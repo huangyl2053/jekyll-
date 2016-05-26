@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -26,6 +27,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class FukaManager {
 
+    private final RString RSTRING_調定年度 = new RString("調定年度");
+    private final RString RSTRING_賦課年度 = new RString("賦課年度");
+    private final RString RSTRING_通知書番号 = new RString("通知書番号");
+    private final RString RSTRING_履歴番号 = new RString("履歴番号");
     private final DbT2002FukaDac dac;
 
     /**
@@ -59,10 +64,10 @@ public class FukaManager {
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
             int 履歴番号) {
-        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
-        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_調定年度.toString()));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_賦課年度.toString()));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_通知書番号.toString()));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_履歴番号.toString()));
 
         DbT2002FukaEntity entity = dac.selectByKey(
                 調定年度,
@@ -147,8 +152,8 @@ public class FukaManager {
             FlexibleYear 賦課年度,
             HihokenshaNo 被保険者番号,
             RDateTime 調定日時) {
-        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_調定年度.toString()));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_賦課年度.toString()));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(調定日時, UrSystemErrorMessages.値がnull.getReplacedMessage("調定日時"));
 
@@ -162,6 +167,64 @@ public class FukaManager {
         }
         entity.initializeMd5();
         return Optional.of(new Fuka(entity));
+    }
+
+    /**
+     * 引数のキーに一致する介護賦課を取得します。<br />
+     * 賦課の任意対象比較に使用します。<br />
+     * 調定日時＜＝更生日時、を抽出条件とします。
+     *
+     * @param 調定年度 ChoteiNendo
+     * @param 賦課年度 FukaNendo
+     * @param 通知書番号 TsuchishoNo
+     * @param 履歴番号 int
+     * @return Fuka
+     */
+    @Transaction
+    public Optional<Fuka> get介護賦課For任意対象比較(
+            FlexibleYear 調定年度,
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号,
+            int 履歴番号) {
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_調定年度.toString()));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_賦課年度.toString()));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_通知書番号.toString()));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_履歴番号.toString()));
+
+        DbT2002FukaEntity entity = dac.selectFor任意対象比較(
+                調定年度,
+                賦課年度,
+                通知書番号,
+                履歴番号);
+        if (entity == null) {
+            return Optional.ofNullable(null);
+        }
+        entity.initializeMd5();
+        return Optional.of(new Fuka(entity));
+    }
+
+    /**
+     * 賦課年度に対する最新の介護賦課を返します。
+     *
+     * @param 賦課年度 FukaNendo
+     * @param 通知書番号 TsuchishoNo
+     * @return Fuka
+     */
+    @Transaction
+    public Fuka get介護賦課_賦課年度最新(
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号) {
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_賦課年度.toString()));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_通知書番号.toString()));
+
+        DbT2002FukaEntity entity = dac.selectByFukanendoSaishin(
+                賦課年度,
+                通知書番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new Fuka(entity);
     }
 
     /**

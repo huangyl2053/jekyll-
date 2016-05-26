@@ -65,7 +65,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.RLogger;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -628,7 +627,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
                 随時期月判断(第11期, 年度データ.get賦課年度()), 随時期月判断(第12期, 年度データ.get賦課年度()),
                 随時期月判断(第13期, 年度データ.get賦課年度()), 随時期月判断(第14期, 年度データ.get賦課年度()));
     }
-
+    
     private RString get月As期By期月リスト(int 期, KitsukiList 期月リスト) {
         if (null == 期月リスト.get期の月(期) || 期月リスト.get期の月(期).isEmpty()) {
             return RString.EMPTY;
@@ -1300,9 +1299,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     private List<GokeiDataEntity> get合計データリスト() {
         List<GokeiDataEntity> 合計リスト = new ArrayList<>();
         List<GokeiBubunEntity> 合計部分情報リスト = choteiboSakuseiMapper.selectAll合計部分情報();
-        RLogger.info("【get合計データリスト】selectAll合計部分情報:" + String.valueOf(合計部分情報リスト.size()));
         List<GokeiBubunSoukeiEntity> 合計部分総計情報リスト = choteiboSakuseiMapper.selectAll合計部分総計情報();
-        RLogger.info("【get合計データリスト】selectAll合計部分総計情報:" + String.valueOf(合計部分総計情報リスト.size()));
         GokeiDataEntity 特別徴収合計データ = new GokeiDataEntity();
         List<DankaiShokeiEntity> 特別徴収合計の段階リスト = new ArrayList<>();
         特別徴収合計データ.set徴収方法(ChoshuHohoKibetsu.特別徴収.code());
@@ -1338,13 +1335,9 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         param.put(KEY_FUKANENDO.toString(), fukaNendo);
         List<NendoDataEntity> 年度データリスト = new ArrayList<>();
         List<KibetsuShokeiEntity> 期別小計リスト = choteiboSakuseiMapper.select期別小計情報(param);
-        RLogger.info("【get年度データリスト】select期別小計情報:" + String.valueOf(期別小計リスト.size()));
         List<DankaiShokeiEntity> 段階小計リスト = choteiboSakuseiMapper.select段階小計情報(param);
-        RLogger.info("【get年度データリスト】select段階小計情報:" + String.valueOf(段階小計リスト.size()));
         List<KibetsuGokeiEntity> 期別合計リスト = choteiboSakuseiMapper.select期別合計情報(param);
-        RLogger.info("【get年度データリスト】select期別合計情報:" + String.valueOf(期別合計リスト.size()));
         List<DankaiGokeiEntity> 段階合計リスト = choteiboSakuseiMapper.select段階合計情報(param);
-        RLogger.info("【get年度データリスト】select段階合計情報:" + String.valueOf(段階合計リスト.size()));
         NendoDataEntity 年度特別徴収データ = new NendoDataEntity();
         年度特別徴収データ.set徴収方法(ChoshuHohoKibetsu.特別徴収.code());
         年度特別徴収データ.set調定年度(choteiNendo);

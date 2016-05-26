@@ -10,7 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2013HokenryoDankaiDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2013HokenryoDankaiMapper;
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -26,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class HokenryoDankaiSettings {
 
     private final MapperProvider mapperProvider;
-    private final DbT2013HokenryoDankaiDac 賦課年度dac;
     private static final RString 段階区分_000 = new RString("000");
 
     /**
@@ -35,17 +33,14 @@ public class HokenryoDankaiSettings {
      */
     public HokenryoDankaiSettings() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.賦課年度dac = InstanceProvider.create(DbT2013HokenryoDankaiDac.class);
     }
 
     /**
      * 単体テスト用のコンストラクタです。
      *
-     * @param DbT2013HokenryoDankaiDac 保険料段階dac
      */
-    HokenryoDankaiSettings(MapperProvider mapperProvider, DbT2013HokenryoDankaiDac 賦課年度dac) {
+    HokenryoDankaiSettings(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
-        this.賦課年度dac = 賦課年度dac;
     }
 
     /**
@@ -90,7 +85,7 @@ public class HokenryoDankaiSettings {
         List<HokenryoDankai> serviceShuruiList = new ArrayList<>();
         IDbT2013HokenryoDankaiMapper dbT2013HokenryoDankaiMapper = mapperProvider.create(IDbT2013HokenryoDankaiMapper.class);
         List<DbT2013HokenryoDankaiEntity> 賦課年度リスタ = dbT2013HokenryoDankaiMapper.getHokenryoDankaiKubun(賦課年度.toDateString());
-        
+
         if (賦課年度リスタ == null || 賦課年度リスタ.isEmpty()) {
             return new HokenryoDankaiList(serviceShuruiList);
         }

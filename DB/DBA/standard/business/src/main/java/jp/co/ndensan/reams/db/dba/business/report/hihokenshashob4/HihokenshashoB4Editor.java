@@ -336,25 +336,4 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).getEra();
     }
-
-    private RString get年月日の年_西歴(RString date) {
-        if (date == null || date.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return new RDate(date.toString()).seireki().getYear();
-    }
-
-    private RString get年月日の月_西歴(RString date) {
-        if (date == null || date.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return new RDate(date.toString()).seireki().getMonth();
-    }
-
-    private RString get年月日の日_西歴(RString date) {
-        if (date == null || date.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return new RDate(date.toString()).seireki().getDay();
-    }
 }

@@ -97,7 +97,7 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
             for (KaigoJuminhyoKobetsuKoikiunyo entitylist : koikiunyoEntityList) {
                 kaigojuminiEntity = new KobetsuKoikiunyoParameter();
                 kaigojuminiEntity.setShichosonCode(entitylist.getShichosonCode().value());
-                kaigojuminiEntity.setDateFrom(entitylist.getTaishoKaishiTimestamp().getRDateTime());
+                kaigojuminiEntity.setDateFrom(entitylist.getTaishoShuryoTimestamp().getRDateTime());
                 kaigojuminiEntity.setDateTo(YMDHMS.now().getRDateTime());
                 //        if (kaigojuminiEntity.get日付TO().isBeforeOrEquals(kaigojuminiEntity.get日付FROM())) {
                 //TODO 技術点NO:31　バッチメッセージの出力　DBZErrorMessage．DBZE00006を返して、バッチ処理終了。

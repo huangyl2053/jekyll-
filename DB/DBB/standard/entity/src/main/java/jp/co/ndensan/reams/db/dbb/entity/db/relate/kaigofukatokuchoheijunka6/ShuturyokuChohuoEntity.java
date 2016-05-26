@@ -23,7 +23,7 @@ public class ShuturyokuChohuoEntity {
     /**
      * 帳票分類IDのgetメソッドです。
      *
-     * @return
+     * @return 帳票分類ID
      */
     public ReportId get帳票分類ID() {
         return 帳票分類ID;
@@ -33,7 +33,7 @@ public class ShuturyokuChohuoEntity {
     /**
      * 帳票分類IDのsetメソッドです。
      *
-     * @param 帳票分類ID
+     * @param 帳票分類ID 帳票分類ID
      */
     public void set帳票分類ID(ReportId 帳票分類ID) {
         this.帳票分類ID = 帳票分類ID;
@@ -42,7 +42,7 @@ public class ShuturyokuChohuoEntity {
     /**
      * 帳票分類IDのgetメソッドです。
      *
-     * @return
+     * @return 帳票名
      */
     public RString get帳票名() {
         return 帳票名;
@@ -52,7 +52,7 @@ public class ShuturyokuChohuoEntity {
     /**
      * 帳票名のsetメソッドです。
      *
-     * @param 帳票名
+     * @param 帳票名 帳票名
      */
     public void set帳票名(RString 帳票名) {
         this.帳票名 = 帳票名;
@@ -61,7 +61,7 @@ public class ShuturyokuChohuoEntity {
     /**
      * 改頁出力順IDのgetメソッドです。
      *
-     * @return
+     * @return 改頁出力順ID
      */
     public RString get改頁出力順ID() {
         return 改頁出力順ID;
@@ -71,7 +71,7 @@ public class ShuturyokuChohuoEntity {
     /**
      * 改頁出力順IDのsetメソッドです。
      *
-     * @param 改頁出力順ID
+     * @param 改頁出力順ID 改頁出力順ID
      */
     public void set改頁出力順ID(RString 改頁出力順ID) {
         this.改頁出力順ID = 改頁出力順ID;
@@ -80,7 +80,7 @@ public class ShuturyokuChohuoEntity {
     /**
      * 帳票IDのgetメソッドです。
      *
-     * @return
+     * @return 帳票ID
      */
     public ReportId get帳票ID() {
         return 帳票ID;
@@ -90,7 +90,7 @@ public class ShuturyokuChohuoEntity {
     /**
      * 帳票IDのsetメソッドです。
      *
-     * @param 帳票ID
+     * @param 帳票ID 帳票ID
      */
     public void set帳票ID(ReportId 帳票ID) {
         this.帳票ID = 帳票ID;

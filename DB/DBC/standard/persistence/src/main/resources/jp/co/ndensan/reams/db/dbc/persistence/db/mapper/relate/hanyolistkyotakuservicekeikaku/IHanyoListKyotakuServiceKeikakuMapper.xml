@@ -9,273 +9,279 @@
     </select>
     <sql id="selectHanyoListKyotakuServiceKeikakuEntity">
         select ROW_NUMBER() over(order by D."dbv1001被保険者番号")as row ,* from (
-        SELECT 	    
-            DbV1001."hihokenshaNo"                                              AS dbv1001被保険者番号,
-            DbV1001."shichosonCode"                     			AS dbV1001市町村コード,						
-	    DbV1001."shikakuShutokuJiyuCode"					AS dbV1001資格取得事由コード,					
-	    DbV1001."shikakuShutokuYMD"						AS dbV1001資格取得年月日,					
-	    DbV1001."shikakuShutokuTodokedeYMD"					AS dbV1001資格取得届出年月日,					
-	    DbV1001."shikakuSoshitsuJiyuCode"					AS dbV1001資格喪失事由コード,					
-	    DbV1001."shikakuSoshitsuYMD"					AS dbV1001資格喪失年月日,					
-	    DbV1001."shikakuSoshitsuTodokedeYMD"				AS dbV1001資格喪失届出年月日,					
-	    DbV1001."hihokennshaKubunCode"					AS dbV1001被保険者区分コード,					
-	    DbV1001."jushochiTokureiFlag"					AS dbV1001住所地特例フラグ,					
-	    DbV1001."koikinaiJushochiTokureiFlag"				AS dbV1001広域内住所地特例フラグ,					
-	    DbV1001."koikinaiTokureiSochimotoShichosonCode"			AS dbV1001広住特措置元市町村コード,					
-	    DbV1004."nyushoShisetsuCode"					AS dbV1004入所施設コード,				
-	    DbV1004."nyushoYMD"							AS dbV1004入所年月日,				
-	    DbV1004."taishoYMD"							AS dbV1004退所年月日,	
-            Dbv1004."nyushoShisetsuShurui"                                      AS dbV1004入所施設種類,
-	    DbT7060."jigyoshaName"						AS dbT7060事業者名称,				
-	    DbT7060."jigyoshaNameKana"						AS dbT7060事業者名称カナ,					
-	    DbT7060."yubinNo"							AS dbT7060郵便番号,				
-	    DbT7060."jigyoshaAddress"						AS dbT7060事業者住所,				
-	    DbT7062."daihyoshaShimei"						AS dbT7062代表者名,				
-	    DbT7062."daihyoshaKanaShimei"					AS dbT7062代表者名カナ,				
-	    DbT7062."daihyoshaYakushokuMei"					AS dbT7062代表者役職名,				
-	    DbT7060."telNo"							AS dbT7060電話番号,				
-	    DbT7060."faxNo"							AS dbT7060FAX番号,				
-	    DbT7060."shozokuNinzu"						AS dbT7060所属人数,				
-	    DbT7060."riyoshaSu"                                                 AS dbT7060利用者数,				
-	    DbT7060."yukoKaishiYMD"						AS dbT7060有効開始日,				
-	    DbT7060."yukoShuryoYMD"						AS dbT7060有効終了日,				
-	    DbT7060."serviceJisshiChiiki"					AS dbT7060サービス実施地域,					
-	   
-            DbV1005."jigyoshaMeisho"						AS dbV1005事業者名称,			
-	    DbV1005."jigyoshaKanaMeisho"					AS dbV1005事業者名称カナ,				
-	    DbV1005."yubinNo"							AS dbV1005郵便番号,			
-	    DbV1005."jigyoshaJusho"						AS dbV1005事業者住所,			
-	    DbV1005."daihyoshaMeisho"						AS dbV1005代表者名称,			
-	    DbV1005."daihyoshaKanaMeisho"					AS dbV1005代表者名称カナ,				
-	    DbV1005."yakushoku"                                                 AS dbV1005役職,			
-	    DbV1005."telNo"							AS dbV1005電話番号,			
-	    DbV1005."faxNo"							AS dbV1005FAX番号,
-	    DbV1005."yukoKaishiYMD"						AS dbV1005有効開始日,										
-	    DbV1005."yukoShuryoYMD"						AS dbV1005有効終了年月日,
-            					
-	    DbT3005."hihokenshaNo"						AS dbT3005被保険者番号,										
-	    DbT3005."taishoYM"							AS dbT3005対象年月,				
-	    DbT3005."rirekiNo"							AS dbT3005履歴番号,				
-	    DbT3005."todokedeKubun"						AS dbT3005届出区分,				
-	    DbT3005."todokedeYMD"						AS dbT3005届出年月日,				
-	    DbT3006."sakuseiKubunCode"                                          AS dbT3006作成区分コード,									
-	    DbT3006."tekiyoKaishiYMD"						AS dbT3006適用開始年月日,							
-	    DbT3006."tekiyoShuryoYMD"						AS dbT3006適用終了年月日,							
-	    DbT3007."sakuseiKubunCode"                                          AS dbT3007作成区分コード,									
-	    DbT3007."tekiyoKaishiYMD"						AS dbT3007適用開始年月日,							
-	    DbT3007."tekiyoShuryoYMD"						AS dbT3007適用終了年月日,							
-	    DbT3007."keikakuSakuseiYMD"                                         AS dbT3007計画作成年月日,							
-	    DbT3007."keikakuHenkoYMD"						AS dbT3007計画変更年月日,							
-            DbT3007."keikakuHenkoJiyu"                                          AS dbT3007変更理由,						
-            DbT3006."keikakuJigyoshaNo"                                         AS dbT3006計画事業者番号,									
-            DbT7060_Keikaku."jigyoshaName"					AS dbT7060_Keikaku事業者名称,								
-            DbT3006."itakusakiJigyoshaNo"					AS dbT3006委託先事業者番号,							
-            DbT7060_Itaku."jigyoshaName"					AS dbT7060_Itaku事業者名称,							
-	    DbV4001."jukyuShinseiJiyu"						AS dbV4001受給申請事由,								
-	    DbV4001."jukyuShinseiYMD"						AS dbV4001受給申請年月日,					
-	    DbV4001."yokaigoJotaiKubunCode"					AS dbV4001要介護認定状態区分コード,					
-	    DbV4001."ninteiYukoKikanKaishiYMD"					AS dbV4001認定有効期間開始日,					
-	    DbV4001."ninteiYukoKikanShuryoYMD"					AS dbV4001認定有効期間終了日,					
-	    DbV4001."ninteiYMD"							AS dbV4001受給認定日,			
-	    DbV4001."kyuSochishaFlag"						AS dbV4001旧措置フラグ,				
-	    DbT4001."minashiCode"						AS dbT4001みなし要介護区分コード,				
-	    DbV4001."chokkinIdoJiyuCode"					AS dbV4001直近異動事由コード,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
+        SELECT
+        DbV1001."hihokenshaNo"                                              AS dbv1001被保険者番号,
+        DbV1001."shichosonCode"                     			AS dbV1001市町村コード,
+        DbV1001."shikakuShutokuJiyuCode"					AS dbV1001資格取得事由コード,
+        DbV1001."shikakuShutokuYMD"						AS dbV1001資格取得年月日,
+        DbV1001."shikakuShutokuTodokedeYMD"					AS dbV1001資格取得届出年月日,
+        DbV1001."shikakuSoshitsuJiyuCode"					AS dbV1001資格喪失事由コード,
+        DbV1001."shikakuSoshitsuYMD"					AS dbV1001資格喪失年月日,
+        DbV1001."shikakuSoshitsuTodokedeYMD"				AS dbV1001資格喪失届出年月日,
+        DbV1001."hihokennshaKubunCode"					AS dbV1001被保険者区分コード,
+        DbV1001."jushochiTokureiFlag"					AS dbV1001住所地特例フラグ,
+        DbV1001."koikinaiJushochiTokureiFlag"				AS dbV1001広域内住所地特例フラグ,
+        DbV1001."koikinaiTokureiSochimotoShichosonCode"			AS dbV1001広住特措置元市町村コード,
+        DbV1004."nyushoShisetsuCode"					AS dbV1004入所施設コード,
+        DbV1004."nyushoYMD"							AS dbV1004入所年月日,
+        DbV1004."taishoYMD"							AS dbV1004退所年月日,
+        Dbv1004."nyushoShisetsuShurui"                                      AS dbV1004入所施設種類,
+        DbT7060."jigyoshaName"						AS dbT7060事業者名称,
+        DbT7060."jigyoshaNameKana"						AS dbT7060事業者名称カナ,
+        DbT7060."yubinNo"							AS dbT7060郵便番号,
+        DbT7060."jigyoshaAddress"						AS dbT7060事業者住所,
+        DbT7062."daihyoshaShimei"						AS dbT7062代表者名,
+        DbT7062."daihyoshaKanaShimei"					AS dbT7062代表者名カナ,
+        DbT7062."daihyoshaYakushokuMei"					AS dbT7062代表者役職名,
+        DbT7060."telNo"							AS dbT7060電話番号,
+        DbT7060."faxNo"							AS dbT7060FAX番号,
+        DbT7060."shozokuNinzu"						AS dbT7060所属人数,
+        DbT7060."riyoshaSu"                                                 AS dbT7060利用者数,
+        DbT7060."yukoKaishiYMD"						AS dbT7060有効開始日,
+        DbT7060."yukoShuryoYMD"						AS dbT7060有効終了日,
+        DbT7060."serviceJisshiChiiki"					AS dbT7060サービス実施地域,
+
+        DbV1005."jigyoshaMeisho"						AS dbV1005事業者名称,
+        DbV1005."jigyoshaKanaMeisho"					AS dbV1005事業者名称カナ,
+        DbV1005."yubinNo"							AS dbV1005郵便番号,
+        DbV1005."jigyoshaJusho"						AS dbV1005事業者住所,
+        DbV1005."daihyoshaMeisho"						AS dbV1005代表者名称,
+        DbV1005."daihyoshaKanaMeisho"					AS dbV1005代表者名称カナ,
+        DbV1005."yakushoku"                                                 AS dbV1005役職,
+        DbV1005."telNo"							AS dbV1005電話番号,
+        DbV1005."faxNo"							AS dbV1005FAX番号,
+        DbV1005."yukoKaishiYMD"						AS dbV1005有効開始日,
+        DbV1005."yukoShuryoYMD"						AS dbV1005有効終了年月日,
+
+        DbT3005."hihokenshaNo"						AS dbT3005被保険者番号,
+        DbT3005."taishoYM"							AS dbT3005対象年月,
+        DbT3005."rirekiNo"							AS dbT3005履歴番号,
+        DbT3005."todokedeKubun"						AS dbT3005届出区分,
+        DbT3005."todokedeYMD"						AS dbT3005届出年月日,
+
+        DbT3006."hihokenshaNo"                                          AS dbT3006被保険者番号,
+        DbT3006."sakuseiKubunCode"                                          AS dbT3006作成区分コード,
+        DbT3006."tekiyoKaishiYMD"						AS dbT3006適用開始年月日,
+        DbT3006."tekiyoShuryoYMD"						AS dbT3006適用終了年月日,
+        DbT3006."jigyoshaHenkoYMD"                                      AS dbT3006事業者変更年月日,
+
+        DbT3007."hihokenshaNo"                                          AS dbT3007被保険者番号,
+        DbT3007."sakuseiKubunCode"                                          AS dbT3007作成区分コード,
+        DbT3007."tekiyoKaishiYMD"						AS dbT3007適用開始年月日,
+        DbT3007."tekiyoShuryoYMD"						AS dbT3007適用終了年月日,
+        DbT3007."keikakuSakuseiYMD"                                         AS dbT3007計画作成年月日,
+        DbT3007."keikakuHenkoYMD"						AS dbT3007計画変更年月日,
+        DbT3007."keikakuHenkoJiyu"                                          AS dbT3007変更理由,
+
+        DbT3006."keikakuJigyoshaNo"                                         AS dbT3006計画事業者番号,
+        DbT7060_Keikaku."jigyoshaName"					AS dbT7060_Keikaku事業者名称,
+        DbT3006."itakusakiJigyoshaNo"					AS dbT3006委託先事業者番号,
+        DbT7060_Itaku."jigyoshaName"					AS dbT7060_Itaku事業者名称,
+        DbV4001."jukyuShinseiJiyu"						AS dbV4001受給申請事由,
+        DbV4001."jukyuShinseiYMD"						AS dbV4001受給申請年月日,
+        DbV4001."yokaigoJotaiKubunCode"					AS dbV4001要介護認定状態区分コード,
+        DbV4001."ninteiYukoKikanKaishiYMD"					AS dbV4001認定有効期間開始日,
+        DbV4001."ninteiYukoKikanShuryoYMD"					AS dbV4001認定有効期間終了日,
+        DbV4001."ninteiYMD"							AS dbV4001受給認定日,
+        DbV4001."kyuSochishaFlag"						AS dbV4001旧措置フラグ,
+        DbT4001."minashiCode"						AS dbT4001みなし要介護区分コード,
+        DbV4001."chokkinIdoJiyuCode"					AS dbV4001直近異動事由コード,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
         FROM	rgdb."DbT3005KyotakuKeikakuTodokede"                                            AS DbT3005
-                LEFT OUTER JOIN rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"                     AS DbT3006
-                    ON  DbT3005."hihokenshaNo" = DbT3006."hihokenshaNo"
-                    AND DbT3005."taishoYM" = DbT3006."taishoYM"
-                    AND DbT3005."rirekiNo" = DbT3006."rirekiNo"
-                LEFT OUTER JOIN rgdb."DbT3007KyotakuKeikakuJikoSakusei"                         AS DbT3007
-                    ON  DbT3005."hihokenshaNo" = DbT3007."hihokenshaNo"
-                    AND DbT3005."taishoYM" = DbT3007."taishoYM"
-                    AND DbT3005."rirekiNo" = DbT3007."rirekiNo"
-                LEFT OUTER JOIN rgdb."DbT7060KaigoJigyosha"                                     AS DbT7060_Keikaku
-                    ON  DbT3006."keikakuJigyoshaNo" = DbT7060_Keikaku."jigyoshaNo"
-                    AND DbT7060_Keikaku."yukoKaishiYMD" IN
-                        (SELECT A."yukoKaishiYMD" FROM 
-                            (SELECT "jigyoshaNo", MAX("yukoKaishiYMD") AS "yukoKaishiYMD"
-                                 FROM rgdb."DbT7060KaigoJigyosha" 
-                                 GROUP BY "jigyoshaNo") AS A)
-                LEFT OUTER JOIN rgdb."DbT7060KaigoJigyosha"                                     AS DbT7060_Itaku
-                    ON DbT3006."itakusakiJigyoshaNo" = DbT7060_Itaku."jigyoshaNo"
-                    AND DbT7060_Itaku."yukoKaishiYMD" IN 
-                        (SELECT A."yukoKaishiYMD" FROM 
-                             (SELECT "jigyoshaNo", MAX("yukoKaishiYMD") AS "yukoKaishiYMD"
-                                  FROM rgdb."DbT7060KaigoJigyosha" 
-                                  GROUP BY "jigyoshaNo") AS A)
-                LEFT OUTER JOIN rgdb."DbV1001HihokenshaDaicho"                                   AS DbV1001
-                    ON DbT3005."hihokenshaNo" = DbV1001."hihokenshaNo"
-                LEFT OUTER JOIN rgdb."DbV1004HihokenshaShisetsuNyutaisho"                        AS DbV1004
-                    ON DbV1001."shikibetsuCode" = DbV1004."shikibetsuCode"
-                <if test="基準年月日 != null and !基準年月日.isEmpty()">
-                    AND DbV1004."rirekiNo" = (
-                        SELECT DbV1004sub."rirekiNo"
-                        FROM rgdb."DbV1004HihokenshaShisetsuNyutaisho" AS DbV1004sub
-                        WHERE 
-                            DbV1004sub."nyushoYMD" <![CDATA[<=]]> #{基準年月日}
-                            AND (DbV1004sub."taishoYMD" <![CDATA[>=]]> #{基準年月日}
-                            OR DbV1004sub."taishoYMD" IS NULL
-                            OR DbV1004sub."taishoYMD" = '')
-                        ORDER BY DbV1004sub."rirekiNo" DESC
-                        LIMIT 1)
-                </if>
-                LEFT OUTER JOIN rgdb."DbV1005KaigoJogaiTokureiTaishoShisetsu"                    AS DbV1005
-                    ON DbV1004."nyushoShisetsuShurui" = DbV1005."jigyoshaShubetsu"
-                    AND DbV1004."nyushoShisetsuCode" = DbV1005."jigyoshaNo"
-                LEFT OUTER JOIN rgdb."DbT7060KaigoJigyosha"                                      As DbT7060
-                    ON DbV1004."nyushoShisetsuCode" = DbT7060."jigyoshaNo"
-                    AND DbT7060."yukoKaishiYMD" IN
-                         (SELECT A."yukoKaishiYMD" FROM 
-                              (SELECT "jigyoshaNo", MAX("yukoKaishiYMD") AS "yukoKaishiYMD"
-                                   FROM rgdb."DbT7060KaigoJigyosha" 
-                                   GROUP BY "jigyoshaNo") AS A)
-                LEFT OUTER JOIN rgdb."DbT7062KaigoJigyoshaDaihyosha"                             As DbT7062
-                    ON DbV1004."nyushoShisetsuCode" = DbT7062."jigyoshaNo"
-                    AND DbT7062."yukoKaishiYMD" IN
-                            (SELECT A."yukoKaishiYMD" FROM 
-                                (SELECT "jigyoshaNo", MAX("yukoKaishiYMD") AS "yukoKaishiYMD"
-                                    FROM rgdb."DbT7062KaigoJigyoshaDaihyosha" 
-                                    GROUP BY "jigyoshaNo") AS A)
-                LEFT OUTER JOIN rgdb."DbV4001JukyushaDaicho"                                     AS DbV4001
-                    ON DbV4001."hihokenshaNo" = DbV1001."hihokenshaNo"
-                LEFT OUTER JOIN rgdb."DbT4001JukyushaDaicho"                                     AS DbT4001
-                    ON  DbT4001."shichosonCode" = DbV4001."shichosonCode"										
-                    AND DbT4001."hihokenshaNo" = DbV4001."hihokenshaNo"										
-                    AND DbT4001."rirekiNo" = DbV4001."rirekiNo"										
-                    AND DbT4001."edaban" = DbV4001."edaban"										
-                    AND DbT4001."jukyuShinseiJiyu" = DbV4001."jukyuShinseiJiyu"										
-                INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
-                    ON "ShikibetsuTaisho"."shikibetsuCode"=DbV1001."shikibetsuCode"
-                LEFT JOIN rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
-                    ON "Atesaki"."shikibetsuCode"=DbV1001."shikibetsuCode"
+        LEFT OUTER JOIN rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"                     AS DbT3006
+        ON  DbT3005."hihokenshaNo" = DbT3006."hihokenshaNo"
+        AND DbT3005."taishoYM" = DbT3006."taishoYM"
+        AND DbT3005."rirekiNo" = DbT3006."rirekiNo"
+        LEFT OUTER JOIN rgdb."DbT3007KyotakuKeikakuJikoSakusei"                         AS DbT3007
+        ON  DbT3005."hihokenshaNo" = DbT3007."hihokenshaNo"
+        AND DbT3005."taishoYM" = DbT3007."taishoYM"
+        AND DbT3005."rirekiNo" = DbT3007."rirekiNo"
+        LEFT OUTER JOIN rgdb."DbT7060KaigoJigyosha"                                     AS DbT7060_Keikaku
+        ON  DbT3006."keikakuJigyoshaNo" = DbT7060_Keikaku."jigyoshaNo"
+        AND DbT7060_Keikaku."yukoKaishiYMD" IN
+        (SELECT A."yukoKaishiYMD" FROM
+        (SELECT "jigyoshaNo", MAX("yukoKaishiYMD") AS "yukoKaishiYMD"
+        FROM rgdb."DbT7060KaigoJigyosha"
+        WHERE "jigyoshaNo" = DbT3006."keikakuJigyoshaNo"
+        GROUP BY "jigyoshaNo") AS A)
+        LEFT OUTER JOIN rgdb."DbT7060KaigoJigyosha"                                     AS DbT7060_Itaku
+        ON DbT3006."itakusakiJigyoshaNo" = DbT7060_Itaku."jigyoshaNo"
+        AND DbT7060_Itaku."yukoKaishiYMD" IN
+        (SELECT A."yukoKaishiYMD" FROM
+        (SELECT "jigyoshaNo", MAX("yukoKaishiYMD") AS "yukoKaishiYMD"
+        FROM rgdb."DbT7060KaigoJigyosha"
+        WHERE "jigyoshaNo" = DbT3006."keikakuJigyoshaNo"
+        GROUP BY "jigyoshaNo") AS A)
+        LEFT OUTER JOIN rgdb."DbV1001HihokenshaDaicho"                                   AS DbV1001
+        ON DbT3005."hihokenshaNo" = DbV1001."hihokenshaNo"
+        LEFT OUTER JOIN rgdb."DbV1004HihokenshaShisetsuNyutaisho"                        AS DbV1004
+        ON DbV1001."shikibetsuCode" = DbV1004."shikibetsuCode"
+        <if test="基準年月日 != null and !基準年月日.isEmpty()">
+            AND DbV1004."rirekiNo" = (
+            SELECT DbV1004sub."rirekiNo"
+            FROM rgdb."DbV1004HihokenshaShisetsuNyutaisho" AS DbV1004sub
+            WHERE
+            DbV1004sub."nyushoYMD" <![CDATA[<=]]> #{基準年月日}
+            AND (DbV1004sub."taishoYMD" <![CDATA[>=]]> #{基準年月日}
+            OR DbV1004sub."taishoYMD" IS NULL
+            OR DbV1004sub."taishoYMD" = '')
+            ORDER BY DbV1004sub."rirekiNo" DESC
+            LIMIT 1)
+        </if>
+        LEFT OUTER JOIN rgdb."DbV1005KaigoJogaiTokureiTaishoShisetsu"                    AS DbV1005
+        ON DbV1004."nyushoShisetsuShurui" = DbV1005."jigyoshaShubetsu"
+        AND DbV1004."nyushoShisetsuCode" = DbV1005."jigyoshaNo"
+        LEFT OUTER JOIN rgdb."DbT7060KaigoJigyosha"                                      As DbT7060
+        ON DbV1004."nyushoShisetsuCode" = DbT7060."jigyoshaNo"
+        AND DbT7060."yukoKaishiYMD" IN
+        (SELECT A."yukoKaishiYMD" FROM
+        (SELECT "jigyoshaNo", MAX("yukoKaishiYMD") AS "yukoKaishiYMD"
+        FROM rgdb."DbT7060KaigoJigyosha"
+        GROUP BY "jigyoshaNo") AS A)
+        LEFT OUTER JOIN rgdb."DbT7062KaigoJigyoshaDaihyosha"                             As DbT7062
+        ON DbV1004."nyushoShisetsuCode" = DbT7062."jigyoshaNo"
+        AND DbT7062."yukoKaishiYMD" IN
+        (SELECT A."yukoKaishiYMD" FROM
+        (SELECT "jigyoshaNo", MAX("yukoKaishiYMD") AS "yukoKaishiYMD"
+        FROM rgdb."DbT7062KaigoJigyoshaDaihyosha"
+        GROUP BY "jigyoshaNo") AS A)
+        LEFT OUTER JOIN rgdb."DbV4001JukyushaDaicho"                                     AS DbV4001
+        ON DbV4001."hihokenshaNo" = DbV1001."hihokenshaNo"
+        LEFT OUTER JOIN rgdb."DbT4001JukyushaDaicho"                                     AS DbT4001
+        ON  DbT4001."shichosonCode" = DbV4001."shichosonCode"
+        AND DbT4001."hihokenshaNo" = DbV4001."hihokenshaNo"
+        AND DbT4001."rirekiNo" = DbV4001."rirekiNo"
+        AND DbT4001."edaban" = DbV4001."edaban"
+        AND DbT4001."jukyuShinseiJiyu" = DbV4001."jukyuShinseiJiyu"
+        INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode"=DbV1001."shikibetsuCode"
+        LEFT JOIN rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
+        ON "Atesaki"."shikibetsuCode"=DbV1001."shikibetsuCode"
 
         WHERE
-         1=1
+        1=1
         <if test="抽出区分 == 1">
-         AND  (DbT3005. "hihokenshaNo", DbT3005. "taishoYM", DbT3005. "rirekiNo")  in
-                     (SELECT
-                            B. "hihokenshaNo",
-                            B. "taishoYM",
-                            B. "rirekiNo"
-                        FROM
-                            rgdb. "DbT3005KyotakuKeikakuTodokede" AS B
-                                INNER JOIN (
-                                SELECT
-                                    "hihokenshaNo"
-                                    ,MAX (
-                                        "taishoYM" || "rirekiNo"
-                                    ) AS "max1"
-                                FROM
-                                    rgdb. "DbT3005KyotakuKeikakuTodokede"
-                                GROUP BY
-                                    "hihokenshaNo"
-                            ) AS A
-                                    ON A. "hihokenshaNo" = B. "hihokenshaNo"
-                            AND A. "max1" = (
-                                B. "taishoYM" || B. "rirekiNo") )
+            AND  (DbT3005. "hihokenshaNo", DbT3005. "taishoYM", DbT3005. "rirekiNo")  in
+            (SELECT
+            B. "hihokenshaNo",
+            B. "taishoYM",
+            B. "rirekiNo"
+            FROM
+            rgdb. "DbT3005KyotakuKeikakuTodokede" AS B
+            INNER JOIN (
+            SELECT
+            "hihokenshaNo"
+            ,MAX (
+            "taishoYM" || "rirekiNo"
+            ) AS "max1"
+            FROM
+            rgdb. "DbT3005KyotakuKeikakuTodokede"
+            GROUP BY
+            "hihokenshaNo"
+            ) AS A
+            ON A. "hihokenshaNo" = B. "hihokenshaNo"
+            AND A. "max1" = (
+            B. "taishoYM" || B. "rirekiNo") )
 
-	</if>
+        </if>
         <if test="抽出区分 == 2">
             <if test="基準年月日 == null ">
                 AND  (DbT3005. "hihokenshaNo", DbT3005. "taishoYM", DbT3005. "rirekiNo")  in
-                     (SELECT
-                            B. "hihokenshaNo",
-                            B. "taishoYM",
-                            B. "rirekiNo"
-                        FROM
-                            rgdb. "DbT3005KyotakuKeikakuTodokede" AS B
-                                INNER JOIN (
-                                SELECT
-                                    "hihokenshaNo"
-                                    ,MAX (
-                                        "taishoYM" || "rirekiNo"
-                                    ) AS "max1"
-                                FROM
-                                    rgdb. "DbT3005KyotakuKeikakuTodokede"
-                                GROUP BY
-                                    "hihokenshaNo"
-                            ) AS A
-                                    ON A. "hihokenshaNo" = B. "hihokenshaNo"
-                            AND A. "max1" = (
-                                B. "taishoYM" || B. "rirekiNo") )
+                (SELECT
+                B. "hihokenshaNo",
+                B. "taishoYM",
+                B. "rirekiNo"
+                FROM
+                rgdb. "DbT3005KyotakuKeikakuTodokede" AS B
+                INNER JOIN (
+                SELECT
+                "hihokenshaNo"
+                ,MAX (
+                "taishoYM" || "rirekiNo"
+                ) AS "max1"
+                FROM
+                rgdb. "DbT3005KyotakuKeikakuTodokede"
+                GROUP BY
+                "hihokenshaNo"
+                ) AS A
+                ON A. "hihokenshaNo" = B. "hihokenshaNo"
+                AND A. "max1" = (
+                B. "taishoYM" || B. "rirekiNo") )
             </if>
             <if test="基準年月日 != null and !基準年月日.isEmpty()">
                 AND ((DbT3005. "hihokenshaNo", DbT3005. "taishoYM", DbT3005. "rirekiNo")  in
-                     (SELECT
-                            B. "hihokenshaNo",
-                            B. "taishoYM",
-                            B. "rirekiNo"
-                        FROM
-                            rgdb. "DbT3005KyotakuKeikakuTodokede" AS B
-                                INNER JOIN (
-                                SELECT
-                                    "hihokenshaNo"
-                                    ,MAX (
-                                        "taishoYM" || "rirekiNo"
-                                    ) AS "max1"
-                                FROM
-                                    rgdb. "DbT3005KyotakuKeikakuTodokede"
-                                GROUP BY
-                                    "hihokenshaNo"
-                            ) AS A
-                                    ON A. "hihokenshaNo" = B. "hihokenshaNo"
-                            AND A. "max1" = (
-                                B. "taishoYM" || B. "rirekiNo") )
+                (SELECT
+                B. "hihokenshaNo",
+                B. "taishoYM",
+                B. "rirekiNo"
+                FROM
+                rgdb. "DbT3005KyotakuKeikakuTodokede" AS B
+                INNER JOIN (
+                SELECT
+                "hihokenshaNo"
+                ,MAX (
+                "taishoYM" || "rirekiNo"
+                ) AS "max1"
+                FROM
+                rgdb. "DbT3005KyotakuKeikakuTodokede"
+                GROUP BY
+                "hihokenshaNo"
+                ) AS A
+                ON A. "hihokenshaNo" = B. "hihokenshaNo"
+                AND A. "max1" = (
+                B. "taishoYM" || B. "rirekiNo") )
                 AND DbT3006."tekiyoKaishiYMD" <![CDATA[<=]]> #{基準年月日}
-                AND (DbT3006."tekiyoShuryoYMD" <![CDATA[>=]]> #{基準年月日} 
-                    OR DbT3006."tekiyoShuryoYMD" is null
-                    OR DbT3006."tekiyoShuryoYMD" = ''))
-                
+                AND (DbT3006."tekiyoShuryoYMD" <![CDATA[>=]]> #{基準年月日}
+                OR DbT3006."tekiyoShuryoYMD" is null
+                OR DbT3006."tekiyoShuryoYMD" = ''))
+
                 OR
                 ((DbT3005. "hihokenshaNo", DbT3005. "taishoYM", DbT3005. "rirekiNo")  in
-                     (SELECT
-                            F. "hihokenshaNo",
-                            F. "taishoYM",
-                            F. "rirekiNo"
-                        FROM
-                            rgdb. "DbT3005KyotakuKeikakuTodokede" AS F
-                                INNER JOIN (
-                                SELECT
-                                    "hihokenshaNo"
-                                    ,MAX ("taishoYM" || "rirekiNo") AS "max2"
-                                FROM
-                                    rgdb. "DbT3006KyotakuKeikakuJigyoshaSakusei"
-                                WHERE
-                                    "tekiyoKaishiYMD" <![CDATA[<=]]> #{基準年月日}
-                                    AND ("tekiyoShuryoYMD" <![CDATA[>=]]> #{基準年月日} 
-                                    OR "tekiyoShuryoYMD" IS NULL
-                                    OR "tekiyoShuryoYMD" = '')
-                                GROUP BY
-                                    "hihokenshaNo"
-                            ) AS E
-                                    ON E. "hihokenshaNo" = F. "hihokenshaNo"
-                            AND E. "max2" = (F. "taishoYM" || F. "rirekiNo") ))
+                (SELECT
+                F. "hihokenshaNo",
+                F. "taishoYM",
+                F. "rirekiNo"
+                FROM
+                rgdb. "DbT3005KyotakuKeikakuTodokede" AS F
+                INNER JOIN (
+                SELECT
+                "hihokenshaNo"
+                ,MAX ("taishoYM" || "rirekiNo") AS "max2"
+                FROM
+                rgdb. "DbT3006KyotakuKeikakuJigyoshaSakusei"
+                WHERE
+                "tekiyoKaishiYMD" <![CDATA[<=]]> #{基準年月日}
+                AND "tekiyoShuryoYMD" <![CDATA[>=]]> #{基準年月日}
+                GROUP BY
+                "hihokenshaNo"
+                ) AS E
+                ON E. "hihokenshaNo" = F. "hihokenshaNo"
+                AND E. "max2" = (F. "taishoYM" || F. "rirekiNo") ))
             </if>
         </if>
-     
+
         <if test="作成区分 == 1">
-		AND DbT3006."sakuseiKubunCode" = '1'
-	</if>
-	<if test="作成区分 == 2">
-		AND DbT3006."sakuseiKubunCode" = '2'
-	</if>
-	<if test="作成区分 == 3">
-		AND (DbT3006."sakuseiKubunCode" = '1' OR DbT3006."sakuseiKubunCode" = '2')
-	</if>
-	<if test="作成区分 == 4">
-		AND DbT3007."sakuseiKubunCode" = '3'
-	</if>
-	<if test="作成区分 == 5">
-		AND DbT3006."sakuseiKubunCode" = '4'
-	</if>
-	<if test="支援事業者番号 !=null and !支援事業者番号.isEmpty()">
-		AND DbT3006."keikakuJigyoshaNo" = #{支援事業者番号}
-	</if>
+            AND DbT3006."sakuseiKubunCode" = '1'
+        </if>
+        <if test="作成区分 == 2">
+            AND DbT3006."sakuseiKubunCode" = '2'
+        </if>
+        <if test="作成区分 == 3">
+            AND (DbT3006."sakuseiKubunCode" = '1' OR DbT3006."sakuseiKubunCode" = '2')
+        </if>
+        <if test="作成区分 == 4">
+            AND DbT3007."sakuseiKubunCode" = '3'
+        </if>
+        <if test="作成区分 == 5">
+            AND DbT3006."sakuseiKubunCode" = '4'
+        </if>
+        <if test="支援事業者番号 !=null and !支援事業者番号.isEmpty()">
+            AND DbT3006."keikakuJigyoshaNo" = #{支援事業者番号}
+        </if>
         ) as D
     </sql>
-    
+
     <resultMap id="resultMapHanyoListKyotakuServiceKeikakuEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuEntity">
         <id column="row"/>
@@ -324,9 +330,12 @@
         <result property="dbT3005履歴番号" column="dbT3005履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="dbT3005届出区分" column="dbT3005届出区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3005届出年月日" column="dbT3005届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="dbT3006被保険者番号" column="dbT3006被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
         <result property="dbT3006作成区分コード" column="dbT3006作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3006適用開始年月日" column="dbT3006適用開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="dbT3006適用終了年月日" column="dbT3006適用終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="dbT3006事業者変更年月日" column="dbT3006事業者変更年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="dbT3007被保険者番号" column="dbT3007被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
         <result property="dbT3007作成区分コード" column="dbT3007作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3007適用開始年月日" column="dbT3007適用開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="dbT3007適用終了年月日" column="dbT3007適用終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -346,9 +355,9 @@
         <result property="dbV4001旧措置フラグ" column="dbV4001旧措置フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT4001みなし要介護区分コード" column="dbT4001みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="dbV4001直近異動事由コード" column="dbV4001直近異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <association property="宛名Entity" 
+        <association property="宛名Entity"
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
-        <association property="宛先Entity" 
+        <association property="宛先Entity"
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
-    </resultMap> 
+    </resultMap>
 </mapper>

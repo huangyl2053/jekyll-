@@ -105,7 +105,7 @@ public class SeikatsuhogoDetail {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         getHandler(div).onbtn_DetailAirOK();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).dialogOKClose();
     }
 
     /**

@@ -77,9 +77,12 @@ public class HanyoListKyotakuServiceKeikakuEntity {
     private Decimal dbT3005履歴番号;
     private RString dbT3005届出区分;
     private FlexibleDate dbT3005届出年月日;
+    private HihokenshaNo dbT3006被保険者番号;
     private RString dbT3006作成区分コード;
     private FlexibleDate dbT3006適用開始年月日;
     private FlexibleDate dbT3006適用終了年月日;
+    private FlexibleDate dbT3006事業者変更年月日;
+    private HihokenshaNo dbT3007被保険者番号;
     private RString dbT3007作成区分コード;
     private FlexibleDate dbT3007適用開始年月日;
     private FlexibleDate dbT3007適用終了年月日;

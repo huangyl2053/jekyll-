@@ -40,7 +40,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public final class FukaShokaiController {
 
-    private static final RString SERIAL_NUMBER0 = new RString("0000");
     private static final RString SERIAL_NUMBER1 = new RString("0001");
 
     /**
@@ -132,7 +131,6 @@ public final class FukaShokaiController {
 
 //        Optional<Fuka> modeloid = Optional.of(new FukaManager().get介護賦課(
 //                key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get履歴番号()));
-
         if (!modeloid.isPresent()) {
             throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
@@ -239,7 +237,7 @@ public final class FukaShokaiController {
     public static Optional<HokenryoDankai> findZennendoHokenryoDankai(Fuka fuka) {
         FlexibleYear 前年度 = fuka.get賦課年度().minusYear(1);
 
-        Optional<Fuka> modeloid = Optional.ofNullable(new FukaManager().get介護賦課(前年度, fuka.get賦課年度(), fuka.get通知書番号(), fuka.get履歴番号()));
+        Optional<Fuka> modeloid = Optional.ofNullable(new FukaManager().get介護賦課_賦課年度最新(前年度, fuka.get通知書番号()));
         if (!modeloid.isPresent()) {
             return Optional.empty();
         }

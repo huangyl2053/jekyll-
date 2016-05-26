@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.step.hanyolisthihokenshadaicho;
 
+import jp.co.ndensan.reams.db.dba.business.core.hanyolisthihokenshadaicho.ShikakShutokuHanteiComparator;
+import jp.co.ndensan.reams.db.dba.business.core.hanyolisthihokenshadaicho.ShikakShutokuHantei;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HaniChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HihokenshaJoho;
@@ -555,6 +558,49 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
         return 条件.toRString();
     }
 
+    /**
+     * 資格取得の事由・適用日・届出日について、資格取得年月日・資格変更年月日・住所地特例適用年月日・住所地特例解除年月日で<br />
+     * 最大の適用日付を判定し、それに対応する事由・適用日・適用届出日を、資格取得事由・適用日・届出日として出力する。
+     *
+     * @param t HanyoListHihokenshadaichoRelateEntity
+     * @return ShikakShutokuHantei
+     */
+    private ShikakShutokuHantei decide資格取得(HanyoListHihokenshadaichoRelateEntity t) {
+        ShikakShutokuHantei 資格取得 = new ShikakShutokuHantei();
+        ShikakShutokuHantei 資格変更 = new ShikakShutokuHantei();
+        ShikakShutokuHantei 住特適用 = new ShikakShutokuHantei();
+        ShikakShutokuHantei 住特解除 = new ShikakShutokuHantei();
+
+        資格取得.setCodeShubetsu(new RString("0007"));
+        資格取得.setJiyuCode(t.getShikakuShutokuJiyuCode());
+        資格取得.setTekiyoYMD(t.getShikakuShutokuYMD());
+        資格取得.setTodokedeYMD(t.getShikakuShutokuTodokedeYMD());
+
+        資格変更.setCodeShubetsu(new RString("0013"));
+        資格変更.setJiyuCode(t.getShikakuHenkoJiyuCode());
+        資格変更.setTekiyoYMD(t.getShikakuHenkoYMD());
+        資格変更.setTodokedeYMD(t.getShikakuHenkoTodokedeYMD());
+
+        住特適用.setCodeShubetsu(new RString("0014"));
+        住特適用.setJiyuCode(t.getJushochitokureiTekiyoJiyuCode());
+        住特適用.setTekiyoYMD(t.getJushochitokureiTekiyoYMD());
+        住特適用.setTodokedeYMD(t.getJushochitokureiTekiyoTodokedeYMD());
+
+        住特解除.setCodeShubetsu(new RString("0015"));
+        住特解除.setJiyuCode(t.getJushochitokureiKaijoJiyuCode());
+        住特解除.setTekiyoYMD(t.getJushochitokureiKaijoYMD());
+        住特解除.setTodokedeYMD(t.getJushochitokureiKaijoTodokedeYMD());
+
+        List<ShikakShutokuHantei> list = new ArrayList<>();
+        list.add(住特解除);
+        list.add(住特適用);
+        list.add(資格変更);
+        list.add(資格取得);
+        Collections.sort(list, new ShikakShutokuHanteiComparator());
+
+        return list.get(0);
+    }
+
     private HanyoListHihokenshadaichoCSVEntity getCSVEntity(HanyoListHihokenshadaichoRelateEntity t, int i) {
         IKojin iKojin = ShikibetsuTaishoFactory.createKojin(t.getPsmEntity());
         UaFt200FindShikibetsuTaishoEntity entity = t.getPsmEntity();
@@ -567,6 +613,8 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
         if (t.getShichosonCode() != null && !t.getShichosonCode().isEmpty()) {
             市町村名 = AssociationFinderFactory.createInstance().getAssociation(t.getShichosonCode()).get市町村名();
         }
+
+        ShikakShutokuHantei shikakShutokuHantei = decide資格取得(t);
         if (mybatisPrm.isHidukeHensyu()) {
             return new HanyoListHihokenshadaichoCSVEntity(
                     連番, entity.getShikibetsuCode(),
@@ -614,9 +662,9 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                     atesakiEntity.getGyoseikuCode(),
                     atesakiEntity.getGyoseiku(),
                     t.getHihokenshaNo(),
-                    get略称(new CodeShubetsu("0007"), t.getShikakuShutokuJiyuCode()),
-                    getパターン32(t.getShikakuShutokuYMD()),
-                    getパターン32(t.getShikakuShutokuTodokedeYMD()),
+                    get略称(new CodeShubetsu(shikakShutokuHantei.getCodeShubetsu()), shikakShutokuHantei.getJiyuCode()),
+                    getパターン32(shikakShutokuHantei.getTekiyoYMD()),
+                    getパターン32(shikakShutokuHantei.getTodokedeYMD()),
                     get略称(new CodeShubetsu("0010"), t.getShikakuShutokuJiyuCode()),
                     getパターン32(t.getShikakuSoshitsuYMD()),
                     getパターン32(t.getShikakuSoshitsuTodokedeYMD()),
@@ -670,9 +718,9 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                     atesakiEntity.getGyoseikuCode(),
                     atesakiEntity.getGyoseiku(),
                     t.getHihokenshaNo(),
-                    get略称(new CodeShubetsu("0007"), t.getShikakuShutokuJiyuCode()),
-                    getYYYYMMDD(t.getShikakuShutokuYMD()),
-                    getYYYYMMDD(t.getShikakuShutokuTodokedeYMD()),
+                    get略称(new CodeShubetsu(shikakShutokuHantei.getCodeShubetsu()), shikakShutokuHantei.getJiyuCode()),
+                    getYYYYMMDD(shikakShutokuHantei.getTekiyoYMD()),
+                    getYYYYMMDD(shikakShutokuHantei.getTodokedeYMD()),
                     get略称(new CodeShubetsu("0010"), t.getShikakuShutokuJiyuCode()),
                     getYYYYMMDD(t.getShikakuSoshitsuYMD()),
                     getYYYYMMDD(t.getShikakuSoshitsuTodokedeYMD()),

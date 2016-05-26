@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.report.honsanteiidou;
 
+import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.report.honsanteiidou.GenNendoHonsanteiIdouProperty;
@@ -77,12 +78,12 @@ public class GenNendoHonsanteiIdouPrintService {
      */
     public SourceDataCollection printTaitsu(List<KeisanjohoAtenaKozaKouseizengoEntity> 更正前後EntityList,
             RString shutsuryokujunID, YMDHMS 調定日時, FlexibleYear 賦課年度) {
+        SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-
             printFukusu(更正前後EntityList, shutsuryokujunID, 調定日時, 賦課年度, reportManager);
-            return reportManager.publish();
+            collection = reportManager.publish();
         }
-
+        return collection;
     }
 
     /**
@@ -99,13 +100,14 @@ public class GenNendoHonsanteiIdouPrintService {
 
         GenNendoHonsanteiIdouProperty property = new GenNendoHonsanteiIdouProperty();
 
-        RString 住所編集 = RString.EMPTY;
+        List<RString> 住所編集リスト = new ArrayList<>();
         for (KeisanjohoAtenaKozaKouseizengoEntity entity : 更正前後EntityList) {
 
             IKojin 宛名情報 = ShikibetsuTaishoFactory.createKojin(entity.get計算後情報_宛名_口座_更正後Entity().get宛名Entity());
             JushoHenshu jushoHenshu = JushoHenshu.createInstance();
             ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(帳票分類Id);
-            住所編集 = jushoHenshu.editJusho(帳票制御共通, 宛名情報);
+            RString 住所編集 = jushoHenshu.editJusho(帳票制御共通, 宛名情報);
+            住所編集リスト.add(住所編集);
         }
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();
@@ -137,7 +139,7 @@ public class GenNendoHonsanteiIdouPrintService {
                 }
             }
             new GenNendoHonsanteiIdouReport(
-                    更正前後EntityList, 調定日時, 賦課年度, association, 住所編集, 並び順の１件目, 並び順の２件目,
+                    更正前後EntityList, 調定日時, 賦課年度, association, 住所編集リスト, 並び順の１件目, 並び順の２件目,
                     並び順の３件目, 並び順の４件目, 並び順の５件目)
                     .writeBy(reportSourceWriter);
         }

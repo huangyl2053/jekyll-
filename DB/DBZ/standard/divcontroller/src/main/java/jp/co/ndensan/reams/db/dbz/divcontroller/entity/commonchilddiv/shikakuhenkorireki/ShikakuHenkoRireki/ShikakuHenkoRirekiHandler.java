@@ -431,12 +431,10 @@ public class ShikakuHenkoRirekiHandler {
         SikakuKanrenIdoFinder finder = SikakuKanrenIdoFinder.createInstance();
         List<KoseiShichosonMaster> shichosonMasters = finder.selectByKoseiShichosonMasterList().records();
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        int count = 1;
         for (KoseiShichosonMaster koseiShichosonMaster : shichosonMasters) {
             if (!RString.isNullOrEmpty(koseiShichosonMaster.getShichosonCode().getColumnValue())) {
                 dataSource.add(new KeyValueDataSource(
                         koseiShichosonMaster.getShichosonCode().getColumnValue(), koseiShichosonMaster.getShichosonMeisho()));
-                count++;
             }
         }
         return dataSource;

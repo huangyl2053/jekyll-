@@ -38,7 +38,7 @@ public class KokuhorenKyoutsuuInterfaceKanriKousinManager {
     private static final RString MESSAGE_交換情報識別番号 = new RString("交換情報識別番号");
     private static final RString MESSAGE_処理対象年月 = new RString("処理対象年月");
     private static final RString MESSAGE_レコード件数合計 = new RString("レコード件数合計");
-    private static final RString MESSAGE_エントリ情報List = new RString("エントリ情報List");
+    private static final RString MESSAGE_エントリ情報LIST = new RString("エントリ情報List");
 
     KokuhorenKyoutsuuInterfaceKanriKousinManager() {
         this.国保連インターフェース管理Dac = InstanceProvider.create(DbT3104KokuhorenInterfaceKanriDac.class);
@@ -70,8 +70,8 @@ public class KokuhorenKyoutsuuInterfaceKanriKousinManager {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGE_交換情報識別番号.toString()));
         requireNonNull(処理対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGE_処理対象年月.toString()));
         requireNonNull(レコード件数合計, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGE_レコード件数合計.toString()));
-        requireNonNull(エントリ情報List, UrSystemErrorMessages.値がempty.getReplacedMessage(MESSAGE_エントリ情報List.toString()));
-        requireNonNull(エントリ情報List, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGE_エントリ情報List.toString()));
+        requireNonNull(エントリ情報List, UrSystemErrorMessages.値がempty.getReplacedMessage(MESSAGE_エントリ情報LIST.toString()));
+        requireNonNull(エントリ情報List, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGE_エントリ情報LIST.toString()));
         DbT3104KokuhorenInterfaceKanriEntity entity = 国保連インターフェース管理Dac.selectByKeyUndeleted(処理年月, 交換情報識別番号);
         if (null != entity) {
             entity.setSofuTorikomiKubun(送付取込区分_取込);

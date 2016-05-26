@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxKinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxKinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
@@ -856,6 +857,10 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
         return new ShiharaiHohoJyohoHandler(this);
     }
 
+    private ShiharaiHohoJyohoValidationHandler getValidationHandler() {
+        return new ShiharaiHohoJyohoValidationHandler(this);
+    }
+
     /**
      * 共通子DIVの初期化処理です。
      *
@@ -959,22 +964,12 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     }
 
     /**
-     * 開始日と終了日の整合性チェック。
+     * 支払方法情報、バリデーションチェックを行う。
      *
-     * @return boolean
+     * @return ValidationMessageControlPairs
      */
     @Override
-    public boolean 開始日と終了日の整合性チェック() {
-        return getHandler().開始日と終了日の整合性チェック();
-    }
-
-    /**
-     * 開始時間と終了時間の整合性チェック。
-     *
-     * @return boolean
-     */
-    @Override
-    public boolean 開始時間と終了時間の整合性チェック() {
-        return getHandler().開始時間と終了時間の整合性チェック();
+    public ValidationMessageControlPairs validateCheck() {
+        return getValidationHandler().validateCheck();
     }
 }

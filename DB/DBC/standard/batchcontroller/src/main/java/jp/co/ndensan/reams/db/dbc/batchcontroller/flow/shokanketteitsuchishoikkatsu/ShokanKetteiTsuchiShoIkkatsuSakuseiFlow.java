@@ -11,7 +11,10 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikka
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShoShiharaiYoteiBiYijiAriOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoIkkatsuDBUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoMeisaiTempInsertProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoMeisaiTempServiceUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoMeisaiTempShitenUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoMeisaiTempUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoMeisaiTempYoshikiUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoSealer2OutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoSealerOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoTempInsertProcess;
@@ -38,6 +41,9 @@ public class ShokanKetteiTsuchiShoIkkatsuSakuseiFlow extends BatchFlowBase<Shouk
     private static final String TEMP_INSERT = "shokanKetteiTsuchiShoTempInsertProcess";
     private static final String MEISAI_TEMP_INSERT = "shokanKetteiTsuchiShoMeisaiTempInsertProcess";
     private static final String TEMP_UPDATE = "shokanKetteiTsuchiShoMeisaiTempUpdateProcess";
+    private static final String TEMP_UPDATE_SERVICE = "ShokanKetteiTsuchiShoMeisaiTempServiceUpdateProcess";
+    private static final String TEMP_UPDATE_YOSHIKI = "ShokanKetteiTsuchiShoMeisaiTempYoshikiUpdateProcess";
+    private static final String TEMP_UPDATE_SHITEN = "ShokanKetteiTsuchiShoMeisaiTempShitenUpdateProcess";
     private static final String DB_UPDATE = "shokanKetteiTsuchiShoIkkatsuDBUpdateProcess";
 
     private static final String DBC100002 = "shiharaiYoteiBiYijiNashiOutputProcess";
@@ -78,6 +84,9 @@ public class ShokanKetteiTsuchiShoIkkatsuSakuseiFlow extends BatchFlowBase<Shouk
         executeStep(TEMP_INSERT);
         executeStep(MEISAI_TEMP_INSERT);
         executeStep(TEMP_UPDATE);
+        executeStep(TEMP_UPDATE_SHITEN);
+        executeStep(TEMP_UPDATE_YOSHIKI);
+        executeStep(TEMP_UPDATE_SERVICE);
         executeStep(DB_UPDATE);
         if (用紙タイプ_A4.equals(用紙タイプ)) {
             if (支払予定日印字有無_印字しない.equals(支払予定日印字有無)) {
@@ -115,6 +124,21 @@ public class ShokanKetteiTsuchiShoIkkatsuSakuseiFlow extends BatchFlowBase<Shouk
     @Step(TEMP_UPDATE)
     IBatchFlowCommand shokanKetteiTsuchiShoMeisaiTempUpdateProcess() {
         return loopBatch(ShokanKetteiTsuchiShoMeisaiTempUpdateProcess.class).define();
+    }
+
+    @Step(TEMP_UPDATE_SHITEN)
+    IBatchFlowCommand shokanKetteiTsuchiShoMeisaiTempShitenUpdateProcess() {
+        return loopBatch(ShokanKetteiTsuchiShoMeisaiTempShitenUpdateProcess.class).define();
+    }
+
+    @Step(TEMP_UPDATE_YOSHIKI)
+    IBatchFlowCommand shokanKetteiTsuchiShoMeisaiTempYoshikiUpdateProcess() {
+        return loopBatch(ShokanKetteiTsuchiShoMeisaiTempYoshikiUpdateProcess.class).define();
+    }
+
+    @Step(TEMP_UPDATE_SERVICE)
+    IBatchFlowCommand shokanKetteiTsuchiShoMeisaiTempServiceUpdateProcess() {
+        return loopBatch(ShokanKetteiTsuchiShoMeisaiTempServiceUpdateProcess.class).define();
     }
 
     @Step(DB_UPDATE)

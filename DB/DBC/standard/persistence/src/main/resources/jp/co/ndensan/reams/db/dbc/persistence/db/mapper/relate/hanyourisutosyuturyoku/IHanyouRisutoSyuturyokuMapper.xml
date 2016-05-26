@@ -115,7 +115,8 @@
         AND NOT EXISTS (
         SELECT 1
         FROM rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS a
-        WHERE "DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo" = a."hihokenshaNo"
+        WHERE "DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo"  = a."hihokenshaNo"
+        AND "DbT3055KogakuKyufuTaishoshaGokei"."serviceTeikyoYM" = a."serviceTeikyoYM"
         AND "DbT3055KogakuKyufuTaishoshaGokei"."rirekiNo"     <![CDATA[<]]> a."rirekiNo"))
         As  DbT3055
         LEFT OUTER JOIN
@@ -141,14 +142,18 @@
         AND "serviceTeikyoYM"=DbT3056."dbT3056KogakuShikyuShinsei_serviceTeikyoYM"
         AND "shoKisaiHokenshaNo"=DbT3056."dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo")
         LEFT OUTER JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3054KogakuKyufuTaishoshaMeisaiMapper.noDeleted_DbT3054KogakuKyufuTaishoshaMeisai" />
-        <!-- 被保険者毎の最新を取得する。-->
-        AND NOT EXISTS (
-        SELECT 1
-        FROM rgdb."DbT3054KogakuKyufuTaishoshaMeisai" AS a
-        WHERE "DbT3054KogakuKyufuTaishoshaMeisai"."hihokenshaNo" = a."hihokenshaNo"
-        AND "DbT3054KogakuKyufuTaishoshaMeisai"."rirekiNo"     <![CDATA[<]]> a."rirekiNo"
-        ))
+        (SELECT
+        "DbT3054KogakuKyufuTaishoshaMeisai"."hihokenshaNo"             AS "dbT3054KogakuKyufuTaishoshaMeisai_hihokenshaNo"
+        ,"DbT3054KogakuKyufuTaishoshaMeisai"."serviceTeikyoYM"         AS "dbT3054KogakuKyufuTaishoshaMeisai_serviceTeikyoYM"
+        ,"DbT3054KogakuKyufuTaishoshaMeisai"."rirekiNo"                AS "dbT3054KogakuKyufuTaishoshaMeisai_rirekiNo"
+        ,max("DbT3054KogakuKyufuTaishoshaMeisai"."kogakuKyufuKonkyo")  AS "dbT3054KogakuKyufuTaishoshaMeisai_kogakuKyufuKonkyo"
+        FROM rgdb."DbT3054KogakuKyufuTaishoshaMeisai"
+        GROUP BY "DbT3054KogakuKyufuTaishoshaMeisai"."hihokenshaNo"
+        ,"DbT3054KogakuKyufuTaishoshaMeisai"."serviceTeikyoYM"
+        ,"DbT3054KogakuKyufuTaishoshaMeisai"."rirekiNo"
+        ORDER BY "DbT3054KogakuKyufuTaishoshaMeisai"."hihokenshaNo"
+        ,"DbT3054KogakuKyufuTaishoshaMeisai"."serviceTeikyoYM"
+        ,"DbT3054KogakuKyufuTaishoshaMeisai"."rirekiNo")
         As DbT3054
         ON DbT3054."dbT3054KogakuKyufuTaishoshaMeisai_hihokenshaNo" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo"
         AND DbT3054."dbT3054KogakuKyufuTaishoshaMeisai_serviceTeikyoYM" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM"

@@ -870,7 +870,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         List<KeyValueDataSource> selectedItems = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                 .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().getSelectedItems();
         List<RString> selectedKey = new ArrayList<>();
-        if (selectedItems != null && selectedItems.size() > 0) {
+        if (selectedItems != null && !selectedItems.isEmpty()) {
             for (KeyValueDataSource tmpDataSource : selectedItems) {
                 selectedKey.add(tmpDataSource.getKey());
             }
@@ -918,7 +918,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         List<KeyValueDataSource> selectedItemsNew = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                 .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().getSelectedItems();
         List<RString> selectedKeyNew = new ArrayList<>();
-        if (selectedItemsNew != null && selectedItemsNew.size() > 0) {
+        if (selectedItemsNew != null && !selectedItemsNew.isEmpty()) {
             for (KeyValueDataSource tmpDataSource : selectedItemsNew) {
                 selectedKeyNew.add(tmpDataSource.getKey());
             }
@@ -1815,7 +1815,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     public boolean 画面住宅改修グリッドデータ変更有無() {
         List<dgGaisyuList_Row> gridList = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                 .getTabJutakuKaisyuJyoho().getCcdJutakuJizenShinseiDetail().get住宅改修内容一覧();
-        if (gridList != null && gridList.size() > 0) {
+        if (gridList != null && !gridList.isEmpty()) {
             for (dgGaisyuList_Row tmpRow : gridList) {
                 if (行状態_更新.equals(tmpRow.getTxtJyotai())
                         || 行状態_削除.equals(tmpRow.getTxtJyotai())
