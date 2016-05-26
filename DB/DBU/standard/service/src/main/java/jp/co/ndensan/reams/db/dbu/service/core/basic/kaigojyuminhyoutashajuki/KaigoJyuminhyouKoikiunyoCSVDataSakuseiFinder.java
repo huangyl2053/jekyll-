@@ -378,7 +378,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         junientity.set受給者区分(new RString("1"));
         junientity.set要介護状態区分コード(entity.get受給者要介護認定状態区分コード());
         junientity.set認定有効開始日(entity.get受給者認定有効期間開始年月日());
-        junientity.set認定有効終了日(entity.get受給者当初認定有効終了年月日());
+        junientity.set認定有効終了日(entity.get受給者認定有効期間終了年月日());
         junientity.set受給認定年月日(entity.get受給者認定年月日());
         if (entity.get受給者挿入日時() != null && entity.get挿入日時() != null) {
             if (entity.get受給者挿入日時().compareTo(entity.get挿入日時()) <= 0) {
@@ -548,7 +548,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         junientity.set受給者区分(new RString("1"));
         junientity.set要介護状態区分コード(entity.get受給者要介護認定状態区分コード());
         junientity.set認定有効開始日(entity.get受給者認定有効期間開始年月日());
-        junientity.set認定有効終了日(entity.get受給者当初認定有効終了年月日());
+        junientity.set認定有効終了日(entity.get受給者認定有効期間終了年月日());
         junientity.set受給認定年月日(entity.get受給者認定年月日());
         if (entity.get受給者挿入日時() != null && entity.get挿入日時() != null) {
             if (entity.get受給者挿入日時().compareTo(entity.get挿入日時()) <= 0) {
