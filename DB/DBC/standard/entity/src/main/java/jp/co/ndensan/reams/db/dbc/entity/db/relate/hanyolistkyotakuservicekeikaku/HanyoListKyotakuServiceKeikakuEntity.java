@@ -91,8 +91,10 @@ public class HanyoListKyotakuServiceKeikakuEntity {
     private RString dbT3007変更理由;
     private JigyoshaNo dbT3006計画事業者番号;
     private AtenaMeisho dbT7060_Keikaku事業者名称;
+    private AtenaKanaMeisho dbT7060_Keikaku事業者カナ名称;
     private JigyoshaNo dbT3006委託先事業者番号;
     private AtenaMeisho dbT7060_Itaku事業者名称;
+    private AtenaKanaMeisho dbT7060_Itaku事業者カナ名称;
     private Code dbV4001受給申請事由;
     private FlexibleDate dbV4001受給申請年月日;
     private Code dbV4001要介護認定状態区分コード;

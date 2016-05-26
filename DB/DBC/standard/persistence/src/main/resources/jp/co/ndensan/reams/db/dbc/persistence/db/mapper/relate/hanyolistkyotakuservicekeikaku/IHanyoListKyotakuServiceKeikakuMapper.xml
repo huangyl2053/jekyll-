@@ -75,8 +75,10 @@
 
         DbT3006."keikakuJigyoshaNo"                                         AS dbT3006計画事業者番号,
         DbT7060_Keikaku."jigyoshaName"					AS dbT7060_Keikaku事業者名称,
+        DbT7060_Keikaku."jigyoshaNameKana"                              AS dbT7060_Keikaku事業者カナ名称,
         DbT3006."itakusakiJigyoshaNo"					AS dbT3006委託先事業者番号,
         DbT7060_Itaku."jigyoshaName"					AS dbT7060_Itaku事業者名称,
+        DbT7060_Itaku."jigyoshaNameKana"                                AS DbT7060_Itaku.事業者カナ名称,
         DbV4001."jukyuShinseiJiyu"						AS dbV4001受給申請事由,
         DbV4001."jukyuShinseiYMD"						AS dbV4001受給申請年月日,
         DbV4001."yokaigoJotaiKubunCode"					AS dbV4001要介護認定状態区分コード,
@@ -344,8 +346,10 @@
         <result property="dbT3007変更理由" column="dbT3007変更理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3006計画事業者番号" column="dbT3006計画事業者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="dbT7060_Keikaku事業者名称" column="dbT7060_Keikaku事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="dbT7060_Keikaku事業者カナ名称" column="dbT7060_Keikaku事業者カナ名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="dbT3006委託先事業者番号" column="dbT3006委託先事業者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="dbT7060_Itaku事業者名称" column="dbT7060_Itaku事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="dbT7060_Itaku事業者カナ名称" column="dbT7060_Itaku事業者カナ名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="dbV4001受給申請事由" column="dbV4001受給申請事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="dbV4001受給申請年月日" column="dbV4001受給申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="dbV4001要介護認定状態区分コード" column="dbV4001要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
