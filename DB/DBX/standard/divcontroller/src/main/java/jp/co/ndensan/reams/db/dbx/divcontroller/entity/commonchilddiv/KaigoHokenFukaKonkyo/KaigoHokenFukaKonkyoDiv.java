@@ -578,33 +578,63 @@ public class KaigoHokenFukaKonkyoDiv extends Panel implements IKaigoHokenFukaKon
     }
 
     @JsonIgnore
-    public Label getLblKikanData() {
-        return this.getTblKikan().getLblKikanData();
+    public Label getLblKikanData1() {
+        return this.getTblKikan().getLblKikanData1();
     }
 
     @JsonIgnore
-    public Label getLblGessuData() {
-        return this.getTblKikan().getLblGessuData();
+    public Label getLblGessuData1() {
+        return this.getTblKikan().getLblGessuData1();
     }
 
     @JsonIgnore
-    public Label getLblHokenryoDankaiKubunData() {
-        return this.getTblKikan().getLblHokenryoDankaiKubunData();
+    public Label getLblHokenryoDankaiKubunData1() {
+        return this.getTblKikan().getLblHokenryoDankaiKubunData1();
     }
 
     @JsonIgnore
-    public Label getLblHokenryoritsuData() {
-        return this.getTblKikan().getLblHokenryoritsuData();
+    public Label getLblHokenryoritsuData1() {
+        return this.getTblKikan().getLblHokenryoritsuData1();
     }
 
     @JsonIgnore
-    public Label getLblHokenryoSanshutsugakuData() {
-        return this.getTblKikan().getLblHokenryoSanshutsugakuData();
+    public Label getLblHokenryoSanshutsugakuData1() {
+        return this.getTblKikan().getLblHokenryoSanshutsugakuData1();
     }
 
     @JsonIgnore
-    public Label getLblHokenryogakuData() {
-        return this.getTblKikan().getLblHokenryogakuData();
+    public Label getLblHokenryogakuData1() {
+        return this.getTblKikan().getLblHokenryogakuData1();
+    }
+
+    @JsonIgnore
+    public Label getLblKikanData2() {
+        return this.getTblKikan().getLblKikanData2();
+    }
+
+    @JsonIgnore
+    public Label getLblGessuData2() {
+        return this.getTblKikan().getLblGessuData2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoDankaiKubunData2() {
+        return this.getTblKikan().getLblHokenryoDankaiKubunData2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoritsuData2() {
+        return this.getTblKikan().getLblHokenryoritsuData2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoSanshutsugakuData2() {
+        return this.getTblKikan().getLblHokenryoSanshutsugakuData2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryogakuData2() {
+        return this.getTblKikan().getLblHokenryogakuData2();
     }
 
     // </editor-fold>
