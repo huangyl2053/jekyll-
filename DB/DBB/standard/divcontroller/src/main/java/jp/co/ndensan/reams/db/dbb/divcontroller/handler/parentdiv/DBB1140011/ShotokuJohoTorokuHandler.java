@@ -534,9 +534,7 @@ public final class ShotokuJohoTorokuHandler {
     }
 
     private FlexibleYear trans和暦to西暦(RString 和暦str) {
-        RDate nendo = new RDate(和暦str.toString());
-        FlexibleYear 西暦Year = new FlexibleYear(nendo.getYear().toString());
-        return 西暦Year;
+        return new FlexibleYear(new RDate(和暦str.toString()).getYear().toString());
     }
 
     private void changeTo初期状態(boolean isDisplay) {

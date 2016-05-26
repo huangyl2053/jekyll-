@@ -330,13 +330,15 @@ public class JukyuShikakuShomeishoFinder {
         if (措置元市町村コード != null) {
             SearchResult<ShichosonCodeYoriShichoson> result
                     = koikiShichosonJohoFinder.shichosonCodeYoriShichosonJoho(措置元市町村コード);
-            if (result != null) {
+            if (result != null && !result.records().isEmpty()
+                    && result.records().get(0).get証記載保険者番号() != null) {
                 outEntity.set保険者番号(result.records().get(0).get証記載保険者番号().getColumnValue());
             }
         } else {
             SearchResult<ShichosonCodeYoriShichoson> searchResult
                     = koikiShichosonJohoFinder.shichosonCodeYoriShichosonJoho(dbT1001EntityList.get(0).getShichosonCode());
-            if (searchResult != null) {
+            if (searchResult != null && !searchResult.records().isEmpty()
+                    && searchResult.records().get(0).get証記載保険者番号() != null) {
                 outEntity.set保険者番号(searchResult.records().get(0).get証記載保険者番号().getColumnValue());
             }
         }
