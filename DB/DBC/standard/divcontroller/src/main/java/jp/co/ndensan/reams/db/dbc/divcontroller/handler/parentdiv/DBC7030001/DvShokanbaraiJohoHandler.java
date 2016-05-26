@@ -183,9 +183,9 @@ public class DvShokanbaraiJohoHandler {
         boolean 連番付加 = div.getDvShokanbaraiParam().getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(連番);
         boolean 日付スラッシュ付加 = div.getDvShokanbaraiParam()
                 .getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(日付スラッシュ);
-        long 出力順 = div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun() == null
+        long 出力順 = div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().get出力順ID() == null
                 ? 0 : div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().get出力順ID();
-        ReportId 帳票ID = div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun() == null
+        ReportId 帳票ID = div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().get帳票ID() == null
                 ? null : div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().get帳票ID();
         parameter.setサービス提供年月From(サービス提供年月From);
         parameter.setサービス提供年月To(サービス提供年月To);
