@@ -293,10 +293,12 @@ public class ShikakuJukiValidator {
     }
 
     private void setMsg(Map<RString, DbzErrorMessages> retMap, IKojin 個人情報, FuseigoRiyu 不整合理由) {
-        if (不整合理由 == FuseigoRiyu.資格取得者_転出者 && isNullOrEmpty(個人情報.get転出確定().get異動年月日())) {
-            retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出確定日);
-        } else {
-            retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出予定日);
+        if (不整合理由 == FuseigoRiyu.資格取得者_転出者) {
+            if (isNullOrEmpty(個人情報.get転出確定().get異動年月日())) {
+                retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出確定日);
+            } else {
+                retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出予定日);
+            }
         }
     }
 
