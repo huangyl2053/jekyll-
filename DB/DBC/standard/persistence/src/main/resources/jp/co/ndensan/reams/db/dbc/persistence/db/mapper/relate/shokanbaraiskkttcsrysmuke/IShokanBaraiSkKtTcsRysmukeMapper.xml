@@ -31,8 +31,7 @@
         LEFT JOIN rgdb."DbT3077JuryoininKeiyakuJigyosha" AS B
         ON A."keiyakuJigyoshaNo" = B."keiyakuJigyoshaNo"
         WHERE A."hihokenshaNo" = #{被保険者番号}
-        AND A."shikyushinseiSeiriNo" = #{支給申請サービス提供年月}
-        AND A."shikyushinseiServiceYM" = #{支給申請償還整理番号}
+        AND A."shikyushinseiSeiriNo" = #{支給申請償還整理番号}
+        AND A."shikyushinseiServiceYM" = #{支給申請サービス提供年月}
     </select>
-
 </mapper>
