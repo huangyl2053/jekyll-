@@ -404,7 +404,7 @@ public class SetaiShotokuIchiranHandler {
     /**
      * アクセスログ
      *
-     * @param 世帯員所得情報リスト
+     * @param 世帯員所得情報リスト 世帯員所得情報リスト
      */
     public void accessLog(List<? extends SetaiinShotoku> 世帯員所得情報リスト) {
         List<PersonalData> personalData = new ArrayList();
