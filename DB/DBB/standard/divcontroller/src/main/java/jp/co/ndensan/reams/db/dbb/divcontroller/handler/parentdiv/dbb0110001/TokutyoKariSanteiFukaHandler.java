@@ -127,10 +127,10 @@ public final class TokutyoKariSanteiFukaHandler {
         list2.add(row2);
         div.getTokutyoKariSanteiKanriInfo().getDgKanrijoho2().setDataSource(list2);
         List<KeyValueDataSource> list = new ArrayList();
-        for (TokuchoKaishiTsuhishoKariOutputJoken tokuchokaishitsuhishokarioutputjoken : TokuchoKaishiTsuhishoKariOutputJoken.values()) {
+        for (TokuchoKaishiTsuhishoKariOutputJoken tokuchokai : TokuchoKaishiTsuhishoKariOutputJoken.values()) {
             KeyValueDataSource keyvaluedatasource = new KeyValueDataSource();
-            keyvaluedatasource.setKey(tokuchokaishitsuhishokarioutputjoken.get名称());
-            keyvaluedatasource.setValue(tokuchokaishitsuhishokarioutputjoken.get名称());
+            keyvaluedatasource.setKey(tokuchokai.get名称());
+            keyvaluedatasource.setValue(tokuchokai.get名称());
             list.add(keyvaluedatasource);
         }
         div.getTokutyoKariSanteiFukaChohyoHakko().getTokutyoKariTsuchiKobetsuJoho().getRadTokuKaishiTsuchiTaisho2().setDataSource(list);

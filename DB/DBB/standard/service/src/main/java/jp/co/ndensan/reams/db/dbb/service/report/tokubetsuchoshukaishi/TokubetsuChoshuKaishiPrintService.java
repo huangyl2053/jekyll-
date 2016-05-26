@@ -57,10 +57,12 @@ public class TokubetsuChoshuKaishiPrintService {
      */
     public SourceDataCollection printSingle(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報, FlexibleYear 賦課年度,
             long 出力順ID, RDateTime 帳票作成日時) {
+        SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             print(編集後本算定通知書共通情報, 賦課年度, 出力順ID, 帳票作成日時, reportManager);
-            return reportManager.publish();
+            collection = reportManager.publish();
         }
+        return collection;
     }
 
     /**
@@ -82,7 +84,6 @@ public class TokubetsuChoshuKaishiPrintService {
             Association association = finder.getAssociation();
             RString 市町村コード = association.get地方公共団体コード().value();
             RString 市町村名 = association.get市町村名();
-
             IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
                     .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200011.getReportId(), 出力順ID);
             if (並び順 == null || 並び順.get設定項目リスト() == null || 並び順.get設定項目リスト().isEmpty()) {
