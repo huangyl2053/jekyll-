@@ -51,6 +51,7 @@ module DBC
                     //this.controls.txtTeiseiYMD().readOnly = true;			//訂正日
                     //this.controls.radTeiseiKubunCode().readOnly = true;		//訂正区分
                     //基本送付情報
+                    this.controls.chkKihonSofu().visible = true;
                     this.controls.chkKihonSofu().readOnly = false;
                     //KyodoJukyushaIdoRenrakuhyoKihonPanel
                     this.controls.KyodoJukyushaIdoRenrakuhyoShokanPanel().readOnly = false;
@@ -64,6 +65,7 @@ module DBC
                     //this.controls.txtAddressKana().readOnly = true;
                     
                     //償還送付情報
+                    this.controls.chkShokanSofu().visible = true;
                     this.controls.chkShokanSofu().readOnly = false;
                     //KyodoJukyushaIdoRenrakuhyoShokanPanel
                     this.controls.KyodoJukyushaIdoRenrakuhyoShokanPanel().readOnly = false;
@@ -74,6 +76,7 @@ module DBC
                     //this.controls.txtHokenkyufuIchijiSashitomeKingaku().readOnly = true;
                     
                     //高額送付情報
+                    this.controls.chkKogakuSofu().visible = true;
                     this.controls.chkKogakuSofu().readOnly = false;
                     //KyodoJukyushaIdoRenrakuhyoKogakuPanel
                     this.controls.KyodoJukyushaIdoRenrakuhyoKogakuPanel().readOnly = false;
@@ -100,6 +103,7 @@ module DBC
                     //this.controls.txtTeiseiYMD().readOnly = true;			//訂正日
                     //this.controls.radTeiseiKubunCode().readOnly = true;		//訂正区分
                     //基本送付情報
+                    this.controls.chkKihonSofu().visible = true;
                     this.controls.chkKihonSofu().readOnly = false;
                     //KyodoJukyushaIdoRenrakuhyoKihonPanel
                     this.controls.KyodoJukyushaIdoRenrakuhyoShokanPanel().readOnly = false;
@@ -113,6 +117,7 @@ module DBC
                     //this.controls.txtAddressKana().readOnly = true;
                     
                     //償還送付情報
+                    this.controls.chkShokanSofu().visible = true;
                     this.controls.chkShokanSofu().readOnly = false;
                     //KyodoJukyushaIdoRenrakuhyoShokanPanel
                     this.controls.KyodoJukyushaIdoRenrakuhyoShokanPanel().readOnly = false;
@@ -123,6 +128,7 @@ module DBC
                     //this.controls.txtHokenkyufuIchijiSashitomeKingaku().readOnly = true;
                     
                     //高額送付情報
+                    this.controls.chkKogakuSofu().visible = true;
                     this.controls.chkKogakuSofu().readOnly = false;
                     //KyodoJukyushaIdoRenrakuhyoKogakuPanel
                     this.controls.KyodoJukyushaIdoRenrakuhyoKogakuPanel().readOnly = false;
@@ -140,12 +146,28 @@ module DBC
                 public sakujyo(): void {
                     //this.controls.KyodoJukyushaIdoRenrakuhyo().readOnly = true;
                     this.controls.KyodoJukyushaIdoRenrakuhyo().disabled = true;
+                    //基本送付情報
+                    this.controls.chkKihonSofu().visible = false;
+                    
+                    //償還送付情報
+                    this.controls.chkShokanSofu().visible = false;
+                    
+                    //高額送付情報
+                    this.controls.chkKogakuSofu().visible = false;
                 }
                 
                 //照会モード
                 public shokai(): void {
                     //this.controls.KyodoJukyushaIdoRenrakuhyo().readOnly = true;
                     this.controls.KyodoJukyushaIdoRenrakuhyo().disabled = true;
+                    //基本送付情報
+                    this.controls.chkKihonSofu().visible = false;
+                    
+                    //償還送付情報
+                    this.controls.chkShokanSofu().visible = false;
+                    
+                    //高額送付情報
+                    this.controls.chkKogakuSofu().visible = false;
                 }
             }
         }
