@@ -8,11 +8,12 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hanteikekkajohoshuturyok
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuProcessParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.IinJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiGijirokuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiKaisaiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiKekkaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hanteikekkajohoshuturyoku.IHanteiKekkaJohoShuturyokuMapper;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -34,7 +35,7 @@ public class ShinsakaiGijirokuProcess extends BatchProcessBase<ShinsakaiKekkaJoh
     private HanteiKekkaJohoShuturyokuMybatisParameter mybatisParameter;
     private ShinsakaiGijirokuEntity shinsakaiGijirokuEntity;
     private RDateTime システム時刻;
-    private List<DbT5594ShinsakaiIinJohoEntity> 委員情報;
+    private List<IinJohoRelateEntity> 委員情報;
     private ShinsakaiKaisaiKekkaJohoEntity 審査会情報;
     private int 未判定;
     private int 未審査;
@@ -66,6 +67,17 @@ public class ShinsakaiGijirokuProcess extends BatchProcessBase<ShinsakaiKekkaJoh
     protected void beforeExecute() {
         super.beforeExecute();
         委員情報 = getMapper(IHanteiKekkaJohoShuturyokuMapper.class).getIinJoho(mybatisParameter);
+        for (IinJohoRelateEntity entity : 委員情報) {
+            if (Sikaku.ホームヘルパー.getコード().equals(entity.getShinsakaiIinShikakuCode())
+                    || Sikaku.介護職員.getコード().equals(entity.getShinsakaiIinShikakuCode())) {
+                entity.setChosaIn(entity.getShinsakaiIinShimei());
+            } else {
+                entity.setShinsakaiIin(entity.getShinsakaiIinShimei());
+            }
+            if (Sikaku.その他.getコード().equals(entity.getShinsakaiIinShikakuCode())) {
+                entity.setSonoTa(entity.getShinsakaiIinShimei());
+            }
+        }
         審査会情報 = getMapper(IHanteiKekkaJohoShuturyokuMapper.class).getShinsakaiJoho(mybatisParameter);
         未判定 = getMapper(IHanteiKekkaJohoShuturyokuMapper.class).getMiHanteiKensu(mybatisParameter);
         未審査 = getMapper(IHanteiKekkaJohoShuturyokuMapper.class).getMishinSaKensu(mybatisParameter);

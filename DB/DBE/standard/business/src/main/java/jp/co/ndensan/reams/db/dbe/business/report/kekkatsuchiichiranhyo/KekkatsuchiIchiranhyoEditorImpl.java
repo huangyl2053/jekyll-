@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.kekkatsuchiichiranhyo;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.kekkatsuchiichiranhyo.KekkatsuchiIchiranhyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.kekkatsuchiichiranhyo.KekkatsuchiIchiranhyoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -14,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 要介護認定結果通知一覧表のEditorです。
@@ -77,6 +79,7 @@ public class KekkatsuchiIchiranhyoEditorImpl implements IKekkatsuchiIchiranhyoEd
         source.listKekkatsuchitaisho_3 = entity.getShinseiYMD() == null
                 ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(entity.getShinseiYMD()));
         source.listKekkatsuchitaisho_4 = entity.getHihokenshaNo();
+        source.hishokenshaNo = new ExpandedInformation(Code.EMPTY, new RString("被保険者番号"), entity.getHihokenshaNo());
         source.listKekkatsuchitaisho_5 = entity.getHihokenshaName();
         source.listKekkatsuchitaisho_6 = entity.getHihokenshaKana();
         source.listKekkatsuchitaisho_7 = entity.getSeinengappiYMD() == null
