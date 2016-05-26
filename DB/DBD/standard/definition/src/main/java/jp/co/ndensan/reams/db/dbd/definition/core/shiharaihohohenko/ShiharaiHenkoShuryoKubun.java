@@ -83,6 +83,11 @@ public enum ShiharaiHenkoShuryoKubun {
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("支払方法変更終了区分"));
     }
 
+    /**
+     * valuesAt償還払い化終了申請
+     *
+     * @return list
+     */
     public static List<ShiharaiHenkoShuryoKubun> valuesAt償還払い化終了申請() {
         List<ShiharaiHenkoShuryoKubun> list = new ArrayList<>();
         list.add(ShiharaiHenkoShuryoKubun._空);
@@ -93,6 +98,11 @@ public enum ShiharaiHenkoShuryoKubun {
         return list;
     }
 
+    /**
+     * valuesAt２号弁明書受理
+     *
+     * @return list
+     */
     public static List<ShiharaiHenkoShuryoKubun> valuesAt２号弁明書受理() {
         List<ShiharaiHenkoShuryoKubun> list = new ArrayList<>();
         list.add(ShiharaiHenkoShuryoKubun._空);
