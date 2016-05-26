@@ -57,7 +57,7 @@ public class ShiharaiHohoJyohoValidationHandler {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.口座ＩＤの必須チェック, div.getDdlKozaID()));
         }
         if (契約番号の必須チェック()) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.口座ＩＤの必須チェック, div.getTxtKeiyakuNo()));
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.契約番号の必須チェック, div.getTxtKeiyakuNo()));
         }
         return validPairs;
     }
