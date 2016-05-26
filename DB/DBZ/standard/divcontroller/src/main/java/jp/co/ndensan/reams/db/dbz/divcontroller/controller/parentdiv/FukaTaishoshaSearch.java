@@ -166,10 +166,9 @@ public class FukaTaishoshaSearch {
             return responseData;
         }
 
-        boolean 介護検索条件のみ = 検索条件Flag && !宛名条件修正Flag;
-
+//        boolean 介護検索条件のみ = 検索条件Flag && !宛名条件修正Flag;
         // 該当者を検索する
-        SearchResult<FukaTaishoshaRelateEntity> result = get対象者(div.getSearchCondition().getCcdSearchCondition(), 介護検索条件のみ);
+        SearchResult<FukaTaishoshaRelateEntity> result = get対象者(div.getSearchCondition().getCcdSearchCondition());
 
         // 検索結果の絞り込み
         // TODO 【資格、賦課共通】部分
@@ -340,20 +339,19 @@ public class FukaTaishoshaSearch {
         div.getGaitoshaList().getTxtFukanendo().setValue(new RDate(賦課年度.toString()));
     }
 
-    private SearchResult<FukaTaishoshaRelateEntity> get対象者(HihokenshaFinderDiv div, boolean 介護条件のみ) {
+    private SearchResult<FukaTaishoshaRelateEntity> get対象者(HihokenshaFinderDiv div) {
         TaishoshaFinder finder = new TaishoshaFinder();
         FukaSearchMenu menu = FukaSearchMenu.toValue(ResponseHolder.getMenuID());
 //        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
         // FukaSearchMenu menu = FukaSearchMenu.toValue(UrControlDataFactory.createInstance().getMenuID());
 
-        ShikibetsuTaishoSearchKeyBuilder keyBuilder = new ShikibetsuTaishoSearchKeyBuilder(div.get宛名条件().getPSMSearchKey());
+//       ShikibetsuTaishoSearchKeyBuilder keyBuilder = new ShikibetsuTaishoSearchKeyBuilder(div.get宛名条件().getPSMSearchKey());
 //        if (介護条件のみ) {
 //            Optional<Fuka> modeloid = Optional.of(new FukaManager().get介護賦課(fukaKey.get調定年度(), 前年度, fukaKey.get通知書番号(), fukaKey.get履歴番号()));
 //            keyBuilder.set識別コードリスト(null);
 //        } else {
 //
 //        }
-
         return finder.get賦課対象者(get介護条件(div), get介護除外条件(div, menu), div.get宛名条件(), 最大取得件数);
     }
 

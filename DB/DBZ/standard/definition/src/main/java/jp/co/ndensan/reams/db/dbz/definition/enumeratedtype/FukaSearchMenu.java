@@ -130,6 +130,7 @@ public enum FukaSearchMenu {
      *
      * @param code UIコンテナIDまたは標準版メニューID
      * @return 列挙型
+     * @throws IllegalArgumentException 対応する列挙型がない場合
      */
     public static FukaSearchMenu toValue(RString code) throws IllegalArgumentException {
         if (RString.isNullOrEmpty(code)) {
