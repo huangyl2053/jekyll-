@@ -5,7 +5,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 国保連情報取込エラーリストタイプを表す列挙型です。
  *
- * @reamsid_L DBC-0980-550 zhangrui
+ * @reamsid_L DBC-9999-022 zhangrui
  */
 public enum KokuhorenJoho_TorikomiErrorListType {
 
