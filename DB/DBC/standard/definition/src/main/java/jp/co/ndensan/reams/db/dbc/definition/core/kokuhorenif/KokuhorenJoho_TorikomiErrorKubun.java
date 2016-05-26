@@ -6,50 +6,49 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 国保連情報取込エラー区分を表す列挙型です。
  *
- * @reamsid_L DBC-0980-550 zhangrui
+ * @reamsid_L DBC-9999-022 zhangrui
  */
 public enum KokuhorenJoho_TorikomiErrorKubun {
 
     /**
      * コード:10 名称:新旧被保険者番号変換エラー 略称:定義なし
      */
-    新旧被保険者番号変換エラー("10", "新旧被保険者番号変換", "新被保険者番号に変換できません。"),
+    新旧被保険者番号変換エラー("10", "新旧被保険者番号変換エラー"),
     /**
      * コード:20 名称:被保険者情報取得エラー 略称:定義なし
      */
-    被保険者情報取得エラー("20", "被保険者・宛名情報取得", "被保険者台帳が存在しません。"),
+    被保険者情報取得エラー("20", "被保険者情報取得エラー"),
     /**
      * コード:30 名称:宛名取得エラー 略称:定義なし
      */
-    宛名取得エラー("30", "被保険者・宛名情報取得", "宛名が存在しません。"),
+    宛名取得エラー("30", "宛名取得エラー"),
     /**
      * コード:40 名称:世帯集約番号取得エラー 略称:定義なし
      */
-    世帯集約番号取得エラー("40", "世帯集約番号取得", "世帯集約番号の取得ができません。"),
+    世帯集約番号取得エラー("40", "世帯集約番号取得エラー"),
     /**
      * コード:60 名称:再処理不可 略称:定義なし
      */
-    再処理不可("60", "DB登録", "関連データが登録済のため再処理できません。"),
+    再処理不可("60", "再処理不可"),
     /**
      * コード:61 名称:再処理データなし 略称:定義なし
      */
-    再処理データなし("61", "DB登録", "再処理対象ファイルにデータが存在しません。"),
+    再処理データなし("61", "再処理データなし"),
     /**
      * コード:62 名称:関連データなし 略称:定義なし
      */
-    関連データなし("62", "DB登録", "関連データが存在しません。"),
+    関連データなし("62", "関連データなし"),
     /**
      * コード:99 名称:取込対象データなし 略称:定義なし
      */
-    取込対象データなし("99", "DB登録", "取り込むデータがありません。");
-    private final RString コード;
-    private final RString 処理名;
-    private final RString エラーメッセージ;
+    取込対象データなし("99", "取込対象データなし");
 
-    private KokuhorenJoho_TorikomiErrorKubun(String code, String 処理名, String エラーメッセージ) {
-        this.コード = new RString(code);
-        this.処理名 = new RString(処理名);
-        this.エラーメッセージ = new RString(エラーメッセージ);
+    private final RString code;
+    private final RString fullName;
+
+    private KokuhorenJoho_TorikomiErrorKubun(String code, String fullName) {
+        this.code = new RString(code);
+        this.fullName = new RString(fullName);
     }
 
     /**
@@ -58,25 +57,65 @@ public enum KokuhorenJoho_TorikomiErrorKubun {
      * @return コード
      */
     public RString getコード() {
-        return コード;
+        return code;
+    }
+
+    /**
+     * 名称を取ります
+     *
+     * @return 名称
+     */
+    public RString get名称() {
+        return fullName;
     }
 
     /**
      * 処理名を取ります
      *
+     * @param code コード
      * @return 処理名
      */
-    public RString get処理名() {
-        return 処理名;
+    public static RString get処理名(RString code) {
+        if (KokuhorenJoho_TorikomiErrorKubun.新旧被保険者番号変換エラー.getコード().contains(code)) {
+            return new RString("新旧被保険者番号変換");
+        } else if ((KokuhorenJoho_TorikomiErrorKubun.被保険者情報取得エラー.getコード().contains(code))
+                || (KokuhorenJoho_TorikomiErrorKubun.宛名取得エラー.getコード().contains(code))) {
+            return new RString("被保険者・宛名情報取得");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.世帯集約番号取得エラー.getコード().contains(code)) {
+            return new RString("被保険者・世帯集約番号取得");
+        } else if ((KokuhorenJoho_TorikomiErrorKubun.再処理不可.getコード().contains(code))
+                || (KokuhorenJoho_TorikomiErrorKubun.再処理データなし.getコード().contains(code))
+                || (KokuhorenJoho_TorikomiErrorKubun.関連データなし.getコード().contains(code))
+                || (KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード().contains(code))) {
+            return new RString("DB登録");
+        }
+        return null;
     }
 
     /**
      * エラーメッセージを取ります
      *
+     * @param code コード
      * @return エラーメッセージ
      */
-    public RString getエラーメッセージ() {
-        return エラーメッセージ;
+    public static RString getエラーメッセージ(RString code) {
+        if (KokuhorenJoho_TorikomiErrorKubun.新旧被保険者番号変換エラー.getコード().contains(code)) {
+            return new RString("新被保険者番号に変換できません。");
+        } else if ((KokuhorenJoho_TorikomiErrorKubun.被保険者情報取得エラー.getコード().contains(code))
+                || (KokuhorenJoho_TorikomiErrorKubun.宛名取得エラー.getコード().contains(code))) {
+            return new RString("被保険者台帳が存在しません。");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.世帯集約番号取得エラー.getコード().contains(code)) {
+            return new RString("宛名が存在しません。");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.再処理不可.getコード().contains(code)) {
+            return new RString("関連データが登録済のため再処理できません。");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.再処理データなし.getコード().contains(code)) {
+            return new RString("再処理対象ファイルにデータが存在しません。");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.関連データなし.getコード().contains(code)) {
+            return new RString("関連データが存在しません。");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード().contains(code)) {
+            return new RString("取り込むデータがありません。");
+        }
+        return null;
     }
 
     /**
@@ -87,11 +126,10 @@ public enum KokuhorenJoho_TorikomiErrorKubun {
      */
     public static KokuhorenJoho_TorikomiErrorKubun toValue(RString code) {
         for (KokuhorenJoho_TorikomiErrorKubun errorKubun : KokuhorenJoho_TorikomiErrorKubun.values()) {
-            if (errorKubun.コード.equals(code)) {
+            if (errorKubun.code.equals(code)) {
                 return errorKubun;
             }
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("国保連情報取込エラー区分"));
     }
-
 }

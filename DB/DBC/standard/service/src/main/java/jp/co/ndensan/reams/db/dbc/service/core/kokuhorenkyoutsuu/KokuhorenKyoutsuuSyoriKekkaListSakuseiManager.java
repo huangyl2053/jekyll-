@@ -141,9 +141,8 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
                 entity.setキー5(data.getキー5());
                 entity.set備考(data.get備考());
                 try {
-                    KokuhorenJoho_TorikomiErrorKubun エラー区分 = KokuhorenJoho_TorikomiErrorKubun.toValue(data.getエラー区分());
-                    entity.set処理名(エラー区分.get処理名());
-                    entity.setエラー内容(エラー区分.getエラーメッセージ());
+                    entity.set処理名(KokuhorenJoho_TorikomiErrorKubun.get処理名(data.getエラー区分()));
+                    entity.setエラー内容(KokuhorenJoho_TorikomiErrorKubun.getエラーメッセージ(data.getエラー区分()));
                 } catch (IllegalArgumentException ex) {
                     Logger.getLogger(KokuhorenKyoutsuuSyoriKekkaListSakuseiManager.class.getName()).log(Level.SEVERE, null, ex);
                     throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(
