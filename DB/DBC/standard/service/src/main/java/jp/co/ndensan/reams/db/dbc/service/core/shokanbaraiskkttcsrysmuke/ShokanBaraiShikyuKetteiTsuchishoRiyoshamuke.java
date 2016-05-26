@@ -165,9 +165,12 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
                 item.setKyufuShu1(給付の種類);
                 item.setRiyu1(shoShiharai.get増減理由等());
             } else if (給付の種類.length() <= 文字数_76) {
+                item.setKyufuShu1(給付の種類.substring(ZERO, 文字数_38));
                 item.setKyufuShu2(給付の種類.substring(文字数_38));
                 item.setRiyu2(shoShiharai.get増減理由等());
             } else {
+                item.setKyufuShu1(給付の種類.substring(ZERO, 文字数_38));
+                item.setKyufuShu2(給付の種類.substring(文字数_38, 文字数_76));
                 item.setKyufuShu3(給付の種類.substring(文字数_76));
                 item.setRiyu3(shoShiharai.get増減理由等());
             }
@@ -212,11 +215,14 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
     }
 
     private RString set種類(RString kyufuShu, RString 種類) {
-
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(kyufuShu);
-        builder.append(カンマ);
-        builder.append(種類);
+        if (RString.isNullOrEmpty(kyufuShu)) {
+            return 種類;
+        }
+        RStringBuilder builder = new RStringBuilder(kyufuShu);
+        if (!RString.isNullOrEmpty(種類)) {
+            builder.append(カンマ);
+            builder.append(種類);
+        }
         return builder.toRString();
     }
 
