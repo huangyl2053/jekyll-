@@ -626,6 +626,8 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtMeigininKana().setDomain(口座情報.get口座名義人());
         div.getTtxtMeigininKanji().setDomain(口座情報.get口座名義人漢字());
         div.getTxtTenban().setReadOnly(true);
+        div.getTxtKinyuKikanShitenCode().setReadOnly(true);
+        div.getTxtYokinShubetsu().setReadOnly(true);
     }
 
     /**
@@ -680,6 +682,8 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtMeigininKanji1().setDomain(受領委任契約事業者.get口座名義人() == null
                 ? AtenaMeisho.EMPTY : 受領委任契約事業者.get口座名義人());
         div.getTxtTenban1().setReadOnly(true);
+        div.getTxtKinyuKikanShitenCode1().setReadOnly(true);
+        div.getTxtYokinShubetsu1().setReadOnly(true);
     }
 
     private void 口座払いエリアの初期化Private(KinyuKikan kinyuKikan, KinyuKikanShiten kinyuKikanShiten) {
