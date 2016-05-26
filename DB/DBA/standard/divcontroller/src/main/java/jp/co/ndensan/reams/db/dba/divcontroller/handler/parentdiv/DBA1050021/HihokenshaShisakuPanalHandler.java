@@ -199,7 +199,7 @@ public class HihokenshaShisakuPanalHandler {
             }
         } else {
             if (状態_追加.equals(viewState)) {
-                旧保険者情報の設定(所在保険者の取得(識別コード), 旧保険者の取得());
+                旧保険者情報の設定(所在保険者の取得(識別コード), RString.EMPTY);
             } else {
                 旧保険者情報の設定(資格得喪情報.getShozaiHokensha(), 資格得喪情報.getSochimotoHokensha());
             }
