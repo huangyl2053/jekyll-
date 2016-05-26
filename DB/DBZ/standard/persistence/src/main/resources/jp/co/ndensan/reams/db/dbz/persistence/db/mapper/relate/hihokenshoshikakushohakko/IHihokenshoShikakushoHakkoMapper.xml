@@ -141,18 +141,18 @@
         KyotakuKeikakuTodokede."rirekiNo" AS "rirekiNo",
         KyotakuKeikakuTodokede."todokedeYMD" AS "todokedeYMD",
         '2' AS "kyotakuKeikaKubun",
-        KyotakuKeikakuJigyoshaSakusei."tekiyoKaishiYMD",
-        KyotakuKeikakuJigyoshaSakusei."tekiyoShuryoYMD",
+        KyotakuKeikakuJikoSakusei."tekiyoKaishiYMD",
+        KyotakuKeikakuJikoSakusei."tekiyoShuryoYMD",
         '' AS "keikakuJigyoshaNo",
         '' AS "itakusakiJigyoshaNo"
         FROM
         rgdb."DbT3005KyotakuKeikakuTodokede" AS KyotakuKeikakuTodokede
         INNER JOIN
-        rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS KyotakuKeikakuJigyoshaSakusei
+        rgdb."DbT3007KyotakuKeikakuJikoSakusei" AS KyotakuKeikakuJikoSakusei
         ON
-        KyotakuKeikakuTodokede."hihokenshaNo" = KyotakuKeikakuJigyoshaSakusei."hihokenshaNo"
-        AND KyotakuKeikakuTodokede."taishoYM" = KyotakuKeikakuJigyoshaSakusei."taishoYM"
-        AND KyotakuKeikakuTodokede."rirekiNo" = KyotakuKeikakuJigyoshaSakusei."rirekiNo"
+        KyotakuKeikakuTodokede."hihokenshaNo" = KyotakuKeikakuJikoSakusei."hihokenshaNo"
+        AND KyotakuKeikakuTodokede."taishoYM" = KyotakuKeikakuJikoSakusei."taishoYM"
+        AND KyotakuKeikakuTodokede."rirekiNo" = KyotakuKeikakuJikoSakusei."rirekiNo"
         WHERE
         KyotakuKeikakuTodokede."hihokenshaNo" = #{被保険者番号}) AS A
         ORDER BY A."tekiyoKaishiYMD"
