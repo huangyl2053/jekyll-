@@ -571,22 +571,22 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
         ShikakShutokuHantei 住特適用 = new ShikakShutokuHantei();
         ShikakShutokuHantei 住特解除 = new ShikakShutokuHantei();
 
-        資格取得.setCodeShubetsu("0007");
+        資格取得.setCodeShubetsu(new RString("0007"));
         資格取得.setJiyuCode(t.getShikakuShutokuJiyuCode());
         資格取得.setTekiyoYMD(t.getShikakuShutokuYMD());
         資格取得.setTodokedeYMD(t.getShikakuShutokuTodokedeYMD());
 
-        資格変更.setCodeShubetsu("0013");
+        資格変更.setCodeShubetsu(new RString("0013"));
         資格変更.setJiyuCode(t.getShikakuHenkoJiyuCode());
         資格変更.setTekiyoYMD(t.getShikakuHenkoYMD());
         資格変更.setTodokedeYMD(t.getShikakuHenkoTodokedeYMD());
 
-        住特適用.setCodeShubetsu("0014");
+        住特適用.setCodeShubetsu(new RString("0014"));
         住特適用.setJiyuCode(t.getJushochitokureiTekiyoJiyuCode());
         住特適用.setTekiyoYMD(t.getJushochitokureiTekiyoYMD());
         住特適用.setTodokedeYMD(t.getJushochitokureiTekiyoTodokedeYMD());
 
-        住特解除.setCodeShubetsu("0015");
+        住特解除.setCodeShubetsu(new RString("0015"));
         住特解除.setJiyuCode(t.getJushochitokureiKaijoJiyuCode());
         住特解除.setTekiyoYMD(t.getJushochitokureiKaijoYMD());
         住特解除.setTodokedeYMD(t.getJushochitokureiKaijoTodokedeYMD());
