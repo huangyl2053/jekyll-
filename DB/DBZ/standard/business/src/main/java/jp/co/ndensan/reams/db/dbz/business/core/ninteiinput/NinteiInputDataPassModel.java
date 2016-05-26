@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * DBZ.NinteiInput_認定情報のdDataPassModelです。
  *
- * @author yaods
+ * @reamsid_L DBE-1300-080 yaodongsheng
  */
 @lombok.Getter
 @lombok.Setter
