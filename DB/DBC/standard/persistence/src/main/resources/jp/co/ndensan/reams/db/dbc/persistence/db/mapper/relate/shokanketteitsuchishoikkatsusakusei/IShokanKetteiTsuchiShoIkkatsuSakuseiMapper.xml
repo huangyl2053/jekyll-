@@ -4,9 +4,11 @@
 <!-- @reamsid_L DBC-1000-020 zuotao -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanketteitsuchishoikkatsusakusei.IShokanKetteiTsuchiShoIkkatsuSakuseiMapper">
     <resultMap id="resultMap_KetteiTsuchiSho" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho.ShokanKetteiTsuchiShoTempTableEntity" autoMapping="true">
-        <result property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="kinyuKikanCode" column="kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
+        <id property="kinyuKikanShitenCode" column="kinyuKikanShitenCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanShitenCodeTypeHandler"/>
         <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <result property="uketsukeYMD" column="uketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shiharaiHohoKubunCode" column="shiharaiHohoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -20,8 +22,6 @@
         <result property="shikyuHushikyuKetteiKubun" column="shikyuHushikyuKetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shiharaiKingaku" column="shiharaiKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="shiharaiKingakuUchiwakeRiyoshabun" column="shiharaiKingakuUchiwakeRiyoshabun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="kinyuKikanCode" column="kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
-        <result property="kinyuKikanShitenCode" column="kinyuKikanShitenCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanShitenCodeTypeHandler"/>
         <result property="yokinShubetsu" column="yokinShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaNo" column="kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaMeigininKanji" column="kozaMeigininKanji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
@@ -38,9 +38,13 @@
     </resultMap>
 
     <resultMap id="resultMap_KetteiTsuchiShoMeisai" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho.ShokanKetteiTsuchiShoMeisaiTempTableEntity" autoMapping="true">
-        <result property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="kinyuKikanCode" column="kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
+        <id property="kinyuKikanShitenCode" column="kinyuKikanShitenCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanShitenCodeTypeHandler"/>
+        <id property="yoshikiNo" column="yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="serviceCode" column="serviceCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <result property="uketsukeYMD" column="uketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shiharaiHohoKubunCode" column="shiharaiHohoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -54,8 +58,6 @@
         <result property="shikyuHushikyuKetteiKubun" column="shikyuHushikyuKetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shiharaiKingaku" column="shiharaiKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="shiharaiKingakuUchiwakeRiyoshabun" column="shiharaiKingakuUchiwakeRiyoshabun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="kinyuKikanCode" column="kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
-        <result property="kinyuKikanShitenCode" column="kinyuKikanShitenCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanShitenCodeTypeHandler"/>
         <result property="yokinShubetsu" column="yokinShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaNo" column="kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaMeigininKanji" column="kozaMeigininKanji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
@@ -72,11 +74,9 @@
         <result property="kinyuKikanCodeName" column="kinyuKikanCodeName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kinyuKikanShitenName" column="kinyuKikanShitenName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yokinName" column="yokinName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="yoshikiNo" column="yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yoshikiMeisho" column="yoshikiMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="serviceCode" column="serviceCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="serviceShuruiName" column="serviceShuruiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kaishuKingaku" column="kaishuKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kaishuKingaku" column="kaishuKingaku"/>
         <result property="zougenRiyu" column="zougenRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
@@ -84,7 +84,7 @@
         <result property="seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ketteiTsuchiNo" column="ketteiTsuchiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="hiHokenshaShimei" column="kanjiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hiHokenshaShimei" column="meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="banchi" column="banchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -107,7 +107,7 @@
         <result property="shideMeisho" column="kinyuKikanShitenName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yokinShubetsuMeisho" column="yokinName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaBango" column="kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kozaMeigininKanji" column="kozaMeigininKanji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="kozaMeigininKanji" column="kozaMeigininKanji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shiharaiHohoKubunCode" column="shiharaiHohoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shiharaiKaishiYMD" column="shiharaiKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shiharaiShuryoYMD" column="shiharaiShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -226,7 +226,7 @@
         ,ShokanKetteiTsuchiShoMeisaiTemp."banchi"
         ,ShokanKetteiTsuchiShoMeisaiTemp."yoshikiNo"
         ,ShokanKetteiTsuchiShoMeisaiTemp."yoshikiMeisho"
-        ,SUBSTRING(ShokanKetteiTsuchiShoMeisaiTemp."serviceCode", 1, 2) AS "serviceCode"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceCode"
         ,ShokanKetteiTsuchiShoMeisaiTemp."serviceShuruiName"
         ,ShokanKetteiTsuchiShoMeisaiTemp."kaishuKingaku"
         ,ShokanKetteiTsuchiShoMeisaiTemp."zougenRiyu"
@@ -265,6 +265,7 @@
         ,SUBDbT4001JukyushaDaicho."yokaigoJotaiKubunCode"
         ,SUBDbT4001JukyushaDaicho."ninteiYukoKikanKaishiYMD"
         ,SUBDbT4001JukyushaDaicho."ninteiYukoKikanShuryoYMD"
+        ,ShikibetsuTaisho."kanjiShimei" AS "meisho"
         ,ShikibetsuTaisho."kanjiShimei"
         ,ShikibetsuTaisho."jusho"
         ,ShikibetsuTaisho."yubinNo"
@@ -349,7 +350,7 @@
         AND
         SUBHihokenshaDaicho."shichosonCode" = SUBDbT4001JukyushaDaicho."shichosonCode"
         LEFT JOIN
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" /> AS ShikibetsuTaisho
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS ShikibetsuTaisho
         ON
         ShikibetsuTaisho."shikibetsuCode" = SUBHihokenshaDaicho."shikibetsuCode"
         WHERE
@@ -374,7 +375,7 @@
         </if>
         <if test="chusyutuKetteiFlag">
             AND
-            DbT3036ShokanHanteiKekka.ketteiIchiranTorikomiYM = #{ketteishaUketsukeYM}
+            DbT3036ShokanHanteiKekka."ketteiIchiranTorikomiYM" = #{ketteishaUketsukeYM}
         </if>
         <if test="yoshiFlag">
             AND
@@ -558,25 +559,43 @@
     </select>
 
     <select id="get金融機関と預金種別"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoUpdateParameter"
             resultMap="resultMap_KetteiTsuchiShoMeisai"
             fetchSize="500">
         SELECT
         <include refid="selectKetteiTsuchiShoMeisai" />
-        ,ShokanKetteiTsuchiShoMeisaiTemp."name" AS "kinyuKikanCodeName"
-        ,UaT0301YokinShubetsuPattern."yokinShubetsuRyakusho" AS "yokinName"
+        ,TEMP."name" AS "kinyuKikanCodeName"
+        ,TEMP."yokinName" AS "yokinName"
         ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanShitenName"
         ,ShokanKetteiTsuchiShoMeisaiTemp."yoshikiMeisho"
         ,ShokanKetteiTsuchiShoMeisaiTemp."serviceShuruiName"
         FROM
+        "ShokanKetteiTsuchiShoMeisaiTemp" AS ShokanKetteiTsuchiShoMeisaiTemp
+        INNER JOIN
         (
         SELECT
-        ROW_NUMBER() OVER(PARTITION BY UaT0302KinyuKikan."kinyuKikanCode" ORDER BY UaT0302KinyuKikan."kaishiYMD" DESC)  AS  "sortNo"
-        ,<include refid="selectKetteiTsuchiShoMeisai" />
+        ShokanKetteiTsuchiShoMeisaiTemp."name"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."yokinShubetsuPatternCode"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."yokinShubetsu"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanCode"
+        ,UaT0301YokinShubetsuPattern."yokinShubetsuRyakusho" AS "yokinName"
+        FROM
+        (
+        SELECT
+        ROW_NUMBER() OVER(PARTITION BY ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+        ,UaT0302KinyuKikan."kinyuKikanCode" ORDER BY UaT0302KinyuKikan."kaishiYMD" DESC)  AS  "sortNo"
         ,UaT0302KinyuKikan."name"
         ,UaT0302KinyuKikan."yokinShubetsuPatternCode"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanShitenName"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."yoshikiMeisho"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceShuruiName"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."yokinShubetsu"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanCode"
         FROM
         "ShokanKetteiTsuchiShoMeisaiTemp" AS ShokanKetteiTsuchiShoMeisaiTemp
         INNER JOIN
@@ -594,29 +613,52 @@
         AND
         ShokanKetteiTsuchiShoMeisaiTemp."yokinShubetsu" = UaT0301YokinShubetsuPattern."yokinShubetsuCode"
         WHERE
-        ShokanKetteiTsuchiShoMeisaiTemp."sortNo" = 1
+        ShokanKetteiTsuchiShoMeisaiTemp."sortNo" = 1) AS TEMP
+        ON
+        TEMP."hiHokenshaNo" = ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
+        AND TEMP."serviceTeikyoYM"=ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
+        AND TEMP."seiriNo"=ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+        AND TEMP."yokinShubetsu"=ShokanKetteiTsuchiShoMeisaiTemp."yokinShubetsu"
+        AND TEMP."kinyuKikanCode" = ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanCode"
     </select>
 
     <select id="get支店名称"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoUpdateParameter"
             resultMap="resultMap_KetteiTsuchiShoMeisai"
             fetchSize="500">
+
         SELECT
         <include refid="selectKetteiTsuchiShoMeisai" />
-        ,ShokanKetteiTsuchiShoMeisaiTemp."name" AS "kinyuKikanShitenName"
+        ,TEMP."kinyuKikanShitenName"
         ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanCodeName"
         ,ShokanKetteiTsuchiShoMeisaiTemp."yokinName"
         ,ShokanKetteiTsuchiShoMeisaiTemp."yoshikiMeisho"
         ,ShokanKetteiTsuchiShoMeisaiTemp."serviceShuruiName"
         FROM
+        "ShokanKetteiTsuchiShoMeisaiTemp" AS ShokanKetteiTsuchiShoMeisaiTemp
+        INNER JOIN
         (
         SELECT
-        ROW_NUMBER() OVER(PARTITION BY UaT0303KinyuKikanShiten."kinyuKikanCode" ,UaT0303KinyuKikanShiten."kinyuKikanShitenCode" ORDER BY UaT0303KinyuKikanShiten."kaishiYMD" DESC) AS "sortNo"
-        ,<include refid="selectKetteiTsuchiShoMeisai" />
+        ShokanKetteiTsuchiShoMeisaiTemp."name" AS "kinyuKikanShitenName"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanCode"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanShitenCode"
+        FROM
+        (
+        SELECT
+        ROW_NUMBER() OVER(PARTITION BY ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+        ,UaT0303KinyuKikanShiten."kinyuKikanCode"
+        ,UaT0303KinyuKikanShiten."kinyuKikanShitenCode" ORDER BY UaT0303KinyuKikanShiten."kaishiYMD" DESC) AS "sortNo"
         ,UaT0303KinyuKikanShiten."name"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanCodeName"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."yokinName"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."yoshikiMeisho"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceShuruiName"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanCode"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanShitenCode"
         FROM
         "ShokanKetteiTsuchiShoMeisaiTemp" AS ShokanKetteiTsuchiShoMeisaiTemp
         INNER JOIN
@@ -630,36 +672,53 @@
         AND #{sysData} <![CDATA[<=]]> ShokanKetteiTsuchiShoMeisaiTemp."shuryoYMD"
         ) AS ShokanKetteiTsuchiShoMeisaiTemp
         WHERE
-        ShokanKetteiTsuchiShoMeisaiTemp."sortNo" = 1
+        ShokanKetteiTsuchiShoMeisaiTemp."sortNo" = 1) AS TEMP
+        ON
+        TEMP."hiHokenshaNo"=ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
+        AND TEMP."serviceTeikyoYM"=ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
+        AND TEMP."seiriNo"=ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+        AND TEMP."kinyuKikanCode"=ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanCode"
+        AND TEMP."kinyuKikanShitenCode"=ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanShitenCode"
     </select>
 
     <select id="get様式名称"
             resultMap="resultMap_KetteiTsuchiShoMeisai"
             fetchSize="500">
-
         SELECT
         <include refid="selectKetteiTsuchiShoMeisai" />
-        ,ShokanKetteiTsuchiShoMeisaiTemp."ryakusho" AS "yoshikiMeisho"
         ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanShitenName"
         ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanCodeName"
         ,ShokanKetteiTsuchiShoMeisaiTemp."yokinName"
+        ,TEMP."yoshikiMeisho"
         ,ShokanKetteiTsuchiShoMeisaiTemp."serviceShuruiName"
+        FROM
+        "ShokanKetteiTsuchiShoMeisaiTemp" AS ShokanKetteiTsuchiShoMeisaiTemp
+        INNER JOIN
+        (
+        SELECT
+        ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."yoshikiMeisho"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."yoshikiNo"
         FROM
         (
         SELECT
-        ROW_NUMBER() OVER(PARTITION BY  DbT3118ShikibetsuNoKanri."shikibetsuNoKubon" ORDER BY  DbT3118ShikibetsuNoKanri."tekiyoKaishiYM" DESC)  AS  "sortNo"
-        ,<include refid="selectKetteiTsuchiShoMeisai" />
-        ,DbT3118ShikibetsuNoKanri."ryakusho"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanShitenName"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanCodeName"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."yokinName"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceShuruiName"
+        ROW_NUMBER() OVER(PARTITION BY ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+        ,DbT3118ShikibetsuNoKanri."shikibetsuNo" ORDER BY  DbT3118ShikibetsuNoKanri."tekiyoKaishiYM" DESC)  AS  "sortNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+        ,DbT3118ShikibetsuNoKanri."ryakusho" AS "yoshikiMeisho"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."yoshikiNo"
         FROM
         "ShokanKetteiTsuchiShoMeisaiTemp" AS ShokanKetteiTsuchiShoMeisaiTemp
         INNER JOIN
         rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118ShikibetsuNoKanri
         ON
-        ShokanKetteiTsuchiShoMeisaiTemp."yoshikiNo" = DbT3118ShikibetsuNoKanri."shikibetsuNoKubon"
+        ShokanKetteiTsuchiShoMeisaiTemp."yoshikiNo" = DbT3118ShikibetsuNoKanri."shikibetsuNo"
         WHERE
         ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM" <![CDATA[>=]]> DbT3118ShikibetsuNoKanri."tekiyoKaishiYM"
         AND
@@ -668,7 +727,12 @@
         OR  DbT3118ShikibetsuNoKanri."tekiyoShuryoYM" IS NULL
         )) AS ShokanKetteiTsuchiShoMeisaiTemp
         WHERE
-        ShokanKetteiTsuchiShoMeisaiTemp."sortNo" = 1
+        ShokanKetteiTsuchiShoMeisaiTemp."sortNo" = 1) AS TEMP
+        ON
+        TEMP."hiHokenshaNo"=ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
+        AND TEMP."serviceTeikyoYM"=ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
+        AND TEMP."seiriNo"=ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+        AND TEMP."yoshikiNo"=ShokanKetteiTsuchiShoMeisaiTemp."yoshikiNo"
     </select>
 
     <select id="getサービス種類"
@@ -677,28 +741,41 @@
 
         SELECT
         <include refid="selectKetteiTsuchiShoMeisai" />
-        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceNameRyaku" AS "serviceShuruiName"
         ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanShitenName"
         ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanCodeName"
         ,ShokanKetteiTsuchiShoMeisaiTemp."yokinName"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."yoshikiMeisho"
+        ,TEMP."serviceNameRyaku" AS "serviceShuruiName"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceShuruiName"
+        FROM
+        "ShokanKetteiTsuchiShoMeisaiTemp" AS ShokanKetteiTsuchiShoMeisaiTemp
+        INNER JOIN
+        (
+        SELECT
+        ShokanKetteiTsuchiShoMeisaiTemp."serviceNameRyaku" AS "serviceShuruiName"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceNameRyaku"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceCode"
         FROM
         (
         SELECT
-        ROW_NUMBER() OVER(PARTITION BY DbT7131KaigoServiceNaiyou."serviceShuruiCd",DbT7131KaigoServiceNaiyou."serviceKoumokuCd" ORDER BY DbT7131KaigoServiceNaiyou."teikyoKaishiYM" DESC
+        ROW_NUMBER() OVER(PARTITION BY ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+        ,DbT7131KaigoServiceNaiyou."serviceShuruiCd",DbT7131KaigoServiceNaiyou."serviceKoumokuCd" ORDER BY DbT7131KaigoServiceNaiyou."teikyoKaishiYM" DESC
         ,DbT7131KaigoServiceNaiyou."rirekiNo" DESC) AS  "sortNo"
-        ,<include refid="selectKetteiTsuchiShoMeisai" />
+        ,ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
         ,DbT7131KaigoServiceNaiyou."serviceNameRyaku"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanShitenName"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanCodeName"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."yokinName"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."yoshikiMeisho"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceCode"
         FROM
         "ShokanKetteiTsuchiShoMeisaiTemp" AS ShokanKetteiTsuchiShoMeisaiTemp
         INNER JOIN
         rgdb."DbT7131KaigoServiceNaiyou" AS DbT7131KaigoServiceNaiyou
         ON
-        SUBSTRING(ShokanKetteiTsuchiShoMeisaiTemp."serviceCode", 1, 2) = DbT7131KaigoServiceNaiyou."serviceShuruiCd"
+        SUBSTRING(ShokanKetteiTsuchiShoMeisaiTemp."serviceCode",1, 2) = DbT7131KaigoServiceNaiyou."serviceShuruiCd"
         AND
         SUBSTRING(ShokanKetteiTsuchiShoMeisaiTemp."serviceCode", LENGTH(ShokanKetteiTsuchiShoMeisaiTemp."serviceCode")-3, 4)= DbT7131KaigoServiceNaiyou."serviceKoumokuCd"
         WHERE
@@ -709,7 +786,12 @@
         OR DbT7131KaigoServiceNaiyou."teikyoShuryoYM" IS NULL)
         ) AS ShokanKetteiTsuchiShoMeisaiTemp
         WHERE
-        ShokanKetteiTsuchiShoMeisaiTemp."sortNo" = 1
+        ShokanKetteiTsuchiShoMeisaiTemp."sortNo" = 1) AS TEMP
+        ON
+        TEMP."hiHokenshaNo"=ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
+        AND TEMP."serviceTeikyoYM"=ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
+        AND TEMP."seiriNo"=ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+        AND TEMP."serviceCode"=ShokanKetteiTsuchiShoMeisaiTemp."serviceCode"
     </select>
     <select id="get償還払支給判定結果情報"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanHanteiKekkaUpdataParameter"
