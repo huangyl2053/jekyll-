@@ -357,7 +357,7 @@ public class HonsanteiIdoKanendo {
     }
 
     private HonsanteiIdoKanendoResult get期毎タイプ(ChohyoSeigyoHanyo 帳票タイプを, ReportId 帳票分類ID,
-            RString 出力順ID, RString 型N) {
+            RString 出力順ID) {
         if (zOneRS.equals(帳票タイプを.get設定値())) {
             return new HonsanteiIdoKanendoResult(帳票分類ID, ReportIdDBB.DBB100066.getReportId().value(), 出力順ID);
         }
@@ -365,7 +365,7 @@ public class HonsanteiIdoKanendo {
     }
 
     private HonsanteiIdoKanendoResult get銀振型5期タイプ(ChohyoSeigyoHanyo 帳票タイプを,
-            ReportId 帳票分類ID, RString 出力順ID, RString 型N) {
+            ReportId 帳票分類ID, RString 出力順ID) {
         if (zOneRS.equals(帳票タイプを.get設定値())) {
             return new HonsanteiIdoKanendoResult(帳票分類ID, ReportIdDBB.DBB100070.getReportId().value(), 出力順ID);
         }
@@ -373,7 +373,7 @@ public class HonsanteiIdoKanendo {
     }
 
     private HonsanteiIdoKanendoResult get銀振型４期タイプ(ChohyoSeigyoHanyo 帳票タイプを, ReportId 帳票分類ID,
-            RString 出力順ID, RString 型N) {
+            RString 出力順ID) {
         if (zOneRS.equals(帳票タイプを.get設定値())) {
             return new HonsanteiIdoKanendoResult(帳票分類ID, ReportIdDBB.DBB100069.getReportId().value(), 出力順ID);
         }
@@ -382,7 +382,7 @@ public class HonsanteiIdoKanendo {
 
     private HonsanteiIdoKanendoResult getブックタイプ(ChohyoSeigyoHanyo 帳票タイプを, ChohyoSeigyoHanyo 帳票_口座振替依頼,
             ReportId 帳票分類ID,
-            RString 出力順ID, RString 型N) {
+            RString 出力順ID) {
         if (zOneRS.equals(帳票タイプを.get設定値())) {
             if (zeroRS.equals(帳票_口座振替依頼.get設定値())) {
                 return new HonsanteiIdoKanendoResult(帳票分類ID, ReportIdDBB.DBB100071.getReportId().value(), 出力順ID);
@@ -397,7 +397,7 @@ public class HonsanteiIdoKanendo {
             ChohyoSeigyoHanyo 帳票タイプを,
             ChohyoSeigyoHanyo 帳票_コンビニ期毎出力,
             ReportId 帳票分類ID,
-            RString 出力順ID, RString 型N) {
+            RString 出力順ID) {
         if (twlZRS.equals(帳票タイプを.get設定値()) && zeroRS.equals(帳票_コンビニ期毎出力.get設定値())) {
             return new HonsanteiIdoKanendoResult(帳票分類ID, ReportIdDBB.DBB100075.getReportId().value(), 出力順ID);
         } else if (twlTRS.equals(帳票タイプを.get設定値()) && zeroRS.equals(帳票_コンビニ期毎出力.get設定値())) {
@@ -414,34 +414,33 @@ public class HonsanteiIdoKanendo {
         RString アイテムとして;
         ChohyoSeigyoHanyo 帳票タイプを;
         RString 設定値 = new RString(get納付書の型(算定期).toString().split(",")[0]);
-        RString 型N = new RString(get納付書の型(算定期).toString().split(",")[1]);
         switch (設定値.toString()) {
             case "1":
                 項目名 = 期毎納入通知書タイプ;
                 帳票タイプを = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
-                return get期毎タイプ(帳票タイプを, 帳票分類ID, 出力順ID, 型N);
+                return get期毎タイプ(帳票タイプを, 帳票分類ID, 出力順ID);
             case "2":
                 項目名 = 銀振納入通知書タイプ;
                 帳票タイプを = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
-                return get銀振型5期タイプ(帳票タイプを, 帳票分類ID, 出力順ID, 型N);
+                return get銀振型5期タイプ(帳票タイプを, 帳票分類ID, 出力順ID);
             case "4":
                 項目名 = 銀振納入通知書タイプ;
                 帳票タイプを = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
-                return get銀振型４期タイプ(帳票タイプを, 帳票分類ID, 出力順ID, 型N);
+                return get銀振型４期タイプ(帳票タイプを, 帳票分類ID, 出力順ID);
             case "5":
                 項目名 = その他納入通知書タイプ;
                 アイテムとして = ブック口座振替依頼表示;
                 帳票タイプを = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
                 ChohyoSeigyoHanyo 帳票_口座振替依頼 = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID,
                         調定年度, アイテムとして);
-                return getブックタイプ(帳票タイプを, 帳票_口座振替依頼, 帳票分類ID, 出力順ID, 型N);
+                return getブックタイプ(帳票タイプを, 帳票_口座振替依頼, 帳票分類ID, 出力順ID);
             case "6":
                 項目名 = コンビニ期毎タイプ;
                 アイテムとして = コンビニ期毎出力;
                 帳票タイプを = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
                 ChohyoSeigyoHanyo 帳票_コンビニ期毎出力 = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID,
                         調定年度, アイテムとして);
-                return getコンビニ収納タイプ(帳票タイプを, 帳票_コンビニ期毎出力, 帳票分類ID, 出力順ID, 型N);
+                return getコンビニ収納タイプ(帳票タイプを, 帳票_コンビニ期毎出力, 帳票分類ID, 出力順ID);
             default:
                 return null;
         }
