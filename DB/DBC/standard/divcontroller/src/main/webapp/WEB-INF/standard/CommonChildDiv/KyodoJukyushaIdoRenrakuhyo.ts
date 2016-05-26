@@ -51,8 +51,10 @@ module DBC
                     //this.controls.txtTeiseiYMD().readOnly = true;			//訂正日
                     //this.controls.radTeiseiKubunCode().readOnly = true;		//訂正区分
                     //基本送付情報
-                    this.controls.chkKihonSofu().visible = true;
-                    this.controls.chkKihonSofu().readOnly = false;
+                    this.controls.chkKihonSofuAdd().visible = true;
+                    this.controls.chkKihonSofuAdd().readOnly = false;
+                    this.controls.chkKihonSofuDelete().visible = false;
+                    this.controls.chkKihonSofuDelete().readOnly = false;
                     //KyodoJukyushaIdoRenrakuhyoKihonPanel
                     this.controls.KyodoJukyushaIdoRenrakuhyoShokanPanel().readOnly = false;
                     this.controls.txtKihonIdoYMD().readOnly = false;
@@ -65,8 +67,10 @@ module DBC
                     //this.controls.txtAddressKana().readOnly = true;
                     
                     //償還送付情報
-                    this.controls.chkShokanSofu().visible = true;
-                    this.controls.chkShokanSofu().readOnly = false;
+                    this.controls.chkShokanSofuAdd().visible = true;
+                    this.controls.chkShokanSofuAdd().readOnly = false;
+                    this.controls.chkShokanSofuDelete().visible = false;
+                    this.controls.chkShokanSofuDelete().readOnly = false;
                     //KyodoJukyushaIdoRenrakuhyoShokanPanel
                     this.controls.KyodoJukyushaIdoRenrakuhyoShokanPanel().readOnly = false;
                     this.controls.txtShokanIdoYMD().readOnly = false;
@@ -76,8 +80,10 @@ module DBC
                     //this.controls.txtHokenkyufuIchijiSashitomeKingaku().readOnly = true;
                     
                     //高額送付情報
-                    this.controls.chkKogakuSofu().visible = true;
-                    this.controls.chkKogakuSofu().readOnly = false;
+                    this.controls.chkKogakuSofuAdd().visible = true;
+                    this.controls.chkKogakuSofuAdd().readOnly = false;
+                    this.controls.chkKogakuSofuDelete().visible = false;
+                    this.controls.chkKogakuSofuDelete().readOnly = false;
                     //KyodoJukyushaIdoRenrakuhyoKogakuPanel
                     this.controls.KyodoJukyushaIdoRenrakuhyoKogakuPanel().readOnly = false;
                     this.controls.txtKogakuIdoYMD().readOnly = false;
@@ -103,8 +109,10 @@ module DBC
                     //this.controls.txtTeiseiYMD().readOnly = true;			//訂正日
                     //this.controls.radTeiseiKubunCode().readOnly = true;		//訂正区分
                     //基本送付情報
-                    this.controls.chkKihonSofu().visible = true;
-                    this.controls.chkKihonSofu().readOnly = false;
+                    this.controls.chkKihonSofuAdd().visible = true;
+                    this.controls.chkKihonSofuAdd().readOnly = false;
+                    this.controls.chkKihonSofuDelete().visible = true;
+                    this.controls.chkKihonSofuDelete().readOnly = false;
                     //KyodoJukyushaIdoRenrakuhyoKihonPanel
                     this.controls.KyodoJukyushaIdoRenrakuhyoShokanPanel().readOnly = false;
                     this.controls.txtKihonIdoYMD().readOnly = true;
@@ -117,8 +125,10 @@ module DBC
                     //this.controls.txtAddressKana().readOnly = true;
                     
                     //償還送付情報
-                    this.controls.chkShokanSofu().visible = true;
-                    this.controls.chkShokanSofu().readOnly = false;
+                    this.controls.chkShokanSofuAdd().visible = true;
+                    this.controls.chkShokanSofuAdd().readOnly = false;
+                    this.controls.chkShokanSofuDelete().visible = true;
+                    this.controls.chkShokanSofuDelete().readOnly = false;
                     //KyodoJukyushaIdoRenrakuhyoShokanPanel
                     this.controls.KyodoJukyushaIdoRenrakuhyoShokanPanel().readOnly = false;
                     this.controls.txtShokanIdoYMD().readOnly = true;
@@ -128,8 +138,10 @@ module DBC
                     //this.controls.txtHokenkyufuIchijiSashitomeKingaku().readOnly = true;
                     
                     //高額送付情報
-                    this.controls.chkKogakuSofu().visible = true;
-                    this.controls.chkKogakuSofu().readOnly = false;
+                    this.controls.chkKogakuSofuAdd().visible = true;
+                    this.controls.chkKogakuSofuAdd().readOnly = false;
+                    this.controls.chkKogakuSofuDelete().visible = true;
+                    this.controls.chkKogakuSofuDelete().readOnly = false;
                     //KyodoJukyushaIdoRenrakuhyoKogakuPanel
                     this.controls.KyodoJukyushaIdoRenrakuhyoKogakuPanel().readOnly = false;
                     this.controls.txtKogakuIdoYMD().readOnly = true;
@@ -147,13 +159,14 @@ module DBC
                     //this.controls.KyodoJukyushaIdoRenrakuhyo().readOnly = true;
                     this.controls.KyodoJukyushaIdoRenrakuhyo().disabled = true;
                     //基本送付情報
-                    this.controls.chkKihonSofu().visible = false;
-                    
+                    this.controls.chkKihonSofuAdd().visible = false;
+                    this.controls.chkKihonSofuDelete().visible = false;
                     //償還送付情報
-                    this.controls.chkShokanSofu().visible = false;
-                    
+                    this.controls.chkShokanSofuAdd().visible = false;
+                    this.controls.chkShokanSofuDelete().visible = false;
                     //高額送付情報
-                    this.controls.chkKogakuSofu().visible = false;
+                    this.controls.chkKogakuSofuAdd().visible = false;
+                    this.controls.chkKogakuSofuDelete().visible = false;
                 }
                 
                 //照会モード
@@ -161,13 +174,14 @@ module DBC
                     //this.controls.KyodoJukyushaIdoRenrakuhyo().readOnly = true;
                     this.controls.KyodoJukyushaIdoRenrakuhyo().disabled = true;
                     //基本送付情報
-                    this.controls.chkKihonSofu().visible = false;
-                    
+                    this.controls.chkKihonSofuAdd().visible = false;
+                    this.controls.chkKihonSofuDelete().visible = false;
                     //償還送付情報
-                    this.controls.chkShokanSofu().visible = false;
-                    
+                    this.controls.chkShokanSofuAdd().visible = false;
+                    this.controls.chkShokanSofuDelete().visible = false;
                     //高額送付情報
-                    this.controls.chkKogakuSofu().visible = false;
+                    this.controls.chkKogakuSofuAdd().visible = false;
+                    this.controls.chkKogakuSofuDelete().visible = false;
                 }
             }
         }

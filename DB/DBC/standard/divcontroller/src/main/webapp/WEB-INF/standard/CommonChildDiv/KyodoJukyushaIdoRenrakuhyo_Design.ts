@@ -77,8 +77,12 @@ module DBC {
                 return new UZA.HorizontalLine(this.convFiledName("lin2"));
             }
 
-            public chkKihonSofu(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkKihonSofu"));
+            public chkKihonSofuAdd(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkKihonSofuAdd"));
+            }
+
+            public chkKihonSofuDelete(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkKihonSofuDelete"));
             }
 
             public KyodoJukyushaIdoRenrakuhyoKihonPanel(): UZA.Panel {
@@ -121,8 +125,12 @@ module DBC {
                 return new UZA.TextBoxKana(this.convFiledName("txtAddressKana"));
             }
 
-            public chkShokanSofu(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkShokanSofu"));
+            public chkShokanSofuAdd(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkShokanSofuAdd"));
+            }
+
+            public chkShokanSofuDelete(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkShokanSofuDelete"));
             }
 
             public KyodoJukyushaIdoRenrakuhyoShokanPanel(): UZA.Panel {
@@ -153,8 +161,12 @@ module DBC {
                 return new UZA.TextBoxNum(this.convFiledName("txtHokenkyufuIchijiSashitomeKingaku"));
             }
 
-            public chkKogakuSofu(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkKogakuSofu"));
+            public chkKogakuSofuAdd(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkKogakuSofuAdd"));
+            }
+
+            public chkKogakuSofuDelete(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkKogakuSofuDelete"));
             }
 
             public KyodoJukyushaIdoRenrakuhyoKogakuPanel(): UZA.Panel {

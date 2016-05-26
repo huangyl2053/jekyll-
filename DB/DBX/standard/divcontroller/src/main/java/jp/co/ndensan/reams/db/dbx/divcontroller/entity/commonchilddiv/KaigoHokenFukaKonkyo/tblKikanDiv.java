@@ -47,6 +47,18 @@ public class tblKikanDiv extends TablePanel {
     private celKikan52AttblKikan celKikan52;
     @JsonProperty("celKikan62")
     private celKikan62AttblKikan celKikan62;
+    @JsonProperty("celKikan13")
+    private celKikan13AttblKikan celKikan13;
+    @JsonProperty("celKikan23")
+    private celKikan23AttblKikan celKikan23;
+    @JsonProperty("celKikan33")
+    private celKikan33AttblKikan celKikan33;
+    @JsonProperty("celKikan43")
+    private celKikan43AttblKikan celKikan43;
+    @JsonProperty("celKikan53")
+    private celKikan53AttblKikan celKikan53;
+    @JsonProperty("celKikan63")
+    private celKikan63AttblKikan celKikan63;
 
     /*
      * [ Helperの作成 ]
@@ -83,33 +95,63 @@ public class tblKikanDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblKikanData() {
-        return this.celKikan12.getLblKikanData();
+    public Label getLblKikanData1() {
+        return this.celKikan12.getLblKikanData1();
     }
 
     @JsonIgnore
-    public Label getLblGessuData() {
-        return this.celKikan22.getLblGessuData();
+    public Label getLblGessuData1() {
+        return this.celKikan22.getLblGessuData1();
     }
 
     @JsonIgnore
-    public Label getLblHokenryoDankaiKubunData() {
-        return this.celKikan32.getLblHokenryoDankaiKubunData();
+    public Label getLblHokenryoDankaiKubunData1() {
+        return this.celKikan32.getLblHokenryoDankaiKubunData1();
     }
 
     @JsonIgnore
-    public Label getLblHokenryoritsuData() {
-        return this.celKikan42.getLblHokenryoritsuData();
+    public Label getLblHokenryoritsuData1() {
+        return this.celKikan42.getLblHokenryoritsuData1();
     }
 
     @JsonIgnore
-    public Label getLblHokenryoSanshutsugakuData() {
-        return this.celKikan52.getLblHokenryoSanshutsugakuData();
+    public Label getLblHokenryoSanshutsugakuData1() {
+        return this.celKikan52.getLblHokenryoSanshutsugakuData1();
     }
 
     @JsonIgnore
-    public Label getLblHokenryogakuData() {
-        return this.celKikan62.getLblHokenryogakuData();
+    public Label getLblHokenryogakuData1() {
+        return this.celKikan62.getLblHokenryogakuData1();
+    }
+
+    @JsonIgnore
+    public Label getLblKikanData2() {
+        return this.celKikan13.getLblKikanData2();
+    }
+
+    @JsonIgnore
+    public Label getLblGessuData2() {
+        return this.celKikan23.getLblGessuData2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoDankaiKubunData2() {
+        return this.celKikan33.getLblHokenryoDankaiKubunData2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoritsuData2() {
+        return this.celKikan43.getLblHokenryoritsuData2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoSanshutsugakuData2() {
+        return this.celKikan53.getLblHokenryoSanshutsugakuData2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryogakuData2() {
+        return this.celKikan63.getLblHokenryogakuData2();
     }
 
     /*
@@ -334,6 +376,114 @@ public class tblKikanDiv extends TablePanel {
         this.celKikan62 = celKikan62;
     }
 
+    /*
+     * getcelKikan13
+     * @return celKikan13
+     */
+    @JsonProperty("celKikan13")
+    private celKikan13AttblKikan getCelKikan13() {
+        return celKikan13;
+    }
+
+    /*
+     * setcelKikan13
+     * @param celKikan13 celKikan13
+     */
+    @JsonProperty("celKikan13")
+    private void setCelKikan13(celKikan13AttblKikan celKikan13) {
+        this.celKikan13 = celKikan13;
+    }
+
+    /*
+     * getcelKikan23
+     * @return celKikan23
+     */
+    @JsonProperty("celKikan23")
+    private celKikan23AttblKikan getCelKikan23() {
+        return celKikan23;
+    }
+
+    /*
+     * setcelKikan23
+     * @param celKikan23 celKikan23
+     */
+    @JsonProperty("celKikan23")
+    private void setCelKikan23(celKikan23AttblKikan celKikan23) {
+        this.celKikan23 = celKikan23;
+    }
+
+    /*
+     * getcelKikan33
+     * @return celKikan33
+     */
+    @JsonProperty("celKikan33")
+    private celKikan33AttblKikan getCelKikan33() {
+        return celKikan33;
+    }
+
+    /*
+     * setcelKikan33
+     * @param celKikan33 celKikan33
+     */
+    @JsonProperty("celKikan33")
+    private void setCelKikan33(celKikan33AttblKikan celKikan33) {
+        this.celKikan33 = celKikan33;
+    }
+
+    /*
+     * getcelKikan43
+     * @return celKikan43
+     */
+    @JsonProperty("celKikan43")
+    private celKikan43AttblKikan getCelKikan43() {
+        return celKikan43;
+    }
+
+    /*
+     * setcelKikan43
+     * @param celKikan43 celKikan43
+     */
+    @JsonProperty("celKikan43")
+    private void setCelKikan43(celKikan43AttblKikan celKikan43) {
+        this.celKikan43 = celKikan43;
+    }
+
+    /*
+     * getcelKikan53
+     * @return celKikan53
+     */
+    @JsonProperty("celKikan53")
+    private celKikan53AttblKikan getCelKikan53() {
+        return celKikan53;
+    }
+
+    /*
+     * setcelKikan53
+     * @param celKikan53 celKikan53
+     */
+    @JsonProperty("celKikan53")
+    private void setCelKikan53(celKikan53AttblKikan celKikan53) {
+        this.celKikan53 = celKikan53;
+    }
+
+    /*
+     * getcelKikan63
+     * @return celKikan63
+     */
+    @JsonProperty("celKikan63")
+    private celKikan63AttblKikan getCelKikan63() {
+        return celKikan63;
+    }
+
+    /*
+     * setcelKikan63
+     * @param celKikan63 celKikan63
+     */
+    @JsonProperty("celKikan63")
+    private void setCelKikan63(celKikan63AttblKikan celKikan63) {
+        this.celKikan63 = celKikan63;
+    }
+
     // </editor-fold>
 }
 /**
@@ -523,25 +673,25 @@ class celKikan61AttblKikan extends TableCell {
  */
 class celKikan12AttblKikan extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
-    @JsonProperty("lblKikanData")
-    private Label lblKikanData;
+    @JsonProperty("lblKikanData1")
+    private Label lblKikanData1;
 
     /*
-     * getlblKikanData
-     * @return lblKikanData
+     * getlblKikanData1
+     * @return lblKikanData1
      */
-    @JsonProperty("lblKikanData")
-    public Label getLblKikanData() {
-        return lblKikanData;
+    @JsonProperty("lblKikanData1")
+    public Label getLblKikanData1() {
+        return lblKikanData1;
     }
 
     /*
-     * setlblKikanData
-     * @param lblKikanData lblKikanData
+     * setlblKikanData1
+     * @param lblKikanData1 lblKikanData1
      */
-    @JsonProperty("lblKikanData")
-    public void setLblKikanData(Label lblKikanData) {
-        this.lblKikanData = lblKikanData;
+    @JsonProperty("lblKikanData1")
+    public void setLblKikanData1(Label lblKikanData1) {
+        this.lblKikanData1 = lblKikanData1;
     }
 
     // </editor-fold>
@@ -553,25 +703,25 @@ class celKikan12AttblKikan extends TableCell {
  */
 class celKikan22AttblKikan extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
-    @JsonProperty("lblGessuData")
-    private Label lblGessuData;
+    @JsonProperty("lblGessuData1")
+    private Label lblGessuData1;
 
     /*
-     * getlblGessuData
-     * @return lblGessuData
+     * getlblGessuData1
+     * @return lblGessuData1
      */
-    @JsonProperty("lblGessuData")
-    public Label getLblGessuData() {
-        return lblGessuData;
+    @JsonProperty("lblGessuData1")
+    public Label getLblGessuData1() {
+        return lblGessuData1;
     }
 
     /*
-     * setlblGessuData
-     * @param lblGessuData lblGessuData
+     * setlblGessuData1
+     * @param lblGessuData1 lblGessuData1
      */
-    @JsonProperty("lblGessuData")
-    public void setLblGessuData(Label lblGessuData) {
-        this.lblGessuData = lblGessuData;
+    @JsonProperty("lblGessuData1")
+    public void setLblGessuData1(Label lblGessuData1) {
+        this.lblGessuData1 = lblGessuData1;
     }
 
     // </editor-fold>
@@ -583,25 +733,25 @@ class celKikan22AttblKikan extends TableCell {
  */
 class celKikan32AttblKikan extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
-    @JsonProperty("lblHokenryoDankaiKubunData")
-    private Label lblHokenryoDankaiKubunData;
+    @JsonProperty("lblHokenryoDankaiKubunData1")
+    private Label lblHokenryoDankaiKubunData1;
 
     /*
-     * getlblHokenryoDankaiKubunData
-     * @return lblHokenryoDankaiKubunData
+     * getlblHokenryoDankaiKubunData1
+     * @return lblHokenryoDankaiKubunData1
      */
-    @JsonProperty("lblHokenryoDankaiKubunData")
-    public Label getLblHokenryoDankaiKubunData() {
-        return lblHokenryoDankaiKubunData;
+    @JsonProperty("lblHokenryoDankaiKubunData1")
+    public Label getLblHokenryoDankaiKubunData1() {
+        return lblHokenryoDankaiKubunData1;
     }
 
     /*
-     * setlblHokenryoDankaiKubunData
-     * @param lblHokenryoDankaiKubunData lblHokenryoDankaiKubunData
+     * setlblHokenryoDankaiKubunData1
+     * @param lblHokenryoDankaiKubunData1 lblHokenryoDankaiKubunData1
      */
-    @JsonProperty("lblHokenryoDankaiKubunData")
-    public void setLblHokenryoDankaiKubunData(Label lblHokenryoDankaiKubunData) {
-        this.lblHokenryoDankaiKubunData = lblHokenryoDankaiKubunData;
+    @JsonProperty("lblHokenryoDankaiKubunData1")
+    public void setLblHokenryoDankaiKubunData1(Label lblHokenryoDankaiKubunData1) {
+        this.lblHokenryoDankaiKubunData1 = lblHokenryoDankaiKubunData1;
     }
 
     // </editor-fold>
@@ -613,25 +763,25 @@ class celKikan32AttblKikan extends TableCell {
  */
 class celKikan42AttblKikan extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
-    @JsonProperty("lblHokenryoritsuData")
-    private Label lblHokenryoritsuData;
+    @JsonProperty("lblHokenryoritsuData1")
+    private Label lblHokenryoritsuData1;
 
     /*
-     * getlblHokenryoritsuData
-     * @return lblHokenryoritsuData
+     * getlblHokenryoritsuData1
+     * @return lblHokenryoritsuData1
      */
-    @JsonProperty("lblHokenryoritsuData")
-    public Label getLblHokenryoritsuData() {
-        return lblHokenryoritsuData;
+    @JsonProperty("lblHokenryoritsuData1")
+    public Label getLblHokenryoritsuData1() {
+        return lblHokenryoritsuData1;
     }
 
     /*
-     * setlblHokenryoritsuData
-     * @param lblHokenryoritsuData lblHokenryoritsuData
+     * setlblHokenryoritsuData1
+     * @param lblHokenryoritsuData1 lblHokenryoritsuData1
      */
-    @JsonProperty("lblHokenryoritsuData")
-    public void setLblHokenryoritsuData(Label lblHokenryoritsuData) {
-        this.lblHokenryoritsuData = lblHokenryoritsuData;
+    @JsonProperty("lblHokenryoritsuData1")
+    public void setLblHokenryoritsuData1(Label lblHokenryoritsuData1) {
+        this.lblHokenryoritsuData1 = lblHokenryoritsuData1;
     }
 
     // </editor-fold>
@@ -643,25 +793,25 @@ class celKikan42AttblKikan extends TableCell {
  */
 class celKikan52AttblKikan extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
-    @JsonProperty("lblHokenryoSanshutsugakuData")
-    private Label lblHokenryoSanshutsugakuData;
+    @JsonProperty("lblHokenryoSanshutsugakuData1")
+    private Label lblHokenryoSanshutsugakuData1;
 
     /*
-     * getlblHokenryoSanshutsugakuData
-     * @return lblHokenryoSanshutsugakuData
+     * getlblHokenryoSanshutsugakuData1
+     * @return lblHokenryoSanshutsugakuData1
      */
-    @JsonProperty("lblHokenryoSanshutsugakuData")
-    public Label getLblHokenryoSanshutsugakuData() {
-        return lblHokenryoSanshutsugakuData;
+    @JsonProperty("lblHokenryoSanshutsugakuData1")
+    public Label getLblHokenryoSanshutsugakuData1() {
+        return lblHokenryoSanshutsugakuData1;
     }
 
     /*
-     * setlblHokenryoSanshutsugakuData
-     * @param lblHokenryoSanshutsugakuData lblHokenryoSanshutsugakuData
+     * setlblHokenryoSanshutsugakuData1
+     * @param lblHokenryoSanshutsugakuData1 lblHokenryoSanshutsugakuData1
      */
-    @JsonProperty("lblHokenryoSanshutsugakuData")
-    public void setLblHokenryoSanshutsugakuData(Label lblHokenryoSanshutsugakuData) {
-        this.lblHokenryoSanshutsugakuData = lblHokenryoSanshutsugakuData;
+    @JsonProperty("lblHokenryoSanshutsugakuData1")
+    public void setLblHokenryoSanshutsugakuData1(Label lblHokenryoSanshutsugakuData1) {
+        this.lblHokenryoSanshutsugakuData1 = lblHokenryoSanshutsugakuData1;
     }
 
     // </editor-fold>
@@ -673,25 +823,205 @@ class celKikan52AttblKikan extends TableCell {
  */
 class celKikan62AttblKikan extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
-    @JsonProperty("lblHokenryogakuData")
-    private Label lblHokenryogakuData;
+    @JsonProperty("lblHokenryogakuData1")
+    private Label lblHokenryogakuData1;
 
     /*
-     * getlblHokenryogakuData
-     * @return lblHokenryogakuData
+     * getlblHokenryogakuData1
+     * @return lblHokenryogakuData1
      */
-    @JsonProperty("lblHokenryogakuData")
-    public Label getLblHokenryogakuData() {
-        return lblHokenryogakuData;
+    @JsonProperty("lblHokenryogakuData1")
+    public Label getLblHokenryogakuData1() {
+        return lblHokenryogakuData1;
     }
 
     /*
-     * setlblHokenryogakuData
-     * @param lblHokenryogakuData lblHokenryogakuData
+     * setlblHokenryogakuData1
+     * @param lblHokenryogakuData1 lblHokenryogakuData1
      */
-    @JsonProperty("lblHokenryogakuData")
-    public void setLblHokenryogakuData(Label lblHokenryogakuData) {
-        this.lblHokenryogakuData = lblHokenryogakuData;
+    @JsonProperty("lblHokenryogakuData1")
+    public void setLblHokenryogakuData1(Label lblHokenryogakuData1) {
+        this.lblHokenryogakuData1 = lblHokenryogakuData1;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKikan13 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKikan13AttblKikan extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    @JsonProperty("lblKikanData2")
+    private Label lblKikanData2;
+
+    /*
+     * getlblKikanData2
+     * @return lblKikanData2
+     */
+    @JsonProperty("lblKikanData2")
+    public Label getLblKikanData2() {
+        return lblKikanData2;
+    }
+
+    /*
+     * setlblKikanData2
+     * @param lblKikanData2 lblKikanData2
+     */
+    @JsonProperty("lblKikanData2")
+    public void setLblKikanData2(Label lblKikanData2) {
+        this.lblKikanData2 = lblKikanData2;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKikan23 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKikan23AttblKikan extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    @JsonProperty("lblGessuData2")
+    private Label lblGessuData2;
+
+    /*
+     * getlblGessuData2
+     * @return lblGessuData2
+     */
+    @JsonProperty("lblGessuData2")
+    public Label getLblGessuData2() {
+        return lblGessuData2;
+    }
+
+    /*
+     * setlblGessuData2
+     * @param lblGessuData2 lblGessuData2
+     */
+    @JsonProperty("lblGessuData2")
+    public void setLblGessuData2(Label lblGessuData2) {
+        this.lblGessuData2 = lblGessuData2;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKikan33 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKikan33AttblKikan extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    @JsonProperty("lblHokenryoDankaiKubunData2")
+    private Label lblHokenryoDankaiKubunData2;
+
+    /*
+     * getlblHokenryoDankaiKubunData2
+     * @return lblHokenryoDankaiKubunData2
+     */
+    @JsonProperty("lblHokenryoDankaiKubunData2")
+    public Label getLblHokenryoDankaiKubunData2() {
+        return lblHokenryoDankaiKubunData2;
+    }
+
+    /*
+     * setlblHokenryoDankaiKubunData2
+     * @param lblHokenryoDankaiKubunData2 lblHokenryoDankaiKubunData2
+     */
+    @JsonProperty("lblHokenryoDankaiKubunData2")
+    public void setLblHokenryoDankaiKubunData2(Label lblHokenryoDankaiKubunData2) {
+        this.lblHokenryoDankaiKubunData2 = lblHokenryoDankaiKubunData2;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKikan43 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKikan43AttblKikan extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    @JsonProperty("lblHokenryoritsuData2")
+    private Label lblHokenryoritsuData2;
+
+    /*
+     * getlblHokenryoritsuData2
+     * @return lblHokenryoritsuData2
+     */
+    @JsonProperty("lblHokenryoritsuData2")
+    public Label getLblHokenryoritsuData2() {
+        return lblHokenryoritsuData2;
+    }
+
+    /*
+     * setlblHokenryoritsuData2
+     * @param lblHokenryoritsuData2 lblHokenryoritsuData2
+     */
+    @JsonProperty("lblHokenryoritsuData2")
+    public void setLblHokenryoritsuData2(Label lblHokenryoritsuData2) {
+        this.lblHokenryoritsuData2 = lblHokenryoritsuData2;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKikan53 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKikan53AttblKikan extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    @JsonProperty("lblHokenryoSanshutsugakuData2")
+    private Label lblHokenryoSanshutsugakuData2;
+
+    /*
+     * getlblHokenryoSanshutsugakuData2
+     * @return lblHokenryoSanshutsugakuData2
+     */
+    @JsonProperty("lblHokenryoSanshutsugakuData2")
+    public Label getLblHokenryoSanshutsugakuData2() {
+        return lblHokenryoSanshutsugakuData2;
+    }
+
+    /*
+     * setlblHokenryoSanshutsugakuData2
+     * @param lblHokenryoSanshutsugakuData2 lblHokenryoSanshutsugakuData2
+     */
+    @JsonProperty("lblHokenryoSanshutsugakuData2")
+    public void setLblHokenryoSanshutsugakuData2(Label lblHokenryoSanshutsugakuData2) {
+        this.lblHokenryoSanshutsugakuData2 = lblHokenryoSanshutsugakuData2;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKikan63 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKikan63AttblKikan extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    @JsonProperty("lblHokenryogakuData2")
+    private Label lblHokenryogakuData2;
+
+    /*
+     * getlblHokenryogakuData2
+     * @return lblHokenryogakuData2
+     */
+    @JsonProperty("lblHokenryogakuData2")
+    public Label getLblHokenryogakuData2() {
+        return lblHokenryogakuData2;
+    }
+
+    /*
+     * setlblHokenryogakuData2
+     * @param lblHokenryogakuData2 lblHokenryogakuData2
+     */
+    @JsonProperty("lblHokenryogakuData2")
+    public void setLblHokenryogakuData2(Label lblHokenryogakuData2) {
+        this.lblHokenryogakuData2 = lblHokenryogakuData2;
     }
 
     // </editor-fold>
