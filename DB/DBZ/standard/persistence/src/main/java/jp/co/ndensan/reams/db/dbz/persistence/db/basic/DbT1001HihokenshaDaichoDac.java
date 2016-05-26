@@ -600,11 +600,12 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
      * @param 被保険者番号 被保険者番号
      * @param 識別コード 識別コード
      * @param 異動日 異動日
+     * @param 被保険者区分コード 被保険者区分コード
      * @return DbT1001HihokenshaDaichoEntity
      */
     @Transaction
     public DbT1001HihokenshaDaichoEntity get資格の情報(HihokenshaNo 被保険者番号,
-            ShikibetsuCode 識別コード, FlexibleDate 異動日) {
+            ShikibetsuCode 識別コード, FlexibleDate 異動日, RString 被保険者区分コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
@@ -612,7 +613,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                                 eq(hihokenshaNo, 被保険者番号),
                                 leq(異動日, idoYMD),
                                 not(eq(shikibetsuCode, 識別コード)),
-                                eq(hihokennshaKubunCode, 1))).
+                                eq(hihokennshaKubunCode, 被保険者区分コード))).
                 order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST)).
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
