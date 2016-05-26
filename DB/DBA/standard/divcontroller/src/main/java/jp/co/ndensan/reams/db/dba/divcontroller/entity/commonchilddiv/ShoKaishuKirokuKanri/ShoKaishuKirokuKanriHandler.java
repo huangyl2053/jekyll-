@@ -243,10 +243,10 @@ public class ShoKaishuKirokuKanriHandler {
         div.getPanelInput().getTxtKoufuType().setValue(dgKoufuKaishuRow.getKoufuType());
         div.getPanelInput().getTxtKoufuDate().setValue(new RDate(dgKoufuKaishuRow.getKoufuDate().toString()));
         div.getPanelInput().getTxtYukouKigen().setValue(new RDate(dgKoufuKaishuRow.getYukoKigen().toString()));
-        div.getPanelInput().getDdlKoufuJiyu().setSelectedValue(dgKoufuKaishuRow.getKoufuJiyu());
+        div.getPanelInput().getDdlKoufuJiyu().setSelectedKey(dgKoufuKaishuRow.getKoufuJiyuNo());
         div.getPanelInput().getTxaKoufuRiyu().setValue(dgKoufuKaishuRow.getKofuRiyu());
         div.getPanelInput().getTxtKaisyuDate().setValue(new RDate(dgKoufuKaishuRow.getKaishuDate().toString()));
-        div.getPanelInput().getDdlKaisyuJiyu().setSelectedValue(dgKoufuKaishuRow.getKaishuJiyu());
+        div.getPanelInput().getDdlKaisyuJiyu().setSelectedKey(dgKoufuKaishuRow.getKaishuJiyuNo());
         div.getPanelInput().getTxaKaishuRiyu().setValue(dgKoufuKaishuRow.getKaishuRiyu());
         div.getPanelInput().getBtnConfirm().setDisabled(false);
         div.getPanelInput().getBtnCancel().setDisabled(false);
