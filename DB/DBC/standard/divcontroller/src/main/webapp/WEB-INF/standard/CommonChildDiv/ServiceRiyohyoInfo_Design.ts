@@ -171,12 +171,12 @@ module DBC {
                 return new UZA.Button(this.convFiledName("btnCalcMeisai"));
             }
 
-            public tbTeigakuRiyoushaFudan(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("tbTeigakuRiyoushaFudan"));
-            }
-
             public tbRiyoushaFudan(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("tbRiyoushaFudan"));
+            }
+
+            public tbTeigakuRiyoushaFudan(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("tbTeigakuRiyoushaFudan"));
             }
 
             public btnBeppyoMeisaiKakutei(): UZA.Button {

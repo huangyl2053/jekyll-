@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC10801",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "申請書発行用対象者把握",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD1080001",
+     "toLayoutTitle": "減免減額申請書発行用対象者把握",
+     "toState": "負担限度額認定"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD1080001",
+     "layoutTitle": "減免減額申請書発行用対象者把握",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

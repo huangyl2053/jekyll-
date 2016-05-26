@@ -156,12 +156,12 @@ var DBC;
                 return new UZA.Button(this.convFiledName("btnCalcMeisai"));
             };
 
-            Controls.prototype.tbTeigakuRiyoushaFudan = function () {
-                return new UZA.TextBox(this.convFiledName("tbTeigakuRiyoushaFudan"));
-            };
-
             Controls.prototype.tbRiyoushaFudan = function () {
                 return new UZA.TextBox(this.convFiledName("tbRiyoushaFudan"));
+            };
+
+            Controls.prototype.tbTeigakuRiyoushaFudan = function () {
+                return new UZA.TextBox(this.convFiledName("tbTeigakuRiyoushaFudan"));
             };
 
             Controls.prototype.btnBeppyoMeisaiKakutei = function () {

@@ -1,7 +1,6 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
-/// <reference path="./../kaigoshikakukihon/KaigoShikakuKihon.ts" />
 
 module DBZ {
 
@@ -36,10 +35,6 @@ module DBZ {
 
             public NinteiChosaIraiShokai(): UZA.Panel {
                 return new UZA.Panel(this.convFiledNameSelf());
-            }
-
-            public ccdKaigoShikakuKihon(): DBZ.KaigoShikakuKihon.ModeController {
-                return new DBZ.KaigoShikakuKihon.ModeController(this.convFiledName("ccdKaigoShikakuKihon"));
             }
 
             public dgNinteiChosaIrai(): UZA.DataGrid {

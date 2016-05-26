@@ -6,6 +6,10 @@ var DBC;
                 this.fieldName = fieldName;
                 this.controls = new ServiceRiyohyoInfo.Controls(fieldName);
             }
+            ModeController.prototype.priorities = function () {
+                return ["GamenMode", "KaigoType"];
+            };
+
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
@@ -17,6 +21,10 @@ var DBC;
             ModeController.prototype.GamenMode = function () {
                 return new Modes.GamenMode(this.controls);
             };
+
+            ModeController.prototype.KaigoType = function () {
+                return new Modes.KaigoType(this.controls);
+            };
             return ModeController;
         })();
         ServiceRiyohyoInfo.ModeController = ModeController;
@@ -27,17 +35,63 @@ var DBC;
                     this.controls = controls;
                 }
                 GamenMode.prototype.ModifyMode = function () {
-                    this.controls.ServiceRiyohyoBeppyoMeisai().displayNone = true;
-                    this.controls.ServiceRiyohyoBeppyoGokei().displayNone = true;
+                    this.controls.btnZengetsuCopy().displayNone = false;
+
+                    this.controls.btnBeppyoMeisaiNew().displayNone = false;
+                    this.controls.btnBeppyoGokeiNew().displayNone = false;
+                    this.controls.btnBeppyoMeisaiGokeiNew().displayNone = false;
+
+                    this.controls.ServiceRiyohyoBeppyoMeisai().disabled = false;
+                    this.controls.btnCalcMeisai().displayNone = false;
+                    this.controls.btnBeppyoMeisaiKakutei().displayNone = false;
+
+                    this.controls.ServiceRiyohyoBeppyoGokei().disabled = false;
+                    this.controls.btnCalcGokei().displayNone = false;
+                    this.controls.btnBeppyoGokeiKakutei().displayNone = false;
+
+                    this.controls.btnDelete().displayNone = false;
+                    this.controls.btnSave().displayNone = false;
                 };
 
                 GamenMode.prototype.InquiryMode = function () {
-                    this.controls.ServiceRiyohyoBeppyoMeisai().displayNone = false;
-                    this.controls.ServiceRiyohyoBeppyoGokei().displayNone = false;
+                    this.controls.btnZengetsuCopy().displayNone = true;
+
+                    this.controls.btnBeppyoMeisaiNew().displayNone = true;
+                    this.controls.btnBeppyoGokeiNew().displayNone = true;
+                    this.controls.btnBeppyoMeisaiGokeiNew().displayNone = true;
+
+                    this.controls.ServiceRiyohyoBeppyoMeisai().disabled = true;
+                    this.controls.btnCalcMeisai().displayNone = true;
+                    this.controls.btnBeppyoMeisaiKakutei().displayNone = true;
+
+                    this.controls.ServiceRiyohyoBeppyoGokei().disabled = true;
+                    this.controls.btnCalcGokei().displayNone = true;
+                    this.controls.btnBeppyoGokeiKakutei().displayNone = true;
+
+                    this.controls.btnDelete().displayNone = true;
+                    this.controls.btnSave().displayNone = true;
                 };
                 return GamenMode;
             })();
             Modes.GamenMode = GamenMode;
+
+            var KaigoType = (function () {
+                function KaigoType(controls) {
+                    this.controls = controls;
+                }
+                KaigoType.prototype.kyoType = function () {
+                    this.controls.tbRiyoushaFudan().displayNone = true;
+                    this.controls.tbTeigakuRiyoushaFudan().displayNone = true;
+                    this.controls.cbZanteiKubun().displayNone = false;
+                };
+                KaigoType.prototype.SogoType = function () {
+                    this.controls.tbRiyoushaFudan().displayNone = false;
+                    this.controls.tbTeigakuRiyoushaFudan().displayNone = false;
+                    this.controls.cbZanteiKubun().displayNone = true;
+                };
+                return KaigoType;
+            })();
+            Modes.KaigoType = KaigoType;
         })(ServiceRiyohyoInfo.Modes || (ServiceRiyohyoInfo.Modes = {}));
         var Modes = ServiceRiyohyoInfo.Modes;
     })(DBC.ServiceRiyohyoInfo || (DBC.ServiceRiyohyoInfo = {}));

@@ -30,6 +30,15 @@ public class HanyoListHihokenshadaichoRelateEntity {
     private Code shikakuSoshitsuJiyuCode;
     private FlexibleDate shikakuSoshitsuYMD;
     private FlexibleDate shikakuSoshitsuTodokedeYMD;
+    private Code shikakuHenkoJiyuCode;
+    private FlexibleDate shikakuHenkoYMD;
+    private FlexibleDate shikakuHenkoTodokedeYMD;
+    private Code jushochitokureiTekiyoJiyuCode;
+    private FlexibleDate jushochitokureiTekiyoYMD;
+    private FlexibleDate jushochitokureiTekiyoTodokedeYMD;
+    private Code jushochitokureiKaijoJiyuCode;
+    private FlexibleDate jushochitokureiKaijoYMD;
+    private FlexibleDate jushochitokureiKaijoTodokedeYMD;
     private RString hihokennshaKubunCode;
     private RString jushochiTokureiFlag;
     private RString koikinaiJushochiTokureiFlag;

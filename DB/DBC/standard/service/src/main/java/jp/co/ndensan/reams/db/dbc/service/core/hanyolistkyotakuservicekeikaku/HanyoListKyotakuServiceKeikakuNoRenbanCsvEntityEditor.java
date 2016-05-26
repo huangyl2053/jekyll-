@@ -542,7 +542,10 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
         csvEntity.set計画適用終了日(dataToRString(entity.getDbT3006適用終了年月日(), parameter));
         csvEntity.set計画届出日(dataToRString(entity.getDbT3005届出年月日(), parameter));
         csvEntity.set計画作成日(dataToRString(entity.getDbT3007計画作成年月日(), parameter));
-        csvEntity.set計画変更日(dataToRString(entity.getDbT3007計画変更年月日(), parameter));
+        csvEntity.set計画変更日(
+                entity.getDbT3007被保険者番号().isEmpty()
+                ? dataToRString(entity.getDbT3006事業者変更年月日(), parameter)
+                : dataToRString(entity.getDbT3007計画変更年月日(), parameter));
         csvEntity.set変更理由(isNull(entity.getDbT3007変更理由())
                 ? RString.EMPTY : entity.getDbT3007変更理由());
         csvEntity.set委託先計画事業者番号(isNull(entity.getDbT3006委託先事業者番号())

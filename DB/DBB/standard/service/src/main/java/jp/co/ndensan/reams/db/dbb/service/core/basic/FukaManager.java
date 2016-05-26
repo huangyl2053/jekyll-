@@ -165,6 +165,65 @@ public class FukaManager {
     }
 
     /**
+     * 引数のキーに一致する介護賦課を取得します。<br />
+     * 賦課の任意対象比較に使用します。<br />
+     * 調定日時＜＝更生日時、を抽出条件とします。
+     *
+     * @param 調定年度 ChoteiNendo
+     * @param 賦課年度 FukaNendo
+     * @param 通知書番号 TsuchishoNo
+     * @param 履歴番号 int
+     * @return Fuka
+     */
+    @Transaction
+    public Optional<Fuka> get介護賦課For任意対象比較(
+            FlexibleYear 調定年度,
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号,
+            int 履歴番号) {
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+
+        DbT2002FukaEntity entity = dac.selectFor任意対象比較(
+                調定年度,
+                賦課年度,
+                通知書番号,
+                履歴番号);
+        if (entity == null) {
+            return Optional.ofNullable(null);
+        }
+        entity.initializeMd5();
+        return Optional.of(new Fuka(entity));
+    }
+
+
+    /**
+     * 賦課年度に対する最新の介護賦課を返します。
+     *
+     * @param 賦課年度 FukaNendo
+     * @param 通知書番号 TsuchishoNo
+     * @return Fuka
+     */
+    @Transaction
+    public Fuka get介護賦課_賦課年度最新(
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号) {
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+
+        DbT2002FukaEntity entity = dac.selectByFukanendoSaishin(
+                賦課年度,
+                通知書番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new Fuka(entity);
+    }
+
+    /**
      * 指定の年度の賦課履歴を検索します。
      *
      * @param 賦課年度 賦課年度
