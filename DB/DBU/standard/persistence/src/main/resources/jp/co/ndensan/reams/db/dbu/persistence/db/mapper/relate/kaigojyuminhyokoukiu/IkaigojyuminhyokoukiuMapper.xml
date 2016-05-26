@@ -59,6 +59,7 @@
                 rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{item.dateTo}
             </if>
         </foreach>
+          AND rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" <![CDATA[<>]]> '0'
         ) AS dbT4001
         ON
         dbT1001."dbT1001_hihokenshaNo" = dbT4001."dbT4001_hihokenshaNo")
@@ -93,7 +94,7 @@
         FROM
         rgdb."DbT4001JukyushaDaicho"
         where
-        rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" = '0'
+        rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" <![CDATA[<>]]> '0'
         <foreach  
             collection="kobetsuKoikiunyoParameterList"
             item="item"
