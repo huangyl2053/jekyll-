@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyos
 import jp.co.ndensan.reams.db.dbd.entity.report.shakaifukushihojinfutan.ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReportSource;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
@@ -116,7 +116,7 @@ public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho {
         }
     }
 
-    private static List<ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReport> toReports(
+    private List<ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReport> toReports(
             HihokenshaKihonBusiness business, RString ninshoshaYakushokuMei) {
         List<ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReport> list = new ArrayList<>();
         RString 生年月日 = RString.EMPTY;
@@ -132,8 +132,7 @@ public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho {
                 ninshoshaYakushokuMei,
                 business.getフリガナ(),
                 business.get被保険者氏名(),
-                // TODO QA:691 回答待ち　 確認番号を取得する不正 2016/03/03まで
-                new RString("確認番号"),
+                get確認番号(business),
                 business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
                 生年月日,
                 Gender.toValue(business.get性別()).getCommonName(),
@@ -145,7 +144,7 @@ public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho {
         return list;
     }
 
-    private static RString get通知文() {
+    private RString get通知文() {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
                 SubGyomuCode.DBD介護受給,
@@ -160,12 +159,12 @@ public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho {
         return RString.EMPTY;
     }
 
-    private static RString set生年月日_日本人(FlexibleDate 生年月日) {
+    private RString set生年月日_日本人(FlexibleDate 生年月日) {
         return 生年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
-    private static RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
+    private RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
         RString 外国人表示制御_生年月日表示方法 = DbBusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, RDate.getNowDate());
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             return 生年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -175,7 +174,7 @@ public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho {
         return RString.EMPTY;
     }
 
-    private static RString set生年月日_和暦表示(FlexibleDate 生年月日, RString 生年月日不詳区分) {
+    private RString set生年月日_和暦表示(FlexibleDate 生年月日, RString 生年月日不詳区分) {
         if (生年月日不詳区分_FALG.equals(生年月日不詳区分)) {
             return 生年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -183,7 +182,7 @@ public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho {
         return RString.EMPTY;
     }
 
-    private static RString set郵便番号(RString 郵便番号) {
+    private RString set郵便番号(RString 郵便番号) {
         RStringBuilder yubinNoSb = new RStringBuilder();
         if (INDEX_3 <= 郵便番号.length()) {
             yubinNoSb.append(郵便番号.substring(0, INDEX_3));
