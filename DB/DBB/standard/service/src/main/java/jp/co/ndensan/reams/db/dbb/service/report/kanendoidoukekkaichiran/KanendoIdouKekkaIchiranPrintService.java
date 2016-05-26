@@ -133,12 +133,8 @@ public class KanendoIdouKekkaIchiranPrintService {
                     int flag = o2.get計算後情報_宛名_口座_更正前Entity().get通知書番号()
                             .compareTo(o1.get計算後情報_宛名_口座_更正前Entity().get通知書番号());
                     if (INDEX_0 == flag) {
-                        flag = o2.get計算後情報_宛名_口座_更正前Entity().get世帯員数()
-                                - o1.get計算後情報_宛名_口座_更正前Entity().get世帯員数();
-                        if (INDEX_0 == flag) {
-                            flag = o2.get計算後情報_宛名_口座_更正前Entity().get賦課年度()
-                                    .compareTo(o1.get計算後情報_宛名_口座_更正前Entity().get賦課年度());
-                        }
+                        flag = o2.get計算後情報_宛名_口座_更正前Entity().get賦課年度()
+                                .compareTo(o1.get計算後情報_宛名_口座_更正前Entity().get賦課年度());
                     }
                     return flag;
                 }
