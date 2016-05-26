@@ -25,8 +25,8 @@ public class JukyuShikakuShomeishoBodyEditor implements IJukyuShikakuShomeishoEd
     private static final int NOCOUNT_8 = 8;
     private static final int NOCOUNT_9 = 9;
     private static final int NOCOUNT_10 = 10;
-    private static final RString SHINSEICHU_1 = new RString("女");
-    private static final RString SHINSEICHU_2 = new RString("男");
+    private static final RString SHINSEICHU_1 = new RString("男");
+    private static final RString SHINSEICHU_2 = new RString("女");
     private static final RString HOUSI = new RString("*");
     private final JukyuShikakuShomeishoBodyItem item;
 
