@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki;
 
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.IKaigoJuminhyoEucCsvEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,7 +33,7 @@ public class KaigoJyuminhyouKoikiunyoJuniEucCSVDataEntity implements IKaigoJumin
     @CsvField(order = 60, name = "ＦＩＬＬＥＲ1")
     private final RString ＦＩＬＬＥＲ1;
     @CsvField(order = 70, name = "被保険者番号")
-    private final HihokenshaNo 被保険者番号;
+    private final RString 被保険者番号;
     @CsvField(order = 80, name = "識別コード")
     private final RString 識別コード;
     @CsvField(order = 90, name = "資格取得日")
@@ -81,7 +80,7 @@ public class KaigoJyuminhyouKoikiunyoJuniEucCSVDataEntity implements IKaigoJumin
             RString 最終レコード区分,
             RString 連番,
             RString ＦＩＬＬＥＲ1,
-            HihokenshaNo 被保険者番号,
+            RString 被保険者番号,
             RString 識別コード,
             FlexibleDate 資格取得日,
             FlexibleDate 資格喪失日,
