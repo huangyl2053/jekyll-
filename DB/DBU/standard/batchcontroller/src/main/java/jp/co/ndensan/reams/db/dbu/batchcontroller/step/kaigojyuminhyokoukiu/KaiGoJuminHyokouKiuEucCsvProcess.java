@@ -25,12 +25,14 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.definition.core.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuParameter;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.RenkeiDataFormatVersion;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SofuRenkeiDataKyoyuFileName;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7035RendoPatternEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7035RendoPatternMapper;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -99,25 +101,25 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
                 kaigojuminiEntity.setShichosonCode(entitylist.getShichosonCode().value());
                 kaigojuminiEntity.setDateFrom(entitylist.getTaishoShuryoTimestamp().getRDateTime());
                 kaigojuminiEntity.setDateTo(YMDHMS.now().getRDateTime());
-                //        if (kaigojuminiEntity.get日付TO().isBeforeOrEquals(kaigojuminiEntity.get日付FROM())) {
-                //TODO 技術点NO:31　バッチメッセージの出力　DBZErrorMessage．DBZE00006を返して、バッチ処理終了。
-//        }
+                if (kaigojuminiEntity.getDateTo().isBefore(kaigojuminiEntity.getDateFrom())) {
+                    throw new BatchInterruptedException(DbzErrorMessages.期間が不正_未来日付不可.getMessage().toString());
+                }
                 processParameter.getKobetsuKoikiunyoParameterList().add(kaigojuminiEntity);
             }
         }
         for (int i = 0; i < processParameter.getKobetsuKoikiunyoParameterList().size(); i++) {
             rendoPatternMapper = getMapper(IDbT7035RendoPatternMapper.class);
             dbT7035Entity = rendoPatternMapper.getRendoPatternEntity(new FlexibleDate(RDate.getNowDate().toDateString()));
-//                if (dbT7035Entity == null) {
-////                TODO 技術点NO:31　バッチメッセージの出力 DbzErrorMessages.連携パターン取得エラー.getMessage();
-//                } else {
-            rendoPatternEntity = new RendoPatternEntity();
-            rendoPatternEntity.setSakiFormatVersion(dbT7035Entity.getMotoFormatVersion());
-            rendoPatternEntity.setSakiEncodeKeitai(dbT7035Entity.getSakiEncodeKeitai());
-            rendoPatternEntity.setCodeHenkanKubun(dbT7035Entity.getCodeHenkanKubun());
-            rendoPatternEntity.setRenkeiFileName(dbT7035Entity.getRenkeiFileName());
-            renkeiFileName = dbT7035Entity.getRenkeiFileName();
-//                }
+            if (dbT7035Entity == null) {
+                throw new BatchInterruptedException(DbzErrorMessages.連携パターン取得エラー.getMessage().toString());
+            } else {
+                rendoPatternEntity = new RendoPatternEntity();
+                rendoPatternEntity.setSakiFormatVersion(dbT7035Entity.getSakiFormatVersion());
+                rendoPatternEntity.setSakiEncodeKeitai(dbT7035Entity.getSakiEncodeKeitai());
+                rendoPatternEntity.setCodeHenkanKubun(dbT7035Entity.getCodeHenkanKubun());
+                rendoPatternEntity.setRenkeiFileName(dbT7035Entity.getRenkeiFileName());
+                renkeiFileName = dbT7035Entity.getRenkeiFileName();
+            }
         }
         if (!RString.isNullOrEmpty(renkeiFileName)) {
             if (renkeiFileName.contains(日時)) {
@@ -180,7 +182,7 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
     @Override
     protected void process(KaigoJuminhyoRelateEntity entity) {
         KaigoJuminhyoEntity kaigoJuminhyoEntity = new KaigoJuminhyoEntity();
-        kaigoJuminhyoEntity.setHihokenshaNo(new HihokenshaNo(entity.getDbT1001HihokenshaDaichoEntity().getHihokenshaNo().value()));
+        kaigoJuminhyoEntity.setHihokenshaNo(entity.getDbT1001HihokenshaDaichoEntity().getHihokenshaNo());
         kaigoJuminhyoEntity.setIdoYMD(entity.getDbT1001HihokenshaDaichoEntity().getIdoYMD());
         kaigoJuminhyoEntity.setEdaNo(entity.getDbT1001HihokenshaDaichoEntity().getEdaNo());
         kaigoJuminhyoEntity.setIdoJiyuCode(entity.getDbT1001HihokenshaDaichoEntity().getIdoJiyuCode());
@@ -394,8 +396,8 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
                             entity.get受給認定年月日(),
                             entity.get受給認定取消年月日(),
                             entity.get削除フラグ(),
-                            new RString(entity.get作成日時().toString()),
-                            new RString(entity.get更新日時().toString())
+                            entity.get作成日時(),
+                            entity.get更新日時()
                     ));
         }
         eucCsvWriterJunitoJugo.close();

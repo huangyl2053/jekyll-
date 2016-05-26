@@ -111,7 +111,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
             KaigoJyuminhyouTashajukiDateEntity entity, KaigoJyuminhyouTashajukiCSVDateEntity hachientity) {
         if ((entity.get被保険者番号() != null && !entity.get被保険者番号().isEmpty())
                 && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty())) {
-            hachientity.set被保険者番号(entity.get被保険者番号());
+            hachientity.set被保険者番号(entity.get被保険者番号().value());
             hachientity.set市町村コード(entity.get市町村コード());
             コード変換区分の判定8桁(codeHenkanKubun, entity, hachientity);
         }
@@ -119,7 +119,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
                 && entity.get受給者認定有効期間開始年月日() != null) && (!entity.get被保険者番号().isEmpty()
                 && !entity.get受給者被保険者番号().isEmpty()
                 && entity.get資格取得年月日().isBeforeOrEquals(entity.get受給者認定有効期間開始年月日()))) {
-            hachientity.set被保険者番号(entity.get被保険者番号());
+            hachientity.set被保険者番号(entity.get被保険者番号().value());
             hachientity.set市町村コード(entity.get市町村コード());
             コード変換区分と更新日時の判定8桁(codeHenkanKubun, entity, hachientity);
         }
@@ -127,7 +127,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
                 && entity.get資格取得年月日() != null && entity.get受給者認定有効期間開始年月日() != null)
                 && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
                 && entity.get受給者認定有効期間開始年月日().isBefore(entity.get資格取得年月日()))) {
-            hachientity.set被保険者番号(entity.get被保険者番号());
+            hachientity.set被保険者番号(entity.get被保険者番号().value());
             hachientity.set市町村コード(entity.get市町村コード());
             コード変換区分の判定8桁(codeHenkanKubun, entity, hachientity);
         }
@@ -140,7 +140,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
                 && (entity.get受給者被保険者番号() != null || !entity.get受給者被保険者番号().isEmpty())
                 || ((entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty())
                 && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty()))) {
-            hachientity.set被保険者番号(entity.get被保険者番号());
+            hachientity.set被保険者番号(entity.get被保険者番号().value());
             hachientity.set市町村コード(entity.get市町村コード());
             コード変換区分の判定8桁4(codeHenkanKubun, entity, hachientity);
         }
@@ -296,7 +296,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         if ((entity.get被保険者番号() != null || !entity.get被保険者番号().isEmpty())
                 && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty())) {
             hachientity.set市町村コード(entity.get市町村コード());
-            hachientity.set被保険者番号(entity.get被保険者番号());
+            hachientity.set被保険者番号(entity.get被保険者番号().value());
             コード変換区分の判定12桁(codeHenkanKubun, entity, hachientity);
         }
         if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null && entity.get資格取得年月日() != null
@@ -304,7 +304,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
                 && !entity.get受給者被保険者番号().isEmpty()
                 && entity.get資格取得年月日().isBeforeOrEquals(entity.get受給者認定有効期間開始年月日()))) {
             hachientity.set市町村コード(entity.get市町村コード());
-            hachientity.set被保険者番号(entity.get被保険者番号());
+            hachientity.set被保険者番号(entity.get被保険者番号().value());
             コード変換区分の判定12桁2(codeHenkanKubun, entity, hachientity);
         }
         if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
@@ -312,7 +312,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
                 && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
                 && entity.get受給者認定有効期間開始年月日().isBefore(entity.get資格取得年月日()))) {
             hachientity.set市町村コード(entity.get市町村コード());
-            hachientity.set被保険者番号(entity.get被保険者番号());
+            hachientity.set被保険者番号(entity.get被保険者番号().value());
             コード変換区分の判定12桁(codeHenkanKubun, entity, hachientity);
         }
         被保険者番号NULL以外の判定12桁4(codeHenkanKubun, entity, hachientity);
@@ -466,7 +466,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         if ((entity.get被保険者番号() != null || !entity.get被保険者番号().isEmpty())
                 && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty())) {
             hachientity.set市町村コード(entity.get市町村コード());
-            hachientity.set被保険者番号(entity.get被保険者番号());
+            hachientity.set被保険者番号(entity.get被保険者番号().value());
             コード変換区分の判定15桁(codeHenkanKubun, entity, hachientity);
         }
         if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null && entity.get資格取得年月日() != null
@@ -474,7 +474,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
                 && !entity.get受給者被保険者番号().isEmpty()
                 && entity.get資格取得年月日().isBeforeOrEquals(entity.get受給者認定有効期間開始年月日()))) {
             hachientity.set市町村コード(entity.get市町村コード());
-            hachientity.set被保険者番号(entity.get被保険者番号());
+            hachientity.set被保険者番号(entity.get被保険者番号().value());
             コード変換区分の判定15桁2(codeHenkanKubun, entity, hachientity);
         }
         if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
@@ -482,7 +482,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
                 && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
                 && entity.get受給者認定有効期間開始年月日().isBefore(entity.get資格取得年月日()))) {
             hachientity.set市町村コード(entity.get市町村コード());
-            hachientity.set被保険者番号(entity.get被保険者番号());
+            hachientity.set被保険者番号(entity.get被保険者番号().value());
             コード変換区分の判定15桁(codeHenkanKubun, entity, hachientity);
         }
         被保険者番号NULL以外の判定15桁4(codeHenkanKubun, entity, hachientity);
