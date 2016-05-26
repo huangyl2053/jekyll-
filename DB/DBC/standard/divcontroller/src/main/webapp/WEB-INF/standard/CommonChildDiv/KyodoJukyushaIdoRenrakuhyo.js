@@ -7,15 +7,95 @@ var DBC;
                 this.controls = new KyodoJukyushaIdoRenrakuhyo.Controls(fieldName);
             }
             ModeController.prototype.priorities = function () {
-                return [];
+                return ["DisplayMode"];
             };
 
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
+
+            ModeController.prototype.DisplayMode = function () {
+                return new Modes.DisplayMode(this.controls);
+            };
             return ModeController;
         })();
         KyodoJukyushaIdoRenrakuhyo.ModeController = ModeController;
+
+        (function (Modes) {
+            var DisplayMode = (function () {
+                function DisplayMode(controls) {
+                    this.controls = controls;
+                }
+                DisplayMode.prototype.shinki = function () {
+                    this.controls.KyodoJukyushaIdoRenrakuhyo().disabled = false;
+                    this.controls.txtHiHokenshaNo().readOnly = true;
+                    this.controls.txtTaisyoYM().readOnly = true;
+                    this.controls.txtIdoYMD().readOnly = true;
+                    this.controls.txtShoKisaiHokenshaNo().readOnly = false;
+                    this.controls.radIdoKubunCode().readOnly = false;
+                    this.controls.ddlJukyushaIdoJiyu().readOnly = false;
+                    this.controls.KyodoJukyushaIdoRenrakuhyoTeisei().visible = false;
+
+                    this.controls.chkKihonSofu().readOnly = false;
+
+                    this.controls.KyodoJukyushaIdoRenrakuhyoShokanPanel().readOnly = false;
+                    this.controls.txtKihonIdoYMD().readOnly = false;
+                    this.controls.txtRirekiNo().readOnly = true;
+
+                    this.controls.chkShokanSofu().readOnly = false;
+
+                    this.controls.KyodoJukyushaIdoRenrakuhyoShokanPanel().readOnly = false;
+                    this.controls.txtShokanIdoYMD().readOnly = false;
+                    this.controls.txtShokanRirekiNo().readOnly = true;
+
+                    this.controls.chkKogakuSofu().readOnly = false;
+
+                    this.controls.KyodoJukyushaIdoRenrakuhyoKogakuPanel().readOnly = false;
+                    this.controls.txtKogakuIdoYMD().readOnly = false;
+                    this.controls.txtKogakuRirekiNo().readOnly = true;
+                };
+
+                DisplayMode.prototype.teisei = function () {
+                    this.controls.KyodoJukyushaIdoRenrakuhyo().disabled = false;
+                    this.controls.txtHiHokenshaNo().readOnly = true;
+                    this.controls.txtTaisyoYM().readOnly = true;
+                    this.controls.txtIdoYMD().readOnly = true;
+                    this.controls.txtShoKisaiHokenshaNo().readOnly = false;
+                    this.controls.radIdoKubunCode().readOnly = false;
+                    this.controls.ddlJukyushaIdoJiyu().readOnly = false;
+                    this.controls.KyodoJukyushaIdoRenrakuhyoTeisei().visible = true;
+
+                    this.controls.chkKihonSofu().readOnly = false;
+
+                    this.controls.KyodoJukyushaIdoRenrakuhyoShokanPanel().readOnly = false;
+                    this.controls.txtKihonIdoYMD().readOnly = true;
+                    this.controls.txtRirekiNo().readOnly = true;
+
+                    this.controls.chkShokanSofu().readOnly = false;
+
+                    this.controls.KyodoJukyushaIdoRenrakuhyoShokanPanel().readOnly = false;
+                    this.controls.txtShokanIdoYMD().readOnly = true;
+                    this.controls.txtShokanRirekiNo().readOnly = true;
+
+                    this.controls.chkKogakuSofu().readOnly = false;
+
+                    this.controls.KyodoJukyushaIdoRenrakuhyoKogakuPanel().readOnly = false;
+                    this.controls.txtKogakuIdoYMD().readOnly = true;
+                    this.controls.txtKogakuRirekiNo().readOnly = true;
+                };
+
+                DisplayMode.prototype.sakujyo = function () {
+                    this.controls.KyodoJukyushaIdoRenrakuhyo().disabled = true;
+                };
+
+                DisplayMode.prototype.shokai = function () {
+                    this.controls.KyodoJukyushaIdoRenrakuhyo().disabled = true;
+                };
+                return DisplayMode;
+            })();
+            Modes.DisplayMode = DisplayMode;
+        })(KyodoJukyushaIdoRenrakuhyo.Modes || (KyodoJukyushaIdoRenrakuhyo.Modes = {}));
+        var Modes = KyodoJukyushaIdoRenrakuhyo.Modes;
     })(DBC.KyodoJukyushaIdoRenrakuhyo || (DBC.KyodoJukyushaIdoRenrakuhyo = {}));
     var KyodoJukyushaIdoRenrakuhyo = DBC.KyodoJukyushaIdoRenrakuhyo;
 })(DBC || (DBC = {}));
