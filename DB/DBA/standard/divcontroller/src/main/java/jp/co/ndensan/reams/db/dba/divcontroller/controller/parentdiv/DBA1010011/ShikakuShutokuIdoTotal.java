@@ -317,8 +317,8 @@ public class ShikakuShutokuIdoTotal {
             if (changeStringToInt(row0.getShutokuDate().getValue().toString()) > changeStringToInt(row1.getShutokuDate().getValue().toString())) {
                 return -1;
             } else {
-                if (changeStringToInt(row0.getShutokuDate().getValue().toString()) == changeStringToInt(row1.
-                        getShutokuDate().getValue().toString())) {
+                if (changeStringToInt(row0.getShutokuDate().getValue().toString()).compareTo(changeStringToInt(row1.
+                        getShutokuDate().getValue().toString())) == 0) {
                     return 0;
                 } else {
                     return 1;
