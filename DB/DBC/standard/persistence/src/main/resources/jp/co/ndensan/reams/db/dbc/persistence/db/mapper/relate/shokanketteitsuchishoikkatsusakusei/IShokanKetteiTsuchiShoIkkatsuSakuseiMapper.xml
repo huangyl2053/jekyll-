@@ -226,7 +226,7 @@
         ,ShokanKetteiTsuchiShoMeisaiTemp."banchi"
         ,ShokanKetteiTsuchiShoMeisaiTemp."yoshikiNo"
         ,ShokanKetteiTsuchiShoMeisaiTemp."yoshikiMeisho"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceCode"
+        ,SUBSTRING(ShokanKetteiTsuchiShoMeisaiTemp."serviceCode",1, 2) AS "serviceCode"
         ,ShokanKetteiTsuchiShoMeisaiTemp."serviceShuruiName"
         ,ShokanKetteiTsuchiShoMeisaiTemp."kaishuKingaku"
         ,ShokanKetteiTsuchiShoMeisaiTemp."zougenRiyu"
