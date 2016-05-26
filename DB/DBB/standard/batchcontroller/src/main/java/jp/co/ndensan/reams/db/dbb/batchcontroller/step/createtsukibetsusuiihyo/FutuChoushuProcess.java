@@ -32,12 +32,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -62,6 +60,7 @@ public class FutuChoushuProcess extends BatchProcessBase<KoumokuGoukey> {
     private static final RString 生年月日終了 = new RString("生年月日終了");
     private static final RString 選択対象 = new RString("選択対象");
     private static final RString 市町村 = new RString("市町村");
+    private static final int INT_8 = 8;
     private List<KoumokuGoukey> koumokuGoukeyList;
     private CreateTsukibetsuSuiihyoProcessParameter processPrm;
     private CreateTsukibetsuSuiihyoMyBatisParameter mybatisPrm;
@@ -186,7 +185,10 @@ public class FutuChoushuProcess extends BatchProcessBase<KoumokuGoukey> {
         List<RString> 出力条件 = new ArrayList<>();
         FlexibleYear 調定年度 = mybatisPrm.getChoteiNendo();
         出力条件.add(get条件(処理年度, 調定年度.wareki().toDateString()));
-        RDate 基準日 = new YMDHMS(mybatisPrm.getChoteiKijunNichiji().toString()).getDate();
+        FlexibleDate 基準日 = FlexibleDate.EMPTY;
+        if (!RString.isNullOrEmpty(mybatisPrm.getChoteiKijunNichiji())) {
+            基準日 = new FlexibleDate(mybatisPrm.getChoteiKijunNichiji().substring(0, INT_8));
+        }
         出力条件.add(get条件(調定基準日, 基準日.wareki().toDateString()));
         出力条件.add(get条件(各月資格基準日, mybatisPrm.getKakutukiShikakuKijunNichi()));
         出力条件.add(get条件(年齢開始, mybatisPrm.getAgeStart()));
