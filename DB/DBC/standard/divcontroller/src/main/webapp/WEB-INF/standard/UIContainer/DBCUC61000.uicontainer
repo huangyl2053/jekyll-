@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC61000",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "スケジュール設定",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC6100011",
+     "toLayoutTitle": "高額給付対象者登録スケジュール設定",
+     "toState": "登録"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC6100011",
+     "layoutTitle": "高額給付対象者登録スケジュール設定",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyodoJuky
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -54,6 +55,16 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     private CheckBoxList chkKogakuSofu;
     @JsonProperty("KyodoJukyushaIdoRenrakuhyoKogakuPanel")
     private KyodoJukyushaIdoRenrakuhyoKogakuPanelDiv KyodoJukyushaIdoRenrakuhyoKogakuPanel;
+    @JsonProperty("hdnHiHokenshaNo")
+    private RString hdnHiHokenshaNo;
+    @JsonProperty("hdnIdoYMD")
+    private RString hdnIdoYMD;
+    @JsonProperty("hdnDeleteFlg")
+    private RString hdnDeleteFlg;
+    @JsonProperty("hdnTaisyoYM")
+    private RString hdnTaisyoYM;
+    @JsonProperty("hdnKyodoShoriyoJukyushaIdoEntity")
+    private RString hdnKyodoShoriyoJukyushaIdoEntity;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -311,6 +322,96 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     @JsonProperty("KyodoJukyushaIdoRenrakuhyoKogakuPanel")
     public void setKyodoJukyushaIdoRenrakuhyoKogakuPanel(KyodoJukyushaIdoRenrakuhyoKogakuPanelDiv KyodoJukyushaIdoRenrakuhyoKogakuPanel) {
         this.KyodoJukyushaIdoRenrakuhyoKogakuPanel = KyodoJukyushaIdoRenrakuhyoKogakuPanel;
+    }
+
+    /*
+     * gethdnHiHokenshaNo
+     * @return hdnHiHokenshaNo
+     */
+    @JsonProperty("hdnHiHokenshaNo")
+    public RString getHdnHiHokenshaNo() {
+        return hdnHiHokenshaNo;
+    }
+
+    /*
+     * sethdnHiHokenshaNo
+     * @param hdnHiHokenshaNo hdnHiHokenshaNo
+     */
+    @JsonProperty("hdnHiHokenshaNo")
+    public void setHdnHiHokenshaNo(RString hdnHiHokenshaNo) {
+        this.hdnHiHokenshaNo = hdnHiHokenshaNo;
+    }
+
+    /*
+     * gethdnIdoYMD
+     * @return hdnIdoYMD
+     */
+    @JsonProperty("hdnIdoYMD")
+    public RString getHdnIdoYMD() {
+        return hdnIdoYMD;
+    }
+
+    /*
+     * sethdnIdoYMD
+     * @param hdnIdoYMD hdnIdoYMD
+     */
+    @JsonProperty("hdnIdoYMD")
+    public void setHdnIdoYMD(RString hdnIdoYMD) {
+        this.hdnIdoYMD = hdnIdoYMD;
+    }
+
+    /*
+     * gethdnDeleteFlg
+     * @return hdnDeleteFlg
+     */
+    @JsonProperty("hdnDeleteFlg")
+    public RString getHdnDeleteFlg() {
+        return hdnDeleteFlg;
+    }
+
+    /*
+     * sethdnDeleteFlg
+     * @param hdnDeleteFlg hdnDeleteFlg
+     */
+    @JsonProperty("hdnDeleteFlg")
+    public void setHdnDeleteFlg(RString hdnDeleteFlg) {
+        this.hdnDeleteFlg = hdnDeleteFlg;
+    }
+
+    /*
+     * gethdnTaisyoYM
+     * @return hdnTaisyoYM
+     */
+    @JsonProperty("hdnTaisyoYM")
+    public RString getHdnTaisyoYM() {
+        return hdnTaisyoYM;
+    }
+
+    /*
+     * sethdnTaisyoYM
+     * @param hdnTaisyoYM hdnTaisyoYM
+     */
+    @JsonProperty("hdnTaisyoYM")
+    public void setHdnTaisyoYM(RString hdnTaisyoYM) {
+        this.hdnTaisyoYM = hdnTaisyoYM;
+    }
+
+    /*
+     * gethdnKyodoShoriyoJukyushaIdoEntity
+     * @return hdnKyodoShoriyoJukyushaIdoEntity
+     */
+    @JsonProperty("hdnKyodoShoriyoJukyushaIdoEntity")
+    public RString getHdnKyodoShoriyoJukyushaIdoEntity() {
+        return hdnKyodoShoriyoJukyushaIdoEntity;
+    }
+
+    /*
+     * sethdnKyodoShoriyoJukyushaIdoEntity
+     * @param hdnKyodoShoriyoJukyushaIdoEntity hdnKyodoShoriyoJukyushaIdoEntity
+     */
+    @JsonProperty("hdnKyodoShoriyoJukyushaIdoEntity")
+    public void setHdnKyodoShoriyoJukyushaIdoEntity(RString hdnKyodoShoriyoJukyushaIdoEntity) {
+        this.hdnKyodoShoriyoJukyushaIdoEntity = hdnKyodoShoriyoJukyushaIdoEntity;
     }
 
     /*
