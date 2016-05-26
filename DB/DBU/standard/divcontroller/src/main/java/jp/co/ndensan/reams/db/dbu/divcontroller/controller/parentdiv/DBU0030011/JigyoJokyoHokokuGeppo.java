@@ -61,6 +61,8 @@ public class JigyoJokyoHokokuGeppo {
             getHandler(div).getShukeiYM(集計年月_一般状況1から10, 集計年月_11から14現物分, 審査年月_11から14償還分,
                     決定年月_11から14現物分, 集計年月_決定状況現物分, 審査年月_決定状況償還分, 決定年月_決定状況償還分);
             getHandler(div).getShutsuryokuAll();
+            getHandler(div).setShutsuryoku();
+            getHandler(div).setDisDisabledTrueToShutsuryokuAll();
         }
         return ResponseData.of(div).respond();
     }
@@ -72,9 +74,7 @@ public class JigyoJokyoHokokuGeppo {
      * @return ResponseData<JigyoJokyoHokokuGeppoDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoDiv> onChange_cblShutsuryokuAll(JigyoJokyoHokokuGeppoDiv div) {
-        if (!RString.isNullOrEmpty(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedValue())) {
-            getHandler(div).getCblShutsuryokuAll();
-        }
+        getHandler(div).getCblShutsuryokuAll();
         return ResponseData.of(div).respond();
     }
 

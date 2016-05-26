@@ -307,10 +307,14 @@ public class JigyoJokyoHokokuGeppoHandler {
             div.getCblIppanGembutsu().setSelectedItemsByKey(一般状況14_現物分);
             一般状況14_償還分.clear();
             div.getCblIppanShokan().setSelectedItemsByKey(一般状況14_償還分);
-            決定状況合算.clear();
-            div.getCblGassan2().setSelectedItemsByKey(決定状況合算);
-            保険給付決定状況_現物分.clear();
-            div.getCblHokenKyufuGembutsu().setSelectedItemsByKey(保険給付決定状況_現物分);
+            if (!div.getCblGassan2().isDisabled()) {
+                決定状況合算.clear();
+                div.getCblGassan2().setSelectedItemsByKey(決定状況合算);
+            }
+            if (!div.getCblHokenKyufuGembutsu().isDisabled()) {
+                保険給付決定状況_現物分.clear();
+                div.getCblHokenKyufuGembutsu().setSelectedItemsByKey(保険給付決定状況_現物分);
+            }
             決定状況合算_償還分.clear();
             div.getCblHokenKyufuShokan().setSelectedItemsByKey(決定状況合算_償還分);
         }
@@ -320,9 +324,7 @@ public class JigyoJokyoHokokuGeppoHandler {
      * チェックボックスの操作不可設定処理です。
      */
     public void getShutsuryokuAll() {
-        List<RString> すべて選択 = new ArrayList<>();
-        すべて選択.add(ALL);
-        if (すべて選択.equals(div.getCblShutsuryokuAll().getSelectedKeys())) {
+        if (div.getCblShutsuryokuAll().getSelectedKeys().contains(ALL)) {
             div.getCblIppan1to10().setDisabled(false);
             div.getCblGassan1().setDisabled(false);
             div.getCblIppanGembutsu().setDisabled(false);
@@ -331,44 +333,20 @@ public class JigyoJokyoHokokuGeppoHandler {
             div.getCblHokenKyufuGembutsu().setDisabled(false);
             div.getCblHokenKyufuShokan().setDisabled(false);
         } else {
-            if (FlexibleDate.EMPTY.equals(div.getTxtShukeiYM1().getValue())) {
+            if (div.getTxtShukeiYM1().getValue() == null || div.getTxtShukeiYM1().getValue().isEmpty()) {
                 div.getCblIppan1to10().setDisabled(true);
-            } else {
-                div.getCblIppan1to10().setDisabled(false);
-                一般状況10.clear();
-                一般状況10.add(new RString("ippan1_11"));
-                div.getCblIppan1to10().setSelectedItemsByKey(一般状況10);
             }
-            if (FlexibleDate.EMPTY.equals(div.getTxtShukeiYM2().getValue())) {
+            if (div.getTxtShukeiYM2().getValue() == null || div.getTxtShukeiYM2().getValue().isEmpty()) {
                 div.getCblIppanGembutsu().setDisabled(true);
             }
-            if (FlexibleDate.EMPTY.equals(div.getTxtShukeiYM3().getValue())) {
+            if (div.getTxtShukeiYM3().getValue() == null || div.getTxtShukeiYM3().getValue().isEmpty()) {
                 div.getCblIppanShokan().setDisabled(true);
             }
-            if (FlexibleDate.EMPTY.equals(div.getTxtShukeiYM2().getValue()) && FlexibleDate.EMPTY.equals(div.getTxtShukeiYM3().getValue())) {
+            if (div.getTxtShukeiYM2().getValue() == null || div.getTxtShukeiYM2().getValue().isEmpty()
+                    && div.getTxtShukeiYM3().getValue() == null || div.getTxtShukeiYM3().getValue().isEmpty()) {
                 div.getCblGassan1().setDisabled(true);
-                setCblGassan1();
-            } else {
-                div.getCblGassan1().setDisabled(false);
-                一般状況_合算.clear();
-                一般状況_合算.add(ALL);
-                div.getCblGassan1().setSelectedItemsByKey(一般状況_合算);
             }
-            if (FlexibleDate.EMPTY.equals(div.getTxtShukeiYM4().getValue())) {
-                div.getCblHokenKyufuGembutsu().setDisabled(true);
-            }
-            if (FlexibleDate.EMPTY.equals(div.getTxtShukeiYM5().getValue())) {
-                div.getCblHokenKyufuShokan().setDisabled(true);
-            }
-            if (FlexibleDate.EMPTY.equals(div.getTxtShukeiYM4().getValue()) && FlexibleDate.EMPTY.equals(div.getTxtShukeiYM5().getValue())) {
-                div.getCblGassan2().setDisabled(true);
-                setCblGassan2();
-            } else {
-                div.getCblGassan2().setDisabled(false);
-                決定状況合算.clear();
-                決定状況合算.add(ALL);
-                div.getCblGassan2().setSelectedItemsByKey(決定状況合算);
-            }
+            getShutsuryoku();
         }
         if (new FlexibleDate("平26.07").isBeforeOrEquals((new FlexibleDate(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedValue())))) {
             div.getCblHokenKyufuGembutsu().setDisabled(true);
@@ -376,14 +354,30 @@ public class JigyoJokyoHokokuGeppoHandler {
         }
     }
 
+    /**
+     * チェックボックスの操作不可設定処理です。
+     */
+    public void getShutsuryoku() {
+        if (div.getTxtShukeiYM4().getValue() == null || div.getTxtShukeiYM4().getValue().isEmpty()) {
+            div.getCblHokenKyufuGembutsu().setDisabled(true);
+        }
+        if (div.getTxtShukeiYM5().getValue() == null || div.getTxtShukeiYM5().getValue().isEmpty()) {
+            div.getCblHokenKyufuShokan().setDisabled(true);
+        }
+        if (div.getTxtShukeiYM4().getValue() == null || div.getTxtShukeiYM4().getValue().isEmpty()
+                && div.getTxtShukeiYM5().getValue() == null || div.getTxtShukeiYM5().getValue().isEmpty()) {
+            div.getCblGassan2().setDisabled(true);
+        }
+    }
+
     private void setCblGassan1() {
-        if (!FlexibleDate.EMPTY.equals(div.getTxtShukeiYM2().getValue())) {
+        if (div.getTxtShukeiYM2().getValue() != null && !div.getTxtShukeiYM2().getValue().isEmpty()) {
             div.getCblIppanGembutsu().setDisabled(false);
             一般状況14_現物分.clear();
             一般状況14_現物分.add(new RString("ippan12_14Genbutsu"));
             div.getCblIppanGembutsu().setSelectedItemsByKey(一般状況14_現物分);
         }
-        if (!FlexibleDate.EMPTY.equals(div.getTxtShukeiYM3().getValue())) {
+        if (div.getTxtShukeiYM3().getValue() != null && !div.getTxtShukeiYM3().getValue().isEmpty()) {
             div.getCblIppanShokan().setDisabled(false);
             一般状況14_償還分.clear();
             一般状況14_償還分.add(new RString("ippan12_14Genbutsu"));
@@ -392,12 +386,12 @@ public class JigyoJokyoHokokuGeppoHandler {
     }
 
     private void setCblGassan2() {
-        if (!FlexibleDate.EMPTY.equals(div.getTxtShukeiYM4().getValue())) {
+        if (div.getTxtShukeiYM4().getValue() != null && !div.getTxtShukeiYM4().getValue().isEmpty()) {
             保険給付決定状況_現物分.clear();
             保険給付決定状況_現物分.add(new RString("hokenKyufuGenbutsu"));
             div.getCblHokenKyufuGembutsu().setSelectedItemsByKey(保険給付決定状況_現物分);
         }
-        if (!FlexibleDate.EMPTY.equals(div.getTxtShukeiYM5().getValue())) {
+        if (div.getTxtShukeiYM5().getValue() != null && !div.getTxtShukeiYM5().getValue().isEmpty()) {
             決定状況合算_償還分.clear();
             決定状況合算_償還分.add(new RString("hokenKyufuShokan"));
             div.getCblHokenKyufuShokan().setSelectedItemsByKey(決定状況合算_償還分);
@@ -430,14 +424,18 @@ public class JigyoJokyoHokokuGeppoHandler {
      * 集計年月3テキストボックスの処理です。
      */
     public void setShukeiType3() {
+        FlexibleDate shukeiYM3 = div.getTxtShukeiYM3().getValue();
         div.getTxtShukeiYM3().setValue(new FlexibleDate(div.getShukeiNengetsu3()));
+        div.setShukeiNengetsu3(shukeiYM3 == null ? RString.EMPTY : new RString(shukeiYM3.toString()));
     }
 
     /**
      * 集計年月5テキストボックスの処理です。
      */
     public void setShukeiType5() {
+        FlexibleDate shukeiYM5 = div.getTxtShukeiYM5().getValue();
         div.getTxtShukeiYM5().setValue(new FlexibleDate(div.getShukeiNengetsu5()));
+        div.setShukeiNengetsu5(shukeiYM5 == null ? RString.EMPTY : new RString(shukeiYM5.toString()));
     }
 
     /**
@@ -451,5 +449,67 @@ public class JigyoJokyoHokokuGeppoHandler {
         div.getTxtShukeiYM4().clearValue();
         div.getTxtShukeiYM5().clearValue();
         div.setShukeiNengetsu5(RString.EMPTY);
+        一般状況10.clear();
+        div.getCblIppan1to10().setSelectedItemsByKey(一般状況10);
+        一般状況_合算.clear();
+        div.getCblGassan1().setSelectedItemsByKey(一般状況_合算);
+        一般状況14_現物分.clear();
+        div.getCblIppanGembutsu().setSelectedItemsByKey(一般状況14_現物分);
+        一般状況14_償還分.clear();
+        div.getCblIppanShokan().setSelectedItemsByKey(一般状況14_償還分);
+        決定状況合算.clear();
+        div.getCblGassan2().setSelectedItemsByKey(決定状況合算);
+        保険給付決定状況_現物分.clear();
+        div.getCblHokenKyufuGembutsu().setSelectedItemsByKey(保険給付決定状況_現物分);
+        決定状況合算_償還分.clear();
+        div.getCblHokenKyufuShokan().setSelectedItemsByKey(決定状況合算_償還分);
+        div.getCblIppan1to10().setDisabled(false);
+        div.getCblGassan1().setDisabled(false);
+        div.getCblIppanGembutsu().setDisabled(false);
+        div.getCblIppanShokan().setDisabled(false);
+        div.getCblGassan2().setDisabled(false);
+        div.getCblHokenKyufuGembutsu().setDisabled(false);
+        div.getCblHokenKyufuShokan().setDisabled(false);
+    }
+
+    /**
+     * チェックボックスの初期選択処理です。
+     */
+    public void setShutsuryoku() {
+        if (div.getTxtShukeiYM1().getValue() != null && !div.getTxtShukeiYM1().getValue().isEmpty()) {
+            div.getCblIppan1to10().setDisabled(false);
+            一般状況10.clear();
+            一般状況10.add(new RString("ippan1_11"));
+            div.getCblIppan1to10().setSelectedItemsByKey(一般状況10);
+        }
+        if (div.getTxtShukeiYM2().getValue() == null || div.getTxtShukeiYM2().getValue().isEmpty()
+                && div.getTxtShukeiYM3().getValue() == null || div.getTxtShukeiYM3().getValue().isEmpty()) {
+            setCblGassan1();
+        } else {
+            一般状況_合算.clear();
+            一般状況_合算.add(ALL);
+            div.getCblGassan1().setSelectedItemsByKey(一般状況_合算);
+        }
+        if (div.getTxtShukeiYM4().getValue() == null || div.getTxtShukeiYM4().getValue().isEmpty()
+                && div.getTxtShukeiYM5().getValue() == null || div.getTxtShukeiYM5().getValue().isEmpty()) {
+            setCblGassan2();
+        } else {
+            決定状況合算.clear();
+            決定状況合算.add(ALL);
+            div.getCblGassan2().setSelectedItemsByKey(決定状況合算);
+        }
+    }
+
+    /**
+     * すべて選択チェックボックス操作不可設定の処理です。
+     */
+    public void setDisDisabledTrueToShutsuryokuAll() {
+        if (div.getCblIppan1to10().isDisabled() && div.getCblGassan1().isDisabled() && div.getCblIppanGembutsu().isDisabled()
+                && div.getCblIppanShokan().isDisabled() && div.getCblGassan2().isDisabled() && div.getCblHokenKyufuGembutsu().isDisabled()
+                && div.getCblHokenKyufuShokan().isDisabled()) {
+            div.getCblShutsuryokuAll().setDisabled(true);
+        } else {
+            div.getCblShutsuryokuAll().setDisabled(false);
+        }
     }
 }
