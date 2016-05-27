@@ -1625,10 +1625,28 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
      * @return (true:画面データが変更される ; false:画面データが変更されない)
      */
     public boolean is画面データが変更(RString 画面モード) {
+        if (!画面モード_修正.equals(画面モード)) {
+            return true;
+        }
         Map<RString, RString> 更新前データmap = ViewStateHolder.get(ViewStateKeys.申請情報登録_更新前データ, Map.class);
         Map<RString, RString> 画面データmap = get画面データ();
         if (更新前データmap.size() != 画面データmap.size()) {
             return true;
+        }
+        for (Entry<RString, RString> entry : 更新前データmap.entrySet()) {
+            RString 更新前データkey = entry.getKey();
+            for (Entry<RString, RString> entry1 : 画面データmap.entrySet()) {
+                RString 画面データkey = entry1.getKey();
+                if (更新前データkey.equals(画面データkey)) {
+                    if (entry.getValue() == null && entry1.getValue() == null) {
+                        break;
+                    }
+                    if (is更新前と画面正常項目データが変更OK(entry, entry1)) {
+                        return true;
+                    }
+                    break;
+                }
+            }
         }
         List<JutakuGaisuListDataParameter> 住宅住所更新前データ = ViewStateHolder.get(
                 ViewStateKeys.申請情報登録_住宅住所更新前データ, List.class);
@@ -1654,31 +1672,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         if (is住宅改修内容削除 || is住宅改修内容追加) {
             return true;
         }
-        Decimal 今回の支払状況 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
-                .getTxtHiyoTotalNow().getValue();
-        if (画面費用額合計.equals(今回の支払状況)) {
-            return false;
-        }
-        if (!画面モード_修正.equals(画面モード)) {
+        if (住宅住所更新前データ.size() != 画面住宅住所.size() || 住宅住所更新前データ.size() != 画面住宅住所一覧.size()) {
             return true;
-        }
-        if (住宅住所更新前データ.size() != 画面住宅住所.size()) {
-            return true;
-        }
-        for (Entry<RString, RString> entry : 更新前データmap.entrySet()) {
-            RString 更新前データkey = entry.getKey();
-            for (Entry<RString, RString> entry1 : 画面データmap.entrySet()) {
-                RString 画面データkey = entry1.getKey();
-                if (更新前データkey.equals(画面データkey)) {
-                    if (entry.getValue() == null && entry1.getValue() == null) {
-                        break;
-                    }
-                    if (is更新前と画面正常項目データが変更OK(entry, entry1)) {
-                        return true;
-                    }
-                    break;
-                }
-            }
         }
         if (住宅住所更新前データ.isEmpty() && 画面住宅住所.isEmpty()) {
             return false;
