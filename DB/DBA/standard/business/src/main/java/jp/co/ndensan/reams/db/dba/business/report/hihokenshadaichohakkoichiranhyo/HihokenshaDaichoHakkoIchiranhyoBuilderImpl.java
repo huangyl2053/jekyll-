@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 被保険者台帳一覧表Builderクラスです。
  *
- * @reamsid_L DBA-0510-070 wangxiaodong
+ * @reamsid_L DBA-0510-070 wangxiaodong
  */
 public class HihokenshaDaichoHakkoIchiranhyoBuilderImpl implements IHihokenshaDaichoHakkoIchiranhyoBuilder {
 

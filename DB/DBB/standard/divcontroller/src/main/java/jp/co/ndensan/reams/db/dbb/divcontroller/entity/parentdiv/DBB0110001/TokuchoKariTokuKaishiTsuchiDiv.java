@@ -4,18 +4,22 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0110001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * TokuchoKariTokuKaishiTsuchi のクラスファイル 
- * 
- * @author 自動生成
+ * TokuchoKariTokuKaishiTsuchi のクラスファイル
+ *
+ * @reamsid_L DBB-0790-010 yangchenbing
  */
 public class TokuchoKariTokuKaishiTsuchiDiv extends PanelPublish {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     /*
      * [ private の作成 ]
@@ -45,7 +49,7 @@ public class TokuchoKariTokuKaishiTsuchiDiv extends PanelPublish {
 
     @JsonProperty("txtTokuKaishiTsuchiHakkoYMD")
     public void setTxtTokuKaishiTsuchiHakkoYMD(TextBoxDate txtTokuKaishiTsuchiHakkoYMD) {
-        this.txtTokuKaishiTsuchiHakkoYMD=txtTokuKaishiTsuchiHakkoYMD;
+        this.txtTokuKaishiTsuchiHakkoYMD = txtTokuKaishiTsuchiHakkoYMD;
     }
 
     @JsonProperty("lblTokuKaishiTsuchiDaikou")
@@ -55,7 +59,7 @@ public class TokuchoKariTokuKaishiTsuchiDiv extends PanelPublish {
 
     @JsonProperty("lblTokuKaishiTsuchiDaikou")
     public void setLblTokuKaishiTsuchiDaikou(Label lblTokuKaishiTsuchiDaikou) {
-        this.lblTokuKaishiTsuchiDaikou=lblTokuKaishiTsuchiDaikou;
+        this.lblTokuKaishiTsuchiDaikou = lblTokuKaishiTsuchiDaikou;
     }
 
     @JsonProperty("radTokuKaishiTsuchiTaisho")
@@ -65,7 +69,7 @@ public class TokuchoKariTokuKaishiTsuchiDiv extends PanelPublish {
 
     @JsonProperty("radTokuKaishiTsuchiTaisho")
     public void setRadTokuKaishiTsuchiTaisho(RadioButton radTokuKaishiTsuchiTaisho) {
-        this.radTokuKaishiTsuchiTaisho=radTokuKaishiTsuchiTaisho;
+        this.radTokuKaishiTsuchiTaisho = radTokuKaishiTsuchiTaisho;
     }
 
     @JsonProperty("ShutsuryokuJunTokuchoKariTokuKaishiTsuchi")

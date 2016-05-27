@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbz.service.core.hihokenshashoshikakushohakko;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
@@ -22,28 +22,27 @@ import jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.Hiho
 import static jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter.createParam;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.KaigoHokenShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.KyotakuKeikakuTodokedeEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.ServiceTypeListEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3007KyotakuKeikakuJikoSakuseiDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4021ShiharaiHohoHenkoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokenshoshikakushohakko.IHihokenshoShikakushoHakkoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -57,15 +56,14 @@ public class HihokenshashoShikakushoHakkoFinder {
     private static final RString MENUID_DBUMN12001 = new RString("DBUMN12001");
     private static final RString MENUID_DBUMN12002 = new RString("DBUMN12002");
     private static final RString JIBUNSAKUSEI = new RString("自己作成");
-    private static final RString 居宅サービス計画 = new RString("1");
     private final MapperProvider mapperProvider;
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
     private final DbT4001JukyushaDaichoDac dbT4001Dac;
     private final DbT7130KaigoServiceShuruiDac dbT7130Dac;
-    private final DbT3006KyotakuKeikakuJigyoshaSakuseiDac dbT3006Dac;
-    private final DbT3007KyotakuKeikakuJikoSakuseiDac dbT3007Dac;
+    private final DbT1004ShisetsuNyutaishoDac dbT1004Dac;
     private final DbT7060KaigoJigyoshaDac dbT7060Dac;
     private final DbT1005KaigoJogaiTokureiTaishoShisetsuDac dbT1005Dac;
+    private final DbT4021ShiharaiHohoHenkoDac dbT4021Dac;
     private static final int HYOJI_SIZE = 150;
 
     /**
@@ -76,10 +74,10 @@ public class HihokenshashoShikakushoHakkoFinder {
         this.dbT1001Dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
         this.dbT4001Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
         this.dbT7130Dac = InstanceProvider.create(DbT7130KaigoServiceShuruiDac.class);
-        this.dbT3006Dac = InstanceProvider.create(DbT3006KyotakuKeikakuJigyoshaSakuseiDac.class);
-        this.dbT3007Dac = InstanceProvider.create(DbT3007KyotakuKeikakuJikoSakuseiDac.class);
+        this.dbT1004Dac = InstanceProvider.create(DbT1004ShisetsuNyutaishoDac.class);
         this.dbT7060Dac = InstanceProvider.create(DbT7060KaigoJigyoshaDac.class);
         this.dbT1005Dac = InstanceProvider.create(DbT1005KaigoJogaiTokureiTaishoShisetsuDac.class);
+        this.dbT4021Dac = InstanceProvider.create(DbT4021ShiharaiHohoHenkoDac.class);
     }
 
     /**
@@ -90,18 +88,18 @@ public class HihokenshashoShikakushoHakkoFinder {
             DbT1001HihokenshaDaichoDac dbT1001Dac,
             DbT4001JukyushaDaichoDac dbT4001Dac,
             DbT7130KaigoServiceShuruiDac dbT7130Dac,
-            DbT3006KyotakuKeikakuJigyoshaSakuseiDac dbT3006Dac,
-            DbT3007KyotakuKeikakuJikoSakuseiDac dbT3007Dac,
+            DbT1004ShisetsuNyutaishoDac dbT1004Dac,
             DbT7060KaigoJigyoshaDac dbT7060Dac,
-            DbT1005KaigoJogaiTokureiTaishoShisetsuDac dbT1005Dac) {
+            DbT1005KaigoJogaiTokureiTaishoShisetsuDac dbT1005Dac,
+            DbT4021ShiharaiHohoHenkoDac dbT4021Dac) {
         this.mapperProvider = mapperProvider;
         this.dbT1001Dac = dbT1001Dac;
         this.dbT4001Dac = dbT4001Dac;
         this.dbT7130Dac = dbT7130Dac;
-        this.dbT3006Dac = dbT3006Dac;
-        this.dbT3007Dac = dbT3007Dac;
+        this.dbT1004Dac = dbT1004Dac;
         this.dbT7060Dac = dbT7060Dac;
         this.dbT1005Dac = dbT1005Dac;
+        this.dbT4021Dac = dbT4021Dac;
     }
 
     /**
@@ -118,10 +116,14 @@ public class HihokenshashoShikakushoHakkoFinder {
      *
      * @param 被保険者番号 被保険者番号
      * @param メニューID メニューID
+     * @param 識別コード ShikibetsuCode
      * @return 被保険者証資格証発行情報取得Entity
      */
     @Transaction
-    public HihokenshoShikakushoHakkoEntity 被保険者証資格証発行情報取得(HihokenshaNo 被保険者番号, RString メニューID) {
+    public HihokenshoShikakushoHakkoEntity 被保険者証資格証発行情報取得(
+            HihokenshaNo 被保険者番号,
+            RString メニューID,
+            ShikibetsuCode 識別コード) {
 
         // SQL発行
         IHihokenshoShikakushoHakkoMapper mapper = this.mapperProvider.create(IHihokenshoShikakushoHakkoMapper.class);
@@ -151,13 +153,13 @@ public class HihokenshashoShikakushoHakkoFinder {
         this.限度額データ取得(entity);
 
         // 給付制限データ取得
-        this.給付制限データ取得(entity, メニューID);
+        this.給付制限データ取得(entity, メニューID, 被保険者番号);
 
         // 支援事業者データ取得
-        this.支援事業者データ取得(entity);
+        this.支援事業者データ取得(entity, 被保険者番号);
 
         // 施設入退所データ取得
-        this.施設入退所データ取得(entity);
+        this.施設入退所データ取得(entity, 識別コード);
 
         return entity;
     }
@@ -282,21 +284,21 @@ public class HihokenshashoShikakushoHakkoFinder {
      *
      */
     @Transaction
-    private void 給付制限データ取得(HihokenshoShikakushoHakkoEntity entity, RString メニューID
-    ) {
+    private void 給付制限データ取得(HihokenshoShikakushoHakkoEntity entity,
+            RString メニューID,
+            HihokenshaNo 被保険者番号) {
 
-        IHihokenshoShikakushoHakkoMapper mapper = mapperProvider.create(IHihokenshoShikakushoHakkoMapper.class);
-        List<ShiharaiHohoHenkoEntity> shiharaiHohoHenkoList = mapper.支払方法変更の情報取得();
+        List<DbT4021ShiharaiHohoHenkoEntity> dbT4021EntityList = dbT4021Dac.get支払方法変更For給付制限データ(被保険者番号);
 
-        if (shiharaiHohoHenkoList.isEmpty()) {
+        if (dbT4021EntityList.isEmpty()) {
             return;
         }
 
-        for (int i = 0; i < shiharaiHohoHenkoList.size(); i++) {
+        for (int i = 0; i < dbT4021EntityList.size(); i++) {
 
-            this.給付制限データ取得編集１(entity, shiharaiHohoHenkoList, メニューID, i);
-            this.給付制限データ取得編集２(entity, shiharaiHohoHenkoList, メニューID, i);
-            this.給付制限データ取得編集３(entity, shiharaiHohoHenkoList, メニューID, i);
+            this.給付制限データ取得編集１(entity, dbT4021EntityList, メニューID, i);
+            this.給付制限データ取得編集２(entity, dbT4021EntityList, メニューID, i);
+            this.給付制限データ取得編集３(entity, dbT4021EntityList, メニューID, i);
 
         }
     }
@@ -307,103 +309,45 @@ public class HihokenshashoShikakushoHakkoFinder {
      * @param HihokenshoShikakushoHakkoEntity HihokenshoShikakushoHakkoEntity
      */
     @Transaction
-    private void 支援事業者データ取得(HihokenshoShikakushoHakkoEntity entity
-    ) {
+    private void 支援事業者データ取得(HihokenshoShikakushoHakkoEntity entity, HihokenshaNo 被保険者番号) {
 
         IHihokenshoShikakushoHakkoMapper mapper = mapperProvider.create(IHihokenshoShikakushoHakkoMapper.class);
 
-        List<KyotakuKeikakuTodokedeEntity> kyotakuKeikakuTodokedeList = mapper.居宅給付計画届出情報取得();
+        List<KyotakuKeikakuTodokedeEntity> kyotakuKeikakuTodokedeList = mapper.居宅給付計画届出情報取得(被保険者番号);
 
-        if (kyotakuKeikakuTodokedeList.isEmpty()) {
-            return;
-        }
-        int dbT3006Count = dbT3006Dac.selectAll().size();
-        int dbT3007Count = dbT3007Dac.selectAll().size();
+        for (int i = 0; i < kyotakuKeikakuTodokedeList.size(); i++) {
 
-        for (int i = 0;
-                i < kyotakuKeikakuTodokedeList.size();
-                i++) {
+            RString 居宅計画区分 = kyotakuKeikakuTodokedeList.get(i).get居宅計画区分();
+            KyotakuKeikakuTodokedeEntity kyotakuKeikakuTodokedeEntity = kyotakuKeikakuTodokedeList.get(i);
+            if (new RString("1").equals(居宅計画区分)) {
+
+                List<DbT7060KaigoJigyoshaEntity> dbT7060List
+                        = dbT7060Dac.select事業者名称(kyotakuKeikakuTodokedeEntity.get計画事業者番号());
+                if (!dbT7060List.isEmpty()
+                        && dbT7060List.get(0).getJigyoshaName() != null) {
+                    kyotakuKeikakuTodokedeEntity.set居宅計画作成者名称(dbT7060List.get(0).getJigyoshaName().value());
+                } else {
+                    kyotakuKeikakuTodokedeEntity.set居宅計画作成者名称(RString.EMPTY);
+                }
+            } else if (new RString("2").equals(居宅計画区分)) {
+                kyotakuKeikakuTodokedeEntity.set居宅計画作成者名称(JIBUNSAKUSEI);
+            }
+
             if (i == 0) {
-                if (dbT3006Count > 0) {
-                    DbT3006KyotakuKeikakuJigyoshaSakuseiEntity dbT3006 = dbT3006Dac.selectByKey(
-                            kyotakuKeikakuTodokedeList.get(i).get被保険者番号(),
-                            kyotakuKeikakuTodokedeList.get(i).get対象年月(),
-                            kyotakuKeikakuTodokedeList.get(i).get履歴番号().intValue());
-
-                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = dbT7060Dac.select事業者名称(dbT3006.getKeikakuJigyoshaNo()).get(0);
-
-                    entity.set事業者１(dbT7060KaigoJigyosha.getJigyoshaName().value());
-                    entity.set届出年月日１(kyotakuKeikakuTodokedeList.get(i).get届出年月日());
-                    entity.set適用開始年月日１(dbT3006.getTekiyoKaishiYMD());
-                    entity.set適用終了年月日１(dbT3006.getTekiyoShuryoYMD());
-                } else if (dbT3007Count > 0) {
-
-                    DbT3007KyotakuKeikakuJikoSakuseiEntity dbT3007 = dbT3007Dac.get居宅給付計画自己作成(
-                            kyotakuKeikakuTodokedeList.get(i).get被保険者番号(),
-                            kyotakuKeikakuTodokedeList.get(i).get対象年月(),
-                            kyotakuKeikakuTodokedeList.get(i).get履歴番号().intValue(),
-                            居宅サービス計画);
-
-                    entity.set事業者１(JIBUNSAKUSEI);
-                    entity.set届出年月日１(kyotakuKeikakuTodokedeList.get(i).get届出年月日());
-                    entity.set適用開始年月日１(dbT3007.getTekiyoKaishiYMD());
-                    entity.set適用終了年月日１(dbT3007.getTekiyoShuryoYMD());
-                }
-
+                entity.set事業者１(kyotakuKeikakuTodokedeEntity.get居宅計画作成者名称());
+                entity.set届出年月日１(kyotakuKeikakuTodokedeEntity.get届出年月日());
+                entity.set適用開始年月日１(kyotakuKeikakuTodokedeEntity.get適用開始年月日());
+                entity.set適用終了年月日１(kyotakuKeikakuTodokedeEntity.get適用終了年月日());
             } else if (i == 1) {
-
-                if (dbT3006Count > 0) {
-                    DbT3006KyotakuKeikakuJigyoshaSakuseiEntity dbT3006 = dbT3006Dac.selectByKey(
-                            kyotakuKeikakuTodokedeList.get(i).get被保険者番号(),
-                            kyotakuKeikakuTodokedeList.get(i).get対象年月(),
-                            kyotakuKeikakuTodokedeList.get(i).get履歴番号().intValue());
-
-                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = dbT7060Dac.select事業者名称(dbT3006.getKeikakuJigyoshaNo()).get(0);
-
-                    entity.set事業者２(dbT7060KaigoJigyosha.getJigyoshaName().value());
-                    entity.set届出年月日２(kyotakuKeikakuTodokedeList.get(i).get届出年月日());
-                    entity.set適用開始年月日２(dbT3006.getTekiyoKaishiYMD());
-                    entity.set適用終了年月日２(dbT3006.getTekiyoShuryoYMD());
-                } else if (dbT3007Count > 0) {
-
-                    DbT3007KyotakuKeikakuJikoSakuseiEntity dbT3007 = dbT3007Dac.get居宅給付計画自己作成(
-                            kyotakuKeikakuTodokedeList.get(i).get被保険者番号(),
-                            kyotakuKeikakuTodokedeList.get(i).get対象年月(),
-                            kyotakuKeikakuTodokedeList.get(i).get履歴番号().intValue(),
-                            居宅サービス計画);
-
-                    entity.set事業者２(JIBUNSAKUSEI);
-                    entity.set届出年月日２(kyotakuKeikakuTodokedeList.get(i).get届出年月日());
-                    entity.set適用開始年月日２(dbT3007.getTekiyoKaishiYMD());
-                    entity.set適用終了年月日２(dbT3007.getTekiyoShuryoYMD());
-                }
+                entity.set事業者２(kyotakuKeikakuTodokedeEntity.get居宅計画作成者名称());
+                entity.set届出年月日２(kyotakuKeikakuTodokedeEntity.get届出年月日());
+                entity.set適用開始年月日２(kyotakuKeikakuTodokedeEntity.get適用開始年月日());
+                entity.set適用終了年月日２(kyotakuKeikakuTodokedeEntity.get適用終了年月日());
             } else if (i == 2) {
-
-                if (dbT3006Count > 0) {
-                    DbT3006KyotakuKeikakuJigyoshaSakuseiEntity dbT3006 = dbT3006Dac.selectByKey(
-                            kyotakuKeikakuTodokedeList.get(i).get被保険者番号(),
-                            kyotakuKeikakuTodokedeList.get(i).get対象年月(),
-                            kyotakuKeikakuTodokedeList.get(i).get履歴番号().intValue());
-
-                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = dbT7060Dac.select事業者名称(dbT3006.getKeikakuJigyoshaNo()).get(0);
-
-                    entity.set事業者３(dbT7060KaigoJigyosha.getJigyoshaName().value());
-                    entity.set届出年月日３(kyotakuKeikakuTodokedeList.get(i).get届出年月日());
-                    entity.set適用開始年月日３(dbT3006.getTekiyoKaishiYMD());
-                    entity.set適用終了年月日３(dbT3006.getTekiyoShuryoYMD());
-                } else if (dbT3007Count > 0) {
-
-                    DbT3007KyotakuKeikakuJikoSakuseiEntity dbT3007 = dbT3007Dac.get居宅給付計画自己作成(
-                            kyotakuKeikakuTodokedeList.get(i).get被保険者番号(),
-                            kyotakuKeikakuTodokedeList.get(i).get対象年月(),
-                            kyotakuKeikakuTodokedeList.get(i).get履歴番号().intValue(),
-                            居宅サービス計画);
-
-                    entity.set事業者３(JIBUNSAKUSEI);
-                    entity.set届出年月日３(kyotakuKeikakuTodokedeList.get(i).get届出年月日());
-                    entity.set適用開始年月日３(dbT3007.getTekiyoKaishiYMD());
-                    entity.set適用終了年月日３(dbT3007.getTekiyoShuryoYMD());
-                }
+                entity.set事業者３(kyotakuKeikakuTodokedeEntity.get居宅計画作成者名称());
+                entity.set届出年月日３(kyotakuKeikakuTodokedeEntity.get届出年月日());
+                entity.set適用開始年月日３(kyotakuKeikakuTodokedeEntity.get適用開始年月日());
+                entity.set適用終了年月日３(kyotakuKeikakuTodokedeEntity.get適用終了年月日());
             }
         }
     }
@@ -414,69 +358,54 @@ public class HihokenshashoShikakushoHakkoFinder {
      * @param HihokenshoShikakushoHakkoEntity HihokenshoShikakushoHakkoEntity
      */
     @Transaction
-    private void 施設入退所データ取得(HihokenshoShikakushoHakkoEntity entity
-    ) {
+    private void 施設入退所データ取得(HihokenshoShikakushoHakkoEntity entity, ShikibetsuCode 識別コード) {
 
-        IHihokenshoShikakushoHakkoMapper mapper = mapperProvider.create(IHihokenshoShikakushoHakkoMapper.class);
+        List<DbT1004ShisetsuNyutaishoEntity> dbT1004EntityList = dbT1004Dac.selectFor施設入退所データ(識別コード);
 
-        List<KaigoHokenShisetsuNyutaishoEntity> resultList = mapper.介護保険施設入退所の情報取得();
+        for (int i = 0; i < dbT1004EntityList.size(); i++) {
+            RString 入所施設種類 = dbT1004EntityList.get(i).getNyushoShisetsuShurui();
+            RString 事業者名称 = RString.EMPTY;
 
-        if (resultList.isEmpty()) {
-            return;
-        }
+            if (ShisetsuType.介護保険施設.getCode().equals(入所施設種類)) {
 
-        for (int i = 0; i < resultList.size(); i++) {
+                List<DbT7060KaigoJigyoshaEntity> dbT7060List = dbT7060Dac.
+                        select事業者名称(dbT1004EntityList.get(i).getNyushoShisetsuCode());
+
+                if (!dbT7060List.isEmpty()
+                        && dbT7060List.get(0).getJigyoshaName() != null) {
+                    事業者名称 = dbT7060List.get(0).getJigyoshaName().value();
+                }
+            } else if (ShisetsuType.住所地特例対象施設.getCode().equals(入所施設種類)) {
+                List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> dbT1005List = dbT1005Dac.
+                        selectJigyoshaJohoFor施設名取得(dbT1004EntityList.get(i).getNyushoShisetsuCode());
+
+                if (!dbT1005List.isEmpty()
+                        && dbT1005List.get(0).getJigyoshaMeisho() != null) {
+                    事業者名称 = dbT1005List.get(0).getJigyoshaMeisho().value();
+                }
+            }
 
             if (i == 0) {
-                if (ShisetsuType.介護保険施設.getCode().equals(resultList.get(i).get入所施設種類())) {
-                    List<DbT7060KaigoJigyoshaEntity> dbT7060List = dbT7060Dac.
-                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード()));
-                    RString 入所施設１ = dbT7060List.isEmpty() ? RString.EMPTY : dbT7060List.get(0).getJigyoshaName().value();
-                    entity.set入所施設１(入所施設１);
-                } else if (ShisetsuType.住所地特例対象施設.getCode().equals(resultList.get(i).get入所施設種類())) {
-                    List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> dbT1005List = dbT1005Dac.
-                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード()));
-                    RString 入所施設１ = dbT1005List.isEmpty() ? RString.EMPTY : dbT1005List.get(0).getJigyoshaMeisho().value();
-                    entity.set入所施設１(入所施設１);
-                }
-                entity.set入所施設コード１(resultList.get(i).get入所施設コード());
-                entity.set入所施設種類１(resultList.get(i).get入所施設種類());
-                entity.set入所年月日１(resultList.get(i).get入所年月日());
-                entity.set退所年月日１(resultList.get(i).get退所年月日());
+                entity.set入所施設コード１(dbT1004EntityList.get(i).getNyushoShisetsuCode() == null
+                        ? RString.EMPTY : dbT1004EntityList.get(i).getNyushoShisetsuCode().value());
+                entity.set入所施設１(事業者名称);
+                entity.set入所年月日１(dbT1004EntityList.get(i).getNyushoYMD());
+                entity.set退所年月日１(dbT1004EntityList.get(i).getTaishoYMD());
+                entity.set入所施設種類１(dbT1004EntityList.get(i).getNyushoShisetsuShurui());
             } else if (i == 1) {
-                if (ShisetsuType.介護保険施設.getCode().equals(resultList.get(i).get入所施設種類())) {
-                    List<DbT7060KaigoJigyoshaEntity> dbT7060List = dbT7060Dac.
-                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード()));
-                    RString 入所施設２ = dbT7060List.isEmpty() ? RString.EMPTY : dbT7060List.get(0).getJigyoshaName().value();
-                    entity.set入所施設２(入所施設２);
-                } else if (ShisetsuType.住所地特例対象施設.getCode().equals(resultList.get(i).get入所施設種類())) {
-                    List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> dbT1005List = dbT1005Dac.
-                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード()));
-                    RString 入所施設２ = dbT1005List.isEmpty() ? RString.EMPTY : dbT1005List.get(0).getJigyoshaMeisho().value();
-                    entity.set入所施設２(入所施設２);
-
-                }
-                entity.set入所施設コード２(resultList.get(i).get入所施設コード());
-                entity.set入所施設種類２(resultList.get(i).get入所施設種類());
-                entity.set入所年月日２(resultList.get(i).get入所年月日());
-                entity.set退所年月日２(resultList.get(i).get退所年月日());
+                entity.set入所施設コード２(dbT1004EntityList.get(i).getNyushoShisetsuCode() == null
+                        ? RString.EMPTY : dbT1004EntityList.get(i).getNyushoShisetsuCode().value());
+                entity.set入所施設２(事業者名称);
+                entity.set入所年月日２(dbT1004EntityList.get(i).getNyushoYMD());
+                entity.set退所年月日２(dbT1004EntityList.get(i).getTaishoYMD());
+                entity.set入所施設種類２(dbT1004EntityList.get(i).getNyushoShisetsuShurui());
             } else if (i == 2) {
-                if (ShisetsuType.介護保険施設.getCode().equals(resultList.get(i).get入所施設種類())) {
-                    List<DbT7060KaigoJigyoshaEntity> dbT7060List = dbT7060Dac.
-                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード()));
-                    RString 入所施設３ = dbT7060List.isEmpty() ? RString.EMPTY : dbT7060List.get(0).getJigyoshaName().value();
-                    entity.set入所施設３(入所施設３);
-                } else if (ShisetsuType.住所地特例対象施設.getCode().equals(resultList.get(i).get入所施設種類())) {
-                    List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> dbT1005List = dbT1005Dac.
-                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード()));
-                    RString 入所施設３ = dbT1005List.isEmpty() ? RString.EMPTY : dbT1005List.get(0).getJigyoshaMeisho().value();
-                    entity.set入所施設３(入所施設３);
-
-                }
-                entity.set入所施設コード３(resultList.get(i).get入所施設コード());
-                entity.set入所施設種類３(resultList.get(i).get入所施設種類());
-                entity.set入所年月日３(resultList.get(i).get入所年月日());
-                entity.set退所年月日３(resultList.get(i).get退所年月日());
+                entity.set入所施設コード３(dbT1004EntityList.get(i).getNyushoShisetsuCode() == null
+                        ? RString.EMPTY : dbT1004EntityList.get(i).getNyushoShisetsuCode().value());
+                entity.set入所施設３(事業者名称);
+                entity.set入所年月日３(dbT1004EntityList.get(i).getNyushoYMD());
+                entity.set退所年月日３(dbT1004EntityList.get(i).getTaishoYMD());
+                entity.set入所施設種類３(dbT1004EntityList.get(i).getNyushoShisetsuShurui());
             }
         }
     }
@@ -547,51 +476,51 @@ public class HihokenshashoShikakushoHakkoFinder {
      */
     private void 給付制限データ取得編集１(
             HihokenshoShikakushoHakkoEntity entity,
-            List<ShiharaiHohoHenkoEntity> shiharaiHohoHenkoList,
+            List<DbT4021ShiharaiHohoHenkoEntity> dbT4021EntityList,
             RString メニューID,
             int i) {
         if (MENUID_DBUMN12001.equals(メニューID)
-                && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(dbT4021EntityList.get(i).getKanriKubun())
                 && i == 0) {
-            entity.set給付制限内容１(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, SubGyomuCode.DBD介護受給));
-            entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-            entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+            entity.set給付制限内容１(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始１(dbT4021EntityList.get(i).getTekiyoKaishiYMD());
+            entity.set制限期間終了１(dbT4021EntityList.get(i).getTekiyoShuryoYMD());
         } else if (MENUID_DBUMN12001.equals(メニューID)
-                && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(dbT4021EntityList.get(i).getKanriKubun())
                 && i == 1) {
-            entity.set給付制限内容２(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, SubGyomuCode.DBD介護受給));
-            entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-            entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+            entity.set給付制限内容２(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始２(dbT4021EntityList.get(i).getTekiyoKaishiYMD());
+            entity.set制限期間終了２(dbT4021EntityList.get(i).getTekiyoShuryoYMD());
         } else if (MENUID_DBUMN12001.equals(メニューID)
-                && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(dbT4021EntityList.get(i).getKanriKubun())
                 && i == 2) {
-            entity.set給付制限内容３(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, SubGyomuCode.DBD介護受給));
-            entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-            entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+            entity.set給付制限内容３(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始３(dbT4021EntityList.get(i).getTekiyoKaishiYMD());
+            entity.set制限期間終了３(dbT4021EntityList.get(i).getTekiyoShuryoYMD());
         } else if (MENUID_DBUMN12001.equals(メニューID)
-                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(dbT4021EntityList.get(i).getKanriKubun())
                 && i == 0) {
-            entity.set給付制限内容１(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
-            entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-            entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+            entity.set給付制限内容１(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始１(dbT4021EntityList.get(i).getTekiyoKaishiYMD());
+            entity.set制限期間終了１(dbT4021EntityList.get(i).getTekiyoShuryoYMD());
         } else if (MENUID_DBUMN12001.equals(メニューID)
-                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(dbT4021EntityList.get(i).getKanriKubun())
                 && i == 1) {
-            entity.set給付制限内容２(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
-            entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-            entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+            entity.set給付制限内容２(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始２(dbT4021EntityList.get(i).getTekiyoKaishiYMD());
+            entity.set制限期間終了２(dbT4021EntityList.get(i).getTekiyoShuryoYMD());
         } else if (MENUID_DBUMN12001.equals(メニューID)
-                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(dbT4021EntityList.get(i).getKanriKubun())
                 && i == 2) {
-            entity.set給付制限内容３(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
-            entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-            entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+            entity.set給付制限内容３(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始３(dbT4021EntityList.get(i).getTekiyoKaishiYMD());
+            entity.set制限期間終了３(dbT4021EntityList.get(i).getTekiyoShuryoYMD());
         }
 
     }
@@ -602,52 +531,52 @@ public class HihokenshashoShikakushoHakkoFinder {
      */
     private void 給付制限データ取得編集２(
             HihokenshoShikakushoHakkoEntity entity,
-            List<ShiharaiHohoHenkoEntity> shiharaiHohoHenkoList,
+            List<DbT4021ShiharaiHohoHenkoEntity> dbT4021EntityList,
             RString メニューID,
             int i) {
 
         if (MENUID_DBUMN12001.equals(メニューID)
-                && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(dbT4021EntityList.get(i).getKanriKubun())
                 && i == 0) {
-            entity.set給付制限内容１(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, SubGyomuCode.DBD介護受給));
-            entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-            entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+            entity.set給付制限内容１(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始１(dbT4021EntityList.get(i).getTekiyoKaishiYMD());
+            entity.set制限期間終了１(dbT4021EntityList.get(i).getTekiyoShuryoYMD());
         } else if (MENUID_DBUMN12001.equals(メニューID)
-                && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(dbT4021EntityList.get(i).getKanriKubun())
                 && i == 1) {
-            entity.set給付制限内容２(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, SubGyomuCode.DBD介護受給));
-            entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-            entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+            entity.set給付制限内容２(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始２(dbT4021EntityList.get(i).getTekiyoKaishiYMD());
+            entity.set制限期間終了２(dbT4021EntityList.get(i).getTekiyoShuryoYMD());
         } else if (MENUID_DBUMN12001.equals(メニューID)
-                && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(dbT4021EntityList.get(i).getKanriKubun())
                 && i == 2) {
-            entity.set給付制限内容３(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, SubGyomuCode.DBD介護受給));
-            entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-            entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+            entity.set給付制限内容３(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始３(dbT4021EntityList.get(i).getTekiyoKaishiYMD());
+            entity.set制限期間終了３(dbT4021EntityList.get(i).getTekiyoShuryoYMD());
         } else if (MENUID_DBUMN12002.equals(メニューID)
-                && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(dbT4021EntityList.get(i).getKanriKubun())
                 && i == 0) {
-            entity.set給付制限内容１(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, SubGyomuCode.DBD介護受給));
-            entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-            entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+            entity.set給付制限内容１(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始１(dbT4021EntityList.get(i).getTekiyoKaishiYMD());
+            entity.set制限期間終了１(dbT4021EntityList.get(i).getTekiyoShuryoYMD());
         } else if (MENUID_DBUMN12002.equals(メニューID)
-                && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(dbT4021EntityList.get(i).getKanriKubun())
                 && i == 1) {
-            entity.set給付制限内容２(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, SubGyomuCode.DBD介護受給));
-            entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-            entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+            entity.set給付制限内容２(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始２(dbT4021EntityList.get(i).getTekiyoKaishiYMD());
+            entity.set制限期間終了２(dbT4021EntityList.get(i).getTekiyoShuryoYMD());
         } else if (MENUID_DBUMN12002.equals(メニューID)
-                && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(dbT4021EntityList.get(i).getKanriKubun())
                 && i == 2) {
-            entity.set給付制限内容３(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, SubGyomuCode.DBD介護受給));
-            entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-            entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+            entity.set給付制限内容３(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始３(dbT4021EntityList.get(i).getTekiyoKaishiYMD());
+            entity.set制限期間終了３(dbT4021EntityList.get(i).getTekiyoShuryoYMD());
         }
     }
 
@@ -657,52 +586,52 @@ public class HihokenshashoShikakushoHakkoFinder {
      */
     private void 給付制限データ取得編集３(
             HihokenshoShikakushoHakkoEntity entity,
-            List<ShiharaiHohoHenkoEntity> shiharaiHohoHenkoList,
+            List<DbT4021ShiharaiHohoHenkoEntity> dbT4021EntityList,
             RString メニューID,
             int i) {
 
         if (MENUID_DBUMN12002.equals(メニューID)
-                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(dbT4021EntityList.get(i).getKanriKubun())
                 && i == 0) {
-            entity.set給付制限内容１(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
-            entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-            entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+            entity.set給付制限内容１(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始１(dbT4021EntityList.get(i).getTekiyoKaishiYMD());
+            entity.set制限期間終了１(dbT4021EntityList.get(i).getTekiyoShuryoYMD());
         } else if (MENUID_DBUMN12002.equals(メニューID)
-                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(dbT4021EntityList.get(i).getKanriKubun())
                 && i == 1) {
-            entity.set給付制限内容２(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
-            entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-            entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+            entity.set給付制限内容２(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始２(dbT4021EntityList.get(i).getTekiyoKaishiYMD());
+            entity.set制限期間終了２(dbT4021EntityList.get(i).getTekiyoShuryoYMD());
         } else if (MENUID_DBUMN12002.equals(メニューID)
-                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(dbT4021EntityList.get(i).getKanriKubun())
                 && i == 2) {
-            entity.set給付制限内容３(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
-            entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-            entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+            entity.set給付制限内容３(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始３(dbT4021EntityList.get(i).getTekiyoKaishiYMD());
+            entity.set制限期間終了３(dbT4021EntityList.get(i).getTekiyoShuryoYMD());
         } else if (MENUID_DBUMN12002.equals(メニューID)
-                && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(dbT4021EntityList.get(i).getKanriKubun())
                 && i == 0) {
-            entity.set給付制限内容１(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, SubGyomuCode.DBD介護受給));
-            entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-            entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+            entity.set給付制限内容１(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始１(dbT4021EntityList.get(i).getTekiyoKaishiYMD());
+            entity.set制限期間終了１(dbT4021EntityList.get(i).getTekiyoShuryoYMD());
         } else if (MENUID_DBUMN12002.equals(メニューID)
-                && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(dbT4021EntityList.get(i).getKanriKubun())
                 && i == 1) {
-            entity.set給付制限内容２(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, SubGyomuCode.DBD介護受給));
-            entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-            entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+            entity.set給付制限内容２(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始２(dbT4021EntityList.get(i).getTekiyoKaishiYMD());
+            entity.set制限期間終了２(dbT4021EntityList.get(i).getTekiyoShuryoYMD());
         } else if (MENUID_DBUMN12002.equals(メニューID)
-                && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(dbT4021EntityList.get(i).getKanriKubun())
                 && i == 2) {
-            entity.set給付制限内容３(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, SubGyomuCode.DBD介護受給));
-            entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-            entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+            entity.set給付制限内容３(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始３(dbT4021EntityList.get(i).getTekiyoKaishiYMD());
+            entity.set制限期間終了３(dbT4021EntityList.get(i).getTekiyoShuryoYMD());
         }
     }
 }

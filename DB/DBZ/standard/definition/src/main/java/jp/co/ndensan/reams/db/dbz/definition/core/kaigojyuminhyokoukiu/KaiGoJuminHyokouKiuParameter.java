@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core.kaigojyuminhyokoukiu;
 
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -18,17 +19,17 @@ import lombok.Getter;
 @Getter
 public final class KaiGoJuminHyokouKiuParameter {
 
-    private final RString 市町村コード;
+    private final List<RString> 市町村コード;
     private final RString 被保険者番号;
 
     /**
      * コンストラクタです。
      *
-     * @param 市町村コード RString
+     * @param 市町村コード List<RString>
      * @param 被保険者番号 RString
      */
     private KaiGoJuminHyokouKiuParameter(
-            RString 市町村コード,
+            List<RString> 市町村コード,
             RString 被保険者番号) {
 
         this.市町村コード = 市町村コード;
@@ -38,12 +39,12 @@ public final class KaiGoJuminHyokouKiuParameter {
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param 市町村コード RString
+     * @param 市町村コード List<RString>
      * @param 被保険者番号 RString
      * @return 広域運用識別コード情報の検索パラメータ
      */
     public static KaiGoJuminHyokouKiuParameter createParam_common(
-            RString 市町村コード,
+            List<RString> 市町村コード,
             RString 被保険者番号) {
         return new KaiGoJuminHyokouKiuParameter(市町村コード, 被保険者番号);
     }

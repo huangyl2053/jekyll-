@@ -803,7 +803,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
             for (ShokanShakaiFukushiHojinKeigengaku entity : entityList) {
                 if (EntityDataState.Deleted.equals(entity.toEntity().getState())) {
                     償還払請求社会福祉法人軽減額Dac.delete(entity.toEntity());
-                } else {
+                } else if (!EntityDataState.Unchanged.equals(entity.toEntity().getState())) {
                     償還払請求社会福祉法人軽減額Dac.save(entity.toEntity());
                 }
             }
@@ -893,7 +893,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
     @Transaction
     public void updShokanShukei(List<ShokanShukei> shukeiList, ShokanKihonParameter parameter) {
 
-        Decimal 請求額合計 = new Decimal(0);
+        Decimal 請求額合計 = Decimal.ZERO;
         int 利用者負担額合計 = 0;
         if (shukeiList != null && !shukeiList.isEmpty()) {
             boolean 変更区分 = false;

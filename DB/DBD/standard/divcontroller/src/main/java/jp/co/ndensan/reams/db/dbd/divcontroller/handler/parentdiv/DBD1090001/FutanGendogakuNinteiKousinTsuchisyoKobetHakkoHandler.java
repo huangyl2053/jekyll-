@@ -44,7 +44,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler {
     /**
      * 介護保険負担限度額認定Listをsort
      *
-     * @param 介護保険負担限度額認定List
+     * @param 介護保険負担限度額認定List 介護保険負担限度額認定List
      */
     public static void compareTo(ArrayList<FutanGendogakuNintei> 介護保険負担限度額認定List) {
         Collections.sort(介護保険負担限度額認定List, new Comparator<FutanGendogakuNintei>() {

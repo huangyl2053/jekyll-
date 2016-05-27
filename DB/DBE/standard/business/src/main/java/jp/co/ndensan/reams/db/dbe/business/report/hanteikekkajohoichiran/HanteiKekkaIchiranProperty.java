@@ -17,8 +17,10 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  */
 public class HanteiKekkaIchiranProperty extends ReportPropertyBase<HanteiKekkaIchiranA4ReportSource> {
 
+    /**
+     * インスタンスを生成します。
+     */
     public HanteiKekkaIchiranProperty() {
         super(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE525001.getReportId());
     }
-
 }

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.shokanshinseiichiran;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshinseiichiran.ShokanShinseiIchiranRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -91,6 +92,24 @@ public class ShokanShinseiIchiran {
      */
     public FlexibleDate get決定年月日() {
         return relateEntity.getKetteiYMD();
+    }
+
+    /**
+     * get事業者番号。
+     *
+     * @return 決定年月日
+     */
+    public JigyoshaNo get事業者番号() {
+        return relateEntity.getJigyoshaNo();
+    }
+
+    /**
+     * get明細番号。
+     *
+     * @return get明細番号
+     */
+    public RString get明細番号() {
+        return relateEntity.getMeisaiNo();
     }
 
 }

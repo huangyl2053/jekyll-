@@ -11,10 +11,13 @@ import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoiraitaishoichiran.S
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.NijiHanteiKekkaInputHoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.DBE4020001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.DBE4020001TransitionEventName;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.ShinsaKaiKekkaInputCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.ShinsaKaiKekkaTorokuCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.ShinsaKaiKekkaTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4020001.ShinsaKaiKekkaTorokuHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4020001.ShinsaKaiKekkaTorokuValidationHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
@@ -27,6 +30,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -41,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -170,14 +175,11 @@ public class ShinsaKaiKekkaToroku {
             if (validation.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validation).respond();
             } else {
-//TODO 楊さん確認中.モバイル登録を実行する
-//            １）モバイルPCおよびUSBから二次判定結果登録済みデータを受け取る。また、1.5次判定があれば取込み可能。
-//ファイルの場所：カスタムコンフィグ.審査結果取込用データ（モバイル）パス
-//ファイルの名称：カスタムコンフィグ.審査結果取込用データ（モバイル）パス
-//            上記受け取ったCSVファイルのデータをDBへ更新する
-//「DB出力(要介護認定結果情報)」に記載するように登録する。また、
-//1.5次判定データがDBにあれば、DB出力(要介護認定1.5次判定結果情報)のように更新する、
-//1.5次判定データがDBになければ、DB出力(要介護認定1.5次判定結果情報)のように登録する、
+                RDate 日期 = RDate.getNowDate();
+                RString ファイルの場所 = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル_パス, 日期, SubGyomuCode.DBE認定支援);
+                RString ファイルの名称 = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル, 日期, SubGyomuCode.DBE認定支援);
+                List<ShinsaKaiKekkaInputCsvEntity> ファイルデータ = insertCsvDate(ファイルの場所, ファイルの名称);
+                getHandler(div).onClick_btnCyosakekkaInput(ファイルデータ);
                 前排他キーの解除();
                 onLoad(div);
             }
@@ -278,6 +280,28 @@ public class ShinsaKaiKekkaToroku {
         return data;
     }
 
+    private List<ShinsaKaiKekkaInputCsvEntity> insertCsvDate(RString ファイルの場所, RString ファイルの名称) {
+        RString filePath = Path.combinePath(ファイルの場所, ファイルの名称);
+        CsvReader csvReader = new CsvReader.InstanceBuilder(filePath, ShinsaKaiKekkaInputCsvEntity.class)
+                .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS)
+                .hasHeader(false).setNewLine(NewLine.CRLF).build();
+        return readCsvFile(csvReader);
+    }
+
+    private List<ShinsaKaiKekkaInputCsvEntity> readCsvFile(CsvReader csvReader) {
+        List<ShinsaKaiKekkaInputCsvEntity> csvEntityList = new ArrayList<>();
+        while (true) {
+            ShinsaKaiKekkaInputCsvEntity entity = (ShinsaKaiKekkaInputCsvEntity) csvReader.readLine();
+            if (entity != null) {
+                csvEntityList.add(entity);
+            } else {
+                break;
+            }
+        }
+        csvReader.close();
+        return csvEntityList;
+    }
+
     private RString 日期転換(RDate 日期) {
         if (日期 != null) {
             return 日期.wareki().toDateString();
@@ -319,7 +343,7 @@ public class ShinsaKaiKekkaToroku {
             申請書管理番号リスト.add(データ.getShinseishoKanriNo());
         }
         ShinseishoKanriNoList shinseishoKanriNoList = new ShinseishoKanriNoList();
-        shinseishoKanriNoList.setShinseishoKanriNoList(申請書管理番号リスト);
+        shinseishoKanriNoList.setShinseishoKanriNoS(申請書管理番号リスト);
         ViewStateHolder.put(ViewStateKeys.主治医意見書依頼_申請書管理番号List, shinseishoKanriNoList);
     }
 

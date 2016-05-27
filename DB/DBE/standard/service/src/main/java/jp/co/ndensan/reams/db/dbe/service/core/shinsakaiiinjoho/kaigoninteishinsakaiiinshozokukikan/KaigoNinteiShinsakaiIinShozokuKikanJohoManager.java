@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護認定審査会委員所属機関情報を管理するクラスです。
  *
- * @reamsid_L DBE-0110-010 wangxiaodong
+ * @reamsid_L DBE-0110-010 wangxiaodong
  */
 public class KaigoNinteiShinsakaiIinShozokuKikanJohoManager {
 

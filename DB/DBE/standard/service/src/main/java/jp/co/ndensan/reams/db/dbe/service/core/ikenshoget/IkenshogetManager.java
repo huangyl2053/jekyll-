@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 完了処理・主治医意見書入手のManagerクラスです。
  *
- * @reamsid_L DBE-0020-060 lishengli
+ * @reamsid_L DBE-0330-010 lishengli
  */
 public class IkenshogetManager {
 

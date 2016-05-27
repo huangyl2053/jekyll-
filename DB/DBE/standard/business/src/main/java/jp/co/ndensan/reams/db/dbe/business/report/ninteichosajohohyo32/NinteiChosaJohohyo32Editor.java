@@ -7,6 +7,10 @@ package jp.co.ndensan.reams.db.dbe.business.report.ninteichosajohohyo32;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosajohohyo.NinteiChosaJohohyo32ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosajohohyo.NinteiChosaJohohyoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 認定調査票情報のEditorです。
@@ -44,6 +48,8 @@ public class NinteiChosaJohohyo32Editor implements INinteiChosaJohohyo32Editor {
     private NinteiChosaJohohyo32ReportSource editSource_32(NinteiChosaJohohyo32ReportSource source) {
         source.hokenshaNo = entity.get保険者番号();
         source.hihokenshaNo = entity.get被保険者番号();
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.hihokennshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), entity.get被保険者番号());
         source.hihokenshaName = entity.get被保険者氏名();
         source.shinseiGengo = entity.get申請日_元号();
         source.shinseiYY = entity.get申請日_年();
@@ -92,20 +98,20 @@ public class NinteiChosaJohohyo32Editor implements INinteiChosaJohohyo32Editor {
         source.chosaJisshiYMD = entity.get調査実施日();
         source.chosaJisshiBasho = entity.get実施場所コード();
         source.chosaJisshiBashoTxit = entity.get実施場所名称();
-//        source.imgChosaJisshiBasho = entity.get実施場所イメージ();
+        source.imgChosaJisshiBasho = entity.get実施場所イメージ();
         source.chosainName = entity.get記入者();
         source.chosaItakusakiName = entity.get所属機関();
         source.tokubetsukyufuTxit = entity.get市町村特別給付();
-//        source.imgTokubetsukyufu = entity.get市町村特別給付イメージ();
+        source.imgTokubetsukyufu = entity.get市町村特別給付イメージ();
         source.zaitakusabisuTxit = entity.get介護保険給付外の在宅();
-//        source.imgZaitakusabisu = entity.get介護保険給付外の在宅イメージ();
+        source.imgZaitakusabisu = entity.get介護保険給付外の在宅イメージ();
         source.shisetsuriyo = entity.get施設利用();
         source.shisetsuNameTxit = entity.get施設名();
-//        source.imgShisetsuName = entity.get施設名イメージ();
+        source.imgShisetsuName = entity.get施設名イメージ();
         source.shisetsujushoTxit = entity.get施設住所();
-//        source.imgShisetsujusho = entity.get施設住所イメージ();
+        source.imgShisetsujusho = entity.get施設住所イメージ();
         source.shisetsuTxitTel = entity.get施設電話();
-//        source.imgShisetsuTel = entity.get施設電話イメージ();
+        source.imgShisetsuTel = entity.get施設電話イメージ();
         if (index < entity.get日常生活自立度リスト().size()) {
             source.listChosaJiritsudo_1 = entity.get日常生活自立度リスト().get(index);
         }

@@ -5,11 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.report.honsanteiidou;
 
+import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.report.honsanteiidou.GenNendoHonsanteiIdouProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.honsanteiidou.GenNendoHonsanteiIdouReport;
 import jp.co.ndensan.reams.db.dbb.business.report.honsanteiidou.KeisanjohoAtenaKozaKouseizengoEntity;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.source.gennendohonsanteiidou.GenNendoHonsanteiIdouSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
@@ -18,9 +20,12 @@ import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -44,7 +49,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class GenNendoHonsanteiIdouPrintService {
 
-    private DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac;
+    private final DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac;
+
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
 
     private final ReportId 帳票分類Id = new ReportId("DBB200015_HonsanteiIdouKekkaIchiran");
 
@@ -67,12 +78,12 @@ public class GenNendoHonsanteiIdouPrintService {
      */
     public SourceDataCollection printTaitsu(List<KeisanjohoAtenaKozaKouseizengoEntity> 更正前後EntityList,
             RString shutsuryokujunID, YMDHMS 調定日時, FlexibleYear 賦課年度) {
+        SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-
             printFukusu(更正前後EntityList, shutsuryokujunID, 調定日時, 賦課年度, reportManager);
-            return reportManager.publish();
+            collection = reportManager.publish();
         }
-
+        return collection;
     }
 
     /**
@@ -89,20 +100,47 @@ public class GenNendoHonsanteiIdouPrintService {
 
         GenNendoHonsanteiIdouProperty property = new GenNendoHonsanteiIdouProperty();
 
-        RString 住所編集 = RString.EMPTY;
+        List<RString> 住所編集リスト = new ArrayList<>();
         for (KeisanjohoAtenaKozaKouseizengoEntity entity : 更正前後EntityList) {
 
             IKojin 宛名情報 = ShikibetsuTaishoFactory.createKojin(entity.get計算後情報_宛名_口座_更正後Entity().get宛名Entity());
             JushoHenshu jushoHenshu = JushoHenshu.createInstance();
             ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(帳票分類Id);
-            住所編集 = jushoHenshu.editJusho(帳票制御共通, 宛名情報);
+            RString 住所編集 = jushoHenshu.editJusho(帳票制御共通, 宛名情報);
+            住所編集リスト.add(住所編集);
         }
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();
         try (ReportAssembler<GenNendoHonsanteiIdouSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<GenNendoHonsanteiIdouSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                    .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200015.getReportId(),
+                            Long.valueOf(shutsuryokujunID.toString()));
+            int i = 0;
+            RString 並び順の１件目 = RString.EMPTY;
+            RString 並び順の２件目 = RString.EMPTY;
+            RString 並び順の３件目 = RString.EMPTY;
+            RString 並び順の４件目 = RString.EMPTY;
+            RString 並び順の５件目 = RString.EMPTY;
+            if (並び順 != null) {
+                for (ISetSortItem item : 並び順.get設定項目リスト()) {
+                    if (i == INDEX_0) {
+                        並び順の１件目 = item.get項目名();
+                    } else if (i == INDEX_1) {
+                        並び順の２件目 = item.get項目名();
+                    } else if (i == INDEX_2) {
+                        並び順の３件目 = item.get項目名();
+                    } else if (i == INDEX_3) {
+                        並び順の４件目 = item.get項目名();
+                    } else if (i == INDEX_4) {
+                        並び順の５件目 = item.get項目名();
+                    }
+                    i = i + 1;
+                }
+            }
             new GenNendoHonsanteiIdouReport(
-                    更正前後EntityList, shutsuryokujunID, 調定日時, 賦課年度, association, 住所編集)
+                    更正前後EntityList, 調定日時, 賦課年度, association, 住所編集リスト, 並び順の１件目, 並び順の２件目,
+                    並び順の３件目, 並び順の４件目, 並び順の５件目)
                     .writeBy(reportSourceWriter);
         }
     }

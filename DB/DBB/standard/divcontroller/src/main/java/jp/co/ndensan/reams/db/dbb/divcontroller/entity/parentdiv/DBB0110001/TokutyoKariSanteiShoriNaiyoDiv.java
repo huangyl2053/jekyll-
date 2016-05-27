@@ -4,17 +4,20 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0110001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxFlexibleYear;
 
 /**
- * TokutyoKariSanteiShoriNaiyo のクラスファイル 
- * 
- * @author 自動生成
+ * TokutyoKariSanteiShoriNaiyo のクラスファイル
+ *
+ *  * @reamsid_L DBB-0790-010 yangchenbing
+ *
  */
 public class TokutyoKariSanteiShoriNaiyoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +25,9 @@ public class TokutyoKariSanteiShoriNaiyoDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtChoteiNendo")
-    private TextBoxYear txtChoteiNendo;
+    private TextBoxFlexibleYear txtChoteiNendo;
     @JsonProperty("txtFukaNendo")
-    private TextBoxYear txtFukaNendo;
+    private TextBoxFlexibleYear txtFukaNendo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +35,40 @@ public class TokutyoKariSanteiShoriNaiyoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtChoteiNendo
+     * @return txtChoteiNendo
+     */
     @JsonProperty("txtChoteiNendo")
-    public TextBoxYear getTxtChoteiNendo() {
+    public TextBoxFlexibleYear getTxtChoteiNendo() {
         return txtChoteiNendo;
     }
 
+    /*
+     * settxtChoteiNendo
+     * @param txtChoteiNendo txtChoteiNendo
+     */
     @JsonProperty("txtChoteiNendo")
-    public void setTxtChoteiNendo(TextBoxYear txtChoteiNendo) {
-        this.txtChoteiNendo=txtChoteiNendo;
+    public void setTxtChoteiNendo(TextBoxFlexibleYear txtChoteiNendo) {
+        this.txtChoteiNendo = txtChoteiNendo;
     }
 
+    /*
+     * gettxtFukaNendo
+     * @return txtFukaNendo
+     */
     @JsonProperty("txtFukaNendo")
-    public TextBoxYear getTxtFukaNendo() {
+    public TextBoxFlexibleYear getTxtFukaNendo() {
         return txtFukaNendo;
     }
 
+    /*
+     * settxtFukaNendo
+     * @param txtFukaNendo txtFukaNendo
+     */
     @JsonProperty("txtFukaNendo")
-    public void setTxtFukaNendo(TextBoxYear txtFukaNendo) {
-        this.txtFukaNendo=txtFukaNendo;
+    public void setTxtFukaNendo(TextBoxFlexibleYear txtFukaNendo) {
+        this.txtFukaNendo = txtFukaNendo;
     }
 
     // </editor-fold>

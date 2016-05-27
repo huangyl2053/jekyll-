@@ -7,21 +7,17 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0230011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * tblkonkaiInfoInput のクラスファイル
- *
- * @reamsid_L DBU-0550-010 zhangzhiming
+ * tblkonkaiInfoInput のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class tblkonkaiInfoInputDiv extends TablePanel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -506,26 +502,23 @@ public class tblkonkaiInfoInputDiv extends TablePanel {
 
     // </editor-fold>
 }
-
 /**
- * celNull1 のクラスファイル
- *
+ * celNull1 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celNull1AttblkonkaiInfoInput extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     // </editor-fold>
 }
-
 /**
- * celStYMD のクラスファイル
- *
+ * celStYMD のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celStYMDAttblkonkaiInfoInput extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblStYMD")
     private Label lblStYMD;
 
@@ -549,15 +542,13 @@ class celStYMDAttblkonkaiInfoInput extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celStTime のクラスファイル
- *
+ * celStTime のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celStTimeAttblkonkaiInfoInput extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblStTime")
     private Label lblStTime;
 
@@ -581,15 +572,13 @@ class celStTimeAttblkonkaiInfoInput extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celEdYMD のクラスファイル
- *
+ * celEdYMD のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celEdYMDAttblkonkaiInfoInput extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblEdYMD")
     private Label lblEdYMD;
 
@@ -613,15 +602,13 @@ class celEdYMDAttblkonkaiInfoInput extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celEdTime のクラスファイル
- *
+ * celEdTime のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celEdTimeAttblkonkaiInfoInput extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblEdTime")
     private Label lblEdTime;
 
@@ -645,15 +632,13 @@ class celEdTimeAttblkonkaiInfoInput extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celZenken のクラスファイル
- *
+ * celZenken のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celZenkenAttblkonkaiInfoInput extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("Zenken")
     private ZenkenDiv Zenken;
 
@@ -677,15 +662,13 @@ class celZenkenAttblkonkaiInfoInput extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celZenkaiChushutsu のクラスファイル
- *
+ * celZenkaiChushutsu のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celZenkaiChushutsuAttblkonkaiInfoInput extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblZenkaiChushutsu")
     private Label lblZenkaiChushutsu;
 
@@ -709,15 +692,13 @@ class celZenkaiChushutsuAttblkonkaiInfoInput extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celZenkaiChushutsuFromYMD のクラスファイル
- *
+ * celZenkaiChushutsuFromYMD のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celZenkaiChushutsuFromYMDAttblkonkaiInfoInput extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtZenkaiChushutsuFromYMD")
     private TextBoxDate txtZenkaiChushutsuFromYMD;
 
@@ -741,15 +722,13 @@ class celZenkaiChushutsuFromYMDAttblkonkaiInfoInput extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celZenkaiChushutsuFromTime のクラスファイル
- *
+ * celZenkaiChushutsuFromTime のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celZenkaiChushutsuFromTimeAttblkonkaiInfoInput extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtZenkaiChushutsuFromTime")
     private TextBoxTime txtZenkaiChushutsuFromTime;
     @JsonProperty("lblKara")
@@ -793,15 +772,13 @@ class celZenkaiChushutsuFromTimeAttblkonkaiInfoInput extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celZenkaiChushutsuToYMD のクラスファイル
- *
+ * celZenkaiChushutsuToYMD のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celZenkaiChushutsuToYMDAttblkonkaiInfoInput extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtZenkaiChushutsuToYMD")
     private TextBoxDate txtZenkaiChushutsuToYMD;
 
@@ -825,15 +802,13 @@ class celZenkaiChushutsuToYMDAttblkonkaiInfoInput extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celZenkaiChushutsuToTime のクラスファイル
- *
+ * celZenkaiChushutsuToTime のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celZenkaiChushutsuToTimeAttblkonkaiInfoInput extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtZenkaiChushutsuToTime")
     private TextBoxTime txtZenkaiChushutsuToTime;
 
@@ -857,15 +832,13 @@ class celZenkaiChushutsuToTimeAttblkonkaiInfoInput extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celKonkaiChushutsu のクラスファイル
- *
+ * celKonkaiChushutsu のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celKonkaiChushutsuAttblkonkaiInfoInput extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblKonkaiChushutsu")
     private Label lblKonkaiChushutsu;
 
@@ -889,15 +862,13 @@ class celKonkaiChushutsuAttblkonkaiInfoInput extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celKonkaiChushutsuFromYMD のクラスファイル
- *
+ * celKonkaiChushutsuFromYMD のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celKonkaiChushutsuFromYMDAttblkonkaiInfoInput extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtKonkaiChushutsuFromYMD")
     private TextBoxDate txtKonkaiChushutsuFromYMD;
 
@@ -921,15 +892,13 @@ class celKonkaiChushutsuFromYMDAttblkonkaiInfoInput extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celKonkaiChushutsuFromTime のクラスファイル
- *
+ * celKonkaiChushutsuFromTime のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celKonkaiChushutsuFromTimeAttblkonkaiInfoInput extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtKonkaiChushutsuFromTime")
     private TextBoxTime txtKonkaiChushutsuFromTime;
     @JsonProperty("lblKara2")
@@ -973,59 +942,53 @@ class celKonkaiChushutsuFromTimeAttblkonkaiInfoInput extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celButton のクラスファイル
- *
+ * celButton のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celButtonAttblkonkaiInfoInput extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     // </editor-fold>
 }
-
 /**
- * celNull2 のクラスファイル
- *
+ * celNull2 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celNull2AttblkonkaiInfoInput extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     // </editor-fold>
 }
-
 /**
- * celNull3 のクラスファイル
- *
+ * celNull3 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celNull3AttblkonkaiInfoInput extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     // </editor-fold>
 }
-
 /**
- * celNull4 のクラスファイル
- *
+ * celNull4 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celNull4AttblkonkaiInfoInput extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     // </editor-fold>
 }
-
 /**
- * celBtn のクラスファイル
- *
+ * celBtn のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celBtnAttblkonkaiInfoInput extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("btnKakutei")
     private Button btnKakutei;
     @JsonProperty("btnClose")

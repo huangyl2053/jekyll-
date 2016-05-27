@@ -273,6 +273,7 @@ public class KihonInfoMainPanelHandler {
                     様式番号,
                     明細番号);
         } else {
+            明細番号 = RString.EMPTY;
             ShokanKihon shokanKihon = ViewStateHolder.get(ViewStateKeys.償還払請求基本データ, ShokanKihon.class);
             if (shokanKihon == null) {
                 shokanKihon = new ShokanKihon(

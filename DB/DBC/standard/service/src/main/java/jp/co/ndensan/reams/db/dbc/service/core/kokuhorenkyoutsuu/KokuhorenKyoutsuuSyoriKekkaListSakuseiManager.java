@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.SyoriKekkaL
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -56,7 +55,6 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
     private static final RString HEADER_備考 = new RString("備考");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC900001"));
 
-    @BatchWriter
     private CsvListWriter csvListWriter;
 
     /**
@@ -143,9 +141,8 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
                 entity.setキー5(data.getキー5());
                 entity.set備考(data.get備考());
                 try {
-                    KokuhorenJoho_TorikomiErrorKubun エラー区分 = KokuhorenJoho_TorikomiErrorKubun.toValue(data.getエラー区分());
-                    entity.set処理名(エラー区分.get処理名());
-                    entity.setエラー内容(エラー区分.getエラーメッセージ());
+                    entity.set処理名(KokuhorenJoho_TorikomiErrorKubun.get処理名(data.getエラー区分()));
+                    entity.setエラー内容(KokuhorenJoho_TorikomiErrorKubun.getエラーメッセージ(data.getエラー区分()));
                 } catch (IllegalArgumentException ex) {
                     Logger.getLogger(KokuhorenKyoutsuuSyoriKekkaListSakuseiManager.class.getName()).log(Level.SEVERE, null, ex);
                     throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(

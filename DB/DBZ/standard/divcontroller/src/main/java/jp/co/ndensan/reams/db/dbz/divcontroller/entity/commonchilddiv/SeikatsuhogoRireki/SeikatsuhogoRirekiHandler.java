@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -29,6 +30,7 @@ public class SeikatsuhogoRirekiHandler {
     private final RString 登録 = new RString("登録");
     private final RString 照会 = new RString("照会");
     private final RString 表示モード_新規 = new RString("新規");
+    private final RString 線 = new RString("～");
 
     /**
      * コンストラクタです。
@@ -78,6 +80,15 @@ public class SeikatsuhogoRirekiHandler {
             if (!RString.isNullOrEmpty(list.get扶助種類コード())) {
                 row.setTxtFujoShuruiCode(list.get扶助種類コード().substring(0, list.get扶助種類コード().length() - 1));
             }
+            RStringBuilder 受給停止期間 = new RStringBuilder();
+            if (!RString.isNullOrEmpty(list.get受給停止開始日())) {
+                受給停止期間.append(list.get受給停止開始日().substring(0, list.get受給停止開始日().length() - 1));
+            }
+            受給停止期間.append(線);
+            if (!RString.isNullOrEmpty(list.get受給停止終了日())) {
+                受給停止期間.append(list.get受給停止終了日().substring(0, list.get受給停止終了日().length() - 1));
+            }
+            row.setTxtJukyuTeishi(受給停止期間.toRString());
             rowList.add(row);
         }
         if (登録.equals(表示モード)) {
@@ -118,6 +129,7 @@ public class SeikatsuhogoRirekiHandler {
                 dataModel.set退所日(dgRow.getTxtKyugoshisetsuTaishoDate().getValue());
                 dataModel.set扶助種類(dgRow.getTxtFujoShurui());
                 dataModel.set扶助種類コード(dgRow.getTxtFujoShuruiCode());
+                dataModel.set受給停止期間(dgRow.getTxtJukyuTeishi());
             }
         }
         div.setHdnDataPass(DataPassingConverter.serialize(dataModel));

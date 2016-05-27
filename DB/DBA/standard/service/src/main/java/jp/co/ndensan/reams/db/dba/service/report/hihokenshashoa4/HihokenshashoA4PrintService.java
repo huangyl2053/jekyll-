@@ -5,14 +5,24 @@
  */
 package jp.co.ndensan.reams.db.dba.service.report.hihokenshashoa4;
 
-import java.util.ArrayList;
-import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.report.hihokenshashoa4.HihokenshashoA4BodyItem;
 import jp.co.ndensan.reams.db.dba.business.report.hihokenshashoa4.HihokenshashoA4Joho;
 import jp.co.ndensan.reams.db.dba.business.report.hihokenshashoa4.HihokenshashoA4Proerty;
 import jp.co.ndensan.reams.db.dba.business.report.hihokenshashoa4.HihokenshashoA4Report;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashoa4.HihokenshashoA4ReportSource;
-import jp.co.ndensan.reams.uz.uza.report.Printer;
+import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.Report;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
+import jp.co.ndensan.reams.uz.uza.report.ReportManager;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
  * 介護保険被保険者証Printクラスです。
@@ -29,12 +39,31 @@ public class HihokenshashoA4PrintService {
      */
     public SourceDataCollection print(HihokenshashoA4Joho hihokenshashoA4Joho) {
         HihokenshashoA4Proerty property = new HihokenshashoA4Proerty();
-        return new Printer<HihokenshashoA4ReportSource>().spool(property, toReports(hihokenshashoA4Joho));
+        try (ReportManager reportManager = new ReportManager()) {
+            try (ReportAssembler<HihokenshashoA4ReportSource> assembler = createAssembler(property, reportManager)) {
+                ReportSourceWriter<HihokenshashoA4ReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBA介護資格,
+                        property.reportId(),
+                        FlexibleDate.getNowDate(),
+                        reportSourceWriter);
+                for (HihokenshashoA4BodyItem item : hihokenshashoA4Joho.getBodyItem()) {
+                    item.setImageField1(ninshoshaSource.denshiKoin);
+                }
+                HihokenshashoA4Report report = HihokenshashoA4Report.createReport(hihokenshashoA4Joho.getBodyItem());
+                report.writeBy(reportSourceWriter);
+            }
+            return reportManager.publish();
+        }
     }
 
-    private static List<HihokenshashoA4Report> toReports(HihokenshashoA4Joho joho) {
-        List<HihokenshashoA4Report> list = new ArrayList<>();
-        list.add(HihokenshashoA4Report.createReport(joho.getBodyItem()));
-        return list;
+    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
+            IReportProperty<T> property, ReportManager manager) {
+        ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
+        for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
+            builder.addBreak(breaker);
+        }
+        builder.isHojinNo(property.containsHojinNo());
+        builder.isKojinNo(property.containsKojinNo());
+        return builder.<T>create();
     }
 }

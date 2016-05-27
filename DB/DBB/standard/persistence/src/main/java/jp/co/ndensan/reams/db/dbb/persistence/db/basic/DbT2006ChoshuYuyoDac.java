@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護賦課徴収猶予のデータアクセスクラスです。
+ *
+ * @reamsid_L DBB-9999-012 xicongwang
  */
 public class DbT2006ChoshuYuyoDac implements ISaveable<DbT2006ChoshuYuyoEntity> {
 

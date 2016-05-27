@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryo;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -34,7 +35,6 @@ public class SonoTashiryoReportSource implements IReportSource {
     @ReportItem(name = "sakuseiDD", length = 2, order = 10)
     public RString sakuseiDD;
     @ReportItem(name = "hihokenshaNo", length = 10, order = 11)
-    @ReportExpandedInfo(id = "X")
     public RString hihokenshaNo;
     @ReportItem(name = "chosaGengo", length = 2, order = 12)
     public RString chosaGengo;
@@ -60,12 +60,6 @@ public class SonoTashiryoReportSource implements IReportSource {
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
-
-    /**
-     * 改ページ条件のキーです。
-     */
-    public enum ReportSourceFields {
-
-        imgSonotashiryo,
-    }
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation hihokennshaNo;
 }

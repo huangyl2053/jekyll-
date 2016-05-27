@@ -34,111 +34,36 @@ and open the template in the editor.
         AND  C."yukoKaishiYMD" <![CDATA[<=]]> B."taishoYMD" AND B."taishoYMD" <![CDATA[<=]]> C."yukoShuryoYMD"
         ORDER BY B."nyushoYMD" LIMIT 2
     </select>
-     
-    <resultMap id="result_get事業者名称" type="jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.ShisetsuJyohoRelateEntity">
-        <result property="台帳種別" column="daichoShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="入所施設種類" column="nyushoShisetsuShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="入所施設コード" column="nyushoShisetsuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
-        <result property="入所年月日" column="nyushoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="退所年月日" column="taishoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="退所事由" column="tekiyoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="適用日" column="tekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="事業者名称" column="jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="電話番号" column="telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="FAX番号" column="faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="郵便番号" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="事業者住所" column="jigyoshaAddress" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    </resultMap>
-    
-    <select id="selct他市町村住所地特例" resultMap="result_get事業者名称"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.ShisetsuJyohoParameter" fetchSize="500">
+    <select id="setTatokuKanrenChohyoRenrakuhyo"
+            resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TatokuKanrenChohyoShijiDataEntity" fetchSize="500">
         SELECT
-            dbT1004."daichoShubetsu",
-            dbT1004."nyushoShisetsuShurui",
-            dbT1004."nyushoShisetsuCode",
-            dbT1004."nyushoYMD",
-            dbT1004."taishoYMD",
-            dbT1003."tekiyoJiyuCode",
-            dbT1003."tekiyoYMD"
+        B."nyushoYMD" AS "入所年月日",
+        C."jigyoshaMeisho" AS "事業者名称",
+        C."telNo" AS "電話番号",
+        C."faxNo" AS "fax番号",
+        C."yubinNo" AS "郵便番号",
+        C."jigyoshaJusho" AS "事業者住所"
         FROM
-            (SELECT
-                  "sochiHokenshaNo"
-                  , "kaijoYMD"
-                  , "shikibetsuCode"
-                  , "tekiyoJiyuCode"
-                  , "tekiyoYMD" 
-                FROM
-                  rgdb."DbT1003TashichosonJushochiTokurei"
-                WHERE
-                    "shikibetsuCode" = #{shikibetsuCode}
-                AND "idoYMD" = #{idoYMD}
-                AND "edaNo" =#{edaNo}
-                AND "logicalDeletedFlag" =false
-               ) AS dbT1003 
-        LEFT JOIN 
-            rgdb."DbT1004ShisetsuNyutaisho" AS dbT1004
-        ON
-            dbT1004."shikibetsuCode" = dbT1003."shikibetsuCode"
-        AND 
-            dbT1004."daichoShubetsu" = #{psmShikibetsuTaisho}
+        rgdb."DbT1003TashichosonJushochiTokurei" A,
+        rgdb."DbT1004ShisetsuNyutaisho" B,
+        rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" C
+        WHERE
+        A."shikibetsuCode" =#{識別コード}
+        AND  A."idoYMD" =#{idoYMD}
+        AND  A."edaNo" =#{edaNo}
+        AND  A."logicalDeletedFlag" <![CDATA[<>]]> true
+        AND  A."shikibetsuCode" = B."shikibetsuCode"
+        AND  NOT(
+        (A."tekiyoYMD" <![CDATA[>]]> B."nyushoYMD" AND A."tekiyoYMD" <![CDATA[>=]]> B."taishoYMD")
         AND
-            ((dbT1003."kaijoYMD" IS NULL AND (dbT1004."taishoYMD" IS NULL OR dbT1003."tekiyoYMD" <![CDATA[<=]]> dbT1004."taishoYMD"))
-        OR  ((dbT1003."kaijoYMD" IS NOT NULL
-        AND ((dbT1004."taishoYMD" IS NULL AND dbT1004."nyushoYMD" <![CDATA[<]]> dbT1003."kaijoYMD")
-        OR  (dbT1004."nyushoYMD" <![CDATA[<]]> dbT1003."kaijoYMD" AND dbT1004."taishoYMD" <![CDATA[>]]> dbT1003."tekiyoYMD")))))
-        LEFT JOIN 
-            rgur."UrT0507Hokenja" AS urT0507
-        ON
-            urT0507."hokenjaNo" = dbT1003."sochiHokenshaNo"
-        AND urT0507."hokenjaShubetsu" = '08'
-        ORDER BY
-            dbT1004."nyushoYMD" DESC
+        (A."kaijoYMD" <![CDATA[<=]]> B."nyushoYMD" AND A."kaijoYMD" <![CDATA[<]]> B."taishoYMD")
+        )
+        AND  C."jigyoshaShubetsu" = B."nyushoShisetsuShurui"
+        AND  C."jigyoshaNo" = B."nyushoShisetsuCode"
+        AND  C."yukoKaishiYMD" <![CDATA[<=]]> B."taishoYMD"  AND B."taishoYMD" <![CDATA[<=]]> C."yukoShuryoYMD"
+        LIMIT 1
     </select>
-   
-    <select id="get事業者名称_介護保険施設" resultMap="result_get事業者名称"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.ShisetsuJyohoParameter" fetchSize="500">
-        SELECT
-            dbT7060."jigyoshaName" AS "jigyoshaMeisho",
-            dbT7060."telNo",
-            dbT7060."faxNo",
-            dbT7060."yubinNo",
-            dbT7060."jigyoshaAddress"
-        FROM
-            rgdb."DbT7060KaigoJigyosha" AS dbT7060
-        WHERE
-            dbT7060."jigyoshaNo" = #{nyushoShisetsuCode}
-            AND dbT7060."yukoKaishiYMD" = (
-                SELECT
-                MAX(dbT7060Kaigo."yukoKaishiYMD") AS "yukoKaishiYMD"
-                FROM
-                rgdb."DbT7060KaigoJigyosha" AS dbT7060Kaigo
-                WHERE
-                dbT7060Kaigo."jigyoshaNo" = #{nyushoShisetsuCode})
-    </select>
-
-    <select id="get事業者名称_住所地特例対象施設" resultMap="result_get事業者名称"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.ShisetsuJyohoParameter" fetchSize="500">
-        SELECT
-            dbT1005."jigyoshaMeisho",
-            dbT1005."telNo",
-            dbT1005."faxNo",
-            dbT1005."yubinNo",
-            dbT1005."jigyoshaAddress"
-        FROM
-            rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS dbT1005
-        WHERE
-            dbT1005."jigyoshaShubetsu" = #{juushotiTokureitaishouShisetu}
-        AND dbT1005."jigyoshaNo" = #{nyushoShisetsuCode}
-        AND dbT1005."yukoKaishiYMD" = (
-            SELECT
-                MAX(dbT1005Kaigo."yukoKaishiYMD") AS "yukoKaishiYMD"
-            FROM
-                rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS dbT1005Kaigo
-            WHERE
-                dbT1005Kaigo."jigyoshaShubetsu" = #{juushotiTokureitaishouShisetu}
-            AND dbT1005Kaigo."jigyoshaNo" = #{nyushoShisetsuCode})
-    </select>
-    
     <select id="selectTaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatis"
             resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashihenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatisParameter">

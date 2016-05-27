@@ -7,15 +7,17 @@ package jp.co.ndensan.reams.db.dba.business.core.hanyolisthihokenshadaicho;
 
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link HanyoListHihokenshadaichoProcess}の資格取得判定のためのクラスです。
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShikakShutokuHantei {
 
-    private String codeShubetsu;
+    private RString codeShubetsu;
     private Code jiyuCode;
     private FlexibleDate tekiyoYMD;
     private FlexibleDate todokedeYMD;

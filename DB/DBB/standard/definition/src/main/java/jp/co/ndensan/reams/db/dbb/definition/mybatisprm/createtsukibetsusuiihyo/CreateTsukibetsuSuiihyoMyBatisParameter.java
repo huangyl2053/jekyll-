@@ -25,6 +25,7 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
     private static final RString 選択対象_地区1 = new RString("地区1");
     private static final RString 選択対象_地区2 = new RString("地区2");
     private static final RString 選択対象_地区3 = new RString("地区3");
+    private static final int INT_65 = 65;
     private final FlexibleYear choteiNendo;
     private final RString choteiKijunNichiji;
     private final RString kakutukiShikakuKijunNichi;
@@ -283,13 +284,14 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
             開始生年月日 = 年齢基準日.minusYear(Integer.valueOf(年齢終了.toString()));
             is1と3場合 = true;
         }
-        if (RString.isNullOrEmpty(年齢開始) && (年齢基準日 != null && !年齢基準日.isEmpty())) {
+        if (RString.isNullOrEmpty(年齢開始) && !RString.isNullOrEmpty(年齢終了) && (年齢基準日 != null && !年齢基準日.isEmpty())) {
             開始生年月日 = 年齢基準日.minusYear(Integer.valueOf(年齢終了.toString()));
-            is2場合 = true;
+            終了生年月日 = 年齢基準日.minusYear(INT_65);
+            is1と3場合 = true;
         }
         if (!RString.isNullOrEmpty(年齢開始) && RString.isNullOrEmpty(年齢終了) && (年齢基準日 != null && !年齢基準日.isEmpty())) {
             終了生年月日 = 年齢基準日.minusYear(Integer.valueOf(年齢開始.toString()));
-            is1と3場合 = true;
+            is2場合 = true;
         }
         boolean is町域 = 選択対象_町域.equals(選択対象);
         boolean is行政区 = 選択対象_行政区.equals(選択対象);

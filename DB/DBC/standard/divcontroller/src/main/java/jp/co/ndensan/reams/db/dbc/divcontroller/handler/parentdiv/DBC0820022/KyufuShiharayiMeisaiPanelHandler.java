@@ -150,7 +150,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
      */
     public void click計算する() {
         if (div.getPanelThree().getPanelFour().getTxtTanyi().getValue() != null
-                || div.getPanelThree().getPanelFour().getTxtKaisu().getValue() != null) {
+                && div.getPanelThree().getPanelFour().getTxtKaisu().getValue() != null) {
             Decimal data = div.getPanelThree().getPanelFour().getTxtTanyi().getValue().multiply(
                     div.getPanelThree().getPanelFour().getTxtKaisu().getValue());
             div.getPanelThree().getPanelFour().getTxtServiceTanyi().setValue(data);

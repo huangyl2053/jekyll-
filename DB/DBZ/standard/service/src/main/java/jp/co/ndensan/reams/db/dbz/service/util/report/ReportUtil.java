@@ -237,6 +237,9 @@ public final class ReportUtil {
         TsuchishoTeikeibunInfo info = tsuchishoTeikeibunManager.get通知書定形文検索(subGyomuCode, reportId,
                 kamokuCode, patternNo, sentenceNo, kijunDate);
         ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(subGyomuCode, reportId);
+        if (info == null) {
+            return textHenkanRule.editText(RString.EMPTY);
+        }
         return textHenkanRule.editText(info.get文章());
     }
 
@@ -252,7 +255,7 @@ public final class ReportUtil {
         ChohyoSeigyoKyotsuManager manager = new ChohyoSeigyoKyotsuManager();
         ChohyoSeigyoKyotsu kyotsu = manager.get帳票制御共通(subGyomuCode, reportBunruiId);
         if (kyotsu != null) {
-            kyotsu.get定型文文字サイズ();
+            return kyotsu.get定型文文字サイズ();
         }
         return RString.EMPTY;
     }

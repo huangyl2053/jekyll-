@@ -241,23 +241,17 @@ public class ShokanbaraiJyokyoShokai {
      * @param 被保険者番号 HihokenshaNo
      * @param サービス年月 FlexibleYearMonth
      * @param 整理番号 RString
-     * @param 様式番号 RString
      * @return List<ServiceTeikyoShomeishoResult> List
      */
     public List<ServiceTeikyoShomeishoResult> getServiceTeikyoShomeishoList(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
-            RString 整理番号,
-            RString 様式番号) {
-
+            RString 整理番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
         requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス年月.toString()));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
-        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_様式番号.toString()));
-
         ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
-                被保険者番号, サービス年月, 整理番号, 様式番号, null, null, null, null, null);
-
+                被保険者番号, サービス年月, 整理番号, null, null, null, null, null, null);
         IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
         List<ServiceTeikyoShomeisho> entityList = mapper.getサービス提供証明書一覧(parameter);
         if (entityList == null || entityList.isEmpty()) {

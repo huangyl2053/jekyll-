@@ -16,20 +16,15 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ChosaIraiIchiranhyoItem {
 
-    private final ChosaIraiIchiranhyoHeadItem headItem;
     private final ChosaIraiIchiranhyoBodyItem bodyItem;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headItem 認定調査依頼一覧表ヘッダのITEM
      * @param bodyItem 認定調査依頼一覧表ボディのITEM
      */
     public ChosaIraiIchiranhyoItem(
-            ChosaIraiIchiranhyoHeadItem headItem,
             ChosaIraiIchiranhyoBodyItem bodyItem) {
-
-        this.headItem = headItem;
         this.bodyItem = bodyItem;
     }
 }

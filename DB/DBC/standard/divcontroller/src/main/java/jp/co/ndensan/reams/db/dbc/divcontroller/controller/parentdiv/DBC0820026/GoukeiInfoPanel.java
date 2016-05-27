@@ -186,7 +186,7 @@ public class GoukeiInfoPanel {
      */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnKinkyujiShisetsu(GoukeiInfoPanelDiv div) {
         getHandler(div).putViewState();
-        return ResponseData.of(div).forwardWithEventName(DBC0820026TransitionEventName.緊急時施設療養型).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820026TransitionEventName.緊急時施設療養費).respond();
     }
 
     /**
@@ -197,7 +197,7 @@ public class GoukeiInfoPanel {
      */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnShokujihiyo(GoukeiInfoPanelDiv div) {
         getHandler(div).putViewState();
-        return ResponseData.of(div).forwardWithEventName(DBC0820026TransitionEventName.食事).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820026TransitionEventName.食事費用).respond();
     }
 
     /**

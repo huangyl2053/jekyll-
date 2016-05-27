@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 抽出条件の生成_DB検索用のパラメータです。
+ *
+ * @reamsid_L DBA-0330-010 xuyue
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

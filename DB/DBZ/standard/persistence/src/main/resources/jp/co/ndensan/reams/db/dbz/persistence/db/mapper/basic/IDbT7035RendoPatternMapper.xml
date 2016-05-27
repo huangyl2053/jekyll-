@@ -84,6 +84,6 @@
         WHERE
         rgdb."DbT7035RendoPattern"."shubetsu" = 'B1' AND
         rgdb."DbT7035RendoPattern"."yukoKaishiYMD" <![CDATA[<=]]> #{systemdate} AND
-        rgdb."DbT7035RendoPattern"."yukoShuryoYMD" <![CDATA[>]]> #{systemdate}
+        #{systemdate}<![CDATA[<=]]> rgdb."DbT7035RendoPattern"."yukoShuryoYMD"
     </select>
 </mapper>

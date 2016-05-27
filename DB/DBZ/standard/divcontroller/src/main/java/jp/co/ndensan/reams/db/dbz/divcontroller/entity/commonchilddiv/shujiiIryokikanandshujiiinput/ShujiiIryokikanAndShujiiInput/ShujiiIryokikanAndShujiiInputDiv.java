@@ -417,6 +417,13 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
         createHandler().initialize(shichosonCode, shinseishoKanriNo, gyomuCode);
     }
 
+    @Override
+    @JsonIgnore
+    public void initialize(LasdecCode shichosonCode, ShinseishoKanriNo shinseishoKanriNo, SubGyomuCode gyomuCode, RString shujiiIryokikanCode,
+            RString iryoKikanMeisho, RString shujiiCode, RString shujiiName) {
+        createHandler().initialize(shichosonCode, shinseishoKanriNo, gyomuCode, shujiiIryokikanCode, iryoKikanMeisho, shujiiCode, shujiiName);
+    }
+
     @JsonIgnore
     private ShujiiIryokikanAndShujiiInputHandler createHandler() {
         return new ShujiiIryokikanAndShujiiInputHandler(this);

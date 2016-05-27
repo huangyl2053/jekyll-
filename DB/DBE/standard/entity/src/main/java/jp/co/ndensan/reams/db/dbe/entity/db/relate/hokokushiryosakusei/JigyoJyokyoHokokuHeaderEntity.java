@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 /**
  * 要介護認定事業状況報告の情報です。
  *
- * @reamsid_L DBE-1450-020 wangxiaodong
+ * @reamsid_L DBE-1450-020 wangxiaodong
  */
 @OnNextSchema("rgdb")
 public class JigyoJyokyoHokokuHeaderEntity extends DbTableEntityBase<JigyoJyokyoHokokuHeaderEntity> implements IDbAccessable {

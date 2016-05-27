@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護宛名基本情報を取得するクラスです。
  *
- * @reamsid_L DBA-0030-010 wangxiaodong
+ * @reamsid_L DBA-0030-010 wangxiaodong
  */
 public class KaigoAtenaKihonFinder {
 
@@ -46,8 +46,7 @@ public class KaigoAtenaKihonFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoAtenaKihonFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KaigoAtenaKihonFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KaigoAtenaKihonFinder}のインスタンス
      */
     public static KaigoAtenaKihonFinder createInstance() {
         return InstanceProvider.create(KaigoAtenaKihonFinder.class);

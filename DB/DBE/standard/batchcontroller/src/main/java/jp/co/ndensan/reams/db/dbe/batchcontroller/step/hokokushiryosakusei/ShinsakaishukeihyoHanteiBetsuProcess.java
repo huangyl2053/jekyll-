@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 審査判定の変更状況の取得バッチクラスです。
  *
- * @reamsid_L DBE-1450-020 wangxiaodong
+ * @reamsid_L DBE-1450-020 wangxiaodong
  */
 public class ShinsakaishukeihyoHanteiBetsuProcess extends BatchKeyBreakBase<SinsakaiHanteiJyokyoHeaderEntity> {
 

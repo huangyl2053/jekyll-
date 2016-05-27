@@ -20,28 +20,58 @@ public class ShorijyokyoEntity {
     private FlexibleDate 基準年月日;
     private YMDHMS 基準日時;
 
+    /**
+     * 処理名のgetメソッドです。
+     *
+     * @return 処理名
+     */
     public RString get処理名() {
         return 処理名;
     }
 
+    /**
+     * 処理名のsetメソッドです。
+     *
+     * @param 処理名 処理名
+     */
     public void set処理名(RString 処理名) {
         this.処理名 = 処理名;
 
     }
 
+    /**
+     * 基準年月日のgetメソッドです。
+     *
+     * @return 基準年月日
+     */
     public FlexibleDate get基準年月日() {
         return 基準年月日;
     }
 
+    /**
+     * 基準年月日のsetメソッドです。
+     *
+     * @param 基準年月日 基準年月日
+     */
     public void set基準年月日(FlexibleDate 基準年月日) {
         this.基準年月日 = 基準年月日;
 
     }
 
+    /**
+     * 基準日時のgetメソッドです。
+     *
+     * @return 基準日時
+     */
     public YMDHMS get基準日時() {
         return 基準日時;
     }
 
+    /**
+     * 基準日時のsetメソッドです。
+     *
+     * @param 基準日時 基準日時
+     */
     public void set基準日時(YMDHMS 基準日時) {
         this.基準日時 = 基準日時;
 

@@ -42,6 +42,15 @@ public class NinteiShinseiJohoManager {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link NinteiShinseiJohoManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link NinteiShinseiJohoManager}のインスタンス
+     */
+    public static NinteiShinseiJohoManager createInstance() {
+        return InstanceProvider.create(NinteiShinseiJohoManager.class);
+    }
+
+    /**
      * 主キーに合致する要介護認定申請情報を返します。
      *
      * @param 申請書管理番号 申請書管理番号

@@ -33,4 +33,5 @@ public class SeikaatsuhogoDataModel implements Serializable {
     private RString 扶助種類コード;
     private RString 扶助種類;
     private RString 表示モード;
+    private RString 受給停止期間;
 }

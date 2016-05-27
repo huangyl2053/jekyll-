@@ -221,7 +221,7 @@ public class YokaigoNinteiTaskListHandler {
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
             if (!調査入手List.isEmpty()) {
                 ShinSaKaiBusiness 前調査入手Model = YokaigoNinteiTaskListFinder.createInstance().
-                        get前意見書依頼(YokaigoNinteiTaskListParameter.
+                        get前調査入手モード(YokaigoNinteiTaskListParameter.
                                 createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
                 ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前調査入手Model.get要介護認定完了情報Lsit()));
             } else {

@@ -9,17 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteijohoteikyo.HihokenshaJyuhouBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteijohoteikyo.NinnteiRiriBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0900001.YokaigoNinteiJohoTeikyoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0900001.dgNinteiKekkaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteijohoteikyo.YokaigoNinteiJohoTeikyoFinder;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiHoreiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IsIkenshoDoiUmu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.IsExistJohoTeikyoDoui;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -88,7 +92,7 @@ public class YokaigoNinteiJohoTeikyoHandler {
                 dgNinteiKekkaIchiran_Row row = new dgNinteiKekkaIchiran_Row();
                 row.getNinteiShinseiDay().setValue(getNull(business.get認定申請日()));
                 row.setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(business.get申請区分_申請時().getKey()).get名称());
-                row.setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(business.get申請区分_法令().getKey()).toRString());
+                row.setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(business.get申請区分_法令().getKey()).get名称());
                 row.getShinseiTorisageDay().setValue(getNull(business.get取下年月日()));
                 row.getNinteiDay().setValue(getNull(business.get二次判定年月日()));
                 row.setYoKaigodo(YokaigoJotaiKubun09.toValue(business.get二次判定区分コード().getKey()).get名称());
@@ -122,9 +126,10 @@ public class YokaigoNinteiJohoTeikyoHandler {
                 row.setShujiiCode(business.get主治医コード());
                 row.setShujiiName(business.get主治医氏名());
                 row.getShinsakaiKaisaiYoteiYMD().setValue(getNull(business.get審査会開催予定日()));
-                row.setIkenshoDoiFlag(business.is情報提供への同意有無());
-                row.setJohoteikyoDoiFlag(business.is意見書同意フラグ());
+                row.setIkenshoDoiFlag(business.is意見書同意フラグ());
+                row.setJohoteikyoDoiFlag(business.is情報提供への同意有無());
                 row.setShinseishoKanriNo(business.get申請書管理番号());
+                row.setShichosonCode(business.get市町村コード());
                 ichiran_Row.add(row);
             }
         }
@@ -154,14 +159,14 @@ public class YokaigoNinteiJohoTeikyoHandler {
         div.getNinteiKekkaShosai().getTxtNinteiChosaIraibi().setValue(row.getNinteichosaIraiYMD().getValue());
         div.getNinteiKekkaShosai().getTxtNinteiChosaJisshibi().setValue(row.getNinteiChosaJisshiDay().getValue());
         div.getNinteiKekkaShosai().getTxtNinteiChosaJuryobi().setValue(row.getNinteichosaJuryoYMD().getValue());
-        div.getCcdChosaItakusakiAndChosainInput().setTxtChosaItakusakiCode(row.getNinteiChosaItakusakiCode());
-        div.getCcdChosaItakusakiAndChosainInput().setTxtChosaItakusakiName(row.getJigyoshaMeisho());
-        div.getCcdChosaItakusakiAndChosainInput().setTxtChosainCode(row.getNinteiChosainCode());
-        div.getCcdChosaItakusakiAndChosainInput().setTxtChosainName(row.getChosainShimei());
+        div.getCcdChosaItakusakiAndChosainInput().initialize(new RString(ChosaItakusakiAndChosainInputDiv.ShoriType.SimpleInputMode.toString()),
+                row.getNinteiChosaItakusakiCode(), row.getJigyoshaMeisho(), row.getNinteiChosainCode(), row.getChosainShimei());
+        div.getCcdChosaItakusakiAndChosainInput().setHdnShichosonCode(row.getShichosonCode());
+        div.getCcdChosaItakusakiAndChosainInput().setHdnShinseishoKanriNo(RString.EMPTY);
         div.getNinteiKekkaShosai().getTxtIkenshoIraibi().setValue(row.getIkenshoSakuseiIraiYMD().getValue());
         div.getNinteiKekkaShosai().getTxtIkenshoJuryobi().setValue(row.getShujiiIkenshoJuryoDay().getValue());
-        // 主治医医療機関／主治医入力共通部品 QA1171
-        //        div.getCcdShujiiIryoKikanAndShujiiInput().initialize(LasdecCode.EMPTY, ShinseishoKanriNo.EMPTY, SubGyomuCode.EMPTY);
+        div.getCcdShujiiIryoKikanAndShujiiInput().initialize(new LasdecCode(row.getShichosonCode()), ShinseishoKanriNo.EMPTY, SubGyomuCode.EMPTY,
+                row.getShujiiIryokikanCode(), row.getIryoKikanMeisho(), row.getShujiiCode(), row.getShujiiName());
         div.getNinteiKekkaShosai().getTxtShinsakaiYoteibi().setValue(row.getShinsakaiKaisaiYoteiYMD().getValue());
         div.getNinteiKekkaShosai().getTxtShinsakaiKaisaibi().setValue(row.getKaigoNinteiShinsakaiKaisaiDay().getValue());
     }

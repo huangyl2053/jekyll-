@@ -401,6 +401,11 @@ public class SetaiShotokuIchiranHandler {
         div.getDgSetaiShotoku().setDataSource(list);
     }
 
+    /**
+     * アクセスログ
+     *
+     * @param 世帯員所得情報リスト 世帯員所得情報リスト
+     */
     public void accessLog(List<? extends SetaiinShotoku> 世帯員所得情報リスト) {
         List<PersonalData> personalData = new ArrayList();
         for (SetaiinShotoku setaiin : 世帯員所得情報リスト) {

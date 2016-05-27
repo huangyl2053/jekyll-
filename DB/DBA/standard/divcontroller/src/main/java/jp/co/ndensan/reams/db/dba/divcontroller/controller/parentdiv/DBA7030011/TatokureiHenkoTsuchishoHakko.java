@@ -219,12 +219,12 @@ public class TatokureiHenkoTsuchishoHakko {
         item.setHenkomaeShisetsuName(business.get変更前施設名称());
         item.setHenkomaeShisetsuTelNo(business.get変更前施設電話番号());
         item.setHenkomaeShisetsuFaxNo(business.get変更前施設FAX番号());
-        item.setHenkomaeShisetsuYubinNo(business.get変更前施設住所());
-        item.setHenkomaeShisetsuJusho(business.get変更後施設名称());
+        item.setHenkomaeShisetsuYubinNo(business.get変更前施設郵便番号());
+        item.setHenkomaeShisetsuJusho(business.get変更前施設住所());
         item.setHenkogoShisetsuName(business.get変更後施設名称());
         item.setHenkogoShisetsuTelNo(business.get変更後施設電話番号());
         item.setHenkogoShisetsuFaxNo(business.get変更後施設FAX番号());
-        item.setHenkogoShisetsuYubinNo(business.get変更後施設住所());
+        item.setHenkogoShisetsuYubinNo(business.get変更後施設郵便番号());
         item.setHenkogoShisetsuJusho(business.get変更後施設住所());
         return item;
     }

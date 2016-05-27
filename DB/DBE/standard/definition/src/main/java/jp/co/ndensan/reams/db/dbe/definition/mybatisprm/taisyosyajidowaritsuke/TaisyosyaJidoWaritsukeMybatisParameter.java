@@ -10,7 +10,7 @@ import lombok.Getter;
 /**
  * 対象者自動割付のMybatisパラメータクラスです。
  *
- * @reamsid_L DBE-1350-040 wangxiaodong
+ * @reamsid_L DBE-1350-040 wangxiaodong
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

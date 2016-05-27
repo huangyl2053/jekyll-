@@ -94,9 +94,9 @@ public class ServiceKeikakuHiPanel {
             return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.一覧に戻る).respond();
         }
         handler.set申請共通エリア(サービス年月, 申請日, 事業者番号, 明細番号, 様式番号);
-        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setIsOpen(false);
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(true);
         if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
-            div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setIsOpen(false);
+            div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(true);
             div.getPanelServiceKeikakuhiDown().setDisplayNone(true);
             List<ShokanServicePlan200904Result> entity200904List
                     = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200904(
@@ -213,14 +213,14 @@ public class ServiceKeikakuHiPanel {
     }
 
     /**
-     * 「取消する」ボタンを押下した際に実行します。
+     * サービス計画費登録エリアの「取消する」ボタンを押下した際に実行します。
      *
      * @param div ServiceKeikakuHiPanelDiv
      * @return 償還払い費支給申請決定_サービス提供証明書(サービス計画費)画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnCancel(ServiceKeikakuHiPanelDiv div) {
         getHandler(div).clickクリア();
-        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setIsOpen(false);
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(true);
         return createResponse(div);
     }
 
@@ -239,7 +239,7 @@ public class ServiceKeikakuHiPanel {
             getHandler(div).確定_削除();
         }
         getHandler(div).clickクリア();
-        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setIsOpen(false);
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(true);
         return createResponse(div);
     }
 
@@ -384,7 +384,7 @@ public class ServiceKeikakuHiPanel {
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKihonInfo(ServiceKeikakuHiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.基本情報).respond();
     }
 
     /**
@@ -395,7 +395,7 @@ public class ServiceKeikakuHiPanel {
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKyufuhiMeisai(ServiceKeikakuHiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.給付費明細).respond();
     }
 
     /**
@@ -406,7 +406,7 @@ public class ServiceKeikakuHiPanel {
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnTokuteiShinryo(ServiceKeikakuHiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.特定診療費).respond();
     }
 
     /**
@@ -417,7 +417,7 @@ public class ServiceKeikakuHiPanel {
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnTokuteiNyushosha(ServiceKeikakuHiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.特定入所者費用).respond();
     }
 
     /**
@@ -428,7 +428,7 @@ public class ServiceKeikakuHiPanel {
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnGokeiInfo(ServiceKeikakuHiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.合計情報).respond();
     }
 
     /**
@@ -439,7 +439,7 @@ public class ServiceKeikakuHiPanel {
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKyufuhiMeisaiJyuchi(ServiceKeikakuHiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.給付費明細_住特).respond();
     }
 
     /**
@@ -450,7 +450,7 @@ public class ServiceKeikakuHiPanel {
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKinkyujiShoteiShikan(ServiceKeikakuHiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.緊急時_所定疾患).respond();
     }
 
     /**
@@ -461,7 +461,7 @@ public class ServiceKeikakuHiPanel {
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKinkyujiShisetsu(ServiceKeikakuHiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.緊急時施設療養費).respond();
     }
 
     /**
@@ -472,7 +472,7 @@ public class ServiceKeikakuHiPanel {
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnShokujiHiyo(ServiceKeikakuHiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.食事費用).respond();
     }
 
     /**
@@ -483,7 +483,7 @@ public class ServiceKeikakuHiPanel {
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnSeikyugakuShukei(ServiceKeikakuHiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.請求額集計).respond();
     }
 
     /**
@@ -494,7 +494,7 @@ public class ServiceKeikakuHiPanel {
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnShafukukeigenGaku(ServiceKeikakuHiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.社福軽減額).respond();
     }
 
     private boolean checkNull(List list) {

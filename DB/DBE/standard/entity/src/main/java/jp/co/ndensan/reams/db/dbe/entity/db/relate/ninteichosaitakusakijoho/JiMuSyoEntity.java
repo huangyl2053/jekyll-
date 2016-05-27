@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JiMuSyoEntity {
 
     private FlexibleDate temp_ninteiChosaYoteiYMD;
-    private RString Temp_ninteiChosaItakusakiCode;
-    private RString Temp_jigyoshaMeisho;
+    private RString temp_ninteiChosaItakusakiCode;
+    private RString temp_jigyoshaMeisho;
     private RString 空きの午前イメージ;
     private int 空きの午前件数;
     private RString 空きの午後イメージ;

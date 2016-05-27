@@ -16,6 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBE {
 
     /**
+     * 事務局用介護認定審査対象者一覧表の帳票ID。
+     */
+    DBE517011(new ReportId("DBE517011_ShinsakaishiryoA4"), new RString("事務局用介護認定審査対象者一覧表")),
+    /**
      * 医療機関・主治医一覧表の帳票ID。
      */
     DBE591001(new ReportId("DBE591001_ShujiiIryokikanShujiiIchiranhyo"), new RString("医療機関・主治医一覧表")),

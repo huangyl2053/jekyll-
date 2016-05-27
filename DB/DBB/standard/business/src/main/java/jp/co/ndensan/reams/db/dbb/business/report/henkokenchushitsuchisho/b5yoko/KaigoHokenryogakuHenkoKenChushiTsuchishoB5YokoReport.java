@@ -66,13 +66,13 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReport
                 KibetsuBusiness kibetsuBusiness = new KibetsuBusiness();
                 RString 普徴期 = 普徴期リスト.get(i - 1);
                 RString 普徴月 = 普徴月リスト.get(i - 1).getコード();
-                kibetsuBusiness.setListKibetsu_1(普徴期.padRight(SPACE, 2));
-                kibetsuBusiness.setListKibetsu_2(普徴月);
+                kibetsuBusiness.setListKibetsu_5(普徴期.padRight(SPACE, 2));
+                kibetsuBusiness.setListKibetsu_6(普徴月);
                 set普徴期別金額(kibetsuBusiness, 普徴期, 更正前_普徴期別金額リスト, 更正後_普徴期別金額リスト);
                 RString 特徴期 = 特徴期リスト.get(i - 1);
                 RString 特徴月 = 特徴月リス.get(i - 1).getコード();
-                kibetsuBusiness.setListKibetsu_5(特徴期.padRight(SPACE, 2));
-                kibetsuBusiness.setListKibetsu_6(特徴月);
+                kibetsuBusiness.setListKibetsu_1(特徴期.padRight(SPACE, 2));
+                kibetsuBusiness.setListKibetsu_2(特徴月);
                 set特徴期別金額(kibetsuBusiness, 特徴期, 更正前_特徴期別金額リスト, 更正後_特徴期別金額リスト);
                 kibetsuBusiness.setListZuiji_1(get随時(特徴期, 普徴納期情報リスト));
 
@@ -177,11 +177,11 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReport
         Decimal 更正後_普徴期別金額 = get普徴期別金額(期, 更正後_普徴期別金額リスト);
         if (Decimal.ZERO.equals(更正前_普徴期別金額)
                 && Decimal.ZERO.equals(更正後_普徴期別金額)) {
-            kibetsuBusiness.setListKibetsu_3(RString.EMPTY);
-            kibetsuBusiness.setListKibetsu_4(RString.EMPTY);
+            kibetsuBusiness.setListKibetsu_7(RString.EMPTY);
+            kibetsuBusiness.setListKibetsu_8(RString.EMPTY);
         } else {
-            kibetsuBusiness.setListKibetsu_3(new RString(更正前_普徴期別金額.toString()));
-            kibetsuBusiness.setListKibetsu_4(new RString(更正後_普徴期別金額.toString()));
+            kibetsuBusiness.setListKibetsu_7(new RString(更正前_普徴期別金額.toString()));
+            kibetsuBusiness.setListKibetsu_8(new RString(更正後_普徴期別金額.toString()));
         }
     }
 
@@ -189,7 +189,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReport
         Decimal 普徴期別金額 = Decimal.ZERO;
         for (UniversalPhase universalPhase : 普徴期別金額リスト) {
 
-            if (new RString(universalPhase.get期()).equals(期)) {
+            if (new RString(universalPhase.get期()).padZeroToLeft(2).equals(期.padZeroToLeft(2))) {
                 普徴期別金額 = universalPhase.get金額();
                 break;
             }
@@ -205,11 +205,11 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReport
         Decimal 更正後_特徴期別金額 = get特徴期別金額(期, 更正後_特徴期別金額リスト);
         if (Decimal.ZERO.equals(更正前_特徴期別金額)
                 && Decimal.ZERO.equals(更正後_特徴期別金額)) {
-            kibetsuBusiness.setListKibetsu_7(RString.EMPTY);
-            kibetsuBusiness.setListKibetsu_8(RString.EMPTY);
+            kibetsuBusiness.setListKibetsu_3(RString.EMPTY);
+            kibetsuBusiness.setListKibetsu_4(RString.EMPTY);
         } else {
-            kibetsuBusiness.setListKibetsu_7(new RString(更正前_特徴期別金額.toString()));
-            kibetsuBusiness.setListKibetsu_8(new RString(更正後_特徴期別金額.toString()));
+            kibetsuBusiness.setListKibetsu_3(new RString(更正前_特徴期別金額.toString()));
+            kibetsuBusiness.setListKibetsu_4(new RString(更正後_特徴期別金額.toString()));
         }
     }
 
@@ -217,7 +217,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReport
         Decimal 特徴期別金額 = Decimal.ZERO;
         for (CharacteristicsPhase characteristicsPhase : 特徴期別金額リスト) {
 
-            if (characteristicsPhase.get期().equals(期)) {
+            if (characteristicsPhase.get期().padZeroToLeft(2).equals(期.padZeroToLeft(2))) {
                 特徴期別金額 = characteristicsPhase.get金額();
                 break;
             }

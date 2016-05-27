@@ -10,17 +10,18 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.koikinaijushochitokurei.KoikinaiJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbu.definition.koikinaijushochitokurei.KoikinaiJushochiTokureiItiranEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -188,11 +189,11 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
             return timeToRString(該当データ.get生年月日());
         } else if (JuminShubetsu.外国人.getCode().equals(該当データ.get住民種別コード())
                 || JuminShubetsu.住登外個人_外国人.getCode().equals(該当データ.get住民種別コード())) {
-            if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(BusinessConfig
-                    .get(ConfigNameDBU.外国人表示制御_生年月日表示方法))) {
+            if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(DbBusinessConfig
+                    .get(ConfigNameDBU.外国人表示制御_生年月日表示方法, RDate.getNowDate()))) {
                 return timeToRString(該当データ.get生年月日());
-            } else if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(BusinessConfig
-                    .get(ConfigNameDBU.外国人表示制御_生年月日表示方法))) {
+            } else if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(DbBusinessConfig
+                    .get(ConfigNameDBU.外国人表示制御_生年月日表示方法, RDate.getNowDate()))) {
                 return new FlexibleDate(該当データ.get生年月日()).wareki()
                         .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }

@@ -183,5 +183,5 @@ public enum ViewStateKeys {
     /**
      * 市町村Entiyリスト
      */
-    市町村Entiyリスト;
+    市町村Entiyリスト,
 }

@@ -12,7 +12,8 @@
         <result property="shinseiYMD" column="shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="sofuYM" column="sofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="ketteiYMD" column="ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-
+        <result property="jigyoshaNo" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+         <result property="meisaiNo" column="meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select id="select償還払支給申請リスト照会"
             resultMap="ShokanShinseiIchiranRelateEntity"
@@ -22,6 +23,8 @@
         shokanShinsei."serviceTeikyoYM" AS "serviceTeikyoYM",
         shokanShinsei."seiriNo" AS "seiriNo",
         T1."yoshikiNo" AS "yoshikiNo",
+        T1."jigyoshaNo" AS "jigyoshaNo",
+        T1."meisaiNo" AS "meisaiNo",
         shokanShinsei."shinseiYMD" AS "shinseiYMD",
         shokanShinsei."sofuYM" AS "sofuYM",
         T2."ketteiYMD" AS "ketteiYMD"
@@ -33,7 +36,9 @@
         shokanKihon."hiHokenshaNo" AS "hiHokenshaNo",
         shokanKihon."serviceTeikyoYM" AS "serviceTeikyoYM",
         shokanKihon."seiriNo" AS "seiriNo",
-        shokanKihon."yoshikiNo" AS "yoshikiNo"
+        shokanKihon."jigyoshaNo" AS "jigyoshaNo",
+        shokanKihon."yoshikiNo" AS "yoshikiNo",
+        shokanKihon."meisaiNo" AS "meisaiNo"
         FROM
         rgdb."DbT3038ShokanKihon" AS shokanKihon
         WHERE
@@ -48,6 +53,8 @@
         shokanKihon."hiHokenshaNo",
         shokanKihon."serviceTeikyoYM",
         shokanKihon."seiriNo",
+        shokanKihon."meisaiNo",
+        shokanKihon."jigyoshaNo",
         shokanKihon."yoshikiNo"
         )AS T1
         ON

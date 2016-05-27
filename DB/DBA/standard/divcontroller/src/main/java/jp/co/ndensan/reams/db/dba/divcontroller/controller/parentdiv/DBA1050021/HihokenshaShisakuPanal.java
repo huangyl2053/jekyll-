@@ -68,16 +68,16 @@ public class HihokenshaShisakuPanal {
      */
     public ResponseData<HihokenshaShisakuPanalDiv> onLoad(HihokenshaShisakuPanalDiv div) {
         RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_状態, RString.class);
-        if (初期_状態.equals(状態_追加)) {
+        if (状態_追加.equals(初期_状態)) {
             getHandler(div).initialize(初期_状態);
             return ResponseData.of(div).setState(DBA1050021StateName.追加状態);
-        } else if (初期_状態.equals(状態_修正)) {
+        } else if (状態_修正.equals(初期_状態)) {
             getHandler(div).initialize(初期_状態);
             return ResponseData.of(div).setState(DBA1050021StateName.修正状態);
-        } else if (初期_状態.equals(状態_削除)) {
+        } else if (状態_削除.equals(初期_状態)) {
             getHandler(div).initialize(初期_状態);
             return ResponseData.of(div).setState(DBA1050021StateName.削除状態);
-        } else if (初期_状態.equals(状態_照会)) {
+        } else if (状態_照会.equals(初期_状態)) {
             getHandler(div).initialize(初期_状態);
             return ResponseData.of(div).setState(DBA1050021StateName.照会状態);
         }
@@ -145,14 +145,14 @@ public class HihokenshaShisakuPanal {
                 = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShikakuHenkoRireki().getGridData().records();
         List<HihokenshaDaicho> 資格訂正登録リスト = new ArrayList<>();
         RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_状態, RString.class);
-        if (初期_状態.equals(状態_追加)) {
+        if (状態_追加.equals(初期_状態)) {
             資格訂正登録リスト = manager.getShikakuTorukuList(
                     資格詳細情報, 住所地特例情報, 資格変更履歴情報,
                     被保険者番号,
                     識別コード,
                     被保履歴追加).records();
         }
-        if (初期_状態.equals(状態_修正)) {
+        if (状態_修正.equals(初期_状態)) {
             資格訂正登録リスト = manager.getShikakuTorukuList(
                     資格詳細情報, 住所地特例情報, 資格変更履歴情報,
                     被保険者番号,
@@ -172,6 +172,27 @@ public class HihokenshaShisakuPanal {
     private IDateOfBirth get当該識別対象の生年月日(HihokenshaShisakuPanalDiv div) {
         FlexibleDate birth = div.getKihonJoho().getCcdKaigoAtenaInfo().getShokaiData().getTxtSeinengappiYMD().getValue();
         return DateOfBirthFactory.createInstance(birth);
+    }
+
+    /**
+     * 「資格異動の訂正を削除する」ボタンの押下を処理です。
+     *
+     * @param div 被保険者資格詳細異動Div
+     * @return ResponseData<HihokenshaShisakuPanalDiv> 被保険者資格詳細異動Div
+     */
+    public ResponseData<HihokenshaShisakuPanalDiv> onClick_btnDelete(HihokenshaShisakuPanalDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
+        }
+        if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_被保番号, HihokenshaNo.class);
+            FlexibleDate 取得日 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_資格得喪情報, ShikakuRirekiJoho.class).getShutokuDate();
+            manager.deleteHihokenshaShikakuTeisei(被保険者番号, 取得日);
+            RealInitialLocker.release(前排他ロックキー);
+            return ResponseData.of(div).forwardWithEventName(DBA1050021TransitionEventName.履歴一覧に戻る).respond();
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**

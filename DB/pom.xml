@@ -475,6 +475,11 @@
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+                <artifactId>UexPersistence</artifactId>
+                <version>${jp.co.ndensan.reams.uex.version}</version>
+            </dependency>            
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ue.uex</groupId>
                 <artifactId>UexDivController</artifactId>
                 <version>${jp.co.ndensan.reams.uex.version}</version>
                 <classifier>classes</classifier>

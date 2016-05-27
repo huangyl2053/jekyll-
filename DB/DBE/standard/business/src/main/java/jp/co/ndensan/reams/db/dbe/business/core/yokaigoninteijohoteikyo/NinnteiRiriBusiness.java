@@ -288,4 +288,13 @@ public class NinnteiRiriBusiness {
     public boolean is意見書同意フラグ() {
         return entity.isIkenshoDoiFlag();
     }
+
+    /**
+     * 市町村コードのgetメソッドです。
+     *
+     * @return 市町村コード
+     */
+    public RString get市町村コード() {
+        return entity.getShichosonCode();
+    }
 }

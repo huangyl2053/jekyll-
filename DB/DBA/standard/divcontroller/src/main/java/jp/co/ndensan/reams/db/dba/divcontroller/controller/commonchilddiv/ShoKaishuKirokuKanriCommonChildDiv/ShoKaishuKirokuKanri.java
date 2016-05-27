@@ -108,7 +108,6 @@ public class ShoKaishuKirokuKanri {
         ViewStateHolder.put(ViewStateKeys.状態, 状態_削除);
         createHandlerOf(requestDiv).状態の修正(状態_削除);
         return createResponseData(requestDiv);
-
     }
 
     /**
@@ -119,10 +118,20 @@ public class ShoKaishuKirokuKanri {
      * @return ResponseData<ShoKaishuKirokuKanriDiv>
      */
     public ResponseData<ShoKaishuKirokuKanriDiv> onClick_btnShoKaishuKakutei(ShoKaishuKirokuKanriDiv shoKaishuDiv) {
-        if (check_btnKakuninn(shoKaishuDiv).iterator().hasNext()) {
-            return ResponseData.of(shoKaishuDiv).addValidationMessages(check_btnKakuninn(shoKaishuDiv)).respond();
-        }
         if (!ResponseHolder.isReRequest()) {
+            ValidationMessageControlPairs controlPairs = check_btnKakuninn(shoKaishuDiv);
+            if (controlPairs.iterator().hasNext()) {
+                return ResponseData.of(shoKaishuDiv).addValidationMessages(controlPairs).respond();
+            }
+        }
+
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        getValidationHandler(shoKaishuDiv).交付日と有効期限の整合性チェック(validationMessages);
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(shoKaishuDiv).addValidationMessages(validationMessages).respond();
+        }
+
+        if (!ResponseHolder.isReRequest() || ResponseHolder.isWarningIgnoredRequest()) {
             return ResponseData.of(shoKaishuDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
@@ -132,7 +141,6 @@ public class ShoKaishuKirokuKanri {
                 List<dgKoufuKaishu_Row> list = shoKaishuDiv.getDgKoufuKaishu().getDataSource();
                 int rowcount = shoKaishuDiv.getDgKoufuKaishu().getClickedItem().getId();
                 dgKoufuKaishu_Row row = list.get(rowcount);
-
                 row.setKoufuType(shoKaishuDiv.getPanelInput().getTxtKoufuType().getValue());
                 row.setKoufuDate(shoKaishuDiv.getPanelInput().getTxtKoufuDate().getValue().wareki().toDateString());
                 row.setYukoKigen(shoKaishuDiv.getPanelInput().getTxtYukouKigen().getValue().wareki().toDateString());
@@ -144,7 +152,6 @@ public class ShoKaishuKirokuKanri {
                 row.setKaishuJiyuNo(shoKaishuDiv.getPanelInput().getDdlKaisyuJiyu().getSelectedKey());
                 row.setKaishuRiyu(shoKaishuDiv.getPanelInput().getTxaKaishuRiyu().getValue());
                 list.set(rowcount, row);
-
                 shoKaishuDiv.getDgKoufuKaishu().setDataSource(list);
                 createResponseData(shoKaishuDiv).data = shoKaishuDiv;
             }
@@ -164,6 +171,7 @@ public class ShoKaishuKirokuKanri {
         }
         ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
         return createResponseData(shoKaishuDiv);
+
     }
 
     /**
@@ -192,7 +200,6 @@ public class ShoKaishuKirokuKanri {
     private ValidationMessageControlPairs check_btnKakuninn(ShoKaishuKirokuKanriDiv requestDiv) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
 
-        getValidationHandler(requestDiv).交付日と有効期限の整合性チェック(validationMessages);
         getValidationHandler(requestDiv).交付事由の必須チェック(validationMessages);
         getValidationHandler(requestDiv).交付理由の最大桁数(validationMessages);
         getValidationHandler(requestDiv).回収理由のの最大桁数(validationMessages);
@@ -201,7 +208,6 @@ public class ShoKaishuKirokuKanri {
         getValidationHandler(requestDiv).交付事由がセットになっているかの入力チェック(validationMessages);
         getValidationHandler(requestDiv).回収日がセットになっているかの入力チェック(validationMessages);
         getValidationHandler(requestDiv).回収事由がセットになっているかの入力チェック(validationMessages);
-
         return validationMessages;
     }
 

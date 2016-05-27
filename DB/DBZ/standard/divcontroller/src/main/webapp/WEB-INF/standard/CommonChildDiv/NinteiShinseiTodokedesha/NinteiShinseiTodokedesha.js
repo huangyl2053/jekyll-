@@ -34,11 +34,12 @@ var DBZ;
                 }
                 ShoriType.prototype.InputMode = function () {
                     this.controls.ddlTodokledeDaikoKubun().readOnly = false;
-                    this.controls.btnSetaiIchiran().disabled = false;
-                    this.controls.btnAtenaKensaku().disabled = false;
+                    this.controls.ddlShinseiKankeisha().readOnly = true;
+                    this.controls.btnSetaiIchiran().disabled = true;
+                    this.controls.btnAtenaKensaku().disabled = true;
                     this.controls.btnZenkaiFukusha().disabled = false;
-                    this.controls.txtJigyoshaCode().readOnly = false;
-                    this.controls.btnJigyoshaGuide().disabled = false;
+                    this.controls.txtJigyoshaCode().readOnly = true;
+                    this.controls.btnJigyoshaGuide().disabled = true;
                     this.controls.txtShimei().readOnly = false;
                     this.controls.txtKanaShimei().readOnly = false;
                     this.controls.txtHonninKankeisei().readOnly = false;

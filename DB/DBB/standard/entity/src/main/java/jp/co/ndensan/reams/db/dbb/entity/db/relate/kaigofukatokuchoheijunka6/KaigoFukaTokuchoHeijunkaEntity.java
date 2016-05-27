@@ -42,7 +42,7 @@ public class KaigoFukaTokuchoHeijunkaEntity {
     /**
      * 調定年度のsetメソッドです。
      *
-     * @param 調定年度
+     * @param 調定年度 調定年度
      */
     public void set調定年度(FlexibleYear 調定年度) {
         this.調定年度 = 調定年度;
@@ -60,7 +60,7 @@ public class KaigoFukaTokuchoHeijunkaEntity {
     /**
      * 賦課年度のsetメソッドです。
      *
-     * @param 賦課年度
+     * @param 賦課年度 賦課年度
      */
     public void set賦課年度(FlexibleYear 賦課年度) {
         this.賦課年度 = 賦課年度;
@@ -78,7 +78,7 @@ public class KaigoFukaTokuchoHeijunkaEntity {
     /**
      * 増額平準化方法のsetメソッドです。
      *
-     * @param 増額平準化方法
+     * @param 増額平準化方法 増額平準化方法
      */
     public void set増額平準化方法(RString 増額平準化方法) {
         this.増額平準化方法 = 増額平準化方法;
@@ -96,7 +96,7 @@ public class KaigoFukaTokuchoHeijunkaEntity {
     /**
      * 減額平準化方法のsetメソッドです。
      *
-     * @param 減額平準化方法
+     * @param 減額平準化方法 減額平準化方法
      */
     public void set減額平準化方法(RString 減額平準化方法) {
         this.減額平準化方法 = 減額平準化方法;
@@ -114,7 +114,7 @@ public class KaigoFukaTokuchoHeijunkaEntity {
     /**
      * 帳票グループのsetメソッドです。
      *
-     * @param 帳票グループ
+     * @param 帳票グループ 帳票グループ
      */
     public void set帳票グループ(RString 帳票グループ) {
         this.帳票グループ = 帳票グループ;
@@ -132,7 +132,7 @@ public class KaigoFukaTokuchoHeijunkaEntity {
     /**
      * 帳票分類ＩＤのsetメソッドです。
      *
-     * @param 帳票分類ＩＤ
+     * @param 帳票分類ＩＤ 帳票分類ＩＤ
      */
     public void set帳票分類ＩＤ(ReportId 帳票分類ＩＤ) {
         this.帳票分類ＩＤ = 帳票分類ＩＤ;
@@ -150,7 +150,7 @@ public class KaigoFukaTokuchoHeijunkaEntity {
     /**
      * 帳票名のsetメソッドです。
      *
-     * @param 帳票名
+     * @param 帳票名 帳票名
      */
     public void set帳票名(RString 帳票名) {
         this.帳票名 = 帳票名;
@@ -168,7 +168,7 @@ public class KaigoFukaTokuchoHeijunkaEntity {
     /**
      * 改頁出力順IDのsetメソッドです。
      *
-     * @param 改頁出力順ID
+     * @param 改頁出力順ID 改頁出力順ID
      */
     public void set改頁出力順ID(RString 改頁出力順ID) {
         this.改頁出力順ID = 改頁出力順ID;
@@ -186,7 +186,7 @@ public class KaigoFukaTokuchoHeijunkaEntity {
     /**
      * 出力対象指示フラグのsetメソッドです。
      *
-     * @param 出力対象指示フラグ
+     * @param 出力対象指示フラグ 出力対象指示フラグ
      */
     public void set出力対象指示フラグ(RString 出力対象指示フラグ) {
         this.出力対象指示フラグ = 出力対象指示フラグ;
@@ -204,7 +204,7 @@ public class KaigoFukaTokuchoHeijunkaEntity {
     /**
      * 発行日のsetメソッドです。
      *
-     * @param 発行日
+     * @param 発行日 発行日
      */
     public void set発行日(FlexibleDate 発行日) {
         this.発行日 = 発行日;
@@ -222,7 +222,7 @@ public class KaigoFukaTokuchoHeijunkaEntity {
     /**
      * 文書番号のsetメソッドです。
      *
-     * @param 文書番号
+     * @param 文書番号 文書番号
      */
     public void set文書番号(RString 文書番号) {
         this.文書番号 = 文書番号;
@@ -240,7 +240,7 @@ public class KaigoFukaTokuchoHeijunkaEntity {
     /**
      * 遷移元区分のsetメソッドです。
      *
-     * @param 遷移元区分
+     * @param 遷移元区分 遷移元区分
      */
     public void set遷移元区分(RString 遷移元区分) {
         this.遷移元区分 = 遷移元区分;

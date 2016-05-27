@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 被保険者台帳発行のクラスです。
  *
- * @reamsid_L DBA-0510-050 wangxiaodong
+ * @reamsid_L DBA-0510-050 wangxiaodong
  */
 public class HihokenshaDaichoIkkatsuHakkoPanel {
 

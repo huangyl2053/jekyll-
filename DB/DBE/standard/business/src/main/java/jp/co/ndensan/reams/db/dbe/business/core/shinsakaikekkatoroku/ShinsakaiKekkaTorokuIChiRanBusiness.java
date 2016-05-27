@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 介護認定審査会開催結果登録の審査会委員一覧検索Businessです。
  *
  * @reamsid_L DBE-0170-010 wangkun
@@ -170,7 +169,7 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 特定疾病
      */
     public RString get特定疾病() {
-        return entity.get_２号特定疾病コード().value();
+        return entity.getコード_２号特定疾病コード().value();
     }
 
     /**

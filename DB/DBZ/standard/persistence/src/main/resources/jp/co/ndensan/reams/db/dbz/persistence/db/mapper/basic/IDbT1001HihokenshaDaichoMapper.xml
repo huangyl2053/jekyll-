@@ -140,7 +140,8 @@
 	FROM
 	rgdb."DbT1001HihokenshaDaicho" as DbT1001
        WHERE
-        DbT1001."shichosonCode" = #{市町村コード}
+        DbT1001."shichosonCode" in 
+        <foreach collection="市町村コード" item="code" open="(" separator="," close=")"> #{code} </foreach>
        AND 
         DbT1001."hihokenshaNo" = #{被保険者番号}
 	</select>

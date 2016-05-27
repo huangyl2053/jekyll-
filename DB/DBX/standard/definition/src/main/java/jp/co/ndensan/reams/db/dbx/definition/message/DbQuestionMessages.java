@@ -22,7 +22,11 @@ public enum DbQuestionMessages implements IMessageGettable, IValidationMessage {
     /**
      * "入力された値を破棄します。よろしいですか？"を定義しています。
      */
-    入力内容の破棄(UrQuestionMessages.入力内容の破棄.getMessage(), ButtonSelectPattern.OKCancel);
+    入力内容の破棄(UrQuestionMessages.入力内容の破棄.getMessage(), ButtonSelectPattern.OKCancel),
+    /**
+     *
+     */
+    処理実行の確認(UrQuestionMessages.処理実行の確認.getMessage(), ButtonSelectPattern.OKCancel);
 
     private final Message message;
 

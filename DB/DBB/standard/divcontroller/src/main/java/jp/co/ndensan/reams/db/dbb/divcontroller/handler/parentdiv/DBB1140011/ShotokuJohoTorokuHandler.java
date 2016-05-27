@@ -238,6 +238,20 @@ public final class ShotokuJohoTorokuHandler {
 
     }
 
+    private void set金額制御TO内容登録(FlexibleDate 生年月日, boolean is被保険者) {
+        if (get金額表示Flg(生年月日, is被保険者)) {
+            div.getShotokuJohoToroku().getTxtGokeiShotokuGaku().setDisplayNone(false);
+            div.getShotokuJohoToroku().getTxtKazeiShotokuGaku().setDisplayNone(false);
+            div.getShotokuJohoToroku().getTxtNenkinShotokuGaku().setDisplayNone(false);
+            div.getShotokuJohoToroku().getTxtNenkinShunyuGaku().setDisplayNone(false);
+        } else {
+            div.getShotokuJohoToroku().getTxtGokeiShotokuGaku().setDisplayNone(true);
+            div.getShotokuJohoToroku().getTxtKazeiShotokuGaku().setDisplayNone(true);
+            div.getShotokuJohoToroku().getTxtNenkinShotokuGaku().setDisplayNone(true);
+            div.getShotokuJohoToroku().getTxtNenkinShunyuGaku().setDisplayNone(true);
+        }
+    }
+
     /**
      * 住民税減免前/後の表示制御 世帯一覧
      */
@@ -350,6 +364,20 @@ public final class ShotokuJohoTorokuHandler {
             div.getShotokuJohoToroku().getTxtNenkinShunyuGaku().setValue(transToDecimal(公的年金収入額));
             div.getShotokuJohoToroku().getTxtNenkinShotokuGaku().setValue(transToDecimal(公的年金所得額));
         }
+        boolean is被保険者 = true;
+        FlexibleDate 生年月日 = FlexibleDate.getNowDate();
+        List<RString> ketsugo01List = selected_row.getTxtKetsugo01().split(改行タグ.toString());
+        if (null != ketsugo01List && ketsugo01List.size() == 2) {
+            RString 被保険者番号 = ketsugo01List.get(1);
+            is被保険者 = !RString.isNullOrEmpty(被保険者番号.trim());
+        }
+        List<RString> ketsugo02List = selected_row.getTxtKetsugo02().split(改行タグ.toString());
+        if (null != ketsugo02List && ketsugo02List.size() == 2) {
+            RString 生年月日Str = ketsugo02List.get(0);
+            生年月日Str = 生年月日Str.substring(0, 生年月日Str.lastIndexOf(RString.FULL_SPACE));
+            生年月日 = new FlexibleDate((new RDate(生年月日Str.toString())).toString());
+        }
+        set金額制御TO内容登録(生年月日, is被保険者);
         set住民税減免前_後表示制御情報TO内容登録();
         set激変緩和表示制御情報TO内容登録();
         changeTo初期状態(false);
@@ -364,6 +392,12 @@ public final class ShotokuJohoTorokuHandler {
         RString 課税所得額 = editComma(div.getShotokuJohoToroku().getTxtKazeiShotokuGaku().getText());
         RString 年金収入額 = editComma(div.getShotokuJohoToroku().getTxtNenkinShunyuGaku().getText());
         RString 年金所得額 = editComma(div.getShotokuJohoToroku().getTxtNenkinShotokuGaku().getText());
+        if (div.getShotokuJohoToroku().getTxtGokeiShotokuGaku().isDisplayNone()) {
+            合計所得金額 = RString.EMPTY;
+            課税所得額 = RString.EMPTY;
+            年金収入額 = RString.EMPTY;
+            年金所得額 = RString.EMPTY;
+        }
         row.setTxtJuminzeiGenmenMae(div.getShotokuJohoToroku().getDdlJuminzeiGenmenMae().getSelectedValue());
         row.setTxtJuminzeiGenmenAto(div.getShotokuJohoToroku().getDdlJuminzeiGenmenAto().getSelectedValue());
         row.setTxtJuminzei(div.getShotokuJohoToroku().getDdlJuminzei().getSelectedValue());
@@ -500,9 +534,7 @@ public final class ShotokuJohoTorokuHandler {
     }
 
     private FlexibleYear trans和暦to西暦(RString 和暦str) {
-        RDate nendo = new RDate(和暦str.toString());
-        FlexibleYear 西暦Year = new FlexibleYear(nendo.getYear().toString());
-        return 西暦Year;
+        return new FlexibleYear(new RDate(和暦str.toString()).getYear().toString());
     }
 
     private void changeTo初期状態(boolean isDisplay) {

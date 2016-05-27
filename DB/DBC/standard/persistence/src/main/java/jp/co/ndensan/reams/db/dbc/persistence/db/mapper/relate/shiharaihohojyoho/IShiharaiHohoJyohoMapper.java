@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shiharaihohojyoho.KozaJohoPSM
 /**
  * 支払方法情報を取得するマッパーインタフェースです。
  *
- * @reamsid_L DBC-0300-020 houtianpeng
+ * @reamsid_L DBC-0300-020 houtianpeng
  */
 public interface IShiharaiHohoJyohoMapper {
 

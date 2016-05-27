@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003.dgRe
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosaschedule.NinteichosaScheduleFinder;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
@@ -159,7 +159,7 @@ public class MainPanelHandler {
             row.setJokyo(entity.get予約状況() == null ? RString.EMPTY : YoyakuJokyo.toValue(entity.get予約状況()).get名称());
             row.setHokensha(entity.get市町村名称());
             row.setShinseiKubun(entity.get認定申請区分() == null
-                    ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).toRString());
+                    ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).get名称());
             row.setShinseishoKanriNo(entity.get申請書管理番号());
             row.setNinteiChosaItakusakiCode(entity.get認定調査委託先コード());
             row.setNinteiChosainCode(entity.get認定調査員コード());
@@ -336,7 +336,7 @@ public class MainPanelHandler {
                 row.setJokyo(entity.get予約状況() == null ? RString.EMPTY : YoyakuJokyo.toValue(entity.get予約状況()).get名称());
                 row.setHokensha(entity.get市町村名称());
                 row.setShinseiKubun(entity.get認定申請区分() == null
-                        ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).toRString());
+                        ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).get名称());
                 row.setShinseishoKanriNo(entity.get申請書管理番号());
                 row.setNinteiChosaItakusakiCode(entity.get認定調査委託先コード());
                 row.setNinteiChosainCode(entity.get認定調査員コード());
@@ -399,7 +399,7 @@ public class MainPanelHandler {
                 row.setJokyo(entity.get予約状況() == null ? RString.EMPTY : YoyakuJokyo.toValue(entity.get予約状況()).get名称());
                 row.setHokensha(entity.get市町村名称());
                 row.setShinseiKubun(entity.get認定申請区分() == null
-                        ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).toRString());
+                        ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).get名称());
                 row.setShinseishoKanriNo(entity.get申請書管理番号());
                 row.setNinteiChosaItakusakiCode(entity.get認定調査委託先コード());
                 row.setNinteiChosainCode(entity.get認定調査員コード());
@@ -463,7 +463,7 @@ public class MainPanelHandler {
                 row.setJokyo(entity.get予約状況() == null ? RString.EMPTY : YoyakuJokyo.toValue(entity.get予約状況()).get名称());
                 row.setHokensha(entity.get市町村名称());
                 row.setShinseiKubun(entity.get認定申請区分() == null
-                        ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).toRString());
+                        ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).get名称());
                 row.setShinseishoKanriNo(entity.get申請書管理番号());
                 row.setNinteiChosaItakusakiCode(entity.get認定調査委託先コード());
                 row.setNinteiChosainCode(entity.get認定調査員コード());
@@ -527,7 +527,7 @@ public class MainPanelHandler {
                 row.setJokyo(entity.get予約状況() == null ? RString.EMPTY : YoyakuJokyo.toValue(entity.get予約状況()).get名称());
                 row.setHokensha(entity.get市町村名称());
                 row.setShinseiKubun(entity.get認定申請区分() == null
-                        ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).toRString());
+                        ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).get名称());
                 row.setShinseishoKanriNo(entity.get申請書管理番号());
                 row.setNinteiChosaItakusakiCode(entity.get認定調査委託先コード());
                 row.setNinteiChosainCode(entity.get認定調査員コード());
@@ -593,7 +593,7 @@ public class MainPanelHandler {
                 row.setJokyo(entity.get予約状況() == null ? RString.EMPTY : YoyakuJokyo.toValue(entity.get予約状況()).get名称());
                 row.setHokensha(entity.get市町村名称());
                 row.setShinseiKubun(entity.get認定申請区分() == null
-                        ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).toRString());
+                        ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).get名称());
                 row.setShinseishoKanriNo(entity.get申請書管理番号());
                 row.setNinteiChosaItakusakiCode(entity.get認定調査委託先コード());
                 row.setNinteiChosainCode(entity.get認定調査員コード());

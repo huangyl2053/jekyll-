@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Param;
 /**
  * 対象者自動割付のマッパーインタフェースです。
  *
- * @reamsid_L DBE-1350-040 wangxiaodong
+ * @reamsid_L DBE-1350-040 wangxiaodong
  */
 public interface ITaisyosyaJidoWaritsukeRelateMapper {
 

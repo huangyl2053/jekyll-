@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.KoseiShichosonMaster;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5051KoseiShichosonMasterDac;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -21,21 +21,21 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class KoseiShichosonMasterManager {
 
-    private final DbT5051KoseiShichosonMasterDac dac;
+    private final DbT7051KoseiShichosonMasterDac dac;
 
     /**
      * コンストラクタです。
      */
     public KoseiShichosonMasterManager() {
-        dac = InstanceProvider.create(DbT5051KoseiShichosonMasterDac.class);
+        dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
     }
 
     /**
      * テスト用コンストラクタです。
      *
-     * @param dac {@link DbT5051KoseiShichosonMasterDac}
+     * @param dac {@link DbT7051KoseiShichosonMasterDac}
      */
-    KoseiShichosonMasterManager(DbT5051KoseiShichosonMasterDac dac) {
+    KoseiShichosonMasterManager(DbT7051KoseiShichosonMasterDac dac) {
         this.dac = dac;
     }
 
@@ -50,7 +50,7 @@ public class KoseiShichosonMasterManager {
             RString 市町村識別ID) {
         requireNonNull(市町村識別ID, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村識別ID"));
 
-        DbT5051KoseiShichosonMasterEntity entity = dac.selectByKey(
+        DbT7051KoseiShichosonMasterEntity entity = dac.selectByKey(
                 市町村識別ID);
         if (entity == null) {
             return null;
@@ -68,7 +68,7 @@ public class KoseiShichosonMasterManager {
     public List<KoseiShichosonMaster> get構成市町村マスタ一覧() {
         List<KoseiShichosonMaster> businessList = new ArrayList<>();
 
-        for (DbT5051KoseiShichosonMasterEntity entity : dac.selectAll()) {
+        for (DbT7051KoseiShichosonMasterEntity entity : dac.selectAll()) {
             entity.initializeMd5();
             businessList.add(new KoseiShichosonMaster(entity));
         }

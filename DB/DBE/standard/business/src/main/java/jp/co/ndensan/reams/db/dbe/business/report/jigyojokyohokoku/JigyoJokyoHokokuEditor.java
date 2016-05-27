@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FillTypeFormatted;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -69,7 +70,15 @@ public class JigyoJokyoHokokuEditor implements IJigyoJokyoHokokuEditor {
     }
 
     private RString dateFormat(RString date) {
-        return RString.isNullOrEmpty(date) ? RString.EMPTY : new FlexibleDate(date).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        RString dateRString = RString.EMPTY;
+        if (!RString.isNullOrEmpty(date)) {
+            RStringBuilder dateSb = new RStringBuilder();
+            FillTypeFormatted dateFormat = new FlexibleDate(date).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK);
+            dateSb.append(dateFormat.getYear());
+            dateSb.append(dateFormat.getMonth());
+            dateRString = dateSb.toRString();
+        }
+        return dateRString;
     }
 }

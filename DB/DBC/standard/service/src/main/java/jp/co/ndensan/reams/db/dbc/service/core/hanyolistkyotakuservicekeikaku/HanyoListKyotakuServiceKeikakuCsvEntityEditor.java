@@ -95,6 +95,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
             editor指定事業者_住所地特例対象施設_適用除外施設(entity, csvEntity, parameter);
         }
         editor計画(entity, csvEntity, parameter);
+        editor受給(entity, csvEntity, parameter);
         return csvEntity;
     }
 
@@ -564,6 +565,11 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
                 isNull(entity.getDbT7060_Itaku事業者名称())
                 ? RString.EMPTY
                 : entity.getDbT7060_Itaku事業者名称().value());
+    }
+
+    private void editor受給(HanyoListKyotakuServiceKeikakuEntity entity,
+            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
+
         csvEntity.set受給申請事由(isNull(entity.getDbV4001受給申請事由())
                 ? RString.EMPTY : entity.getDbV4001受給申請事由().value());
         csvEntity.set受給申請日(dataToRString(entity.getDbV4001受給申請年月日(), parameter));

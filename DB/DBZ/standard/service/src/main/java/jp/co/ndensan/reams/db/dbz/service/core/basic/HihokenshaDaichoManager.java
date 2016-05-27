@@ -285,7 +285,7 @@ public class HihokenshaDaichoManager {
      */
     public HihokenshaDaicho get資格の情報For資格不整合(HihokenshaNo 被保険者番号,
             ShikibetsuCode 識別コード, FlexibleDate 異動日) {
-        DbT1001HihokenshaDaichoEntity entity = dac.get資格の情報(被保険者番号, 識別コード, 異動日);
+        DbT1001HihokenshaDaichoEntity entity = dac.get資格の情報(被保険者番号, 識別コード, 異動日, new RString("1"));
         if (entity == null) {
             return null;
         }

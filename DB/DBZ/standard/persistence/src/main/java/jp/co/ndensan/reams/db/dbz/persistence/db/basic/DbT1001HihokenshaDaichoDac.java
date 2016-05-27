@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.edaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.hihokennshaKubunCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.hihokenshaNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.idoJiyuCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.idoYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.isDeleted;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.jushochitokureiKaijoJiyuCode;
@@ -37,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import jp.co.ndensan.reams.uz.uza.util.db.OrderBy;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.between;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
@@ -58,8 +56,6 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
     private static final RString メッセージ_識別コード = new RString("識別コード");
     private static final RString メッセージ_被保険者番号 = new RString("被保険者番号");
     private static final RString メッセージ_異動日 = new RString("異動日");
-    private static final RString メッセージ_被保険者区分コード = new RString("被保険者区分コード");
-    private static final RString メッセージ_異動事由コード = new RString("異動事由コード");
     @InjectSession
     private SqlSession session;
 
@@ -604,11 +600,12 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
      * @param 被保険者番号 被保険者番号
      * @param 識別コード 識別コード
      * @param 異動日 異動日
+     * @param 被保険者区分コード 被保険者区分コード
      * @return DbT1001HihokenshaDaichoEntity
      */
     @Transaction
     public DbT1001HihokenshaDaichoEntity get資格の情報(HihokenshaNo 被保険者番号,
-            ShikibetsuCode 識別コード, FlexibleDate 異動日) {
+            ShikibetsuCode 識別コード, FlexibleDate 異動日, RString 被保険者区分コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
@@ -616,44 +613,9 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                                 eq(hihokenshaNo, 被保険者番号),
                                 leq(異動日, idoYMD),
                                 not(eq(shikibetsuCode, 識別コード)),
-                                eq(hihokennshaKubunCode, 1))).
+                                eq(hihokennshaKubunCode, 被保険者区分コード))).
                 order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST)).
                 limit(1).
-                toObject(DbT1001HihokenshaDaichoEntity.class);
-    }
-
-    /**
-     * 前回の年齢到達（バッチ）処理時から今回の年齢到達（バッチ）処理時までの「年齢到達の異動」を被保険者台帳から取得する。
-     *
-     * @param 被保険者区分コード hihokennshaKubunCode
-     * @param 対象開始年月日 taishoKaishiYMD
-     * @param 対象終了年月日 taishoShuryoYMD
-     * @param 異動事由コード idoJiyuCode
-     * @return DbT7022ShoriDateKanriEntity
-     * @throws NullPointerException 引数のいずれかがnullの場合
-     */
-    @Transaction
-    public DbT1001HihokenshaDaichoEntity selectHihokenjabango(
-            RString 被保険者区分コード,
-            FlexibleDate 対象開始年月日,
-            FlexibleDate 対象終了年月日,
-            RString 異動事由コード) throws NullPointerException {
-        requireNonNull(被保険者区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者区分コード.toString()));
-        requireNonNull(対象開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_異動日.toString()));
-        requireNonNull(対象終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_異動日.toString()));
-        requireNonNull(異動事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_異動事由コード.toString()));
-
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        return accessor.select().
-                table(DbT1001HihokenshaDaicho.class).
-                where(and(
-                                eq(logicalDeletedFlag, false),
-                                eq(hihokennshaKubunCode, 被保険者区分コード),
-                                between(対象開始年月日, idoYMD, 対象終了年月日),
-                                eq(idoJiyuCode, 異動事由コード))).
-                order(by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC),
-                        by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
 

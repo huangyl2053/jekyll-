@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochit
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochito
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.jushotitokurei.JushotiTokureiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -281,8 +283,8 @@ public class JushochiTokureiRirekiListHandler {
                 TextBoxDate idoYMD = new TextBoxDate();
                 idoYMD.setValue(new RDate(jushotiTokureiBusiness.get異動日().toString()));
                 row.setIdoYMD(idoYMD);
-                row.setSochimotoHokensha(jushotiTokureiBusiness.get措置元保険者().value());
-                row.setKyuHokensha(jushotiTokureiBusiness.get旧保険者().value());
+                row.setSochimotoHokensha(ObjectUtil.defaultIfNull(jushotiTokureiBusiness.get措置元保険者(), LasdecCode.EMPTY).value());
+                row.setKyuHokensha(ObjectUtil.defaultIfNull(jushotiTokureiBusiness.get旧保険者(), LasdecCode.EMPTY).value());
 
                 TextBoxDate shoriDate = new TextBoxDate();
                 shoriDate.setValue(jushotiTokureiBusiness.get処理日時().getDate());

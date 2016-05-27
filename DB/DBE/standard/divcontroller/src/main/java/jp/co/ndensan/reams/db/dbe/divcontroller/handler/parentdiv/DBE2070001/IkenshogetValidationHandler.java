@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 完了処理・主治医意見書入手のValidationHandlerクラスです。
  *
- * @reamsid_L DBE-0320-010 lishengli
+ * @reamsid_L DBE-0330-010 lishengli
  */
 public class IkenshogetValidationHandler {
 

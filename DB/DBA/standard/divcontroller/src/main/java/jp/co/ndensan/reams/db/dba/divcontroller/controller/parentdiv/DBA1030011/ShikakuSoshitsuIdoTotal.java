@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.DBA1
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.DBA1030011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.ShikakuSoshitsuIdoTotalDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1030011.ShikakuSoshitsuIdoTotalHandler;
-import static jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1030011.ShikakuSoshitsuIdoTotalHandler.FIRSTINDEX;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -42,8 +41,9 @@ public class ShikakuSoshitsuIdoTotal {
     private static final RString IRYOU = new RString("医療保険");
     private static final RString RONEN = new RString("老福年金");
     private static final RString SHISETSU = new RString("施設入退所");
-    private static final RString SHORUIJOKYO = new RString("証類状況");
+    private static final RString SHORUIJOKYO = new RString("証交付回収");
     private static final RString 修正 = new RString("修正");
+    private static final Integer FIRSTINDEX = Integer.valueOf("0");
 
     /**
      * 資格喪失異動の初期化します。
@@ -93,7 +93,6 @@ public class ShikakuSoshitsuIdoTotal {
      * @return レスポンス
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnUpdate(ShikakuSoshitsuIdoTotalDiv div) {
-        ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -106,8 +105,7 @@ public class ShikakuSoshitsuIdoTotal {
             div.getComplete().getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(DBA1030011StateName.完了状態);
         }
-        response.data = div;
-        return response;
+        return ResponseData.of(div).respond();
     }
 
     /**

@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class ShoriDateKanriManager {
 
     private final DbT7022ShoriDateKanriDac dac;
+    private static final RString 処理名メッセージ = new RString("処理名");
 
     /**
      * コンストラクタです。
@@ -65,7 +66,7 @@ public class ShoriDateKanriManager {
             RString 年度内連番) {
         requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サブ業務コード"));
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage("処理名"));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
         requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("処理枝番"));
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
         requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage("年度内連番"));
@@ -102,7 +103,7 @@ public class ShoriDateKanriManager {
             FlexibleYear 年度,
             RString 年度内連番) {
         requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サブ業務コード"));
-        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage("処理名"));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
         requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("処理枝番"));
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
         requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage("年度内連番"));
@@ -167,7 +168,7 @@ public class ShoriDateKanriManager {
             RString 処理名,
             FlexibleYear 年度) {
         requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サブ業務コード"));
-        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage("処理名"));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
 
         DbT7022ShoriDateKanriEntity entity = dac.selectChoteiNiji(
@@ -192,7 +193,7 @@ public class ShoriDateKanriManager {
     public ShoriDateKanri get基準年月日(
             RString 処理名,
             FlexibleYear 年度) {
-        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage("処理名"));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
 
         DbT7022ShoriDateKanriEntity entity = dac.selectKijunYMD(

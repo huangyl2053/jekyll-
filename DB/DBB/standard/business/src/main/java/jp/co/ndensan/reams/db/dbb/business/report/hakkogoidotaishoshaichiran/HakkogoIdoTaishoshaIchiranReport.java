@@ -42,8 +42,8 @@ public class HakkogoIdoTaishoshaIchiranReport extends Report<HakkogoIdoTaishosha
     @Override
     public void writeBy(ReportSourceWriter<HakkogoIdoTaishoshaIchiranSource> writer) {
         for (HakkogoIdoTaishoshaIchiranItem target : targets) {
-            IHakkogoIdoTaishoshaIchiranEditor headerEditor = new HeaderEditor(target);
-            IHakkogoIdoTaishoshaIchiranEditor bodyEditor = new BodyEditor(target);
+            IHakkogoIdoTaishoshaIchiranEditor headerEditor = new HakkogoIdoTaishoshaIchiranHeaderEditor(target);
+            IHakkogoIdoTaishoshaIchiranEditor bodyEditor = new HakkogoIdoTaishoshaIchiranBodyEditor(target);
             IHakkogoIdoTaishoshaIchiranBuilder builder = new HakkogoIdoTaishoshaIchiranBuilder(headerEditor, bodyEditor);
             writer.writeLine(builder);
         }

@@ -11,12 +11,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.source.gennendohonsanteiidou.Gen
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 本算定異動（現年度）結果一覧表帳票HeaderEditorクラスです
@@ -24,8 +19,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  * @reamsid_L DBB-0930-030 sunhui
  */
 public class GenNendoHonsanteiIdouHeaderEditor implements IGenNendoHonsanteiIdouEditor {
-
-    private final GenendoIdouKekkaIchiranInputEntity inputEntity;
 
     private static final int NUM_1 = 0;
     private static final int NUM_2 = 1;
@@ -41,23 +34,17 @@ public class GenNendoHonsanteiIdouHeaderEditor implements IGenNendoHonsanteiIdou
     private static final int NUM_12 = 11;
     private static final int NUM_13 = 12;
     private static final int NUM_14 = 13;
-    private static final RString SAKUSEI = new RString("作成");
 
     /**
      * インスタンスを生成します。
      *
-     * @param inputEntity {@link GenendoIdouKekkaIchiranInputEntity}
      */
-    protected GenNendoHonsanteiIdouHeaderEditor(GenendoIdouKekkaIchiranInputEntity inputEntity) {
-        this.inputEntity = inputEntity;
+    protected GenNendoHonsanteiIdouHeaderEditor() {
+
     }
 
     @Override
     public GenNendoHonsanteiIdouSource edit(GenNendoHonsanteiIdouSource source) {
-        source.printTimeStamp = inputEntity.get調定日時().getDate().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString()
-                .concat(" " + inputEntity.get調定日時().getRDateTime().getTime()
-                        .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒) + " " + SAKUSEI);
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
         KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
         List<Kitsuki> 表記リスト = 期月リスト_普徴.toList();
@@ -70,20 +57,20 @@ public class GenNendoHonsanteiIdouHeaderEditor implements IGenNendoHonsanteiIdou
                 期の表記.add(RString.EMPTY);
             }
         }
-        source.fuchoKi1 = 期の表記.get(NUM_1);
-        source.fuchoKi2 = 期の表記.get(NUM_2);
-        source.fuchoKi3 = 期の表記.get(NUM_3);
-        source.fuchoKi4 = 期の表記.get(NUM_4);
-        source.fuchoKi5 = 期の表記.get(NUM_5);
-        source.fuchoKi6 = 期の表記.get(NUM_6);
-        source.fuchoKi7 = 期の表記.get(NUM_7);
-        source.fuchoKi8 = 期の表記.get(NUM_8);
-        source.fuchoKi9 = 期の表記.get(NUM_9);
-        source.fuchoKi10 = 期の表記.get(NUM_10);
-        source.fuchoKi11 = 期の表記.get(NUM_11);
-        source.fuchoKi12 = 期の表記.get(NUM_12);
-        source.fuchoKi13 = 期の表記.get(NUM_13);
-        source.fuchoKi14 = 期の表記.get(NUM_14);
+        source.fuchoKi1 = 期の表記.get(NUM_14);
+        source.fuchoKi2 = 期の表記.get(NUM_13);
+        source.fuchoKi3 = 期の表記.get(NUM_12);
+        source.fuchoKi4 = 期の表記.get(NUM_11);
+        source.fuchoKi5 = 期の表記.get(NUM_10);
+        source.fuchoKi6 = 期の表記.get(NUM_9);
+        source.fuchoKi7 = 期の表記.get(NUM_8);
+        source.fuchoKi8 = 期の表記.get(NUM_7);
+        source.fuchoKi9 = 期の表記.get(NUM_6);
+        source.fuchoKi10 = 期の表記.get(NUM_5);
+        source.fuchoKi11 = 期の表記.get(NUM_4);
+        source.fuchoKi12 = 期の表記.get(NUM_3);
+        source.fuchoKi13 = 期の表記.get(NUM_2);
+        source.fuchoKi14 = 期の表記.get(NUM_1);
         return source;
     }
 }

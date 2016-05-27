@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 /**
  * 支払口座情報を特定するためのMyBatis用パラメータクラスです。
  *
- * @reamsid_L DBC-0300-020 houtianpeng
+ * @reamsid_L DBC-0300-020 houtianpeng
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

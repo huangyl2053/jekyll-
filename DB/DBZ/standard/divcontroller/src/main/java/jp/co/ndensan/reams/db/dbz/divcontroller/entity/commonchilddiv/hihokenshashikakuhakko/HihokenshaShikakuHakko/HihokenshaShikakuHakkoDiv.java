@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokensh
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @author 自動生成
  */
 public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShikakuHakkoDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -35,9 +36,9 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("YukoKigenInfo")
-    private YukoKigenInfoDiv YukoKigenInfo;
+    private YukoKigenInfoDiv yukoKigenInfo;
     @JsonProperty("NinteiInfo")
-    private NinteiInfoDiv NinteiInfo;
+    private NinteiInfoDiv ninteiInfo;
     @JsonProperty("tabHihokenshaShikakuShosai")
     private tabHihokenshaShikakuShosaiDiv tabHihokenshaShikakuShosai;
     @JsonProperty("hidden入所施設コード１")
@@ -70,8 +71,9 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return YukoKigenInfo
      */
     @JsonProperty("YukoKigenInfo")
+    @Override
     public YukoKigenInfoDiv getYukoKigenInfo() {
-        return YukoKigenInfo;
+        return yukoKigenInfo;
     }
 
     /*
@@ -79,8 +81,8 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @param YukoKigenInfo YukoKigenInfo
      */
     @JsonProperty("YukoKigenInfo")
-    public void setYukoKigenInfo(YukoKigenInfoDiv YukoKigenInfo) {
-        this.YukoKigenInfo = YukoKigenInfo;
+    public void setYukoKigenInfo(YukoKigenInfoDiv yukoKigenInfo) {
+        this.yukoKigenInfo = yukoKigenInfo;
     }
 
     /*
@@ -88,8 +90,9 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return NinteiInfo
      */
     @JsonProperty("NinteiInfo")
+    @Override
     public NinteiInfoDiv getNinteiInfo() {
-        return NinteiInfo;
+        return ninteiInfo;
     }
 
     /*
@@ -97,8 +100,8 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @param NinteiInfo NinteiInfo
      */
     @JsonProperty("NinteiInfo")
-    public void setNinteiInfo(NinteiInfoDiv NinteiInfo) {
-        this.NinteiInfo = NinteiInfo;
+    public void setNinteiInfo(NinteiInfoDiv ninteiInfo) {
+        this.ninteiInfo = ninteiInfo;
     }
 
     /*
@@ -106,6 +109,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return tabHihokenshaShikakuShosai
      */
     @JsonProperty("tabHihokenshaShikakuShosai")
+    @Override
     public tabHihokenshaShikakuShosaiDiv getTabHihokenshaShikakuShosai() {
         return tabHihokenshaShikakuShosai;
     }
@@ -124,6 +128,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return hidden入所施設コード１
      */
     @JsonProperty("hidden入所施設コード１")
+    @Override
     public RString getHidden入所施設コード１() {
         return hidden入所施設コード１;
     }
@@ -142,6 +147,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return hidden入所施設種類１
      */
     @JsonProperty("hidden入所施設種類１")
+    @Override
     public RString getHidden入所施設種類１() {
         return hidden入所施設種類１;
     }
@@ -160,6 +166,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return hidden入所施設コード２
      */
     @JsonProperty("hidden入所施設コード２")
+    @Override
     public RString getHidden入所施設コード２() {
         return hidden入所施設コード２;
     }
@@ -178,6 +185,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return hidden入所施設種類２
      */
     @JsonProperty("hidden入所施設種類２")
+    @Override
     public RString getHidden入所施設種類２() {
         return hidden入所施設種類２;
     }
@@ -196,6 +204,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return hidden入所施設コード３
      */
     @JsonProperty("hidden入所施設コード３")
+    @Override
     public RString getHidden入所施設コード３() {
         return hidden入所施設コード３;
     }
@@ -214,6 +223,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return hidden入所施設種類３
      */
     @JsonProperty("hidden入所施設種類３")
+    @Override
     public RString getHidden入所施設種類３() {
         return hidden入所施設種類３;
     }
@@ -232,6 +242,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return hidden適用終了日１
      */
     @JsonProperty("hidden適用終了日１")
+    @Override
     public RString getHidden適用終了日１() {
         return hidden適用終了日１;
     }
@@ -250,6 +261,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return hidden適用終了日２
      */
     @JsonProperty("hidden適用終了日２")
+    @Override
     public RString getHidden適用終了日２() {
         return hidden適用終了日２;
     }
@@ -268,6 +280,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return hidden適用終了日３
      */
     @JsonProperty("hidden適用終了日３")
+    @Override
     public RString getHidden適用終了日３() {
         return hidden適用終了日３;
     }
@@ -290,7 +303,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTxtYukoKigen(TextBoxDate txtYukoKigen) {
+    public void setTxtYukoKigen(TextBoxDate txtYukoKigen) {
         this.getYukoKigenInfo().setTxtYukoKigen(txtYukoKigen);
     }
 
@@ -300,7 +313,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTxtKofuDate(TextBoxFlexibleDate txtKofuDate) {
+    public void setTxtKofuDate(TextBoxFlexibleDate txtKofuDate) {
         this.getYukoKigenInfo().setTxtKofuDate(txtKofuDate);
     }
 
@@ -310,7 +323,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTxtHokensha(TextBox txtHokensha) {
+    public void setTxtHokensha(TextBox txtHokensha) {
         this.getYukoKigenInfo().setTxtHokensha(txtHokensha);
     }
 
@@ -320,7 +333,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setDdlKofuJiyu(DropDownList ddlKofuJiyu) {
+    public void setDdlKofuJiyu(DropDownList ddlKofuJiyu) {
         this.getYukoKigenInfo().setDdlKofuJiyu(ddlKofuJiyu);
     }
 
@@ -330,7 +343,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTxtYokaigodo(TextBox txtYokaigodo) {
+    public void setTxtYokaigodo(TextBox txtYokaigodo) {
         this.getNinteiInfo().setTxtYokaigodo(txtYokaigodo);
     }
 
@@ -340,7 +353,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTxtNinteiYMD(TextBoxDate txtNinteiYMD) {
+    public void setTxtNinteiYMD(TextBoxDate txtNinteiYMD) {
         this.getNinteiInfo().setTxtNinteiYMD(txtNinteiYMD);
     }
 
@@ -350,7 +363,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTxtNinteiYukoFromYMD(TextBoxDate txtNinteiYukoFromYMD) {
+    public void setTxtNinteiYukoFromYMD(TextBoxDate txtNinteiYukoFromYMD) {
         this.getNinteiInfo().setTxtNinteiYukoFromYMD(txtNinteiYukoFromYMD);
     }
 
@@ -360,7 +373,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setLblKara1(Label lblKara1) {
+    public void setLblKara1(Label lblKara1) {
         this.getNinteiInfo().setLblKara1(lblKara1);
     }
 
@@ -370,7 +383,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTxtNinteiYukoToYMD(TextBoxDate txtNinteiYukoToYMD) {
+    public void setTxtNinteiYukoToYMD(TextBoxDate txtNinteiYukoToYMD) {
         this.getNinteiInfo().setTxtNinteiYukoToYMD(txtNinteiYukoToYMD);
     }
 
@@ -380,7 +393,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTxtShinseiDate(TextBoxFlexibleDate txtShinseiDate) {
+    public void setTxtShinseiDate(TextBoxFlexibleDate txtShinseiDate) {
         this.getNinteiInfo().setTxtShinseiDate(txtShinseiDate);
     }
 
@@ -390,7 +403,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setChkSeidoitsuseiShogai(CheckBoxList chkSeidoitsuseiShogai) {
+    public void setChkSeidoitsuseiShogai(CheckBoxList chkSeidoitsuseiShogai) {
         this.getNinteiInfo().setChkSeidoitsuseiShogai(chkSeidoitsuseiShogai);
     }
 
@@ -400,7 +413,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTplGendoGaku(tplGendoGakuDiv tplGendoGaku) {
+    public void setTplGendoGaku(tplGendoGakuDiv tplGendoGaku) {
         this.getTabHihokenshaShikakuShosai().setTplGendoGaku(tplGendoGaku);
     }
 
@@ -410,7 +423,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTblGendoGaku(tblGendoGakuDiv tblGendoGaku) {
+    public void setTblGendoGaku(tblGendoGakuDiv tblGendoGaku) {
         this.getTabHihokenshaShikakuShosai().getTplGendoGaku().setTblGendoGaku(tblGendoGaku);
     }
 
@@ -425,7 +438,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTxtKubunShikyuGendoKijunGaku(TextBoxNum txtKubunShikyuGendoKijunGaku) {
+    public void setTxtKubunShikyuGendoKijunGaku(TextBoxNum txtKubunShikyuGendoKijunGaku) {
         this.getTabHihokenshaShikakuShosai().getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().setTxtKubunShikyuGendoKijunGaku(txtKubunShikyuGendoKijunGaku);
     }
 
@@ -435,7 +448,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTxtYukoFromYMD(TextBoxDate txtYukoFromYMD) {
+    public void setTxtYukoFromYMD(TextBoxDate txtYukoFromYMD) {
         this.getTabHihokenshaShikakuShosai().getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().setTxtYukoFromYMD(txtYukoFromYMD);
     }
 
@@ -445,7 +458,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setLblKara(Label lblKara) {
+    public void setLblKara(Label lblKara) {
         this.getTabHihokenshaShikakuShosai().getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().setLblKara(lblKara);
     }
 
@@ -455,7 +468,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTxtYukoToYMD(TextBoxDate txtYukoToYMD) {
+    public void setTxtYukoToYMD(TextBoxDate txtYukoToYMD) {
         this.getTabHihokenshaShikakuShosai().getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().setTxtYukoToYMD(txtYukoToYMD);
     }
 
@@ -470,7 +483,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTplShinsakaiIken(tplShinsakaiIkenDiv tplShinsakaiIken) {
+    public void setTplShinsakaiIken(tplShinsakaiIkenDiv tplShinsakaiIken) {
         this.getTabHihokenshaShikakuShosai().setTplShinsakaiIken(tplShinsakaiIken);
     }
 
@@ -480,7 +493,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setLblShinsakaiIken(Label lblShinsakaiIken) {
+    public void setLblShinsakaiIken(Label lblShinsakaiIken) {
         this.getTabHihokenshaShikakuShosai().getTplShinsakaiIken().setLblShinsakaiIken(lblShinsakaiIken);
     }
 
@@ -490,7 +503,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTxtShinsakaiIken(TextBoxMultiLine txtShinsakaiIken) {
+    public void setTxtShinsakaiIken(TextBoxMultiLine txtShinsakaiIken) {
         this.getTabHihokenshaShikakuShosai().getTplShinsakaiIken().setTxtShinsakaiIken(txtShinsakaiIken);
     }
 
@@ -500,7 +513,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTplKyufuSeigen(tplKyufuSeigenDiv tplKyufuSeigen) {
+    public void setTplKyufuSeigen(tplKyufuSeigenDiv tplKyufuSeigen) {
         this.getTabHihokenshaShikakuShosai().setTplKyufuSeigen(tplKyufuSeigen);
     }
 
@@ -510,7 +523,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setLblKyufuSeigen(Label lblKyufuSeigen) {
+    public void setLblKyufuSeigen(Label lblKyufuSeigen) {
         this.getTabHihokenshaShikakuShosai().getTplKyufuSeigen().setLblKyufuSeigen(lblKyufuSeigen);
     }
 
@@ -520,7 +533,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTblKyuhuSeigen(tblKyuhuSeigenDiv tblKyuhuSeigen) {
+    public void setTblKyuhuSeigen(tblKyuhuSeigenDiv tblKyuhuSeigen) {
         this.getTabHihokenshaShikakuShosai().getTplKyufuSeigen().setTblKyuhuSeigen(tblKyuhuSeigen);
     }
 
@@ -570,7 +583,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTplShienJigyosha(tplShienJigyoshaDiv tplShienJigyosha) {
+    public void setTplShienJigyosha(tplShienJigyoshaDiv tplShienJigyosha) {
         this.getTabHihokenshaShikakuShosai().setTplShienJigyosha(tplShienJigyosha);
     }
 
@@ -580,7 +593,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setLblShienJigyosha(Label lblShienJigyosha) {
+    public void setLblShienJigyosha(Label lblShienJigyosha) {
         this.getTabHihokenshaShikakuShosai().getTplShienJigyosha().setLblShienJigyosha(lblShienJigyosha);
     }
 
@@ -590,7 +603,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTblJigyosha(tblJigyoshaDiv tblJigyosha) {
+    public void setTblJigyosha(tblJigyoshaDiv tblJigyosha) {
         this.getTabHihokenshaShikakuShosai().getTplShienJigyosha().setTblJigyosha(tblJigyosha);
     }
 
@@ -660,7 +673,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTplShisetsuNyutaisho(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho) {
+    public void setTplShisetsuNyutaisho(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho) {
         this.getTabHihokenshaShikakuShosai().setTplShisetsuNyutaisho(tplShisetsuNyutaisho);
     }
 
@@ -670,7 +683,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setLblKaigoHokensha(Label lblKaigoHokensha) {
+    public void setLblKaigoHokensha(Label lblKaigoHokensha) {
         this.getTabHihokenshaShikakuShosai().getTplShisetsuNyutaisho().setLblKaigoHokensha(lblKaigoHokensha);
     }
 
@@ -680,7 +693,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
-    public void  setTblShisetsuNyutaisho(tblShisetsuNyutaishoDiv tblShisetsuNyutaisho) {
+    public void setTblShisetsuNyutaisho(tblShisetsuNyutaishoDiv tblShisetsuNyutaisho) {
         this.getTabHihokenshaShikakuShosai().getTplShisetsuNyutaisho().setTblShisetsuNyutaisho(tblShisetsuNyutaisho);
     }
 
@@ -747,8 +760,8 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public void initialize(HihokenshaNo 被保険者番号, RString メニューID) {
+    public void initialize(HihokenshaNo 被保険者番号, RString メニューID, ShikibetsuCode 識別コード) {
         HihokenshaShikakuHakkoHandler handler = new HihokenshaShikakuHakkoHandler(this);
-        handler.initialize(被保険者番号, メニューID);
+        handler.initialize(被保険者番号, メニューID, 識別コード);
     }
 }

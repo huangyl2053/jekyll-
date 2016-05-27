@@ -22,29 +22,42 @@ public class GenendoIdouKekkaIchiranInputEntity {
 
     private final KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity;
     private final KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正後Entity;
-    private final RString shutsuryokujunID;
+    private final RString 並び順の１件目;
+    private final RString 並び順の２件目;
+    private final RString 並び順の３件目;
+    private final RString 並び順の４件目;
+    private final RString 並び順の５件目;
     private final YMDHMS 調定日時;
     private final FlexibleYear 賦課年度;
     private final Association association;
     private final RString 住所編集;
 
     /**
-     * コンストラクタです。
      *
      * @param 計算後情報_宛名_口座_更正前Entity KeisanjohoAtenaKozaEntity
      * @param 計算後情報_宛名_口座_更正後Entity KeisanjohoAtenaKozaEntity
-     * @param shutsuryokujunID RString
-     * @param 賦課年度 FUKANENDO
      * @param 調定日時 YMDHMS
+     * @param 賦課年度 FUKANENDO
      * @param association Association
      * @param 住所編集 RString
+     * @param 並び順の１件目 RString
+     * @param 並び順の２件目 RString
+     * @param 並び順の３件目 RString
+     * @param 並び順の４件目 RString
+     * @param 並び順の５件目 RString
      */
     public GenendoIdouKekkaIchiranInputEntity(KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity,
             KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正後Entity,
-            RString shutsuryokujunID, YMDHMS 調定日時, FlexibleYear 賦課年度, Association association, RString 住所編集) {
+            YMDHMS 調定日時, FlexibleYear 賦課年度, Association association, RString 住所編集,
+            RString 並び順の１件目, RString 並び順の２件目,
+            RString 並び順の３件目, RString 並び順の４件目, RString 並び順の５件目) {
         this.計算後情報_宛名_口座_更正前Entity = 計算後情報_宛名_口座_更正前Entity;
         this.計算後情報_宛名_口座_更正後Entity = 計算後情報_宛名_口座_更正後Entity;
-        this.shutsuryokujunID = shutsuryokujunID;
+        this.並び順の１件目 = 並び順の１件目;
+        this.並び順の２件目 = 並び順の２件目;
+        this.並び順の３件目 = 並び順の３件目;
+        this.並び順の４件目 = 並び順の４件目;
+        this.並び順の５件目 = 並び順の５件目;
         this.調定日時 = 調定日時;
         this.賦課年度 = 賦課年度;
         this.association = association;

@@ -815,14 +815,14 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
     }
 
     private void edit所得段階区分リスト(EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 共通情報, List<DankaiKubun> dankaiKubunList, boolean 更正前) {
-        int 月割開始年月1 = new FlexibleDate(共通情報.get月割開始年月1()).getMonthValue();
-        int 月割終了年月1 = new FlexibleDate(共通情報.get月割終了年月1()).getMonthValue();
+        int 月割開始年月1 = new FlexibleDate(共通情報.get月割開始年月1_西暦()).getMonthValue();
+        int 月割終了年月1 = new FlexibleDate(共通情報.get月割終了年月1_西暦()).getMonthValue();
         int 月割開始年月2 = 0;
         int 月割終了年月2 = 0;
         boolean 月割終了年月 = false;
-        if (!RString.isNullOrEmpty(共通情報.get月割開始年月2()) && !RString.isNullOrEmpty(共通情報.get月割終了年月2())) {
-            月割開始年月2 = new FlexibleDate(共通情報.get月割開始年月2()).getMonthValue();
-            月割終了年月2 = new FlexibleDate(共通情報.get月割終了年月2()).getMonthValue();
+        if (!RString.isNullOrEmpty(共通情報.get月割開始年月2_西暦()) && !RString.isNullOrEmpty(共通情報.get月割終了年月2_西暦())) {
+            月割開始年月2 = new FlexibleDate(共通情報.get月割開始年月2_西暦()).getMonthValue();
+            月割終了年月2 = new FlexibleDate(共通情報.get月割終了年月2_西暦()).getMonthValue();
             月割終了年月 = true;
         }
 

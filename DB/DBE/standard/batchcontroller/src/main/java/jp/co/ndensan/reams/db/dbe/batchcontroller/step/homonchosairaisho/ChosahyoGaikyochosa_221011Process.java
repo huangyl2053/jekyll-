@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -148,6 +149,7 @@ public class ChosahyoGaikyochosa_221011Process extends BatchProcessBase<HomonCho
     private RString 所属機関コード10;
     private RString 所属機関コード11;
     private RString 所属機関コード12;
+    private RString 年;
     private List<ChosahyoGaikyochosaItem> itemList;
     private IHomonChosaIraishoMapper iHomonChosaIraishoMapper;
     private HomonChosaIraishoProcessParamter processParamter;
@@ -184,11 +186,11 @@ public class ChosahyoGaikyochosa_221011Process extends BatchProcessBase<HomonCho
 
     @Override
     protected void afterExecute() {
-        バッチ出力条件リストの出力();
         if (itemList != null && !itemList.isEmpty()) {
             ChosahyoGaikyochosaReport report = ChosahyoGaikyochosaReport.createFrom(itemList);
             report.writeBy(reportSourceWriter);
         }
+        バッチ出力条件リストの出力();
     }
 
     private ChosahyoGaikyochosaItem setItem(HomonChosaIraishoRelateEntity entity) {
@@ -210,7 +212,7 @@ public class ChosahyoGaikyochosa_221011Process extends BatchProcessBase<HomonCho
         } else if (YOKAIGOJOTAIKUBUN13.equals(entity.get前回要介護状態区分コード())) {
             要支援詳細 = 文字列2;
         }
-
+        get年月日(entity.get生年月日());
         return new ChosahyoGaikyochosaItem(保険者番号1,
                 保険者番号2,
                 保険者番号3,
@@ -265,9 +267,9 @@ public class ChosahyoGaikyochosa_221011Process extends BatchProcessBase<HomonCho
                 誕生日明治,
                 誕生日大正,
                 誕生日昭和,
-                !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(0, INT3) : RString.EMPTY,
-                !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(INT3, INT4) : RString.EMPTY,
-                !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(INT4, INT5) : RString.EMPTY,
+                年,
+                !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(INT4, INT6) : RString.EMPTY,
+                !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(INT6, INT8) : RString.EMPTY,
                 entity.get年齢(),
                 entity.get連絡先住所(),
                 entity.get連絡先郵便番号(),
@@ -278,14 +280,21 @@ public class ChosahyoGaikyochosa_221011Process extends BatchProcessBase<HomonCho
                 ? RensakusakiTsuzukigara.toValue(entity.get連絡先続柄()).get名称() : RString.EMPTY,
                 RString.isNullOrEmpty(entity.get前回認定年月日()) ? 記号 : RString.EMPTY,
                 !RString.isNullOrEmpty(entity.get前回認定年月日()) ? 記号 : RString.EMPTY,
-                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get前回認定年月日().substring(0, INT3) : RString.EMPTY,
-                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get前回認定年月日().substring(INT3, INT4) : RString.EMPTY,
-                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get前回認定年月日().substring(INT4, INT5) : RString.EMPTY,
+                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get前回認定年月日().substring(0, INT4) : RString.EMPTY,
+                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get前回認定年月日().substring(INT4, INT6) : RString.EMPTY,
+                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get前回認定年月日().substring(INT6, INT8) : RString.EMPTY,
                 YOKAIGOJOTAIKUBUN01.equals(entity.get前回要介護状態区分コード()) ? 記号 : RString.EMPTY,
                 要支援,
                 要支援詳細,
                 get要介護詳細(entity),
                 get要介護詳細(entity.get前回要介護状態区分コード()));
+    }
+
+    private void get年月日(RString 生年月日) {
+        年 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(生年月日)) {
+            年 = new FlexibleYear(生年月日.substring(0, INT4)).wareki().eraType(EraType.KANJI).toDateString().substring(2, INT4);
+        }
     }
 
     private RString get要介護詳細(HomonChosaIraishoRelateEntity entity) {
@@ -483,10 +492,8 @@ public class ChosahyoGaikyochosa_221011Process extends BatchProcessBase<HomonCho
         }
         RString hakkobi = processParamter.getHakkobi();
         if (!RString.isNullOrEmpty(hakkobi)) {
-            dbT5201Entity.setIraishoShutsuryokuYMD(new FlexibleDate(hakkobi));
             dbT5201Entity.setChosahyoTouShutsuryokuYMD(new FlexibleDate(hakkobi));
         } else {
-            dbT5201Entity.setIraishoShutsuryokuYMD(FlexibleDate.EMPTY);
             dbT5201Entity.setChosahyoTouShutsuryokuYMD(FlexibleDate.EMPTY);
         }
         dbT5201EntityWriter.update(dbT5201Entity);

@@ -34,16 +34,7 @@ var DBZ;
             PublicProperties.prototype.getEditTypes = function () {
                 var editTypes = new UZA.EditTypeForPublicProperty();
 
-                editTypes.addEditType("btnHokenshaGuide_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 return editTypes;
-            };
-
-            PublicProperties.prototype.getbtnHokenshaGuide_displayNone = function () {
-                return this.controls.btnHokenshaGuide().displayNone;
-            };
-
-            PublicProperties.prototype.setbtnHokenshaGuide_displayNone = function (value) {
-                this.controls.btnHokenshaGuide().displayNone = value;
             };
             return PublicProperties;
         })();

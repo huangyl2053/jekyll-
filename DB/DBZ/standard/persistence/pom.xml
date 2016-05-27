@@ -32,6 +32,11 @@
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxTestHelper</artifactId>
         </dependency>
+        <!-- UAX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxPersistence</artifactId>
+        </dependency>
 
         <!-- �ｽe�ｽX�ｽg -->
         <dependency>

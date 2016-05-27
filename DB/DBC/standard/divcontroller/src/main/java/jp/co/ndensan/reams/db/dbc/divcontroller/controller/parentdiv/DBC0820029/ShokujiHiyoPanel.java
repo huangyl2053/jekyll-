@@ -460,7 +460,7 @@ public class ShokujiHiyoPanel {
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnKihonInfo(ShokujiHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.基本情報).respond();
     }
 
     /**
@@ -471,18 +471,7 @@ public class ShokujiHiyoPanel {
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnKyufuMeisai(ShokujiHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
-    }
-
-    /**
-     * 「特定診療費」ボタン
-     *
-     * @param div ShokujiHiyoPanelDiv
-     * @return ResponseData<ShokujiHiyoPanelDiv>
-     */
-    public ResponseData<ShokujiHiyoPanelDiv> onClick_btnTokuteiShinryouhii(ShokujiHiyoPanelDiv div) {
-        getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.給付費明細).respond();
     }
 
     /**
@@ -493,7 +482,7 @@ public class ShokujiHiyoPanel {
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnServiceKeikakuhi(ShokujiHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.サービス計画費).respond();
     }
 
     /**
@@ -504,7 +493,7 @@ public class ShokujiHiyoPanel {
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnTokuteiNyushosya(ShokujiHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.特定入所者費用).respond();
     }
 
     /**
@@ -515,7 +504,7 @@ public class ShokujiHiyoPanel {
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnGoukeiInfo(ShokujiHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.合計情報).respond();
     }
 
     /**
@@ -527,7 +516,7 @@ public class ShokujiHiyoPanel {
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnKyufuhiMeisaiJyuchi(
             ShokujiHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.給付費明細_住特).respond();
     }
 
     /**
@@ -538,7 +527,7 @@ public class ShokujiHiyoPanel {
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnTokuteiShinryohi(ShokujiHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.特定診療費).respond();
     }
 
     /**
@@ -549,7 +538,7 @@ public class ShokujiHiyoPanel {
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnKyufuhiMeisaiJutoku(ShokujiHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.給付費明細_住特).respond();
     }
 
     /**
@@ -560,7 +549,7 @@ public class ShokujiHiyoPanel {
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnKinkyujiShoteiShikan(ShokujiHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.緊急時_所定疾患).respond();
     }
 
     /**
@@ -571,18 +560,7 @@ public class ShokujiHiyoPanel {
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnKinkyushisetuRyoyouhi(ShokujiHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
-    }
-
-    /**
-     * 「食事費用」ボタン
-     *
-     * @param div ShokujiHiyoPanelDiv
-     * @return ResponseData<ShokujiHiyoPanelDiv>
-     */
-    public ResponseData<ShokujiHiyoPanelDiv> onClick_btnShokujihiyo(ShokujiHiyoPanelDiv div) {
-        getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.緊急時施設療養費).respond();
     }
 
     /**
@@ -593,7 +571,7 @@ public class ShokujiHiyoPanel {
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnSeikyugakuShukei(ShokujiHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.請求額集計).respond();
     }
 
     /**
@@ -604,7 +582,7 @@ public class ShokujiHiyoPanel {
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnShafukukeigenGaku(ShokujiHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.社福軽減額).respond();
     }
 
     private ShokujiHiyoPanelHandler getHandler(ShokujiHiyoPanelDiv div) {

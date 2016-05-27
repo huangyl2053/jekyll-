@@ -173,6 +173,30 @@ public class EditedKoza {
      *
      * @return 通帳記号
      */
+    public RString getEdited通帳記号() {
+        if (口座 == null) {
+            return RString.EMPTY;
+        }
+        return 口座.getEdited通帳記号();
+    }
+
+    /**
+     * 通帳番号を返却します。
+     *
+     * @return 通帳番号
+     */
+    public RString getEdited通帳番号() {
+        if (口座 == null) {
+            return RString.EMPTY;
+        }
+        return 口座.getEdited通帳番号();
+    }
+
+    /**
+     * 通帳記号を返却します。
+     *
+     * @return 通帳記号
+     */
     public RString get通帳記号() {
         if (口座 == null) {
             return RString.EMPTY;

@@ -11,6 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
@@ -66,19 +67,19 @@ public class ShikakShutokuHanteiComparatorTest extends DbaTestBase {
 
     private static List<ShikakShutokuHantei> createSampleList() {
         List<ShikakShutokuHantei> smapleList = new ArrayList<>();
-        o1.setCodeShubetsu("0007");
+        o1.setCodeShubetsu(new RString("0007"));
         o1.setJiyuCode(Code.EMPTY);
         o1.setTekiyoYMD(new FlexibleDate("20000401"));
         o1.setTodokedeYMD(new FlexibleDate("20000402"));
-        o2.setCodeShubetsu("0013");
+        o2.setCodeShubetsu(new RString("0013"));
         o2.setJiyuCode(Code.EMPTY);
         o2.setTekiyoYMD(null);
         o2.setTodokedeYMD(null);
-        o3.setCodeShubetsu("0014");
+        o3.setCodeShubetsu(new RString("0014"));
         o3.setJiyuCode(Code.EMPTY);
         o3.setTekiyoYMD(new FlexibleDate(""));
         o3.setTodokedeYMD(new FlexibleDate(""));
-        o4.setCodeShubetsu("0015");
+        o4.setCodeShubetsu(new RString("0015"));
         o4.setJiyuCode(Code.EMPTY);
         o4.setTekiyoYMD(new FlexibleDate("20030401"));
         o4.setTodokedeYMD(new FlexibleDate("20030402"));
