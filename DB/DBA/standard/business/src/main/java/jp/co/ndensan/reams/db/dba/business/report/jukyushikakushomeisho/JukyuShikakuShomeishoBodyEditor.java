@@ -6,7 +6,12 @@
 package jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho;
 
 import jp.co.ndensan.reams.db.dba.entity.report.jukyushikakushomeisho.JukyuShikakuShomeishoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 受給資格証明書ボディEditorです。
@@ -28,6 +33,7 @@ public class JukyuShikakuShomeishoBodyEditor implements IJukyuShikakuShomeishoEd
     private static final RString SHINSEICHU_1 = new RString("男");
     private static final RString SHINSEICHU_2 = new RString("女");
     private static final RString HOUSI = new RString("*");
+    private static final RString HOUSI_3 = new RString("***");
     private final JukyuShikakuShomeishoBodyItem item;
 
     /**
@@ -125,9 +131,13 @@ public class JukyuShikakuShomeishoBodyEditor implements IJukyuShikakuShomeishoEd
             }
         }
         RString shinseichu = item.getShinseichu();
-        source.ninteizumi = new RString("0").equals(shinseichu) ? HOUSI : RString.EMPTY;
-        source.shinseichu = SHINSEICHU_1.equals(shinseichu) ? HOUSI : RString.EMPTY;
-        source.shinseiYMD = item.getShinseiYMD();
+        source.ninteizumi = new RString("0").equals(shinseichu) ? HOUSI_3 : RString.EMPTY;
+        source.shinseichu = new RString("1").equals(shinseichu) ? HOUSI_3 : RString.EMPTY;
+        RString shinseiYMD = item.getShinseiYMD();
+        if (!RString.isNullOrEmpty(shinseiYMD)) {
+            source.shinseiYMD = new RDate(shinseiYMD.toString()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
         source.ninteiYMD = item.getNinteiYMD();
         source.yokaigoKubun = item.getYokaigoKubun();
         source.yukoKaishiYMD = item.getYukoKaishiYMD();
