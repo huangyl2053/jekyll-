@@ -45,7 +45,7 @@ public class ValidationHandler {
                 && shoDiv.getPanelInput().getTxtYukouKigen().getValue() != null)
                 && (!shoDiv.getPanelInput().getTxtKoufuDate().getValue().
                 isBefore(shoDiv.getPanelInput().getTxtYukouKigen().getValue()))) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.ValidateA, shoDiv.getPanelInput().getTxtKoufuType()));
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.ValidateA, shoDiv.getPanelInput().getTxtKoufuDate()));
         }
     }
 
