@@ -17,4 +17,23 @@ public interface IHihokenshaShikakuHakkoDiv extends ICommonChildDivBasePropertie
     NinteiInfoDiv getNinteiInfo();
 
     YukoKigenInfoDiv getYukoKigenInfo();
+
+    RString getHidden入所施設コード１();
+
+    RString getHidden入所施設種類１();
+
+    RString getHidden入所施設コード２();
+
+    RString getHidden入所施設種類２();
+
+    RString getHidden入所施設コード３();
+
+    RString getHidden入所施設種類３();
+
+    RString getHidden適用終了日１();
+
+    RString getHidden適用終了日２();
+
+    RString getHidden適用終了日３();
+
 }
