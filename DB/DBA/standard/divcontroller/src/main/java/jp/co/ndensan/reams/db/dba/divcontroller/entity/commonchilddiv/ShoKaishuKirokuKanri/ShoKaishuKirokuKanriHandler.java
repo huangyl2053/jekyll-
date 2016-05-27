@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuIdentifier;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -73,7 +74,7 @@ public class ShoKaishuKirokuKanriHandler {
             if (businessList != null && !businessList.isEmpty()) {
                 for (ShoKofuKaishu jigyoshaInput : businessList) {
                     dgKoufuKaishu_Row dgJigyoshaItiran = new dgKoufuKaishu_Row();
-                    dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0006), new Code(jigyoshaInput.get交付証種類())));
+                    dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0006), new Code(jigyoshaInput.get交付証種類())));
                     if (jigyoshaInput.get交付年月日() != null && jigyoshaInput.get交付年月日().isValid()) {
                         dgJigyoshaItiran.setKoufuDate(jigyoshaInput.get交付年月日().wareki().toDateString());
                     } else {
@@ -120,7 +121,7 @@ public class ShoKaishuKirokuKanriHandler {
             if (businessList != null && !businessList.isEmpty()) {
                 for (ShoKofuKaishu jigyoshaInput : businessList) {
                     dgKoufuKaishu_Row dgJigyoshaItiran = new dgKoufuKaishu_Row();
-                    dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0006), new Code(jigyoshaInput.get交付証種類())));
+                    dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0006), new Code(jigyoshaInput.get交付証種類())));
                     if (jigyoshaInput.get交付年月日() != null && jigyoshaInput.get交付年月日().isValid()) {
                         dgJigyoshaItiran.setKoufuDate(jigyoshaInput.get交付年月日().wareki().toDateString());
                     } else {
