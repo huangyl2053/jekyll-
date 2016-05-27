@@ -389,13 +389,22 @@ public class JukyuShikakuShomeishoFinder {
         }
         outEntity.set要介護状態区分(inEntity.get要介護状態区分());
 
-        outEntity.set認定の有効期間の開始年月日(inEntity.get有効期間の開始年月日());
-        outEntity.set認定の有効期間の終了年月日(inEntity.get有効期間の終了年月日());
+        RDate 有効期間の開始年月日
+                = null == inEntity.get有効期間の開始年月日() ? RDate.MIN : new RDate(inEntity.get有効期間の開始年月日().toString());
+        RDate 有効期間の終了年月日
+                = null == inEntity.get有効期間の終了年月日() ? RDate.MIN : new RDate(inEntity.get有効期間の終了年月日().toString());
+        outEntity.set認定の有効期間の開始年月日(有効期間の開始年月日
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+
+        outEntity.set認定の有効期間の終了年月日(有効期間の終了年月日
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
     }
 
     private void set申請状況And年月日(JukyuShikakuShomeishoDataEntity outEntity, JukyuShikakuShomeishoKaiKo inEntity, FlexibleDate 認定年月日) {
         if (inEntity.get申請日() != null && !inEntity.get申請日().isEmpty()) {
-            outEntity.set申請状況(new RString("申請中"));
+            outEntity.set申請状況(new RString("0"));
             outEntity.set申請年月日(inEntity.get申請日());
             if (認定年月日 != null) {
                 outEntity.set認定年月日(認定年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
@@ -407,7 +416,7 @@ public class JukyuShikakuShomeishoFinder {
     private void set申請状況And年月日(JukyuShikakuShomeishoDataEntity outEntity,
             JukyuShikakuShomeishoKaiKo inEntity, DbT4001JukyushaDaichoEntity dbT4001JukyushaDaichoEntity) {
         if (null == inEntity.get申請日() || inEntity.get申請日().isEmpty()) {
-            outEntity.set申請状況(new RString("認定済"));
+            outEntity.set申請状況(new RString("1"));
             outEntity.set申請年月日(RString.EMPTY);
             FlexibleDate ninteiYMD = dbT4001JukyushaDaichoEntity.getNinteiYMD();
 
