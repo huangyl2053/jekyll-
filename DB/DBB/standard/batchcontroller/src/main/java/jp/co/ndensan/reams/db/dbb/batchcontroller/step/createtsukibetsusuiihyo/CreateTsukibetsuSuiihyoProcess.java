@@ -57,6 +57,7 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<HihokenshaD
     private static final int INT_6 = 6;
     private static final RString TABLE_資格状況一時テーブル = new RString("TmpSikakuJyoukyou_Ichi");
     private static final RString TABLE_介護情報一時テーブル = new RString("TmpKayigoJyoho_Ichi");
+    private static final RString TABLE_減免介護情報一時テーブル = new RString("TmpGemmenKayigoJyoho_Ichi");
     private List<HihokenshaDaichoPsm> hihokenshaDaichoPsmList;
     private CreateTsukibetsuSuiihyoProcessParameter processPrm;
     private CreateTsukibetsuSuiihyoMyBatisParameter mybatisPrm;
@@ -65,6 +66,8 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<HihokenshaD
     BatchEntityCreatedTempTableWriter 資格状況一時テーブル;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 介護情報一時テーブル;
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 減免介護情報一時テーブル;
 
     @Override
     protected void initialize() {
@@ -93,6 +96,8 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<HihokenshaD
         資格状況一時テーブル = new BatchEntityCreatedTempTableWriter(TABLE_資格状況一時テーブル,
                 HihokenshaDaichoPsm.class);
         介護情報一時テーブル = new BatchEntityCreatedTempTableWriter(TABLE_介護情報一時テーブル,
+                GennendoDate.class);
+        減免介護情報一時テーブル = new BatchEntityCreatedTempTableWriter(TABLE_減免介護情報一時テーブル,
                 GennendoDate.class);
     }
 
@@ -215,7 +220,7 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<HihokenshaD
                 .create_過年度のデータの取得(mybatisPrm.getChoteiNendo(), mybatisPrm.getChoteiKijunNichiji());
         List<GennendoDate> list = iCreateTsukibetsuSuiihyoMapper.get減免部分のデータの取得(parameter);
         for (GennendoDate gennendoDate : list) {
-            介護情報一時テーブル.insert(gennendoDate);
+            減免介護情報一時テーブル.insert(gennendoDate);
         }
     }
 }
