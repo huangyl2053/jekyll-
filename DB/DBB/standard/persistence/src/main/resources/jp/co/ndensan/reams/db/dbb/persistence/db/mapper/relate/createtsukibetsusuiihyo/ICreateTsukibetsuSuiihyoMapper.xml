@@ -363,6 +363,9 @@
             SUM(koumokuSyoukeyi."itiGetuNinsu") AS "itiGetuNinsu",
             SUM(koumokuSyoukeyi."niGetuNinsu") AS "niGetuNinsu",
             SUM(koumokuSyoukeyi."sanGetuNinsu") AS "sanGetuNinsu",
+            SUM(koumokuSyoukeyi."gennenSuyijiNinsu") AS "gennenSuyijiNinsu",
+            SUM(koumokuSyoukeyi."kanendoNinsu") AS "kanendoNinsu",
+            SUM(koumokuSyoukeyi."sayisyutuKanpuNinsu") AS "sayisyutuKanpuNinsu",
             SUM(koumokuSyoukeyi."yoGetuKinkaku") AS "yoGetuKinkaku",
             SUM(koumokuSyoukeyi."goGetuKinkaku") AS "goGetuKinkaku",
             SUM(koumokuSyoukeyi."rokuGetuKinkaku") AS "rokuGetuKinkaku",
@@ -511,7 +514,7 @@
         <result property="fuSaishutsuKampuGaku" column="fuka_fuSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="choshuHouhou" column="kibetsu_choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ki" column="kibetsu_ki"/>
-        <result property="choteiId" column="kibetsu_choteiId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choteiId" column="kibetsu_choteiId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="choteigaku" column="choteiKyotsu_choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="gemmenGaku" column="fuka_gemmenGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
@@ -754,6 +757,7 @@
                                                 WHERE sikakuJyoukyou."yoGetuSikakuumuFlg" = true
                                                 )
             AND kayigoJyoho."getu" = '04'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
         GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
     </select>
     
@@ -775,6 +779,7 @@
                                                 WHERE sikakuJyoukyou."goGetuSikakuumuFlg" = true
                                                 )
             AND kayigoJyoho."getu" = '05'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
         GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
     </select>
     
@@ -796,6 +801,7 @@
                                                 WHERE sikakuJyoukyou."rokuGetuSikakuumuFlg" = true
                                                 )
             AND kayigoJyoho."getu" = '06'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
         GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
     </select>
     
@@ -817,6 +823,7 @@
                                                 WHERE sikakuJyoukyou."nanaGetuSikakuumuFlg" = true
                                                 )
             AND kayigoJyoho."getu" = '07'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
         GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
     </select>
     
@@ -838,6 +845,7 @@
                                                 WHERE sikakuJyoukyou."hatiGetuSikakuumuFlg" = true
                                                 )
             AND kayigoJyoho."getu" = '08'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
         GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
     </select>
     
@@ -859,6 +867,7 @@
                                                 WHERE sikakuJyoukyou."kyuGetuSikakuumuFlg" = true
                                                 )
             AND kayigoJyoho."getu" = '09'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
         GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
     </select>
     
@@ -880,6 +889,7 @@
                                                 WHERE sikakuJyoukyou."jyuGetuSikakuumuFlg" = true
                                                 )
             AND kayigoJyoho."getu" = '10'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
         GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
     </select>
     
@@ -901,6 +911,7 @@
                                                 WHERE sikakuJyoukyou."jyuitiGetuSikakuumuFlg" = true
                                                 )
             AND kayigoJyoho."getu" = '11'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
         GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
     </select>
     
@@ -922,6 +933,7 @@
                                                 WHERE sikakuJyoukyou."jyuniGetuSikakuumuFlg" = true
                                                 )
             AND kayigoJyoho."getu" = '12'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
         GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
     </select>
     
@@ -943,6 +955,7 @@
                                                 WHERE sikakuJyoukyou."itiGetuSikakuumuFlg" = true
                                                 )
             AND kayigoJyoho."getu" = '01'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
         GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
     </select>
     
@@ -964,6 +977,7 @@
                                                 WHERE sikakuJyoukyou."niGetuSikakuumuFlg" = true
                                                 )
             AND kayigoJyoho."getu" = '02'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
         GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
     </select>
     
@@ -985,6 +999,7 @@
                                                 WHERE sikakuJyoukyou."sanGetuSikakuumuFlg" = true
                                                 )
             AND kayigoJyoho."getu" = '03'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
         GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
     </select>
     
@@ -1005,6 +1020,7 @@
                                                 FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
                                                 )
             AND kayigoJyoho."getu" = '随'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
         GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
     </select>
     

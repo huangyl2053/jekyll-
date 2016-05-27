@@ -5,9 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.chosaitakusakiandchosaininput;
 
+import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv.TaishoMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInputHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 共有子Div「調査委託先/調査員入力」のDivControllerです。
@@ -61,6 +65,68 @@ public class ChosaItakusakiAndChosainInput {
         div.getTxtChosaItakusakiName().clearValue();
         div.getTxtChosainCode().clearValue();
         div.getTxtChosainName().clearValue();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 調査委託先ガイドボタンを押下した際に動作するメソッドです。
+     *
+     * @param div 調査委託先/調査員入力共有子Div
+     * @return レスポンス
+     */
+    public ResponseData<ChosaItakusakiAndChosainInputDiv> onClick_BtnChosaItakusakiGuide(ChosaItakusakiAndChosainInputDiv div) {
+        KijuntsukiShichosonjohoiDataPassModel modle = new KijuntsukiShichosonjohoiDataPassModel();
+        modle.set市町村コード(div.getHdnShichosonCode());
+        modle.set委託先コード(div.getTxtChosaItakusakiCode().getValue());
+        modle.set委託先名(div.getTxtChosaItakusakiName().getValue());
+        modle.set対象モード(new RString(TaishoMode.Itakusaki.toString()));
+        div.setHdnDataPass(DataPassingConverter.serialize(modle));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 調査委託先/調査員ガイドDivに選択ボタンを押下した際に動作するメソッドです。（委託先対象モード）
+     *
+     * @param div 調査委託先/調査員入力共有子Div
+     * @return レスポンス
+     */
+    public ResponseData<ChosaItakusakiAndChosainInputDiv> onOKClose_BtnChosaItakusakiGuide(ChosaItakusakiAndChosainInputDiv div) {
+        KijuntsukiShichosonjohoiDataPassModel modle = DataPassingConverter.deserialize(div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
+        div.getTxtChosaItakusakiCode().setValue(modle.get委託先コード());
+        div.getTxtChosaItakusakiName().setValue(modle.get委託先名());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 調査員ガイドボタンを押下した際に動作するメソッドです。
+     *
+     * @param div 調査委託先/調査員入力共有子Div
+     * @return レスポンス
+     */
+    public ResponseData<ChosaItakusakiAndChosainInputDiv> onClick_BtnChosainGuide(ChosaItakusakiAndChosainInputDiv div) {
+        KijuntsukiShichosonjohoiDataPassModel modle = new KijuntsukiShichosonjohoiDataPassModel();
+        modle.set市町村コード(div.getHdnShichosonCode());
+        modle.set委託先コード(div.getTxtChosaItakusakiCode().getValue());
+        modle.set委託先名(div.getTxtChosaItakusakiName().getValue());
+        modle.set調査員コード(div.getTxtChosainCode().getValue());
+        modle.set調査員名(div.getTxtChosainName().getValue());
+        modle.set対象モード(new RString(TaishoMode.Chosain.toString()));
+        div.setHdnDataPass(DataPassingConverter.serialize(modle));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 調査委託先/調査員ガイドDivに選択ボタンを押下した際に動作するメソッドです。（調査員対象モード）
+     *
+     * @param div 調査委託先/調査員入力共有子Div
+     * @return レスポンス
+     */
+    public ResponseData<ChosaItakusakiAndChosainInputDiv> onOKClose_BtnChosainGuide(ChosaItakusakiAndChosainInputDiv div) {
+        KijuntsukiShichosonjohoiDataPassModel modle = DataPassingConverter.deserialize(div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
+        div.getTxtChosaItakusakiCode().setValue(modle.get委託先コード());
+        div.getTxtChosaItakusakiName().setValue(modle.get委託先名());
+        div.getTxtChosainCode().setValue(modle.get調査員コード());
+        div.getTxtChosainName().setValue(modle.get調査員名());
         return ResponseData.of(div).respond();
     }
 

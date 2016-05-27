@@ -41,7 +41,6 @@ public class ShokanbarayiKeteiInfoPanelHandler {
     private static final RString 新規 = new RString("新規");
     private static final RString 参照 = new RString("参照");
     private static final RString 業務区分 = new RString("03");
-    private static final RString 受託なし = new RString("1");
 
     private final ShokanbarayiKeteiInfoPanelDiv div;
     private static final int 定数_0 = 0;

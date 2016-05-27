@@ -57,10 +57,12 @@ public class KanendoIdouKekkaIchiranPrintService {
      */
     public SourceDataCollection printTaitsu(List<KeisangojohoAtenaKozaKouseizengoEntity> 更正前後EntityList,
             RString 出力順ID, YMDHMS 調定日時) {
+        SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             printFukusu(更正前後EntityList, 出力順ID, 調定日時, reportManager);
-            return reportManager.publish();
+            collection = reportManager.publish();
         }
+        return collection;
     }
 
     /**

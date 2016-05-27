@@ -50,7 +50,7 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
     private static final int 横番号_2 = 2;
     private static final int 横番号_3 = 3;
     private static final int 横番号_12 = 12;
-    private static final int 横行データ件数_8 = 8;
+    private static final int 横行データ件数_7 = 7;
     private static final int 横行データ件数_10 = 10;
     private static final int 横行データ件数_11 = 11;
 
@@ -105,8 +105,10 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
                 if (更新前.get縦番号().equals(画面データ.get縦番号())
                         && 更新前.get横番号().equals(画面データ.get横番号())
                         && 更新前.get集計番号().equals(画面データ.get集計番号())
-                        && (更新前.get集計結果値() == null
-                        || (!更新前.get集計結果値().equals(画面データ.get集計結果値())))) {
+                        && ((更新前.get集計結果値() == null && 画面データ.get集計結果値() != null)
+                        || (更新前.get集計結果値() != null && 画面データ.get集計結果値() == null)
+                        || (更新前.get集計結果値() != null && 画面データ.get集計結果値() != null
+                        && !更新前.get集計結果値().equals(画面データ.get集計結果値())))) {
                     更新前 = 更新前.createBuilderForEdit().set集計結果値(画面データ.get集計結果値()).build();
                     修正データリスト.add(更新前);
                 }
@@ -137,6 +139,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
         set給付費_地域密着型介護老人福祉施設入所者生活介護リスト(給付費_地域密着型介護老人福祉リスト);
         set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0206), 給付費_地域密着型介護老人福祉リスト,
                 new Decimal(縦番号_16));
+        画面データリスト.add(get画面データ(更新前データ, new Code(集計番号_0206), new Decimal(横番号_12),
+                new Decimal(縦番号_16), div.getPnl2().getPnl1().getTxt2SyokuhiMitchakuGokei().getValue()));
         List<Decimal> 給付費_短期入所生活介護リスト = new ArrayList<>();
         set給付費_短期入所生活介護リスト(給付費_短期入所生活介護リスト);
         set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0206), 給付費_短期入所生活介護リスト,
@@ -169,6 +173,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
         set給付費_居住費_地域密着型介護老人福祉施設入所者生活介護リスト(給付費_居住費老人福祉施設入所者生活介護リスト);
         set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0206),
                 給付費_居住費老人福祉施設入所者生活介護リスト, new Decimal(縦番号_17));
+        画面データリスト.add(get画面データ(更新前データ, new Code(集計番号_0206), new Decimal(横番号_12),
+                new Decimal(縦番号_17), div.getPnl2().getPnl1().getTxt2KyojuhiMitchakuGokei().getValue()));
         List<Decimal> 給付費_居住費短期入所生活介護リスト = new ArrayList<>();
         set給付費_居住費_短期入所生活介護リスト(給付費_居住費短期入所生活介護リスト);
         set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0206),
@@ -209,6 +215,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
         set件数_地域密着型介護老人福祉施設入所者生活介護リスト(件数_地域密着型介護老人福祉リスト);
         set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0205), 件数_地域密着型介護老人福祉リスト,
                 new Decimal(縦番号_16));
+        画面データリスト.add(get画面データ(更新前データ, new Code(集計番号_0205), new Decimal(横番号_12),
+                new Decimal(縦番号_16), div.getPnl2().getPnl1().getTxt1SyokuhiMitchakuGokei().getValue()));
         List<Decimal> 件数_短期入所生活介護リスト = new ArrayList<>();
         set件数_短期入所生活介護リスト(件数_短期入所生活介護リスト);
         set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0205), 件数_短期入所生活介護リスト,
@@ -241,6 +249,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
         set件数_居住費_地域密着型介護老人福祉施設入所者生活介護リスト(件数_居住費老人福祉施設入所者生活介護リスト);
         set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0205),
                 件数_居住費老人福祉施設入所者生活介護リスト, new Decimal(縦番号_17));
+        画面データリスト.add(get画面データ(更新前データ, new Code(集計番号_0205), new Decimal(横番号_12),
+                new Decimal(縦番号_17), div.getPnl2().getPnl1().getTxt1KyojuhiMitchakuGokei().getValue()));
         List<Decimal> 件数_居住費短期入所生活介護リスト = new ArrayList<>();
         set件数_居住費_短期入所生活介護リスト(件数_居住費短期入所生活介護リスト);
         set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0205),
@@ -435,7 +445,7 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
             List<Decimal> 件数リスト,
             Decimal 縦番号) {
         for (int i = 0; i < 件数リスト.size(); i++) {
-            if (件数リスト.size() == 横行データ件数_8 || 件数リスト.size() == 横行データ件数_11) {
+            if (件数リスト.size() == 横行データ件数_7 || 件数リスト.size() == 横行データ件数_11) {
                 画面データリスト.add(get画面データ(更新前データ, 集計番号, new Decimal(i + 横番号_2), 縦番号,
                         件数リスト.get(i)));
             } else if (件数リスト.size() == 横行データ件数_10) {

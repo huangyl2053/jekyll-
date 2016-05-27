@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
@@ -357,21 +359,27 @@ public class ShikakuFuseigoCorrector {
         if (flag == FLAG_2) {
             他特の情報修正後Builder.set他市町村住所地特例適用事由コード(他特の情報修正前.get他市町村住所地特例適用事由コード());
             他特の情報修正後Builder.set適用年月日(他特の情報修正前.get適用年月日());
-            他特の情報修正後Builder.set適用届出年月日(他特の情報修正前.get適用届出年月日());
+            他特の情報修正後Builder.set適用届出年月日(ObjectUtil.defaultIfNull(他特の情報修正前.get適用届出年月日(), FlexibleDate.EMPTY));
         }
-        他特の情報修正後Builder.set適用受付年月日(他特の情報修正前.get適用受付年月日());
+        他特の情報修正後Builder.set適用受付年月日(ObjectUtil.defaultIfNull(他特の情報修正前.get適用受付年月日(), FlexibleDate.EMPTY));
         if (flag == FLAG_1) {
-            他特の情報修正後Builder.set他市町村住所地特例解除事由コード(他特の情報修正前.get他市町村住所地特例解除事由コード());
-            他特の情報修正後Builder.set解除年月日(他特の情報修正前.get解除年月日());
-            他特の情報修正後Builder.set解除届出年月日(他特の情報修正前.get解除届出年月日());
+            他特の情報修正後Builder.set他市町村住所地特例解除事由コード(
+                    ObjectUtil.defaultIfNull(他特の情報修正前.get他市町村住所地特例解除事由コード(), RString.EMPTY));
+            他特の情報修正後Builder.set解除年月日(ObjectUtil.defaultIfNull(他特の情報修正前.get解除年月日(), FlexibleDate.EMPTY));
+            他特の情報修正後Builder.set解除届出年月日(ObjectUtil.defaultIfNull(他特の情報修正前.get解除届出年月日(), FlexibleDate.EMPTY));
         }
-        他特の情報修正後Builder.set解除受付年月日(他特の情報修正前.get解除受付年月日());
-        他特の情報修正後Builder.set措置保険者番号(他特の情報修正前.get措置保険者番号());
-        他特の情報修正後Builder.set措置被保険者番号(他特の情報修正前.get措置被保険者番号());
-        他特の情報修正後Builder.set他特例連絡票発行年月日(他特の情報修正前.get他特例連絡票発行年月日());
-        他特の情報修正後Builder.set施設退所通知発行年月日(他特の情報修正前.get施設退所通知発行年月日());
-        他特の情報修正後Builder.set施設変更通知発行年月日(他特の情報修正前.get施設変更通知発行年月日());
-        他特の情報修正後Builder.set論理削除フラグ(他特の情報修正前.is論理削除フラグ());
+        他特の情報修正後Builder.set解除受付年月日(ObjectUtil.defaultIfNull(
+                他特の情報修正前.get解除受付年月日(), FlexibleDate.EMPTY));
+        他特の情報修正後Builder.set措置保険者番号(ObjectUtil.defaultIfNull(
+                他特の情報修正前.get措置保険者番号(), ShoKisaiHokenshaNo.EMPTY));
+        他特の情報修正後Builder.set措置被保険者番号(ObjectUtil.defaultIfNull(他特の情報修正前.get措置被保険者番号(), HihokenshaNo.EMPTY));
+        他特の情報修正後Builder.set他特例連絡票発行年月日(ObjectUtil.defaultIfNull(
+                他特の情報修正前.get他特例連絡票発行年月日(), FlexibleDate.EMPTY));
+        他特の情報修正後Builder.set施設退所通知発行年月日(ObjectUtil.defaultIfNull(
+                他特の情報修正前.get施設退所通知発行年月日(), FlexibleDate.EMPTY));
+        他特の情報修正後Builder.set施設変更通知発行年月日(ObjectUtil.defaultIfNull(
+                他特の情報修正前.get施設変更通知発行年月日(), FlexibleDate.EMPTY));
+        他特の情報修正後Builder.set論理削除フラグ(ObjectUtil.defaultIfNull(他特の情報修正前.is論理削除フラグ(), false));
 
         return 他特の情報修正後Builder.build();
     }

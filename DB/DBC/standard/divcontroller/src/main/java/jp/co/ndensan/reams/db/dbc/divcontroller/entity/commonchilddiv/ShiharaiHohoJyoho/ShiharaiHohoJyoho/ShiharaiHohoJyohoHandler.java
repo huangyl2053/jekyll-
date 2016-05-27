@@ -93,8 +93,8 @@ public class ShiharaiHohoJyohoHandler {
      * @param 状態 状態
      */
     public void initialize(SikyuSinseiJyohoParameter 支給申請情報, RString 状態) {
-        div.setサブ業務コード(SubGyomuCode.DBC介護給付.value());
-        div.set識別コード(支給申請情報.getShikibetsuCode() == null ? RString.EMPTY : 支給申請情報.getShikibetsuCode().value());
+        div.setHdnTxtSubGyomuCode(SubGyomuCode.DBC介護給付.value());
+        div.setHdnTxtShikibetsuCode(支給申請情報.getShikibetsuCode() == null ? RString.EMPTY : 支給申請情報.getShikibetsuCode().value());
         KamokuCode 業務内区分コード = KamokuCode.EMPTY;
 
         業務内区分コード = get業務内区分コード(業務内区分コード);
@@ -923,14 +923,25 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtMeigininKana1().setReadOnly(true);
         div.getTxtMeigininKanji1().setReadOnly(true);
     }
-
-    private void set口座ID(SikyuSinseiJyohoParameter 支給申請情報, KamokuCode 業務内区分コード) {
+    /**
+     * 口座IDの設定。
+     *
+     * @param 支給申請情報 SikyuSinseiJyohoParameter
+     * @param 業務内区分コード KamokuCode
+     */
+    public void set口座ID(SikyuSinseiJyohoParameter 支給申請情報, KamokuCode 業務内区分コード) {
         List<KozaJohoPSM> 口座IDリスト = ShiharaiHohoJyohoFinder.createInstance()
                 .getKozaIDList(KozaParameter.createParam(0, 支給申請情報.getShikibetsuCode(), 業務内区分コード)).records();
         div.getDdlKozaID().setDataSource(set口座ID(口座IDリスト,支給申請情報.getKozaId()));
     }
 
-    private KamokuCode get業務内区分コード(KamokuCode 業務内区分コード) {
+    /**
+     * 業務内区分の設定。
+     *
+     * @param 業務内区分コード KamokuCode
+     * @return 業務内区分コード
+     */
+    public KamokuCode get業務内区分コード(KamokuCode 業務内区分コード) {
 
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();

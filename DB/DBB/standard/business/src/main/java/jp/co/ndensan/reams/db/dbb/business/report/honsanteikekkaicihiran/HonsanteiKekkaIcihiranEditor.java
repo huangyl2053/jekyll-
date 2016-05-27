@@ -233,43 +233,59 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
         if (entity.get特徴期別金額06() != null) {
             source.listLower_6 = DecimalFormatter.toコンマ区切りRString(entity.get特徴期別金額06(), 0);
         }
+
         if (entity.get普徴期別金額01() != null) {
-            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(entity.get普徴期別金額01(), 0);
+            source.listLower_7 = set普徴額_x期(entity.get普徴期別金額01());
         }
         if (entity.get普徴期別金額02() != null) {
-            source.listLower_8 = DecimalFormatter.toコンマ区切りRString(entity.get普徴期別金額02(), 0);
+            source.listLower_8 = set普徴額_x期(entity.get普徴期別金額02());
         }
         if (entity.get普徴期別金額03() != null) {
-            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(entity.get普徴期別金額03(), 0);
+            source.listLower_9 = set普徴額_x期(entity.get普徴期別金額03());
         }
         if (entity.get普徴期別金額04() != null) {
 
-            source.listLower_10 = DecimalFormatter.toコンマ区切りRString(entity.get普徴期別金額04(), 0);
+            source.listLower_10 = set普徴額_x期(entity.get普徴期別金額04());
         }
         if (entity.get普徴期別金額05() != null) {
-            source.listLower_11 = DecimalFormatter.toコンマ区切りRString(entity.get普徴期別金額05(), 0);
+            source.listLower_11 = set普徴額_x期(entity.get普徴期別金額05());
         }
         if (entity.get普徴期別金額06() != null) {
-            source.listLower_12 = DecimalFormatter.toコンマ区切りRString(entity.get普徴期別金額06(), 0);
+            source.listLower_12 = set普徴額_x期(entity.get普徴期別金額06());
         }
         if (entity.get普徴期別金額07() != null) {
-            source.listLower_13 = DecimalFormatter.toコンマ区切りRString(entity.get普徴期別金額07(), 0);
+            source.listLower_13 = set普徴額_x期(entity.get普徴期別金額07());
         }
         if (entity.get普徴期別金額08() != null) {
-            source.listLower_14 = DecimalFormatter.toコンマ区切りRString(entity.get普徴期別金額08(), 0);
+            source.listLower_14 = set普徴額_x期(entity.get普徴期別金額08());
         }
         if (entity.get普徴期別金額09() != null) {
-            source.listLower_15 = DecimalFormatter.toコンマ区切りRString(entity.get普徴期別金額09(), 0);
+            source.listLower_15 = set普徴額_x期(entity.get普徴期別金額09());
         }
         if (entity.get普徴期別金額10() != null) {
-            source.listLower_16 = DecimalFormatter.toコンマ区切りRString(entity.get普徴期別金額10(), 0);
+            source.listLower_16 = set普徴額_x期(entity.get普徴期別金額10());
         }
         if (entity.get普徴期別金額11() != null) {
-            source.listLower_17 = DecimalFormatter.toコンマ区切りRString(entity.get普徴期別金額11(), 0);
+            source.listLower_17 = set普徴額_x期(entity.get普徴期別金額11());
         }
         if (entity.get普徴期別金額12() != null) {
-            source.listLower_18 = DecimalFormatter.toコンマ区切りRString(entity.get普徴期別金額12(), 0);
+            source.listLower_18 = set普徴額_x期(entity.get普徴期別金額12());
         }
+    }
+
+    private RString set普徴額_x期(Decimal 普徴期別金額) {
+        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
+        KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
+        List<Kitsuki> 表記リスト = 期月リスト_普徴.toList();
+        Kitsuki 最終法定納期 = 期月リスト_普徴.get最終法定納期();
+        for (Kitsuki 期 : 表記リスト) {
+            if (期.get期AsInt() <= 最終法定納期.get期AsInt()) {
+                return DecimalFormatter.toコンマ区切りRString(普徴期別金額, 0);
+            } else {
+                return RString.EMPTY;
+            }
+        }
+        return RString.EMPTY;
     }
 
     private void set出力順(HonsanteiKekkaIcihiranReportSource source) {

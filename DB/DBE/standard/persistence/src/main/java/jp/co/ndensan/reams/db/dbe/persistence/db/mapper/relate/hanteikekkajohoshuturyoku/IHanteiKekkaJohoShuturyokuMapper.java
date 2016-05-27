@@ -9,10 +9,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkaichirana3.HanteiKekkaIchiranA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.kekkatsuchiichiranhyo.KekkatsuchiIchiranhyoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.IinJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiKaisaiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiKekkaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
 
 /**
  * 判定結果情報出力(介護認定審査会)のマッパーインタフェースです。
@@ -49,9 +49,9 @@ public interface IHanteiKekkaJohoShuturyokuMapper {
      * 委員情報を取得します。
      *
      * @param parameter 判定結果情報出力(介護認定審査会)のMyBatisパラメータ
-     * @return List<DbT5594ShinsakaiIinJohoEntity>
+     * @return List<IinJohoRelateEntity>
      */
-    List<DbT5594ShinsakaiIinJohoEntity> getIinJoho(HanteiKekkaJohoShuturyokuMybatisParameter parameter);
+    List<IinJohoRelateEntity> getIinJoho(HanteiKekkaJohoShuturyokuMybatisParameter parameter);
 
     /**
      * 審査会情報を取得します。

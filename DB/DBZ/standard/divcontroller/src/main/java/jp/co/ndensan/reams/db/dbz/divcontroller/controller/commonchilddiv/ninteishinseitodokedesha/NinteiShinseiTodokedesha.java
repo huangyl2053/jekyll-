@@ -39,6 +39,9 @@ public class NinteiShinseiTodokedesha {
      * @return NinteiShinseiTodokedeshaDivのResponseData
      */
     public ResponseData<NinteiShinseiTodokedeshaDiv> onChangeDdlTodokedeDaikoKubun(NinteiShinseiTodokedeshaDiv div) {
+        if (div.getMode_ShoriType() != null && new RString("InputMode").equals(new RString(div.getMode_ShoriType().toString()))) {
+            setInput(div);
+        }
         if (ShinseiTodokedeDaikoKubunCode.本人.getCode().equals(div.getDdlTodokledeDaikoKubun().getSelectedKey())) {
             div.setHdnShimei(div.getTxtShimei().getValue());
             div.setHdnKanaShimei(div.getTxtKanaShimei().getValue());
@@ -55,22 +58,7 @@ public class NinteiShinseiTodokedesha {
             div.getBtnJigyoshaGuide().setDisabled(false);
             div.getDdlShinseiKankeisha().setReadOnly(false);
         } else {
-            div.getDdlShinseiKankeisha().setSelectedIndex(0);
-            div.getDdlTodokledeDaikoKubun().setSelectedIndex(0);
-            div.getTxtHonninKankeisei().clearValue();
-            div.getTxtJigyoshaCode().clearValue();
-            div.getTxtJigyoshaName().clearValue();
-            div.getTxtKanaShimei().clearValue();
-            div.getTxtShimei().clearValue();
-            div.getTxtTelNo().clearDomain();
-            div.getTxtYubinNo().clearValue();
-            div.getCcdChoikiInput().clear();
-            div.getCcdZenkokuJushoInput().clear();
-            div.getBtnAtenaKensaku().setDisabled(true);
-            div.getBtnJigyoshaGuide().setDisabled(true);
-            div.getBtnSetaiIchiran().setDisabled(true);
-            div.getTxtJigyoshaCode().setReadOnly(true);
-            div.getDdlShinseiKankeisha().setReadOnly(true);
+            setその他(div);
         }
         return ResponseData.of(div).respond();
     }
@@ -172,5 +160,34 @@ public class NinteiShinseiTodokedesha {
             div.getDdlTodokledeDaikoKubun().setSelectedKey(dbt4120.get申請届出代行区分コード().value());
             div.getDdlShinseiKankeisha().setSelectedKey(dbt4120.get事業者区分());
         }
+    }
+
+    private void setInput(NinteiShinseiTodokedeshaDiv div) {
+        div.getDdlTodokledeDaikoKubun().setReadOnly(false);
+        div.getDdlShinseiKankeisha().setReadOnly(true);
+        div.getBtnSetaiIchiran().setDisabled(true);
+        div.getBtnAtenaKensaku().setDisabled(true);
+        div.getBtnZenkaiFukusha().setDisabled(false);
+        div.getBtnJigyoshaGuide().setDisabled(true);
+        div.getTxtJigyoshaCode().setReadOnly(true);
+    }
+
+    private void setその他(NinteiShinseiTodokedeshaDiv div) {
+        div.getDdlShinseiKankeisha().setSelectedIndex(0);
+        div.getDdlTodokledeDaikoKubun().setSelectedIndex(0);
+        div.getTxtHonninKankeisei().clearValue();
+        div.getTxtJigyoshaCode().clearValue();
+        div.getTxtJigyoshaName().clearValue();
+        div.getTxtKanaShimei().clearValue();
+        div.getTxtShimei().clearValue();
+        div.getTxtTelNo().clearDomain();
+        div.getTxtYubinNo().clearValue();
+        div.getCcdChoikiInput().clear();
+        div.getCcdZenkokuJushoInput().clear();
+        div.getBtnAtenaKensaku().setDisabled(true);
+        div.getBtnJigyoshaGuide().setDisabled(true);
+        div.getBtnSetaiIchiran().setDisabled(true);
+        div.getTxtJigyoshaCode().setReadOnly(true);
+        div.getDdlShinseiKankeisha().setReadOnly(true);
     }
 }

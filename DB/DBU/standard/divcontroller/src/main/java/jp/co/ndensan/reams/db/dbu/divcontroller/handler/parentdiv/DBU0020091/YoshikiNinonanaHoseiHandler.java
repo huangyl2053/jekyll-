@@ -5,14 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020091;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020091.YoshikiNinonanaHoseiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
-import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -21,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -328,20 +325,21 @@ public class YoshikiNinonanaHoseiHandler {
         List<JigyoHokokuTokeiData> 修正データリスト = new ArrayList<>();
         List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト = new ArrayList<>();
         if (様式種類.equals(様式種類_039) || 様式種類.equals(様式種類_139) || 様式種類.equals(様式種類_239)) {
-            List<JigyoHokokuTokeiData> 利用者負担第四段階
-                    = ViewStateHolder.get(ViewStateKeys.利用者負担第四段階, List.class);
-            List<JigyoHokokuTokeiData> 利用者負担第三段階
-                    = ViewStateHolder.get(ViewStateKeys.利用者負担第三段階, List.class);
-            List<JigyoHokokuTokeiData> 利用者負担第二段階
-                    = ViewStateHolder.get(ViewStateKeys.利用者負担第二段階, List.class);
-            List<JigyoHokokuTokeiData> 利用者負担第一段階
-                    = ViewStateHolder.get(ViewStateKeys.利用者負担第一段階, List.class);
-            List<JigyoHokokuTokeiData> 高額介護_合計
-                    = ViewStateHolder.get(ViewStateKeys.高額介護_合計, List.class);
-            List<JigyoHokokuTokeiData> 再掲利用者負担第三段階
-                    = ViewStateHolder.get(ViewStateKeys.再掲利用者負担第三段階, List.class);
-            List<JigyoHokokuTokeiData> 再掲利用者負担第二段階
-                    = ViewStateHolder.get(ViewStateKeys.再掲利用者負担第二段階, List.class);
+
+            List<JigyoHokokuTokeiData> 利用者負担第四段階 = get事業報告月報詳細データリスト(
+                    引き継ぎデータ, 集計番号_0701);
+            List<JigyoHokokuTokeiData> 利用者負担第三段階 = get事業報告月報詳細データリスト(
+                    引き継ぎデータ, 集計番号_0702);
+            List<JigyoHokokuTokeiData> 利用者負担第二段階 = get事業報告月報詳細データリスト(
+                    引き継ぎデータ, 集計番号_0703);
+            List<JigyoHokokuTokeiData> 利用者負担第一段階 = get事業報告月報詳細データリスト(
+                    引き継ぎデータ, 集計番号_0704);
+            List<JigyoHokokuTokeiData> 高額介護_合計 = get事業報告月報詳細データリスト(
+                    引き継ぎデータ, 集計番号_0705);
+            List<JigyoHokokuTokeiData> 再掲利用者負担第三段階 = get事業報告月報詳細データリスト(
+                    引き継ぎデータ, 集計番号_0706);
+            List<JigyoHokokuTokeiData> 再掲利用者負担第二段階 = get事業報告月報詳細データリスト(
+                    引き継ぎデータ, 集計番号_0707);
             事業報告月報詳細データリスト.addAll(利用者負担第四段階);
             事業報告月報詳細データリスト.addAll(利用者負担第三段階);
             事業報告月報詳細データリスト.addAll(利用者負担第二段階);
@@ -351,17 +349,16 @@ public class YoshikiNinonanaHoseiHandler {
             事業報告月報詳細データリスト.addAll(再掲利用者負担第二段階);
             修正データリスト = get高額介護修正リスト(事業報告月報詳細データリスト, 修正データリスト);
         } else if (様式種類.equals(様式種類_040) || 様式種類.equals(様式種類_140) || 様式種類.equals(様式種類_240)) {
-            List<JigyoHokokuTokeiData> 現役並み所得者
-                    = ViewStateHolder.get(ViewStateKeys.現役並み所得者, List.class);
-            List<JigyoHokokuTokeiData> 一般
-                    = ViewStateHolder.get(ViewStateKeys.一般, List.class);
-            List<JigyoHokokuTokeiData> 低所得者Ⅱ
-                    = ViewStateHolder.get(ViewStateKeys.低所得者Ⅱ, List.class);
-            List<JigyoHokokuTokeiData> 低所得者Ⅰ
-                    = ViewStateHolder.get(ViewStateKeys.低所得者Ⅰ, List.class);
-            List<JigyoHokokuTokeiData> 高額医療合算介護_合計
-                    = ViewStateHolder.get(ViewStateKeys.高額医療合算介護_合計, List.class);
-
+            List<JigyoHokokuTokeiData> 現役並み所得者 = get事業報告月報詳細データリスト(
+                    引き継ぎデータ, 集計番号_0801);
+            List<JigyoHokokuTokeiData> 一般 = get事業報告月報詳細データリスト(
+                    引き継ぎデータ, 集計番号_0802);
+            List<JigyoHokokuTokeiData> 低所得者Ⅱ = get事業報告月報詳細データリスト(
+                    引き継ぎデータ, 集計番号_0803);
+            List<JigyoHokokuTokeiData> 低所得者Ⅰ = get事業報告月報詳細データリスト(
+                    引き継ぎデータ, 集計番号_0804);
+            List<JigyoHokokuTokeiData> 高額医療合算介護_合計 = get事業報告月報詳細データリスト(
+                    引き継ぎデータ, 集計番号_0805);
             事業報告月報詳細データリスト.addAll(現役並み所得者);
             事業報告月報詳細データリスト.addAll(一般);
             事業報告月報詳細データリスト.addAll(低所得者Ⅱ);
@@ -585,13 +582,6 @@ public class YoshikiNinonanaHoseiHandler {
             loadList(高額介護_合計);
             loadList(再掲利用者負担第三段階);
             loadList(再掲利用者負担第二段階);
-            ViewStateHolder.put(ViewStateKeys.利用者負担第四段階, (Serializable) 利用者負担第四段階);
-            ViewStateHolder.put(ViewStateKeys.利用者負担第三段階, (Serializable) 利用者負担第三段階);
-            ViewStateHolder.put(ViewStateKeys.利用者負担第二段階, (Serializable) 利用者負担第二段階);
-            ViewStateHolder.put(ViewStateKeys.利用者負担第一段階, (Serializable) 利用者負担第一段階);
-            ViewStateHolder.put(ViewStateKeys.高額介護_合計, (Serializable) 高額介護_合計);
-            ViewStateHolder.put(ViewStateKeys.再掲利用者負担第三段階, (Serializable) 再掲利用者負担第三段階);
-            ViewStateHolder.put(ViewStateKeys.再掲利用者負担第二段階, (Serializable) 再掲利用者負担第二段階);
         } else if (様式種類.equals(様式種類_040) || 様式種類.equals(様式種類_140) || 様式種類.equals(様式種類_240)) {
             List<JigyoHokokuTokeiData> 現役並み所得者 = get事業報告月報詳細データリスト(
                     引き継ぎデータ, 集計番号_0801);
@@ -608,11 +598,6 @@ public class YoshikiNinonanaHoseiHandler {
             loadList1(低所得者Ⅱ);
             loadList1(低所得者Ⅰ);
             loadList1(高額医療合算介護_合計);
-            ViewStateHolder.put(ViewStateKeys.現役並み所得者, (Serializable) 現役並み所得者);
-            ViewStateHolder.put(ViewStateKeys.一般, (Serializable) 一般);
-            ViewStateHolder.put(ViewStateKeys.低所得者Ⅱ, (Serializable) 低所得者Ⅱ);
-            ViewStateHolder.put(ViewStateKeys.低所得者Ⅰ, (Serializable) 低所得者Ⅰ);
-            ViewStateHolder.put(ViewStateKeys.高額医療合算介護_合計, (Serializable) 高額医療合算介護_合計);
         }
     }
 

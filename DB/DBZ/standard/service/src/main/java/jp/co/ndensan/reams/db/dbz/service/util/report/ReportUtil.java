@@ -237,6 +237,9 @@ public final class ReportUtil {
         TsuchishoTeikeibunInfo info = tsuchishoTeikeibunManager.get通知書定形文検索(subGyomuCode, reportId,
                 kamokuCode, patternNo, sentenceNo, kijunDate);
         ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(subGyomuCode, reportId);
+        if (info == null) {
+            return textHenkanRule.editText(RString.EMPTY);
+        }
         return textHenkanRule.editText(info.get文章());
     }
 

@@ -749,7 +749,7 @@ public class HihokenshaShikakuTeiseiManager {
             throw new ApplicationException(DbaErrorMessages.住所地特例適用異動が未登録.getMessage());
         }
         if (!RString.isNullOrEmpty(適用事由コード) && !RString.isNullOrEmpty(解除事由コード)
-                && !RString.isNullOrEmpty(住所地特例適用事由コード) && RString.isNullOrEmpty(住所地特例解除事由コード)) {
+                && !RString.isNullOrEmpty(住所地特例適用事由コード) && !RString.isNullOrEmpty(住所地特例解除事由コード)) {
             throw new ApplicationException(DbaErrorMessages.住所地特例解除異動が未登録.getMessage());
         }
     }

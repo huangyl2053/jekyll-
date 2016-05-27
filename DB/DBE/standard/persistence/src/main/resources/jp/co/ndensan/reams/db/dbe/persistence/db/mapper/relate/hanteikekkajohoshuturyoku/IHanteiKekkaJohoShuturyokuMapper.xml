@@ -362,16 +362,18 @@
         WHERE
         dbT5511."shinsakaiKaisaiNo" = #{kaisaiBangou}
     </select>
-    <resultMap id="resultMap_getShinsakaiIinJoho" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity" autoMapping="true">
-        <result property="shinsakaiIinShimei" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
-        <result property="shinsakaiIinShikakuCode" column="shinsakaiIinShikakuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+    <resultMap id="resultMap_getShinsakaiIinJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.IinJohoRelateEntity" autoMapping="true">
+        <result property="shinsakaiIinShimei" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiIinShikakuCode" column="shinsakaiIinShikakuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kaigoninteiShinsakaiGichoKubunCode" column="kaigoninteiShinsakaiGichoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select id="getIinJoho" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
             resultMap="resultMap_getShinsakaiIinJoho"
             fetchSize="500">
         SELECT
         DbT5594."shinsakaiIinShimei",
-        DbT5594."shinsakaiIinShikakuCode"
+        DbT5594."shinsakaiIinShikakuCode",
+        DbT5503."kaigoninteiShinsakaiGichoKubunCode"
         FROM
         rgdb."DbT5503ShinsakaiWariateIinJoho" DbT5503
         INNER JOIN

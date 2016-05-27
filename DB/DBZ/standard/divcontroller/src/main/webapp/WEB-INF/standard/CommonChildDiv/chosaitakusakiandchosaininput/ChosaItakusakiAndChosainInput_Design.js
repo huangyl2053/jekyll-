@@ -8,12 +8,28 @@ var DBZ;
                 return "onBlur_TxtChosaItakusakiCode";
             };
 
+            Events.onOKClose_BtnChosaItakusakiGuide = function () {
+                return "onOKClose_BtnChosaItakusakiGuide";
+            };
+
+            Events.onClick_BtnChosaItakusakiGuide = function () {
+                return "onClick_BtnChosaItakusakiGuide";
+            };
+
             Events.onClick_BtnZenkaiFukusha = function () {
                 return "onClick_BtnZenkaiFukusha";
             };
 
             Events.onBlur_TxtChosainCode = function () {
                 return "onBlur_TxtChosainCode";
+            };
+
+            Events.onOKClose_BtnChosainGuide = function () {
+                return "onOKClose_BtnChosainGuide";
+            };
+
+            Events.onClick_BtnChosainGuide = function () {
+                return "onClick_BtnChosainGuide";
             };
 
             Events.onClick_BtnClear = function () {
