@@ -83,7 +83,7 @@ public class IryohokenKanyuJokyoManager {
     public int saveAllIryoHokenJoho(List<IryohokenKanyuJokyo> 医療保険情報List) {
         int count = 0;
         for (IryohokenKanyuJokyo 医療保険情報 : 医療保険情報List) {
-            count = count + dac.save(医療保険情報.toEntity());
+            count = count + dac.saveOrDeletePhysicalBy(医療保険情報.toEntity());
         }
         return count;
     }
