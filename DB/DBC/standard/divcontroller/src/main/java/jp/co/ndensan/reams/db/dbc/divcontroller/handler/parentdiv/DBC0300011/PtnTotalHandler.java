@@ -287,11 +287,13 @@ public final class PtnTotalHandler {
             row.setTxtKeiyakuJigyoshaName(dataList.get(i).get契約事業者名称().value());
             row.setTxtKeiyakuJigyoshaJusho(dataList.get(i).get契約事業者住所().value());
             TextBoxDate 開始年月日 = new TextBoxDate();
-            RDate 開始年月日RDate = new RDate(dataList.get(i).get開始年月日().toString());
+            RDate 開始年月日RDate = RDate.canConvert(new RString(dataList.get(i).get開始年月日().toString()))
+                    ? new RDate(dataList.get(i).get開始年月日().toString()) : null;
             開始年月日.setValue(開始年月日RDate);
             row.setTxtKeiyakuFromYMD(開始年月日);
             TextBoxDate 終了年月日 = new TextBoxDate();
-            RDate 終了年月日RDate = new RDate(dataList.get(i).get終了年月日().toString());
+            RDate 終了年月日RDate = RDate.canConvert(new RString(dataList.get(i).get終了年月日().toString()))
+                    ? new RDate(dataList.get(i).get終了年月日().toString()) : null;
             終了年月日.setValue(終了年月日RDate);
             row.setTxtKeiyakuToYMD(終了年月日);
             row.setTxtKeiyakuShurui(JuryoIninKeiyakuShurui.toValue(dataList.get(i).get契約種類()).get名称());
