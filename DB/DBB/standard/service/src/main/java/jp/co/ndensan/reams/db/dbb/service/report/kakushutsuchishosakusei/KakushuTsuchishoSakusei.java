@@ -726,7 +726,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
 //            sourceDataCollection = new Printer<KarisanteiNonyuTsuchishoCVSMultiSource>().spool(null, report);
         } else if (ReportIdDBB.DBB100024.getReportId().equals(帳票ID)) {
             KarisanteiNonyuTsuchishoCVSKakukoReport report
-                    = KarisanteiNonyuTsuchishoCVSKakukoReport.createFrom(null, null);
+                    = new KarisanteiNonyuTsuchishoCVSKakukoReport(null, null);
             new Printer<KarisanteiNonyuTsuchishoCVSKakukoSource>().spool(null, report);
         } else {
 //            KarisanteiNonyuTsuchishoCVSKigotoItem item = new KarisanteiNonyuTsuchishoCVSKigotoItem(仮算定納入通知書情報, null);
