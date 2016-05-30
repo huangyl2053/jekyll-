@@ -281,7 +281,19 @@ public enum ReportIdDBE {
     /**
      * 認定調査票情報の帳票ＩＤです。
      */
-    DBE091052(new ReportId("DBE091052_99ANinteiChosaJohohyo"), new RString("認定調査票情報_99A"));
+    DBE091052(new ReportId("DBE091052_99ANinteiChosaJohohyo"), new RString("認定調査票情報_99A")),
+    /**
+     * 申請に関する帳票発行の帳票ＩＤです。
+     */
+    DBE012002(new ReportId("DBE120002_NinteichosaIraiHenko"), new RString("認定調査依頼先変更者一覧表")),
+    /**
+     * 申請に関する帳票発行の帳票ＩＤです。
+     */
+    DBE012001(new ReportId("DBE012001_NinteichosaYoteiMitei"), new RString("認定調査予定未定者一覧表")),
+    /**
+     * 申請に関する帳票発行の帳票ＩＤです。
+     */
+    DBE012003(new ReportId("DBE120002_NinteichosaIraiHenko"), new RString("認定調査結果と主治医意見書のチェックリスト"));
 
     private final ReportId reportId;
 
