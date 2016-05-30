@@ -79,25 +79,27 @@ public class PrintValidationHandler {
             }
 
             RString selectKey = div.getRadJyushinKikan().getSelectedKey();
-            if (KEY0.equals(selectKey)) {
+            if (div.getShindanMeirei().isVisible()) {
+                if (KEY0.equals(selectKey)) {
 
-                if (div.getTxtJyushinymd().getValue() == null) {
-                    validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "受診日"), div.getTxtJyushinymd()));
-                }
-                if (div.getTxtJushinTime().getValue() == null) {
-                    validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "時分"), div.getTxtJushinTime()));
-                }
-            } else {
+                    if (div.getTxtJyushinymd().getValue() == null) {
+                        validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "受診日"), div.getTxtJyushinymd()));
+                    }
+                    if (div.getTxtJushinTime().getValue() == null) {
+                        validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "時分"), div.getTxtJushinTime()));
+                    }
+                } else {
 
-                if (div.getTxtJushinKikan().getFromValue() == null) {
-                    validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "受診期間(開始日)"), div.getTxtJushinKikan()));
-                }
-                if (div.getTxtJushinKikan().getToValue() == null) {
-                    validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "受診期間(終了日)"), div.getTxtJushinKikan()));
-                }
+                    if (div.getTxtJushinKikan().getFromValue() == null) {
+                        validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "受診期間(開始日)"), div.getTxtJushinKikan()));
+                    }
+                    if (div.getTxtJushinKikan().getToValue() == null) {
+                        validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "受診期間(終了日)"), div.getTxtJushinKikan()));
+                    }
 
-                if (RString.isNullOrEmpty(div.getTxtJushinBasho().getValue())) {
-                    validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "受診場所"), div.getTxtJushinBasho()));
+                    if (RString.isNullOrEmpty(div.getTxtJushinBasho().getValue())) {
+                        validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "受診場所"), div.getTxtJushinBasho()));
+                    }
                 }
             }
 

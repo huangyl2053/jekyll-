@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.chosahyokihonchosakatamen.Chos
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
+import jp.co.ndensan.reams.db.dbe.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoHeaderItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.saichekkuhyo.SaiChekkuhyoItem;
@@ -31,6 +32,9 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.ninteishinseijoho.Ninte
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.ikenshosakuseiryo.IkenshoSakuseiRyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
@@ -57,6 +61,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 依頼書・認定調査票(OCR)・主治医意見書印刷のハンドラークラスです。
@@ -129,11 +135,13 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         RString 証記載保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value();
         ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(申請書管理番号リスト,
                 証記載保険者番号);
+        ChosaIraishoAndChosahyoAndIkenshoPrintFinder printFinder = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance();
         if (GamenSeniKbn.認定調査依頼.equals(遷移元画面区分)) {
             div.getNinteiChosa().setVisible(true);
             div.getShujiiIkensho().setVisible(false);
-            List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> list = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
-                    .get認定調査依頼情報(parameter).records();
+            List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> list = printFinder.get認定調査依頼情報(parameter).records();
+            List<NinteichosaIraiJoho> 認定調査依頼情報List = printFinder.get更新用認定調査依頼情報(parameter).records();
+            ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, Models.create(認定調査依頼情報List));
             List<dgNinteiChosa_Row> rowList = new ArrayList<>();
             int rowNo = 1;
             for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : list) {
@@ -162,8 +170,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         } else {
             div.getNinteiChosa().setVisible(false);
             div.getShujiiIkensho().setVisible(true);
-            List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> list = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
-                    .get主治医意見書依頼情報(parameter).records();
+            List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> list = printFinder.get主治医意見書依頼情報(parameter).records();
+            List<ShujiiIkenshoIraiJoho> 主治医意見書依頼情報List = printFinder.get更新用主治医意見書依頼情報(parameter).records();
+            ViewStateHolder.put(ViewStateKeys.主治医意見書依頼情報, Models.create(主治医意見書依頼情報List));
             List<dgShujiiIkensho_Row> rowList = new ArrayList<>();
             int rowNo = 1;
             for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : list) {
@@ -235,7 +244,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             div.getTxtJyushinymd().setDisabled(true);
             div.getTxtJushinTime().setDisabled(true);
             div.getTxtJushinKikan().setDisabled(false);
-            div.getTxtJushinKikan().setReadOnly(true);
+            div.getTxtJushinKikan().setFromRequired(true);
+            div.getTxtJushinKikan().setToRequired(true);
             div.getTxtJushinBasho().setDisabled(false);
             div.getTxtJushinBasho().setRequired(true);
         }
@@ -501,7 +511,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(申請書管理番号リスト, RString.EMPTY);
 
         List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> list = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
-                .get認定調査依頼書(parameter).records();
+                .get認定調査依頼一覧表(parameter).records();
         List<ChosaIraiIchiranhyoBodyItem> chosaIraishoHeadItemList = new ArrayList<>();
         int 連番 = 1;
         Map<Integer, RString> 通知文
@@ -910,10 +920,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<ShujiiIkenshoSakuseiIraishoItem> create意見書作成依頼書_パラメータ() {
         List<ShujiiIkenshoSakuseiIraishoItem> itemList = new ArrayList<>();
-        List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
+        List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
         int 宛名連番 = 1;
         int 連番 = 1;
-        for (dgNinteiChosa_Row row : selectedItems) {
+        for (dgShujiiIkensho_Row row : selectedItems) {
             ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
                     = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
 
@@ -1002,44 +1012,46 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<IkenshoSakuseiIraiIchiranhyoItem> create意見書作成依頼一覧表_パラメータ() {
         List<IkenshoSakuseiIraiIchiranhyoItem> itemList = new ArrayList<>();
-        List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
-        for (dgNinteiChosa_Row row : selectedItems) {
-            ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
-                    = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
+        List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
+        List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
+        for (dgShujiiIkensho_Row row : selectedItems) {
+            申請書管理番号リスト.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+        }
+        ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
+                = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(申請書管理番号リスト, RString.EMPTY);
 
-            List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
-                    .get意見書作成依頼一覧表(parameter).records();
-            if (!businessList.isEmpty()) {
-                ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
-                Map<Integer, RString> 通知文Map
-                        = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230002.getReportId(), KamokuCode.EMPTY, 1);
-                IkenshoSakuseiIraiIchiranhyoItem item = new IkenshoSakuseiIraiIchiranhyoItem(
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        business.get医療機関郵便番号(),
-                        business.get医療機関住所(),
-                        business.get医療機関名称(),
-                        business.get代表者名(),
-                        get名称付与(),
-                        get印刷日時(),
-                        通知文Map.get(1),
-                        business.get主治医氏名(),
-                        business.get被保険者番号(),
-                        business.get被保険者氏名(),
-                        business.get被保険者氏名カナ(),
-                        business.get住所(),
-                        get和暦(business.get生年月日(), true),
-                        Seibetsu.toValue(business.get性別()).get名称(),
-                        set提出期限(business));
-                itemList.add(item);
-            }
+        List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
+                .get意見書作成依頼一覧表(parameter).records();
+        for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : businessList) {
+
+            Map<Integer, RString> 通知文Map
+                    = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230002.getReportId(), KamokuCode.EMPTY, 1);
+            IkenshoSakuseiIraiIchiranhyoItem item = new IkenshoSakuseiIraiIchiranhyoItem(
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    business.get医療機関郵便番号(),
+                    business.get医療機関住所(),
+                    business.get医療機関名称(),
+                    business.get代表者名(),
+                    get名称付与(),
+                    get印刷日時(),
+                    通知文Map.get(1),
+                    business.get主治医氏名(),
+                    business.get被保険者番号(),
+                    business.get被保険者氏名(),
+                    business.get被保険者氏名カナ(),
+                    business.get住所(),
+                    get和暦(business.get生年月日(), true),
+                    Seibetsu.toValue(business.get性別()).get名称(),
+                    set提出期限(business));
+            itemList.add(item);
         }
         return itemList;
     }
@@ -1051,8 +1063,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<ShujiiIkenshoSakuseiRyoSeikyushoItem> create主治医意見書作成料請求書_パラメータ() {
         List<ShujiiIkenshoSakuseiRyoSeikyushoItem> itemList = new ArrayList<>();
-        List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
-        for (dgNinteiChosa_Row row : selectedItems) {
+        List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
+        for (dgShujiiIkensho_Row row : selectedItems) {
             ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
                     = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
 
@@ -1111,6 +1123,26 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 itemList.add(item);
             }
         }
+        return itemList;
+    }
+
+    /**
+     * 介護保険診断命令書印刷用パラメータを作成します。
+     *
+     * @return 介護保険診断命令書パラメータ
+     */
+    public List<KaigohokenShindanMeireishoHeaderItem> create介護保険診断命令書_パラメータ() {
+        List<KaigohokenShindanMeireishoHeaderItem> itemList = new ArrayList<>();
+        return itemList;
+    }
+
+     /**
+     * 主治医意見書記入用紙印刷用パラメータを作成します。
+     *
+     * @return 主治医意見書記入用紙パラメータ
+     */
+    public List<KaigohokenShindanMeireishoHeaderItem> create主治医意見書記入用紙_パラメータ() {
+        List<KaigohokenShindanMeireishoHeaderItem> itemList = new ArrayList<>();
         return itemList;
     }
 

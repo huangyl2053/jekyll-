@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.dbb0110001;
+package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0110001;
 
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchokarisanteifuka.TokuchoKariSanteiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0110001.TokutyoKariSanteiFukaDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.dbb0110001.TokutyoKariSanteiFukaHandler;
+import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0110001.TokutyoKariSanteiFukaHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
