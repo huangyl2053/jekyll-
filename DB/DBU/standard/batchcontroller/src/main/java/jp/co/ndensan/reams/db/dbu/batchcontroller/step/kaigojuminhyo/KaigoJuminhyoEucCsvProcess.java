@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.TashajukiHachiCSVDataE
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.TashajukiJunitoJugoCSVDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyo.KaigoJuminhyoRelateEntity;
 import jp.co.ndensan.reams.db.dbu.service.core.basic.kaigojuminhyo.KaigoJyuminhyouTashajukiCSVDataSakuseiFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.RenkeiDataFormatVersion;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7035RendoPatternEntity;
@@ -45,9 +44,9 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 介護住民票個別事項連携情報作成【他社住基】のバッチ処理のCSV出力のプロセスクラスです。
- * 
- * @reamsid_L DBU-0350-020  lijia
- * 
+ *
+ * @reamsid_L DBU-0350-020 lijia
+ *
  */
 public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRelateEntity> {
 
@@ -79,7 +78,7 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
             shoriDateKanriMapper = getMapper(IDbT7022ShoriDateKanriMapper.class);
             shoriDateKanriEntity = shoriDateKanriMapper.getTaishoShuryoYMD();
             //if (RDate.getNowDateTime().isBefore(shoriDateKanriEntity.getTaishoShuryoTimestamp().getRDateTime())) {
-                //TODO 技術点NO:31　バッチメッセージの出力　DBZErrorMessage．DBZE00006を返して、バッチ処理終了。
+            //TODO 技術点NO:31　バッチメッセージの出力　DBZErrorMessage．DBZE00006を返して、バッチ処理終了。
             //}
             processParameter.setTaishoKaishiTimestamp(shoriDateKanriEntity.getTaishoShuryoTimestamp().getRDateTime());
             processParameter.setTaishoShuryoTimestamp(RDate.getNowDateTime());
@@ -88,7 +87,7 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
         rendoPatternMapper = getMapper(IDbT7035RendoPatternMapper.class);
         dbT7035RendoPatternEntity = rendoPatternMapper.getRendoPatternEntity(new FlexibleDate(RDate.getNowDate().toDateString()));
         //if (dbT7035RendoPatternEntity == null) {
-            //TODO 技術点NO:31　バッチメッセージの出力 DbzErrorMessages.連携パターン取得エラー.getMessage();
+        //TODO 技術点NO:31　バッチメッセージの出力 DbzErrorMessages.連携パターン取得エラー.getMessage();
         //}
         rendoPatternEntity = new RendoPatternEntity();
         rendoPatternEntity.setSakiFormatVersion(dbT7035RendoPatternEntity.getSakiFormatVersion());
@@ -157,7 +156,7 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
     @Override
     protected void process(KaigoJuminhyoRelateEntity entity) {
         KaigoJuminhyoEntity kaigoJuminhyoEntity = new KaigoJuminhyoEntity();
-        kaigoJuminhyoEntity.setHihokenshaNo(new HihokenshaNo(entity.getDbT1001HihokenshaDaichoEntity().getHihokenshaNo().value()));
+        kaigoJuminhyoEntity.setHihokenshaNo(entity.getDbT1001HihokenshaDaichoEntity().getHihokenshaNo());
         kaigoJuminhyoEntity.setIdoYMD(entity.getDbT1001HihokenshaDaichoEntity().getIdoYMD());
         kaigoJuminhyoEntity.setEdaNo(entity.getDbT1001HihokenshaDaichoEntity().getEdaNo());
         kaigoJuminhyoEntity.setIdoJiyuCode(entity.getDbT1001HihokenshaDaichoEntity().getIdoJiyuCode());
@@ -310,7 +309,7 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
                             entity.get最終レコード区分(),
                             entity.get連番(),
                             entity.getＦＩＬＬＥＲ1(),
-                            entity.get被保険者番号(),
+                            entity.get被保険者番号() == null ? RString.EMPTY : entity.get被保険者番号().getColumnValue(),
                             entity.get識別コード(),
                             entity.get資格取得日(),
                             entity.get資格喪失日(),
@@ -335,7 +334,7 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
                             entity.get最終レコード区分(),
                             entity.get連番(),
                             entity.get識別コード(),
-                            entity.get被保険者番号(),
+                            entity.get被保険者番号() == null ? RString.EMPTY : entity.get被保険者番号().getColumnValue(),
                             entity.get資格取得日(),
                             entity.get資格喪失日(),
                             entity.get資格被保険者区分(),
