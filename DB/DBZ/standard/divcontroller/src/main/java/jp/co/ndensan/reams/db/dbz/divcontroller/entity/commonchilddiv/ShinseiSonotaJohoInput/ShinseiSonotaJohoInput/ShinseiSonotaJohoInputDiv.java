@@ -5,22 +5,25 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSo
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * ShinseiSonotaJohoInput のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBE-1300-120 houtianpeng
  */
 public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJohoInputDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -47,10 +50,6 @@ public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJo
     private TextBoxFlexibleDate txtJukyuShikakuHakkoDay1;
     @JsonProperty("txtJukyuShikakuHakkoDay2")
     private TextBoxFlexibleDate txtJukyuShikakuHakkoDay2;
-    @JsonProperty("hdnDatabaseSubGyomuCode")
-    private RString hdnDatabaseSubGyomuCode;
-    @JsonProperty("hdnShinseishoKanriNo")
-    private RString hdnShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -239,42 +238,6 @@ public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJo
     }
 
     /*
-     * gethdnDatabaseSubGyomuCode
-     * @return hdnDatabaseSubGyomuCode
-     */
-    @JsonProperty("hdnDatabaseSubGyomuCode")
-    public RString getHdnDatabaseSubGyomuCode() {
-        return hdnDatabaseSubGyomuCode;
-    }
-
-    /*
-     * sethdnDatabaseSubGyomuCode
-     * @param hdnDatabaseSubGyomuCode hdnDatabaseSubGyomuCode
-     */
-    @JsonProperty("hdnDatabaseSubGyomuCode")
-    public void setHdnDatabaseSubGyomuCode(RString hdnDatabaseSubGyomuCode) {
-        this.hdnDatabaseSubGyomuCode = hdnDatabaseSubGyomuCode;
-    }
-
-    /*
-     * gethdnShinseishoKanriNo
-     * @return hdnShinseishoKanriNo
-     */
-    @JsonProperty("hdnShinseishoKanriNo")
-    public RString getHdnShinseishoKanriNo() {
-        return hdnShinseishoKanriNo;
-    }
-
-    /*
-     * sethdnShinseishoKanriNo
-     * @param hdnShinseishoKanriNo hdnShinseishoKanriNo
-     */
-    @JsonProperty("hdnShinseishoKanriNo")
-    public void setHdnShinseishoKanriNo(RString hdnShinseishoKanriNo) {
-        this.hdnShinseishoKanriNo = hdnShinseishoKanriNo;
-    }
-
-    /*
      * [共有子DIVモード]
      */
     @JsonProperty("modes")
@@ -284,21 +247,16 @@ public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJo
 
         TokushuTsuikaMode("TokushuTsuikaMode"),
         TokushuShuseiMode("TokushuShuseiMode"),
-        TokushuSakujoMode("TokushuSakujoMode"),
+        TokushuSakujyoMode("TokushuSakujyoMode"),
         TokushuRirekiShuseiMode("TokushuRirekiShuseiMode"),
         NinteiMode("NinteiMode"),
         KyakkaMode("KyakkaMode"),
         ShokkenKisaiMode("ShokkenKisaiMode"),
-        TorisageMode("TorisageMode"),
-        ShokkenTorisageMode("ShokkenTorisageMode"),
-        SoshitsuMode("SoshitsuMode"),
+        TorikeshiMode("TorikeshiMode"),
+        ZenbuSoshitsuMode("ZenbuSoshitsuMode"),
+        IchibuSoshitsuMode("IchibuSoshitsuMode"),
         JukyuShikakushashoMode("JukyuShikakushashoMode"),
-        ShokaiMode("ShokaiMode"),
-        RirekiTsuika("RirekiTsuika"),
-        RirekiSakujoShusei("RirekiSakujoShusei"),
-        RirekiShinseiTorisage("RirekiShinseiTorisage"),
-        RirekiNinteiTorisage("RirekiNinteiTorisage"),
-        RirekTsuikaKyakka("RirekTsuikaKyakka");
+        ShokaiMode("ShokaiMode");
 
         private final String name;
 
@@ -392,5 +350,4 @@ public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJo
     private ShinseiSonotaJohoInputHandler createHandler() {
         return new ShinseiSonotaJohoInputHandler(this);
     }
-
 }
