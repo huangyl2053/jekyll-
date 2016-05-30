@@ -139,7 +139,7 @@ public class ShinseiKensaku {
             ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.申請書管理番号,
                     new ShinseishoKanriNo(申請書管理番号));
             ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.認定調査履歴番号,
-                    row.getNinteichosaIraiRirekiNo());
+                    Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.認定調査結果登録1へ).respond();
         }
         return ResponseData.of(div).respond();
