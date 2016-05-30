@@ -102,7 +102,7 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
      * 削除状態に非活性化設定
      */
     public void 非活性化設定() {
-        div.getPnlMain().setReadOnly(true);
+        div.setDisabled(true);
     }
 
     /**
