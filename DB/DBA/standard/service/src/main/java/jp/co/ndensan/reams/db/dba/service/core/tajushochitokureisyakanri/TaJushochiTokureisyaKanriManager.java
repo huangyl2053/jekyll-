@@ -78,13 +78,19 @@ public class TaJushochiTokureisyaKanriManager {
         TaJushochiTokureisyaKanriParameter 直近適用グリッド行 = sortList.get(0);
         for (TaJushochiTokureisyaKanriParameter date : paramater) {
 
-            if (新規.equals(date.get状態()) && (date.getNyuusyoYMD().isBefore(直近適用グリッド行.getTayishoYMD())
+            if (新規.equals(date.get状態()) && !date.getNyuusyoYMD().isEmpty()
+                    && !直近適用グリッド行.getTayishoYMD().isEmpty()
+                    && !直近適用グリッド行.getKaijoYMD().isEmpty()
+                    && (date.getNyuusyoYMD().isBefore(直近適用グリッド行.getTayishoYMD())
                     || date.getNyuusyoYMD().isBefore(直近適用グリッド行.getKaijoYMD()))) {
                 throw new ApplicationException(
                         UrErrorMessages.期間が重複.getMessage());
             }
         }
-    }
+
+
+
+
 
     private static class DateComparator implements Comparator<TaJushochiTokureisyaKanriParameter>, Serializable {
 
@@ -102,18 +108,18 @@ public class TaJushochiTokureisyaKanriManager {
      */
     public void checkKaijoJotai(List<TaJushochiTokureisyaKanriParameter> paramater) {
         for (TaJushochiTokureisyaKanriParameter date : paramater) {
-            if (修正.equals(date.get状態()) && !date.getNyuusyoYMD().isBefore(date.getTayishoYMD())) {
+            if (修正.equals(date.get状態()) && !date.getNyuusyoYMD().isEmpty()
+                    && !date.getTayishoYMD().isEmpty()
+                    && !date.getNyuusyoYMD().isBefore(date.getTayishoYMD())) {
                 throw new ApplicationException(
                         UrErrorMessages.入力値が不正.getMessage());
             }
         }
-    }
-
-    /**
-     * 施設入退所情報情報の取得です。
-     *
-     * @param paramater TaJushochiTokureisyaKanriParameter
-     */
+        /**
+         * 施設入退所情報情報の取得です。
+         *
+         * @param paramater TaJushochiTokureisyaKanriParameter
+         */
     public void checkHenkoJotai(List<TaJushochiTokureisyaKanriParameter> paramater) {
         for (TaJushochiTokureisyaKanriParameter date : paramater) {
             if (追加.equals(date.get状態()) || 修正.equals(date.get状態())) {
