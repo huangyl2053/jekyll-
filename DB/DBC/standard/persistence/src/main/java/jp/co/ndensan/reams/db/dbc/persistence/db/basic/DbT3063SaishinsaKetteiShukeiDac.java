@@ -117,4 +117,16 @@ public class DbT3063SaishinsaKetteiShukeiDac implements ISaveable<DbT3063Saishin
                 .order(by(rirekiNo, DESC)).limit(1).
                 toObject(DbT3063SaishinsaKetteiShukeiEntity.class);
     }
+
+    /**
+     * DbT3063SaishinsaKetteiShukeiEntityyを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int delete(DbT3063SaishinsaKetteiShukeiEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払支給判定結果エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
 }

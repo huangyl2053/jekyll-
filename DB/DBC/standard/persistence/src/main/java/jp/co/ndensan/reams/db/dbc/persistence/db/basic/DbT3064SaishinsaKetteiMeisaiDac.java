@@ -118,4 +118,15 @@ public class DbT3064SaishinsaKetteiMeisaiDac implements ISaveable<DbT3064Saishin
                 toObject(DbT3064SaishinsaKetteiMeisaiEntity.class);
     }
 
+    /**
+     * DbT3064SaishinsaKetteiMeisaiEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int delete(DbT3064SaishinsaKetteiMeisaiEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払支給判定結果エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
 }
