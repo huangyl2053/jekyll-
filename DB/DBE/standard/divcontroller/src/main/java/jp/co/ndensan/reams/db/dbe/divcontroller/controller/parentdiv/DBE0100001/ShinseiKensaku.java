@@ -138,8 +138,8 @@ public class ShinseiKensaku {
         } else if (MENUID_DBEMN31005.equals(menuID)) {
             ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.申請書管理番号,
                     new ShinseishoKanriNo(申請書管理番号));
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.主治医意見書作成依頼履歴番号,
-                    Integer.valueOf(主治医意見書作成依頼履歴番号.toString()));
+            ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.認定調査履歴番号,
+                    row.getNinteichosaIraiRirekiNo());
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.認定調査結果登録1へ).respond();
         }
         return ResponseData.of(div).respond();

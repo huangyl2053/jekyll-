@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri May 27 13:50:50 CST 2016 
+ * Mon May 30 14:12:42 CST 2016 
  */
 
 
@@ -36,6 +36,7 @@ public class dgShinseiJoho_Row extends DataRow {
     private RString shinseishoKanriNo;
     private RString shoKisaiHokenshaNo;
     private RString ikenshoIraiRirekiNo;
+    private RString ninteichosaIraiRirekiNo;
 
     public dgShinseiJoho_Row() {
         super();
@@ -53,6 +54,7 @@ public class dgShinseiJoho_Row extends DataRow {
         this.shinseishoKanriNo = RString.EMPTY;
         this.shoKisaiHokenshaNo = RString.EMPTY;
         this.ikenshoIraiRirekiNo = RString.EMPTY;
+        this.ninteichosaIraiRirekiNo = RString.EMPTY;
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
         this.setOriginalData("shimei", shimei);
@@ -67,9 +69,10 @@ public class dgShinseiJoho_Row extends DataRow {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
         this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
+        this.setOriginalData("ninteichosaIraiRirekiNo", ninteichosaIraiRirekiNo);
     }
 
-    public dgShinseiJoho_Row(RString hokensha, RString hihokenshaNo, RString shimei, TextBoxDate hihokenshaBirthDay, RString hihokenshaNenrei, RString hihokenshaSeibetsu, TextBoxDate shinseiDay, RString shinseikubunshinseiji, RString yubinno, RString telno, RString jyusho, RString shinseishoKanriNo, RString shoKisaiHokenshaNo, RString ikenshoIraiRirekiNo) {
+    public dgShinseiJoho_Row(RString hokensha, RString hihokenshaNo, RString shimei, TextBoxDate hihokenshaBirthDay, RString hihokenshaNenrei, RString hihokenshaSeibetsu, TextBoxDate shinseiDay, RString shinseikubunshinseiji, RString yubinno, RString telno, RString jyusho, RString shinseishoKanriNo, RString shoKisaiHokenshaNo, RString ikenshoIraiRirekiNo, RString ninteichosaIraiRirekiNo) {
         super();
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
@@ -85,6 +88,7 @@ public class dgShinseiJoho_Row extends DataRow {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
         this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
+        this.setOriginalData("ninteichosaIraiRirekiNo", ninteichosaIraiRirekiNo);
         this.hokensha = hokensha;
         this.hihokenshaNo = hihokenshaNo;
         this.shimei = shimei;
@@ -99,6 +103,7 @@ public class dgShinseiJoho_Row extends DataRow {
         this.shinseishoKanriNo = shinseishoKanriNo;
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
         this.ikenshoIraiRirekiNo = ikenshoIraiRirekiNo;
+        this.ninteichosaIraiRirekiNo = ninteichosaIraiRirekiNo;
     }
 
     public RString getHokensha() {
@@ -155,6 +160,10 @@ public class dgShinseiJoho_Row extends DataRow {
 
     public RString getIkenshoIraiRirekiNo() {
         return ikenshoIraiRirekiNo;
+    }
+
+    public RString getNinteichosaIraiRirekiNo() {
+        return ninteichosaIraiRirekiNo;
     }
 
     public void setHokensha(RString hokensha) {
@@ -225,6 +234,11 @@ public class dgShinseiJoho_Row extends DataRow {
     public void setIkenshoIraiRirekiNo(RString ikenshoIraiRirekiNo) {
         this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
         this.ikenshoIraiRirekiNo = ikenshoIraiRirekiNo;
+    }
+
+    public void setNinteichosaIraiRirekiNo(RString ninteichosaIraiRirekiNo) {
+        this.setOriginalData("ninteichosaIraiRirekiNo", ninteichosaIraiRirekiNo);
+        this.ninteichosaIraiRirekiNo = ninteichosaIraiRirekiNo;
     }
 
     // </editor-fold>

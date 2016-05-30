@@ -252,4 +252,12 @@ public class ShinseiKensakuBusiness implements Serializable {
     public int get主治医意見書作成依頼履歴番号() {
         return entity.getIkenshoIraiRirekiNo();
     }
+     /**
+     * 認定調査依頼履歴番号のgetメソッドです。
+     *
+     * @return 認定調査依頼履歴番号
+     */
+    public int get認定調査依頼履歴番号() {
+        return entity.getNinteichosaIraiRirekiNo();
+    }
 }

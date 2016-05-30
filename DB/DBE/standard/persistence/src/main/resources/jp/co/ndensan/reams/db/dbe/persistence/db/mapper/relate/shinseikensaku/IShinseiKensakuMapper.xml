@@ -28,6 +28,8 @@
         <result property="chosainShimei" column="chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="iryoKikanMeisho" column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shujiiName" column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="ikenshoIraiRirekiNo" column="ikenshoIraiRirekiNo" />
+        <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />
     </resultMap>
     <select id="selectShinseiJoho" resultMap="ResultMap_ShinseiKensakuRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinseikensaku.ShinseiKensakuMapperParameter" 
@@ -61,6 +63,7 @@
             <if test="useShujiiIkenshoIraiJoho">
                 ,DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo"
             </if>
+            ,DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo"
         FROM 
             rgdb."DbT5101NinteiShinseiJoho"  DbT5101NinteiShinseiJoho
         <if test="useNinteichosahyoGaikyoChosa">
@@ -182,6 +185,15 @@
             ON DbT5101NinteiShinseiJoho."shujiiIryokikanCode" = DbT5912ShujiiJoho."shujiiIryokikanCode"
             AND DbT5101NinteiShinseiJoho."shujiiCode" = DbT5912ShujiiJoho."shujiiCode"
             AND DbT7051KoseiShichosonMaster."shichosonCode" = DbT5912ShujiiJoho."shichosonCode"
+        LEFT JOIN 
+            rgdb."DbT5201NinteichosaIraiJoho" DbT5201NinteichosaIraiJoho
+            ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5201NinteichosaIraiJoho."shinseishoKanriNo"
+            AND DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" = 
+                (SELECT MAX(NinteichosaIraiJoho."ninteichosaIraiRirekiNo") 
+                FROM rgdb."DbT5201NinteichosaIraiJoho" NinteichosaIraiJoho 
+                WHERE NinteichosaIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+                AND NinteichosaIraiJoho."logicalDeletedFlag" = FALSE)
+                AND DbT5201NinteichosaIraiJoho."logicalDeletedFlag" = FALSE
         <where>
                 <if test="useHihokenshaNo">
                     AND DbT5101NinteiShinseiJoho."hihokenshaNo" = #{hihokenshaNo}
