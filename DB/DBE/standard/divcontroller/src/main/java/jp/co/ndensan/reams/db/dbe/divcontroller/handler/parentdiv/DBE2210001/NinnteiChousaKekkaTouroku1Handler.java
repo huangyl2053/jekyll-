@@ -229,7 +229,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
     public void initialize() {
 
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        Integer temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class);
+        Integer temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
 
         div.getCcdNinteiShinseishaKihonInfo().initialize(temp_申請書管理番号);
         div.getCcdNinteiShinseiRenrakusakiKihon().initialize(temp_申請書管理番号);
@@ -328,7 +328,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
     private void 既存概況調査情報取得(RString temp_厚労省IF識別コード) {
 
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        Integer temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class);
+        Integer temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
 
         在宅_住宅改修radの設定(temp_申請書管理番号, temp_認定調査履歴番号);
         在宅_市町村特別給付txtの設定(temp_申請書管理番号, temp_認定調査履歴番号);
