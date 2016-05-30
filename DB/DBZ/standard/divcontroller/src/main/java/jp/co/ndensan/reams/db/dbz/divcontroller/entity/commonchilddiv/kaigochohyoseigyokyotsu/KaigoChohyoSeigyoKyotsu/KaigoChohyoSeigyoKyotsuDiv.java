@@ -10,9 +10,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatesakijushosettei.KaigoAtesakiJushoSettei.IKaigoAtesakiJushoSetteiDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 
 /**
  * KaigoChohyoSeigyoKyotsu のクラスファイル
@@ -486,4 +491,27 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    /**
+     * 介護帳票制御共通情報の初期化
+     *
+     * @param subGyomuCode サブ業務コード
+     * @param reportId 帳票分類ID
+     */
+    @Override
+    public void initialize(SubGyomuCode subGyomuCode, ReportId reportId) {
+        KaigoChohyoSeigyoKyotsuHandler handler = new KaigoChohyoSeigyoKyotsuHandler(this);
+        handler.initialize(subGyomuCode, reportId);
+    }
+
+    /**
+     * 介護帳票制御共通情報の保存
+     *
+     * @param subGyomuCode サブ業務コード
+     * @param reportId 帳票分類ID
+     */
+    @Override
+    public void save(SubGyomuCode subGyomuCode, ReportId reportId) {
+        KaigoChohyoSeigyoKyotsuHandler handler = new KaigoChohyoSeigyoKyotsuHandler(this);
+        handler.save(subGyomuCode, reportId);
+    }
 }

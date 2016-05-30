@@ -310,6 +310,15 @@ public class ChohyoSeigyoKyotsu extends
     }
 
     /**
+     * 代納人表示有無を返します。
+     *
+     * @return 代納人表示有無
+     */
+    public boolean is代納人表示有無() {
+        return entity.getDainoninHyojiUmu();
+    }
+
+    /**
      * {@link DbT7065ChohyoSeigyoKyotsuEntity}のクローンを返します。
      *
      * @return {@link DbT7065ChohyoSeigyoKyotsuEntity}のクローン
