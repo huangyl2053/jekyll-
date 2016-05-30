@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
+import jp.co.ndensan.reams.db.dbb.definition.core.gemmenchoshuyuyo.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyo;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyoEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2006ChoshuYuyoDac;
@@ -70,7 +70,7 @@ public class ChoshuYuyoRelateDac implements IModifiable<DbT2006ChoshuYuyoEntity>
                                 eq(DbT2006ChoshuYuyo.fukaNendo, 賦課年度),
                                 eq(DbT2006ChoshuYuyo.tsuchishoNo, 通知書番号),
                                 eq(DbT2006ChoshuYuyo.rirekiNo, 履歴番号),
-                                eq(DbT2006ChoshuYuyo.jotaiKubun, 状態区分.code()))).
+                                eq(DbT2006ChoshuYuyo.jotaiKubun, 状態区分.getコード()))).
                 toObject(DbT2006ChoshuYuyoEntity.class);
 
         return createChoshuYuyo(entity);

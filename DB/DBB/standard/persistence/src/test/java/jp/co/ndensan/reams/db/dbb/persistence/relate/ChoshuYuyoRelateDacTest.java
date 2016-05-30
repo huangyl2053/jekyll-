@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
-import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
+import jp.co.ndensan.reams.db.dbb.definition.core.gemmenchoshuyuyo.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2007KibetsuChoshuYuyoEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyoEntity;
@@ -78,7 +78,6 @@ public class ChoshuYuyoRelateDacTest {
 //        public void 引数の処理日時にnullを指定した場合_NullPointerExceptionが発生する() {
 //            sut.select徴収猶予RelateByKeyAndState(調定年度1, 賦課年度1, 通知書番号1, null, 状態区分1);
 //        }
-
         @Test(expected = NullPointerException.class)
         public void 引数の状態区分にnullを指定した場合_NullPointerExceptionが発生する() {
             sut.select徴収猶予RelateByKeyAndState(調定年度1, 賦課年度1, 通知書番号1, 履歴番号, null);
@@ -191,7 +190,7 @@ public class ChoshuYuyoRelateDacTest {
             entity.setFukaNendo(賦課年度);
             entity.setTsuchishoNo(通知書番号);
             entity.setRirekiNo(履歴番号);
-            entity.setJotaiKubun(状態区分1.code());
+            entity.setJotaiKubun(状態区分1.getコード());
 
             徴収猶予Dac.save(entity);
         }
