@@ -135,8 +135,9 @@ public class ShinseiKensaku {
             ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.主治医意見書登録へ).respond();
         } else if (MENUID_DBEMN31005.equals(menuID)) {
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_申請書管理番号, 申請書管理番号);
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
+            ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.申請書管理番号, 申請書管理番号);
+            ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.主治医意見書作成依頼履歴番号,
+                    主治医意見書作成依頼履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.認定調査結果登録1へ).respond();
         }
         return ResponseData.of(div).respond();
