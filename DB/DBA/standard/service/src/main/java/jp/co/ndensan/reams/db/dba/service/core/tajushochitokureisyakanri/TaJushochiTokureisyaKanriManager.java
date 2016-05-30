@@ -51,7 +51,7 @@ public class TaJushochiTokureisyaKanriManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TaJushochiTokureisyaKanriManager}のインスタンスを返します。
      *
-     * @return // * {@link InstanceProvider#create}にて生成した{@link TaJushochiTokureisyaKanriManager}のインスタンス
+     * @return // {@link InstanceProvider#create}にて生成した{@link TaJushochiTokureisyaKanriManager}のインスタンス
      */
     public static TaJushochiTokureisyaKanriManager createInstance() {
         return InstanceProvider.create(TaJushochiTokureisyaKanriManager.class);
@@ -87,10 +87,7 @@ public class TaJushochiTokureisyaKanriManager {
                         UrErrorMessages.期間が重複.getMessage());
             }
         }
-
-
-
-
+    }
 
     private static class DateComparator implements Comparator<TaJushochiTokureisyaKanriParameter>, Serializable {
 
@@ -115,11 +112,13 @@ public class TaJushochiTokureisyaKanriManager {
                         UrErrorMessages.入力値が不正.getMessage());
             }
         }
-        /**
-         * 施設入退所情報情報の取得です。
-         *
-         * @param paramater TaJushochiTokureisyaKanriParameter
-         */
+    }
+
+    /**
+     * 施設入退所情報情報の取得です。
+     *
+     * @param paramater TaJushochiTokureisyaKanriParameter
+     */
     public void checkHenkoJotai(List<TaJushochiTokureisyaKanriParameter> paramater) {
         for (TaJushochiTokureisyaKanriParameter date : paramater) {
             if (追加.equals(date.get状態()) || 修正.equals(date.get状態())) {
