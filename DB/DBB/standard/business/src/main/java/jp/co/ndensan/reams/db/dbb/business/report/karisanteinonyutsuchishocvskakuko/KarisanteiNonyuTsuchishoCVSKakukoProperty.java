@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvska
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -32,20 +33,15 @@ public class KarisanteiNonyuTsuchishoCVSKakukoProperty extends ReportPropertyBas
      * インスタンスを生成します。
      */
     public KarisanteiNonyuTsuchishoCVSKakukoProperty() {
-        super(SubGyomuCode.DBB介護賦課, ID);
+        super(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB100024.getReportId());
     }
 
     @Override
     public Breakers<KarisanteiNonyuTsuchishoCVSKakukoSource> defineBreakers(
             Breakers<KarisanteiNonyuTsuchishoCVSKakukoSource> breakers,
             BreakerCatalog<KarisanteiNonyuTsuchishoCVSKakukoSource> catalog) {
-        return breakers.add(catalog.new SimpleLayoutBreaker(
 
-
-
-
-
-
+        return breakers.add(catalog.new SimplePageBreaker(
 
 
             LAYOUT_BREAK_KEYS) {
@@ -54,11 +50,12 @@ public class KarisanteiNonyuTsuchishoCVSKakukoProperty extends ReportPropertyBas
                     ReportLineRecord<KarisanteiNonyuTsuchishoCVSKakukoSource> currentRecord,
                     ReportLineRecord<KarisanteiNonyuTsuchishoCVSKakukoSource> nextRecord,
                     ReportDynamicChart dynamicChart) {
-                if (nextRecord.equals(ReportLineRecord.LAST_RECORD)) {
-                    return currentRecord;
+                int layout = currentRecord.getSource().layoutBreakItem;
+                currentRecord.setFormGroupIndex(layout);
+                if (nextRecord != null && nextRecord.getSource() != null) {
+                    layout = nextRecord.getSource().layoutBreakItem;
+                    nextRecord.setFormGroupIndex(layout);
                 }
-                KarisanteiNonyuTsuchishoCVSKakukoSource.Layouts layout = nextRecord.getSource().layout;
-                nextRecord.setFormGroupIndex(layout.index());
                 return currentRecord;
             }
         }).fixed();
