@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.db.dbb.business.report.fukadaicho.EditedHonSanteiFuka
 import jp.co.ndensan.reams.db.dbb.business.report.fukadaicho.EditedKariSanteiFukaDaichoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.gemmen.GenmenKetteiTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.henkokenchushitsuchisho.KaigoHokenryogakuHenkoKenChushiTsuchishoJoho;
-import jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishobook.HokenryoNonyuTsuchishoBookItem;
 import jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishobook.KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverReport;
 import jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishobook.KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverReport;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoReport;
@@ -713,14 +712,12 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         } else if (ReportIdDBB.DBB100018.getReportId().equals(帳票ID)) {
             new KarisanteihokenryononyutsuchishoginfuriPrintService().print(仮算定納入通知書情報, reportManager);
         } else if (ReportIdDBB.DBB100021.getReportId().equals(帳票ID)) {
-            HokenryoNonyuTsuchishoBookItem item = new HokenryoNonyuTsuchishoBookItem(仮算定納入通知書情報, null);
             KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverReport report
-                    = KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverReport.createFrom(item);
+                    = KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverReport.createFrom(仮算定納入通知書情報, null);
             new Printer<KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource>().spool(null, report);
         } else if (ReportIdDBB.DBB100020.getReportId().equals(帳票ID)) {
-            HokenryoNonyuTsuchishoBookItem item = new HokenryoNonyuTsuchishoBookItem(仮算定納入通知書情報, null);
             KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverReport report
-                    = KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverReport.createFrom(item);
+                    = KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverReport.createFrom(仮算定納入通知書情報, null);
             new Printer<KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource>().spool(null, report);
         } else if (ReportIdDBB.DBB100026.getReportId().equals(帳票ID)) {
             return;

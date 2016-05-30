@@ -10,16 +10,15 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNony
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NofuShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
-import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishobook.KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishobook.KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
- * 保険料納入通知書（仮算定）【ブックタイプ】納付書 HokenryoNonyuTsuchishoBookNofushoEditor
+ * 保険料納入通知書（仮算定）【ブックタイプ】（口振依頼なし）納付書 HokenryoNonyuTsuchishoBookNofushoNashiEditor
  *
  * @reamsid_L DBB-9110-040 wangjie2
  */
-public class HokenryoNonyuTsuchishoBookNofushoEditor implements IKarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor {
+public class HokenryoNonyuTsuchishoBookNofushoNashiEditor implements IKarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverEditor {
 
     private final List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト;
     private final KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報;
@@ -42,7 +41,7 @@ public class HokenryoNonyuTsuchishoBookNofushoEditor implements IKarisanteiHoken
      * @param 納入通知書期情報リスト 納入通知書期情報リスト
      * @param 通知書の連番 通知書の連番
      */
-    protected HokenryoNonyuTsuchishoBookNofushoEditor(
+    protected HokenryoNonyuTsuchishoBookNofushoNashiEditor(
             KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報,
             List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
             int 通知書の連番) {
@@ -53,7 +52,7 @@ public class HokenryoNonyuTsuchishoBookNofushoEditor implements IKarisanteiHoken
     }
 
     @Override
-    public KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource edit(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource source) {
+    public KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource edit(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource source) {
         source.layoutBreakItem = 2;
         edit印字位置2(source);
         edit印字位置3(source);
@@ -66,68 +65,68 @@ public class HokenryoNonyuTsuchishoBookNofushoEditor implements IKarisanteiHoken
         return source;
     }
 
-    private void edit印字位置2(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource source) {
+    private void edit印字位置2(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource source) {
         NonyuTsuchiShoKiJoho 納入通知書期情報 = get納入通知書期情報(2);
         boolean is納入通知書期情報がある = is納入通知書期情報がある(納入通知書期情報);
-        source.ryoshushoTitleNendo1 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
-        source.ryoshushoTitleKi1 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
-        source.ryoshushoTitleTsuki1 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
-        source.ryoshushoJusho1 = 納付書共通.get住所();
-        source.ryoshushoKatagaki1 = 納付書共通.get方書();
-        source.ryoshushoHihokenshaName1 = 納付書共通.get納付者氏名();
+        source.ryoshushoTitleNendo5 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
+        source.ryoshushoTitleKi5 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
+        source.ryoshushoTitleTsuki5 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
+        source.ryoshushoJusho5 = 納付書共通.get住所();
+        source.ryoshushoKatagaki5 = 納付書共通.get方書();
+        source.ryoshushoHihokenshaName5 = 納付書共通.get納付者氏名();
         if (納付書共通.get通知書番号() != null) {
-            source.ryoshushoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
-            source.nofushoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
+            source.ryoshushoTsuchishoNo5 = 納付書共通.get通知書番号().getColumnValue();
+            source.nofushoTsuchishoNo5 = 納付書共通.get通知書番号().getColumnValue();
         }
-        source.ryoshushoHokenryoGaku1 = is納入通知書期情報がある ? 納入通知書期情報.get領収証書納付額欄() : 星10;
-        source.ryoshushoNokigen1 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
-        source.ryoshushoNofuIn1 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付印欄() : new RString("**");
-        source.ryoshushoKozaCom1 = is納入通知書期情報がある ? 納入通知書期情報.get領収証書領収印欄() : RString.EMPTY;
-        source.ryoshushoZuiji1 = is納入通知書期情報がある ? 納入通知書期情報.get随時表記() : RString.EMPTY;
-        source.nofushoTitleNendo1 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
-        source.nofushoTitleKi1 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
-        source.nofushoTitleTsuki1 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
-        source.nofushoHihokenshaName1 = 納付書共通.get納付者氏名();
-        source.nofushoHokenryoGaku1 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
-        source.nofushoNokigen1 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
-        source.nofushoNofuIn1 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
-        source.nofushoKozaCom1 = is納入通知書期情報がある ? 納入通知書期情報.get納付書領収印欄() : RString.EMPTY;
-        source.nofushoZuiji1 = is納入通知書期情報がある ? 納入通知書期情報.get随時表記() : RString.EMPTY;
-        source.nofuzumishoTitleNendoBun1 = RString.EMPTY;
+        source.ryoshushoHokenryoGaku5 = is納入通知書期情報がある ? 納入通知書期情報.get領収証書納付額欄() : 星10;
+        source.ryoshushoNokigen5 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
+        source.ryoshushoNofuIn5 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付印欄() : new RString("**");
+        source.ryoshushoKozaCom5 = is納入通知書期情報がある ? 納入通知書期情報.get領収証書領収印欄() : RString.EMPTY;
+        source.ryoshushoZuiji5 = is納入通知書期情報がある ? 納入通知書期情報.get随時表記() : RString.EMPTY;
+        source.nofushoTitleNendo5 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
+        source.nofushoTitleKi5 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
+        source.nofushoTitleTsuki5 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
+        source.nofushoHihokenshaName5 = 納付書共通.get納付者氏名();
+        source.nofushoHokenryoGaku5 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
+        source.nofushoNokigen5 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
+        source.nofushoNofuIn5 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
+        source.nofushoKozaCom5 = is納入通知書期情報がある ? 納入通知書期情報.get納付書領収印欄() : RString.EMPTY;
+        source.nofushoZuiji5 = is納入通知書期情報がある ? 納入通知書期情報.get随時表記() : RString.EMPTY;
+        source.nofuzumishoTitleNendoBun5 = RString.EMPTY;
         edit印字位置2_1(source, 納入通知書期情報, is納入通知書期情報がある);
 
     }
 
-    private void edit印字位置2_1(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource source,
+    private void edit印字位置2_1(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource source,
             NonyuTsuchiShoKiJoho 納入通知書期情報, boolean is納入通知書期情報がある) {
-        source.nofuzumishoTitleKi1 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
-        source.nofuzumishoTitleTsuki1 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
-        source.nofozumishoTitleNendo1 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
-        source.nofuzumishoOCR11 = is納入通知書期情報がある
+        source.nofuzumishoTitleKi5 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
+        source.nofuzumishoTitleTsuki5 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
+        source.nofozumishoTitleNendo5 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
+        source.nofuzumishoOCR15 = is納入通知書期情報がある
                 ? null == 納入通知書期情報.getOcr() ? RString.EMPTY : 納入通知書期情報.getOcr().get(1) : 星19;
-        source.nofuzumishoOCR21 = is納入通知書期情報がある
+        source.nofuzumishoOCR25 = is納入通知書期情報がある
                 ? null == 納入通知書期情報.getOcr() ? RString.EMPTY : 納入通知書期情報.getOcr().get(2) : 星20;
-        source.nofuzumishoOCR31 = is納入通知書期情報がある
+        source.nofuzumishoOCR35 = is納入通知書期情報がある
                 ? null == 納入通知書期情報.getOcr() ? RString.EMPTY : 納入通知書期情報.getOcr().get(INT3) : 星12;
-        source.nofuzumishoNofuGaku1 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
-        source.nofuzumishoJusho1 = 納付書共通.get住所();
-        source.nofuzumishoKatagaki1 = 納付書共通.get方書();
-        source.nofuzumishoHihokenshaName1 = 納付書共通.get納付者氏名();
+        source.nofuzumishoNofuGaku5 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
+        source.nofuzumishoJusho5 = 納付書共通.get住所();
+        source.nofuzumishoKatagaki5 = 納付書共通.get方書();
+        source.nofuzumishoHihokenshaName5 = 納付書共通.get納付者氏名();
         if (納付書共通.get通知書番号() != null) {
-            source.nofuzumishoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
+            source.nofuzumishoTsuchishoNo5 = 納付書共通.get通知書番号().getColumnValue();
         }
         if (納付書共通.get世帯コード() != null) {
-            source.nofuzumishoSetaiCode1 = 納付書共通.get世帯コード().getColumnValue();
+            source.nofuzumishoSetaiCode5 = 納付書共通.get世帯コード().getColumnValue();
         }
-        source.nofuzumishoNokigen1 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
-        source.nofuzumishoNofuIn1 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
-        source.nofuzumishoKozaCom1 = is納入通知書期情報がある ? 納入通知書期情報.get納付書領収印欄() : RString.EMPTY;
-        source.nofuzumishoZuiji1 = is納入通知書期情報がある ? 納入通知書期情報.get随時表記() : RString.EMPTY;
-        source.nofuzumishoshichosonName1 = 納付書共通.get納付書市町村名();
+        source.nofuzumishoNokigen5 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
+        source.nofuzumishoNofuIn5 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
+        source.nofuzumishoKozaCom5 = is納入通知書期情報がある ? 納入通知書期情報.get納付書領収印欄() : RString.EMPTY;
+        source.nofuzumishoZuiji5 = is納入通知書期情報がある ? 納入通知書期情報.get随時表記() : RString.EMPTY;
+        source.nofuzumishoshichosonName5 = 納付書共通.get納付書市町村名();
         source.pagerenban5 = getページ連番(1);
     }
 
-    private void edit印字位置3(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource source) {
+    private void edit印字位置3(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource source) {
         NonyuTsuchiShoKiJoho 納入通知書期情報 = get納入通知書期情報(INT3);
         boolean is納入通知書期情報がある = is納入通知書期情報がある(納入通知書期情報);
         source.ryoshushoJusho2 = 納付書共通.get住所();
@@ -181,7 +180,7 @@ public class HokenryoNonyuTsuchishoBookNofushoEditor implements IKarisanteiHoken
         edit印字位置3_1(source, 納入通知書期情報, is納入通知書期情報がある);
     }
 
-    private void edit印字位置3_1(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource source,
+    private void edit印字位置3_1(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource source,
             NonyuTsuchiShoKiJoho 納入通知書期情報, boolean is納入通知書期情報がある) {
         source.nofuzumishoJusho2 = 納付書共通.get住所();
         source.nofuzumishoKatagaki2 = 納付書共通.get方書();
@@ -215,7 +214,7 @@ public class HokenryoNonyuTsuchishoBookNofushoEditor implements IKarisanteiHoken
         source.pagerenban6 = getページ連番(2);
     }
 
-    private void edit印字位置4(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource source) {
+    private void edit印字位置4(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource source) {
         NonyuTsuchiShoKiJoho 納入通知書期情報 = get納入通知書期情報(INT4);
         boolean is納入通知書期情報がある = is納入通知書期情報がある(納入通知書期情報);
         source.ryoshushoJusho3 = 納付書共通.get住所();
@@ -264,7 +263,7 @@ public class HokenryoNonyuTsuchishoBookNofushoEditor implements IKarisanteiHoken
         edit印字位置4_1(source, 納入通知書期情報, is納入通知書期情報がある);
     }
 
-    private void edit印字位置4_1(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource source,
+    private void edit印字位置4_1(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource source,
             NonyuTsuchiShoKiJoho 納入通知書期情報, boolean is納入通知書期情報がある) {
         source.nofuzumishoTitleNendoBun3 = RString.EMPTY;
         source.nofuzumishoTitleKi3 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
@@ -293,7 +292,7 @@ public class HokenryoNonyuTsuchishoBookNofushoEditor implements IKarisanteiHoken
         source.pagerenban7 = getページ連番(INT3);
     }
 
-    private void edit印字位置5(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource source) {
+    private void edit印字位置5(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource source) {
         NonyuTsuchiShoKiJoho 納入通知書期情報 = get納入通知書期情報(INT5);
         boolean is納入通知書期情報がある = is納入通知書期情報がある(納入通知書期情報);
         source.ryoshushoTitleNendo4 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
@@ -325,7 +324,7 @@ public class HokenryoNonyuTsuchishoBookNofushoEditor implements IKarisanteiHoken
         edit印字位置5_1(source, 納入通知書期情報, is納入通知書期情報がある);
     }
 
-    private void edit印字位置5_1(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource source,
+    private void edit印字位置5_1(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource source,
             NonyuTsuchiShoKiJoho 納入通知書期情報, boolean is納入通知書期情報がある) {
         source.nofuzumishoTitleTsuki4 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
         source.nofuzumishoOCR14 = is納入通知書期情報がある
