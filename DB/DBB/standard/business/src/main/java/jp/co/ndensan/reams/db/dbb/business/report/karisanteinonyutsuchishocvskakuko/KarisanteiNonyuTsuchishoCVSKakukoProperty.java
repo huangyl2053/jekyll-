@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoSource;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -26,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  */
 public class KarisanteiNonyuTsuchishoCVSKakukoProperty extends ReportPropertyBase<KarisanteiNonyuTsuchishoCVSKakukoSource> {
 
-    private static final ReportId ID = new ReportId("DBB100024_KarisanteiNonyuTsuchishoCVSKakuko");
     private static final List<RString> LAYOUT_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("layout")));
 
     /**
@@ -42,6 +40,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoProperty extends ReportPropertyBas
             BreakerCatalog<KarisanteiNonyuTsuchishoCVSKakukoSource> catalog) {
 
         return breakers.add(catalog.new SimplePageBreaker(
+
 
 
             LAYOUT_BREAK_KEYS) {
