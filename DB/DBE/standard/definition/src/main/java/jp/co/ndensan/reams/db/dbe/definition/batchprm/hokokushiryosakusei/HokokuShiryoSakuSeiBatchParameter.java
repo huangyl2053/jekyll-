@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbe.definition.batchprm.hokokushiryosakusei;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.JigyoJyokyoHokokuProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.JisshiJokyoTokeiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.ShinsahanteinoHenkojokyoProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.ShinsakaiShukeiGenzainojokyoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.ShinsakaiShukeihyoShinseiBetsuProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.SinsakaiHanteiJyokyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -255,4 +256,54 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
                 taishoGeppiFrom,
                 taishoGeppiTo);
     }
+
+    /**
+     * ShinsakaiShukeiGenzainojokyoProcessParameterに転換します。
+     *
+     * @return ShinsakaiShukeiGenzainojokyoProcessParameter
+     */
+    public ShinsakaiShukeiGenzainojokyoProcessParameter toShinsakaiShukeiGenzainojokyoProcessParameter() {
+
+        return new ShinsakaiShukeiGenzainojokyoProcessParameter(
+                RString.isNullOrEmpty(hokensyaNo),
+                hokensyaNo,
+                hiHokensyaKubun,
+                -1 == gogitaiNo,
+                gogitaiNo,
+                kijyunYMD == null || RString.isNullOrEmpty(kijyunYMD.toDateString()),
+                kijyunYMD,
+                isTaishoTsukiKubun,
+                isTaishoGeppiKubun,
+                taishoNendoYM,
+                RString.isNullOrEmpty(taishoGeppiFrom),
+                RString.isNullOrEmpty(taishoGeppiTo),
+                taishoGeppiFrom,
+                taishoGeppiTo,
+                isSinseiKubunSinseitoki,
+                isSinseiKubunHorei);
+    }
+
+    /**
+     * CsvKenHokokuShiryoSakuseiProcessParameterに転換します。
+     *
+     * @return CsvKenHokokuShiryoSakuseiProcessParameter
+     */
+//    public CsvKenHokokuShiryoSakuseiProcessParameter toCsvKenHokokuShiryoSakuseiProcessParameter() {
+//
+//        return new CsvKenHokokuShiryoSakuseiProcessParameter(
+//                RString.isNullOrEmpty(hokensyaNo),
+//                hokensyaNo,
+//                hiHokensyaKubun,
+//                -1 == gogitaiNo,
+//                gogitaiNo,
+//                isTaishoTsukiKubun,
+//                isTaishoGeppiKubun,
+//                taishoNendoYM,
+//                RString.isNullOrEmpty(taishoGeppiFrom),
+//                RString.isNullOrEmpty(taishoGeppiTo),
+//                taishoGeppiFrom,
+//                taishoGeppiTo,
+//                isSinseiKubunSinseitoki,
+//                isSinseiKubunHorei);
+//    }
 }
