@@ -241,7 +241,7 @@ public class ShinseiKensakuBusiness implements Serializable {
      * @return 主治医氏名
      */
     public RString get主治医氏名() {
-        return entity.getShujiiName().getColumnValue();
+        return entity.getShujiiName() == null ? RString.EMPTY : entity.getShujiiName().getColumnValue();
     }
 
     /**

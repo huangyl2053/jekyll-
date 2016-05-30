@@ -38,6 +38,7 @@ public class ShinseiKensaku {
     private static final RString MENUID_DBEMN11003 = new RString("DBEMN11003");
     private static final RString MENUID_DBEMN14001 = new RString("DBEMN14001");
     private static final RString MENUID_DBEMN32002 = new RString("DBEMN32002");
+    private static final RString MENUID_DBEMN31005 = new RString("DBEMN31005");
     private static final RString BUTTON_BTNITIRANPRINT = new RString("btnitiranprint");
 
     /**
@@ -55,7 +56,9 @@ public class ShinseiKensaku {
             return ResponseData.of(div).setState(DBE0100001StateName.申請検索);
         } else if (MENUID_DBEMN11003.equals(menuID)) {
             return ResponseData.of(div).setState(DBE0100001StateName.個人照会);
-        } else if (MENUID_DBEMN14001.equals(menuID) || MENUID_DBEMN32002.equals(menuID)) {
+        } else if (MENUID_DBEMN14001.equals(menuID)
+                || MENUID_DBEMN32002.equals(menuID)
+                || MENUID_DBEMN31005.equals(menuID)) {
             return ResponseData.of(div).setState(DBE0100001StateName.情報提供);
         }
         return ResponseData.of(div).respond();
@@ -131,6 +134,10 @@ public class ShinseiKensaku {
             ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.主治医意見書登録へ).respond();
+        } else if (MENUID_DBEMN31005.equals(menuID)) {
+            ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_申請書管理番号, 申請書管理番号);
+            ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
+            return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.認定調査結果登録1へ).respond();
         }
         return ResponseData.of(div).respond();
     }
