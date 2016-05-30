@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2040021
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.definition.core.tashichosonjushochitokureisyaidoteisei.ShisetsuNyutaishoData;
 import jp.co.ndensan.reams.db.dba.definition.core.tashichosonjushochitokureisyaidoteisei.TaShichosonJushochiTokureisyaIdoTeiseiParamter;
 import jp.co.ndensan.reams.db.dba.definition.core.tashichosonjushochitokureisyaidoteisei.TekiyouJouhou;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushochiTokureishaKanri.TaJushochiTokureishaKanri.dgJushochiTokureiRireki_Row;
@@ -15,6 +16,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040021.Taju
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2040021.TajutokuIdoTeiseiHandler;
 import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureisyaidoteisei.TaShichosonJushochiTokureisyaIdoTeisei;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -82,10 +84,10 @@ public class TajutokuIdoTeisei {
     }
 
     private ResponseData<TajutokuIdoTeiseiDiv> set登録処理(TajutokuIdoTeiseiDiv requestDiv) {
-        List<dgJushochiTokureiRireki_Row> dgJushochiTokureiRireki = requestDiv.getTajutokuIdoTeiseiIdoJoho().
+        List<dgJushochiTokureiRireki_Row> 適用情報一覧 = requestDiv.getTajutokuIdoTeiseiIdoJoho().
                 getCcdTaJushochiTokureishaKanri().get適用情報一覧();
         List<TekiyouJouhou> 適用情報グリッド = new ArrayList<>();
-        for (dgJushochiTokureiRireki_Row dg : dgJushochiTokureiRireki) {
+        for (dgJushochiTokureiRireki_Row dg : 適用情報一覧) {
             if (!dg.getRowState().equals(RowState.Unchanged) && !dg.getRowState().equals(RowState.Deleted)) {
                 TekiyouJouhou tekiyouJouhou = new TekiyouJouhou();
                 tekiyouJouhou.set適用日(dg.getTekiyoYMD().getText());
@@ -93,8 +95,19 @@ public class TajutokuIdoTeisei {
                 適用情報グリッド.add(tekiyouJouhou);
             }
         }
+        List<ShisetsuNyutaishoData> 入退所データリスト = new ArrayList<>();
+        List<dgShisetsuNyutaishoRireki_Row> 施設入退所履歴一覧 = requestDiv.getTajutokuIdoTeiseiIdoJoho().
+                getShisetsuIdoJoho().getCcdShisetsuNyutaishoRirekiKanri().get施設入退所履歴一覧();
+        for (dgShisetsuNyutaishoRireki_Row dg : 施設入退所履歴一覧) {
+            if (!dg.getRowState().equals(RowState.Unchanged) && !dg.getRowState().equals(RowState.Deleted)) {
+                ShisetsuNyutaishoData shisetsuNyutaishoData = new ShisetsuNyutaishoData();
+                shisetsuNyutaishoData.set入所日(dg.getNyushoDate().getValue());
+                shisetsuNyutaishoData.set退所日(dg.getTaishoDate().getValue());
+                入退所データリスト.add(shisetsuNyutaishoData);
+            }
+        }
         TaShichosonJushochiTokureisyaIdoTeiseiParamter paramter = new TaShichosonJushochiTokureisyaIdoTeiseiParamter(
-                ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード(),
+                入退所データリスト,
                 適用情報グリッド);
         if (適用情報グリッド != null && !適用情報グリッド.isEmpty()) {
             TaShichosonJushochiTokureisyaIdoTeisei.createInstance().is適用状態のチェック(paramter);
