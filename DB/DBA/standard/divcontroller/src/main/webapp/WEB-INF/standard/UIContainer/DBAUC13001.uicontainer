@@ -51,7 +51,7 @@
      "layoutName": "DBA1030011",
      "layoutTitle": "資格喪失異動",
      "eventName": "詳細へ",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBA",
      "toLayoutName": "DBA1050021",
