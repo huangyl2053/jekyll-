@@ -362,7 +362,7 @@ public class NinnteiChousaKekkaTouroku1 {
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onBeforeOpenDialog_btnKihonChosa(NinnteiChousaKekkaTouroku1Div div) {
 
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        Integer temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class);
+        Integer temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
 
         div.setShinseishoKanriNo(temp_申請書管理番号.getColumnValue());
         div.setRecordNumber(new RString(String.valueOf(temp_認定調査履歴番号)));
@@ -663,7 +663,7 @@ public class NinnteiChousaKekkaTouroku1 {
 
     private void 認定調査依頼情報の更新() {
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class);
+        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
 
         NinteichosaIraiJohoManager dbt5201Manager = NinteichosaIraiJohoManager.createInstance();
         NinteichosaIraiJoho dbt5201 = dbt5201Manager.get認定調査依頼情報(temp_申請書管理番号, temp_認定調査履歴番号);
@@ -677,7 +677,7 @@ public class NinnteiChousaKekkaTouroku1 {
 
     private void 概況調査の更新(NinnteiChousaKekkaTouroku1Div div) {
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class);
+        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
         RString temp_厚労省IF識別コード = ViewStateHolder.get(NinnteiChousaKekkaTouroku1Handler.Dbe2210001Keys.厚労省IF識別コード, RString.class);
         RString temp_認定調査依頼区分コード = ViewStateHolder.get(NinnteiChousaKekkaTouroku1Handler.Dbe2210001Keys.認定調査依頼区分コード, RString.class);
 
@@ -724,7 +724,7 @@ public class NinnteiChousaKekkaTouroku1 {
 
     private void サービス状況フラグの更新(NinnteiChousaKekkaTouroku1Div div) {
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class);
+        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
         RString temp_厚労省IF識別コード = ViewStateHolder.get(NinnteiChousaKekkaTouroku1Handler.Dbe2210001Keys.厚労省IF識別コード, RString.class);
 
         NinteichosahyoServiceJokyoFlagManager dbt5208Manager = new NinteichosahyoServiceJokyoFlagManager();
@@ -747,7 +747,7 @@ public class NinnteiChousaKekkaTouroku1 {
     private void 記入項目の更新(NinnteiChousaKekkaTouroku1Div div) {
 
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class);
+        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
         RString temp_厚労省IF識別コード = ViewStateHolder.get(NinnteiChousaKekkaTouroku1Handler.Dbe2210001Keys.厚労省IF識別コード, RString.class);
 
         NinteichosahyoKinyuItemManager dbt5209Manager = new NinteichosahyoKinyuItemManager();
@@ -773,7 +773,7 @@ public class NinnteiChousaKekkaTouroku1 {
     private void 施設利用の更新(NinnteiChousaKekkaTouroku1Div div) {
 
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class);
+        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
         RString temp_厚労省IF識別コード = ViewStateHolder.get(NinnteiChousaKekkaTouroku1Handler.Dbe2210001Keys.厚労省IF識別コード, RString.class);
 
         List<Integer> 連番List = getHandler(div).get施設利用連番List(temp_厚労省IF識別コード);
@@ -798,7 +798,7 @@ public class NinnteiChousaKekkaTouroku1 {
     private void 施設利用falseの設定(NinnteiChousaKekkaTouroku1Div div) {
 
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class);
+        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
         RString temp_厚労省IF識別コード = ViewStateHolder.get(NinnteiChousaKekkaTouroku1Handler.Dbe2210001Keys.厚労省IF識別コード, RString.class);
 
         List<Integer> 連番List = getHandler(div).get施設利用連番List(temp_厚労省IF識別コード);
@@ -819,7 +819,7 @@ public class NinnteiChousaKekkaTouroku1 {
     private void 現在の状況_在宅or施設の保存(NinnteiChousaKekkaTouroku1Div div) {
 
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class);
+        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
         RString temp_厚労省IF識別コード = ViewStateHolder.get(NinnteiChousaKekkaTouroku1Handler.Dbe2210001Keys.厚労省IF識別コード, RString.class);
 
         int 居宅連番 = 1;
@@ -919,7 +919,7 @@ public class NinnteiChousaKekkaTouroku1 {
         }
 
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class);
+        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
         RString temp_厚労省IF識別コード = ViewStateHolder.get(NinnteiChousaKekkaTouroku1Handler.Dbe2210001Keys.厚労省IF識別コード, RString.class);
 
         NinteichosahyoKihonChosaManager manager = new NinteichosahyoKihonChosaManager();
@@ -941,7 +941,7 @@ public class NinnteiChousaKekkaTouroku1 {
     private void 調査項目の保存(int 連番, RString 調査項目) {
 
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class);
+        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
 
         NinteichosahyoChosaItemManager manager = new NinteichosahyoChosaItemManager();
         NinteichosahyoChosaItem dbt5211 = manager.get認定調査票_基本調査_調査項目(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
@@ -958,7 +958,7 @@ public class NinnteiChousaKekkaTouroku1 {
     private void 予防給付サービス状況の更新(NinnteiChousaKekkaTouroku1Div div) {
 
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class);
+        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
         RString temp_厚労省IF識別コード = ViewStateHolder.get(NinnteiChousaKekkaTouroku1Handler.Dbe2210001Keys.厚労省IF識別コード, RString.class);
 
         List<Integer> 連番List = getHandler(div).get予防給付サービス連番List(temp_厚労省IF識別コード);
@@ -991,7 +991,7 @@ public class NinnteiChousaKekkaTouroku1 {
     private void 予防給付サービス状況のクリア(NinnteiChousaKekkaTouroku1Div div) {
 
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class);
+        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
         RString temp_厚労省IF識別コード = ViewStateHolder.get(NinnteiChousaKekkaTouroku1Handler.Dbe2210001Keys.厚労省IF識別コード, RString.class);
 
         List<Integer> 連番List = getHandler(div).get予防給付サービス連番List(temp_厚労省IF識別コード);
@@ -1012,7 +1012,7 @@ public class NinnteiChousaKekkaTouroku1 {
     private void 介護給付サービス状況の更新(NinnteiChousaKekkaTouroku1Div div) {
 
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class);
+        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
         RString temp_厚労省IF識別コード = ViewStateHolder.get(NinnteiChousaKekkaTouroku1Handler.Dbe2210001Keys.厚労省IF識別コード, RString.class);
 
         List<Integer> 連番List = getHandler(div).get介護給付サービス連番List(temp_厚労省IF識別コード);
@@ -1045,7 +1045,7 @@ public class NinnteiChousaKekkaTouroku1 {
     private void 介護給付サービス状況のクリア(NinnteiChousaKekkaTouroku1Div div) {
 
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class);
+        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
         RString temp_厚労省IF識別コード = ViewStateHolder.get(NinnteiChousaKekkaTouroku1Handler.Dbe2210001Keys.厚労省IF識別コード, RString.class);
 
         List<Integer> 連番List = getHandler(div).get介護給付サービス連番List(temp_厚労省IF識別コード);
@@ -1066,10 +1066,10 @@ public class NinnteiChousaKekkaTouroku1 {
     private void set画面遷移パラメータ(NinnteiChousaKekkaTouroku1Div div) {
 
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class);
+        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
 
         ViewStateHolder.put(ViewStateKeys.申請書管理番号, temp_申請書管理番号);
-        ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, temp_認定調査履歴番号);
+        ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, temp_認定調査履歴番号);
         ViewStateHolder.put(ViewStateKeys.調査実施日, div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate().getText());
         ViewStateHolder.put(ViewStateKeys.調査実施場所, div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey());
         ViewStateHolder.put(ViewStateKeys.実施場所名称, div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().getText());
