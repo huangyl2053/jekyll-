@@ -187,7 +187,7 @@ public class KogakuServicehiPanelHandler {
             }
             row.setTxtShikyuKubun(entity.getEntity().get支給区分コード());
             row.getTxtShikyuKingaku().setValue(entity.getEntity().get支給金額());
-            // TODO QAあり boolean?entity.getEntity().is高額自動償還()
+            // TODO QA780 boolean?entity.getEntity().is高額自動償還()
             row.setTxtKogakuAutoShokan(new RString("true"));
             Decimal 履歴番号 = entity.getEntity().get履歴番号();
             if (履歴番号 != null) {

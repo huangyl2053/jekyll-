@@ -69,7 +69,7 @@ public class KogakuServicehiPanel {
             getHandler(div).set該当者一覧エリア(searchCondition);
             return ResponseData.of(div).setState(DBC0030011StateName.該当者一覧);
         } else {
-            // TODO このdialogは問題があります。
+            // TODO QA801 このdialogは問題があります。
             ViewStateHolder.put(ViewStateKeys.画面フラグ, 画面フラグ_対象者検索);
         }
         return createResponse(div);

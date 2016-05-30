@@ -36,14 +36,6 @@ public enum KogakuServicehiPanelSpec implements IPredicate<KogakuServicehiPanelD
                     RDate 決定年月To;
                     RString 画面フラグ = ViewStateHolder.get(ViewStateKeys.画面フラグ, RString.class);
                     if (new RString("対象者検索").equals(画面フラグ)) {
-                        被保番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
-                        提供年月From = ViewStateHolder.get(ViewStateKeys.提供年月From, RDate.class);
-                        提供年月To = ViewStateHolder.get(ViewStateKeys.提供年月To, RDate.class);
-                        申請年月From = ViewStateHolder.get(ViewStateKeys.申請年月From, RDate.class);
-                        申請年月To = ViewStateHolder.get(ViewStateKeys.申請年月To, RDate.class);
-                        決定年月From = ViewStateHolder.get(ViewStateKeys.決定年月From, RDate.class);
-                        決定年月To = ViewStateHolder.get(ViewStateKeys.決定年月To, RDate.class);
-                    } else {
                         SearchKogakuHihokenshaDiv panel = div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha();
                         被保番号 = panel.getTxtHihoNo().getValue();
                         提供年月From = panel.getTxtTeikyoYMRange().getFromValue();
@@ -52,6 +44,14 @@ public enum KogakuServicehiPanelSpec implements IPredicate<KogakuServicehiPanelD
                         申請年月To = panel.getTxtShinseiYMRange().getToValue();
                         決定年月From = panel.getTxtKetteiYMRange().getFromValue();
                         決定年月To = panel.getTxtKetteiYMRange().getToValue();
+                    } else {
+                        被保番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+                        提供年月From = ViewStateHolder.get(ViewStateKeys.提供年月From, RDate.class);
+                        提供年月To = ViewStateHolder.get(ViewStateKeys.提供年月To, RDate.class);
+                        申請年月From = ViewStateHolder.get(ViewStateKeys.申請年月From, RDate.class);
+                        申請年月To = ViewStateHolder.get(ViewStateKeys.申請年月To, RDate.class);
+                        決定年月From = ViewStateHolder.get(ViewStateKeys.決定年月From, RDate.class);
+                        決定年月To = ViewStateHolder.get(ViewStateKeys.決定年月To, RDate.class);
                     }
                     if (被保番号 != null && !被保番号.isEmpty()) {
                         return true;
