@@ -39,15 +39,31 @@ public class TennyuTenshutsuHoryuTaishoshaIchiranHandler {
             row.getShichosonCode().setValue(taishosha.get市町村コード().value());
             row.getHihokenshaNo().setValue(taishosha.get被保険者番号().value());
             row.getShikibetsuCode().setValue(taishosha.get識別コード().value());
-            row.setShimei(taishosha.get宛名氏名().value());
-            row.setShimeiKana(taishosha.get宛名カナ氏名().value());
-            row.setSex(taishosha.get性別());
-            row.setJuminShubetsu(taishosha.get住民種別());
-            row.getBirthYMD().setValue(taishosha.get生年月日());
-            row.getIdoYMD().setValue(taishosha.get異動年月日());
-            row.setIdoJiyu(taishosha.get異動事由());
-            row.setTennyuTenshutsuYoteiJusho(taishosha.get転出予定住所().value());
             row.setRirekiNo(new RString(taishosha.get履歴番号()));
+            if (taishosha.get宛名氏名() != null) {
+                row.setShimei(taishosha.get宛名氏名().value());
+            }
+            if (taishosha.get宛名カナ氏名() != null) {
+                row.setShimeiKana(taishosha.get宛名カナ氏名().value());
+            }
+            if (taishosha.get性別() != null) {
+                row.setSex(taishosha.get性別());
+            }
+            if (taishosha.get住民種別() != null) {
+                row.setJuminShubetsu(taishosha.get住民種別());
+            }
+            if (taishosha.get生年月日() != null) {
+                row.getBirthYMD().setValue(taishosha.get生年月日());
+            }
+            if (taishosha.get異動年月日() != null) {
+                row.getIdoYMD().setValue(taishosha.get異動年月日());
+            }
+            if (taishosha.get異動事由() != null) {
+                row.setIdoJiyu(taishosha.get異動事由());
+            }
+            if (taishosha.get転出予定住所() != null) {
+                row.setTennyuTenshutsuYoteiJusho(taishosha.get転出予定住所().value());
+            }
             list.add(row);
         }
         div.getDgTenshutsu().setDataSource(list);
@@ -65,15 +81,31 @@ public class TennyuTenshutsuHoryuTaishoshaIchiranHandler {
             row.getShichosonCode().setValue(taishosha.get市町村コード().value());
             row.getHihokenshaNo().setValue(taishosha.get被保険者番号().value());
             row.getShikibetsuCode().setValue(taishosha.get識別コード().value());
-            row.setShimei(taishosha.get宛名氏名().value());
-            row.setShimeiKana(taishosha.get宛名カナ氏名().value());
-            row.setSex(taishosha.get性別());
-            row.setJuminShubetsu(taishosha.get住民種別());
-            row.getBirthYMD().setValue(taishosha.get生年月日());
-            row.getIdoYMD().setValue(taishosha.get異動年月日());
-            row.setIdoJiyu(taishosha.get異動事由());
-            row.setTennyuTenshutsuYoteiJusho(taishosha.get転出予定住所().value());
             row.setRirekiNo(new RString(taishosha.get履歴番号()));
+            if (taishosha.get宛名氏名() != null) {
+                row.setShimei(taishosha.get宛名氏名().value());
+            }
+            if (taishosha.get宛名カナ氏名() != null) {
+                row.setShimeiKana(taishosha.get宛名カナ氏名().value());
+            }
+            if (taishosha.get性別() != null) {
+                row.setSex(taishosha.get性別());
+            }
+            if (taishosha.get住民種別() != null) {
+                row.setJuminShubetsu(taishosha.get住民種別());
+            }
+            if (taishosha.get生年月日() != null) {
+                row.getBirthYMD().setValue(taishosha.get生年月日());
+            }
+            if (taishosha.get異動年月日() != null) {
+                row.getIdoYMD().setValue(taishosha.get異動年月日());
+            }
+            if (taishosha.get異動事由() != null) {
+                row.setIdoJiyu(taishosha.get異動事由());
+            }
+            if (taishosha.get転出予定住所() != null) {
+                row.setTennyuTenshutsuYoteiJusho(taishosha.get転出予定住所().value());
+            }
             list.add(row);
         }
         div.getDgTennyu().setDataSource(list);
@@ -91,15 +123,31 @@ public class TennyuTenshutsuHoryuTaishoshaIchiranHandler {
             row.getShichosonCode().setValue(taishosha.get市町村コード().value());
             row.getHihokennshaNo().setValue(taishosha.get被保険者番号().value());
             row.getShikibetsuCode().setValue(taishosha.get識別コード().value());
-            row.setShimei(taishosha.get宛名氏名().value());
-            row.setShimeiKana(taishosha.get宛名カナ氏名().value());
-            row.setSex(taishosha.get性別());
-            row.setJuminShubetsu(taishosha.get住民種別());
-            row.getBirthYMD().setValue(taishosha.get生年月日());
-            row.getIdoYMD().setValue(taishosha.get異動年月日());
-            row.setIdoJiyu(taishosha.get異動事由());
-            row.setTenkyoYoteiJusho(taishosha.get転出予定住所().value());
             row.setRirekiNo(new RString(taishosha.get履歴番号()));
+            if (taishosha.get宛名氏名() != null) {
+                row.setShimei(taishosha.get宛名氏名().value());
+            }
+            if (taishosha.get宛名カナ氏名() != null) {
+                row.setShimeiKana(taishosha.get宛名カナ氏名().value());
+            }
+            if (taishosha.get性別() != null) {
+                row.setSex(taishosha.get性別());
+            }
+            if (taishosha.get住民種別() != null) {
+                row.setJuminShubetsu(taishosha.get住民種別());
+            }
+            if (taishosha.get生年月日() != null) {
+                row.getBirthYMD().setValue(taishosha.get生年月日());
+            }
+            if (taishosha.get異動年月日() != null) {
+                row.getIdoYMD().setValue(taishosha.get異動年月日());
+            }
+            if (taishosha.get異動事由() != null) {
+                row.setIdoJiyu(taishosha.get異動事由());
+            }
+            if (taishosha.get転出予定住所() != null) {
+                row.setTenkyoYoteiJusho(taishosha.get転出予定住所().value());
+            }
             list.add(row);
         }
         div.getDgKoiki().setDataSource(list);
