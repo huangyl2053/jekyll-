@@ -249,6 +249,8 @@ public class FutangendogakuNinteiShinseiHandler {
             div.getBtnHiShoninRiyu().setDisabled(true);
             div.getTxtHiShoninRiyu().setDisabled(true);
             div.getTxtHiShoninRiyu().clearValue();
+            init旧措置DDL();
+            init居室種別DDL();
             if (is負担段階を設定) {
                 init負担段階DDL();
                 div.getDdlRiyoshaFutanDankai().setSelectedKey(
