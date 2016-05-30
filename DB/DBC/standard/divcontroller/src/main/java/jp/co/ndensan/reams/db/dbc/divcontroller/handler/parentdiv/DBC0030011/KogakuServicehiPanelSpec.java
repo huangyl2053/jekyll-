@@ -118,14 +118,14 @@ public enum KogakuServicehiPanelSpec implements IPredicate<KogakuServicehiPanelD
                     RDate 決定年月;
                     RString 画面フラグ = ViewStateHolder.get(ViewStateKeys.画面フラグ, RString.class);
                     if (new RString("対象者検索").equals(画面フラグ)) {
-                        提供年月 = ViewStateHolder.get(ViewStateKeys.提供年月, RDate.class);
-                        申請年月 = ViewStateHolder.get(ViewStateKeys.申請年月, RDate.class);
-                        決定年月 = ViewStateHolder.get(ViewStateKeys.決定年月, RDate.class);
-                    } else {
                         SearchYMDiv panel = div.getSearchKogakuServicehiPanel().getSearchYM();
                         提供年月 = panel.getTxtTeikyoYM().getValue();
                         申請年月 = panel.getTxtShinseiYM().getValue();
                         決定年月 = panel.getTxtKetteiYM().getValue();
+                    } else {
+                        提供年月 = ViewStateHolder.get(ViewStateKeys.提供年月, RDate.class);
+                        申請年月 = ViewStateHolder.get(ViewStateKeys.申請年月, RDate.class);
+                        決定年月 = ViewStateHolder.get(ViewStateKeys.決定年月, RDate.class);
                     }
                     return !(提供年月 == null && 申請年月 == null && 決定年月 == null);
                 }
