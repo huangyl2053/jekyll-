@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -140,5 +141,20 @@ public class ChohyoSeigyoHanyoManager {
             businessList.add(new ChohyoSeigyoHanyo(entity));
         }
         return businessList;
+    }
+
+    /**
+     * 帳票制御汎用リスト{@link ChohyoSeigyoHanyo}を更新します。
+     *
+     * @param 帳票制御汎用リスト 帳票制御汎用リスト
+     */
+    @Transaction
+    public void update帳票制御汎用(List<ChohyoSeigyoHanyo> 帳票制御汎用リスト) {
+        requireNonNull(帳票制御汎用リスト, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御汎用"));
+        for (ChohyoSeigyoHanyo 帳票制御汎用 : 帳票制御汎用リスト) {
+            DbT7067ChohyoSeigyoHanyoEntity entity = 帳票制御汎用.toEntity();
+            entity.setState(EntityDataState.Modified);
+            dac.save(entity);
+        }
     }
 }
