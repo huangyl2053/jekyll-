@@ -107,7 +107,7 @@ public class TaJushochiTokureisyaKanriManager {
         for (TaJushochiTokureisyaKanriParameter date : paramater) {
             if (修正.equals(date.get状態()) && !date.getNyuusyoYMD().isEmpty()
                     && !date.getTayishoYMD().isEmpty()
-                    && !date.getNyuusyoYMD().isBefore(date.getTayishoYMD())) {
+                    && !date.getNyuusyoYMD().isBeforeOrEquals(date.getTayishoYMD())) {
                 throw new ApplicationException(
                         UrErrorMessages.入力値が不正.getMessage());
             }
