@@ -40,6 +40,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 介護帳票制御共通Div処理するクラスです。
+ *
+ * @reamsid_L DBB-1770-070 yebangqiang
  */
 public class KaigoChohyoSeigyoKyotsuHandler {
 

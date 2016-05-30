@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 /**
  * KaigoChohyoSeigyoKyotsu のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBB-1770-070 yebangqiang
  */
 public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSeigyoKyotsuDiv {
 

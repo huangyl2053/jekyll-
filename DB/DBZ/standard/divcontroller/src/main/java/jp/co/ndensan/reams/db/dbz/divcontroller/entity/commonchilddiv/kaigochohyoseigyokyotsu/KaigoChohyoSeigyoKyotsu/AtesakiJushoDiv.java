@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * AtesakiJusho のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBB-1770-070 yebangqiang
  */
 public class AtesakiJushoDiv extends Panel {
 
