@@ -95,17 +95,26 @@ public class NinteiChosaSchedule3Main {
         }
         if (スケジュール編集初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class))) {
             getHandler(div).検索対象未定者リスト_モード1();
-            データ空チェック(div);
+            ValidationMessageControlPairs validationMessage = getalidatisonHandler(div).データ空のチェック();
+            if (validationMessage.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validationMessage).respond();
+            }
             return ResponseData.of(div).setState(DBE2020003StateName.スケジュール編集);
         }
         if (スケジュール照会初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class))) {
             getHandler(div).該当者一覧照会リスト();
-            データ空チェック(div);
+            ValidationMessageControlPairs validation = getalidatisonHandler(div).データ空のチェック();
+            if (validation.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validation).respond();
+            }
             return ResponseData.of(div).setState(DBE2020003StateName.スケジュール照会);
         }
         if (未定者管理初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class))) {
             getHandler(div).検索対象未定者リスト_モード3();
-            データ空チェック(div);
+            ValidationMessageControlPairs validationMessages = getalidatisonHandler(div).データ空のチェック();
+            if (validationMessages.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
             return ResponseData.of(div).setState(DBE2020003StateName.未定者);
         }
         return ResponseData.of(div).respond();
@@ -173,13 +182,5 @@ public class NinteiChosaSchedule3Main {
 
     private MainPanelValidatisonHandler getalidatisonHandler(NinteiChosaSchedule3MainDiv div) {
         return new MainPanelValidatisonHandler(div);
-    }
-
-    private ResponseData<NinteiChosaSchedule3MainDiv> データ空チェック(NinteiChosaSchedule3MainDiv div) {
-        ValidationMessageControlPairs validationMessageControlPairs = getalidatisonHandler(div).データ空のチェック();
-        if (validationMessageControlPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
-        }
-        return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
     }
 }

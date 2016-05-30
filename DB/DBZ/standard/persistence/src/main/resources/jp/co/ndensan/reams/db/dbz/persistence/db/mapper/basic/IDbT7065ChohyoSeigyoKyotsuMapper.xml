@@ -100,5 +100,17 @@
         FROM
         rgdb."DbT7065ChohyoSeigyoKyotsu"
     </select>
-
+    <select id="get帳票分類名称" resultMap="ResultMap_DbT7065ChohyoSeigyoKyotsuEntity"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.chohyoseigyokyotsucontro.ChohyoSeigyoKyotsuParameter" fetchSize="500">
+      SELECT
+        DbT7065."chohyoBunruiID",
+        DbT7065."chohyoBunruiMeisho" 
+	FROM
+	rgdb."DbT7065ChohyoSeigyoKyotsu" AS DbT7065
+       WHERE
+        <foreach collection="帳票分類ID" item="code" open="(" separator="OR" close=")" >
+              DbT7065."chohyoBunruiID"= #{code}  
+        </foreach>
+       AND DbT7065."subGyomuCode" = #{サブ業務コード}
+    </select>
 </mapper>

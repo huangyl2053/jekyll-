@@ -169,11 +169,6 @@ public class MainPanelHandler {
             rowList.add(row);
         }
         div.getResultListPanel().getDgResultList().setDataSource(rowList);
-        if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
-            List<dgResultList_Row> list = new ArrayList<>();
-            div.getResultListPanel().getDgResultList().setDataSource(list);
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-        }
     }
 
     /**
@@ -346,12 +341,6 @@ public class MainPanelHandler {
                 rowList.add(row);
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
-            if (div.getResultListPanel().getDgResultList().getDataSource() == null
-                    || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
-                List<dgResultList_Row> list = new ArrayList<>();
-                div.getResultListPanel().getDgResultList().setDataSource(list);
-                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-            }
         }
     }
 
@@ -409,12 +398,6 @@ public class MainPanelHandler {
                 rowList.add(row);
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
-            if (div.getResultListPanel().getDgResultList().getDataSource() == null
-                    || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
-                List<dgResultList_Row> list = new ArrayList<>();
-                div.getResultListPanel().getDgResultList().setDataSource(list);
-                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-            }
         }
     }
 
@@ -537,13 +520,6 @@ public class MainPanelHandler {
                 rowList.add(row);
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
-            if (div.getResultListPanel().getDgResultList().getDataSource() == null
-                    || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
-                List<dgResultList_Row> list = new ArrayList<>();
-                div.getResultListPanel().getDgResultList().setDataSource(list);
-                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-            }
-            div.getResultListPanel().getDgResultList().setDataSource(rowList);
         }
     }
 
@@ -603,12 +579,6 @@ public class MainPanelHandler {
                 rowList.add(row);
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
-            if (div.getResultListPanel().getDgResultList().getDataSource() == null
-                    || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
-                List<dgResultList_Row> list = new ArrayList<>();
-                div.getResultListPanel().getDgResultList().setDataSource(list);
-                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-            }
         }
     }
 }
