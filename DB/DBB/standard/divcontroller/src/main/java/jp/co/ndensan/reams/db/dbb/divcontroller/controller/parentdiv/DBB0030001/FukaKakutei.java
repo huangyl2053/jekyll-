@@ -89,8 +89,9 @@ public class FukaKakutei {
     }
 
     private void 賦課処理状況更新(FukaKakuteiDiv div) {
-        TokuchoKarisanteiFukaKakuteiMapperParameter parameter = TokuchoKarisanteiFukaKakuteiMapperParameter.createParam(div.getFukaKakuteiBatchParameter().
-                getFukaKeisanShoriNaiyo().getTxtFukaKeisanShoriNichiji().getValue(), div.getFukaKakuteiBatchParameter().
+        TokuchoKarisanteiFukaKakuteiMapperParameter parameter = TokuchoKarisanteiFukaKakuteiMapperParameter.createParam(
+                div.getFukaKakuteiBatchParameter().get基準日時(),
+                div.getFukaKakuteiBatchParameter().
                 getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().getDomain());
         fukaKakuteiManager.updateFukaShoriJyokyo(parameter);
     }
