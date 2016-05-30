@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshokinyuyoshi;
+package jp.co.ndensan.reams.db.dbe.business.core.ikenshokinyuyoshi;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 要介護認定主治医意見書記入用紙のEntityです。
+ * 要介護認定主治医意見書記入用紙のBusinessクラスです。
  *
  * @reamsid_L DBE-0050-030 xuyannan
  */
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class IkenshokinyuyoshiEntity {
+public class IkenshokinyuyoshiBusiness {
 
     private RString hokenshaNo1;
     private RString hokenshaNo2;
