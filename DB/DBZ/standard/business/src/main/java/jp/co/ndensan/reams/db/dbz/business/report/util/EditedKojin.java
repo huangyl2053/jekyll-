@@ -67,6 +67,21 @@ public class EditedKojin {
     }
 
     /**
+     * パターン37とパターン12により、生年月日を返します。
+     *
+     * @return 生年月日 RString
+     */
+    public RString get生年月日_パターン() {
+        if (個人.is日本人()) {
+            return 個人.get生年月日().toFlexibleDate().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                    .fillType(FillType.BLANK).toDateString();
+        } else {
+            return 個人.get生年月日().toFlexibleDate().seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+    }
+
+    /**
      * 生年月日For帳票を返します。
      *
      * @return 生年月日For帳票
