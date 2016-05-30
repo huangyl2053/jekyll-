@@ -23,7 +23,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
      *
      * @param div HoseiHakkoYoshiki2KensuEtcTotalPanelDiv
      */
-    public HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
+    public HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler(
+            HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
         this.div = div;
     }
 
@@ -34,7 +35,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
      */
     public boolean is整合性チェック_費用額_NG1() {
 
-        return is整合性チェック_費用額_NG_整合_費用額1_1() || is整合性チェック_費用額_NG_整合_費用額1_2() || is整合性チェック_費用額_NG_整合_費用額1_3();
+        return is整合性チェック_費用額_NG_整合_費用額1_1() || is整合性チェック_費用額_NG_整合_費用額1_2()
+                || is整合性チェック_費用額_NG_整合_費用額1_3();
     }
 
     /**
@@ -44,49 +46,68 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
      */
     public boolean is整合性チェック_費用額_NG2() {
 
-        return is整合性チェック_費用額_NG_整合_費用額2_1() || is整合性チェック_費用額_NG_整合_費用額2_2() || is整合性チェック_費用額_NG_整合_費用額2_3();
+        return is整合性チェック_費用額_NG_整合_費用額2_1() || is整合性チェック_費用額_NG_整合_費用額2_2()
+                || is整合性チェック_費用額_NG_整合_費用額2_3();
     }
 
     private boolean is整合性チェック_費用額_NG_整合_費用額1_1() {
-        return is整合性チェック_費用額_NG_1() || is整合性チェック_費用額_NG_2() || is整合性チェック_費用額_NG_3() || is整合性チェック_費用額_NG_4()
-                || is整合性チェック_費用額_NG_5() || is整合性チェック_費用額_NG_6() || is整合性チェック_費用額_NG_7() || is整合性チェック_費用額_NG_8()
-                || is整合性チェック_費用額_NG_9() || is整合性チェック_費用額_NG_10() || is整合性チェック_費用額_NG_11() || is整合性チェック_費用額_NG_12()
+        return is整合性チェック_費用額_NG_1() || is整合性チェック_費用額_NG_2()
+                || is整合性チェック_費用額_NG_3() || is整合性チェック_費用額_NG_4()
+                || is整合性チェック_費用額_NG_5() || is整合性チェック_費用額_NG_6()
+                || is整合性チェック_費用額_NG_7() || is整合性チェック_費用額_NG_8()
+                || is整合性チェック_費用額_NG_9() || is整合性チェック_費用額_NG_10()
+                || is整合性チェック_費用額_NG_11() || is整合性チェック_費用額_NG_12()
                 || is整合性チェック_費用額_NG_13();
 
     }
 
     private boolean is整合性チェック_費用額_NG_整合_費用額1_2() {
-        return is整合性チェック_費用額_NG_14() || is整合性チェック_費用額_NG_15() || is整合性チェック_費用額_NG_16() || is整合性チェック_費用額_NG_17()
-                || is整合性チェック_費用額_NG_18() || is整合性チェック_費用額_NG_19() || is整合性チェック_費用額_NG_20() || is整合性チェック_費用額_NG_21()
-                || is整合性チェック_費用額_NG_22() || is整合性チェック_費用額_NG_23() || is整合性チェック_費用額_NG_24() || is整合性チェック_費用額_NG_25()
+        return is整合性チェック_費用額_NG_14() || is整合性チェック_費用額_NG_15()
+                || is整合性チェック_費用額_NG_16() || is整合性チェック_費用額_NG_17()
+                || is整合性チェック_費用額_NG_18() || is整合性チェック_費用額_NG_19()
+                || is整合性チェック_費用額_NG_20() || is整合性チェック_費用額_NG_21()
+                || is整合性チェック_費用額_NG_22() || is整合性チェック_費用額_NG_23()
+                || is整合性チェック_費用額_NG_24() || is整合性チェック_費用額_NG_25()
                 || is整合性チェック_費用額_NG_26();
     }
 
     private boolean is整合性チェック_費用額_NG_整合_費用額1_3() {
-        return is整合性チェック_費用額_NG_27() || is整合性チェック_費用額_NG_28() || is整合性チェック_費用額_NG_29() || is整合性チェック_費用額_NG_30()
-                || is整合性チェック_費用額_NG_31() || is整合性チェック_費用額_NG_32() || is整合性チェック_費用額_NG_33() || is整合性チェック_費用額_NG_34()
-                || is整合性チェック_費用額_NG_35() || is整合性チェック_費用額_NG_36() || is整合性チェック_費用額_NG_37() || is整合性チェック_費用額_NG_38();
+        return is整合性チェック_費用額_NG_27() || is整合性チェック_費用額_NG_28()
+                || is整合性チェック_費用額_NG_29() || is整合性チェック_費用額_NG_30()
+                || is整合性チェック_費用額_NG_31() || is整合性チェック_費用額_NG_32()
+                || is整合性チェック_費用額_NG_33() || is整合性チェック_費用額_NG_34()
+                || is整合性チェック_費用額_NG_35() || is整合性チェック_費用額_NG_36()
+                || is整合性チェック_費用額_NG_37() || is整合性チェック_費用額_NG_38();
     }
 
     private boolean is整合性チェック_費用額_NG_整合_費用額2_1() {
-        return is整合性チェック_費用額_NG_1_1() || is整合性チェック_費用額_NG_1_2() || is整合性チェック_費用額_NG_1_3() || is整合性チェック_費用額_NG_1_4()
-                || is整合性チェック_費用額_NG_1_5() || is整合性チェック_費用額_NG_1_6() || is整合性チェック_費用額_NG_1_7() || is整合性チェック_費用額_NG_1_8()
-                || is整合性チェック_費用額_NG_1_9() || is整合性チェック_費用額_NG_1_10() || is整合性チェック_費用額_NG_1_11() || is整合性チェック_費用額_NG_1_12()
+        return is整合性チェック_費用額_NG_1_1() || is整合性チェック_費用額_NG_1_2()
+                || is整合性チェック_費用額_NG_1_3() || is整合性チェック_費用額_NG_1_4()
+                || is整合性チェック_費用額_NG_1_5() || is整合性チェック_費用額_NG_1_6()
+                || is整合性チェック_費用額_NG_1_7() || is整合性チェック_費用額_NG_1_8()
+                || is整合性チェック_費用額_NG_1_9() || is整合性チェック_費用額_NG_1_10()
+                || is整合性チェック_費用額_NG_1_11() || is整合性チェック_費用額_NG_1_12()
                 || is整合性チェック_費用額_NG_1_13();
 
     }
 
     private boolean is整合性チェック_費用額_NG_整合_費用額2_2() {
-        return is整合性チェック_費用額_NG_1_14() || is整合性チェック_費用額_NG_1_15() || is整合性チェック_費用額_NG_1_16() || is整合性チェック_費用額_NG_1_17()
-                || is整合性チェック_費用額_NG_1_18() || is整合性チェック_費用額_NG_1_19() || is整合性チェック_費用額_NG_1_20() || is整合性チェック_費用額_NG_1_21()
-                || is整合性チェック_費用額_NG_1_22() || is整合性チェック_費用額_NG_1_23() || is整合性チェック_費用額_NG_1_24() || is整合性チェック_費用額_NG_1_25()
+        return is整合性チェック_費用額_NG_1_14() || is整合性チェック_費用額_NG_1_15()
+                || is整合性チェック_費用額_NG_1_16() || is整合性チェック_費用額_NG_1_17()
+                || is整合性チェック_費用額_NG_1_18() || is整合性チェック_費用額_NG_1_19()
+                || is整合性チェック_費用額_NG_1_20() || is整合性チェック_費用額_NG_1_21()
+                || is整合性チェック_費用額_NG_1_22() || is整合性チェック_費用額_NG_1_23()
+                || is整合性チェック_費用額_NG_1_24() || is整合性チェック_費用額_NG_1_25()
                 || is整合性チェック_費用額_NG_1_26();
     }
 
     private boolean is整合性チェック_費用額_NG_整合_費用額2_3() {
-        return is整合性チェック_費用額_NG_1_27() || is整合性チェック_費用額_NG_1_28() || is整合性チェック_費用額_NG_1_29() || is整合性チェック_費用額_NG_1_30()
-                || is整合性チェック_費用額_NG_1_31() || is整合性チェック_費用額_NG_1_32() || is整合性チェック_費用額_NG_1_33() || is整合性チェック_費用額_NG_1_34()
-                || is整合性チェック_費用額_NG_1_35() || is整合性チェック_費用額_NG_1_36() || is整合性チェック_費用額_NG_1_37() || is整合性チェック_費用額_NG_1_38();
+        return is整合性チェック_費用額_NG_1_27() || is整合性チェック_費用額_NG_1_28()
+                || is整合性チェック_費用額_NG_1_29() || is整合性チェック_費用額_NG_1_30()
+                || is整合性チェック_費用額_NG_1_31() || is整合性チェック_費用額_NG_1_32()
+                || is整合性チェック_費用額_NG_1_33() || is整合性チェック_費用額_NG_1_34()
+                || is整合性チェック_費用額_NG_1_35() || is整合性チェック_費用額_NG_1_36()
+                || is整合性チェック_費用額_NG_1_37() || is整合性チェック_費用額_NG_1_38();
     }
 
     private boolean is整合性チェック_費用額_NG_1_1() {
@@ -99,7 +120,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 居宅介護予防サービス要介護５ = div.getPnlMain().getTbl3().getTextBox594().getValue();
         RString 居宅介護予防サービス要介護計 = div.getPnlMain().getTbl3().getTextBox595().getValue();
 
-        return 入力チェック2(居宅介護予防サービス経過的要介護, 居宅介護予防サービス要会護１, 居宅介護予防サービス要介護２, 居宅介護予防サービス要介護３,
+        return 入力チェック2(居宅介護予防サービス経過的要介護,
+                居宅介護予防サービス要会護１, 居宅介護予防サービス要介護２, 居宅介護予防サービス要介護３,
                 居宅介護予防サービス要介護４, 居宅介護予防サービス要介護５, 居宅介護予防サービス要介護計);
     }
 
@@ -113,7 +135,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 訪問サービス要介護５ = div.getPnlMain().getTbl3().getTextBox605().getValue();
         RString 訪問サービス要介護計 = div.getPnlMain().getTbl3().getTextBox606().getValue();
 
-        return 入力チェック2(訪問サービス経過的要介護, 訪問サービス要会護１, 訪問サービス要介護２, 訪問サービス要介護３, 訪問サービス要介護４,
+        return 入力チェック2(訪問サービス経過的要介護, 訪問サービス要会護１,
+                訪問サービス要介護２, 訪問サービス要介護３, 訪問サービス要介護４,
                 訪問サービス要介護５, 訪問サービス要介護計);
     }
 
@@ -127,7 +150,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 訪問介護要介護５ = div.getPnlMain().getTbl3().getTextBox827().getValue();
         RString 訪問介護要介護計 = div.getPnlMain().getTbl3().getTextBox828().getValue();
 
-        return 入力チェック2(訪問介護経過的要介護, 訪問介護要会護１, 訪問介護要介護２, 訪問介護要介護３, 訪問介護要介護４, 訪問介護要介護５, 訪問介護要介護計);
+        return 入力チェック2(訪問介護経過的要介護, 訪問介護要会護１,
+                訪問介護要介護２, 訪問介護要介護３, 訪問介護要介護４, 訪問介護要介護５, 訪問介護要介護計);
     }
 
     private boolean is整合性チェック_費用額_NG_1_4() {
@@ -154,7 +178,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 訪問看護要介護５ = div.getPnlMain().getTbl3().getTextBox849().getValue();
         RString 訪問看護要介護計 = div.getPnlMain().getTbl3().getTextBox850().getValue();
 
-        return 入力チェック2(訪問看護経過的要介護, 訪問看護要会護１, 訪問看護要介護２, 訪問看護要介護３, 訪問看護要介護４, 訪問看護要介護５, 訪問看護要介護計);
+        return 入力チェック2(訪問看護経過的要介護, 訪問看護要会護１,
+                訪問看護要介護２, 訪問看護要介護３, 訪問看護要介護４, 訪問看護要介護５, 訪問看護要介護計);
     }
 
     private boolean is整合性チェック_費用額_NG_1_6() {
@@ -167,8 +192,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 訪問リハビリテーション要介護５ = div.getPnlMain().getTbl3().getTextBox860().getValue();
         RString 訪問リハビリテーション要介護計 = div.getPnlMain().getTbl3().getTextBox861().getValue();
 
-        return 入力チェック2(訪問リハビリテーション経過的要介護, 訪問リハビリテーション要会護１, 訪問リハビリテーション要介護２,
-                訪問リハビリテーション要介護３, 訪問リハビリテーション要介護４, 訪問リハビリテーション要介護５, 訪問リハビリテーション要介護計);
+        return 入力チェック2(訪問リハビリテーション経過的要介護,
+                訪問リハビリテーション要会護１, 訪問リハビリテーション要介護２,
+                訪問リハビリテーション要介護３, 訪問リハビリテーション要介護４,
+                訪問リハビリテーション要介護５, 訪問リハビリテーション要介護計);
     }
 
     private boolean is整合性チェック_費用額_NG_1_7() {
@@ -209,7 +236,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 通所介護要介護５ = div.getPnlMain().getTbl3().getTextBox893().getValue();
         RString 通所介護要介護計 = div.getPnlMain().getTbl3().getTextBox894().getValue();
 
-        return 入力チェック2(通所介護経過的要介護, 通所介護要会護１, 通所介護要介護２, 通所介護要介護３, 通所介護要介護４, 通所介護要介護５, 通所介護要介護計);
+        return 入力チェック2(通所介護経過的要介護, 通所介護要会護１,
+                通所介護要介護２, 通所介護要介護３, 通所介護要介護４, 通所介護要介護５, 通所介護要介護計);
     }
 
     private boolean is整合性チェック_費用額_NG_1_10() {
@@ -222,8 +250,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 通所リハビリテーション要介護５ = div.getPnlMain().getTbl3().getTextBox904().getValue();
         RString 通所リハビリテーション要介護計 = div.getPnlMain().getTbl3().getTextBox905().getValue();
 
-        return 入力チェック2(通所リハビリテーション経過的要介護, 通所リハビリテーション要会護１, 通所リハビリテーション要介護２,
-                通所リハビリテーション要介護３, 通所リハビリテーション要介護４, 通所リハビリテーション要介護５, 通所リハビリテーション要介護計);
+        return 入力チェック2(通所リハビリテーション経過的要介護,
+                通所リハビリテーション要会護１, 通所リハビリテーション要介護２,
+                通所リハビリテーション要介護３, 通所リハビリテーション要介護４,
+                通所リハビリテーション要介護５, 通所リハビリテーション要介護計);
     }
 
     private boolean is整合性チェック_費用額_NG_1_11() {
@@ -236,7 +266,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 短期入所サービス要介護５ = div.getPnlMain().getTbl3().getTextBox915().getValue();
         RString 短期入所サービス要介護計 = div.getPnlMain().getTbl3().getTextBox916().getValue();
 
-        return 入力チェック2(短期入所サービス経過的要介護, 短期入所サービス要会護１, 短期入所サービス要介護２, 短期入所サービス要介護３,
+        return 入力チェック2(短期入所サービス経過的要介護, 短期入所サービス要会護１,
+                短期入所サービス要介護２, 短期入所サービス要介護３,
                 短期入所サービス要介護４, 短期入所サービス要介護５, 短期入所サービス要介護計);
     }
 
@@ -265,8 +296,9 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 短期入所療養介護介護老人保健施設要介護計 = div.getPnlMain().getTbl3().getTextBox938().getValue();
 
         return 入力チェック2(短期入所療養介護介護老人保健施設経過的要介護, 短期入所療養介護介護老人保健施設要会護１,
-                短期入所療養介護介護老人保健施設要介護２, 短期入所療養介護介護老人保健施設要介護３, 短期入所療養介護介護老人保健施設要介護４,
-                短期入所療養介護介護老人保健施設要介護５, 短期入所療養介護介護老人保健施設要介護計);
+                短期入所療養介護介護老人保健施設要介護２, 短期入所療養介護介護老人保健施設要介護３,
+                短期入所療養介護介護老人保健施設要介護４, 短期入所療養介護介護老人保健施設要介護５,
+                短期入所療養介護介護老人保健施設要介護計);
     }
 
     private boolean is整合性チェック_費用額_NG_1_14() {
@@ -280,8 +312,9 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 短期入所療養介護介護療養型医療施設等要介護計 = div.getPnlMain().getTbl3().getTextBox949().getValue();
 
         return 入力チェック2(短期入所療養介護介護療養型医療施設等経過的要介護, 短期入所療養介護介護療養型医療施設等要会護１,
-                短期入所療養介護介護療養型医療施設等要介護２, 短期入所療養介護介護療養型医療施設等要介護３, 短期入所療養介護介護療養型医療施設等要介護４,
-                短期入所療養介護介護療養型医療施設等要介護５, 短期入所療養介護介護療養型医療施設等要介護計);
+                短期入所療養介護介護療養型医療施設等要介護２, 短期入所療養介護介護療養型医療施設等要介護３,
+                短期入所療養介護介護療養型医療施設等要介護４, 短期入所療養介護介護療養型医療施設等要介護５,
+                短期入所療養介護介護療養型医療施設等要介護計);
     }
 
     private boolean is整合性チェック_費用額_NG_1_15() {
@@ -294,8 +327,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 福祉用具住宅改修サービス要介護５ = div.getPnlMain().getTbl3().getTextBox959().getValue();
         RString 福祉用具住宅改修サービス要介護計 = div.getPnlMain().getTbl3().getTextBox960().getValue();
 
-        return 入力チェック2(福祉用具住宅改修サービス経過的要介護, 福祉用具住宅改修サービス要会護１, 福祉用具住宅改修サービス要介護２,
-                福祉用具住宅改修サービス要介護３, 福祉用具住宅改修サービス要介護４, 福祉用具住宅改修サービス要介護５, 福祉用具住宅改修サービス要介護計);
+        return 入力チェック2(福祉用具住宅改修サービス経過的要介護,
+                福祉用具住宅改修サービス要会護１, 福祉用具住宅改修サービス要介護２,
+                福祉用具住宅改修サービス要介護３, 福祉用具住宅改修サービス要介護４,
+                福祉用具住宅改修サービス要介護５, 福祉用具住宅改修サービス要介護計);
     }
 
     private boolean is整合性チェック_費用額_NG_1_16() {
@@ -322,7 +357,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 福祉用具購入費要介護５ = div.getPnlMain().getTbl3().getTextBox981().getValue();
         RString 福祉用具購入費要介護計 = div.getPnlMain().getTbl3().getTextBox982().getValue();
 
-        return 入力チェック2(福祉用具購入費経過的要介護, 福祉用具購入費要会護１, 福祉用具購入費要介護２, 福祉用具購入費要介護３,
+        return 入力チェック2(福祉用具購入費経過的要介護, 福祉用具購入費要会護１,
+                福祉用具購入費要介護２, 福祉用具購入費要介護３,
                 福祉用具購入費要介護４, 福祉用具購入費要介護５, 福祉用具購入費要介護計);
     }
 
@@ -336,7 +372,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 住宅改修費要介護５ = div.getPnlMain().getTbl3().getTextBox992().getValue();
         RString 住宅改修費要介護計 = div.getPnlMain().getTbl3().getTextBox993().getValue();
 
-        return 入力チェック2(住宅改修費経過的要介護, 住宅改修費要会護１, 住宅改修費要介護２, 住宅改修費要介護３, 住宅改修費要介護４,
+        return 入力チェック2(住宅改修費経過的要介護, 住宅改修費要会護１,
+                住宅改修費要介護２, 住宅改修費要介護３, 住宅改修費要介護４,
                 住宅改修費要介護５, 住宅改修費要介護計);
     }
 
@@ -350,8 +387,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 特定施設入居者生活介護要介護５ = div.getPnlMain().getTbl3().getTextBox1003().getValue();
         RString 特定施設入居者生活介護要介護計 = div.getPnlMain().getTbl3().getTextBox1004().getValue();
 
-        return 入力チェック2(特定施設入居者生活介護経過的要介護, 特定施設入居者生活介護要会護１, 特定施設入居者生活介護要介護２,
-                特定施設入居者生活介護要介護３, 特定施設入居者生活介護要介護４, 特定施設入居者生活介護要介護５, 特定施設入居者生活介護要介護計);
+        return 入力チェック2(特定施設入居者生活介護経過的要介護,
+                特定施設入居者生活介護要会護１, 特定施設入居者生活介護要介護２,
+                特定施設入居者生活介護要介護３, 特定施設入居者生活介護要介護４,
+                特定施設入居者生活介護要介護５, 特定施設入居者生活介護要介護計);
     }
 
     private boolean is整合性チェック_費用額_NG_1_20() {
@@ -364,8 +403,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 介護予防支援居宅介護支援要介護５ = div.getPnlMain().getTbl3().getTextBox1014().getValue();
         RString 介護予防支援居宅介護支援要介護計 = div.getPnlMain().getTbl3().getTextBox1015().getValue();
 
-        return 入力チェック2(介護予防支援居宅介護支援経過的要介護, 介護予防支援居宅介護支援要会護１, 介護予防支援居宅介護支援要介護２,
-                介護予防支援居宅介護支援要介護３, 介護予防支援居宅介護支援要介護４, 介護予防支援居宅介護支援要介護５, 介護予防支援居宅介護支援要介護計);
+        return 入力チェック2(介護予防支援居宅介護支援経過的要介護,
+                介護予防支援居宅介護支援要会護１, 介護予防支援居宅介護支援要介護２,
+                介護予防支援居宅介護支援要介護３, 介護予防支援居宅介護支援要介護４,
+                介護予防支援居宅介護支援要介護５, 介護予防支援居宅介護支援要介護計);
     }
 
     private boolean is整合性チェック_費用額_NG_1_21() {
@@ -378,9 +419,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 地域密着型介護予防サービス要介護５ = div.getPnlMain().getTbl3().getTextBox1025().getValue();
         RString 地域密着型介護予防サービス要介護計 = div.getPnlMain().getTbl3().getTextBox1026().getValue();
 
-        return 入力チェック2(地域密着型介護予防サービス経過的要介護, 地域密着型介護予防サービス要会護１, 地域密着型介護予防サービス要介護２,
-                地域密着型介護予防サービス要介護３, 地域密着型介護予防サービス要介護４, 地域密着型介護予防サービス要介護５,
-                地域密着型介護予防サービス要介護計);
+        return 入力チェック2(地域密着型介護予防サービス経過的要介護,
+                地域密着型介護予防サービス要会護１, 地域密着型介護予防サービス要介護２,
+                地域密着型介護予防サービス要介護３, 地域密着型介護予防サービス要介護４,
+                地域密着型介護予防サービス要介護５, 地域密着型介護予防サービス要介護計);
     }
 
     private boolean is整合性チェック_費用額_NG_1_22() {
@@ -393,9 +435,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 定期巡回随時対応型訪問介護看護要介護５ = div.getPnlMain().getTbl3().getTextBox1035().getValue();
         RString 定期巡回随時対応型訪問介護看護要介護計 = div.getPnlMain().getTbl3().getTextBox1036().getValue();
 
-        return 入力チェック2(定期巡回随時対応型訪問介護看護経過的要介護, 定期巡回随時対応型訪問介護看護要会護１, 定期巡回随時対応型訪問介護看護要介護２,
-                定期巡回随時対応型訪問介護看護要介護３, 定期巡回随時対応型訪問介護看護要介護４, 定期巡回随時対応型訪問介護看護要介護５,
-                定期巡回随時対応型訪問介護看護要介護計);
+        return 入力チェック2(定期巡回随時対応型訪問介護看護経過的要介護,
+                定期巡回随時対応型訪問介護看護要会護１, 定期巡回随時対応型訪問介護看護要介護２,
+                定期巡回随時対応型訪問介護看護要介護３, 定期巡回随時対応型訪問介護看護要介護４,
+                定期巡回随時対応型訪問介護看護要介護５, 定期巡回随時対応型訪問介護看護要介護計);
     }
 
     private boolean is整合性チェック_費用額_NG_1_23() {
@@ -408,7 +451,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 夜間対応型訪問介護要介護５ = div.getPnlMain().getTbl3().getTextBox1045().getValue();
         RString 夜間対応型訪問介護要介護計 = div.getPnlMain().getTbl3().getTextBox1046().getValue();
 
-        return 入力チェック2(夜間対応型訪問介護経過的要介護, 夜間対応型訪問介護要会護１, 夜間対応型訪問介護要介護２, 夜間対応型訪問介護要介護３,
+        return 入力チェック2(夜間対応型訪問介護経過的要介護,
+                夜間対応型訪問介護要会護１, 夜間対応型訪問介護要介護２, 夜間対応型訪問介護要介護３,
                 夜間対応型訪問介護要介護４, 夜間対応型訪問介護要介護５, 夜間対応型訪問介護要介護計);
     }
 
@@ -422,7 +466,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 認知症対応型通所介護要介護５ = div.getPnlMain().getTbl3().getTextBox1056().getValue();
         RString 認知症対応型通所介護要介護計 = div.getPnlMain().getTbl3().getTextBox1057().getValue();
 
-        return 入力チェック2(認知症対応型通所介護経過的要介護, 認知症対応型通所介護要会護１, 認知症対応型通所介護要介護２, 認知症対応型通所介護要介護３,
+        return 入力チェック2(認知症対応型通所介護経過的要介護,
+                認知症対応型通所介護要会護１, 認知症対応型通所介護要介護２, 認知症対応型通所介護要介護３,
                 認知症対応型通所介護要介護４, 認知症対応型通所介護要介護５, 認知症対応型通所介護要介護計);
     }
 
@@ -436,8 +481,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 小規模多機能型居宅介護要介護５ = div.getPnlMain().getTbl3().getTextBox1067().getValue();
         RString 小規模多機能型居宅介護要介護計 = div.getPnlMain().getTbl3().getTextBox1068().getValue();
 
-        return 入力チェック2(小規模多機能型居宅介護経過的要介護, 小規模多機能型居宅介護要会護１, 小規模多機能型居宅介護要介護２,
-                小規模多機能型居宅介護要介護３, 小規模多機能型居宅介護要介護４, 小規模多機能型居宅介護要介護５, 小規模多機能型居宅介護要介護計);
+        return 入力チェック2(小規模多機能型居宅介護経過的要介護,
+                小規模多機能型居宅介護要会護１, 小規模多機能型居宅介護要介護２,
+                小規模多機能型居宅介護要介護３, 小規模多機能型居宅介護要介護４,
+                小規模多機能型居宅介護要介護５, 小規模多機能型居宅介護要介護計);
     }
 
     private boolean is整合性チェック_費用額_NG_1_26() {
@@ -450,8 +497,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 認知症対応型共同生活介護要介護５ = div.getPnlMain().getTbl3().getTextBox1077().getValue();
         RString 認知症対応型共同生活介護要介護計 = div.getPnlMain().getTbl3().getTextBox1078().getValue();
 
-        return 入力チェック2(認知症対応型共同生活介護経過的要介護, 認知症対応型共同生活介護要会護１, 認知症対応型共同生活介護要介護２,
-                認知症対応型共同生活介護要介護３, 認知症対応型共同生活介護要介護４, 認知症対応型共同生活介護要介護５, 認知症対応型共同生活介護要介護計);
+        return 入力チェック2(認知症対応型共同生活介護経過的要介護,
+                認知症対応型共同生活介護要会護１, 認知症対応型共同生活介護要介護２,
+                認知症対応型共同生活介護要介護３, 認知症対応型共同生活介護要介護４,
+                認知症対応型共同生活介護要介護５, 認知症対応型共同生活介護要介護計);
     }
 
     private boolean is整合性チェック_費用額_NG_1_27() {
@@ -464,9 +513,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 地域密着型特定施設入居者生活介護要介護５ = div.getPnlMain().getTbl3().getTextBox1087().getValue();
         RString 地域密着型特定施設入居者生活介護要介護計 = div.getPnlMain().getTbl3().getTextBox1088().getValue();
 
-        return 入力チェック2(地域密着型特定施設入居者生活介護経過的要介護, 地域密着型特定施設入居者生活介護要会護１, 地域密着型特定施設入居者生活介護要介護２,
-                地域密着型特定施設入居者生活介護要介護３, 地域密着型特定施設入居者生活介護要介護４, 地域密着型特定施設入居者生活介護要介護５,
-                地域密着型特定施設入居者生活介護要介護計);
+        return 入力チェック2(地域密着型特定施設入居者生活介護経過的要介護,
+                地域密着型特定施設入居者生活介護要会護１, 地域密着型特定施設入居者生活介護要介護２,
+                地域密着型特定施設入居者生活介護要介護３, 地域密着型特定施設入居者生活介護要介護４,
+                地域密着型特定施設入居者生活介護要介護５, 地域密着型特定施設入居者生活介護要介護計);
     }
 
     private boolean is整合性チェック_費用額_NG_1_28() {
@@ -479,10 +529,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 地域密着型介護老人福祉施設入所者生活介護要介護５ = div.getPnlMain().getTbl3().getTextBox1097().getValue();
         RString 地域密着型介護老人福祉施設入所者生活介護要介護計 = div.getPnlMain().getTbl3().getTextBox1098().getValue();
 
-        return 入力チェック2(地域密着型介護老人福祉施設入所者生活介護経過的要介護, 地域密着型介護老人福祉施設入所者生活介護要会護１,
-                地域密着型介護老人福祉施設入所者生活介護要介護２, 地域密着型介護老人福祉施設入所者生活介護要介護３,
-                地域密着型介護老人福祉施設入所者生活介護要介護４, 地域密着型介護老人福祉施設入所者生活介護要介護５,
-                地域密着型介護老人福祉施設入所者生活介護要介護計);
+        return 入力チェック2(地域密着型介護老人福祉施設入所者生活介護経過的要介護,
+                地域密着型介護老人福祉施設入所者生活介護要会護１, 地域密着型介護老人福祉施設入所者生活介護要介護２,
+                地域密着型介護老人福祉施設入所者生活介護要介護３, 地域密着型介護老人福祉施設入所者生活介護要介護４,
+                地域密着型介護老人福祉施設入所者生活介護要介護５, 地域密着型介護老人福祉施設入所者生活介護要介護計);
     }
 
     private boolean is整合性チェック_費用額_NG_1_29() {
@@ -495,7 +545,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 複合型サービス要介護５ = div.getPnlMain().getTbl3().getTextBox1107().getValue();
         RString 複合型サービス要介護計 = div.getPnlMain().getTbl3().getTextBox1108().getValue();
 
-        return 入力チェック2(複合型サービス経過的要介護, 複合型サービス要会護１, 複合型サービス要介護２, 複合型サービス要介護３,
+        return 入力チェック2(複合型サービス経過的要介護,
+                複合型サービス要会護１, 複合型サービス要介護２, 複合型サービス要介護３,
                 複合型サービス要介護４, 複合型サービス要介護５, 複合型サービス要介護計);
     }
 
@@ -509,7 +560,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 施設サービス要介護５ = div.getPnlMain().getTbl3().getTextBox1118().getValue();
         RString 施設サービス要介護計 = div.getPnlMain().getTbl3().getTextBox1119().getValue();
 
-        return 入力チェック2(施設サービス経過的要介護, 施設サービス要会護１, 施設サービス要介護２, 施設サービス要介護３, 施設サービス要介護４,
+        return 入力チェック2(施設サービス経過的要介護, 施設サービス要会護１,
+                施設サービス要介護２, 施設サービス要介護３, 施設サービス要介護４,
                 施設サービス要介護５, 施設サービス要介護計);
     }
 
@@ -524,7 +576,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 介護老人福祉施設_1_要介護計 = div.getPnlMain().getTbl3().getTextBox1130().getValue();
 
         return 入力チェック2(介護老人福祉施設_1_経過的要介護, 介護老人福祉施設_1_要会護１, 介護老人福祉施設_1_要介護２,
-                介護老人福祉施設_1_要介護３, 介護老人福祉施設_1_要介護４, 介護老人福祉施設_1_要介護５, 介護老人福祉施設_1_要介護計);
+                介護老人福祉施設_1_要介護３, 介護老人福祉施設_1_要介護４,
+                介護老人福祉施設_1_要介護５, 介護老人福祉施設_1_要介護計);
     }
 
     private boolean is整合性チェック_費用額_NG_1_32() {
@@ -537,7 +590,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 介護老人保健施設_1_要介護５ = div.getPnlMain().getTbl3().getTextBox1139().getValue();
         RString 介護老人保健施設_1_要介護計 = div.getPnlMain().getTbl3().getTextBox1140().getValue();
 
-        return 入力チェック2(介護老人保健施設_1_経過的要介護, 介護老人保健施設_1_要会護１, 介護老人保健施設_1_要介護２, 介護老人保健施設_1_要介護３,
+        return 入力チェック2(介護老人保健施設_1_経過的要介護, 介護老人保健施設_1_要会護１,
+                介護老人保健施設_1_要介護２, 介護老人保健施設_1_要介護３,
                 介護老人保健施設_1_要介護４, 介護老人保健施設_1_要介護５, 介護老人保健施設_1_要介護計);
     }
 
@@ -551,7 +605,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 介護療養型医療施設_1_要介護５ = div.getPnlMain().getTbl3().getTextBox1149().getValue();
         RString 介護療養型医療施設_1_要介護計 = div.getPnlMain().getTbl3().getTextBox1150().getValue();
 
-        return 入力チェック2(介護療養型医療施設_1_経過的要介護, 介護療養型医療施設_1_要会護１, 介護療養型医療施設_1_要介護２, 介護療養型医療施設_1_要介護３,
+        return 入力チェック2(介護療養型医療施設_1_経過的要介護, 介護療養型医療施設_1_要会護１,
+                介護療養型医療施設_1_要介護２, 介護療養型医療施設_1_要介護３,
                 介護療養型医療施設_1_要介護４, 介護療養型医療施設_1_要介護５, 介護療養型医療施設_1_要介護計);
     }
 
@@ -565,7 +620,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 食事提供費用再掲要介護５ = div.getPnlMain().getTbl3().getTextBox1160().getValue();
         RString 食事提供費用再掲要介護計 = div.getPnlMain().getTbl3().getTextBox1161().getValue();
 
-        return 入力チェック2(食事提供費用再掲経過的要介護, 食事提供費用再掲要会護１, 食事提供費用再掲要介護２, 食事提供費用再掲要介護３,
+        return 入力チェック2(食事提供費用再掲経過的要介護, 食事提供費用再掲要会護１,
+                食事提供費用再掲要介護２, 食事提供費用再掲要介護３,
                 食事提供費用再掲要介護４, 食事提供費用再掲要介護５, 食事提供費用再掲要介護計);
     }
 
@@ -579,7 +635,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 介護老人福祉施設_2_要介護５ = div.getPnlMain().getTbl3().getTextBox1171().getValue();
         RString 介護老人福祉施設_2_要介護計 = div.getPnlMain().getTbl3().getTextBox1172().getValue();
 
-        return 入力チェック2(介護老人福祉施設_2_経過的要介護, 介護老人福祉施設_2_要会護１, 介護老人福祉施設_2_要介護２, 介護老人福祉施設_2_要介護３,
+        return 入力チェック2(介護老人福祉施設_2_経過的要介護, 介護老人福祉施設_2_要会護１,
+                介護老人福祉施設_2_要介護２, 介護老人福祉施設_2_要介護３,
                 介護老人福祉施設_2_要介護４, 介護老人福祉施設_2_要介護５, 介護老人福祉施設_2_要介護計);
     }
 
@@ -593,7 +650,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 介護老人保健施設_2_要介護５ = div.getPnlMain().getTbl3().getTextBox1181().getValue();
         RString 介護老人保健施設_2_要介護計 = div.getPnlMain().getTbl3().getTextBox1182().getValue();
 
-        return 入力チェック2(介護老人保健施設_2_経過的要介護, 介護老人保健施設_2_要会護１, 介護老人保健施設_2_要介護２, 介護老人保健施設_2_要介護３,
+        return 入力チェック2(介護老人保健施設_2_経過的要介護, 介護老人保健施設_2_要会護１,
+                介護老人保健施設_2_要介護２, 介護老人保健施設_2_要介護３,
                 介護老人保健施設_2_要介護４, 介護老人保健施設_2_要介護５, 介護老人保健施設_2_要介護計);
     }
 
@@ -607,7 +665,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 介護療養型医療施設_2_要介護５ = div.getPnlMain().getTbl3().getTextBox1191().getValue();
         RString 介護療養型医療施設_2_要介護計 = div.getPnlMain().getTbl3().getTextBox1192().getValue();
 
-        return 入力チェック2(介護療養型医療施設_2_経過的要介護, 介護療養型医療施設_2_要会護１, 介護療養型医療施設_2_要介護２, 介護療養型医療施設_2_要介護３,
+        return 入力チェック2(介護療養型医療施設_2_経過的要介護,
+                介護療養型医療施設_2_要会護１, 介護療養型医療施設_2_要介護２, 介護療養型医療施設_2_要介護３,
                 介護療養型医療施設_2_要介護４, 介護療養型医療施設_2_要介護５, 介護療養型医療施設_2_要介護計);
     }
 
@@ -621,7 +680,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 総計要介護５ = div.getPnlMain().getTbl3().getTextBox1204().getValue();
         RString 総計要介護計 = div.getPnlMain().getTbl3().getTextBox1205().getValue();
 
-        return 入力チェック2(総計経過的要介護, 総計要会護１, 総計要介護２, 総計要介護３, 総計要介護４, 総計要介護５, 総計要介護計);
+        return 入力チェック2(総計経過的要介護, 総計要会護１,
+                総計要介護２, 総計要介護３, 総計要介護４, 総計要介護５, 総計要介護計);
     }
 
     private boolean is整合性チェック_費用額_NG_1() {
@@ -738,7 +798,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 短期入所療養介護介護老人保健施設要支援２ = div.getPnlMain().getTbl3().getTextBox930().getValue();
         RString 短期入所療養介護介護老人保健施設要支援計 = div.getPnlMain().getTbl3().getTextBox931().getValue();
 
-        return 入力チェック1(短期入所療養介護介護老人保健施設要支援１, 短期入所療養介護介護老人保健施設要支援２, 短期入所療養介護介護老人保健施設要支援計);
+        return 入力チェック1(短期入所療養介護介護老人保健施設要支援１,
+                短期入所療養介護介護老人保健施設要支援２, 短期入所療養介護介護老人保健施設要支援計);
     }
 
     private boolean is整合性チェック_費用額_NG_14() {
@@ -757,7 +818,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 福祉用具住宅改修サービス要支援２ = div.getPnlMain().getTbl3().getTextBox952().getValue();
         RString 福祉用具住宅改修サービス要支援計 = div.getPnlMain().getTbl3().getTextBox953().getValue();
 
-        return 入力チェック1(福祉用具住宅改修サービス要支援１, 福祉用具住宅改修サービス要支援２, 福祉用具住宅改修サービス要支援計);
+        return 入力チェック1(福祉用具住宅改修サービス要支援１,
+                福祉用具住宅改修サービス要支援２, 福祉用具住宅改修サービス要支援計);
     }
 
     private boolean is整合性チェック_費用額_NG_16() {
@@ -793,7 +855,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 特定施設入居者生活介護要支援２ = div.getPnlMain().getTbl3().getTextBox996().getValue();
         RString 特定施設入居者生活介護要支援計 = div.getPnlMain().getTbl3().getTextBox997().getValue();
 
-        return 入力チェック1(特定施設入居者生活介護要支援１, 特定施設入居者生活介護要支援２, 特定施設入居者生活介護要支援計);
+        return 入力チェック1(特定施設入居者生活介護要支援１,
+                特定施設入居者生活介護要支援２, 特定施設入居者生活介護要支援計);
     }
 
     private boolean is整合性チェック_費用額_NG_20() {
@@ -802,7 +865,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 介護予防支援居宅介護支援要支援２ = div.getPnlMain().getTbl3().getTextBox1007().getValue();
         RString 介護予防支援居宅介護支援要支援計 = div.getPnlMain().getTbl3().getTextBox1008().getValue();
 
-        return 入力チェック1(介護予防支援居宅介護支援要支援１, 介護予防支援居宅介護支援要支援２, 介護予防支援居宅介護支援要支援計);
+        return 入力チェック1(介護予防支援居宅介護支援要支援１,
+                介護予防支援居宅介護支援要支援２, 介護予防支援居宅介護支援要支援計);
     }
 
     private boolean is整合性チェック_費用額_NG_21() {
@@ -811,7 +875,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 地域密着型介護予防サービス要支援２ = div.getPnlMain().getTbl3().getTextBox1018().getValue();
         RString 地域密着型介護予防サービス要支援計 = div.getPnlMain().getTbl3().getTextBox1019().getValue();
 
-        return 入力チェック1(地域密着型介護予防サービス要支援１, 地域密着型介護予防サービス要支援２, 地域密着型介護予防サービス要支援計);
+        return 入力チェック1(地域密着型介護予防サービス要支援１,
+                地域密着型介護予防サービス要支援２, 地域密着型介護予防サービス要支援計);
     }
 
     private boolean is整合性チェック_費用額_NG_22() {
@@ -820,7 +885,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 定期巡回随時対応型訪問介護看護要支援２ = div.getPnlMain().getTbl3().getTextBox1029().getValue();
         RString 定期巡回随時対応型訪問介護看護要支援計 = div.getPnlMain().getTbl3().getTextBox1030().getValue();
 
-        return 入力チェック1(定期巡回随時対応型訪問介護看護要支援１, 定期巡回随時対応型訪問介護看護要支援２, 定期巡回随時対応型訪問介護看護要支援計);
+        return 入力チェック1(定期巡回随時対応型訪問介護看護要支援１,
+                定期巡回随時対応型訪問介護看護要支援２, 定期巡回随時対応型訪問介護看護要支援計);
     }
 
     private boolean is整合性チェック_費用額_NG_23() {
@@ -856,7 +922,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 認知症対応型共同生活介護要支援２ = div.getPnlMain().getTbl3().getTextBox1071().getValue();
         RString 認知症対応型共同生活介護要支援計 = div.getPnlMain().getTbl3().getTextBox1072().getValue();
 
-        return 入力チェック1(認知症対応型共同生活介護要支援１, 認知症対応型共同生活介護要支援２, 認知症対応型共同生活介護要支援計);
+        return 入力チェック1(認知症対応型共同生活介護要支援１,
+                認知症対応型共同生活介護要支援２, 認知症対応型共同生活介護要支援計);
     }
 
     private boolean is整合性チェック_費用額_NG_27() {
@@ -865,7 +932,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 地域密着型特定施設入居者生活介護要支援２ = div.getPnlMain().getTbl3().getTextBox1081().getValue();
         RString 地域密着型特定施設入居者生活介護要支援計 = div.getPnlMain().getTbl3().getTextBox1082().getValue();
 
-        return 入力チェック1(地域密着型特定施設入居者生活介護要支援１, 地域密着型特定施設入居者生活介護要支援２, 地域密着型特定施設入居者生活介護要支援計);
+        return 入力チェック1(地域密着型特定施設入居者生活介護要支援１,
+                地域密着型特定施設入居者生活介護要支援２, 地域密着型特定施設入居者生活介護要支援計);
     }
 
     private boolean is整合性チェック_費用額_NG_28() {
@@ -971,9 +1039,12 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
     private boolean 入力チェック1(RString 入力要支援１,
             RString 入力要支援２,
             RString 入力要支援計) {
-        Decimal 要支援１ = (null == 入力要支援１ || 入力要支援１.isEmpty() ? Decimal.ZERO : new Decimal(入力要支援１.toString()));
-        Decimal 要支援2 = (null == 入力要支援２ || 入力要支援２.isEmpty()) ? Decimal.ZERO : new Decimal(入力要支援２.toString());
-        Decimal 支援計 = (null == 入力要支援計 || 入力要支援計.isEmpty()) ? Decimal.ZERO : new Decimal(入力要支援計.toString());
+        Decimal 要支援１ = (入力要支援１ == null || 入力要支援１.isEmpty()
+                ? Decimal.ZERO : new Decimal(入力要支援１.toString()));
+        Decimal 要支援2 = (入力要支援２ == null || 入力要支援２.isEmpty())
+                ? Decimal.ZERO : new Decimal(入力要支援２.toString());
+        Decimal 支援計 = (入力要支援計 == null || 入力要支援計.isEmpty())
+                ? Decimal.ZERO : new Decimal(入力要支援計.toString());
 
         return !要支援１.add(要支援2).equals(支援計);
     }
@@ -985,13 +1056,20 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
             RString 入力要介護４,
             RString 入力要介護５,
             RString 入力要介護計) {
-        Decimal 経過的要介護 = (null == 入力経過的要介護 || 入力経過的要介護.isEmpty() ? Decimal.ZERO : new Decimal(入力経過的要介護.toString()));
-        Decimal 要会護１ = (null == 入力要会護１ || 入力要会護１.isEmpty()) ? Decimal.ZERO : new Decimal(入力要会護１.toString());
-        Decimal 要介護２ = (null == 入力要介護２ || 入力要介護２.isEmpty()) ? Decimal.ZERO : new Decimal(入力要介護２.toString());
-        Decimal 要会護３ = (null == 入力要介護３ || 入力要介護３.isEmpty()) ? Decimal.ZERO : new Decimal(入力要介護３.toString());
-        Decimal 要介護４ = (null == 入力要介護４ || 入力要介護４.isEmpty()) ? Decimal.ZERO : new Decimal(入力要介護４.toString());
-        Decimal 要会護５ = (null == 入力要介護５ || 入力要介護５.isEmpty()) ? Decimal.ZERO : new Decimal(入力要介護５.toString());
-        Decimal 要介護計 = (null == 入力要介護計 || 入力要介護計.isEmpty()) ? Decimal.ZERO : new Decimal(入力要介護計.toString());
+        Decimal 経過的要介護 = (入力経過的要介護 == null || 入力経過的要介護.isEmpty()
+                ? Decimal.ZERO : new Decimal(入力経過的要介護.toString()));
+        Decimal 要会護１ = (入力要会護１ == null || 入力要会護１.isEmpty())
+                ? Decimal.ZERO : new Decimal(入力要会護１.toString());
+        Decimal 要介護２ = (入力要介護２ == null || 入力要介護２.isEmpty())
+                ? Decimal.ZERO : new Decimal(入力要介護２.toString());
+        Decimal 要会護３ = (入力要介護３ == null || 入力要介護３.isEmpty())
+                ? Decimal.ZERO : new Decimal(入力要介護３.toString());
+        Decimal 要介護４ = (入力要介護４ == null || 入力要介護４.isEmpty())
+                ? Decimal.ZERO : new Decimal(入力要介護４.toString());
+        Decimal 要会護５ = (入力要介護５ == null || 入力要介護５.isEmpty())
+                ? Decimal.ZERO : new Decimal(入力要介護５.toString());
+        Decimal 要介護計 = (入力要介護計 == null || 入力要介護計.isEmpty())
+                ? Decimal.ZERO : new Decimal(入力要介護計.toString());
 
         return !経過的要介護.add(要会護１).add(要介護２).add(要会護３).add(要介護４).add(要会護５).equals(要介護計);
     }
@@ -1003,27 +1081,37 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
      */
     public boolean is整合性チェック_費用額_NG3() {
 
-        return is整合性チェック_NG_費用額_整合3_1() || is整合性チェック_NG_費用額_整合3_2() || is整合性チェック_NG_費用額_整合3_3();
+        return is整合性チェック_NG_費用額_整合3_1() || is整合性チェック_NG_費用額_整合3_2()
+                || is整合性チェック_NG_費用額_整合3_3();
     }
 
     private boolean is整合性チェック_NG_費用額_整合3_1() {
-        return is整合性チェック_NG_費用額_3_1() || is整合性チェック_NG_費用額_3_2() || is整合性チェック_NG_費用額_3_3() || is整合性チェック_NG_費用額_3_4()
-                || is整合性チェック_NG_費用額_3_5() || is整合性チェック_NG_費用額_3_6() || is整合性チェック_NG_費用額_3_7() || is整合性チェック_NG_費用額_3_8()
-                || is整合性チェック_NG_費用額_3_9() || is整合性チェック_NG_費用額_3_10() || is整合性チェック_NG_費用額_3_11() || is整合性チェック_NG_費用額_3_12()
+        return is整合性チェック_NG_費用額_3_1() || is整合性チェック_NG_費用額_3_2()
+                || is整合性チェック_NG_費用額_3_3() || is整合性チェック_NG_費用額_3_4()
+                || is整合性チェック_NG_費用額_3_5() || is整合性チェック_NG_費用額_3_6()
+                || is整合性チェック_NG_費用額_3_7() || is整合性チェック_NG_費用額_3_8()
+                || is整合性チェック_NG_費用額_3_9() || is整合性チェック_NG_費用額_3_10()
+                || is整合性チェック_NG_費用額_3_11() || is整合性チェック_NG_費用額_3_12()
                 || is整合性チェック_NG_費用額_3_13();
     }
 
     private boolean is整合性チェック_NG_費用額_整合3_2() {
-        return is整合性チェック_NG_費用額_3_14() || is整合性チェック_NG_費用額_3_15() || is整合性チェック_NG_費用額_3_16() || is整合性チェック_NG_費用額_3_17()
-                || is整合性チェック_NG_費用額_3_18() || is整合性チェック_NG_費用額_3_19() || is整合性チェック_NG_費用額_3_20() || is整合性チェック_NG_費用額_3_21()
-                || is整合性チェック_NG_費用額_3_22() || is整合性チェック_NG_費用額_3_23() || is整合性チェック_NG_費用額_3_24() || is整合性チェック_NG_費用額_3_25()
+        return is整合性チェック_NG_費用額_3_14() || is整合性チェック_NG_費用額_3_15()
+                || is整合性チェック_NG_費用額_3_16() || is整合性チェック_NG_費用額_3_17()
+                || is整合性チェック_NG_費用額_3_18() || is整合性チェック_NG_費用額_3_19()
+                || is整合性チェック_NG_費用額_3_20() || is整合性チェック_NG_費用額_3_21()
+                || is整合性チェック_NG_費用額_3_22() || is整合性チェック_NG_費用額_3_23()
+                || is整合性チェック_NG_費用額_3_24() || is整合性チェック_NG_費用額_3_25()
                 || is整合性チェック_NG_費用額_3_26();
     }
 
     private boolean is整合性チェック_NG_費用額_整合3_3() {
-        return is整合性チェック_NG_費用額_3_27() || is整合性チェック_NG_費用額_3_28() || is整合性チェック_NG_費用額_3_29() || is整合性チェック_NG_費用額_3_30()
-                || is整合性チェック_NG_費用額_3_31() || is整合性チェック_NG_費用額_3_32() || is整合性チェック_NG_費用額_3_33() || is整合性チェック_NG_費用額_3_34()
-                || is整合性チェック_NG_費用額_3_35() || is整合性チェック_NG_費用額_3_36() || is整合性チェック_NG_費用額_3_37() || is整合性チェック_NG_費用額_3_38();
+        return is整合性チェック_NG_費用額_3_27() || is整合性チェック_NG_費用額_3_28()
+                || is整合性チェック_NG_費用額_3_29() || is整合性チェック_NG_費用額_3_30()
+                || is整合性チェック_NG_費用額_3_31() || is整合性チェック_NG_費用額_3_32()
+                || is整合性チェック_NG_費用額_3_33() || is整合性チェック_NG_費用額_3_34()
+                || is整合性チェック_NG_費用額_3_35() || is整合性チェック_NG_費用額_3_36()
+                || is整合性チェック_NG_費用額_3_37() || is整合性チェック_NG_費用額_3_38();
     }
 
     private boolean is整合性チェック_NG_費用額_3_1() {
@@ -1140,7 +1228,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 短期入所療養介護介護老人保健施設要介護計 = div.getPnlMain().getTbl3().getTextBox938().getValue();
         RString 短期入所療養介護介護老人保健施設合計 = div.getPnlMain().getTbl3().getTextBox939().getValue();
 
-        return 入力チェック3(短期入所療養介護介護老人保健施設要支援計, 短期入所療養介護介護老人保健施設要介護計, 短期入所療養介護介護老人保健施設合計);
+        return 入力チェック3(短期入所療養介護介護老人保健施設要支援計,
+                短期入所療養介護介護老人保健施設要介護計, 短期入所療養介護介護老人保健施設合計);
     }
 
     private boolean is整合性チェック_NG_費用額_3_14() {
@@ -1213,7 +1302,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 地域密着型介護予防サービス要介護計 = div.getPnlMain().getTbl3().getTextBox1026().getValue();
         RString 地域密着型介護予防サービス合計 = div.getPnlMain().getTbl3().getTextBox1027().getValue();
 
-        return 入力チェック3(地域密着型介護予防サービス要支援計, 地域密着型介護予防サービス要介護計, 地域密着型介護予防サービス合計);
+        return 入力チェック3(地域密着型介護予防サービス要支援計,
+                地域密着型介護予防サービス要介護計, 地域密着型介護予防サービス合計);
     }
 
     private boolean is整合性チェック_NG_費用額_3_22() {
@@ -1222,7 +1312,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 定期巡回随時対応型訪問介護看護要介護計 = div.getPnlMain().getTbl3().getTextBox1036().getValue();
         RString 定期巡回随時対応型訪問介護看護合計 = div.getPnlMain().getTbl3().getTextBox1037().getValue();
 
-        return 入力チェック3(定期巡回随時対応型訪問介護看護要支援計, 定期巡回随時対応型訪問介護看護要介護計, 定期巡回随時対応型訪問介護看護合計);
+        return 入力チェック3(定期巡回随時対応型訪問介護看護要支援計,
+                定期巡回随時対応型訪問介護看護要介護計, 定期巡回随時対応型訪問介護看護合計);
     }
 
     private boolean is整合性チェック_NG_費用額_3_23() {
@@ -1267,7 +1358,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
         RString 地域密着型特定施設入居者生活介護要介護計 = div.getPnlMain().getTbl3().getTextBox1088().getValue();
         RString 地域密着型特定施設入居者生活介護合計 = div.getPnlMain().getTbl3().getTextBox1089().getValue();
 
-        return 入力チェック3(地域密着型特定施設入居者生活介護要支援計, 地域密着型特定施設入居者生活介護要介護計, 地域密着型特定施設入居者生活介護合計);
+        return 入力チェック3(地域密着型特定施設入居者生活介護要支援計,
+                地域密着型特定施設入居者生活介護要介護計, 地域密着型特定施設入居者生活介護合計);
     }
 
     private boolean is整合性チェック_NG_費用額_3_28() {
@@ -1373,11 +1465,11 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler {
     private boolean 入力チェック3(RString 入力要支援計,
             RString 入力要介護計,
             RString 入力合計) {
-        Decimal 要支援計 = (null == 入力要支援計 || 入力要支援計.isEmpty()
+        Decimal 要支援計 = (入力要支援計 == null || 入力要支援計.isEmpty()
                 ? Decimal.ZERO : new Decimal(入力要支援計.toString()));
-        Decimal 要介護計 = (null == 入力要介護計 || 入力要介護計.isEmpty())
+        Decimal 要介護計 = (入力要介護計 == null || 入力要介護計.isEmpty())
                 ? Decimal.ZERO : new Decimal(入力要介護計.toString());
-        Decimal 合計 = (null == 入力合計 || 入力合計.isEmpty())
+        Decimal 合計 = (入力合計 == null || 入力合計.isEmpty())
                 ? Decimal.ZERO : new Decimal(入力合計.toString());
         return !要支援計.add(要介護計).equals(合計);
     }

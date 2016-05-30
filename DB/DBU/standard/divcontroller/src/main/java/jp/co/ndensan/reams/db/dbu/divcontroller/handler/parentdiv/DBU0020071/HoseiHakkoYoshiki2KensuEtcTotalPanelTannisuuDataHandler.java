@@ -111,27 +111,37 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
      */
     public boolean is整合性チェック_件数_NG3() {
 
-        return is整合性チェック_NG_件数_整合3_1() || is整合性チェック_NG_件数_整合3_2() || is整合性チェック_NG_件数_整合3_3();
+        return is整合性チェック_NG_件数_整合3_1() || is整合性チェック_NG_件数_整合3_2()
+                || is整合性チェック_NG_件数_整合3_3();
     }
 
     private boolean is整合性チェック_NG_件数_整合3_1() {
-        return is整合性チェック_NG_件数_3_1() || is整合性チェック_NG_件数_3_2() || is整合性チェック_NG_件数_3_3() || is整合性チェック_NG_件数_3_4()
-                || is整合性チェック_NG_件数_3_5() || is整合性チェック_NG_件数_3_6() || is整合性チェック_NG_件数_3_7() || is整合性チェック_NG_件数_3_8()
-                || is整合性チェック_NG_件数_3_9() || is整合性チェック_NG_件数_3_10() || is整合性チェック_NG_件数_3_11() || is整合性チェック_NG_件数_3_12()
+        return is整合性チェック_NG_件数_3_1() || is整合性チェック_NG_件数_3_2()
+                || is整合性チェック_NG_件数_3_3() || is整合性チェック_NG_件数_3_4()
+                || is整合性チェック_NG_件数_3_5() || is整合性チェック_NG_件数_3_6()
+                || is整合性チェック_NG_件数_3_7() || is整合性チェック_NG_件数_3_8()
+                || is整合性チェック_NG_件数_3_9() || is整合性チェック_NG_件数_3_10()
+                || is整合性チェック_NG_件数_3_11() || is整合性チェック_NG_件数_3_12()
                 || is整合性チェック_NG_件数_3_13();
     }
 
     private boolean is整合性チェック_NG_件数_整合3_2() {
-        return is整合性チェック_NG_件数_3_14() || is整合性チェック_NG_件数_3_15() || is整合性チェック_NG_件数_3_16() || is整合性チェック_NG_件数_3_17()
-                || is整合性チェック_NG_件数_3_18() || is整合性チェック_NG_件数_3_19() || is整合性チェック_NG_件数_3_20() || is整合性チェック_NG_件数_3_21()
-                || is整合性チェック_NG_件数_3_22() || is整合性チェック_NG_件数_3_23() || is整合性チェック_NG_件数_3_24() || is整合性チェック_NG_件数_3_25()
+        return is整合性チェック_NG_件数_3_14() || is整合性チェック_NG_件数_3_15()
+                || is整合性チェック_NG_件数_3_16() || is整合性チェック_NG_件数_3_17()
+                || is整合性チェック_NG_件数_3_18() || is整合性チェック_NG_件数_3_19()
+                || is整合性チェック_NG_件数_3_20() || is整合性チェック_NG_件数_3_21()
+                || is整合性チェック_NG_件数_3_22() || is整合性チェック_NG_件数_3_23()
+                || is整合性チェック_NG_件数_3_24() || is整合性チェック_NG_件数_3_25()
                 || is整合性チェック_NG_件数_3_26();
     }
 
     private boolean is整合性チェック_NG_件数_整合3_3() {
-        return is整合性チェック_NG_件数_3_27() || is整合性チェック_NG_件数_3_28() || is整合性チェック_NG_件数_3_29() || is整合性チェック_NG_件数_3_30()
-                || is整合性チェック_NG_件数_3_31() || is整合性チェック_NG_件数_3_32() || is整合性チェック_NG_件数_3_33() || is整合性チェック_NG_件数_3_34()
-                || is整合性チェック_NG_件数_3_35() || is整合性チェック_NG_件数_3_36() || is整合性チェック_NG_件数_3_37() || is整合性チェック_NG_件数_3_38();
+        return is整合性チェック_NG_件数_3_27() || is整合性チェック_NG_件数_3_28()
+                || is整合性チェック_NG_件数_3_29() || is整合性チェック_NG_件数_3_30()
+                || is整合性チェック_NG_件数_3_31() || is整合性チェック_NG_件数_3_32()
+                || is整合性チェック_NG_件数_3_33() || is整合性チェック_NG_件数_3_34()
+                || is整合性チェック_NG_件数_3_35() || is整合性チェック_NG_件数_3_36()
+                || is整合性チェック_NG_件数_3_37() || is整合性チェック_NG_件数_3_38();
     }
 
     private boolean is整合性チェック_NG_件数_3_1() {
@@ -248,7 +258,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
         RString 短期入所療養介護介護老人保健施設要介護計 = div.getPnlMain().getTbl1().getTextBox142().getValue();
         RString 短期入所療養介護介護老人保健施設合計 = div.getPnlMain().getTbl1().getTextBox143().getValue();
 
-        return 入力チェック3(短期入所療養介護介護老人保健施設要支援計, 短期入所療養介護介護老人保健施設要介護計, 短期入所療養介護介護老人保健施設合計);
+        return 入力チェック3(短期入所療養介護介護老人保健施設要支援計,
+                短期入所療養介護介護老人保健施設要介護計, 短期入所療養介護介護老人保健施設合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_14() {
@@ -321,7 +332,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
         RString 地域密着型介護予防サービス要介護計 = div.getPnlMain().getTbl1().getTextBox230().getValue();
         RString 地域密着型介護予防サービス合計 = div.getPnlMain().getTbl1().getTextBox231().getValue();
 
-        return 入力チェック3(地域密着型介護予防サービス要支援計, 地域密着型介護予防サービス要介護計, 地域密着型介護予防サービス合計);
+        return 入力チェック3(地域密着型介護予防サービス要支援計,
+                地域密着型介護予防サービス要介護計, 地域密着型介護予防サービス合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_22() {
@@ -330,7 +342,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
         RString 定期巡回随時対応型訪問介護看護要介護計 = div.getPnlMain().getTbl1().getTextBox240().getValue();
         RString 定期巡回随時対応型訪問介護看護合計 = div.getPnlMain().getTbl1().getTextBox241().getValue();
 
-        return 入力チェック3(定期巡回随時対応型訪問介護看護要支援計, 定期巡回随時対応型訪問介護看護要介護計, 定期巡回随時対応型訪問介護看護合計);
+        return 入力チェック3(定期巡回随時対応型訪問介護看護要支援計,
+                定期巡回随時対応型訪問介護看護要介護計, 定期巡回随時対応型訪問介護看護合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_23() {
@@ -375,7 +388,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
         RString 地域密着型特定施設入居者生活介護要介護計 = div.getPnlMain().getTbl1().getTextBox292().getValue();
         RString 地域密着型特定施設入居者生活介護合計 = div.getPnlMain().getTbl1().getTextBox293().getValue();
 
-        return 入力チェック3(地域密着型特定施設入居者生活介護要支援計, 地域密着型特定施設入居者生活介護要介護計, 地域密着型特定施設入居者生活介護合計);
+        return 入力チェック3(地域密着型特定施設入居者生活介護要支援計,
+                地域密着型特定施設入居者生活介護要介護計, 地域密着型特定施設入居者生活介護合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_28() {
@@ -485,27 +499,36 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
      */
     public boolean is整合性チェック_単位数_NG3() {
 
-        return is整合性チェック_NG_単位数_整合3_1() || is整合性チェック_NG_単位数_整合3_2() || is整合性チェック_NG_単位数_整合3_3();
+        return is整合性チェック_NG_単位数_整合3_1() || is整合性チェック_NG_単位数_整合3_2()
+                || is整合性チェック_NG_単位数_整合3_3();
     }
 
     private boolean is整合性チェック_NG_単位数_整合3_1() {
-        return is整合性チェック_NG_単位数_3_1() || is整合性チェック_NG_単位数_3_2() || is整合性チェック_NG_単位数_3_3() || is整合性チェック_NG_単位数_3_4()
-                || is整合性チェック_NG_単位数_3_5() || is整合性チェック_NG_単位数_3_6() || is整合性チェック_NG_単位数_3_7() || is整合性チェック_NG_単位数_3_8()
-                || is整合性チェック_NG_単位数_3_9() || is整合性チェック_NG_単位数_3_10() || is整合性チェック_NG_単位数_3_11() || is整合性チェック_NG_単位数_3_12()
+        return is整合性チェック_NG_単位数_3_1() || is整合性チェック_NG_単位数_3_2()
+                || is整合性チェック_NG_単位数_3_3() || is整合性チェック_NG_単位数_3_4()
+                || is整合性チェック_NG_単位数_3_5() || is整合性チェック_NG_単位数_3_6()
+                || is整合性チェック_NG_単位数_3_7() || is整合性チェック_NG_単位数_3_8()
+                || is整合性チェック_NG_単位数_3_9() || is整合性チェック_NG_単位数_3_10()
+                || is整合性チェック_NG_単位数_3_11() || is整合性チェック_NG_単位数_3_12()
                 || is整合性チェック_NG_単位数_3_13();
     }
 
     private boolean is整合性チェック_NG_単位数_整合3_2() {
-        return is整合性チェック_NG_単位数_3_14() || is整合性チェック_NG_単位数_3_15() || is整合性チェック_NG_単位数_3_16()
-                || is整合性チェック_NG_単位数_3_19() || is整合性チェック_NG_単位数_3_20() || is整合性チェック_NG_単位数_3_21()
-                || is整合性チェック_NG_単位数_3_22() || is整合性チェック_NG_単位数_3_23() || is整合性チェック_NG_単位数_3_24()
-                || is整合性チェック_NG_単位数_3_25() || is整合性チェック_NG_単位数_3_26();
+        return is整合性チェック_NG_単位数_3_14() || is整合性チェック_NG_単位数_3_15()
+                || is整合性チェック_NG_単位数_3_16() || is整合性チェック_NG_単位数_3_19()
+                || is整合性チェック_NG_単位数_3_20() || is整合性チェック_NG_単位数_3_21()
+                || is整合性チェック_NG_単位数_3_22() || is整合性チェック_NG_単位数_3_23()
+                || is整合性チェック_NG_単位数_3_24() || is整合性チェック_NG_単位数_3_25()
+                || is整合性チェック_NG_単位数_3_26();
     }
 
     private boolean is整合性チェック_NG_単位数_整合3_3() {
-        return is整合性チェック_NG_単位数_3_27() || is整合性チェック_NG_単位数_3_28() || is整合性チェック_NG_単位数_3_29() || is整合性チェック_NG_単位数_3_30()
-                || is整合性チェック_NG_単位数_3_31() || is整合性チェック_NG_単位数_3_32() || is整合性チェック_NG_単位数_3_33() || is整合性チェック_NG_単位数_3_34()
-                || is整合性チェック_NG_単位数_3_35() || is整合性チェック_NG_単位数_3_36() || is整合性チェック_NG_単位数_3_37() || is整合性チェック_NG_単位数_3_38();
+        return is整合性チェック_NG_単位数_3_27() || is整合性チェック_NG_単位数_3_28()
+                || is整合性チェック_NG_単位数_3_29() || is整合性チェック_NG_単位数_3_30()
+                || is整合性チェック_NG_単位数_3_31() || is整合性チェック_NG_単位数_3_32()
+                || is整合性チェック_NG_単位数_3_33() || is整合性チェック_NG_単位数_3_34()
+                || is整合性チェック_NG_単位数_3_35() || is整合性チェック_NG_単位数_3_36()
+                || is整合性チェック_NG_単位数_3_37() || is整合性チェック_NG_単位数_3_38();
     }
 
     private boolean is整合性チェック_NG_単位数_3_1() {
@@ -622,7 +645,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
         RString 短期入所療養介護介護老人保健施設要介護計 = div.getPnlMain().getTbl2().getTextBox551().getValue();
         RString 短期入所療養介護介護老人保健施設合計 = div.getPnlMain().getTbl2().getTextBox552().getValue();
 
-        return 入力チェック3(短期入所療養介護介護老人保健施設要支援計, 短期入所療養介護介護老人保健施設要介護計, 短期入所療養介護介護老人保健施設合計);
+        return 入力チェック3(短期入所療養介護介護老人保健施設要支援計,
+                短期入所療養介護介護老人保健施設要介護計, 短期入所療養介護介護老人保健施設合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_14() {
@@ -677,7 +701,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
         RString 地域密着型介護予防サービス要介護計 = div.getPnlMain().getTbl2().getTextBox639().getValue();
         RString 地域密着型介護予防サービス合計 = div.getPnlMain().getTbl2().getTextBox640().getValue();
 
-        return 入力チェック3(地域密着型介護予防サービス要支援計, 地域密着型介護予防サービス要介護計, 地域密着型介護予防サービス合計);
+        return 入力チェック3(地域密着型介護予防サービス要支援計,
+                地域密着型介護予防サービス要介護計, 地域密着型介護予防サービス合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_22() {
@@ -686,7 +711,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
         RString 定期巡回随時対応型訪問介護看護要介護計 = div.getPnlMain().getTbl2().getTextBox649().getValue();
         RString 定期巡回随時対応型訪問介護看護合計 = div.getPnlMain().getTbl2().getTextBox650().getValue();
 
-        return 入力チェック3(定期巡回随時対応型訪問介護看護要支援計, 定期巡回随時対応型訪問介護看護要介護計, 定期巡回随時対応型訪問介護看護合計);
+        return 入力チェック3(定期巡回随時対応型訪問介護看護要支援計,
+                定期巡回随時対応型訪問介護看護要介護計, 定期巡回随時対応型訪問介護看護合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_23() {
@@ -731,7 +757,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
         RString 地域密着型特定施設入居者生活介護要介護計 = div.getPnlMain().getTbl2().getTextBox701().getValue();
         RString 地域密着型特定施設入居者生活介護合計 = div.getPnlMain().getTbl2().getTextBox702().getValue();
 
-        return 入力チェック3(地域密着型特定施設入居者生活介護要支援計, 地域密着型特定施設入居者生活介護要介護計, 地域密着型特定施設入居者生活介護合計);
+        return 入力チェック3(地域密着型特定施設入居者生活介護要支援計,
+                地域密着型特定施設入居者生活介護要介護計, 地域密着型特定施設入居者生活介護合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_28() {
@@ -837,11 +864,11 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
     private boolean 入力チェック3(RString 入力要支援計,
             RString 入力要介護計,
             RString 入力合計) {
-        Decimal 要支援計 = (null == 入力要支援計 || 入力要支援計.isEmpty()
+        Decimal 要支援計 = (入力要支援計 == null || 入力要支援計.isEmpty()
                 ? Decimal.ZERO : new Decimal(入力要支援計.toString()));
-        Decimal 要介護計 = (null == 入力要介護計 || 入力要介護計.isEmpty())
+        Decimal 要介護計 = (入力要介護計 == null || 入力要介護計.isEmpty())
                 ? Decimal.ZERO : new Decimal(入力要介護計.toString());
-        Decimal 合計 = (null == 入力合計 || 入力合計.isEmpty())
+        Decimal 合計 = (入力合計 == null || 入力合計.isEmpty())
                 ? Decimal.ZERO : new Decimal(入力合計.toString());
         return !要支援計.add(要介護計).equals(合計);
     }
@@ -1506,7 +1533,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
             }
         } else {
             if (entity == null) {
-                entity = set事業報告統計データ(事業報告月報詳細データリスト, 横番号, 縦番号, new Decimal(集計結果値.toString()));
+                entity = set事業報告統計データ(事業報告月報詳細データリスト, 横番号, 縦番号,
+                        new Decimal(集計結果値.toString()));
                 修正データリスト.add(entity);
                 return 修正データリスト;
             } else if (entity.get集計結果値() == null) {
