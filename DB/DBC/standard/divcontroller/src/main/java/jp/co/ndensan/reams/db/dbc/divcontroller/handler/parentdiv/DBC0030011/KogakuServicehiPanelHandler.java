@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class KogakuServicehiPanelHandler {
 
     private final KogakuServicehiPanelDiv div;
+    private static final RString 月初 = new RString("01");
     private static final RString 指定_被保険者 = new RString("hihokenshaShitei");
 
     /**
@@ -73,7 +74,7 @@ public class KogakuServicehiPanelHandler {
             SearchKogakuHihokenshaDiv panel = div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha();
             searchCondition.set指定して場合(Boolean.TRUE);
             RString 被保険者番号 = panel.getTxtHihoNo().getValue();
-            if (被保険者番号.isNullOrEmpty()) {
+            if (被保険者番号 != null && !被保険者番号.isNullOrEmpty()) {
                 searchCondition.set被保険者番号(new HihokenshaNo(被保険者番号));
             }
             RDate 提供年月From = panel.getTxtTeikyoYMRange().getFromValue();
@@ -86,19 +87,21 @@ public class KogakuServicehiPanelHandler {
             }
             RDate 申請年月From = panel.getTxtShinseiYMRange().getFromValue();
             if (申請年月From != null) {
-                searchCondition.set申請年月From(new FlexibleYearMonth(申請年月From.getYearMonth().toString()));
+                searchCondition.set申請年月From(new FlexibleDate(申請年月From.getYearMonth().toString().concat(月初.toString())));
             }
             RDate 申請年月To = panel.getTxtShinseiYMRange().getToValue();
             if (申請年月To != null) {
-                searchCondition.set申請年月To(new FlexibleYearMonth(申請年月To.getYearMonth().toString()));
+                searchCondition.set申請年月To(new FlexibleDate(申請年月To.getYearMonth().toString()
+                        .concat(String.valueOf(申請年月To.getYearMonth().getLastDay()))));
             }
             RDate 決定年月From = panel.getTxtKetteiYMRange().getFromValue();
             if (決定年月From != null) {
-                searchCondition.set決定年月From(new FlexibleYearMonth(決定年月From.getYearMonth().toString()));
+                searchCondition.set決定年月From(new FlexibleDate(決定年月From.getYearMonth().toString().concat(月初.toString())));
             }
             RDate 決定年月To = panel.getTxtKetteiYMRange().getToValue();
             if (決定年月To != null) {
-                searchCondition.set決定年月To(new FlexibleYearMonth(決定年月To.getYearMonth().toString()));
+                searchCondition.set決定年月To(new FlexibleDate(決定年月To.getYearMonth().toString()
+                        .concat(String.valueOf(決定年月To.getYearMonth().getLastDay()))));
             }
         } else {
             SearchYMDiv panel = div.getSearchKogakuServicehiPanel().getSearchYM();
@@ -109,11 +112,15 @@ public class KogakuServicehiPanelHandler {
             }
             RDate 申請年月 = panel.getTxtShinseiYM().getValue();
             if (申請年月 != null) {
-                searchCondition.set申請年月(new FlexibleYearMonth(申請年月.getYearMonth().toString()));
+                searchCondition.set申請年月初(new FlexibleDate(申請年月.getYearMonth().toString().concat(月初.toString())));
+                searchCondition.set申請年月末(new FlexibleDate(申請年月.getYearMonth().toString()
+                        .concat(String.valueOf(申請年月.getYearMonth().getLastDay()))));
             }
             RDate 決定年月 = panel.getTxtKetteiYM().getValue();
             if (決定年月 != null) {
-                searchCondition.set決定年月(new FlexibleYearMonth(決定年月.getYearMonth().toString()));
+                searchCondition.set決定年月初(new FlexibleDate(決定年月.getYearMonth().toString().concat(月初.toString())));
+                searchCondition.set決定年月末(new FlexibleDate(決定年月.getYearMonth().toString()
+                        .concat(String.valueOf(決定年月.getYearMonth().getLastDay()))));
             }
         }
         List<KogakuShokaiTaishoshaKensakuResultEntity> 該当者一覧情報 = KogakuShokaiTaishoshaKensaku.createInstance().selectTaishosha(searchCondition);

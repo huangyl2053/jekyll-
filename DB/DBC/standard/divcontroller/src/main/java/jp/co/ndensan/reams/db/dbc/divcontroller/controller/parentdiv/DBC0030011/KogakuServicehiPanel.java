@@ -33,6 +33,8 @@ public class KogakuServicehiPanel {
     private static final RString 指定_被保険者 = new RString("hihokenshaShitei");
     private static final RString 指定_年月 = new RString("YMShitei");
     private static final RString 高額介護サービス費照会_メニューID = new RString("DBCMN11004");
+    private static final RString 画面フラグ_対象者検索 = new RString("対象者検索");
+    private static final RString 画面フラグ_照会 = new RString("高額介護サービス費照会");
 
     /**
      * 画面の初期化メソッドです。
@@ -45,13 +47,13 @@ public class KogakuServicehiPanel {
         RString メニューID = ResponseHolder.getMenuID();
         RString 画面フラグ = ViewStateHolder.get(ViewStateKeys.画面フラグ, RString.class);
         if (高額介護サービス費照会_メニューID.equals(メニューID)) {
-            ViewStateHolder.put(ViewStateKeys.画面フラグ, null);
+            ViewStateHolder.put(ViewStateKeys.画面フラグ, 画面フラグ_対象者検索);
             return ResponseData.of(div).setState(DBC0030011StateName.検索条件);
-        } else if (画面フラグ != null) {
-            ViewStateHolder.put(ViewStateKeys.画面フラグ, null);
+        } else if (画面フラグ_照会.equals(画面フラグ)) {
+            ViewStateHolder.put(ViewStateKeys.画面フラグ, 画面フラグ_対象者検索);
             set検索条件(div);
         } else {
-            ViewStateHolder.put(ViewStateKeys.画面フラグ, null);
+            ViewStateHolder.put(ViewStateKeys.画面フラグ, 画面フラグ_対象者検索);
         }
         return createResponse(div);
     }

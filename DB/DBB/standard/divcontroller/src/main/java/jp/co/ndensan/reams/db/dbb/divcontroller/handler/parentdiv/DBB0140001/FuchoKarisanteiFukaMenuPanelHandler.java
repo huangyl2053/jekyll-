@@ -49,14 +49,13 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
     private static final RString 遷移元区分_0 = new RString("0");
     private static final RString 遷移元区分_1 = new RString("1");
     private static final RString 基準日時_未 = new RString("未");
-//    private static final RString 基準日時_済 = new RString("済");
+    private static final RString 基準日時_済 = new RString("済");
     private static final RString コロン = new RString(":");
     private static final RString スペース = new RString("　");
     private static final RString 普徴仮算定賦課_ボタン = new RString("btnFuchoKarisanteiFukaBatch");
-//    private static final RString 普徴仮算定通知書一括発行_ボタン = new RString("btnFuchoKarisanteiTsuchishoBatch");
-    // TODO QAあり。
-    private static final RString 普徴仮算定賦課メニュー = new RString("DBBMN35004");
-    private static final RString 普徴仮算定通知書一括発行メニュー = new RString("DBBMN35004");
+    private static final RString 普徴仮算定通知書一括発行_ボタン = new RString("btnFuchoKarisanteiTsuchishoBatch");
+    private static final RString 普徴仮算定賦課メニュー = new RString("DBBMN34001");
+    private static final RString 普徴仮算定通知書一括発行メニュー = new RString("DBBMN34002");
     private static final RString 項目列_納期限 = new RString("納期限");
     private static final RString 項目列_端数調整有無 = new RString("端数調整有無");
     private static final RString 項目列_6月特徴開始者 = new RString("6月特徴開始者");
@@ -82,34 +81,31 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
         処理状況div.getFuchoKarisanteiShoriNaiyo().getTxtFukaNendo().setDomain(new RYear(調定年度));
         List<dgFuchoKarisanteiShoriKakunin_Row> dataSource = new ArrayList<>();
         RString メニューID = ResponseHolder.getMenuID();
-        // TODO 普徴仮算定賦課メニューから起動の場合： 普徴仮算定通知書一括発行メニューから起動の場合：
         if (普徴仮算定賦課メニュー.equals(メニューID)) {
             List<ShoriDateKanri> 処理日付管理マスタ = FuchoKariSanteiFuka.createInstance().getShoriDateKanriList(
                     new FlexibleYear(調定年度), 遷移元区分_0);
-            if (処理日付管理マスタ.isEmpty()) {
+            if (処理日付管理マスタ == null || 処理日付管理マスタ.isEmpty()) {
                 dgFuchoKarisanteiShoriKakunin_Row row = new dgFuchoKarisanteiShoriKakunin_Row();
                 row.setTxtShoriMei(ShoriName.特徴仮算定賦課.get名称());
                 row.setTxtJokyo(基準日時_未);
                 row.setTxtShoriNichiji(null);
                 dataSource.add(row);
-                // TODO button の control
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(普徴仮算定賦課_ボタン, true);
             } else {
-                dataSource = setグリッド(処理日付管理マスタ, dataSource, メニューID);
+                dataSource = setグリッド(処理日付管理マスタ.get(0), dataSource, メニューID);
             }
         } else if (普徴仮算定通知書一括発行メニュー.equals(メニューID)) {
             List<ShoriDateKanri> 処理日付管理マスタ = FuchoKariSanteiFuka.createInstance().getShoriDateKanriList(
                     new FlexibleYear(調定年度), 遷移元区分_1);
-            if (処理日付管理マスタ.isEmpty()) {
+            if (処理日付管理マスタ == null || 処理日付管理マスタ.isEmpty()) {
                 dgFuchoKarisanteiShoriKakunin_Row row = new dgFuchoKarisanteiShoriKakunin_Row();
                 row.setTxtShoriMei(ShoriName.普徴仮算定賦課.get名称());
                 row.setTxtJokyo(基準日時_未);
                 row.setTxtShoriNichiji(null);
                 dataSource.add(row);
-                // TODO button の control
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(普徴仮算定賦課_ボタン, true);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(普徴仮算定通知書一括発行_ボタン, true);
             } else {
-                dataSource = setグリッド(処理日付管理マスタ, dataSource, メニューID);
+                dataSource = setグリッド(処理日付管理マスタ.get(0), dataSource, メニューID);
             }
         }
         処理状況div.getFuchoKarisanteiShoriKakunin().getDgFuchoKarisanteiShoriKakunin().setDataSource(dataSource);
@@ -203,42 +199,44 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
     }
 
     private List<dgFuchoKarisanteiShoriKakunin_Row> setグリッド(
-            List<ShoriDateKanri> 処理日付管理マスタ,
+            ShoriDateKanri 処理日付管理マスタ,
             List<dgFuchoKarisanteiShoriKakunin_Row> dataSource,
             RString メニューID) {
         RString 処理名 = RString.EMPTY;
-        if (普徴仮算定賦課メニュー.equals(メニューID)) {
-            処理名 = ShoriName.特徴仮算定賦課.get名称();
-        } else if (普徴仮算定通知書一括発行メニュー.equals(メニューID)) {
-            処理名 = ShoriName.普徴仮算定賦課.get名称();
-        }
-        for (ShoriDateKanri entity : 処理日付管理マスタ) {
-            YMDHMS 基準日時 = entity.get基準日時();
-            dgFuchoKarisanteiShoriKakunin_Row row = new dgFuchoKarisanteiShoriKakunin_Row();
-            if (基準日時 == null || 基準日時.isEmpty()) {
-                row.setTxtShoriMei(処理名);
-                row.setTxtJokyo(基準日時_未);
-                row.setTxtShoriNichiji(null);
-                dataSource.add(row);
-                // TODO button の control
+        YMDHMS 基準日時 = 処理日付管理マスタ.get基準日時();
+        dgFuchoKarisanteiShoriKakunin_Row row = new dgFuchoKarisanteiShoriKakunin_Row();
+        if (基準日時 == null || 基準日時.isEmpty()) {
+            if (普徴仮算定賦課メニュー.equals(メニューID)) {
+                処理名 = ShoriName.特徴仮算定賦課.get名称();
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(普徴仮算定賦課_ボタン, true);
-            } else {
-                // TODO 特徴仮算定賦課 control
-                row.setTxtShoriMei(処理名);
-                row.setTxtJokyo(基準日時_未);
-                RStringBuilder builder = new RStringBuilder();
-                builder.append(new RString(基準日時.getDate().wareki().toString()));
-                builder.append(スペース);
-                builder.append(new RString(基準日時.getRDateTime().getHour()).padZeroToLeft(時分秒LENGTH));
-                builder.append(コロン);
-                builder.append(new RString(基準日時.getRDateTime().getMinute()).padZeroToLeft(時分秒LENGTH));
-                builder.append(コロン);
-                builder.append(new RString(基準日時.getRDateTime().getSecond()).padZeroToLeft(時分秒LENGTH));
-                row.setTxtShoriNichiji(builder.toRString());
-                dataSource.add(row);
-                // TODO button の control
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(普徴仮算定賦課_ボタン, false);
+            } else if (普徴仮算定通知書一括発行メニュー.equals(メニューID)) {
+                処理名 = ShoriName.普徴仮算定賦課.get名称();
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(普徴仮算定通知書一括発行_ボタン, false);
             }
+            row.setTxtShoriMei(処理名);
+            row.setTxtJokyo(基準日時_未);
+            row.setTxtShoriNichiji(null);
+            dataSource.add(row);
+        } else {
+            if (普徴仮算定賦課メニュー.equals(メニューID)) {
+                処理名 = ShoriName.特徴仮算定賦課.get名称();
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(普徴仮算定賦課_ボタン, true);
+            } else if (普徴仮算定通知書一括発行メニュー.equals(メニューID)) {
+                処理名 = ShoriName.普徴仮算定賦課.get名称();
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(普徴仮算定通知書一括発行_ボタン, false);
+            }
+            row.setTxtShoriMei(処理名);
+            row.setTxtJokyo(基準日時_済);
+            RStringBuilder builder = new RStringBuilder();
+            builder.append(new RString(基準日時.getDate().wareki().toString()));
+            builder.append(スペース);
+            builder.append(new RString(基準日時.getRDateTime().getHour()).padZeroToLeft(時分秒LENGTH));
+            builder.append(コロン);
+            builder.append(new RString(基準日時.getRDateTime().getMinute()).padZeroToLeft(時分秒LENGTH));
+            builder.append(コロン);
+            builder.append(new RString(基準日時.getRDateTime().getSecond()).padZeroToLeft(時分秒LENGTH));
+            row.setTxtShoriNichiji(builder.toRString());
+            dataSource.add(row);
         }
         return dataSource;
     }

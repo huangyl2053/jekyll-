@@ -44,6 +44,10 @@ public class KouzaInfoHandler {
     private static final RString 受託あり = new RString("2");
     private static final RString 窓口払_コード = new RString("1");
     private static final RString 口座払_コード = new RString("2");
+    private static final int NUM_0 = 0;
+    private static final int NUM_2 = 2;
+    private static final int NUM_3 = 3;
+    private static final int NUM_5 = 5;
     private static final RString 償還払支給申請 = new RString("償還払支給申請");
 
     /**
@@ -174,18 +178,20 @@ public class KouzaInfoHandler {
             RString 支払窓口開始時間 = null;
             RTime 支払窓口開始時間div = 支払方法情報共有DIV.getStartHHMM();
             if (支払窓口開始時間div != null) {
+                RString 支払窓口開始時間R = new RString(支払窓口開始時間div.toString());
                 RStringBuilder builder = new RStringBuilder();
-                builder.append(new RString(支払窓口開始時間div.getHour()));
-                builder.append(new RString(支払窓口開始時間div.getMinute()));
+                builder.append(支払窓口開始時間R.substring(NUM_0, NUM_2));
+                builder.append(支払窓口開始時間R.substring(NUM_3, NUM_5));
                 支払窓口開始時間 = builder.toRString();
             }
             i = i + checkObject(支払窓口開始時間, entityView.get支払窓口開始時間());
             RString 支払窓口終了時間 = null;
             RTime 支払窓口終了時間div = 支払方法情報共有DIV.getEndHHMM();
             if (支払窓口終了時間div != null) {
+                RString 支払窓口終了時間R = new RString(支払窓口終了時間div.toString());
                 RStringBuilder builder = new RStringBuilder();
-                builder.append(new RString(支払窓口終了時間div.getHour()));
-                builder.append(new RString(支払窓口終了時間div.getMinute()));
+                builder.append(支払窓口終了時間R.substring(NUM_0, NUM_2));
+                builder.append(支払窓口終了時間R.substring(NUM_3, NUM_5));
                 支払窓口終了時間 = builder.toRString();
             }
             i = i + checkObject(支払窓口終了時間, entityView.get支払窓口終了時間());
@@ -225,17 +231,19 @@ public class KouzaInfoHandler {
             RString 支払窓口開始時間 = RString.EMPTY;
             RTime 支払窓口開始時間div = 支払方法情報共有DIV.getStartHHMM();
             if (支払窓口開始時間div != null) {
+                RString 支払窓口開始時間R = new RString(支払窓口開始時間div.toString());
                 RStringBuilder builder = new RStringBuilder();
-                builder.append(new RString(支払窓口開始時間div.getHour()));
-                builder.append(new RString(支払窓口開始時間div.getMinute()));
+                builder.append(支払窓口開始時間R.substring(NUM_0, NUM_2));
+                builder.append(支払窓口開始時間R.substring(NUM_3, NUM_5));
                 支払窓口開始時間 = builder.toRString();
             }
             RString 支払窓口終了時間 = RString.EMPTY;
             RTime 支払窓口終了時間div = 支払方法情報共有DIV.getEndHHMM();
             if (支払窓口終了時間div != null) {
+                RString 支払窓口終了時間R = new RString(支払窓口終了時間div.toString());
                 RStringBuilder builder = new RStringBuilder();
-                builder.append(new RString(支払窓口終了時間div.getHour()));
-                builder.append(new RString(支払窓口終了時間div.getMinute()));
+                builder.append(支払窓口終了時間R.substring(NUM_0, NUM_2));
+                builder.append(支払窓口終了時間R.substring(NUM_3, NUM_5));
                 支払窓口終了時間 = builder.toRString();
             }
             entityView = entityView.createBuilderForEdit()
@@ -258,6 +266,7 @@ public class KouzaInfoHandler {
                     .set被保険者番号(被保険者番号)
                     .setサービス提供年月(サービス年月)
                     .set整理番号(整理番号)
+                    .set支払方法区分コード(支払方法区分コード)
                     .set口座ID(口座Id).build();
         } else {
             RString 受領委任契約番号 = 支払方法情報共有DIV.getKeiyakuNo();
@@ -265,6 +274,7 @@ public class KouzaInfoHandler {
                     .set被保険者番号(被保険者番号)
                     .setサービス提供年月(サービス年月)
                     .set整理番号(整理番号)
+                    .set支払方法区分コード(支払方法区分コード)
                     .set受領委任契約番号(受領委任契約番号).build();
         }
         SyokanbaraihiShikyuShinseiKetteManager.createInstance().updDbT3034ShokanShinsei(entityView);
@@ -316,8 +326,8 @@ public class KouzaInfoHandler {
         ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード);
     }
 
-    private int checkObject(Object obj1, Object obj2) {
-        if (obj1 == null && obj2 == null) {
+    private int checkObject(RString obj1, RString obj2) {
+        if ((obj1 == null || obj1.isEmpty()) && (obj2 == null || obj2.isEmpty())) {
             return 0;
         } else if (obj1 != null && obj1.equals(obj2)) {
             return 0;

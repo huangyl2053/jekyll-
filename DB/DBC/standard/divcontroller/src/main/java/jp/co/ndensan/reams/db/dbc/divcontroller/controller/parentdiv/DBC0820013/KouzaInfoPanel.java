@@ -15,10 +15,12 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820013.Kou
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -41,6 +43,7 @@ public class KouzaInfoPanel {
     private static final RString 登録 = new RString("登録");
     private static final RString 新規 = new RString("新規");
     private static final RString 参照 = new RString("参照");
+    private static final RString 更新 = new RString("更新");
     private static final RString 照会モード = new RString("照会");
     private static final RString 申請を保存ボタン = new RString("btnUpdate");
     private static final RString 申請を削除する = new RString("btnDelete");
@@ -194,6 +197,9 @@ public class KouzaInfoPanel {
      */
     public ResponseData<KouzaInfoPanelDiv> onClick_btnSave(KouzaInfoPanelDiv div) {
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+        if (修正.equals(画面モード)) {
+            画面モード = 更新;
+        }
         Boolean 変更有無チェック = getHandler(div).変更有無チェック();
         if (!変更有無チェック) {
             if (!ResponseHolder.isReRequest()) {
@@ -204,13 +210,17 @@ public class KouzaInfoPanel {
             }
             return createResponse(div);
         }
-        if (!ResponseHolder.isReRequest()) {
-            getHandler(div).保存_修正();
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存ボタン, true);
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(画面モード.toString())).respond();
-        }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return createResponse(div);
+        try {
+            if (!ResponseHolder.isReRequest()) {
+                getHandler(div).保存_修正();
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存ボタン, true);
+                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(画面モード.toString())).respond();
+            }
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                return createResponse(div);
+            }
+        } catch (Exception e) {
+            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
         return createResponse(div);
     }
@@ -222,13 +232,17 @@ public class KouzaInfoPanel {
      * @return 償還払い費支給申請決定_口座情報画面
      */
     public ResponseData<KouzaInfoPanelDiv> onClick_btnDelete(KouzaInfoPanelDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            getHandler(div).保存_削除();
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を削除する, true);
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(削除.toString())).respond();
-        }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return createResponse(div);
+        try {
+            if (!ResponseHolder.isReRequest()) {
+                getHandler(div).保存_削除();
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を削除する, true);
+                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(削除.toString())).respond();
+            }
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                return createResponse(div);
+            }
+        } catch (Exception e) {
+            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
         return createResponse(div);
     }
