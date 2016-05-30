@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100001.dgSh
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0100001.ShinseiKensakuHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinseikensaku.ShinseiKensakuFinder;
 import jp.co.ndensan.reams.db.dbe.service.report.yokaigoyoshienshinseiichiran.YokaigoYoshienShinseiIchiranPrintService;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
@@ -135,9 +136,10 @@ public class ShinseiKensaku {
             ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.主治医意見書登録へ).respond();
         } else if (MENUID_DBEMN31005.equals(menuID)) {
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.申請書管理番号, 申請書管理番号);
+            ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.申請書管理番号,
+                    new ShinseishoKanriNo(申請書管理番号));
             ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.主治医意見書作成依頼履歴番号,
-                    主治医意見書作成依頼履歴番号);
+                    Integer.valueOf(主治医意見書作成依頼履歴番号.toString()));
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.認定調査結果登録1へ).respond();
         }
         return ResponseData.of(div).respond();
