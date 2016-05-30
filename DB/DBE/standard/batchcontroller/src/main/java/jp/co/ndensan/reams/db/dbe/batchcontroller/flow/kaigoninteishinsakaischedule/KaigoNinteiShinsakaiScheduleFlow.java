@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.kaigoninteishinsakaischedu
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -23,19 +24,33 @@ public class KaigoNinteiShinsakaiScheduleFlow extends BatchFlowBase<KaigoNinteiS
 
     private static final String SHINSAKAISCHEDULEHYO = "shinsakaischedulehyo";
     private static final String NENKAN = "nenkanReport";
+    private static final String CALL_KAGAMIFLOW = "kaigoNinteiShinsakaiScheduleKagamiFlow";
+    private static final RString SCHEDULEKAGAMIFLOW_FLOWID = new RString("KaigoNinteiShinsakaiScheduleKagamiFlow");
     private final RString 帳票出力区分1 = new RString("1");
     private final RString 帳票出力区分2 = new RString("2");
 
     @Override
     protected void defineFlow() {
-        if (!RString.isNullOrEmpty(getParameter().getChohyoShutsuryokuKubun())
-                && getParameter().getChohyoShutsuryokuKubun().equals(帳票出力区分1)) {
-            executeStep(SHINSAKAISCHEDULEHYO);
-        }
-        if (!RString.isNullOrEmpty(getParameter().getChohyoShutsuryokuKubun())
-                && getParameter().getChohyoShutsuryokuKubun().equals(帳票出力区分2)) {
-            executeStep(SHINSAKAISCHEDULEHYO);
-            executeStep(NENKAN);
+        if (getParameter().getShinsakaiIinCodeList() != null
+                && !getParameter().getShinsakaiIinCodeList().isEmpty()) {
+
+            if (getParameter().getChohyoShutsuryokuKubun().equals(帳票出力区分1)) {
+                executeStep(SHINSAKAISCHEDULEHYO);
+                executeStep(CALL_KAGAMIFLOW);
+            }
+            if (getParameter().getChohyoShutsuryokuKubun().equals(帳票出力区分2)) {
+                executeStep(SHINSAKAISCHEDULEHYO);
+                executeStep(CALL_KAGAMIFLOW);
+                executeStep(NENKAN);
+            }
+        } else {
+            if (getParameter().getChohyoShutsuryokuKubun().equals(帳票出力区分1)) {
+                executeStep(SHINSAKAISCHEDULEHYO);
+            }
+            if (getParameter().getChohyoShutsuryokuKubun().equals(帳票出力区分2)) {
+                executeStep(SHINSAKAISCHEDULEHYO);
+                executeStep(NENKAN);
+            }
         }
     }
 
@@ -59,5 +74,15 @@ public class KaigoNinteiShinsakaiScheduleFlow extends BatchFlowBase<KaigoNinteiS
     protected IBatchFlowCommand nenkanReportProcess() {
         return loopBatch(NenkanReportProcess.class)
                 .arguments(getParameter().toKaigoNinteiShinsakaiScheduleProcessParamter()).define();
+    }
+
+    /**
+     * 介護認定審査会スケジュール表かがみバッチのです。
+     *
+     * @return KaigoNinteiShinsakaiScheduleKagamiFlow
+     */
+    @Step(CALL_KAGAMIFLOW)
+    protected IBatchFlowCommand callScheduleKagamiFlow() {
+        return otherBatchFlow(SCHEDULEKAGAMIFLOW_FLOWID, SubGyomuCode.DBE認定支援, getParameter()).define();
     }
 }
