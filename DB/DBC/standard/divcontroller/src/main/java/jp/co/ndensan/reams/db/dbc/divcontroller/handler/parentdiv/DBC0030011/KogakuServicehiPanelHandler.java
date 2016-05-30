@@ -69,68 +69,98 @@ public class KogakuServicehiPanelHandler {
      * 検索処理、対象者一覧（パネル）初期化する。
      */
     public void load該当者一覧情報() {
-        KogakuShokaiTaishoshaKensakuSearch searchCondition = new KogakuShokaiTaishoshaKensakuSearch();
+        KogakuShokaiTaishoshaKensakuSearch searchCondition;
         if (指定_被保険者.equals(div.getSearchKogakuServicehiPanel().getRadSearchKubun().getSelectedKey())) {
             SearchKogakuHihokenshaDiv panel = div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha();
-            searchCondition.set指定して場合(Boolean.TRUE);
             RString 被保険者番号 = panel.getTxtHihoNo().getValue();
-            if (被保険者番号 != null && !被保険者番号.isNullOrEmpty()) {
-                searchCondition.set被保険者番号(new HihokenshaNo(被保険者番号));
-            }
             RDate 提供年月From = panel.getTxtTeikyoYMRange().getFromValue();
-            if (提供年月From != null) {
-                searchCondition.set提供年月From(new FlexibleYearMonth(提供年月From.getYearMonth().toString()));
-            }
             RDate 提供年月To = panel.getTxtTeikyoYMRange().getToValue();
-            if (提供年月To != null) {
-                searchCondition.set提供年月To(new FlexibleYearMonth(提供年月To.getYearMonth().toString()));
-            }
             RDate 申請年月From = panel.getTxtShinseiYMRange().getFromValue();
-            if (申請年月From != null) {
-                searchCondition.set申請年月From(new FlexibleDate(申請年月From.getYearMonth().toString().concat(月初.toString())));
-            }
             RDate 申請年月To = panel.getTxtShinseiYMRange().getToValue();
-            if (申請年月To != null) {
-                searchCondition.set申請年月To(new FlexibleDate(申請年月To.getYearMonth().toString()
-                        .concat(String.valueOf(申請年月To.getYearMonth().getLastDay()))));
-            }
             RDate 決定年月From = panel.getTxtKetteiYMRange().getFromValue();
-            if (決定年月From != null) {
-                searchCondition.set決定年月From(new FlexibleDate(決定年月From.getYearMonth().toString().concat(月初.toString())));
-            }
             RDate 決定年月To = panel.getTxtKetteiYMRange().getToValue();
-            if (決定年月To != null) {
-                searchCondition.set決定年月To(new FlexibleDate(決定年月To.getYearMonth().toString()
-                        .concat(String.valueOf(決定年月To.getYearMonth().getLastDay()))));
-            }
+            searchCondition = getパラメータ(Boolean.TRUE, 被保険者番号, 提供年月From, 提供年月To, 申請年月From, 申請年月To,
+                    決定年月From, 決定年月To, null, null, null);
         } else {
             SearchYMDiv panel = div.getSearchKogakuServicehiPanel().getSearchYM();
-            searchCondition.set指定して場合(Boolean.FALSE);
             RDate 提供年月 = panel.getTxtTeikyoYM().getValue();
-            if (提供年月 != null) {
-                searchCondition.set提供年月(new FlexibleYearMonth(提供年月.getYearMonth().toString()));
-            }
             RDate 申請年月 = panel.getTxtShinseiYM().getValue();
-            if (申請年月 != null) {
-                searchCondition.set申請年月初(new FlexibleDate(申請年月.getYearMonth().toString().concat(月初.toString())));
-                searchCondition.set申請年月末(new FlexibleDate(申請年月.getYearMonth().toString()
-                        .concat(String.valueOf(申請年月.getYearMonth().getLastDay()))));
-            }
             RDate 決定年月 = panel.getTxtKetteiYM().getValue();
-            if (決定年月 != null) {
-                searchCondition.set決定年月初(new FlexibleDate(決定年月.getYearMonth().toString().concat(月初.toString())));
-                searchCondition.set決定年月末(new FlexibleDate(決定年月.getYearMonth().toString()
-                        .concat(String.valueOf(決定年月.getYearMonth().getLastDay()))));
-            }
+            searchCondition = getパラメータ(Boolean.FALSE, null, null, null, null, null, null, null, 提供年月, 申請年月, 決定年月);
         }
-        List<KogakuShokaiTaishoshaKensakuResultEntity> 該当者一覧情報 = KogakuShokaiTaishoshaKensaku.createInstance().selectTaishosha(searchCondition);
+        set該当者一覧エリア(searchCondition);
+    }
+
+    /**
+     *
+     * @param 指定して場合 boolean
+     * @param 被保険者番号 RString
+     * @param 提供年月From RDate
+     * @param 提供年月To RDate
+     * @param 申請年月From RDate
+     * @param 申請年月To RDate
+     * @param 決定年月From RDate
+     * @param 決定年月To RDate
+     * @param 提供年月 RDate
+     * @param 申請年月 RDate
+     * @param 決定年月 RDate
+     * @return searchパラメータ KogakuShokaiTaishoshaKensakuSearch
+     */
+    public KogakuShokaiTaishoshaKensakuSearch getパラメータ(boolean 指定して場合, RString 被保険者番号, RDate 提供年月From,
+            RDate 提供年月To, RDate 申請年月From, RDate 申請年月To, RDate 決定年月From, RDate 決定年月To,
+            RDate 提供年月, RDate 申請年月, RDate 決定年月) {
+        KogakuShokaiTaishoshaKensakuSearch searchCondition = new KogakuShokaiTaishoshaKensakuSearch();
+        searchCondition.set指定して場合(指定して場合);
+        if (被保険者番号 != null && !被保険者番号.isNullOrEmpty()) {
+            searchCondition.set被保険者番号(new HihokenshaNo(被保険者番号));
+        }
+        if (提供年月From != null) {
+            searchCondition.set提供年月From(new FlexibleYearMonth(提供年月From.getYearMonth().toString()));
+        }
+        if (提供年月To != null) {
+            searchCondition.set提供年月To(new FlexibleYearMonth(提供年月To.getYearMonth().toString()));
+        }
+        if (申請年月From != null) {
+            searchCondition.set申請年月From(new FlexibleDate(申請年月From.getYearMonth().toString().concat(月初.toString())));
+        }
+        if (申請年月To != null) {
+            searchCondition.set申請年月To(new FlexibleDate(申請年月To.getYearMonth().toString()
+                    .concat(String.valueOf(申請年月To.getYearMonth().getLastDay()))));
+        }
+        if (決定年月From != null) {
+            searchCondition.set決定年月From(new FlexibleDate(決定年月From.getYearMonth().toString().concat(月初.toString())));
+        }
+        if (決定年月To != null) {
+            searchCondition.set決定年月To(new FlexibleDate(決定年月To.getYearMonth().toString()
+                    .concat(String.valueOf(決定年月To.getYearMonth().getLastDay()))));
+        }
+        if (提供年月 != null) {
+            searchCondition.set提供年月(new FlexibleYearMonth(提供年月.getYearMonth().toString()));
+        }
+        if (申請年月 != null) {
+            searchCondition.set申請年月初(new FlexibleDate(申請年月.getYearMonth().toString().concat(月初.toString())));
+            searchCondition.set申請年月末(new FlexibleDate(申請年月.getYearMonth().toString()
+                    .concat(String.valueOf(申請年月.getYearMonth().getLastDay()))));
+        }
+        if (決定年月 != null) {
+            searchCondition.set決定年月初(new FlexibleDate(決定年月.getYearMonth().toString().concat(月初.toString())));
+            searchCondition.set決定年月末(new FlexibleDate(決定年月.getYearMonth().toString()
+                    .concat(String.valueOf(決定年月.getYearMonth().getLastDay()))));
+        }
+        return searchCondition;
+    }
+
+    /**
+     * 該当者一覧エリアを初期化メソッドです。
+     *
+     * @param searchCondition searchパラメータ
+     */
+    public void set該当者一覧エリア(KogakuShokaiTaishoshaKensakuSearch searchCondition) {
+        List<KogakuShokaiTaishoshaKensakuResultEntity> 該当者一覧情報
+                = KogakuShokaiTaishoshaKensaku.createInstance().selectTaishosha(searchCondition);
         if (該当者一覧情報 == null) {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         }
-        set該当者一覧エリア(該当者一覧情報);
-    }
-
-    private void set該当者一覧エリア(List<KogakuShokaiTaishoshaKensakuResultEntity> 該当者一覧情報) {
         List<dgKogakuServicehiRireki_Row> dataSource = new ArrayList<>();
         for (KogakuShokaiTaishoshaKensakuResultEntity entity : 該当者一覧情報) {
             dgKogakuServicehiRireki_Row row = new dgKogakuServicehiRireki_Row();
@@ -157,7 +187,7 @@ public class KogakuServicehiPanelHandler {
             }
             row.setTxtShikyuKubun(entity.getEntity().get支給区分コード());
             row.getTxtShikyuKingaku().setValue(entity.getEntity().get支給金額());
-            // TODO boolean?entity.getEntity().is高額自動償還()
+            // TODO QAあり boolean?entity.getEntity().is高額自動償還()
             row.setTxtKogakuAutoShokan(new RString("true"));
             Decimal 履歴番号 = entity.getEntity().get履歴番号();
             if (履歴番号 != null) {

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0030011;
 
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensakuSearch;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.DBC0030011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.DBC0030011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.KogakuServicehiPanelDiv;
@@ -51,8 +52,24 @@ public class KogakuServicehiPanel {
             return ResponseData.of(div).setState(DBC0030011StateName.検索条件);
         } else if (画面フラグ_照会.equals(画面フラグ)) {
             ViewStateHolder.put(ViewStateKeys.画面フラグ, 画面フラグ_対象者検索);
-            set検索条件(div);
+            KogakuServicehiPanelValidationHandler validationHandler = new KogakuServicehiPanelValidationHandler(div);
+            ValidationMessageControlPairs pairs;
+            if (指定_被保険者.equals(div.getSearchKogakuServicehiPanel().getRadSearchKubun().getSelectedKey())) {
+                pairs = validationHandler.validate被保険者を指定入力();
+                pairs.add(validationHandler.validate提供年月());
+                pairs.add(validationHandler.validate申請年月());
+                pairs.add(validationHandler.validate決定年月());
+            } else {
+                pairs = validationHandler.validate年月を指定入力();
+            }
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+            KogakuShokaiTaishoshaKensakuSearch searchCondition = set検索条件(div);
+            getHandler(div).set該当者一覧エリア(searchCondition);
+            return ResponseData.of(div).setState(DBC0030011StateName.該当者一覧);
         } else {
+            // TODO このdialogは問題があります。
             ViewStateHolder.put(ViewStateKeys.画面フラグ, 画面フラグ_対象者検索);
         }
         return createResponse(div);
@@ -187,7 +204,8 @@ public class KogakuServicehiPanel {
         ViewStateHolder.put(ViewStateKeys.決定年月, panel.getTxtTeikyoYM().getValue());
     }
 
-    private void set検索条件(KogakuServicehiPanelDiv div) {
+    private KogakuShokaiTaishoshaKensakuSearch set検索条件(KogakuServicehiPanelDiv div) {
+        KogakuShokaiTaishoshaKensakuSearch searchCondition;
         RString ラジオ_指定 = ViewStateHolder.get(ViewStateKeys.ラジオ_指定, RString.class);
         if (指定_被保険者.equals(ラジオ_指定)) {
             div.getSearchKogakuServicehiPanel().getRadSearchKubun().setSelectedKey(指定_被保険者);
@@ -206,16 +224,16 @@ public class KogakuServicehiPanel {
             panel.getTxtShinseiYMRange().setToValue(申請年月To);
             panel.getTxtKetteiYMRange().setFromValue(決定年月From);
             panel.getTxtKetteiYMRange().setToValue(決定年月To);
+            searchCondition = getHandler(div).getパラメータ(Boolean.TRUE, 被保険者番号, 提供年月From, 提供年月To, 申請年月From, 申請年月To,
+                    決定年月From, 決定年月To, null, null, null);
         } else {
             div.getSearchKogakuServicehiPanel().getRadSearchKubun().setSelectedKey(指定_年月);
-            SearchYMDiv panel = div.getSearchKogakuServicehiPanel().getSearchYM();
             RDate 提供年月 = ViewStateHolder.get(ViewStateKeys.提供年月, RDate.class);
             RDate 申請年月 = ViewStateHolder.get(ViewStateKeys.申請年月, RDate.class);
             RDate 決定年月 = ViewStateHolder.get(ViewStateKeys.決定年月, RDate.class);
-            panel.getTxtTeikyoYM().setValue(提供年月);
-            panel.getTxtTeikyoYM().setValue(申請年月);
-            panel.getTxtTeikyoYM().setValue(決定年月);
+            searchCondition = getHandler(div).getパラメータ(Boolean.FALSE, null, null, null, null, null, null, null, 提供年月, 申請年月, 決定年月);
         }
+        return searchCondition;
     }
 
     private KogakuServicehiPanelHandler getHandler(KogakuServicehiPanelDiv div) {
