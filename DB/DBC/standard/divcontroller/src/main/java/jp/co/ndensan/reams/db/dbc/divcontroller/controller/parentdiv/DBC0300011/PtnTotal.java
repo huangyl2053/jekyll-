@@ -53,7 +53,7 @@ public class PtnTotal {
             List<RString> list = new ArrayList<>();
             list.add(new RString("1"));
             if (searchKey.isSameKanaName()) {
-                div.getPnlCondition().getChkJyusyoKanji().setSelectedItemsByKey(list);
+                div.getPnlCondition().getChkMeisyoKana().setSelectedItemsByKey(list);
             }
             if (searchKey.getKeiyakuJigyoshaName() != null) {
                 div.getPnlCondition().getTxtMeisyoKanji().setValue(searchKey.getKeiyakuJigyoshaName().value());
