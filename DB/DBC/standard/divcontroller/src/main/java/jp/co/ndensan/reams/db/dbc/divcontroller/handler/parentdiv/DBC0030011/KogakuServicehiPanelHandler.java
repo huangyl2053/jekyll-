@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0030011;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensakuResultEntity;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensakuSearch;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.KogakuServicehiPanelDiv;
@@ -33,6 +35,20 @@ public class KogakuServicehiPanelHandler {
 
     private final KogakuServicehiPanelDiv div;
     private static final RString 月初 = new RString("01");
+    private static final RString 指定R = new RString("指定");
+    private static final RString 被保険者番号R = new RString("被保険者番号");
+    private static final RString 提供年月FROMR = new RString("提供年月From");
+    private static final RString 提供年月TOR = new RString("提供年月To");
+    private static final RString 申請年月FROMR = new RString("申請年月From");
+    private static final RString 申請年月TOR = new RString("申請年月To");
+    private static final RString 決定年月FROMR = new RString("決定年月From");
+    private static final RString 決定年月TOR = new RString("決定年月To");
+    private static final RString 提供年月R = new RString("提供年月");
+    private static final RString 申請年月R = new RString("申請年月");
+    private static final RString 決定年月R = new RString("決定年月");
+    private static final RString 履歴番号R = new RString("履歴番号R");
+    private static final RString サービス提供年月R = new RString("サービス提供年月R");
+    private static final RString 指定_年月 = new RString("YMShitei");
     private static final RString 指定_被保険者 = new RString("hihokenshaShitei");
 
     /**
@@ -196,6 +212,116 @@ public class KogakuServicehiPanelHandler {
             dataSource.add(row);
         }
         div.getKogakuServicehiListPanel().getDgKogakuServicehiRireki().setDataSource(dataSource);
+    }
+
+    /**
+     * 検索条件エリアの検索条件のonChange事件です。
+     */
+    public void onChange検索条件エリア() {
+        if (指定_被保険者.equals(div.getSearchKogakuServicehiPanel().getRadSearchKubun().getSelectedKey())) {
+            div.getSearchKogakuServicehiPanel().getSearchYM().getTxtKetteiYM().clearValue();
+            div.getSearchKogakuServicehiPanel().getSearchYM().getTxtShinseiYM().clearValue();
+            div.getSearchKogakuServicehiPanel().getSearchYM().getTxtTeikyoYM().clearValue();
+            div.getSearchKogakuServicehiPanel().getSearchYM().setDisabled(true);
+            div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha().setDisabled(false);
+        } else {
+            div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha().getTxtHihoNo().clearValue();
+            div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha().getTxtHihoName().clearValue();
+            div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha().getTxtKetteiYMRange().clearToValue();
+            div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha().getTxtKetteiYMRange().clearFromValue();
+            div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha().getTxtShinseiYMRange().clearToValue();
+            div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha().getTxtShinseiYMRange().clearFromValue();
+            div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha().getTxtTeikyoYMRange().clearToValue();
+            div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha().getTxtTeikyoYMRange().clearFromValue();
+            div.getSearchKogakuServicehiPanel().getSearchYM().setDisabled(false);
+            div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha().setDisabled(true);
+        }
+    }
+
+    /**
+     * 検索条件エリアのRString内容をを返しする。
+     *
+     * @return 検索条件エリアの内容 Mapper<RString, RString>
+     */
+    public Map<RString, RString> get検索条件エリアRStr() {
+        Map<RString, RString> map = new HashMap<>();
+        map.put(指定R, div.getSearchKogakuServicehiPanel().getRadSearchKubun().getSelectedKey());
+        map.put(被保険者番号R, div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha().getTxtHihoNo().getValue());
+        return map;
+    }
+
+    /**
+     * 検索条件エリアのRDate内容をを返しする。
+     *
+     * @return 検索条件エリアの内容 Mapper<RString, RString>
+     */
+    public Map<RString, RDate> get検索条件エリアRDate() {
+        Map<RString, RDate> map = new HashMap<>();
+        SearchKogakuHihokenshaDiv panel_被保険者 = div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha();
+        SearchYMDiv panel年月 = div.getSearchKogakuServicehiPanel().getSearchYM();
+        map.put(提供年月FROMR, panel_被保険者.getTxtTeikyoYMRange().getFromValue());
+        map.put(提供年月TOR, panel_被保険者.getTxtTeikyoYMRange().getToValue());
+        map.put(申請年月FROMR, panel_被保険者.getTxtShinseiYMRange().getFromValue());
+        map.put(申請年月TOR, panel_被保険者.getTxtShinseiYMRange().getToValue());
+        map.put(決定年月FROMR, panel_被保険者.getTxtKetteiYMRange().getFromValue());
+        map.put(決定年月TOR, panel_被保険者.getTxtKetteiYMRange().getToValue());
+        map.put(提供年月R, panel年月.getTxtTeikyoYM().getValue());
+        map.put(申請年月R, panel年月.getTxtShinseiYM().getValue());
+        map.put(決定年月R, panel年月.getTxtKetteiYM().getValue());
+        return map;
+    }
+
+    /**
+     * 検索条件を復活する。
+     *
+     * @param 指定 RString
+     * @param 被保険者番号 RString
+     * @param 提供年月From RDate
+     * @param 提供年月To RDate
+     * @param 申請年月From RDate
+     * @param 申請年月To RDate
+     * @param 決定年月From RDate
+     * @param 決定年月To RDate
+     * @param 提供年月 RDate
+     * @param 申請年月 RDate
+     * @param 決定年月 RDate
+     */
+    public void set検索条件(RString 指定, RString 被保険者番号, RDate 提供年月From, RDate 提供年月To, RDate 申請年月From,
+            RDate 申請年月To, RDate 決定年月From, RDate 決定年月To, RDate 提供年月, RDate 申請年月, RDate 決定年月) {
+        if (指定_被保険者.equals(指定)) {
+            div.getSearchKogakuServicehiPanel().getRadSearchKubun().setSelectedKey(指定_被保険者);
+            SearchKogakuHihokenshaDiv panel被保険者 = div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha();
+            panel被保険者.getTxtHihoNo().setValue(被保険者番号);
+            panel被保険者.getTxtTeikyoYMRange().setFromValue(提供年月From);
+            panel被保険者.getTxtTeikyoYMRange().setToValue(提供年月To);
+            panel被保険者.getTxtShinseiYMRange().setFromValue(申請年月From);
+            panel被保険者.getTxtShinseiYMRange().setToValue(申請年月To);
+            panel被保険者.getTxtKetteiYMRange().setFromValue(決定年月From);
+            panel被保険者.getTxtKetteiYMRange().setToValue(決定年月To);
+        } else {
+            div.getSearchKogakuServicehiPanel().getRadSearchKubun().setSelectedKey(指定_年月);
+            SearchYMDiv panel年月 = div.getSearchKogakuServicehiPanel().getSearchYM();
+            panel年月.getTxtTeikyoYM().setValue(提供年月);
+            panel年月.getTxtShinseiYM().setValue(申請年月);
+            panel年月.getTxtKetteiYM().setValue(決定年月);
+        }
+    }
+
+    /**
+     * 該当者一覧で選択した行の検索キーを返しする。
+     *
+     * @return 該当者一覧で選択した行の検索キー Map<RString, RString>
+     */
+    public Map<RString, RString> onClick_選択() {
+        Map<RString, RString> map = new HashMap<>();
+        dgKogakuServicehiRireki_Row row = div.getKogakuServicehiListPanel().getDgKogakuServicehiRireki().getClickedItem();
+        RString 被保険者番号Row = row.getTxtHihoNo();
+        RString サービス提供年月Row = row.getTxtTeikyoYM();
+        RString 履歴番号Row = row.getTxtRirekiNo();
+        map.put(被保険者番号R, 被保険者番号Row);
+        map.put(サービス提供年月R, サービス提供年月Row);
+        map.put(履歴番号R, 履歴番号Row);
+        return map;
     }
 
 }
