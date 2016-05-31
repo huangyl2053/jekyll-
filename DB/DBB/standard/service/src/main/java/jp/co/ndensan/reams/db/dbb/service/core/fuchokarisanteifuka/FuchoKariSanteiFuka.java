@@ -8,11 +8,13 @@ package jp.co.ndensan.reams.db.dbb.service.core.fuchokarisanteifuka;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.BatchFuchoKariSanteiResult;
-import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.FuchoKariSanteiEntity;
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.FuchoKariSanteiFukaEntity;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisantei.FuchoKariSanteiEntity;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisantei.FuchoKarisanteiBatchParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisanteitsuchishohakko.BatchFuchoKariSanteiEntity;
+import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -20,11 +22,11 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -54,45 +56,36 @@ public class FuchoKariSanteiFuka {
     private static final RString 口座振替者 = new RString("口座振替者");
     private static final RString すべて選択_2 = new RString("2");
     private static final RString すべて選択 = new RString("（すべて選択）");
-    private static final int 算定期_0 = 0;
-    private static final int 算定期_1 = 1;
-    private static final int 算定期_2 = 2;
-    private static final int 算定期_4 = 4;
-    private static final int 算定期_5 = 5;
-    private static final int 算定期_6 = 6;
-    private static final int 算定期_9 = 9;
-    private static final RString なし = new RString("なし");
+    private static final int 定値_1期 = 1;
+    private static final int 定値_2期 = 2;
+    private static final int 定値_3期 = 3;
+    private static final int 定値_4期 = 4;
+    private static final int 定値_5期 = 5;
+    private static final int 定値_6期 = 6;
+    private static final int 定値_7期 = 7;
+    private static final int 定値_8期 = 8;
+    private static final int 定値_9期 = 9;
+    private static final int 定値_10期 = 10;
+    private static final int 定値_11期 = 11;
+    private static final int 定値_12期 = 12;
+    private static final int 定値_13期 = 13;
+    private static final int 定値_14期 = 14;
+    private static final int 設定値_番号1 = 1;
+    private static final int 設定値_番号0 = 0;
+    private static final int 設定値_番号4 = 4;
+    private static final int 設定値_番号5 = 5;
+    private static final int 設定値_番号6 = 6;
+    private static final int 設定値_番号9 = 9;
+    private static final RString 区分_ゼロ = new RString("0");
+    private static final RString 区分_イチ = new RString("1");
+    private static final RString 通知書タイプ設定値 = new RString("001");
     private static final RString 期毎タイプ = new RString("期毎タイプ");
-    private static final RString 銀振型5期タイプ = new RString("銀振型5期タイプ");
-    private static final RString 銀振型4期タイプ = new RString("銀振型4期タイプ");
-    private static final RString ブックタイプ = new RString("ブックタイプ");
-    private static final RString コンビニ収納タイプ = new RString("コンビニ収納タイプ");
-    private static final RString その他_カスタマイズ = new RString("その他（カスタマイズ）");
-    private static final RString 期毎納入通知書タイプ = new RString("期毎納入通知書タイプ");
-    private static final RString 銀振納入通知書タイプ = new RString("銀振納入通知書タイプ");
-    private static final RString ブック口座振替依頼表示 = new RString("ブック口座振替依頼表示");
-    private static final RString コンビニ期毎タイプ = new RString("コンビニ期毎タイプ");
+    private static final RString 定値_銀振型 = new RString("銀振納入通知書タイプ");
     private static final RString その他納入通知書タイプ = new RString("その他納入通知書タイプ");
-    private static final int CASE_10010 = 10010;
-    private static final int CASE_10011 = 10011;
-    private static final int CASE_40010 = 40010;
-    private static final int CASE_40011 = 40011;
-    private static final int CASE_50010 = 50010;
-    private static final int CASE_50011 = 50011;
-    private static final int CASE_00 = 00;
-    private static final int CASE_01 = 01;
-    private static final int CASE_10 = 10;
-    private static final int CASE_11 = 11;
-    private static final int CASE_600 = 600;
-    private static final int CASE_601 = 601;
-    private static final int CASE_3010 = 3010;
-    private static final int CASE_3011 = 3011;
-    private static final int CASE_3020 = 3020;
-    private static final int CASE_3021 = 3021;
-    private static final int CASE_610 = 610;
-    private static final int CASE_611 = 611;
-    private static final ReportId DBB100014 = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
-    private static final RString 納入通知書の帳票ID = new RString("納入通知書の帳票ID");
+    private static final RString コンビニ期毎出力 = new RString("コンビニ期毎出力");
+    private static final RString コンビニマルチ収納タイプ = new RString("301");
+    private static final RString コンビニ角公タイプ = new RString("302");
+    private static final RString 調定月日 = new RString("0401");
 
     /**
      * コンストラクタです。
@@ -157,7 +150,7 @@ public class FuchoKariSanteiFuka {
      * @return FuchoKariSanteiFukaParameter
      */
     public FuchoKarisanteiBatchParameter createFuchoKariSanteiParameter(FuchoKariSanteiFukaEntity entity) {
-        List<BatchFuchoKariSanteiResult> 出力帳票一覧List = get出力帳票一覧(entity.get出力帳票一覧List(),
+        List<FuchoKariSanteiEntity> 出力帳票一覧List = get出力帳票一覧(entity.get出力帳票一覧List(),
                 entity.get調定年度(), entity.get算定期());
         FuchoKarisanteiBatchParameter resultParameter = new FuchoKarisanteiBatchParameter();
         resultParameter.set調定年度(entity.get調定年度());
@@ -194,176 +187,188 @@ public class FuchoKariSanteiFuka {
      * @throws ApplicationException
      * @return バッチ出力帳票リスト
      */
-    private List<BatchFuchoKariSanteiResult> get出力帳票一覧(List<FuchoKariSanteiEntity> 出力帳票List,
+    private List<FuchoKariSanteiEntity> get出力帳票一覧(List<BatchFuchoKariSanteiResult> 出力帳票List,
             FlexibleYear 調定年度, RString 算定期) throws ApplicationException {
-        List<BatchFuchoKariSanteiResult> resultList = new ArrayList<>();
+        List<FuchoKariSanteiEntity> resultList = new ArrayList<>();
         if (出力帳票List == null || 出力帳票List.isEmpty()) {
             return resultList;
         }
-        for (FuchoKariSanteiEntity 出力帳票entity : 出力帳票List) {
-            ReportId 帳票分類ID = 出力帳票entity.get帳票分類ID();
-            ReportId 帳票ID = 帳票分類ID;
-            if (DBB100014.equals(帳票分類ID)) {
-                // TODO DBBコンフィグから、納付書の型と連帳区分を取得する。
-//                BusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型４, RDate.MAX, SubGyomuCode.DBB介護賦課, LasdecCode.EMPTY)
-//                RString 設定値 = get設定値(算定期);
-                RString 納入通知書の型 = get納入通知書の型(算定期);
-                RString 普徴期情報_納通連帳区分 = new RString("0");
-                RString 項目名 = get項目名(納入通知書の型);
-                ReportId 通知書の帳票ID = get通知書の帳票ID(
-                        帳票分類ID, 調定年度, 項目名, 算定期, 普徴期情報_納通連帳区分);
+        for (BatchFuchoKariSanteiResult 出力帳票entity : 出力帳票List) {
+            ReportId 帳票ID = 出力帳票entity.get帳票ID();
+            RDate 調定年月日 = new RDate(調定年度.toString().concat(調定月日.toString()));
 
-                if (通知書の帳票ID == null || 通知書の帳票ID.isEmpty()) {
-                    throw new ApplicationException(UrErrorMessages.存在しない
-                            .getMessage().replace(納入通知書の帳票ID.toString()).evaluate());
-                }
-                帳票ID = 通知書の帳票ID;
+            RString 設定値 = get納付書の型の設定値(算定期, 調定年月日);
+            RString 項目名 = get項目名(設定値);
+            RString 納通連帳区分 = get普徴期情報_納通連帳区分(算定期, 調定年月日);
+
+            ChohyoSeigyoHanyo 帳票タイプ = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 出力帳票entity.get帳票ID(),
+                    調定年度, 項目名);
+            if (帳票タイプ == null) {
+                throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
             }
-            BatchFuchoKariSanteiEntity バッチ出力帳票一覧Entity = new BatchFuchoKariSanteiEntity(
-                    帳票分類ID,
+            ReportId 通知書の帳票ID = get通知書の帳票ID(調定年度, 項目名, 帳票タイプ, 納通連帳区分, 帳票ID);
+            if (通知書の帳票ID == null || 通知書の帳票ID.isEmpty()) {
+                throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
+            }
+            FuchoKariSanteiEntity バッチ出力帳票一覧Entity = new FuchoKariSanteiEntity(
                     帳票ID,
-                    出力帳票entity.get改頁出力順ID()
+                    通知書の帳票ID,
+                    出力帳票entity.get出力順ID()
             );
-            resultList.add(new BatchFuchoKariSanteiResult(バッチ出力帳票一覧Entity));
+            resultList.add(バッチ出力帳票一覧Entity);
         }
         return resultList;
     }
 
-//    private RString get設定値(RString 算定期) {
-//        return 算定期;
-//    }
-    private RString get納入通知書の型(RString 算定期) {
-        RString 納入通知書の型;
-        switch (Integer.valueOf(算定期.toString())) {
-            case 算定期_0:
-                納入通知書の型 = なし;
-                break;
-            case 算定期_1:
-                納入通知書の型 = 期毎タイプ;
-                break;
-            case 算定期_2:
-                納入通知書の型 = 銀振型5期タイプ;
-                break;
-            case 算定期_4:
-                納入通知書の型 = 銀振型4期タイプ;
-                break;
-            case 算定期_5:
-                納入通知書の型 = ブックタイプ;
-                break;
-            case 算定期_6:
-                納入通知書の型 = コンビニ収納タイプ;
-                break;
-            case 算定期_9:
-                納入通知書の型 = その他_カスタマイズ;
-                break;
+    private RString get普徴期情報_納通連帳区分(RString 出力期, RDate 調定年月日) {
+
+        switch (Integer.parseInt(出力期.toString())) {
+            case 定値_1期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分1, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_2期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分2, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_3期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分3, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_4期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分4, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_5期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分5, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_6期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分6, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_7期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分7, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_8期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分8, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_9期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分9, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_10期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分10, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_11期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分11, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_12期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分12, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_13期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分13, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_14期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分14, 調定年月日, SubGyomuCode.DBB介護賦課);
             default:
-                納入通知書の型 = RString.EMPTY;
+                return RString.EMPTY;
         }
-        return 納入通知書の型;
     }
 
-    private RString get項目名(RString 納入通知書の型) {
-        RString 項目名;
-        if (期毎タイプ.equals(納入通知書の型)) {
-            項目名 = 期毎納入通知書タイプ;
-        } else if (銀振型4期タイプ.equals(納入通知書の型)) {
-            項目名 = 銀振納入通知書タイプ;
-        } else if (ブックタイプ.equals(納入通知書の型)) {
-            項目名 = その他納入通知書タイプ;
-        } else if (コンビニ収納タイプ.equals(納入通知書の型)) {
-            項目名 = コンビニ期毎タイプ;
-        } else {
-            項目名 = null;
+    private RString get納付書の型の設定値(RString 算定期, RDate 調定年月日) {
+
+        switch (Integer.parseInt(算定期.toString())) {
+            case 定値_1期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型1, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_2期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型2, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_3期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型3, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_4期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型4, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_5期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型5, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_6期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型6, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_7期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型7, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_8期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型8, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_9期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型9, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_10期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型10, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_11期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型11, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_12期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型12, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_13期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型13, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_14期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型14, 調定年月日, SubGyomuCode.DBB介護賦課);
+            default:
+                return 区分_ゼロ;
         }
-        return 項目名;
+    }
+
+    private RString get項目名(RString 設定値) {
+        switch (Integer.parseInt(設定値.toString())) {
+            case 設定値_番号0:
+                return RString.EMPTY;
+            case 設定値_番号1:
+                return 期毎タイプ;
+            case 設定値_番号4:
+                return 定値_銀振型;
+            case 設定値_番号5:
+                return その他納入通知書タイプ;
+            case 設定値_番号6:
+                return コンビニ期毎出力;
+            case 設定値_番号9:
+                return RString.EMPTY;
+            default:
+                return RString.EMPTY;
+        }
     }
 
     private ReportId get通知書の帳票ID(
-            ReportId 帳票分類ID,
             FlexibleYear 調定年度,
             RString 項目名,
-            RString 算定期,
-            RString 普徴期情報_納通連帳区分) {
-        ChohyoSeigyoHanyo 帳票制御汎用キー = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
-        ReportId 通知書帳票ID = null;
-        if (帳票制御汎用キー != null && 算定期 != null && 普徴期情報_納通連帳区分 != null) {
-            RString 帳票制御汎用 = 帳票制御汎用キー.get設定値();
-            RString コンフィグと帳票制御汎用 = new RString(
-                    算定期.toString() + 帳票制御汎用.toString() + 普徴期情報_納通連帳区分.toString());
-            switch (Integer.valueOf(コンフィグと帳票制御汎用.toString())) {
-                case CASE_10010:
-                    通知書帳票ID = ReportIdDBB.DBB100014.getReportId();
-                    break;
-                case CASE_10011:
-                    通知書帳票ID = ReportIdDBB.DBB100015.getReportId();
-                    break;
-                case CASE_40010:
-                    通知書帳票ID = ReportIdDBB.DBB100018.getReportId();
-                    break;
-                case CASE_40011:
-                    通知書帳票ID = ReportIdDBB.DBB100019.getReportId();
-                    break;
-                case CASE_50010:
-                case CASE_50011:
-                    ChohyoSeigyoHanyo 帳票制御汎用キー_ブックタイプ
-                            = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, ブック口座振替依頼表示);
-                    switch (Integer.valueOf(帳票制御汎用キー_ブックタイプ.get設定値().toString() + 普徴期情報_納通連帳区分.toString())) {
-                        case CASE_00:
-                            通知書帳票ID = ReportIdDBB.DBB100021.getReportId();
-                            break;
-                        case CASE_01:
-                            通知書帳票ID = ReportIdDBB.DBB100023.getReportId();
-                            break;
-                        case CASE_10:
-                            通知書帳票ID = ReportIdDBB.DBB100020.getReportId();
-                            break;
-                        case CASE_11:
-                            通知書帳票ID = ReportIdDBB.DBB100022.getReportId();
-                            break;
-                        default:
-                            通知書帳票ID = ReportId.EMPTY;
-                    }
-                    break;
-                case CASE_600:
-                case CASE_601:
-                    ChohyoSeigyoHanyo 帳票制御汎用キー_ブックタイプ_コンビニ収納タイプ
-                            = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, その他納入通知書タイプ);
-                    int 通知書帳票IDFlag = Integer.valueOf(
-                            帳票制御汎用キー_ブックタイプ_コンビニ収納タイプ.toString() + 普徴期情報_納通連帳区分.toString());
-                    通知書帳票ID = get通知書の帳票ID_通常出力(通知書帳票IDFlag);
-                    break;
-                case CASE_610:
-                    通知書帳票ID = ReportIdDBB.DBB100028.getReportId();
-                    break;
-                case CASE_611:
-                    通知書帳票ID = ReportIdDBB.DBB100029.getReportId();
-                    break;
-                default:
-                    通知書帳票ID = ReportId.EMPTY;
+            ChohyoSeigyoHanyo 帳票タイプ,
+            RString 納通連帳区分,
+            ReportId 帳票ID) {
+        if (期毎タイプ.equals(項目名) && 通知書タイプ設定値.equals(帳票タイプ.get設定値())) {
+            if (区分_ゼロ.equals(納通連帳区分)) {
+                return ReportIdDBB.DBB100014.getReportId();
+            } else if (区分_イチ.equals(納通連帳区分)) {
+                return ReportIdDBB.DBB100015.getReportId();
             }
+        } else if (定値_銀振型.equals(項目名) && 通知書タイプ設定値.equals(帳票タイプ.get設定値())) {
+            if (区分_ゼロ.equals(納通連帳区分)) {
+                return ReportIdDBB.DBB100018.getReportId();
+            } else if (区分_イチ.equals(納通連帳区分)) {
+                return ReportIdDBB.DBB100019.getReportId();
+            }
+        } else if (その他納入通知書タイプ.equals(項目名) && 通知書タイプ設定値.equals(帳票タイプ.get設定値())) {
+            // TODO ブック口座振替依頼表示
+            if (区分_ゼロ.equals(納通連帳区分)) {
+                return ReportIdDBB.DBB100018.getReportId();
+            } else if (区分_イチ.equals(納通連帳区分)) {
+                return ReportIdDBB.DBB100019.getReportId();
+            }
+        } else if (コンビニ期毎出力.equals(項目名) && 区分_イチ.equals(帳票タイプ.get設定値())) {
+            if (区分_ゼロ.equals(納通連帳区分)) {
+                return ReportIdDBB.DBB100028.getReportId();
+            } else if (区分_イチ.equals(納通連帳区分)) {
+                return ReportIdDBB.DBB100029.getReportId();
+            }
+        } else if (コンビニ期毎出力.equals(項目名) && 区分_ゼロ.equals(帳票タイプ.get設定値())) {
+            return get通知書の帳票ID(納通連帳区分, 調定年度, 帳票ID);
         }
-        return 通知書帳票ID;
+        return null;
     }
 
-    private ReportId get通知書の帳票ID_通常出力(int 通知書帳票IDFlag) {
-        ReportId 通知書帳票ID = null;
-        switch (通知書帳票IDFlag) {
-            case CASE_3010:
-                通知書帳票ID = ReportIdDBB.DBB100026.getReportId();
-                break;
-            case CASE_3011:
-                通知書帳票ID = ReportIdDBB.DBB100027.getReportId();
-                break;
-            case CASE_3020:
-                通知書帳票ID = ReportIdDBB.DBB100024.getReportId();
-                break;
-            case CASE_3021:
-                通知書帳票ID = ReportIdDBB.DBB100025.getReportId();
-                break;
-            default:
-                通知書帳票ID = ReportId.EMPTY;
+    private ReportId get通知書の帳票ID(RString 納通連帳区分,
+            FlexibleYear 調定年度,
+            ReportId 帳票ID) {
+        ChohyoSeigyoHanyo 帳票タイプその他 = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票ID, 調定年度, その他納入通知書タイプ);
+        if (帳票タイプその他 == null) {
+            throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
         }
-        return 通知書帳票ID;
+        if (コンビニマルチ収納タイプ.equals(帳票タイプその他.get設定値())) {
+            if (区分_ゼロ.equals(納通連帳区分)) {
+                return ReportIdDBB.DBB100026.getReportId();
+            } else if (区分_イチ.equals(納通連帳区分)) {
+                return ReportIdDBB.DBB100027.getReportId();
+            }
+        } else if (コンビニ角公タイプ.equals(帳票タイプその他.get設定値())) {
+            if (区分_ゼロ.equals(納通連帳区分)) {
+                return ReportIdDBB.DBB100024.getReportId();
+            } else if (区分_イチ.equals(納通連帳区分)) {
+                return ReportIdDBB.DBB100025.getReportId();
+            }
+        }
+        return null;
     }
 
     /**

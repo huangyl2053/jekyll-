@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisantei;
 
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 普徴仮算定賦課出力帳票entity
@@ -19,21 +18,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class FuchoKariSanteiEntity {
 
     private ReportId 帳票分類ID;
-    private RString 改頁出力順ID;
-    private RString 帳票名;
+    private ReportId 帳票ID;
+    private long 出力順ID;
 
     /**
      * コンストラクタです。
      *
-     * @param 帳票分類ID 帳票分類ID
-     * @param 改頁出力順ID 改頁出力順ID
-     * @param 帳票名 帳票名
+     * @param 帳票分類ID ReportId
+     * @param 帳票ID ReportId
+     * @param 出力順ID long
      */
     public FuchoKariSanteiEntity(ReportId 帳票分類ID,
-            RString 改頁出力順ID,
-            RString 帳票名) {
+            ReportId 帳票ID,
+            long 出力順ID) {
         this.帳票分類ID = 帳票分類ID;
-        this.改頁出力順ID = 改頁出力順ID;
-        this.帳票名 = 帳票名;
+        this.帳票ID = 帳票ID;
+        this.出力順ID = 出力順ID;
     }
 }

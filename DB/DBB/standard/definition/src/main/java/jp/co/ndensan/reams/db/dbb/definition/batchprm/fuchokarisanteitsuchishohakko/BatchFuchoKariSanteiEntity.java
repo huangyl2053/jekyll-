@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisanteitsuchishohakko;
 
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * バッチ出力帳票一覧Entityクラスです。
@@ -20,18 +19,18 @@ public class BatchFuchoKariSanteiEntity {
 
     private ReportId 帳票分類ID;
     private ReportId 帳票ID;
-    private RString 出力順ID;
+    private long 出力順ID;
 
     /**
      * コンストラクタです。
      *
-     * @param 帳票分類ID 帳票分類ID
-     * @param 帳票ID 帳票ID
-     * @param 出力順ID 出力順ID
+     * @param 帳票分類ID ReportId
+     * @param 帳票ID ReportId
+     * @param 出力順ID long
      */
     public BatchFuchoKariSanteiEntity(ReportId 帳票分類ID,
             ReportId 帳票ID,
-            RString 出力順ID) {
+            long 出力順ID) {
         this.帳票分類ID = 帳票分類ID;
         this.帳票ID = 帳票ID;
         this.出力順ID = 出力順ID;
