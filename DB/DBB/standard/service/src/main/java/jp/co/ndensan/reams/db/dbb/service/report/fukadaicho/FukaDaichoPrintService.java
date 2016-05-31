@@ -13,8 +13,16 @@ import jp.co.ndensan.reams.db.dbb.business.report.fukadaicho.FukaDaichoProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.fukadaicho.FukaDaichoReport;
 import jp.co.ndensan.reams.db.dbb.entity.report.fukadaicho.FukaDaichoSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Printer;
+import jp.co.ndensan.reams.uz.uza.report.Report;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
+import jp.co.ndensan.reams.uz.uza.report.ReportManager;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
  * 賦課台帳（本算定）帳票PrintService
@@ -32,6 +40,33 @@ public class FukaDaichoPrintService {
     private static final int INDEX6 = 6;
     private static final int INDEX7 = 7;
     private static final int INDEX0 = 0;
+
+    /**
+     * printメソッド
+     *
+     * @param entity EditedHonSanteiFukaDaichoJoho
+     * @param reportManager ReportManager
+     */
+    public void printSingle(EditedHonSanteiFukaDaichoJoho entity, ReportManager reportManager) {
+        FukaDaichoProperty property = new FukaDaichoProperty();
+        try (ReportAssembler<FukaDaichoSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<FukaDaichoSource> reportSourceWriter
+                    = new ReportSourceWriter(assembler);
+            List<FukaDaichoItem> targets = setItems(entity);
+            new FukaDaichoReport(targets).writeBy(reportSourceWriter);
+        }
+    }
+
+    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
+            IReportProperty<T> property, ReportManager manager) {
+        ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
+        for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
+            builder.addBreak(breaker);
+        }
+        builder.isHojinNo(property.containsHojinNo());
+        builder.isKojinNo(property.containsKojinNo());
+        return builder.<T>create();
+    }
 
     /**
      * printメソッド

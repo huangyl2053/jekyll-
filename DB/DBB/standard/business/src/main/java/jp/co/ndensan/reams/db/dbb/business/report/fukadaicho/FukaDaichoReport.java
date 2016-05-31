@@ -25,7 +25,7 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
      *
      * @param targets List<FukaDaichoItem>
      */
-    protected FukaDaichoReport(List<FukaDaichoItem> targets) {
+    public FukaDaichoReport(List<FukaDaichoItem> targets) {
         this.targets = targets;
     }
 
