@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyotokkijiko.ChosahyoTokkijikoEntity;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyotokkijiko.ChosahyoTokkijikoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,15 +17,15 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSource> {
 
-    private final ChosahyoTokkijikoEntity entity;
+    private final ChosahyoTokkijikoBusiness business;
 
     /**
      * インスタンスを生成します。
      *
-     * @param entity 要介護認定調査票（特記事項）のentity
+     * @param business 要介護認定調査票（特記事項）のbusiness
      */
-    public ChosahyoTokkijikoReport(ChosahyoTokkijikoEntity entity) {
-        this.entity = entity;
+    public ChosahyoTokkijikoReport(ChosahyoTokkijikoBusiness business) {
+        this.business = business;
     }
 
     /**
@@ -35,7 +35,7 @@ public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSourc
      */
     @Override
     public void writeBy(ReportSourceWriter<ChosahyoTokkijikoReportSource> reportSourceWriter) {
-        IChosahyoTokkijikoEditor editor = new ChosahyoTokkijikoEditorImpl(entity);
+        IChosahyoTokkijikoEditor editor = new ChosahyoTokkijikoEditorImpl(business);
         IChosahyoTokkijikoBuilder builder = new ChosahyoTokkijikoBuilderImpl(editor);
         reportSourceWriter.writeLine(builder);
     }
