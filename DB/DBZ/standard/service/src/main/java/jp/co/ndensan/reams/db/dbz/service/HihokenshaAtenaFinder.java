@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 /**
  * ビジネス設計_DBUMN00000_被保険者・宛名情報取得。
  *
- * @reamsid_L DBB-0980-590 yangchenbing
+ * @reamsid_L DBC-0980-590 yangchenbing
  */
 public class HihokenshaAtenaFinder {
 
