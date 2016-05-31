@@ -99,10 +99,6 @@ module DBZ {
                 return new UZA.TextBoxCode(this.convFiledName("txtHonninKankeisei"));
             }
 
-            public lblHonninKankeiseiMei(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblHonninKankeiseiMei"));
-            }
-
             public radKannaiKangai(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radKannaiKangai"));
             }
