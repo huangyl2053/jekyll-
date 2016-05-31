@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011.Hoka
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2040011.HokaShichosonJyusyochiTokureisyaKanriHandler;
 import jp.co.ndensan.reams.db.dba.service.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -27,9 +29,11 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -54,6 +58,10 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
     private static final RString SYUSEI = new RString("修正");
     private static final RString 新規 = new RString("Added");
     private static final RString 修正 = new RString("Modified");
+    private static final RString TSUIKA = new RString("追加");
+    private static final RString KOSHIN = new RString("修正");
+    private static final RString SAKUJYO = new RString("削除");
+    private static final RString ROOTTITLE = new RString("他市町村住所地特例異動の保存処理が完了しました。");
     private static final LockingKey LOCKINGKEY = new LockingKey(new RString("TatokuIdoKanri"));
     private static final QuestionMessage SYORIMESSAGE = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
             UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -120,8 +128,18 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            RString menuId = ResponseHolder.getMenuID();
+            if (((メニューID_施設入所により適用.equals(menuId) || メニューID_転入転出保留対象者管理.equals(menuId)
+                    || メニューID_施設退所により解除.equals(menuId))
+                    && RowState.Unchanged.equals(div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getRowState()))
+                    || (メニューID_施設変更により変更.equals(menuId) && !get変更(div))) {
+                InformationMessage message = new InformationMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode(),
+                        DbzInformationMessages.内容変更なしで保存不可.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
             set処理実行(div);
             RealInitialLocker.release(LOCKINGKEY);
+            div.getCcdKaigoKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBA2040011StateName.完了);
         }
         return ResponseData.of(div).respond();
@@ -177,8 +195,11 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
         } else if (メニューID_施設変更により変更.equals(menuId)) {
             manager.checkHenkoJotai(paramaterList);
         }
-        div.getShikakuKihonJoho().getCddTaJushochiTokureishaKanri().saveTaJushochiTokurei(
-                ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
+        if (メニューID_施設入所により適用.equals(menuId) || メニューID_転入転出保留対象者管理.equals(menuId)
+                || メニューID_施設退所により解除.equals(menuId)) {
+            div.getShikakuKihonJoho().getCddTaJushochiTokureishaKanri().saveTaJushochiTokurei(
+                    ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
+        }
         if (メニューID_施設変更により変更.equals(menuId)) {
             div.getCddShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
         }
@@ -202,6 +223,17 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
             );
             paramaterList.set(0, parameter);
         }
+    }
+
+    private boolean get変更(HokaShichosonJyusyochiTokureisyaKanriDiv div) {
+        boolean henko = false;
+        for (dgShisetsuNyutaishoRireki_Row row : div.getCddShisetsuNyutaishoRirekiKanri().get施設入退所履歴一覧()) {
+            if (TSUIKA.equals(row.getRowState()) || KOSHIN.equals(row.getRowState()) || SAKUJYO.equals(row.getRowState())) {
+                henko = true;
+                break;
+            }
+        }
+        return henko;
     }
 
     private enum TekiyoJogaiTotalErrorMessage implements IValidationMessage {
