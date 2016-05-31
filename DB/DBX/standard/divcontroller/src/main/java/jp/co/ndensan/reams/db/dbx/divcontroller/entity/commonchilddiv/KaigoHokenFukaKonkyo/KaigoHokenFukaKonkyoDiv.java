@@ -573,11 +573,6 @@ public class KaigoHokenFukaKonkyoDiv extends Panel implements IKaigoHokenFukaKon
     }
 
     @JsonIgnore
-    public Label getLblHokenryogaku() {
-        return this.getTblKikan().getLblHokenryogaku();
-    }
-
-    @JsonIgnore
     public Label getLblKikanData1() {
         return this.getTblKikan().getLblKikanData1();
     }
@@ -603,11 +598,6 @@ public class KaigoHokenFukaKonkyoDiv extends Panel implements IKaigoHokenFukaKon
     }
 
     @JsonIgnore
-    public Label getLblHokenryogakuData1() {
-        return this.getTblKikan().getLblHokenryogakuData1();
-    }
-
-    @JsonIgnore
     public Label getLblKikanData2() {
         return this.getTblKikan().getLblKikanData2();
     }
@@ -630,11 +620,6 @@ public class KaigoHokenFukaKonkyoDiv extends Panel implements IKaigoHokenFukaKon
     @JsonIgnore
     public Label getLblHokenryoSanshutsugakuData2() {
         return this.getTblKikan().getLblHokenryoSanshutsugakuData2();
-    }
-
-    @JsonIgnore
-    public Label getLblHokenryogakuData2() {
-        return this.getTblKikan().getLblHokenryogakuData2();
     }
 
     // </editor-fold>
