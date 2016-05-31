@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.service;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1001HihokenshaDaichoAliveDac;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshaatenafinder.HihokenshaAtenaResult;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.IShikibetsuTaishoFinder;
@@ -28,7 +29,7 @@ public class HihokenshaAtenaFinder {
      * @param 被保険者番号 HihokenshaNo
      * @return 宛名データ IShikibetsuTaisho
      */
-    public IShikibetsuTaisho getHihokenshaAtena(HihokenshaNo 被保険者番号) {
+    public HihokenshaAtenaResult getHihokenshaAtena(HihokenshaNo 被保険者番号) {
         if (被保険者番号 == null) {
             return null;
         }
@@ -40,6 +41,6 @@ public class HihokenshaAtenaFinder {
         IShikibetsuTaishoFinder 識別対象Finder = ShikibetsuTaishoService.getShikibetsuTaishoFinder();
         IShikibetsuTaisho 識別対象 = 識別対象Finder.get識別対象(GyomuCode.DB介護保険,
                 new ShikibetsuCode(entity.getHihokenshaNo().value()), KensakuYusenKubun.住登外優先);
-        return 識別対象;
+        return new HihokenshaAtenaResult(entity, 識別対象);
     }
 }
