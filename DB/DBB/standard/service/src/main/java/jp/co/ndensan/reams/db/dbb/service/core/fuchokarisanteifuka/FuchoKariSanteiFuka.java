@@ -151,7 +151,7 @@ public class FuchoKariSanteiFuka {
      * @return FuchoKariSanteiFukaParameter
      */
     public FuchoKarisanteiBatchParameter createFuchoKariSanteiParameter(FuchoKariSanteiFukaEntity entity) {
-        List<FuchoKariSanteiEntity> 出力帳票一覧List = get出力帳票一覧(entity.get出力帳票一覧List(),
+        List<FuchoKariSanteiEntity> 出力帳票一覧List = getChohyoIchiran(entity.get出力帳票一覧List(),
                 entity.get調定年度(), entity.get出力期());
         FuchoKarisanteiBatchParameter resultParameter = new FuchoKarisanteiBatchParameter();
         resultParameter.set調定年度(entity.get調定年度());
@@ -191,7 +191,7 @@ public class FuchoKariSanteiFuka {
      * @return バッチ出力帳票リスト List<FuchoKariSanteiEntity>
      * @throws ApplicationException ApplicationException
      */
-    public List<FuchoKariSanteiEntity> get出力帳票一覧(List<BatchFuchoKariSanteiResult> 出力帳票List,
+    public List<FuchoKariSanteiEntity> getChohyoIchiran(List<BatchFuchoKariSanteiResult> 出力帳票List,
             FlexibleYear 調定年度, RString 算定期) throws ApplicationException {
         List<FuchoKariSanteiEntity> resultList = new ArrayList<>();
         if (出力帳票List == null || 出力帳票List.isEmpty()) {
@@ -386,7 +386,7 @@ public class FuchoKariSanteiFuka {
      * @param 項目名 項目名
      * @return ChohyoSeigyoHanyo
      */
-    public ChohyoSeigyoHanyo getChohyoHanyoKey(SubGyomuCode サブ業務コード, ReportId 帳票分類ID,
+    public ChohyoSeigyoHanyo getChohyoSeigyoKey(SubGyomuCode サブ業務コード, ReportId 帳票分類ID,
             FlexibleYear 管理年度, RString 項目名) {
         DbT7067ChohyoSeigyoHanyoEntity entity
                 = 帳票制御汎用Dac.select帳票制御汎用キー(サブ業務コード, 帳票分類ID, 管理年度, 項目名);

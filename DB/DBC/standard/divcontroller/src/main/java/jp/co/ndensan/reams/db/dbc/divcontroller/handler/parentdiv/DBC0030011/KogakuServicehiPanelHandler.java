@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensakuResultEntity;
+import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensakuSearch;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.KogakuServicehiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.SearchKogakuHihokenshaDiv;
@@ -79,6 +80,7 @@ public class KogakuServicehiPanelHandler {
         panel指定_年月.getTxtTeikyoYM().clearValue();
         div.getSearchKogakuServicehiPanel().getRadSearchKubun().setSelectedKey(指定_被保険者);
         div.getSearchKogakuServicehiPanel().getSearchYM().setDisabled(true);
+        div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha().setDisabled(false);
     }
 
     /**
@@ -201,7 +203,10 @@ public class KogakuServicehiPanelHandler {
             if (決定日 != null && !決定日.isEmpty()) {
                 row.setTxtKetteiDate(new RString(決定日.toString()));
             }
-            row.setTxtShikyuKubun(entity.getEntity().get支給区分コード());
+            RString 支給区分コード = entity.getEntity().get支給区分コード();
+            if (支給区分コード != null && !支給区分コード.isEmpty()) {
+                row.setTxtShikyuKubun(ShikyuFushikyuKubun.toValue(支給区分コード).get名称());
+            }
             row.getTxtShikyuKingaku().setValue(entity.getEntity().get支給金額());
             // TODO QA780 boolean?entity.getEntity().is高額自動償還()
             row.setTxtKogakuAutoShokan(new RString("true"));
@@ -298,12 +303,16 @@ public class KogakuServicehiPanelHandler {
             panel被保険者.getTxtShinseiYMRange().setToValue(申請年月To);
             panel被保険者.getTxtKetteiYMRange().setFromValue(決定年月From);
             panel被保険者.getTxtKetteiYMRange().setToValue(決定年月To);
+            div.getSearchKogakuServicehiPanel().getSearchYM().setDisabled(true);
+            div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha().setDisabled(false);
         } else {
             div.getSearchKogakuServicehiPanel().getRadSearchKubun().setSelectedKey(指定_年月);
             SearchYMDiv panel年月 = div.getSearchKogakuServicehiPanel().getSearchYM();
             panel年月.getTxtTeikyoYM().setValue(提供年月);
             panel年月.getTxtShinseiYM().setValue(申請年月);
             panel年月.getTxtKetteiYM().setValue(決定年月);
+            div.getSearchKogakuServicehiPanel().getSearchYM().setDisabled(false);
+            div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha().setDisabled(true);
         }
     }
 

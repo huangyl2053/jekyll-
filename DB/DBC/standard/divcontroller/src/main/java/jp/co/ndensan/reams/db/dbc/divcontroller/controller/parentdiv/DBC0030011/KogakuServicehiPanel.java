@@ -144,6 +144,11 @@ public class KogakuServicehiPanel {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
+        if (指定_被保険者.equals(mapStr.get(指定R))) {
+            put指定_被保険者ViewState(div);
+        } else {
+            put指定_年月ViewState(div);
+        }
         getHandler(div).load該当者一覧情報();
         return ResponseData.of(div).setState(DBC0030011StateName.該当者一覧);
     }
