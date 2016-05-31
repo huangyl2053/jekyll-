@@ -11,18 +11,24 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum HeijunkaHenkoOutputJoken {
 
     /**
-     * コード:3 名称:追加候補者のみ 略称:追加候補者のみ
+     * コード:1 名称:追加候補者のみ 略称：無
      */
-    追加候補者のみ("3", "追加候補者のみ", "追加候補者のみ");
+    全件_追加候補者含む("1", "全件（追加候補者含む）"),
+    /**
+     * コード:2 名称:全件（追加候補者含まない） 略称:無
+     */
+    全件_追加候補者含まない("2", "全件（追加候補者含まない）"),
+    /**
+     * コード:3 名称:追加候補者のみ 略称:無
+     */
+    追加候補者のみ("3", "追加候補者のみ");
 
     private final RString code;
     private final RString fullName;
-    private final RString shortName;
 
-    private HeijunkaHenkoOutputJoken(String code, String fullname, String shortName) {
+    private HeijunkaHenkoOutputJoken(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
-        this.shortName = new RString(shortName);
     }
 
     /**
@@ -41,15 +47,6 @@ public enum HeijunkaHenkoOutputJoken {
      */
     public RString get名称() {
         return fullName;
-    }
-
-    /**
-     * 平準化変更通知書出力条件の略称を返します。
-     *
-     * @return 平準化変更通知書出力条件の略称
-     */
-    public RString get略称() {
-        return shortName;
     }
 
     /**
