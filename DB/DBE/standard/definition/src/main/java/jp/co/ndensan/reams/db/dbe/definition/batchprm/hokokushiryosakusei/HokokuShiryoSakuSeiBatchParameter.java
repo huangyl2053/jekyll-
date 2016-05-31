@@ -148,6 +148,13 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
     public SinsakaiHanteiJyokyoProcessParameter toSinsakaiHanteiJyokyoProcessParameter() {
 
         return new SinsakaiHanteiJyokyoProcessParameter(
+                jigyoJyokyoHokoku,
+                jissiJyokyoTokei,
+                sinsaHanteiJyokyo,
+                sinsakaiKanrenTokei,
+                csvShutsuryoku,
+                shutsuryokuFairu,
+                kijyunYMD,
                 RString.isNullOrEmpty(hokensyaNo),
                 hokensyaNo,
                 hiHokensyaKubun,
@@ -160,7 +167,6 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
                 RString.isNullOrEmpty(taishoGeppiTo),
                 taishoGeppiFrom,
                 taishoGeppiTo,
-                null,
                 isSinseiKubunSinseitoki,
                 isSinseiKubunHorei);
     }
