@@ -57,7 +57,7 @@ public final class KonkaiShoriNaiyoHandler {
                 ShoriName.新年度管理情報作成.toRString(),
                 new FlexibleYear(調定年度).plusYear(1));
         RString 新年度管理情報 = 新年度管理情報_未作成;
-        if (result != null && result.get基準年月日() != FlexibleDate.EMPTY) {
+        if (result != null && !FlexibleDate.EMPTY.equals(result.get基準年月日())) {
             新年度管理情報 = 新年度管理情報_作成済;
         }
         if (新年度管理情報_未作成.equals(新年度管理情報)) {

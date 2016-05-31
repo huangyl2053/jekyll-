@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsuBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsuControl;
@@ -34,6 +35,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.config.jushoinput.ConfigKeysCo
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
@@ -56,7 +58,7 @@ public class KaigoChohyoSeigyoKyotsuHandler {
     private static final RString 帳票出力順表示_SORT_ONLY = new RString("SORT_ONLY");
     private static final RString 帳票出力順表示_SHUKEI_NONE = new RString("SHUKEI_NONE");
     private static final RString 帳票出力順表示_KAIPEJIJOKEN_NONE = new RString("KAIPEJIJOKEN_NONE");
-    private static final RString 画面表示可 = new RString("02");
+    private static final RString 画面表示可 = new RString("2");
     private static final RString タグ挿入ボタン表示制御_表示する = new RString("1");
     private static final RString タグ_改行記号 = new RString("改行記号");
     private static final RString 埋め込み_改行記号 = new RString("<改行記号>");
@@ -99,38 +101,56 @@ public class KaigoChohyoSeigyoKyotsuHandler {
     public void initialize(SubGyomuCode subGyomuCode, ReportId reportId) {
         ChohyoSeigyoKyotsuControlManager manager = new ChohyoSeigyoKyotsuControlManager();
         ChohyoSeigyoKyotsuControl 帳票制御共通コントロール = manager.get帳票制御共通コントロール(subGyomuCode, reportId);
-        RString 文書番号使用区分 = 帳票制御共通コントロール.get文書番号使用区分();
-        if (画面表示可.equals(文書番号使用区分)) {
+        if (!画面表示可.equals(帳票制御共通コントロール.get住所編集使用区分())) {
             div.getAtesakiJusho().setDisplayNone(true);
-            div.getConfigInfo1().setDisplayNone(true);
-            div.getConfigInfo2().setDisplayNone(true);
-            div.getConfigInfo3().setDisplayNone(true);
-            div.getConfigInfo4().setDisplayNone(true);
-            div.getCommonButtonPanel().setDisplayNone(true);
-        } else {
-            setDataSource();
-            ChohyoSeigyoKyotsuManager 帳票制御共通Mgr = new ChohyoSeigyoKyotsuManager();
-            ChohyoSeigyoKyotsu 帳票制御共通 = 帳票制御共通Mgr.get帳票制御共通(subGyomuCode, reportId);
-            set初期表示(subGyomuCode, reportId, 帳票制御共通コントロール.get帳票出力順表示方法(), 帳票制御共通);
-
-            div.setHdnSubGyomuCode(subGyomuCode.value());
-            div.setHdnReportId(reportId.value());
-            div.setHdnReportName(帳票制御共通.get帳票分類名称());
-            div.setHdnIsDisplayInsertTag(タグ挿入ボタン表示制御_表示する);
-            Map<RString, RString> tagList = new HashMap<>();
-            tagList.put(タグ_改行記号, 埋め込み_改行記号);
-            tagList.put(タグ_市町村名, 埋め込み_市町村名);
-            tagList.put(タグ_都道府県名, 埋め込み_都道府県名);
-            tagList.put(タグ_本日日付, 埋め込み_本日日付);
-            tagList.put(タグ_郵便番号, 埋め込み_郵便番号);
-            tagList.put(タグ_所在地, 埋め込み_所在地);
-            tagList.put(タグ_庁舎名, 埋め込み_庁舎名);
-            tagList.put(タグ_電話番号, 埋め込み_電話番号);
-            tagList.put(タグ_内線番号, 埋め込み_内線番号);
-            tagList.put(タグ_部署名, 埋め込み_部署名);
-            tagList.put(タグ_担当者名, 埋め込み_担当者名);
-            div.setHdnTagList(DataPassingConverter.serialize((Serializable) tagList));
         }
+        if (!画面表示可.equals(帳票制御共通コントロール.get地区表示使用区分())) {
+            div.getConfigInfo1().setDisplayNone(true);
+        }
+        if (!画面表示可.equals(帳票制御共通コントロール.get世帯主表示使用区分()) && !画面表示可.equals(
+                帳票制御共通コントロール.get代納人表示使用区分()) && !画面表示可.equals(
+                        帳票制御共通コントロール.get口座マスク使用区分()) && !画面表示可.equals(
+                        帳票制御共通コントロール.get口座名義人カナ優先使用区分())) {
+            div.getConfigInfo2().setDisplayNone(true);
+        }
+        if (!画面表示可.equals(帳票制御共通コントロール.get外部帳票文字切れ制御使用区分()) && !画面表示可.equals(
+                帳票制御共通コントロール.get内部帳票文字切れ制御使用区分()) && !画面表示可.equals(
+                        帳票制御共通コントロール.get文字切れ分離制御使用区分()) && !画面表示可.equals(
+                        帳票制御共通コントロール.get代行プリント使用区分())
+                && !画面表示可.equals(帳票制御共通コントロール.get定型文文字サイズ使用区分())) {
+            div.getConfigInfo3().setDisplayNone(true);
+        }
+        if (!画面表示可.equals(帳票制御共通コントロール.getカスタマバーコード使用区分())) {
+            div.getConfigInfo4().setDisplayNone(true);
+        }
+        if (!画面表示可.equals(帳票制御共通コントロール.get文書番号使用区分()) && !画面表示可.equals(
+                帳票制御共通コントロール.get通知書定型文使用区分()) && !画面表示可.equals(
+                        帳票制御共通コントロール.get認証者使用区分()) && !画面表示可.equals(
+                        帳票制御共通コントロール.get介護問合せ先使用区分())) {
+            div.getCommonButtonPanel().setDisplayNone(true);
+        }
+        setDataSource();
+        ChohyoSeigyoKyotsuManager 帳票制御共通Mgr = new ChohyoSeigyoKyotsuManager();
+        ChohyoSeigyoKyotsu 帳票制御共通 = 帳票制御共通Mgr.get帳票制御共通(subGyomuCode, reportId);
+        set初期表示(subGyomuCode, reportId, 帳票制御共通コントロール.get帳票出力順表示方法(), 帳票制御共通);
+
+        div.setHdnSubGyomuCode(subGyomuCode.value());
+        div.setHdnReportId(reportId.value());
+        div.setHdnReportName(帳票制御共通.get帳票分類名称());
+        div.setHdnIsDisplayInsertTag(タグ挿入ボタン表示制御_表示する);
+        Map<RString, RString> tagList = new HashMap<>();
+        tagList.put(タグ_改行記号, 埋め込み_改行記号);
+        tagList.put(タグ_市町村名, 埋め込み_市町村名);
+        tagList.put(タグ_都道府県名, 埋め込み_都道府県名);
+        tagList.put(タグ_本日日付, 埋め込み_本日日付);
+        tagList.put(タグ_郵便番号, 埋め込み_郵便番号);
+        tagList.put(タグ_所在地, 埋め込み_所在地);
+        tagList.put(タグ_庁舎名, 埋め込み_庁舎名);
+        tagList.put(タグ_電話番号, 埋め込み_電話番号);
+        tagList.put(タグ_内線番号, 埋め込み_内線番号);
+        tagList.put(タグ_部署名, 埋め込み_部署名);
+        tagList.put(タグ_担当者名, 埋め込み_担当者名);
+        div.setHdnTagList(DataPassingConverter.serialize((Serializable) tagList));
     }
 
     /**
@@ -216,46 +236,52 @@ public class KaigoChohyoSeigyoKyotsuHandler {
         List<KeyValueDataSource> 地区表示2 = new ArrayList<>();
         地区表示2.add(new KeyValueDataSource(ChikuHyoji2.なし.getコード(), ChikuHyoji2.なし.get名称()));
         地区表示2.add(new KeyValueDataSource(ChikuHyoji2.地区の分類1.getコード(),
-                new RString(ConfigKeysCodeName.コード名称_地区の分類１.toString())));
+                DbBusinessConfig.get(ConfigKeysCodeName.コード名称_地区の分類１, RDate.getNowDate(),
+                        SubGyomuCode.URZ業務共通_共通系)));
         地区表示2.add(new KeyValueDataSource(ChikuHyoji2.地区の分類2.getコード(),
-                new RString(ConfigKeysCodeName.コード名称_地区の分類２.toString())));
+                DbBusinessConfig.get(ConfigKeysCodeName.コード名称_地区の分類２, RDate.getNowDate(),
+                        SubGyomuCode.URZ業務共通_共通系)));
         地区表示2.add(new KeyValueDataSource(ChikuHyoji2.地区の分類3.getコード(),
-                new RString(ConfigKeysCodeName.コード名称_地区の分類３.toString())));
+                DbBusinessConfig.get(ConfigKeysCodeName.コード名称_地区の分類３, RDate.getNowDate(),
+                        SubGyomuCode.URZ業務共通_共通系)));
         地区表示2.add(new KeyValueDataSource(ChikuHyoji2.納組コード.getコード(), ChikuHyoji2.納組コード.get名称()));
         div.getConfigInfo1().getDdlHyojiCodeName2().setDataSource(地区表示2);
 
         List<KeyValueDataSource> 地区表示3 = new ArrayList<>();
         地区表示3.add(new KeyValueDataSource(ChikuHyoji3.なし.getコード(), ChikuHyoji3.なし.get名称()));
         地区表示3.add(new KeyValueDataSource(ChikuHyoji3.地区の分類1.getコード(),
-                new RString(ConfigKeysCodeName.コード名称_地区の分類１.toString())));
+                DbBusinessConfig.get(ConfigKeysCodeName.コード名称_地区の分類１, RDate.getNowDate(),
+                        SubGyomuCode.URZ業務共通_共通系)));
         地区表示3.add(new KeyValueDataSource(ChikuHyoji3.地区の分類2.getコード(),
-                new RString(ConfigKeysCodeName.コード名称_地区の分類２.toString())));
+                DbBusinessConfig.get(ConfigKeysCodeName.コード名称_地区の分類２, RDate.getNowDate(),
+                        SubGyomuCode.URZ業務共通_共通系)));
         地区表示3.add(new KeyValueDataSource(ChikuHyoji3.地区の分類3.getコード(),
-                new RString(ConfigKeysCodeName.コード名称_地区の分類３.toString())));
+                DbBusinessConfig.get(ConfigKeysCodeName.コード名称_地区の分類３, RDate.getNowDate(),
+                        SubGyomuCode.URZ業務共通_共通系)));
         地区表示3.add(new KeyValueDataSource(ChikuHyoji3.納組コード.getコード(), ChikuHyoji3.納組コード.get名称()));
         div.getConfigInfo1().getDdlHyojiCodeName3().setDataSource(地区表示3);
 
         List<KeyValueDataSource> 世帯主 = new ArrayList<>();
+        世帯主.add(new KeyValueDataSource(SetainushiHyojiUmu.表示する.getコード(), SetainushiHyojiUmu.表示する.get名称()));
         世帯主.add(new KeyValueDataSource(
                 SetainushiHyojiUmu.表示しない.getコード(), SetainushiHyojiUmu.表示しない.get名称()));
-        世帯主.add(new KeyValueDataSource(SetainushiHyojiUmu.表示する.getコード(), SetainushiHyojiUmu.表示する.get名称()));
         div.getConfigInfo2().getRadSetaiNushiHyoji().setDataSource(世帯主);
 
         List<KeyValueDataSource> 代納人 = new ArrayList<>();
-        代納人.add(new KeyValueDataSource(DianoninHyojiUmu.表示しない.getコード(), DianoninHyojiUmu.表示しない.get名称()));
         代納人.add(new KeyValueDataSource(DianoninHyojiUmu.表示する.getコード(), DianoninHyojiUmu.表示する.get名称()));
+        代納人.add(new KeyValueDataSource(DianoninHyojiUmu.表示しない.getコード(), DianoninHyojiUmu.表示しない.get名称()));
         div.getConfigInfo2().getRadDainoninHyoji().setDataSource(代納人);
 
         List<KeyValueDataSource> 口座番号マスク = new ArrayList<>();
-        口座番号マスク.add(new KeyValueDataSource(KozaMaskUmu.マスクしない.getコード(), KozaMaskUmu.マスクしない.get名称()));
         口座番号マスク.add(new KeyValueDataSource(KozaMaskUmu.マスクする.getコード(), KozaMaskUmu.マスクする.get名称()));
+        口座番号マスク.add(new KeyValueDataSource(KozaMaskUmu.マスクしない.getコード(), KozaMaskUmu.マスクしない.get名称()));
         div.getConfigInfo2().getRadKozaMask().setDataSource(口座番号マスク);
 
         List<KeyValueDataSource> 口座名義人カナ優先区分 = new ArrayList<>();
-        口座名義人カナ優先区分.add(new KeyValueDataSource(KozaMeigininKanaYusenKubun.表示しない.getコード(),
-                KozaMeigininKanaYusenKubun.表示しない.get名称()));
         口座名義人カナ優先区分.add(new KeyValueDataSource(KozaMeigininKanaYusenKubun.表示する.getコード(),
                 KozaMeigininKanaYusenKubun.表示する.get名称()));
+        口座名義人カナ優先区分.add(new KeyValueDataSource(KozaMeigininKanaYusenKubun.表示しない.getコード(),
+                KozaMeigininKanaYusenKubun.表示しない.get名称()));
         div.getConfigInfo2().getRadKozaMeigininKana().setDataSource(口座名義人カナ優先区分);
 
         List<KeyValueDataSource> 外部帳票文字切れ制御 = new ArrayList<>();
@@ -267,23 +293,23 @@ public class KaigoChohyoSeigyoKyotsuHandler {
 
         List<KeyValueDataSource> 内部帳票文字切れ制御 = new ArrayList<>();
         内部帳票文字切れ制御.add(new KeyValueDataSource(NaibuChohyoMojigireSeigyo.印字可能範囲まで印字する.getコード(),
-                NaibuChohyoMojigireSeigyo.印字可能範囲まで印字する.get名称()));
+                NaibuChohyoMojigireSeigyo.印字可能範囲まで印字する.get略称()));
         内部帳票文字切れ制御.add(new KeyValueDataSource(NaibuChohyoMojigireSeigyo.ｵｰﾊﾞｰﾌﾛｰ文字を印字する.getコード(),
-                NaibuChohyoMojigireSeigyo.ｵｰﾊﾞｰﾌﾛｰ文字を印字する.get名称()));
+                NaibuChohyoMojigireSeigyo.ｵｰﾊﾞｰﾌﾛｰ文字を印字する.get略称()));
         div.getConfigInfo3().getRadMonjiKireCrtlNaibu().setDataSource(内部帳票文字切れ制御);
 
         List<KeyValueDataSource> 文字切れ分離制御 = new ArrayList<>();
-        文字切れ分離制御.add(new KeyValueDataSource(MojigireBunriSeigyo.分けない.getコード(),
-                MojigireBunriSeigyo.分けない.get名称()));
         文字切れ分離制御.add(new KeyValueDataSource(MojigireBunriSeigyo.分ける.getコード(),
-                MojigireBunriSeigyo.分ける.get名称()));
+                MojigireBunriSeigyo.分ける.get略称()));
+        文字切れ分離制御.add(new KeyValueDataSource(MojigireBunriSeigyo.分けない.getコード(),
+                MojigireBunriSeigyo.分けない.get略称()));
         div.getConfigInfo3().getRadMojiKireBunriCtrl().setDataSource(文字切れ分離制御);
 
         List<KeyValueDataSource> 代行プリント有無 = new ArrayList<>();
-        代行プリント有無.add(new KeyValueDataSource(DaikoPrintUmu.プリントしない.getコード(),
-                DaikoPrintUmu.プリントしない.get名称()));
         代行プリント有無.add(new KeyValueDataSource(DaikoPrintUmu.プリントする.getコード(),
                 DaikoPrintUmu.プリントする.get名称()));
+        代行プリント有無.add(new KeyValueDataSource(DaikoPrintUmu.プリントしない.getコード(),
+                DaikoPrintUmu.プリントしない.get名称()));
         div.getConfigInfo3().getRadDaikoPrintUmu().setDataSource(代行プリント有無);
 
         List<KeyValueDataSource> 帳票文言様式 = new ArrayList<>();

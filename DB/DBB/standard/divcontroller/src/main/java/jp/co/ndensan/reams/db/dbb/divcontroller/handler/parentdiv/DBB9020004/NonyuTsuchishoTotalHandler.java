@@ -126,21 +126,21 @@ public final class NonyuTsuchishoTotalHandler {
 
         List<KeyValueDataSource> 納付額欄 = new ArrayList<>();
         納付額欄.add(new KeyValueDataSource(NofugakuranHyojiKubun.__を印字する.getコード(),
-                NofugakuranHyojiKubun.__を印字する.get名称()));
+                NofugakuranHyojiKubun.__を印字する.get略称()));
         納付額欄.add(new KeyValueDataSource(NofugakuranHyojiKubun._口座振替_を印字する.getコード(),
-                NofugakuranHyojiKubun._口座振替_を印字する.get名称()));
+                NofugakuranHyojiKubun._口座振替_を印字する.get略称()));
         納付額欄.add(new KeyValueDataSource(NofugakuranHyojiKubun.星印を印字する.getコード(),
-                NofugakuranHyojiKubun.星印を印字する.get名称()));
+                NofugakuranHyojiKubun.星印を印字する.get略称()));
         納付額欄.add(new KeyValueDataSource(NofugakuranHyojiKubun.金額出力.getコード(),
-                NofugakuranHyojiKubun.金額出力.get名称()));
+                NofugakuranHyojiKubun.金額出力.get略称()));
         div.getNotsuInfo().getDdlKozaMongonRyoshushoNofugaku().setDataSource(納付額欄);
         div.getNotsuInfo().getDdlKozaMongonNofushoNofugaku().setDataSource(納付額欄);
 
         List<KeyValueDataSource> 領収印欄 = new ArrayList<>();
         領収印欄.add(new KeyValueDataSource(RyoshuinranHyojiKubun.__を印字する.getコード(),
-                RyoshuinranHyojiKubun.__を印字する.get名称()));
+                RyoshuinranHyojiKubun.__を印字する.get略称()));
         領収印欄.add(new KeyValueDataSource(RyoshuinranHyojiKubun._口座振替_を印字する.getコード(),
-                RyoshuinranHyojiKubun._口座振替_を印字する.get名称()));
+                RyoshuinranHyojiKubun._口座振替_を印字する.get略称()));
         div.getNotsuInfo().getDdlKozaMongonRyoshushoRyoshuin().setDataSource(領収印欄);
         div.getNotsuInfo().getDdlKozaMongonNofushoRyoshuin().setDataSource(領収印欄);
 
@@ -170,19 +170,19 @@ public final class NonyuTsuchishoTotalHandler {
 
         List<KeyValueDataSource> 納期限出力方法 = new ArrayList<>();
         納期限出力方法.add(new KeyValueDataSource(NokigenShutsuryokuHoho.全ての期分を印字する.getコード(),
-                NokigenShutsuryokuHoho.全ての期分を印字する.get名称()));
+                NokigenShutsuryokuHoho.全ての期分を印字する.get略称()));
         納期限出力方法.add(new KeyValueDataSource(
                 NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.getコード(),
-                NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.get名称()));
+                NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.get略称()));
         div.getNotsuInfo().getDdlNokigenShutsuryokuHoho().setDataSource(納期限出力方法);
 
         List<KeyValueDataSource> 口座振替のOCR出力方法 = new ArrayList<>();
         口座振替のOCR出力方法.add(new KeyValueDataSource(OCRShutsuryokuHoho._口座振替_ならOCR欄を_星印_でつぶす.getコード(),
-                OCRShutsuryokuHoho._口座振替_ならOCR欄を_星印_でつぶす.get名称()));
+                OCRShutsuryokuHoho._口座振替_ならOCR欄を_星印_でつぶす.get略称()));
         口座振替のOCR出力方法.add(new KeyValueDataSource(OCRShutsuryokuHoho._口座振替_ならOCR欄を印字しない.getコード(),
-                OCRShutsuryokuHoho._口座振替_ならOCR欄を印字しない.get名称()));
+                OCRShutsuryokuHoho._口座振替_ならOCR欄を印字しない.get略称()));
         口座振替のOCR出力方法.add(new KeyValueDataSource(OCRShutsuryokuHoho._口座振替_ならOCR欄を印字する.getコード(),
-                OCRShutsuryokuHoho._口座振替_ならOCR欄を印字する.get名称()));
+                OCRShutsuryokuHoho._口座振替_ならOCR欄を印字する.get略称()));
         div.getNotsuInfo().getDdlOCRShutsuryokuHoho().setDataSource(口座振替のOCR出力方法);
 
         List<KeyValueDataSource> 差額令書発行指示区分 = new ArrayList<>();
@@ -207,9 +207,9 @@ public final class NonyuTsuchishoTotalHandler {
 
         List<KeyValueDataSource> 当初出力方法 = new ArrayList<>();
         当初出力方法.add(new KeyValueDataSource(ToshoShutsuryokuHoho.前期_中期_後期を全件出力.getコード(),
-                ToshoShutsuryokuHoho.前期_中期_後期を全件出力.get名称()));
+                ToshoShutsuryokuHoho.前期_中期_後期を全件出力.get略称()));
         当初出力方法.add(new KeyValueDataSource(ToshoShutsuryokuHoho.前期_中期_後期を別々に出力.getコード(),
-                ToshoShutsuryokuHoho.前期_中期_後期を別々に出力.get名称()));
+                ToshoShutsuryokuHoho.前期_中期_後期を別々に出力.get略称()));
         div.getNotsuInfo().getRadToshoShutsuryokuK().setDataSource(当初出力方法);
         div.getNotsuInfo().getRadToshoShutsuryokuH().setDataSource(当初出力方法);
 
@@ -349,7 +349,7 @@ public final class NonyuTsuchishoTotalHandler {
         }
         ChohyoSeigyoHanyo 帳票制御汎用_速報取込区分 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
                 new ReportId(帳票分類ID), 管理年度, キー_速報取込区分);
-//        div.getNotsuInfo().getRadSokuhoTorikomiKubun().setSelectedKey(SokuhoTorikomiKubun.取り込まない.getコード());
+        div.getNotsuInfo().getRadSokuhoTorikomiKubun().setSelectedKey(SokuhoTorikomiKubun.取り込まない.getコード());
         if (帳票制御汎用_速報取込区分 != null) {
             div.getNotsuInfo().getRadSokuhoTorikomiKubun().setSelectedKey(帳票制御汎用_速報取込区分.get設定値());
         }
