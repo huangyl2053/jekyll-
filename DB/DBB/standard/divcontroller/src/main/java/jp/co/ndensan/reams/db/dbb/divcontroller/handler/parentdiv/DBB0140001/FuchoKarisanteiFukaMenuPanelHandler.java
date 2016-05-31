@@ -175,7 +175,7 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
         帳票作成個別情報Panel.getFuchoTsuchiKobetsuJoho().getTxtHakkoYMD().setValue(発行日);
         RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, システム日時, SubGyomuCode.DBB介護賦課);
         ChohyoSeigyoHanyo 出力方法 = FuchoKariSanteiFuka.createInstance()
-                .getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, new FlexibleYear(調定年度), 項目名);
+                .getChohyoSeigyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, new FlexibleYear(調定年度), 項目名);
         List<Kitsuki> 期月リスト = new FuchoKiUtil().get期月リスト().filtered仮算定期間().toList();
         // TODO 57行：どの戻り値ですが？
         if (定値_ゼロ.equals(出力方法.get設定値())) {

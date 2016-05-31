@@ -205,7 +205,7 @@ public class FuchoKariSanteiFuka {
             RString 項目名 = get項目名(設定値);
             RString 納通連帳区分 = get普徴期情報_納通連帳区分(算定期, 調定年月日);
 
-            ChohyoSeigyoHanyo 帳票タイプ = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 出力帳票entity.get帳票ID(),
+            ChohyoSeigyoHanyo 帳票タイプ = getChohyoSeigyoKey(SubGyomuCode.DBB介護賦課, 出力帳票entity.get帳票ID(),
                     調定年度, 項目名);
             if (帳票タイプ == null) {
                 throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
@@ -357,7 +357,7 @@ public class FuchoKariSanteiFuka {
     private ReportId get通知書の帳票ID(RString 納通連帳区分,
             FlexibleYear 調定年度,
             ReportId 帳票ID) {
-        ChohyoSeigyoHanyo 帳票タイプその他 = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票ID, 調定年度, その他納入通知書タイプ);
+        ChohyoSeigyoHanyo 帳票タイプその他 = getChohyoSeigyoKey(SubGyomuCode.DBB介護賦課, 帳票ID, 調定年度, その他納入通知書タイプ);
         if (帳票タイプその他 == null) {
             throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
         }
