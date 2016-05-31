@@ -65,12 +65,13 @@ public class KakushuTsuchishoSakuseiKobetsu {
     public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onLoad(KakushuTsuchishoSakuseiKobetsuDiv div) {
         TsuchishoNo 通知書番号;
         FlexibleYear 賦課年度;
-        LasdecCode 市町村コード = null;
+        LasdecCode 市町村コード;
         ShikibetsuCode 識別コード;
         if (即時賦課更正.equals(ResponseHolder.getMenuID())) {
             // TODO この画面が実装できない。
             通知書番号 = null;
             賦課年度 = null;
+            市町村コード = null;
             識別コード = null;
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(再検索する, true);
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索結果一覧へ, true);
@@ -78,14 +79,17 @@ public class KakushuTsuchishoSakuseiKobetsu {
                 || 通知書発行後異動把握_本算定.equals(ResponseHolder.getMenuID())) {
             RString parameter = ViewStateHolder.get(ViewStateKeys.各種通知書作成戻るフラグ, RString.class);
             if (戻るフラグ.equals(parameter)) {
+                // TODO
                 List<IdoTaishoshaIchiranparameter> listPar = ViewStateHolder.get(ViewStateKeys.異動者一覧Par, List.class);
                 通知書番号 = listPar.get(0).getTsuchishoNo();
                 賦課年度 = listPar.get(0).getFukaNendo();
+                市町村コード = null;
                 識別コード = listPar.get(0).getShikibetsuCode();
             } else {
                 // TODO この画面が実装できない。
                 通知書番号 = null;
                 賦課年度 = null;
+                市町村コード = null;
                 識別コード = null;
             }
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(再検索する, true);
