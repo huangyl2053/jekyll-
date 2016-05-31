@@ -160,7 +160,19 @@ public class DbT2009RentaiGimushaDac implements ISaveable<DbT2009RentaiGimushaEn
     public int save(DbT2009RentaiGimushaEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("連帯納付義務者エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
+//        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * DbT2009RentaiGimushaEntityをdeleteします。
+     *
+     * @param entity DbT2009RentaiGimushaEntity
+     * @return delete件数
+     */
+    @Transaction
+    public int delete(DbT2009RentaiGimushaEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("連帯納付義務者エンティティ"));
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
-        //return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }
