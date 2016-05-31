@@ -1,13 +1,24 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
-// <reference path="../d.ts/DBZCommonChildDiv.d.ts" />
 
 module DBC {
 
      export module JukyushaIdoRenrakuhyo {
 
         export class Events {
+
+            public static onBlur_txtHokenshaNo(): string {
+                return "onBlur_txtHokenshaNo";
+            }
+
+            public static onOkClose_btnSearch(): string {
+                return "onOkClose_btnSearch";
+            }
+
+            public static onBeforeOpenDialog_btnSearch(): string {
+                return "onBeforeOpenDialog_btnSearch";
+            }
 
         }
 
@@ -38,60 +49,60 @@ module DBC {
                 return new UZA.Panel(this.convFiledName("JukyushaIdoRenrakuhyoKihonJoho"));
             }
 
-            public txtRenrakuhyoIdoDate(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtRenrakuhyoIdoDate"));
+            public txtIdoYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIdoYMD"));
             }
 
-            public radRenrakuhyoIdoKubun(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radRenrakuhyoIdoKubun"));
+            public radIdoKubun(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radIdoKubun"));
             }
 
-            public ddlIdoJiyu(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlIdoJiyu"));
+            public ddlJukyushaIdoJiyu(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlJukyushaIdoJiyu"));
             }
 
-            public txtRenrakuhyoHihoNo(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtRenrakuhyoHihoNo"));
+            public txtHiHokenshaNo(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtHiHokenshaNo"));
             }
 
-            public txtRenrakuhyoHihoName(): UZA.TextBoxKana {
-                return new UZA.TextBoxKana(this.convFiledName("txtRenrakuhyoHihoName"));
+            public txtHiHokenshaNameKana(): UZA.TextBoxKana {
+                return new UZA.TextBoxKana(this.convFiledName("txtHiHokenshaNameKana"));
             }
 
-            public txtHihoBirthday(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtHihoBirthday"));
+            public txtUmareYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtUmareYMD"));
             }
 
-            public radHihoSex(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radHihoSex"));
+            public radSeibetsu(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radSeibetsu"));
             }
 
-            public txtShikakuShutokuDate(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShikakuShutokuDate"));
+            public txtShikakuShutokuYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShikakuShutokuYMD"));
             }
 
-            public txtShikakuSoshitsuDate(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShikakuSoshitsuDate"));
+            public txtShikakuSoshitsuYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShikakuSoshitsuYMD"));
             }
 
-            public txtShokisaiHokenshaNo(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtShokisaiHokenshaNo"));
+            public txtShoKisaiHokenshaNo(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtShoKisaiHokenshaNo"));
             }
 
             public txtKoikiHokenshaNo(): UZA.TextBoxCode {
                 return new UZA.TextBoxCode(this.convFiledName("txtKoikiHokenshaNo"));
             }
 
-            public txtRenrakuhyoSendYM(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtRenrakuhyoSendYM"));
-            }
-
-            public JukyushaIdoRenrakuhyoTeisei(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JukyushaIdoRenrakuhyoTeisei"));
+            public txtSofuYM(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSofuYM"));
             }
 
             public lin2(): UZA.HorizontalLine {
                 return new UZA.HorizontalLine(this.convFiledName("lin2"));
+            }
+
+            public JukyushaIdoRenrakuhyoTeisei(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("JukyushaIdoRenrakuhyoTeisei"));
             }
 
             public txtTeiseiYMD(): UZA.TextBoxDate {
@@ -106,16 +117,16 @@ module DBC {
                 return new UZA.HorizontalLine(this.convFiledName("lin3"));
             }
 
-            public JukyushaIdoRenrakuhyoYokaigonintei(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JukyushaIdoRenrakuhyoYokaigonintei"));
+            public YokaigoNinteiPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("YokaigoNinteiPanel"));
             }
 
-            public txtShinseiDate(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinseiDate"));
+            public txtShinseiYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinseiYMD"));
             }
 
-            public radShinseiType(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radShinseiType"));
+            public radShinseiShubetsu(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radShinseiShubetsu"));
             }
 
             public btnYokaigoninteiRireki(): UZA.Button {
@@ -130,68 +141,68 @@ module DBC {
                 return new UZA.RadioButton(this.convFiledName("radHenkoShinseichuKubun"));
             }
 
-            public txtNinteiDateRange(): UZA.TextBoxDateRange {
-                return new UZA.TextBoxDateRange(this.convFiledName("txtNinteiDateRange"));
+            public txtNinteiYukoKikanYMD(): UZA.TextBoxDateRange {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtNinteiYukoKikanYMD"));
             }
 
-            public radMinashiYokaigoKubun(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radMinashiYokaigoKubun"));
+            public radMinashiYokaigoJotaiKubun(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radMinashiYokaigoJotaiKubun"));
             }
 
-            public JukyushaIdoRenrakuhyoShikyugendoKijungaku(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JukyushaIdoRenrakuhyoShikyugendoKijungaku"));
+            public ShikyuGendoKijungakuPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ShikyuGendoKijungakuPanel"));
             }
 
             public lblKyuHomonTsusho(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblKyuHomonTsusho"));
             }
 
-            public txtKyuHomonTsushoShikyuGendoKijungaku(): UZA.TextBoxNum {
-                return new UZA.TextBoxNum(this.convFiledName("txtKyuHomonTsushoShikyuGendoKijungaku"));
+            public txtHomonTsushoServiceShikyuGendoKijungaku(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtHomonTsushoServiceShikyuGendoKijungaku"));
             }
 
-            public txtKyuHomonTsushoKanriTekiyoDateRange(): UZA.TextBoxDateRange {
-                return new UZA.TextBoxDateRange(this.convFiledName("txtKyuHomonTsushoKanriTekiyoDateRange"));
+            public txtHomonTsushoServiceJogenKanriTekiyoYMD(): UZA.TextBoxDateRange {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtHomonTsushoServiceJogenKanriTekiyoYMD"));
             }
 
             public lblKyuTankiNyusho(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblKyuTankiNyusho"));
             }
 
-            public txtKyuTankiNyushoShikyuGendoKijungaku(): UZA.TextBoxNum {
-                return new UZA.TextBoxNum(this.convFiledName("txtKyuTankiNyushoShikyuGendoKijungaku"));
+            public txtTankiNyushoServiceShikyuGendoKijungaku(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtTankiNyushoServiceShikyuGendoKijungaku"));
             }
 
-            public txtKyuTankiNyushoKanriTekiyoDateRange(): UZA.TextBoxDateRange {
-                return new UZA.TextBoxDateRange(this.convFiledName("txtKyuTankiNyushoKanriTekiyoDateRange"));
+            public txtTankinyushoServiceJogenKanriTekiyoYMD(): UZA.TextBoxDateRange {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtTankinyushoServiceJogenKanriTekiyoYMD"));
             }
 
-            public JukyushaIdoRenrakuhyoKyotakuServicePlan(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JukyushaIdoRenrakuhyoKyotakuServicePlan"));
+            public KyotakuServicePlanPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KyotakuServicePlanPanel"));
             }
 
-            public radPlanSakuseiKubun(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radPlanSakuseiKubun"));
+            public radKyotakuServiceSakuseiKubun(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKyotakuServiceSakuseiKubun"));
             }
 
             public btnKyotakuServiceRireki(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnKyotakuServiceRireki"));
             }
 
-            public txtShienJigyoshaNo(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtShienJigyoshaNo"));
+            public txtKyotakuKaigoShienJigyoshoNo(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtKyotakuKaigoShienJigyoshoNo"));
             }
 
-            public txtShienJigyoshaName(): UZA.TextBoxKana {
-                return new UZA.TextBoxKana(this.convFiledName("txtShienJigyoshaName"));
+            public txtKyotakuKaigoShienJigyoshoName(): UZA.TextBoxKana {
+                return new UZA.TextBoxKana(this.convFiledName("txtKyotakuKaigoShienJigyoshoName"));
             }
 
-            public txtKyotakuServicePlanTekiyoDateRange(): UZA.TextBoxDateRange {
-                return new UZA.TextBoxDateRange(this.convFiledName("txtKyotakuServicePlanTekiyoDateRange"));
+            public txtKyotakuServiceTekiyoYMD(): UZA.TextBoxDateRange {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtKyotakuServiceTekiyoYMD"));
             }
 
-            public radShokiboKyotakuServiceRiyoUmu(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radShokiboKyotakuServiceRiyoUmu"));
+            public radShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag"));
             }
 
             public JushochiTokureiPanel(): UZA.Panel {
@@ -202,16 +213,28 @@ module DBC {
                 return new UZA.RadioButton(this.convFiledName("radJushochiTokureiTaishoshaKubun"));
             }
 
-            public txtJushochiTokureiTekiyoDateRange(): UZA.TextBoxDateRange {
-                return new UZA.TextBoxDateRange(this.convFiledName("txtJushochiTokureiTekiyoDateRange"));
+            public txtJushochiTokureiTekiyoYMD(): UZA.TextBoxDateRange {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtJushochiTokureiTekiyoYMD"));
             }
 
-            //public ccdHokenshaJoho(): DBZ.HokenshaJoho.ModeController {
-            //    return new DBZ.HokenshaJoho.ModeController(this.convFiledName("ccdHokenshaJoho"));
-            //}
+            public HokenshaJohoPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("HokenshaJohoPanel"));
+            }
 
-            public JukyushaIdoRenrakuhyoGemmenGengaku(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JukyushaIdoRenrakuhyoGemmenGengaku"));
+            public txtShisetsuShozaiHokenjaNo(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtShisetsuShozaiHokenjaNo"));
+            }
+
+            public btnHokenshaSelect(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnHokenshaSelect"));
+            }
+
+            public txtHokenshaMeisho(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtHokenshaMeisho"));
+            }
+
+            public GemmenGengakuPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("GemmenGengakuPanel"));
             }
 
             public radGemmenShinseichuKubun(): UZA.RadioButton {
@@ -230,16 +253,16 @@ module DBC {
                 return new UZA.Panel(this.convFiledName("JukyushaIdoRenrakuhyoRiyoshaFutan"));
             }
 
-            public radRiyoshaFutanKubun(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radRiyoshaFutanKubun"));
+            public radRiyoshaFutanKubunCode(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radRiyoshaFutanKubunCode"));
             }
 
-            public txtRiyoshaFutanKyufuritsu(): UZA.TextBoxNum {
-                return new UZA.TextBoxNum(this.convFiledName("txtRiyoshaFutanKyufuritsu"));
+            public txtKyufuritsu(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtKyufuritsu"));
             }
 
-            public txtRiyoshaFutanTekiyoDateRange(): UZA.TextBoxDateRange {
-                return new UZA.TextBoxDateRange(this.convFiledName("txtRiyoshaFutanTekiyoDateRange"));
+            public txtTekiyoYMD(): UZA.TextBoxDateRange {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtTekiyoYMD"));
             }
 
             public JukyushaIdoRenrakuhyoFukushiHojinKeigen(): UZA.Panel {
@@ -250,8 +273,8 @@ module DBC {
                 return new UZA.TextBoxNum(this.convFiledName("txtKeigenritsu"));
             }
 
-            public txtKeigenritsuTekiyoDateRange(): UZA.TextBoxDateRange {
-                return new UZA.TextBoxDateRange(this.convFiledName("txtKeigenritsuTekiyoDateRange"));
+            public txtKeigenritsuTekiyoYMD(): UZA.TextBoxDateRange {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtKeigenritsuTekiyoYMD"));
             }
 
             public JukyushaIdoRenrakuhyoHyojunFutan(): UZA.Panel {
@@ -262,36 +285,36 @@ module DBC {
                 return new UZA.RadioButton(this.convFiledName("radHyojunFutanKubun"));
             }
 
-            public txtHyojunFutangaku(): UZA.TextBoxNum {
-                return new UZA.TextBoxNum(this.convFiledName("txtHyojunFutangaku"));
+            public txtFutangaku(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtFutangaku"));
             }
 
-            public txtHyojunFutanTekiyoDateRange(): UZA.TextBoxDateRange {
-                return new UZA.TextBoxDateRange(this.convFiledName("txtHyojunFutanTekiyoDateRange"));
+            public txtFutangakuTekiyoYMD(): UZA.TextBoxDateRange {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtFutangakuTekiyoYMD"));
             }
 
             public JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi"));
             }
 
-            public radNinteiShinseichuKubun(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radNinteiShinseichuKubun"));
+            public radTokuteiNyushoshaNinteiShinseichuKubun(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radTokuteiNyushoshaNinteiShinseichuKubun"));
             }
 
-            public radServiceKubun(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radServiceKubun"));
+            public radTokuteiNyushoshaKaigoServiceKubun(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radTokuteiNyushoshaKaigoServiceKubun"));
             }
 
-            public radTokureiKeigenSochiTaisho(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radTokureiKeigenSochiTaisho"));
+            public radKaizeisoTokureiGengakuSochiTaishoFlag(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKaizeisoTokureiGengakuSochiTaishoFlag"));
             }
 
             public txtShokuhiFutanGendogaku(): UZA.TextBoxNum {
                 return new UZA.TextBoxNum(this.convFiledName("txtShokuhiFutanGendogaku"));
             }
 
-            public txtFutanGendogakuTekiyoDateRange(): UZA.TextBoxDateRange {
-                return new UZA.TextBoxDateRange(this.convFiledName("txtFutanGendogakuTekiyoDateRange"));
+            public txtFutanGendogakuTekiyoYMD(): UZA.TextBoxDateRange {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtFutanGendogakuTekiyoYMD"));
             }
 
             public lblKyojuhiFutanGendogaku(): UZA.Label {
@@ -334,56 +357,56 @@ module DBC {
                 return new UZA.TextBoxNum(this.convFiledName("txtUnitJunKoshitsuFutanGendogaku"));
             }
 
-            public JukyushaIdoRenrakuhyoKokiKoreiKokuho(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JukyushaIdoRenrakuhyoKokiKoreiKokuho"));
+            public KokiKoureiIryoHokenshaPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KokiKoureiIryoHokenshaPanel"));
             }
 
-            public JukyushaIdoRenrakuhyoKokiKorei(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JukyushaIdoRenrakuhyoKokiKorei"));
+            public KokiKoureiPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KokiKoureiPanel"));
             }
 
-            public txtKokiKoreiHokenshaNo(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtKokiKoreiHokenshaNo"));
+            public txtKokiKoureiIryoHokenshaNo(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtKokiKoureiIryoHokenshaNo"));
             }
 
-            public txtKokiKoreiHihokenshaNo(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtKokiKoreiHihokenshaNo"));
+            public txtKokikoureiIryoHiHokenshaNo(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtKokikoureiIryoHiHokenshaNo"));
             }
 
-            public JukyushaIdoRenrakuhyoKokuho(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JukyushaIdoRenrakuhyoKokuho"));
+            public KokuhoPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KokuhoPanel"));
             }
 
             public txtKokuhoHokenshaNo(): UZA.TextBoxCode {
                 return new UZA.TextBoxCode(this.convFiledName("txtKokuhoHokenshaNo"));
             }
 
-            public txtKokuhoHihokenshashoNo(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtKokuhoHihokenshashoNo"));
+            public txtKokuhoHiHokenshaNo(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtKokuhoHiHokenshaNo"));
             }
 
             public txtKokuhoKojinNo(): UZA.TextBoxCode {
                 return new UZA.TextBoxCode(this.convFiledName("txtKokuhoKojinNo"));
             }
 
-            public JukyushaIdoRenrakuhyoKyufuSeigen(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JukyushaIdoRenrakuhyoKyufuSeigen"));
+            public KyufuSeigenPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KyufuSeigenPanel"));
             }
 
-            public radKohiFutanJogengakuGengakuUmu(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radKohiFutanJogengakuGengakuUmu"));
+            public radKohiFutanJogenGengakuAriFlag(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKohiFutanJogenGengakuAriFlag"));
             }
 
             public btnKyufuSeigenRireki(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnKyufuSeigenRireki"));
             }
 
-            public txtKyufuritsuHikisageDateRange(): UZA.TextBoxDateRange {
-                return new UZA.TextBoxDateRange(this.convFiledName("txtKyufuritsuHikisageDateRange"));
+            public txtShokanbaraikaYMD(): UZA.TextBoxDateRange {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtShokanbaraikaYMD"));
             }
 
-            public txtShokanBaraikaDateRange(): UZA.TextBoxDateRange {
-                return new UZA.TextBoxDateRange(this.convFiledName("txtShokanBaraikaDateRange"));
+            public txtKyufuritsuHikisage(): UZA.TextBoxDateRange {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtKyufuritsuHikisage"));
             }
 
             public RiyosyaFutanWariaiPanel(): UZA.Panel {
@@ -394,8 +417,8 @@ module DBC {
                 return new UZA.TextBoxDateRange(this.convFiledName("txtRiyosyaFutanWariaiYukoYMD"));
             }
 
-            public JukyushaIdoRenrakuhyoNijiyoboJigyo(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JukyushaIdoRenrakuhyoNijiyoboJigyo"));
+            public NijiyoboJigyoPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("NijiyoboJigyoPanel"));
             }
 
             public radNijiyoboJigyoKubun(): UZA.RadioButton {
@@ -406,20 +429,20 @@ module DBC {
                 return new UZA.TextBoxDateRange(this.convFiledName("txtNijiyoboJigyoYukoDateRange"));
             }
 
-            public JukyushaIdoRenrakuhyoRojinHoken(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JukyushaIdoRenrakuhyoRojinHoken"));
+            public RojinHokenPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("RojinHokenPanel"));
             }
 
-            public RokenShichosonNo(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("RokenShichosonNo"));
+            public txtRojinHokenShichosonNo(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtRojinHokenShichosonNo"));
             }
 
-            public RokenJukyushaNo(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("RokenJukyushaNo"));
+            public txtRojinHokenJukyushaNo(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtRojinHokenJukyushaNo"));
             }
 
-            public RokenKohiFutanshaNo(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("RokenKohiFutanshaNo"));
+            public txtKohiFutanshaNo(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtKohiFutanshaNo"));
             }
 
         }

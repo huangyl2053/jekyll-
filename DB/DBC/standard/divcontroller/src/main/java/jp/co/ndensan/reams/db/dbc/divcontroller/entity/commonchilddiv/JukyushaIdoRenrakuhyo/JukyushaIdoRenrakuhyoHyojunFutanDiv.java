@@ -23,10 +23,10 @@ public class JukyushaIdoRenrakuhyoHyojunFutanDiv extends Panel {
      */
     @JsonProperty("radHyojunFutanKubun")
     private RadioButton radHyojunFutanKubun;
-    @JsonProperty("txtHyojunFutangaku")
-    private TextBoxNum txtHyojunFutangaku;
-    @JsonProperty("txtHyojunFutanTekiyoDateRange")
-    private TextBoxDateRange txtHyojunFutanTekiyoDateRange;
+    @JsonProperty("txtFutangaku")
+    private TextBoxNum txtFutangaku;
+    @JsonProperty("txtFutangakuTekiyoYMD")
+    private TextBoxDateRange txtFutangakuTekiyoYMD;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -53,39 +53,39 @@ public class JukyushaIdoRenrakuhyoHyojunFutanDiv extends Panel {
     }
 
     /*
-     * gettxtHyojunFutangaku
-     * @return txtHyojunFutangaku
+     * gettxtFutangaku
+     * @return txtFutangaku
      */
-    @JsonProperty("txtHyojunFutangaku")
-    public TextBoxNum getTxtHyojunFutangaku() {
-        return txtHyojunFutangaku;
+    @JsonProperty("txtFutangaku")
+    public TextBoxNum getTxtFutangaku() {
+        return txtFutangaku;
     }
 
     /*
-     * settxtHyojunFutangaku
-     * @param txtHyojunFutangaku txtHyojunFutangaku
+     * settxtFutangaku
+     * @param txtFutangaku txtFutangaku
      */
-    @JsonProperty("txtHyojunFutangaku")
-    public void setTxtHyojunFutangaku(TextBoxNum txtHyojunFutangaku) {
-        this.txtHyojunFutangaku = txtHyojunFutangaku;
+    @JsonProperty("txtFutangaku")
+    public void setTxtFutangaku(TextBoxNum txtFutangaku) {
+        this.txtFutangaku = txtFutangaku;
     }
 
     /*
-     * gettxtHyojunFutanTekiyoDateRange
-     * @return txtHyojunFutanTekiyoDateRange
+     * gettxtFutangakuTekiyoYMD
+     * @return txtFutangakuTekiyoYMD
      */
-    @JsonProperty("txtHyojunFutanTekiyoDateRange")
-    public TextBoxDateRange getTxtHyojunFutanTekiyoDateRange() {
-        return txtHyojunFutanTekiyoDateRange;
+    @JsonProperty("txtFutangakuTekiyoYMD")
+    public TextBoxDateRange getTxtFutangakuTekiyoYMD() {
+        return txtFutangakuTekiyoYMD;
     }
 
     /*
-     * settxtHyojunFutanTekiyoDateRange
-     * @param txtHyojunFutanTekiyoDateRange txtHyojunFutanTekiyoDateRange
+     * settxtFutangakuTekiyoYMD
+     * @param txtFutangakuTekiyoYMD txtFutangakuTekiyoYMD
      */
-    @JsonProperty("txtHyojunFutanTekiyoDateRange")
-    public void setTxtHyojunFutanTekiyoDateRange(TextBoxDateRange txtHyojunFutanTekiyoDateRange) {
-        this.txtHyojunFutanTekiyoDateRange = txtHyojunFutanTekiyoDateRange;
+    @JsonProperty("txtFutangakuTekiyoYMD")
+    public void setTxtFutangakuTekiyoYMD(TextBoxDateRange txtFutangakuTekiyoYMD) {
+        this.txtFutangakuTekiyoYMD = txtFutangakuTekiyoYMD;
     }
 
     // </editor-fold>
