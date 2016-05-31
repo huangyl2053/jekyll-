@@ -3,29 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakukonofusho;
+package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakuko;
 
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 保険料納入通知書（本算定）【コンビニ角公タイプ】納付書のBuilder
+ * 保険料納入通知書（本算定）【コンビニ角公タイプ】CoverのBuilder
  *
  * @reamsid_L DBB-9110-120 huangh
  */
-public class NonyuTsuchishoCVSKakukoNofushoBuilder implements INonyuTsuchishoCVSKakukoNofushoBuilder {
+public class NonyuTsuchishoCVSKakukoCoverBuilder implements INonyuTsuchishoCVSKakukoCoverBuilder {
 
-    private final INonyuTsuchishoCVSKakukoNofushoEditor nofushoEditor;
+    private final INonyuTsuchishoCVSKakukoCoverEditor coverEditor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param nofushoEditor nofushoEditor
+     * @param coverEditor coverEditor
      */
-    public NonyuTsuchishoCVSKakukoNofushoBuilder(
-            INonyuTsuchishoCVSKakukoNofushoEditor nofushoEditor) {
-
-        this.nofushoEditor = nofushoEditor;
+    public NonyuTsuchishoCVSKakukoCoverBuilder(INonyuTsuchishoCVSKakukoCoverEditor coverEditor) {
+        this.coverEditor = coverEditor;
     }
 
     /**
@@ -35,8 +33,8 @@ public class NonyuTsuchishoCVSKakukoNofushoBuilder implements INonyuTsuchishoCVS
      */
     @Override
     public NonyuTsuchishoCVSKakukoSource build() {
-        return ReportEditorJoiner.from(new NonyuTsuchishoCVSKakukoSource()).join(nofushoEditor).buildSource();
-
+        return ReportEditorJoiner.from(new NonyuTsuchishoCVSKakukoSource())
+                .join(coverEditor).buildSource();
     }
 
 }

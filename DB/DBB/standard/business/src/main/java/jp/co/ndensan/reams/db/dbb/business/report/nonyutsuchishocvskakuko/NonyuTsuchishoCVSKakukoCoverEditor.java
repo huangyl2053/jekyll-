@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakukocover;
+package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakuko;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
@@ -75,7 +75,7 @@ public class NonyuTsuchishoCVSKakukoCoverEditor implements INonyuTsuchishoCVSKak
     @Override
     public NonyuTsuchishoCVSKakukoSource edit(NonyuTsuchishoCVSKakukoSource source) {
         editSource(source);
-        source.layout = NonyuTsuchishoCVSKakukoSource.Layouts.DBB100059_NonyuTsuchishoCVSKakukoCover;
+        source.layoutBreakItem = 1;
         return source;
     }
 
@@ -228,8 +228,8 @@ public class NonyuTsuchishoCVSKakukoCoverEditor implements INonyuTsuchishoCVSKak
             source.nofuKubun = 印字位置1の納付書.get納付区分();
             source.ocrId1 = 印字位置1の納付書.getOcrid();
             source.barcodeCvsBarcode1 = 印字位置1の納付書.getバーコード情報();
-            source.cvsBarcodeNaiyo11 = 印字位置1の納付書.getバーコード情報上段();
-            source.cvsBarcodeNaiyo21 = 印字位置1の納付書.getバーコード情報下段();
+            source.cvsBarcodeNaiyo3 = 印字位置1の納付書.getバーコード情報上段();
+            source.cvsBarcodeNaiyo4 = 印字位置1の納付書.getバーコード情報下段();
             source.kibetsu = 印字位置1の納付書.get期表記();
             source.gokeigaku = 印字位置1の納付書.get納付額表記();
             source.nokigenYmd = 印字位置1の納付書.get納期限表記();
@@ -411,7 +411,7 @@ public class NonyuTsuchishoCVSKakukoCoverEditor implements INonyuTsuchishoCVSKak
         }
         if (item.get編集後本算定通知書共通情報().get編集後個人() != null
                 && item.get編集後本算定通知書共通情報().get編集後個人().get世帯主名() != null) {
-            source.kaisanMeisaishoSetaiNushiName = item.get編集後本算定通知書共通情報().get編集後個人().get世帯主名().value();
+            source.kaisanMeisaishoHihokenshaName1 = item.get編集後本算定通知書共通情報().get編集後個人().get世帯主名().value();
         }
         if (item.get編集後本算定通知書共通情報().get編集後個人() != null
                 && item.get編集後本算定通知書共通情報().get編集後個人().get世帯コード() != null) {
@@ -428,7 +428,7 @@ public class NonyuTsuchishoCVSKakukoCoverEditor implements INonyuTsuchishoCVSKak
                 source.keisanMeisaishoHokenryoRitsu = new RString(item.get編集後本算定通知書共通情報().get更正後().get保険料率().toString());
             }
             if (item.get編集後本算定通知書共通情報().get更正後().get特別徴収額合計() != null) {
-                source.kaisanMeisaishoTokuchoGokei = new RString(item.get編集後本算定通知書共通情報().get更正後().get特別徴収額合計().toString());
+                source.kaisanMeisaishoTokuchoGokeiGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get特別徴収額合計().toString());
             }
             source.keisanMeisaishoKikanKaishi = item.get編集後本算定通知書共通情報().get更正後().get期間_自();
             if (item.get編集後本算定通知書共通情報().get更正後().get普通徴収額合計() != null) {

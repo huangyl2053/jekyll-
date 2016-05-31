@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakukorenchonofusho;
+package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakuko;
 
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 保険料納入通知書（本算定）【コンビニ角公タイプ】納付書のBuilderのインターフェースクラスです。
+ * 保険料納入通知書（本算定）【コンビニ角公タイプ】CoverのBuilderのインターフェースクラスです。
  *
  * @reamsid_L DBB-9110-120 huangh
  */
-public interface INonyuTsuchishoCVSKakukoRenchoNofushoBuilder extends IReportBuilder<NonyuTsuchishoCVSKakukoSource> {
+interface INonyuTsuchishoCVSKakukoCoverBuilder extends IReportBuilder<NonyuTsuchishoCVSKakukoSource> {
 
 }

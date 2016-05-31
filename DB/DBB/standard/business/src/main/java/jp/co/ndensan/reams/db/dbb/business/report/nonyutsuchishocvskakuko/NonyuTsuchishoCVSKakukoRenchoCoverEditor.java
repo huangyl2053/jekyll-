@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakukorenchocover;
+package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakuko;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
-import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
-import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoRenchoSource;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
@@ -74,13 +73,13 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
     }
 
     @Override
-    public NonyuTsuchishoCVSKakukoSource edit(NonyuTsuchishoCVSKakukoSource source) {
+    public NonyuTsuchishoCVSKakukoRenchoSource edit(NonyuTsuchishoCVSKakukoRenchoSource source) {
         editSource(source);
-        source.layout = NonyuTsuchishoCVSKakukoSource.Layouts.DBB100060_NonyuTsuchishoCVSKakukoRenchoCover;
+        source.layoutBreakItem = 1;
         return source;
     }
 
-    private NonyuTsuchishoCVSKakukoSource editSource(NonyuTsuchishoCVSKakukoSource source) {
+    private NonyuTsuchishoCVSKakukoRenchoSource editSource(NonyuTsuchishoCVSKakukoRenchoSource source) {
 
         this.edit宛先(source);
 
@@ -101,7 +100,7 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
         return source;
     }
 
-    private NonyuTsuchishoCVSKakukoSource edit宛先(NonyuTsuchishoCVSKakukoSource source) {
+    private NonyuTsuchishoCVSKakukoRenchoSource edit宛先(NonyuTsuchishoCVSKakukoRenchoSource source) {
 
         EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = item.get編集後本算定通知書共通情報();
 
@@ -140,15 +139,10 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
 
         this.納入通知書期情報設定(source);
 
-        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-            source.notsuRenban1 = new RString(renban);
-        }
-        source.pageCount1 = new RString(renban + "-1");
-
         return source;
     }
 
-    private NonyuTsuchishoCVSKakukoSource edit明細(NonyuTsuchishoCVSKakukoSource source) {
+    private NonyuTsuchishoCVSKakukoRenchoSource edit明細(NonyuTsuchishoCVSKakukoRenchoSource source) {
 
         if (item.get編集後本算定通知書共通情報() != null) {
 
@@ -172,9 +166,9 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
                 source.keisanMeisaishoNofuGaku2
                         = new RString(item.get編集後本算定通知書共通情報().get普徴収入情報リスト().get(1).get収入額().toString());
             }
-            if (item.get編集後本算定通知書共通情報().get保険者名() != null) {
-                source.hokenshaName = new RString(item.get編集後本算定通知書共通情報().get保険者名().toString());
-            }
+//            if (item.get編集後本算定通知書共通情報().get保険者名() != null) {
+//                source.hokenshaName = new RString(item.get編集後本算定通知書共通情報().get保険者名().toString());
+//            }
             if (item.get編集後本算定通知書共通情報().get普徴収入情報リスト() != null
                     && item.get編集後本算定通知書共通情報().get普徴収入情報リスト().get(0) != null
                     && item.get編集後本算定通知書共通情報().get普徴収入情報リスト().get(0).get収入額() != null) {
@@ -193,22 +187,10 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
         source.keisanMeisaishYen2 = EN;
         source.keisanMeisaishoKomokuTitle2 = TSUGIKI_IKOU;
 
-        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-            source.notsuRenban2 = new RString(renban).padZeroToLeft(INT_6);
-        }
-        source.pageCount2 = new RString(renban + "-2");
-        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-            source.renban = new RString(renban).padZeroToLeft(INT_6);
-        }
-
-        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-            source.notsuRenban3 = new RString(renban).padZeroToLeft(INT_6);
-        }
-        source.pageCount3 = new RString(renban + "-3");
         return source;
     }
 
-    private void edit納付書1(NonyuTsuchishoCVSKakukoSource source) {
+    private void edit納付書1(NonyuTsuchishoCVSKakukoRenchoSource source) {
 
         if (item.get納付書共通() != null) {
             source.kamokumei = item.get納付書共通().get科目名称();
@@ -224,11 +206,11 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
         }
 
         if (印字位置1の納付書 != null) {
-            source.shunoKikanBango = 印字位置1の納付書.get収納機関番号表示用();
+            source.shunoKikanBango1 = 印字位置1の納付書.get収納機関番号表示用();
             //TODO
             source.nofuBango = 印字位置1の納付書.get納付番号();
-            source.kakuninBango = 印字位置1の納付書.get確認番号();
-            source.nofuKubun = 印字位置1の納付書.get納付区分();
+            source.kakuninBango1 = 印字位置1の納付書.get確認番号();
+            source.nofuKubun1 = 印字位置1の納付書.get納付区分();
             source.ocrId1 = 印字位置1の納付書.getOcrid();
             source.barcodeCvsBarcode1 = 印字位置1の納付書.getバーコード情報();
             source.cvsBarcodeNaiyo11 = 印字位置1の納付書.getバーコード情報上段();
@@ -237,15 +219,15 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
             source.gokeigaku = 印字位置1の納付書.get納付額表記();
             source.nokigenYmd = 印字位置1の納付書.get納期限表記();
             source.honzei = 印字位置1の納付書.get納付額表記();
-            source.ocr1 = 印字位置1の納付書.getOcr().get(1);
-            source.ocr2 = 印字位置1の納付書.getOcr().get(2);
+            source.ocr11 = 印字位置1の納付書.getOcr().get(1);
+            source.ocr21 = 印字位置1の納付書.getOcr().get(2);
             if (印字位置1の納付書.getコンビニ支払期限() != null) {
-                source.cvsToriatsukaikigen = 印字位置1の納付書.getコンビニ支払期限().toDateString();
+                source.cvsToriatsukaikigen1 = 印字位置1の納付書.getコンビニ支払期限().toDateString();
             }
             if (item.get納付書共通() != null) {
-                source.ryoshushoNendo = item.get納付書共通().get調定年度表記();
+                source.ryoshushoNendo1 = item.get納付書共通().get調定年度表記();
                 source.nendoNenbun = item.get納付書共通().get年度年分表記();
-                source.ryoshushoNenbun = item.get納付書共通().get賦課年度表記();
+                source.ryoshushoNenbun1 = item.get納付書共通().get賦課年度表記();
                 source.hakkoYmd = item.get納付書共通().get発行日表記();
             }
             if (item.get納付書共通() != null
@@ -253,30 +235,30 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
                 source.tsuchishoNo = item.get納付書共通().get通知書番号().value();
             }
         } else {
-            source.ryoshushoNendo = HOSHI_4;
+            source.ryoshushoNendo1 = HOSHI_4;
             source.nendoNenbun = HOSHI_4;
             source.kibetsu = HOSHI_2;
-            source.ryoshushoNenbun = HOSHI_4;
+            source.ryoshushoNenbun1 = HOSHI_4;
             source.gokeigaku = HOSHI_13;
             source.tsuchishoNo = HOSHI_16;
             source.nokigenYmd = HOSHI_11;
             source.hakkoYmd = HOSHI_11;
             source.honzei = HOSHI_13;
-            source.ocr1 = HOSHI_28;
-            source.ocr2 = HOSHI_28;
-            source.cvsToriatsukaikigen = HOSHI_16;
+            source.ocr11 = HOSHI_28;
+            source.ocr21 = HOSHI_28;
+            source.cvsToriatsukaikigen1 = HOSHI_16;
         }
 
         source.nokigenTitle = NOKIGEN;
         source.tokusokuTesuryo = RString.EMPTY;
-        source.ocrCut = HANKAKU_X;
+        source.ocrCut1 = HANKAKU_X;
         source.entaikin = RString.EMPTY;
-        source.biko1 = RString.EMPTY;
-        source.biko2 = RString.EMPTY;
-        source.funyuFukanBango = RString.EMPTY;
+        source.biko11 = RString.EMPTY;
+        source.biko21 = RString.EMPTY;
+        source.funyuFukanBango1 = RString.EMPTY;
     }
 
-    private void edit納付書2(NonyuTsuchishoCVSKakukoSource source) {
+    private void edit納付書2(NonyuTsuchishoCVSKakukoRenchoSource source) {
 
         if (item.get納付書共通() != null) {
             source.kamokumei = item.get納付書共通().get科目名称();
@@ -346,7 +328,7 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
         source.funyuFukanBango2 = RString.EMPTY;
     }
 
-    private void edit雛形部品(NonyuTsuchishoCVSKakukoSource source) {
+    private void edit雛形部品(NonyuTsuchishoCVSKakukoRenchoSource source) {
 
         if (ninshoshaSource != null) {
             source.denshiKoin = ninshoshaSource.denshiKoin;
@@ -361,7 +343,7 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
         }
     }
 
-    private void editCompSofubutsuAtesaki(NonyuTsuchishoCVSKakukoSource source) {
+    private void editCompSofubutsuAtesaki(NonyuTsuchishoCVSKakukoRenchoSource source) {
 
         KaigoSofubutsuAtesakiSource kaigoSofubutsuAtesakiSource = null;
 
@@ -406,7 +388,7 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
         }
     }
 
-    private void 納入通知書期情報設定(NonyuTsuchishoCVSKakukoSource source) {
+    private void 納入通知書期情報設定(NonyuTsuchishoCVSKakukoRenchoSource source) {
 
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = item.get納入通知書期情報リスト();
         if (納入通知書期情報リスト == null) {
@@ -475,7 +457,7 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
         }
     }
 
-    private void 編集後個人相関設定(NonyuTsuchishoCVSKakukoSource source) {
+    private void 編集後個人相関設定(NonyuTsuchishoCVSKakukoRenchoSource source) {
 
         if (item.get編集後本算定通知書共通情報().get編集後個人() != null
                 && item.get編集後本算定通知書共通情報().get編集後個人().get名称() != null
@@ -492,7 +474,7 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
         }
     }
 
-    private void 更正後情報相関設定(NonyuTsuchishoCVSKakukoSource source) {
+    private void 更正後情報相関設定(NonyuTsuchishoCVSKakukoRenchoSource source) {
 
         if (item.get編集後本算定通知書共通情報().get更正後() != null) {
 
@@ -501,7 +483,7 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
                 source.keisanMeisaishoHokenryoRitsu = new RString(item.get編集後本算定通知書共通情報().get更正後().get保険料率().toString());
             }
             if (item.get編集後本算定通知書共通情報().get更正後().get特別徴収額合計() != null) {
-                source.kaisanMeisaishoTokuchoGokei = new RString(item.get編集後本算定通知書共通情報().get更正後().get特別徴収額合計().toString());
+                source.kaisanMeisaishoTokuchoGokeiGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get特別徴収額合計().toString());
             }
             source.keisanMeisaishoKikanKaishi = item.get編集後本算定通知書共通情報().get更正後().get期間_自();
             if (item.get編集後本算定通知書共通情報().get更正後().get普通徴収額合計() != null) {
