@@ -18,16 +18,16 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.dgNinteiChosaSchedule_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020002.NinteiChosaScheduleShosaiHander;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.chikuninteichosainmapper.ChosainJohoFander;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -108,8 +108,8 @@ public class NinteiChosaScheduleShosai {
     private List<ChosaChiku> get対象地区List(LasdecCode 保険者) {
         List<ChosaChiku> get対象地区List = ChosainJohoFander.createInstance().get対象地区(保険者).records();
         for (ChosaChiku chosaChiku : get対象地区List) {
-            UzT0007CodeEntity entity = CodeMaster.getCode(SubGyomuCode.DBE認定支援,
-                    new CodeShubetsu("5002"), new Code(chosaChiku.get調査地区コード()));
+            UzT0007CodeEntity entity = CodeMaster.getCode(DBECodeShubetsu.調査地区コード.getコード(), new Code(chosaChiku.get調査地区コード()),
+                    new FlexibleDate(RDate.getNowDate().toDateString()));
             if (entity != null) {
                 chosaChiku.set調査地区名称(entity.getコード名称());
             } else {
