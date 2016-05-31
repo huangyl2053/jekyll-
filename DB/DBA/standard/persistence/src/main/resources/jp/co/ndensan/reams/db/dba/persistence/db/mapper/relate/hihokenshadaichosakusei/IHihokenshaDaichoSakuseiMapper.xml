@@ -208,5 +208,8 @@
             AND														
             "shikibetsuCode" = #{shikibetsuCode}	
         </if>
+        ORDER BY
+            DbT1001."idoYMD" DESC,
+            DbT1001."edaNo" DESC
     </select>
 </mapper>

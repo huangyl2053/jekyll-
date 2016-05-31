@@ -126,7 +126,7 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
 
     private HihokenshaEntity set被保険者Entity(DbT1001HihokenshaDaichoEntity entity) {
         HihokenshaEntity 被保険者Entity = new HihokenshaEntity();
-        被保険者Entity.setPrintDate(new RString(RDateTime.now().toString()));
+        被保険者Entity.setPrintDate(RDateTime.now());
         被保険者Entity.setPage(RString.EMPTY);
         被保険者Entity.setTitle(TITLE);
         被保険者Entity.setShichosonCode(entity.getShichosonCode());
