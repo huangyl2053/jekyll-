@@ -11,14 +11,12 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 報告資料作成_バッチフロークラスパラメータクラスです。
  *
  * @reamsid_L DBE-1450-020 wangxiaodong
  */
-@Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
@@ -179,6 +177,13 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
     public JigyoJyokyoHokokuProcessParameter toJigyoJyokyoHokokuProcessParameter() {
 
         return new JigyoJyokyoHokokuProcessParameter(
+                jigyoJyokyoHokoku,
+                jissiJyokyoTokei,
+                sinsaHanteiJyokyo,
+                sinsakaiKanrenTokei,
+                csvShutsuryoku,
+                shutsuryokuFairu,
+                kijyunYMD,
                 RString.isNullOrEmpty(hokensyaNo),
                 hokensyaNo,
                 isTaishoTsukiKubun,
