@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka;
+package jp.co.ndensan.reams.db.dbx.definition.mybatisprm.fuka;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
+import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -18,7 +18,7 @@ import org.junit.runner.RunWith;
  * {@link FukaMapperParameter}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-public class FukaMapperParameterTest extends DbbTestBase {
+public class FukaMapperParameterTest extends DbxTestBase {
 
     private static final FlexibleYear choteiNendo = new FlexibleYear("2015");
     private static final FlexibleYear fukaNendo = new FlexibleYear("2015");
@@ -28,7 +28,7 @@ public class FukaMapperParameterTest extends DbbTestBase {
     /**
      * createParamテストメソッドです。
      */
-    public static class createParamテスト extends DbbTestBase {
+    public static class createParamテスト extends DbxTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 調定年度にNullを指定すると_NullPointerExceptionが発生する() {
@@ -49,7 +49,6 @@ public class FukaMapperParameterTest extends DbbTestBase {
 //        public void 履歴番号にNullを指定すると_NullPointerExceptionが発生する() {
 //            FukaMapperParameter sut = FukaMapperParameter.createParam(choteiNendo, fukaNendo, tsuchishoNo, null);
 //        }
-
         @Test
         public void 引数にNull以外を指定すると_パラメータが生成できる() {
             FukaMapperParameter sut = FukaMapperParameter.createParam(choteiNendo, fukaNendo, tsuchishoNo, rirekiNo);

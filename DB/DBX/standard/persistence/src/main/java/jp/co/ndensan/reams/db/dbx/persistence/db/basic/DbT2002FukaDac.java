@@ -2,23 +2,22 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.choteiNendo;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.choteiNichiji;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.fukaNendo;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.hihokenshaNo;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.rirekiNo;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.tsuchishoNo;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.fuka.FukaMapperParameter;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.choteiNendo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.choteiNichiji;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.fukaNendo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.rirekiNo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.tsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.fuka.IFukaMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

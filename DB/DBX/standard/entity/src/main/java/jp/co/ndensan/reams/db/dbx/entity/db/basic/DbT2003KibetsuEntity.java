@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbb.entity.db.basic;
+package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;

@@ -4,15 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
-import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
-import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
-import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_被保険者番号;
-import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
-import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_被保険者番号;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
@@ -92,7 +92,6 @@ public class FukaDacTest {
 //            public void 引数の処理日時にnullを指定した場合_NullPointerExceptionが発生する() {
 //                sut.select賦課ByKey(調定年度1, 賦課年度1, 通知書番号1, null);
 //            }
-
             @Test
             public void データが見つかる検索条件を渡すと_賦課モデル返す() {
                 assertThat(sut.select賦課ByKey(調定年度1, 賦課年度1, 通知書番号1, 履歴番号)
@@ -179,7 +178,6 @@ public class FukaDacTest {
 //                        DEFAULT_通知書番号,
 //                        null);
 //            }
-
             public static class 引数に該当する情報がある時_selectRecentlyは_直近のモデルを１件返す extends DbzTestDacBase {
 
                 @Test

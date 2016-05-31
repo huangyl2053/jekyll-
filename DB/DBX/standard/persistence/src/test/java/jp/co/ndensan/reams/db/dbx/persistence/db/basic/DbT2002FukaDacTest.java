@@ -2,17 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2002FukaEntityGenerator;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_調定年度;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_調定年度;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
+import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -33,7 +33,7 @@ import org.junit.runner.RunWith;
  */
 @Ignore
 @RunWith(Enclosed.class)
-public class DbT2002FukaDacTest extends DbbTestDacBase {
+public class DbT2002FukaDacTest extends DbxTestDacBase {
 
     private static final TsuchishoNo 通知書番号_01 = new TsuchishoNo("2");
     private static final TsuchishoNo 通知書番号_02 = new TsuchishoNo("3");
@@ -45,7 +45,7 @@ public class DbT2002FukaDacTest extends DbbTestDacBase {
         sut = InstanceProvider.create(DbT2002FukaDac.class);
     }
 
-    public static class selectByKeyのテスト extends DbbTestDacBase {
+    public static class selectByKeyのテスト extends DbxTestDacBase {
 
         @Before
         public void setUp() {
@@ -96,7 +96,6 @@ public class DbT2002FukaDacTest extends DbbTestDacBase {
 //                    DEFAULT_通知書番号,
 //                    null);
 //        }
-
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT2002FukaEntity insertedRecord = sut.selectByKey(
@@ -118,7 +117,7 @@ public class DbT2002FukaDacTest extends DbbTestDacBase {
         }
     }
 
-    public static class selectAllのテスト extends DbbTestDacBase {
+    public static class selectAllのテスト extends DbxTestDacBase {
 
         @Test
         public void 介護賦課が存在する場合_selectAllは_全件を返す() {
@@ -141,7 +140,7 @@ public class DbT2002FukaDacTest extends DbbTestDacBase {
         }
     }
 
-    public static class insertのテスト extends DbbTestDacBase {
+    public static class insertのテスト extends DbxTestDacBase {
 
         @Test
         public void 介護賦課エンティティを渡すと_insertは_介護賦課を追加する() {
@@ -159,7 +158,7 @@ public class DbT2002FukaDacTest extends DbbTestDacBase {
         }
     }
 
-    public static class updateのテスト extends DbbTestDacBase {
+    public static class updateのテスト extends DbxTestDacBase {
 
         @Before
         public void setUp() {
@@ -191,7 +190,7 @@ public class DbT2002FukaDacTest extends DbbTestDacBase {
         }
     }
 
-    public static class deleteのテスト extends DbbTestDacBase {
+    public static class deleteのテスト extends DbxTestDacBase {
 
         @Before
         public void setUp() {

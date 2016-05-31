@@ -5,11 +5,11 @@
 package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2003KibetsuEntityGenerator;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.relate.KibetsuChoteiKyotsuEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2003KibetsuDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2003KibetsuEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2003KibetsuDac;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.UrT0705ChoteiKyotsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.UrT0705ChoteiKyotsuDac;
@@ -82,7 +82,6 @@ public class KibetsuChoteiKyotsuDacTest {
 //        public void 引数の処理日時にnullを指定した場合_NullPointerExceptionが発生する() {
 //            sut.select介護期別調定共通ByKey(調定年度, 賦課年度, 通知書番号, null, 徴収方法, 期);
 //        }
-
         @Test(expected = NullPointerException.class)
         public void 引数の徴収方法にnullを指定した場合_NullPointerExceptionが発生する() {
             sut.select介護期別調定共通ByKey(調定年度, 賦課年度, 通知書番号, 履歴番号, null, 期);
@@ -128,7 +127,6 @@ public class KibetsuChoteiKyotsuDacTest {
 //        public void 引数の処理日時にnullを指定した場合_NullPointerExceptionが発生する() {
 //            sut.select介護期別調定共通一覧(調定年度, 賦課年度, 通知書番号, null);
 //        }
-
         @Test
         public void データが見つかる検索条件を渡すと_介護期別調定共通リストを返す() {
             List<KibetsuChoteiKyotsuEntity> modelList = sut.select介護期別調定共通一覧(調定年度, 賦課年度, 通知書番号, 履歴番号);

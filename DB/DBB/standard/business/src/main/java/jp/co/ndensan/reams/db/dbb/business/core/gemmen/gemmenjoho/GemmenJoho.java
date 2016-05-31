@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.gemmen.gemmen.GemmenIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.kibetsu.KibetsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.GemmenJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.KibetsuEntity;
