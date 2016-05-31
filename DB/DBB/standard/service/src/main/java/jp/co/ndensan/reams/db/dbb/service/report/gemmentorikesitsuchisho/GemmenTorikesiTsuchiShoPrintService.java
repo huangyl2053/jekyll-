@@ -48,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -76,6 +77,50 @@ public class GemmenTorikesiTsuchiShoPrintService {
     private static final int INDEX_TWELVE = 12;
     private static final int INDEX_FOURTEEN = 14;
     private static final int INDEX_FIFTEEN = 15;
+
+    /**
+     * 介護保険料減免取消通知書A4縦タイプ(単一帳票出力用)
+     *
+     * @param 発行日 FlexibleDate
+     * @param 文書番号 RString
+     * @param 減免取消通知書情報 GemmenTorikesiTsuchiShoJoho
+     * @param 通知書定型文 RString
+     * @param 介護問合せ先ソースビルダー IKaigoToiawasesakiSourceBuilder
+     * @return SourceDataCollection
+     */
+    public SourceDataCollection printSingleA4縦タイプ(FlexibleDate 発行日, RString 文書番号,
+            GemmenTorikesiTsuchiShoJoho 減免取消通知書情報,
+            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー) {
+        SourceDataCollection collection;
+        try (ReportManager reportManager = new ReportManager()) {
+            printA4縦タイプ(発行日, 文書番号, 減免取消通知書情報,
+                    通知書定型文, 介護問合せ先ソースビルダー, reportManager);
+            collection = reportManager.publish();
+        }
+        return collection;
+    }
+
+    /**
+     * 介護保険料減免取消通知書B5横タイプ(単一帳票出力用)
+     *
+     * @param 発行日 FlexibleDate
+     * @param 文書番号 RString
+     * @param 減免取消通知書情報 GemmenTorikesiTsuchiShoJoho
+     * @param 通知書定型文 RString
+     * @param 介護問合せ先ソースビルダー IKaigoToiawasesakiSourceBuilder
+     * @return SourceDataCollection
+     */
+    public SourceDataCollection printSingleB5横タイプ(FlexibleDate 発行日, RString 文書番号,
+            GemmenTorikesiTsuchiShoJoho 減免取消通知書情報,
+            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー) {
+        SourceDataCollection collection;
+        try (ReportManager reportManager = new ReportManager()) {
+            printB5横タイプ(発行日, 文書番号, 減免取消通知書情報,
+                    通知書定型文, 介護問合せ先ソースビルダー, reportManager);
+            collection = reportManager.publish();
+        }
+        return collection;
+    }
 
     /**
      * printA4縦タイプメソッドします。
@@ -228,7 +273,7 @@ public class GemmenTorikesiTsuchiShoPrintService {
     /**
      * 更正前後期割額リストを生成する。
      *
-     * @param 減免取消通知書情報 GenmenKetteiTsuchiShoJoho
+     * @param 減免取消通知書情報 GemmenTorikesiTsuchiShoJoho
      * @return List<KoseiZengoKiwariGaku>
      */
     private List<KoseiZengoKiwariGaku> 更正前後期割額リストを生成(GemmenTorikesiTsuchiShoJoho 減免取消通知書情報) {
@@ -250,7 +295,7 @@ public class GemmenTorikesiTsuchiShoPrintService {
      * 更正前後期割額を生成する。
      *
      * @param index int
-     * @param 減免取消通知書情報 GenmenKetteiTsuchiShoJoho
+     * @param 減免取消通知書情報 GemmenTorikesiTsuchiShoJoho
      * @param 期月特徴 Kitsuki
      * @param 期月普徴 Kitsuki
      * @return KoseiZengoKiwariGaku
@@ -337,7 +382,7 @@ public class GemmenTorikesiTsuchiShoPrintService {
      * set特徴期別金額更正前します。
      *
      * @param 期 RString
-     * @param 減免取消通知書情報 GenmenKetteiTsuchiShoJoho
+     * @param 減免取消通知書情報 GemmenTorikesiTsuchiShoJoho
      * @return Decimal
      */
     private Decimal set特徴期別金額取消前(RString 期, GemmenTorikesiTsuchiShoJoho 減免取消通知書情報) {
@@ -367,7 +412,7 @@ public class GemmenTorikesiTsuchiShoPrintService {
      * set特徴期別金額更正後します。
      *
      * @param 期 RString
-     * @param 減免取消通知書情報 GenmenKetteiTsuchiShoJoho
+     * @param 減免取消通知書情報 GemmenTorikesiTsuchiShoJoho
      * @return Decimal
      */
     private Decimal set特徴期別金額取消後(RString 期, GemmenTorikesiTsuchiShoJoho 減免取消通知書情報) {
@@ -397,7 +442,7 @@ public class GemmenTorikesiTsuchiShoPrintService {
      * set普徴期別金額更正前します。
      *
      * @param index int
-     * @param 減免取消通知書情報 GenmenKetteiTsuchiShoJoho
+     * @param 減免取消通知書情報 GemmenTorikesiTsuchiShoJoho
      * @return Decimal
      */
     private Decimal set普徴期別金額取消前(int index, GemmenTorikesiTsuchiShoJoho 減免取消通知書情報) {
@@ -442,7 +487,7 @@ public class GemmenTorikesiTsuchiShoPrintService {
      * set普徴期別金額更正後します。
      *
      * @param index int
-     * @param 減免取消通知書情報 GenmenKetteiTsuchiShoJoho
+     * @param 減免取消通知書情報 GemmenTorikesiTsuchiShoJoho
      * @return Decimal
      */
     private Decimal set普徴期別金額取消後(int index, GemmenTorikesiTsuchiShoJoho 減免取消通知書情報) {
