@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -232,11 +233,12 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(TAISHOYM);
-        条件.append(paramter.getTaishoNendoYM());
+        条件.append(!paramter.isTaishoTsukiKubun() ? RString.EMPTY
+                : new RYearMonth(paramter.getTaishoNendoYM()).wareki().toDateString());
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(KIJYUNYMD);
-        条件.append(paramter.getKijyunYMD());
+        条件.append(paramter.getKijyunYMD() == null ? RString.EMPTY : paramter.getKijyunYMD().toDateString());
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(TAISHOGEPPIKUBUN);
@@ -244,11 +246,13 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(TAISHOGEPPIFROM);
-        条件.append(paramter.getTaishoGeppiFrom());
+        条件.append(paramter.isEmptyTaishoGeppiFrom() ? RString.EMPTY
+                : new RDate(paramter.getTaishoGeppiFrom().toString()).toDateString());
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(TAISHOGEPPITO);
-        条件.append(paramter.getTaishoGeppiTo());
+        条件.append(paramter.isEmptyTaishoGeppiTo() ? RString.EMPTY
+                : new RDate(paramter.getTaishoGeppiTo().toString()).toDateString());
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(SINSEIKUBUNSINSEITOKI);
