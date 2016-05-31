@@ -31,4 +31,5 @@ public class FuchoKarisanteiBatchParameter extends BatchParameterBase {
     private RString 対象者フラグ;
     private RString 生活保護者をまとめて先頭に出力フラグ;
     private RString ページごとに山分けフラグ;
+    private boolean 一括発行起動フラグ;
 }
