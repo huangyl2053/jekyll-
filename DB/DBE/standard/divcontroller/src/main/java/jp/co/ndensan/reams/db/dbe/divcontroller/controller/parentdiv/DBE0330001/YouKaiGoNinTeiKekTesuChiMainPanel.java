@@ -12,14 +12,16 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.DBE0330001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.YouKaiGoNinTeiKekTesuChiMainPanelDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.dgResultList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0330001.MainPanelHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -29,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -92,13 +95,9 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        boolean 未出力のみFlag = false;
         boolean 希望のみFlag = false;
         RString dateFrom = RString.EMPTY;
         RString dateTo = RString.EMPTY;
-        if (未出力のみ.equals(div.getRadPrintCondition().getSelectedKey())) {
-            未出力のみFlag = true;
-        }
         if (希望のみ.equals(div.getRadKekkaTsuchiOutputTaisho().getSelectedKey())) {
             希望のみFlag = true;
         }
@@ -113,7 +112,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
                         .createSelectListParam(dateFrom,
                                 dateTo,
                                 div.getCcdShujiiIryokikanAndShujiiInput().getIryoKikanCode(),
-                                div.getCcdShujiiIryokikanAndShujiiInput().getShujiiCode(), 未出力のみFlag, 希望のみFlag)).records();
+                                div.getCcdShujiiIryokikanAndShujiiInput().getShujiiCode(), false, 希望のみFlag)).records();
         if (youKaiGoNinTeiKekTesuChi.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
@@ -128,11 +127,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
      * @return ResponseData
      */
     public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onClick_SelectByButton(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
-        boolean 未出力のみFlag = false;
         boolean 希望のみFlag = false;
-        if (未出力のみ.equals(div.getRadPrintCondition().getSelectedKey())) {
-            未出力のみFlag = true;
-        }
         if (希望のみ.equals(div.getRadPrintCondition().getSelectedKey())) {
             希望のみFlag = true;
         }
@@ -150,7 +145,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
                 .get結果通知出力対象申請者一覧(YouKaiGoNinTeiKekTesuChiMapperParameter
                         .createSelectListParam(dateFrom,
                                 dateTo,
-                                主治医医療機関コード, 主治医コード, 未出力のみFlag, 希望のみFlag)).records();
+                                主治医医療機関コード, 主治医コード, false, 希望のみFlag)).records();
         if (youKaiGoNinTeiKekTesuChi.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
@@ -159,7 +154,29 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
     }
 
     /**
-     * 結果通知を実行する」ボタンが押下場合、チェックを実行します。
+     * 「再検索」ボタンが押下します。
+     *
+     * @param div YouKaiGoNinTeiKekTesuChiMainPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onClick_btnSaiKenSaku(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
+        if (!ResponseHolder.isReRequest() && !hasChange(div)) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getPrintPanel().getTxtNinteiJokyoTeikyoYMD().clearValue();
+            div.getPrintPanel().getRadPrintCondition().setSelectedIndex(0);
+            return ResponseData.of(div).setState(DBE0330001StateName.照会);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「結果通知を実行する」ボタンが押下場合、チェックを実行します。
      *
      * @param div YouKaiGoNinTeiKekTesuChiMainPanelDiv
      * @return ResponseData
@@ -217,6 +234,15 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
         param.setShoKisaiHokenshaNo(new RString("209006"));
         response.data = param;
         return response;
+    }
+
+    private boolean hasChange(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
+        List<dgResultList_Row> rowList = div.getDgResultList().getDataSource();
+        RStringBuilder rsb = new RStringBuilder();
+        for (dgResultList_Row row : rowList) {
+            rsb.append(String.valueOf(row.getSelected()));
+        }
+        return div.getPrintPanel().getHiddenitem().equals(rsb.toRString());
     }
 
     private MainPanelHandler getHandler(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
