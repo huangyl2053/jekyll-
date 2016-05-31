@@ -11,33 +11,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum DaichoFuseigoJotai {
 
     /**
-     * コード:1 名称:不整合なし 略称:定義なし
+     * コード:定義なし 名称:不整合なし 略称:定義なし
      */
-    不整合なし("1", "不整合なし"),
+    不整合なし("不整合なし"),
     /**
-     * コード:1 名称:不整合あり 略称:定義なし
+     * コード:定義なし 名称:不整合あり 略称:定義なし
      */
-    不整合あり("1", "不整合あり"),
+    不整合あり("不整合あり"),
     /**
-     * コード:1 名称:未作成 略称:定義なし
+     * コード:定義なし 名称:未作成 略称:定義なし
      */
-    未作成("1", "未作成");
+    未作成("未作成");
 
-    private final RString code;
     private final RString fullName;
 
-    private DaichoFuseigoJotai(String code, String fullname) {
-        this.code = new RString(code);
+    private DaichoFuseigoJotai(String fullname) {
         this.fullName = new RString(fullname);
-    }
-
-    /**
-     * 台帳不整合状態のコードを返します。
-     *
-     * @return 台帳不整合状態のコード
-     */
-    public RString getコード() {
-        return code;
     }
 
     /**
@@ -52,12 +41,12 @@ public enum DaichoFuseigoJotai {
     /**
      * 台帳不整合状態のコードと一致する内容を探します。
      *
-     * @param code 台帳不整合状態のコード
+     * @param fullname 台帳不整合状態の名称
      * @return {@code code} に対応する台帳不整合状態
      */
-    public static DaichoFuseigoJotai toValue(RString code) {
+    public static DaichoFuseigoJotai toValue(RString fullname) {
         for (DaichoFuseigoJotai daichoFuseigoJotai : DaichoFuseigoJotai.values()) {
-            if (daichoFuseigoJotai.code.equals(code)) {
+            if (daichoFuseigoJotai.get名称().equals(fullname)) {
                 return daichoFuseigoJotai;
             }
         }

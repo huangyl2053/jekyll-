@@ -11,6 +11,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum FuchoKarisanteiIdoShinkiShikakuFuka {
 
     /**
+     * コード:0 名称:賦課しない 略称:定義なし
+     */
+    賦課しない("0", "賦課しない"),
+    /**
      * コード:1 名称:賦課する 略称:定義なし
      */
     賦課する("1", "賦課する");
