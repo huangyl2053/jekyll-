@@ -115,7 +115,7 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanel {
                     UrWarningMessages.相違.getMessage().replace(
                             要支援計.toString(), 合計計算結果.toString())).respond();
         } else if (!ResponseHolder.isReRequest() && 整合性チェックNG_介護給付) {
-
+            getHandler8(div).介護給付チェック前設定();
             return ResponseData.of(div).addMessage(
                     UrWarningMessages.相違.getMessage().replace(
                             要介護計.toString(), 合計計算結果.toString())).respond();
@@ -158,6 +158,7 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanel {
                     new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                             UrQuestionMessages.処理実行の確認.getMessage().evaluate())).respond();
         }
+        チェックはいいえ(div, 整合性チェックNG_予防給付, 整合性チェックNG_介護給付, 整合性チェックNG_合計);
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(
                     new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
@@ -170,6 +171,26 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanel {
             return ResponseData.of(div).setState(DBU0020071StateName.完了状態);
         } else {
             return ResponseData.of(div).respond();
+        }
+    }
+
+    private void チェックはいいえ(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div,
+            boolean 整合性チェックNG_予防給付,
+            boolean 整合性チェックNG_介護給付,
+            boolean 整合性チェックNG_合計) {
+        if (new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No
+                || new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            if (整合性チェックNG_予防給付) {
+                getHandler8(div).予防給付チェック前設定();
+            }
+            if (整合性チェックNG_介護給付) {
+                getHandler8(div).介護給付チェック前設定();
+            }
+            if (整合性チェックNG_合計) {
+                getHandler8(div).合計チェック前設定();
+            }
         }
     }
 
