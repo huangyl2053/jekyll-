@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko;
 
-import java.util.List;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyotokkijiko.ChosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyotokkijiko.ChosahyoTokkijikoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,25 +17,15 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSource> {
 
-    private final List<ChosahyoTokkijikoItem> itemList;
+    private final ChosahyoTokkijikoEntity entity;
 
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 要介護認定調査票（特記事項）のItem
-     * @return 要介護認定調査票（特記事項）のReport
+     * @param entity 要介護認定調査票（特記事項）のentity
      */
-    public static ChosahyoTokkijikoReport createFrom(List<ChosahyoTokkijikoItem> itemList) {
-        return new ChosahyoTokkijikoReport(itemList);
-    }
-
-    /**
-     * インスタンスを生成します。
-     *
-     * @param itemList 要介護認定調査票（特記事項）のItem
-     */
-    protected ChosahyoTokkijikoReport(List<ChosahyoTokkijikoItem> itemList) {
-        this.itemList = itemList;
+    public ChosahyoTokkijikoReport(ChosahyoTokkijikoEntity entity) {
+        this.entity = entity;
     }
 
     /**
@@ -45,10 +35,8 @@ public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSourc
      */
     @Override
     public void writeBy(ReportSourceWriter<ChosahyoTokkijikoReportSource> reportSourceWriter) {
-        for (ChosahyoTokkijikoItem item : itemList) {
-            IChosahyoTokkijikoEditor editor = new ChosahyoTokkijikoEditorImpl(item);
-            IChosahyoTokkijikoBuilder builder = new ChosahyoTokkijikoBuilderImpl(editor);
-            reportSourceWriter.writeLine(builder);
-        }
+        IChosahyoTokkijikoEditor editor = new ChosahyoTokkijikoEditorImpl(entity);
+        IChosahyoTokkijikoBuilder builder = new ChosahyoTokkijikoBuilderImpl(editor);
+        reportSourceWriter.writeLine(builder);
     }
 }

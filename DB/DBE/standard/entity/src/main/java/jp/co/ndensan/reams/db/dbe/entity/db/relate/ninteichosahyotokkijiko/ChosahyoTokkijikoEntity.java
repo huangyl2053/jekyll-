@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko;
+package jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyotokkijiko;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- * 要介護認定調査票（特記事項）のItemです。
+ * 要介護認定調査票（特記事項）のEntityです。
  *
  * @reamsid_L DBE-0080-040 xuyannan
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ChosahyoTokkijikoItem {
+public class ChosahyoTokkijikoEntity {
 
     private final RString hokenshaNo4;
     private final RString shinseiYY1;
@@ -68,7 +68,7 @@ public class ChosahyoTokkijikoItem {
      * @param hihokenshaNo2 被保険者番号2
      * @param hihokenshaName 被保険者名
      */
-    public ChosahyoTokkijikoItem(
+    public ChosahyoTokkijikoEntity(
             RString hokenshaNo4,
             RString shinseiYY1,
             RString shinseiYY2,
