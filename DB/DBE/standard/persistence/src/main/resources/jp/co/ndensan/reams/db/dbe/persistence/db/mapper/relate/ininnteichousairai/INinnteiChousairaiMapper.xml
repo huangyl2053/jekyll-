@@ -269,7 +269,7 @@
         ,dbT5105."ninteichosaKanryoYMD"            AS  "ninteichosaKanryoYMD"
         ,dbT5101."shinseishoKanriNo"               AS "shinseishoKanriNo"
         ,dbT5201Waritukezumi."ninteichosaIraiRirekiNo"         AS "ninteichosaIraiRirekiNo"
-        ,dbT5101."ninteiChosainCode" AS "ninteiChosainCode"
+        ,dbT5201."ninteiChosainCode" AS "ninteiChosainCode"
         ,dbT5101."shoKisaiHokenshaNo" AS "hokenshaNo"
         ,dbT5201."ninteichosaItakusakiCode" AS "ninteichosaItakusakiCode"
         ,G."renrakusakiShimei" AS "renrakusakiShimei"
@@ -318,7 +318,7 @@
         AND dbT5913."ninteiChosainCode" = dbT5101."ninteiChosainCode"
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbT5910
         ON dbT5910."shichosonCode" = dbT7051."shichosonCode"
-        AND dbT5910."ninteichosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
+        AND dbT5910."ninteichosaItakusakiCode" = dbT5913."ninteiChosaItakusakiCode"
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911
         ON
         dbT5911."shichosonCode" IN (
@@ -397,7 +397,7 @@
                      SELECT 'X' 
                      FROM rgdb."DbT5150RenrakusakiJoho" AS G1
                      WHERE  G."shinseishoKanriNo" = G1."shinseishoKanriNo"
-                     AND G.renban = G1.renban
+                     AND G.renban <![CDATA[<]]> G1.renban
         )
         WHERE
         dbT5101."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
