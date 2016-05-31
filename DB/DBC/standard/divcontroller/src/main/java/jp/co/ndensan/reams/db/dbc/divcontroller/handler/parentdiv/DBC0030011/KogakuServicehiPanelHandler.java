@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -177,7 +178,7 @@ public class KogakuServicehiPanelHandler {
         List<KogakuShokaiTaishoshaKensakuResultEntity> 該当者一覧情報
                 = KogakuShokaiTaishoshaKensaku.createInstance().selectTaishosha(searchCondition);
         if (該当者一覧情報 == null) {
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage().evaluate());
         }
         List<dgKogakuServicehiRireki_Row> dataSource = new ArrayList<>();
         for (KogakuShokaiTaishoshaKensakuResultEntity entity : 該当者一覧情報) {
@@ -192,16 +193,16 @@ public class KogakuServicehiPanelHandler {
             }
             FlexibleYearMonth サービス提供年月 = entity.getEntity().getサービス提供年月();
             if (サービス提供年月 != null && !サービス提供年月.isEmpty()) {
-                row.setTxtTeikyoYM(サービス提供年月.toDateString());
+                row.setTxtTeikyoYM(サービス提供年月.wareki().firstYear(FirstYear.ICHI_NEN).toDateString());
             }
             row.getTxtKogakuShikyuAmount().setValue(entity.getEntity().get高額支給額());
             FlexibleDate 申請日 = entity.getEntity().get申請日();
             if (申請日 != null && !申請日.isEmpty()) {
-                row.setTxtShinseiDate(new RString(申請日.toString()));
+                row.setTxtShinseiDate(申請日.wareki().toDateString());
             }
             FlexibleDate 決定日 = entity.getEntity().get決定日();
             if (決定日 != null && !決定日.isEmpty()) {
-                row.setTxtKetteiDate(new RString(決定日.toString()));
+                row.setTxtKetteiDate(決定日.wareki().toDateString());
             }
             RString 支給区分コード = entity.getEntity().get支給区分コード();
             if (支給区分コード != null && !支給区分コード.isEmpty()) {
