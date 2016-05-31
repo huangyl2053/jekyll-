@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -112,8 +114,10 @@ public class SeikatsuhogoRirekiFinder {
                     teishiShuryo.append(連結);
                 }
                 if (!RString.isNullOrEmpty(entity.getFujoShuruiCode())
-                        && !RString.isNullOrEmpty(CodeMaster.getCodeRyakusho(コード種別, new Code(entity.getFujoShuruiCode())))) {
-                    codeRyakusho.append(CodeMaster.getCodeRyakusho(コード種別, new Code(entity.getFujoShuruiCode())));
+                        && !RString.isNullOrEmpty(CodeMaster.getCodeRyakusho(SubGyomuCode.DBZ介護共通, コード種別,
+                                        new Code(entity.getFujoShuruiCode()), FlexibleDate.getNowDate()))) {
+                    codeRyakusho.append(CodeMaster.getCodeRyakusho(SubGyomuCode.DBZ介護共通, コード種別,
+                            new Code(entity.getFujoShuruiCode()), FlexibleDate.getNowDate()));
                     codeRyakusho.append(連結);
                 }
                 relateEntity.setFujoShuruiCode(shuruiCode.toRString());

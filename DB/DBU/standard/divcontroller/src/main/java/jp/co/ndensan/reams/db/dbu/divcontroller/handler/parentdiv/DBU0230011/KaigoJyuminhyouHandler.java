@@ -17,8 +17,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 介護住民票個別事項連携情報作成【広域運用】画面のハンドラークラスです。
@@ -101,6 +103,8 @@ public class KaigoJyuminhyouHandler {
             div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().setDisabled(false);
         }
         div.getKonkaiInfoInput().getChkZenken().setSelectedItemsByKey(key);
+        div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getSelectedItems().get(数値_0).setModifyButtonState(DataGridButtonState.Disabled);
+        div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getSelectedItems().get(数値_0).setSelectable(false);
     }
 
     /**
@@ -110,6 +114,8 @@ public class KaigoJyuminhyouHandler {
     public void onClick_CloseButton() {
         div.getKonkaiInfoInput().setIsOpen(false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
+        div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().setSelectable(true);
+        div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().setModifyButtonState(DataGridButtonState.Enabled);
     }
 
     /**
@@ -123,7 +129,9 @@ public class KaigoJyuminhyouHandler {
             div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().setDisabled(true);
             div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().setDisabled(true);
         } else {
-            dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getSelectedItems().get(数値_0);
+            List<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgRowList = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getDataSource();
+            int rowcount = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().getId();
+            dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = dgRowList.get(rowcount);
             div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().setValue(dgRow.getTxtKonkaiStSakuseiYMD().getValue());
             div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().setValue(dgRow.getTxtKonkaiStSakuseiTime().getValue());
             div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().setDisabled(false);
@@ -132,10 +140,21 @@ public class KaigoJyuminhyouHandler {
     }
 
     /**
+     * 確定するボタン押下の場合、入力チェック実行します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs validateCheck() {
+        return createValidationHandler(div).validateCheck();
+    }
+
+    /**
      * 画面確定処理です。
      *
      */
     public void onClick_KakuButton() {
+        div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().setSelectable(true);
+        div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().setModifyButtonState(DataGridButtonState.Enabled);
         if (div.getKonkaiInfoInput().getChkZenken().isAllSelected()) {
             div.getKonkaiInfoInput().setIsOpen(false);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
@@ -181,5 +200,9 @@ public class KaigoJyuminhyouHandler {
                 div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().setDataSource(dgRowList);
             }
         }
+    }
+
+    private KaigoJyuminValidationHandler createValidationHandler(KobetsuJikoRenkeiInfoSakuseiKoikiDiv div) {
+        return new KaigoJyuminValidationHandler(div);
     }
 }

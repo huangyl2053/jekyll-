@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -71,9 +72,10 @@ public class MainPanelHandler {
             dgChosaChikuList_Row row = new dgChosaChikuList_Row();
             row.setNo(new RString(String.valueOf(index)));
             row.setChosaChikuCode(list.get調査地区コード());
-            row.setChosaChikuName(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, new CodeShubetsu("5002"), new Code(list.get調査地区コード())));
+            row.setChosaChikuName(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, new CodeShubetsu("5002"),
+                    new Code(list.get調査地区コード()), FlexibleDate.getNowDate()));
             row.setChosaChikuAbbreviatedName(CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援,
-                    new CodeShubetsu("5002"), new Code(list.get調査地区コード())));
+                    new CodeShubetsu("5002"), new Code(list.get調査地区コード()), FlexibleDate.getNowDate()));
             row.setShichosonCode(list.get市町村コード());
             row.setShichosnMeisho(list.get市町村名称());
             index++;
