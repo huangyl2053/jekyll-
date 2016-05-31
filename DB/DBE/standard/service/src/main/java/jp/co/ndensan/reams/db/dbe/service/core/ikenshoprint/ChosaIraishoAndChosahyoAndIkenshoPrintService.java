@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.ikenshoprint;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenItem;
 import jp.co.ndensan.reams.db.dbe.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenReport;
@@ -25,7 +26,6 @@ import jp.co.ndensan.reams.db.dbe.business.report.kaigohokenshindanmeireisho.Kai
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReport;
-import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoReport;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijikofree.ChosahyoTokkijikoFreeProperty;
@@ -246,10 +246,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
      *
      * @param 認定調査票_特記事項List 認定調査票_概況調査List
      */
-    public void print認定調査票_特記事項(List<ChosahyoTokkijikoItem> 認定調査票_特記事項List) {
+    public void print認定調査票_特記事項(List<ChosahyoTokkijikoBusiness> 認定調査票_特記事項List) {
         List<ChosahyoTokkijikoReport> list = new ArrayList<>();
         if (!認定調査票_特記事項List.isEmpty()) {
-            list.add(ChosahyoTokkijikoReport.createFrom(認定調査票_特記事項List));
+            list.add(new ChosahyoTokkijikoReport(認定調査票_特記事項List));
         }
         ChosahyoTokkijikoProperty property = new ChosahyoTokkijikoProperty();
         try (ReportAssembler<ChosahyoTokkijikoReportSource> assembler = createAssembler(property, reportManager)) {
@@ -265,7 +265,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
      *
      * @param 認定調査票_特記事項List 認定調査票_概況調査List
      */
-    public void print認定調査票_特記事項_フリー様式(List<ChosahyoTokkijikoItem> 認定調査票_特記事項List) {
+    public void print認定調査票_特記事項_フリー様式(List<ChosahyoTokkijikoBusiness> 認定調査票_特記事項List) {
         List<ChosahyoTokkijikoFreeReport> list = new ArrayList<>();
         if (!認定調査票_特記事項List.isEmpty()) {
             list.add(ChosahyoTokkijikoFreeReport.createFrom(認定調査票_特記事項List));
