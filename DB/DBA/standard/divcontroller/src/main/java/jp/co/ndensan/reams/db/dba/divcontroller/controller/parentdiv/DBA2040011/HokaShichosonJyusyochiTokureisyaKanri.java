@@ -131,7 +131,8 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
             RString menuId = ResponseHolder.getMenuID();
             if (((メニューID_施設入所により適用.equals(menuId) || メニューID_転入転出保留対象者管理.equals(menuId)
                     || メニューID_施設退所により解除.equals(menuId))
-                    && RowState.Unchanged.equals(div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getRowState()))
+                    && (div.getCddTaJushochiTokureishaKanri().get適用情報一覧().isEmpty()
+                    || RowState.Unchanged.equals(div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getRowState())))
                     || (メニューID_施設変更により変更.equals(menuId) && !get変更(div))) {
                 InformationMessage message = new InformationMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode(),
                         DbzInformationMessages.内容変更なしで保存不可.getMessage().evaluate());
