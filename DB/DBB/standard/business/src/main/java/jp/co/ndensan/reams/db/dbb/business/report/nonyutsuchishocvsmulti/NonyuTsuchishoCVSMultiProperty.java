@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvsmulticover;
+package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvsmulti;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,7 +25,8 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  */
 public class NonyuTsuchishoCVSMultiProperty extends ReportPropertyBase<NonyuTsuchishoCVSMultiSource> {
 
-    private static final List<RString> LAYOUT_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("layout")));
+    private static final List<RString> LAYOUT_BREAK_KEYS = Collections.
+            unmodifiableList(Arrays.asList(NonyuTsuchishoCVSMultiSource.LAYOUTBREAKITEM));
 
     /**
      * インスタンスを生成します。
@@ -43,23 +44,18 @@ public class NonyuTsuchishoCVSMultiProperty extends ReportPropertyBase<NonyuTsuc
 
 
 
-
-
-
-
-
-
             LAYOUT_BREAK_KEYS) {
             @Override
             public ReportLineRecord<NonyuTsuchishoCVSMultiSource> occuredBreak(
                     ReportLineRecord<NonyuTsuchishoCVSMultiSource> currentRecord,
                     ReportLineRecord<NonyuTsuchishoCVSMultiSource> nextRecord,
                     ReportDynamicChart dynamicChart) {
-                if (nextRecord.equals(ReportLineRecord.LAST_RECORD)) {
-                    return currentRecord;
+                int layout = currentRecord.getSource().layoutBreakItem;
+                currentRecord.setFormGroupIndex(layout);
+                if (nextRecord != null && nextRecord.getSource() != null) {
+                    layout = nextRecord.getSource().layoutBreakItem;
+                    nextRecord.setFormGroupIndex(layout);
                 }
-                NonyuTsuchishoCVSMultiSource.Layouts layout = nextRecord.getSource().layout;
-                nextRecord.setFormGroupIndex(layout.index());
                 return currentRecord;
             }
         }).fixed();

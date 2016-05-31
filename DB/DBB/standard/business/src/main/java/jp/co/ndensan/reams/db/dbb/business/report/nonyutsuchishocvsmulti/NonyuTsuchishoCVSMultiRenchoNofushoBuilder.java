@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvsmultirenchonofusho;
+package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvsmulti;
 
-import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvsmulti.NonyuTsuchishoCVSMultiSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvsmulti.NonyuTsuchishoCVSMultiRenchoSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -31,11 +31,11 @@ public class NonyuTsuchishoCVSMultiRenchoNofushoBuilder implements INonyuTsuchis
     /**
      * 帳票ソースをビルドします。
      *
-     * @return {@link NonyuTsuchishoCVSMultiSource}
+     * @return {@link NonyuTsuchishoCVSMultiRenchoSource}
      */
     @Override
-    public NonyuTsuchishoCVSMultiSource build() {
-        return ReportEditorJoiner.from(new NonyuTsuchishoCVSMultiSource()).join(nofushoEditor).buildSource();
+    public NonyuTsuchishoCVSMultiRenchoSource build() {
+        return ReportEditorJoiner.from(new NonyuTsuchishoCVSMultiRenchoSource()).join(nofushoEditor).buildSource();
 
     }
 
