@@ -42,16 +42,18 @@
         ON ShoKofuKaishu."shikibetsuCode" = PSM."shikibetsuCode"
         WHERE
         ShoKofuKaishu."logicalDeletedFlag" = 'false'
-        AND
-        ShoKofuKaishu."kofuJiyu" IN
-        <foreach
-            collection="kofuJiyulist"
-            item="code"
-            open="("
-            separator=","
-            close=")">
-            #{code}
-        </foreach>
+        <if test="kofuJiyulist.size() > 0">
+            AND
+            ShoKofuKaishu."kofuJiyu" IN
+            <foreach
+                collection="kofuJiyulist"
+                item="code"
+                open="("
+                separator=","
+                close=")">
+                #{code}
+            </foreach>
+        </if>
         <if test="kaishuJiyulist.size() > 0">
             AND
             ShoKofuKaishu."kaishuJiyu" IN
