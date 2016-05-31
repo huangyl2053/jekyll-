@@ -21,16 +21,16 @@ public class JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("radNinteiShinseichuKubun")
-    private RadioButton radNinteiShinseichuKubun;
-    @JsonProperty("radServiceKubun")
-    private RadioButton radServiceKubun;
-    @JsonProperty("radTokureiKeigenSochiTaisho")
-    private RadioButton radTokureiKeigenSochiTaisho;
+    @JsonProperty("radTokuteiNyushoshaNinteiShinseichuKubun")
+    private RadioButton radTokuteiNyushoshaNinteiShinseichuKubun;
+    @JsonProperty("radTokuteiNyushoshaKaigoServiceKubun")
+    private RadioButton radTokuteiNyushoshaKaigoServiceKubun;
+    @JsonProperty("radKaizeisoTokureiGengakuSochiTaishoFlag")
+    private RadioButton radKaizeisoTokureiGengakuSochiTaishoFlag;
     @JsonProperty("txtShokuhiFutanGendogaku")
     private TextBoxNum txtShokuhiFutanGendogaku;
-    @JsonProperty("txtFutanGendogakuTekiyoDateRange")
-    private TextBoxDateRange txtFutanGendogakuTekiyoDateRange;
+    @JsonProperty("txtFutanGendogakuTekiyoYMD")
+    private TextBoxDateRange txtFutanGendogakuTekiyoYMD;
     @JsonProperty("lblKyojuhiFutanGendogaku")
     private Label lblKyojuhiFutanGendogaku;
     @JsonProperty("lin1")
@@ -59,57 +59,57 @@ public class JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getradNinteiShinseichuKubun
-     * @return radNinteiShinseichuKubun
+     * getradTokuteiNyushoshaNinteiShinseichuKubun
+     * @return radTokuteiNyushoshaNinteiShinseichuKubun
      */
-    @JsonProperty("radNinteiShinseichuKubun")
-    public RadioButton getRadNinteiShinseichuKubun() {
-        return radNinteiShinseichuKubun;
+    @JsonProperty("radTokuteiNyushoshaNinteiShinseichuKubun")
+    public RadioButton getRadTokuteiNyushoshaNinteiShinseichuKubun() {
+        return radTokuteiNyushoshaNinteiShinseichuKubun;
     }
 
     /*
-     * setradNinteiShinseichuKubun
-     * @param radNinteiShinseichuKubun radNinteiShinseichuKubun
+     * setradTokuteiNyushoshaNinteiShinseichuKubun
+     * @param radTokuteiNyushoshaNinteiShinseichuKubun radTokuteiNyushoshaNinteiShinseichuKubun
      */
-    @JsonProperty("radNinteiShinseichuKubun")
-    public void setRadNinteiShinseichuKubun(RadioButton radNinteiShinseichuKubun) {
-        this.radNinteiShinseichuKubun = radNinteiShinseichuKubun;
+    @JsonProperty("radTokuteiNyushoshaNinteiShinseichuKubun")
+    public void setRadTokuteiNyushoshaNinteiShinseichuKubun(RadioButton radTokuteiNyushoshaNinteiShinseichuKubun) {
+        this.radTokuteiNyushoshaNinteiShinseichuKubun = radTokuteiNyushoshaNinteiShinseichuKubun;
     }
 
     /*
-     * getradServiceKubun
-     * @return radServiceKubun
+     * getradTokuteiNyushoshaKaigoServiceKubun
+     * @return radTokuteiNyushoshaKaigoServiceKubun
      */
-    @JsonProperty("radServiceKubun")
-    public RadioButton getRadServiceKubun() {
-        return radServiceKubun;
+    @JsonProperty("radTokuteiNyushoshaKaigoServiceKubun")
+    public RadioButton getRadTokuteiNyushoshaKaigoServiceKubun() {
+        return radTokuteiNyushoshaKaigoServiceKubun;
     }
 
     /*
-     * setradServiceKubun
-     * @param radServiceKubun radServiceKubun
+     * setradTokuteiNyushoshaKaigoServiceKubun
+     * @param radTokuteiNyushoshaKaigoServiceKubun radTokuteiNyushoshaKaigoServiceKubun
      */
-    @JsonProperty("radServiceKubun")
-    public void setRadServiceKubun(RadioButton radServiceKubun) {
-        this.radServiceKubun = radServiceKubun;
+    @JsonProperty("radTokuteiNyushoshaKaigoServiceKubun")
+    public void setRadTokuteiNyushoshaKaigoServiceKubun(RadioButton radTokuteiNyushoshaKaigoServiceKubun) {
+        this.radTokuteiNyushoshaKaigoServiceKubun = radTokuteiNyushoshaKaigoServiceKubun;
     }
 
     /*
-     * getradTokureiKeigenSochiTaisho
-     * @return radTokureiKeigenSochiTaisho
+     * getradKaizeisoTokureiGengakuSochiTaishoFlag
+     * @return radKaizeisoTokureiGengakuSochiTaishoFlag
      */
-    @JsonProperty("radTokureiKeigenSochiTaisho")
-    public RadioButton getRadTokureiKeigenSochiTaisho() {
-        return radTokureiKeigenSochiTaisho;
+    @JsonProperty("radKaizeisoTokureiGengakuSochiTaishoFlag")
+    public RadioButton getRadKaizeisoTokureiGengakuSochiTaishoFlag() {
+        return radKaizeisoTokureiGengakuSochiTaishoFlag;
     }
 
     /*
-     * setradTokureiKeigenSochiTaisho
-     * @param radTokureiKeigenSochiTaisho radTokureiKeigenSochiTaisho
+     * setradKaizeisoTokureiGengakuSochiTaishoFlag
+     * @param radKaizeisoTokureiGengakuSochiTaishoFlag radKaizeisoTokureiGengakuSochiTaishoFlag
      */
-    @JsonProperty("radTokureiKeigenSochiTaisho")
-    public void setRadTokureiKeigenSochiTaisho(RadioButton radTokureiKeigenSochiTaisho) {
-        this.radTokureiKeigenSochiTaisho = radTokureiKeigenSochiTaisho;
+    @JsonProperty("radKaizeisoTokureiGengakuSochiTaishoFlag")
+    public void setRadKaizeisoTokureiGengakuSochiTaishoFlag(RadioButton radKaizeisoTokureiGengakuSochiTaishoFlag) {
+        this.radKaizeisoTokureiGengakuSochiTaishoFlag = radKaizeisoTokureiGengakuSochiTaishoFlag;
     }
 
     /*
@@ -131,21 +131,21 @@ public class JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv extends Panel {
     }
 
     /*
-     * gettxtFutanGendogakuTekiyoDateRange
-     * @return txtFutanGendogakuTekiyoDateRange
+     * gettxtFutanGendogakuTekiyoYMD
+     * @return txtFutanGendogakuTekiyoYMD
      */
-    @JsonProperty("txtFutanGendogakuTekiyoDateRange")
-    public TextBoxDateRange getTxtFutanGendogakuTekiyoDateRange() {
-        return txtFutanGendogakuTekiyoDateRange;
+    @JsonProperty("txtFutanGendogakuTekiyoYMD")
+    public TextBoxDateRange getTxtFutanGendogakuTekiyoYMD() {
+        return txtFutanGendogakuTekiyoYMD;
     }
 
     /*
-     * settxtFutanGendogakuTekiyoDateRange
-     * @param txtFutanGendogakuTekiyoDateRange txtFutanGendogakuTekiyoDateRange
+     * settxtFutanGendogakuTekiyoYMD
+     * @param txtFutanGendogakuTekiyoYMD txtFutanGendogakuTekiyoYMD
      */
-    @JsonProperty("txtFutanGendogakuTekiyoDateRange")
-    public void setTxtFutanGendogakuTekiyoDateRange(TextBoxDateRange txtFutanGendogakuTekiyoDateRange) {
-        this.txtFutanGendogakuTekiyoDateRange = txtFutanGendogakuTekiyoDateRange;
+    @JsonProperty("txtFutanGendogakuTekiyoYMD")
+    public void setTxtFutanGendogakuTekiyoYMD(TextBoxDateRange txtFutanGendogakuTekiyoYMD) {
+        this.txtFutanGendogakuTekiyoYMD = txtFutanGendogakuTekiyoYMD;
     }
 
     /*

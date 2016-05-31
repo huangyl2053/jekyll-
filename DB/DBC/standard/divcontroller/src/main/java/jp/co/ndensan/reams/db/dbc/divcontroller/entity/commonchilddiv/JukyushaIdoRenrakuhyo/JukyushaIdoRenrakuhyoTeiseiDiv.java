@@ -21,8 +21,6 @@ public class JukyushaIdoRenrakuhyoTeiseiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lin2")
-    private HorizontalLine lin2;
     @JsonProperty("txtTeiseiYMD")
     private TextBoxDate txtTeiseiYMD;
     @JsonProperty("radTeiseiKubunCode")
@@ -36,24 +34,6 @@ public class JukyushaIdoRenrakuhyoTeiseiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getlin2
-     * @return lin2
-     */
-    @JsonProperty("lin2")
-    public HorizontalLine getLin2() {
-        return lin2;
-    }
-
-    /*
-     * setlin2
-     * @param lin2 lin2
-     */
-    @JsonProperty("lin2")
-    public void setLin2(HorizontalLine lin2) {
-        this.lin2 = lin2;
-    }
-
     /*
      * gettxtTeiseiYMD
      * @return txtTeiseiYMD

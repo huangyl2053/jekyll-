@@ -33,8 +33,6 @@ public class tblKikanDiv extends TablePanel {
     private celKikan41AttblKikan celKikan41;
     @JsonProperty("celKikan51")
     private celKikan51AttblKikan celKikan51;
-    @JsonProperty("celKikan61")
-    private celKikan61AttblKikan celKikan61;
     @JsonProperty("celKikan12")
     private celKikan12AttblKikan celKikan12;
     @JsonProperty("celKikan22")
@@ -45,8 +43,6 @@ public class tblKikanDiv extends TablePanel {
     private celKikan42AttblKikan celKikan42;
     @JsonProperty("celKikan52")
     private celKikan52AttblKikan celKikan52;
-    @JsonProperty("celKikan62")
-    private celKikan62AttblKikan celKikan62;
     @JsonProperty("celKikan13")
     private celKikan13AttblKikan celKikan13;
     @JsonProperty("celKikan23")
@@ -57,8 +53,6 @@ public class tblKikanDiv extends TablePanel {
     private celKikan43AttblKikan celKikan43;
     @JsonProperty("celKikan53")
     private celKikan53AttblKikan celKikan53;
-    @JsonProperty("celKikan63")
-    private celKikan63AttblKikan celKikan63;
 
     /*
      * [ Helperの作成 ]
@@ -90,11 +84,6 @@ public class tblKikanDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblHokenryogaku() {
-        return this.celKikan61.getLblHokenryogaku();
-    }
-
-    @JsonIgnore
     public Label getLblKikanData1() {
         return this.celKikan12.getLblKikanData1();
     }
@@ -120,11 +109,6 @@ public class tblKikanDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblHokenryogakuData1() {
-        return this.celKikan62.getLblHokenryogakuData1();
-    }
-
-    @JsonIgnore
     public Label getLblKikanData2() {
         return this.celKikan13.getLblKikanData2();
     }
@@ -147,11 +131,6 @@ public class tblKikanDiv extends TablePanel {
     @JsonIgnore
     public Label getLblHokenryoSanshutsugakuData2() {
         return this.celKikan53.getLblHokenryoSanshutsugakuData2();
-    }
-
-    @JsonIgnore
-    public Label getLblHokenryogakuData2() {
-        return this.celKikan63.getLblHokenryogakuData2();
     }
 
     /*
@@ -251,24 +230,6 @@ public class tblKikanDiv extends TablePanel {
     }
 
     /*
-     * getcelKikan61
-     * @return celKikan61
-     */
-    @JsonProperty("celKikan61")
-    private celKikan61AttblKikan getCelKikan61() {
-        return celKikan61;
-    }
-
-    /*
-     * setcelKikan61
-     * @param celKikan61 celKikan61
-     */
-    @JsonProperty("celKikan61")
-    private void setCelKikan61(celKikan61AttblKikan celKikan61) {
-        this.celKikan61 = celKikan61;
-    }
-
-    /*
      * getcelKikan12
      * @return celKikan12
      */
@@ -359,24 +320,6 @@ public class tblKikanDiv extends TablePanel {
     }
 
     /*
-     * getcelKikan62
-     * @return celKikan62
-     */
-    @JsonProperty("celKikan62")
-    private celKikan62AttblKikan getCelKikan62() {
-        return celKikan62;
-    }
-
-    /*
-     * setcelKikan62
-     * @param celKikan62 celKikan62
-     */
-    @JsonProperty("celKikan62")
-    private void setCelKikan62(celKikan62AttblKikan celKikan62) {
-        this.celKikan62 = celKikan62;
-    }
-
-    /*
      * getcelKikan13
      * @return celKikan13
      */
@@ -464,24 +407,6 @@ public class tblKikanDiv extends TablePanel {
     @JsonProperty("celKikan53")
     private void setCelKikan53(celKikan53AttblKikan celKikan53) {
         this.celKikan53 = celKikan53;
-    }
-
-    /*
-     * getcelKikan63
-     * @return celKikan63
-     */
-    @JsonProperty("celKikan63")
-    private celKikan63AttblKikan getCelKikan63() {
-        return celKikan63;
-    }
-
-    /*
-     * setcelKikan63
-     * @param celKikan63 celKikan63
-     */
-    @JsonProperty("celKikan63")
-    private void setCelKikan63(celKikan63AttblKikan celKikan63) {
-        this.celKikan63 = celKikan63;
     }
 
     // </editor-fold>
@@ -637,36 +562,6 @@ class celKikan51AttblKikan extends TableCell {
     // </editor-fold>
 }
 /**
- * celKikan61 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKikan61AttblKikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
-    @JsonProperty("lblHokenryogaku")
-    private Label lblHokenryogaku;
-
-    /*
-     * getlblHokenryogaku
-     * @return lblHokenryogaku
-     */
-    @JsonProperty("lblHokenryogaku")
-    public Label getLblHokenryogaku() {
-        return lblHokenryogaku;
-    }
-
-    /*
-     * setlblHokenryogaku
-     * @param lblHokenryogaku lblHokenryogaku
-     */
-    @JsonProperty("lblHokenryogaku")
-    public void setLblHokenryogaku(Label lblHokenryogaku) {
-        this.lblHokenryogaku = lblHokenryogaku;
-    }
-
-    // </editor-fold>
-}
-/**
  * celKikan12 のクラスファイル 
  * 
  * @author 自動生成
@@ -817,36 +712,6 @@ class celKikan52AttblKikan extends TableCell {
     // </editor-fold>
 }
 /**
- * celKikan62 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKikan62AttblKikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
-    @JsonProperty("lblHokenryogakuData1")
-    private Label lblHokenryogakuData1;
-
-    /*
-     * getlblHokenryogakuData1
-     * @return lblHokenryogakuData1
-     */
-    @JsonProperty("lblHokenryogakuData1")
-    public Label getLblHokenryogakuData1() {
-        return lblHokenryogakuData1;
-    }
-
-    /*
-     * setlblHokenryogakuData1
-     * @param lblHokenryogakuData1 lblHokenryogakuData1
-     */
-    @JsonProperty("lblHokenryogakuData1")
-    public void setLblHokenryogakuData1(Label lblHokenryogakuData1) {
-        this.lblHokenryogakuData1 = lblHokenryogakuData1;
-    }
-
-    // </editor-fold>
-}
-/**
  * celKikan13 のクラスファイル 
  * 
  * @author 自動生成
@@ -992,36 +857,6 @@ class celKikan53AttblKikan extends TableCell {
     @JsonProperty("lblHokenryoSanshutsugakuData2")
     public void setLblHokenryoSanshutsugakuData2(Label lblHokenryoSanshutsugakuData2) {
         this.lblHokenryoSanshutsugakuData2 = lblHokenryoSanshutsugakuData2;
-    }
-
-    // </editor-fold>
-}
-/**
- * celKikan63 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKikan63AttblKikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
-    @JsonProperty("lblHokenryogakuData2")
-    private Label lblHokenryogakuData2;
-
-    /*
-     * getlblHokenryogakuData2
-     * @return lblHokenryogakuData2
-     */
-    @JsonProperty("lblHokenryogakuData2")
-    public Label getLblHokenryogakuData2() {
-        return lblHokenryogakuData2;
-    }
-
-    /*
-     * setlblHokenryogakuData2
-     * @param lblHokenryogakuData2 lblHokenryogakuData2
-     */
-    @JsonProperty("lblHokenryogakuData2")
-    public void setLblHokenryogakuData2(Label lblHokenryogakuData2) {
-        this.lblHokenryogakuData2 = lblHokenryogakuData2;
     }
 
     // </editor-fold>

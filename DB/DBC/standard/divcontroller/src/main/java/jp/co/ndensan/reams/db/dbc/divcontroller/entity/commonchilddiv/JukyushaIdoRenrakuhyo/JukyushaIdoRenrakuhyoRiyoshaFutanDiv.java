@@ -21,12 +21,12 @@ public class JukyushaIdoRenrakuhyoRiyoshaFutanDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("radRiyoshaFutanKubun")
-    private RadioButton radRiyoshaFutanKubun;
-    @JsonProperty("txtRiyoshaFutanKyufuritsu")
-    private TextBoxNum txtRiyoshaFutanKyufuritsu;
-    @JsonProperty("txtRiyoshaFutanTekiyoDateRange")
-    private TextBoxDateRange txtRiyoshaFutanTekiyoDateRange;
+    @JsonProperty("radRiyoshaFutanKubunCode")
+    private RadioButton radRiyoshaFutanKubunCode;
+    @JsonProperty("txtKyufuritsu")
+    private TextBoxNum txtKyufuritsu;
+    @JsonProperty("txtTekiyoYMD")
+    private TextBoxDateRange txtTekiyoYMD;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -35,57 +35,57 @@ public class JukyushaIdoRenrakuhyoRiyoshaFutanDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getradRiyoshaFutanKubun
-     * @return radRiyoshaFutanKubun
+     * getradRiyoshaFutanKubunCode
+     * @return radRiyoshaFutanKubunCode
      */
-    @JsonProperty("radRiyoshaFutanKubun")
-    public RadioButton getRadRiyoshaFutanKubun() {
-        return radRiyoshaFutanKubun;
+    @JsonProperty("radRiyoshaFutanKubunCode")
+    public RadioButton getRadRiyoshaFutanKubunCode() {
+        return radRiyoshaFutanKubunCode;
     }
 
     /*
-     * setradRiyoshaFutanKubun
-     * @param radRiyoshaFutanKubun radRiyoshaFutanKubun
+     * setradRiyoshaFutanKubunCode
+     * @param radRiyoshaFutanKubunCode radRiyoshaFutanKubunCode
      */
-    @JsonProperty("radRiyoshaFutanKubun")
-    public void setRadRiyoshaFutanKubun(RadioButton radRiyoshaFutanKubun) {
-        this.radRiyoshaFutanKubun = radRiyoshaFutanKubun;
+    @JsonProperty("radRiyoshaFutanKubunCode")
+    public void setRadRiyoshaFutanKubunCode(RadioButton radRiyoshaFutanKubunCode) {
+        this.radRiyoshaFutanKubunCode = radRiyoshaFutanKubunCode;
     }
 
     /*
-     * gettxtRiyoshaFutanKyufuritsu
-     * @return txtRiyoshaFutanKyufuritsu
+     * gettxtKyufuritsu
+     * @return txtKyufuritsu
      */
-    @JsonProperty("txtRiyoshaFutanKyufuritsu")
-    public TextBoxNum getTxtRiyoshaFutanKyufuritsu() {
-        return txtRiyoshaFutanKyufuritsu;
+    @JsonProperty("txtKyufuritsu")
+    public TextBoxNum getTxtKyufuritsu() {
+        return txtKyufuritsu;
     }
 
     /*
-     * settxtRiyoshaFutanKyufuritsu
-     * @param txtRiyoshaFutanKyufuritsu txtRiyoshaFutanKyufuritsu
+     * settxtKyufuritsu
+     * @param txtKyufuritsu txtKyufuritsu
      */
-    @JsonProperty("txtRiyoshaFutanKyufuritsu")
-    public void setTxtRiyoshaFutanKyufuritsu(TextBoxNum txtRiyoshaFutanKyufuritsu) {
-        this.txtRiyoshaFutanKyufuritsu = txtRiyoshaFutanKyufuritsu;
+    @JsonProperty("txtKyufuritsu")
+    public void setTxtKyufuritsu(TextBoxNum txtKyufuritsu) {
+        this.txtKyufuritsu = txtKyufuritsu;
     }
 
     /*
-     * gettxtRiyoshaFutanTekiyoDateRange
-     * @return txtRiyoshaFutanTekiyoDateRange
+     * gettxtTekiyoYMD
+     * @return txtTekiyoYMD
      */
-    @JsonProperty("txtRiyoshaFutanTekiyoDateRange")
-    public TextBoxDateRange getTxtRiyoshaFutanTekiyoDateRange() {
-        return txtRiyoshaFutanTekiyoDateRange;
+    @JsonProperty("txtTekiyoYMD")
+    public TextBoxDateRange getTxtTekiyoYMD() {
+        return txtTekiyoYMD;
     }
 
     /*
-     * settxtRiyoshaFutanTekiyoDateRange
-     * @param txtRiyoshaFutanTekiyoDateRange txtRiyoshaFutanTekiyoDateRange
+     * settxtTekiyoYMD
+     * @param txtTekiyoYMD txtTekiyoYMD
      */
-    @JsonProperty("txtRiyoshaFutanTekiyoDateRange")
-    public void setTxtRiyoshaFutanTekiyoDateRange(TextBoxDateRange txtRiyoshaFutanTekiyoDateRange) {
-        this.txtRiyoshaFutanTekiyoDateRange = txtRiyoshaFutanTekiyoDateRange;
+    @JsonProperty("txtTekiyoYMD")
+    public void setTxtTekiyoYMD(TextBoxDateRange txtTekiyoYMD) {
+        this.txtTekiyoYMD = txtTekiyoYMD;
     }
 
     // </editor-fold>

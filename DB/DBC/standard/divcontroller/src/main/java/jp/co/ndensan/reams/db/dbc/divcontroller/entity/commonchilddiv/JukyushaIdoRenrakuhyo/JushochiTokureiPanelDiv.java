@@ -4,13 +4,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.JukyushaI
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.HokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.IHokenshaJohoDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 
 /**
  * JushochiTokureiPanel のクラスファイル
@@ -18,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
  * @author 自動生成
  */
 public class JushochiTokureiPanelDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -28,10 +23,10 @@ public class JushochiTokureiPanelDiv extends Panel {
      */
     @JsonProperty("radJushochiTokureiTaishoshaKubun")
     private RadioButton radJushochiTokureiTaishoshaKubun;
-    @JsonProperty("txtJushochiTokureiTekiyoDateRange")
-    private TextBoxDateRange txtJushochiTokureiTekiyoDateRange;
-    @JsonProperty("ccdHokenshaJoho")
-    private HokenshaJohoDiv ccdHokenshaJoho;
+    @JsonProperty("txtJushochiTokureiTekiyoYMD")
+    private TextBoxDateRange txtJushochiTokureiTekiyoYMD;
+    @JsonProperty("HokenshaJohoPanel")
+    private HokenshaJohoPanelDiv HokenshaJohoPanel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -58,30 +53,39 @@ public class JushochiTokureiPanelDiv extends Panel {
     }
 
     /*
-     * gettxtJushochiTokureiTekiyoDateRange
-     * @return txtJushochiTokureiTekiyoDateRange
+     * gettxtJushochiTokureiTekiyoYMD
+     * @return txtJushochiTokureiTekiyoYMD
      */
-    @JsonProperty("txtJushochiTokureiTekiyoDateRange")
-    public TextBoxDateRange getTxtJushochiTokureiTekiyoDateRange() {
-        return txtJushochiTokureiTekiyoDateRange;
+    @JsonProperty("txtJushochiTokureiTekiyoYMD")
+    public TextBoxDateRange getTxtJushochiTokureiTekiyoYMD() {
+        return txtJushochiTokureiTekiyoYMD;
     }
 
     /*
-     * settxtJushochiTokureiTekiyoDateRange
-     * @param txtJushochiTokureiTekiyoDateRange txtJushochiTokureiTekiyoDateRange
+     * settxtJushochiTokureiTekiyoYMD
+     * @param txtJushochiTokureiTekiyoYMD txtJushochiTokureiTekiyoYMD
      */
-    @JsonProperty("txtJushochiTokureiTekiyoDateRange")
-    public void setTxtJushochiTokureiTekiyoDateRange(TextBoxDateRange txtJushochiTokureiTekiyoDateRange) {
-        this.txtJushochiTokureiTekiyoDateRange = txtJushochiTokureiTekiyoDateRange;
+    @JsonProperty("txtJushochiTokureiTekiyoYMD")
+    public void setTxtJushochiTokureiTekiyoYMD(TextBoxDateRange txtJushochiTokureiTekiyoYMD) {
+        this.txtJushochiTokureiTekiyoYMD = txtJushochiTokureiTekiyoYMD;
     }
 
     /*
-     * getccdHokenshaJoho
-     * @return ccdHokenshaJoho
+     * getHokenshaJohoPanel
+     * @return HokenshaJohoPanel
      */
-    @JsonProperty("ccdHokenshaJoho")
-    public IHokenshaJohoDiv getCcdHokenshaJoho() {
-        return ccdHokenshaJoho;
+    @JsonProperty("HokenshaJohoPanel")
+    public HokenshaJohoPanelDiv getHokenshaJohoPanel() {
+        return HokenshaJohoPanel;
+    }
+
+    /*
+     * setHokenshaJohoPanel
+     * @param HokenshaJohoPanel HokenshaJohoPanel
+     */
+    @JsonProperty("HokenshaJohoPanel")
+    public void setHokenshaJohoPanel(HokenshaJohoPanelDiv HokenshaJohoPanel) {
+        this.HokenshaJohoPanel = HokenshaJohoPanel;
     }
 
     // </editor-fold>
