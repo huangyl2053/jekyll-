@@ -63,20 +63,8 @@ var DBD;
                 return new UZA.Panel(this.convFiledName("DvKeikakuIraiUketsuke"));
             };
 
-            Controls.prototype.txtIraiShinkiShinsei = function () {
-                return new UZA.TextBox(this.convFiledName("txtIraiShinkiShinsei"));
-            };
-
-            Controls.prototype.txtIraiSaishinsei = function () {
-                return new UZA.TextBox(this.convFiledName("txtIraiSaishinsei"));
-            };
-
-            Controls.prototype.txtIraiHenkoShinsei = function () {
-                return new UZA.TextBox(this.convFiledName("txtIraiHenkoShinsei"));
-            };
-
-            Controls.prototype.txtIraiServiceHenko = function () {
-                return new UZA.TextBox(this.convFiledName("txtIraiServiceHenko"));
+            Controls.prototype.txtIraiNinteiShinseiJokyo = function () {
+                return new UZA.TextBox(this.convFiledName("txtIraiNinteiShinseiJokyo"));
             };
 
             Controls.prototype.txtTodokedeKubun = function () {
@@ -111,24 +99,8 @@ var DBD;
                 return new UZA.TextBox(this.convFiledName("txtJigyoshaName"));
             };
 
-            Controls.prototype.txtKyotakuKaigo = function () {
-                return new UZA.TextBox(this.convFiledName("txtKyotakuKaigo"));
-            };
-
-            Controls.prototype.txtKyotakuYobo = function () {
-                return new UZA.TextBox(this.convFiledName("txtKyotakuYobo"));
-            };
-
-            Controls.prototype.txtShokiboKaigo = function () {
-                return new UZA.TextBox(this.convFiledName("txtShokiboKaigo"));
-            };
-
-            Controls.prototype.txtShokiboYobo = function () {
-                return new UZA.TextBox(this.convFiledName("txtShokiboYobo"));
-            };
-
-            Controls.prototype.txtCare = function () {
-                return new UZA.TextBox(this.convFiledName("txtCare"));
+            Controls.prototype.txtServiceShurui = function () {
+                return new UZA.TextBox(this.convFiledName("txtServiceShurui"));
             };
 
             Controls.prototype.txtYubinNo = function () {
@@ -171,20 +143,8 @@ var DBD;
                 return new UZA.Panel(this.convFiledName("DvJikoSakuseiKeikaku"));
             };
 
-            Controls.prototype.txtJikoShinkiShinsei = function () {
-                return new UZA.TextBox(this.convFiledName("txtJikoShinkiShinsei"));
-            };
-
-            Controls.prototype.txtJikoSaishinsei = function () {
-                return new UZA.TextBox(this.convFiledName("txtJikoSaishinsei"));
-            };
-
-            Controls.prototype.txtJikoHenkoShinsei = function () {
-                return new UZA.TextBox(this.convFiledName("txtJikoHenkoShinsei"));
-            };
-
-            Controls.prototype.txtJikoServiceHenko = function () {
-                return new UZA.TextBox(this.convFiledName("txtJikoServiceHenko"));
+            Controls.prototype.txtJikoNinteiShinseiJokyo = function () {
+                return new UZA.TextBox(this.convFiledName("txtJikoNinteiShinseiJokyo"));
             };
 
             Controls.prototype.linLine6 = function () {

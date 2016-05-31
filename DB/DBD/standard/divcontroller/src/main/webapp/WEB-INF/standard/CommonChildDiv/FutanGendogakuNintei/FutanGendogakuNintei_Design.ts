@@ -41,10 +41,6 @@ module DBD {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public txtHiddenHihokenshaNo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtHiddenHihokenshaNo"));
-            }
-
             public dgFutanGendogakuNinteiList(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgFutanGendogakuNinteiList"));
             }
@@ -153,32 +149,16 @@ module DBD {
                 return new UZA.TextBox(this.convFiledName("txtShimei"));
             }
 
-            public TextBoxFlexibleDate1(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("TextBoxFlexibleDate1"));
-            }
-
             public txtBirthday(): UZA.TextBoxFlexibleDate {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtBirthday"));
-            }
-
-            public txtTelNo(): UZA.TextBoxTelNo {
-                return new UZA.TextBoxTelNo(this.convFiledName("txtTelNo"));
             }
 
             public txtRenrakusaki(): UZA.TextBoxTelNo {
                 return new UZA.TextBoxTelNo(this.convFiledName("txtRenrakusaki"));
             }
 
-            public txtJusho(): UZA.TextBoxJusho {
-                return new UZA.TextBoxJusho(this.convFiledName("txtJusho"));
-            }
-
             public txtJusho1(): UZA.TextBoxJusho {
                 return new UZA.TextBoxJusho(this.convFiledName("txtJusho1"));
-            }
-
-            public lblGenjusho(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblGenjusho"));
             }
 
             public lblGenjusho1(): UZA.Label {

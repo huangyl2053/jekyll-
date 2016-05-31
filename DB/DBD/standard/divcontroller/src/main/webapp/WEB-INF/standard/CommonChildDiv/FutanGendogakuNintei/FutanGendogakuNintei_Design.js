@@ -35,10 +35,6 @@ var DBD;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.txtHiddenHihokenshaNo = function () {
-                return new UZA.TextBox(this.convFiledName("txtHiddenHihokenshaNo"));
-            };
-
             Controls.prototype.dgFutanGendogakuNinteiList = function () {
                 return new UZA.DataGrid(this.convFiledName("dgFutanGendogakuNinteiList"));
             };
@@ -147,32 +143,16 @@ var DBD;
                 return new UZA.TextBox(this.convFiledName("txtShimei"));
             };
 
-            Controls.prototype.TextBoxFlexibleDate1 = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("TextBoxFlexibleDate1"));
-            };
-
             Controls.prototype.txtBirthday = function () {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtBirthday"));
-            };
-
-            Controls.prototype.txtTelNo = function () {
-                return new UZA.TextBoxTelNo(this.convFiledName("txtTelNo"));
             };
 
             Controls.prototype.txtRenrakusaki = function () {
                 return new UZA.TextBoxTelNo(this.convFiledName("txtRenrakusaki"));
             };
 
-            Controls.prototype.txtJusho = function () {
-                return new UZA.TextBoxJusho(this.convFiledName("txtJusho"));
-            };
-
             Controls.prototype.txtJusho1 = function () {
                 return new UZA.TextBoxJusho(this.convFiledName("txtJusho1"));
-            };
-
-            Controls.prototype.lblGenjusho = function () {
-                return new UZA.Label(this.convFiledName("lblGenjusho"));
             };
 
             Controls.prototype.lblGenjusho1 = function () {

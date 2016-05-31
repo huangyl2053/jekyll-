@@ -30,20 +30,12 @@ public class haigushaJohoDiv extends Panel {
     private TextBox txtShimeiKana;
     @JsonProperty("txtShimei")
     private TextBox txtShimei;
-    @JsonProperty("TextBoxFlexibleDate1")
-    private TextBoxFlexibleDate TextBoxFlexibleDate1;
     @JsonProperty("txtBirthday")
     private TextBoxFlexibleDate txtBirthday;
-    @JsonProperty("txtTelNo")
-    private TextBoxTelNo txtTelNo;
     @JsonProperty("txtRenrakusaki")
     private TextBoxTelNo txtRenrakusaki;
-    @JsonProperty("txtJusho")
-    private TextBoxJusho txtJusho;
     @JsonProperty("txtJusho1")
     private TextBoxJusho txtJusho1;
-    @JsonProperty("lblGenjusho")
-    private Label lblGenjusho;
     @JsonProperty("lblGenjusho1")
     private Label lblGenjusho1;
     @JsonProperty("txtGenjusho")
@@ -130,24 +122,6 @@ public class haigushaJohoDiv extends Panel {
     }
 
     /*
-     * getTextBoxFlexibleDate1
-     * @return TextBoxFlexibleDate1
-     */
-    @JsonProperty("TextBoxFlexibleDate1")
-    public TextBoxFlexibleDate getTextBoxFlexibleDate1() {
-        return TextBoxFlexibleDate1;
-    }
-
-    /*
-     * setTextBoxFlexibleDate1
-     * @param TextBoxFlexibleDate1 TextBoxFlexibleDate1
-     */
-    @JsonProperty("TextBoxFlexibleDate1")
-    public void setTextBoxFlexibleDate1(TextBoxFlexibleDate TextBoxFlexibleDate1) {
-        this.TextBoxFlexibleDate1 = TextBoxFlexibleDate1;
-    }
-
-    /*
      * gettxtBirthday
      * @return txtBirthday
      */
@@ -163,24 +137,6 @@ public class haigushaJohoDiv extends Panel {
     @JsonProperty("txtBirthday")
     public void setTxtBirthday(TextBoxFlexibleDate txtBirthday) {
         this.txtBirthday = txtBirthday;
-    }
-
-    /*
-     * gettxtTelNo
-     * @return txtTelNo
-     */
-    @JsonProperty("txtTelNo")
-    public TextBoxTelNo getTxtTelNo() {
-        return txtTelNo;
-    }
-
-    /*
-     * settxtTelNo
-     * @param txtTelNo txtTelNo
-     */
-    @JsonProperty("txtTelNo")
-    public void setTxtTelNo(TextBoxTelNo txtTelNo) {
-        this.txtTelNo = txtTelNo;
     }
 
     /*
@@ -202,24 +158,6 @@ public class haigushaJohoDiv extends Panel {
     }
 
     /*
-     * gettxtJusho
-     * @return txtJusho
-     */
-    @JsonProperty("txtJusho")
-    public TextBoxJusho getTxtJusho() {
-        return txtJusho;
-    }
-
-    /*
-     * settxtJusho
-     * @param txtJusho txtJusho
-     */
-    @JsonProperty("txtJusho")
-    public void setTxtJusho(TextBoxJusho txtJusho) {
-        this.txtJusho = txtJusho;
-    }
-
-    /*
      * gettxtJusho1
      * @return txtJusho1
      */
@@ -235,24 +173,6 @@ public class haigushaJohoDiv extends Panel {
     @JsonProperty("txtJusho1")
     public void setTxtJusho1(TextBoxJusho txtJusho1) {
         this.txtJusho1 = txtJusho1;
-    }
-
-    /*
-     * getlblGenjusho
-     * @return lblGenjusho
-     */
-    @JsonProperty("lblGenjusho")
-    public Label getLblGenjusho() {
-        return lblGenjusho;
-    }
-
-    /*
-     * setlblGenjusho
-     * @param lblGenjusho lblGenjusho
-     */
-    @JsonProperty("lblGenjusho")
-    public void setLblGenjusho(Label lblGenjusho) {
-        this.lblGenjusho = lblGenjusho;
     }
 
     /*

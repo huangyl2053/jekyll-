@@ -41,10 +41,6 @@ module DBD {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public txtHiddenHihokenshaNo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtHiddenHihokenshaNo"));
-            }
-
             public dgTokubetsuChiikiKasanGemmenList(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgTokubetsuChiikiKasanGemmenList"));
             }

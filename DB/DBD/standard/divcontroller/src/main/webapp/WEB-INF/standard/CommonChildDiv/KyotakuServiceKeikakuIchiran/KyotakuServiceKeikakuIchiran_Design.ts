@@ -69,20 +69,8 @@ module DBD {
                 return new UZA.Panel(this.convFiledName("DvKeikakuIraiUketsuke"));
             }
 
-            public txtIraiShinkiShinsei(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtIraiShinkiShinsei"));
-            }
-
-            public txtIraiSaishinsei(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtIraiSaishinsei"));
-            }
-
-            public txtIraiHenkoShinsei(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtIraiHenkoShinsei"));
-            }
-
-            public txtIraiServiceHenko(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtIraiServiceHenko"));
+            public txtIraiNinteiShinseiJokyo(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtIraiNinteiShinseiJokyo"));
             }
 
             public txtTodokedeKubun(): UZA.TextBox {
@@ -117,24 +105,8 @@ module DBD {
                 return new UZA.TextBox(this.convFiledName("txtJigyoshaName"));
             }
 
-            public txtKyotakuKaigo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtKyotakuKaigo"));
-            }
-
-            public txtKyotakuYobo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtKyotakuYobo"));
-            }
-
-            public txtShokiboKaigo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtShokiboKaigo"));
-            }
-
-            public txtShokiboYobo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtShokiboYobo"));
-            }
-
-            public txtCare(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtCare"));
+            public txtServiceShurui(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtServiceShurui"));
             }
 
             public txtYubinNo(): UZA.TextBoxYubinNo {
@@ -177,20 +149,8 @@ module DBD {
                 return new UZA.Panel(this.convFiledName("DvJikoSakuseiKeikaku"));
             }
 
-            public txtJikoShinkiShinsei(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtJikoShinkiShinsei"));
-            }
-
-            public txtJikoSaishinsei(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtJikoSaishinsei"));
-            }
-
-            public txtJikoHenkoShinsei(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtJikoHenkoShinsei"));
-            }
-
-            public txtJikoServiceHenko(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtJikoServiceHenko"));
+            public txtJikoNinteiShinseiJokyo(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtJikoNinteiShinseiJokyo"));
             }
 
             public linLine6(): UZA.HorizontalLine {

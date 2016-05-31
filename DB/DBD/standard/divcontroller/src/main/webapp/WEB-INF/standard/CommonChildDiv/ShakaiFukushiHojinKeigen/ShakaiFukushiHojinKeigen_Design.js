@@ -35,10 +35,6 @@ var DBD;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.txtHiddenHihokenshaNo = function () {
-                return new UZA.TextBox(this.convFiledName("txtHiddenHihokenshaNo"));
-            };
-
             Controls.prototype.dgShakaiFukushiHojinKeigenList = function () {
                 return new UZA.DataGrid(this.convFiledName("dgShakaiFukushiHojinKeigenList"));
             };

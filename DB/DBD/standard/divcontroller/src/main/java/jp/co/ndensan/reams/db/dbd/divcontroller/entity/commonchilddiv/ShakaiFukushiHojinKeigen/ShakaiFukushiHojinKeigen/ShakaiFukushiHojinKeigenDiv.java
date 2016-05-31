@@ -21,8 +21,6 @@ public class ShakaiFukushiHojinKeigenDiv extends Panel implements IShakaiFukushi
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtHiddenHihokenshaNo")
-    private TextBox txtHiddenHihokenshaNo;
     @JsonProperty("dgShakaiFukushiHojinKeigenList")
     private DataGrid<dgShakaiFukushiHojinKeigenList_Row> dgShakaiFukushiHojinKeigenList;
     @JsonProperty("ShakaiFukushiHojinKeigenDetail")
@@ -36,24 +34,6 @@ public class ShakaiFukushiHojinKeigenDiv extends Panel implements IShakaiFukushi
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * gettxtHiddenHihokenshaNo
-     * @return txtHiddenHihokenshaNo
-     */
-    @JsonProperty("txtHiddenHihokenshaNo")
-    public TextBox getTxtHiddenHihokenshaNo() {
-        return txtHiddenHihokenshaNo;
-    }
-
-    /*
-     * settxtHiddenHihokenshaNo
-     * @param txtHiddenHihokenshaNo txtHiddenHihokenshaNo
-     */
-    @JsonProperty("txtHiddenHihokenshaNo")
-    public void setTxtHiddenHihokenshaNo(TextBox txtHiddenHihokenshaNo) {
-        this.txtHiddenHihokenshaNo = txtHiddenHihokenshaNo;
-    }
-
     /*
      * getdgShakaiFukushiHojinKeigenList
      * @return dgShakaiFukushiHojinKeigenList

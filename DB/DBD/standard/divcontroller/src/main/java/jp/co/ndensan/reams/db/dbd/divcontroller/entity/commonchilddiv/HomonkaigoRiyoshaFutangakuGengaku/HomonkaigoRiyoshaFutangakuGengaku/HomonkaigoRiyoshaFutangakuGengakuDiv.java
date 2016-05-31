@@ -21,8 +21,6 @@ public class HomonkaigoRiyoshaFutangakuGengakuDiv extends Panel implements IHomo
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtHiddenHihokenshaNo")
-    private TextBox txtHiddenHihokenshaNo;
     @JsonProperty("dgHomonkaigoRiyoshaFutangakuGengakuList")
     private DataGrid<dgHomonkaigoRiyoshaFutangakuGengakuList_Row> dgHomonkaigoRiyoshaFutangakuGengakuList;
     @JsonProperty("HomonkaigoRiyoshaFutangakuGengakuDetail")
@@ -36,24 +34,6 @@ public class HomonkaigoRiyoshaFutangakuGengakuDiv extends Panel implements IHomo
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * gettxtHiddenHihokenshaNo
-     * @return txtHiddenHihokenshaNo
-     */
-    @JsonProperty("txtHiddenHihokenshaNo")
-    public TextBox getTxtHiddenHihokenshaNo() {
-        return txtHiddenHihokenshaNo;
-    }
-
-    /*
-     * settxtHiddenHihokenshaNo
-     * @param txtHiddenHihokenshaNo txtHiddenHihokenshaNo
-     */
-    @JsonProperty("txtHiddenHihokenshaNo")
-    public void setTxtHiddenHihokenshaNo(TextBox txtHiddenHihokenshaNo) {
-        this.txtHiddenHihokenshaNo = txtHiddenHihokenshaNo;
-    }
-
     /*
      * getdgHomonkaigoRiyoshaFutangakuGengakuList
      * @return dgHomonkaigoRiyoshaFutangakuGengakuList

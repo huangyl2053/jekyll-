@@ -23,8 +23,6 @@ public class RiyoshaFutangakuGemmenDiv extends Panel implements IRiyoshaFutangak
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtHiddenHihokenshaNo")
-    private TextBox txtHiddenHihokenshaNo;
     @JsonProperty("dgRiyoshaFutangakuGemmenList")
     private DataGrid<dgRiyoshaFutangakuGemmenList_Row> dgRiyoshaFutangakuGemmenList;
     @JsonProperty("RiyoshaFutangakuGemmenDetail")
@@ -38,24 +36,6 @@ public class RiyoshaFutangakuGemmenDiv extends Panel implements IRiyoshaFutangak
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * gettxtHiddenHihokenshaNo
-     * @return txtHiddenHihokenshaNo
-     */
-    @JsonProperty("txtHiddenHihokenshaNo")
-    public TextBox getTxtHiddenHihokenshaNo() {
-        return txtHiddenHihokenshaNo;
-    }
-
-    /*
-     * settxtHiddenHihokenshaNo
-     * @param txtHiddenHihokenshaNo txtHiddenHihokenshaNo
-     */
-    @JsonProperty("txtHiddenHihokenshaNo")
-    public void setTxtHiddenHihokenshaNo(TextBox txtHiddenHihokenshaNo) {
-        this.txtHiddenHihokenshaNo = txtHiddenHihokenshaNo;
-    }
-
     /*
      * getdgRiyoshaFutangakuGemmenList
      * @return dgRiyoshaFutangakuGemmenList

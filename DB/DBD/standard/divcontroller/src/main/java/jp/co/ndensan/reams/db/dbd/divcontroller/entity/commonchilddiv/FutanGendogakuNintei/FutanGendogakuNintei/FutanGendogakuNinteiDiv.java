@@ -23,8 +23,6 @@ public class FutanGendogakuNinteiDiv extends Panel implements IFutanGendogakuNin
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtHiddenHihokenshaNo")
-    private TextBox txtHiddenHihokenshaNo;
     @JsonProperty("dgFutanGendogakuNinteiList")
     private DataGrid<dgFutanGendogakuNinteiList_Row> dgFutanGendogakuNinteiList;
     @JsonProperty("FutanGendogakuNinteiDetail")
@@ -38,24 +36,6 @@ public class FutanGendogakuNinteiDiv extends Panel implements IFutanGendogakuNin
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * gettxtHiddenHihokenshaNo
-     * @return txtHiddenHihokenshaNo
-     */
-    @JsonProperty("txtHiddenHihokenshaNo")
-    public TextBox getTxtHiddenHihokenshaNo() {
-        return txtHiddenHihokenshaNo;
-    }
-
-    /*
-     * settxtHiddenHihokenshaNo
-     * @param txtHiddenHihokenshaNo txtHiddenHihokenshaNo
-     */
-    @JsonProperty("txtHiddenHihokenshaNo")
-    public void setTxtHiddenHihokenshaNo(TextBox txtHiddenHihokenshaNo) {
-        this.txtHiddenHihokenshaNo = txtHiddenHihokenshaNo;
-    }
-
     /*
      * getdgFutanGendogakuNinteiList
      * @return dgFutanGendogakuNinteiList
@@ -154,16 +134,6 @@ public class FutanGendogakuNinteiDiv extends Panel implements IFutanGendogakuNin
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTextBoxFlexibleDate1() {
-        return this.getFutanGendogakuNinteiDetail().getHaigushaJoho().getTextBoxFlexibleDate1();
-    }
-
-    @JsonIgnore
-    public void  setTextBoxFlexibleDate1(TextBoxFlexibleDate TextBoxFlexibleDate1) {
-        this.getFutanGendogakuNinteiDetail().getHaigushaJoho().setTextBoxFlexibleDate1(TextBoxFlexibleDate1);
-    }
-
-    @JsonIgnore
     public TextBoxFlexibleDate getTxtBirthday() {
         return this.getFutanGendogakuNinteiDetail().getHaigushaJoho().getTxtBirthday();
     }
@@ -171,16 +141,6 @@ public class FutanGendogakuNinteiDiv extends Panel implements IFutanGendogakuNin
     @JsonIgnore
     public void  setTxtBirthday(TextBoxFlexibleDate txtBirthday) {
         this.getFutanGendogakuNinteiDetail().getHaigushaJoho().setTxtBirthday(txtBirthday);
-    }
-
-    @JsonIgnore
-    public TextBoxTelNo getTxtTelNo() {
-        return this.getFutanGendogakuNinteiDetail().getHaigushaJoho().getTxtTelNo();
-    }
-
-    @JsonIgnore
-    public void  setTxtTelNo(TextBoxTelNo txtTelNo) {
-        this.getFutanGendogakuNinteiDetail().getHaigushaJoho().setTxtTelNo(txtTelNo);
     }
 
     @JsonIgnore
@@ -194,16 +154,6 @@ public class FutanGendogakuNinteiDiv extends Panel implements IFutanGendogakuNin
     }
 
     @JsonIgnore
-    public TextBoxJusho getTxtJusho() {
-        return this.getFutanGendogakuNinteiDetail().getHaigushaJoho().getTxtJusho();
-    }
-
-    @JsonIgnore
-    public void  setTxtJusho(TextBoxJusho txtJusho) {
-        this.getFutanGendogakuNinteiDetail().getHaigushaJoho().setTxtJusho(txtJusho);
-    }
-
-    @JsonIgnore
     public TextBoxJusho getTxtJusho1() {
         return this.getFutanGendogakuNinteiDetail().getHaigushaJoho().getTxtJusho1();
     }
@@ -211,16 +161,6 @@ public class FutanGendogakuNinteiDiv extends Panel implements IFutanGendogakuNin
     @JsonIgnore
     public void  setTxtJusho1(TextBoxJusho txtJusho1) {
         this.getFutanGendogakuNinteiDetail().getHaigushaJoho().setTxtJusho1(txtJusho1);
-    }
-
-    @JsonIgnore
-    public Label getLblGenjusho() {
-        return this.getFutanGendogakuNinteiDetail().getHaigushaJoho().getLblGenjusho();
-    }
-
-    @JsonIgnore
-    public void  setLblGenjusho(Label lblGenjusho) {
-        this.getFutanGendogakuNinteiDetail().getHaigushaJoho().setLblGenjusho(lblGenjusho);
     }
 
     @JsonIgnore
