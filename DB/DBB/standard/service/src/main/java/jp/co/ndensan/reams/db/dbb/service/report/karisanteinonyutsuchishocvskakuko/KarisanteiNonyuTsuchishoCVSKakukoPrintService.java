@@ -40,8 +40,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 public class KarisanteiNonyuTsuchishoCVSKakukoPrintService {
 
     private final ReportId 帳票分類ID = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
-    private final RString 帳票IDの先頭_DBB100026 = new RString("DBB100024");
-    private final RString 帳票IDの先頭_DBB100027 = new RString("DBB100025");
+    private final RString 帳票IDの先頭_DBB100024 = new RString("DBB100024");
+    private final RString 帳票IDの先頭_DBB100025 = new RString("DBB100025");
 
     /**
      * 保険料納入通知書（仮算定）【コンビニ角公タイプ】 printメソッド
@@ -54,10 +54,10 @@ public class KarisanteiNonyuTsuchishoCVSKakukoPrintService {
         if (仮算定納入通知書情報 != null && 仮算定納入通知書情報.get帳票ID() != null) {
             帳票IDRString = 仮算定納入通知書情報.get帳票ID().getColumnValue();
         }
-        if (帳票IDRString.startsWith(帳票IDの先頭_DBB100026)) {
-            return print全てページDBB100026(仮算定納入通知書情報);
-        } else if (帳票IDRString.startsWith(帳票IDの先頭_DBB100027)) {
-            return print全てページDBB100027(仮算定納入通知書情報);
+        if (帳票IDRString.startsWith(帳票IDの先頭_DBB100024)) {
+            return print全てページDBB100024(仮算定納入通知書情報);
+        } else if (帳票IDRString.startsWith(帳票IDの先頭_DBB100025)) {
+            return print全てページDBB100025(仮算定納入通知書情報);
         }
         return null;
 
@@ -74,10 +74,10 @@ public class KarisanteiNonyuTsuchishoCVSKakukoPrintService {
         if (仮算定納入通知書情報 != null && 仮算定納入通知書情報.get帳票ID() != null) {
             帳票IDRString = 仮算定納入通知書情報.get帳票ID().getColumnValue();
         }
-        if (帳票IDRString.startsWith(帳票IDの先頭_DBB100026)) {
-            print全てページDBB100026(仮算定納入通知書情報, reportManager);
-        } else if (帳票IDRString.startsWith(帳票IDの先頭_DBB100027)) {
-            print全てページDBB100027(仮算定納入通知書情報, reportManager);
+        if (帳票IDRString.startsWith(帳票IDの先頭_DBB100024)) {
+            print全てページDBB100024(仮算定納入通知書情報, reportManager);
+        } else if (帳票IDRString.startsWith(帳票IDの先頭_DBB100025)) {
+            print全てページDBB100025(仮算定納入通知書情報, reportManager);
         }
     }
 
@@ -92,15 +92,15 @@ public class KarisanteiNonyuTsuchishoCVSKakukoPrintService {
         if (仮算定納入通知書情報 != null && 仮算定納入通知書情報.get帳票ID() != null) {
             帳票IDRString = 仮算定納入通知書情報.get帳票ID().getColumnValue();
         }
-        if (帳票IDRString.startsWith(帳票IDの先頭_DBB100026)) {
-            return print全てページDBB100026DevidedByPage(仮算定納入通知書情報);
-        } else if (帳票IDRString.startsWith(帳票IDの先頭_DBB100027)) {
-            return print全てページDBB100027DevidedByPage(仮算定納入通知書情報);
+        if (帳票IDRString.startsWith(帳票IDの先頭_DBB100024)) {
+            return print全てページDBB100024DevidedByPage(仮算定納入通知書情報);
+        } else if (帳票IDRString.startsWith(帳票IDの先頭_DBB100025)) {
+            return print全てページDBB100025DevidedByPage(仮算定納入通知書情報);
         }
         return null;
     }
 
-    private SourceDataCollection print全てページDBB100026(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報) {
+    private SourceDataCollection print全てページDBB100024(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報) {
         KarisanteiNonyuTsuchishoCVSKakukoProperty property = new KarisanteiNonyuTsuchishoCVSKakukoProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<KarisanteiNonyuTsuchishoCVSKakukoSource> assembler = createAssembler(property, reportManager)) {
@@ -117,7 +117,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoPrintService {
         }
     }
 
-    private void print全てページDBB100026(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, ReportManager reportManager) {
+    private void print全てページDBB100024(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, ReportManager reportManager) {
         KarisanteiNonyuTsuchishoCVSKakukoProperty property = new KarisanteiNonyuTsuchishoCVSKakukoProperty();
         try (ReportAssembler<KarisanteiNonyuTsuchishoCVSKakukoSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<KarisanteiNonyuTsuchishoCVSKakukoSource> reportSourceWriter
@@ -131,7 +131,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoPrintService {
         }
     }
 
-    private SourceDataCollection print全てページDBB100027(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報) {
+    private SourceDataCollection print全てページDBB100025(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報) {
         KarisanteiNonyuTsuchishoCVSKakukoRenchoProperty property = new KarisanteiNonyuTsuchishoCVSKakukoRenchoProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<KarisanteiNonyuTsuchishoCVSKakukoRenchoSource> assembler = createAssembler(property, reportManager)) {
@@ -148,7 +148,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoPrintService {
         }
     }
 
-    private void print全てページDBB100027(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, ReportManager reportManager) {
+    private void print全てページDBB100025(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, ReportManager reportManager) {
         KarisanteiNonyuTsuchishoCVSKakukoRenchoProperty property = new KarisanteiNonyuTsuchishoCVSKakukoRenchoProperty();
         try (ReportAssembler<KarisanteiNonyuTsuchishoCVSKakukoRenchoSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<KarisanteiNonyuTsuchishoCVSKakukoRenchoSource> reportSourceWriter
@@ -162,7 +162,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoPrintService {
         }
     }
 
-    private SourceDataCollection print全てページDBB100026DevidedByPage(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報) {
+    private SourceDataCollection print全てページDBB100024DevidedByPage(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報) {
         KarisanteiNonyuTsuchishoCVSKakukoProperty property = new KarisanteiNonyuTsuchishoCVSKakukoProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<KarisanteiNonyuTsuchishoCVSKakukoSource> assembler = createAssembler(property, reportManager)) {
@@ -180,7 +180,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoPrintService {
         }
     }
 
-    private SourceDataCollection print全てページDBB100027DevidedByPage(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報) {
+    private SourceDataCollection print全てページDBB100025DevidedByPage(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報) {
         KarisanteiNonyuTsuchishoCVSKakukoRenchoProperty property = new KarisanteiNonyuTsuchishoCVSKakukoRenchoProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<KarisanteiNonyuTsuchishoCVSKakukoRenchoSource> assembler = createAssembler(property, reportManager)) {

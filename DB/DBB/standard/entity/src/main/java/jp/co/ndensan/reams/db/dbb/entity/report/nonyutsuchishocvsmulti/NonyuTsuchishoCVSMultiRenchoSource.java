@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvsmulti;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -5,12 +10,11 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- * 帳票　保険料納入通知書（本算定）【コンビニマルチ収納タイプ】Cover連帳の項目を定義するクラスです。
+ * 帳票　保険料納入通知書（仮算定）【コンビニマルチ収納タイプ】連帳の項目を定義するクラスです。
  *
- * @reamsid_L DBB-9110-110 huangh
+ * @reamsid_L DBB-9110-050 huangh
  */
-public class NonyuTsuchishoCVSMultiRenchoCoverSource implements IReportSource {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
+public class NonyuTsuchishoCVSMultiRenchoSource implements IReportSource {
 
     @ReportItem(name = "titleNendo", length = 4, order = 1)
     public RString titleNendo;
@@ -286,56 +290,28 @@ public class NonyuTsuchishoCVSMultiRenchoCoverSource implements IReportSource {
     public RString cvsToriatsukaikigen1;
     @ReportItem(name = "funyuFukanBango1", length = 12, order = 137)
     public RString funyuFukanBango1;
-//    @ReportItem(name = "kamokumei", order = 138)
-//    public RString kamokumei;
-//    @ReportItem(name = "ryoshushoNendo2", order = 139)
-//    public RString ryoshushoNendo2;
-//    @ReportItem(name = "nendoNenbun", order = 140)
-//    public RString nendoNenbun;
-//    @ReportItem(name = "kibetsu", order = 141)
-//    public RString kibetsu;
-//    @ReportItem(name = "ryoshushoNenbun2", order = 142)
-//    public RString ryoshushoNenbun2;
-//    @ReportItem(name = "gokeigaku", length = 15, order = 143)
-//    public RString gokeigaku;
-//    @ReportItem(name = "shunoKikanBango2", length = 5, order = 144)
-//    public RString shunoKikanBango2;
-//    @ReportItem(name = "nofuBango", length = 20, order = 145)
-//    public RString nofuBango;
-//    @ReportItem(name = "kakuninBango2", length = 5, order = 146)
-//    public RString kakuninBango2;
-//    @ReportItem(name = "nofuKubun2", length = 3, order = 147)
-//    public RString nofuKubun2;
-//    @ReportItem(name = "nokigenTitle", length = 12, order = 148)
-//    public RString nokigenTitle;
-//    @ReportItem(name = "ocrId2", length = 3, order = 149)
-//    public RString ocrId2;
-//    @ReportItem(name = "tsuchishoNo", length = 20, order = 150)
-//    public RString tsuchishoNo;
-//    @ReportItem(name = "nokigenYmd", length = 16, order = 151)
-//    public RString nokigenYmd;
-//    @ReportItem(name = "hakkoYmd", length = 16, order = 152)
-//    public RString hakkoYmd;
-//    @ReportItem(name = "honzei", length = 15, order = 153)
-//    public RString honzei;
-//    @ReportItem(name = "tokusokuTesuryo", length = 5, order = 154)
-//    public RString tokusokuTesuryo;
-//    @ReportItem(name = "ocr12", length = 39, order = 155)
-//    public RString ocr12;
-//    @ReportItem(name = "ocrCut2", length = 1, order = 156)
-//    public RString ocrCut2;
-//    @ReportItem(name = "entaikin", length = 15, order = 157)
-//    public RString entaikin;
-//    @ReportItem(name = "ocr22", length = 44, order = 158)
-//    public RString ocr22;
-//    @ReportItem(name = "shimei", order = 159)
-//    public RString shimei;
-//    @ReportItem(name = "biko12", length = 30, order = 160)
-//    public RString biko12;
-//    @ReportItem(name = "biko22", length = 30, order = 161)
-//    public RString biko22;
-//    @ReportItem(name = "gimushaShimei", order = 162)
-//    public RString gimushaShimei;
+    @ReportItem(name = "ryoshushoNendo2", order = 139)
+    public RString ryoshushoNendo2;
+    @ReportItem(name = "ryoshushoNenbun2", order = 142)
+    public RString ryoshushoNenbun2;
+    @ReportItem(name = "shunoKikanBango2", length = 5, order = 144)
+    public RString shunoKikanBango2;
+    @ReportItem(name = "kakuninBango2", length = 5, order = 146)
+    public RString kakuninBango2;
+    @ReportItem(name = "nofuKubun2", length = 3, order = 147)
+    public RString nofuKubun2;
+    @ReportItem(name = "ocrId2", length = 3, order = 149)
+    public RString ocrId2;
+    @ReportItem(name = "ocr12", length = 39, order = 155)
+    public RString ocr12;
+    @ReportItem(name = "ocrCut2", length = 1, order = 156)
+    public RString ocrCut2;
+    @ReportItem(name = "ocr22", length = 44, order = 158)
+    public RString ocr22;
+    @ReportItem(name = "biko12", length = 30, order = 160)
+    public RString biko12;
+    @ReportItem(name = "biko22", length = 30, order = 161)
+    public RString biko22;
     @ReportItem(name = "barcodeCvsBarcode2", order = 163)
     public RString barcodeCvsBarcode2;
     @ReportItem(name = "cvsBarcodeNaiyo12", length = 33, order = 164)
@@ -426,10 +402,170 @@ public class NonyuTsuchishoCVSMultiRenchoCoverSource implements IReportSource {
     public RString ninshoshaShimeiKakeru;
     @ReportItem(name = "koinShoryaku", length = 15, order = 207)
     public RString koinShoryaku;
-// </editor-fold>
-// <editor-fold defaultstate="collapsed" desc="User Customize Area">
-    //追加コードは以下（「User Customize Area」内）に記述してください。
-    //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
-    //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
-// </editor-fold>
+
+    //納付書
+    @ReportItem(name = "detail_kamokumei", order = 208)
+    public RString detail_kamokumei;
+    @ReportItem(name = "detail_ryoshushoNendo1", order = 209)
+    public RString detail_ryoshushoNendo1;
+    @ReportItem(name = "detail_ryoshushoNendo2", order = 210)
+    public RString detail_ryoshushoNendo2;
+    @ReportItem(name = "detail_nendoNenbun", order = 211)
+    public RString detail_nendoNenbun;
+    @ReportItem(name = "detail_kibetsu", order = 212)
+    public RString detail_kibetsu;
+    @ReportItem(name = "detail_ryoshushoNenbun1", order = 213)
+    public RString detail_ryoshushoNenbun1;
+    @ReportItem(name = "detail_ryoshushoNenbun2", order = 214)
+    public RString detail_ryoshushoNenbun2;
+    @ReportItem(name = "detail_gokeigaku", length = 15, order = 215)
+    public RString detail_gokeigaku;
+    @ReportItem(name = "detail_shunoKikanBango1", length = 5, order = 216)
+    public RString detail_shunoKikanBango1;
+    @ReportItem(name = "detail_nofuBango", length = 20, order = 217)
+    public RString detail_nofuBango;
+    @ReportItem(name = "detail_kakuninBango1", length = 5, order = 218)
+    public RString detail_kakuninBango1;
+    @ReportItem(name = "detail_nofuKubun1", length = 3, order = 219)
+    public RString detail_nofuKubun1;
+    @ReportItem(name = "detail_shunoKikanBango2", length = 5, order = 220)
+    public RString detail_shunoKikanBango2;
+    @ReportItem(name = "detail_kakuninBango2", length = 5, order = 221)
+    public RString detail_kakuninBango2;
+    @ReportItem(name = "detail_nofuKubun2", length = 3, order = 222)
+    public RString detail_nofuKubun2;
+    @ReportItem(name = "detail_nokigenTitle", length = 12, order = 223)
+    public RString detail_nokigenTitle;
+    @ReportItem(name = "detail_ocrId1", length = 3, order = 224)
+    public RString detail_ocrId1;
+    @ReportItem(name = "detail_ocrId2", length = 3, order = 225)
+    public RString detail_ocrId2;
+    @ReportItem(name = "detail_tsuchishoNo", length = 20, order = 226)
+    public RString detail_tsuchishoNo;
+    @ReportItem(name = "detail_nokigenYmd", length = 16, order = 227)
+    public RString detail_nokigenYmd;
+    @ReportItem(name = "detail_hakkoYmd", length = 16, order = 228)
+    public RString detail_hakkoYmd;
+    @ReportItem(name = "detail_honzei", length = 15, order = 229)
+    public RString detail_honzei;
+    @ReportItem(name = "detail_tokusokuTesuryo", length = 5, order = 230)
+    public RString detail_tokusokuTesuryo;
+    @ReportItem(name = "detail_ocr11", length = 39, order = 231)
+    public RString detail_ocr11;
+    @ReportItem(name = "detail_ocrCut1", length = 1, order = 232)
+    public RString detail_ocrCut1;
+    @ReportItem(name = "detail_ocr12", length = 39, order = 233)
+    public RString detail_ocr12;
+    @ReportItem(name = "detail_ocrCut2", length = 1, order = 234)
+    public RString detail_ocrCut2;
+    @ReportItem(name = "detail_entaikin", length = 15, order = 235)
+    public RString detail_entaikin;
+    @ReportItem(name = "detail_ocr21", length = 44, order = 236)
+    public RString detail_ocr21;
+    @ReportItem(name = "detail_ocr22", length = 44, order = 237)
+    public RString detail_ocr22;
+    @ReportItem(name = "detail_shimei", order = 238)
+    public RString detail_shimei;
+    @ReportItem(name = "detail_biko11", length = 30, order = 239)
+    public RString detail_biko11;
+    @ReportItem(name = "detail_biko12", length = 30, order = 240)
+    public RString detail_biko12;
+    @ReportItem(name = "detail_biko21", length = 30, order = 241)
+    public RString detail_biko21;
+    @ReportItem(name = "detail_biko22", length = 30, order = 242)
+    public RString detail_biko22;
+    @ReportItem(name = "detail_gimushaShimei", order = 243)
+    public RString detail_gimushaShimei;
+    @ReportItem(name = "detail_barcodeCvsBarcode1", order = 244)
+    public RString detail_barcodeCvsBarcode1;
+    @ReportItem(name = "detail_barcodeCvsBarcode2", order = 245)
+    public RString detail_barcodeCvsBarcode2;
+    @ReportItem(name = "detail_cvsBarcodeNaiyo11", length = 33, order = 246)
+    public RString detail_cvsBarcodeNaiyo11;
+    @ReportItem(name = "detail_cvsBarcodeNaiyo12", length = 33, order = 247)
+    public RString detail_cvsBarcodeNaiyo12;
+    @ReportItem(name = "detail_cvsBarcodeNaiyo21", length = 33, order = 248)
+    public RString detail_cvsBarcodeNaiyo21;
+    @ReportItem(name = "detail_cvsBarcodeNaiyo22", length = 33, order = 249)
+    public RString detail_cvsBarcodeNaiyo22;
+    @ReportItem(name = "detail_cvsToriatsukaikigen1", length = 16, order = 250)
+    public RString detail_cvsToriatsukaikigen1;
+    @ReportItem(name = "detail_cvsToriatsukaikigen2", length = 16, order = 251)
+    public RString detail_cvsToriatsukaikigen2;
+    @ReportItem(name = "detail_funyuFukanBango1", length = 12, order = 252)
+    public RString detail_funyuFukanBango1;
+    @ReportItem(name = "detail_funyuFukanBango2", length = 12, order = 253)
+    public RString detail_funyuFukanBango2;
+    @ReportItem(name = "detail_ryoshushoNendo3", order = 254)
+    public RString detail_ryoshushoNendo3;
+    @ReportItem(name = "detail_ryoshushoNendo4", order = 255)
+    public RString detail_ryoshushoNendo4;
+    @ReportItem(name = "detail_ryoshushoNenbun3", order = 256)
+    public RString detail_ryoshushoNenbun3;
+    @ReportItem(name = "detail_ryoshushoNenbun4", order = 257)
+    public RString detail_ryoshushoNenbun4;
+    @ReportItem(name = "detail_shunoKikanBango3", length = 5, order = 258)
+    public RString detail_shunoKikanBango3;
+    @ReportItem(name = "detail_kakuninBango3", length = 5, order = 259)
+    public RString detail_kakuninBango3;
+    @ReportItem(name = "detail_nofuKubun3", length = 3, order = 260)
+    public RString detail_nofuKubun3;
+    @ReportItem(name = "detail_shunoKikanBango4", length = 5, order = 261)
+    public RString detail_shunoKikanBango4;
+    @ReportItem(name = "detail_kakuninBango4", length = 5, order = 262)
+    public RString detail_kakuninBango4;
+    @ReportItem(name = "detail_nofuKubun4", length = 3, order = 263)
+    public RString detail_nofuKubun4;
+    @ReportItem(name = "detail_ocrId3", length = 3, order = 264)
+    public RString detail_ocrId3;
+    @ReportItem(name = "detail_ocrId4", length = 3, order = 265)
+    public RString detail_ocrId4;
+    @ReportItem(name = "detail_ocr13", length = 39, order = 266)
+    public RString detail_ocr13;
+    @ReportItem(name = "detail_ocrCut3", length = 1, order = 267)
+    public RString detail_ocrCut3;
+    @ReportItem(name = "detail_ocr14", length = 39, order = 268)
+    public RString detail_ocr14;
+    @ReportItem(name = "detail_ocrCut4", length = 1, order = 269)
+    public RString detail_ocrCut4;
+    @ReportItem(name = "detail_ocr23", length = 44, order = 270)
+    public RString detail_ocr23;
+    @ReportItem(name = "detail_ocr24", length = 44, order = 271)
+    public RString detail_ocr24;
+    @ReportItem(name = "detail_biko13", length = 30, order = 272)
+    public RString detail_biko13;
+    @ReportItem(name = "detail_biko14", length = 30, order = 273)
+    public RString detail_biko14;
+    @ReportItem(name = "detail_biko23", length = 30, order = 274)
+    public RString detail_biko23;
+    @ReportItem(name = "detail_biko24", length = 30, order = 275)
+    public RString detail_biko24;
+    @ReportItem(name = "detail_barcodeCvsBarcode3", order = 276)
+    public RString detail_barcodeCvsBarcode3;
+    @ReportItem(name = "detail_barcodeCvsBarcode4", order = 277)
+    public RString detail_barcodeCvsBarcode4;
+    @ReportItem(name = "detail_cvsBarcodeNaiyo13", length = 33, order = 278)
+    public RString detail_cvsBarcodeNaiyo13;
+    @ReportItem(name = "detail_cvsBarcodeNaiyo14", length = 33, order = 279)
+    public RString detail_cvsBarcodeNaiyo14;
+    @ReportItem(name = "detail_cvsBarcodeNaiyo23", length = 33, order = 280)
+    public RString detail_cvsBarcodeNaiyo23;
+    @ReportItem(name = "detail_cvsBarcodeNaiyo24", length = 33, order = 281)
+    public RString detail_cvsBarcodeNaiyo24;
+    @ReportItem(name = "detail_cvsToriatsukaikigen3", length = 16, order = 282)
+    public RString detail_cvsToriatsukaikigen3;
+    @ReportItem(name = "detail_cvsToriatsukaikigen4", length = 16, order = 283)
+    public RString detail_cvsToriatsukaikigen4;
+    @ReportItem(name = "detail_funyuFukanBango3", length = 12, order = 284)
+    public RString detail_funyuFukanBango3;
+    @ReportItem(name = "detail_funyuFukanBango4", length = 12, order = 285)
+    public RString detail_funyuFukanBango4;
+
+    @ReportItem(name = "layoutBreakItem", length = 10, order = 999)
+    public int layoutBreakItem;
+    public static final RString LAYOUTBREAKITEM;
+
+    static {
+        LAYOUTBREAKITEM = new RString("layoutBreakItem");
+    }
 }

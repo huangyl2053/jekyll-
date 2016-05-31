@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvsmultirenchocover;
+package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvsmulti;
 
-import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvsmulti.NonyuTsuchishoCVSMultiSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvsmulti.NonyuTsuchishoCVSMultiRenchoSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
@@ -13,6 +13,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
  *
  * @reamsid_L DBB-9110-110 huangh
  */
-public interface INonyuTsuchishoCVSMultiRenchoCoverEditor extends IReportEditor<NonyuTsuchishoCVSMultiSource> {
+public interface INonyuTsuchishoCVSMultiRenchoCoverEditor extends IReportEditor<NonyuTsuchishoCVSMultiRenchoSource> {
 
 }

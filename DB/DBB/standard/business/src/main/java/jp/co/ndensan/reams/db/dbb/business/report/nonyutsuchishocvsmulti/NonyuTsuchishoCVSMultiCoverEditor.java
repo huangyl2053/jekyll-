@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvsmulticover;
+package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvsmulti;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
@@ -75,7 +75,7 @@ public class NonyuTsuchishoCVSMultiCoverEditor implements INonyuTsuchishoCVSMult
     @Override
     public NonyuTsuchishoCVSMultiSource edit(NonyuTsuchishoCVSMultiSource source) {
         editSource(source);
-        source.layout = NonyuTsuchishoCVSMultiSource.Layouts.DBB100061_NonyuTsuchishoCVSMultiCover;
+        source.layoutBreakItem = 1;
         return source;
     }
 
@@ -228,8 +228,8 @@ public class NonyuTsuchishoCVSMultiCoverEditor implements INonyuTsuchishoCVSMult
             source.nofuKubun = 印字位置1の納付書.get納付区分();
             source.ocrId1 = 印字位置1の納付書.getOcrid();
             source.barcodeCvsBarcode1 = 印字位置1の納付書.getバーコード情報();
-            source.cvsBarcodeNaiyo11 = 印字位置1の納付書.getバーコード情報上段();
-            source.cvsBarcodeNaiyo21 = 印字位置1の納付書.getバーコード情報下段();
+            source.cvsBarcodeNaiyo3 = 印字位置1の納付書.getバーコード情報上段();
+            source.cvsBarcodeNaiyo4 = 印字位置1の納付書.getバーコード情報下段();
             source.kibetsu = 印字位置1の納付書.get期表記();
             source.gokeigaku = 印字位置1の納付書.get納付額表記();
             source.nokigenYmd = 印字位置1の納付書.get納期限表記();
@@ -411,7 +411,7 @@ public class NonyuTsuchishoCVSMultiCoverEditor implements INonyuTsuchishoCVSMult
         }
         if (item.get編集後本算定通知書共通情報().get編集後個人() != null
                 && item.get編集後本算定通知書共通情報().get編集後個人().get世帯主名() != null) {
-            source.kaisanMeisaishoSetaiNushiName = item.get編集後本算定通知書共通情報().get編集後個人().get世帯主名().value();
+            source.kaisanMeisaishoHihokenshaName1 = item.get編集後本算定通知書共通情報().get編集後個人().get世帯主名().value();
         }
         if (item.get編集後本算定通知書共通情報().get編集後個人() != null
                 && item.get編集後本算定通知書共通情報().get編集後個人().get世帯コード() != null) {
