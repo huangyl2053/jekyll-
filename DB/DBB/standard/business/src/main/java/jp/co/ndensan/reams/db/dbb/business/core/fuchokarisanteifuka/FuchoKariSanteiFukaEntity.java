@@ -30,6 +30,6 @@ public class FuchoKariSanteiFukaEntity {
     private RString 対象者;
     private RString 生活保護者をまとめて先頭に出力フラグ;
     private RString ページごとに山分けフラグ;
-    private RString 算定期;
+    private boolean 一括発行起動フラグ;
 
 }

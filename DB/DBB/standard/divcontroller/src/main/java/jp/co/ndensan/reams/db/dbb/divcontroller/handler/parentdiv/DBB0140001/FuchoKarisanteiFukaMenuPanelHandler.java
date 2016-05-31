@@ -22,8 +22,10 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -52,6 +54,9 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
     private static final RString 基準日時_済 = new RString("済");
     private static final RString コロン = new RString(":");
     private static final RString スペース = new RString("　");
+    private static final RString 定値_ゼロ = new RString("0");
+    private static final RString 定値_イチ = new RString("1");
+    private static final RString 定値_二 = new RString("1");
     private static final RString 普徴仮算定賦課_ボタン = new RString("btnFuchoKarisanteiFukaBatch");
     private static final RString 普徴仮算定通知書一括発行_ボタン = new RString("btnFuchoKarisanteiTsuchishoBatch");
     private static final RString 普徴仮算定賦課メニュー = new RString("DBBMN34001");
@@ -60,16 +65,20 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
     private static final RString 項目列_端数調整有無 = new RString("端数調整有無");
     private static final RString 項目列_6月特徴開始者 = new RString("6月特徴開始者");
     private static final RString 項目列_仮算定賦課方法 = new RString("仮算定賦課方法");
-//    private static final RString 別々に出力 = new RString("別々に出力");
-//    private static final RString 全件出力 = new RString("全件出力");
+    private static final RString 別々に出力 = new RString("別々に出力");
+    private static final RString 全件出力 = new RString("全件出力");
     private static final RString 出力期のタイプ_前 = new RString("期（");
     private static final RString 出力期のタイプ_別々に = new RString("月）分");
     private static final RString 出力期のタイプ_全件 = new RString("月）~");
-//    private static final ReportId 帳票分類ID = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
+    private static final RString 項目名 = new RString("当初出力_出力方法");
+    private static final RString 対象者_0 = new RString("現金納付者");
+    private static final RString 対象者_1 = new RString("口座振替者");
+    private static final RString 対象者_2 = new RString("（すべて選択）");
+    private static final ReportId 帳票分類ID = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
 //    private static final RString 帳票グループコード_賦課から = new RString("DBB0140001(普徴仮算定賦課)");
 //    private static final RString 帳票グループコード_一括発行から = new RString("DBB0140003(普徴仮算定通知書一括発行)");
-    private static final RString 帳票グループコード_普徴仮算定賦課メニュー = new RString("DBB0140001(普徴仮算定賦課)");
-    private static final RString 帳票グループコード_普徴仮算定通知書一括発行メニュー = new RString("DBB0140003(普徴仮算定通知書一括発行)");
+    private static final RString 帳票グループコード_普徴仮算定賦課メニュー = new RString("DBB0140001");
+    private static final RString 帳票グループコード_普徴仮算定通知書一括発行メニュー = new RString("DBB0140003");
 
     /**
      * 処理状況エリアの初期化メソッドです。
@@ -121,6 +130,7 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
         dgKanrijoho2_Row row3 = new dgKanrijoho2_Row();
         dgKanrijoho2_Row row4 = new dgKanrijoho2_Row();
         row1.setTxtKoumoku(項目列_仮算定賦課方法);
+        // TODO 下記の内容はDBB介護賦課コンフィグ.日付関連_調定年度で取得する　　日付関連_調定年度の用
         RString 仮算定賦課方法code = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, システム日時, SubGyomuCode.DBB介護賦課);
         row1.setTxtNaiyo(FuchoZanteiKeisanHoho.toValue(仮算定賦課方法code).get名称());
         row2.setTxtKoumoku(項目列_端数調整有無);
@@ -147,7 +157,6 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
         RString メニューID = ResponseHolder.getMenuID();
         RString 帳票グループコード = RString.EMPTY;
         if (普徴仮算定賦課メニュー.equals(メニューID)) {
-            // TODO 帳票グループコードのtype
             帳票グループコード = 帳票グループコード_普徴仮算定賦課メニュー;
         } else if (普徴仮算定通知書一括発行メニュー.equals(メニューID)) {
             帳票グループコード = 帳票グループコード_普徴仮算定通知書一括発行メニュー;
@@ -164,16 +173,21 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
                 更正月判定.find更正月(システム日時).get期AsInt()).get通知書発行日();
         FuchoKarisanteiChohyoHakko2Div 帳票作成個別情報Panel = div.getMainPanelBatchParameter().getFuchoKarisanteiChohyoHakko2();
         帳票作成個別情報Panel.getFuchoTsuchiKobetsuJoho().getTxtHakkoYMD().setValue(発行日);
+        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, システム日時, SubGyomuCode.DBB介護賦課);
+        ChohyoSeigyoHanyo 出力方法 = FuchoKariSanteiFuka.createInstance()
+                .getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, new FlexibleYear(調定年度), 項目名);
         List<Kitsuki> 期月リスト = new FuchoKiUtil().get期月リスト().filtered仮算定期間().toList();
-        // TODO 当初出力_出力方法を取得する。実装しない。
-//        FuchoKariSanteiFuka.createInstance().getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, FlexibleYear.MAX, コロン)
-//        ChohyoSeigyoHanyo 当初出力_出力方法 = new ChohyoSeigyoHanyo(new DbT7067ChohyoSeigyoHanyoEntity());
-//        当初出力_出力方法.
-        帳票作成個別情報Panel.getFuchoTsuchiKobetsuJoho().getTxtNotsuShutsuryokukiType2().setValue(new RString("別々に出力"));
-        List<KeyValueDataSource> 出力期のタイプ_別々に出力 = get出力期のタイプ(期月リスト, 出力期のタイプ_別々に);
-//        List<KeyValueDataSource> 出力期のタイプ_全件出力 = get出力期のタイプ(期月リスト, 出力期のタイプ_全件);
-        帳票作成個別情報Panel.getFuchoTsuchiKobetsuJoho().getDdlNotsuShuturyokuki2().setDataSource(出力期のタイプ_別々に出力);
-        // TODO 対象者 生活保護対象者をまとめて先頭に出力 ページごとに山分け QA
+        // TODO 57行：どの戻り値ですが？
+        if (定値_ゼロ.equals(出力方法.get設定値())) {
+            帳票作成個別情報Panel.getFuchoTsuchiKobetsuJoho().getTxtNotsuShutsuryokukiType2().setValue(別々に出力);
+            List<KeyValueDataSource> 出力期のタイプ = get出力期のタイプ(期月リスト, 出力期のタイプ_別々に);
+            帳票作成個別情報Panel.getFuchoTsuchiKobetsuJoho().getDdlNotsuShuturyokuki2().setDataSource(出力期のタイプ);
+        } else if (定値_イチ.equals(出力方法.get設定値())) {
+            帳票作成個別情報Panel.getFuchoTsuchiKobetsuJoho().getTxtNotsuShutsuryokukiType2().setValue(全件出力);
+            List<KeyValueDataSource> 出力期のタイプ = get出力期のタイプ(期月リスト, 出力期のタイプ_全件);
+            帳票作成個別情報Panel.getFuchoTsuchiKobetsuJoho().getDdlNotsuShuturyokuki2().setDataSource(出力期のタイプ);
+        }
+
     }
 
     private List<KeyValueDataSource> get出力期のタイプ(List<Kitsuki> 期月リスト, RString 出力期のタイプ) {

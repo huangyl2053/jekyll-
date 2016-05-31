@@ -72,6 +72,7 @@ public class FuchoKariSanteiFuka {
     private static final int 定値_14期 = 14;
     private static final int 設定値_番号1 = 1;
     private static final int 設定値_番号0 = 0;
+    private static final int 設定値_番号2 = 2;
     private static final int 設定値_番号4 = 4;
     private static final int 設定値_番号5 = 5;
     private static final int 設定値_番号6 = 6;
@@ -151,7 +152,7 @@ public class FuchoKariSanteiFuka {
      */
     public FuchoKarisanteiBatchParameter createFuchoKariSanteiParameter(FuchoKariSanteiFukaEntity entity) {
         List<FuchoKariSanteiEntity> 出力帳票一覧List = get出力帳票一覧(entity.get出力帳票一覧List(),
-                entity.get調定年度(), entity.get算定期());
+                entity.get調定年度(), entity.get出力期());
         FuchoKarisanteiBatchParameter resultParameter = new FuchoKarisanteiBatchParameter();
         resultParameter.set調定年度(entity.get調定年度());
         resultParameter.set賦課年度(entity.get賦課年度());
@@ -177,6 +178,7 @@ public class FuchoKariSanteiFuka {
         }
         resultParameter.set生活保護者をまとめて先頭に出力フラグ(entity.get生活保護者をまとめて先頭に出力フラグ());
         resultParameter.setページごとに山分けフラグ(entity.getページごとに山分けフラグ());
+        resultParameter.set一括発行起動フラグ(entity.is一括発行起動フラグ());
         return resultParameter;
     }
 
@@ -184,10 +186,12 @@ public class FuchoKariSanteiFuka {
      * 出力帳票一覧作成する。
      *
      * @param 出力帳票List FuchoKariSanteiEntity
-     * @throws ApplicationException
-     * @return バッチ出力帳票リスト
+     * @param 調定年度 FlexibleYear
+     * @param 算定期 RString
+     * @return バッチ出力帳票リスト List<FuchoKariSanteiEntity>
+     * @throws ApplicationException ApplicationException
      */
-    private List<FuchoKariSanteiEntity> get出力帳票一覧(List<BatchFuchoKariSanteiResult> 出力帳票List,
+    public List<FuchoKariSanteiEntity> get出力帳票一覧(List<BatchFuchoKariSanteiResult> 出力帳票List,
             FlexibleYear 調定年度, RString 算定期) throws ApplicationException {
         List<FuchoKariSanteiEntity> resultList = new ArrayList<>();
         if (出力帳票List == null || 出力帳票List.isEmpty()) {
@@ -298,6 +302,8 @@ public class FuchoKariSanteiFuka {
                 return RString.EMPTY;
             case 設定値_番号1:
                 return 期毎タイプ;
+            case 設定値_番号2:
+                return RString.EMPTY;
             case 設定値_番号4:
                 return 定値_銀振型;
             case 設定値_番号5:
@@ -380,7 +386,7 @@ public class FuchoKariSanteiFuka {
      * @param 項目名 項目名
      * @return ChohyoSeigyoHanyo
      */
-    private ChohyoSeigyoHanyo getChohyoHanyoKey(SubGyomuCode サブ業務コード, ReportId 帳票分類ID,
+    public ChohyoSeigyoHanyo getChohyoHanyoKey(SubGyomuCode サブ業務コード, ReportId 帳票分類ID,
             FlexibleYear 管理年度, RString 項目名) {
         DbT7067ChohyoSeigyoHanyoEntity entity
                 = 帳票制御汎用Dac.select帳票制御汎用キー(サブ業務コード, 帳票分類ID, 管理年度, 項目名);
