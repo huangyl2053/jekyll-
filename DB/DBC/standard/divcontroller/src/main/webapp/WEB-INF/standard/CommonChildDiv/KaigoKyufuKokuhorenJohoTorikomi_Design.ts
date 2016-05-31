@@ -1,7 +1,7 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
-/// <reference path="../d.ts/URZCommonChildDiv.d.ts" />
+// <reference path="../d.ts/URZCommonChildDiv.d.ts" />
 
 module DBC {
 
@@ -78,9 +78,9 @@ module DBC {
                 return new UZA.Panel(this.convFiledName("ShutsuRyokujun"));
             }
 
-            public ccdChohyoShutsuryokujun(): URZ.ChohyoShutsuryokujun.ModeController {
-                return new URZ.ChohyoShutsuryokujun.ModeController(this.convFiledName("ccdChohyoShutsuryokujun"));
-            }
+            //public ccdChohyoShutsuryokujun(): URZ.ChohyoShutsuryokujun.ModeController {
+            //    return new URZ.ChohyoShutsuryokujun.ModeController(this.convFiledName("ccdChohyoShutsuryokujun"));
+            //}
 
         }
 

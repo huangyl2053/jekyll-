@@ -22,18 +22,18 @@ module DBC
             
             public priorities(): Array {
                 return [
-                    "表示モード"
+                    "HyoujiModo"
                 ];
             }
 
-            public 表示モード() {
-                return new Modes.表示モード(this.controls);
+            public HyoujiModo() {
+                return new Modes.HyoujiModo(this.controls);
             }
         }
 
         export module Modes {
         
-        	export class 表示モード {
+        	export class HyoujiModo {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
