@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenItem;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoBodyItem;
@@ -17,7 +18,6 @@ import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadI
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoHeaderItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaItem;
-import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.saichekkuhyo.SaiChekkuhyoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
@@ -717,8 +717,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      *
      * @return 認定調査票_特記事項パラメータ
      */
-    public List<ChosahyoTokkijikoItem> create認定調査票_特記事項パラメータ() {
-        List<ChosahyoTokkijikoItem> itemList = new ArrayList<>();
+    public List<ChosahyoTokkijikoBusiness> create認定調査票_特記事項パラメータ() {
+        List<ChosahyoTokkijikoBusiness> itemList = new ArrayList<>();
         List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
 
         for (dgNinteiChosa_Row row : selectedItems) {
@@ -728,7 +728,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
                 List<RString> 証記載保険者番号リスト = get被保険者番号(ninteiShinseiJoho.get証記載保険者番号());
                 List<RString> 被保険者番号リスト = get被保険者番号(ninteiShinseiJoho.get被保険者番号());
-                ChosahyoTokkijikoItem item = new ChosahyoTokkijikoItem(
+                ChosahyoTokkijikoBusiness item = new ChosahyoTokkijikoBusiness(
                         証記載保険者番号リスト.get(INDEX_3),
                         ninteiShinseiDay.substring(1, 2),
                         ninteiShinseiDay.substring(2, INDEX_3),
@@ -763,8 +763,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      *
      * @return 認定調査票_特記事項_フリー様式パラメータ
      */
-    public List<ChosahyoTokkijikoItem> create認定調査票_特記事項_フリー様式パラメータ() {
-        List<ChosahyoTokkijikoItem> itemList = new ArrayList<>();
+    public List<ChosahyoTokkijikoBusiness> create認定調査票_特記事項_フリー様式パラメータ() {
+        List<ChosahyoTokkijikoBusiness> itemList = new ArrayList<>();
         List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
 
         for (dgNinteiChosa_Row row : selectedItems) {
@@ -774,7 +774,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
                 List<RString> 保険者番号リスト = get被保険者番号(ninteiShinseiJoho.get証記載保険者番号());
                 List<RString> 被保険者番号リスト = get被保険者番号(ninteiShinseiJoho.get被保険者番号());
-                ChosahyoTokkijikoItem item = new ChosahyoTokkijikoItem(
+                ChosahyoTokkijikoBusiness item = new ChosahyoTokkijikoBusiness(
                         保険者番号リスト.get(INDEX_3),
                         ninteiShinseiDay.substring(1, 2),
                         ninteiShinseiDay.substring(2, INDEX_3),
