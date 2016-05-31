@@ -826,6 +826,28 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
     }
 
     /**
+     * 減免取消日を返します。
+     *
+     * @return 減免取消日
+     */
+    public FlexibleDate get減免取消日() {
+
+        Gemmen 介護賦課減免 = get介護賦課減免();
+        return 介護賦課減免 != null ? 介護賦課減免.get減免取消日() : FlexibleDate.EMPTY;
+    }
+
+    /**
+     * 取消減免額を返します。
+     *
+     * @return 取消減免額
+     */
+    public Decimal get取消減免額() {
+
+        Gemmen 介護賦課減免 = get介護賦課減免();
+        return 介護賦課減免 != null ? 介護賦課減免.get取消減免額() : Decimal.ZERO;
+    }
+
+    /**
      * 減免事由を返します。
      *
      * @return 減免事由
