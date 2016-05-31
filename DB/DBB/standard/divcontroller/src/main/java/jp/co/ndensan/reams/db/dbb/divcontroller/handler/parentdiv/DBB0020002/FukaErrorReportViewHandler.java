@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalRep
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -134,7 +135,8 @@ public class FukaErrorReportViewHandler {
             }
             if (fukaErrorList.getエラーコード() != null) {
                 row.setErrorCode(fukaErrorList.getエラーコード().getKey());
-                row.setErrorDetail(CodeMaster.getCodeRyakusho(DBBCodeShubetsu.エラーコード.getコード(), fukaErrorList.getエラーコード()));
+                row.setErrorDetail(CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課,
+                        DBBCodeShubetsu.エラーコード.getコード(), fukaErrorList.getエラーコード(), FlexibleDate.getNowDate()));
             }
             if (fukaErrorList.get被保険者番号() != null) {
                 row.setHihokenshaNo(fukaErrorList.get被保険者番号().value());

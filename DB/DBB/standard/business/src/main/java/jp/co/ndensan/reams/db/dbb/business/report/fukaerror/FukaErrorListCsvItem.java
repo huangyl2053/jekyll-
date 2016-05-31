@@ -12,7 +12,9 @@ import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalRe
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportItem;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportShoriKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
@@ -58,7 +60,8 @@ public class FukaErrorListCsvItem extends InternalReportItem implements IInterna
 
         this.賦課年度 = model.get賦課年度().toDateString();
         this.通知書番号 = model.get通知書番号().value();
-        this.エラー詳細 = CodeMaster.getCodeRyakusho(DBBCodeShubetsu.エラーコード.getコード(), model.getエラーコード());
+        this.エラー詳細 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課,
+                DBBCodeShubetsu.エラーコード.getコード(), model.getエラーコード(), FlexibleDate.getNowDate());
         this.被保険者番号 = model.get被保険者番号().value();
         this.識別コード = model.get識別コード().value();
 
