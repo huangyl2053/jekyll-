@@ -63,6 +63,9 @@
         ORDER BY
            DbT1001."dbT1001HihokenshaDaicho_shikibetsuCode",
            DbT1001."dbT1001HihokenshaDaicho_shikakuShutokuYMD"
+           <if test="orderbyFlag">
+                , ${orderby}
+            </if>  
     </select>
     
     <select id="get被保険者台帳管理情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"

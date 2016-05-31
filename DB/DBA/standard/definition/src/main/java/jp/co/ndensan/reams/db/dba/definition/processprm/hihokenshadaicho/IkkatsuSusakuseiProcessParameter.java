@@ -30,6 +30,7 @@ public class IkkatsuSusakuseiProcessParameter implements IBatchProcessParameter 
     private LasdecCode shichosonCode;
     private ShikibetsuCode shikibetsuCode;
     private RString psmShikibetsuTaisho;
+    private RString orderby;
 
     /**
      * コンストラクタ
@@ -52,6 +53,10 @@ public class IkkatsuSusakuseiProcessParameter implements IBatchProcessParameter 
      * @return mybatisパラメータ
      */
     public IkkatsuSakuseiMybatisParameter toIkkatsuHakkoMybatisParameter() {
-        return IkkatsuSakuseiMybatisParameter.createSelectByKeyParam(chushutsuFlag, shichosonCode, shikibetsuCode, psmShikibetsuTaisho);
+        return IkkatsuSakuseiMybatisParameter.createSelectByKeyParam(chushutsuFlag,
+                shichosonCode,
+                shikibetsuCode,
+                psmShikibetsuTaisho,
+                orderby);
     }
 }
