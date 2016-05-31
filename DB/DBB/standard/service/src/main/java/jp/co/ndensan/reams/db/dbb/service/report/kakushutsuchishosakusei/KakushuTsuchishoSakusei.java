@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.ReportSo
 import jp.co.ndensan.reams.db.dbb.business.report.fukadaicho.EditedHonSanteiFukaDaichoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.fukadaicho.EditedKariSanteiFukaDaichoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.gemmen.GenmenKetteiTsuchiShoJoho;
+import jp.co.ndensan.reams.db.dbb.business.report.gemmentorikesitsuchisho.GemmenTorikesiTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.henkokenchushitsuchisho.KaigoHokenryogakuHenkoKenChushiTsuchishoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishobook.KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverReport;
 import jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishobook.KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverReport;
@@ -74,6 +75,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.kanri.HonsanteiIkoHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.NonyuTsuchiShoSeigyoJohoLoaderFinder;
 import jp.co.ndensan.reams.db.dbb.service.report.fukadaicho.FukaDaichoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.gemmen.GenmenKetteiTsuchiShoPrintService;
+import jp.co.ndensan.reams.db.dbb.service.report.gemmentorikesitsuchisho.GemmenTorikesiTsuchiShoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.henkokenchushitsuchisho.KaigoHokenryogakuHenkoKenChushiTsuchishoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.karisanteifukadaicho.KarisanteiFukaDaichoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.karisanteihenkotsuchisho.KarisanteiHenkoTsuchishoPrintService;
@@ -461,7 +463,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         } else if (TsuchiSho.介護保険料減免決定通知書.get名称().equals(発行する帳票)) {
             publish介護保険料減免決定通知書(parameter, 通知書共通情報, reportManager, reportSourceDataCollection);
         } else if (TsuchiSho.介護保険料減免取消通知書.get名称().equals(発行する帳票)) {
-            publish介護保険料減免取消通知書(parameter, 通知書共通情報, reportSourceDataCollection);
+            publish介護保険料減免取消通知書(parameter, 通知書共通情報, reportManager, reportSourceDataCollection);
         } else if (TsuchiSho.介護保険料徴収猶予決定通知書.get名称().equals(発行する帳票)) {
             publish介護保険料徴収猶予決定通知書(parameter, 通知書共通情報, reportManager, reportSourceDataCollection);
         } else if (TsuchiSho.介護保険料徴収猶予取消通知書.get名称().equals(発行する帳票)) {
@@ -1359,10 +1361,12 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
      *
      * @param parameter KakushuTsuchishoParameter
      * @param 通知書共通情報 KakushuTsuchishoCommonInfo
+     * @param reportManager ReportManager
      * @param reportSourceDataCollection List<ReportSourceDataCollection>
      */
     public void publish介護保険料減免取消通知書(KakushuTsuchishoParameter parameter,
-            KakushuTsuchishoCommonInfo 通知書共通情報, List<ReportSourceDataCollection> reportSourceDataCollection) {
+            KakushuTsuchishoCommonInfo 通知書共通情報, ReportManager reportManager,
+            List<ReportSourceDataCollection> reportSourceDataCollection) {
 
         ChohyoSeigyoHanyo 帳票制御汎用 = load帳票制御汎用ByKey(介護保険料減免取消通知書_帳票分類ID, 管理年度, 項目名);
         if (帳票制御汎用 == null) {
@@ -1379,18 +1383,30 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
             return;
         }
 
-//        CompKaigoToiawasesakiSource 介護問合せ先ソースビルダー
-//                = KaigoToiawasesakiSourceBuilderCreator.create(SubGyomuCode.DBB介護賦課, 介護保険料減免取消通知書_帳票分類ID).buildSource();
-//        GemmenJohoManager gemmenJohoManager = GemmenJohoManager.createInstance();
-//        GemmenJohoRelateSonotaMapperParameter paramt
-//                = GemmenJohoRelateSonotaMapperParameter.createSelectByKeyParam(通知書共通情報.get賦課の情報_更正後().get賦課情報().get調定年度(),
-//                        通知書共通情報.get賦課の情報_更正後().get賦課情報().get賦課年度(),
-//                        通知書共通情報.get賦課の情報_更正後().get賦課情報().get通知書番号(),
-//                        通知書共通情報.get賦課の情報_更正後().get賦課情報().get履歴番号(),
-//                        通知書共通情報.get賦課の情報_更正後().get賦課情報().get調定日時());
-//        GemmenJoho 減免の情報_更正後 = gemmenJohoManager.get減免の情報_取消更正後(paramt);
-        //TODO 1.2.3 減免取消通知書情報を作成する。
+        IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー
+                = KaigoToiawasesakiSourceBuilderCreator.create(SubGyomuCode.DBB介護賦課, 介護保険料減免取消通知書_帳票分類ID);
+        GemmenJohoManager gemmenJohoManager = GemmenJohoManager.createInstance();
+        GemmenJohoRelateSonotaMapperParameter paramt
+                = GemmenJohoRelateSonotaMapperParameter.createSelectByKeyParam(通知書共通情報.get賦課の情報_更正後().get賦課情報().get調定年度(),
+                        通知書共通情報.get賦課の情報_更正後().get賦課情報().get賦課年度(),
+                        通知書共通情報.get賦課の情報_更正後().get賦課情報().get通知書番号(),
+                        通知書共通情報.get賦課の情報_更正後().get賦課情報().get履歴番号(),
+                        通知書共通情報.get賦課の情報_更正後().get賦課情報().get調定日時());
+        GemmenJoho 減免の情報_更正後 = gemmenJohoManager.get減免の情報_取消更正後(paramt);
+
         DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通 = load帳票制御共通(介護保険料減免取消通知書_帳票分類ID);
+        GemmenTorikesiTsuchiShoJoho 減免取消通知書情報 = new GemmenTorikesiTsuchiShoJoho();
+        if (通知書共通情報.get賦課の情報_更正前() != null) {
+            減免取消通知書情報.set賦課の情報更正前(通知書共通情報.get賦課の情報_更正前().get賦課情報());
+        }
+        減免取消通知書情報.set減免の情報更正後(減免の情報_更正後);
+        減免取消通知書情報.set宛名(通知書共通情報.get宛名情報());
+        減免取消通知書情報.set宛先(通知書共通情報.get宛先情報());
+        減免取消通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
+        減免取消通知書情報.set納組情報(通知書共通情報.get納組情報());
+        if (帳票制御共通 != null) {
+            減免取消通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(帳票制御共通));
+        }
         RString 通知書定型文 = RString.EMPTY;
         if (帳票制御共通 != null && !nullTOEmpty(帳票制御共通.getTeikeibunMojiSize()).isEmpty()) {
             int パターン番号 = Integer.parseInt(nullTOEmpty(帳票制御共通.getTeikeibunMojiSize()).toString());
@@ -1403,8 +1419,14 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
                 通知書定型文 = tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
             }
         }
-        nullTOEmpty(通知書定型文);
-        //TODO 帳票設計_DBBRP12001_32_介護保険料減免決定通知書未製造
+        if (ReportIdDBB.DBB100079.getReportId().equals(帳票ID)) {
+            new GemmenTorikesiTsuchiShoPrintService().printB5横タイプ(parameter.get減免通知書_発行日(),
+                    parameter.get減免通知書_文書番号(), 減免取消通知書情報, 通知書定型文, 介護問合せ先ソースビルダー, reportManager);
+        } else {
+            new GemmenTorikesiTsuchiShoPrintService().printA4縦タイプ(parameter.get減免通知書_発行日(),
+                    parameter.get減免通知書_文書番号(), 減免取消通知書情報, 通知書定型文, 介護問合せ先ソースビルダー, reportManager);
+        }
+
         List<ShikibetsuCode> 識別コードList = new ArrayList<>();
         識別コードList.add(通知書共通情報.get賦課の情報_更正後().get賦課情報().get識別コード());
         Map<Code, RString> 業務固有情報 = new HashMap<>();
