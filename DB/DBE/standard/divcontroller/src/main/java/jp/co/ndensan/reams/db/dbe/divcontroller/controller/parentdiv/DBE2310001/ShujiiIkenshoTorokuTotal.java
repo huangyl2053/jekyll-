@@ -62,8 +62,6 @@ public class ShujiiIkenshoTorokuTotal {
     private static final RString SELECT_KEY9 = new RString("key9");
     private static final RString SELECT_KEY10 = new RString("key10");
     private static final RString SELECT_KEY11 = new RString("key11");
-    private static final RString MENUID_DBEMN32002 = new RString("DBEMN32002");
-    private static final RString MENUID_DBEMNA1005 = new RString("DBEMNA1005");
     private final ShujiiIkenshoTorokuManager service;
     private final ImageManager imageManager;
     private final NinteiShinseiJohoManager ninteiManager;
@@ -85,18 +83,8 @@ public class ShujiiIkenshoTorokuTotal {
      * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
     public ResponseData<ShujiiIkenshoTorokuTotalDiv> onLoad(ShujiiIkenshoTorokuTotalDiv div) {
-        RString menuID = ResponseHolder.getMenuID();
-        ShinseishoKanriNo 管理番号 = ShinseishoKanriNo.EMPTY;
-        int 履歴番号 = 0;
-        if (MENUID_DBEMN32002.equals(menuID)) {
-            管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
-            履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
-        }
-        if (MENUID_DBEMNA1005.equals(menuID)) {
-            // TODO 完了処理　主治医意見書入手画面は未開発です、キーを分かりません
-            管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.その他機関選択ガイド_モード, RString.class));
-            履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.その他機関選択ガイド_モード, RString.class).toString());
-        }
+        ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
+        int 履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
         LasdecCode 市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
         ShujiiIkenshoTorokuMapperParameter param
                 = ShujiiIkenshoTorokuMapperParameter.createShujiiIkenshoTorokuMapperParameter(管理番号, 履歴番号, 市町村コード);
