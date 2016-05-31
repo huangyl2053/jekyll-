@@ -233,11 +233,11 @@ public final class NonyuTsuchishoTotalHandler {
         div.getNotsuInfo().getDdlKokiKaishiKiH().setDataSource(開始期);
 
         List<KeyValueDataSource> 算定の基礎 = new ArrayList<>();
-        算定の基礎.add(new KeyValueDataSource(SanteiKiso.空白.getコード(), SanteiKiso.空白.get名称()));
-        算定の基礎.add(new KeyValueDataSource(SanteiKiso.保険料率.getコード(), SanteiKiso.保険料率.get名称()));
-        算定の基礎.add(new KeyValueDataSource(SanteiKiso.年額保険料.getコード(), SanteiKiso.年額保険料.get名称()));
-        算定の基礎.add(new KeyValueDataSource(SanteiKiso.最終期保険料額.getコード(), SanteiKiso.最終期保険料額.get名称()));
-        算定の基礎.add(new KeyValueDataSource(SanteiKiso.保険料率_今年度.getコード(), SanteiKiso.保険料率_今年度.get名称()));
+        算定の基礎.add(new KeyValueDataSource(SanteiKiso.空白.getコード(), SanteiKiso.空白.get略称()));
+        算定の基礎.add(new KeyValueDataSource(SanteiKiso.保険料率.getコード(), SanteiKiso.保険料率.get略称()));
+        算定の基礎.add(new KeyValueDataSource(SanteiKiso.年額保険料.getコード(), SanteiKiso.年額保険料.get略称()));
+        算定の基礎.add(new KeyValueDataSource(SanteiKiso.最終期保険料額.getコード(), SanteiKiso.最終期保険料額.get略称()));
+        算定の基礎.add(new KeyValueDataSource(SanteiKiso.保険料率_今年度.getコード(), SanteiKiso.保険料率_今年度.get略称()));
         div.getNotsuInfo().getDdlKiso1().setDataSource(算定の基礎);
         div.getNotsuInfo().getDdlKiso2().setDataSource(算定の基礎);
         div.getNotsuInfo().getDdlKiso3().setDataSource(算定の基礎);
