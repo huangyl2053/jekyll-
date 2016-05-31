@@ -315,7 +315,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             本人個人 = new EditedKojin(賦課の情報_更正後.get宛名(), 賦課台帳情報.get帳票制御共通());
         }
         EditedKojin 本人個人_更正前 = null;
-        if (賦課の情報_更正前 != null) {
+        if (賦課の情報_更正前 != null && 賦課台帳情報.get帳票制御共通() != null && 賦課の情報_更正前.get宛名() != null) {
             本人個人_更正前 = new EditedKojin(賦課の情報_更正前.get宛名(), 賦課台帳情報.get帳票制御共通());
         }
 
@@ -377,14 +377,14 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         set本人_更正前後(賦課の情報_更正後, 賦課台帳情報.get被保険者台帳情報(), 賦課台帳情報.get境界層当該者情報(),
                 本人個人, 編集後本算定賦課台帳情報);
         編集後本算定賦課台帳情報.set世帯員情報リスト(世帯員情報リスト);
+        編集後本算定賦課台帳情報.set特徴期(特徴期情報);
+        編集後本算定賦課台帳情報.set特徴月(特徴月情報);
         if (GennenKanen.現年度.equals(年度区分)) {
             set特別徴収_本算定(false, 賦課の情報_更正前, 賦課台帳情報.get収入情報(), 期月リスト_特徴, 編集後本算定賦課台帳情報);
             set特別徴収_本算定(true, 賦課の情報_更正後, 賦課台帳情報.get収入情報(), 期月リスト_特徴, 編集後本算定賦課台帳情報);
+            set特別徴収_増減額(編集後本算定賦課台帳情報);
             set特別徴収_収入額(賦課台帳情報.get収入情報(), 編集後本算定賦課台帳情報);
         }
-        set特別徴収_増減額(編集後本算定賦課台帳情報);
-        編集後本算定賦課台帳情報.set特徴期(特徴期情報);
-        編集後本算定賦課台帳情報.set特徴月(特徴月情報);
         編集後本算定賦課台帳情報.set印刷日時(RDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RString.HALF_SPACE)
                 .concat(RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)).
@@ -525,11 +525,11 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
 
         if (賦課の情報.get賦課情報().get月割開始年月2() != null && !賦課の情報.get賦課情報().get月割開始年月2().isEmpty()
                 && 賦課の情報.get賦課情報().get月割開始年月2()
-                .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度().toDateString().concat(月)))) {
+                .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度().toDateString().concat(月.padZeroToLeft(2))))) {
             return 賦課の情報.get賦課情報().get保険料算定段階2();
         } else if (賦課の情報.get賦課情報().get月割開始年月1() != null && !賦課の情報.get賦課情報().get月割開始年月1().isEmpty()
                 && 賦課の情報.get賦課情報().get月割開始年月1()
-                .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度().toDateString().concat(月)))) {
+                .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度().toDateString().concat(月.padZeroToLeft(2))))) {
             return 賦課の情報.get賦課情報().get保険料算定段階1();
         }
         return RString.EMPTY;
@@ -539,11 +539,13 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
 
         if (賦課の情報.get賦課情報().get月割開始年月2() != null && !賦課の情報.get賦課情報().get月割開始年月2().isEmpty()
                 && 賦課の情報.get賦課情報().get月割開始年月2()
-                .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度().plusYear(INT_1).toDateString().concat(月)))) {
+                .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度()
+                                .plusYear(INT_1).toDateString().concat(月.padZeroToLeft(2))))) {
             return 賦課の情報.get賦課情報().get保険料算定段階2();
         } else if (賦課の情報.get賦課情報().get月割開始年月1() != null && !賦課の情報.get賦課情報().get月割開始年月1().isEmpty()
                 && 賦課の情報.get賦課情報().get月割開始年月1()
-                .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度().plusYear(INT_1).toDateString().concat(月)))) {
+                .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度()
+                                .plusYear(INT_1).toDateString().concat(月.padZeroToLeft(2))))) {
             return 賦課の情報.get賦課情報().get保険料算定段階1();
         }
         return RString.EMPTY;
@@ -553,11 +555,11 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
 
         if (賦課の情報.get賦課情報().get月割開始年月2() != null && !賦課の情報.get賦課情報().get月割開始年月2().isEmpty()
                 && 賦課の情報.get賦課情報().get月割開始年月2()
-                .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度().toDateString().concat(月)))) {
+                .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度().toDateString().concat(月.padZeroToLeft(2))))) {
             return format金額_パターン(賦課の情報.get賦課情報().get算定年額保険料2());
         } else if (賦課の情報.get賦課情報().get月割開始年月1() != null && !賦課の情報.get賦課情報().get月割開始年月1().isEmpty()
                 && 賦課の情報.get賦課情報().get月割開始年月1()
-                .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度().toDateString().concat(月)))) {
+                .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度().toDateString().concat(月.padZeroToLeft(2))))) {
             return format金額_パターン(賦課の情報.get賦課情報().get算定年額保険料1());
         }
         return RString.EMPTY;
@@ -567,11 +569,13 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
 
         if (賦課の情報.get賦課情報().get月割開始年月2() != null && !賦課の情報.get賦課情報().get月割開始年月2().isEmpty()
                 && 賦課の情報.get賦課情報().get月割開始年月2()
-                .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度().plusYear(INT_1).toDateString().concat(月)))) {
+                .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度()
+                                .plusYear(INT_1).toDateString().concat(月.padZeroToLeft(2))))) {
             return format金額_パターン(賦課の情報.get賦課情報().get算定年額保険料2());
         } else if (賦課の情報.get賦課情報().get月割開始年月1() != null && !賦課の情報.get賦課情報().get月割開始年月1().isEmpty()
                 && 賦課の情報.get賦課情報().get月割開始年月1()
-                .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度().plusYear(INT_1).toDateString().concat(月)))) {
+                .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度()
+                                .plusYear(INT_1).toDateString().concat(月.padZeroToLeft(2))))) {
             return format金額_パターン(賦課の情報.get賦課情報().get算定年額保険料1());
         }
         return RString.EMPTY;
@@ -589,7 +593,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             本人個人 = new EditedKojin(賦課の情報_更正後.get宛名(), 賦課台帳情報.get帳票制御共通());
         }
         EditedKojin 本人個人_更正前 = null;
-        if (賦課の情報_更正前 != null) {
+        if (賦課の情報_更正前 != null && 賦課台帳情報.get帳票制御共通() != null && 賦課の情報_更正前.get宛名() != null) {
             本人個人_更正前 = new EditedKojin(賦課の情報_更正前.get宛名(), 賦課台帳情報.get帳票制御共通());
         }
 
@@ -631,12 +635,12 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         set本人_更正前後(賦課の情報_更正前, 賦課台帳情報.get被保険者台帳情報(), 本人個人_更正前, 編集後仮算定賦課台帳情報);
         set本人_更正前後(賦課の情報_更正後, 賦課台帳情報.get被保険者台帳情報(), 本人個人, 編集後仮算定賦課台帳情報);
         編集後仮算定賦課台帳情報.set世帯員情報リスト(世帯員情報リスト);
+        編集後仮算定賦課台帳情報.set特徴期(特徴期情報);
+        編集後仮算定賦課台帳情報.set特徴月(特徴月情報);
         set特別徴収_仮算定(false, 賦課の情報_更正前, 賦課台帳情報.get収入情報(), 期月リスト_特徴, 編集後仮算定賦課台帳情報);
         set特別徴収_仮算定(true, 賦課の情報_更正後, 賦課台帳情報.get収入情報(), 期月リスト_特徴, 編集後仮算定賦課台帳情報);
         set特別徴収_増減額(編集後仮算定賦課台帳情報);
         set特別徴収_収入額(賦課台帳情報.get収入情報(), 編集後仮算定賦課台帳情報);
-        編集後仮算定賦課台帳情報.set特徴期(特徴期情報);
-        編集後仮算定賦課台帳情報.set特徴月(特徴月情報);
         set仮算定内訳(false, 賦課の情報_更正前, 編集後仮算定賦課台帳情報);
         set仮算定内訳(true, 賦課の情報_更正後, 編集後仮算定賦課台帳情報);
         編集後仮算定賦課台帳情報.set印刷日時(RDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
