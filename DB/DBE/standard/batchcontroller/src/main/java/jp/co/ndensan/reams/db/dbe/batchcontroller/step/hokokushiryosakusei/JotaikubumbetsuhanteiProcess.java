@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 介護認定審査会判定状況の取得バッチクラスです。
  *
- * @reamsid_L DBE-1450-020 wangxiaodong
+ * @reamsid_L DBE-1450-020 wangxiaodong
  */
 public class JotaikubumbetsuhanteiProcess extends BatchKeyBreakBase<SinsakaiHanteiJyokyoHeaderEntity> {
 
@@ -35,7 +35,7 @@ public class JotaikubumbetsuhanteiProcess extends BatchKeyBreakBase<SinsakaiHant
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
             new RString(JotaikubumbetsuhanteiReportSource.ReportSourceFields.gogitaiName.name()),
             new RString(JotaikubumbetsuhanteiReportSource.ReportSourceFields.shichosonNo.name())));
-    private static final RString 帳票タイトル = new RString("介護認定審査会判定状況表");
+    private static final RString 帳票タイトル = new RString("要介護状態区分別判定件数");
     private static final RString 非該当 = new RString("01");
     private static final RString 要支援1 = new RString("12");
     private static final RString 要支援2 = new RString("13");

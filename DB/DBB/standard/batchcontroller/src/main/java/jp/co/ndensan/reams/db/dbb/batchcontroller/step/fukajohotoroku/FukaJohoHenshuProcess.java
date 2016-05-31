@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 賦課の情報を一括登録するバッチデータ作成用Processクラスです。
  *
- * @reamsid_L DBB-9040-070 wangxiaodong
+ * @reamsid_L DBB-9040-070 wangxiaodong
  */
 public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempTableEntity> {
 

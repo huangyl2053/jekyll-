@@ -76,6 +76,7 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanel {
         if (更新.equals(状態)) {
             return ResponseData.of(div).setState(DBU0020071StateName.修正状態);
         } else if (削除.equals(状態)) {
+            div.getPnlMain().setReadOnly(true);
             return ResponseData.of(div).setState(DBU0020071StateName.削除状態);
         }
         return ResponseData.of(div).respond();

@@ -6,10 +6,11 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoBodyItem;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
@@ -19,10 +20,10 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIra
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaiichiranhyo.ChosaIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IHomonChosaIraishoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -32,8 +33,8 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -49,6 +50,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -57,7 +59,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0080-140 duanzhanli
  */
-public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoRelateEntity> {
+public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraishoRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper."
             + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get訪問調査依頼書");
@@ -87,12 +89,8 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
     private static final RString NINTEICHOSACHECKHYO = new RString("【認定調査差異チェック表出力区分】");
     private static final RString NINTEICHOSAIRAICHOHYO = new RString("【認定調査依頼一覧表出力区分】");
     private static final RString ZENKONINTEICHOSAHYO = new RString("【前回認定調査結果との比較表出力区分】");
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("jigyoshaNo")));
     private RDate 基準日;
-    private RString 郵便番号;
-    private RString 住所;
-    private RString 機関名称;
-    private RString 氏名;
-    private RString 事業者番号;
     private IHomonChosaIraishoMapper iHomonChosaIraishoMapper;
     private List<ChosaIraiIchiranhyoBodyItem> ichiranhyoBodyItemList;
     private HomonChosaIraishoProcessParamter processParamter;
@@ -117,61 +115,67 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
 
     @Override
     protected void createWriter() {
-        ichiranhyoBatchReportWriter = BatchReportFactory.createBatchReportWriter(帳票ID.value()).create();
+        ichiranhyoBatchReportWriter = BatchReportFactory.createBatchReportWriter(帳票ID.value()).
+                addBreak(new BreakerCatalog<ChosaIraiIchiranhyoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS)).create();
         ichiranhyoReportSourceWriter = new ReportSourceWriter<>(ichiranhyoBatchReportWriter);
         dbT5201EntityWriter = new BatchPermanentTableWriter(DbT5201NinteichosaIraiJohoEntity.class);
     }
 
     @Override
-    protected void process(HomonChosaIraishoRelateEntity entity) {
-//        // 内部QA：614　Redmine：＃75422　排他制限の確認
-        郵便番号 = entity.get調査委託先住所_郵便番号();
-        住所 = entity.get調査委託先住所();
-        機関名称 = entity.get事業者名称();
-        氏名 = entity.get代表者名();
-        事業者番号 = entity.get事業者番号();
+    protected void keyBreakProcess(HomonChosaIraishoRelateEntity current) {
+        if (hasBrek(getBefore(), current)) {
+            ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.createFrom(ichiranhyoBodyItemList);
+            report.writeBy(ichiranhyoReportSourceWriter);
+            ichiranhyoBodyItemList = new ArrayList<>();
+        }
+    }
+
+    private boolean hasBrek(HomonChosaIraishoRelateEntity before, HomonChosaIraishoRelateEntity current) {
+        return !before.get事業者番号().equals(current.get事業者番号());
+    }
+
+    @Override
+    protected void usualProcess(HomonChosaIraishoRelateEntity entity) {
         update認定調査依頼情報(entity);
         ichiranhyoBodyItemList.add(setBodyItem(entity));
     }
 
     @Override
     protected void afterExecute() {
-        if (ichiranhyoBodyItemList != null && !ichiranhyoBodyItemList.isEmpty()) {
-            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
-                    帳票ID,
-                    new FlexibleDate(processParamter.getHakkobi()),
-                    ichiranhyoReportSourceWriter);
-            Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 1);
-            ChosaIraiIchiranhyoHeadItem ichiranhyoHeadItem = new ChosaIraiIchiranhyoHeadItem(ninshoshaSource.hakkoYMD,
-                    ninshoshaSource.denshiKoin,
-                    ninshoshaSource.ninshoshaYakushokuMei,
-                    ninshoshaSource.ninshoshaYakushokuMei2,
-                    ninshoshaSource.ninshoshaYakushokuMei1,
-                    ninshoshaSource.ninshoshaShimeiKakenai,
-                    ninshoshaSource.ninshoshaShimeiKakeru,
-                    ninshoshaSource.koinMojiretsu,
-                    ninshoshaSource.koinShoryaku,
-                    郵便番号,
-                    住所,
-                    機関名称,
-                    氏名,
-                    get名称付与(),
-                    事業者番号,
-                    通知文Map.get(1),
-                    通知文Map.get(2));
-            ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.createFrom(ichiranhyoHeadItem, ichiranhyoBodyItemList);
-            report.writeBy(ichiranhyoReportSourceWriter);
-        }
+        ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.createFrom(ichiranhyoBodyItemList);
+        report.writeBy(ichiranhyoReportSourceWriter);
         バッチ出力条件リストの出力();
     }
 
     private ChosaIraiIchiranhyoBodyItem setBodyItem(HomonChosaIraishoRelateEntity entity) {
+        NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
+                帳票ID,
+                new FlexibleDate(processParamter.getHakkobi()),
+                ichiranhyoReportSourceWriter);
+        Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 1);
         return new ChosaIraiIchiranhyoBodyItem(
+                ninshoshaSource.hakkoYMD,
+                ninshoshaSource.denshiKoin,
+                ninshoshaSource.ninshoshaYakushokuMei,
+                ninshoshaSource.ninshoshaYakushokuMei2,
+                ninshoshaSource.ninshoshaYakushokuMei1,
+                ninshoshaSource.ninshoshaShimeiKakenai,
+                ninshoshaSource.ninshoshaShimeiKakeru,
+                ninshoshaSource.koinMojiretsu,
+                ninshoshaSource.koinShoryaku,
+                entity.get調査委託先住所_郵便番号(),
+                entity.get調査委託先住所(),
+                entity.get事業者名称(),
+                entity.get代表者名(),
+                get名称付与(),
+                entity.get事業者番号(),
+                通知文Map.get(1),
+                通知文Map.get(2),
                 new RString(String.valueOf(連番++)),
                 entity.get調査員氏名(),
                 entity.get被保険者番号(),
                 get和暦(entity.get認定申請年月日(), false),
-                NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時_コード()).toRString(),
+                NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時_コード()).get名称(),
                 entity.get被保険者氏名(),
                 entity.get被保険者氏名カナ(),
                 Seibetsu.toValue(entity.get性別()).get名称(),
@@ -212,10 +216,8 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
         RString hakkobi = processParamter.getHakkobi();
         if (!RString.isNullOrEmpty(hakkobi)) {
             dbT5201Entity.setIraishoShutsuryokuYMD(new FlexibleDate(hakkobi));
-            dbT5201Entity.setChosahyoTouShutsuryokuYMD(new FlexibleDate(hakkobi));
         } else {
             dbT5201Entity.setIraishoShutsuryokuYMD(FlexibleDate.EMPTY);
-            dbT5201Entity.setChosahyoTouShutsuryokuYMD(FlexibleDate.EMPTY);
         }
         dbT5201EntityWriter.update(dbT5201Entity);
     }

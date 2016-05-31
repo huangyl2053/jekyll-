@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 対象者自動割付のバチパラメータクラスです。
  *
- * @reamsid_L DBE-1350-040 wangxiaodong
+ * @reamsid_L DBE-1350-040 wangxiaodong
  */
 public class TaisyosyaJidoWaritsukeBatchParameter extends BatchParameterBase {
 

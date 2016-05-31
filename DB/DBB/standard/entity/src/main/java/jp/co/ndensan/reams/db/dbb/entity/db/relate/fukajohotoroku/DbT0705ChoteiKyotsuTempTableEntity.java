@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 /**
  * DbT0705ChoteiKyotsuTempTableEntity項目定義クラスです。
  *
- * @reamsid_L DBB-9040-070 wangxiaodong
+ * @reamsid_L DBB-9040-070 wangxiaodong
  */
 @OnNextSchema("rgdb")
 public class DbT0705ChoteiKyotsuTempTableEntity extends DbTableEntityBase<DbT0705ChoteiKyotsuTempTableEntity> implements IDbAccessable {

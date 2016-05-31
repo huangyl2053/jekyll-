@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxKinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxKinyuKikanShitenCode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * ShiharaiHohoJyoho のクラスファイル
@@ -90,7 +91,7 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     @JsonProperty("txtKeiyakuNo")
     private TextBoxCode txtKeiyakuNo;
     @JsonProperty("btnSelect")
-    private ButtonDialog btnSelect;
+    private Button btnSelect;
     @JsonProperty("txtKeiyakuCode")
     private TextBoxCode txtKeiyakuCode;
     @JsonProperty("txtKeiyakuName")
@@ -111,10 +112,10 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     private TextBoxAtenaKanaMeisho txtMeigininKana1;
     @JsonProperty("txtMeigininKanji1")
     private TextBoxAtenaMeisho txtMeigininKanji1;
-    @JsonProperty("サブ業務コード")
-    private RString サブ業務コード;
-    @JsonProperty("識別コード")
-    private RString 識別コード;
+    @JsonProperty("hdnTxtSubGyomuCode")
+    private RString hdnTxtSubGyomuCode;
+    @JsonProperty("hdnTxtShikibetsuCode")
+    private RString hdnTxtShikibetsuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -541,7 +542,7 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
      * @return btnSelect
      */
     @JsonProperty("btnSelect")
-    public ButtonDialog getBtnSelect() {
+    public Button getBtnSelect() {
         return btnSelect;
     }
 
@@ -550,7 +551,7 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
      * @param btnSelect btnSelect
      */
     @JsonProperty("btnSelect")
-    public void setBtnSelect(ButtonDialog btnSelect) {
+    public void setBtnSelect(Button btnSelect) {
         this.btnSelect = btnSelect;
     }
 
@@ -735,39 +736,39 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     }
 
     /*
-     * getサブ業務コード
-     * @return サブ業務コード
+     * gethdnTxtSubGyomuCode
+     * @return hdnTxtSubGyomuCode
      */
-    @JsonProperty("サブ業務コード")
-    public RString getサブ業務コード() {
-        return サブ業務コード;
+    @JsonProperty("hdnTxtSubGyomuCode")
+    public RString getHdnTxtSubGyomuCode() {
+        return hdnTxtSubGyomuCode;
     }
 
     /*
-     * setサブ業務コード
-     * @param サブ業務コード サブ業務コード
+     * sethdnTxtSubGyomuCode
+     * @param hdnTxtSubGyomuCode hdnTxtSubGyomuCode
      */
-    @JsonProperty("サブ業務コード")
-    public void setサブ業務コード(RString サブ業務コード) {
-        this.サブ業務コード = サブ業務コード;
+    @JsonProperty("hdnTxtSubGyomuCode")
+    public void setHdnTxtSubGyomuCode(RString hdnTxtSubGyomuCode) {
+        this.hdnTxtSubGyomuCode = hdnTxtSubGyomuCode;
     }
 
     /*
-     * get識別コード
-     * @return 識別コード
+     * gethdnTxtShikibetsuCode
+     * @return hdnTxtShikibetsuCode
      */
-    @JsonProperty("識別コード")
-    public RString get識別コード() {
-        return 識別コード;
+    @JsonProperty("hdnTxtShikibetsuCode")
+    public RString getHdnTxtShikibetsuCode() {
+        return hdnTxtShikibetsuCode;
     }
 
     /*
-     * set識別コード
-     * @param 識別コード 識別コード
+     * sethdnTxtShikibetsuCode
+     * @param hdnTxtShikibetsuCode hdnTxtShikibetsuCode
      */
-    @JsonProperty("識別コード")
-    public void set識別コード(RString 識別コード) {
-        this.識別コード = 識別コード;
+    @JsonProperty("hdnTxtShikibetsuCode")
+    public void setHdnTxtShikibetsuCode(RString hdnTxtShikibetsuCode) {
+        this.hdnTxtShikibetsuCode = hdnTxtShikibetsuCode;
     }
 
     /*
@@ -857,6 +858,10 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     //--------------- この行より下にコードを追加してください -------------------
     private ShiharaiHohoJyohoHandler getHandler() {
         return new ShiharaiHohoJyohoHandler(this);
+    }
+
+    private ShiharaiHohoJyohoValidationHandler getValidationHandler() {
+        return new ShiharaiHohoJyohoValidationHandler(this);
     }
 
     /**
@@ -959,5 +964,15 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     @Override
     public RString getKozaID() {
         return getHandler().getKozaID();
+    }
+
+    /**
+     * 支払方法情報、バリデーションチェックを行う。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @Override
+    public ValidationMessageControlPairs validateCheck() {
+        return getValidationHandler().validateCheck();
     }
 }

@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 /**
  * 施設入退所異動Divのハンドラークラスです。
  *
- * @reamsid_L DBA-0360-040 wangxiaodong
+ * @reamsid_L DBA-0360-040 wangxiaodong
  */
 public class ShisetsuNyutaishoIdoHandler {
 

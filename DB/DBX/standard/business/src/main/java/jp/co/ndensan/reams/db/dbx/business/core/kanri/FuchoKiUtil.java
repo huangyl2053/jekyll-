@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.util.NendoUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 月期対応取得_普徴のクラスです。
@@ -68,9 +68,9 @@ public class FuchoKiUtil {
     }
 
     private Kitsuki getKitsuki(ConfigNameDBB 月別テーブル, ConfigNameDBB 月の期, ConfigNameDBB 月処理区分) {
-        RString 月別 = BusinessConfig.get(月別テーブル, 適用基準日, SubGyomuCode.DBB介護賦課);
-        RString 期 = BusinessConfig.get(月の期, 適用基準日, SubGyomuCode.DBB介護賦課);
-        RString 処理区分 = BusinessConfig.get(月処理区分, 適用基準日, SubGyomuCode.DBB介護賦課);
+        RString 月別 = DbBusinessConfig.get(月別テーブル, 適用基準日, SubGyomuCode.DBB介護賦課);
+        RString 期 = DbBusinessConfig.get(月の期, 適用基準日, SubGyomuCode.DBB介護賦課);
+        RString 処理区分 = DbBusinessConfig.get(月処理区分, 適用基準日, SubGyomuCode.DBB介護賦課);
         Tsuki 月 = Tsuki.toValue(月別.padLeft(new RString("0"), 2));
         return new Kitsuki(月, 期, FuchokiJohoTsukiShoriKubun.toValue(処理区分), true, new KitsukiHyoki(月, 期));
     }

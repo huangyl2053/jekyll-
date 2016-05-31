@@ -18,6 +18,17 @@ public interface IChosaItakusakiAndChosainInputDiv extends ICommonChildDivBasePr
     void initialize(RString モード);
 
     /**
+     * 共有子Divの初期化を行います。
+     *
+     * @param モード モード
+     * @param 調査委託先コード 調査委託先コード
+     * @param 調査委託先名 調査委託先名
+     * @param 調査員コード 調査員コード
+     * @param 調査員名 調査員名
+     */
+    void initialize(RString モード, RString 調査委託先コード, RString 調査委託先名, RString 調査員コード, RString 調査員名);
+
+    /**
      * 認定調査委託先情報の市町村コード
      *
      * @param HdnShichosonCode 市町村コード

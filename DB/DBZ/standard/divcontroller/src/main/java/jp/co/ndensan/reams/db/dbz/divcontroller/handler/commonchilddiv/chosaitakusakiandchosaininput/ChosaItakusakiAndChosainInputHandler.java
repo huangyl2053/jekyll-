@@ -70,7 +70,23 @@ public class ChosaItakusakiAndChosainInputHandler {
             div.getBtnChosainGuide().setVisible(true);
             div.getBtnClear().setVisible(true);
         }
+    }
 
+    /**
+     * 画面の初期化をします。
+     *
+     * @param モード モード
+     * @param 調査委託先コード 調査委託先コード
+     * @param 調査委託先名 調査委託先名
+     * @param 調査員コード 調査員コード
+     * @param 調査員名 調査員名
+     */
+    public void initialize(RString モード, RString 調査委託先コード, RString 調査委託先名, RString 調査員コード, RString 調査員名) {
+        initialize(モード);
+        div.getTxtChosaItakusakiCode().setValue(調査委託先コード);
+        div.getTxtChosaItakusakiName().setValue(調査委託先名);
+        div.getTxtChosainCode().setValue(調査員コード);
+        div.getTxtChosainName().setValue(調査員名);
     }
 
     /**

@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.processprm.kaigojyuminhyokoukiu;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KobetsuKoikiunyoParameter;
 import jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuMapperParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,25 +23,16 @@ import lombok.Setter;
 @Setter
 public class KaiGoJuminHyokouKiuProcessParameter implements IBatchProcessParameter {
 
-    private RString shichosonCode;
-    private RDateTime datefrom;
-    private RDateTime dateto;
+    private List<KobetsuKoikiunyoParameter> kobetsuKoikiunyoParameterList;
 
     /**
      * コンストラクタ
      *
-     * @param shichosonCode 市町村コード
-     * @param datefrom 日付FROM
-     * @param dateto 日付TO
+     * @param kobetsuKoikiunyoParameterList kobetsuKoikiunyoParameterList
      */
     public KaiGoJuminHyokouKiuProcessParameter(
-            RString shichosonCode,
-            RDateTime datefrom,
-            RDateTime dateto
-    ) {
-        this.shichosonCode = shichosonCode;
-        this.datefrom = datefrom;
-        this.dateto = dateto;
+            List<KobetsuKoikiunyoParameter> kobetsuKoikiunyoParameterList) {
+        this.kobetsuKoikiunyoParameterList = kobetsuKoikiunyoParameterList;
     }
 
     /**
@@ -50,6 +41,6 @@ public class KaiGoJuminHyokouKiuProcessParameter implements IBatchProcessParamet
      * @return KaigoJuminhyoMapperParameter
      */
     public KaiGoJuminHyokouKiuMapperParameter toKaiGoJuminHyokouKiuMapperParameter() {
-        return KaiGoJuminHyokouKiuMapperParameter.createParam(shichosonCode, datefrom, dateto);
+        return KaiGoJuminHyokouKiuMapperParameter.createParam(kobetsuKoikiunyoParameterList);
     }
 }

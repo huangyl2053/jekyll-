@@ -73,6 +73,8 @@ public class KakushuTsuchishoSakuseiKobetsu {
             Map<RString, FlexibleYear> 年度Map = getHandler(div).set調定パネル(賦課の情報List, 調定日時List);
             FukaJoho 賦課の情報 = 賦課の情報List.get(0);
             set発行する帳票(賦課の情報, div, 年度Map.get(調定年度_KEY), 年度Map.get(賦課年度_KEY), 調定日時List);
+        } else {
+            getHandler(div).set初期化();
         }
         return ResponseData.of(div).respond();
     }

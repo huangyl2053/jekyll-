@@ -66,8 +66,6 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
     private static final RString 追加 = new RString("追加");
     private static final RString 表示モード = new RString("HihokenrirekiNashiMode");
     private static final RString FIRSTREQUEST以外 = new RString("2");
-    public static final int FIRSTINDEX = 0;
-
     private RString 状態_被保履歴タブ = RString.EMPTY;
     private RString 状態_医療保険タブ = RString.EMPTY;
     private RString 状態_老福年金タブ = RString.EMPTY;
@@ -298,8 +296,8 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
         ViewStateHolder.put(ViewStateKeys.資格異動の訂正_識別コード, 識別コード);
         ViewStateHolder.put(ViewStateKeys.資格異動の訂正_被保番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.資格異動の訂正_状態, 状態_照会);
-        dgShikakuShutokuRireki_Row row = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
-                .getCcdShikakuTokusoRireki().getDataGridSelectItem();
+        dgShikakuShutokuRireki_Row row = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                getCcdShikakuTokusoRireki().getDataGridSelectItem();
         ShikakuRirekiJoho joho = new ShikakuRirekiJoho();
         joho.setDaNo(row.getDaNo());
         joho.setHihokenshaKubun(row.getHihokenshaKubun());

@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikekkatoroku.ShinsakaiKek
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
@@ -67,8 +66,6 @@ public class ShinsakaiKekkaToroku {
      * @return ResponseData<NenreiTotatsuTorokushaListDiv>
      */
     public ResponseData<ShinsakaiKekkaTorokuDiv> onClick_Check(ShinsakaiKekkaTorokuDiv div) {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-
         return ResponseData.of(div).respond();
     }
 

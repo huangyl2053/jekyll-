@@ -5,6 +5,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.Jigyo
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JisshiJokyoTokeiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JotaikubumbetsuhanteiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.ShinsahanteinoHenkojokyoProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.ShinsakaiShukeihyoShinseiBetsuProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.ShinsakaishukeihyoHanteiBetsuProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.SinsakaiHanteiJyokyoProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.hokokushiryosakusei.HokokuShiryoSakuSeiBatchParameter;
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  * 報告資料作成のバッチフロークラスです。
  *
- * @reamsid_L DBE-1450-020 wangxiaodong
+ * @reamsid_L DBE-1450-020 wangxiaodong
  */
 public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBatchParameter> {
 
@@ -26,6 +27,7 @@ public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBa
     private static final String 状態区分別判定 = "jotaikubumbetsuhantei";
     private static final String 審査判定変更状況 = "shinsahanteinoHenkojokyo";
     private static final String 審査会集計表判定別 = "shinsakaishukeihyoHanteiBetsu";
+    private static final String 審査会集計表申請区分別 = "shinsakaiShukeihyoShinseiBetsu";
 
     @Override
     protected void defineFlow() {
@@ -43,6 +45,7 @@ public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBa
             executeStep(状態区分別判定);
             executeStep(審査判定変更状況);
             executeStep(審査会集計表判定別);
+            executeStep(審査会集計表申請区分別);
         }
     }
 
@@ -74,7 +77,7 @@ public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBa
      */
     @Step(認定実施状況統計)
     protected IBatchFlowCommand selectJisshiJokyoTokei() {
-        return simpleBatch(JisshiJokyoTokeiProcess.class)
+        return loopBatch(JisshiJokyoTokeiProcess.class)
                 .arguments(getParameter().toJisshiJokyoTokeiProcessParameter()).define();
     }
 
@@ -120,6 +123,17 @@ public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBa
     protected IBatchFlowCommand selectShinsakaishukeihyoHanteiBetsu() {
         return loopBatch(ShinsakaishukeihyoHanteiBetsuProcess.class)
                 .arguments(getParameter().toSinsakaiHanteiJyokyoProcessParameter()).define();
+    }
+
+    /**
+     * 介護認定審査会集計表（申請区分別）の作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(審査会集計表申請区分別)
+    protected IBatchFlowCommand selectShinsakaiShukeihyoShinseiBetsu() {
+        return loopBatch(ShinsakaiShukeihyoShinseiBetsuProcess.class)
+                .arguments(getParameter().toShinsakaiShukeihyoShinseiBetsuProcessParameter()).define();
     }
 
 }

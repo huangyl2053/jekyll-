@@ -12,11 +12,11 @@ import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoIdentifier;
@@ -388,14 +388,15 @@ public class ShikakuHenkoRirekiHandler {
                 変更日,
                 届出日,
                 変更事由,
-                sikakuKanrenIdo.get住所地特例適用事由コード(),
-                sikakuKanrenIdo.get市町村名称(),
-                sikakuKanrenIdo.get措置元保険者(),
-                sikakuKanrenIdo.get旧市町村名称(),
+                sikakuKanrenIdo.get住所地特例適用事由コード() == null
+                ? RString.EMPTY : sikakuKanrenIdo.get住所地特例適用事由コード(),
+                sikakuKanrenIdo.get市町村名称() == null ? RString.EMPTY : sikakuKanrenIdo.get市町村名称(),
+                sikakuKanrenIdo.get措置元保険者() == null ? RString.EMPTY : sikakuKanrenIdo.get措置元保険者(),
+                sikakuKanrenIdo.get旧市町村名称() == null ? RString.EMPTY : sikakuKanrenIdo.get旧市町村名称(),
                 処理日時,
                 sikakuKanrenIdo.get被保険者番号().getColumnValue(),
                 識別コード.getColumnValue(),
-                sikakuKanrenIdo.get市町村コード().getColumnValue(),
+                sikakuKanrenIdo.get市町村コード() == null ? RString.EMPTY : sikakuKanrenIdo.get市町村コード().getColumnValue(),
                 異動日,
                 sikakuKanrenIdo.get枝番().trim());
         return row;
@@ -430,12 +431,10 @@ public class ShikakuHenkoRirekiHandler {
         SikakuKanrenIdoFinder finder = SikakuKanrenIdoFinder.createInstance();
         List<KoseiShichosonMaster> shichosonMasters = finder.selectByKoseiShichosonMasterList().records();
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        int count = 1;
         for (KoseiShichosonMaster koseiShichosonMaster : shichosonMasters) {
             if (!RString.isNullOrEmpty(koseiShichosonMaster.getShichosonCode().getColumnValue())) {
                 dataSource.add(new KeyValueDataSource(
                         koseiShichosonMaster.getShichosonCode().getColumnValue(), koseiShichosonMaster.getShichosonMeisho()));
-                count++;
             }
         }
         return dataSource;

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 賦課の情報を一括登録するバッチフロークラスです。
  *
- * @reamsid_L DBB-9040-060 wangxiaodong
+ * @reamsid_L DBB-9040-060 wangxiaodong
  */
 public class FukaJohoTorokuFlow extends BatchFlowBase<FukaJohoTorokuBatchParameter> {
 

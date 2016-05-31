@@ -129,7 +129,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateReport
         Decimal 普徴期別金額 = Decimal.ZERO;
         for (UniversalPhase universalPhase : 普徴期別金額リスト) {
 
-            if (new RString(universalPhase.get期()).equals(期)) {
+            if (new RString(universalPhase.get期()).padZeroToLeft(2).equals(期.padZeroToLeft(2))) {
                 普徴期別金額 = universalPhase.get金額();
                 break;
             }
@@ -157,7 +157,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateReport
         Decimal 特徴期別金額 = Decimal.ZERO;
         for (CharacteristicsPhase characteristicsPhase : 特徴期別金額リスト) {
 
-            if (characteristicsPhase.get期().equals(期)) {
+            if (characteristicsPhase.get期().padZeroToLeft(2).equals(期.padZeroToLeft(2))) {
                 特徴期別金額 = characteristicsPhase.get金額();
                 break;
             }

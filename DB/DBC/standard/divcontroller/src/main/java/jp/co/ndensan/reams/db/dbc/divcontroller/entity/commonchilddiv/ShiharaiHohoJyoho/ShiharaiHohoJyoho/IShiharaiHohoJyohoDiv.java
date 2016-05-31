@@ -5,6 +5,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /*
  * このコードはツールによって生成されました。
@@ -77,4 +78,11 @@ public interface IShiharaiHohoJyohoDiv extends ICommonChildDivBaseProperties {
      * @return RString
      */
     public RString getKozaID();
+
+    /**
+     * 支払方法情報、バリデーションチェックを行う。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs validateCheck();
 }

@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 対象者自動割付の取得バッチクラスです。
  *
- * @reamsid_L DBE-1350-040 wangxiaodong
+ * @reamsid_L DBE-1350-040 wangxiaodong
  */
 public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
 

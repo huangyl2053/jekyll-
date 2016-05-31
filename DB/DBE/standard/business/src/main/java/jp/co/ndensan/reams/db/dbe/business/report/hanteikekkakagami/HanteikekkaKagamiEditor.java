@@ -5,17 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.hanteikekkakagami;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkaichiran.HanteiKekkaIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkakagami.HanteikekkaKagamiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.hanteikekkakagami.HanteikekkaKagamiReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 介護認定審査判定結果（鑑）Editorです。
@@ -29,7 +27,7 @@ public class HanteikekkaKagamiEditor implements IHanteikekkaKagamiEditor {
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link HanteiKekkaIchiranEntity}
+     * @param item {@link HanteikekkaKagamiEntity}
      */
     protected HanteikekkaKagamiEditor(HanteikekkaKagamiEntity item) {
         this.item = item;
@@ -37,18 +35,13 @@ public class HanteikekkaKagamiEditor implements IHanteikekkaKagamiEditor {
 
     @Override
     public HanteikekkaKagamiReportSource edit(HanteikekkaKagamiReportSource source) {
-        RDateTime dateTime = RDateTime.now();
-        RStringBuilder hakkoYMD = new RStringBuilder();
-        hakkoYMD.append(dateTime.getDate().wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
-        hakkoYMD.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         if (item != null) {
             editCompNinshosha(source);
-            // TODO QA
-            source.title = new RString("介護認定審査判定結果（鑑）");
-            source.shinsakaiKaisaiYMD = new RString(item.getShinsakaiKaisaiYMD().toString());
+            source.title = DbBusinessConfig
+                    .get(ConfigNameDBE.介護認定審査判定結果_鑑, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            source.shinsakaiKaisaiYMD = item.getShinsakaiKaisaiYMD().seireki().
+                    separator(Separator.JAPANESE).
+                    fillType(FillType.ZERO).toDateString();
             source.gogitaiNo = new RString(item.getGogitaiNo());
             source.tsuchibun1 = item.getTsuchibun1();
             source.tsuchibun2 = item.getTsuchibun2();
@@ -57,8 +50,10 @@ public class HanteikekkaKagamiEditor implements IHanteikekkaKagamiEditor {
     }
 
     private void editCompNinshosha(HanteikekkaKagamiReportSource source) {
-        if (item != null && item.getNinshoshaSource() != null) {
-            source.hakkoYMD1 = item.getNinshoshaSource().hakkoYMD;
+        if (item.getNinshoshaSource() != null) {
+            source.hakkoYMD1 = new RDate(item.getNinshoshaSource().hakkoYMD.toString()).seireki().
+                    separator(Separator.JAPANESE).
+                    fillType(FillType.ZERO).toDateString();
             source.denshiKoin = item.getNinshoshaSource().denshiKoin;
             source.koinMojiretsu = item.getNinshoshaSource().koinMojiretsu;
             source.koinShoryaku = item.getNinshoshaSource().koinShoryaku;

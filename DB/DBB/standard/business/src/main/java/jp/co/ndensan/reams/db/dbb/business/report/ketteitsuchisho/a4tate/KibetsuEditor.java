@@ -36,6 +36,7 @@ public class KibetsuEditor implements IKaigoHokenHokenryogakuKetteiTsuchishoA4Ta
         reportSource.listKibetsu_6 = item.getListKibetsu_6();
         reportSource.listKibetsu_7 = item.getListKibetsu_7();
         reportSource.listKibetsu_8 = item.getListKibetsu_8();
+        reportSource.listKibetsu_9 = item.getListKibetsu_9();
         return reportSource;
     }
 }

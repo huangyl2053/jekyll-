@@ -23,6 +23,8 @@ public class ikenshoiraiselectDiv extends Panel {
      */
     @JsonProperty("btnikenshoiraitaishooutput")
     private ButtonDownLoad btnikenshoiraitaishooutput;
+    @JsonProperty("btnIraishoToOutputDialog")
+    private ButtonDialog btnIraishoToOutputDialog;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,6 +48,24 @@ public class ikenshoiraiselectDiv extends Panel {
     @JsonProperty("btnikenshoiraitaishooutput")
     public void setBtnikenshoiraitaishooutput(ButtonDownLoad btnikenshoiraitaishooutput) {
         this.btnikenshoiraitaishooutput = btnikenshoiraitaishooutput;
+    }
+
+    /*
+     * getbtnIraishoToOutputDialog
+     * @return btnIraishoToOutputDialog
+     */
+    @JsonProperty("btnIraishoToOutputDialog")
+    public ButtonDialog getBtnIraishoToOutputDialog() {
+        return btnIraishoToOutputDialog;
+    }
+
+    /*
+     * setbtnIraishoToOutputDialog
+     * @param btnIraishoToOutputDialog btnIraishoToOutputDialog
+     */
+    @JsonProperty("btnIraishoToOutputDialog")
+    public void setBtnIraishoToOutputDialog(ButtonDialog btnIraishoToOutputDialog) {
+        this.btnIraishoToOutputDialog = btnIraishoToOutputDialog;
     }
 
     // </editor-fold>

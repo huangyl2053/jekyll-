@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC58101",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "要介護認定実施状況表（統計表）",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD5810001",
+     "toLayoutTitle": "要介護認定実施状況表（統計表）",
+     "toState": ""
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD5810001",
+     "layoutTitle": "要介護認定実施状況表（統計表）",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

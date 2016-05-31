@@ -51,6 +51,12 @@ public class INenreiToutatsuYoteishaCheckListBatchParameter extends BatchParamet
     private RString shutsuryokujunId;
 
     /**
+     * コンストラクタです。
+     */
+    public INenreiToutatsuYoteishaCheckListBatchParameter() {
+    }
+
+    /**
      * コンストラクタです。<br/>
      *
      * @param syutsuryokutaisyo 出力対象者

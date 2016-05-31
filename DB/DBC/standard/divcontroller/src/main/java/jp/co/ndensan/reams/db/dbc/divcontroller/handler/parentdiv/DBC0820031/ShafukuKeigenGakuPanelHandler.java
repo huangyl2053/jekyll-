@@ -47,7 +47,6 @@ public final class ShafukuKeigenGakuPanelHandler {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
-    private static final int SIX = 6;
 
     private ShafukuKeigenGakuPanelHandler(ShafukuKeigenGakuPanelDiv div) {
         this.div = div;
@@ -523,8 +522,7 @@ public final class ShafukuKeigenGakuPanelHandler {
         ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
         ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().toDateString()
-                        .substring(0, SIX)),
+                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
                 new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue()),
                 div.getPanelHead().getTxtShomeisho().getValue(),

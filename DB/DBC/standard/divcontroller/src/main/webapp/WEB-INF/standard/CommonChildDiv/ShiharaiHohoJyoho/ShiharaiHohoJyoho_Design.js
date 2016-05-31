@@ -24,12 +24,20 @@ var DBC;
                 return "onChange_ddlKozaID";
             };
 
+            Events.onOkClose_ddlKozaID = function () {
+                return "onOkClose_ddlKozaID";
+            };
+
             Events.onClick_radJyryoinin = function () {
                 return "onClick_radJyryoinin";
             };
 
             Events.onBlur_txtKeiyakuNo = function () {
                 return "onBlur_txtKeiyakuNo";
+            };
+
+            Events.onClick_btnKeiyakuNo = function () {
+                return "onClick_btnKeiyakuNo";
             };
             return Events;
         })();
@@ -148,7 +156,7 @@ var DBC;
             };
 
             Controls.prototype.btnSelect = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnSelect"));
+                return new UZA.Button(this.convFiledName("btnSelect"));
             };
 
             Controls.prototype.txtKeiyakuCode = function () {

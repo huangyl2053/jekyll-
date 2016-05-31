@@ -175,7 +175,7 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onChange_radKetteiKubun(FutangendogakuShinseiDiv div) {
-        getHandler(div).onChange_radKetteiKubun();
+        getHandler(div).onChange_radKetteiKubun(true);
         return ResponseData.of(div).respond();
     }
 

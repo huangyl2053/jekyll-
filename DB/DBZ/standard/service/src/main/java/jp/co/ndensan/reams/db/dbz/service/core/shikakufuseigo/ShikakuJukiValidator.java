@@ -116,7 +116,7 @@ public class ShikakuJukiValidator {
                 && (!個人情報.get生年月日().toFlexibleDate().isValid()
                 || 資格の情報.get資格変更年月日().compareTo(個人情報.get年齢算出().get年齢到達日(
                                 第１号被保険者到達基準年齢)) != 0)) {
-            不整合理由 = FuseigoRiyu.資格取得者_死亡者;
+            不整合理由 = FuseigoRiyu.資格変更者_１号被保険者到達;
         }
 
         return 不整合理由;
@@ -130,6 +130,9 @@ public class ShikakuJukiValidator {
      * @return FuseigoRiyu
      */
     public FuseigoRiyu checkFor除外不整合(IKojin 個人情報, TekiyoJogaisha 除外の情報) {
+        if (除外の情報 == null) {
+            return null;
+        }
         FuseigoRiyu 不整合理由 = null;
         if (JukiIdoJiyu.転入.get異動事由コード().equals(個人情報.get登録事由().get異動事由コード())
                 && JogaiTekiyoJiyu.除外者適用.getコード().equals(除外の情報.get適用除外適用事由コード())
@@ -164,6 +167,9 @@ public class ShikakuJukiValidator {
      * @return FuseigoRiyu
      */
     public FuseigoRiyu checkFor他特不整合(IKojin 個人情報, TashichosonJushochiTokurei 他特の情報) {
+        if (他特の情報 == null) {
+            return null;
+        }
         FuseigoRiyu 不整合理由 = null;
         if (JukiIdoJiyu.転入.get異動事由コード().equals(個人情報.get登録事由().get異動事由コード())
                 && TatokureiTekiyoJiyu.他特例適用.getコード().equals(他特の情報.get他市町村住所地特例適用事由コード())
@@ -293,10 +299,12 @@ public class ShikakuJukiValidator {
     }
 
     private void setMsg(Map<RString, DbzErrorMessages> retMap, IKojin 個人情報, FuseigoRiyu 不整合理由) {
-        if (不整合理由 == FuseigoRiyu.資格取得者_転出者 && isNullOrEmpty(個人情報.get転出確定().get異動年月日())) {
-            retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出確定日);
-        } else {
-            retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出予定日);
+        if (不整合理由 == FuseigoRiyu.資格取得者_転出者) {
+            if (isNullOrEmpty(個人情報.get転出確定().get異動年月日())) {
+                retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出確定日);
+            } else {
+                retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出予定日);
+            }
         }
     }
 
@@ -312,12 +320,12 @@ public class ShikakuJukiValidator {
         boolean flag2 = JukiIdoJiyu.死亡.get異動事由コード().equals(消除事由)
                 && !JogaiKaijoJiyu.除外者死亡.getコード().equals(解除事由);
         boolean flag3 = JukiIdoJiyu.職権消除.get異動事由コード().equals(消除事由)
-                && !JogaiKaijoJiyu.職権解除.getコード().equals(消除事由);
+                && !JogaiKaijoJiyu.職権解除.getコード().equals(解除事由);
         boolean flag4 = JukiIdoJiyu.死亡.get異動事由コード().equals(消除事由)
                 && JogaiKaijoJiyu.除外者死亡.getコード().equals(解除事由)
                 && 解除年月日.compareTo(消除異動年月日.plusDay(1)) != 0;
         boolean flag5 = JukiIdoJiyu.職権消除.get異動事由コード().equals(消除事由)
-                && JogaiKaijoJiyu.職権解除.getコード().equals(消除事由)
+                && JogaiKaijoJiyu.職権解除.getコード().equals(解除事由)
                 && 解除年月日.compareTo(消除異動年月日.plusDay(1)) != 0;
         return flag1 || flag2 || flag3 || flag4 || flag5;
     }
@@ -327,12 +335,12 @@ public class ShikakuJukiValidator {
         boolean flag2 = JukiIdoJiyu.死亡.get異動事由コード().equals(消除事由)
                 && !TatokureiKaijoJiyu.他特例死亡.getコード().equals(解除事由);
         boolean flag3 = JukiIdoJiyu.職権消除.get異動事由コード().equals(消除事由)
-                && !TatokureiKaijoJiyu.職権解除.getコード().equals(消除事由);
+                && !TatokureiKaijoJiyu.職権解除.getコード().equals(解除事由);
         boolean flag4 = JukiIdoJiyu.死亡.get異動事由コード().equals(消除事由)
                 && TatokureiKaijoJiyu.他特例死亡.getコード().equals(解除事由)
                 && 解除年月日.compareTo(消除異動年月日.plusDay(1)) != 0;
         boolean flag5 = JukiIdoJiyu.職権消除.get異動事由コード().equals(消除事由)
-                && TatokureiKaijoJiyu.職権解除.getコード().equals(消除事由)
+                && TatokureiKaijoJiyu.職権解除.getコード().equals(解除事由)
                 && 解除年月日.compareTo(消除異動年月日.plusDay(1)) != 0;
         return flag1 || flag2 || flag3 || flag4 || flag5;
     }

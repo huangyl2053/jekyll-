@@ -261,6 +261,20 @@
      "toLayoutName": "DBC0710011",
      "toLayoutTitle": "住宅改修費支給申請登録",
      "toState": "支給申請モード"
+    },
+    {
+     "id": "21",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0700011",
+     "layoutTitle": "住宅改修費事前申請登録",
+     "eventName": "該当者一覧",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0710011",
+     "toLayoutTitle": "住宅改修費支給申請登録",
+     "toState": "支給申請モード"
     }
    ]
   }

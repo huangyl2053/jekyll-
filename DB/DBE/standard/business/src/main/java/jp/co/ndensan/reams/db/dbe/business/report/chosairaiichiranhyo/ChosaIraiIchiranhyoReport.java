@@ -19,35 +19,28 @@ import lombok.NonNull;
 public class ChosaIraiIchiranhyoReport extends Report<ChosaIraiIchiranhyoReportSource> {
 
     private final List<ChosaIraiIchiranhyoBodyItem> bodyItemList;
-    private final ChosaIraiIchiranhyoHeadItem headItem;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headItem 認定調査依頼一覧表ヘッダのITEM
      * @param bodyItemList 認定調査依頼一覧表ボディのITEMリスト
      * @return 認定調査依頼一覧表のReport
      */
     public static ChosaIraiIchiranhyoReport createFrom(
-            ChosaIraiIchiranhyoHeadItem headItem,
             @NonNull List<ChosaIraiIchiranhyoBodyItem> bodyItemList) {
 
         return new ChosaIraiIchiranhyoReport(
-                headItem,
                 bodyItemList);
     }
 
     /**
      * インスタンスを生成します。
      *
-     * @param headItem 認定調査依頼一覧表ヘッダのITEM
      * @param bodyItemList 認定調査依頼一覧表ボディのITEMリスト
      */
     protected ChosaIraiIchiranhyoReport(
-            ChosaIraiIchiranhyoHeadItem headItem,
             List<ChosaIraiIchiranhyoBodyItem> bodyItemList) {
 
-        this.headItem = headItem;
         this.bodyItemList = bodyItemList;
     }
 
@@ -58,9 +51,8 @@ public class ChosaIraiIchiranhyoReport extends Report<ChosaIraiIchiranhyoReportS
     @Override
     public void writeBy(ReportSourceWriter<ChosaIraiIchiranhyoReportSource> reportSourceWriter) {
         for (ChosaIraiIchiranhyoBodyItem bodyItem : bodyItemList) {
-            IChosaIraiIchiranhyoEditor headerEditor = new ChosaIraiIchiranhyoHeaderEditor(headItem);
             IChosaIraiIchiranhyoEditor bodyEditor = new ChosaIraiIchiranhyoBodyEditor(bodyItem);
-            IChosaIraiIchiranhyoBuilder builder = new ChosaIraiIchiranhyoBuilderImpl(headerEditor, bodyEditor);
+            IChosaIraiIchiranhyoBuilder builder = new ChosaIraiIchiranhyoBuilderImpl(bodyEditor);
             reportSourceWriter.writeLine(builder);
         }
     }

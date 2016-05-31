@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.Keiyak
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shiharaihohojyoho.ShiharaiHohoJyohoFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -91,8 +93,8 @@ public class ShiharaiHohoJyohoHandler {
      * @param 状態 状態
      */
     public void initialize(SikyuSinseiJyohoParameter 支給申請情報, RString 状態) {
-        div.setサブ業務コード(SubGyomuCode.DBC介護給付.value());
-        div.set識別コード(支給申請情報.getShikibetsuCode() == null ? RString.EMPTY : 支給申請情報.getShikibetsuCode().value());
+        div.setHdnTxtSubGyomuCode(SubGyomuCode.DBC介護給付.value());
+        div.setHdnTxtShikibetsuCode(支給申請情報.getShikibetsuCode() == null ? RString.EMPTY : 支給申請情報.getShikibetsuCode().value());
         KamokuCode 業務内区分コード = KamokuCode.EMPTY;
 
         業務内区分コード = get業務内区分コード(業務内区分コード);
@@ -117,20 +119,22 @@ public class ShiharaiHohoJyohoHandler {
                 div.getRadJyryoinin().setSelectedKey(支払方法区分.getコード());
                 JuryoininKeiyakuJigyosha 受領委任契約事業者 = ShiharaiHohoJyohoFinder.createInstance().
                         getKeiyakuJigyosya(new KeiyakushaParameter(null, null, null, null).
-                                createParam(支給申請情報.getHihokenshaNo(), 支給申請情報.
-                                        getShikyushinseiServiceYM(), 支給申請情報.getShikyushinseiSeiriNo(), 支給申請情報.getKeiyakuNo()));
-                受領委任払いエリアの初期化(支給申請情報, 受領委任契約事業者);
+                                createParam(支給申請情報.getHihokenshaNo() == null ? HihokenshaNo.EMPTY : new HihokenshaNo(支給申請情報.getHihokenshaNo().value()),
+                                        支給申請情報.getShikyushinseiServiceYM() == null ? FlexibleYearMonth.EMPTY : 支給申請情報.getShikyushinseiServiceYM(),
+                                        支給申請情報.getShikyushinseiSeiriNo() == null ? RString.EMPTY : 支給申請情報.getShikyushinseiSeiriNo(),
+                                        支給申請情報.getKeiyakuNo() == null ? RString.EMPTY : 支給申請情報.getKeiyakuNo()));
+                受領委任払いエリアの初期化(支給申請情報, 受領委任契約事業者, new RString("初期"));
             }
         }
         if ((業務内区分コード.equals(new KamokuCode(償還払給付費)) || 業務内区分コード.equals(new KamokuCode(高額給付費)))) {
 
             if (状態.equals(照会)) {
 
-                償還払給付または高額給付の照会モード();
+                償還払給付または高額給付の照会モード(支給申請情報.getShiharaiHohoKubun());
             }
             if (状態.equals(登録)) {
 
-                償還払給付または高額給付の登録モード();
+                償還払給付または高額給付の登録モード(支給申請情報.getShiharaiHohoKubun());
             }
             if (状態.equals(修正)) {
 
@@ -141,11 +145,11 @@ public class ShiharaiHohoJyohoHandler {
 
             if (状態.equals(照会)) {
 
-                高額合算の照会モード();
+                高額合算の照会モード(支給申請情報.getShiharaiHohoKubun());
             }
             if (状態.equals(登録)) {
 
-                高額合算の登録モード();
+                高額合算の登録モード(支給申請情報.getShiharaiHohoKubun());
             }
             if (状態.equals(修正)) {
 
@@ -167,7 +171,7 @@ public class ShiharaiHohoJyohoHandler {
             RString 口座 = new RString(String.valueOf(kozaId.get口座ID()));
             口座IDリスト.add(new KeyValueDataSource(口座, 口座));
         }
-        if (list == null || list.isEmpty()) {
+        if (list.isEmpty()) {
             RString 口座 = new RString(String.valueOf(口座ID));
             口座IDリスト.add(new KeyValueDataSource(口座, 口座));
         }
@@ -183,6 +187,7 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtKinyuKikanShitenCode().clearDomain();
         div.getTxtYokinShubetsu().clearValue();
         div.getTxtKozaNo().clearValue();
+        div.getTxtTenban().clearValue();
         div.getTxtKinyuKikanName().clearValue();
         div.getTxtMeigininKana().clearDomain();
         div.getTtxtMeigininKanji().clearDomain();
@@ -203,12 +208,12 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtMeigininKanji1().clearDomain();
     }
 
-    private void 償還払給付または高額給付の照会モード() {
+    private void 償還払給付または高額給付の照会モード(ShiharaiHohoKubun 支払方法区分) {
 
         償還払給付または高額給付の照会モード_支払方法情報エリアの状態処理();
         償還払給付または高額給付の照会モード_窓口払いエリアの状態処理();
-        償還払給付または高額給付の照会モード_口座払いエリアの状態処理();
-        償還払給付または高額給付の照会モード_受領委任払いエリアの状態処理();
+        償還払給付または高額給付の照会モード_口座払いエリアの状態処理(支払方法区分);
+        償還払給付または高額給付の照会モード_受領委任払いエリアの状態処理(支払方法区分);
     }
 
     private void 償還払給付または高額給付の修正モード(ShiharaiHohoKubun 支払方法区分) {
@@ -219,27 +224,27 @@ public class ShiharaiHohoJyohoHandler {
         償還払給付または高額給付の修正モード_受領委任払いエリアの状態処理(支払方法区分);
     }
 
-    private void 償還払給付または高額給付の登録モード() {
+    private void 償還払給付または高額給付の登録モード(ShiharaiHohoKubun 支払方法区分) {
 
         償還払給付または高額給付の登録モード_支払方法情報エリアの状態処理();
         償還払給付または高額給付の登録モード_窓口払いエリアの状態処理();
-        償還払給付または高額給付の登録モード_口座払いエリアの状態処理();
-        償還払給付または高額給付の登録モード_受領委任払いエリアの状態処理();
+        償還払給付または高額給付の登録モード_口座払いエリアの状態処理(支払方法区分);
+        償還払給付または高額給付の登録モード_受領委任払いエリアの状態処理(支払方法区分);
     }
 
-    private void 高額合算の照会モード() {
+    private void 高額合算の照会モード(ShiharaiHohoKubun 支払方法区分) {
 
         高額合算の照会モード_支払方法情報エリアの状態処理();
         高額合算の照会モード_窓口払いエリアの状態処理();
-        高額合算の照会モード_口座払いエリアの状態処理();
+        高額合算の照会モード_口座払いエリアの状態処理(支払方法区分);
         div.setMode_PageMode(ShiharaiHohoJyohoDiv.PageMode.KogakuGassan);
     }
 
-    private void 高額合算の登録モード() {
+    private void 高額合算の登録モード(ShiharaiHohoKubun 支払方法区分) {
 
         高額合算の登録モード_支払方法情報エリアの状態処理();
         高額合算の登録モード_窓口払いエリアの状態処理();
-        高額合算の登録モード_口座払いエリアの状態処理();
+        高額合算の登録モード_口座払いエリアの状態処理(支払方法区分);
         div.setMode_PageMode(ShiharaiHohoJyohoDiv.PageMode.KogakuGassan);
     }
 
@@ -297,13 +302,16 @@ public class ShiharaiHohoJyohoHandler {
         div.getRadJyryoinin().setDisabled(false);
     }
 
-    private void 償還払給付または高額給付の照会モード_口座払いエリアの状態処理() {
+    private void 償還払給付または高額給付の照会モード_口座払いエリアの状態処理(ShiharaiHohoKubun 支払方法区分) {
 
         div.getDdlKozaID().setDisabled(true);
         div.getBtnKozaToroku().setDisabled(true);
         div.getTxtKinyuKikanCode().setReadOnly(true);
         div.getTxtKinyuKikanShitenCode().setReadOnly(true);
-        div.getTxtTenban().setReadOnly(true);
+        if (!ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
+
+            div.getTxtTenban().setDisplayNone(true);
+        }
         div.getTxtKinyuKikanName().setReadOnly(true);
         div.getTxtKozaNo().setReadOnly(true);
         div.getTxtMeigininKana().setReadOnly(true);
@@ -311,13 +319,15 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtYokinShubetsu().setReadOnly(true);
     }
 
-    private void 償還払給付または高額給付の登録モード_口座払いエリアの状態処理() {
+    private void 償還払給付または高額給付の登録モード_口座払いエリアの状態処理(ShiharaiHohoKubun 支払方法区分) {
 
         div.getDdlKozaID().setDisabled(true);
         div.getBtnKozaToroku().setDisabled(true);
         div.getTxtKinyuKikanCode().setReadOnly(true);
         div.getTxtKinyuKikanShitenCode().setReadOnly(true);
-        div.getTxtTenban().setReadOnly(true);
+        if (!ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
+            div.getTxtTenban().setDisplayNone(true);
+        }
         div.getTxtKinyuKikanName().setReadOnly(true);
         div.getTxtYokinShubetsu().setReadOnly(true);
         div.getTxtKozaNo().setReadOnly(true);
@@ -325,13 +335,15 @@ public class ShiharaiHohoJyohoHandler {
         div.getTtxtMeigininKanji().setReadOnly(true);
     }
 
-    private void 高額合算の登録モード_口座払いエリアの状態処理() {
+    private void 高額合算の登録モード_口座払いエリアの状態処理(ShiharaiHohoKubun 支払方法区分) {
 
         div.getDdlKozaID().setDisabled(true);
         div.getBtnKozaToroku().setDisabled(true);
         div.getTxtKinyuKikanCode().setReadOnly(true);
         div.getTxtKinyuKikanShitenCode().setReadOnly(true);
-        div.getTxtTenban().setReadOnly(true);
+        if (!ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
+            div.getTxtTenban().setDisplayNone(true);
+        }
         div.getTxtKinyuKikanName().setReadOnly(true);
         div.getTxtYokinShubetsu().setReadOnly(true);
         div.getTxtKozaNo().setReadOnly(true);
@@ -339,25 +351,30 @@ public class ShiharaiHohoJyohoHandler {
         div.getTtxtMeigininKanji().setReadOnly(true);
     }
 
-    private void 高額合算の照会モード_口座払いエリアの状態処理() {
+    private void 高額合算の照会モード_口座払いエリアの状態処理(ShiharaiHohoKubun 支払方法区分) {
 
         div.getDdlKozaID().setDisabled(true);
         div.getBtnKozaToroku().setDisabled(true);
         div.getTxtKinyuKikanCode().setReadOnly(true);
-        div.getTxtTenban().setReadOnly(true);
+        if (!ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
+            div.getTxtTenban().setDisplayNone(true);
+        }
         div.getTxtKinyuKikanName().setReadOnly(true);
         div.getTxtKozaNo().setReadOnly(true);
         div.getTxtMeigininKana().setReadOnly(true);
         div.getTtxtMeigininKanji().setReadOnly(true);
     }
 
-    private void 償還払給付または高額給付の照会モード_受領委任払いエリアの状態処理() {
+    private void 償還払給付または高額給付の照会モード_受領委任払いエリアの状態処理(ShiharaiHohoKubun 支払方法区分) {
 
         div.getTxtKeiyakuNo().setReadOnly(true);
         div.getBtnSelect().setDisabled(true);
         div.getTxtKeiyakuCode().setReadOnly(true);
         div.getTxtKeiyakuName().setReadOnly(true);
         div.getTxtKinyuKikanCode1().setReadOnly(true);
+        if (!ShiharaiHohoKubun.受領委任払.equals(支払方法区分)) {
+            div.getTxtTenban1().setDisplayNone(true);
+        }
         div.getTxtKinyuKikanShitenCode1().setReadOnly(true);
         div.getTxtYokinShubetsu1().setReadOnly(true);
         div.getTxtKozaNo1().setReadOnly(true);
@@ -386,18 +403,17 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtKeiyakuCode().setReadOnly(true);
             div.getTxtKeiyakuName().setReadOnly(true);
             div.getTxtKinyuKikanCode1().setReadOnly(true);
-            div.getTxtTenban().setReadOnly(true);
+            div.getTxtTenban1().setDisplayNone(true);
             div.getTxtKozaNo1().setReadOnly(true);
             div.getTxtKinyuKikanName1().setReadOnly(true);
             div.getTxtMeigininKana1().setReadOnly(true);
             div.getTxtMeigininKanji1().setReadOnly(true);
         }
         div.getTxtKinyuKikanShitenCode1().setReadOnly(true);
-        div.getTxtTenban1().setReadOnly(true);
         div.getTxtYokinShubetsu1().setReadOnly(true);
     }
 
-    private void 償還払給付または高額給付の登録モード_受領委任払いエリアの状態処理() {
+    private void 償還払給付または高額給付の登録モード_受領委任払いエリアの状態処理(ShiharaiHohoKubun 支払方法区分) {
 
         div.getTxtKeiyakuNo().setReadOnly(true);
         div.getBtnSelect().setDisabled(true);
@@ -405,7 +421,9 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtKeiyakuName().setReadOnly(true);
         div.getTxtKinyuKikanCode1().setReadOnly(true);
         div.getTxtKinyuKikanShitenCode1().setReadOnly(true);
-        div.getTxtTenban1().setReadOnly(true);
+        if (!ShiharaiHohoKubun.受領委任払.equals(支払方法区分)) {
+            div.getTxtTenban1().setDisplayNone(true);
+        }
         div.getTxtYokinShubetsu1().setReadOnly(true);
         div.getTxtKozaNo1().setReadOnly(true);
         div.getTxtKinyuKikanName1().setReadOnly(true);
@@ -495,6 +513,7 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtKinyuKikanCode().setReadOnly(true);
             div.getTxtKinyuKikanName().setReadOnly(true);
             div.getTxtKozaNo().setReadOnly(true);
+            div.getTxtTenban().setDisplayNone(true);
             div.getTxtMeigininKana().setReadOnly(true);
             div.getTtxtMeigininKanji().setReadOnly(true);
         }
@@ -507,7 +526,6 @@ public class ShiharaiHohoJyohoHandler {
 
         if (ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
 
-            div.getDdlKozaID().setReadOnly(true);
             div.getBtnKozaToroku().setDisabled(false);
             div.getTxtKinyuKikanCode().setReadOnly(true);
             div.getTxtKinyuKikanName().setReadOnly(true);
@@ -521,6 +539,7 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtKinyuKikanCode().setReadOnly(true);
             div.getTxtKinyuKikanName().setReadOnly(true);
             div.getTxtKozaNo().setReadOnly(true);
+            div.getTxtTenban().setDisplayNone(true);
             div.getTxtMeigininKana().setReadOnly(true);
             div.getTtxtMeigininKanji().setReadOnly(true);
         }
@@ -598,14 +617,17 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtYokinShubetsu().setDisplayNone(false);
             div.getTxtTenban().setDisplayNone(true);
         }
-        UzT0007CodeBusiness uzT0007CodeBusiness = 預金種別に対する略称(nullToEmpty(口座情報.get預金種別()));
+        UzT0007CodeBusiness uzT0007CodeBusiness = 預金種別に対する名称(nullToEmpty(口座情報.get預金種別()));
         if (uzT0007CodeBusiness != null) {
 
-            div.getTxtYokinShubetsu().setValue(uzT0007CodeBusiness.getコード略称() == null ? RString.EMPTY : uzT0007CodeBusiness.getコード略称());
+            div.getTxtYokinShubetsu().setValue(uzT0007CodeBusiness.getコード名称() == null ? RString.EMPTY : uzT0007CodeBusiness.getコード名称());
         }
         div.getTxtKozaNo().setValue(口座情報.get口座番号());
         div.getTxtMeigininKana().setDomain(口座情報.get口座名義人());
         div.getTtxtMeigininKanji().setDomain(口座情報.get口座名義人漢字());
+        div.getTxtTenban().setReadOnly(true);
+        div.getTxtKinyuKikanShitenCode().setReadOnly(true);
+        div.getTxtYokinShubetsu().setReadOnly(true);
     }
 
     /**
@@ -613,10 +635,14 @@ public class ShiharaiHohoJyohoHandler {
      *
      * @param 支給申請情報 支給申請情報
      * @param 受領委任契約事業者 受領委任契約事業者
+     * @param 表示フラグ 表示フラグ
      */
-    public void 受領委任払いエリアの初期化(SikyuSinseiJyohoParameter 支給申請情報, JuryoininKeiyakuJigyosha 受領委任契約事業者) {
+    public void 受領委任払いエリアの初期化(SikyuSinseiJyohoParameter 支給申請情報,
+            JuryoininKeiyakuJigyosha 受領委任契約事業者, RString 表示フラグ) {
 
-        div.getTxtKeiyakuNo().setValue(支給申請情報.getKeiyakuNo());
+        if (!表示フラグ.isNullOrEmpty()) {
+            div.getTxtKeiyakuNo().setValue(支給申請情報.getKeiyakuNo());
+        }
         div.getRadJyryoinin().setSelectedKey(new RString("3"));
         div.getTxtKeiyakuNo().setDisabled(false);
         div.getBtnSelect().setDisabled(false);
@@ -625,8 +651,6 @@ public class ShiharaiHohoJyohoHandler {
                 ? AtenaMeisho.EMPTY : 受領委任契約事業者.get契約事業者名称());
         div.getTxtKinyuKikanCode1().setDomain(受領委任契約事業者.get金融機関コード() == null
                 ? KinyuKikanCode.EMPTY : 受領委任契約事業者.get金融機関コード());
-        div.getTxtKinyuKikanShitenCode1().setDomain(受領委任契約事業者.get支店コード() == null
-                ? KinyuKikanShitenCode.EMPTY : 受領委任契約事業者.get支店コード());
         KinyuKikan kinyuKikan = 金融機関コードに対する名称(受領委任契約事業者.get金融機関コード() == null
                 ? KinyuKikanCode.EMPTY : 受領委任契約事業者.get金融機関コード());
         KinyuKikanShiten kinyuKikanShiten = 支店コードまたは店番に対する名称(受領委任契約事業者.get金融機関コード() == null
@@ -644,18 +668,22 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtKinyuKikanShitenCode1().setDisplayNone(false);
             div.getTxtYokinShubetsu1().setDisplayNone(false);
             div.getTxtTenban1().setDisplayNone(true);
-            div.getTxtKinyuKikanShitenCode().setDomain(受領委任契約事業者.get支店コード());
+            div.getTxtKinyuKikanShitenCode1().setDomain(受領委任契約事業者.get支店コード() == null
+                    ? KinyuKikanShitenCode.EMPTY : 受領委任契約事業者.get支店コード());
             口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
         }
-        UzT0007CodeBusiness uzT0007CodeBusiness = 預金種別に対する略称(nullToEmpty(受領委任契約事業者.get口座種別()));
+        UzT0007CodeBusiness uzT0007CodeBusiness = 預金種別に対する名称(nullToEmpty(受領委任契約事業者.get口座種別()));
         if (uzT0007CodeBusiness != null) {
-            div.getTxtYokinShubetsu1().setValue(uzT0007CodeBusiness.getコード略称() == null ? RString.EMPTY : uzT0007CodeBusiness.getコード略称());
+            div.getTxtYokinShubetsu1().setValue(uzT0007CodeBusiness.getコード名称() == null ? RString.EMPTY : uzT0007CodeBusiness.getコード名称());
         }
         div.getTxtKozaNo1().setValue(nullToEmpty(受領委任契約事業者.get口座番号()));
         div.getTxtMeigininKana1().setDomain(受領委任契約事業者.get口座名義人カナ() == null
                 ? AtenaKanaMeisho.EMPTY : 受領委任契約事業者.get口座名義人カナ());
         div.getTxtMeigininKanji1().setDomain(受領委任契約事業者.get口座名義人() == null
                 ? AtenaMeisho.EMPTY : 受領委任契約事業者.get口座名義人());
+        div.getTxtTenban1().setReadOnly(true);
+        div.getTxtKinyuKikanShitenCode1().setReadOnly(true);
+        div.getTxtYokinShubetsu1().setReadOnly(true);
     }
 
     private void 口座払いエリアの初期化Private(KinyuKikan kinyuKikan, KinyuKikanShiten kinyuKikanShiten) {
@@ -667,7 +695,7 @@ public class ShiharaiHohoJyohoHandler {
         }
     }
 
-    private UzT0007CodeBusiness 預金種別に対する略称(RString 口座種別) {
+    private UzT0007CodeBusiness 預金種別に対する名称(RString 口座種別) {
 
         return new UzT0007CodeBusiness(CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, 預金種別, new Code(口座種別)) == null
                 ? new UzT0007CodeEntity() : CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, 預金種別, new Code(口座種別)));
@@ -895,14 +923,25 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtMeigininKana1().setReadOnly(true);
         div.getTxtMeigininKanji1().setReadOnly(true);
     }
-
-    private void set口座ID(SikyuSinseiJyohoParameter 支給申請情報, KamokuCode 業務内区分コード) {
+    /**
+     * 口座IDの設定。
+     *
+     * @param 支給申請情報 SikyuSinseiJyohoParameter
+     * @param 業務内区分コード KamokuCode
+     */
+    public void set口座ID(SikyuSinseiJyohoParameter 支給申請情報, KamokuCode 業務内区分コード) {
         List<KozaJohoPSM> 口座IDリスト = ShiharaiHohoJyohoFinder.createInstance()
                 .getKozaIDList(KozaParameter.createParam(0, 支給申請情報.getShikibetsuCode(), 業務内区分コード)).records();
         div.getDdlKozaID().setDataSource(set口座ID(口座IDリスト,支給申請情報.getKozaId()));
     }
 
-    private KamokuCode get業務内区分コード(KamokuCode 業務内区分コード) {
+    /**
+     * 業務内区分の設定。
+     *
+     * @param 業務内区分コード KamokuCode
+     * @return 業務内区分コード
+     */
+    public KamokuCode get業務内区分コード(KamokuCode 業務内区分コード) {
 
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();

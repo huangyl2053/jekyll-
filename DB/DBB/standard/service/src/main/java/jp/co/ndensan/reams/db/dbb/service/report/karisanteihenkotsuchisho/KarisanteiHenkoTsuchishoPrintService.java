@@ -118,7 +118,8 @@ public class KarisanteiHenkoTsuchishoPrintService {
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 仮算定納入通知書情報.get帳票分類ID(),
                     仮算定納入通知書情報.get発行日(),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-            KarisanteiHenkoTsuchishoB5YokoReport report = new KarisanteiHenkoTsuchishoB5YokoReport(仮算定納入通知書情報, 文書番号, ninshoshaSource, kaigoToiawasesakiSource);
+            KarisanteiHenkoTsuchishoB5YokoReport report
+                    = new KarisanteiHenkoTsuchishoB5YokoReport(仮算定納入通知書情報, 文書番号, ninshoshaSource, kaigoToiawasesakiSource);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -144,7 +145,8 @@ public class KarisanteiHenkoTsuchishoPrintService {
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 仮算定納入通知書情報.get帳票分類ID(),
                     仮算定納入通知書情報.get発行日(),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-            KarisanteiHenkoTsuchishoA4TateReport report = new KarisanteiHenkoTsuchishoA4TateReport(仮算定納入通知書情報, 文書番号, ninshoshaSource, kaigoToiawasesakiSource);
+            KarisanteiHenkoTsuchishoA4TateReport report
+                    = new KarisanteiHenkoTsuchishoA4TateReport(仮算定納入通知書情報, 文書番号, ninshoshaSource, kaigoToiawasesakiSource);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -170,7 +172,8 @@ public class KarisanteiHenkoTsuchishoPrintService {
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 仮算定納入通知書情報.get帳票分類ID(),
                     仮算定納入通知書情報.get発行日(),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-            KarisanteiHenjunkaHenkoTsuchishoB5YokoReport report = new KarisanteiHenjunkaHenkoTsuchishoB5YokoReport(仮算定納入通知書情報, 文書番号, ninshoshaSource, kaigoToiawasesakiSource);
+            KarisanteiHenjunkaHenkoTsuchishoB5YokoReport report
+                    = new KarisanteiHenjunkaHenkoTsuchishoB5YokoReport(仮算定納入通知書情報, 文書番号, ninshoshaSource, kaigoToiawasesakiSource);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -196,7 +199,8 @@ public class KarisanteiHenkoTsuchishoPrintService {
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 仮算定納入通知書情報.get帳票分類ID(),
                     仮算定納入通知書情報.get発行日(),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-            KarisanteiHenjunkaHenkoTsuchishoA4TateReport report = new KarisanteiHenjunkaHenkoTsuchishoA4TateReport(仮算定納入通知書情報, 文書番号, ninshoshaSource, kaigoToiawasesakiSource);
+            KarisanteiHenjunkaHenkoTsuchishoA4TateReport report = new KarisanteiHenjunkaHenkoTsuchishoA4TateReport(仮算定納入通知書情報, 文書番号,
+                    ninshoshaSource, kaigoToiawasesakiSource);
             report.writeBy(reportSourceWriter);
         }
     }

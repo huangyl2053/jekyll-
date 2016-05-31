@@ -7,22 +7,17 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0230011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * KonkaiInfoInput のクラスファイル
- *
- * @reamsid_L DBU-0550-010 zhangzhiming
+ * KonkaiInfoInput のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class KonkaiInfoInputDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,6 +28,10 @@ public class KonkaiInfoInputDiv extends Panel {
     private TextBox txtSofuShichoShon;
     @JsonProperty("tblkonkaiInfoInput")
     private tblkonkaiInfoInputDiv tblkonkaiInfoInput;
+    @JsonProperty("TxtChushutsuFrom")
+    private RString TxtChushutsuFrom;
+    @JsonProperty("TxtChushutsuTo")
+    private RString TxtChushutsuTo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -77,6 +76,42 @@ public class KonkaiInfoInputDiv extends Panel {
     }
 
     /*
+     * getTxtChushutsuFrom
+     * @return TxtChushutsuFrom
+     */
+    @JsonProperty("TxtChushutsuFrom")
+    public RString getTxtChushutsuFrom() {
+        return TxtChushutsuFrom;
+    }
+
+    /*
+     * setTxtChushutsuFrom
+     * @param TxtChushutsuFrom TxtChushutsuFrom
+     */
+    @JsonProperty("TxtChushutsuFrom")
+    public void setTxtChushutsuFrom(RString TxtChushutsuFrom) {
+        this.TxtChushutsuFrom = TxtChushutsuFrom;
+    }
+
+    /*
+     * getTxtChushutsuTo
+     * @return TxtChushutsuTo
+     */
+    @JsonProperty("TxtChushutsuTo")
+    public RString getTxtChushutsuTo() {
+        return TxtChushutsuTo;
+    }
+
+    /*
+     * setTxtChushutsuTo
+     * @param TxtChushutsuTo TxtChushutsuTo
+     */
+    @JsonProperty("TxtChushutsuTo")
+    public void setTxtChushutsuTo(RString TxtChushutsuTo) {
+        this.TxtChushutsuTo = TxtChushutsuTo;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -110,7 +145,7 @@ public class KonkaiInfoInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkZenken(CheckBoxList chkZenken) {
+    public void  setChkZenken(CheckBoxList chkZenken) {
         this.getTblkonkaiInfoInput().getZenken().setChkZenken(chkZenken);
     }
 

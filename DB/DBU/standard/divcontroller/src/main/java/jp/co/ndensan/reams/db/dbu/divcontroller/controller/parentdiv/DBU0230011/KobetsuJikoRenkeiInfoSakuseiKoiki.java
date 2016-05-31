@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakus
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0230011.KobetsuJikoRenkeiInfoSakuseiKoikiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0230011.dgKobetsuJikoRenkeiInfoSakuseiKoik_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0230011.KaigoJyuminhyouHandler;
-import jp.co.ndensan.reams.db.dbu.service.core.kaigojuminhyokobetsukoikiunyobatchparametersakusei.KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder;
+import jp.co.ndensan.reams.db.dbu.service.core.kaigojuminhyobatchparameter.KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;

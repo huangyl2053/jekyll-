@@ -566,4 +566,12 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintBusiness {
     public RString get在宅施設区分() {
         return entity.getZaitakuShisetsuKubun();
     }
+     /**
+     * 証記載保険者番号を取得します。
+     *
+     * @return 証記載保険者番号
+     */
+    public RString get証記載保険者番号() {
+        return entity.getShoKisaiHokenshaNo();
+    }
 }

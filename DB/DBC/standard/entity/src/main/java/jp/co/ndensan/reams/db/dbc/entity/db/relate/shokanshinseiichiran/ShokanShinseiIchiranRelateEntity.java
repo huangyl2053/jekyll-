@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshinseiichiran;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -28,5 +29,7 @@ public class ShokanShinseiIchiranRelateEntity {
     private FlexibleYearMonth sofuYM;
     private RString yoshikiNo;
     private FlexibleDate ketteiYMD;
+    private JigyoshaNo jigyoshaNo;
+    private RString meisaiNo;
 
 }

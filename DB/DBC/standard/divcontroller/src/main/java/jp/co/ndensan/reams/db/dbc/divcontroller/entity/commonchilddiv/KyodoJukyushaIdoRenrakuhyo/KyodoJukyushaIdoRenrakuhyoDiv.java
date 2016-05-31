@@ -43,16 +43,22 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     private KyodoJukyushaIdoRenrakuhyoTeiseiDiv KyodoJukyushaIdoRenrakuhyoTeisei;
     @JsonProperty("lin2")
     private HorizontalLine lin2;
-    @JsonProperty("chkKihonSofu")
-    private CheckBoxList chkKihonSofu;
+    @JsonProperty("chkKihonSofuAdd")
+    private CheckBoxList chkKihonSofuAdd;
+    @JsonProperty("chkKihonSofuDelete")
+    private CheckBoxList chkKihonSofuDelete;
     @JsonProperty("KyodoJukyushaIdoRenrakuhyoKihonPanel")
     private KyodoJukyushaIdoRenrakuhyoKihonPanelDiv KyodoJukyushaIdoRenrakuhyoKihonPanel;
-    @JsonProperty("chkShokanSofu")
-    private CheckBoxList chkShokanSofu;
+    @JsonProperty("chkShokanSofuAdd")
+    private CheckBoxList chkShokanSofuAdd;
+    @JsonProperty("chkShokanSofuDelete")
+    private CheckBoxList chkShokanSofuDelete;
     @JsonProperty("KyodoJukyushaIdoRenrakuhyoShokanPanel")
     private KyodoJukyushaIdoRenrakuhyoShokanPanelDiv KyodoJukyushaIdoRenrakuhyoShokanPanel;
-    @JsonProperty("chkKogakuSofu")
-    private CheckBoxList chkKogakuSofu;
+    @JsonProperty("chkKogakuSofuAdd")
+    private CheckBoxList chkKogakuSofuAdd;
+    @JsonProperty("chkKogakuSofuDelete")
+    private CheckBoxList chkKogakuSofuDelete;
     @JsonProperty("KyodoJukyushaIdoRenrakuhyoKogakuPanel")
     private KyodoJukyushaIdoRenrakuhyoKogakuPanelDiv KyodoJukyushaIdoRenrakuhyoKogakuPanel;
     @JsonProperty("hdnHiHokenshaNo")
@@ -217,21 +223,39 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     }
 
     /*
-     * getchkKihonSofu
-     * @return chkKihonSofu
+     * getchkKihonSofuAdd
+     * @return chkKihonSofuAdd
      */
-    @JsonProperty("chkKihonSofu")
-    public CheckBoxList getChkKihonSofu() {
-        return chkKihonSofu;
+    @JsonProperty("chkKihonSofuAdd")
+    public CheckBoxList getChkKihonSofuAdd() {
+        return chkKihonSofuAdd;
     }
 
     /*
-     * setchkKihonSofu
-     * @param chkKihonSofu chkKihonSofu
+     * setchkKihonSofuAdd
+     * @param chkKihonSofuAdd chkKihonSofuAdd
      */
-    @JsonProperty("chkKihonSofu")
-    public void setChkKihonSofu(CheckBoxList chkKihonSofu) {
-        this.chkKihonSofu = chkKihonSofu;
+    @JsonProperty("chkKihonSofuAdd")
+    public void setChkKihonSofuAdd(CheckBoxList chkKihonSofuAdd) {
+        this.chkKihonSofuAdd = chkKihonSofuAdd;
+    }
+
+    /*
+     * getchkKihonSofuDelete
+     * @return chkKihonSofuDelete
+     */
+    @JsonProperty("chkKihonSofuDelete")
+    public CheckBoxList getChkKihonSofuDelete() {
+        return chkKihonSofuDelete;
+    }
+
+    /*
+     * setchkKihonSofuDelete
+     * @param chkKihonSofuDelete chkKihonSofuDelete
+     */
+    @JsonProperty("chkKihonSofuDelete")
+    public void setChkKihonSofuDelete(CheckBoxList chkKihonSofuDelete) {
+        this.chkKihonSofuDelete = chkKihonSofuDelete;
     }
 
     /*
@@ -253,21 +277,39 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     }
 
     /*
-     * getchkShokanSofu
-     * @return chkShokanSofu
+     * getchkShokanSofuAdd
+     * @return chkShokanSofuAdd
      */
-    @JsonProperty("chkShokanSofu")
-    public CheckBoxList getChkShokanSofu() {
-        return chkShokanSofu;
+    @JsonProperty("chkShokanSofuAdd")
+    public CheckBoxList getChkShokanSofuAdd() {
+        return chkShokanSofuAdd;
     }
 
     /*
-     * setchkShokanSofu
-     * @param chkShokanSofu chkShokanSofu
+     * setchkShokanSofuAdd
+     * @param chkShokanSofuAdd chkShokanSofuAdd
      */
-    @JsonProperty("chkShokanSofu")
-    public void setChkShokanSofu(CheckBoxList chkShokanSofu) {
-        this.chkShokanSofu = chkShokanSofu;
+    @JsonProperty("chkShokanSofuAdd")
+    public void setChkShokanSofuAdd(CheckBoxList chkShokanSofuAdd) {
+        this.chkShokanSofuAdd = chkShokanSofuAdd;
+    }
+
+    /*
+     * getchkShokanSofuDelete
+     * @return chkShokanSofuDelete
+     */
+    @JsonProperty("chkShokanSofuDelete")
+    public CheckBoxList getChkShokanSofuDelete() {
+        return chkShokanSofuDelete;
+    }
+
+    /*
+     * setchkShokanSofuDelete
+     * @param chkShokanSofuDelete chkShokanSofuDelete
+     */
+    @JsonProperty("chkShokanSofuDelete")
+    public void setChkShokanSofuDelete(CheckBoxList chkShokanSofuDelete) {
+        this.chkShokanSofuDelete = chkShokanSofuDelete;
     }
 
     /*
@@ -289,21 +331,39 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     }
 
     /*
-     * getchkKogakuSofu
-     * @return chkKogakuSofu
+     * getchkKogakuSofuAdd
+     * @return chkKogakuSofuAdd
      */
-    @JsonProperty("chkKogakuSofu")
-    public CheckBoxList getChkKogakuSofu() {
-        return chkKogakuSofu;
+    @JsonProperty("chkKogakuSofuAdd")
+    public CheckBoxList getChkKogakuSofuAdd() {
+        return chkKogakuSofuAdd;
     }
 
     /*
-     * setchkKogakuSofu
-     * @param chkKogakuSofu chkKogakuSofu
+     * setchkKogakuSofuAdd
+     * @param chkKogakuSofuAdd chkKogakuSofuAdd
      */
-    @JsonProperty("chkKogakuSofu")
-    public void setChkKogakuSofu(CheckBoxList chkKogakuSofu) {
-        this.chkKogakuSofu = chkKogakuSofu;
+    @JsonProperty("chkKogakuSofuAdd")
+    public void setChkKogakuSofuAdd(CheckBoxList chkKogakuSofuAdd) {
+        this.chkKogakuSofuAdd = chkKogakuSofuAdd;
+    }
+
+    /*
+     * getchkKogakuSofuDelete
+     * @return chkKogakuSofuDelete
+     */
+    @JsonProperty("chkKogakuSofuDelete")
+    public CheckBoxList getChkKogakuSofuDelete() {
+        return chkKogakuSofuDelete;
+    }
+
+    /*
+     * setchkKogakuSofuDelete
+     * @param chkKogakuSofuDelete chkKogakuSofuDelete
+     */
+    @JsonProperty("chkKogakuSofuDelete")
+    public void setChkKogakuSofuDelete(CheckBoxList chkKogakuSofuDelete) {
+        this.chkKogakuSofuDelete = chkKogakuSofuDelete;
     }
 
     /*

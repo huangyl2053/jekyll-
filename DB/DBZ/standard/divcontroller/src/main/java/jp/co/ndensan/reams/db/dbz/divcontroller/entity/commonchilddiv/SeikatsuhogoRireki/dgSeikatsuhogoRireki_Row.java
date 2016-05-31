@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Seikatsuh
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue May 10 15:36:15 CST 2016 
+ * Tue May 24 10:41:41 CST 2016 
  */
 
 
@@ -37,6 +37,7 @@ public class dgSeikatsuhogoRireki_Row extends DataRow {
     private TextBoxDate txtKyugoshisetsuTaishoDate;
     private RString txtFujoShurui;
     private RString txtFujoShuruiCode;
+    private RString txtJukyuTeishi;
 
     public dgSeikatsuhogoRireki_Row() {
         super();
@@ -53,6 +54,7 @@ public class dgSeikatsuhogoRireki_Row extends DataRow {
         this.txtKyugoshisetsuTaishoDate = new TextBoxDate();
         this.txtFujoShurui = RString.EMPTY;
         this.txtFujoShuruiCode = RString.EMPTY;
+        this.txtJukyuTeishi = RString.EMPTY;
         this.setOriginalData("btnSelectRow", btnSelectRow);
         this.setOriginalData("btnModifyRow", btnModifyRow);
         this.setOriginalData("btnDeleteRow", btnDeleteRow);
@@ -66,9 +68,10 @@ public class dgSeikatsuhogoRireki_Row extends DataRow {
         this.setOriginalData("txtKyugoshisetsuTaishoDate", txtKyugoshisetsuTaishoDate);
         this.setOriginalData("txtFujoShurui", txtFujoShurui);
         this.setOriginalData("txtFujoShuruiCode", txtFujoShuruiCode);
+        this.setOriginalData("txtJukyuTeishi", txtJukyuTeishi);
     }
 
-    public dgSeikatsuhogoRireki_Row(ButtonDialog btnSelectRow, ButtonDialog btnModifyRow, ButtonDialog btnDeleteRow, TextBoxCode txtJukyushaNo, TextBoxDate txtKaishiYM, TextBoxDate txtHaishiYM, RString txtHokenryoDairiNofuKubun, TextBoxDate txtHokenryoDairiNofuYM, RString txtKyugoshisetsuNyutaishoKubun, TextBoxDate txtKyugoshisetsuNyushoDate, TextBoxDate txtKyugoshisetsuTaishoDate, RString txtFujoShurui, RString txtFujoShuruiCode) {
+    public dgSeikatsuhogoRireki_Row(ButtonDialog btnSelectRow, ButtonDialog btnModifyRow, ButtonDialog btnDeleteRow, TextBoxCode txtJukyushaNo, TextBoxDate txtKaishiYM, TextBoxDate txtHaishiYM, RString txtHokenryoDairiNofuKubun, TextBoxDate txtHokenryoDairiNofuYM, RString txtKyugoshisetsuNyutaishoKubun, TextBoxDate txtKyugoshisetsuNyushoDate, TextBoxDate txtKyugoshisetsuTaishoDate, RString txtFujoShurui, RString txtFujoShuruiCode, RString txtJukyuTeishi) {
         super();
         this.setOriginalData("btnSelectRow", btnSelectRow);
         this.setOriginalData("btnModifyRow", btnModifyRow);
@@ -83,6 +86,7 @@ public class dgSeikatsuhogoRireki_Row extends DataRow {
         this.setOriginalData("txtKyugoshisetsuTaishoDate", txtKyugoshisetsuTaishoDate);
         this.setOriginalData("txtFujoShurui", txtFujoShurui);
         this.setOriginalData("txtFujoShuruiCode", txtFujoShuruiCode);
+        this.setOriginalData("txtJukyuTeishi", txtJukyuTeishi);
         this.btnSelectRow = btnSelectRow;
         this.btnModifyRow = btnModifyRow;
         this.btnDeleteRow = btnDeleteRow;
@@ -96,6 +100,7 @@ public class dgSeikatsuhogoRireki_Row extends DataRow {
         this.txtKyugoshisetsuTaishoDate = txtKyugoshisetsuTaishoDate;
         this.txtFujoShurui = txtFujoShurui;
         this.txtFujoShuruiCode = txtFujoShuruiCode;
+        this.txtJukyuTeishi = txtJukyuTeishi;
     }
 
     public ButtonDialog getBtnSelectRow() {
@@ -148,6 +153,10 @@ public class dgSeikatsuhogoRireki_Row extends DataRow {
 
     public RString getTxtFujoShuruiCode() {
         return txtFujoShuruiCode;
+    }
+
+    public RString getTxtJukyuTeishi() {
+        return txtJukyuTeishi;
     }
 
     public void setBtnSelectRow(ButtonDialog btnSelectRow) {
@@ -213,6 +222,11 @@ public class dgSeikatsuhogoRireki_Row extends DataRow {
     public void setTxtFujoShuruiCode(RString txtFujoShuruiCode) {
         this.setOriginalData("txtFujoShuruiCode", txtFujoShuruiCode);
         this.txtFujoShuruiCode = txtFujoShuruiCode;
+    }
+
+    public void setTxtJukyuTeishi(RString txtJukyuTeishi) {
+        this.setOriginalData("txtJukyuTeishi", txtJukyuTeishi);
+        this.txtJukyuTeishi = txtJukyuTeishi;
     }
 
     // </editor-fold>

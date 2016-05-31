@@ -104,8 +104,13 @@ public class ShiharaiHohoJyohoFinder {
             }
         }
         KozaSearchParameter kozaSearchParameter = new KozaSearchParameter(kozaBuilder.build(), kamokuCodeList);
-        List<KozaRelateEntity> kozaRelateList = kozaMapper.select(kozaSearchParameter);
+        List<KozaRelateEntity> kozaRelateList = null;
+        if (kozaSearchParameter.has権限有科目()) {
+            kozaRelateList = kozaMapper.select(kozaSearchParameter);
+        }
         if (kozaRelateList == null) {
+            KozaJohoPSMEntity psmEntity = new KozaJohoPSMEntity();
+            kozaJohoPSMList.add(new KozaJohoPSM(psmEntity));
             return SearchResult.of(kozaJohoPSMList, 0, false);
         }
         for (KozaRelateEntity entity : kozaRelateList) {

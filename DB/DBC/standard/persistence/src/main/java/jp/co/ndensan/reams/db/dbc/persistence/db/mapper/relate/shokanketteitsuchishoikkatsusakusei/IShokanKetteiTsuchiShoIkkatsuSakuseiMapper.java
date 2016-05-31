@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanketteitsuc
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoIkkatsuSakuseiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoUpdateParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho.ShokanKetteiTsuchiShoMeisaiTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho.ShokanKetteiTsuchiShoTempTableEntity;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -41,7 +41,7 @@ public interface IShokanKetteiTsuchiShoIkkatsuSakuseiMapper {
      * @param sysData システム年月日
      * @return List<ShokanKetteiTsuchiShoMeisaiTempTableEntity>
      */
-    List<ShokanKetteiTsuchiShoMeisaiTempTableEntity> get金融機関と預金種別(FlexibleDate sysData);
+    List<ShokanKetteiTsuchiShoMeisaiTempTableEntity> get金融機関と預金種別(ShokanKetteiTsuchiShoUpdateParameter sysData);
 
     /**
      * 支店名称を取得します。
@@ -49,7 +49,7 @@ public interface IShokanKetteiTsuchiShoIkkatsuSakuseiMapper {
      * @param sysData システム年月日
      * @return List<ShokanKetteiTsuchiShoMeisaiTempTableEntity>
      */
-    List<ShokanKetteiTsuchiShoMeisaiTempTableEntity> get支店名称(FlexibleDate sysData);
+    List<ShokanKetteiTsuchiShoMeisaiTempTableEntity> get支店名称(ShokanKetteiTsuchiShoUpdateParameter sysData);
 
     /**
      * 様式名称を取得します。
@@ -71,5 +71,4 @@ public interface IShokanKetteiTsuchiShoIkkatsuSakuseiMapper {
      * @return 最大年度内連番
      */
     RString get最大年度内連番();
-
 }

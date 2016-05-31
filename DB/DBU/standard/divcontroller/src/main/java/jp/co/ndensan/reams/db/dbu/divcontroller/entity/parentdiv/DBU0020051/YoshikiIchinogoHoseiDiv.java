@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020051;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class YoshikiIchinogoHoseiDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,6 +35,12 @@ public class YoshikiIchinogoHoseiDiv extends Panel {
     private pnl14Div pnl14;
     @JsonProperty("pnlKanryo")
     private pnlKanryoDiv pnlKanryo;
+    @JsonProperty("要支援計")
+    private RString 要支援計;
+    @JsonProperty("要介護計")
+    private RString 要介護計;
+    @JsonProperty("合計")
+    private RString 合計;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -147,6 +154,60 @@ public class YoshikiIchinogoHoseiDiv extends Panel {
     @JsonProperty("pnlKanryo")
     public void setPnlKanryo(pnlKanryoDiv pnlKanryo) {
         this.pnlKanryo = pnlKanryo;
+    }
+
+    /*
+     * get要支援計
+     * @return 要支援計
+     */
+    @JsonProperty("要支援計")
+    public RString get要支援計() {
+        return 要支援計;
+    }
+
+    /*
+     * set要支援計
+     * @param 要支援計 要支援計
+     */
+    @JsonProperty("要支援計")
+    public void set要支援計(RString 要支援計) {
+        this.要支援計 = 要支援計;
+    }
+
+    /*
+     * get要介護計
+     * @return 要介護計
+     */
+    @JsonProperty("要介護計")
+    public RString get要介護計() {
+        return 要介護計;
+    }
+
+    /*
+     * set要介護計
+     * @param 要介護計 要介護計
+     */
+    @JsonProperty("要介護計")
+    public void set要介護計(RString 要介護計) {
+        this.要介護計 = 要介護計;
+    }
+
+    /*
+     * get合計
+     * @return 合計
+     */
+    @JsonProperty("合計")
+    public RString get合計() {
+        return 合計;
+    }
+
+    /*
+     * set合計
+     * @param 合計 合計
+     */
+    @JsonProperty("合計")
+    public void set合計(RString 合計) {
+        this.合計 = 合計;
     }
 
     // </editor-fold>

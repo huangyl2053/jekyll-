@@ -117,13 +117,19 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             ViewStateHolder.put(資格対象者, key);
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転入).parameter(PARAMETER_除外者適用);
         }
-        Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha> 転入保留対象者情報
-                = (Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha>) ViewStateHolder
-                .get(ViewStateKeys.転入転出保留対象者管理_転入保留対象者情報, Models.class);
-        manager.delTennyushutsuHoryuTaishosha(転入保留対象者情報.get(new TennyushutsuHoryuTaishoshaIdentifier(
-                new ShikibetsuCode(click転入保留対象者.getShikibetsuCode().getText()),
-                Integer.parseInt(click転入保留対象者.getRirekiNo().toString()))));
-        div.getDgTennyu().getDataSource().remove(click転入保留対象者);
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha> 転入保留対象者情報
+                    = (Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha>) ViewStateHolder
+                    .get(ViewStateKeys.転入転出保留対象者管理_転入保留対象者情報, Models.class);
+            manager.delTennyushutsuHoryuTaishosha(転入保留対象者情報.get(new TennyushutsuHoryuTaishoshaIdentifier(
+                    new ShikibetsuCode(click転入保留対象者.getShikibetsuCode().getText()),
+                    Integer.parseInt(click転入保留対象者.getRirekiNo().toString()))));
+            div.getDgTennyu().getDataSource().remove(click転入保留対象者);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -146,13 +152,19 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             ViewStateHolder.put(資格対象者, key);
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転出).parameter(PARAMETER_住所地特例適用);
         }
-        Models<TenshutsuHoryuTaishoshaIdentifier, TenshutsuHoryuTaishosha> 転出保留対象者情報
-                = (Models<TenshutsuHoryuTaishoshaIdentifier, TenshutsuHoryuTaishosha>) ViewStateHolder
-                .get(ViewStateKeys.転入転出保留対象者管理_転出保留対象者情報, Models.class);
-        manager.delTenshutsuHoryuTaishosha(転出保留対象者情報.get(new TenshutsuHoryuTaishoshaIdentifier(
-                new ShikibetsuCode(click転出保留対象者.getShikibetsuCode().getText()),
-                Integer.parseInt(click転出保留対象者.getRirekiNo().toString()))));
-        div.getDgTenshutsu().getDataSource().remove(click転出保留対象者);
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            Models<TenshutsuHoryuTaishoshaIdentifier, TenshutsuHoryuTaishosha> 転出保留対象者情報
+                    = (Models<TenshutsuHoryuTaishoshaIdentifier, TenshutsuHoryuTaishosha>) ViewStateHolder
+                    .get(ViewStateKeys.転入転出保留対象者管理_転出保留対象者情報, Models.class);
+            manager.delTenshutsuHoryuTaishosha(転出保留対象者情報.get(new TenshutsuHoryuTaishoshaIdentifier(
+                    new ShikibetsuCode(click転出保留対象者.getShikibetsuCode().getText()),
+                    Integer.parseInt(click転出保留対象者.getRirekiNo().toString()))));
+            div.getDgTenshutsu().getDataSource().remove(click転出保留対象者);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -175,13 +187,19 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             ViewStateHolder.put(資格対象者, key);
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.広域).parameter(PARAMETER_住所地特例適用);
         }
-        Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha> 広域保留対象者情報
-                = (Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha>) ViewStateHolder
-                .get(ViewStateKeys.転入転出保留対象者管理_転入保留対象者情報, Models.class);
-        manager.delTennyushutsuHoryuTaishosha(広域保留対象者情報.get(new TennyushutsuHoryuTaishoshaIdentifier(
-                new ShikibetsuCode(click広域保留対象者.getShikibetsuCode().getText()),
-                Integer.parseInt(click広域保留対象者.getRirekiNo().toString()))));
-        div.getDgKoiki().getDataSource().remove(click広域保留対象者);
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha> 広域保留対象者情報
+                    = (Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha>) ViewStateHolder
+                    .get(ViewStateKeys.転入転出保留対象者管理_転入保留対象者情報, Models.class);
+            manager.delTennyushutsuHoryuTaishosha(広域保留対象者情報.get(new TennyushutsuHoryuTaishoshaIdentifier(
+                    new ShikibetsuCode(click広域保留対象者.getShikibetsuCode().getText()),
+                    Integer.parseInt(click広域保留対象者.getRirekiNo().toString()))));
+            div.getDgKoiki().getDataSource().remove(click広域保留対象者);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -209,6 +227,17 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転出).parameter(PARAMETER_資格喪失);
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 完了ボタンをクリックします。
+     *
+     * @param div 転入転出保留対象者管理
+     * @return ResponseData<TennyuTenshutsuHoryuTaishoshaIchiranDiv>
+     */
+    public ResponseData<TennyuTenshutsuHoryuTaishoshaIchiranDiv> onClick_btnComplete(TennyuTenshutsuHoryuTaishoshaIchiranDiv div) {
+
+        return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.完了する).respond();
     }
 
     private void save転入転出保留対象者情報ToViewState() {

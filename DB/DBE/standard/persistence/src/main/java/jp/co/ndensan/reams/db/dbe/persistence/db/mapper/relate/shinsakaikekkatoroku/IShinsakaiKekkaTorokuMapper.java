@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaikekkato
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -42,7 +42,7 @@ public interface IShinsakaiKekkaTorokuMapper {
      * @param param 審査会内容検索パラメータ
      * @return List<ShinsakaiKaisaiYoteiJohoRelateEntity>
      */
-    List<ShinsakaiKaisaiYoteiJohoRelateEntity> get審査会委員一覧更新_1(ShinsakaiKekkaTorokuParameter param);
+    List<DbT5502ShinsakaiWariateJohoEntity> get審査会委員一覧更新_1(ShinsakaiKekkaTorokuParameter param);
 
     /**
      * 介護認定審査会開催予定情報情報をキー検索で１件取得します。

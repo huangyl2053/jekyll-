@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 不正な動作の原因になります。</br>
  * DBC0820031のイベント名定義クラスです</br>
  *
- * @reamsid_L DBC-1030-070 xuhao
+ * @reamsid_L DBC-1030-080 xuhao
  */
 public enum DBC0820031TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
@@ -20,10 +20,10 @@ public enum DBC0820031TransitionEventName implements IContainerEvents {
     特定診療費("特定診療費"),
     サービス計画費("サービス計画費"),
     特定入所者費用("特定入所者費用"),
-    合計費用("合計費用"),
-    緊急時施設療養型("緊急時施設療養型"),
+    合計情報("合計情報"),
+    緊急時施設療養費("緊急時施設療養費"),
     緊急時_所定疾患("緊急時_所定疾患"),
-    食事("食事"),
+    食事費用("食事費用"),
     請求額集計("請求額集計"),
     給付費明細_住特("給付費明細_住特");
 

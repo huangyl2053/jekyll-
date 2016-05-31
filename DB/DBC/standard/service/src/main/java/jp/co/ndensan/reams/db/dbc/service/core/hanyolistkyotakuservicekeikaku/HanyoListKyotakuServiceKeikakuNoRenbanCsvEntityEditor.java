@@ -89,6 +89,7 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
             editor指定事業者_住所地特例対象施設_適用除外施設(entity, csvEntity, parameter);
         }
         editor計画(entity, csvEntity, parameter);
+        editor受給(entity, csvEntity, parameter);
         return csvEntity;
     }
 
@@ -554,6 +555,12 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
                 ? RString.EMPTY : entity.getDbT3007変更理由());
         csvEntity.set委託先計画事業者番号(isNull(entity.getDbT3006委託先事業者番号())
                 ? RString.EMPTY : entity.getDbT3006委託先事業者番号().value());
+
+    }
+
+    private void editor受給(HanyoListKyotakuServiceKeikakuEntity entity,
+            HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
+
         csvEntity.set委託先計画事業者名(
                 isNull(entity.getDbT7060_Itaku事業者名称())
                 ? RString.EMPTY

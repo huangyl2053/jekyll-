@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.taishouwaritsuk
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.IsShinsakaiJidoWaritsuke;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.ShinsakaiYusenWaritsukeKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiwariatejoho.ShinsakaiWariateJohoMapperParameter;
@@ -38,6 +37,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DbeConfigKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;

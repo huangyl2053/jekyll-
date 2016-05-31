@@ -138,11 +138,11 @@ public class ChosahyoTokkijiko_221022Process extends BatchProcessBase<HomonChosa
 
     @Override
     protected void afterExecute() {
-        バッチ出力条件リストの出力();
         if (itemList != null && !itemList.isEmpty()) {
             ChosahyoTokkijikoReport report = ChosahyoTokkijikoReport.createFrom(itemList);
             report.writeBy(reportSourceWriter);
         }
+        バッチ出力条件リストの出力();
     }
 
     private ChosahyoTokkijikoItem setItem(HomonChosaIraishoRelateEntity entity) {
@@ -264,10 +264,8 @@ public class ChosahyoTokkijiko_221022Process extends BatchProcessBase<HomonChosa
         }
         RString hakkobi = processParamter.getHakkobi();
         if (!RString.isNullOrEmpty(hakkobi)) {
-            dbT5201Entity.setIraishoShutsuryokuYMD(new FlexibleDate(hakkobi));
             dbT5201Entity.setChosahyoTouShutsuryokuYMD(new FlexibleDate(hakkobi));
         } else {
-            dbT5201Entity.setIraishoShutsuryokuYMD(FlexibleDate.EMPTY);
             dbT5201Entity.setChosahyoTouShutsuryokuYMD(FlexibleDate.EMPTY);
         }
         dbT5201EntityWriter.update(dbT5201Entity);

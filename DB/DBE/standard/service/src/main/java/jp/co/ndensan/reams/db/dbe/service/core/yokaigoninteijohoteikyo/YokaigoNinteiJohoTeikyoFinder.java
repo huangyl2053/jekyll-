@@ -102,13 +102,15 @@ public class YokaigoNinteiJohoTeikyoFinder {
         if (item != null && !item.isEmpty()) {
             支所コード = AuthItem.getAuthorities(ControlDataHolder.getUserId(), 種類.create(), RDate.getNowDate()).get(0).getItemId();
         }
-        List<NinnteiRiriRelateEntity> entityList = mapper
-                .get認定履歴一覧(YokaigoNinteiJohoTeiParameter.createParameter(hihokenshaNo, 証記載保険者番号, 支所コード));
-        if (entityList == null || entityList.isEmpty()) {
-            return SearchResult.of(Collections.<NinnteiRiriBusiness>emptyList(), 0, false);
-        }
-        for (NinnteiRiriRelateEntity entity : entityList) {
-            resultList.add(new NinnteiRiriBusiness(entity));
+        if (!RString.isNullOrEmpty(証記載保険者番号) && !RString.isNullOrEmpty(支所コード)) {
+            List<NinnteiRiriRelateEntity> entityList = mapper
+                    .get認定履歴一覧(YokaigoNinteiJohoTeiParameter.createParameter(hihokenshaNo, 証記載保険者番号, 支所コード));
+            if (entityList == null || entityList.isEmpty()) {
+                return SearchResult.of(Collections.<NinnteiRiriBusiness>emptyList(), 0, false);
+            }
+            for (NinnteiRiriRelateEntity entity : entityList) {
+                resultList.add(new NinnteiRiriBusiness(entity));
+            }
         }
         return SearchResult.of(resultList, 0, false);
     }

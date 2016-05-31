@@ -4,16 +4,18 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0110001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * TokutyoKariSanteiFuka のクラスファイル 
- * 
- * @author 自動生成
+ * TokutyoKariSanteiFuka のクラスファイル
+ *
+ * @reamsid_L DBB-0790-010 yangchenbing
  */
 public class TokutyoKariSanteiFukaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,8 +26,6 @@ public class TokutyoKariSanteiFukaDiv extends Panel {
     private ShoriJokyoDiv ShoriJokyo;
     @JsonProperty("TokutyoKariSanteiKanriInfo")
     private TokutyoKariSanteiKanriInfoDiv TokutyoKariSanteiKanriInfo;
-    @JsonProperty("TokuchoKarisanteiChohyoHakko")
-    private TokuchoKarisanteiChohyoHakkoDiv TokuchoKarisanteiChohyoHakko;
     @JsonProperty("TokutyoKariSanteiFukaChohyoHakko")
     private TokutyoKariSanteiFukaChohyoHakkoDiv TokutyoKariSanteiFukaChohyoHakko;
 
@@ -35,44 +35,58 @@ public class TokutyoKariSanteiFukaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getShoriJokyo
+     * @return ShoriJokyo
+     */
     @JsonProperty("ShoriJokyo")
     public ShoriJokyoDiv getShoriJokyo() {
         return ShoriJokyo;
     }
 
+    /*
+     * setShoriJokyo
+     * @param ShoriJokyo ShoriJokyo
+     */
     @JsonProperty("ShoriJokyo")
     public void setShoriJokyo(ShoriJokyoDiv ShoriJokyo) {
-        this.ShoriJokyo=ShoriJokyo;
+        this.ShoriJokyo = ShoriJokyo;
     }
 
+    /*
+     * getTokutyoKariSanteiKanriInfo
+     * @return TokutyoKariSanteiKanriInfo
+     */
     @JsonProperty("TokutyoKariSanteiKanriInfo")
     public TokutyoKariSanteiKanriInfoDiv getTokutyoKariSanteiKanriInfo() {
         return TokutyoKariSanteiKanriInfo;
     }
 
+    /*
+     * setTokutyoKariSanteiKanriInfo
+     * @param TokutyoKariSanteiKanriInfo TokutyoKariSanteiKanriInfo
+     */
     @JsonProperty("TokutyoKariSanteiKanriInfo")
     public void setTokutyoKariSanteiKanriInfo(TokutyoKariSanteiKanriInfoDiv TokutyoKariSanteiKanriInfo) {
-        this.TokutyoKariSanteiKanriInfo=TokutyoKariSanteiKanriInfo;
+        this.TokutyoKariSanteiKanriInfo = TokutyoKariSanteiKanriInfo;
     }
 
-    @JsonProperty("TokuchoKarisanteiChohyoHakko")
-    public TokuchoKarisanteiChohyoHakkoDiv getTokuchoKarisanteiChohyoHakko() {
-        return TokuchoKarisanteiChohyoHakko;
-    }
-
-    @JsonProperty("TokuchoKarisanteiChohyoHakko")
-    public void setTokuchoKarisanteiChohyoHakko(TokuchoKarisanteiChohyoHakkoDiv TokuchoKarisanteiChohyoHakko) {
-        this.TokuchoKarisanteiChohyoHakko=TokuchoKarisanteiChohyoHakko;
-    }
-
+    /*
+     * getTokutyoKariSanteiFukaChohyoHakko
+     * @return TokutyoKariSanteiFukaChohyoHakko
+     */
     @JsonProperty("TokutyoKariSanteiFukaChohyoHakko")
     public TokutyoKariSanteiFukaChohyoHakkoDiv getTokutyoKariSanteiFukaChohyoHakko() {
         return TokutyoKariSanteiFukaChohyoHakko;
     }
 
+    /*
+     * setTokutyoKariSanteiFukaChohyoHakko
+     * @param TokutyoKariSanteiFukaChohyoHakko TokutyoKariSanteiFukaChohyoHakko
+     */
     @JsonProperty("TokutyoKariSanteiFukaChohyoHakko")
     public void setTokutyoKariSanteiFukaChohyoHakko(TokutyoKariSanteiFukaChohyoHakkoDiv TokutyoKariSanteiFukaChohyoHakko) {
-        this.TokutyoKariSanteiFukaChohyoHakko=TokutyoKariSanteiFukaChohyoHakko;
+        this.TokutyoKariSanteiFukaChohyoHakko = TokutyoKariSanteiFukaChohyoHakko;
     }
 
     // </editor-fold>

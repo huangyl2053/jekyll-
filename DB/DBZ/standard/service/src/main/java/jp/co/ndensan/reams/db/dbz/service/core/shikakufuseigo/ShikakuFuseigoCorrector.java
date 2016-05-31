@@ -6,6 +6,9 @@
 package jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
@@ -23,6 +26,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.tatokureiidojiyu.TatokureiKaij
 import jp.co.ndensan.reams.db.dbz.definition.core.tatokureiidojiyu.TatokureiTekiyoJiyu;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.idojiyu.JukiIdoJiyu;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -285,41 +289,41 @@ public class ShikakuFuseigoCorrector {
 
         資格の情報修正後Builder.set被保険者区分コード(資格の情報修正前.get被保険者区分コード());
         if (flag == FLAG_1) {
-            資格の情報修正後Builder.set資格喪失事由コード(資格の情報修正前.get資格喪失事由コード());
-            資格の情報修正後Builder.set資格喪失年月日(資格の情報修正前.get資格喪失年月日());
-            資格の情報修正後Builder.set資格喪失届出年月日(資格の情報修正前.get資格喪失届出年月日());
-            資格の情報修正後Builder.set資格変更事由コード(資格の情報修正前.get資格変更事由コード());
-            資格の情報修正後Builder.set資格変更年月日(資格の情報修正前.get資格変更年月日());
-            資格の情報修正後Builder.set資格変更届出年月日(資格の情報修正前.get資格変更届出年月日());
+            資格の情報修正後Builder.set資格喪失事由コード(ObjectUtil.defaultIfNull(資格の情報修正前.get資格喪失事由コード(), RString.EMPTY));
+            資格の情報修正後Builder.set資格喪失年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get資格喪失年月日(), FlexibleDate.EMPTY));
+            資格の情報修正後Builder.set資格喪失届出年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get資格喪失届出年月日(), FlexibleDate.EMPTY));
+            資格の情報修正後Builder.set資格変更事由コード(ObjectUtil.defaultIfNull(資格の情報修正前.get資格変更事由コード(), RString.EMPTY));
+            資格の情報修正後Builder.set資格変更年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get資格変更年月日(), FlexibleDate.EMPTY));
+            資格の情報修正後Builder.set資格変更届出年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get資格変更届出年月日(), FlexibleDate.EMPTY));
         }
         if (flag == FLAG_2) {
-            資格の情報修正後Builder.set資格取得事由コード(資格の情報修正前.get資格取得事由コード());
-            資格の情報修正後Builder.set資格取得年月日(資格の情報修正前.get資格取得年月日());
-            資格の情報修正後Builder.set資格取得届出年月日(資格の情報修正前.get資格取得届出年月日());
-            資格の情報修正後Builder.set第1号資格取得年月日(資格の情報修正前.get第1号資格取得年月日());
-            資格の情報修正後Builder.set資格変更事由コード(資格の情報修正前.get資格変更事由コード());
-            資格の情報修正後Builder.set資格変更年月日(資格の情報修正前.get資格変更年月日());
-            資格の情報修正後Builder.set資格変更届出年月日(資格の情報修正前.get資格変更届出年月日());
+            資格の情報修正後Builder.set資格取得事由コード(ObjectUtil.defaultIfNull(資格の情報修正前.get資格取得事由コード(), RString.EMPTY));
+            資格の情報修正後Builder.set資格取得年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get資格取得年月日(), FlexibleDate.EMPTY));
+            資格の情報修正後Builder.set資格取得届出年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get資格取得届出年月日(), FlexibleDate.EMPTY));
+            資格の情報修正後Builder.set第1号資格取得年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get第1号資格取得年月日(), FlexibleDate.EMPTY));
+            資格の情報修正後Builder.set資格変更事由コード(ObjectUtil.defaultIfNull(資格の情報修正前.get資格変更事由コード(), RString.EMPTY));
+            資格の情報修正後Builder.set資格変更年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get資格変更年月日(), FlexibleDate.EMPTY));
+            資格の情報修正後Builder.set資格変更届出年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get資格変更届出年月日(), FlexibleDate.EMPTY));
         }
         if (flag == FLAG_3) {
-            資格の情報修正後Builder.set資格喪失事由コード(資格の情報修正前.get資格喪失事由コード());
-            資格の情報修正後Builder.set資格喪失年月日(資格の情報修正前.get資格喪失年月日());
-            資格の情報修正後Builder.set資格喪失届出年月日(資格の情報修正前.get資格喪失届出年月日());
-            資格の情報修正後Builder.set資格取得事由コード(資格の情報修正前.get資格取得事由コード());
-            資格の情報修正後Builder.set資格取得年月日(資格の情報修正前.get資格取得年月日());
-            資格の情報修正後Builder.set資格取得届出年月日(資格の情報修正前.get資格取得届出年月日());
+            資格の情報修正後Builder.set資格喪失事由コード(ObjectUtil.defaultIfNull(資格の情報修正前.get資格喪失事由コード(), RString.EMPTY));
+            資格の情報修正後Builder.set資格喪失年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get資格喪失年月日(), FlexibleDate.EMPTY));
+            資格の情報修正後Builder.set資格喪失届出年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get資格喪失届出年月日(), FlexibleDate.EMPTY));
+            資格の情報修正後Builder.set資格取得事由コード(ObjectUtil.defaultIfNull(資格の情報修正前.get資格取得事由コード(), RString.EMPTY));
+            資格の情報修正後Builder.set資格取得年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get資格取得年月日(), FlexibleDate.EMPTY));
+            資格の情報修正後Builder.set資格取得届出年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get資格取得届出年月日(), FlexibleDate.EMPTY));
         }
-        資格の情報修正後Builder.set住所地特例適用事由コード(資格の情報修正前.get住所地特例適用事由コード());
-        資格の情報修正後Builder.set適用年月日(資格の情報修正前.get適用年月日());
-        資格の情報修正後Builder.set適用届出年月日(資格の情報修正前.get適用届出年月日());
-        資格の情報修正後Builder.set住所地特例解除事由コード(資格の情報修正前.get住所地特例解除事由コード());
-        資格の情報修正後Builder.set解除年月日(資格の情報修正前.get解除年月日());
-        資格の情報修正後Builder.set解除届出年月日(資格の情報修正前.get解除届出年月日());
-        資格の情報修正後Builder.set住所地特例フラグ(資格の情報修正前.get住所地特例フラグ());
-        資格の情報修正後Builder.set広域内住所地特例フラグ(資格の情報修正前.get広域内住所地特例フラグ());
-        資格の情報修正後Builder.set広住特措置元市町村コード(資格の情報修正前.get広住特措置元市町村コード());
-        資格の情報修正後Builder.set旧市町村コード(資格の情報修正前.get旧市町村コード());
-        資格の情報修正後Builder.set論理削除フラグ(資格の情報修正前.is論理削除フラグ());
+        資格の情報修正後Builder.set住所地特例適用事由コード(ObjectUtil.defaultIfNull(資格の情報修正前.get住所地特例適用事由コード(), RString.EMPTY));
+        資格の情報修正後Builder.set適用年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get適用年月日(), FlexibleDate.EMPTY));
+        資格の情報修正後Builder.set適用届出年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get適用届出年月日(), FlexibleDate.EMPTY));
+        資格の情報修正後Builder.set住所地特例解除事由コード(ObjectUtil.defaultIfNull(資格の情報修正前.get住所地特例解除事由コード(), RString.EMPTY));
+        資格の情報修正後Builder.set解除年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get解除年月日(), FlexibleDate.EMPTY));
+        資格の情報修正後Builder.set解除届出年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get解除届出年月日(), FlexibleDate.EMPTY));
+        資格の情報修正後Builder.set住所地特例フラグ(ObjectUtil.defaultIfNull(資格の情報修正前.get住所地特例フラグ(), RString.EMPTY));
+        資格の情報修正後Builder.set広域内住所地特例フラグ(ObjectUtil.defaultIfNull(資格の情報修正前.get広域内住所地特例フラグ(), RString.EMPTY));
+        資格の情報修正後Builder.set広住特措置元市町村コード(ObjectUtil.defaultIfNull(資格の情報修正前.get広住特措置元市町村コード(), LasdecCode.EMPTY));
+        資格の情報修正後Builder.set旧市町村コード(ObjectUtil.defaultIfNull(資格の情報修正前.get旧市町村コード(), LasdecCode.EMPTY));
+        資格の情報修正後Builder.set論理削除フラグ(ObjectUtil.defaultIfNull(資格の情報修正前.is論理削除フラグ(), false));
 
         return 資格の情報修正後Builder.build();
     }
@@ -329,21 +333,21 @@ public class ShikakuFuseigoCorrector {
         除外の情報修正後Builder.set異動事由コード(除外の情報修正前.get異動事由コード());
         除外の情報修正後Builder.set市町村コード(除外の情報修正前.get市町村コード());
         if (flag == FLAG_1) {
-            除外の情報修正後Builder.set適用除外解除事由コード(除外の情報修正前.get適用除外解除事由コード());
-            除外の情報修正後Builder.set解除年月日(除外の情報修正前.get解除年月日());
-            除外の情報修正後Builder.set解除届出年月日(除外の情報修正前.get解除届出年月日());
+            除外の情報修正後Builder.set適用除外解除事由コード(ObjectUtil.defaultIfNull(除外の情報修正前.get適用除外解除事由コード(), RString.EMPTY));
+            除外の情報修正後Builder.set解除年月日(ObjectUtil.defaultIfNull(除外の情報修正前.get解除年月日(), FlexibleDate.EMPTY));
+            除外の情報修正後Builder.set解除届出年月日(ObjectUtil.defaultIfNull(除外の情報修正前.get解除届出年月日(), FlexibleDate.EMPTY));
         }
         if (flag == FLAG_2) {
             除外の情報修正後Builder.set適用除外適用事由コード(除外の情報修正前.get適用除外適用事由コード());
             除外の情報修正後Builder.set適用年月日(除外の情報修正前.get適用年月日());
-            除外の情報修正後Builder.set適用届出年月日(除外の情報修正前.get適用届出年月日());
+            除外の情報修正後Builder.set適用届出年月日(ObjectUtil.defaultIfNull(除外の情報修正前.get適用届出年月日(), FlexibleDate.EMPTY));
         }
-        除外の情報修正後Builder.set適用受付年月日(除外の情報修正前.get適用受付年月日());
-        除外の情報修正後Builder.set解除受付年月日(除外の情報修正前.get解除受付年月日());
-        除外の情報修正後Builder.set入所通知発行日(除外の情報修正前.get入所通知発行日());
-        除外の情報修正後Builder.set退所通知発行日(除外の情報修正前.get退所通知発行日());
-        除外の情報修正後Builder.set変更通知発行日(除外の情報修正前.get変更通知発行日());
-        除外の情報修正後Builder.set論理削除フラグ(除外の情報修正前.is論理削除フラグ());
+        除外の情報修正後Builder.set適用受付年月日(ObjectUtil.defaultIfNull(除外の情報修正前.get適用受付年月日(), FlexibleDate.EMPTY));
+        除外の情報修正後Builder.set解除受付年月日(ObjectUtil.defaultIfNull(除外の情報修正前.get解除受付年月日(), FlexibleDate.EMPTY));
+        除外の情報修正後Builder.set入所通知発行日(ObjectUtil.defaultIfNull(除外の情報修正前.get入所通知発行日(), FlexibleDate.EMPTY));
+        除外の情報修正後Builder.set退所通知発行日(ObjectUtil.defaultIfNull(除外の情報修正前.get退所通知発行日(), FlexibleDate.EMPTY));
+        除外の情報修正後Builder.set変更通知発行日(ObjectUtil.defaultIfNull(除外の情報修正前.get変更通知発行日(), FlexibleDate.EMPTY));
+        除外の情報修正後Builder.set論理削除フラグ(ObjectUtil.defaultIfNull(除外の情報修正前.is論理削除フラグ(), false));
         return 除外の情報修正後Builder.build();
     }
 
@@ -355,21 +359,27 @@ public class ShikakuFuseigoCorrector {
         if (flag == FLAG_2) {
             他特の情報修正後Builder.set他市町村住所地特例適用事由コード(他特の情報修正前.get他市町村住所地特例適用事由コード());
             他特の情報修正後Builder.set適用年月日(他特の情報修正前.get適用年月日());
-            他特の情報修正後Builder.set適用届出年月日(他特の情報修正前.get適用届出年月日());
+            他特の情報修正後Builder.set適用届出年月日(ObjectUtil.defaultIfNull(他特の情報修正前.get適用届出年月日(), FlexibleDate.EMPTY));
         }
-        他特の情報修正後Builder.set適用受付年月日(他特の情報修正前.get適用受付年月日());
+        他特の情報修正後Builder.set適用受付年月日(ObjectUtil.defaultIfNull(他特の情報修正前.get適用受付年月日(), FlexibleDate.EMPTY));
         if (flag == FLAG_1) {
-            他特の情報修正後Builder.set他市町村住所地特例解除事由コード(他特の情報修正前.get他市町村住所地特例解除事由コード());
-            他特の情報修正後Builder.set解除年月日(他特の情報修正前.get解除年月日());
-            他特の情報修正後Builder.set解除届出年月日(他特の情報修正前.get解除届出年月日());
+            他特の情報修正後Builder.set他市町村住所地特例解除事由コード(
+                    ObjectUtil.defaultIfNull(他特の情報修正前.get他市町村住所地特例解除事由コード(), RString.EMPTY));
+            他特の情報修正後Builder.set解除年月日(ObjectUtil.defaultIfNull(他特の情報修正前.get解除年月日(), FlexibleDate.EMPTY));
+            他特の情報修正後Builder.set解除届出年月日(ObjectUtil.defaultIfNull(他特の情報修正前.get解除届出年月日(), FlexibleDate.EMPTY));
         }
-        他特の情報修正後Builder.set解除受付年月日(他特の情報修正前.get解除受付年月日());
-        他特の情報修正後Builder.set措置保険者番号(他特の情報修正前.get措置保険者番号());
-        他特の情報修正後Builder.set措置被保険者番号(他特の情報修正前.get措置被保険者番号());
-        他特の情報修正後Builder.set他特例連絡票発行年月日(他特の情報修正前.get他特例連絡票発行年月日());
-        他特の情報修正後Builder.set施設退所通知発行年月日(他特の情報修正前.get施設退所通知発行年月日());
-        他特の情報修正後Builder.set施設変更通知発行年月日(他特の情報修正前.get施設変更通知発行年月日());
-        他特の情報修正後Builder.set論理削除フラグ(他特の情報修正前.is論理削除フラグ());
+        他特の情報修正後Builder.set解除受付年月日(ObjectUtil.defaultIfNull(
+                他特の情報修正前.get解除受付年月日(), FlexibleDate.EMPTY));
+        他特の情報修正後Builder.set措置保険者番号(ObjectUtil.defaultIfNull(
+                他特の情報修正前.get措置保険者番号(), ShoKisaiHokenshaNo.EMPTY));
+        他特の情報修正後Builder.set措置被保険者番号(ObjectUtil.defaultIfNull(他特の情報修正前.get措置被保険者番号(), HihokenshaNo.EMPTY));
+        他特の情報修正後Builder.set他特例連絡票発行年月日(ObjectUtil.defaultIfNull(
+                他特の情報修正前.get他特例連絡票発行年月日(), FlexibleDate.EMPTY));
+        他特の情報修正後Builder.set施設退所通知発行年月日(ObjectUtil.defaultIfNull(
+                他特の情報修正前.get施設退所通知発行年月日(), FlexibleDate.EMPTY));
+        他特の情報修正後Builder.set施設変更通知発行年月日(ObjectUtil.defaultIfNull(
+                他特の情報修正前.get施設変更通知発行年月日(), FlexibleDate.EMPTY));
+        他特の情報修正後Builder.set論理削除フラグ(ObjectUtil.defaultIfNull(他特の情報修正前.is論理削除フラグ(), false));
 
         return 他特の情報修正後Builder.build();
     }

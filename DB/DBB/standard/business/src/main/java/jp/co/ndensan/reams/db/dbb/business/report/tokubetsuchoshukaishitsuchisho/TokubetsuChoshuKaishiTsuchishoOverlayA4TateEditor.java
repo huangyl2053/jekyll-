@@ -12,6 +12,9 @@ import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho.T
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -65,7 +68,8 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateEditor implements ITokub
     @Override
     public TokubetsuChoshuKaishiTsuchishoOverlayA4TateSource edit(TokubetsuChoshuKaishiTsuchishoOverlayA4TateSource source) {
         if (編集後本算定通知書共通情報.get賦課年度() != null) {
-            source.titleNendo = 編集後本算定通知書共通情報.get賦課年度().toDateString();
+            source.titleNendo = 編集後本算定通知書共通情報.get賦課年度().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         }
         if (編集後本算定通知書共通情報.get表示コード() != null) {
             source.hyojicodeName1 = 編集後本算定通知書共通情報.get表示コード().get表示コード名１();
@@ -169,17 +173,21 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateEditor implements ITokub
             source.tokuchoTaishoNenkinName = 編集後本算定通知書共通情報.get更正後().get特別徴収対象年金();
         }
         if (編集後本算定通知書共通情報.get賦課年度() != null) {
-            source.hokenryoGakuNendo1 = 編集後本算定通知書共通情報.get賦課年度().toDateString();
-            source.hokenryoGakuNendo2 = 編集後本算定通知書共通情報.get賦課年度().toDateString();
+            source.hokenryoGakuNendo1 = 編集後本算定通知書共通情報.get賦課年度().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+            source.hokenryoGakuNendo2 = 編集後本算定通知書共通情報.get賦課年度().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         }
         source.karisanteiGakuGokei = set仮算定額合計();
         source.hokenryoGaku10Gatsu1 = set特徴期別金額(特徴期別金額4期);
         source.hokenryoGaku12Gatsu1 = set特徴期別金額(特徴期別金額5期);
         source.hokenryoGaku2Gatsu1 = set特徴期別金額(特徴期別金額6期);
-        source.santeiKisoNendo1 = 編集後本算定通知書共通情報.get調定年度().toDateString();
+        source.santeiKisoNendo1 = 編集後本算定通知書共通情報.get調定年度().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         if (編集後本算定通知書共通情報.get更正後() != null) {
-            source.santeikisoKikan = 編集後本算定通知書共通情報.get更正後().get期間_自().concat(TOKEN)
-                    .concat(編集後本算定通知書共通情報.get更正後().get期間_至());
+            RString 期間_自 = 編集後本算定通知書共通情報.get更正後().get期間_自();
+            RString 期間_至 = 編集後本算定通知書共通情報.get更正後().get期間_至();
+            source.santeikisoKikan = 期間_自.concat(TOKEN).concat(期間_至);
             source.santeikisoTsukisu = 編集後本算定通知書共通情報.get更正後().get月数_ケ月();
             source.shotokuDankai1 = 編集後本算定通知書共通情報.get更正後().get保険料段階();
         }

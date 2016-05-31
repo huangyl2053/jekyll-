@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.service.report.chosairaiichiranhyo;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoBodyItem;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoReportJoho;
@@ -39,36 +38,51 @@ public class ChosaIraiIchiranhyoPrintService {
     /**
      * 認定調査依頼一覧表を印刷します。
      *
-     * @param headItem 認定調査依頼一覧表ヘッダのITEM
      * @param bodyItems 認定調査依頼一覧表ボディのITEM
      * @return {@link SourceDataCollection}
      */
-    public SourceDataCollection print(ChosaIraiIchiranhyoHeadItem headItem, List<ChosaIraiIchiranhyoBodyItem> bodyItems) {
+    public SourceDataCollection print(List<ChosaIraiIchiranhyoBodyItem> bodyItems) {
         ChosaIraiIchiranhyoProperty property = new ChosaIraiIchiranhyoProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<ChosaIraiIchiranhyoReportSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
                         RDate.getNowDate(), assembler.getImageFolderPath());
-                headItem = new ChosaIraiIchiranhyoHeadItem(
-                        ninshoshaSourceBuilder.buildSource().hakkoYMD,
-                        ninshoshaSourceBuilder.buildSource().denshiKoin,
-                        ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei,
-                        ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei2,
-                        ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei1,
-                        ninshoshaSourceBuilder.buildSource().ninshoshaShimeiKakenai,
-                        ninshoshaSourceBuilder.buildSource().ninshoshaShimeiKakeru,
-                        ninshoshaSourceBuilder.buildSource().koinMojiretsu,
-                        ninshoshaSourceBuilder.buildSource().koinShoryaku,
-                        headItem.getYubinNo1(),
-                        headItem.getJushoText(),
-                        headItem.getKikanNameText(),
-                        headItem.getShimeiText(),
-                        headItem.getMeishoFuyo(),
-                        headItem.getJigyoshaNo(),
-                        headItem.getTsuchibun1(),
-                        headItem.getTsuchibun2());
-                for (ChosaIraiIchiranhyoReport report : toReports(new ChosaIraiIchiranhyoReportJoho(headItem, bodyItems))) {
+                List<ChosaIraiIchiranhyoBodyItem> itemList = new ArrayList<>();
+                for (ChosaIraiIchiranhyoBodyItem bodyItem : bodyItems) {
+                    bodyItem = new ChosaIraiIchiranhyoBodyItem(
+                            ninshoshaSourceBuilder.buildSource().hakkoYMD,
+                            ninshoshaSourceBuilder.buildSource().denshiKoin,
+                            ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei,
+                            ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei2,
+                            ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei1,
+                            ninshoshaSourceBuilder.buildSource().ninshoshaShimeiKakenai,
+                            ninshoshaSourceBuilder.buildSource().ninshoshaShimeiKakeru,
+                            ninshoshaSourceBuilder.buildSource().koinMojiretsu,
+                            ninshoshaSourceBuilder.buildSource().koinShoryaku,
+                            bodyItem.getYubinNo1(),
+                            bodyItem.getJushoText(),
+                            bodyItem.getKikanNameText(),
+                            bodyItem.getShimeiText(),
+                            bodyItem.getMeishoFuyo(),
+                            bodyItem.getJigyoshaNo(),
+                            bodyItem.getTsuchibun1(),
+                            bodyItem.getTsuchibun2(),
+                            bodyItem.getListIchiranhyo_1(),
+                            bodyItem.getListIchiranhyo_2(),
+                            bodyItem.getListIchiranhyo_3(),
+                            bodyItem.getListIchiranhyo_4(),
+                            bodyItem.getListIchiranhyo_5(),
+                            bodyItem.getListIchiranhyo_6(),
+                            bodyItem.getListIchiranhyo_7(),
+                            bodyItem.getListIchiranhyo_8(),
+                            bodyItem.getListIchiranhyo_9(),
+                            bodyItem.getListIchiranhyo_10(),
+                            bodyItem.getListIchiranhyo_11(),
+                            bodyItem.getListIchiranhyo_12());
+                    itemList.add(bodyItem);
+                }
+                for (ChosaIraiIchiranhyoReport report : toReports(new ChosaIraiIchiranhyoReportJoho(itemList))) {
                     ReportSourceWriter<ChosaIraiIchiranhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
                 }
@@ -80,7 +94,6 @@ public class ChosaIraiIchiranhyoPrintService {
     private static List<ChosaIraiIchiranhyoReport> toReports(ChosaIraiIchiranhyoReportJoho reportJoho) {
         List<ChosaIraiIchiranhyoReport> list = new ArrayList<>();
         list.add(ChosaIraiIchiranhyoReport.createFrom(
-                reportJoho.getHeadItem(),
                 reportJoho.getBodyItemList()));
         return list;
     }

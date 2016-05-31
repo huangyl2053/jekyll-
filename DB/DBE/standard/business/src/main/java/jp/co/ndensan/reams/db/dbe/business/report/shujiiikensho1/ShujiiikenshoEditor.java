@@ -7,6 +7,10 @@ package jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho1;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.shujiiikensho.ShujiiikenshoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho1.ShujiiikenshoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 主治医意見書のEditorです。
@@ -51,7 +55,10 @@ public class ShujiiikenshoEditor implements IShujiiikenshoEditor {
         source.shinsaYY = item.get審査日_年();
         source.shinsaMM = item.get審査日_月();
         source.shinsaDD = item.get審査日_日();
-        source.imgIkensho1 = item.getイメージファイル();
+        source.imgIkensho1 = item.getイメージファイル1();
+        source.imgIkensho2 = item.getイメージファイル2();
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.hihokennshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
         return source;
     }
 }

@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.kaigoatenakihon;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigoatenakihon.KaigoAtenaKihonEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigoatenakihon.KaigoAtenaKihonEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護資格系基本情報Businessクラスです。
  *
- * @reamsid_L DBA-0030-010 wangxiaodong
+ * @reamsid_L DBA-0030-010 wangxiaodong
  */
 public class KaigoAtenaKihonBusiness {
 

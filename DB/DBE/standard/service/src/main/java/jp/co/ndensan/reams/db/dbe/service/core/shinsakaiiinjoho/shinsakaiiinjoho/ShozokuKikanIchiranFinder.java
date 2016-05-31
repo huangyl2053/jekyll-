@@ -9,8 +9,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.shinsakaiiinjoho.ShozokuKikanIchiranFinderBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjoho.shinsakaiiinjoho.ShozokuKikanIchiranEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinjoho.IShinsakaiIinJohoMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 所属機関一覧情報を取得するクラスです。
  *
- * @reamsid_L DBE-0110-010 wangxiaodong
+ * @reamsid_L DBE-0110-010 wangxiaodong
  */
 public class ShozokuKikanIchiranFinder {
 
@@ -43,8 +43,7 @@ public class ShozokuKikanIchiranFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShozokuKikanIchiranFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShozokuKikanIchiranFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShozokuKikanIchiranFinder}のインスタンス
      */
     public static ShozokuKikanIchiranFinder createInstance() {
         return InstanceProvider.create(ShozokuKikanIchiranFinder.class);

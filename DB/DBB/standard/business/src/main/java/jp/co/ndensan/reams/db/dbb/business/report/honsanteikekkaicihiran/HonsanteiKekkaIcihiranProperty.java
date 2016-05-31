@@ -5,10 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.honsanteikekkaicihiran;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.honsanteikekkaicihiran.HonsanteiKekkaIcihiranReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.Breakers;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 「本算定賦課計算」property
@@ -17,10 +25,35 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  */
 public class HonsanteiKekkaIcihiranProperty extends ReportPropertyBase<HonsanteiKekkaIcihiranReportSource> {
 
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString(
+            HonsanteiKekkaIcihiranReportSource.ReportSourceFields.listUpper_1.name())));
+
     /**
      * コンストラクタです。
      */
     public HonsanteiKekkaIcihiranProperty() {
         super(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId());
+    }
+
+    @Override
+    public Breakers<HonsanteiKekkaIcihiranReportSource> defineBreakers(
+            Breakers<HonsanteiKekkaIcihiranReportSource> breakers,
+            BreakerCatalog<HonsanteiKekkaIcihiranReportSource> catalog) {
+        return breakers.add(catalog.new SimplePageBreaker(
+
+
+
+            PAGE_BREAK_KEYS) {
+            @Override
+            public ReportLineRecord<HonsanteiKekkaIcihiranReportSource> occuredBreak(
+                    ReportLineRecord<HonsanteiKekkaIcihiranReportSource> currentRecord,
+                    ReportLineRecord<HonsanteiKekkaIcihiranReportSource> nextRecord,
+                    ReportDynamicChart dynamicChart) {
+                if (nextRecord == ReportLineRecord.LAST_RECORD) {
+                    return currentRecord;
+                }
+                return currentRecord;
+            }
+        }).fixed();
     }
 }

@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKe
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaikekkatoroku.IShinsakaiKekkaTorokuMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -107,16 +107,16 @@ public class ShinsakaiKekkaTorokuManager {
     @Transaction
     public SearchResult<ShinsakaiKaisaiYoteiJoho> get審査会委員一覧検索_業務概念_1(RString 開催番号) {
         List<ShinsakaiKaisaiYoteiJoho> resultList = new ArrayList<>();
-        List<ShinsakaiKaisaiYoteiJohoRelateEntity> entityList
+        List<DbT5502ShinsakaiWariateJohoEntity> entityList
                 = mapperProvider.create(IShinsakaiKekkaTorokuMapper.class)
                 .get審査会委員一覧更新_1(ShinsakaiKekkaTorokuParameter.createShinsakaiKekkaTorokuParameter(開催番号));
         if (entityList.isEmpty()) {
             return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
         }
-        for (ShinsakaiKaisaiYoteiJohoRelateEntity entity : entityList) {
-            entity.initializeMd5ToEntities();
-            resultList.add(new ShinsakaiKaisaiYoteiJoho(entity));
-        }
+//        for (ShinsakaiKaisaiYoteiJohoRelateEntity entity : entityList) {
+//            entity.initializeMd5ToEntities();
+//            resultList.add(new ShinsakaiKaisaiYoteiJoho(entity));
+//        }
         return SearchResult.of(resultList, 0, false);
     }
 

@@ -13,10 +13,10 @@ import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jukyushikakushomeisho.Ju
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jukyushikakushomeisho.JukyuShikakuShomeishoDataEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jukyushikakushomeisho.IJukyuShikakuShomeishoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import static jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho.getShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
@@ -61,7 +61,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -331,13 +330,15 @@ public class JukyuShikakuShomeishoFinder {
         if (措置元市町村コード != null) {
             SearchResult<ShichosonCodeYoriShichoson> result
                     = koikiShichosonJohoFinder.shichosonCodeYoriShichosonJoho(措置元市町村コード);
-            if (result != null) {
+            if (result != null && !result.records().isEmpty()
+                    && result.records().get(0).get証記載保険者番号() != null) {
                 outEntity.set保険者番号(result.records().get(0).get証記載保険者番号().getColumnValue());
             }
         } else {
             SearchResult<ShichosonCodeYoriShichoson> searchResult
                     = koikiShichosonJohoFinder.shichosonCodeYoriShichosonJoho(dbT1001EntityList.get(0).getShichosonCode());
-            if (searchResult != null) {
+            if (searchResult != null && !searchResult.records().isEmpty()
+                    && searchResult.records().get(0).get証記載保険者番号() != null) {
                 outEntity.set保険者番号(searchResult.records().get(0).get証記載保険者番号().getColumnValue());
             }
         }
@@ -388,13 +389,22 @@ public class JukyuShikakuShomeishoFinder {
         }
         outEntity.set要介護状態区分(inEntity.get要介護状態区分());
 
-        outEntity.set認定の有効期間の開始年月日(inEntity.get有効期間の開始年月日());
-        outEntity.set認定の有効期間の終了年月日(inEntity.get有効期間の終了年月日());
+        RDate 有効期間の開始年月日
+                = null == inEntity.get有効期間の開始年月日() ? RDate.MIN : new RDate(inEntity.get有効期間の開始年月日().toString());
+        RDate 有効期間の終了年月日
+                = null == inEntity.get有効期間の終了年月日() ? RDate.MIN : new RDate(inEntity.get有効期間の終了年月日().toString());
+        outEntity.set認定の有効期間の開始年月日(有効期間の開始年月日
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+
+        outEntity.set認定の有効期間の終了年月日(有効期間の終了年月日
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
     }
 
     private void set申請状況And年月日(JukyuShikakuShomeishoDataEntity outEntity, JukyuShikakuShomeishoKaiKo inEntity, FlexibleDate 認定年月日) {
         if (inEntity.get申請日() != null && !inEntity.get申請日().isEmpty()) {
-            outEntity.set申請状況(new RString("申請中"));
+            outEntity.set申請状況(new RString("0"));
             outEntity.set申請年月日(inEntity.get申請日());
             if (認定年月日 != null) {
                 outEntity.set認定年月日(認定年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
@@ -406,7 +416,7 @@ public class JukyuShikakuShomeishoFinder {
     private void set申請状況And年月日(JukyuShikakuShomeishoDataEntity outEntity,
             JukyuShikakuShomeishoKaiKo inEntity, DbT4001JukyushaDaichoEntity dbT4001JukyushaDaichoEntity) {
         if (null == inEntity.get申請日() || inEntity.get申請日().isEmpty()) {
-            outEntity.set申請状況(new RString("認定済"));
+            outEntity.set申請状況(new RString("1"));
             outEntity.set申請年月日(RString.EMPTY);
             FlexibleDate ninteiYMD = dbT4001JukyushaDaichoEntity.getNinteiYMD();
 

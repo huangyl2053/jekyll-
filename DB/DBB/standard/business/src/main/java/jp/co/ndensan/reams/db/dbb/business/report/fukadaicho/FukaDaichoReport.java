@@ -42,8 +42,8 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
     @Override
     public void writeBy(ReportSourceWriter<FukaDaichoSource> writer) {
         for (FukaDaichoItem target : targets) {
-            IFukaDaichoEditor headerEditor = new HeaderEditor(target);
-            IFukaDaichoEditor bodyEditor = new BodyEditor(target);
+            IFukaDaichoEditor headerEditor = new FukaDaichoHeaderEditor(target);
+            IFukaDaichoEditor bodyEditor = new FukaDaichoBodyEditor(target);
             IFukaDaichoBuilder builder = new FukaDaichoBuilder(headerEditor, bodyEditor);
             writer.writeLine(builder);
         }

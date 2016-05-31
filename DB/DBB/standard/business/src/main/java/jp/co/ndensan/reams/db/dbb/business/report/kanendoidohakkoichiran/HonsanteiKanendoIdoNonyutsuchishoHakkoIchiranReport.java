@@ -25,11 +25,14 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranReport extends Report<
     private final RString 調定年度;
     private final RString 出力期;
     private final RString 帳票作成日時;
-    private final RString 出力順ID;
     private final RString 地方公共団体コード;
     private final RString 市町村名;
     private final List<RString> 納入対象賦課年度List;
-    private static final int SIZE = 18;
+    private final RString 並び順の１件目;
+    private final RString 並び順の２件目;
+    private final RString 並び順の３件目;
+    private final RString 並び順の４件目;
+    private final RString 並び順の５件目;
 
     /**
      * コンストラクタです。
@@ -38,22 +41,33 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranReport extends Report<
      * @param 調定年度 RString
      * @param 帳票作成日時 RString
      * @param 出力期 RString
-     * @param 出力順ID RString
      * @param 地方公共団体コード RString
      * @param 市町村名 RString
+     * @param 納入対象賦課年度List List<RString>
+     * @param 並び順の１件目 RString
+     * @param 並び順の２件目 RString
+     * @param 並び順の３件目 RString
+     * @param 並び順の４件目 RString
+     * @param 並び順の５件目 RString
      */
     public HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranReport(
             List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
             RString 調定年度, RString 出力期, RString 帳票作成日時,
-            RString 出力順ID, RString 地方公共団体コード, RString 市町村名, List<RString> 納入対象賦課年度List) {
+            RString 地方公共団体コード, RString 市町村名, List<RString> 納入対象賦課年度List,
+            RString 並び順の１件目, RString 並び順の２件目,
+            RString 並び順の３件目, RString 並び順の４件目, RString 並び順の５件目) {
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
         this.調定年度 = 調定年度;
         this.出力期 = 出力期;
         this.帳票作成日時 = 帳票作成日時;
-        this.出力順ID = 出力順ID;
         this.地方公共団体コード = 地方公共団体コード;
         this.市町村名 = 市町村名;
         this.納入対象賦課年度List = 納入対象賦課年度List;
+        this.並び順の１件目 = 並び順の１件目;
+        this.並び順の２件目 = 並び順の２件目;
+        this.並び順の３件目 = 並び順の３件目;
+        this.並び順の４件目 = 並び順の４件目;
+        this.並び順の５件目 = 並び順の５件目;
     }
 
     @Override
@@ -61,12 +75,15 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranReport extends Report<
         int index = 0;
         for (EditedHonSanteiTsuchiShoKyotsu target : 編集後本算定通知書共通情報) {
             index++;
-            int 連番 = (index - 1) % SIZE + 1;
+            int 連番 = index;
             HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranInputEntity inputEntity
                     = new HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranInputEntity(target,
-                            調定年度, 出力期, 帳票作成日時, 出力順ID, 地方公共団体コード, 市町村名, 連番, 納入対象賦課年度List);
-            IHonsanteiKanendoIdoNonyutsuchishoHakkoIchiranEditor headerEditor = new HeaderEditor(inputEntity);
-            IHonsanteiKanendoIdoNonyutsuchishoHakkoIchiranEditor bodyEditor = new BodyEditor(inputEntity);
+                            調定年度, 出力期, 帳票作成日時, 地方公共団体コード, 市町村名, 連番, 納入対象賦課年度List,
+                            並び順の１件目, 並び順の２件目, 並び順の３件目, 並び順の４件目, 並び順の５件目);
+            IHonsanteiKanendoIdoNonyutsuchishoHakkoIchiranEditor headerEditor
+                    = new HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranHeaderEditor(inputEntity);
+            IHonsanteiKanendoIdoNonyutsuchishoHakkoIchiranEditor bodyEditor
+                    = new HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranBodyEditor(inputEntity);
             IHonsanteiKanendoIdoNonyutsuchishoHakkoIchiranBuilder builder
                     = new HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranBuilder(headerEditor, bodyEditor);
             writer.writeLine(builder);

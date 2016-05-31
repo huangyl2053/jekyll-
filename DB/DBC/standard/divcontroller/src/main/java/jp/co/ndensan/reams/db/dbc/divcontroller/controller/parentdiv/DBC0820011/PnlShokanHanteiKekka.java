@@ -56,7 +56,7 @@ public class PnlShokanHanteiKekka {
      * @return ResponseData
      */
     public ResponseData<PnlShokanHanteiKekkaDiv> onClick_InsertButton(PnlShokanHanteiKekkaDiv div) {
-        ViewStateHolder.put(ViewStateKeys.処理モード, 新規);
+        ViewStateHolder.put(ViewStateKeys.画面モード, 新規);
         return ResponseData.of(div).forwardWithEventName(償還申請).respond();
     }
 
@@ -67,7 +67,7 @@ public class PnlShokanHanteiKekka {
      * @return ResponseData
      */
     public ResponseData<PnlShokanHanteiKekkaDiv> onClick_ModifyButton(PnlShokanHanteiKekkaDiv div) {
-        ViewStateHolder.put(ViewStateKeys.処理モード, 修正);
+        ViewStateHolder.put(ViewStateKeys.画面モード, 修正);
         return ResponseData.of(div).forwardWithEventName(償還申請).respond();
     }
 
@@ -78,7 +78,7 @@ public class PnlShokanHanteiKekka {
      * @return ResponseData
      */
     public ResponseData<PnlShokanHanteiKekkaDiv> onClick_DeleteButton(PnlShokanHanteiKekkaDiv div) {
-        ViewStateHolder.put(ViewStateKeys.処理モード, 削除);
+        ViewStateHolder.put(ViewStateKeys.画面モード, 削除);
         return ResponseData.of(div).forwardWithEventName(償還申請).respond();
     }
 }

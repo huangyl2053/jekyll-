@@ -49,4 +49,11 @@ public class JisshiJokyoTokeiReportSource implements IReportSource {
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation hishokenshaNo;
 
+    /**
+     * 改ページ条件のキーです。
+     */
+    public enum ReportSourceFields {
+
+        hokenshaNo
+    }
 }

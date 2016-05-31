@@ -5,14 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu;
 
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoUpdateParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho.ShokanKetteiTsuchiShoMeisaiTempTableEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanketteitsuchishoikkatsusakusei.IShokanKetteiTsuchiShoIkkatsuSakuseiMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -30,7 +29,7 @@ public class ShokanKetteiTsuchiShoMeisaiTempUpdateProcess extends BatchProcessBa
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(金融機関と預金種別取得SQL);
+        return new BatchDbReader(金融機関と預金種別取得SQL, new ShokanKetteiTsuchiShoUpdateParameter());
     }
 
     @Override
@@ -42,19 +41,5 @@ public class ShokanKetteiTsuchiShoMeisaiTempUpdateProcess extends BatchProcessBa
     @Override
     protected void process(ShokanKetteiTsuchiShoMeisaiTempTableEntity entity) {
         償還払支給不支給決定通知書明細情報一時TBL.update(entity);
-    }
-
-    @Override
-    protected void afterExecute() {
-        IShokanKetteiTsuchiShoIkkatsuSakuseiMapper mapper = getMapper(IShokanKetteiTsuchiShoIkkatsuSakuseiMapper.class);
-        for (ShokanKetteiTsuchiShoMeisaiTempTableEntity entity : mapper.get支店名称(FlexibleDate.getNowDate())) {
-            償還払支給不支給決定通知書明細情報一時TBL.update(entity);
-        }
-        for (ShokanKetteiTsuchiShoMeisaiTempTableEntity entity : mapper.get様式名称()) {
-            償還払支給不支給決定通知書明細情報一時TBL.update(entity);
-        }
-        for (ShokanKetteiTsuchiShoMeisaiTempTableEntity entity : mapper.getサービス種類()) {
-            償還払支給不支給決定通知書明細情報一時TBL.update(entity);
-        }
     }
 }

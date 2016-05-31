@@ -119,6 +119,7 @@ public class ShikakuFuseigoShuseiMain {
                     ShikakuFuseigoBusiness.class).get不整合理由コード();
             if (!不整合理由コード.equals(
                     ViewStateHolder.get(ViewStateKeys.資格不整合_不整合理由, FuseigoRiyu.class).getコード())) {
+                ViewStateHolder.put(ViewStateKeys.資格不整合_台帳状態, RString.EMPTY);
                 return ResponseData.of(div).addMessage(
                         DbzInformationMessages.不整合内容相違.getMessage().replace(
                                 FuseigoRiyu.toValue(不整合理由コード).get名称().toString(),
@@ -130,6 +131,7 @@ public class ShikakuFuseigoShuseiMain {
             return onLoad(div);
         }
         RString 台帳状態 = ViewStateHolder.get(ViewStateKeys.資格不整合_台帳状態, RString.class);
+        ViewStateHolder.put(ViewStateKeys.資格不整合_台帳状態, RString.EMPTY);
         if (台帳状態.equals(台帳状態_不整合あり)) {
             RString 台帳種別 = ViewStateHolder.get(ViewStateKeys.資格不整合_不整合修正中, ShikakuFuseigoBusiness.class).get台帳種別();
             getHandler(div).setMeisaiByDaichoType(台帳種別);

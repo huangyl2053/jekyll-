@@ -103,10 +103,12 @@
         INNER JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho"  AS  DbT5910NinteichosaItakusakiJoho  <!-- 認定調査委託先情報 -->
         ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
+        AND DbT5101NinteiShinseiJoho."ninteiChosaItakusakiCode" =  DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
         INNER JOIN
         rgdb."DbT5913ChosainJoho"  AS  DbT5913ChosainJoho     <!-- 調査員情報 -->
         ON  DbT5913ChosainJoho."shichosonCode" = DbT5910NinteichosaItakusakiJoho."shichosonCode"
-        AND  DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
+        AND DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
+        AND DbT5913ChosainJoho."ninteiChosainCode" = DbT5101NinteiShinseiJoho."ninteiChosainCode"
         INNER JOIN
         (
         SELECT

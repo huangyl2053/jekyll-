@@ -188,7 +188,9 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
      * @return trueの場合、随時です、falseの場合、随時ではありません
      */
     public boolean is随時期(Kitsuki 期月) {
-
+        if (期月 == null || 期月.get月処理区分() == null) {
+            return false;
+        }
         return 随時.equals(期月.get月処理区分().getName())
                 || 現年随時.equals(期月.get月処理区分().getName());
     }
@@ -664,7 +666,9 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     }
 
     private RString 随時期判断(Kitsuki 期月) {
-
+        if (期月 == null || 期月.get月処理区分() == null) {
+            return RString.EMPTY;
+        }
         return 随時.equals(期月.get月処理区分().getName())
                 || 現年随時.equals(期月.get月処理区分().getName()) ? 随時 : RString.EMPTY;
     }

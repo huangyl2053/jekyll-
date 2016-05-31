@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbb.service.core.karisanteiidofuka;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.karisanteiidofuka.BatchresultParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.karisanteiidofuka.KariSanteiIdoParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.karisanteiidofuka.TyouhyouResult;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.KarisanteiIdoFukaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2014TsuchishoUchiwakeJokenDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -57,7 +57,6 @@ public class KariSanteiIdoFuka {
     private static final RString 連帳 = new RString("1");
     private static final RString カット紙 = new RString("0");
     private static final RString 納入通知書 = new RString("納入通知書の帳票ID");
-    private static final RString 定値_DBB100014 = new RString(ReportIdDBB.DBB100014.getReportId().toString());
     private static final RString 定値_0 = new RString("0");
     private static final RString 表示しない = new RString("0");
     private static final RString 通常出力 = new RString("0");
@@ -150,7 +149,9 @@ public class KariSanteiIdoFuka {
             entityList = 処理日付管理Dac.select処理状況_異動賦課(調定年度);
         } else if (定値_1.equals(遷移元区分)) {
             dbt = 処理日付管理Dac.select処理状況_異動通知書作成(調定年度);
-            entityList.add(dbt);
+            if (dbt != null) {
+                entityList.add(dbt);
+            }
         }
         if (entityList == null || entityList.isEmpty()) {
             return new ArrayList<>();
@@ -224,7 +225,7 @@ public class KariSanteiIdoFuka {
             }
         } else if (保険料納入通知書_本算定_帳票分類ＩＤ.equals(帳票分類ID.value())) {
             TyouhyouEntity 納入通知書entity = get納入通知書_帳票ID(調定年度, 算定期, 帳票分類ID, 出力順ID);
-            if (定値_DBB100014.equals(帳票分類ID.value())
+            if (保険料納入通知書_本算定_帳票分類ＩＤ.equals(帳票分類ID.value())
                     && 納入通知書entity == null) {
                 throw new ApplicationException(UrErrorMessages.存在しない
                         .getMessage().replace(納入通知書.toString()).evaluate());
@@ -342,7 +343,7 @@ public class KariSanteiIdoFuka {
                 帳票ID = ReportIdDBB.DBB100019.getReportId();
             }
         } else if (定値_ブック.equals(納入通知書の型)) {
-            getブック帳票ID(調定年度, 帳票分類ID, 納通連帳区分);
+            帳票ID = getブック帳票ID(調定年度, 帳票分類ID, 納通連帳区分);
         } else if (定値_コンビニ収納.equals(納入通知書の型)) {
             帳票ID = getコンビニ収納帳票ID(調定年度, 帳票分類ID, 納通連帳区分);
         }
@@ -517,10 +518,10 @@ public class KariSanteiIdoFuka {
      * バッチ用パラメータ作成します。
      *
      * @param parameter parameter
-     * @return BatchresultParameter
+     * @return KarisanteiIdoFukaParameter
      */
-    public BatchresultParameter createKariSanteiIdoParameter(KariSanteiIdoParameter parameter) {
-        BatchresultParameter result = new BatchresultParameter();
+    public KarisanteiIdoFukaParameter createKariSanteiIdoParameter(KariSanteiIdoParameter parameter) {
+        KarisanteiIdoFukaParameter result = new KarisanteiIdoFukaParameter();
         result.set調定年度(parameter.get調定年度());
         result.set賦課年度(parameter.get賦課年度());
         result.set処理対象月(parameter.get処理対象());
@@ -580,17 +581,15 @@ public class KariSanteiIdoFuka {
             return 特徴同定未完了;
         }
         List<DbT7022ShoriDateKanriEntity> 依頼金額計算list = 処理日付管理Dac.get依頼金額計算(調定年度);
-        //TODO QA738を待つ.
-        FlexibleYear 基準日時1 = new FlexibleYear("20160305");
-        FlexibleYear 基準日時2 = new FlexibleYear("20160305");
-        //TODO END
-        if (基準日時1.isEmpty()) {
+        YMDHMS 基準日時1 = 特徴対象者同定list.get(0).getKijunTimestamp();
+        if (基準日時1 == null || 基準日時1.isEmpty()) {
             return 特徴同定未完了;
         }
         if (依頼金額計算list.isEmpty()) {
             return 計算未完了;
         } else {
-            if (基準日時2.isEmpty()) {
+            YMDHMS 基準日時2 = 依頼金額計算list.get(0).getKijunTimestamp();
+            if (基準日時2 == null || 基準日時2.isEmpty()) {
                 return 計算未完了;
             } else {
                 return 計算完了;

@@ -72,6 +72,9 @@ public class KihonInfo {
 
         ShikibetsuNoKanriResult shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShikibetsubangoKanri(サービス年月, 様式番号);
+        if (shikibetsuNoKanriEntity == null) {
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+        }
         getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity.getEntity(), サービス年月);
 
         return createResponse(div);

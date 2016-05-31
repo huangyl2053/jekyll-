@@ -74,6 +74,7 @@
         <result property="ninteiShinsakaiKanryoYMD" column="DbT5105_ninteiShinsakaiKanryoYMD"                  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="johoteikyoDoiFlag" column="DbT5101_johoteikyoDoiFlag" />
         <result property="ikenshoDoiFlag" column="DbT5302_ikenshoDoiFlag" />
+        <result property="shichosonCode" column="Dbt7051_shichosonCode"                                        typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     <select id="get認定履歴一覧" resultMap="resultMap_NinnteiRiriRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.yokaigoninteijohoteikyo.YokaigoNinteiJohoTeiParameter" fetchSize="500">
@@ -107,6 +108,7 @@
             , DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" AS DbT5501_shinsakaiKaisaiYoteiYMD
             , DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiYMD" AS DbT5511_shinsakaiKaisaiYMD
             , DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD"  AS DbT5105_ninteiShinsakaiKanryoYMD
+            , DbT7051KoseiShichosonMaster."shichosonCode" AS Dbt7051_shichosonCode
         FROM
             rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho 
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102NinteiKekkaJoho 

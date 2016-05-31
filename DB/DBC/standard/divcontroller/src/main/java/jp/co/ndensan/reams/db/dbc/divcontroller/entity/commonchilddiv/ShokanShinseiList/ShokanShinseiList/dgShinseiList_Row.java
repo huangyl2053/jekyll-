@@ -3,20 +3,19 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanShi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Apr 05 20:44:24 CST 2016
+ * Tue May 24 17:01:04 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 /**
- * dgShinseiList_Row のクラスファイル 。
+ * dgShinseiList_Row のクラスファイル
  *
  * @reamsid_L DBC-0960-010 hezhenzhen
- *
  */
 public class dgShinseiList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private RString hiHokenshaNo;
     private RString serviceTeikyoYM;
@@ -26,6 +25,8 @@ public class dgShinseiList_Row extends DataRow {
     private RString sofuYM;
     private RString ketteiYMD;
     private RString yoshikiNo;
+    private RString jigyoshaNo;
+    private RString meisaiNo;
 
     public dgShinseiList_Row() {
         super();
@@ -37,6 +38,8 @@ public class dgShinseiList_Row extends DataRow {
         this.sofuYM = RString.EMPTY;
         this.ketteiYMD = RString.EMPTY;
         this.yoshikiNo = RString.EMPTY;
+        this.jigyoshaNo = RString.EMPTY;
+        this.meisaiNo = RString.EMPTY;
         this.setOriginalData("hiHokenshaNo", hiHokenshaNo);
         this.setOriginalData("serviceTeikyoYM", serviceTeikyoYM);
         this.setOriginalData("shinseiYMD", shinseiYMD);
@@ -45,9 +48,11 @@ public class dgShinseiList_Row extends DataRow {
         this.setOriginalData("sofuYM", sofuYM);
         this.setOriginalData("ketteiYMD", ketteiYMD);
         this.setOriginalData("yoshikiNo", yoshikiNo);
+        this.setOriginalData("jigyoshaNo", jigyoshaNo);
+        this.setOriginalData("meisaiNo", meisaiNo);
     }
 
-    public dgShinseiList_Row(RString hiHokenshaNo, RString serviceTeikyoYM, RString shinseiYMD, RString seiriNo, RString rirekiNo, RString sofuYM, RString ketteiYMD, RString yoshikiNo) {
+    public dgShinseiList_Row(RString hiHokenshaNo, RString serviceTeikyoYM, RString shinseiYMD, RString seiriNo, RString rirekiNo, RString sofuYM, RString ketteiYMD, RString yoshikiNo, RString jigyoshaNo, RString meisaiNo) {
         super();
         this.setOriginalData("hiHokenshaNo", hiHokenshaNo);
         this.setOriginalData("serviceTeikyoYM", serviceTeikyoYM);
@@ -57,6 +62,8 @@ public class dgShinseiList_Row extends DataRow {
         this.setOriginalData("sofuYM", sofuYM);
         this.setOriginalData("ketteiYMD", ketteiYMD);
         this.setOriginalData("yoshikiNo", yoshikiNo);
+        this.setOriginalData("jigyoshaNo", jigyoshaNo);
+        this.setOriginalData("meisaiNo", meisaiNo);
         this.hiHokenshaNo = hiHokenshaNo;
         this.serviceTeikyoYM = serviceTeikyoYM;
         this.shinseiYMD = shinseiYMD;
@@ -65,6 +72,8 @@ public class dgShinseiList_Row extends DataRow {
         this.sofuYM = sofuYM;
         this.ketteiYMD = ketteiYMD;
         this.yoshikiNo = yoshikiNo;
+        this.jigyoshaNo = jigyoshaNo;
+        this.meisaiNo = meisaiNo;
     }
 
     public RString getHiHokenshaNo() {
@@ -97,6 +106,14 @@ public class dgShinseiList_Row extends DataRow {
 
     public RString getYoshikiNo() {
         return yoshikiNo;
+    }
+
+    public RString getJigyoshaNo() {
+        return jigyoshaNo;
+    }
+
+    public RString getMeisaiNo() {
+        return meisaiNo;
     }
 
     public void setHiHokenshaNo(RString hiHokenshaNo) {
@@ -137,6 +154,16 @@ public class dgShinseiList_Row extends DataRow {
     public void setYoshikiNo(RString yoshikiNo) {
         this.setOriginalData("yoshikiNo", yoshikiNo);
         this.yoshikiNo = yoshikiNo;
+    }
+
+    public void setJigyoshaNo(RString jigyoshaNo) {
+        this.setOriginalData("jigyoshaNo", jigyoshaNo);
+        this.jigyoshaNo = jigyoshaNo;
+    }
+
+    public void setMeisaiNo(RString meisaiNo) {
+        this.setOriginalData("meisaiNo", meisaiNo);
+        this.meisaiNo = meisaiNo;
     }
 
     // </editor-fold>

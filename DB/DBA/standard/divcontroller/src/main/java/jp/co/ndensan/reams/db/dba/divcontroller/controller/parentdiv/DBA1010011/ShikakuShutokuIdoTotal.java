@@ -95,7 +95,6 @@ public class ShikakuShutokuIdoTotal {
      * @return レスポンス
      */
     public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnUpdate(ShikakuShutokuIdoTotalDiv div) {
-        ResponseData<ShikakuShutokuIdoTotalDiv> response = new ResponseData<>();
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -109,8 +108,7 @@ public class ShikakuShutokuIdoTotal {
             div.getComplete().getCcdComplete().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(DBA1010011StateName.完了状態);
         }
-        response.data = div;
-        return response;
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -222,25 +220,23 @@ public class ShikakuShutokuIdoTotal {
             div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().setDataGridSelectItem(row);
         } else {
             Collections.sort(rowList, new ShikakuShutokuIdoTotal.ComparatorByDaNoSort());
-
             RString daNo = new RString("1");
             if (!rowList.isEmpty()) {
                 daNo = new RString(Integer.parseInt(rowList.get(rowList.size() - 1).getDaNo().trim().toString()) + 1);
             }
-
             row = new dgShikakuShutokuRireki_Row();
             row.setState(追加);
             row.setDaNo(daNo);
-            row.getShutokuDate().setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
-                    .getShikakuShutokuInput().getTxtShutokuDate().getValue());
-            row.getShutokuTodokedeDate().setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput()
-                    .getTxtShutokuTodokedeDate().getValue());
-            row.setShutokuJiyu(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
-                    .getShikakuShutokuInput().getDdlShikakuShutokuJiyu().getSelectedValue());
-            row.setShutokuJiyuKey(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
-                    .getShikakuShutokuInput().getDdlShikakuShutokuJiyu().getSelectedKey());
-            row.setHihokenshaNo(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
-                    .getShikakuShutokuInput().getTxtHihoNo().getValue());
+            row.getShutokuDate().setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                    getShikakuShutokuInput().getTxtShutokuDate().getValue());
+            row.getShutokuTodokedeDate().setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().
+                    getTxtShutokuTodokedeDate().getValue());
+            row.setShutokuJiyu(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                    getShikakuShutokuInput().getDdlShikakuShutokuJiyu().getSelectedValue());
+            row.setShutokuJiyuKey(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                    getShikakuShutokuInput().getDdlShikakuShutokuJiyu().getSelectedKey());
+            row.setHihokenshaNo(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                    getShikakuShutokuInput().getTxtHihoNo().getValue());
             rowList.add(row);
             div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().setDataGridDataSource(rowList);
         }
@@ -318,10 +314,11 @@ public class ShikakuShutokuIdoTotal {
             dgShikakuShutokuRireki_Row row0 = (dgShikakuShutokuRireki_Row) arg0;
             dgShikakuShutokuRireki_Row row1 = (dgShikakuShutokuRireki_Row) arg1;
 
-            if (ChangeStringToInt(row0.getShutokuDate().getValue().toString()) > ChangeStringToInt(row1.getShutokuDate().getValue().toString())) {
+            if (changeStringToInt(row0.getShutokuDate().getValue().toString()) > changeStringToInt(row1.getShutokuDate().getValue().toString())) {
                 return -1;
             } else {
-                if (ChangeStringToInt(row0.getShutokuDate().getValue().toString()) == ChangeStringToInt(row1.getShutokuDate().getValue().toString())) {
+                if (changeStringToInt(row0.getShutokuDate().getValue().toString()).compareTo(changeStringToInt(row1.
+                        getShutokuDate().getValue().toString())) == 0) {
                     return 0;
                 } else {
                     return 1;
@@ -329,10 +326,15 @@ public class ShikakuShutokuIdoTotal {
             }
         }
 
-        public int ChangeStringToInt(String str) {
-            return new Integer(str).intValue();
+        /**
+         * StringをIntegerに変更する。
+         *
+         * @param str String
+         * @return Integer Integer
+         */
+        public Integer changeStringToInt(String str) {
+            return Integer.valueOf(str);
         }
-
     }
 
     private enum ShikakuShutokuIdoTotalErrorMessage implements IValidationMessage {

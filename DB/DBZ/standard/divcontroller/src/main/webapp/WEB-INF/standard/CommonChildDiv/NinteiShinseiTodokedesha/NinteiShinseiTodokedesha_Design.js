@@ -8,6 +8,14 @@ var DBZ;
                 return "onChanged_ddlTodokedeDaikoKubun";
             };
 
+            Events.onOkClose_seitai = function () {
+                return "onOkClose_seitai";
+            };
+
+            Events.onOkClose_atenKensaku = function () {
+                return "onOkClose_atenKensaku";
+            };
+
             Events.onClick_btnZenkaiFukusha = function () {
                 return "onClick_btnZenkaiFukusha";
             };

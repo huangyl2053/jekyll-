@@ -10,12 +10,12 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHo
 import jp.co.ndensan.reams.db.dbc.service.core.shiharaihohojyoho.ShiharaiHohoJyohoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
-import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 支払方法情報のコントローラです。
@@ -146,35 +146,6 @@ public class ShiharaiHohoJyoho {
     }
 
     /**
-     * 「口座情報を登録する」ボタンをクリックします。
-     *
-     * @param div 支払方法情報
-     * @return ResponseData
-     */
-    public ResponseData onClick_btnKozaToroku(ShiharaiHohoJyohoDiv div) {
-        ResponseData<ShiharaiHohoJyohoDiv> response = new ResponseData<>();
-
-
-//        TODO 口座情報照会ダイアログ
-        response.data = div;
-        return response;
-    }
-
-    /**
-     * 口座情報照会ダイアログ。<br/>
-     *
-     * @param div ShiharaiHohoJyohoDiv
-     * @return ResponseData<ShiharaiHohoJyohoDiv>
-     */
-    public ResponseData<ShiharaiHohoJyohoDiv> onBeforeOpenDialog_koza(ShiharaiHohoJyohoDiv div) {
-
-        //        TODO QA:内部番号 928
-        div.setサブ業務コード(DataPassingConverter.serialize(div.getサブ業務コード()));
-        div.set識別コード(DataPassingConverter.serialize(div.get識別コード()));
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 「参考」ボタンをクリックします。
      *
      * @param div 支払方法情報
@@ -182,7 +153,25 @@ public class ShiharaiHohoJyoho {
      */
     public ResponseData onClick_btnKeiyakuNo(ShiharaiHohoJyohoDiv div) {
         ResponseData<ShiharaiHohoJyohoDiv> response = new ResponseData<>();
-//        TODO QA:内部番号 928
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * 口座IDドロップダウンリスト再設定。
+     *
+     * @param div 支払方法情報
+     * @return ResponseData
+     */
+    public ResponseData<ShiharaiHohoJyohoDiv> onOkClose_ddlKozaID(ShiharaiHohoJyohoDiv div) {
+
+        ResponseData<ShiharaiHohoJyohoDiv> response = new ResponseData<>();
+        KamokuCode 業務内区分コード = KamokuCode.EMPTY;
+        業務内区分コード = getHandler(div).get業務内区分コード(業務内区分コード);
+        SikyuSinseiJyohoParameter parameter = ViewStateHolder.
+                get(ViewStateKeys.支給申請情報パラメータ, SikyuSinseiJyohoParameter.class);
+        getHandler(div).set口座ID(parameter, 業務内区分コード);
+        div.getDdlKozaID().setSelectedKey(RString.EMPTY);
         response.data = div;
         return response;
     }
@@ -199,11 +188,11 @@ public class ShiharaiHohoJyoho {
         SikyuSinseiJyohoParameter 支給申請情報 = ViewStateHolder.get(ViewStateKeys.支給申請情報パラメータ, SikyuSinseiJyohoParameter.class);
         JuryoininKeiyakuJigyosha 受領委任契約事業者 = ShiharaiHohoJyohoFinder.createInstance().
                 getKeiyakuJigyosya(new KeiyakushaParameter(null, null, null, null).
-                        createParam(new HihokenshaNo(div.getTxtKeiyakuNo().getValue()),
+                        createParam(支給申請情報.getHihokenshaNo() == null ? HihokenshaNo.EMPTY : new HihokenshaNo(支給申請情報.getHihokenshaNo().value()),
                                 支給申請情報.getShikyushinseiServiceYM() == null ? FlexibleYearMonth.EMPTY : 支給申請情報.getShikyushinseiServiceYM(),
                                 支給申請情報.getShikyushinseiSeiriNo() == null ? RString.EMPTY : 支給申請情報.getShikyushinseiSeiriNo(),
-                                支給申請情報.getKeiyakuNo() == null ? RString.EMPTY : 支給申請情報.getKeiyakuNo()));
-        getHandler(div).受領委任払いエリアの初期化(支給申請情報, 受領委任契約事業者);
+                                div.getTxtKeiyakuNo() == null ? RString.EMPTY : div.getTxtKeiyakuNo().getValue()));
+        getHandler(div).受領委任払いエリアの初期化(支給申請情報, 受領委任契約事業者, RString.EMPTY);
         response.data = div;
         return response;
     }

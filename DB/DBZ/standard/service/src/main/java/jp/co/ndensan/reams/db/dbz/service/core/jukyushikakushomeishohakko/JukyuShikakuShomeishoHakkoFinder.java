@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbz.service.core.jukyushikakushomeishohakko;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.business.core.jukyushikakushomeishohakko.JukyuShikakuShomeishoModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
@@ -217,8 +217,6 @@ public class JukyuShikakuShomeishoHakkoFinder {
                 .getNinTeiChouSaJou(JukyuShikakuShomeishoHakkoParameter.
                         createSelectBy申請書管理番号(ninTeiShinSeiChuDataEntity.getShinseishoKanriNo()));
         RStringBuilder workBiko = new RStringBuilder(RString.EMPTY);
-        // TODO 汪坤 QA38 DBD.Enum受給申請事由とDBD.Enum受給資格証明書申請種類文言のクラスが未提供ですので、
-        // とりあえず全てJuKyuShinSeiZiYuで仮定義しています
         RString jukyuShinseiJiyu = ninTeiShinSeiChuDataEntity.getJukyuShinseiJiyu();
         if (JuKyuShinSeiZiYu.初回申請.getCode().equals(jukyuShinseiJiyu)
                 || JuKyuShinSeiZiYu.再申請_有効期限外.getCode().equals(jukyuShinseiJiyu)
@@ -334,9 +332,9 @@ public class JukyuShikakuShomeishoHakkoFinder {
         Map<Integer, RString> 通知文List = ReportUtil.get通知文(SubGyomuCode.DBA介護資格, new ReportId("DBA100004_JukyuShikakuShomeisho"),
                 KamokuCode.EMPTY, 1);
         RStringBuilder sb = new RStringBuilder();
-        Set<Integer> keySet = 通知文List.keySet();
-        for (Integer index : keySet) {
-            sb.append(通知文List.get(index));
+        Iterator<Map.Entry<Integer, RString>> keySet = 通知文List.entrySet().iterator();
+        while (keySet.hasNext()) {
+            sb.append(keySet.next().getValue());
         }
         return sb.toRString();
     }

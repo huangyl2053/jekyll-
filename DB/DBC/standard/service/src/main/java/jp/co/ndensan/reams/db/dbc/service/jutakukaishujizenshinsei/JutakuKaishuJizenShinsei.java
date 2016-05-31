@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengaku
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4014RiyoshaFutangakuGengakuDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -46,7 +47,6 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntit
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -424,7 +424,7 @@ public class JutakuKaishuJizenShinsei {
         if (entityList == null || entityList.isEmpty()) {
             return null;
         }
-        if (entityList.get(0).getKoikinaiTokureiSochimotoShichosonCode() != null) {
+        if (nullTOEmpty(entityList.get(0).getKoikinaiTokureiSochimotoShichosonCode()) != null) {
             市町村コード = entityList.get(0).getKoikinaiTokureiSochimotoShichosonCode();
         } else {
             市町村コード = entityList.get(0).getShichosonCode();
@@ -601,5 +601,18 @@ public class JutakuKaishuJizenShinsei {
             return RString.EMPTY;
         }
         return entity.getServiceShuruiMeisho();
+    }
+
+    /**
+     * 空値判断
+     *
+     * @param 項目 LasdecCode
+     * @return LasdecCode 項目
+     */
+    private LasdecCode nullTOEmpty(LasdecCode 項目) {
+        if (項目 == null || 項目.isEmpty()) {
+            return null;
+        }
+        return 項目;
     }
 }

@@ -11,28 +11,30 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum NinteiShinseiHoreiCode {
 
     /**
-     * コード:1 名称:新規申請 略称:定義なし
+     * コード:1 名称:新規申請 略称:新規
      */
-    新規申請("1", "新規申請"),
+    新規申請("1", "新規申請", "新規"),
     /**
-     * コード:2 名称:更新申請 略称:定義なし
+     * コード:2 名称:更新申請 略称:更新
      */
-    更新申請("2", "更新申請"),
+    更新申請("2", "更新申請", "更新"),
     /**
-     * コード:3 名称:区分変更申請 略称:定義なし
+     * コード:3 名称:区分変更申請 略称:区変
      */
-    区分変更申請("3", "区分変更申請"),
+    区分変更申請("3", "区分変更申請", "区変"),
     /**
-     * コード:4 名称:職権 略称:定義なし
+     * コード:4 名称:職権 略称:職権
      */
-    職権("4", "職権");
+    職権("4", "職権", "職権");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private NinteiShinseiHoreiCode(String code, String fullname) {
+    private NinteiShinseiHoreiCode(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -51,6 +53,15 @@ public enum NinteiShinseiHoreiCode {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 申請区分（法令）コードの略称を返します。
+     *
+     * @return 申請区分（法令）コードの略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

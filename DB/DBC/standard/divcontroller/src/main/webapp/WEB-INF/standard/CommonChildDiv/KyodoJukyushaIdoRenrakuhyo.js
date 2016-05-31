@@ -36,22 +36,28 @@ var DBC;
                     this.controls.ddlJukyushaIdoJiyu().readOnly = false;
                     this.controls.KyodoJukyushaIdoRenrakuhyoTeisei().visible = false;
 
-                    this.controls.chkKihonSofu().visible = true;
-                    this.controls.chkKihonSofu().readOnly = false;
+                    this.controls.chkKihonSofuAdd().visible = true;
+                    this.controls.chkKihonSofuAdd().readOnly = false;
+                    this.controls.chkKihonSofuDelete().visible = false;
+                    this.controls.chkKihonSofuDelete().readOnly = false;
 
                     this.controls.KyodoJukyushaIdoRenrakuhyoShokanPanel().readOnly = false;
                     this.controls.txtKihonIdoYMD().readOnly = false;
                     this.controls.txtRirekiNo().readOnly = true;
 
-                    this.controls.chkShokanSofu().visible = true;
-                    this.controls.chkShokanSofu().readOnly = false;
+                    this.controls.chkShokanSofuAdd().visible = true;
+                    this.controls.chkShokanSofuAdd().readOnly = false;
+                    this.controls.chkShokanSofuDelete().visible = false;
+                    this.controls.chkShokanSofuDelete().readOnly = false;
 
                     this.controls.KyodoJukyushaIdoRenrakuhyoShokanPanel().readOnly = false;
                     this.controls.txtShokanIdoYMD().readOnly = false;
                     this.controls.txtShokanRirekiNo().readOnly = true;
 
-                    this.controls.chkKogakuSofu().visible = true;
-                    this.controls.chkKogakuSofu().readOnly = false;
+                    this.controls.chkKogakuSofuAdd().visible = true;
+                    this.controls.chkKogakuSofuAdd().readOnly = false;
+                    this.controls.chkKogakuSofuDelete().visible = false;
+                    this.controls.chkKogakuSofuDelete().readOnly = false;
 
                     this.controls.KyodoJukyushaIdoRenrakuhyoKogakuPanel().readOnly = false;
                     this.controls.txtKogakuIdoYMD().readOnly = false;
@@ -68,22 +74,28 @@ var DBC;
                     this.controls.ddlJukyushaIdoJiyu().readOnly = false;
                     this.controls.KyodoJukyushaIdoRenrakuhyoTeisei().visible = true;
 
-                    this.controls.chkKihonSofu().visible = true;
-                    this.controls.chkKihonSofu().readOnly = false;
+                    this.controls.chkKihonSofuAdd().visible = true;
+                    this.controls.chkKihonSofuAdd().readOnly = false;
+                    this.controls.chkKihonSofuDelete().visible = true;
+                    this.controls.chkKihonSofuDelete().readOnly = false;
 
                     this.controls.KyodoJukyushaIdoRenrakuhyoShokanPanel().readOnly = false;
                     this.controls.txtKihonIdoYMD().readOnly = true;
                     this.controls.txtRirekiNo().readOnly = true;
 
-                    this.controls.chkShokanSofu().visible = true;
-                    this.controls.chkShokanSofu().readOnly = false;
+                    this.controls.chkShokanSofuAdd().visible = true;
+                    this.controls.chkShokanSofuAdd().readOnly = false;
+                    this.controls.chkShokanSofuDelete().visible = true;
+                    this.controls.chkShokanSofuDelete().readOnly = false;
 
                     this.controls.KyodoJukyushaIdoRenrakuhyoShokanPanel().readOnly = false;
                     this.controls.txtShokanIdoYMD().readOnly = true;
                     this.controls.txtShokanRirekiNo().readOnly = true;
 
-                    this.controls.chkKogakuSofu().visible = true;
-                    this.controls.chkKogakuSofu().readOnly = false;
+                    this.controls.chkKogakuSofuAdd().visible = true;
+                    this.controls.chkKogakuSofuAdd().readOnly = false;
+                    this.controls.chkKogakuSofuDelete().visible = true;
+                    this.controls.chkKogakuSofuDelete().readOnly = false;
 
                     this.controls.KyodoJukyushaIdoRenrakuhyoKogakuPanel().readOnly = false;
                     this.controls.txtKogakuIdoYMD().readOnly = true;
@@ -93,21 +105,27 @@ var DBC;
                 DisplayMode.prototype.sakujyo = function () {
                     this.controls.KyodoJukyushaIdoRenrakuhyo().disabled = true;
 
-                    this.controls.chkKihonSofu().visible = false;
+                    this.controls.chkKihonSofuAdd().visible = false;
+                    this.controls.chkKihonSofuDelete().visible = false;
 
-                    this.controls.chkShokanSofu().visible = false;
+                    this.controls.chkShokanSofuAdd().visible = false;
+                    this.controls.chkShokanSofuDelete().visible = false;
 
-                    this.controls.chkKogakuSofu().visible = false;
+                    this.controls.chkKogakuSofuAdd().visible = false;
+                    this.controls.chkKogakuSofuDelete().visible = false;
                 };
 
                 DisplayMode.prototype.shokai = function () {
                     this.controls.KyodoJukyushaIdoRenrakuhyo().disabled = true;
 
-                    this.controls.chkKihonSofu().visible = false;
+                    this.controls.chkKihonSofuAdd().visible = false;
+                    this.controls.chkKihonSofuDelete().visible = false;
 
-                    this.controls.chkShokanSofu().visible = false;
+                    this.controls.chkShokanSofuAdd().visible = false;
+                    this.controls.chkShokanSofuDelete().visible = false;
 
-                    this.controls.chkKogakuSofu().visible = false;
+                    this.controls.chkKogakuSofuAdd().visible = false;
+                    this.controls.chkKogakuSofuDelete().visible = false;
                 };
                 return DisplayMode;
             })();

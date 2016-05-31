@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbb.entity.report.honsanteikekkaicihiran;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票「本算定賦課計算」の項目を定義するクラスです。
@@ -79,6 +81,7 @@ public class HonsanteiKekkaIcihiranReportSource implements IReportSource {
     public RString listUpper_4;
     @ReportItem(name = "listUpper_5", length = 15, order = 31)
     public RString listUpper_5;
+    @ReportPerson(id = "X")
     @ReportItem(name = "listUpper_6", length = 15, order = 32)
     public RString listUpper_6;
     @ReportItem(name = "listUpper_7", length = 11, order = 33)
@@ -89,6 +92,7 @@ public class HonsanteiKekkaIcihiranReportSource implements IReportSource {
     public RString listUpper_9;
     @ReportItem(name = "listUpper_10", length = 38, order = 36)
     public RString listUpper_10;
+    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "listCenter_1", length = 10, order = 37)
     public RString listCenter_1;
     @ReportItem(name = "listCenter_2", length = 9, order = 38)
@@ -176,4 +180,85 @@ public class HonsanteiKekkaIcihiranReportSource implements IReportSource {
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+    /**
+     * ReportSourceFields
+     */
+    public enum ReportSourceFields {
+
+        printTimeStamp,
+        nendo,
+        hokenshaNohokenshaName,
+        shutsuryokujun1,
+        shutsuryokujun2,
+        shutsuryokujun3,
+        shutsuryokujun4,
+        shutsuryokujun5,
+        kaipage1,
+        kaipage2,
+        kaipage3,
+        kaipage4,
+        kaipage5,
+        fuchoKi1,
+        fuchoKi2,
+        fuchoKi3,
+        fuchoKi4,
+        fuchoKi5,
+        fuchoKi6,
+        fuchoKi7,
+        fuchoKi8,
+        fuchoKi9,
+        fuchoKi10,
+        fuchoKi11,
+        fuchoKi12,
+        listUpper_1,
+        listUpper_2,
+        listUpper_3,
+        listUpper_4,
+        listUpper_5,
+        listUpper_6,
+        listUpper_7,
+        listUpper_8,
+        listUpper_9,
+        listUpper_10,
+        listCenter_1,
+        listCenter_2,
+        listCenter_3,
+        listCenter_4,
+        listCenter_5,
+        listCenter_6,
+        listCenter_7,
+        listCenter_8,
+        listCenter_9,
+        listCenter_10,
+        listCenter_11,
+        listCenter_12,
+        listCenter_13,
+        listCenter_14,
+        listCenter_15,
+        listCenter_16,
+        listCenter_17,
+        listCenter_18,
+        listCenter_19,
+        listCenter_20,
+        listCenter_21,
+        listLower_1,
+        listLower_2,
+        listLower_3,
+        listLower_4,
+        listLower_5,
+        listLower_6,
+        listLower_7,
+        listLower_8,
+        listLower_9,
+        listLower_10,
+        listLower_11,
+        listLower_12,
+        listLower_13,
+        listLower_14,
+        listLower_15,
+        listLower_16,
+        listLower_17,
+        listLower_18,
+        listLower_19,
+    }
 }

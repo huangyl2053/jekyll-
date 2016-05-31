@@ -90,9 +90,11 @@ public final class PnlTotalRegisterHandler {
         ViewStateHolder.put(ViewStateKeys.受領委任契約事業者詳細データ, recode);
 
         div.getPnlKeyakuJigyosya().getTxtJigyosyakeiyakuNo().setValue(recode.get契約事業者番号());
-        RDate 開始年月日RDate = new RDate(recode.get開始年月日().toString());
+        RDate 開始年月日RDate = RDate.canConvert(new RString(recode.get開始年月日().toString()))
+                ? new RDate(recode.get開始年月日().toString()) : null;
         div.getPnlKeyakuJigyosya().getTxtKeyakubi().setFromValue(開始年月日RDate);
-        RDate 終了年月日RDate = new RDate(recode.get終了年月日().toString());
+        RDate 終了年月日RDate = RDate.canConvert(new RString(recode.get終了年月日().toString()))
+                ? new RDate(recode.get終了年月日().toString()) : null;
         div.getPnlKeyakuJigyosya().getTxtKeyakubi().setToValue(終了年月日RDate);
 
         List<KeyValueDataSource> keiyakuSyuruList = new ArrayList<>();

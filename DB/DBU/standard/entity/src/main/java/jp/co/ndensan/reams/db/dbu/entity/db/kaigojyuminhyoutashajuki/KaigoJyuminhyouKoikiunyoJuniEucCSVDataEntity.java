@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki;
 
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.IKaigoJuminhyoEucCsvEntity;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -36,13 +37,13 @@ public class KaigoJyuminhyouKoikiunyoJuniEucCSVDataEntity implements IKaigoJumin
     @CsvField(order = 80, name = "識別コード")
     private final RString 識別コード;
     @CsvField(order = 90, name = "資格取得日")
-    private final RString 資格取得日;
+    private final FlexibleDate 資格取得日;
     @CsvField(order = 100, name = "資格喪失日")
-    private final RString 資格喪失日;
+    private final FlexibleDate 資格喪失日;
     @CsvField(order = 110, name = "受給認定年月日")
-    private final RString 受給認定年月日;
+    private final FlexibleDate 受給認定年月日;
     @CsvField(order = 120, name = "受給認定取消年月日")
-    private final RString 受給認定取消年月日;
+    private final FlexibleDate 受給認定取消年月日;
     @CsvField(order = 130, name = "資格区分")
     private final RString 資格区分;
     @CsvField(order = 140, name = "受給者区分")
@@ -81,10 +82,10 @@ public class KaigoJyuminhyouKoikiunyoJuniEucCSVDataEntity implements IKaigoJumin
             RString ＦＩＬＬＥＲ1,
             RString 被保険者番号,
             RString 識別コード,
-            RString 資格取得日,
-            RString 資格喪失日,
-            RString 受給認定年月日,
-            RString 受給認定取消年月日,
+            FlexibleDate 資格取得日,
+            FlexibleDate 資格喪失日,
+            FlexibleDate 受給認定年月日,
+            FlexibleDate 受給認定取消年月日,
             RString 資格区分,
             RString 受給者区分,
             RString 更新日時,

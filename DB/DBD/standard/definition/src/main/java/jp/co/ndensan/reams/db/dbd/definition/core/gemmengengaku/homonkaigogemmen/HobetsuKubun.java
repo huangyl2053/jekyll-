@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 法別区分を表す列挙型です。
  *
  * @reamsid_L DBD-9999-023 wangjie2
@@ -19,7 +18,7 @@ public enum HobetsuKubun {
     /**
      * コード:56 名称:施行時ホームヘルプ 略称:定義なし
      */
-    施行時ホームヘルプ("56", "以下"),
+    施行時ホームヘルプ("56", "施行時ホームヘルプ"),
     /**
      * コード:57 名称:障害時ホームヘルプ 略称:定義なし
      */
@@ -28,6 +27,7 @@ public enum HobetsuKubun {
      * コード:58 名称:障害ヘルプ全額免除 略称:定義なし
      */
     障害ヘルプ全額免除("58", "障害ヘルプ全額免除");
+
     private final RString code;
     private final RString fullName;
 

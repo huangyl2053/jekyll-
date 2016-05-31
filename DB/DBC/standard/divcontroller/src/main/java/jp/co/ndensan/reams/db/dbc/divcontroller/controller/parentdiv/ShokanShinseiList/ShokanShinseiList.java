@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanShin
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.shokanshinseilisthandler.ShokanShinseiHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanshinseiichiran.ShokanShinseiIchiranManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -284,7 +285,8 @@ public class ShokanShinseiList {
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_様式番号, dgShinseiList.getYoshikiNo());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_決定日, dgShinseiList.getKetteiYMD());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_申請日, dgShinseiList.getShinseiYMD());
-
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_事業者番号, new JigyoshaNo(dgShinseiList.getJigyoshaNo()));
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_明細番号, dgShinseiList.getMeisaiNo());
     }
 
     private void get修正ボタンcheck(ShokanShinseiListDiv requestDiv) {

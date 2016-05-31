@@ -92,7 +92,10 @@ public class PanelnlTotal {
      * @return ResponseData<PanelnlTotalDiv>
      */
     public ResponseData<PanelnlTotalDiv> onClick_btnJikou(PanelnlTotalDiv div) {
-
+        ValidationMessageControlPairs validationMessageControlPairs = createHandler(div).validateCheck();
+        if (validationMessageControlPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -100,10 +103,7 @@ public class PanelnlTotal {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs validationMessageControlPairs = createHandler(div).validateCheck();
-            if (validationMessageControlPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
-            }
+            return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -115,7 +115,7 @@ public class PanelnlTotal {
      * @return ResponseData<PanelnlTotalDiv>
      */
     public ResponseData<ShoukanBaraiSuuchiShoIkatsuBatchParamter> onClick_batch(PanelnlTotalDiv div) {
-        ShoukanBaraiSuuchiShoIkatsuBatchParamter parameter = createHandler(div).onClick_btnJikou();
+        ShoukanBaraiSuuchiShoIkatsuBatchParamter parameter = createHandler(div).onClick_btnJikouBatch();
         return ResponseData.of(parameter).respond();
     }
 

@@ -15,7 +15,7 @@ import lombok.Setter;
 /**
  * 要介護認定事業状況報告の情報です。
  *
- * @reamsid_L DBE-1450-020 wangxiaodong
+ * @reamsid_L DBE-1450-020 wangxiaodong
  */
 @Getter
 @Setter

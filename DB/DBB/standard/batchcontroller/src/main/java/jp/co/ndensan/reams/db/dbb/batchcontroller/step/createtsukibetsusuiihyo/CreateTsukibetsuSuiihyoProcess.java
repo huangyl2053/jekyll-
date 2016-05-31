@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.Hihok
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
@@ -51,8 +51,13 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<HihokenshaD
     private static final RString 一月 = new RString("01");
     private static final RString 二月 = new RString("02");
     private static final RString 三月 = new RString("03");
+    private static final int INT_3 = 3;
+    private static final int INT_4 = 4;
+    private static final int INT_5 = 5;
+    private static final int INT_6 = 6;
     private static final RString TABLE_資格状況一時テーブル = new RString("TmpSikakuJyoukyou_Ichi");
     private static final RString TABLE_介護情報一時テーブル = new RString("TmpKayigoJyoho_Ichi");
+    private static final RString TABLE_減免介護情報一時テーブル = new RString("TmpGemmenKayigoJyoho_Ichi");
     private List<HihokenshaDaichoPsm> hihokenshaDaichoPsmList;
     private CreateTsukibetsuSuiihyoProcessParameter processPrm;
     private CreateTsukibetsuSuiihyoMyBatisParameter mybatisPrm;
@@ -62,13 +67,7 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<HihokenshaD
     @BatchWriter
     BatchEntityCreatedTempTableWriter 介護情報一時テーブル;
     @BatchWriter
-    BatchEntityCreatedTempTableWriter 減免情報一時テーブル;
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter 項目小計一時テーブル;
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter 項目合計一時テーブル;
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter 合計部分項目一時テーブル;
+    BatchEntityCreatedTempTableWriter 減免介護情報一時テーブル;
 
     @Override
     protected void initialize() {
@@ -97,6 +96,8 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<HihokenshaD
         資格状況一時テーブル = new BatchEntityCreatedTempTableWriter(TABLE_資格状況一時テーブル,
                 HihokenshaDaichoPsm.class);
         介護情報一時テーブル = new BatchEntityCreatedTempTableWriter(TABLE_介護情報一時テーブル,
+                GennendoDate.class);
+        減免介護情報一時テーブル = new BatchEntityCreatedTempTableWriter(TABLE_減免介護情報一時テーブル,
                 GennendoDate.class);
     }
 
@@ -171,8 +172,24 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<HihokenshaD
             itsukiList = fuchoKiUtil.get期月リスト().get期の月(gennendoDate.getKi());
         }
         if (特別徴収.equals(gennendoDate.getChoshuHouhou())) {
-            TokuchoKiUtil tokuchoKiUtil = new TokuchoKiUtil();
-            itsukiList = tokuchoKiUtil.get期月リスト().get期の月(gennendoDate.getKi());
+            if (gennendoDate.getKi() == 1) {
+                return Tsuki._4月.getコード();
+            }
+            if (gennendoDate.getKi() == 2) {
+                return Tsuki._6月.getコード();
+            }
+            if (gennendoDate.getKi() == INT_3) {
+                return Tsuki._8月.getコード();
+            }
+            if (gennendoDate.getKi() == INT_4) {
+                return Tsuki._10月.getコード();
+            }
+            if (gennendoDate.getKi() == INT_5) {
+                return Tsuki._12月.getコード();
+            }
+            if (gennendoDate.getKi() == INT_6) {
+                return Tsuki._2月.getコード();
+            }
         }
         return itsukiList.get(0).get月().getコード();
     }
@@ -203,7 +220,7 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<HihokenshaD
                 .create_過年度のデータの取得(mybatisPrm.getChoteiNendo(), mybatisPrm.getChoteiKijunNichiji());
         List<GennendoDate> list = iCreateTsukibetsuSuiihyoMapper.get減免部分のデータの取得(parameter);
         for (GennendoDate gennendoDate : list) {
-            介護情報一時テーブル.insert(gennendoDate);
+            減免介護情報一時テーブル.insert(gennendoDate);
         }
     }
 }

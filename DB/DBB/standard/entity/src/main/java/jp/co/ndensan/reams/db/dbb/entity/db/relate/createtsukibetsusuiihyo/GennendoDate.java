@@ -36,7 +36,7 @@ public class GennendoDate extends DbTableEntityBase<GennendoDate> implements IDb
     private RString choshuHouhou;
     private int ki;
     private RString getu;
-    private RString choteiId;
+    private Decimal choteiId;
     private Decimal choteigaku;
     private boolean dankaiFumeyiFlg;
 

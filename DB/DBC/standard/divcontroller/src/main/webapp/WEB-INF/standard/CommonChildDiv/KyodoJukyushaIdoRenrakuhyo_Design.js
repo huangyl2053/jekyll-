@@ -72,8 +72,12 @@ var DBC;
                 return new UZA.HorizontalLine(this.convFiledName("lin2"));
             };
 
-            Controls.prototype.chkKihonSofu = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkKihonSofu"));
+            Controls.prototype.chkKihonSofuAdd = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkKihonSofuAdd"));
+            };
+
+            Controls.prototype.chkKihonSofuDelete = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkKihonSofuDelete"));
             };
 
             Controls.prototype.KyodoJukyushaIdoRenrakuhyoKihonPanel = function () {
@@ -116,8 +120,12 @@ var DBC;
                 return new UZA.TextBoxKana(this.convFiledName("txtAddressKana"));
             };
 
-            Controls.prototype.chkShokanSofu = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkShokanSofu"));
+            Controls.prototype.chkShokanSofuAdd = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkShokanSofuAdd"));
+            };
+
+            Controls.prototype.chkShokanSofuDelete = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkShokanSofuDelete"));
             };
 
             Controls.prototype.KyodoJukyushaIdoRenrakuhyoShokanPanel = function () {
@@ -148,8 +156,12 @@ var DBC;
                 return new UZA.TextBoxNum(this.convFiledName("txtHokenkyufuIchijiSashitomeKingaku"));
             };
 
-            Controls.prototype.chkKogakuSofu = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkKogakuSofu"));
+            Controls.prototype.chkKogakuSofuAdd = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkKogakuSofuAdd"));
+            };
+
+            Controls.prototype.chkKogakuSofuDelete = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkKogakuSofuDelete"));
             };
 
             Controls.prototype.KyodoJukyushaIdoRenrakuhyoKogakuPanel = function () {

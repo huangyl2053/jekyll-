@@ -158,7 +158,7 @@ public class ServiceKeikakuHiPanelHandler {
      * 追加するボタン Handler処理
      */
     public void click追加() {
-        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setIsOpen(true);
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(false);
         setサービス計画費共通エリア(null);
         clickクリア();
     }
@@ -169,7 +169,7 @@ public class ServiceKeikakuHiPanelHandler {
      * @param row dgdYichiran_Row
      */
     public void click修正(dgdYichiran_Row row) {
-        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setIsOpen(true);
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(false);
         setサービス計画費共通エリア(null);
         clickクリア();
         setサービス計画費共通エリアdown(row);
@@ -182,7 +182,7 @@ public class ServiceKeikakuHiPanelHandler {
      * @param row dgdYichiran_Row
      */
     public void click削除(dgdYichiran_Row row) {
-        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setIsOpen(true);
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(false);
         setサービス計画費共通エリア(null);
         clickクリア();
         setサービス計画費共通エリアdown(row);
@@ -640,6 +640,9 @@ public class ServiceKeikakuHiPanelHandler {
 
     private int max連番(List<ShokanServicePlan200904Result> entity200904List) {
         int max連番 = 0;
+        if (entity200904List == null) {
+            return max連番;
+        }
         for (ShokanServicePlan200904Result entity200904 : entity200904List) {
             if (max連番 < Integer.valueOf(entity200904.getEntity().get連番().toString())) {
                 max連番 = Integer.valueOf(entity200904.getEntity().get連番().toString());

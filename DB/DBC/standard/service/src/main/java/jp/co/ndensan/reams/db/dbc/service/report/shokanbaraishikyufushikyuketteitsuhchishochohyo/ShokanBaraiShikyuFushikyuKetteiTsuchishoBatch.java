@@ -150,8 +150,11 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
             if (kyufuShu.length() <= 文字数_38) {
                 item.setKyufuShu1(kyufuShu);
             } else if (kyufuShu.length() <= 文字数_76) {
+                item.setKyufuShu1(kyufuShu.substring(ZERO, 文字数_38));
                 item.setKyufuShu2(kyufuShu.substring(文字数_38));
             } else {
+                item.setKyufuShu1(kyufuShu.substring(ZERO, 文字数_38));
+                item.setKyufuShu2(kyufuShu.substring(文字数_38, 文字数_76));
                 item.setKyufuShu3(kyufuShu.substring(文字数_76));
             }
             item = create帳票ソースデータ(item, ninshoshaSource, shiharai, batchPram, atesakiSource);
@@ -168,11 +171,14 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
     }
 
     private RString set種類(RString kyufuShu, RString 種類) {
-
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(kyufuShu);
-        builder.append(カンマ);
-        builder.append(種類);
+        if (RString.isNullOrEmpty(kyufuShu)) {
+            return 種類;
+        }
+        RStringBuilder builder = new RStringBuilder(kyufuShu);
+        if (!RString.isNullOrEmpty(種類)) {
+            builder.append(カンマ);
+            builder.append(種類);
+        }
         return builder.toRString();
     }
 
