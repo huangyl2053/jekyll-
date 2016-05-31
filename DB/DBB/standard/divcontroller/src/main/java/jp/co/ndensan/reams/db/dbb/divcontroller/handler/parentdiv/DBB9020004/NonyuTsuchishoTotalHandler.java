@@ -43,7 +43,7 @@ public final class NonyuTsuchishoTotalHandler {
     private static final RString 帳票分類ID = new RString("保険料納入通知書（本算定）");
     private static final RString 仮算定_帳票分類ID = new RString("保険料納入通知書（仮算定）");
     private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
-    private static final RString キー_項目名 = new RString("項目名");
+    private static final RString キー_出力部数 = new RString("出力部数");
     private static final RString キー_速報取込区分 = new RString("速報取込区分");
     private static final RString キー_単票発行_出力方式 = new RString("単票発行_出力方式");
     private static final RString キー_単票発行_出力形式 = new RString("単票発行_出力形式");
@@ -342,14 +342,14 @@ public final class NonyuTsuchishoTotalHandler {
 
     private void 宛先住所コード出力順初期化(ChohyoSeigyoHanyoManager manager) {
         ChohyoSeigyoHanyo 帳票制御汎用_項目名 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
-                new ReportId(帳票分類ID), 管理年度, キー_項目名);
+                new ReportId(帳票分類ID), 管理年度, キー_出力部数);
         div.getNotsuInfo().getTxtHakkoBusu().setValue(RString.EMPTY);
         if (帳票制御汎用_項目名 != null) {
             div.getNotsuInfo().getTxtHakkoBusu().setValue(帳票制御汎用_項目名.get設定値());
         }
         ChohyoSeigyoHanyo 帳票制御汎用_速報取込区分 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
                 new ReportId(帳票分類ID), 管理年度, キー_速報取込区分);
-        div.getNotsuInfo().getRadSokuhoTorikomiKubun().setSelectedKey(SokuhoTorikomiKubun.取り込まない.getコード());
+//        div.getNotsuInfo().getRadSokuhoTorikomiKubun().setSelectedKey(SokuhoTorikomiKubun.取り込まない.getコード());
         if (帳票制御汎用_速報取込区分 != null) {
             div.getNotsuInfo().getRadSokuhoTorikomiKubun().setSelectedKey(帳票制御汎用_速報取込区分.get設定値());
         }
@@ -518,7 +518,7 @@ public final class NonyuTsuchishoTotalHandler {
     private void 宛先住所コード出力順等リスト作成(ChohyoSeigyoHanyoManager manager,
             List<ChohyoSeigyoHanyo> 帳票制御汎用リスト) {
         ChohyoSeigyoHanyo 帳票制御汎用_項目名 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
-                new ReportId(帳票分類ID), 管理年度, キー_項目名);
+                new ReportId(帳票分類ID), 管理年度, キー_出力部数);
         帳票制御汎用リスト.add(帳票制御汎用_項目名.createBuilderForEdit().set設定値(
                 div.getNotsuInfo().getTxtHakkoBusu().getValue()).build());
         ChohyoSeigyoHanyo 帳票制御汎用_速報取込区分 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
