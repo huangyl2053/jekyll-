@@ -336,7 +336,7 @@
         ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" D
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" C
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" C
         ON A."shoKisaiHokenshaNo" =  C."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
         AND D."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL

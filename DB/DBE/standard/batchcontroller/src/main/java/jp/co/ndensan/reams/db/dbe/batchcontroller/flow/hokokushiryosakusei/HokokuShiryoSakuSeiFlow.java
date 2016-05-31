@@ -74,7 +74,8 @@ public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBa
      */
     @Step(事業状況報告出力)
     protected IBatchFlowCommand selectJigyoJyokyoHokoku() {
-        return loopBatch(JigyoJyokyoHokokuProcess.class).define();
+        return loopBatch(JigyoJyokyoHokokuProcess.class)
+                .arguments(getParameter().toJigyoJyokyoHokokuProcessParameter()).define();
     }
 
     /**
