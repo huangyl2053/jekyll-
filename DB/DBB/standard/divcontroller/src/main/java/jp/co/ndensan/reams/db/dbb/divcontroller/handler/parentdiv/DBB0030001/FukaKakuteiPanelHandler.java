@@ -82,10 +82,10 @@ public class FukaKakuteiPanelHandler {
                         setValue(日時.toRString());
                 div.getFukaKakuteiBatchParameter().set処理名(特徴仮算定賦課確定);
                 div.getFukaKakuteiBatchParameter().set基準日時(new RString(特徴仮算定賦課の基準日時.toString()));
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, false);
                 return true;
             }
         }
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, false);
         return false;
     }
 
@@ -110,10 +110,10 @@ public class FukaKakuteiPanelHandler {
                         setValue(日時.toRString());
                 div.getFukaKakuteiBatchParameter().set処理名(普徴仮算定賦課確定);
                 div.getFukaKakuteiBatchParameter().set基準日時(new RString(普徴仮算定賦課の最大基準日時.toString()));
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, false);
                 return true;
             }
         }
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, false);
         return false;
     }
 
@@ -138,6 +138,7 @@ public class FukaKakuteiPanelHandler {
                         setValue(日時.toRString());
                 div.getFukaKakuteiBatchParameter().set処理名(仮算定異動賦課確定);
                 div.getFukaKakuteiBatchParameter().set基準日時(new RString(仮算定異動賦課の基準日.toString()));
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, false);
                 return true;
             } else if (仮算定異動賦課確定の最大基準日時.isBeforeOrEquals(仮算定異動賦課の基準日)) {
                 RStringBuilder 日時 = new RStringBuilder();
@@ -149,10 +150,10 @@ public class FukaKakuteiPanelHandler {
                         setValue(日時.toRString());
                 div.getFukaKakuteiBatchParameter().set処理名(仮算定異動賦課確定);
                 div.getFukaKakuteiBatchParameter().set基準日時(new RString(仮算定異動賦課の基準日.toString()));
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, false);
                 return true;
             }
         }
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, false);
         return false;
     }
 
@@ -177,10 +178,10 @@ public class FukaKakuteiPanelHandler {
                         setValue(日時.toRString());
                 div.getFukaKakuteiBatchParameter().set処理名(本算定賦課確定);
                 div.getFukaKakuteiBatchParameter().set基準日時(new RString(本算定賦課の基準日時.toString()));
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, false);
                 return true;
             }
         }
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, false);
         return false;
     }
 
@@ -205,6 +206,7 @@ public class FukaKakuteiPanelHandler {
                         setValue(日時.toRString());
                 div.getFukaKakuteiBatchParameter().set処理名(異動賦課確定);
                 div.getFukaKakuteiBatchParameter().set基準日時(new RString(異動賦課の基準日時.toString()));
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, false);
                 return true;
             } else if (異動賦課確定の最大基準日時.isBeforeOrEquals(異動賦課の基準日時)) {
                 RStringBuilder 日時 = new RStringBuilder();
@@ -216,12 +218,12 @@ public class FukaKakuteiPanelHandler {
                         setValue(日時.toRString());
                 div.getFukaKakuteiBatchParameter().set処理名(異動賦課確定);
                 div.getFukaKakuteiBatchParameter().set基準日時(new RString(異動賦課の基準日時.toString()));
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, false);
                 return true;
             } else if (異動賦課の基準日時.isBefore(異動賦課確定の最大基準日時)) {
                 throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace((確定処理).toString()).evaluate());
             }
         }
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, false);
         return false;
     }
 }
