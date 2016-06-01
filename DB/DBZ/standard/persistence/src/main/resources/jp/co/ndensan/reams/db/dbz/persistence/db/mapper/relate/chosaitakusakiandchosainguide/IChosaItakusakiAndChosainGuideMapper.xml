@@ -102,10 +102,10 @@
             AND
             DbT4913."chosainKanaShimei" LIKE '%'||#{調査員カナ}||'%'
         </if>
+        1=1)
         <if test="usesSaidaiHyojiKensu" >
             LIMIT #{saidaiHyojiKensu}
         </if>
-           1=1)
     </select>
     <select id="getKijuntsukiShichoson" resultMap="resultMap_getKijuntsukiShichosonjoho"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.param.ikninteichosaitakusakijoho.ChosaItakusakiAndChosainGuideParameter" fetchSize="500">
@@ -188,10 +188,10 @@
             AND
             DbT5913."chosainKanaShimei" LIKE '%'||#{調査員カナ}||'%'
         </if>
+        1=1)
         <if test="usesSaidaiHyojiKensu" >
             LIMIT #{saidaiHyojiKensu}
         </if>
-          1=1)
     </select>
 </mapper>
 

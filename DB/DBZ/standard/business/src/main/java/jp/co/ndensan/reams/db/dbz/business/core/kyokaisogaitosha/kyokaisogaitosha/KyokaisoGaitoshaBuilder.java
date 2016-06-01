@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisogaitosha;
+package jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisohokenryodankai.KyokaisoHokenryoDankai;
-import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisohokenryodankai.KyokaisoHokenryoDankaiIdentifier;
-import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisosochishinsei.KyokaisoSochiShinsei;
-import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisosochishinsei.KyokaisoSochiShinseiIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisohokenryodankai.KyokaisoHokenryoDankai;
+import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisohokenryodankai.KyokaisoHokenryoDankaiIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisosochishinsei.KyokaisoSochiShinsei;
+import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisosochishinsei.KyokaisoSochiShinseiIdentifier;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
