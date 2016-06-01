@@ -59,6 +59,7 @@ public class NonyuTsuchishoTotal {
     public ResponseData<NonyuTsuchishoTotalDiv> onChange_ChoteiNendo(NonyuTsuchishoTotalDiv div) {
         List<ChohyoSeigyoHanyo> 帳票制御汎用リスト = new ArrayList<>();
         getHandler(div).initialize(帳票制御汎用リスト);
+        ViewStateHolder.put(ViewStateKeys.帳票制御汎用リスト, (Serializable) 帳票制御汎用リスト);
         return ResponseData.of(div).respond();
     }
 

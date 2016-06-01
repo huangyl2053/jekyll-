@@ -313,94 +313,52 @@ public final class NonyuTsuchishoTotalHandler {
         ChohyoSeigyoHanyo 帳票制御汎用_領収証書納付額欄 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
                 new ReportId(帳票分類ID), 調定年度DDLの調定年度, キー_領収証書納付額欄);
         div.getNotsuInfo().getDdlKozaMongonRyoshushoNofugaku().setSelectedKey(
-                NofugakuranHyojiKubun.__を印字する.getコード());
-        if (帳票制御汎用_領収証書納付額欄 != null) {
-            div.getNotsuInfo().getDdlKozaMongonRyoshushoNofugaku().setSelectedKey(
-                    帳票制御汎用_領収証書納付額欄.get設定値());
-            帳票制御汎用リスト.add(帳票制御汎用_領収証書納付額欄);
-        }
+                帳票制御汎用_領収証書納付額欄.get設定値());
+        帳票制御汎用リスト.add(帳票制御汎用_領収証書納付額欄);
         ChohyoSeigyoHanyo 帳票制御汎用_納付書納付額欄 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
                 new ReportId(帳票分類ID), 調定年度DDLの調定年度, キー_納付書納付額欄);
-        div.getNotsuInfo().getDdlKozaMongonNofushoNofugaku().setSelectedKey(
-                NofugakuranHyojiKubun.__を印字する.getコード());
-        if (帳票制御汎用_納付書納付額欄 != null) {
-            div.getNotsuInfo().getDdlKozaMongonNofushoNofugaku().setSelectedKey(帳票制御汎用_納付書納付額欄.get設定値());
-            帳票制御汎用リスト.add(帳票制御汎用_納付書納付額欄);
-        }
+        div.getNotsuInfo().getDdlKozaMongonNofushoNofugaku().setSelectedKey(帳票制御汎用_納付書納付額欄.get設定値());
+        帳票制御汎用リスト.add(帳票制御汎用_納付書納付額欄);
         ChohyoSeigyoHanyo 帳票制御汎用_領収証書領収印欄 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
                 new ReportId(帳票分類ID), 調定年度DDLの調定年度, キー_領収証書領収印欄);
         div.getNotsuInfo().getDdlKozaMongonRyoshushoRyoshuin().setSelectedKey(
-                RyoshuinranHyojiKubun.__を印字する.getコード());
-        if (帳票制御汎用_領収証書領収印欄 != null) {
-            div.getNotsuInfo().getDdlKozaMongonRyoshushoRyoshuin().setSelectedKey(
-                    帳票制御汎用_領収証書領収印欄.get設定値());
-            帳票制御汎用リスト.add(帳票制御汎用_領収証書領収印欄);
-        }
+                帳票制御汎用_領収証書領収印欄.get設定値());
+        帳票制御汎用リスト.add(帳票制御汎用_領収証書領収印欄);
         ChohyoSeigyoHanyo 帳票制御汎用_納付書領収印欄 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
                 new ReportId(帳票分類ID), 調定年度DDLの調定年度, キー_納付書領収印欄);
-        div.getNotsuInfo().getDdlKozaMongonNofushoRyoshuin().setSelectedKey(
-                RyoshuinranHyojiKubun.__を印字する.getコード());
-        if (帳票制御汎用_納付書領収印欄 != null) {
-            div.getNotsuInfo().getDdlKozaMongonNofushoRyoshuin().setSelectedKey(帳票制御汎用_納付書領収印欄.get設定値());
-            帳票制御汎用リスト.add(帳票制御汎用_納付書領収印欄);
-        }
+        div.getNotsuInfo().getDdlKozaMongonNofushoRyoshuin().setSelectedKey(帳票制御汎用_納付書領収印欄.get設定値());
+        帳票制御汎用リスト.add(帳票制御汎用_納付書領収印欄);
         ChohyoSeigyoHanyo 帳票制御汎用_領収書領収日付印欄 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
                 new ReportId(帳票分類ID), 調定年度DDLの調定年度, キー_領収書領収日付印欄);
         div.getNotsuInfo().getDdlShutsuryokuHohoRyoshushoRyoshuHidukeIn().setSelectedKey(
-                RyoshuHizukeRan.何も表示しない.getコード());
-        if (帳票制御汎用_領収書領収日付印欄 != null) {
-            div.getNotsuInfo().getDdlShutsuryokuHohoRyoshushoRyoshuHidukeIn().setSelectedKey(
-                    帳票制御汎用_領収書領収日付印欄.get設定値());
-            帳票制御汎用リスト.add(帳票制御汎用_領収書領収日付印欄);
-        }
+                帳票制御汎用_領収書領収日付印欄.get設定値());
+        帳票制御汎用リスト.add(帳票制御汎用_領収書領収日付印欄);
         ChohyoSeigyoHanyo 帳票制御汎用_納付書領収日付欄 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
                 new ReportId(帳票分類ID), 調定年度DDLの調定年度, キー_納付書領収日付欄);
         div.getNotsuInfo().getDdlShutsuryokuHohoNofushoRyoshuHiduke().setSelectedKey(
-                RyoshuHizukeRan.何も表示しない.getコード());
-        if (帳票制御汎用_納付書領収日付欄 != null) {
-            div.getNotsuInfo().getDdlShutsuryokuHohoNofushoRyoshuHiduke().setSelectedKey(
-                    帳票制御汎用_納付書領収日付欄.get設定値());
-            帳票制御汎用リスト.add(帳票制御汎用_納付書領収日付欄);
-        }
+                帳票制御汎用_納付書領収日付欄.get設定値());
+        帳票制御汎用リスト.add(帳票制御汎用_納付書領収日付欄);
         ChohyoSeigyoHanyo 帳票制御汎用_領収書日付印欄の期 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
                 new ReportId(帳票分類ID), 管理年度, キー_領収書日付印欄の期);
         div.getNotsuInfo().getDdlShutsuryokuHohoRyoshushoRyoshuHidukeInNoKi().setSelectedKey(
-                RyoshushoHizukeranKiHyoji.表示しない.getコード());
-        if (帳票制御汎用_領収書日付印欄の期 != null) {
-            div.getNotsuInfo().getDdlShutsuryokuHohoRyoshushoRyoshuHidukeInNoKi().setSelectedKey(
-                    帳票制御汎用_領収書日付印欄の期.get設定値());
-            帳票制御汎用リスト.add(帳票制御汎用_領収書日付印欄の期);
-        }
+                帳票制御汎用_領収書日付印欄の期.get設定値());
+        帳票制御汎用リスト.add(帳票制御汎用_領収書日付印欄の期);
         ChohyoSeigyoHanyo 帳票制御汎用_納付書市町村名表示 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
                 new ReportId(帳票分類ID), 管理年度, キー_納付書市町村名表示);
-        div.getNotsuInfo().getDdlNofushoShichosonNameUmu().setSelectedKey(HyojiUmu.表示しない.getコード());
-        if (帳票制御汎用_納付書市町村名表示 != null) {
-            div.getNotsuInfo().getDdlNofushoShichosonNameUmu().setSelectedKey(帳票制御汎用_納付書市町村名表示.get設定値());
-            帳票制御汎用リスト.add(帳票制御汎用_納付書市町村名表示);
-        }
+        div.getNotsuInfo().getDdlNofushoShichosonNameUmu().setSelectedKey(帳票制御汎用_納付書市町村名表示.get設定値());
+        帳票制御汎用リスト.add(帳票制御汎用_納付書市町村名表示);
         ChohyoSeigyoHanyo 帳票制御汎用_納付書市町村名 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
                 new ReportId(帳票分類ID), 管理年度, キー_納付書市町村名);
-        div.getNotsuInfo().getTxtNofushoShichosonName().setValue(RString.EMPTY);
-        if (帳票制御汎用_納付書市町村名 != null) {
-            div.getNotsuInfo().getTxtNofushoShichosonName().setValue(帳票制御汎用_納付書市町村名.get設定値());
-            帳票制御汎用リスト.add(帳票制御汎用_納付書市町村名);
-        }
+        div.getNotsuInfo().getTxtNofushoShichosonName().setValue(帳票制御汎用_納付書市町村名.get設定値());
+        帳票制御汎用リスト.add(帳票制御汎用_納付書市町村名);
         ChohyoSeigyoHanyo 帳票制御汎用_納期限出力方法 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
                 new ReportId(帳票分類ID), 調定年度DDLの調定年度, キー_納期限出力方法);
-        div.getNotsuInfo().getDdlNokigenShutsuryokuHoho().setSelectedKey(
-                NokigenShutsuryokuHoho.全ての期分を印字する.getコード());
-        if (帳票制御汎用_納期限出力方法 != null) {
-            div.getNotsuInfo().getDdlNokigenShutsuryokuHoho().setSelectedKey(帳票制御汎用_納期限出力方法.get設定値());
-            帳票制御汎用リスト.add(帳票制御汎用_納期限出力方法);
-        }
+        div.getNotsuInfo().getDdlNokigenShutsuryokuHoho().setSelectedKey(帳票制御汎用_納期限出力方法.get設定値());
+        帳票制御汎用リスト.add(帳票制御汎用_納期限出力方法);
         ChohyoSeigyoHanyo 帳票制御汎用_口座振替のOCR出力方法 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
                 new ReportId(帳票分類ID), 調定年度DDLの調定年度, キー_口座振替のOCR出力方法);
-        div.getNotsuInfo().getDdlOCRShutsuryokuHoho().setSelectedKey(
-                OCRShutsuryokuHoho._口座振替_ならOCR欄を_星印_でつぶす.getコード());
-        if (帳票制御汎用_口座振替のOCR出力方法 != null) {
-            div.getNotsuInfo().getDdlOCRShutsuryokuHoho().setSelectedKey(帳票制御汎用_口座振替のOCR出力方法.get設定値());
-            帳票制御汎用リスト.add(帳票制御汎用_口座振替のOCR出力方法);
-        }
+        div.getNotsuInfo().getDdlOCRShutsuryokuHoho().setSelectedKey(帳票制御汎用_口座振替のOCR出力方法.get設定値());
+        帳票制御汎用リスト.add(帳票制御汎用_口座振替のOCR出力方法);
     }
 
     private void 宛先住所コード出力順初期化(ChohyoSeigyoHanyoManager manager,
@@ -690,7 +648,7 @@ public final class NonyuTsuchishoTotalHandler {
 
     private void setDataSource(int 調定年度) {
         List<KeyValueDataSource> ddlSourceList = new ArrayList<>();
-        for (int i = 調定年度; i >= 平成12年_西暦; i--) {
+        for (int i = 調定年度; 平成12年_西暦 <= i; i--) {
             KeyValueDataSource source = new KeyValueDataSource(new RString(String.valueOf(i)),
                     new FlexibleYear(String.valueOf(i)).wareki().firstYear(FirstYear.ICHI_NEN).getYear());
             ddlSourceList.add(source);
