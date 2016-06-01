@@ -267,6 +267,13 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
     public ShinsakaiShukeihyoShinseiBetsuProcessParameter toShinsakaiShukeihyoShinseiBetsuProcessParameter() {
 
         return new ShinsakaiShukeihyoShinseiBetsuProcessParameter(
+                jigyoJyokyoHokoku,
+                jissiJyokyoTokei,
+                sinsaHanteiJyokyo,
+                sinsakaiKanrenTokei,
+                csvShutsuryoku,
+                shutsuryokuFairu,
+                kijyunYMD,
                 RString.isNullOrEmpty(hokensyaNo),
                 hokensyaNo,
                 hiHokensyaKubun,
@@ -278,7 +285,9 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
                 RString.isNullOrEmpty(taishoGeppiFrom),
                 RString.isNullOrEmpty(taishoGeppiTo),
                 taishoGeppiFrom,
-                taishoGeppiTo);
+                taishoGeppiTo,
+                isSinseiKubunSinseitoki,
+                isSinseiKubunHorei);
     }
 
     /**
