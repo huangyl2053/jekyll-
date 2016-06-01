@@ -61,6 +61,10 @@ module DBE {
                 return new UZA.RadioButton(this.convFiledName("radServiceKubun"));
             }
 
+            public rdoJutakuKaishu(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("rdoJutakuKaishu"));
+            }
+
             public KubetsuKyufuPanel(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("KubetsuKyufuPanel"));
             }
