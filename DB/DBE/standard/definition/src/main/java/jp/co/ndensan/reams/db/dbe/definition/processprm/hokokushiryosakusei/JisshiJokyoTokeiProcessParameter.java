@@ -89,6 +89,13 @@ public class JisshiJokyoTokeiProcessParameter implements IBatchProcessParameter 
             RString taishoGeppiTo,
             boolean isShinseiji,
             boolean isHorei) {
+        this.isJigyoJyokyoHokoku = isJigyoJyokyoHokoku;
+        this.isJissiJyokyoTokei = isJissiJyokyoTokei;
+        this.isSinsaHanteiJyokyo = isSinsaHanteiJyokyo;
+        this.isSinsakaiKanrenTokei = isSinsakaiKanrenTokei;
+        this.isCsvShutsuryoku = isCsvShutsuryoku;
+        this.shutsuryokuFairuName = shutsuryokuFairuName;
+        this.kijyunYMD = kijyunYMD;
         this.isEmptyHokensyaNo = isEmptyHokensyaNo;
         this.hokensyaNo = hokensyaNo;
         this.hihokenshaKubun = hihokenshaKubun;
