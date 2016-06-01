@@ -30,6 +30,7 @@ and open the template in the editor.
             AND DbT1004."shikibetsuCode" = DbT1001."shikibetsuCode"
             AND DbT1004."nyushoYMD" <![CDATA[>=]]> DbT1001."shikakuSoshitsuYMD"
             AND DbT1004."taishoYMD" <![CDATA[<=]]> DbT1001."shikakuShutokuYMD"
+            AND DbT1001.rrkno = 1
             AND DbT1001."logicalDeletedFlag" <![CDATA[<>]]> TRUE
     </select>
     
@@ -54,6 +55,7 @@ and open the template in the editor.
         AND DbT1004."shikibetsuCode" = DbT1002."shikibetsuCode"
         AND DbT1004."nyushoYMD" <![CDATA[>=]]> DbT1002."kaijoYMD"
         AND DbT1004."taishoYMD" <![CDATA[<=]]> DbT1002."tekiyoYMD"
+        AND DbT1002.rrkno = 1
         AND DbT1002."logicalDeletedFlag" <![CDATA[<>]]> TRUE
     </select>
       
@@ -78,6 +80,7 @@ and open the template in the editor.
         AND DbT1004."shikibetsuCode" = DbT1003."shikibetsuCode"
         AND DbT1004."nyushoYMD" <![CDATA[>=]]> DbT1003."kaijoYMD"
         AND DbT1004."taishoYMD" <![CDATA[<=]]> DbT1003."tekiyoYMD"
+        AND DbT1003.rrkno = 1
         AND DbT1003."logicalDeletedFlag" <![CDATA[<>]]> TRUE
     </select>
 </mapper>
