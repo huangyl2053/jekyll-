@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
 import jp.co.ndensan.reams.db.dbb.entity.report.gemmentorikesitsuchisho.KaigoHokenHokenryoGenmenTorikeshiTsuchishoA4TateSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
@@ -48,7 +49,7 @@ public class GemmenTorikesiTsuchiShoA4TateEditor implements IGemmenTorikesiTsuch
     private final EditedAtesaki 編集後宛先;
     private final int i;
     private static final CodeShubetsu コード種別 = new CodeShubetsu("0006");
-    private final RString 年度 = new RString("年度");
+    private static final RString YEAR = new RString("年度");
 
     /**
      * コンストラクタです。
@@ -116,12 +117,13 @@ public class GemmenTorikesiTsuchiShoA4TateEditor implements IGemmenTorikesiTsuch
     private void set減免の情報(KaigoHokenHokenryoGenmenTorikeshiTsuchishoA4TateSource source) {
         if (減免取消通知書情報.get減免の情報更正後() != null) {
             FlexibleYear 調定年度 = 減免取消通知書情報.get減免の情報更正後().get調定年度();
-            source.choteiNendo = 調定年度.wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.ICHI_NEN).toDateString();
+            source.choteiNendo = (調定年度 != null ? 調定年度.wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.ICHI_NEN).toDateString() : RString.EMPTY);
             FlexibleYear 賦課年度 = 減免取消通知書情報.get減免の情報更正後().get賦課年度();
-            source.fukaNendo = 賦課年度.wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.ICHI_NEN).toDateString().concat(年度);
-            source.tsuchishoNo = 減免取消通知書情報.get減免の情報更正後().get通知書番号().value();
+            source.fukaNendo = (賦課年度 != null ? 賦課年度.wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.ICHI_NEN).toDateString().concat(YEAR) : RString.EMPTY);
+            TsuchishoNo 通知書番号 = 減免取消通知書情報.get減免の情報更正後().get通知書番号();
+            source.tsuchishoNo = (通知書番号 != null ? 通知書番号.value() : RString.EMPTY);
             SetaiCode 世帯コード = 減免取消通知書情報.get減免の情報更正後().get世帯コード();
             source.setaiCode = (世帯コード != null ? 世帯コード.value() : RString.EMPTY);
             HihokenshaNo 被保険者番号 = 減免取消通知書情報.get減免の情報更正後().get被保険者番号();
@@ -173,7 +175,7 @@ public class GemmenTorikesiTsuchiShoA4TateEditor implements IGemmenTorikesiTsuch
     private void set編集後宛先(KaigoHokenHokenryoGenmenTorikeshiTsuchishoA4TateSource source) {
         if (編集後宛先 != null) {
             KaigoSofubutsuAtesakiSource 送付物宛先 = 編集後宛先.getSofubutsuAtesakiSource();
-            if (送付物宛先 != null) {
+            if (送付物宛先 != null && 送付物宛先.get送付物宛先ソース() != null) {
                 source.yubinNo = 送付物宛先.get送付物宛先ソース().yubinNo;
                 source.gyoseiku = 送付物宛先.get送付物宛先ソース().gyoseiku;
                 source.jusho3 = 送付物宛先.get送付物宛先ソース().jusho3;

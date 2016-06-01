@@ -49,7 +49,7 @@ public class GemmenTorikesiTsuchiShoB5YokoEditor implements IGemmenTorikesiTsuch
     private final EditedAtesaki 編集後宛先;
     private final int i;
     private static final CodeShubetsu コード種別 = new CodeShubetsu("0006");
-    private final RString 年度 = new RString("年度");
+    private static final RString YEAR = new RString("年度");
 
     /**
      * コンストラクタです。
@@ -122,7 +122,7 @@ public class GemmenTorikesiTsuchiShoB5YokoEditor implements IGemmenTorikesiTsuch
                     .firstYear(FirstYear.ICHI_NEN).toDateString() : RString.EMPTY);
             FlexibleYear 賦課年度 = 減免取消通知書情報.get減免の情報更正後().get賦課年度();
             source.fukaNendo = (賦課年度 != null ? 賦課年度.wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.ICHI_NEN).toDateString().concat(年度) : RString.EMPTY);
+                    .firstYear(FirstYear.ICHI_NEN).toDateString().concat(YEAR) : RString.EMPTY);
             TsuchishoNo 通知書番号 = 減免取消通知書情報.get減免の情報更正後().get通知書番号();
             source.tsuchishoNo = (通知書番号 != null ? 通知書番号.value() : RString.EMPTY);
             SetaiCode 世帯コード = 減免取消通知書情報.get減免の情報更正後().get世帯コード();
@@ -176,38 +176,40 @@ public class GemmenTorikesiTsuchiShoB5YokoEditor implements IGemmenTorikesiTsuch
     private void set編集後宛先(KaigoHokenHokenryoGenmenTorikeshiTsuchishoB5YokoSource source) {
         if (編集後宛先 != null) {
             KaigoSofubutsuAtesakiSource 送付物宛先 = 編集後宛先.getSofubutsuAtesakiSource();
-            source.yubinNo = 送付物宛先.get送付物宛先ソース().yubinNo;
-            source.gyoseiku = 送付物宛先.get送付物宛先ソース().gyoseiku;
-            source.jusho3 = 送付物宛先.get送付物宛先ソース().jusho3;
-            source.jushoText = 送付物宛先.get送付物宛先ソース().jushoText;
-            source.jusho1 = 送付物宛先.get送付物宛先ソース().jusho1;
-            source.jusho2 = 送付物宛先.get送付物宛先ソース().jusho2;
-            source.katagakiText = 送付物宛先.get送付物宛先ソース().katagakiText;
-            source.katagaki2 = 送付物宛先.get送付物宛先ソース().katagaki2;
-            source.katagakiSmall2 = 送付物宛先.get送付物宛先ソース().katagakiSmall2;
-            source.katagaki1 = 送付物宛先.get送付物宛先ソース().katagaki1;
-            source.katagakiSmall1 = 送付物宛先.get送付物宛先ソース().katagakiSmall1;
-            source.kakkoRight2 = 送付物宛先.get送付物宛先ソース().kakkoRight2;
-            source.kakkoRight1 = 送付物宛先.get送付物宛先ソース().kakkoRight1;
-            source.shimei2 = 送付物宛先.get送付物宛先ソース().shimei2;
-            source.shimeiSmall2 = 送付物宛先.get送付物宛先ソース().shimeiSmall2;
-            source.shimeiText = 送付物宛先.get送付物宛先ソース().shimeiText;
-            source.meishoFuyo2 = 送付物宛先.get送付物宛先ソース().meishoFuyo2;
-            source.shimeiSmall1 = 送付物宛先.get送付物宛先ソース().shimeiSmall1;
-            source.dainoKubunMei = 送付物宛先.get送付物宛先ソース().dainoKubunMei;
-            source.shimei1 = 送付物宛先.get送付物宛先ソース().shimei1;
-            source.meishoFuyo1 = 送付物宛先.get送付物宛先ソース().meishoFuyo1;
-            source.samabunShimeiText = 送付物宛先.get送付物宛先ソース().samabunShimeiText;
-            source.samabunShimeiSmall2 = 送付物宛先.get送付物宛先ソース().samabunShimeiSmall2;
-            source.samaBun2 = 送付物宛先.get送付物宛先ソース().samaBun2;
-            source.kakkoLeft2 = 送付物宛先.get送付物宛先ソース().kakkoLeft2;
-            source.samabunShimei2 = 送付物宛先.get送付物宛先ソース().samabunShimei2;
-            source.kakkoLeft1 = 送付物宛先.get送付物宛先ソース().kakkoLeft1;
-            source.samabunShimei1 = 送付物宛先.get送付物宛先ソース().samabunShimei1;
-            source.samaBun1 = 送付物宛先.get送付物宛先ソース().samaBun1;
-            source.samabunShimeiSmall1 = 送付物宛先.get送付物宛先ソース().samabunShimeiSmall1;
-            source.customerBarCode = 送付物宛先.get送付物宛先ソース().customerBarCode;
-            // TODO世帯主名 様方
+            if (送付物宛先 != null && 送付物宛先.get送付物宛先ソース() != null) {
+                source.yubinNo = 送付物宛先.get送付物宛先ソース().yubinNo;
+                source.gyoseiku = 送付物宛先.get送付物宛先ソース().gyoseiku;
+                source.jusho3 = 送付物宛先.get送付物宛先ソース().jusho3;
+                source.jushoText = 送付物宛先.get送付物宛先ソース().jushoText;
+                source.jusho1 = 送付物宛先.get送付物宛先ソース().jusho1;
+                source.jusho2 = 送付物宛先.get送付物宛先ソース().jusho2;
+                source.katagakiText = 送付物宛先.get送付物宛先ソース().katagakiText;
+                source.katagaki2 = 送付物宛先.get送付物宛先ソース().katagaki2;
+                source.katagakiSmall2 = 送付物宛先.get送付物宛先ソース().katagakiSmall2;
+                source.katagaki1 = 送付物宛先.get送付物宛先ソース().katagaki1;
+                source.katagakiSmall1 = 送付物宛先.get送付物宛先ソース().katagakiSmall1;
+                source.kakkoRight2 = 送付物宛先.get送付物宛先ソース().kakkoRight2;
+                source.kakkoRight1 = 送付物宛先.get送付物宛先ソース().kakkoRight1;
+                source.shimei2 = 送付物宛先.get送付物宛先ソース().shimei2;
+                source.shimeiSmall2 = 送付物宛先.get送付物宛先ソース().shimeiSmall2;
+                source.shimeiText = 送付物宛先.get送付物宛先ソース().shimeiText;
+                source.meishoFuyo2 = 送付物宛先.get送付物宛先ソース().meishoFuyo2;
+                source.shimeiSmall1 = 送付物宛先.get送付物宛先ソース().shimeiSmall1;
+                source.dainoKubunMei = 送付物宛先.get送付物宛先ソース().dainoKubunMei;
+                source.shimei1 = 送付物宛先.get送付物宛先ソース().shimei1;
+                source.meishoFuyo1 = 送付物宛先.get送付物宛先ソース().meishoFuyo1;
+                source.samabunShimeiText = 送付物宛先.get送付物宛先ソース().samabunShimeiText;
+                source.samabunShimeiSmall2 = 送付物宛先.get送付物宛先ソース().samabunShimeiSmall2;
+                source.samaBun2 = 送付物宛先.get送付物宛先ソース().samaBun2;
+                source.kakkoLeft2 = 送付物宛先.get送付物宛先ソース().kakkoLeft2;
+                source.samabunShimei2 = 送付物宛先.get送付物宛先ソース().samabunShimei2;
+                source.kakkoLeft1 = 送付物宛先.get送付物宛先ソース().kakkoLeft1;
+                source.samabunShimei1 = 送付物宛先.get送付物宛先ソース().samabunShimei1;
+                source.samaBun1 = 送付物宛先.get送付物宛先ソース().samaBun1;
+                source.samabunShimeiSmall1 = 送付物宛先.get送付物宛先ソース().samabunShimeiSmall1;
+                source.customerBarCode = 送付物宛先.get送付物宛先ソース().customerBarCode;
+                // TODO世帯主名 様方
+            }
         }
     }
 

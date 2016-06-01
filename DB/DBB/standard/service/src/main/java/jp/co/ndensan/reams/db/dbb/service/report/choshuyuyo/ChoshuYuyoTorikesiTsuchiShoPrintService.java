@@ -159,7 +159,7 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
                 Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
                 ChohyoSeigyoKyotsu 帳票制御共通 = 徴収猶予取消通知書情報.get帳票制御共通();
                 boolean is公印に掛ける = false;
-                if (帳票制御共通.get首長名印字位置() != null && RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
+                if (RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
                     is公印に掛ける = true;
                 }
                 boolean is公印を省略 = false;
@@ -207,7 +207,7 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
                 Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
                 ChohyoSeigyoKyotsu 帳票制御共通 = 徴収猶予取消通知書情報.get帳票制御共通();
                 boolean is公印に掛ける = false;
-                if (帳票制御共通.get首長名印字位置() != null && RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
+                if (RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
                     is公印に掛ける = true;
                 }
                 boolean is公印を省略 = false;
@@ -249,17 +249,21 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
     private HyojiCodes get表示コード(ChoshuYuyoTorikesiTsuchiShoJoho 徴収猶予取消通知書情報) {
         HyojiCodes 表示コード = null;
         HyojiCodeResearcher researcher = new HyojiCodeResearcher();
-        if (isNotNull(徴収猶予取消通知書情報.get帳票制御共通()) && isNotNull(徴収猶予取消通知書情報.get宛名())
-                && isNotNull(徴収猶予取消通知書情報.get納組情報())) {
-            IGyoseiKukaku 行政区画 = 徴収猶予取消通知書情報.get宛名().get行政区画();
-            IJusho 住所 = 徴収猶予取消通知書情報.get宛名().get住所();
+        if (isNotNull(徴収猶予取消通知書情報.get帳票制御共通())) {
+            IGyoseiKukaku 行政区画 = null;
+            IJusho 住所 = null;
+            if (isNotNull(徴収猶予取消通知書情報.get宛名())) {
+                行政区画 = 徴収猶予取消通知書情報.get宛名().get行政区画();
+                住所 = 徴収猶予取消通知書情報.get宛名().get住所();
+            }
             表示コード = researcher.create表示コード情報(徴収猶予取消通知書情報.get帳票制御共通().toEntity(),
                     住所 != null ? 住所.get町域コード().value() : RString.EMPTY,
                     行政区画 != null ? 行政区画.getGyoseiku().getコード().value() : RString.EMPTY,
                     行政区画 != null ? 行政区画.getChiku1().getコード().value() : RString.EMPTY,
                     行政区画 != null ? 行政区画.getChiku2().getコード().value() : RString.EMPTY,
                     行政区画 != null ? 行政区画.getChiku3().getコード().value() : RString.EMPTY,
-                    徴収猶予取消通知書情報.get納組情報().getNokumi().getNokumiCode());
+                    徴収猶予取消通知書情報.get納組情報() != null
+                    ? 徴収猶予取消通知書情報.get納組情報().getNokumi().getNokumiCode() : RString.EMPTY);
         }
         return 表示コード;
     }
@@ -277,8 +281,8 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
             Kitsuki 特徴期月 = 期月リスト_特徴.get期の最初月(index);
             Kitsuki 普徴期月 = 期月リスト_普徴.get期の最初月(index);
             if (特徴期月.isPresent()) {
-                期別徴収猶予期間.set特徴期(edit2桁文字列(特徴期月.get期()));
-                期別徴収猶予期間.set特徴月(editInt2桁文字列(特徴期月.get月AsInt()));
+                期別徴収猶予期間.set特徴期(特徴期月.get期().padZeroToLeft(2));
+                期別徴収猶予期間.set特徴月(特徴期月.get月().getコード());
                 期別徴収猶予期間.set特徴期別金額(DecimalFormatter
                         .toコンマ区切りRString(get期と特徴期別金額の対応(徴収猶予取消通知書情報, 特徴期月.get期()), 0));
             } else {
@@ -288,8 +292,8 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
             }
 
             if (普徴期月.isPresent()) {
-                期別徴収猶予期間.set普徴期(edit2桁文字列(普徴期月.get期()));
-                期別徴収猶予期間.set普徴月(editInt2桁文字列(普徴期月.get月AsInt()));
+                期別徴収猶予期間.set普徴期(普徴期月.get期().padZeroToLeft(2));
+                期別徴収猶予期間.set普徴月(普徴期月.get月().getコード());
                 期別徴収猶予期間.set普徴期別金額(DecimalFormatter
                         .toコンマ区切りRString(get月と普徴期別金額の対応(徴収猶予取消通知書情報, 普徴期月.get月()), 0));
                 期別徴収猶予期間.set徴収猶予期間(get徴収猶予期間(徴収猶予取消通知書情報, 普徴期月));
@@ -368,21 +372,6 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
         }
 
         return 期別納期リスト;
-    }
-
-    private RString edit2桁文字列(RString 期) {
-        if (定数_ONE == 期.length()) {
-            期 = new RString(RSTR_0 + 期.toString());
-        }
-        return 期;
-    }
-
-    private RString editInt2桁文字列(int 月) {
-        RString 月AsInt = new RString(String.valueOf(月));
-        if (月 < 定数_TEN && 月 >= 定数_ZERO) {
-            月AsInt = new RString(RSTR_0 + String.valueOf(月));
-        }
-        return 月AsInt;
     }
 
     private Decimal get期と特徴期別金額の対応(
