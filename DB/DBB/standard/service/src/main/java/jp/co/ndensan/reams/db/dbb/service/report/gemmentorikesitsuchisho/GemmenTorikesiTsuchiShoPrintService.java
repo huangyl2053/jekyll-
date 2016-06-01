@@ -141,11 +141,11 @@ public class GemmenTorikesiTsuchiShoPrintService {
                 Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
                 ChohyoSeigyoKyotsu 帳票制御共通 = 減免取消通知書情報.get帳票制御共通();
                 boolean is公印に掛ける = false;
-                if (RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
+                if (帳票制御共通 != null && RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
                     is公印に掛ける = true;
                 }
                 boolean is公印を省略 = false;
-                if (!帳票制御共通.is電子公印印字有無()) {
+                if (帳票制御共通 != null && !帳票制御共通.is電子公印印字有無()) {
                     is公印を省略 = true;
                 }
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
@@ -188,7 +188,7 @@ public class GemmenTorikesiTsuchiShoPrintService {
                 Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
                 ChohyoSeigyoKyotsu 帳票制御共通 = 減免取消通知書情報.get帳票制御共通();
                 boolean is公印に掛ける = true;
-                if (RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
+                if (帳票制御共通 != null && RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
                     is公印に掛ける = true;
                 }
                 boolean is公印を省略 = false;

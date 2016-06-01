@@ -67,10 +67,6 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
 
     private static final RString 種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
     private static final RString RSTRING_1 = new RString("1");
-    private static final int 定数_ONE = 1;
-    private static final int 定数_ZERO = 0;
-    private static final int 定数_TEN = 10;
-    private static final RString RSTR_0 = new RString("　");
     private static final RString 波線 = new RString("～");
     private static final RString 期_1 = new RString("01");
     private static final RString 期_2 = new RString("02");
@@ -159,11 +155,11 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
                 Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
                 ChohyoSeigyoKyotsu 帳票制御共通 = 徴収猶予取消通知書情報.get帳票制御共通();
                 boolean is公印に掛ける = false;
-                if (RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
+                if (帳票制御共通 != null && RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
                     is公印に掛ける = true;
                 }
                 boolean is公印を省略 = false;
-                if (!帳票制御共通.is電子公印印字有無()) {
+                if (帳票制御共通 != null && !帳票制御共通.is電子公印印字有無()) {
                     is公印を省略 = true;
                 }
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
