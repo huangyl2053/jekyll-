@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.core.kyokaisogaitosha.kyokaisosochishinsei;
+package jp.co.ndensan.reams.db.dbz.service.core.kyokaisogaitosha.kyokaisosochishinsei;
 
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisosochishinsei.KyokaisoSochiShinsei;
+import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisosochishinsei.KyokaisoSochiShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1013KyokaisoSochiShinseiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1013KyokaisoSochiShinseiDac;

@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kyokaisogaitosha;
+package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kyokaisogaitosha;
 
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kyokaisogaitosha.KyokaisoMapperParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kyokaisogaitosha.KyokaisoMapperParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity;
 
 /**
  * 境界層該当者のマッパーインタフェースです。

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.definition.mybatisprm.kyokaisogaitosha;
+package jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kyokaisogaitosha;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 
