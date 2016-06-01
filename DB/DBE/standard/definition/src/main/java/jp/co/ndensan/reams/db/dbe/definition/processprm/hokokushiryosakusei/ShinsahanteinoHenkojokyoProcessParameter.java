@@ -134,7 +134,6 @@ public class ShinsahanteinoHenkojokyoProcessParameter implements IBatchProcessPa
                 isEmptyTaishoGeppiTo,
                 taishoGeppiFrom,
                 taishoGeppiTo,
-                shichosonCode,
                 isShinseiji,
                 isHorei);
     }
