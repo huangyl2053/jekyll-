@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.Tashic
 import jp.co.ndensan.reams.db.dba.definition.message.DbaQuestionMessages;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakusoshitsu.HihokenshashikakusoshitsuManager;
 import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureisyaKanriManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuKaijoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -29,7 +30,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -58,8 +58,6 @@ public class TaJushochiTokureishaKanriHandler {
     private static final RString 他特例解除 = new RString("01");
     private static final RString 転入 = new RString("01");
     private static final RString 除外者適用 = new RString("01");
-    private static final CodeShubetsu 介護他特適用理由 = new CodeShubetsu("0008");
-    private static final CodeShubetsu 介護他特解除理由 = new CodeShubetsu("0011");
     private final RString 新枝番 = new RString("0001");
 
     private static final RString 照会モード = new RString("Shokai");
@@ -916,22 +914,25 @@ public class TaJushochiTokureishaKanriHandler {
     }
 
     private RString get適用事由(RString 適用事由コード) {
+        FlexibleDate 基准日 = new FlexibleDate(RDate.getNowDate().toDateString());
         if (適用事由コード == null || 適用事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeRyakusho(介護他特適用理由, new Code(適用事由コード));
+        return CodeMaster.getCodeRyakusho(DBACodeShubetsu.介護資格適用事由_他特例者.getコード(), new Code(適用事由コード), 基准日);
     }
 
     private RString get解除事由(RString 解除事由コード) {
+        FlexibleDate 基准日 = new FlexibleDate(RDate.getNowDate().toDateString());
         if (解除事由コード == null || 解除事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeRyakusho(介護他特解除理由, new Code(解除事由コード));
+        return CodeMaster.getCodeRyakusho(DBACodeShubetsu.介護資格解除事由_他特例者.getコード(), new Code(解除事由コード), 基准日);
     }
 
     private List<KeyValueDataSource> set適用事由() {
+        FlexibleDate 基准日 = new FlexibleDate(RDate.getNowDate().toDateString());
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        List<UzT0007CodeEntity> 適用事由Key = CodeMaster.getCode(介護他特適用理由);
+        List<UzT0007CodeEntity> 適用事由Key = CodeMaster.getCode(DBACodeShubetsu.介護資格適用事由_他特例者.getコード(), 基准日);
         for (UzT0007CodeEntity key : 適用事由Key) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(key.getコード().getColumnValue());
@@ -942,8 +943,9 @@ public class TaJushochiTokureishaKanriHandler {
     }
 
     private List<KeyValueDataSource> set解除事由() {
+        FlexibleDate 基准日 = new FlexibleDate(RDate.getNowDate().toDateString());
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        List<UzT0007CodeEntity> 解除事由Key = CodeMaster.getCode(介護他特解除理由);
+        List<UzT0007CodeEntity> 解除事由Key = CodeMaster.getCode(DBACodeShubetsu.介護資格解除事由_他特例者.getコード(), 基准日);
         for (UzT0007CodeEntity key : 解除事由Key) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(key.getコード().getColumnValue());
