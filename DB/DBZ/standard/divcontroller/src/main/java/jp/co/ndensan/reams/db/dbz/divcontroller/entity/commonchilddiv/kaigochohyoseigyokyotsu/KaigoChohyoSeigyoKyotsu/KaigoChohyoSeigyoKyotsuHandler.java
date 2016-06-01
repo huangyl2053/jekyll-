@@ -171,6 +171,9 @@ public class KaigoChohyoSeigyoKyotsuHandler {
                 div.getCommonButtonPanel().getBtnKaigoToiawasesaki().setDisplayNone(true);
             }
         }
+        if (!画面表示可.equals(帳票制御共通コントロール.get帳票出力順使用区分())) {
+            div.getCcdChohyoShutsuryokujun().setDisplayNone(true);
+        }
         setDataSource();
         ChohyoSeigyoKyotsuManager 帳票制御共通Mgr = new ChohyoSeigyoKyotsuManager();
         ChohyoSeigyoKyotsu 帳票制御共通 = 帳票制御共通Mgr.get帳票制御共通(subGyomuCode, reportId);
