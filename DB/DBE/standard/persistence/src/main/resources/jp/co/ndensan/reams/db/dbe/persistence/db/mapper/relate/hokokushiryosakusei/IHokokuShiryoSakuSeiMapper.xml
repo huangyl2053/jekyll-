@@ -1225,7 +1225,7 @@
         ON A."gogitaiNo" = E."gogitaiNo"
         AND E."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> TO_CHAR(NOW(), 'YYYYMMDD')
         AND TO_CHAR(NOW(), 'YYYYMMDD') <![CDATA[<=]]> E."gogitaiYukoKikanShuryoYMD"
-        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" F
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON C."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE D."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND D."ninteichosaKanryoYMD" IS NOT NULL
