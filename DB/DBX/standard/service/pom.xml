@@ -4,7 +4,7 @@
     <parent>
         <groupId>jp.co.ndensan.reams.db.dbx</groupId>
         <artifactId>dbx</artifactId>
-        <version>1.9.1</version>
+        <version>1.10.0</version>
     </parent>
     <artifactId>DbxService</artifactId>
     <packaging>jar</packaging>
@@ -61,12 +61,12 @@
             <groupId>jp.co.ndensan.reams.ur.urf</groupId>
             <artifactId>UrfService</artifactId>
         </dependency>
-        <!-- ŒöŠJŒn -->
+        <!-- ï¿½ï¿½ï¿½Jï¿½n -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxService</artifactId>
         </dependency>
-        <!-- ƒeƒXƒg -->
+        <!-- ï¿½eï¿½Xï¿½g -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbxTestHelper</artifactId>
