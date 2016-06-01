@@ -16,12 +16,12 @@ import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsu.KibetsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsuchochuyuyo.KibetsuChoshuYuyo;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.ChoshuYuyoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.ChoshuYuyoJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -1071,7 +1071,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     public FlexibleDate get徴収猶予申請年月日() {
 
         ChoshuYuyo 徴収猶予 = get徴収猶予();
-        return 徴収猶予 != null ? 徴収猶予.get徴収猶予申請年月日() : FlexibleDate.EMPTY;
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予申請年月日() : null;
     }
 
     /**
@@ -1082,7 +1082,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     public FlexibleDate get徴収猶予決定年月日() {
 
         ChoshuYuyo 徴収猶予 = get徴収猶予();
-        return 徴収猶予 != null ? 徴収猶予.get徴収猶予決定年月日() : FlexibleDate.EMPTY;
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予決定年月日() : null;
     }
 
     /**
@@ -1093,7 +1093,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     public FlexibleDate get徴収猶予取消年月日() {
 
         ChoshuYuyo 徴収猶予 = get徴収猶予();
-        return 徴収猶予 != null ? 徴収猶予.get徴収猶予取消年月日() : FlexibleDate.EMPTY;
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予取消年月日() : null;
     }
 
     /**
@@ -1104,7 +1104,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     public Code get徴収猶予種類コード() {
 
         ChoshuYuyo 徴収猶予 = get徴収猶予();
-        return 徴収猶予 != null ? 徴収猶予.get徴収猶予種類コード() : Code.EMPTY;
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予種類コード() : null;
     }
 
     /**
@@ -1115,7 +1115,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     public RString get徴収猶予取消事由() {
 
         ChoshuYuyo 徴収猶予 = get徴収猶予();
-        return 徴収猶予 != null ? 徴収猶予.get徴収猶予取消事由() : RString.EMPTY;
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予取消事由() : null;
     }
 
     /**
@@ -1126,7 +1126,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     public RString get徴収猶予状態区分() {
 
         ChoshuYuyo 徴収猶予 = get徴収猶予();
-        return 徴収猶予 != null ? 徴収猶予.get徴収猶予状態区分() : RString.EMPTY;
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予状態区分() : null;
     }
 
     /**
@@ -1137,7 +1137,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     public RString get徴収猶予作成区分() {
 
         ChoshuYuyo 徴収猶予 = get徴収猶予();
-        return 徴収猶予 != null ? 徴収猶予.get徴収猶予作成区分() : RString.EMPTY;
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予作成区分() : null;
     }
 
     /**
@@ -1160,7 +1160,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     public List<KibetsuChoshuYuyo> get介護期別徴収猶予() {
         ChoshuYuyo 徴収猶予 = get徴収猶予();
         if (徴収猶予 == null) {
-            return new ArrayList<>();
+            return null;
         }
         return 徴収猶予.getKibetsuChoshuYuyoList();
     }
@@ -1175,7 +1175,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     private Decimal get期別金額(int 期, RString 徴収方法期別) {
 
         if (kibetsu == null || kibetsu.values() == null || kibetsu.values().isEmpty()) {
-            return Decimal.ZERO;
+            return null;
         }
         List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
         for (Kibetsu 介護期別 : 介護期別List) {
@@ -1186,7 +1186,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
                 return 介護期別.getChoteiKyotsu(identifier).get調定額();
             }
         }
-        return Decimal.ZERO;
+        return null;
     }
 
     /**
@@ -1200,11 +1200,11 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
 
         ChoshuYuyo 徴収猶予 = get徴収猶予();
         if (徴収猶予 == null) {
-            return FlexibleDate.EMPTY;
+            return null;
         }
         List<KibetsuChoshuYuyo> 介護期別徴収猶予情報List = 徴収猶予.getKibetsuChoshuYuyoList();
         if (介護期別徴収猶予情報List == null || 介護期別徴収猶予情報List.isEmpty()) {
-            return FlexibleDate.EMPTY;
+            return null;
         }
         for (KibetsuChoshuYuyo 介護期別徴収猶予情報 : 介護期別徴収猶予情報List) {
             if (徴収方法期別.equals(介護期別徴収猶予情報.get徴収方法())
@@ -1212,7 +1212,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
                 return 介護期別徴収猶予情報.get徴収猶予開始日();
             }
         }
-        return FlexibleDate.EMPTY;
+        return null;
     }
 
     /**
@@ -1226,11 +1226,11 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
 
         ChoshuYuyo 徴収猶予 = get徴収猶予();
         if (徴収猶予 == null) {
-            return FlexibleDate.EMPTY;
+            return null;
         }
         List<KibetsuChoshuYuyo> 介護期別徴収猶予情報List = 徴収猶予.getKibetsuChoshuYuyoList();
         if (介護期別徴収猶予情報List == null || 介護期別徴収猶予情報List.isEmpty()) {
-            return FlexibleDate.EMPTY;
+            return null;
         }
         for (KibetsuChoshuYuyo 介護期別徴収猶予情報 : 介護期別徴収猶予情報List) {
             if (徴収方法期別.equals(介護期別徴収猶予情報.get徴収方法())
@@ -1238,7 +1238,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
                 return 介護期別徴収猶予情報.get徴収猶予終了日();
             }
         }
-        return FlexibleDate.EMPTY;
+        return null;
     }
 
     /**
