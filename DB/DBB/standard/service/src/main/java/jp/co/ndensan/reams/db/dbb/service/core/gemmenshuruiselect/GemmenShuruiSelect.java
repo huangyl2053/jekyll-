@@ -22,7 +22,7 @@ public class GemmenShuruiSelect {
     private static final CodeShubetsu 種別 = new CodeShubetsu("0004");
 
     /**
-     * 取消種類情報を取得する
+     * 減免種類情報を取得する
      *
      * @param システム日付 FlexibleDate
      * @return List<UzT0007CodeEntity>
