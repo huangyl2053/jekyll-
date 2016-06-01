@@ -109,7 +109,7 @@ public class HihokenshaShisakuPanalHandler {
     private void setドロップダウンリストの設定(RString viewState, ShikakuRirekiJoho 資格得喪情報, ShikibetsuCode 識別コード) {
         get取得事由();
         get被保区分();
-        get所在保険者と措置元保険者(viewState, 資格得喪情報);
+        get所在保険者と措置元保険者(viewState, 資格得喪情報, 識別コード);
         表示と非表示();
         get旧保険者(viewState, 資格得喪情報, 識別コード);
         get喪失事由();
@@ -140,12 +140,18 @@ public class HihokenshaShisakuPanalHandler {
         panelDiv.getShikakuShosai().getDdlHihoKubun().setDataSource(被保区分リスト);
     }
 
-    private void get所在保険者と措置元保険者(RString viewState, ShikakuRirekiJoho 資格得喪情報) {
+    private void get所在保険者と措置元保険者(RString viewState, ShikakuRirekiJoho 資格得喪情報, ShikibetsuCode 識別コード) {
         List<KeyValueDataSource> 所在保険者List = new ArrayList<>();
         List<KeyValueDataSource> 措置元保険者List = new ArrayList<>();
         if (単一保険者.equals(広域と市町村判断())) {
             if (状態_追加.equals(viewState)) {
-                set所在保険者();
+                HihokenshaShisaku business = manager.get宛名情報(識別コード);
+                RString 所在保険者 = business.getGenLasdecCode().getColumnValue();
+                KeyValueDataSource keyValue = new KeyValueDataSource();
+                keyValue.setKey(所在保険者);
+                keyValue.setValue(RString.EMPTY);
+                所在保険者List.add(keyValue);
+                panelDiv.getShikakuShosai().getDdlShutokuShozaiHokensha().setDataSource(所在保険者List);
             } else {
                 KeyValueDataSource keyValue = new KeyValueDataSource();
                 keyValue.setKey(資格得喪情報.getShozaiHokensha());
@@ -170,21 +176,6 @@ public class HihokenshaShisakuPanalHandler {
             panelDiv.getShikakuShosai().getDdlShutokuShozaiHokensha().setDataSource(所在保険者List);
             panelDiv.getShikakuShosai().getDdlShutokuSochimotoHokensha().setDataSource(所在保険者List);
         }
-    }
-
-    private void set所在保険者() {
-        List<KeyValueDataSource> 所在保険者List = new ArrayList<>();
-        List<HihokenshaShisaku> 宛名情報List = manager.get宛名情報全て();
-        for (HihokenshaShisaku business : 宛名情報List) {
-            LasdecCode 現全国地方公共団体コード = business.getGenLasdecCode();
-            if (現全国地方公共団体コード != null) {
-                KeyValueDataSource keyValue = new KeyValueDataSource();
-                keyValue.setKey(現全国地方公共団体コード.getColumnValue());
-                keyValue.setValue(RString.EMPTY);
-                所在保険者List.add(keyValue);
-            }
-        }
-        panelDiv.getShikakuShosai().getDdlShutokuShozaiHokensha().setDataSource(所在保険者List);
     }
 
     private void get旧保険者(RString viewState, ShikakuRirekiJoho 資格得喪情報, ShikibetsuCode 識別コード) {
