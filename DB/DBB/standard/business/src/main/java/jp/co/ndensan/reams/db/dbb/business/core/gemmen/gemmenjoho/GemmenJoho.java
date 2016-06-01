@@ -15,12 +15,12 @@ import jp.co.ndensan.reams.db.dbb.business.core.gemmen.gemmen.GemmenIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.kibetsu.KibetsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.GemmenJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -800,7 +800,7 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
     public RString get減免状態区分() {
 
         Gemmen 介護賦課減免 = get介護賦課減免();
-        return 介護賦課減免 != null ? 介護賦課減免.get減免状態区分() : RString.EMPTY;
+        return 介護賦課減免 != null ? 介護賦課減免.get減免状態区分() : null;
     }
 
     /**
@@ -811,7 +811,7 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
     public RString get減免作成区分() {
 
         Gemmen 介護賦課減免 = get介護賦課減免();
-        return 介護賦課減免 != null ? 介護賦課減免.get減免作成区分() : RString.EMPTY;
+        return 介護賦課減免 != null ? 介護賦課減免.get減免作成区分() : null;
     }
 
     /**
@@ -822,7 +822,7 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
     public FlexibleDate get減免決定日() {
 
         Gemmen 介護賦課減免 = get介護賦課減免();
-        return 介護賦課減免 != null ? 介護賦課減免.get減免決定日() : FlexibleDate.EMPTY;
+        return 介護賦課減免 != null ? 介護賦課減免.get減免決定日() : null;
     }
 
     /**
@@ -833,7 +833,7 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
     public FlexibleDate get減免取消日() {
 
         Gemmen 介護賦課減免 = get介護賦課減免();
-        return 介護賦課減免 != null ? 介護賦課減免.get減免取消日() : FlexibleDate.EMPTY;
+        return 介護賦課減免 != null ? 介護賦課減免.get減免取消日() : null;
     }
 
     /**
@@ -844,7 +844,7 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
     public Decimal get取消減免額() {
 
         Gemmen 介護賦課減免 = get介護賦課減免();
-        return 介護賦課減免 != null ? 介護賦課減免.get取消減免額() : Decimal.ZERO;
+        return 介護賦課減免 != null ? 介護賦課減免.get取消減免額() : null;
     }
 
     /**
@@ -855,7 +855,7 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
     public RString get減免事由() {
 
         Gemmen 介護賦課減免 = get介護賦課減免();
-        return 介護賦課減免 != null ? 介護賦課減免.get減免事由() : RString.EMPTY;
+        return 介護賦課減免 != null ? 介護賦課減免.get減免事由() : null;
     }
 
     /**
@@ -880,7 +880,7 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
     private Decimal get期別金額(int 期, RString 徴収方法期別) {
 
         if (kibetsu == null || kibetsu.values() == null || kibetsu.values().isEmpty()) {
-            return Decimal.ZERO;
+            return null;
         }
         List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
         for (Kibetsu 介護期別 : 介護期別List) {
@@ -891,7 +891,7 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
                 return 介護期別.getChoteiKyotsu(identifier).get調定額();
             }
         }
-        return Decimal.ZERO;
+        return null;
     }
 
     /**
