@@ -87,8 +87,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoJyuminhyouTashajukiCSVDataSakuseiFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KaigoJyuminhyouTashajukiCSVDataSakuseiFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KaigoJyuminhyouTashajukiCSVDataSakuseiFinder}のインスタンス
      */
     public static KaigoJyuminhyouTashajukiCSVDataSakuseiFinder createInstance() {
         return new KaigoJyuminhyouTashajukiCSVDataSakuseiFinder();
@@ -114,6 +113,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             hachientity = this.get8桁市町村コード(hachilist, hachientity, tashajyukiList);
             RString 連番new = this.get連番(Integer.valueOf(hachientity.get連番().toString()) + 1);
             hachientity.set連番(連番new);
+            hachientity.set識別ＩＤ(識別ＩＤ_DA01);
             hachientity.setタイムスタンプ(new RString(YMDHMS.now().toString()));
             hachientity.set最終レコード区分(最終ﾚｺｰﾄﾞ);
             hachilist.add(hachientity);
@@ -737,7 +737,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             tashajukientity = get被保険者番号ない(tashajukientity);
             RStringBuilder errorMsg = new RStringBuilder();
             errorMsg.append(new RString("他社住基連携の取得処理で被保険者番号がないデータがあります。識別コード＝"));
-            errorMsg.append(entity.get識別コード().value());
+            errorMsg.append(entity.get識別コード());
             errorMsg.append(new RString("。"));
             RLogger.error(errorMsg.toRString());
         }
