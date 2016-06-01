@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.service.tokuchokarisanteifukakakutei.TokuchoKa
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  *
@@ -32,6 +33,7 @@ public class FukaKakutei {
     private static final RString 仮算定異動賦課確定 = new RString("仮算定異動賦課確定");
     private static final RString 本算定賦課確定 = new RString("本算定賦課確定");
     private static final RString 異動賦課確定 = new RString("異動賦課確定");
+    private static final RString 共通ボタン = new RString("btnFukaKakutei");
 
     /**
      * コンストラクタです。
@@ -47,6 +49,7 @@ public class FukaKakutei {
      * @return ResponseData
      */
     public ResponseData<FukaKakuteiDiv> onLoad(FukaKakuteiDiv div) {
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
         getHandler(div).賦課年度の設定();
         if (getHandler(div).処理名_特徴仮算定賦課(基準日時取得(div, 特徴仮算定賦課), 基準日時取得(div, 特徴仮算定賦課確定))) {
 
@@ -64,6 +67,7 @@ public class FukaKakutei {
         if (getHandler(div).処理名_異動賦課(基準日時取得(div, 異動賦課), 基準日時取得(div, 異動賦課確定))) {
             return ResponseData.of(div).respond();
         }
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, false);
         return ResponseData.of(div).respond();
     }
 
