@@ -21,9 +21,15 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoS
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -43,6 +49,12 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -50,6 +62,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -60,7 +73,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class ShujiiIkenshoIraiTaishoIchiran {
 
     private static final RString SHINSEISHOKANRINO = new RString("ShinseishoKanriNo");
-    private static final RString CSVファイル名 = new RString("主治医意見書依頼一覧.csv");
+    private static final RString CSVファイル名 = new RString("ShujiiIkenshoIraiIchiran.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
 
     /**
@@ -107,12 +120,15 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(ShujiiIkenshoIraiTaishoIchiranDiv div, IDownLoadServletResponse response) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
+        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         try (CsvWriter<ShujiiIkenshoIraiCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
             List<dgNinteiTaskList_Row> rowList = div.getCcdTaskList().getCheckbox();
             for (dgNinteiTaskList_Row row : rowList) {
                 csvWriter.writeLine(getCsvData(row));
+                personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                        row.getShinseishoKanriNo()));
             }
             csvWriter.close();
         }
@@ -120,7 +136,74 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
+        AccessLogger.log(AccessLogType.照会, personalData);
+        outputJokenhyoFactory(div.getCcdTaskList().一览件数(), div);
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
+    }
+
+    private void outputJokenhyoFactory(RString 一览件数, ShujiiIkenshoIraiTaishoIchiranDiv div) {
+        Association association = AssociationFinderFactory.createInstance().getAssociation();
+        EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
+                new RString("主治医意見書依頼一覧"),
+                association.getLasdecCode_().getColumnValue(),
+                association.get市町村名(),
+                new RString("56"),
+                CSVファイル名,
+                new RString("DBE204001"),
+                get一览件数(一览件数),
+                contribute(div));
+        OutputJokenhyoFactory.createInstance(item).print();
+    }
+
+    private RString get一览件数(RString 一览件数) {
+        return DecimalFormatter.toコンマ区切りRString(new Decimal(一览件数.toString()), 0);
+    }
+
+    private List<RString> contribute(ShujiiIkenshoIraiTaishoIchiranDiv div) {
+        List<RString> 出力条件 = new ArrayList<>();
+        for (dgNinteiTaskList_Row row : div.getCcdTaskList().getCheckbox()) {
+            出力条件.add(get条件(new RString("申請書管理番号"), row.getShinseishoKanriNo()));
+            出力条件.add(get条件(new RString("保険者"), row.getHokensha()));
+            出力条件.add(get条件(new RString("認定申請日"), getパターン1(row.getNinteiShinseiDay().getValue())));
+            出力条件.add(get条件(new RString("被保険者_被保番号"), row.getHihoNumber()));
+            出力条件.add(get条件(new RString("被保険者_氏名"), row.getHihoShimei()));
+            出力条件.add(get条件(new RString("申請区分_申請時コード"), getコード(row.getShinseiKubunShinseiji(), 1)));
+            出力条件.add(get条件(new RString("申請区分_申請時"), row.getShinseiKubunShinseiji()));
+            出力条件.add(get条件(new RString("意見書依頼_完了日"), getパターン1(row.getIkenshoIraiKanryoDay().getValue())));
+            出力条件.add(get条件(new RString("意見書依頼_再意見書回数"), get回数(row.getIkenshoIraiIkenCount().getValue())));
+            出力条件.add(get条件(new RString("意見書依頼_依頼日"), getパターン1(row.getIkenshoIraiDay().getValue())));
+            出力条件.add(get条件(new RString("意見書依頼_依頼書発行日"), getパターン1(row.getIkenshoIraiIraishoHakkoDay().getValue())));
+            出力条件.add(get条件(new RString("意見書依頼_意見書出力日"), getパターン1(row.getIkenshoIraiIkenshoShutsuryokuDay().getValue())));
+            出力条件.add(get条件(new RString("意見書依頼_依頼期限"), getパターン1(row.getIkenshoIraiKigen().getValue())));
+            出力条件.add(get条件(new RString("意見書依頼_初回_2回目コード"), getコード(row.getIkenshoIraiShokai(), 2)));
+            出力条件.add(get条件(new RString("意見書依頼_初回_2回目"), row.getIkenshoIraiShokai()));
+            出力条件.add(get条件(new RString("(今回主治医)医療機関"), row.getKonkaiShujiiIryokikan()));
+            出力条件.add(get条件(new RString("(今回主治医)主治医"), row.getKonkaiShujii()));
+            出力条件.add(get条件(new RString("(前回主治医)医療機関"), row.getZenkaiIryokikan()));
+            出力条件.add(get条件(new RString("(前回主治医)主治医"), row.getZenkaiShujii()));
+            出力条件.add(get条件(new RString("郵便番号"), 郵便番号編集(row.getYubinNumber())));
+            出力条件.add(get条件(new RString("住所"), row.getJusho()));
+            出力条件.add(get条件(new RString("入所施設コード"), row.getNyushoShisetsuCode()));
+            出力条件.add(get条件(new RString("入所施設"), row.getNyushoShisetsu()));
+            出力条件.add(get条件(new RString("経過日数"), new RString(RDate.getNowDate().getBetweenDays(row.getNinteiShinseiDay().getValue()))));
+        }
+        return 出力条件;
+    }
+
+    private RString get回数(Decimal 回数) {
+        if (回数 == null) {
+            return RString.EMPTY;
+        }
+        return new RString(回数.toString());
+    }
+
+    private RString get条件(RString バッチパラメータ名, RString 値) {
+        RStringBuilder 条件 = new RStringBuilder();
+        条件.append("【");
+        条件.append(バッチパラメータ名);
+        条件.append("】");
+        条件.append(値);
+        return 条件.toRString();
     }
 
     /**
