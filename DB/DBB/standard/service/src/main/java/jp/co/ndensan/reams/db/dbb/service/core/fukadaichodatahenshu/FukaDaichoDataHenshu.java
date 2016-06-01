@@ -119,6 +119,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
     private static final RString 定数_住特 = new RString("住特");
     private static final CodeShubetsu コード種別0001 = new CodeShubetsu("0001");
     private static final RString 公式 = new RString("×　1/12");
+    private static final RString 定数_ゼロ = new RString("0");
 
     /**
      * コンストラクタです。
@@ -1207,7 +1208,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         } else if (RString.isNullOrEmpty(更正前)) {
             return 更正後;
         } else if (RString.isNullOrEmpty(更正後)) {
-            return FORMAT_.concat(更正前);
+            return 定数_ゼロ.equals(更正前) ? 更正前 : FORMAT_.concat(更正前);
         }
         更正後 = 更正後.replace(FORMAT_符号, RString.EMPTY);
         更正前 = 更正前.replace(FORMAT_符号, RString.EMPTY);
