@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadI
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaItem;
 import jp.co.ndensan.reams.db.dbe.business.report.saichekkuhyo.SaiChekkuhyoItem;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.SaiChekkuhyoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.NinteiChosaIraiDiv;
@@ -28,17 +29,24 @@ import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.NinteiShinseiKu
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChosainJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChosainJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -48,6 +56,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
+import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
@@ -688,6 +698,7 @@ public class NinteiChosaIraiHandler {
     public List<ChosaIraishoHeadItem> create認定調査依頼書印刷用パラメータ() {
         List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
         List<ChosaIraishoHeadItem> chosaIraishoHeadItemList = new ArrayList<>();
+        int 宛名連番 = 1;
         for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
             List<RString> 被保険者番号リスト = get被保険者番号(row.getHihokenshaNo());
             RString 誕生日明治 = HOUSI;
@@ -712,10 +723,16 @@ public class NinteiChosaIraiHandler {
             } else {
                 性別男 = HOUSI;
             }
-
+            RStringBuilder builder = new RStringBuilder();
+            builder.append("*");
+            builder.append((new RString(String.valueOf(宛名連番++))).padZeroToLeft(INDEX_6));
+            builder.append("#");
+            ChosainJoho 調査員情報 = new ChosainJohoManager().get調査員情報(LasdecCode.EMPTY, ChosaItakusakiCode.EMPTY, ChosainCode.EMPTY);
             Map<Integer, RString> 通知文
                     = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220001.getReportId(), KamokuCode.EMPTY, 1);
             RString homonChosasakiJusho = row.getHomonChosasakiJusho();
+            YubinNo 郵便番号 = 調査員情報.get郵便番号();
+            AtenaJusho 住所 = 調査員情報.get住所();
             ChosaIraishoHeadItem item = new ChosaIraishoHeadItem(
                     div.getTxthokkoymd().getValue().toDateString(),
                     RString.EMPTY,
@@ -727,15 +744,15 @@ public class NinteiChosaIraiHandler {
                     RString.EMPTY,
                     RString.EMPTY,
                     RString.EMPTY,
-                    new RString(""), // TODO QA:789 宛先情報の取得
-                    new RString(""),
-                    new RString(""),
-                    new RString(""),
-                    new RString(""),
-                    new RString(""),
-                    new RString(""),
-                    new RString(""),
-                    new RString("要介護認定調査依頼書"),
+                    郵便番号 == null ? RString.EMPTY : 郵便番号.value(),
+                    住所 == null ? RString.EMPTY : 住所.value(),
+                    調査員情報.get所属機関名称(),
+                    調査員情報.get調査員氏名(),
+                    get名称付与(),
+                    getカスタマーバーコード(調査員情報),
+                    RString.EMPTY,
+                    builder.toRString(),
+                    ConfigNameDBE.認定調査依頼書.get名称(),
                     通知文.get(1),
                     被保険者番号リスト.get(0),
                     被保険者番号リスト.get(1),
@@ -769,6 +786,33 @@ public class NinteiChosaIraiHandler {
             chosaIraishoHeadItemList.add(item);
         }
         return chosaIraishoHeadItemList;
+    }
+
+    private RString getカスタマーバーコード(ChosainJoho 調査員情報) {
+        RString カスタマーバーコード = RString.EMPTY;
+        CustomerBarCode barCode = new CustomerBarCode();
+        YubinNo 郵便番号 = 調査員情報.get郵便番号();
+        AtenaJusho 住所 = 調査員情報.get住所();
+        if (郵便番号 != null && 住所 != null) {
+            CustomerBarCodeResult result = barCode.convertCustomerBarCode(郵便番号.value(), 住所.value());
+            if (result != null) {
+                カスタマーバーコード = result.getCustomerBarCode();
+            }
+        }
+        return カスタマーバーコード;
+    }
+
+    private RString get名称付与() {
+        RString key = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書_宛先敬称, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString meishoFuyo = RString.EMPTY;
+        if (ChohyoAtesakiKeisho.なし.getコード().equals(key)) {
+            meishoFuyo = RString.EMPTY;
+        } else if (ChohyoAtesakiKeisho.様.getコード().equals(key)) {
+            meishoFuyo = ChohyoAtesakiKeisho.様.get名称();
+        } else if (ChohyoAtesakiKeisho.殿.getコード().equals(key)) {
+            meishoFuyo = ChohyoAtesakiKeisho.殿.get名称();
+        }
+        return meishoFuyo;
     }
 
     /**
