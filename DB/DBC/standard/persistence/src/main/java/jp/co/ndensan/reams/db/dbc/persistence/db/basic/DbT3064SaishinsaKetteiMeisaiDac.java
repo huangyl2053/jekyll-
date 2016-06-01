@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3064SaishinsaKetteiMeisai;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3064SaishinsaKetteiMeisai.hokenshaKubun;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3064SaishinsaKetteiMeisai.rirekiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3064SaishinsaKetteiMeisai.toriatsukaiYM;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3064SaishinsaKetteiMeisai.torikomiYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3064SaishinsaKetteiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -116,6 +117,29 @@ public class DbT3064SaishinsaKetteiMeisaiDac implements ISaveable<DbT3064Saishin
                                 eq(hokenshaKubun, 保険者区分)))
                 .order(by(rirekiNo, DESC)).limit(1).
                 toObject(DbT3064SaishinsaKetteiMeisaiEntity.class);
+    }
+
+    /**
+     * 再審査決定明細を取得します。
+     *
+     * @param 取込年月 ToriatsukaiYM
+     * @param 保険者区分 HokenshaKubun
+     * @return DbT3064SaishinsaKetteiMeisaiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3064SaishinsaKetteiMeisaiEntity> selectAllBy(
+            FlexibleYearMonth 取込年月,
+            RString 保険者区分) throws NullPointerException {
+        requireNonNull(保険者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者区分"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3064SaishinsaKetteiMeisai.class).
+                where(and(
+                                eq(torikomiYM, 取込年月),
+                                eq(hokenshaKubun, 保険者区分))).
+                toList(DbT3064SaishinsaKetteiMeisaiEntity.class);
     }
 
     /**

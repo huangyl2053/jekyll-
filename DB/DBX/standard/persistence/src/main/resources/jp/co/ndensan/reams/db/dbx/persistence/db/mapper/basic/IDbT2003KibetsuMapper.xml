@@ -4,12 +4,12 @@
 <!-- 作者： LDNS王肖 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT2003Kibetsu">
      SELECT
-         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu" />
+         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu" />
      FROM
          rgdb."DbT2003Kibetsu"
      WHERE
@@ -36,7 +36,7 @@
 
 
     <!--テーブルDbT2003Kibetsuの項目をDbT2003KibetsuEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT2003KibetsuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT2003KibetsuEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity" autoMapping="true">
         <id property="choteiNendo" column="dbT2003Kibetsu_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="dbT2003Kibetsu_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="tsuchishoNo" column="dbT2003Kibetsu_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>

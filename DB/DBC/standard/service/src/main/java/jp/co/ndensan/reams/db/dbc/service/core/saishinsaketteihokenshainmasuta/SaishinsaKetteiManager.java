@@ -86,8 +86,8 @@ public class SaishinsaKetteiManager {
         if (再処理区分_1.equals(再処理区分)) {
             param.set取込年月(処理年月);
             param.set保険者区分(保険者区分);
-            List<DbT3064SaishinsaKetteiMeisaiEntity> 明細テーブルList = mapper.select再審査決定明細テーブル(param);
-            List<DbT3063SaishinsaKetteiShukeiEntity> 集計テーブルList = mapper.select再審査決定集計テーブル(param);
+            List<DbT3064SaishinsaKetteiMeisaiEntity> 明細テーブルList = 再審査決定明細Dac.selectAllBy(param.get取込年月(), param.get保険者区分());
+            List<DbT3063SaishinsaKetteiShukeiEntity> 集計テーブルList = 再審査決定集計Dac.selectAllBy(param.get取込年月(), param.get保険者区分());
 
             if (明細テーブルList != null) {
                 for (DbT3064SaishinsaKetteiMeisaiEntity entity : 明細テーブルList) {
