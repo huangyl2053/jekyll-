@@ -231,7 +231,6 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(shoriEdaban, 処理枝番),
                                 eq(nendo, 年度),
                                 eq(nendoNaiRenban, 年度内連番))).
-                order(by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
 
