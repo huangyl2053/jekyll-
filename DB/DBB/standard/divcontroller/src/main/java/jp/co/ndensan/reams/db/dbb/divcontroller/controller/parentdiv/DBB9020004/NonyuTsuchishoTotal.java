@@ -10,10 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020004.DBB9020004StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020004.NonyuTsuchishoTotalDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020004.NotsuInfoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB9020004.NonyuTsuchishoTotalHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -44,10 +50,19 @@ public class NonyuTsuchishoTotal {
      * @return システム管理情報（納入通知書）Divを持つResponseData
      */
     public ResponseData<NonyuTsuchishoTotalDiv> onClick_btnUpdate(NonyuTsuchishoTotalDiv div) {
-        List<ChohyoSeigyoHanyo> 帳票制御汎用リスト = ViewStateHolder.get(ViewStateKeys.帳票制御汎用リスト, List.class);
-        getHandler(div).save(帳票制御汎用リスト);
-        getHandler(div).set完了メッセージ表示();
-        return ResponseData.of(div).setState(DBB9020004StateName.完了);
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            List<ChohyoSeigyoHanyo> 帳票制御汎用リスト = ViewStateHolder.get(ViewStateKeys.帳票制御汎用リスト, List.class);
+            getHandler(div).set完了メッセージ表示();
+            getHandler(div).save(帳票制御汎用リスト);
+            return ResponseData.of(div).setState(DBB9020004StateName.完了);
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**

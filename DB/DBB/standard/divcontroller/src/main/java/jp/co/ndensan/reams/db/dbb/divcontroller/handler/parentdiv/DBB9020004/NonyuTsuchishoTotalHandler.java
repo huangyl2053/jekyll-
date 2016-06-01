@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB9020004;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.KaishiKi;
@@ -648,11 +649,12 @@ public final class NonyuTsuchishoTotalHandler {
 
     private void setDataSource(int 調定年度) {
         List<KeyValueDataSource> ddlSourceList = new ArrayList<>();
-        for (int i = 調定年度; 平成12年_西暦 <= i; i--) {
+        for (int i = 平成12年_西暦; i <= 調定年度; i++) {
             KeyValueDataSource source = new KeyValueDataSource(new RString(String.valueOf(i)),
                     new FlexibleYear(String.valueOf(i)).wareki().firstYear(FirstYear.ICHI_NEN).getYear());
             ddlSourceList.add(source);
         }
+        Collections.reverse(ddlSourceList);
         div.getKonkaiShoriNaiyo().getDdlChoteiNendo().setDataSource(ddlSourceList);
     }
 }
