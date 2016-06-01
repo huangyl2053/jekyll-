@@ -356,6 +356,21 @@ public class TaJushochiTokureisyaKanriManager {
         return daichoJohoMapper.select宛名情報(parameter);
     }
 
+    /**
+     * 最新履歴番号を取得します。
+     *
+     * @param 識別コード 識別コード
+     * @return int 最新履歴番号
+     */
+    @Transaction
+    public int get最新履歴番号(ShikibetsuCode 識別コード) {
+        DbT1004ShisetsuNyutaishoEntity entit = 介護保険施設入退所Manager.get最大履歴番号(識別コード);
+        if (entit == null) {
+            return 1;
+        }
+        return entit.getRirekiNo() + 1;
+    }
+
     private void set他市町村住所地特例(
             List<DbT1003TashichosonJushochiTokureiEntity> tokureiEntityList,
             List<DbT1004ShisetsuNyutaishoEntity> nyutaishoEntityList,

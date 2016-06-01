@@ -384,11 +384,7 @@ public class TaJushochiTokureishaKanriHandler {
             row.setNyushoShisetsuShurui(div.getCcdShisetsuJoho().get施設種類());
             row.setRowState(RowState.Added);
             rowList.add(row);
-            RString 履歴番号 = rowList.get(0).getRirekiNo();
-            if (RString.isNullOrEmpty(履歴番号)) {
-                履歴番号 = new RString("0");
-            }
-            int 最新履歴番号 = Integer.parseInt(履歴番号.toString()) + 1;
+            int 最新履歴番号 = TaJushochiTokureisyaKanriManager.createInstance().get最新履歴番号(識別コード);
             ShisetsuNyutaisho taisho = new ShisetsuNyutaisho(識別コード, 最新履歴番号);
             TashichosonJushochiTokurei 住所地特例の識別子
                     = new TashichosonJushochiTokurei(識別コード, new FlexibleDate(div.getTxtTekiyobi().getValue().toString()), 変更後枝番);
