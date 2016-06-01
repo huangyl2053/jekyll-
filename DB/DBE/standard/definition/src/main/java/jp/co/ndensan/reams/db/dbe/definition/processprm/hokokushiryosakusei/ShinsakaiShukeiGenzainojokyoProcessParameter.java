@@ -20,6 +20,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShinsakaiShukeiGenzainojokyoProcessParameter implements IBatchProcessParameter {
 
+    private boolean isJigyoJyokyoHokoku;
+    private boolean isJissiJyokyoTokei;
+    private boolean isSinsaHanteiJyokyo;
+    private boolean isSinsakaiKanrenTokei;
+    private boolean isCsvShutsuryoku;
+    private RString shutsuryokuFairuName;
     private boolean isEmptyHokensyaNo;
     private RString hokensyaNo;
     private RString hihokenshaKubun;
@@ -40,6 +46,12 @@ public class ShinsakaiShukeiGenzainojokyoProcessParameter implements IBatchProce
     /**
      * コンストラクタです。
      *
+     * @param isJigyoJyokyoHokoku 事業状況報告出力区分
+     * @param isJissiJyokyoTokei 実施状況統計出力区分
+     * @param isSinsaHanteiJyokyo 審査判定状況出力区分
+     * @param isSinsakaiKanrenTokei 審査会関連統計資料作成出力区分
+     * @param isCsvShutsuryoku CSV出力区分
+     * @param shutsuryokuFairuName 出力ファイル名
      * @param isEmptyHokensyaNo 空保険者番号
      * @param hokensyaNo 保険者番号
      * @param hihokenshaKubun 被保険者区分
@@ -58,6 +70,12 @@ public class ShinsakaiShukeiGenzainojokyoProcessParameter implements IBatchProce
      * @param isHorei 申請区分(法令)
      */
     public ShinsakaiShukeiGenzainojokyoProcessParameter(
+            boolean isJigyoJyokyoHokoku,
+            boolean isJissiJyokyoTokei,
+            boolean isSinsaHanteiJyokyo,
+            boolean isSinsakaiKanrenTokei,
+            boolean isCsvShutsuryoku,
+            RString shutsuryokuFairuName,
             boolean isEmptyHokensyaNo,
             RString hokensyaNo,
             RString hihokenshaKubun,
@@ -74,6 +92,12 @@ public class ShinsakaiShukeiGenzainojokyoProcessParameter implements IBatchProce
             RString taishoGeppiTo,
             boolean isShinseiji,
             boolean isHorei) {
+        this.isJigyoJyokyoHokoku = isJigyoJyokyoHokoku;
+        this.isJissiJyokyoTokei = isJissiJyokyoTokei;
+        this.isSinsaHanteiJyokyo = isSinsaHanteiJyokyo;
+        this.isSinsakaiKanrenTokei = isSinsakaiKanrenTokei;
+        this.isCsvShutsuryoku = isCsvShutsuryoku;
+        this.shutsuryokuFairuName = shutsuryokuFairuName;
         this.isEmptyHokensyaNo = isEmptyHokensyaNo;
         this.hokensyaNo = hokensyaNo;
         this.hihokenshaKubun = hihokenshaKubun;

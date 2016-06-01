@@ -289,6 +289,12 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
     public ShinsakaiShukeiGenzainojokyoProcessParameter toShinsakaiShukeiGenzainojokyoProcessParameter() {
 
         return new ShinsakaiShukeiGenzainojokyoProcessParameter(
+                jigyoJyokyoHokoku,
+                jissiJyokyoTokei,
+                sinsaHanteiJyokyo,
+                sinsakaiKanrenTokei,
+                csvShutsuryoku,
+                shutsuryokuFairu,
                 RString.isNullOrEmpty(hokensyaNo),
                 hokensyaNo,
                 hiHokensyaKubun,
