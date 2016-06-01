@@ -61,6 +61,7 @@ public class GemmenTorikesiTsuchiShoPrintService {
 
     private static final RString 種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
     private static final RString RSTRING_1 = new RString("1");
+    private static final RString RSTRING_2 = new RString("-");
     private static final int INDEX_ONE = 1;
     private static final int INDEX_TWO = 2;
     private static final int INDEX_THREE = 3;
@@ -140,7 +141,7 @@ public class GemmenTorikesiTsuchiShoPrintService {
                 Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
                 ChohyoSeigyoKyotsu 帳票制御共通 = 減免取消通知書情報.get帳票制御共通();
                 boolean is公印に掛ける = false;
-                if (帳票制御共通.get首長名印字位置() != null && RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
+                if (RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
                     is公印に掛ける = true;
                 }
                 boolean is公印を省略 = false;
@@ -187,8 +188,7 @@ public class GemmenTorikesiTsuchiShoPrintService {
                 Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
                 ChohyoSeigyoKyotsu 帳票制御共通 = 減免取消通知書情報.get帳票制御共通();
                 boolean is公印に掛ける = true;
-                if (帳票制御共通 != null && 帳票制御共通.get首長名印字位置() != null && 帳票制御共通.
-                        get首長名印字位置().equals(RSTRING_1)) {
+                if (RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
                     is公印に掛ける = true;
                 }
                 boolean is公印を省略 = false;
@@ -229,17 +229,22 @@ public class GemmenTorikesiTsuchiShoPrintService {
     private HyojiCodes get表示コード(GemmenTorikesiTsuchiShoJoho 減免取消通知書情報) {
         HyojiCodes 表示コード = null;
         HyojiCodeResearcher researcher = new HyojiCodeResearcher();
-        if (isNotNull(減免取消通知書情報.get帳票制御共通()) && isNotNull(減免取消通知書情報.get宛名())
-                && isNotNull(減免取消通知書情報.get納組情報())) {
-            IGyoseiKukaku 行政区画 = 減免取消通知書情報.get宛名().get行政区画();
-            IJusho 住所 = 減免取消通知書情報.get宛名().get住所();
+        if (isNotNull(減免取消通知書情報.get帳票制御共通())) {
+            IGyoseiKukaku 行政区画 = null;
+            IJusho 住所 = null;
+            if (isNotNull(減免取消通知書情報.get宛名())) {
+                行政区画 = 減免取消通知書情報.get宛名().get行政区画();
+                住所 = 減免取消通知書情報.get宛名().get住所();
+            }
+
             表示コード = researcher.create表示コード情報(減免取消通知書情報.get帳票制御共通().toEntity(),
                     住所 != null ? 住所.get町域コード().value() : RString.EMPTY,
                     行政区画 != null ? 行政区画.getGyoseiku().getコード().value() : RString.EMPTY,
                     行政区画 != null ? 行政区画.getChiku1().getコード().value() : RString.EMPTY,
                     行政区画 != null ? 行政区画.getChiku2().getコード().value() : RString.EMPTY,
                     行政区画 != null ? 行政区画.getChiku3().getコード().value() : RString.EMPTY,
-                    減免取消通知書情報.get納組情報().getNokumi().getNokumiCode());
+                    減免取消通知書情報.get納組情報() != null
+                    ? 減免取消通知書情報.get納組情報().getNokumi().getNokumiCode() : RString.EMPTY);
         }
         return 表示コード;
     }
@@ -322,6 +327,9 @@ public class GemmenTorikesiTsuchiShoPrintService {
             } else if (特徴期別金額取消後 != null && 特徴期別金額取消前 == null) {
                 更正前後期割額.set特徴減免取消額(DecimalFormatter
                         .toコンマ区切りRString(特徴期別金額取消後, 0));
+            } else if (特徴期別金額取消後 == null && 特徴期別金額取消前 != null) {
+                更正前後期割額.set特徴減免取消額(RSTRING_2.concat(DecimalFormatter
+                        .toコンマ区切りRString(特徴期別金額取消前, 0)));
             } else {
                 更正前後期割額.set特徴減免取消額(RString.EMPTY);
             }
@@ -355,6 +363,9 @@ public class GemmenTorikesiTsuchiShoPrintService {
             } else if (普徴期別金額取消後 != null && 普徴期別金額取消前 == null) {
                 更正前後期割額.set普徴減免取消額(DecimalFormatter
                         .toコンマ区切りRString(普徴期別金額取消後, 0));
+            } else if (普徴期別金額取消後 == null && 普徴期別金額取消前 != null) {
+                更正前後期割額.set普徴減免取消額(RSTRING_2.concat(DecimalFormatter
+                        .toコンマ区切りRString(普徴期別金額取消前, 0)));
             } else {
                 更正前後期割額.set普徴減免取消額(RString.EMPTY);
             }
