@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -43,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class TajutokuIdoTeisei {
 
     private static final LockingKey LOCKINGKEY = new LockingKey("TatokuIdoTeisei");
+    private final RString 削除 = new RString("削除");
     private static final QuestionMessage SYORIMESSAGE = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
             UrQuestionMessages.処理実行の確認.getMessage().evaluate());
 
@@ -88,10 +90,10 @@ public class TajutokuIdoTeisei {
                 getCcdTaJushochiTokureishaKanri().get適用情報一覧();
         List<TekiyouJouhou> 適用情報グリッド = new ArrayList<>();
         for (dgJushochiTokureiRireki_Row dg : 適用情報一覧) {
-            if (!dg.getRowState().equals(RowState.Unchanged) && !dg.getRowState().equals(RowState.Deleted)) {
+            if (!dg.getRowState().equals(RowState.Deleted)) {
                 TekiyouJouhou tekiyouJouhou = new TekiyouJouhou();
-                tekiyouJouhou.set適用日(dg.getTekiyoYMD().getText());
-                tekiyouJouhou.set解除日(dg.getKaijoYMD().getText());
+                tekiyouJouhou.set適用日(nullCheck(dg.getTekiyoYMD().getValue()));
+                tekiyouJouhou.set解除日(nullCheck(dg.getKaijoYMD().getValue()));
                 適用情報グリッド.add(tekiyouJouhou);
             }
         }
@@ -99,7 +101,7 @@ public class TajutokuIdoTeisei {
         List<dgShisetsuNyutaishoRireki_Row> 施設入退所履歴一覧 = requestDiv.getTajutokuIdoTeiseiIdoJoho().
                 getShisetsuIdoJoho().getCcdShisetsuNyutaishoRirekiKanri().get施設入退所履歴一覧();
         for (dgShisetsuNyutaishoRireki_Row dg : 施設入退所履歴一覧) {
-            if (!dg.getRowState().equals(RowState.Unchanged) && !dg.getRowState().equals(RowState.Deleted)) {
+            if (!削除.equals(dg.getState())) {
                 ShisetsuNyutaishoData shisetsuNyutaishoData = new ShisetsuNyutaishoData();
                 shisetsuNyutaishoData.set入所日(dg.getNyushoDate().getValue());
                 shisetsuNyutaishoData.set退所日(dg.getTaishoDate().getValue());
@@ -117,6 +119,14 @@ public class TajutokuIdoTeisei {
         requestDiv.getTajutokuIdoTeiseiIdoJoho().getShisetsuIdoJoho().getCcdShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
         RealInitialLocker.release(LOCKINGKEY);
         return ResponseData.of(requestDiv).setState(DBA2040021StateName.完了状態);
+    }
+
+    private RString nullCheck(RDate 日付) {
+        RString 戻り値 = RString.EMPTY;
+        if (日付 != null) {
+            戻り値 = 日付.toDateString();
+        }
+        return 戻り値;
     }
 
     /**

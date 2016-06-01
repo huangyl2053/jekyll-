@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class ShinseiSonotaJohoInputHandler {
 
     private final ShinseiSonotaJohoInputDiv div;
-    private final RString 通常 = new RString("0");
+    private final RString 通常 = new RString("00");
     private final RString 職権取消 = new RString("1");
     private final RString 取得事由 = new RString("2");
     private final RString 却下事由 = new RString("3");
@@ -53,7 +53,6 @@ public class ShinseiSonotaJohoInputHandler {
      */
     public void initialize() {
         clear();
-        状態の設定();
         移動事由ddlの設定();
         div.getDdlSakujoJiyu().setDataSource(get削除事由ddl());
     }
@@ -105,54 +104,10 @@ public class ShinseiSonotaJohoInputHandler {
         }
     }
 
-    private void 状態の設定() {
-
-        switch (div.getMode_ShoriType()) {
-            case TokushuTsuikaMode:
-                div.setMode_ShoriType(TokushuTsuikaMode);
-                break;
-            case TokushuShuseiMode:
-                div.setMode_ShoriType(TokushuShuseiMode);
-                break;
-            case TokushuSakujyoMode:
-                div.setMode_ShoriType(TokushuSakujyoMode);
-                break;
-            case TokushuRirekiShuseiMode:
-                div.setMode_ShoriType(TokushuRirekiShuseiMode);
-                break;
-            case NinteiMode:
-                div.setMode_ShoriType(NinteiMode);
-                break;
-            case KyakkaMode:
-                div.setMode_ShoriType(KyakkaMode);
-                break;
-            case ShokkenKisaiMode:
-                div.setMode_ShoriType(ShokkenKisaiMode);
-                break;
-            case TorikeshiMode:
-                div.setMode_ShoriType(TorikeshiMode);
-                break;
-            case ZenbuSoshitsuMode:
-                div.setMode_ShoriType(ZenbuSoshitsuMode);
-                break;
-            case IchibuSoshitsuMode:
-                div.setMode_ShoriType(IchibuSoshitsuMode);
-                break;
-            case JukyuShikakushashoMode:
-                div.setMode_ShoriType(JukyuShikakushashoMode);
-                break;
-            case ShokaiMode:
-                div.setMode_ShoriType(ShokaiMode);
-                break;
-            default:
-                break;
-        }
-    }
-
     private List<KeyValueDataSource> get移動事由ddl_通常() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         for (Datakubun target : Datakubun.values()) {
-            if (target.getコード().startsWith(通常)) {
+            if (target.getコード().equals(通常)) {
                 KeyValueDataSource keyValueData = new KeyValueDataSource(target.getコード(), target.get名称());
                 dataSource.add(keyValueData);
             }
