@@ -112,6 +112,14 @@ public class KaigoChohyoSeigyoKyotsuHandler {
                         帳票制御共通コントロール.get口座マスク使用区分()) && !画面表示可.equals(
                         帳票制御共通コントロール.get口座名義人カナ優先使用区分())) {
             div.getConfigInfo2().setDisplayNone(true);
+        } else if (!画面表示可.equals(帳票制御共通コントロール.get世帯主表示使用区分())) {
+            div.getConfigInfo2().getRadSetaiNushiHyoji().setDisplayNone(true);
+        } else if (!画面表示可.equals(帳票制御共通コントロール.get代納人表示使用区分())) {
+            div.getConfigInfo2().getRadDainoninHyoji().setDisplayNone(true);
+        } else if (!画面表示可.equals(帳票制御共通コントロール.get口座マスク使用区分())) {
+            div.getConfigInfo2().getRadKozaMask().setDisplayNone(true);
+        } else if (!画面表示可.equals(帳票制御共通コントロール.get口座名義人カナ優先使用区分())) {
+            div.getConfigInfo2().getRadKozaMeigininKana().setDisplayNone(true);
         }
         if (!画面表示可.equals(帳票制御共通コントロール.get外部帳票文字切れ制御使用区分()) && !画面表示可.equals(
                 帳票制御共通コントロール.get内部帳票文字切れ制御使用区分()) && !画面表示可.equals(
@@ -119,6 +127,16 @@ public class KaigoChohyoSeigyoKyotsuHandler {
                         帳票制御共通コントロール.get代行プリント使用区分())
                 && !画面表示可.equals(帳票制御共通コントロール.get定型文文字サイズ使用区分())) {
             div.getConfigInfo3().setDisplayNone(true);
+        } else if (!画面表示可.equals(帳票制御共通コントロール.get外部帳票文字切れ制御使用区分())) {
+            div.getConfigInfo3().getRadMonjiKireCrtlGaibu().setDisplayNone(true);
+        } else if (!画面表示可.equals(帳票制御共通コントロール.get内部帳票文字切れ制御使用区分())) {
+            div.getConfigInfo3().getRadMonjiKireCrtlNaibu().setDisplayNone(true);
+        } else if (!画面表示可.equals(帳票制御共通コントロール.get文字切れ分離制御使用区分())) {
+            div.getConfigInfo3().getRadMojiKireBunriCtrl().setDisplayNone(true);
+        } else if (!画面表示可.equals(帳票制御共通コントロール.get代行プリント使用区分())) {
+            div.getConfigInfo3().getRadDaikoPrintUmu().setDisplayNone(true);
+        } else if (!画面表示可.equals(帳票制御共通コントロール.get定型文文字サイズ使用区分())) {
+            div.getConfigInfo3().getDdlChohyoMongonYoshiki().setDisplayNone(true);
         }
         if (!画面表示可.equals(帳票制御共通コントロール.getカスタマバーコード使用区分())) {
             div.getConfigInfo4().setDisplayNone(true);
@@ -128,6 +146,14 @@ public class KaigoChohyoSeigyoKyotsuHandler {
                         帳票制御共通コントロール.get認証者使用区分()) && !画面表示可.equals(
                         帳票制御共通コントロール.get介護問合せ先使用区分())) {
             div.getCommonButtonPanel().setDisplayNone(true);
+        } else if (!画面表示可.equals(帳票制御共通コントロール.get文書番号使用区分())) {
+            div.getCommonButtonPanel().getBtnBunshoNo().setDisplayNone(true);
+        } else if (!画面表示可.equals(帳票制御共通コントロール.get通知書定型文使用区分())) {
+            div.getCommonButtonPanel().getBtnTsuchishoTeikeibun().setDisplayNone(true);
+        } else if (!画面表示可.equals(帳票制御共通コントロール.get認証者使用区分())) {
+            div.getCommonButtonPanel().getBtnGyomuNinshohsa().setDisplayNone(true);
+        } else if (!画面表示可.equals(帳票制御共通コントロール.get介護問合せ先使用区分())) {
+            div.getCommonButtonPanel().getBtnKaigoToiawasesaki().setDisplayNone(true);
         }
         setDataSource();
         ChohyoSeigyoKyotsuManager 帳票制御共通Mgr = new ChohyoSeigyoKyotsuManager();
@@ -235,14 +261,15 @@ public class KaigoChohyoSeigyoKyotsuHandler {
 
         List<KeyValueDataSource> 地区表示2 = new ArrayList<>();
         地区表示2.add(new KeyValueDataSource(ChikuHyoji2.なし.getコード(), ChikuHyoji2.なし.get名称()));
+        final RDate nowDate = RDate.getNowDate();
         地区表示2.add(new KeyValueDataSource(ChikuHyoji2.地区の分類1.getコード(),
-                DbBusinessConfig.get(ConfigKeysCodeName.コード名称_地区の分類１, RDate.getNowDate(),
+                DbBusinessConfig.get(ConfigKeysCodeName.コード名称_地区の分類１, nowDate,
                         SubGyomuCode.URZ業務共通_共通系)));
         地区表示2.add(new KeyValueDataSource(ChikuHyoji2.地区の分類2.getコード(),
-                DbBusinessConfig.get(ConfigKeysCodeName.コード名称_地区の分類２, RDate.getNowDate(),
+                DbBusinessConfig.get(ConfigKeysCodeName.コード名称_地区の分類２, nowDate,
                         SubGyomuCode.URZ業務共通_共通系)));
         地区表示2.add(new KeyValueDataSource(ChikuHyoji2.地区の分類3.getコード(),
-                DbBusinessConfig.get(ConfigKeysCodeName.コード名称_地区の分類３, RDate.getNowDate(),
+                DbBusinessConfig.get(ConfigKeysCodeName.コード名称_地区の分類３, nowDate,
                         SubGyomuCode.URZ業務共通_共通系)));
         地区表示2.add(new KeyValueDataSource(ChikuHyoji2.納組コード.getコード(), ChikuHyoji2.納組コード.get名称()));
         div.getConfigInfo1().getDdlHyojiCodeName2().setDataSource(地区表示2);
@@ -250,13 +277,13 @@ public class KaigoChohyoSeigyoKyotsuHandler {
         List<KeyValueDataSource> 地区表示3 = new ArrayList<>();
         地区表示3.add(new KeyValueDataSource(ChikuHyoji3.なし.getコード(), ChikuHyoji3.なし.get名称()));
         地区表示3.add(new KeyValueDataSource(ChikuHyoji3.地区の分類1.getコード(),
-                DbBusinessConfig.get(ConfigKeysCodeName.コード名称_地区の分類１, RDate.getNowDate(),
+                DbBusinessConfig.get(ConfigKeysCodeName.コード名称_地区の分類１, nowDate,
                         SubGyomuCode.URZ業務共通_共通系)));
         地区表示3.add(new KeyValueDataSource(ChikuHyoji3.地区の分類2.getコード(),
-                DbBusinessConfig.get(ConfigKeysCodeName.コード名称_地区の分類２, RDate.getNowDate(),
+                DbBusinessConfig.get(ConfigKeysCodeName.コード名称_地区の分類２, nowDate,
                         SubGyomuCode.URZ業務共通_共通系)));
         地区表示3.add(new KeyValueDataSource(ChikuHyoji3.地区の分類3.getコード(),
-                DbBusinessConfig.get(ConfigKeysCodeName.コード名称_地区の分類３, RDate.getNowDate(),
+                DbBusinessConfig.get(ConfigKeysCodeName.コード名称_地区の分類３, nowDate,
                         SubGyomuCode.URZ業務共通_共通系)));
         地区表示3.add(new KeyValueDataSource(ChikuHyoji3.納組コード.getコード(), ChikuHyoji3.納組コード.get名称()));
         div.getConfigInfo1().getDdlHyojiCodeName3().setDataSource(地区表示3);
@@ -346,53 +373,26 @@ public class KaigoChohyoSeigyoKyotsuHandler {
         ChohyoShutsuryokujunDiv ccdDiv = (ChohyoShutsuryokujunDiv) div.getCcdChohyoShutsuryokujun();
         ccdDiv.load(subGyomuCode, reportId);
         set出力順モード(帳票出力順表示方法, ccdDiv);
-        div.getConfigInfo1().getDdlHyojiCodeName1().setSelectedKey(ラジオ_しない);
-        if (帳票制御共通.get地区表示1() != null) {
-            div.getConfigInfo1().getDdlHyojiCodeName1().setSelectedKey(帳票制御共通.get地区表示1());
-        }
-        div.getConfigInfo1().getDdlHyojiCodeName2().setSelectedKey(ラジオ_しない);
-        if (帳票制御共通.get地区表示2() != null) {
-            div.getConfigInfo1().getDdlHyojiCodeName2().setSelectedKey(帳票制御共通.get地区表示2());
-        }
-        div.getConfigInfo1().getDdlHyojiCodeName3().setSelectedKey(ラジオ_しない);
-        if (帳票制御共通.get地区表示3() != null) {
-            div.getConfigInfo1().getDdlHyojiCodeName3().setSelectedKey(帳票制御共通.get地区表示3());
-        }
+        div.getConfigInfo1().getDdlHyojiCodeName1().setSelectedKey(帳票制御共通.get地区表示1());
+        div.getConfigInfo1().getDdlHyojiCodeName2().setSelectedKey(帳票制御共通.get地区表示2());
+        div.getConfigInfo1().getDdlHyojiCodeName3().setSelectedKey(帳票制御共通.get地区表示3());
         div.getConfigInfo2().getRadSetaiNushiHyoji().setSelectedKey(
                 帳票制御共通.is世帯主表示有無() ? ラジオ_する : ラジオ_しない);
         div.getConfigInfo2().getRadDainoninHyoji().setSelectedKey(
                 帳票制御共通.is代納人表示有無() ? ラジオ_する : ラジオ_しない);
         div.getConfigInfo2().getRadKozaMask().setSelectedKey(
                 帳票制御共通.is口座マスク有無() ? ラジオ_する : ラジオ_しない);
-        div.getConfigInfo2().getRadKozaMeigininKana().setSelectedKey(ラジオ_しない);
-        if (帳票制御共通.get口座名義人カナ優先区分() != null) {
-            div.getConfigInfo2().getRadKozaMeigininKana().setSelectedKey(帳票制御共通.get口座名義人カナ優先区分());
-        }
-        div.getConfigInfo3().getRadMonjiKireCrtlGaibu().setSelectedKey(ラジオ_しない);
-        if (帳票制御共通.get外部帳票文字切れ制御() != null) {
-            div.getConfigInfo3().getRadMonjiKireCrtlGaibu().setSelectedKey(帳票制御共通.get外部帳票文字切れ制御());
-        }
-        div.getConfigInfo3().getRadMonjiKireCrtlNaibu().setSelectedKey(ラジオ_する);
-        if (帳票制御共通.get内部帳票文字切れ制御() != null) {
-            div.getConfigInfo3().getRadMonjiKireCrtlNaibu().setSelectedKey(帳票制御共通.get内部帳票文字切れ制御());
-        }
-        div.getConfigInfo3().getRadMojiKireBunriCtrl().setSelectedKey(ラジオ_しない);
-        if (帳票制御共通.get文字切れ分離制御() != null) {
-            div.getConfigInfo3().getRadMojiKireBunriCtrl().setSelectedKey(帳票制御共通.get文字切れ分離制御());
-        }
+        div.getConfigInfo2().getRadKozaMeigininKana().setSelectedKey(帳票制御共通.get口座名義人カナ優先区分());
+        div.getConfigInfo3().getRadMonjiKireCrtlGaibu().setSelectedKey(帳票制御共通.get外部帳票文字切れ制御());
+        div.getConfigInfo3().getRadMonjiKireCrtlNaibu().setSelectedKey(帳票制御共通.get内部帳票文字切れ制御());
+        div.getConfigInfo3().getRadMojiKireBunriCtrl().setSelectedKey(帳票制御共通.get文字切れ分離制御());
         div.getConfigInfo3().getRadDaikoPrintUmu().setSelectedKey(
                 帳票制御共通.is代行プリント有無() ? ラジオ_する : ラジオ_しない);
-        div.getConfigInfo3().getDdlChohyoMongonYoshiki().setSelectedKey(ラジオ_する);
-        if (帳票制御共通.get定型文文字サイズ() != null) {
-            div.getConfigInfo3().getDdlChohyoMongonYoshiki().setSelectedKey(帳票制御共通.get定型文文字サイズ());
-        }
+        div.getConfigInfo3().getDdlChohyoMongonYoshiki().setSelectedKey(帳票制御共通.get定型文文字サイズ());
         div.getConfigInfo4().getDdlBarCodeUmu().setSelectedKey(
                 帳票制御共通.isカスタマバーコード使用有無() ? ラジオ_する : ラジオ_しない);
-        div.getConfigInfo4().getDdlBarCodeHenshuHoho().setSelectedKey(ラジオ_する);
-        if (帳票制御共通.getカスタマバーコード変換エラー編集方法() != null) {
-            div.getConfigInfo4().getDdlBarCodeHenshuHoho().setSelectedKey(
-                    帳票制御共通.getカスタマバーコード変換エラー編集方法());
-        }
+        div.getConfigInfo4().getDdlBarCodeHenshuHoho().setSelectedKey(
+                帳票制御共通.getカスタマバーコード変換エラー編集方法());
     }
 
     private void set出力順モード(RString 帳票出力順表示方法, ChohyoShutsuryokujunDiv ccdDiv) {

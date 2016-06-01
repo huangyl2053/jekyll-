@@ -10,7 +10,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
  */
 public interface IKaigoChohyoSeigyoKyotsuDiv extends ICommonChildDivBaseProperties {
 
+    /**
+     * 介護帳票制御共通情報の初期化
+     *
+     * @param subGyomuCode サブ業務コード
+     * @param reportId 帳票分類ID
+     */
     void initialize(SubGyomuCode subGyomuCode, ReportId reportId);
 
+    /**
+     * 介護帳票制御共通情報の保存
+     *
+     * @param subGyomuCode サブ業務コード
+     * @param reportId 帳票分類ID
+     */
     void save(SubGyomuCode subGyomuCode, ReportId reportId);
 }
