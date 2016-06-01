@@ -6,10 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.DBZ0400001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0400001.ChohyoSelectDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.DBZ0400001.ChohyoSelectHandler;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.chohyoseigyokyotsucontro.ChohyoSeigyoKyotsuControFinder;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
