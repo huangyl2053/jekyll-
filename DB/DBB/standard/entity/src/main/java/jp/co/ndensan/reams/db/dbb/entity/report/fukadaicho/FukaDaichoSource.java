@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbb.entity.report.fukadaicho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 賦課台帳（本算定）帳票Source
@@ -106,7 +107,7 @@ public class FukaDaichoSource implements IReportSource {
     public RString bankNo;
     @ReportItem(name = "bankName", order = 47)
     public RString bankName;
-    @ReportItem(name = "listHonin2_1", length = 15, order = 48)
+    @ReportPerson(id = "listHonin2_1")
     public RString listHonin2_1;
     @ReportItem(name = "listHonin2_2", length = 35, order = 49)
     public RString listHonin2_2;
@@ -122,7 +123,7 @@ public class FukaDaichoSource implements IReportSource {
     public RString kozaMeiginin;
     @ReportItem(name = "kozaNo", length = 14, order = 55)
     public RString kozaNo;
-    @ReportItem(name = "listSetaiin_1", length = 15, order = 56)
+    @ReportPerson(id = "listSetaiin_1")
     public RString listSetaiin_1;
     @ReportItem(name = "listSetaiin_2", length = 12, order = 57)
     public RString listSetaiin_2;
