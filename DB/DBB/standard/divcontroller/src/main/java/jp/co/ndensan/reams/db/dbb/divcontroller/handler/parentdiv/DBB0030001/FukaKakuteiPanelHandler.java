@@ -139,7 +139,7 @@ public class FukaKakuteiPanelHandler {
                 div.getFukaKakuteiBatchParameter().set処理名(仮算定異動賦課確定);
                 div.getFukaKakuteiBatchParameter().set基準日時(new RString(仮算定異動賦課の基準日.toString()));
                 return true;
-            } else if (仮算定異動賦課の基準日.isBeforeOrEquals(仮算定異動賦課確定の最大基準日時)) {
+            } else if (仮算定異動賦課確定の最大基準日時.isBeforeOrEquals(仮算定異動賦課の基準日)) {
                 RStringBuilder 日時 = new RStringBuilder();
                 日時.append(仮算定異動賦課の基準日.getRDateTime().getDate().wareki().toDateString());
                 日時.append(new RString(" "));
