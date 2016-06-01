@@ -61,8 +61,6 @@ public class GemmenTorikesiTsuchiShoPrintService {
 
     private static final RString 種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
     private static final RString RSTRING_1 = new RString("1");
-    private static final RString 定数 = new RString("0");
-    private static final int INDEX_ZERO = 0;
     private static final int INDEX_ONE = 1;
     private static final int INDEX_TWO = 2;
     private static final int INDEX_THREE = 3;
@@ -141,14 +139,13 @@ public class GemmenTorikesiTsuchiShoPrintService {
                         発行日 == null || 発行日.isEmpty() ? FlexibleDate.getNowDate() : 発行日);
                 Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
                 ChohyoSeigyoKyotsu 帳票制御共通 = 減免取消通知書情報.get帳票制御共通();
-                boolean is公印に掛ける = true;
-                if (帳票制御共通 != null && 帳票制御共通.get首長名印字位置() != null && 帳票制御共通.
-                        get首長名印字位置().equals(RSTRING_1)) {
+                boolean is公印に掛ける = false;
+                if (帳票制御共通.get首長名印字位置() != null && RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
                     is公印に掛ける = true;
                 }
                 boolean is公印を省略 = false;
-                if (帳票制御共通 != null && !帳票制御共通.is電子公印印字有無()) {
-                    is公印を省略 = false;
+                if (!帳票制御共通.is電子公印印字有無()) {
+                    is公印を省略 = true;
                 }
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         地方公共団体,
@@ -236,15 +233,13 @@ public class GemmenTorikesiTsuchiShoPrintService {
                 && isNotNull(減免取消通知書情報.get納組情報())) {
             IGyoseiKukaku 行政区画 = 減免取消通知書情報.get宛名().get行政区画();
             IJusho 住所 = 減免取消通知書情報.get宛名().get住所();
-            if (行政区画 != null && 住所 != null) {
-                表示コード = researcher.create表示コード情報(減免取消通知書情報.get帳票制御共通().toEntity(),
-                        住所.get町域コード().value(),
-                        行政区画.getGyoseiku().getコード().value(),
-                        行政区画.getChiku1().getコード().value(),
-                        行政区画.getChiku2().getコード().value(),
-                        行政区画.getChiku3().getコード().value(),
-                        減免取消通知書情報.get納組情報().getNokumi().getNokumiCode());
-            }
+            表示コード = researcher.create表示コード情報(減免取消通知書情報.get帳票制御共通().toEntity(),
+                    住所 != null ? 住所.get町域コード().value() : RString.EMPTY,
+                    行政区画 != null ? 行政区画.getGyoseiku().getコード().value() : RString.EMPTY,
+                    行政区画 != null ? 行政区画.getChiku1().getコード().value() : RString.EMPTY,
+                    行政区画 != null ? 行政区画.getChiku2().getコード().value() : RString.EMPTY,
+                    行政区画 != null ? 行政区画.getChiku3().getコード().value() : RString.EMPTY,
+                    減免取消通知書情報.get納組情報().getNokumi().getNokumiCode());
         }
         return 表示コード;
     }
@@ -304,16 +299,9 @@ public class GemmenTorikesiTsuchiShoPrintService {
             Kitsuki 期月特徴, Kitsuki 期月普徴) {
         KoseiZengoKiwariGaku 更正前後期割額 = new KoseiZengoKiwariGaku();
         if (期月特徴.isPresent()) {
-            if (期月特徴.get期().length() < 2) {
-                更正前後期割額.set特徴期(期月特徴.get期().insert(INDEX_ZERO, 定数.toString()));
-            } else {
-                更正前後期割額.set特徴期(期月特徴.get期());
-            }
-            if (期月特徴.get月AsInt() < INDEX_TEN) {
-                更正前後期割額.set特徴月(new RString(定数.toString() + 期月特徴.get月AsInt()));
-            } else {
-                更正前後期割額.set特徴月(new RString(String.valueOf(期月特徴.get月AsInt())));
-            }
+            更正前後期割額.set特徴期(期月特徴.get期().padZeroToLeft(2));
+            更正前後期割額.set特徴月(期月特徴.get月().getコード());
+
             Decimal 特徴期別金額取消前 = set特徴期別金額取消前(期月特徴.get期(), 減免取消通知書情報);
             if (特徴期別金額取消前 != null) {
                 更正前後期割額.set特徴期別金額取消前(DecimalFormatter
@@ -331,6 +319,11 @@ public class GemmenTorikesiTsuchiShoPrintService {
             if (特徴期別金額取消前 != null && 特徴期別金額取消後 != null) {
                 更正前後期割額.set特徴減免取消額(DecimalFormatter
                         .toコンマ区切りRString(特徴期別金額取消後.subtract(特徴期別金額取消前), 0));
+            } else if (特徴期別金額取消後 != null && 特徴期別金額取消前 == null) {
+                更正前後期割額.set特徴減免取消額(DecimalFormatter
+                        .toコンマ区切りRString(特徴期別金額取消後, 0));
+            } else {
+                更正前後期割額.set特徴減免取消額(RString.EMPTY);
             }
         } else {
             更正前後期割額.set特徴期(RString.EMPTY);
@@ -340,16 +333,8 @@ public class GemmenTorikesiTsuchiShoPrintService {
             更正前後期割額.set特徴期別金額取消後(RString.EMPTY);
         }
         if (期月普徴.isPresent()) {
-            if (期月普徴.get期().length() < 2) {
-                更正前後期割額.set普徴期(期月普徴.get期().insert(INDEX_ZERO, 定数.toString()));
-            } else {
-                更正前後期割額.set普徴期(期月普徴.get期());
-            }
-            if (期月普徴.get月AsInt() < INDEX_TEN) {
-                更正前後期割額.set普徴月(new RString(定数.toString() + 期月普徴.get月AsInt()));
-            } else {
-                更正前後期割額.set普徴月(new RString(String.valueOf(期月普徴.get月AsInt())));
-            }
+            更正前後期割額.set普徴期(期月普徴.get期().padZeroToLeft(2));
+            更正前後期割額.set普徴月(期月普徴.get月().getコード());
             Decimal 普徴期別金額取消前 = set普徴期別金額取消前(期月普徴.get月AsInt(), 減免取消通知書情報);
             if (普徴期別金額取消前 != null) {
                 更正前後期割額.set普徴期別金額取消前(DecimalFormatter
@@ -367,6 +352,11 @@ public class GemmenTorikesiTsuchiShoPrintService {
             if (普徴期別金額取消後 != null && 普徴期別金額取消前 != null) {
                 更正前後期割額.set普徴減免取消額(DecimalFormatter
                         .toコンマ区切りRString(普徴期別金額取消後.subtract(普徴期別金額取消前), 0));
+            } else if (普徴期別金額取消後 != null && 普徴期別金額取消前 == null) {
+                更正前後期割額.set普徴減免取消額(DecimalFormatter
+                        .toコンマ区切りRString(普徴期別金額取消後, 0));
+            } else {
+                更正前後期割額.set普徴減免取消額(RString.EMPTY);
             }
         } else {
             更正前後期割額.set普徴月(RString.EMPTY);

@@ -113,14 +113,13 @@ public class GenmenKetteiTsuchiShoPrintService {
                         発行日 == null || 発行日.isEmpty() ? FlexibleDate.getNowDate() : 発行日);
                 Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
                 ChohyoSeigyoKyotsu 帳票制御共通 = 減免決定通知書情報.get帳票制御共通();
-                boolean is公印に掛ける = true;
-                if (帳票制御共通 != null && 帳票制御共通.get首長名印字位置() != null && 帳票制御共通.
-                        get首長名印字位置().equals(RSTRING_1)) {
+                boolean is公印に掛ける = false;
+                if (帳票制御共通.get首長名印字位置() != null && RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
                     is公印に掛ける = true;
                 }
                 boolean is公印を省略 = false;
-                if (帳票制御共通 != null && !帳票制御共通.is電子公印印字有無()) {
-                    is公印を省略 = false;
+                if (!帳票制御共通.is電子公印印字有無()) {
+                    is公印を省略 = true;
                 }
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         地方公共団体,
@@ -159,11 +158,11 @@ public class GenmenKetteiTsuchiShoPrintService {
                 Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
                 ChohyoSeigyoKyotsu 帳票制御共通 = 減免決定通知書情報.get帳票制御共通();
                 boolean is公印に掛ける = false;
-                if (帳票制御共通 != null && 帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().equals(RSTRING_1)) {
+                if (帳票制御共通.get首長名印字位置() != null && RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
                     is公印に掛ける = true;
                 }
                 boolean is公印を省略 = false;
-                if (帳票制御共通 != null && !帳票制御共通.is電子公印印字有無()) {
+                if (!帳票制御共通.is電子公印印字有無()) {
                     is公印を省略 = true;
                 }
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
@@ -247,17 +246,15 @@ public class GenmenKetteiTsuchiShoPrintService {
             IGyoseiKukaku 行政区画 = 減免決定通知書情報.get宛名().get行政区画();
             IJusho 住所 = 減免決定通知書情報.get宛名().get住所();
             HyojiCodes 表示コード = null;
-            if (行政区画 != null && 住所 != null && 行政区画.getGyoseiku() != null && 住所.get町域コード() != null
-                    && 減免決定通知書情報.get納組情報().getNokumi() != null && 行政区画.getChiku1() != null
-                    && 行政区画.getChiku2() != null && 行政区画.getChiku3() != null) {
-                表示コード = researcher.create表示コード情報(減免決定通知書情報.get帳票制御共通().toEntity(),
-                        減免決定通知書情報.get宛名().get住所().get町域コード().value(),
-                        減免決定通知書情報.get宛名().get行政区画().getGyoseiku().getコード().value(),
-                        減免決定通知書情報.get宛名().get行政区画().getChiku1().getコード().value(),
-                        減免決定通知書情報.get宛名().get行政区画().getChiku2().getコード().value(),
-                        減免決定通知書情報.get宛名().get行政区画().getChiku3().getコード().value(),
-                        減免決定通知書情報.get納組情報().getNokumi().getNokumiCode());
-            }
+
+            表示コード = researcher.create表示コード情報(減免決定通知書情報.get帳票制御共通().toEntity(),
+                    住所 != null ? 住所.get町域コード().value() : RString.EMPTY,
+                    行政区画 != null ? 行政区画.getGyoseiku().getコード().value() : RString.EMPTY,
+                    行政区画 != null ? 行政区画.getChiku1().getコード().value() : RString.EMPTY,
+                    行政区画 != null ? 行政区画.getChiku2().getコード().value() : RString.EMPTY,
+                    行政区画 != null ? 行政区画.getChiku3().getコード().value() : RString.EMPTY,
+                    減免決定通知書情報.get納組情報().getNokumi().getNokumiCode());
+
             if (isNotNull(表示コード)) {
                 item.set表示コード名称１(表示コード.get表示コード名１());
                 item.set表示コード名称２(表示コード.get表示コード名２());

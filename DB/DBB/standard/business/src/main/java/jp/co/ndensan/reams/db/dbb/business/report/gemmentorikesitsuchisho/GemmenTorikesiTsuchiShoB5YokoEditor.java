@@ -105,19 +105,21 @@ public class GemmenTorikesiTsuchiShoB5YokoEditor implements IGemmenTorikesiTsuch
     }
 
     private void set表示コード(KaigoHokenHokenryoGenmenTorikeshiTsuchishoB5YokoSource source) {
-        source.hyojicodeName1 = 表示コード.get表示コード名１();
-        source.hyojicodeName2 = 表示コード.get表示コード名２();
-        source.hyojicodeName3 = 表示コード.get表示コード名３();
-        source.hyojicode1 = 表示コード.get表示コード１();
-        source.hyojicode2 = 表示コード.get表示コード２();
-        source.hyojicode3 = 表示コード.get表示コード３();
+        if (表示コード != null) {
+            source.hyojicodeName1 = 表示コード.get表示コード名１();
+            source.hyojicodeName2 = 表示コード.get表示コード名２();
+            source.hyojicodeName3 = 表示コード.get表示コード名３();
+            source.hyojicode1 = 表示コード.get表示コード１();
+            source.hyojicode2 = 表示コード.get表示コード２();
+            source.hyojicode3 = 表示コード.get表示コード３();
+        }
     }
 
     private void set減免の情報(KaigoHokenHokenryoGenmenTorikeshiTsuchishoB5YokoSource source) {
         if (減免取消通知書情報.get減免の情報更正後() != null) {
             FlexibleYear 調定年度 = 減免取消通知書情報.get減免の情報更正後().get調定年度();
-            source.choteiNendo = 調定年度 != null ? 調定年度.wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.ICHI_NEN).toDateString() : RString.EMPTY;
+            source.choteiNendo = (調定年度 != null ? 調定年度.wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.ICHI_NEN).toDateString() : RString.EMPTY);
             FlexibleYear 賦課年度 = 減免取消通知書情報.get減免の情報更正後().get賦課年度();
             source.fukaNendo = (賦課年度 != null ? 賦課年度.wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.ICHI_NEN).toDateString().concat(年度) : RString.EMPTY);
