@@ -163,10 +163,13 @@ public class FuchoKariSanteiFuka {
         } else if (全件出力.equals(entity.get出力方法())) {
             resultParameter.set出力方法(全件出力_1);
         }
-        if (entity.get出力期表示方法().endsWith(出力期表示方法_分)) {
-            resultParameter.set出力期表示方法(出力期表示方法_1);
-        } else if (entity.get出力期表示方法().endsWith(出力期表示方法_)) {
-            resultParameter.set出力期表示方法(出力期表示方法_2);
+        RString 出力期表示方法 = entity.get出力期表示方法();
+        if (出力期表示方法 != null && !出力期表示方法.isEmpty()) {
+            if (出力期表示方法.endsWith(出力期表示方法_分)) {
+                resultParameter.set出力期表示方法(出力期表示方法_1);
+            } else if (出力期表示方法.endsWith(出力期表示方法_)) {
+                resultParameter.set出力期表示方法(出力期表示方法_2);
+            }
         }
         resultParameter.set出力期(entity.get出力期());
         if (すべて選択.equals(entity.get対象者())) {
