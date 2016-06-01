@@ -136,6 +136,28 @@ public class DbT2009RentaiGimushaDac implements ISaveable<DbT2009RentaiGimushaEn
     }
 
     /**
+     * selectBy連帯納付義務者_履歴番号
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return DbT2009RentaiGimushaEntity
+     * @throws NullPointerException
+     */
+    @Transaction
+    public DbT2009RentaiGimushaEntity selectBy連帯納付義務者_履歴番号(
+            HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT2009RentaiGimusha.class).
+                where(
+                        eq(hihokenshaNo, 被保険者番号))
+                .order(by(rirekiNo, Order.DESC)).limit(1)
+                .toObject(DbT2009RentaiGimushaEntity.class);
+    }
+
+    /**
      * 連帯納付義務者を全件返します。
      *
      * @return List<DbT2009RentaiGimushaEntity>
