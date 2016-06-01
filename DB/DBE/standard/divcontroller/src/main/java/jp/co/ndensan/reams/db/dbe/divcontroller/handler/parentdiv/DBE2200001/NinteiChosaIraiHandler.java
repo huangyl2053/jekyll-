@@ -52,7 +52,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 認定調査員マスタ画面のハンドラークラスです。
@@ -137,8 +136,9 @@ public class NinteiChosaIraiHandler {
      * 認定調査委託先一覧に検索結果を設定します。
      *
      * @param 認定調査委託先List 認定調査委託先List
+     * @return コード取得結果
      */
-    public void set認定調査委託先一覧(List<NinnteiChousairaiBusiness> 認定調査委託先List) {
+    public boolean set認定調査委託先一覧(List<NinnteiChousairaiBusiness> 認定調査委託先List) {
         List<dgChosaItakusakiIchiran_Row> dataSource = new ArrayList<>();
         RString 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
         RString 市町村名称 = div.getCcdHokenshaList().getSelectedItem().get市町村名称();
@@ -149,17 +149,20 @@ public class NinteiChosaIraiHandler {
             chosaItakusakiCode.setValue(nullToEmpty(business.getNinteichosaItakusakiCode()));
             row.setChosaItakusakiCode(chosaItakusakiCode);
             row.setChosaItakusakiMeisho(nullToEmpty(business.getJigyoshaMeisho()));
-            UzT0007CodeEntity codeEntity = null;
+            RString codeName = null;
             if (business.getWaritsukeChiku() != null) {
-                codeEntity = CodeMaster.getCode(
+                codeName = CodeMaster.getCodeMeisho(
                         SubGyomuCode.DBE認定支援,
                         DBECodeShubetsu.調査地区コード.getコード(),
                         new Code(business.getWaritsukeChiku().value()), 基準日);
+
+            }
+            if (codeName != null) {
+                row.setChosaChiku(codeName);
+            } else {
+                return false;
             }
 
-            if (codeEntity != null) {
-                row.setChosaChiku(nullToEmpty(codeEntity.getコード名称()));
-            }
             TextBoxNum waritsukeTeiin = new TextBoxNum();
             waritsukeTeiin.setValue(new Decimal(business.getWaritsukeTeiin()));
             row.setWaritsukeTeiin(waritsukeTeiin);
@@ -181,6 +184,7 @@ public class NinteiChosaIraiHandler {
         }
         div.getDgChosaItakusakiIchiran().getFilterList().clear();
         div.getDgChosaItakusakiIchiran().setDataSource(dataSource);
+        return true;
     }
 
     /**
