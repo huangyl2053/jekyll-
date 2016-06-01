@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinJoho;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinJoho.RoreiFukushiNenkinJoho;
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
