@@ -85,10 +85,6 @@ public class ShinsakaiAutoHandler {
                         : new FlexibleDate(row.getKaisaibi().getValue().toDateString()));
                 shinsakaiWaritsukeNinsu.add(Integer.valueOf(row.getWaritsukeninzu().toString()));
                 shinsakaiJidoWariateTeiin.add(Integer.valueOf(row.getShinsakaiJidoWariateTeiin().toString()));
-//                jidoWaritsukeBatchParameter.toTaisyosyaJidoWaritsukeProcessParameter().setKaisaiYMD(kaisaiYMD);
-//                jidoWaritsukeBatchParameter.toTaisyosyaJidoWaritsukeProcessParameter().setShinsakaiJidoWariateTeiin(shinsakaiJidoWariateTeiin);
-//                jidoWaritsukeBatchParameter.toTaisyosyaJidoWaritsukeProcessParameter().setShinsakaiKaisaiNo(shinsakaiKaisaiNo);
-//                jidoWaritsukeBatchParameter.toTaisyosyaJidoWaritsukeProcessParameter().setShinsakaiWaritsukeNinsu(shinsakaiWaritsukeNinsu);
             }
         }
         return new TaisyosyaJidoWaritsukeBatchParameter(shinsakaiKaisaiNo, kaisaiYMD, shinsakaiWaritsukeNinsu, shinsakaiJidoWariateTeiin);
