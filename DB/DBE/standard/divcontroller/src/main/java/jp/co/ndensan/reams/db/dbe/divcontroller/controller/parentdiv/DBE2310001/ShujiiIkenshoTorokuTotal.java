@@ -100,10 +100,10 @@ public class ShujiiIkenshoTorokuTotal {
             div.getTxtKinyuYMD().setDisabled(false);
         } else {
             getHandler(div).load(resultList.records().get(0));
-            div.setHdnHasChanged(getHandler(div).getDataRString());
             div.getTxtKinyuYMD().setDisabled(true);
             ViewStateHolder.put(ViewStateKeys.状態, JYOTAI_CODE_UPD);
         }
+        div.setHdnHasChanged(getHandler(div).getDataRString());
         div.getCcdNinteiShinseishaKihonInfo().initialize(管理番号);
         ViewStateHolder.put(ViewStateKeys.主治医意見書登録_意見書情報, ninteiShinseiJoho);
         ViewStateHolder.put(ViewStateKeys.主治医意見書登録_イメージ情報, image);
@@ -273,7 +273,7 @@ public class ShujiiIkenshoTorokuTotal {
         if (!ResponseHolder.isReRequest()) {
             RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
             RString beforeChange = getHandler(div).getDataRString();
-            if ((JYOTAI_CODE_ADD.equals(state) && !beforeChange.isEmpty())
+            if ((JYOTAI_CODE_ADD.equals(state) && !beforeChange.equals(div.getHdnHasChanged()))
                     || (JYOTAI_CODE_UPD.equals(state) && !beforeChange.equals(div.getHdnHasChanged()))) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.画面遷移の確認.getMessage()).respond();
             }
@@ -294,7 +294,7 @@ public class ShujiiIkenshoTorokuTotal {
         if (!ResponseHolder.isReRequest()) {
             RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
             RString beforeChange = getHandler(div).getDataRString();
-            if ((JYOTAI_CODE_ADD.equals(state) && !beforeChange.isEmpty())
+            if ((JYOTAI_CODE_ADD.equals(state) && !beforeChange.equals(div.getHdnHasChanged()))
                     || (JYOTAI_CODE_UPD.equals(state) && !beforeChange.equals(div.getHdnHasChanged()))) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.画面遷移の確認.getMessage()).respond();
             }
@@ -317,7 +317,7 @@ public class ShujiiIkenshoTorokuTotal {
         int 履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
         if (!ResponseHolder.isReRequest()) {
             RString beforeChange = getHandler(div).getDataRString();
-            if ((JYOTAI_CODE_ADD.equals(state) && !beforeChange.isEmpty())
+            if ((JYOTAI_CODE_ADD.equals(state) && !beforeChange.equals(div.getHdnHasChanged()))
                     || (JYOTAI_CODE_UPD.equals(state) && !beforeChange.equals(div.getHdnHasChanged()))) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
