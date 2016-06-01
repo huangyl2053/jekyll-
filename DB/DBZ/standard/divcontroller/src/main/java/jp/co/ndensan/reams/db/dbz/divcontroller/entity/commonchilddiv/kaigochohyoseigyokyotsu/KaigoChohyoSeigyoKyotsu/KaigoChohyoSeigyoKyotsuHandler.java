@@ -97,8 +97,9 @@ public class KaigoChohyoSeigyoKyotsuHandler {
      *
      * @param subGyomuCode サブ業務コード
      * @param reportId 帳票分類ID
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
      */
-    public void initialize(SubGyomuCode subGyomuCode, ReportId reportId) {
+    public void initialize(SubGyomuCode subGyomuCode, ReportId reportId, ChohyoSeigyoKyotsu 帳票制御共通) {
         ChohyoSeigyoKyotsuControlManager manager = new ChohyoSeigyoKyotsuControlManager();
         ChohyoSeigyoKyotsuControl 帳票制御共通コントロール = manager.get帳票制御共通コントロール(subGyomuCode, reportId);
         if (!画面表示可.equals(帳票制御共通コントロール.get住所編集使用区分())) {
@@ -175,8 +176,6 @@ public class KaigoChohyoSeigyoKyotsuHandler {
             div.getCcdChohyoShutsuryokujun().setDisplayNone(true);
         }
         setDataSource();
-        ChohyoSeigyoKyotsuManager 帳票制御共通Mgr = new ChohyoSeigyoKyotsuManager();
-        ChohyoSeigyoKyotsu 帳票制御共通 = 帳票制御共通Mgr.get帳票制御共通(subGyomuCode, reportId);
         set初期表示(subGyomuCode, reportId, 帳票制御共通コントロール.get帳票出力順表示方法(), 帳票制御共通);
 
         div.setHdnSubGyomuCode(subGyomuCode.value());
@@ -203,10 +202,10 @@ public class KaigoChohyoSeigyoKyotsuHandler {
      *
      * @param subGyomuCode サブ業務コード
      * @param reportId 帳票分類ID
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
      */
-    public void save(SubGyomuCode subGyomuCode, ReportId reportId) {
+    public void save(SubGyomuCode subGyomuCode, ReportId reportId, ChohyoSeigyoKyotsu 帳票制御共通) {
         ChohyoSeigyoKyotsuManager 帳票制御共通Mgr = new ChohyoSeigyoKyotsuManager();
-        ChohyoSeigyoKyotsu 帳票制御共通 = 帳票制御共通Mgr.get帳票制御共通(subGyomuCode, reportId);
         ChohyoSeigyoKyotsuBuilder builder = 帳票制御共通.createBuilderForEdit();
         // TODO QA78669
         if (!div.getAtesakiJusho().isDisplayNone()) {
