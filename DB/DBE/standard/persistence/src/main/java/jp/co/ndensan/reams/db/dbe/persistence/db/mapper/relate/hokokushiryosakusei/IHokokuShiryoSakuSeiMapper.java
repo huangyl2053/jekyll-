@@ -143,4 +143,12 @@ public interface IHokokuShiryoSakuSeiMapper {
      * @return SinsakaiHanteiJyokyoHeaderEntity
      */
 //    List<SinsakaiHanteiJyokyoHeaderEntity> getCsvKenHokokuShiryoSakuseiHeader(CsvKenHokokuShiryoSakuseiMyBatisParameter parameter);
+//
+//    /**
+//     * 県報告用資料情報ヘッダ情報リストを取得します。
+//     *
+//     * @param parameter CsvKenHokokuShiryoSakuseiMyBatisParameter
+//     * @return CsvKenHokokuShiryoEntity
+//     */
+//    List<CsvKenHokokuShiryoEntity> getCsvKenHokokuShiryoSakusei(CsvKenHokokuShiryoSakuseiMyBatisParameter parameter);
 }
