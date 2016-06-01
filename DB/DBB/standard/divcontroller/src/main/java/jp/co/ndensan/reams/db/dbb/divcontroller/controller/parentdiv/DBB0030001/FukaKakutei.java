@@ -67,7 +67,6 @@ public class FukaKakutei {
         if (getHandler(div).処理名_異動賦課(基準日時取得(div, 異動賦課), 基準日時取得(div, 異動賦課確定))) {
             return ResponseData.of(div).respond();
         }
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, false);
         return ResponseData.of(div).respond();
     }
 
