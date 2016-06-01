@@ -300,7 +300,7 @@ public class IryohokenRirekiCommonChildDiv {
             if (new RDate(preData.getDefaultDataName4().toString()).isBefore(new RDate(ichiran_Row.getDefaultDataName3().toString()))) {
                 throw new ApplicationException(
                         DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace(
-                                preData.getDefaultDataName4().toString(), ichiran_Row.getDefaultDataName3().toString()));
+                                ichiran_Row.getDefaultDataName3().toString(), preData.getDefaultDataName4().toString()));
             }
         } else {
 

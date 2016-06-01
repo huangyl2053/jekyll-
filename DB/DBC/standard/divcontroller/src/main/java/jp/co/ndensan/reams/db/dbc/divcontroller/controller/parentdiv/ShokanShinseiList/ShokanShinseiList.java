@@ -9,20 +9,19 @@ import jp.co.ndensan.reams.db.dbc.business.core.shokanshinseiichiran.ShokanShins
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanShinseiList.ShokanShinseiList.ShokanShinseiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanShinseiList.ShokanShinseiList.dgShinseiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.shokanshinseilisthandler.ShokanShinseiHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.shokanshinseilisthandler.ShokanShinseiValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanshinseiichiran.ShokanShinseiIchiranManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
@@ -40,6 +39,10 @@ public class ShokanShinseiList {
     private static final RString 修正モード = new RString("修正");
     private static final RString 削除モード = new RString("削除");
     private static final RString 照会 = new RString("照会");
+
+    private ShokanShinseiValidationHandler createValidationHandler(ShokanShinseiListDiv div) {
+        return new ShokanShinseiValidationHandler(div);
+    }
 
     /**
      * 償還払申請一覧の初期化。<br/>
@@ -73,8 +76,11 @@ public class ShokanShinseiList {
      * @return ShokanShinseiListDivのResponseData
      */
     public ResponseData<ShokanShinseiListDiv> onClick_InsertButton(ShokanShinseiListDiv requestDiv) {
-        get申請を追加するcheck(requestDiv);
-
+        ShokanShinseiValidationHandler validationHandler = createValidationHandler(requestDiv);
+        ValidationMessageControlPairs validationMessages = validationHandler.サービス年月の有効性チェック();
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(requestDiv).addValidationMessages(validationMessages).respond();
+        }
         // TODO 疎通するために、QAのNo.750を暫定対応(正式対応方針はお客様確認中) Start
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, requestDiv.getTxtServiceYM().getValue().getYearMonth().toDateString());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, RString.EMPTY);
@@ -104,7 +110,11 @@ public class ShokanShinseiList {
      * @return ShokanShinseiListDivのResponseData
      */
     public ResponseData<ShokanShinseiListDiv> onSelectByDbClick(ShokanShinseiListDiv requestDiv) {
-        get検索ボタンcheck(requestDiv);
+        ShokanShinseiValidationHandler validationHandler = createValidationHandler(requestDiv);
+        ValidationMessageControlPairs validationMessages = validationHandler.検索ボタンcheck();
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(requestDiv).addValidationMessages(validationMessages).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
@@ -223,45 +233,6 @@ public class ShokanShinseiList {
 
     private ShokanShinseiHandler getHandler(ShokanShinseiListDiv requestdiv) {
         return new ShokanShinseiHandler(requestdiv);
-    }
-
-    private void get申請を追加するcheck(ShokanShinseiListDiv requestDiv) {
-
-        if (RDate.getNowDate().getYearMonth().isBefore(requestDiv.getTxtServiceYM().getValue().getYearMonth())) {
-            throw new ApplicationException(
-                    UrWarningMessages.日付の前後関係逆転以降.getMessage().replace(
-                            requestDiv.getTxtServiceYM().getValue().getYearMonth().toString(), RDate.getNowDate().getYearMonth().toString()));
-
-        }
-        int count = ShokanShinseiIchiranManager.createInstance().getShokanShinseiCount(
-                ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号,
-                        HihokenshaNo.class
-                ), new FlexibleYearMonth(
-                        requestDiv.getTxtServiceYM().getValue().getYearMonth().toDateString()));
-        if (count
-                > 1) {
-            throw new ApplicationException(
-                    UrErrorMessages.既に登録済.getMessage().replace(
-                            requestDiv.getTxtServiceYM().getValue().getYearMonth().toString()));
-        }
-    }
-
-    private void get検索ボタンcheck(ShokanShinseiListDiv requestDiv) {
-
-        if (requestDiv.getTxtServiceYMFrom().getValue() == null && requestDiv.getTxtServiceYMTo().getValue() == null) {
-            throw new ApplicationException(
-                    UrErrorMessages.期間が不正.getMessage());
-        }
-        if ((requestDiv.getTxtServiceYMFrom().getValue() != null
-                && !RString.EMPTY.equals(requestDiv.getTxtServiceYMFrom().getValue().toDateString()))
-                && (requestDiv.getTxtServiceYMTo().getValue() != null
-                && !RString.EMPTY.equals(requestDiv.getTxtServiceYMTo().getValue().toDateString()))
-                && requestDiv.getTxtServiceYMTo().getValue().getYearMonth().isBefore(requestDiv.getTxtServiceYMFrom().getValue().getYearMonth())) {
-            throw new ApplicationException(
-                    UrErrorMessages.期間が不正_追加メッセージあり２.getMessage().replace(
-                            requestDiv.getTxtServiceYMFrom().getValue().getYearMonth().toString(),
-                            requestDiv.getTxtServiceYMTo().getValue().getYearMonth().toString()));
-        }
     }
 
     private void get選択ボタンcheck(ShokanShinseiListDiv requestDiv) {
