@@ -22,6 +22,7 @@ public final class HihokenshaDaichoIkkatsuSakusei {
     private final boolean 資格喪失者抽出フラグ;
     private final boolean 出力フラグ;
     private final RString 出力順ID;
+    private RString 登録ユーザーID;
 
     /**
      * コンストラクタです。<br/>
@@ -44,12 +45,13 @@ public final class HihokenshaDaichoIkkatsuSakusei {
      * @param 資格喪失者抽出フラグ 資格喪失者抽出フラグ
      * @param 出力フラグ 出力フラグ
      * @param 出力順ID 出力順ID
-     *
+     * @param 登録ユーザーID 登録ユーザーID
      * @return IkkatsuSakuseiBatchParameter
      */
     public static IkkatsuSakuseiBatchParameter createHihokenshaDaichoBatchParameter(boolean 資格喪失者抽出フラグ,
             boolean 出力フラグ,
-            RString 出力順ID) {
-        return new IkkatsuSakuseiBatchParameter(資格喪失者抽出フラグ, 出力フラグ, 出力順ID);
+            RString 出力順ID,
+            RString 登録ユーザーID) {
+        return new IkkatsuSakuseiBatchParameter(資格喪失者抽出フラグ, 出力フラグ, 出力順ID, 登録ユーザーID);
     }
 }

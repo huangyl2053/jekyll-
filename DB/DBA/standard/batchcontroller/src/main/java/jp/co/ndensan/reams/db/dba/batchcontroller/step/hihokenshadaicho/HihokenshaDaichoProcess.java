@@ -226,7 +226,8 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
     }
 
     private RString get市町村名称(DbT1001HihokenshaDaichoEntity entity) {
-        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務,
+                processPrm.getLoginUserId());
         IkkatsuSakuseiMybatisParameter mybatisParameter = IkkatsuSakuseiMybatisParameter.
                 createSelectByKeyParam(processPrm.isChushutsuFlag(),
                         entity.getShichosonCode(),
