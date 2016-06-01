@@ -367,10 +367,10 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         更正前.set普徴期別金額リスト(普徴期別金額リスト);
         更正前.set特別徴収額合計(get普徴納付済額(本算定通知書情報.get賦課の情報_更正前().get賦課情報(), 1, SIZE_14));
         NenkinTokuchoKaifuJoho 対象者_追加含む_情報_更正前 = 本算定通知書情報.get対象者_追加含む_情報_更正前();
-
+        FlexibleDate 基準日 = FlexibleDate.getNowDate();
         if (対象者_追加含む_情報_更正前 != null && 対象者_追加含む_情報_更正前.getDT特別徴収義務者コード() != null) {
             RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
-                    対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value());
+                    対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value(), 基準日);
             更正前.set特別徴収義務者(特別徴収義務者);
             更正前.set特別徴収義務者コード(対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value().value());
         }
@@ -379,7 +379,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         RString 年金コード = 徴収方法情報_更正前.get本徴収_年金コード();
         if (!RString.isNullOrEmpty(年金コード) && SIZE_3 < 年金コード.length()) {
             RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
-                    new Code(年金コード.substring(0, SIZE_3)));
+                    new Code(年金コード.substring(0, SIZE_3)), 基準日);
             更正前.set特別徴収対象年金(特別徴収対象年金);
         }
         更正前.set特別徴収対象年金コード(年金コード);
@@ -464,10 +464,10 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         更正後.set普徴期別金額リスト(普徴期別金額リスト);
         更正後.set特別徴収額合計(get普徴納付済額(本算定通知書情報.get賦課の情報_更正後().get賦課情報(), 1, SIZE_14));
         NenkinTokuchoKaifuJoho 対象者_追加含む_情報_更正後 = 本算定通知書情報.get対象者_追加含む_情報_更正後();
-
+        FlexibleDate 基準日 = FlexibleDate.getNowDate();
         if (対象者_追加含む_情報_更正後 != null && 対象者_追加含む_情報_更正後.getDT特別徴収義務者コード() != null) {
             RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
-                    対象者_追加含む_情報_更正後.getDT特別徴収義務者コード().value());
+                    対象者_追加含む_情報_更正後.getDT特別徴収義務者コード().value(), 基準日);
             更正後.set特別徴収義務者(特別徴収義務者);
             更正後.set特別徴収義務者コード(対象者_追加含む_情報_更正後.getDT特別徴収義務者コード().value().value());
         }
@@ -475,7 +475,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         ChoshuHoho 徴収方法情報_更正後 = 本算定通知書情報.get徴収方法情報_更正後();
         RString 年金コード = 徴収方法情報_更正後.get本徴収_年金コード();
         if (!RString.isNullOrEmpty(年金コード) && SIZE_3 < 年金コード.length()) {
-            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(), new Code(年金コード.substring(0, SIZE_3)));
+            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
+                    new Code(年金コード.substring(0, SIZE_3)), 基準日);
             更正後.set特別徴収対象年金(特別徴収対象年金);
         }
         更正後.set特別徴収対象年金コード(年金コード);

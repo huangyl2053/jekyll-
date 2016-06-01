@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -62,7 +63,8 @@ public class NinteiChosainMasterHandler {
     public void load() {
 
         div.getHokenshaList().loadHokenshaList();
-        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード());
+        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード(),
+                FlexibleDate.getNowDate());
         List<KeyValueDataSource> chikuDataSource = new ArrayList<>();
         chikuDataSource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (UzT0007CodeEntity codeEntity : codeList) {
@@ -163,7 +165,7 @@ public class NinteiChosainMasterHandler {
         }
         row.setChikuCode(nullToEmpty(chiku));
         RString chikuName = CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード(),
-                new Code(chiku));
+                new Code(chiku), FlexibleDate.getNowDate());
         if (!RString.isNullOrEmpty(chikuName)) {
             row.setChiku(chikuName);
         }

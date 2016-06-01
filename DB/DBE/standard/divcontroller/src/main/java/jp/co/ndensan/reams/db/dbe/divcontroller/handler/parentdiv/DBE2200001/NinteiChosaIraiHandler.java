@@ -142,6 +142,7 @@ public class NinteiChosaIraiHandler {
         List<dgChosaItakusakiIchiran_Row> dataSource = new ArrayList<>();
         RString 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
         RString 市町村名称 = div.getCcdHokenshaList().getSelectedItem().get市町村名称();
+        FlexibleDate 基準日 = FlexibleDate.getNowDate();
         for (NinnteiChousairaiBusiness business : 認定調査委託先List) {
             dgChosaItakusakiIchiran_Row row = new dgChosaItakusakiIchiran_Row();
             TextBoxCode chosaItakusakiCode = new TextBoxCode();
@@ -153,7 +154,7 @@ public class NinteiChosaIraiHandler {
                 codeEntity = CodeMaster.getCode(
                         SubGyomuCode.DBE認定支援,
                         DBECodeShubetsu.調査地区コード.getコード(),
-                        new Code(business.getWaritsukeChiku().value()));
+                        new Code(business.getWaritsukeChiku().value()), 基準日);
             }
 
             if (codeEntity != null) {
