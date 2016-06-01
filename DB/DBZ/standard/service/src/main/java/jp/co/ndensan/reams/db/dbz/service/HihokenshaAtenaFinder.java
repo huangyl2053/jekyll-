@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.IShikibetsuTaish
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * ビジネス設計_DBUMN00000_被保険者・宛名情報取得。
@@ -22,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
  * @reamsid_L DBC-0980-590 yangchenbing
  */
 public class HihokenshaAtenaFinder {
+
+    private DbV1001HihokenshaDaichoAliveDac 被保険者台帳管理dac;
 
     /**
      * 直近の被保険者台帳情報および宛名情報を取得します。
@@ -33,14 +36,18 @@ public class HihokenshaAtenaFinder {
         if (被保険者番号 == null) {
             return null;
         }
-        DbV1001HihokenshaDaichoAliveDac dac = new DbV1001HihokenshaDaichoAliveDac();
-        DbV1001HihokenshaDaichoEntity entity = dac.get最新の被保険者台帳情報(被保険者番号);
+        被保険者台帳管理dac = InstanceProvider.create(DbV1001HihokenshaDaichoAliveDac.class);
+        DbV1001HihokenshaDaichoEntity entity = 被保険者台帳管理dac.get最新の被保険者台帳情報(被保険者番号);
         if (entity == null) {
             return null;
         }
         IShikibetsuTaishoFinder 識別対象Finder = ShikibetsuTaishoService.getShikibetsuTaishoFinder();
         IShikibetsuTaisho 識別対象 = 識別対象Finder.get識別対象(GyomuCode.DB介護保険,
                 new ShikibetsuCode(entity.getHihokenshaNo().value()), KensakuYusenKubun.住登外優先);
-        return new HihokenshaAtenaResult(entity, 識別対象);
+        if (識別対象 == null) {
+            return null;
+        } else {
+            return new HihokenshaAtenaResult(entity, 識別対象);
+        }
     }
 }
