@@ -88,7 +88,7 @@ public class ShotokuJohoTyushutuRenkeitanitu {
             }
             処理日付管理異動情報Entity = 処理日付管理Dac.select処理日付管理マスタ_異動所得情報抽出(年度);
             if (処理日付管理異動情報Entity != null) {
-                処理区分 = 可;
+                処理区分 = 不可;
             } else {
                 処理区分 = 可;
             }

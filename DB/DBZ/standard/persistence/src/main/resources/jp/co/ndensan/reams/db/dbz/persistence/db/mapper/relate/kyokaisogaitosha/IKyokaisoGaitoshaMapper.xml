@@ -3,7 +3,7 @@
 <!-- 概要： 境界層該当者のマッピング用XMLです。 -->
 <!-- @reamsid_L DBA-9999-013 huangh -->
 
-<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kyokaisogaitosha.IKyokaisoGaitoshaMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kyokaisogaitosha.IKyokaisoGaitoshaMapper">
 
     <select id="select境界層該当者ByKey" resultMap="resultMap_KyokaisoGaitoshaEntity" fetchSize="500">
         <include refid="selectKyokaisoGaitoshaEntity" />
@@ -42,7 +42,7 @@
     </sql>
 
     <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
-    <resultMap id="resultMap_KyokaisoGaitoshaEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity" autoMapping="true">
+    <resultMap id="resultMap_KyokaisoGaitoshaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity" autoMapping="true">
         <id property="境界層該当者Entity.hihokenshaNo" column="dbT1006KyokaisoGaitosha_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="境界層該当者Entity.rirekiNo" column="dbT1006KyokaisoGaitosha_rirekiNo" />
         <id property="境界層該当者Entity.linkNo" column="dbT1006KyokaisoGaitosha_linkNo" />

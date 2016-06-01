@@ -2,20 +2,20 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.core.kyokaisogaitosha.kyokaisogaitosha;
+package jp.co.ndensan.reams.db.dbz.service.core.kyokaisogaitosha.kyokaisogaitosha;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
-import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisohokenryodankai.KyokaisoHokenryoDankai;
-import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisosochishinsei.KyokaisoSochiShinsei;
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kyokaisogaitosha.KyokaisoMapperParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity;
-import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kyokaisogaitosha.IKyokaisoGaitoshaMapper;
-import jp.co.ndensan.reams.db.dba.service.core.kyokaisogaitosha.kyokaisohokenryodankai.KyokaisoHokenryoDankaiManager;
-import jp.co.ndensan.reams.db.dba.service.core.kyokaisogaitosha.kyokaisosochishinsei.KyokaisoSochiShinseiManager;
+import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
+import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisohokenryodankai.KyokaisoHokenryoDankai;
+import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisosochishinsei.KyokaisoSochiShinsei;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kyokaisogaitosha.KyokaisoMapperParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1006KyokaisoGaitoshaDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kyokaisogaitosha.IKyokaisoGaitoshaMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.service.core.kyokaisogaitosha.kyokaisohokenryodankai.KyokaisoHokenryoDankaiManager;
+import jp.co.ndensan.reams.db.dbz.service.core.kyokaisogaitosha.kyokaisosochishinsei.KyokaisoSochiShinseiManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;

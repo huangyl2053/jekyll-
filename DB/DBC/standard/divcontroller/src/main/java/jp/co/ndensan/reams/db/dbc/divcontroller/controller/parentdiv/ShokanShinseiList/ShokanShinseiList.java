@@ -78,7 +78,7 @@ public class ShokanShinseiList {
     public ResponseData<ShokanShinseiListDiv> onClick_InsertButton(ShokanShinseiListDiv requestDiv) {
         ShokanShinseiValidationHandler validationHandler = createValidationHandler(requestDiv);
         ValidationMessageControlPairs validationMessages = validationHandler.サービス年月の有効性チェック();
-        if (validationMessages.iterator().hasNext()) {
+        if (validationMessages.iterator().hasNext() && !ResponseHolder.isWarningIgnoredRequest()) {
             return ResponseData.of(requestDiv).addValidationMessages(validationMessages).respond();
         }
         // TODO 疎通するために、QAのNo.750を暫定対応(正式対応方針はお客様確認中) Start
