@@ -279,8 +279,12 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
             if (特徴期月.isPresent()) {
                 期別徴収猶予期間.set特徴期(特徴期月.get期().padZeroToLeft(2));
                 期別徴収猶予期間.set特徴月(特徴期月.get月().getコード());
-                期別徴収猶予期間.set特徴期別金額(DecimalFormatter
-                        .toコンマ区切りRString(get期と特徴期別金額の対応(徴収猶予取消通知書情報, 特徴期月.get期()), 0));
+                Decimal 特徴期別金額 = get期と特徴期別金額の対応(徴収猶予取消通知書情報, 特徴期月.get期());
+                if (特徴期別金額 != null) {
+                    期別徴収猶予期間.set特徴期別金額(DecimalFormatter.toコンマ区切りRString(特徴期別金額, 0));
+                } else {
+                    期別徴収猶予期間.set特徴期別金額(RString.EMPTY);
+                }
             } else {
                 期別徴収猶予期間.set特徴期(RString.EMPTY);
                 期別徴収猶予期間.set特徴月(RString.EMPTY);
@@ -290,8 +294,13 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
             if (普徴期月.isPresent()) {
                 期別徴収猶予期間.set普徴期(普徴期月.get期().padZeroToLeft(2));
                 期別徴収猶予期間.set普徴月(普徴期月.get月().getコード());
-                期別徴収猶予期間.set普徴期別金額(DecimalFormatter
-                        .toコンマ区切りRString(get月と普徴期別金額の対応(徴収猶予取消通知書情報, 普徴期月.get月()), 0));
+                Decimal 普徴期別金額 = get月と普徴期別金額の対応(徴収猶予取消通知書情報, 普徴期月.get月());
+                if (普徴期別金額 != null) {
+                    期別徴収猶予期間.set普徴期別金額(DecimalFormatter
+                            .toコンマ区切りRString(普徴期別金額, 0));
+                } else {
+                    期別徴収猶予期間.set普徴期別金額(RString.EMPTY);
+                }
                 期別徴収猶予期間.set徴収猶予期間(get徴収猶予期間(徴収猶予取消通知書情報, 普徴期月));
             } else {
                 期別徴収猶予期間.set普徴期(RString.EMPTY);
@@ -339,14 +348,14 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
         if (期月リスト.isEmpty() || 賦課納期list == null || 賦課納期list.isEmpty()) {
             return 期別納期リスト;
         }
-        RDate 納期開始日 = null;
-        RDate 納期終了日 = null;
-        RString 期別納期期間 = RString.EMPTY;
         for (Kitsuki 期月 : 期月リスト) {
+            boolean flag = false;
             for (Noki 賦課納期 : 賦課納期list) {
-                if (Integer.parseInt(期月.get期().toString()) == 賦課納期.get期別()) {
-                    納期開始日 = 賦課納期.get納期開始日();
-                    納期終了日 = 賦課納期.get納期終了日();
+                RString 期別納期期間 = RString.EMPTY;
+                if (期月.get期AsInt() == 賦課納期.get期別()) {
+                    flag = true;
+                    RDate 納期開始日 = 賦課納期.get納期開始日();
+                    RDate 納期終了日 = 賦課納期.get納期終了日();
                     if (納期開始日 != null && 納期終了日 != null) {
                         期別納期期間 = 納期開始日.wareki().toDateString().concat(波線)
                                 .concat(納期終了日.wareki().toDateString());
@@ -363,6 +372,9 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
                         期別納期リスト.add(RString.EMPTY);
                     }
                 }
+            }
+            if (!flag) {
+                期別納期リスト.add(RString.EMPTY);
             }
 
         }
@@ -442,15 +454,15 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
         if (介護期別徴収猶予List == null || 介護期別徴収猶予List.isEmpty()) {
             return 徴収猶予期間;
         }
-        FlexibleDate 徴収猶予開始日 = FlexibleDate.EMPTY;
-        FlexibleDate 徴収猶予終了日 = FlexibleDate.EMPTY;
         for (KibetsuChoshuYuyo 介護期別徴収猶予 : 介護期別徴収猶予List) {
             RString 徴収方法 = 介護期別徴収猶予.get徴収方法();
-            int 期 = Integer.parseInt(普徴期月.get期().toString());
-            if (ChoshuHohoKibetsu.普通徴収.code().equals(徴収方法) && 期 == 介護期別徴収猶予.get期()) {
+            FlexibleDate 徴収猶予開始日 = FlexibleDate.EMPTY;
+            FlexibleDate 徴収猶予終了日 = FlexibleDate.EMPTY;
+            if (ChoshuHohoKibetsu.普通徴収.code().equals(徴収方法) && 普徴期月.get期AsInt() == 介護期別徴収猶予.get期()) {
                 徴収猶予開始日 = 介護期別徴収猶予.get徴収猶予開始日();
                 徴収猶予終了日 = 介護期別徴収猶予.get徴収猶予終了日();
-                if (徴収猶予開始日 != null && 徴収猶予終了日 != null) {
+                if (徴収猶予開始日 != null && !徴収猶予開始日.isEmpty()
+                        && 徴収猶予終了日 != null && !徴収猶予終了日.isEmpty()) {
                     徴収猶予期間 = 徴収猶予開始日.wareki().toDateString().concat(波線)
                             .concat(徴収猶予終了日.wareki().toDateString());
                 } else if (徴収猶予開始日 == null && 徴収猶予終了日 != null) {
