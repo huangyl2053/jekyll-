@@ -112,14 +112,19 @@ public class KaigoChohyoSeigyoKyotsuHandler {
                         帳票制御共通コントロール.get口座マスク使用区分()) && !画面表示可.equals(
                         帳票制御共通コントロール.get口座名義人カナ優先使用区分())) {
             div.getConfigInfo2().setDisplayNone(true);
-        } else if (!画面表示可.equals(帳票制御共通コントロール.get世帯主表示使用区分())) {
-            div.getConfigInfo2().getRadSetaiNushiHyoji().setDisplayNone(true);
-        } else if (!画面表示可.equals(帳票制御共通コントロール.get代納人表示使用区分())) {
-            div.getConfigInfo2().getRadDainoninHyoji().setDisplayNone(true);
-        } else if (!画面表示可.equals(帳票制御共通コントロール.get口座マスク使用区分())) {
-            div.getConfigInfo2().getRadKozaMask().setDisplayNone(true);
-        } else if (!画面表示可.equals(帳票制御共通コントロール.get口座名義人カナ優先使用区分())) {
-            div.getConfigInfo2().getRadKozaMeigininKana().setDisplayNone(true);
+        } else {
+            if (!画面表示可.equals(帳票制御共通コントロール.get世帯主表示使用区分())) {
+                div.getConfigInfo2().getRadSetaiNushiHyoji().setDisplayNone(true);
+            }
+            if (!画面表示可.equals(帳票制御共通コントロール.get代納人表示使用区分())) {
+                div.getConfigInfo2().getRadDainoninHyoji().setDisplayNone(true);
+            }
+            if (!画面表示可.equals(帳票制御共通コントロール.get口座マスク使用区分())) {
+                div.getConfigInfo2().getRadKozaMask().setDisplayNone(true);
+            }
+            if (!画面表示可.equals(帳票制御共通コントロール.get口座名義人カナ優先使用区分())) {
+                div.getConfigInfo2().getRadKozaMeigininKana().setDisplayNone(true);
+            }
         }
         if (!画面表示可.equals(帳票制御共通コントロール.get外部帳票文字切れ制御使用区分()) && !画面表示可.equals(
                 帳票制御共通コントロール.get内部帳票文字切れ制御使用区分()) && !画面表示可.equals(
@@ -127,16 +132,22 @@ public class KaigoChohyoSeigyoKyotsuHandler {
                         帳票制御共通コントロール.get代行プリント使用区分())
                 && !画面表示可.equals(帳票制御共通コントロール.get定型文文字サイズ使用区分())) {
             div.getConfigInfo3().setDisplayNone(true);
-        } else if (!画面表示可.equals(帳票制御共通コントロール.get外部帳票文字切れ制御使用区分())) {
-            div.getConfigInfo3().getRadMonjiKireCrtlGaibu().setDisplayNone(true);
-        } else if (!画面表示可.equals(帳票制御共通コントロール.get内部帳票文字切れ制御使用区分())) {
-            div.getConfigInfo3().getRadMonjiKireCrtlNaibu().setDisplayNone(true);
-        } else if (!画面表示可.equals(帳票制御共通コントロール.get文字切れ分離制御使用区分())) {
-            div.getConfigInfo3().getRadMojiKireBunriCtrl().setDisplayNone(true);
-        } else if (!画面表示可.equals(帳票制御共通コントロール.get代行プリント使用区分())) {
-            div.getConfigInfo3().getRadDaikoPrintUmu().setDisplayNone(true);
-        } else if (!画面表示可.equals(帳票制御共通コントロール.get定型文文字サイズ使用区分())) {
-            div.getConfigInfo3().getDdlChohyoMongonYoshiki().setDisplayNone(true);
+        } else {
+            if (!画面表示可.equals(帳票制御共通コントロール.get外部帳票文字切れ制御使用区分())) {
+                div.getConfigInfo3().getRadMonjiKireCrtlGaibu().setDisplayNone(true);
+            }
+            if (!画面表示可.equals(帳票制御共通コントロール.get内部帳票文字切れ制御使用区分())) {
+                div.getConfigInfo3().getRadMonjiKireCrtlNaibu().setDisplayNone(true);
+            }
+            if (!画面表示可.equals(帳票制御共通コントロール.get文字切れ分離制御使用区分())) {
+                div.getConfigInfo3().getRadMojiKireBunriCtrl().setDisplayNone(true);
+            }
+            if (!画面表示可.equals(帳票制御共通コントロール.get代行プリント使用区分())) {
+                div.getConfigInfo3().getRadDaikoPrintUmu().setDisplayNone(true);
+            }
+            if (!画面表示可.equals(帳票制御共通コントロール.get定型文文字サイズ使用区分())) {
+                div.getConfigInfo3().getDdlChohyoMongonYoshiki().setDisplayNone(true);
+            }
         }
         if (!画面表示可.equals(帳票制御共通コントロール.getカスタマバーコード使用区分())) {
             div.getConfigInfo4().setDisplayNone(true);
@@ -146,14 +157,19 @@ public class KaigoChohyoSeigyoKyotsuHandler {
                         帳票制御共通コントロール.get認証者使用区分()) && !画面表示可.equals(
                         帳票制御共通コントロール.get介護問合せ先使用区分())) {
             div.getCommonButtonPanel().setDisplayNone(true);
-        } else if (!画面表示可.equals(帳票制御共通コントロール.get文書番号使用区分())) {
-            div.getCommonButtonPanel().getBtnBunshoNo().setDisplayNone(true);
-        } else if (!画面表示可.equals(帳票制御共通コントロール.get通知書定型文使用区分())) {
-            div.getCommonButtonPanel().getBtnTsuchishoTeikeibun().setDisplayNone(true);
-        } else if (!画面表示可.equals(帳票制御共通コントロール.get認証者使用区分())) {
-            div.getCommonButtonPanel().getBtnGyomuNinshohsa().setDisplayNone(true);
-        } else if (!画面表示可.equals(帳票制御共通コントロール.get介護問合せ先使用区分())) {
-            div.getCommonButtonPanel().getBtnKaigoToiawasesaki().setDisplayNone(true);
+        } else {
+            if (!画面表示可.equals(帳票制御共通コントロール.get文書番号使用区分())) {
+                div.getCommonButtonPanel().getBtnBunshoNo().setDisplayNone(true);
+            }
+            if (!画面表示可.equals(帳票制御共通コントロール.get通知書定型文使用区分())) {
+                div.getCommonButtonPanel().getBtnTsuchishoTeikeibun().setDisplayNone(true);
+            }
+            if (!画面表示可.equals(帳票制御共通コントロール.get認証者使用区分())) {
+                div.getCommonButtonPanel().getBtnGyomuNinshohsa().setDisplayNone(true);
+            }
+            if (!画面表示可.equals(帳票制御共通コントロール.get介護問合せ先使用区分())) {
+                div.getCommonButtonPanel().getBtnKaigoToiawasesaki().setDisplayNone(true);
+            }
         }
         setDataSource();
         ChohyoSeigyoKyotsuManager 帳票制御共通Mgr = new ChohyoSeigyoKyotsuManager();
