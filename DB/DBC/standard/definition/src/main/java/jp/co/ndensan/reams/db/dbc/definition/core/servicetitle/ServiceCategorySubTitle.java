@@ -6,42 +6,31 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * サブタイトルを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBC-9999-023 liangbc
  */
 public enum ServiceCategorySubTitle {
 
     /**
      * コード:無し 名称:訪問通所 略称:定義なし
      */
-    訪問通所("無し", "訪問通所"),
+    訪問通所("訪問通所"),
     /**
      * コード:無し 名称:短期入所 略称:定義なし
      */
-    短期入所("無し", "短期入所"),
+    短期入所("短期入所"),
     /**
      * コード:無し 名称:地域密着 略称:定義なし
      */
-    地域密着("無し", "地域密着"),
+    地域密着("地域密着"),
     /**
      * コード:無し 名称:サブタイトルなし 略称:定義なし
      */
-    サブタイトルなし("無し", "サブタイトルなし");
+    サブタイトルなし("サブタイトルなし");
 
-    private final RString code;
     private final RString fullName;
 
-    private ServiceCategorySubTitle(String code, String fullname) {
-        this.code = new RString(code);
+    private ServiceCategorySubTitle(String fullname) {
         this.fullName = new RString(fullname);
-    }
-
-    /**
-     * サブタイトルのコードを返します。
-     *
-     * @return サブタイトルのコード
-     */
-    public RString getコード() {
-        return code;
     }
 
     /**
@@ -54,15 +43,15 @@ public enum ServiceCategorySubTitle {
     }
 
     /**
-     * サブタイトルのコードと一致する内容を探します。
+     * サブタイトルと一致する内容を探します。
      *
-     * @param code サブタイトルのコード
-     * @return {@code code} に対応するサブタイトル
+     * @param fullname サブタイトル
+     * @return {fullname} に対応するサブタイトル
      */
-    public static ServiceCategorySubTitle toValue(RString code) {
+    public static ServiceCategorySubTitle toValue(RString fullname) {
 
         for (ServiceCategorySubTitle serviceCategorySubTitle : ServiceCategorySubTitle.values()) {
-            if (serviceCategorySubTitle.code.equals(code)) {
+            if (serviceCategorySubTitle.get名称().equals(fullname)) {
                 return serviceCategorySubTitle;
             }
         }
