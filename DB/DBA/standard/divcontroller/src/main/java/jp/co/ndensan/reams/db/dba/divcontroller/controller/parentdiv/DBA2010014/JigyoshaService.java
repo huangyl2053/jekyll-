@@ -140,6 +140,18 @@ public class JigyoshaService {
     }
 
     /**
+     * 「登録保険者入力ガイド」ボタンを押しダイアログ画面を戻る、登録保険者を設定します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<JigyoshaServiceDiv>
+     */
+    public ResponseData<JigyoshaServiceDiv> onClick_BtnHokenshaInputGuide(JigyoshaServiceDiv div) {
+        div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().setValue(div.getHokenshaNo());
+        div.getJigyoshaServiceKihon().getTxtTorokuHokenshaName().setValue(div.getHokenshaMeisho());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 詳細情報を表示します。
      *
      * @param div 画面情報
