@@ -387,8 +387,7 @@ public class JushochiTokureiRirekiListHandler {
                     new HihokenshaNo(row.getHihokenshaNo()), new FlexibleDate(row.getIdoYMD().getText()), row.getEdaNo());
 
             if (hihokenshaDaicho == null) {
-                returnList.add(new HihokenshaDaicho(HihokenshaNo.EMPTY, FlexibleDate.EMPTY, RString.EMPTY));
-                continue;
+                hihokenshaDaicho = new HihokenshaDaicho(HihokenshaNo.EMPTY, FlexibleDate.EMPTY, RString.EMPTY);
             }
             HihokenshaDaichoBuilder builder = hihokenshaDaicho.createBuilderForEdit();
 
