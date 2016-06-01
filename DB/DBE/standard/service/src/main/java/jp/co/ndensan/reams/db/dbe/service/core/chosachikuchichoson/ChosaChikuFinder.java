@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikuchichoson.C
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosachikuchichoson.ChosaChikuChichosonRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosachikuchichoson.IChosaChikuChichosonMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
@@ -23,7 +24,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichosonEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5221NinteichosaScheduleDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5224ChikuShichosonDac;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -40,7 +40,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class ChosaChikuFinder {
 
-    private static final CodeShubetsu コード種別 = new CodeShubetsu("5002");
     private final MapperProvider mapperProvider;
     private final DbT5224ChikuShichosonDac dbt5224dac;
     private final DbT7051KoseiShichosonMasterDac dbt7051dac;
@@ -89,7 +88,7 @@ public class ChosaChikuFinder {
     @Transaction
     public SearchResult<UzT0007CodeBusiness> getChosaChikuList() {
         List<UzT0007CodeBusiness> resultList = new ArrayList<>();
-        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBE認定支援, コード種別);
+        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード());
         if (codeList == null || codeList.isEmpty()) {
             return SearchResult.of(Collections.<UzT0007CodeBusiness>emptyList(), 0, false);
         }
