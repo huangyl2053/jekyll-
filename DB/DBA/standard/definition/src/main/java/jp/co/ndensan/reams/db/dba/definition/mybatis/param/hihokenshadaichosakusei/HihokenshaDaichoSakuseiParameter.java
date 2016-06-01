@@ -59,7 +59,7 @@ public final class HihokenshaDaichoSakuseiParameter {
             useshihokenshaNo = true;
         }
         JigyoshaNo jigyoshaNo = JigyoshaNo.EMPTY;
-        if (nyushoShisetsuCode != null && nyushoShisetsuCode.length > 1) {
+        if (nyushoShisetsuCode != null && nyushoShisetsuCode.length > 0) {
             jigyoshaNo = nyushoShisetsuCode[0];
         }
 

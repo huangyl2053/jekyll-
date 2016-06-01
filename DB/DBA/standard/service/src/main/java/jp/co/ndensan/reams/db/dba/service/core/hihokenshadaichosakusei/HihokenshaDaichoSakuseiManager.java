@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.Shise
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.ShoKofuKaishuDivisionEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.ShoKofuKaishuDivisionSumEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshadaichosakusei.IHihokenshaDaichoSakuseiMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
@@ -69,7 +70,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -109,11 +109,6 @@ public class HihokenshaDaichoSakuseiManager {
     private static final RString STATE_資格喪失者 = new RString("資格喪失者");
     private static final RString TITLE_介護保険被保険者台帳 = new RString("介護保険被保険者台帳");
     private static final RString NYUSHOSHISETSUSHURUI_11 = new RString("11");
-    private static final RString CODESHUBETSU_0007 = new RString("0007");
-    private static final RString CODESHUBETSU_0010 = new RString("0010");
-    private static final RString CODESHUBETSU_0013 = new RString("0013");
-    private static final RString CODESHUBETSU_0002 = new RString("0002");
-    private static final RString CODESHUBETSU_0001 = new RString("0001");
     private static final int NOCOUNT_5 = 5;
     private static final int NOCOUNT_4 = 4;
     private static final int NOCOUNT_3 = 3;
@@ -288,9 +283,8 @@ public class HihokenshaDaichoSakuseiManager {
         hihokenshaEntity.setJigyoshaMeisho(nyutaishoEntity.getJigyoshaMeisho() == null ? AtenaMeisho.EMPTY
                 : new AtenaMeisho(nyutaishoEntity.getJigyoshaMeisho()));
         if (dbT1008IryohoEntity != null && dbT1008IryohoEntity.getIryoHokenShubetsuCode() != null) {
-            hihokenshaEntity.setIryoHokenShubetsu(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格,
-                    new CodeShubetsu(CODESHUBETSU_0001),
-                    new Code(dbT1008IryohoEntity.getIryoHokenShubetsuCode())));
+            hihokenshaEntity.setIryoHokenShubetsu(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.医療保険種類.getコード(),
+                    new Code(dbT1008IryohoEntity.getIryoHokenShubetsuCode()), FlexibleDate.getNowDate()));
             hihokenshaEntity.setIryoHokenshaMeisho(dbT1008IryohoEntity.getIryoHokenshaMeisho());
             hihokenshaEntity.setIryoHokenKigoNo(dbT1008IryohoEntity.getIryoHokenKigoNo());
         }
@@ -402,7 +396,7 @@ public class HihokenshaDaichoSakuseiManager {
         for (int i = 0; i < maxCount; i++) {
             HihokenshaDaichoSakuseiEntity hihokenshaDaichoSakuseiEntity = new HihokenshaDaichoSakuseiEntity();
             hihokenshaDaichoSakuseiEntity.setPrintDate(dateFormat日時(dateFormat(hihokenshaEntity.getPrintDate())));
-            hihokenshaDaichoSakuseiEntity.setPage(new RString(String.valueOf(i)));
+            hihokenshaDaichoSakuseiEntity.setPage(new RString(String.valueOf(i + 1)));
             hihokenshaDaichoSakuseiEntity.setTitle(TITLE_介護保険被保険者台帳);
             hihokenshaDaichoSakuseiEntity.setShichosonCode(hihokenshaEntity.getShichosonCode());
             hihokenshaDaichoSakuseiEntity.setShichosonMeisho(hihokenshaEntity.getShichosonMeisho());
@@ -434,7 +428,7 @@ public class HihokenshaDaichoSakuseiManager {
             hihokenshaDaichoSakuseiEntity.setIryoHokenShubetsu(hihokenshaEntity.getIryoHokenShubetsu());
             hihokenshaDaichoSakuseiEntity.setIryoHokenshaMeisho(hihokenshaEntity.getIryoHokenshaMeisho());
             hihokenshaDaichoSakuseiEntity.setIryoHokenKigoNo(hihokenshaEntity.getIryoHokenKigoNo());
-            hihokenshaDaichoSakuseiEntity.setOrderNo(hihokenshaEntity.getOrderNo());
+            hihokenshaDaichoSakuseiEntity.setOrderNo(new RString(String.valueOf(i + 1)));
             hihokenshaDaichoSakuseiEntity.setSochiHokensha(hihokenshaEntity.getSochiHokensha());
             hihokenshaDaichoSakuseiEntity.setKyuHokensha(hihokenshaEntity.getKyuHokensha());
             if (!分割した被保険者台帳管理List.isEmpty() && i < 分割した被保険者台帳管理List.size()) {
@@ -891,7 +885,7 @@ public class HihokenshaDaichoSakuseiManager {
             取得事由コード.add(entity.getShikakuShutokuJiyuCode());
             if (entity.getShikakuShutokuJiyuCode() != null) {
                 取得事由名称.add(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
-                        new CodeShubetsu(CODESHUBETSU_0007), new Code(entity.getShikakuShutokuJiyuCode())));
+                        DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), new Code(entity.getShikakuShutokuJiyuCode()), FlexibleDate.getNowDate()));
             } else {
                 取得事由名称.add(RString.EMPTY);
             }
@@ -900,7 +894,8 @@ public class HihokenshaDaichoSakuseiManager {
             喪失事由コード.add(entity.getShikakuSoshitsuJiyuCode());
             if (entity.getShikakuSoshitsuJiyuCode() != null) {
                 喪失事由名称.add(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
-                        new CodeShubetsu(CODESHUBETSU_0010), new Code(entity.getShikakuSoshitsuJiyuCode())));
+                        DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(), new Code(entity.getShikakuSoshitsuJiyuCode()),
+                        FlexibleDate.getNowDate()));
             } else {
                 喪失事由名称.add(RString.EMPTY);
             }
@@ -909,7 +904,7 @@ public class HihokenshaDaichoSakuseiManager {
             変更事由コード.add(entity.getShikakuHenkoJiyuCode());
             if (entity.getShikakuHenkoJiyuCode() != null) {
                 変更事由名称.add(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
-                        new CodeShubetsu(CODESHUBETSU_0013), new Code(entity.getShikakuHenkoJiyuCode())));
+                        DBACodeShubetsu.介護資格変更事由被保険者.getコード(), new Code(entity.getShikakuHenkoJiyuCode()), FlexibleDate.getNowDate()));
             } else {
                 変更事由名称.add(RString.EMPTY);
             }
@@ -1105,7 +1100,7 @@ public class HihokenshaDaichoSakuseiManager {
             証履歴発行日.add(flexRString(entity.getKofuYMD()));
             if (entity.getKofuJiyu() != null) {
                 証履歴事由名称.add(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
-                        new CodeShubetsu(CODESHUBETSU_0002), new Code(entity.getKofuJiyu())));
+                        DBACodeShubetsu.被保険者証交付事由.getコード(), new Code(entity.getKofuJiyu()), FlexibleDate.getNowDate()));
             } else {
                 証履歴事由名称.add(RString.EMPTY);
             }
