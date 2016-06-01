@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -177,7 +178,7 @@ public class KogakuServicehiPanel {
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         RString サービス提供年月Row = map.get(サービス提供年月R);
         FlexibleYearMonth サービス提供年月 = サービス提供年月Row == null || サービス提供年月Row.isEmpty()
-                ? null : new FlexibleYearMonth(サービス提供年月Row);
+                ? null : new FlexibleYearMonth(new RYearMonth(サービス提供年月Row.toString()).toString());
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, サービス提供年月);
         RString 履歴番号Row = map.get(履歴番号R);
         ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号Row);
