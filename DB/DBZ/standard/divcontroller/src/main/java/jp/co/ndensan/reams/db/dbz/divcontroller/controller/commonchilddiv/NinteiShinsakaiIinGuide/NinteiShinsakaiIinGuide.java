@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -56,7 +57,7 @@ public class NinteiShinsakaiIinGuide {
         getHandler(div).set性別();
         getHandler(div).set審査会委員資格();
         div.getKensakuJoken().getCcdHokensha().loadHokenshaList();
-        div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数上限());
+        div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数());
         div.getBtnSaikensaku().setVisible(false);
         div.getDdlIryoKikan().getDataSource().clear();
         div.getDdlKaigoJigyosha().getDataSource().clear();
@@ -76,7 +77,7 @@ public class NinteiShinsakaiIinGuide {
         div.getKensakuJoken().getTxtShinsakaiIinName().setValue(RString.EMPTY);
         div.getKensakuJoken().getDdlSeibetsu().setSelectedKey(RString.EMPTY);
         div.getKensakuJoken().getCcdHokensha().loadHokenshaList();
-        div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数上限());
+        div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数());
         div.getKensakuJoken().getDdlShinsainShikakuCode().setSelectedKey(RString.EMPTY);
         div.getKensakuJoken().getShosaiJoken().getDdlIryoKikan().setSelectedKey(RString.EMPTY);
         div.getKensakuJoken().getShosaiJoken().getDdlKaigoJigyosha().setSelectedKey(RString.EMPTY);
@@ -108,6 +109,9 @@ public class NinteiShinsakaiIinGuide {
         RString kaigoJigyosha = div.getKensakuJoken().getShosaiJoken().getDdlKaigoJigyosha().getSelectedKey();
         RString sonotaJigyosha = div.getKensakuJoken().getShosaiJoken().getDdlSonotaJigyosha().getSelectedKey();
         Decimal maxKensu = div.getKensakuJoken().getTxtMaxKensu().getValue();
+        if (maxKensu.intValue() > get最大取得件数上限().intValue()) {
+            throw new ApplicationException("最大取得件数上限が超過しています。最大取得件数上限(" + get最大取得件数上限().intValue() + ")以下に調整してください。");
+        }
         RString kikenFlag = getChkFlag(div.getKensakuJoken().getShosaiJoken().getChkKiken().getSelectedKeys());
         RString haishiFlag = getChkFlag(div.getKensakuJoken().getShosaiJoken().getChkHaishi().getSelectedKeys());
         NinteiShinsakaiIinGuideMapperParameter parameter;
@@ -169,7 +173,7 @@ public class NinteiShinsakaiIinGuide {
         div.getKensakuJoken().getTxtShinsakaiIinName().setValue(RString.EMPTY);
         div.getKensakuJoken().getDdlSeibetsu().setSelectedKey(RString.EMPTY);
         div.getKensakuJoken().getCcdHokensha().loadHokenshaList();
-        div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数上限());
+        div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数());
         div.getKensakuJoken().getDdlShinsainShikakuCode().setSelectedKey(RString.EMPTY);
         div.getKensakuJoken().getShosaiJoken().getDdlIryoKikan().setSelectedKey(RString.EMPTY);
         div.getKensakuJoken().getShosaiJoken().getDdlKaigoJigyosha().setSelectedKey(RString.EMPTY);
@@ -207,11 +211,22 @@ public class NinteiShinsakaiIinGuide {
         return ResponseData.of(div).respond();
     }
 
+    private Decimal get最大取得件数() {
+        Decimal 最大取得件数 = new Decimal(0);
+        if (DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告) != null) {
+            最大取得件数 = new Decimal(DbBusinessConfig.get(
+                    ConfigNameDBU.検索制御_最大取得件数,
+                    RDate.getNowDate(),
+                    SubGyomuCode.DBU介護統計報告).toString());
+        }
+        return 最大取得件数;
+    }
+
     private Decimal get最大取得件数上限() {
         Decimal 最大取得件数上限 = new Decimal(0);
-        if (DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告) != null) {
+        if (DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告) != null) {
             最大取得件数上限 = new Decimal(DbBusinessConfig.get(
-                    ConfigNameDBU.検索制御_最大取得件数上限,
+                    ConfigNameDBU.検索制御_最大取得件数,
                     RDate.getNowDate(),
                     SubGyomuCode.DBU介護統計報告).toString());
         }
