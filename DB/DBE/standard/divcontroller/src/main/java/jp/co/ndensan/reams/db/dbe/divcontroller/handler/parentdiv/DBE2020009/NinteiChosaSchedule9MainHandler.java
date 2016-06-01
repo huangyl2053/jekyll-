@@ -160,7 +160,7 @@ public class NinteiChosaSchedule9MainHandler {
         for (ChosainJoho entity : 対象認定調査員) {
 
             KeyValueDataSource keyValue = new KeyValueDataSource();
-            keyValue.setKey(entity.get認定調査員コード().value());
+            keyValue.setKey(entity.get認定調査員コード());
             keyValue.setValue(entity.get調査員氏名());
 
             dataSource.add(keyValue);
