@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinseirirekijoho;
+package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 /**
  * 申請履歴情報の識別子です。
  *
- * @reamsid_L DBE-9999-011 sunhaidi
+ * @reamsid_L DBZ-9999-011 sunhaidi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

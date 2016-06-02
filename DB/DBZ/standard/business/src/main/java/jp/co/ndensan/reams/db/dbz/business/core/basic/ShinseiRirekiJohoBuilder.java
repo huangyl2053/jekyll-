@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinseirirekijoho;
+package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 /**
  * {@link ShinseiRirekiJoho}の編集を行うビルダークラスです。
  *
- * @reamsid_L DBE-9999-011 sunhaidi
+ * @reamsid_L DBZ-9999-011 sunhaidi
  */
 public class ShinseiRirekiJohoBuilder {
 

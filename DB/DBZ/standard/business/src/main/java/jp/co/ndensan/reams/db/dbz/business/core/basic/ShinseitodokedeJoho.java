@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinseitodokedejoho;
+package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 申請届出情報を管理するクラスです。
  *
- * @reamsid_L DBE-9999-011 sunhaidi
+ * @reamsid_L DBZ-9999-011 sunhaidi
  */
 public class ShinseitodokedeJoho
         extends ModelBase<ShinseitodokedeJohoIdentifier, DbT5120ShinseitodokedeJohoEntity, ShinseitodokedeJoho>
