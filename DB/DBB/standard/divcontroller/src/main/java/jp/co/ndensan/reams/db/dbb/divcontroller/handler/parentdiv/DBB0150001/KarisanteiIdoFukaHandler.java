@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0150001;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -28,6 +30,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0150001.dgCh
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0150001.dgHokenryoDankai_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0150001.dgKarisanteiIdoshoriKakunin_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0150001.dgKomokuNaiyo_Row;
+import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.karisanteiidofuka.KariSanteiIdoFuka;
 import jp.co.ndensan.reams.db.dbb.service.core.tsuchisho.notsu.ShutsuryokuKiKohoFactory;
@@ -39,6 +42,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
+import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -73,7 +77,8 @@ public class KarisanteiIdoFukaHandler {
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
     private static final RString STR_時刻 = new RString("235959");
-    private static final RString 実行する = new RString("btnSantei");
+    private static final RString 仮算定異動賦課_実行する = new RString("btnSantei");
+    private static final RString 仮算定異動賦課通知書作成_実行する = new RString("btnIkkatsuHakko");
     private static final RString 月_6 = new RString("6月");
     private static final RString 帳票グループコード_32 = new RString("DBB01500032");
     private static final RString 帳票グループコード_3 = new RString("DBB0150003");
@@ -83,21 +88,21 @@ public class KarisanteiIdoFukaHandler {
     private static final RString STR_1 = new RString("1");
     private static final RString STR_2 = new RString("2");
     private static final RString 対象補足月 = new RString("特徴開始月：8月（捕捉月：前年度２月）");
-    private final RString 仮算定異動賦課_処理名 = new RString("仮算定異動賦課");
-    private final RString 仮算定異動賦課確定_処理名 = new RString("仮算定異動賦課確定");
-    private final RString 仮算定異動賦課_MENU = new RString("DBBMN36001");
-    private final RString 普徴仮算定異動方法_項目 = new RString("普徴仮算定異動方法");
-    private final RString 普徴仮算定異動新規資格賦課_項目 = new RString("普徴仮算定異動新規資格賦課");
-    private final RString 普徴仮算定異動新規賦課方法_項目 = new RString("普徴仮算定異動新規賦課方法");
-    private final RString 普徴仮算定新規資格適用段階_項目 = new RString("普徴仮算定新規資格適用段階");
-    private final RString 年額基準年度_項目 = new RString("年額基準年度");
-    private final RString 特徴開始計算方法_項目 = new RString("8月特徴開始計算方法");
-    private final RString 賦課する = new RString("1");
-    private final RString 一律今年度 = new RString("12");
-    private final RString 遷移元区分_0 = new RString("0");
-    private final RString 遷移元区分_1 = new RString("1");
-    private final RString 項目名 = new RString("当初出力_出力方法");
-    private final ReportId 帳票分類ID = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
+    private static final RString 仮算定異動賦課_処理名 = new RString("仮算定異動賦課");
+    private static final RString 仮算定異動賦課確定_処理名 = new RString("仮算定異動賦課確定");
+    private static final RString 仮算定異動賦課_MENU = new RString("DBBMN36001");
+    private static final RString 普徴仮算定異動方法_項目 = new RString("普徴仮算定異動方法");
+    private static final RString 普徴仮算定異動新規資格賦課_項目 = new RString("普徴仮算定異動新規資格賦課");
+    private static final RString 普徴仮算定異動新規賦課方法_項目 = new RString("普徴仮算定異動新規賦課方法");
+    private static final RString 普徴仮算定新規資格適用段階_項目 = new RString("普徴仮算定新規資格適用段階");
+    private static final RString 年額基準年度_項目 = new RString("年額基準年度");
+    private static final RString 特徴開始計算方法_項目 = new RString("8月特徴開始計算方法");
+    private static final RString 賦課する = new RString("1");
+    private static final RString 一律今年度 = new RString("12");
+    private static final RString 遷移元区分_0 = new RString("0");
+    private static final RString 遷移元区分_1 = new RString("1");
+    private static final RString 項目名 = new RString("当初出力_出力方法");
+    private static final ReportId 帳票分類ID = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
     private static final RString 別々出力 = new RString("別々出力");
     private static final RString 全件出力 = new RString("全件出力");
     private static final ReportId 帳票ID_14 = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoKigoto");
@@ -108,8 +113,8 @@ public class KarisanteiIdoFukaHandler {
     private static final ReportId 仮算定額変更通知書_帳票分類ＩＤ = new ReportId("DBB100010_KarisanteiHenkoTsuchishoDaihyo");
     private static final ReportId 保険料納入通知書_本算定_帳票分類ＩＤ = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
     private static final ReportId 特徴開始通知書_仮算定 = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
-    private static final ReportId 仮算定額変更通知書 = new ReportId("BB100010_KarisanteiHenkoTsuchishoDaihyo");
-    private static final ReportId 納入通知書 = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
+    private static final ReportId 仮算定額変更通知書 = new ReportId("DBB100010_KarisanteiHenkoTsuchishoDaihyo");
+    private static final ReportId 納入通知書 = new ReportId("DBB200006_FutsuChoshuKarisanteiKekkaIchiran");
 
     /**
      * コンストラクタです。
@@ -122,8 +127,10 @@ public class KarisanteiIdoFukaHandler {
 
     /**
      * 画面初期化のメソッドます。
+     *
+     * @return flag boolean
      */
-    public void initialize() {
+    public boolean initialize() {
 
         RDate date = RDate.getNowDate();
         int 境界日付 = date.getLastDay() - Integer.valueOf(DbBusinessConfig.get(
@@ -146,8 +153,9 @@ public class KarisanteiIdoFukaHandler {
                 SubGyomuCode.DBB介護賦課);
         set帳票グループ(date);
         set抽出条件(調定年度);
-        set処理状態(調定年度);
+        boolean flag = set処理状態(調定年度);
         set帳票作成個別情報();
+        return flag;
     }
 
     /**
@@ -162,11 +170,12 @@ public class KarisanteiIdoFukaHandler {
                 div.getKarisanteiIdoFukaChohyoHakko().getCcdChohyoIchiran().load(
                         SubGyomuCode.DBB介護賦課, 帳票グループコード_12);
                 set異動賦課_特徴捕捉分();
-                set対象特徴開始月テキストボックス();
+                set保険料段階と保険料率();
                 管理情報確認の制御処理(date);
             } else {
                 div.getKarisanteiIdoFukaChohyoHakko().getCcdChohyoIchiran().load(
                         SubGyomuCode.DBB介護賦課, 帳票グループコード_1);
+                set保険料段階と保険料率();
                 管理情報確認の制御処理(date);
             }
         } else {
@@ -180,20 +189,32 @@ public class KarisanteiIdoFukaHandler {
         }
     }
 
-    private void set対象特徴開始月テキストボックス() {
+    private void set保険料段階と保険料率() {
         FlexibleYear 賦課年度 = div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getTxtFukaNendo().getDomain();
         HokenryoDankaiList 保険料段階リスト = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(賦課年度);
-        List<dgHokenryoDankai_Row> rowList = new ArrayList<>();
-        dgHokenryoDankai_Row row;
-        for (HokenryoDankai 保険料段階 : 保険料段階リスト.asList()) {
-            row = new dgHokenryoDankai_Row();
-            row.setHokenryoDankai(保険料段階.get表記());
-            if (保険料段階.get保険料率() != null) {
-                row.setHokenryoRitsu(new RString(保険料段階.get保険料率().toString()));
+        if (保険料段階リスト != null) {
+            List<HokenryoDankai> 保険料段階List = 保険料段階リスト.asList();
+            Collections.sort(保険料段階List, new Comparator<HokenryoDankai>() {
+                @Override
+                public int compare(HokenryoDankai o1, HokenryoDankai o2) {
+
+                    RString index1 = o1.get段階Index().padZeroToLeft(NUM_2);
+                    RString index2 = o2.get段階Index().padZeroToLeft(NUM_2);
+                    return index1.compareTo(index2);
+                }
+            });
+            List<dgHokenryoDankai_Row> rowList = new ArrayList<>();
+            dgHokenryoDankai_Row row;
+            for (HokenryoDankai 保険料段階 : 保険料段階リスト.asList()) {
+                row = new dgHokenryoDankai_Row();
+                row.setHokenryoDankai(保険料段階.get表記());
+                if (保険料段階.get保険料率() != null) {
+                    row.setHokenryoRitsu(new RString(保険料段階.get保険料率().toString()));
+                }
+                rowList.add(row);
             }
-            rowList.add(row);
+            div.getShoriJokyo().getKanriJohoKakunin().getDgHokenryoDankai().setDataSource(rowList);
         }
-        div.getShoriJokyo().getKanriJohoKakunin().getDgHokenryoDankai().setDataSource(rowList);
     }
 
     private void 管理情報確認の制御処理(RDate date) {
@@ -328,6 +349,7 @@ public class KarisanteiIdoFukaHandler {
         }
         div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getDdlNotsuShuturyokuki()
                 .setDataSource(dataSource);
+        set納入通知書の発行日();
     }
 
     private List<ChohyoMeter> get各通知書の帳票ID() {
@@ -345,7 +367,7 @@ public class KarisanteiIdoFukaHandler {
         return 出力帳票一覧;
     }
 
-    private void set処理状態(RString 調定年度) {
+    private boolean set処理状態(RString 調定年度) {
         List<dgKarisanteiIdoshoriKakunin_Row> rowList = new ArrayList<>();
         dgKarisanteiIdoshoriKakunin_Row row = new dgKarisanteiIdoshoriKakunin_Row();
         boolean flag;
@@ -374,12 +396,7 @@ public class KarisanteiIdoFukaHandler {
             }
         }
         div.getShoriJokyo().getKarisanteiIdoFukashoriKakunin().getDgKarisanteiIdoshoriKakunin().setDataSource(rowList);
-
-        if (flag) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する, false);
-        } else {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する, true);
-        }
+        return flag;
     }
 
     private boolean is仮算定異動賦課状況(
@@ -456,7 +473,12 @@ public class KarisanteiIdoFukaHandler {
         return row;
     }
 
-    private void set抽出条件(RString 調定年度) {
+    /**
+     * 抽出条件設定のメソッドます。
+     *
+     * @param 調定年度 RString
+     */
+    public void set抽出条件(RString 調定年度) {
         KariSanteiIdoFuka idoFuka = new KariSanteiIdoFuka();
         YMDHMS 抽出開始日時 = idoFuka.getTyusyutuKaishibi(new FlexibleYear(調定年度));
         List<dgChushutsuKikan_Row> rowList = new ArrayList<>();
@@ -547,6 +569,41 @@ public class KarisanteiIdoFukaHandler {
         ValidationMessageControlPairs pairs = validation.必須チェックValidate(
                 仮算定額変更通知書Flag, 納入通知書Flag, 特徴開始通知書Flag);
         return pairs;
+    }
+
+    /**
+     * 納入通知書の発行日設定する。
+     */
+    public void set納入通知書の発行日() {
+        RString 出力期 = div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
+                .getDdlNotsuShuturyokuki().getSelectedValue();
+        if (!出力期.isEmpty()) {
+            Noki 普徴納期 = FukaNokiResearcher.createInstance()
+                    .get普徴納期(Integer.valueOf(出力期.substring(NUM_0, NUM_2).toString()));
+            div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getTxtNotsuHakkoYMD()
+                    .setValue(普徴納期.get通知書発行日());
+        }
+    }
+
+    /**
+     * 実行ボタン設定する。
+     *
+     * @param flag boolean
+     */
+    public void set実行ボタン(boolean flag) {
+        if (仮算定異動賦課_MENU.equals(ResponseHolder.getMenuID())) {
+            if (flag) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(仮算定異動賦課_実行する, false);
+            } else {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(仮算定異動賦課_実行する, true);
+            }
+        } else {
+            if (flag) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(仮算定異動賦課通知書作成_実行する, false);
+            } else {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(仮算定異動賦課通知書作成_実行する, true);
+            }
+        }
     }
 
     /**

@@ -68,6 +68,9 @@ public class KarisanteiIdoFukaHandlerValidationHandler {
                         div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getChkNotsuTaishosha())
                 .add(KarisanteiIdoFukaHandlerValidationMessages.特徴開始通知書仮算定の発行日入力チェック,
                         div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getTxtTokuKaishiTsuchiHakkoYMD())
+                .add(KarisanteiIdoFukaHandlerValidationMessages.処理対象と出力期の一致チェック,
+                        div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getDdlShorigetsu(),
+                        div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getDdlNotsuShuturyokuki())
                 .build();
     }
 
@@ -105,7 +108,7 @@ public class KarisanteiIdoFukaHandlerValidationHandler {
                         .thenAdd(KarisanteiIdoFukaHandlerValidationMessages.納入通知書の対象者の選択チェック)
                         .messages());
             }
-            if (保険料納入通知書_仮算定) {
+            if (特徴開始通知書_仮算定) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(KarisanteiIdoFukaHandlerSpec.特徴開始通知書_発行日)
                         .thenAdd(KarisanteiIdoFukaHandlerValidationMessages.特徴開始通知書仮算定の発行日入力チェック)

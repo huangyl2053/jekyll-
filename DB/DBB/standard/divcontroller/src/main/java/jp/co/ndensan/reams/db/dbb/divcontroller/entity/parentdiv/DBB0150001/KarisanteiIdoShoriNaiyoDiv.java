@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0150001;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxFlexibleYear;
 
 /**
@@ -18,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxFlexibleYear;
  */
 public class KarisanteiIdoShoriNaiyoDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,8 +30,6 @@ public class KarisanteiIdoShoriNaiyoDiv extends Panel {
     private TextBoxFlexibleYear txtFukaNendo;
     @JsonProperty("ddlShorigetsu")
     private DropDownList ddlShorigetsu;
-    @JsonProperty("txtFuchoKarisanteiIdoHoho")
-    private TextBox txtFuchoKarisanteiIdoHoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -92,24 +89,6 @@ public class KarisanteiIdoShoriNaiyoDiv extends Panel {
     @JsonProperty("ddlShorigetsu")
     public void setDdlShorigetsu(DropDownList ddlShorigetsu) {
         this.ddlShorigetsu = ddlShorigetsu;
-    }
-
-    /*
-     * gettxtFuchoKarisanteiIdoHoho
-     * @return txtFuchoKarisanteiIdoHoho
-     */
-    @JsonProperty("txtFuchoKarisanteiIdoHoho")
-    public TextBox getTxtFuchoKarisanteiIdoHoho() {
-        return txtFuchoKarisanteiIdoHoho;
-    }
-
-    /*
-     * settxtFuchoKarisanteiIdoHoho
-     * @param txtFuchoKarisanteiIdoHoho txtFuchoKarisanteiIdoHoho
-     */
-    @JsonProperty("txtFuchoKarisanteiIdoHoho")
-    public void setTxtFuchoKarisanteiIdoHoho(TextBox txtFuchoKarisanteiIdoHoho) {
-        this.txtFuchoKarisanteiIdoHoho = txtFuchoKarisanteiIdoHoho;
     }
 
     // </editor-fold>

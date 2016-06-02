@@ -10,12 +10,17 @@ import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0150001.DBB0150001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0150001.KarisanteiIdoFukaPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0150001.KarisanteiIdoFukaHandler;
+import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面設計_DBBGM36001_仮算定異動賦課のクラスです。
@@ -24,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class KarisanteiIdoFukaPanel {
 
-    private final RString 仮算定異動賦課_MENU = new RString("DBBMN36001");
+    private static final RString 仮算定異動賦課_MENU = new RString("DBBMN36001");
 
     /**
      * 画面初期化のメソッドます。
@@ -37,7 +42,8 @@ public class KarisanteiIdoFukaPanel {
         if (getHandler(div).is基準日時(div)) {
             throw new ApplicationException(DbbErrorMessages.異動賦課の確定処理が未処理.getMessage());
         }
-        getHandler(div).initialize();
+        boolean flag = getHandler(div).initialize();
+        ViewStateHolder.put(ViewStateKeys.実行フラグ, flag);
         if (仮算定異動賦課_MENU.equals(ResponseHolder.getMenuID())) {
             return ResponseData.of(div).setState(DBB0150001StateName.仮算定異動賦課);
         } else {
@@ -79,6 +85,42 @@ public class KarisanteiIdoFukaPanel {
     public ResponseData<KarisanteiIdoFukaPanelDiv> onChange_ddlShorigetsu(KarisanteiIdoFukaPanelDiv div) {
         RDate date = RDate.getNowDate();
         getHandler(div).set帳票グループ(date);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 抽出条件のメソッドます。
+     *
+     * @param div KarisanteiIdoFukaPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KarisanteiIdoFukaPanelDiv> onChange_radChushutsuJoken(KarisanteiIdoFukaPanelDiv div) {
+        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
+                SubGyomuCode.DBB介護賦課);
+        getHandler(div).set抽出条件(調定年度);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「出力期」を変更すると、「発行日」も変更するのメソッドます。
+     *
+     * @param div KarisanteiIdoFukaPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KarisanteiIdoFukaPanelDiv> onChange_ddlNotsuShuturyokuki(KarisanteiIdoFukaPanelDiv div) {
+        getHandler(div).set納入通知書の発行日();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「実行する」ボタンを設定する。
+     *
+     * @param div KarisanteiIdoFukaPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KarisanteiIdoFukaPanelDiv> onStateTransition(KarisanteiIdoFukaPanelDiv div) {
+        boolean falg = ViewStateHolder.get(ViewStateKeys.実行フラグ, boolean.class);
+        getHandler(div).set実行ボタン(falg);
         return ResponseData.of(div).respond();
     }
 

@@ -69,32 +69,32 @@ public enum KarisanteiIdoFukaHandlerSpec implements IPredicate<KarisanteiIdoFuka
         public static boolean is仮算定額変更通知書の発行日(KarisanteiIdoFukaPanelDiv div) {
             RDate 仮算定額変更通知書_発行日 = div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
                     .getTxtKariHenkoTsuchiHakkoYMD().getValue();
-            return 仮算定額変更通知書_発行日 == null;
+            return 仮算定額変更通知書_発行日 != null;
         }
 
         public static boolean is納入通知書の発行日(KarisanteiIdoFukaPanelDiv div) {
             RDate 納入通知書_発行日 = div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
                     .getTxtNotsuHakkoYMD().getValue();
-            return 納入通知書_発行日 == null;
+            return 納入通知書_発行日 != null;
         }
 
         public static boolean is納入通知書の対象者(KarisanteiIdoFukaPanelDiv div) {
             List<RString> 納入通知書_対象者 = div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
                     .getChkNotsuTaishosha().getSelectedKeys();
-            return (納入通知書_対象者 == null || 納入通知書_対象者.isEmpty());
+            return !納入通知書_対象者.isEmpty();
         }
 
         public static boolean is特徴開始通知書の発行日(KarisanteiIdoFukaPanelDiv div) {
             RDate 特徴開始通知書_発行日 = div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
                     .getTxtTokuKaishiTsuchiHakkoYMD().getValue();
-            return 特徴開始通知書_発行日 == null;
+            return 特徴開始通知書_発行日 != null;
         }
 
         public static boolean is処理対象と出力期の一致(KarisanteiIdoFukaPanelDiv div) {
             RString key1 = div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getDdlShorigetsu().getSelectedKey();
             RString key2 = div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
                     .getDdlNotsuShuturyokuki().getSelectedKey();
-            return !key1.equals(key2);
+            return key1.equals(key2);
         }
     }
 }
