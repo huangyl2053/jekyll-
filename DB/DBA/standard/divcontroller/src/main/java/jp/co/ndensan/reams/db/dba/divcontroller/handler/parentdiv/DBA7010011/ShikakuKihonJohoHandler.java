@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TaJush
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010011.ShikakuKihonJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010011.dgJushochiTokureiRireki_Row;
 import jp.co.ndensan.reams.db.dba.service.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
@@ -24,7 +25,6 @@ import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaManagerFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -49,8 +49,6 @@ public class ShikakuKihonJohoHandler {
     private final RString 役場_役所名敬称 = new RString("役場・役所名敬称");
     private final RString 担当課名 = new RString("担当課名");
     private final RString 担当課名敬称 = new RString("担当課名敬称");
-    private static final CodeShubetsu 介護他特適用理由 = new CodeShubetsu("0008");
-    private static final CodeShubetsu 介護他特解除理由 = new CodeShubetsu("0011");
 
     /**
      * コンストラクタです。
@@ -232,15 +230,19 @@ public class ShikakuKihonJohoHandler {
         if (適用事由コード == null || 適用事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeRyakusho(介護他特適用理由, new Code(適用事由コード)) == null
-                ? RString.EMPTY : CodeMaster.getCodeRyakusho(介護他特適用理由, new Code(適用事由コード));
+        return CodeMaster.getCodeRyakusho(DBACodeShubetsu.介護資格適用事由_他特例者.getコード(),
+                new Code(適用事由コード), new FlexibleDate(RDate.getNowDate().toDateString())) == null
+                ? RString.EMPTY : CodeMaster.getCodeRyakusho(DBACodeShubetsu.介護資格適用事由_他特例者.getコード(),
+                        new Code(適用事由コード), new FlexibleDate(RDate.getNowDate().toDateString()));
     }
 
     private RString get解除事由(RString 解除事由コード) {
         if (解除事由コード == null || 解除事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeRyakusho(介護他特解除理由, new Code(解除事由コード)) == null
-                ? RString.EMPTY : CodeMaster.getCodeRyakusho(介護他特解除理由, new Code(解除事由コード));
+        return CodeMaster.getCodeRyakusho(DBACodeShubetsu.介護資格解除事由_他特例者.getコード(),
+                new Code(解除事由コード), new FlexibleDate(RDate.getNowDate().toDateString())) == null
+                ? RString.EMPTY : CodeMaster.getCodeRyakusho(DBACodeShubetsu.介護資格解除事由_他特例者.getコード(),
+                        new Code(解除事由コード), new FlexibleDate(RDate.getNowDate().toDateString()));
     }
 }

@@ -11,15 +11,16 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.importance.Importanc
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.NinteiChosaScheduleMemoInformationDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.dgListOfCommonMemo_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.dgListOfJichikuMemo_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiChosaScheduleMemo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiChosaScheduleMemoBuilder;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -42,7 +43,6 @@ public class NinteiChosaScheduleMemoInformationHandler {
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
-    private static final CodeShubetsu コード種別 = new CodeShubetsu("5002");
     private static final RString インデックス初期化 = new RString("0");
 
     /**
@@ -66,7 +66,8 @@ public class NinteiChosaScheduleMemoInformationHandler {
     public void onLoad(List<NinteiChosaScheduleMemo> ninteiChosaScheduleMemoList,
             FlexibleDate メモ年月日, Code 地区コード, int 通常件数, int 重要件数) {
 
-        UzT0007CodeEntity uzT0007CodeEntity = CodeMaster.getCode(SubGyomuCode.DBE認定支援, コード種別, 地区コード);
+        UzT0007CodeEntity uzT0007CodeEntity = CodeMaster.getCode(SubGyomuCode.DBE認定支援,
+                DBECodeShubetsu.調査地区コード.getコード(), 地区コード, new FlexibleDate(RDate.getNowDate().toDateString()));
         div.getTxtSetteiDate().setValue(メモ年月日);
         div.getTxtTaishoChiku().setValue(uzT0007CodeEntity == null ? RString.EMPTY : uzT0007CodeEntity.getコード名称());
         div.getTxtNumberOfTsujoMemo().setValue(new RString(String.valueOf(通常件数)));
@@ -406,7 +407,8 @@ public class NinteiChosaScheduleMemoInformationHandler {
     private List<KeyValueDataSource> 調査地区ドロップダウンリスト() {
 
         List<KeyValueDataSource> dataSource = new ArrayList();
-        List<UzT0007CodeEntity> 指定調査地区 = CodeMaster.getCode(SubGyomuCode.DBE認定支援, コード種別);
+        List<UzT0007CodeEntity> 指定調査地区 = CodeMaster.getCode(SubGyomuCode.DBE認定支援,
+                DBECodeShubetsu.調査地区コード.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
 
         for (UzT0007CodeEntity entity : 指定調査地区) {
 
