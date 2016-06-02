@@ -9,7 +9,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShinsainJoho.JogaiShinsainJoho.JogaiShinsainJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShinsainJoho.JogaiShinsainJoho.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShinsainJoho.JogaiShinsainJoho.dgShozokuKikanIchiran_Row;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
  * 除外審査員情報の画面処理Handlerクラスです。
@@ -83,6 +87,21 @@ public class JogaiShinsainJohoHandler {
             row.setShinsakaiIinCode(div.getTxtShinsakaiIinCode().getValue());
             row.setShimei(div.getTxtShinsakaiIinName().getValue());
             row.setShozokuKikan(所属機関);
+        }
+    }
+
+    public static enum RRVMessages implements IValidationMessage {
+
+        未入力(UrWarningMessages.未入力, "審査会委員コード");
+        private final Message message;
+
+        private RRVMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
         }
     }
 

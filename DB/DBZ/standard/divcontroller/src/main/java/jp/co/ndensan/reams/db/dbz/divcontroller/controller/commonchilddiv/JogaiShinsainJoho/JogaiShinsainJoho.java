@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.db.dbz.service.core.jogaishinsainjoho.JogaiShinsainJo
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -111,6 +113,11 @@ public class JogaiShinsainJoho {
      * @return ResponseData<JogaiShinsainJohoDiv>
      */
     public ResponseData<JogaiShinsainJohoDiv> onClick_btnToroku(JogaiShinsainJohoDiv div) {
+        if (RString.isNullOrEmpty(div.getTxtShinsakaiIinCode().getValue())) {
+            ValidationMessageControlPairs controlPairs = new ValidationMessageControlPairs();
+            controlPairs.add(new ValidationMessageControlPair(JogaiShinsainJohoHandler.RRVMessages.未入力));
+            return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+        }
         getHandler(div).onClick_btnToroku();
         return ResponseData.of(div).respond();
     }
