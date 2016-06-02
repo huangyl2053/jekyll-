@@ -73,12 +73,12 @@
         "kanaMeisho" character(40),
         "meisho" character(40),
         "shimei50onKana" character(40),
-        "shikibetsuCode" character(40),
         "shikakuShutokuYmd" rshare."UDD015YMD",
         "shikakuShutokuJiyuCode" character(2),
         "shikakuSoshitsuYmd" rshare."UDD015YMD",
         "shikakuSoshitsuJiyuCode" character(2),
-        "setaiShuyakuNo" character(40)
+        "setaiShuyakuNo" character(40),
+        "shikibetsuCode" rshare."UDD001ShikibetsuCode"
         )
     </insert>
     
