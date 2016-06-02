@@ -1,5 +1,5 @@
 ﻿{
- "uiContainerName": "JikoFutangakuShomeishoToroku",
+ "uiContainerName": "DBCUCN1301",
  "displayWizard": false,
  "subGyomuCode": "DBC",
  "steps": [
@@ -26,7 +26,7 @@
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "JikoFutangakuShomeishoToroku",
+     "toLayoutName": "DBCN130001",
      "toLayoutTitle": "事業分・高額合算　自己負担額証明書登録",
      "toState": "証明書検索"
     },
@@ -34,7 +34,7 @@
      "id": "3",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBC",
-     "layoutName": "JikoFutangakuShomeishoToroku",
+     "layoutName": "DBCN130001",
      "layoutTitle": "事業分・高額合算　自己負担額証明書登録",
      "eventName": "対象者検索に戻る",
      "destroy": true,
@@ -48,7 +48,7 @@
      "id": "4",
      "type": "end",
      "layoutSubGyomuCode": "DBC",
-     "layoutName": "JikoFutangakuShomeishoToroku",
+     "layoutName": "DBCN130001",
      "layoutTitle": "事業分・高額合算　自己負担額証明書登録",
      "eventName": "処理完了",
      "destroy": false,
@@ -58,7 +58,7 @@
      "id": "5",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBC",
-     "layoutName": "JikoFutangakuShomeishoToroku",
+     "layoutName": "DBCN130001",
      "layoutTitle": "事業分・高額合算　自己負担額証明書登録",
      "eventName": "検索結果一覧に戻る",
      "destroy": true,
