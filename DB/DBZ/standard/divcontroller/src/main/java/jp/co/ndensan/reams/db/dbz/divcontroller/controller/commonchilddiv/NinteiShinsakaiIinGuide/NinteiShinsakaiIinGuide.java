@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideResult;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideMapperParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinsakaiIinGuide.NinteiShinsakaiIinGuide.NinteiShinsakaiIinGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideHandler;
@@ -27,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 認定審査会委員ガイドのDivControllerです
@@ -196,8 +194,8 @@ public class NinteiShinsakaiIinGuide {
     public ResponseData<NinteiShinsakaiIinGuideDiv> onClick_ShinsakaiIinIchiranDate(NinteiShinsakaiIinGuideDiv div) {
         RString 介護認定審査会委員コード = div.getShinsakaiIinIchiran().getDgShinsakaiIinIchiran().getClickedItem().getCode();
         RString 審査会委員名称 = div.getShinsakaiIinIchiran().getDgShinsakaiIinIchiran().getClickedItem().getShinsakaiIinName();
-        ViewStateHolder.put(ViewStateKeys.介護認定審査会委員コード, 介護認定審査会委員コード);
-        ViewStateHolder.put(ViewStateKeys.審査会委員名称, 審査会委員名称);
+        div.setHdnShinsakaiIinCode(介護認定審査会委員コード);
+        div.setHdnShinsakaiIinName(審査会委員名称);
         return ResponseData.of(div).respond();
     }
 

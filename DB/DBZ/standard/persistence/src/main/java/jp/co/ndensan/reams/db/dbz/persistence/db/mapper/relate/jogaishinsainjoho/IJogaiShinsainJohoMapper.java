@@ -24,4 +24,11 @@ public interface IJogaiShinsainJohoMapper {
      */
     List<ShinsakaiIinJohoRelateEntity> getShinsakaiIinJoho(RString shinseishoKanriNo);
 
+    /**
+     * 審査会委員コードより審査会委員情報を取得します。
+     *
+     * @param shinsakaiIinCode 審査会委員コード
+     * @return 審査会委員情報
+     */
+    List<ShinsakaiIinJohoRelateEntity> getShinsakaiIinJohoByCode(RString shinsakaiIinCode);
 }
