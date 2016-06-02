@@ -499,8 +499,6 @@ public class ShujiiIkenshoSakuseiIrai {
         iraishoItem.setHihokenshaNameKana(row.getHihokenshaShimeiKana());
         iraishoItem.setHihokenshaName(row.getHihokennshaShimei());
         iraishoItem.setJusho(row.getJusho());
-        iraishoItem.setBirthYMD(row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
         iraishoItem.setYubinNo(getEditedYubinNo(row.getYubinNo()));
         RString hokenshaNo = row.getHokenshaNo().padRight(RString.HALF_SPACE, 数字_6);
         iraishoItem.setHokenshaNo1(hokenshaNo.substring(数字_0, 数字_1));
@@ -533,6 +531,28 @@ public class ShujiiIkenshoSakuseiIrai {
         CustomerBarCode barcode = new CustomerBarCode();
         CustomerBarCodeResult result = barcode.convertCustomerBarCode(row.getYubinNo(), row.getJusho());
         iraishoItem.setCustomerBarCode(result.getCustomerBarCode());
+        FlexibleDate birthYMD = row.getBirthYMD().getValue();
+        if (birthYMD != null) {
+            iraishoItem.setBirthYMD(birthYMD.wareki().eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
+            if (new RString("明").equals(birthYMD.getYear().wareki().getEra())) {
+                iraishoItem.setBirthGengoShowa(星);
+                iraishoItem.setBirthGengoTaisho(星);
+            } else if (new RString("大").equals(birthYMD.getYear().wareki().getEra())) {
+                iraishoItem.setBirthGengoMeiji(星);
+                iraishoItem.setBirthGengoShowa(星);
+            } else if (new RString("昭").equals(birthYMD.getYear().wareki().getEra())) {
+                iraishoItem.setBirthGengoTaisho(星);
+                iraishoItem.setBirthGengoMeiji(星);
+            }
+        }
+        if (!RString.isNullOrEmpty(row.getSeibetsu())) {
+            if (Seibetsu.男.get名称().equals(row.getSeibetsu())) {
+                iraishoItem.setSeibetsuWoman(星);
+            } else if (Seibetsu.女.get名称().equals(row.getSeibetsu())) {
+                iraishoItem.setSeibetsuMan(星);
+            }
+        }
         return iraishoItem;
     }
 
@@ -599,21 +619,21 @@ public class ShujiiIkenshoSakuseiIrai {
             business.setBirthYY(birthYMD.getYear().wareki().getEra());
             business.setBirthMM(new RString(String.valueOf(birthYMD.getMonthValue())));
             business.setBirthDD(new RString(String.valueOf(birthYMD.getDayValue())));
-            if (new RString("明治").equals(birthYMD.getYear().wareki().getEra())) {
+            if (new RString("明").equals(birthYMD.getYear().wareki().getEra())) {
                 business.setBirthGengoShowa(星);
                 business.setBirthGengoTaisho(星);
-            } else if (new RString("大正").equals(birthYMD.getYear().wareki().getEra())) {
+            } else if (new RString("大").equals(birthYMD.getYear().wareki().getEra())) {
                 business.setBirthGengoMeiji(星);
                 business.setBirthGengoShowa(星);
-            } else if (new RString("昭和").equals(birthYMD.getYear().wareki().getEra())) {
+            } else if (new RString("昭").equals(birthYMD.getYear().wareki().getEra())) {
                 business.setBirthGengoTaisho(星);
                 business.setBirthGengoMeiji(星);
             }
         }
         if (!RString.isNullOrEmpty(row.getSeibetsu())) {
-            if (Seibetsu.男.getコード().equals(row.getSeibetsu())) {
+            if (Seibetsu.男.get名称().equals(row.getSeibetsu())) {
                 business.setSeibetsuWoman(星);
-            } else if (Seibetsu.女.getコード().equals(row.getSeibetsu())) {
+            } else if (Seibetsu.女.get名称().equals(row.getSeibetsu())) {
                 business.setSeibetsuMan(星);
             }
         }
@@ -782,16 +802,29 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setHihokenshaName(row.getHihokennshaShimei());
         item.setHihokenshaNameKana(row.getHihokenshaShimeiKana());
         item.setJusho(row.getJusho());
-        if (row.getBirthYMD() != null) {
+        item.setYubinNo(getEditedYubinNo(row.getYubinNo()));
+        FlexibleDate birthYMD = row.getBirthYMD().getValue();
+        if (birthYMD != null) {
             item.setBirthYMD(row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
+            if (new RString("明").equals(birthYMD.getYear().wareki().getEra())) {
+                item.setBirthGengoShowa(星);
+                item.setBirthGengoTaisho(星);
+            } else if (new RString("大").equals(birthYMD.getYear().wareki().getEra())) {
+                item.setBirthGengoMeiji(星);
+                item.setBirthGengoShowa(星);
+            } else if (new RString("昭").equals(birthYMD.getYear().wareki().getEra())) {
+                item.setBirthGengoTaisho(星);
+                item.setBirthGengoMeiji(星);
+            }
         }
-        if (Seibetsu.女.getコード().equals(row.getSeibetsu())) {
-            item.setSeibetsuMan(Seibetsu.男.get名称());
-        } else if (Seibetsu.男.getコード().equals(row.getSeibetsu())) {
-            item.setSeibetsuMan(Seibetsu.女.get名称());
+        if (!RString.isNullOrEmpty(row.getSeibetsu())) {
+            if (Seibetsu.男.get名称().equals(row.getSeibetsu())) {
+                item.setSeibetsuWoman(星);
+            } else if (Seibetsu.女.get名称().equals(row.getSeibetsu())) {
+                item.setSeibetsuMan(星);
+            }
         }
-        item.setYubinNo(getEditedYubinNo(row.getYubinNo()));
         return item;
     }
 
