@@ -122,22 +122,27 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
      * @return HokaShichosonJyusyochiTokureisyaKanriDiv
      */
     public ResponseData<HokaShichosonJyusyochiTokureisyaKanriDiv> onClick_Hozon(HokaShichosonJyusyochiTokureisyaKanriDiv div) {
+        if (ResponseHolder.isReRequest() && new RString(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())) {
+            return ResponseData.of(div).respond();
+        }
+        RString menuId = ResponseHolder.getMenuID();
+        if (((メニューID_施設入所により適用.equals(menuId) || メニューID_転入転出保留対象者管理.equals(menuId)
+                || メニューID_施設退所により解除.equals(menuId))
+                && (div.getCddTaJushochiTokureishaKanri().get適用情報一覧().isEmpty()
+                || RowState.Unchanged.equals(div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getRowState())))
+                || (メニューID_施設変更により変更.equals(menuId) && !get変更(div))) {
+            InformationMessage message = new InformationMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode(),
+                    DbzInformationMessages.内容変更なしで保存不可.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            RString menuId = ResponseHolder.getMenuID();
-            if (((メニューID_施設入所により適用.equals(menuId) || メニューID_転入転出保留対象者管理.equals(menuId)
-                    || メニューID_施設退所により解除.equals(menuId))
-                    && (div.getCddTaJushochiTokureishaKanri().get適用情報一覧().isEmpty()
-                    || RowState.Unchanged.equals(div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getRowState())))
-                    || (メニューID_施設変更により変更.equals(menuId) && !get変更(div))) {
-                InformationMessage message = new InformationMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode(),
-                        DbzInformationMessages.内容変更なしで保存不可.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+
             set処理実行(div);
             RealInitialLocker.release(LOCKINGKEY);
             div.getCcdKaigoKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
