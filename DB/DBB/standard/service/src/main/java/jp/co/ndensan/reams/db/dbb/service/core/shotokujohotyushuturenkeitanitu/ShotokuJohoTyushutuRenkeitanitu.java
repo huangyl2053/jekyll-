@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -31,10 +30,6 @@ public class ShotokuJohoTyushutuRenkeitanitu {
     private static final RString 遷移区分_1 = new RString("1");
     private static final RString 不可 = new RString("2");
     private static final RString 可 = new RString("1");
-    private static final RString 所得情報抽出連携当初 = new RString("DBBMN51009");
-    private static final RString 所得情報抽出連携異動 = new RString("DBBMN51010");
-    private static final RString 定値_3 = new RString("3");
-    private static final RString 定値_4 = new RString("4");
 
     ShotokuJohoTyushutuRenkeitanitu() {
         this.処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
@@ -75,23 +70,26 @@ public class ShotokuJohoTyushutuRenkeitanitu {
                 処理区分 = 処理日付管理マスタ無し;
             } else {
                 基準日時 = 処理日付管理異動情報Entity.getKijunTimestamp();
-                基準日時1(基準日時);
+                処理区分 = 基準日時1(基準日時);
             }
+            return 処理区分;
         }
         if (遷移区分_1.equals(遷移区分)) {
             処理日付管理異動情報Entity = 処理日付管理Dac.select処理日付管理マスタ_当初所得情報抽出(年度, 市町村識別ID);
             if (処理日付管理異動情報Entity == null) {
                 処理区分 = 不可;
+                return 処理区分;
             } else {
                 基準日時 = 処理日付管理異動情報Entity.getKijunTimestamp();
                 基準日時2(基準日時, 処理区分);
             }
             処理日付管理異動情報Entity = 処理日付管理Dac.select処理日付管理マスタ_異動所得情報抽出(年度);
-            if (処理日付管理異動情報Entity != null) {
+            if (処理日付管理異動情報Entity == null) {
                 処理区分 = 不可;
             } else {
                 処理区分 = 可;
             }
+            return 処理区分;
         }
         return 処理区分;
     }
@@ -99,10 +97,11 @@ public class ShotokuJohoTyushutuRenkeitanitu {
     /**
      * バッチ用パラメータ作成します。
      *
+     * @param 処理区分 RString
      * @param parameter ShotokuJohoTyushutuRenkeiKoikiParameter
      * @return ShotokuJohoBatchresultParameter createShotokuJohoParameter
      */
-    public ShotokuJohoBatchresultTanituParameter createShotokuJohoParameter(ShotokuJohoTyushutuRenkeiTanituParameter parameter) {
+    public ShotokuJohoBatchresultTanituParameter createShotokuJohoParameter(ShotokuJohoTyushutuRenkeiTanituParameter parameter, RString 処理区分) {
         ShotokuJohoBatchresultTanituParameter result = new ShotokuJohoBatchresultTanituParameter();
         result.set処理年度(parameter.get処理年度());
         result.set所得情報取込処理状態(parameter.get所得情報取込処理状態());
@@ -110,12 +109,7 @@ public class ShotokuJohoTyushutuRenkeitanitu {
         result.set帳票ID(new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran"));
         result.set共有ファイル名(parameter.get共有ファイル名());
         result.set共有ファイルID(parameter.get共有ファイルID());
-        RString メニューID = ResponseHolder.getMenuID();
-        if (所得情報抽出連携当初.equals(メニューID)) {
-            result.set処理区分(定値_3);
-        } else if (所得情報抽出連携異動.equals(メニューID)) {
-            result.set処理区分(定値_4);
-        }
+        result.set処理区分(処理区分);
         return result;
     }
 
