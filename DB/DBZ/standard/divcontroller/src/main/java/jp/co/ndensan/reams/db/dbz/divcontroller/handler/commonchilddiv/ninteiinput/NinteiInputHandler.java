@@ -68,10 +68,16 @@ public class NinteiInputHandler {
         div.getDgServiceIchiran().setDataSource(rowList);
         List<JukyushaDaicho> jukyushaDaichoList = ninteiInputFinder.getサービス(model.get申請書管理番号()).records();
         setSelect(rowList, jukyushaDaichoList);
-        if (!new RString("TemnyuMode").equals(new RString(div.getMode_ShoriType().toString()))
-                && !new RString("InputMode").equals(new RString(div.getMode_ShoriType().toString()))
-                && !new RString("TokushuTsuikaMode").equals(new RString(div.getMode_ShoriType().toString()))
-                && !new RString("TokushuShuseiMode").equals(new RString(div.getMode_ShoriType().toString()))) {
+        if (new RString("TemnyuMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("InputMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("TokushuTsuikaMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("TokushuShuseiMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("TokushuShinseiTorikeshiMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("ShokkenTsuikaMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("ShokkenShuseiMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("KyakkaTorikeshiRirekiShusei").equals(new RString(div.getMode_ShoriType().toString()))) {
+            div.getDgServiceIchiran().setReadOnly(false);
+        } else {
             div.getDgServiceIchiran().setReadOnly(true);
         }
     }
