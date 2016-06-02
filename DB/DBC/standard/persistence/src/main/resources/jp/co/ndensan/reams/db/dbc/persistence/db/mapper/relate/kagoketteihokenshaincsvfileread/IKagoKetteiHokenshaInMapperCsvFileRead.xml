@@ -95,7 +95,7 @@
         "key5" character(40),
         "hihokenshaKanaShimei" character(40),
         "hihokenshaShimei" character(40),
-        "biko" character(40),
+        "biko" character(40)
         )
     </insert>
     

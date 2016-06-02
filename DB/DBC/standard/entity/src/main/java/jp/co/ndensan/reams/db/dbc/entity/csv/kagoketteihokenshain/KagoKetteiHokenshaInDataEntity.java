@@ -10,16 +10,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 過誤決定通知書情報取込共通処理（保険者分・ファイル読込）のcsvEntity
+ * 過誤決定通知書情報取込共通処理（保険者分・ファイル読込）のdataEntity
  *
  * @reamsid_L DBC-0980-302 surun
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KagoKetteiHokenshaInCsvEntity {
+public class KagoKetteiHokenshaInDataEntity {
 
-    private KagoKetteiHokenshaInControlCsvEntity controlCsvEntity;
-    private List<KagoKetteiHokenshaInDataEntity> listDataEntity;
-
+    private KagoKetteiHokenshaInHeadCsvEntity headCsvEntity;
+    private List<KagoKetteiHokenshaInMeisaiCsvEntity> listMeisaiCsvEntity;
+    private KagoKetteiHokenshaInGokeiCsvEntity gokeiCsvEntity;
 }
