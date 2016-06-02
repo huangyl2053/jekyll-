@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core;
 
+import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ConfigKeysFuSikyuKetteishaIchiran;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ConfigKeysHenreiIchiranhyo;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ConfigKeysJukyushaDaichoJohoIchiran;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ConfigKeysJukyushaDaichoTotsugoKekka;
