@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuMapper">
@@ -19,6 +20,7 @@
          "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."hihokenshaNo" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_hihokenshaNo",
          "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."taishoYM" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_taishoYM",
          "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."rirekiNo" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_rirekiNo",
+         "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."riyoYM" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_riyoYM",
          "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."insertDantaiCd" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_insertDantaiCd",
          "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."insertTimestamp" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_insertTimestamp",
          "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."insertReamsLoginId" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_insertReamsLoginId",
@@ -28,7 +30,8 @@
          "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."lastUpdateTimestamp" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_lastUpdateTimestamp",
          "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."lastUpdateReamsLoginId" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_lastUpdateReamsLoginId",
          "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."zenkaiRiyoNissu" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_zenkaiRiyoNissu",
-         "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."konkaiKeikakuRiyoNissu" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_konkaiKeikakuRiyoNissu"
+         "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."konkaiKeikakuRiyoNissu" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_konkaiKeikakuRiyoNissu",
+         "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."zanteiKubun" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_zanteiKubun"
     </sql>
 
 
@@ -37,6 +40,7 @@
         <id property="hihokenshaNo" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="taishoYM" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="rirekiNo" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_rirekiNo" />
+        <id property="riyoYM" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_riyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="insertDantaiCd" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -47,6 +51,7 @@
         <result property="lastUpdateReamsLoginId" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="zenkaiRiyoNissu" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_zenkaiRiyoNissu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="konkaiKeikakuRiyoNissu" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_konkaiKeikakuRiyoNissu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="zanteiKubun" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_zanteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
 </mapper>

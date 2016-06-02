@@ -5,18 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity;
-
 /**
+ * {@link jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity}のマッパーIFです。
  *
- * @author LDNS xuxf
+ * @author n1070 久保裕是
  */
 public interface IDbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuMapper {
 
-    /** {@link DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity}を取得します。
-     *
-     * @return {@link DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity}
-     * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
-     */
-    DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity getEntity();
 }

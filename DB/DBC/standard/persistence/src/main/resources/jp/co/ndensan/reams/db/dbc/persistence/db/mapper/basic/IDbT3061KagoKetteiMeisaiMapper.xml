@@ -39,7 +39,8 @@
          "DbT3061KagoKetteiMeisai"."kagomoushitateJiyuCode" as "dbT3061KagoKetteiMeisai_kagomoushitateJiyuCode",
          "DbT3061KagoKetteiMeisai"."kagomoushitateJiyu" as "dbT3061KagoKetteiMeisai_kagomoushitateJiyu",
          "DbT3061KagoKetteiMeisai"."tanisu" as "dbT3061KagoKetteiMeisai_tanisu",
-         "DbT3061KagoKetteiMeisai"."hokenshaFutangaku" as "dbT3061KagoKetteiMeisai_hokenshaFutangaku"
+         "DbT3061KagoKetteiMeisai"."hokenshaFutangaku" as "dbT3061KagoKetteiMeisai_hokenshaFutangaku",
+         "DbT3061KagoKetteiMeisai"."torikomiYM" as "dbT3061KagoKetteiMeisai_torikomiYM"
     </sql>
 
 
@@ -47,7 +48,7 @@
     <resultMap id="ResultMap_DbT3061KagoKetteiMeisaiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3061KagoKetteiMeisaiEntity" autoMapping="true">
         <id property="toriatsukaiYM" column="dbT3061KagoKetteiMeisai_toriatsukaiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="hokenshaKubun" column="dbT3061KagoKetteiMeisai_hokenshaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="rirekiNo" column="dbT3061KagoKetteiMeisai_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <id property="rirekiNo" column="dbT3061KagoKetteiMeisai_rirekiNo" />
         <result property="insertDantaiCd" column="dbT3061KagoKetteiMeisai_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT3061KagoKetteiMeisai_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT3061KagoKetteiMeisai_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -68,6 +69,7 @@
         <result property="kagomoushitateJiyu" column="dbT3061KagoKetteiMeisai_kagomoushitateJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tanisu" column="dbT3061KagoKetteiMeisai_tanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="hokenshaFutangaku" column="dbT3061KagoKetteiMeisai_hokenshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="torikomiYM" column="dbT3061KagoKetteiMeisai_torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
     </resultMap>
 
 </mapper>

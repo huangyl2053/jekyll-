@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic;
+package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic;
 
 /**
- * {@link jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5508ShinsakaiJizenKekkaJohoEntity}のマッパーIFです。
+ * {@link jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4122TsuchishoHakkoJohoEntity}のマッパーIFです。
  *
  * @author n1070 久保裕是
  */
-public interface IDbT5508ShinsakaiJizenKekkaJohoMapper {
+public interface IDbT4122TsuchishoHakkoJohoMapper {
 
 }
