@@ -32,6 +32,7 @@ public class JyukiRendoTorokushaListBatchParameter extends BatchParameterBase {
     private static final String KEY_TAJUSHOTOKUREISHAKANRI_FLG = "tajushochitokureishakanriFLG";
     private static final String KEY_TEKIYOJOGAISHADAICHO_FLG = "tekiyojogaishadaichoFLG";
     private static final String KEY_SHUTURYOKUJUN_ID = "shuturyokujunID";
+    private static final String KEY_LOGINUSER_ID = "loginUserId";
 
     @BatchParameter(key = KEY_ZENKAIKAISHI_YMDHMS, name = "前回開始日時")
     private RString zenkaikaishiYMDHMS;
@@ -49,6 +50,8 @@ public class JyukiRendoTorokushaListBatchParameter extends BatchParameterBase {
     private boolean tekiyojogaishadaichoFLG;
     @BatchParameter(key = KEY_SHUTURYOKUJUN_ID, name = "出力順ID")
     private RString shuturyokujunID;
+    @BatchParameter(key = KEY_LOGINUSER_ID, name = "LOGINユーザID")
+    private RString loginUserId;
 
     /**
      * バーチのパラメータを作成します。
@@ -64,6 +67,7 @@ public class JyukiRendoTorokushaListBatchParameter extends BatchParameterBase {
                 hihokenshadaichoFLG,
                 tajushochitokureishakanriFLG,
                 tekiyojogaishadaichoFLG,
-                shuturyokujunID);
+                shuturyokujunID,
+                loginUserId);
     }
 }

@@ -29,8 +29,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -43,6 +41,8 @@ import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -81,7 +81,6 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
 
     private IJyukiRendoJouhouMapper jyukiRendoJouhouMapper;
     private JyukiRendoTorokushaListBatchProcessParameter processParameter;
-    private RString loginId;
 
     @BatchWriter
     private BatchReportWriter<JukiRendoTorokuListReportSource> batchReportWriter;
@@ -91,8 +90,6 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
     protected void beforeExecute() {
         super.beforeExecute();
         jyukiRendoJouhouMapper = getMapper(IJyukiRendoJouhouMapper.class);
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        loginId = controlData.getLoginInfo().getUserId();
     }
 
     @Override
@@ -109,23 +106,23 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         List<Code> 住特適用Codes = new ArrayList<>();
         List<Code> 住特解除Codes = new ArrayList<>();
         List<UzT0007CodeEntity> 取得事由被保険者List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                DBACodeShubetsu.介護資格取得事由_被保険者.getコード());
+                DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
         List<UzT0007CodeEntity> 適用事由他特例者List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                DBACodeShubetsu.介護資格適用事由_他特例者.getコード());
+                DBACodeShubetsu.介護資格適用事由_他特例者.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
         List<UzT0007CodeEntity> 適用事由除外者List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                DBACodeShubetsu.介護資格適用事由_除外者.getコード());
+                DBACodeShubetsu.介護資格適用事由_除外者.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
         List<UzT0007CodeEntity> 喪失事由被保険者List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                DBACodeShubetsu.介護資格喪失事由_被保険者.getコード());
+                DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
         List<UzT0007CodeEntity> 解除事由他特例者List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                DBACodeShubetsu.介護資格解除事由_他特例者.getコード());
+                DBACodeShubetsu.介護資格解除事由_他特例者.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
         List<UzT0007CodeEntity> 解除事由除外者List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                DBACodeShubetsu.介護資格解除事由_除外者.getコード());
+                DBACodeShubetsu.介護資格解除事由_除外者.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
         List<UzT0007CodeEntity> 変更事由被保険者List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                DBACodeShubetsu.介護資格変更事由被保険者.getコード());
+                DBACodeShubetsu.介護資格変更事由被保険者.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
         List<UzT0007CodeEntity> 住特適用LIst = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                DBACodeShubetsu.介護資格住特適用.getコード());
+                DBACodeShubetsu.介護資格住特適用.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
         List<UzT0007CodeEntity> 住特解除List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                DBACodeShubetsu.介護資格住特解除.getコード());
+                DBACodeShubetsu.介護資格住特解除.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
         for (UzT0007CodeEntity uzT0007CodeEntity : 取得事由被保険者List) {
             取得事由被保険者Codes.add(uzT0007CodeEntity.getコード());
         }
@@ -155,7 +152,6 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         }
         取得事由被保険者Codes.remove(年齢到達);
         変更事由被保険者Codes.remove(一号被保険者到達);
-        processParameter.setLoginId(loginId);
         processParameter.setShutokuJiyu_Hihokensha(取得事由被保険者Codes);
         processParameter.setTekiyoJiyu_TaTokureisha(適用事由他特例者Codes);
         processParameter.setTekiyoJiyu_Jogaisha(適用事由除外者Codes);
@@ -299,14 +295,16 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
                         DBACodeShubetsu.介護資格解除事由_他特例者.getコード().value());
             } else {
                 if (taJushochiTokureiShayouhou.getIdoJiyuCode() != null
-                        && !CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格,
+                        && !CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格,
                                 DBACodeShubetsu.介護資格適用事由_他特例者.getコード(),
-                                new Code(taJushochiTokureiShayouhou.getIdoJiyuCode().toString())).isEmpty()) {
+                                new Code(taJushochiTokureiShayouhou.getIdoJiyuCode().toString()),
+                                new FlexibleDate(RDate.getNowDate().toDateString())).isEmpty()) {
                     set適用削除情報(entity, taJushochiTokureiShayouhou);
                 } else if (taJushochiTokureiShayouhou.getIdoJiyuCode() != null
-                        && !CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格,
+                        && !CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格,
                                 DBACodeShubetsu.介護資格解除事由_他特例者.getコード(),
-                                new Code(taJushochiTokureiShayouhou.getIdoJiyuCode().toString())).isEmpty()) {
+                                new Code(taJushochiTokureiShayouhou.getIdoJiyuCode().toString()),
+                                new FlexibleDate(RDate.getNowDate().toDateString())).isEmpty()) {
                     set解除削除情報(entity, taJushochiTokureiShayouhou);
                 }
             }
@@ -358,14 +356,16 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
                         DBACodeShubetsu.介護資格解除事由_除外者.getコード().value());
             } else {
                 if (taJushochiTokureiShayouhou.getIdoJiyuCode() != null
-                        && !CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格,
+                        && !CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格,
                                 DBACodeShubetsu.介護資格適用事由_除外者.getコード(),
-                                new Code(taJushochiTokureiShayouhou.getIdoJiyuCode().toString())).isEmpty()) {
+                                new Code(taJushochiTokureiShayouhou.getIdoJiyuCode().toString()),
+                                new FlexibleDate(RDate.getNowDate().toDateString())).isEmpty()) {
                     set適用削除情報(entity, taJushochiTokureiShayouhou);
                 } else if (taJushochiTokureiShayouhou.getIdoJiyuCode() != null
-                        && !CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格,
+                        && !CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格,
                                 DBACodeShubetsu.介護資格解除事由_除外者.getコード(),
-                                new Code(taJushochiTokureiShayouhou.getIdoJiyuCode().toString())).isEmpty()) {
+                                new Code(taJushochiTokureiShayouhou.getIdoJiyuCode().toString()),
+                                new FlexibleDate(RDate.getNowDate().toDateString())).isEmpty()) {
                     set解除削除情報(entity, taJushochiTokureiShayouhou);
                 }
             }
@@ -386,9 +386,10 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
             RString codeShuBetsuIti,
             RString codeShuBetsuNi) {
         if (taJushochiTokureiShayouhou.getIdoJiyuCode() != null
-                && !CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格,
+                && !CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格,
                         new CodeShubetsu(codeShuBetsuIti.toString()),
-                        new Code(taJushochiTokureiShayouhou.getIdoJiyuCode().toString())).isEmpty()) {
+                        new Code(taJushochiTokureiShayouhou.getIdoJiyuCode().toString()),
+                        new FlexibleDate(RDate.getNowDate().toDateString())).isEmpty()) {
             set適用異動情報(entity, taJushochiTokureiShayouhou);
         } else if (taJushochiTokureiShayouhou.getIdoJiyuCode() == null
                 && taJushochiTokureiShayouhou.getNyushoYMD() != null
@@ -399,9 +400,10 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
                 && taJushochiTokureiShayouhou.getTaishoYMD() != null) {
             set退所異動情報(entity, taJushochiTokureiShayouhou);
         } else if (taJushochiTokureiShayouhou.getIdoJiyuCode() != null
-                && !CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格,
+                && !CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格,
                         new CodeShubetsu(codeShuBetsuNi.toString()),
-                        new Code(taJushochiTokureiShayouhou.getIdoJiyuCode().toString())).isEmpty()) {
+                        new Code(taJushochiTokureiShayouhou.getIdoJiyuCode().toString()),
+                        new FlexibleDate(RDate.getNowDate().toDateString())).isEmpty()) {
             set解除異動情報(entity, taJushochiTokureiShayouhou);
         }
     }

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.ur.urd.definition.core.seikatsuhogo.KyugoShisetsuNyuT
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -83,7 +84,8 @@ public class SeikatsuhogoDetailHandler {
             for (KeyValueDataSource dataSource : div.getChkFujoShurui().getDataSource()) {
                 for (RString コード : 無連結扶助種類コード) {
                     if (dataSource.getValue().equals(CodeMaster.getCodeMeisho(SubGyomuCode.URZ業務共通_共通系,
-                            URZCodeShubetsu.扶助種類コード.getCodeShubetsu(), new Code(コード)))) {
+                            URZCodeShubetsu.扶助種類コード.getCodeShubetsu(), new Code(コード),
+                            new FlexibleDate(RDate.getNowDate().toDateString())))) {
                         扶助種類KEY.add(dataSource.getKey());
                         break;
                     }

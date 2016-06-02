@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5224ChikuShichosonDac;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -88,7 +90,8 @@ public class ChosaChikuFinder {
     @Transaction
     public SearchResult<UzT0007CodeBusiness> getChosaChikuList() {
         List<UzT0007CodeBusiness> resultList = new ArrayList<>();
-        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード());
+        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBE認定支援,
+                DBECodeShubetsu.調査地区コード.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
         if (codeList == null || codeList.isEmpty()) {
             return SearchResult.of(Collections.<UzT0007CodeBusiness>emptyList(), 0, false);
         }

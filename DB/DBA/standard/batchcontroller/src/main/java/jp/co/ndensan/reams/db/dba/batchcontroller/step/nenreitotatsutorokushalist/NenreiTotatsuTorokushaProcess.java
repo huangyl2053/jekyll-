@@ -41,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -94,11 +95,11 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
         List<Code> 住特適用Codes = new ArrayList<>();
         List<Code> 住特解除Codes = new ArrayList<>();
         List<UzT0007CodeEntity> 喪失事由被保険者List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                DBACodeShubetsu.介護資格喪失事由_被保険者.getコード());
+                DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
         List<UzT0007CodeEntity> 住特適用LIst = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                DBACodeShubetsu.介護資格住特適用.getコード());
+                DBACodeShubetsu.介護資格住特適用.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
         List<UzT0007CodeEntity> 住特解除List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                DBACodeShubetsu.介護資格住特解除.getコード());
+                DBACodeShubetsu.介護資格住特解除.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
         for (UzT0007CodeEntity uzT0007CodeEntity : 喪失事由被保険者List) {
             喪失事由被保険者Codes.add(uzT0007CodeEntity.getコード());
         }
