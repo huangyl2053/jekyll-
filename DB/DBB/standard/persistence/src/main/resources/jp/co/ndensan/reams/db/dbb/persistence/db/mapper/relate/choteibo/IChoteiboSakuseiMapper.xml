@@ -425,71 +425,35 @@
     </resultMap>
     <!-- 内併徴者数をします。 -->
     <select id="select内併徴者数" resultMap="resultMap_NaiheisyaKensuEntity" parameterType="java.util.Map" fetchSize="500">
-        SELECT
-        COUNT(T."hihokenshaNo") AS "naiheisyaKensu",
-        T."choteiNendo",
-        T."fukaNendo",
-        T."choshuHouhou",
-        T."dankai",
-        T."karisanFlag"
-        FROM
-        (
-        SELECT
-        DISTINCT (Ta."hihokenshaNo"),
-        Ta."choteiNendo",
-        Ta."fukaNendo",
-        Ta."choshuHouhou",
-        Ta."dankai",
-        Ta."karisanFlag"
-        FROM
-        (SELECT
-        A."hihokenshaNo",
-        A."choteiNendo",
-        A."fukaNendo",
-        A."dankai",
-        A."choshuHouhou",
-        A."karisanFlag"
-        FROM
-        "TmpDankai" AS A
-        WHERE
-        A."choteiNendo" = #{choteiNendo}
-        AND A."fukaNendo" = #{fukaNendo}
-        AND A."dogetsuFlag" = 1
-        AND A."choshuHouhou"= '1'
-        AND A."karisanFlag" = #{karisanFlag}
-        AND COALESCE(A."dogetsusueChoteigaku",0) > 0
-        ) AS Ta,
-        (
-        SELECT
-        B."hihokenshaNo",
-        B."choteiNendo",
-        B."fukaNendo",
-        B."dankai",
-        B."choshuHouhou",
-        B."karisanFlag"
-        FROM
-        "TmpDankai" AS B
-        WHERE
-        B."choteiNendo" = #{choteiNendo}
-        AND B."fukaNendo" = #{fukaNendo}
-        AND B."dogetsuFlag" = 1
-        AND B."choshuHouhou"= '2'
-        AND B."karisanFlag" = #{karisanFlag}
-        AND COALESCE(B."dogetsusueChoteigaku",0) > 0
-        ) AS Tb
-        WHERE 
-        Ta."hihokenshaNo" = Tb."hihokenshaNo"
-        AND Ta."choteiNendo" = Tb."choteiNendo"
-        AND Ta."fukaNendo" = Tb."fukaNendo"
-        AND Ta."dankai" = Tb."dankai"
-        AND Ta."karisanFlag" = Tb."karisanFlag"
-        )AS T
-        GROUP BY
-        T."choteiNendo",
-        T."fukaNendo",
-        T."choshuHouhou",
-        T."dankai",
-        T."karisanFlag"
+        SELECT a."choteiNendo", a."fukaNendo", a."dankai", a."karisanFlag", COUNT(a."hihokenshaNo") AS "naiheisyaKensu", '1' AS "choshuHouhou"
+        FROM (
+        SELECT "choteiNendo", "fukaNendo", "dankai", "hihokenshaNo", "karisanFlag"
+        FROM "TmpDankai"
+        WHERE "choteiNendo" = #{choteiNendo}
+        AND   "fukaNendo" = #{fukaNendo}
+        AND   "choshuHouhou" = '1'
+        AND   "dogetsuFlag" = 1
+        AND   "karisanFlag" = #{karisanFlag}
+        AND   COALESCE("dogetsusueChoteigaku",0) > 0
+        GROUP BY "choteiNendo", "fukaNendo", "dankai", "hihokenshaNo", "karisanFlag"
+        ) a
+        INNER JOIN (
+        SELECT "choteiNendo", "fukaNendo", "dankai", "hihokenshaNo", "karisanFlag"
+        FROM "TmpDankai"
+        WHERE "choteiNendo" = #{choteiNendo}
+        AND   "fukaNendo" = #{fukaNendo}
+        AND   "choshuHouhou" = '2'
+        AND   "dogetsuFlag" = 1
+        AND   "karisanFlag" = #{karisanFlag}
+        AND   COALESCE("dogetsusueChoteigaku",0) > 0
+        GROUP BY "choteiNendo", "fukaNendo", "dankai", "hihokenshaNo", "karisanFlag"
+        ) b
+        ON  a."choteiNendo" = b."choteiNendo"
+        AND a."fukaNendo" = b."fukaNendo"
+        AND a."dankai" = b."dankai"
+        AND a."karisanFlag" = b."karisanFlag"
+        AND  a."hihokenshaNo" = b."hihokenshaNo"
+        GROUP BY a."choteiNendo", a."fukaNendo", a."dankai", a."karisanFlag"
     </select>
 
     <!-- 段階小計一時テーブルに内併徴者数を更新します。 -->

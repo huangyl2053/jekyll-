@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.choteibo.ChoteiboSource;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.choteibo.IChoteiboSakuseiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
@@ -132,6 +133,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     private List<ChoteiboItem> targets;
     private KitsukiList 期月リスト_普徴;
     private Kitsuki 最終法定納期;
+    private KitsukiList 期月リスト_過年度;
     @BatchWriter
     private BatchReportWriter<ChoteiboSource> batchReportWriter;
     private ReportSourceWriter<ChoteiboSource> reportSourceWriter;
@@ -228,6 +230,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(年度);
         期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
         最終法定納期 = 期月リスト_普徴.get最終法定納期();
+        期月リスト_過年度 = new KanendoKiUtil(年度).get期月リスト();
     }
 
     private void makeChoteiboItemList(ChoteiboHeaderItem headerItem) {
@@ -580,52 +583,102 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         }
-        return new ChoteiboKitsukiFuchoItem(
-                changeDecimalToRString(年度データ.get普通徴収の調定額の合計()),
-                changeDecimalToRString(年度データ.get普徴歳出還付の調定額()),
-                changeDecimalToRString(年度データ.get普徴歳出還付の件数()),
-                文字列_第.concat(String.valueOf(第1期)).concat(文字列_期),
-                文字列_第.concat(String.valueOf(第2期)).concat(文字列_期),
-                文字列_第.concat(String.valueOf(第3期)).concat(文字列_期),
-                文字列_第.concat(String.valueOf(第4期)).concat(文字列_期),
-                文字列_第.concat(String.valueOf(第5期)).concat(文字列_期),
-                文字列_第.concat(String.valueOf(第6期)).concat(文字列_期),
-                文字列_第.concat(String.valueOf(第7期)).concat(文字列_期),
-                文字列_第.concat(String.valueOf(第8期)).concat(文字列_期),
-                文字列_第.concat(String.valueOf(第9期)).concat(文字列_期),
-                文字列_第.concat(String.valueOf(第10期)).concat(文字列_期),
-                文字列_第.concat(String.valueOf(第11期)).concat(文字列_期),
-                文字列_第.concat(String.valueOf(第12期)).concat(文字列_期),
-                文字列_第.concat(String.valueOf(第13期)).concat(文字列_期),
-                文字列_第.concat(String.valueOf(第14期)).concat(文字列_期),
-                changeDecimalToRString(年度データ.get第1期の調定額の小計()),
-                changeDecimalToRString(年度データ.get第2期の調定額の小計()),
-                changeDecimalToRString(年度データ.get第3期の調定額の小計()),
-                changeDecimalToRString(年度データ.get第4期の調定額の小計()),
-                changeDecimalToRString(年度データ.get第5期の調定額の小計()),
-                changeDecimalToRString(年度データ.get第6期の調定額の小計()),
-                changeDecimalToRString(年度データ.get第7期の調定額の小計()),
-                changeDecimalToRString(年度データ.get第8期の調定額の小計()),
-                changeDecimalToRString(年度データ.get第9期の調定額の小計()),
-                changeDecimalToRString(年度データ.get第10期の調定額の小計()),
-                changeDecimalToRString(年度データ.get第11期の調定額の小計()),
-                changeDecimalToRString(年度データ.get第12期の調定額の小計()),
-                changeDecimalToRString(年度データ.get第13期の調定額の小計()),
-                changeDecimalToRString(年度データ.get第14期の調定額の小計()),
-                get月As期By期月リスト(第1期, 期月リスト_普徴), get月As期By期月リスト(第2期, 期月リスト_普徴),
-                get月As期By期月リスト(第3期, 期月リスト_普徴), get月As期By期月リスト(第4期, 期月リスト_普徴),
-                get月As期By期月リスト(第5期, 期月リスト_普徴), get月As期By期月リスト(第6期, 期月リスト_普徴),
-                get月As期By期月リスト(第7期, 期月リスト_普徴), get月As期By期月リスト(第8期, 期月リスト_普徴),
-                get月As期By期月リスト(第9期, 期月リスト_普徴), get月As期By期月リスト(第10期, 期月リスト_普徴),
-                get月As期By期月リスト(第11期, 期月リスト_普徴), get月As期By期月リスト(第12期, 期月リスト_普徴),
-                get月As期By期月リスト(第13期, 期月リスト_普徴), get月As期By期月リスト(第14期, 期月リスト_普徴),
-                随時期月判断(第1期, 年度データ.get賦課年度()), 随時期月判断(第2期, 年度データ.get賦課年度()),
-                随時期月判断(第3期, 年度データ.get賦課年度()), 随時期月判断(第4期, 年度データ.get賦課年度()),
-                随時期月判断(第5期, 年度データ.get賦課年度()), 随時期月判断(第6期, 年度データ.get賦課年度()),
-                随時期月判断(第7期, 年度データ.get賦課年度()), 随時期月判断(第8期, 年度データ.get賦課年度()),
-                随時期月判断(第9期, 年度データ.get賦課年度()), 随時期月判断(第10期, 年度データ.get賦課年度()),
-                随時期月判断(第11期, 年度データ.get賦課年度()), 随時期月判断(第12期, 年度データ.get賦課年度()),
-                随時期月判断(第13期, 年度データ.get賦課年度()), 随時期月判断(第14期, 年度データ.get賦課年度()));
+        
+        if (年度データ.get調定年度().equals(年度データ.get賦課年度())) {
+            return new ChoteiboKitsukiFuchoItem(
+                    changeDecimalToRString(年度データ.get普通徴収の調定額の合計()),
+                    changeDecimalToRString(年度データ.get普徴歳出還付の調定額()),
+                    changeDecimalToRString(年度データ.get普徴歳出還付の件数()),
+                    文字列_第.concat(String.valueOf(第1期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第2期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第3期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第4期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第5期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第6期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第7期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第8期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第9期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第10期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第11期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第12期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第13期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第14期)).concat(文字列_期),
+                    changeDecimalToRString(年度データ.get第1期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第2期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第3期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第4期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第5期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第6期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第7期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第8期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第9期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第10期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第11期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第12期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第13期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第14期の調定額の小計()),
+                    get月As期By期月リスト(第1期, 期月リスト_普徴), get月As期By期月リスト(第2期, 期月リスト_普徴),
+                    get月As期By期月リスト(第3期, 期月リスト_普徴), get月As期By期月リスト(第4期, 期月リスト_普徴),
+                    get月As期By期月リスト(第5期, 期月リスト_普徴), get月As期By期月リスト(第6期, 期月リスト_普徴),
+                    get月As期By期月リスト(第7期, 期月リスト_普徴), get月As期By期月リスト(第8期, 期月リスト_普徴),
+                    get月As期By期月リスト(第9期, 期月リスト_普徴), get月As期By期月リスト(第10期, 期月リスト_普徴),
+                    get月As期By期月リスト(第11期, 期月リスト_普徴), get月As期By期月リスト(第12期, 期月リスト_普徴),
+                    get月As期By期月リスト(第13期, 期月リスト_普徴), get月As期By期月リスト(第14期, 期月リスト_普徴),
+                    随時期月判断(第1期, 年度データ.get賦課年度()), 随時期月判断(第2期, 年度データ.get賦課年度()),
+                    随時期月判断(第3期, 年度データ.get賦課年度()), 随時期月判断(第4期, 年度データ.get賦課年度()),
+                    随時期月判断(第5期, 年度データ.get賦課年度()), 随時期月判断(第6期, 年度データ.get賦課年度()),
+                    随時期月判断(第7期, 年度データ.get賦課年度()), 随時期月判断(第8期, 年度データ.get賦課年度()),
+                    随時期月判断(第9期, 年度データ.get賦課年度()), 随時期月判断(第10期, 年度データ.get賦課年度()),
+                    随時期月判断(第11期, 年度データ.get賦課年度()), 随時期月判断(第12期, 年度データ.get賦課年度()),
+                    随時期月判断(第13期, 年度データ.get賦課年度()), 随時期月判断(第14期, 年度データ.get賦課年度()));
+        } else {
+            return new ChoteiboKitsukiFuchoItem(
+                    changeDecimalToRString(年度データ.get普通徴収の調定額の合計()),
+                    changeDecimalToRString(年度データ.get普徴歳出還付の調定額()),
+                    changeDecimalToRString(年度データ.get普徴歳出還付の件数()),
+                    文字列_第.concat(String.valueOf(第1期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第2期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第3期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第4期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第5期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第6期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第7期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第8期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第9期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第10期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第11期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第12期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第13期)).concat(文字列_期),
+                    文字列_第.concat(String.valueOf(第14期)).concat(文字列_期),
+                    changeDecimalToRString(年度データ.get第1期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第2期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第3期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第4期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第5期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第6期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第7期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第8期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第9期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第10期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第11期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第12期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第13期の調定額の小計()),
+                    changeDecimalToRString(年度データ.get第14期の調定額の小計()),
+                    get月As期By期月リスト(第1期, 期月リスト_過年度), get月As期By期月リスト(第2期, 期月リスト_過年度),
+                    get月As期By期月リスト(第3期, 期月リスト_過年度), get月As期By期月リスト(第4期, 期月リスト_過年度),
+                    get月As期By期月リスト(第5期, 期月リスト_過年度), get月As期By期月リスト(第6期, 期月リスト_過年度),
+                    get月As期By期月リスト(第7期, 期月リスト_過年度), get月As期By期月リスト(第8期, 期月リスト_過年度),
+                    get月As期By期月リスト(第9期, 期月リスト_過年度), get月As期By期月リスト(第10期, 期月リスト_過年度),
+                    get月As期By期月リスト(第11期, 期月リスト_過年度), get月As期By期月リスト(第12期, 期月リスト_過年度),
+                    get月As期By期月リスト(第13期, 期月リスト_過年度), get月As期By期月リスト(第14期, 期月リスト_過年度),
+                    随時期月判断(第1期, 年度データ.get賦課年度()), 随時期月判断(第2期, 年度データ.get賦課年度()),
+                    随時期月判断(第3期, 年度データ.get賦課年度()), 随時期月判断(第4期, 年度データ.get賦課年度()),
+                    随時期月判断(第5期, 年度データ.get賦課年度()), 随時期月判断(第6期, 年度データ.get賦課年度()),
+                    随時期月判断(第7期, 年度データ.get賦課年度()), 随時期月判断(第8期, 年度データ.get賦課年度()),
+                    随時期月判断(第9期, 年度データ.get賦課年度()), 随時期月判断(第10期, 年度データ.get賦課年度()),
+                    随時期月判断(第11期, 年度データ.get賦課年度()), 随時期月判断(第12期, 年度データ.get賦課年度()),
+                    随時期月判断(第13期, 年度データ.get賦課年度()), 随時期月判断(第14期, 年度データ.get賦課年度()));
+        }
     }
     
     private RString get月As期By期月リスト(int 期, KitsukiList 期月リスト) {
