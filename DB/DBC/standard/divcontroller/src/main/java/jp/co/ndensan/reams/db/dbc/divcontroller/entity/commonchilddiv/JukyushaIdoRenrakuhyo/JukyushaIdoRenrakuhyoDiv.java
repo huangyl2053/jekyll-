@@ -9,6 +9,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+
 /**
  * JukyushaIdoRenrakuhyo のクラスファイル 
  * 
@@ -26,26 +30,26 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     private JukyushaIdoRenrakuhyoKihonJohoDiv JukyushaIdoRenrakuhyoKihonJoho;
     @JsonProperty("JukyushaIdoRenrakuhyoTeisei")
     private JukyushaIdoRenrakuhyoTeiseiDiv JukyushaIdoRenrakuhyoTeisei;
-    @JsonProperty("JukyushaIdoRenrakuhyoYokaigonintei")
-    private JukyushaIdoRenrakuhyoYokaigoninteiDiv JukyushaIdoRenrakuhyoYokaigonintei;
-    @JsonProperty("JukyushaIdoRenrakuhyoShikyugendoKijungaku")
-    private JukyushaIdoRenrakuhyoShikyugendoKijungakuDiv JukyushaIdoRenrakuhyoShikyugendoKijungaku;
-    @JsonProperty("JukyushaIdoRenrakuhyoKyotakuServicePlan")
-    private JukyushaIdoRenrakuhyoKyotakuServicePlanDiv JukyushaIdoRenrakuhyoKyotakuServicePlan;
+    @JsonProperty("YokaigoNinteiPanel")
+    private YokaigoNinteiPanelDiv YokaigoNinteiPanel;
+    @JsonProperty("ShikyuGendoKijungakuPanel")
+    private ShikyuGendoKijungakuPanelDiv ShikyuGendoKijungakuPanel;
+    @JsonProperty("KyotakuServicePlanPanel")
+    private KyotakuServicePlanPanelDiv KyotakuServicePlanPanel;
     @JsonProperty("JushochiTokureiPanel")
     private JushochiTokureiPanelDiv JushochiTokureiPanel;
-    @JsonProperty("JukyushaIdoRenrakuhyoGemmenGengaku")
-    private JukyushaIdoRenrakuhyoGemmenGengakuDiv JukyushaIdoRenrakuhyoGemmenGengaku;
-    @JsonProperty("JukyushaIdoRenrakuhyoKokiKoreiKokuho")
-    private JukyushaIdoRenrakuhyoKokiKoreiKokuhoDiv JukyushaIdoRenrakuhyoKokiKoreiKokuho;
-    @JsonProperty("JukyushaIdoRenrakuhyoKyufuSeigen")
-    private JukyushaIdoRenrakuhyoKyufuSeigenDiv JukyushaIdoRenrakuhyoKyufuSeigen;
+    @JsonProperty("GemmenGengakuPanel")
+    private GemmenGengakuPanelDiv GemmenGengakuPanel;
+    @JsonProperty("KokiKoureiIryoHokenshaPanel")
+    private KokiKoureiIryoHokenshaPanelDiv KokiKoureiIryoHokenshaPanel;
+    @JsonProperty("KyufuSeigenPanel")
+    private KyufuSeigenPanelDiv KyufuSeigenPanel;
     @JsonProperty("RiyosyaFutanWariaiPanel")
     private RiyosyaFutanWariaiPanelDiv RiyosyaFutanWariaiPanel;
-    @JsonProperty("JukyushaIdoRenrakuhyoNijiyoboJigyo")
-    private JukyushaIdoRenrakuhyoNijiyoboJigyoDiv JukyushaIdoRenrakuhyoNijiyoboJigyo;
-    @JsonProperty("JukyushaIdoRenrakuhyoRojinHoken")
-    private JukyushaIdoRenrakuhyoRojinHokenDiv JukyushaIdoRenrakuhyoRojinHoken;
+    @JsonProperty("NijiyoboJigyoPanel")
+    private NijiyoboJigyoPanelDiv NijiyoboJigyoPanel;
+    @JsonProperty("RojinHokenPanel")
+    private RojinHokenPanelDiv RojinHokenPanel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -90,57 +94,57 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     /*
-     * getJukyushaIdoRenrakuhyoYokaigonintei
-     * @return JukyushaIdoRenrakuhyoYokaigonintei
+     * getYokaigoNinteiPanel
+     * @return YokaigoNinteiPanel
      */
-    @JsonProperty("JukyushaIdoRenrakuhyoYokaigonintei")
-    public JukyushaIdoRenrakuhyoYokaigoninteiDiv getJukyushaIdoRenrakuhyoYokaigonintei() {
-        return JukyushaIdoRenrakuhyoYokaigonintei;
+    @JsonProperty("YokaigoNinteiPanel")
+    public YokaigoNinteiPanelDiv getYokaigoNinteiPanel() {
+        return YokaigoNinteiPanel;
     }
 
     /*
-     * setJukyushaIdoRenrakuhyoYokaigonintei
-     * @param JukyushaIdoRenrakuhyoYokaigonintei JukyushaIdoRenrakuhyoYokaigonintei
+     * setYokaigoNinteiPanel
+     * @param YokaigoNinteiPanel YokaigoNinteiPanel
      */
-    @JsonProperty("JukyushaIdoRenrakuhyoYokaigonintei")
-    public void setJukyushaIdoRenrakuhyoYokaigonintei(JukyushaIdoRenrakuhyoYokaigoninteiDiv JukyushaIdoRenrakuhyoYokaigonintei) {
-        this.JukyushaIdoRenrakuhyoYokaigonintei = JukyushaIdoRenrakuhyoYokaigonintei;
+    @JsonProperty("YokaigoNinteiPanel")
+    public void setYokaigoNinteiPanel(YokaigoNinteiPanelDiv YokaigoNinteiPanel) {
+        this.YokaigoNinteiPanel = YokaigoNinteiPanel;
     }
 
     /*
-     * getJukyushaIdoRenrakuhyoShikyugendoKijungaku
-     * @return JukyushaIdoRenrakuhyoShikyugendoKijungaku
+     * getShikyuGendoKijungakuPanel
+     * @return ShikyuGendoKijungakuPanel
      */
-    @JsonProperty("JukyushaIdoRenrakuhyoShikyugendoKijungaku")
-    public JukyushaIdoRenrakuhyoShikyugendoKijungakuDiv getJukyushaIdoRenrakuhyoShikyugendoKijungaku() {
-        return JukyushaIdoRenrakuhyoShikyugendoKijungaku;
+    @JsonProperty("ShikyuGendoKijungakuPanel")
+    public ShikyuGendoKijungakuPanelDiv getShikyuGendoKijungakuPanel() {
+        return ShikyuGendoKijungakuPanel;
     }
 
     /*
-     * setJukyushaIdoRenrakuhyoShikyugendoKijungaku
-     * @param JukyushaIdoRenrakuhyoShikyugendoKijungaku JukyushaIdoRenrakuhyoShikyugendoKijungaku
+     * setShikyuGendoKijungakuPanel
+     * @param ShikyuGendoKijungakuPanel ShikyuGendoKijungakuPanel
      */
-    @JsonProperty("JukyushaIdoRenrakuhyoShikyugendoKijungaku")
-    public void setJukyushaIdoRenrakuhyoShikyugendoKijungaku(JukyushaIdoRenrakuhyoShikyugendoKijungakuDiv JukyushaIdoRenrakuhyoShikyugendoKijungaku) {
-        this.JukyushaIdoRenrakuhyoShikyugendoKijungaku = JukyushaIdoRenrakuhyoShikyugendoKijungaku;
+    @JsonProperty("ShikyuGendoKijungakuPanel")
+    public void setShikyuGendoKijungakuPanel(ShikyuGendoKijungakuPanelDiv ShikyuGendoKijungakuPanel) {
+        this.ShikyuGendoKijungakuPanel = ShikyuGendoKijungakuPanel;
     }
 
     /*
-     * getJukyushaIdoRenrakuhyoKyotakuServicePlan
-     * @return JukyushaIdoRenrakuhyoKyotakuServicePlan
+     * getKyotakuServicePlanPanel
+     * @return KyotakuServicePlanPanel
      */
-    @JsonProperty("JukyushaIdoRenrakuhyoKyotakuServicePlan")
-    public JukyushaIdoRenrakuhyoKyotakuServicePlanDiv getJukyushaIdoRenrakuhyoKyotakuServicePlan() {
-        return JukyushaIdoRenrakuhyoKyotakuServicePlan;
+    @JsonProperty("KyotakuServicePlanPanel")
+    public KyotakuServicePlanPanelDiv getKyotakuServicePlanPanel() {
+        return KyotakuServicePlanPanel;
     }
 
     /*
-     * setJukyushaIdoRenrakuhyoKyotakuServicePlan
-     * @param JukyushaIdoRenrakuhyoKyotakuServicePlan JukyushaIdoRenrakuhyoKyotakuServicePlan
+     * setKyotakuServicePlanPanel
+     * @param KyotakuServicePlanPanel KyotakuServicePlanPanel
      */
-    @JsonProperty("JukyushaIdoRenrakuhyoKyotakuServicePlan")
-    public void setJukyushaIdoRenrakuhyoKyotakuServicePlan(JukyushaIdoRenrakuhyoKyotakuServicePlanDiv JukyushaIdoRenrakuhyoKyotakuServicePlan) {
-        this.JukyushaIdoRenrakuhyoKyotakuServicePlan = JukyushaIdoRenrakuhyoKyotakuServicePlan;
+    @JsonProperty("KyotakuServicePlanPanel")
+    public void setKyotakuServicePlanPanel(KyotakuServicePlanPanelDiv KyotakuServicePlanPanel) {
+        this.KyotakuServicePlanPanel = KyotakuServicePlanPanel;
     }
 
     /*
@@ -162,57 +166,57 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     /*
-     * getJukyushaIdoRenrakuhyoGemmenGengaku
-     * @return JukyushaIdoRenrakuhyoGemmenGengaku
+     * getGemmenGengakuPanel
+     * @return GemmenGengakuPanel
      */
-    @JsonProperty("JukyushaIdoRenrakuhyoGemmenGengaku")
-    public JukyushaIdoRenrakuhyoGemmenGengakuDiv getJukyushaIdoRenrakuhyoGemmenGengaku() {
-        return JukyushaIdoRenrakuhyoGemmenGengaku;
+    @JsonProperty("GemmenGengakuPanel")
+    public GemmenGengakuPanelDiv getGemmenGengakuPanel() {
+        return GemmenGengakuPanel;
     }
 
     /*
-     * setJukyushaIdoRenrakuhyoGemmenGengaku
-     * @param JukyushaIdoRenrakuhyoGemmenGengaku JukyushaIdoRenrakuhyoGemmenGengaku
+     * setGemmenGengakuPanel
+     * @param GemmenGengakuPanel GemmenGengakuPanel
      */
-    @JsonProperty("JukyushaIdoRenrakuhyoGemmenGengaku")
-    public void setJukyushaIdoRenrakuhyoGemmenGengaku(JukyushaIdoRenrakuhyoGemmenGengakuDiv JukyushaIdoRenrakuhyoGemmenGengaku) {
-        this.JukyushaIdoRenrakuhyoGemmenGengaku = JukyushaIdoRenrakuhyoGemmenGengaku;
+    @JsonProperty("GemmenGengakuPanel")
+    public void setGemmenGengakuPanel(GemmenGengakuPanelDiv GemmenGengakuPanel) {
+        this.GemmenGengakuPanel = GemmenGengakuPanel;
     }
 
     /*
-     * getJukyushaIdoRenrakuhyoKokiKoreiKokuho
-     * @return JukyushaIdoRenrakuhyoKokiKoreiKokuho
+     * getKokiKoureiIryoHokenshaPanel
+     * @return KokiKoureiIryoHokenshaPanel
      */
-    @JsonProperty("JukyushaIdoRenrakuhyoKokiKoreiKokuho")
-    public JukyushaIdoRenrakuhyoKokiKoreiKokuhoDiv getJukyushaIdoRenrakuhyoKokiKoreiKokuho() {
-        return JukyushaIdoRenrakuhyoKokiKoreiKokuho;
+    @JsonProperty("KokiKoureiIryoHokenshaPanel")
+    public KokiKoureiIryoHokenshaPanelDiv getKokiKoureiIryoHokenshaPanel() {
+        return KokiKoureiIryoHokenshaPanel;
     }
 
     /*
-     * setJukyushaIdoRenrakuhyoKokiKoreiKokuho
-     * @param JukyushaIdoRenrakuhyoKokiKoreiKokuho JukyushaIdoRenrakuhyoKokiKoreiKokuho
+     * setKokiKoureiIryoHokenshaPanel
+     * @param KokiKoureiIryoHokenshaPanel KokiKoureiIryoHokenshaPanel
      */
-    @JsonProperty("JukyushaIdoRenrakuhyoKokiKoreiKokuho")
-    public void setJukyushaIdoRenrakuhyoKokiKoreiKokuho(JukyushaIdoRenrakuhyoKokiKoreiKokuhoDiv JukyushaIdoRenrakuhyoKokiKoreiKokuho) {
-        this.JukyushaIdoRenrakuhyoKokiKoreiKokuho = JukyushaIdoRenrakuhyoKokiKoreiKokuho;
+    @JsonProperty("KokiKoureiIryoHokenshaPanel")
+    public void setKokiKoureiIryoHokenshaPanel(KokiKoureiIryoHokenshaPanelDiv KokiKoureiIryoHokenshaPanel) {
+        this.KokiKoureiIryoHokenshaPanel = KokiKoureiIryoHokenshaPanel;
     }
 
     /*
-     * getJukyushaIdoRenrakuhyoKyufuSeigen
-     * @return JukyushaIdoRenrakuhyoKyufuSeigen
+     * getKyufuSeigenPanel
+     * @return KyufuSeigenPanel
      */
-    @JsonProperty("JukyushaIdoRenrakuhyoKyufuSeigen")
-    public JukyushaIdoRenrakuhyoKyufuSeigenDiv getJukyushaIdoRenrakuhyoKyufuSeigen() {
-        return JukyushaIdoRenrakuhyoKyufuSeigen;
+    @JsonProperty("KyufuSeigenPanel")
+    public KyufuSeigenPanelDiv getKyufuSeigenPanel() {
+        return KyufuSeigenPanel;
     }
 
     /*
-     * setJukyushaIdoRenrakuhyoKyufuSeigen
-     * @param JukyushaIdoRenrakuhyoKyufuSeigen JukyushaIdoRenrakuhyoKyufuSeigen
+     * setKyufuSeigenPanel
+     * @param KyufuSeigenPanel KyufuSeigenPanel
      */
-    @JsonProperty("JukyushaIdoRenrakuhyoKyufuSeigen")
-    public void setJukyushaIdoRenrakuhyoKyufuSeigen(JukyushaIdoRenrakuhyoKyufuSeigenDiv JukyushaIdoRenrakuhyoKyufuSeigen) {
-        this.JukyushaIdoRenrakuhyoKyufuSeigen = JukyushaIdoRenrakuhyoKyufuSeigen;
+    @JsonProperty("KyufuSeigenPanel")
+    public void setKyufuSeigenPanel(KyufuSeigenPanelDiv KyufuSeigenPanel) {
+        this.KyufuSeigenPanel = KyufuSeigenPanel;
     }
 
     /*
@@ -234,54 +238,89 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     /*
-     * getJukyushaIdoRenrakuhyoNijiyoboJigyo
-     * @return JukyushaIdoRenrakuhyoNijiyoboJigyo
+     * getNijiyoboJigyoPanel
+     * @return NijiyoboJigyoPanel
      */
-    @JsonProperty("JukyushaIdoRenrakuhyoNijiyoboJigyo")
-    public JukyushaIdoRenrakuhyoNijiyoboJigyoDiv getJukyushaIdoRenrakuhyoNijiyoboJigyo() {
-        return JukyushaIdoRenrakuhyoNijiyoboJigyo;
+    @JsonProperty("NijiyoboJigyoPanel")
+    public NijiyoboJigyoPanelDiv getNijiyoboJigyoPanel() {
+        return NijiyoboJigyoPanel;
     }
 
     /*
-     * setJukyushaIdoRenrakuhyoNijiyoboJigyo
-     * @param JukyushaIdoRenrakuhyoNijiyoboJigyo JukyushaIdoRenrakuhyoNijiyoboJigyo
+     * setNijiyoboJigyoPanel
+     * @param NijiyoboJigyoPanel NijiyoboJigyoPanel
      */
-    @JsonProperty("JukyushaIdoRenrakuhyoNijiyoboJigyo")
-    public void setJukyushaIdoRenrakuhyoNijiyoboJigyo(JukyushaIdoRenrakuhyoNijiyoboJigyoDiv JukyushaIdoRenrakuhyoNijiyoboJigyo) {
-        this.JukyushaIdoRenrakuhyoNijiyoboJigyo = JukyushaIdoRenrakuhyoNijiyoboJigyo;
+    @JsonProperty("NijiyoboJigyoPanel")
+    public void setNijiyoboJigyoPanel(NijiyoboJigyoPanelDiv NijiyoboJigyoPanel) {
+        this.NijiyoboJigyoPanel = NijiyoboJigyoPanel;
     }
 
     /*
-     * getJukyushaIdoRenrakuhyoRojinHoken
-     * @return JukyushaIdoRenrakuhyoRojinHoken
+     * getRojinHokenPanel
+     * @return RojinHokenPanel
      */
-    @JsonProperty("JukyushaIdoRenrakuhyoRojinHoken")
-    public JukyushaIdoRenrakuhyoRojinHokenDiv getJukyushaIdoRenrakuhyoRojinHoken() {
-        return JukyushaIdoRenrakuhyoRojinHoken;
+    @JsonProperty("RojinHokenPanel")
+    public RojinHokenPanelDiv getRojinHokenPanel() {
+        return RojinHokenPanel;
     }
 
     /*
-     * setJukyushaIdoRenrakuhyoRojinHoken
-     * @param JukyushaIdoRenrakuhyoRojinHoken JukyushaIdoRenrakuhyoRojinHoken
+     * setRojinHokenPanel
+     * @param RojinHokenPanel RojinHokenPanel
      */
-    @JsonProperty("JukyushaIdoRenrakuhyoRojinHoken")
-    public void setJukyushaIdoRenrakuhyoRojinHoken(JukyushaIdoRenrakuhyoRojinHokenDiv JukyushaIdoRenrakuhyoRojinHoken) {
-        this.JukyushaIdoRenrakuhyoRojinHoken = JukyushaIdoRenrakuhyoRojinHoken;
+    @JsonProperty("RojinHokenPanel")
+    public void setRojinHokenPanel(RojinHokenPanelDiv RojinHokenPanel) {
+        this.RojinHokenPanel = RojinHokenPanel;
+    }
+
+    /*
+     * [共有子DIVモード]
+     */
+    @JsonProperty("modes")
+    private HashSet<Mode> modes;
+
+    public static enum DisplayMode implements ICommonChildDivMode {
+
+        shinki("shinki"),
+        teisei("teisei"),
+        saihakko("saihakko"),
+        shokai("shokai");
+
+        private final String name;
+
+        private DisplayMode(final String name) {
+            this.name = name;
+        }
+
+        public static DisplayMode getEnum(String str) {
+            DisplayMode[] enumArray = DisplayMode.values();
+
+            for (DisplayMode enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public DisplayMode getMode_DisplayMode() {
+        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
+    }
+
+    public void setMode_DisplayMode( DisplayMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
     }
 
     /*
      * [ ショートカットの作成 ]
      */
-    @JsonIgnore
-    public HorizontalLine getLin2() {
-        return this.getJukyushaIdoRenrakuhyoTeisei().getLin2();
-    }
-
-    @JsonIgnore
-    public void  setLin2(HorizontalLine lin2) {
-        this.getJukyushaIdoRenrakuhyoTeisei().setLin2(lin2);
-    }
-
     @JsonIgnore
     public TextBoxDate getTxtTeiseiYMD() {
         return this.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD();

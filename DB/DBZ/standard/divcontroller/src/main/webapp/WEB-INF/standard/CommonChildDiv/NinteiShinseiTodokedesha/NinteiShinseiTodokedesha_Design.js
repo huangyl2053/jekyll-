@@ -91,10 +91,6 @@ var DBZ;
                 return new UZA.TextBoxCode(this.convFiledName("txtHonninKankeisei"));
             };
 
-            Controls.prototype.lblHonninKankeiseiMei = function () {
-                return new UZA.Label(this.convFiledName("lblHonninKankeiseiMei"));
-            };
-
             Controls.prototype.radKannaiKangai = function () {
                 return new UZA.RadioButton(this.convFiledName("radKannaiKangai"));
             };

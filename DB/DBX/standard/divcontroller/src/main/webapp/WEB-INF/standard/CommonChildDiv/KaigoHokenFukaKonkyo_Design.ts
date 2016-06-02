@@ -429,14 +429,6 @@ module DBX {
                 return new UZA.Label(this.convFiledName("lblHokenryoSanshutsugaku"));
             }
 
-            public celKikan61(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celKikan61"));
-            }
-
-            public lblHokenryogaku(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblHokenryogaku"));
-            }
-
             public celKikan12(): UZA.TableCell {
                 return new UZA.TableCell(this.convFiledName("celKikan12"));
             }
@@ -477,14 +469,6 @@ module DBX {
                 return new UZA.Label(this.convFiledName("lblHokenryoSanshutsugakuData1"));
             }
 
-            public celKikan62(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celKikan62"));
-            }
-
-            public lblHokenryogakuData1(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblHokenryogakuData1"));
-            }
-
             public celKikan13(): UZA.TableCell {
                 return new UZA.TableCell(this.convFiledName("celKikan13"));
             }
@@ -523,14 +507,6 @@ module DBX {
 
             public lblHokenryoSanshutsugakuData2(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblHokenryoSanshutsugakuData2"));
-            }
-
-            public celKikan63(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celKikan63"));
-            }
-
-            public lblHokenryogakuData2(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblHokenryogakuData2"));
             }
 
             public txtChoteiJiyu1(): UZA.TextBox {
