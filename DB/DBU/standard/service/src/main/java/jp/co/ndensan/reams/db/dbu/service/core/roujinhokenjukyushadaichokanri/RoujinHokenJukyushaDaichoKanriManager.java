@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -127,5 +128,20 @@ public class RoujinHokenJukyushaDaichoKanriManager {
         IRoujinHokenJukyushaDaichoKanriMapper mapper = mapperProvider.create(IRoujinHokenJukyushaDaichoKanriMapper.class);
         UaFt200FindShikibetsuTaishoEntity 宛名情報 = mapper.selectJyohou(psmParameter);
         return ShikibetsuTaishoFactory.createKojin(宛名情報).get現全国地方公共団体コード().getColumnValue();
+    }
+
+    /**
+     * 老健受給情報{@link RojinHokenJukyushaJoho}を更新します。
+     *
+     * @param 老健受給情報 {@link RojinHokenJukyushaJoho}
+     * @param state 更新状態
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public int updateRoukenJukyuJoho(RojinHokenJukyushaJoho 老健受給情報, EntityDataState state) {
+        requireNonNull(老健受給情報, UrSystemErrorMessages.値がnull.getReplacedMessage("老健受給情報"));
+        DbT7005RojinHokenJukyushaJohoEntity entity = 老健受給情報.toEntity();
+        entity.setState(state);
+        return dac.save(entity);
     }
 }

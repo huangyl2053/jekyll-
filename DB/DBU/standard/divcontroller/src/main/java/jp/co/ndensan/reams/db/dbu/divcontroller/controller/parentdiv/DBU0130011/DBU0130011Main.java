@@ -55,7 +55,8 @@ public class DBU0130011Main {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-            createHandler(div).update老健受給情報();
+            TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
+            createHandler(div).update老健受給情報(key.get識別コード(), key.get被保険者番号());
         }
         return ResponseData.of(div).respond();
     }

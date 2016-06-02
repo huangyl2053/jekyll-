@@ -62,36 +62,35 @@ public class DBU0130011MainHandler {
 
     /**
      * 老健受給情報を設定します。
+     *
+     * @param 識別コード 識別コード
+     * @param 被保険者番号 被保険者番号
      */
-    public void update老健受給情報() {
+    public void update老健受給情報(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
         RojinHokenJukyushaJoho hokenJukyushaJoho;
         if (モード_データなし.equals(ViewStateHolder.get(ViewStateKeys.老人保健受給者台帳管理_モード, RString.class))) {
-            hokenJukyushaJoho = new RojinHokenJukyushaJoho(ViewStateHolder.get(ViewStateKeys.老人保健受給者台帳管理_識別コード, ShikibetsuCode.class));
+            hokenJukyushaJoho = new RojinHokenJukyushaJoho(識別コード);
             RojinHokenJukyushaJohoBuilder builder = hokenJukyushaJoho.createBuilderForEdit();
-            builder.set市町村コード(new LasdecCode(RoujinHokenJukyushaDaichoKanriManager.createInstance().
-                    get宛名情報(ViewStateHolder.get(ViewStateKeys.老人保健受給者台帳管理_識別コード, ShikibetsuCode.class))));
+            builder.set市町村コード(new LasdecCode(RoujinHokenJukyushaDaichoKanriManager.createInstance().get宛名情報(識別コード)));
             if (div.getTxtRoukenShichosonNo().getValue() == null) {
-                builder.set老人保健市町村コード(null);
+                builder.set老人保健市町村コード(RString.EMPTY);
             } else {
                 builder.set老人保健市町村コード(div.getTxtRoukenShichosonNo().getValue());
             }
-            builder.set被保険者番号(ViewStateHolder.get(ViewStateKeys.老人保健受給者台帳管理_被保険者番号, HihokenshaNo.class));
+            builder.set被保険者番号(被保険者番号);
             builder.set老人保健受給者番号(div.getTxtRokenJukyushaNo().getValue());
-            hokenJukyushaJoho.toEntity().setState(EntityDataState.Added);
-            RoujinHokenJukyushaDaichoKanriManager.createInstance().insertRoukenJukyuJoho(builder.build());
+            RoujinHokenJukyushaDaichoKanriManager.createInstance().updateRoukenJukyuJoho(builder.build(), EntityDataState.Added);
         } else {
             hokenJukyushaJoho = ViewStateHolder.get(ViewStateKeys.老健受給情報, RojinHokenJukyushaJoho.class);
             RojinHokenJukyushaJohoBuilder builder = hokenJukyushaJoho.createBuilderForEdit();
             if (div.getTxtRoukenShichosonNo().getValue() == null) {
-                builder.set老人保健市町村コード(null);
+                builder.set老人保健市町村コード(RString.EMPTY);
             } else {
                 builder.set老人保健市町村コード(div.getTxtRoukenShichosonNo().getValue());
             }
             builder.set老人保健受給者番号(div.getTxtRokenJukyushaNo().getValue());
-            hokenJukyushaJoho.toEntity().setState(EntityDataState.Modified);
-            RoujinHokenJukyushaDaichoKanriManager.createInstance().updateRoukenJukyuJoho(builder.build());
+            RoujinHokenJukyushaDaichoKanriManager.createInstance().updateRoukenJukyuJoho(builder.build(), EntityDataState.Modified);
         }
-        initialize(RoujinHokenJukyushaDaichoKanriManager.createInstance().getRoukenJukyuJoho(
-                ViewStateHolder.get(ViewStateKeys.老人保健受給者台帳管理_識別コード, ShikibetsuCode.class)));
+        initialize(RoujinHokenJukyushaDaichoKanriManager.createInstance().getRoukenJukyuJoho(識別コード));
     }
 }
