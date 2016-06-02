@@ -58,7 +58,6 @@ public class TaJushochiTokureishaKanriHandler {
     private static final RString 他特例解除 = new RString("01");
     private static final RString 転入 = new RString("01");
     private static final RString 除外者適用 = new RString("01");
-    private final RString 新枝番 = new RString("0001");
 
     private static final RString 照会モード = new RString("Shokai");
     private static final RString 訂正モード = new RString("Teisei");
@@ -322,6 +321,8 @@ public class TaJushochiTokureishaKanriHandler {
                 rireki_Row.setRowState(RowState.Added);
                 rireki_Row.setShikibetsuCode(識別コード.getColumnValue());
                 rireki_Row.setIdoYMD(div.getTajushochiTokureiInput().getHiddenInputIdoYMD());
+                変更後枝番 = TaJushochiTokureisyaKanriManager.createInstance().
+                        get最新枝番(識別コード, new FlexibleDate(div.getTxtKaijyobi().getValue().toString()));
                 rireki_Row.setEdaNo(変更後枝番);
                 rireki_Row.getTekiyoYMD().setValue(new RDate(div.getTxtTekiyobi().getValue().toString()));
                 if (div.getTxtTekiyoTodokedebi().getValue() != null) {
@@ -457,7 +458,7 @@ public class TaJushochiTokureishaKanriHandler {
             if (訂正モード.equals(new RString(div.getMode_DisplayMode().toString()))) {
                 if (RowState.Added.equals(row.getRowState())) {
                     TashichosonJushochiTokureiIdentifier 住所地特例の識別子
-                            = new TashichosonJushochiTokureiIdentifier(識別コード, new FlexibleDate(row.getKaijoYMD().getValue().toString()), 新枝番);
+                            = new TashichosonJushochiTokureiIdentifier(識別コード, new FlexibleDate(row.getKaijoYMD().getValue().toString()), row.getEdaNo());
                     TaJushochiTokureisyaKanriManager.createInstance().regTaJushochiTokurei(set他住所地特例(他住所地特例Model.get(住所地特例の識別子), row).toEntity());
                 } else if (RowState.Modified.equals(row.getRowState())) {
                     TashichosonJushochiTokureiIdentifier 更新前住所地特例の識別子
@@ -484,7 +485,7 @@ public class TaJushochiTokureishaKanriHandler {
                 FlexibleDate 適用異動日 = new FlexibleDate(rowList.get(0).getTekiyoYMD().getValue().toString());
                 dgJushochiTokureiRireki_Row 適用情報 = rowList.get(0);
                 TashichosonJushochiTokureiIdentifier 住所地特例の識別子
-                        = new TashichosonJushochiTokureiIdentifier(識別コード, 適用異動日, 新枝番);
+                        = new TashichosonJushochiTokureiIdentifier(識別コード, 適用異動日, new RString("0001"));
                 TaJushochiTokureisyaKanriManager.createInstance().regTaJushochiTokurei(set適用状態他住所地特例(他住所地特例Model.get(住所地特例の識別子), 適用情報).toEntity());
                 Collections.sort(rowList, new DateComparatorRirekiNo());
                 int 最新履歴番号 = TaJushochiTokureisyaKanriManager.createInstance().get最新履歴番号(識別コード);
