@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshomiteishutsu;
 
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshomiteishutsu.*;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
