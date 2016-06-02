@@ -9,13 +9,17 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002Fuka;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002Fuka.choteiNendo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002Fuka.choteiNichiji;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002Fuka.fukaNendo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002Fuka.hokenryoDankai;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002Fuka.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002Fuka.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002FukaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -91,5 +95,36 @@ public class DbV2002FukaAliveDac implements ISaveable<DbV2002FukaEntity> {
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 平準化対象件数の取得。
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 賦課年度 FlexibleYear
+     * @param 調定日時 YMDHMS
+     * @param 保険料段階 RString
+     *
+     * @return 平準化対象件数
+     */
+    @Transaction
+    public int select件数(FlexibleYear 調定年度,
+            FlexibleYear 賦課年度,
+            YMDHMS 調定日時,
+            RString 保険料段階) {
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(調定日時, UrSystemErrorMessages.値がnull.getReplacedMessage("調定日時"));
+        requireNonNull(保険料段階, UrSystemErrorMessages.値がnull.getReplacedMessage("保険料段階"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV2002Fuka.class).
+                where(and(
+                                eq(choteiNendo, 調定年度),
+                                eq(fukaNendo, 賦課年度),
+                                eq(choteiNichiji, 調定日時),
+                                eq(hokenryoDankai, 保険料段階))).getCount();
     }
 }
