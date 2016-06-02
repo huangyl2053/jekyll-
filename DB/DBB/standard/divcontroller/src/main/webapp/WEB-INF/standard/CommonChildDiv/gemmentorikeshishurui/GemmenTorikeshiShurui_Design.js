@@ -4,6 +4,13 @@ var DBB;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnSelect = function () {
+                return "onClick_btnSelect";
+            };
+
+            Events.onClick_btnCancel = function () {
+                return "onClick_btnCancel";
+            };
             return Events;
         })();
         GemmenTorikeshiShurui.Events = Events;
