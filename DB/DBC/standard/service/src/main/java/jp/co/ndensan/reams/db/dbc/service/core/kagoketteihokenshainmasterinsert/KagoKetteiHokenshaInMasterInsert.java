@@ -79,7 +79,7 @@ public class KagoKetteiHokenshaInMasterInsert {
      * @param 再処理区分 RString
      * @param 交換情報識別番号 RString
      */
-    public void 再処理準備(FlexibleYearMonth 処理年月, RString 再処理区分, RString 交換情報識別番号) {
+    public void 再処理準備と登録(FlexibleYearMonth 処理年月, RString 再処理区分, RString 交換情報識別番号) {
         if (再処理.equals(再処理区分)) {
             RString 保険者区分 = 保険者区分を設定(交換情報識別番号);
             List<DbT3060KagoKetteiShukeiEntity> list = dbt3060Dac.selectByKey(処理年月, 保険者区分);
@@ -94,6 +94,9 @@ public class KagoKetteiHokenshaInMasterInsert {
                 dbt3061Dac.delete(listTwo.get(j));
             }
         }
+        過誤決定集計TBLに登録(交換情報識別番号);
+        過誤決定明細TBLに登録(交換情報識別番号);
+
     }
 
     /**
@@ -101,7 +104,7 @@ public class KagoKetteiHokenshaInMasterInsert {
      *
      * @param 交換情報識別番号 RString
      */
-    public void 過誤決定集計TBLに登録(RString 交換情報識別番号) {
+    private void 過誤決定集計TBLに登録(RString 交換情報識別番号) {
         IKagoKetteiHokenshaInMasterInsertMapper mapper = mapperProvider.create(IKagoKetteiHokenshaInMasterInsertMapper.class);
         RString 保険者区分 = 保険者区分を設定(交換情報識別番号);
         Map<String, Object> map = new HashMap<>();
@@ -114,7 +117,7 @@ public class KagoKetteiHokenshaInMasterInsert {
      *
      * @param 交換情報識別番号 RString
      */
-    public void 過誤決定明細TBLに登録(RString 交換情報識別番号) {
+    private void 過誤決定明細TBLに登録(RString 交換情報識別番号) {
         IKagoKetteiHokenshaInMasterInsertMapper mapper = mapperProvider.create(IKagoKetteiHokenshaInMasterInsertMapper.class);
         RString 保険者区分 = 保険者区分を設定(交換情報識別番号);
         Map<String, Object> map = new HashMap<>();
