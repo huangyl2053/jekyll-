@@ -42,3 +42,5 @@ shikyugakuGokei,numeric,Decimal,,,,,支給額合計額,A
 dataKubun,varchar,RString,,,,,データ区分,A
 uketoriYM,UDD014YM,FlexibleYearMonth,,,,,受取年月,A
 sofuYM,UDD014YM,FlexibleYearMonth,,,,,送付年月,A
+saisoFG,varchar,RString,,,,,再送フラグ,A
+sikyugakuKeisanKekkaRenrakuhyoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,支給額計算結果連絡票作成年月日,A

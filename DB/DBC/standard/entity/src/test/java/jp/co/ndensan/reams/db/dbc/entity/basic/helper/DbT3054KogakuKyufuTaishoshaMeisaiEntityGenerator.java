@@ -21,7 +21,7 @@ public final class DbT3054KogakuKyufuTaishoshaMeisaiEntityGenerator {
     public static final FlexibleYearMonth DEFAULT_サービス提供年月 = new FlexibleYearMonth("199001");
     public static final JigyoshaNo DEFAULT_事業者番号 = new JigyoshaNo("1");
     public static final ServiceShuruiCode DEFAULT_サービス種類コード = new ServiceShuruiCode("1");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 0;
     public static final Decimal DEFAULT_サービス費用合計額 = new Decimal(0);
     public static final Decimal DEFAULT_利用者負担額 = new Decimal(0);
     public static final RString DEFAULT_高額給付根拠 = new RString("Data");

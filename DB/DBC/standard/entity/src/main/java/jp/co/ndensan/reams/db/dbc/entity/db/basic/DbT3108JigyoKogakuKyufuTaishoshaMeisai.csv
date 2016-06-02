@@ -6,3 +6,4 @@ rirekiNo,int2,int,,,,,履歴番号,A
 serviceHiyoGokeiGaku,numeric,Decimal,,,,,サービス費用合計額,A
 riyoshaFutanGaku,numeric,Decimal,,,,,利用者負担額,A
 jigyoKogakuKyufuKonkyo,varchar,RString,,,,,事業高額給付根拠,A
+taishoshaUketoriYM,UDD014YM,FlexibleYearMonth,,,,,対象者受取年月,A

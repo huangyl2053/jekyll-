@@ -43,7 +43,7 @@ public class DbT3061KagoKetteiMeisaiDac implements ISaveable<DbT3061KagoKetteiMe
     public DbT3061KagoKetteiMeisaiEntity selectByKey(
             FlexibleYearMonth 取扱年月,
             RString 保険者区分,
-            Decimal 履歴番号) throws NullPointerException {
+            int 履歴番号) throws NullPointerException {
         requireNonNull(取扱年月, UrSystemErrorMessages.値がnull.getReplacedMessage("取扱年月"));
         requireNonNull(保険者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者区分"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));

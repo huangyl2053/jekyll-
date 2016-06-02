@@ -39,7 +39,7 @@ public class KagoKetteiMeisai extends ModelBase<KagoKetteiMeisaiIdentifier, DbT3
      */
     public KagoKetteiMeisai(FlexibleYearMonth 取扱年月,
             RString 保険者区分,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(取扱年月, UrSystemErrorMessages.値がnull.getReplacedMessage("取扱年月"));
         requireNonNull(保険者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者区分"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -106,7 +106,7 @@ public class KagoKetteiMeisai extends ModelBase<KagoKetteiMeisaiIdentifier, DbT3
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 

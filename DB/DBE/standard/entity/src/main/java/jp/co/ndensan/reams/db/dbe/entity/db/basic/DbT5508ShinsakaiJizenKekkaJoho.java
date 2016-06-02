@@ -55,14 +55,15 @@ public enum DbT5508ShinsakaiJizenKekkaJoho implements IColumnDefinition {
      */
     shinsakaiOrder(5, 0),
     /**
-     * 一次判定結果変更理由
-     */
-    ichijiHanteiHenkoRiyu(2147483647, 0),
-    /**
      * 二次判定結果コード
      * <br/>Enum（DBE：要介護状態区分コード（認定ｿﾌﾄ2009））
      */
-    nijiHanteiKekkaCode(2147483647, 0);
+    nijiHanteiKekkaCode(2147483647, 0),
+    /**
+     * 有効期間
+     * <br/>有効期間月数
+     */
+    yukokikan(5, 0);
 
     private final int maxLength;
     private final int scale;

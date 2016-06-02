@@ -125,29 +125,29 @@ public class ShinsakaiJizenKekkaJohoManagerTest {
             assertThat(sut.save介護認定審査会事前審査結果情報(介護認定審査会事前審査結果情報), is(false));
         }
 
-        @Test
-        public void updateに成功するとtrueが返る() {
-            when(dac.save(any(DbT5508ShinsakaiJizenKekkaJohoEntity.class))).thenReturn(1);
+//        @Test
+//        public void updateに成功するとtrueが返る() {
+//            when(dac.save(any(DbT5508ShinsakaiJizenKekkaJohoEntity.class))).thenReturn(1);
+//
+//            DbT5508ShinsakaiJizenKekkaJohoEntity entity = DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.createDbT5508ShinsakaiJizenKekkaJohoEntity();
+//            entity.initializeMd5();
+//            ShinsakaiJizenKekkaJoho 介護認定審査会事前審査結果情報 = new ShinsakaiJizenKekkaJoho(entity);
+//            介護認定審査会事前審査結果情報 = 介護認定審査会事前審査結果情報.createBuilderForEdit().set一次判定結果変更理由(new RString("任意項目1を変更")).build();
+//
+//            assertThat(sut.save介護認定審査会事前審査結果情報(介護認定審査会事前審査結果情報), is(true));
+//        }
 
-            DbT5508ShinsakaiJizenKekkaJohoEntity entity = DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.createDbT5508ShinsakaiJizenKekkaJohoEntity();
-            entity.initializeMd5();
-            ShinsakaiJizenKekkaJoho 介護認定審査会事前審査結果情報 = new ShinsakaiJizenKekkaJoho(entity);
-            介護認定審査会事前審査結果情報 = 介護認定審査会事前審査結果情報.createBuilderForEdit().set一次判定結果変更理由(new RString("任意項目1を変更")).build();
-
-            assertThat(sut.save介護認定審査会事前審査結果情報(介護認定審査会事前審査結果情報), is(true));
-        }
-
-        @Test
-        public void updateに失敗するとfalseが返る() {
-            when(dac.save(any(DbT5508ShinsakaiJizenKekkaJohoEntity.class))).thenReturn(0);
-
-            DbT5508ShinsakaiJizenKekkaJohoEntity entity = DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.createDbT5508ShinsakaiJizenKekkaJohoEntity();
-            entity.initializeMd5();
-            ShinsakaiJizenKekkaJoho 介護認定審査会事前審査結果情報 = new ShinsakaiJizenKekkaJoho(entity);
-            介護認定審査会事前審査結果情報 = 介護認定審査会事前審査結果情報.createBuilderForEdit().set一次判定結果変更理由(new RString("任意項目1を変更")).build();
-
-            assertThat(sut.save介護認定審査会事前審査結果情報(介護認定審査会事前審査結果情報), is(false));
-        }
+//        @Test
+//        public void updateに失敗するとfalseが返る() {
+//            when(dac.save(any(DbT5508ShinsakaiJizenKekkaJohoEntity.class))).thenReturn(0);
+//
+//            DbT5508ShinsakaiJizenKekkaJohoEntity entity = DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.createDbT5508ShinsakaiJizenKekkaJohoEntity();
+//            entity.initializeMd5();
+//            ShinsakaiJizenKekkaJoho 介護認定審査会事前審査結果情報 = new ShinsakaiJizenKekkaJoho(entity);
+//            介護認定審査会事前審査結果情報 = 介護認定審査会事前審査結果情報.createBuilderForEdit().set一次判定結果変更理由(new RString("任意項目1を変更")).build();
+//
+//            assertThat(sut.save介護認定審査会事前審査結果情報(介護認定審査会事前審査結果情報), is(false));
+//        }
 
         @Test
         public void deleteに成功するとtrueが返る() {

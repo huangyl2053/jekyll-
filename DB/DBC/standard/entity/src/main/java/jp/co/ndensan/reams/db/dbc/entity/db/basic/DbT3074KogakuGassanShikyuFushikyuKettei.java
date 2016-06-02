@@ -6,8 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 高額合算支給不支給決定テーブルの項目定義クラスです。
  */
 public enum DbT3074KogakuGassanShikyuFushikyuKettei implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -152,7 +151,15 @@ public enum DbT3074KogakuGassanShikyuFushikyuKettei implements IColumnDefinition
     /**
      * 受取年月
      */
-    uketoriYM(2147483647, 0);
+    uketoriYM(2147483647, 0),
+    /**
+     * 口座ID
+     */
+    kozaID(2147483647, 0),
+    /**
+     * 決定通知リアル発行フラグ
+     */
+    ketteiTsuchiRealHakkoFlag(1, 0);
 
     private final int maxLength;
     private final int scale;
@@ -164,7 +171,7 @@ public enum DbT3074KogakuGassanShikyuFushikyuKettei implements IColumnDefinition
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -173,7 +180,7 @@ public enum DbT3074KogakuGassanShikyuFushikyuKettei implements IColumnDefinition
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

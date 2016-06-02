@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -53,13 +53,21 @@ public enum DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu implements ICol
      */
     rirekiNo(5, 0),
     /**
+     * 利用年月
+     */
+    riyoYM(2147483647, 0),
+    /**
      * 前回迄利用日数
      */
     zenkaiRiyoNissu(3, 0),
     /**
      * 今回計画利用日数
      */
-    konkaiKeikakuRiyoNissu(3, 0);
+    konkaiKeikakuRiyoNissu(3, 0),
+    /**
+     * 暫定区分
+     */
+    zanteiKubun(1, 0);
 
     private final int maxLength;
     private final int scale;

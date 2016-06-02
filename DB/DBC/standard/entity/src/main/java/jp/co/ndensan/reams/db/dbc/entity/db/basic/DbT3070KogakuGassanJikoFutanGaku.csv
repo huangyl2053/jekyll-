@@ -53,3 +53,6 @@ sofuTaishoGaiFlag,varchar,RString,,,,,送付対象外フラグ,A
 jikoFutanKeisanYMD,UDD015YMD,FlexibleDate,,,,,自己負担額計算年月日,A
 shomeiShoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,自己負担額証明書作成年月日,A
 koki_KokuhoShoriKubun,varchar,RString,,,,,後期・国保処理区分,A
+jikoFutangakuShomeishoRealHakkoFlag,varchar,RString,,,,,自己負担額証明書リアル発行フラグ,A
+batchHoseiJissiYMD,UDD015YMD,FlexibleDate,,,,,バッチ補正実施年月日,A
+realHoseiJissiYMD,UDD015YMD,FlexibleDate,,,,,リアル補正実施年月日,A

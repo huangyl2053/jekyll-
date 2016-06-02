@@ -24,7 +24,7 @@ public class JigyoKogakuKyufuTaishoshaMeisaiIdentifier implements Serializable {
     private final FlexibleYearMonth サービス提供年月;
     private final JigyoshaNo 事業者番号;
     private final ServiceShuruiCode サービス種類コード;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
 
     /**
      * コンストラクタです。
@@ -39,7 +39,7 @@ public class JigyoKogakuKyufuTaishoshaMeisaiIdentifier implements Serializable {
             FlexibleYearMonth サービス提供年月,
             JigyoshaNo 事業者番号,
             ServiceShuruiCode サービス種類コード,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月 = サービス提供年月;
         this.事業者番号 = 事業者番号;

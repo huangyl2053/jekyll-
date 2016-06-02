@@ -7,9 +7,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -33,11 +33,12 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
+    private FlexibleYearMonth sofuYM;
+    @PrimaryKey
     private HihokenshaNo hiHokenshaNo;
     @PrimaryKey
-    private FlexibleDate idoYMD;
-    @PrimaryKey
     private int rirekiNo;
+    private FlexibleDate idoYMD;
     private RString idoKubunCode;
     private RString jukyushaIdoJiyu;
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
@@ -105,7 +106,6 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
     private FlexibleDate nijiyoboJigyoYukoKikanKaishiYMD;
     private FlexibleDate nijiyoboJigyoYukoKikanShuryoYMD;
     private boolean teiseiRenrakuhyoFlag;
-    private FlexibleYearMonth sofuYM;
     private RString jushochiTokureiTaishoshaKubunCode;
     private RString shisetsuShozaiHokenjaNo;
     private RString jushochiTokureiTekiyoKaishiYMD;
@@ -166,6 +166,24 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
     }
 
     /**
+     * 送付年月のgetメソッドです。
+     * 
+     * @return 送付年月
+     */
+    public FlexibleYearMonth getSofuYM() {
+        return sofuYM;
+    }
+
+    /**
+     * 送付年月のsetメソッドです。
+     * 
+     * @param sofuYM 送付年月
+     */
+    public void setSofuYM(@Nonnull FlexibleYearMonth sofuYM) {
+        this.sofuYM = sofuYM;
+    }
+
+    /**
      * 被保険者番号のgetメソッドです。
      * 
      * @return 被保険者番号
@@ -184,6 +202,25 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
     }
 
     /**
+     * 履歴番号のgetメソッドです。
+     * 
+     * @return 履歴番号
+     */
+    @CheckForNull
+    public int getRirekiNo() {
+        return rirekiNo;
+    }
+
+    /**
+     * 履歴番号のsetメソッドです。
+     * 
+     * @param rirekiNo 履歴番号
+     */
+    public void setRirekiNo(int rirekiNo) {
+        this.rirekiNo = rirekiNo;
+    }
+
+    /**
      * 異動年月日のgetメソッドです。
      * 
      * @return 異動年月日
@@ -199,24 +236,6 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      */
     public void setIdoYMD(@Nonnull FlexibleDate idoYMD) {
         this.idoYMD = idoYMD;
-    }
-
-    /**
-     * 履歴番号のgetメソッドです。
-     * 
-     * @return 履歴番号
-     */
-    public int getRirekiNo() {
-        return rirekiNo;
-    }
-
-    /**
-     * 履歴番号のsetメソッドです。
-     * 
-     * @param rirekiNo 履歴番号
-     */
-    public void setRirekiNo(@Nonnull int rirekiNo) {
-        this.rirekiNo = rirekiNo;
     }
 
     /**
@@ -1586,25 +1605,6 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
     }
 
     /**
-     * 送付年月のgetメソッドです。
-     * 
-     * @return 送付年月
-     */
-    @CheckForNull
-    public FlexibleYearMonth getSofuYM() {
-        return sofuYM;
-    }
-
-    /**
-     * 送付年月のsetメソッドです。
-     * 
-     * @param sofuYM 送付年月
-     */
-    public void setSofuYM(FlexibleYearMonth sofuYM) {
-        this.sofuYM = sofuYM;
-    }
-
-    /**
      * 住所地特例対象者区分コードのgetメソッドです。
      * 
      * @return 住所地特例対象者区分コード
@@ -1848,10 +1848,10 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.hiHokenshaNo, other.hiHokenshaNo)) {
+        if (!Objects.equals(this.sofuYM, other.sofuYM)) {
             return false;
         }
-        if (!Objects.equals(this.idoYMD, other.idoYMD)) {
+        if (!Objects.equals(this.hiHokenshaNo, other.hiHokenshaNo)) {
             return false;
         }
         if (this.rirekiNo != other.rirekiNo) {
@@ -1865,9 +1865,10 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      */
     @Override
     public void shallowCopy(DbT3001JukyushaIdoRenrakuhyoEntity entity) {
+        this.sofuYM = entity.sofuYM;
         this.hiHokenshaNo = entity.hiHokenshaNo;
-        this.idoYMD = entity.idoYMD;
         this.rirekiNo = entity.rirekiNo;
+        this.idoYMD = entity.idoYMD;
         this.idoKubunCode = entity.idoKubunCode;
         this.jukyushaIdoJiyu = entity.jukyushaIdoJiyu;
         this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
@@ -1935,7 +1936,6 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
         this.nijiyoboJigyoYukoKikanKaishiYMD = entity.nijiyoboJigyoYukoKikanKaishiYMD;
         this.nijiyoboJigyoYukoKikanShuryoYMD = entity.nijiyoboJigyoYukoKikanShuryoYMD;
         this.teiseiRenrakuhyoFlag = entity.teiseiRenrakuhyoFlag;
-        this.sofuYM = entity.sofuYM;
         this.jushochiTokureiTaishoshaKubunCode = entity.jushochiTokureiTaishoshaKubunCode;
         this.shisetsuShozaiHokenjaNo = entity.shisetsuShozaiHokenjaNo;
         this.jushochiTokureiTekiyoKaishiYMD = entity.jushochiTokureiTekiyoKaishiYMD;
@@ -1956,10 +1956,11 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hiHokenshaNo, idoYMD, rirekiNo, idoKubunCode, jukyushaIdoJiyu, shoKisaiHokenshaNo, hiHokenshaNameKana, umareYMD, seibetsuCode, shikakuShutokuYMD, shikakuSoshitsuYMD, rojinHokenShichosonNo, rojinHokenJukyushaNo, kohiFutanshaNo, koikiRengoHokenshaNo, shinseiShubetsuCode, henkoShinseichuKubunCode, shinseiYMD, minashiYokaigoJotaiKubunCode, yokaigoJotaiKubunCode, ninteiYukoKikankaishiYMD, ninteiYukoKikanShuryoYMD, kyotakuServiceSakuseiKubunCode, kyotakuKaigoShienJigyoshoNo, kyotakuServiceTekiyoKaishiYMD, kyotakuServiceTekiyoShuryoYMD, homonTsushoServiceShikyuGendoKijungaku, homonTsushoServiceJogenKanriTekiyoKaishiYMD, homonTsushoServiceJogenKanriTekiyoShuryoYMD, tankiNyushoServiceShikyuGendoKijungaku, tankinyushoServiceJogenKanriTekiyoKaishiYMD, tankinyushoServiceJogenKanriTekiyoShuryoYMD, kohiFutanJogenGengakuAriFlag, shokanbaraikaKaishiYMD, shokanbaraikaShuryoYMD, kyufuritsuHikisageKaishiYMD, kyufuritsuHikisageShuryoYMD, gemmenShinseichuKubunCode, riyoshaFutanKubunCode, kyufuritsu, tekiyoKaishiYMD, tekiyoShuryoYMD, hyojunFutanKubunCode, futangaku, futangakuTekiyoKaishiYMD, futangakuTekiyoShuryoYMD, tokuteiNyushoshaNinteiShinseichuKubunCode, tokuteiNyushoshaKaigoServiceKubunCode, kaizeisoTokureiGengakuSochiTaishoFlag, shokuhiFutanGendogaku, kyojuhiUnitGataKoshitsuFutanGendogaku, kyojuhiUnitGataJunKoshitsuFutanGendogaku, kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku, kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku, kyujuhiTashoshitsuFutanGendogaku, futanGendogakuTekiyoKaishiYMD, futanGendogakuTekiyoShuryoYMD, keigenritsu, keigenritsuTekiyoKaishiYMD, keigenritsuTekiyoShuryoYMD, shoTakinoKyotakuKaigoRiyozukiRiyoAriFlag, kokiKoureiIryoHokenshaNo, kokikoureiIryoHiHokenshaNo, kokuhoHokenshaNo, kokuhoHiHokenshaNo, kokuhoKojinNo, nijiyoboJigyoKubunCode, nijiyoboJigyoYukoKikanKaishiYMD, nijiyoboJigyoYukoKikanShuryoYMD, teiseiRenrakuhyoFlag, sofuYM, jushochiTokureiTaishoshaKubunCode, shisetsuShozaiHokenjaNo, jushochiTokureiTekiyoKaishiYMD, jushochiTokureiTekiyoShuryoYMD, kyotakuhiShin1FutanGendogaku, kyotakuhiShin2FutanGendogaku, kyotakuhiShin3FutanGendogaku, riyosyaFutanWariaiYukoKaishiYMD, riyosyaFutanWariaiYukoShuryoYMD, teiseiKubunCode, teiseiYMD, logicalDeletedFlag);
+        return super.toMd5(sofuYM, hiHokenshaNo, rirekiNo, idoYMD, idoKubunCode, jukyushaIdoJiyu, shoKisaiHokenshaNo, hiHokenshaNameKana, umareYMD, seibetsuCode, shikakuShutokuYMD, shikakuSoshitsuYMD, rojinHokenShichosonNo, rojinHokenJukyushaNo, kohiFutanshaNo, koikiRengoHokenshaNo, shinseiShubetsuCode, henkoShinseichuKubunCode, shinseiYMD, minashiYokaigoJotaiKubunCode, yokaigoJotaiKubunCode, ninteiYukoKikankaishiYMD, ninteiYukoKikanShuryoYMD, kyotakuServiceSakuseiKubunCode, kyotakuKaigoShienJigyoshoNo, kyotakuServiceTekiyoKaishiYMD, kyotakuServiceTekiyoShuryoYMD, homonTsushoServiceShikyuGendoKijungaku, homonTsushoServiceJogenKanriTekiyoKaishiYMD, homonTsushoServiceJogenKanriTekiyoShuryoYMD, tankiNyushoServiceShikyuGendoKijungaku, tankinyushoServiceJogenKanriTekiyoKaishiYMD, tankinyushoServiceJogenKanriTekiyoShuryoYMD, kohiFutanJogenGengakuAriFlag, shokanbaraikaKaishiYMD, shokanbaraikaShuryoYMD, kyufuritsuHikisageKaishiYMD, kyufuritsuHikisageShuryoYMD, gemmenShinseichuKubunCode, riyoshaFutanKubunCode, kyufuritsu, tekiyoKaishiYMD, tekiyoShuryoYMD, hyojunFutanKubunCode, futangaku, futangakuTekiyoKaishiYMD, futangakuTekiyoShuryoYMD, tokuteiNyushoshaNinteiShinseichuKubunCode, tokuteiNyushoshaKaigoServiceKubunCode, kaizeisoTokureiGengakuSochiTaishoFlag, shokuhiFutanGendogaku, kyojuhiUnitGataKoshitsuFutanGendogaku, kyojuhiUnitGataJunKoshitsuFutanGendogaku, kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku, kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku, kyujuhiTashoshitsuFutanGendogaku, futanGendogakuTekiyoKaishiYMD, futanGendogakuTekiyoShuryoYMD, keigenritsu, keigenritsuTekiyoKaishiYMD, keigenritsuTekiyoShuryoYMD, shoTakinoKyotakuKaigoRiyozukiRiyoAriFlag, kokiKoureiIryoHokenshaNo, kokikoureiIryoHiHokenshaNo, kokuhoHokenshaNo, kokuhoHiHokenshaNo, kokuhoKojinNo, nijiyoboJigyoKubunCode, nijiyoboJigyoYukoKikanKaishiYMD, nijiyoboJigyoYukoKikanShuryoYMD, teiseiRenrakuhyoFlag, jushochiTokureiTaishoshaKubunCode, shisetsuShozaiHokenjaNo, jushochiTokureiTekiyoKaishiYMD, jushochiTokureiTekiyoShuryoYMD, kyotakuhiShin1FutanGendogaku, kyotakuhiShin2FutanGendogaku, kyotakuhiShin3FutanGendogaku, riyosyaFutanWariaiYukoKaishiYMD, riyosyaFutanWariaiYukoShuryoYMD, teiseiKubunCode, teiseiYMD, logicalDeletedFlag);
     }
 
 // </editor-fold>
+
 
 
 

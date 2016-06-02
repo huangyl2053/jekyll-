@@ -1,24 +1,25 @@
 package jp.co.ndensan.reams.db.dbb.entity.db.basic;
 
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 計算後情報テーブルのエンティティクラスです。
@@ -69,12 +70,12 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
     private RString hokenryoDankai;
     private RString hokenryoDankai1;
     private Decimal nengakuHokenryo1;
-    private FlexibleDate tsukiwariStartYM1;
-    private FlexibleDate tsukiwariEndYM1;
+    private FlexibleYearMonth tsukiwariStartYM1;
+    private FlexibleYearMonth tsukiwariEndYM1;
     private RString hokenryoDankai2;
     private Decimal nengakuHokenryo2;
-    private FlexibleDate tsukiwariStartYM2;
-    private FlexibleDate tsukiwariEndYM2;
+    private FlexibleYearMonth tsukiwariStartYM2;
+    private FlexibleYearMonth tsukiwariEndYM2;
     private YMDHMS choteiNichiji;
     private RString choteiJiyu1;
     private RString choteiJiyu2;
@@ -726,7 +727,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
      * @return 月割開始年月1
      */
     @CheckForNull
-    public FlexibleDate getTsukiwariStartYM1() {
+    public FlexibleYearMonth getTsukiwariStartYM1() {
         return tsukiwariStartYM1;
     }
 
@@ -735,7 +736,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
      * 
      * @param tsukiwariStartYM1 月割開始年月1
      */
-    public void setTsukiwariStartYM1(FlexibleDate tsukiwariStartYM1) {
+    public void setTsukiwariStartYM1(FlexibleYearMonth tsukiwariStartYM1) {
         this.tsukiwariStartYM1 = tsukiwariStartYM1;
     }
 
@@ -745,7 +746,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
      * @return 月割終了年月1
      */
     @CheckForNull
-    public FlexibleDate getTsukiwariEndYM1() {
+    public FlexibleYearMonth getTsukiwariEndYM1() {
         return tsukiwariEndYM1;
     }
 
@@ -754,7 +755,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
      * 
      * @param tsukiwariEndYM1 月割終了年月1
      */
-    public void setTsukiwariEndYM1(FlexibleDate tsukiwariEndYM1) {
+    public void setTsukiwariEndYM1(FlexibleYearMonth tsukiwariEndYM1) {
         this.tsukiwariEndYM1 = tsukiwariEndYM1;
     }
 
@@ -802,7 +803,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
      * @return 月割開始年月2
      */
     @CheckForNull
-    public FlexibleDate getTsukiwariStartYM2() {
+    public FlexibleYearMonth getTsukiwariStartYM2() {
         return tsukiwariStartYM2;
     }
 
@@ -811,7 +812,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
      * 
      * @param tsukiwariStartYM2 月割開始年月2
      */
-    public void setTsukiwariStartYM2(FlexibleDate tsukiwariStartYM2) {
+    public void setTsukiwariStartYM2(FlexibleYearMonth tsukiwariStartYM2) {
         this.tsukiwariStartYM2 = tsukiwariStartYM2;
     }
 
@@ -821,7 +822,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
      * @return 月割終了年月2
      */
     @CheckForNull
-    public FlexibleDate getTsukiwariEndYM2() {
+    public FlexibleYearMonth getTsukiwariEndYM2() {
         return tsukiwariEndYM2;
     }
 
@@ -830,7 +831,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
      * 
      * @param tsukiwariEndYM2 月割終了年月2
      */
-    public void setTsukiwariEndYM2(FlexibleDate tsukiwariEndYM2) {
+    public void setTsukiwariEndYM2(FlexibleYearMonth tsukiwariEndYM2) {
         this.tsukiwariEndYM2 = tsukiwariEndYM2;
     }
 
@@ -2693,4 +2694,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
     }
 
 // </editor-fold>
+
+
+
 }

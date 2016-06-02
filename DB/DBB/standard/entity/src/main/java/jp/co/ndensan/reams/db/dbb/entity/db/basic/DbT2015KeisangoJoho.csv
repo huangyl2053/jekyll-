@@ -25,12 +25,12 @@ nenkinShunyuGaku,numeric,Decimal,,,,,公的年金収入額,A
 hokenryoDankai,varchar,RString,,,,,保険料段階,A
 hokenryoDankai1,varchar,RString,,,,,保険料算定段階1,A
 nengakuHokenryo1,numeric,Decimal,,,,,算定年額保険料1,A
-tsukiwariStartYM1,UDD015YMD,FlexibleDate,,,,,月割開始年月1,A
-tsukiwariEndYM1,UDD015YMD,FlexibleDate,,,,,月割終了年月1,A
+tsukiwariStartYM1,UDD014YM,FlexibleYearMonth,,,,,月割開始年月1,A
+tsukiwariEndYM1,UDD014YM,FlexibleYearMonth,,,,,月割終了年月1,A
 hokenryoDankai2,varchar,RString,,,,,保険料算定段階2,A
 nengakuHokenryo2,numeric,Decimal,,,,,算定年額保険料2,A
-tsukiwariStartYM2,UDD015YMD,FlexibleDate,,,,,月割開始年月2,A
-tsukiwariEndYM2,UDD015YMD,FlexibleDate,,,,,月割終了年月2,A
+tsukiwariStartYM2,UDD014YM,FlexibleYearMonth,,,,,月割開始年月2,A
+tsukiwariEndYM2,UDD014YM,FlexibleYearMonth,,,,,月割終了年月2,A
 choteiNichiji,UDD018YMDHMS,YMDHMS,,,,,調定日時,A
 choteiJiyu1,varchar,RString,,,,,調定事由1,A
 choteiJiyu2,varchar,RString,,,,,調定事由2,A

@@ -40,17 +40,21 @@ public enum DbT3001JukyushaIdoRenrakuhyo implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
+     * 送付年月
+     */
+    sofuYM(2147483647, 0),
+    /**
      * 被保険者番号
      */
     hiHokenshaNo(2147483647, 0),
     /**
-     * 異動年月日
-     */
-    idoYMD(2147483647, 0),
-    /**
      * 履歴番号
      */
     rirekiNo(5, 0),
+    /**
+     * 異動年月日
+     */
+    idoYMD(2147483647, 0),
     /**
      * 異動区分コード
      * <br/>1:新規,2:変更,3:終了
@@ -344,10 +348,6 @@ public enum DbT3001JukyushaIdoRenrakuhyo implements IColumnDefinition {
      * <br/>異動or訂正 訂正ならtrue
      */
     teiseiRenrakuhyoFlag(1, 0),
-    /**
-     * 送付年月
-     */
-    sofuYM(2147483647, 0),
     /**
      * 住所地特例対象者区分コード
      */
