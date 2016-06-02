@@ -351,9 +351,9 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
         for (Kitsuki 期月 : 期月リスト) {
             boolean flag = false;
             for (Noki 賦課納期 : 賦課納期list) {
-                RString 期別納期期間 = RString.EMPTY;
                 if (期月.get期AsInt() == 賦課納期.get期別()) {
                     flag = true;
+                    RString 期別納期期間 = RString.EMPTY;
                     RDate 納期開始日 = 賦課納期.get納期開始日();
                     RDate 納期終了日 = 賦課納期.get納期終了日();
                     if (納期開始日 != null && 納期終了日 != null) {
@@ -465,10 +465,12 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
                         && 徴収猶予終了日 != null && !徴収猶予終了日.isEmpty()) {
                     徴収猶予期間 = 徴収猶予開始日.wareki().toDateString().concat(波線)
                             .concat(徴収猶予終了日.wareki().toDateString());
-                } else if (徴収猶予開始日 == null && 徴収猶予終了日 != null) {
+                } else if ((徴収猶予開始日 == null || 徴収猶予開始日.isEmpty())
+                        && 徴収猶予終了日 != null && !徴収猶予終了日.isEmpty()) {
                     徴収猶予期間 = RString.EMPTY.concat(波線)
                             .concat(徴収猶予終了日.wareki().toDateString());
-                } else if (徴収猶予開始日 != null && 徴収猶予終了日 == null) {
+                } else if (徴収猶予開始日 != null && !徴収猶予開始日.isEmpty()
+                        && (徴収猶予終了日 == null || 徴収猶予終了日.isEmpty())) {
                     徴収猶予期間 = 徴収猶予開始日.wareki().toDateString().concat(波線);
                 } else {
                     徴収猶予期間 = RString.EMPTY;
