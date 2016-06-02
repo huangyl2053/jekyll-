@@ -239,10 +239,6 @@ public class TaJushochiTokureisyaKanriManager {
     @Transaction
     public void saveHihokenshaSositu(KaigoTatokuTekiyoJiyu 適用事由,
             FlexibleDate 適用年月日, FlexibleDate 適用届出年月日, ShikibetsuCode 識別コード) {
-        requireNonNull(適用事由, UrSystemErrorMessages.値がnull.getReplacedMessage("適用事由"));
-        requireNonNull(適用年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用年月日"));
-        requireNonNull(適用届出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用届出年月日"));
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード.toString()));
         HihokenshashikakusoshitsuManager.createInstance().saveHihokenshaShikakuSoshitsu(
                 識別コード, HihokenshaNo.EMPTY, 適用年月日, new RString("05"), 適用届出年月日);
     }

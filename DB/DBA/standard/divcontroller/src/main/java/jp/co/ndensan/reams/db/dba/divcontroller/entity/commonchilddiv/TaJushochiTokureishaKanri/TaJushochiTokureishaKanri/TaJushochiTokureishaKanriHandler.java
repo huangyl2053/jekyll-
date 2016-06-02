@@ -477,10 +477,14 @@ public class TaJushochiTokureishaKanriHandler {
                 }
             } else if (適用モード.equals(new RString(div.getMode_DisplayMode().toString()))) {
                 HihokenshashikakusoshitsuManager.createInstance().shikakuSoshitsuCheck(識別コード, HihokenshaNo.EMPTY);
+                FlexibleDate 適用届出年月日 = FlexibleDate.EMPTY;
+                if (rowList.get(0).getTekiyoTodokedeYMD() != null && rowList.get(0).getTekiyoTodokedeYMD().getValue() != null) {
+                    適用届出年月日 = new FlexibleDate(rowList.get(0).getTekiyoTodokedeYMD().getValue().toString());
+                }
                 TaJushochiTokureisyaKanriManager.createInstance().saveHihokenshaSositu(
                         new KaigoTatokuTekiyoJiyu(rowList.get(0).getTekiyoJiyu()),
                         new FlexibleDate(rowList.get(0).getTekiyoYMD().getValue().toString()),
-                        new FlexibleDate(rowList.get(0).getTekiyoTodokedeYMD().getValue().toString()),
+                        適用届出年月日,
                         識別コード);
                 FlexibleDate 適用異動日 = new FlexibleDate(rowList.get(0).getTekiyoYMD().getValue().toString());
                 dgJushochiTokureiRireki_Row 適用情報 = rowList.get(0);
@@ -732,13 +736,15 @@ public class TaJushochiTokureishaKanriHandler {
         if (!RString.isNullOrEmpty(row.getSochiHihokenshaNo())) {
             編集Builder.set措置被保険者番号(new HihokenshaNo(row.getSochiHihokenshaNo()));
         }
+        if (row.getTekiyoTodokedeYMD() != null && row.getTekiyoTodokedeYMD().getValue() != null) {
+            編集Builder.set適用届出年月日(new FlexibleDate(row.getTekiyoTodokedeYMD().getValue().toDateString()))
+                    .set適用受付年月日(new FlexibleDate(row.getTekiyoTodokedeYMD().getValue().toDateString()));
+        }
         return 編集Builder
                 .set異動事由コード(row.getTekiyoJiyu())
                 .set市町村コード(宛名情報.getGenLasdecCode())
                 .set他市町村住所地特例適用事由コード(row.getTekiyoJiyu())
                 .set適用年月日(new FlexibleDate(row.getTekiyoYMD().getValue().toDateString()))
-                .set適用届出年月日(new FlexibleDate(row.getTekiyoTodokedeYMD().getValue().toDateString()))
-                .set適用受付年月日(new FlexibleDate(row.getTekiyoTodokedeYMD().getValue().toDateString()))
                 .set論理削除フラグ(false)
                 .build();
     }
