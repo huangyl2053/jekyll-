@@ -13,6 +13,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaRelate;
 import jp.co.ndensan.reams.db.dba.service.core.tekiyojogaisha.TekiyoJogaishaManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
@@ -21,9 +22,9 @@ import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaishaIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -52,8 +53,6 @@ public class TekiyoJogaiRirekiHandler {
     private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
     private static final RString 適用除外者 = new RString("適用除外者");
     private static final int PADZERO = 4;
-    private static final CodeShubetsu 介護除外適用理由 = new CodeShubetsu("0009");
-    private static final CodeShubetsu 介護除外解除理由 = new CodeShubetsu("0012");
     private static final RString 開始枝番 = new RString("0001");
     private final TekiyoJogaiRirekiDiv div;
 
@@ -342,7 +341,7 @@ public class TekiyoJogaiRirekiHandler {
                                 枝番 = new RString(Integer.parseInt(row.getHenkougoEdaNo().toString()) + 1).padZeroToLeft(PADZERO);
                                 break;
                             } else {
-                                枝番 = new RString(Integer.parseInt(row.getHenkoumaeEdaNo().toString()) + 1).padZeroToLeft(PADZERO);;
+                                枝番 = new RString(Integer.parseInt(row.getHenkoumaeEdaNo().toString()) + 1).padZeroToLeft(PADZERO);
                             }
                         }
                     }
@@ -827,19 +826,22 @@ public class TekiyoJogaiRirekiHandler {
         if (適用事由コード == null || 適用事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeRyakusho(介護除外適用理由, new Code(適用事由コード));
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格適用事由_除外者.getコード(),
+                new Code(適用事由コード), FlexibleDate.getNowDate());
     }
 
     private RString get解除事由(RString 解除事由コード) {
         if (解除事由コード == null || 解除事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeRyakusho(介護除外解除理由, new Code(解除事由コード));
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格解除事由_除外者.getコード(),
+                new Code(解除事由コード), FlexibleDate.getNowDate());
     }
 
     private List<KeyValueDataSource> set適用事由() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        List<UzT0007CodeEntity> 適用事由Key = CodeMaster.getCode(介護除外適用理由);
+        List<UzT0007CodeEntity> 適用事由Key = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                DBACodeShubetsu.介護資格適用事由_除外者.getコード(), FlexibleDate.getNowDate());
         for (UzT0007CodeEntity key : 適用事由Key) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(key.getコード().getColumnValue());
@@ -851,7 +853,8 @@ public class TekiyoJogaiRirekiHandler {
 
     private List<KeyValueDataSource> set解除事由() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        List<UzT0007CodeEntity> 解除事由Key = CodeMaster.getCode(介護除外解除理由);
+        List<UzT0007CodeEntity> 解除事由Key = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                DBACodeShubetsu.介護資格解除事由_除外者.getコード(), FlexibleDate.getNowDate());
         for (UzT0007CodeEntity key : 解除事由Key) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(key.getコード().getColumnValue());
