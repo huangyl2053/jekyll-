@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.otheraddressledger.OtherAddre
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TaJushochiTokureisyaKanriRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.otheraddressinformation.IOtherAddressInformationMapper;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokureisyakanri.ITaJushochiTokureisyaKanriMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -39,7 +40,6 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -264,12 +264,22 @@ public class TashichosonJushochiTokureiDaichoFinder {
             RString 適用事由名称 = RString.EMPTY;
             RString 解除事由名称 = RString.EMPTY;
             if (otherAddressInfFromDBEntity.get他市町村住所地特例適用事由コード() != null) {
-                適用事由名称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0008"),
-                        new Code(otherAddressInfFromDBEntity.get他市町村住所地特例適用事由コード()));
+                適用事由名称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
+                        DBACodeShubetsu.介護資格適用事由_他特例者.getコード(),
+                        new Code(otherAddressInfFromDBEntity.get他市町村住所地特例適用事由コード()),
+                        new FlexibleDate(RDate.getNowDate().toDateString()));
             }
             if (otherAddressInfFromDBEntity.get他市町村住所地特例解除事由コード() != null) {
-                解除事由名称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0011"),
-                        new Code(otherAddressInfFromDBEntity.get他市町村住所地特例解除事由コード()));
+                解除事由名称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
+                        DBACodeShubetsu.介護資格解除事由_他特例者.getコード(),
+                        new Code(otherAddressInfFromDBEntity.get他市町村住所地特例解除事由コード()),
+                        new FlexibleDate(RDate.getNowDate().toDateString()));
+            }
+            if (null == 適用事由名称) {
+                適用事由名称 = RString.EMPTY;
+            }
+            if (null == 解除事由名称) {
+                解除事由名称 = RString.EMPTY;
             }
             OtherAddressInfEntity otherAddressInfEntity = new OtherAddressInfEntity();
             set他市町村住所地特例者情報(otherAddressInfEntity, otherAddressInfFromDBEntity, no, 適用事由名称, 解除事由名称, new事業者名称);
