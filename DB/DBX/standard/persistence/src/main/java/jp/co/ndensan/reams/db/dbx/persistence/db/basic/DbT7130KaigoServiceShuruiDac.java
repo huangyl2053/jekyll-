@@ -175,6 +175,26 @@ public class DbT7130KaigoServiceShuruiDac {
     }
 
     /**
+     * サービス種類名称とサービス種類略称を取得します。
+     *
+     * @param サービス種類 サービス種類
+     * @param 提供開始年月 FlexibleYearMonth
+     * @return DbT7130KaigoServiceShuruiEntity
+     */
+    @Transaction
+    public DbT7130KaigoServiceShuruiEntity selectサービス種類名称Andサービス種類略称(RString サービス種類,
+            FlexibleYearMonth 提供開始年月) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7130KaigoServiceShurui.class).
+                where(and(eq(serviceShuruiCd, サービス種類),
+                                leq(teikyoKaishiYM, RDate.getNowDate().getYearMonth()),
+                                or(leq(提供開始年月, teikyoshuryoYM), isNULL(teikyoshuryoYM)))).
+                toObject(DbT7130KaigoServiceShuruiEntity.class);
+    }
+
+    /**
      * 給付種類を取得します。
      *
      * @param サービス種類コード サービス種類コード
