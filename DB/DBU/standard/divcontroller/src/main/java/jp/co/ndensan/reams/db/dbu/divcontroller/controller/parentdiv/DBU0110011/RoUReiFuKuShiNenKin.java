@@ -33,8 +33,6 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -63,9 +61,7 @@ public class RoUReiFuKuShiNenKin {
         アクセスログ(AccessLogType.照会, 識別コード);
         if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
             div.setReadOnly(true);
-            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            validationMessages.add(new ValidationMessageControlPair(TekiyoJogaiTotalErrorMessage.排他_他のユーザが使用中));
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
         }
         return ResponseData.of(div).setState(DBU0110011StateName.初期状態);
     }
