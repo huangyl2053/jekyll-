@@ -10,11 +10,17 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5170001.Publ
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5170001.PublicationShiryoShinsakaiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5170001.PublicationShiryoShinsakaiValidationHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -52,6 +58,10 @@ public class PublicationShiryoShinsakai {
         div.getTxtYoteiTeiin().setValue(new Decimal(予定定員.toString()));
         div.getTxtWariateNinzu().setValue(new Decimal(割付人数.toString()));
         div.getTxtOperationDate().setValue(処理日);
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(new RString("DBEShinsakaiNo"))
+                .append(審査会一覧_開催番号);
+        前排他キーのセット(builder.toRString());
         getHandler(div).onLoad();
         return ResponseData.of(div).respond();
     }
@@ -115,8 +125,26 @@ public class PublicationShiryoShinsakai {
         // 処理完了のメッセージを表示する
         // 排他制御の解除を行う
         // 画面を再表示する
-
+        RString 審査会一覧_開催番号 = ViewStateHolder.get(ViewStateKeys.審査会一覧_開催番号, RString.class);
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(new RString("DBEShinsakaiNo"))
+                .append(審査会一覧_開催番号);
+        前排他キーの解除(builder.toRString());
         return ResponseData.of(getHandler(div).onClick_btnKogakuParamSave()).respond();
+    }
+
+    private void 前排他キーのセット(RString 排他) {
+        LockingKey 排他キー = new LockingKey(排他);
+        if (!RealInitialLocker.tryGetLock(排他キー)) {
+            ErrorMessage message = new ErrorMessage(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().getCode(),
+                    UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().evaluate());
+            throw new ApplicationException(message);
+        }
+    }
+
+    private void 前排他キーの解除(RString 排他) {
+        LockingKey 排他キー = new LockingKey(排他);
+        RealInitialLocker.release(排他キー);
     }
 
     private PublicationShiryoShinsakaiHandler getHandler(PublicationShiryoShinsakaiDiv div) {
