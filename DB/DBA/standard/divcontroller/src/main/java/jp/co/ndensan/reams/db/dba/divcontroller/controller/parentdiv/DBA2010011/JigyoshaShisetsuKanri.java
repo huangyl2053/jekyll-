@@ -61,6 +61,7 @@ public class JigyoshaShisetsuKanri {
         }
         mode.setJigyoshaShubetsu(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey());
         div.setJigyoshaMode(DataPassingConverter.serialize(mode));
+        div.getJigyoshaNyuryokuGuide().getCommonChildDiv1().setYaMeRu();
         div.getJigyoshaNyuryokuGuide().getCommonChildDiv1().initialize(mode);
         div.getJigyoshaNyuryokuGuide().getCommonChildDiv1().getJigyoshaNyuryokuGudieCommonChildDiv()
                 .setJigyoshaMode(DataPassingConverter.serialize(mode));
