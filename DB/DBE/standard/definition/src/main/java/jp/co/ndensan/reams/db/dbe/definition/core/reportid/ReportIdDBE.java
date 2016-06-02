@@ -297,7 +297,11 @@ public enum ReportIdDBE {
     /**
      * 申請に関する帳票発行の帳票ＩＤです。
      */
-    DBE012003(new ReportId("DBE120002_NinteichosaIraiHenko"), new RString("認定調査結果と主治医意見書のチェックリスト"));
+    DBE012003(new ReportId("DBE120002_NinteichosaIraiHenko"), new RString("認定調査結果と主治医意見書のチェックリスト")),
+    /**
+     * 主治医意見書未提出者一覧表の帳票ＩＤです。
+     */
+    DBE013003(new ReportId("DBE013003_ShujiiIkenshoMiteishutsu"), new RString("主治医意見書未提出者一覧表"));
 
     private final ReportId reportId;
 
