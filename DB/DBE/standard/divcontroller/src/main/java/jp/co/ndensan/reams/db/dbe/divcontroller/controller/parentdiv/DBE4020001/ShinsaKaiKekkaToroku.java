@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4020001.Shi
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4020001.ShinsaKaiKekkaTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
@@ -25,7 +26,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -354,7 +354,7 @@ public class ShinsaKaiKekkaToroku {
         }
         ShinseishoKanriNoList shinseishoKanriNoList = new ShinseishoKanriNoList();
         shinseishoKanriNoList.setShinseishoKanriNoS(申請書管理番号リスト);
-        ViewStateHolder.put(ViewStateKeys.主治医意見書依頼_申請書管理番号List, shinseishoKanriNoList);
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号リスト, shinseishoKanriNoList);
     }
 
     private ShinsaKaiKekkaTorokuHandler getHandler(ShinsaKaiKekkaTorokuDiv div) {
