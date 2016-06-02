@@ -1,8 +1,12 @@
 package jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshomiteishutsu;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 主治医意見書未提出者一覧表のReportSourceです。
@@ -48,6 +52,12 @@ public class ShujiiIkenshoMiteishutsuReportSource implements IReportSource {
     public RString listIkemmiteishutsu_14;
     @ReportItem(name = "listIkemmiteishutsu_15", length = 2, order = 18)
     public RString listIkemmiteishutsu_15;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation hokenshaNo;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation hihokenshaNo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -55,4 +65,11 @@ public class ShujiiIkenshoMiteishutsuReportSource implements IReportSource {
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
 
+    /**
+     * 改ページ条件のキーです。
+     */
+    public enum ReportSourceFields {
+
+        shichosonName
+    }
 }
