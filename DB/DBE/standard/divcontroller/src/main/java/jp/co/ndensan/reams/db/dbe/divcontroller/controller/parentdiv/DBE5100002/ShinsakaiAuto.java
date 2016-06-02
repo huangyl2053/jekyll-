@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100002.Shin
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100002.ShinsakaiAutoHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100002.ValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.shinsakayijidouwaritsuke.ShinsaKayiJidouWaritsukeFinder;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -34,7 +34,7 @@ public class ShinsakaiAuto {
      */
     public ResponseData<ShinsakaiAutoDiv> onLoad(ShinsakaiAutoDiv shinDiv) {
         List<ShinsaKayiJidouWaritsukeBusiness> shinsaKayiList
-                = ShinsaKayiJidouWaritsukeFinder.createInstance().getHanteiKekka(ViewStateHolder.get(ViewStateKeys.審査会一覧_開催番号,
+                = ShinsaKayiJidouWaritsukeFinder.createInstance().getHanteiKekka(ViewStateHolder.get(ViewStateKeys.開催番号,
                                 KaigoNinteiShinsakaiParameter.class)).records();
         getHandler(shinDiv).onLoad(shinsaKayiList);
         return createResponse(shinDiv);

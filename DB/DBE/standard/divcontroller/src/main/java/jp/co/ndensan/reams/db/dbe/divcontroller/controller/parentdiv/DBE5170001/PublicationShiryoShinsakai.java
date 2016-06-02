@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.publicationshiryoshinsakai
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5170001.PublicationShiryoShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5170001.PublicationShiryoShinsakaiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5170001.PublicationShiryoShinsakaiValidationHandler;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -38,16 +38,16 @@ public class PublicationShiryoShinsakai {
      * @return ResponseData<PublicationShiryoShinsakaiDiv>
      */
     public ResponseData<PublicationShiryoShinsakaiDiv> onLoad(PublicationShiryoShinsakaiDiv div) {
-        RString 審査会一覧_開催番号 = ViewStateHolder.get(ViewStateKeys.審査会一覧_開催番号, RString.class);
-        FlexibleDate 開催予定日 = ViewStateHolder.get(ViewStateKeys.介護認定審査会資料作成_開催予定日, FlexibleDate.class);
-        RString 審査会会場 = ViewStateHolder.get(ViewStateKeys.介護認定審査会資料作成_審査会会場, RString.class);
-        RString 開始予定時間 = ViewStateHolder.get(ViewStateKeys.介護認定審査会資料作成_開始予定時間, RString.class);
-        RString 資料作成 = ViewStateHolder.get(ViewStateKeys.介護認定審査会資料作成_資料作成, RString.class);
-        RString 合議体番号 = ViewStateHolder.get(ViewStateKeys.介護認定審査会資料作成_合議体番号, RString.class);
-        RString 合議体名称 = ViewStateHolder.get(ViewStateKeys.介護認定審査会資料作成_合議体名称, RString.class);
-        RString 予定定員 = ViewStateHolder.get(ViewStateKeys.介護認定審査会資料作成_予定定員, RString.class);
-        RString 割付人数 = ViewStateHolder.get(ViewStateKeys.介護認定審査会資料作成_割付人数, RString.class);
-        FlexibleDate 処理日 = ViewStateHolder.get(ViewStateKeys.介護認定審査会資料作成_処理日, FlexibleDate.class);
+        RString 審査会一覧_開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        FlexibleDate 開催予定日 = ViewStateHolder.get(ViewStateKeys.開催予定日, FlexibleDate.class);
+        RString 審査会会場 = ViewStateHolder.get(ViewStateKeys.審査会会場, RString.class);
+        RString 開始予定時間 = ViewStateHolder.get(ViewStateKeys.開始予定時間, RString.class);
+        RString 資料作成 = ViewStateHolder.get(ViewStateKeys.資料作成, RString.class);
+        RString 合議体番号 = ViewStateHolder.get(ViewStateKeys.合議体番号, RString.class);
+        RString 合議体名称 = ViewStateHolder.get(ViewStateKeys.合議体名称, RString.class);
+        RString 予定定員 = ViewStateHolder.get(ViewStateKeys.予定定員, RString.class);
+        RString 割付人数 = ViewStateHolder.get(ViewStateKeys.割付人数, RString.class);
+        FlexibleDate 処理日 = ViewStateHolder.get(ViewStateKeys.処理日, FlexibleDate.class);
         div.getTxtShinsakaiKaisaiNo().setValue(審査会一覧_開催番号);
         div.getTxtShinsakaiYoteiDate().setValue(開催予定日);
         div.getTxtShinsakaiKaijo().setValue(審査会会場);
@@ -125,7 +125,7 @@ public class PublicationShiryoShinsakai {
         // 処理完了のメッセージを表示する
         // 排他制御の解除を行う
         // 画面を再表示する
-        RString 審査会一覧_開催番号 = ViewStateHolder.get(ViewStateKeys.審査会一覧_開催番号, RString.class);
+        RString 審査会一覧_開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         RStringBuilder builder = new RStringBuilder();
         builder.append(new RString("DBEShinsakaiNo"))
                 .append(審査会一覧_開催番号);
