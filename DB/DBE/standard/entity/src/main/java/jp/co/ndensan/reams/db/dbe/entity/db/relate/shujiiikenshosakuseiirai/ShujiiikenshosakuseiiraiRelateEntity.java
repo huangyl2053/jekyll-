@@ -48,6 +48,7 @@ public class ShujiiikenshosakuseiiraiRelateEntity {
     private RString iryoKikanMeisho;
     private RString iryoKikanJusho;
     private TelNo iryoKikanTelNo;
+    private RString iryoKikanFaxNo;
     private AtenaMeisho shujiiName;
     private FlexibleDate ikenshoSakuseiIraiYMD;
     private FlexibleDate iraishoShutsuryokuYMD;
