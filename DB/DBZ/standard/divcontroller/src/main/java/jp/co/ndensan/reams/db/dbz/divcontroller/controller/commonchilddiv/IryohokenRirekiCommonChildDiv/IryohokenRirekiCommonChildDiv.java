@@ -280,7 +280,7 @@ public class IryohokenRirekiCommonChildDiv {
         Collections.sort(childDivDate, new DateComparator());
         int sortIndex = childDivDate.indexOf(iryohokenRirekiDate);
 
-        if (new RDate(iryohokenRirekiDate.getDefaultDataName4().toString()).isBefore(new RDate(iryohokenRirekiDate.getDefaultDataName3().toString()))) {
+        if (new RDate(ichiran_Row.getDefaultDataName4().toString()).isBefore(new RDate(ichiran_Row.getDefaultDataName3().toString()))) {
             throw new ApplicationException(
                     DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace(
                             ichiran_Row.getDefaultDataName3().toString(), ichiran_Row.getDefaultDataName4().toString()));
@@ -290,22 +290,22 @@ public class IryohokenRirekiCommonChildDiv {
         }
         if (sortIndex == 0) {
             IryohokenRirekiCommonChildDivDate nextData = childDivDate.get(sortIndex + 1);
-            if (new RDate(ichiran_Row.getDefaultDataName4().toString()).isBefore(new RDate(nextData.getDefaultDataName3().toString()))) {
+            if (new RDate(ichiran_Row.getDefaultDataName3().toString()).isBefore(new RDate(nextData.getDefaultDataName4().toString()))) {
                 throw new ApplicationException(
                         DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace(
                                 ichiran_Row.getDefaultDataName4().toString(), nextData.getDefaultDataName3().toString()));
             }
         } else if (sortIndex == childDivDate.size() - 1) {
             IryohokenRirekiCommonChildDivDate preData = childDivDate.get(sortIndex - 1);
-            if (new RDate(preData.getDefaultDataName4().toString()).isBefore(new RDate(ichiran_Row.getDefaultDataName3().toString()))) {
+            if (new RDate(ichiran_Row.getDefaultDataName3().toString()).isBefore(new RDate(preData.getDefaultDataName4().toString()))) {
                 throw new ApplicationException(
                         DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace(
-                                ichiran_Row.getDefaultDataName3().toString(), preData.getDefaultDataName4().toString()));
+                                preData.getDefaultDataName4().toString(), ichiran_Row.getDefaultDataName3().toString()));
             }
         } else {
 
             IryohokenRirekiCommonChildDivDate preData = childDivDate.get(sortIndex - 1);
-            if (new RDate(preData.getDefaultDataName4().toString()).isBefore(new RDate(ichiran_Row.getDefaultDataName3().toString()))) {
+            if (new RDate(ichiran_Row.getDefaultDataName3().toString()).isBefore(new RDate(preData.getDefaultDataName4().toString()))) {
                 throw new ApplicationException(
                         DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace(
                                 preData.getDefaultDataName4().toString(), ichiran_Row.getDefaultDataName3().toString()));
