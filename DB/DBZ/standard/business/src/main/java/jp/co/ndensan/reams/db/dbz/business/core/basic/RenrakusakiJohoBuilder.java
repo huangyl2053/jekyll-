@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho;
+package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * {@link RenrakusakiJoho}の編集を行うビルダークラスです。
  *
- * @reamsid_L DBE-1300-100 dongyabin
+ * @reamsid_L DBZ-9999-011 sunhaidi
  */
 public class RenrakusakiJohoBuilder {
 

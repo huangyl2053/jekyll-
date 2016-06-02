@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho;
+package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護連絡先情報を管理するクラスです。
  *
- * @reamsid_L DBE-1300-100 dongyabin
+ * @reamsid_L DBZ-9999-011 sunhaidi
  */
 public class RenrakusakiJoho extends ModelBase<RenrakusakiJohoIdentifier, DbT5150RenrakusakiJohoEntity, RenrakusakiJoho> implements Serializable {
 
