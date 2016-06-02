@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.FukaEntity;
 
 /**

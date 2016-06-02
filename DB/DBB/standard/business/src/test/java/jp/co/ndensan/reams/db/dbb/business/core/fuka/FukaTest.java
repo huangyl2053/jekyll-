@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.core.fuka;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2002FukaEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2003KibetsuEntityGenerator;

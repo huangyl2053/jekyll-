@@ -4,13 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
+import jp.co.ndensan.reams.db.dbb.persistence.db.relate.FukaDac;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
 import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
 import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_被保険者番号;
 import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
 import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2002FukaDac;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;

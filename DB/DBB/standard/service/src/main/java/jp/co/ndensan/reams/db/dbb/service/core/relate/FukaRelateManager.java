@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.FukaEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2002FukaDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.KibetsuManager;

@@ -65,7 +65,7 @@
         "db2002Fuka"."fuSaishutsuKampuGaku"
     </sql>
     
-    <resultMap id="ResultMap_FukaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity" autoMapping="true">
+    <resultMap id="ResultMap_FukaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity" autoMapping="true">
         <result property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="tsuchishoNo" column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>

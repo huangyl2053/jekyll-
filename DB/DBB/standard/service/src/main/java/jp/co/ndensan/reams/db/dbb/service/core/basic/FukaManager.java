@@ -10,8 +10,9 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.FukaRireki;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2002FukaDac;
+import jp.co.ndensan.reams.db.dbb.persistence.db.relate.FukaDac;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
@@ -32,12 +33,14 @@ public class FukaManager {
     private final RString 通知書番号_メセージ = new RString("通知書番号");
     private final RString 履歴番号_メセージ = new RString("履歴番号");
     private final DbT2002FukaDac dac;
+    private final FukaDac relateDac;
 
     /**
      * コンストラクタです。
      */
     public FukaManager() {
         dac = InstanceProvider.create(DbT2002FukaDac.class);
+        relateDac = InstanceProvider.create(FukaDac.class);
     }
 
     /**
@@ -45,8 +48,9 @@ public class FukaManager {
      *
      * @param dac {@link DbT2002FukaDac}
      */
-    FukaManager(DbT2002FukaDac dac) {
+    FukaManager(DbT2002FukaDac dac, FukaDac relateDac) {
         this.dac = dac;
+        this.relateDac = relateDac;
     }
 
     /**
@@ -191,7 +195,7 @@ public class FukaManager {
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通知書番号_メセージ.toString()));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(履歴番号_メセージ.toString()));
 
-        DbT2002FukaEntity entity = dac.selectFor任意対象比較(
+        DbT2002FukaEntity entity = relateDac.selectFor任意対象比較(
                 調定年度,
                 賦課年度,
                 通知書番号,
