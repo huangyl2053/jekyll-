@@ -51,7 +51,7 @@
      "layoutName": "DBA1030011",
      "layoutTitle": "資格喪失異動",
      "eventName": "詳細へ",
-     "destroy": true,
+     "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBA",
      "toLayoutName": "DBA1050021",
@@ -65,7 +65,7 @@
      "layoutName": "DBA1050021",
      "layoutTitle": "被保険者資格詳細異動",
      "eventName": "履歴一覧に戻る",
-     "destroy": true,
+     "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBA",
      "toLayoutName": "DBA1030011",
@@ -79,7 +79,7 @@
      "layoutName": "DBA1030011",
      "layoutTitle": "資格喪失異動",
      "eventName": "完了",
-     "destroy": false,
+     "destroy": true,
      "condition": ""
     }
    ]
