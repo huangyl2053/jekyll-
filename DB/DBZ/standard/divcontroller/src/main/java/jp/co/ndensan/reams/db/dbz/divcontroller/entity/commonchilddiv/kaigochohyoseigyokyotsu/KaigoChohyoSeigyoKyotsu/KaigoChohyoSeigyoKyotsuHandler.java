@@ -266,8 +266,12 @@ public class KaigoChohyoSeigyoKyotsuHandler {
             builder.setカスタマバーコード変換エラー編集方法(
                     div.getConfigInfo4().getDdlBarCodeHenshuHoho().getSelectedKey());
         }
-        帳票制御共通 = builder.build();
-        帳票制御共通Mgr.update帳票制御共通(帳票制御共通);
+        if (!div.getAtesakiJusho().isDisplayNone() || !div.getConfigInfo1().isDisplayNone()
+                || !div.getConfigInfo2().isDisplayNone() || !div.getConfigInfo3().isDisplayNone()
+                || !div.getConfigInfo4().isDisplayNone()) {
+            帳票制御共通 = builder.build();
+            帳票制御共通Mgr.update帳票制御共通(帳票制御共通);
+        }
     }
 
     private void setDataSource() {
