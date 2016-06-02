@@ -14,4 +14,6 @@ public interface IJigyoshaNyuryokuGudieCommonChildDiv extends ICommonChildDivBas
     public abstract void select_BtnSenTaKu();
 
     JigyoshaNyuryokuGudieCommonChildDivDiv getJigyoshaNyuryokuGudieCommonChildDiv();
+
+    public void setYaMeRu();
 }

@@ -418,6 +418,15 @@ public class JiGyoSyaHandler {
         }
     }
 
+    /**
+     * やめるを実行します。
+     *
+     */
+    public void setYaMeRu() {
+
+        div.getBtnYameru().setVisible(false);
+    }
+
     private List<KeyValueDataSource> get県コード() {
 
         JigyoshaInputGuideFinder jigyosha = new JigyoshaInputGuideFinder();
