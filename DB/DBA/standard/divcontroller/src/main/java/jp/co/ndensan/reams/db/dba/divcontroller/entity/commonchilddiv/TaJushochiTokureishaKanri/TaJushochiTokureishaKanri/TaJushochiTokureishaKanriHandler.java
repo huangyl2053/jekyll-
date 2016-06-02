@@ -487,11 +487,7 @@ public class TaJushochiTokureishaKanriHandler {
                         = new TashichosonJushochiTokureiIdentifier(識別コード, 適用異動日, 新枝番);
                 TaJushochiTokureisyaKanriManager.createInstance().regTaJushochiTokurei(set適用状態他住所地特例(他住所地特例Model.get(住所地特例の識別子), 適用情報).toEntity());
                 Collections.sort(rowList, new DateComparatorRirekiNo());
-                RString 履歴番号 = rowList.get(0).getRirekiNo();
-                if (RString.isNullOrEmpty(履歴番号)) {
-                    履歴番号 = new RString("0");
-                }
-                int 最新履歴番号 = Integer.parseInt(履歴番号.toString()) + 1;
+                int 最新履歴番号 = TaJushochiTokureisyaKanriManager.createInstance().get最新履歴番号(識別コード);
                 ShisetsuNyutaishoIdentifier taisho = new ShisetsuNyutaishoIdentifier(識別コード, 最新履歴番号);
                 TaJushochiTokureisyaKanriManager.createInstance().regShisetsuNyutaisho(set適用状態介護保険施設入退所(保険施設入退所Model.get(taisho), 適用情報).toEntity());
                 Collections.sort(rowList, new DateComparator());
