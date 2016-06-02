@@ -50,11 +50,11 @@ public class NonyuTsuchishoTotal {
      */
     public ResponseData<NonyuTsuchishoTotalDiv> onClick_btnUpdate(NonyuTsuchishoTotalDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             List<ChohyoSeigyoHanyo> 帳票制御汎用リスト = ViewStateHolder.get(ViewStateKeys.帳票制御汎用リスト, List.class);
             getHandler(div).set完了メッセージ表示();
