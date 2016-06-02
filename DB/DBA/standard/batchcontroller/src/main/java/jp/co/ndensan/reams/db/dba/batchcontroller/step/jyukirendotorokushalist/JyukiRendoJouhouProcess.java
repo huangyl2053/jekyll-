@@ -178,8 +178,7 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
                 if (!new識別コード.equals(old識別コード)) {
                     ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                             ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(
-                                    GyomuCode.DB介護保険,
-                                    KensakuYusenKubun.住登外優先));
+                                    GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先));
                     key.setデータ取得区分(DataShutokuKubun.直近レコード);
                     key.set識別コード(entity.get識別コード());
                     List<JuminShubetsu> 住民種別 = new ArrayList();
@@ -199,15 +198,29 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
                             key.getPSM検索キー());
                     UaFt200FindShikibetsuTaishoEntity shikibetsuTaishoentity = jyukiRendoJouhouMapper
                             .getPsmShikibetsuTaisho(new PsmShikibetsuTaishoMybatisParameter(
-                                            new RString(uaFt200Psm.getParameterMap()
-                                                    .get("psmShikibetsuTaisho").toString())));
+                                            new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString())));
                     getPSM宛名情報(shikibetsuTaishoentity, entity);
                     old識別コード = new識別コード;
                 }
             }
+            if (データ種別_被保険者台帳.equals(entity.get対象情報タイトル())) {
+                entity.set取得情報_前_事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get取得情報_前_事由()));
+                entity.set取得情報_後_事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get取得情報_後_事由()));
+                entity.set喪失情報_前_事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get喪失情報_前_事由()));
+                entity.set喪失情報_後_事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get喪失情報_後_事由()));
+            } else if (データ種別_他市町村住所地特例者台帳.equals(entity.get対象情報タイトル())) {
+                entity.set取得情報_前_事由(getCodeNameByCode(DBACodeShubetsu.介護資格適用事由_他特例者.getコード(), entity.get取得情報_前_事由()));
+                entity.set取得情報_後_事由(getCodeNameByCode(DBACodeShubetsu.介護資格適用事由_他特例者.getコード(), entity.get取得情報_後_事由()));
+                entity.set喪失情報_前_事由(getCodeNameByCode(DBACodeShubetsu.介護資格適用事由_他特例者.getコード(), entity.get喪失情報_前_事由()));
+                entity.set喪失情報_後_事由(getCodeNameByCode(DBACodeShubetsu.介護資格適用事由_他特例者.getコード(), entity.get喪失情報_後_事由()));
+            } else if (データ種別_適用除外者台帳.equals(entity.get対象情報タイトル())) {
+                entity.set取得情報_前_事由(getCodeNameByCode(DBACodeShubetsu.介護資格解除事由_除外者.getコード(), entity.get取得情報_前_事由()));
+                entity.set取得情報_後_事由(getCodeNameByCode(DBACodeShubetsu.介護資格解除事由_除外者.getコード(), entity.get取得情報_後_事由()));
+                entity.set喪失情報_前_事由(getCodeNameByCode(DBACodeShubetsu.介護資格解除事由_除外者.getコード(), entity.get喪失情報_前_事由()));
+                entity.set喪失情報_後_事由(getCodeNameByCode(DBACodeShubetsu.介護資格解除事由_除外者.getコード(), entity.get喪失情報_後_事由()));
+            }
         }
         // TODO 2-上記取得した住基連動情報リストをソートする(技術点を提出しました)
-
         JyukiRendoTorokushaListBatchEntity jyukiRendoTorokushaEntity = new JyukiRendoTorokushaListBatchEntity();
         jyukiRendoTorokushaEntity.set市町村コード(AssociationFinderFactory.createInstance().getAssociation()
                 .get地方公共団体コード());
@@ -220,12 +233,10 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         jyukiRendoTorokushaEntity.set並び順_5(RString.EMPTY);
         jyukiRendoTorokushaEntity.set住基連動情報(jyukiRendoJouhouList);
         JyukiRendoTorokushaListBatch jyukiRendoTorokushaListBatch = new JyukiRendoTorokushaListBatch();
-        List<JukiRendoTorokuListItem> item = jyukiRendoTorokushaListBatch
-                .getIdoCheckChohyoData(jyukiRendoTorokushaEntity);
+        List<JukiRendoTorokuListItem> item = jyukiRendoTorokushaListBatch.getIdoCheckChohyoData(jyukiRendoTorokushaEntity);
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBA.DBA200007.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
-        JukiRendoTorokuListReport report = JukiRendoTorokuListReport
-                .createFrom(item);
+        JukiRendoTorokuListReport report = JukiRendoTorokuListReport.createFrom(item);
         report.writeBy(reportSourceWriter);
         batchReportWriter.close();
     }
@@ -466,4 +477,14 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         entity.set異動情報タイトル4(異動情報);
     }
 
+    private RString getCodeNameByCode(CodeShubetsu codeShubetsu, RString code) {
+        if (RString.isNullOrEmpty(code)) {
+            return RString.EMPTY;
+        }
+        return CodeMaster.getCodeRyakusho(
+                SubGyomuCode.DBA介護資格,
+                codeShubetsu,
+                new Code(code),
+                new FlexibleDate(RDate.getNowDate().toDateString()));
+    }
 }
