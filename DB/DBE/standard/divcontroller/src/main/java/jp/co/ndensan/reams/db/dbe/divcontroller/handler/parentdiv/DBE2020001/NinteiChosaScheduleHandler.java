@@ -75,7 +75,7 @@ public class NinteiChosaScheduleHandler {
         List<ChosaChiku> list = new ArrayList<>();
         for (ChikuShichosonBusiness chikuShichosonBusiness : chikuList) {
             UzT0007CodeEntity entity = CodeMaster.getCode(SubGyomuCode.DBE認定支援,
-                    new CodeShubetsu("5002"), chikuShichosonBusiness.getChosaChikuCode());
+                    new CodeShubetsu("5002"), chikuShichosonBusiness.getChosaChikuCode(), FlexibleDate.getNowDate());
             ChosaChiku chiku = new ChosaChiku();
             if (entity != null) {
                 chiku.set調査地区名称(entity.getコード名称());
@@ -122,11 +122,13 @@ public class NinteiChosaScheduleHandler {
                 if (jigyoshaInput.get全午前件数() != 0) {
                     dgJigyoshaItiran.setAkiAM(new RString("○"));
                 }
-                dgJigyoshaItiran.setAkiAMCount(new RString(String.valueOf(jigyoshaInput.get全午前件数() - jigyoshaInput.get午前の仮予約件数() - jigyoshaInput.get午前の確定件数())));
+                dgJigyoshaItiran.setAkiAMCount(new RString(String.valueOf(jigyoshaInput.get全午前件数() - jigyoshaInput.get午前の仮予約件数()
+                        - jigyoshaInput.get午前の確定件数())));
                 if (jigyoshaInput.get全午後件数() != 0) {
                     dgJigyoshaItiran.setAkiPM(new RString("●"));
                 }
-                dgJigyoshaItiran.setAkiPMCount(new RString(String.valueOf(jigyoshaInput.get全午後件数() - jigyoshaInput.get午後の仮予約件数() - jigyoshaInput.get午後の確定件数())));
+                dgJigyoshaItiran.setAkiPMCount(new RString(String.valueOf(jigyoshaInput.get全午後件数() - jigyoshaInput.get午後の仮予約件数()
+                        - jigyoshaInput.get午後の確定件数())));
                 if (jigyoshaInput.get午前の仮予約件数() != 0) {
                     dgJigyoshaItiran.setKariYoyakuAM(new RString("△"));
                 }

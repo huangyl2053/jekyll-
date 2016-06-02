@@ -62,6 +62,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     private static final RString 年度内連番_0 = new RString("0000");
     private static final RString 年度内連番_1 = new RString("0001");
     private static final RString 年度内連番_2 = new RString("0002");
+    private static final RString 処理枝番 = new RString("0001");
 
     /**
      * 主キーで処理日付管理マスタを取得します。
@@ -1009,7 +1010,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 where(and(
                                 eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
                                 eq(shoriName, ShoriName.当初所得引出.get名称()),
-                                eq(shoriEdaban, 年度内連番_1),
+                                eq(shoriEdaban, 処理枝番),
                                 eq(shichosonCode, 市町村識別ID),
                                 eq(nendo, 年度),
                                 eq(nendoNaiRenban, 年度内連番_1))).
@@ -1031,7 +1032,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(shoriName, ShoriName.所得引出.get名称()),
                                 eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
                                 eq(nendo, 年度),
-                                eq(shoriEdaban, 年度内連番_1))).
+                                eq(shoriEdaban, 処理枝番))).
                 order(by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
