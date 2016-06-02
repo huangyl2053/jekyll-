@@ -65,7 +65,7 @@ public class KyokaisoGaitoshaPanel {
     public ResponseData<KyokaisoGaitoshaPanelDiv> onLoad(KyokaisoGaitoshaPanelDiv div) {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_状態, RString.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(
-                jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.被保険者番号, TaishoshaKey.class).get被保険者番号();
+                jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
         ShikibetsuCode 識別コード = ViewStateHolder.get(
                 jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
         div.getCcdKaigoAtena().onLoad(識別コード);
