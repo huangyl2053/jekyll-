@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshomiteishutsu;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshomiteishutsu.ShujiiIkenshoMiteishutsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshomiteishutsu.ShujiiIkenshoMiteishutsuReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -60,7 +61,7 @@ public class ShujiiIkenshoMiteishutsuEditor implements IShujiiIkenshoMiteishutsu
         source.listIkemmiteishutsu_6 = dateFormat(item.get生年月日());
         source.listIkemmiteishutsu_7 = set性別(item.get性別());
         source.listIkemmiteishutsu_8 = dateFormat(item.get申請日());
-        source.listIkemmiteishutsu_9 = item.get申請区分();
+        source.listIkemmiteishutsu_9 = set申請区分(item.get申請区分());
         source.listIkemmiteishutsu_10 = item.get医療機関();
         source.listIkemmiteishutsu_11 = item.get主治医();
         source.listIkemmiteishutsu_12 = dateFormat(item.get依頼日());
@@ -76,6 +77,14 @@ public class ShujiiIkenshoMiteishutsuEditor implements IShujiiIkenshoMiteishutsu
             性別 = Seibetsu.toValue(item.get性別()).get名称();
         }
         return 性別;
+    }
+
+    private RString set申請区分(RString 申請区分申請時コード) {
+        RString 申請区分 = null;
+        if (申請区分申請時コード != null) {
+            申請区分 = NinteiShinseiShinseijiKubunCode.toValue(item.get申請区分()).get名称();
+        }
+        return 申請区分;
     }
 
     private RString getNo(int index_tmp) {
