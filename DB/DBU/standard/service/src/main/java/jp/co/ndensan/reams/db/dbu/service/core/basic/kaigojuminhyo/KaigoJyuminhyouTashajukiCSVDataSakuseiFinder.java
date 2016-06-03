@@ -741,7 +741,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             errorMsg.append(new RString("。"));
             RLogger.error(errorMsg.toRString());
         }
-        if (entity.get受給者被保険者番号() != null && entity.get受給者被保険者番号().isEmpty()) {
+        if (entity.get受給者被保険者番号() != null && !entity.get受給者被保険者番号().isEmpty()) {
             tashajukientity = get受給者被保険者番号ある(entity, tashajukientity);
         } else {
             tashajukientity = get受給者被保険者番号ない(tashajukientity);
