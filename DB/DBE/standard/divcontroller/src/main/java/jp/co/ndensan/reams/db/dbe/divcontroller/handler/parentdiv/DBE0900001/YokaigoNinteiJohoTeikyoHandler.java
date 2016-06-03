@@ -67,7 +67,7 @@ public class YokaigoNinteiJohoTeikyoHandler {
         div.getHakkoChohyo().setIsOpen(false);
         div.getNInteiRirekiInfo().setIsOpen(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnkensakuback"), false);
-        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_被保険者番号, RString.class);
         HihokenshaJyuhouBusiness 被保険者情報 = YokaigoNinteiJohoTeikyoFinder.createInstance().select被保険者情報(被保険者番号);
         if (被保険者情報 != null) {
             div.getTxtHihokenshaNo().setValue(被保険者情報.get被保険者番号());
