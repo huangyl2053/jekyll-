@@ -14,6 +14,7 @@ import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * DbT7064CareManegerテーブルのエンティティクラスです。
@@ -26,6 +27,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
  * @mainClass
  * @reference
  */
+@OnNextSchema("rgdb")
 public class DbT7064CareManegerEntity extends DbTableEntityBase<DbT7064CareManegerEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName

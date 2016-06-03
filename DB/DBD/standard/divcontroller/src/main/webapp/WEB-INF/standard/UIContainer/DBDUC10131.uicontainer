@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC10131",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "一括承認",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD1010031",
+     "toLayoutTitle": "負担限度額認定申請承認",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD1010031",
+     "layoutTitle": "負担限度額認定申請承認",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

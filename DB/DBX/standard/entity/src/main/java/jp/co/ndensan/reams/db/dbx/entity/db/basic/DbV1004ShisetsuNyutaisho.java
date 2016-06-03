@@ -1,10 +1,12 @@
 package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 介護保険施設入退所Aliveテーブルの項目定義クラスです。
  */
+@OnNextSchema("rgdb")
 public enum DbV1004ShisetsuNyutaisho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     /**

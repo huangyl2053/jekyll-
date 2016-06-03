@@ -1,11 +1,13 @@
 package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 介護事業者テーブルの項目定義クラスです。
  * <br/> 介護事業者を管理します。
  */
+@OnNextSchema("rgdb")
 public enum DbT7060KaigoJigyosha implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**

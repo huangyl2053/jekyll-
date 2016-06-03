@@ -16,11 +16,13 @@ import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 構成市町村マスタテーブルのエンティティクラスです。
  * <br/> 運用保険者単位に構成市長を管理する
  */
+@OnNextSchema("rgdb")
 public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051KoseiShichosonMasterEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 

@@ -11,10 +11,12 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 他市町村住所地特例者台帳管理Aliveテーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityBase<DbV1005KaigoJogaiTokureiTaishoShisetsuEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     @TableName

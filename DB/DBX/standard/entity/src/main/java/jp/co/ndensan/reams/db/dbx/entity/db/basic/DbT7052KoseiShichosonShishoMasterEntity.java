@@ -12,11 +12,13 @@ import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 構成市町村支所マスタテーブルのエンティティクラスです。
  * <br/> 構成・単独市町村単位の支所を管理する
  */
+@OnNextSchema("rgdb")
 public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<DbT7052KoseiShichosonShishoMasterEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 

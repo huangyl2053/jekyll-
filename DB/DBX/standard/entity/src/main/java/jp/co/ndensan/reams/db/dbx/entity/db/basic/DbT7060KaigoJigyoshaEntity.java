@@ -18,11 +18,13 @@ import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 介護事業者テーブルのエンティティクラスです。
  * <br/> 介護事業者を管理します。
  */
+@OnNextSchema("rgdb")
 public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJigyoshaEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName

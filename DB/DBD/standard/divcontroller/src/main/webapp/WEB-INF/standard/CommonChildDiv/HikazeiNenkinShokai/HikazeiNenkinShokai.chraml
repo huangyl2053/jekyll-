@@ -1,0 +1,1111 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;HikazeiNenkinShokai&quot;,&quot;businessId&quot;:&quot;DBD&quot;,&quot;controlName&quot;:&quot;HikazeiNenkinShokai&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[{&quot;key&quot;:&quot;hihokenshaNo&quot;,&quot;controlName&quot;:&quot;txtHiddenHihokenshaNo&quot;}],&quot;dialogOkEventNameForDialog&quot;:&quot;CloseOK&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCloseEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;532px&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;enterKeyAssignedControl&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBD.HikazeiNenkinShokai"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginRight-XS marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G10 UzCompositeChild" id="HikazeiNenkinShokai" style="margin-top: 0px; margin-bottom: 0px; margin-left: 0em;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;HikazeiNenkinShokai&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G10&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;HikazeiNenkinShokai&quot;,&quot;title&quot;:&quot;非課税年金照会&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;HikazeiNenkinShokai&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dbd/db/dbd/HyojunFutangakuGengaku/onLoad&quot;},{&quot;eventName&quot;:&quot;onSelect_dgHyojunFutangakuGengakuList&quot;,&quot;requestUrl&quot;:&quot;dbd/db/dbd/HyojunFutangakuGengaku/onSelect_dgHyojunFutangakuGengakuList&quot;}],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="HikazeiNenkinShokai_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">非課税年金照会</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="HikazeiNenkinShokai_panel_body_area"><div class="WithLabel TextBoxOuterDiv UzTextBoxCode JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtHihoNo" style="width: 214px; height: 23px; position: relative;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtHihoNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;selectControlID&quot;:&quot;txtHihoNo_core&quot;,&quot;jpControlName&quot;:&quot;被保番号&quot;,&quot;readOnly&quot;:true,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;被保番号&quot;}"><span class="word-wrap-break-word Label-L text-align-right Width-S" id="txtHihoNo_labelL"><span>被保番号</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Off readonlyColor" id="txtHihoNo_core" style="width: 90px;" type="text" placeholder=""></div><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlNendo" style="width: 117px; height: 23px; position: relative;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlNendo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;60px&quot;,&quot;selectControlID&quot;:&quot;ddlNendo_core&quot;,&quot;jpControlName&quot;:&quot;年度&quot;,&quot;labelLText&quot;:&quot;年度&quot;,&quot;labelLWidth&quot;:&quot;XS&quot;,&quot;selectedItem&quot;:&quot;0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;0&quot;,&quot;value&quot;:&quot;平27&quot;}],&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right Width-XS" id="ddlNendo_labelL"><span>年度</span></span><select class="CoreElement" id="ddlNendo_core" style="width: 60px;"><option value="0">平27</option></select></div><div class="UzRadioButton JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="radRireki" style="width: 223px; height: 25px;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;radRireki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;220px&quot;,&quot;selectControlID&quot;:&quot;radRireki_core&quot;,&quot;jpControlName&quot;:&quot;履歴&quot;,&quot;icon&quot;:[],&quot;dataSource&quot;:[{&quot;key&quot;:&quot;1&quot;,&quot;value&quot;:&quot;同一年金単位最新&quot;},{&quot;key&quot;:&quot;2&quot;,&quot;value&quot;:&quot;全て&quot;}],&quot;disabledItem&quot;:[]}"><span class="buttonSpan FloatLeft" id="radRireki_core" style="width: 220px;"><input class="verticalSpace-M" id="radRireki_1" type="radio" value="同一年金単位最新" data-key="1"><label for="radRireki_1" data-key="1">同一年金単位最新</label><input class="spaceSize-M verticalSpace-M" id="radRireki_2" type="radio" value="全て" data-key="2"><label for="radRireki_2" data-key="2">全て</label></span></div><button class="UzButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnSaiHyoji" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnSaiHyoji&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;btnSaiHyoji&quot;,&quot;jpControlName&quot;:&quot;再表示する&quot;,&quot;text&quot;:&quot;再表示する&quot;}"><span>再表示する</span></button><div class="UzHorizontalLine JSControl controlMargin-M Width-Default ClearFloat UzCompositeChild" id="linLine1" data-control-type="HorizontalLine" data-obj="{&quot;fieldName&quot;:&quot;linLine1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;HorizontalLine&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;linLine1&quot;}"></div><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M text-align-right UzCompositeChild" id="lblHojinHikazeiNenkinJoho" style="width: 144px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblHojinHikazeiNenkinJoho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;144px&quot;,&quot;selectControlID&quot;:&quot;lblHojinHikazeiNenkinJoho&quot;,&quot;jpControlName&quot;:&quot;本人非課税年金情報&quot;,&quot;text&quot;:&quot;本人非課税年金情報&quot;}"><span>本人非課税年金情報</span></span><div class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl controlMargin-M FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="txtShotokuKananGakugo" style="width: 718px; height: 23px; position: relative;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtShotokuKananGakugo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;110px&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;txtShotokuKananGakugo_core&quot;,&quot;jpControlName&quot;:&quot;所得勘案額合&quot;,&quot;readOnly&quot;:true,&quot;maxLength&quot;:&quot;12&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;非課税年金　所得勘案額合&quot;,&quot;labelRText&quot;:&quot;※「同一年金単位内最新」の合計額です。&quot;,&quot;labelLWidth&quot;:&quot;200px&quot;,&quot;labelRWidth&quot;:&quot;400px&quot;,&quot;maxValue&quot;:&quot;&quot;,&quot;isComma&quot;:true,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShotokuKananGakugo_labelL" style="width: 200px;"><span>非課税年金　所得勘案額合</span></span><input tabindex="-1" class="UzTextBox CoreElement ime-mode-Off text-align-right readonlyColor" id="txtShotokuKananGakugo_core" style="width: 110px;" type="text" placeholder=""><span class="word-wrap-break-word Label-R text-align-left" id="txtShotokuKananGakugo_labelR" style="width: 400px;"><span>※「同一年金単位内最新」の合計額です。</span></span></div><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS ClearFloat UzCompositeChild" id="dgHikazeiNenkinShokai" style="width: 1020px; height: 390px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgHikazeiNenkinShokai&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;1020px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;dgHikazeiNenkinShokai&quot;,&quot;jpControlName&quot;:&quot;非課税年金照会&quot;,&quot;height&quot;:&quot;390px&quot;,&quot;dataSource&quot;:[],&quot;gridSetting&quot;:{&quot;rowHeight&quot;:45,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowClearSortButton&quot;:false,&quot;isShowSelectedRowCount&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowRowState&quot;:false,&quot;columns&quot;:[{&quot;columnName&quot;:&quot;氏名&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;shimei&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:200,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;shimei&quot;},{&quot;columnName&quot;:&quot;生年月日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;seinengappi&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;disabled&quot;:false,&quot;readOnly&quot;:true,&quot;required&quot;:false,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;placeHolder&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;isShowCalendarOpenerIcon&quot;:false},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;seinengappi&quot;},{&quot;columnName&quot;:&quot;性別&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;seibetsu&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:50,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;seibetsu&quot;},{&quot;columnName&quot;:&quot;年金保険者<br>コード&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;nenkinHokenshaCode&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;nenkinHokenshaCode&quot;},{&quot;columnName&quot;:&quot;基礎年金番号&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;kisoNenkinNo&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:110,&quot;visible&quot;:true,&quot;cellType&quot;:4,&quot;cellDetails&quot;:{&quot;cellType&quot;:4,&quot;disabled&quot;:false,&quot;readOnly&quot;:true,&quot;required&quot;:false,&quot;maxLength&quot;:&quot;10&quot;,&quot;minLength&quot;:&quot;0&quot;,&quot;formatLength&quot;:&quot;1&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;placeHolder&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;permitAlphabet&quot;:false,&quot;paddingZero&quot;:true,&quot;errorMessage&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;kisoNenkinNo&quot;},{&quot;columnName&quot;:&quot;現基礎年金番号&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;genKisoNenkinNo&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:110,&quot;visible&quot;:true,&quot;cellType&quot;:4,&quot;cellDetails&quot;:{&quot;cellType&quot;:4,&quot;disabled&quot;:false,&quot;readOnly&quot;:true,&quot;required&quot;:false,&quot;maxLength&quot;:&quot;10&quot;,&quot;minLength&quot;:&quot;0&quot;,&quot;formatLength&quot;:&quot;1&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;placeHolder&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;permitAlphabet&quot;:false,&quot;paddingZero&quot;:true,&quot;errorMessage&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;genKisoNenkinNo&quot;},{&quot;columnName&quot;:&quot;年金コード&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;nenkinCode&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:4,&quot;cellDetails&quot;:{&quot;cellType&quot;:4,&quot;disabled&quot;:false,&quot;readOnly&quot;:true,&quot;required&quot;:false,&quot;maxLength&quot;:&quot;5&quot;,&quot;minLength&quot;:&quot;0&quot;,&quot;formatLength&quot;:&quot;1&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;placeHolder&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;permitAlphabet&quot;:false,&quot;paddingZero&quot;:true,&quot;errorMessage&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;nenkinCode&quot;},{&quot;columnName&quot;:&quot;金額&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;kingaku&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:110,&quot;visible&quot;:true,&quot;cellType&quot;:5,&quot;cellDetails&quot;:{&quot;cellType&quot;:5,&quot;disabled&quot;:false,&quot;readOnly&quot;:true,&quot;required&quot;:false,&quot;maxLength&quot;:&quot;12&quot;,&quot;minLength&quot;:&quot;0&quot;,&quot;maxValue&quot;:&quot;999999999999&quot;,&quot;minValue&quot;:&quot;0&quot;,&quot;isCurrency&quot;:false,&quot;isComma&quot;:true,&quot;decimalPointLength&quot;:&quot;0&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;placeHolder&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false},&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;kingaku&quot;},{&quot;columnName&quot;:&quot;通知内容&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;tsuchiNaiyo&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;tsuchiNaiyo&quot;},{&quot;columnName&quot;:&quot;作成（登録）<br>年月日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;sakuseiDate&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;disabled&quot;:false,&quot;readOnly&quot;:true,&quot;required&quot;:false,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;placeHolder&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;isShowCalendarOpenerIcon&quot;:false},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;sakuseiDate&quot;},{&quot;columnName&quot;:&quot;訂正表示&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;teiseiHyoji&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;teiseiHyoji&quot;},{&quot;columnName&quot;:&quot;各種区分&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;kakushuKubun&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;kakushuKubun&quot;},{&quot;columnName&quot;:&quot;処理結果&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;shoriKekka&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;shoriKekka&quot;},{&quot;columnName&quot;:&quot;住所&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;jusho&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:300,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;jusho&quot;},{&quot;columnName&quot;:&quot;登録区分&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;torokuKubun&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;torokuKubun&quot;}],&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;kingaku&quot;,&quot;headerHeight&quot;:1,&quot;groupHeaderHeight&quot;:0},&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;isShowCancelButtonColumn&quot;:false,&quot;isErrorAndWarningColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;cancelButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgHikazeiNenkinShokai_grid_table" role="" style="width: 1020px; height: 365px; position: relative;"></div><div id="dgHikazeiNenkinShokai_footer" style="width: 1020px; height: 25px;"></div></div><button title="" class="UzButton JSControl controlMargin-M ClearFloat FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnClose" style="width: 120px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnClose&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;120px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnClose&quot;,&quot;onClick&quot;:&quot;CloseOK&quot;,&quot;text&quot;:&quot;閉じる&quot;}"><span>閉じる</span></button></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBD;
+(function (DBD) {
+    (function (HyojunFutangakuGengaku) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "CloseOK", {
+                get: function () {
+                    return "CloseOK";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelect_dgHyojunFutangakuGengakuList", {
+                get: function () {
+                    return "onSelect_dgHyojunFutangakuGengakuList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        HyojunFutangakuGengaku.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "HyojunFutangakuGengaku";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.HyojunFutangakuGengaku = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtHiddenHihokenshaNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtHiddenHihokenshaNo"));
+            };
+
+            Controls.prototype.dgHyojunFutangakuGengakuList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgHyojunFutangakuGengakuList"));
+            };
+
+            Controls.prototype.HyojunFutangakuGemmenDetail = function () {
+                return new UZA.Panel(this.convFiledName("HyojunFutangakuGemmenDetail"));
+            };
+
+            Controls.prototype.txtShinseiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinseiDate"));
+            };
+
+            Controls.prototype.HyojunFutangakuGemmenRiyoshaFutan = function () {
+                return new UZA.Panel(this.convFiledName("HyojunFutangakuGemmenRiyoshaFutan"));
+            };
+
+            Controls.prototype.txtKetteiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKetteiDate"));
+            };
+
+            Controls.prototype.txtKetteiKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtKetteiKubun"));
+            };
+
+            Controls.prototype.txtTekiyoDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoDate"));
+            };
+
+            Controls.prototype.txtYukokigenDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukokigenDate"));
+            };
+
+            Controls.prototype.txtGengakuKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtGengakuKubun"));
+            };
+
+            Controls.prototype.txtFutangaku = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtFutangaku"));
+            };
+
+            Controls.prototype.txtFushoninRiyu = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtFushoninRiyu"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        HyojunFutangakuGengaku.Controls = Controls;
+    })(DBD.HyojunFutangakuGengaku || (DBD.HyojunFutangakuGengaku = {}));
+    var HyojunFutangakuGengaku = DBD.HyojunFutangakuGengaku;
+
+    var HyojunFutangakuGengaku_Design = (function (_super) {
+        __extends(HyojunFutangakuGengaku_Design, _super);
+        function HyojunFutangakuGengaku_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, HyojunFutangakuGengaku_Design.myLayout, fieldName);
+        }
+        HyojunFutangakuGengaku_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        HyojunFutangakuGengaku_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        HyojunFutangakuGengaku_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "HyojunFutangakuGengaku",
+                    "items": [
+                        {
+                            "fieldName": "txtHiddenHihokenshaNo",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "XS",
+                            "visible": false,
+                            "displayNone": true,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtHiddenHihokenshaNo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "dgHyojunFutangakuGengakuList",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "910",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "dgHyojunFutangakuGengakuList",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "185",
+                            "gridSetting": {
+                                "rowHeight": 25,
+                                "isMultiSelectable": false,
+                                "isShowHeader": true,
+                                "isShowFooter": true,
+                                "isShowFilter": false,
+                                "isShowFilterButton": false,
+                                "isShowRowState": false,
+                                "isShowSelectButtonColumn": false,
+                                "isShowModifyButtonColumn": false,
+                                "isShowDeleteButtonColumn": false,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
+                                "header": {
+                                    "combineColumns": [],
+                                    "frozenColumn": "",
+                                    "headerHeight": 1
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "申請日",
+                                        "dataName": "shinseiDate",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": ""
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shinseiDate"
+                                    },
+                                    {
+                                        "columnName": "適用日",
+                                        "dataName": "tekiyoDate",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": ""
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "tekiyoDate"
+                                    },
+                                    {
+                                        "columnName": "有効期限<br>",
+                                        "dataName": "yukoKigen",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": ""
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "yukoKigen"
+                                    },
+                                    {
+                                        "columnName": "決定区分",
+                                        "dataName": "ketteiKubun",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ketteiKubun"
+                                    },
+                                    {
+                                        "columnName": "決定日",
+                                        "dataName": "ketteiDate",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": ""
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ketteiDate"
+                                    },
+                                    {
+                                        "columnName": "標準<br>負担額",
+                                        "dataName": "futangaku",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 75,
+                                        "visible": true,
+                                        "cellType": 5,
+                                        "cellDetails": {
+                                            "cellType": 5,
+                                            "maxLength": "5",
+                                            "minLength": "0",
+                                            "maxValue": "99999",
+                                            "minValue": "0",
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": "0",
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": false
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "futangaku"
+                                    },
+                                    {
+                                        "columnName": "減額区分",
+                                        "dataName": "gengakuKubun",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 130,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "gengakuKubun"
+                                    },
+                                    {
+                                        "columnName": "承認しない理由",
+                                        "dataName": "fushoninRiyu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 265,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "fushoninRiyu"
+                                    }
+                                ]
+                            },
+                            "onSort": "",
+                            "onSelect": "onSelect_dgHyojunFutangakuGengakuList",
+                            "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "futangaku",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1
+                        },
+                        {
+                            "fieldName": "HyojunFutangakuGemmenDetail",
+                            "items": [
+                                {
+                                    "fieldName": "txtShinseiDate",
+                                    "items": [],
+                                    "controlType": "TextBoxFlexibleDate",
+                                    "width": "80",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "S",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShinseiDate_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "value": "",
+                                    "labelLText": "申請日",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "HyojunFutangakuGemmenRiyoshaFutan",
+                                    "items": [
+                                        {
+                                            "fieldName": "txtKetteiDate",
+                                            "items": [],
+                                            "controlType": "TextBoxFlexibleDate",
+                                            "width": "80",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtKetteiDate_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "value": "",
+                                            "labelLText": "決定日",
+                                            "labelRText": "",
+                                            "labelLWidth": "S",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "permitCharactor": "./_-"
+                                        },
+                                        {
+                                            "fieldName": "txtKetteiKubun",
+                                            "items": [],
+                                            "controlType": "TextBox",
+                                            "width": "75",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtKetteiKubun_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 0,
+                                            "placeHolder": "",
+                                            "textKind": 0,
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "isComboBox": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "suggest": [],
+                                            "value": "",
+                                            "labelLText": "決定区分",
+                                            "labelRText": "",
+                                            "labelLWidth": "167",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "decorationClass": "",
+                                            "permitCharactor": ""
+                                        },
+                                        {
+                                            "fieldName": "txtTekiyoDate",
+                                            "items": [],
+                                            "controlType": "TextBoxFlexibleDate",
+                                            "width": "80",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtTekiyoDate_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "value": "",
+                                            "labelLText": "適用日",
+                                            "labelRText": "",
+                                            "labelLWidth": "90",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "permitCharactor": "./_-"
+                                        },
+                                        {
+                                            "fieldName": "txtYukokigenDate",
+                                            "items": [],
+                                            "controlType": "TextBoxFlexibleDate",
+                                            "width": "80",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtYukokigenDate_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "value": "",
+                                            "labelLText": "有効期限",
+                                            "labelRText": "",
+                                            "labelLWidth": "90",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "permitCharactor": "./_-"
+                                        },
+                                        {
+                                            "fieldName": "txtGengakuKubun",
+                                            "items": [],
+                                            "controlType": "TextBox",
+                                            "width": "130",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtGengakuKubun_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 0,
+                                            "placeHolder": "",
+                                            "textKind": 0,
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "isComboBox": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "suggest": [],
+                                            "value": "",
+                                            "labelLText": "減額区分",
+                                            "labelRText": "",
+                                            "labelLWidth": "S",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "decorationClass": "",
+                                            "permitCharactor": ""
+                                        },
+                                        {
+                                            "fieldName": "txtFutangaku",
+                                            "items": [],
+                                            "controlType": "TextBoxNum",
+                                            "width": "40",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtFutangaku_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 2,
+                                            "placeHolder": "",
+                                            "textKind": 2,
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "isComboBox": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "suggest": [],
+                                            "value": "",
+                                            "labelLText": "標準負担額",
+                                            "labelRText": "円/日",
+                                            "labelLWidth": "S",
+                                            "labelRWidth": "48",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "decorationClass": "",
+                                            "maxValue": 1.7976931348623157e+308,
+                                            "minValue": 0,
+                                            "isCurrency": false,
+                                            "isComma": false,
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
+                                        },
+                                        {
+                                            "fieldName": "txtFushoninRiyu",
+                                            "items": [],
+                                            "controlType": "TextBoxMultiLine",
+                                            "width": "750",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtFushoninRiyu_text_area",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "height": "XS",
+                                            "required": false,
+                                            "maxLength": "200",
+                                            "minLength": 0,
+                                            "placeHolder": "",
+                                            "textKind": 0,
+                                            "isPrivateInfo": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "value": "",
+                                            "labelLText": "承認しない理由",
+                                            "labelRText": "",
+                                            "labelLWidth": "S",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "limitLength": "200",
+                                            "countDisp": false
+                                        }
+                                    ],
+                                    "controlType": "Panel",
+                                    "width": "892",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "HyojunFutangakuGemmenRiyoshaFutan",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "onLoad": "",
+                                    "title": "利用者負担",
+                                    "marginTop": "Default",
+                                    "marginBottom": "Default",
+                                    "isOpen": true,
+                                    "canOpenAndClose": false,
+                                    "postParameterPanelNames": [
+                                        {
+                                            "postParameterPanelNames": "HyojunFutangakuGemmenRiyoshaFutan"
+                                        }
+                                    ],
+                                    "requestSettings": [],
+                                    "hiddenInput": [],
+                                    "onOpen": "",
+                                    "onClose": "",
+                                    "session": {},
+                                    "eraseBorder": false,
+                                    "backgroundColor": 0,
+                                    "widthAuto": false,
+                                    "panelDisplay": 1,
+                                    "isGroupBox": false,
+                                    "readOnly": false,
+                                    "height": "Auto"
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "910",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "HyojunFutangakuGemmenDetail",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "詳細",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": true,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "HyojunFutangakuGemmenDetail"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": false,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 0,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto"
+                        },
+                        {
+                            "fieldName": "btnClose",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 1,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnClose",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "閉じる",
+                            "onClick": "CloseOK",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G10",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0",
+                    "marginRight": "XS",
+                    "selectControlID": "HyojunFutangakuGengaku",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "標準負担額減額",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "HyojunFutangakuGengaku"
+                        }
+                    ],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": "dbd/db/dbd/HyojunFutangakuGengaku/onLoad"
+                        },
+                        {
+                            "eventName": "onSelect_dgHyojunFutangakuGengakuList",
+                            "requestUrl": "dbd/db/dbd/HyojunFutangakuGengaku/onSelect_dgHyojunFutangakuGengakuList"
+                        }
+                    ],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "450"
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "businessId": "DBD",
+            "controlName": "HyojunFutangakuGengaku",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [],
+            "dataPassingForDialog": [
+                {
+                    "key": "hihokenshaNo",
+                    "controlName": "txtHiddenHihokenshaNo"
+                }
+            ],
+            "dialogOkEventNameForDialog": "CloseOK",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "490"
+        };
+        return HyojunFutangakuGengaku_Design;
+    })(Uz.CommonChildDiv);
+    DBD.HyojunFutangakuGengaku_Design = HyojunFutangakuGengaku_Design;
+})(DBD || (DBD = {}));
+
+var DBD;
+(function (DBD) {
+    (function (HyojunFutangakuGengaku) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new HyojunFutangakuGengaku.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        HyojunFutangakuGengaku.ModeController = ModeController;
+    })(DBD.HyojunFutangakuGengaku || (DBD.HyojunFutangakuGengaku = {}));
+    var HyojunFutangakuGengaku = DBD.HyojunFutangakuGengaku;
+})(DBD || (DBD = {}));
+
+var DBD;
+(function (DBD) {
+    (function (HyojunFutangakuGengaku) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new HyojunFutangakuGengaku.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        HyojunFutangakuGengaku.PublicProperties = PublicProperties;
+    })(DBD.HyojunFutangakuGengaku || (DBD.HyojunFutangakuGengaku = {}));
+    var HyojunFutangakuGengaku = DBD.HyojunFutangakuGengaku;
+})(DBD || (DBD = {}));
+</script>
+  
+     
+         
+     
+   
+     <script class="RamlConvert" type="text/javascript">
+var DBD= DBD? DBD: {};
+DBD['HIKAZEINENKINSHOKAI'] = {};
+DBD['HIKAZEINENKINSHOKAI'].HikazeiNenkinShokaiRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_HikazeiNenkinShokai').getProperty();parameter0.txtHihoNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHihoNo').getProperty();parameter0.ddlNendo = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlNendo').getProperty();parameter0.radRireki = Uz.JSControlUtil.getJSControl(parentFieldName + '_radRireki').getProperty();parameter0.btnSaiHyoji = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnSaiHyoji').getProperty();parameter0.linLine1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_linLine1').getProperty();parameter0.lblHojinHikazeiNenkinJoho = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblHojinHikazeiNenkinJoho').getProperty();parameter0.txtShotokuKananGakugo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShotokuKananGakugo').getProperty();parameter0.dgHikazeiNenkinShokai = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgHikazeiNenkinShokai').getProperty();parameter0.btnClose = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnClose').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBD;
+(function (DBD) {
+    (function (HikazeiNenkinShokai) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.CloseOK = function () {
+                return "CloseOK";
+            };
+            return Events;
+        })();
+        HikazeiNenkinShokai.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "HikazeiNenkinShokai";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBD.HikazeiNenkinShokai.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBD.HikazeiNenkinShokai.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.HikazeiNenkinShokai = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtHihoNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtHihoNo"));
+            };
+
+            Controls.prototype.ddlNendo = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlNendo"));
+            };
+
+            Controls.prototype.radRireki = function () {
+                return new UZA.RadioButton(this.convFiledName("radRireki"));
+            };
+
+            Controls.prototype.btnSaiHyoji = function () {
+                return new UZA.Button(this.convFiledName("btnSaiHyoji"));
+            };
+
+            Controls.prototype.linLine1 = function () {
+                return new UZA.HorizontalLine(this.convFiledName("linLine1"));
+            };
+
+            Controls.prototype.lblHojinHikazeiNenkinJoho = function () {
+                return new UZA.Label(this.convFiledName("lblHojinHikazeiNenkinJoho"));
+            };
+
+            Controls.prototype.txtShotokuKananGakugo = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtShotokuKananGakugo"));
+            };
+
+            Controls.prototype.dgHikazeiNenkinShokai = function () {
+                return new UZA.DataGrid(this.convFiledName("dgHikazeiNenkinShokai"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+            return Controls;
+        })();
+        HikazeiNenkinShokai.Controls = Controls;
+    })(DBD.HikazeiNenkinShokai || (DBD.HikazeiNenkinShokai = {}));
+    var HikazeiNenkinShokai = DBD.HikazeiNenkinShokai;
+})(DBD || (DBD = {}));
+var DBD;
+(function (DBD) {
+    (function (HikazeiNenkinShokai) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new HikazeiNenkinShokai.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new HikazeiNenkinShokai.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        HikazeiNenkinShokai.ModeController = ModeController;
+    })(DBD.HikazeiNenkinShokai || (DBD.HikazeiNenkinShokai = {}));
+    var HikazeiNenkinShokai = DBD.HikazeiNenkinShokai;
+})(DBD || (DBD = {}));
+
+var DBD;
+(function (DBD) {
+    (function (HikazeiNenkinShokai) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new HikazeiNenkinShokai.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        HikazeiNenkinShokai.PublicProperties = PublicProperties;
+    })(DBD.HikazeiNenkinShokai || (DBD.HikazeiNenkinShokai = {}));
+    var HikazeiNenkinShokai = DBD.HikazeiNenkinShokai;
+})(DBD || (DBD = {}));
+</script></div>
