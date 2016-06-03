@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 主治医意見書依頼未処理者一覧表のReportです。
+ * 主治医意見書依頼済み一覧表のReportです。
  *
- * @reamsid_L DBE-1390-130 suguangjun
+ * @reamsid_L DBE-1390-160 suguangjun
  */
 public class ShujiiIkenshoIraiSumiReport extends Report<ShujiiIkenshoIraiSumiReportSource> {
 

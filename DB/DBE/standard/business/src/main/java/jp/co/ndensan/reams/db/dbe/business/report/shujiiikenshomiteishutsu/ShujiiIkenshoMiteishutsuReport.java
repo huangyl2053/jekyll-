@@ -39,7 +39,7 @@ public class ShujiiIkenshoMiteishutsuReport extends Report<ShujiiIkenshoMiteishu
         }
         if (data.isEmpty()) {
             ShujiiIkenshoMiteishutsuEntity entity = new ShujiiIkenshoMiteishutsuEntity();
-            entity.set保険者名(new RString("該当データがありません"));
+            entity.set氏名(new RString("該当データがありません"));
             IShujiiIkenshoMiteishutsuEditor editor = new ShujiiIkenshoMiteishutsuEditor(entity, -1);
             IShujiiIkenshoMiteishutsuBuilder builder = new ShujiiIkenshoMiteishutsuBuilder(editor);
             reportSourceWriter.writeLine(builder);
