@@ -206,16 +206,16 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
             if (データ種別_被保険者台帳.equals(entity.get対象情報タイトル())) {
                 entity.set取得情報_前_事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get取得情報_前_事由()));
                 entity.set取得情報_後_事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get取得情報_後_事由()));
-                entity.set喪失情報_前_事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get喪失情報_前_事由()));
-                entity.set喪失情報_後_事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get喪失情報_後_事由()));
+                entity.set喪失情報_前_事由(getCodeNameByCode(DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(), entity.get喪失情報_前_事由()));
+                entity.set喪失情報_後_事由(getCodeNameByCode(DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(), entity.get喪失情報_後_事由()));
             } else if (データ種別_他市町村住所地特例者台帳.equals(entity.get対象情報タイトル())) {
                 entity.set取得情報_前_事由(getCodeNameByCode(DBACodeShubetsu.介護資格適用事由_他特例者.getコード(), entity.get取得情報_前_事由()));
                 entity.set取得情報_後_事由(getCodeNameByCode(DBACodeShubetsu.介護資格適用事由_他特例者.getコード(), entity.get取得情報_後_事由()));
-                entity.set喪失情報_前_事由(getCodeNameByCode(DBACodeShubetsu.介護資格適用事由_他特例者.getコード(), entity.get喪失情報_前_事由()));
-                entity.set喪失情報_後_事由(getCodeNameByCode(DBACodeShubetsu.介護資格適用事由_他特例者.getコード(), entity.get喪失情報_後_事由()));
+                entity.set喪失情報_前_事由(getCodeNameByCode(DBACodeShubetsu.介護資格解除事由_他特例者.getコード(), entity.get喪失情報_前_事由()));
+                entity.set喪失情報_後_事由(getCodeNameByCode(DBACodeShubetsu.介護資格解除事由_他特例者.getコード(), entity.get喪失情報_後_事由()));
             } else if (データ種別_適用除外者台帳.equals(entity.get対象情報タイトル())) {
-                entity.set取得情報_前_事由(getCodeNameByCode(DBACodeShubetsu.介護資格解除事由_除外者.getコード(), entity.get取得情報_前_事由()));
-                entity.set取得情報_後_事由(getCodeNameByCode(DBACodeShubetsu.介護資格解除事由_除外者.getコード(), entity.get取得情報_後_事由()));
+                entity.set取得情報_前_事由(getCodeNameByCode(DBACodeShubetsu.介護資格適用事由_除外者.getコード(), entity.get取得情報_前_事由()));
+                entity.set取得情報_後_事由(getCodeNameByCode(DBACodeShubetsu.介護資格適用事由_除外者.getコード(), entity.get取得情報_後_事由()));
                 entity.set喪失情報_前_事由(getCodeNameByCode(DBACodeShubetsu.介護資格解除事由_除外者.getコード(), entity.get喪失情報_前_事由()));
                 entity.set喪失情報_後_事由(getCodeNameByCode(DBACodeShubetsu.介護資格解除事由_除外者.getコード(), entity.get喪失情報_後_事由()));
             }
