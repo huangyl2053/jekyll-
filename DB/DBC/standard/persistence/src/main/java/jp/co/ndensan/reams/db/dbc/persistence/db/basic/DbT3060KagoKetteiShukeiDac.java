@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 過誤決定集計のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-0980-301 surun
  */
 public class DbT3060KagoKetteiShukeiDac implements ISaveable<DbT3060KagoKetteiShukeiEntity> {
 

@@ -27,12 +27,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class KagoKetteiHokenshaInMasterInsert {
 
     private static final RString 再処理 = new RString("1");
-    private static final RString 交換情報識別番号ONE = new RString("171");
-    private static final RString 交換情報識別番号TWO = new RString("651");
-    private static final RString 交換情報識別番号THREE = new RString("175");
-    private static final RString 交換情報識別番号FOUR = new RString("177");
-    private static final RString 交換情報識別番号FIVE = new RString("661");
-    private static RString 保険者区分KEY = new RString("保険者区分");
+    private static final RString 交換情報識別番号171 = new RString("171");
+    private static final RString 交換情報識別番号651 = new RString("651");
+    private static final RString 交換情報識別番号175 = new RString("175");
+    private static final RString 交換情報識別番号177 = new RString("177");
+    private static final RString 交換情報識別番号661 = new RString("661");
     private static final RString 保険者 = new RString("1");
     private static final RString 公費負担者 = new RString("2");
     private static final RString 総合事業費経過措置保険者 = new RString("3");
@@ -126,15 +125,16 @@ public class KagoKetteiHokenshaInMasterInsert {
     }
 
     private RString 保険者区分を設定(RString 交換情報識別番号) {
-        if (交換情報識別番号ONE.equals(交換情報識別番号)) {
+        RString 保険者区分KEY = new RString("保険者区分");
+        if (交換情報識別番号171.equals(交換情報識別番号)) {
             保険者区分KEY = 保険者;
-        } else if (交換情報識別番号TWO.equals(交換情報識別番号)) {
+        } else if (交換情報識別番号651.equals(交換情報識別番号)) {
             保険者区分KEY = 公費負担者;
-        } else if (交換情報識別番号THREE.equals(交換情報識別番号)) {
+        } else if (交換情報識別番号175.equals(交換情報識別番号)) {
             保険者区分KEY = 総合事業費経過措置保険者;
-        } else if (交換情報識別番号FOUR.equals(交換情報識別番号)) {
+        } else if (交換情報識別番号177.equals(交換情報識別番号)) {
             保険者区分KEY = 総合事業費保険者;
-        } else if (交換情報識別番号FIVE.equals(交換情報識別番号)) {
+        } else if (交換情報識別番号661.equals(交換情報識別番号)) {
             保険者区分KEY = 総合事業費公費負担者;
         }
         return 保険者区分KEY;
