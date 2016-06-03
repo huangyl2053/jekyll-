@@ -114,7 +114,7 @@ public class DbT2009RentaiGimushaDac implements ISaveable<DbT2009RentaiGimushaEn
      * @param 開始年月日 FlexibleDate
      * @param 終了年月日 FlexibleDate
      * @return 連帯納付義務者宛名情報
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT2009RentaiGimushaEntity selectBy連帯納付義務者宛名情報_削除(
@@ -140,7 +140,7 @@ public class DbT2009RentaiGimushaDac implements ISaveable<DbT2009RentaiGimushaEn
      *
      * @param 被保険者番号 HihokenshaNo
      * @return DbT2009RentaiGimushaEntity
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT2009RentaiGimushaEntity selectBy連帯納付義務者_履歴番号(

@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbb.service.core.rentainofugimusha;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.RentaiGimusha;
+import jp.co.ndensan.reams.db.dbb.business.core.rentainofugimusha.AtenaJouhou;
+import jp.co.ndensan.reams.db.dbb.business.core.rentainofugimusha.RentaiGimushaAtenaJouhou;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2009RentaiGimushaEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2009RentaiGimushaDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.service.core.saihakkofinder;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.saihakkofinder.SaiHakko;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.saihakkofinder.SaiHakkoEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.saihakkofinder.ISaiHakkoFinderMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
