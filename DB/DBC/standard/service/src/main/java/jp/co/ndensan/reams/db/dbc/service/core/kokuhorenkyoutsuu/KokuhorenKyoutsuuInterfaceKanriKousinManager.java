@@ -6,9 +6,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3104KokuhorenInterfaceKanriDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -88,8 +88,8 @@ public class KokuhorenKyoutsuuInterfaceKanriKousinManager {
             entity.setCtrlShoriYM(処理対象年月);
             entity.setState(EntityDataState.Modified);
         } else {
-            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().
-                    replace(ERROR_MESSAGE.toString()));
+            throw new BatchInterruptedException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().
+                    replace(ERROR_MESSAGE.toString()).toString());
         }
         return 1 == 国保連インターフェース管理Dac.save(entity);
     }

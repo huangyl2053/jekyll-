@@ -13,11 +13,11 @@ import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -52,11 +52,11 @@ public final class KokuhorenKyoutsuuFileGetManager {
             entityList = SharedFile.searchSharedFile(PREFIX.concat(交換情報識別番号));
         } catch (Exception ex) {
             Logger.getLogger(KokuhorenKyoutsuuFileGetManager.class.getName()).log(Level.SEVERE, null, ex.getMessage());
-            return result;
+            throw new BatchInterruptedException(ex.getMessage());
         }
         if (null == entityList || entityList.isEmpty()) {
-            throw new ApplicationException(DbcErrorMessages.取込対象ファイルが存在しない.getMessage()
-                    .replace(PREFIX.concat(交換情報識別番号).toString()));
+            throw new BatchInterruptedException(DbcErrorMessages.取込対象ファイルが存在しない.getMessage()
+                    .replace(PREFIX.concat(交換情報識別番号).toString()).toString());
         }
 
         for (UzT0885SharedFileEntryEntity entity : entityList) {
@@ -68,7 +68,7 @@ public final class KokuhorenKyoutsuuFileGetManager {
                 result.set保存先フォルダのパス(保存先フォルダのパス);
             } catch (Exception ex) {
                 Logger.getLogger(KokuhorenKyoutsuuFileGetManager.class.getName()).log(Level.SEVERE, null, ex);
-                return result;
+                throw new BatchInterruptedException(ex.getMessage());
             }
         }
         result.setEntityList(entityList);

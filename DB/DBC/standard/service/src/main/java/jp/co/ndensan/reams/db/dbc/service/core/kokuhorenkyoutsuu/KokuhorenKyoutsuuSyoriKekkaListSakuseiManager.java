@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.SyoriKekkaL
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -19,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -81,8 +81,8 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
      */
     public void create国保連情報データ取込処理結果リスト(KokuhorenJoho_TorikomiErrorListType エラーリストタイプ) {
         if (null == エラーリストタイプ) {
-            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(
-                    MSG_国保連情報取込エラーリストタイプ.toString()));
+            throw new BatchInterruptedException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(
+                    MSG_国保連情報取込エラーリストタイプ.toString()).toString());
         }
         RString key1 = エラーリストタイプ.getキー1();
         RString key2 = エラーリストタイプ.getキー2();
@@ -145,8 +145,8 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
                     entity.setエラー内容(KokuhorenJoho_TorikomiErrorKubun.getエラーメッセージ(data.getエラー区分()));
                 } catch (IllegalArgumentException ex) {
                     Logger.getLogger(KokuhorenKyoutsuuSyoriKekkaListSakuseiManager.class.getName()).log(Level.SEVERE, null, ex);
-                    throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(
-                            MSG_国保連情報取込エラー区分.toString()));
+                    throw new BatchInterruptedException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(
+                            MSG_国保連情報取込エラー区分.toString()).toString());
                 }
                 csvEntityList.add(entity);
             }
