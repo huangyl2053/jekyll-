@@ -111,9 +111,7 @@ public class TajutokuIdoTeisei {
         TaShichosonJushochiTokureisyaIdoTeiseiParamter paramter = new TaShichosonJushochiTokureisyaIdoTeiseiParamter(
                 入退所データリスト,
                 適用情報グリッド);
-        if (適用情報グリッド != null && !適用情報グリッド.isEmpty()) {
-            TaShichosonJushochiTokureisyaIdoTeisei.createInstance().is適用状態のチェック(paramter);
-        }
+        TaShichosonJushochiTokureisyaIdoTeisei.createInstance().is適用状態のチェック(paramter);
         requestDiv.getTajutokuIdoTeiseiIdoJoho().getCcdTaJushochiTokureishaKanri().saveTaJushochiTokurei(
                 ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
         requestDiv.getTajutokuIdoTeiseiIdoJoho().getShisetsuIdoJoho().getCcdShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
