@@ -307,9 +307,13 @@ public enum ReportIdDBE {
      */
     DBE013003(new ReportId("DBE013003_ShujiiIkenshoMiteishutsu"), new RString("主治医意見書未提出者一覧表")),
     /**
-     * 主治医意見書未提出者一覧表の帳票ＩＤです。
+     * 主治医意見書未処理者一覧表の帳票ＩＤです。
      */
-    DBE013001(new ReportId("DBE013001_ShujiiIkenshoMiIrai"), new RString("主治医意見書依頼未処理者一覧表"));
+    DBE013001(new ReportId("DBE013001_ShujiiIkenshoMiIrai"), new RString("主治医意見書依頼未処理者一覧表")),
+    /**
+     * 主治医意見書未処理者一覧表の帳票ＩＤです。
+     */
+    DBE013004(new ReportId("DBE013004_ShujiiIkenshoIraiSumi"), new RString("主治医意見書依頼済み一覧表"));
 
     private final ReportId reportId;
 
