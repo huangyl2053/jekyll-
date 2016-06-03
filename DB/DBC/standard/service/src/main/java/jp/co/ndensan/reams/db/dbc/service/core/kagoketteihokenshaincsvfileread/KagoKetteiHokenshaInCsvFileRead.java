@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.KagoKetteiHoke
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.KagoKetteiHokenshaInGokeiCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.KagoKetteiHokenshaInHeadCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.KagoKetteiHokenshaInMeisaiCsvEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kagoketteihokenshaincsvfileread.IKagoKetteiHokenshaInMapperCsvFileRead;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kagoketteihokenshaincsvfileread.IKagoKetteiHokenshaInCsvFileReadMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -96,7 +96,7 @@ public class KagoKetteiHokenshaInCsvFileRead {
      */
     @Transaction
     public FlowEntity 一時TBL作成と読込と登録(FlexibleYearMonth 処理年月, RString 保存先フォルダ, List<RString> エントリ情報List) {
-        IKagoKetteiHokenshaInMapperCsvFileRead mapper = this.mapperProvider.create(IKagoKetteiHokenshaInMapperCsvFileRead.class);
+        IKagoKetteiHokenshaInCsvFileReadMapper mapper = this.mapperProvider.create(IKagoKetteiHokenshaInCsvFileReadMapper.class);
         mapper.create過誤決定集計一時TBL();
         mapper.create過誤決定明細一時TBL();
         mapper.create被保険者一時TBL();
@@ -121,7 +121,7 @@ public class KagoKetteiHokenshaInCsvFileRead {
 
     @Transaction
     private FlowEntity 取込件数確認(List<KagoKetteiHokenshaInCsvEntity> csvlist) {
-        IKagoKetteiHokenshaInMapperCsvFileRead mapper = this.mapperProvider.create(IKagoKetteiHokenshaInMapperCsvFileRead.class);
+        IKagoKetteiHokenshaInCsvFileReadMapper mapper = this.mapperProvider.create(IKagoKetteiHokenshaInCsvFileReadMapper.class);
         DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
         FlowEntity getEntity = バッチフロ(csvlist);
         int レコード件数合算 = getEntity.getCodeNum();
@@ -148,7 +148,7 @@ public class KagoKetteiHokenshaInCsvFileRead {
 
     @Transaction
     private void 過誤決定集計一時TBLに登録(FlexibleYearMonth 処理年月, List<KagoKetteiHokenshaInCsvEntity> csvlist) {
-        IKagoKetteiHokenshaInMapperCsvFileRead mapper = this.mapperProvider.create(IKagoKetteiHokenshaInMapperCsvFileRead.class);
+        IKagoKetteiHokenshaInCsvFileReadMapper mapper = this.mapperProvider.create(IKagoKetteiHokenshaInCsvFileReadMapper.class);
         int 連番 = INDEX_0;
         for (int i = INDEX_0; i < csvlist.size(); i++) {
             KagoKetteiHokenshaInCsvEntity csvEntity = csvlist.get(i);
@@ -203,8 +203,8 @@ public class KagoKetteiHokenshaInCsvFileRead {
 
     @Transaction
     private void 過誤決定明細一時TBLに登録(FlexibleYearMonth 処理年月, List<KagoKetteiHokenshaInCsvEntity> csvlist) {
-        IKagoKetteiHokenshaInMapperCsvFileRead mapper = this.mapperProvider.create(IKagoKetteiHokenshaInMapperCsvFileRead.class);
-        int 連番 = INDEX_0;
+        IKagoKetteiHokenshaInCsvFileReadMapper mapper = this.mapperProvider.create(IKagoKetteiHokenshaInCsvFileReadMapper.class);
+        int 連番 = 100;
         for (int i = INDEX_0; i < csvlist.size(); i++) {
             KagoKetteiHokenshaInCsvEntity csvEntity = csvlist.get(i);
             List<KagoKetteiHokenshaInDataEntity> listDataEntity = csvEntity.getListDataEntity();
@@ -260,7 +260,7 @@ public class KagoKetteiHokenshaInCsvFileRead {
     @Transaction
     private void 被保険者一時TBLに登録(int 連番, KagoKetteiHokenshaInDataEntity dataEntity,
             KagoKetteiHokenshaInMeisaiCsvEntity meisaiCsvEntity) {
-        IKagoKetteiHokenshaInMapperCsvFileRead mapper = this.mapperProvider.create(IKagoKetteiHokenshaInMapperCsvFileRead.class);
+        IKagoKetteiHokenshaInCsvFileReadMapper mapper = this.mapperProvider.create(IKagoKetteiHokenshaInCsvFileReadMapper.class);
         DbWT0001HihokenshaTempEntity hihokenshaTempentity = new DbWT0001HihokenshaTempEntity();
         hihokenshaTempentity.set連番(連番);
         hihokenshaTempentity.set証記載保険者番号(new ShoKisaiHokenshaNo(dataEntity.getHeadCsvEntity().getShoKisaiHokenshaNo().substring(2)));
