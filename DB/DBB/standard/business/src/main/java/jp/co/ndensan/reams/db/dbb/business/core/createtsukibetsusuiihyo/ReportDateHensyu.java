@@ -66,6 +66,10 @@ public class ReportDateHensyu {
         entity.set保険者名(保険者名);
         entity.set保険者番号(保険者番号);
         entity.set徴収方法Title(徴収方法);
+        if (koumokuGoukeyList == null || koumokuGoukeyList.isEmpty()) {
+            entity.set人数_1段階_4月(new RString("該当者無し"));
+            return entity;
+        }
         int listLength = koumokuGoukeyList.size();
         if (listLength > 0) {
             entity.set人数_1段階_Title(koumokuGoukeyList.get(0).getHokenryoDankai());
@@ -909,6 +913,10 @@ public class ReportDateHensyu {
         entity.set保険者名(保険者名);
         entity.set保険者番号(保険者番号);
         entity.set徴収方法Title(徴収方法);
+        if (gemmenJyohoList == null || gemmenJyohoList.isEmpty()) {
+            entity.set人数_1段階_4月(new RString("該当者無し"));
+            return entity;
+        }
         int listLength = gemmenJyohoList.size();
         if (listLength > 0) {
             entity.set人数_1段階_Title(gemmenJyohoList.get(0).getHokenryoDankai());
