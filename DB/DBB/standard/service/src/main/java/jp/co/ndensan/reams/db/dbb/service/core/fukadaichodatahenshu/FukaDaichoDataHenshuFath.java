@@ -448,22 +448,18 @@ public class FukaDaichoDataHenshuFath {
         if (世帯員所得情報リスト == null || 世帯員所得情報リスト.isEmpty()) {
             return 世帯員情報リスト;
         }
-        List<SetaiinShotoku> new世帯員所得情報リスト = new ArrayList<>();
         for (SetaiinShotoku 世帯員所得情報 : 世帯員所得情報リスト) {
             if (期_2.equals(世帯員所得情報.get本人区分())) {
-                new世帯員所得情報リスト.add(世帯員所得情報);
+                SetaInJoho 世帯員情報 = new SetaInJoho();
+                世帯員情報.set世帯員識別コード(世帯員所得情報.get識別コード().getColumnValue());
+                世帯員情報.set世帯員氏名(世帯員所得情報.get氏名());
+                世帯員情報.set世帯員性別(世帯員所得情報.get性別());
+                世帯員情報.set世帯員生年月日(get生年月日(住民種別区分, 世帯員所得情報.get生年月日()));
+                世帯員情報.set世帯員続柄(世帯員所得情報.get続柄());
+                世帯員情報.set世帯員合計取得金額(format金額(世帯員所得情報.get合計所得金額()));
+                世帯員情報.set世帯員課税区分(世帯員所得情報.get課税区分_住民税減免前());
+                世帯員情報リスト.add(世帯員情報);
             }
-        }
-        for (SetaiinShotoku new世帯員所得情報 : new世帯員所得情報リスト) {
-            SetaInJoho 世帯員情報 = new SetaInJoho();
-            世帯員情報.set世帯員識別コード(new世帯員所得情報.get識別コード().getColumnValue());
-            世帯員情報.set世帯員氏名(new世帯員所得情報.get氏名());
-            世帯員情報.set世帯員性別(new世帯員所得情報.get性別());
-            世帯員情報.set世帯員生年月日(get生年月日(住民種別区分, new世帯員所得情報.get生年月日()));
-            世帯員情報.set世帯員続柄(new世帯員所得情報.get続柄());
-            世帯員情報.set世帯員合計取得金額(format金額(new世帯員所得情報.get合計所得金額()));
-            世帯員情報.set世帯員課税区分(new世帯員所得情報.get課税区分_住民税減免前());
-            世帯員情報リスト.add(世帯員情報);
         }
         return 世帯員情報リスト;
     }
@@ -498,43 +494,62 @@ public class FukaDaichoDataHenshuFath {
         if (賦課の情報_更正前 == null || 賦課の情報_更正後 == null) {
             return 変更事由リスト;
         }
-        if (賦課の情報_更正後.get賦課情報().get口座区分() != null
-                && !賦課の情報_更正後.get賦課情報().get口座区分().equals(賦課の情報_更正前.get賦課情報().get口座区分())) {
+        if ((isNull(賦課の情報_更正後.get賦課情報().get口座区分()) && !isNull(賦課の情報_更正後.get賦課情報().get口座区分()))
+                || (賦課の情報_更正後.get賦課情報().get口座区分() != null
+                && !賦課の情報_更正後.get賦課情報().get口座区分().equals(賦課の情報_更正前.get賦課情報().get口座区分()))) {
             変更事由リスト.add(HenkoJiyu.口座情報変更.getコード());
         }
-        if ((賦課の情報_更正後.get賦課情報().get資格取得日() != null
-                && !賦課の情報_更正後.get賦課情報().get資格取得日().equals(賦課の情報_更正前.get賦課情報().get資格取得日()))
-                || (賦課の情報_更正後.get賦課情報().get資格取得事由() != null
-                && !賦課の情報_更正後.get賦課情報().get資格取得事由().equals(賦課の情報_更正前.get賦課情報().get資格取得事由()))
-                || (賦課の情報_更正後.get賦課情報().get資格喪失日() != null
-                && !賦課の情報_更正後.get賦課情報().get資格喪失日().equals(賦課の情報_更正前.get賦課情報().get資格喪失日()))
-                || (賦課の情報_更正後.get賦課情報().get資格喪失事由() != null
-                && !賦課の情報_更正後.get賦課情報().get資格喪失事由().equals(賦課の情報_更正前.get賦課情報().get資格喪失事由()))) {
-            変更事由リスト.add(HenkoJiyu.資格変更.getコード());
-        }
+        set資格変更事由(賦課の情報_更正後, 賦課の情報_更正前, 変更事由リスト);
+        set老齢年金変更事由(賦課の情報_更正後, 賦課の情報_更正前, 変更事由リスト);
         set変更事由(賦課の情報_更正後, 賦課の情報_更正前, 変更事由リスト);
         return 変更事由リスト;
     }
 
-    private void set変更事由(FukaAtena 賦課の情報_更正後, FukaAtena 賦課の情報_更正前, List<RString> 変更事由リスト) {
+    private void set資格変更事由(FukaAtena 賦課の情報_更正後, FukaAtena 賦課の情報_更正前, List<RString> 変更事由リスト) {
+        if (((isNull(賦課の情報_更正後.get賦課情報().get資格取得日()) && !isNull(賦課の情報_更正後.get賦課情報().get資格取得日()))
+                || (賦課の情報_更正後.get賦課情報().get資格取得日() != null
+                && !賦課の情報_更正後.get賦課情報().get資格取得日().equals(賦課の情報_更正前.get賦課情報().get資格取得日())))
+                || ((isNull(賦課の情報_更正後.get賦課情報().get資格取得事由()) && !isNull(賦課の情報_更正後.get賦課情報().get資格取得事由()))
+                || (賦課の情報_更正後.get賦課情報().get資格取得事由() != null
+                && !賦課の情報_更正後.get賦課情報().get資格取得事由().equals(賦課の情報_更正前.get賦課情報().get資格取得事由())))
+                || ((isNull(賦課の情報_更正後.get賦課情報().get資格喪失日()) && !isNull(賦課の情報_更正後.get賦課情報().get資格喪失日()))
+                || (賦課の情報_更正後.get賦課情報().get資格喪失日() != null
+                && !賦課の情報_更正後.get賦課情報().get資格喪失日().equals(賦課の情報_更正前.get賦課情報().get資格喪失日())))
+                || ((isNull(賦課の情報_更正後.get賦課情報().get資格喪失事由()) && !isNull(賦課の情報_更正後.get賦課情報().get資格喪失事由()))
+                || (賦課の情報_更正後.get賦課情報().get資格喪失事由() != null
+                && !賦課の情報_更正後.get賦課情報().get資格喪失事由().equals(賦課の情報_更正前.get賦課情報().get資格喪失事由())))) {
+            変更事由リスト.add(HenkoJiyu.資格変更.getコード());
+        }
+    }
 
-        if ((賦課の情報_更正後.get賦課情報().get老年開始日() != null
-                && !賦課の情報_更正後.get賦課情報().get老年開始日().equals(賦課の情報_更正前.get賦課情報().get老年開始日()))
+    private void set老齢年金変更事由(FukaAtena 賦課の情報_更正後, FukaAtena 賦課の情報_更正前, List<RString> 変更事由リスト) {
+        if (((isNull(賦課の情報_更正後.get賦課情報().get老年開始日()) && !isNull(賦課の情報_更正後.get賦課情報().get老年開始日()))
+                || (賦課の情報_更正後.get賦課情報().get老年開始日() != null
+                && !賦課の情報_更正後.get賦課情報().get老年開始日().equals(賦課の情報_更正前.get賦課情報().get老年開始日())))
+                || ((isNull(賦課の情報_更正後.get賦課情報().get老年廃止日()) && !isNull(賦課の情報_更正後.get賦課情報().get老年廃止日()))
                 || (賦課の情報_更正後.get賦課情報().get老年廃止日() != null
-                && !賦課の情報_更正後.get賦課情報().get老年廃止日().equals(賦課の情報_更正前.get賦課情報().get老年廃止日()))) {
+                && !賦課の情報_更正後.get賦課情報().get老年廃止日().equals(賦課の情報_更正前.get賦課情報().get老年廃止日())))) {
             変更事由リスト.add(HenkoJiyu.老齢年金変更.getコード());
         }
-        if ((賦課の情報_更正後.get賦課情報().get生活保護扶助種類() != null
-                && !賦課の情報_更正後.get賦課情報().get生活保護扶助種類().equals(賦課の情報_更正前.get賦課情報().get生活保護扶助種類()))
+    }
+
+    private void set変更事由(FukaAtena 賦課の情報_更正後, FukaAtena 賦課の情報_更正前, List<RString> 変更事由リスト) {
+
+        if (((isNull(賦課の情報_更正後.get賦課情報().get生活保護扶助種類()) && !isNull(賦課の情報_更正後.get賦課情報().get生活保護扶助種類()))
+                || (賦課の情報_更正後.get賦課情報().get生活保護扶助種類() != null
+                && !賦課の情報_更正後.get賦課情報().get生活保護扶助種類().equals(賦課の情報_更正前.get賦課情報().get生活保護扶助種類())))
+                || ((isNull(賦課の情報_更正後.get賦課情報().get生保開始日()) && !isNull(賦課の情報_更正後.get賦課情報().get生保開始日()))
                 || (賦課の情報_更正後.get賦課情報().get生保開始日() != null
-                && !賦課の情報_更正後.get賦課情報().get生保開始日().equals(賦課の情報_更正前.get賦課情報().get生保開始日()))
+                && !賦課の情報_更正後.get賦課情報().get生保開始日().equals(賦課の情報_更正前.get賦課情報().get生保開始日())))
+                || ((isNull(賦課の情報_更正後.get賦課情報().get生保廃止日()) && !isNull(賦課の情報_更正後.get賦課情報().get生保廃止日()))
                 || (賦課の情報_更正後.get賦課情報().get生保廃止日() != null
-                && !賦課の情報_更正後.get賦課情報().get生保廃止日().equals(賦課の情報_更正前.get賦課情報().get生保廃止日()))) {
+                && !賦課の情報_更正後.get賦課情報().get生保廃止日().equals(賦課の情報_更正前.get賦課情報().get生保廃止日())))) {
             変更事由リスト.add(HenkoJiyu.生活保護変更.getコード());
         }
         if (賦課の情報_更正後.get賦課情報().get世帯員数() != 賦課の情報_更正前.get賦課情報().get世帯員数()
+                || ((isNull(賦課の情報_更正後.get賦課情報().get世帯コード()) && !isNull(賦課の情報_更正後.get賦課情報().get世帯コード()))
                 || (賦課の情報_更正後.get賦課情報().get世帯コード() != null
-                && !賦課の情報_更正後.get賦課情報().get世帯コード().equals(賦課の情報_更正前.get賦課情報().get世帯コード()))) {
+                && !賦課の情報_更正後.get賦課情報().get世帯コード().equals(賦課の情報_更正前.get賦課情報().get世帯コード())))) {
             変更事由リスト.add(HenkoJiyu.世帯員変更.getコード());
         }
     }
@@ -545,5 +560,9 @@ public class FukaDaichoDataHenshuFath {
             return RString.EMPTY;
         }
         return DecimalFormatter.toコンマ区切りRString(金額, 0);
+    }
+
+    private boolean isNull(Object 項目) {
+        return 項目 == null;
     }
 }
