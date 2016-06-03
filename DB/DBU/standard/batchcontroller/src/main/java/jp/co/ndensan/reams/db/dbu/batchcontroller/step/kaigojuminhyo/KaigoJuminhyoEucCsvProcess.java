@@ -526,9 +526,9 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
             tashaJukiDataEntity.set受給者挿入日時(new RString(entity.getDbT4001InsertTimestamp().toString()));
         }
         if (entity.getDbT4001LastUpdateTimestamp() == null) {
-            tashaJukiDataEntity.set受給者挿入日時(RString.EMPTY);
+            tashaJukiDataEntity.set受給者更新日時(RString.EMPTY);
         } else {
-            tashaJukiDataEntity.set受給者挿入日時(new RString(entity.getDbT4001LastUpdateTimestamp().toString()));
+            tashaJukiDataEntity.set受給者更新日時(new RString(entity.getDbT4001LastUpdateTimestamp().toString()));
         }
         return tashaJukiDataEntity;
     }
