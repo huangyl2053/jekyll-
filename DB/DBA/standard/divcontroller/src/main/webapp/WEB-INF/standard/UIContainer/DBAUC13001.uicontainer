@@ -56,7 +56,7 @@
      "toLayoutSubGyomuCode": "DBA",
      "toLayoutName": "DBA1050021",
      "toLayoutTitle": "被保険者資格詳細異動",
-     "toState": "初期状態"
+     "toState": "照会状態"
     },
     {
      "id": "5",
