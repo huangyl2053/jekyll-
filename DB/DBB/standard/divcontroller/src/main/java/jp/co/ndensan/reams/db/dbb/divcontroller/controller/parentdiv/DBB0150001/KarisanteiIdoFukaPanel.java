@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.Karisant
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0150001.DBB0150001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0150001.KarisanteiIdoFukaPanelDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0150001.KarisanteiIdoFukaHandler;
+import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0150001.KarisanteiIdoFukaPanelHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -124,7 +124,7 @@ public class KarisanteiIdoFukaPanel {
         return ResponseData.of(div).respond();
     }
 
-    private KarisanteiIdoFukaHandler getHandler(KarisanteiIdoFukaPanelDiv div) {
-        return new KarisanteiIdoFukaHandler(div);
+    private KarisanteiIdoFukaPanelHandler getHandler(KarisanteiIdoFukaPanelDiv div) {
+        return new KarisanteiIdoFukaPanelHandler(div);
     }
 }

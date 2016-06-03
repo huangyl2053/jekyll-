@@ -63,7 +63,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * @reamsid_L DBB-0890-010 wangkanglei
  */
-public class KarisanteiIdoFukaHandler {
+public class KarisanteiIdoFukaPanelHandler {
 
     private final KarisanteiIdoFukaPanelDiv div;
     private static final int NUM_0 = 0;
@@ -121,7 +121,7 @@ public class KarisanteiIdoFukaHandler {
      *
      * @param div KarisanteiIdoFukaPanelDiv
      */
-    public KarisanteiIdoFukaHandler(KarisanteiIdoFukaPanelDiv div) {
+    public KarisanteiIdoFukaPanelHandler(KarisanteiIdoFukaPanelDiv div) {
         this.div = div;
     }
 
@@ -565,7 +565,7 @@ public class KarisanteiIdoFukaHandler {
                 納入通知書Flag = true;
             }
         }
-        KarisanteiIdoFukaHandlerValidationHandler validation = new KarisanteiIdoFukaHandlerValidationHandler(div);
+        KarisanteiIdoFukaPanelHandlerValidationHandler validation = new KarisanteiIdoFukaPanelHandlerValidationHandler(div);
         ValidationMessageControlPairs pairs = validation.必須チェックValidate(
                 仮算定額変更通知書Flag, 納入通知書Flag, 特徴開始通知書Flag);
         return pairs;

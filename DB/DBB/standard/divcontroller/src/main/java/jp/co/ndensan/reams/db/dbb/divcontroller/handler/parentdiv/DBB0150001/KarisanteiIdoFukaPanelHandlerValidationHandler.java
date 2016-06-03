@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * @reamsid_L DBB-0890-010 wangkanglei
  */
-public class KarisanteiIdoFukaHandlerValidationHandler {
+public class KarisanteiIdoFukaPanelHandlerValidationHandler {
 
     private final KarisanteiIdoFukaPanelDiv div;
     private static final RString 仮算定額変更通知書 = new RString("仮算定額変更通知書の発行日");
@@ -37,7 +37,7 @@ public class KarisanteiIdoFukaHandlerValidationHandler {
      *
      * @param div 仮算定異動賦課Div
      */
-    public KarisanteiIdoFukaHandlerValidationHandler(KarisanteiIdoFukaPanelDiv div) {
+    public KarisanteiIdoFukaPanelHandlerValidationHandler(KarisanteiIdoFukaPanelDiv div) {
         this.div = div;
     }
 
@@ -96,26 +96,26 @@ public class KarisanteiIdoFukaHandlerValidationHandler {
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
             if (仮算定額変更通知書) {
                 messages.add(ValidateChain.validateStart(div)
-                        .ifNot(KarisanteiIdoFukaHandlerSpec.仮算定額変更通知書の発行日)
+                        .ifNot(KarisanteiIdoFukaPanelHandlerSpec.仮算定額変更通知書の発行日)
                         .thenAdd(KarisanteiIdoFukaHandlerValidationMessages.仮算定額変更通知書の発行日入力チェック)
                         .messages());
             }
             if (保険料納入通知書_仮算定) {
                 messages.add(ValidateChain.validateStart(div)
-                        .ifNot(KarisanteiIdoFukaHandlerSpec.納入通知書_発行日)
+                        .ifNot(KarisanteiIdoFukaPanelHandlerSpec.納入通知書_発行日)
                         .thenAdd(KarisanteiIdoFukaHandlerValidationMessages.納入通知書の発行日入力チェック)
-                        .ifNot(KarisanteiIdoFukaHandlerSpec.納入通知書_対象者)
+                        .ifNot(KarisanteiIdoFukaPanelHandlerSpec.納入通知書_対象者)
                         .thenAdd(KarisanteiIdoFukaHandlerValidationMessages.納入通知書の対象者の選択チェック)
                         .messages());
             }
             if (特徴開始通知書_仮算定) {
                 messages.add(ValidateChain.validateStart(div)
-                        .ifNot(KarisanteiIdoFukaHandlerSpec.特徴開始通知書_発行日)
+                        .ifNot(KarisanteiIdoFukaPanelHandlerSpec.特徴開始通知書_発行日)
                         .thenAdd(KarisanteiIdoFukaHandlerValidationMessages.特徴開始通知書仮算定の発行日入力チェック)
                         .messages());
             }
             messages.add(ValidateChain.validateStart(div)
-                    .ifNot(KarisanteiIdoFukaHandlerSpec.処理対象と出力期の一致)
+                    .ifNot(KarisanteiIdoFukaPanelHandlerSpec.処理対象と出力期の一致)
                     .thenAdd(KarisanteiIdoFukaHandlerValidationMessages.処理対象と出力期の一致チェック)
                     .messages());
             return messages;
