@@ -9,12 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.KoseiShichosonMasterBuilder;
-import jp.co.ndensan.reams.db.dbe.business.core.basic.KoseiShichosonMasterIdentifier;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0830011.KoikiShichosonJohoKanriDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0830011.dgKoikiShichosonSelect_Row;
-import jp.co.ndensan.reams.db.dbu.service.core.koikishichosonjohokanri.KoikiShichosonJohoKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NofugakuDataRenkeiHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.RozinhokenbangotaikeiCheck;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaiyusenChikuCode;
@@ -24,9 +21,8 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinShi
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 広域システム管理のHandlerクラスです。
@@ -48,9 +44,10 @@ public class KoikiShichosonJohoKanriHandler {
 
     /**
      * 広域市町村一覧Gridの設定。
+     *
+     * @param masterList masterList
      */
-    public void onLoad() {
-        List<KoseiShichosonMaster> masterList = KoikiShichosonJohoKanriManager.createInstance().get広域市町村一覧().records();
+    public void onLoad(List<KoseiShichosonMaster> masterList) {
         List<dgKoikiShichosonSelect_Row> rowList = new ArrayList<>();
         for (KoseiShichosonMaster master : masterList) {
             dgKoikiShichosonSelect_Row row = new dgKoikiShichosonSelect_Row();
@@ -69,9 +66,10 @@ public class KoikiShichosonJohoKanriHandler {
     /**
      * 編集内容か表示され、編集ができる。
      *
+     * @param master master
+     * @param row row
      */
-    public void 適用情報の編集() {
-        dgKoikiShichosonSelect_Row row = div.getKoikiShichosonSelect().getDgKoikiShichosonSelect().getActiveRow();
+    public void 適用情報の編集(dgKoikiShichosonSelect_Row row, KoseiShichosonMaster master) {
         div.getKoikiShichosonJohoMaintenance().getDdlGaikokujinShimei().setDataSource(getDdlGaikokujinShimei());
         div.getKoikiShichosonJohoMaintenance().getDdlShotokuHikidashiHoho().setDataSource(getDdlShotokuHikidashiHoho());
         div.getKoikiShichosonJohoMaintenance().getDdlSaiyusenChikuCode().setDataSource(getDdlSaiyusenChikuCode());
@@ -79,9 +77,6 @@ public class KoikiShichosonJohoKanriHandler {
         div.getKoikiShichosonJohoMaintenance().getDdlRojinHokenJukyushaNoTaikei().setDataSource(getDdlRojinHokenJukyushaNoTaikei());
         div.getKoikiShichosonJohoMaintenance().getDdlNofugakuDataRenkei().setDataSource(getDdlNofugakuDataRenkei());
 
-        KoseiShichosonMaster master = KoikiShichosonJohoKanriManager.createInstance().getメンテナンス情報(row.getKoikiNaiNo()).records().get(0);
-        ViewStateHolder.put(ViewStateKeys.広域内市町村情報, Models.create(KoikiShichosonJohoKanriManager.
-                createInstance().getメンテナンス情報(row.getKoikiNaiNo()).records()));
         div.getKoikiShichosonJohoMaintenance().getTxtShichonoShikibetsuID().setValue(row.getKoikiNaiNo());
         div.getKoikiShichosonJohoMaintenance().getTxtShokisaiHokenshaNo().setValue(master.get証記載保険者番号() == null
                 ? RString.EMPTY : master.get証記載保険者番号().value());
@@ -104,19 +99,46 @@ public class KoikiShichosonJohoKanriHandler {
         div.getKoikiShichosonJohoMaintenance().getDdlTokuchoBunpai().setSelectedKey(master.get特徴分配集約());
         div.getKoikiShichosonJohoMaintenance().getDdlRojinHokenJukyushaNoTaikei().setSelectedKey(master.get老人保健受給者番号体系());
         div.getKoikiShichosonJohoMaintenance().getDdlNofugakuDataRenkei().setSelectedKey(master.get納付額データ連携方法());
+        div.setHiddenInputDiv(getInputDiv());
         //TODO 共有子Div「帳票住所デフォルト表記方法」が未実装
+    }
+
+    /**
+     * 編集内容をRStringに保存します。
+     *
+     * @return 編集結果
+     */
+    public RString getInputDiv() {
+        RStringBuilder inputDiv = new RStringBuilder();
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getTxtShichonoShikibetsuID().getValue());
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getTxtShokisaiHokenshaNo().getValue());
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getTxtKokuhorenShichosonNo().getValue());
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getTxtShichosonCode().getValue());
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getTxtTodofukenName().getValue());
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getTxtGunName().getValue());
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getTxtJusho().getDomain().value());
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getTxtShichosonName().getValue());
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getTxtYubinNo().getValue());
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getTxtKanyuYMD().getValue());
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getTxtTelNo().getDomain().value());
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getTxtRojinHokenShichosonNo().getValue());
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getTxtDattaiYMD().getValue());
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getDdlGaikokujinShimei().getSelectedKey());
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getDdlShotokuHikidashiHoho().getSelectedKey());
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getDdlSaiyusenChikuCode().getSelectedKey());
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getDdlTokuchoBunpai().getSelectedKey());
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getDdlRojinHokenJukyushaNoTaikei().getSelectedKey());
+        inputDiv.append(div.getKoikiShichosonJohoMaintenance().getDdlNofugakuDataRenkei().getSelectedKey());
+        return inputDiv.toRString();
     }
 
     /**
      * 編集内容か表示され、編集ができる。
      *
+     * @param 市町村管理Builder 市町村管理Builder
+     * @return KoseiShichosonMaster KoseiShichosonMaster
      */
-    public void update市町村管理() {
-        Models<KoseiShichosonMasterIdentifier, KoseiShichosonMaster> 修正前市町村Models
-                = ViewStateHolder.get(ViewStateKeys.広域内市町村情報, Models.class);
-        KoseiShichosonMaster 修正前市町村 = 修正前市町村Models.get(new KoseiShichosonMasterIdentifier(
-                div.getTxtShichonoShikibetsuID().getValue()));
-        KoseiShichosonMasterBuilder 市町村管理Builder = 修正前市町村.createBuilderForEdit();
+    public KoseiShichosonMaster get市町村管理情報(KoseiShichosonMasterBuilder 市町村管理Builder) {
         市町村管理Builder.set国保連広域内市町村番号(div.getTxtKokuhorenShichosonNo().getValue());
         市町村管理Builder.set都道府県名称(div.getTxtTodofukenName().getValue());
         市町村管理Builder.set市町村名称(div.getTxtShichosonName().getValue());
@@ -134,7 +156,66 @@ public class KoikiShichosonJohoKanriHandler {
         市町村管理Builder.set老人保健受給者番号体系(div.getDdlRojinHokenJukyushaNoTaikei().getSelectedKey());
         市町村管理Builder.set離脱日(div.getTxtDattaiYMD().getValue());
         市町村管理Builder.set納付額データ連携方法(div.getDdlNofugakuDataRenkei().getSelectedKey());
-        KoikiShichosonJohoKanriManager.createInstance().save市町村Master(市町村管理Builder.build());
+        return 市町村管理Builder.build();
+    }
+
+    /**
+     * 加入日と脱退日の期間をチェックします。
+     *
+     * @return 重複チェックフラグ
+     */
+    public boolean is期間チェックフラグ() {
+        FlexibleDate 加入日 = get加入日();
+        FlexibleDate 脱退日 = get脱退日();
+        if (加入日 != null && !加入日.isEmpty() && 脱退日 != null && !脱退日.isEmpty()) {
+            return 脱退日.isBefore(加入日);
+        }
+        return false;
+    }
+
+    /**
+     * 加入日を取得します。
+     *
+     * @return 重複チェックフラグ
+     */
+    public FlexibleDate get加入日() {
+        return div.getTxtKanyuYMD().getValue();
+    }
+
+    /**
+     * 脱退日を取得します。
+     *
+     * @return 重複チェックフラグ
+     */
+    public FlexibleDate get脱退日() {
+        return div.getTxtDattaiYMD().getValue();
+    }
+
+    /**
+     * 画面内容変更をチェックします。
+     *
+     * @return 判定結果(true:変更あり,false:変更なし)
+     */
+    public boolean isUpdate() {
+        return getInputDiv().equals(div.getHiddenInputDiv());
+    }
+
+    /**
+     * 市町村識別IDを取得します。
+     *
+     * @return 市町村識別ID
+     */
+    public RString get市町村識別ID() {
+        return div.getTxtShichonoShikibetsuID().getValue();
+    }
+
+    /**
+     * 適用情報一覧該当行を取得します。
+     *
+     * @return dgKoikiShichosonSelect_Row
+     */
+    public dgKoikiShichosonSelect_Row get適用情報一覧該当行() {
+        return div.getKoikiShichosonSelect().getDgKoikiShichosonSelect().getActiveRow();
     }
 
     private List<KeyValueDataSource> getDdlNofugakuDataRenkei() {

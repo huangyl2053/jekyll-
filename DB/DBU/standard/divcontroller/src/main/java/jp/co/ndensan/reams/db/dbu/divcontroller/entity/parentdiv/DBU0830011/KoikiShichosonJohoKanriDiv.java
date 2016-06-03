@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatesakijushosettei.KaigoAtesakiJushoSettei.IKaigoAtesakiJushoSetteiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatesakijushosettei.KaigoAtesakiJushoSettei.KaigoAtesakiJushoSetteiDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -32,6 +33,8 @@ public class KoikiShichosonJohoKanriDiv extends Panel {
     private KoikiShichosonJohoMaintenanceDiv KoikiShichosonJohoMaintenance;
     @JsonProperty("KanryoMessage")
     private KanryoMessageDiv KanryoMessage;
+    @JsonProperty("hiddenInputDiv")
+    private RString hiddenInputDiv;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -91,6 +94,24 @@ public class KoikiShichosonJohoKanriDiv extends Panel {
     @JsonProperty("KanryoMessage")
     public void setKanryoMessage(KanryoMessageDiv KanryoMessage) {
         this.KanryoMessage = KanryoMessage;
+    }
+
+    /*
+     * gethiddenInputDiv
+     * @return hiddenInputDiv
+     */
+    @JsonProperty("hiddenInputDiv")
+    public RString getHiddenInputDiv() {
+        return hiddenInputDiv;
+    }
+
+    /*
+     * sethiddenInputDiv
+     * @param hiddenInputDiv hiddenInputDiv
+     */
+    @JsonProperty("hiddenInputDiv")
+    public void setHiddenInputDiv(RString hiddenInputDiv) {
+        this.hiddenInputDiv = hiddenInputDiv;
     }
 
     /*
