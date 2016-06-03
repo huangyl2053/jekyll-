@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -54,7 +55,29 @@ public class ShuturyokuJyoukenProcessParamter implements IBatchProcessParameter 
                 false,
                 false,
                 false,
-                false);
+                false,
+                null);
+    }
+
+    /**
+     * 主治医意見書督促状発行のMybatisパラメータを作成します。
+     *
+     * @param temp_市町村コード 市町村コード
+     * @return 主治医意見書督促状発行のMybatisパラメータ
+     */
+    public ShujiiIkenTokusokujoMybitisParamter toShujiiIkenTokusokujoMybitisParamter(LasdecCode temp_市町村コード) {
+        this.temp_基準日 = this.temp_基準日.minusDay(Integer.parseInt(temp_主治医意見書督促期限日数.toString()));
+
+        return ShujiiIkenTokusokujoMybitisParamter.createParam(this.temp_基準日,
+                this.temp_印刷済対象者,
+                this.temp_保険者コード,
+                this.temp_主治医医療機関コード,
+                this.temp_主治医コード,
+                false,
+                false,
+                false,
+                false,
+                temp_市町村コード);
     }
 
     /**
