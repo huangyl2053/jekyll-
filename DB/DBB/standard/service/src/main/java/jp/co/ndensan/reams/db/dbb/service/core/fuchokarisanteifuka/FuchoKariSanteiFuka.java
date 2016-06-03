@@ -79,9 +79,12 @@ public class FuchoKariSanteiFuka {
     private static final int 設定値_番号9 = 9;
     private static final RString 区分_ゼロ = new RString("0");
     private static final RString 区分_イチ = new RString("1");
+    private static final RString 口座振替依頼_ゼロ = new RString("0");
+    private static final RString 口座振替依頼_イチ = new RString("1");
     private static final RString 通知書タイプ設定値 = new RString("001");
-    private static final RString 期毎タイプ = new RString("期毎タイプ");
+    private static final RString 期毎タイプ = new RString("期毎納入通知書タイプ");
     private static final RString 定値_銀振型 = new RString("銀振納入通知書タイプ");
+    private static final RString ブック口座振替依頼表示 = new RString("ブック口座振替依頼表示");
     private static final RString その他納入通知書タイプ = new RString("その他納入通知書タイプ");
     private static final RString コンビニ期毎出力 = new RString("コンビニ期毎出力");
     private static final RString コンビニマルチ収納タイプ = new RString("301");
@@ -339,12 +342,7 @@ public class FuchoKariSanteiFuka {
                 return ReportIdDBB.DBB100019.getReportId();
             }
         } else if (その他納入通知書タイプ.equals(項目名) && 通知書タイプ設定値.equals(帳票タイプ.get設定値())) {
-            // TODO ブック口座振替依頼表示
-            if (区分_ゼロ.equals(納通連帳区分)) {
-                return ReportIdDBB.DBB100018.getReportId();
-            } else if (区分_イチ.equals(納通連帳区分)) {
-                return ReportIdDBB.DBB100019.getReportId();
-            }
+            return get口座振替依頼帳票ID(納通連帳区分, 調定年度, 帳票ID);
         } else if (コンビニ期毎出力.equals(項目名) && 区分_イチ.equals(帳票タイプ.get設定値())) {
             if (区分_ゼロ.equals(納通連帳区分)) {
                 return ReportIdDBB.DBB100028.getReportId();
@@ -353,6 +351,29 @@ public class FuchoKariSanteiFuka {
             }
         } else if (コンビニ期毎出力.equals(項目名) && 区分_ゼロ.equals(帳票タイプ.get設定値())) {
             return get通知書の帳票ID(納通連帳区分, 調定年度, 帳票ID);
+        }
+        return null;
+    }
+
+    private ReportId get口座振替依頼帳票ID(RString 納通連帳区分,
+            FlexibleYear 調定年度,
+            ReportId 帳票ID) {
+        ChohyoSeigyoHanyo 帳票口座振替依頼 = getChohyoSeigyoKey(SubGyomuCode.DBB介護賦課, 帳票ID, 調定年度, ブック口座振替依頼表示);
+        if (帳票口座振替依頼 == null) {
+            throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
+        }
+        if (口座振替依頼_ゼロ.equals(帳票口座振替依頼.get設定値())) {
+            if (区分_ゼロ.equals(納通連帳区分)) {
+                return ReportIdDBB.DBB100021.getReportId();
+            } else if (区分_イチ.equals(納通連帳区分)) {
+                return ReportIdDBB.DBB100023.getReportId();
+            }
+        } else if (口座振替依頼_イチ.equals(帳票口座振替依頼.get設定値())) {
+            if (区分_ゼロ.equals(納通連帳区分)) {
+                return ReportIdDBB.DBB100020.getReportId();
+            } else if (区分_イチ.equals(納通連帳区分)) {
+                return ReportIdDBB.DBB100022.getReportId();
+            }
         }
         return null;
     }
