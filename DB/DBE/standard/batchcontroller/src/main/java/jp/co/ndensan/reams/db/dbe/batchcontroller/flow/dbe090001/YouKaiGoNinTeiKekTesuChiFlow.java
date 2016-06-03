@@ -13,21 +13,21 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
  * 主治医への結果通知書発行のバッチフロークラスです。
- * 
+ *
  * @reamsid_L DBE-0220-030 wangkun
  */
 public class YouKaiGoNinTeiKekTesuChiFlow extends BatchFlowBase<YouKaiGoNinTeiKekTesuChiFlowParameter> {
 
-   
     private static final String 主治医への結果通知書発行 = "youKaiGoNinTeiKekTesuChiReport";
 
     @Override
     protected void defineFlow() {
         executeStep(主治医への結果通知書発行);
     }
-    
+
     /**
      * 主治医への結果通知書発行を行います。
+     *
      * @return バッチコマンド
      */
     @Step(主治医への結果通知書発行)
