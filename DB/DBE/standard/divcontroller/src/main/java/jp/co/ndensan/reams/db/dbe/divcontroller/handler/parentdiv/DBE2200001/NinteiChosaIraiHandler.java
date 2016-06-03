@@ -727,7 +727,9 @@ public class NinteiChosaIraiHandler {
             builder.append("*");
             builder.append((new RString(String.valueOf(宛名連番++))).padZeroToLeft(INDEX_6));
             builder.append("#");
-            ChosainJoho 調査員情報 = new ChosainJohoManager().get調査員情報(LasdecCode.EMPTY, ChosaItakusakiCode.EMPTY, ChosainCode.EMPTY);
+            ChosainJoho 調査員情報 = new ChosainJohoManager().get調査員情報(new LasdecCode(row.getHokenshaNo()),
+                    new ChosaItakusakiCode(row.getNinteiChosaItakusakiCode()),
+                    new ChosainCode(row.getNinteiChosainCode()));
             Map<Integer, RString> 通知文
                     = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220001.getReportId(), KamokuCode.EMPTY, 1);
             RString homonChosasakiJusho = row.getHomonChosasakiJusho();
@@ -972,18 +974,18 @@ public class NinteiChosaIraiHandler {
             List<RString> 証記載保険者番号リスト = get被保険者番号(row.getHokenshaNo());
             List<RString> 被保険者番号リスト = get被保険者番号(row.getHihokenshaNo());
             ChosahyoKihonchosaKatamenItem item = new ChosahyoKihonchosaKatamenItem(
-                    証記載保険者番号リスト.get(0),
-                    証記載保険者番号リスト.get(1),
-                    証記載保険者番号リスト.get(2),
-                    証記載保険者番号リスト.get(INDEX_3),
-                    証記載保険者番号リスト.get(INDEX_4),
-                    証記載保険者番号リスト.get(INDEX_5),
                     ninteiShinseiDay.substring(1, 2),
                     ninteiShinseiDay.substring(2, INDEX_3),
                     ninteiShinseiDay.substring(INDEX_4, INDEX_5),
                     ninteiShinseiDay.substring(INDEX_5, INDEX_6),
                     ninteiShinseiDay.substring(INDEX_7, INDEX_8),
                     ninteiShinseiDay.substring(INDEX_8),
+                    証記載保険者番号リスト.get(0),
+                    証記載保険者番号リスト.get(1),
+                    証記載保険者番号リスト.get(2),
+                    証記載保険者番号リスト.get(INDEX_3),
+                    証記載保険者番号リスト.get(INDEX_4),
+                    証記載保険者番号リスト.get(INDEX_5),
                     被保険者番号リスト.get(0),
                     被保険者番号リスト.get(1),
                     被保険者番号リスト.get(2),
