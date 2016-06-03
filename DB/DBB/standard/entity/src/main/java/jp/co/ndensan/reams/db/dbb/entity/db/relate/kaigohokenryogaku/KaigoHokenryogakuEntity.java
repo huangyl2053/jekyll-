@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6;
+package jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigohokenryogaku;
 
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 出力帳票entityクラスです。
+ * 帳票設計_DBBRP43002_5_介護保険料額変更通知書発行一覧表KaigoHokenryogakuParameter
  *
- * @reamsid_L DBB-0820-020 xuyue
+ * @reamsid_L DBB-0780-120 yangchenbing
  */
-public class ShuturyokuChohuoEntity {
+public class KaigoHokenryogakuEntity {
 
     private ReportId 帳票分類ID;
     private ReportId 帳票ID;
