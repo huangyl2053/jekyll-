@@ -354,7 +354,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiSource implements IReportSource {
     public RString detail_kakuninBango1;
     @ReportItem(name = "detail_nofuKubun1", length = 3, order = 170)
     public RString detail_nofuKubun1;
-    @ReportItem(name = "detail_nokigenTitle", length = 12, order = 71)
+    @ReportItem(name = "detail_nokigenTitle", length = 12, order = 171)
     public RString detail_nokigenTitle;
     @ReportItem(name = "detail_ocrId1", length = 3, order = 172)
     public RString detail_ocrId1;
@@ -412,13 +412,13 @@ public class KarisanteiNonyuTsuchishoCVSMultiSource implements IReportSource {
     public RString detail_ocrCut2;
     @ReportItem(name = "detail_ocr22", length = 44, order = 199)
     public RString detail_ocr22;
-    @ReportItem(name = "biko12", length = 30, order = 200)
+    @ReportItem(name = "detail_biko12", length = 30, order = 200)
     public RString detail_biko12;
     @ReportItem(name = "detail_biko22", length = 30, order = 201)
     public RString detail_biko22;
     @ReportItem(name = "detail_barcodeCvsBarcode2", order = 202)
     public RString detail_barcodeCvsBarcode2;
-    @ReportItem(name = "cvsBarcodeNaiyo12", length = 33, order = 203)
+    @ReportItem(name = "detail_cvsBarcodeNaiyo12", length = 33, order = 203)
     public RString detail_cvsBarcodeNaiyo12;
     @ReportItem(name = "detail_cvsBarcodeNaiyo22", length = 33, order = 204)
     public RString detail_cvsBarcodeNaiyo22;
