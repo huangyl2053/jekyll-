@@ -213,6 +213,9 @@ public final class PnlTotalRegisterHandler {
      */
     public boolean has画面変更有無() {
         RString states = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        if (登録.equals(states)) {
+            return has登録情報有無();
+        }
         if (!修正.equals(states)) {
             return false;
         }
@@ -227,6 +230,34 @@ public final class PnlTotalRegisterHandler {
         }
 
         return has送付情報変更有無(param);
+    }
+
+    /**
+     * 登録情報有無の判定
+     *
+     * @return boolean
+     */
+    private boolean has登録情報有無() {
+        return div.getPnlKeyakuJigyosya().getTxtKeyakubi().getFromValue() != null
+                || div.getPnlKeyakuJigyosya().getTxtKeyakubi().getToValue() != null
+                || !div.getPnlKeyakuJigyosya().getDdlKeyakusyurui().getSelectedKey().isEmpty()
+                || !div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyo().getDomain().isEmpty()
+                || !div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyoKana().getDomain().isEmpty()
+                || !div.getPnlKeyakuJigyosya().getTxtJigyosyaYubinNo().getValue().isEmpty()
+                || !div.getPnlKeyakuJigyosya().getTxtJigyosyaTel().getDomain().isEmpty()
+                || !div.getPnlKeyakuJigyosya().getTxtJigyosyaFax().getDomain().isEmpty()
+                || !div.getPnlKeyakuJigyosya().getTxtJigyosyaJyusyo().getDomain().isEmpty()
+                || !div.getPnlKeyakuJigyosya().getTxtSofusakiYubin().getValue().isEmpty()
+                || !div.getPnlKeyakuJigyosya().getTxtSofusakiJigyosya().getDomain().isEmpty()
+                || !div.getPnlKeyakuJigyosya().getTxtSofusakiJigyosyaKana().getDomain().isEmpty()
+                || !div.getPnlKeyakuJigyosya().getTxtSofusakiJyusyo().getDomain().isEmpty()
+                || !div.getPnlKeyakuJigyosya().getTxtSofusakiBusyo().getValue().isEmpty()
+                || !div.getPnlKeyakuJigyosya().getCcdKinyukikan().getKinyuKikanCode().isEmpty()
+                || !div.getPnlKeyakuJigyosya().getCcdKinyukikan().getKinyuKikanShitenCode().isEmpty()
+                || !div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().getSelectedKey().isEmpty()
+                || !div.getPnlKeyakuJigyosya().getTxtSofusakiKouzabango().getValue().isEmpty()
+                || !div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeiginin().getDomain().isEmpty()
+                || !div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeigininKana().getDomain().isEmpty();
     }
 
     /**
