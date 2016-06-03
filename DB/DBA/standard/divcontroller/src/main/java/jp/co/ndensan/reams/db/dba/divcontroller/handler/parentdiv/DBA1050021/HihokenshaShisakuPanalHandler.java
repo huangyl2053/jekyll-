@@ -82,8 +82,8 @@ public class HihokenshaShisakuPanalHandler {
         setドロップダウンリストの設定(viewState, 資格得喪情報, 識別コード);
         if (状態_追加.equals(viewState)) {
             get画面初期の追加更新モードの表示制御();
-            get住所地特例情報取得(被保番号, 識別コード, 資格得喪情報.getShutokuDate());
-            get資格変更履歴情報取得(被保番号, 識別コード, 資格得喪情報.getShutokuDate());
+            get住所地特例情報取得(被保番号, 識別コード, FlexibleDate.EMPTY);
+            get資格変更履歴情報取得(被保番号, 識別コード, FlexibleDate.EMPTY);
             get施設入退所情報取得(識別コード);
         } else if (状態_修正.equals(viewState)) {
             get画面初期の追加更新モードの表示制御();
