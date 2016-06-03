@@ -149,7 +149,7 @@ public class KarisanteiIdoFukaPanelHandler {
             div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getDdlShorigetsu().setSelectedKey(翌月.padZeroToLeft(NUM_2));
         }
 
-        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
+        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, date,
                 SubGyomuCode.DBB介護賦課);
         set帳票グループ(date);
         set抽出条件(調定年度);
@@ -169,7 +169,7 @@ public class KarisanteiIdoFukaPanelHandler {
             if (月_6.equals(処理対象)) {
                 div.getKarisanteiIdoFukaChohyoHakko().getCcdChohyoIchiran().load(
                         SubGyomuCode.DBB介護賦課, 帳票グループコード_12);
-                set異動賦課_特徴捕捉分();
+                set異動賦課_特徴捕捉分(date);
                 set保険料段階と保険料率();
                 管理情報確認の制御処理(date);
             } else {
@@ -205,7 +205,7 @@ public class KarisanteiIdoFukaPanelHandler {
             });
             List<dgHokenryoDankai_Row> rowList = new ArrayList<>();
             dgHokenryoDankai_Row row;
-            for (HokenryoDankai 保険料段階 : 保険料段階リスト.asList()) {
+            for (HokenryoDankai 保険料段階 : 保険料段階List) {
                 row = new dgHokenryoDankai_Row();
                 row.setHokenryoDankai(保険料段階.get表記());
                 if (保険料段階.get保険料率() != null) {
@@ -274,9 +274,8 @@ public class KarisanteiIdoFukaPanelHandler {
 
     }
 
-    private void set異動賦課_特徴捕捉分() {
-        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
-                SubGyomuCode.DBB介護賦課);
+    private void set異動賦課_特徴捕捉分(RDate date) {
+        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, date, SubGyomuCode.DBB介護賦課);
         KariSanteiIdoFuka idoFuka = new KariSanteiIdoFuka();
         RString 依頼金計算処理区分 = idoFuka.getIraikinKeisanShoriKubun(new FlexibleYear(調定年度), null);
         if (STR_0.equals(依頼金計算処理区分)) {
@@ -307,28 +306,7 @@ public class KarisanteiIdoFukaPanelHandler {
         ShutsuryokuKiKohoFactory kohoFactory = new ShutsuryokuKiKohoFactory(調定年度);
         List<TyouhyouResult> 帳票IDList = new ArrayList<>();
         List<ShutsuryokuKiKoho> 出力期;
-        List<ChohyoMeter> 各通知書の帳票ID = get各通知書の帳票ID();
-        FuchoKiUtil util = new FuchoKiUtil();
-        // TODO 算定期
-        KitsukiList 期月リスト = util.get期月リスト();
-        RString 処理対象月 = div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getDdlShorigetsu().getSelectedKey();
-        RString 算定期 = new RString(期月リスト.get月の期(Tsuki.toValue(処理対象月)).get期AsInt());
-        for (ChohyoMeter 通知書の帳票ID : 各通知書の帳票ID) {
-            TyouhyouResult 帳票ID = null;
-            if (特徴開始通知書_仮算定.equals(通知書の帳票ID.get帳票分類ID())) {
-                帳票ID = idoFuka.getChohyoID(調定年度, 特別徴収開始通知書_仮算定_帳票分類ＩＤ,
-                        算定期, 通知書の帳票ID.get出力順ID());
-            } else if (仮算定額変更通知書.equals(通知書の帳票ID.get帳票分類ID())) {
-                帳票ID = idoFuka.getChohyoID(調定年度, 仮算定額変更通知書_帳票分類ＩＤ,
-                        算定期, 通知書の帳票ID.get出力順ID());
-            } else if (納入通知書.equals(通知書の帳票ID.get帳票分類ID())) {
-                帳票ID = idoFuka.getChohyoID(調定年度, 保険料納入通知書_本算定_帳票分類ＩＤ,
-                        算定期, 通知書の帳票ID.get出力順ID());
-            }
-            if (帳票ID != null) {
-                帳票IDList.add(帳票ID);
-            }
-        }
+        get帳票ID(帳票IDList, idoFuka, 調定年度);
         if (!帳票IDList.isEmpty()) {
             boolean flag = false;
             for (TyouhyouResult result : 帳票IDList) {
@@ -350,6 +328,36 @@ public class KarisanteiIdoFukaPanelHandler {
         div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getDdlNotsuShuturyokuki()
                 .setDataSource(dataSource);
         set納入通知書の発行日();
+    }
+
+    private void get帳票ID(List<TyouhyouResult> 帳票IDList, KariSanteiIdoFuka idoFuka, FlexibleYear 調定年度) {
+
+        List<ChohyoMeter> 各通知書の帳票ID = get各通知書の帳票ID();
+        FuchoKiUtil util = new FuchoKiUtil();
+        // TODO 算定期
+        KitsukiList 期月リスト = util.get期月リスト();
+        RString 処理対象月 = div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getDdlShorigetsu().getSelectedKey();
+        RString 算定期 = new RString(期月リスト.get月の期(Tsuki.toValue(処理対象月)).get期AsInt());
+        try {
+            for (ChohyoMeter 通知書の帳票ID : 各通知書の帳票ID) {
+                TyouhyouResult 帳票ID = null;
+                if (特徴開始通知書_仮算定.equals(通知書の帳票ID.get帳票分類ID())) {
+                    帳票ID = idoFuka.getChohyoID(調定年度, 特別徴収開始通知書_仮算定_帳票分類ＩＤ,
+                            算定期, 通知書の帳票ID.get出力順ID());
+                } else if (仮算定額変更通知書.equals(通知書の帳票ID.get帳票分類ID())) {
+                    帳票ID = idoFuka.getChohyoID(調定年度, 仮算定額変更通知書_帳票分類ＩＤ,
+                            算定期, 通知書の帳票ID.get出力順ID());
+                } else if (納入通知書.equals(通知書の帳票ID.get帳票分類ID())) {
+                    帳票ID = idoFuka.getChohyoID(調定年度, 保険料納入通知書_本算定_帳票分類ＩＤ,
+                            算定期, 通知書の帳票ID.get出力順ID());
+                }
+                if (帳票ID != null) {
+                    帳票IDList.add(帳票ID);
+                }
+            }
+        } catch (ApplicationException e) {
+            throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
+        }
     }
 
     private List<ChohyoMeter> get各通知書の帳票ID() {
@@ -411,15 +419,13 @@ public class KarisanteiIdoFukaPanelHandler {
             if (処理名_特徴.equals(entity.get処理名())) {
                 FlexibleDate 基準年月日 = entity.get基準年月日();
                 YMDHMS 基準日時 = entity.get基準日時();
-                is仮算定状況(基準年月日, 基準日時, row, 処理名_特徴, rowList);
                 rowList.add(setDgRow(row, 処理名_普徴));
-                return false;
+                return is仮算定状況(基準年月日, 基準日時, row, 処理名_特徴, rowList);
             } else {
                 FlexibleDate 基準年月日 = entity.get基準年月日();
                 YMDHMS 基準日時 = entity.get基準日時();
                 rowList.add(setDgRow(row, 処理名_特徴));
-                is仮算定状況(基準年月日, 基準日時, row, 処理名_普徴, rowList);
-                return false;
+                return is仮算定状況(基準年月日, 基準日時, row, 処理名_普徴, rowList);
             }
         } else {
             boolean flag1 = false;
@@ -518,12 +524,10 @@ public class KarisanteiIdoFukaPanelHandler {
     /**
      * 画面onLoadの時にチェックを行う。
      *
-     * @param div KarisanteiIdoFukaPanelDiv
      * @return is基準日時 boolean
      */
-    public boolean is基準日時(KarisanteiIdoFukaPanelDiv div) {
-        YMDHMS 異動賦課の基準日時 = null;
-        YMDHMS 異動賦課確定の基準日時 = null;
+    public boolean is基準日時() {
+
         RString choteiNendo = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課);
         FlexibleYear 年度 = new FlexibleYear(choteiNendo);
@@ -531,15 +535,10 @@ public class KarisanteiIdoFukaPanelHandler {
         div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getTxtFukaNendo().setDomain(年度);
         KariSanteiIdoFuka idoFuka = new KariSanteiIdoFuka();
         ShoriDateKanri dbT7022Entity = idoFuka.get基準日時(年度, 仮算定異動賦課_処理名);
-        if (dbT7022Entity != null) {
-            異動賦課の基準日時 = dbT7022Entity.get基準日時();
-        }
+        YMDHMS 異動賦課の基準日時 = dbT7022Entity.get基準日時();
         dbT7022Entity = idoFuka.get基準日時(年度, 仮算定異動賦課確定_処理名);
-        if (dbT7022Entity != null) {
-            異動賦課確定の基準日時 = dbT7022Entity.get基準日時();
-        }
-        return 異動賦課の基準日時 != null && 異動賦課確定の基準日時 != null
-                && 異動賦課確定の基準日時.isBefore(異動賦課の基準日時);
+        YMDHMS 異動賦課確定の基準日時 = dbT7022Entity.get基準日時();
+        return 異動賦課確定の基準日時.isBefore(異動賦課の基準日時);
     }
 
     /**
@@ -693,5 +692,15 @@ public class KarisanteiIdoFukaPanelHandler {
         parameter.set一括発行起動フラグ(一括発行起動フラグ);
         // TODO 特徴捕捉対象者の依頼金額計算区分
         return idoFuka.createKariSanteiIdoParameter(parameter);
+    }
+
+    /**
+     * 帳票IDのチェック。
+     */
+    public void check帳票ID() {
+        List<TyouhyouResult> 帳票IDList = new ArrayList<>();
+        KariSanteiIdoFuka idoFuka = new KariSanteiIdoFuka();
+        FlexibleYear 調定年度 = div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getTxtChoteiNendo().getDomain();
+        get帳票ID(帳票IDList, idoFuka, 調定年度);
     }
 }

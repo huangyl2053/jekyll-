@@ -39,7 +39,7 @@ public class KarisanteiIdoFukaPanel {
      */
     public ResponseData<KarisanteiIdoFukaPanelDiv> onLoad(KarisanteiIdoFukaPanelDiv div) {
 
-        if (getHandler(div).is基準日時(div)) {
+        if (getHandler(div).is基準日時()) {
             throw new ApplicationException(DbbErrorMessages.異動賦課の確定処理が未処理.getMessage());
         }
         boolean flag = getHandler(div).initialize();
@@ -62,6 +62,7 @@ public class KarisanteiIdoFukaPanel {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
+        getHandler(div).check帳票ID();
         return ResponseData.of(div).respond();
     }
 
@@ -119,7 +120,7 @@ public class KarisanteiIdoFukaPanel {
      * @return ResponseData
      */
     public ResponseData<KarisanteiIdoFukaPanelDiv> onStateTransition(KarisanteiIdoFukaPanelDiv div) {
-        boolean falg = ViewStateHolder.get(ViewStateKeys.実行フラグ, boolean.class);
+        boolean falg = ViewStateHolder.get(ViewStateKeys.実行フラグ, Boolean.class);
         getHandler(div).set実行ボタン(falg);
         return ResponseData.of(div).respond();
     }
