@@ -494,7 +494,7 @@ public class FukaDaichoDataHenshuFath {
         if (賦課の情報_更正前 == null || 賦課の情報_更正後 == null) {
             return 変更事由リスト;
         }
-        if ((isNull(賦課の情報_更正後.get賦課情報().get口座区分()) && !isNull(賦課の情報_更正後.get賦課情報().get口座区分()))
+        if ((isNull(賦課の情報_更正後.get賦課情報().get口座区分()) && !isNull(賦課の情報_更正前.get賦課情報().get口座区分()))
                 || (賦課の情報_更正後.get賦課情報().get口座区分() != null
                 && !賦課の情報_更正後.get賦課情報().get口座区分().equals(賦課の情報_更正前.get賦課情報().get口座区分()))) {
             変更事由リスト.add(HenkoJiyu.口座情報変更.getコード());
@@ -506,16 +506,16 @@ public class FukaDaichoDataHenshuFath {
     }
 
     private void set資格変更事由(FukaAtena 賦課の情報_更正後, FukaAtena 賦課の情報_更正前, List<RString> 変更事由リスト) {
-        if (((isNull(賦課の情報_更正後.get賦課情報().get資格取得日()) && !isNull(賦課の情報_更正後.get賦課情報().get資格取得日()))
+        if (((isNull(賦課の情報_更正後.get賦課情報().get資格取得日()) && !isNull(賦課の情報_更正前.get賦課情報().get資格取得日()))
                 || (賦課の情報_更正後.get賦課情報().get資格取得日() != null
                 && !賦課の情報_更正後.get賦課情報().get資格取得日().equals(賦課の情報_更正前.get賦課情報().get資格取得日())))
-                || ((isNull(賦課の情報_更正後.get賦課情報().get資格取得事由()) && !isNull(賦課の情報_更正後.get賦課情報().get資格取得事由()))
+                || ((isNull(賦課の情報_更正後.get賦課情報().get資格取得事由()) && !isNull(賦課の情報_更正前.get賦課情報().get資格取得事由()))
                 || (賦課の情報_更正後.get賦課情報().get資格取得事由() != null
                 && !賦課の情報_更正後.get賦課情報().get資格取得事由().equals(賦課の情報_更正前.get賦課情報().get資格取得事由())))
-                || ((isNull(賦課の情報_更正後.get賦課情報().get資格喪失日()) && !isNull(賦課の情報_更正後.get賦課情報().get資格喪失日()))
+                || ((isNull(賦課の情報_更正後.get賦課情報().get資格喪失日()) && !isNull(賦課の情報_更正前.get賦課情報().get資格喪失日()))
                 || (賦課の情報_更正後.get賦課情報().get資格喪失日() != null
                 && !賦課の情報_更正後.get賦課情報().get資格喪失日().equals(賦課の情報_更正前.get賦課情報().get資格喪失日())))
-                || ((isNull(賦課の情報_更正後.get賦課情報().get資格喪失事由()) && !isNull(賦課の情報_更正後.get賦課情報().get資格喪失事由()))
+                || ((isNull(賦課の情報_更正後.get賦課情報().get資格喪失事由()) && !isNull(賦課の情報_更正前.get賦課情報().get資格喪失事由()))
                 || (賦課の情報_更正後.get賦課情報().get資格喪失事由() != null
                 && !賦課の情報_更正後.get賦課情報().get資格喪失事由().equals(賦課の情報_更正前.get賦課情報().get資格喪失事由())))) {
             変更事由リスト.add(HenkoJiyu.資格変更.getコード());
@@ -523,10 +523,10 @@ public class FukaDaichoDataHenshuFath {
     }
 
     private void set老齢年金変更事由(FukaAtena 賦課の情報_更正後, FukaAtena 賦課の情報_更正前, List<RString> 変更事由リスト) {
-        if (((isNull(賦課の情報_更正後.get賦課情報().get老年開始日()) && !isNull(賦課の情報_更正後.get賦課情報().get老年開始日()))
+        if (((isNull(賦課の情報_更正後.get賦課情報().get老年開始日()) && !isNull(賦課の情報_更正前.get賦課情報().get老年開始日()))
                 || (賦課の情報_更正後.get賦課情報().get老年開始日() != null
                 && !賦課の情報_更正後.get賦課情報().get老年開始日().equals(賦課の情報_更正前.get賦課情報().get老年開始日())))
-                || ((isNull(賦課の情報_更正後.get賦課情報().get老年廃止日()) && !isNull(賦課の情報_更正後.get賦課情報().get老年廃止日()))
+                || ((isNull(賦課の情報_更正後.get賦課情報().get老年廃止日()) && !isNull(賦課の情報_更正前.get賦課情報().get老年廃止日()))
                 || (賦課の情報_更正後.get賦課情報().get老年廃止日() != null
                 && !賦課の情報_更正後.get賦課情報().get老年廃止日().equals(賦課の情報_更正前.get賦課情報().get老年廃止日())))) {
             変更事由リスト.add(HenkoJiyu.老齢年金変更.getコード());
@@ -535,19 +535,19 @@ public class FukaDaichoDataHenshuFath {
 
     private void set変更事由(FukaAtena 賦課の情報_更正後, FukaAtena 賦課の情報_更正前, List<RString> 変更事由リスト) {
 
-        if (((isNull(賦課の情報_更正後.get賦課情報().get生活保護扶助種類()) && !isNull(賦課の情報_更正後.get賦課情報().get生活保護扶助種類()))
+        if (((isNull(賦課の情報_更正後.get賦課情報().get生活保護扶助種類()) && !isNull(賦課の情報_更正前.get賦課情報().get生活保護扶助種類()))
                 || (賦課の情報_更正後.get賦課情報().get生活保護扶助種類() != null
                 && !賦課の情報_更正後.get賦課情報().get生活保護扶助種類().equals(賦課の情報_更正前.get賦課情報().get生活保護扶助種類())))
-                || ((isNull(賦課の情報_更正後.get賦課情報().get生保開始日()) && !isNull(賦課の情報_更正後.get賦課情報().get生保開始日()))
+                || ((isNull(賦課の情報_更正後.get賦課情報().get生保開始日()) && !isNull(賦課の情報_更正前.get賦課情報().get生保開始日()))
                 || (賦課の情報_更正後.get賦課情報().get生保開始日() != null
                 && !賦課の情報_更正後.get賦課情報().get生保開始日().equals(賦課の情報_更正前.get賦課情報().get生保開始日())))
-                || ((isNull(賦課の情報_更正後.get賦課情報().get生保廃止日()) && !isNull(賦課の情報_更正後.get賦課情報().get生保廃止日()))
+                || ((isNull(賦課の情報_更正後.get賦課情報().get生保廃止日()) && !isNull(賦課の情報_更正前.get賦課情報().get生保廃止日()))
                 || (賦課の情報_更正後.get賦課情報().get生保廃止日() != null
                 && !賦課の情報_更正後.get賦課情報().get生保廃止日().equals(賦課の情報_更正前.get賦課情報().get生保廃止日())))) {
             変更事由リスト.add(HenkoJiyu.生活保護変更.getコード());
         }
         if (賦課の情報_更正後.get賦課情報().get世帯員数() != 賦課の情報_更正前.get賦課情報().get世帯員数()
-                || ((isNull(賦課の情報_更正後.get賦課情報().get世帯コード()) && !isNull(賦課の情報_更正後.get賦課情報().get世帯コード()))
+                || ((isNull(賦課の情報_更正後.get賦課情報().get世帯コード()) && !isNull(賦課の情報_更正前.get賦課情報().get世帯コード()))
                 || (賦課の情報_更正後.get賦課情報().get世帯コード() != null
                 && !賦課の情報_更正後.get賦課情報().get世帯コード().equals(賦課の情報_更正前.get賦課情報().get世帯コード())))) {
             変更事由リスト.add(HenkoJiyu.世帯員変更.getコード());
