@@ -90,6 +90,7 @@ public class FuchoKariSanteiFuka {
     private static final RString コンビニマルチ収納タイプ = new RString("301");
     private static final RString コンビニ角公タイプ = new RString("302");
     private static final RString 調定月日 = new RString("0401");
+    private static final ReportId 保険料納入通知書_仮算定_帳票分類ID = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
 
     /**
      * コンストラクタです。
@@ -204,7 +205,18 @@ public class FuchoKariSanteiFuka {
             return resultList;
         }
         for (BatchFuchoKariSanteiResult 出力帳票entity : 出力帳票List) {
+            FuchoKariSanteiEntity バッチ出力帳票一覧Entity;
             ReportId 帳票ID = 出力帳票entity.get帳票ID();
+            if (!保険料納入通知書_仮算定_帳票分類ID.equals(帳票ID)) {
+                バッチ出力帳票一覧Entity = new FuchoKariSanteiEntity(
+                        帳票ID,
+                        帳票ID,
+                        出力帳票entity.get出力順ID()
+                );
+                resultList.add(バッチ出力帳票一覧Entity);
+                continue;
+            }
+
             RDate 調定年月日 = new RDate(調定年度.toString().concat(調定月日.toString()));
 
             RString 設定値 = get納付書の型の設定値(算定期, 調定年月日);
@@ -220,7 +232,7 @@ public class FuchoKariSanteiFuka {
             if (通知書の帳票ID == null || 通知書の帳票ID.isEmpty()) {
                 throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
             }
-            FuchoKariSanteiEntity バッチ出力帳票一覧Entity = new FuchoKariSanteiEntity(
+            バッチ出力帳票一覧Entity = new FuchoKariSanteiEntity(
                     帳票ID,
                     通知書の帳票ID,
                     出力帳票entity.get出力順ID()
