@@ -204,7 +204,7 @@ public class KagoKetteiHokenshaInCsvFileRead {
     @Transaction
     private void 過誤決定明細一時TBLに登録(FlexibleYearMonth 処理年月, List<KagoKetteiHokenshaInCsvEntity> csvlist) {
         IKagoKetteiHokenshaInCsvFileReadMapper mapper = this.mapperProvider.create(IKagoKetteiHokenshaInCsvFileReadMapper.class);
-        int 連番 = 100;
+        int 連番 = INDEX_0;
         for (int i = INDEX_0; i < csvlist.size(); i++) {
             KagoKetteiHokenshaInCsvEntity csvEntity = csvlist.get(i);
             List<KagoKetteiHokenshaInDataEntity> listDataEntity = csvEntity.getListDataEntity();
