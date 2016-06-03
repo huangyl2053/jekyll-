@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.business.core.hihohenshashohakokanribocsvdata
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihohenshashoHakkoKanriboChohyoDataSakuseiEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihohenshashoHakoKanriboCsvDataNoRebanSakuseiEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihohenshashoHakoKanriboCsvDataSakuseiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -30,18 +31,18 @@ public final class HihohenshashoHakoKanriboCsvDataSakusei {
      * @param entityList 証発行管理リストEntity
      * @param koumukumeyifukaflg 項目名付加フラグ
      * @param hizikehensyuuflg 日付'/'編集フラグ
-     * @return List<HihohenshashoHakoKanriboCsvDataSakuseiEntity>
+     * @return List<HihohenshashoHakoKanriboCsvDataNoRebanSakuseiEntity>
      * 証発行管理リストCSV用データリスト
      */
-    public List<HihohenshashoHakoKanriboCsvDataSakuseiEntity> getShohakkoKanriCSVDataList(
+    public List<HihohenshashoHakoKanriboCsvDataNoRebanSakuseiEntity> getShohakkoKanriCSVDataList(
             List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> entityList,
             boolean koumukumeyifukaflg,
             boolean hizikehensyuuflg) {
-        List<HihohenshashoHakoKanriboCsvDataSakuseiEntity> csvDataList = new ArrayList<>();
+        List<HihohenshashoHakoKanriboCsvDataNoRebanSakuseiEntity> csvDataList = new ArrayList<>();
         if (!entityList.isEmpty() && !(entityList.get(0).get被保険者番号() == null
                 || entityList.get(0).get被保険者番号().isEmpty())) {
             for (int i = 0; i < entityList.size(); i++) {
-                HihohenshashoHakoKanriboCsvDataSakuseiEntity csvEntity = new HihohenshashoHakoKanriboCsvDataSakuseiEntity();
+                HihohenshashoHakoKanriboCsvDataNoRebanSakuseiEntity csvEntity = new HihohenshashoHakoKanriboCsvDataNoRebanSakuseiEntity();
                 csvEntity.setHihokenshaNo(entityList.get(i).get被保険者番号());
                 csvEntity.setShikibetsuCode(entityList.get(i).get識別コード());
                 csvEntity.setShichosonCode(entityList.get(i).get市町村コード());
@@ -71,7 +72,7 @@ public final class HihohenshashoHakoKanriboCsvDataSakusei {
                     csvEntity.setKaishuYMD(RString.isNullOrEmpty(entityList.get(i).get回収年月日()) ? RString.EMPTY : new RDate(
                             entityList.get(i).get回収年月日().toString()).seireki().separator(
                                     Separator.NONE).fillType(FillType.ZERO).toDateString());
-                    csvEntity.setYukoKigenYMD(RString.isNullOrEmpty(entityList.get(i).get交付年月日()) ? RString.EMPTY : new RDate(
+                    csvEntity.setYukoKigenYMD(RString.isNullOrEmpty(entityList.get(i).get有効期限()) ? RString.EMPTY : new RDate(
                             entityList.get(i).get有効期限().toString()).seireki().separator(
                                     Separator.NONE).fillType(FillType.ZERO).toDateString());
                 }
@@ -129,7 +130,7 @@ public final class HihohenshashoHakoKanriboCsvDataSakusei {
                     csvEntity.setKaishuYMD(RString.isNullOrEmpty(entityList.get(i).get回収年月日()) ? RString.EMPTY : new RDate(
                             entityList.get(i).get回収年月日().toString()).seireki().separator(
                                     Separator.NONE).fillType(FillType.ZERO).toDateString());
-                    csvEntity.setYukoKigenYMD(RString.isNullOrEmpty(entityList.get(i).get交付年月日()) ? RString.EMPTY : new RDate(
+                    csvEntity.setYukoKigenYMD(RString.isNullOrEmpty(entityList.get(i).get有効期限()) ? RString.EMPTY : new RDate(
                             entityList.get(i).get有効期限().toString()).seireki().separator(
                                     Separator.NONE).fillType(FillType.ZERO).toDateString());
                 }

@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.AkasiHakouKanriEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.AkasiHakouKanriRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihohenshashoHakkoKanriboChohyoDataSakuseiEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihohenshashoHakoKanriboCsvDataSakuseiEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihohenshashoHakoKanriboCsvDataNoRebanSakuseiEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashohakkokanriichiranhyo.HihokenshashoHakkoKanriIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshashohakkokanribo.IHihokenshashoHakkoKanriboMapper;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
@@ -52,9 +52,9 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * 被保険者証発行管理簿_バッチ処理クラスです
  *
- * @reamsid_L DBA-0600-020 zhangguopeng
+ * @reamsid_L DBA-0600-020 dingyi
  */
-public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
+public class HihokenshashoHakkoKanriboNoRenbanProcess extends SimpleBatchProcessBase {
 
     private static final RString 証発行モード_001 = new RString("001");
     private static final RString 証発行モード_002 = new RString("002");
@@ -72,7 +72,7 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
     private FileSpoolManager manager;
 
     @BatchWriter
-    private EucCsvWriter<HihohenshashoHakoKanriboCsvDataSakuseiEntity> eucCsvWriter;
+    private EucCsvWriter<HihohenshashoHakoKanriboCsvDataNoRebanSakuseiEntity> eucCsvWriter;
     private BatchReportWriter<HihokenshashoHakkoKanriIchiranhyoReportSource> batchReportWriter;
     private ReportSourceWriter<HihokenshashoHakkoKanriIchiranhyoReportSource> reportSourceWriter;
 
@@ -147,9 +147,8 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
         List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> chohyoDataSakuseiEntityList
                 = chohyoDataSakusei.getShohakkoKanriChohyoDataList(relateEntityList);
         HihohenshashoHakoKanriboCsvDataSakusei checkListCsv = new HihohenshashoHakoKanriboCsvDataSakusei();
-        List<HihohenshashoHakoKanriboCsvDataSakuseiEntity> eucCsvEntityList;
-        eucCsvEntityList = checkListCsv.getShohakkoKanriCSVDataListAddRenban(
-                chohyoDataSakuseiEntityList,
+        List<HihohenshashoHakoKanriboCsvDataNoRebanSakuseiEntity> eucCsvEntityList;
+        eucCsvEntityList = checkListCsv.getShohakkoKanriCSVDataList(chohyoDataSakuseiEntityList,
                 processParameter.isKoumukumeyifukaflg(),
                 processParameter.isHizikehensyuuflg());
         if (!eucCsvEntityList.isEmpty()) {
@@ -163,7 +162,7 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
                     setNewLine(NewLine.CRLF).
                     hasHeader(relateEntityList.isKoumukumeyifukaflg()).
                     build();
-            for (HihohenshashoHakoKanriboCsvDataSakuseiEntity csvEntity : eucCsvEntityList) {
+            for (HihohenshashoHakoKanriboCsvDataNoRebanSakuseiEntity csvEntity : eucCsvEntityList) {
                 eucCsvWriter.writeLine(csvEntity);
             }
             eucCsvWriter.close();
