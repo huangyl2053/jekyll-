@@ -15,8 +15,9 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TsukibetsuSuiihyoBodyItem {
+public class TsukibetsuSuiihyoBody {
 
+    private final RString listTitle_1;
     private final RString list_1;
     private final RString list_2;
     private final RString list_3;
@@ -37,6 +38,7 @@ public class TsukibetsuSuiihyoBodyItem {
     /**
      * インスタンスを生成します。
      *
+     * @param listTitle_1 listTitle_1
      * @param list_1 list_1
      * @param list_2 list_2
      * @param list_3 list_3
@@ -54,7 +56,8 @@ public class TsukibetsuSuiihyoBodyItem {
      * @param list_15 list_15
      * @param list_16 list_16
      */
-    public TsukibetsuSuiihyoBodyItem(
+    public TsukibetsuSuiihyoBody(
+            RString listTitle_1,
             RString list_1,
             RString list_2,
             RString list_3,
@@ -71,6 +74,7 @@ public class TsukibetsuSuiihyoBodyItem {
             RString list_14,
             RString list_15,
             RString list_16) {
+        this.listTitle_1 = listTitle_1;
         this.list_1 = list_1;
         this.list_2 = list_2;
         this.list_3 = list_3;
