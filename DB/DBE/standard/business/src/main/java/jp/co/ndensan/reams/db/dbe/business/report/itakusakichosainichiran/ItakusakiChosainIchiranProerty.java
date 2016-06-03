@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.itakusakichosainichiran;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.itakusakichosainichiran.ItakusakiChosainIchiranReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -21,10 +22,12 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * {@link ItakusakiChosainIchiranReport}のプロパティです。
+ *
+ * @reamsid_L DBE-0290-020 dongyabin
  */
 public class ItakusakiChosainIchiranProerty extends ReportPropertyBase<ItakusakiChosainIchiranReportSource> {
 
-    private static final ReportId ID = new ReportId("DBE592001");
+    private static final ReportId ID = ReportIdDBE.DBE592001.getReportId();
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("listIchiranhyoUpper_1")));
 
     /**
@@ -39,6 +42,7 @@ public class ItakusakiChosainIchiranProerty extends ReportPropertyBase<Itakusaki
             Breakers<ItakusakiChosainIchiranReportSource> breakers,
             BreakerCatalog<ItakusakiChosainIchiranReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
 
 
 

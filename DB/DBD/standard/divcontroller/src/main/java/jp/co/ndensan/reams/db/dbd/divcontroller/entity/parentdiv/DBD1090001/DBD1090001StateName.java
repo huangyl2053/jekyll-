@@ -16,7 +16,7 @@ public enum DBD1090001StateName implements IStateEnumerations {
 
     NoChange(""),
     負担限度額認定("負担限度額認定"),
-    完了メッセージ("完了メッセージ");
+    世帯所得一覧("世帯所得一覧");
 
     private final RString name;
 

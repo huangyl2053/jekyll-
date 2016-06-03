@@ -15,6 +15,7 @@ import lombok.Value;
  * 被保険者台帳管理Aliveの識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class HihokenshaDaichoAliveIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

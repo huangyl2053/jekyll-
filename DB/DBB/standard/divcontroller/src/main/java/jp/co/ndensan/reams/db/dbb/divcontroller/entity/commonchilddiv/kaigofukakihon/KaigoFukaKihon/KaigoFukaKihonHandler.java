@@ -13,7 +13,11 @@ import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMasterNoOption;
 
 /**
  * 介護賦課基本情報Divの操作を行うクラスです。
@@ -77,9 +81,11 @@ public class KaigoFukaKihonHandler {
             HihokenshaDaicho daichoModel = daicho.get();
             div.getTxtHihokenshaNo().setValue(daichoModel.get被保険者番号().value());
             div.getTxtShutokuYmd().setValue(daichoModel.get資格取得年月日());
-            div.getTxtShutokuJiyu().setValue(daichoModel.get資格取得事由コード());
+            div.getTxtShutokuJiyu().setValue(CodeMasterNoOption.getCodeRyakusho(
+                    SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), new Code(daichoModel.get資格取得事由コード())));
             div.getTxtSoshitsuYmd().setValue(daichoModel.get資格喪失年月日());
-            div.getTxtSoshitsuJiyu().setValue(daichoModel.get資格喪失事由コード());
+            div.getTxtSoshitsuJiyu().setValue(CodeMasterNoOption.getCodeRyakusho(
+                    SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu(), new Code(daichoModel.get資格喪失事由コード())));
         }
     }
 }

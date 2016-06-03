@@ -2,7 +2,6 @@ package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -10,7 +9,6 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -34,15 +32,10 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
-    @PrimaryKey
     private FlexibleYearMonth shinsaYM;
-    @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
-    @PrimaryKey
     private HihokenshaNo hiHokenshaNo;
-    @PrimaryKey
     private RString kyufuKanrihyoShubetsuKubunCode;
-    @PrimaryKey
     private RString kyufuKanrihyoMeisaiLineNo;
     private HokenshaNo shokisaiHokenshaNo;
     private JigyoshaNo kyotakushienJigyoshoNo;
@@ -649,21 +642,6 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.shinsaYM, other.shinsaYM)) {
-            return false;
-        }
-        if (!Objects.equals(this.serviceTeikyoYM, other.serviceTeikyoYM)) {
-            return false;
-        }
-        if (!Objects.equals(this.hiHokenshaNo, other.hiHokenshaNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.kyufuKanrihyoShubetsuKubunCode, other.kyufuKanrihyoShubetsuKubunCode)) {
-            return false;
-        }
-        if (!Objects.equals(this.kyufuKanrihyoMeisaiLineNo, other.kyufuKanrihyoMeisaiLineNo)) {
-            return false;
-        }
         return true;
     }
 
@@ -711,6 +689,7 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
     }
 
 // </editor-fold>
+
 
 
 }

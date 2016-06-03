@@ -76,10 +76,4 @@
         <result property="jokyoFlag" column="dbT4910NinteichosaItakusakiJoho_jokyoFlag" />
     </resultMap>
 
-    <select id="getEntity" resultMap="ResultMap_DbT4910NinteichosaItakusakiJohoEntity">
-        SELECT
-        <include refid="allColumns_DbT4910NinteichosaItakusakiJoho"/>
-        FROM
-        rgdb."DbT4910NinteichosaItakusakiJoho"
-    </select>
 </mapper>

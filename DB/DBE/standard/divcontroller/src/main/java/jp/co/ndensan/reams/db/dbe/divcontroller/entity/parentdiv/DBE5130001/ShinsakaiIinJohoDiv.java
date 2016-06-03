@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiIinJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,10 +33,10 @@ public class ShinsakaiIinJohoDiv extends Panel {
     private TextBox txtShimei;
     @JsonProperty("txtKanaShimei")
     private TextBox txtKanaShimei;
-    @JsonProperty("txtBirthYMD")
-    private TextBoxFlexibleDate txtBirthYMD;
     @JsonProperty("radSeibetsu")
     private RadioButton radSeibetsu;
+    @JsonProperty("txtBirthYMD")
+    private TextBoxFlexibleDate txtBirthYMD;
     @JsonProperty("ddlShikakuCode")
     private DropDownList ddlShikakuCode;
     @JsonProperty("txtBiko")
@@ -141,24 +141,6 @@ public class ShinsakaiIinJohoDiv extends Panel {
     }
 
     /*
-     * gettxtBirthYMD
-     * @return txtBirthYMD
-     */
-    @JsonProperty("txtBirthYMD")
-    public TextBoxFlexibleDate getTxtBirthYMD() {
-        return txtBirthYMD;
-    }
-
-    /*
-     * settxtBirthYMD
-     * @param txtBirthYMD txtBirthYMD
-     */
-    @JsonProperty("txtBirthYMD")
-    public void setTxtBirthYMD(TextBoxFlexibleDate txtBirthYMD) {
-        this.txtBirthYMD = txtBirthYMD;
-    }
-
-    /*
      * getradSeibetsu
      * @return radSeibetsu
      */
@@ -174,6 +156,24 @@ public class ShinsakaiIinJohoDiv extends Panel {
     @JsonProperty("radSeibetsu")
     public void setRadSeibetsu(RadioButton radSeibetsu) {
         this.radSeibetsu = radSeibetsu;
+    }
+
+    /*
+     * gettxtBirthYMD
+     * @return txtBirthYMD
+     */
+    @JsonProperty("txtBirthYMD")
+    public TextBoxFlexibleDate getTxtBirthYMD() {
+        return txtBirthYMD;
+    }
+
+    /*
+     * settxtBirthYMD
+     * @param txtBirthYMD txtBirthYMD
+     */
+    @JsonProperty("txtBirthYMD")
+    public void setTxtBirthYMD(TextBoxFlexibleDate txtBirthYMD) {
+        this.txtBirthYMD = txtBirthYMD;
     }
 
     /*

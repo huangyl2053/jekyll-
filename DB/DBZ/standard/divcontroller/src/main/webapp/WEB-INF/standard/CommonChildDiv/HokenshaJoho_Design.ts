@@ -12,6 +12,14 @@ module DBZ {
                 return "onBlur_txtHokenshaNo";
             }
 
+            public static onOkClose_btnSearch(): string {
+                return "onOkClose_btnSearch";
+            }
+
+            public static onBeforeOpenDialog_btnSearch(): string {
+                return "onBeforeOpenDialog_btnSearch";
+            }
+
         }
 
         export class Controls {

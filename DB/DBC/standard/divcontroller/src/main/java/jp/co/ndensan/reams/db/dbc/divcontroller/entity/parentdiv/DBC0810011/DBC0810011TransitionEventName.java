@@ -9,14 +9,16 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
  * 不正な動作の原因になります。</br>
  * DBC0810011のイベント名定義クラスです</br>
  *
- * @author 自動生成
+ * @reamsid_L DBC-1010-130 panhe
  */
 public enum DBC0810011TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    選択("選択"),
-    戻る("戻る"),
-    完了("完了");
+    福祉用具購入費支給("福祉用具購入費支給"),
+    検索に戻る("検索に戻る"),
+    住宅改修費事前申請("住宅改修費事前申請"),
+    住宅改修費支給申請("住宅改修費支給申請"),
+    償還払い費支給申請("償還払い費支給申請");
 
     private final RString name;
 

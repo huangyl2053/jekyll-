@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 広域内住所地特例者区分を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public enum KoikinaiJushochitokureishaKubun {
 
@@ -15,9 +15,9 @@ public enum KoikinaiJushochitokureishaKubun {
      */
     広域内住所地特例者("1", "広域内住所地特例者"),
     /**
-     * コード:2 名称:通常資格者 略称:定義なし
+     * コード:0 名称:通常資格者 略称:定義なし
      */
-    通常資格者("2", "通常資格者");
+    通常資格者("0", "通常資格者");
 
     private final RString code;
     private final RString fullName;

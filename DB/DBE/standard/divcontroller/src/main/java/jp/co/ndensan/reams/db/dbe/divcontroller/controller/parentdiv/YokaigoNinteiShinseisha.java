@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv;
 
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe5040002.dgSearchResult_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5040002.dgSearchResult_Row;
 
 /**
  *

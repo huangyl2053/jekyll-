@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.helper;
 
-import jp.co.ndensan.reams.db.dbe.business.core.Shujii.IShujii;
+import jp.co.ndensan.reams.db.dbe.business.core.shujii.IShujii;
 
 /**
  * Shujiiを生成するMockです。

@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link JukyushaDaicho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public class JukyushaDaichoBuilder {
 

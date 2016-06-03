@@ -18,12 +18,20 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
  *
  * @author N2810 久保 里史
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KokuhorenJohoTorikomiValidator implements IValidatable {
 
     private final CheckBoxList 同月過誤分;
     private final CheckBoxList 通常分;
     private final long 出力順;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 同月過誤分 同月過誤分
+     * @param 通常分 通常分
+     * @param 出力順 出力順
+     */
     public KokuhorenJohoTorikomiValidator(CheckBoxList 同月過誤分, CheckBoxList 通常分, Long 出力順) {
         this.同月過誤分 = 同月過誤分;
         this.通常分 = 通常分;

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBZ-4520-010 zhangzhiming -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.seikatsuhogorireki.ISeikatsuhogoRirekiMapper">
+    
+    <resultMap id="result_SeikatsuhogoRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.seikatsuhogorireki.SeikatsuhogoRelateEntity" autoMapping="true">
+        <result property="shikibetsuCode" column="A_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+        <result property="gyomuCode" column="A_gyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler" />
+        <result property="jukyuKaishiYMD" column="A_jukyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jukyuHaishiYMD" column="A_jukyuHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="jukyushaNo" column="A_jukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kaigoRyoDairiNofuKubun" column="A_kaigoRyoDairiNofuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kaigoRyoDairiNofuYM" column="A_kaigoRyoDairiNofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+        <result property="kyugoShisetsuNyuTaishoKubun" column="A_kyugoShisetsuNyuTaishoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kyugoShisetsuNyutaishoYMD" column="A_kyugoShisetsuNyutaishoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="jukyuTeishiKaishiYMD" column="B_jukyuTeishiKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jukyuTeishiShuryoYMD" column="B_jukyuTeishiShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="fujoShuruiCode" column="C_fujoShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    <select id="get生活保護履歴情報" resultMap="result_SeikatsuhogoRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.seikatsuhogorireki.SeikatsuhogoParameter">
+      SELECT
+          A."shikibetsuCode" AS A_shikibetsuCode
+	  ,A."gyomuCode" AS A_gyomuCode
+	  ,A."jukyuKaishiYMD" AS A_jukyuKaishiYMD
+	  ,A."jukyuHaishiYMD" AS A_jukyuHaishiYMD
+	  ,A."jukyushaNo" AS A_jukyushaNo
+	  ,A."kaigoRyoDairiNofuKubun" AS A_kaigoRyoDairiNofuKubun
+	  ,A."kaigoRyoDairiNofuYM" AS A_kaigoRyoDairiNofuYM
+	  ,A."kyugoShisetsuNyuTaishoKubun" AS A_kyugoShisetsuNyuTaishoKubun
+	  ,A."kyugoShisetsuNyutaishoYMD" AS A_kyugoShisetsuNyutaishoYMD
+	  ,B."jukyuTeishiKaishiYMD" AS B_jukyuTeishiKaishiYMD
+	  ,B."jukyuTeishiShuryoYMD" AS B_jukyuTeishiShuryoYMD
+	  ,C."fujoShuruiCode" AS C_fujoShuruiCode
+	FROM rgur."UrT0508SeikatsuHogoJukyusha" AS A
+	LEFT OUTER JOIN rgur."UrT0528SeikatsuHogoTeishikikan" AS B
+	ON A."shikibetsuCode" = B."shikibetsuCode"
+	AND A."gyomuCode" = B."gyomuCode"
+	AND A."jukyuKaishiYMD" = B."jukyuKaishiYMD"
+	LEFT OUTER JOIN rgur."UrT0526SeikatsuHogoFujoShurui" AS C
+	ON A."shikibetsuCode" = C."shikibetsuCode"
+	AND A."gyomuCode" = C."gyomuCode"
+	AND A."jukyuKaishiYMD" = C."jukyuKaishiYMD"
+	WHERE A."shikibetsuCode" =#{識別コード}
+	AND A."gyomuCode" =#{業務コード}
+        order by A."shikibetsuCode" desc,
+        A."gyomuCode" desc,A."jukyuKaishiYMD" desc
+    </select>
+</mapper>

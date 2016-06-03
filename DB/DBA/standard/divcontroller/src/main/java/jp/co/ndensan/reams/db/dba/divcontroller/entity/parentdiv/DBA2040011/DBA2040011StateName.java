@@ -15,10 +15,10 @@ public enum DBA2040011StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    適用状態("適用状態"),
-    解除状態("解除状態"),
-    変更状態("変更状態"),
-    完了状態("完了状態");
+    追加適用("追加適用"),
+    追加解除("追加解除"),
+    追加変更("追加変更"),
+    完了("完了");
 
     private final RString name;
 

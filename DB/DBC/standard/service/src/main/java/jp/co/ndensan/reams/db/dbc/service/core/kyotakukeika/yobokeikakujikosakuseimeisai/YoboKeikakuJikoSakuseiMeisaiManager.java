@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 予防給付計画自己作成明細を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class YoboKeikakuJikoSakuseiMeisaiManager {
 

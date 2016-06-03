@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC03301",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "要介護認定結果通知",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0330001",
+     "toLayoutTitle": "要介護認定結果通知（主治医）",
+     "toState": "照会"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0330001",
+     "layoutTitle": "要介護認定結果通知（主治医）",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

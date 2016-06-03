@@ -8,19 +8,21 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3039ShokanMeisaiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求明細を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
 public class ShokanMeisai extends ModelBase<ShokanMeisaiIdentifier, DbT3039ShokanMeisaiEntity, ShokanMeisai> implements Serializable {
 
@@ -56,7 +58,7 @@ public class ShokanMeisai extends ModelBase<ShokanMeisaiIdentifier, DbT3039Shoka
         this.entity = new DbT3039ShokanMeisaiEntity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
-        this.entity.setSeiriNp(整理番号);
+        this.entity.setSeiriNo(整理番号);
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYoshikiNo(様式番号);
         this.entity.setMeisaiNo(明細番号);
@@ -83,7 +85,7 @@ public class ShokanMeisai extends ModelBase<ShokanMeisaiIdentifier, DbT3039Shoka
         this.id = new ShokanMeisaiIdentifier(
                 entity.getHiHokenshaNo(),
                 entity.getServiceTeikyoYM(),
-                entity.getSeiriNp(),
+                entity.getSeiriNo(),
                 entity.getJigyoshaNo(),
                 entity.getYoshikiNo(),
                 entity.getMeisaiNo(),
@@ -129,7 +131,7 @@ public class ShokanMeisai extends ModelBase<ShokanMeisaiIdentifier, DbT3039Shoka
      * @return 整理番号
      */
     public RString get整理番号() {
-        return entity.getSeiriNp();
+        return entity.getSeiriNo();
     }
 
     /**
@@ -243,8 +245,7 @@ public class ShokanMeisai extends ModelBase<ShokanMeisaiIdentifier, DbT3039Shoka
     }
 
     /**
-     * 保持する償還払請求明細を削除対象とします。<br/>
-     * {@link DbT3039ShokanMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する償還払請求明細を削除対象とします。<br/> {@link DbT3039ShokanMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShokanMeisai}
      */
@@ -258,6 +259,34 @@ public class ShokanMeisai extends ModelBase<ShokanMeisaiIdentifier, DbT3039Shoka
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ShokanMeisai(deletedEntity, id);
+    }
+
+    /**
+     * 修正ShokanMeisai
+     *
+     * @return ShokanMeisai {@link ShokanMeisai}のクローン
+     */
+    public ShokanMeisai modified() {
+        DbT3039ShokanMeisaiEntity modifiedEntity = this.toEntity();
+
+        modifiedEntity.setState(EntityDataState.Modified);
+
+        //TODO メッセージの検討
+        return new ShokanMeisai(modifiedEntity, id);
+    }
+
+    /**
+     * add ShokanMeisai
+     *
+     * @return ShokanMeisai {@link ShokanMeisai}のクローン
+     */
+    public ShokanMeisai added() {
+        DbT3039ShokanMeisaiEntity addedEntity = this.toEntity();
+
+        addedEntity.setState(EntityDataState.Added);
+
+        //TODO メッセージの検討
+        return new ShokanMeisai(addedEntity, id);
     }
 
     /**

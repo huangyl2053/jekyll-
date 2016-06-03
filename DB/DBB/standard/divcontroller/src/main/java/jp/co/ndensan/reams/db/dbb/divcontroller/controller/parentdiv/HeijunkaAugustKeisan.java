@@ -25,6 +25,12 @@ public class HeijunkaAugustKeisan {
     private static final RString HEIJUNKA_8SHORI_KAKUNIN1 = new RString("DBB0130001/dgHeijunka8ShoriKakunin1.yml");
     private static final RString HEIJUNKA_8SHORI_KAKUNIN2 = new RString("DBB0130001/dgHeijunka8ShoriKakunin2.yml");
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel HeijunkaAugustKeisanDiv
+     * @return 画面の ResponseData
+     */
     public ResponseData<HeijunkaAugustKeisanDiv> onLoad_HeijunkaAugustKeisan(HeijunkaAugustKeisanDiv panel) {
         ResponseData<HeijunkaAugustKeisanDiv> response = new ResponseData<>();
 

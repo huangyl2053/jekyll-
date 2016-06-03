@@ -30,20 +30,20 @@ module DBZ {
                     this.controls = controls;
                 }
                 public SoshitsuMode(): void {
-                    this.controls.ccdNinteiInput().shoriType().InputMode();
+                    this.controls.ccdNinteiInput().ShoriType().InputMode();
                     this.controls.ccdShinseiSonotaJohoInput().ShoriType().SoshitsuMode();
                     this.controls.btnToroku().displayNone = false;
 
                 }
                 public ShokkenTorikeshiInputMode(): void {
-                    this.controls.ccdNinteiInput().shoriType().IchibuSoshitsuMode();
+                    this.controls.ccdNinteiInput().ShoriType().IchibuSoshitsuMode();
                     this.controls.ccdShinseiSonotaJohoInput().ShoriType().TokushuTsuikaMode();
                     this.controls.btnToroku().displayNone = false;
                 
                 }
 
                 public ShokaiMode(): void {
-                    this.controls.ccdNinteiInput().shoriType().ShokaiMode();
+                    this.controls.ccdNinteiInput().ShoriType().ShokaiMode();
                     this.controls.ccdShinseiSonotaJohoInput().ShoriType().ShokaiMode();
                     this.controls.btnToroku().displayNone = true;
                 

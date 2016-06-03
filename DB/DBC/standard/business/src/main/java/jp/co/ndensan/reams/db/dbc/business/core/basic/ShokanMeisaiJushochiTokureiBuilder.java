@@ -7,18 +7,19 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokureiEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanMeisaiJushochiTokurei}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class ShokanMeisaiJushochiTokureiBuilder {
 
@@ -75,7 +76,7 @@ public class ShokanMeisaiJushochiTokureiBuilder {
      */
     public ShokanMeisaiJushochiTokureiBuilder set整理番号(RString 整理番号) {
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-        entity.setSeiriNp(整理番号);
+        entity.setSeiriNo(整理番号);
         return this;
     }
 
@@ -170,7 +171,6 @@ public class ShokanMeisaiJushochiTokureiBuilder {
      * @return {@link ShokanMeisaiJushochiTokureiBuilder}
      */
     public ShokanMeisaiJushochiTokureiBuilder set施設所在保険者番号(ShoKisaiHokenshaNo 施設所在保険者番号) {
-        requireNonNull(施設所在保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("施設所在保険者番号"));
         entity.setShisetsuShozaiHokenshaNo(施設所在保険者番号);
         return this;
     }
@@ -182,7 +182,6 @@ public class ShokanMeisaiJushochiTokureiBuilder {
      * @return {@link ShokanMeisaiJushochiTokureiBuilder}
      */
     public ShokanMeisaiJushochiTokureiBuilder set摘要(RString 摘要) {
-        requireNonNull(摘要, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要"));
         entity.setTekiyo(摘要);
         return this;
     }

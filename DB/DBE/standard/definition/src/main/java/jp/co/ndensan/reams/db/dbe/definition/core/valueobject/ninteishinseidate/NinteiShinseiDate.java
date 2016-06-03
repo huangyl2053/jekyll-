@@ -21,7 +21,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 public class NinteiShinseiDate implements IDbColumnMappable, IValidatable, IValueObject<FlexibleDate> {
 
     private final FlexibleDate 認定申請年月日;
-
+    /**
+     *
+     * NinteiShinseiDateのEMPTY値です。
+     */
     public static final NinteiShinseiDate EMPTY;
 
     /**
@@ -35,14 +38,14 @@ public class NinteiShinseiDate implements IDbColumnMappable, IValidatable, IValu
      * コンストラクタです。<br/>
      *
      * @param 認定申請年月日 認定申請年月日
+     * @throws NullPointerException Error
      */
     public NinteiShinseiDate(FlexibleDate 認定申請年月日) throws NullPointerException {
         this.認定申請年月日 = requireNonNull(認定申請年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定申請年月日"));
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link NinteiShinseiDate}が持つ認定申請年月日についてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link NinteiShinseiDate}が持つ認定申請年月日についてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */

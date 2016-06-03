@@ -13,8 +13,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dba.business.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.jushochitokurei.tashichosonjushochitokurei.TashichosonJushochiTokureiEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuKaijoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
@@ -31,9 +29,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 他市町村住所地特例を管理するクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public class TashichosonJushochiTokurei
-        extends ParentModelBase<TashichosonJushochiTokureiIdentifier, DbT1003TashichosonJushochiTokureiEntity, TashichosonJushochiTokurei>
+        extends ParentModelBase<
+        TashichosonJushochiTokureiIdentifier, DbT1003TashichosonJushochiTokureiEntity, TashichosonJushochiTokurei>
         implements Serializable {
 
     private final DbT1003TashichosonJushochiTokureiEntity entity;
@@ -267,7 +268,7 @@ public class TashichosonJushochiTokurei
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.core.valueobject.kaigoninteichosainno;
 
-import static jp.co.ndensan.reams.uz.uza.batch.parameter.message._BatchMessageUtil.toCode;
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -22,7 +22,7 @@ public enum KaigoNinteichosainNoValidationMessage implements IValidationMessage 
      * 番号がNullであること。
      */
     番号がNullであること(KaigoNinteichosainNoErrorMessage.番号がNullであること);
-    private final Message message;
+    private final transient Message message;
 
     private KaigoNinteichosainNoValidationMessage(IMessageGettable message, String... replacements) {
         this.message = message.getMessage().replace(replacements);

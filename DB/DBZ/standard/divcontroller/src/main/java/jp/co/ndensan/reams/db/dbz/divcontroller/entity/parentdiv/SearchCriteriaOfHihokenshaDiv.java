@@ -1,18 +1,16 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SearchCriteriaDetailDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SearchCriteriaOfHihokensha のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+
+/**
+ * SearchCriteriaOfHihokensha のクラスファイル
+ *
  * @author 自動生成
  */
 public class SearchCriteriaOfHihokenshaDiv extends Panel {
@@ -22,6 +20,7 @@ public class SearchCriteriaOfHihokenshaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ddlHokensha")
     private DropDownList ddlHokensha;
     @JsonProperty("txtHihokenshaNo")
@@ -46,7 +45,7 @@ public class SearchCriteriaOfHihokenshaDiv extends Panel {
 
     @JsonProperty("ddlHokensha")
     public void setDdlHokensha(DropDownList ddlHokensha) {
-        this.ddlHokensha=ddlHokensha;
+        this.ddlHokensha = ddlHokensha;
     }
 
     @JsonProperty("txtHihokenshaNo")
@@ -56,7 +55,7 @@ public class SearchCriteriaOfHihokenshaDiv extends Panel {
 
     @JsonProperty("txtHihokenshaNo")
     public void setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
-        this.txtHihokenshaNo=txtHihokenshaNo;
+        this.txtHihokenshaNo = txtHihokenshaNo;
     }
 
     @JsonProperty("txtTuchishoNo")
@@ -66,7 +65,7 @@ public class SearchCriteriaOfHihokenshaDiv extends Panel {
 
     @JsonProperty("txtTuchishoNo")
     public void setTxtTuchishoNo(TextBoxCode txtTuchishoNo) {
-        this.txtTuchishoNo=txtTuchishoNo;
+        this.txtTuchishoNo = txtTuchishoNo;
     }
 
     @JsonProperty("ddlFukaNendo")
@@ -76,7 +75,7 @@ public class SearchCriteriaOfHihokenshaDiv extends Panel {
 
     @JsonProperty("ddlFukaNendo")
     public void setDdlFukaNendo(DropDownList ddlFukaNendo) {
-        this.ddlFukaNendo=ddlFukaNendo;
+        this.ddlFukaNendo = ddlFukaNendo;
     }
 
     @JsonProperty("SearchCriteriaDetail")
@@ -86,7 +85,7 @@ public class SearchCriteriaOfHihokenshaDiv extends Panel {
 
     @JsonProperty("SearchCriteriaDetail")
     public void setSearchCriteriaDetail(SearchCriteriaDetailDiv SearchCriteriaDetail) {
-        this.SearchCriteriaDetail=SearchCriteriaDetail;
+        this.SearchCriteriaDetail = SearchCriteriaDetail;
     }
 
 }

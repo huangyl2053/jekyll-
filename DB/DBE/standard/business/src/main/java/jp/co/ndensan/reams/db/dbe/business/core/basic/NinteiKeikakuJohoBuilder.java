@@ -112,7 +112,7 @@ public class NinteiKeikakuJohoBuilder {
     /**
      * 要介護認定1.5次判定予定年月日を設定します。
      *
-     * @param 要介護認定1.5次判定予定年月日 要介護認定1.5次判定予定年月日
+     * @param 要介護認定1_5次判定予定年月日 要介護認定1.5次判定予定年月日
      * @return {@link NinteiKeikakuJohoBuilder}
      */
     public NinteiKeikakuJohoBuilder set要介護認定1_5次判定予定年月日(FlexibleDate 要介護認定1_5次判定予定年月日) {

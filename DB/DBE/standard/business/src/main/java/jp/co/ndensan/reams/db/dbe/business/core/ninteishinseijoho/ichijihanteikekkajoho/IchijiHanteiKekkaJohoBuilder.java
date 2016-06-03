@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link IchijiHanteiKekkaJoho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class IchijiHanteiKekkaJohoBuilder {
 
@@ -454,6 +456,54 @@ public class IchijiHanteiKekkaJohoBuilder {
     public IchijiHanteiKekkaJohoBuilder set状態像(RString 状態像) {
         requireNonNull(状態像, UrSystemErrorMessages.値がnull.getReplacedMessage("状態像"));
         entity.setJotaizo(状態像);
+        return this;
+    }
+
+    /**
+     * 仮一次判定区分を設定します。
+     *
+     * @param 仮一次判定区分 仮一次判定区分
+     * @return {@link IchijiHanteiKekkaJohoBuilder}
+     */
+    public IchijiHanteiKekkaJohoBuilder set仮一次判定区分(boolean 仮一次判定区分) {
+        requireNonNull(仮一次判定区分, UrSystemErrorMessages.値がnull.getReplacedMessage("仮一次判定区分"));
+        entity.setKariIchijiHanteiKubun(仮一次判定区分);
+        return this;
+    }
+
+    /**
+     * 要介護認定一次判定年月日を設定します。
+     *
+     * @param 要介護認定一次判定年月日 要介護認定一次判定年月日
+     * @return {@link IchijiHanteiKekkaJohoBuilder}
+     */
+    public IchijiHanteiKekkaJohoBuilder set要介護認定一次判定年月日(FlexibleDate 要介護認定一次判定年月日) {
+        requireNonNull(要介護認定一次判定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定一次判定年月日"));
+        entity.setIchijiHanteiYMD(要介護認定一次判定年月日);
+        return this;
+    }
+
+    /**
+     * 要介護認定一次判定結果コードを設定します。
+     *
+     * @param 要介護認定一次判定結果コード 要介護認定一次判定結果コード
+     * @return {@link IchijiHanteiKekkaJohoBuilder}
+     */
+    public IchijiHanteiKekkaJohoBuilder set要介護認定一次判定結果コード(Code 要介護認定一次判定結果コード) {
+        requireNonNull(要介護認定一次判定結果コード, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定一次判定結果コード"));
+        entity.setIchijiHanteiKekkaCode(要介護認定一次判定結果コード);
+        return this;
+    }
+
+    /**
+     * 要介護認定一次判定結果コード_認知症加算を設定します。
+     *
+     * @param 要介護認定一次判定結果コード_認知症加算 要介護認定一次判定結果コード_認知症加算
+     * @return {@link IchijiHanteiKekkaJohoBuilder}
+     */
+    public IchijiHanteiKekkaJohoBuilder set要介護認定一次判定結果コード_認知症加算(Code 要介護認定一次判定結果コード_認知症加算) {
+        requireNonNull(要介護認定一次判定結果コード_認知症加算, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定一次判定結果コード_認知症加算"));
+        entity.setIchijiHanteiKekkaNinchishoKasanCode(要介護認定一次判定結果コード_認知症加算);
         return this;
     }
 

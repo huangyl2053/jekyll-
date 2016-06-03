@@ -76,6 +76,12 @@ public class DbT7064CareManegerDac implements ISaveable<DbT7064CareManegerEntity
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
+    /**
+     * selectByJigyoshaCode
+     *
+     * @param 事業者番号 事業者番号
+     * @return new UnsupportedOperationException
+     */
     public List<DbT7064CareManegerEntity> selectByJigyoshaCode(KaigoJigyoshaNo 事業者番号) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

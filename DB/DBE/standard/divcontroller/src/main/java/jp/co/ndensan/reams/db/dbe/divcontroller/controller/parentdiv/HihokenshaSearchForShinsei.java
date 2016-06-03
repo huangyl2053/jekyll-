@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv;
 
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010001.HihokenshaSearchForShinseiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001.HihokenshaSearchForShinseiDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**

@@ -10,16 +10,20 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5590ShinsakaiIinJogaiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 審査会委員除外情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class ShinsakaiIinJogaiJoho extends ModelBase<ShinsakaiIinJogaiJohoIdentifier, DbT5590ShinsakaiIinJogaiJohoEntity, ShinsakaiIinJogaiJoho> implements Serializable {
+public class ShinsakaiIinJogaiJoho
+        extends ModelBase<ShinsakaiIinJogaiJohoIdentifier, DbT5590ShinsakaiIinJogaiJohoEntity, ShinsakaiIinJogaiJoho>
+        implements Serializable {
 
     private final DbT5590ShinsakaiIinJogaiJohoEntity entity;
     private final ShinsakaiIinJogaiJohoIdentifier id;
@@ -119,8 +123,7 @@ public class ShinsakaiIinJogaiJoho extends ModelBase<ShinsakaiIinJogaiJohoIdenti
     }
 
     /**
-     * 審査会委員除外情報のみを変更対象とします。<br/>
-     * {@link DbT5590ShinsakaiIinJogaiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 審査会委員除外情報のみを変更対象とします。<br/> {@link DbT5590ShinsakaiIinJogaiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShinsakaiIinJogaiJoho}
      */
@@ -134,8 +137,7 @@ public class ShinsakaiIinJogaiJoho extends ModelBase<ShinsakaiIinJogaiJohoIdenti
     }
 
     /**
-     * 保持する審査会委員除外情報を削除対象とします。<br/>
-     * {@link DbT5590ShinsakaiIinJogaiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する審査会委員除外情報を削除対象とします。<br/> {@link DbT5590ShinsakaiIinJogaiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShinsakaiIinJogaiJoho}
      */

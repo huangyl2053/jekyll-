@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigoserviceshurui;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 
 /**
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
-public class KaigoServiceShuruiMapperParameter {
+public final class KaigoServiceShuruiMapperParameter {
 
     private final ServiceShuruiCode serviceShuruiCd;
     private final FlexibleYearMonth teikyoKaishiYM;

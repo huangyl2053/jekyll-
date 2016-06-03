@@ -6,11 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.business.core.basic.shujiijoho;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.basic.shujiijoho.ShujiiMasterRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiijoho.ShujiiMasterRelateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -18,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医情報を管理するクラスです。
+ * 
+ * @reamsid_L DBE-0250-010  suguangjun 
  */
 public class ShujiiMaster {
 
@@ -47,7 +47,7 @@ public class ShujiiMaster {
      *
      * @return 主治医氏名
      */
-    public AtenaMeisho get主治医氏名() {
+    public RString get主治医氏名() {
         return entity.getShujiiName();
     }
 
@@ -56,7 +56,7 @@ public class ShujiiMaster {
      *
      * @return 主治医カナ
      */
-    public AtenaKanaMeisho get主治医カナ() {
+    public RString get主治医カナ() {
         return entity.getShujiiKana();
     }
 
@@ -110,7 +110,7 @@ public class ShujiiMaster {
      *
      * @return 住所
      */
-    public RString get住所() {
+    public AtenaJusho get住所() {
         return entity.getJusho();
     }
 
@@ -137,7 +137,7 @@ public class ShujiiMaster {
      *
      * @return 性別
      */
-    public Code get性別() {
+    public RString get性別() {
         return entity.getSeibetsu();
     }
 

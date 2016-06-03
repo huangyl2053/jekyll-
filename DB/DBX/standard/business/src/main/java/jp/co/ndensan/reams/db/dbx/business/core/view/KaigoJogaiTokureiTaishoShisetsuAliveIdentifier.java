@@ -14,6 +14,7 @@ import lombok.Value;
  * 他市町村住所地特例者台帳管理Aliveの識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KaigoJogaiTokureiTaishoShisetsuAliveIdentifier implements Serializable {
 
     private final RString 事業者種別;

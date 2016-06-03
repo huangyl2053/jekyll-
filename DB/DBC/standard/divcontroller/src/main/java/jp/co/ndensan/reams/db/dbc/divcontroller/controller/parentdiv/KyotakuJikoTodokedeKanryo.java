@@ -29,6 +29,8 @@ public class KyotakuJikoTodokedeKanryo {
     }
 
     private void setKanryoMessage(KyotakuJikoTodokedeKanryoDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getKyotakuJikoTodokedeKanryoMessage();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
 //
 //        KaigoKanryoMessage.setMessage(panel.getKyotakuJikoTodokedeKanryoMessage(),

@@ -11,10 +11,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ServiceJigyosha のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBA-0140-010 houtianpeng
  */
 public class ServiceJigyoshaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

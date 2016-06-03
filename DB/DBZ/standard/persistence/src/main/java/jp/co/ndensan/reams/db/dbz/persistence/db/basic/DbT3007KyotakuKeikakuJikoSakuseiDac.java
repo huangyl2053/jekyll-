@@ -9,14 +9,17 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakusei;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakusei.*;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakusei.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakusei.kyotaku_SogoJigyoKubun;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakusei.rirekiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakusei.taishoYM;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -104,5 +107,38 @@ public class DbT3007KyotakuKeikakuJikoSakuseiDac implements ISaveable<DbT3007Kyo
             selectByKey(HihokenshaNo 被保険者番号, HokenshaNo 証記載保険者番号,
                     ShikibetsuCode 識別コード, FlexibleYearMonth 対象年月, YMDHMS 処理日時) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * 居宅給付計画自己作成を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年月 TaishoYM
+     * @param 履歴番号 RirekiNo
+     * @param 総合事業区分 RString
+     * @return DbT3007KyotakuKeikakuJikoSakuseiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT3007KyotakuKeikakuJikoSakuseiEntity get居宅給付計画自己作成(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth 対象年月,
+            int 履歴番号,
+            RString 総合事業区分) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(総合事業区分, UrSystemErrorMessages.値がnull.getReplacedMessage("総合事業区分"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3007KyotakuKeikakuJikoSakusei.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(taishoYM, 対象年月),
+                                eq(rirekiNo, 履歴番号),
+                                eq(kyotaku_SogoJigyoKubun, 総合事業区分))).
+                toObject(DbT3007KyotakuKeikakuJikoSakuseiEntity.class);
     }
 }

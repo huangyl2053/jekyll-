@@ -5,19 +5,41 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.core.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.hihokenshadaicho.HihokenshaDaichoSearchCondition;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 
 /**
  *
- * @author LDNS xuxf
+ * @reamsid_L DBB-0630-020 chengsanyuan
  */
 public interface IDbT1001HihokenshaDaichoMapper {
 
-    /** {@link DbT1001HihokenshaDaichoEntity}を取得します。
+    /**
+     * {@link DbT1001HihokenshaDaichoEntity}を取得します。
      *
      * @return {@link DbT1001HihokenshaDaichoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT1001HihokenshaDaichoEntity getEntity();
+
+    /**
+     *
+     * 資格の情報を取得します。
+     *
+     * @param param HihokenshaDaichoSearchCondition
+     * @return List<DbT1001HihokenshaDaichoEntity>
+     */
+    DbT1001HihokenshaDaichoEntity get資格の情報(HihokenshaDaichoSearchCondition param);
+
+    /**
+     *
+     * 広域運用識別コード情報の取得処理。
+     *
+     * @param parameter KaiGoJuminHyokouKiuParameter
+     * @return List<DbT1001HihokenshaDaichoEntity>
+     */
+    List<DbT1001HihokenshaDaichoEntity> ge広域運用識別コード情報の取得処理(KaiGoJuminHyokouKiuParameter parameter);
 
 }

@@ -80,14 +80,23 @@ public class SoshitsuJiyuTatokuTekiyo implements ICodeValueObject {
         return codeRyakusho;
     }
 
+    /**
+     * @return option1
+     */
     public RString getOption1() {
         return option1;
     }
 
+    /**
+     * @return option2
+     */
     public RString getOption2() {
         return option2;
     }
 
+    /**
+     * @return option3
+     */
     public RString getOption3() {
         return option3;
     }

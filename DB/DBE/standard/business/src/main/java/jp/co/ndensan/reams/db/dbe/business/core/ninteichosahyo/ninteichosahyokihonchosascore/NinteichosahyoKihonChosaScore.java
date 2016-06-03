@@ -14,23 +14,27 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyokih
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyokihonchosascoreitem.NinteichosahyoKihonChosaScoreItemIdentifier;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyo.ninteichosahyokihonchosascore.NinteichosahyoKihonChosaScoreEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.util.ModelBase;
-import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5204NinteichosahyoKihonChosaScoreEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5212NinteichosahyoKihonChosaScoreItemEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査票（基本調査素点）を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class NinteichosahyoKihonChosaScore extends ModelBase<NinteichosahyoKihonChosaScoreIdentifier, DbT5204NinteichosahyoKihonChosaScoreEntity, NinteichosahyoKihonChosaScore> implements Serializable {
+public class NinteichosahyoKihonChosaScore
+        extends ModelBase<NinteichosahyoKihonChosaScoreIdentifier, DbT5204NinteichosahyoKihonChosaScoreEntity, NinteichosahyoKihonChosaScore>
+        implements Serializable {
 
     private final DbT5204NinteichosahyoKihonChosaScoreEntity entity;
     private final NinteichosahyoKihonChosaScoreIdentifier id;
-    private final Models<NinteichosahyoKihonChosaScoreItemIdentifier, NinteichosahyoKihonChosaScoreItem> ninteichosahyoKihonChosaScoreItem;
+    private final Models<NinteichosahyoKihonChosaScoreItemIdentifier, NinteichosahyoKihonChosaScoreItem> kihonChosaScoreItem;
 
     /**
      * コンストラクタです。<br/>
@@ -50,7 +54,7 @@ public class NinteichosahyoKihonChosaScore extends ModelBase<NinteichosahyoKihon
                 申請書管理番号,
                 要介護認定調査履歴番号
         );
-        this.ninteichosahyoKihonChosaScoreItem = Models.create(new ArrayList<NinteichosahyoKihonChosaScoreItem>());
+        this.kihonChosaScoreItem = Models.create(new ArrayList<NinteichosahyoKihonChosaScoreItem>());
     }
 
     /**
@@ -64,11 +68,11 @@ public class NinteichosahyoKihonChosaScore extends ModelBase<NinteichosahyoKihon
         this.id = new NinteichosahyoKihonChosaScoreIdentifier(
                 entity.get認定調査票_基本調査素点Entity().getShinseishoKanriNo(),
                 entity.get認定調査票_基本調査素点Entity().getNinteichosaRirekiNo());
-        List<NinteichosahyoKihonChosaScoreItem> ninteichosahyoKihonChosaScoreItemList = new ArrayList<>();
+        List<NinteichosahyoKihonChosaScoreItem> kihonChosaScoreItemList = new ArrayList<>();
         for (DbT5212NinteichosahyoKihonChosaScoreItemEntity niniEntity : entity.get認定調査票_基本調査素点項目Entity()) {
-            ninteichosahyoKihonChosaScoreItemList.add(new NinteichosahyoKihonChosaScoreItem(niniEntity));
+            kihonChosaScoreItemList.add(new NinteichosahyoKihonChosaScoreItem(niniEntity));
         }
-        this.ninteichosahyoKihonChosaScoreItem = Models.create(ninteichosahyoKihonChosaScoreItemList);
+        this.kihonChosaScoreItem = Models.create(kihonChosaScoreItemList);
 
     }
 
@@ -81,11 +85,11 @@ public class NinteichosahyoKihonChosaScore extends ModelBase<NinteichosahyoKihon
     NinteichosahyoKihonChosaScore(
             DbT5204NinteichosahyoKihonChosaScoreEntity entity,
             NinteichosahyoKihonChosaScoreIdentifier id,
-            Models<NinteichosahyoKihonChosaScoreItemIdentifier, NinteichosahyoKihonChosaScoreItem> ninteichosahyoKihonChosaScoreItem
+            Models<NinteichosahyoKihonChosaScoreItemIdentifier, NinteichosahyoKihonChosaScoreItem> kihonChosaScoreItem
     ) {
         this.entity = entity;
         this.id = id;
-        this.ninteichosahyoKihonChosaScoreItem = ninteichosahyoKihonChosaScoreItem;
+        this.kihonChosaScoreItem = kihonChosaScoreItem;
     }
 
     /**
@@ -199,14 +203,11 @@ public class NinteichosahyoKihonChosaScore extends ModelBase<NinteichosahyoKihon
     }
 
     /**
-     * 認定調査票（基本調査素点）配下の要素を削除対象とします。<br/>
-     * {@link DbT5204NinteichosahyoKihonChosaScoreEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 認定調査票（基本調査素点）配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link NinteichosahyoKihonChosaScore}を返します。
+     * 認定調査票（基本調査素点）配下の要素を削除対象とします。<br/> {@link DbT5204NinteichosahyoKihonChosaScoreEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 認定調査票（基本調査素点）配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link NinteichosahyoKihonChosaScore}を返します。
      *
      * @return 削除対象処理実施後の{@link NinteichosahyoKihonChosaScore}
-     * @throws IllegalStateException
-     * DbT5204NinteichosahyoKihonChosaScoreEntityのデータ状態が変更の場合
+     * @throws IllegalStateException DbT5204NinteichosahyoKihonChosaScoreEntityのデータ状態が変更の場合
      */
     @Override
     public NinteichosahyoKihonChosaScore deleted() {
@@ -218,17 +219,16 @@ public class NinteichosahyoKihonChosaScore extends ModelBase<NinteichosahyoKihon
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new NinteichosahyoKihonChosaScore(
-                deletedEntity, id, ninteichosahyoKihonChosaScoreItem.deleted());
+                deletedEntity, id, kihonChosaScoreItem.deleted());
     }
 
     @Override
     public boolean hasChanged() {
-        return hasChangedEntity() || ninteichosahyoKihonChosaScoreItem.hasAnyChanged();
+        return hasChangedEntity() || kihonChosaScoreItem.hasAnyChanged();
     }
 
     /**
-     * 認定調査票（基本調査素点）のみを変更対象とします。<br/>
-     * {@link DbT5204NinteichosahyoKihonChosaScoreEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査票（基本調査素点）のみを変更対象とします。<br/> {@link DbT5204NinteichosahyoKihonChosaScoreEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosahyoKihonChosaScore}
      */
@@ -238,7 +238,7 @@ public class NinteichosahyoKihonChosaScore extends ModelBase<NinteichosahyoKihon
             modifiedEntity.setState(EntityDataState.Modified);
         }
         return new NinteichosahyoKihonChosaScore(
-                modifiedEntity, id, ninteichosahyoKihonChosaScoreItem);
+                modifiedEntity, id, kihonChosaScoreItem);
     }
 
     /**
@@ -249,8 +249,8 @@ public class NinteichosahyoKihonChosaScore extends ModelBase<NinteichosahyoKihon
      * @throws IllegalStateException 指定の識別子に該当する認定調査票（基本調査素点項目）項目情報がない場合
      */
     public NinteichosahyoKihonChosaScoreItem getNinteichosahyoKihonChosaScoreItem(NinteichosahyoKihonChosaScoreItemIdentifier id) {
-        if (ninteichosahyoKihonChosaScoreItem.contains(id)) {
-            return ninteichosahyoKihonChosaScoreItem.clone().get(id);
+        if (kihonChosaScoreItem.contains(id)) {
+            return kihonChosaScoreItem.clone().get(id);
         }
         //TODO メッセージの検討
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
@@ -262,7 +262,7 @@ public class NinteichosahyoKihonChosaScore extends ModelBase<NinteichosahyoKihon
      * @return 認定調査票（基本調査素点項目）項目情報リスト
      */
     public List<NinteichosahyoKihonChosaScoreItem> getNinteichosahyoKihonChosaScoreItemList() {
-        return new ArrayList<>(ninteichosahyoKihonChosaScoreItem.values());
+        return new ArrayList<>(kihonChosaScoreItem.values());
 
     }
 
@@ -272,7 +272,7 @@ public class NinteichosahyoKihonChosaScore extends ModelBase<NinteichosahyoKihon
      * @return {@link NinteichosahyoKihonChosaScore}のシリアライズ形式
      */
     protected Object writeReplace() {
-        return new _SerializationProxy(entity, id, ninteichosahyoKihonChosaScoreItem);
+        return new _SerializationProxy(entity, id, kihonChosaScoreItem);
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -280,20 +280,20 @@ public class NinteichosahyoKihonChosaScore extends ModelBase<NinteichosahyoKihon
         private static final long serialVersionUID = -710031961519711799L;
         private final DbT5204NinteichosahyoKihonChosaScoreEntity entity;
         private final NinteichosahyoKihonChosaScoreIdentifier id;
-        private final Models<NinteichosahyoKihonChosaScoreItemIdentifier, NinteichosahyoKihonChosaScoreItem> ninteichosahyoKihonChosaScoreItem;
+        private final Models<NinteichosahyoKihonChosaScoreItemIdentifier, NinteichosahyoKihonChosaScoreItem> kihonChosaScoreItem;
 
         private _SerializationProxy(
                 DbT5204NinteichosahyoKihonChosaScoreEntity entity,
                 NinteichosahyoKihonChosaScoreIdentifier id,
-                Models<NinteichosahyoKihonChosaScoreItemIdentifier, NinteichosahyoKihonChosaScoreItem> ninteichosahyoKihonChosaScoreItem
+                Models<NinteichosahyoKihonChosaScoreItemIdentifier, NinteichosahyoKihonChosaScoreItem> kihonChosaScoreItem
         ) {
             this.entity = entity;
             this.id = id;
-            this.ninteichosahyoKihonChosaScoreItem = ninteichosahyoKihonChosaScoreItem;
+            this.kihonChosaScoreItem = kihonChosaScoreItem;
         }
 
         private Object readResolve() {
-            return new NinteichosahyoKihonChosaScore(this.entity, this.id, this.ninteichosahyoKihonChosaScoreItem);
+            return new NinteichosahyoKihonChosaScore(this.entity, this.id, this.kihonChosaScoreItem);
         }
     }
 
@@ -304,7 +304,7 @@ public class NinteichosahyoKihonChosaScore extends ModelBase<NinteichosahyoKihon
      * @return {@link NinteichosahyoKihonChosaScoreBuilder}
      */
     public NinteichosahyoKihonChosaScoreBuilder createBuilderForEdit() {
-        return new NinteichosahyoKihonChosaScoreBuilder(entity, id, ninteichosahyoKihonChosaScoreItem);
+        return new NinteichosahyoKihonChosaScoreBuilder(entity, id, kihonChosaScoreItem);
     }
 
     @Override

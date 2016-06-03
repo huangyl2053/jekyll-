@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbu.definition.core.enumeratedtype.config;
 /**
  * 被保険者表示方法に関連する業務コンフィグです。
  *
- * @author n8178 城間篤人
+ * @reamsid_L DBU-0420-030 duanzhanli
  */
 public enum ConfigKeysHihokenshashoIndicationMethod {
 

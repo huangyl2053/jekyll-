@@ -1,19 +1,19 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 共同処理用受給者異動高額送付テーブルのエンティティクラスです。
@@ -32,17 +32,14 @@ public class DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity extends DbTableEntit
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private FlexibleDate idoYMD;
-    @PrimaryKey
-    private RString idoKubunCode;
-    @PrimaryKey
-    private RString jukyushaIdoJiyu;
-    @PrimaryKey
-    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
-    @PrimaryKey
     private HihokenshaNo hiHokenshaNo;
     @PrimaryKey
+    private FlexibleDate idoYMD;
+    @PrimaryKey
     private int rirekiNo;
+    private RString idoKubunCode;
+    private RString jukyushaIdoJiyu;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private HihokenshaNo setaiShuyakuNo;
     private RString setaiShotokuKubunCode;
     private RString shotokuKubunCode;
@@ -51,6 +48,9 @@ public class DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity extends DbTableEntit
     private boolean shikyuShinseishoOutputAriFlag;
     private boolean teiseiRenrakuhyoFlag;
     private FlexibleYearMonth sofuYM;
+    private RString teiseiKubunCode;
+    private FlexibleDate teiseiYMD;
+    private boolean logicalDeletedFlag;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -99,6 +99,24 @@ public class DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity extends DbTableEntit
     }
 
     /**
+     * 被保険者番号のgetメソッドです。
+     * 
+     * @return 被保険者番号
+     */
+    public HihokenshaNo getHiHokenshaNo() {
+        return hiHokenshaNo;
+    }
+
+    /**
+     * 被保険者番号のsetメソッドです。
+     * 
+     * @param hiHokenshaNo 被保険者番号
+     */
+    public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
+        this.hiHokenshaNo = hiHokenshaNo;
+    }
+
+    /**
      * 異動年月日のgetメソッドです。
      * 
      * @return 異動年月日
@@ -114,6 +132,24 @@ public class DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity extends DbTableEntit
      */
     public void setIdoYMD(@Nonnull FlexibleDate idoYMD) {
         this.idoYMD = idoYMD;
+    }
+
+    /**
+     * 履歴番号のgetメソッドです。
+     * 
+     * @return 履歴番号
+     */
+    public int getRirekiNo() {
+        return rirekiNo;
+    }
+
+    /**
+     * 履歴番号のsetメソッドです。
+     * 
+     * @param rirekiNo 履歴番号
+     */
+    public void setRirekiNo(@Nonnull int rirekiNo) {
+        this.rirekiNo = rirekiNo;
     }
 
     /**
@@ -180,42 +216,6 @@ public class DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity extends DbTableEntit
      */
     public void setShoKisaiHokenshaNo(@Nonnull ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
-    }
-
-    /**
-     * 被保険者番号のgetメソッドです。
-     * 
-     * @return 被保険者番号
-     */
-    public HihokenshaNo getHiHokenshaNo() {
-        return hiHokenshaNo;
-    }
-
-    /**
-     * 被保険者番号のsetメソッドです。
-     * 
-     * @param hiHokenshaNo 被保険者番号
-     */
-    public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
-        this.hiHokenshaNo = hiHokenshaNo;
-    }
-
-    /**
-     * 履歴番号のgetメソッドです。
-     * 
-     * @return 履歴番号
-     */
-    public int getRirekiNo() {
-        return rirekiNo;
-    }
-
-    /**
-     * 履歴番号のsetメソッドです。
-     * 
-     * @param rirekiNo 履歴番号
-     */
-    public void setRirekiNo(@Nonnull int rirekiNo) {
-        this.rirekiNo = rirekiNo;
     }
 
     /**
@@ -399,6 +399,67 @@ public class DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity extends DbTableEntit
     }
 
     /**
+     * 訂正区分コードのgetメソッドです。
+     * <br/>
+     * <br/>2：修正、3：削除
+     * 
+     * @return 訂正区分コード
+     */
+    @CheckForNull
+    public RString getTeiseiKubunCode() {
+        return teiseiKubunCode;
+    }
+
+    /**
+     * 訂正区分コードのsetメソッドです。
+     * <br/>
+     * <br/>2：修正、3：削除
+     * 
+     * @param teiseiKubunCode 訂正区分コード
+     */
+    public void setTeiseiKubunCode(RString teiseiKubunCode) {
+        this.teiseiKubunCode = teiseiKubunCode;
+    }
+
+    /**
+     * 訂正年月日のgetメソッドです。
+     * 
+     * @return 訂正年月日
+     */
+    @CheckForNull
+    public FlexibleDate getTeiseiYMD() {
+        return teiseiYMD;
+    }
+
+    /**
+     * 訂正年月日のsetメソッドです。
+     * 
+     * @param teiseiYMD 訂正年月日
+     */
+    public void setTeiseiYMD(FlexibleDate teiseiYMD) {
+        this.teiseiYMD = teiseiYMD;
+    }
+
+    /**
+     * 論理削除フラグのgetメソッドです。
+     * 
+     * @return 論理削除フラグ
+     */
+    @CheckForNull
+    public boolean getLogicalDeletedFlag() {
+        return logicalDeletedFlag;
+    }
+
+    /**
+     * 論理削除フラグのsetメソッドです。
+     * 
+     * @param logicalDeletedFlag 論理削除フラグ
+     */
+    public void setLogicalDeletedFlag(boolean logicalDeletedFlag) {
+        this.logicalDeletedFlag = logicalDeletedFlag;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
@@ -410,19 +471,10 @@ public class DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity extends DbTableEntit
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.idoYMD, other.idoYMD)) {
-            return false;
-        }
-        if (!Objects.equals(this.idoKubunCode, other.idoKubunCode)) {
-            return false;
-        }
-        if (!Objects.equals(this.jukyushaIdoJiyu, other.jukyushaIdoJiyu)) {
-            return false;
-        }
-        if (!Objects.equals(this.shoKisaiHokenshaNo, other.shoKisaiHokenshaNo)) {
-            return false;
-        }
         if (!Objects.equals(this.hiHokenshaNo, other.hiHokenshaNo)) {
+            return false;
+        }
+        if (!Objects.equals(this.idoYMD, other.idoYMD)) {
             return false;
         }
         if (this.rirekiNo != other.rirekiNo) {
@@ -436,12 +488,12 @@ public class DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity extends DbTableEntit
      */
     @Override
     public void shallowCopy(DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity entity) {
+        this.hiHokenshaNo = entity.hiHokenshaNo;
         this.idoYMD = entity.idoYMD;
+        this.rirekiNo = entity.rirekiNo;
         this.idoKubunCode = entity.idoKubunCode;
         this.jukyushaIdoJiyu = entity.jukyushaIdoJiyu;
         this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
-        this.hiHokenshaNo = entity.hiHokenshaNo;
-        this.rirekiNo = entity.rirekiNo;
         this.setaiShuyakuNo = entity.setaiShuyakuNo;
         this.setaiShotokuKubunCode = entity.setaiShotokuKubunCode;
         this.shotokuKubunCode = entity.shotokuKubunCode;
@@ -450,6 +502,9 @@ public class DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity extends DbTableEntit
         this.shikyuShinseishoOutputAriFlag = entity.shikyuShinseishoOutputAriFlag;
         this.teiseiRenrakuhyoFlag = entity.teiseiRenrakuhyoFlag;
         this.sofuYM = entity.sofuYM;
+        this.teiseiKubunCode = entity.teiseiKubunCode;
+        this.teiseiYMD = entity.teiseiYMD;
+        this.logicalDeletedFlag = entity.logicalDeletedFlag;
     }
 
     /**
@@ -458,9 +513,10 @@ public class DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity extends DbTableEntit
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(idoYMD, idoKubunCode, jukyushaIdoJiyu, shoKisaiHokenshaNo, hiHokenshaNo, rirekiNo, setaiShuyakuNo, setaiShotokuKubunCode, shotokuKubunCode, roureiFukushiNenkinJukyuAriFlag, riyoshaFutan2DankaiAriFlag, shikyuShinseishoOutputAriFlag, teiseiRenrakuhyoFlag, sofuYM);
+        return super.toMd5(hiHokenshaNo, idoYMD, rirekiNo, idoKubunCode, jukyushaIdoJiyu, shoKisaiHokenshaNo, setaiShuyakuNo, setaiShotokuKubunCode, shotokuKubunCode, roureiFukushiNenkinJukyuAriFlag, riyoshaFutan2DankaiAriFlag, shikyuShinseishoOutputAriFlag, teiseiRenrakuhyoFlag, sofuYM, teiseiKubunCode, teiseiYMD, logicalDeletedFlag);
     }
 
 // </editor-fold>
+
 
 }

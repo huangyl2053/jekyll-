@@ -38,12 +38,10 @@ public class SearchHihokenshaPanel {
 //        panel.getHihokenshaFinder().getSearchCriteriaOfHihokensha().setIsOpen(false);
         /////////////////////////////////////////////////////////////////////////////////////////
         //TO DO  JutakuData1.xml ①
-        List<HashMap> ymlData = ymlData();
-
+//        List<HashMap> ymlData = ymlData();
         //TO DO  JutakuData1.xml Read　②
 //        RString hihokenshaNo = new RString(ymlData.get(0).get("hihokenshaNo").toString());
-       /////////////////////////////////////////////////////////////////////////////////////////
-
+        /////////////////////////////////////////////////////////////////////////////////////////
         //TO DO  JutakuData.xml Write　③
 //        panel.getHihokenshaFinder().getSearchCriteriaOfHihokensha().getTxtHihokenshaNo().setValue(new RString(hihokenshaNo));
         response.data = panel;
@@ -64,12 +62,10 @@ public class SearchHihokenshaPanel {
 //        panel.getHihokenshaFinder().getSearchCriteriaOfHihokensha().setIsOpen(false);
         /////////////////////////////////////////////////////////////////////////////////////////
         //TO DO  JutakuData1.xml ①
-        List<HashMap> ymlData = ymlData();
-
+//        List<HashMap> ymlData = ymlData();
         //TO DO  JutakuData1.xml Read　②
 //        RString hihokenshaNo = new RString(ymlData.get(0).get("hihokenshaNo").toString());
-       /////////////////////////////////////////////////////////////////////////////////////////
-
+        /////////////////////////////////////////////////////////////////////////////////////////
         //TO DO  JutakuData.xml Write　③
 //        panel.getHihokenshaFinder().getSearchCriteriaOfHihokensha().getTxtHihokenshaNo().setValue(new RString(hihokenshaNo));
         response.data = panel;

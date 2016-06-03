@@ -78,7 +78,7 @@ public final class ViewStateKeyCreator {
     }
 
     private static boolean is減免あり(Fuka model) {
-        return model.get減免額().compareTo(Decimal.ZERO) > 0;
+        return model.get減免額() != null && model.get減免額().compareTo(Decimal.ZERO) > 0;
     }
 
     private static boolean is徴収猶予あり(Fuka fuka) {

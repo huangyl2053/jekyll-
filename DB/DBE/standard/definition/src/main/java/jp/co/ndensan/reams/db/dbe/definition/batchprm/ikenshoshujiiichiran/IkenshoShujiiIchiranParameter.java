@@ -13,11 +13,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 医療機関・主治医一覧表作成_バッチフロークラスパラメータクラス
+ * 医療機関・主治医一覧表作成_バッチフロークラスパラメータクラスです。
+ *
+ * @reamsid_L DBE-0260-030 zuotao
  */
 @Setter
 @Getter
-public class IkenshoShujiiIchiranParameter extends BatchParameterBase{
+public class IkenshoShujiiIchiranParameter extends BatchParameterBase {
 
     /**
      * 市町村コード
@@ -55,7 +57,7 @@ public class IkenshoShujiiIchiranParameter extends BatchParameterBase{
     public static final String JYOKYO = "jyokyo";
 
     /**
-     *  並び順
+     * 並び順
      */
     public static final String OUTPUTSORT = "outputSort";
 

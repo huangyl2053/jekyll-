@@ -6,7 +6,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain;
 
-import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChosainJohoRelateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -16,11 +15,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査スケジュール詳細情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-0020-020 lishengli
  */
-public class ChikuNinteiChosain implements Serializable {
+public class ChikuNinteiChosain {
 
     private final ChosainJohoRelateEntity entity;
 
+    /**
+     * コンストラクタです。<br/>
+     * DBより取得した{@link ChosainJohoRelateEntity}より{@link ChikuNinteiChosain}を生成します。
+     *
+     * @param entity DBより取得した{@link ChosainJohoRelateEntity}
+     */
     public ChikuNinteiChosain(ChosainJohoRelateEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査スケジュール詳細情報"));
     }
@@ -77,6 +84,24 @@ public class ChikuNinteiChosain implements Serializable {
      */
     public Code get認定調査時間枠数() {
         return entity.getNinteiChosaJikanWaku();
+    }
+
+    /**
+     * 認定調査時間枠数を返します。
+     *
+     * @return 認定調査時間枠数
+     */
+    public boolean is予約可否() {
+        return entity.isYoyakuKaoFlag();
+    }
+
+    /**
+     * 認定調査時間枠数を返します。
+     *
+     * @return 認定調査時間枠数
+     */
+    public RString get予約状況() {
+        return entity.getYoyakuJokyo();
     }
 
 }

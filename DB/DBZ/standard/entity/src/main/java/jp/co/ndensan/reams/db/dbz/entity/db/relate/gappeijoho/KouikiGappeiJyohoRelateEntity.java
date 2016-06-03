@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 /**
  * 広域合併情報取得_返却Entity
  *
+ * @reamsid_L DBU-0090-010 linghuhang
  */
 @lombok.Getter
 @lombok.Setter

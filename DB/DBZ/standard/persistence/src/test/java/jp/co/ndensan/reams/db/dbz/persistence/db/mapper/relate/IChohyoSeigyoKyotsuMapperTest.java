@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.IChohyoSeigyoKyotsuMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chohyoseigyokyotsu.IChohyoSeigyoKyotsuMapper;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.ChohyoSeigyoKyotsuMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;

@@ -14,10 +14,9 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 public enum DBA1080011TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    除外者登録へ("除外者登録へ"),
-    年齢到達条件へ("年齢到達条件へ"),
-    完了状態へ("完了状態へ"),
-    終了する("終了する");
+    完了する("完了する"),
+    保存する("保存する"),
+    対象検索("対象検索");
 
     private final RString name;
 

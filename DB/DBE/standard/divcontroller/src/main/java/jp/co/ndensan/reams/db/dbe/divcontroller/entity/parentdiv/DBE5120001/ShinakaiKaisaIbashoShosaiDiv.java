@@ -15,10 +15,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 /**
  * ShinakaiKaisaIbashoShosai のクラスファイル 
  * 
- * @author 自動生成
  */
 public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,14 +34,16 @@ public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
     private TextBoxTelNo txtTelNumber;
     @JsonProperty("ddlKaisaiBashoJokyo")
     private DropDownList ddlKaisaiBashoJokyo;
-    @JsonProperty("ccdKaisaiChikuCode")
-    private CodeInputDiv ccdKaisaiChikuCode;
     @JsonProperty("btnupdate")
     private Button btnupdate;
     @JsonProperty("btnback")
     private Button btnback;
+    @JsonProperty("ccdKaisaiChikuCode")
+    private CodeInputDiv ccdKaisaiChikuCode;
     @JsonProperty("jyotai")
     private RString jyotai;
+    @JsonProperty("selectItem")
+    private RString selectItem;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -141,15 +142,6 @@ public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
     }
 
     /*
-     * getccdKaisaiChikuCode
-     * @return ccdKaisaiChikuCode
-     */
-    @JsonProperty("ccdKaisaiChikuCode")
-    public ICodeInputDiv getCcdKaisaiChikuCode() {
-        return ccdKaisaiChikuCode;
-    }
-
-    /*
      * getbtnupdate
      * @return btnupdate
      */
@@ -186,6 +178,15 @@ public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
     }
 
     /*
+     * getccdKaisaiChikuCode
+     * @return ccdKaisaiChikuCode
+     */
+    @JsonProperty("ccdKaisaiChikuCode")
+    public ICodeInputDiv getCcdKaisaiChikuCode() {
+        return ccdKaisaiChikuCode;
+    }
+
+    /*
      * getjyotai
      * @return jyotai
      */
@@ -201,6 +202,24 @@ public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
     @JsonProperty("jyotai")
     public void setJyotai(RString jyotai) {
         this.jyotai = jyotai;
+    }
+
+    /*
+     * getselectItem
+     * @return selectItem
+     */
+    @JsonProperty("selectItem")
+    public RString getSelectItem() {
+        return selectItem;
+    }
+
+    /*
+     * setselectItem
+     * @param selectItem selectItem
+     */
+    @JsonProperty("selectItem")
+    public void setSelectItem(RString selectItem) {
+        this.selectItem = selectItem;
     }
 
     // </editor-fold>

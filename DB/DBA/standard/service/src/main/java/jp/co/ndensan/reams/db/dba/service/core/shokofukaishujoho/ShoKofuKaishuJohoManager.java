@@ -7,12 +7,12 @@ package jp.co.ndensan.reams.db.dba.service.core.shokofukaishujoho;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.ShoKofuKaishuJohoModel;
-import jp.co.ndensan.reams.db.dba.entity.ShoKofuKaishuJohoEntity;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7037ShoKofuKaishuDac;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 証交付回収情報の取得処理です。
+ *
+ * @reamsid_L DBA-1070-020 lizhuoxuan
  */
 public class ShoKofuKaishuJohoManager {
 
@@ -59,85 +61,66 @@ public class ShoKofuKaishuJohoManager {
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 論理削除フラグ boolean
-     * @return SearchResult<ShoKofuKaishuJohoModel>
+     * @return SearchResult<ShoKofuKaishu>
      */
     @Transaction
-    public SearchResult<ShoKofuKaishuJohoModel> getShoKofuKaishuJohoList(HihokenshaNo 被保険者番号, boolean 論理削除フラグ) {
-        List<ShoKofuKaishuJohoModel> businessList = new ArrayList<>();
+    public SearchResult<ShoKofuKaishu> getShoKofuKaishuJohoList(HihokenshaNo 被保険者番号, boolean 論理削除フラグ) {
+        List<ShoKofuKaishu> businessList = new ArrayList<>();
         List<DbT7037ShoKofuKaishuEntity> dbT7037ShoKofuKaishuEntity = 証交付回収情報dac.select一覧取得(被保険者番号, 論理削除フラグ);
         for (DbT7037ShoKofuKaishuEntity shoKofuKaishuEntity : dbT7037ShoKofuKaishuEntity) {
-            businessList.add(new ShoKofuKaishuJohoModel(shoKofuKaishuEntity));
+            businessList.add(new ShoKofuKaishu(shoKofuKaishuEntity));
         }
         return SearchResult.of(businessList, 0, false);
     }
 
     /**
-     * 証交付回収の更新処理します。
+     * 証交付回収情報{@link ShoKofuKaishu}を追加します。
      *
-     * @param kaishuJohoEntity ShoKofuKaishuJohoEntity
-     * @return count
+     * @param 証交付回収情報 {@link ShoKofuKaishu}
+     * @return 追加件数 追加結果の件数を返します。
      */
     @Transaction
-    public int updShoKofuKaishuJoho(ShoKofuKaishuJohoEntity kaishuJohoEntity) {
-        int count = 0;
-        List<DbT7037ShoKofuKaishuEntity> entityList = 証交付回収情報dac.select更新処理(kaishuJohoEntity.getKofuShoShurui(),
-                kaishuJohoEntity.getHihokenshaNo(), kaishuJohoEntity.getHakkoShoriTimestamp());
-        for (DbT7037ShoKofuKaishuEntity entity : entityList) {
-            entity.setHihokenshaNo(kaishuJohoEntity.getHihokenshaNo());
-            entity.setHakkoShoriTimestamp(kaishuJohoEntity.getHakkoShoriTimestamp());
-            entity.setKaishuJiyu(kaishuJohoEntity.getKaishuJiyu());
-            entity.setKaishuRiyu(kaishuJohoEntity.getKaishuRiyu());
-            entity.setKaishuYMD(kaishuJohoEntity.getKaishuYMD());
-            entity.setKofuJiyu(kaishuJohoEntity.getKofuJiyu());
-            entity.setKofuRiyu(kaishuJohoEntity.getKofuRiyu());
-            entity.setKofuShoShurui(kaishuJohoEntity.getKofuShoShurui());
-            entity.setKofuYMD(kaishuJohoEntity.getKofuYMD());
-            entity.setYukoKigenYMD(kaishuJohoEntity.getYukoKigenYMD());
-            entity.setState(EntityDataState.Modified);
-            証交付回収情報dac.save(entity);
-            count = count + 1;
+    public boolean 証交付回収情報の追加(ShoKofuKaishu 証交付回収情報) {
+        requireNonNull(証交付回収情報,
+                UrSystemErrorMessages.値がnull.getReplacedMessage("証交付回収情報"));
+        if (!証交付回収情報.hasChanged()) {
+            return false;
         }
-        return count;
+        DbT7037ShoKofuKaishuEntity dbT7037Entity = 証交付回収情報.toEntity();
+        dbT7037Entity.setState(EntityDataState.Added);
+        return 1 == 証交付回収情報dac.save(dbT7037Entity);
     }
 
     /**
-     * 証交付回収情報を削除します
+     * 証交付回収情報{@link ShoKofuKaishu}を削除します。
      *
-     * @param kaishuJohoEntity ShoKofuKaishuJohoEntity
-     * @return count
+     * @param 証交付回収情報 {@link ShoKofuKaishu}
+     * @return 削除件数 削除結果の件数を返します。
      */
     @Transaction
-    public int delShoKofuKaishuJoho(ShoKofuKaishuJohoEntity kaishuJohoEntity) {
-        int count = 0;
-        List<DbT7037ShoKofuKaishuEntity> entityList = 証交付回収情報dac.select更新処理(kaishuJohoEntity.getKofuShoShurui(),
-                kaishuJohoEntity.getHihokenshaNo(), kaishuJohoEntity.getHakkoShoriTimestamp());
-        for (DbT7037ShoKofuKaishuEntity entity : entityList) {
-            entity.setLogicalDeletedFlag(true);
-            entity.setState(EntityDataState.Modified);
-            証交付回収情報dac.save(entity);
-            count = count + 1;
-        }
-        return count;
+    public boolean 証交付回収情報の削除(ShoKofuKaishu 証交付回収情報) {
+        requireNonNull(証交付回収情報,
+                UrSystemErrorMessages.値がnull.getReplacedMessage("証交付回収情報"));
+        DbT7037ShoKofuKaishuEntity dbT7037Entity = 証交付回収情報.toEntity();
+        dbT7037Entity.setState(EntityDataState.Deleted);
+        return 1 == 証交付回収情報dac.save(dbT7037Entity);
     }
 
     /**
-     * 証交付回収の保存処理結果を返します。
+     * 証交付回収情報{@link ShoKofuKaishu}を更新します。
      *
-     * @param entityList List<ShoKofuKaishuJohoEntity>
+     * @param 証交付回収情報 {@link ShoKofuKaishu}
+     * @return 更新件数 更新結果の件数を返します。
      */
     @Transaction
-    public void saveShoKofuKaishuJoho(List<ShoKofuKaishuJohoEntity> entityList
-    ) {
-        for (ShoKofuKaishuJohoEntity johoEntity : entityList) {
-            if (johoEntity.getStatus() == null || johoEntity.getStatus().isEmpty()) {
-                continue;
-            }
-            if (new RString("修正").equals(johoEntity.getStatus())) {
-                updShoKofuKaishuJoho(johoEntity);
-            }
-            if (new RString("削除").equals(johoEntity.getStatus())) {
-                delShoKofuKaishuJoho(johoEntity);
-            }
+    public boolean 証交付回収情報の更新(ShoKofuKaishu 証交付回収情報) {
+        requireNonNull(証交付回収情報,
+                UrSystemErrorMessages.値がnull.getReplacedMessage("証交付回収情報"));
+        if (!証交付回収情報.hasChanged()) {
+            return false;
         }
+        DbT7037ShoKofuKaishuEntity dbT7037Entity = 証交付回収情報.toEntity();
+        dbT7037Entity.setState(EntityDataState.Modified);
+        return 1 == 証交付回収情報dac.save(dbT7037Entity);
     }
 }

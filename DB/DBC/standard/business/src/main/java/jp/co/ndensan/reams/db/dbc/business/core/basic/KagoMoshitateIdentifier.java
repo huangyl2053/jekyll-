@@ -15,6 +15,7 @@ import lombok.Value;
  * 過誤申立の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KagoMoshitateIdentifier implements Serializable {
 
     private final JigyoshaNo 事業所番号;

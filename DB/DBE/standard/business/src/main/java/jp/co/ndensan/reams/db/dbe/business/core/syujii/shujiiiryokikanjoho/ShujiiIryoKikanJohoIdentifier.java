@@ -6,12 +6,13 @@
 package jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiiiryokikanjoho;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医医療機関情報の識別子です。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

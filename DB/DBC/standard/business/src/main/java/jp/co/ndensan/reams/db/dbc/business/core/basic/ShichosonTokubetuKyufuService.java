@@ -19,8 +19,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 市町村特別給付サービス内容を管理するクラスです。
  */
-public class ShichosonTokubetuKyufuService
-        extends ModelBase<ShichosonTokubetuKyufuServiceIdentifier, DbT3066ShichosonTokubetuKyufuServiceEntity, ShichosonTokubetuKyufuService> implements Serializable {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public class ShichosonTokubetuKyufuService extends
+        ModelBase<ShichosonTokubetuKyufuServiceIdentifier, DbT3066ShichosonTokubetuKyufuServiceEntity, ShichosonTokubetuKyufuService>
+        implements Serializable {
 
     private final DbT3066ShichosonTokubetuKyufuServiceEntity entity;
     private final ShichosonTokubetuKyufuServiceIdentifier id;
@@ -165,7 +167,7 @@ public class ShichosonTokubetuKyufuService
      *
      * @return 市町村特別給付用給付率引下有フラグ
      */
-    public boolean get市町村特別給付用給付率引下有フラグ() {
+    public boolean is市町村特別給付用給付率引下有フラグ() {
         return entity.getKyufuritsuHikisageAriFlag();
     }
 

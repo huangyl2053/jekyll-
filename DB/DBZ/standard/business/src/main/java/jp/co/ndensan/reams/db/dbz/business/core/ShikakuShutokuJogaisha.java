@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -15,15 +15,18 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 資格取得除外者を管理するクラスです。
+ *
+ * @reamsid_L DBZ-9999-011 zhangzhiming
  */
-public class ShikakuShutokuJogaisha extends 
-        ModelBase<ShikakuShutokuJogaishaIdentifier, 
-        DbT1009ShikakuShutokuJogaishaEntity, 
-        ShikakuShutokuJogaisha> implements Serializable {
+public class ShikakuShutokuJogaisha extends
+        ParentModelBase<ShikakuShutokuJogaishaIdentifier, DbT1009ShikakuShutokuJogaishaEntity, ShikakuShutokuJogaisha> implements Serializable {
+
+    private static final long serialVersionUID = -3796373031138454567L;
 
     private final DbT1009ShikakuShutokuJogaishaEntity entity;
     private final ShikakuShutokuJogaishaIdentifier id;
@@ -151,8 +154,7 @@ public class ShikakuShutokuJogaisha extends
     }
 
     /**
-     * 保持する資格取得除外者を削除対象とします。<br/>
-     * {@link DbT1009ShikakuShutokuJogaishaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する資格取得除外者を削除対象とします。<br/> {@link DbT1009ShikakuShutokuJogaishaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShikakuShutokuJogaisha}
      */
@@ -180,6 +182,11 @@ public class ShikakuShutokuJogaisha extends
 
     @Override
     public boolean hasChanged() {
+        return hasChangedEntity();
+    }
+
+    @Override
+    public ShikakuShutokuJogaisha modifiedModel() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -209,5 +216,22 @@ public class ShikakuShutokuJogaisha extends
         return new ShikakuShutokuJogaishaBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ShikakuShutokuJogaisha other = (ShikakuShutokuJogaisha) obj;
+        return Objects.equals(this.id, other.id);
+    }
 }

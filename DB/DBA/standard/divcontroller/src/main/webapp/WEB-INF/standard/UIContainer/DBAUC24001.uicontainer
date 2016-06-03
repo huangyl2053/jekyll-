@@ -65,7 +65,7 @@
      "layoutName": "DBA2040011",
      "layoutTitle": "他市町村住所地特例異動",
      "eventName": "再検索",
-     "destroy": false,
+     "destroy": true,
      "condition": "対象者検索",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
@@ -79,7 +79,7 @@
      "layoutName": "DBA2040011",
      "layoutTitle": "他市町村住所地特例異動",
      "eventName": "再検索",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
@@ -93,6 +93,59 @@
      "layoutName": "DBA2040011",
      "layoutTitle": "他市町村住所地特例異動",
      "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "name": "他特例適用",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1070011",
+     "toLayoutTitle": "転入転出保留対象者管理",
+     "toState": "初期状態"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1070011",
+     "layoutTitle": "転入転出保留対象者管理",
+     "eventName": "転入",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA2040011",
+     "toLayoutTitle": "他市町村住所地特例異動",
+     "toState": "追加適用"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2040011",
+     "layoutTitle": "他市町村住所地特例異動",
+     "eventName": "検索に戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1070011",
+     "toLayoutTitle": "転入転出保留対象者管理",
+     "toState": ""
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1070011",
+     "layoutTitle": "転入転出保留対象者管理",
+     "eventName": "完了する",
      "destroy": false,
      "condition": ""
     }

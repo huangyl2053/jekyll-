@@ -14,6 +14,7 @@ import lombok.Value;
  * 介護賦課の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class FukaIdentifier implements Serializable {
 
     private final FlexibleYear 調定年度;

@@ -12,9 +12,9 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaiiinjoho.ShinsakaiIinJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaiiinjoho.ShinsakaiIinJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -26,8 +26,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 合議体割当委員情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class GogitaiWariateIinJoho extends ModelBase<GogitaiWariateIinJohoIdentifier, DbT5593GogitaiWariateIinJohoEntity, GogitaiWariateIinJoho> implements Serializable {
+public class GogitaiWariateIinJoho
+        extends ModelBase<GogitaiWariateIinJohoIdentifier, DbT5593GogitaiWariateIinJohoEntity, GogitaiWariateIinJoho>
+        implements Serializable {
 
     private final DbT5593GogitaiWariateIinJohoEntity entity;
     private final GogitaiWariateIinJohoIdentifier id;
@@ -143,7 +147,7 @@ public class GogitaiWariateIinJoho extends ModelBase<GogitaiWariateIinJohoIdenti
      *
      * @return 補欠
      */
-    public boolean get補欠() {
+    public boolean is補欠() {
         return entity.getSubstituteFlag();
     }
 

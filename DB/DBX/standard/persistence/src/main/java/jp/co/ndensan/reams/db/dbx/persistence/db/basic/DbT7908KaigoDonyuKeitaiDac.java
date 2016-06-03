@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護導入形態のデータアクセスクラスです。
+ *
+ * @reamsid_L DBU-0050-010 liangbc
  */
 public class DbT7908KaigoDonyuKeitaiDac implements ISaveable<DbT7908KaigoDonyuKeitaiEntity> {
 

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- @reamsid_L DBE-1300-040 dongyabin -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.jogaishinsainjoho.IJogaiShinsainJohoMapper">
+
+    <resultMap id="resultMap_ShinsakaiIinJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.jogaishinsainjoho.ShinsakaiIinJohoRelateEntity" autoMapping="true">
+        <result property="shinsakaiIinCode" column="TBL3_shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiIinKaishiYMD" column="TBL3_shinsakaiIinKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="shinsakaiIinShuryoYMD" column="TBL3_shinsakaiIinShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="shinsakaiIinShimei" column="TBL3_shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="shinsakaiIinKanaShimei" column="TBL3_shinsakaiIinKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <result property="seibetsu" column="TBL3_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiIinShikakuCode" column="TBL3_shinsakaiIinShikakuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="shinsainYusoKubun" column="TBL3_shinsainYusoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="tantoChikuCode" column="TBL3_tantoChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler" />
+        <result property="yubinNo" column="TBL3_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="jusho" column="TBL3_Jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
+        <result property="telNo" column="TBL3_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+        <result property="faxNo" column="TBL3_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+        <result property="seinengappiYMD" column="TBL3_seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="biko" column="TBL3_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="haishiFlag" column="TBL3_haishiFlag" />
+        <result property="haishiYMD" column="TBL3_haishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="remban" column="TBL4_remban" />
+        <result property="shoKisaiHokenshaNo" column="TBL4_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
+        <result property="shujiiIryokikanCode" column="TBL4_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiCode" column="TBL4_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteichosaItakusakiCode" column="TBL4_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiChosainNo" column="TBL4_ninteiChosainNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="sonotaKikanCode" column="TBL4_sonotaKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+
+
+
+    <select id="getShinsakaiIinJoho" resultMap="resultMap_ShinsakaiIinJohoEntity" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SELECT
+            TBL3."shinsakaiIinCode" AS TBL3_shinsakaiIinCode
+            , TBL3."shinsakaiIinKaishiYMD" AS TBL3_shinsakaiIinKaishiYMD
+            , TBL3."shinsakaiIinShuryoYMD" AS TBL3_shinsakaiIinShuryoYMD
+            , TBL3."shinsakaiIinShimei" AS TBL3_shinsakaiIinShimei
+            , TBL3."shinsakaiIinKanaShimei" AS TBL3_shinsakaiIinKanaShimei
+            , TBL3."seibetsu" AS TBL3_seibetsu
+            , TBL3."shinsakaiIinShikakuCode" AS TBL3_shinsakaiIinShikakuCode
+            , TBL3."shinsainYusoKubun" AS TBL3_shinsainYusoKubun
+            , TBL3."tantoChikuCode" AS TBL3_tantoChikuCode
+            , TBL3."yubinNo" AS TBL3_yubinNo
+            , TBL3."Jusho" AS TBL3_Jusho
+            , TBL3."telNo" AS TBL3_telNo
+            , TBL3."faxNo" AS TBL3_faxNo
+            , TBL3."seinengappiYMD" AS TBL3_seinengappiYMD
+            , TBL3."biko" AS TBL3_biko
+            , TBL3."haishiFlag" AS TBL3_haishiFlag
+            , TBL3."haishiYMD" AS TBL3_haishiYMD
+            , TBL4."remban" AS TBL4_remban
+            , TBL4."shoKisaiHokenshaNo" AS TBL4_shoKisaiHokenshaNo
+            , TBL4."shujiiIryokikanCode" AS TBL4_shujiiIryokikanCode
+            , TBL4."shujiiCode" AS TBL4_shujiiCode
+            , TBL4."ninteichosaItakusakiCode" AS TBL4_ninteichosaItakusakiCode
+            , TBL4."ninteiChosainNo" AS TBL4_ninteiChosainNo
+            , TBL4."sonotaKikanCode" AS TBL4_sonotaKikanCode
+        FROM
+        ( 
+          SELECT
+            * 
+          FROM
+            rgdb."DbT5594ShinsakaiIinJoho" 
+          WHERE
+            EXISTS ( 
+              SELECT
+                * 
+              FROM
+                rgdb."DbT5121ShinseiRirekiJoho" AS TBL1 
+                INNER JOIN rgdb."DbT5590ShinsakaiIinJogaiJoho" AS TBL2 
+                  ON TBL1."shinseishoKanriNo" = TBL2."shinseishoKanriNo" 
+              WHERE
+                TBL1."shinseishoKanriNo" = #{shinseishoKanriNo}
+            )
+        ) TBL3 
+        LEFT JOIN rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" AS TBL4 
+          ON TBL3."shinsakaiIinCode" = TBL4."shinsakaiIinCode"
+    </select>
+
+</mapper>

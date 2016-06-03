@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 市町村単独助成金給付申請を特定するためのMyBatis用パラメータクラスです。
@@ -18,7 +17,7 @@ public final class TandokuJoseikinKyufuShinseiMapperParameter {
 // TODO 主キーの数が足りない場合、処理を追加してください。
     private final HihokenshaNo 主キー1;
     private final FlexibleDate 主キー2;
-    private Decimal 主キー3;
+//    private Decimal 主キー3;
 
     private final boolean uses主キー1;
     private final boolean uses主キー2;
@@ -71,22 +70,38 @@ public final class TandokuJoseikinKyufuShinseiMapperParameter {
         return new TandokuJoseikinKyufuShinseiMapperParameter(主キー1, FlexibleDate.MIN, true, false);
     }
 
+    /**
+     * 主キー1を返します。
+     *
+     * @return 主キー1
+     */
     public HihokenshaNo get主キー1() {
         return 主キー1;
     }
 
+    /**
+     * 主キー2を返します。
+     *
+     * @return 主キー2
+     */
     public FlexibleDate get主キー2() {
         return 主キー2;
     }
 
-    public Decimal get主キー3() {
-        return 主キー3;
-    }
-
+    /**
+     * uses主キー1を返します。
+     *
+     * @return uses主キー1
+     */
     public boolean isUses主キー1() {
         return uses主キー1;
     }
 
+    /**
+     * uses主キー2を返します。
+     *
+     * @return uses主キー2
+     */
     public boolean isUses主キー2() {
         return uses主キー2;
     }

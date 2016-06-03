@@ -1,0 +1,130 @@
+﻿{
+ "uiContainerName": "DBBUC00201",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "賦課エラー一覧",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0020002",
+     "toLayoutTitle": "賦課エラー修正",
+     "toState": "初期化状態"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0020002",
+     "layoutTitle": "賦課エラー修正",
+     "eventName": "即時賦課更正",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB8120001",
+     "toLayoutTitle": "介護保険料即時賦課更正",
+     "toState": "即時賦課更正"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB8120001",
+     "layoutTitle": "介護保険料即時賦課更正",
+     "eventName": "賦課エラー修正完了",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0020002",
+     "toLayoutTitle": "賦課エラー修正",
+     "toState": "初期化状態"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0020002",
+     "layoutTitle": "賦課エラー修正",
+     "eventName": "資格不整合修正",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1050011",
+     "toLayoutTitle": "資格異動訂正",
+     "toState": "初期状態"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1050011",
+     "layoutTitle": "資格異動訂正",
+     "eventName": "賦課エラー修正完了",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB8120001",
+     "toLayoutTitle": "介護保険料即時賦課更正",
+     "toState": "即時賦課更正"
+    },
+    {
+     "id": "6",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0020002",
+     "layoutTitle": "賦課エラー修正",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1050011",
+     "layoutTitle": "資格異動訂正",
+     "eventName": "詳細",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1050021",
+     "toLayoutTitle": "被保険者資格詳細異動",
+     "toState": "修正状態"
+    },
+    {
+     "id": "8",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1050021",
+     "layoutTitle": "被保険者資格詳細異動",
+     "eventName": "資格異動の訂正を保存する",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1050011",
+     "toLayoutTitle": "資格異動訂正",
+     "toState": "初期状態"
+    },
+    {
+     "id": "9",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1050021",
+     "layoutTitle": "被保険者資格詳細異動",
+     "eventName": "資格異動訂正に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1050011",
+     "toLayoutTitle": "資格異動訂正",
+     "toState": "初期状態"
+    }
+   ]
+  }
+ ]
+}

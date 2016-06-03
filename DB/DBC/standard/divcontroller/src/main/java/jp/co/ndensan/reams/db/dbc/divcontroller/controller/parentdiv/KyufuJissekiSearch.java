@@ -20,6 +20,12 @@ public class KyufuJissekiSearch {
 
     private static final RString DATE_TYPE_YM = new RString("serviceTeikyoYM");
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel KyufuJissekiSearchDiv
+     * @return ResponseData
+     */
     public ResponseData<KyufuJissekiSearchDiv> onLoad(KyufuJissekiSearchDiv panel) {
         ResponseData<KyufuJissekiSearchDiv> response = new ResponseData<>();
         initData(panel);
@@ -27,6 +33,12 @@ public class KyufuJissekiSearch {
         return response;
     }
 
+    /**
+     * onClick_btnKyufuJissekiSearchClearメソッドです。
+     *
+     * @param panel KyufuJissekiSearchDiv
+     * @return ResponseData
+     */
     public ResponseData<KyufuJissekiSearchDiv> onClick_btnKyufuJissekiSearchClear(KyufuJissekiSearchDiv panel) {
         ResponseData<KyufuJissekiSearchDiv> response = new ResponseData<>();
         initData(panel);
@@ -34,6 +46,12 @@ public class KyufuJissekiSearch {
         return response;
     }
 
+    /**
+     * onChange_radKyufuJissekiSearchDateTypeメソッドです。
+     *
+     * @param panel KyufuJissekiSearchDiv
+     * @return ResponseData
+     */
     public ResponseData<KyufuJissekiSearchDiv> onChange_radKyufuJissekiSearchDateType(KyufuJissekiSearchDiv panel) {
         ResponseData<KyufuJissekiSearchDiv> response = new ResponseData<>();
         setDateType(panel);

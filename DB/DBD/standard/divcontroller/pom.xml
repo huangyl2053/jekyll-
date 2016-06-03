@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-		<!-- DBD -->
+        <!-- DBD -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbdDefinition</artifactId>
@@ -32,8 +32,12 @@
             <artifactId>DbdPersistence</artifactId>
             <scope>runtime</scope>
         </dependency>
-		<!-- DBX -->
-		<!-- DBZ -->
+        <!-- DBX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxDefinition</artifactId>
+        </dependency>
+        <!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzDefinition</artifactId>
@@ -43,14 +47,14 @@
             <artifactId>DbzDivController</artifactId>
             <classifier>classes</classifier>
         </dependency>
-		<!-- 公開系 -->
+        <!-- 公開系 -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzDivController</artifactId>
             <classifier>classes</classifier>
         </dependency>
-		<!-- テスト -->
-		<!-- ツール -->
+        <!-- テスト -->
+        <!-- ツール -->
         <dependency>
             <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
             <artifactId>requestSettings-maven-plugin</artifactId>
@@ -61,14 +65,21 @@
             <artifactId>shareSetting-maven-plugin</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-		<!-- 削除予定 -->
+        <!-- 削除予定 -->
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>1.13</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbdBatchController</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
     <build>
+        <finalName>db#dbd</finalName>
         <plugins>
             <plugin>
                 <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>

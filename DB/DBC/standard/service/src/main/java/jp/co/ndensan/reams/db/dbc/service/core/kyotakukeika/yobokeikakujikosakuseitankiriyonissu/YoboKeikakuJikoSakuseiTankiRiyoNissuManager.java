@@ -20,9 +20,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 予防給付計画自己作成短期利用日数を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class YoboKeikakuJikoSakuseiTankiRiyoNissuManager {
-    
+
     private final DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDac dac;
 
     /**
@@ -51,7 +53,7 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManager {
      */
     @Transaction
     public YoboKeikakuJikoSakuseiTankiRiyoNissu get予防給付計画自己作成短期利用日数(
-             HihokenshaNo 被保険者番号,
+            HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
             Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));

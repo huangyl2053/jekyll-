@@ -16,7 +16,9 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -52,6 +54,28 @@ public class DbT2009RentaiGimushaDac implements ISaveable<DbT2009RentaiGimushaEn
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(rirekiNo, 履歴番号))).
+                toObject(DbT2009RentaiGimushaEntity.class);
+    }
+
+    /**
+     * 最新の連帯納付義務者を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return DbT2009RentaiGimushaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT2009RentaiGimushaEntity selectBy最新連帯納付義務者(
+            HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT2009RentaiGimusha.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                order(by(rirekiNo, Order.DESC)).
+                limit(1).
                 toObject(DbT2009RentaiGimushaEntity.class);
     }
 

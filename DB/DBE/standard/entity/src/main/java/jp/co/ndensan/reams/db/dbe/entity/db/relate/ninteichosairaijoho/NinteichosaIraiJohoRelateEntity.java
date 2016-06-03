@@ -7,6 +7,11 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairaijoho;
 
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 
+/**
+ * {NinteichosaIraiJohoRelateEntity}です。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
+ */
 @lombok.Getter
 @lombok.Setter
 public class NinteichosaIraiJohoRelateEntity {

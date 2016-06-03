@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 主治医医療機関・主治医一覧表Sourceクラスです。
+ *
+ * @reamsid_L DBE-0260-020 zuotao
  */
 public class ShujiiIryokikanShujiiIchiranhyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

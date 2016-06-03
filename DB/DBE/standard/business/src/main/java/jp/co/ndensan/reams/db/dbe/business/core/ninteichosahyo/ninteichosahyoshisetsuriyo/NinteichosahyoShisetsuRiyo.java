@@ -9,17 +9,21 @@ import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査票（概況調査）施設利用を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class NinteichosahyoShisetsuRiyo extends ModelBase<NinteichosahyoShisetsuRiyoIdentifier, DbT5210NinteichosahyoShisetsuRiyoEntity, NinteichosahyoShisetsuRiyo> implements Serializable {
+public class NinteichosahyoShisetsuRiyo
+        extends ModelBase<NinteichosahyoShisetsuRiyoIdentifier, DbT5210NinteichosahyoShisetsuRiyoEntity, NinteichosahyoShisetsuRiyo>
+        implements Serializable {
 
     private final DbT5210NinteichosahyoShisetsuRiyoEntity entity;
     private final NinteichosahyoShisetsuRiyoIdentifier id;
@@ -118,7 +122,7 @@ public class NinteichosahyoShisetsuRiyo extends ModelBase<NinteichosahyoShisetsu
      *
      * @return 施設利用フラグ
      */
-    public boolean get施設利用フラグ() {
+    public boolean is施設利用フラグ() {
         return entity.getShisetsuRiyoFlag();
     }
 
@@ -143,8 +147,7 @@ public class NinteichosahyoShisetsuRiyo extends ModelBase<NinteichosahyoShisetsu
     }
 
     /**
-     * 認定調査票（概況調査）施設利用のみを変更対象とします。<br/>
-     * {@link DbT5210NinteichosahyoShisetsuRiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査票（概況調査）施設利用のみを変更対象とします。<br/> {@link DbT5210NinteichosahyoShisetsuRiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosahyoShisetsuRiyo}
      */
@@ -158,8 +161,7 @@ public class NinteichosahyoShisetsuRiyo extends ModelBase<NinteichosahyoShisetsu
     }
 
     /**
-     * 保持する認定調査票（概況調査）施設利用を削除対象とします。<br/>
-     * {@link DbT5210NinteichosahyoShisetsuRiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する認定調査票（概況調査）施設利用を削除対象とします。<br/> {@link DbT5210NinteichosahyoShisetsuRiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteichosahyoShisetsuRiyo}
      */

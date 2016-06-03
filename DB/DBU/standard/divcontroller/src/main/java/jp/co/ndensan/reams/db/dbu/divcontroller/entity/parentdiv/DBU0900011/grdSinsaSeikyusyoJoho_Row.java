@@ -3,22 +3,18 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Dec 07 10:50:45 CST 2015 
+ * Mon Dec 07 10:50:45 CST 2015
  */
 
-
-
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-
 
 /**
- * grdSinsaSeikyusyoJoho_Row のクラスファイル 
- * 
- * @author 自動生成
+ * grdSinsaSeikyusyoJoho_Row のクラスファイル
+ *
+ * @reamsid_L DBU-1080-050 lizhuoxuan
  */
-
 public class grdSinsaSeikyusyoJoho_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
 

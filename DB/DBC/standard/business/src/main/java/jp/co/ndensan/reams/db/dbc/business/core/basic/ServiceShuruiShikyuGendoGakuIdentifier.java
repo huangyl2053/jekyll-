@@ -15,6 +15,7 @@ import lombok.Value;
  * サービス種類支給限度額の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ServiceShuruiShikyuGendoGakuIdentifier implements Serializable {
 
     private final ServiceShuruiCode サービス種類コード;

@@ -17,7 +17,7 @@
         FROM
         (
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5503ShinsakaiWariateIinJohoMapper.allColumns_DbT5503ShinsakaiWariateIinJoho" />
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5503ShinsakaiWariateIinJohoMapper.allColumns_DbT5503ShinsakaiWariateIinJoho" />
         FROM 
             rgdb."DbT5503ShinsakaiWariateIinJoho"
         WHERE
@@ -28,7 +28,7 @@
         LEFT JOIN
         (
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.allColumns_DbT5594ShinsakaiIinJoho" />
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.allColumns_DbT5594ShinsakaiIinJoho" />
         FROM   
             rgdb."DbT5594ShinsakaiIinJoho"  
         ) AS DbT5594ShinsakaiIinJoho
@@ -39,8 +39,8 @@
     <resultMap id="resultMap_ShinsakaiWariateIinJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoRelateEntity" autoMapping="true">
         <id column="dbT5503ShinsakaiWariateIinJoho_shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id column="dbT5503ShinsakaiWariateIinJoho_shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <association property="介護認定審査会割当委員情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5503ShinsakaiWariateIinJohoMapper.ResultMap_DbT5503ShinsakaiWariateIinJohoEntity"/>
-        <collection property="介護認定審査会委員情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.ResultMap_DbT5594ShinsakaiIinJohoEntity"/>
+        <association property="介護認定審査会割当委員情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5503ShinsakaiWariateIinJohoMapper.ResultMap_DbT5503ShinsakaiWariateIinJohoEntity"/>
+        <collection property="介護認定審査会委員情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.ResultMap_DbT5594ShinsakaiIinJohoEntity"/>
     </resultMap>
 
 </mapper>

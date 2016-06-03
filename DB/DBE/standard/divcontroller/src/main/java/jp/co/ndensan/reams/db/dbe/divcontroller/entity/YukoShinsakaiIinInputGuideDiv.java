@@ -1,20 +1,17 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.IYukoShinsakaiIinInputGuideDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgYukoShinsakaiIin_Row;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * YukoShinsakaiIinInputGuide のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * YukoShinsakaiIinInputGuide のクラスファイル
+ *
  * @author 自動生成
  */
 public class YukoShinsakaiIinInputGuideDiv extends Panel implements IYukoShinsakaiIinInputGuideDiv {
@@ -24,6 +21,7 @@ public class YukoShinsakaiIinInputGuideDiv extends Panel implements IYukoShinsak
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("dgYukoShinsakaiIin")
     private DataGrid<dgYukoShinsakaiIin_Row> dgYukoShinsakaiIin;
     @JsonProperty("btnClose")
@@ -52,7 +50,7 @@ public class YukoShinsakaiIinInputGuideDiv extends Panel implements IYukoShinsak
 
     @JsonProperty("dgYukoShinsakaiIin")
     public void setDgYukoShinsakaiIin(DataGrid<dgYukoShinsakaiIin_Row> dgYukoShinsakaiIin) {
-        this.dgYukoShinsakaiIin=dgYukoShinsakaiIin;
+        this.dgYukoShinsakaiIin = dgYukoShinsakaiIin;
     }
 
     @JsonProperty("btnClose")
@@ -62,7 +60,7 @@ public class YukoShinsakaiIinInputGuideDiv extends Panel implements IYukoShinsak
 
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
+        this.btnClose = btnClose;
     }
 
     @JsonProperty("iinCode")
@@ -72,7 +70,7 @@ public class YukoShinsakaiIinInputGuideDiv extends Panel implements IYukoShinsak
 
     @JsonProperty("iinCode")
     public void setIinCode(RString iinCode) {
-        this.iinCode=iinCode;
+        this.iinCode = iinCode;
     }
 
     @JsonProperty("iinMeisho")
@@ -82,7 +80,7 @@ public class YukoShinsakaiIinInputGuideDiv extends Panel implements IYukoShinsak
 
     @JsonProperty("iinMeisho")
     public void setIinMeisho(RString iinMeisho) {
-        this.iinMeisho=iinMeisho;
+        this.iinMeisho = iinMeisho;
     }
 
     @JsonProperty("shozokuKikanCode")
@@ -92,7 +90,7 @@ public class YukoShinsakaiIinInputGuideDiv extends Panel implements IYukoShinsak
 
     @JsonProperty("shozokuKikanCode")
     public void setShozokuKikanCode(RString shozokuKikanCode) {
-        this.shozokuKikanCode=shozokuKikanCode;
+        this.shozokuKikanCode = shozokuKikanCode;
     }
 
     @JsonProperty("shozokuKikanMeisho")
@@ -102,7 +100,7 @@ public class YukoShinsakaiIinInputGuideDiv extends Panel implements IYukoShinsak
 
     @JsonProperty("shozokuKikanMeisho")
     public void setShozokuKikanMeisho(RString shozokuKikanMeisho) {
-        this.shozokuKikanMeisho=shozokuKikanMeisho;
+        this.shozokuKikanMeisho = shozokuKikanMeisho;
     }
 
     @JsonProperty("shozokuKikan")
@@ -112,9 +110,8 @@ public class YukoShinsakaiIinInputGuideDiv extends Panel implements IYukoShinsak
 
     @JsonProperty("shozokuKikan")
     public void setShozokuKikan(RString shozokuKikan) {
-        this.shozokuKikan=shozokuKikan;
+        this.shozokuKikan = shozokuKikan;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

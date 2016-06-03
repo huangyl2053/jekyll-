@@ -52,43 +52,31 @@ public class ShokanShinseiManagerTest {
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleYearMonth 主キー2 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_整理番号;
-            int 主キー4 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払支給申請(null, 主キー2, 主キー3, 主キー4);
+            sut.get償還払支給申請(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー1 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_被保険者番号;
             RString 主キー3 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_整理番号;
-            int 主キー4 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払支給申請(主キー1, null, 主キー3, 主キー4);
+            sut.get償還払支給申請(主キー1, null, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー1 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_サービス提供年月;
-            int 主キー4 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払支給申請(主キー1, 主キー2, null, 主キー4);
+            sut.get償還払支給申請(主キー1, 主キー2, null);
         }
-
-//        @Test(expected = NullPointerException.class)
-//        public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
-//            HihokenshaNo 主キー1 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_被保険者番号;
-//            FlexibleYearMonth 主キー2 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_サービス提供年月;
-//            RString 主キー3 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_整理番号;
-//            sut.get償還払支給申請(主キー1, 主キー2, 主キー3, null);
-//        }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class), any(int.class))).thenReturn(null);
+            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class)));
             HihokenshaNo 主キー1 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_整理番号;
-            int 主キー4 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_履歴番号;
-            ShokanShinsei result = sut.get償還払支給申請(主キー1, 主キー2, 主キー3, 主キー4);
+            ShokanShinsei result = sut.get償還払支給申請(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
         }
@@ -96,12 +84,11 @@ public class ShokanShinseiManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3034ShokanShinseiEntity entity = DbT3034ShokanShinseiEntityGenerator.createDbT3034ShokanShinseiEntity();
-            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class), any(int.class))).thenReturn(entity);
+            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class)));
             HihokenshaNo 主キー1 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_整理番号;
-            int 主キー4 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_履歴番号;
-            ShokanShinsei result = sut.get償還払支給申請(主キー1, 主キー2, 主キー3, 主キー4);
+            ShokanShinsei result = sut.get償還払支給申請(主キー1, 主キー2, 主キー3);
 
             assertThat(result.get被保険者番号().value(), is(DbT3034ShokanShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
         }

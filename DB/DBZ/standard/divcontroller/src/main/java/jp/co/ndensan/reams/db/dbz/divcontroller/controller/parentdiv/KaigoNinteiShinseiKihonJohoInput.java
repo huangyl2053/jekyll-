@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -24,7 +24,7 @@ public class KaigoNinteiShinseiKihonJohoInput {
      */
     public ResponseData<KaigoNinteiShinseiKihonJohoInputDiv> onLoad(KaigoNinteiShinseiKihonJohoInputDiv div) {
         KaigoNinteiShinseiKihonJohoInputHandler handler = createHandler(div);
-        handler.Initialize();
+        handler.initialize();
 
         return createResponseData(div);
     }

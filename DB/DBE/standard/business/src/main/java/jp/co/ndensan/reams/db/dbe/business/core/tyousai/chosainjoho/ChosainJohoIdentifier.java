@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 調査員情報の識別子です。
+ *
+ * @reamsid_L DBE-9999-023 liangbc
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

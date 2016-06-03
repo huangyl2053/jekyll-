@@ -9,6 +9,7 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -16,14 +17,15 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護除外住所地特例対象施設を管理するクラスです。
+ *
+ * @reamsid_L DBZ-9999-011 wanghui
  */
 public class KaigoJogaiTokureiTaishoShisetsu extends
-        ModelBase<KaigoJogaiTokureiTaishoShisetsuIdentifier, 
-        DbT1005KaigoJogaiTokureiTaishoShisetsuEntity, 
-        KaigoJogaiTokureiTaishoShisetsu>
+        ModelBase<KaigoJogaiTokureiTaishoShisetsuIdentifier, DbT1005KaigoJogaiTokureiTaishoShisetsuEntity, KaigoJogaiTokureiTaishoShisetsu>
         implements Serializable {
 
     private final DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity;
@@ -58,8 +60,7 @@ public class KaigoJogaiTokureiTaishoShisetsu extends
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT1005KaigoJogaiTokureiTaishoShisetsuEntity}より{@link KaigoJogaiTokureiTaishoShisetsu}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT1005KaigoJogaiTokureiTaishoShisetsuEntity}
+     * @param entity DBより取得した{@link DbT1005KaigoJogaiTokureiTaishoShisetsuEntity}
      */
     public KaigoJogaiTokureiTaishoShisetsu(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護除外住所地特例対象施設"));
@@ -295,8 +296,7 @@ public class KaigoJogaiTokureiTaishoShisetsu extends
     /**
      * 介護除外住所地特例対象施設の識別子{@link KaigoJogaiTokureiTaishoShisetsuIdentifier}を返します。
      *
-     * @return
-     * 介護除外住所地特例対象施設の識別子{@link KaigoJogaiTokureiTaishoShisetsuIdentifier}
+     * @return 介護除外住所地特例対象施設の識別子{@link KaigoJogaiTokureiTaishoShisetsuIdentifier}
      */
     @Override
     public KaigoJogaiTokureiTaishoShisetsuIdentifier identifier() {
@@ -315,12 +315,19 @@ public class KaigoJogaiTokureiTaishoShisetsu extends
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     @Override
     public KaigoJogaiTokureiTaishoShisetsu deleted() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DbT1005KaigoJogaiTokureiTaishoShisetsuEntity deletedEntity = this.toEntity();
+        if (deletedEntity.getState() != EntityDataState.Added) {
+            deletedEntity.setState(EntityDataState.Deleted);
+        } else {
+            //TODO メッセージの検討
+            throw new IllegalStateException(UrErrorMessages.不正.toString());
+        }
+        return new KaigoJogaiTokureiTaishoShisetsu(deletedEntity, id);
     }
 
     private static final class _SerializationProxy implements Serializable {

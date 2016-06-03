@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5115Image;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5115Image.shinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;

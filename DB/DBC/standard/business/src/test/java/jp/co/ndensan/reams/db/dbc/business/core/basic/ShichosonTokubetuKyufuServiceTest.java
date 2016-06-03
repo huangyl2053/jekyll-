@@ -166,7 +166,7 @@ public class ShichosonTokubetuKyufuServiceTest extends DbcTestBase {
 
         @Test
         public void get市町村特別給付用給付率引下有フラグは_entityが持つ市町村特別給付用給付率引下有フラグを返す() {
-            assertThat(sut.get市町村特別給付用給付率引下有フラグ(), is(ShichosonTokubetuKyufuServiceEntity.getKyufuritsuHikisageAriFlag()));
+            assertThat(sut.is市町村特別給付用給付率引下有フラグ(), is(ShichosonTokubetuKyufuServiceEntity.getKyufuritsuHikisageAriFlag()));
         }
 
         @Test

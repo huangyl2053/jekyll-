@@ -1,0 +1,12 @@
+﻿gogitaiNo,int2,int,,,,,合議体番号,A
+gogitaiMei,varchar,RString,,,,,合議体名称,A
+gogitaiYukoKikanKaishiYMD,UDD015YMD,FlexibleDate,,,,,合議体有効期間開始年月日,A
+gogitaiYukoKikanShuryoYMD,UDD015YMD,FlexibleDate,,,,,合議体有効期間終了年月日,A
+gogitaiKaishiYoteiTime,varchar,RString,,,,,合議体開始予定時刻,A
+gogitaiShuryoYoteiTime,varchar,RString,,,,,合議体終了予定時刻,A
+shinsakaiKaisaiBashoCode,varchar,RString,,,,,介護認定審査会開催場所コード,A
+shinsakaiYoteiTeiin,int2,int,,,,,介護認定審査会予定定員,A
+shinsakaiJidoWariateTeiin,int2,int,,,,,介護認定審査会自動割当定員,A
+shinsakaiIinTeiin,int2,int,,,,,介護認定審査会委員定員,A
+gogitaiSeishinkaSonzaiFlag,bool,boolean,,,,,合議体精神科医存在フラグ,A
+gogitaiDummyFlag,bool,boolean,,,,,合議体ダミーフラグ,A

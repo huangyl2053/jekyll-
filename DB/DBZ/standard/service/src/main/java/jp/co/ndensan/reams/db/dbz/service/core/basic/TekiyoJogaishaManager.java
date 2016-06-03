@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 適用除外者を管理するクラスです。
+ *
+ * @reamsid_L DBB-0630-020 chengsanyuan
  */
 public class TekiyoJogaishaManager {
 
@@ -39,6 +41,15 @@ public class TekiyoJogaishaManager {
      */
     TekiyoJogaishaManager(DbT1002TekiyoJogaishaDac dac) {
         this.dac = dac;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaManager}のインスタンス
+     */
+    public static TekiyoJogaishaManager createInstance() {
+        return InstanceProvider.create(TekiyoJogaishaManager.class);
     }
 
     /**
@@ -62,6 +73,24 @@ public class TekiyoJogaishaManager {
                 識別コード,
                 異動日,
                 枝番);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new TekiyoJogaisha(entity);
+    }
+
+    /**
+     * 主キーに合致する適用除外者を返します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return TekiyoJogaisha
+     */
+    @Transaction
+    public TekiyoJogaisha get適用除外者By識別(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbT1002TekiyoJogaishaEntity entity = dac.selectMaxByKey(識別コード);
         if (entity == null) {
             return null;
         }

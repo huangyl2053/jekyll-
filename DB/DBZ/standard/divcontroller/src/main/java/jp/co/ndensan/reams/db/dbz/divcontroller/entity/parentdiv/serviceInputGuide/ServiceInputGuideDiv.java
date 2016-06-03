@@ -1,19 +1,18 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.serviceInputGuide;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.serviceInputGuide.SearchResultServiceDiv;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ServiceInputGuide のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+
+/**
+ * ServiceInputGuide のクラスファイル
+ *
  * @author 自動生成
  */
 public class ServiceInputGuideDiv extends Panel {
@@ -23,6 +22,7 @@ public class ServiceInputGuideDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtServiceShuruiCode")
     private TextBoxCode txtServiceShuruiCode;
     @JsonProperty("txtServiceCode")
@@ -57,7 +57,7 @@ public class ServiceInputGuideDiv extends Panel {
 
     @JsonProperty("txtServiceShuruiCode")
     public void setTxtServiceShuruiCode(TextBoxCode txtServiceShuruiCode) {
-        this.txtServiceShuruiCode=txtServiceShuruiCode;
+        this.txtServiceShuruiCode = txtServiceShuruiCode;
     }
 
     @JsonProperty("txtServiceCode")
@@ -67,7 +67,7 @@ public class ServiceInputGuideDiv extends Panel {
 
     @JsonProperty("txtServiceCode")
     public void setTxtServiceCode(TextBoxCode txtServiceCode) {
-        this.txtServiceCode=txtServiceCode;
+        this.txtServiceCode = txtServiceCode;
     }
 
     @JsonProperty("txtKijyunYM")
@@ -77,7 +77,7 @@ public class ServiceInputGuideDiv extends Panel {
 
     @JsonProperty("txtKijyunYM")
     public void setTxtKijyunYM(TextBoxDate txtKijyunYM) {
-        this.txtKijyunYM=txtKijyunYM;
+        this.txtKijyunYM = txtKijyunYM;
     }
 
     @JsonProperty("btnSearchJService")
@@ -87,7 +87,7 @@ public class ServiceInputGuideDiv extends Panel {
 
     @JsonProperty("btnSearchJService")
     public void setBtnSearchJService(Button btnSearchJService) {
-        this.btnSearchJService=btnSearchJService;
+        this.btnSearchJService = btnSearchJService;
     }
 
     @JsonProperty("SearchResultService")
@@ -97,7 +97,7 @@ public class ServiceInputGuideDiv extends Panel {
 
     @JsonProperty("SearchResultService")
     public void setSearchResultService(SearchResultServiceDiv SearchResultService) {
-        this.SearchResultService=SearchResultService;
+        this.SearchResultService = SearchResultService;
     }
 
     @JsonProperty("btnServiceInputGuideReturn")
@@ -107,7 +107,7 @@ public class ServiceInputGuideDiv extends Panel {
 
     @JsonProperty("btnServiceInputGuideReturn")
     public void setBtnServiceInputGuideReturn(Button btnServiceInputGuideReturn) {
-        this.btnServiceInputGuideReturn=btnServiceInputGuideReturn;
+        this.btnServiceInputGuideReturn = btnServiceInputGuideReturn;
     }
 
     @JsonProperty("serviceCode")
@@ -117,7 +117,7 @@ public class ServiceInputGuideDiv extends Panel {
 
     @JsonProperty("serviceCode")
     public void setServiceCode(RString serviceCode) {
-        this.serviceCode=serviceCode;
+        this.serviceCode = serviceCode;
     }
 
     @JsonProperty("serviceMeisho")
@@ -127,7 +127,7 @@ public class ServiceInputGuideDiv extends Panel {
 
     @JsonProperty("serviceMeisho")
     public void setServiceMeisho(RString serviceMeisho) {
-        this.serviceMeisho=serviceMeisho;
+        this.serviceMeisho = serviceMeisho;
     }
 
     @JsonProperty("serviceTaishoYM")
@@ -137,7 +137,7 @@ public class ServiceInputGuideDiv extends Panel {
 
     @JsonProperty("serviceTaishoYM")
     public void setServiceTaishoYM(RString serviceTaishoYM) {
-        this.serviceTaishoYM=serviceTaishoYM;
+        this.serviceTaishoYM = serviceTaishoYM;
     }
 
     @JsonProperty("serviceCodeMeisho")
@@ -147,7 +147,7 @@ public class ServiceInputGuideDiv extends Panel {
 
     @JsonProperty("serviceCodeMeisho")
     public void setServiceCodeMeisho(RString serviceCodeMeisho) {
-        this.serviceCodeMeisho=serviceCodeMeisho;
+        this.serviceCodeMeisho = serviceCodeMeisho;
     }
 
 }

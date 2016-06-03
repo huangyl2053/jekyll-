@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 委員早退有無を表す列挙型です。
  *
- * @author LDNS 作成者漢字名
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IssotaiUmu {
 
@@ -32,7 +32,7 @@ public enum IssotaiUmu {
      *
      * @return 委員早退有無のコード
      */
-    public boolean getコード() {
+    public boolean is早退() {
         return code;
     }
 

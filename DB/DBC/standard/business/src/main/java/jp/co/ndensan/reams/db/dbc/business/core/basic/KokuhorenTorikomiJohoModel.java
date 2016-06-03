@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 国保連取込情報を管理するクラスです。
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KokuhorenTorikomiJohoModel {
 
     private DbV3104KokuhorenTorikomiJohoEntity entity;
@@ -79,14 +80,16 @@ public class KokuhorenTorikomiJohoModel {
      * @return 前々月処理状態
      */
     public RString get前々月処理状態() {
-        if (this.entity == null
-                || this.entity.getZenzen_shorijotaikubun() == null
-                || this.entity.getZenzen_shorijotaikubun().isEmpty()) {
+        if (this.entity == null) {
             return new RString("9");
+        } else {
+            RString zenzen_shorijotaikubun = this.entity.getZenzen_shorijotaikubun();
+            if (zenzen_shorijotaikubun == null || zenzen_shorijotaikubun.isEmpty()) {
+                return new RString("9");
+            } else {
+                return zenzen_shorijotaikubun;
+            }
         }
-
-        return this.entity.getZenzen_shorijotaikubun();
-
     }
 
     /**
@@ -96,14 +99,15 @@ public class KokuhorenTorikomiJohoModel {
      * @return 前月処理状態
      */
     public RString get前月処理状態() {
-        if (this.entity == null
-                || this.entity.getZen_shorijotaikubun() == null
-                || this.entity.getZen_shorijotaikubun().isEmpty()) {
+        if (this.entity == null) {
             return new RString("9");
+        } else {
+            RString zen_shorijotaikubun = this.entity.getZen_shorijotaikubun();
+            if (zen_shorijotaikubun == null || zen_shorijotaikubun.isEmpty()) {
+                return new RString("9");
+            }
         }
-
         return this.entity.getZen_shorijotaikubun();
-
     }
 
     /**
@@ -113,18 +117,19 @@ public class KokuhorenTorikomiJohoModel {
      * @return 前月処理状態
      */
     public RString get当月処理状態() {
-        if (this.entity == null
-                || this.entity.getShoriJotaiKubun() == null
-                || this.entity.getShoriJotaiKubun().isEmpty()) {
+        if (this.entity == null) {
             return new RString("処理なし");
-        } else if (this.entity.getShoriJotaiKubun().equals(new RString("1"))) {
-            return new RString("処理前");
-        } else if (this.entity.getShoriJotaiKubun().equals(new RString("3"))) {
-            return new RString("処理済み");
+        } else {
+            RString shoriJotaiKubun = this.entity.getShoriJotaiKubun();
+            if (shoriJotaiKubun == null || shoriJotaiKubun.isEmpty()) {
+                return new RString("処理なし");
+            } else if (new RString("1").equals(this.entity.getShoriJotaiKubun())) {
+                return new RString("処理前");
+            } else if (new RString("3").equals(this.entity.getShoriJotaiKubun())) {
+                return new RString("処理済み");
+            }
+            return new RString("処理なし");
         }
-
-        return new RString("処理なし");
-
     }
 
     /**
@@ -143,7 +148,7 @@ public class KokuhorenTorikomiJohoModel {
      *
      * @return 再処理可否区分
      */
-    public boolean get再処理可否区分() {
+    public boolean is再処理可否区分() {
         return this.entity.getSaiShoriKanoKubun();
     }
 

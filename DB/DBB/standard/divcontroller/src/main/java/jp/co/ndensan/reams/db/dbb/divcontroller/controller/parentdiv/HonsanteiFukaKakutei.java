@@ -19,6 +19,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public class HonsanteiFukaKakutei {
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param honsanteiFukaKakuteiDiv HonsanteiFukaKakuteiDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<HonsanteiFukaKakuteiDiv> onLoad(HonsanteiFukaKakuteiDiv honsanteiFukaKakuteiDiv) {
         ResponseData<HonsanteiFukaKakuteiDiv> response = new ResponseData<>();
 

@@ -6,6 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 申請書帳票種類を表す列挙型です。
  *
+ * @reamsid_L DBA-9999-023 liangbc
  */
 public enum ShinseishoChohyoShurui {
 
@@ -160,7 +161,19 @@ public enum ShinseishoChohyoShurui {
     /**
      * コード:DBD800010_ShiharaiShobunBenmeisho 名称:介護保険給付の支払処分弁明書 略称:定義なし
      */
-    介護保険給付の支払処分弁明書("DBD800010_ShiharaiShobunBenmeisho", "介護保険給付の支払処分弁明書");
+    介護保険給付の支払処分弁明書("DBD800010_ShiharaiShobunBenmeisho", "介護保険給付の支払処分弁明書"),
+    /**
+     * コード:DBD501001_YokaigoNinteiShinseisho 名称:要介護認定申請書 略称:定義なし
+     */
+    要介護認定申請書("DBD501001_YokaigoNinteiShinseisho", "要介護認定申請書"),
+    /**
+     * コード:DBD501002_yokaigoNinteikbnHenkoShinseisho 名称:要介護認定区分変更申請書 略称:定義なし
+     */
+    要介護認定区分変更申請書("DBD501002_yokaigoNinteikbnHenkoShinseisho", "要介護認定区分変更申請書"),
+    /**
+     * コード:DBC800002_JuryoIninharaiKeiyakuShinseishoFukushiYogu 名称:介護保険受領委任払い契約申請書 略称:定義なし
+     */
+    介護保険受領委任払い契約申請書("DBC800002_JuryoIninharaiKeiyakuShinseishoFukushiYogu", "介護保険受領委任払い契約申請書");
 
     private final RString code;
     private final RString fullName;

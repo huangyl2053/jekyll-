@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * サービス変更理由の有無を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IsExistServiseHenkoRiyu {
 
@@ -32,7 +32,7 @@ public enum IsExistServiseHenkoRiyu {
      *
      * @return サービス変更理由の有無のコード
      */
-    public boolean getコード() {
+    public boolean hasサービス変更理由() {
         return code;
     }
 

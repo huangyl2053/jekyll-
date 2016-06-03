@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.ChoshuYuyoEntity;
 
 /**
  * 介護賦課徴収猶予のマッパーインタフェースです。
+ *
+ * @reamsid_L DBB-9999-011 sunhaidi
  */
 public interface IChoshuYuyoMapper {
 

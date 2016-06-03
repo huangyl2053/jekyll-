@@ -7,12 +7,12 @@ package jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariateiinjoh
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiiinjoho.ShinsakaiIinJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiiinjoho.ShinsakaiIinJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5503ShinsakaiWariateIinJohoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5503ShinsakaiWariateIinJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiwariateiinjoho.IShinsakaiWariateIinJohoMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiiinjoho.ShinsakaiIinJohoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護認定審査会割当委員情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-0160-010 wangxiaodong
  */
 public class ShinsakaiWariateIinJohoManager {
 
@@ -104,4 +106,18 @@ public class ShinsakaiWariateIinJohoManager {
             介護認定審査会委員情報Manager.save介護認定審査会委員情報(介護認定審査会委員情報);
         }
     }
+
+    /**
+     * 介護認定審査会割当委員情報{@link GogitaiJoho}を物理削除します。
+     *
+     * @param 介護認定審査会割当委員情報 介護認定審査会委員情報
+     * @return 削除あり:true、削除なし:false <br>
+     * いずれかのテーブルに削除があればtrueを返す
+     */
+    @Transaction
+    public boolean deletePhysical(ShinsakaiWariateIinJoho 介護認定審査会割当委員情報) {
+        requireNonNull(介護認定審査会割当委員情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当委員情報"));
+        return 1 == dac.deletePhysical(介護認定審査会割当委員情報.toEntity());
+    }
+
 }

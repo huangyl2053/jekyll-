@@ -1,20 +1,19 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakuhenkorireki;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakuhenkorireki.HenkoHokenshaJohoDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * HenkoInput のクラスファイル 
- * 
+ * HenkoInput のクラスファイル
+ *
  * @author 自動生成
  */
 public class HenkoInputDiv extends Panel {
@@ -24,6 +23,7 @@ public class HenkoInputDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtHenkoDate")
     private TextBoxFlexibleDate txtHenkoDate;
     @JsonProperty("txtHenkoTodokedeDate")
@@ -56,7 +56,7 @@ public class HenkoInputDiv extends Panel {
 
     @JsonProperty("txtHenkoDate")
     public void setTxtHenkoDate(TextBoxFlexibleDate txtHenkoDate) {
-        this.txtHenkoDate=txtHenkoDate;
+        this.txtHenkoDate = txtHenkoDate;
     }
 
     @JsonProperty("txtHenkoTodokedeDate")
@@ -66,7 +66,7 @@ public class HenkoInputDiv extends Panel {
 
     @JsonProperty("txtHenkoTodokedeDate")
     public void setTxtHenkoTodokedeDate(TextBoxFlexibleDate txtHenkoTodokedeDate) {
-        this.txtHenkoTodokedeDate=txtHenkoTodokedeDate;
+        this.txtHenkoTodokedeDate = txtHenkoTodokedeDate;
     }
 
     @JsonProperty("ddlHenkoJiyu")
@@ -76,7 +76,7 @@ public class HenkoInputDiv extends Panel {
 
     @JsonProperty("ddlHenkoJiyu")
     public void setDdlHenkoJiyu(DropDownList ddlHenkoJiyu) {
-        this.ddlHenkoJiyu=ddlHenkoJiyu;
+        this.ddlHenkoJiyu = ddlHenkoJiyu;
     }
 
     @JsonProperty("HenkoHokenshaJoho")
@@ -86,7 +86,7 @@ public class HenkoInputDiv extends Panel {
 
     @JsonProperty("HenkoHokenshaJoho")
     public void setHenkoHokenshaJoho(HenkoHokenshaJohoDiv HenkoHokenshaJoho) {
-        this.HenkoHokenshaJoho=HenkoHokenshaJoho;
+        this.HenkoHokenshaJoho = HenkoHokenshaJoho;
     }
 
     @JsonProperty("btnHenkoKakutei")
@@ -96,7 +96,7 @@ public class HenkoInputDiv extends Panel {
 
     @JsonProperty("btnHenkoKakutei")
     public void setBtnHenkoKakutei(Button btnHenkoKakutei) {
-        this.btnHenkoKakutei=btnHenkoKakutei;
+        this.btnHenkoKakutei = btnHenkoKakutei;
     }
 
     @JsonProperty("btnHenkoTorikeshi")
@@ -106,7 +106,7 @@ public class HenkoInputDiv extends Panel {
 
     @JsonProperty("btnHenkoTorikeshi")
     public void setBtnHenkoTorikeshi(Button btnHenkoTorikeshi) {
-        this.btnHenkoTorikeshi=btnHenkoTorikeshi;
+        this.btnHenkoTorikeshi = btnHenkoTorikeshi;
     }
 
     @JsonProperty("henkojiShichosonCode")
@@ -116,7 +116,7 @@ public class HenkoInputDiv extends Panel {
 
     @JsonProperty("henkojiShichosonCode")
     public void setHenkojiShichosonCode(RString henkojiShichosonCode) {
-        this.henkojiShichosonCode=henkojiShichosonCode;
+        this.henkojiShichosonCode = henkojiShichosonCode;
     }
 
     @JsonProperty("henkojiHihokenshaNo")
@@ -126,7 +126,7 @@ public class HenkoInputDiv extends Panel {
 
     @JsonProperty("henkojiHihokenshaNo")
     public void setHenkojiHihokenshaNo(RString henkojiHihokenshaNo) {
-        this.henkojiHihokenshaNo=henkojiHihokenshaNo;
+        this.henkojiHihokenshaNo = henkojiHihokenshaNo;
     }
 
     @JsonProperty("henkojiShoriDatetime")
@@ -136,7 +136,7 @@ public class HenkoInputDiv extends Panel {
 
     @JsonProperty("henkojiShoriDatetime")
     public void setHenkojiShoriDatetime(RString henkojiShoriDatetime) {
-        this.henkojiShoriDatetime=henkojiShoriDatetime;
+        this.henkojiShoriDatetime = henkojiShoriDatetime;
     }
 
     /*
@@ -148,7 +148,7 @@ public class HenkoInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlHenkoSochimotoHokensha(DropDownList ddlHenkoSochimotoHokensha) {
+    public void setDdlHenkoSochimotoHokensha(DropDownList ddlHenkoSochimotoHokensha) {
         this.getHenkoHokenshaJoho().setDdlHenkoSochimotoHokensha(ddlHenkoSochimotoHokensha);
     }
 
@@ -158,7 +158,7 @@ public class HenkoInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlHenkoKyuHokensha(DropDownList ddlHenkoKyuHokensha) {
+    public void setDdlHenkoKyuHokensha(DropDownList ddlHenkoKyuHokensha) {
         this.getHenkoHokenshaJoho().setDdlHenkoKyuHokensha(ddlHenkoKyuHokensha);
     }
 
@@ -168,7 +168,7 @@ public class HenkoInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlJuminJoho(DropDownList ddlJuminJoho) {
+    public void setDdlJuminJoho(DropDownList ddlJuminJoho) {
         this.getHenkoHokenshaJoho().setDdlJuminJoho(ddlJuminJoho);
     }
 

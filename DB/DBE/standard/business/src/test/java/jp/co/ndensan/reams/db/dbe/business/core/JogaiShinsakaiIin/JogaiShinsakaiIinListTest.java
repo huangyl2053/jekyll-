@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.JogaiShinsakaiIin;
 
-import jp.co.ndensan.reams.db.dbe.business.core.JogaiShinsakaiIin.JogaiShinsakaiIinList;
-import jp.co.ndensan.reams.db.dbe.business.core.JogaiShinsakaiIin.JogaiShinsakaiIin;
+import jp.co.ndensan.reams.db.dbe.business.core.jogaishinsakaiiin.JogaiShinsakaiIinList;
+import jp.co.ndensan.reams.db.dbe.business.core.jogaishinsakaiiin.JogaiShinsakaiIin;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;

@@ -18,8 +18,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査スケジュールメモ情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class NinteiChosaScheduleMemo extends ModelBase<NinteiChosaScheduleMemoIdentifier, DbT5222NinteiChosaScheduleMemoEntity, NinteiChosaScheduleMemo> implements Serializable {
+public class NinteiChosaScheduleMemo
+        extends ModelBase<NinteiChosaScheduleMemoIdentifier, DbT5222NinteiChosaScheduleMemoEntity, NinteiChosaScheduleMemo>
+        implements Serializable {
 
     private static final long serialVersionUID = 4441122624281562268L;
 
@@ -179,8 +183,7 @@ public class NinteiChosaScheduleMemo extends ModelBase<NinteiChosaScheduleMemoId
     }
 
     /**
-     * 認定調査スケジュールメモ情報のみを変更対象とします。<br/>
-     * {@link DbT5222NinteiChosaScheduleMemoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査スケジュールメモ情報のみを変更対象とします。<br/> {@link DbT5222NinteiChosaScheduleMemoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteiChosaScheduleMemo}
      */
@@ -194,8 +197,7 @@ public class NinteiChosaScheduleMemo extends ModelBase<NinteiChosaScheduleMemoId
     }
 
     /**
-     * 保持する認定調査スケジュールメモ情報を削除対象とします。<br/>
-     * {@link DbT5222NinteiChosaScheduleMemoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する認定調査スケジュールメモ情報を削除対象とします。<br/> {@link DbT5222NinteiChosaScheduleMemoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteiChosaScheduleMemo}
      */

@@ -14,17 +14,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ServiceShiteiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblServiceIken")
-    private Label lblServiceIken;
     @JsonProperty("dgServiceIchiran")
     private DataGrid<dgServiceIchiran_Row> dgServiceIchiran;
+    @JsonProperty("lblServiceIken")
+    private Label lblServiceIken;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +32,6 @@ public class ServiceShiteiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getlblServiceIken
-     * @return lblServiceIken
-     */
-    @JsonProperty("lblServiceIken")
-    public Label getLblServiceIken() {
-        return lblServiceIken;
-    }
-
-    /*
-     * setlblServiceIken
-     * @param lblServiceIken lblServiceIken
-     */
-    @JsonProperty("lblServiceIken")
-    public void setLblServiceIken(Label lblServiceIken) {
-        this.lblServiceIken = lblServiceIken;
-    }
-
     /*
      * getdgServiceIchiran
      * @return dgServiceIchiran
@@ -66,6 +48,24 @@ public class ServiceShiteiDiv extends Panel {
     @JsonProperty("dgServiceIchiran")
     public void setDgServiceIchiran(DataGrid<dgServiceIchiran_Row> dgServiceIchiran) {
         this.dgServiceIchiran = dgServiceIchiran;
+    }
+
+    /*
+     * getlblServiceIken
+     * @return lblServiceIken
+     */
+    @JsonProperty("lblServiceIken")
+    public Label getLblServiceIken() {
+        return lblServiceIken;
+    }
+
+    /*
+     * setlblServiceIken
+     * @param lblServiceIken lblServiceIken
+     */
+    @JsonProperty("lblServiceIken")
+    public void setLblServiceIken(Label lblServiceIken) {
+        this.lblServiceIken = lblServiceIken;
     }
 
     // </editor-fold>

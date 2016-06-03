@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.FukaEntity;
 
 /**
@@ -38,4 +39,13 @@ public interface IFukaMapper {
      * @return FukaEntityの{@code list}
      */
     List<FukaEntity> select介護賦課リストBy主キー1(FukaMapperParameter 介護賦課検索条件);
+
+    /**
+     * 主キー1に合致するデータ以前の介護賦課のリストを取得します。
+     *
+     * @param 介護賦課検索条件 介護賦課検索条件
+     * @return FukaEntityの{@code list}
+     */
+    List<DbT2002FukaEntity> get前賦課履歴(FukaMapperParameter 介護賦課検索条件);
+
 }

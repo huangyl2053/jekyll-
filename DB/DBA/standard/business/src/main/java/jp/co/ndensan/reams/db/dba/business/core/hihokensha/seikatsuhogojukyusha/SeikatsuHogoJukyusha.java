@@ -33,8 +33,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 生活保護受給者を管理するクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
-public class SeikatsuHogoJukyusha extends ModelBase<SeikatsuHogoJukyushaIdentifier, UrT0508SeikatsuHogoJukyushaEntity, SeikatsuHogoJukyusha> implements Serializable {
+public class SeikatsuHogoJukyusha
+        extends ModelBase<SeikatsuHogoJukyushaIdentifier, UrT0508SeikatsuHogoJukyushaEntity, SeikatsuHogoJukyusha>
+        implements Serializable {
 
     private final UrT0508SeikatsuHogoJukyushaEntity entity;
     private final SeikatsuHogoJukyushaIdentifier id;
@@ -215,12 +219,10 @@ public class SeikatsuHogoJukyusha extends ModelBase<SeikatsuHogoJukyushaIdentifi
     /**
      * 生活保護受給者配下の要素を削除対象とします。<br/>
      * {@link UrT0508SeikatsuHogoJukyushaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 生活保護受給者配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link SeikatsuHogoJukyusha}を返します。
+     * 生活保護受給者配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link SeikatsuHogoJukyusha}を返します。
      *
      * @return 削除対象処理実施後の{@link SeikatsuHogoJukyusha}
-     * @throws IllegalStateException
-     * UrT0508SeikatsuHogoJukyushaEntityのデータ状態が変更の場合
+     * @throws IllegalStateException UrT0508SeikatsuHogoJukyushaEntityのデータ状態が変更の場合
      */
     @Override
     public SeikatsuHogoJukyusha deleted() {

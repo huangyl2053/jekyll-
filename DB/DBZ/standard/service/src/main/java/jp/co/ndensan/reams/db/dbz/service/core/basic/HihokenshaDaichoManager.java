@@ -10,8 +10,11 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.hihokenshadaicho.HihokenshaDaichoSearchCondition;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper;
+import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -22,25 +25,40 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 被保険者台帳管理を管理するクラスです。
+ *
+ * @reamsid_L DBB-0630-020 chengsanyuan
  */
 public class HihokenshaDaichoManager {
 
     private final DbT1001HihokenshaDaichoDac dac;
+    private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタです。
      */
     public HihokenshaDaichoManager() {
         dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
+        mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
     /**
      * テスト用コンストラクタです。
      *
      * @param dac {@link DbT1001HihokenshaDaichoDac}
+     * @param mapperProvider mapperProvider
      */
-    HihokenshaDaichoManager(DbT1001HihokenshaDaichoDac dac) {
+    HihokenshaDaichoManager(DbT1001HihokenshaDaichoDac dac, MapperProvider mapperProvider) {
         this.dac = dac;
+        this.mapperProvider = mapperProvider;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoManager}のインスタンス
+     */
+    public static HihokenshaDaichoManager createInstance() {
+        return InstanceProvider.create(HihokenshaDaichoManager.class);
     }
 
     /**
@@ -137,6 +155,38 @@ public class HihokenshaDaichoManager {
     }
 
     /**
+     * 被保険者番号に被保険者台帳を検索します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return List<HihokenshaDaicho>
+     */
+    public List<HihokenshaDaicho> get最新被保険者台帳(HihokenshaNo 被保険者番号) {
+        List<HihokenshaDaicho> businessList = new ArrayList<>();
+        List<DbT1001HihokenshaDaichoEntity> entityList = dac.get被保険者台帳管理情報(被保険者番号);
+        for (DbT1001HihokenshaDaichoEntity entity : entityList) {
+            entity.initializeMd5();
+            businessList.add(new HihokenshaDaicho(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
+     * 被保険者番号、異動日で最大の枝番を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 異動日 異動日
+     * @return List<HihokenshaDaicho>
+     */
+    public RString get最大の枝番(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        DbT1001HihokenshaDaichoEntity entity = dac.selectMaxEdaNoByKey(被保険者番号, 異動日);
+        if (entity == null) {
+            return null;
+        }
+        return entity.getEdaNo();
+    }
+
+    /**
      * 基準日時点の被保険者番号に該当する被保険者台帳情報を取得します。
      *
      * @param 被保険者番号 被保険者番号
@@ -185,6 +235,57 @@ public class HihokenshaDaichoManager {
     public HihokenshaDaicho find最新被保険者台帳(ShikibetsuCode 識別コード) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         DbT1001HihokenshaDaichoEntity entity = dac.selectByShikibetsuCode(識別コード);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new HihokenshaDaicho(entity);
+    }
+
+    /**
+     * 異動日に該当する最新の被保険者台帳を取得します。
+     *
+     * @param 異動日 異動日
+     * @return 該当する被保険者台帳情報の内、最新の1件
+     */
+    public HihokenshaDaicho find最新被保険者台帳(FlexibleDate 異動日) {
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+        DbT1001HihokenshaDaichoEntity entity = dac.selectBy異動日(異動日);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new HihokenshaDaicho(entity);
+    }
+
+    /**
+     * 最新の資格の情報を取得します。
+     *
+     * @param param HihokenshaDaichoSearchCondition
+     * @return 最新の資格の情報を取得
+     */
+    public HihokenshaDaicho find資格の情報(HihokenshaDaichoSearchCondition param) {
+
+        DbT1001HihokenshaDaichoEntity entity = mapperProvider.create(
+                IDbT1001HihokenshaDaichoMapper.class).get資格の情報(param);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new HihokenshaDaicho(entity);
+    }
+
+    /**
+     * 識別コードが異なる、異動日が大きいの資格の情報を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 識別コード ShikibetsuCode
+     * @param 異動日 FlexibleDate
+     * @return 資格の情報
+     */
+    public HihokenshaDaicho get資格の情報For資格不整合(HihokenshaNo 被保険者番号,
+            ShikibetsuCode 識別コード, FlexibleDate 異動日) {
+        DbT1001HihokenshaDaichoEntity entity = dac.get資格の情報(被保険者番号, 識別コード, 異動日, new RString("1"));
         if (entity == null) {
             return null;
         }

@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbx.service;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho;
-import jp.co.ndensan.reams.db.dbx.business.shichosonsecurityjoho.KanriJoho;
-import jp.co.ndensan.reams.db.dbx.business.shichosonsecurityjoho.KoseiShichosonJoho;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KanriJoho;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ChohyoKyotsuJushoHenshuHoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DousaKanren;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.RojinHokenJoho;
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEnt
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7908KaigoDonyuKeitaiDac;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -33,24 +35,26 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  * 市町村セキュリティ情報取得のクラスです。
+ *
+ * @reamsid_L DBU-0050-010 liangbc
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class ShichosonSecurityJoho {
 
-    private final static RString 権限項目種類 = new RString("koseiShichosonKengen");
-    private final static RString 導入済 = new RString("1");
-    private final static RString 未導入 = new RString("0");
-    private final static Integer 市町村ＩＤ有効桁数_DEFAULT = 2;
-    private final static RString 市町村識別ID_DEFAULT = new RString("00");
+    private static final RString 権限項目種類 = new RString("koseiShichosonKengen");
+    private static final RString 導入済 = new RString("1");
+    private static final RString 未導入 = new RString("0");
+    private static final Integer 市町村ＩＤ有効桁数_DEFAULT = 2;
+    private static final Integer 市町村識別ID_MAX = 99;
+    private static final RString 市町村識別ID_DEFAULT = new RString("00");
 
     private static DbT7908KaigoDonyuKeitaiDac 介護導入形態Dac;
     private static DbT7051KoseiShichosonMasterDac 構成市町村マスタDac;
@@ -64,17 +68,24 @@ public final class ShichosonSecurityJoho {
     /**
      * コンストラクタです。
      */
-    public ShichosonSecurityJoho() {
+    private ShichosonSecurityJoho() {
     }
 
+    /**
+     * 市町村セキュリティ情報を取得する
+     *
+     * @param 業務分類 業務分類
+     * @return 市町村セキュリティ情報
+     */
     public static ShichosonSecurityJoho getShichosonSecurityJoho(GyomuBunrui 業務分類) {
         requireNonNull(業務分類, UrErrorMessages.対象データなし.getMessage().toString());
         介護導入形態Dac = InstanceProvider.create(DbT7908KaigoDonyuKeitaiDac.class);
         構成市町村マスタDac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
-        DbT7908KaigoDonyuKeitaiEntity 介護導入形態 = 介護導入形態Dac.selectByGyomuBunrui(業務分類.code()).get(0);
-        if (null == 介護導入形態) {
+        List<DbT7908KaigoDonyuKeitaiEntity> entitys = 介護導入形態Dac.selectByGyomuBunrui(業務分類.code());
+        if (entitys.isEmpty()) {
             return get未導入市町村セキュリティ情報();
         } else {
+            DbT7908KaigoDonyuKeitaiEntity 介護導入形態 = entitys.get(0);
             return get導入済市町村セキュリティ情報(介護導入形態);
         }
     }
@@ -101,15 +112,27 @@ public final class ShichosonSecurityJoho {
     /**
      * 業務コンフィグから管理情報を取得する
      *
-     * @param 介護導入形態 介護導入形態
+     * @param 業務分類 業務分類
      * @return 管理情報
      */
-    public static KanriJoho getKanriJoho(DbT7908KaigoDonyuKeitaiEntity 介護導入形態) {
+    public static KanriJoho getKanriJoho(GyomuBunrui 業務分類) {
+        requireNonNull(業務分類, UrErrorMessages.対象データなし.getMessage().toString());
+        介護導入形態Dac = InstanceProvider.create(DbT7908KaigoDonyuKeitaiDac.class);
+        List<DbT7908KaigoDonyuKeitaiEntity> entitys = 介護導入形態Dac.selectByGyomuBunrui(業務分類.code());
+        if (entitys.isEmpty()) {
+            return null;
+        } else {
+            DbT7908KaigoDonyuKeitaiEntity 介護導入形態 = entitys.get(0);
+            return getKanriJoho(介護導入形態);
+        }
+    }
+
+    private static KanriJoho getKanriJoho(DbT7908KaigoDonyuKeitaiEntity 介護導入形態) {
         requireNonNull(介護導入形態, UrErrorMessages.対象データなし.getMessage().toString());
         KanriJoho 管理情報 = new KanriJoho();
         管理情報.set導入形態コード(介護導入形態.getDonyuKeitaiCode());
         管理情報.set支所管理有無フラグ(介護導入形態.getShishoKanriUmuFlag());
-        管理情報.set広域タイプ(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_広域タイプ, SubGyomuCode.DBU介護統計報告));
+        管理情報.set広域タイプ(DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_広域タイプ, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         管理情報.set市町村ＩＤ有効桁数(市町村ＩＤ有効桁数_DEFAULT);
         管理情報.set市町村情報(get市町村情報Form介護共通業務コンフィグ());
         return 管理情報;
@@ -144,18 +167,19 @@ public final class ShichosonSecurityJoho {
                 || new Code("112").equals(介護導入形態.getDonyuKeitaiCode())
                 || new Code("220").equals(介護導入形態.getDonyuKeitaiCode())) {
             KanriJoho kanriJoho = getKanriJoho(介護導入形態);
-            ConverterKanriJohoToShichosonSecurityJoho(市町村セキュリティ情報, kanriJoho);
+            converterKanriJohoToShichosonSecurityJoho(市町村セキュリティ情報, kanriJoho);
         } else if (new Code("111").equals(介護導入形態.getDonyuKeitaiCode())
                 || new Code("211").equals(介護導入形態.getDonyuKeitaiCode())) {
-            RString 市町村識別ID = getShichosonShikibetsuId(権限項目種類).get(0).getItemId();
+            RString 市町村識別ID = getShichosonShikibetsuId(UrControlDataFactory.createInstance().getLoginInfo().getUserId()).get(0).getItemId();
             if (市町村識別ID_DEFAULT.equals(市町村識別ID)) {
                 KanriJoho kanriJoho = getKanriJoho(介護導入形態);
-                ConverterKanriJohoToShichosonSecurityJoho(市町村セキュリティ情報, kanriJoho);
+                converterKanriJohoToShichosonSecurityJoho(市町村セキュリティ情報, kanriJoho);
             } else {
                 市町村セキュリティ情報.set市町村情報(getKouseiShichosonJoho(市町村識別ID));
                 市町村セキュリティ情報.set導入形態コード(介護導入形態.getDonyuKeitaiCode());
                 市町村セキュリティ情報.set支所管理有無フラグ(介護導入形態.getShishoKanriUmuFlag());
-                市町村セキュリティ情報.set広域タイプ(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_広域タイプ, SubGyomuCode.DBU介護統計報告));
+                市町村セキュリティ情報.set広域タイプ(
+                        DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_広域タイプ, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
                 市町村セキュリティ情報.set市町村ＩＤ有効桁数(市町村ＩＤ有効桁数_DEFAULT);
             }
         }
@@ -172,7 +196,7 @@ public final class ShichosonSecurityJoho {
         } catch (NumberFormatException ex) {
             return Boolean.FALSE;
         }
-        if (1 <= shichosonShokibetsuID && shichosonShokibetsuID <= 99) {
+        if (1 <= shichosonShokibetsuID && shichosonShokibetsuID <= 市町村識別ID_MAX) {
             return Boolean.TRUE;
         } else {
             return Boolean.FALSE;
@@ -217,32 +241,33 @@ public final class ShichosonSecurityJoho {
         KoseiShichosonJoho 市町村情報 = new KoseiShichosonJoho();
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         市町村情報.set市町村識別ID(市町村識別ID_DEFAULT);
-        市町村情報.set市町村コード(導入団体クラス.getLasdecCode_());
-        市町村情報.set証記載保険者番号(new ShoKisaiHokenshaNo(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号, SubGyomuCode.DBU介護統計報告)));
+        市町村情報.set市町村コード(導入団体クラス.get地方公共団体コード());
+        市町村情報.set証記載保険者番号(
+                new ShoKisaiHokenshaNo(DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)));
         市町村情報.set国保連広域内市町村番号(RString.EMPTY);
-        市町村情報.set市町村名称(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者名称, SubGyomuCode.DBU介護統計報告));
+        市町村情報.set市町村名称(DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         市町村情報.set都道府県名称(導入団体クラス.get都道府県名());
         市町村情報.set郡名称(導入団体クラス.get郡名());
-        市町村情報.set郵便番号(new YubinNo(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_郵便番号, SubGyomuCode.DBU介護統計報告)));
-        市町村情報.set住所(new AtenaJusho(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_住所, SubGyomuCode.DBU介護統計報告)));
-        市町村情報.set電話番号(new TelNo(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_電話番号, SubGyomuCode.DBU介護統計報告)));
-        市町村情報.set最優先地区コード(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_最優先地区コード, SubGyomuCode.DBU介護統計報告));
-        市町村情報.set帳票用都道府県名称表示有無(BusinessConfig.get(
-                ChohyoKyotsuJushoHenshuHoho.KannaiJushoHenshu.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, SubGyomuCode.DBU介護統計報告));
-        市町村情報.set帳票用郡名称表示有無(BusinessConfig.get(
-                ChohyoKyotsuJushoHenshuHoho.KannaiJushoHenshu.帳票共通住所編集方法_管内住所編集_郡名付与有無, SubGyomuCode.DBU介護統計報告));
-        市町村情報.set帳票用市町村名称表示有無(BusinessConfig.get(
-                ChohyoKyotsuJushoHenshuHoho.KannaiJushoHenshu.帳票共通住所編集方法_管内住所編集_市町村名付与有無, SubGyomuCode.DBU介護統計報告));
-        市町村情報.set帳票用住所編集方法(BusinessConfig.get(
-                ChohyoKyotsuJushoHenshuHoho.KannaiJushoHenshu.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告));
-        市町村情報.set帳票用方書表示有無(BusinessConfig.get(
-                ChohyoKyotsuJushoHenshuHoho.JushoHenshu.帳票共通住所編集方法_住所編集_方書表示有無, SubGyomuCode.DBU介護統計報告));
-        市町村情報.set老人保健市町村番号(BusinessConfig.get(
-                RojinHokenJoho.老人保健情報_市町村番号, SubGyomuCode.DBU介護統計報告));
-        市町村情報.set老人保健受給者番号体系(BusinessConfig.get(
-                RojinHokenJoho.老人保健情報_管理体系, SubGyomuCode.DBD介護受給));
-        市町村情報.set特徴分配集約(BusinessConfig.get(
-                DousaKanren.動作関連_特徴分配集約システム, SubGyomuCode.DBB介護賦課));
+        市町村情報.set郵便番号(new YubinNo(DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_郵便番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)));
+        市町村情報.set住所(new AtenaJusho(DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_住所, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)));
+        市町村情報.set電話番号(new TelNo(DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_電話番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)));
+        市町村情報.set最優先地区コード(DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_最優先地区コード, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        市町村情報.set帳票用都道府県名称表示有無(DbBusinessConfig.get(
+                ChohyoKyotsuJushoHenshuHoho.KannaiJushoHenshu.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        市町村情報.set帳票用郡名称表示有無(DbBusinessConfig.get(
+                ChohyoKyotsuJushoHenshuHoho.KannaiJushoHenshu.帳票共通住所編集方法_管内住所編集_郡名付与有無, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        市町村情報.set帳票用市町村名称表示有無(DbBusinessConfig.get(
+                ChohyoKyotsuJushoHenshuHoho.KannaiJushoHenshu.帳票共通住所編集方法_管内住所編集_市町村名付与有無, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        市町村情報.set帳票用住所編集方法(DbBusinessConfig.get(
+                ChohyoKyotsuJushoHenshuHoho.KannaiJushoHenshu.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        市町村情報.set帳票用方書表示有無(DbBusinessConfig.get(
+                ChohyoKyotsuJushoHenshuHoho.JushoHenshu.帳票共通住所編集方法_住所編集_方書表示有無, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        市町村情報.set老人保健市町村番号(DbBusinessConfig.get(
+                RojinHokenJoho.老人保健情報_市町村番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        市町村情報.set老人保健受給者番号体系(DbBusinessConfig.get(
+                RojinHokenJoho.老人保健情報_管理体系, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+        市町村情報.set特徴分配集約(DbBusinessConfig.get(
+                DousaKanren.動作関連_特徴分配集約システム, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
         市町村情報.set移行日(FlexibleDate.EMPTY);
         市町村情報.set加入日(FlexibleDate.EMPTY);
         市町村情報.set離脱日(FlexibleDate.EMPTY);
@@ -256,7 +281,7 @@ public final class ShichosonSecurityJoho {
         return 市町村情報;
     }
 
-    private static void ConverterKanriJohoToShichosonSecurityJoho(ShichosonSecurityJoho 市町村セキュリティ情報, KanriJoho kanriJoho) {
+    private static void converterKanriJohoToShichosonSecurityJoho(ShichosonSecurityJoho 市町村セキュリティ情報, KanriJoho kanriJoho) {
         市町村セキュリティ情報.set導入形態コード(kanriJoho.get導入形態コード());
         市町村セキュリティ情報.set市町村ＩＤ有効桁数(kanriJoho.get市町村ＩＤ有効桁数());
         市町村セキュリティ情報.set広域タイプ(kanriJoho.get広域タイプ());

@@ -19,7 +19,7 @@ public enum NinteiShinseiDateSpec implements IPredicate<NinteiShinseiDate> {
 
                 /**
                  *
-                 * @param ninteiShinseiDate 認定申請年月日
+                 * @param ninteishinseidate 認定申請年月日
                  * @return true：仕様を満たす、false：仕様を満たさない
                  */
                 @Override

@@ -1,19 +1,17 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010013;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010013.JutokuTekiyoHokenshaJohoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * JutokuTekiyoInput のクラスファイル 
- * 
+ * JutokuTekiyoInput のクラスファイル
+ *
  * @author 自動生成
  */
 public class JutokuTekiyoInputDiv extends Panel {
@@ -23,6 +21,7 @@ public class JutokuTekiyoInputDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtTekiyoDate")
     private TextBoxFlexibleDate txtTekiyoDate;
     @JsonProperty("txtTekyoTodokedeDate")
@@ -45,7 +44,7 @@ public class JutokuTekiyoInputDiv extends Panel {
 
     @JsonProperty("txtTekiyoDate")
     public void setTxtTekiyoDate(TextBoxFlexibleDate txtTekiyoDate) {
-        this.txtTekiyoDate=txtTekiyoDate;
+        this.txtTekiyoDate = txtTekiyoDate;
     }
 
     @JsonProperty("txtTekyoTodokedeDate")
@@ -55,7 +54,7 @@ public class JutokuTekiyoInputDiv extends Panel {
 
     @JsonProperty("txtTekyoTodokedeDate")
     public void setTxtTekyoTodokedeDate(TextBoxFlexibleDate txtTekyoTodokedeDate) {
-        this.txtTekyoTodokedeDate=txtTekyoTodokedeDate;
+        this.txtTekyoTodokedeDate = txtTekyoTodokedeDate;
     }
 
     @JsonProperty("ddlTekiyoJiyu")
@@ -65,7 +64,7 @@ public class JutokuTekiyoInputDiv extends Panel {
 
     @JsonProperty("ddlTekiyoJiyu")
     public void setDdlTekiyoJiyu(DropDownList ddlTekiyoJiyu) {
-        this.ddlTekiyoJiyu=ddlTekiyoJiyu;
+        this.ddlTekiyoJiyu = ddlTekiyoJiyu;
     }
 
     @JsonProperty("JutokuTekiyoHokenshaJoho")
@@ -75,7 +74,7 @@ public class JutokuTekiyoInputDiv extends Panel {
 
     @JsonProperty("JutokuTekiyoHokenshaJoho")
     public void setJutokuTekiyoHokenshaJoho(JutokuTekiyoHokenshaJohoDiv JutokuTekiyoHokenshaJoho) {
-        this.JutokuTekiyoHokenshaJoho=JutokuTekiyoHokenshaJoho;
+        this.JutokuTekiyoHokenshaJoho = JutokuTekiyoHokenshaJoho;
     }
 
     /*
@@ -87,7 +86,7 @@ public class JutokuTekiyoInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlTekiyoShozaiHokensha(DropDownList ddlTekiyoShozaiHokensha) {
+    public void setDdlTekiyoShozaiHokensha(DropDownList ddlTekiyoShozaiHokensha) {
         this.getJutokuTekiyoHokenshaJoho().setDdlTekiyoShozaiHokensha(ddlTekiyoShozaiHokensha);
     }
 
@@ -97,7 +96,7 @@ public class JutokuTekiyoInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlTekiyoSochimotoHokensha(DropDownList ddlTekiyoSochimotoHokensha) {
+    public void setDdlTekiyoSochimotoHokensha(DropDownList ddlTekiyoSochimotoHokensha) {
         this.getJutokuTekiyoHokenshaJoho().setDdlTekiyoSochimotoHokensha(ddlTekiyoSochimotoHokensha);
     }
 
@@ -107,7 +106,7 @@ public class JutokuTekiyoInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlTekiyoKyuHokensha(DropDownList ddlTekiyoKyuHokensha) {
+    public void setDdlTekiyoKyuHokensha(DropDownList ddlTekiyoKyuHokensha) {
         this.getJutokuTekiyoHokenshaJoho().setDdlTekiyoKyuHokensha(ddlTekiyoKyuHokensha);
     }
 

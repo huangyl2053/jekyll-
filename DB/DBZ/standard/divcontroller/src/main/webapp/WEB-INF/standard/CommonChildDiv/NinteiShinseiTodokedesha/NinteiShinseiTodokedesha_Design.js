@@ -8,8 +8,20 @@ var DBZ;
                 return "onChanged_ddlTodokedeDaikoKubun";
             };
 
+            Events.onOkClose_seitai = function () {
+                return "onOkClose_seitai";
+            };
+
+            Events.onOkClose_atenKensaku = function () {
+                return "onOkClose_atenKensaku";
+            };
+
             Events.onClick_btnZenkaiFukusha = function () {
                 return "onClick_btnZenkaiFukusha";
+            };
+
+            Events.onChangeChkKannaiKangai = function () {
+                return "onChangeChkKannaiKangai";
             };
             return Events;
         })();
@@ -77,10 +89,6 @@ var DBZ;
 
             Controls.prototype.txtHonninKankeisei = function () {
                 return new UZA.TextBoxCode(this.convFiledName("txtHonninKankeisei"));
-            };
-
-            Controls.prototype.lblHonninKankeiseiMei = function () {
-                return new UZA.Label(this.convFiledName("lblHonninKankeiseiMei"));
             };
 
             Controls.prototype.radKannaiKangai = function () {

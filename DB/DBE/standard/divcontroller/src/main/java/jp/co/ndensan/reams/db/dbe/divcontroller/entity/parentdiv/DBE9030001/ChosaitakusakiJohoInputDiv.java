@@ -4,30 +4,20 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxJusho;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ChosaitakusakiJohoInput のクラスファイル
- *
+ * ChosaitakusakiJohoInput のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class ChosaitakusakiJohoInputDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -59,35 +49,31 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     @JsonProperty("txtFaxNo")
     private TextBoxTelNo txtFaxNo;
     @JsonProperty("txtdaihyoshaname")
-    private TextBoxJusho txtdaihyoshaname;
+    private TextBox txtdaihyoshaname;
     @JsonProperty("txtdaihyoshakananame")
-    private TextBoxJusho txtdaihyoshakananame;
+    private TextBox txtdaihyoshakananame;
     @JsonProperty("ddlItakusakikubun")
     private DropDownList ddlItakusakikubun;
     @JsonProperty("ddltokuteichosain")
     private DropDownList ddltokuteichosain;
-    @JsonProperty("txtteiin")
-    private TextBoxYubinNo txtteiin;
-    @JsonProperty("txtChiku")
-    private TextBoxCode txtChiku;
-    @JsonProperty("btnToSearchchiku")
-    private ButtonDialog btnToSearchchiku;
-    @JsonProperty("txtChikuMei")
-    private TextBox txtChikuMei;
+    @JsonProperty("txtTeiin")
+    private TextBoxNum txtTeiin;
     @JsonProperty("radautowatitsuke")
     private RadioButton radautowatitsuke;
     @JsonProperty("ddlKikankubun")
     private DropDownList ddlKikankubun;
     @JsonProperty("radChosainJokyo")
     private RadioButton radChosainJokyo;
-    @JsonProperty("btnkoza")
-    private Button btnkoza;
+    @JsonProperty("btnKoza")
+    private ButtonDialog btnKoza;
     @JsonProperty("btnKakutei")
     private Button btnKakutei;
     @JsonProperty("btnTorikeshi")
     private Button btnTorikeshi;
     @JsonProperty("btnchosaininsert")
     private Button btnchosaininsert;
+    @JsonProperty("ccdChiku")
+    private CodeInputDiv ccdChiku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -316,7 +302,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
      * @return txtdaihyoshaname
      */
     @JsonProperty("txtdaihyoshaname")
-    public TextBoxJusho getTxtdaihyoshaname() {
+    public TextBox getTxtdaihyoshaname() {
         return txtdaihyoshaname;
     }
 
@@ -325,7 +311,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
      * @param txtdaihyoshaname txtdaihyoshaname
      */
     @JsonProperty("txtdaihyoshaname")
-    public void setTxtdaihyoshaname(TextBoxJusho txtdaihyoshaname) {
+    public void setTxtdaihyoshaname(TextBox txtdaihyoshaname) {
         this.txtdaihyoshaname = txtdaihyoshaname;
     }
 
@@ -334,7 +320,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
      * @return txtdaihyoshakananame
      */
     @JsonProperty("txtdaihyoshakananame")
-    public TextBoxJusho getTxtdaihyoshakananame() {
+    public TextBox getTxtdaihyoshakananame() {
         return txtdaihyoshakananame;
     }
 
@@ -343,7 +329,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
      * @param txtdaihyoshakananame txtdaihyoshakananame
      */
     @JsonProperty("txtdaihyoshakananame")
-    public void setTxtdaihyoshakananame(TextBoxJusho txtdaihyoshakananame) {
+    public void setTxtdaihyoshakananame(TextBox txtdaihyoshakananame) {
         this.txtdaihyoshakananame = txtdaihyoshakananame;
     }
 
@@ -384,75 +370,21 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     }
 
     /*
-     * gettxtteiin
-     * @return txtteiin
+     * gettxtTeiin
+     * @return txtTeiin
      */
-    @JsonProperty("txtteiin")
-    public TextBoxYubinNo getTxtteiin() {
-        return txtteiin;
+    @JsonProperty("txtTeiin")
+    public TextBoxNum getTxtTeiin() {
+        return txtTeiin;
     }
 
     /*
-     * settxtteiin
-     * @param txtteiin txtteiin
+     * settxtTeiin
+     * @param txtTeiin txtTeiin
      */
-    @JsonProperty("txtteiin")
-    public void setTxtteiin(TextBoxYubinNo txtteiin) {
-        this.txtteiin = txtteiin;
-    }
-
-    /*
-     * gettxtChiku
-     * @return txtChiku
-     */
-    @JsonProperty("txtChiku")
-    public TextBoxCode getTxtChiku() {
-        return txtChiku;
-    }
-
-    /*
-     * settxtChiku
-     * @param txtChiku txtChiku
-     */
-    @JsonProperty("txtChiku")
-    public void setTxtChiku(TextBoxCode txtChiku) {
-        this.txtChiku = txtChiku;
-    }
-
-    /*
-     * getbtnToSearchchiku
-     * @return btnToSearchchiku
-     */
-    @JsonProperty("btnToSearchchiku")
-    public ButtonDialog getBtnToSearchchiku() {
-        return btnToSearchchiku;
-    }
-
-    /*
-     * setbtnToSearchchiku
-     * @param btnToSearchchiku btnToSearchchiku
-     */
-    @JsonProperty("btnToSearchchiku")
-    public void setBtnToSearchchiku(ButtonDialog btnToSearchchiku) {
-        this.btnToSearchchiku = btnToSearchchiku;
-    }
-
-    /*
-     * gettxtChikuMei
-     * @return txtChikuMei
-     */
-    @JsonProperty("txtChikuMei")
-    public TextBox getTxtChikuMei() {
-        return txtChikuMei;
-    }
-
-    /*
-     * settxtChikuMei
-     * @param txtChikuMei txtChikuMei
-     */
-    @JsonProperty("txtChikuMei")
-    public void setTxtChikuMei(TextBox txtChikuMei) {
-        this.txtChikuMei = txtChikuMei;
+    @JsonProperty("txtTeiin")
+    public void setTxtTeiin(TextBoxNum txtTeiin) {
+        this.txtTeiin = txtTeiin;
     }
 
     /*
@@ -510,21 +442,21 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     }
 
     /*
-     * getbtnkoza
-     * @return btnkoza
+     * getbtnKoza
+     * @return btnKoza
      */
-    @JsonProperty("btnkoza")
-    public Button getBtnkoza() {
-        return btnkoza;
+    @JsonProperty("btnKoza")
+    public ButtonDialog getBtnKoza() {
+        return btnKoza;
     }
 
     /*
-     * setbtnkoza
-     * @param btnkoza btnkoza
+     * setbtnKoza
+     * @param btnKoza btnKoza
      */
-    @JsonProperty("btnkoza")
-    public void setBtnkoza(Button btnkoza) {
-        this.btnkoza = btnkoza;
+    @JsonProperty("btnKoza")
+    public void setBtnKoza(ButtonDialog btnKoza) {
+        this.btnKoza = btnKoza;
     }
 
     /*
@@ -581,26 +513,14 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
         this.btnchosaininsert = btnchosaininsert;
     }
 
-    // </editor-fold>
-    private static final RString 有効 = new RString("yuko");
-
-    public void clear() {
-        this.txtShichoson.clearValue();
-        this.txtShichosonmei.clearValue();
-        this.txtChosaItakusaki.clearValue();
-        this.txtjigyoshano.clearValue();
-        this.txtChosaitakusakiname.clearValue();
-        this.txtChosaitakusakiKananame.clearValue();
-        this.txtYubinNo.clearValue();
-        this.txtJusho.clearDomain();
-        this.txtTelNo.clearDomain();
-        this.txtFaxNo.clearDomain();
-        this.txtdaihyoshaname.clearDomain();
-        this.txtdaihyoshakananame.clearDomain();
-        this.txtteiin.clearValue();
-        this.txtChiku.clearValue();
-        this.txtChikuMei.clearValue();
-        this.radautowatitsuke.setSelectedKey(有効);
-        this.radChosainJokyo.setSelectedKey(有効);
+    /*
+     * getccdChiku
+     * @return ccdChiku
+     */
+    @JsonProperty("ccdChiku")
+    public ICodeInputDiv getCcdChiku() {
+        return ccdChiku;
     }
+
+    // </editor-fold>
 }

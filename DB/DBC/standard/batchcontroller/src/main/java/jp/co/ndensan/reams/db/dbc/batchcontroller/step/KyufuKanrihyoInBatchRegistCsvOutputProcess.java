@@ -46,9 +46,24 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KyufuKanrihyoInBatchRegistCsvOutputProcess extends BatchProcessBase<DbTKyufukanrihyoDataTempTableEntity> {
 
-    public static final RString INPUT_PARAM_KEY_出力順ID = new RString("出力順ID");
-    public static final RString OUTPUT_PARAM_KEY_一覧ファイル = new RString("一覧ファイル");
-    public static final RString OUTPUT_PARAM_KEY_結果ファイル = new RString("結果ファイル");
+    /**
+     * 出力順ID
+     */
+    public static final RString INPUT_PARAM_KEY_出力順ID;
+    /**
+     * 一覧ファイル
+     */
+    public static final RString OUTPUT_PARAM_KEY_一覧ファイル;
+    /**
+     * 結果ファイル
+     */
+    public static final RString OUTPUT_PARAM_KEY_結果ファイル;
+
+    static {
+        INPUT_PARAM_KEY_出力順ID = new RString("出力順ID");
+        OUTPUT_PARAM_KEY_一覧ファイル = new RString("一覧ファイル");
+        OUTPUT_PARAM_KEY_結果ファイル = new RString("結果ファイル");
+    }
 
     private static final RString マッパーID = DbcMapperInterfaces.給付管理票取込_一時データ取得.getFullPath();
     private static final ReportId 帳票ID = new ReportId(new RString("DBC900001_KyufukanrihyoTorikomiKekkaIchiran"));
@@ -72,6 +87,8 @@ public class KyufuKanrihyoInBatchRegistCsvOutputProcess extends BatchProcessBase
     private static final RString 支援事業者未登録 = new RString("支援事業者未登録");
     private static final RString 集計レコード = new RString("99");
     private static final FlexibleYearMonth サービス単位出力基準 = new FlexibleYearMonth("200604");
+    private static final int NUMBER3 = 3;
+    private static final int NUMBER4 = 4;
 
     private InputParameter<Long> 出力順ID;
     private OutputParameter<RString> 一覧ファイル;
@@ -266,10 +283,10 @@ public class KyufuKanrihyoInBatchRegistCsvOutputProcess extends BatchProcessBase
         csvEntity.set出力順昇降順指示2(getParameter(昇降順パラメータ.get(1)));
         csvEntity.set出力順名称3(getParameter(出力順パラメータ.get(2)));
         csvEntity.set出力順昇降順指示3(getParameter(昇降順パラメータ.get(2)));
-        csvEntity.set出力順名称4(getParameter(出力順パラメータ.get(3)));
-        csvEntity.set出力順昇降順指示4(getParameter(昇降順パラメータ.get(3)));
-        csvEntity.set出力順名称5(getParameter(出力順パラメータ.get(4)));
-        csvEntity.set出力順昇降順指示5(getParameter(昇降順パラメータ.get(4)));
+        csvEntity.set出力順名称4(getParameter(出力順パラメータ.get(NUMBER3)));
+        csvEntity.set出力順昇降順指示4(getParameter(昇降順パラメータ.get(NUMBER3)));
+        csvEntity.set出力順名称5(getParameter(出力順パラメータ.get(NUMBER4)));
+        csvEntity.set出力順昇降順指示5(getParameter(昇降順パラメータ.get(NUMBER4)));
         csvEntity.set訪問通所サービス件数(getCommaValue(訪問通所サービス件数));
         csvEntity.set短期入所サービス件数(getCommaValue(短期入所サービス件数));
         csvEntity.set居宅サービス件数(getCommaValue(居宅サービス件数));

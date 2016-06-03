@@ -14,6 +14,7 @@ import lombok.Value;
  * 介護導入形態の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KaigoDonyuKeitaiIdentifier implements Serializable {
 
     private final RString 業務分類;

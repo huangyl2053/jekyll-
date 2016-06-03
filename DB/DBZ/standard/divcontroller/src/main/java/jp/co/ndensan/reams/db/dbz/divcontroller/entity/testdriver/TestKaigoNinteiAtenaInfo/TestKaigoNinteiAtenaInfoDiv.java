@@ -4,19 +4,21 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.testdriver.TestKaigoNint
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiAtenaInfo.IKaigoNinteiAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.IKaigoNinteiAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TestKaigoNinteiAtenaInfo のクラスファイル 
- * 
+ * TestKaigoNinteiAtenaInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class TestKaigoNinteiAtenaInfoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-44">
     /*
      * [ private の作成 ]
@@ -74,7 +76,7 @@ public class TestKaigoNinteiAtenaInfoDiv extends Panel {
 
     @JsonProperty("txtHdnKaigoDonyuKeitai")
     public void setTxtHdnKaigoDonyuKeitai(TextBox txtHdnKaigoDonyuKeitai) {
-        this.txtHdnKaigoDonyuKeitai=txtHdnKaigoDonyuKeitai;
+        this.txtHdnKaigoDonyuKeitai = txtHdnKaigoDonyuKeitai;
     }
 
     @JsonProperty("txtHdnShoriType")
@@ -84,7 +86,7 @@ public class TestKaigoNinteiAtenaInfoDiv extends Panel {
 
     @JsonProperty("txtHdnShoriType")
     public void setTxtHdnShoriType(TextBox txtHdnShoriType) {
-        this.txtHdnShoriType=txtHdnShoriType;
+        this.txtHdnShoriType = txtHdnShoriType;
     }
 
     @JsonProperty("txtMemoShikibetsuKubun")
@@ -94,7 +96,7 @@ public class TestKaigoNinteiAtenaInfoDiv extends Panel {
 
     @JsonProperty("txtMemoShikibetsuKubun")
     public void setTxtMemoShikibetsuKubun(TextBox txtMemoShikibetsuKubun) {
-        this.txtMemoShikibetsuKubun=txtMemoShikibetsuKubun;
+        this.txtMemoShikibetsuKubun = txtMemoShikibetsuKubun;
     }
 
     @JsonProperty("txtHdnSubGyomuCode")
@@ -104,7 +106,7 @@ public class TestKaigoNinteiAtenaInfoDiv extends Panel {
 
     @JsonProperty("txtHdnSubGyomuCode")
     public void setTxtHdnSubGyomuCode(TextBox txtHdnSubGyomuCode) {
-        this.txtHdnSubGyomuCode=txtHdnSubGyomuCode;
+        this.txtHdnSubGyomuCode = txtHdnSubGyomuCode;
     }
 
     @JsonProperty("txtShimei")
@@ -114,7 +116,7 @@ public class TestKaigoNinteiAtenaInfoDiv extends Panel {
 
     @JsonProperty("txtShimei")
     public void setTxtShimei(TextBox txtShimei) {
-        this.txtShimei=txtShimei;
+        this.txtShimei = txtShimei;
     }
 
     @JsonProperty("txtBirthYMD")
@@ -124,7 +126,7 @@ public class TestKaigoNinteiAtenaInfoDiv extends Panel {
 
     @JsonProperty("txtBirthYMD")
     public void setTxtBirthYMD(TextBoxDate txtBirthYMD) {
-        this.txtBirthYMD=txtBirthYMD;
+        this.txtBirthYMD = txtBirthYMD;
     }
 
     @JsonProperty("txtNenrei")
@@ -134,7 +136,7 @@ public class TestKaigoNinteiAtenaInfoDiv extends Panel {
 
     @JsonProperty("txtNenrei")
     public void setTxtNenrei(TextBox txtNenrei) {
-        this.txtNenrei=txtNenrei;
+        this.txtNenrei = txtNenrei;
     }
 
     @JsonProperty("txtSeibetsu")
@@ -144,7 +146,7 @@ public class TestKaigoNinteiAtenaInfoDiv extends Panel {
 
     @JsonProperty("txtSeibetsu")
     public void setTxtSeibetsu(TextBox txtSeibetsu) {
-        this.txtSeibetsu=txtSeibetsu;
+        this.txtSeibetsu = txtSeibetsu;
     }
 
     @JsonProperty("txtJuminShubetsu")
@@ -154,7 +156,7 @@ public class TestKaigoNinteiAtenaInfoDiv extends Panel {
 
     @JsonProperty("txtJuminShubetsu")
     public void setTxtJuminShubetsu(TextBox txtJuminShubetsu) {
-        this.txtJuminShubetsu=txtJuminShubetsu;
+        this.txtJuminShubetsu = txtJuminShubetsu;
     }
 
     @JsonProperty("txtShikiBetsuCode")
@@ -164,7 +166,7 @@ public class TestKaigoNinteiAtenaInfoDiv extends Panel {
 
     @JsonProperty("txtShikiBetsuCode")
     public void setTxtShikiBetsuCode(TextBox txtShikiBetsuCode) {
-        this.txtShikiBetsuCode=txtShikiBetsuCode;
+        this.txtShikiBetsuCode = txtShikiBetsuCode;
     }
 
     @JsonProperty("txtKojinNo")
@@ -174,7 +176,7 @@ public class TestKaigoNinteiAtenaInfoDiv extends Panel {
 
     @JsonProperty("txtKojinNo")
     public void setTxtKojinNo(TextBox txtKojinNo) {
-        this.txtKojinNo=txtKojinNo;
+        this.txtKojinNo = txtKojinNo;
     }
 
     @JsonProperty("txtYubinNo")
@@ -184,7 +186,7 @@ public class TestKaigoNinteiAtenaInfoDiv extends Panel {
 
     @JsonProperty("txtYubinNo")
     public void setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
-        this.txtYubinNo=txtYubinNo;
+        this.txtYubinNo = txtYubinNo;
     }
 
     @JsonProperty("txtJusho")
@@ -194,7 +196,7 @@ public class TestKaigoNinteiAtenaInfoDiv extends Panel {
 
     @JsonProperty("txtJusho")
     public void setTxtJusho(TextBoxJusho txtJusho) {
-        this.txtJusho=txtJusho;
+        this.txtJusho = txtJusho;
     }
 
     @JsonProperty("txtTelNo")
@@ -204,7 +206,7 @@ public class TestKaigoNinteiAtenaInfoDiv extends Panel {
 
     @JsonProperty("txtTelNo")
     public void setTxtTelNo(TextBoxTelNo txtTelNo) {
-        this.txtTelNo=txtTelNo;
+        this.txtTelNo = txtTelNo;
     }
 
     @JsonProperty("txtGyoseiku")
@@ -214,7 +216,7 @@ public class TestKaigoNinteiAtenaInfoDiv extends Panel {
 
     @JsonProperty("txtGyoseiku")
     public void setTxtGyoseiku(TextBox txtGyoseiku) {
-        this.txtGyoseiku=txtGyoseiku;
+        this.txtGyoseiku = txtGyoseiku;
     }
 
     @JsonProperty("txtSetaiCode")
@@ -224,7 +226,7 @@ public class TestKaigoNinteiAtenaInfoDiv extends Panel {
 
     @JsonProperty("txtSetaiCode")
     public void setTxtSetaiCode(TextBoxSetaiCode txtSetaiCode) {
-        this.txtSetaiCode=txtSetaiCode;
+        this.txtSetaiCode = txtSetaiCode;
     }
 
     @JsonProperty("btnSetinput")
@@ -234,7 +236,7 @@ public class TestKaigoNinteiAtenaInfoDiv extends Panel {
 
     @JsonProperty("btnSetinput")
     public void setBtnSetinput(Button btnSetinput) {
-        this.btnSetinput=btnSetinput;
+        this.btnSetinput = btnSetinput;
     }
 
     @JsonProperty("CcdKaigoNinteiAtenaInfo")

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBU-0490-021 zhangzhiming -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshasho.IHihokenshashoChohyoMapper">
+    <resultMap id="honninJohoEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshashochohyo.HonninJohoEntity" autoMapping="true">
+        <result property="shikibetsuCode" column="ShikibetsuTaisho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+        <result property="meisho" column="ShikibetsuTaisho_meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="seinengappiYMD" column="ShikibetsuTaisho_seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="juminShubetsuCode" column="ShikibetsuTaisho_juminShubetsuCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="gyoseikuName" column="ShikibetsuTaisho_gyoseikuName"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kanaMeisho"    column="ShikibetsuTaisho_kanaMeisho"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="yubinNo"    column="ShikibetsuTaisho_yubinNo"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="seibetsuCode"    column="ShikibetsuTaisho_seibetsuCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="seinengappiFushoKubun"    column="ShikibetsuTaisho_seinengappiFushoKubun"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    <select id="get本人情報取得" resultMap="honninJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.AtenaMybatisParameter"
+            fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+    </select>
+    <resultMap id="sofusakiJohoEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshashochohyo.SofusakiJohoEntity" autoMapping="true">
+        <result property="shikibetsuCode" column="Atesaki_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+        <result property="atesakiShubetsu" column="Atesaki_atesakiShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kannaiKangaiKubun" column="Atesaki_kannaiKangaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jusho" column="Atesaki_jusho"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="banchi" column="Atesaki_banchi"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="katagaki"    column="Atesaki_katagaki"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    <select id="get送付先情報取得" resultMap="sofusakiJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.AtenaMybatisParameter"
+            fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
+        FROM
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" />
+        AS  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.as_Atesaki" />
+    </select>
+</mapper>

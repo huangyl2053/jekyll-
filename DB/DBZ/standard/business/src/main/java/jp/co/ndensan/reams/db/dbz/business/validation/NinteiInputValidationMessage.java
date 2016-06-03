@@ -22,7 +22,7 @@ public enum NinteiInputValidationMessage implements IValidationMessage {
      */
     対象データなし(UrErrorMessages.対象データなし);
 
-    private final Message message;
+    private final transient Message message;
 
     private NinteiInputValidationMessage(IMessageGettable message, String... replacements) {
         this.message = message.getMessage().replace(replacements);

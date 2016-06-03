@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.ninteichosasch
 
 /**
  * 認定調査スケジュール情報のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public interface INinteichosaScheduleMapper {
 

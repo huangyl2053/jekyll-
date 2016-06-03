@@ -1,19 +1,17 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010012;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010012.TablePanel3Div;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * kaiItaku1 のクラスファイル 
- * 
+ * kaiItaku1 のクラスファイル
+ *
  * @author 自動生成
  */
 public class kaiItaku1Div extends Panel {
@@ -23,6 +21,7 @@ public class kaiItaku1Div extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("TablePanel3")
     private TablePanel3Div TablePanel3;
 
@@ -39,7 +38,7 @@ public class kaiItaku1Div extends Panel {
 
     @JsonProperty("TablePanel3")
     public void setTablePanel3(TablePanel3Div TablePanel3) {
-        this.TablePanel3=TablePanel3;
+        this.TablePanel3 = TablePanel3;
     }
 
     /*

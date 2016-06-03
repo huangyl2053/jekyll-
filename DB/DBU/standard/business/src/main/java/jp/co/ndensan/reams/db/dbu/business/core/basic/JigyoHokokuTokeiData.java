@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbu.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -16,13 +15,16 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 事業報告統計データを管理するクラスです。
+ *
+ * @reamsid_L DBU-1100-030 wangkanglei
  */
 public class JigyoHokokuTokeiData
-        extends ParentModelBase<JigyoHokokuTokeiDataIdentifier, DbT7021JigyoHokokuTokeiDataEntity, JigyoHokokuTokeiData> implements Serializable {
+        extends ModelBase<JigyoHokokuTokeiDataIdentifier, DbT7021JigyoHokokuTokeiDataEntity, JigyoHokokuTokeiData> implements Serializable {
 
     private final DbT7021JigyoHokokuTokeiDataEntity entity;
     private final JigyoHokokuTokeiDataIdentifier id;
@@ -285,11 +287,11 @@ public class JigyoHokokuTokeiData
     }
 
     /**
-     * 事業報告統計データのみを変更対象とします。<br/> {@link DbT7021JigyoHokokuTokeiDataEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 事業報告統計データのみを変更対象とします。<br/>
+     * {@link DbT7021JigyoHokokuTokeiDataEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link JigyoHokokuTokeiData}
      */
-    @Override
     public JigyoHokokuTokeiData modifiedModel() {
         DbT7021JigyoHokokuTokeiDataEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
@@ -300,7 +302,21 @@ public class JigyoHokokuTokeiData
     }
 
     /**
-     * 保持する事業報告統計データを削除対象とします。<br/> {@link DbT7021JigyoHokokuTokeiDataEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 事業報告統計データのみを追加対象とします。<br/>
+     * {@link DbT7021JigyoHokokuTokeiDataEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば追加状態にします。
+     *
+     * @return 変更対象処理実施後の{@link JigyoHokokuTokeiData}
+     */
+    public JigyoHokokuTokeiData addedModel() {
+        DbT7021JigyoHokokuTokeiDataEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Added);
+        return new JigyoHokokuTokeiData(
+                modifiedEntity, id);
+    }
+
+    /**
+     * 保持する事業報告統計データを削除対象とします。<br/>
+     * {@link DbT7021JigyoHokokuTokeiDataEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link JigyoHokokuTokeiData}
      */

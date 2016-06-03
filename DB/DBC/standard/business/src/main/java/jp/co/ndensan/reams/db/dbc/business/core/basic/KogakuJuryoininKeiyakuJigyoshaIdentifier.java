@@ -14,6 +14,7 @@ import lombok.Value;
  * 高額受領委任契約事業者の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuJuryoininKeiyakuJigyoshaIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

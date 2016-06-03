@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.JuchochiTokureiKaijo
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.JuchochiTokureiTekiyoValidator;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.JushochiTokureiValidator;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.dgJutoku_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.business.validation.JushochiTokureiValidationMessage;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.dgJutoku_Row;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;

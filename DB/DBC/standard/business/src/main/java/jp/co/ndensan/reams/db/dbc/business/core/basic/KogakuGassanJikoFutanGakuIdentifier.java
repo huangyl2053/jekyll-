@@ -6,24 +6,25 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import lombok.Value;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import lombok.Value;
 
 /**
  * 高額合算自己負担額の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuGassanJikoFutanGakuIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYear 対象年度;
     private final HokenshaNo 保険者番号;
     private final RString 支給申請書整理番号;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
 
     /**
      * コンストラクタです。
@@ -38,7 +39,7 @@ public class KogakuGassanJikoFutanGakuIdentifier implements Serializable {
             FlexibleYear 対象年度,
             HokenshaNo 保険者番号,
             RString 支給申請書整理番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         this.被保険者番号 = 被保険者番号;
         this.対象年度 = 対象年度;
         this.保険者番号 = 保険者番号;

@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0100000.Kyot
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0100000.KyotakuKeikakuTodokedeshaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0100000.dgKyotakuKeikakuTodokedeRirekiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0100000.tplKyotakuKeikakuTodokedeDetailRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishujokyolist.dgShoKaishuJokyo_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishukirokukanri.ShoKaishuKirokuKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ShoKaishuKirokuKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.dgKoufuKaishu_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
  * 居宅サービス計画作成依頼届出情報登録の居宅サービス計画作成依頼届出のコントロールです。
@@ -68,6 +67,8 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     private void setKihonData(KyotakuKeikakuTodokedeDetailDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getKyotakuKeikakuTodokedeKihon();
 //        ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
 //        int rowId = 0;
 //        KyotakuKeikakuTodokedeKihonDiv div = panel.getKyotakuKeikakuTodokedeKihon();
@@ -75,6 +76,8 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     private void setRirekiList(KyotakuKeikakuTodokedeDetailDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getKyotakuKeikakuTodokedeKihon();
 //        Button btn = new Button();
 //        for (int i = 3; i < 5; i++) {
 //            ControlGenerator cg = new ControlGenerator(getYaml().get(i));
@@ -474,7 +477,9 @@ public class KyotakuKeikakuTodokedeDetail {
      * @param pattern pattern
      */
     private void setMeisaiData(KyotakuKeikakuTodokedeDetailDiv panel, 画面表示 pattern) {
-
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getKyotakuKeikakuTodokedeKihon();
+        pattern.hashCode();
 //        KyotakuKeikakuTodokedeMeisaiDiv meisai = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
 //                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai();
 //        DataGrid<dgKyotakuKeikakuTodokedeRirekiList_Row> rirekiList = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
@@ -605,22 +610,19 @@ public class KyotakuKeikakuTodokedeDetail {
         ShoKaishuKirokuKanriDiv kanri = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
                 getTplKyotakuKeikakuTodokedeDetailShorui().getKyotakuKeikakuTodokedeShoruiJyokyo();
         List<HashMap> yamlData = YamlLoader.DBC.loadAsList(new RString("dbc0100000/KyotakuKeikakuTodokedeShoKofuKaishu.yml"));
-        List<dgShoKaishuJokyo_Row> dgRow = kanri.getCcdShoKaishuJokyoList().getDgShoKaishuJokyo().getDataSource();
+        List<dgKoufuKaishu_Row> dgRow = kanri.getPanelKoufuList().getDgKoufuKaishu().getDataSource();
         dgRow.clear();
         for (int i = 0; i < 2; i++) {
             ControlGenerator cg = new ControlGenerator(yamlData.get(i));
-            dgShoKaishuJokyo_Row row = new dgShoKaishuJokyo_Row(RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(),
-                    RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
-                    RString.EMPTY, new TextBoxFlexibleDate());
+            dgKoufuKaishu_Row row = new dgKoufuKaishu_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY);
 
-            row.setKofushoShurui(cg.getAsRString("証交付種類"));
-            row.getKofuDate().setValue(cg.getAsFlexibleDate("交付日"));
-            row.setKofuJiyu(cg.getAsRString("交付事由"));
-            row.setKofuJiyuKey(cg.getAsRString("交付事由Key"));
-            row.getKaishuDate().setValue(cg.getAsFlexibleDate("回収日"));
+            row.setKoufuType(cg.getAsRString("証交付種類"));
+            row.setKoufuDate(new RString(cg.getAsFlexibleDate("交付日").toString()));
+            row.setKoufuJiyu(cg.getAsRString("交付事由"));
+            row.setKaishuDate(new RString(cg.getAsFlexibleDate("回収日").toString()));
             row.setKaishuJiyu(cg.getAsRString("回収事由"));
-            row.setKaishuJiyuKey(cg.getAsRString("回収事由Key"));
-            row.getYukoKigen().setValue(cg.getAsFlexibleDate("有効期限"));
+            row.setYukoKigen(new RString(cg.getAsFlexibleDate("有効期限").toString()));
             dgRow.add(row);
         }
     }

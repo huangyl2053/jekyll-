@@ -1,18 +1,15 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010011;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * OtherTokureiShisetsuSearch のクラスファイル 
- * 
- * @author 自動生成
+ * OtherTokureiShisetsuSearch のクラスファイル
+ *
  */
 public class OtherTokureiShisetsuSearchDiv extends Panel {
     /*
@@ -21,6 +18,7 @@ public class OtherTokureiShisetsuSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("radKannaiKangaiKubun")
     private RadioButton radKannaiKangaiKubun;
 
@@ -37,7 +35,7 @@ public class OtherTokureiShisetsuSearchDiv extends Panel {
 
     @JsonProperty("radKannaiKangaiKubun")
     public void setRadKannaiKangaiKubun(RadioButton radKannaiKangaiKubun) {
-        this.radKannaiKangaiKubun=radKannaiKangaiKubun;
+        this.radKannaiKangaiKubun = radKannaiKangaiKubun;
     }
 
 }

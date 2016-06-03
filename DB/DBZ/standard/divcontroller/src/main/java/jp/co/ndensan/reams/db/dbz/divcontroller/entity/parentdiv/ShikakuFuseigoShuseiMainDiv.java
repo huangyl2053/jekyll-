@@ -1,17 +1,14 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ShikakuFuseigoIchiranDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ShikakuShuseiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShikakuFuseigoShuseiMain のクラスファイル 
- * 
+ * ShikakuFuseigoShuseiMain のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShikakuFuseigoShuseiMainDiv extends Panel {
@@ -21,6 +18,7 @@ public class ShikakuFuseigoShuseiMainDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ShikakuFuseigoIchiran")
     private ShikakuFuseigoIchiranDiv ShikakuFuseigoIchiran;
     @JsonProperty("ShikakuShusei")
@@ -39,7 +37,7 @@ public class ShikakuFuseigoShuseiMainDiv extends Panel {
 
     @JsonProperty("ShikakuFuseigoIchiran")
     public void setShikakuFuseigoIchiran(ShikakuFuseigoIchiranDiv ShikakuFuseigoIchiran) {
-        this.ShikakuFuseigoIchiran=ShikakuFuseigoIchiran;
+        this.ShikakuFuseigoIchiran = ShikakuFuseigoIchiran;
     }
 
     @JsonProperty("ShikakuShusei")
@@ -49,7 +47,7 @@ public class ShikakuFuseigoShuseiMainDiv extends Panel {
 
     @JsonProperty("ShikakuShusei")
     public void setShikakuShusei(ShikakuShuseiDiv ShikakuShusei) {
-        this.ShikakuShusei=ShikakuShusei;
+        this.ShikakuShusei = ShikakuShusei;
     }
 
 }

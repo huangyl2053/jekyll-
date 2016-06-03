@@ -125,10 +125,10 @@ public class ShinsakaiJizenKekkaJohoTest extends DbeTestBase {
             assertThat(sut.get介護認定審査会審査順(), is(ShinsakaiJizenKekkaJohoEntity.getShinsakaiOrder()));
         }
 
-        @Test
-        public void get一次判定結果変更理由は_entityが持つ一次判定結果変更理由を返す() {
-            assertThat(sut.get一次判定結果変更理由(), is(ShinsakaiJizenKekkaJohoEntity.getIchijiHanteiHenkoRiyu()));
-        }
+//        @Test
+//        public void get一次判定結果変更理由は_entityが持つ一次判定結果変更理由を返す() {
+//            assertThat(sut.get一次判定結果変更理由(), is(ShinsakaiJizenKekkaJohoEntity.getIchijiHanteiHenkoRiyu()));
+//        }
 
         @Test
         public void get二次判定結果コードは_entityが持つ二次判定結果コードを返す() {

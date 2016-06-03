@@ -48,26 +48,27 @@ public class NinteiChosaScheduleMemoManagerTest {
     public static class get認定調査スケジュールメモ情報 extends DbzTestBase {
 
         FlexibleDate 主キー1 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ年月日;
-        Code 主キー2 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ区分;
-        int 主キー3 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_連番;
+        Code 主キー2 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_調査地区コード;
+        Code 主キー3 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ区分;
+        int 主キー4 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_連番;
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.get認定調査スケジュールメモ情報(null, 主キー2, 主キー3);
+            sut.get認定調査スケジュールメモ情報(null, 主キー2, 主キー3, 主キー4);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.get認定調査スケジュールメモ情報(主キー1, null, 主キー3);
+            sut.get認定調査スケジュールメモ情報(主キー1, null, 主キー3, 主キー4);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(FlexibleDate.class), any(Code.class), any(int.class))).thenReturn(null);
+            when(dac.selectByKey(any(FlexibleDate.class), any(Code.class), any(Code.class), any(int.class))).thenReturn(null);
 
-            NinteiChosaScheduleMemo result = sut.get認定調査スケジュールメモ情報(主キー1, 主キー2, 主キー3);
+            NinteiChosaScheduleMemo result = sut.get認定調査スケジュールメモ情報(主キー1, 主キー2, 主キー3, 主キー4);
 
             assertThat(result, is(nullValue()));
         }
@@ -75,9 +76,9 @@ public class NinteiChosaScheduleMemoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5222NinteiChosaScheduleMemoEntity entity = DbT5222NinteiChosaScheduleMemoEntityGenerator.createDbT5222NinteiChosaScheduleMemoEntity();
-            when(dac.selectByKey(any(FlexibleDate.class), any(Code.class), any(int.class))).thenReturn(entity);
+            when(dac.selectByKey(any(FlexibleDate.class), any(Code.class), any(Code.class), any(int.class))).thenReturn(entity);
 
-            NinteiChosaScheduleMemo result = sut.get認定調査スケジュールメモ情報(主キー1, 主キー2, 主キー3);
+            NinteiChosaScheduleMemo result = sut.get認定調査スケジュールメモ情報(主キー1, 主キー2, 主キー3, 主キー4);
 
             assertThat(result.getメモ年月日(), is(DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ年月日));
         }

@@ -54,6 +54,7 @@ var DBZ;
                     this.controls.dgIryohokenIchiran().gridSetting.isShowSelectButtonColumn = true;
                     this.controls.dgIryohokenIchiran().gridSetting.isShowModifyButtonColumn = false;
                     this.controls.dgIryohokenIchiran().gridSetting.isShowDeleteButtonColumn = false;
+                    this.controls.dgIryohokenIchiran()._control.afterPropertiesSet();
                 };
                 DisplayMode.prototype.referenceNoSelect = function () {
                     this.controls.tbdKanyubi().readOnly = true;
@@ -68,6 +69,7 @@ var DBZ;
                     this.controls.dgIryohokenIchiran().gridSetting.isShowSelectButtonColumn = false;
                     this.controls.dgIryohokenIchiran().gridSetting.isShowModifyButtonColumn = false;
                     this.controls.dgIryohokenIchiran().gridSetting.isShowDeleteButtonColumn = false;
+                    this.controls.dgIryohokenIchiran()._control.afterPropertiesSet();
                 };
 
                 DisplayMode.prototype.registration = function () {
@@ -88,6 +90,7 @@ var DBZ;
                     this.controls.dgIryohokenIchiran().gridSetting.isShowSelectButtonColumn = false;
                     this.controls.dgIryohokenIchiran().gridSetting.isShowModifyButtonColumn = true;
                     this.controls.dgIryohokenIchiran().gridSetting.isShowDeleteButtonColumn = true;
+                    this.controls.dgIryohokenIchiran()._control.afterPropertiesSet();
                 };
                 return DisplayMode;
             })();

@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 延期理由の有無を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IsExistEnkiRiyu {
 
@@ -32,7 +32,7 @@ public enum IsExistEnkiRiyu {
      *
      * @return 延期理由の有無のコード
      */
-    public boolean getコード() {
+    public boolean is延期理由あり() {
         return code;
     }
 

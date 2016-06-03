@@ -16,6 +16,7 @@ import lombok.Value;
  * 賦課エラー一覧の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class FukaErrorListIdentifier implements Serializable {
 
     private final SubGyomuCode サブ業務コード;

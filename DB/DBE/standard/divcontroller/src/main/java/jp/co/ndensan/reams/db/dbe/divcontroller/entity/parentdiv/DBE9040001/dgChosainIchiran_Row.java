@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Dec 30 16:20:50 CST 2015 
+ * Thu Apr 14 17:12:58 CST 2016 
  */
 
 
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgChosainIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private RString jotai;
     private RString shichoson;
@@ -34,11 +34,11 @@ public class dgChosainIchiran_Row extends DataRow {
     private RString chiku;
     private RString chosainShikaku;
     private TextBoxNum chosaKanoNinzu;
-    private RString jokyoFlag;
     private RString yubinNo;
     private RString jusho;
     private RString telNo;
     private RString faxNo;
+    private RString jokyoFlag;
     private RString shichosonCode;
     private RString chikuCode;
     private RString shozokuKikanName;
@@ -57,11 +57,11 @@ public class dgChosainIchiran_Row extends DataRow {
         this.chiku = RString.EMPTY;
         this.chosainShikaku = RString.EMPTY;
         this.chosaKanoNinzu = new TextBoxNum();
-        this.jokyoFlag = RString.EMPTY;
         this.yubinNo = RString.EMPTY;
         this.jusho = RString.EMPTY;
         this.telNo = RString.EMPTY;
         this.faxNo = RString.EMPTY;
+        this.jokyoFlag = RString.EMPTY;
         this.shichosonCode = RString.EMPTY;
         this.chikuCode = RString.EMPTY;
         this.shozokuKikanName = RString.EMPTY;
@@ -77,18 +77,18 @@ public class dgChosainIchiran_Row extends DataRow {
         this.setOriginalData("chiku", chiku);
         this.setOriginalData("chosainShikaku", chosainShikaku);
         this.setOriginalData("chosaKanoNinzu", chosaKanoNinzu);
-        this.setOriginalData("jokyoFlag", jokyoFlag);
         this.setOriginalData("yubinNo", yubinNo);
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("telNo", telNo);
         this.setOriginalData("faxNo", faxNo);
+        this.setOriginalData("jokyoFlag", jokyoFlag);
         this.setOriginalData("shichosonCode", shichosonCode);
         this.setOriginalData("chikuCode", chikuCode);
         this.setOriginalData("shozokuKikanName", shozokuKikanName);
         this.setOriginalData("chosainShikakuCode", chosainShikakuCode);
     }
 
-    public dgChosainIchiran_Row(RString jotai, RString shichoson, TextBoxCode chosainCode, RString chosainShimei, RString chosainKanaShimei, TextBoxCode chosaItakusakiCode, RString chosaItakusakiMeisho, RString seibetsu, RString chiku, RString chosainShikaku, TextBoxNum chosaKanoNinzu, RString jokyoFlag, RString yubinNo, RString jusho, RString telNo, RString faxNo, RString shichosonCode, RString chikuCode, RString shozokuKikanName, RString chosainShikakuCode) {
+    public dgChosainIchiran_Row(RString jotai, RString shichoson, TextBoxCode chosainCode, RString chosainShimei, RString chosainKanaShimei, TextBoxCode chosaItakusakiCode, RString chosaItakusakiMeisho, RString seibetsu, RString chiku, RString chosainShikaku, TextBoxNum chosaKanoNinzu, RString yubinNo, RString jusho, RString telNo, RString faxNo, RString jokyoFlag, RString shichosonCode, RString chikuCode, RString shozokuKikanName, RString chosainShikakuCode) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("shichoson", shichoson);
@@ -101,11 +101,11 @@ public class dgChosainIchiran_Row extends DataRow {
         this.setOriginalData("chiku", chiku);
         this.setOriginalData("chosainShikaku", chosainShikaku);
         this.setOriginalData("chosaKanoNinzu", chosaKanoNinzu);
-        this.setOriginalData("jokyoFlag", jokyoFlag);
         this.setOriginalData("yubinNo", yubinNo);
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("telNo", telNo);
         this.setOriginalData("faxNo", faxNo);
+        this.setOriginalData("jokyoFlag", jokyoFlag);
         this.setOriginalData("shichosonCode", shichosonCode);
         this.setOriginalData("chikuCode", chikuCode);
         this.setOriginalData("shozokuKikanName", shozokuKikanName);
@@ -121,11 +121,11 @@ public class dgChosainIchiran_Row extends DataRow {
         this.chiku = chiku;
         this.chosainShikaku = chosainShikaku;
         this.chosaKanoNinzu = chosaKanoNinzu;
-        this.jokyoFlag = jokyoFlag;
         this.yubinNo = yubinNo;
         this.jusho = jusho;
         this.telNo = telNo;
         this.faxNo = faxNo;
+        this.jokyoFlag = jokyoFlag;
         this.shichosonCode = shichosonCode;
         this.chikuCode = chikuCode;
         this.shozokuKikanName = shozokuKikanName;
@@ -176,10 +176,6 @@ public class dgChosainIchiran_Row extends DataRow {
         return chosaKanoNinzu;
     }
 
-    public RString getJokyoFlag() {
-        return jokyoFlag;
-    }
-
     public RString getYubinNo() {
         return yubinNo;
     }
@@ -194,6 +190,10 @@ public class dgChosainIchiran_Row extends DataRow {
 
     public RString getFaxNo() {
         return faxNo;
+    }
+
+    public RString getJokyoFlag() {
+        return jokyoFlag;
     }
 
     public RString getShichosonCode() {
@@ -267,11 +267,6 @@ public class dgChosainIchiran_Row extends DataRow {
         this.chosaKanoNinzu = chosaKanoNinzu;
     }
 
-    public void setJokyoFlag(RString jokyoFlag) {
-        this.setOriginalData("jokyoFlag", jokyoFlag);
-        this.jokyoFlag = jokyoFlag;
-    }
-
     public void setYubinNo(RString yubinNo) {
         this.setOriginalData("yubinNo", yubinNo);
         this.yubinNo = yubinNo;
@@ -290,6 +285,11 @@ public class dgChosainIchiran_Row extends DataRow {
     public void setFaxNo(RString faxNo) {
         this.setOriginalData("faxNo", faxNo);
         this.faxNo = faxNo;
+    }
+
+    public void setJokyoFlag(RString jokyoFlag) {
+        this.setOriginalData("jokyoFlag", jokyoFlag);
+        this.jokyoFlag = jokyoFlag;
     }
 
     public void setShichosonCode(RString shichosonCode) {

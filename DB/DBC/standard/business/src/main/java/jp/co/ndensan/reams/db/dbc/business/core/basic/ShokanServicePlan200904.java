@@ -8,16 +8,15 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904Entity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -390,13 +389,32 @@ public class ShokanServicePlan200904
     @Override
     public ShokanServicePlan200904 deleted() {
         DbT3047ShokanServicePlan200904Entity deletedEntity = this.toEntity();
-        if (deletedEntity.getState() != EntityDataState.Added) {
-            deletedEntity.setState(EntityDataState.Deleted);
-        } else {
-            //TODO メッセージの検討
-            throw new IllegalStateException(UrErrorMessages.不正.toString());
-        }
+        deletedEntity.setState(EntityDataState.Deleted);
         return new ShokanServicePlan200904(deletedEntity, id);
+    }
+
+    /**
+     * 保持する償還払請求サービス計画200904を修正対象とします。<br/>
+     * {@link DbT3047ShokanServicePlan200904Entity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば修正状態にします。
+     *
+     * @return 修正対象処理実施後の{@link ShokanServicePlan200904}
+     */
+    public ShokanServicePlan200904 modified() {
+        DbT3047ShokanServicePlan200904Entity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        return new ShokanServicePlan200904(modifiedEntity, id);
+    }
+
+    /**
+     * 保持する償還払請求サービス計画200904を登録対象とします。<br/>
+     * {@link DbT3047ShokanServicePlan200904Entity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば登録状態にします。
+     *
+     * @return 登録対象処理実施後の{@link ShokanServicePlan200904}
+     */
+    public ShokanServicePlan200904 added() {
+        DbT3047ShokanServicePlan200904Entity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new ShokanServicePlan200904(addedEntity, id);
     }
 
     /**

@@ -15,6 +15,7 @@ import lombok.Value;
  * 高額合算給付実績の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuGassanKyufuJissekiIdentifier implements Serializable {
 
     private final KokanShikibetsuNo 交換情報識別番号;

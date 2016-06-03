@@ -15,6 +15,7 @@ import lombok.Setter;
 /**
  *
  * 調査委託先・調査員一覧表のバッチパラメータクラスです。
+ * @reamsid_L DBE-0290-030 dongyabin
  */
 @Getter
 @Setter

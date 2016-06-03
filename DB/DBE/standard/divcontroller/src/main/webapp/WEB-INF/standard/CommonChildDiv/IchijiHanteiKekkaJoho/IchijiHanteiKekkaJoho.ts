@@ -1,9 +1,12 @@
-/// <reference path='IchijiHanteiKekkaJoho_Design.ts' />
+/// <reference path="IchijiHanteiKekkaJoho_Design.ts" />
+
+// 共有子Divモード記述TypeScriptソースです。
+
 module DBE
 {
-    export module IchijiHanteiKekkaJoho
-    {
-        export class ModeController {
+    export module IchijiHanteiKekkaJoho {
+
+        export class ModeController{
             private controls: Controls;
             private fieldName: string;
 
@@ -11,31 +14,50 @@ module DBE
                 this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
             }
+ 
+            public priorities(): Array<string> {
+                return [];
+            }
+
+             public State() {
+                return new Modes.State(this.controls);
+            }
 
             public Properties() {
                 return new UZA.CommonChildDiv(this.fieldName);
             }
+        }
+     export module Modes {
+        export class State {
+                private controls: Controls;
 
-            public PublicProperties() {
-                return new PublicProperties(this.fieldName);
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                public shokai (): void {
+                }
+
+                public touroku (): void {
+                }
             }
+        
         }
 
-        export module Modes {
-        }
+
     }
 }
 
-module DBE
-{
-    export module IchijiHanteiKekkaJoho
-    {
+
+
+module DBE {
+
+    export module IchijiHanteiKekkaJoho {
+
         export class PublicProperties {
             private controls: Controls;
-            private fieldName: string;
 
             constructor(fieldName: string) {
-                this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
             }
 
@@ -44,7 +66,11 @@ module DBE
 
                 return editTypes;
             }
+
         }
     }
 }
+
+
+
 

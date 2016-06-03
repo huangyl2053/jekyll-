@@ -6,7 +6,7 @@
 
 package jp.co.ndensan.reams.db.dbe.business.core.NinteiShinsei;
 
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinsei.NinteiShinseiJohoValidate;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinsei.NinteiShinseiJohoValidate;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.YokaigoNinteiShinseiKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

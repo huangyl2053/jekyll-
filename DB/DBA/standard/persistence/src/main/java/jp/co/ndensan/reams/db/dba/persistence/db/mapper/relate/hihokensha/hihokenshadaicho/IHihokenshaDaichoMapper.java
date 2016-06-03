@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokensha.hihokenshadaicho.H
 
 /**
  * 被保険者台帳管理のマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public interface IHihokenshaDaichoMapper {
 

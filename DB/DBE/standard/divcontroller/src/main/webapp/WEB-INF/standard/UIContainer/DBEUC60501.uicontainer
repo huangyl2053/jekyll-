@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC60501",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "意見書作成報酬照会",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE6050001",
+     "toLayoutTitle": "意見書作成報酬照会",
+     "toState": ""
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE6050001",
+     "layoutTitle": "意見書作成報酬照会",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

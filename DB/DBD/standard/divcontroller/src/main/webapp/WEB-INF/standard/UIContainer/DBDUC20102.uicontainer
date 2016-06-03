@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC20102",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "支払方法変更各種通知書発行",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD2010002",
+     "toLayoutTitle": "支払方法変更管理各種通知書発行",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD2010002",
+     "layoutTitle": "支払方法変更管理各種通知書発行",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

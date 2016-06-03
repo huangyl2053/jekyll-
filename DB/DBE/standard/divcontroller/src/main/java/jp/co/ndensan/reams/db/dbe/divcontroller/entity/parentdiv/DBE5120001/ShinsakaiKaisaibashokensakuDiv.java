@@ -11,10 +11,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShinsakaiKaisaibashokensaku のクラスファイル 
  * 
- * @author 自動生成
  */
 public class ShinsakaiKaisaibashokensakuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,6 +22,10 @@ public class ShinsakaiKaisaibashokensakuDiv extends Panel {
      */
     @JsonProperty("radHyojiJoken")
     private RadioButton radHyojiJoken;
+    @JsonProperty("txtDispMax")
+    private TextBoxNum txtDispMax;
+    @JsonProperty("btnClear")
+    private Button btnClear;
     @JsonProperty("btnKensaku")
     private Button btnKensaku;
 
@@ -48,6 +51,42 @@ public class ShinsakaiKaisaibashokensakuDiv extends Panel {
     @JsonProperty("radHyojiJoken")
     public void setRadHyojiJoken(RadioButton radHyojiJoken) {
         this.radHyojiJoken = radHyojiJoken;
+    }
+
+    /*
+     * gettxtDispMax
+     * @return txtDispMax
+     */
+    @JsonProperty("txtDispMax")
+    public TextBoxNum getTxtDispMax() {
+        return txtDispMax;
+    }
+
+    /*
+     * settxtDispMax
+     * @param txtDispMax txtDispMax
+     */
+    @JsonProperty("txtDispMax")
+    public void setTxtDispMax(TextBoxNum txtDispMax) {
+        this.txtDispMax = txtDispMax;
+    }
+
+    /*
+     * getbtnClear
+     * @return btnClear
+     */
+    @JsonProperty("btnClear")
+    public Button getBtnClear() {
+        return btnClear;
+    }
+
+    /*
+     * setbtnClear
+     * @param btnClear btnClear
+     */
+    @JsonProperty("btnClear")
+    public void setBtnClear(Button btnClear) {
+        this.btnClear = btnClear;
     }
 
     /*

@@ -118,7 +118,7 @@ public class ChoteiKyotsu implements Serializable {
      * @return 調定事由コード
      */
     public ChoteiJiyuCode get調定事由コード() {
-        return entity.getChoteiJiyuCode();
+        return new ChoteiJiyuCode(entity.getChoteiJiyuCode());
     }
 
     /**
@@ -242,7 +242,7 @@ public class ChoteiKyotsu implements Serializable {
      */
     public void set調定事由コード(ChoteiJiyuCode 調定事由コード) {
         requireNonNull(調定事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調定事由コード"));
-        entity.setChoteiJiyuCode(調定事由コード);
+        entity.setChoteiJiyuCode(調定事由コード.getColumnValue());
     }
 
     /**

@@ -1,18 +1,16 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4020011;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TekiyoJiyuInput のクラスファイル 
- * 
- * @author 自動生成
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+
+/**
+ * TekiyoJiyuInput のクラスファイル
+ *
  */
 public class TekiyoJiyuInputDiv extends Panel {
     /*
@@ -21,6 +19,7 @@ public class TekiyoJiyuInputDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtTekiyoDate")
     private TextBoxFlexibleDate txtTekiyoDate;
     @JsonProperty("txtTekiyoTodokedeDate")
@@ -43,7 +42,7 @@ public class TekiyoJiyuInputDiv extends Panel {
 
     @JsonProperty("txtTekiyoDate")
     public void setTxtTekiyoDate(TextBoxFlexibleDate txtTekiyoDate) {
-        this.txtTekiyoDate=txtTekiyoDate;
+        this.txtTekiyoDate = txtTekiyoDate;
     }
 
     @JsonProperty("txtTekiyoTodokedeDate")
@@ -53,7 +52,7 @@ public class TekiyoJiyuInputDiv extends Panel {
 
     @JsonProperty("txtTekiyoTodokedeDate")
     public void setTxtTekiyoTodokedeDate(TextBoxFlexibleDate txtTekiyoTodokedeDate) {
-        this.txtTekiyoTodokedeDate=txtTekiyoTodokedeDate;
+        this.txtTekiyoTodokedeDate = txtTekiyoTodokedeDate;
     }
 
     @JsonProperty("ddlTekiyoJiyu")
@@ -63,7 +62,7 @@ public class TekiyoJiyuInputDiv extends Panel {
 
     @JsonProperty("ddlTekiyoJiyu")
     public void setDdlTekiyoJiyu(DropDownList ddlTekiyoJiyu) {
-        this.ddlTekiyoJiyu=ddlTekiyoJiyu;
+        this.ddlTekiyoJiyu = ddlTekiyoJiyu;
     }
 
     @JsonProperty("txtShisetsuNyushoDate")
@@ -73,7 +72,7 @@ public class TekiyoJiyuInputDiv extends Panel {
 
     @JsonProperty("txtShisetsuNyushoDate")
     public void setTxtShisetsuNyushoDate(TextBoxFlexibleDate txtShisetsuNyushoDate) {
-        this.txtShisetsuNyushoDate=txtShisetsuNyushoDate;
+        this.txtShisetsuNyushoDate = txtShisetsuNyushoDate;
     }
 
 }

@@ -1404,4 +1404,6 @@ public class DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity extends DbTableEntityB
 
 // </editor-fold>
 
+
+
 }

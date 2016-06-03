@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 被保険者台帳管理（資格取得）情報です。
  *
+ * @reamsid_L DBA-0520-010 lishengli
  */
 public class HihokenshaShutokuJyoho {
 
@@ -34,6 +35,15 @@ public class HihokenshaShutokuJyoho {
      */
     public HihokenshaShutokuJyoho(DbT1001HihokenshaDaichoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者台帳管理"));
+    }
+
+    /**
+     * 被保険者台帳管理を返します。
+     *
+     * @return 被保険者台帳管理
+     */
+    public DbT1001HihokenshaDaichoEntity get被保険者台帳管理() {
+        return entity;
     }
 
     /**

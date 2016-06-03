@@ -16,6 +16,12 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
  */
 public class KogakuShikyuKetteiTsuchiSakusei {
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel KogakuShikyuKetteiTsuchiSakuseiDiv
+     * @return ResponseData
+     */
     public ResponseData<KogakuShikyuKetteiTsuchiSakuseiDiv> onLoad(KogakuShikyuKetteiTsuchiSakuseiDiv panel) {
         setKogakuShikyuKetteiTsuchiSakusei(panel);
 
@@ -32,6 +38,8 @@ public class KogakuShikyuKetteiTsuchiSakusei {
     }
 
     private void setKogakuShikyuKetteiTsuchiSakusei(KogakuShikyuKetteiTsuchiSakuseiDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getBtnCreate();
 //        //初期値を設定したいものに値を入れる。出力対象区分
 //        List<KeyValueDataSource> dataSource = new ArrayList<>();
 //        dataSource.add(new KeyValueDataSource(new RString("ForRiyosha"), new RString("利用者向け決定通知書")));

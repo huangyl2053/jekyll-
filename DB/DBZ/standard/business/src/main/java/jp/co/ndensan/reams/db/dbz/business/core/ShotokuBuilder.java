@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -95,7 +96,7 @@ public class ShotokuBuilder {
      */
     public ShotokuBuilder set非課税区分_住民税減免後(RString 非課税区分_住民税減免後) {
         requireNonNull(非課税区分_住民税減免後, UrSystemErrorMessages.値がnull.getReplacedMessage("非課税区分（住民税減免後）"));
-        entity.setKazeiKubun(非課税区分_住民税減免後);
+        entity.setKazeiKubunGemmenGo(非課税区分_住民税減免後);
         return this;
     }
 
@@ -112,6 +113,18 @@ public class ShotokuBuilder {
     }
 
     /**
+     * 課税所得額を設定します。
+     *
+     * @param 課税所得額 課税所得額
+     * @return {@link ShotokuBuilder}
+     */
+    public ShotokuBuilder set課税所得額(Decimal 課税所得額) {
+        requireNonNull(課税所得額, UrSystemErrorMessages.値がnull.getReplacedMessage("課税所得額"));
+        entity.setKazeiShotokuGaku(課税所得額);
+        return this;
+    }
+
+    /**
      * 公的年金収入額を設定します。
      *
      * @param 公的年金収入額 公的年金収入額
@@ -124,6 +137,18 @@ public class ShotokuBuilder {
     }
 
     /**
+     * 公的年金所得額を設定します。
+     *
+     * @param 公的年金所得額 公的年金所得額
+     * @return {@link ShotokuBuilder}
+     */
+    public ShotokuBuilder set公的年金所得額(Decimal 公的年金所得額) {
+        requireNonNull(公的年金所得額, UrSystemErrorMessages.値がnull.getReplacedMessage("公的年金所得額"));
+        entity.setNenkiniShotokuGaku(公的年金所得額);
+        return this;
+    }
+
+    /**
      * 激変緩和措置区分を設定します。
      *
      * @param 激変緩和措置区分 激変緩和措置区分
@@ -132,6 +157,30 @@ public class ShotokuBuilder {
     public ShotokuBuilder set激変緩和措置区分(RString 激変緩和措置区分) {
         requireNonNull(激変緩和措置区分, UrSystemErrorMessages.値がnull.getReplacedMessage("激変緩和措置区分"));
         entity.setGekihenKanwaKubun(激変緩和措置区分);
+        return this;
+    }
+
+    /**
+     * 優先区分を設定します。
+     *
+     * @param 優先区分 優先区分
+     * @return {@link ShotokuBuilder}
+     */
+    public ShotokuBuilder set優先区分(RString 優先区分) {
+        requireNonNull(優先区分, UrSystemErrorMessages.値がnull.getReplacedMessage("優先区分"));
+        entity.setYusenKubun(優先区分);
+        return this;
+    }
+
+    /**
+     * 処理日時を設定します。
+     *
+     * @param 処理日時 処理日時
+     * @return {@link ShotokuBuilder}
+     */
+    public ShotokuBuilder set処理日時(YMDHMS 処理日時) {
+        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+        entity.setShoriTimeStamp(処理日時);
         return this;
     }
 

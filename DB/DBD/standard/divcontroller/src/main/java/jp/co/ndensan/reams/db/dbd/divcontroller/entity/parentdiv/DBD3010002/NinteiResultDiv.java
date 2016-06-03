@@ -1,19 +1,15 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3010002;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3010002.NinteiResultEtceteraDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3010002.ShiteiServiceIchiranDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * NinteiResult のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * NinteiResult のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteiResultDiv extends Panel {
@@ -23,6 +19,7 @@ public class NinteiResultDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtNinteiYMD")
     private TextBoxFlexibleDate txtNinteiYMD;
     @JsonProperty("txtYokaigodoCode")
@@ -53,7 +50,7 @@ public class NinteiResultDiv extends Panel {
 
     @JsonProperty("txtNinteiYMD")
     public void setTxtNinteiYMD(TextBoxFlexibleDate txtNinteiYMD) {
-        this.txtNinteiYMD=txtNinteiYMD;
+        this.txtNinteiYMD = txtNinteiYMD;
     }
 
     @JsonProperty("txtYokaigodoCode")
@@ -63,7 +60,7 @@ public class NinteiResultDiv extends Panel {
 
     @JsonProperty("txtYokaigodoCode")
     public void setTxtYokaigodoCode(TextBoxCode txtYokaigodoCode) {
-        this.txtYokaigodoCode=txtYokaigodoCode;
+        this.txtYokaigodoCode = txtYokaigodoCode;
     }
 
     @JsonProperty("txtYokaigodo")
@@ -73,7 +70,7 @@ public class NinteiResultDiv extends Panel {
 
     @JsonProperty("txtYokaigodo")
     public void setTxtYokaigodo(TextBox txtYokaigodo) {
-        this.txtYokaigodo=txtYokaigodo;
+        this.txtYokaigodo = txtYokaigodo;
     }
 
     @JsonProperty("txtYukokikanTsukisu")
@@ -83,7 +80,7 @@ public class NinteiResultDiv extends Panel {
 
     @JsonProperty("txtYukokikanTsukisu")
     public void setTxtYukokikanTsukisu(TextBox txtYukokikanTsukisu) {
-        this.txtYukokikanTsukisu=txtYukokikanTsukisu;
+        this.txtYukokikanTsukisu = txtYukokikanTsukisu;
     }
 
     @JsonProperty("txtNinteiYukoKaishiYMD")
@@ -93,7 +90,7 @@ public class NinteiResultDiv extends Panel {
 
     @JsonProperty("txtNinteiYukoKaishiYMD")
     public void setTxtNinteiYukoKaishiYMD(TextBoxFlexibleDate txtNinteiYukoKaishiYMD) {
-        this.txtNinteiYukoKaishiYMD=txtNinteiYukoKaishiYMD;
+        this.txtNinteiYukoKaishiYMD = txtNinteiYukoKaishiYMD;
     }
 
     @JsonProperty("txtNinteiYukoShuryoYMD")
@@ -103,7 +100,7 @@ public class NinteiResultDiv extends Panel {
 
     @JsonProperty("txtNinteiYukoShuryoYMD")
     public void setTxtNinteiYukoShuryoYMD(TextBoxFlexibleDate txtNinteiYukoShuryoYMD) {
-        this.txtNinteiYukoShuryoYMD=txtNinteiYukoShuryoYMD;
+        this.txtNinteiYukoShuryoYMD = txtNinteiYukoShuryoYMD;
     }
 
     @JsonProperty("NinteiResultEtcetera")
@@ -113,7 +110,7 @@ public class NinteiResultDiv extends Panel {
 
     @JsonProperty("NinteiResultEtcetera")
     public void setNinteiResultEtcetera(NinteiResultEtceteraDiv NinteiResultEtcetera) {
-        this.NinteiResultEtcetera=NinteiResultEtcetera;
+        this.NinteiResultEtcetera = NinteiResultEtcetera;
     }
 
     @JsonProperty("ShiteiServiceIchiran")
@@ -123,7 +120,7 @@ public class NinteiResultDiv extends Panel {
 
     @JsonProperty("ShiteiServiceIchiran")
     public void setShiteiServiceIchiran(ShiteiServiceIchiranDiv ShiteiServiceIchiran) {
-        this.ShiteiServiceIchiran=ShiteiServiceIchiran;
+        this.ShiteiServiceIchiran = ShiteiServiceIchiran;
     }
 
 }

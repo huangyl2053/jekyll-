@@ -14,13 +14,13 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3013YoboKeikakuJikoSak
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 予防給付計画自己作成短期利用日数を管理するクラスです。
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class YoboKeikakuJikoSakuseiTankiRiyoNissuManager {
 
     private final DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDac dac;

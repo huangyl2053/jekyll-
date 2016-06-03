@@ -16,12 +16,15 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査票（基本調査）のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-013 huangh
  */
 public class DbT5203NinteichosahyoKihonChosaDac implements ISaveable<DbT5203NinteichosahyoKihonChosaEntity> {
 
@@ -54,6 +57,28 @@ public class DbT5203NinteichosahyoKihonChosaDac implements ISaveable<DbT5203Nint
     }
 
     /**
+     * 申請書管理番号でMAX(認定調査依頼情報．認定調査依頼履歴番号) を取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return DbT5203NinteichosahyoKihonChosaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT5203NinteichosahyoKihonChosaEntity selectMax認定調査依頼履歴番号ByKey(
+            ShinseishoKanriNo 申請書管理番号) throws NullPointerException {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(max(ninteichosaRirekiNo)).
+                table(DbT5203NinteichosahyoKihonChosa.class).
+                where(
+                        eq(shinseishoKanriNo, 申請書管理番号)).
+                groupBy(shinseishoKanriNo).
+                toObject(DbT5203NinteichosahyoKihonChosaEntity.class);
+    }
+
+    /**
      * 認定調査票（基本調査）を全件返します。
      *
      * @return DbT5203NinteichosahyoKihonChosaEntityの{@code list}
@@ -80,5 +105,22 @@ public class DbT5203NinteichosahyoKihonChosaDac implements ISaveable<DbT5203Nint
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 認定調査票（基本調査）を検索By申請書管理番号。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return DbT5203NinteichosahyoKihonChosaEntityの{@code list}
+     */
+    @Transaction
+    public List<DbT5203NinteichosahyoKihonChosaEntity> selectBy申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5203NinteichosahyoKihonChosa.class).
+                where(
+                        eq(shinseishoKanriNo, 申請書管理番号)).
+                toList(DbT5203NinteichosahyoKihonChosaEntity.class);
     }
 }

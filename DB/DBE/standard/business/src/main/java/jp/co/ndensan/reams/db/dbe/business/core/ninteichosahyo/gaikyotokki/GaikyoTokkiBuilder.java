@@ -49,7 +49,7 @@ public class GaikyoTokkiBuilder {
     /**
      * 住宅改修(回収箇所)を設定します。
      *
-     * @param 住宅改修(回収箇所) 住宅改修(回収箇所)
+     * @param 住宅改修 住宅改修(回収箇所)
      * @return {@link GaikyoTokkiBuilder}
      */
     public GaikyoTokkiBuilder set住宅改修(RString 住宅改修) {

@@ -4,9 +4,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
  * 標準負担額減免テーブルの項目定義クラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public enum DbT4012HyojunFutangakuGemmen implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     /**
      * insertDantaiCd
      */
@@ -40,30 +43,6 @@ public enum DbT4012HyojunFutangakuGemmen implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * shinseiYMD
-     */
-    shinseiYMD(2147483647, 0),
-    /**
-     * ketteiYMD
-     */
-    ketteiYMD(2147483647, 0),
-    /**
-     * tekiyoKaishiYMD
-     */
-    tekiyoKaishiYMD(2147483647, 0),
-    /**
-     * tekiyoShuryoYMD
-     */
-    tekiyoShuryoYMD(2147483647, 0),
-    /**
-     * ketteiKubun
-     */
-    ketteiKubun(1, 0),
-    /**
-     * hiShoninRiyu
-     */
-    hiShoninRiyu(200, 0),
-    /**
      * 証記載保険者番号
      */
     shoKisaiHokenshaNo(2147483647, 0),
@@ -92,7 +71,7 @@ public enum DbT4012HyojunFutangakuGemmen implements IColumnDefinition {
     gengakugoKingaku(5, 0),
     /**
      * 標準負担区分
-     * <br/>1:標準負担 
+     * <br/>1:標準負担
      * <br/>2:特定標準負担
      */
     hyojunFutanKubun(1, 0);
@@ -107,7 +86,7 @@ public enum DbT4012HyojunFutangakuGemmen implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -116,7 +95,7 @@ public enum DbT4012HyojunFutangakuGemmen implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

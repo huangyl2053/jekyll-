@@ -9,14 +9,12 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.FukaTaishoshaRelateEntity;
-import jp.co.ndensan.reams.db.dbz.entity.relate.TaishoshaRelateEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.relate.TaishoshaRelateDac;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.TaishoshaRelateEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.relate.TaishoshaRelateDac;
 import jp.co.ndensan.reams.db.dbz.service.util.SearchResult;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.KojinSearchEntityHolder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -33,25 +31,21 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class TaishoshaFinder {
 
     private final TaishoshaRelateDac dac;
-    private final IUrControlData ctrlData;
 
     /**
      * コンストラクタです。
      */
     public TaishoshaFinder() {
         this.dac = InstanceProvider.create(TaishoshaRelateDac.class);
-        this.ctrlData = UrControlDataFactory.createInstance();
     }
 
     /**
      * モックを使用するテスト用コンストラクタです。
      *
      * @param dac 被保険者台帳ViewDoc
-     * @param ctrlData コントロールデータ
      */
-    TaishoshaFinder(TaishoshaRelateDac dac, IUrControlData ctrlData) {
+    TaishoshaFinder(TaishoshaRelateDac dac) {
         this.dac = dac;
-        this.ctrlData = ctrlData;
     }
 
     /**
@@ -69,7 +63,7 @@ public class TaishoshaFinder {
         ITrueFalseCriteria 介護条件 = getCriteria(条件, 除外条件);
         IPsmCriteria 宛名psm = getPsmCriteria(宛名キー);
         boolean is内部結合 = (介護条件 != null);
-        IItemList<jp.co.ndensan.reams.db.dbz.entity.db.relate.TaishoshaRelateEntity> result = dac.select資格対象者(介護条件, 宛名psm, is内部結合, 最大件数);
+        IItemList<TaishoshaRelateEntity> result = dac.select資格対象者(介護条件, 宛名psm, is内部結合, 最大件数);
 
         int totalCount = result.size();
         if (result.size() == 最大件数) {
@@ -91,8 +85,8 @@ public class TaishoshaFinder {
     @Transaction
     public SearchResult<FukaTaishoshaRelateEntity> get賦課対象者(ISearchCondition 条件, ISearchCondition 除外条件, IShikibetsuTaishoSearchKey 宛名キー, int 最大件数) {
 
-        //TODO メニューから起動しないとメニューIDを取得できないため、動作確認のために定数をセット
-        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
+        FukaSearchMenu menu = FukaSearchMenu.toValue(ResponseHolder.getMenuID());
+//        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
 //        FukaSearchMenu menu = FukaSearchMenu.toValue(ctrlData.getMenuID());
         ITrueFalseCriteria 介護条件 = getCriteria(条件, 除外条件);
         IPsmCriteria 宛名psm = getPsmCriteria(宛名キー);

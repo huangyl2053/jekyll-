@@ -393,7 +393,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
 
     private static FukaKeisanConfig create賦課計算Config() {
         FukaKeisanConfig mock = mock(FukaKeisanConfig.class);
-        when(mock.get納期統一年度()).thenReturn(納期統一年度.toDateString());
+        when(mock.get不均一納期期限()).thenReturn(納期統一年度.toDateString());
         return mock;
     }
 

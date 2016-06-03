@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2030011
 
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.dgJutoku_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.dgJutoku_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
@@ -26,6 +26,16 @@ public final class ShikakuShosaiValidationHelper {
     private ShikakuShosaiValidationHelper() {
     }
 
+    /**
+     *
+     * @param target HihokenshaDaicho
+     * @param daichoList HihokenshaDaicho
+     * @param 適用日 適用日
+     * @param 解除日 解除日
+     * @param 住所地特例grid dgJutoku_Row
+     * @param status JushochiTokureiExecutionStatus
+     * @return ValidationMessageControlPairs
+     */
     public static ValidationMessageControlPairs validate画面起動時(HihokenshaDaicho target, IItemList<HihokenshaDaicho> daichoList,
             TextBoxFlexibleDate 適用日, TextBoxFlexibleDate 解除日, DataGrid<dgJutoku_Row> 住所地特例grid, JushochiTokureiExecutionStatus status) {
         ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionary();
@@ -34,6 +44,16 @@ public final class ShikakuShosaiValidationHelper {
         return dictionary.check(messages);
     }
 
+    /**
+     *
+     * @param target HihokenshaDaicho
+     * @param daichoList HihokenshaDaicho
+     * @param 適用日 適用日
+     * @param 解除日 解除日
+     * @param 住所地特例grid dgJutoku_Row
+     * @param status JushochiTokureiExecutionStatus
+     * @return ValidationMessageControlPairs
+     */
     public static ValidationMessageControlPairs validate保存前(HihokenshaDaicho target, IItemList<HihokenshaDaicho> daichoList,
             TextBoxFlexibleDate 適用日, TextBoxFlexibleDate 解除日, DataGrid<dgJutoku_Row> 住所地特例grid, JushochiTokureiExecutionStatus status) {
         ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionary();

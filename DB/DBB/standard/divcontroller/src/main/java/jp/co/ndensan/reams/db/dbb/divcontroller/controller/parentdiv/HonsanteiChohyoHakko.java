@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv;
 
 import java.util.ArrayList;
@@ -14,13 +13,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
-
 /**
  *
  * @author n8211
  */
 public class HonsanteiChohyoHakko {
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param honsanteiChohyoHakkoDiv HonsanteiChohyoHakkoDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<HonsanteiChohyoHakkoDiv> onLoad(HonsanteiChohyoHakkoDiv honsanteiChohyoHakkoDiv) {
         ResponseData<HonsanteiChohyoHakkoDiv> response = new ResponseData<>();
 
@@ -48,7 +52,7 @@ public class HonsanteiChohyoHakko {
 
     private void setHonNotsu(HonsanteiChohyoHakkoDiv honsanteiChohyoHakkoDiv) {
         honsanteiChohyoHakkoDiv.getHonNotsu().getTxtNotsuHakkoYMD().setValue(RDateTime.now().getDate());
-        
+
         List<KeyValueDataSource> test = new ArrayList<>();
         test.add(new KeyValueDataSource(new RString("isAllSelect"), new RString("")));
 //        List<KeyValueDataSource> keyValueDataSources = honsanteiChohyoHakkoDiv.getHonNotsu().getChkNotsuTaishosha().getDataSource();

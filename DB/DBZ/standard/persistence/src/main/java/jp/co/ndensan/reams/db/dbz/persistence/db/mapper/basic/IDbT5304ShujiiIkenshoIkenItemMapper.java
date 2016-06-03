@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -20,4 +22,12 @@ public interface IDbT5304ShujiiIkenshoIkenItemMapper {
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT5304ShujiiIkenshoIkenItemEntity getEntity();
+
+    /**
+     * selectBy申請書管理番号の処理です。
+     *
+     * @param shinseishoKanriNo 申請書管理番号
+     * @return List<DbT5304ShujiiIkenshoIkenItemEntity>
+     */
+    List<DbT5304ShujiiIkenshoIkenItemEntity> selectBy申請書管理番号(RString shinseishoKanriNo);
 }

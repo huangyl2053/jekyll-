@@ -10,9 +10,12 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 地区市町村を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
-public class ChikuShichosonMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class ChikuShichosonMapperParameter {
 
     private final Code 調査地区コード;
     private final LasdecCode 市町村コード;

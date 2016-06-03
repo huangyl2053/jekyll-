@@ -12,8 +12,8 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiIkenshoIraiJoho.ShujiiIkenshoIraiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiIkenshoJoho.ShujiiIkenshoJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -27,8 +27,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 主治医意見書作成依頼情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class ShujiiIkenshoIraiJoho extends ModelBase<ShujiiIkenshoIraiJohoIdentifier, DbT5301ShujiiIkenshoIraiJohoEntity, ShujiiIkenshoIraiJoho> implements Serializable {
+public class ShujiiIkenshoIraiJoho
+        extends ModelBase<ShujiiIkenshoIraiJohoIdentifier, DbT5301ShujiiIkenshoIraiJohoEntity, ShujiiIkenshoIraiJoho>
+        implements Serializable {
 
     private static final long serialVersionUID = 4590222643412347242L;
 
@@ -242,7 +246,7 @@ public class ShujiiIkenshoIraiJoho extends ModelBase<ShujiiIkenshoIraiJohoIdenti
      *
      * @return 認定情報提供希望フラグ
      */
-    public boolean get認定情報提供希望フラグ() {
+    public boolean is認定情報提供希望フラグ() {
         return entity.getNinteiJohoTeikyoKiboFlag();
     }
 
@@ -260,7 +264,7 @@ public class ShujiiIkenshoIraiJoho extends ModelBase<ShujiiIkenshoIraiJohoIdenti
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 
@@ -285,14 +289,11 @@ public class ShujiiIkenshoIraiJoho extends ModelBase<ShujiiIkenshoIraiJohoIdenti
     }
 
     /**
-     * 主治医意見書作成依頼情報配下の要素を削除対象とします。<br/>
-     * {@link DbT5301ShujiiIkenshoIraiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 主治医意見書作成依頼情報配下の要素である要介護認定主治医意見書情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link ShujiiIkenshoIraiJoho}を返します。
+     * 主治医意見書作成依頼情報配下の要素を削除対象とします。<br/> {@link DbT5301ShujiiIkenshoIraiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 主治医意見書作成依頼情報配下の要素である要介護認定主治医意見書情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link ShujiiIkenshoIraiJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link ShujiiIkenshoIraiJoho}
-     * @throws IllegalStateException
-     * DbT5301ShujiiIkenshoIraiJohoEntityのデータ状態が変更の場合
+     * @throws IllegalStateException DbT5301ShujiiIkenshoIraiJohoEntityのデータ状態が変更の場合
      */
     @Override
     public ShujiiIkenshoIraiJoho deleted() {
@@ -312,8 +313,7 @@ public class ShujiiIkenshoIraiJoho extends ModelBase<ShujiiIkenshoIraiJohoIdenti
     }
 
     /**
-     * 主治医意見書作成依頼情報のみを変更対象とします。<br/>
-     * {@link DbT5301ShujiiIkenshoIraiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 主治医意見書作成依頼情報のみを変更対象とします。<br/> {@link DbT5301ShujiiIkenshoIraiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShujiiIkenshoIraiJoho}
      */

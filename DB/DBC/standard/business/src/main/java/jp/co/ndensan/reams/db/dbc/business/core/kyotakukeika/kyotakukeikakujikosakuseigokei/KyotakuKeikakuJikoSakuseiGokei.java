@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 居宅給付計画自己作成合計を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class KyotakuKeikakuJikoSakuseiGokei
         extends ModelBase<KyotakuKeikakuJikoSakuseiGokeiIdentifier, DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity, KyotakuKeikakuJikoSakuseiGokei>
@@ -185,8 +187,7 @@ public class KyotakuKeikakuJikoSakuseiGokei
     }
 
     /**
-     * 居宅給付計画自己作成合計のみを変更対象とします。<br/>
-     * {@link DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 居宅給付計画自己作成合計のみを変更対象とします。<br/> {@link DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link KyotakuKeikakuJikoSakuseiGokei}
      */
@@ -200,8 +201,7 @@ public class KyotakuKeikakuJikoSakuseiGokei
     }
 
     /**
-     * 保持する居宅給付計画自己作成合計を削除対象とします。<br/>
-     * {@link DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する居宅給付計画自己作成合計を削除対象とします。<br/> {@link DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KyotakuKeikakuJikoSakuseiGokei}
      */

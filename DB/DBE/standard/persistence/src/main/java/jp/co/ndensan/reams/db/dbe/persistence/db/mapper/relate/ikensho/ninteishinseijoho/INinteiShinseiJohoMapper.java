@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.ninteishinseijoho.Nin
 
 /**
  * 要介護認定申請情報のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-9999-011 chengsanyuan
  */
 public interface INinteiShinseiJohoMapper {
 
@@ -28,4 +30,12 @@ public interface INinteiShinseiJohoMapper {
      * @return NinteiShinseiJohoEntityの{@code list}
      */
     List<NinteiShinseiJohoEntity> select要介護認定申請情報リストBy主キー1(NinteiShinseiJohoMapperParameter 要介護認定申請情報検索条件);
+
+    /**
+     * 意見書情報を取得します。
+     *
+     * @param 要介護認定申請情報検索条件 要介護認定申請情報検索条件
+     * @return NinteiShinseiJohoEntity
+     */
+    NinteiShinseiJohoEntity get意見書情報(NinteiShinseiJohoMapperParameter 要介護認定申請情報検索条件);
 }

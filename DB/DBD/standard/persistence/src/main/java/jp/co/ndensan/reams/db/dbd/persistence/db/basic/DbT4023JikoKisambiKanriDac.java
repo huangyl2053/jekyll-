@@ -44,7 +44,7 @@ public class DbT4023JikoKisambiKanriDac implements ISaveable<DbT4023JikoKisambiK
      *
      * @param 証記載保険者番号 証記載保険者番号
      * @param 被保険者番号 被保険者番号
-     * @param 管理区分 管理区分
+     * @param 調定年度 FlexibleYear
      * @param 賦課年度 賦課年度
      * @param 特徴_普徴区分 特徴_普徴区分
      * @param 通知書番号 通知書番号

@@ -14,6 +14,7 @@ import lombok.Value;
  * 市町村特別給付サービス内容の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShichosonTokubetuKyufuServiceIdentifier implements Serializable {
 
     private final RString 市町村特別給付用サービスコード;

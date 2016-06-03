@@ -8,8 +8,8 @@ import org.junit.Test;
 
 /**
  * 資格コードのテストクラスです。
- * 
- * @author LDNS 
+ *
+ * @author LDNS
  */
 public class SikakuTest extends DbeTestBase {
 
@@ -49,8 +49,8 @@ public class SikakuTest extends DbeTestBase {
     }
 
     @Test
-    public void 引数に06を指定した場合_toValueは_洵_看護師を返す() {
-        assertThat(Sikaku.toValue(new RString("06")), is(Sikaku._洵_看護師));
+    public void 引数に06を指定した場合_toValueは_准_看護師を返す() {
+        assertThat(Sikaku.toValue(new RString("06")), is(Sikaku._准_看護師));
     }
 
     @Test
@@ -134,8 +134,8 @@ public class SikakuTest extends DbeTestBase {
     }
 
     @Test
-    public void _洵_看護師を指定した場合_getコードは_06を返す() {
-        assertThat(Sikaku._洵_看護師.getコード(), is(new RString("06")));
+    public void _准_看護師を指定した場合_getコードは_06を返す() {
+        assertThat(Sikaku._准_看護師.getコード(), is(new RString("06")));
     }
 
     @Test
@@ -219,8 +219,8 @@ public class SikakuTest extends DbeTestBase {
     }
 
     @Test
-    public void _洵_看護師を指定した場合_get名称は__洵_看護師を返す() {
-        assertThat(Sikaku._洵_看護師.get名称(), is(new RString("（洵）看護師")));
+    public void _准_看護師を指定した場合_get名称は__准_看護師を返す() {
+        assertThat(Sikaku._准_看護師.get名称(), is(new RString("（洵）看護師")));
     }
 
     @Test

@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteike
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.image.Image;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikanryojoho.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikeikakujoho.NinteiKeikakuJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.renrakusakijoho.RenrakusakiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinsakaiiinjogaijoho.ShinsakaiIinJogaiJoho;
@@ -21,21 +20,19 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tennyushibo.Te
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tsuchishohakkojoho.TsuchishoHakkoJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteikekkajoho.NinteiKekkaJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteikekkajoho.INinteiKekkaJohoMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.image.ImageManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ninteikanryojoho.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ninteikeikakujoho.NinteiKeikakuJohoManager;
-import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.renrakusakijoho.RenrakusakiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.shinsakaiiinjogaijoho.ShinsakaiIinJogaiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.shinseirirekijoho.ShinseiRirekiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.shinseitodokedejoho.ShinseitodokedeJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.tennyushibo.TennyuShiboManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.tsuchishohakkojoho.TsuchishoHakkoJohoManager;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.INinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -43,12 +40,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 要介護認定結果情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class NinteiShinseiJohoManager {
 
     private final MapperProvider mapperProvider;
     private final DbT5101NinteiShinseiJohoDac 要介護認定申請情報Dac;
-    private final NinteiKekkaJohoManager 要介護認定結果情報Manager;
+//    private final NinteiKekkaJohoManager 要介護認定結果情報Manager;
     private final IchijiHanteiKekkaJohoManager 要介護認定一次判定結果情報Manager;
     private final NinteiKanryoJohoManager 要介護認定完了情報Manager;
     private final ImageManager イメージ情報Manager;
@@ -67,7 +66,7 @@ public class NinteiShinseiJohoManager {
     NinteiShinseiJohoManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.要介護認定申請情報Dac = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
-        this.要介護認定結果情報Manager = new NinteiKekkaJohoManager();
+//        this.要介護認定結果情報Manager = new NinteiKekkaJohoManager();
         this.要介護認定一次判定結果情報Manager = new IchijiHanteiKekkaJohoManager();
         this.要介護認定完了情報Manager = new NinteiKanryoJohoManager();
         this.イメージ情報Manager = new ImageManager();
@@ -85,8 +84,7 @@ public class NinteiShinseiJohoManager {
      * 単体テスト用のコンストラクタです。
      *
      * @param mapperProvider mapperProvider
-     * @param 要介護認定申請情報Dac 要介護認定申請情報Dac
-     * @param 要介護認定結果情報Manager 要介護認定結果情報Manager
+     * @param 要介護認定申請情報Dac 要介護認定申請情報Dac // * @param 要介護認定結果情報Manager 要介護認定結果情報Manager
      * @param 要介護認定一次判定結果情報Manager 要介護認定一次判定結果情報Manager
      * @param 要介護認定完了情報Manager 要介護認定完了情報Manager
      * @param イメージ情報Manager イメージ情報Manager
@@ -102,7 +100,7 @@ public class NinteiShinseiJohoManager {
     NinteiShinseiJohoManager(
             MapperProvider mapperProvider,
             DbT5101NinteiShinseiJohoDac 要介護認定申請情報Dac,
-            NinteiKekkaJohoManager 要介護認定結果情報Manager,
+            //            NinteiKekkaJohoManager 要介護認定結果情報Manager,
             IchijiHanteiKekkaJohoManager 要介護認定一次判定結果情報Manager,
             NinteiKanryoJohoManager 要介護認定完了情報Manager,
             ImageManager イメージ情報Manager,
@@ -117,7 +115,7 @@ public class NinteiShinseiJohoManager {
     ) {
         this.mapperProvider = mapperProvider;
         this.要介護認定申請情報Dac = 要介護認定申請情報Dac;
-        this.要介護認定結果情報Manager = 要介護認定結果情報Manager;
+//        this.要介護認定結果情報Manager = 要介護認定結果情報Manager;
         this.要介護認定一次判定結果情報Manager = 要介護認定一次判定結果情報Manager;
         this.要介護認定完了情報Manager = 要介護認定完了情報Manager;
         this.イメージ情報Manager = イメージ情報Manager;
@@ -186,15 +184,14 @@ public class NinteiShinseiJohoManager {
         save介護連絡先情報リスト(要介護認定申請情報.getRenrakusakiJohoList());
         save要介護認定1_5次判定結果情報リスト(要介護認定申請情報.getIchiGojiHanteiKekkaJohoList());
         save審査会委員除外情報リスト(要介護認定申請情報.getShinsakaiIinJogaiJohoList());
-        return 1 == 要介護認定申請情報Dac.update((INinteiShinseiJohoEntity) 要介護認定申請情報.toEntity());
+        return 1 == 要介護認定申請情報Dac.save(要介護認定申請情報.toEntity());
     }
 
-    private void save要介護認定結果情報リスト(List<NinteiKekkaJoho> 要介護認定結果情報List) {
-        for (NinteiKekkaJoho 要介護認定結果情報 : 要介護認定結果情報List) {
-            要介護認定結果情報Manager.save要介護認定結果情報(要介護認定結果情報);
-        }
-    }
-
+//    private void save要介護認定結果情報リスト(List<NinteiKekkaJoho> 要介護認定結果情報List) {
+//        for (NinteiKekkaJoho 要介護認定結果情報 : 要介護認定結果情報List) {
+//            要介護認定結果情報Manager.save要介護認定結果情報(要介護認定結果情報);
+//        }
+//    }
     private void save要介護認定一次判定結果情報リスト(List<IchijiHanteiKekkaJoho> 要介護認定一次判定結果情報List) {
         for (IchijiHanteiKekkaJoho 要介護認定一次判定結果情報 : 要介護認定一次判定結果情報List) {
             要介護認定一次判定結果情報Manager.save要介護認定一次判定結果情報(要介護認定一次判定結果情報);

@@ -1,19 +1,17 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010013;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010013.JutokuKaijoHokenshaJohoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * JutokuKaijoInput のクラスファイル 
- * 
+ * JutokuKaijoInput のクラスファイル
+ *
  * @author 自動生成
  */
 public class JutokuKaijoInputDiv extends Panel {
@@ -23,6 +21,7 @@ public class JutokuKaijoInputDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtKaijoDate")
     private TextBoxFlexibleDate txtKaijoDate;
     @JsonProperty("txtKaijoTodokedeDate")
@@ -45,7 +44,7 @@ public class JutokuKaijoInputDiv extends Panel {
 
     @JsonProperty("txtKaijoDate")
     public void setTxtKaijoDate(TextBoxFlexibleDate txtKaijoDate) {
-        this.txtKaijoDate=txtKaijoDate;
+        this.txtKaijoDate = txtKaijoDate;
     }
 
     @JsonProperty("txtKaijoTodokedeDate")
@@ -55,7 +54,7 @@ public class JutokuKaijoInputDiv extends Panel {
 
     @JsonProperty("txtKaijoTodokedeDate")
     public void setTxtKaijoTodokedeDate(TextBoxFlexibleDate txtKaijoTodokedeDate) {
-        this.txtKaijoTodokedeDate=txtKaijoTodokedeDate;
+        this.txtKaijoTodokedeDate = txtKaijoTodokedeDate;
     }
 
     @JsonProperty("ddlKaijoJIyu")
@@ -65,7 +64,7 @@ public class JutokuKaijoInputDiv extends Panel {
 
     @JsonProperty("ddlKaijoJIyu")
     public void setDdlKaijoJIyu(DropDownList ddlKaijoJIyu) {
-        this.ddlKaijoJIyu=ddlKaijoJIyu;
+        this.ddlKaijoJIyu = ddlKaijoJIyu;
     }
 
     @JsonProperty("JutokuKaijoHokenshaJoho")
@@ -75,7 +74,7 @@ public class JutokuKaijoInputDiv extends Panel {
 
     @JsonProperty("JutokuKaijoHokenshaJoho")
     public void setJutokuKaijoHokenshaJoho(JutokuKaijoHokenshaJohoDiv JutokuKaijoHokenshaJoho) {
-        this.JutokuKaijoHokenshaJoho=JutokuKaijoHokenshaJoho;
+        this.JutokuKaijoHokenshaJoho = JutokuKaijoHokenshaJoho;
     }
 
     /*
@@ -87,7 +86,7 @@ public class JutokuKaijoInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlKaijoShozaiHokensha(DropDownList ddlKaijoShozaiHokensha) {
+    public void setDdlKaijoShozaiHokensha(DropDownList ddlKaijoShozaiHokensha) {
         this.getJutokuKaijoHokenshaJoho().setDdlKaijoShozaiHokensha(ddlKaijoShozaiHokensha);
     }
 
@@ -97,7 +96,7 @@ public class JutokuKaijoInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlKaijoSochimotoHokensha(DropDownList ddlKaijoSochimotoHokensha) {
+    public void setDdlKaijoSochimotoHokensha(DropDownList ddlKaijoSochimotoHokensha) {
         this.getJutokuKaijoHokenshaJoho().setDdlKaijoSochimotoHokensha(ddlKaijoSochimotoHokensha);
     }
 
@@ -107,7 +106,7 @@ public class JutokuKaijoInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlKaijoKyuHokensha(DropDownList ddlKaijoKyuHokensha) {
+    public void setDdlKaijoKyuHokensha(DropDownList ddlKaijoKyuHokensha) {
         this.getJutokuKaijoHokenshaJoho().setDdlKaijoKyuHokensha(ddlKaijoKyuHokensha);
     }
 

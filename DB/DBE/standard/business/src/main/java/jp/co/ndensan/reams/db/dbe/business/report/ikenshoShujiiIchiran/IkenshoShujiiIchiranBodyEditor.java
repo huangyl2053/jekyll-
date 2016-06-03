@@ -5,18 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.IryoKikanJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji.IryoKikanJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji.ShujiiJokyo;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ShujiiIryokikanShujiiIchiranhyoReportSource;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.SeibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 主治医医療機関・主治医一覧表ボディEditorです。
+ *
+ * @reamsid_L DBE-0260-020 zuotao
  */
 class IkenshoShujiiIchiranBodyEditor implements IkenshoShujiiIchiranEditor {
 
+    private static final int 数値_7 = 7;
+    private static final int 数値_3 = 3;
     private final IkenshoShujiiIchiranBodyItem item;
 
     /**
@@ -43,23 +46,20 @@ class IkenshoShujiiIchiranBodyEditor implements IkenshoShujiiIchiranEditor {
         source.listIchiranhyoUpper_2 = item.getListIchiranhyoUpper_2();
         source.listIchiranhyoUpper_3 = item.getListIchiranhyoUpper_3();
         if (item.getListIchiranhyoUpper_4() == null
-                || item.getListIchiranhyoUpper_4().length() != 7) {
+                || item.getListIchiranhyoUpper_4().length() != 数値_7) {
             source.listIchiranhyoUpper_4 = item.getListIchiranhyoUpper_4();
         } else {
             RStringBuilder yubinBango = new RStringBuilder();
-            yubinBango.append(item.getListIchiranhyoUpper_4().substring(0, 3));
+            yubinBango.append(item.getListIchiranhyoUpper_4().substring(0, 数値_3));
             yubinBango.append(new RString("-"));
-            yubinBango.append(yubinBango.append(item.getListIchiranhyoUpper_4().substring(3)));
+            yubinBango.append(yubinBango.append(item.getListIchiranhyoUpper_4().substring(数値_3)));
             source.listIchiranhyoUpper_4 = yubinBango.toRString();
         }
         source.listIchiranhyoUpper_5 = item.getListIchiranhyoUpper_5();
         source.listIchiranhyoUpper_7 = item.getListIchiranhyoUpper_7();
         source.listIchiranhyoUpper_8 = item.getListIchiranhyoUpper_8();
-        source.listIchiranhyoUpper_9 = new SeibetsuCode(item.getListIchiranhyoUpper_9()).getColumnValue();
-
-        // TODO 左涛 QA224　医療機関状況ENUMの確認
+        source.listIchiranhyoUpper_9 = item.getListIchiranhyoUpper_9();
         source.listIchiranhyoUpper_6 = IryoKikanJokyo.toValue(item.isListIchiranhyoUpper_6()).get名称();
-        // TODO 左涛 QA224　主治医状況ENUMの確認
         source.listIchiranhyoUpper_10 = ShujiiJokyo.toValue(item.isListIchiranhyoUpper_10()).get名称();
         return source;
     }

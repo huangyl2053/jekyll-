@@ -8,30 +8,30 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinsei.NinteiShinseiJohoValidate;
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIin;
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIinKoza;
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIinShikaku;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinsei.NinteiShinseiJohoValidate;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ShinsakaiIin;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ShinsakaiIinKoza;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ShinsakaiIinShikaku;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiIinJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.YokaigoNinteiShinseiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.YokaigoNinteiShinseishaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaiiincode.ShinsakaiIinCode;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.EditShinsakaiIinDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.HihokenshaOutlineDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.HihokenshaShujiiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.KankeiIinDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.LatestNinteiResultDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.N2HihokenshaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.NinteiShinseiJigyoshaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.NinteiShinseishaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.NinteichosainAdvanceEntryDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.NyuinNyushoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.ShichosonRenrakuJikoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.ShinseiJohoInputDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.SinseiRiyuDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.dgKankeiIin_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.dgShisetsuRereki_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.EditShinsakaiIinDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.HihokenshaOutlineDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.HihokenshaShujiiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.KankeiIinDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.LatestNinteiResultDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.N2HihokenshaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.NinteiShinseiJigyoshaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.NinteiShinseishaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.NinteichosainAdvanceEntryDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.NyuinNyushoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.ShichosonRenrakuJikoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.ShinseiJohoInputDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.SinseiRiyuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.dgKankeiIin_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.dgShisetsuRereki_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.TeikeibunKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.TeikeibunShubetsuElseTokki;
@@ -152,7 +152,7 @@ public class ShinseiJohoInput {
      * バリデーションをします。
      *
      * @param div ShinseiJohoInputDiv
-     * @param hihokenshaDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
      * @return ResponseData
      */
     public ResponseData<ShinseiJohoInputDiv> onClick_btnValidation(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
@@ -515,10 +515,10 @@ public class ShinseiJohoInput {
 
         @Override
         public void init(dgSearchResult_Row hihokensha) {
-            _init(hihokensha);
+//            _init(hihokensha);
         }
 
-        private void _init(dgSearchResult_Row hihokensha) {
+//        private void _init(dgSearchResult_Row hihokensha) {
 //            YokaigoninteiShinseishaData.LatestNinteiResult latestResult
 //                    = new YokaigoninteiShinseishaData().get前回認定結果(hihokensha.getHihokenshaNo());
 //            _setUp(latestResult.yokaigodo().toRString(), latestResult.ninteiDate(),
@@ -533,8 +533,7 @@ public class ShinseiJohoInput {
 //                HihokenshaShujii.setLatestValue(shujii, hihokensha.getHihokenshaNo());
 //                setDisplayNone_buttons_toCopyLatest(false);
 //            }
-        }
-
+//        }
         private void setDisplayNone_buttons_toCopyLatest(boolean displayNone) {
             this.shujii.getBtnToCopyLatestShujii().setDisplayNone(displayNone);
             this.chosain.getBtnToCopyLatestItakusaki().setDisplayNone(displayNone);

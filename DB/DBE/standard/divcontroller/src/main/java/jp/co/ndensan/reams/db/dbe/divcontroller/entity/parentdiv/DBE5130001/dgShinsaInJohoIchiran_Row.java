@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Dec 16 14:27:45 CST 2015 
+ * Tue Apr 26 15:09:14 CST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgShinsaInJohoIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private RString status;
     private RString shinsainCode;
@@ -31,8 +31,8 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
     private RString seibetsu;
     private TextBoxDate barthYMD;
     private RString shikakuCode;
-    private RString biko;
     private RString jokyo;
+    private RString biko;
     private RString shinsakaiChikuCode;
     private RString yubinNo;
     private RString yusoKubun;
@@ -52,8 +52,8 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.seibetsu = RString.EMPTY;
         this.barthYMD = new TextBoxDate();
         this.shikakuCode = RString.EMPTY;
-        this.biko = RString.EMPTY;
         this.jokyo = RString.EMPTY;
+        this.biko = RString.EMPTY;
         this.shinsakaiChikuCode = RString.EMPTY;
         this.yubinNo = RString.EMPTY;
         this.yusoKubun = RString.EMPTY;
@@ -70,8 +70,8 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.setOriginalData("seibetsu", seibetsu);
         this.setOriginalData("barthYMD", barthYMD);
         this.setOriginalData("shikakuCode", shikakuCode);
-        this.setOriginalData("biko", biko);
         this.setOriginalData("jokyo", jokyo);
+        this.setOriginalData("biko", biko);
         this.setOriginalData("shinsakaiChikuCode", shinsakaiChikuCode);
         this.setOriginalData("yubinNo", yubinNo);
         this.setOriginalData("yusoKubun", yusoKubun);
@@ -81,7 +81,7 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.setOriginalData("faxNo", faxNo);
     }
 
-    public dgShinsaInJohoIchiran_Row(RString status, RString shinsainCode, TextBoxDate shinsakaiIinKaishiYMD, TextBoxDate shinsakaiIinShuryoYMD, RString shimei, RString kanaShimei, RString seibetsu, TextBoxDate barthYMD, RString shikakuCode, RString biko, RString jokyo, RString shinsakaiChikuCode, RString yubinNo, RString yusoKubun, RString jusho, TextBoxDate haishiYMD, RString telNo1, RString faxNo) {
+    public dgShinsaInJohoIchiran_Row(RString status, RString shinsainCode, TextBoxDate shinsakaiIinKaishiYMD, TextBoxDate shinsakaiIinShuryoYMD, RString shimei, RString kanaShimei, RString seibetsu, TextBoxDate barthYMD, RString shikakuCode, RString jokyo, RString biko, RString shinsakaiChikuCode, RString yubinNo, RString yusoKubun, RString jusho, TextBoxDate haishiYMD, RString telNo1, RString faxNo) {
         super();
         this.setOriginalData("status", status);
         this.setOriginalData("shinsainCode", shinsainCode);
@@ -92,8 +92,8 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.setOriginalData("seibetsu", seibetsu);
         this.setOriginalData("barthYMD", barthYMD);
         this.setOriginalData("shikakuCode", shikakuCode);
-        this.setOriginalData("biko", biko);
         this.setOriginalData("jokyo", jokyo);
+        this.setOriginalData("biko", biko);
         this.setOriginalData("shinsakaiChikuCode", shinsakaiChikuCode);
         this.setOriginalData("yubinNo", yubinNo);
         this.setOriginalData("yusoKubun", yusoKubun);
@@ -110,8 +110,8 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.seibetsu = seibetsu;
         this.barthYMD = barthYMD;
         this.shikakuCode = shikakuCode;
-        this.biko = biko;
         this.jokyo = jokyo;
+        this.biko = biko;
         this.shinsakaiChikuCode = shinsakaiChikuCode;
         this.yubinNo = yubinNo;
         this.yusoKubun = yusoKubun;
@@ -157,12 +157,12 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         return shikakuCode;
     }
 
-    public RString getBiko() {
-        return biko;
-    }
-
     public RString getJokyo() {
         return jokyo;
+    }
+
+    public RString getBiko() {
+        return biko;
     }
 
     public RString getShinsakaiChikuCode() {
@@ -238,14 +238,14 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.shikakuCode = shikakuCode;
     }
 
-    public void setBiko(RString biko) {
-        this.setOriginalData("biko", biko);
-        this.biko = biko;
-    }
-
     public void setJokyo(RString jokyo) {
         this.setOriginalData("jokyo", jokyo);
         this.jokyo = jokyo;
+    }
+
+    public void setBiko(RString biko) {
+        this.setOriginalData("biko", biko);
+        this.biko = biko;
     }
 
     public void setShinsakaiChikuCode(RString shinsakaiChikuCode) {

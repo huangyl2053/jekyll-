@@ -8,9 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -18,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link ShujiiJoho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class ShujiiJohoBuilder {
 
@@ -46,7 +46,7 @@ public class ShujiiJohoBuilder {
      * @param 主治医氏名 主治医氏名
      * @return {@link ShujiiJohoBuilder}
      */
-    public ShujiiJohoBuilder set主治医氏名(AtenaMeisho 主治医氏名) {
+    public ShujiiJohoBuilder set主治医氏名(RString 主治医氏名) {
         requireNonNull(主治医氏名, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医氏名"));
         entity.setShujiiName(主治医氏名);
         return this;
@@ -94,7 +94,7 @@ public class ShujiiJohoBuilder {
      * @param 住所 住所
      * @return {@link ShujiiJohoBuilder}
      */
-    public ShujiiJohoBuilder set住所(AtenaJusho 住所) {
+    public ShujiiJohoBuilder set住所(RString 住所) {
         requireNonNull(住所, UrSystemErrorMessages.値がnull.getReplacedMessage("住所"));
         entity.setJusho(住所);
         return this;
@@ -115,12 +115,12 @@ public class ShujiiJohoBuilder {
     /**
      * FAX番号を設定します。
      *
-     * @param FAX番号 FAX番号
+     * @param fax番号 FAX番号
      * @return {@link ShujiiJohoBuilder}
      */
-    public ShujiiJohoBuilder setFAX番号(TelNo FAX番号) {
-        requireNonNull(FAX番号, UrSystemErrorMessages.値がnull.getReplacedMessage("FAX番号"));
-        entity.setFaxNo(FAX番号);
+    public ShujiiJohoBuilder setFAX番号(TelNo fax番号) {
+        requireNonNull(fax番号, UrSystemErrorMessages.値がnull.getReplacedMessage("FAX番号"));
+        entity.setFaxNo(fax番号);
         return this;
     }
 

@@ -4,12 +4,12 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_btnToroku = function () {
-                return "onClick_btnToroku";
+            Events.onClick_btnKakutei = function () {
+                return "onClick_btnKakutei";
             };
 
-            Events.onClick_btnModoru = function () {
-                return "onClick_btnModoru";
+            Events.onClick_btnTorikeshi = function () {
+                return "onClick_btnTorikeshi";
             };
             return Events;
         })();

@@ -4,22 +4,39 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFuku
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaIdentifier;
+import jp.co.ndensan.reams.db.dbz.definition.core.roreifukushinenkinjoho.RoreiFukushiNenkinJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaManager;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
- * RoreiFukushiNenkinShokai のクラスファイル 
- * 
+ * RoreiFukushiNenkinShokai のクラスファイル
+ *
+ * @reamsid_L DBA-0220-010 dongyabin
  * @author 自動生成
  */
 public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiNenkinShokaiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,6 +47,10 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     private panelRirekiDiv panelRireki;
     @JsonProperty("panelInput")
     private panelInputDiv panelInput;
+    @JsonProperty("hihokenshaNo")
+    private RString hihokenshaNo;
+    @JsonProperty("shikibetsuCode")
+    private RString shikibetsuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -74,6 +95,42 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     }
 
     /*
+     * gethihokenshaNo
+     * @return hihokenshaNo
+     */
+    @JsonProperty("hihokenshaNo")
+    public RString getHihokenshaNo() {
+        return hihokenshaNo;
+    }
+
+    /*
+     * sethihokenshaNo
+     * @param hihokenshaNo hihokenshaNo
+     */
+    @JsonProperty("hihokenshaNo")
+    public void setHihokenshaNo(RString hihokenshaNo) {
+        this.hihokenshaNo = hihokenshaNo;
+    }
+
+    /*
+     * getshikibetsuCode
+     * @return shikibetsuCode
+     */
+    @JsonProperty("shikibetsuCode")
+    public RString getShikibetsuCode() {
+        return shikibetsuCode;
+    }
+
+    /*
+     * setshikibetsuCode
+     * @param shikibetsuCode shikibetsuCode
+     */
+    @JsonProperty("shikibetsuCode")
+    public void setShikibetsuCode(RString shikibetsuCode) {
+        this.shikibetsuCode = shikibetsuCode;
+    }
+
+    /*
      * [共有子DIVモード]
      */
     @JsonProperty("modes")
@@ -93,7 +150,7 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
             ModeC[] enumArray = ModeC.values();
 
             for (ModeC enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -108,11 +165,11 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     }
 
     public ModeC getMode_ModeC() {
-        return (ModeC) _CommonChildDivModeUtil.getMode( this.modes, ModeC.class );
+        return (ModeC) _CommonChildDivModeUtil.getMode(this.modes, ModeC.class);
     }
 
-    public void setMode_ModeC( ModeC value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, ModeC.class , value );
+    public void setMode_ModeC(ModeC value) {
+        _CommonChildDivModeUtil.setMode(this.modes, ModeC.class, value);
     }
 
     public static enum ModeA implements ICommonChildDivMode {
@@ -129,7 +186,7 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
             ModeA[] enumArray = ModeA.values();
 
             for (ModeA enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -144,11 +201,11 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     }
 
     public ModeA getMode_ModeA() {
-        return (ModeA) _CommonChildDivModeUtil.getMode( this.modes, ModeA.class );
+        return (ModeA) _CommonChildDivModeUtil.getMode(this.modes, ModeA.class);
     }
 
-    public void setMode_ModeA( ModeA value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, ModeA.class , value );
+    public void setMode_ModeA(ModeA value) {
+        _CommonChildDivModeUtil.setMode(this.modes, ModeA.class, value);
     }
 
     public static enum ModeB implements ICommonChildDivMode {
@@ -165,7 +222,7 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
             ModeB[] enumArray = ModeB.values();
 
             for (ModeB enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -180,11 +237,11 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     }
 
     public ModeB getMode_ModeB() {
-        return (ModeB) _CommonChildDivModeUtil.getMode( this.modes, ModeB.class );
+        return (ModeB) _CommonChildDivModeUtil.getMode(this.modes, ModeB.class);
     }
 
-    public void setMode_ModeB( ModeB value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, ModeB.class , value );
+    public void setMode_ModeB(ModeB value) {
+        _CommonChildDivModeUtil.setMode(this.modes, ModeB.class, value);
     }
 
     /*
@@ -196,7 +253,7 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     }
 
     @JsonIgnore
-    public void  setBtnAdd(Button btnAdd) {
+    public void setBtnAdd(Button btnAdd) {
         this.getPanelRireki().setBtnAdd(btnAdd);
     }
 
@@ -206,51 +263,67 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     }
 
     @JsonIgnore
-    public void  setDatagridRireki(DataGrid<datagridRireki_Row> datagridRireki) {
+    public void setDatagridRireki(DataGrid<datagridRireki_Row> datagridRireki) {
         this.getPanelRireki().setDatagridRireki(datagridRireki);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtStartDate() {
-        return this.getPanelInput().getTxtStartDate();
-    }
-
-    @JsonIgnore
-    public void  setTxtStartDate(TextBoxDate txtStartDate) {
-        this.getPanelInput().setTxtStartDate(txtStartDate);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtEndDate() {
-        return this.getPanelInput().getTxtEndDate();
-    }
-
-    @JsonIgnore
-    public void  setTxtEndDate(TextBoxDate txtEndDate) {
-        this.getPanelInput().setTxtEndDate(txtEndDate);
-    }
-
-    @JsonIgnore
-    public Button getBtnSave() {
-        return this.getPanelInput().getBtnSave();
-    }
-
-    @JsonIgnore
-    public void  setBtnSave(Button btnSave) {
-        this.getPanelInput().setBtnSave(btnSave);
-    }
-
-    @JsonIgnore
-    public Button getBtnCancel() {
-        return this.getPanelInput().getBtnCancel();
-    }
-
-    @JsonIgnore
-    public void  setBtnCancel(Button btnCancel) {
-        this.getPanelInput().setBtnCancel(btnCancel);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    /**
+     * 画面を初期化します。
+     *
+     * @param shikibetsuCode 識別コード
+     * @param hihokenshaNo 被保険者番号
+     */
+    @Override
+    public void initialize(ShikibetsuCode shikibetsuCode, HihokenshaNo hihokenshaNo) {
+
+        RoreiFukushiNenkinJohoMapperParameter param = RoreiFukushiNenkinJohoMapperParameter.createRoreiFukushiParam(
+                shikibetsuCode,
+                FlexibleDate.EMPTY, HihokenshaNo.EMPTY,
+                FlexibleDate.EMPTY);
+        this.setHihokenshaNo(hihokenshaNo == null ? RString.EMPTY : hihokenshaNo.getColumnValue());
+        this.setShikibetsuCode(shikibetsuCode == null ? RString.EMPTY : shikibetsuCode
+                .getColumnValue());
+        List<RoreiFukushiNenkinJukyusha> 一覧情報 = getService()
+                .getRoreiFukushiNenkinJoho(param);
+        getHandler(this).set老齢福祉年金情報一覧表示グリッド(一覧情報);
+        Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha
+                = Models.create(一覧情報);
+        ViewStateHolder.put(ViewStateKeys.老齢福祉年金情報_老齢福祉年金情報検索結果一覧, roreiFukushiNenkinJukyusha);
+    }
+
+    /**
+     * 画面データをデータベースに格納します。
+     */
+    @Override
+    public void click_Save() {
+        Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha
+                = ViewStateHolder.get(ViewStateKeys.老齢福祉年金情報_老齢福祉年金情報検索結果一覧, Models.class);
+        if (roreiFukushiNenkinJukyusha != null) {
+            Iterator<RoreiFukushiNenkinJukyusha> iterater = roreiFukushiNenkinJukyusha.iterator();
+            while (iterater.hasNext()) {
+                getService().save老齢福祉年金受給者(iterater.next());
+            }
+        }
+    }
+
+    /**
+     * 老福年金情報を取得します。
+     *
+     * @return List<datagridRireki_Row>
+     */
+    @Override
+    public List<datagridRireki_Row> getDataGridList() {
+        return this.getDatagridRireki().getDataSource();
+    }
+
+    private RoreiFukushiNenkinShokaiHandler getHandler(RoreiFukushiNenkinShokaiDiv div) {
+        return new RoreiFukushiNenkinShokaiHandler(div);
+    }
+
+    private RoreiFukushiNenkinJukyushaManager getService() {
+        return RoreiFukushiNenkinJukyushaManager.createInstance();
+    }
 
 }

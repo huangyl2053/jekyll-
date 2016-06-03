@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710011;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -9,15 +9,15 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
  * 不正な動作の原因になります。</br>
  * DBC0710011の状態名定義クラスです
  *
- * @author 自動生成
+ * @reamsid_L DBC-0992-100 yebangqiang
  */
 public enum DBC0710011StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    申請登録("申請登録"),
-    申請登録内容("申請登録内容"),
-    申請登録完了("申請登録完了");
+    Default("default"),
+    支給申請モード("支給申請モード"),
+    事前申請モード("事前申請モード");
 
     private final RString name;
 

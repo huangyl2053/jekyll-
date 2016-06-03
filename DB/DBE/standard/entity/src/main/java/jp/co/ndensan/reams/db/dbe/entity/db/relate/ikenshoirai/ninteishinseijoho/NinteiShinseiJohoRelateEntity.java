@@ -13,10 +13,12 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEn
 
 /**
  * 要介護認定申請情報RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter
-public class NinteiShinseiJohoRelateEntity implements Cloneable, Serializable {
+public class NinteiShinseiJohoRelateEntity implements Serializable {
 
     /**
      * -- GETTER -- 要介護認定申請情報Entityを返します。

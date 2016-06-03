@@ -16,31 +16,37 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChosainSearchDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("hokenshaList")
-    private HokenshaListDiv hokenshaList;
     @JsonProperty("txtSearchChosaItakusakiCodeFrom")
     private TextBoxCode txtSearchChosaItakusakiCodeFrom;
     @JsonProperty("txtSearchChosaItakusakiCodeTo")
     private TextBoxCode txtSearchChosaItakusakiCodeTo;
     @JsonProperty("txtSearchChosaItakusakiMeisho")
     private TextBox txtSearchChosaItakusakiMeisho;
+    @JsonProperty("ddlItakusakiMeisho")
+    private DropDownList ddlItakusakiMeisho;
     @JsonProperty("txtSearchChosaItakusakiKanaMeisho")
     private TextBoxKana txtSearchChosaItakusakiKanaMeisho;
+    @JsonProperty("ddlItakusakiKanaMeisho")
+    private DropDownList ddlItakusakiKanaMeisho;
     @JsonProperty("txtSearchChosainCodeFrom")
     private TextBoxCode txtSearchChosainCodeFrom;
     @JsonProperty("txtSearchChosainCodeTo")
     private TextBoxCode txtSearchChosainCodeTo;
     @JsonProperty("txtSearchChosainShimei")
     private TextBox txtSearchChosainShimei;
+    @JsonProperty("ddlChosainMeisho")
+    private DropDownList ddlChosainMeisho;
     @JsonProperty("txtSearchChosainKanaShimei")
     private TextBoxKana txtSearchChosainKanaShimei;
+    @JsonProperty("ddlChosainKanaMeisho")
+    private DropDownList ddlChosainKanaMeisho;
     @JsonProperty("ddlChikuCode")
     private DropDownList ddlChikuCode;
     @JsonProperty("radSearchChosainJokyo")
@@ -51,6 +57,8 @@ public class ChosainSearchDiv extends Panel {
     private Button btnSearchShujii;
     @JsonProperty("btnClearKensakuJoken")
     private Button btnClearKensakuJoken;
+    @JsonProperty("hokenshaList")
+    private HokenshaListDiv hokenshaList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -58,15 +66,6 @@ public class ChosainSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * gethokenshaList
-     * @return hokenshaList
-     */
-    @JsonProperty("hokenshaList")
-    public IHokenshaListDiv getHokenshaList() {
-        return hokenshaList;
-    }
-
     /*
      * gettxtSearchChosaItakusakiCodeFrom
      * @return txtSearchChosaItakusakiCodeFrom
@@ -122,6 +121,24 @@ public class ChosainSearchDiv extends Panel {
     }
 
     /*
+     * getddlItakusakiMeisho
+     * @return ddlItakusakiMeisho
+     */
+    @JsonProperty("ddlItakusakiMeisho")
+    public DropDownList getDdlItakusakiMeisho() {
+        return ddlItakusakiMeisho;
+    }
+
+    /*
+     * setddlItakusakiMeisho
+     * @param ddlItakusakiMeisho ddlItakusakiMeisho
+     */
+    @JsonProperty("ddlItakusakiMeisho")
+    public void setDdlItakusakiMeisho(DropDownList ddlItakusakiMeisho) {
+        this.ddlItakusakiMeisho = ddlItakusakiMeisho;
+    }
+
+    /*
      * gettxtSearchChosaItakusakiKanaMeisho
      * @return txtSearchChosaItakusakiKanaMeisho
      */
@@ -137,6 +154,24 @@ public class ChosainSearchDiv extends Panel {
     @JsonProperty("txtSearchChosaItakusakiKanaMeisho")
     public void setTxtSearchChosaItakusakiKanaMeisho(TextBoxKana txtSearchChosaItakusakiKanaMeisho) {
         this.txtSearchChosaItakusakiKanaMeisho = txtSearchChosaItakusakiKanaMeisho;
+    }
+
+    /*
+     * getddlItakusakiKanaMeisho
+     * @return ddlItakusakiKanaMeisho
+     */
+    @JsonProperty("ddlItakusakiKanaMeisho")
+    public DropDownList getDdlItakusakiKanaMeisho() {
+        return ddlItakusakiKanaMeisho;
+    }
+
+    /*
+     * setddlItakusakiKanaMeisho
+     * @param ddlItakusakiKanaMeisho ddlItakusakiKanaMeisho
+     */
+    @JsonProperty("ddlItakusakiKanaMeisho")
+    public void setDdlItakusakiKanaMeisho(DropDownList ddlItakusakiKanaMeisho) {
+        this.ddlItakusakiKanaMeisho = ddlItakusakiKanaMeisho;
     }
 
     /*
@@ -194,6 +229,24 @@ public class ChosainSearchDiv extends Panel {
     }
 
     /*
+     * getddlChosainMeisho
+     * @return ddlChosainMeisho
+     */
+    @JsonProperty("ddlChosainMeisho")
+    public DropDownList getDdlChosainMeisho() {
+        return ddlChosainMeisho;
+    }
+
+    /*
+     * setddlChosainMeisho
+     * @param ddlChosainMeisho ddlChosainMeisho
+     */
+    @JsonProperty("ddlChosainMeisho")
+    public void setDdlChosainMeisho(DropDownList ddlChosainMeisho) {
+        this.ddlChosainMeisho = ddlChosainMeisho;
+    }
+
+    /*
      * gettxtSearchChosainKanaShimei
      * @return txtSearchChosainKanaShimei
      */
@@ -209,6 +262,24 @@ public class ChosainSearchDiv extends Panel {
     @JsonProperty("txtSearchChosainKanaShimei")
     public void setTxtSearchChosainKanaShimei(TextBoxKana txtSearchChosainKanaShimei) {
         this.txtSearchChosainKanaShimei = txtSearchChosainKanaShimei;
+    }
+
+    /*
+     * getddlChosainKanaMeisho
+     * @return ddlChosainKanaMeisho
+     */
+    @JsonProperty("ddlChosainKanaMeisho")
+    public DropDownList getDdlChosainKanaMeisho() {
+        return ddlChosainKanaMeisho;
+    }
+
+    /*
+     * setddlChosainKanaMeisho
+     * @param ddlChosainKanaMeisho ddlChosainKanaMeisho
+     */
+    @JsonProperty("ddlChosainKanaMeisho")
+    public void setDdlChosainKanaMeisho(DropDownList ddlChosainKanaMeisho) {
+        this.ddlChosainKanaMeisho = ddlChosainKanaMeisho;
     }
 
     /*
@@ -299,6 +370,15 @@ public class ChosainSearchDiv extends Panel {
     @JsonProperty("btnClearKensakuJoken")
     public void setBtnClearKensakuJoken(Button btnClearKensakuJoken) {
         this.btnClearKensakuJoken = btnClearKensakuJoken;
+    }
+
+    /*
+     * gethokenshaList
+     * @return hokenshaList
+     */
+    @JsonProperty("hokenshaList")
+    public IHokenshaListDiv getHokenshaList() {
+        return hokenshaList;
     }
 
     // </editor-fold>

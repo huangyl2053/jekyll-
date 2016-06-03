@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 認定調査委託先情報の識別子です。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

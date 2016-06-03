@@ -97,4 +97,9 @@ public interface IHihokenshaFinderDiv extends ICommonChildDivBaseProperties {
      */
     RString get最近処理者();
 
+    /**
+     * 賦課年度ドロップダウンの値を設定します。
+     */
+    void set賦課年度ドロップダウン();
+
 }

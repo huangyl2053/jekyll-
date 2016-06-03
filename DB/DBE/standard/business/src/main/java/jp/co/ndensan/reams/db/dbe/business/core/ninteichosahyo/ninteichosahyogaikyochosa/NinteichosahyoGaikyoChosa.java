@@ -37,12 +37,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5209NinteichosahyoKinyuItem
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -50,8 +47,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査票（概況調査）を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class NinteichosahyoGaikyoChosa extends ModelBase<NinteichosahyoGaikyoChosaIdentifier, DbT5202NinteichosahyoGaikyoChosaEntity, NinteichosahyoGaikyoChosa> implements Serializable {
+public class NinteichosahyoGaikyoChosa
+        extends ModelBase<NinteichosahyoGaikyoChosaIdentifier, DbT5202NinteichosahyoGaikyoChosaEntity, NinteichosahyoGaikyoChosa>
+        implements Serializable {
 
     private final DbT5202NinteichosahyoGaikyoChosaEntity entity;
     private final NinteichosahyoGaikyoChosaIdentifier id;
@@ -125,11 +126,11 @@ public class NinteichosahyoGaikyoChosa extends ModelBase<NinteichosahyoGaikyoCho
         }
         this.ninteichosahyoServiceJokyo = Models.create(ninteichosahyoServiceJokyoList);
 
-        List<NinteichosahyoServiceJokyoFlag> ninteichosahyoServiceJokyoFlagList = new ArrayList<>();
+        List<NinteichosahyoServiceJokyoFlag> serviceJokyoFlagList = new ArrayList<>();
         for (DbT5208NinteichosahyoServiceJokyoFlagEntity todokedeshaEntity : entity.get認定調査票_概況調査_サービスの状況フラグEntity()) {
-            ninteichosahyoServiceJokyoFlagList.add(new NinteichosahyoServiceJokyoFlag(todokedeshaEntity));
+            serviceJokyoFlagList.add(new NinteichosahyoServiceJokyoFlag(todokedeshaEntity));
         }
-        this.ninteichosahyoServiceJokyoFlag = Models.create(ninteichosahyoServiceJokyoFlagList);
+        this.ninteichosahyoServiceJokyoFlag = Models.create(serviceJokyoFlagList);
 
         List<NinteichosahyoShisetsuRiyo> ninteichosahyoShisetsuRiyoList = new ArrayList<>();
         for (DbT5210NinteichosahyoShisetsuRiyoEntity todokedeshaEntity : entity.get認定調査票_概況調査_施設利用Entity()) {
@@ -373,12 +374,11 @@ public class NinteichosahyoGaikyoChosa extends ModelBase<NinteichosahyoGaikyoCho
     }
 
     /**
-     * 認定調査票（概況調査）配下の要素を削除対象とします。<br/>
-     * {@link DbT5202NinteichosahyoGaikyoChosaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 認定調査票（概況調査）配下の要素である認定調査票（概況特記）情報の{@link Models#deleteOrRemoveAll() }と
-     * 認定調査票（基本調査）情報の{@link Models#deleteOrRemoveAll() }と 認定調査票（概況調査）記入項目情報の{@link Models#deleteOrRemoveAll() }と
-     * 認定調査票（概況調査）サービスの状況情報の{@link Models#deleteOrRemoveAll() }と
-     * 認定調査票（概況調査）サービスの状況フラグ情報の{@link Models#deleteOrRemoveAll() }と
+     * 認定調査票（概況調査）配下の要素を削除対象とします。<br/> {@link DbT5202NinteichosahyoGaikyoChosaEntity}の{@link EntityDataState}が すでにDBへ永続化されている物であれば削除状態にします。
+     * 認定調査票（概況調査）配下の要素である認定調査票（概況特記）情報の{@link Models#deleteOrRemoveAll() }と <br/>
+     * 認定調査票（基本調査）情報の{@link Models#deleteOrRemoveAll() }と <br/>
+     * 認定調査票（概況調査）記入項目情報の{@link Models#deleteOrRemoveAll()
+     * }と 認定調査票（概況調査）サービスの状況情報の{@link Models#deleteOrRemoveAll() }と 認定調査票（概況調査）サービスの状況フラグ情報の{@link Models#deleteOrRemoveAll() }と
      * 認定調査票（概況調査）施設利用情報の{@link Models#deleteOrRemoveAll() }と 認定調査票（特記情報）情報の{@link Models#deleteOrRemoveAll() }とを実行します。
      * 削除処理結果となる{@link NinteichosahyoGaikyoChosa}を返します。
      *
@@ -410,8 +410,7 @@ public class NinteichosahyoGaikyoChosa extends ModelBase<NinteichosahyoGaikyoCho
     }
 
     /**
-     * 認定調査票（概況調査）のみを変更対象とします。<br/>
-     * {@link DbT5202NinteichosahyoGaikyoChosaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査票（概況調査）のみを変更対象とします。<br/> {@link DbT5202NinteichosahyoGaikyoChosaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosahyoGaikyoChosa}
      */
@@ -641,7 +640,8 @@ public class NinteichosahyoGaikyoChosa extends ModelBase<NinteichosahyoGaikyoCho
 
         private Object readResolve() {
             return new NinteichosahyoGaikyoChosa(this.entity, this.id, this.gaikyoTokki, this.ninteichosahyoKihonChosa, this.ninteichosahyoKinyuItem,
-                    this.ninteichosahyoServiceJokyo, this.ninteichosahyoServiceJokyoFlag, this.ninteichosahyoShisetsuRiyo, this.ninteichosahyoTokkijiko);
+                    this.ninteichosahyoServiceJokyo, this.ninteichosahyoServiceJokyoFlag,
+                    this.ninteichosahyoShisetsuRiyo, this.ninteichosahyoTokkijiko);
         }
     }
 

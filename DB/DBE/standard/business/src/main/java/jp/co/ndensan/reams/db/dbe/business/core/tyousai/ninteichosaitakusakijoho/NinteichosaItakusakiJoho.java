@@ -30,8 +30,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査委託先情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-023 liangbc
  */
-public class NinteichosaItakusakiJoho extends ModelBase<NinteichosaItakusakiJohoIdentifier, DbT5910NinteichosaItakusakiJohoEntity, NinteichosaItakusakiJoho> implements Serializable {
+public class NinteichosaItakusakiJoho extends
+        ModelBase<NinteichosaItakusakiJohoIdentifier, DbT5910NinteichosaItakusakiJohoEntity, NinteichosaItakusakiJoho> implements Serializable {
 
     private static final long serialVersionUID = 5013160557608226847L;
 
@@ -209,7 +212,7 @@ public class NinteichosaItakusakiJoho extends ModelBase<NinteichosaItakusakiJoho
      *
      * @return 特定調査員表示フラグ
      */
-    public Boolean get特定調査員表示フラグ() {
+    public Boolean is特定調査員表示フラグ() {
         return entity.getTokuteiChosainDisplayFlag();
     }
 
@@ -236,7 +239,7 @@ public class NinteichosaItakusakiJoho extends ModelBase<NinteichosaItakusakiJoho
      *
      * @return 自動割付フラグ
      */
-    public boolean get自動割付フラグ() {
+    public boolean is自動割付フラグTrue() {
         return entity.getAutoWaritsukeFlag();
     }
 
@@ -254,7 +257,7 @@ public class NinteichosaItakusakiJoho extends ModelBase<NinteichosaItakusakiJoho
      *
      * @return 状況フラグ
      */
-    public boolean get状況フラグ() {
+    public boolean is状況フラグ() {
         return entity.getJokyoFlag();
     }
 

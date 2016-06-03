@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  */
 public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV2001ChoshuHoho");
 
@@ -63,8 +64,17 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
     private RString tokuchoTeishiJiyuCode;
 
     /**
+     * lastUpdateTimestampのgetメソッドです。
+     *
+     * @return lastUpdateTimestamp
+     */
+    public RDateTime getLastUpdateTimestamp() {
+        return lastUpdateTimestamp;
+    }
+
+    /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -73,7 +83,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -82,7 +92,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -91,17 +101,16 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -110,7 +119,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * fukaNendoのgetメソッドです。
-     * 
+     *
      * @return fukaNendo
      */
     @CheckForNull
@@ -120,7 +129,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * fukaNendoのsetメソッドです。
-     * 
+     *
      * @param fukaNendo fukaNendo
      */
     public void setFukaNendo(FlexibleYear fukaNendo) {
@@ -129,7 +138,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * hihokenshaNoのgetメソッドです。
-     * 
+     *
      * @return hihokenshaNo
      */
     @CheckForNull
@@ -139,7 +148,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * hihokenshaNoのsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo hihokenshaNo
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
@@ -148,7 +157,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * rirekiNoのgetメソッドです。
-     * 
+     *
      * @return rirekiNo
      */
     @CheckForNull
@@ -158,7 +167,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * rirekiNoのsetメソッドです。
-     * 
+     *
      * @param rirekiNo rirekiNo
      */
     public void setRirekiNo(int rirekiNo) {
@@ -167,7 +176,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho4gatsuのgetメソッドです。
-     * 
+     *
      * @return choshuHoho4gatsu
      */
     @CheckForNull
@@ -177,7 +186,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho4gatsuのsetメソッドです。
-     * 
+     *
      * @param choshuHoho4gatsu choshuHoho4gatsu
      */
     public void setChoshuHoho4gatsu(RString choshuHoho4gatsu) {
@@ -186,7 +195,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho5gatsuのgetメソッドです。
-     * 
+     *
      * @return choshuHoho5gatsu
      */
     @CheckForNull
@@ -196,7 +205,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho5gatsuのsetメソッドです。
-     * 
+     *
      * @param choshuHoho5gatsu choshuHoho5gatsu
      */
     public void setChoshuHoho5gatsu(RString choshuHoho5gatsu) {
@@ -205,7 +214,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho6gatsuのgetメソッドです。
-     * 
+     *
      * @return choshuHoho6gatsu
      */
     @CheckForNull
@@ -215,7 +224,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho6gatsuのsetメソッドです。
-     * 
+     *
      * @param choshuHoho6gatsu choshuHoho6gatsu
      */
     public void setChoshuHoho6gatsu(RString choshuHoho6gatsu) {
@@ -224,7 +233,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho7gatsuのgetメソッドです。
-     * 
+     *
      * @return choshuHoho7gatsu
      */
     @CheckForNull
@@ -234,7 +243,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho7gatsuのsetメソッドです。
-     * 
+     *
      * @param choshuHoho7gatsu choshuHoho7gatsu
      */
     public void setChoshuHoho7gatsu(RString choshuHoho7gatsu) {
@@ -243,7 +252,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho8gatsuのgetメソッドです。
-     * 
+     *
      * @return choshuHoho8gatsu
      */
     @CheckForNull
@@ -253,7 +262,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho8gatsuのsetメソッドです。
-     * 
+     *
      * @param choshuHoho8gatsu choshuHoho8gatsu
      */
     public void setChoshuHoho8gatsu(RString choshuHoho8gatsu) {
@@ -262,7 +271,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho9gatsuのgetメソッドです。
-     * 
+     *
      * @return choshuHoho9gatsu
      */
     @CheckForNull
@@ -272,7 +281,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho9gatsuのsetメソッドです。
-     * 
+     *
      * @param choshuHoho9gatsu choshuHoho9gatsu
      */
     public void setChoshuHoho9gatsu(RString choshuHoho9gatsu) {
@@ -281,7 +290,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho10gatsuのgetメソッドです。
-     * 
+     *
      * @return choshuHoho10gatsu
      */
     @CheckForNull
@@ -291,7 +300,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho10gatsuのsetメソッドです。
-     * 
+     *
      * @param choshuHoho10gatsu choshuHoho10gatsu
      */
     public void setChoshuHoho10gatsu(RString choshuHoho10gatsu) {
@@ -300,7 +309,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho11gatsuのgetメソッドです。
-     * 
+     *
      * @return choshuHoho11gatsu
      */
     @CheckForNull
@@ -310,7 +319,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho11gatsuのsetメソッドです。
-     * 
+     *
      * @param choshuHoho11gatsu choshuHoho11gatsu
      */
     public void setChoshuHoho11gatsu(RString choshuHoho11gatsu) {
@@ -319,7 +328,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho12gatsuのgetメソッドです。
-     * 
+     *
      * @return choshuHoho12gatsu
      */
     @CheckForNull
@@ -329,7 +338,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho12gatsuのsetメソッドです。
-     * 
+     *
      * @param choshuHoho12gatsu choshuHoho12gatsu
      */
     public void setChoshuHoho12gatsu(RString choshuHoho12gatsu) {
@@ -338,7 +347,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho1gatsuのgetメソッドです。
-     * 
+     *
      * @return choshuHoho1gatsu
      */
     @CheckForNull
@@ -348,7 +357,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho1gatsuのsetメソッドです。
-     * 
+     *
      * @param choshuHoho1gatsu choshuHoho1gatsu
      */
     public void setChoshuHoho1gatsu(RString choshuHoho1gatsu) {
@@ -357,7 +366,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho2gatsuのgetメソッドです。
-     * 
+     *
      * @return choshuHoho2gatsu
      */
     @CheckForNull
@@ -367,7 +376,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho2gatsuのsetメソッドです。
-     * 
+     *
      * @param choshuHoho2gatsu choshuHoho2gatsu
      */
     public void setChoshuHoho2gatsu(RString choshuHoho2gatsu) {
@@ -376,7 +385,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho3gatsuのgetメソッドです。
-     * 
+     *
      * @return choshuHoho3gatsu
      */
     @CheckForNull
@@ -386,7 +395,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHoho3gatsuのsetメソッドです。
-     * 
+     *
      * @param choshuHoho3gatsu choshuHoho3gatsu
      */
     public void setChoshuHoho3gatsu(RString choshuHoho3gatsu) {
@@ -395,7 +404,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHohoYoku4gatsuのgetメソッドです。
-     * 
+     *
      * @return choshuHohoYoku4gatsu
      */
     @CheckForNull
@@ -405,7 +414,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHohoYoku4gatsuのsetメソッドです。
-     * 
+     *
      * @param choshuHohoYoku4gatsu choshuHohoYoku4gatsu
      */
     public void setChoshuHohoYoku4gatsu(RString choshuHohoYoku4gatsu) {
@@ -414,7 +423,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHohoYoku5gatsuのgetメソッドです。
-     * 
+     *
      * @return choshuHohoYoku5gatsu
      */
     @CheckForNull
@@ -424,7 +433,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHohoYoku5gatsuのsetメソッドです。
-     * 
+     *
      * @param choshuHohoYoku5gatsu choshuHohoYoku5gatsu
      */
     public void setChoshuHohoYoku5gatsu(RString choshuHohoYoku5gatsu) {
@@ -433,7 +442,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHohoYoku6gatsuのgetメソッドです。
-     * 
+     *
      * @return choshuHohoYoku6gatsu
      */
     @CheckForNull
@@ -443,7 +452,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHohoYoku6gatsuのsetメソッドです。
-     * 
+     *
      * @param choshuHohoYoku6gatsu choshuHohoYoku6gatsu
      */
     public void setChoshuHohoYoku6gatsu(RString choshuHohoYoku6gatsu) {
@@ -452,7 +461,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHohoYoku7gatsuのgetメソッドです。
-     * 
+     *
      * @return choshuHohoYoku7gatsu
      */
     @CheckForNull
@@ -462,7 +471,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHohoYoku7gatsuのsetメソッドです。
-     * 
+     *
      * @param choshuHohoYoku7gatsu choshuHohoYoku7gatsu
      */
     public void setChoshuHohoYoku7gatsu(RString choshuHohoYoku7gatsu) {
@@ -471,7 +480,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHohoYoku8gatsuのgetメソッドです。
-     * 
+     *
      * @return choshuHohoYoku8gatsu
      */
     @CheckForNull
@@ -481,7 +490,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHohoYoku8gatsuのsetメソッドです。
-     * 
+     *
      * @param choshuHohoYoku8gatsu choshuHohoYoku8gatsu
      */
     public void setChoshuHohoYoku8gatsu(RString choshuHohoYoku8gatsu) {
@@ -490,7 +499,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHohoYoku9gatsuのgetメソッドです。
-     * 
+     *
      * @return choshuHohoYoku9gatsu
      */
     @CheckForNull
@@ -500,7 +509,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * choshuHohoYoku9gatsuのsetメソッドです。
-     * 
+     *
      * @param choshuHohoYoku9gatsu choshuHohoYoku9gatsu
      */
     public void setChoshuHohoYoku9gatsu(RString choshuHohoYoku9gatsu) {
@@ -509,7 +518,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * kariNenkinNoのgetメソッドです。
-     * 
+     *
      * @return kariNenkinNo
      */
     @CheckForNull
@@ -519,7 +528,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * kariNenkinNoのsetメソッドです。
-     * 
+     *
      * @param kariNenkinNo kariNenkinNo
      */
     public void setKariNenkinNo(RString kariNenkinNo) {
@@ -528,7 +537,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * kariNenkinCodeのgetメソッドです。
-     * 
+     *
      * @return kariNenkinCode
      */
     @CheckForNull
@@ -538,7 +547,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * kariNenkinCodeのsetメソッドです。
-     * 
+     *
      * @param kariNenkinCode kariNenkinCode
      */
     public void setKariNenkinCode(RString kariNenkinCode) {
@@ -547,7 +556,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * kariHosokuMのgetメソッドです。
-     * 
+     *
      * @return kariHosokuM
      */
     @CheckForNull
@@ -557,7 +566,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * kariHosokuMのsetメソッドです。
-     * 
+     *
      * @param kariHosokuM kariHosokuM
      */
     public void setKariHosokuM(RString kariHosokuM) {
@@ -566,7 +575,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * honNenkinNoのgetメソッドです。
-     * 
+     *
      * @return honNenkinNo
      */
     @CheckForNull
@@ -576,7 +585,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * honNenkinNoのsetメソッドです。
-     * 
+     *
      * @param honNenkinNo honNenkinNo
      */
     public void setHonNenkinNo(RString honNenkinNo) {
@@ -585,7 +594,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * honNenkinCodeのgetメソッドです。
-     * 
+     *
      * @return honNenkinCode
      */
     @CheckForNull
@@ -595,7 +604,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * honNenkinCodeのsetメソッドです。
-     * 
+     *
      * @param honNenkinCode honNenkinCode
      */
     public void setHonNenkinCode(RString honNenkinCode) {
@@ -604,7 +613,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * honHosokuMのgetメソッドです。
-     * 
+     *
      * @return honHosokuM
      */
     @CheckForNull
@@ -614,7 +623,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * honHosokuMのsetメソッドです。
-     * 
+     *
      * @param honHosokuM honHosokuM
      */
     public void setHonHosokuM(RString honHosokuM) {
@@ -623,7 +632,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * yokunendoKariNenkinNoのgetメソッドです。
-     * 
+     *
      * @return yokunendoKariNenkinNo
      */
     @CheckForNull
@@ -633,7 +642,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * yokunendoKariNenkinNoのsetメソッドです。
-     * 
+     *
      * @param yokunendoKariNenkinNo yokunendoKariNenkinNo
      */
     public void setYokunendoKariNenkinNo(RString yokunendoKariNenkinNo) {
@@ -642,7 +651,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * yokunendoKariNenkinCodeのgetメソッドです。
-     * 
+     *
      * @return yokunendoKariNenkinCode
      */
     @CheckForNull
@@ -652,7 +661,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * yokunendoKariNenkinCodeのsetメソッドです。
-     * 
+     *
      * @param yokunendoKariNenkinCode yokunendoKariNenkinCode
      */
     public void setYokunendoKariNenkinCode(RString yokunendoKariNenkinCode) {
@@ -661,7 +670,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * yokunendoKariHosokuMのgetメソッドです。
-     * 
+     *
      * @return yokunendoKariHosokuM
      */
     @CheckForNull
@@ -671,7 +680,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * yokunendoKariHosokuMのsetメソッドです。
-     * 
+     *
      * @param yokunendoKariHosokuM yokunendoKariHosokuM
      */
     public void setYokunendoKariHosokuM(RString yokunendoKariHosokuM) {
@@ -680,7 +689,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * iraiSohuzumiFlagのgetメソッドです。
-     * 
+     *
      * @return iraiSohuzumiFlag
      */
     @CheckForNull
@@ -690,7 +699,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * iraiSohuzumiFlagのsetメソッドです。
-     * 
+     *
      * @param iraiSohuzumiFlag iraiSohuzumiFlag
      */
     public void setIraiSohuzumiFlag(boolean iraiSohuzumiFlag) {
@@ -699,7 +708,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * tsuikaIraiSohuzumiFlagのgetメソッドです。
-     * 
+     *
      * @return tsuikaIraiSohuzumiFlag
      */
     @CheckForNull
@@ -709,7 +718,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * tsuikaIraiSohuzumiFlagのsetメソッドです。
-     * 
+     *
      * @param tsuikaIraiSohuzumiFlag tsuikaIraiSohuzumiFlag
      */
     public void setTsuikaIraiSohuzumiFlag(boolean tsuikaIraiSohuzumiFlag) {
@@ -718,7 +727,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * tokuchoTeishiNichijiのgetメソッドです。
-     * 
+     *
      * @return tokuchoTeishiNichiji
      */
     @CheckForNull
@@ -728,7 +737,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * tokuchoTeishiNichijiのsetメソッドです。
-     * 
+     *
      * @param tokuchoTeishiNichiji tokuchoTeishiNichiji
      */
     public void setTokuchoTeishiNichiji(YMDHMS tokuchoTeishiNichiji) {
@@ -737,7 +746,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * tokuchoTeishiJiyuCodeのgetメソッドです。
-     * 
+     *
      * @return tokuchoTeishiJiyuCode
      */
     @CheckForNull
@@ -747,7 +756,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * tokuchoTeishiJiyuCodeのsetメソッドです。
-     * 
+     *
      * @param tokuchoTeishiJiyuCode tokuchoTeishiJiyuCode
      */
     public void setTokuchoTeishiJiyuCode(RString tokuchoTeishiJiyuCode) {
@@ -756,10 +765,9 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * このエンティティの主キーが他の{@literal DbV2001ChoshuHohoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbV2001ChoshuHohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbV2001ChoshuHohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbV2001ChoshuHohoEntity other) {
@@ -812,6 +820,7 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

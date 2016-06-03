@@ -13,7 +13,7 @@
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE0100001",
-     "toLayoutTitle": "申請者検索",
+     "toLayoutTitle": "要介護認定申請検索",
      "toState": "条件指定"
     },
     {
@@ -21,8 +21,8 @@
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE0100001",
-     "layoutTitle": "申請者検索",
-     "eventName": "対象者特定",
+     "layoutTitle": "要介護認定申請検索",
+     "eventName": "主治医意見書登録へ",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
@@ -37,29 +37,68 @@
      "layoutName": "DBE2310001",
      "layoutTitle": "主治医意見書登録",
      "eventName": "申請者検索に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE0100001",
-     "toLayoutTitle": "申請者検索",
+     "toLayoutTitle": "要介護認定申請検索",
      "toState": "条件指定"
     },
     {
      "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2310001",
+     "layoutTitle": "主治医意見書登録",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "name": "主治医意見書登録2",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2070001",
+     "toLayoutTitle": "完了処理・主治医意見書入手",
+     "toState": "登録"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2070001",
+     "layoutTitle": "完了処理・主治医意見書入手",
+     "eventName": "主治医意見書登録へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2310001",
+     "toLayoutTitle": "主治医意見書登録",
+     "toState": "初期表示_一覧"
+    },
+    {
+     "id": "3",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE2310001",
      "layoutTitle": "主治医意見書登録",
      "eventName": "申請者検索結果一覧に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE0100001",
-     "toLayoutTitle": "申請者検索",
-     "toState": "検索結果一覧"
+     "toLayoutName": "DBE2070001",
+     "toLayoutTitle": "完了処理・主治医意見書入手",
+     "toState": "登録"
     },
     {
-     "id": "5",
+     "id": "4",
      "type": "end",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE2310001",

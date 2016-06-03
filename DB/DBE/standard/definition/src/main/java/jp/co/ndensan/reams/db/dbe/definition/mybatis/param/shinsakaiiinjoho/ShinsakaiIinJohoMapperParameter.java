@@ -11,32 +11,60 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護認定審査会委員情報を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0110-010 wangxiaodong
  */
 @lombok.Getter
-public class ShinsakaiIinJohoMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class ShinsakaiIinJohoMapperParameter {
 
-    private final RString shinsakaiIinCode;
+    private RString shinsakaiIinCode;
+    private int dispMax;
+    private boolean isSubeteHyoji;
 
     /**
      * コンストラクタです。
      *
-     * @param shinsakaiIinCode shinsakaiIinCode
+     * @param shinsakaiIinCode 審査会委員コード
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
-    public ShinsakaiIinJohoMapperParameter(RString shinsakaiIinCode) {
+    private ShinsakaiIinJohoMapperParameter(RString shinsakaiIinCode) {
         this.shinsakaiIinCode
-                = requireNonNull(shinsakaiIinCode, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
+                = requireNonNull(shinsakaiIinCode, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員コード"));
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     * @throws NullPointerException 引数のいずれかが{@code null}の場合
+     */
+    private ShinsakaiIinJohoMapperParameter(int dispMax,
+            boolean isSubeteHyoji) {
+        this.dispMax = dispMax;
+        this.isSubeteHyoji = isSubeteHyoji;
     }
 
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param shinsakaiIinCode shinsakaiIinCode
+     * @param shinsakaiIinCode 審査会委員コード
      * @return 介護認定審査会委員情報パラメータ
      */
-    public static ShinsakaiIinJohoMapperParameter createSelectByKeyParam(
+    public static ShinsakaiIinJohoMapperParameter createParamByShinsakaiIinCode(
             RString shinsakaiIinCode) {
         return new ShinsakaiIinJohoMapperParameter(shinsakaiIinCode);
+    }
+
+    /**
+     * キー検索用のパラメータを生成します。
+     *
+     * @param dispMax 最大表示件数
+     * @param isSubeteHyoji 全て表示
+     * @return 介護認定審査会委員情報パラメータ
+     */
+    public static ShinsakaiIinJohoMapperParameter createParamForShinsakaiIin(
+            boolean isSubeteHyoji, int dispMax) {
+        return new ShinsakaiIinJohoMapperParameter(dispMax, isSubeteHyoji);
     }
 
 }

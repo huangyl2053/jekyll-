@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.chosachikugroup.ChosaChikuGroup;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5225ChosaChikuGroupDac;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroupEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5225ChosaChikuGroupDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 調査地区グループマスタを管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class ChosaChikuGroupManager {
 
@@ -50,7 +52,7 @@ public class ChosaChikuGroupManager {
      */
     @Transaction
     public ChosaChikuGroup get調査地区グループマスタ(
-             Code 調査地区グループコード,
+            Code 調査地区グループコード,
             Code 調査地区コード,
             LasdecCode 市町村コード) {
         requireNonNull(調査地区グループコード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区グループコード"));
@@ -98,5 +100,21 @@ public class ChosaChikuGroupManager {
             return false;
         }
         return 1 == dac.save(調査地区グループマスタ.toEntity());
+    }
+
+    /**
+     * 調査地区グループマスタ{@link ChosaChikuGroup}を保存します。
+     *
+     * @param 調査地区グループマスタ {@link ChosaChikuGroup}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean saveOrDelete調査地区グループマスタ(ChosaChikuGroup 調査地区グループマスタ) {
+        requireNonNull(調査地区グループマスタ, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区グループマスタ"));
+        if (!調査地区グループマスタ.hasChanged()) {
+            return false;
+        }
+
+        return 1 == dac.saveOrDelete(調査地区グループマスタ.toEntity());
     }
 }

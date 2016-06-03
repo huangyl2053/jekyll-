@@ -68,10 +68,16 @@ public enum DBACodeShubetsu {
         this.returnType = returnType;
     }
 
+    /**
+     * @return codeShubetsu。
+     */
     public CodeShubetsu getCodeShubetsu() {
         return codeShubetsu;
     }
 
+    /**
+     * @return returnType。
+     */
     public Class getReturnType() {
         return returnType;
     }

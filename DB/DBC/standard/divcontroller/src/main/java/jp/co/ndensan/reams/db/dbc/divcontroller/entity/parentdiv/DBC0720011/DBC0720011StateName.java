@@ -16,7 +16,9 @@ public enum DBC0720011StateName implements IStateEnumerations {
 
     NoChange(""),
     申請検索("申請検索"),
-    申請審査("申請審査");
+    申請審査("申請審査"),
+    完了("完了"),
+    申請審査_保存不可("申請審査_保存不可");
 
     private final RString name;
 

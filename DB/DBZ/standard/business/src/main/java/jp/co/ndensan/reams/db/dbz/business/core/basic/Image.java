@@ -7,16 +7,18 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * イメージ情報を管理するクラスです。
+ *
+ * @reamsid_L DBZ-9999-011 chengsanyuan
  */
 public class Image extends ParentModelBase<ImageIdentifier, DbT5115ImageEntity, Image> implements Serializable {
 
@@ -101,8 +103,7 @@ public class Image extends ParentModelBase<ImageIdentifier, DbT5115ImageEntity, 
     }
 
     /**
-     * イメージ情報のみを変更対象とします。<br/>
-     * {@link DbT5115ImageEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * イメージ情報のみを変更対象とします。<br/> {@link DbT5115ImageEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link Image}
      */
@@ -117,8 +118,7 @@ public class Image extends ParentModelBase<ImageIdentifier, DbT5115ImageEntity, 
     }
 
     /**
-     * 保持するイメージ情報を削除対象とします。<br/>
-     * {@link DbT5115ImageEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持するイメージ情報を削除対象とします。<br/> {@link DbT5115ImageEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link Image}
      */
@@ -146,7 +146,7 @@ public class Image extends ParentModelBase<ImageIdentifier, DbT5115ImageEntity, 
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

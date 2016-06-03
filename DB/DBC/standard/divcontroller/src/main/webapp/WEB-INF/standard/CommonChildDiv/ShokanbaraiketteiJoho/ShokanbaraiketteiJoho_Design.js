@@ -4,6 +4,9 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_rdoShikyukubun = function () {
+                return "onChange_rdoShikyukubun";
+            };
             return Events;
         })();
         ShokanbaraiketteiJoho.Events = Events;

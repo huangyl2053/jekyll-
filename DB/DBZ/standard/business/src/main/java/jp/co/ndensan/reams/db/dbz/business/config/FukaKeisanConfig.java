@@ -99,12 +99,12 @@ public class FukaKeisanConfig {
     }
 
     /**
-     * ランク管理情報_納期統一年度を返します。
+     * ランク管理情報_不均一納期期限を返します。
      *
-     * @return ランク管理情報_納期統一年度
+     * @return ランク管理情報_不均一納期期限
      */
-    public RString get納期統一年度() {
-        return get(ConfigKeysFukaKeisan.ランク管理情報_納期統一年度);
+    public RString get不均一納期期限() {
+        return get(ConfigKeysFukaKeisan.ランク管理情報_不均一納期期限);
     }
 
     private Map<ConfigKeysFukaKeisan, RString> getValue(RDate effectiveDate) {

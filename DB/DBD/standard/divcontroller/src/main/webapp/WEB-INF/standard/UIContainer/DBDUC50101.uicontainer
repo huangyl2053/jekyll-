@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC50101",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "完了処理・更新管理",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD5010001",
+     "toLayoutTitle": "完了処理・更新管理",
+     "toState": "初期表示"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD5010001",
+     "layoutTitle": "完了処理・更新管理",
+     "eventName": "完了状態",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

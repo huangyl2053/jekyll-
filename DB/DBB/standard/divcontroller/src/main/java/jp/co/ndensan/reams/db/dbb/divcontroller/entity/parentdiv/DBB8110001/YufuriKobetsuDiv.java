@@ -1,20 +1,23 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * YufuriKobetsu のクラスファイル 
- * 
- * @author 自動生成
+ * YufuriKobetsu のクラスファイル
+ *
+ * @reamsid_L DBB-0740-010 wangkanglei
  */
 public class YufuriKobetsuDiv extends PanelPublish {
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,24 +35,41 @@ public class YufuriKobetsuDiv extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getddlYufuriShuturyokuKi
+     * @return ddlYufuriShuturyokuKi
+     */
     @JsonProperty("ddlYufuriShuturyokuKi")
     public DropDownList getDdlYufuriShuturyokuKi() {
         return ddlYufuriShuturyokuKi;
     }
 
+    /*
+     * setddlYufuriShuturyokuKi
+     * @param ddlYufuriShuturyokuKi ddlYufuriShuturyokuKi
+     */
     @JsonProperty("ddlYufuriShuturyokuKi")
     public void setDdlYufuriShuturyokuKi(DropDownList ddlYufuriShuturyokuKi) {
-        this.ddlYufuriShuturyokuKi=ddlYufuriShuturyokuKi;
+        this.ddlYufuriShuturyokuKi = ddlYufuriShuturyokuKi;
     }
 
+    /*
+     * getchkYufuriShuturyokuKi
+     * @return chkYufuriShuturyokuKi
+     */
     @JsonProperty("chkYufuriShuturyokuKi")
     public CheckBoxList getChkYufuriShuturyokuKi() {
         return chkYufuriShuturyokuKi;
     }
 
+    /*
+     * setchkYufuriShuturyokuKi
+     * @param chkYufuriShuturyokuKi chkYufuriShuturyokuKi
+     */
     @JsonProperty("chkYufuriShuturyokuKi")
     public void setChkYufuriShuturyokuKi(CheckBoxList chkYufuriShuturyokuKi) {
-        this.chkYufuriShuturyokuKi=chkYufuriShuturyokuKi;
+        this.chkYufuriShuturyokuKi = chkYufuriShuturyokuKi;
     }
 
+    // </editor-fold>
 }

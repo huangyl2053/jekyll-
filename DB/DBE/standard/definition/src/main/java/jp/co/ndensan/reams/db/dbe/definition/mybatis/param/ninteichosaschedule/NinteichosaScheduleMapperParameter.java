@@ -14,7 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 認定調査スケジュール情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class NinteichosaScheduleMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class NinteichosaScheduleMapperParameter {
 
     private final FlexibleDate ninteiChosaYoteiYMD;
     private final RString ninteiChosaYoteiKaishiTime;
@@ -58,8 +59,14 @@ public class NinteichosaScheduleMapperParameter {
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param 主キー1 主キー1
-     * @param 主キー2 主キー2
+     * @param ninteiChosaYoteiYMD 主キー1
+     * @param ninteiChosaYoteiKaishiTime 主キー2
+     * @param ninteiChosaYoteiShuryoTime 主キー1
+     * @param ninteiChosaJikanWaku 主キー2
+     * @param chosaChikuCode 主キー1
+     * @param ninteichosaItakusakiCode 主キー2
+     * @param ninteiChosainNo 主キー1
+     * @param shichosonCode 主キー2
      * @return 身体手帳検索パラメータ
      */
     public static NinteichosaScheduleMapperParameter createSelectByKeyParam(
@@ -71,7 +78,9 @@ public class NinteichosaScheduleMapperParameter {
             RString ninteichosaItakusakiCode,
             RString ninteiChosainNo,
             LasdecCode shichosonCode) {
-        return new NinteichosaScheduleMapperParameter(ninteiChosaYoteiYMD, ninteiChosaYoteiKaishiTime, ninteiChosaYoteiShuryoTime, ninteiChosaJikanWaku, chosaChikuCode, ninteichosaItakusakiCode, ninteiChosainNo, shichosonCode);
+        return new NinteichosaScheduleMapperParameter(
+                ninteiChosaYoteiYMD, ninteiChosaYoteiKaishiTime, ninteiChosaYoteiShuryoTime, ninteiChosaJikanWaku,
+                chosaChikuCode, ninteichosaItakusakiCode, ninteiChosainNo, shichosonCode);
     }
 
 }

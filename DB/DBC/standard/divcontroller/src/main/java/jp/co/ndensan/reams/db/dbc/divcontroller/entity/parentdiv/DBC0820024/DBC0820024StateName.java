@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -9,13 +9,14 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
  * 不正な動作の原因になります。</br>
  * DBC0820024の状態名定義クラスです
  *
- * @author 自動生成
+ * @reamsid_L DBC-1030-010 gongliang
  */
 public enum DBC0820024StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    Default("default");
+    新規修正モード("新規修正モード"),
+    削除モード("削除モード");
 
     private final RString name;
 

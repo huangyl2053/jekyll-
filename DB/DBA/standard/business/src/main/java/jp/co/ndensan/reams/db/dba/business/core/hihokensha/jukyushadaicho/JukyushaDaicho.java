@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 受給者台帳を管理するクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public class JukyushaDaicho extends ModelBase<JukyushaDaichoIdentifier, DbT4001JukyushaDaichoEntity, JukyushaDaicho> implements Serializable {
 
@@ -164,7 +166,7 @@ public class JukyushaDaicho extends ModelBase<JukyushaDaichoIdentifier, DbT4001J
      *
      * @return 直近フラグ
      */
-    public boolean get直近フラグ() {
+    public boolean is直近フラグ() {
         return entity.getChokkinFlag();
     }
 
@@ -641,7 +643,7 @@ public class JukyushaDaicho extends ModelBase<JukyushaDaichoIdentifier, DbT4001J
      *
      * @return 要支援者認定申請区分
      */
-    public boolean get要支援者認定申請区分() {
+    public boolean is要支援者認定申請区分() {
         return entity.getYoshienshaNinteiShinseiFlag();
     }
 
@@ -803,7 +805,7 @@ public class JukyushaDaicho extends ModelBase<JukyushaDaichoIdentifier, DbT4001J
      *
      * @return 資格取得前申請フラグ
      */
-    public boolean get資格取得前申請フラグ() {
+    public boolean is資格取得前申請フラグ() {
         return entity.getShikakuShutokuMaeShinseiFlag();
     }
 
@@ -812,7 +814,7 @@ public class JukyushaDaicho extends ModelBase<JukyushaDaichoIdentifier, DbT4001J
      *
      * @return 旧措置者フラグ
      */
-    public boolean get旧措置者フラグ() {
+    public boolean is旧措置者フラグ() {
         return entity.getKyuSochishaFlag();
     }
 
@@ -821,7 +823,7 @@ public class JukyushaDaicho extends ModelBase<JukyushaDaichoIdentifier, DbT4001J
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 
@@ -846,8 +848,7 @@ public class JukyushaDaicho extends ModelBase<JukyushaDaichoIdentifier, DbT4001J
     }
 
     /**
-     * 受給者台帳のみを変更対象とします。<br/>
-     * {@link DbT4001JukyushaDaichoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 受給者台帳のみを変更対象とします。<br/> {@link DbT4001JukyushaDaichoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link JukyushaDaicho}
      */
@@ -861,8 +862,7 @@ public class JukyushaDaicho extends ModelBase<JukyushaDaichoIdentifier, DbT4001J
     }
 
     /**
-     * 保持する受給者台帳を削除対象とします。<br/>
-     * {@link DbT4001JukyushaDaichoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する受給者台帳を削除対象とします。<br/> {@link DbT4001JukyushaDaichoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link JukyushaDaicho}
      */

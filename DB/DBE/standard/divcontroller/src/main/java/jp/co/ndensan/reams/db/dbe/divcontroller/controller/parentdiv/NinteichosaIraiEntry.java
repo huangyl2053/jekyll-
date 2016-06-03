@@ -7,20 +7,20 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010001.NinteichosaIraiEntryMainDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010001.NinteichosaIraiEntryDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010001.NinteichosaIraiEntryPaperDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010001.NinteichosaIraiEntryRequestContentDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010001.NinteichosaIraiEntryRequestDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010001.NinteichosaIraiEntryTargetChosainDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010001.NinteichosaIraiEntryTargetDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010001.NinteichosaIraiEntryTargetLatestChosainDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010001.NinteichosaIraiEntryTokusokuContentDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010001.NinteichosaIraiEntryTokusokuDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010001.NinteichosaIraiEntryTokusokuPublishDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010001.NinteichosaIraiListDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010001.dgNinteichosaIraiList_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010002.dgChosaItakusakiList_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiEntryDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiEntryMainDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiEntryPaperDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiEntryRequestContentDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiEntryRequestDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiEntryTargetChosainDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiEntryTargetDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiEntryTargetLatestChosainDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiEntryTokusokuContentDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiEntryTokusokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiEntryTokusokuPublishDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiListDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.dgNinteichosaIraiList_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.dgChosaItakusakiList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.shozokuChosainList.dgShozokuChosainList_Row;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -164,10 +164,7 @@ public class NinteichosaIraiEntry {
     }
 
     private void setDisabled_btnToCallNext(boolean disabled) {
-        try {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), disabled);
-        } catch (Exception e) {
-        }
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), disabled);
     }
 
     /**
@@ -716,9 +713,9 @@ public class NinteichosaIraiEntry {
             this.content.getTokusokuCount().setValue(targetInfo.get督促回数());
         }
 
-        private RString _composeKey(RString value) {
-            return value.equals(RString.EMPTY) ? new RString("0") : value.substring(0, 1);
-        }
+//        private RString _composeKey(RString value) {
+//            return value.equals(RString.EMPTY) ? new RString("0") : value.substring(0, 1);
+//        }
 
         /**
          * 指定の対象者情報に、コントロールの値を反映して返します。
@@ -797,7 +794,7 @@ public class NinteichosaIraiEntry {
                 return this.pablish;
             }
 
-            class _Pablish {
+            static class _Pablish {
 
                 private final NinteichosaIraiEntryTokusokuPublishDiv panel;
 

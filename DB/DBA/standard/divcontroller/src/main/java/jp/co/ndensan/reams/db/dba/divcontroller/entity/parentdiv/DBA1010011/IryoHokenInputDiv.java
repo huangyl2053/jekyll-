@@ -4,16 +4,21 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * IryoHokenInput のクラスファイル 
- * 
- * @author 自動生成
+ * IryoHokenInput のクラスファイル
+ *
  */
 public class IryoHokenInputDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     /*
      * [ private の作成 ]
@@ -51,7 +56,7 @@ public class IryoHokenInputDiv extends Panel {
 
     @JsonProperty("txtIryoHokenKanyuDate")
     public void setTxtIryoHokenKanyuDate(TextBoxFlexibleDate txtIryoHokenKanyuDate) {
-        this.txtIryoHokenKanyuDate=txtIryoHokenKanyuDate;
+        this.txtIryoHokenKanyuDate = txtIryoHokenKanyuDate;
     }
 
     @JsonProperty("txtIryoHokenDattaiDate")
@@ -61,7 +66,7 @@ public class IryoHokenInputDiv extends Panel {
 
     @JsonProperty("txtIryoHokenDattaiDate")
     public void setTxtIryoHokenDattaiDate(TextBoxFlexibleDate txtIryoHokenDattaiDate) {
-        this.txtIryoHokenDattaiDate=txtIryoHokenDattaiDate;
+        this.txtIryoHokenDattaiDate = txtIryoHokenDattaiDate;
     }
 
     @JsonProperty("ddlIryoHokenShubetsu")
@@ -71,7 +76,7 @@ public class IryoHokenInputDiv extends Panel {
 
     @JsonProperty("ddlIryoHokenShubetsu")
     public void setDdlIryoHokenShubetsu(DropDownList ddlIryoHokenShubetsu) {
-        this.ddlIryoHokenShubetsu=ddlIryoHokenShubetsu;
+        this.ddlIryoHokenShubetsu = ddlIryoHokenShubetsu;
     }
 
     @JsonProperty("txtIryoHokenHokenshaNo")
@@ -81,7 +86,7 @@ public class IryoHokenInputDiv extends Panel {
 
     @JsonProperty("txtIryoHokenHokenshaNo")
     public void setTxtIryoHokenHokenshaNo(TextBoxCode txtIryoHokenHokenshaNo) {
-        this.txtIryoHokenHokenshaNo=txtIryoHokenHokenshaNo;
+        this.txtIryoHokenHokenshaNo = txtIryoHokenHokenshaNo;
     }
 
     @JsonProperty("txtIryoHokenHokenshaMeisho")
@@ -91,7 +96,7 @@ public class IryoHokenInputDiv extends Panel {
 
     @JsonProperty("txtIryoHokenHokenshaMeisho")
     public void setTxtIryoHokenHokenshaMeisho(TextBox txtIryoHokenHokenshaMeisho) {
-        this.txtIryoHokenHokenshaMeisho=txtIryoHokenHokenshaMeisho;
+        this.txtIryoHokenHokenshaMeisho = txtIryoHokenHokenshaMeisho;
     }
 
     @JsonProperty("txtIryoHokenKigoNo")
@@ -101,7 +106,7 @@ public class IryoHokenInputDiv extends Panel {
 
     @JsonProperty("txtIryoHokenKigoNo")
     public void setTxtIryoHokenKigoNo(TextBox txtIryoHokenKigoNo) {
-        this.txtIryoHokenKigoNo=txtIryoHokenKigoNo;
+        this.txtIryoHokenKigoNo = txtIryoHokenKigoNo;
     }
 
     @JsonProperty("btnIryoHokenKakutei")
@@ -111,7 +116,7 @@ public class IryoHokenInputDiv extends Panel {
 
     @JsonProperty("btnIryoHokenKakutei")
     public void setBtnIryoHokenKakutei(Button btnIryoHokenKakutei) {
-        this.btnIryoHokenKakutei=btnIryoHokenKakutei;
+        this.btnIryoHokenKakutei = btnIryoHokenKakutei;
     }
 
     @JsonProperty("btnIryoHokenTorikeshi")
@@ -121,7 +126,7 @@ public class IryoHokenInputDiv extends Panel {
 
     @JsonProperty("btnIryoHokenTorikeshi")
     public void setBtnIryoHokenTorikeshi(Button btnIryoHokenTorikeshi) {
-        this.btnIryoHokenTorikeshi=btnIryoHokenTorikeshi;
+        this.btnIryoHokenTorikeshi = btnIryoHokenTorikeshi;
     }
 
     // </editor-fold>

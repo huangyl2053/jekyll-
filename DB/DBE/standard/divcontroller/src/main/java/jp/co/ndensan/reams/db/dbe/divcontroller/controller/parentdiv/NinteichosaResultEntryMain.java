@@ -8,27 +8,25 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kihonchosaResultInputCom.KihonchosaResultInputCom;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060002.HihokenshaForNinteichosaResultDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060002.Kihonchosa0911Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060002.Kihonchosa0912Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060002.Kihonchosa0921Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060002.Kihonchosa0931Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060002.Kihonchosa0941Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060002.Kihonchosa0942Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060002.Kihonchosa0951Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060002.Kihonchosa0961Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060002.Kihonchosa0971Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060002.Kihonchosa09Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060002.NinteichosaDetailDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060002.NinteichosaResultEntryMainDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060002.ServiceJokyoServicesCountsDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060002.ServiceJokyoTabDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060002.ShisakaiWaritsukeKiboDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060001.dgNinteichosaResultTaishosha_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.dgNinteichosaResultTaishosha_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.HihokenshaForNinteichosaResultDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.Kihonchosa0911Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.Kihonchosa0912Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.Kihonchosa0921Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.Kihonchosa0931Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.Kihonchosa0941Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.Kihonchosa0942Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.Kihonchosa0951Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.Kihonchosa0961Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.Kihonchosa0971Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.Kihonchosa09Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.NinteichosaDetailDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.NinteichosaResultEntryMainDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.ServiceJokyoServicesCountsDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.ServiceJokyoTabDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.ShisakaiWaritsukeKiboDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.serviceWithCountCom.ServiceWithCountCom;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.tokkijikoCom.TokkijikoCom;
-//import jp.co.ndensan.reams.ur.urz.business.DateOfBirthFactory;
-//import jp.co.ndensan.reams.ur.urz.business.IDateOfBirth;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -141,7 +139,7 @@ public class NinteichosaResultEntryMain {
         return repeateData;
     }
 
-    private final class TokkijikoComFactroy {
+    private static final class TokkijikoComFactroy {
 
         private final TokkijikoCom copyOrigin;
 

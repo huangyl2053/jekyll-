@@ -14,8 +14,11 @@ import lombok.Value;
 
 /**
  * 償還払請求食事費用の識別子です。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanShokujiHiyoIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

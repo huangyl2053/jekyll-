@@ -11,9 +11,12 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
  * 認定調査依頼情報を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
-public class NinteichosaIraiJohoMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class NinteichosaIraiJohoMapperParameter {
 
     private final ShinseishoKanriNo shinseishoKanriNo;
     private final int ninteichosaIraiRirekiNo;

@@ -13,9 +13,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum KokuhorenIFShoriJotaiKubun {
 
+    /**
+     * 未処理
+     */
     未処理("1"),
+    /**
+     * 処理中
+     */
     処理中("2"),
+    /**
+     * 処理済
+     */
     処理済("3"),
+    /**
+     * 処理無
+     */
     処理無("9");
 
     private final RString kubun;

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
     <action>
-        <actionName>CUSTOM-build_no_test</actionName>
-        <displayName>build_no_test</displayName>
+        <actionName>build-with-dependencies</actionName>
+        <reactor>also-make</reactor>
+        <packagings>
+            <packaging>*</packaging>
+        </packagings>
         <goals>
-            <goal>clean</goal>
             <goal>install</goal>
+            <goal>-Dmaven.test.skip</goal>
         </goals>
         <properties>
             <skipTests>true</skipTests>
@@ -20,5 +23,5 @@
         <properties>
             <skipTests>true</skipTests>
         </properties>
-    </action>
+    </action>    
 </actions>

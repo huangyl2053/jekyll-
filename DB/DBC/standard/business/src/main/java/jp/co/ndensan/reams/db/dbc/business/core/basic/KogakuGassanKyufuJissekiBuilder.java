@@ -141,7 +141,7 @@ public class KogakuGassanKyufuJissekiBuilder {
     /**
      * 国保 被保険者証記号を設定します。
      *
-     * @param 国保 被保険者証記号 国保 被保険者証記号
+     * @param 国保_被保険者証記号 国保 被保険者証記号
      * @return {@link KogakuGassanKyufuJissekiBuilder}
      */
     public KogakuGassanKyufuJissekiBuilder set国保_被保険者証記号(RString 国保_被保険者証記号) {

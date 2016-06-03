@@ -4,6 +4,9 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_BeforeOpenDialog = function () {
+                return "onClick_BeforeOpenDialog";
+            };
             return Events;
         })();
         KaigoShikakuKihon.Events = Events;
@@ -70,10 +73,6 @@ var DBZ;
 
             Controls.prototype.btnHihoRireki = function () {
                 return new UZA.ButtonDialog(this.convFiledName("btnHihoRireki"));
-            };
-
-            Controls.prototype.btnRenrakusaki = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnRenrakusaki"));
             };
             return Controls;
         })();

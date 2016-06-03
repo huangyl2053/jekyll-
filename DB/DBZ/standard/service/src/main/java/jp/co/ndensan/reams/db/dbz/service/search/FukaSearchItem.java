@@ -5,8 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.search;
 
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearch.fukaNendo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearch.hihodaichoHihokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearch.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearch.tsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbV7902FukaSearch.*;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchItem;
 
 /**

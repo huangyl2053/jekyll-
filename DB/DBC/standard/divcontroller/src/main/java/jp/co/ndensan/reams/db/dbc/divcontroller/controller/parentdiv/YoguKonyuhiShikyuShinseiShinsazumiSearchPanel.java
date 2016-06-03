@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
 import java.util.ArrayList;
@@ -26,11 +25,14 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @author n8223
  */
 public class YoguKonyuhiShikyuShinseiShinsazumiSearchPanel {
-    
-        /*
+
+    /**
      * 福祉用具購入費支給申請決定 審査日の情報を表示する。
+     *
+     * @param panel YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv
+     * @return ResponseData
      */
-      public ResponseData<YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv> onLoad(YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv panel) {
+    public ResponseData<YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv> onLoad(YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv panel) {
         ResponseData<YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv> response = new ResponseData<>();
 
         panel.getYoguKonyuhiShikyuShinseiShinsazumiSearchCondition().getTxtShinsaDateRange().setFromPlaceHolder(new RString("平26.07.01"));
@@ -40,9 +42,12 @@ public class YoguKonyuhiShikyuShinseiShinsazumiSearchPanel {
         return response;
 
     }
-  
-    /*
+
+    /**
      * 福祉用具購入費支給申請決定 審査済支給申請一覧情報を表示する。
+     *
+     * @param panel YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv
+     * @return ResponseData
      */
     public ResponseData<YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv> onClick_btnSearchMishinsa(YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv panel) {
         ResponseData<YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv> response = new ResponseData<>();
@@ -86,7 +91,7 @@ public class YoguKonyuhiShikyuShinseiShinsazumiSearchPanel {
      */
     private static final RString DATE = new RString("20140701");
     private static final RString YEAR = new RString("201406");
-    
+
     private List<dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row> createRowShinseiShinsazumiData() {
 
         List<dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row> arrayDataList = new ArrayList<>();
@@ -266,6 +271,4 @@ public class YoguKonyuhiShikyuShinseiShinsazumiSearchPanel {
 
     }
 
- 
 }
-

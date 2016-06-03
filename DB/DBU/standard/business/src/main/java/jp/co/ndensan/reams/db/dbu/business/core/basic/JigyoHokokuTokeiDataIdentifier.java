@@ -17,6 +17,7 @@ import lombok.Value;
  * 事業報告統計データの識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class JigyoHokokuTokeiDataIdentifier implements Serializable {
 
     private final FlexibleYear 報告年;

@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3098TandokuJoseikinKyufuShinseiEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -195,6 +195,12 @@ public class TandokuJoseikinKyufuShinseiBuilder {
         return new TandokuJoseikinKyufuShinsei(entity, id);
     }
 
+    /**
+     * TandokuJoseikinKyufuShinseiの編集を行うビルダークラスですを返します。
+     *
+     * @param createTandokuJoseikin 市町村単独助成金給付決定を管理するクラス
+     * @return TandokuJoseikinKyufuShinseiの編集を行うビルダークラスです。
+     */
     public TandokuJoseikinKyufuShinseiBuilder setTandokuJoseikin(TandokuJoseikinKyufuKettei createTandokuJoseikin) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

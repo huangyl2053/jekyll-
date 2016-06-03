@@ -1,17 +1,14 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SeikatsuhogoDetail;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SeikatsuhogoDetail.FujoShuruiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SeikatsuhogoDetail.SeikatsuhogoDetailSubDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * SeikatsuhogoDetail のクラスファイル 
- * 
+ * SeikatsuhogoDetail のクラスファイル
+ *
  * @author 自動生成
  */
 public class SeikatsuhogoDetailDiv extends Panel {
@@ -21,6 +18,7 @@ public class SeikatsuhogoDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("SeikatsuhogoDetailSub")
     private SeikatsuhogoDetailSubDiv SeikatsuhogoDetailSub;
     @JsonProperty("FujoShurui")
@@ -39,7 +37,7 @@ public class SeikatsuhogoDetailDiv extends Panel {
 
     @JsonProperty("SeikatsuhogoDetailSub")
     public void setSeikatsuhogoDetailSub(SeikatsuhogoDetailSubDiv SeikatsuhogoDetailSub) {
-        this.SeikatsuhogoDetailSub=SeikatsuhogoDetailSub;
+        this.SeikatsuhogoDetailSub = SeikatsuhogoDetailSub;
     }
 
     @JsonProperty("FujoShurui")
@@ -49,7 +47,7 @@ public class SeikatsuhogoDetailDiv extends Panel {
 
     @JsonProperty("FujoShurui")
     public void setFujoShurui(FujoShuruiDiv FujoShurui) {
-        this.FujoShurui=FujoShurui;
+        this.FujoShurui = FujoShurui;
     }
 
 }

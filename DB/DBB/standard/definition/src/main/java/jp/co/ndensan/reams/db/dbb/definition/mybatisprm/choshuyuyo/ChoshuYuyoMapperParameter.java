@@ -12,9 +12,12 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**
  * 介護賦課徴収猶予を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBB-9999-013 huangh
  */
 @lombok.Getter
-public class ChoshuYuyoMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class ChoshuYuyoMapperParameter {
 
     private final FlexibleYear choteiNendo;
     private final FlexibleYear fukaNendo;

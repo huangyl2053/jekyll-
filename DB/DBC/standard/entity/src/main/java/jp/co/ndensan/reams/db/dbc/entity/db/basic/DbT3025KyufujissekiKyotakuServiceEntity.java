@@ -760,4 +760,5 @@ public class DbT3025KyufujissekiKyotakuServiceEntity extends DbTableEntityBase<D
 
 // </editor-fold>
 
+
 }

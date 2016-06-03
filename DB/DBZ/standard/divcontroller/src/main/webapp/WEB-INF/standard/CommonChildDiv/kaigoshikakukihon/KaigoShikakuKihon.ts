@@ -9,10 +9,6 @@ module DBZ {
                 this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
             }
-
-            public 連絡先ボタンを() {
-                return new Modes.連絡先ボタンを(this.controls);
-            }
             
             public 被保履歴ボタンを() {
                 return new Modes.被保履歴ボタンを(this.controls);
@@ -24,22 +20,6 @@ module DBZ {
         }
 
         export module Modes {
-
-            export class 連絡先ボタンを {
-                private controls: Controls;
-
-                constructor(controls: Controls) {
-                    this.controls = controls;
-                }
-
-                public 表示する(): void {
-                    this.controls.btnRenrakusaki().displayNone = false;
-                }
-
-                public 表示しない(): void {
-                    this.controls.btnRenrakusaki().displayNone = true;
-                }
-            }
 
             export class 被保履歴ボタンを {
                 private controls: Controls;

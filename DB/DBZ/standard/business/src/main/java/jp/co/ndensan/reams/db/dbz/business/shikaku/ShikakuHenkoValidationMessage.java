@@ -55,7 +55,7 @@ public enum ShikakuHenkoValidationMessage implements IValidationMessage {
      */
     変更事由が１号到達で年齢が65歳未満(DbzErrorMessages.確定不可, "変更日時点での年齢が65歳未満");
 
-    private final Message message;
+    private final transient Message message;
 
     private ShikakuHenkoValidationMessage(IMessageGettable message, String... replacements) {
         this.message = message.getMessage().replace(replacements);

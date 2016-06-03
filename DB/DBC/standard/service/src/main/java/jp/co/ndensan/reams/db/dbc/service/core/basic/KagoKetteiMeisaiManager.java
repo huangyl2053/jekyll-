@@ -53,7 +53,7 @@ public class KagoKetteiMeisaiManager {
     public KagoKetteiMeisai get過誤決定明細(
             FlexibleYearMonth 取扱年月,
             RString 保険者区分,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(取扱年月, UrSystemErrorMessages.値がnull.getReplacedMessage("取扱年月"));
         requireNonNull(保険者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者区分"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));

@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC22501",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "認定調査データ取込（モバイル）",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2250001",
+     "toLayoutTitle": "認定調査データ取込（モバイル）",
+     "toState": ""
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2250001",
+     "layoutTitle": "認定調査データ取込（モバイル）",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

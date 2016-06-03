@@ -10,11 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140001.ShotokushokaihyoIkkatuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140001.dgSaihakko_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 
 /**
  *
@@ -25,11 +25,23 @@ public class ShotokushokaihyoIkkatu {
     private static final RString SAIHAKKO_H25 = new RString("DBB1140001/Saihakko_H25.yml");
     private static final RString SAIHAKKO_H26 = new RString("DBB1140001/Saihakko_H26.yml");
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel ShotokushokaihyoIkkatuDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<ShotokushokaihyoIkkatuDiv> onLoad_HeijunkaAugustKeisan(ShotokushokaihyoIkkatuDiv panel) {
 
         return loadSaihakkoData(panel);
     }
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel ShotokushokaihyoIkkatuDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<ShotokushokaihyoIkkatuDiv> onChange_ddlShoriNendo(ShotokushokaihyoIkkatuDiv panel) {
 
         return loadSaihakkoData(panel);
@@ -52,9 +64,7 @@ public class ShotokushokaihyoIkkatu {
 
         List<dgSaihakko_Row> arrayData = new ArrayList<>();
 
-        if (filename == null || filename.isEmpty()) {
-
-        } else {
+        if (filename != null && !filename.isEmpty()) {
             List<HashMap> demoDataList = YamlLoader.DBB.loadAsList(filename);
             for (HashMap demoData : demoDataList) {
                 // コンストラクタにMapを渡して生成。

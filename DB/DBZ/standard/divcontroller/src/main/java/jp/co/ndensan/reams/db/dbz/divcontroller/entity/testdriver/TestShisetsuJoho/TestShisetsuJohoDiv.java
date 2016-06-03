@@ -1,19 +1,17 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.testdriver.TestShisetsuJoho;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsujoho.IShisetsuJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsujoho.ShisetsuJohoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TestShisetsuJoho のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJoho.IShisetsuJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJoho.ShisetsuJohoDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * TestShisetsuJoho のクラスファイル
+ *
  * @author 自動生成
  */
 public class TestShisetsuJohoDiv extends Panel {
@@ -23,6 +21,7 @@ public class TestShisetsuJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("radSetDaicho")
     private RadioButton radSetDaicho;
     @JsonProperty("btnSetDaicho")
@@ -87,7 +86,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("radSetDaicho")
     public void setRadSetDaicho(RadioButton radSetDaicho) {
-        this.radSetDaicho=radSetDaicho;
+        this.radSetDaicho = radSetDaicho;
     }
 
     @JsonProperty("btnSetDaicho")
@@ -97,7 +96,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("btnSetDaicho")
     public void setBtnSetDaicho(Button btnSetDaicho) {
-        this.btnSetDaicho=btnSetDaicho;
+        this.btnSetDaicho = btnSetDaicho;
     }
 
     @JsonProperty("radSetShisetsu")
@@ -107,7 +106,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("radSetShisetsu")
     public void setRadSetShisetsu(RadioButton radSetShisetsu) {
-        this.radSetShisetsu=radSetShisetsu;
+        this.radSetShisetsu = radSetShisetsu;
     }
 
     @JsonProperty("btnSetShisetsu")
@@ -117,7 +116,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("btnSetShisetsu")
     public void setBtnSetShisetsu(Button btnSetShisetsu) {
-        this.btnSetShisetsu=btnSetShisetsu;
+        this.btnSetShisetsu = btnSetShisetsu;
     }
 
     @JsonProperty("txtSetCode")
@@ -127,7 +126,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("txtSetCode")
     public void setTxtSetCode(TextBox txtSetCode) {
-        this.txtSetCode=txtSetCode;
+        this.txtSetCode = txtSetCode;
     }
 
     @JsonProperty("btnSetCode")
@@ -137,7 +136,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("btnSetCode")
     public void setBtnSetCode(Button btnSetCode) {
-        this.btnSetCode=btnSetCode;
+        this.btnSetCode = btnSetCode;
     }
 
     @JsonProperty("txtSetMeisho")
@@ -147,7 +146,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("txtSetMeisho")
     public void setTxtSetMeisho(TextBox txtSetMeisho) {
-        this.txtSetMeisho=txtSetMeisho;
+        this.txtSetMeisho = txtSetMeisho;
     }
 
     @JsonProperty("btnSetMeisho")
@@ -157,7 +156,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("btnSetMeisho")
     public void setBtnSetMeisho(Button btnSetMeisho) {
-        this.btnSetMeisho=btnSetMeisho;
+        this.btnSetMeisho = btnSetMeisho;
     }
 
     @JsonProperty("line0")
@@ -167,7 +166,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("line0")
     public void setLine0(HorizontalLine line0) {
-        this.line0=line0;
+        this.line0 = line0;
     }
 
     @JsonProperty("txtDaicho")
@@ -177,7 +176,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("txtDaicho")
     public void setTxtDaicho(TextBox txtDaicho) {
-        this.txtDaicho=txtDaicho;
+        this.txtDaicho = txtDaicho;
     }
 
     @JsonProperty("btnGetDaicho")
@@ -187,7 +186,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("btnGetDaicho")
     public void setBtnGetDaicho(Button btnGetDaicho) {
-        this.btnGetDaicho=btnGetDaicho;
+        this.btnGetDaicho = btnGetDaicho;
     }
 
     @JsonProperty("txtDaichoKey")
@@ -197,7 +196,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("txtDaichoKey")
     public void setTxtDaichoKey(TextBoxCode txtDaichoKey) {
-        this.txtDaichoKey=txtDaichoKey;
+        this.txtDaichoKey = txtDaichoKey;
     }
 
     @JsonProperty("btnGetDaichoKey")
@@ -207,7 +206,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("btnGetDaichoKey")
     public void setBtnGetDaichoKey(Button btnGetDaichoKey) {
-        this.btnGetDaichoKey=btnGetDaichoKey;
+        this.btnGetDaichoKey = btnGetDaichoKey;
     }
 
     @JsonProperty("txtShisetsu")
@@ -217,7 +216,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("txtShisetsu")
     public void setTxtShisetsu(TextBox txtShisetsu) {
-        this.txtShisetsu=txtShisetsu;
+        this.txtShisetsu = txtShisetsu;
     }
 
     @JsonProperty("btnGetShisetsu")
@@ -227,7 +226,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("btnGetShisetsu")
     public void setBtnGetShisetsu(Button btnGetShisetsu) {
-        this.btnGetShisetsu=btnGetShisetsu;
+        this.btnGetShisetsu = btnGetShisetsu;
     }
 
     @JsonProperty("txtShisetsuKey")
@@ -237,7 +236,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("txtShisetsuKey")
     public void setTxtShisetsuKey(TextBoxCode txtShisetsuKey) {
-        this.txtShisetsuKey=txtShisetsuKey;
+        this.txtShisetsuKey = txtShisetsuKey;
     }
 
     @JsonProperty("btnGetShisetsuKey")
@@ -247,7 +246,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("btnGetShisetsuKey")
     public void setBtnGetShisetsuKey(Button btnGetShisetsuKey) {
-        this.btnGetShisetsuKey=btnGetShisetsuKey;
+        this.btnGetShisetsuKey = btnGetShisetsuKey;
     }
 
     @JsonProperty("txtCode")
@@ -257,7 +256,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("txtCode")
     public void setTxtCode(TextBox txtCode) {
-        this.txtCode=txtCode;
+        this.txtCode = txtCode;
     }
 
     @JsonProperty("btnGetCode")
@@ -267,7 +266,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("btnGetCode")
     public void setBtnGetCode(Button btnGetCode) {
-        this.btnGetCode=btnGetCode;
+        this.btnGetCode = btnGetCode;
     }
 
     @JsonProperty("txtMeisho")
@@ -277,7 +276,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("txtMeisho")
     public void setTxtMeisho(TextBox txtMeisho) {
-        this.txtMeisho=txtMeisho;
+        this.txtMeisho = txtMeisho;
     }
 
     @JsonProperty("btnGetMeisho")
@@ -287,7 +286,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("btnGetMeisho")
     public void setBtnGetMeisho(Button btnGetMeisho) {
-        this.btnGetMeisho=btnGetMeisho;
+        this.btnGetMeisho = btnGetMeisho;
     }
 
     @JsonProperty("btnInitialize")
@@ -297,7 +296,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("btnInitialize")
     public void setBtnInitialize(Button btnInitialize) {
-        this.btnInitialize=btnInitialize;
+        this.btnInitialize = btnInitialize;
     }
 
     @JsonProperty("btnClear")
@@ -307,7 +306,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("btnClear")
     public void setBtnClear(Button btnClear) {
-        this.btnClear=btnClear;
+        this.btnClear = btnClear;
     }
 
     @JsonProperty("line1")
@@ -317,7 +316,7 @@ public class TestShisetsuJohoDiv extends Panel {
 
     @JsonProperty("line1")
     public void setLine1(HorizontalLine line1) {
-        this.line1=line1;
+        this.line1 = line1;
     }
 
     @JsonProperty("ccdShisetsuJoho")

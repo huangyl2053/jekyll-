@@ -13,12 +13,11 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
 /**
  * DBAの質問メッセージ定義列挙型です。
  *
- * @author N9606 漢那 憲作
+ * @reamsid_L DBA-9999-023 liangbc
  */
 public enum DbaQuestionMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    資格取得確認(3, "資格取得を行ってもよろしいですか？");
 
     private final Message message;
 
@@ -29,7 +28,7 @@ public enum DbaQuestionMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbaQuestionMessages(int no, String message) {
-        this.message = new QuestionMessage(toCode("Q", no), message);
+        this.message = new QuestionMessage(toCode("DBAQ", no), message);
     }
 
     @Override

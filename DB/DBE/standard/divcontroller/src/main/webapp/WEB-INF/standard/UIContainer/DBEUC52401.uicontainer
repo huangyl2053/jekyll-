@@ -1,0 +1,60 @@
+﻿{
+ "uiContainerName": "DBEUC52401",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "介護認定審査会審査結果登録（OCR)",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5100001",
+     "toLayoutTitle": "審査会一覧",
+     "toState": "結果登録_OCR"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5100001",
+     "layoutTitle": "審査会一覧",
+     "eventName": "審査会選択",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5240001",
+     "toLayoutTitle": "介護認定審査会審査結果登録（OCR)",
+     "toState": "結果登録_OCR"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5240001",
+     "layoutTitle": "介護認定審査会審査結果登録（OCR)",
+     "eventName": "一覧に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5100001",
+     "toLayoutTitle": "審査会一覧",
+     "toState": ""
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5240001",
+     "layoutTitle": "介護認定審査会審査結果登録（OCR)",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

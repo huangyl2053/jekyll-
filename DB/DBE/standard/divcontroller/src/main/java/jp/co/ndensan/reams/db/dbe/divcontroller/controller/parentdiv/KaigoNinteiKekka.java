@@ -22,6 +22,9 @@ public final class KaigoNinteiKekka {
     }
 
     //<editor-fold defaultstate="collapsed" desc="enum Mode">
+    /**
+     * Mode
+     */
     enum Mode {
 
         INPUT("0"), READ("09");
@@ -47,6 +50,9 @@ public final class KaigoNinteiKekka {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="enum NinteiKubun">
+    /**
+     * NinteiKubun
+     */
     enum NinteiKubun {
 
         認定("01"), 再調査("02"), 再審査("03"), 却下("09"), 区却("11");
@@ -69,6 +75,9 @@ public final class KaigoNinteiKekka {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="enum TokuteiShippei">
+    /**
+     * TokuteiShippei
+     */
     enum TokuteiShippei {
 
         EMPTY("00", ""),
@@ -93,6 +102,9 @@ public final class KaigoNinteiKekka {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="enum Yokaigodo">
+    /**
+     * Yokaigodo
+     */
     enum Yokaigodo {
 
         EMPTY("01", ""),
@@ -123,6 +135,9 @@ public final class KaigoNinteiKekka {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="enum JotaiZo">
+    /**
+     * JotaiZo
+     */
     enum JotaiZo {
 
         EMPTY("00", ""),
@@ -147,6 +162,9 @@ public final class KaigoNinteiKekka {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="enum YukoKIkanTsukisu">
+    /**
+     * YukoKikanTsukisu
+     */
     enum YukoKikanTsukisu {
 
         ZERO("00", 0),
@@ -271,6 +289,9 @@ public final class KaigoNinteiKekka {
     }
 
     //<editor-fold defaultstate="collapsed" desc="static class Values">
+    /**
+     * Values
+     */
     static class Values {
 
         private FlexibleDate shinseiDate = FlexibleDate.EMPTY;

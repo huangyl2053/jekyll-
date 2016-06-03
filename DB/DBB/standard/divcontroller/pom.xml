@@ -32,7 +32,17 @@
             <artifactId>DbbPersistence</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbbBatchController</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
         <!-- DBX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxDefinition</artifactId>
+        </dependency>
         <!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
@@ -82,6 +92,7 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>db#dbb</finalName>
         <plugins>
             <plugin>
                 <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link NinteiChosaScheduleMemo}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class NinteiChosaScheduleMemoBuilder {
 
@@ -34,6 +36,7 @@ public class NinteiChosaScheduleMemoBuilder {
         this.id = id;
 
     }
+
     /**
      * メモ指定調査地区コードを設定します。
      *

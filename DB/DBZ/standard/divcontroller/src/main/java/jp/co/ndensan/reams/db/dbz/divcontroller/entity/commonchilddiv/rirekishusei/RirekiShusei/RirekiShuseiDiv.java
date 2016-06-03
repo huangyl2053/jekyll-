@@ -6,19 +6,19 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.rirekishu
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiShinseiKihonJohoInput.IKaigoNinteiShinseiKihonJohoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiInput.INinteiInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiInput.NinteiInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiShinseiTodokedesha.INinteiShinseiTodokedeshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ZenkaiNinteiKekkaJoho.IZenkaiNinteiKekkaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.chosaitakusakiandchosaininput.IChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.IKaigoNinteiShinseiKihonJohoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.INinteiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.NinteiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.INinteiShinseiTodokedeshaDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.IShinseiSonotaJohoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.ShinseiSonotaJohoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shujiiIryokikanandshujiiinput.IShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ZenkaiNinteiKekkaJoho.IZenkaiNinteiKekkaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.chosaitakusakiandchosaininput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -27,14 +27,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 
 /**
- * RirekiShusei のクラスファイル 
- * 
+ * RirekiShusei のクラスファイル
+ *
  * @author 自動生成
  */
 public class RirekiShuseiDiv extends Panel implements IRirekiShuseiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-02-19_14-33-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -148,7 +151,7 @@ public class RirekiShuseiDiv extends Panel implements IRirekiShuseiDiv {
      * @return ccdZenkaiNinteiKekka
      */
     @JsonProperty("ccdZenkaiNinteiKekka")
-    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekka() {
+    public ZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekka() {
         return ccdZenkaiNinteiKekka;
     }
 
@@ -374,12 +377,12 @@ public class RirekiShuseiDiv extends Panel implements IRirekiShuseiDiv {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
+    public ShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
         return this.getShijiiIryokikanAndShijiiInput().getCcdShujiiIryokikanAndShujiiInput();
     }
 
     @JsonIgnore
-    public IChosaItakusakiAndChosainInputDiv getCcdChosaItakusakiAndChosainInput() {
+    public ChosaItakusakiAndChosainInputDiv getCcdChosaItakusakiAndChosainInput() {
         return this.getChsaItakusakiAndChosainInput().getCcdChosaItakusakiAndChosainInput();
     }
 

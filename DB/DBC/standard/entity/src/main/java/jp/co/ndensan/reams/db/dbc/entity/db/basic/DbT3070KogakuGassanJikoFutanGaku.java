@@ -6,8 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 高額合算自己負担額テーブルの項目定義クラスです。
  */
 public enum DbT3070KogakuGassanJikoFutanGaku implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -260,7 +259,20 @@ public enum DbT3070KogakuGassanJikoFutanGaku implements IColumnDefinition {
     /**
      * 後期・国保処理区分
      */
-    koki_KokuhoShoriKubun(1, 0);
+    koki_KokuhoShoriKubun(1, 0),
+    /**
+     * 自己負担額証明書リアル発行フラグ
+     * <br/>0：未発行、1：発行済
+     */
+    jikoFutangakuShomeishoRealHakkoFlag(1, 0),
+    /**
+     * バッチ補正実施年月日
+     */
+    batchHoseiJissiYMD(2147483647, 0),
+    /**
+     * リアル補正実施年月日
+     */
+    realHoseiJissiYMD(2147483647, 0);
 
     private final int maxLength;
     private final int scale;
@@ -272,7 +284,7 @@ public enum DbT3070KogakuGassanJikoFutanGaku implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -281,7 +293,7 @@ public enum DbT3070KogakuGassanJikoFutanGaku implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

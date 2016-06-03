@@ -13,12 +13,11 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
 /**
  * DBZの警告メッセージ定義列挙型です。
  *
- * @author N9606 漢那 憲作
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public enum DbzWarningMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    確認(1, "?よろしいですか？");
 
     private final Message message;
 
@@ -29,7 +28,7 @@ public enum DbzWarningMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbzWarningMessages(int no, String message) {
-        this.message = new WarningMessage(toCode("W", no), message);
+        this.message = new WarningMessage(toCode("DBZW", no), message);
     }
 
     @Override

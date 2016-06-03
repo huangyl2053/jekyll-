@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 
 /**
  * 申請届出情報の識別子です。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value
@@ -20,7 +22,7 @@ public class ShinseitodokedeJohoIdentifier implements Serializable {
     /**
      * コンストラクタです。
      *
-     * @param 申請書管理番号
+     * @param 申請書管理番号 ShinseishoKanriNo
      */
     public ShinseitodokedeJohoIdentifier(ShinseishoKanriNo 申請書管理番号) {
         this.申請書管理番号 = 申請書管理番号;

@@ -14,6 +14,7 @@ import lombok.Value;
  * 二次予防基本チェックリストの識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class NijiYoboKihonCheckListIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

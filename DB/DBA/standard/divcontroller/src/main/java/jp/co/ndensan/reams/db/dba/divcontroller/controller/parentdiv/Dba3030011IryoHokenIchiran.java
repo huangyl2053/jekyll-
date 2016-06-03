@@ -20,8 +20,8 @@ public class Dba3030011IryoHokenIchiran {
     /**
      * onLoadの処理を行います。
      *
-     * @param panel
-     * @return
+     * @param panel Dba3030011IryoHokenIchiranDiv
+     * @return Dba3030011IryoHokenIchiranDiv
      */
     public ResponseData<Dba3030011IryoHokenIchiranDiv> onLoad(Dba3030011IryoHokenIchiranDiv panel) {
         IIryoHokenRirekiDiv iryoHokenRireki = panel.getCcdryoHokenRireki();
@@ -32,8 +32,8 @@ public class Dba3030011IryoHokenIchiran {
     /**
      * btnAddIryoHokenの処理を行います。
      *
-     * @param panel
-     * @return
+     * @param panel Dba3030011IryoHokenIchiranDiv
+     * @return Dba3030011IryoHokenIchiranDiv
      */
     public ResponseData<Dba3030011IryoHokenIchiranDiv> onClick_btnAddIryoHoken(Dba3030011IryoHokenIchiranDiv panel) {
         IIryoHokenRirekiDiv iryoHokenRireki = panel.getCcdryoHokenRireki();
@@ -45,8 +45,8 @@ public class Dba3030011IryoHokenIchiran {
      * btnAddUpdateの処理を行います。
      *
      *
-     * @param panel
-     * @return
+     * @param panel Dba3030011IryoHokenIchiranDiv
+     * @return Dba3030011IryoHokenIchiranDiv
      */
     public ResponseData<Dba3030011IryoHokenIchiranDiv> onClick_btnAddUpdate(Dba3030011IryoHokenIchiranDiv panel) {
         IIryoHokenRirekiDiv iryoHokenRireki = panel.getCcdryoHokenRireki();

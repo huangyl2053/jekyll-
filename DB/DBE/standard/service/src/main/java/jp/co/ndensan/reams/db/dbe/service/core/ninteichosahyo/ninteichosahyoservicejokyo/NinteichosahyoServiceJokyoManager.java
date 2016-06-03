@@ -7,13 +7,15 @@ package jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyoser
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyoservicejokyo.NinteichosahyoServiceJokyo;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5207NinteichosahyoServiceJokyoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5207NinteichosahyoServiceJokyoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査票（概況調査）サービスの状況を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class NinteichosahyoServiceJokyoManager {
 

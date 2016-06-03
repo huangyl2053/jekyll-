@@ -36,7 +36,7 @@ module DBZ
                     this.controls = controls;
                 }
 
-                public ServiceJigyoshaMode(): void {
+                public サービス事業者処理モード(): void {
                     this.controls.ServiceJigyosha().displayNone = false;
                     this.controls.OtherTokureiShisetsu().displayNone = true;
                     var gridSetting = this.controls.dgJigyoshaItiran().gridSetting;
@@ -47,7 +47,7 @@ module DBZ
                     this.controls.dgJigyoshaItiran()._control.afterPropertiesSet();
                 }
 
-                public OtherTokureiShisetsuMode(): void {
+                public その他特例施設処理モード(): void {
                     this.controls.ServiceJigyosha().displayNone = true;
                     this.controls.OtherTokureiShisetsu().displayNone = false;
                     var gridSetting = this.controls.dgJigyoshaItiran().gridSetting;
@@ -58,7 +58,7 @@ module DBZ
                     this.controls.dgJigyoshaItiran()._control.afterPropertiesSet();
                 }
 
-                public ShitekiJogaiShisetsuMode(): void {
+                public 適用除外施設処理モード(): void {
                     this.controls.ServiceJigyosha().displayNone= true;
                     this.controls.OtherTokureiShisetsu().displayNone = true;
                     var gridSetting = this.controls.dgJigyoshaItiran().gridSetting;

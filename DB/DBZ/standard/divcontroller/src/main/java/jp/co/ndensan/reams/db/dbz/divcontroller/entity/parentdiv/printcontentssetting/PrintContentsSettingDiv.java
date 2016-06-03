@@ -1,18 +1,15 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.printcontentssetting;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.printcontentssetting.IPrintContentsSettingDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * PrintContentsSetting のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+
+/**
+ * PrintContentsSetting のクラスファイル
+ *
  * @author 自動生成
  */
 public class PrintContentsSettingDiv extends Panel implements IPrintContentsSettingDiv {
@@ -22,6 +19,7 @@ public class PrintContentsSettingDiv extends Panel implements IPrintContentsSett
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtIssueDate")
     private TextBoxDate txtIssueDate;
     @JsonProperty("txtSendDate")
@@ -40,7 +38,7 @@ public class PrintContentsSettingDiv extends Panel implements IPrintContentsSett
 
     @JsonProperty("txtIssueDate")
     public void setTxtIssueDate(TextBoxDate txtIssueDate) {
-        this.txtIssueDate=txtIssueDate;
+        this.txtIssueDate = txtIssueDate;
     }
 
     @JsonProperty("txtSendDate")
@@ -50,9 +48,8 @@ public class PrintContentsSettingDiv extends Panel implements IPrintContentsSett
 
     @JsonProperty("txtSendDate")
     public void setTxtSendDate(TextBoxDate txtSendDate) {
-        this.txtSendDate=txtSendDate;
+        this.txtSendDate = txtSendDate;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

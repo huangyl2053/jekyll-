@@ -8,13 +8,27 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.*;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.edaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.hihokennshaKubunCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.idoYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.isDeleted;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.jushochitokureiKaijoJiyuCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.jushochitokureiKaijoYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.jushochitokureiTekiyoJiyuCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.jushochitokureiTekiyoYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.lastUpdateTimestamp;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.logicalDeletedFlag;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.shichosonCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.shikakuShutokuYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
@@ -26,6 +40,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -33,9 +48,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 被保険者台帳管理のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 linghuhang
  */
 public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDaichoEntity> {
 
+    private static final RString メッセージ_識別コード = new RString("識別コード");
+    private static final RString メッセージ_被保険者番号 = new RString("被保険者番号");
+    private static final RString メッセージ_異動日 = new RString("異動日");
     @InjectSession
     private SqlSession session;
 
@@ -53,7 +73,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
             HihokenshaNo 被保険者番号,
             FlexibleDate 異動日,
             RString 枝番) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
         requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
         requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
 
@@ -108,7 +128,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
     @Transaction
     public List<DbT1001HihokenshaDaichoEntity> selectListHihokenshaNo(HihokenshaNo 被保険者番号,
             FlexibleDate 取得日) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
         requireNonNull(取得日, UrSystemErrorMessages.値がnull.getReplacedMessage("取得日"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -119,7 +139,8 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(shikakuShutokuYMD, 取得日),
                                 not(eq(logicalDeletedFlag, true)),
-                                not(isNULL(jushochitokureiTekiyoYMD))
+                                not(isNULL(jushochitokureiTekiyoYMD)),
+                                not(eq(jushochitokureiTekiyoYMD, ""))
                         )).
                 order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST), new OrderBy(jushochitokureiKaijoYMD, Order.DESC, NullsOrder.LAST)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
@@ -136,7 +157,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
     @Transaction
     public List<DbT1001HihokenshaDaichoEntity> selectListShikibetsuCode(ShikibetsuCode 識別コード,
             FlexibleDate 取得日) throws NullPointerException {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_識別コード.toString()));
         requireNonNull(取得日, UrSystemErrorMessages.値がnull.getReplacedMessage("取得日"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -147,7 +168,8 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                                 eq(shikibetsuCode, 識別コード),
                                 eq(shikakuShutokuYMD, 取得日),
                                 not(eq(logicalDeletedFlag, true)),
-                                not(isNULL(jushochitokureiTekiyoYMD))
+                                not(isNULL(jushochitokureiTekiyoYMD)),
+                                not(eq(jushochitokureiTekiyoYMD, ""))
                         )).
                 order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST), new OrderBy(jushochitokureiKaijoYMD, Order.DESC, NullsOrder.LAST)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
@@ -160,13 +182,13 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
      * @param 異動日 異動日
      * @param 枝番 枝番
      * @return DbT1001HihokenshaDaichoEntity
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     public DbT1001HihokenshaDaichoEntity selectByHihokenshaNo(
             HihokenshaNo 被保険者番号,
             FlexibleDate 異動日,
-            RString 枝番) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+            RString 枝番) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
         requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
         requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
 
@@ -248,7 +270,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
     @Transaction
     public DbT1001HihokenshaDaichoEntity selectHihokenshaNo(
             ShikibetsuCode 識別コード) throws NullPointerException {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_識別コード.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -270,7 +292,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
     @Transaction
     public List<DbT1001HihokenshaDaichoEntity> selectByHihokenshaNo(HihokenshaNo 被保険者番号, FlexibleDate 取得日)
             throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
         requireNonNull(取得日, UrSystemErrorMessages.値がnull.getReplacedMessage("取得日"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
@@ -283,17 +305,70 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
     }
 
     /**
+     * 被保険者台帳管理By論理削除フラグAnd識別コードを取得します。
+     *
+     * @param 論理削除フラグ 論理削除フラグ
+     * @param 識別コード 識別コード
+     * @return DbT1001HihokenshaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity select被保険者台帳管理By論理削除フラグAnd識別コード(
+            boolean 論理削除フラグ,
+            RString 識別コード) throws NullPointerException {
+
+        requireNonNull(論理削除フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("論理削除フラグ"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_識別コード.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(logicalDeletedFlag, 論理削除フラグ),
+                                eq(shikibetsuCode, 識別コード))).
+                order(new OrderBy(DbT1001HihokenshaDaicho.idoYMD, Order.DESC, NullsOrder.LAST),
+                        new OrderBy(DbT1001HihokenshaDaicho.edaNo, Order.DESC, NullsOrder.LAST)).
+                limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者番号、論理削除フラグで被保険者台帳から最新データを取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT1001HihokenshaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity selectByHihokenshaNo(HihokenshaNo 被保険者番号)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(logicalDeletedFlag, false))).
+                order(new OrderBy(DbT1001HihokenshaDaicho.idoYMD, Order.DESC, NullsOrder.LAST),
+                        new OrderBy(DbT1001HihokenshaDaicho.edaNo, Order.DESC, NullsOrder.LAST)).
+                limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
      * 市町村コードと被保険者番号を指定し、該当する被保険者台帳情報を取得します。 <br/>
      * 取得した結果は、異動日によりDescされた状態で取得され、listの先頭が最も最新の異動履歴になります。
      *
      * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
-     * @return
-     * @throws NullPointerException
+     * @return List<DbT1001HihokenshaDaichoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
-    public List<DbT1001HihokenshaDaichoEntity> selectByHihokenshaNoAndShichosonCode(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) throws NullPointerException {
+    public List<DbT1001HihokenshaDaichoEntity> selectByHihokenshaNoAndShichosonCode(LasdecCode 市町村コード,
+            HihokenshaNo 被保険者番号) throws NullPointerException {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -318,7 +393,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
      */
     public DbT1001HihokenshaDaichoEntity selectForNewestHihokenshaDaichoData(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_識別コード.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -336,6 +411,62 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
     }
 
     /**
+     * 被保険者台帳情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @return List<DbT1001HihokenshaDaichoEntity>
+     */
+    @Transaction
+    public List<DbT1001HihokenshaDaichoEntity> get被保険者台帳情報(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                leq(idoYMD, new FlexibleDate(サービス提供年月.toDateString().toString() + "01")),
+                                not(eq(logicalDeletedFlag, true)))).
+                order(by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
+                toList(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者台帳管理情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return List<DbT1001HihokenshaDaichoEntity>
+     */
+    @Transaction
+    public List<DbT1001HihokenshaDaichoEntity> get被保険者台帳管理情報(HihokenshaNo 被保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                not(eq(logicalDeletedFlag, true)))).
+                order(by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
+                toList(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者証資格証発行情報取得です。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT1001HihokenshaDaichoEntity
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity get被保険者証資格証発行情報(HihokenshaNo 被保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(logicalDeletedFlag, false))).order(by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).limit(1)
+                .toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
      * 基準年月日と被保険者番号を指定し、該当する被保険者台帳情報を取得します。
      *
      * @param 被保険者番号 被保険者番号
@@ -343,7 +474,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
      * @return 該当する被保険者台帳情報
      */
     public DbT1001HihokenshaDaichoEntity selectByHihokenshaNoAndKijunDate(HihokenshaNo 被保険者番号, FlexibleDate 基準年月日) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
         requireNonNull(基準年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準年月日"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -358,9 +489,11 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST), new OrderBy(edaNo, Order.DESC, NullsOrder.LAST)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
         for (DbT1001HihokenshaDaichoEntity entity : entityList) {
-            if (!entity.getShikakuSoshitsuYMD().isEmpty() && 基準年月日.isBefore(entity.getShikakuSoshitsuYMD())) {
+            FlexibleDate shikakuSoshitsuYMD = entity.getShikakuSoshitsuYMD();
+            FlexibleDate shikakuShutokuYMD = entity.getShikakuShutokuYMD();
+            if (shikakuSoshitsuYMD != null && !shikakuSoshitsuYMD.isEmpty() && 基準年月日.isBefore(shikakuSoshitsuYMD)) {
                 return entity;
-            } else if (!entity.getShikakuShutokuYMD().isEmpty() && entity.getShikakuShutokuYMD().isBeforeOrEquals(基準年月日)) {
+            } else if (shikakuShutokuYMD != null && !shikakuShutokuYMD.isEmpty() && shikakuShutokuYMD.isBeforeOrEquals(基準年月日)) {
                 return entity;
             }
         }
@@ -375,7 +508,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
      * @return 該当する被保険者台帳情報
      */
     public DbT1001HihokenshaDaichoEntity selectByShikibetsuCodeAndKijunDate(ShikibetsuCode 識別コード, FlexibleDate 基準年月日) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_識別コード.toString()));
         requireNonNull(基準年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準年月日"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -389,9 +522,11 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST), new OrderBy(edaNo, Order.DESC, NullsOrder.LAST)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
         for (DbT1001HihokenshaDaichoEntity entity : entityList) {
-            if (!entity.getShikakuSoshitsuYMD().isEmpty() && 基準年月日.isBefore(entity.getShikakuSoshitsuYMD())) {
+            FlexibleDate shikakuSoshitsuYMD = entity.getShikakuSoshitsuYMD();
+            FlexibleDate shikakuShutokuYMD = entity.getShikakuShutokuYMD();
+            if (shikakuSoshitsuYMD != null && !shikakuSoshitsuYMD.isEmpty() && 基準年月日.isBefore(shikakuSoshitsuYMD)) {
                 return entity;
-            } else if (!entity.getShikakuShutokuYMD().isEmpty() && entity.getShikakuShutokuYMD().isBeforeOrEquals(基準年月日)) {
+            } else if (shikakuShutokuYMD != null && !shikakuShutokuYMD.isEmpty() && shikakuShutokuYMD.isBeforeOrEquals(基準年月日)) {
                 return entity;
             }
         }
@@ -405,7 +540,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
      * @return 該当する被保険者台帳情報から最新1件
      */
     public DbT1001HihokenshaDaichoEntity selectByShikibetsuCode(ShikibetsuCode 識別コード) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_識別コード.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -416,6 +551,92 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                                 eq(isDeleted, false))).
                 order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST), new OrderBy(edaNo, Order.DESC, NullsOrder.LAST)).
                 limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者番号で被保険者台帳を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return List<DbT1001HihokenshaDaichoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity selectByHihokensha(HihokenshaNo 被保険者番号)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where((eq(hihokenshaNo, 被保険者番号))).order(by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).
+                limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 異動日を指定し、該当する被保険者台帳情報のなかから最新の1件を取得します。
+     *
+     * @param 異動日 異動日
+     * @return 該当する被保険者台帳情報から最新1件
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity selectBy異動日(FlexibleDate 異動日) {
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_異動日.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(
+                        leq(idoYMD, 異動日)).
+                order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST)).
+                limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 資格の情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 識別コード 識別コード
+     * @param 異動日 異動日
+     * @param 被保険者区分コード 被保険者区分コード
+     * @return DbT1001HihokenshaDaichoEntity
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity get資格の情報(HihokenshaNo 被保険者番号,
+            ShikibetsuCode 識別コード, FlexibleDate 異動日, RString 被保険者区分コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                leq(異動日, idoYMD),
+                                not(eq(shikibetsuCode, 識別コード)),
+                                eq(hihokennshaKubunCode, 被保険者区分コード))).
+                order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST)).
+                limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者番号、異動日で最大の枝番を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 IdoYMD
+     * @return DbT1001HihokenshaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity selectMaxEdaNoByKey(
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 異動日) throws NullPointerException {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(max(edaNo)).
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(idoYMD, 異動日))).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
 }

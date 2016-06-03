@@ -4,6 +4,25 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnKensakku = function () {
+                return "onClick_btnKensakku";
+            };
+
+            Events.onClick_btnClear = function () {
+                return "onClick_btnClear";
+            };
+
+            Events.onClick_ShinsakaiIinIchiranDate = function () {
+                return "onClick_ShinsakaiIinIchiranDate";
+            };
+
+            Events.onClick_btnModoru = function () {
+                return "onClick_btnModoru";
+            };
+
+            Events.onClick_btnSaikensaku = function () {
+                return "onClick_btnSaikensaku";
+            };
             return Events;
         })();
         NinteiShinsakaiIinGuide.Events = Events;
@@ -56,8 +75,20 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlShinsainShikakuCode"));
             };
 
+            Controls.prototype.ccdHokensha = function () {
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokensha"));
+            };
+
+            Controls.prototype.txtMaxKensu = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtMaxKensu"));
+            };
+
             Controls.prototype.btnKensakku = function () {
                 return new UZA.Button(this.convFiledName("btnKensakku"));
+            };
+
+            Controls.prototype.btnClear = function () {
+                return new UZA.Button(this.convFiledName("btnClear"));
             };
 
             Controls.prototype.ShosaiJoken = function () {

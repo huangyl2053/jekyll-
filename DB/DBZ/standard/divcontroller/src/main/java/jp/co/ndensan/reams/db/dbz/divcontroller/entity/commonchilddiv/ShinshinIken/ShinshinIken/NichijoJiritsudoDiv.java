@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NichijoJiritsudoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,24 +32,40 @@ public class NichijoJiritsudoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getchkShogaiKoreishaNichijoSeikatsuJiritsudo
+     * @return chkShogaiKoreishaNichijoSeikatsuJiritsudo
+     */
     @JsonProperty("chkShogaiKoreishaNichijoSeikatsuJiritsudo")
     public CheckBoxList getChkShogaiKoreishaNichijoSeikatsuJiritsudo() {
         return chkShogaiKoreishaNichijoSeikatsuJiritsudo;
     }
 
+    /*
+     * setchkShogaiKoreishaNichijoSeikatsuJiritsudo
+     * @param chkShogaiKoreishaNichijoSeikatsuJiritsudo chkShogaiKoreishaNichijoSeikatsuJiritsudo
+     */
     @JsonProperty("chkShogaiKoreishaNichijoSeikatsuJiritsudo")
     public void setChkShogaiKoreishaNichijoSeikatsuJiritsudo(CheckBoxList chkShogaiKoreishaNichijoSeikatsuJiritsudo) {
-        this.chkShogaiKoreishaNichijoSeikatsuJiritsudo=chkShogaiKoreishaNichijoSeikatsuJiritsudo;
+        this.chkShogaiKoreishaNichijoSeikatsuJiritsudo = chkShogaiKoreishaNichijoSeikatsuJiritsudo;
     }
 
+    /*
+     * getchkNinchishoKoreishaJiritsu
+     * @return chkNinchishoKoreishaJiritsu
+     */
     @JsonProperty("chkNinchishoKoreishaJiritsu")
     public CheckBoxList getChkNinchishoKoreishaJiritsu() {
         return chkNinchishoKoreishaJiritsu;
     }
 
+    /*
+     * setchkNinchishoKoreishaJiritsu
+     * @param chkNinchishoKoreishaJiritsu chkNinchishoKoreishaJiritsu
+     */
     @JsonProperty("chkNinchishoKoreishaJiritsu")
     public void setChkNinchishoKoreishaJiritsu(CheckBoxList chkNinchishoKoreishaJiritsu) {
-        this.chkNinchishoKoreishaJiritsu=chkNinchishoKoreishaJiritsu;
+        this.chkNinchishoKoreishaJiritsu = chkNinchishoKoreishaJiritsu;
     }
 
     // </editor-fold>

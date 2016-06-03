@@ -6,15 +6,15 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import lombok.Value;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import lombok.Value;
 
 /**
  * 市町村特別給付サービス事業者の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShichosonTokubetsuKyufuJigyoshaIdentifier implements Serializable {
 
     private final JigyoshaNo 市町村特別給付用事業者番号;

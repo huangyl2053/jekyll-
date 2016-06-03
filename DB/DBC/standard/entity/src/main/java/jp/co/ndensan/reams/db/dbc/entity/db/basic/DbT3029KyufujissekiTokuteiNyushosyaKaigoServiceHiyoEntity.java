@@ -1426,4 +1426,5 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
 // </editor-fold>
 
+
 }

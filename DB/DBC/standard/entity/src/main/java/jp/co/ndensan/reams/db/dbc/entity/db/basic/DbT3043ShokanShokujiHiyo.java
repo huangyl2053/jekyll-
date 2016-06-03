@@ -50,7 +50,7 @@ public enum DbT3043ShokanShokujiHiyo implements IColumnDefinition {
     /**
      * 整理番号
      */
-    seiriNp(10, 0),
+    seiriNo(10, 0),
     /**
      * 事業者番号
      */

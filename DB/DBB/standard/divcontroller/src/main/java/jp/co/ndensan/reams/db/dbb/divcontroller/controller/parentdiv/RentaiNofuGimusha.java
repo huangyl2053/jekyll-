@@ -26,10 +26,10 @@ public class RentaiNofuGimusha {
     /**
      * 補足情報パラメータオブジェクトを作成する。 共有子Divが必要とする親Divからのキー情報を返すメソッド
      *
-     * @param hogeCode1
-     * @param hugaCode2
-     * @param hogeCode3
-     * @return
+     * @param hogeCode1 hogeCode1
+     * @param hugaCode2 hugaCode2
+     * @param hogeCode3 hugaCode3
+     * @return SupplementInfoPrm
      */
     public SupplementInfoPrm buildSendParam(String hogeCode1, String hugaCode2, String hogeCode3) {
         Map<String, String> prm = new HashMap<>();
@@ -41,11 +41,12 @@ public class RentaiNofuGimusha {
     }
 
     /**
-     * タブがクリックされ、この共有子DivがActiveになった際に発火するイベント。 タブがアクティブになったとき自動的にcallされる。メソッド名はonActiveにすること。
+     * タブがクリックされ、この共有子DivがActiveになった際に発火するイベント。
+     * タブがアクティブになったとき自動的にcallされる。メソッド名はonActiveにすること。
      * 第一引数は対象の共有子Divのentityのインスタンス。第二引数は親Divから渡されるSupplementInfoPrmのインスタンス。
      *
-     * @param div
-     * @param prm
+     * @param div RentaiNofuGimushaDiv
+     * @param prm SupplementInfoPrm
      * @return ResponseData
      */
     public ResponseData onActive(RentaiNofuGimushaDiv div, SupplementInfoPrm prm) {
@@ -56,11 +57,12 @@ public class RentaiNofuGimusha {
     }
 
     /**
-     * この共有子DivがActive（タブが選択されている状態）で、業務画面側でキー情報の変更が発生した際に発火するイベント。 親画面で、sendDataが更新されたとき自動的にcallされる。メソッド名はonUpdateにすること。
+     * この共有子DivがActive（タブが選択されている状態）で、業務画面側でキー情報の変更が発生した際に発火するイベント。
+     * 親画面で、sendDataが更新されたとき自動的にcallされる。メソッド名はonUpdateにすること。
      * 第一引数は対象の共有子Divのentityのインスタンス。第二引数は親Divから渡されるSupplementInfoPrmのインスタンス。
      *
-     * @param div
-     * @param prm
+     * @param div RentaiNofuGimushaDiv
+     * @param prm SupplementInfoPrm
      * @return ResponseData
      */
     public ResponseData onUpdate(RentaiNofuGimushaDiv div, SupplementInfoPrm prm) {
@@ -74,6 +76,8 @@ public class RentaiNofuGimusha {
 //                prm.getKeyData().get(HosokuInfoKey.コード2.name()),
 //                prm.getKeyData().get(HosokuInfoKey.コード3.name())
 //        );
+        // TODO 未使用のメソッド引数があります。prmのCheckstyle対応。
+        prm.getCommonChildDivID();
         ResponseData res = gyomuMethod(
                 div,
                 null,
@@ -85,6 +89,15 @@ public class RentaiNofuGimusha {
     }
 
     // このメソッドは多業務から呼ばれる場合もあると考え、引数を個別指定するようにしている。
+    /**
+     * 多業務から呼ばれる場合もあると考え
+     *
+     * @param div RentaiNofuGimushaDiv
+     * @param hogeCode1 hogeCode1
+     * @param hugaCode2 hugaCode2
+     * @param hogeCode3 hogeCode3
+     * @return 画面のResponseData
+     */
     public ResponseData gyomuMethod(RentaiNofuGimushaDiv div, String hogeCode1, String hugaCode2, String hogeCode3) {
 
         ResponseData res = new ResponseData();

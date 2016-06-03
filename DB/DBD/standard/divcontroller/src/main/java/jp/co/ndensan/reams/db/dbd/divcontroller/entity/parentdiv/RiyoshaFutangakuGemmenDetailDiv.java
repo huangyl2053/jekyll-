@@ -1,18 +1,15 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.RiyoshaFutangakuGemmenRiyoshaFutanDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * RiyoshaFutangakuGemmenDetail のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * RiyoshaFutangakuGemmenDetail のクラスファイル
+ *
  * @author 自動生成
  */
 public class RiyoshaFutangakuGemmenDetailDiv extends Panel {
@@ -22,6 +19,7 @@ public class RiyoshaFutangakuGemmenDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtShinseiDate")
     private TextBoxFlexibleDate txtShinseiDate;
     @JsonProperty("RiyoshaFutangakuGemmenRiyoshaFutan")
@@ -40,7 +38,7 @@ public class RiyoshaFutangakuGemmenDetailDiv extends Panel {
 
     @JsonProperty("txtShinseiDate")
     public void setTxtShinseiDate(TextBoxFlexibleDate txtShinseiDate) {
-        this.txtShinseiDate=txtShinseiDate;
+        this.txtShinseiDate = txtShinseiDate;
     }
 
     @JsonProperty("RiyoshaFutangakuGemmenRiyoshaFutan")
@@ -50,7 +48,7 @@ public class RiyoshaFutangakuGemmenDetailDiv extends Panel {
 
     @JsonProperty("RiyoshaFutangakuGemmenRiyoshaFutan")
     public void setRiyoshaFutangakuGemmenRiyoshaFutan(RiyoshaFutangakuGemmenRiyoshaFutanDiv RiyoshaFutangakuGemmenRiyoshaFutan) {
-        this.RiyoshaFutangakuGemmenRiyoshaFutan=RiyoshaFutangakuGemmenRiyoshaFutan;
+        this.RiyoshaFutangakuGemmenRiyoshaFutan = RiyoshaFutangakuGemmenRiyoshaFutan;
     }
 
 }

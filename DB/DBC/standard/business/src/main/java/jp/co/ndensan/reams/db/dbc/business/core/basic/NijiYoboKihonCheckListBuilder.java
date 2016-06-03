@@ -407,10 +407,22 @@ public class NijiYoboKihonCheckListBuilder {
         return new NijiYoboKihonCheckList(entity, id);
     }
 
+    /**
+     * NijiYoboKihonCheckListの編集を行うビルダークラス
+     *
+     * @param createNijiYoboNiniCheckList 二次予防任意チェックリストを管理するクラス
+     * @return NijiYoboKihonCheckListの編集を行うビルダークラス
+     */
     public NijiYoboKihonCheckListBuilder setNijiYoboNiniCheckList(NijiYoboNiniCheckList createNijiYoboNiniCheckList) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * NijiYoboKihonCheckListの編集を行うビルダークラス
+     *
+     * @param createNijiYoboCheckListHanteiKekka 二次予防チェックリスト判定結果を管理するクラス
+     * @return NijiYoboKihonCheckListの編集を行うビルダークラス
+     */
     public NijiYoboKihonCheckListBuilder setNijiYoboCheckListHanteiKekka(NijiYoboCheckListHanteiKekka createNijiYoboCheckListHanteiKekka) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

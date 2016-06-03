@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokensha.seikatsuhogojukyus
 
 /**
  * 生活保護受給者のマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public interface ISeikatsuHogoJukyushaMapper {
 

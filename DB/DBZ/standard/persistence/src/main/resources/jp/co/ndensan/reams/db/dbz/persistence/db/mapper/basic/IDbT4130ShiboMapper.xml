@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4130Shiboマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4130ShiboMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4130Shibo">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4130ShiboMapper.allColumns_DbT4130Shibo" />
+     FROM
+         rgdb."DbT4130Shibo"
+     WHERE
+         rgdb."DbT4130Shibo"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4130Shibo">
+         "DbT4130Shibo"."shinseishoKanriNo" as "dbT4130Shibo_shinseishoKanriNo",
+         "DbT4130Shibo"."insertDantaiCd" as "dbT4130Shibo_insertDantaiCd",
+         "DbT4130Shibo"."insertTimestamp" as "dbT4130Shibo_insertTimestamp",
+         "DbT4130Shibo"."insertReamsLoginId" as "dbT4130Shibo_insertReamsLoginId",
+         "DbT4130Shibo"."insertContextId" as "dbT4130Shibo_insertContextId",
+         "DbT4130Shibo"."isDeleted" as "dbT4130Shibo_isDeleted",
+         "DbT4130Shibo"."updateCount" as "dbT4130Shibo_updateCount",
+         "DbT4130Shibo"."lastUpdateTimestamp" as "dbT4130Shibo_lastUpdateTimestamp",
+         "DbT4130Shibo"."lastUpdateReamsLoginId" as "dbT4130Shibo_lastUpdateReamsLoginId",
+         "DbT4130Shibo"."nijiHanteiYMD" as "dbT4130Shibo_nijiHanteiYMD",
+         "DbT4130Shibo"."nijiHanteiYokaigoJotaiKubunCode" as "dbT4130Shibo_nijiHanteiYokaigoJotaiKubunCode",
+         "DbT4130Shibo"."nijiHanteiNinteiYukoKikan" as "dbT4130Shibo_nijiHanteiNinteiYukoKikan",
+         "DbT4130Shibo"."nijiHanteiNinteiYukoKaishiYMD" as "dbT4130Shibo_nijiHanteiNinteiYukoKaishiYMD",
+         "DbT4130Shibo"."nijiHanteiNinteiYukoShuryoYMD" as "dbT4130Shibo_nijiHanteiNinteiYukoShuryoYMD",
+         "DbT4130Shibo"."shinsakaiShiryoSakuseiYMD" as "dbT4130Shibo_shinsakaiShiryoSakuseiYMD",
+         "DbT4130Shibo"."shinsakaiKaisaiNo" as "dbT4130Shibo_shinsakaiKaisaiNo",
+         "DbT4130Shibo"."shinsakaiIken" as "dbT4130Shibo_shinsakaiIken",
+         "DbT4130Shibo"."ichijiHanteiKekkaHenkoRiyu" as "dbT4130Shibo_ichijiHanteiKekkaHenkoRiyu",
+         "DbT4130Shibo"."yokaigoJotaizoReiCode" as "dbT4130Shibo_yokaigoJotaizoReiCode",
+         "DbT4130Shibo"."ninteishinsakaiIkenShurui" as "dbT4130Shibo_ninteishinsakaiIkenShurui",
+         "DbT4130Shibo"."shinsakaiMemo" as "dbT4130Shibo_shinsakaiMemo",
+         "DbT4130Shibo"."nijiHanteiKekkaInputHoho" as "dbT4130Shibo_nijiHanteiKekkaInputHoho",
+         "DbT4130Shibo"."nijiHanteiKekkaInputYMD" as "dbT4130Shibo_nijiHanteiKekkaInputYMD"
+    </sql>
+
+
+    <!--テーブルDbT4130Shiboの項目をDbT4130ShiboEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4130ShiboEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4130ShiboEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT4130Shibo_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT4130Shibo_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4130Shibo_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4130Shibo_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4130Shibo_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4130Shibo_isDeleted" />
+        <result property="updateCount" column="dbT4130Shibo_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4130Shibo_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4130Shibo_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiHanteiYMD" column="dbT4130Shibo_nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nijiHanteiYokaigoJotaiKubunCode" column="dbT4130Shibo_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="nijiHanteiNinteiYukoKikan" column="dbT4130Shibo_nijiHanteiNinteiYukoKikan" />
+        <result property="nijiHanteiNinteiYukoKaishiYMD" column="dbT4130Shibo_nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nijiHanteiNinteiYukoShuryoYMD" column="dbT4130Shibo_nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinsakaiShiryoSakuseiYMD" column="dbT4130Shibo_shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinsakaiKaisaiNo" column="dbT4130Shibo_shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiIken" column="dbT4130Shibo_shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichijiHanteiKekkaHenkoRiyu" column="dbT4130Shibo_ichijiHanteiKekkaHenkoRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokaigoJotaizoReiCode" column="dbT4130Shibo_yokaigoJotaizoReiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ninteishinsakaiIkenShurui" column="dbT4130Shibo_ninteishinsakaiIkenShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiMemo" column="dbT4130Shibo_shinsakaiMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiHanteiKekkaInputHoho" column="dbT4130Shibo_nijiHanteiKekkaInputHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="nijiHanteiKekkaInputYMD" column="dbT4130Shibo_nijiHanteiKekkaInputYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+
+</mapper>

@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiH
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -12,14 +13,31 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxKinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxKinyuKikanShitenCode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- * ShiharaiHohoJyoho のクラスファイル 
- * 
- * @author 自動生成
+ * ShiharaiHohoJyoho のクラスファイル
+ *
+ * @reamsid_L DBC-0300-010 houtianpeng
  */
 public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -54,6 +72,8 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     private TextBoxKinyuKikanCode txtKinyuKikanCode;
     @JsonProperty("txtKinyuKikanShitenCode")
     private TextBoxKinyuKikanShitenCode txtKinyuKikanShitenCode;
+    @JsonProperty("txtTenban")
+    private TextBoxCode txtTenban;
     @JsonProperty("txtYokinShubetsu")
     private TextBox txtYokinShubetsu;
     @JsonProperty("txtKozaNo")
@@ -71,7 +91,7 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     @JsonProperty("txtKeiyakuNo")
     private TextBoxCode txtKeiyakuNo;
     @JsonProperty("btnSelect")
-    private ButtonDialog btnSelect;
+    private Button btnSelect;
     @JsonProperty("txtKeiyakuCode")
     private TextBoxCode txtKeiyakuCode;
     @JsonProperty("txtKeiyakuName")
@@ -80,6 +100,8 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     private TextBoxKinyuKikanCode txtKinyuKikanCode1;
     @JsonProperty("txtKinyuKikanShitenCode1")
     private TextBoxKinyuKikanShitenCode txtKinyuKikanShitenCode1;
+    @JsonProperty("txtTenban1")
+    private TextBoxCode txtTenban1;
     @JsonProperty("txtYokinShubetsu1")
     private TextBox txtYokinShubetsu1;
     @JsonProperty("txtKozaNo1")
@@ -90,6 +112,10 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     private TextBoxAtenaKanaMeisho txtMeigininKana1;
     @JsonProperty("txtMeigininKanji1")
     private TextBoxAtenaMeisho txtMeigininKanji1;
+    @JsonProperty("hdnTxtSubGyomuCode")
+    private RString hdnTxtSubGyomuCode;
+    @JsonProperty("hdnTxtShikibetsuCode")
+    private RString hdnTxtShikibetsuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -350,6 +376,24 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     }
 
     /*
+     * gettxtTenban
+     * @return txtTenban
+     */
+    @JsonProperty("txtTenban")
+    public TextBoxCode getTxtTenban() {
+        return txtTenban;
+    }
+
+    /*
+     * settxtTenban
+     * @param txtTenban txtTenban
+     */
+    @JsonProperty("txtTenban")
+    public void setTxtTenban(TextBoxCode txtTenban) {
+        this.txtTenban = txtTenban;
+    }
+
+    /*
      * gettxtYokinShubetsu
      * @return txtYokinShubetsu
      */
@@ -498,7 +542,7 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
      * @return btnSelect
      */
     @JsonProperty("btnSelect")
-    public ButtonDialog getBtnSelect() {
+    public Button getBtnSelect() {
         return btnSelect;
     }
 
@@ -507,7 +551,7 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
      * @param btnSelect btnSelect
      */
     @JsonProperty("btnSelect")
-    public void setBtnSelect(ButtonDialog btnSelect) {
+    public void setBtnSelect(Button btnSelect) {
         this.btnSelect = btnSelect;
     }
 
@@ -581,6 +625,24 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     @JsonProperty("txtKinyuKikanShitenCode1")
     public void setTxtKinyuKikanShitenCode1(TextBoxKinyuKikanShitenCode txtKinyuKikanShitenCode1) {
         this.txtKinyuKikanShitenCode1 = txtKinyuKikanShitenCode1;
+    }
+
+    /*
+     * gettxtTenban1
+     * @return txtTenban1
+     */
+    @JsonProperty("txtTenban1")
+    public TextBoxCode getTxtTenban1() {
+        return txtTenban1;
+    }
+
+    /*
+     * settxtTenban1
+     * @param txtTenban1 txtTenban1
+     */
+    @JsonProperty("txtTenban1")
+    public void setTxtTenban1(TextBoxCode txtTenban1) {
+        this.txtTenban1 = txtTenban1;
     }
 
     /*
@@ -674,6 +736,42 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     }
 
     /*
+     * gethdnTxtSubGyomuCode
+     * @return hdnTxtSubGyomuCode
+     */
+    @JsonProperty("hdnTxtSubGyomuCode")
+    public RString getHdnTxtSubGyomuCode() {
+        return hdnTxtSubGyomuCode;
+    }
+
+    /*
+     * sethdnTxtSubGyomuCode
+     * @param hdnTxtSubGyomuCode hdnTxtSubGyomuCode
+     */
+    @JsonProperty("hdnTxtSubGyomuCode")
+    public void setHdnTxtSubGyomuCode(RString hdnTxtSubGyomuCode) {
+        this.hdnTxtSubGyomuCode = hdnTxtSubGyomuCode;
+    }
+
+    /*
+     * gethdnTxtShikibetsuCode
+     * @return hdnTxtShikibetsuCode
+     */
+    @JsonProperty("hdnTxtShikibetsuCode")
+    public RString getHdnTxtShikibetsuCode() {
+        return hdnTxtShikibetsuCode;
+    }
+
+    /*
+     * sethdnTxtShikibetsuCode
+     * @param hdnTxtShikibetsuCode hdnTxtShikibetsuCode
+     */
+    @JsonProperty("hdnTxtShikibetsuCode")
+    public void setHdnTxtShikibetsuCode(RString hdnTxtShikibetsuCode) {
+        this.hdnTxtShikibetsuCode = hdnTxtShikibetsuCode;
+    }
+
+    /*
      * [共有子DIVモード]
      */
     @JsonProperty("modes")
@@ -758,5 +856,123 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    private ShiharaiHohoJyohoHandler getHandler() {
+        return new ShiharaiHohoJyohoHandler(this);
+    }
 
+    private ShiharaiHohoJyohoValidationHandler getValidationHandler() {
+        return new ShiharaiHohoJyohoValidationHandler(this);
+    }
+
+    /**
+     * 共通子DIVの初期化処理です。
+     *
+     *
+     * @param 支給申請情報
+     * @param 状態
+     */
+    @Override
+    public void initialize(SikyuSinseiJyohoParameter 支給申請情報, RString 状態) {
+        getHandler().initialize(支給申請情報, 状態);
+    }
+
+    /**
+     * 支払方法を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString getShiharaiHohoRad() {
+        return getHandler().getShiharaiHoho();
+    }
+
+    /**
+     * 開始日を取得します。
+     *
+     * @return RDate
+     */
+    @Override
+    public RDate getStartYMD() {
+        return getHandler().getStartYMD();
+    }
+
+    /**
+     * 終了日を取得します。
+     *
+     * @return RDate
+     */
+    @Override
+    public RDate getEndYMD() {
+        return getHandler().getEndYMD();
+    }
+
+    /**
+     * 開始時間を取得します。
+     *
+     * @return RTime
+     */
+    @Override
+    public RTime getStartHHMM() {
+        return getHandler().getStartHHMM();
+    }
+
+    /**
+     * 終了時間を取得します。
+     *
+     * @return RTime
+     */
+    @Override
+    public RTime getEndHHMM() {
+        return getHandler().getEndHHMM();
+    }
+
+    /**
+     * 口座IDを取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString getKozaNo() {
+        return getHandler().getKozaNo();
+    }
+
+    /**
+     * 契約番号を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString getKeiyakuNo() {
+        return getHandler().getKeiyakuNo();
+    }
+
+    /**
+     * 支払場所を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString getShiharaiBasho() {
+        return getHandler().getShiharaiBasho();
+    }
+
+    /**
+     * 口座IDを取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString getKozaID() {
+        return getHandler().getKozaID();
+    }
+
+    /**
+     * 支払方法情報、バリデーションチェックを行う。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @Override
+    public ValidationMessageControlPairs validateCheck() {
+        return getValidationHandler().validateCheck();
+    }
 }

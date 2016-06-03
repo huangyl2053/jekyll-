@@ -24,13 +24,20 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KyufuKanrihyoInBatchRegistTempSaveProcess extends BatchProcessBase<RString> {
 
     //パラメータ名
-    public static final RString PARAMETER_FILEPATH = new RString("filePath");
+    /**
+     * filePath
+     */
+    public static final RString PARAMETER_FILEPATH;
+
+    static {
+        PARAMETER_FILEPATH = new RString("filePath");
+    }
 
     //パラメータ受取変数
     InputParameter<RString> filePath;
 
     private final Integer レコード種別 = 0;
-    private final String 区切り文字 = ",";
+    private final RString 区切り文字 = new RString(",");
 
     //IBatchWriterを実装したクラス
     @BatchWriter
@@ -39,7 +46,7 @@ public class KyufuKanrihyoInBatchRegistTempSaveProcess extends BatchProcessBase<
 
     //IBatchWriterを実装したクラス
     @BatchWriter
-    BatchEntityCreatedTempTableWriter kyufuKanrihyoDataTempTableWriter;
+    BatchEntityCreatedTempTableWriter kyufuKanrihyoWriter;
 //    BatchPermanentTableWriter kyufuKanrihyoDataTempTableWriter;
 
     @Override
@@ -53,7 +60,7 @@ public class KyufuKanrihyoInBatchRegistTempSaveProcess extends BatchProcessBase<
         kyufuInCtrlTempTableWriter
                 //                = new BatchPermanentTableWriter(DbTKyufuInCtrlTempTableEntity.class);
                 = new BatchEntityCreatedTempTableWriter(DbTKyufuInCtrlTempTableEntity.TABLE_NAME, DbTKyufuInCtrlTempTableEntity.class);
-        kyufuKanrihyoDataTempTableWriter
+        kyufuKanrihyoWriter
                 //                = new BatchPermanentTableWriter(DbTKyufukanrihyoDataTempTableEntity.class);
                 = new BatchEntityCreatedTempTableWriter(DbTKyufukanrihyoDataTempTableEntity.TABLE_NAME, DbTKyufukanrihyoDataTempTableEntity.class);
     }
@@ -63,13 +70,13 @@ public class KyufuKanrihyoInBatchRegistTempSaveProcess extends BatchProcessBase<
 
         KyufuKanrihyoInBatch business = new KyufuKanrihyoInBatch();
 
-        List<RString> data = line.split(区切り文字);
+        List<RString> data = line.split(区切り文字.toString());
         switch (data.get(レコード種別).toString()) {
             case "1": //コントロールレコード
                 kyufuInCtrlTempTableWriter.insert(business.createControlRecord(data, filePath.getValue()));
                 break;
             case "2": //データレコード
-                kyufuKanrihyoDataTempTableWriter.insert(business.createDataRecord(data));
+                kyufuKanrihyoWriter.insert(business.createDataRecord(data));
                 break;
             case "3": //エンドレコード
             default:

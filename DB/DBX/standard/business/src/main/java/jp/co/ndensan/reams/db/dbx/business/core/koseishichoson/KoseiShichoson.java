@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 構成市町村のエンティティです。
+ *
+ * @reamsid_L DBX-9999-011 sunhaidi
  */
 @lombok.Value
 @SuppressWarnings("PMD.UnusedPrivateField")

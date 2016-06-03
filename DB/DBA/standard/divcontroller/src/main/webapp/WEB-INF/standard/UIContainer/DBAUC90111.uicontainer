@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBAUC90111",
+ "displayWizard": false,
+ "subGyomuCode": "DBA",
+ "steps": [
+  {
+   "id": 1,
+   "name": "転入保留特定住所登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA9010011",
+     "toLayoutTitle": "転入保留特定住所登録",
+     "toState": "住所照会"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA9010011",
+     "layoutTitle": "転入保留特定住所登録",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

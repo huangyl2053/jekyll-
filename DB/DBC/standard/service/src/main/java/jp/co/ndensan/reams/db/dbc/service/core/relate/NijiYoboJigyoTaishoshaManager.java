@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.NijiYoboKihonCheckList;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate.NijiYoboJigyoTaishoshaMapperParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.NijiYoboJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3100NijiYoboJigyoTaishoshaDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.INijiYoboJigyoTaishoshaMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.nijiyobojigyotaishosha.INijiYoboJigyoTaishoshaMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

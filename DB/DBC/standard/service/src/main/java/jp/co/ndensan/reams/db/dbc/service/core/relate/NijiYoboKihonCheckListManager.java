@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.NijiYoboNiniCheckList;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate.NijiYoboKihonCheckListMapperParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.NijiYoboKihonCheckListEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3101NijiYoboKihonCheckListDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.INijiYoboKihonCheckListMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.nijiyobokihonchecklist.INijiYoboKihonCheckListMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.NijiYoboCheckListHanteiKekkaManager;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.NijiYoboNiniCheckListManager;

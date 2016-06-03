@@ -1,0 +1,153 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbz.service.core.hihousyosai;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
+import jp.co.ndensan.reams.db.dbz.business.core.hihousyosai.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dbz.business.core.shichoson.Shichoson;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.service.KyuShichosonCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
+
+/**
+ * 被保詳細のクラスです。
+ *
+ * @reamsid_L DBA-0170-020 linghuhang
+ */
+public class HihousyosaiFinder {
+
+    private final DbT7051KoseiShichosonMasterDac dbT7051Dac;
+    private final DbT1001HihokenshaDaichoDac dbT1001Dac;
+
+    /**
+     * コンストラクタです。
+     */
+    HihousyosaiFinder() {
+        dbT7051Dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
+        dbT1001Dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     * @param dbT7051Dac DbT7051KoseiShichosonMasterDac
+     * @param dbT1001dac DbT1001HihokenshaDaichoDac
+     */
+    HihousyosaiFinder(DbT7051KoseiShichosonMasterDac dbT7051Dac,
+            DbT1001HihokenshaDaichoDac dbT1001dac) {
+        this.dbT7051Dac = dbT7051Dac;
+        this.dbT1001Dac = dbT1001dac;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link HihousyosaiFinder}のインスタンスを返します。
+     *
+     * @return HihousyosaiFinder
+     */
+    public static HihousyosaiFinder createInstance() {
+        return InstanceProvider.create(HihousyosaiFinder.class);
+    }
+
+    /**
+     * 所在保険者リスト情報取得します。
+     *
+     * @return SearchResult<KoseiShichosonMaster> 構成市町村マスタリスト
+     */
+    @Transaction
+    public SearchResult<KoseiShichosonMaster> getKoseiShichosonMasterList() {
+        List<KoseiShichosonMaster> businessList = new ArrayList<>();
+        List<DbT7051KoseiShichosonMasterEntity> entityList = dbT7051Dac.selectByGappeiKyuShichosonKubun();
+        if (entityList == null || entityList.isEmpty()) {
+            return SearchResult.of(Collections.<KoseiShichosonMaster>emptyList(), 0, false);
+        }
+        for (DbT7051KoseiShichosonMasterEntity entity : entityList) {
+            businessList.add(new KoseiShichosonMaster(entity));
+        }
+        return SearchResult.of(businessList, 0, false);
+    }
+
+    /**
+     * 旧保険者リスト情報取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 導入形態コード 導入形態コード
+     * @return SearchResult<Shichoson> 旧保険者リスト情報取得
+     */
+    @Transaction
+    public SearchResult<Shichoson> getGappeiShichosonList(
+            LasdecCode 市町村コード,
+            DonyuKeitaiCode 導入形態コード) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(導入形態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("導入形態コード"));
+        List<Shichoson> shichosonList = new ArrayList<>();
+        List<KyuShichosonCode> kyuShichosonCodeList
+                = KyuShichosonCode.getKyuShichosonCodeJoho(市町村コード, 導入形態コード).get旧市町村コード情報List();
+        if (kyuShichosonCodeList == null || kyuShichosonCodeList.isEmpty()) {
+            return SearchResult.of(Collections.<Shichoson>emptyList(), 0, false);
+        }
+        for (KyuShichosonCode kyuShichosonCode : kyuShichosonCodeList) {
+            Shichoson shichoson = new Shichoson();
+            shichoson.set旧市町村コード(kyuShichosonCode.get旧市町村コード());
+            shichoson.set旧市町村名称(kyuShichosonCode.get旧市町村名称());
+            shichosonList.add(shichoson);
+        }
+        return SearchResult.of(shichosonList, 0, false);
+    }
+
+    /**
+     * 得喪情報取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 異動日 異動日
+     * @param 枝番 枝番
+     * @return HihokenshaDaicho 被保険者台帳管理オブジェクト
+     */
+    @Transaction
+    public HihokenshaDaicho getTokusouJoho(HihokenshaNo 被保険者番号, FlexibleDate 異動日, RString 枝番) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+        requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
+        DbT1001HihokenshaDaichoEntity entity = dbT1001Dac.selectByHihokenshaNo(被保険者番号, 異動日, 枝番);
+        if (entity == null) {
+            return null;
+        }
+        return new HihokenshaDaicho(entity);
+    }
+
+    /**
+     * 被保区分リスト情報取得します。
+     *
+     * @return SearchResult<ShikakuKubun> 資格区分リスト
+     */
+    @Transaction
+    public SearchResult<KeyValueDataSource> getHihokubunList() {
+        List<KeyValueDataSource> dataSource = new ArrayList();
+        for (ShikakuKubun seibetsu : ShikakuKubun.values()) {
+            KeyValueDataSource keyValue = new KeyValueDataSource();
+            keyValue.setKey(seibetsu.getコード());
+            keyValue.setValue(seibetsu.get名称());
+            dataSource.add(keyValue);
+        }
+        return SearchResult.of(dataSource, 0, false);
+    }
+}

@@ -58,7 +58,7 @@ var DBZ;
 
                     var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
                     gridSetting.columns[0].visible = false;
-                    gridSetting.columns[18].visible = true;
+                    gridSetting.columns[17].visible = true;
                     gridSetting.isShowModifyButtonColumn = false;
                     gridSetting.isShowDeleteButtonColumn = false;
 
@@ -76,7 +76,7 @@ var DBZ;
                     var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
 
                     gridSetting.columns[0].visible = true;
-                    gridSetting.columns[18].visible = false;
+                    gridSetting.columns[17].visible = false;
                     gridSetting.isShowModifyButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = true;
 
@@ -94,7 +94,7 @@ var DBZ;
                     var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
 
                     gridSetting.columns[0].visible = true;
-                    gridSetting.columns[18].visible = false;
+                    gridSetting.columns[17].visible = false;
                     gridSetting.isShowModifyButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = true;
 
@@ -111,7 +111,7 @@ var DBZ;
                     var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
 
                     gridSetting.columns[0].visible = true;
-                    gridSetting.columns[18].visible = false;
+                    gridSetting.columns[17].visible = false;
                     gridSetting.isShowModifyButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = true;
 
@@ -147,6 +147,7 @@ var DBZ;
                 HokenshaJohoDisplayMode.prototype.TanitsuGappeiNashi = function () {
                     var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
 
+                    gridSetting.columns[13].visible = false;
                     gridSetting.columns[14].visible = false;
                     gridSetting.columns[15].visible = false;
                     gridSetting.columns[16].visible = false;
@@ -159,9 +160,10 @@ var DBZ;
                 HokenshaJohoDisplayMode.prototype.TanitsuGappeiAri = function () {
                     var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
 
+                    gridSetting.columns[13].visible = false;
                     gridSetting.columns[14].visible = false;
-                    gridSetting.columns[15].visible = false;
-                    gridSetting.columns[16].visible = true;
+                    gridSetting.columns[15].visible = true;
+                    gridSetting.columns[16].visible = false;
 
                     this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
@@ -171,9 +173,10 @@ var DBZ;
                 HokenshaJohoDisplayMode.prototype.KoikiGappeiNashi = function () {
                     var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
 
+                    gridSetting.columns[13].visible = true;
                     gridSetting.columns[14].visible = true;
-                    gridSetting.columns[15].visible = true;
-                    gridSetting.columns[16].visible = false;
+                    gridSetting.columns[15].visible = false;
+                    gridSetting.columns[16].visible = true;
 
                     this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
@@ -183,6 +186,7 @@ var DBZ;
                 HokenshaJohoDisplayMode.prototype.KoikiGappeiAri = function () {
                     var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
 
+                    gridSetting.columns[13].visible = true;
                     gridSetting.columns[14].visible = true;
                     gridSetting.columns[15].visible = true;
                     gridSetting.columns[16].visible = true;
@@ -200,37 +204,37 @@ var DBZ;
                     this.controls = controls;
                 }
                 DataGridWidth.prototype.Size1 = function () {
-                    this.controls.dgShikakuShutokuRireki().width = 1090;
+                    this.controls.dgShikakuShutokuRireki().width = 1220;
 
                     this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
                 DataGridWidth.prototype.Size2 = function () {
-                    this.controls.dgShikakuShutokuRireki().width = 1050;
+                    this.controls.dgShikakuShutokuRireki().width = 1080;
 
                     this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
                 DataGridWidth.prototype.Size3 = function () {
-                    this.controls.dgShikakuShutokuRireki().width = 1020;
+                    this.controls.dgShikakuShutokuRireki().width = 1060;
 
                     this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
                 DataGridWidth.prototype.Size4 = function () {
-                    this.controls.dgShikakuShutokuRireki().width = 970;
+                    this.controls.dgShikakuShutokuRireki().width = 960;
 
                     this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
                 DataGridWidth.prototype.Size5 = function () {
-                    this.controls.dgShikakuShutokuRireki().width = 920;
+                    this.controls.dgShikakuShutokuRireki().width = 940;
 
                     this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
                 DataGridWidth.prototype.Size6 = function () {
-                    this.controls.dgShikakuShutokuRireki().width = 870;
+                    this.controls.dgShikakuShutokuRireki().width = 940;
 
                     this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };

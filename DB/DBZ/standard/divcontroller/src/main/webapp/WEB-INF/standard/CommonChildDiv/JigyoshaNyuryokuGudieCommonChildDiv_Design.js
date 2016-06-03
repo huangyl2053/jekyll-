@@ -4,6 +4,33 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_BtnKenCode = function () {
+                return "onChange_BtnKenCode";
+            };
+
+            Events.search_Jigyosya = function () {
+                return "search_Jigyosya";
+            };
+
+            Events.onclick_BtnClear = function () {
+                return "onclick_BtnClear";
+            };
+
+            Events.close_Dialog = function () {
+                return "close_Dialog";
+            };
+
+            Events.select_BtnSenTaKu = function () {
+                return "select_BtnSenTaKu";
+            };
+
+            Events.select_BtnSilyuuseyi = function () {
+                return "select_BtnSilyuuseyi";
+            };
+
+            Events.select_BtnSakujo = function () {
+                return "select_BtnSakujo";
+            };
             return Events;
         })();
         JigyoshaNyuryokuGudieCommonChildDiv.Events = Events;

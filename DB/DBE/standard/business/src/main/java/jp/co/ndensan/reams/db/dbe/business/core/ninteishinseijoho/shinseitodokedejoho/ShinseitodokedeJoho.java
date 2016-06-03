@@ -9,20 +9,24 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 申請届出情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class ShinseitodokedeJoho extends ModelBase<ShinseitodokedeJohoIdentifier, DbT5120ShinseitodokedeJohoEntity, ShinseitodokedeJoho> implements Serializable {
+public class ShinseitodokedeJoho
+        extends ModelBase<ShinseitodokedeJohoIdentifier, DbT5120ShinseitodokedeJohoEntity, ShinseitodokedeJoho>
+        implements Serializable {
 
     private final DbT5120ShinseitodokedeJohoEntity entity;
     private final ShinseitodokedeJohoIdentifier id;
@@ -31,7 +35,7 @@ public class ShinseitodokedeJoho extends ModelBase<ShinseitodokedeJohoIdentifier
      * コンストラクタです。<br/>
      * 申請届出情報の新規作成時に使用します。
      *
-     * @param 申請書管理番号
+     * @param 申請書管理番号 申請書管理番号
      */
     public ShinseitodokedeJoho(ShinseishoKanriNo 申請書管理番号) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
@@ -177,8 +181,7 @@ public class ShinseitodokedeJoho extends ModelBase<ShinseitodokedeJohoIdentifier
     }
 
     /**
-     * 申請届出情報のみを変更対象とします。<br/>
-     * {@link DbT5120ShinseitodokedeJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 申請届出情報のみを変更対象とします。<br/> {@link DbT5120ShinseitodokedeJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShinseitodokedeJoho}
      */
@@ -192,8 +195,7 @@ public class ShinseitodokedeJoho extends ModelBase<ShinseitodokedeJohoIdentifier
     }
 
     /**
-     * 保持する申請届出情報を削除対象とします。<br/>
-     * {@link DbT5120ShinseitodokedeJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する申請届出情報を削除対象とします。<br/> {@link DbT5120ShinseitodokedeJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShinseitodokedeJoho}
      */
@@ -225,6 +227,8 @@ public class ShinseitodokedeJoho extends ModelBase<ShinseitodokedeJohoIdentifier
     }
 
     private static final class _SerializationProxy implements Serializable {
+
+        private static final long serialVersionUID = -6227957924560881664L;
 
         private final DbT5120ShinseitodokedeJohoEntity entity;
         private final ShinseitodokedeJohoIdentifier id;

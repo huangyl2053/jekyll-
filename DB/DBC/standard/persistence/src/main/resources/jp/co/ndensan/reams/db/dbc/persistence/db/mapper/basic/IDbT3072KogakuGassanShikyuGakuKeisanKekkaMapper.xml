@@ -68,7 +68,9 @@
          "DbT3072KogakuGassanShikyuGakuKeisanKekka"."shikyugakuGokei" as "dbT3072KogakuGassanShikyuGakuKeisanKekka_shikyugakuGokei",
          "DbT3072KogakuGassanShikyuGakuKeisanKekka"."dataKubun" as "dbT3072KogakuGassanShikyuGakuKeisanKekka_dataKubun",
          "DbT3072KogakuGassanShikyuGakuKeisanKekka"."uketoriYM" as "dbT3072KogakuGassanShikyuGakuKeisanKekka_uketoriYM",
-         "DbT3072KogakuGassanShikyuGakuKeisanKekka"."sofuYM" as "dbT3072KogakuGassanShikyuGakuKeisanKekka_sofuYM"
+         "DbT3072KogakuGassanShikyuGakuKeisanKekka"."sofuYM" as "dbT3072KogakuGassanShikyuGakuKeisanKekka_sofuYM",
+         "DbT3072KogakuGassanShikyuGakuKeisanKekka"."saisoFG" as "dbT3072KogakuGassanShikyuGakuKeisanKekka_saisoFG",
+         "DbT3072KogakuGassanShikyuGakuKeisanKekka"."sikyugakuKeisanKekkaRenrakuhyoSakuseiYMD" as "dbT3072KogakuGassanShikyuGakuKeisanKekka_sikyugakuKeisanKekkaRenrakuhyoSakuseiYMD"
     </sql>
 
 
@@ -126,6 +128,8 @@
         <result property="dataKubun" column="dbT3072KogakuGassanShikyuGakuKeisanKekka_dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="uketoriYM" column="dbT3072KogakuGassanShikyuGakuKeisanKekka_uketoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="sofuYM" column="dbT3072KogakuGassanShikyuGakuKeisanKekka_sofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="saisoFG" column="dbT3072KogakuGassanShikyuGakuKeisanKekka_saisoFG" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sikyugakuKeisanKekkaRenrakuhyoSakuseiYMD" column="dbT3072KogakuGassanShikyuGakuKeisanKekka_sikyugakuKeisanKekkaRenrakuhyoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
 
 </mapper>

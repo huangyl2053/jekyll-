@@ -14,6 +14,7 @@ import lombok.Value;
  * ランク情報の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class RankJohoIdentifier implements Serializable {
 
     private final FlexibleYear 賦課年度;

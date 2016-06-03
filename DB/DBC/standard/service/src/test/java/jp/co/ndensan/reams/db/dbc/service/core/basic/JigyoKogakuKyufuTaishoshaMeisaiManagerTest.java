@@ -56,7 +56,7 @@ public class JigyoKogakuKyufuTaishoshaMeisaiManagerTest {
             FlexibleYearMonth 主キー2 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_サービス提供年月;
             JigyoshaNo 主キー3 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_事業者番号;
             ServiceShuruiCode 主キー4 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_サービス種類コード;
-            Decimal 主キー5 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー5 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_履歴番号;
             sut.get事業高額介護サービス費給付対象者明細(null, 主キー2, 主キー3, 主キー4, 主キー5);
         }
 
@@ -65,7 +65,7 @@ public class JigyoKogakuKyufuTaishoshaMeisaiManagerTest {
             HihokenshaNo 主キー1 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_被保険者番号;
             JigyoshaNo 主キー3 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_事業者番号;
             ServiceShuruiCode 主キー4 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_サービス種類コード;
-            Decimal 主キー5 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー5 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_履歴番号;
             sut.get事業高額介護サービス費給付対象者明細(主キー1, null, 主キー3, 主キー4, 主キー5);
         }
 
@@ -74,7 +74,7 @@ public class JigyoKogakuKyufuTaishoshaMeisaiManagerTest {
             HihokenshaNo 主キー1 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_サービス提供年月;
             ServiceShuruiCode 主キー4 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_サービス種類コード;
-            Decimal 主キー5 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー5 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_履歴番号;
             sut.get事業高額介護サービス費給付対象者明細(主キー1, 主キー2, null, 主キー4, 主キー5);
         }
 
@@ -83,30 +83,30 @@ public class JigyoKogakuKyufuTaishoshaMeisaiManagerTest {
             HihokenshaNo 主キー1 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_サービス提供年月;
             JigyoshaNo 主キー3 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_事業者番号;
-            Decimal 主キー5 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー5 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_履歴番号;
             sut.get事業高額介護サービス費給付対象者明細(主キー1, 主キー2, 主キー3, null, 主キー5);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型5にnullを指定した場合_NullPointerExceptionが発生する() {
-            HihokenshaNo 主キー1 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_被保険者番号;
-            FlexibleYearMonth 主キー2 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_サービス提供年月;
-            JigyoshaNo 主キー3 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_事業者番号;
-            ServiceShuruiCode 主キー4 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_サービス種類コード;
-            sut.get事業高額介護サービス費給付対象者明細(主キー1, 主キー2, 主キー3, 主キー4, null);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の主キー型5にnullを指定した場合_NullPointerExceptionが発生する() {
+//            HihokenshaNo 主キー1 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_被保険者番号;
+//            FlexibleYearMonth 主キー2 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_サービス提供年月;
+//            JigyoshaNo 主キー3 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_事業者番号;
+//            ServiceShuruiCode 主キー4 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_サービス種類コード;
+//            sut.get事業高額介護サービス費給付対象者明細(主キー1, 主キー2, 主キー3, 主キー4, null);
+//        }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
             when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(JigyoshaNo.class),
-                    any(ServiceShuruiCode.class), any(Decimal.class))).thenReturn(null);
+                    any(ServiceShuruiCode.class), any(int.class))).thenReturn(null);
 
             HihokenshaNo 主キー1 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_サービス提供年月;
             JigyoshaNo 主キー3 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_事業者番号;
             ServiceShuruiCode 主キー4 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_サービス種類コード;
-            Decimal 主キー5 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー5 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_履歴番号;
             JigyoKogakuKyufuTaishoshaMeisai result = sut.get事業高額介護サービス費給付対象者明細(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
             assertThat(result, is(nullValue()));
@@ -116,12 +116,12 @@ public class JigyoKogakuKyufuTaishoshaMeisaiManagerTest {
         public void 検索結果が存在する場合() {
             DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity entity = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.createDbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity();
             when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(JigyoshaNo.class),
-                    any(ServiceShuruiCode.class), any(Decimal.class))).thenReturn(entity);
+                    any(ServiceShuruiCode.class), any(int.class))).thenReturn(entity);
             HihokenshaNo 主キー1 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_サービス提供年月;
             JigyoshaNo 主キー3 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_事業者番号;
             ServiceShuruiCode 主キー4 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_サービス種類コード;
-            Decimal 主キー5 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー5 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_履歴番号;
             JigyoKogakuKyufuTaishoshaMeisai result = sut.get事業高額介護サービス費給付対象者明細(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
             assertThat(result.get被保険者番号().value(), is(DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));

@@ -8,6 +8,14 @@ module DBZ {
 
         export class Events {
 
+            public static onOk_Cancel(): string {
+                return "onOk_Cancel";
+            }
+
+            public static onbtn_AddRow(): string {
+                return "onbtn_AddRow";
+            }
+
         }
 
         export class Controls {
@@ -33,8 +41,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public btnAddRow(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnAddRow"));
+            public btnAddRow(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnAddRow"));
             }
 
             public dgSeikatsuhogoRireki(): UZA.DataGrid {

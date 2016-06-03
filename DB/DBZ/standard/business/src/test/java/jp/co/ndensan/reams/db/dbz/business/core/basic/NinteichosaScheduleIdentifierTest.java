@@ -8,6 +8,7 @@ import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializ
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5221NinteichosaScheduleEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -31,6 +32,8 @@ public class NinteichosaScheduleIdentifierTest extends DbzTestBase {
     private static Code 認定調査時間枠;
     private static RString 認定調査委託先コード;
     private static RString 認定調査員コード;
+    private static LasdecCode 市町村コード;
+    private static Code 調査地区コード;
 
     @BeforeClass
     public static void setUpClass() {
@@ -41,13 +44,16 @@ public class NinteichosaScheduleIdentifierTest extends DbzTestBase {
         認定調査時間枠 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査時間枠;
         認定調査委託先コード = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査委託先コード;
         認定調査員コード = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査員コード;
+        市町村コード = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_市町村コード;
+        調査地区コード = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_調査地区コード;
     }
 
     public static class シリアライズテスト extends DbzTestBase {
 
         @Test
         public void シリアライズできる() {
-            NinteichosaScheduleIdentifier sut = new NinteichosaScheduleIdentifier(認定調査予定年月日, 認定調査予定開始時間, 認定調査予定終了時間, 認定調査時間枠, 認定調査委託先コード, 認定調査員コード);
+            NinteichosaScheduleIdentifier sut = new NinteichosaScheduleIdentifier(認定調査予定年月日, 認定調査予定開始時間, 認定調査予定終了時間,
+                    認定調査時間枠, 調査地区コード, 認定調査委託先コード, 認定調査員コード, 市町村コード);
             assertThat(sut, is(serializable()));
         }
     }

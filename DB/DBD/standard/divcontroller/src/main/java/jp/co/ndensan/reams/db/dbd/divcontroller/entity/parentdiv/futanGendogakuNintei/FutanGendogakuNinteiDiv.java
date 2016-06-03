@@ -1,20 +1,15 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.futanGendogakuNintei;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.futanGendogakuNintei.IFutanGendogakuNinteiDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.futanGendogakuNintei.FutanGendogakuNinteiDetailDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.futanGendogakuNintei.dgFutanGendogakuNinteiList_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * FutanGendogakuNintei のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * FutanGendogakuNintei のクラスファイル
+ *
  * @author 自動生成
  */
 public class FutanGendogakuNinteiDiv extends Panel implements IFutanGendogakuNinteiDiv {
@@ -24,6 +19,7 @@ public class FutanGendogakuNinteiDiv extends Panel implements IFutanGendogakuNin
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtHiddenHihokenshaNo")
     private TextBox txtHiddenHihokenshaNo;
     @JsonProperty("dgFutanGendogakuNinteiList")
@@ -46,7 +42,7 @@ public class FutanGendogakuNinteiDiv extends Panel implements IFutanGendogakuNin
 
     @JsonProperty("txtHiddenHihokenshaNo")
     public void setTxtHiddenHihokenshaNo(TextBox txtHiddenHihokenshaNo) {
-        this.txtHiddenHihokenshaNo=txtHiddenHihokenshaNo;
+        this.txtHiddenHihokenshaNo = txtHiddenHihokenshaNo;
     }
 
     @JsonProperty("dgFutanGendogakuNinteiList")
@@ -56,7 +52,7 @@ public class FutanGendogakuNinteiDiv extends Panel implements IFutanGendogakuNin
 
     @JsonProperty("dgFutanGendogakuNinteiList")
     public void setDgFutanGendogakuNinteiList(DataGrid<dgFutanGendogakuNinteiList_Row> dgFutanGendogakuNinteiList) {
-        this.dgFutanGendogakuNinteiList=dgFutanGendogakuNinteiList;
+        this.dgFutanGendogakuNinteiList = dgFutanGendogakuNinteiList;
     }
 
     @JsonProperty("FutanGendogakuNinteiDetail")
@@ -66,7 +62,7 @@ public class FutanGendogakuNinteiDiv extends Panel implements IFutanGendogakuNin
 
     @JsonProperty("FutanGendogakuNinteiDetail")
     public void setFutanGendogakuNinteiDetail(FutanGendogakuNinteiDetailDiv FutanGendogakuNinteiDetail) {
-        this.FutanGendogakuNinteiDetail=FutanGendogakuNinteiDetail;
+        this.FutanGendogakuNinteiDetail = FutanGendogakuNinteiDetail;
     }
 
     @JsonProperty("btnClose")
@@ -76,9 +72,8 @@ public class FutanGendogakuNinteiDiv extends Panel implements IFutanGendogakuNin
 
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
+        this.btnClose = btnClose;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

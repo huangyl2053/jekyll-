@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KiwarigakuMeisai;
-import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.fuka.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.service.core.relate.KiwarigakuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.config.FuchoConfig;
@@ -128,8 +128,8 @@ public class KiwarigakuHandler {
 
     private void setDisplayMode(FlexibleYear 賦課年度, int 普徴期数) {
 
-        FlexibleYear 納期統一年度 = new FlexibleYear(賦課計算Config.get納期統一年度());
-        boolean is月列表示 = 納期統一年度.isBeforeOrEquals(賦課年度);
+        FlexibleYear 不均一納期期限 = new FlexibleYear(賦課計算Config.get不均一納期期限());
+        boolean is月列表示 = 不均一納期期限.isBeforeOrEquals(賦課年度);
         boolean is追加期1表示 = (追加期1 <= 普徴期数);
         boolean is追加期2表示 = (追加期2 <= 普徴期数);
 

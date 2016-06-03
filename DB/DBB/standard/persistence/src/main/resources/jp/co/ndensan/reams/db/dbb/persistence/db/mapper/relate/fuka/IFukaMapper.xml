@@ -13,7 +13,7 @@
         FROM
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />
         FROM
         rgdb."DbT2002Fuka"
         WHERE
@@ -54,7 +54,7 @@
         FROM
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />
         FROM
         rgdb."DbT2002Fuka"
         WHERE
@@ -95,7 +95,7 @@
         FROM
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />
         FROM
         rgdb."DbT2002Fuka"
         WHERE
@@ -135,9 +135,41 @@
         <id property="介護賦課Entity.tsuchishoNo" column="dbT2002Fuka_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
         <id property="介護賦課Entity.rirekiNo" column="dbT2002Fuka_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <association property="介護賦課Entity" 
-                     resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
+                     resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
         <collection property="介護期別Entity" 
                     resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
     </resultMap>
+    
+    <sql id="FukaRowNumber">
+        
+        SELECT  
+            row_number() over(order by "fukaNendo" , "choteiNendo" ,"tsuchishoNo", "rirekiNo") as rownum,
+            *
+        FROM 
+            rgdb."DbT2002Fuka"
+        WHERE 
+            "tsuchishoNo" = #{tsuchishoNo}
+        AND "fukaNendo" <![CDATA[<=]]> #{fukaNendo}
+    </sql>
+
+    <!-- RelateEntityを取得できるSQL。 -->
+    <select id="get前賦課履歴" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter" fetchSize="500">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />
+        FROM  (<include refid="FukaRowNumber" />) As "DbT2002Fuka"
+        WHERE "DbT2002Fuka".rownum <![CDATA[<]]>
+        (
+        SELECT
+            A.rownum
+        FROM
+            (<include refid="FukaRowNumber" />) as A
+        WHERE
+                A."choteiNendo" = #{choteiNendo}
+            AND A."fukaNendo" =   #{fukaNendo}
+            AND A."tsuchishoNo" = #{tsuchishoNo}
+            AND A."rirekiNo" =    #{rirekiNo}
+        )
+        ORDER BY "DbT2002Fuka".rownum DESC
+    </select>
 
 </mapper>

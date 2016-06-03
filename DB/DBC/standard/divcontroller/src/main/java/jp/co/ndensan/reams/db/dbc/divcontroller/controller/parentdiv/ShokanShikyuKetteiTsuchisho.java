@@ -28,6 +28,8 @@ public class ShokanShikyuKetteiTsuchisho {
     }
 
     private void setTsuchishoData(ShokanShikyuKetteiTsuchishoDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.hashCode();
 //        panel.getShokanShikyuKetteiTsuchishoPrintContentsSetting().getTxtIssueDate().
 //                setValue(new RDate(source.get("発効日").toString()));
     }

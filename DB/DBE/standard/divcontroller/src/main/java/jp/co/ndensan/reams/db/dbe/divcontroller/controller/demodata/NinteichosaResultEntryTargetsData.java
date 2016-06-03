@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData.Chosain;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060001.dgNinteichosaResultTaishosha_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.dgNinteichosaResultTaishosha_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
@@ -30,6 +30,11 @@ public class NinteichosaResultEntryTargetsData {
         FILE_NAME = new RString("dbe2060001/NinteichosaResultEntryTargets.yml");
     }
 
+    /**
+     * 認定調査依頼登録対象者一覧情報を取得します。
+     *
+     * @return IDemoData<dgNinteichosaResultTaishosha_Row>
+     */
     public IDemoData<dgNinteichosaResultTaishosha_Row> get認定調査依頼登録対象者一覧() {
         List<HashMap> dataFromYaml = YamlLoader.DBE.loadAsList(FILE_NAME);
         return new DemoData(dataFromYaml, new YamlUtil.Converter.IConverter<dgNinteichosaResultTaishosha_Row>() {

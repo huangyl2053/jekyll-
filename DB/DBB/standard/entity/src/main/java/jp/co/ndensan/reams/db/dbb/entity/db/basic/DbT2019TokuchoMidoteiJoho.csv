@@ -1,0 +1,8 @@
+﻿shoriNendo,UDD012YSeireki,FlexibleYear,,,,,処理年度,A
+kisoNenkinNo,varchar,RString,,,,,基礎年金番号,A
+nenkinCode,varchar,RString,,,,,年金コード,A
+hosokuM,varchar,RString,,,,,捕捉月,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
+kaishiM,varchar,RString,,,,,開始月,A
+fuichiRiyuCode,varchar,RString,,,,,不一致理由コード,A
+kakuninJokyoKbn,varchar,RString,,,,,確認状況区分,A

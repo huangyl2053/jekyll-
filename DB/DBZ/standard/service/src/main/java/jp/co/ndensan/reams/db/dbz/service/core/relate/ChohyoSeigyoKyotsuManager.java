@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsuControl;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.ChohyoSeigyoKyotsuMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.IChohyoSeigyoKyotsuMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chohyoseigyokyotsu.IChohyoSeigyoKyotsuMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuControlManager;

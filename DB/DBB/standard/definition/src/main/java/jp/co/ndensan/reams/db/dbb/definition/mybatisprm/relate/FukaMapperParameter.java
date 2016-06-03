@@ -70,18 +70,38 @@ public final class FukaMapperParameter {
         return new FukaMapperParameter(主キー1, FlexibleYear.EMPTY, true, false);
     }
 
+    /**
+     * 主キー1を返します。
+     *
+     * @return 主キー1
+     */
     public FlexibleYear get主キー1() {
         return 主キー1;
     }
 
+    /**
+     * 主キー2を返します。
+     *
+     * @return 主キー2
+     */
     public FlexibleYear get主キー2() {
         return 主キー2;
     }
 
+    /**
+     * isUses主キー1
+     *
+     * @return uses主キー1
+     */
     public boolean isUses主キー1() {
         return uses主キー1;
     }
 
+    /**
+     * isUses主キー2
+     *
+     * @return uses主キー2
+     */
     public boolean isUses主キー2() {
         return uses主キー2;
     }

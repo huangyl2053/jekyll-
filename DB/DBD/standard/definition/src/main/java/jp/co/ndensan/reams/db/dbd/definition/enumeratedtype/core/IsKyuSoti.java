@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 旧措置適用フラグを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBD-9999-023 liangbc
  */
 public enum IsKyuSoti {
 
@@ -32,7 +32,7 @@ public enum IsKyuSoti {
      *
      * @return 旧措置適用フラグのコード
      */
-    public boolean getコード() {
+    public boolean is適用() {
         return code;
     }
 

@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0526SeikatsuHo
 
 /**
  * {@link SeikatsuHogoFujoShurui}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public class SeikatsuHogoFujoShuruiBuilder {
 

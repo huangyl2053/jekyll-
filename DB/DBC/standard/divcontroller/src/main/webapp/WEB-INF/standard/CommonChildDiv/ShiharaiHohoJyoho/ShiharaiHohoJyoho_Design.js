@@ -4,6 +4,41 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_radMadoguti = function () {
+                return "onClick_radMadoguti";
+            };
+
+            Events.onBlur_txtStartYMD = function () {
+                return "onBlur_txtStartYMD";
+            };
+
+            Events.onBlur_txtEndYMD = function () {
+                return "onBlur_txtEndYMD";
+            };
+
+            Events.onClick_radKoza = function () {
+                return "onClick_radKoza";
+            };
+
+            Events.onChange_ddlKozaID = function () {
+                return "onChange_ddlKozaID";
+            };
+
+            Events.onOkClose_ddlKozaID = function () {
+                return "onOkClose_ddlKozaID";
+            };
+
+            Events.onClick_radJyryoinin = function () {
+                return "onClick_radJyryoinin";
+            };
+
+            Events.onBlur_txtKeiyakuNo = function () {
+                return "onBlur_txtKeiyakuNo";
+            };
+
+            Events.onClick_btnKeiyakuNo = function () {
+                return "onClick_btnKeiyakuNo";
+            };
             return Events;
         })();
         ShiharaiHohoJyoho.Events = Events;
@@ -84,6 +119,10 @@ var DBC;
                 return new UZA.TextBoxKinyuKikanShitenCode(this.convFiledName("txtKinyuKikanShitenCode"));
             };
 
+            Controls.prototype.txtTenban = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtTenban"));
+            };
+
             Controls.prototype.txtYokinShubetsu = function () {
                 return new UZA.TextBox(this.convFiledName("txtYokinShubetsu"));
             };
@@ -117,7 +156,7 @@ var DBC;
             };
 
             Controls.prototype.btnSelect = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnSelect"));
+                return new UZA.Button(this.convFiledName("btnSelect"));
             };
 
             Controls.prototype.txtKeiyakuCode = function () {
@@ -134,6 +173,10 @@ var DBC;
 
             Controls.prototype.txtKinyuKikanShitenCode1 = function () {
                 return new UZA.TextBoxKinyuKikanShitenCode(this.convFiledName("txtKinyuKikanShitenCode1"));
+            };
+
+            Controls.prototype.txtTenban1 = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtTenban1"));
             };
 
             Controls.prototype.txtYokinShubetsu1 = function () {

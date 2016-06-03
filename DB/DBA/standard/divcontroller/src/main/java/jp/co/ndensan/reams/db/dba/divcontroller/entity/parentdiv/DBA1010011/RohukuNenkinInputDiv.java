@@ -1,18 +1,16 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * RohukuNenkinInput のクラスファイル 
- * 
- * @author 自動生成
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+
+/**
+ * RohukuNenkinInput のクラスファイル
+ *
  */
 public class RohukuNenkinInputDiv extends Panel {
     /*
@@ -21,6 +19,7 @@ public class RohukuNenkinInputDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtRofukuNenkinKaishiDate")
     private TextBoxFlexibleDate txtRofukuNenkinKaishiDate;
     @JsonProperty("txtRofukuNenkinShuryoDate")
@@ -41,7 +40,7 @@ public class RohukuNenkinInputDiv extends Panel {
 
     @JsonProperty("txtRofukuNenkinKaishiDate")
     public void setTxtRofukuNenkinKaishiDate(TextBoxFlexibleDate txtRofukuNenkinKaishiDate) {
-        this.txtRofukuNenkinKaishiDate=txtRofukuNenkinKaishiDate;
+        this.txtRofukuNenkinKaishiDate = txtRofukuNenkinKaishiDate;
     }
 
     @JsonProperty("txtRofukuNenkinShuryoDate")
@@ -51,7 +50,7 @@ public class RohukuNenkinInputDiv extends Panel {
 
     @JsonProperty("txtRofukuNenkinShuryoDate")
     public void setTxtRofukuNenkinShuryoDate(TextBoxFlexibleDate txtRofukuNenkinShuryoDate) {
-        this.txtRofukuNenkinShuryoDate=txtRofukuNenkinShuryoDate;
+        this.txtRofukuNenkinShuryoDate = txtRofukuNenkinShuryoDate;
     }
 
     @JsonProperty("txtRofukuNenkinJukyushaNo")
@@ -61,7 +60,7 @@ public class RohukuNenkinInputDiv extends Panel {
 
     @JsonProperty("txtRofukuNenkinJukyushaNo")
     public void setTxtRofukuNenkinJukyushaNo(TextBoxCode txtRofukuNenkinJukyushaNo) {
-        this.txtRofukuNenkinJukyushaNo=txtRofukuNenkinJukyushaNo;
+        this.txtRofukuNenkinJukyushaNo = txtRofukuNenkinJukyushaNo;
     }
 
 }

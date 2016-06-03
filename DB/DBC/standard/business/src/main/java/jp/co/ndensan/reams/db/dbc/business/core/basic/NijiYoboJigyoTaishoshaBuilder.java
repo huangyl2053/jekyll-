@@ -118,6 +118,12 @@ public class NijiYoboJigyoTaishoshaBuilder {
         return new NijiYoboJigyoTaishosha(entity, id);
     }
 
+    /**
+     * NijiYoboJigyoTaishoshaの編集を行うビルダークラスを返します。
+     *
+     * @param createNijiYoboKihonCheckList 二次予防基本チェックリストを管理するクラス
+     * @return NijiYoboJigyoTaishoshaの編集を行うビルダークラス
+     */
     public NijiYoboJigyoTaishoshaBuilder setNijiYoboKihonCheckList(NijiYoboKihonCheckList createNijiYoboKihonCheckList) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

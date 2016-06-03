@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyotakukeika.kyotakukeikakuto
 
 /**
  * 居宅給付計画届出のマッパーインタフェースです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public interface IKyotakuKeikakuTodokedeMapper {
 

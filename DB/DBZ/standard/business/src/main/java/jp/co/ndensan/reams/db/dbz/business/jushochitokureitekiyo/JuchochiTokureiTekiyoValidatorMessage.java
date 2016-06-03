@@ -23,7 +23,7 @@ public enum JuchochiTokureiTekiyoValidatorMessage implements IValidationMessage 
     //TODO n8178 欲しいエラーがDBAのため見れない（DBAE00002）。対応を相談する。
     住所地特例適用日が_最新履歴の取得日_変更日_住所地特例解除日より前(UrErrorMessages.不正, "住所地特例適用日");
 
-    private final Message message;
+    private final transient Message message;
 
     private JuchochiTokureiTekiyoValidatorMessage(IMessageGettable message, String... replacements) {
         this.message = message.getMessage().replace(replacements);

@@ -28,6 +28,8 @@ public class ShokanShikyuKetteiKihon {
     }
 
     private void setKihonData(ShokanShikyuKetteiKihonDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getShokanShikyuKetteiKaigoKihon();
 //        ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
 //        int rowId = 0;
 

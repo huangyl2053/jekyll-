@@ -18,7 +18,7 @@ public enum NinteiYukoKikanTsukisuSpec implements IPredicate<NinteiYukoKikanTsuk
     有効期間月数がNullでないこと {
                 /**
                  *
-                 * @param ninteiYukoKikanTsukisu 認定有効期間月数
+                 * @param ninteiyukokikantsukisu 認定有効期間月数
                  * @return true：仕様を満たす、false：仕様を満たさない
                  */
                 @Override

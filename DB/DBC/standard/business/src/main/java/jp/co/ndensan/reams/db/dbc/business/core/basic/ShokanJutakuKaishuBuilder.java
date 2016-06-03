@@ -14,9 +14,12 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * {@link ShokanJutakuKaishu}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
 public class ShokanJutakuKaishuBuilder {
 
@@ -150,6 +153,30 @@ public class ShokanJutakuKaishuBuilder {
     }
 
     /**
+     * 事前申請サービス提供年月を設定します。
+     *
+     * @param 事前申請サービス提供年月 事前申請サービス提供年月
+     * @return {@link ShokanJutakuKaishuBuilder}
+     */
+    public ShokanJutakuKaishuBuilder set事前申請サービス提供年月(FlexibleYearMonth 事前申請サービス提供年月) {
+//        requireNonNull(事前申請サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("事前申請サービス提供年月"));
+        entity.setJizenServiceTeikyoYM(事前申請サービス提供年月);
+        return this;
+    }
+
+    /**
+     * 事前申請整理番号を設定します。
+     *
+     * @param 事前申請整理番号 事前申請整理番号
+     * @return {@link ShokanJutakuKaishuBuilder}
+     */
+    public ShokanJutakuKaishuBuilder set事前申請整理番号(RString 事前申請整理番号) {
+//        requireNonNull(事前申請整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事前申請整理番号"));
+        entity.setJizenSeiriNo(事前申請整理番号);
+        return this;
+    }
+
+    /**
      * 住宅改修事業者名を設定します。
      *
      * @param 住宅改修事業者名 住宅改修事業者名
@@ -192,7 +219,7 @@ public class ShokanJutakuKaishuBuilder {
      * @return {@link ShokanJutakuKaishuBuilder}
      */
     public ShokanJutakuKaishuBuilder set審査方法区分コード(RString 審査方法区分コード) {
-        requireNonNull(審査方法区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("審査方法区分コード"));
+//        requireNonNull(審査方法区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("審査方法区分コード"));
         entity.setShinsaHohoKubunCode(審査方法区分コード);
         return this;
     }
@@ -218,6 +245,29 @@ public class ShokanJutakuKaishuBuilder {
     public ShokanJutakuKaishuBuilder set差額金額(int 差額金額) {
         requireNonNull(差額金額, UrSystemErrorMessages.値がnull.getReplacedMessage("差額金額"));
         entity.setSagakuKingaku(差額金額);
+        return this;
+    }
+
+    /**
+     * 住宅改修内容を設定します。
+     *
+     * @param 住宅改修内容 住宅改修内容
+     * @return {@link ShokanJutakuKaishuBuilder}
+     */
+    public ShokanJutakuKaishuBuilder set住宅改修内容(RString 住宅改修内容) {
+        requireNonNull(住宅改修内容, UrSystemErrorMessages.値がnull.getReplacedMessage("住宅改修内容"));
+        entity.setJutakuKaishuNaiyo(住宅改修内容);
+        return this;
+    }
+
+    /**
+     * ステータスを設定します
+     *
+     * @param ステータス ステータス
+     * @return {@link ShokanJutakuKaishuBuilder}
+     */
+    public ShokanJutakuKaishuBuilder setステータス(EntityDataState ステータス) {
+        entity.setState(ステータス);
         return this;
     }
 

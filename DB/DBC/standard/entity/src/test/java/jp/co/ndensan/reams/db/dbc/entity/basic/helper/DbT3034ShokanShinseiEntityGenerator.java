@@ -45,7 +45,7 @@ public final class DbT3034ShokanShinseiEntityGenerator {
     public static final FlexibleDate DEFAULT_支払期間終了年月日 = new FlexibleDate("19900101");
 //    public static final RString DEFAULT_閉庁内容 = new RString("Data");
     public static final RString DEFAULT_支払窓口開始時間 = new RString("Data");
-    public static final RString DEFAULT_支払窓口終了期間 = new RString("Data");
+    public static final RString DEFAULT_支払窓口終了時間 = new RString("Data");
     public static final long DEFAULT_口座ID = 1L;
     public static final RString DEFAULT_受領委任契約番号 = new RString("Data");
 
@@ -83,7 +83,7 @@ public final class DbT3034ShokanShinseiEntityGenerator {
         entity.setShiharaiShuryoYMD(DEFAULT_支払期間終了年月日);
 //        entity.setHeichoNaiyo(DEFAULT_閉庁内容);
         entity.setShiharaiKaishiTime(DEFAULT_支払窓口開始時間);
-        entity.setShiharaiShuryoTime(DEFAULT_支払窓口終了期間);
+        entity.setShiharaiShuryoTime(DEFAULT_支払窓口終了時間);
         entity.setKozaID(DEFAULT_口座ID);
         entity.setJuryoininKeiyakuNo(DEFAULT_受領委任契約番号);
         return entity;

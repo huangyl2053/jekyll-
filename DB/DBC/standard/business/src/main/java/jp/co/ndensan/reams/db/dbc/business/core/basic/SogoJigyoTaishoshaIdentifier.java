@@ -13,6 +13,7 @@ import lombok.Value;
  * 総合事業対象者の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class SogoJigyoTaishoshaIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

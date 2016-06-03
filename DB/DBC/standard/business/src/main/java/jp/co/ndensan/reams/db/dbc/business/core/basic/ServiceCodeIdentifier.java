@@ -15,6 +15,7 @@ import lombok.Value;
  * サービスコードの識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ServiceCodeIdentifier implements Serializable {
 
     private final ServiceShuruiCode サービス種類コード;

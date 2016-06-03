@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0120000.KyotakuJikoRiyohyoKihonDiv;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -30,6 +29,8 @@ public class KyotakuJikoRiyohyoKihon {
     }
 
     private void setKihonData(KyotakuJikoRiyohyoKihonDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getKyotakuJikoRiyohyoKaigoKihon();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
 //        ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
 //        int rowId = 0;

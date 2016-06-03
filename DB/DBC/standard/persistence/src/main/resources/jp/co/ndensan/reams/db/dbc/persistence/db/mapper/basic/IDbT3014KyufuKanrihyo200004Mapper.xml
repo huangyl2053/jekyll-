@@ -17,11 +17,6 @@
     </sql>
 
     <sql id="allColumns_DbT3014KyufuKanrihyo200004">
-         "DbT3014KyufuKanrihyo200004"."shinsaYM" as "dbT3014KyufuKanrihyo200004_shinsaYM",
-         "DbT3014KyufuKanrihyo200004"."serviceTeikyoYM" as "dbT3014KyufuKanrihyo200004_serviceTeikyoYM",
-         "DbT3014KyufuKanrihyo200004"."hiHokenshaNo" as "dbT3014KyufuKanrihyo200004_hiHokenshaNo",
-         "DbT3014KyufuKanrihyo200004"."kyufuKanrihyoShubetsuKubunCode" as "dbT3014KyufuKanrihyo200004_kyufuKanrihyoShubetsuKubunCode",
-         "DbT3014KyufuKanrihyo200004"."kyufuKanrihyoMeisaiLineNo" as "dbT3014KyufuKanrihyo200004_kyufuKanrihyoMeisaiLineNo",
          "DbT3014KyufuKanrihyo200004"."insertDantaiCd" as "dbT3014KyufuKanrihyo200004_insertDantaiCd",
          "DbT3014KyufuKanrihyo200004"."insertTimestamp" as "dbT3014KyufuKanrihyo200004_insertTimestamp",
          "DbT3014KyufuKanrihyo200004"."insertReamsLoginId" as "dbT3014KyufuKanrihyo200004_insertReamsLoginId",
@@ -30,6 +25,11 @@
          "DbT3014KyufuKanrihyo200004"."updateCount" as "dbT3014KyufuKanrihyo200004_updateCount",
          "DbT3014KyufuKanrihyo200004"."lastUpdateTimestamp" as "dbT3014KyufuKanrihyo200004_lastUpdateTimestamp",
          "DbT3014KyufuKanrihyo200004"."lastUpdateReamsLoginId" as "dbT3014KyufuKanrihyo200004_lastUpdateReamsLoginId",
+         "DbT3014KyufuKanrihyo200004"."shinsaYM" as "dbT3014KyufuKanrihyo200004_shinsaYM",
+         "DbT3014KyufuKanrihyo200004"."serviceTeikyoYM" as "dbT3014KyufuKanrihyo200004_serviceTeikyoYM",
+         "DbT3014KyufuKanrihyo200004"."hiHokenshaNo" as "dbT3014KyufuKanrihyo200004_hiHokenshaNo",
+         "DbT3014KyufuKanrihyo200004"."kyufuKanrihyoShubetsuKubunCode" as "dbT3014KyufuKanrihyo200004_kyufuKanrihyoShubetsuKubunCode",
+         "DbT3014KyufuKanrihyo200004"."kyufuKanrihyoMeisaiLineNo" as "dbT3014KyufuKanrihyo200004_kyufuKanrihyoMeisaiLineNo",
          "DbT3014KyufuKanrihyo200004"."shokisaiHokenshaNo" as "dbT3014KyufuKanrihyo200004_shokisaiHokenshaNo",
          "DbT3014KyufuKanrihyo200004"."kyotakushienJigyoshoNo" as "dbT3014KyufuKanrihyo200004_kyotakushienJigyoshoNo",
          "DbT3014KyufuKanrihyo200004"."kyufuKanrihyoSakuseiKubunCode" as "dbT3014KyufuKanrihyo200004_kyufuKanrihyoSakuseiKubunCode",
@@ -57,11 +57,6 @@
 
     <!--テーブルDbT3014KyufuKanrihyo200004の項目をDbT3014KyufuKanrihyo200004Entityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT3014KyufuKanrihyo200004Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3014KyufuKanrihyo200004Entity" autoMapping="true">
-        <id property="shinsaYM" column="dbT3014KyufuKanrihyo200004_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="serviceTeikyoYM" column="dbT3014KyufuKanrihyo200004_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="hiHokenshaNo" column="dbT3014KyufuKanrihyo200004_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="kyufuKanrihyoShubetsuKubunCode" column="dbT3014KyufuKanrihyo200004_kyufuKanrihyoShubetsuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="kyufuKanrihyoMeisaiLineNo" column="dbT3014KyufuKanrihyo200004_kyufuKanrihyoMeisaiLineNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertDantaiCd" column="dbT3014KyufuKanrihyo200004_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT3014KyufuKanrihyo200004_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT3014KyufuKanrihyo200004_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -70,6 +65,11 @@
         <result property="updateCount" column="dbT3014KyufuKanrihyo200004_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT3014KyufuKanrihyo200004_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT3014KyufuKanrihyo200004_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsaYM" column="dbT3014KyufuKanrihyo200004_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="serviceTeikyoYM" column="dbT3014KyufuKanrihyo200004_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="hiHokenshaNo" column="dbT3014KyufuKanrihyo200004_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="kyufuKanrihyoShubetsuKubunCode" column="dbT3014KyufuKanrihyo200004_kyufuKanrihyoShubetsuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyufuKanrihyoMeisaiLineNo" column="dbT3014KyufuKanrihyo200004_kyufuKanrihyoMeisaiLineNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shokisaiHokenshaNo" column="dbT3014KyufuKanrihyo200004_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
         <result property="kyotakushienJigyoshoNo" column="dbT3014KyufuKanrihyo200004_kyotakushienJigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="kyufuKanrihyoSakuseiKubunCode" column="dbT3014KyufuKanrihyo200004_kyufuKanrihyoSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

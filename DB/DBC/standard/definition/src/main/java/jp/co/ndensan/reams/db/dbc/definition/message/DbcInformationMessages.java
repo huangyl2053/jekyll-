@@ -5,20 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.message;
 
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
  * DBCのインフォメーションメッセージ定義列挙型です。
  *
- * @author N9606 漢那 憲作
+ * @reamsid_L DBB-9999-013 wangchao
  */
 public enum DbcInformationMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    限度額チェック前(1, "画面のデータを変更するため、限度額をチェックしてください。"),
+    自己負担額データなし(2, "自己負担額情報が1件も存在しないため、処理できません。");
 
     private final Message message;
 
@@ -29,7 +29,7 @@ public enum DbcInformationMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbcInformationMessages(int no, String message) {
-        this.message = new InformationMessage(toCode("I", no), message);
+        this.message = new InformationMessage(toCode("DBCI", no), message);
     }
 
     @Override

@@ -5,10 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2013HokenryoDankaiMapper}のマッパーIFです。
+ *
+ * @reamsid_L DBB-9020-130 sunhaidi
  */
 public interface IDbT2013HokenryoDankaiMapper {
 
@@ -19,4 +23,20 @@ public interface IDbT2013HokenryoDankaiMapper {
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT2013HokenryoDankaiEntity getEntity();
+
+    /**
+     * {@link DbT2013HokenryoDankaiEntity}を取得します。
+     *
+     * @return List<DbT2013HokenryoDankaiEntity>
+     */
+    List<DbT2013HokenryoDankaiEntity> getHokenryoDankai();
+    
+    /**
+     * {@link DbT2013HokenryoDankaiEntity}を取得します。
+     * 
+     * @param fukaNendo 賦課年度
+     * @return List<DbT2013HokenryoDankaiEntity>
+     */
+    List<DbT2013HokenryoDankaiEntity> getHokenryoDankaiKubun(RString fukaNendo);
+    
 }

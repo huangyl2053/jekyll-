@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC22701",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "認定調査データ出力_モバイル",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2270001",
+     "toLayoutTitle": "認定調査データ出力（モバイル）",
+     "toState": "検索"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2270001",
+     "layoutTitle": "",
+     "eventName": "終了処理",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

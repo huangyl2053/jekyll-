@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.search;
 
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbV7901ShikakuSearch.JukyushaDaichoHihokenshaNo;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbV7901ShikakuSearch.hihokenshaNo;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbV7901ShikakuSearch.jushochiTokureiFlag;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbV7901ShikakuSearch.shikakuSoshitsuYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7901ShikakuSearch.JukyushaDaichoHihokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7901ShikakuSearch.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7901ShikakuSearch.jushochiTokureiFlag;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7901ShikakuSearch.shikakuSoshitsuYMD;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchItem;
 

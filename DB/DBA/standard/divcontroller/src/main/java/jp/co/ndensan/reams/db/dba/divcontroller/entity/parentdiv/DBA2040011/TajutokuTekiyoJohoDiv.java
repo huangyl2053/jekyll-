@@ -4,12 +4,8 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011;
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011.JutokuJohoInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011.ShisetsuHenkoInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011.dgJushochiTokureiRireki_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * TajutokuTekiyoJoho のクラスファイル

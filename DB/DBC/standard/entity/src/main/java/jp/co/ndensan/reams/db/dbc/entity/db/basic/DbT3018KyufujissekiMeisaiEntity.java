@@ -818,4 +818,5 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
 // </editor-fold>
 
+
 }

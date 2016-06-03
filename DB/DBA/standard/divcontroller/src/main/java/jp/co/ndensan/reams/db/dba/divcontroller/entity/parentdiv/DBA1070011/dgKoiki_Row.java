@@ -1,9 +1,9 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Nov 27 19:09:45 JST 2014 
+ * Mon May 09 14:22:44 CST 2016 
  */
 
 
@@ -11,7 +11,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
@@ -23,225 +23,182 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 
 public class dgKoiki_Row extends DataRow {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
-    private DropDownList nextWork;
-    private Button btnNext;
-    private RString shichosonCode;
-    private RString shichosonCodeAndshichosonMei;
-    private RString hihokenshaNo;
-    private RString shikibetsuCode;
-    private RString hihokenshaNoAndShikibetsuCode;
+    private DropDownList nextTask;
+    private TextBoxCode shichosonCode;
+    private TextBoxCode hihokennshaNo;
+    private TextBoxCode shikibetsuCode;
     private RString shimei;
-    private RString kanaShimei;
-    private RString shimeiAndKanaShimei;
-    private RString gender;
+    private RString shimeiKana;
+    private RString sex;
     private RString juminShubetsu;
-    private TextBoxFlexibleDate dateOfBirth;
-    private RString juminShubetsuAndDateOfBirth;
-    private TextBoxFlexibleDate idoDate;
+    private TextBoxFlexibleDate birthYMD;
+    private TextBoxFlexibleDate idoYMD;
     private RString idoJiyu;
-    private RString idoDateAndIdoJiyu;
-    private RString tennyuTenshutsuYoteiJusho;
-    private RString tennyuTenshutsuZenkokuJushoCode;
+    private RString tenkyoYoteiJusho;
+    private RString rirekiNo;
 
     public dgKoiki_Row() {
         super();
-        this.nextWork = new DropDownList();
-        this.btnNext = new Button();
-        this.shichosonCode = RString.EMPTY;
-        this.shichosonCodeAndshichosonMei = RString.EMPTY;
-        this.hihokenshaNo = RString.EMPTY;
-        this.shikibetsuCode = RString.EMPTY;
-        this.hihokenshaNoAndShikibetsuCode = RString.EMPTY;
+        this.nextTask = new DropDownList();
+        this.shichosonCode = new TextBoxCode();
+        this.hihokennshaNo = new TextBoxCode();
+        this.shikibetsuCode = new TextBoxCode();
         this.shimei = RString.EMPTY;
-        this.kanaShimei = RString.EMPTY;
-        this.shimeiAndKanaShimei = RString.EMPTY;
-        this.gender = RString.EMPTY;
+        this.shimeiKana = RString.EMPTY;
+        this.sex = RString.EMPTY;
         this.juminShubetsu = RString.EMPTY;
-        this.dateOfBirth = new TextBoxFlexibleDate();
-        this.juminShubetsuAndDateOfBirth = RString.EMPTY;
-        this.idoDate = new TextBoxFlexibleDate();
+        this.birthYMD = new TextBoxFlexibleDate();
+        this.idoYMD = new TextBoxFlexibleDate();
         this.idoJiyu = RString.EMPTY;
-        this.idoDateAndIdoJiyu = RString.EMPTY;
-        this.tennyuTenshutsuYoteiJusho = RString.EMPTY;
-        this.tennyuTenshutsuZenkokuJushoCode = RString.EMPTY;
+        this.tenkyoYoteiJusho = RString.EMPTY;
+        this.rirekiNo = RString.EMPTY;
+        this.setOriginalData("nextTask", nextTask);
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.setOriginalData("hihokennshaNo", hihokennshaNo);
+        this.setOriginalData("shikibetsuCode", shikibetsuCode);
+        this.setOriginalData("shimei", shimei);
+        this.setOriginalData("shimeiKana", shimeiKana);
+        this.setOriginalData("sex", sex);
+        this.setOriginalData("juminShubetsu", juminShubetsu);
+        this.setOriginalData("birthYMD", birthYMD);
+        this.setOriginalData("idoYMD", idoYMD);
+        this.setOriginalData("idoJiyu", idoJiyu);
+        this.setOriginalData("tenkyoYoteiJusho", tenkyoYoteiJusho);
+        this.setOriginalData("rirekiNo", rirekiNo);
     }
 
-    public dgKoiki_Row(DropDownList nextWork, Button btnNext, RString shichosonCode, RString shichosonCodeAndshichosonMei, RString hihokenshaNo, RString shikibetsuCode, RString hihokenshaNoAndShikibetsuCode, RString shimei, RString kanaShimei, RString shimeiAndKanaShimei, RString gender, RString juminShubetsu, TextBoxFlexibleDate dateOfBirth, RString juminShubetsuAndDateOfBirth, TextBoxFlexibleDate idoDate, RString idoJiyu, RString idoDateAndIdoJiyu, RString tennyuTenshutsuYoteiJusho, RString tennyuTenshutsuZenkokuJushoCode) {
+    public dgKoiki_Row(DropDownList nextTask, TextBoxCode shichosonCode, TextBoxCode hihokennshaNo, TextBoxCode shikibetsuCode, RString shimei, RString shimeiKana, RString sex, RString juminShubetsu, TextBoxFlexibleDate birthYMD, TextBoxFlexibleDate idoYMD, RString idoJiyu, RString tenkyoYoteiJusho, RString rirekiNo) {
         super();
-        this.setOriginalData("nextWork", nextWork);
-        this.setOriginalData("btnNext", btnNext);
+        this.setOriginalData("nextTask", nextTask);
         this.setOriginalData("shichosonCode", shichosonCode);
-        this.setOriginalData("shichosonCodeAndshichosonMei", shichosonCodeAndshichosonMei);
-        this.setOriginalData("hihokenshaNo", hihokenshaNo);
+        this.setOriginalData("hihokennshaNo", hihokennshaNo);
         this.setOriginalData("shikibetsuCode", shikibetsuCode);
-        this.setOriginalData("hihokenshaNoAndShikibetsuCode", hihokenshaNoAndShikibetsuCode);
         this.setOriginalData("shimei", shimei);
-        this.setOriginalData("kanaShimei", kanaShimei);
-        this.setOriginalData("shimeiAndKanaShimei", shimeiAndKanaShimei);
-        this.setOriginalData("gender", gender);
+        this.setOriginalData("shimeiKana", shimeiKana);
+        this.setOriginalData("sex", sex);
         this.setOriginalData("juminShubetsu", juminShubetsu);
-        this.setOriginalData("dateOfBirth", dateOfBirth);
-        this.setOriginalData("juminShubetsuAndDateOfBirth", juminShubetsuAndDateOfBirth);
-        this.setOriginalData("idoDate", idoDate);
+        this.setOriginalData("birthYMD", birthYMD);
+        this.setOriginalData("idoYMD", idoYMD);
         this.setOriginalData("idoJiyu", idoJiyu);
-        this.setOriginalData("idoDateAndIdoJiyu", idoDateAndIdoJiyu);
-        this.setOriginalData("tennyuTenshutsuYoteiJusho", tennyuTenshutsuYoteiJusho);
-        this.setOriginalData("tennyuTenshutsuZenkokuJushoCode", tennyuTenshutsuZenkokuJushoCode);
-        this.nextWork = nextWork;
-        this.btnNext = btnNext;
+        this.setOriginalData("tenkyoYoteiJusho", tenkyoYoteiJusho);
+        this.setOriginalData("rirekiNo", rirekiNo);
+        this.nextTask = nextTask;
         this.shichosonCode = shichosonCode;
-        this.shichosonCodeAndshichosonMei = shichosonCodeAndshichosonMei;
-        this.hihokenshaNo = hihokenshaNo;
+        this.hihokennshaNo = hihokennshaNo;
         this.shikibetsuCode = shikibetsuCode;
-        this.hihokenshaNoAndShikibetsuCode = hihokenshaNoAndShikibetsuCode;
         this.shimei = shimei;
-        this.kanaShimei = kanaShimei;
-        this.shimeiAndKanaShimei = shimeiAndKanaShimei;
-        this.gender = gender;
+        this.shimeiKana = shimeiKana;
+        this.sex = sex;
         this.juminShubetsu = juminShubetsu;
-        this.dateOfBirth = dateOfBirth;
-        this.juminShubetsuAndDateOfBirth = juminShubetsuAndDateOfBirth;
-        this.idoDate = idoDate;
+        this.birthYMD = birthYMD;
+        this.idoYMD = idoYMD;
         this.idoJiyu = idoJiyu;
-        this.idoDateAndIdoJiyu = idoDateAndIdoJiyu;
-        this.tennyuTenshutsuYoteiJusho = tennyuTenshutsuYoteiJusho;
-        this.tennyuTenshutsuZenkokuJushoCode = tennyuTenshutsuZenkokuJushoCode;
+        this.tenkyoYoteiJusho = tenkyoYoteiJusho;
+        this.rirekiNo = rirekiNo;
     }
 
     public dgKoiki_Row(DataGridSetting gridSetting) {
         super();
-        this.nextWork = DropDownList.createInstance(gridSetting.getColumn("nextWork").getCellDetails());
-        this.setOriginalData("nextWork", nextWork);
-        this.btnNext = new Button();
-        this.shichosonCode = RString.EMPTY;
-        this.shichosonCodeAndshichosonMei = RString.EMPTY;
-        this.hihokenshaNo = RString.EMPTY;
-        this.shikibetsuCode = RString.EMPTY;
-        this.hihokenshaNoAndShikibetsuCode = RString.EMPTY;
+        this.nextTask = DropDownList.createInstance(gridSetting.getColumn("nextTask").getCellDetails());
+        this.shichosonCode = new TextBoxCode();
+        this.hihokennshaNo = new TextBoxCode();
+        this.shikibetsuCode = new TextBoxCode();
         this.shimei = RString.EMPTY;
-        this.kanaShimei = RString.EMPTY;
-        this.shimeiAndKanaShimei = RString.EMPTY;
-        this.gender = RString.EMPTY;
+        this.shimeiKana = RString.EMPTY;
+        this.sex = RString.EMPTY;
         this.juminShubetsu = RString.EMPTY;
-        this.dateOfBirth = new TextBoxFlexibleDate();
-        this.juminShubetsuAndDateOfBirth = RString.EMPTY;
-        this.idoDate = new TextBoxFlexibleDate();
+        this.birthYMD = new TextBoxFlexibleDate();
+        this.idoYMD = new TextBoxFlexibleDate();
         this.idoJiyu = RString.EMPTY;
-        this.idoDateAndIdoJiyu = RString.EMPTY;
-        this.tennyuTenshutsuYoteiJusho = RString.EMPTY;
-        this.tennyuTenshutsuZenkokuJushoCode = RString.EMPTY;
+        this.tenkyoYoteiJusho = RString.EMPTY;
+        this.rirekiNo = RString.EMPTY;
+        this.setOriginalData("nextTask", nextTask);
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.setOriginalData("hihokennshaNo", hihokennshaNo);
+        this.setOriginalData("shikibetsuCode", shikibetsuCode);
+        this.setOriginalData("shimei", shimei);
+        this.setOriginalData("shimeiKana", shimeiKana);
+        this.setOriginalData("sex", sex);
+        this.setOriginalData("juminShubetsu", juminShubetsu);
+        this.setOriginalData("birthYMD", birthYMD);
+        this.setOriginalData("idoYMD", idoYMD);
+        this.setOriginalData("idoJiyu", idoJiyu);
+        this.setOriginalData("tenkyoYoteiJusho", tenkyoYoteiJusho);
+        this.setOriginalData("rirekiNo", rirekiNo);
     }
 
-    public DropDownList getNextWork() {
-        return nextWork;
+    public DropDownList getNextTask() {
+        return nextTask;
     }
 
-    public Button getBtnNext() {
-        return btnNext;
-    }
-
-    public RString getShichosonCode() {
+    public TextBoxCode getShichosonCode() {
         return shichosonCode;
     }
 
-    public RString getShichosonCodeAndshichosonMei() {
-        return shichosonCodeAndshichosonMei;
+    public TextBoxCode getHihokennshaNo() {
+        return hihokennshaNo;
     }
 
-    public RString getHihokenshaNo() {
-        return hihokenshaNo;
-    }
-
-    public RString getShikibetsuCode() {
+    public TextBoxCode getShikibetsuCode() {
         return shikibetsuCode;
-    }
-
-    public RString getHihokenshaNoAndShikibetsuCode() {
-        return hihokenshaNoAndShikibetsuCode;
     }
 
     public RString getShimei() {
         return shimei;
     }
 
-    public RString getKanaShimei() {
-        return kanaShimei;
+    public RString getShimeiKana() {
+        return shimeiKana;
     }
 
-    public RString getShimeiAndKanaShimei() {
-        return shimeiAndKanaShimei;
-    }
-
-    public RString getGender() {
-        return gender;
+    public RString getSex() {
+        return sex;
     }
 
     public RString getJuminShubetsu() {
         return juminShubetsu;
     }
 
-    public TextBoxFlexibleDate getDateOfBirth() {
-        return dateOfBirth;
+    public TextBoxFlexibleDate getBirthYMD() {
+        return birthYMD;
     }
 
-    public RString getJuminShubetsuAndDateOfBirth() {
-        return juminShubetsuAndDateOfBirth;
-    }
-
-    public TextBoxFlexibleDate getIdoDate() {
-        return idoDate;
+    public TextBoxFlexibleDate getIdoYMD() {
+        return idoYMD;
     }
 
     public RString getIdoJiyu() {
         return idoJiyu;
     }
 
-    public RString getIdoDateAndIdoJiyu() {
-        return idoDateAndIdoJiyu;
+    public RString getTenkyoYoteiJusho() {
+        return tenkyoYoteiJusho;
     }
 
-    public RString getTennyuTenshutsuYoteiJusho() {
-        return tennyuTenshutsuYoteiJusho;
+    public RString getRirekiNo() {
+        return rirekiNo;
     }
 
-    public RString getTennyuTenshutsuZenkokuJushoCode() {
-        return tennyuTenshutsuZenkokuJushoCode;
+    public void setNextTask(DropDownList nextTask) {
+        this.setOriginalData("nextTask", nextTask);
+        this.nextTask = nextTask;
     }
 
-    public void setNextWork(DropDownList nextWork) {
-        this.setOriginalData("nextWork", nextWork);
-        this.nextWork = nextWork;
-    }
-
-    public void setBtnNext(Button btnNext) {
-        this.setOriginalData("btnNext", btnNext);
-        this.btnNext = btnNext;
-    }
-
-    public void setShichosonCode(RString shichosonCode) {
+    public void setShichosonCode(TextBoxCode shichosonCode) {
         this.setOriginalData("shichosonCode", shichosonCode);
         this.shichosonCode = shichosonCode;
     }
 
-    public void setShichosonCodeAndshichosonMei(RString shichosonCodeAndshichosonMei) {
-        this.setOriginalData("shichosonCodeAndshichosonMei", shichosonCodeAndshichosonMei);
-        this.shichosonCodeAndshichosonMei = shichosonCodeAndshichosonMei;
+    public void setHihokennshaNo(TextBoxCode hihokennshaNo) {
+        this.setOriginalData("hihokennshaNo", hihokennshaNo);
+        this.hihokennshaNo = hihokennshaNo;
     }
 
-    public void setHihokenshaNo(RString hihokenshaNo) {
-        this.setOriginalData("hihokenshaNo", hihokenshaNo);
-        this.hihokenshaNo = hihokenshaNo;
-    }
-
-    public void setShikibetsuCode(RString shikibetsuCode) {
+    public void setShikibetsuCode(TextBoxCode shikibetsuCode) {
         this.setOriginalData("shikibetsuCode", shikibetsuCode);
         this.shikibetsuCode = shikibetsuCode;
-    }
-
-    public void setHihokenshaNoAndShikibetsuCode(RString hihokenshaNoAndShikibetsuCode) {
-        this.setOriginalData("hihokenshaNoAndShikibetsuCode", hihokenshaNoAndShikibetsuCode);
-        this.hihokenshaNoAndShikibetsuCode = hihokenshaNoAndShikibetsuCode;
     }
 
     public void setShimei(RString shimei) {
@@ -249,19 +206,14 @@ public class dgKoiki_Row extends DataRow {
         this.shimei = shimei;
     }
 
-    public void setKanaShimei(RString kanaShimei) {
-        this.setOriginalData("kanaShimei", kanaShimei);
-        this.kanaShimei = kanaShimei;
+    public void setShimeiKana(RString shimeiKana) {
+        this.setOriginalData("shimeiKana", shimeiKana);
+        this.shimeiKana = shimeiKana;
     }
 
-    public void setShimeiAndKanaShimei(RString shimeiAndKanaShimei) {
-        this.setOriginalData("shimeiAndKanaShimei", shimeiAndKanaShimei);
-        this.shimeiAndKanaShimei = shimeiAndKanaShimei;
-    }
-
-    public void setGender(RString gender) {
-        this.setOriginalData("gender", gender);
-        this.gender = gender;
+    public void setSex(RString sex) {
+        this.setOriginalData("sex", sex);
+        this.sex = sex;
     }
 
     public void setJuminShubetsu(RString juminShubetsu) {
@@ -269,19 +221,14 @@ public class dgKoiki_Row extends DataRow {
         this.juminShubetsu = juminShubetsu;
     }
 
-    public void setDateOfBirth(TextBoxFlexibleDate dateOfBirth) {
-        this.setOriginalData("dateOfBirth", dateOfBirth);
-        this.dateOfBirth = dateOfBirth;
+    public void setBirthYMD(TextBoxFlexibleDate birthYMD) {
+        this.setOriginalData("birthYMD", birthYMD);
+        this.birthYMD = birthYMD;
     }
 
-    public void setJuminShubetsuAndDateOfBirth(RString juminShubetsuAndDateOfBirth) {
-        this.setOriginalData("juminShubetsuAndDateOfBirth", juminShubetsuAndDateOfBirth);
-        this.juminShubetsuAndDateOfBirth = juminShubetsuAndDateOfBirth;
-    }
-
-    public void setIdoDate(TextBoxFlexibleDate idoDate) {
-        this.setOriginalData("idoDate", idoDate);
-        this.idoDate = idoDate;
+    public void setIdoYMD(TextBoxFlexibleDate idoYMD) {
+        this.setOriginalData("idoYMD", idoYMD);
+        this.idoYMD = idoYMD;
     }
 
     public void setIdoJiyu(RString idoJiyu) {
@@ -289,19 +236,15 @@ public class dgKoiki_Row extends DataRow {
         this.idoJiyu = idoJiyu;
     }
 
-    public void setIdoDateAndIdoJiyu(RString idoDateAndIdoJiyu) {
-        this.setOriginalData("idoDateAndIdoJiyu", idoDateAndIdoJiyu);
-        this.idoDateAndIdoJiyu = idoDateAndIdoJiyu;
+    public void setTenkyoYoteiJusho(RString tenkyoYoteiJusho) {
+        this.setOriginalData("tenkyoYoteiJusho", tenkyoYoteiJusho);
+        this.tenkyoYoteiJusho = tenkyoYoteiJusho;
     }
 
-    public void setTennyuTenshutsuYoteiJusho(RString tennyuTenshutsuYoteiJusho) {
-        this.setOriginalData("tennyuTenshutsuYoteiJusho", tennyuTenshutsuYoteiJusho);
-        this.tennyuTenshutsuYoteiJusho = tennyuTenshutsuYoteiJusho;
+    public void setRirekiNo(RString rirekiNo) {
+        this.setOriginalData("rirekiNo", rirekiNo);
+        this.rirekiNo = rirekiNo;
     }
 
-    public void setTennyuTenshutsuZenkokuJushoCode(RString tennyuTenshutsuZenkokuJushoCode) {
-        this.setOriginalData("tennyuTenshutsuZenkokuJushoCode", tennyuTenshutsuZenkokuJushoCode);
-        this.tennyuTenshutsuZenkokuJushoCode = tennyuTenshutsuZenkokuJushoCode;
-    }
-
+    // </editor-fold>
 }

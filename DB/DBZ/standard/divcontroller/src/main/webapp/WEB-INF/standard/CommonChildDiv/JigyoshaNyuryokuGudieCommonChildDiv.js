@@ -30,7 +30,7 @@ var DBZ;
                 function State(controls) {
                     this.controls = controls;
                 }
-                State.prototype.ServiceJigyoshaMode = function () {
+                State.prototype.サービス事業者処理モード = function () {
                     this.controls.ServiceJigyosha().displayNone = false;
                     this.controls.OtherTokureiShisetsu().displayNone = true;
                     var gridSetting = this.controls.dgJigyoshaItiran().gridSetting;
@@ -41,7 +41,7 @@ var DBZ;
                     this.controls.dgJigyoshaItiran()._control.afterPropertiesSet();
                 };
 
-                State.prototype.OtherTokureiShisetsuMode = function () {
+                State.prototype.その他特例施設処理モード = function () {
                     this.controls.ServiceJigyosha().displayNone = true;
                     this.controls.OtherTokureiShisetsu().displayNone = false;
                     var gridSetting = this.controls.dgJigyoshaItiran().gridSetting;
@@ -52,7 +52,7 @@ var DBZ;
                     this.controls.dgJigyoshaItiran()._control.afterPropertiesSet();
                 };
 
-                State.prototype.ShitekiJogaiShisetsuMode = function () {
+                State.prototype.適用除外施設処理モード = function () {
                     this.controls.ServiceJigyosha().displayNone = true;
                     this.controls.OtherTokureiShisetsu().displayNone = true;
                     var gridSetting = this.controls.dgJigyoshaItiran().gridSetting;

@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigojigyosha;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
@@ -39,9 +39,9 @@ public final class KaigoJigyoshaMapperParameter {
 
     /**
      * キー検索用のパラメータを生成します。
-     *
-     * @param JigyoshaNo jigyoshaNo
-     * @param FlexibleDate yukoKaishiYMD
+     * 
+     * @param jigyoshaNo JigyoshaNo
+     * @param yukoKaishiYMD FlexibleDate
      * @return 身体手帳検索パラメータ
      */
     public static KaigoJigyoshaMapperParameter createSelectByKeyParam(

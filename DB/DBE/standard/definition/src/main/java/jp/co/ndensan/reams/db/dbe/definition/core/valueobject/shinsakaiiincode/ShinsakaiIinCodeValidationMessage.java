@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaiiincode;
 
-import static jp.co.ndensan.reams.uz.uza.batch.parameter.message._BatchMessageUtil.toCode;
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -22,7 +22,7 @@ public enum ShinsakaiIinCodeValidationMessage implements IValidationMessage {
      * 桁数が8桁であること。
      */
     桁数が8桁ではないこと(ShinsakaiIinCodeErrorMessage.桁数が8桁ではないこと);
-    private final Message message;
+    private final transient Message message;
 
     private ShinsakaiIinCodeValidationMessage(IMessageGettable message, String... replacements) {
         this.message = message.getMessage().replace(replacements);

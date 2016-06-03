@@ -6,15 +6,16 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import lombok.Value;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import lombok.Value;
 
 /**
  * 住宅改修理由書作成手数料請求決定の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class JutakuKaishuRiyushoTesuryoKetteiIdentifier implements Serializable {
 
     private final JigyoshaNo 介護住宅改修理由書作成事業者番号;

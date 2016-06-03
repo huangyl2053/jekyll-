@@ -5,7 +5,7 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4302ShujiiIkenshoJohoChildMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT4302ShujiiIkenshoJohoChild">
         SELECT
@@ -94,10 +94,9 @@
         <result property="existShikaJushinFlag" column="dbT4302ShujiiIkenshoJohoChild_existShikaJushinFlag" />
         <result property="existGankaJushinFlag" column="dbT4302ShujiiIkenshoJohoChild_existGankaJushinFlag" />
         <result property="existSonotaJushinkaFlag" column="dbT4302ShujiiIkenshoJohoChild_existSonotaJushinkaFlag" />
-        <result property="sonotaJushinKaShimei" column="dbT4302ShujiiIkenshoJohoChild_sonotaJushinKaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ikenshoMemo" column="dbT4302ShujiiIkenshoJohoChild_ikenshoMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    
+
     <select id="getEntity" resultMap="ResultMap_DbT4302ShujiiIkenshoJohoChildEntity">
         SELECT
         <include refid="allColumns_DbT4302ShujiiIkenshoJohoChild"/>

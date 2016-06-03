@@ -8,7 +8,9 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1013KyokaisoSochiShinsei;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1013KyokaisoSochiShinsei.*;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1013KyokaisoSochiShinsei.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1013KyokaisoSochiShinsei.linkNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1013KyokaisoSochiShinsei.rirekiNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1013KyokaisoSochiShinseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -32,15 +34,18 @@ public class DbT1013KyokaisoSochiShinseiDac implements ISaveable<DbT1013Kyokaiso
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 履歴番号 RirekiNo
+     * @param リンク番号 int
      * @return DbT1013KyokaisoSochiShinseiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT1013KyokaisoSochiShinseiEntity selectByKey(
             HihokenshaNo 被保険者番号,
-            int 履歴番号) throws NullPointerException {
+            int 履歴番号,
+            int リンク番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(リンク番号, UrSystemErrorMessages.値がnull.getReplacedMessage("リンク番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -48,7 +53,8 @@ public class DbT1013KyokaisoSochiShinseiDac implements ISaveable<DbT1013Kyokaiso
                 table(DbT1013KyokaisoSochiShinsei.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                eq(rirekiNo, 履歴番号))).
+                                eq(rirekiNo, 履歴番号),
+                                eq(linkNo, リンク番号))).
                 toObject(DbT1013KyokaisoSochiShinseiEntity.class);
     }
 

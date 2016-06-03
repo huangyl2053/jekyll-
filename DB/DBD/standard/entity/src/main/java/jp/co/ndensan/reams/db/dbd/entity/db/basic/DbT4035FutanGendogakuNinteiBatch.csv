@@ -1,0 +1,5 @@
+﻿ninteiBatchExecutedTimestamp,UDD018YMDHMS,YMDHMS,,,,,一括認定バッチ処理日時,A
+sakuseiNendo,UDD012YSeireki,FlexibleYear,,,,,作成年度,A
+ketteiYmd,UDD015YMD,FlexibleDate,,,,,決定日,A
+isTest,bool,boolean,,,,,テスト処理フラグ,A
+hadApproved,bool,boolean,,,,,承認済みフラグ,A

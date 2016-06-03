@@ -1,19 +1,15 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.shakaiFukushiHojinKeigen;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.shakaiFukushiHojinKeigen.ShakaiFukushiHojinKeigenDetailDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.shakaiFukushiHojinKeigen.dgShakaiFukushiHojinKeigenList_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShakaiFukushiHojinKeigen のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * ShakaiFukushiHojinKeigen のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShakaiFukushiHojinKeigenDiv extends Panel {
@@ -23,6 +19,7 @@ public class ShakaiFukushiHojinKeigenDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtHiddenHihokenshaNo")
     private TextBox txtHiddenHihokenshaNo;
     @JsonProperty("dgShakaiFukushiHojinKeigenList")
@@ -45,7 +42,7 @@ public class ShakaiFukushiHojinKeigenDiv extends Panel {
 
     @JsonProperty("txtHiddenHihokenshaNo")
     public void setTxtHiddenHihokenshaNo(TextBox txtHiddenHihokenshaNo) {
-        this.txtHiddenHihokenshaNo=txtHiddenHihokenshaNo;
+        this.txtHiddenHihokenshaNo = txtHiddenHihokenshaNo;
     }
 
     @JsonProperty("dgShakaiFukushiHojinKeigenList")
@@ -55,7 +52,7 @@ public class ShakaiFukushiHojinKeigenDiv extends Panel {
 
     @JsonProperty("dgShakaiFukushiHojinKeigenList")
     public void setDgShakaiFukushiHojinKeigenList(DataGrid<dgShakaiFukushiHojinKeigenList_Row> dgShakaiFukushiHojinKeigenList) {
-        this.dgShakaiFukushiHojinKeigenList=dgShakaiFukushiHojinKeigenList;
+        this.dgShakaiFukushiHojinKeigenList = dgShakaiFukushiHojinKeigenList;
     }
 
     @JsonProperty("ShakaiFukushiHojinKeigenDetail")
@@ -65,7 +62,7 @@ public class ShakaiFukushiHojinKeigenDiv extends Panel {
 
     @JsonProperty("ShakaiFukushiHojinKeigenDetail")
     public void setShakaiFukushiHojinKeigenDetail(ShakaiFukushiHojinKeigenDetailDiv ShakaiFukushiHojinKeigenDetail) {
-        this.ShakaiFukushiHojinKeigenDetail=ShakaiFukushiHojinKeigenDetail;
+        this.ShakaiFukushiHojinKeigenDetail = ShakaiFukushiHojinKeigenDetail;
     }
 
     @JsonProperty("btnClose")
@@ -75,7 +72,7 @@ public class ShakaiFukushiHojinKeigenDiv extends Panel {
 
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
+        this.btnClose = btnClose;
     }
 
 }

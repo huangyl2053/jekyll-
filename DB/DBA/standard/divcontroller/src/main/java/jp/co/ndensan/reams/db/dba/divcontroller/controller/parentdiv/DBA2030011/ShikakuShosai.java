@@ -22,7 +22,6 @@ public class ShikakuShosai {
 
     //TODO n8178 城間　新ビジネス対応と、realservice廃止などにより、依存するクラスが見えなくなったため処理の一部をコメントアウト。依存クラスに変わるものが作成された後に修正予定 2015/08/19記述
     //private ICodeShubetsu KaigoshikakuShutokuJiyuHihokensha;
-
     /**
      * 画面が読み込まれた際に実行します。<br/>
      * 前画面から渡されているViewStateの該当者情報と画面IDを元に、住所地特例異動で使用する各種共有子Divの初期化を行います。
@@ -114,7 +113,6 @@ public class ShikakuShosai {
 //
 //        shikakuShosaiDiv.getCcdShisetsuNyutaishoRirekiKanri().initialize(lasdecCode, shikibetsuCode);
 //    }
-
 //    private void initializeJushochiTokureiRirekiList(IUrControlData controlData, Optional<DbT1001HihokenshaDaichoEntity> hihoDaicho,
 //            IJushochiTokureiRirekiListDiv jutokuDiv, JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode hokenshaMode) {
 //        ViewExecutionStatus exeStatus;
@@ -141,7 +139,6 @@ public class ShikakuShosai {
 //        }
 //        jutokuDiv.initialize(hihoDaicho.get().getKyuShichosonCode(), exeStatus, jutokuExeStatus, hokenshaMode);
 //    }
-
 //    private void setDataOfShikakuTokuso(ShikakuShosaiDiv shikakuShosaiDiv, Optional<DbT1001HihokenshaDaichoEntity> hihoDaicho, LasdecCode lasdecCode,
 //            IDonyuHokensha donyuHokensha, GappeiJohoKanriConfig gappeiConfig) {
 //        HihokenshaDaichoModel daichoModel = hihoDaicho.get();
@@ -149,7 +146,6 @@ public class ShikakuShosai {
 //        shikakuShosaiDiv.getTxtShutokuTodokedeDate().setValue(daichoModel.get資格取得届出年月日());
 //TODO n8223 朴 URZCodeShubetsu.介護資格取得事由がみつかれません。エラーが発生したため、コメントアウト
 //        List<KaigoShikakuShutokuJiyu> shutokuJiyuList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格取得事由);
-
 //        shikakuShosaiDiv.getDdlShutokuJiyu().setDataSource(
 //                ItemList.of(shutokuJiyuList).map(new CodeMasterToKeyValueFunction()).toList());
 //TODO n8223 朴    getShikakuShutokuJiyuCode() エラーが発生したため、コメントアウト
@@ -162,16 +158,16 @@ public class ShikakuShosai {
 //        shikakuShosaiDiv.getDdlHihoKubun().setSelectedKey(daichoModel.get被保険者区分コード());
 //
 //        if (donyuHokensha.is広域保険者()) {
-        //TODO n8178 城間篤人 生産性評価の対象でないため未実装　今後の回収で実装を行う
-        //
-        //1, 所在保険者の設定
-        //広域の場合、Atenaから取得できる地区コード3（もしくはそれに代わるもの）から情報を取得する。（初期設定）
-        //もしくは、住所地特例処理の中で設定した住民情報に合わせて変更を行う。（実行中のイベント）
-        //DDLの内容は住民情報の候補に挙がる保険者の一覧？（設定は不要のため、内容を考慮する必要は無いかもしれない）
-        //
-        //2, 措置元保険者の設定
-        //広域構成市町村の情報を、DDLに設定する。
-        //DDLに設定した情報から、台帳情報に持つ措置元保険者情報に一致するものを選択する。
+    //TODO n8178 城間篤人 生産性評価の対象でないため未実装　今後の回収で実装を行う
+    //
+    //1, 所在保険者の設定
+    //広域の場合、Atenaから取得できる地区コード3（もしくはそれに代わるもの）から情報を取得する。（初期設定）
+    //もしくは、住所地特例処理の中で設定した住民情報に合わせて変更を行う。（実行中のイベント）
+    //DDLの内容は住民情報の候補に挙がる保険者の一覧？（設定は不要のため、内容を考慮する必要は無いかもしれない）
+    //
+    //2, 措置元保険者の設定
+    //広域構成市町村の情報を、DDLに設定する。
+    //DDLに設定した情報から、台帳情報に持つ措置元保険者情報に一致するものを選択する。
 //            shikakuShosaiDiv.getDdlShutokuShozaiHokensha().setDataSource(null);
 //            shikakuShosaiDiv.getDdlShutokuSochimotoHokensha().setDataSource(null);
 //        } else {
@@ -210,7 +206,6 @@ public class ShikakuShosai {
 //        }
 //        shikakuShosaiDiv.getTblShikakuShosai().setDisabled(true);
 //    }
-
     //TODO n8178 城間篤人 生産性評価では広域の考慮が不要なため、一時的にコメントアウト
 //
 //    private List<KeyValueDataSource> createKoseiShichosonDataSource() {
@@ -306,7 +301,6 @@ public class ShikakuShosai {
 //        }
 //
 //    }
-
 //    private boolean is住所地特例適用者(TaishoshaKey taishoshaKey, IUrControlData controlData) {
 //
 //        HihokenshaDaichoManager daichoManager = new HihokenshaDaichoManager();
@@ -316,7 +310,6 @@ public class ShikakuShosai {
 //        return !(is住所地特例未適用(daicho.get()) || is住所地特例解除済み(daicho.get()));
 //        return false;
 //    }
-
 //    private boolean is住所地特例未適用(DbT1001HihokenshaDaichoEntity daicho) {
 //        return daicho.getJushochitokureiTekiyoJiyuCode() == null
 //                || daicho.getJushochitokureiTekiyoTodokedeYMD() == null
@@ -328,7 +321,6 @@ public class ShikakuShosai {
 //                || daicho.getJushochitokureiKaijoTodokedeYMD() != null
 //                || daicho.getJushochitokureiKaijoYMD() != null;
 //    }
-
     /**
      * 共通ボタンエリアの、該当者一覧へ戻るためのボタンが押下された際に実行します。<br/>
      *
@@ -382,6 +374,7 @@ public class ShikakuShosai {
      *
      * @param shikakuShosaiDiv {@link ShikakuShosaiDiv 資格詳細Div}
      * @param kihonDiv {@link KihonJohoDiv 基本情報Div}
+     * @throws InformationException 情報エラー
      * @return 資格取得情報Divを持つResponseData
      */
     public ResponseData<ShikakuShosaiDiv> onClick_btnUpdate(ShikakuShosaiDiv shikakuShosaiDiv, KihonJohoDiv kihonDiv) throws InformationException {

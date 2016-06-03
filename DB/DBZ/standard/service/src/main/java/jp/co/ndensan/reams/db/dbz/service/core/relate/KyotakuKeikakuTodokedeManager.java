@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuTodokede;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.KyotakuKeikakuTodokedeMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.KyotakuKeikakuTodokedeEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3005KyotakuKeikakuTodokedeDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.IKyotakuKeikakuTodokedeMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kyotakukeikaku.IKyotakuKeikakuTodokedeMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KyotakuKeikakuJigyoshaSakuseiManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

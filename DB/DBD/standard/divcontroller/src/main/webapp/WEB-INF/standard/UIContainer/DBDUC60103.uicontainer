@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC60103",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "システム管理登録（社会福祉法人確認番号）",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD6010003",
+     "toLayoutTitle": "システム管理（介護受給）",
+     "toState": "初期状態"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD6010003",
+     "layoutTitle": "システム管理（介護受給）",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

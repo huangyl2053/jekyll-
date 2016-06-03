@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
@@ -82,4 +78,5 @@ public class DbT7065ChohyoSeigyoKyotsuDac implements ISaveable<DbT7065ChohyoSeig
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
 }

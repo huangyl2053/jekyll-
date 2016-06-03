@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ShogaiKoreishaJiritsudoKomoku;
-import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho.ShujiiIkensho5Komoku;
-import jp.co.ndensan.reams.db.dbe.business.core.NinchishoKoreishaJiritsudo.NinchishoKoreishaJiritsudoKomoku;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikensho.ShujiiIkensho5Komoku;
+import jp.co.ndensan.reams.db.dbe.business.core.ninchishokoreishajiritsudo.NinchishoKoreishaJiritsudoKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.DentatsuNoryokuKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinchiNoryokuKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShokujiKoiHyokaKomoku;

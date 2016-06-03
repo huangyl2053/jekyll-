@@ -181,10 +181,20 @@ public class NijiYoboJigyoTaishosha
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * modifiedModel
+     *
+     * @return 二次予防事業対象者を管理するクラス
+     */
     public NijiYoboJigyoTaishosha modifiedModel() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * getNijiYoboKihonCheckListList
+     *
+     * @return 二次予防事業対象者を管理するクラスList
+     */
     public List<NijiYoboKihonCheckList> getNijiYoboKihonCheckListList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

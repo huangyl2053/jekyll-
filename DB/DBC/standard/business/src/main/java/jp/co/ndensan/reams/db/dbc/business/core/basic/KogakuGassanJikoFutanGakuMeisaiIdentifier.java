@@ -16,6 +16,7 @@ import lombok.Value;
  * 高額合算自己負担額明細の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuGassanJikoFutanGakuMeisaiIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

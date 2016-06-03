@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 import java.io.Serializable;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3005KyotakuKeikakuTodokedeEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -20,15 +20,13 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 居宅給付計画届出を管理するクラスです。
  */
-public class KyotakuKeikakuTodokede extends 
-        ParentModelBase<KyotakuKeikakuTodokedeIdentifier, 
-        DbT3005KyotakuKeikakuTodokedeEntity, KyotakuKeikakuTodokede> implements Serializable {
+public class KyotakuKeikakuTodokede extends
+        ParentModelBase<KyotakuKeikakuTodokedeIdentifier, DbT3005KyotakuKeikakuTodokedeEntity, KyotakuKeikakuTodokede> implements Serializable {
 
     private final DbT3005KyotakuKeikakuTodokedeEntity entity;
     private final KyotakuKeikakuTodokedeIdentifier id;
@@ -216,8 +214,7 @@ public class KyotakuKeikakuTodokede extends
     }
 
     /**
-     * 保持する居宅給付計画届出を削除対象とします。<br/>
-     * {@link DbT3005KyotakuKeikakuTodokedeEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する居宅給付計画届出を削除対象とします。<br/> {@link DbT3005KyotakuKeikakuTodokedeEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KyotakuKeikakuTodokede}
      */

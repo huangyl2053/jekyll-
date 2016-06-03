@@ -8,6 +8,14 @@ var DBZ;
                 return "onChange_radNinteiKubun";
             };
 
+            Events.onClick_btnYokaigodoGuide = function () {
+                return "onClick_btnYokaigodoGuide";
+            };
+
+            Events.onClick_lostFocus = function () {
+                return "onClick_lostFocus";
+            };
+
             Events.onClick_btnSixMonthLater = function () {
                 return "onClick_btnSixMonthLater";
             };
@@ -103,12 +111,12 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("ServiceShitei"));
             };
 
-            Controls.prototype.lblServiceIken = function () {
-                return new UZA.Label(this.convFiledName("lblServiceIken"));
-            };
-
             Controls.prototype.dgServiceIchiran = function () {
                 return new UZA.DataGrid(this.convFiledName("dgServiceIchiran"));
+            };
+
+            Controls.prototype.lblServiceIken = function () {
+                return new UZA.Label(this.convFiledName("lblServiceIken"));
             };
 
             Controls.prototype.txtShinsakaiIken = function () {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： DbT5508ShinsakaiJizenKekkaJohoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5508ShinsakaiJizenKekkaJohoMapper">
@@ -27,8 +28,8 @@
          "DbT5508ShinsakaiJizenKekkaJoho"."updateCount" as "dbT5508ShinsakaiJizenKekkaJoho_updateCount",
          "DbT5508ShinsakaiJizenKekkaJoho"."lastUpdateTimestamp" as "dbT5508ShinsakaiJizenKekkaJoho_lastUpdateTimestamp",
          "DbT5508ShinsakaiJizenKekkaJoho"."lastUpdateReamsLoginId" as "dbT5508ShinsakaiJizenKekkaJoho_lastUpdateReamsLoginId",
-         "DbT5508ShinsakaiJizenKekkaJoho"."ichijiHanteiHenkoRiyu" as "dbT5508ShinsakaiJizenKekkaJoho_ichijiHanteiHenkoRiyu",
-         "DbT5508ShinsakaiJizenKekkaJoho"."nijiHanteiKekkaCode" as "dbT5508ShinsakaiJizenKekkaJoho_nijiHanteiKekkaCode"
+         "DbT5508ShinsakaiJizenKekkaJoho"."nijiHanteiKekkaCode" as "dbT5508ShinsakaiJizenKekkaJoho_nijiHanteiKekkaCode",
+         "DbT5508ShinsakaiJizenKekkaJoho"."yukokikan" as "dbT5508ShinsakaiJizenKekkaJoho_yukokikan"
     </sql>
 
 
@@ -45,13 +46,8 @@
         <result property="updateCount" column="dbT5508ShinsakaiJizenKekkaJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT5508ShinsakaiJizenKekkaJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5508ShinsakaiJizenKekkaJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="ichijiHanteiHenkoRiyu" column="dbT5508ShinsakaiJizenKekkaJoho_ichijiHanteiHenkoRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="nijiHanteiKekkaCode" column="dbT5508ShinsakaiJizenKekkaJoho_nijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="yukokikan" column="dbT5508ShinsakaiJizenKekkaJoho_yukokikan" />
     </resultMap>
-   <select id="getEntity" resultMap="ResultMap_DbT5508ShinsakaiJizenKekkaJohoEntity">
-        SELECT
-        <include refid="allColumns_DbT5508ShinsakaiJizenKekkaJoho"/>
-        FROM
-        rgdb."DbT5508ShinsakaiJizenKekkaJoho"
-    </select>
+
 </mapper>

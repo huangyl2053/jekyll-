@@ -11,10 +11,13 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 調査地区グループマスタの識別子です。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value
 public class ChosaChikuGroupIdentifier implements Serializable {
+
     private static final long serialVersionUID = 176196496789814643L;
     private final Code 調査地区グループコード;
     private final Code 調査地区コード;

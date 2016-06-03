@@ -6,10 +6,6 @@ var DBZ;
                 this.fieldName = fieldName;
                 this.controls = new HokenshaInputGuide.Controls(fieldName);
             }
-            ModeController.prototype.priorities = function () {
-                return [];
-            };
-
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
@@ -29,6 +25,7 @@ var DBZ;
     (function (HokenshaInputGuide) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
                 this.controls = new HokenshaInputGuide.Controls(fieldName);
             }
             PublicProperties.prototype.getEditTypes = function () {

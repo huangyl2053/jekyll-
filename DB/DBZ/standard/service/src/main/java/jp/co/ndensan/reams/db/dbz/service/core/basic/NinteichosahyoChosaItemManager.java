@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoChosaItem;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoChosaItem;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5211NinteichosahyoChosaItemDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -98,4 +98,5 @@ public class NinteichosahyoChosaItemManager {
         }
         return 1 == dac.save(認定調査票_基本調査_調査項目.toEntity());
     }
+
 }

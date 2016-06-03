@@ -14,14 +14,25 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * JushochiTokureiRirekiList のクラスファイル 
- * 
- * @author 自動生成
+ * JushochiTokureiRirekiList のクラスファイル
+ *
+ * @reamsid_L DBA-0150-011 huangh
  */
 public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiTokureiRirekiListDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -488,5 +499,57 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public void clearInputData() {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        handler.clearInputData();
+    }
 
+    @Override
+    public void initialize(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日) {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        handler.initialize(被保険者番号, 識別コード, 取得日);
+    }
+
+    @Override
+    public void setMeisaiDisplayMode(MeisaiDisplayMode displayMode) {
+        setMode_MeisaiDisplayMode(displayMode);
+    }
+
+    @Override
+    public void setAddButtonDisplay(BtnDisplayMode displayMode) {
+        setMode_BtnDisplayMode(displayMode);
+    }
+
+    public void setupToBeforeInput(RString btnType) {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        handler.setupToBeforeInput(btnType);
+
+    }
+
+    @Override
+    public void setDisplayType(DisplayType displayType) {
+        setMode_DisplayType(displayType);
+    }
+
+    @Override
+    public boolean hasChanged() {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        return handler.hasChanged();
+    }
+
+    public void setMeisaiInputMode() {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        handler.setMeisaiInputMode();
+    }
+
+    public void setExecutionStatus(ViewExecutionStatus status) {
+        this.setExecutionStatus(status.getValue());
+    }
+
+    @Override
+    public List<HihokenshaDaicho> getDataList() {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        return handler.getDataList();
+    }
 }

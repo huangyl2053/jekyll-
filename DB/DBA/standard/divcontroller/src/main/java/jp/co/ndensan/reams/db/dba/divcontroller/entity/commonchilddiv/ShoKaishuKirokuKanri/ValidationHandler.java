@@ -5,8 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri;
 
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -15,83 +16,150 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 証交付回収情報のチェッククラスです。
+ *
+ * @reamsid_L DBA-1070-010 lizhuoxuan
  */
 public class ValidationHandler {
 
-    public static ValidationMessageControlPairs 交付日と有効期限の整合性チェック() {
+    private final ShoKaishuKirokuKanriDiv shoDiv;
+    private static final int 桁数_256 = 256;
 
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.ValidateA));
-        return validationMessages;
+    /**
+     * コンストラクタです。
+     *
+     * @param shoDiv ShoKaishuKirokuKanriDiv
+     */
+    public ValidationHandler(ShoKaishuKirokuKanriDiv shoDiv) {
+        this.shoDiv = shoDiv;
     }
 
-    public static ValidationMessageControlPairs 交付事由の必須チェック() {
-
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate必須));
-        return validationMessages;
+    /**
+     * 交付日と有効期限の整合性チェックです。
+     *
+     * @param validPairs ValidationMessageControlPairs
+     */
+    public void 交付日と有効期限の整合性チェック(ValidationMessageControlPairs validPairs) {
+        if (shoDiv.getPanelInput().getTxtKoufuType().getValue() != null
+                && new RString("資格者証").equals(shoDiv.getPanelInput().getTxtKoufuType().getValue())
+                && (shoDiv.getPanelInput().getTxtKoufuDate().getValue() != null
+                && shoDiv.getPanelInput().getTxtYukouKigen().getValue() != null)
+                && (!shoDiv.getPanelInput().getTxtKoufuDate().getValue().
+                isBefore(shoDiv.getPanelInput().getTxtYukouKigen().getValue()))) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.ValidateA, shoDiv.getPanelInput().getTxtKoufuDate()));
+        }
     }
 
-    public static ValidationMessageControlPairs 交付理由の最大桁数() {
-
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate桁数));
-        return validationMessages;
+    /**
+     * 交付事由の必須チェックです。
+     *
+     * @param validPairs ValidationMessageControlPairs
+     */
+    public void 交付事由の必須チェック(ValidationMessageControlPairs validPairs) {
+        if (shoDiv.getPanelInput().getDdlKoufuJiyu().getSelectedValue() != null
+                && RString.EMPTY.equals(shoDiv.getPanelInput().getDdlKoufuJiyu().getSelectedValue())) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate必須, shoDiv.getPanelInput().getDdlKoufuJiyu()));
+        }
     }
 
-    public static ValidationMessageControlPairs 回収理由のの最大桁数() {
-
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate桁数2));
-        return validationMessages;
+    /**
+     * 交付理由の最大桁数です。
+     *
+     * @param validPairs ValidationMessageControlPairs
+     */
+    public void 交付理由の最大桁数(ValidationMessageControlPairs validPairs) {
+        if (shoDiv.getPanelInput().getTxaKoufuRiyu().getValue() != null
+                && 桁数_256 < shoDiv.getPanelInput().getTxaKoufuRiyu().getValue().length()) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate桁数, shoDiv.getPanelInput().getTxaKoufuRiyu()));
+        }
     }
 
-    public static ValidationMessageControlPairs 交付日と回収日の順番の整合性チェック() {
-
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate順番));
-        return validationMessages;
+    /**
+     * 回収理由のの最大桁数です。
+     *
+     * @param validPairs ValidationMessageControlPairs
+     */
+    public void 回収理由のの最大桁数(ValidationMessageControlPairs validPairs) {
+        if (shoDiv.getPanelInput().getTxaKaishuRiyu().getValue() != null
+                && 桁数_256 < shoDiv.getPanelInput().getTxaKaishuRiyu().getValue().length()) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate桁数2, shoDiv.getPanelInput().getTxaKaishuRiyu()));
+        }
     }
 
-    public static ValidationMessageControlPairs 交付日がセットになっているかの入力チェック() {
-
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate交付日));
-        return validationMessages;
+    /**
+     * 交付日と回収日の順番の整合性チェックです。
+     *
+     * @param validPairs ValidationMessageControlPairs
+     */
+    public void 交付日と回収日の順番の整合性チェック(ValidationMessageControlPairs validPairs) {
+        if (shoDiv.getPanelInput().getTxtKoufuDate().getValue() != null
+                && shoDiv.getPanelInput().getTxtKaisyuDate().getValue() != null
+                && shoDiv.getPanelInput().getTxtKaisyuDate().getValue().
+                isBefore(shoDiv.getPanelInput().getTxtKoufuDate().getValue())) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate順番,
+                    shoDiv.getPanelInput().getTxtKoufuDate(),
+                    shoDiv.getPanelInput().getTxtKaisyuDate()));
+        }
     }
 
-    public static ValidationMessageControlPairs 交付事由がセットになっているかの入力チェック() {
-
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate交付事由));
-        return validationMessages;
+    /**
+     * 交付日がセットになっているかの入力チェックです。
+     *
+     * @param validPairs ValidationMessageControlPairs
+     */
+    public void 交付日がセットになっているかの入力チェック(ValidationMessageControlPairs validPairs) {
+        if (shoDiv.getPanelInput().getTxtKoufuDate().getValue() == null
+                && shoDiv.getPanelInput().getTxaKoufuRiyu().getValue() != null) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate交付日, shoDiv.getPanelInput().getTxtKoufuDate()));
+        }
     }
 
-    public static ValidationMessageControlPairs 回収日がセットになっているかの入力チェック() {
-
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate回収日));
-        return validationMessages;
+    /**
+     * 交付事由がセットになっているかの入力チェックです。
+     *
+     * @param validPairs ValidationMessageControlPairs
+     */
+    public void 交付事由がセットになっているかの入力チェック(ValidationMessageControlPairs validPairs) {
+        if (RString.EMPTY.equals(shoDiv.getPanelInput().getDdlKoufuJiyu().getSelectedValue())
+                && shoDiv.getPanelInput().getTxtKoufuDate().getValue() != null) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate交付事由, shoDiv.getPanelInput().getDdlKoufuJiyu()));
+        }
     }
 
-    public static ValidationMessageControlPairs 回収事由がセットになっているかの入力チェック() {
+    /**
+     * 回収日がセットになっているかの入力チェックです。
+     *
+     * @param validPairs ValidationMessageControlPairs
+     */
+    public void 回収日がセットになっているかの入力チェック(ValidationMessageControlPairs validPairs) {
+        if (shoDiv.getPanelInput().getTxtKaisyuDate().getValue() == null
+                && shoDiv.getPanelInput().getTxaKaishuRiyu().getValue() != null) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate回収日, shoDiv.getPanelInput().getTxtKaisyuDate()));
+        }
+    }
 
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate回収事由));
-        return validationMessages;
+    /**
+     * 回収事由がセットになっているかの入力チェックです。
+     *
+     * @param validPairs ValidationMessageControlPairs
+     */
+    public void 回収事由がセットになっているかの入力チェック(ValidationMessageControlPairs validPairs) {
+        if (RString.EMPTY.equals(shoDiv.getPanelInput().getDdlKaisyuJiyu().getSelectedValue())
+                && shoDiv.getPanelInput().getTxtKaisyuDate().getValue() != null) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate回収事由, shoDiv.getPanelInput().getDdlKaisyuJiyu()));
+        }
     }
 
     private static enum RRVMessages implements IValidationMessage {
 
-        ValidateA(DbzErrorMessages.期間が不正_過去日付不可, "有効期限", "交付日"),
+        ValidateA(UrErrorMessages.期間が不正_追加メッセージあり２, "有効期限", "交付日"),
         Validate必須(UrErrorMessages.必須, "交付事由"),
         Validate桁数(UrErrorMessages.桁数が不正, "交付理由", "256"),
         Validate桁数2(UrErrorMessages.桁数が不正, "回収理由", "256"),
-        Validate順番(UrErrorMessages.期間が不正_追加メッセージあり２, "交付日", "回収日"),
-        Validate交付日(UrErrorMessages.存在しない, "交付日"),
-        Validate交付事由(UrErrorMessages.存在しない, "交付事由"),
-        Validate回収日(UrErrorMessages.存在しない, "回収日"),
-        Validate回収事由(UrErrorMessages.存在しない, "回収事由");
+        Validate順番(UrWarningMessages.日付の前後関係逆転以降, "交付日", "回収日"),
+        Validate交付日(UrErrorMessages.必須項目_追加メッセージあり, "交付日"),
+        Validate交付事由(UrErrorMessages.必須項目_追加メッセージあり, "交付事由"),
+        Validate回収日(UrErrorMessages.必須項目_追加メッセージあり, "回収日"),
+        Validate回収事由(UrErrorMessages.必須項目_追加メッセージあり, "回収事由");
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {

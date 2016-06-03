@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config;
 /**
  * 被保険者表示方法に関連する業務コンフィグです。
  *
+ * @reamsid_L DBA-9999-021 zhangzhiming
  */
 public enum ConfigKeysJukyuShikakuShomeishoHakko {
 
@@ -19,5 +20,13 @@ public enum ConfigKeysJukyuShikakuShomeishoHakko {
      * 受給資格証明書_備考項目文言を示すコンフィグです。
      */
     受給資格証明書_備考項目文言,
-    
+    /**
+     * 資格取得除外者登録作成です。
+     */
+    資格取得除外者登録キー,
+    /**
+     * 資格取得除外者登録作成です。
+     */
+    除外者データキー;
+
 }

@@ -13,8 +13,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum KokuhorenTorikomiJohoRecordShubetsu {
 
+    /**
+     * コントロールレコード
+     */
     コントロールレコード("1"),
+    /**
+     * データレコード
+     */
     データレコード("2"),
+    /**
+     * エンドレコード
+     */
     エンドレコード("3");
 
     private final RString code;

@@ -8,12 +8,10 @@ package jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteishinseijoh
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosairaijoho.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosairaijoho.NinteichosaIraiJohoIdentifier;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -32,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * {@link NinteiShinseiJoho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class NinteiShinseiJohoBuilder {
 
@@ -433,7 +433,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * 二号医療保険者名を設定します。
      *
-     * @param 二号医療保険者名　二号医療保険者名
+     * @param 二号医療保険者名 二号医療保険者名
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set二号医療保険者名(RString 二号医療保険者名) {

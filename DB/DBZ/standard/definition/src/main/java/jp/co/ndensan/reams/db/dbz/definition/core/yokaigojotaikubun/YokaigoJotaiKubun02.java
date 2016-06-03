@@ -6,57 +6,59 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 要介護状態区分コード02を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public enum YokaigoJotaiKubun02 {
 
     /**
-     * コード:01 名称:非該当 略称:定義なし
+     * コード:01 名称:非該当 略称:非該
      */
-    非該当("01", "非該当"),
+    非該当("01", "非該当", "非該"),
     /**
-     * コード:11 名称:要支援 略称:定義なし
+     * コード:11 名称:要支援 略称:支援
      */
-    要支援("11", "要支援"),
+    要支援("11", "要支援", "支援"),
     /**
-     * コード:21 名称:要介護1 略称:定義なし
+     * コード:21 名称:要介護1 略称:介1
      */
-    要介護1("21", "要介護1"),
+    要介護1("21", "要介護1", "介1"),
     /**
-     * コード:22 名称:要介護2 略称:定義なし
+     * コード:22 名称:要介護2 略称:介2
      */
-    要介護2("22", "要介護2"),
+    要介護2("22", "要介護2", "介2"),
     /**
-     * コード:23 名称:要介護3 略称:定義なし
+     * コード:23 名称:要介護3 略称:介3
      */
-    要介護3("23", "要介護3"),
+    要介護3("23", "要介護3", "介3"),
     /**
-     * コード:24 名称:要介護4 略称:定義なし
+     * コード:24 名称:要介護4 略称:介4
      */
-    要介護4("24", "要介護4"),
+    要介護4("24", "要介護4", "介4"),
     /**
-     * コード:25 名称:要介護5 略称:定義なし
+     * コード:25 名称:要介護5 略称:介5
      */
-    要介護5("25", "要介護5"),
+    要介護5("25", "要介護5", "介5"),
     /**
-     * コード:31 名称:再調査 略称:定義なし
+     * コード:31 名称:再調査 略称:再調
      */
-    再調査("31", "再調査"),
+    再調査("31", "再調査", "再調"),
     /**
      * コード:88 名称:取消 略称:定義なし
      */
-    取消("88", "取消"),
+    取消("88", "取消", "取消"),
     /**
      * コード:99 名称:なし 略称:定義なし
      */
-    なし("99", "なし");
+    なし("99", "なし", "なし");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private YokaigoJotaiKubun02(String code, String fullname) {
+    private YokaigoJotaiKubun02(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -66,6 +68,15 @@ public enum YokaigoJotaiKubun02 {
      */
     public RString getコード() {
         return code;
+    }
+
+    /**
+     * 要介護状態区分コード02の略称を返します。
+     *
+     * @return 要介護状態区分コード02の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

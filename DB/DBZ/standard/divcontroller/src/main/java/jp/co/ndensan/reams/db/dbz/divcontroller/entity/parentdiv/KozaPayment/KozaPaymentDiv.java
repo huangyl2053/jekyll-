@@ -1,18 +1,17 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KozaPayment;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KozaPayment.IKozaPaymentDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KozaPayment のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+
+/**
+ * KozaPayment のクラスファイル
+ *
  * @author 自動生成
  */
 public class KozaPaymentDiv extends Panel implements IKozaPaymentDiv {
@@ -22,6 +21,7 @@ public class KozaPaymentDiv extends Panel implements IKozaPaymentDiv {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtKinyuKikanCode")
     private TextBoxCode txtKinyuKikanCode;
     @JsonProperty("txtKinyuKikanName")
@@ -52,7 +52,7 @@ public class KozaPaymentDiv extends Panel implements IKozaPaymentDiv {
 
     @JsonProperty("txtKinyuKikanCode")
     public void setTxtKinyuKikanCode(TextBoxCode txtKinyuKikanCode) {
-        this.txtKinyuKikanCode=txtKinyuKikanCode;
+        this.txtKinyuKikanCode = txtKinyuKikanCode;
     }
 
     @JsonProperty("txtKinyuKikanName")
@@ -62,7 +62,7 @@ public class KozaPaymentDiv extends Panel implements IKozaPaymentDiv {
 
     @JsonProperty("txtKinyuKikanName")
     public void setTxtKinyuKikanName(TextBox txtKinyuKikanName) {
-        this.txtKinyuKikanName=txtKinyuKikanName;
+        this.txtKinyuKikanName = txtKinyuKikanName;
     }
 
     @JsonProperty("radKozaShubetsu")
@@ -72,7 +72,7 @@ public class KozaPaymentDiv extends Panel implements IKozaPaymentDiv {
 
     @JsonProperty("radKozaShubetsu")
     public void setRadKozaShubetsu(RadioButton radKozaShubetsu) {
-        this.radKozaShubetsu=radKozaShubetsu;
+        this.radKozaShubetsu = radKozaShubetsu;
     }
 
     @JsonProperty("txtKozaMeigininKana")
@@ -82,7 +82,7 @@ public class KozaPaymentDiv extends Panel implements IKozaPaymentDiv {
 
     @JsonProperty("txtKozaMeigininKana")
     public void setTxtKozaMeigininKana(TextBox txtKozaMeigininKana) {
-        this.txtKozaMeigininKana=txtKozaMeigininKana;
+        this.txtKozaMeigininKana = txtKozaMeigininKana;
     }
 
     @JsonProperty("txtKinyuKikanBrunchCode")
@@ -92,7 +92,7 @@ public class KozaPaymentDiv extends Panel implements IKozaPaymentDiv {
 
     @JsonProperty("txtKinyuKikanBrunchCode")
     public void setTxtKinyuKikanBrunchCode(TextBoxCode txtKinyuKikanBrunchCode) {
-        this.txtKinyuKikanBrunchCode=txtKinyuKikanBrunchCode;
+        this.txtKinyuKikanBrunchCode = txtKinyuKikanBrunchCode;
     }
 
     @JsonProperty("txtKinyuKikanBrunchName")
@@ -102,7 +102,7 @@ public class KozaPaymentDiv extends Panel implements IKozaPaymentDiv {
 
     @JsonProperty("txtKinyuKikanBrunchName")
     public void setTxtKinyuKikanBrunchName(TextBox txtKinyuKikanBrunchName) {
-        this.txtKinyuKikanBrunchName=txtKinyuKikanBrunchName;
+        this.txtKinyuKikanBrunchName = txtKinyuKikanBrunchName;
     }
 
     @JsonProperty("txtKozaNo")
@@ -112,7 +112,7 @@ public class KozaPaymentDiv extends Panel implements IKozaPaymentDiv {
 
     @JsonProperty("txtKozaNo")
     public void setTxtKozaNo(TextBoxCode txtKozaNo) {
-        this.txtKozaNo=txtKozaNo;
+        this.txtKozaNo = txtKozaNo;
     }
 
     @JsonProperty("txtKozaMeiginin")
@@ -122,9 +122,8 @@ public class KozaPaymentDiv extends Panel implements IKozaPaymentDiv {
 
     @JsonProperty("txtKozaMeiginin")
     public void setTxtKozaMeiginin(TextBox txtKozaMeiginin) {
-        this.txtKozaMeiginin=txtKozaMeiginin;
+        this.txtKozaMeiginin = txtKozaMeiginin;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

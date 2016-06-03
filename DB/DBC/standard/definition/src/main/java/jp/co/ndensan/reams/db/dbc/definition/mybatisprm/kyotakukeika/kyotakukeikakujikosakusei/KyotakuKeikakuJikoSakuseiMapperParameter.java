@@ -11,10 +11,13 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 居宅給付計画自己作成を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 @lombok.Getter
-public class KyotakuKeikakuJikoSakuseiMapperParameter {
-    
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class KyotakuKeikakuJikoSakuseiMapperParameter {
+
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth 対象年月;
     private final Decimal 履歴番号;

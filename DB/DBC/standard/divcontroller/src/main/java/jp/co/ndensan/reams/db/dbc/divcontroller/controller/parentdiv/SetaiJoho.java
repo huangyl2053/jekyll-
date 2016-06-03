@@ -41,32 +41,31 @@ public class SetaiJoho {
     }
 
     private List<dgSetaiJoho_Row> create世帯情報() {
-        
+
         List<HashMap> ymlData = ymlData("dbc0020000/KyotakuServicePlanIchiranSetaiJoin.yml");
         List<dgSetaiJoho_Row> arrayData = new ArrayList<>();
         dgSetaiJoho_Row item;
-        
+
         for (int i = 0; i < ymlData.size(); i++) {
-            
+
             HashMap hashMap = ymlData.get(i);
-            ControlGenerator ymlDt = new ControlGenerator(hashMap); 
-            
-             item = create世帯(
-             ymlDt.getAsRString("SetaiName"),
-             ymlDt.getAsRString("SetaiGender"),
-             ymlDt.getAsRString("SetaiBirthDay"),
-             ymlDt.getAsRString("SetaiTsuzukiGara"),
-             ymlDt.getAsRString("SetaiShikibetsuCode")        
-                   );
-             
-        arrayData.add(item);
+            ControlGenerator ymlDt = new ControlGenerator(hashMap);
+
+            item = create世帯(
+                    ymlDt.getAsRString("SetaiName"),
+                    ymlDt.getAsRString("SetaiGender"),
+                    ymlDt.getAsRString("SetaiBirthDay"),
+                    ymlDt.getAsRString("SetaiTsuzukiGara"),
+                    ymlDt.getAsRString("SetaiShikibetsuCode")
+            );
+
+            arrayData.add(item);
         }
-        
+
 //        item = create世帯("電算　次郎", "男", "昭52.02.21", "子", "123456789012");
 //        arrayData.add(item);
 //        item = create世帯("電算　三郎", "男", "昭54.02.21", "子", "123456789013");
 //        arrayData.add(item);
-
         return arrayData;
     }
 
@@ -75,7 +74,7 @@ public class SetaiJoho {
             RString gender,
             RString birthDay,
             RString tsuzukiGara,
-            RString JuminCode) {
+            RString juminCode) {
         dgSetaiJoho_Row rowData = new dgSetaiJoho_Row(
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
 
@@ -83,11 +82,11 @@ public class SetaiJoho {
         rowData.setSetaiGender(gender);
         rowData.setSetaiBirthDay(birthDay);
         rowData.setSetaiTsuzukiGara(tsuzukiGara);
-        rowData.setSetaiShikibetsuCode(JuminCode);
+        rowData.setSetaiShikibetsuCode(juminCode);
         return rowData;
     }
-    
-      private List<HashMap> ymlData(String ymlName) {
+
+    private List<HashMap> ymlData(String ymlName) {
         return YamlLoader.DBC.loadAsList(new RString(ymlName));
     }
 }

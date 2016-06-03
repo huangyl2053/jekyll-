@@ -7,22 +7,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.InputShikibetsuNo;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJisseki;
-import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiTokuteiNyushohi;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.dbc0010000.TokuteiNyushoshaKaigoServicehiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.dbc0010000.dgTokuteiNyushoshaKaigoServicehi_Row;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ServiceTeikyoYM;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -30,6 +22,12 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class TokuteiNyushoshaKaigoServicehi {
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel TokuteiNyushoshaKaigoServicehiDiv
+     * @return ResponseData
+     */
     public ResponseData<TokuteiNyushoshaKaigoServicehiDiv> onLoad(TokuteiNyushoshaKaigoServicehiDiv panel) {
         ResponseData<TokuteiNyushoshaKaigoServicehiDiv> response = new ResponseData<>();
 
@@ -97,33 +95,31 @@ public class TokuteiNyushoshaKaigoServicehi {
 
     private KyufuJisseki get給付実績() {
 
-        RString 被保番号 = (RString) ViewStateHolder.get("被保番号", RString.class);
-        RString サービス提供期間開始 = (RString) ViewStateHolder.get("サービス提供期間開始", RString.class);
-        RString サービス提供期間終了 = (RString) ViewStateHolder.get("サービス提供期間終了", RString.class);
-        RString 入力識別番号 = (RString) ViewStateHolder.get("入力識別番号", RString.class);
-        RString サービス種類 = (RString) ViewStateHolder.get("サービス種類", RString.class);
-        RString サービス提供年月 = (RString) ViewStateHolder.get("サービス提供年月", RString.class);
-
+//        RString 被保番号 = (RString) ViewStateHolder.get("被保番号", RString.class);
+//        RString サービス提供期間開始 = (RString) ViewStateHolder.get("サービス提供期間開始", RString.class);
+//        RString サービス提供期間終了 = (RString) ViewStateHolder.get("サービス提供期間終了", RString.class);
+//        RString 入力識別番号 = (RString) ViewStateHolder.get("入力識別番号", RString.class);
+//        RString サービス種類 = (RString) ViewStateHolder.get("サービス種類", RString.class);
+//        RString サービス提供年月 = (RString) ViewStateHolder.get("サービス提供年月", RString.class);
 //        KyufuJissekiKeyInfo keyInfo = new KyufuJissekiKeyInfo(
 //                new HihokenshaNo(被保番号),
 //                new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth(サービス提供期間開始)), new ServiceTeikyoYM((new FlexibleYearMonth(サービス提供期間終了)))),
 //                new InputShikibetsuNo(new Code(入力識別番号), RString.EMPTY, RString.EMPTY),
 //                new ServiceShuruiCode(サービス種類),
 //                new ServiceTeikyoYM(new FlexibleYearMonth(サービス提供年月)));
-
         // TODO n8300姜　ビルドエラー回避のために暫定対応
 //        KyufuJissekiFinder finder = new KyufuJissekiFinder();
 //        KyufuJissekiDetailKeyInfo detailKeyInfo = finder.get給付実績詳細キー(keyInfo);
 //        return detailKeyInfo != null ? finder.get給付実績(detailKeyInfo) : null;
         return null;
     }
-
-    private String setCommFormat(String str) {
-        if (str.isEmpty()) {
-            return str;
-        }
-        return new Decimal(str).toString("##,###,###");
-    }
+//
+//    private String setCommFormat(String str) {
+//        if (str.isEmpty()) {
+//            return str;
+//        }
+//        return new Decimal(str).toString("##,###,###");
+//    }
 
     private RString setCommFormat(Decimal data) {
         if (data == null) {
@@ -133,6 +129,7 @@ public class TokuteiNyushoshaKaigoServicehi {
     }
 
     private static final int INDEX_6 = 6;
+
     private RString toWareki(FlexibleYearMonth data) {
         if (data == null || !data.isValid()) {
             return RString.EMPTY;

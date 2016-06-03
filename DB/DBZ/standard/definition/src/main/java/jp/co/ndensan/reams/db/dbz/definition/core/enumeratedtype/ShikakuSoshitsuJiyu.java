@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author N3327 三浦 凌
  */
 public enum ShikakuSoshitsuJiyu implements IShikakuIdoJiyu {
+//TODO DBAから遷移か
 
     /**
      * EMPTY <br />

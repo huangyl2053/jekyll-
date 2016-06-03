@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060000.KyufuKanrihyoKihonDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -41,6 +41,8 @@ public class KyufuKanrihyoKihon {
     }
 
     private void setAtenaData(KyufuKanrihyoKihonDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getKyufuKanrihyoKaigoAtena();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
 //        AtenaShokaiSimple.setData(panel.getKyufuKanrihyoKaigoAtena().getAtenaInfo(), new ShikibetsuCode(cg.getAsRString("識別コード")));
     }

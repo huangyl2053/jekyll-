@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult;
 
-import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult.JotaiAnteiseiKubun;
+import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult.JotaiAnteiseiKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

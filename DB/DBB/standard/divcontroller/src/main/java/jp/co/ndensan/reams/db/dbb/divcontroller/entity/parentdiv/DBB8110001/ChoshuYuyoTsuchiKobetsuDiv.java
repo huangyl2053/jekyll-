@@ -1,20 +1,24 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * ChoshuYuyoTsuchiKobetsu のクラスファイル 
- * 
- * @author 自動生成
+ * ChoshuYuyoTsuchiKobetsu のクラスファイル
+ *
+ * @reamsid_L DBB-0740-010 wangkanglei
  */
 public class ChoshuYuyoTsuchiKobetsuDiv extends PanelPublish {
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,11 +26,9 @@ public class ChoshuYuyoTsuchiKobetsuDiv extends PanelPublish {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtChoshuYuyoHakkoYMD")
-    private TextBoxDate txtChoshuYuyoHakkoYMD;
-    @JsonProperty("lblChoshuYuyoTsuchiBunshoNo")
-    private Label lblChoshuYuyoTsuchiBunshoNo;
-    @JsonProperty("txtChoshuYuyoTsuchiBunshoNo")
-    private TextBox txtChoshuYuyoTsuchiBunshoNo;
+    private TextBoxFlexibleDate txtChoshuYuyoHakkoYMD;
+    @JsonProperty("ccdChoshuYuyoTsuchiBunshoNo")
+    private BunshoBangoInputDiv ccdChoshuYuyoTsuchiBunshoNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,34 +36,32 @@ public class ChoshuYuyoTsuchiKobetsuDiv extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtChoshuYuyoHakkoYMD
+     * @return txtChoshuYuyoHakkoYMD
+     */
     @JsonProperty("txtChoshuYuyoHakkoYMD")
-    public TextBoxDate getTxtChoshuYuyoHakkoYMD() {
+    public TextBoxFlexibleDate getTxtChoshuYuyoHakkoYMD() {
         return txtChoshuYuyoHakkoYMD;
     }
 
+    /*
+     * settxtChoshuYuyoHakkoYMD
+     * @param txtChoshuYuyoHakkoYMD txtChoshuYuyoHakkoYMD
+     */
     @JsonProperty("txtChoshuYuyoHakkoYMD")
-    public void setTxtChoshuYuyoHakkoYMD(TextBoxDate txtChoshuYuyoHakkoYMD) {
-        this.txtChoshuYuyoHakkoYMD=txtChoshuYuyoHakkoYMD;
+    public void setTxtChoshuYuyoHakkoYMD(TextBoxFlexibleDate txtChoshuYuyoHakkoYMD) {
+        this.txtChoshuYuyoHakkoYMD = txtChoshuYuyoHakkoYMD;
     }
 
-    @JsonProperty("lblChoshuYuyoTsuchiBunshoNo")
-    public Label getLblChoshuYuyoTsuchiBunshoNo() {
-        return lblChoshuYuyoTsuchiBunshoNo;
+    /*
+     * getccdChoshuYuyoTsuchiBunshoNo
+     * @return ccdChoshuYuyoTsuchiBunshoNo
+     */
+    @JsonProperty("ccdChoshuYuyoTsuchiBunshoNo")
+    public IBunshoBangoInputDiv getCcdChoshuYuyoTsuchiBunshoNo() {
+        return ccdChoshuYuyoTsuchiBunshoNo;
     }
 
-    @JsonProperty("lblChoshuYuyoTsuchiBunshoNo")
-    public void setLblChoshuYuyoTsuchiBunshoNo(Label lblChoshuYuyoTsuchiBunshoNo) {
-        this.lblChoshuYuyoTsuchiBunshoNo=lblChoshuYuyoTsuchiBunshoNo;
-    }
-
-    @JsonProperty("txtChoshuYuyoTsuchiBunshoNo")
-    public TextBox getTxtChoshuYuyoTsuchiBunshoNo() {
-        return txtChoshuYuyoTsuchiBunshoNo;
-    }
-
-    @JsonProperty("txtChoshuYuyoTsuchiBunshoNo")
-    public void setTxtChoshuYuyoTsuchiBunshoNo(TextBox txtChoshuYuyoTsuchiBunshoNo) {
-        this.txtChoshuYuyoTsuchiBunshoNo=txtChoshuYuyoTsuchiBunshoNo;
-    }
-
+    // </editor-fold>
 }

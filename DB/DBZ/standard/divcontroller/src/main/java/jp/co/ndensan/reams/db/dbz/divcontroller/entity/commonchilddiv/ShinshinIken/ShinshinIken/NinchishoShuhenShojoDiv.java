@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinchishoShuhenShojoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,44 +36,76 @@ public class NinchishoShuhenShojoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getchkNinchishoShuhenShojoUmu
+     * @return chkNinchishoShuhenShojoUmu
+     */
     @JsonProperty("chkNinchishoShuhenShojoUmu")
     public CheckBoxList getChkNinchishoShuhenShojoUmu() {
         return chkNinchishoShuhenShojoUmu;
     }
 
+    /*
+     * setchkNinchishoShuhenShojoUmu
+     * @param chkNinchishoShuhenShojoUmu chkNinchishoShuhenShojoUmu
+     */
     @JsonProperty("chkNinchishoShuhenShojoUmu")
     public void setChkNinchishoShuhenShojoUmu(CheckBoxList chkNinchishoShuhenShojoUmu) {
-        this.chkNinchishoShuhenShojoUmu=chkNinchishoShuhenShojoUmu;
+        this.chkNinchishoShuhenShojoUmu = chkNinchishoShuhenShojoUmu;
     }
 
+    /*
+     * getchkNinchishoShuhenShojo
+     * @return chkNinchishoShuhenShojo
+     */
     @JsonProperty("chkNinchishoShuhenShojo")
     public CheckBoxList getChkNinchishoShuhenShojo() {
         return chkNinchishoShuhenShojo;
     }
 
+    /*
+     * setchkNinchishoShuhenShojo
+     * @param chkNinchishoShuhenShojo chkNinchishoShuhenShojo
+     */
     @JsonProperty("chkNinchishoShuhenShojo")
     public void setChkNinchishoShuhenShojo(CheckBoxList chkNinchishoShuhenShojo) {
-        this.chkNinchishoShuhenShojo=chkNinchishoShuhenShojo;
+        this.chkNinchishoShuhenShojo = chkNinchishoShuhenShojo;
     }
 
+    /*
+     * getchkNinchishoShuhenShojoSonota
+     * @return chkNinchishoShuhenShojoSonota
+     */
     @JsonProperty("chkNinchishoShuhenShojoSonota")
     public CheckBoxList getChkNinchishoShuhenShojoSonota() {
         return chkNinchishoShuhenShojoSonota;
     }
 
+    /*
+     * setchkNinchishoShuhenShojoSonota
+     * @param chkNinchishoShuhenShojoSonota chkNinchishoShuhenShojoSonota
+     */
     @JsonProperty("chkNinchishoShuhenShojoSonota")
     public void setChkNinchishoShuhenShojoSonota(CheckBoxList chkNinchishoShuhenShojoSonota) {
-        this.chkNinchishoShuhenShojoSonota=chkNinchishoShuhenShojoSonota;
+        this.chkNinchishoShuhenShojoSonota = chkNinchishoShuhenShojoSonota;
     }
 
+    /*
+     * gettxtSonotaKinyu
+     * @return txtSonotaKinyu
+     */
     @JsonProperty("txtSonotaKinyu")
     public TextBox getTxtSonotaKinyu() {
         return txtSonotaKinyu;
     }
 
+    /*
+     * settxtSonotaKinyu
+     * @param txtSonotaKinyu txtSonotaKinyu
+     */
     @JsonProperty("txtSonotaKinyu")
     public void setTxtSonotaKinyu(TextBox txtSonotaKinyu) {
-        this.txtSonotaKinyu=txtSonotaKinyu;
+        this.txtSonotaKinyu = txtSonotaKinyu;
     }
 
     // </editor-fold>

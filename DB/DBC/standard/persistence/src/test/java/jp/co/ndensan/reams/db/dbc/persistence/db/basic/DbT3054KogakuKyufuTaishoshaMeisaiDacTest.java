@@ -255,7 +255,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiDacTest extends DbcTestDacBase {
                 FlexibleYearMonth サービス提供年月,
                 JigyoshaNo 事業者番号,
                 ServiceShuruiCode サービス種類コード,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3054KogakuKyufuTaishoshaMeisaiEntity entity = DbT3054KogakuKyufuTaishoshaMeisaiEntityGenerator.createDbT3054KogakuKyufuTaishoshaMeisaiEntity();
             entity.setHihokenshaNo(被保険者番号);
             entity.setServiceTeikyoYM(サービス提供年月);

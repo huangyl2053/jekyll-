@@ -10,13 +10,15 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJushoE
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.BanchiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link RendoHoryuTokuteiJusho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBZ-9999-021 zhangzhiming
  */
 public class RendoHoryuTokuteiJushoBuilder {
 
@@ -37,32 +39,6 @@ public class RendoHoryuTokuteiJushoBuilder {
         this.entity = entity.clone();
         this.id = id;
 
-    }
-
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 管理番号を設定します。
-     *
-     * @param 管理番号 管理番号
-     * @return {@link RendoHoryuTokuteiJushoBuilder}
-     */
-    public RendoHoryuTokuteiJushoBuilder set管理番号(RString 管理番号) {
-        requireNonNull(管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("管理番号"));
-        entity.setKanriNo(管理番号);
-        return this;
-    }
-
-    /**
-     * 市町村コードを設定します。
-     *
-     * @param 市町村コード 市町村コード
-     * @return {@link RendoHoryuTokuteiJushoBuilder}
-     */
-    public RendoHoryuTokuteiJushoBuilder set市町村コード(LasdecCode 市町村コード) {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        entity.setShichosonCode(市町村コード);
-        return this;
     }
 
     /**
@@ -158,6 +134,18 @@ public class RendoHoryuTokuteiJushoBuilder {
     public RendoHoryuTokuteiJushoBuilder set施設コード(RString 施設コード) {
         requireNonNull(施設コード, UrSystemErrorMessages.値がnull.getReplacedMessage("施設コード"));
         entity.setShisetsuCode(施設コード);
+        return this;
+    }
+
+    /**
+     * 施設名称を設定します。
+     *
+     * @param 施設名称 施設名称
+     * @return {@link RendoHoryuTokuteiJushoBuilder}
+     */
+    public RendoHoryuTokuteiJushoBuilder set施設名称(AtenaMeisho 施設名称) {
+        requireNonNull(施設名称, UrSystemErrorMessages.値がnull.getReplacedMessage("施設名称"));
+        entity.setShisetsuMeisho(施設名称);
         return this;
     }
 

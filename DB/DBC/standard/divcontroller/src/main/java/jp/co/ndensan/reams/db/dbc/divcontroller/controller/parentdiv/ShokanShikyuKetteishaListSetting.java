@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShokanShikyuKetteishaListSetting {
 
     private static final int INDEX_3 = 3;
-    private static final int INDEX_4 = 4;
+//    private static final int INDEX_4 = 4;
     private static final int INDEX_5 = 5;
 
     private List<HashMap> getShokanShikyuTorokuShomeishoYaml() {
@@ -52,6 +52,8 @@ public class ShokanShikyuKetteishaListSetting {
     }
 
     private void setPaymentDate(ShokanShikyuKetteishaListSettingDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.hashCode();
 //        HashMap source = getShokanShikyuTorokuShomeishoYaml().get(INDEX_4);
     }
 

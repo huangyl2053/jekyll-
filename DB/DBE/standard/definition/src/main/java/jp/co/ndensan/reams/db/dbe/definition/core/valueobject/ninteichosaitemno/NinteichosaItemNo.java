@@ -22,7 +22,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 public class NinteichosaItemNo implements Comparable<NinteichosaItemNo>, IDbColumnMappable, IValidatable, IValueObject<RString> {
 
     private final RString 調査項目番号;
-
+    /**
+     * NinteichosaItemNoのEMPTYです。
+     */
     public static final NinteichosaItemNo EMPTY;
 
     /**
@@ -36,14 +38,14 @@ public class NinteichosaItemNo implements Comparable<NinteichosaItemNo>, IDbColu
      * コンストラクタです。<br/>
      *
      * @param 調査項目番号 調査項目番号
+     * @throws NullPointerException Error
      */
     public NinteichosaItemNo(RString 調査項目番号) throws NullPointerException {
         this.調査項目番号 = requireNonNull(調査項目番号, UrSystemErrorMessages.値がnull.getReplacedMessage("調査項目番号"));
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link NinteichosaItemNo}が持つ調査項目番号についてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link NinteichosaItemNo}が持つ調査項目番号についてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */

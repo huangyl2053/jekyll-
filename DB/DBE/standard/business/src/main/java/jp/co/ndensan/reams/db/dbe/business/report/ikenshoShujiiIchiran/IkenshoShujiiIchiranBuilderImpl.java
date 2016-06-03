@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 主治医医療機関・主治医一覧表Builderクラスです。
+ *
+ * @reamsid_L DBE-0260-020 zuotao
  */
 class IkenshoShujiiIchiranBuilderImpl implements IkenshoShujiiIchiranBuilder {
 

@@ -14,8 +14,20 @@ module DBZ {
                 return "onChanged_ddlTodokedeDaikoKubun";
             }
 
+            public static onOkClose_seitai(): string {
+                return "onOkClose_seitai";
+            }
+
+            public static onOkClose_atenKensaku(): string {
+                return "onOkClose_atenKensaku";
+            }
+
             public static onClick_btnZenkaiFukusha(): string {
                 return "onClick_btnZenkaiFukusha";
+            }
+
+            public static onChangeChkKannaiKangai(): string {
+                return "onChangeChkKannaiKangai";
             }
 
         }
@@ -85,10 +97,6 @@ module DBZ {
 
             public txtHonninKankeisei(): UZA.TextBoxCode {
                 return new UZA.TextBoxCode(this.convFiledName("txtHonninKankeisei"));
-            }
-
-            public lblHonninKankeiseiMei(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblHonninKankeiseiMei"));
             }
 
             public radKannaiKangai(): UZA.RadioButton {

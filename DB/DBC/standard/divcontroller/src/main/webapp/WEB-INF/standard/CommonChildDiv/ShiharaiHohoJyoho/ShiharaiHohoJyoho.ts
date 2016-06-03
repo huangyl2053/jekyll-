@@ -45,25 +45,15 @@ module DBC
                 }
 
                 public shokai(): void {
-                    this.controls.radMadoguti().disabled = true;
-                    this.controls.txtShiharaiBasho().disabled = true;
-                    this.controls.txtStartYMD().disabled = true;
-                    this.controls.txtStartHHMM().disabled = true;
-                    this.controls.txtEndYMD().disabled = true;
-                    this.controls.txtEndHHMM().disabled = true;
-                    this.controls.radKoza().disabled = true;
-                    this.controls.radJyryoinin().disabled = true;
+                    this.controls.btnKozaToroku().visible = false;
+                    this.controls.btnSelect().visible = false;
+                    this.controls.ShiharaiHohoJyoho().disabled = true;
                 }
 
                 public toroku(): void {
-                    this.controls.radMadoguti().disabled = false;
-                    this.controls.txtShiharaiBasho().disabled = false;
-                    this.controls.txtStartYMD().disabled = false;
-                    this.controls.txtStartHHMM().disabled = false;
-                    this.controls.txtEndYMD().disabled = false;
-                    this.controls.txtEndHHMM().disabled = false;
-                    this.controls.radKoza().disabled = false;
-                    this.controls.radJyryoinin().disabled = false;
+                    this.controls.btnKozaToroku().visible = true;
+                    this.controls.btnSelect().visible = true;
+                    this.controls.ShiharaiHohoJyoho().disabled = false;
                 }
             }
             export class PageMode {
@@ -148,6 +138,7 @@ module DBC
                     this.controls.txtKinyuKikanShitenCode1().displayNone = true;
                     this.controls.txtYokinShubetsu1().displayNone = true;
                     this.controls.txtKozaNo1().displayNone = true;
+                    this.controls.txtTenban1().displayNone = true;
                     this.controls.txtKinyuKikanName1().displayNone = true;
                     this.controls.txtMeigininKana1().displayNone = true;
                     this.controls.txtMeigininKanji1().displayNone = true;

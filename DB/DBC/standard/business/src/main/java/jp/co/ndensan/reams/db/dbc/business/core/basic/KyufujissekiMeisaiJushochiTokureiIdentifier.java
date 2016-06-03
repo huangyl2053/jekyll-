@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import lombok.Value;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -16,11 +15,13 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomo
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Value;
 
 /**
  * 給付実績明細・住所地特例の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KyufujissekiMeisaiJushochiTokureiIdentifier implements Serializable {
 
     private final KokanShikibetsuNo 交換情報識別番号;

@@ -15,6 +15,7 @@ import lombok.Value;
  * 基準収入額適用管理の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KijunShunyugakuTekiyoKanriIdentifier implements Serializable {
 
     private final SetaiCode 世帯コード;

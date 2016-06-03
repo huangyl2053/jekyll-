@@ -12,9 +12,10 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.shujiijoho.ShujiiMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiMasterMapperParameter;
-import jp.co.ndensan.reams.db.dbe.entity.basic.shujiijoho.ShujiiMasterRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.shujiijoho.IShujiiMasterJohoMapper;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiMasterSearchParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiijoho.ShujiiMasterRelateEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiijoho.IShujiiMasterJohoMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 主治医情報クラスです。
  *
+ * @reamsid_L DBE-0250-010  suguangjun
  */
 public class ShujiiMasterFinder {
 
@@ -104,7 +106,7 @@ public class ShujiiMasterFinder {
      * @return 主治医情報の件数
      */
     @Transaction
-    public int getShujiiJohoCount(ShujiiMasterMapperParameter 主治医情報検索条件) {
+    public int getShujiiJohoCount(ShujiiMasterSearchParameter 主治医情報検索条件) {
         IShujiiMasterJohoMapper mapper = mapperProvider.create(IShujiiMasterJohoMapper.class);
         return mapper.selectShujiiJohoCount(主治医情報検索条件);
     }
@@ -116,7 +118,7 @@ public class ShujiiMasterFinder {
      * @return 要介護認定申請情報の件数
      */
     @Transaction
-    public int getNinteiShinseiJohoCount(ShujiiMasterMapperParameter 主治医情報検索条件) {
+    public int getNinteiShinseiJohoCount(ShujiiMasterSearchParameter 主治医情報検索条件) {
         IShujiiMasterJohoMapper mapper = mapperProvider.create(IShujiiMasterJohoMapper.class);
         return mapper.selectNinteiShinseiJohoCount(主治医情報検索条件);
     }
@@ -128,7 +130,7 @@ public class ShujiiMasterFinder {
      * @return 主治医意見書作成依頼情報の件数
      */
     @Transaction
-    public int getIkenshoIraiJohoCount(ShujiiMasterMapperParameter 主治医情報検索条件) {
+    public int getIkenshoIraiJohoCount(ShujiiMasterSearchParameter 主治医情報検索条件) {
         IShujiiMasterJohoMapper mapper = mapperProvider.create(IShujiiMasterJohoMapper.class);
         return mapper.selectIkenshoIraiJohoCount(主治医情報検索条件);
     }
@@ -140,8 +142,20 @@ public class ShujiiMasterFinder {
      * @return 主治医医療機関名
      */
     @Transaction
-    public RString getShujiiIryoKikanJoho(ShujiiMasterMapperParameter 主治医情報検索条件) {
+    public RString getShujiiIryoKikanJoho(ShujiiMasterSearchParameter 主治医情報検索条件) {
         IShujiiMasterJohoMapper mapper = mapperProvider.create(IShujiiMasterJohoMapper.class);
         return mapper.selectShujiiIryoKikanJoho(主治医情報検索条件);
+    }
+
+    /**
+     * 検索条件に従い、市町村名検索します。
+     *
+     * @param 主治医情報検索条件 主治医情報検索条件
+     * @return 市町村名
+     */
+    @Transaction
+    public RString getShichosonMeisho(ShujiiMasterSearchParameter 主治医情報検索条件) {
+        IShujiiMasterJohoMapper mapper = mapperProvider.create(IShujiiMasterJohoMapper.class);
+        return mapper.selectShichosonMeisho(主治医情報検索条件);
     }
 }

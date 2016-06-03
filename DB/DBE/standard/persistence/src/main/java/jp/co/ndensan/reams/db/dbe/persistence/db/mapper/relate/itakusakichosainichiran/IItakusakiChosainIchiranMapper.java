@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.itakusakichosainichiran.Itaku
 /**
  *
  * 調査委託先・調査員一覧表の処理のインタフェースです。
+ * @reamsid_L DBE-0290-030 dongyabin
  */
 public interface IItakusakiChosainIchiranMapper {
 

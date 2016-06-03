@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 他市町村住所地特例を管理するクラスです。
+ *
+ * @reamsid_L DBB-0630-020 chengsanyuan
  */
 public class TashichosonJushochiTokureiManager {
 
@@ -39,6 +41,15 @@ public class TashichosonJushochiTokureiManager {
      */
     TashichosonJushochiTokureiManager(DbT1003TashichosonJushochiTokureiDac dac) {
         this.dac = dac;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link TashichosonJushochiTokureiManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link TashichosonJushochiTokureiManager}のインスタンス
+     */
+    public static TashichosonJushochiTokureiManager createInstance() {
+        return InstanceProvider.create(TashichosonJushochiTokureiManager.class);
     }
 
     /**
@@ -84,6 +95,24 @@ public class TashichosonJushochiTokureiManager {
         }
 
         return businessList;
+    }
+
+    /**
+     * 主キーに合致する適用除外者を返します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return TashichosonJushochiTokurei
+     */
+    @Transaction
+    public TashichosonJushochiTokurei get他市町村住所地特例By識別(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbT1003TashichosonJushochiTokureiEntity entity = dac.selectMaxByKey(識別コード);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new TashichosonJushochiTokurei(entity);
     }
 
     /**

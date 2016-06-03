@@ -8,13 +8,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiShinseiT
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.IShinseiRirekiJoho;
-import jp.co.ndensan.reams.db.dbz.business.core.IShinseitodokedeJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JigyoshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShinseiTodokedeshaTsuzukigaraCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -31,8 +29,6 @@ public class NinteiShinseiTodokedeshaHandler {
 //    private IShinseiRirekiManager shinseiRirekiManager;
 //    private INinteiShinseiJohoManager ninteiShinseiJohoManager;
 //    private IShinseitodokedeJohoManager shinseitodokedeJohoManager;
-
-    private SubGyomuCode subGyomuCode;
 
     /**
      * コンストラクタです。
@@ -144,7 +140,7 @@ public class NinteiShinseiTodokedeshaHandler {
         Optional<IShinseiRirekiJoho> shinseiRirekiJoho = Optional.empty();
 //        Optional<IShinseiRirekiJoho> shinseiRirekiJoho = shinseiRirekiManager.find申請履歴情報(new ShinseishoKanriNo(div.getHdnShinseishoKanriNo()));
         if (shinseiRirekiJoho.isPresent()) {
-            createZenkaiJoho(shinseiRirekiJoho);
+//            createZenkaiJoho(shinseiRirekiJoho);
         }
     }
 
@@ -161,7 +157,7 @@ public class NinteiShinseiTodokedeshaHandler {
 //        shinseitodokedeJohoManager = ShinseitodokedeJohoFactory.getInstance(new SubGyomuCode(div.getHdnGyomuCode()));
     }
 
-    private void createZenkaiJoho(Optional<IShinseiRirekiJoho> shinseiRirekiJoho) {
+//    private void createZenkaiJoho(Optional<IShinseiRirekiJoho> shinseiRirekiJoho) {
 //        Optional<INinteiShinseiJoho> ninteiShinseiJoho
 //                = ninteiShinseiJohoManager.find認定申請情報(shinseiRirekiJoho.get().get前回申請管理番号());
 //        if (ninteiShinseiJoho.isPresent()) {
@@ -171,19 +167,17 @@ public class NinteiShinseiTodokedeshaHandler {
 //                setZenkaiJoho(shinseitodokedeJoho);
 //            }
 //        }
-    }
-
-    private void setZenkaiJoho(Optional<IShinseitodokedeJoho> shinseitodokedeJoho) {
-        div.getTxtShimei().setValue(shinseitodokedeJoho.get().get申請届出者氏名());
-        div.getTxtKanaShimei().setValue(shinseitodokedeJoho.get().get申請届出者氏名カナ());
-        //本人と関係性
-        div.getTxtHonninKankeisei().setValue(shinseitodokedeJoho.get().get申請届出者続柄コード());
-        div.getLblHonninKankeiseiMei().setText(new RString(ShinseiTodokedeshaTsuzukigaraCode.toValue(shinseitodokedeJoho.get().get申請届出者続柄コード()).name()));
-        div.getTxtYubinNo().setValue(shinseitodokedeJoho.get().get申請届出者郵便番号());
-        div.getTxtTelNo().setDomain((shinseitodokedeJoho.get().get申請届出者電話番号()));
-        div.getDdlTodokledeDaikoKubun().setSelectedKey(shinseitodokedeJoho.get().get申請届出代行区分コード().getKey());
-        div.getDdlShinseiKankeisha().setSelectedKey(shinseitodokedeJoho.get().get事業者区分());
-
-    }
-
+//    }
+//    private void setZenkaiJoho(Optional<IShinseitodokedeJoho> shinseitodokedeJoho) {
+//        div.getTxtShimei().setValue(shinseitodokedeJoho.get().get申請届出者氏名());
+//        div.getTxtKanaShimei().setValue(shinseitodokedeJoho.get().get申請届出者氏名カナ());
+//        //本人と関係性
+//        div.getTxtHonninKankeisei().setValue(shinseitodokedeJoho.get().get申請届出者続柄コード());
+//        div.getLblHonninKankeiseiMei().setText(new RString(ShinseiTodokedeshaTsuzukigaraCode.toValue(shinseitodokedeJoho.get().get申請届出者続柄コード()).name()));
+//        div.getTxtYubinNo().setValue(shinseitodokedeJoho.get().get申請届出者郵便番号());
+//        div.getTxtTelNo().setDomain((shinseitodokedeJoho.get().get申請届出者電話番号()));
+//        div.getDdlTodokledeDaikoKubun().setSelectedKey(shinseitodokedeJoho.get().get申請届出代行区分コード().getKey());
+//        div.getDdlShinseiKankeisha().setSelectedKey(shinseitodokedeJoho.get().get事業者区分());
+//
+//    }
 }

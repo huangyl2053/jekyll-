@@ -1,21 +1,16 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3010002;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3010002.IryoHokenDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3010002.NinteiResultDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3010002.NinteichosaDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3010002.ShujiiIkenshoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * NinteiDetail のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+
+/**
+ * NinteiDetail のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteiDetailDiv extends Panel {
@@ -25,6 +20,7 @@ public class NinteiDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtNinteiShinseiYMD")
     private TextBoxFlexibleDate txtNinteiShinseiYMD;
     @JsonProperty("txtNinteiShinseiKubunShinseiji")
@@ -61,7 +57,7 @@ public class NinteiDetailDiv extends Panel {
 
     @JsonProperty("txtNinteiShinseiYMD")
     public void setTxtNinteiShinseiYMD(TextBoxFlexibleDate txtNinteiShinseiYMD) {
-        this.txtNinteiShinseiYMD=txtNinteiShinseiYMD;
+        this.txtNinteiShinseiYMD = txtNinteiShinseiYMD;
     }
 
     @JsonProperty("txtNinteiShinseiKubunShinseiji")
@@ -71,7 +67,7 @@ public class NinteiDetailDiv extends Panel {
 
     @JsonProperty("txtNinteiShinseiKubunShinseiji")
     public void setTxtNinteiShinseiKubunShinseiji(TextBox txtNinteiShinseiKubunShinseiji) {
-        this.txtNinteiShinseiKubunShinseiji=txtNinteiShinseiKubunShinseiji;
+        this.txtNinteiShinseiKubunShinseiji = txtNinteiShinseiKubunShinseiji;
     }
 
     @JsonProperty("txtNinteiShinseiKubunHorei")
@@ -81,7 +77,7 @@ public class NinteiDetailDiv extends Panel {
 
     @JsonProperty("txtNinteiShinseiKubunHorei")
     public void setTxtNinteiShinseiKubunHorei(TextBox txtNinteiShinseiKubunHorei) {
-        this.txtNinteiShinseiKubunHorei=txtNinteiShinseiKubunHorei;
+        this.txtNinteiShinseiKubunHorei = txtNinteiShinseiKubunHorei;
     }
 
     @JsonProperty("txtNinteiShinseiYukoKubun")
@@ -91,7 +87,7 @@ public class NinteiDetailDiv extends Panel {
 
     @JsonProperty("txtNinteiShinseiYukoKubun")
     public void setTxtNinteiShinseiYukoKubun(TextBox txtNinteiShinseiYukoKubun) {
-        this.txtNinteiShinseiYukoKubun=txtNinteiShinseiYukoKubun;
+        this.txtNinteiShinseiYukoKubun = txtNinteiShinseiYukoKubun;
     }
 
     @JsonProperty("txtIchijiHanteiYMD")
@@ -101,7 +97,7 @@ public class NinteiDetailDiv extends Panel {
 
     @JsonProperty("txtIchijiHanteiYMD")
     public void setTxtIchijiHanteiYMD(TextBoxFlexibleDate txtIchijiHanteiYMD) {
-        this.txtIchijiHanteiYMD=txtIchijiHanteiYMD;
+        this.txtIchijiHanteiYMD = txtIchijiHanteiYMD;
     }
 
     @JsonProperty("txtIchijiHanteiResult")
@@ -111,7 +107,7 @@ public class NinteiDetailDiv extends Panel {
 
     @JsonProperty("txtIchijiHanteiResult")
     public void setTxtIchijiHanteiResult(TextBox txtIchijiHanteiResult) {
-        this.txtIchijiHanteiResult=txtIchijiHanteiResult;
+        this.txtIchijiHanteiResult = txtIchijiHanteiResult;
     }
 
     @JsonProperty("txtIchijiHanteiKanryoYMD")
@@ -121,7 +117,7 @@ public class NinteiDetailDiv extends Panel {
 
     @JsonProperty("txtIchijiHanteiKanryoYMD")
     public void setTxtIchijiHanteiKanryoYMD(TextBoxFlexibleDate txtIchijiHanteiKanryoYMD) {
-        this.txtIchijiHanteiKanryoYMD=txtIchijiHanteiKanryoYMD;
+        this.txtIchijiHanteiKanryoYMD = txtIchijiHanteiKanryoYMD;
     }
 
     @JsonProperty("NinteiResult")
@@ -131,7 +127,7 @@ public class NinteiDetailDiv extends Panel {
 
     @JsonProperty("NinteiResult")
     public void setNinteiResult(NinteiResultDiv NinteiResult) {
-        this.NinteiResult=NinteiResult;
+        this.NinteiResult = NinteiResult;
     }
 
     @JsonProperty("Ninteichosa")
@@ -141,7 +137,7 @@ public class NinteiDetailDiv extends Panel {
 
     @JsonProperty("Ninteichosa")
     public void setNinteichosa(NinteichosaDiv Ninteichosa) {
-        this.Ninteichosa=Ninteichosa;
+        this.Ninteichosa = Ninteichosa;
     }
 
     @JsonProperty("ShujiiIkensho")
@@ -151,7 +147,7 @@ public class NinteiDetailDiv extends Panel {
 
     @JsonProperty("ShujiiIkensho")
     public void setShujiiIkensho(ShujiiIkenshoDiv ShujiiIkensho) {
-        this.ShujiiIkensho=ShujiiIkensho;
+        this.ShujiiIkensho = ShujiiIkensho;
     }
 
     @JsonProperty("IryoHoken")
@@ -161,7 +157,7 @@ public class NinteiDetailDiv extends Panel {
 
     @JsonProperty("IryoHoken")
     public void setIryoHoken(IryoHokenDiv IryoHoken) {
-        this.IryoHoken=IryoHoken;
+        this.IryoHoken = IryoHoken;
     }
 
 }

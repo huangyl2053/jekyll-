@@ -14,6 +14,7 @@ import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKe
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke.日付関連_調定年度;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke.日付関連_遡及年度;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenu;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.helper.FukaTaishoshaSearchValidationHelper;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
@@ -34,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
@@ -162,7 +164,7 @@ public class HihokenshaFinderHandler {
      * 最近処理者を読み込みます。
      */
     void load最近処理者() {
-//        div.getCcdSaikinShorisha().setInitialLoad(new ScopeCode(ScopeCodeType.識別対象.getCode()));
+        div.getCcdSaikinShorisha().setInitialLoad(new ScopeCode(ScopeCodeType.識別対象.getCode()));
     }
 
     /**
@@ -181,7 +183,8 @@ public class HihokenshaFinderHandler {
      * @return 最近処理者
      */
     RString get最近処理者() {
-        RecentUsedDdlValue 最近処理者 = div.getCcdSaikinShorisha().getWrappedSaikinShorishaRireki().getRecentUsed();
+//        RecentUsedDdlValue 最近処理者 = div.getCcdSaikinShorisha().getWrappedSaikinShorishaRireki().getRecentUsed();
+        RecentUsedDdlValue 最近処理者 = div.getCcdSaikinShorisha().getRecentUsed();
         return 最近処理者 != null ? 最近処理者.get最近処理対象コード() : RString.EMPTY;
     }
 
@@ -195,24 +198,20 @@ public class HihokenshaFinderHandler {
         int 所得年度 = Integer.parseInt(BusinessConfig.getConfigInfo(日付関連_所得年度, subGyomuCode).getConfigValue().toString());
         int 遡及年度 = Integer.parseInt(BusinessConfig.getConfigInfo(日付関連_遡及年度, subGyomuCode).getConfigValue().toString());
         int 当初年度 = Integer.parseInt(BusinessConfig.getConfigInfo(日付関連_当初年度, subGyomuCode).getConfigValue().toString());
-        // TODO メニューから起動しないとメニューIDを取得できないため、動作確認のために定数をセット
-        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
-        // FukaSearchMenu menu = FukaSearchMenu.toValue(UrControlDataFactory.createInstance().getMenuID());
+        FukaSearchMenu menu = FukaSearchMenu.toValue(ResponseHolder.getUIContainerId());
+
         int 開始年度 = 0;
         int 終了年度 = 0;
-        if (menu.equals(FukaSearchMenu.賦課照会)) {
+        if (menu.is(FukaSearchMenuGroup.更正計算系)) {
+            開始年度 = 調定年度;
+            終了年度 = 遡及年度;
+        } else if (menu.is(FukaSearchMenuGroup.所得照会系)) {
+            開始年度 = 所得年度;
+            終了年度 = 当初年度;
+        } else if (menu.is(FukaSearchMenuGroup.照会系)) {
             開始年度 = 調定年度;
             終了年度 = 当初年度;
             ddlSourceList.add(new KeyValueDataSource(new RString("9999"), new RString("全年度")));
-        } else if (menu.equals(FukaSearchMenu.所得情報照会)) {
-            開始年度 = 所得年度;
-            終了年度 = 当初年度;
-        } else if (menu.equals(FukaSearchMenu.即時賦課更正)) {
-            開始年度 = 調定年度;
-            終了年度 = 遡及年度;
-        } else if (menu.equals(FukaSearchMenu.各種通知書発行_個別)) {
-            開始年度 = 調定年度;
-            終了年度 = 当初年度;
         }
         for (int i = 開始年度; i >= 終了年度; i--) {
             KeyValueDataSource source = new KeyValueDataSource(new RString(String.valueOf(i)), new RString("平").concat(new RString(String.valueOf(i - 1988))));

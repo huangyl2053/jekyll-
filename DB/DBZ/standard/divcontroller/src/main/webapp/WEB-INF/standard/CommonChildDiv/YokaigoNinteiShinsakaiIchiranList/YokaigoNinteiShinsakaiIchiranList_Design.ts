@@ -8,8 +8,16 @@ module DBZ {
 
         export class Events {
 
+            public static onClick_BtnKensaku(): string {
+                return "onClick_BtnKensaku";
+            }
+
             public static onClick_btnSelect(): string {
                 return "onClick_btnSelect";
+            }
+
+            public static onClick_CheckBox(): string {
+                return "onClick_CheckBox";
             }
 
         }

@@ -10,12 +10,12 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ShujiiData;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe4060001.NinteiShinsakaiTaishoshaWariateDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe4060001.NinteiShinsakaiIchiranDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe4060001.dgWariatezumiTaishoshaIchiran_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe4060001.dgMiwariateTaishoshaIchiran_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe4060001.dgShinsainKoseiIchiran_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe4060001.dgShinsainIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4060001.NinteiShinsakaiIchiranDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4060001.NinteiShinsakaiTaishoshaWariateDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4060001.dgMiwariateTaishoshaIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4060001.dgShinsainIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4060001.dgShinsainKoseiIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4060001.dgWariatezumiTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -237,18 +237,9 @@ public class NinteiShinsakaiTaishoshaWariate {
                 DataGrid dgMiwariateList = panel.getTabWariate().getTplTaishoshaWariate().getMiwariatesha().
                         getDgMiwariateTaishoshaIchiran();
                 List<dgMiwariateTaishoshaIchiran_Row> miwariateData = dgMiwariateList.getDataSource();
-                List<dgMiwariateTaishoshaIchiran_Row> newMiwariateData = new ArrayList<>();
-                for (dgMiwariateTaishoshaIchiran_Row row : miwariateData) {
-                    boolean bSelectFlg = false;
-                    for (dgMiwariateTaishoshaIchiran_Row selectRow : selectedMiwariateData) {
-                        if (row.toString().equalsIgnoreCase(selectRow.toString())) {
-                            bSelectFlg = true;
-                        }
-                    }
-                    if (bSelectFlg == Boolean.FALSE) {
-                        newMiwariateData.add(row);
-                    }
-                }
+
+                List<dgMiwariateTaishoshaIchiran_Row> newMiwariateData
+                        = editNewMiwariateData(miwariateData, selectedMiwariateData);
                 dgMiwariateList.setDataSource(newMiwariateData);
 
             }
@@ -270,18 +261,8 @@ public class NinteiShinsakaiTaishoshaWariate {
                 DataGrid dgWariatezumiList = panel.getTabWariate().getTplTaishoshaWariate().getWariateZumisha().
                         getDgWariatezumiTaishoshaIchiran();
                 List<dgWariatezumiTaishoshaIchiran_Row> wariatezumiData = dgWariatezumiList.getDataSource();
-                List<dgWariatezumiTaishoshaIchiran_Row> newWariateData = new ArrayList<>();
-                for (dgWariatezumiTaishoshaIchiran_Row row : wariatezumiData) {
-                    boolean bSelectFlg = false;
-                    for (dgWariatezumiTaishoshaIchiran_Row selectRow : selectedWariatezumiData) {
-                        if (row.toString().equalsIgnoreCase(selectRow.toString())) {
-                            bSelectFlg = true;
-                        }
-                    }
-                    if (bSelectFlg == Boolean.FALSE) {
-                        newWariateData.add(row);
-                    }
-                }
+                List<dgWariatezumiTaishoshaIchiran_Row> newWariateData
+                        = editNewWariateData(wariatezumiData, selectedWariatezumiData);
                 dgWariatezumiList.setDataSource(newWariateData);
 
             }
@@ -310,6 +291,42 @@ public class NinteiShinsakaiTaishoshaWariate {
             panel.getTabWariate().getTplTaishoshaWariate().getMiwariatesha().getKaijoButtonArea().
                     getBtnKaijoTaishosha().setDisabled(false);
         }
+    }
+
+    private List<dgMiwariateTaishoshaIchiran_Row> editNewMiwariateData(
+            List<dgMiwariateTaishoshaIchiran_Row> miwariateData,
+            List<dgMiwariateTaishoshaIchiran_Row> selectedMiwariateData) {
+        List<dgMiwariateTaishoshaIchiran_Row> newMiwariateData = new ArrayList<>();
+        for (dgMiwariateTaishoshaIchiran_Row row : miwariateData) {
+            boolean bSelectFlg = false;
+            for (dgMiwariateTaishoshaIchiran_Row selectRow : selectedMiwariateData) {
+                if (row.toString().equalsIgnoreCase(selectRow.toString())) {
+                    bSelectFlg = true;
+                }
+            }
+            if (bSelectFlg == Boolean.FALSE) {
+                newMiwariateData.add(row);
+            }
+        }
+        return newMiwariateData;
+    }
+
+    private List<dgWariatezumiTaishoshaIchiran_Row> editNewWariateData(
+            List<dgWariatezumiTaishoshaIchiran_Row> wariatezumiData,
+            List<dgWariatezumiTaishoshaIchiran_Row> selectedWariatezumiData) {
+        List<dgWariatezumiTaishoshaIchiran_Row> newWariateData = new ArrayList<>();
+        for (dgWariatezumiTaishoshaIchiran_Row row : wariatezumiData) {
+            boolean bSelectFlg = false;
+            for (dgWariatezumiTaishoshaIchiran_Row selectRow : selectedWariatezumiData) {
+                if (row.toString().equalsIgnoreCase(selectRow.toString())) {
+                    bSelectFlg = true;
+                }
+            }
+            if (bSelectFlg == Boolean.FALSE) {
+                newWariateData.add(row);
+            }
+        }
+        return newWariateData;
     }
 
     /*
@@ -480,18 +497,7 @@ public class NinteiShinsakaiTaishoshaWariate {
                 //審査員一覧の再設定
                 DataGrid dgShinsainList = panel.getTabWariate().getTplShinsainWariate().getDgShinsainIchiran();
                 List<dgShinsainIchiran_Row> shinsainData = dgShinsainList.getDataSource();
-                List<dgShinsainIchiran_Row> newShinsainData = new ArrayList<>();
-                for (dgShinsainIchiran_Row row : shinsainData) {
-                    boolean bSelectFlg = false;
-                    for (dgShinsainIchiran_Row selectRow : selectedShinsainData) {
-                        if (row.toString().equalsIgnoreCase(selectRow.toString())) {
-                            bSelectFlg = true;
-                        }
-                    }
-                    if (bSelectFlg == Boolean.FALSE) {
-                        newShinsainData.add(row);
-                    }
-                }
+                List<dgShinsainIchiran_Row> newShinsainData = editNewShinsainData(shinsainData, selectedShinsainData);
                 dgShinsainList.setDataSource(newShinsainData);
 
             }
@@ -511,18 +517,8 @@ public class NinteiShinsakaiTaishoshaWariate {
                 //審査員構成一覧の再設定
                 DataGrid dgShinsainKoseiList = panel.getTabWariate().getTplShinsainWariate().getDgShinsainKoseiIchiran();
                 List<dgShinsainKoseiIchiran_Row> shinsainKoseiData = dgShinsainKoseiList.getDataSource();
-                List<dgShinsainKoseiIchiran_Row> newShinsainKoseiData = new ArrayList<>();
-                for (dgShinsainKoseiIchiran_Row row : shinsainKoseiData) {
-                    boolean bSelectFlg = false;
-                    for (dgShinsainKoseiIchiran_Row selectRow : selectedShinsainKoseiData) {
-                        if (row.toString().equalsIgnoreCase(selectRow.toString())) {
-                            bSelectFlg = true;
-                        }
-                    }
-                    if (bSelectFlg == Boolean.FALSE) {
-                        newShinsainKoseiData.add(row);
-                    }
-                }
+                List<dgShinsainKoseiIchiran_Row> newShinsainKoseiData
+                        = editNewShinsainKoseiData(shinsainKoseiData, selectedShinsainKoseiData);
                 dgShinsainKoseiList.setDataSource(newShinsainKoseiData);
 
             }
@@ -550,6 +546,42 @@ public class NinteiShinsakaiTaishoshaWariate {
                     getBtnKaijoShinsain().setDisabled(false);
         }
 
+    }
+
+    private List<dgShinsainIchiran_Row> editNewShinsainData(
+            List<dgShinsainIchiran_Row> shinsainData,
+            List<dgShinsainIchiran_Row> selectedShinsainData) {
+        List<dgShinsainIchiran_Row> newShinsainData = new ArrayList<>();
+        for (dgShinsainIchiran_Row row : shinsainData) {
+            boolean bSelectFlg = false;
+            for (dgShinsainIchiran_Row selectRow : selectedShinsainData) {
+                if (row.toString().equalsIgnoreCase(selectRow.toString())) {
+                    bSelectFlg = true;
+                }
+            }
+            if (bSelectFlg == Boolean.FALSE) {
+                newShinsainData.add(row);
+            }
+        }
+        return newShinsainData;
+    }
+
+    private List<dgShinsainKoseiIchiran_Row> editNewShinsainKoseiData(
+            List<dgShinsainKoseiIchiran_Row> shinsainKoseiData,
+            List<dgShinsainKoseiIchiran_Row> selectedShinsainKoseiData) {
+        List<dgShinsainKoseiIchiran_Row> newShinsainKoseiData = new ArrayList<>();
+        for (dgShinsainKoseiIchiran_Row row : shinsainKoseiData) {
+            boolean bSelectFlg = false;
+            for (dgShinsainKoseiIchiran_Row selectRow : selectedShinsainKoseiData) {
+                if (row.toString().equalsIgnoreCase(selectRow.toString())) {
+                    bSelectFlg = true;
+                }
+            }
+            if (bSelectFlg == Boolean.FALSE) {
+                newShinsainKoseiData.add(row);
+            }
+        }
+        return newShinsainKoseiData;
     }
 
     /*

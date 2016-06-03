@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.Minashi2Gosha;
 
-import jp.co.ndensan.reams.db.dbe.business.core.Minashi2Gosha.Minashi2GoshaList;
-import jp.co.ndensan.reams.db.dbe.business.core.Minashi2Gosha.Minashi2Gosha;
+import jp.co.ndensan.reams.db.dbe.business.core.minashi2gosha.Minashi2GoshaList;
+import jp.co.ndensan.reams.db.dbe.business.core.minashi2gosha.Minashi2Gosha;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;

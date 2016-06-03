@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link TennyushutsuHoryuTaishosha}の編集を行うビルダークラスです。
@@ -419,7 +418,7 @@ public class TennyushutsuHoryuTaishoshaBuilder {
 //        return this;
 //    }
 
-     /**
+    /**
      * 前住所全国住所コードを設定します。
      *
      * @param 前住所全国住所コード 前住所全国住所コード
@@ -466,7 +465,7 @@ public class TennyushutsuHoryuTaishoshaBuilder {
         entity.setMaeJushoKatagaki(前住所方書);
         return this;
     }
-    
+
     /**
      * {@link TennyushutsuHoryuTaishosha}のインスタンスを生成します。
      *

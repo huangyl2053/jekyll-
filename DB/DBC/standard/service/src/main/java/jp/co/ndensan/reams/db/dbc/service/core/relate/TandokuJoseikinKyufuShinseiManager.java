@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.TandokuJoseikinKyufuShinse
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate.TandokuJoseikinKyufuShinseiMapperParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.TandokuJoseikinKyufuShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3098TandokuJoseikinKyufuShinseiDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.ITandokuJoseikinKyufuShinseiMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.tandokujoseikinkyufushinsei.ITandokuJoseikinKyufuShinseiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.TandokuJoseikinKyufuKetteiManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

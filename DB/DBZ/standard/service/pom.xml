@@ -68,7 +68,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzPersistence</artifactId>
-            <scope>test</scope>
         </dependency>
         <!-- テスト -->
         <dependency>
@@ -84,6 +83,26 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzBusiness</artifactId>
             <type>test-jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxService</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxPersistence</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
+            <artifactId>UxxBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
+            <artifactId>UxxEntity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
+            <artifactId>UxxService</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -22,7 +22,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 public class ShujiiIkenshoItemNo implements Comparable<ShujiiIkenshoItemNo>, IValueObject<RString>, IDbColumnMappable, IValidatable {
 
     private final RString 項目番号;
-
+    /**
+     * ShujiiIkenshoItemNoのEMPTY値です。
+     *
+     */
     public static final ShujiiIkenshoItemNo EMPTY;
 
     /**
@@ -36,14 +39,14 @@ public class ShujiiIkenshoItemNo implements Comparable<ShujiiIkenshoItemNo>, IVa
      * コンストラクタです。<br/>
      *
      * @param 項目番号 項目番号
+     * @throws NullPointerException Error
      */
     public ShujiiIkenshoItemNo(RString 項目番号) throws NullPointerException {
         this.項目番号 = requireNonNull(項目番号, UrSystemErrorMessages.値がnull.getReplacedMessage("項目番号"));
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link ShujiiIkenshoItemNo}が持つ項目番号についてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link ShujiiIkenshoItemNo}が持つ項目番号についてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */

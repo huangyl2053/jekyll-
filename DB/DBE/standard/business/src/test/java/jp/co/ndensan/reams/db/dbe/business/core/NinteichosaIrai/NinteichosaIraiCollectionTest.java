@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.NinteichosaIrai;
 
-import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaIrai.NinteichosaIrai;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaIrai.NinteichosaIraiCollection;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairai.NinteichosaIrai;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairai.NinteichosaIraiCollection;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;

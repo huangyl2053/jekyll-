@@ -30,11 +30,24 @@ public final class KaigoToiawasesakiSourceBuilderCreator {
     private KaigoToiawasesakiSourceBuilderCreator() {
     }
 
+    /**
+     * 問合せ先ソースビルダー作成
+     *
+     * @param サブ業務コード サブ業務コード
+     * @param 帳票ID 帳票ID
+     * @return {@link IKaigoToiawasesakiSourceBuilder}
+     */
     public static IKaigoToiawasesakiSourceBuilder create(SubGyomuCode サブ業務コード, ReportId 帳票ID) {
         KaigoToiawasesaki kaigoToiawasesaki = new KaigoToiawasesakiManager().get介護問合せ先(サブ業務コード, 帳票ID);
         return new KaigoToiawasesakiSourceBuilder(kaigoToiawasesaki);
     }
 
+    /**
+     * 問合せ先ソースビルダー作成
+     *
+     * @param 介護問合せ先 介護問合せ先
+     * @return {@link IKaigoToiawasesakiSourceBuilder}
+     */
     public static IKaigoToiawasesakiSourceBuilder create(KaigoToiawasesaki 介護問合せ先) {
         return new KaigoToiawasesakiSourceBuilder(介護問合せ先);
     }

@@ -13,3 +13,4 @@ kagomoushitateJiyuCode,UDD035Code,Code,,,,,過誤申立事由コード,A
 kagomoushitateJiyu,varchar,RString,,,,,過誤申立事由,A
 tanisu,numeric,Decimal,,,,,単位数（特定入所者介護費等）,A
 hokenshaFutangaku,numeric,Decimal,,,,,保険者負担額,A
+torikomiYM,UDD014YM,FlexibleYearMonth,,,,,取込年月,A

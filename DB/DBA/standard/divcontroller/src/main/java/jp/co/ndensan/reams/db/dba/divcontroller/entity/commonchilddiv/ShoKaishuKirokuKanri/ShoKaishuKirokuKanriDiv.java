@@ -8,15 +8,28 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
- * ShoKaishuKirokuKanri のクラスファイル 
- * 
- * @author 自動生成
+ * ShoKaishuKirokuKanri のクラスファイル
+ *
+ * @reamsid_L DBA-1070-010 lizhuoxuan
  */
 public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKanriDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -68,6 +81,51 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     @JsonProperty("panelInput")
     public void setPanelInput(panelInputDiv panelInput) {
         this.panelInput = panelInput;
+    }
+
+    /*
+     * [共有子DIVモード]
+     */
+    @JsonProperty("modes")
+    private HashSet<Mode> modes;
+
+    public static enum DisplayMode implements ICommonChildDivMode {
+
+        shokai("shokai"),
+        shokai_selected("shokai_selected"),
+        koshin("koshin"),
+        sakujyo("sakujyo");
+
+        private final String name;
+
+        private DisplayMode(final String name) {
+            this.name = name;
+        }
+
+        public static DisplayMode getEnum(String str) {
+            DisplayMode[] enumArray = DisplayMode.values();
+
+            for (DisplayMode enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public DisplayMode getMode_DisplayMode() {
+        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
+    }
+
+    public void setMode_DisplayMode( DisplayMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
     }
 
     /*
@@ -185,5 +243,27 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public void initialize(RString 状態, HihokenshaNo 被保険者番号) {
+        new ShoKaishuKirokuKanriHandler(this).initialize(状態, 被保険者番号);
+    }
 
+    /**
+     * 適用情報一覧を取得します。
+     *
+     * @return 適用情報一覧 適用情報一覧
+     */
+    @Override
+    public List<dgKoufuKaishu_Row> get証交付回収情報一覧() {
+        return new ShoKaishuKirokuKanriHandler(this).get証交付回収情報一覧();
+    }
+
+    /**
+     * 適用情報一覧を取得します。
+     *
+     */
+    @Override
+    public void saveShoKaishuKirokuKanri() {
+        new ShoKaishuKirokuKanriHandler(this).saveShoKaishuKirokuKanri();
+    }
 }

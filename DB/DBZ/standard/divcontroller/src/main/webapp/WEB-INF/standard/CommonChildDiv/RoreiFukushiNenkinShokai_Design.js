@@ -4,8 +4,24 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.add = function () {
-                return "add";
+            Events.onClick_btnAdd = function () {
+                return "onClick_btnAdd";
+            };
+
+            Events.onChange_btnUpdate = function () {
+                return "onChange_btnUpdate";
+            };
+
+            Events.onClick_DeleteButton = function () {
+                return "onClick_DeleteButton";
+            };
+
+            Events.onClick_btnSave = function () {
+                return "onClick_btnSave";
+            };
+
+            Events.onClick_btnCancel = function () {
+                return "onClick_btnCancel";
             };
             return Events;
         })();

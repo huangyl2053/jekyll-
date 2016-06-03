@@ -8,16 +8,18 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.ninteishinseijoho;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiIkenshoIraiJoho.ShujiiIkenshoIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5300GeninShikkanEntity;
 
 /**
  * 要介護認定申請情報RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter
-public class NinteiShinseiJohoEntity implements Cloneable, Serializable {
+public class NinteiShinseiJohoEntity implements Serializable {
 
     /**
      * -- GETTER -- 要介護認定申請情報Entityを返します。
@@ -64,7 +66,7 @@ public class NinteiShinseiJohoEntity implements Cloneable, Serializable {
             entity.initializeMd5();
         }
         for (ShujiiIkenshoIraiJohoEntity entity : this.主治医意見書作成依頼情報Entity) {
-            entity.initializeMd5ToEntities();;
+            entity.initializeMd5ToEntities();
         }
     }
 }

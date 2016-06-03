@@ -4,29 +4,23 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IKaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * NinteiChosainMaster のクラスファイル
- *
+ * NinteiChosainMaster のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class NinteiChosainMasterDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -41,6 +35,8 @@ public class NinteiChosainMasterDiv extends Panel {
     private ChosainJohoInputDiv ChosainJohoInput;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
+    @JsonProperty("hdnDataPass")
+    private RString hdnDataPass;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -112,20 +108,33 @@ public class NinteiChosainMasterDiv extends Panel {
     }
 
     /*
-     * [ ショートカットの作成 ]
+     * gethdnDataPass
+     * @return hdnDataPass
      */
-    @JsonIgnore
-    public IHokenshaListDiv getHokenshaList() {
-        return this.getChosainSearch().getHokenshaList();
+    @JsonProperty("hdnDataPass")
+    public RString getHdnDataPass() {
+        return hdnDataPass;
     }
 
+    /*
+     * sethdnDataPass
+     * @param hdnDataPass hdnDataPass
+     */
+    @JsonProperty("hdnDataPass")
+    public void setHdnDataPass(RString hdnDataPass) {
+        this.hdnDataPass = hdnDataPass;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
     @JsonIgnore
     public TextBoxCode getTxtSearchChosaItakusakiCodeFrom() {
         return this.getChosainSearch().getTxtSearchChosaItakusakiCodeFrom();
     }
 
     @JsonIgnore
-    public void setTxtSearchChosaItakusakiCodeFrom(TextBoxCode txtSearchChosaItakusakiCodeFrom) {
+    public void  setTxtSearchChosaItakusakiCodeFrom(TextBoxCode txtSearchChosaItakusakiCodeFrom) {
         this.getChosainSearch().setTxtSearchChosaItakusakiCodeFrom(txtSearchChosaItakusakiCodeFrom);
     }
 
@@ -135,7 +144,7 @@ public class NinteiChosainMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchChosaItakusakiCodeTo(TextBoxCode txtSearchChosaItakusakiCodeTo) {
+    public void  setTxtSearchChosaItakusakiCodeTo(TextBoxCode txtSearchChosaItakusakiCodeTo) {
         this.getChosainSearch().setTxtSearchChosaItakusakiCodeTo(txtSearchChosaItakusakiCodeTo);
     }
 
@@ -145,8 +154,18 @@ public class NinteiChosainMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchChosaItakusakiMeisho(TextBox txtSearchChosaItakusakiMeisho) {
+    public void  setTxtSearchChosaItakusakiMeisho(TextBox txtSearchChosaItakusakiMeisho) {
         this.getChosainSearch().setTxtSearchChosaItakusakiMeisho(txtSearchChosaItakusakiMeisho);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlItakusakiMeisho() {
+        return this.getChosainSearch().getDdlItakusakiMeisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlItakusakiMeisho(DropDownList ddlItakusakiMeisho) {
+        this.getChosainSearch().setDdlItakusakiMeisho(ddlItakusakiMeisho);
     }
 
     @JsonIgnore
@@ -155,8 +174,18 @@ public class NinteiChosainMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchChosaItakusakiKanaMeisho(TextBoxKana txtSearchChosaItakusakiKanaMeisho) {
+    public void  setTxtSearchChosaItakusakiKanaMeisho(TextBoxKana txtSearchChosaItakusakiKanaMeisho) {
         this.getChosainSearch().setTxtSearchChosaItakusakiKanaMeisho(txtSearchChosaItakusakiKanaMeisho);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlItakusakiKanaMeisho() {
+        return this.getChosainSearch().getDdlItakusakiKanaMeisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlItakusakiKanaMeisho(DropDownList ddlItakusakiKanaMeisho) {
+        this.getChosainSearch().setDdlItakusakiKanaMeisho(ddlItakusakiKanaMeisho);
     }
 
     @JsonIgnore
@@ -165,7 +194,7 @@ public class NinteiChosainMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchChosainCodeFrom(TextBoxCode txtSearchChosainCodeFrom) {
+    public void  setTxtSearchChosainCodeFrom(TextBoxCode txtSearchChosainCodeFrom) {
         this.getChosainSearch().setTxtSearchChosainCodeFrom(txtSearchChosainCodeFrom);
     }
 
@@ -175,7 +204,7 @@ public class NinteiChosainMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchChosainCodeTo(TextBoxCode txtSearchChosainCodeTo) {
+    public void  setTxtSearchChosainCodeTo(TextBoxCode txtSearchChosainCodeTo) {
         this.getChosainSearch().setTxtSearchChosainCodeTo(txtSearchChosainCodeTo);
     }
 
@@ -185,8 +214,18 @@ public class NinteiChosainMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchChosainShimei(TextBox txtSearchChosainShimei) {
+    public void  setTxtSearchChosainShimei(TextBox txtSearchChosainShimei) {
         this.getChosainSearch().setTxtSearchChosainShimei(txtSearchChosainShimei);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlChosainMeisho() {
+        return this.getChosainSearch().getDdlChosainMeisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlChosainMeisho(DropDownList ddlChosainMeisho) {
+        this.getChosainSearch().setDdlChosainMeisho(ddlChosainMeisho);
     }
 
     @JsonIgnore
@@ -195,8 +234,18 @@ public class NinteiChosainMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchChosainKanaShimei(TextBoxKana txtSearchChosainKanaShimei) {
+    public void  setTxtSearchChosainKanaShimei(TextBoxKana txtSearchChosainKanaShimei) {
         this.getChosainSearch().setTxtSearchChosainKanaShimei(txtSearchChosainKanaShimei);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlChosainKanaMeisho() {
+        return this.getChosainSearch().getDdlChosainKanaMeisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlChosainKanaMeisho(DropDownList ddlChosainKanaMeisho) {
+        this.getChosainSearch().setDdlChosainKanaMeisho(ddlChosainKanaMeisho);
     }
 
     @JsonIgnore
@@ -205,7 +254,7 @@ public class NinteiChosainMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlChikuCode(DropDownList ddlChikuCode) {
+    public void  setDdlChikuCode(DropDownList ddlChikuCode) {
         this.getChosainSearch().setDdlChikuCode(ddlChikuCode);
     }
 
@@ -215,7 +264,7 @@ public class NinteiChosainMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadSearchChosainJokyo(RadioButton radSearchChosainJokyo) {
+    public void  setRadSearchChosainJokyo(RadioButton radSearchChosainJokyo) {
         this.getChosainSearch().setRadSearchChosainJokyo(radSearchChosainJokyo);
     }
 
@@ -225,7 +274,7 @@ public class NinteiChosainMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
+    public void  setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
         this.getChosainSearch().setTxtSaidaiHyojiKensu(txtSaidaiHyojiKensu);
     }
 
@@ -235,7 +284,7 @@ public class NinteiChosainMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnSearchShujii(Button btnSearchShujii) {
+    public void  setBtnSearchShujii(Button btnSearchShujii) {
         this.getChosainSearch().setBtnSearchShujii(btnSearchShujii);
     }
 
@@ -245,8 +294,13 @@ public class NinteiChosainMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnClearKensakuJoken(Button btnClearKensakuJoken) {
+    public void  setBtnClearKensakuJoken(Button btnClearKensakuJoken) {
         this.getChosainSearch().setBtnClearKensakuJoken(btnClearKensakuJoken);
+    }
+
+    @JsonIgnore
+    public IHokenshaListDiv getHokenshaList() {
+        return this.getChosainSearch().getHokenshaList();
     }
 
     // </editor-fold>

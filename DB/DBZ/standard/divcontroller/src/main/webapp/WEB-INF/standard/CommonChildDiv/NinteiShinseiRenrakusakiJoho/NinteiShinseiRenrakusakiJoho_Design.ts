@@ -8,6 +8,42 @@ module DBZ {
 
         export class Events {
 
+            public static onClilck_btnShinkiTsuika(): string {
+                return "onClilck_btnShinkiTsuika";
+            }
+
+            public static onClilck_btnFukushaTsuika(): string {
+                return "onClilck_btnFukushaTsuika";
+            }
+
+            public static onClilck_btnZenkaiFukusha(): string {
+                return "onClilck_btnZenkaiFukusha";
+            }
+
+            public static onSelect_RenrakusakiIchiran(): string {
+                return "onSelect_RenrakusakiIchiran";
+            }
+
+            public static onClick_btnShusei(): string {
+                return "onClick_btnShusei";
+            }
+
+            public static onClick_btnSakujo(): string {
+                return "onClick_btnSakujo";
+            }
+
+            public static onClick_btnToroku(): string {
+                return "onClick_btnToroku";
+            }
+
+            public static onClick_btnModoru(): string {
+                return "onClick_btnModoru";
+            }
+
+            public static onClick_btnKakutei(): string {
+                return "onClick_btnKakutei";
+            }
+
         }
 
         export class Controls {
@@ -107,6 +143,10 @@ module DBZ {
 
             public btnModoru(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnModoru"));
+            }
+
+            public btnKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             }
 
         }

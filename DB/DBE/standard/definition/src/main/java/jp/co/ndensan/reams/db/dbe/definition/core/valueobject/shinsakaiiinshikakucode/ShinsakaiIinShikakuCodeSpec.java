@@ -12,11 +12,14 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
  */
 public enum ShinsakaiIinShikakuCodeSpec implements IPredicate<ShinsakaiIinShikakuCode> {
 
+    /**
+     * コードがNullでないこと
+     */
     コードがNullでないこと {
 
                 /**
                  *
-                 * @param shinsakaiIinShikakuCode 介護認定審査会委員資格コード
+                 * @param shinsakaiiinshikakucode 介護認定審査会委員資格コード
                  * @return true：仕様を満たす、false：仕様を満たさない
                  */
                 @Override

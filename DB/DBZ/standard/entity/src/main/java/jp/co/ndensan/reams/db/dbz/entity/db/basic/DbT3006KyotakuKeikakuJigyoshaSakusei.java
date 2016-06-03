@@ -70,6 +70,10 @@ public enum DbT3006KyotakuKeikakuJigyoshaSakusei implements IColumnDefinition {
      */
     keikakuJigyoshaNo(2147483647, 0),
     /**
+     * サービス種類コード
+     */
+    serviceShuruiCode(2147483647, 0),
+    /**
      * 委託先事業者番号
      * <br/>地域包括支援センターの委託先
      */

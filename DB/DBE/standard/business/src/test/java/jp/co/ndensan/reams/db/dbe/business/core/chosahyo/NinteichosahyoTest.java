@@ -4,19 +4,20 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.chosahyo;
 
+import java.util.Arrays;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemGroupOf2009;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.INinteichosaItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemGroupOf2009;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
-import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
+import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 /**
  * 要介護認定調査の調査票を扱うクラスのテストクラスです。
@@ -30,12 +31,12 @@ public class NinteichosahyoTest extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 調査票定義がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            Ninteichosahyo sut = new Ninteichosahyo(null, NinteichosaItemGroupOf2009.values());
+            Ninteichosahyo sut = new Ninteichosahyo(null, Arrays.asList(NinteichosaItemGroupOf2009.values()));
         }
 
         @Test(expected = NullPointerException.class)
         public void 調査項目グループ配列がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            Ninteichosahyo sut = new Ninteichosahyo(new NinteichosahyoRegulationOf2009().get基本調査定義(), (INinteichosaItemGroup[]) null);
+            Ninteichosahyo sut = new Ninteichosahyo(new NinteichosahyoRegulationOf2009().get基本調査定義(), (List<INinteichosaItemGroup>) null);
         }
 
         @Test(expected = NullPointerException.class)

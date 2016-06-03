@@ -36,7 +36,7 @@ public class DbT3043ShokanShokujiHiyoEntity extends DbTableEntityBase<DbT3043Sho
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
-    private RString seiriNp;
+    private RString seiriNo;
     @PrimaryKey
     private JigyoshaNo jigyoshaNo;
     @PrimaryKey
@@ -148,17 +148,17 @@ public class DbT3043ShokanShokujiHiyoEntity extends DbTableEntityBase<DbT3043Sho
      *
      * @return 整理番号
      */
-    public RString getSeiriNp() {
-        return seiriNp;
+    public RString getSeiriNo() {
+        return seiriNo;
     }
 
     /**
      * 整理番号のsetメソッドです。
      *
-     * @param seiriNp 整理番号
+     * @param seiriNo 整理番号
      */
-    public void setSeiriNp(@Nonnull RString seiriNp) {
-        this.seiriNp = seiriNp;
+    public void setSeiriNo(@Nonnull RString seiriNo) {
+        this.seiriNo = seiriNo;
     }
 
     /**
@@ -571,7 +571,7 @@ public class DbT3043ShokanShokujiHiyoEntity extends DbTableEntityBase<DbT3043Sho
         if (!Objects.equals(this.serviceTeikyoYM, other.serviceTeikyoYM)) {
             return false;
         }
-        if (!Objects.equals(this.seiriNp, other.seiriNp)) {
+        if (!Objects.equals(this.seiriNo, other.seiriNo)) {
             return false;
         }
         if (!Objects.equals(this.jigyoshaNo, other.jigyoshaNo)) {
@@ -596,7 +596,7 @@ public class DbT3043ShokanShokujiHiyoEntity extends DbTableEntityBase<DbT3043Sho
     public void shallowCopy(DbT3043ShokanShokujiHiyoEntity entity) {
         this.hiHokenshaNo = entity.hiHokenshaNo;
         this.serviceTeikyoYM = entity.serviceTeikyoYM;
-        this.seiriNp = entity.seiriNp;
+        this.seiriNo = entity.seiriNo;
         this.jigyoshaNo = entity.jigyoshaNo;
         this.yoshikiNo = entity.yoshikiNo;
         this.meisaiNo = entity.meisaiNo;
@@ -626,7 +626,7 @@ public class DbT3043ShokanShokujiHiyoEntity extends DbTableEntityBase<DbT3043Sho
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNp, jigyoshaNo, yoshikiNo, meisaiNo, renban, kihonTeikyoNissu, kihonTeikyoTanka, kihonTeikyoKingaku, tokubetsuTeikyoNissu, tokubetsuTeikyoTanka, tokubetsuTeikyoKingaku, shokujiTeikyoTotalNissu, shokujiTeikyohiTotal, getsugakuHyojunFutangaku, shokujiTeikyohiSeikyugaku, nichigakuHyojunFutangaku, shikyuKubunCode, tensuKingaku, shikyuKingaku, zougenTen, sagakuKingaku);
+        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, jigyoshaNo, yoshikiNo, meisaiNo, renban, kihonTeikyoNissu, kihonTeikyoTanka, kihonTeikyoKingaku, tokubetsuTeikyoNissu, tokubetsuTeikyoTanka, tokubetsuTeikyoKingaku, shokujiTeikyoTotalNissu, shokujiTeikyohiTotal, getsugakuHyojunFutangaku, shokujiTeikyohiSeikyugaku, nichigakuHyojunFutangaku, shikyuKubunCode, tensuKingaku, shikyuKingaku, zougenTen, sagakuKingaku);
     }
 
 // </editor-fold>

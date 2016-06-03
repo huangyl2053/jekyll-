@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1007KyokaisoHokenryoDankaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -36,54 +35,6 @@ public class KyokaisoHokenryoDankaiBuilder {
 
     }
 
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 被保険者番号を設定します。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @return {@link KyokaisoHokenryoDankaiBuilder}
-     */
-    public KyokaisoHokenryoDankaiBuilder set被保険者番号(HihokenshaNo 被保険者番号) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        entity.setHihokenshaNo(被保険者番号);
-        return this;
-    }
-
-    /**
-     * 履歴番号を設定します。
-     *
-     * @param 履歴番号 履歴番号
-     * @return {@link KyokaisoHokenryoDankaiBuilder}
-     */
-    public KyokaisoHokenryoDankaiBuilder set履歴番号(int 履歴番号) {
-        entity.setRirekiNo(履歴番号);
-        return this;
-    }
-
-    /**
-     * リンク番号を設定します。
-     *
-     * @param リンク番号 リンク番号
-     * @return {@link KyokaisoHokenryoDankaiBuilder}
-     */
-    public KyokaisoHokenryoDankaiBuilder setリンク番号(int リンク番号) {
-        entity.setLinkNo(リンク番号);
-        return this;
-    }
-
-    /**
-     * 適用開始年月を設定します。
-     *
-     * @param 適用開始年月 適用開始年月
-     * @return {@link KyokaisoHokenryoDankaiBuilder}
-     */
-    public KyokaisoHokenryoDankaiBuilder set適用開始年月(FlexibleYearMonth 適用開始年月) {
-        requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
-        entity.setTekiyoKaishiYM(適用開始年月);
-        return this;
-    }
-
     /**
      * 適用終了年月を設定します。
      *
@@ -107,7 +58,18 @@ public class KyokaisoHokenryoDankaiBuilder {
         entity.setGengakuGoHokenryoDankai(保険料納付減額後保険料段階);
         return this;
     }
-
+    
+    /**
+     * 論理削除フラグを設定します。
+     *
+     * @param 論理削除フラグ 論理削除フラグ
+     * @return {@link KyokaisoHokenryoDankaiBuilder}
+     */
+    public KyokaisoHokenryoDankaiBuilder is論理削除フラグ(boolean 論理削除フラグ) {
+        requireNonNull(論理削除フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("論理削除フラグ"));
+        entity.setLogicalDeletedFlag(論理削除フラグ);
+        return this;
+    }
     /**
      * {@link KyokaisoHokenryoDankai}のインスタンスを生成します。
      *

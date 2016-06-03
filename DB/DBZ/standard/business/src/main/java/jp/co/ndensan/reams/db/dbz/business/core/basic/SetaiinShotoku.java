@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -124,6 +125,7 @@ public class SetaiinShotoku {
      *
      * @return 識別コード
      */
+    @Nonnull
     public ShikibetsuCode get識別コード() {
         return 識別コード;
     }
@@ -133,6 +135,7 @@ public class SetaiinShotoku {
      *
      * @return 被保険者番号
      */
+    @Nonnull
     public HihokenshaNo get被保険者番号() {
         return 被保険者番号;
     }
@@ -304,7 +307,7 @@ public class SetaiinShotoku {
      *
      * @return 同月サービス有無
      */
-    public boolean get同月サービス有無() {
+    public boolean is同月サービス有無() {
         return 同月サービス有無;
     }
 

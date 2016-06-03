@@ -9,12 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.view.KaigoShotokuAlive;
-import jp.co.ndensan.reams.db.dbz.entity.db.view.DbV2502KaigoShotokuEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbV2502KaigoShotokuAliveDac;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbV2502KaigoShotokuAliveDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -43,6 +42,15 @@ public class ShotokuManager {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link SetaiinFinder}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link SetaiinFinder}のインスタンス
+     */
+    public static ShotokuManager createInstance() {
+        return InstanceProvider.create(ShotokuManager.class);
+    }
+
+    /**
      * 主キーに合致する賦課Aliveを返します。
      *
      * @param 識別コード 識別コード
@@ -57,7 +65,7 @@ public class ShotokuManager {
         if (所得基準年月日 == null) {
             所得基準年月日 = YMDHMS.now();
         }
-        DbV2502KaigoShotokuEntity entity = dac.selectByKey(識別コード, 所得年度, 所得基準年月日);
+        DbV2502KaigoShotokuEntity entity = dac.selectByshoriTimeStamp(識別コード, 所得年度, 所得基準年月日);
         if (entity == null) {
             return null;
         }

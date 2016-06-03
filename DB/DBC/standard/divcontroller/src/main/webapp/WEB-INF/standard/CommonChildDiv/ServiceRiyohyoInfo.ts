@@ -14,16 +14,96 @@ module DBC
                 this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
             }
- 
+
             public priorities(): Array<string> {
-                return [];
+                return ["GamenMode","KaigoType"];
             }
 
             public Properties() {
                 return new UZA.CommonChildDiv(this.fieldName);
             }
-        }
 
+            public PublicProperties() {
+                return new PublicProperties(this.fieldName);
+            }
+
+            public GamenMode() {
+                return new Modes.GamenMode(this.controls);
+            } 
+            
+            public KaigoType() {
+                return new Modes.KaigoType(this.controls);
+            } 
+        }
+        
+        export module Modes {
+            
+            export class GamenMode {
+                private controls: Controls;
+                
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+                public ModifyMode(): void {
+                    // 前月コピーボタン
+                    this.controls.btnZengetsuCopy().displayNone = false;
+                    // 追加ボタン三つ
+                    this.controls.btnBeppyoMeisaiNew().displayNone = false;
+                    this.controls.btnBeppyoGokeiNew().displayNone = false;
+                    this.controls.btnBeppyoMeisaiGokeiNew().displayNone = false;
+                    // 明細部分
+                    this.controls.ServiceRiyohyoBeppyoMeisai().disabled = false;
+                    this.controls.btnCalcMeisai().displayNone = false;
+                    this.controls.btnBeppyoMeisaiKakutei().displayNone = false;
+                    // 合計部分
+                    this.controls.ServiceRiyohyoBeppyoGokei().disabled = false;
+                    this.controls.btnCalcGokei().displayNone = false;
+                    this.controls.btnBeppyoGokeiKakutei().displayNone = false;
+                    // 削除ボタンと保存ボタン
+                    this.controls.btnDelete().displayNone = false;
+                    this.controls.btnSave().displayNone =false;
+                }
+                
+                public InquiryMode(): void {
+                    // 前月コピーボタン
+                    this.controls.btnZengetsuCopy().displayNone =true;
+                    // 追加ボタン三つ
+                    this.controls.btnBeppyoMeisaiNew().displayNone =true;
+                    this.controls.btnBeppyoGokeiNew().displayNone =true;
+                    this.controls.btnBeppyoMeisaiGokeiNew().displayNone =true;
+                    // 明細部分
+                    this.controls.ServiceRiyohyoBeppyoMeisai().disabled = true;
+                    this.controls.btnCalcMeisai().displayNone = true;
+                    this.controls.btnBeppyoMeisaiKakutei().displayNone = true;
+                    // 合計部分
+                    this.controls.ServiceRiyohyoBeppyoGokei().disabled = true;
+                    this.controls.btnCalcGokei().displayNone = true;
+                    this.controls.btnBeppyoGokeiKakutei().displayNone = true;
+                    // 削除ボタンと保存ボタン
+                    this.controls.btnDelete().displayNone = true;
+                    this.controls.btnSave().displayNone =true;
+                }
+            }
+            
+            export class KaigoType {
+                private controls: Controls;
+                
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+                
+                public kyoType(): void {
+                    this.controls.tbRiyoushaFudan().displayNone = true;
+                    this.controls.tbTeigakuRiyoushaFudan().displayNone = true;
+                    this.controls.cbZanteiKubun().displayNone = false;
+                }
+                public SogoType(): void {
+                    this.controls.tbRiyoushaFudan().displayNone = false;
+                    this.controls.tbTeigakuRiyoushaFudan().displayNone = false;
+                    this.controls.cbZanteiKubun().displayNone = true;
+                }
+            }
+        }
     }
 }
 
@@ -49,26 +129,17 @@ module DBC {
                 editTypes.addEditType("BeppyoGokeiDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 editTypes.addEditType("BeppyoRiyoNissuVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 editTypes.addEditType("BeppyoRiyoNissuDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("KeikakuJigyoshaCodeVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("KeikakuJigyoshaCodeDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("KeikakuJigyoshaNameVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("KeikakuJigyoshaNameDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 editTypes.addEditType("onClickZengetsuCopy", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("onClickRiyohyoMeisaiAdd", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("onClickBeppyoMeisaiNew", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("onClickBeppyoGokeiNew", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("onClickBeppyoMeisaiKakutei", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("onClickBeppyoGokeiKakutei", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("dgServiceRiyohyoListSelectByDblClick", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("dgServiceRiyohyoListSelectBySelect", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("dgServiceRiyohyoListSelectByDelete", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("dgServiceRiyohyoBeppyoListSelectByDblClick", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("dgServiceRiyohyoBeppyoListSelectBySelect", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("dgServiceRiyohyoBeppyoListSelectByDelete", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("ServiceRiyohyoEraseBorder", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 editTypes.addEditType("onClickBtnCalcMeisai", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("onClickBtnCalcGokei", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("onBlurTxtSreviceCode", UZA.EditTypeEnumForPublicProperty.StringType);
                 return editTypes;
             }
 
@@ -120,37 +191,6 @@ module DBC {
                 this.controls.ServiceRiyohyoBeppyoRiyoNissu().displayNone = value;
             }
 
-            public getKeikakuJigyoshaCodeVisible() {
-                return this.controls.txtKeikakuJigyoshaCode().visible;
-            }
-
-            public setKeikakuJigyoshaCodeVisible(value) {
-                this.controls.txtKeikakuJigyoshaCode().visible = value;
-            }
-
-            public getKeikakuJigyoshaCodeDisplayNone() {
-                return this.controls.txtKeikakuJigyoshaCode().displayNone;
-            }
-
-            public setKeikakuJigyoshaCodeDisplayNone(value) {
-                this.controls.txtKeikakuJigyoshaCode().displayNone = value;
-            }
-
-            public getKeikakuJigyoshaNameVisible() {
-                return this.controls.txtKeikakuJigyoshaName().visible;
-            }
-
-            public setKeikakuJigyoshaNameVisible(value) {
-                this.controls.txtKeikakuJigyoshaName().visible = value;
-            }
-
-            public getKeikakuJigyoshaNameDisplayNone() {
-                return this.controls.txtKeikakuJigyoshaName().displayNone;
-            }
-
-            public setKeikakuJigyoshaNameDisplayNone(value) {
-                this.controls.txtKeikakuJigyoshaName().displayNone = value;
-            }
             
             /*
             //TODO n8178 城間篤人 モード化するか削除するか作成者の判断が必要。
@@ -169,14 +209,6 @@ module DBC {
 
             public setonClickZengetsuCopy(value) {
                 this.controls.btnZengetsuCopy().onClick = value;
-            }
-
-            public getonClickRiyohyoMeisaiAdd() {
-                return this.controls.btnRiyohyoMeisaiAdd().onClick;
-            }
-
-            public setonClickRiyohyoMeisaiAdd(value) {
-                this.controls.btnRiyohyoMeisaiAdd().onClick = value;
             }
 
             public getonClickBeppyoMeisaiNew() {
@@ -221,30 +253,6 @@ module DBC {
                 this.controls.dgServiceRiyohyoBeppyoList().gridSetting = value;
             }
             */
-
-            public getdgServiceRiyohyoListSelectByDblClick() {
-                return this.controls.dgServiceRiyohyoList().onSelectByDblClick;
-            }
-
-            public setdgServiceRiyohyoListSelectByDblClick(value) {
-                this.controls.dgServiceRiyohyoList().onSelectByDblClick = value;
-            }
-
-            public getdgServiceRiyohyoListSelectBySelect() {
-                return this.controls.dgServiceRiyohyoList().onSelectBySelectButton;
-            }
-
-            public setdgServiceRiyohyoListSelectBySelect(value) {
-                this.controls.dgServiceRiyohyoList().onSelectBySelectButton = value;
-            }
-
-            public getdgServiceRiyohyoListSelectByDelete() {
-                return this.controls.dgServiceRiyohyoList().onSelectByDeleteButton;
-            }
-
-            public setdgServiceRiyohyoListSelectByDelete(value) {
-                this.controls.dgServiceRiyohyoList().onSelectByDeleteButton = value;
-            }
 
             public getdgServiceRiyohyoBeppyoListSelectByDblClick() {
                 return this.controls.dgServiceRiyohyoBeppyoList().onSelectByDblClick;
@@ -293,19 +301,6 @@ module DBC {
             public setonClickBtnCalcGokei(value) {
                 this.controls.btnCalcGokei().onClick = value;
             }
-
-            public getonBlurTxtSreviceCode() {
-                return this.controls.txtServiceCode().onBlur;
-            }
-
-            public setonBlurTxtSreviceCode(value) {
-                this.controls.txtServiceCode().onBlur = value;
-            }
-
         }
     }
 }
-
-
-
-

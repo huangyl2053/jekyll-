@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2820-010 sunhui -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.saishinsakohifutansha.ISaishinsaKohishaMapper">
+
+    <!--再審査決定明細一時テーブルを作成する -->
+    <insert id="create再審査明細一時テーブル">
+        CREATE TEMP TABLE "TABLE_SAISHINSAMESAIICHIJI"
+        (
+            "toriatukaiYM" rshare."UDD014YM",
+            "rirekiNo" smallint,
+            "jigyoshoNo" rgdb."DbUDD004JigyoshaNo",
+            "jigyoshoName" character varying(20),
+            "kohiJukyushaNo" character varying(7),
+            "kohiJukyushaName" character varying(50),
+            "shokisaiHokenshaNo" rgdb."DbUDD003HokenshaNo",
+            "shokisaiHokenshaName" character varying(50),
+            "hiHokenshaNo" rgdb."DbUDD002HihokenshaNo",
+            "serviceTeikyoYM" rshare."UDD014YM",
+            "serviceShuruiCode" rgdb."DbUDD005ServiceShuruiCode",
+            "serviceShuruiName" character varying(12),
+            "saishinsaCode" character varying(12),
+            "saishinsamoshitateJiyu" character varying(14),
+            "saishinsaResultCode" character varying(12),
+            "toshoSeikyuTanisu" numeric(13,0),
+            "genshinSeikyuTanisu" numeric(13,0),
+            "moushitateTanisu" numeric(13,0),
+            "ketteiTanisu" numeric(13,0),
+            "choseiTanisu" numeric(13,0),
+            "kouhiFutangaku" numeric(13,0)
+        )
+    </insert>
+
+    <!--再審査決定集計一時テーブルを作成する -->
+    <insert id="create再審査集計一時テーブル">
+        CREATE TEMP TABLE "TABLE_SAISHINSASHUKEIICHIJI"
+        (
+            "toriatukaiYM" rshare."UDD014YM",
+            "rirekiNo" smallint,
+            "sukeseikyuKensu" integer,
+            "sukeseikyuTanisu" numeric(13,0),
+            "sukeseikyuFutangaku" numeric(13,0),
+            "sukeketteiKensu" integer,
+            "sukeketteiTanisu" numeric(13,0),
+            "sukeketteiFutangaku" numeric(13,0),
+            "sukethuseiKensu" integer,
+            "sukethuseiTanisu" numeric(13,0),
+            "sukethuseiFutangaku" numeric(13,0),
+            "kougakusukeseikyuKensu" integer,
+            "kougakusukeseikyuTanisu" numeric(13,0),
+            "kougakusukeseikyuFutangaku" numeric(13,0),
+            "kougakusukeketteiKensu" integer,
+            "kougakusukeketteiTanisu" numeric(13,0),
+            "kougakusukeketteiFutangaku" numeric(13,0),
+            "kougakusukethuseiKensu" integer,
+            "kougakusukethuseiTanisu" numeric(13,0),
+            "kougakusukethuseiFutangaku" numeric(13,0),
+            "kohiFutanshaNo" character varying(8),
+            "kohiFutanshaName" character varying(50),
+            "sakuseiYMD" rshare."UDD015YMD",
+            "kokuhoRenkokaiName" character varying(50),
+            "sinsaiinkaiName" character varying(15)
+        )
+    </insert>
+
+    <!-- 再審査決定明細一時テーブルにデータを登録する。 -->
+    <insert id="insert再審査決定明細一時テーブル"
+            parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsa.SaishinsaMesaiIchijiEntity">
+        INSERT INTO "TABLE_SAISHINSAMESAIICHIJI"
+        VALUES (
+            #{取扱年月},
+            #{履歴番号},
+            #{事業所番号},
+            #{事業所名},
+            #{公費受給者番号},
+            #{公費受給者氏名},
+            #{証記載保険者番号},
+            #{証記載保険者名},
+            #{被保険者番号},
+            #{サービス提供年月},
+            #{サービス種類コード},
+            #{サービス種類名},
+            #{再審査申立事由コード},
+            #{再審査申立事由},
+            #{再審査結果コード},
+            #{当初請求単位数},
+            #{原番単位数},
+            #{申立単位数},
+            #{決定単位数},
+            #{調整単位数},
+            #{公費負担額}
+        )
+    </insert>
+
+    <!-- 再審査決定集計一時テーブルにデータを登録する。 -->
+    <insert id="insert再審査決定集計一時テーブル"
+            parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsa.SaishinsaShukeiIchijiEntity">
+        INSERT INTO "TABLE_SAISHINSASHUKEIICHIJI"
+        VALUES (
+            #{取扱年月},
+            #{履歴番号},
+            #{介護給付費請求件数},
+            #{介護給付費請求単位数},
+            #{介護給付費決定件数},
+            #{介護給付費請求公費負担額},
+            #{介護給付費決定単位数},
+            #{介護給付費決定公費負担額},
+            #{介護給付費調整件数},
+            #{介護給付費調整単位数},
+            #{介護給付費調整公費負担額},
+            #{高額介護サービス費請求件数},
+            #{高額介護サービス費請求単位数},
+            #{高額介護サービス費請求公費負担額},
+            #{高額介護サービス費決定件数},
+            #{高額介護サービス費決定単位数},
+            #{高額介護サービス費決定公費負担額},
+            #{高額介護サービス費調整件数},
+            #{高額介護サービス費調整単位数},
+            #{高額介護サービス費調整公費負担額},
+            #{公費負担者番号},
+            #{公費負担者名},
+            #{作成年月日},
+            #{国保連合会名},
+            #{審査委員会名}
+        )
+    </insert>
+
+    <resultMap id="resultMap_Hihokensha" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsa.SaishinsaMesaiIchijiEntity" autoMapping="true">
+        <result property="被保険者番号" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+    </resultMap>
+    
+    <!-- 一時テーブルのデータの取得-->
+    <select id="select被保険者番号From一時テーブル" resultMap="resultMap_Hihokensha" fetchSize="500">
+        SELECT DISTINCT SAISHIN."hiHokenshaNo"
+        FROM "TABLE_SAISHINSAMESAIICHIJI" AS SAISHIN
+    </select>
+
+    <!--新被保険者番号一時テーブルを作成する -->
+    <insert id="create新被保険者番号一時テーブル">
+        CREATE TEMP TABLE "TABLE_SINHIHOKENSHABANGOICHIJI"
+        (
+            "shichosonCode" rshare."UDD023LasdecCode",
+            "shinNo" character varying(20),
+            "kyuNo" character varying(20)
+        )
+    </insert>
+
+    <!-- 被保険者台帳管理から市町村コード取得 -->
+    <select id="select市町村コードFrom被保険者台帳管理"
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteikohifutanshain.ShichosonHihokenshaParameter">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
+     FROM
+         rgdb."DbT1001HihokenshaDaicho"
+     WHERE
+         rgdb."DbT1001HihokenshaDaicho"."hihokenshaNo" = #{被保険者番号}
+     AND rgdb."DbT1001HihokenshaDaicho"."isDeleted" <![CDATA[<>]]> TRUE
+     ORDER BY rgdb."DbT1001HihokenshaDaicho"."hihokenshaNo" DESC,
+              rgdb."DbT1001HihokenshaDaicho"."idoYMD" DESC,
+              rgdb."DbT1001HihokenshaDaicho"."edaNo" DESC
+     LIMIT(1)
+    </select>
+
+    
+    
+</mapper>

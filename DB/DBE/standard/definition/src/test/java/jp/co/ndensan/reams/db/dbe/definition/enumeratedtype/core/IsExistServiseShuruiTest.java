@@ -25,12 +25,12 @@ public class IsExistServiseShuruiTest extends DbeTestBase {
 
     @Test
     public void であるを指定した場合_getコードは_Trueを返す() {
-        assertThat(IsExistServiseShurui.である.getコード(), is(true));
+        assertThat(IsExistServiseShurui.である.isサービス種類の有無(), is(true));
     }
 
     @Test
     public void でないを指定した場合_getコードは_Falseを返す() {
-        assertThat(IsExistServiseShurui.でない.getコード(), is(false));
+        assertThat(IsExistServiseShurui.でない.isサービス種類の有無(), is(false));
     }
 
     @Test

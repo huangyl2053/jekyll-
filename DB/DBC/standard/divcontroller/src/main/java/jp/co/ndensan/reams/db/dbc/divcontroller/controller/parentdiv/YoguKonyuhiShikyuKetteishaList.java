@@ -16,6 +16,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class YoguKonyuhiShikyuKetteishaList {
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel YoguKonyuhiShikyuKetteishaListDiv
+     * @return ResponseData
+     */
     public ResponseData<YoguKonyuhiShikyuKetteishaListDiv> onLoad(YoguKonyuhiShikyuKetteishaListDiv panel) {
         ResponseData<YoguKonyuhiShikyuKetteishaListDiv> response = new ResponseData<>();
 
@@ -35,7 +41,7 @@ public class YoguKonyuhiShikyuKetteishaList {
      */
     private void setOutputOrderForKetteishaList(YoguKonyuhiShikyuKetteishaListDiv panel) {
 
-        // TO DO 2014.5.20 
+        // TO DO 2014.5.20
         //　出力順序・改頁の情の初期値を設定する。
         panel.getOutputOrderForKetteishaList().getTxtNewPageItem().setValue(new RString("氏名５０音カナ"));
         panel.getOutputOrderForKetteishaList().getTxt1().setValue(new RString("被保険者番号"));

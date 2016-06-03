@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.IShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.KoikiType;
@@ -38,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
@@ -57,8 +59,8 @@ public class ShichosonSecurityJohoFinderTest extends DbxTestDacBase {
 
     @RunWith(PowerMockRunner.class)
     @PrepareForTest({AuthorityItem.class, AuthItem.class, BusinessConfig.class, RDate.class,
-                     IAssociationFinder.class, AssociationFinderFactory.class, Association.class,
-                     IUrControlData.class, ILoginInfo.class, UrControlDataFactory.class})
+        IAssociationFinder.class, AssociationFinderFactory.class, Association.class,
+        IUrControlData.class, ILoginInfo.class, UrControlDataFactory.class})
     public static class 介護事務_事務広域 extends DbxTestDacBase {
 
         private RString defaultValueOfConfig;
@@ -131,11 +133,11 @@ public class ShichosonSecurityJohoFinderTest extends DbxTestDacBase {
             assertThat(shichosonJohoEntity.get導入形態コード(), is(DonyuKeitaiCode.事務広域));
             assertThat(shichosonJohoEntity.get広域タイプ(), is(KoikiType.toValue(defaultValueOfConfig)));
             assertThat(shichosonJohoEntity.get市町村ID有効桁数(), is(new RString("2")));
-            ShichosonJoho shichosonJoho = shichosonJohoEntity.get市町村情報();
-            assertThat(shichosonJoho.getShoKisaiHokenshaNo().value(), is(defaultValueOfConfig));
-            assertThat(shichosonJoho.getTodofukenMeisho(), is(association.get都道府県名()));
-            assertThat(shichosonJoho.getGunMeisho(), is(association.get郡名()));
-            assertThat(shichosonJoho.getShichosonCode(), is(association.get地方公共団体コード()));
+            IShichosonJoho shichosonJoho = shichosonJohoEntity.get市町村情報();
+            assertThat(shichosonJoho.get証記載保険者番号().value(), is(defaultValueOfConfig));
+            assertThat(shichosonJoho.get都道府県名称(), is(association.get都道府県名()));
+            assertThat(shichosonJoho.get郡名称(), is(association.get郡名()));
+            assertThat(shichosonJoho.get市町村コード(), is(association.get地方公共団体コード()));
         }
 
         @Test
@@ -148,8 +150,8 @@ public class ShichosonSecurityJohoFinderTest extends DbxTestDacBase {
             assertThat(shichosonJohoEntity.get導入形態コード(), is(DonyuKeitaiCode.事務広域));
             assertThat(shichosonJohoEntity.get広域タイプ(), is(KoikiType.toValue(defaultValueOfConfig)));
             assertThat(shichosonJohoEntity.get市町村ID有効桁数(), is(new RString("2")));
-            ShichosonJoho shichosonJoho = shichosonJohoEntity.get市町村情報();
-            assertThat(shichosonJoho.getShichosonShokibetsuID(), is(shichosonShikibetsuID));
+            IShichosonJoho shichosonJoho = shichosonJohoEntity.get市町村情報();
+            assertThat(shichosonJoho.get市町村識別ID(), is(shichosonShikibetsuID));
         }
 
         @Test
@@ -162,21 +164,21 @@ public class ShichosonSecurityJohoFinderTest extends DbxTestDacBase {
             assertThat(shichosonJohoEntity.get導入形態コード(), is(DonyuKeitaiCode.事務広域));
             assertThat(shichosonJohoEntity.get広域タイプ(), is(KoikiType.toValue(defaultValueOfConfig)));
             assertThat(shichosonJohoEntity.get市町村ID有効桁数(), is(new RString("2")));
-            ShichosonJoho shichosonJoho = shichosonJohoEntity.get市町村情報();
-            assertThat(shichosonJoho.getShichosonShokibetsuID(), is(shichosonShikibetsuID));
+            IShichosonJoho shichosonJoho = shichosonJohoEntity.get市町村情報();
+            assertThat(shichosonJoho.get市町村識別ID(), is(shichosonShikibetsuID));
         }
 
         @Test
-        public void getShichosonSecurityJohoは_指定の業務分類に該当する情報が存在しない場合_ShichosonSecurityJoho$EMPTY_を返す() {
+        public void getShichosonSecurityJohoは_指定の業務分類に該当する情報が存在しない場合_null_を返す() {
             ShichosonSecurityJohoFinder joho = new ShichosonSecurityJohoFinder();
             ShichosonSecurityJoho shichosonJoho = joho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-            assertThat(shichosonJoho, is(ShichosonSecurityJoho.EMPTY));
+            assertThat(shichosonJoho, is(nullValue()));
         }
     }
 
     @RunWith(PowerMockRunner.class)
     @PrepareForTest({AuthorityItem.class, AuthItem.class, RDate.class, BusinessConfig.class, IAssociationFinder.class,
-                     AssociationFinderFactory.class, Association.class, ShichosonSecurityJohoFinder.class})
+        AssociationFinderFactory.class, Association.class, ShichosonSecurityJohoFinder.class})
     public static class 介護事務_事務単一 extends DbxTestDacBase {
 
         @Before
@@ -189,11 +191,11 @@ public class ShichosonSecurityJohoFinderTest extends DbxTestDacBase {
         }
 
         @Test
-        public void getShichosonSecurityJohoは_指定の業務分類に該当する情報が存在しない場合_ShichosonSecurityJoho$EMPTY_を返す()
+        public void getShichosonSecurityJohoは_指定の業務分類に該当する情報が存在しない場合_null_を返す()
                 throws Exception {
             ShichosonSecurityJohoFinder joho = new ShichosonSecurityJohoFinder();
             ShichosonSecurityJoho result = joho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-            assertThat(result, is(ShichosonSecurityJoho.EMPTY));
+            assertThat(result, is(nullValue()));
         }
 
         @Test
@@ -222,9 +224,9 @@ public class ShichosonSecurityJohoFinderTest extends DbxTestDacBase {
             assertThat(shichosonJohoEntity.get導入形態コード(), is(DonyuKeitaiCode.事務単一));
             assertThat(shichosonJohoEntity.get広域タイプ(), is(KoikiType.toValue(defaultValueOfConfig)));
             assertThat(shichosonJohoEntity.get市町村ID有効桁数(), is(new RString("2")));
-            ShichosonJoho shichosonJoho = shichosonJohoEntity.get市町村情報();
-            assertThat(shichosonJoho.getShoKisaiHokenshaNo().value(), is(defaultValueOfConfig));
-            assertThat(shichosonJoho.getYubinNo(), is(yubinNo));
+            IShichosonJoho shichosonJoho = shichosonJohoEntity.get市町村情報();
+            assertThat(shichosonJoho.get証記載保険者番号().value(), is(defaultValueOfConfig));
+            assertThat(shichosonJoho.get郵便番号(), is(yubinNo));
         }
     }
 

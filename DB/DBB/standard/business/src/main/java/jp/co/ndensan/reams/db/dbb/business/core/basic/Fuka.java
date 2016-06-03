@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.core.basic;
 import java.io.Serializable;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -587,6 +587,11 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 介護期別を管理するクラスリストを返します。
+     *
+     * @return 介護期別を管理するクラスリスト
+     */
     public List<Kibetsu> getKibetsuList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

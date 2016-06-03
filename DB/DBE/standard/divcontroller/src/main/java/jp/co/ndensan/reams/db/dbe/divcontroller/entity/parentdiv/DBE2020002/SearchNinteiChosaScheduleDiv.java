@@ -4,17 +4,22 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * SearchNinteiChosaSchedule のクラスファイル 
- * 
- * @author 自動生成
+ * SearchNinteiChosaSchedule のクラスファイル
+ *
  */
 public class SearchNinteiChosaScheduleDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,8 +36,8 @@ public class SearchNinteiChosaScheduleDiv extends Panel {
     private TextBox txtTsujoMemo;
     @JsonProperty("txtJuyoMemo")
     private TextBox txtJuyoMemo;
-    @JsonProperty("btnDisplayMemoInformation")
-    private ButtonDialog btnDisplayMemoInformation;
+    @JsonProperty("btnMemo")
+    private Button btnMemo;
     @JsonProperty("ddlTaishoChiku")
     private DropDownList ddlTaishoChiku;
     @JsonProperty("radChosainJokyo")
@@ -141,21 +146,21 @@ public class SearchNinteiChosaScheduleDiv extends Panel {
     }
 
     /*
-     * getbtnDisplayMemoInformation
-     * @return btnDisplayMemoInformation
+     * getbtnMemo
+     * @return btnMemo
      */
-    @JsonProperty("btnDisplayMemoInformation")
-    public ButtonDialog getBtnDisplayMemoInformation() {
-        return btnDisplayMemoInformation;
+    @JsonProperty("btnMemo")
+    public Button getBtnMemo() {
+        return btnMemo;
     }
 
     /*
-     * setbtnDisplayMemoInformation
-     * @param btnDisplayMemoInformation btnDisplayMemoInformation
+     * setbtnMemo
+     * @param btnMemo btnMemo
      */
-    @JsonProperty("btnDisplayMemoInformation")
-    public void setBtnDisplayMemoInformation(ButtonDialog btnDisplayMemoInformation) {
-        this.btnDisplayMemoInformation = btnDisplayMemoInformation;
+    @JsonProperty("btnMemo")
+    public void setBtnMemo(Button btnMemo) {
+        this.btnMemo = btnMemo;
     }
 
     /*

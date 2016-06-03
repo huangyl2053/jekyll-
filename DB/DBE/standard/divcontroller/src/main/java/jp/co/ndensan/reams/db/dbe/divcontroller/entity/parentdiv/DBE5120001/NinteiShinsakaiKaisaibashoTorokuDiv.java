@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -15,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 /**
  * NinteiShinsakaiKaisaibashoToroku のクラスファイル 
  * 
- * @author 自動生成
  */
 public class NinteiShinsakaiKaisaibashoTorokuDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">

@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.HokenshaChosainJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HokenshaNinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.IChosainJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.INinteichosaItakusakiJoho;
-import jp.co.ndensan.reams.db.dbz.business.core.IShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShinsakaiChosainJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShinsakaiNinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
@@ -99,32 +98,30 @@ public class ChosaItakusakiAndChosainInputHandler {
 //        }
     }
 
-    private void createZenkaiJoho(Optional<IShinseiRirekiJoho> shinseiRirekiJoho) {
-        //②－1
-        //履歴申請情報から前回申請管理番号をもとに、③介護認定申請情報から申請書管理番号を比較して認定調査委託コード・認定調査委託員コード・証記載保険者番号を取得します。
-        //その証記載保険者番号と④構成市町村マスタの保険者番号と比較して市町村コードを取得します。
+//    private void createZenkaiJoho(Optional<IShinseiRirekiJoho> shinseiRirekiJoho) {
+    //②－1
+    //履歴申請情報から前回申請管理番号をもとに、③介護認定申請情報から申請書管理番号を比較して認定調査委託コード・認定調査委託員コード・証記載保険者番号を取得します。
+    //その証記載保険者番号と④構成市町村マスタの保険者番号と比較して市町村コードを取得します。
 //        Optional<INinteiShinseiJoho> ninteiShinseiJoho
 //                = ninteiShinseiJohoManager.find認定申請情報(shinseiRirekiJoho.get().get前回申請管理番号());
 //        Optional<IKoseiShichosonMaster> koseiShichosonMaster
 //                = koseiShichosonMasterManager.find構成市町村by証記載保険者番号(new ShoKisaiHokenshaNo(ninteiShinseiJoho.get().get証記載保険者番号()));
-        //⑤-1③から取得した認定調査委託コード・④から取得した市町村コードをもとに認定調査委託先情報の認定調査委託コード・市町村コードと比較してから認定調査委託先情報を取得します。
+    //⑤-1③から取得した認定調査委託コード・④から取得した市町村コードをもとに認定調査委託先情報の認定調査委託コード・市町村コードと比較してから認定調査委託先情報を取得します。
 //        Optional<INinteichosaItakusakiJoho> chosaItakusakiJoho
 //                = chosaItakusakimanager.find調査委託先情報(koseiShichosonMaster.get().get市町村コード(), ninteiShinseiJoho.get().get認定調査委託先コード());
-        //⑤-2③から取得した認定調査委託コード・認定調査委託員コード・④から取得した市町村コードをもとに調査員情報の認定調査委託コード・認定調査委託員コード・市町村コードと比較して
-        //取得します。
+    //⑤-2③から取得した認定調査委託コード・認定調査委託員コード・④から取得した市町村コードをもとに調査員情報の認定調査委託コード・認定調査委託員コード・市町村コードと比較して
+    //取得します。
 //        Optional<IChosainJoho> chosainJoho
 //                = chosaInmanager.find調査員情報(koseiShichosonMaster.get().get市町村コード(), ninteiShinseiJoho.get().get認定調査委託先コード(),
 //                        ninteiShinseiJoho.get().get認定調査員コード());
 //        setZenkaiJoho(chosaItakusakiJoho, chosainJoho);
-    }
-
-    private void setZenkaiJoho(Optional<INinteichosaItakusakiJoho> chosaItakusakiJoho, Optional<IChosainJoho> chosainJoho) {
-       // div.getTxtChosaItakusakiCode().setValue(chosaItakusakiJoho.get().get認定調査委託先コード().value());
-        div.getTxtChosaItakusakiName().setValue(chosaItakusakiJoho.get().get事業者名称());
-        div.getTxtChosainCode().setValue(chosainJoho.get().get認定調査員コード());
-        div.getTxtChosainName().setValue(chosainJoho.get().get調査員氏名());
-    }
-
+//    }
+//    private void setZenkaiJoho(Optional<INinteichosaItakusakiJoho> chosaItakusakiJoho, Optional<IChosainJoho> chosainJoho) {
+//        // div.getTxtChosaItakusakiCode().setValue(chosaItakusakiJoho.get().get認定調査委託先コード().value());
+//        div.getTxtChosaItakusakiName().setValue(chosaItakusakiJoho.get().get事業者名称());
+//        div.getTxtChosainCode().setValue(chosainJoho.get().get認定調査員コード());
+//        div.getTxtChosainName().setValue(chosainJoho.get().get調査員氏名());
+//    }
     private void createZenkaiJohoManager() {
 //        shinseiRirekiManager = ShinseiRirekiFactory.getInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));
 //        ninteiShinseiJohoManager = NinteiShinseiJohoManagerFactory.createInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));

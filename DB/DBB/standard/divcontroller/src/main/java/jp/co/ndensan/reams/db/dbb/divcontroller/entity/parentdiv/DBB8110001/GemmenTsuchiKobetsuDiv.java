@@ -1,20 +1,24 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * GemmenTsuchiKobetsu のクラスファイル 
- * 
- * @author 自動生成
+ * GemmenTsuchiKobetsu のクラスファイル
+ *
+ * @reamsid_L DBB-0740-010 wangkanglei
  */
 public class GemmenTsuchiKobetsuDiv extends PanelPublish {
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,11 +26,9 @@ public class GemmenTsuchiKobetsuDiv extends PanelPublish {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtGemmenHakkoYMD")
-    private TextBoxDate txtGemmenHakkoYMD;
-    @JsonProperty("lblGemmenTsuchiBunshoNo")
-    private Label lblGemmenTsuchiBunshoNo;
-    @JsonProperty("txtGemmenTsuchiBunshoNo")
-    private TextBox txtGemmenTsuchiBunshoNo;
+    private TextBoxFlexibleDate txtGemmenHakkoYMD;
+    @JsonProperty("ccdGemmenTsuchiBunshoNo")
+    private BunshoBangoInputDiv ccdGemmenTsuchiBunshoNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,34 +36,32 @@ public class GemmenTsuchiKobetsuDiv extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtGemmenHakkoYMD
+     * @return txtGemmenHakkoYMD
+     */
     @JsonProperty("txtGemmenHakkoYMD")
-    public TextBoxDate getTxtGemmenHakkoYMD() {
+    public TextBoxFlexibleDate getTxtGemmenHakkoYMD() {
         return txtGemmenHakkoYMD;
     }
 
+    /*
+     * settxtGemmenHakkoYMD
+     * @param txtGemmenHakkoYMD txtGemmenHakkoYMD
+     */
     @JsonProperty("txtGemmenHakkoYMD")
-    public void setTxtGemmenHakkoYMD(TextBoxDate txtGemmenHakkoYMD) {
-        this.txtGemmenHakkoYMD=txtGemmenHakkoYMD;
+    public void setTxtGemmenHakkoYMD(TextBoxFlexibleDate txtGemmenHakkoYMD) {
+        this.txtGemmenHakkoYMD = txtGemmenHakkoYMD;
     }
 
-    @JsonProperty("lblGemmenTsuchiBunshoNo")
-    public Label getLblGemmenTsuchiBunshoNo() {
-        return lblGemmenTsuchiBunshoNo;
+    /*
+     * getccdGemmenTsuchiBunshoNo
+     * @return ccdGemmenTsuchiBunshoNo
+     */
+    @JsonProperty("ccdGemmenTsuchiBunshoNo")
+    public IBunshoBangoInputDiv getCcdGemmenTsuchiBunshoNo() {
+        return ccdGemmenTsuchiBunshoNo;
     }
 
-    @JsonProperty("lblGemmenTsuchiBunshoNo")
-    public void setLblGemmenTsuchiBunshoNo(Label lblGemmenTsuchiBunshoNo) {
-        this.lblGemmenTsuchiBunshoNo=lblGemmenTsuchiBunshoNo;
-    }
-
-    @JsonProperty("txtGemmenTsuchiBunshoNo")
-    public TextBox getTxtGemmenTsuchiBunshoNo() {
-        return txtGemmenTsuchiBunshoNo;
-    }
-
-    @JsonProperty("txtGemmenTsuchiBunshoNo")
-    public void setTxtGemmenTsuchiBunshoNo(TextBox txtGemmenTsuchiBunshoNo) {
-        this.txtGemmenTsuchiBunshoNo=txtGemmenTsuchiBunshoNo;
-    }
-
+    // </editor-fold>
 }

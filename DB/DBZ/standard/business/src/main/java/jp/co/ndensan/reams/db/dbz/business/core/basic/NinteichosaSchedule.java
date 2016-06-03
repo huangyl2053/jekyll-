@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -17,10 +16,13 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査スケジュール情報を管理するクラスです。
+ *
+ * @reamsid_L DBZ-9999-011 linghuhang
  */
 public class NinteichosaSchedule extends
         ParentModelBase<NinteichosaScheduleIdentifier, DbT5221NinteichosaScheduleEntity, NinteichosaSchedule> implements Serializable {
@@ -36,35 +38,45 @@ public class NinteichosaSchedule extends
      * @param 認定調査予定開始時間 認定調査予定開始時間
      * @param 認定調査予定終了時間 認定調査予定終了時間
      * @param 認定調査時間枠 認定調査時間枠
+     * @param 調査地区コード 調査地区コード
      * @param 認定調査委託先コード 認定調査委託先コード
      * @param 認定調査員コード 認定調査員コード
+     * @param 市町村コード 市町村コード
      */
     public NinteichosaSchedule(FlexibleDate 認定調査予定年月日,
             RString 認定調査予定開始時間,
             RString 認定調査予定終了時間,
             Code 認定調査時間枠,
+            Code 調査地区コード,
             RString 認定調査委託先コード,
-            RString 認定調査員コード) {
+            RString 認定調査員コード,
+            LasdecCode 市町村コード) {
         requireNonNull(認定調査予定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定年月日"));
         requireNonNull(認定調査予定開始時間, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定開始時間"));
         requireNonNull(認定調査予定終了時間, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定終了時間"));
         requireNonNull(認定調査時間枠, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査時間枠"));
+        requireNonNull(調査地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区コード"));
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
         requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         this.entity = new DbT5221NinteichosaScheduleEntity();
         this.entity.setNinteiChosaYoteiYMD(認定調査予定年月日);
         this.entity.setNinteiChosaYoteiKaishiTime(認定調査予定開始時間);
         this.entity.setNinteiChosaYoteiShuryoTime(認定調査予定終了時間);
         this.entity.setNinteiChosaJikanWaku(認定調査時間枠);
+        this.entity.setChosaChikuCode(調査地区コード);
         this.entity.setNinteiChosaItakusakiCode(認定調査委託先コード);
         this.entity.setNinteiChosainCode(認定調査員コード);
+        this.entity.setShichosonCode(市町村コード);
         this.id = new NinteichosaScheduleIdentifier(
                 認定調査予定年月日,
                 認定調査予定開始時間,
                 認定調査予定終了時間,
                 認定調査時間枠,
+                調査地区コード,
                 認定調査委託先コード,
-                認定調査員コード
+                認定調査員コード,
+                市町村コード
         );
     }
 
@@ -74,16 +86,18 @@ public class NinteichosaSchedule extends
      *
      * @param entity DBより取得した{@link DbT5221NinteichosaScheduleEntity}
      */
-//    public NinteichosaSchedule(DbT5221NinteichosaScheduleEntity entity) {
-//        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査スケジュール情報"));
-//        this.id = new NinteichosaScheduleIdentifier(
-//                entity.getNinteiChosaYoteiYMD(),
-//                entity.getNinteiChosaYoteiKaishiTime(),
-//                entity.getNinteiChosaYoteiShuryoTime(),
-//                entity.getNinteiChosaJikanWaku(),
-//                entity.getNinteichosaItakusakiCode(),
-//                entity.getNinteiChosainNo());
-//    }
+    public NinteichosaSchedule(DbT5221NinteichosaScheduleEntity entity) {
+        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査スケジュール情報"));
+        this.id = new NinteichosaScheduleIdentifier(
+                entity.getNinteiChosaYoteiYMD(),
+                entity.getNinteiChosaYoteiKaishiTime(),
+                entity.getNinteiChosaYoteiShuryoTime(),
+                entity.getNinteiChosaJikanWaku(),
+                entity.getChosaChikuCode(),
+                entity.getNinteiChosaItakusakiCode(),
+                entity.getNinteiChosainCode(),
+                entity.getShichosonCode());
+    }
 
     /**
      * シリアライズ、ビルダー用コンストラクタです。
@@ -99,7 +113,6 @@ public class NinteichosaSchedule extends
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 認定調査予定年月日を返します。
      *
@@ -145,23 +158,23 @@ public class NinteichosaSchedule extends
         return entity.getChosaChikuCode();
     }
 
-//    /**
-//     * 認定調査委託先コードを返します。
-//     *
-//     * @return 認定調査委託先コード
-//     */
-//    public RString get認定調査委託先コード() {
-//        return entity.getNinteichosaItakusakiCode();
-//    }
-//
-//    /**
-//     * 認定調査員コードを返します。
-//     *
-//     * @return 認定調査員コード
-//     */
-//    public RString get認定調査員コード() {
-//        return entity.getNinteiChosainNo();
-//    }
+    /**
+     * 認定調査委託先コードを返します。
+     *
+     * @return 認定調査委託先コード
+     */
+    public RString get認定調査委託先コード() {
+        return entity.getNinteiChosaItakusakiCode();
+    }
+
+    /**
+     * 認定調査員コードを返します。
+     *
+     * @return 認定調査員コード
+     */
+    public RString get認定調査員コード() {
+        return entity.getNinteiChosainCode();
+    }
 
     /**
      * 市町村コードを返します。
@@ -337,7 +350,7 @@ public class NinteichosaSchedule extends
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -365,6 +378,4 @@ public class NinteichosaSchedule extends
     public NinteichosaScheduleBuilder createBuilderForEdit() {
         return new NinteichosaScheduleBuilder(entity, id);
     }
-
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

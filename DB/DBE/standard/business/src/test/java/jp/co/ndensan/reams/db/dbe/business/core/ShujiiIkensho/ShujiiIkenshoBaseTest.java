@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho;
 
-import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho.ShujiiIkenshoBase;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikensho.ShujiiIkenshoBase;
 import jp.co.ndensan.reams.db.dbe.business.helper.ShujiiIkenshoResultMock;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IkenshoDoi;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinteiJohoTeikyoKibo;

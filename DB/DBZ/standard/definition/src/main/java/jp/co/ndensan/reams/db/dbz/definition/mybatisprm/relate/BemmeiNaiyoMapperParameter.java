@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate;
 
 //import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 //import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
@@ -30,10 +29,9 @@ public final class BemmeiNaiyoMapperParameter {
     /**
      * コンストラクタです。
      *
-// * @param 主キー1 主キー1
+     * // * @param 主キー1 主キー1
      *
-     * @param 主キー2 主キー2
-// * @param uses主キー1 uses主キー1
+     * @param 主キー2 主キー2 // * @param uses主キー1 uses主キー1
      * @param uses主キー2 uses主キー2
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
@@ -54,7 +52,6 @@ public final class BemmeiNaiyoMapperParameter {
     /**
      * キー検索用のパラメータを生成します。
      *
-// * @param 主キー1 主キー1
      *
      * @param 主キー2 主キー2
      * @return 身体手帳検索パラメータ
@@ -75,7 +72,6 @@ public final class BemmeiNaiyoMapperParameter {
 //            ShoKisaiHokenshaNo 主キー1) {
 //        return new BemmeiNaiyoMapperParameter(主キー1, ShikibetsuCode.EMPTY, true, false);
 //    }
-
 //    /**
 //     * get主キー1。
 //     *
@@ -84,7 +80,6 @@ public final class BemmeiNaiyoMapperParameter {
 //    public ShoKisaiHokenshaNo get主キー1() {
 //        return 主キー1;
 //    }
-
     /**
      * get主キー2。
      *
@@ -129,7 +124,6 @@ public final class BemmeiNaiyoMapperParameter {
 //    public boolean isUses主キー1() {
 //        return uses主キー1;
 //    }
-
     /**
      * isUses主キー2。
      *

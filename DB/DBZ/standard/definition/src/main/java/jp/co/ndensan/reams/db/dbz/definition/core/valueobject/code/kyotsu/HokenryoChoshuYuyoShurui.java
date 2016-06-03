@@ -35,7 +35,7 @@ public class HokenryoChoshuYuyoShurui implements ICodeValueObject, IDbColumnMapp
     private final Code code;
 
     static {
-        SUB_GYOMU_CODE = SubGyomuCode.DBZ介護共通;
+        SUB_GYOMU_CODE = SubGyomuCode.DBB介護賦課;
         CODE_SHUBETSU = DBZCodeShubetsu.保険料徴収猶予種類.getCodeShubetsu();
     }
 

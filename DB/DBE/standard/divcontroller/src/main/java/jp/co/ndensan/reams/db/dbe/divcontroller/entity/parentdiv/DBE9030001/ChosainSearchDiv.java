@@ -4,47 +4,43 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * ChosainSearch のクラスファイル
- *
+ * ChosainSearch のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class ChosainSearchDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("radSearchChosainJokyo")
-    private RadioButton radSearchChosainJokyo;
     @JsonProperty("txtSearchChosaItakusakiCodeFrom")
     private TextBoxCode txtSearchChosaItakusakiCodeFrom;
     @JsonProperty("txtSearchChosaItakusakiCodeTo")
     private TextBoxCode txtSearchChosaItakusakiCodeTo;
     @JsonProperty("txtSearchChosaItakusakiMeisho")
     private TextBox txtSearchChosaItakusakiMeisho;
+    @JsonProperty("ddlItakusakiMeisho")
+    private DropDownList ddlItakusakiMeisho;
     @JsonProperty("txtSearchChosaItakusakiKanaMeisho")
     private TextBoxKana txtSearchChosaItakusakiKanaMeisho;
+    @JsonProperty("ddlItakusakiKanaMeisho")
+    private DropDownList ddlItakusakiKanaMeisho;
     @JsonProperty("ddlitakukubun")
     private DropDownList ddlitakukubun;
     @JsonProperty("ddlkikankubun")
     private DropDownList ddlkikankubun;
+    @JsonProperty("radSearchChosainJokyo")
+    private RadioButton radSearchChosainJokyo;
     @JsonProperty("txtSaidaiHyojiKensu")
     private TextBoxNum txtSaidaiHyojiKensu;
     @JsonProperty("btnSearchShujii")
@@ -60,24 +56,6 @@ public class ChosainSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getradSearchChosainJokyo
-     * @return radSearchChosainJokyo
-     */
-    @JsonProperty("radSearchChosainJokyo")
-    public RadioButton getRadSearchChosainJokyo() {
-        return radSearchChosainJokyo;
-    }
-
-    /*
-     * setradSearchChosainJokyo
-     * @param radSearchChosainJokyo radSearchChosainJokyo
-     */
-    @JsonProperty("radSearchChosainJokyo")
-    public void setRadSearchChosainJokyo(RadioButton radSearchChosainJokyo) {
-        this.radSearchChosainJokyo = radSearchChosainJokyo;
-    }
-
     /*
      * gettxtSearchChosaItakusakiCodeFrom
      * @return txtSearchChosaItakusakiCodeFrom
@@ -133,6 +111,24 @@ public class ChosainSearchDiv extends Panel {
     }
 
     /*
+     * getddlItakusakiMeisho
+     * @return ddlItakusakiMeisho
+     */
+    @JsonProperty("ddlItakusakiMeisho")
+    public DropDownList getDdlItakusakiMeisho() {
+        return ddlItakusakiMeisho;
+    }
+
+    /*
+     * setddlItakusakiMeisho
+     * @param ddlItakusakiMeisho ddlItakusakiMeisho
+     */
+    @JsonProperty("ddlItakusakiMeisho")
+    public void setDdlItakusakiMeisho(DropDownList ddlItakusakiMeisho) {
+        this.ddlItakusakiMeisho = ddlItakusakiMeisho;
+    }
+
+    /*
      * gettxtSearchChosaItakusakiKanaMeisho
      * @return txtSearchChosaItakusakiKanaMeisho
      */
@@ -148,6 +144,24 @@ public class ChosainSearchDiv extends Panel {
     @JsonProperty("txtSearchChosaItakusakiKanaMeisho")
     public void setTxtSearchChosaItakusakiKanaMeisho(TextBoxKana txtSearchChosaItakusakiKanaMeisho) {
         this.txtSearchChosaItakusakiKanaMeisho = txtSearchChosaItakusakiKanaMeisho;
+    }
+
+    /*
+     * getddlItakusakiKanaMeisho
+     * @return ddlItakusakiKanaMeisho
+     */
+    @JsonProperty("ddlItakusakiKanaMeisho")
+    public DropDownList getDdlItakusakiKanaMeisho() {
+        return ddlItakusakiKanaMeisho;
+    }
+
+    /*
+     * setddlItakusakiKanaMeisho
+     * @param ddlItakusakiKanaMeisho ddlItakusakiKanaMeisho
+     */
+    @JsonProperty("ddlItakusakiKanaMeisho")
+    public void setDdlItakusakiKanaMeisho(DropDownList ddlItakusakiKanaMeisho) {
+        this.ddlItakusakiKanaMeisho = ddlItakusakiKanaMeisho;
     }
 
     /*
@@ -184,6 +198,24 @@ public class ChosainSearchDiv extends Panel {
     @JsonProperty("ddlkikankubun")
     public void setDdlkikankubun(DropDownList ddlkikankubun) {
         this.ddlkikankubun = ddlkikankubun;
+    }
+
+    /*
+     * getradSearchChosainJokyo
+     * @return radSearchChosainJokyo
+     */
+    @JsonProperty("radSearchChosainJokyo")
+    public RadioButton getRadSearchChosainJokyo() {
+        return radSearchChosainJokyo;
+    }
+
+    /*
+     * setradSearchChosainJokyo
+     * @param radSearchChosainJokyo radSearchChosainJokyo
+     */
+    @JsonProperty("radSearchChosainJokyo")
+    public void setRadSearchChosainJokyo(RadioButton radSearchChosainJokyo) {
+        this.radSearchChosainJokyo = radSearchChosainJokyo;
     }
 
     /*
@@ -250,15 +282,4 @@ public class ChosainSearchDiv extends Panel {
     }
 
     // </editor-fold>
-    public void clear() {
-        this.getCcdHokenshaList().loadHokenshaList();
-        this.getRadSearchChosainJokyo().setSelectedIndex(0);
-        this.getTxtSearchChosaItakusakiCodeFrom().clearValue();
-        this.getTxtSearchChosaItakusakiCodeTo().clearValue();
-        this.getTxtSearchChosaItakusakiMeisho().clearValue();
-        this.getTxtSearchChosaItakusakiKanaMeisho().clearValue();
-        this.getDdlitakukubun().setSelectedIndex(0);
-        this.getDdlkikankubun().setSelectedIndex(0);
-        this.getTxtSaidaiHyojiKensu().clearValue();
-    }
 }

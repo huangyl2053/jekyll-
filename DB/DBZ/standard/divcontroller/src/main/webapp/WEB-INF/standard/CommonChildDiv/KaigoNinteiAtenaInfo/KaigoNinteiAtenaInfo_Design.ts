@@ -65,6 +65,14 @@ module DBZ {
                 return new UZA.ButtonDialog(this.convFiledName("btnKojinMemo"));
             }
 
+            public txtSetaiCode(): UZA.TextBoxSetaiCode {
+                return new UZA.TextBoxSetaiCode(this.convFiledName("txtSetaiCode"));
+            }
+
+            public btnSetaiMemo(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnSetaiMemo"));
+            }
+
             public txtKojinNo(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtKojinNo"));
             }
@@ -87,14 +95,6 @@ module DBZ {
 
             public txtGyoseiku(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtGyoseiku"));
-            }
-
-            public txtSetaiCode(): UZA.TextBoxSetaiCode {
-                return new UZA.TextBoxSetaiCode(this.convFiledName("txtSetaiCode"));
-            }
-
-            public btnSetaiMemo(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnSetaiMemo"));
             }
 
         }

@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -20,4 +22,12 @@ public interface IDbT7130KaigoServiceShuruiMapper {
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7130KaigoServiceShuruiEntity getEntity();
+
+    /**
+     * サービス種類ドロップダウンリストの取得します。
+     *
+     * @param systemDate システム日付の年月
+     * @return List<DbT7130KaigoServiceShuruiEntity>
+     */
+    List<DbT7130KaigoServiceShuruiEntity> getserviceShuruiCdDDL(RString systemDate);
 }

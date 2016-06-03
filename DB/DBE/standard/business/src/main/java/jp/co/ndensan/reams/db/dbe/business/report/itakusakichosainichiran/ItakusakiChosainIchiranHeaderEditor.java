@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  *
  * 認定調査委託先・認定調査員一覧表ヘッダEditorです。
+ * @reamsid_L DBE-0290-020 dongyabin
  */
 public class ItakusakiChosainIchiranHeaderEditor implements ItakusakiChosainIchiranEditor {
 

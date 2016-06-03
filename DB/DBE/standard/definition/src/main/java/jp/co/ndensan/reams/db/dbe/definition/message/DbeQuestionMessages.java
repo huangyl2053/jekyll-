@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 /**
  * DBEの質問メッセージ定義列挙型です。
  *
- * @author N9606 漢那 憲作
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum DbeQuestionMessages implements IMessageGettable {
 

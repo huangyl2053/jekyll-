@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC10601",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "減免・減額帳票一括",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD1060001",
+     "toLayoutTitle": "減免軽減額認定証・決定通知書一括発行",
+     "toState": "負担限度額認定"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD1060001",
+     "layoutTitle": "減免軽減額認定証・決定通知書一括発行",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

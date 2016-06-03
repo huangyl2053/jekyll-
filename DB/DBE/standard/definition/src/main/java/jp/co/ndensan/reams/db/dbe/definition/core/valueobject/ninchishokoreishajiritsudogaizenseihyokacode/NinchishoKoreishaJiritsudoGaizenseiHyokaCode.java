@@ -26,7 +26,9 @@ public class NinchishoKoreishaJiritsudoGaizenseiHyokaCode implements Comparable<
 //    IDbColumnMappable, IValidatable, IValueObject<Code> {
 
     private final Code code;
-
+    /**
+     * NinchishoKoreishaJiritsudoGaizenseiHyokaCodeのEMPTYです。
+     */
     public static final NinchishoKoreishaJiritsudoGaizenseiHyokaCode EMPTY;
 
     /**
@@ -47,8 +49,7 @@ public class NinchishoKoreishaJiritsudoGaizenseiHyokaCode implements Comparable<
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link NinchishoKoreishaJiritsudoGaizenseiHyokaCode}が持つcodeについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link NinchishoKoreishaJiritsudoGaizenseiHyokaCode}が持つcodeについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */
@@ -62,11 +63,9 @@ public class NinchishoKoreishaJiritsudoGaizenseiHyokaCode implements Comparable<
      * 指定のcodeについて、バリデーションを実施し、バリデーション実施結果としての、<br/>
      * {@link IValidationMessages}にメッセージが含まれていた場合に{@link IllegalArgumentException}をthrowします。<br/>
      *
-     * @param code
-     * {@link NinchishoKoreishaJiritsudoGaizenseiHyokaCode}となるコード{@link Code}
+     * @param code {@link NinchishoKoreishaJiritsudoGaizenseiHyokaCode}となるコード{@link Code}
      * @return {@link NinchishoKoreishaJiritsudoGaizenseiHyokaCode}
-     * @throws IllegalArgumentException
-     * {@link NinchishoKoreishaJiritsudoGaizenseiHyokaCodeSpec}の仕様を満たさない場合
+     * @throws IllegalArgumentException {@link NinchishoKoreishaJiritsudoGaizenseiHyokaCodeSpec}の仕様を満たさない場合
      */
     public static NinchishoKoreishaJiritsudoGaizenseiHyokaCode createCheckInstance(Code code) throws IllegalArgumentException {
         List<IValidationMessage> validResult

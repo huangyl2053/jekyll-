@@ -34,6 +34,8 @@ public class KashitsukeHenkanInfo {
     }
 
     private void setSummary1Data(KashitsukeHenkanInfoDiv info) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        info.getBtnKashitsukeInfo();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
 //        info.getTxtShinseiYMD().setValue(cg.getAsRDate("申請日"));
 //        info.getTxtRiyoKikan().setFromValue(cg.getAsRDate("利用期間開始日"));
@@ -43,6 +45,8 @@ public class KashitsukeHenkanInfo {
     }
 
     private void setServiceData(KashitsukeHenkanInfoDiv info) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        info.getBtnKashitsukeInfo();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(1));
 //
 //        info.getTxtService1().setValue(cg.getAsRString("対象サービス１"));
@@ -52,6 +56,8 @@ public class KashitsukeHenkanInfo {
     }
 
     private void setSummary2Data(KashitsukeHenkanInfoDiv info) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        info.getBtnKashitsukeInfo();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(1));
 //
 //        info.getTxtKetteiYMD().setValue(cg.getAsRDate("審査決定日"));
@@ -64,6 +70,8 @@ public class KashitsukeHenkanInfo {
     }
 
     private void setRisokuKeisanData(KashitsukeHenkanInfoDiv info) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        info.getBtnKashitsukeInfo();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(2));
 //        KashitsukeHenkanKeisanDiv div = info.getKashitsukeHenkanKeisan();
 //        div.getTxtEntaiNissu().setValue(cg.getAsDecimal("延滞日数"));
@@ -71,6 +79,8 @@ public class KashitsukeHenkanInfo {
     }
 
     private void setRisokuChoshuData(KashitsukeHenkanInfoDiv info) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        info.getBtnKashitsukeInfo();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(3));
 //        KashitsukeHenkanRisokuDiv div = info.getKashitsukeHenkanRisoku();
 //        div.getTxtRisokuChoshuYMD().setValue(cg.getAsRDate("徴収日"));
@@ -78,6 +88,8 @@ public class KashitsukeHenkanInfo {
     }
 
     private void setHenkanChoshuData(KashitsukeHenkanInfoDiv info) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        info.getBtnKashitsukeInfo();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(4));
 //        KashitsukeHenkanChoshuDiv div = info.getKashitsukeHenkanChoshu();
 //        div.getRadChoshuHoho().setSelectedItem(cg.getAsRString("徴収方法key"));
@@ -87,6 +99,8 @@ public class KashitsukeHenkanInfo {
     }
 
     private void setTeishutsuData(KashitsukeHenkanInfoDiv info) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        info.getBtnKashitsukeInfo();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(5));
 //        KashitsukeHenkanTsuchishoDiv div = info.getKashitsukeHenkanTsuchisho();
 //        div.getKashitsukeHenkanTsuchishoPrintSetting().getTxtIssueDate().setValue(RDate.getNowDate());

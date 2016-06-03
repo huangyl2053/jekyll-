@@ -6,20 +6,24 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiService.serviceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.rirekiNo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.serviceKoumokuCd;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.serviceShuruiCd;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.teikyoKaishiYM;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.teikyoShuryoYM;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -28,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護サービス内容のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT7131KaigoServiceNaiyouDac {
 
@@ -60,7 +66,7 @@ public class DbT7131KaigoServiceNaiyouDac {
         return accessor.select().
                 table(DbT7131KaigoServiceNaiyou.class).
                 where(and(
-                                eq(serviceShuruiCode, サービス種類コード),
+                                eq(serviceShuruiCd, サービス種類コード),
                                 eq(serviceKoumokuCd, サービス項目コード),
                                 eq(teikyoKaishiYM, 提供開始年月),
                                 eq(rirekiNo, 履歴番号))).
@@ -118,4 +124,51 @@ public class DbT7131KaigoServiceNaiyouDac {
 
     }
 
+    /**
+     * キーで介護サービス内容を取得します。
+     *
+     * @param サービス年月 サービス年月
+     * @return DbT7131KaigoServiceNaiyouEntity
+     */
+    @Transaction
+    public DbT7131KaigoServiceNaiyouEntity select介護サービス(FlexibleYearMonth サービス年月) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7131KaigoServiceNaiyou.class).
+                where(and(
+                                eq(serviceShuruiCd, new KaigoServiceShuruiCode("50")),
+                                eq(serviceKoumokuCd, new RString("9901")),
+                                leq(teikyoKaishiYM, サービス年月),
+                                leq(サービス年月, teikyoShuryoYM))).
+                order(by(rirekiNo, Order.DESC)).limit(1).
+                toObject(DbT7131KaigoServiceNaiyouEntity.class);
+    }
+
+    /**
+     * サービスコード情報取得
+     *
+     * @param サービス種類コード サービス種類コード
+     * @param サービス項目コード サービス項目コード
+     * @param 基準年月 基準年月
+     * @return List<DbT7131KaigoServiceNaiyouEntity>
+     */
+    @Transaction
+    public List<DbT7131KaigoServiceNaiyouEntity> selectサービスコード情報(
+            KaigoServiceShuruiCode サービス種類コード,
+            RString サービス項目コード,
+            FlexibleYearMonth 基準年月) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7131KaigoServiceNaiyou.class).
+                where(and(
+                                eq(serviceShuruiCd, サービス種類コード),
+                                eq(serviceKoumokuCd, サービス項目コード),
+                                leq(teikyoKaishiYM, 基準年月),
+                                leq(基準年月, teikyoShuryoYM)))
+                .order(by(serviceShuruiCd, Order.ASC), by(serviceKoumokuCd, Order.ASC))
+                .toList(DbT7131KaigoServiceNaiyouEntity.class);
+    }
 }

@@ -15,6 +15,7 @@ import lombok.Value;
  * 介護期別徴収猶予の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KibetsuChoshuYuyoIdentifier implements Serializable {
 
     private final FlexibleYear 調定年度;

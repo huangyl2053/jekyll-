@@ -1,9 +1,9 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7030011;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Nov 27 18:49:04 JST 2014 
+ * Thu May 19 16:50:11 CST 2016 
  */
 
 
@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 
 public class dgJushochiTokureiRireki_Row extends DataRow {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private RString tekiyoJiyu;
     private TextBoxFlexibleDate tekiyoDate;
@@ -39,6 +40,8 @@ public class dgJushochiTokureiRireki_Row extends DataRow {
     private TextBoxFlexibleDate renrakuhyoHakkoDate;
     private TextBoxFlexibleDate shisetuTaishoTuchiHakkoDate;
     private TextBoxFlexibleDate shisetsuHenkoTuchiHakkoDate;
+    private TextBoxFlexibleDate idoYMD;
+    private RString edaNo;
 
     public dgJushochiTokureiRireki_Row() {
         super();
@@ -60,9 +63,31 @@ public class dgJushochiTokureiRireki_Row extends DataRow {
         this.renrakuhyoHakkoDate = new TextBoxFlexibleDate();
         this.shisetuTaishoTuchiHakkoDate = new TextBoxFlexibleDate();
         this.shisetsuHenkoTuchiHakkoDate = new TextBoxFlexibleDate();
+        this.idoYMD = new TextBoxFlexibleDate();
+        this.edaNo = RString.EMPTY;
+        this.setOriginalData("tekiyoJiyu", tekiyoJiyu);
+        this.setOriginalData("tekiyoDate", tekiyoDate);
+        this.setOriginalData("tekiyoTodokedeDate", tekiyoTodokedeDate);
+        this.setOriginalData("kaijoJiyu", kaijoJiyu);
+        this.setOriginalData("kaijoDate", kaijoDate);
+        this.setOriginalData("kaijoTodokedeDate", kaijoTodokedeDate);
+        this.setOriginalData("sochiHokenshaNo", sochiHokenshaNo);
+        this.setOriginalData("sochiHokenshaMeisho", sochiHokenshaMeisho);
+        this.setOriginalData("sochiHihokenshaNo", sochiHihokenshaNo);
+        this.setOriginalData("nyushoDate", nyushoDate);
+        this.setOriginalData("taishoDate", taishoDate);
+        this.setOriginalData("shisetsuShurui", shisetsuShurui);
+        this.setOriginalData("nyushoShisetsu", nyushoShisetsu);
+        this.setOriginalData("shisetsuCode", shisetsuCode);
+        this.setOriginalData("shisetsuMeisho", shisetsuMeisho);
+        this.setOriginalData("renrakuhyoHakkoDate", renrakuhyoHakkoDate);
+        this.setOriginalData("shisetuTaishoTuchiHakkoDate", shisetuTaishoTuchiHakkoDate);
+        this.setOriginalData("shisetsuHenkoTuchiHakkoDate", shisetsuHenkoTuchiHakkoDate);
+        this.setOriginalData("idoYMD", idoYMD);
+        this.setOriginalData("edaNo", edaNo);
     }
 
-    public dgJushochiTokureiRireki_Row(RString tekiyoJiyu, TextBoxFlexibleDate tekiyoDate, TextBoxFlexibleDate tekiyoTodokedeDate, RString kaijoJiyu, TextBoxFlexibleDate kaijoDate, TextBoxFlexibleDate kaijoTodokedeDate, RString sochiHokenshaNo, RString sochiHokenshaMeisho, RString sochiHihokenshaNo, TextBoxFlexibleDate nyushoDate, TextBoxFlexibleDate taishoDate, RString shisetsuShurui, RString nyushoShisetsu, RString shisetsuCode, RString shisetsuMeisho, TextBoxFlexibleDate renrakuhyoHakkoDate, TextBoxFlexibleDate shisetuTaishoTuchiHakkoDate, TextBoxFlexibleDate shisetsuHenkoTuchiHakkoDate) {
+    public dgJushochiTokureiRireki_Row(RString tekiyoJiyu, TextBoxFlexibleDate tekiyoDate, TextBoxFlexibleDate tekiyoTodokedeDate, RString kaijoJiyu, TextBoxFlexibleDate kaijoDate, TextBoxFlexibleDate kaijoTodokedeDate, RString sochiHokenshaNo, RString sochiHokenshaMeisho, RString sochiHihokenshaNo, TextBoxFlexibleDate nyushoDate, TextBoxFlexibleDate taishoDate, RString shisetsuShurui, RString nyushoShisetsu, RString shisetsuCode, RString shisetsuMeisho, TextBoxFlexibleDate renrakuhyoHakkoDate, TextBoxFlexibleDate shisetuTaishoTuchiHakkoDate, TextBoxFlexibleDate shisetsuHenkoTuchiHakkoDate, TextBoxFlexibleDate idoYMD, RString edaNo) {
         super();
         this.setOriginalData("tekiyoJiyu", tekiyoJiyu);
         this.setOriginalData("tekiyoDate", tekiyoDate);
@@ -82,6 +107,8 @@ public class dgJushochiTokureiRireki_Row extends DataRow {
         this.setOriginalData("renrakuhyoHakkoDate", renrakuhyoHakkoDate);
         this.setOriginalData("shisetuTaishoTuchiHakkoDate", shisetuTaishoTuchiHakkoDate);
         this.setOriginalData("shisetsuHenkoTuchiHakkoDate", shisetsuHenkoTuchiHakkoDate);
+        this.setOriginalData("idoYMD", idoYMD);
+        this.setOriginalData("edaNo", edaNo);
         this.tekiyoJiyu = tekiyoJiyu;
         this.tekiyoDate = tekiyoDate;
         this.tekiyoTodokedeDate = tekiyoTodokedeDate;
@@ -100,6 +127,8 @@ public class dgJushochiTokureiRireki_Row extends DataRow {
         this.renrakuhyoHakkoDate = renrakuhyoHakkoDate;
         this.shisetuTaishoTuchiHakkoDate = shisetuTaishoTuchiHakkoDate;
         this.shisetsuHenkoTuchiHakkoDate = shisetsuHenkoTuchiHakkoDate;
+        this.idoYMD = idoYMD;
+        this.edaNo = edaNo;
     }
 
     public RString getTekiyoJiyu() {
@@ -172,6 +201,14 @@ public class dgJushochiTokureiRireki_Row extends DataRow {
 
     public TextBoxFlexibleDate getShisetsuHenkoTuchiHakkoDate() {
         return shisetsuHenkoTuchiHakkoDate;
+    }
+
+    public TextBoxFlexibleDate getIdoYMD() {
+        return idoYMD;
+    }
+
+    public RString getEdaNo() {
+        return edaNo;
     }
 
     public void setTekiyoJiyu(RString tekiyoJiyu) {
@@ -264,4 +301,15 @@ public class dgJushochiTokureiRireki_Row extends DataRow {
         this.shisetsuHenkoTuchiHakkoDate = shisetsuHenkoTuchiHakkoDate;
     }
 
+    public void setIdoYMD(TextBoxFlexibleDate idoYMD) {
+        this.setOriginalData("idoYMD", idoYMD);
+        this.idoYMD = idoYMD;
+    }
+
+    public void setEdaNo(RString edaNo) {
+        this.setOriginalData("edaNo", edaNo);
+        this.edaNo = edaNo;
+    }
+
+    // </editor-fold>
 }

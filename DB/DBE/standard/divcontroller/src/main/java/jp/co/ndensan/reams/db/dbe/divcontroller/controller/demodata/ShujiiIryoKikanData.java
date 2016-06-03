@@ -22,8 +22,14 @@ public class ShujiiIryoKikanData {
 
     private static final RString FILE_NAME = new RString("IryoKikanDialog/IryoKikanList.yml");
 
+    /**
+     * IryoKikan
+     */
     public static final class IryoKikan {
 
+        /**
+         * IryoKikan
+         */
         public static final IryoKikan EMPTY;
 
         static {
@@ -37,15 +43,30 @@ public class ShujiiIryoKikanData {
             this.theName = name;
         }
 
+        /**
+         * codeを取得します。
+         *
+         * @return code
+         */
         public RString code() {
             return this.theCode;
         }
 
+        /**
+         * nameを取得します。
+         *
+         * @return name
+         */
         public RString name() {
             return this.theName;
         }
     }
 
+    /**
+     * 医療機関一覧情報を取得します。
+     *
+     * @return IDemoData<IryoKikan>
+     */
     public IDemoData<IryoKikan> get医療機関一覧() {
         List<HashMap> dataFromYaml = YamlLoader.DBE.loadAsList(FILE_NAME);
         return new DemoData<>(dataFromYaml, new YamlUtil.Converter.IConverter<IryoKikan>() {
@@ -57,6 +78,12 @@ public class ShujiiIryoKikanData {
         });
     }
 
+    /**
+     * 医療機関From情報を取得します。
+     *
+     * @param code RString
+     * @return IryoKikan
+     */
     public IryoKikan get医療機関From(RString code) {
         List<IryoKikan> list = get医療機関一覧().asConvertedType();
         for (IryoKikan iryoKikan : list) {

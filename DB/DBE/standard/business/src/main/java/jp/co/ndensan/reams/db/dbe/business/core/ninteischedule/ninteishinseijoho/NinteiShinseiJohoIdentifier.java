@@ -10,10 +10,13 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 
 /**
  * 要介護認定申請情報の識別子です。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value
 public class NinteiShinseiJohoIdentifier implements Serializable {
+
     private static final long serialVersionUID = -580231607727616185L;
 
     private final ShinseishoKanriNo 申請書管理番号;

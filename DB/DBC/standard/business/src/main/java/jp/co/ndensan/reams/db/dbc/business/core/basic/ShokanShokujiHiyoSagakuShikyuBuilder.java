@@ -71,7 +71,7 @@ public class ShokanShokujiHiyoSagakuShikyuBuilder {
      */
     public ShokanShokujiHiyoSagakuShikyuBuilder set整理番号(RString 整理番号) {
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-        entity.setSeiriNp(整理番号);
+        entity.setSeiriNo(整理番号);
         return this;
     }
 

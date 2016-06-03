@@ -11,9 +11,21 @@ package jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype;
  */
 public enum IcchiJoken {
 
+    /**
+     * 前方一致
+     */
     前方一致,
+    /**
+     * 後方一致
+     */
     後方一致,
+    /**
+     * 部分一致
+     */
     部分一致,
+    /**
+     * 完全一致
+     */
     完全一致;
 
 }

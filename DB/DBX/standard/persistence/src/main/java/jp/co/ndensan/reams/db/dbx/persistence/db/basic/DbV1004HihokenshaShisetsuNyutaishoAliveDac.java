@@ -83,6 +83,12 @@ public class DbV1004HihokenshaShisetsuNyutaishoAliveDac implements ISaveable<DbV
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
+    /**
+     * selectBy識別コード。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return new UnsupportedOperationException
+     */
     public List<DbV1004HihokenshaShisetsuNyutaishoEntity> selectBy識別コード(ShikibetsuCode 識別コード) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

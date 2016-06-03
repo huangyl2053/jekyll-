@@ -47,16 +47,7 @@ module DBZ {
             public getEditTypes(): UZA.EditTypeForPublicProperty {
                 var editTypes = new UZA.EditTypeForPublicProperty();
 
-                editTypes.addEditType("btnHokenshaGuide_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 return editTypes;
-            }
-
-            public getbtnHokenshaGuide_displayNone() {
-                return this.controls.btnHokenshaGuide().displayNone;
-            }
-
-            public setbtnHokenshaGuide_displayNone(value) {
-                this.controls.btnHokenshaGuide().displayNone = value;
             }
 
         }

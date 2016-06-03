@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaiiinjoho;
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -25,8 +25,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護認定審査会委員情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class ShinsakaiIinJoho extends ModelBase<ShinsakaiIinJohoIdentifier, DbT5594ShinsakaiIinJohoEntity, ShinsakaiIinJoho> implements Serializable {
+public class ShinsakaiIinJoho
+        extends ModelBase<ShinsakaiIinJohoIdentifier, DbT5594ShinsakaiIinJohoEntity, ShinsakaiIinJoho>
+        implements Serializable {
 
     private final DbT5594ShinsakaiIinJohoEntity entity;
     private final ShinsakaiIinJohoIdentifier id;
@@ -212,7 +216,7 @@ public class ShinsakaiIinJoho extends ModelBase<ShinsakaiIinJohoIdentifier, DbT5
      *
      * @return 廃止フラグ
      */
-    public boolean get廃止フラグ() {
+    public boolean is廃止フラグ() {
         return entity.getHaishiFlag();
     }
 
@@ -246,8 +250,7 @@ public class ShinsakaiIinJoho extends ModelBase<ShinsakaiIinJohoIdentifier, DbT5
     }
 
     /**
-     * 介護認定審査会委員情報のみを変更対象とします。<br/>
-     * {@link DbT5594ShinsakaiIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護認定審査会委員情報のみを変更対象とします。<br/> {@link DbT5594ShinsakaiIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShinsakaiIinJoho}
      */
@@ -261,8 +264,7 @@ public class ShinsakaiIinJoho extends ModelBase<ShinsakaiIinJohoIdentifier, DbT5
     }
 
     /**
-     * 保持する介護認定審査会委員情報を削除対象とします。<br/>
-     * {@link DbT5594ShinsakaiIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護認定審査会委員情報を削除対象とします。<br/> {@link DbT5594ShinsakaiIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShinsakaiIinJoho}
      */

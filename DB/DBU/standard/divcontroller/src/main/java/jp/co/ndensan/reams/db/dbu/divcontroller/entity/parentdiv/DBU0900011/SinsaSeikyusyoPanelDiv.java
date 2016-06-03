@@ -4,19 +4,22 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoatenainfo.IKaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.IKaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * SinsaSeikyusyoPanel のクラスファイル 
- * 
- * @author 自動生成
+ * SinsaSeikyusyoPanel のクラスファイル
+ *
+ * @reamsid_L DBU-1080-050 lizhuoxuan
  */
 public class SinsaSeikyusyoPanelDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -110,7 +113,7 @@ public class SinsaSeikyusyoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnTuika(Button btnTuika) {
+    public void setBtnTuika(Button btnTuika) {
         this.getSinsaSeikyusyoJohoPane1().setBtnTuika(btnTuika);
     }
 
@@ -120,7 +123,7 @@ public class SinsaSeikyusyoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setGrdSinsaSeikyusyoJoho(DataGrid<grdSinsaSeikyusyoJoho_Row> grdSinsaSeikyusyoJoho) {
+    public void setGrdSinsaSeikyusyoJoho(DataGrid<grdSinsaSeikyusyoJoho_Row> grdSinsaSeikyusyoJoho) {
         this.getSinsaSeikyusyoJohoPane1().setGrdSinsaSeikyusyoJoho(grdSinsaSeikyusyoJoho);
     }
 

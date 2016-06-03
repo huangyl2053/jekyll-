@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 資格不整合一覧情報のマッピング用XMLです。 -->
+<!-- @reamsid_L DBB-0630-020 chengsanyuan -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shikakufuseigo.IShikakuFuseigoMapper">
+    <resultMap id="shikakuResult" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakufuseigo.ShikakuFuseigoEntity">
+        <id property="dbt1014Entity.shikibetsuCode" column="dbT1014SeigoseiCheck_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <association property="dbt1014Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1014SeigoseiCheckMapper.ResultMap_DbT1014SeigoseiCheckEntity"/>
+        <association property="ft200Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>    
+    <select id="get被保険者資格不整合一覧" 
+                resultMap="shikakuResult"
+                parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakufuseigo.ShikakuFuseigoMybatisParameter" 
+                fetchSize="500">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1014SeigoseiCheckMapper.allColumns_DbT1014SeigoseiCheck" />,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+            rgdb."DbT1014SeigoseiCheck"
+            INNER JOIN
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+                AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
+              ON "DbT1014SeigoseiCheck"."shikibetsuCode" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+        WHERE
+              "DbT1014SeigoseiCheck"."daichoShubetsu" IN('1','2','3')
+              OR "DbT1014SeigoseiCheck"."fuseigoRiyuCode" IN ('11','12','13','21','22','23','31','32','33','42','51','52','53','54','61','62','63','64')
+          ORDER BY "DbT1014SeigoseiCheck"."hihokenshaNo","DbT1014SeigoseiCheck"."shikibetsuCode"
+    </select>
+</mapper>
+    

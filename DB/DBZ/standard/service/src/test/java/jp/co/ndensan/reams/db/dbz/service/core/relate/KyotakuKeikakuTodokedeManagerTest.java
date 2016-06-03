@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakus
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3005KyotakuKeikakuTodokedeEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.KyotakuKeikakuTodokedeEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3005KyotakuKeikakuTodokedeDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.IKyotakuKeikakuTodokedeMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kyotakukeikaku.IKyotakuKeikakuTodokedeMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.db.relate.KyotakuKeikakuTodokedeDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KyotakuKeikakuJigyoshaSakuseiManager;

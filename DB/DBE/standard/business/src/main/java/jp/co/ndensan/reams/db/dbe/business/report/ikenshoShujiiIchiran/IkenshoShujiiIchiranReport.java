@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 主治医医療機関・主治医一覧表のReportです。
+ *
+ * @reamsid_L DBE-0260-020 zuotao
  */
 public class IkenshoShujiiIchiranReport extends Report<ShujiiIryokikanShujiiIchiranhyoReportSource> {
 

@@ -25,12 +25,12 @@ public class ShinsakaiIinJohoMapperParameterTest extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void shinsakaiIinCodeにNullを指定すると_NullPointerExceptionが発生する() {
-            ShinsakaiIinJohoMapperParameter sut = ShinsakaiIinJohoMapperParameter.createSelectByKeyParam(null);
+            ShinsakaiIinJohoMapperParameter sut = ShinsakaiIinJohoMapperParameter.createParamByShinsakaiIinCode(new RString(""));
         }
 
         @Test
         public void 引数にNull以外を指定すると_パラメータが生成できる() {
-            ShinsakaiIinJohoMapperParameter sut = ShinsakaiIinJohoMapperParameter.createSelectByKeyParam(shinsakaiIinCode);
+            ShinsakaiIinJohoMapperParameter sut = ShinsakaiIinJohoMapperParameter.createParamByShinsakaiIinCode(shinsakaiIinCode);
 
             assertThat(sut.getShinsakaiIinCode(), is(shinsakaiIinCode));
         }

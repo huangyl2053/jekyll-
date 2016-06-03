@@ -5,9 +5,14 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3038ShokanKihonEntityGenerator;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3038ShokanKihonEntityGenerator.*;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3038ShokanKihonEntityGenerator.DEFAULT_サービス提供年月;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3038ShokanKihonEntityGenerator.DEFAULT_事業者番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3038ShokanKihonEntityGenerator.DEFAULT_整理番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3038ShokanKihonEntityGenerator.DEFAULT_明細番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3038ShokanKihonEntityGenerator.DEFAULT_様式番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3038ShokanKihonEntityGenerator.DEFAULT_被保険者番号;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
@@ -19,11 +24,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -289,7 +294,7 @@ public class DbT3038ShokanKihonDacTest extends DbcTestDacBase {
             DbT3038ShokanKihonEntity entity = DbT3038ShokanKihonEntityGenerator.createDbT3038ShokanKihonEntity();
             entity.setHiHokenshaNo(被保険者番号);
             entity.setServiceTeikyoYM(サービス提供年月);
-            entity.setSeiriNp(整理番号);
+            entity.setSeiriNo(整理番号);
             entity.setJigyoshaNo(事業者番号);
             entity.setYoshikiNo(様式番号);
             entity.setMeisaiNo(明細番号);

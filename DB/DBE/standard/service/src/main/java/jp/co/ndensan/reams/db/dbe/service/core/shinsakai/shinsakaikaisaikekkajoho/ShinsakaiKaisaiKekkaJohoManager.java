@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaikekkajo
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoDac;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護認定審査会開催結果情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class ShinsakaiKaisaiKekkaJohoManager {
 
@@ -37,6 +39,15 @@ public class ShinsakaiKaisaiKekkaJohoManager {
      */
     ShinsakaiKaisaiKekkaJohoManager(DbT5511ShinsakaiKaisaiKekkaJohoDac dac) {
         this.dac = dac;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiKekkaJohoManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiKekkaJohoManager}のインスタンス
+     */
+    public static ShinsakaiKaisaiKekkaJohoManager createInstance() {
+        return InstanceProvider.create(ShinsakaiKaisaiKekkaJohoManager.class);
     }
 
     /**

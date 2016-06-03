@@ -5,13 +5,13 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinjoho;
 
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5594ShinsakaiIinJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5594ShinsakaiIinJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoDac;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5594ShinsakaiIinJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5594ShinsakaiIinJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.DbTestHelper;
@@ -73,7 +73,7 @@ public class IShinsakaiIinJohoMapperTest {
         @Test
         public void データが見つかる検索条件を渡すと_DbT5594介護認定審査会委員情報Entity返す() {
             TestSupport.insertDbT5594(shinsakaiIinCode);
-            param = ShinsakaiIinJohoMapperParameter.createSelectByKeyParam(shinsakaiIinCode);
+            param = ShinsakaiIinJohoMapperParameter.createParamByShinsakaiIinCode(shinsakaiIinCode);
             result = sut.getShinsakaiIinJohoEntity(param);
             assertThat(result.get介護認定審査会委員情報Entity().getShinsakaiIinCode(), is(shinsakaiIinCode));
         }
@@ -83,7 +83,7 @@ public class IShinsakaiIinJohoMapperTest {
         public void データが見つかない検索条件を渡すと_DbT5594介護認定審査会委員情報nullを返す() {
 
             TestSupport.insertDbT5594(shinsakaiIinCode);
-            param = ShinsakaiIinJohoMapperParameter.createSelectByKeyParam(shinsakaiIinCode);
+            param = ShinsakaiIinJohoMapperParameter.createParamByShinsakaiIinCode(shinsakaiIinCode);
             result = sut.getShinsakaiIinJohoEntity(param);
             assertThat(result, is(nullValue()));
         }
@@ -105,7 +105,7 @@ public class IShinsakaiIinJohoMapperTest {
         public void データが見つかる検索条件を渡すと_DbT5595介護認定審査会委員所属機関情報Entity返す() {
             TestSupport.insertDbT5594(shinsakaiIinCode);
             TestSupport.insertDbT5595(shinsakaiIinCode);
-            param = ShinsakaiIinJohoMapperParameter.createSelectByKeyParam(shinsakaiIinCode);
+            param = ShinsakaiIinJohoMapperParameter.createParamByShinsakaiIinCode(shinsakaiIinCode);
             result = sut.getShinsakaiIinJohoEntity(param);
             assertThat(result.get介護認定審査会委員所属機関情報Entity().get(0).getShinsakaiIinCode(), is(shinsakaiIinCode));
         }
@@ -115,7 +115,7 @@ public class IShinsakaiIinJohoMapperTest {
         public void データが見つかない検索条件を渡すと_DbT5595介護認定審査会委員所属機関情報nullを返す() {
 
             TestSupport.insertDbT5594(shinsakaiIinCode);
-            param = ShinsakaiIinJohoMapperParameter.createSelectByKeyParam(shinsakaiIinCode);
+            param = ShinsakaiIinJohoMapperParameter.createParamByShinsakaiIinCode(shinsakaiIinCode);
             result = sut.getShinsakaiIinJohoEntity(param);
             assertThat(result, is(nullValue()));
         }

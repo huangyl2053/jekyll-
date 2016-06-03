@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 要介護認定主治医意見書情報のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-013 huangh
  */
 public class DbT5302ShujiiIkenshoJohoDac implements ISaveable<DbT5302ShujiiIkenshoJohoEntity> {
 
@@ -64,6 +66,23 @@ public class DbT5302ShujiiIkenshoJohoDac implements ISaveable<DbT5302ShujiiIkens
 
         return accessor.select().
                 table(DbT5302ShujiiIkenshoJoho.class).
+                toList(DbT5302ShujiiIkenshoJohoEntity.class);
+    }
+
+    /**
+     * 要介護認定主治医意見書情報を検索By申請書管理番号。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return DbT5302ShujiiIkenshoJohoEntityの{@code list}
+     */
+    @Transaction
+    public List<DbT5302ShujiiIkenshoJohoEntity> selectBy申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5302ShujiiIkenshoJoho.class).
+                where(
+                        eq(shinseishoKanriNo, 申請書管理番号)).
                 toList(DbT5302ShujiiIkenshoJohoEntity.class);
     }
 

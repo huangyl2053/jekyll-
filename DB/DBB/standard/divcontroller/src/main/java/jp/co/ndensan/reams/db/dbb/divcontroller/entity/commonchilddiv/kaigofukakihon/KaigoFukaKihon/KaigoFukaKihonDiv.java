@@ -7,9 +7,13 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofuka
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
  * KaigoFukaKihon のクラスファイル
@@ -197,6 +201,15 @@ public class KaigoFukaKihonDiv extends Panel implements IKaigoFukaKihonDiv {
     @Override
     public void load(KaigoFukaKihonSearchKey searchKey) {
         getHandler().load(searchKey);
+    }
+
+    @Override
+    public HihokenshaNo get被保番号() {
+        RString 被保番号RString = this.getTxtHihokenshaNo().getValue();
+        if (null == 被保番号RString || 被保番号RString.isEmpty()) {
+            return HihokenshaNo.EMPTY;
+        }
+        return new HihokenshaNo(被保番号RString);
     }
 
     @JsonIgnore

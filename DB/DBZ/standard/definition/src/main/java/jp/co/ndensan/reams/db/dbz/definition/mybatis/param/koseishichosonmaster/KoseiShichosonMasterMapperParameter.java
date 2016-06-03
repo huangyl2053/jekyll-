@@ -11,7 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 構成市町村マスタを特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class KoseiShichosonMasterMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class KoseiShichosonMasterMapperParameter {
 
     private final RString shichosonShokibetsuID;
 

@@ -4,9 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.shujiiIkenshoIraiJoho;
 
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.shujiiikenshoiraijoho.IShujiiIkenshoIraiJohoMapper;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikensho.shujiiIkenshoIraiJoho.ShujiiIkenshoIraiJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiIkenshoIraiJoho.ShujiiIkenshoIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5301ShujiiIkenshoIraiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5302ShujiiIkenshoJohoEntityGenerator;

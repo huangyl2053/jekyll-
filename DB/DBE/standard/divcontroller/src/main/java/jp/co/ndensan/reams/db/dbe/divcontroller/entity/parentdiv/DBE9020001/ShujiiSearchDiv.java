@@ -4,49 +4,67 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * ShujiiSearch のクラスファイル 
- * 
- * @author 自動生成
+ * ShujiiSearch のクラスファイル
+ *
+ * @reamsid_L DBE-0250-010 suguangjun
  */
 public class ShujiiSearchDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlSearchShichoson")
-    private DropDownList ddlSearchShichoson;
     @JsonProperty("txtSearchShujiiIryokikanCodeFrom")
     private TextBoxCode txtSearchShujiiIryokikanCodeFrom;
     @JsonProperty("txtSearchShujiiIryokikanCodeTo")
     private TextBoxCode txtSearchShujiiIryokikanCodeTo;
-    @JsonProperty("txtSearchShujiiIryokikanMeisho")
-    private TextBox txtSearchShujiiIryokikanMeisho;
-    @JsonProperty("txtSearchShujiiIryokikanKanaMeisho")
-    private TextBoxKana txtSearchShujiiIryokikanKanaMeisho;
     @JsonProperty("txtSearchShujiiCodeFrom")
     private TextBoxCode txtSearchShujiiCodeFrom;
     @JsonProperty("txtSearchShujiiCodeTo")
     private TextBoxCode txtSearchShujiiCodeTo;
+    @JsonProperty("txtSearchShujiiIryokikanMeisho")
+    private TextBox txtSearchShujiiIryokikanMeisho;
+    @JsonProperty("ddlKikanMeisho")
+    private DropDownList ddlKikanMeisho;
+    @JsonProperty("txtSearchShujiiIryokikanKanaMeisho")
+    private TextBoxKana txtSearchShujiiIryokikanKanaMeisho;
+    @JsonProperty("ddlKikanKanaMeisho")
+    private DropDownList ddlKikanKanaMeisho;
     @JsonProperty("txtSearchShujiiShimei")
     private TextBox txtSearchShujiiShimei;
+    @JsonProperty("ddlShujiiMeisho")
+    private DropDownList ddlShujiiMeisho;
     @JsonProperty("txtSearchShujiiKanaShimei")
     private TextBoxKana txtSearchShujiiKanaShimei;
-    @JsonProperty("txtSaidaiHyojiKensu")
-    private TextBoxNum txtSaidaiHyojiKensu;
+    @JsonProperty("ddlShujiiKanaMeisho")
+    private DropDownList ddlShujiiKanaMeisho;
     @JsonProperty("radSearchJokyoFlag")
     private RadioButton radSearchJokyoFlag;
+    @JsonProperty("txtSaidaiHyojiKensu")
+    private TextBoxNum txtSaidaiHyojiKensu;
     @JsonProperty("btnSearchShujii")
     private Button btnSearchShujii;
     @JsonProperty("btnClearKensakuJoken")
     private Button btnClearKensakuJoken;
+    @JsonProperty("ccdHokenshaList")
+    private HokenshaListDiv ccdHokenshaList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -54,24 +72,6 @@ public class ShujiiSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getddlSearchShichoson
-     * @return ddlSearchShichoson
-     */
-    @JsonProperty("ddlSearchShichoson")
-    public DropDownList getDdlSearchShichoson() {
-        return ddlSearchShichoson;
-    }
-
-    /*
-     * setddlSearchShichoson
-     * @param ddlSearchShichoson ddlSearchShichoson
-     */
-    @JsonProperty("ddlSearchShichoson")
-    public void setDdlSearchShichoson(DropDownList ddlSearchShichoson) {
-        this.ddlSearchShichoson = ddlSearchShichoson;
-    }
-
     /*
      * gettxtSearchShujiiIryokikanCodeFrom
      * @return txtSearchShujiiIryokikanCodeFrom
@@ -106,42 +106,6 @@ public class ShujiiSearchDiv extends Panel {
     @JsonProperty("txtSearchShujiiIryokikanCodeTo")
     public void setTxtSearchShujiiIryokikanCodeTo(TextBoxCode txtSearchShujiiIryokikanCodeTo) {
         this.txtSearchShujiiIryokikanCodeTo = txtSearchShujiiIryokikanCodeTo;
-    }
-
-    /*
-     * gettxtSearchShujiiIryokikanMeisho
-     * @return txtSearchShujiiIryokikanMeisho
-     */
-    @JsonProperty("txtSearchShujiiIryokikanMeisho")
-    public TextBox getTxtSearchShujiiIryokikanMeisho() {
-        return txtSearchShujiiIryokikanMeisho;
-    }
-
-    /*
-     * settxtSearchShujiiIryokikanMeisho
-     * @param txtSearchShujiiIryokikanMeisho txtSearchShujiiIryokikanMeisho
-     */
-    @JsonProperty("txtSearchShujiiIryokikanMeisho")
-    public void setTxtSearchShujiiIryokikanMeisho(TextBox txtSearchShujiiIryokikanMeisho) {
-        this.txtSearchShujiiIryokikanMeisho = txtSearchShujiiIryokikanMeisho;
-    }
-
-    /*
-     * gettxtSearchShujiiIryokikanKanaMeisho
-     * @return txtSearchShujiiIryokikanKanaMeisho
-     */
-    @JsonProperty("txtSearchShujiiIryokikanKanaMeisho")
-    public TextBoxKana getTxtSearchShujiiIryokikanKanaMeisho() {
-        return txtSearchShujiiIryokikanKanaMeisho;
-    }
-
-    /*
-     * settxtSearchShujiiIryokikanKanaMeisho
-     * @param txtSearchShujiiIryokikanKanaMeisho txtSearchShujiiIryokikanKanaMeisho
-     */
-    @JsonProperty("txtSearchShujiiIryokikanKanaMeisho")
-    public void setTxtSearchShujiiIryokikanKanaMeisho(TextBoxKana txtSearchShujiiIryokikanKanaMeisho) {
-        this.txtSearchShujiiIryokikanKanaMeisho = txtSearchShujiiIryokikanKanaMeisho;
     }
 
     /*
@@ -181,6 +145,78 @@ public class ShujiiSearchDiv extends Panel {
     }
 
     /*
+     * gettxtSearchShujiiIryokikanMeisho
+     * @return txtSearchShujiiIryokikanMeisho
+     */
+    @JsonProperty("txtSearchShujiiIryokikanMeisho")
+    public TextBox getTxtSearchShujiiIryokikanMeisho() {
+        return txtSearchShujiiIryokikanMeisho;
+    }
+
+    /*
+     * settxtSearchShujiiIryokikanMeisho
+     * @param txtSearchShujiiIryokikanMeisho txtSearchShujiiIryokikanMeisho
+     */
+    @JsonProperty("txtSearchShujiiIryokikanMeisho")
+    public void setTxtSearchShujiiIryokikanMeisho(TextBox txtSearchShujiiIryokikanMeisho) {
+        this.txtSearchShujiiIryokikanMeisho = txtSearchShujiiIryokikanMeisho;
+    }
+
+    /*
+     * getddlKikanMeisho
+     * @return ddlKikanMeisho
+     */
+    @JsonProperty("ddlKikanMeisho")
+    public DropDownList getDdlKikanMeisho() {
+        return ddlKikanMeisho;
+    }
+
+    /*
+     * setddlKikanMeisho
+     * @param ddlKikanMeisho ddlKikanMeisho
+     */
+    @JsonProperty("ddlKikanMeisho")
+    public void setDdlKikanMeisho(DropDownList ddlKikanMeisho) {
+        this.ddlKikanMeisho = ddlKikanMeisho;
+    }
+
+    /*
+     * gettxtSearchShujiiIryokikanKanaMeisho
+     * @return txtSearchShujiiIryokikanKanaMeisho
+     */
+    @JsonProperty("txtSearchShujiiIryokikanKanaMeisho")
+    public TextBoxKana getTxtSearchShujiiIryokikanKanaMeisho() {
+        return txtSearchShujiiIryokikanKanaMeisho;
+    }
+
+    /*
+     * settxtSearchShujiiIryokikanKanaMeisho
+     * @param txtSearchShujiiIryokikanKanaMeisho txtSearchShujiiIryokikanKanaMeisho
+     */
+    @JsonProperty("txtSearchShujiiIryokikanKanaMeisho")
+    public void setTxtSearchShujiiIryokikanKanaMeisho(TextBoxKana txtSearchShujiiIryokikanKanaMeisho) {
+        this.txtSearchShujiiIryokikanKanaMeisho = txtSearchShujiiIryokikanKanaMeisho;
+    }
+
+    /*
+     * getddlKikanKanaMeisho
+     * @return ddlKikanKanaMeisho
+     */
+    @JsonProperty("ddlKikanKanaMeisho")
+    public DropDownList getDdlKikanKanaMeisho() {
+        return ddlKikanKanaMeisho;
+    }
+
+    /*
+     * setddlKikanKanaMeisho
+     * @param ddlKikanKanaMeisho ddlKikanKanaMeisho
+     */
+    @JsonProperty("ddlKikanKanaMeisho")
+    public void setDdlKikanKanaMeisho(DropDownList ddlKikanKanaMeisho) {
+        this.ddlKikanKanaMeisho = ddlKikanKanaMeisho;
+    }
+
+    /*
      * gettxtSearchShujiiShimei
      * @return txtSearchShujiiShimei
      */
@@ -196,6 +232,24 @@ public class ShujiiSearchDiv extends Panel {
     @JsonProperty("txtSearchShujiiShimei")
     public void setTxtSearchShujiiShimei(TextBox txtSearchShujiiShimei) {
         this.txtSearchShujiiShimei = txtSearchShujiiShimei;
+    }
+
+    /*
+     * getddlShujiiMeisho
+     * @return ddlShujiiMeisho
+     */
+    @JsonProperty("ddlShujiiMeisho")
+    public DropDownList getDdlShujiiMeisho() {
+        return ddlShujiiMeisho;
+    }
+
+    /*
+     * setddlShujiiMeisho
+     * @param ddlShujiiMeisho ddlShujiiMeisho
+     */
+    @JsonProperty("ddlShujiiMeisho")
+    public void setDdlShujiiMeisho(DropDownList ddlShujiiMeisho) {
+        this.ddlShujiiMeisho = ddlShujiiMeisho;
     }
 
     /*
@@ -217,21 +271,21 @@ public class ShujiiSearchDiv extends Panel {
     }
 
     /*
-     * gettxtSaidaiHyojiKensu
-     * @return txtSaidaiHyojiKensu
+     * getddlShujiiKanaMeisho
+     * @return ddlShujiiKanaMeisho
      */
-    @JsonProperty("txtSaidaiHyojiKensu")
-    public TextBoxNum getTxtSaidaiHyojiKensu() {
-        return txtSaidaiHyojiKensu;
+    @JsonProperty("ddlShujiiKanaMeisho")
+    public DropDownList getDdlShujiiKanaMeisho() {
+        return ddlShujiiKanaMeisho;
     }
 
     /*
-     * settxtSaidaiHyojiKensu
-     * @param txtSaidaiHyojiKensu txtSaidaiHyojiKensu
+     * setddlShujiiKanaMeisho
+     * @param ddlShujiiKanaMeisho ddlShujiiKanaMeisho
      */
-    @JsonProperty("txtSaidaiHyojiKensu")
-    public void setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
-        this.txtSaidaiHyojiKensu = txtSaidaiHyojiKensu;
+    @JsonProperty("ddlShujiiKanaMeisho")
+    public void setDdlShujiiKanaMeisho(DropDownList ddlShujiiKanaMeisho) {
+        this.ddlShujiiKanaMeisho = ddlShujiiKanaMeisho;
     }
 
     /*
@@ -250,6 +304,24 @@ public class ShujiiSearchDiv extends Panel {
     @JsonProperty("radSearchJokyoFlag")
     public void setRadSearchJokyoFlag(RadioButton radSearchJokyoFlag) {
         this.radSearchJokyoFlag = radSearchJokyoFlag;
+    }
+
+    /*
+     * gettxtSaidaiHyojiKensu
+     * @return txtSaidaiHyojiKensu
+     */
+    @JsonProperty("txtSaidaiHyojiKensu")
+    public TextBoxNum getTxtSaidaiHyojiKensu() {
+        return txtSaidaiHyojiKensu;
+    }
+
+    /*
+     * settxtSaidaiHyojiKensu
+     * @param txtSaidaiHyojiKensu txtSaidaiHyojiKensu
+     */
+    @JsonProperty("txtSaidaiHyojiKensu")
+    public void setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
+        this.txtSaidaiHyojiKensu = txtSaidaiHyojiKensu;
     }
 
     /*
@@ -286,6 +358,15 @@ public class ShujiiSearchDiv extends Panel {
     @JsonProperty("btnClearKensakuJoken")
     public void setBtnClearKensakuJoken(Button btnClearKensakuJoken) {
         this.btnClearKensakuJoken = btnClearKensakuJoken;
+    }
+
+    /*
+     * getccdHokenshaList
+     * @return ccdHokenshaList
+     */
+    @JsonProperty("ccdHokenshaList")
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return ccdHokenshaList;
     }
 
     // </editor-fold>

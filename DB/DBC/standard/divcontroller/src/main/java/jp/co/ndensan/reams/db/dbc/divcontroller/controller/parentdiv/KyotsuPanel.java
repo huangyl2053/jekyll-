@@ -18,16 +18,17 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 public class KyotsuPanel {
 
     /**
-     * 住宅改修費支給申請決定 審査済支給申請一覧の選択されたが一つでもあれば、審査内容を保存するボタンを表示する。ない場合に審査内容を保存するボタンを非表示する。
+     * 住宅改修費支給申請決定
+     * 審査済支給申請一覧の選択されたが一つでもあれば、審査内容を保存するボタンを表示する。ない場合に審査内容を保存するボタンを非表示する。
      *
      * @param panel JutakuKaishuShinseiListDiv
-     * @param panel1
+     * @param panel1 ShinsazumiShikyuShinseiListPanelDiv
      * @return PanelDivのResponseData
      */
     public ResponseData<KyotsuPanelDiv> onSelect_OnClick(KyotsuPanelDiv panel, ShinsazumiShikyuShinseiListPanelDiv panel1) {
         ResponseData<KyotsuPanelDiv> response = new ResponseData<>();
 
-        //TO DO 
+        //TO DO
         setbtnSaveDisabled(panel, panel1);
 
         response.data = panel;

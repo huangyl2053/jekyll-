@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyo.ninteichosahyo
 
 /**
  * 認定調査票（基本調査）のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public interface INinteichosahyoKihonChosaMapper {
 

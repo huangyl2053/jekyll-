@@ -8,18 +8,22 @@ package jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikanryoj
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 要介護認定完了情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class NinteiKanryoJoho extends ModelBase<NinteiKanryoJohoIdentifier, DbT5105NinteiKanryoJohoEntity, NinteiKanryoJoho> implements Serializable {
+public class NinteiKanryoJoho
+        extends ModelBase<NinteiKanryoJohoIdentifier, DbT5105NinteiKanryoJohoEntity, NinteiKanryoJoho>
+        implements Serializable {
 
     private final DbT5105NinteiKanryoJohoEntity entity;
     private final NinteiKanryoJohoIdentifier id;
@@ -186,8 +190,7 @@ public class NinteiKanryoJoho extends ModelBase<NinteiKanryoJohoIdentifier, DbT5
     }
 
     /**
-     * 要介護認定完了情報のみを変更対象とします。<br/>
-     * {@link DbT5105NinteiKanryoJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 要介護認定完了情報のみを変更対象とします。<br/> {@link DbT5105NinteiKanryoJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteiKanryoJoho}
      */
@@ -201,8 +204,7 @@ public class NinteiKanryoJoho extends ModelBase<NinteiKanryoJohoIdentifier, DbT5
     }
 
     /**
-     * 保持する要介護認定完了情報を削除対象とします。<br/>
-     * {@link DbT5105NinteiKanryoJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する要介護認定完了情報を削除対象とします。<br/> {@link DbT5105NinteiKanryoJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteiKanryoJoho}
      */

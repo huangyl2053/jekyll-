@@ -14,6 +14,7 @@ import lombok.Value;
  * 連帯納付義務者の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class RentaiGimushaIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

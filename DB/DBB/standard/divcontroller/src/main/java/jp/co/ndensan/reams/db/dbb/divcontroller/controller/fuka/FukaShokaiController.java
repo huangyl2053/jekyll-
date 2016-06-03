@@ -15,13 +15,12 @@ import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.ExceptionSuppliers;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.DankaiIndex;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
@@ -41,6 +40,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public final class FukaShokaiController {
 
+    private static final RString SERIAL_NUMBER1 = new RString("0001");
+
     /**
      * プライベートコンストラクタです。
      */
@@ -54,9 +55,7 @@ public final class FukaShokaiController {
      * @return 賦課対象者キー
      */
     public static FukaTaishoshaKey getFukaTaishoshaKeyInViewState() {
-
-        FukaTaishoshaKey key = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
-        return key;
+        return ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
     }
 
     /**
@@ -65,9 +64,7 @@ public final class FukaShokaiController {
      * @return 賦課照会キー
      */
     public static FukaShokaiKey getFukaShokaiKeyInViewState() {
-
-        FukaShokaiKey key = ViewStateHolder.get(DbbViewStateKey.FukaShokaiKey, FukaShokaiKey.class);
-        return key;
+        return ViewStateHolder.get(DbbViewStateKey.FukaShokaiKey, FukaShokaiKey.class);
     }
 
     /**
@@ -105,11 +102,35 @@ public final class FukaShokaiController {
      */
     public static Fuka getFukaModelByFukaShokaiKey() {
 
+        // UIデザイナの読み込み順を直すまでの暫定対応
+        FlexibleYear 調定年度;
+        FlexibleYear 賦課年度;
+        TsuchishoNo 通知書番号;
+        int 履歴番号;
+
         FukaShokaiKey key = getFukaShokaiKeyInViewState();
 
-        Optional<Fuka> modeloid = Optional.of(new FukaManager().get介護賦課(
-                key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get履歴番号()));
+        if (key == null
+                || key.get賦課年度() == null || key.get賦課年度().isEmpty()
+                || key.get調定年度() == null || key.get調定年度().isEmpty()
+                || key.get通知書番号() == null || key.get通知書番号().isEmpty()) {
+            FukaTaishoshaKey taishoshaKey = getFukaTaishoshaKeyInViewState();
+            調定年度 = taishoshaKey.get調定年度();
+            賦課年度 = taishoshaKey.get賦課年度();
+            通知書番号 = taishoshaKey.get通知書番号();
+            履歴番号 = 1;
+        } else {
+            調定年度 = key.get調定年度();
+            賦課年度 = key.get賦課年度();
+            通知書番号 = key.get通知書番号();
+            履歴番号 = key.get履歴番号();
+        }
 
+        Optional<Fuka> modeloid = Optional.ofNullable(new FukaManager().get介護賦課(
+                調定年度, 賦課年度, 通知書番号, 履歴番号));
+
+//        Optional<Fuka> modeloid = Optional.of(new FukaManager().get介護賦課(
+//                key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get履歴番号()));
         if (!modeloid.isPresent()) {
             throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
@@ -216,7 +237,7 @@ public final class FukaShokaiController {
     public static Optional<HokenryoDankai> findZennendoHokenryoDankai(Fuka fuka) {
         FlexibleYear 前年度 = fuka.get賦課年度().minusYear(1);
 
-        Optional<Fuka> modeloid = Optional.of(new FukaManager().get介護賦課(前年度, fuka.get賦課年度(), fuka.get通知書番号(), fuka.get履歴番号()));
+        Optional<Fuka> modeloid = Optional.ofNullable(new FukaManager().get介護賦課_賦課年度最新(前年度, fuka.get通知書番号()));
         if (!modeloid.isPresent()) {
             return Optional.empty();
         }
@@ -240,19 +261,29 @@ public final class FukaShokaiController {
      * @return 算定状態
      */
     public static SanteiState judgeSanteiState(Fuka fuka) {
-        final RString SERIAL_NUMBER = new RString("0001");
-
         Optional<ShoriDateKanri> modeloid = Optional.ofNullable(new ShoriDateKanriManager().get処理日付管理マスタ(
-                SubGyomuCode.DBB介護賦課, fuka.get賦課市町村コード(), ShoriName.本算定賦課.toRString(),
-                SERIAL_NUMBER, fuka.get賦課年度(), SERIAL_NUMBER));
+                SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.toRString(),
+                SERIAL_NUMBER1, fuka.get賦課年度(), SERIAL_NUMBER1));
 
         if (!modeloid.isPresent()) {
             throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
-        RDateTime 対象終了日時 = modeloid.get().get対象終了日時().getRDateTime();
-        RDateTime 調定日時 = fuka.get調定日時().getRDateTime();
 
-        if (調定日時.isAfter(対象終了日時)) {
+        RDateTime 基準日時;
+        if (modeloid.get().get基準日時() == null || modeloid.get().get基準日時().isEmpty()) {
+            基準日時 = RDateTime.MAX;
+        } else {
+            基準日時 = modeloid.get().get基準日時().getRDateTime();
+        }
+
+        RDateTime 調定日時;
+        if (fuka.get調定日時() == null || fuka.get調定日時().isEmpty()) {
+            調定日時 = RDateTime.MAX;
+        } else {
+            調定日時 = fuka.get調定日時().getRDateTime();
+        }
+
+        if (調定日時.isAfter(基準日時)) {
             return SanteiState.本算定;
         }
 

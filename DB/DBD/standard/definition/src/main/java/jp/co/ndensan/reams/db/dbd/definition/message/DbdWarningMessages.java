@@ -13,12 +13,14 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
 /**
  * DBDの警告メッセージ定義列挙型です。
  *
- * @author N9606 漢那 憲作
+ * @reamsid_L DBD-9999-023 liangbc
  */
 public enum DbdWarningMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    社会福祉法人減免_非生活保護者_軽減率100(1, "生活保護登録者ではありませんが、軽減率１００％です。"),
+    社会福祉法人減免_軽減率_特例措置期間(2, "平21.04.01から平23.03.31は特例措置期間です。軽減率を確認してください。"),
+    減免減額_有効期限が年度外(3, "指定の有効期限は、設定された年度の範囲外です。確認してください。"),
+    障がい者控除_年度重複(4, "既に対象年度の認定情報が存在しますが、よろしいですか？");
 
     private final Message message;
 
@@ -29,7 +31,7 @@ public enum DbdWarningMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbdWarningMessages(int no, String message) {
-        this.message = new WarningMessage(toCode("W", no), message);
+        this.message = new WarningMessage(toCode("DBDW", no), message);
     }
 
     @Override

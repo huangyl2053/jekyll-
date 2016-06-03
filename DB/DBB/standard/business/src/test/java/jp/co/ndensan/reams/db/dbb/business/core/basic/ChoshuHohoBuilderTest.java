@@ -238,13 +238,13 @@ public class ChoshuHohoBuilderTest extends DbbTestBase {
         @Test
         public void 戻り値の依頼情報送付済みフラグは_設定した値と同じ依頼情報送付済みフラグを返す() {
             business = sut.set依頼情報送付済みフラグ(DbT2001ChoshuHohoEntityGenerator.DEFAULT_依頼情報送付済みフラグ).build();
-            assertThat(business.get依頼情報送付済みフラグ(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_依頼情報送付済みフラグ));
+            assertThat(business.is依頼情報送付済みフラグ(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_依頼情報送付済みフラグ));
         }
 
         @Test
         public void 戻り値の追加依頼情報送付済みフラグは_設定した値と同じ追加依頼情報送付済みフラグを返す() {
             business = sut.set追加依頼情報送付済みフラグ(DbT2001ChoshuHohoEntityGenerator.DEFAULT_追加依頼情報送付済みフラグ).build();
-            assertThat(business.get追加依頼情報送付済みフラグ(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_追加依頼情報送付済みフラグ));
+            assertThat(business.is追加依頼情報送付済みフラグ(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_追加依頼情報送付済みフラグ));
         }
 
         @Test

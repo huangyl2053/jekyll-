@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -73,7 +72,6 @@ public class ShujiiIryoKikanJohoBuilder {
      * @return {@link ShujiiIryoKikanJohoBuilder}
      */
     public ShujiiIryoKikanJohoBuilder set医療機関コード(IryoKikanCode 医療機関コード) {
-        requireNonNull(医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("医療機関コード"));
         entity.setIryokikanCode(医療機関コード);
         return this;
     }
@@ -159,6 +157,18 @@ public class ShujiiIryoKikanJohoBuilder {
     public ShujiiIryoKikanJohoBuilder set代表者名(AtenaMeisho 代表者名) {
         requireNonNull(代表者名, UrSystemErrorMessages.値がnull.getReplacedMessage("代表者名"));
         entity.setDaihyoshaName(代表者名.getColumnValue());
+        return this;
+    }
+
+    /**
+     * 代表者名を設定します。
+     *
+     * @param 代表者名カナ 代表者名カナ
+     * @return {@link ShujiiIryoKikanJohoBuilder}
+     */
+    public ShujiiIryoKikanJohoBuilder set代表者名カナ(RString 代表者名カナ) {
+        requireNonNull(代表者名カナ, UrSystemErrorMessages.値がnull.getReplacedMessage("代表者名カナ"));
+        entity.setDaihyoshaNameKana(代表者名カナ);
         return this;
     }
 

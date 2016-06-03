@@ -4,6 +4,21 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnClear = function () {
+                return "onClick_btnClear";
+            };
+
+            Events.onClick_btnKensaku = function () {
+                return "onClick_btnKensaku";
+            };
+
+            Events.onSelect = function () {
+                return "onSelect";
+            };
+
+            Events.onClick_btnModoru = function () {
+                return "onClick_btnModoru";
+            };
             return Events;
         })();
         ShujiiIryokikanAndShujiiGuide.Events = Events;
@@ -32,8 +47,8 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("KensakuJoken"));
             };
 
-            Controls.prototype.txtHokensha = function () {
-                return new UZA.TextBox(this.convFiledName("txtHokensha"));
+            Controls.prototype.HokenshaList = function () {
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("HokenshaList"));
             };
 
             Controls.prototype.txtIryoKikanCodeFrom = function () {
@@ -74,6 +89,10 @@ var DBZ;
 
             Controls.prototype.txtShujiiKanaShimei = function () {
                 return new UZA.TextBox(this.convFiledName("txtShujiiKanaShimei"));
+            };
+
+            Controls.prototype.txtMaxKensu = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtMaxKensu"));
             };
 
             Controls.prototype.btnClear = function () {

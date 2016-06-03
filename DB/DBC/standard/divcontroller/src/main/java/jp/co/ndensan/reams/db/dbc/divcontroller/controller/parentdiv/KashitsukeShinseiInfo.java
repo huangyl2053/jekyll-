@@ -101,6 +101,8 @@ public class KashitsukeShinseiInfo {
     }
 
     private void setServiceData(KashitsukeShinseiInfoDiv info) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        info.getKashitsukeShinseiHoshonin();
 //        boolean newFlg = isNew(info);
 //        KashitsukeShinseiServiceDiv div = info.getKashitsukeShinseiService();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(1));
@@ -113,6 +115,8 @@ public class KashitsukeShinseiInfo {
     }
 
     private void setShinseishaData(KashitsukeShinseiInfoDiv info) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        info.getKashitsukeShinseiHoshonin();
 //        boolean newFlg = isNew(info);
 //        KashitsukeShinseishaDiv div = info.getKashitsukeShinseisha();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(2));
@@ -125,6 +129,8 @@ public class KashitsukeShinseiInfo {
     }
 
     private void setHoshoninData(KashitsukeShinseiInfoDiv info) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        info.getKashitsukeShinseiHoshonin();
 //        boolean newFlg = isNew(info);
 //        KashitsukeShinseiHoshoninDiv div = info.getKashitsukeShinseiHoshonin();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(3));
@@ -139,6 +145,8 @@ public class KashitsukeShinseiInfo {
     }
 
     private void setHoshoninKinmusakiData(KashitsukeShinseiInfoDiv info) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        info.getKashitsukeShinseiHoshonin();
 //        boolean newFlg = isNew(info);
 //        KashitsukeShinseiHoshoninKinmuDiv div = info.getKashitsukeShinseiHoshonin().getKashitsukeShinseiHoshoninKinmu();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(4));
@@ -148,6 +156,8 @@ public class KashitsukeShinseiInfo {
     }
 
     private void setTeishutsuData(KashitsukeShinseiInfoDiv info) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        info.getKashitsukeShinseiHoshonin();
 //        boolean newFlg = isNew(info);
 //        KashitsukeShinseiTeishutsuDiv div = info.getKashitsukeShinseiTeishutsu();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(5));

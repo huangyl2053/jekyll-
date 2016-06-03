@@ -459,4 +459,5 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity extends DbTableEntityBase<D
 
 // </editor-fold>
 
+
 }

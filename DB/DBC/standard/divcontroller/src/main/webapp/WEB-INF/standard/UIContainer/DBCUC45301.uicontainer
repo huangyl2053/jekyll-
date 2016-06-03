@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC45301",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "運用管理・自己負担額補正窓口払情報",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC4530011",
+     "toLayoutTitle": "運用管理・自己負担額補正窓口払情報",
+     "toState": "初期登録状態"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC4530011",
+     "layoutTitle": "運用管理・自己負担額補正窓口払情報",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

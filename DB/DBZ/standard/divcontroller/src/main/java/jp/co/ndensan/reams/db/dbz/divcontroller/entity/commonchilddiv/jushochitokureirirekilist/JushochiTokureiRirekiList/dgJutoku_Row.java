@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochit
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Dec 08 21:28:23 JST 2015 
+ * Thu May 19 23:52:15 CST 2016 
  */
 
 
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgJutoku_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private RString state;
     private RString shichosonCode;
@@ -38,6 +38,8 @@ public class dgJutoku_Row extends DataRow {
     private RString sochimotoHokensha;
     private RString kyuHokensha;
     private TextBoxDate shoriDate;
+    private TextBoxDate idoYMD;
+    private RString edaNo;
 
     public dgJutoku_Row() {
         super();
@@ -56,6 +58,8 @@ public class dgJutoku_Row extends DataRow {
         this.sochimotoHokensha = RString.EMPTY;
         this.kyuHokensha = RString.EMPTY;
         this.shoriDate = new TextBoxDate();
+        this.idoYMD = new TextBoxDate();
+        this.edaNo = RString.EMPTY;
         this.setOriginalData("state", state);
         this.setOriginalData("shichosonCode", shichosonCode);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
@@ -71,9 +75,11 @@ public class dgJutoku_Row extends DataRow {
         this.setOriginalData("sochimotoHokensha", sochimotoHokensha);
         this.setOriginalData("kyuHokensha", kyuHokensha);
         this.setOriginalData("shoriDate", shoriDate);
+        this.setOriginalData("idoYMD", idoYMD);
+        this.setOriginalData("edaNo", edaNo);
     }
 
-    public dgJutoku_Row(RString state, RString shichosonCode, RString hihokenshaNo, RString shoriTimestamp, TextBoxFlexibleDate tekiyoDate, TextBoxFlexibleDate tekiyoTodokedeDate, RString tekiyoJiyu, RString tekiyoJiyuKey, TextBoxFlexibleDate kaijoDate, TextBoxFlexibleDate kaijoTodokedeDate, RString kaijoJiyu, RString kaijoJiyuKey, RString sochimotoHokensha, RString kyuHokensha, TextBoxDate shoriDate) {
+    public dgJutoku_Row(RString state, RString shichosonCode, RString hihokenshaNo, RString shoriTimestamp, TextBoxFlexibleDate tekiyoDate, TextBoxFlexibleDate tekiyoTodokedeDate, RString tekiyoJiyu, RString tekiyoJiyuKey, TextBoxFlexibleDate kaijoDate, TextBoxFlexibleDate kaijoTodokedeDate, RString kaijoJiyu, RString kaijoJiyuKey, RString sochimotoHokensha, RString kyuHokensha, TextBoxDate shoriDate, TextBoxDate idoYMD, RString edaNo) {
         super();
         this.setOriginalData("state", state);
         this.setOriginalData("shichosonCode", shichosonCode);
@@ -90,6 +96,8 @@ public class dgJutoku_Row extends DataRow {
         this.setOriginalData("sochimotoHokensha", sochimotoHokensha);
         this.setOriginalData("kyuHokensha", kyuHokensha);
         this.setOriginalData("shoriDate", shoriDate);
+        this.setOriginalData("idoYMD", idoYMD);
+        this.setOriginalData("edaNo", edaNo);
         this.state = state;
         this.shichosonCode = shichosonCode;
         this.hihokenshaNo = hihokenshaNo;
@@ -105,6 +113,8 @@ public class dgJutoku_Row extends DataRow {
         this.sochimotoHokensha = sochimotoHokensha;
         this.kyuHokensha = kyuHokensha;
         this.shoriDate = shoriDate;
+        this.idoYMD = idoYMD;
+        this.edaNo = edaNo;
     }
 
     public RString getState() {
@@ -165,6 +175,14 @@ public class dgJutoku_Row extends DataRow {
 
     public TextBoxDate getShoriDate() {
         return shoriDate;
+    }
+
+    public TextBoxDate getIdoYMD() {
+        return idoYMD;
+    }
+
+    public RString getEdaNo() {
+        return edaNo;
     }
 
     public void setState(RString state) {
@@ -240,6 +258,16 @@ public class dgJutoku_Row extends DataRow {
     public void setShoriDate(TextBoxDate shoriDate) {
         this.setOriginalData("shoriDate", shoriDate);
         this.shoriDate = shoriDate;
+    }
+
+    public void setIdoYMD(TextBoxDate idoYMD) {
+        this.setOriginalData("idoYMD", idoYMD);
+        this.idoYMD = idoYMD;
+    }
+
+    public void setEdaNo(RString edaNo) {
+        this.setOriginalData("edaNo", edaNo);
+        this.edaNo = edaNo;
     }
 
     // </editor-fold>

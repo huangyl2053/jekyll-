@@ -40,6 +40,18 @@ public enum DbT3001JukyushaIdoRenrakuhyo implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
+     * 送付年月
+     */
+    sofuYM(2147483647, 0),
+    /**
+     * 被保険者番号
+     */
+    hiHokenshaNo(2147483647, 0),
+    /**
+     * 履歴番号
+     */
+    rirekiNo(5, 0),
+    /**
      * 異動年月日
      */
     idoYMD(2147483647, 0),
@@ -58,14 +70,6 @@ public enum DbT3001JukyushaIdoRenrakuhyo implements IColumnDefinition {
      * <br/>Not（地方公共団体コード（導入団体）⇒保険者番号）
      */
     shoKisaiHokenshaNo(2147483647, 0),
-    /**
-     * 被保険者番号
-     */
-    hiHokenshaNo(2147483647, 0),
-    /**
-     * 履歴番号
-     */
-    rirekiNo(5, 0),
     /**
      * 被保険者氏名カナ
      */
@@ -138,7 +142,7 @@ public enum DbT3001JukyushaIdoRenrakuhyo implements IColumnDefinition {
     /**
      * 認定有効期間終了年月日
      */
-    ninteiYukoKikanShuryoYMD(2147483647, 0),
+    ninteiYukoKikanShuryoYMD(8, 0),
     /**
      * 居宅サービス計画作成区分コード
      * <br/>1:居宅介護支援事業所作成,2:自己作成,3:介護予防支援事業所作成
@@ -148,15 +152,15 @@ public enum DbT3001JukyushaIdoRenrakuhyo implements IColumnDefinition {
      * 居宅介護支援事業所番号
      * <br/>居宅サービス計画作成区分コードが「2:自己作成」である場合、設定不要
      */
-    kyotakuKaigoShienJigyoshoNo(2147483647, 0),
+    kyotakuKaigoShienJigyoshoNo(10, 0),
     /**
      * 居宅サービス計画適用開始年月日
      */
-    kyotakuServiceTekiyoKaishiYMD(2147483647, 0),
+    kyotakuServiceTekiyoKaishiYMD(8, 0),
     /**
      * 居宅サービス計画適用終了年月日
      */
-    kyotakuServiceTekiyoShuryoYMD(2147483647, 0),
+    kyotakuServiceTekiyoShuryoYMD(8, 0),
     /**
      * 訪問通所サービス支給限度基準額
      */
@@ -168,7 +172,7 @@ public enum DbT3001JukyushaIdoRenrakuhyo implements IColumnDefinition {
     /**
      * 訪問通所サービス上限管理適用期間終了年月日
      */
-    homonTsushoServiceJogenKanriTekiyoShuryoYMD(2147483647, 0),
+    homonTsushoServiceJogenKanriTekiyoShuryoYMD(8, 0),
     /**
      * 短期入所サービス支給限度基準額
      */
@@ -188,19 +192,19 @@ public enum DbT3001JukyushaIdoRenrakuhyo implements IColumnDefinition {
     /**
      * 償還払化開始年月日
      */
-    shokanbaraikaKaishiYMD(2147483647, 0),
+    shokanbaraikaKaishiYMD(8, 0),
     /**
      * 償還払化終了年月日
      */
-    shokanbaraikaShuryoYMD(2147483647, 0),
+    shokanbaraikaShuryoYMD(8, 0),
     /**
      * 給付率引下げ開始年月日
      */
-    kyufuritsuHikisageKaishiYMD(2147483647, 0),
+    kyufuritsuHikisageKaishiYMD(8, 0),
     /**
      * 給付率引下げ終了年月日
      */
-    kyufuritsuHikisageShuryoYMD(2147483647, 0),
+    kyufuritsuHikisageShuryoYMD(8, 0),
     /**
      * 減免申請中区分コード
      * <br/>1:申請無し 
@@ -216,15 +220,15 @@ public enum DbT3001JukyushaIdoRenrakuhyo implements IColumnDefinition {
     /**
      * 給付率
      */
-    kyufuritsu(2147483647, 0),
+    kyufuritsu(3, 0),
     /**
      * 適用開始年月日
      */
-    tekiyoKaishiYMD(2147483647, 0),
+    tekiyoKaishiYMD(8, 0),
     /**
      * 適用終了年月日
      */
-    tekiyoShuryoYMD(2147483647, 0),
+    tekiyoShuryoYMD(8, 0),
     /**
      * 標準負担区分コード
      * <br/>1:標準負担,2:特定標準負担
@@ -233,15 +237,15 @@ public enum DbT3001JukyushaIdoRenrakuhyo implements IColumnDefinition {
     /**
      * 負担額
      */
-    futangaku(10, 0),
+    futangaku(5, 0),
     /**
      * 負担額適用開始年月日
      */
-    futangakuTekiyoKaishiYMD(2147483647, 0),
+    futangakuTekiyoKaishiYMD(8, 0),
     /**
      * 負担額適用終了年月日
      */
-    futangakuTekiyoShuryoYMD(2147483647, 0),
+    futangakuTekiyoShuryoYMD(8, 0),
     /**
      * 特定入所者認定申請中区分コード
      * <br/>1:申請無し,2:申請中,3:決定済み
@@ -260,47 +264,47 @@ public enum DbT3001JukyushaIdoRenrakuhyo implements IColumnDefinition {
     /**
      * 食費負担限度額
      */
-    shokuhiFutanGendogaku(5, 0),
+    shokuhiFutanGendogaku(4, 0),
     /**
      * 居住費ユニット型個室負担限度額
      */
-    kyojuhiUnitGataKoshitsuFutanGendogaku(5, 0),
+    kyojuhiUnitGataKoshitsuFutanGendogaku(4, 0),
     /**
      * 居住費ユニット型準個室負担限度額
      */
-    kyojuhiUnitGataJunKoshitsuFutanGendogaku(5, 0),
+    kyojuhiUnitGataJunKoshitsuFutanGendogaku(4, 0),
     /**
      * 居住費従来型個室特養等負担限度額
      */
-    kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku(5, 0),
+    kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku(4, 0),
     /**
      * 居住費従来型個室老健療養等負担限度額
      */
-    kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku(5, 0),
+    kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku(4, 0),
     /**
      * 居住費多床室負担限度額
      */
-    kyujuhiTashoshitsuFutanGendogaku(5, 0),
+    kyujuhiTashoshitsuFutanGendogaku(4, 0),
     /**
      * 負担限度額適用開始年月日
      */
-    futanGendogakuTekiyoKaishiYMD(2147483647, 0),
+    futanGendogakuTekiyoKaishiYMD(8, 0),
     /**
      * 負担限度額適用終了年月日
      */
-    futanGendogakuTekiyoShuryoYMD(2147483647, 0),
+    futanGendogakuTekiyoShuryoYMD(8, 0),
     /**
      * 軽減率
      */
-    keigenritsu(5, 0),
+    keigenritsu(4, 0),
     /**
      * 軽減率適用開始年月日
      */
-    keigenritsuTekiyoKaishiYMD(2147483647, 0),
+    keigenritsuTekiyoKaishiYMD(8, 0),
     /**
      * 軽減率適用終了年月日
      */
-    keigenritsuTekiyoShuryoYMD(2147483647, 0),
+    keigenritsuTekiyoShuryoYMD(8, 0),
     /**
      * 小多機能居宅介護利用開始月利用有フラグ
      * <br/>1:利用無し,2:利用有り
@@ -345,10 +349,6 @@ public enum DbT3001JukyushaIdoRenrakuhyo implements IColumnDefinition {
      */
     teiseiRenrakuhyoFlag(1, 0),
     /**
-     * 送付年月
-     */
-    sofuYM(2147483647, 0),
-    /**
      * 住所地特例対象者区分コード
      */
     jushochiTokureiTaishoshaKubunCode(1, 0),
@@ -359,31 +359,44 @@ public enum DbT3001JukyushaIdoRenrakuhyo implements IColumnDefinition {
     /**
      * 住所地特例適用開始日
      */
-    jushochiTokureiTekiyoKaishiYMD(2147483647, 0),
+    jushochiTokureiTekiyoKaishiYMD(8, 0),
     /**
      * 住所地特例適用終了日
      */
-    jushochiTokureiTekiyoShuryoYMD(2147483647, 0),
+    jushochiTokureiTekiyoShuryoYMD(8, 0),
     /**
      * 居宅費（新１）負担限度額
      */
-    kyotakuhiShin1FutanGendogaku(5, 0),
+    kyotakuhiShin1FutanGendogaku(4, 0),
     /**
      * 居宅費（新２）負担限度額
      */
-    kyotakuhiShin2FutanGendogaku(5, 0),
+    kyotakuhiShin2FutanGendogaku(4, 0),
     /**
      * 居宅費（新３）負担限度額
      */
-    kyotakuhiShin3FutanGendogaku(5, 0),
+    kyotakuhiShin3FutanGendogaku(4, 0),
     /**
      * 利用者負担割合有効開始日
      */
-    riyosyaFutanWariaiYukoKaishiYMD(2147483647, 0),
+    riyosyaFutanWariaiYukoKaishiYMD(8, 0),
     /**
      * 利用者負担割合有効終了日
      */
-    riyosyaFutanWariaiYukoShuryoYMD(2147483647, 0);
+    riyosyaFutanWariaiYukoShuryoYMD(8, 0),
+    /**
+     * 訂正区分コード
+     * <br/>2：修正、3：削除
+     */
+    teiseiKubunCode(1, 0),
+    /**
+     * 訂正年月日
+     */
+    teiseiYMD(2147483647, 0),
+    /**
+     * 論理削除フラグ
+     */
+    logicalDeletedFlag(1, 0);
 
     private final int maxLength;
     private final int scale;

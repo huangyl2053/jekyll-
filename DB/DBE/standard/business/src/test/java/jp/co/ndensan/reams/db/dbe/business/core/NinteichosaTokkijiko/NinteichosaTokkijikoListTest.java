@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.NinteichosaTokkijiko;
 
-import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaTokkijiko.NinteichosaTokkijikoList;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaTokkijiko.NinteichosaTokkijiko;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosatokkijiko.NinteichosaTokkijikoList;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosatokkijiko.NinteichosaTokkijiko;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

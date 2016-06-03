@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 異動期間のデータアクセスクラスです。
  *
+ * @reamsid_L DBU-0110-010 xuyannan
  */
 @lombok.Getter
 @lombok.Setter

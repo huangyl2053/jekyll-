@@ -1,18 +1,15 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.ninteichosaIraiListForByHandCom;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ninteichosaIraiListForByHandCom.dgNinteichosaIraiListForByHand_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CompositeControl;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * defaultLayout のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CompositeControl;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+
+/**
+ * defaultLayout のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteichosaIraiListForByHandCom extends CompositeControl {
@@ -22,6 +19,7 @@ public class NinteichosaIraiListForByHandCom extends CompositeControl {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("dgNinteichosaIraiListForByHand")
     private DataGrid<dgNinteichosaIraiListForByHand_Row> dgNinteichosaIraiListForByHand;
 
@@ -38,7 +36,7 @@ public class NinteichosaIraiListForByHandCom extends CompositeControl {
 
     @JsonProperty("dgNinteichosaIraiListForByHand")
     public void setDgNinteichosaIraiListForByHand(DataGrid<dgNinteichosaIraiListForByHand_Row> dgNinteichosaIraiListForByHand) {
-        this.dgNinteichosaIraiListForByHand=dgNinteichosaIraiListForByHand;
+        this.dgNinteichosaIraiListForByHand = dgNinteichosaIraiListForByHand;
     }
 
 }

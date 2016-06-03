@@ -1,0 +1,842 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBE-0180-030 xuyannan -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hanteikekkajohoshuturyoku.IHanteiKekkaJohoShuturyokuMapper">
+
+    <resultMap id="resultMap_HanteiKekkaIchiranList" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkaichiran.HanteiKekkaIchiranEntity" autoMapping="true">
+        <result property="介護認定審査会審査順" column="shinsakaiOrder" />
+        <result property="認定申請区分_申請時" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定申請区分_法令" column="ninteiShinseiHoreiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定申請日" column="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="二次判定年月日" column="nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="証記載保険者番号" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="市町村名称" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者氏名" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="tb_一次判定結果" column="tb_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="tb_一次判定結果_加算" column="tb_ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="tb_二次判定要介護状態区分" column="tb_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="一次判定結果" column="ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="一次判定結果_加算" column="ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="二次判定要介護状態区分" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="要介護状態像例コード" column="yokaigoJotaizoReiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="二次判定認定有効期間" column="nijiHanteiNinteiYukoKikan" />
+        <result property="二次判定認定有効開始年月日" column="nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="二次判定認定有効終了年月日" column="nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="二号特定疾病コード" column="nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="介護認定審査会意見" column="shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="count" column="COUNT" />
+    </resultMap>
+    <select id="getHanteiKekkaIchiranList" resultMap="resultMap_HanteiKekkaIchiranList"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+            fetchSize="500">
+        SELECT
+            A.shinsakaiOrder AS shinsakaiOrder
+            ,A.ninteiShinseiShinseijiKubunCode AS ninteiShinseiShinseijiKubunCode
+            ,A.ninteiShinseiHoreiKubunCode AS ninteiShinseiHoreiKubunCode
+            ,A.ninteiShinseiYMD AS ninteiShinseiYMD
+            ,A.nijiHanteiYMD AS nijiHanteiYMD
+            ,A.shoKisaiHokenshaNo AS shoKisaiHokenshaNo
+            ,A.shichosonMeisho AS shichosonMeisho
+            ,A.hihokenshaNo AS hihokenshaNo
+            ,A.hihokenshaName AS hihokenshaName
+            ,A.ichijiHanteiKekkaCode AS tb_ichijiHanteiKekkaCode
+            ,A.ichijiHanteiKekkaNinchishoKasanCode AS tb_ichijiHanteiKekkaNinchishoKasanCode
+            ,A.nijiHanteiYokaigoJotaiKubunCode AS tb_nijiHanteiYokaigoJotaiKubunCode
+            ,A.ichijiHanteiKekkaCode AS ichijiHanteiKekkaCode
+            ,A.ichijiHanteiKekkaNinchishoKasanCode AS ichijiHanteiKekkaNinchishoKasanCode
+            ,A.nijiHanteiYokaigoJotaiKubunCode AS nijiHanteiYokaigoJotaiKubunCode
+            ,A.yokaigoJotaizoReiCode AS yokaigoJotaizoReiCode
+            ,A.nijiHanteiNinteiYukoKikan AS nijiHanteiNinteiYukoKikan
+            ,A.nijiHanteiNinteiYukoKaishiYMD AS nijiHanteiNinteiYukoKaishiYMD
+            ,A.nijiHanteiNinteiYukoShuryoYMD AS nijiHanteiNinteiYukoShuryoYMD
+            ,A.nigoTokuteiShippeiCode AS nigoTokuteiShippeiCode
+            ,A.shinsakaiIken AS shinsakaiIken
+            ,B.COUNT AS COUNT
+        FROM
+            (SELECT
+                dbT5502."shinsakaiOrder" AS shinsakaiOrder
+                ,dbT5101."ninteiShinseiShinseijiKubunCode" AS ninteiShinseiShinseijiKubunCode
+                ,dbT5101."ninteiShinseiHoreiKubunCode" AS ninteiShinseiHoreiKubunCode
+                ,dbT5101."ninteiShinseiYMD" AS ninteiShinseiYMD
+                ,dbT5102."nijiHanteiYMD" AS nijiHanteiYMD
+                ,dbT5101."shoKisaiHokenshaNo" AS shoKisaiHokenshaNo
+                ,dbT7051."shichosonMeisho" AS shichosonMeisho
+                ,dbT5101."hihokenshaNo" AS hihokenshaNo
+                ,dbT5101."hihokenshaName" AS hihokenshaName
+                ,TB."ichijiHanteiKekkaCode" AS tb_ichijiHanteiKekkaCode
+                ,TB."ichijiHanteiKekkaNinchishoKasanCode" AS tb_ichijiHanteiKekkaNinchishoKasanCode
+                ,TB."nijiHanteiYokaigoJotaiKubunCode" AS tb_nijiHanteiYokaigoJotaiKubunCode
+                ,dbT5116."ichijiHanteiKekkaCode" AS ichijiHanteiKekkaCode
+                ,dbT5116."ichijiHanteiKekkaNinchishoKasanCode" AS ichijiHanteiKekkaNinchishoKasanCode
+                ,dbT5102."nijiHanteiYokaigoJotaiKubunCode" AS nijiHanteiYokaigoJotaiKubunCode
+                ,dbT5102."yokaigoJotaizoReiCode" AS yokaigoJotaizoReiCode
+                ,dbT5102."nijiHanteiNinteiYukoKikan" AS nijiHanteiNinteiYukoKikan
+                ,dbT5102."nijiHanteiNinteiYukoKaishiYMD" AS nijiHanteiNinteiYukoKaishiYMD
+                ,dbT5102."nijiHanteiNinteiYukoShuryoYMD" AS nijiHanteiNinteiYukoShuryoYMD
+                ,dbT5101."nigoTokuteiShippeiCode" AS nigoTokuteiShippeiCode
+                ,dbT5102."shinsakaiIken" AS shinsakaiIken
+                ,dbT5502."shinsakaiKaisaiNo" AS "shinsakaiKaisaiNo"
+                ,dbT7051."shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo"
+            FROM
+                rgdb."DbT5502ShinsakaiWariateJoho" AS dbT5502
+            INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
+                ON dbT5102."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
+            INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
+                ON dbT5101."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
+            AND dbT5101."shoriJotaiKubun" IN
+            <foreach collection="shoriJotaiKubun" item="code" open="(" separator="," close=")"> #{code} </foreach>
+            AND dbT5101."logicalDeletedFlag" = False
+            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
+                ON dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
+            INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS dbT5116
+                ON dbT5116."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
+            LEFT JOIN
+                (SELECT
+                    dbT5116."ichijiHanteiKekkaCode"
+                    ,dbT5116."ichijiHanteiKekkaNinchishoKasanCode"
+                    ,dbT5102."nijiHanteiYokaigoJotaiKubunCode"
+                    ,dbT5502."shinseishoKanriNo"
+                FROM
+                    rgdb."DbT5502ShinsakaiWariateJoho" AS dbT5502
+                INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" AS dbT5121
+                    ON dbT5121."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
+                LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS dbT5116
+                    ON dbT5116."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo"
+                LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
+                    ON dbT5102."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo"
+                WHERE
+                    dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
+                    ) AS TB ON TB."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
+            WHERE
+                dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
+            <if test="isShoKisaiHokenshaNoFlag">
+                AND dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+            </if>                  
+            ORDER BY dbT5502."shinsakaiOrder") AS A
+        LEFT JOIN 
+        (SELECT
+            COUNT(1) AS COUNT
+            ,dbT5502."shinsakaiKaisaiNo" AS "shinsakaiKaisaiNo"
+            ,dbT7051."shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo"
+            FROM
+                rgdb."DbT5502ShinsakaiWariateJoho" AS dbT5502
+            INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
+                ON dbT5102."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
+            INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
+                ON dbT5101."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
+            AND dbT5101."shoriJotaiKubun" IN
+            <foreach collection="shoriJotaiKubun" item="code" open="(" separator="," close=")"> #{code} </foreach>
+            AND dbT5101."logicalDeletedFlag" = False
+            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
+                ON dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
+            INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS dbT5116
+                ON dbT5116."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
+            LEFT JOIN
+            (
+                SELECT
+                    dbT5116."ichijiHanteiKekkaCode"
+                    ,dbT5116."ichijiHanteiKekkaNinchishoKasanCode"
+                    ,dbT5102."nijiHanteiYokaigoJotaiKubunCode"
+                    ,dbT5502."shinseishoKanriNo"
+                FROM
+                    rgdb."DbT5502ShinsakaiWariateJoho" AS dbT5502
+                INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" AS dbT5121
+                    ON dbT5121."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
+                LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS dbT5116
+                    ON dbT5116."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo"
+                LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
+                    ON dbT5102."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo"
+                WHERE
+                    dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
+                ) AS TB ON TB."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
+            WHERE
+                dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
+            <if test="isShoKisaiHokenshaNoFlag">
+                AND dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+            </if>
+            GROUP BY
+                dbT5502."shinsakaiKaisaiNo"
+                ,dbT7051."shoKisaiHokenshaNo") AS B
+        ON A."shinsakaiKaisaiNo" = B."shinsakaiKaisaiNo"
+        <if test="isShoKisaiHokenshaNoFlag">
+            AND A."shoKisaiHokenshaNo" = B."shoKisaiHokenshaNo"
+        </if>
+    </select>
+    <resultMap id="resultMap_HanteiKekkaIchiranA3List" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkaichirana3.HanteiKekkaIchiranA3Entity" autoMapping="true">
+        <result property="介護認定審査会審査順" column="shinsakaiOrder" />
+        <result property="市町村名称" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="証記載保険者番号" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者氏名" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="生年月日" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="性別" column="seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定申請日" column="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="二次判定年月日" column="nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者区分" column="hihokenshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定申請区分_申請時" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定申請区分_法令" column="ninteiShinseiHoreiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="tb_一次判定結果" column="tb_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="tb_一次判定結果_加算" column="tb_ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="tb_二次判定要介護状態区分" column="tb_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="一次判定結果" column="ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="一次判定結果_加算" column="ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="二次判定要介護状態区分" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="要介護状態像例コード" column="yokaigoJotaizoReiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="tb_二次判定認定有効開始日" column="tb_nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="tb_二次判定認定有効終了日" column="tb_nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="tb_二次判定認定有効期間" column="tb_nijiHanteiNinteiYukoKikan" />
+        <result property="二次判定認定有効開始年月日" column="nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="二次判定認定有効終了年月日" column="nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="二次判定認定有効期間" column="nijiHanteiNinteiYukoKikan"/>
+        <result property="二号特定疾病コード" column="nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="介護認定審査会意見" column="shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="合議体番号" column="gogitaiNo" />
+        <result property="count" column="COUNT" />
+    </resultMap>
+    <select id="getHanteiKekkaIchiranA3List" resultMap="resultMap_HanteiKekkaIchiranA3List"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+            fetchSize="500">
+        SELECT
+            A.shinsakaiOrder AS shinsakaiOrder
+            ,A.shichosonMeisho AS shichosonMeisho
+            ,A.shoKisaiHokenshaNo AS shoKisaiHokenshaNo
+            ,A.hihokenshaName AS hihokenshaName
+            ,A.hihokenshaNo AS hihokenshaNo
+            ,A.seinengappiYMD AS seinengappiYMD
+            ,A.seibetsu AS seibetsu
+            ,A.ninteiShinseiYMD AS ninteiShinseiYMD
+            ,A.nijiHanteiYMD AS nijiHanteiYMD
+            ,A.hihokenshaKubunCode AS hihokenshaKubunCode
+            ,A.ninteiShinseiShinseijiKubunCode AS ninteiShinseiShinseijiKubunCode
+            ,A.ninteiShinseiHoreiKubunCode AS ninteiShinseiHoreiKubunCode
+            ,A.ichijiHanteiKekkaCode AS tb_ichijiHanteiKekkaCode
+            ,A.ichijiHanteiKekkaNinchishoKasanCode AS tb_ichijiHanteiKekkaNinchishoKasanCode
+            ,A.nijiHanteiYokaigoJotaiKubunCode AS tb_nijiHanteiYokaigoJotaiKubunCode
+            ,A.ichijiHanteiKekkaCode AS ichijiHanteiKekkaCode
+            ,A.ichijiHanteiKekkaNinchishoKasanCode AS ichijiHanteiKekkaNinchishoKasanCode
+            ,A.nijiHanteiYokaigoJotaiKubunCode AS nijiHanteiYokaigoJotaiKubunCode
+            ,A.yokaigoJotaizoReiCode AS yokaigoJotaizoReiCode
+            ,A.nijiHanteiNinteiYukoKaishiYMD AS tb_nijiHanteiNinteiYukoKaishiYMD
+            ,A.nijiHanteiNinteiYukoShuryoYMD AS tb_nijiHanteiNinteiYukoShuryoYMD
+            ,A.nijiHanteiNinteiYukoKikan AS tb_nijiHanteiNinteiYukoKikan
+            ,A.nijiHanteiNinteiYukoKaishiYMD AS nijiHanteiNinteiYukoKaishiYMD
+            ,A.nijiHanteiNinteiYukoShuryoYMD AS nijiHanteiNinteiYukoShuryoYMD
+            ,A.nijiHanteiNinteiYukoKikan AS nijiHanteiNinteiYukoKikan
+            ,A.nigoTokuteiShippeiCode AS nigoTokuteiShippeiCode
+            ,A.shinsakaiIken AS shinsakaiIken
+            ,A.gogitaiNo AS gogitaiNo
+            ,B.COUNT AS COUNT 
+        FROM
+            (SELECT
+                dbT5502."shinsakaiOrder" AS shinsakaiOrder
+                ,dbT7051."shichosonMeisho" AS shichosonMeisho
+                ,dbT5101."shoKisaiHokenshaNo" AS shoKisaiHokenshaNo
+                ,dbT5101."hihokenshaName" AS hihokenshaName
+                ,dbT5101."hihokenshaNo" AS hihokenshaNo
+                ,dbT5101."seinengappiYMD" AS seinengappiYMD
+                ,dbT5101."seibetsu" AS seibetsu
+                ,dbT5101."ninteiShinseiYMD" AS ninteiShinseiYMD
+                ,dbT5102."nijiHanteiYMD" AS nijiHanteiYMD
+                ,dbT5101."hihokenshaKubunCode" AS hihokenshaKubunCode
+                ,dbT5101."ninteiShinseiShinseijiKubunCode" AS ninteiShinseiShinseijiKubunCode
+                ,dbT5101."ninteiShinseiHoreiKubunCode" AS ninteiShinseiHoreiKubunCode
+                ,TB."ichijiHanteiKekkaCode" AS tb_ichijiHanteiKekkaCode
+                ,TB."ichijiHanteiKekkaNinchishoKasanCode" AS tb_ichijiHanteiKekkaNinchishoKasanCode
+                ,TB."nijiHanteiYokaigoJotaiKubunCode" AS tb_nijiHanteiYokaigoJotaiKubunCode
+                ,dbT5116."ichijiHanteiKekkaCode" AS ichijiHanteiKekkaCode
+                ,dbT5116."ichijiHanteiKekkaNinchishoKasanCode" AS ichijiHanteiKekkaNinchishoKasanCode
+                ,dbT5102."nijiHanteiYokaigoJotaiKubunCode" AS nijiHanteiYokaigoJotaiKubunCode
+                ,dbT5102."yokaigoJotaizoReiCode" AS yokaigoJotaizoReiCode
+                ,TB."nijiHanteiNinteiYukoKaishiYMD" AS tb_nijiHanteiNinteiYukoKaishiYMD
+                ,TB."nijiHanteiNinteiYukoShuryoYMD" AS tb_nijiHanteiNinteiYukoShuryoYMD
+                ,TB."nijiHanteiNinteiYukoKikan" AS tb_nijiHanteiNinteiYukoKikan
+                ,dbT5102."nijiHanteiNinteiYukoKaishiYMD" AS nijiHanteiNinteiYukoKaishiYMD
+                ,dbT5102."nijiHanteiNinteiYukoShuryoYMD" AS nijiHanteiNinteiYukoShuryoYMD
+                ,dbT5102."nijiHanteiNinteiYukoKikan" AS nijiHanteiNinteiYukoKikan
+                ,dbT5101."nigoTokuteiShippeiCode" AS nigoTokuteiShippeiCode
+                ,dbT5102."shinsakaiIken" AS shinsakaiIken
+                ,dbT5511."gogitaiNo" AS gogitaiNo
+                ,dbT5502."shinsakaiKaisaiNo" AS shinsakaiKaisaiNo 
+              FROM
+                rgdb."DbT5502ShinsakaiWariateJoho" AS dbT5502 
+                INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102 
+                  ON dbT5102."shinseishoKanriNo" = dbT5502."shinseishoKanriNo" 
+                INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS dbT5101 
+                  ON dbT5101."shinseishoKanriNo" = dbT5502."shinseishoKanriNo" 
+                  AND dbT5101."shoriJotaiKubun" IN 
+                  <foreach collection="shoriJotaiKubun" item="code" open="(" separator="," close=")"> #{code} </foreach> 
+                  AND dbT5101."logicalDeletedFlag" = False 
+                INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051 
+                  ON dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo" 
+                INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS dbT5116 
+                  ON dbT5116."shinseishoKanriNo" = dbT5502."shinseishoKanriNo" 
+                INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS dbT5511 
+                  ON dbT5511."shinsakaiKaisaiNo" = dbT5502."shinsakaiKaisaiNo" 
+                LEFT JOIN ( 
+                  SELECT
+                    dbT5116."ichijiHanteiKekkaCode"
+                    ,dbT5116."ichijiHanteiKekkaNinchishoKasanCode"
+                    ,dbT5102."nijiHanteiYokaigoJotaiKubunCode"
+                    ,dbT5102."nijiHanteiNinteiYukoKaishiYMD"
+                    ,dbT5102."nijiHanteiNinteiYukoShuryoYMD"
+                    ,dbT5102."nijiHanteiNinteiYukoKikan"
+                    ,dbT5502."shinseishoKanriNo" 
+                  FROM
+                    rgdb."DbT5502ShinsakaiWariateJoho" AS dbT5502 
+                    INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" AS dbT5121 
+                      ON dbT5121."shinseishoKanriNo" = dbT5502."shinseishoKanriNo" 
+                    LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS dbT5116 
+                      ON dbT5116."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo" 
+                    LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102 
+                      ON dbT5102."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo" 
+                  WHERE
+                    dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
+                ) AS TB 
+                  ON TB."shinseishoKanriNo" = dbT5502."shinseishoKanriNo" 
+              WHERE
+                dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou} 
+              ORDER BY
+                dbT5502."shinsakaiOrder") AS A 
+          LEFT JOIN ( 
+              SELECT
+                COUNT(1) AS COUNT
+                , dbT5502."shinsakaiKaisaiNo" AS shinsakaiKaisaiNo 
+              FROM
+                rgdb."DbT5502ShinsakaiWariateJoho" AS dbT5502 
+                INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102 
+                  ON dbT5102."shinseishoKanriNo" = dbT5502."shinseishoKanriNo" 
+                INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS dbT5101 
+                  ON dbT5101."shinseishoKanriNo" = dbT5502."shinseishoKanriNo" 
+                  AND dbT5101."shoriJotaiKubun" IN 
+                  <foreach collection="shoriJotaiKubun" item="code" open="(" separator="," close=")"> #{code} </foreach> 
+                  AND dbT5101."logicalDeletedFlag" = False 
+                INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051 
+                  ON dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo" 
+                INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS dbT5116 
+                  ON dbT5116."shinseishoKanriNo" = dbT5502."shinseishoKanriNo" 
+                INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS dbT5511 
+                  ON dbT5511."shinsakaiKaisaiNo" = dbT5502."shinsakaiKaisaiNo" 
+                LEFT JOIN ( 
+                  SELECT
+                    dbT5116."ichijiHanteiKekkaCode"
+                    ,dbT5116."ichijiHanteiKekkaNinchishoKasanCode"
+                    ,dbT5102."nijiHanteiYokaigoJotaiKubunCode"
+                    ,dbT5102."nijiHanteiNinteiYukoKaishiYMD"
+                    ,dbT5102."nijiHanteiNinteiYukoShuryoYMD"
+                    ,dbT5102."nijiHanteiNinteiYukoKikan"
+                    ,dbT5502."shinseishoKanriNo" 
+                  FROM
+                    rgdb."DbT5502ShinsakaiWariateJoho" AS dbT5502 
+                    INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" AS dbT5121 
+                      ON dbT5121."shinseishoKanriNo" = dbT5502."shinseishoKanriNo" 
+                    LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS dbT5116 
+                      ON dbT5116."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo" 
+                    LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102 
+                      ON dbT5102."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo" 
+                  WHERE
+                    dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
+                ) AS TB 
+                  ON TB."shinseishoKanriNo" = dbT5502."shinseishoKanriNo" 
+              WHERE
+                dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou} 
+              GROUP BY
+                dbT5502."shinsakaiKaisaiNo") AS B 
+          ON A.shinsakaiKaisaiNo = B.shinsakaiKaisaiNo
+    </select>
+
+    <resultMap id="resultMap_ShinsakaiKaisaiKekkaJoho" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity" autoMapping="true">
+        <result property="shinsakaiKaisaiYMD" column="審査会開催日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="gogitaiNo" column="合議体番号" />
+    </resultMap>
+    <select id="getShinsakaiKaisaiKekkaJoho" resultMap="resultMap_ShinsakaiKaisaiKekkaJoho"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+            fetchSize="500">
+        SELECT
+        dbT5511."shinsakaiKaisaiYMD" AS 審査会開催日
+        ,dbT5511."gogitaiNo" AS 合議体番号
+        FROM
+        rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS dbT5511
+        WHERE
+        dbT5511."shinsakaiKaisaiNo" = #{kaisaiBangou}
+    </select>
+    <resultMap id="resultMap_getShinsakaiIinJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.IinJohoRelateEntity" autoMapping="true">
+        <result property="shinsakaiIinShimei" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiIinShikakuCode" column="shinsakaiIinShikakuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kaigoninteiShinsakaiGichoKubunCode" column="kaigoninteiShinsakaiGichoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <select id="getIinJoho" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+            resultMap="resultMap_getShinsakaiIinJoho"
+            fetchSize="500">
+        SELECT
+        DbT5594."shinsakaiIinShimei",
+        DbT5594."shinsakaiIinShikakuCode",
+        DbT5503."kaigoninteiShinsakaiGichoKubunCode"
+        FROM
+        rgdb."DbT5503ShinsakaiWariateIinJoho" DbT5503
+        INNER JOIN
+        rgdb."DbT5594ShinsakaiIinJoho" DbT5594
+        ON DbT5503."shinsakaiIinCode" = DbT5594."shinsakaiIinCode"
+        WHERE
+        DbT5503."shinsakaiKaisaiNo" = #{kaisaiBangou}
+        ORDER BY
+        DbT5503."kaigoninteiShinsakaiGichoKubunCode" DESC
+    </select>
+    <resultMap id="resultMap_getShinsakaiKaisaiKekkaJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiKaisaiKekkaJohoEntity" autoMapping="true">
+        <result property="shinsakaiKaisaiNo" column="shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiKaisaiYMD" column="shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinsakaiKaishiTime" column="shinsakaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiShuryoTime" column="shinsakaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiKaisaiBashoName" column="shinsakaiKaisaiBashoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hanteiYoteiSu" column="hanteiYoteiSu" />
+    </resultMap>
+    <select id="getShinsakaiJoho" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+            resultMap="resultMap_getShinsakaiKaisaiKekkaJoho"
+            fetchSize="500">
+        SELECT
+        DbT5511."shinsakaiKaisaiNo" AS "shinsakaiKaisaiNo",
+        MAX(DbT5511."shinsakaiKaisaiYMD") AS "shinsakaiKaisaiYMD",
+        MAX(DbT5511."shinsakaiKaishiTime") AS "shinsakaiKaishiTime",
+        MAX(DbT5511."shinsakaiShuryoTime") AS "shinsakaiShuryoTime",
+        MAX(DbT5592."shinsakaiKaisaiBashoName") AS "shinsakaiKaisaiBashoName",
+        COUNT(0) AS hanteiYoteiSu
+        FROM
+        rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511
+        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
+        ON DbT5511."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
+        LEFT JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" DbT5592
+        ON DbT5511."shinsakaiKaisaiBashoCode" = DbT5592."shinsakaiKaisaiBashoCode"
+        WHERE
+        DbT5511."shinsakaiKaisaiNo" = #{kaisaiBangou}
+        GROUP BY
+        DbT5511."shinsakaiKaisaiNo"
+    </select>
+    <select id="getMiHanteiKensu" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+            resultType="int">
+        SELECT
+        COUNT(0)
+        FROM
+        rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511
+        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
+        ON DbT5511."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
+        WHERE
+        DbT5511."shinsakaiKaisaiNo" = #{kaisaiBangou}
+        AND
+        (DbT5502."hanteiKekkaCode" <![CDATA[<>]]>  '01'
+        AND DbT5502."hanteiKekkaCode" <![CDATA[<>]]>  '11')
+    </select>
+
+    <select id="getMishinSaKensu" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+             resultType="int">
+        SELECT
+        COUNT(0)
+        FROM
+        rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511
+        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
+        ON DbT5511."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
+        WHERE
+        DbT5511."shinsakaiKaisaiNo" = #{kaisaiBangou}
+        AND DbT5502."hanteiKekkaCode" = '11'
+    </select>
+    <select id="getItiDoHanteiHenkoKensu" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+             resultType="int">
+        SELECT
+        COUNT(0)
+        FROM
+        rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511
+        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
+        ON DbT5502."shinsakaiKaisaiNo" = DbT5511."shinsakaiKaisaiNo"
+        INNER JOIN rgdb."DbT5510IchiGojiHanteiKekkaJoho" DbT5510
+        ON DbT5510."shinseishoKanriNo" = DbT5502."shinseishoKanriNo"
+        WHERE
+        DbT5511."shinsakaiKaisaiNo" = #{kaisaiBangou}
+    </select>
+    <select id="getSinSakaiIkenTukeKensu" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+            resultType="int">
+        SELECT
+        COUNT(0)
+        FROM
+        rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511
+        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
+        ON DbT5511."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
+        INNER JOIN rgdb."DbT5102NinteiKekkaJoho" DbT5102
+        ON DbT5102."shinseishoKanriNo" = DbT5502."shinseishoKanriNo"
+        WHERE
+        DbT5511."shinsakaiKaisaiNo" = #{kaisaiBangou}
+        AND (DbT5102."shinsakaiIken" <![CDATA[<>]]> ''
+        AND DbT5102."shinsakaiIken" <![CDATA[<>]]> NULL)
+    </select>
+    <resultMap id="resultMap_getShinsakaiKekkaJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiKekkaJohoRelateEntity" autoMapping="true">
+        <result property="新規申請_状態区分変更件数" column="新規申請_状態区分変更件数"/>
+        <result property="新規申請件数" column="新規申請件数"/>
+        <result property="状態区分変更件数" column="状態区分変更件数"/>
+        <result property="新規_状変の内2号被保険者数" column="新規_状変の内2号被保険者数"/>
+        <result property="新規_状変在宅数" column="新規_状変在宅数"/>
+        <result property="新規_状変施設数" column="新規_状変施設数"/>
+        <result property="新規_状変一次判定非該当数" column="新規_状変一次判定非該当数"/>
+        <result property="新規_状変一次判定要支援1数" column="新規_状変一次判定要支援1数"/>
+        <result property="新規_状変一次判定要支援2数" column="新規_状変一次判定要支援2数"/>
+        <result property="新規_状変一次判定要介護1数" column="新規_状変一次判定要介護1数"/>
+        <result property="新規_状変一次判定要介護2数" column="新規_状変一次判定要介護2数"/>
+        <result property="新規_状変一次判定要介護3数" column="新規_状変一次判定要介護3数"/>
+        <result property="新規_状変一次判定要介護4数" column="新規_状変一次判定要介護4数"/>
+        <result property="新規_状変一次判定要介護5数" column="新規_状変一次判定要介護5数"/>
+        <result property="新規_状変一次判定再調査数" column="新規_状変一次判定再調査数"/>
+        <result property="新規_状変一次判定非該当数_2号被保険者" column="新規_状変一次判定非該当数_2号被保険者"/>
+        <result property="新規_状変一次判定要支援1数_2号被保険者" column="新規_状変一次判定要支援1数_2号被保険者"/>
+        <result property="新規_状変一次判定要支援2数_2号被保険者" column="新規_状変一次判定要支援2数_2号被保険者"/>
+        <result property="新規_状変一次判定要介護1数_2号被保険者" column="新規_状変一次判定要介護1数_2号被保険者"/>
+        <result property="新規_状変一次判定要介護2数_2号被保険者" column="新規_状変一次判定要介護2数_2号被保険者"/>
+        <result property="新規_状変一次判定要介護3数_2号被保険者" column="新規_状変一次判定要介護3数_2号被保険者"/>
+        <result property="新規_状変一次判定要介護4数_2号被保険者" column="新規_状変一次判定要介護4数_2号被保険者"/>
+        <result property="新規_状変一次判定要介護5数_2号被保険者" column="新規_状変一次判定要介護5数_2号被保険者"/>
+        <result property="新規_状変の一次判定再調査数_2号被保険者" column="新規_状変の一次判定再調査数_2号被保険者"/>
+        <result property="更新申請件数" column="更新申請件数"/>
+        <result property="更新申請内2号被保険者数" column="更新申請内2号被保険者数"/>
+        <result property="更新申請在宅数" column="更新申請在宅数"/>
+        <result property="更新申請施設数" column="更新申請施設数"/>
+        <result property="更新申請の一次判定非該当数" column="更新申請の一次判定非該当数"/>
+        <result property="更新申請の一次判定要支援1数" column="更新申請の一次判定要支援1数"/>
+        <result property="更新申請の一次判定要支援2数" column="更新申請の一次判定要支援2数"/>
+        <result property="更新申請の一次判定要介護1数" column="更新申請の一次判定要介護1数"/>
+        <result property="更新申請の一次判定要介護2数" column="更新申請の一次判定要介護2数"/>
+        <result property="更新申請の一次判定要介護3数" column="更新申請の一次判定要介護3数"/>
+        <result property="更新申請の一次判定要介護4数" column="更新申請の一次判定要介護4数"/>
+        <result property="更新申請の一次判定要介護5数" column="更新申請の一次判定要介護5数"/>
+        <result property="更新申請の一次判定再調査数" column="更新申請の一次判定再調査数"/>
+        <result property="更新申請の一次判定非該当数_2号被保険者" column="更新申請の一次判定非該当数_2号被保険者"/>
+        <result property="更新申請の一次判定要支援1数_2号被保険者" column="更新申請の一次判定要支援1数_2号被保険者"/>
+        <result property="更新申請の一次判定要支援2数_2号被保険者" column="更新申請の一次判定要支援2数_2号被保険者"/>
+        <result property="更新申請の一次判定要介護1数_2号被保険者" column="更新申請の一次判定要介護1数_2号被保険者"/>
+        <result property="更新申請の一次判定要介護2数_2号被保険者" column="更新申請の一次判定要介護2数_2号被保険者"/>
+        <result property="更新申請の一次判定要介護3数_2号被保険者" column="更新申請の一次判定要介護3数_2号被保険者"/>
+        <result property="更新申請の一次判定要介護4数_2号被保険者" column="更新申請の一次判定要介護4数_2号被保険者"/>
+        <result property="更新申請の一次判定要介護5数_2号被保険者" column="更新申請の一次判定要介護5数_2号被保険者"/>
+        <result property="更新申請の一次判定再調査数_2号被保険者" column="更新申請の一次判定再調査数_2号被保険者"/>
+        <result property="判定件数" column="判定件数"/>
+        <result property="判定件数_2号被保険者数" column="判定件数_2号被保険者数"/>
+        <result property="判定件数_在宅数" column="判定件数_在宅数"/>
+        <result property="判定件数_施設数" column="判定件数_施設数"/>
+        <result property="判定件数_の新規件数" column="判定件数_の新規件数"/>
+        <result property="判定件数_の状態区分変更件数" column="判定件数_の状態区分変更件数"/>
+        <result property="判定件数_の更新件数" column="判定件数_の更新件数"/>
+        <result property="二次判定_非該当" column="二次判定_非該当"/>
+        <result property="二次判定_要支１" column="二次判定_要支１"/>
+        <result property="二次判定_要支２" column="二次判定_要支２"/>
+        <result property="二次判定_要介護１" column="二次判定_要介護１"/>
+        <result property="二次判定_要介護２" column="二次判定_要介護２"/>
+        <result property="二次判定_要介護３" column="二次判定_要介護３"/>
+        <result property="二次判定_要介護４" column="二次判定_要介護４"/>
+        <result property="二次判定_要介護５" column="二次判定_要介護５"/>
+    </resultMap>
+    <select id="getShinsakaiKekkaJoho" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+            resultMap="resultMap_getShinsakaiKekkaJoho">
+        SELECT
+        SUM(TB."新規申請件数") + SUM(TB."状態区分変更件数") AS 新規申請_状態区分変更件数,
+        SUM(TB."新規申請件数") AS "新規申請件数",
+        SUM(TB."状態区分変更件数") AS "状態区分変更件数",
+        SUM(TB."新規_状変の内2号被保険者数") AS "新規_状変の内2号被保険者数",
+        SUM(TB."新規_状変の在宅数")  AS "新規_状変在宅数",
+        SUM(TB."新規_状変の施設数")  AS "新規_状変施設数",
+        SUM(TB."新規_状変の一次判定非該当数")  AS "新規_状変一次判定非該当数",
+        SUM(TB."新規_状変の一次判定要支援1数")  AS "新規_状変一次判定要支援1数",
+        SUM(TB."新規_状変の一次判定要支援2数")  AS "新規_状変一次判定要支援2数",
+        SUM(TB."新規_状変の一次判定要介護1数")  AS "新規_状変一次判定要介護1数",
+        SUM(TB."新規_状変の一次判定要介護2数")  AS "新規_状変一次判定要介護2数",
+        SUM(TB."新規_状変の一次判定要介護3数")  AS "新規_状変一次判定要介護3数",
+        SUM(TB."新規_状変の一次判定要介護4数")  AS "新規_状変一次判定要介護4数",
+        SUM(TB."新規_状変の一次判定要介護5数")  AS "新規_状変一次判定要介護5数",
+        SUM(TB."新規_状変の一次判定再調査数")  AS "新規_状変一次判定再調査数",
+        SUM(TB."新規_状変の一次判定非該当数_2号被保険者")  AS "新規_状変一次判定非該当数_2号被保険者",
+        SUM(TB."新規_状変の一次判定要支援1数_2号被保険者")  AS "新規_状変一次判定要支援1数_2号被保険者",
+        SUM(TB."新規_状変の一次判定要支援2数_2号被保険者")  AS "新規_状変一次判定要支援2数_2号被保険者",
+        SUM(TB."新規_状変の一次判定要介護1数_2号被保険者")  AS "新規_状変一次判定要介護1数_2号被保険者",
+        SUM(TB."新規_状変の一次判定要介護2数_2号被保険者")  AS "新規_状変一次判定要介護2数_2号被保険者",
+        SUM(TB."新規_状変の一次判定要介護3数_2号被保険者")  AS "新規_状変一次判定要介護3数_2号被保険者",
+        SUM(TB."新規_状変の一次判定要介護4数_2号被保険者")  AS "新規_状変一次判定要介護4数_2号被保険者",
+        SUM(TB."新規_状変の一次判定要介護5数_2号被保険者")  AS "新規_状変一次判定要介護5数_2号被保険者",
+        SUM(TB."新規_状変の一次判定再調査数_2号被保険者")  AS "新規_状変の一次判定再調査数_2号被保険者",
+        SUM(TB."更新申請数")  AS "更新申請件数",
+        SUM(TB."更新申請の内2号被保険者数")  AS "更新申請内2号被保険者数",
+        SUM(TB."更新申請の在宅数")  AS "更新申請在宅数",
+        SUM(TB."更新申請の施設数")  AS "更新申請施設数",
+        SUM(TB."更新申請の一次判定非該当数")  AS "更新申請の一次判定非該当数",
+        SUM(TB."更新申請の一次判定要支援1数")  AS "更新申請の一次判定要支援1数",
+        SUM(TB."更新申請の一次判定要支援2数")  AS "更新申請の一次判定要支援2数",
+        SUM(TB."更新申請の一次判定要介護1数")  AS "更新申請の一次判定要介護1数",
+        SUM(TB."更新申請の一次判定要介護2数")  AS "更新申請の一次判定要介護2数",
+        SUM(TB."更新申請の一次判定要介護3数")  AS "更新申請の一次判定要介護3数",
+        SUM(TB."更新申請の一次判定要介護4数")  AS "更新申請の一次判定要介護4数",
+        SUM(TB."更新申請の一次判定要介護5数")  AS "更新申請の一次判定要介護5数",
+        SUM(TB."更新申請の一次判定再調査数")  AS "更新申請の一次判定再調査数",
+        SUM(TB."更新申請の一次判定非該当数_2号被保険者")  AS "更新申請の一次判定非該当数_2号被保険者",
+        SUM(TB."更新申請の一次判定要支援1数_2号被保険者")  AS "更新申請の一次判定要支援1数_2号被保険者",
+        SUM(TB."更新申請の一次判定要支援2数_2号被保険者")  AS "更新申請の一次判定要支援2数_2号被保険者",
+        SUM(TB."更新申請の一次判定要介護1数_2号被保険者")  AS "更新申請の一次判定要介護1数_2号被保険者",
+        SUM(TB."更新申請の一次判定要介護2数_2号被保険者")  AS "更新申請の一次判定要介護2数_2号被保険者",
+        SUM(TB."更新申請の一次判定要介護3数_2号被保険者")  AS "更新申請の一次判定要介護3数_2号被保険者",
+        SUM(TB."更新申請の一次判定要介護4数_2号被保険者")  AS "更新申請の一次判定要介護4数_2号被保険者",
+        SUM(TB."更新申請の一次判定要介護5数_2号被保険者")  AS "更新申請の一次判定要介護5数_2号被保険者",
+        SUM(TB."更新申請の一次判定再調査数_2号被保険者")  AS "更新申請の一次判定再調査数_2号被保険者",
+        SUM(TB."新規申請件数") + SUM(TB."状態区分変更件数") + SUM(TB."更新申請数") AS "判定件数",
+        SUM(TB."新規_状変の内2号被保険者数") + SUM(TB."更新申請の内2号被保険者数")  AS "判定件数_2号被保険者数",
+        SUM(TB."新規_状変の在宅数") + SUM(TB."更新申請の在宅数") AS "判定件数_在宅数",
+        SUM(TB."新規_状変の施設数") + SUM(TB."更新申請の施設数") AS "判定件数_施設数",
+        SUM(TB."新規申請件数")  AS "判定件数_の新規件数",
+        SUM(TB."状態区分変更件数")  AS "判定件数_の状態区分変更件数",
+        SUM(TB."更新申請数")  AS "判定件数_の更新件数",
+        SUM(TB."二次判定_非該当")  AS "二次判定_非該当",
+        SUM(TB."二次判定_要支援１")  AS "二次判定_要支１",
+        SUM(TB."二次判定_要支援２")  AS "二次判定_要支２",
+        SUM(TB."二次判定_要介護１")  AS "二次判定_要介護１",
+        SUM(TB."二次判定_要介護２")  AS "二次判定_要介護２",
+        SUM(TB."二次判定_要介護３")  AS "二次判定_要介護３",
+        SUM(TB."二次判定_要介護４")  AS "二次判定_要介護４",
+        SUM(TB."二次判定_要介護５") AS "二次判定_要介護５"
+        FROM
+        (SELECT
+        DbT5502."shinsakaiKaisaiNo" AS "介護認定審査会開催番号",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "新規申請件数",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '3'
+        THEN 1
+        ELSE 0 END AS "状態区分変更件数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "新規_状変の内2号被保険者数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5101."shisetsuNyushoFlag" = FALSE
+        THEN 1
+        ELSE 0 END AS "新規_状変の在宅数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5101."shisetsuNyushoFlag" = TRUE
+        THEN 1
+        ELSE 0 END AS "新規_状変の施設数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5116."ichijiHanteiKekkaCode" = '01'
+        THEN 1
+        ELSE 0 END AS "新規_状変の一次判定非該当数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5116."ichijiHanteiKekkaCode" = '12'
+        THEN 1
+        ELSE 0 END AS "新規_状変の一次判定要支援1数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5116."ichijiHanteiKekkaCode" = '13'
+        THEN 1
+        ELSE 0 END AS "新規_状変の一次判定要支援2数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5116."ichijiHanteiKekkaCode" = '21'
+        THEN 1
+        ELSE 0 END AS "新規_状変の一次判定要介護1数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5116."ichijiHanteiKekkaCode" = '22'
+        THEN 1
+        ELSE 0 END AS "新規_状変の一次判定要介護2数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5116."ichijiHanteiKekkaCode" = '23'
+        THEN 1
+        ELSE 0 END AS "新規_状変の一次判定要介護3数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5116."ichijiHanteiKekkaCode" = '24'
+        THEN 1
+        ELSE 0 END AS "新規_状変の一次判定要介護4数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5116."ichijiHanteiKekkaCode" = '25'
+        THEN 1
+        ELSE 0 END AS "新規_状変の一次判定要介護5数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5101."chosaKubun" = '1'
+        THEN 1
+        ELSE 0 END AS "新規_状変の一次判定再調査数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5116."ichijiHanteiKekkaCode" = '01' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "新規_状変の一次判定非該当数_2号被保険者",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5116."ichijiHanteiKekkaCode" = '12' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "新規_状変の一次判定要支援1数_2号被保険者",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5116."ichijiHanteiKekkaCode" = '13' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "新規_状変の一次判定要支援2数_2号被保険者",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5116."ichijiHanteiKekkaCode" = '21' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "新規_状変の一次判定要介護1数_2号被保険者",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5116."ichijiHanteiKekkaCode" = '22' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "新規_状変の一次判定要介護2数_2号被保険者",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5116."ichijiHanteiKekkaCode" = '23' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "新規_状変の一次判定要介護3数_2号被保険者",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5116."ichijiHanteiKekkaCode" = '24' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "新規_状変の一次判定要介護4数_2号被保険者",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5116."ichijiHanteiKekkaCode" = '25' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "新規_状変の一次判定要介護5数_2号被保険者",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        AND DbT5101."chosaKubun" = '1' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "新規_状変の一次判定再調査数_2号被保険者",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2'
+        THEN 1
+        ELSE 0 END AS "更新申請数",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "更新申請の内2号被保険者数",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5101."shisetsuNyushoFlag" = FALSE
+        THEN 1
+        ELSE 0 END AS "更新申請の在宅数",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5101."shisetsuNyushoFlag" = TRUE
+        THEN 1
+        ELSE 0 END AS "更新申請の施設数",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5116."ichijiHanteiKekkaCode" = '01'
+        THEN 1
+        ELSE 0 END AS "更新申請の一次判定非該当数",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5116."ichijiHanteiKekkaCode" = '12'
+        THEN 1
+        ELSE 0 END AS "更新申請の一次判定要支援1数",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5116."ichijiHanteiKekkaCode" = '13'
+        THEN 1
+        ELSE 0 END AS "更新申請の一次判定要支援2数",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5116."ichijiHanteiKekkaCode" = '21'
+        THEN 1
+        ELSE 0 END AS "更新申請の一次判定要介護1数",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5116."ichijiHanteiKekkaCode" = '22'
+        THEN 1
+        ELSE 0 END AS "更新申請の一次判定要介護2数",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5116."ichijiHanteiKekkaCode" = '23'
+        THEN 1
+        ELSE 0 END AS "更新申請の一次判定要介護3数",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5116."ichijiHanteiKekkaCode" = '24'
+        THEN 1
+        ELSE 0 END AS "更新申請の一次判定要介護4数",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5116."ichijiHanteiKekkaCode" = '25'
+        THEN 1
+        ELSE 0 END AS "更新申請の一次判定要介護5数",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5101."chosaKubun" = '1'
+        THEN 1
+        ELSE 0 END AS "更新申請の一次判定再調査数",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5116."ichijiHanteiKekkaCode" = '01' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "更新申請の一次判定非該当数_2号被保険者",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5116."ichijiHanteiKekkaCode" = '12' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "更新申請の一次判定要支援1数_2号被保険者",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5116."ichijiHanteiKekkaCode" = '13' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "更新申請の一次判定要支援2数_2号被保険者",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5116."ichijiHanteiKekkaCode" = '21' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "更新申請の一次判定要介護1数_2号被保険者",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5116."ichijiHanteiKekkaCode" = '22' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "更新申請の一次判定要介護2数_2号被保険者",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5116."ichijiHanteiKekkaCode" = '23' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "更新申請の一次判定要介護3数_2号被保険者",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5116."ichijiHanteiKekkaCode" = '24' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "更新申請の一次判定要介護4数_2号被保険者",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5116."ichijiHanteiKekkaCode" = '25' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "更新申請の一次判定要介護5数_2号被保険者",
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2' AND DbT5101."chosaKubun" = '1' AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "更新申請の一次判定再調査数_2号被保険者",
+        CASE WHEN DbT5102."nijiHanteiYokaigoJotaiKubunCode" = '01'
+        THEN 1
+        ELSE 0 END AS "二次判定_非該当",
+        CASE WHEN DbT5102."nijiHanteiYokaigoJotaiKubunCode" = '12'
+        THEN 1
+        ELSE 0 END AS "二次判定_要支援１",
+        CASE WHEN DbT5102."nijiHanteiYokaigoJotaiKubunCode" = '13'
+        THEN 1
+        ELSE 0 END AS "二次判定_要支援２",
+        CASE WHEN DbT5102."nijiHanteiYokaigoJotaiKubunCode" = '21'
+        THEN 1
+        ELSE 0 END AS "二次判定_要介護１",
+        CASE WHEN DbT5102."nijiHanteiYokaigoJotaiKubunCode" = '22'
+        THEN 1
+        ELSE 0 END AS "二次判定_要介護２",
+        CASE WHEN DbT5102."nijiHanteiYokaigoJotaiKubunCode" = '23'
+        THEN 1
+        ELSE 0 END AS "二次判定_要介護３",
+        CASE WHEN DbT5102."nijiHanteiYokaigoJotaiKubunCode" = '24'
+        THEN 1
+        ELSE 0 END AS "二次判定_要介護４",
+        CASE WHEN DbT5102."nijiHanteiYokaigoJotaiKubunCode" = '25'
+        THEN 1
+        ELSE 0 END AS "二次判定_要介護５"
+        FROM
+        rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
+        INNER JOIN
+        rgdb."DbT5102NinteiKekkaJoho" DbT5102
+        ON
+        DbT5502."shinseishoKanriNo" = DbT5102."shinseishoKanriNo"
+        INNER JOIN
+        rgdb."DbT5101NinteiShinseiJoho" DbT5101
+        ON
+        DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        INNER JOIN
+        rgdb."DbT5116IchijiHanteiKekkaJoho" DbT5116
+        ON
+        DbT5502."shinseishoKanriNo" = DbT5116."shinseishoKanriNo"
+        WHERE
+        DbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}) TB
+        GROUP BY TB."介護認定審査会開催番号"
+    </select>
+    <resultMap id="resultMap_KekkatsuchiIchiran" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.kekkatsuchiichiranhyo.KekkatsuchiIchiranhyoEntity" autoMapping="true">
+        <result property="hokenshaName" column="保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinseiYMD" column="申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaName" column="氏名"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaKana" column="氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="seinengappiYMD" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="seibetsu" column="性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="nijiHanteiKekka" column="二次判定結果" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiYukoKikan" column="有効期間_月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiYukokaishiYMD" column="有効開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiYukoshurouYMD" column="有効終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiKaisaiYMD" column="開催日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    <select id="getKekkatsuchiIchiranList" resultMap="resultMap_KekkatsuchiIchiran"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+            fetchSize="500">
+        SELECT
+        dbT7051."shichosonMeisho" AS 保険者名
+        ,dbT5101."ninteiShinseiYMD" AS 申請日
+        ,dbT5101."hihokenshaNo" AS 被保険者番号
+        ,dbT5101."hihokenshaName" AS 氏名
+        ,dbT5101."hihokenshaKana" AS 氏名カナ
+        ,dbT5101."seinengappiYMD" AS 生年月日
+        ,dbT5101."seibetsu" AS 性別
+        ,dbT5102."nijiHanteiYokaigoJotaiKubunCode" AS 二次判定結果
+        ,dbT5102."nijiHanteiNinteiYukoKikan" || 'ヶ月' AS 有効期間_月
+        ,dbT5102."nijiHanteiNinteiYukoKaishiYMD" AS 有効開始年月日
+        ,dbT5102."nijiHanteiNinteiYukoShuryoYMD" AS 有効終了年月日
+        ,dbT5511."shinsakaiKaisaiYMD" AS 開催日
+        FROM
+        rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
+        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
+        ON dbT5101."shinseishoKanriNo" = dbT5102."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
+        ON dbT7051."shoKisaiHokenshaNo"= dbT5101."shoKisaiHokenshaNo"
+        INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS dbT5511
+        ON dbT5511."shinsakaiKaisaiNo" = dbT5102."shinsakaiKaisaiNo"
+        WHERE
+        dbT5102."shinsakaiKaisaiNo" = #{kaisaiBangou}
+        ORDER BY
+        dbT5101."ninteiShinseiYMD"
+    </select>
+</mapper>

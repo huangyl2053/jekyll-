@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC04300",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "高額支給申請書一括発行",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0430011",
+     "toLayoutTitle": "高額サービス費給付お知らせ通知書作成",
+     "toState": "バッチ起動"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0430011",
+     "layoutTitle": "高額サービス費給付お知らせ通知書作成",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

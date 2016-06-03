@@ -1,7 +1,7 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
-/// <reference path="./ShisetsuJoho.ts" />
+/// <reference path="./ShisetsuJohoCommonChildDiv.ts" />
 
 module DBZ {
 
@@ -11,14 +11,6 @@ module DBZ {
 
             public static onClick_btnAddShisetsuNyutaisho(): string {
                 return "onClick_btnAddShisetsuNyutaisho";
-            }
-
-            public static onSelect_dgShisetsuNyutaishoRireki(): string {
-                return "onSelect_dgShisetsuNyutaishoRireki";
-            }
-
-            public static onSelectByDblClick_dgShisetsuNyutaishoRireki(): string {
-                return "onSelectByDblClick_dgShisetsuNyutaishoRireki";
             }
 
             public static onSelectBySelectButton_dgShisetsuNyutaishoRireki(): string {
@@ -86,8 +78,8 @@ module DBZ {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTaishoDate"));
             }
 
-            public ccdShisetsuJoho(): DBZ.ShisetsuJoho.ModeController {
-                return new DBZ.ShisetsuJoho.ModeController(this.convFiledName("ccdShisetsuJoho"));
+            public ccdShisetsuJoho(): DBZ.ShisetsuJohoCommonChildDiv.ModeController {
+                return new DBZ.ShisetsuJohoCommonChildDiv.ModeController(this.convFiledName("ccdShisetsuJoho"));
             }
 
             public btnShisetsuNyutaishoKakutei(): UZA.Button {

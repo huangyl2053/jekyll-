@@ -4,10 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.helper;
 
-import jp.co.ndensan.reams.db.dbe.business.core.KaigoDoctor.KaigoDoctor;
-import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho.ShujiiIkenshoBase;
-import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho.ShujiiIkenshoDetails;
-import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho.ShujiiIkenshoResult;
+import jp.co.ndensan.reams.db.dbe.business.core.kaigodoctor.KaigoDoctor;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikensho.ShujiiIkenshoBase;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikensho.ShujiiIkenshoDetails;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikensho.ShujiiIkenshoResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkenshoEditor;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkenshoFactory;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IkenshoDoi;

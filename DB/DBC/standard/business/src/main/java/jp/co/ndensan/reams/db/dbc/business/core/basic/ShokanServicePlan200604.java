@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -361,13 +360,32 @@ public class ShokanServicePlan200604
     @Override
     public ShokanServicePlan200604 deleted() {
         DbT3046ShokanServicePlan200604Entity deletedEntity = this.toEntity();
-        if (deletedEntity.getState() != EntityDataState.Added) {
-            deletedEntity.setState(EntityDataState.Deleted);
-        } else {
-            //TODO メッセージの検討
-            throw new IllegalStateException(UrErrorMessages.不正.toString());
-        }
+        deletedEntity.setState(EntityDataState.Deleted);
         return new ShokanServicePlan200604(deletedEntity, id);
+    }
+
+    /**
+     * 保持する償還払請求サービス計画200604を修正対象とします。<br/>
+     * {@link DbT3046ShokanServicePlan200604Entity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば修正状態にします。
+     *
+     * @return 修正対象処理実施後の{@link ShokanServicePlan200604}
+     */
+    public ShokanServicePlan200604 modified() {
+        DbT3046ShokanServicePlan200604Entity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        return new ShokanServicePlan200604(modifiedEntity, id);
+    }
+
+    /**
+     * 保持する償還払請求サービス計画200604をinsert対象とします。<br/>
+     * {@link DbT3046ShokanServicePlan200604Entity}の{@link EntityDataState}がすでにDBへ永続化されている物であればinsert状態にします。
+     *
+     * @return 修正対象処理実施後の{@link ShokanServicePlan200604}
+     */
+    public ShokanServicePlan200604 added() {
+        DbT3046ShokanServicePlan200604Entity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Added);
+        return new ShokanServicePlan200604(modifiedEntity, id);
     }
 
     /**

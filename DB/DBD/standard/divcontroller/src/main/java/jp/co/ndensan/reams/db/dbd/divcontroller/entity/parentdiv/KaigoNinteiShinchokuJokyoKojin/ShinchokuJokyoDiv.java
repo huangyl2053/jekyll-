@@ -1,19 +1,16 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.KaigoNinteiShinchokuJokyoKojin;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.KaigoNinteiShinchokuJokyoKojin.tplShinchoKujokyoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShinchokuJokyo のクラスファイル 
- * 
+ * ShinchokuJokyo のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShinchokuJokyoDiv extends Panel {
@@ -23,6 +20,7 @@ public class ShinchokuJokyoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("tplShinchoKujokyo")
     private tplShinchoKujokyoDiv tplShinchoKujokyo;
 
@@ -39,7 +37,7 @@ public class ShinchokuJokyoDiv extends Panel {
 
     @JsonProperty("tplShinchoKujokyo")
     public void setTplShinchoKujokyo(tplShinchoKujokyoDiv tplShinchoKujokyo) {
-        this.tplShinchoKujokyo=tplShinchoKujokyo;
+        this.tplShinchoKujokyo = tplShinchoKujokyo;
     }
 
     /*

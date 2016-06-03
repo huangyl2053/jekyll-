@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.Shinsakai;
 
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ShinsakaiList;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.Shinsakai;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiMockBusinessCreator;

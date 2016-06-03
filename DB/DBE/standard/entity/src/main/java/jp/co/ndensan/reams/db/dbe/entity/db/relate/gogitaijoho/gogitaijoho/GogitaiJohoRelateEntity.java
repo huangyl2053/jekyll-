@@ -8,16 +8,18 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaijoho;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5591GogitaiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
 
 /**
  * 合議体情報RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter
-public class GogitaiJohoRelateEntity implements Cloneable, Serializable {
+public class GogitaiJohoRelateEntity implements Serializable {
 
     /**
      * -- GETTER -- 合議体情報Entityを返します。

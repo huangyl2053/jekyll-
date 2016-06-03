@@ -8,8 +8,6 @@ package jp.co.ndensan.reams.db.dba.business.core.jushochitokurei.tashichosonjush
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dba.business.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaishoIdentifier;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuKaijoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
@@ -22,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * {@link TashichosonJushochiTokurei}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public class TashichosonJushochiTokureiBuilder {
 

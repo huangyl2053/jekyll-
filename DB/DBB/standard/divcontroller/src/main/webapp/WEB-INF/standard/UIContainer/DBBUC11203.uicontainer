@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC11203",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "所得情報アップロード",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB1120003",
+     "toLayoutTitle": "所得情報抽出・連携",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB1120003",
+     "layoutTitle": "所得情報アップロード",
+     "eventName": "終了処理",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

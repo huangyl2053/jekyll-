@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 受給者台帳を管理するクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public class JukyushaDaichoManager {
 

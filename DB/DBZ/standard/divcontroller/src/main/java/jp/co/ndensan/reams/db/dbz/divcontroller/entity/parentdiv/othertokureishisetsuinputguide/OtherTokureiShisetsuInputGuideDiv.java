@@ -1,19 +1,18 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.othertokureishisetsuinputguide;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.othertokureishisetsuinputguide.SearchResultOtherShisetsuDiv;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * OtherTokureiShisetsuInputGuide のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+
+/**
+ * OtherTokureiShisetsuInputGuide のクラスファイル
+ *
  * @author 自動生成
  */
 public class OtherTokureiShisetsuInputGuideDiv extends Panel {
@@ -23,6 +22,7 @@ public class OtherTokureiShisetsuInputGuideDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("radKannaiKubun")
     private RadioButton radKannaiKubun;
     @JsonProperty("btnSearchOtherShisetsu")
@@ -51,7 +51,7 @@ public class OtherTokureiShisetsuInputGuideDiv extends Panel {
 
     @JsonProperty("radKannaiKubun")
     public void setRadKannaiKubun(RadioButton radKannaiKubun) {
-        this.radKannaiKubun=radKannaiKubun;
+        this.radKannaiKubun = radKannaiKubun;
     }
 
     @JsonProperty("btnSearchOtherShisetsu")
@@ -61,7 +61,7 @@ public class OtherTokureiShisetsuInputGuideDiv extends Panel {
 
     @JsonProperty("btnSearchOtherShisetsu")
     public void setBtnSearchOtherShisetsu(Button btnSearchOtherShisetsu) {
-        this.btnSearchOtherShisetsu=btnSearchOtherShisetsu;
+        this.btnSearchOtherShisetsu = btnSearchOtherShisetsu;
     }
 
     @JsonProperty("lblOtherShisetsuShurui")
@@ -71,7 +71,7 @@ public class OtherTokureiShisetsuInputGuideDiv extends Panel {
 
     @JsonProperty("lblOtherShisetsuShurui")
     public void setLblOtherShisetsuShurui(Label lblOtherShisetsuShurui) {
-        this.lblOtherShisetsuShurui=lblOtherShisetsuShurui;
+        this.lblOtherShisetsuShurui = lblOtherShisetsuShurui;
     }
 
     @JsonProperty("SearchResultOtherShisetsu")
@@ -81,7 +81,7 @@ public class OtherTokureiShisetsuInputGuideDiv extends Panel {
 
     @JsonProperty("SearchResultOtherShisetsu")
     public void setSearchResultOtherShisetsu(SearchResultOtherShisetsuDiv SearchResultOtherShisetsu) {
-        this.SearchResultOtherShisetsu=SearchResultOtherShisetsu;
+        this.SearchResultOtherShisetsu = SearchResultOtherShisetsu;
     }
 
     @JsonProperty("btnOtherShisetsuReturn")
@@ -91,7 +91,7 @@ public class OtherTokureiShisetsuInputGuideDiv extends Panel {
 
     @JsonProperty("btnOtherShisetsuReturn")
     public void setBtnOtherShisetsuReturn(Button btnOtherShisetsuReturn) {
-        this.btnOtherShisetsuReturn=btnOtherShisetsuReturn;
+        this.btnOtherShisetsuReturn = btnOtherShisetsuReturn;
     }
 
     @JsonProperty("shisetsuCode")
@@ -101,7 +101,7 @@ public class OtherTokureiShisetsuInputGuideDiv extends Panel {
 
     @JsonProperty("shisetsuCode")
     public void setShisetsuCode(RString shisetsuCode) {
-        this.shisetsuCode=shisetsuCode;
+        this.shisetsuCode = shisetsuCode;
     }
 
     @JsonProperty("shisetsuMeisho")
@@ -111,7 +111,7 @@ public class OtherTokureiShisetsuInputGuideDiv extends Panel {
 
     @JsonProperty("shisetsuMeisho")
     public void setShisetsuMeisho(RString shisetsuMeisho) {
-        this.shisetsuMeisho=shisetsuMeisho;
+        this.shisetsuMeisho = shisetsuMeisho;
     }
 
 }

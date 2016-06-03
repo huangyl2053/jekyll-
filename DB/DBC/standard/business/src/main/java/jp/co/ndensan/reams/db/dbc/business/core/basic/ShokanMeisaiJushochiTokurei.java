@@ -8,23 +8,26 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokureiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求明細・住所地特例を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class ShokanMeisaiJushochiTokurei
-        extends ModelBase<ShokanMeisaiJushochiTokureiIdentifier, DbT3107ShokanMeisaiJushochiTokureiEntity, ShokanMeisaiJushochiTokurei> implements Serializable {
+        extends ModelBase<ShokanMeisaiJushochiTokureiIdentifier, DbT3107ShokanMeisaiJushochiTokureiEntity, ShokanMeisaiJushochiTokurei>
+        implements Serializable {
 
     private final DbT3107ShokanMeisaiJushochiTokureiEntity entity;
     private final ShokanMeisaiJushochiTokureiIdentifier id;
@@ -38,29 +41,39 @@ public class ShokanMeisaiJushochiTokurei
      * @param 整理番号 整理番号
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
+     * @param 連番 連番
      */
     public ShokanMeisaiJushochiTokurei(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             JigyoshaNo 事業者番号,
-            RString 様式番号) {
+            RString 様式番号,
+            RString 明細番号,
+            RString 連番) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
         this.entity = new DbT3107ShokanMeisaiJushochiTokureiEntity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
-        this.entity.setSeiriNp(整理番号);
+        this.entity.setSeiriNo(整理番号);
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYoshikiNo(様式番号);
+        this.entity.setMeisaiNo(明細番号);
+        this.entity.setRenban(連番);
         this.id = new ShokanMeisaiJushochiTokureiIdentifier(
                 被保険者番号,
                 サービス提供年月,
                 整理番号,
                 事業者番号,
-                様式番号
+                様式番号,
+                明細番号,
+                連番
         );
     }
 
@@ -75,9 +88,12 @@ public class ShokanMeisaiJushochiTokurei
         this.id = new ShokanMeisaiJushochiTokureiIdentifier(
                 entity.getHiHokenshaNo(),
                 entity.getServiceTeikyoYM(),
-                entity.getSeiriNp(),
+                entity.getSeiriNo(),
                 entity.getJigyoshaNo(),
-                entity.getYoshikiNo());
+                entity.getYoshikiNo(),
+                entity.getMeisaiNo(),
+                entity.getRenban());
+
     }
 
     /**
@@ -119,7 +135,7 @@ public class ShokanMeisaiJushochiTokurei
      * @return 整理番号
      */
     public RString get整理番号() {
-        return entity.getSeiriNp();
+        return entity.getSeiriNo();
     }
 
     /**
@@ -138,6 +154,15 @@ public class ShokanMeisaiJushochiTokurei
      */
     public RString get様式番号() {
         return entity.getYoshikiNo();
+    }
+
+    /**
+     * 様式番号を返します。
+     *
+     * @return 様式番号
+     */
+    public RString get明細番号() {
+        return entity.getMeisaiNo();
     }
 
     /**
@@ -204,6 +229,15 @@ public class ShokanMeisaiJushochiTokurei
     }
 
     /**
+     * 連番を返します。
+     *
+     * @return 連番
+     */
+    public RString get連番() {
+        return entity.getRenban();
+    }
+
+    /**
      * {@link DbT3107ShokanMeisaiJushochiTokureiEntity}のクローンを返します。
      *
      * @return {@link DbT3107ShokanMeisaiJushochiTokureiEntity}のクローン
@@ -239,6 +273,30 @@ public class ShokanMeisaiJushochiTokurei
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ShokanMeisaiJushochiTokurei(deletedEntity, id);
+    }
+
+    /**
+     * 修正ShokanMeisaiJushochiTokurei
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public ShokanMeisaiJushochiTokurei modified() {
+        DbT3107ShokanMeisaiJushochiTokureiEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        //TODO メッセージの検討
+        return new ShokanMeisaiJushochiTokurei(modifiedEntity, id);
+    }
+
+    /**
+     * add ShokanMeisaiJushochiTokurei
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public ShokanMeisaiJushochiTokurei added() {
+        DbT3107ShokanMeisaiJushochiTokureiEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        //TODO メッセージの検討
+        return new ShokanMeisaiJushochiTokurei(addedEntity, id);
     }
 
     /**

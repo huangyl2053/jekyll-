@@ -4,19 +4,24 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SeikatsuS
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SeikatsuServiceIken.SeikatsuServiceIken.ISeikatsuServiceIkenDiv;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * SeikatsuServiceIken のクラスファイル 
- * 
+ * SeikatsuServiceIken のクラスファイル
+ *
  * @author 自動生成
  */
 public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIkenDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -48,94 +53,166 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getIdo
+     * @return Ido
+     */
     @JsonProperty("Ido")
     public IdoDiv getIdo() {
         return Ido;
     }
 
+    /*
+     * setIdo
+     * @param Ido Ido
+     */
     @JsonProperty("Ido")
     public void setIdo(IdoDiv Ido) {
-        this.Ido=Ido;
+        this.Ido = Ido;
     }
 
+    /*
+     * getEiyoShokuseikatsu
+     * @return EiyoShokuseikatsu
+     */
     @JsonProperty("EiyoShokuseikatsu")
     public EiyoShokuseikatsuDiv getEiyoShokuseikatsu() {
         return EiyoShokuseikatsu;
     }
 
+    /*
+     * setEiyoShokuseikatsu
+     * @param EiyoShokuseikatsu EiyoShokuseikatsu
+     */
     @JsonProperty("EiyoShokuseikatsu")
     public void setEiyoShokuseikatsu(EiyoShokuseikatsuDiv EiyoShokuseikatsu) {
-        this.EiyoShokuseikatsu=EiyoShokuseikatsu;
+        this.EiyoShokuseikatsu = EiyoShokuseikatsu;
     }
 
+    /*
+     * getHasseiJotaiTaishoHoshin
+     * @return HasseiJotaiTaishoHoshin
+     */
     @JsonProperty("HasseiJotaiTaishoHoshin")
     public HasseiJotaiTaishoHoshinDiv getHasseiJotaiTaishoHoshin() {
         return HasseiJotaiTaishoHoshin;
     }
 
+    /*
+     * setHasseiJotaiTaishoHoshin
+     * @param HasseiJotaiTaishoHoshin HasseiJotaiTaishoHoshin
+     */
     @JsonProperty("HasseiJotaiTaishoHoshin")
     public void setHasseiJotaiTaishoHoshin(HasseiJotaiTaishoHoshinDiv HasseiJotaiTaishoHoshin) {
-        this.HasseiJotaiTaishoHoshin=HasseiJotaiTaishoHoshin;
+        this.HasseiJotaiTaishoHoshin = HasseiJotaiTaishoHoshin;
     }
 
+    /*
+     * getSeikatsuKinoMitoshi
+     * @return SeikatsuKinoMitoshi
+     */
     @JsonProperty("SeikatsuKinoMitoshi")
     public SeikatsuKinoMitoshiDiv getSeikatsuKinoMitoshi() {
         return SeikatsuKinoMitoshi;
     }
 
+    /*
+     * setSeikatsuKinoMitoshi
+     * @param SeikatsuKinoMitoshi SeikatsuKinoMitoshi
+     */
     @JsonProperty("SeikatsuKinoMitoshi")
     public void setSeikatsuKinoMitoshi(SeikatsuKinoMitoshiDiv SeikatsuKinoMitoshi) {
-        this.SeikatsuKinoMitoshi=SeikatsuKinoMitoshi;
+        this.SeikatsuKinoMitoshi = SeikatsuKinoMitoshi;
     }
 
+    /*
+     * getIgakutekiKanriHitsuyosei
+     * @return IgakutekiKanriHitsuyosei
+     */
     @JsonProperty("IgakutekiKanriHitsuyosei")
     public IgakutekiKanriHitsuyoseiDiv getIgakutekiKanriHitsuyosei() {
         return IgakutekiKanriHitsuyosei;
     }
 
+    /*
+     * setIgakutekiKanriHitsuyosei
+     * @param IgakutekiKanriHitsuyosei IgakutekiKanriHitsuyosei
+     */
     @JsonProperty("IgakutekiKanriHitsuyosei")
     public void setIgakutekiKanriHitsuyosei(IgakutekiKanriHitsuyoseiDiv IgakutekiKanriHitsuyosei) {
-        this.IgakutekiKanriHitsuyosei=IgakutekiKanriHitsuyosei;
+        this.IgakutekiKanriHitsuyosei = IgakutekiKanriHitsuyosei;
     }
 
+    /*
+     * getIgakutekiKantenRyuiten
+     * @return IgakutekiKantenRyuiten
+     */
     @JsonProperty("IgakutekiKantenRyuiten")
     public IgakutekiKantenRyuitenDiv getIgakutekiKantenRyuiten() {
         return IgakutekiKantenRyuiten;
     }
 
+    /*
+     * setIgakutekiKantenRyuiten
+     * @param IgakutekiKantenRyuiten IgakutekiKantenRyuiten
+     */
     @JsonProperty("IgakutekiKantenRyuiten")
     public void setIgakutekiKantenRyuiten(IgakutekiKantenRyuitenDiv IgakutekiKantenRyuiten) {
-        this.IgakutekiKantenRyuiten=IgakutekiKantenRyuiten;
+        this.IgakutekiKantenRyuiten = IgakutekiKantenRyuiten;
     }
 
+    /*
+     * getKansenshoUmu
+     * @return KansenshoUmu
+     */
     @JsonProperty("KansenshoUmu")
     public KansenshoUmuDiv getKansenshoUmu() {
         return KansenshoUmu;
     }
 
+    /*
+     * setKansenshoUmu
+     * @param KansenshoUmu KansenshoUmu
+     */
     @JsonProperty("KansenshoUmu")
     public void setKansenshoUmu(KansenshoUmuDiv KansenshoUmu) {
-        this.KansenshoUmu=KansenshoUmu;
+        this.KansenshoUmu = KansenshoUmu;
     }
 
+    /*
+     * getbtnKakutei
+     * @return btnKakutei
+     */
     @JsonProperty("btnKakutei")
     public Button getBtnKakutei() {
         return btnKakutei;
     }
 
+    /*
+     * setbtnKakutei
+     * @param btnKakutei btnKakutei
+     */
     @JsonProperty("btnKakutei")
     public void setBtnKakutei(Button btnKakutei) {
-        this.btnKakutei=btnKakutei;
+        this.btnKakutei = btnKakutei;
     }
 
+    /*
+     * getbtnCancel
+     * @return btnCancel
+     */
     @JsonProperty("btnCancel")
     public Button getBtnCancel() {
         return btnCancel;
     }
 
+    /*
+     * setbtnCancel
+     * @param btnCancel btnCancel
+     */
     @JsonProperty("btnCancel")
     public void setBtnCancel(Button btnCancel) {
-        this.btnCancel=btnCancel;
+        this.btnCancel = btnCancel;
     }
 
     /*
@@ -147,7 +224,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setRadOkugaiHokou(RadioButton radOkugaiHokou) {
+    public void setRadOkugaiHokou(RadioButton radOkugaiHokou) {
         this.getIdo().setRadOkugaiHokou(radOkugaiHokou);
     }
 
@@ -157,7 +234,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setRadKurumaisuShiyo(RadioButton radKurumaisuShiyo) {
+    public void setRadKurumaisuShiyo(RadioButton radKurumaisuShiyo) {
         this.getIdo().setRadKurumaisuShiyo(radKurumaisuShiyo);
     }
 
@@ -167,7 +244,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setChkHokohojoShiyo(CheckBoxList chkHokohojoShiyo) {
+    public void setChkHokohojoShiyo(CheckBoxList chkHokohojoShiyo) {
         this.getIdo().setChkHokohojoShiyo(chkHokohojoShiyo);
     }
 
@@ -177,7 +254,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setRadShokujiKoi(RadioButton radShokujiKoi) {
+    public void setRadShokujiKoi(RadioButton radShokujiKoi) {
         this.getEiyoShokuseikatsu().setRadShokujiKoi(radShokujiKoi);
     }
 
@@ -187,7 +264,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setRadGenzaiEiyoJotai(RadioButton radGenzaiEiyoJotai) {
+    public void setRadGenzaiEiyoJotai(RadioButton radGenzaiEiyoJotai) {
         this.getEiyoShokuseikatsu().setRadGenzaiEiyoJotai(radGenzaiEiyoJotai);
     }
 
@@ -197,7 +274,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setTxtEiyoShokuseikatsuRyuiten(TextBox txtEiyoShokuseikatsuRyuiten) {
+    public void setTxtEiyoShokuseikatsuRyuiten(TextBox txtEiyoShokuseikatsuRyuiten) {
         this.getEiyoShokuseikatsu().setTxtEiyoShokuseikatsuRyuiten(txtEiyoShokuseikatsuRyuiten);
     }
 
@@ -207,7 +284,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setChkHasseiShojo(CheckBoxList chkHasseiShojo) {
+    public void setChkHasseiShojo(CheckBoxList chkHasseiShojo) {
         this.getHasseiJotaiTaishoHoshin().setChkHasseiShojo(chkHasseiShojo);
     }
 
@@ -217,7 +294,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setChkJotaiSonota(CheckBoxList chkJotaiSonota) {
+    public void setChkJotaiSonota(CheckBoxList chkJotaiSonota) {
         this.getHasseiJotaiTaishoHoshin().setChkJotaiSonota(chkJotaiSonota);
     }
 
@@ -227,7 +304,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setTxtSonotaJotaiShosai(TextBox txtSonotaJotaiShosai) {
+    public void setTxtSonotaJotaiShosai(TextBox txtSonotaJotaiShosai) {
         this.getHasseiJotaiTaishoHoshin().setTxtSonotaJotaiShosai(txtSonotaJotaiShosai);
     }
 
@@ -237,7 +314,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setTxtTaishoHoushin(TextBox txtTaishoHoushin) {
+    public void setTxtTaishoHoushin(TextBox txtTaishoHoushin) {
         this.getHasseiJotaiTaishoHoshin().setTxtTaishoHoushin(txtTaishoHoushin);
     }
 
@@ -247,18 +324,18 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setRadSeikatsuKinoMitoshi(RadioButton radSeikatsuKinoMitoshi) {
+    public void setRadSeikatsuKinoMitoshi(RadioButton radSeikatsuKinoMitoshi) {
         this.getSeikatsuKinoMitoshi().setRadSeikatsuKinoMitoshi(radSeikatsuKinoMitoshi);
     }
 
     @JsonIgnore
-    public CheckBoxList getChkIgakutekiKanriHitsuyosei() {
-        return this.getIgakutekiKanriHitsuyosei().getChkIgakutekiKanriHitsuyosei();
+    public CheckBoxList getChkIgakutekiKanri() {
+        return this.getIgakutekiKanriHitsuyosei().getChkIgakutekiKanri();
     }
 
     @JsonIgnore
-    public void  setChkIgakutekiKanriHitsuyosei(CheckBoxList chkIgakutekiKanriHitsuyosei) {
-        this.getIgakutekiKanriHitsuyosei().setChkIgakutekiKanriHitsuyosei(chkIgakutekiKanriHitsuyosei);
+    public void setChkIgakutekiKanri(CheckBoxList chkIgakutekiKanri) {
+        this.getIgakutekiKanriHitsuyosei().setChkIgakutekiKanri(chkIgakutekiKanri);
     }
 
     @JsonIgnore
@@ -267,7 +344,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setChkSonotaIryoService(CheckBoxList chkSonotaIryoService) {
+    public void setChkSonotaIryoService(CheckBoxList chkSonotaIryoService) {
         this.getIgakutekiKanriHitsuyosei().setChkSonotaIryoService(chkSonotaIryoService);
     }
 
@@ -277,8 +354,18 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setTxtShonotaIryoServiceShosai(TextBox txtShonotaIryoServiceShosai) {
+    public void setTxtShonotaIryoServiceShosai(TextBox txtShonotaIryoServiceShosai) {
         this.getIgakutekiKanriHitsuyosei().setTxtShonotaIryoServiceShosai(txtShonotaIryoServiceShosai);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkSonotaIryoServiceHitsuyoSei() {
+        return this.getIgakutekiKanriHitsuyosei().getChkSonotaIryoServiceHitsuyoSei();
+    }
+
+    @JsonIgnore
+    public void setChkSonotaIryoServiceHitsuyoSei(CheckBoxList chkSonotaIryoServiceHitsuyoSei) {
+        this.getIgakutekiKanriHitsuyosei().setChkSonotaIryoServiceHitsuyoSei(chkSonotaIryoServiceHitsuyoSei);
     }
 
     @JsonIgnore
@@ -287,7 +374,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setRadKetsuatsu(RadioButton radKetsuatsu) {
+    public void setRadKetsuatsu(RadioButton radKetsuatsu) {
         this.getIgakutekiKantenRyuiten().setRadKetsuatsu(radKetsuatsu);
     }
 
@@ -297,7 +384,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setTxtKetsuatsu(TextBox txtKetsuatsu) {
+    public void setTxtKetsuatsu(TextBox txtKetsuatsu) {
         this.getIgakutekiKantenRyuiten().setTxtKetsuatsu(txtKetsuatsu);
     }
 
@@ -307,7 +394,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setRadIdo(RadioButton radIdo) {
+    public void setRadIdo(RadioButton radIdo) {
         this.getIgakutekiKantenRyuiten().setRadIdo(radIdo);
     }
 
@@ -317,7 +404,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setTxtIdo(TextBox txtIdo) {
+    public void setTxtIdo(TextBox txtIdo) {
         this.getIgakutekiKantenRyuiten().setTxtIdo(txtIdo);
     }
 
@@ -327,7 +414,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setRadSesshoku(RadioButton radSesshoku) {
+    public void setRadSesshoku(RadioButton radSesshoku) {
         this.getIgakutekiKantenRyuiten().setRadSesshoku(radSesshoku);
     }
 
@@ -337,7 +424,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setTxtSesshoku(TextBox txtSesshoku) {
+    public void setTxtSesshoku(TextBox txtSesshoku) {
         this.getIgakutekiKantenRyuiten().setTxtSesshoku(txtSesshoku);
     }
 
@@ -347,7 +434,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setRadUndo(RadioButton radUndo) {
+    public void setRadUndo(RadioButton radUndo) {
         this.getIgakutekiKantenRyuiten().setRadUndo(radUndo);
     }
 
@@ -357,7 +444,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setTxtUndo(TextBox txtUndo) {
+    public void setTxtUndo(TextBox txtUndo) {
         this.getIgakutekiKantenRyuiten().setTxtUndo(txtUndo);
     }
 
@@ -367,7 +454,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setRadEnka(RadioButton radEnka) {
+    public void setRadEnka(RadioButton radEnka) {
         this.getIgakutekiKantenRyuiten().setRadEnka(radEnka);
     }
 
@@ -377,7 +464,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setTxtEnka(TextBox txtEnka) {
+    public void setTxtEnka(TextBox txtEnka) {
         this.getIgakutekiKantenRyuiten().setTxtEnka(txtEnka);
     }
 
@@ -387,7 +474,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setTxtSonotaRyuiJiko(TextBox txtSonotaRyuiJiko) {
+    public void setTxtSonotaRyuiJiko(TextBox txtSonotaRyuiJiko) {
         this.getIgakutekiKantenRyuiten().setTxtSonotaRyuiJiko(txtSonotaRyuiJiko);
     }
 
@@ -397,7 +484,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setRadKansenshoUmu(RadioButton radKansenshoUmu) {
+    public void setRadKansenshoUmu(RadioButton radKansenshoUmu) {
         this.getKansenshoUmu().setRadKansenshoUmu(radKansenshoUmu);
     }
 
@@ -407,7 +494,7 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setSpSpace1(Space spSpace1) {
+    public void setSpSpace1(Space spSpace1) {
         this.getKansenshoUmu().setSpSpace1(spSpace1);
     }
 
@@ -417,11 +504,10 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
-    public void  setTxtKansenshoShosai(TextBox txtKansenshoShosai) {
+    public void setTxtKansenshoShosai(TextBox txtKansenshoShosai) {
         this.getKansenshoUmu().setTxtKansenshoShosai(txtKansenshoShosai);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-
 }

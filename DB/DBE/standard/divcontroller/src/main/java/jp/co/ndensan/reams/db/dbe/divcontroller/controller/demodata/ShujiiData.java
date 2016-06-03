@@ -22,8 +22,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShujiiData {
 
+    /**
+     * Doctor
+     */
     public static final class Doctor {
 
+        /**
+         * Doctor
+         */
         public static final Doctor EMPTY;
 
         static {
@@ -39,14 +45,29 @@ public class ShujiiData {
             this.theIryoKikan = iryoKikan;
         }
 
+        /**
+         * codeを取得します。
+         *
+         * @return code
+         */
         public RString code() {
             return theCode;
         }
 
+        /**
+         * nameを取得します。
+         *
+         * @return name
+         */
         public RString name() {
             return theName;
         }
 
+        /**
+         * iryoKikanを取得します。
+         *
+         * @return IryoKikan
+         */
         public ShujiiIryoKikanData.IryoKikan iryoKikan() {
             return this.theIryoKikan;
         }

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IgakutekiKantenRyuitenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -50,114 +50,202 @@ public class IgakutekiKantenRyuitenDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getradKetsuatsu
+     * @return radKetsuatsu
+     */
     @JsonProperty("radKetsuatsu")
     public RadioButton getRadKetsuatsu() {
         return radKetsuatsu;
     }
 
+    /*
+     * setradKetsuatsu
+     * @param radKetsuatsu radKetsuatsu
+     */
     @JsonProperty("radKetsuatsu")
     public void setRadKetsuatsu(RadioButton radKetsuatsu) {
-        this.radKetsuatsu=radKetsuatsu;
+        this.radKetsuatsu = radKetsuatsu;
     }
 
+    /*
+     * gettxtKetsuatsu
+     * @return txtKetsuatsu
+     */
     @JsonProperty("txtKetsuatsu")
     public TextBox getTxtKetsuatsu() {
         return txtKetsuatsu;
     }
 
+    /*
+     * settxtKetsuatsu
+     * @param txtKetsuatsu txtKetsuatsu
+     */
     @JsonProperty("txtKetsuatsu")
     public void setTxtKetsuatsu(TextBox txtKetsuatsu) {
-        this.txtKetsuatsu=txtKetsuatsu;
+        this.txtKetsuatsu = txtKetsuatsu;
     }
 
+    /*
+     * getradIdo
+     * @return radIdo
+     */
     @JsonProperty("radIdo")
     public RadioButton getRadIdo() {
         return radIdo;
     }
 
+    /*
+     * setradIdo
+     * @param radIdo radIdo
+     */
     @JsonProperty("radIdo")
     public void setRadIdo(RadioButton radIdo) {
-        this.radIdo=radIdo;
+        this.radIdo = radIdo;
     }
 
+    /*
+     * gettxtIdo
+     * @return txtIdo
+     */
     @JsonProperty("txtIdo")
     public TextBox getTxtIdo() {
         return txtIdo;
     }
 
+    /*
+     * settxtIdo
+     * @param txtIdo txtIdo
+     */
     @JsonProperty("txtIdo")
     public void setTxtIdo(TextBox txtIdo) {
-        this.txtIdo=txtIdo;
+        this.txtIdo = txtIdo;
     }
 
+    /*
+     * getradSesshoku
+     * @return radSesshoku
+     */
     @JsonProperty("radSesshoku")
     public RadioButton getRadSesshoku() {
         return radSesshoku;
     }
 
+    /*
+     * setradSesshoku
+     * @param radSesshoku radSesshoku
+     */
     @JsonProperty("radSesshoku")
     public void setRadSesshoku(RadioButton radSesshoku) {
-        this.radSesshoku=radSesshoku;
+        this.radSesshoku = radSesshoku;
     }
 
+    /*
+     * gettxtSesshoku
+     * @return txtSesshoku
+     */
     @JsonProperty("txtSesshoku")
     public TextBox getTxtSesshoku() {
         return txtSesshoku;
     }
 
+    /*
+     * settxtSesshoku
+     * @param txtSesshoku txtSesshoku
+     */
     @JsonProperty("txtSesshoku")
     public void setTxtSesshoku(TextBox txtSesshoku) {
-        this.txtSesshoku=txtSesshoku;
+        this.txtSesshoku = txtSesshoku;
     }
 
+    /*
+     * getradUndo
+     * @return radUndo
+     */
     @JsonProperty("radUndo")
     public RadioButton getRadUndo() {
         return radUndo;
     }
 
+    /*
+     * setradUndo
+     * @param radUndo radUndo
+     */
     @JsonProperty("radUndo")
     public void setRadUndo(RadioButton radUndo) {
-        this.radUndo=radUndo;
+        this.radUndo = radUndo;
     }
 
+    /*
+     * gettxtUndo
+     * @return txtUndo
+     */
     @JsonProperty("txtUndo")
     public TextBox getTxtUndo() {
         return txtUndo;
     }
 
+    /*
+     * settxtUndo
+     * @param txtUndo txtUndo
+     */
     @JsonProperty("txtUndo")
     public void setTxtUndo(TextBox txtUndo) {
-        this.txtUndo=txtUndo;
+        this.txtUndo = txtUndo;
     }
 
+    /*
+     * getradEnka
+     * @return radEnka
+     */
     @JsonProperty("radEnka")
     public RadioButton getRadEnka() {
         return radEnka;
     }
 
+    /*
+     * setradEnka
+     * @param radEnka radEnka
+     */
     @JsonProperty("radEnka")
     public void setRadEnka(RadioButton radEnka) {
-        this.radEnka=radEnka;
+        this.radEnka = radEnka;
     }
 
+    /*
+     * gettxtEnka
+     * @return txtEnka
+     */
     @JsonProperty("txtEnka")
     public TextBox getTxtEnka() {
         return txtEnka;
     }
 
+    /*
+     * settxtEnka
+     * @param txtEnka txtEnka
+     */
     @JsonProperty("txtEnka")
     public void setTxtEnka(TextBox txtEnka) {
-        this.txtEnka=txtEnka;
+        this.txtEnka = txtEnka;
     }
 
+    /*
+     * gettxtSonotaRyuiJiko
+     * @return txtSonotaRyuiJiko
+     */
     @JsonProperty("txtSonotaRyuiJiko")
     public TextBox getTxtSonotaRyuiJiko() {
         return txtSonotaRyuiJiko;
     }
 
+    /*
+     * settxtSonotaRyuiJiko
+     * @param txtSonotaRyuiJiko txtSonotaRyuiJiko
+     */
     @JsonProperty("txtSonotaRyuiJiko")
     public void setTxtSonotaRyuiJiko(TextBox txtSonotaRyuiJiko) {
-        this.txtSonotaRyuiJiko=txtSonotaRyuiJiko;
+        this.txtSonotaRyuiJiko = txtSonotaRyuiJiko;
     }
 
     // </editor-fold>

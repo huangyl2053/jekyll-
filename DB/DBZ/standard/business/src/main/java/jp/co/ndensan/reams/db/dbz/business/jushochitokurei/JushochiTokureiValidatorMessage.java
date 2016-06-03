@@ -38,7 +38,7 @@ public enum JushochiTokureiValidatorMessage implements IValidationMessage {
      */
     住所地特例期間が不正_適用日が解除日の後(UrErrorMessages.期間が不正_追加メッセージあり２, "適用日", "解除日");
 
-    private final Message message;
+    private final transient Message message;
 
     private JushochiTokureiValidatorMessage(IMessageGettable message, String... replacements) {
         this.message = message.getMessage().replace(replacements);

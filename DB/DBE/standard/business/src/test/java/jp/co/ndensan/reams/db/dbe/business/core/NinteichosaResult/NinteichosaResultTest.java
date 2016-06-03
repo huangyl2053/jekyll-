@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.NinteichosaResult;
 
-import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaResult.NinteichosaResult;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaresult.NinteichosaResult;
 import jp.co.ndensan.reams.db.dbe.business.helper.NinteichosaResultMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.experimental.runners.Enclosed;

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT1014SeigoseiCheckマスタとエンティティのマッピング用XMLです。 -->
+<!-- @reamsid_L DBB-0630-020 chengsanyuan -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1014SeigoseiCheckMapper">
+
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT1014SeigoseiCheck">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1014SeigoseiCheckMapper.allColumns_DbT1014SeigoseiCheck" />
+        FROM
+        rgdb."DbT1014SeigoseiCheck"
+        WHERE
+        rgdb."DbT1014SeigoseiCheck"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT1014SeigoseiCheck">
+        "DbT1014SeigoseiCheck"."shikibetsuCode" as "dbT1014SeigoseiCheck_shikibetsuCode",
+        "DbT1014SeigoseiCheck"."insertDantaiCd" as "dbT1014SeigoseiCheck_insertDantaiCd",
+        "DbT1014SeigoseiCheck"."insertTimestamp" as "dbT1014SeigoseiCheck_insertTimestamp",
+        "DbT1014SeigoseiCheck"."insertReamsLoginId" as "dbT1014SeigoseiCheck_insertReamsLoginId",
+        "DbT1014SeigoseiCheck"."insertContextId" as "dbT1014SeigoseiCheck_insertContextId",
+        "DbT1014SeigoseiCheck"."isDeleted" as "dbT1014SeigoseiCheck_isDeleted",
+        "DbT1014SeigoseiCheck"."updateCount" as "dbT1014SeigoseiCheck_updateCount",
+        "DbT1014SeigoseiCheck"."lastUpdateTimestamp" as "dbT1014SeigoseiCheck_lastUpdateTimestamp",
+        "DbT1014SeigoseiCheck"."lastUpdateReamsLoginId" as "dbT1014SeigoseiCheck_lastUpdateReamsLoginId",
+        "DbT1014SeigoseiCheck"."taishogaiFlag" as "dbT1014SeigoseiCheck_taishogaiFlag",
+        "DbT1014SeigoseiCheck"."fuseigoRiyuCode" as "dbT1014SeigoseiCheck_fuseigoRiyuCode",
+        "DbT1014SeigoseiCheck"."torokuTimestamp" as "dbT1014SeigoseiCheck_torokuTimestamp",
+        "DbT1014SeigoseiCheck"."rierkiNo" as "dbT1014SeigoseiCheck_rierkiNo",
+        "DbT1014SeigoseiCheck"."idoYMD" as "dbT1014SeigoseiCheck_idoYMD",
+        "DbT1014SeigoseiCheck"."todokedeYMD" as "dbT1014SeigoseiCheck_todokedeYMD",
+        "DbT1014SeigoseiCheck"."idoJiyuCode" as "dbT1014SeigoseiCheck_idoJiyuCode",
+        "DbT1014SeigoseiCheck"."shoriJiyuCode" as "dbT1014SeigoseiCheck_shoriJiyuCode",
+        "DbT1014SeigoseiCheck"."shoriYMD" as "dbT1014SeigoseiCheck_shoriYMD",
+        "DbT1014SeigoseiCheck"."juminShubetsuCode" as "dbT1014SeigoseiCheck_juminShubetsuCode",
+        "DbT1014SeigoseiCheck"."juminJotaiCode" as "dbT1014SeigoseiCheck_juminJotaiCode",
+        "DbT1014SeigoseiCheck"."seinengappiYMD" as "dbT1014SeigoseiCheck_seinengappiYMD",
+        "DbT1014SeigoseiCheck"."torokuJiyuCode" as "dbT1014SeigoseiCheck_torokuJiyuCode",
+        "DbT1014SeigoseiCheck"."torokuIdoYMD" as "dbT1014SeigoseiCheck_torokuIdoYMD",
+        "DbT1014SeigoseiCheck"."torokuTodokedeYMD" as "dbT1014SeigoseiCheck_torokuTodokedeYMD",
+        "DbT1014SeigoseiCheck"."shojoJiyuCode" as "dbT1014SeigoseiCheck_shojoJiyuCode",
+        "DbT1014SeigoseiCheck"."shojoIdoYMD" as "dbT1014SeigoseiCheck_shojoIdoYMD",
+        "DbT1014SeigoseiCheck"."shojoTodokedeYMD" as "dbT1014SeigoseiCheck_shojoTodokedeYMD",
+        "DbT1014SeigoseiCheck"."shojoTsuchiFlag" as "dbT1014SeigoseiCheck_shojoTsuchiFlag",
+        "DbT1014SeigoseiCheck"."tenshutsuYoteiIdoYMD" as "dbT1014SeigoseiCheck_tenshutsuYoteiIdoYMD",
+        "DbT1014SeigoseiCheck"."tenshutsuKakuteiIdoYMD" as "dbT1014SeigoseiCheck_tenshutsuKakuteiIdoYMD",
+        "DbT1014SeigoseiCheck"."tenshutsuKakuteiTsuchiYMD" as "dbT1014SeigoseiCheck_tenshutsuKakuteiTsuchiYMD",
+        "DbT1014SeigoseiCheck"."daichoShubetsu" as "dbT1014SeigoseiCheck_daichoShubetsu",
+        "DbT1014SeigoseiCheck"."shikakuIdoYMD" as "dbT1014SeigoseiCheck_shikakuIdoYMD",
+        "DbT1014SeigoseiCheck"."shikakuIdoEdaNo" as "dbT1014SeigoseiCheck_shikakuIdoEdaNo",
+        "DbT1014SeigoseiCheck"."shikakuIdoJiyuCode" as "dbT1014SeigoseiCheck_shikakuIdoJiyuCode",
+        "DbT1014SeigoseiCheck"."hihokenshaNo" as "dbT1014SeigoseiCheck_hihokenshaNo",
+        "DbT1014SeigoseiCheck"."shichosonCode" as "dbT1014SeigoseiCheck_shichosonCode",
+        "DbT1014SeigoseiCheck"."shutokuTekiyoJiyuCode" as "dbT1014SeigoseiCheck_shutokuTekiyoJiyuCode",
+        "DbT1014SeigoseiCheck"."shutokuTekiyoYMD" as "dbT1014SeigoseiCheck_shutokuTekiyoYMD",
+        "DbT1014SeigoseiCheck"."shutokuTekiyoTodokedeYMD" as "dbT1014SeigoseiCheck_shutokuTekiyoTodokedeYMD",
+        "DbT1014SeigoseiCheck"."soshitsuKaijoJiyuCode" as "dbT1014SeigoseiCheck_soshitsuKaijoJiyuCode",
+        "DbT1014SeigoseiCheck"."soshitsuKaijoYMD" as "dbT1014SeigoseiCheck_soshitsuKaijoYMD",
+        "DbT1014SeigoseiCheck"."soshitsuKaijoTodokedeYMD" as "dbT1014SeigoseiCheck_soshitsuKaijoTodokedeYMD",
+        "DbT1014SeigoseiCheck"."ichigoShutokuYMD" as "dbT1014SeigoseiCheck_ichigoShutokuYMD",
+        "DbT1014SeigoseiCheck"."hihokenshaKubunCode" as "dbT1014SeigoseiCheck_hihokenshaKubunCode",
+        "DbT1014SeigoseiCheck"."shikakuHenkoJiyuCode" as "dbT1014SeigoseiCheck_shikakuHenkoJiyuCode",
+        "DbT1014SeigoseiCheck"."shikakuHenkoYMD" as "dbT1014SeigoseiCheck_shikakuHenkoYMD",
+        "DbT1014SeigoseiCheck"."shikakuHenkoTodokedeYMD" as "dbT1014SeigoseiCheck_shikakuHenkoTodokedeYMD",
+        "DbT1014SeigoseiCheck"."jutokuTekiyoJiyuCode" as "dbT1014SeigoseiCheck_jutokuTekiyoJiyuCode",
+        "DbT1014SeigoseiCheck"."jutokuTekiyoYMD" as "dbT1014SeigoseiCheck_jutokuTekiyoYMD",
+        "DbT1014SeigoseiCheck"."jutokuTekiyoTodokedeYMD" as "dbT1014SeigoseiCheck_jutokuTekiyoTodokedeYMD",
+        "DbT1014SeigoseiCheck"."jutokuKaijoJiyuCode" as "dbT1014SeigoseiCheck_jutokuKaijoJiyuCode",
+        "DbT1014SeigoseiCheck"."jutokuKaijoYMD" as "dbT1014SeigoseiCheck_jutokuKaijoYMD",
+        "DbT1014SeigoseiCheck"."jutokuKaijoTodokedeYMD" as "dbT1014SeigoseiCheck_jutokuKaijoTodokedeYMD"
+    </sql>
+
+
+    <!--テーブルDbT1014SeigoseiCheckの項目をDbT1014SeigoseiCheckEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT1014SeigoseiCheckEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1014SeigoseiCheckEntity" autoMapping="true">
+        <id property="shikibetsuCode" column="dbT1014SeigoseiCheck_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT1014SeigoseiCheck_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT1014SeigoseiCheck_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT1014SeigoseiCheck_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT1014SeigoseiCheck_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT1014SeigoseiCheck_isDeleted" />
+        <result property="updateCount" column="dbT1014SeigoseiCheck_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT1014SeigoseiCheck_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT1014SeigoseiCheck_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="taishogaiFlag" column="dbT1014SeigoseiCheck_taishogaiFlag" />
+        <result property="fuseigoRiyuCode" column="dbT1014SeigoseiCheck_fuseigoRiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="torokuTimestamp" column="dbT1014SeigoseiCheck_torokuTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="rierkiNo" column="dbT1014SeigoseiCheck_rierkiNo" />
+        <result property="idoYMD" column="dbT1014SeigoseiCheck_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="todokedeYMD" column="dbT1014SeigoseiCheck_todokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="idoJiyuCode" column="dbT1014SeigoseiCheck_idoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoriJiyuCode" column="dbT1014SeigoseiCheck_shoriJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoriYMD" column="dbT1014SeigoseiCheck_shoriYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="juminShubetsuCode" column="dbT1014SeigoseiCheck_juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="juminJotaiCode" column="dbT1014SeigoseiCheck_juminJotaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seinengappiYMD" column="dbT1014SeigoseiCheck_seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="torokuJiyuCode" column="dbT1014SeigoseiCheck_torokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="torokuIdoYMD" column="dbT1014SeigoseiCheck_torokuIdoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="torokuTodokedeYMD" column="dbT1014SeigoseiCheck_torokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shojoJiyuCode" column="dbT1014SeigoseiCheck_shojoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shojoIdoYMD" column="dbT1014SeigoseiCheck_shojoIdoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shojoTodokedeYMD" column="dbT1014SeigoseiCheck_shojoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shojoTsuchiFlag" column="dbT1014SeigoseiCheck_shojoTsuchiFlag" />
+        <result property="tenshutsuYoteiIdoYMD" column="dbT1014SeigoseiCheck_tenshutsuYoteiIdoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tenshutsuKakuteiIdoYMD" column="dbT1014SeigoseiCheck_tenshutsuKakuteiIdoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tenshutsuKakuteiTsuchiYMD" column="dbT1014SeigoseiCheck_tenshutsuKakuteiTsuchiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="daichoShubetsu" column="dbT1014SeigoseiCheck_daichoShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuIdoYMD" column="dbT1014SeigoseiCheck_shikakuIdoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuIdoEdaNo" column="dbT1014SeigoseiCheck_shikakuIdoEdaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuIdoJiyuCode" column="dbT1014SeigoseiCheck_shikakuIdoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaNo" column="dbT1014SeigoseiCheck_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shichosonCode" column="dbT1014SeigoseiCheck_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="shutokuTekiyoJiyuCode" column="dbT1014SeigoseiCheck_shutokuTekiyoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shutokuTekiyoYMD" column="dbT1014SeigoseiCheck_shutokuTekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shutokuTekiyoTodokedeYMD" column="dbT1014SeigoseiCheck_shutokuTekiyoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="soshitsuKaijoJiyuCode" column="dbT1014SeigoseiCheck_soshitsuKaijoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="soshitsuKaijoYMD" column="dbT1014SeigoseiCheck_soshitsuKaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="soshitsuKaijoTodokedeYMD" column="dbT1014SeigoseiCheck_soshitsuKaijoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ichigoShutokuYMD" column="dbT1014SeigoseiCheck_ichigoShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hihokenshaKubunCode" column="dbT1014SeigoseiCheck_hihokenshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuHenkoJiyuCode" column="dbT1014SeigoseiCheck_shikakuHenkoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuHenkoYMD" column="dbT1014SeigoseiCheck_shikakuHenkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuHenkoTodokedeYMD" column="dbT1014SeigoseiCheck_shikakuHenkoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jutokuTekiyoJiyuCode" column="dbT1014SeigoseiCheck_jutokuTekiyoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jutokuTekiyoYMD" column="dbT1014SeigoseiCheck_jutokuTekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jutokuTekiyoTodokedeYMD" column="dbT1014SeigoseiCheck_jutokuTekiyoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jutokuKaijoJiyuCode" column="dbT1014SeigoseiCheck_jutokuKaijoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jutokuKaijoYMD" column="dbT1014SeigoseiCheck_jutokuKaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jutokuKaijoTodokedeYMD" column="dbT1014SeigoseiCheck_jutokuKaijoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+
+</mapper>

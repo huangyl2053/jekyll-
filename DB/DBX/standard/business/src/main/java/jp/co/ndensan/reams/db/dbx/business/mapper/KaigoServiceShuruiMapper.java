@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.IKaigoServiceShurui;
 import jp.co.ndensan.reams.db.dbx.business.core._KaigoServiceShurui;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**
@@ -39,11 +40,12 @@ public final class KaigoServiceShuruiMapper {
     public static IKaigoServiceShurui to介護サービス種類(DbT7130KaigoServiceShuruiEntity kaigoServiceShuruiEntity) {
         requireNonNull(kaigoServiceShuruiEntity, UrSystemErrorMessages.引数がnullのため生成不可.
                 getReplacedMessage("kaigoServiceShuruiEntity", "IKaigoServiceShurui"));
+        RString serviceShuruiRyakusho = kaigoServiceShuruiEntity.getServiceShuruiRyakusho();
         IKaigoServiceShurui kaigoServiceShurui = new _KaigoServiceShurui(kaigoServiceShuruiEntity.getServiceShuruiCd(),
                 new Range<>(kaigoServiceShuruiEntity.getTeikyoKaishiYM(),
                         kaigoServiceShuruiEntity.getTeikyoshuryoYM()),
                 kaigoServiceShuruiEntity.getServiceShuruiMeisho(),
-                kaigoServiceShuruiEntity.getServiceShuruiRyakusho(),
+                serviceShuruiRyakusho == null ? RString.EMPTY : serviceShuruiRyakusho,
                 kaigoServiceShuruiEntity.getServiceBunrruicode());
         return kaigoServiceShurui;
     }

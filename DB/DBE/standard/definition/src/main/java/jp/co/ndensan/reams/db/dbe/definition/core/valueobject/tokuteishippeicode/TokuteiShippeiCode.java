@@ -38,6 +38,7 @@ public class TokuteiShippeiCode implements Comparable<TokuteiShippeiCode>, ICode
      * コンストラクタです。<br/>
      *
      * @param code 値
+     * @throws NullPointerException Error
      */
     public TokuteiShippeiCode(Code code) throws NullPointerException {
         this.code = requireNonNull(code, UrSystemErrorMessages.値がnull.getReplacedMessage("code"));
@@ -71,6 +72,7 @@ public class TokuteiShippeiCode implements Comparable<TokuteiShippeiCode>, ICode
         return new TokuteiShippeiCode(code);
     }
 
+    @Override
     public Code asCode() {
         return this.code;
     }

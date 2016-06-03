@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbx.entity.db.relate.koseishichosonmaster.KoseiShi
 
 /**
  * 構成市町村マスタのマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public interface IKoseiShichosonMasterMapper {
 

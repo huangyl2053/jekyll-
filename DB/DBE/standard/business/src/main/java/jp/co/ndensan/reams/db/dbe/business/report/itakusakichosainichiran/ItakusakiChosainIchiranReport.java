@@ -14,6 +14,7 @@ import lombok.NonNull;
 /**
  *
  * 認定調査委託先・認定調査員一覧表のReportです。
+ * @reamsid_L DBE-0290-020 dongyabin
  */
 public final class ItakusakiChosainIchiranReport extends Report<ItakusakiChosainIchiranReportSource> {
 

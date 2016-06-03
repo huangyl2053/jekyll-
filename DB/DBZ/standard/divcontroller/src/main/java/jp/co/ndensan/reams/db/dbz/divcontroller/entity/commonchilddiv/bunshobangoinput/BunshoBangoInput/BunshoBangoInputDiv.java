@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.BunshoBangoInput.BunshoBangoInputHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.bunshobangoinput.BunshoBangoInputHandler;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

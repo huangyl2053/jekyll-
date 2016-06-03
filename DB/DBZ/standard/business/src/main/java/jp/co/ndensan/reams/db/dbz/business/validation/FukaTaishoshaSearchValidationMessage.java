@@ -30,7 +30,7 @@ public enum FukaTaishoshaSearchValidationMessage implements IValidationMessage {
      */
     対象者が存在しない(UrErrorMessages.対象者が存在しない.getMessage());
 
-    private final Message message;
+    private final transient Message message;
 
     private FukaTaishoshaSearchValidationMessage(Message message) {
         this.message = message;

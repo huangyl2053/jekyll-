@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.Shinsakai;
 
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaikaisaichiku.ShinsakaiKaisaiChiku;

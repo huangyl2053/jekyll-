@@ -11,8 +11,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 認定調査委託先情報CSVのクラスです
  *
- * @author liangbc
+ * @reamsid_L DBE-0270-010 liangbc
  */
 @Getter
 @Setter

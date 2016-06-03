@@ -1,20 +1,15 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.JogaiShisetsuHenkoInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.JogaishaKaijoInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.JogaishaTekiyoInputDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TekiyoJogaiToroku のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * TekiyoJogaiToroku のクラスファイル
+ *
  * @author 自動生成
  */
 public class TekiyoJogaiTorokuDiv extends Panel {
@@ -24,6 +19,7 @@ public class TekiyoJogaiTorokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("JogaishaTekiyoInput")
     private JogaishaTekiyoInputDiv JogaishaTekiyoInput;
     @JsonProperty("JogaishaKaijoInput")
@@ -46,7 +42,7 @@ public class TekiyoJogaiTorokuDiv extends Panel {
 
     @JsonProperty("JogaishaTekiyoInput")
     public void setJogaishaTekiyoInput(JogaishaTekiyoInputDiv JogaishaTekiyoInput) {
-        this.JogaishaTekiyoInput=JogaishaTekiyoInput;
+        this.JogaishaTekiyoInput = JogaishaTekiyoInput;
     }
 
     @JsonProperty("JogaishaKaijoInput")
@@ -56,7 +52,7 @@ public class TekiyoJogaiTorokuDiv extends Panel {
 
     @JsonProperty("JogaishaKaijoInput")
     public void setJogaishaKaijoInput(JogaishaKaijoInputDiv JogaishaKaijoInput) {
-        this.JogaishaKaijoInput=JogaishaKaijoInput;
+        this.JogaishaKaijoInput = JogaishaKaijoInput;
     }
 
     @JsonProperty("JogaiShisetsuHenkoInput")
@@ -66,7 +62,7 @@ public class TekiyoJogaiTorokuDiv extends Panel {
 
     @JsonProperty("JogaiShisetsuHenkoInput")
     public void setJogaiShisetsuHenkoInput(JogaiShisetsuHenkoInputDiv JogaiShisetsuHenkoInput) {
-        this.JogaiShisetsuHenkoInput=JogaiShisetsuHenkoInput;
+        this.JogaiShisetsuHenkoInput = JogaiShisetsuHenkoInput;
     }
 
     @JsonProperty("btnInsertTekiyoJogaiJoho")
@@ -76,7 +72,7 @@ public class TekiyoJogaiTorokuDiv extends Panel {
 
     @JsonProperty("btnInsertTekiyoJogaiJoho")
     public void setBtnInsertTekiyoJogaiJoho(Button btnInsertTekiyoJogaiJoho) {
-        this.btnInsertTekiyoJogaiJoho=btnInsertTekiyoJogaiJoho;
+        this.btnInsertTekiyoJogaiJoho = btnInsertTekiyoJogaiJoho;
     }
 
 }

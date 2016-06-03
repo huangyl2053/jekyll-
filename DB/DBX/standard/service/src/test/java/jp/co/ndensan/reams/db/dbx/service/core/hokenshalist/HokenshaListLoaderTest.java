@@ -251,7 +251,7 @@ public class HokenshaListLoaderTest {
 
             List<DbT7056GappeiShichosonEntity> gappeiShichosonEntities = new ArrayList<>();
             KyuShichosonJohoEntities kyuShichosons = new KyuShichosonJohoEntities(gappeiShichosonEntities, true);
-            when(kyuShichosonCodeFinder.getKyuShichosonCodeJoho(ssj.get市町村情報().getShichosonCode(), donyuKeitai))
+            when(kyuShichosonCodeFinder.getKyuShichosonCodeJoho(ssj.get市町村情報().get市町村コード(), donyuKeitai))
                     .thenReturn(kyuShichosons);
 
             sut.getShichosonCodeNameList(gyomuBunrui);
@@ -266,7 +266,7 @@ public class HokenshaListLoaderTest {
             gappeiShichosonEntities.add(createGappeiShichoson("010081", "南テスト村", "010081"));
             gappeiShichosonEntities.add(createGappeiShichoson("010091", "北テスト村", "010091"));
             KyuShichosonJohoEntities kyuShichosons = new KyuShichosonJohoEntities(gappeiShichosonEntities, true);
-            when(kyuShichosonCodeFinder.getKyuShichosonCodeJoho(ssj.get市町村情報().getShichosonCode(), donyuKeitai))
+            when(kyuShichosonCodeFinder.getKyuShichosonCodeJoho(ssj.get市町村情報().get市町村コード(), donyuKeitai))
                     .thenReturn(kyuShichosons);
 
             HokenshaList result = sut.getShichosonCodeNameList(gyomuBunrui);
@@ -320,7 +320,7 @@ public class HokenshaListLoaderTest {
             HokenshaList result = sut.getShichosonCodeNameList(gyomuBunrui);
             assertThat(result.is広域(), is(false));
             assertThat(result.size(), is(1));
-            assertThat(result.get(ssj.get市町村情報().getShichosonCode()).get保険者区分(), is(TokeiTaishoKubun.保険者分));
+            assertThat(result.get(ssj.get市町村情報().get市町村コード()).get保険者区分(), is(TokeiTaishoKubun.保険者分));
         }
     }
 }

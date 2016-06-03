@@ -20,7 +20,7 @@ public class GogitaiYukoKikanKaishiDateValidator {
     /**
      * コンストラクタです。
      *
-     * @param gogitaiYukoKikanKaishiDate
+     * @param gogitaiYukoKikanKaishiDate GogitaiYukoKikanKaishiDate
      */
     public GogitaiYukoKikanKaishiDateValidator(GogitaiYukoKikanKaishiDate gogitaiYukoKikanKaishiDate) {
         requireNonNull(gogitaiYukoKikanKaishiDate, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体（介護認定審査会）の長や長代理、委員などの区分コード"));

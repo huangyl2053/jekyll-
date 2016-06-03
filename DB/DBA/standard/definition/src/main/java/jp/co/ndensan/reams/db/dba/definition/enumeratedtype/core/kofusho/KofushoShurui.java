@@ -5,6 +5,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 交付証種類を表す列挙型です。
+ *
+ * @reamsid_L DBA-9999-023 liangbc
  */
 public enum KofushoShurui {
 

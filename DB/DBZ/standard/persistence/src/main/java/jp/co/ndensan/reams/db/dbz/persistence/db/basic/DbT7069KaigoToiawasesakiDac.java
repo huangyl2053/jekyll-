@@ -6,9 +6,9 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7069KaigoToiawasesaki.subGyomuCode;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7069KaigoToiawasesaki.chohyoBunruiID;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7069KaigoToiawasesaki;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7069KaigoToiawasesaki.chohyoBunruiID;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7069KaigoToiawasesaki.subGyomuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7069KaigoToiawasesakiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -62,7 +62,7 @@ public class DbT7069KaigoToiawasesakiDac implements ISaveable<DbT7069KaigoToiawa
      * @return DbT7069KaigoToiawasesakiEntity
      */
     @Transaction
-    public DbT7069KaigoToiawasesakiEntity selectKaigoKyotsu() throws NullPointerException {
+    public DbT7069KaigoToiawasesakiEntity selectKaigoKyotsu() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().

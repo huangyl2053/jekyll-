@@ -7,15 +7,12 @@ package jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteishins
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -363,7 +360,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * 要介護申請・要支援申請の区分を設定します。
      *
-     * @param 要介護申請_要支援申請の区分
+     * @param 要介護申請_要支援申請の区分 要介護申請_要支援申請の区分
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set要介護申請_要支援申請の区分(RString 要介護申請_要支援申請の区分) {
@@ -447,7 +444,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * ２号医療保険者名を設定します。
      *
-     * @param 医療保険者名_２号
+     * @param 医療保険者名_２号 医療保険者名_２号
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set２号医療保険者名(RString 医療保険者名_２号) {
@@ -459,7 +456,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * ２号医療保険記号番号を設定します。
      *
-     * @param 医療保険記号番号_２号
+     * @param 医療保険記号番号_２号 医療保険記号番号_２号
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set２号医療保険記号番号(RString 医療保険記号番号_２号) {
@@ -471,7 +468,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * ２号特定疾病コードを設定します。
      *
-     * @param 特定疾病コード_２号
+     * @param 特定疾病コード_２号 特定疾病コード_２号
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set２号特定疾病コード(Code 特定疾病コード_２号) {
@@ -979,7 +976,7 @@ public class NinteiShinseiJohoBuilder {
      * キーが一致しない場合、新たに追加します。<br>
      *
      * @param 認定調査依頼情報 {@link NinteichosaIraiJoho}
-     * @return {@link NinteichosaIraiJohoBuilder}
+     * @return {@link NinteiShinseiJohoBuilder}
      * @throws IllegalStateException キーが一致しない場合
      */
     public NinteiShinseiJohoBuilder setNinteichosaIraiJoho(NinteichosaIraiJoho 認定調査依頼情報) {

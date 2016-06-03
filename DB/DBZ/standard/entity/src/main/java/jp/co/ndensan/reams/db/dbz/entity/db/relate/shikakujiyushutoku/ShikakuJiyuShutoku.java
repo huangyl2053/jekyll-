@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * DBUMN00000_資格事由取得_戻る用Entityです。
+ *
+ * @reamsid_L DBU-0111-010 wanghui
  */
 @lombok.Getter
 @lombok.Setter

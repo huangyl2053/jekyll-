@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinchishoChukakuShojoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,8 +27,6 @@ public class NinchishoChukakuShojoDiv extends Panel {
     private RadioButton radNichijoNinchiNoryoku;
     @JsonProperty("radIshiDentatsuNoryoku")
     private RadioButton radIshiDentatsuNoryoku;
-    @JsonProperty("radShokujiKoi")
-    private RadioButton radShokujiKoi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -36,44 +34,58 @@ public class NinchishoChukakuShojoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getradTankiKioku
+     * @return radTankiKioku
+     */
     @JsonProperty("radTankiKioku")
     public RadioButton getRadTankiKioku() {
         return radTankiKioku;
     }
 
+    /*
+     * setradTankiKioku
+     * @param radTankiKioku radTankiKioku
+     */
     @JsonProperty("radTankiKioku")
     public void setRadTankiKioku(RadioButton radTankiKioku) {
-        this.radTankiKioku=radTankiKioku;
+        this.radTankiKioku = radTankiKioku;
     }
 
+    /*
+     * getradNichijoNinchiNoryoku
+     * @return radNichijoNinchiNoryoku
+     */
     @JsonProperty("radNichijoNinchiNoryoku")
     public RadioButton getRadNichijoNinchiNoryoku() {
         return radNichijoNinchiNoryoku;
     }
 
+    /*
+     * setradNichijoNinchiNoryoku
+     * @param radNichijoNinchiNoryoku radNichijoNinchiNoryoku
+     */
     @JsonProperty("radNichijoNinchiNoryoku")
     public void setRadNichijoNinchiNoryoku(RadioButton radNichijoNinchiNoryoku) {
-        this.radNichijoNinchiNoryoku=radNichijoNinchiNoryoku;
+        this.radNichijoNinchiNoryoku = radNichijoNinchiNoryoku;
     }
 
+    /*
+     * getradIshiDentatsuNoryoku
+     * @return radIshiDentatsuNoryoku
+     */
     @JsonProperty("radIshiDentatsuNoryoku")
     public RadioButton getRadIshiDentatsuNoryoku() {
         return radIshiDentatsuNoryoku;
     }
 
+    /*
+     * setradIshiDentatsuNoryoku
+     * @param radIshiDentatsuNoryoku radIshiDentatsuNoryoku
+     */
     @JsonProperty("radIshiDentatsuNoryoku")
     public void setRadIshiDentatsuNoryoku(RadioButton radIshiDentatsuNoryoku) {
-        this.radIshiDentatsuNoryoku=radIshiDentatsuNoryoku;
-    }
-
-    @JsonProperty("radShokujiKoi")
-    public RadioButton getRadShokujiKoi() {
-        return radShokujiKoi;
-    }
-
-    @JsonProperty("radShokujiKoi")
-    public void setRadShokujiKoi(RadioButton radShokujiKoi) {
-        this.radShokujiKoi=radShokujiKoi;
+        this.radIshiDentatsuNoryoku = radIshiDentatsuNoryoku;
     }
 
     // </editor-fold>

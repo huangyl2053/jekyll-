@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護保険施設入退所を管理するクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public class ShisetsuNyutaisho extends
         ModelBase<ShisetsuNyutaishoIdentifier, DbT1004ShisetsuNyutaishoEntity, ShisetsuNyutaisho> implements Serializable {

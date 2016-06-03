@@ -16,10 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class HonsanteiChohyoHakko2 {
 
     /**
-     * onLoad。
+     * 画面の初期化メソッドです。
      *
-     * @param div
-     * @return ResponseData
+     * @param div HonsanteiChohyoHakko2Div
+     * @return 画面のResponseData
      */
     public ResponseData<HonsanteiChohyoHakko2Div> onLoad(HonsanteiChohyoHakko2Div div) {
 
@@ -31,9 +31,15 @@ public class HonsanteiChohyoHakko2 {
         response.data = div;
         return response;
     }
-  
+
+    /**
+     * txtKetteiTsuchiYousikiSetteiボックスのchange事件です。
+     *
+     * @param div HonsanteiChohyoHakko2Div
+     * @return 画面のResponseData
+     */
     public ResponseData<HonsanteiChohyoHakko2Div> change_txtKetteiTsuchiYousikiSettei(HonsanteiChohyoHakko2Div div) {
         div.getHonTsuchiKobetsuJoho().getTxtKetteiTsuchiYousikiSettei().setValue(new RString("還付対象者、特徴が中止となった被保険者は変更通知書を出力"));
         return _createResponseData(div);
-    }    
+    }
 }

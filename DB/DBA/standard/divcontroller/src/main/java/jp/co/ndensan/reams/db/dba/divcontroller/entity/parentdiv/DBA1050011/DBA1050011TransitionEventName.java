@@ -20,7 +20,8 @@ public enum DBA1050011TransitionEventName implements IContainerEvents {
     追加("追加"),
     修正("修正"),
     削除("削除"),
-    詳細("詳細");
+    詳細("詳細"),
+    賦課エラー修正完了("賦課エラー修正完了");
 
     private final RString name;
 

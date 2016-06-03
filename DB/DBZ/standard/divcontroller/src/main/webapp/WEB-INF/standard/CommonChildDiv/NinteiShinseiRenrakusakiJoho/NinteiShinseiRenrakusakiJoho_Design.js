@@ -4,6 +4,41 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClilck_btnShinkiTsuika = function () {
+                return "onClilck_btnShinkiTsuika";
+            };
+
+            Events.onClilck_btnFukushaTsuika = function () {
+                return "onClilck_btnFukushaTsuika";
+            };
+
+            Events.onClilck_btnZenkaiFukusha = function () {
+                return "onClilck_btnZenkaiFukusha";
+            };
+
+            Events.onSelect_RenrakusakiIchiran = function () {
+                return "onSelect_RenrakusakiIchiran";
+            };
+
+            Events.onClick_btnShusei = function () {
+                return "onClick_btnShusei";
+            };
+
+            Events.onClick_btnSakujo = function () {
+                return "onClick_btnSakujo";
+            };
+
+            Events.onClick_btnToroku = function () {
+                return "onClick_btnToroku";
+            };
+
+            Events.onClick_btnModoru = function () {
+                return "onClick_btnModoru";
+            };
+
+            Events.onClick_btnKakutei = function () {
+                return "onClick_btnKakutei";
+            };
             return Events;
         })();
         NinteiShinseiRenrakusakiJoho.Events = Events;
@@ -102,6 +137,10 @@ var DBZ;
 
             Controls.prototype.btnModoru = function () {
                 return new UZA.Button(this.convFiledName("btnModoru"));
+            };
+
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             };
             return Controls;
         })();

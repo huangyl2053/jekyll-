@@ -5,7 +5,7 @@
  "steps": [
   {
    "id": 1,
-   "name": "所得情報抽出・連携",
+   "name": "所得情報抽出・連携（広域）",
    "transitionList": [
     {
      "id": "1",
@@ -14,7 +14,7 @@
      "toLayoutSubGyomuCode": "DBB",
      "toLayoutName": "DBB1120001",
      "toLayoutTitle": "所得情報抽出・連携",
-     "toState": ""
+     "toState": "所得情報抽出連携広域用"
     },
     {
      "id": "2",

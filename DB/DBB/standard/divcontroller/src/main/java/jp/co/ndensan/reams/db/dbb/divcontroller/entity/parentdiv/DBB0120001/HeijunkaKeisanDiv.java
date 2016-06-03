@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HeijunkaKeisanDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,8 +24,6 @@ public class HeijunkaKeisanDiv extends Panel {
     private ShoriJokyoDiv ShoriJokyo;
     @JsonProperty("HeijunkaKeisanHoho")
     private HeijunkaKeisanHohoDiv HeijunkaKeisanHoho;
-    @JsonProperty("HeijunkaHenkoTsuchi")
-    private HeijunkaHenkoTsuchiDiv HeijunkaHenkoTsuchi;
     @JsonProperty("TokuchoHeijunkaChohyoHakko")
     private TokuchoHeijunkaChohyoHakkoDiv TokuchoHeijunkaChohyoHakko;
 
@@ -35,44 +33,58 @@ public class HeijunkaKeisanDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getShoriJokyo
+     * @return ShoriJokyo
+     */
     @JsonProperty("ShoriJokyo")
     public ShoriJokyoDiv getShoriJokyo() {
         return ShoriJokyo;
     }
 
+    /*
+     * setShoriJokyo
+     * @param ShoriJokyo ShoriJokyo
+     */
     @JsonProperty("ShoriJokyo")
     public void setShoriJokyo(ShoriJokyoDiv ShoriJokyo) {
-        this.ShoriJokyo=ShoriJokyo;
+        this.ShoriJokyo = ShoriJokyo;
     }
 
+    /*
+     * getHeijunkaKeisanHoho
+     * @return HeijunkaKeisanHoho
+     */
     @JsonProperty("HeijunkaKeisanHoho")
     public HeijunkaKeisanHohoDiv getHeijunkaKeisanHoho() {
         return HeijunkaKeisanHoho;
     }
 
+    /*
+     * setHeijunkaKeisanHoho
+     * @param HeijunkaKeisanHoho HeijunkaKeisanHoho
+     */
     @JsonProperty("HeijunkaKeisanHoho")
     public void setHeijunkaKeisanHoho(HeijunkaKeisanHohoDiv HeijunkaKeisanHoho) {
-        this.HeijunkaKeisanHoho=HeijunkaKeisanHoho;
+        this.HeijunkaKeisanHoho = HeijunkaKeisanHoho;
     }
 
-    @JsonProperty("HeijunkaHenkoTsuchi")
-    public HeijunkaHenkoTsuchiDiv getHeijunkaHenkoTsuchi() {
-        return HeijunkaHenkoTsuchi;
-    }
-
-    @JsonProperty("HeijunkaHenkoTsuchi")
-    public void setHeijunkaHenkoTsuchi(HeijunkaHenkoTsuchiDiv HeijunkaHenkoTsuchi) {
-        this.HeijunkaHenkoTsuchi=HeijunkaHenkoTsuchi;
-    }
-
+    /*
+     * getTokuchoHeijunkaChohyoHakko
+     * @return TokuchoHeijunkaChohyoHakko
+     */
     @JsonProperty("TokuchoHeijunkaChohyoHakko")
     public TokuchoHeijunkaChohyoHakkoDiv getTokuchoHeijunkaChohyoHakko() {
         return TokuchoHeijunkaChohyoHakko;
     }
 
+    /*
+     * setTokuchoHeijunkaChohyoHakko
+     * @param TokuchoHeijunkaChohyoHakko TokuchoHeijunkaChohyoHakko
+     */
     @JsonProperty("TokuchoHeijunkaChohyoHakko")
     public void setTokuchoHeijunkaChohyoHakko(TokuchoHeijunkaChohyoHakkoDiv TokuchoHeijunkaChohyoHakko) {
-        this.TokuchoHeijunkaChohyoHakko=TokuchoHeijunkaChohyoHakko;
+        this.TokuchoHeijunkaChohyoHakko = TokuchoHeijunkaChohyoHakko;
     }
 
     // </editor-fold>

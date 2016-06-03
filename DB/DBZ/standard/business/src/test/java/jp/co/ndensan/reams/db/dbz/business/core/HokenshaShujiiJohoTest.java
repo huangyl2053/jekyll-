@@ -4,14 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.business.core.HokenshaShujiiJoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4912ShujiiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -19,11 +15,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.serialization._Base64Serializer;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -62,7 +58,7 @@ public class HokenshaShujiiJohoTest extends DbdTestBase {
 
         @Test
         public void 戻り値の主治医氏名は_設定した値と同じ主治医氏名を返す() {
-            assertThat(sut.get主治医氏名(), is(new AtenaMeisho("主治医氏名")));
+            assertThat(sut.get主治医氏名(), is(new RString("主治医氏名")));
         }
 
         @Test
@@ -77,7 +73,7 @@ public class HokenshaShujiiJohoTest extends DbdTestBase {
 
         @Test
         public void 戻り値の住所は_設定した値と同じ住所を返す() {
-            assertThat(sut.get住所(), is(new AtenaJusho("住所")));
+            assertThat(sut.get住所(), is(new RString("住所")));
         }
 
         @Test
@@ -172,7 +168,7 @@ public class HokenshaShujiiJohoTest extends DbdTestBase {
 
         @Test
         public void setShujiiNameで設定した値を_生成されたShujiiJohoJukyuも保持する() {
-            HokenshaShujiiJoho result = HokenshaShujiiJoho.newBuilder().setShujiiName(new AtenaMeisho("主治医氏名")).build();
+            HokenshaShujiiJoho result = HokenshaShujiiJoho.newBuilder().setShujiiName(new RString("主治医氏名")).build();
             assertThat(result.get主治医氏名(), is(DbT4912ShujiiJohoEntityGenerator.DEFAULT_主治医氏名));
         }
 
@@ -190,7 +186,7 @@ public class HokenshaShujiiJohoTest extends DbdTestBase {
 
         @Test
         public void setJushoで設定した値を_生成されたShujiiJohoJukyuも保持する() {
-            HokenshaShujiiJoho result = HokenshaShujiiJoho.newBuilder().setJusho(new AtenaJusho("住所")).build();
+            HokenshaShujiiJoho result = HokenshaShujiiJoho.newBuilder().setJusho(new RString("住所")).build();
             assertThat(result.get住所(), is(DbT4912ShujiiJohoEntityGenerator.DEFAULT_住所));
         }
 

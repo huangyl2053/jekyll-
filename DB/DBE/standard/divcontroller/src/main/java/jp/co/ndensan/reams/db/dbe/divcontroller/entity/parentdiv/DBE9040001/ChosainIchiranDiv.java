@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChosainIchiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,7 +24,7 @@ public class ChosainIchiranDiv extends Panel {
     @JsonProperty("btnInsert")
     private Button btnInsert;
     @JsonProperty("btnOutputCsv")
-    private Button btnOutputCsv;
+    private ButtonDownLoad btnOutputCsv;
     @JsonProperty("dgChosainIchiran")
     private DataGrid<dgChosainIchiran_Row> dgChosainIchiran;
 
@@ -57,7 +57,7 @@ public class ChosainIchiranDiv extends Panel {
      * @return btnOutputCsv
      */
     @JsonProperty("btnOutputCsv")
-    public Button getBtnOutputCsv() {
+    public ButtonDownLoad getBtnOutputCsv() {
         return btnOutputCsv;
     }
 
@@ -66,7 +66,7 @@ public class ChosainIchiranDiv extends Panel {
      * @param btnOutputCsv btnOutputCsv
      */
     @JsonProperty("btnOutputCsv")
-    public void setBtnOutputCsv(Button btnOutputCsv) {
+    public void setBtnOutputCsv(ButtonDownLoad btnOutputCsv) {
         this.btnOutputCsv = btnOutputCsv;
     }
 

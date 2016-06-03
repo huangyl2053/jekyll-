@@ -5,13 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.core.valueobject.gogitaiyukokikankaishidate;
 
-import static jp.co.ndensan.reams.uz.uza.batch.parameter.message._BatchMessageUtil.toCode;
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 
+/**
+ * 合議体有効期間開始日付。
+ */
 public enum GogitaiYukoKikanKaishiDateValidationMessage implements IValidationMessage {
 
     /**

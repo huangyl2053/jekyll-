@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.Shinsakai;
 
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ShinsakaiIin;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ShinsakaiIinList;
 import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiMockBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaiiincode.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;

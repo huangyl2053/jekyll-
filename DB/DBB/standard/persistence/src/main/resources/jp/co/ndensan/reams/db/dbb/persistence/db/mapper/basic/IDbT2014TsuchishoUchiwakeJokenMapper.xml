@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT2014TsuchishoUchiwakeJokenマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2014TsuchishoUchiwakeJokenMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT2014TsuchishoUchiwakeJoken">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2014TsuchishoUchiwakeJokenMapper.allColumns_DbT2014TsuchishoUchiwakeJoken" />
+     FROM
+         rgdb."DbT2014TsuchishoUchiwakeJoken"
+     WHERE
+         rgdb."DbT2014TsuchishoUchiwakeJoken"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT2014TsuchishoUchiwakeJoken">
+         "DbT2014TsuchishoUchiwakeJoken"."uchiwakeJoken" as "dbT2014TsuchishoUchiwakeJoken_uchiwakeJoken",
+         "DbT2014TsuchishoUchiwakeJoken"."hozonDateTime" as "dbT2014TsuchishoUchiwakeJoken_hozonDateTime",
+         "DbT2014TsuchishoUchiwakeJoken"."fukaShoriKubun" as "dbT2014TsuchishoUchiwakeJoken_fukaShoriKubun",
+         "DbT2014TsuchishoUchiwakeJoken"."insertDantaiCd" as "dbT2014TsuchishoUchiwakeJoken_insertDantaiCd",
+         "DbT2014TsuchishoUchiwakeJoken"."insertTimestamp" as "dbT2014TsuchishoUchiwakeJoken_insertTimestamp",
+         "DbT2014TsuchishoUchiwakeJoken"."insertReamsLoginId" as "dbT2014TsuchishoUchiwakeJoken_insertReamsLoginId",
+         "DbT2014TsuchishoUchiwakeJoken"."insertContextId" as "dbT2014TsuchishoUchiwakeJoken_insertContextId",
+         "DbT2014TsuchishoUchiwakeJoken"."isDeleted" as "dbT2014TsuchishoUchiwakeJoken_isDeleted",
+         "DbT2014TsuchishoUchiwakeJoken"."updateCount" as "dbT2014TsuchishoUchiwakeJoken_updateCount",
+         "DbT2014TsuchishoUchiwakeJoken"."lastUpdateTimestamp" as "dbT2014TsuchishoUchiwakeJoken_lastUpdateTimestamp",
+         "DbT2014TsuchishoUchiwakeJoken"."lastUpdateReamsLoginId" as "dbT2014TsuchishoUchiwakeJoken_lastUpdateReamsLoginId",
+         "DbT2014TsuchishoUchiwakeJoken"."selectTsuchisho01" as "dbT2014TsuchishoUchiwakeJoken_selectTsuchisho01",
+         "DbT2014TsuchishoUchiwakeJoken"."selectGenkinKoza01" as "dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza01",
+         "DbT2014TsuchishoUchiwakeJoken"."sortGroupName01" as "dbT2014TsuchishoUchiwakeJoken_sortGroupName01",
+         "DbT2014TsuchishoUchiwakeJoken"."selectTsuchisho02" as "dbT2014TsuchishoUchiwakeJoken_selectTsuchisho02",
+         "DbT2014TsuchishoUchiwakeJoken"."selectGenkinKoza02" as "dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza02",
+         "DbT2014TsuchishoUchiwakeJoken"."sortGroupName02" as "dbT2014TsuchishoUchiwakeJoken_sortGroupName02",
+         "DbT2014TsuchishoUchiwakeJoken"."selectTsuchisho03" as "dbT2014TsuchishoUchiwakeJoken_selectTsuchisho03",
+         "DbT2014TsuchishoUchiwakeJoken"."selectGenkinKoza03" as "dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza03",
+         "DbT2014TsuchishoUchiwakeJoken"."sortGroupName03" as "dbT2014TsuchishoUchiwakeJoken_sortGroupName03",
+         "DbT2014TsuchishoUchiwakeJoken"."selectTsuchisho04" as "dbT2014TsuchishoUchiwakeJoken_selectTsuchisho04",
+         "DbT2014TsuchishoUchiwakeJoken"."selectGenkinKoza04" as "dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza04",
+         "DbT2014TsuchishoUchiwakeJoken"."sortGroupName04" as "dbT2014TsuchishoUchiwakeJoken_sortGroupName04",
+         "DbT2014TsuchishoUchiwakeJoken"."selectTsuchisho05" as "dbT2014TsuchishoUchiwakeJoken_selectTsuchisho05",
+         "DbT2014TsuchishoUchiwakeJoken"."selectGenkinKoza05" as "dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza05",
+         "DbT2014TsuchishoUchiwakeJoken"."sortGroupName05" as "dbT2014TsuchishoUchiwakeJoken_sortGroupName05",
+         "DbT2014TsuchishoUchiwakeJoken"."selectTsuchisho06" as "dbT2014TsuchishoUchiwakeJoken_selectTsuchisho06",
+         "DbT2014TsuchishoUchiwakeJoken"."selectGenkinKoza06" as "dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza06",
+         "DbT2014TsuchishoUchiwakeJoken"."sortGroupName06" as "dbT2014TsuchishoUchiwakeJoken_sortGroupName06",
+         "DbT2014TsuchishoUchiwakeJoken"."selectTsuchisho07" as "dbT2014TsuchishoUchiwakeJoken_selectTsuchisho07",
+         "DbT2014TsuchishoUchiwakeJoken"."selectGenkinKoza07" as "dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza07",
+         "DbT2014TsuchishoUchiwakeJoken"."sortGroupName07" as "dbT2014TsuchishoUchiwakeJoken_sortGroupName07",
+         "DbT2014TsuchishoUchiwakeJoken"."selectTsuchisho08" as "dbT2014TsuchishoUchiwakeJoken_selectTsuchisho08",
+         "DbT2014TsuchishoUchiwakeJoken"."selectGenkinKoza08" as "dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza08",
+         "DbT2014TsuchishoUchiwakeJoken"."sortGroupName08" as "dbT2014TsuchishoUchiwakeJoken_sortGroupName08",
+         "DbT2014TsuchishoUchiwakeJoken"."selectTsuchisho09" as "dbT2014TsuchishoUchiwakeJoken_selectTsuchisho09",
+         "DbT2014TsuchishoUchiwakeJoken"."selectGenkinKoza09" as "dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza09",
+         "DbT2014TsuchishoUchiwakeJoken"."sortGroupName09" as "dbT2014TsuchishoUchiwakeJoken_sortGroupName09",
+         "DbT2014TsuchishoUchiwakeJoken"."selectTsuchisho10" as "dbT2014TsuchishoUchiwakeJoken_selectTsuchisho10",
+         "DbT2014TsuchishoUchiwakeJoken"."selectGenkinKoza10" as "dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza10",
+         "DbT2014TsuchishoUchiwakeJoken"."sortGroupName10" as "dbT2014TsuchishoUchiwakeJoken_sortGroupName10",
+         "DbT2014TsuchishoUchiwakeJoken"."selectTsuchisho11" as "dbT2014TsuchishoUchiwakeJoken_selectTsuchisho11",
+         "DbT2014TsuchishoUchiwakeJoken"."selectGenkinKoza11" as "dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza11",
+         "DbT2014TsuchishoUchiwakeJoken"."sortGroupName11" as "dbT2014TsuchishoUchiwakeJoken_sortGroupName11",
+         "DbT2014TsuchishoUchiwakeJoken"."selectTsuchisho12" as "dbT2014TsuchishoUchiwakeJoken_selectTsuchisho12",
+         "DbT2014TsuchishoUchiwakeJoken"."selectGenkinKoza12" as "dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza12",
+         "DbT2014TsuchishoUchiwakeJoken"."sortGroupName12" as "dbT2014TsuchishoUchiwakeJoken_sortGroupName12",
+         "DbT2014TsuchishoUchiwakeJoken"."selectTsuchisho13" as "dbT2014TsuchishoUchiwakeJoken_selectTsuchisho13",
+         "DbT2014TsuchishoUchiwakeJoken"."selectGenkinKoza13" as "dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza13",
+         "DbT2014TsuchishoUchiwakeJoken"."sortGroupName13" as "dbT2014TsuchishoUchiwakeJoken_sortGroupName13",
+         "DbT2014TsuchishoUchiwakeJoken"."selectTsuchisho14" as "dbT2014TsuchishoUchiwakeJoken_selectTsuchisho14",
+         "DbT2014TsuchishoUchiwakeJoken"."selectGenkinKoza14" as "dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza14",
+         "DbT2014TsuchishoUchiwakeJoken"."sortGroupName14" as "dbT2014TsuchishoUchiwakeJoken_sortGroupName14",
+         "DbT2014TsuchishoUchiwakeJoken"."selectTsuchisho15" as "dbT2014TsuchishoUchiwakeJoken_selectTsuchisho15",
+         "DbT2014TsuchishoUchiwakeJoken"."selectGenkinKoza15" as "dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza15",
+         "DbT2014TsuchishoUchiwakeJoken"."sortGroupName15" as "dbT2014TsuchishoUchiwakeJoken_sortGroupName15"
+    </sql>
+
+
+    <!--テーブルDbT2014TsuchishoUchiwakeJokenの項目をDbT2014TsuchishoUchiwakeJokenEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT2014TsuchishoUchiwakeJokenEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2014TsuchishoUchiwakeJokenEntity" autoMapping="true">
+        <id property="uchiwakeJoken" column="dbT2014TsuchishoUchiwakeJoken_uchiwakeJoken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="hozonDateTime" column="dbT2014TsuchishoUchiwakeJoken_hozonDateTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <id property="fukaShoriKubun" column="dbT2014TsuchishoUchiwakeJoken_fukaShoriKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT2014TsuchishoUchiwakeJoken_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT2014TsuchishoUchiwakeJoken_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT2014TsuchishoUchiwakeJoken_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT2014TsuchishoUchiwakeJoken_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT2014TsuchishoUchiwakeJoken_isDeleted" />
+        <result property="updateCount" column="dbT2014TsuchishoUchiwakeJoken_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT2014TsuchishoUchiwakeJoken_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT2014TsuchishoUchiwakeJoken_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectTsuchisho01" column="dbT2014TsuchishoUchiwakeJoken_selectTsuchisho01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectGenkinKoza01" column="dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sortGroupName01" column="dbT2014TsuchishoUchiwakeJoken_sortGroupName01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectTsuchisho02" column="dbT2014TsuchishoUchiwakeJoken_selectTsuchisho02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectGenkinKoza02" column="dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sortGroupName02" column="dbT2014TsuchishoUchiwakeJoken_sortGroupName02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectTsuchisho03" column="dbT2014TsuchishoUchiwakeJoken_selectTsuchisho03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectGenkinKoza03" column="dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sortGroupName03" column="dbT2014TsuchishoUchiwakeJoken_sortGroupName03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectTsuchisho04" column="dbT2014TsuchishoUchiwakeJoken_selectTsuchisho04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectGenkinKoza04" column="dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sortGroupName04" column="dbT2014TsuchishoUchiwakeJoken_sortGroupName04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectTsuchisho05" column="dbT2014TsuchishoUchiwakeJoken_selectTsuchisho05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectGenkinKoza05" column="dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sortGroupName05" column="dbT2014TsuchishoUchiwakeJoken_sortGroupName05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectTsuchisho06" column="dbT2014TsuchishoUchiwakeJoken_selectTsuchisho06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectGenkinKoza06" column="dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sortGroupName06" column="dbT2014TsuchishoUchiwakeJoken_sortGroupName06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectTsuchisho07" column="dbT2014TsuchishoUchiwakeJoken_selectTsuchisho07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectGenkinKoza07" column="dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sortGroupName07" column="dbT2014TsuchishoUchiwakeJoken_sortGroupName07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectTsuchisho08" column="dbT2014TsuchishoUchiwakeJoken_selectTsuchisho08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectGenkinKoza08" column="dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sortGroupName08" column="dbT2014TsuchishoUchiwakeJoken_sortGroupName08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectTsuchisho09" column="dbT2014TsuchishoUchiwakeJoken_selectTsuchisho09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectGenkinKoza09" column="dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sortGroupName09" column="dbT2014TsuchishoUchiwakeJoken_sortGroupName09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectTsuchisho10" column="dbT2014TsuchishoUchiwakeJoken_selectTsuchisho10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectGenkinKoza10" column="dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sortGroupName10" column="dbT2014TsuchishoUchiwakeJoken_sortGroupName10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectTsuchisho11" column="dbT2014TsuchishoUchiwakeJoken_selectTsuchisho11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectGenkinKoza11" column="dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sortGroupName11" column="dbT2014TsuchishoUchiwakeJoken_sortGroupName11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectTsuchisho12" column="dbT2014TsuchishoUchiwakeJoken_selectTsuchisho12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectGenkinKoza12" column="dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sortGroupName12" column="dbT2014TsuchishoUchiwakeJoken_sortGroupName12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectTsuchisho13" column="dbT2014TsuchishoUchiwakeJoken_selectTsuchisho13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectGenkinKoza13" column="dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sortGroupName13" column="dbT2014TsuchishoUchiwakeJoken_sortGroupName13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectTsuchisho14" column="dbT2014TsuchishoUchiwakeJoken_selectTsuchisho14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectGenkinKoza14" column="dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sortGroupName14" column="dbT2014TsuchishoUchiwakeJoken_sortGroupName14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectTsuchisho15" column="dbT2014TsuchishoUchiwakeJoken_selectTsuchisho15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="selectGenkinKoza15" column="dbT2014TsuchishoUchiwakeJoken_selectGenkinKoza15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sortGroupName15" column="dbT2014TsuchishoUchiwakeJoken_sortGroupName15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>

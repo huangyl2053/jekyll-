@@ -10,16 +10,20 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 要介護認定計画情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class NinteiKeikakuJoho extends ModelBase<NinteiKeikakuJohoIdentifier, DbT5123NinteiKeikakuJohoEntity, NinteiKeikakuJoho> implements Serializable {
+public class NinteiKeikakuJoho
+        extends ModelBase<NinteiKeikakuJohoIdentifier, DbT5123NinteiKeikakuJohoEntity, NinteiKeikakuJoho>
+        implements Serializable {
 
     private final DbT5123NinteiKeikakuJohoEntity entity;
     private final NinteiKeikakuJohoIdentifier id;
@@ -166,8 +170,7 @@ public class NinteiKeikakuJoho extends ModelBase<NinteiKeikakuJohoIdentifier, Db
     }
 
     /**
-     * 要介護認定計画情報のみを変更対象とします。<br/>
-     * {@link DbT5123NinteiKeikakuJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 要介護認定計画情報のみを変更対象とします。<br/> {@link DbT5123NinteiKeikakuJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteiKeikakuJoho}
      */
@@ -181,8 +184,7 @@ public class NinteiKeikakuJoho extends ModelBase<NinteiKeikakuJohoIdentifier, Db
     }
 
     /**
-     * 保持する要介護認定計画情報を削除対象とします。<br/>
-     * {@link DbT5123NinteiKeikakuJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する要介護認定計画情報を削除対象とします。<br/> {@link DbT5123NinteiKeikakuJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteiKeikakuJoho}
      */

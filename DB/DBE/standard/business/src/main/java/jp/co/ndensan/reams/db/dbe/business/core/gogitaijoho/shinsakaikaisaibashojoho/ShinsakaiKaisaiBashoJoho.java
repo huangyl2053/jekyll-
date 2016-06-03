@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibash
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -20,7 +20,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護認定審査会開催場所情報を管理するクラスです。
  */
-public class ShinsakaiKaisaiBashoJoho extends ModelBase<ShinsakaiKaisaiBashoJohoIdentifier, DbT5592ShinsakaiKaisaiBashoJohoEntity, ShinsakaiKaisaiBashoJoho> implements Serializable {
+public class ShinsakaiKaisaiBashoJoho 
+                extends ModelBase<ShinsakaiKaisaiBashoJohoIdentifier, 
+                                  DbT5592ShinsakaiKaisaiBashoJohoEntity, 
+                                  ShinsakaiKaisaiBashoJoho> 
+                implements Serializable {
 
 //TODO NetBeansの機能を使って必ずequalsとhashCodeを追加してください。
     private final DbT5592ShinsakaiKaisaiBashoJohoEntity entity;
@@ -117,7 +121,7 @@ public class ShinsakaiKaisaiBashoJoho extends ModelBase<ShinsakaiKaisaiBashoJoho
      *
      * @return 介護認定審査会開催場所状況
      */
-    public boolean get介護認定審査会開催場所状況() {
+    public boolean is介護認定審査会開催場所状況() {
         return entity.getShinsakaiKaisaiBashoJokyo();
     }
 

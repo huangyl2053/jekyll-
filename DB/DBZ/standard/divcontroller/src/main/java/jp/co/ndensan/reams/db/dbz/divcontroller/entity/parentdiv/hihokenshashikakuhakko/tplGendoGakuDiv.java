@@ -1,21 +1,18 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.KubunGendoGakuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.ShuruiShikyuGendoKijungakuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.tblGendoGakuDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * tplGendoGaku のクラスファイル 
- * 
+ * tplGendoGaku のクラスファイル
+ *
  * @author 自動生成
  */
 public class tplGendoGakuDiv extends TabPanel {
@@ -25,6 +22,7 @@ public class tplGendoGakuDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("tblGendoGaku")
     private tblGendoGakuDiv tblGendoGaku;
 
@@ -41,7 +39,7 @@ public class tplGendoGakuDiv extends TabPanel {
 
     @JsonProperty("tblGendoGaku")
     public void setTblGendoGaku(tblGendoGakuDiv tblGendoGaku) {
-        this.tblGendoGaku=tblGendoGaku;
+        this.tblGendoGaku = tblGendoGaku;
     }
 
     /*
@@ -58,7 +56,7 @@ public class tplGendoGakuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setTxtKubunShikyuGendoKijunGaku(TextBoxNum txtKubunShikyuGendoKijunGaku) {
+    public void setTxtKubunShikyuGendoKijunGaku(TextBoxNum txtKubunShikyuGendoKijunGaku) {
         this.getTblGendoGaku().getKubunGendoGaku().setTxtKubunShikyuGendoKijunGaku(txtKubunShikyuGendoKijunGaku);
     }
 
@@ -68,7 +66,7 @@ public class tplGendoGakuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setTxtYukoFromYMD(TextBoxDate txtYukoFromYMD) {
+    public void setTxtYukoFromYMD(TextBoxDate txtYukoFromYMD) {
         this.getTblGendoGaku().getKubunGendoGaku().setTxtYukoFromYMD(txtYukoFromYMD);
     }
 
@@ -78,7 +76,7 @@ public class tplGendoGakuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setLblKara(Label lblKara) {
+    public void setLblKara(Label lblKara) {
         this.getTblGendoGaku().getKubunGendoGaku().setLblKara(lblKara);
     }
 
@@ -88,7 +86,7 @@ public class tplGendoGakuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setTxtYukoToYMD(TextBoxDate txtYukoToYMD) {
+    public void setTxtYukoToYMD(TextBoxDate txtYukoToYMD) {
         this.getTblGendoGaku().getKubunGendoGaku().setTxtYukoToYMD(txtYukoToYMD);
     }
 

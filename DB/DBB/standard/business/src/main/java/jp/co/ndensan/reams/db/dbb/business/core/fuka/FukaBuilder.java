@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core.fuka;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -588,7 +588,6 @@ public class FukaBuilder {
 //        entity.setFuSaishutsuKampuGaku(普徴歳出還付額);
 //        return this;
 //    }
-
     /**
      * 介護期別のキー情報について判定します。<br>
      * 介護賦課に関連できる介護期別である場合、下記の処理に遷移します。<br>
@@ -609,9 +608,9 @@ public class FukaBuilder {
 
     private boolean hasSameIdentifier(KibetsuIdentifier 介護期別識別子) {
         return (id.get調定年度().equals(介護期別識別子.get調定年度())
-                && id.get賦課年度()== 介護期別識別子.get賦課年度()
-                && id.get通知書番号()== 介護期別識別子.get通知書番号()
-                && id.get履歴番号()== 介護期別識別子.get履歴番号());
+                && id.get賦課年度() == 介護期別識別子.get賦課年度()
+                && id.get通知書番号() == 介護期別識別子.get通知書番号()
+                && id.get履歴番号() == 介護期別識別子.get履歴番号());
     }
 
     /**

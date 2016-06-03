@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link KyotakuKeikakuTodokede}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class KyotakuKeikakuTodokedeBuilder {
 

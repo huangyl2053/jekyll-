@@ -50,7 +50,7 @@ public enum KoroshoInterfaceShikibetsuCode {
     V09B("09B", "20120401", "");
 
     private final RString code;
-    private final Range<FlexibleDate> 有効期間;
+    private final transient Range<FlexibleDate> 有効期間;
 
     private KoroshoInterfaceShikibetsuCode(String code, String 有効開始日, String 有効終了日) {
         this.code = new RString(code);

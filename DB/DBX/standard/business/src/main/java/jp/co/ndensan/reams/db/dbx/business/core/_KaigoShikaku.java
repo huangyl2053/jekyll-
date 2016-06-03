@@ -85,75 +85,158 @@ public class _KaigoShikaku implements IKaigoShikaku, IKobetsuJikoKaigoShikaku {
     private <T> boolean isNull(T obj) {
         return (obj == null);
     }
-
+    /**
+     * 識別コードを返します。
+     *
+     * @return 識別コード
+     */
     public ShikibetsuCode get識別コード() {
         return 識別コード;
     }
 
+    /**
+     * 保険種別を返します。
+     *
+     * @return 保険種別
+     */
     public HokenShubetsu get保険種別() {
         return 保険種別;
     }
 
+    /**
+     * 資格取得届出年月日を返します。
+     *
+     * @return 資格取得届出年月日
+     */
     public RDate get資格取得届出年月日() {
         return 資格取得届出年月日;
     }
 
+    /**
+     * 資格取得年月日を返します。
+     *
+     * @return 資格取得年月日
+     */
     @Override
     public RDate get資格取得年月日() {
         return 資格取得年月日;
     }
 
+    /**
+     * 資格取得事由を返します。
+     *
+     * @return 資格取得事由
+     */
     @Override
     public ShikakuShutokuJiyu get資格取得事由() {
         return 資格取得事由;
     }
 
+    /**
+     * 資格喪失届出年月日を返します。
+     *
+     * @return 資格喪失届出年月日
+     */
     public RDate get資格喪失届出年月日() {
         return 資格喪失届出年月日;
     }
 
+    /**
+     * 資格喪失年月日を返します。
+     *
+     * @return 資格喪失年月日
+     */
     @Override
     public RDate get資格喪失年月日() {
         return 資格喪失年月日;
     }
 
+    /**
+     * 資格喪失事由を返します。
+     *
+     * @return 資格喪失事由
+     */
     @Override
     public ShikakuSoshitsuJiyu get資格喪失事由() {
         return 資格喪失事由;
     }
 
+    /**
+     * 被保険者番号を返します。
+     *
+     * @return 被保険者番号
+     */
     @Override
     public RString get被保険者番号() {
         return 被保険者番号;
     }
 
+    /**
+     * 介護保険広域構成市町村コードを返します。
+     *
+     * @return 介護保険広域構成市町村コード
+     */
     @Override
     public RString get介護保険広域構成市町村コード() {
         return 介護保険広域構成市町村コード;
     }
 
+    /**
+     * 一号該当日を返します。
+     *
+     * @return 一号該当日
+     */
     @Override
     public RDate get一号該当日() {
         return 一号該当日;
     }
 
+    /**
+     * 資格ありがあるかを返します。
+     *
+     * @param baseDate RDate
+     * @return 資格あるか
+     */
     public boolean is資格あり(RDate baseDate) {
         return baseDate.isBeforeOrEquals(資格喪失年月日) && 資格取得年月日.isBeforeOrEquals(baseDate);
     }
 
+    /**
+     * isWapperForを返します。
+     *
+     * @param iface Class<?>
+     * @return isWapperFor
+     */
     public boolean isWapperFor(Class<?> iface) {
         return iface.isInstance(this);
     }
 
+    /**
+     * unwrapを返します。
+     *
+     * @param <T> T
+     * @param iface Class<?>
+     * @return unwrap
+     */
     public <T> T unwrap(Class<T> iface) {
         return iface.cast(this);
     }
 
+    /**
+     * 資格被保険者区分を返します。
+     *
+     * @return 資格被保険者区分
+     */
     @Override
     public ShikakuHihokenshaKubun get資格被保険者区分() {
         return 資格被保険者区分;
     }
 
+    /**
+     * 住所地特例者区分を返します。
+     *
+     * @return 住所地特例者区分
+     */
     @Override
     public JushochiTokureishaKubun get住所地特例者区分() {
         return 住所地特例者区分;

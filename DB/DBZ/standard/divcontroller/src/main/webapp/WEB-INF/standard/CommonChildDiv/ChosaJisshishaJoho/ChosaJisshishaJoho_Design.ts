@@ -8,6 +8,10 @@ module DBZ {
 
         export class Events {
 
+            public static onChange_ddlChosaJisshiBasho(): string {
+                return "onChange_ddlChosaJisshiBasho";
+            }
+
         }
 
         export class Controls {

@@ -33,6 +33,8 @@ public class ShikyuGendogakuKyotakuServiceListPanel {
      * 支給限度額登録（居宅サービス費）　支給限度額の入力を確定するボタン押下後、支給限度額一覧の情報を表示する。
      *
      * @author n8223
+     * @param panel ShikyuGendogakuKyotakuServiceListPanelDiv
+     * @return ResponseData
      */
     public ResponseData<ShikyuGendogakuKyotakuServiceListPanelDiv> onClick_btnSettle(ShikyuGendogakuKyotakuServiceListPanelDiv panel) {
         ResponseData<ShikyuGendogakuKyotakuServiceListPanelDiv> response = new ResponseData<>();
@@ -63,9 +65,9 @@ public class ShikyuGendogakuKyotakuServiceListPanel {
 
         }
 
-//       
+//
 //        grid.setDataSource(arraydata);
-//        
+//
 //        grid.getDataSource().addAll(arraydata);
         //grid.setDataSource(arraydata);
         response.data = panel;
@@ -73,6 +75,8 @@ public class ShikyuGendogakuKyotakuServiceListPanel {
     }
 
     private List<dgShikyuGendogakuKyotakuService_Row> setShikyuGendogakuKyotakuServiceList(ShikyuGendogakuKyotakuServiceListPanelDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getBtnAddKubunShikyuGendogaku();
 
         List<dgShikyuGendogakuKyotakuService_Row> arrayData = new ArrayList<>();
         dgShikyuGendogakuKyotakuService_Row item;
@@ -124,8 +128,8 @@ public class ShikyuGendogakuKyotakuServiceListPanel {
             // String 終了年月,
             String 異動区分
     ) {
-        dgShikyuGendogakuKyotakuService_Row rowShikyuGendogakuKyotakuListData;
-        rowShikyuGendogakuKyotakuListData = new dgShikyuGendogakuKyotakuService_Row(
+        dgShikyuGendogakuKyotakuService_Row rowShikyuKyotakuListData;
+        rowShikyuKyotakuListData = new dgShikyuGendogakuKyotakuService_Row(
                 new Button(),
                 new Button(),
                 RString.EMPTY,
@@ -134,30 +138,32 @@ public class ShikyuGendogakuKyotakuServiceListPanel {
                 RString.EMPTY
         );
 
-        rowShikyuGendogakuKyotakuListData.getTxtYukoKaishiDate().setDisabled(true);
-        rowShikyuGendogakuKyotakuListData.getTxtYukoShuryoDate().setDisabled(true);
-        rowShikyuGendogakuKyotakuListData.setTxtKubunOrShurui(new RString(限度額の分類));
-        rowShikyuGendogakuKyotakuListData.getTxtYukoKaishiDate().setValue(new RDate(開始年月));
+        rowShikyuKyotakuListData.getTxtYukoKaishiDate().setDisabled(true);
+        rowShikyuKyotakuListData.getTxtYukoShuryoDate().setDisabled(true);
+        rowShikyuKyotakuListData.setTxtKubunOrShurui(new RString(限度額の分類));
+        rowShikyuKyotakuListData.getTxtYukoKaishiDate().setValue(new RDate(開始年月));
         //rowShikyuGendogakuKyotakuListData.getTxtYukoShuryoDate().setValue(new RDate(終了年月));
-        rowShikyuGendogakuKyotakuListData.setTxtIdoKubun(new RString(異動区分));
+        rowShikyuKyotakuListData.setTxtIdoKubun(new RString(異動区分));
 
         switch (状況) {
             case "追加":
-                rowShikyuGendogakuKyotakuListData.setRowState(RowState.Added);
+                rowShikyuKyotakuListData.setRowState(RowState.Added);
                 break;
             case "修正":
-                rowShikyuGendogakuKyotakuListData.setRowState(RowState.Added);
+                rowShikyuKyotakuListData.setRowState(RowState.Added);
                 //wShikyuGendogakuKyotakuListData.setRowState(RowState.Modified);
                 break;
             case "削除":
-                rowShikyuGendogakuKyotakuListData.setRowState(RowState.Deleted);
+                rowShikyuKyotakuListData.setRowState(RowState.Deleted);
                 break;
             case "変更無し":
-                rowShikyuGendogakuKyotakuListData.setRowState(RowState.Unchanged);
+                rowShikyuKyotakuListData.setRowState(RowState.Unchanged);
+                break;
+            default:
                 break;
         }
 
-        return rowShikyuGendogakuKyotakuListData;
+        return rowShikyuKyotakuListData;
     }
 
 }

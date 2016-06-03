@@ -5,19 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5508ShinsakaiJizenKekkaJohoEntity;
-
 /**
  * {@link jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5508ShinsakaiJizenKekkaJohoEntity}のマッパーIFです。
  *
+ * @author n1070 久保裕是
  */
 public interface IDbT5508ShinsakaiJizenKekkaJohoMapper {
 
-    /**
-     * {@link DbT5508ShinsakaiJizenKekkaJohoEntity}を取得します。
-     *
-     * @return {@link DbT5508ShinsakaiJizenKekkaJohoEntity}
-     * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
-     */
-    DbT5508ShinsakaiJizenKekkaJohoEntity getEntity();
 }

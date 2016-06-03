@@ -17,14 +17,19 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 他市町村住所地特例のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 linghuhang
  */
 public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003TashichosonJushochiTokureiEntity> {
 
@@ -88,4 +93,38 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 最大枝番を取得です。
+     *
+     * @return 最大枝番
+     */
+    @Transaction
+    public DbT1003TashichosonJushochiTokureiEntity selectEdaNoMax() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(max(edaNo)).
+                table(DbT1003TashichosonJushochiTokurei.class).toObject(DbT1003TashichosonJushochiTokureiEntity.class);
+    }
+
+    /**
+     * 他市町村住所地特例で異動日のレコード中で最大の枝番を取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return DbT1003TashichosonJushochiTokureiEntity
+     */
+    @Transaction
+    public DbT1003TashichosonJushochiTokureiEntity selectMaxByKey(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1003TashichosonJushochiTokurei.class).
+                where(
+                        eq(shikibetsuCode, 識別コード)).
+                order(by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).
+                limit(1).
+                toObject(DbT1003TashichosonJushochiTokureiEntity.class);
+    }
+
 }

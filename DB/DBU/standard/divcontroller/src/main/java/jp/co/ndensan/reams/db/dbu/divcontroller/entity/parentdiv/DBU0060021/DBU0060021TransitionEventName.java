@@ -9,13 +9,12 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
  * 不正な動作の原因になります。</br>
  * DBU0060021のイベント名定義クラスです</br>
  *
- * @author 自動生成
+ * @reamsid_L DBU-1060-020 wangkun
  */
 public enum DBU0060021TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    検索に戻る("検索に戻る"),
-    処理完了("処理完了");
+    検索に戻る("検索に戻る");
 
     private final RString name;
 

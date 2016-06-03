@@ -121,30 +121,6 @@ public class RojinHokenJukyushaJohoManagerTest {
         }
 
         @Test
-        public void updateに成功するとtrueが返る() {
-            when(dac.save(any(DbT7005RojinHokenJukyushaJohoEntity.class))).thenReturn(1);
-
-            DbT7005RojinHokenJukyushaJohoEntity entity = DbT7005RojinHokenJukyushaJohoEntityGenerator.createDbT7005RojinHokenJukyushaJohoEntity();
-            entity.initializeMd5();
-            RojinHokenJukyushaJoho 老人保健受給者情報 = new RojinHokenJukyushaJoho(entity);
-            老人保健受給者情報 = 老人保健受給者情報.createBuilderForEdit().set識別コード(new ShikibetsuCode("識別コードを変更")).build();
-
-            assertThat(sut.save老人保健受給者情報(老人保健受給者情報), is(true));
-        }
-
-        @Test
-        public void updateに失敗するとfalseが返る() {
-            when(dac.save(any(DbT7005RojinHokenJukyushaJohoEntity.class))).thenReturn(0);
-
-            DbT7005RojinHokenJukyushaJohoEntity entity = DbT7005RojinHokenJukyushaJohoEntityGenerator.createDbT7005RojinHokenJukyushaJohoEntity();
-            entity.initializeMd5();
-            RojinHokenJukyushaJoho 老人保健受給者情報 = new RojinHokenJukyushaJoho(entity);
-            老人保健受給者情報 = 老人保健受給者情報.createBuilderForEdit().set識別コード(new ShikibetsuCode("識別コードを変更")).build();
-
-            assertThat(sut.save老人保健受給者情報(老人保健受給者情報), is(false));
-        }
-
-        @Test
         public void deleteに成功するとtrueが返る() {
             when(dac.save(any(DbT7005RojinHokenJukyushaJohoEntity.class))).thenReturn(1);
 

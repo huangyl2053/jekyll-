@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -16,19 +15,20 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikib
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 給付実績特定入所者介護サービス費用を管理するクラスです。
  */
-public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyo 
-extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier, 
-        DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity, 
+public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyo
+        extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier,
+        DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity,
         KyufujissekiTokuteiNyushosyaKaigoServiceHiyo> implements Serializable {
 
     private final DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity;
@@ -93,8 +93,7 @@ extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier,
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}より{@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyo}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}
+     * @param entity DBより取得した{@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}
      */
     public KyufujissekiTokuteiNyushosyaKaigoServiceHiyo(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績特定入所者介護サービス費用"));
@@ -113,8 +112,7 @@ extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier,
     /**
      * シリアライズ、ビルダー用コンストラクタです。
      *
-     * @param entity
-     * {@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}
+     * @param entity {@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}
      * @param id {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier}
      */
     KyufujissekiTokuteiNyushosyaKaigoServiceHiyo(
@@ -249,7 +247,8 @@ extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier,
      * @return 日数
      */
     public int get日数() {
-        return entity.getNissu();
+        Integer 日数 = entity.getNissu();
+        return 日数 == null ? 0 : 日数.intValue();
     }
 
     /**
@@ -258,7 +257,8 @@ extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier,
      * @return 公費１日数
      */
     public int get公費１日数() {
-        return entity.getKohi1Nissu();
+        Integer 公費１日数 = entity.getKohi1Nissu();
+        return 公費１日数 == null ? 0 : 公費１日数.intValue();
     }
 
     /**
@@ -267,7 +267,8 @@ extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier,
      * @return 公費２日数
      */
     public int get公費２日数() {
-        return entity.getKohi2Nissu();
+        Integer 公費２日数 = entity.getKohi2Nissu();
+        return 公費２日数 == null ? 0 : 公費２日数.intValue();
     }
 
     /**
@@ -276,7 +277,8 @@ extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier,
      * @return 公費３日数
      */
     public int get公費３日数() {
-        return entity.getKohi3Nissu();
+        Integer 公費３日数 = entity.getKohi3Nissu();
+        return 公費３日数 == null ? 0 : 公費３日数.intValue();
     }
 
     /**
@@ -456,7 +458,8 @@ extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier,
      * @return 後_日数
      */
     public int get後_日数() {
-        return entity.getAtoNissu();
+        Integer 後_日数 = entity.getAtoNissu();
+        return 後_日数 == null ? 0 : 後_日数.intValue();
     }
 
     /**
@@ -465,7 +468,8 @@ extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier,
      * @return 後_公費１日数
      */
     public int get後_公費１日数() {
-        return entity.getAtoKohi1Nissu();
+        Integer 後_公費１日数 = entity.getAtoKohi1Nissu();
+        return 後_公費１日数 == null ? 0 : 後_公費１日数.intValue();
     }
 
     /**
@@ -474,7 +478,8 @@ extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier,
      * @return 後_公費２日数
      */
     public int get後_公費２日数() {
-        return entity.getAtoKohi2Nissu();
+        Integer 後_公費２日数 = entity.getAtoKohi2Nissu();
+        return 後_公費２日数 == null ? 0 : 後_公費２日数.intValue();
     }
 
     /**
@@ -483,7 +488,8 @@ extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier,
      * @return 後_公費３日数
      */
     public int get後_公費３日数() {
-        return entity.getAtoKohi3Nissu();
+        Integer 後_公費３日数 = entity.getAtoKohi3Nissu();
+        return 後_公費３日数 == null ? 0 : 後_公費３日数.intValue();
     }
 
     /**
@@ -654,7 +660,8 @@ extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier,
      * @return 再審査回数
      */
     public int get再審査回数() {
-        return entity.getSaishinsaKaisu();
+        Integer 再審査回数 = entity.getSaishinsaKaisu();
+        return 再審査回数 == null ? 0 : 再審査回数.intValue();
     }
 
     /**
@@ -663,7 +670,8 @@ extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier,
      * @return 過誤回数
      */
     public int get過誤回数() {
-        return entity.getKagoKaisu();
+        Integer 過誤回数 = entity.getKagoKaisu();
+        return 過誤回数 == null ? 0 : 過誤回数.intValue();
     }
 
     /**
@@ -696,8 +704,7 @@ extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier,
     /**
      * {@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}のクローンを返します。
      *
-     * @return
-     * {@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}のクローン
+     * @return {@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}のクローン
      */
     @Override
     public DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity toEntity() {
@@ -707,8 +714,7 @@ extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier,
     /**
      * 給付実績特定入所者介護サービス費用の識別子{@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier}を返します。
      *
-     * @return
-     * 給付実績特定入所者介護サービス費用の識別子{@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier}
+     * @return 給付実績特定入所者介護サービス費用の識別子{@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier}
      */
     @Override
     public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier identifier() {
@@ -755,7 +761,7 @@ extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier,
         private final DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity;
         private final KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier id;
 
-        private _SerializationProxy(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity, 
+        private _SerializationProxy(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity,
                 KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier id) {
             this.entity = entity;
             this.id = id;

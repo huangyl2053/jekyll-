@@ -25,7 +25,7 @@ public class NinteiYukoKikanTsukisu implements IValueObject<Integer>, Comparable
      * コンストラクタです。<br/>
      *
      * @param value 値
-     * @throws NullPointerException
+     * @throws NullPointerException Error
      */
     public NinteiYukoKikanTsukisu(Integer value) throws NullPointerException {
         requireNonNull(value, UrSystemErrorMessages.値がnull.getReplacedMessage("value"));
@@ -33,8 +33,7 @@ public class NinteiYukoKikanTsukisu implements IValueObject<Integer>, Comparable
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link NinteiYukoKikanTsukisu}が持つvalueについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link NinteiYukoKikanTsukisu}が持つvalueについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */
@@ -50,8 +49,7 @@ public class NinteiYukoKikanTsukisu implements IValueObject<Integer>, Comparable
      *
      * @param value {@link NinteiYukoKikanTsukisu}となる数字{@link Integer}
      * @return {@link NinteiYukoKikanTsukisu}
-     * @throws IllegalArgumentException
-     * {@link NinteiYukoKikanTsukisuSpec}の仕様を満たさない場合
+     * @throws IllegalArgumentException {@link NinteiYukoKikanTsukisuSpec}の仕様を満たさない場合
      */
     public static NinteiYukoKikanTsukisu createCheckInstance(Integer value) throws IllegalArgumentException {
         List<IValidationMessage> validResult

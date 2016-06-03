@@ -20,8 +20,7 @@ public class NinchishoKoreishaJiritsudoGaizenseiHyokaCodeValidator {
     /**
      * コンストラクタです。
      *
-     * @param ninchishoKoreishaJiritsudoGaizenseiHyokaCode
-     * 認知症高齢者日常生活自立度が、どの程度確からしいか
+     * @param ninchishoGaizenseiHyokaCode 認知症高齢者日常生活自立度が、どの程度確からしいか
      */
     public NinchishoKoreishaJiritsudoGaizenseiHyokaCodeValidator(NinchishoKoreishaJiritsudoGaizenseiHyokaCode ninchishoGaizenseiHyokaCode) {
         requireNonNull(ninchishoGaizenseiHyokaCode,

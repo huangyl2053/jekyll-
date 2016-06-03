@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -9,17 +9,13 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
  * 不正な動作の原因になります。</br>
  * DBA2020011の状態名定義クラスです
  *
- * @author 自動生成
  */
 public enum DBA2020011StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    照会("照会"),
-    追加("追加"),
-    修正("修正"),
-    削除("削除"),
-    完了("完了");
+    初期状態("初期状態"),
+    完了状態("完了状態");
 
     private final RString name;
 

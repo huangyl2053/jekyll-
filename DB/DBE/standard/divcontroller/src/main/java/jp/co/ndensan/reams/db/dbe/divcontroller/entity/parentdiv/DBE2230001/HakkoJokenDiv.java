@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2230001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,17 +16,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HakkoJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlHokensha")
-    private DropDownList ddlHokensha;
     @JsonProperty("radChohyoSentaku")
     private RadioButton radChohyoSentaku;
+    @JsonProperty("txtKijunDay")
+    private TextBoxFlexibleDate txtKijunDay;
+    @JsonProperty("ccdHokensha")
+    private HokenshaListDiv ccdHokensha;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +36,6 @@ public class HakkoJokenDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getddlHokensha
-     * @return ddlHokensha
-     */
-    @JsonProperty("ddlHokensha")
-    public DropDownList getDdlHokensha() {
-        return ddlHokensha;
-    }
-
-    /*
-     * setddlHokensha
-     * @param ddlHokensha ddlHokensha
-     */
-    @JsonProperty("ddlHokensha")
-    public void setDdlHokensha(DropDownList ddlHokensha) {
-        this.ddlHokensha = ddlHokensha;
-    }
-
     /*
      * getradChohyoSentaku
      * @return radChohyoSentaku
@@ -66,6 +52,33 @@ public class HakkoJokenDiv extends Panel {
     @JsonProperty("radChohyoSentaku")
     public void setRadChohyoSentaku(RadioButton radChohyoSentaku) {
         this.radChohyoSentaku = radChohyoSentaku;
+    }
+
+    /*
+     * gettxtKijunDay
+     * @return txtKijunDay
+     */
+    @JsonProperty("txtKijunDay")
+    public TextBoxFlexibleDate getTxtKijunDay() {
+        return txtKijunDay;
+    }
+
+    /*
+     * settxtKijunDay
+     * @param txtKijunDay txtKijunDay
+     */
+    @JsonProperty("txtKijunDay")
+    public void setTxtKijunDay(TextBoxFlexibleDate txtKijunDay) {
+        this.txtKijunDay = txtKijunDay;
+    }
+
+    /*
+     * getccdHokensha
+     * @return ccdHokensha
+     */
+    @JsonProperty("ccdHokensha")
+    public IHokenshaListDiv getCcdHokensha() {
+        return ccdHokensha;
     }
 
     // </editor-fold>

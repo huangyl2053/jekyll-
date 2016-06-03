@@ -7,15 +7,19 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0210011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * KobetsuJikoRenkeiInfoSakuseiBP のクラスファイル 
- * 
- * @author 自動生成
+ * KobetsuJikoRenkeiInfoSakuseiBP のクラスファイル
+ *
+ * @reamsid_L DBU-0350-010 zhangguopeng
  */
 public class KobetsuJikoRenkeiInfoSakuseiBPDiv extends PanelBatchParameter {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -79,7 +83,7 @@ public class KobetsuJikoRenkeiInfoSakuseiBPDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTblChushutsuKikan(tblChushutsuKikanDiv tblChushutsuKikan) {
+    public void setTblChushutsuKikan(tblChushutsuKikanDiv tblChushutsuKikan) {
         this.getChushutsuKikan().setTblChushutsuKikan(tblChushutsuKikan);
     }
 
@@ -114,7 +118,7 @@ public class KobetsuJikoRenkeiInfoSakuseiBPDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setChkZenken(CheckBoxList chkZenken) {
+    public void setChkZenken(CheckBoxList chkZenken) {
         this.getChushutsuKikan().getTblChushutsuKikan().getZenken().setChkZenken(chkZenken);
     }
 

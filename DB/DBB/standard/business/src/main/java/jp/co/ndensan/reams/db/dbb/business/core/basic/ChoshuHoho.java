@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護徴収方法を管理するクラスです。
+ *
+ * @reamsid_L DBB-9999-023 liangbc
  */
 public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHohoEntity, ChoshuHoho> implements Serializable {
 
@@ -354,7 +356,7 @@ public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHoh
      *
      * @return 依頼情報送付済みフラグ
      */
-    public boolean get依頼情報送付済みフラグ() {
+    public boolean is依頼情報送付済みフラグ() {
         return entity.getIraiSohuzumiFlag();
     }
 
@@ -363,7 +365,7 @@ public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHoh
      *
      * @return 追加依頼情報送付済みフラグ
      */
-    public boolean get追加依頼情報送付済みフラグ() {
+    public boolean is追加依頼情報送付済みフラグ() {
         return entity.getTsuikaIraiSohuzumiFlag();
     }
 
@@ -423,6 +425,17 @@ public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHoh
     }
 
     /**
+     * 保持する介護徴収方法を登録対象とします。<br/> {@link DbT2001ChoshuHohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば登録状態にします。
+     *
+     * @return 登録対象処理実施後の{@link ChoshuHoho}
+     */
+    public ChoshuHoho added() {
+        DbT2001ChoshuHohoEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new ChoshuHoho(addedEntity, id);
+    }
+
+    /**
      * {@link ChoshuHoho}のシリアライズ形式を提供します。
      *
      * @return {@link ChoshuHoho}のシリアライズ形式
@@ -434,7 +447,7 @@ public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHoh
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

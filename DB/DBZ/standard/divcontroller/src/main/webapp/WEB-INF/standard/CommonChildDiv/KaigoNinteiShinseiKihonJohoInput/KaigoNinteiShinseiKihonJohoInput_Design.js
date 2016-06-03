@@ -4,6 +4,21 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onOkClose_btnServiceSakujoTeikeibun = function () {
+                return "onOkClose_btnServiceSakujoTeikeibun";
+            };
+
+            Events.onBeforeOpenDialog_btnServiceSakujoTeikeibun = function () {
+                return "onBeforeOpenDialog_btnServiceSakujoTeikeibun";
+            };
+
+            Events.onOkClose_btnNinteiShinseiRiyuTeikeibun = function () {
+                return "onOkClose_btnNinteiShinseiRiyuTeikeibun";
+            };
+
+            Events.onBeforeOpenDialog_btnNinteiShinseiRiyuTeikeibun = function () {
+                return "onBeforeOpenDialog_btnNinteiShinseiRiyuTeikeibun";
+            };
             return Events;
         })();
         KaigoNinteiShinseiKihonJohoInput.Events = Events;

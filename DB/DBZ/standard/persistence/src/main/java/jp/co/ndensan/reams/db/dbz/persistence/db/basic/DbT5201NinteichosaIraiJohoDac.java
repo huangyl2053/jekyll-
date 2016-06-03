@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.logicalDeletedFlag;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJoho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJoho.ninteichosaIraiRirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJoho.shinseishoKanriNo;
@@ -51,6 +52,28 @@ public class DbT5201NinteichosaIraiJohoDac implements ISaveable<DbT5201Ninteicho
                                 eq(shinseishoKanriNo, 申請書管理番号),
                                 eq(ninteichosaIraiRirekiNo, 認定調査依頼履歴番号))).
                 toObject(DbT5201NinteichosaIraiJohoEntity.class);
+    }
+
+    /**
+     * 申請書管理番号で認定調査依頼情報を取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return DbT5201NinteichosaIraiJohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5201NinteichosaIraiJohoEntity> selectBy申請書管理番号(
+            ShinseishoKanriNo 申請書管理番号) throws NullPointerException {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5201NinteichosaIraiJoho.class).
+                where(and(
+                                eq(shinseishoKanriNo, 申請書管理番号),
+                                eq(logicalDeletedFlag, false))).
+                toList(DbT5201NinteichosaIraiJohoEntity.class);
     }
 
     /**

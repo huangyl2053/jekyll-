@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link ChosainJoho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class ChosainJohoBuilder {
 
@@ -149,12 +151,12 @@ public class ChosainJohoBuilder {
     /**
      * FAX番号を設定します。
      *
-     * @param FAX番号 FAX番号
+     * @param fax番号 FAX番号
      * @return {@link ChosainJohoBuilder}
      */
-    public ChosainJohoBuilder setFAX番号(TelNo FAX番号) {
-        requireNonNull(FAX番号, UrSystemErrorMessages.値がnull.getReplacedMessage("FAX番号"));
-        entity.setFaxNo(FAX番号);
+    public ChosainJohoBuilder setFAX番号(TelNo fax番号) {
+        requireNonNull(fax番号, UrSystemErrorMessages.値がnull.getReplacedMessage("FAX番号"));
+        entity.setFaxNo(fax番号);
         return this;
     }
 

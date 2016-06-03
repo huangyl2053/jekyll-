@@ -1,17 +1,14 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ChosaItakusakiListDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ChosainDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ChosaItakusaki のクラスファイル 
- * 
+ * ChosaItakusaki のクラスファイル
+ *
  * @author 自動生成
  */
 public class ChosaItakusakiDiv extends Panel {
@@ -21,6 +18,7 @@ public class ChosaItakusakiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ChosaItakusakiList")
     private ChosaItakusakiListDiv ChosaItakusakiList;
     @JsonProperty("Chosain")
@@ -39,7 +37,7 @@ public class ChosaItakusakiDiv extends Panel {
 
     @JsonProperty("ChosaItakusakiList")
     public void setChosaItakusakiList(ChosaItakusakiListDiv ChosaItakusakiList) {
-        this.ChosaItakusakiList=ChosaItakusakiList;
+        this.ChosaItakusakiList = ChosaItakusakiList;
     }
 
     @JsonProperty("Chosain")
@@ -49,7 +47,7 @@ public class ChosaItakusakiDiv extends Panel {
 
     @JsonProperty("Chosain")
     public void setChosain(ChosainDiv Chosain) {
-        this.Chosain=Chosain;
+        this.Chosain = Chosain;
     }
 
 }

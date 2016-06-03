@@ -5,8 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.hihokenshanotsukiban;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBA;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
@@ -16,15 +17,17 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
  * 被保険者番号付番の処理サービスクラスです。
+ *
+ * @reamsid_L DBU-0320-010 linghuhang
  */
 public class HihokenshanotsukibanFinder {
 
@@ -37,6 +40,7 @@ public class HihokenshanotsukibanFinder {
     private static final RString 付番方法_自動連番_MCD10付番 = new RString("5");
     private static final RString 付番元情報_住民コード = new RString("1");
     private static final RString 付番元情報_自動連番 = new RString("2");
+    private static final HihokenshaNo 被保険者番号_空白 = new HihokenshaNo("          ");
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
     private final DbT7037ShoKofuKaishuDac dbT7037Dac;
 
@@ -99,7 +103,8 @@ public class HihokenshanotsukibanFinder {
 
     private static HihokenshaNo getHubanHouhou(ShikibetsuCode 識別コード) {
         HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
-        RString 付番方法 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_付番方法, SubGyomuCode.DBA介護資格);
+        RDate 適用基準日 = RDate.getNowDate();
+        RString 付番方法 = DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_付番方法, 適用基準日, SubGyomuCode.DBA介護資格);
         if (付番方法_住民コード付番.equals(付番方法)) {
             被保険者番号 = new HihokenshaNo(new RString(識別コード.toString()).substring(識別コード_LENGTH).trim());
         }
@@ -107,7 +112,7 @@ public class HihokenshanotsukibanFinder {
             被保険者番号 = new HihokenshaNo(Saiban.get(SubGyomuCode.DBA介護資格, SaibanHanyokeyName.被保険者番号自動採番.getコード()).nextString().trim());
         }
         if (付番方法_任意手入力付番.equals(付番方法)) {
-            return 被保険者番号;
+            return 被保険者番号_空白;
         }
         if (付番方法_カスタマイズ付番.equals(付番方法)) {
             被保険者番号 = getHubanHouhouHanteiYonn(識別コード);
@@ -115,18 +120,27 @@ public class HihokenshanotsukibanFinder {
         if (付番方法_自動連番_MCD10付番.equals(付番方法)) {
             被保険者番号 = new HihokenshaNo(Saiban.get(SubGyomuCode.DBA介護資格, SaibanHanyokeyName.被保険者番号自動MCD.getコード()).nextString().trim());
         }
+        return 被保険者番号桁数(被保険者番号);
+    }
+
+    private static HihokenshaNo 被保険者番号桁数(HihokenshaNo 被保険者番号) {
+
+        if (被保険者番号.getColumnValue().length() < 付番方法_LENGTH) {
+            被保険者番号 = new HihokenshaNo(被保険者番号.getColumnValue().padZeroToLeft(付番方法_LENGTH));
+        }
         return 被保険者番号;
     }
 
     private static HihokenshaNo getHubanHouhouHanteiYonn(ShikibetsuCode 識別コード) {
         HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
-        RString 付番元 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報, SubGyomuCode.DBA介護資格);
-        RString 開始位置 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_開始位置, SubGyomuCode.DBA介護資格);
-        RString 有効桁数 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_有効桁数, SubGyomuCode.DBA介護資格);
-        RString 前付与番号桁数 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号_桁数, SubGyomuCode.DBA介護資格);
-        RString 前付与番号 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号, SubGyomuCode.DBA介護資格);
-        RString 後付与番号桁数 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号_桁数, SubGyomuCode.DBA介護資格);
-        RString 後付与番号 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号, SubGyomuCode.DBA介護資格);
+        RDate 適用基準日 = RDate.getNowDate();
+        RString 付番元 = DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報, 適用基準日, SubGyomuCode.DBA介護資格);
+        RString 開始位置 = DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_開始位置, 適用基準日, SubGyomuCode.DBA介護資格);
+        RString 有効桁数 = DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_有効桁数, 適用基準日, SubGyomuCode.DBA介護資格);
+        RString 前付与番号桁数 = DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号_桁数, 適用基準日, SubGyomuCode.DBA介護資格);
+        RString 前付与番号 = DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号, 適用基準日, SubGyomuCode.DBA介護資格);
+        RString 後付与番号桁数 = DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号_桁数, 適用基準日, SubGyomuCode.DBA介護資格);
+        RString 後付与番号 = DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号, 適用基準日, SubGyomuCode.DBA介護資格);
         付番元 = check付番元(付番元, 識別コード);
 
         if (!開始位置.trim().isEmpty()

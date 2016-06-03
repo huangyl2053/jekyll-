@@ -34,8 +34,8 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
     private RString shinsakaiIinCode;
     @PrimaryKey
     private int shinsakaiOrder;
-    private RString ichijiHanteiHenkoRiyu;
     private Code nijiHanteiKekkaCode;
+    private int yukokikan;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -150,24 +150,6 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
     }
 
     /**
-     * 一次判定結果変更理由のgetメソッドです。
-     * 
-     * @return 一次判定結果変更理由
-     */
-    public RString getIchijiHanteiHenkoRiyu() {
-        return ichijiHanteiHenkoRiyu;
-    }
-
-    /**
-     * 一次判定結果変更理由のsetメソッドです。
-     * 
-     * @param ichijiHanteiHenkoRiyu 一次判定結果変更理由
-     */
-    public void setIchijiHanteiHenkoRiyu(@Nonnull RString ichijiHanteiHenkoRiyu) {
-        this.ichijiHanteiHenkoRiyu = ichijiHanteiHenkoRiyu;
-    }
-
-    /**
      * 二次判定結果コードのgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：要介護状態区分コード（認定ｿﾌﾄ2009））
@@ -187,6 +169,29 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
      */
     public void setNijiHanteiKekkaCode(@Nonnull Code nijiHanteiKekkaCode) {
         this.nijiHanteiKekkaCode = nijiHanteiKekkaCode;
+    }
+
+    /**
+     * 有効期間のgetメソッドです。
+     * <br/>
+     * <br/>有効期間月数
+     * 
+     * @return 有効期間
+     */
+    @CheckForNull
+    public int getYukokikan() {
+        return yukokikan;
+    }
+
+    /**
+     * 有効期間のsetメソッドです。
+     * <br/>
+     * <br/>有効期間月数
+     * 
+     * @param yukokikan 有効期間
+     */
+    public void setYukokikan(int yukokikan) {
+        this.yukokikan = yukokikan;
     }
 
     /**
@@ -221,8 +226,8 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
         this.shinsakaiKaisaiNo = entity.shinsakaiKaisaiNo;
         this.shinsakaiIinCode = entity.shinsakaiIinCode;
         this.shinsakaiOrder = entity.shinsakaiOrder;
-        this.ichijiHanteiHenkoRiyu = entity.ichijiHanteiHenkoRiyu;
         this.nijiHanteiKekkaCode = entity.nijiHanteiKekkaCode;
+        this.yukokikan = entity.yukokikan;
     }
 
     /**
@@ -231,10 +236,11 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinsakaiKaisaiNo, shinsakaiIinCode, shinsakaiOrder, ichijiHanteiHenkoRiyu, nijiHanteiKekkaCode);
+        return super.toMd5(shinsakaiKaisaiNo, shinsakaiIinCode, shinsakaiOrder, nijiHanteiKekkaCode, yukokikan);
     }
 
 // </editor-fold>
+
 
 
 }

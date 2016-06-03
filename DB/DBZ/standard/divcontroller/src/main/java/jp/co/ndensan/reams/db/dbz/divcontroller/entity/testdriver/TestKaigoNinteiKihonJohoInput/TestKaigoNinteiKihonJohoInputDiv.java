@@ -4,18 +4,20 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.testdriver.TestKaigoNint
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiShinseiKihonJohoInput.IKaigoNinteiShinseiKihonJohoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.IKaigoNinteiShinseiKihonJohoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * TestKaigoNinteiKihonJohoInput のクラスファイル 
- * 
+ * TestKaigoNinteiKihonJohoInput のクラスファイル
+ *
  * @author 自動生成
  */
 public class TestKaigoNinteiKihonJohoInputDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-44">
     /*
      * [ private の作成 ]
@@ -43,7 +45,7 @@ public class TestKaigoNinteiKihonJohoInputDiv extends Panel {
 
     @JsonProperty("btnClear")
     public void setBtnClear(Button btnClear) {
-        this.btnClear=btnClear;
+        this.btnClear = btnClear;
     }
 
     @JsonProperty("btnLoad")
@@ -53,7 +55,7 @@ public class TestKaigoNinteiKihonJohoInputDiv extends Panel {
 
     @JsonProperty("btnLoad")
     public void setBtnLoad(Button btnLoad) {
-        this.btnLoad=btnLoad;
+        this.btnLoad = btnLoad;
     }
 
     @JsonProperty("ccdKaigoNinteiKihonJokyoInput")

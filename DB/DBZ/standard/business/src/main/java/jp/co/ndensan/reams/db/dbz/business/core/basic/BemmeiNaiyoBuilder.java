@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7002BemmeiNaiyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,7 +40,6 @@ public class BemmeiNaiyoBuilder {
 
 //TODO Key項目のsetterメソッドは削除してください。
 //TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-
     /**
      * 識別コードを設定します。
      *
@@ -97,6 +97,18 @@ public class BemmeiNaiyoBuilder {
     public BemmeiNaiyoBuilder set審査請求に係る処分内容(RString 審査請求に係る処分内容) {
         requireNonNull(審査請求に係る処分内容, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求に係る処分内容"));
         entity.setShinsaseikyuKankeiShobunNaiyo(審査請求に係る処分内容);
+        return this;
+    }
+
+    /**
+     * 審査請求に係る処分内容を設定します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return {@link BemmeiNaiyoBuilder}
+     */
+    public BemmeiNaiyoBuilder set市町村コード(LasdecCode 市町村コード) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求に係る処分内容"));
+        entity.setShichosonCode(市町村コード);
         return this;
     }
 

@@ -36,13 +36,13 @@
      "layoutSubGyomuCode": "DBB",
      "layoutName": "DBB1140011",
      "layoutTitle": "所得照会回答内容登録",
-     "eventName": "検索結果一覧へ",
-     "destroy": false,
+     "eventName": "所得照会状況一覧へ",
+     "destroy": true,
      "condition": "",
-     "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZ0300001",
-     "toLayoutTitle": "賦課対象者検索",
-     "toState": "該当者一覧"
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB1170001",
+     "toLayoutTitle": "所得照会状況一覧",
+     "toState": "初期状態"
     },
     {
      "id": "4",
@@ -51,7 +51,7 @@
      "layoutName": "DBB1140011",
      "layoutTitle": "所得照会回答内容登録",
      "eventName": "再検索",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0300001",
@@ -65,7 +65,7 @@
      "layoutName": "DBB1140011",
      "layoutTitle": "所得照会回答内容登録",
      "eventName": "完了",
-     "destroy": false,
+     "destroy": true,
      "condition": ""
     }
    ]

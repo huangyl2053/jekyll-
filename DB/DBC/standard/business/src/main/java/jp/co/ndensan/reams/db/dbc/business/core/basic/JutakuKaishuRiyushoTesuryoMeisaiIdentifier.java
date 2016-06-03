@@ -6,15 +6,16 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import lombok.Value;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import lombok.Value;
 
 /**
  * 住宅改修理由書作成手数料請求明細の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class JutakuKaishuRiyushoTesuryoMeisaiIdentifier implements Serializable {
 
     private final HokenshaNo 証記載保険者番号;

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import lombok.Value;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -15,11 +14,13 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShi
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Value;
 
 /**
  * 給付実績ケアマネジメント費の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KyufuJissekiCareManagementHiIdentifier implements Serializable {
 
     private final KokanShikibetsuNo 交換情報識別番号;
@@ -44,7 +45,7 @@ public class KyufuJissekiCareManagementHiIdentifier implements Serializable {
      * @param 被保険者番号 被保険者番号
      * @param サービス提供年月 サービス提供年月
      * @param 事業所番号 事業所番号
-     * @param 指定／基準該当事業所区分コード 指定／基準該当事業所区分コード
+     * @param 指定_基準該当事業所区分コード 指定／基準該当事業所区分コード
      * @param 居宅サービス計画作成依頼届出年月日 居宅サービス計画作成依頼届出年月日
      * @param 通し番号 通し番号
      * @param サービス計画費明細行番号 サービス計画費明細行番号

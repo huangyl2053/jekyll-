@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 適用除外施設情報を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBA-0412-010 linghuhang
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

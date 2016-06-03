@@ -8,20 +8,36 @@ module DBZ {
 
         export class Events {
 
-            public static onBlurTxtchosaItakusaki(): string {
-                return "onBlurTxtchosaItakusaki";
+            public static onBlur_TxtChosaItakusakiCode(): string {
+                return "onBlur_TxtChosaItakusakiCode";
             }
 
-            public static onClickBtnZenkaiFukusha(): string {
-                return "onClickBtnZenkaiFukusha";
+            public static onOKClose_BtnChosaItakusakiGuide(): string {
+                return "onOKClose_BtnChosaItakusakiGuide";
             }
 
-            public static onBlurTxtChosaincode(): string {
-                return "onBlurTxtChosaincode";
+            public static onClick_BtnChosaItakusakiGuide(): string {
+                return "onClick_BtnChosaItakusakiGuide";
             }
 
-            public static onClickBtnClear(): string {
-                return "onClickBtnClear";
+            public static onClick_BtnZenkaiFukusha(): string {
+                return "onClick_BtnZenkaiFukusha";
+            }
+
+            public static onBlur_TxtChosainCode(): string {
+                return "onBlur_TxtChosainCode";
+            }
+
+            public static onOKClose_BtnChosainGuide(): string {
+                return "onOKClose_BtnChosainGuide";
+            }
+
+            public static onClick_BtnChosainGuide(): string {
+                return "onClick_BtnChosainGuide";
+            }
+
+            public static onClick_BtnClear(): string {
+                return "onClick_BtnClear";
             }
 
         }

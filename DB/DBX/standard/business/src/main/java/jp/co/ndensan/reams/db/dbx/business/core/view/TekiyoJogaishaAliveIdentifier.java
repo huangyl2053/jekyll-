@@ -15,6 +15,7 @@ import lombok.Value;
  * 適用除外者台帳管理Aliveの識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class TekiyoJogaishaAliveIdentifier implements Serializable {
 
     private final ShikibetsuCode 識別コード;

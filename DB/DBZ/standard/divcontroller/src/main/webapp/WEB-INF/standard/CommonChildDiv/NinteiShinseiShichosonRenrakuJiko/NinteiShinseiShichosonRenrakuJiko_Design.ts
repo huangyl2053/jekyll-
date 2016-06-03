@@ -8,12 +8,12 @@ module DBZ {
 
         export class Events {
 
-            public static onClick_btnToroku(): string {
-                return "onClick_btnToroku";
+            public static onClick_btnKakutei(): string {
+                return "onClick_btnKakutei";
             }
 
-            public static onClick_btnModoru(): string {
-                return "onClick_btnModoru";
+            public static onClick_btnTorikeshi(): string {
+                return "onClick_btnTorikeshi";
             }
 
         }

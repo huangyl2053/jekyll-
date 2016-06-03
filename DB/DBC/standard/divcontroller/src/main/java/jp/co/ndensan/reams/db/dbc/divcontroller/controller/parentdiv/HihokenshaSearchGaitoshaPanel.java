@@ -21,12 +21,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  */
 public class HihokenshaSearchGaitoshaPanel {
 
-    private static final RString ENTITY = new RString("");
-
+//    private static final RString ENTITY = new RString("");
     /**
      * 福祉用具購入費支給申請 該当者一覧の情報を表示する。
      *
      * @param panel HihokenshaSearchGaitoshaPanelDiv
+     * @param panel1 HihokenshaSearchPanelDiv
      * @return PanelDivのResponseData
      */
     public ResponseData<HihokenshaSearchGaitoshaPanelDiv> onClick_HihokenshaSearch(HihokenshaSearchGaitoshaPanelDiv panel, HihokenshaSearchPanelDiv panel1) {
@@ -63,20 +63,21 @@ public class HihokenshaSearchGaitoshaPanel {
                 "74",
                 "女",
                 "長野県長野市1-2-3",
-                "1111111114",
-                ENTITY.toString(),
-                ENTITY.toString(),
-                ENTITY.toString(),
-                ENTITY.toString(),
-                ENTITY.toString(),
-                ENTITY.toString(),
-                ENTITY.toString(),
-                ENTITY.toString(),
-                ENTITY.toString(),
-                ENTITY.toString(),
-                ENTITY.toString(),
-                ENTITY.toString(),
-                ENTITY.toString());
+                "1111111114");
+        // TODO 未使用のメソッド引数があります。 Checkstyle対応。
+//                ENTITY.toString(),
+//                ENTITY.toString(),
+//                ENTITY.toString(),
+//                ENTITY.toString(),
+//                ENTITY.toString(),
+//                ENTITY.toString(),
+//                ENTITY.toString(),
+//                ENTITY.toString(),
+//                ENTITY.toString(),
+//                ENTITY.toString(),
+//                ENTITY.toString(),
+//                ENTITY.toString(),
+//                ENTITY.toString());
         arrayData.add(item);
         return arrayData;
 
@@ -92,20 +93,21 @@ public class HihokenshaSearchGaitoshaPanel {
             String 年齢,
             String 性別,
             String 住所,
-            String 識別コード,
-            String フリガナ,
-            String 住所コード,
-            String 行政区,
-            String 組合,
-            String 世帯コード,
-            String 連絡先1,
-            String 連絡先2,
-            String 要介護度,
-            String 認定期間開始,
-            String 認定期間終了,
-            String 旧被保険者番号,
-            String 旧市町村コード,
-            String 旧市町村
+            String 識別コード
+    // TODO 未使用のメソッド引数があります。 Checkstyle対応。
+    //            String フリガナ,
+    //            String 住所コード,
+    //            String 行政区,
+    //            String 組合,
+    //            String 世帯コード,
+    //            String 連絡先1,
+    //            String 連絡先2,
+    //            String 要介護度,
+    //            String 認定期間開始,
+    //            String 認定期間終了,
+    //            String 旧被保険者番号,
+    //            String 旧市町村コード,
+    //            String 旧市町村
     ) {
 
         dgHihokenshaSearchGaitosha_Row rowHihokenshaData = new dgHihokenshaSearchGaitosha_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
@@ -117,7 +119,6 @@ public class HihokenshaSearchGaitoshaPanel {
         rowHihokenshaData.setGender(new RString(性別));
         rowHihokenshaData.setJusho(new RString(住所));
         rowHihokenshaData.setShikibetsuCode(new RString(識別コード));
-
         return rowHihokenshaData;
     }
 

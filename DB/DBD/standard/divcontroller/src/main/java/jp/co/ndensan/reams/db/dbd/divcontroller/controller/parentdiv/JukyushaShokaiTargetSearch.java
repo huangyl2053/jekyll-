@@ -36,6 +36,12 @@ public class JukyushaShokaiTargetSearch {
         return _createResponseData(div);
     }
 
+    /**
+     * 確認ボタン押下時の処理です。
+     *
+     * @param div JukyushaShokaiTargetSearchDiv
+     * @return ResponseData
+     */
     public ResponseData<JukyushaShokaiTargetSearchDiv> onClick_btnToDecide(JukyushaShokaiTargetSearchDiv div) {
         SearchResultForJukyushaShokai.getInstance().save(div.getSearchResult());
         return _createResponseData(div);

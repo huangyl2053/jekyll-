@@ -1,18 +1,16 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IKoshinKakuninDialogDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KoshinKakuninDialog のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * KoshinKakuninDialog のクラスファイル
+ *
  * @author 自動生成
  */
 public class KoshinKakuninDialogDiv extends Panel implements IKoshinKakuninDialogDiv {
@@ -22,6 +20,7 @@ public class KoshinKakuninDialogDiv extends Panel implements IKoshinKakuninDialo
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("lblKoshinMassage")
     private Label lblKoshinMassage;
     @JsonProperty("btnYes")
@@ -42,7 +41,7 @@ public class KoshinKakuninDialogDiv extends Panel implements IKoshinKakuninDialo
 
     @JsonProperty("lblKoshinMassage")
     public void setLblKoshinMassage(Label lblKoshinMassage) {
-        this.lblKoshinMassage=lblKoshinMassage;
+        this.lblKoshinMassage = lblKoshinMassage;
     }
 
     @JsonProperty("btnYes")
@@ -52,7 +51,7 @@ public class KoshinKakuninDialogDiv extends Panel implements IKoshinKakuninDialo
 
     @JsonProperty("btnYes")
     public void setBtnYes(Button btnYes) {
-        this.btnYes=btnYes;
+        this.btnYes = btnYes;
     }
 
     @JsonProperty("btnNo")
@@ -62,9 +61,8 @@ public class KoshinKakuninDialogDiv extends Panel implements IKoshinKakuninDialo
 
     @JsonProperty("btnNo")
     public void setBtnNo(Button btnNo) {
-        this.btnNo=btnNo;
+        this.btnNo = btnNo;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

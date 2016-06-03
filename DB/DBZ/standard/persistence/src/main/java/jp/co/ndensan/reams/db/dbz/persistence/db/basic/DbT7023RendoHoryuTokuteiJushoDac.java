@@ -6,16 +6,18 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJusho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJusho.kanriNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJusho.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJushoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -23,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 連動保留特定住所マスタのデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 zhangzhiming
  */
 public class DbT7023RendoHoryuTokuteiJushoDac implements ISaveable<DbT7023RendoHoryuTokuteiJushoEntity> {
 
@@ -66,6 +70,22 @@ public class DbT7023RendoHoryuTokuteiJushoDac implements ISaveable<DbT7023RendoH
         return accessor.select().
                 table(DbT7023RendoHoryuTokuteiJusho.class).
                 toList(DbT7023RendoHoryuTokuteiJushoEntity.class);
+    }
+
+    /**
+     * 管理番号を全件返します。
+     *
+     * @return DbT7023RendoHoryuTokuteiJushoEntity
+     */
+    @Transaction
+    public DbT7023RendoHoryuTokuteiJushoEntity selectKanriNo() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7023RendoHoryuTokuteiJusho.class).
+                order(by(kanriNo, Order.DESC)).
+                limit(1).
+                toObject(DbT7023RendoHoryuTokuteiJushoEntity.class);
     }
 
     /**

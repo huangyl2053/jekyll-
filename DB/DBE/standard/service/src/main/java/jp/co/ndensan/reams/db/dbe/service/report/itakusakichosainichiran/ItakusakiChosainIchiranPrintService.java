@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 /**
  *
  * 調査委託先・調査員一覧表Printクラスです。
+ * @reamsid_L DBE-0290-020 dongyabin
  */
 public class ItakusakiChosainIchiranPrintService {
 

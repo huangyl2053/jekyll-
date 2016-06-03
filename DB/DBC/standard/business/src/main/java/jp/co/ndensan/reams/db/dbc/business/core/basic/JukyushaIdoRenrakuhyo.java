@@ -9,8 +9,6 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -18,6 +16,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -295,7 +294,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 認定有効期間終了年月日
      */
-    public FlexibleDate get認定有効期間終了年月日() {
+    public RString get認定有効期間終了年月日() {
         return entity.getNinteiYukoKikanShuryoYMD();
     }
 
@@ -313,7 +312,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居宅介護支援事業所番号
      */
-    public JigyoshaNo get居宅介護支援事業所番号() {
+    public RString get居宅介護支援事業所番号() {
         return entity.getKyotakuKaigoShienJigyoshoNo();
     }
 
@@ -322,7 +321,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居宅サービス計画適用開始年月日
      */
-    public FlexibleDate get居宅サービス計画適用開始年月日() {
+    public RString get居宅サービス計画適用開始年月日() {
         return entity.getKyotakuServiceTekiyoKaishiYMD();
     }
 
@@ -331,7 +330,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居宅サービス計画適用終了年月日
      */
-    public FlexibleDate get居宅サービス計画適用終了年月日() {
+    public RString get居宅サービス計画適用終了年月日() {
         return entity.getKyotakuServiceTekiyoShuryoYMD();
     }
 
@@ -358,7 +357,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 訪問通所サービス上限管理適用期間終了年月日
      */
-    public FlexibleDate get訪問通所サービス上限管理適用期間終了年月日() {
+    public RString get訪問通所サービス上限管理適用期間終了年月日() {
         return entity.getHomonTsushoServiceJogenKanriTekiyoShuryoYMD();
     }
 
@@ -403,7 +402,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 償還払化開始年月日
      */
-    public FlexibleDate get償還払化開始年月日() {
+    public RString get償還払化開始年月日() {
         return entity.getShokanbaraikaKaishiYMD();
     }
 
@@ -412,7 +411,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 償還払化終了年月日
      */
-    public FlexibleDate get償還払化終了年月日() {
+    public RString get償還払化終了年月日() {
         return entity.getShokanbaraikaShuryoYMD();
     }
 
@@ -421,7 +420,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 給付率引下げ開始年月日
      */
-    public FlexibleDate get給付率引下げ開始年月日() {
+    public RString get給付率引下げ開始年月日() {
         return entity.getKyufuritsuHikisageKaishiYMD();
     }
 
@@ -430,7 +429,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 給付率引下げ終了年月日
      */
-    public FlexibleDate get給付率引下げ終了年月日() {
+    public RString get給付率引下げ終了年月日() {
         return entity.getKyufuritsuHikisageShuryoYMD();
     }
 
@@ -457,7 +456,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 給付率
      */
-    public HokenKyufuRitsu get給付率() {
+    public Decimal get給付率() {
         return entity.getKyufuritsu();
     }
 
@@ -466,7 +465,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 適用開始年月日
      */
-    public FlexibleDate get適用開始年月日() {
+    public RString get適用開始年月日() {
         return entity.getTekiyoKaishiYMD();
     }
 
@@ -475,7 +474,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 適用終了年月日
      */
-    public FlexibleDate get適用終了年月日() {
+    public RString get適用終了年月日() {
         return entity.getTekiyoShuryoYMD();
     }
 
@@ -493,7 +492,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 負担額
      */
-    public int get負担額() {
+    public Decimal get負担額() {
         return entity.getFutangaku();
     }
 
@@ -502,7 +501,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 負担額適用開始年月日
      */
-    public FlexibleDate get負担額適用開始年月日() {
+    public RString get負担額適用開始年月日() {
         return entity.getFutangakuTekiyoKaishiYMD();
     }
 
@@ -511,7 +510,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 負担額適用終了年月日
      */
-    public FlexibleDate get負担額適用終了年月日() {
+    public RString get負担額適用終了年月日() {
         return entity.getFutangakuTekiyoShuryoYMD();
     }
 
@@ -538,7 +537,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 課税層の特例減額措置対象フラグ
      */
-    public boolean is課税層の特例減額措置対象フラグ() {
+    public RString is課税層の特例減額措置対象フラグ() {
         return entity.getKaizeisoTokureiGengakuSochiTaishoFlag();
     }
 
@@ -547,7 +546,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 食費負担限度額
      */
-    public int get食費負担限度額() {
+    public RString get食費負担限度額() {
         return entity.getShokuhiFutanGendogaku();
     }
 
@@ -556,7 +555,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居住費ユニット型個室負担限度額
      */
-    public int get居住費ユニット型個室負担限度額() {
+    public RString get居住費ユニット型個室負担限度額() {
         return entity.getKyojuhiUnitGataKoshitsuFutanGendogaku();
     }
 
@@ -565,7 +564,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居住費ユニット型準個室負担限度額
      */
-    public int get居住費ユニット型準個室負担限度額() {
+    public RString get居住費ユニット型準個室負担限度額() {
         return entity.getKyojuhiUnitGataJunKoshitsuFutanGendogaku();
     }
 
@@ -574,7 +573,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居住費従来型個室特養等負担限度額
      */
-    public int get居住費従来型個室特養等負担限度額() {
+    public RString get居住費従来型個室特養等負担限度額() {
         return entity.getKyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku();
     }
 
@@ -583,7 +582,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居住費従来型個室老健療養等負担限度額
      */
-    public int get居住費従来型個室老健療養等負担限度額() {
+    public RString get居住費従来型個室老健療養等負担限度額() {
         return entity.getKyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku();
     }
 
@@ -592,7 +591,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居住費多床室負担限度額
      */
-    public int get居住費多床室負担限度額() {
+    public RString get居住費多床室負担限度額() {
         return entity.getKyujuhiTashoshitsuFutanGendogaku();
     }
 
@@ -601,7 +600,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 負担限度額適用開始年月日
      */
-    public FlexibleDate get負担限度額適用開始年月日() {
+    public RString get負担限度額適用開始年月日() {
         return entity.getFutanGendogakuTekiyoKaishiYMD();
     }
 
@@ -610,7 +609,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 負担限度額適用終了年月日
      */
-    public FlexibleDate get負担限度額適用終了年月日() {
+    public RString get負担限度額適用終了年月日() {
         return entity.getFutanGendogakuTekiyoShuryoYMD();
     }
 
@@ -619,7 +618,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 軽減率
      */
-    public int get軽減率() {
+    public RString get軽減率() {
         return entity.getKeigenritsu();
     }
 
@@ -628,7 +627,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 軽減率適用開始年月日
      */
-    public FlexibleDate get軽減率適用開始年月日() {
+    public RString get軽減率適用開始年月日() {
         return entity.getKeigenritsuTekiyoKaishiYMD();
     }
 
@@ -637,7 +636,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 軽減率適用終了年月日
      */
-    public FlexibleDate get軽減率適用終了年月日() {
+    public RString get軽減率適用終了年月日() {
         return entity.getKeigenritsuTekiyoShuryoYMD();
     }
 
@@ -763,7 +762,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 住所地特例適用開始日
      */
-    public FlexibleDate get住所地特例適用開始日() {
+    public RString get住所地特例適用開始日() {
         return entity.getJushochiTokureiTekiyoKaishiYMD();
     }
 
@@ -772,7 +771,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 住所地特例適用終了日
      */
-    public FlexibleDate get住所地特例適用終了日() {
+    public RString get住所地特例適用終了日() {
         return entity.getJushochiTokureiTekiyoShuryoYMD();
     }
 
@@ -781,7 +780,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居宅費（新１）負担限度額
      */
-    public int get居宅費_新１_負担限度額() {
+    public RString get居宅費_新１_負担限度額() {
         return entity.getKyotakuhiShin1FutanGendogaku();
     }
 
@@ -790,7 +789,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居宅費（新２）負担限度額
      */
-    public int get居宅費_新２_負担限度額() {
+    public RString get居宅費_新２_負担限度額() {
         return entity.getKyotakuhiShin2FutanGendogaku();
     }
 
@@ -799,7 +798,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居宅費（新３）負担限度額
      */
-    public int get居宅費_新３_負担限度額() {
+    public RString get居宅費_新３_負担限度額() {
         return entity.getKyotakuhiShin3FutanGendogaku();
     }
 
@@ -808,7 +807,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 利用者負担割合有効開始日
      */
-    public FlexibleDate get利用者負担割合有効開始日() {
+    public RString get利用者負担割合有効開始日() {
         return entity.getRiyosyaFutanWariaiYukoKaishiYMD();
     }
 
@@ -817,7 +816,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 利用者負担割合有効終了日
      */
-    public FlexibleDate get利用者負担割合有効終了日() {
+    public RString get利用者負担割合有効終了日() {
         return entity.getRiyosyaFutanWariaiYukoShuryoYMD();
     }
 

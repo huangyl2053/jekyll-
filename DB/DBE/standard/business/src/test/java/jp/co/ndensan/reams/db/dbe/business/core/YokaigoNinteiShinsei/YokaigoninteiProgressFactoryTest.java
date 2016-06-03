@@ -4,10 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.YokaigoNinteiShinsei;
 
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiProgress;
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiProgressFactory;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiProgressFactory;
 import com.google.common.base.Objects;
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiProgressFactory.ParticularDates;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiProgressFactory.ParticularDates;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ConsentsToEnkitsuchiHakko;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;

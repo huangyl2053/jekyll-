@@ -23,6 +23,8 @@ public enum ConfigKeysShotokuHikidashi {
 
     /**
      * 列挙対に対応するコンフィグキーを返します。
+     *
+     * @return コンフィグキー
      */
     public RString getKet() {
         return new RString(this.toString());

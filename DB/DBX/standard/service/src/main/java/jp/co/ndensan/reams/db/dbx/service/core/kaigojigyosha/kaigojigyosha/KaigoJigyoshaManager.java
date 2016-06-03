@@ -9,14 +9,18 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyosha;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigojigyosha.KaigoJigyoshaMapperParameter;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigojigyosha.kaigojigyosha.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper;
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.kaigojigyosha.IKaigoJigyoshaMapper;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyoshaManager;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiServiceManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -86,6 +90,30 @@ public class KaigoJigyoshaManager {
         }
         relateEntity.initializeMd5ToEntities();
         return new KaigoJigyosha(relateEntity);
+    }
+
+    /**
+     * 主キーに合致する介護事業者を返します。
+     *
+     * @param 事業者番号 事業者番号
+     * @param 申請日 申請日
+     * @return KaigoJigyosha nullが返る可能性があります。
+     */
+    @Transaction
+    public KaigoJigyosha select介護事業者By申請日(JigyoshaNo 事業者番号, FlexibleDate 申請日) {
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(申請日, UrSystemErrorMessages.値がnull.getReplacedMessage("申請日"));
+
+        IDbT7060KaigoJigyoshaMapper mapper = mapperProvider.create(IDbT7060KaigoJigyoshaMapper.class);
+        KaigoJigyoshaMapperParameter param = KaigoJigyoshaMapperParameter.createSelectByKeyParam(事業者番号, 申請日);
+        DbT7060KaigoJigyoshaEntity entity = mapper.select介護事業者By申請日(param);
+
+        if (entity == null) {
+            return null;
+        }
+        KaigoJigyoshaEntity kaigoJigyoshaEntity = new KaigoJigyoshaEntity();
+        kaigoJigyoshaEntity.set介護事業者Entity(entity);
+        return new KaigoJigyosha(kaigoJigyoshaEntity);
     }
 
     /**

@@ -94,7 +94,7 @@ public class KyuShichosonCodeFinderTest extends DbxTestBase {
             dbT7056GappeiShichosonEntitys = new ArrayList<>();
             when(dbT7056GappeiShichosonDac.selectAllOrderbyChikiNoDesc()).thenReturn(dbT7056GappeiShichosonEntitys);
 
-            sut = KyuShichosonCodeFinder.createInstance();
+            sut = new KyuShichosonCodeFinder(koseiShichosonJohoFinder, dbT7055GappeiJohoDac, dbT7056GappeiShichosonDac, true);
         }
 
         @Test
@@ -162,12 +162,11 @@ public class KyuShichosonCodeFinderTest extends DbxTestBase {
             koseiShichosonJohoFinder = Mockito.mock(KoseiShichosonJohoFinder.class);
             dbT7055GappeiJohoDac = Mockito.mock(DbT7055GappeiJohoDac.class);
             dbT7056GappeiShichosonDac = Mockito.mock(DbT7056GappeiShichosonDac.class);
-
         }
 
         @Test
         public void 合併していない場合_結果は空になる() {
-            sut = KyuShichosonCodeFinder.createInstance();
+            sut = new KyuShichosonCodeFinder(koseiShichosonJohoFinder, dbT7055GappeiJohoDac, dbT7056GappeiShichosonDac, false);
 
             KyuShichosonJohoEntities result = sut.getKyuShichosonCodeJoho(new LasdecCode("152201"), DonyuKeitaiCode.事務単一);
             assertThat(result.isEmpty(), is(true));
@@ -193,7 +192,7 @@ public class KyuShichosonCodeFinderTest extends DbxTestBase {
             gappeiJohoOfMaxChikiNo.setShichosonCode(lasdecCode);
             when(dbT7055GappeiJohoDac.selectTopOneByShichosonCode(lasdecCode)).thenReturn(gappeiJohoOfMaxChikiNo);
 
-            sut = KyuShichosonCodeFinder.createInstance();
+            sut = new KyuShichosonCodeFinder(koseiShichosonJohoFinder, dbT7055GappeiJohoDac, dbT7056GappeiShichosonDac, true);
         }
 
         @Test
@@ -265,7 +264,7 @@ public class KyuShichosonCodeFinderTest extends DbxTestBase {
 
         @Test
         public void 合併していない場合_結果は空になる() {
-            sut = KyuShichosonCodeFinder.createInstance();
+            sut = new KyuShichosonCodeFinder(koseiShichosonJohoFinder, dbT7055GappeiJohoDac, dbT7056GappeiShichosonDac, false);
 
             KyuShichosonJohoEntities result = sut.getKyuShichosonCodeJoho(new LasdecCode("152201"), DonyuKeitaiCode.事務広域);
             assertThat(result.isEmpty(), is(true));

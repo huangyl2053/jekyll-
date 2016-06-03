@@ -12,17 +12,19 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.Nintei
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikensho.ninteishinseijoho.NinteiShinseiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.ninteishinseijoho.NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.ninteishinseijoho.INinteiShinseiJohoMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.service.core.ikensho.geninshikkan.GeninShikkanManager;
-import jp.co.ndensan.reams.db.dbe.service.core.ikensho.shujiiIkenshoIraiJoho.ShujiiIkenshoIraiJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoManager;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 要介護認定申請情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 chengsanyuan
  */
 public class NinteiShinseiJohoManager {
 
@@ -64,8 +66,7 @@ public class NinteiShinseiJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NinteiShinseiJohoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link NinteiShinseiJohoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link NinteiShinseiJohoManager}のインスタンス
      */
     public static NinteiShinseiJohoManager createInstance() {
         return InstanceProvider.create(NinteiShinseiJohoManager.class);
@@ -83,6 +84,24 @@ public class NinteiShinseiJohoManager {
         INinteiShinseiJohoMapper mapper = mapperProvider.create(INinteiShinseiJohoMapper.class);
 
         NinteiShinseiJohoEntity relateEntity = mapper.select要介護認定申請情報ByKey(要介護認定申請情報検索条件);
+        if (relateEntity == null) {
+            return null;
+        }
+        relateEntity.initializeMd5ToEntities();
+        return new NinteiShinseiJoho(relateEntity);
+    }
+
+    /**
+     * 主キーに合致する意見書情報を返します。
+     *
+     * @param 要介護認定申請情報検索条件 要介護認定申請情報検索条件
+     * @return NinteiShinseiJoho nullが返る可能性があります。
+     */
+    @Transaction
+    public NinteiShinseiJoho get意見書情報(NinteiShinseiJohoMapperParameter 要介護認定申請情報検索条件) {
+        requireNonNull(要介護認定申請情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定申請情報検索条件"));
+        INinteiShinseiJohoMapper mapper = mapperProvider.create(INinteiShinseiJohoMapper.class);
+        NinteiShinseiJohoEntity relateEntity = mapper.get意見書情報(要介護認定申請情報検索条件);
         if (relateEntity == null) {
             return null;
         }

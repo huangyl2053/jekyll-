@@ -566,4 +566,5 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
 // </editor-fold>
 
+
 }

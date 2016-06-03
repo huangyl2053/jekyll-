@@ -2035,4 +2035,31 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
     }
 
 // </editor-fold>
+    /**
+     * @return the lastUpdateTimestamp
+     */
+    public RDateTime getLastUpdateTimestamp() {
+        return lastUpdateTimestamp;
+    }
+
+    /**
+     * @param lastUpdateTimestamp the lastUpdateTimestamp to set
+     */
+    public void setLastUpdateTimestamp(RDateTime lastUpdateTimestamp) {
+        this.lastUpdateTimestamp = lastUpdateTimestamp;
+    }
+
+    /**
+     * @return the insertTimestamp
+     */
+    public RDateTime getInsertTimestamp() {
+        return insertTimestamp;
+    }
+
+    /**
+     * @param insertTimestamp the insertTimestamp to set
+     */
+    public void setInsertTimestamp(RDateTime insertTimestamp) {
+        this.insertTimestamp = insertTimestamp;
+    }
 }

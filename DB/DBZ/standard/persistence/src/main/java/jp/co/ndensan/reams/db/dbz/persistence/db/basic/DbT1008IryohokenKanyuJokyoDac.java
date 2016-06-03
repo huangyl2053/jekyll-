@@ -7,11 +7,13 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyo.*;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyo.iryoHokenKanyuYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyo.rirekiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyo.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
@@ -25,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護保険医療保険加入状況のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-020 suguangjun
  */
 public class DbT1008IryohokenKanyuJokyoDac implements ISaveable<DbT1008IryohokenKanyuJokyoEntity> {
 
@@ -83,6 +87,18 @@ public class DbT1008IryohokenKanyuJokyoDac implements ISaveable<DbT1008Iryohoken
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * DbT1008IryohokenKanyuJokyoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int saveOrDeletePhysicalBy(DbT1008IryohokenKanyuJokyoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護保険医療保険加入状況エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 
     /**

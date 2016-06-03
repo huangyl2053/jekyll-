@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 高額介護サービス費支給審査決定テーブルの項目定義クラスです。
  */
 public enum DbT3058KogakuShikyuShinsaKettei implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -40,14 +40,6 @@ public enum DbT3058KogakuShikyuShinsaKettei implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * 決定者受取年月
-     */
-    ketteishaUketoriYM(2147483647, 0),
-    /**
-     * 証記載保険者番号
-     */
-    shoKisaiHokenshaNo(2147483647, 0),
-    /**
      * 被保険者番号
      */
     hihokenshaNo(2147483647, 0),
@@ -55,6 +47,18 @@ public enum DbT3058KogakuShikyuShinsaKettei implements IColumnDefinition {
      * サービス提供年月
      */
     serviceTeikyoYM(2147483647, 0),
+    /**
+     * 証記載保険者番号
+     */
+    shoKisaiHokenshaNo(2147483647, 0),
+    /**
+     * 履歴番号
+     */
+    rirekiNo(5, 0),
+    /**
+     * 決定者受取年月
+     */
+    ketteishaUketoriYM(2147483647, 0),
     /**
      * 通知書番号
      */

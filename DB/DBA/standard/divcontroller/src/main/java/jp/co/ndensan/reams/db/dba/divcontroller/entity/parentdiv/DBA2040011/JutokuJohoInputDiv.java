@@ -1,21 +1,15 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011.KaijoJiyuInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011.ShisetsuJohoInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011.SochimotoJohoInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011.TekiyoJiyuInputDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * JutokuJohoInput のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * JutokuJohoInput のクラスファイル
+ *
  * @author 自動生成
  */
 public class JutokuJohoInputDiv extends Panel {
@@ -25,6 +19,7 @@ public class JutokuJohoInputDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("TekiyoJiyuInput")
     private TekiyoJiyuInputDiv TekiyoJiyuInput;
     @JsonProperty("KaijoJiyuInput")
@@ -49,7 +44,7 @@ public class JutokuJohoInputDiv extends Panel {
 
     @JsonProperty("TekiyoJiyuInput")
     public void setTekiyoJiyuInput(TekiyoJiyuInputDiv TekiyoJiyuInput) {
-        this.TekiyoJiyuInput=TekiyoJiyuInput;
+        this.TekiyoJiyuInput = TekiyoJiyuInput;
     }
 
     @JsonProperty("KaijoJiyuInput")
@@ -59,7 +54,7 @@ public class JutokuJohoInputDiv extends Panel {
 
     @JsonProperty("KaijoJiyuInput")
     public void setKaijoJiyuInput(KaijoJiyuInputDiv KaijoJiyuInput) {
-        this.KaijoJiyuInput=KaijoJiyuInput;
+        this.KaijoJiyuInput = KaijoJiyuInput;
     }
 
     @JsonProperty("SochimotoJohoInput")
@@ -69,7 +64,7 @@ public class JutokuJohoInputDiv extends Panel {
 
     @JsonProperty("SochimotoJohoInput")
     public void setSochimotoJohoInput(SochimotoJohoInputDiv SochimotoJohoInput) {
-        this.SochimotoJohoInput=SochimotoJohoInput;
+        this.SochimotoJohoInput = SochimotoJohoInput;
     }
 
     @JsonProperty("ShisetsuJohoInput")
@@ -79,7 +74,7 @@ public class JutokuJohoInputDiv extends Panel {
 
     @JsonProperty("ShisetsuJohoInput")
     public void setShisetsuJohoInput(ShisetsuJohoInputDiv ShisetsuJohoInput) {
-        this.ShisetsuJohoInput=ShisetsuJohoInput;
+        this.ShisetsuJohoInput = ShisetsuJohoInput;
     }
 
     @JsonProperty("btnTekiyoJohoToroku")
@@ -89,7 +84,7 @@ public class JutokuJohoInputDiv extends Panel {
 
     @JsonProperty("btnTekiyoJohoToroku")
     public void setBtnTekiyoJohoToroku(Button btnTekiyoJohoToroku) {
-        this.btnTekiyoJohoToroku=btnTekiyoJohoToroku;
+        this.btnTekiyoJohoToroku = btnTekiyoJohoToroku;
     }
 
 }

@@ -8,6 +8,18 @@ module DBC {
 
         export class Events {
 
+            public static onClick_btnSearch(): string {
+                return "onClick_btnSearch";
+            }
+
+            public static onClick_btnSelect(): string {
+                return "onClick_btnSelect";
+            }
+
+            public static CloseCancel(): string {
+                return "CloseCancel";
+            }
+
         }
 
         export class Controls {

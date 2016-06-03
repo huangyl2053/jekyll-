@@ -7,28 +7,28 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3025KyufujissekiKyotakuServiceEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 給付実績居宅サービス計画費を管理するクラスです。
  */
-public class KyufujissekiKyotakuService 
-extends ModelBase<KyufujissekiKyotakuServiceIdentifier, 
-        DbT3025KyufujissekiKyotakuServiceEntity, 
+public class KyufujissekiKyotakuService
+        extends ModelBase<KyufujissekiKyotakuServiceIdentifier,
+        DbT3025KyufujissekiKyotakuServiceEntity,
         KyufujissekiKyotakuService> implements Serializable {
 
     private final DbT3025KyufujissekiKyotakuServiceEntity entity;
@@ -256,7 +256,8 @@ extends ModelBase<KyufujissekiKyotakuServiceIdentifier,
      * @return 回数
      */
     public int get回数() {
-        return entity.getKaisu();
+        Integer 回数 = entity.getKaisu();
+        return 回数 == null ? 0 : 回数.intValue();
     }
 
     /**
@@ -319,7 +320,8 @@ extends ModelBase<KyufujissekiKyotakuServiceIdentifier,
      * @return 後_回数
      */
     public int get後_回数() {
-        return entity.getAtoKaisu();
+        Integer 後_回数 = entity.getAtoKaisu();
+        return 後_回数 == null ? 0 : 後_回数.intValue();
     }
 
     /**
@@ -355,7 +357,8 @@ extends ModelBase<KyufujissekiKyotakuServiceIdentifier,
      * @return 再審査回数
      */
     public int get再審査回数() {
-        return entity.getSaishinsaKaisu();
+        Integer 再審査回数 = entity.getSaishinsaKaisu();
+        return 再審査回数 == null ? 0 : 再審査回数.intValue();
     }
 
     /**
@@ -364,7 +367,8 @@ extends ModelBase<KyufujissekiKyotakuServiceIdentifier,
      * @return 過誤回数
      */
     public int get過誤回数() {
-        return entity.getKagoKaisu();
+        Integer 過誤回数 = entity.getKagoKaisu();
+        return 過誤回数 == null ? 0 : 過誤回数.intValue();
     }
 
     /**
@@ -415,8 +419,7 @@ extends ModelBase<KyufujissekiKyotakuServiceIdentifier,
     }
 
     /**
-     * 保持する給付実績居宅サービス計画費を削除対象とします。<br/>
-     * {@link DbT3025KyufujissekiKyotakuServiceEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する給付実績居宅サービス計画費を削除対象とします。<br/> {@link DbT3025KyufujissekiKyotakuServiceEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KyufujissekiKyotakuService}
      */

@@ -4,6 +4,9 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.btn_Modoru = function () {
+                return "btn_Modoru";
+            };
             return Events;
         })();
         ShinsakaiJohoKojin.Events = Events;
@@ -41,7 +44,7 @@ var DBZ;
             };
 
             Controls.prototype.txtShinsakaijoChikuCode = function () {
-                return new UZA.TextBoxChikuCode(this.convFiledName("txtShinsakaijoChikuCode"));
+                return new UZA.TextBoxCode(this.convFiledName("txtShinsakaijoChikuCode"));
             };
 
             Controls.prototype.txtShinsakaijoChikuMeisho = function () {

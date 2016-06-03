@@ -17,6 +17,7 @@ import lombok.Value;
  * 給付管理票200004の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KyufuKanrihyo200004Identifier implements Serializable {
 
     private final FlexibleYearMonth 審査年月;

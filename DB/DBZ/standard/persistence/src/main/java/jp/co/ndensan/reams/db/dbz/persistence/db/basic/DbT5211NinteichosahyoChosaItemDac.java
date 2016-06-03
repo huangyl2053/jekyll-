@@ -86,4 +86,17 @@ public class DbT5211NinteichosahyoChosaItemDac implements ISaveable<DbT5211Ninte
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * DbT5211NinteichosahyoChosaItemEntityを削除します。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int delete(DbT5211NinteichosahyoChosaItemEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査票_基本調査_調査項目エンティティ"));
+        entity.setIsDeleted(true);
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
 }

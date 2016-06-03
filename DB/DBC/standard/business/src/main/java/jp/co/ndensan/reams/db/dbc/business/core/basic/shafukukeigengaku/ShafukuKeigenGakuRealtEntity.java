@@ -21,7 +21,7 @@ public class ShafukuKeigenGakuRealtEntity {
     /**
      * コンストラクタです.
      *
-     * @param entity
+     * @param entity 償還払請求社会福祉法人軽減額テーブルのエンティティ
      */
     public ShafukuKeigenGakuRealtEntity(DbT3051ShokanShakaiFukushiHojinKeigengakuEntity entity) {
         this.entity = entity;

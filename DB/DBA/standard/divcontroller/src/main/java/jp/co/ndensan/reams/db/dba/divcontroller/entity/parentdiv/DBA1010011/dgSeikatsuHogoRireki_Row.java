@@ -3,22 +3,17 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jul 24 15:40:52 JST 2015 
+ * Fri Jul 24 15:40:52 JST 2015
  */
 
-
-
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-
 
 /**
- * dgSeikatsuHogoRireki_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgSeikatsuHogoRireki_Row のクラスファイル
+ *
  */
-
 public class dgSeikatsuHogoRireki_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 

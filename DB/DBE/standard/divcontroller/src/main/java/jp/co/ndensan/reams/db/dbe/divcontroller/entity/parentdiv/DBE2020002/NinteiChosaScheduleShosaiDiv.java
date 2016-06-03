@@ -4,18 +4,24 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * NinteiChosaScheduleShosai のクラスファイル 
- * 
- * @author 自動生成
+ * NinteiChosaScheduleShosai のクラスファイル
+ *
  */
 public class NinteiChosaScheduleShosaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -78,7 +84,7 @@ public class NinteiChosaScheduleShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSetteiDate(TextBoxFlexibleDate txtSetteiDate) {
+    public void setTxtSetteiDate(TextBoxFlexibleDate txtSetteiDate) {
         this.getSearchNinteiChosaSchedule().setTxtSetteiDate(txtSetteiDate);
     }
 
@@ -88,7 +94,7 @@ public class NinteiChosaScheduleShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnSetteiDateToZenjitsu(Button btnSetteiDateToZenjitsu) {
+    public void setBtnSetteiDateToZenjitsu(Button btnSetteiDateToZenjitsu) {
         this.getSearchNinteiChosaSchedule().setBtnSetteiDateToZenjitsu(btnSetteiDateToZenjitsu);
     }
 
@@ -98,7 +104,7 @@ public class NinteiChosaScheduleShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnSetteiDateToJijitsu(Button btnSetteiDateToJijitsu) {
+    public void setBtnSetteiDateToJijitsu(Button btnSetteiDateToJijitsu) {
         this.getSearchNinteiChosaSchedule().setBtnSetteiDateToJijitsu(btnSetteiDateToJijitsu);
     }
 
@@ -108,7 +114,7 @@ public class NinteiChosaScheduleShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTsujoMemo(TextBox txtTsujoMemo) {
+    public void setTxtTsujoMemo(TextBox txtTsujoMemo) {
         this.getSearchNinteiChosaSchedule().setTxtTsujoMemo(txtTsujoMemo);
     }
 
@@ -118,18 +124,18 @@ public class NinteiChosaScheduleShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtJuyoMemo(TextBox txtJuyoMemo) {
+    public void setTxtJuyoMemo(TextBox txtJuyoMemo) {
         this.getSearchNinteiChosaSchedule().setTxtJuyoMemo(txtJuyoMemo);
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnDisplayMemoInformation() {
-        return this.getSearchNinteiChosaSchedule().getBtnDisplayMemoInformation();
+    public Button getBtnMemo() {
+        return this.getSearchNinteiChosaSchedule().getBtnMemo();
     }
 
     @JsonIgnore
-    public void  setBtnDisplayMemoInformation(ButtonDialog btnDisplayMemoInformation) {
-        this.getSearchNinteiChosaSchedule().setBtnDisplayMemoInformation(btnDisplayMemoInformation);
+    public void setBtnMemo(Button btnMemo) {
+        this.getSearchNinteiChosaSchedule().setBtnMemo(btnMemo);
     }
 
     @JsonIgnore
@@ -138,7 +144,7 @@ public class NinteiChosaScheduleShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlTaishoChiku(DropDownList ddlTaishoChiku) {
+    public void setDdlTaishoChiku(DropDownList ddlTaishoChiku) {
         this.getSearchNinteiChosaSchedule().setDdlTaishoChiku(ddlTaishoChiku);
     }
 
@@ -148,7 +154,7 @@ public class NinteiChosaScheduleShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadChosainJokyo(RadioButton radChosainJokyo) {
+    public void setRadChosainJokyo(RadioButton radChosainJokyo) {
         this.getSearchNinteiChosaSchedule().setRadChosainJokyo(radChosainJokyo);
     }
 
@@ -158,7 +164,7 @@ public class NinteiChosaScheduleShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlHokensha(DropDownList ddlHokensha) {
+    public void setDdlHokensha(DropDownList ddlHokensha) {
         this.getSearchNinteiChosaSchedule().setDdlHokensha(ddlHokensha);
     }
 
@@ -168,7 +174,7 @@ public class NinteiChosaScheduleShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlninteiChosaItakusaki(DropDownList ddlninteiChosaItakusaki) {
+    public void setDdlninteiChosaItakusaki(DropDownList ddlninteiChosaItakusaki) {
         this.getSearchNinteiChosaSchedule().setDdlninteiChosaItakusaki(ddlninteiChosaItakusaki);
     }
 
@@ -178,7 +184,7 @@ public class NinteiChosaScheduleShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKensaku(Button btnKensaku) {
+    public void setBtnKensaku(Button btnKensaku) {
         this.getSearchNinteiChosaSchedule().setBtnKensaku(btnKensaku);
     }
 
@@ -188,7 +194,7 @@ public class NinteiChosaScheduleShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgNinteiChosaSchedule(DataGrid<dgNinteiChosaSchedule_Row> dgNinteiChosaSchedule) {
+    public void setDgNinteiChosaSchedule(DataGrid<dgNinteiChosaSchedule_Row> dgNinteiChosaSchedule) {
         this.getNchosainScheduleIchiran().setDgNinteiChosaSchedule(dgNinteiChosaSchedule);
     }
 

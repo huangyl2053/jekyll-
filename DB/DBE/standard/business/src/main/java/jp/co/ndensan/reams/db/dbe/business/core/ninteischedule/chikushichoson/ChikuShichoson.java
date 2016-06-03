@@ -25,13 +25,17 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 地区市町村を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class ChikuShichoson extends ModelBase<ChikuShichosonIdentifier, DbT5224ChikuShichosonEntity, ChikuShichoson> implements Serializable {
+
     private static final long serialVersionUID = -6149283089424054020L;
 
     private final DbT5224ChikuShichosonEntity entity;
     private final ChikuShichosonIdentifier id;
     private final Models<ChosaChikuGroupIdentifier, ChosaChikuGroup> chosaChikuGroup;
+
     /**
      * コンストラクタです。<br/>
      * 地区市町村の新規作成時に使用します。
@@ -39,16 +43,16 @@ public class ChikuShichoson extends ModelBase<ChikuShichosonIdentifier, DbT5224C
      * @param 調査地区コード 調査地区コード
      * @param 市町村コード 市町村コード
      */
-    public ChikuShichoson(Code 調査地区コード,LasdecCode 市町村コード) {
+    public ChikuShichoson(Code 調査地区コード, LasdecCode 市町村コード) {
         requireNonNull(調査地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区コード"));
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         this.entity = new DbT5224ChikuShichosonEntity();
         this.entity.setChosaChikuCode(調査地区コード);
         this.entity.setShichosonCode(市町村コード);
         this.id = new ChikuShichosonIdentifier(
-        調査地区コード,
-        市町村コード
-                );
+                調査地区コード,
+                市町村コード
+        );
         this.chosaChikuGroup = Models.create(new ArrayList<ChosaChikuGroup>());
     }
 
@@ -117,7 +121,7 @@ public class ChikuShichoson extends ModelBase<ChikuShichosonIdentifier, DbT5224C
      *
      * @return 自地区フラグ
      */
-    public boolean get自地区フラグ() {
+    public boolean is自地区フラグ() {
         return entity.getJiChikuFlag();
     }
 
@@ -142,10 +146,8 @@ public class ChikuShichoson extends ModelBase<ChikuShichosonIdentifier, DbT5224C
     }
 
     /**
-     * 地区市町村配下の要素を削除対象とします。<br/>
-     * {@link DbT5224ChikuShichosonEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 地区市町村配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link ChikuShichoson}を返します。
+     * 地区市町村配下の要素を削除対象とします。<br/> {@link DbT5224ChikuShichosonEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 地区市町村配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link ChikuShichoson}を返します。
      *
      * @return 削除対象処理実施後の{@link ChikuShichoson}
      * @throws IllegalStateException DbT5224ChikuShichosonEntityのデータ状態が変更の場合
@@ -160,7 +162,7 @@ public class ChikuShichoson extends ModelBase<ChikuShichosonIdentifier, DbT5224C
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ChikuShichoson(
-                deletedEntity, id,chosaChikuGroup.deleted());
+                deletedEntity, id, chosaChikuGroup.deleted());
     }
 
     @Override
@@ -169,8 +171,7 @@ public class ChikuShichoson extends ModelBase<ChikuShichosonIdentifier, DbT5224C
     }
 
     /**
-     * 地区市町村のみを変更対象とします。<br/>
-     * {@link DbT5224ChikuShichosonEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 地区市町村のみを変更対象とします。<br/> {@link DbT5224ChikuShichosonEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ChikuShichoson}
      */
@@ -207,6 +208,7 @@ public class ChikuShichoson extends ModelBase<ChikuShichosonIdentifier, DbT5224C
         return new ArrayList<>(chosaChikuGroup.values());
 
     }
+
     /**
      * {@link ChikuShichoson}のシリアライズ形式を提供します。
      *
@@ -221,12 +223,12 @@ public class ChikuShichoson extends ModelBase<ChikuShichosonIdentifier, DbT5224C
         private static final long serialVersionUID = -710031961519711799L;
         private final DbT5224ChikuShichosonEntity entity;
         private final ChikuShichosonIdentifier id;
-       private final Models<ChosaChikuGroupIdentifier, ChosaChikuGroup> chosaChikuGroup;
+        private final Models<ChosaChikuGroupIdentifier, ChosaChikuGroup> chosaChikuGroup;
 
         private _SerializationProxy(
                 DbT5224ChikuShichosonEntity entity,
                 ChikuShichosonIdentifier id,
-               Models<ChosaChikuGroupIdentifier, ChosaChikuGroup> chosachikugroup) {
+                Models<ChosaChikuGroupIdentifier, ChosaChikuGroup> chosachikugroup) {
             this.entity = entity;
             this.id = id;
             this.chosaChikuGroup = chosachikugroup;
@@ -246,7 +248,7 @@ public class ChikuShichoson extends ModelBase<ChikuShichosonIdentifier, DbT5224C
     public ChikuShichosonBuilder createBuilderForEdit() {
         return new ChikuShichosonBuilder(entity, id, chosaChikuGroup);
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;

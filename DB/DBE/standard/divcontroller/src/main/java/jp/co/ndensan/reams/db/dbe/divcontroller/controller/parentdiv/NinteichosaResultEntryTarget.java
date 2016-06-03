@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.NinteichosaResultEntryTargetsData;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060001.NinteichosaResultEntryTargetDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060001.dgNinteichosaResultTaishosha_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.NinteichosaResultEntryTargetDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.dgNinteichosaResultTaishosha_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -55,6 +55,12 @@ public class NinteichosaResultEntryTarget {
         return _createResponseData(div);
     }
 
+    /**
+     * onSelect_dgNinteichosaResultTaishosha
+     *
+     * @param div NinteichosaResultEntryTargetDiv
+     * @return ResponseData<NinteichosaResultEntryTargetDiv>
+     */
     public ResponseData<NinteichosaResultEntryTargetDiv>
             onSelect_dgNinteichosaResultTaishosha(NinteichosaResultEntryTargetDiv div) {
         List<dgNinteichosaResultTaishosha_Row> dataSource = new ArrayList<>();
@@ -85,14 +91,11 @@ public class NinteichosaResultEntryTarget {
             for (dgNinteichosaResultTaishosha_Row row : dgTargetPersons(div).getDataSource()) {
                 if (row.getHihokenshaNo().equals(target.getHihokenshaNo())) {
                     list.add(target);
-                    if (canBeSet_chosaKanryoDate(target)) {
-                        setDisabled_btnCommonToCompleteChosa(false);
-                    }
                 } else {
                     list.add(row);
-                    if (canBeSet_chosaKanryoDate(row)) {
-                        setDisabled_btnCommonToCompleteChosa(false);
-                    }
+                }
+                if (canBeSet_chosaKanryoDate(target) || canBeSet_chosaKanryoDate(row)) {
+                    setDisabled_btnCommonToCompleteChosa(false);
                 }
             }
             dgTargetPersons(div).setDataSource(list);

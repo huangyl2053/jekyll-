@@ -70,10 +70,4 @@
         <result property="jokyoFlag" column="dbT4913ChosainJoho_jokyoFlag" />
     </resultMap>
 
-    <select id="getEntity" resultMap="ResultMap_DbT4913ChosainJohoEntity">
-        <!--SELECT
-        <include refid="allColumns_DbT4913ChosainJoho"/>
-        FROM
-        rgdb."DbT4913ChosainJoho"-->
-    </select>
 </mapper>

@@ -9,25 +9,24 @@ import java.io.Serializable;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3098TandokuJoseikinKyufuShinseiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 市町村単独助成金給付申請を管理するクラスです。
  */
-public class TandokuJoseikinKyufuShinsei 
-extends ModelBase<TandokuJoseikinKyufuShinseiIdentifier, 
-        DbT3098TandokuJoseikinKyufuShinseiEntity, 
-        TandokuJoseikinKyufuShinsei> implements Serializable {
+public class TandokuJoseikinKyufuShinsei extends
+        ModelBase<TandokuJoseikinKyufuShinseiIdentifier, DbT3098TandokuJoseikinKyufuShinseiEntity, TandokuJoseikinKyufuShinsei>
+        implements Serializable {
 
     private final DbT3098TandokuJoseikinKyufuShinseiEntity entity;
     private final TandokuJoseikinKyufuShinseiIdentifier id;
@@ -247,10 +246,20 @@ extends ModelBase<TandokuJoseikinKyufuShinseiIdentifier,
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * modifiedModel
+     *
+     * @return 市町村単独助成金給付申請を管理するクラス
+     */
     public TandokuJoseikinKyufuShinsei modifiedModel() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * getTandokuJoseikinKyufuKetteiList
+     *
+     * @return 市町村単独助成金給付申請を管理するクラスList
+     */
     public List<TandokuJoseikinKyufuKettei> getTandokuJoseikinKyufuKetteiList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

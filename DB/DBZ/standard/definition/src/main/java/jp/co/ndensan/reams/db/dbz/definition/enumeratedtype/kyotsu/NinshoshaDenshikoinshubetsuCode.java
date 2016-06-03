@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 認証者電子公印種別コードを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public enum NinshoshaDenshikoinshubetsuCode {
 
@@ -17,7 +17,11 @@ public enum NinshoshaDenshikoinshubetsuCode {
     /**
      * コード:0002 名称:印の字 略称:定義なし
      */
-    印の字("0002", "印の字");
+    印の字("0002", "印の字"),
+    /**
+     * コード:0003 名称:認定用印 略称:定義なし
+     */
+    認定用印("0003", "認定用印");
 
     private final RString code;
     private final RString fullName;

@@ -12,7 +12,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
  * 要介護認定申請情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class NinteiShinseiJohoMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class NinteiShinseiJohoMapperParameter {
 
     private final ShinseishoKanriNo shinseishoKanriNo;
 
@@ -25,7 +26,9 @@ public class NinteiShinseiJohoMapperParameter {
     private NinteiShinseiJohoMapperParameter(
             ShinseishoKanriNo shinseishoKanriNo) {
 
-        this.shinseishoKanriNo = requireNonNull(shinseishoKanriNo, jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        this.shinseishoKanriNo = requireNonNull(shinseishoKanriNo,
+                jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages.値がnull.getReplacedMessage(
+                        "申請書管理番号"));
     }
 
     /**

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorResult;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.basic.shichosonsentaku.IShichosonSentakuMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.shichosonsentaku.IShichosonSentakuMapper;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7056GappeiShichosonDac;
@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 市町村選択には、旧市町村選択情報を取得する、構成市町村選択情報を取得する機能を提供します。
  *
+ * @reamsid_L DBA-0100-020 xuyannan
  */
 public class ShichosonSentakuFinder {
 

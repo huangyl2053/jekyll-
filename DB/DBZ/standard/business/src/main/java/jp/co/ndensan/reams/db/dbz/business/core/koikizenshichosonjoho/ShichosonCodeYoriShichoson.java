@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 市町村コードによる市町村クラスです。
+ *
+ * @reamsid_L DBA-0010-020 linghuhang
  */
 public class ShichosonCodeYoriShichoson {
 

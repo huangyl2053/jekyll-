@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -17,9 +17,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 認定調査票_概況調査_サービスの状況を管理するクラスです。
  */
-public class NinteichosahyoServiceJokyo extends 
-        ParentModelBase<NinteichosahyoServiceJokyoIdentifier, 
-        DbT5207NinteichosahyoServiceJokyoEntity, NinteichosahyoServiceJokyo> implements Serializable {
+public class NinteichosahyoServiceJokyo extends
+        ParentModelBase<NinteichosahyoServiceJokyoIdentifier, DbT5207NinteichosahyoServiceJokyoEntity, NinteichosahyoServiceJokyo>
+        implements Serializable {
 
     private final DbT5207NinteichosahyoServiceJokyoEntity entity;
     private final NinteichosahyoServiceJokyoIdentifier id;
@@ -127,8 +127,7 @@ public class NinteichosahyoServiceJokyo extends
     /**
      * 認定調査票_概況調査_サービスの状況の識別子{@link NinteichosahyoServiceJokyoIdentifier}を返します。
      *
-     * @return
-     * 認定調査票_概況調査_サービスの状況の識別子{@link NinteichosahyoServiceJokyoIdentifier}
+     * @return 認定調査票_概況調査_サービスの状況の識別子{@link NinteichosahyoServiceJokyoIdentifier}
      */
     @Override
     public NinteichosahyoServiceJokyoIdentifier identifier() {
@@ -136,8 +135,7 @@ public class NinteichosahyoServiceJokyo extends
     }
 
     /**
-     * 認定調査票_概況調査_サービスの状況のみを変更対象とします。<br/>
-     * {@link DbT5207NinteichosahyoServiceJokyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査票_概況調査_サービスの状況のみを変更対象とします。<br/> {@link DbT5207NinteichosahyoServiceJokyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosahyoServiceJokyo}
      */
@@ -152,8 +150,7 @@ public class NinteichosahyoServiceJokyo extends
     }
 
     /**
-     * 保持する認定調査票_概況調査_サービスの状況を削除対象とします。<br/>
-     * {@link DbT5207NinteichosahyoServiceJokyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する認定調査票_概況調査_サービスの状況を削除対象とします。<br/> {@link DbT5207NinteichosahyoServiceJokyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteichosahyoServiceJokyo}
      */
@@ -181,7 +178,7 @@ public class NinteichosahyoServiceJokyo extends
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

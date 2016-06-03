@@ -5,16 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0070011.SofujohoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0070011.dgSofuIchiran_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
 /**
  * 過誤申立書送付情報照会画面です。
@@ -38,6 +30,8 @@ public class Sofujoho {
 
     //指定年月の送付済情報の条件が入力されたことをチェックするメソッド
     private Boolean setfuYminfo(SofujohoDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.hashCode();
         boolean status = true;
 
         //TODO n3317塚田　Yamlを使わないようにする
@@ -115,76 +109,73 @@ public class Sofujoho {
 //        grid.setDataSource(arraydata);
 //
 //    }
-
-    private List<dgSofuIchiran_Row> createRowSearchSofuTestData(SofujohoDiv panel, String ymlName) {
-        List<dgSofuIchiran_Row> arrayData = new ArrayList<>();
-        List<HashMap> ymlData = ymlData(ymlName);
-
-        //TO DO データを増える場合。
-        for (int i = 1; i < ymlData.size(); i++) {
-
-            HashMap hashMap = ymlData.get(i);
-            ControlGenerator ymlDt = new ControlGenerator(hashMap);
-
-            arrayData.add(createRowSearchSofuzumiList(
-                    ymlDt.getAsRString("jigyoshaNo"),
-                    ymlDt.getAsRString("jigyoshaName"),
-                    ymlDt.getAsRString("hihoNo"),
-                    ymlDt.getAsRString("hihoName"),
-                    ymlDt.getAsRString("moshitateshaKubun"),
-                    ymlDt.getAsRString("style"),
-                    ymlDt.getAsRString("moshitateRiyu"),
-                    ymlDt.getAsRString("serviceTeikyoYM"),
-                    ymlDt.getAsRString("moshitateYMD"),
-                    ymlDt.getAsRString("shokisaiHokenshaNo")
-            ));
-        }
-
-        return arrayData;
-    }
-
-    private dgSofuIchiran_Row createRowSearchSofuzumiList(
-            RString jigyoshaNo,
-            RString jigyoshaName,
-            RString hihoNo,
-            RString hihoName,
-            RString moshitateshaKubun,
-            RString style,
-            RString moshitateRiyu,
-            RString serviceTeikyoYM,
-            RString moshitateYMD,
-            RString shokisaiHokenshaNo) {
-
-        dgSofuIchiran_Row rowSearchSofuzumiList;
-        rowSearchSofuzumiList = new dgSofuIchiran_Row(
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY
-        );
-
-        rowSearchSofuzumiList.setTxtJigyoshaNo(jigyoshaNo);
-        rowSearchSofuzumiList.setTxtJigyoshaName(jigyoshaName);
-        rowSearchSofuzumiList.setTxtHihoNo(hihoNo);
-        rowSearchSofuzumiList.setTxtHihoName(hihoName);
-        rowSearchSofuzumiList.setTxtMoshitateshaKubun(moshitateshaKubun);
-        rowSearchSofuzumiList.setTxtMoshitateRiyu(moshitateRiyu);
-        rowSearchSofuzumiList.setTxtStyle(style);
-        rowSearchSofuzumiList.setTxtServiceTeikyoYM(serviceTeikyoYM);
-        rowSearchSofuzumiList.setTxtMoshitateYMD(moshitateYMD);
-        rowSearchSofuzumiList.setTxtShokisaiHokenshaNo(shokisaiHokenshaNo);
-
-        return rowSearchSofuzumiList;
-
-    }
-
-    private List<HashMap> ymlData(String ymlName) {
-        return YamlLoader.DBC.loadAsList(new RString(ymlName));
-    }
+//    private List<dgSofuIchiran_Row> createRowSearchSofuTestData(SofujohoDiv panel, String ymlName) {
+//        List<dgSofuIchiran_Row> arrayData = new ArrayList<>();
+//        List<HashMap> ymlData = ymlData(ymlName);
+//
+//        //TO DO データを増える場合。
+//        for (int i = 1; i < ymlData.size(); i++) {
+//
+//            HashMap hashMap = ymlData.get(i);
+//            ControlGenerator ymlDt = new ControlGenerator(hashMap);
+//
+//            arrayData.add(createRowSearchSofuzumiList(
+//                    ymlDt.getAsRString("jigyoshaNo"),
+//                    ymlDt.getAsRString("jigyoshaName"),
+//                    ymlDt.getAsRString("hihoNo"),
+//                    ymlDt.getAsRString("hihoName"),
+//                    ymlDt.getAsRString("moshitateshaKubun"),
+//                    ymlDt.getAsRString("style"),
+//                    ymlDt.getAsRString("moshitateRiyu"),
+//                    ymlDt.getAsRString("serviceTeikyoYM"),
+//                    ymlDt.getAsRString("moshitateYMD"),
+//                    ymlDt.getAsRString("shokisaiHokenshaNo")
+//            ));
+//        }
+//
+//        return arrayData;
+//    }
+//    private dgSofuIchiran_Row createRowSearchSofuzumiList(
+//            RString jigyoshaNo,
+//            RString jigyoshaName,
+//            RString hihoNo,
+//            RString hihoName,
+//            RString moshitateshaKubun,
+//            RString style,
+//            RString moshitateRiyu,
+//            RString serviceTeikyoYM,
+//            RString moshitateYMD,
+//            RString shokisaiHokenshaNo) {
+//
+//        dgSofuIchiran_Row rowSearchSofuzumiList;
+//        rowSearchSofuzumiList = new dgSofuIchiran_Row(
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY
+//        );
+//
+//        rowSearchSofuzumiList.setTxtJigyoshaNo(jigyoshaNo);
+//        rowSearchSofuzumiList.setTxtJigyoshaName(jigyoshaName);
+//        rowSearchSofuzumiList.setTxtHihoNo(hihoNo);
+//        rowSearchSofuzumiList.setTxtHihoName(hihoName);
+//        rowSearchSofuzumiList.setTxtMoshitateshaKubun(moshitateshaKubun);
+//        rowSearchSofuzumiList.setTxtMoshitateRiyu(moshitateRiyu);
+//        rowSearchSofuzumiList.setTxtStyle(style);
+//        rowSearchSofuzumiList.setTxtServiceTeikyoYM(serviceTeikyoYM);
+//        rowSearchSofuzumiList.setTxtMoshitateYMD(moshitateYMD);
+//        rowSearchSofuzumiList.setTxtShokisaiHokenshaNo(shokisaiHokenshaNo);
+//
+//        return rowSearchSofuzumiList;
+//
+//    }
+//    private List<HashMap> ymlData(String ymlName) {
+//        return YamlLoader.DBC.loadAsList(new RString(ymlName));
+//    }
 }

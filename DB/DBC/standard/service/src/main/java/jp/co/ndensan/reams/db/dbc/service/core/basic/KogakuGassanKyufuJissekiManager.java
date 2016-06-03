@@ -48,7 +48,6 @@ public class KogakuGassanKyufuJissekiManager {
      * @param 被保険者番号 HihokenshaNo
      * @param 支給申請書整理番号 ShikyuShinseiSeiriNo
      * @param 整理番号 SeiriNo
-     * @param 履歴番号 RirekiNo
      * @return KogakuGassanKyufuJisseki
      */
     @Transaction

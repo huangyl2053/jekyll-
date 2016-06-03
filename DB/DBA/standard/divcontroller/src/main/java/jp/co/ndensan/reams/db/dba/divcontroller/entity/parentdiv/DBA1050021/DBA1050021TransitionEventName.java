@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 public enum DBA1050021TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    資格異動訂正に戻る("資格異動訂正に戻る"),
+    履歴一覧に戻る("履歴一覧に戻る"),
     資格異動の訂正を保存する("資格異動の訂正を保存する");
 
     private final RString name;

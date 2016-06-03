@@ -14,6 +14,7 @@ import lombok.Setter;
 /**
  *
  * 調査委託先・調査員一覧表_バッチ処理クラスパラメータクラスです。
+ * @reamsid_L DBE-0290-030 dongyabin
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

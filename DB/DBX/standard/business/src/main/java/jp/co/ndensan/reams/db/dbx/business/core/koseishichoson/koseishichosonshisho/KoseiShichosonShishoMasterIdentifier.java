@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 構成市町村支所マスタの識別子です。
+ *
+ * @reamsid_L DBX-9999-011 sunhaidi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

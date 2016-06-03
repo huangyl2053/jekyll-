@@ -4,20 +4,36 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onBlurTxtchosaItakusaki = function () {
-                return "onBlurTxtchosaItakusaki";
+            Events.onBlur_TxtChosaItakusakiCode = function () {
+                return "onBlur_TxtChosaItakusakiCode";
             };
 
-            Events.onClickBtnZenkaiFukusha = function () {
-                return "onClickBtnZenkaiFukusha";
+            Events.onOKClose_BtnChosaItakusakiGuide = function () {
+                return "onOKClose_BtnChosaItakusakiGuide";
             };
 
-            Events.onBlurTxtChosaincode = function () {
-                return "onBlurTxtChosaincode";
+            Events.onClick_BtnChosaItakusakiGuide = function () {
+                return "onClick_BtnChosaItakusakiGuide";
             };
 
-            Events.onClickBtnClear = function () {
-                return "onClickBtnClear";
+            Events.onClick_BtnZenkaiFukusha = function () {
+                return "onClick_BtnZenkaiFukusha";
+            };
+
+            Events.onBlur_TxtChosainCode = function () {
+                return "onBlur_TxtChosainCode";
+            };
+
+            Events.onOKClose_BtnChosainGuide = function () {
+                return "onOKClose_BtnChosainGuide";
+            };
+
+            Events.onClick_BtnChosainGuide = function () {
+                return "onClick_BtnChosainGuide";
+            };
+
+            Events.onClick_BtnClear = function () {
+                return "onClick_BtnClear";
             };
             return Events;
         })();

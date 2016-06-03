@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.helper;
 
-import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho.ShujiiIkenshoSakuseiIrai;
-import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho.ShujiiIkenshoSakuseiTokusoku;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikensho.ShujiiIkenshoSakuseiIrai;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikensho.ShujiiIkenshoSakuseiTokusoku;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IkenshoSakuseiTokusokuHoho;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IshiKubun;

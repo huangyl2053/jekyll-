@@ -13,11 +13,19 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
  * 認定調査スケジュール情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-0020-020 lishengli
  */
 public class NinteichosaSchedule implements Serializable {
 
     private final DbT5221NinteichosaScheduleEntity entity;
 
+    /**
+     * コンストラクタです。<br/>
+     * DBより取得した{@link DbT5221NinteichosaScheduleEntity}より{@link NinteichosaSchedule}を生成します。
+     *
+     * @param entity DBより取得した{@link DbT5221NinteichosaScheduleEntity}
+     */
     public NinteichosaSchedule(DbT5221NinteichosaScheduleEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者"));
     }
@@ -27,7 +35,7 @@ public class NinteichosaSchedule implements Serializable {
      *
      * @return 申請書管理番号
      */
-    public ShinseishoKanriNo getTemp_申請書管理番号2() {
+    public ShinseishoKanriNo get申請書管理番号() {
         return entity.getShinseishoKanriNo();
     }
 }

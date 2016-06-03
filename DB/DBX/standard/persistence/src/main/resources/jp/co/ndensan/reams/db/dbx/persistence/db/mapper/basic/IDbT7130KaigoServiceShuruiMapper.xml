@@ -81,5 +81,30 @@
         FROM
         rgdb."DbT7130KaigoServiceShurui"
     </select>
+    
+    <select id="getserviceShuruiCdDDL" resultMap="ResultMap_DbT7130KaigoServiceShuruiEntity">
+        SELECT
+          TEMP."serviceShuruiCd",
+          TEMP."serviceShuruiMeisho" 
+        FROM
+          ( 
+            SELECT
+              DbT7130."serviceShuruiCd",
+              DbT7130. "serviceShuruiMeisho", 
+              DbT7130."teikyoKaishiYM",
+              row_number() OVER ( 
+                PARTITION BY
+                  DbT7130."serviceShuruiCd"
+                ORDER BY
+                  DbT7130."teikyoKaishiYM" DESC
+              ) AS rrkno 
+            FROM
+              rgdb."DbT7130KaigoServiceShurui" AS DbT7130
+            WHERE
+              DbT7130."teikyoKaishiYM" <![CDATA[<=]]> #{systemDate}
+          ) TEMP 
+        WHERE
+          TEMP.rrkno = 1
+    </select>
 
 </mapper>

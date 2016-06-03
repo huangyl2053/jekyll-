@@ -11,8 +11,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.INinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -63,7 +61,6 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
 //    public DbT5101NinteiShinseiJohoEntity getEntity() {
 //        return entity;
 //    }
-
     /**
      * DbT5101NinteiShinseiJohoEntityを設定します。
      *
@@ -1922,8 +1919,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。
-     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

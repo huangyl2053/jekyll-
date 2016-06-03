@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 訪問介護利用者負担額減額のマッピング用XMLです。 -->
+<!-- @reamsid_L DBD-9999-013 huangh -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.homonkaigogengaku.IHomonKaigoRiyoshaFutangakuGengakuMapper">
+
+    <select id="select訪問介護利用者負担額減額ByKey" resultMap="resultMap_HomonKaigoRiyoshaFutangakuGengakuEntity" fetchSize="500">
+        <include refid="selectHomonKaigoRiyoshaFutangakuGengakuEntity" />
+    </select>
+
+    <sql id="selectHomonKaigoRiyoshaFutangakuGengakuEntity">
+        SELECT
+        DbT4016HomonKaigoRiyoshaFutangakuGengaku.*,
+        DbT4010GemmenGengakuShinsei.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4016HomonKaigoRiyoshaFutangakuGengakuMapper.noDeleted_DbT4016HomonKaigoRiyoshaFutangakuGengaku" />) AS DbT4016HomonKaigoRiyoshaFutangakuGengaku
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.noDeleted_DbT4010GemmenGengakuShinsei" />) AS DbT4010GemmenGengakuShinsei
+        ON
+        DbT4016HomonKaigoRiyoshaFutangakuGengaku."dbT4016HomonKaigoRiyoshaFutangakuGengaku_hihokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_hihokenshaNo" and
+        DbT4016HomonKaigoRiyoshaFutangakuGengaku."dbT4016HomonKaigoRiyoshaFutangakuGengaku_rirekiNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
+        <where>
+            <if test="uses被保険者番号">
+                AND DbT4016HomonKaigoRiyoshaFutangakuGengaku."dbT4016HomonKaigoRiyoshaFutangakuGengaku_hihokenshaNo" = #{被保険者番号}
+            </if>
+            <if test="uses履歴番号">
+                and DbT4016HomonKaigoRiyoshaFutangakuGengaku."dbT4016HomonKaigoRiyoshaFutangakuGengaku_rirekiNo"  = #{履歴番号}
+            </if>
+            <if test="uses減免減額種類">
+                and DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" = #{減免減額種類}
+            </if>
+        </where>
+    </sql>
+
+    <resultMap id="resultMap_HomonKaigoRiyoshaFutangakuGengakuEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengakuEntity" autoMapping="true">
+        <id property="訪問介護利用者負担額減額Entity.hihokenshaNo" column="dbT4020TokubetsuchiikiKasanGemmen_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="訪問介護利用者負担額減額Entity.rirekiNo" column="dbT4020TokubetsuchiikiKasanGemmen_rirekiNo" />
+        <association property="訪問介護利用者負担額減額Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4016HomonKaigoRiyoshaFutangakuGengakuMapper.ResultMap_DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity"/>
+        <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
+    </resultMap>
+
+</mapper>

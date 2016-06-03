@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujiko
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujikosakuseigokei.KyotakuKeikakuJikoSakuseiGokei;
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujikosakuseigokei.KyotakuKeikakuJikoSakuseiGokeiIdentifier;
-import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujikosakuseitankinyushoriyonissu.KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu;
-import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujikosakuseitankinyushoriyonissu.KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier;
+import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeika.KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu;
+import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeika.KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity;
@@ -19,13 +19,16 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyotakuKeikakuJikosakuseiMeisai}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class KyotakuKeikakuJikosakuseiMeisaiBuilder {
 
     private final DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity entity;
     private final KyotakuKeikakuJikosakuseiMeisaiIdentifier id;
     private final Models<KyotakuKeikakuJikoSakuseiGokeiIdentifier, KyotakuKeikakuJikoSakuseiGokei> kyotakuKeikakuJikoSakuseiGokei;
-    private final Models<KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier, KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu> kyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu;
+    private final Models<
+            KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier, KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu> kyotakuRiyoNissu;
 
     /**
      * {@link DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity}より{@link KyotakuKeikakuJikosakuseiMeisai}の編集用Builderクラスを生成します。
@@ -40,12 +43,12 @@ public class KyotakuKeikakuJikosakuseiMeisaiBuilder {
             DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity entity,
             KyotakuKeikakuJikosakuseiMeisaiIdentifier id,
             Models<KyotakuKeikakuJikoSakuseiGokeiIdentifier, KyotakuKeikakuJikoSakuseiGokei> kyotakuKeikakuJikoSakuseiGokei,
-            Models<KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier, KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu> kyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu
+            Models<KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier, KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu> kyotakuRiyoNissu
     ) {
         this.entity = entity.clone();
         this.id = id;
         this.kyotakuKeikakuJikoSakuseiGokei = kyotakuKeikakuJikoSakuseiGokei.clone();
-        this.kyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu = kyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu.clone();
+        this.kyotakuRiyoNissu = kyotakuRiyoNissu.clone();
 
     }
 
@@ -218,9 +221,10 @@ public class KyotakuKeikakuJikosakuseiMeisaiBuilder {
      * @return Builder
      * @throws IllegalStateException キーが一致しない場合
      */
-    public KyotakuKeikakuJikosakuseiMeisaiBuilder setKyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu(KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu 居宅給付計画自己作成短期入所利用日数) {
+    public KyotakuKeikakuJikosakuseiMeisaiBuilder setKyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu(
+            KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu 居宅給付計画自己作成短期入所利用日数) {
         if (hasSameIdentifier(居宅給付計画自己作成短期入所利用日数.identifier())) {
-            kyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu.add(居宅給付計画自己作成短期入所利用日数);
+            kyotakuRiyoNissu.add(居宅給付計画自己作成短期入所利用日数);
             return this;
         }
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
@@ -238,6 +242,6 @@ public class KyotakuKeikakuJikosakuseiMeisaiBuilder {
      * @return {@link KyotakuKeikakuJikosakuseiMeisai}のインスタンス
      */
     public KyotakuKeikakuJikosakuseiMeisai build() {
-        return new KyotakuKeikakuJikosakuseiMeisai(entity, id, kyotakuKeikakuJikoSakuseiGokei, kyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu);
+        return new KyotakuKeikakuJikosakuseiMeisai(entity, id, kyotakuKeikakuJikoSakuseiGokei, kyotakuRiyoNissu);
     }
 }

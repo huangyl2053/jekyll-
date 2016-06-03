@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteishinsei
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoIdentifier;
@@ -18,7 +17,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikanryojo
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikeikakujoho.NinteiKeikakuJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikeikakujoho.NinteiKeikakuJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.renrakusakijoho.RenrakusakiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.renrakusakijoho.RenrakusakiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinsakaiiinjogaijoho.ShinsakaiIinJogaiJoho;
@@ -33,11 +31,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tsuchishohakko
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tsuchishohakkojoho.TsuchishoHakkoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -53,9 +48,12 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * {@link NinteiShinseiJoho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class NinteiShinseiJohoBuilder {
 
@@ -91,7 +89,7 @@ public class NinteiShinseiJohoBuilder {
             Models<ImageIdentifier, Image> image,
             Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJoho,
             Models<NinteiKeikakuJohoIdentifier, NinteiKeikakuJoho> ninteiKeikakuJoho,
-//            Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho,
+            //            Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho,
             Models<RenrakusakiJohoIdentifier, RenrakusakiJoho> renrakusakiJoho,
             Models<ShinsakaiIinJogaiJohoIdentifier, ShinsakaiIinJogaiJoho> shinsakaiIinJogaiJoho,
             Models<ShinseiRirekiJohoIdentifier, ShinseiRirekiJoho> shinseiRirekiJoho,
@@ -418,7 +416,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * 要介護申請・要支援申請の区分を設定します。
      *
-     * @param 要介護申請_要支援申請の区分
+     * @param 要介護申請_要支援申請の区分 要介護申請_要支援申請の区分
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set要介護申請_要支援申請の区分(RString 要介護申請_要支援申請の区分) {
@@ -502,7 +500,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * ２号医療保険者名を設定します。
      *
-     * @param 医療保険者名_２号
+     * @param 医療保険者名_２号 医療保険者名_２号
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set２号医療保険者名(RString 医療保険者名_２号) {
@@ -514,7 +512,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * ２号医療保険記号番号を設定します。
      *
-     * @param 医療保険記号番号_２号
+     * @param 医療保険記号番号_２号 医療保険記号番号_２号
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set２号医療保険記号番号(RString 医療保険記号番号_２号) {
@@ -526,7 +524,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * ２号特定疾病コードを設定します。
      *
-     * @param 特定疾病コード_２号
+     * @param 特定疾病コード_２号 特定疾病コード_２号
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set２号特定疾病コード(Code 特定疾病コード_２号) {
@@ -1033,8 +1031,8 @@ public class NinteiShinseiJohoBuilder {
      * キーが一致する場合は要介護認定1.5次判定結果情報リストに要介護認定1.5次判定結果情報{@link IchiGojiHanteiKekkaJoho}をセットします。<br>
      * キーが一致しない場合、新たに追加します。<br>
      *
-     * @param 要介護認定1_5次判定結果情報
-     * @return {@link IchiGojiHanteiKekkaJohoBuilder}
+     * @param 要介護認定1_5次判定結果情報 要介護認定1_5次判定結果情報
+     * @return {@link NinteiShinseiJohoBuilder}
      * @throws IllegalStateException キーが一致しない場合
      */
     public NinteiShinseiJohoBuilder setIchiGojiHanteiKekkaJoho(IchiGojiHanteiKekkaJoho 要介護認定1_5次判定結果情報) {
@@ -1049,6 +1047,12 @@ public class NinteiShinseiJohoBuilder {
         return (id.get申請書管理番号().equals(要介護認定1_5次判定結果情報識別子.get申請書管理番号()));
     }
 
+    /**
+     * 要介護認定一次判定結果情報を設定します。
+     *
+     * @param 要介護認定一次判定結果情報 要介護認定一次判定結果情報
+     * @return NinteiShinseiJoho
+     */
     public NinteiShinseiJohoBuilder setIchijiHanteiKekkaJoho(IchijiHanteiKekkaJoho 要介護認定一次判定結果情報) {
         if (hasSameIdentifier(要介護認定一次判定結果情報.identifier())) {
             ichijiHanteiKekkaJoho.add(要介護認定一次判定結果情報);
@@ -1061,6 +1065,12 @@ public class NinteiShinseiJohoBuilder {
         return (id.get申請書管理番号().equals(要介護認定一次判定結果情報識別子.get申請書管理番号()));
     }
 
+    /**
+     * イメージ情報を設定します。
+     *
+     * @param イメージ情報 イメージ情報
+     * @return NinteiShinseiJohoBuilder
+     */
     public NinteiShinseiJohoBuilder setImage(Image イメージ情報) {
         if (hasSameIdentifier(イメージ情報.identifier())) {
             image.add(イメージ情報);
@@ -1073,6 +1083,12 @@ public class NinteiShinseiJohoBuilder {
         return (id.get申請書管理番号().equals(イメージ情報識別子.get申請書管理番号()));
     }
 
+    /**
+     * 要介護認定完了情報を設定します。
+     *
+     * @param 要介護認定完了情報 要介護認定完了情報
+     * @return NinteiShinseiJohoBuilder
+     */
     public NinteiShinseiJohoBuilder setNinteiKanryoJoho(NinteiKanryoJoho 要介護認定完了情報) {
         if (hasSameIdentifier(要介護認定完了情報.identifier())) {
             ninteiKanryoJoho.add(要介護認定完了情報);
@@ -1085,6 +1101,12 @@ public class NinteiShinseiJohoBuilder {
         return (id.get申請書管理番号().equals(要介護認定完了情報識別子.get申請書管理番号()));
     }
 
+    /**
+     * 要介護認定計画情報を設定します。
+     *
+     * @param 要介護認定計画情報 要介護認定計画情報
+     * @return NinteiShinseiJohoBuilder
+     */
     public NinteiShinseiJohoBuilder setNinteiKeikakuJoho(NinteiKeikakuJoho 要介護認定計画情報) {
         if (hasSameIdentifier(要介護認定計画情報.identifier())) {
             ninteiKeikakuJoho.add(要介護認定計画情報);
@@ -1097,6 +1119,12 @@ public class NinteiShinseiJohoBuilder {
         return (id.get申請書管理番号().equals(要介護認定計画情報識別子.get申請書管理番号()));
     }
 
+    /**
+     * 要介護認定結果情報を設定します。
+     *
+     * @param 要介護認定結果情報 要介護認定結果情報
+     * @return NinteiShinseiJohoBuilder
+     */
     public NinteiShinseiJohoBuilder setTodokedesha(NinteiKekkaJoho 要介護認定結果情報) {
 //        if (hasSameIdentifier(要介護認定結果情報.identifier())) {
 //            ninteiKekkaJoho.add(要介護認定結果情報);
@@ -1105,10 +1133,15 @@ public class NinteiShinseiJohoBuilder {
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
-    private boolean hasSameIdentifier(NinteiKekkaJohoIdentifier 要介護認定結果情報識別子) {
-        return (id.get申請書管理番号().equals(要介護認定結果情報識別子.get申請書管理番号()));
-    }
-
+//    private boolean hasSameIdentifier(NinteiKekkaJohoIdentifier 要介護認定結果情報識別子) {
+//        return (id.get申請書管理番号().equals(要介護認定結果情報識別子.get申請書管理番号()));
+//    }
+    /**
+     * 介護連絡先情報を設定します。
+     *
+     * @param 介護連絡先情報 介護連絡先情報
+     * @return NinteiShinseiJohoBuilder
+     */
     public NinteiShinseiJohoBuilder setRenrakusakiJoho(RenrakusakiJoho 介護連絡先情報) {
         if (hasSameIdentifier(介護連絡先情報.identifier())) {
             renrakusakiJoho.add(介護連絡先情報);
@@ -1121,6 +1154,12 @@ public class NinteiShinseiJohoBuilder {
         return (id.get申請書管理番号().equals(介護連絡先情報識別子.get申請書管理番号()));
     }
 
+    /**
+     * 審査会委員除外情報を設定します。
+     *
+     * @param 審査会委員除外情報 審査会委員除外情報
+     * @return NinteiShinseiJohoBuilder
+     */
     public NinteiShinseiJohoBuilder setShinsakaiIinJogaiJoho(ShinsakaiIinJogaiJoho 審査会委員除外情報) {
         if (hasSameIdentifier(審査会委員除外情報.identifier())) {
             shinsakaiIinJogaiJoho.add(審査会委員除外情報);
@@ -1133,6 +1172,12 @@ public class NinteiShinseiJohoBuilder {
         return (id.get申請書管理番号().equals(審査会委員除外情報識別子.get申請書管理番号()));
     }
 
+    /**
+     * 申請履歴情報を設定します。
+     *
+     * @param 申請履歴情報 申請履歴情報
+     * @return NinteiShinseiJohoBuilder
+     */
     public NinteiShinseiJohoBuilder setShinseiRirekiJoho(ShinseiRirekiJoho 申請履歴情報) {
         if (hasSameIdentifier(申請履歴情報.identifier())) {
             shinseiRirekiJoho.add(申請履歴情報);
@@ -1145,6 +1190,12 @@ public class NinteiShinseiJohoBuilder {
         return (id.get申請書管理番号().equals(申請履歴情報識別子.get申請管理番号()));
     }
 
+    /**
+     * 申請届出情報を設定します。
+     *
+     * @param 申請届出情報 申請届出情報
+     * @return NinteiShinseiJohoBuilder
+     */
     public NinteiShinseiJohoBuilder setShinseitodokedeJoho(ShinseitodokedeJoho 申請届出情報) {
         if (hasSameIdentifier(申請届出情報.identifier())) {
             shinseitodokedeJoho.add(申請届出情報);
@@ -1157,6 +1208,12 @@ public class NinteiShinseiJohoBuilder {
         return (id.get申請書管理番号().equals(申請届出情報識別子.get申請書管理番号()));
     }
 
+    /**
+     * 転入_死亡情報を設定します。
+     *
+     * @param 転入_死亡情報 転入_死亡情報
+     * @return NinteiShinseiJohoBuilder
+     */
     public NinteiShinseiJohoBuilder setTennyuShibo(TennyuShibo 転入_死亡情報) {
         if (hasSameIdentifier(転入_死亡情報.identifier())) {
             tennyuShibo.add(転入_死亡情報);
@@ -1169,6 +1226,12 @@ public class NinteiShinseiJohoBuilder {
         return (id.get申請書管理番号().equals(転入_死亡情報識別子.get申請書管理番号()));
     }
 
+    /**
+     * 通知書発行情報を設定します。
+     *
+     * @param 通知書発行情報 通知書発行情報
+     * @return NinteiShinseiJohoBuilder
+     */
     public NinteiShinseiJohoBuilder setTsuchishoHakkoJoho(TsuchishoHakkoJoho 通知書発行情報) {
         if (hasSameIdentifier(通知書発行情報.identifier())) {
             tsuchishoHakkoJoho.add(通知書発行情報);
@@ -1188,7 +1251,14 @@ public class NinteiShinseiJohoBuilder {
      */
     public NinteiShinseiJoho build() {
         return null;
-//        return new NinteiShinseiJoho(entity, id, ichiGojiHanteiKekkaJoho, ichijiHanteiKekkaJoho, image, ninteiKanryoJoho, ninteiKeikakuJoho, null, renrakusakiJoho, shinsakaiIinJogaiJoho, shinseiRirekiJoho, shinseitodokedeJoho, tennyuShibo, tsuchishoHakkoJoho);
+//        return new NinteiShinseiJoho(entity,
+//        id, ichiGojiHanteiKekkaJoho,
+//        ichijiHanteiKekkaJoho, image,
+//        ninteiKanryoJoho, ninteiKeikakuJoho,
+//        null, renrakusakiJoho,
+//        shinsakaiIinJogaiJoho,
+//        shinseiRirekiJoho, shinseitodokedeJoho,
+//        tennyuShibo, tsuchishoHakkoJoho);
     }
 
 }

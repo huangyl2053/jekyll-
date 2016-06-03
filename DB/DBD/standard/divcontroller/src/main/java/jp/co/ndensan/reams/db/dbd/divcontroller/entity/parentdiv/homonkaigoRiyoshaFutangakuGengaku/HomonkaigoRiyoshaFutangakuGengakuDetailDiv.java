@@ -1,18 +1,14 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.homonkaigoRiyoshaFutangakuGengaku;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.homonkaigoRiyoshaFutangakuGengaku.HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutanDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.homonkaigoRiyoshaFutangakuGengaku.HomonkaigoRiyoshaFutangakuGengakuShinseiDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.homonkaigoRiyoshaFutangakuGengaku.ShogaishaTechoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * HomonkaigoRiyoshaFutangakuGengakuDetail のクラスファイル 
- * 
+ * HomonkaigoRiyoshaFutangakuGengakuDetail のクラスファイル
+ *
  * @author 自動生成
  */
 public class HomonkaigoRiyoshaFutangakuGengakuDetailDiv extends Panel {
@@ -22,6 +18,7 @@ public class HomonkaigoRiyoshaFutangakuGengakuDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("HomonkaigoRiyoshaFutangakuGengakuShinsei")
     private HomonkaigoRiyoshaFutangakuGengakuShinseiDiv HomonkaigoRiyoshaFutangakuGengakuShinsei;
     @JsonProperty("ShogaishaTecho")
@@ -42,7 +39,7 @@ public class HomonkaigoRiyoshaFutangakuGengakuDetailDiv extends Panel {
 
     @JsonProperty("HomonkaigoRiyoshaFutangakuGengakuShinsei")
     public void setHomonkaigoRiyoshaFutangakuGengakuShinsei(HomonkaigoRiyoshaFutangakuGengakuShinseiDiv HomonkaigoRiyoshaFutangakuGengakuShinsei) {
-        this.HomonkaigoRiyoshaFutangakuGengakuShinsei=HomonkaigoRiyoshaFutangakuGengakuShinsei;
+        this.HomonkaigoRiyoshaFutangakuGengakuShinsei = HomonkaigoRiyoshaFutangakuGengakuShinsei;
     }
 
     @JsonProperty("ShogaishaTecho")
@@ -52,7 +49,7 @@ public class HomonkaigoRiyoshaFutangakuGengakuDetailDiv extends Panel {
 
     @JsonProperty("ShogaishaTecho")
     public void setShogaishaTecho(ShogaishaTechoDiv ShogaishaTecho) {
-        this.ShogaishaTecho=ShogaishaTecho;
+        this.ShogaishaTecho = ShogaishaTecho;
     }
 
     @JsonProperty("HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutan")
@@ -62,7 +59,7 @@ public class HomonkaigoRiyoshaFutangakuGengakuDetailDiv extends Panel {
 
     @JsonProperty("HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutan")
     public void setHomonkaigoRiyoshaFutangakuGengakuRiyoshaFutan(HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutanDiv HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutan) {
-        this.HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutan=HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutan;
+        this.HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutan = HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutan;
     }
 
 }

@@ -26,7 +26,9 @@ public class NinchishoKoreishaJiritsudoCode implements Comparable<NinchishoKorei
 //    IDbColumnMappable, IValidatable, IValueObject<Code> {
 
     private final Code code;
-
+    /**
+     * NinchishoKoreishaJiritsudoCodeのEMPTYです。
+     */
     public static final NinchishoKoreishaJiritsudoCode EMPTY;
 
     /**

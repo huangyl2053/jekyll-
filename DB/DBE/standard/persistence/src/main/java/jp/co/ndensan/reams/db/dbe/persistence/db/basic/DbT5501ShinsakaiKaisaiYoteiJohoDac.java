@@ -7,23 +7,28 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJoho;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJoho.gogitaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5503ShinsakaiWariateIinJoho.shinsakaiKaisaiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJoho.shinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護認定審査会開催予定情報のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 chengsanyuan
  */
 public class DbT5501ShinsakaiKaisaiYoteiJohoDac implements ISaveable<DbT5501ShinsakaiKaisaiYoteiJohoEntity> {
 
+    private static final int INDEX_6 = 6;
     @InjectSession
     private SqlSession session;
 
@@ -46,6 +51,27 @@ public class DbT5501ShinsakaiKaisaiYoteiJohoDac implements ISaveable<DbT5501Shin
                 where(
                         eq(shinsakaiKaisaiNo, 介護認定審査会開催番号)).
                 toObject(DbT5501ShinsakaiKaisaiYoteiJohoEntity.class);
+    }
+
+    /**
+     * 年月で介護認定審査会開催予定情報を取得します。
+     *
+     * @param 年月 年月
+     * @return DbT5501ShinsakaiKaisaiYoteiJohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5501ShinsakaiKaisaiYoteiJohoEntity> selectNengetsu(
+            RString 年月) throws NullPointerException {
+        requireNonNull(年月, UrSystemErrorMessages.値がnull.getReplacedMessage("年月"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5501ShinsakaiKaisaiYoteiJoho.class).
+                where(
+                        eq(substr(DbT5501ShinsakaiKaisaiYoteiJoho.shinsakaiKaisaiYoteiYMD, 1, INDEX_6), 年月)).
+                toList(DbT5501ShinsakaiKaisaiYoteiJohoEntity.class);
     }
 
     /**
@@ -74,5 +100,26 @@ public class DbT5501ShinsakaiKaisaiYoteiJohoDac implements ISaveable<DbT5501Shin
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催予定情報エンティティ"));
 
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 合議体番号で介護認定審査会開催予定情報の件数を取得します。
+     *
+     * @param 合議体番号 合議体番号
+     * @return 件数
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int selectByGogitaiNO(
+            int 合議体番号) throws NullPointerException {
+        requireNonNull(合議体番号, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5501ShinsakaiKaisaiYoteiJoho.class).
+                where(
+                        eq(gogitaiNo, 合議体番号)
+                ).getCount();
     }
 }

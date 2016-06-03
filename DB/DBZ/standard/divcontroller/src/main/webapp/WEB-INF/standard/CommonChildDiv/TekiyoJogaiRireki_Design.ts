@@ -1,7 +1,7 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
-/// <reference path="./ShisetsuJoho.ts" />
+// <reference path="./ShisetsuJohoCommonChildDiv.ts" />
 
 module DBZ {
 
@@ -62,10 +62,6 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlTekiyoJiyu"));
             }
 
-            public txtNyusyoDate(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtNyusyoDate"));
-            }
-
             public txtKayijoDate(): UZA.TextBoxDate {
                 return new UZA.TextBoxDate(this.convFiledName("txtKayijoDate"));
             }
@@ -76,10 +72,6 @@ module DBZ {
 
             public ddlKaijyoJiyu(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlKaijyoJiyu"));
-            }
-
-            public txtTaisyoDate(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtTaisyoDate"));
             }
 
             public panelTekiyoJokaiTekiInput(): UZA.Panel {
@@ -106,9 +98,9 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlTekiyoJiyuInput"));
             }
 
-            public ccdShisetsuJoho(): DBZ.ShisetsuJoho.ModeController {
-                return new DBZ.ShisetsuJoho.ModeController(this.convFiledName("ccdShisetsuJoho"));
-            }
+            //public ccdShisetsuJoho(): DBZ.ShisetsuJohoCommonChildDiv.ModeController {
+            //    return new DBZ.ShisetsuJohoCommonChildDiv.ModeController(this.convFiledName("ccdShisetsuJoho"));
+            //}
 
             public panelTekiyoJokaiKaiJyoInput(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("panelTekiyoJokaiKaiJyoInput"));

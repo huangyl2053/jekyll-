@@ -8,13 +8,13 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe3010001.IchijiHanteiKekkaKakuninDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe3010001.IchijiHanteiShoriTaishoshaIchiranDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe3010001.dgIchijiHanteiTaishoshaIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001.IchijiHanteiKekkaKakuninDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001.IchijiHanteiShoriTaishoshaIchiranDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001.dgIchijiHanteiTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.ichijiHanteiKekkaInfo.dgIchijiHanteiKeikokuCode_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
@@ -201,13 +201,18 @@ public class IchijiHanteiKekkaKakunin {
                 panel.getCcdIchijiHanteiKakuninJoho().getTxtJyotaiAnteisei().setValue(cg.getAsRString("anteisei"));
                 panel.getCcdIchijiHanteiKakuninJoho().getTxtKyufuKbn().setValue(cg.getAsRString("kyufukbn"));
 
-                if (hashmapIchijiHanteiKekka.get("keikokusu").toString().equals("0")) {
-                    List<dgIchijiHanteiKeikokuCode_Row> arraydata = new ArrayList<>();
-                    panel.getCcdIchijiHanteiKakuninJoho().getDgIchijiHanteiKeikokuCode().setDataSource(arraydata);
-                } else {
-                    List arraydata = createRowIchijiHanteiKeikokuCode(hashmapIchijiHanteiKekka);
-                    panel.getCcdIchijiHanteiKakuninJoho().getDgIchijiHanteiKeikokuCode().setDataSource(arraydata);
-                }
+            }
+
+            if (!ichijiHanteiKekkaKakuninData.get(intIdx).getIchijiHanteibi().getValue().isEmpty()
+                    && hashmapIchijiHanteiKekka.get("keikokusu").toString().equals("0")) {
+                List<dgIchijiHanteiKeikokuCode_Row> arraydata = new ArrayList<>();
+                panel.getCcdIchijiHanteiKakuninJoho().getDgIchijiHanteiKeikokuCode().setDataSource(arraydata);
+            }
+
+            if (!ichijiHanteiKekkaKakuninData.get(intIdx).getIchijiHanteibi().getValue().isEmpty()
+                    && !hashmapIchijiHanteiKekka.get("keikokusu").toString().equals("0")) {
+                List arraydata = createRowIchijiHanteiKeikokuCode(hashmapIchijiHanteiKekka);
+                panel.getCcdIchijiHanteiKakuninJoho().getDgIchijiHanteiKeikokuCode().setDataSource(arraydata);
             }
 
             //ボタン活性化制御
@@ -259,16 +264,10 @@ public class IchijiHanteiKekkaKakunin {
     }
 
     private void setDisabled_btnCommonNextResult(boolean disabled) {
-        try {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnCommonNextResult"), disabled);
-        } catch (Exception e) {
-        }
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnCommonNextResult"), disabled);
     }
 
     private void setDisabled_btnCommonBackResult(boolean disabled) {
-        try {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnCommonBackResult"), disabled);
-        } catch (Exception e) {
-        }
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnCommonBackResult"), disabled);
     }
 }

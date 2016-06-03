@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 /**
  * 調査員情報（子）テーブルのエンティティクラスです。
  */
-public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJohoEntity> implements IDbAccessable, IChosainJohoEntity {
+public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4913ChosainJoho");
@@ -451,5 +451,6 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
     }
 
 // </editor-fold>
+
 
 }

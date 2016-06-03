@@ -8,13 +8,12 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link JukyushaIdoRenrakuhyo}の編集を行うビルダークラスです。
@@ -300,7 +299,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 認定有効期間終了年月日 認定有効期間終了年月日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set認定有効期間終了年月日(FlexibleDate 認定有効期間終了年月日) {
+    public JukyushaIdoRenrakuhyoBuilder set認定有効期間終了年月日(RString 認定有効期間終了年月日) {
         requireNonNull(認定有効期間終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定有効期間終了年月日"));
         entity.setNinteiYukoKikanShuryoYMD(認定有効期間終了年月日);
         return this;
@@ -324,7 +323,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 居宅介護支援事業所番号 居宅介護支援事業所番号
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set居宅介護支援事業所番号(JigyoshaNo 居宅介護支援事業所番号) {
+    public JukyushaIdoRenrakuhyoBuilder set居宅介護支援事業所番号(RString 居宅介護支援事業所番号) {
         requireNonNull(居宅介護支援事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅介護支援事業所番号"));
         entity.setKyotakuKaigoShienJigyoshoNo(居宅介護支援事業所番号);
         return this;
@@ -336,7 +335,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 居宅サービス計画適用開始年月日 居宅サービス計画適用開始年月日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set居宅サービス計画適用開始年月日(FlexibleDate 居宅サービス計画適用開始年月日) {
+    public JukyushaIdoRenrakuhyoBuilder set居宅サービス計画適用開始年月日(RString 居宅サービス計画適用開始年月日) {
         requireNonNull(居宅サービス計画適用開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅サービス計画適用開始年月日"));
         entity.setKyotakuServiceTekiyoKaishiYMD(居宅サービス計画適用開始年月日);
         return this;
@@ -348,7 +347,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 居宅サービス計画適用終了年月日 居宅サービス計画適用終了年月日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set居宅サービス計画適用終了年月日(FlexibleDate 居宅サービス計画適用終了年月日) {
+    public JukyushaIdoRenrakuhyoBuilder set居宅サービス計画適用終了年月日(RString 居宅サービス計画適用終了年月日) {
         requireNonNull(居宅サービス計画適用終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅サービス計画適用終了年月日"));
         entity.setKyotakuServiceTekiyoShuryoYMD(居宅サービス計画適用終了年月日);
         return this;
@@ -384,7 +383,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 訪問通所サービス上限管理適用期間終了年月日 訪問通所サービス上限管理適用期間終了年月日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set訪問通所サービス上限管理適用期間終了年月日(FlexibleDate 訪問通所サービス上限管理適用期間終了年月日) {
+    public JukyushaIdoRenrakuhyoBuilder set訪問通所サービス上限管理適用期間終了年月日(RString 訪問通所サービス上限管理適用期間終了年月日) {
         requireNonNull(訪問通所サービス上限管理適用期間終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("訪問通所サービス上限管理適用期間終了年月日"));
         entity.setHomonTsushoServiceJogenKanriTekiyoShuryoYMD(訪問通所サービス上限管理適用期間終了年月日);
         return this;
@@ -444,7 +443,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 償還払化開始年月日 償還払化開始年月日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set償還払化開始年月日(FlexibleDate 償還払化開始年月日) {
+    public JukyushaIdoRenrakuhyoBuilder set償還払化開始年月日(RString 償還払化開始年月日) {
         requireNonNull(償還払化開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払化開始年月日"));
         entity.setShokanbaraikaKaishiYMD(償還払化開始年月日);
         return this;
@@ -456,7 +455,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 償還払化終了年月日 償還払化終了年月日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set償還払化終了年月日(FlexibleDate 償還払化終了年月日) {
+    public JukyushaIdoRenrakuhyoBuilder set償還払化終了年月日(RString 償還払化終了年月日) {
         requireNonNull(償還払化終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払化終了年月日"));
         entity.setShokanbaraikaShuryoYMD(償還払化終了年月日);
         return this;
@@ -468,7 +467,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 給付率引下げ開始年月日 給付率引下げ開始年月日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set給付率引下げ開始年月日(FlexibleDate 給付率引下げ開始年月日) {
+    public JukyushaIdoRenrakuhyoBuilder set給付率引下げ開始年月日(RString 給付率引下げ開始年月日) {
         requireNonNull(給付率引下げ開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("給付率引下げ開始年月日"));
         entity.setKyufuritsuHikisageKaishiYMD(給付率引下げ開始年月日);
         return this;
@@ -480,7 +479,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 給付率引下げ終了年月日 給付率引下げ終了年月日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set給付率引下げ終了年月日(FlexibleDate 給付率引下げ終了年月日) {
+    public JukyushaIdoRenrakuhyoBuilder set給付率引下げ終了年月日(RString 給付率引下げ終了年月日) {
         requireNonNull(給付率引下げ終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("給付率引下げ終了年月日"));
         entity.setKyufuritsuHikisageShuryoYMD(給付率引下げ終了年月日);
         return this;
@@ -516,7 +515,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 給付率 給付率
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set給付率(HokenKyufuRitsu 給付率) {
+    public JukyushaIdoRenrakuhyoBuilder set給付率(Decimal 給付率) {
         requireNonNull(給付率, UrSystemErrorMessages.値がnull.getReplacedMessage("給付率"));
         entity.setKyufuritsu(給付率);
         return this;
@@ -528,7 +527,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 適用開始年月日 適用開始年月日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set適用開始年月日(FlexibleDate 適用開始年月日) {
+    public JukyushaIdoRenrakuhyoBuilder set適用開始年月日(RString 適用開始年月日) {
         requireNonNull(適用開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月日"));
         entity.setTekiyoKaishiYMD(適用開始年月日);
         return this;
@@ -540,7 +539,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 適用終了年月日 適用終了年月日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set適用終了年月日(FlexibleDate 適用終了年月日) {
+    public JukyushaIdoRenrakuhyoBuilder set適用終了年月日(RString 適用終了年月日) {
         requireNonNull(適用終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用終了年月日"));
         entity.setTekiyoShuryoYMD(適用終了年月日);
         return this;
@@ -564,7 +563,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 負担額 負担額
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set負担額(int 負担額) {
+    public JukyushaIdoRenrakuhyoBuilder set負担額(Decimal 負担額) {
         requireNonNull(負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("負担額"));
         entity.setFutangaku(負担額);
         return this;
@@ -576,7 +575,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 負担額適用開始年月日 負担額適用開始年月日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set負担額適用開始年月日(FlexibleDate 負担額適用開始年月日) {
+    public JukyushaIdoRenrakuhyoBuilder set負担額適用開始年月日(RString 負担額適用開始年月日) {
         requireNonNull(負担額適用開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("負担額適用開始年月日"));
         entity.setFutangakuTekiyoKaishiYMD(負担額適用開始年月日);
         return this;
@@ -588,7 +587,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 負担額適用終了年月日 負担額適用終了年月日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set負担額適用終了年月日(FlexibleDate 負担額適用終了年月日) {
+    public JukyushaIdoRenrakuhyoBuilder set負担額適用終了年月日(RString 負担額適用終了年月日) {
         requireNonNull(負担額適用終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("負担額適用終了年月日"));
         entity.setFutangakuTekiyoShuryoYMD(負担額適用終了年月日);
         return this;
@@ -624,7 +623,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 課税層の特例減額措置対象フラグ 課税層の特例減額措置対象フラグ
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set課税層の特例減額措置対象フラグ(boolean 課税層の特例減額措置対象フラグ) {
+    public JukyushaIdoRenrakuhyoBuilder set課税層の特例減額措置対象フラグ(RString 課税層の特例減額措置対象フラグ) {
         requireNonNull(課税層の特例減額措置対象フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("課税層の特例減額措置対象フラグ"));
         entity.setKaizeisoTokureiGengakuSochiTaishoFlag(課税層の特例減額措置対象フラグ);
         return this;
@@ -636,7 +635,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 食費負担限度額 食費負担限度額
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set食費負担限度額(int 食費負担限度額) {
+    public JukyushaIdoRenrakuhyoBuilder set食費負担限度額(RString 食費負担限度額) {
         requireNonNull(食費負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("食費負担限度額"));
         entity.setShokuhiFutanGendogaku(食費負担限度額);
         return this;
@@ -648,7 +647,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 居住費ユニット型個室負担限度額 居住費ユニット型個室負担限度額
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set居住費ユニット型個室負担限度額(int 居住費ユニット型個室負担限度額) {
+    public JukyushaIdoRenrakuhyoBuilder set居住費ユニット型個室負担限度額(RString 居住費ユニット型個室負担限度額) {
         requireNonNull(居住費ユニット型個室負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居住費ユニット型個室負担限度額"));
         entity.setKyojuhiUnitGataKoshitsuFutanGendogaku(居住費ユニット型個室負担限度額);
         return this;
@@ -660,7 +659,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 居住費ユニット型準個室負担限度額 居住費ユニット型準個室負担限度額
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set居住費ユニット型準個室負担限度額(int 居住費ユニット型準個室負担限度額) {
+    public JukyushaIdoRenrakuhyoBuilder set居住費ユニット型準個室負担限度額(RString 居住費ユニット型準個室負担限度額) {
         requireNonNull(居住費ユニット型準個室負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居住費ユニット型準個室負担限度額"));
         entity.setKyojuhiUnitGataJunKoshitsuFutanGendogaku(居住費ユニット型準個室負担限度額);
         return this;
@@ -672,7 +671,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 居住費従来型個室特養等負担限度額 居住費従来型個室特養等負担限度額
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set居住費従来型個室特養等負担限度額(int 居住費従来型個室特養等負担限度額) {
+    public JukyushaIdoRenrakuhyoBuilder set居住費従来型個室特養等負担限度額(RString 居住費従来型個室特養等負担限度額) {
         requireNonNull(居住費従来型個室特養等負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居住費従来型個室特養等負担限度額"));
         entity.setKyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku(居住費従来型個室特養等負担限度額);
         return this;
@@ -684,7 +683,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 居住費従来型個室老健療養等負担限度額 居住費従来型個室老健療養等負担限度額
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set居住費従来型個室老健療養等負担限度額(int 居住費従来型個室老健療養等負担限度額) {
+    public JukyushaIdoRenrakuhyoBuilder set居住費従来型個室老健療養等負担限度額(RString 居住費従来型個室老健療養等負担限度額) {
         requireNonNull(居住費従来型個室老健療養等負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居住費従来型個室老健療養等負担限度額"));
         entity.setKyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku(居住費従来型個室老健療養等負担限度額);
         return this;
@@ -696,7 +695,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 居住費多床室負担限度額 居住費多床室負担限度額
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set居住費多床室負担限度額(int 居住費多床室負担限度額) {
+    public JukyushaIdoRenrakuhyoBuilder set居住費多床室負担限度額(RString 居住費多床室負担限度額) {
         requireNonNull(居住費多床室負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居住費多床室負担限度額"));
         entity.setKyujuhiTashoshitsuFutanGendogaku(居住費多床室負担限度額);
         return this;
@@ -708,7 +707,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 負担限度額適用開始年月日 負担限度額適用開始年月日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set負担限度額適用開始年月日(FlexibleDate 負担限度額適用開始年月日) {
+    public JukyushaIdoRenrakuhyoBuilder set負担限度額適用開始年月日(RString 負担限度額適用開始年月日) {
         requireNonNull(負担限度額適用開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("負担限度額適用開始年月日"));
         entity.setFutanGendogakuTekiyoKaishiYMD(負担限度額適用開始年月日);
         return this;
@@ -720,7 +719,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 負担限度額適用終了年月日 負担限度額適用終了年月日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set負担限度額適用終了年月日(FlexibleDate 負担限度額適用終了年月日) {
+    public JukyushaIdoRenrakuhyoBuilder set負担限度額適用終了年月日(RString 負担限度額適用終了年月日) {
         requireNonNull(負担限度額適用終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("負担限度額適用終了年月日"));
         entity.setFutanGendogakuTekiyoShuryoYMD(負担限度額適用終了年月日);
         return this;
@@ -732,7 +731,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 軽減率 軽減率
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set軽減率(int 軽減率) {
+    public JukyushaIdoRenrakuhyoBuilder set軽減率(RString 軽減率) {
         requireNonNull(軽減率, UrSystemErrorMessages.値がnull.getReplacedMessage("軽減率"));
         entity.setKeigenritsu(軽減率);
         return this;
@@ -744,7 +743,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 軽減率適用開始年月日 軽減率適用開始年月日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set軽減率適用開始年月日(FlexibleDate 軽減率適用開始年月日) {
+    public JukyushaIdoRenrakuhyoBuilder set軽減率適用開始年月日(RString 軽減率適用開始年月日) {
         requireNonNull(軽減率適用開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("軽減率適用開始年月日"));
         entity.setKeigenritsuTekiyoKaishiYMD(軽減率適用開始年月日);
         return this;
@@ -756,7 +755,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 軽減率適用終了年月日 軽減率適用終了年月日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set軽減率適用終了年月日(FlexibleDate 軽減率適用終了年月日) {
+    public JukyushaIdoRenrakuhyoBuilder set軽減率適用終了年月日(RString 軽減率適用終了年月日) {
         requireNonNull(軽減率適用終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("軽減率適用終了年月日"));
         entity.setKeigenritsuTekiyoShuryoYMD(軽減率適用終了年月日);
         return this;
@@ -924,7 +923,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 住所地特例適用開始日 住所地特例適用開始日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set住所地特例適用開始日(FlexibleDate 住所地特例適用開始日) {
+    public JukyushaIdoRenrakuhyoBuilder set住所地特例適用開始日(RString 住所地特例適用開始日) {
         requireNonNull(住所地特例適用開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例適用開始日"));
         entity.setJushochiTokureiTekiyoKaishiYMD(住所地特例適用開始日);
         return this;
@@ -936,7 +935,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 住所地特例適用終了日 住所地特例適用終了日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set住所地特例適用終了日(FlexibleDate 住所地特例適用終了日) {
+    public JukyushaIdoRenrakuhyoBuilder set住所地特例適用終了日(RString 住所地特例適用終了日) {
         requireNonNull(住所地特例適用終了日, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例適用終了日"));
         entity.setJushochiTokureiTekiyoShuryoYMD(住所地特例適用終了日);
         return this;
@@ -948,7 +947,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 居宅費_新１_負担限度額 居宅費（新１）負担限度額
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set居宅費_新１_負担限度額(int 居宅費_新１_負担限度額) {
+    public JukyushaIdoRenrakuhyoBuilder set居宅費_新１_負担限度額(RString 居宅費_新１_負担限度額) {
         requireNonNull(居宅費_新１_負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅費（新１）負担限度額"));
         entity.setKyotakuhiShin1FutanGendogaku(居宅費_新１_負担限度額);
         return this;
@@ -960,7 +959,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 居宅費_新２_負担限度額 居宅費（新２）負担限度額
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set居宅費_新２_負担限度額(int 居宅費_新２_負担限度額) {
+    public JukyushaIdoRenrakuhyoBuilder set居宅費_新２_負担限度額(RString 居宅費_新２_負担限度額) {
         requireNonNull(居宅費_新２_負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅費（新２）負担限度額"));
         entity.setKyotakuhiShin2FutanGendogaku(居宅費_新２_負担限度額);
         return this;
@@ -972,7 +971,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 居宅費_新３_負担限度額 居宅費（新３）負担限度額
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set居宅費_新３_負担限度額(int 居宅費_新３_負担限度額) {
+    public JukyushaIdoRenrakuhyoBuilder set居宅費_新３_負担限度額(RString 居宅費_新３_負担限度額) {
         requireNonNull(居宅費_新３_負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅費（新３）負担限度額"));
         entity.setKyotakuhiShin3FutanGendogaku(居宅費_新３_負担限度額);
         return this;
@@ -984,7 +983,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 利用者負担割合有効開始日 利用者負担割合有効開始日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set利用者負担割合有効開始日(FlexibleDate 利用者負担割合有効開始日) {
+    public JukyushaIdoRenrakuhyoBuilder set利用者負担割合有効開始日(RString 利用者負担割合有効開始日) {
         requireNonNull(利用者負担割合有効開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担割合有効開始日"));
         entity.setRiyosyaFutanWariaiYukoKaishiYMD(利用者負担割合有効開始日);
         return this;
@@ -996,7 +995,7 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @param 利用者負担割合有効終了日 利用者負担割合有効終了日
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set利用者負担割合有効終了日(FlexibleDate 利用者負担割合有効終了日) {
+    public JukyushaIdoRenrakuhyoBuilder set利用者負担割合有効終了日(RString 利用者負担割合有効終了日) {
         requireNonNull(利用者負担割合有効終了日, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担割合有効終了日"));
         entity.setRiyosyaFutanWariaiYukoShuryoYMD(利用者負担割合有効終了日);
         return this;

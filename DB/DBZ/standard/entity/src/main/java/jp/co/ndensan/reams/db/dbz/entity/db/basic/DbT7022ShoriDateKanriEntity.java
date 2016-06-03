@@ -1,18 +1,18 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import java.util.Objects;
 
 /**
  * DbT7022ShoriDateKanriの項目定義クラスです
@@ -20,6 +20,7 @@ import java.util.Objects;
  */
 public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriDateKanriEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7022ShoriDateKanri");
 
@@ -52,7 +53,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -61,7 +62,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -70,7 +71,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -79,17 +80,16 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -98,7 +98,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * サブ業務コードのgetメソッドです。
-     * 
+     *
      * @return サブ業務コード
      */
     public SubGyomuCode getSubGyomuCode() {
@@ -107,7 +107,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * サブ業務コードのsetメソッドです。
-     * 
+     *
      * @param subGyomuCode サブ業務コード
      */
     public void setSubGyomuCode(SubGyomuCode subGyomuCode) {
@@ -116,7 +116,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * 市町村コードのgetメソッドです。
-     * 
+     *
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
@@ -125,7 +125,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * 市町村コードのsetメソッドです。
-     * 
+     *
      * @param shichosonCode 市町村コード
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -134,7 +134,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * 処理名のgetメソッドです。
-     * 
+     *
      * @return 処理名
      */
     public RString getShoriName() {
@@ -143,7 +143,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * 処理名のsetメソッドです。
-     * 
+     *
      * @param shoriName 処理名
      */
     public void setShoriName(RString shoriName) {
@@ -154,7 +154,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
      * 処理枝番のgetメソッドです。
      * <br/>
      * <br/>01から連番
-     * 
+     *
      * @return 処理枝番
      */
     public RString getShoriEdaban() {
@@ -165,7 +165,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
      * 処理枝番のsetメソッドです。
      * <br/>
      * <br/>01から連番
-     * 
+     *
      * @param shoriEdaban 処理枝番
      */
     public void setShoriEdaban(RString shoriEdaban) {
@@ -176,7 +176,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
      * 年度のgetメソッドです。
      * <br/>
      * <br/>使用しない場合は「0000」固定
-     * 
+     *
      * @return 年度
      */
     public FlexibleYear getNendo() {
@@ -187,7 +187,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
      * 年度のsetメソッドです。
      * <br/>
      * <br/>使用しない場合は「0000」固定
-     * 
+     *
      * @param nendo 年度
      */
     public void setNendo(FlexibleYear nendo) {
@@ -198,7 +198,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
      * 年度内連番のgetメソッドです。
      * <br/>
      * <br/>01から連番
-     * 
+     *
      * @return 年度内連番
      */
     public RString getNendoNaiRenban() {
@@ -209,7 +209,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
      * 年度内連番のsetメソッドです。
      * <br/>
      * <br/>01から連番
-     * 
+     *
      * @param nendoNaiRenban 年度内連番
      */
     public void setNendoNaiRenban(RString nendoNaiRenban) {
@@ -218,7 +218,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * 基準年月日のgetメソッドです。
-     * 
+     *
      * @return 基準年月日
      */
     public FlexibleDate getKijunYMD() {
@@ -227,7 +227,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * 基準年月日のsetメソッドです。
-     * 
+     *
      * @param kijunYMD 基準年月日
      */
     public void setKijunYMD(FlexibleDate kijunYMD) {
@@ -236,7 +236,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * 基準日時のgetメソッドです。
-     * 
+     *
      * @return 基準日時
      */
     public YMDHMS getKijunTimestamp() {
@@ -245,7 +245,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * 基準日時のsetメソッドです。
-     * 
+     *
      * @param kijunTimestamp 基準日時
      */
     public void setKijunTimestamp(YMDHMS kijunTimestamp) {
@@ -254,7 +254,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * 対象開始年月日のgetメソッドです。
-     * 
+     *
      * @return 対象開始年月日
      */
     public FlexibleDate getTaishoKaishiYMD() {
@@ -263,7 +263,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * 対象開始年月日のsetメソッドです。
-     * 
+     *
      * @param taishoKaishiYMD 対象開始年月日
      */
     public void setTaishoKaishiYMD(FlexibleDate taishoKaishiYMD) {
@@ -272,7 +272,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * 対象終了年月日のgetメソッドです。
-     * 
+     *
      * @return 対象終了年月日
      */
     public FlexibleDate getTaishoShuryoYMD() {
@@ -281,7 +281,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * 対象終了年月日のsetメソッドです。
-     * 
+     *
      * @param taishoShuryoYMD 対象終了年月日
      */
     public void setTaishoShuryoYMD(FlexibleDate taishoShuryoYMD) {
@@ -290,7 +290,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * 対象開始日時のgetメソッドです。
-     * 
+     *
      * @return 対象開始日時
      */
     public YMDHMS getTaishoKaishiTimestamp() {
@@ -299,7 +299,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * 対象開始日時のsetメソッドです。
-     * 
+     *
      * @param taishoKaishiTimestamp 対象開始日時
      */
     public void setTaishoKaishiTimestamp(YMDHMS taishoKaishiTimestamp) {
@@ -308,7 +308,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * 対象終了日時のgetメソッドです。
-     * 
+     *
      * @return 対象終了日時
      */
     public YMDHMS getTaishoShuryoTimestamp() {
@@ -317,7 +317,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * 対象終了日時のsetメソッドです。
-     * 
+     *
      * @param taishoShuryoTimestamp 対象終了日時
      */
     public void setTaishoShuryoTimestamp(YMDHMS taishoShuryoTimestamp) {
@@ -326,10 +326,9 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * このエンティティの主キーが他の{@literal DbT7022ShoriDateKanriEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT7022ShoriDateKanriEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT7022ShoriDateKanriEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7022ShoriDateKanriEntity other) {
@@ -378,6 +377,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -386,6 +386,4 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
     }
 
 // </editor-fold>
-
-
 }

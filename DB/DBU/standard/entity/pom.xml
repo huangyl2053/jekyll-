@@ -16,6 +16,10 @@
     <dependencies>
 		<!-- DBU -->
 		<!-- DBA -->
+                <dependency>
+                    <groupId>jp.co.ndensan.reams.db.dba</groupId>
+                    <artifactId>DbaEntity</artifactId>
+                </dependency>
 		<!-- DBB -->
 		<!-- DBC -->
 		<!-- DBD -->
@@ -33,5 +37,11 @@
         </dependency>
 		<!-- テスト -->
 		<!-- ツール -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dba</groupId>
+            <artifactId>DbaDefinition</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

@@ -1,18 +1,17 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.IServiceWithCountComDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ServiceWithCountCom のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+
+/**
+ * ServiceWithCountCom のクラスファイル
+ *
  * @author 自動生成
  */
 public class ServiceWithCountComDiv extends Panel implements IServiceWithCountComDiv {
@@ -22,6 +21,7 @@ public class ServiceWithCountComDiv extends Panel implements IServiceWithCountCo
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("lblServiceName")
     private Label lblServiceName;
     @JsonProperty("txtNum")
@@ -42,7 +42,7 @@ public class ServiceWithCountComDiv extends Panel implements IServiceWithCountCo
 
     @JsonProperty("lblServiceName")
     public void setLblServiceName(Label lblServiceName) {
-        this.lblServiceName=lblServiceName;
+        this.lblServiceName = lblServiceName;
     }
 
     @JsonProperty("txtNum")
@@ -52,7 +52,7 @@ public class ServiceWithCountComDiv extends Panel implements IServiceWithCountCo
 
     @JsonProperty("txtNum")
     public void setTxtNum(TextBoxNum txtNum) {
-        this.txtNum=txtNum;
+        this.txtNum = txtNum;
     }
 
     @JsonProperty("radKaigoOrYobo")
@@ -62,9 +62,8 @@ public class ServiceWithCountComDiv extends Panel implements IServiceWithCountCo
 
     @JsonProperty("radKaigoOrYobo")
     public void setRadKaigoOrYobo(RadioButton radKaigoOrYobo) {
-        this.radKaigoOrYobo=radKaigoOrYobo;
+        this.radKaigoOrYobo = radKaigoOrYobo;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

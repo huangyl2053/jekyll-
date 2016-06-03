@@ -1,47 +1,50 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBAM010011;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBAM010011.LblTitle1Div;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBAM010011.LblTitle3Div;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBAM010011.LblTitle4Div;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBAM010011.LblTitle6Div;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBAM010011.LblTitleDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * FubanHoho のクラスファイル 
- * 
- * @author 自動生成
+ * FubanHoho のクラスファイル
+ *
+ * @reamsid_L DBA-1200-010 suguangjun
  */
 public class FubanHohoDiv extends Panel {
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("LblTitle")
-    private LblTitleDiv LblTitle;
-    @JsonProperty("LblTitle1")
-    private LblTitle1Div LblTitle1;
-    @JsonProperty("Label1")
-    private Label Label1;
-    @JsonProperty("HorizontalLine1")
-    private HorizontalLine HorizontalLine1;
-    @JsonProperty("LblTitle3")
-    private LblTitle3Div LblTitle3;
-    @JsonProperty("LblTitle4")
-    private LblTitle4Div LblTitle4;
-    @JsonProperty("LblTitle6")
-    private LblTitle6Div LblTitle6;
-    @JsonProperty("Label3")
-    private Label Label3;
+    @JsonProperty("ddlHihokenshaBangoFubanHoho")
+    private DropDownList ddlHihokenshaBangoFubanHoho;
+    @JsonProperty("lin1")
+    private HorizontalLine lin1;
+    @JsonProperty("JidoFubanKaishiNo")
+    private JidoFubanKaishiNoDiv JidoFubanKaishiNo;
+    @JsonProperty("lblJidoFubanKaishiNo")
+    private Label lblJidoFubanKaishiNo;
+    @JsonProperty("ln2")
+    private HorizontalLine ln2;
+    @JsonProperty("FubanMotoJoho")
+    private FubanMotoJohoDiv FubanMotoJoho;
+    @JsonProperty("MaeFukaJoho")
+    private MaeFukaJohoDiv MaeFukaJoho;
+    @JsonProperty("AtoFukaJoho")
+    private AtoFukaJohoDiv AtoFukaJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -49,84 +52,242 @@ public class FubanHohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("LblTitle")
-    public LblTitleDiv getLblTitle() {
-        return LblTitle;
+    /*
+     * getddlHihokenshaBangoFubanHoho
+     * @return ddlHihokenshaBangoFubanHoho
+     */
+    @JsonProperty("ddlHihokenshaBangoFubanHoho")
+    public DropDownList getDdlHihokenshaBangoFubanHoho() {
+        return ddlHihokenshaBangoFubanHoho;
     }
 
-    @JsonProperty("LblTitle")
-    public void setLblTitle(LblTitleDiv LblTitle) {
-        this.LblTitle=LblTitle;
+    /*
+     * setddlHihokenshaBangoFubanHoho
+     * @param ddlHihokenshaBangoFubanHoho ddlHihokenshaBangoFubanHoho
+     */
+    @JsonProperty("ddlHihokenshaBangoFubanHoho")
+    public void setDdlHihokenshaBangoFubanHoho(DropDownList ddlHihokenshaBangoFubanHoho) {
+        this.ddlHihokenshaBangoFubanHoho = ddlHihokenshaBangoFubanHoho;
     }
 
-    @JsonProperty("LblTitle1")
-    public LblTitle1Div getLblTitle1() {
-        return LblTitle1;
+    /*
+     * getlin1
+     * @return lin1
+     */
+    @JsonProperty("lin1")
+    public HorizontalLine getLin1() {
+        return lin1;
     }
 
-    @JsonProperty("LblTitle1")
-    public void setLblTitle1(LblTitle1Div LblTitle1) {
-        this.LblTitle1=LblTitle1;
+    /*
+     * setlin1
+     * @param lin1 lin1
+     */
+    @JsonProperty("lin1")
+    public void setLin1(HorizontalLine lin1) {
+        this.lin1 = lin1;
     }
 
-    @JsonProperty("Label1")
-    public Label getLabel1() {
-        return Label1;
+    /*
+     * getJidoFubanKaishiNo
+     * @return JidoFubanKaishiNo
+     */
+    @JsonProperty("JidoFubanKaishiNo")
+    public JidoFubanKaishiNoDiv getJidoFubanKaishiNo() {
+        return JidoFubanKaishiNo;
     }
 
-    @JsonProperty("Label1")
-    public void setLabel1(Label Label1) {
-        this.Label1=Label1;
+    /*
+     * setJidoFubanKaishiNo
+     * @param JidoFubanKaishiNo JidoFubanKaishiNo
+     */
+    @JsonProperty("JidoFubanKaishiNo")
+    public void setJidoFubanKaishiNo(JidoFubanKaishiNoDiv JidoFubanKaishiNo) {
+        this.JidoFubanKaishiNo = JidoFubanKaishiNo;
     }
 
-    @JsonProperty("HorizontalLine1")
-    public HorizontalLine getHorizontalLine1() {
-        return HorizontalLine1;
+    /*
+     * getlblJidoFubanKaishiNo
+     * @return lblJidoFubanKaishiNo
+     */
+    @JsonProperty("lblJidoFubanKaishiNo")
+    public Label getLblJidoFubanKaishiNo() {
+        return lblJidoFubanKaishiNo;
     }
 
-    @JsonProperty("HorizontalLine1")
-    public void setHorizontalLine1(HorizontalLine HorizontalLine1) {
-        this.HorizontalLine1=HorizontalLine1;
+    /*
+     * setlblJidoFubanKaishiNo
+     * @param lblJidoFubanKaishiNo lblJidoFubanKaishiNo
+     */
+    @JsonProperty("lblJidoFubanKaishiNo")
+    public void setLblJidoFubanKaishiNo(Label lblJidoFubanKaishiNo) {
+        this.lblJidoFubanKaishiNo = lblJidoFubanKaishiNo;
     }
 
-    @JsonProperty("LblTitle3")
-    public LblTitle3Div getLblTitle3() {
-        return LblTitle3;
+    /*
+     * getln2
+     * @return ln2
+     */
+    @JsonProperty("ln2")
+    public HorizontalLine getLn2() {
+        return ln2;
     }
 
-    @JsonProperty("LblTitle3")
-    public void setLblTitle3(LblTitle3Div LblTitle3) {
-        this.LblTitle3=LblTitle3;
+    /*
+     * setln2
+     * @param ln2 ln2
+     */
+    @JsonProperty("ln2")
+    public void setLn2(HorizontalLine ln2) {
+        this.ln2 = ln2;
     }
 
-    @JsonProperty("LblTitle4")
-    public LblTitle4Div getLblTitle4() {
-        return LblTitle4;
+    /*
+     * getFubanMotoJoho
+     * @return FubanMotoJoho
+     */
+    @JsonProperty("FubanMotoJoho")
+    public FubanMotoJohoDiv getFubanMotoJoho() {
+        return FubanMotoJoho;
     }
 
-    @JsonProperty("LblTitle4")
-    public void setLblTitle4(LblTitle4Div LblTitle4) {
-        this.LblTitle4=LblTitle4;
+    /*
+     * setFubanMotoJoho
+     * @param FubanMotoJoho FubanMotoJoho
+     */
+    @JsonProperty("FubanMotoJoho")
+    public void setFubanMotoJoho(FubanMotoJohoDiv FubanMotoJoho) {
+        this.FubanMotoJoho = FubanMotoJoho;
     }
 
-    @JsonProperty("LblTitle6")
-    public LblTitle6Div getLblTitle6() {
-        return LblTitle6;
+    /*
+     * getMaeFukaJoho
+     * @return MaeFukaJoho
+     */
+    @JsonProperty("MaeFukaJoho")
+    public MaeFukaJohoDiv getMaeFukaJoho() {
+        return MaeFukaJoho;
     }
 
-    @JsonProperty("LblTitle6")
-    public void setLblTitle6(LblTitle6Div LblTitle6) {
-        this.LblTitle6=LblTitle6;
+    /*
+     * setMaeFukaJoho
+     * @param MaeFukaJoho MaeFukaJoho
+     */
+    @JsonProperty("MaeFukaJoho")
+    public void setMaeFukaJoho(MaeFukaJohoDiv MaeFukaJoho) {
+        this.MaeFukaJoho = MaeFukaJoho;
     }
 
-    @JsonProperty("Label3")
-    public Label getLabel3() {
-        return Label3;
+    /*
+     * getAtoFukaJoho
+     * @return AtoFukaJoho
+     */
+    @JsonProperty("AtoFukaJoho")
+    public AtoFukaJohoDiv getAtoFukaJoho() {
+        return AtoFukaJoho;
     }
 
-    @JsonProperty("Label3")
-    public void setLabel3(Label Label3) {
-        this.Label3=Label3;
+    /*
+     * setAtoFukaJoho
+     * @param AtoFukaJoho AtoFukaJoho
+     */
+    @JsonProperty("AtoFukaJoho")
+    public void setAtoFukaJoho(AtoFukaJohoDiv AtoFukaJoho) {
+        this.AtoFukaJoho = AtoFukaJoho;
     }
 
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public Space getSpaceJidoFuban() {
+        return this.getJidoFubanKaishiNo().getSpaceJidoFuban();
+    }
+
+    @JsonIgnore
+    public void setSpaceJidoFuban(Space spaceJidoFuban) {
+        this.getJidoFubanKaishiNo().setSpaceJidoFuban(spaceJidoFuban);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtJidoFubanKaishiNo() {
+        return this.getJidoFubanKaishiNo().getTxtJidoFubanKaishiNo();
+    }
+
+    @JsonIgnore
+    public void setTxtJidoFubanKaishiNo(TextBoxCode txtJidoFubanKaishiNo) {
+        this.getJidoFubanKaishiNo().setTxtJidoFubanKaishiNo(txtJidoFubanKaishiNo);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlFubanmotoJoho() {
+        return this.getFubanMotoJoho().getDdlFubanmotoJoho();
+    }
+
+    @JsonIgnore
+    public void setDdlFubanmotoJoho(DropDownList ddlFubanmotoJoho) {
+        this.getFubanMotoJoho().setDdlFubanmotoJoho(ddlFubanmotoJoho);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtKaishiKetaIchi() {
+        return this.getFubanMotoJoho().getTxtKaishiKetaIchi();
+    }
+
+    @JsonIgnore
+    public void setTxtKaishiKetaIchi(TextBoxNum txtKaishiKetaIchi) {
+        this.getFubanMotoJoho().setTxtKaishiKetaIchi(txtKaishiKetaIchi);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtYukoKetasu() {
+        return this.getFubanMotoJoho().getTxtYukoKetasu();
+    }
+
+    @JsonIgnore
+    public void setTxtYukoKetasu(TextBoxNum txtYukoKetasu) {
+        this.getFubanMotoJoho().setTxtYukoKetasu(txtYukoKetasu);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeFukaKetasu() {
+        return this.getMaeFukaJoho().getTxtMaeFukaKetasu();
+    }
+
+    @JsonIgnore
+    public void setTxtMaeFukaKetasu(TextBoxNum txtMaeFukaKetasu) {
+        this.getMaeFukaJoho().setTxtMaeFukaKetasu(txtMaeFukaKetasu);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtMaeFukaCode() {
+        return this.getMaeFukaJoho().getTxtMaeFukaCode();
+    }
+
+    @JsonIgnore
+    public void setTxtMaeFukaCode(TextBoxCode txtMaeFukaCode) {
+        this.getMaeFukaJoho().setTxtMaeFukaCode(txtMaeFukaCode);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtAtoFukaKetasu() {
+        return this.getAtoFukaJoho().getTxtAtoFukaKetasu();
+    }
+
+    @JsonIgnore
+    public void setTxtAtoFukaKetasu(TextBoxNum txtAtoFukaKetasu) {
+        this.getAtoFukaJoho().setTxtAtoFukaKetasu(txtAtoFukaKetasu);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtAtoFukaCode() {
+        return this.getAtoFukaJoho().getTxtAtoFukaCode();
+    }
+
+    @JsonIgnore
+    public void setTxtAtoFukaCode(TextBoxCode txtAtoFukaCode) {
+        this.getAtoFukaJoho().setTxtAtoFukaCode(txtAtoFukaCode);
+    }
+
+    // </editor-fold>
 }

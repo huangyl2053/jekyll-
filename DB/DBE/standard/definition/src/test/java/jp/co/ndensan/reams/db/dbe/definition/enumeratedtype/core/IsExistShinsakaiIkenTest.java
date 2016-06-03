@@ -25,12 +25,12 @@ public class IsExistShinsakaiIkenTest extends DbeTestBase {
 
     @Test
     public void であるを指定した場合_getコードは_Trueを返す() {
-        assertThat(IsExistShinsakaiIken.である.getコード(), is(true));
+        assertThat(IsExistShinsakaiIken.である.has審査会意見(), is(true));
     }
 
     @Test
     public void でないを指定した場合_getコードは_Falseを返す() {
-        assertThat(IsExistShinsakaiIken.でない.getコード(), is(false));
+        assertThat(IsExistShinsakaiIken.でない.has審査会意見(), is(false));
     }
 
     @Test

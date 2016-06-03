@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3014KyufuKanrihyo200004Entity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -262,7 +262,7 @@ public class KyufuKanrihyo200004Builder {
     /**
      * 指定/基準該当/地域密着型サービス識別コードを設定します。
      *
-     * @param 指定/基準該当/地域密着型サービス識別コード 指定/基準該当/地域密着型サービス識別コード
+     * @param 指定_基準該当_地域密着型サービス識別コード 指定/基準該当/地域密着型サービス識別コード
      * @return {@link KyufuKanrihyo200004Builder}
      */
     public KyufuKanrihyo200004Builder set指定_基準該当_地域密着型サービス識別コード(RString 指定_基準該当_地域密着型サービス識別コード) {
@@ -334,7 +334,7 @@ public class KyufuKanrihyo200004Builder {
     /**
      * 給付計画合計単位数/日数を設定します。
      *
-     * @param 給付計画合計単位数/日数 給付計画合計単位数/日数
+     * @param 給付計画合計単位数_日数 給付計画合計単位数/日数
      * @return {@link KyufuKanrihyo200004Builder}
      */
     public KyufuKanrihyo200004Builder set給付計画合計単位数_日数(Decimal 給付計画合計単位数_日数) {

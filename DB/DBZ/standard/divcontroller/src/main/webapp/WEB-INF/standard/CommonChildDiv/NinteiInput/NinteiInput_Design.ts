@@ -12,6 +12,14 @@ module DBZ {
                 return "onChange_radNinteiKubun";
             }
 
+            public static onClick_btnYokaigodoGuide(): string {
+                return "onClick_btnYokaigodoGuide";
+            }
+
+            public static onClick_lostFocus(): string {
+                return "onClick_lostFocus";
+            }
+
             public static onClick_btnSixMonthLater(): string {
                 return "onClick_btnSixMonthLater";
             }
@@ -109,12 +117,12 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("ServiceShitei"));
             }
 
-            public lblServiceIken(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblServiceIken"));
-            }
-
             public dgServiceIchiran(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgServiceIchiran"));
+            }
+
+            public lblServiceIken(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblServiceIken"));
             }
 
             public txtShinsakaiIken(): UZA.TextBoxMultiLine {

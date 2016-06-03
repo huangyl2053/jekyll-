@@ -12,7 +12,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.itakusakichosainichiran.ItakusakiChosainIchiranBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.itakusakichosainichiran.ItakusakiChosainIchiranHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.itakusakichosainichiran.ItakusakiChosainIchiranReport;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.ItakusakiChosainIchiranReportId;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.itakusakichosainichiran.ItakusakiChosainIchiranQueryProcessParemeter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.itakusakichosainichiran.ItakusakiChosainIchiranRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.itakusakichosainichiran.ItakusakiChosainIchiranReportSource;
@@ -31,13 +31,15 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  *
  * 調査員一覧情報の取得バッチクラスです。
+ *
+ * @reamsid_L DBE-0290-030 dongyabin
  */
 public class ItakusakiChosainIchiranQueryProcess extends BatchKeyBreakBase<ItakusakiChosainIchiranRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.itakusakichosainichiran."
                     + "IItakusakiChosainIchiranMapper.getNinteiChoSain");
-    private static final ReportId REPORT_ID = new ReportId(ItakusakiChosainIchiranReportId.REPORT_ID.getCode());
+    private static final ReportId REPORT_ID = ReportIdDBE.DBE592001.getReportId();
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("listIchiranhyoUpper_1")));
     private ItakusakiChosainIchiranQueryProcessParemeter paramter;
     List<ItakusakiChosainIchiranBodyItem> bodyItem;

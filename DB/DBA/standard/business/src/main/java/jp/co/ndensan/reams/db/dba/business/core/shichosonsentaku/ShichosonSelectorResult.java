@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 市町村選択検索結果を管理するクラスです。
  *
+ * @reamsid_L DBA-0100-020 xuyannan
  */
 public class ShichosonSelectorResult implements Serializable {
 

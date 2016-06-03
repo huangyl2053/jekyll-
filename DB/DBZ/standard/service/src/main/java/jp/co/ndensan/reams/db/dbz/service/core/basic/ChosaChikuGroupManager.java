@@ -44,18 +44,21 @@ public class ChosaChikuGroupManager {
      * 主キーに合致する調査地区グループマスタを返します。
      *
      * @param 調査地区グループコード 調査地区グループコード
+     * @param 調査地区コード 調査地区コード
      * @param 市町村コード 市町村コード
      * @return ChosaChikuGroup
      */
     @Transaction
     public ChosaChikuGroup get調査地区グループマスタ(
             Code 調査地区グループコード,
+            Code 調査地区コード,
             LasdecCode 市町村コード) {
         requireNonNull(調査地区グループコード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区グループコード"));
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
 
         DbT5225ChosaChikuGroupEntity entity = dac.selectByKey(
                 調査地区グループコード,
+                調査地区コード,
                 市町村コード);
         if (entity == null) {
             return null;

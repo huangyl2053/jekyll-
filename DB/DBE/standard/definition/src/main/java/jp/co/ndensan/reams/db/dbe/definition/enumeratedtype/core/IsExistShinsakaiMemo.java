@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 審査会メモの有無を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IsExistShinsakaiMemo {
 
@@ -32,7 +32,7 @@ public enum IsExistShinsakaiMemo {
      *
      * @return 審査会メモの有無のコード
      */
-    public boolean getコード() {
+    public boolean has審査会メモ() {
         return code;
     }
 

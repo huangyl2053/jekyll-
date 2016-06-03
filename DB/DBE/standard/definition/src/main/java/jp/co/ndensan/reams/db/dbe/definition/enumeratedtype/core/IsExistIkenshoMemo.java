@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 意見書メモの有無を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IsExistIkenshoMemo {
 
@@ -32,7 +32,7 @@ public enum IsExistIkenshoMemo {
      *
      * @return 意見書メモの有無のコード
      */
-    public boolean getコード() {
+    public boolean is意見書メモ有り() {
         return code;
     }
 

@@ -15,6 +15,7 @@ import lombok.Value;
  * 受給者限度額管理の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class JukyushaGendoGakuKanriIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

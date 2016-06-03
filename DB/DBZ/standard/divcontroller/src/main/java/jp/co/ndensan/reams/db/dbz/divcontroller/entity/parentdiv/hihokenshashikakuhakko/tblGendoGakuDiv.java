@@ -1,21 +1,16 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.KubunGendoGakuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.ShuruiShikyuGendoKijungakuDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tblGendoGaku のクラスファイル 
- * 
+ * tblGendoGaku のクラスファイル
+ *
  * @author 自動生成
  */
 public class tblGendoGakuDiv extends TablePanel {
@@ -25,6 +20,7 @@ public class tblGendoGakuDiv extends TablePanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("celKubunGendoGaku")
     private celKubunGendoGakuAttblGendoGaku celKubunGendoGaku;
     @JsonProperty("celShuruiGendoKijungaku")
@@ -57,7 +53,7 @@ public class tblGendoGakuDiv extends TablePanel {
 
     @JsonProperty("celKubunGendoGaku")
     private void setCelKubunGendoGaku(celKubunGendoGakuAttblGendoGaku celKubunGendoGaku) {
-        this.celKubunGendoGaku=celKubunGendoGaku;
+        this.celKubunGendoGaku = celKubunGendoGaku;
     }
 
     @JsonProperty("celShuruiGendoKijungaku")
@@ -67,16 +63,18 @@ public class tblGendoGakuDiv extends TablePanel {
 
     @JsonProperty("celShuruiGendoKijungaku")
     private void setCelShuruiGendoKijungaku(celShuruiGendoKijungakuAttblGendoGaku celShuruiGendoKijungaku) {
-        this.celShuruiGendoKijungaku=celShuruiGendoKijungaku;
+        this.celShuruiGendoKijungaku = celShuruiGendoKijungaku;
     }
 
 }
+
 /**
- * celKubunGendoGaku のクラスファイル 
- * 
+ * celKubunGendoGaku のクラスファイル
+ *
  * @author 自動生成
  */
 class celKubunGendoGakuAttblGendoGaku extends TableCell {
+
     @JsonProperty("KubunGendoGaku")
     private KubunGendoGakuDiv KubunGendoGaku;
 
@@ -87,16 +85,18 @@ class celKubunGendoGakuAttblGendoGaku extends TableCell {
 
     @JsonProperty("KubunGendoGaku")
     public void setKubunGendoGaku(KubunGendoGakuDiv KubunGendoGaku) {
-        this.KubunGendoGaku=KubunGendoGaku;
+        this.KubunGendoGaku = KubunGendoGaku;
     }
 
 }
+
 /**
- * celShuruiGendoKijungaku のクラスファイル 
- * 
+ * celShuruiGendoKijungaku のクラスファイル
+ *
  * @author 自動生成
  */
 class celShuruiGendoKijungakuAttblGendoGaku extends TableCell {
+
     @JsonProperty("ShuruiShikyuGendoKijungaku")
     private ShuruiShikyuGendoKijungakuDiv ShuruiShikyuGendoKijungaku;
 
@@ -107,7 +107,7 @@ class celShuruiGendoKijungakuAttblGendoGaku extends TableCell {
 
     @JsonProperty("ShuruiShikyuGendoKijungaku")
     public void setShuruiShikyuGendoKijungaku(ShuruiShikyuGendoKijungakuDiv ShuruiShikyuGendoKijungaku) {
-        this.ShuruiShikyuGendoKijungaku=ShuruiShikyuGendoKijungaku;
+        this.ShuruiShikyuGendoKijungaku = ShuruiShikyuGendoKijungaku;
     }
 
 }

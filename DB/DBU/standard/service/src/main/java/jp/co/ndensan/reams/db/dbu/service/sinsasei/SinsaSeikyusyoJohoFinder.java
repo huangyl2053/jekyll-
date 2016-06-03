@@ -7,15 +7,18 @@ package jp.co.ndensan.reams.db.dbu.service.sinsasei;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.business.SinsaSeikyusyoJohoModel;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.FufukuMoshitate;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7001FufukuMoshitateDac;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 審査請求書登録_一覧情報の取得処理。
+ *
+ * @reamsid_L DBU-1080-070 lizhuoxuan
  */
 public class SinsaSeikyusyoJohoFinder {
 
@@ -27,6 +30,15 @@ public class SinsaSeikyusyoJohoFinder {
      */
     public SinsaSeikyusyoJohoFinder() {
         this.fufukumoshitatedac = InstanceProvider.create(DbT7001FufukuMoshitateDac.class);
+    }
+
+    /**
+     * テスト用コンストラクタです。
+     *
+     * @param dac {@link DbT7001FufukuMoshitateDac}
+     */
+    SinsaSeikyusyoJohoFinder(DbT7001FufukuMoshitateDac dac) {
+        this.fufukumoshitatedac = dac;
     }
 
     /**
@@ -43,15 +55,14 @@ public class SinsaSeikyusyoJohoFinder {
      *
      * @param shikibetsuCode 識別コード
      * @param genshobunsHihokennshaNo 原処分被保険者番号
-     * @return List<SinsaSeikyusyoJohoModel> 
+     * @return SearchResult<FufukuMoshitate>
      */
-    public List<SinsaSeikyusyoJohoModel> getSinsaSeikyusyoJohoList(ShikibetsuCode shikibetsuCode, HihokenshaNo genshobunsHihokennshaNo) {
-        List<SinsaSeikyusyoJohoModel> businessList = new ArrayList<>();
+    public SearchResult<FufukuMoshitate> getSinsaSeikyusyoJohoList(ShikibetsuCode shikibetsuCode, HihokenshaNo genshobunsHihokennshaNo) {
+        List<FufukuMoshitate> businessList = new ArrayList<>();
         List<DbT7001FufukuMoshitateEntity> dbT7001FufukuMoshitateEntity = fufukumoshitatedac.select一覧情報取得(shikibetsuCode, genshobunsHihokennshaNo);
         for (DbT7001FufukuMoshitateEntity fufukuMoshitateEntity : dbT7001FufukuMoshitateEntity) {
-            businessList.add(new SinsaSeikyusyoJohoModel(fufukuMoshitateEntity));
+            businessList.add(new FufukuMoshitate(fufukuMoshitateEntity));
         }
-
-        return businessList;
+        return SearchResult.of(businessList, 0, false);
     }
 }

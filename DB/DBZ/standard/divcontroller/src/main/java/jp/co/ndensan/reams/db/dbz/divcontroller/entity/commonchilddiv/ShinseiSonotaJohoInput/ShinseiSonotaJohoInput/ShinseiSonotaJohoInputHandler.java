@@ -7,11 +7,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSo
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.core.JukyushaDaicho;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DataKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.SakujoJiyuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.Datakubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.SakujoJiyuCode;
 // TODO n8187久保田 dbxのJukyushaDaichoManagerに置換すること。
-import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
@@ -76,7 +74,6 @@ public class ShinseiSonotaJohoInputHandler {
 //        div.getTxtJukyuShikakuHakkoDay1().setValue(直近受給者台帳.get().get受給資格証明書発行年月日１());
 //        div.getTxtJukyuShikakuHakkoDay2().setValue(直近受給者台帳.get().get受給資格証明書発行年月日２());
 //    }
-
     /**
      * 入力値をクリアします。
      */
@@ -136,8 +133,8 @@ public class ShinseiSonotaJohoInputHandler {
 
     private List<KeyValueDataSource> getDataKubun() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        for (DataKubun target : DataKubun.values()) {
-            KeyValueDataSource keyValueData = new KeyValueDataSource(target.code(), target.toRString());
+        for (Datakubun target : Datakubun.values()) {
+            KeyValueDataSource keyValueData = new KeyValueDataSource(target.getコード(), target.get名称());
             dataSource.add(keyValueData);
         }
         return dataSource;
@@ -146,9 +143,9 @@ public class ShinseiSonotaJohoInputHandler {
 
     private List<KeyValueDataSource> getDataKubunByStartWith(RString startWith) {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        for (DataKubun target : DataKubun.values()) {
-            if (target.code().startsWith(startWith)) {
-                dataSource.add(new KeyValueDataSource(target.code(), target.toRString()));
+        for (Datakubun target : Datakubun.values()) {
+            if (target.getコード().startsWith(startWith)) {
+                dataSource.add(new KeyValueDataSource(target.getコード(), target.get名称()));
             }
         }
         return dataSource;
@@ -158,7 +155,7 @@ public class ShinseiSonotaJohoInputHandler {
     private List<KeyValueDataSource> getSakujoJiyuDataSource() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         for (SakujoJiyuCode target : SakujoJiyuCode.values()) {
-            KeyValueDataSource keyValueData = new KeyValueDataSource(target.code(), target.toRString());
+            KeyValueDataSource keyValueData = new KeyValueDataSource(target.getコード(), target.get名称());
             dataSource.add(keyValueData);
         }
         return dataSource;

@@ -11,17 +11,21 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyosh
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 受領委任契約事業者を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
 public class JuryoininKeiyakuJigyosha
         extends ModelBase<JuryoininKeiyakuJigyoshaIdentifier, DbT3077JuryoininKeiyakuJigyoshaEntity, JuryoininKeiyakuJigyosha>
@@ -35,20 +39,12 @@ public class JuryoininKeiyakuJigyosha
      * 受領委任契約事業者の新規作成時に使用します。
      *
      * @param 契約事業者番号 契約事業者番号
-     * @param 開始年月日 開始年月日
-     * @param 履歴番号 履歴番号
      */
-    public JuryoininKeiyakuJigyosha(RString 契約事業者番号,
-            FlexibleDate 開始年月日) {
+    public JuryoininKeiyakuJigyosha(RString 契約事業者番号) {
         requireNonNull(契約事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("契約事業者番号"));
-        requireNonNull(開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("開始年月日"));
         this.entity = new DbT3077JuryoininKeiyakuJigyoshaEntity();
         this.entity.setKeiyakuJigyoshaNo(契約事業者番号);
-        this.entity.setKaishiYMD(開始年月日);
-        this.id = new JuryoininKeiyakuJigyoshaIdentifier(
-                契約事業者番号,
-                開始年月日
-        );
+        this.id = new JuryoininKeiyakuJigyoshaIdentifier(契約事業者番号);
     }
 
     /**
@@ -58,10 +54,9 @@ public class JuryoininKeiyakuJigyosha
      * @param entity DBより取得した{@link DbT3077JuryoininKeiyakuJigyoshaEntity}
      */
     public JuryoininKeiyakuJigyosha(DbT3077JuryoininKeiyakuJigyoshaEntity entity) {
-        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任契約事業者"));
+        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("契約事業者番号"));
         this.id = new JuryoininKeiyakuJigyoshaIdentifier(
-                entity.getKeiyakuJigyoshaNo(),
-                entity.getKaishiYMD());
+                entity.getKeiyakuJigyoshaNo());
     }
 
     /**
@@ -107,6 +102,123 @@ public class JuryoininKeiyakuJigyosha
     }
 
     /**
+     * 契約種類を返します。
+     *
+     * @return 契約種類
+     */
+    public RString get契約種類() {
+        return entity.getKeiyakuShurui();
+    }
+
+    /**
+     * 契約事業者名称を返します。
+     *
+     * @return 契約事業者名称
+     */
+    public AtenaMeisho get契約事業者名称() {
+        return entity.getKeiyakuJigyoshaName();
+    }
+
+    /**
+     * 契約事業者カナ名称を返します。
+     *
+     * @return 契約事業者カナ名称
+     */
+    public AtenaKanaMeisho get契約事業者カナ名称() {
+        return entity.getKeiyakuJigyoshaKanaName();
+    }
+
+    /**
+     * 契約事業者郵便番号を返します。
+     *
+     * @return 契約事業者郵便番号
+     */
+    public YubinNo get契約事業者郵便番号() {
+        return entity.getKeiyakuJigyoshaYubinNo();
+    }
+
+    /**
+     * 契約事業者住所を返します。
+     *
+     * @return 契約事業者住所
+     */
+    public AtenaJusho get契約事業者住所() {
+        return entity.getKeiyakuJigyoshaJusho();
+    }
+
+    /**
+     * 契約代表者氏名を返します。
+     *
+     * @return 契約代表者氏名
+     */
+    public AtenaMeisho get契約代表者氏名() {
+        return entity.getKeiyakuDaihyoshaName();
+    }
+
+    /**
+     * 契約事業者電話番号を返します。
+     *
+     * @return 契約事業者電話番号
+     */
+    public TelNo get契約事業者電話番号() {
+        return entity.getKeiyakuJigyoshaTelNo();
+    }
+
+    /**
+     * 契約事業者FAX番号を返します。
+     *
+     * @return 契約事業者FAX番号
+     */
+    public TelNo get契約事業者FAX番号() {
+        return entity.getKeiyakuJigyoshaFaxNo();
+    }
+
+    /**
+     * 送付先郵便番号を返します。
+     *
+     * @return 送付先郵便番号
+     */
+    public YubinNo get送付先郵便番号() {
+        return entity.getSofusakiYubinNo();
+    }
+
+    /**
+     * 送付先住所を返します。
+     *
+     * @return 送付先住所
+     */
+    public AtenaJusho get送付先住所() {
+        return entity.getSofusakiJusho();
+    }
+
+    /**
+     * 送付先部署を返します。
+     *
+     * @return 送付先部署
+     */
+    public RString get送付先部署() {
+        return entity.getSofusakiBusho();
+    }
+
+    /**
+     * 送付先事業者名称を返します。
+     *
+     * @return 送付先事業者名称
+     */
+    public AtenaMeisho get送付先事業者名称() {
+        return entity.getSofusakiJigyoshaName();
+    }
+
+    /**
+     * 送付先事業者カナ名称を返します。
+     *
+     * @return 送付先事業者カナ名称
+     */
+    public AtenaKanaMeisho get送付先事業者カナ名称() {
+        return entity.getSofusakiJigyoshaKanaName();
+    }
+
+    /**
      * 金融機関コードを返します。
      *
      * @return 金融機関コード
@@ -143,39 +255,21 @@ public class JuryoininKeiyakuJigyosha
     }
 
     /**
+     * 口座名義人を返します。
+     *
+     * @return 口座名義人
+     */
+    public AtenaMeisho get口座名義人() {
+        return entity.getKozaMeiginin();
+    }
+
+    /**
      * 口座名義人カナを返します。
      *
      * @return 口座名義人カナ
      */
     public AtenaKanaMeisho get口座名義人カナ() {
         return entity.getKozaMeigininKana();
-    }
-
-    /**
-     * 口座名義人を返します。
-     *
-     * @return 口座名義人
-     */
-    public AtenaMeisho get口座名義人漢字() {
-        return entity.getKozaMeiginin();
-    }
-
-    /**
-     * 事業者FAX番号を返します。
-     *
-     * @return 事業者FAX番号
-     */
-    public TelNo get事業者FAX番号() {
-        return entity.getKeiyakuJigyoshaFaxNo();
-    }
-
-    /**
-     * 送付先部署を返します。
-     *
-     * @return 送付先部署
-     */
-    public RString get送付先部署() {
-        return entity.getSofusakiBusho();
     }
 
     /**

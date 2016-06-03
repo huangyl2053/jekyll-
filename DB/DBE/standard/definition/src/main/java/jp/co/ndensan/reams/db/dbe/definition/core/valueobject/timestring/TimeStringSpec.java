@@ -19,7 +19,7 @@ public enum TimeStringSpec implements IPredicate<TimeString> {
                 /**
                  * 桁数が4桁である場合にtrueを返す。
                  *
-                 * @param timeString 介護独自で、文字列で表した時間
+                 * @param timestring 介護独自で、文字列で表した時間
                  * @return true：仕様を満たす、false：仕様を満たさない
                  */
                 @Override

@@ -11,9 +11,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 他市町村住所地特例を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 @lombok.Getter
-public class TashichosonJushochiTokureiMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class TashichosonJushochiTokureiMapperParameter {
 
     private final ShikibetsuCode 識別コード;
     private final FlexibleDate 異動日;

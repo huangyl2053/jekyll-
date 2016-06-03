@@ -20,7 +20,7 @@ public class NinteichosaJisshibashoKubunCodeValidator {
     /**
      * コンストラクタです。
      *
-     * @param ninteichosaJisshibashoKubunCode 要介護認定調査の実施場所区分コード
+     * @param ninteichosaKubunCode 要介護認定調査の実施場所区分コード
      */
     public NinteichosaJisshibashoKubunCodeValidator(NinteichosaJisshibashoKubunCode ninteichosaKubunCode) {
         requireNonNull(ninteichosaKubunCode, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定調査の実施場所区分コード"));

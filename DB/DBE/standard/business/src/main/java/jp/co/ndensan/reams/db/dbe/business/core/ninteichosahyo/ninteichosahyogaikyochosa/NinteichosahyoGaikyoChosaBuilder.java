@@ -24,17 +24,16 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5202NinteichosahyoGaikyoChosaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * {@link NinteichosahyoGaikyoChosa}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class NinteichosahyoGaikyoChosaBuilder {
 
@@ -56,12 +55,9 @@ public class NinteichosahyoGaikyoChosaBuilder {
      * @param gaikyoTokki {@link Models<GaikyoTokkiIdentifier, GaikyoTokki>}
      * @param ninteichosahyoKihonChosa {@link Models<NinteichosahyoKihonChosaIdentifier, NinteichosahyoKihonChosa>}
      * @param ninteichosahyoKinyuItem {@link Models<NinteichosahyoKinyuItemIdentifier, NinteichosahyoKinyuItem>}
-     * @param ninteichosahyoServiceJokyo
-     * {@link Models<NinteichosahyoServiceJokyoIdentifier, NinteichosahyoServiceJokyo>}
-     * @param ninteichosahyoServiceJokyoFlag
-     * {@link Models<NinteichosahyoServiceJokyoFlagIdentifier, NinteichosahyoServiceJokyoFlag>}
-     * @param ninteichosahyoShisetsuRiyo
-     * {@link Models<NinteichosahyoShisetsuRiyoIdentifier, NinteichosahyoShisetsuRiyo>}
+     * @param ninteichosahyoServiceJokyo {@link Models<NinteichosahyoServiceJokyoIdentifier, NinteichosahyoServiceJokyo>}
+     * @param ninteichosahyoServiceJokyoFlag {@link Models<NinteichosahyoServiceJokyoFlagIdentifier, NinteichosahyoServiceJokyoFlag>}
+     * @param ninteichosahyoShisetsuRiyo {@link Models<NinteichosahyoShisetsuRiyoIdentifier, NinteichosahyoShisetsuRiyo>}
      * @param ninteichosahyoTokkijiko {@link Models<NinteichosahyoTokkijikoIdentifier, NinteichosahyoTokkijiko>}
      *
      */

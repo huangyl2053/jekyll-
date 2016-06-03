@@ -4,11 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.helper;
 
-import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaResult.NinteichosaJisshibashoKubun;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaResult.NinteichosaResult;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaResult.NinteichosaResultOfGaikyo;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaResult.NinteichosaResultOfGaikyoKihon;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaResult.NinteichosaResultOfKihon;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaresult.NinteichosaJisshibashoKubun;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaresult.NinteichosaResult;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaresult.NinteichosaResultOfGaikyo;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaresult.NinteichosaResultOfGaikyoKihon;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaresult.NinteichosaResultOfKihon;
 import jp.co.ndensan.reams.db.dbe.business.core.chosahyo.NinteichosahyoEditor;
 import jp.co.ndensan.reams.db.dbe.business.core.chosahyo.NinteichosahyoFactory;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KoroshoIFKubun;

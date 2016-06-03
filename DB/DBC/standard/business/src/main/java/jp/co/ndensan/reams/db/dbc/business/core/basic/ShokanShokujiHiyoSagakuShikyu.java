@@ -20,8 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 償還払請求食事費用差額支給を管理するクラスです。
  */
-public class ShokanShokujiHiyoSagakuShikyu
-        extends ModelBase<ShokanShokujiHiyoSagakuShikyuIdentifier, DbT3044ShokanShokujiHiyoSagakuShikyuEntity, ShokanShokujiHiyoSagakuShikyu> implements Serializable {
+public class ShokanShokujiHiyoSagakuShikyu extends
+        ModelBase<ShokanShokujiHiyoSagakuShikyuIdentifier, DbT3044ShokanShokujiHiyoSagakuShikyuEntity, ShokanShokujiHiyoSagakuShikyu>
+        implements Serializable {
 
     private final DbT3044ShokanShokujiHiyoSagakuShikyuEntity entity;
     private final ShokanShokujiHiyoSagakuShikyuIdentifier id;
@@ -55,7 +56,7 @@ public class ShokanShokujiHiyoSagakuShikyu
         this.entity = new DbT3044ShokanShokujiHiyoSagakuShikyuEntity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
-        this.entity.setSeiriNp(整理番号);
+        this.entity.setSeiriNo(整理番号);
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYoshikiNo(様式番号);
         this.entity.setMeisaiNo(明細番号);
@@ -82,7 +83,7 @@ public class ShokanShokujiHiyoSagakuShikyu
         this.id = new ShokanShokujiHiyoSagakuShikyuIdentifier(
                 entity.getHiHokenshaNo(),
                 entity.getServiceTeikyoYM(),
-                entity.getSeiriNp(),
+                entity.getSeiriNo(),
                 entity.getJigyoshaNo(),
                 entity.getYoshikiNo(),
                 entity.getMeisaiNo(),
@@ -129,7 +130,7 @@ public class ShokanShokujiHiyoSagakuShikyu
      * @return 整理番号
      */
     public RString get整理番号() {
-        return entity.getSeiriNp();
+        return entity.getSeiriNo();
     }
 
     /**

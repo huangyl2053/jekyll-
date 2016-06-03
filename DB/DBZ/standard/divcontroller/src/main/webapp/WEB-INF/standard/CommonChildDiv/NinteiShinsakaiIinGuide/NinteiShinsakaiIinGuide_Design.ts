@@ -1,12 +1,33 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
+/// <reference path="./../hokenshalist/HokenshaList.ts" />
 
 module DBZ {
 
      export module NinteiShinsakaiIinGuide {
 
         export class Events {
+
+            public static onClick_btnKensakku(): string {
+                return "onClick_btnKensakku";
+            }
+
+            public static onClick_btnClear(): string {
+                return "onClick_btnClear";
+            }
+
+            public static onClick_ShinsakaiIinIchiranDate(): string {
+                return "onClick_ShinsakaiIinIchiranDate";
+            }
+
+            public static onClick_btnModoru(): string {
+                return "onClick_btnModoru";
+            }
+
+            public static onClick_btnSaikensaku(): string {
+                return "onClick_btnSaikensaku";
+            }
 
         }
 
@@ -61,8 +82,20 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlShinsainShikakuCode"));
             }
 
+            public ccdHokensha(): DBZ.HokenshaList.ModeController {
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokensha"));
+            }
+
+            public txtMaxKensu(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtMaxKensu"));
+            }
+
             public btnKensakku(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnKensakku"));
+            }
+
+            public btnClear(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnClear"));
             }
 
             public ShosaiJoken(): UZA.Panel {

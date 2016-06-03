@@ -8,22 +8,24 @@ package jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaih
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護事業者代表者を管理するクラスです。
+ *
+ * @reamsid_L DBX-9999-011 sunhaidi
  */
 public class KaigoJigyoshaDaihyosha
         extends ModelBase<KaigoJigyoshaDaihyoshaIdentifier, DbT7062KaigoJigyoshaDaihyoshaEntity, KaigoJigyoshaDaihyosha>
@@ -40,7 +42,7 @@ public class KaigoJigyoshaDaihyosha
      * @param 有効開始日 有効開始日
      */
     public KaigoJigyoshaDaihyosha(JigyoshaNo 事業者番号,
-                                  FlexibleDate 有効開始日) {
+            FlexibleDate 有効開始日) {
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(有効開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始日"));
         this.entity = new DbT7062KaigoJigyoshaDaihyoshaEntity();
@@ -235,8 +237,7 @@ public class KaigoJigyoshaDaihyosha
     }
 
     /**
-     * 介護事業者代表者のみを変更対象とします。<br/>
-     * {@link DbT7062KaigoJigyoshaDaihyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護事業者代表者のみを変更対象とします。<br/> {@link DbT7062KaigoJigyoshaDaihyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link KaigoJigyoshaDaihyosha}
      */
@@ -250,8 +251,7 @@ public class KaigoJigyoshaDaihyosha
     }
 
     /**
-     * 保持する介護事業者代表者を削除対象とします。<br/>
-     * {@link DbT7062KaigoJigyoshaDaihyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護事業者代表者を削除対象とします。<br/> {@link DbT7062KaigoJigyoshaDaihyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KaigoJigyoshaDaihyosha}
      */

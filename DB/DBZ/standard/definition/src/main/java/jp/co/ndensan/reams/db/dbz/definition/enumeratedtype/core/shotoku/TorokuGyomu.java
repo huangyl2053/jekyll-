@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.util.strings.IRStringConvertable;
 
 /**
  * 登録業務の列挙型です。
+ *
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public enum TorokuGyomu implements IRStringConvertable {
 

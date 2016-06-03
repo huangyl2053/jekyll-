@@ -25,12 +25,12 @@ public class IsExistEnkiRiyuTest extends DbeTestBase {
 
     @Test
     public void であるを指定した場合_getコードは_Trueを返す() {
-        assertThat(IsExistEnkiRiyu.である.getコード(), is(true));
+        assertThat(IsExistEnkiRiyu.である.is延期理由あり(), is(true));
     }
 
     @Test
     public void でないを指定した場合_getコードは_Falseを返す() {
-        assertThat(IsExistEnkiRiyu.でない.getコード(), is(false));
+        assertThat(IsExistEnkiRiyu.でない.is延期理由あり(), is(false));
     }
 
     @Test

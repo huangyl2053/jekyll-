@@ -22,15 +22,13 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 転出保留対象者を管理するクラスです。
  */
-public class TenshutsuHoryuTaishosha extends 
-        ModelBase<TenshutsuHoryuTaishoshaIdentifier, 
-        DbT1011TenshutsuHoryuTaishoshaEntity, TenshutsuHoryuTaishosha> 
+public class TenshutsuHoryuTaishosha extends
+        ModelBase<TenshutsuHoryuTaishoshaIdentifier, DbT1011TenshutsuHoryuTaishoshaEntity, TenshutsuHoryuTaishosha>
         implements Serializable {
 
     private final DbT1011TenshutsuHoryuTaishoshaEntity entity;
@@ -384,8 +382,7 @@ public class TenshutsuHoryuTaishosha extends
     }
 
     /**
-     * 保持する転出保留対象者を削除対象とします。<br/>
-     * {@link DbT1011TenshutsuHoryuTaishoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する転出保留対象者を削除対象とします。<br/> {@link DbT1011TenshutsuHoryuTaishoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link TenshutsuHoryuTaishosha}
      */

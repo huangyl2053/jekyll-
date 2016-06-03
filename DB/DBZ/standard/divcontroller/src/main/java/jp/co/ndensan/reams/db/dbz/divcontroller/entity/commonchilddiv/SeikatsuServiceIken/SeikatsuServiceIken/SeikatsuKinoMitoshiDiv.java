@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class SeikatsuKinoMitoshiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,14 +30,22 @@ public class SeikatsuKinoMitoshiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getradSeikatsuKinoMitoshi
+     * @return radSeikatsuKinoMitoshi
+     */
     @JsonProperty("radSeikatsuKinoMitoshi")
     public RadioButton getRadSeikatsuKinoMitoshi() {
         return radSeikatsuKinoMitoshi;
     }
 
+    /*
+     * setradSeikatsuKinoMitoshi
+     * @param radSeikatsuKinoMitoshi radSeikatsuKinoMitoshi
+     */
     @JsonProperty("radSeikatsuKinoMitoshi")
     public void setRadSeikatsuKinoMitoshi(RadioButton radSeikatsuKinoMitoshi) {
-        this.radSeikatsuKinoMitoshi=radSeikatsuKinoMitoshi;
+        this.radSeikatsuKinoMitoshi = radSeikatsuKinoMitoshi;
     }
 
     // </editor-fold>

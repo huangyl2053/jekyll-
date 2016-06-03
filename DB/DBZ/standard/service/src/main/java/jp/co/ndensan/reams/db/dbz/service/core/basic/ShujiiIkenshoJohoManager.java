@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5302ShujiiIkenshoJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -71,6 +71,24 @@ public class ShujiiIkenshoJohoManager {
         List<ShujiiIkenshoJoho> businessList = new ArrayList<>();
 
         for (DbT5302ShujiiIkenshoJohoEntity entity : dac.selectAll()) {
+            entity.initializeMd5();
+            businessList.add(new ShujiiIkenshoJoho(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
+     * 要介護認定主治医意見書情報を検索By申請書管理番号。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return ShujiiIkenshoJohoの{@code list}
+     */
+    @Transaction
+    public List<ShujiiIkenshoJoho> get要介護認定主治医意見書情報By申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
+        List<ShujiiIkenshoJoho> businessList = new ArrayList<>();
+
+        for (DbT5302ShujiiIkenshoJohoEntity entity : dac.selectBy申請書管理番号(申請書管理番号)) {
             entity.initializeMd5();
             businessList.add(new ShujiiIkenshoJoho(entity));
         }

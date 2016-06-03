@@ -12,23 +12,24 @@ import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.SikakuKikan;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.Tashichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.TekiyoJogaisha;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.TokusoRireki;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.sikakuidocheck.ISikakuIdoCheckMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.sikakuidocheck.ISikakuIdoCheckMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 資格異動チェック処理クラスです。
  *
+ * @reamsid_L DBU-0110-010 xuyannan
  */
 public class SikakuIdoCheckManager {
 
-    private static final RString ERR_CODE_DBAE00007 = new RString("DBAE00007");
-    private static final RString ERR_CODE_DBAE00008 = new RString("DBAE00008");
     private final MapperProvider mapperProvider;
 
     /**
@@ -64,9 +65,8 @@ public class SikakuIdoCheckManager {
      * 資格期間の履歴重複チェック処理です。
      *
      * @param sikakuKikanList sikakuKikanList
-     * @return RString
      */
-    public RString sikakuKikanRirekiChofukuCheck(List<SikakuKikan> sikakuKikanList) {
+    public void sikakuKikanRirekiChofukuCheck(List<SikakuKikan> sikakuKikanList) {
         if (sikakuKikanList != null && !sikakuKikanList.isEmpty()) {
             List<Idokikan> idokikanList = new ArrayList<>();
             for (SikakuKikan sikakuKikan : sikakuKikanList) {
@@ -76,10 +76,9 @@ public class SikakuIdoCheckManager {
                 idokikanList.add(idokikan);
             }
             if (!chofukuCheck(idokikanList)) {
-                return ERR_CODE_DBAE00007;
+                throw new ApplicationException(DbzErrorMessages.被保険者履歴に期間重複.getMessage());
             }
         }
-        return RString.EMPTY;
     }
 
     /**
@@ -87,24 +86,22 @@ public class SikakuIdoCheckManager {
      *
      * @param tokusoRireki List<TokusoRireki>
      * @param 識別コード 識別コード
-     * @return RString
      */
-    public RString tokusouTanoKikanChofukuCheck(List<TokusoRireki> tokusoRireki, ShikibetsuCode 識別コード) {
+    public void tokusouTanoKikanChofukuCheck(List<TokusoRireki> tokusoRireki, ShikibetsuCode 識別コード) {
 
-        Idokikan 資格取得年月日情報他市町村住所地特例 = get資格取得年月日情報By他市町村住所地特例(識別コード);
-        Idokikan 資格取得年月日情報適用除外者 = get資格取得年月日情報By適用除外者(識別コード);
+        List<Idokikan> 資格取得年月日情報他市町村住所地特例 = get資格取得年月日情報By他市町村住所地特例(識別コード);
+        List<Idokikan> 資格取得年月日情報適用除外者 = get資格取得年月日情報By適用除外者(識別コード);
 
-        if (資格取得年月日情報適用除外者 != null
-                && 資格取得年月日情報他市町村住所地特例 != null) {
+        if (!資格取得年月日情報適用除外者.isEmpty()
+                && !資格取得年月日情報他市町村住所地特例.isEmpty()) {
             List<Idokikan> idokikanList = new ArrayList<>();
-            idokikanList.add(資格取得年月日情報他市町村住所地特例);
-            idokikanList.add(資格取得年月日情報適用除外者);
+            idokikanList.addAll(資格取得年月日情報他市町村住所地特例);
+            idokikanList.addAll(資格取得年月日情報適用除外者);
             idokikanList.addAll(get資格取得年月日情報By引数TokusoRireki(tokusoRireki));
             if (!chofukuCheck(idokikanList)) {
-                return ERR_CODE_DBAE00008;
+                throw new ApplicationException(DbzErrorMessages.他の期間情報との期間重複.getMessage());
             }
         }
-        return RString.EMPTY;
     }
 
     /**
@@ -112,23 +109,21 @@ public class SikakuIdoCheckManager {
      *
      * @param tekiyoJogaisha List<TekiyoJogaisha>
      * @param 識別コード 識別コード
-     * @return RString
      */
-    public RString tekiyoJogaishaChofukuCheck(List<TekiyoJogaisha> tekiyoJogaisha, ShikibetsuCode 識別コード) {
+    public void tekiyoJogaishaChofukuCheck(List<TekiyoJogaisha> tekiyoJogaisha, ShikibetsuCode 識別コード) {
 
         List<Idokikan> 資格取得年月日情報被保険者台帳 = get資格取得年月日情報By被保険者台帳(識別コード);
-        Idokikan 資格取得年月日情報他市町村住所地特例 = get資格取得年月日情報By他市町村住所地特例(識別コード);
+        List<Idokikan> 資格取得年月日情報他市町村住所地特例 = get資格取得年月日情報By他市町村住所地特例(識別コード);
         if (!資格取得年月日情報被保険者台帳.isEmpty()
-                && 資格取得年月日情報他市町村住所地特例 != null) {
+                && !資格取得年月日情報他市町村住所地特例.isEmpty()) {
             List<Idokikan> idokikanList = new ArrayList<>();
             idokikanList.addAll(資格取得年月日情報被保険者台帳);
-            idokikanList.add(資格取得年月日情報他市町村住所地特例);
+            idokikanList.addAll(資格取得年月日情報他市町村住所地特例);
             idokikanList.addAll(get資格取得年月日情報By引数TekiyoJogaisha(tekiyoJogaisha));
             if (!chofukuCheck(idokikanList)) {
-                return ERR_CODE_DBAE00008;
+                throw new ApplicationException(DbzErrorMessages.他の期間情報との期間重複.getMessage());
             }
         }
-        return RString.EMPTY;
     }
 
     /**
@@ -136,22 +131,20 @@ public class SikakuIdoCheckManager {
      *
      * @param tashichoson List<Tashichoson>
      * @param 識別コード 識別コード
-     * @return RString
      */
-    public RString tasichosonTokureiChofukuCheck(List<Tashichoson> tashichoson, ShikibetsuCode 識別コード) {
+    public void tasichosonTokureiChofukuCheck(List<Tashichoson> tashichoson, ShikibetsuCode 識別コード) {
         List<Idokikan> 資格取得年月日情報被保険者台帳 = get資格取得年月日情報By被保険者台帳(識別コード);
-        Idokikan 資格取得年月日情報適用除外者 = get資格取得年月日情報By適用除外者(識別コード);
+        List<Idokikan> 資格取得年月日情報適用除外者 = get資格取得年月日情報By適用除外者(識別コード);
         if (!資格取得年月日情報被保険者台帳.isEmpty()
-                && 資格取得年月日情報適用除外者 != null) {
+                && 資格取得年月日情報適用除外者.isEmpty()) {
             List<Idokikan> idokikanList = new ArrayList<>();
             idokikanList.addAll(資格取得年月日情報被保険者台帳);
-            idokikanList.add(資格取得年月日情報適用除外者);
+            idokikanList.addAll(資格取得年月日情報適用除外者);
             idokikanList.addAll(get資格取得年月日情報By引数Tashichoson(tashichoson));
             if (!chofukuCheck(idokikanList)) {
-                return ERR_CODE_DBAE00008;
+                throw new ApplicationException(DbzErrorMessages.他の期間情報との期間重複.getMessage());
             }
         }
-        return RString.EMPTY;
     }
 
     private List<Idokikan> get資格取得年月日情報By引数TokusoRireki(List<TokusoRireki> tokusoRireki) {
@@ -207,28 +200,30 @@ public class SikakuIdoCheckManager {
         return idokikanList;
     }
 
-    private Idokikan get資格取得年月日情報By他市町村住所地特例(ShikibetsuCode 識別コード) {
+    private List<Idokikan> get資格取得年月日情報By他市町村住所地特例(ShikibetsuCode 識別コード) {
+        List<Idokikan> idokikanList = new ArrayList<>();
         ISikakuIdoCheckMapper mapper = mapperProvider.create(ISikakuIdoCheckMapper.class);
-        DbT1003TashichosonJushochiTokureiEntity entity = mapper.getDbT1003TashichosonJushochiTokurei(識別コード);
-        if (entity != null) {
+        List<DbT1003TashichosonJushochiTokureiEntity> entity = mapper.getDbT1003TashichosonJushochiTokurei(識別コード);
+        for (DbT1003TashichosonJushochiTokureiEntity dbt1003 : entity) {
             Idokikan idokikan = new Idokikan();
-            idokikan.setKaishiYMD(entity.getTekiyoYMD());
-            idokikan.setShuryoYMD(entity.getKaijoYMD());
-            return idokikan;
+            idokikan.setKaishiYMD(dbt1003.getTekiyoYMD());
+            idokikan.setShuryoYMD(dbt1003.getKaijoYMD());
+            idokikanList.add(idokikan);
         }
-        return null;
+        return idokikanList;
     }
 
-    private Idokikan get資格取得年月日情報By適用除外者(ShikibetsuCode 識別コード) {
+    private List<Idokikan> get資格取得年月日情報By適用除外者(ShikibetsuCode 識別コード) {
+        List<Idokikan> idokikanList = new ArrayList<>();
         ISikakuIdoCheckMapper mapper = mapperProvider.create(ISikakuIdoCheckMapper.class);
-        DbT1002TekiyoJogaishaEntity entity = mapper.getDbT1002TekiyoJogaisha(識別コード);
-        if (entity != null) {
+        List<DbT1002TekiyoJogaishaEntity> entity = mapper.getDbT1002TekiyoJogaisha(識別コード);
+        for (DbT1002TekiyoJogaishaEntity dbt1002 : entity) {
             Idokikan idokikan = new Idokikan();
-            idokikan.setKaishiYMD(entity.getTekiyoYMD());
-            idokikan.setShuryoYMD(entity.getKaijoYMD());
-            return idokikan;
+            idokikan.setKaishiYMD(dbt1002.getTekiyoYMD());
+            idokikan.setShuryoYMD(dbt1002.getKaijoYMD());
+            idokikanList.add(idokikan);
         }
-        return null;
+        return idokikanList;
     }
 
     private boolean chofukuCheck(List<Idokikan> idokikanList) {
@@ -247,7 +242,11 @@ public class SikakuIdoCheckManager {
             }
         }
         for (int k = 0; k < idokikanList.size() - 1; k++) {
-            if (idokikanList.get(k).getKaishiYMD().isBefore(idokikanList.get(k + 1).getShuryoYMD())) {
+            FlexibleDate shuryoYMD = idokikanList.get(k + 1).getShuryoYMD();
+            if (shuryoYMD == null || shuryoYMD.isEmpty()) {
+                shuryoYMD = FlexibleDate.MIN;
+            }
+            if (idokikanList.get(k).getKaishiYMD().isBefore(shuryoYMD)) {
                 checkFlag = false;
                 return checkFlag;
             }

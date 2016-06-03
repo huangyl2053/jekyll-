@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 廃止フラグを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IsHaishi {
 
@@ -32,7 +32,7 @@ public enum IsHaishi {
      *
      * @return 廃止フラグのコード
      */
-    public boolean getコード() {
+    public boolean is廃止() {
         return code;
     }
 

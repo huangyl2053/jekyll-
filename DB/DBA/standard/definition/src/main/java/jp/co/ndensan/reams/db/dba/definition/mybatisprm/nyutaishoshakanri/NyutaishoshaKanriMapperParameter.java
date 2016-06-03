@@ -9,7 +9,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 履歴期間重複チェックするためのMyBatis用パラメータクラスです。
+ * 介護保険施設入退所者管理ですためのMapper用パラメータクラスです。
+ *
+ * @reamsid_L DBA-0360-010 duanzhanli
+ *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

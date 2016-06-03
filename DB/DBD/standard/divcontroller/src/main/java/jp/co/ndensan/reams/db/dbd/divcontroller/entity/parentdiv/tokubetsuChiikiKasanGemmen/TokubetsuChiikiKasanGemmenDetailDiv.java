@@ -1,18 +1,15 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.tokubetsuChiikiKasanGemmen;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.tokubetsuChiikiKasanGemmen.TokubetsuChiikiKasanGemmenRiyoshaFutanDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TokubetsuChiikiKasanGemmenDetail のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * TokubetsuChiikiKasanGemmenDetail のクラスファイル
+ *
  * @author 自動生成
  */
 public class TokubetsuChiikiKasanGemmenDetailDiv extends Panel {
@@ -22,6 +19,7 @@ public class TokubetsuChiikiKasanGemmenDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtShinseiDate")
     private TextBoxFlexibleDate txtShinseiDate;
     @JsonProperty("TokubetsuChiikiKasanGemmenRiyoshaFutan")
@@ -40,7 +38,7 @@ public class TokubetsuChiikiKasanGemmenDetailDiv extends Panel {
 
     @JsonProperty("txtShinseiDate")
     public void setTxtShinseiDate(TextBoxFlexibleDate txtShinseiDate) {
-        this.txtShinseiDate=txtShinseiDate;
+        this.txtShinseiDate = txtShinseiDate;
     }
 
     @JsonProperty("TokubetsuChiikiKasanGemmenRiyoshaFutan")
@@ -50,7 +48,7 @@ public class TokubetsuChiikiKasanGemmenDetailDiv extends Panel {
 
     @JsonProperty("TokubetsuChiikiKasanGemmenRiyoshaFutan")
     public void setTokubetsuChiikiKasanGemmenRiyoshaFutan(TokubetsuChiikiKasanGemmenRiyoshaFutanDiv TokubetsuChiikiKasanGemmenRiyoshaFutan) {
-        this.TokubetsuChiikiKasanGemmenRiyoshaFutan=TokubetsuChiikiKasanGemmenRiyoshaFutan;
+        this.TokubetsuChiikiKasanGemmenRiyoshaFutan = TokubetsuChiikiKasanGemmenRiyoshaFutan;
     }
 
 }

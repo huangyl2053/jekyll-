@@ -17,8 +17,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
+ * 広域合併市町村情報の取得のEntityです。
  *
- * 広域合併市町村情報の取得のEntity
+ * @reamsid_L DBU-0250-010 wangxiaodong
  */
 public class KoseiShichosonMasterEntity implements IDbAccessable {
 
@@ -499,7 +500,8 @@ public class KoseiShichosonMasterEntity implements IDbAccessable {
     /**
      * 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しないのsetメソッドです。
      *
-     * @param gappeiKyuShichosonHyojiUmu 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しない
+     * @param gappeiKyuShichosonHyojiUmu 合併旧市町村表示有無
+     * 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しない
      */
     public void setGappeiKyuShichosonHyojiUmu(RString gappeiKyuShichosonHyojiUmu) {
         this.gappeiKyuShichosonHyojiUmu = gappeiKyuShichosonHyojiUmu;

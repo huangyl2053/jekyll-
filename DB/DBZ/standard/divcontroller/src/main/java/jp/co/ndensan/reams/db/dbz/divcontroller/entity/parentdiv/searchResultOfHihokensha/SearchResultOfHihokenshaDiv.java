@@ -1,19 +1,15 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.searchResultOfHihokensha;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.searchResultOfHihokensha.ButtonsForSearchResultOfHihokenshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.searchResultOfHihokensha.dgSearchResult_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SearchResultOfHihokensha のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * SearchResultOfHihokensha のクラスファイル
+ *
  * @author 自動生成
  */
 public class SearchResultOfHihokenshaDiv extends Panel {
@@ -23,6 +19,7 @@ public class SearchResultOfHihokenshaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("dgSearchResult")
     private DataGrid<dgSearchResult_Row> dgSearchResult;
     @JsonProperty("ButtonsForSearchResultOfHihokensha")
@@ -41,7 +38,7 @@ public class SearchResultOfHihokenshaDiv extends Panel {
 
     @JsonProperty("dgSearchResult")
     public void setDgSearchResult(DataGrid<dgSearchResult_Row> dgSearchResult) {
-        this.dgSearchResult=dgSearchResult;
+        this.dgSearchResult = dgSearchResult;
     }
 
     @JsonProperty("ButtonsForSearchResultOfHihokensha")
@@ -51,7 +48,7 @@ public class SearchResultOfHihokenshaDiv extends Panel {
 
     @JsonProperty("ButtonsForSearchResultOfHihokensha")
     public void setButtonsForSearchResultOfHihokensha(ButtonsForSearchResultOfHihokenshaDiv ButtonsForSearchResultOfHihokensha) {
-        this.ButtonsForSearchResultOfHihokensha=ButtonsForSearchResultOfHihokensha;
+        this.ButtonsForSearchResultOfHihokensha = ButtonsForSearchResultOfHihokensha;
     }
 
 }

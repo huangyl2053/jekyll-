@@ -12,6 +12,7 @@ import lombok.Getter;
 /**
  *
  * 調査委託先・調査員一覧表ヘッダのITEMです。
+ * @reamsid_L DBE-0290-020 dongyabin
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

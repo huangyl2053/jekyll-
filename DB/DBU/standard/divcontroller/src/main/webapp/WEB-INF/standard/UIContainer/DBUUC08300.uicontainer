@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBUUC08300",
+ "displayWizard": false,
+ "subGyomuCode": "DBU",
+ "steps": [
+  {
+   "id": 1,
+   "name": "広域内市町村情報管理",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0830011",
+     "toLayoutTitle": "広域内市町村情報管理",
+     "toState": "初期状態"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0830011",
+     "layoutTitle": "広域内市町村情報管理",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

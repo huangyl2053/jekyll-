@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbe.definition.core.valueobject.gogitaiyukokikank
 
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 
+/**
+ * 合議体有効期間開始日付。
+ */
 public enum GogitaiYukoKikanKaishiDateSpec implements IPredicate<GogitaiYukoKikanKaishiDate> {
 
     /**

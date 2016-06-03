@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 却下理由の有無を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IsExistKyakkaRiyu {
 
@@ -32,7 +32,7 @@ public enum IsExistKyakkaRiyu {
      *
      * @return 却下理由の有無のコード
      */
-    public boolean getコード() {
+    public boolean has却下理由() {
         return code;
     }
 

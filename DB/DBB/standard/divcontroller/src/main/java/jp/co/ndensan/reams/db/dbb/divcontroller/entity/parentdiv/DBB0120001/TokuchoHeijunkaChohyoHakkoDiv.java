@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.IOutputChohyoIchiranDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.OutputChohyoIchiranDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -16,23 +18,23 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TokuchoHeijunkaChohyoHakkoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdChohyoIchiran")
-    private OutputChohyoIchiranDiv ccdChohyoIchiran;
     @JsonProperty("lblHeijunkaHenkoTsuchi")
     private Label lblHeijunkaHenkoTsuchi;
     @JsonProperty("txtHeijunkaHenkoTsuchiHakkoYMD")
-    private TextBoxDate txtHeijunkaHenkoTsuchiHakkoYMD;
+    private TextBoxFlexibleDate txtHeijunkaHenkoTsuchiHakkoYMD;
     @JsonProperty("radHeijunkaHenkoTsuchi")
     private RadioButton radHeijunkaHenkoTsuchi;
-    @JsonProperty("txtHeijunkaHenkoTsuchishoBunshoNo")
-    private TextBox txtHeijunkaHenkoTsuchishoBunshoNo;
+    @JsonProperty("ccdHeijunkaHenkoTsuchishoBunshoNo")
+    private BunshoBangoInputDiv ccdHeijunkaHenkoTsuchishoBunshoNo;
+    @JsonProperty("ccdChohyoIchiran")
+    private OutputChohyoIchiranDiv ccdChohyoIchiran;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,49 +42,76 @@ public class TokuchoHeijunkaChohyoHakkoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ccdChohyoIchiran")
-    public IOutputChohyoIchiranDiv getCcdChohyoIchiran() {
-        return ccdChohyoIchiran;
-    }
-
+    /*
+     * getlblHeijunkaHenkoTsuchi
+     * @return lblHeijunkaHenkoTsuchi
+     */
     @JsonProperty("lblHeijunkaHenkoTsuchi")
     public Label getLblHeijunkaHenkoTsuchi() {
         return lblHeijunkaHenkoTsuchi;
     }
 
+    /*
+     * setlblHeijunkaHenkoTsuchi
+     * @param lblHeijunkaHenkoTsuchi lblHeijunkaHenkoTsuchi
+     */
     @JsonProperty("lblHeijunkaHenkoTsuchi")
     public void setLblHeijunkaHenkoTsuchi(Label lblHeijunkaHenkoTsuchi) {
-        this.lblHeijunkaHenkoTsuchi=lblHeijunkaHenkoTsuchi;
+        this.lblHeijunkaHenkoTsuchi = lblHeijunkaHenkoTsuchi;
     }
 
+    /*
+     * gettxtHeijunkaHenkoTsuchiHakkoYMD
+     * @return txtHeijunkaHenkoTsuchiHakkoYMD
+     */
     @JsonProperty("txtHeijunkaHenkoTsuchiHakkoYMD")
-    public TextBoxDate getTxtHeijunkaHenkoTsuchiHakkoYMD() {
+    public TextBoxFlexibleDate getTxtHeijunkaHenkoTsuchiHakkoYMD() {
         return txtHeijunkaHenkoTsuchiHakkoYMD;
     }
 
+    /*
+     * settxtHeijunkaHenkoTsuchiHakkoYMD
+     * @param txtHeijunkaHenkoTsuchiHakkoYMD txtHeijunkaHenkoTsuchiHakkoYMD
+     */
     @JsonProperty("txtHeijunkaHenkoTsuchiHakkoYMD")
-    public void setTxtHeijunkaHenkoTsuchiHakkoYMD(TextBoxDate txtHeijunkaHenkoTsuchiHakkoYMD) {
-        this.txtHeijunkaHenkoTsuchiHakkoYMD=txtHeijunkaHenkoTsuchiHakkoYMD;
+    public void setTxtHeijunkaHenkoTsuchiHakkoYMD(TextBoxFlexibleDate txtHeijunkaHenkoTsuchiHakkoYMD) {
+        this.txtHeijunkaHenkoTsuchiHakkoYMD = txtHeijunkaHenkoTsuchiHakkoYMD;
     }
 
+    /*
+     * getradHeijunkaHenkoTsuchi
+     * @return radHeijunkaHenkoTsuchi
+     */
     @JsonProperty("radHeijunkaHenkoTsuchi")
     public RadioButton getRadHeijunkaHenkoTsuchi() {
         return radHeijunkaHenkoTsuchi;
     }
 
+    /*
+     * setradHeijunkaHenkoTsuchi
+     * @param radHeijunkaHenkoTsuchi radHeijunkaHenkoTsuchi
+     */
     @JsonProperty("radHeijunkaHenkoTsuchi")
     public void setRadHeijunkaHenkoTsuchi(RadioButton radHeijunkaHenkoTsuchi) {
-        this.radHeijunkaHenkoTsuchi=radHeijunkaHenkoTsuchi;
+        this.radHeijunkaHenkoTsuchi = radHeijunkaHenkoTsuchi;
     }
 
-    @JsonProperty("txtHeijunkaHenkoTsuchishoBunshoNo")
-    public TextBox getTxtHeijunkaHenkoTsuchishoBunshoNo() {
-        return txtHeijunkaHenkoTsuchishoBunshoNo;
+    /*
+     * getccdHeijunkaHenkoTsuchishoBunshoNo
+     * @return ccdHeijunkaHenkoTsuchishoBunshoNo
+     */
+    @JsonProperty("ccdHeijunkaHenkoTsuchishoBunshoNo")
+    public IBunshoBangoInputDiv getCcdHeijunkaHenkoTsuchishoBunshoNo() {
+        return ccdHeijunkaHenkoTsuchishoBunshoNo;
     }
 
-    @JsonProperty("txtHeijunkaHenkoTsuchishoBunshoNo")
-    public void setTxtHeijunkaHenkoTsuchishoBunshoNo(TextBox txtHeijunkaHenkoTsuchishoBunshoNo) {
-        this.txtHeijunkaHenkoTsuchishoBunshoNo=txtHeijunkaHenkoTsuchishoBunshoNo;
+    /*
+     * getccdChohyoIchiran
+     * @return ccdChohyoIchiran
+     */
+    @JsonProperty("ccdChohyoIchiran")
+    public IOutputChohyoIchiranDiv getCcdChohyoIchiran() {
+        return ccdChohyoIchiran;
     }
 
     // </editor-fold>

@@ -19,6 +19,7 @@ import lombok.Value;
  * 給付実績緊急時施設療養の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KyufujissekiKinkyuShisetsuRyoyoIdentifier implements Serializable {
 
     private final KokanShikibetsuNo 交換情報識別番号;

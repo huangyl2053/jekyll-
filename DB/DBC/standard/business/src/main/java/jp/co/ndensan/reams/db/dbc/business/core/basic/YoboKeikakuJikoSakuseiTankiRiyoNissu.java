@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -19,8 +19,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 予防給付計画自己作成短期利用日数を管理するクラスです。
  */
-public class YoboKeikakuJikoSakuseiTankiRiyoNissu
-        extends ModelBase<YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity, YoboKeikakuJikoSakuseiTankiRiyoNissu> implements Serializable {
+public class YoboKeikakuJikoSakuseiTankiRiyoNissu extends ModelBase<
+        YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity, YoboKeikakuJikoSakuseiTankiRiyoNissu>
+        implements Serializable {
 
     private final DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity entity;
     private final YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier id;
@@ -54,7 +55,8 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissu
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity}より{@link YoboKeikakuJikoSakuseiTankiRiyoNissu}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity}
+     * @param entity
+     * DBより取得した{@link DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity}
      */
     public YoboKeikakuJikoSakuseiTankiRiyoNissu(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("予防給付計画自己作成短期利用日数"));
@@ -137,7 +139,8 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissu
     /**
      * 予防給付計画自己作成短期利用日数の識別子{@link YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier}を返します。
      *
-     * @return 予防給付計画自己作成短期利用日数の識別子{@link YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier}
+     * @return
+     * 予防給付計画自己作成短期利用日数の識別子{@link YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier}
      */
     @Override
     public YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier identifier() {

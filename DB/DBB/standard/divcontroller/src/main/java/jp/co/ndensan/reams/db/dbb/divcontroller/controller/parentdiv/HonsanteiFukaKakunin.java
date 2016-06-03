@@ -31,9 +31,9 @@ public class HonsanteiFukaKakunin {
     /**
      * 初期ロード時に実行。
      *
-     * @param honsanteiFukaKakuninDiv
+     * @param honsanteiFukaKakuninDiv HonsanteiFukaKakuninDiv
      *
-     * @return
+     * @return 画面の初期化メソッドです。
      */
     public ResponseData<HonsanteiFukaKakuninDiv> onLoad(HonsanteiFukaKakuninDiv honsanteiFukaKakuninDiv) {
         ResponseData<HonsanteiFukaKakuninDiv> response = new ResponseData<>();

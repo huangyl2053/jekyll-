@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * KyufuKanrihyoCSVDataEntityのcsv項目定義クラスです
  *
-* @author N2810 久保 里史
+ * @author N2810 久保 里史
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KyufuKanrihyoCSVDataEntity {
 
     @CsvField(order = 10, name = "レコード種別")
@@ -30,7 +31,7 @@ public class KyufuKanrihyoCSVDataEntity {
     @CsvField(order = 70, name = "保険者番号")
     private RString hokenshaNo;
     @CsvField(order = 80, name = "事業所番号（居宅介護支援事業所）")
-    private RString KyotakuShienJigyoshoNo;
+    private RString kyotakuShienJigyoshoNo;
     @CsvField(order = 90, name = "給付管理票情報作成区分コード")
     private RString kyufukanrihyoSakuseiKubunCode;
     @CsvField(order = 100, name = "給付管理票作成年月日")
@@ -94,6 +95,9 @@ public class KyufuKanrihyoCSVDataEntity {
     @CsvField(order = 390, name = "事業所名称")
     private RString jigyoshoMeisho;
 
+    /**
+     * コンストラクタです。
+     */
     public KyufuKanrihyoCSVDataEntity() {
     }
 
@@ -166,7 +170,7 @@ public class KyufuKanrihyoCSVDataEntity {
      * @return KyotakuShienJigyoshoNo
      */
     public RString getKyotakushienjigyoshono() {
-        return KyotakuShienJigyoshoNo;
+        return kyotakuShienJigyoshoNo;
     }
 
     /**
@@ -451,7 +455,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setrecordShubetsu
      *
-     * @param recordShubetsu
+     * @param recordShubetsu レコード種別
      */
     public void setRecordshubetsu(RString recordShubetsu) {
         this.recordShubetsu = recordShubetsu;
@@ -460,7 +464,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setrenban
      *
-     * @param renban
+     * @param renban 連番
      */
     public void setRenban(RString renban) {
         this.renban = renban;
@@ -469,7 +473,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setkokanjohoShikibetsuNo
      *
-     * @param kokanjohoShikibetsuNo
+     * @param kokanjohoShikibetsuNo 交換情報識別番号
      */
     public void setKokanjohoshikibetsuno(RString kokanjohoShikibetsuNo) {
         this.kokanjohoShikibetsuNo = kokanjohoShikibetsuNo;
@@ -478,7 +482,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setchohyoRecordShubetsu
      *
-     * @param chohyoRecordShubetsu
+     * @param chohyoRecordShubetsu 帳票レコード種別
      */
     public void setChohyorecordshubetsu(RString chohyoRecordShubetsu) {
         this.chohyoRecordShubetsu = chohyoRecordShubetsu;
@@ -487,7 +491,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setshinsaYM
      *
-     * @param shinsaYM
+     * @param shinsaYM 審査年月
      */
     public void setShinsaym(RString shinsaYM) {
         this.shinsaYM = shinsaYM;
@@ -496,7 +500,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * settaishoYM
      *
-     * @param taishoYM
+     * @param taishoYM 対象年月
      */
     public void setTaishoym(RString taishoYM) {
         this.taishoYM = taishoYM;
@@ -505,7 +509,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * sethokenshaNo
      *
-     * @param hokenshaNo
+     * @param hokenshaNo 保険者番号
      */
     public void setHokenshano(RString hokenshaNo) {
         this.hokenshaNo = hokenshaNo;
@@ -514,16 +518,16 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setKyotakuShienJigyoshoNo
      *
-     * @param KyotakuShienJigyoshoNo
+     * @param kyotakuShienJigyoshoNo 事業所番号（居宅介護支援事業所）
      */
-    public void setKyotakushienjigyoshono(RString KyotakuShienJigyoshoNo) {
-        this.KyotakuShienJigyoshoNo = KyotakuShienJigyoshoNo;
+    public void setKyotakushienjigyoshono(RString kyotakuShienJigyoshoNo) {
+        this.kyotakuShienJigyoshoNo = kyotakuShienJigyoshoNo;
     }
 
     /**
      * setkyufukanrihyoSakuseiKubunCode
      *
-     * @param kyufukanrihyoSakuseiKubunCode
+     * @param kyufukanrihyoSakuseiKubunCode 給付管理票情報作成区分コード
      */
     public void setKyufukanrihyosakuseikubuncode(RString kyufukanrihyoSakuseiKubunCode) {
         this.kyufukanrihyoSakuseiKubunCode = kyufukanrihyoSakuseiKubunCode;
@@ -532,7 +536,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setkyufukanrihyoSakuseiYMD
      *
-     * @param kyufukanrihyoSakuseiYMD
+     * @param kyufukanrihyoSakuseiYMD 給付管理票作成年月日
      */
     public void setKyufukanrihyosakuseiymd(RString kyufukanrihyoSakuseiYMD) {
         this.kyufukanrihyoSakuseiYMD = kyufukanrihyoSakuseiYMD;
@@ -541,7 +545,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setkyufukanrihyoShubetsuKubunCode
      *
-     * @param kyufukanrihyoShubetsuKubunCode
+     * @param kyufukanrihyoShubetsuKubunCode 給付管理票種別区分コード
      */
     public void setKyufukanrihyoshubetsukubuncode(RString kyufukanrihyoShubetsuKubunCode) {
         this.kyufukanrihyoShubetsuKubunCode = kyufukanrihyoShubetsuKubunCode;
@@ -550,7 +554,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setkyufukanrihyoMeisaigyoNo
      *
-     * @param kyufukanrihyoMeisaigyoNo
+     * @param kyufukanrihyoMeisaigyoNo 給付管理票明細行番号
      */
     public void setKyufukanrihyomeisaigyono(RString kyufukanrihyoMeisaigyoNo) {
         this.kyufukanrihyoMeisaigyoNo = kyufukanrihyoMeisaigyoNo;
@@ -559,7 +563,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * sethihokenshaNo
      *
-     * @param hihokenshaNo
+     * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshano(RString hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
@@ -568,7 +572,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setseinengappiYMD
      *
-     * @param seinengappiYMD
+     * @param seinengappiYMD 被保険者生年月日
      */
     public void setSeinengappiymd(RString seinengappiYMD) {
         this.seinengappiYMD = seinengappiYMD;
@@ -577,7 +581,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setseibetsuCode
      *
-     * @param seibetsuCode
+     * @param seibetsuCode 被保険者性別コード
      */
     public void setSeibetsucode(RString seibetsuCode) {
         this.seibetsuCode = seibetsuCode;
@@ -586,7 +590,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setyokaigojotaiKubunCode
      *
-     * @param yokaigojotaiKubunCode
+     * @param yokaigojotaiKubunCode 要介護状態区分コード
      */
     public void setYokaigojotaikubuncode(RString yokaigojotaiKubunCode) {
         this.yokaigojotaiKubunCode = yokaigojotaiKubunCode;
@@ -595,7 +599,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setgendogakuTekiyoKaishiYMD
      *
-     * @param gendogakuTekiyoKaishiYMD
+     * @param gendogakuTekiyoKaishiYMD 限度額適用期間（開始）
      */
     public void setGendogakutekiyokaishiymd(RString gendogakuTekiyoKaishiYMD) {
         this.gendogakuTekiyoKaishiYMD = gendogakuTekiyoKaishiYMD;
@@ -604,7 +608,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setgendogakuTekiyoShuryoYMD
      *
-     * @param gendogakuTekiyoShuryoYMD
+     * @param gendogakuTekiyoShuryoYMD 限度額適用期間（終了）
      */
     public void setGendogakutekiyoshuryoymd(RString gendogakuTekiyoShuryoYMD) {
         this.gendogakuTekiyoShuryoYMD = gendogakuTekiyoShuryoYMD;
@@ -613,7 +617,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setkyotakuKaigoyoboShikyugendogaku
      *
-     * @param kyotakuKaigoyoboShikyugendogaku
+     * @param kyotakuKaigoyoboShikyugendogaku 居宅・介護予防支給限度額
      */
     public void setKyotakukaigoyoboshikyugendogaku(RString kyotakuKaigoyoboShikyugendogaku) {
         this.kyotakuKaigoyoboShikyugendogaku = kyotakuKaigoyoboShikyugendogaku;
@@ -622,7 +626,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setkyotakuKeikakuSakuseiKubunCode
      *
-     * @param kyotakuKeikakuSakuseiKubunCode
+     * @param kyotakuKeikakuSakuseiKubunCode 居宅サービス計画作成区分コード
      */
     public void setKyotakukeikakusakuseikubuncode(RString kyotakuKeikakuSakuseiKubunCode) {
         this.kyotakuKeikakuSakuseiKubunCode = kyotakuKeikakuSakuseiKubunCode;
@@ -631,7 +635,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setserviceTeikyoJigyoshoNo
      *
-     * @param serviceTeikyoJigyoshoNo
+     * @param serviceTeikyoJigyoshoNo 事業所番号（サービス事業所）
      */
     public void setServiceteikyojigyoshono(RString serviceTeikyoJigyoshoNo) {
         this.serviceTeikyoJigyoshoNo = serviceTeikyoJigyoshoNo;
@@ -640,7 +644,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setshiteiKijunGaitoJigyoshoKubunCode
      *
-     * @param shiteiKijunGaitoJigyoshoKubunCode
+     * @param shiteiKijunGaitoJigyoshoKubunCode 指定/基準該当等事業所区分コード
      */
     public void setShiteikijungaitojigyoshokubuncode(RString shiteiKijunGaitoJigyoshoKubunCode) {
         this.shiteiKijunGaitoJigyoshoKubunCode = shiteiKijunGaitoJigyoshoKubunCode;
@@ -649,7 +653,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setserviceShuruiCode
      *
-     * @param serviceShuruiCode
+     * @param serviceShuruiCode サービス種類コード
      */
     public void setServiceshuruicode(RString serviceShuruiCode) {
         this.serviceShuruiCode = serviceShuruiCode;
@@ -658,7 +662,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setkyufuKeikakuTanisuNissu
      *
-     * @param kyufuKeikakuTanisuNissu
+     * @param kyufuKeikakuTanisuNissu 給付計画単位数/日数
      */
     public void setKyufukeikakutanisunissu(RString kyufuKeikakuTanisuNissu) {
         this.kyufuKeikakuTanisuNissu = kyufuKeikakuTanisuNissu;
@@ -667,7 +671,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setzentsukiMadeKyufuKeikakuNissu
      *
-     * @param zentsukiMadeKyufuKeikakuNissu
+     * @param zentsukiMadeKyufuKeikakuNissu 限度額管理期間における前月までの給付計画日数
      */
     public void setZentsukimadekyufukeikakunissu(RString zentsukiMadeKyufuKeikakuNissu) {
         this.zentsukiMadeKyufuKeikakuNissu = zentsukiMadeKyufuKeikakuNissu;
@@ -676,7 +680,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setshiteiServiceShokei
      *
-     * @param shiteiServiceShokei
+     * @param shiteiServiceShokei 指定サービス分小計
      */
     public void setShiteiserviceshokei(RString shiteiServiceShokei) {
         this.shiteiServiceShokei = shiteiServiceShokei;
@@ -685,7 +689,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setkijunGaitoServiceShokei
      *
-     * @param kijunGaitoServiceShokei
+     * @param kijunGaitoServiceShokei 基準該当サービス分小計
      */
     public void setKijungaitoserviceshokei(RString kijunGaitoServiceShokei) {
         this.kijunGaitoServiceShokei = kijunGaitoServiceShokei;
@@ -694,7 +698,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setkyufuKeikakuGokeiTanisuNissu
      *
-     * @param kyufuKeikakuGokeiTanisuNissu
+     * @param kyufuKeikakuGokeiTanisuNissu 給付計画合計単位数/日数
      */
     public void setKyufukeikakugokeitanisunissu(RString kyufuKeikakuGokeiTanisuNissu) {
         this.kyufuKeikakuGokeiTanisuNissu = kyufuKeikakuGokeiTanisuNissu;
@@ -703,7 +707,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setkaigoshienSenmoninNo
      *
-     * @param kaigoshienSenmoninNo
+     * @param kaigoshienSenmoninNo 担当介護支援専門員番号
      */
     public void setKaigoshiensenmoninno(RString kaigoshienSenmoninNo) {
         this.kaigoshienSenmoninNo = kaigoshienSenmoninNo;
@@ -712,7 +716,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setitakusakiKyotakuKaigoshienJigyoshoNo
      *
-     * @param itakusakiKyotakuKaigoshienJigyoshoNo
+     * @param itakusakiKyotakuKaigoshienJigyoshoNo 委託先の居宅介護支援事業所番号
      */
     public void setItakusakikyotakukaigoshienjigyoshono(RString itakusakiKyotakuKaigoshienJigyoshoNo) {
         this.itakusakiKyotakuKaigoshienJigyoshoNo = itakusakiKyotakuKaigoshienJigyoshoNo;
@@ -721,7 +725,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setitakusakiKaigoshienSenmoninNo
      *
-     * @param itakusakiKaigoshienSenmoninNo
+     * @param itakusakiKaigoshienSenmoninNo 委託先の担当介護支援専門員番号
      */
     public void setItakusakikaigoshiensenmoninno(RString itakusakiKaigoshienSenmoninNo) {
         this.itakusakiKaigoshienSenmoninNo = itakusakiKaigoshienSenmoninNo;
@@ -730,7 +734,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * sethihoNoHenkanShityosonCode
      *
-     * @param hihoNoHenkanShityosonCode
+     * @param hihoNoHenkanShityosonCode 被保険者番号変更用市町村コード
      */
     public void setHihonohenkanshityosoncode(RString hihoNoHenkanShityosonCode) {
         this.hihoNoHenkanShityosonCode = hihoNoHenkanShityosonCode;
@@ -739,7 +743,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setshinHihokenshaNo
      *
-     * @param shinHihokenshaNo
+     * @param shinHihokenshaNo 新被保険者番号
      */
     public void setShinhihokenshano(RString shinHihokenshaNo) {
         this.shinHihokenshaNo = shinHihokenshaNo;
@@ -748,7 +752,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setshichosonCode
      *
-     * @param shichosonCode
+     * @param shichosonCode 市町村コード
      */
     public void setShichosoncode(RString shichosonCode) {
         this.shichosonCode = shichosonCode;
@@ -757,7 +761,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setkoikiJutokuSochimotoShichosonCode
      *
-     * @param koikiJutokuSochimotoShichosonCode
+     * @param koikiJutokuSochimotoShichosonCode 広住特措置元市町村コード
      */
     public void setKoikijutokusochimotoshichosoncode(RString koikiJutokuSochimotoShichosonCode) {
         this.koikiJutokuSochimotoShichosonCode = koikiJutokuSochimotoShichosonCode;
@@ -766,7 +770,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setkyoShichosonCode
      *
-     * @param kyoShichosonCode
+     * @param kyoShichosonCode 旧市町村コード
      */
     public void setKyoshichosoncode(RString kyoShichosonCode) {
         this.kyoShichosonCode = kyoShichosonCode;
@@ -775,7 +779,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setshikibetsuCode
      *
-     * @param shikibetsuCode
+     * @param shikibetsuCode 識別コード
      */
     public void setShikibetsucode(RString shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
@@ -784,7 +788,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setkanjiMeisho
      *
-     * @param kanjiMeisho
+     * @param kanjiMeisho 漢字氏名
      */
     public void setKanjimeisho(RString kanjiMeisho) {
         this.kanjiMeisho = kanjiMeisho;
@@ -793,7 +797,7 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setjigyoshoMeisho
      *
-     * @param jigyoshoMeisho
+     * @param jigyoshoMeisho 事業所名称
      */
     public void setJigyoshomeisho(RString jigyoshoMeisho) {
         this.jigyoshoMeisho = jigyoshoMeisho;

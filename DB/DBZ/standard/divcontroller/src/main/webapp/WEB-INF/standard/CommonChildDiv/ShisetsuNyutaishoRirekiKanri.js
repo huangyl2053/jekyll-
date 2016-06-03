@@ -56,6 +56,7 @@ var DBZ;
                     this.controls.btnAddShisetsuNyutaisho().displayNone = false;
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = false;
                     gridSetting.isShowDeleteButtonColumn = true;
                     gridSetting.isShowModifyButtonColumn = true;
                     var columns = gridSetting.columns;
@@ -74,6 +75,7 @@ var DBZ;
                     this.controls.btnAddShisetsuNyutaisho().displayNone = true;
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = false;
                     gridSetting.isShowDeleteButtonColumn = false;
                     gridSetting.isShowModifyButtonColumn = false;
                     var columns = gridSetting.columns;
@@ -110,6 +112,7 @@ var DBZ;
                     this.controls.btnAddShisetsuNyutaisho().displayNone = false;
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = false;
                     gridSetting.isShowDeleteButtonColumn = true;
                     gridSetting.isShowModifyButtonColumn = true;
                     var columns = gridSetting.columns;
@@ -168,23 +171,23 @@ var DBZ;
                     this.controls = controls;
                 }
                 表示widthサイズ.prototype.モード1 = function () {
-                    this.controls.dgShisetsuNyutaishoRireki().width = "1030";
+                    this.controls.dgShisetsuNyutaishoRireki().width = "1120";
                 };
 
                 表示widthサイズ.prototype.モード2 = function () {
-                    this.controls.dgShisetsuNyutaishoRireki().width = "980";
+                    this.controls.dgShisetsuNyutaishoRireki().width = "1070";
                 };
 
                 表示widthサイズ.prototype.モード3 = function () {
-                    this.controls.dgShisetsuNyutaishoRireki().width = "900";
+                    this.controls.dgShisetsuNyutaishoRireki().width = "990";
                 };
 
                 表示widthサイズ.prototype.モード4 = function () {
-                    this.controls.dgShisetsuNyutaishoRireki().width = "800";
+                    this.controls.dgShisetsuNyutaishoRireki().width = "890";
                 };
 
                 表示widthサイズ.prototype.モード5 = function () {
-                    this.controls.dgShisetsuNyutaishoRireki().width = "720";
+                    this.controls.dgShisetsuNyutaishoRireki().width = "810";
                 };
                 return 表示widthサイズ;
             })();
@@ -202,11 +205,9 @@ var DBZ;
                     this.controls.txtNyushoDate().readOnly = false;
                     this.controls.txtTaishoDate().displayNone = false;
                     this.controls.txtTaishoDate().readOnly = false;
-                    this.controls.ccdShisetsuJoho().表示モード().defaultView();
                     this.controls.btnShisetsuNyutaishoKakutei().displayNone = false;
-                    this.controls.btnShisetsuNyutaishoKakutei().disabled = false;
+
                     this.controls.btnShisetsuNyutaishoTorikeshi().displayNone = false;
-                    this.controls.btnShisetsuNyutaishoTorikeshi().disabled = false;
                 };
 
                 明細表示モード.prototype.削除 = function () {
@@ -217,7 +218,6 @@ var DBZ;
                     this.controls.txtNyushoDate().readOnly = true;
                     this.controls.txtTaishoDate().displayNone = false;
                     this.controls.txtTaishoDate().readOnly = true;
-                    this.controls.ccdShisetsuJoho().表示モード().readOnly();
                     this.controls.btnShisetsuNyutaishoKakutei().displayNone = false;
                     this.controls.btnShisetsuNyutaishoKakutei().disabled = false;
                     this.controls.btnShisetsuNyutaishoTorikeshi().displayNone = false;
@@ -232,7 +232,6 @@ var DBZ;
                     this.controls.txtNyushoDate().readOnly = true;
                     this.controls.txtTaishoDate().displayNone = false;
                     this.controls.txtTaishoDate().readOnly = true;
-                    this.controls.ccdShisetsuJoho().表示モード().readOnly();
                     this.controls.btnShisetsuNyutaishoKakutei().displayNone = false;
                     this.controls.btnShisetsuNyutaishoKakutei().disabled = true;
                     this.controls.btnShisetsuNyutaishoTorikeshi().displayNone = false;
@@ -264,7 +263,8 @@ var DBZ;
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
-                    this.controls.ccdShisetsuJoho().台帳種別().台帳種別表示する();
+
+                    this.controls.ccdShisetsuJoho().State().DaichoShubetsuAriMode();
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
@@ -294,7 +294,7 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-                    this.controls.ccdShisetsuJoho().台帳種別().台帳種別非表示する();
+                    this.controls.ccdShisetsuJoho().State().DaichoShubetsuNashiMode();
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
@@ -324,7 +324,7 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-                    this.controls.ccdShisetsuJoho().台帳種別().台帳種別非表示する();
+                    this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
@@ -353,7 +353,7 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-                    this.controls.ccdShisetsuJoho().台帳種別().台帳種別非表示する();
+                    this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
@@ -383,8 +383,7 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-                    this.controls.ccdShisetsuJoho().入力補助().除外施設を表示する();
-                    this.controls.ccdShisetsuJoho().台帳種別().台帳種別非表示する();
+                    this.controls.ccdShisetsuJoho().State().TekiyoJogaiMode();
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 

@@ -1,11 +1,15 @@
 
 dbd/db/dbd/FutanGendogakuNintei/onLoad
 dbd/db/dbd/FutanGendogakuNintei/onSelect_dgFutanGendogakuNinteiList
+dbd/db/dbd/GemmenGengakuShinsei/onBeforeOpenDialog_btnOpenJigyoshaGuide
+dbd/db/dbd/GemmenGengakuShinsei/onOkClose_btnOpenJigyoshaGuide
+dbd/db/dbd/GemmenGengakuShinsei/onclick_txtCopyHonnin
+dbd/db/dbd/GemmenShokai/onClick_BtnClose
+dbd/db/dbd/GemmenShokai/onLoad
 dbd/db/dbd/HomonkaigoRiyoshaFutangakuGengaku/onLoad
 dbd/db/dbd/HomonkaigoRiyoshaFutangakuGengaku/onSelect_dgHomonkaigoRiyoshaFutangakuGengakuList
 dbd/db/dbd/HyojunFutangakuGengaku/onLoad
 dbd/db/dbd/HyojunFutangakuGengaku/onSelect_dgHyojunFutangakuGengakuList
-dbd/db/dbd/IkenshoShujiiIchiran/onLoad
 dbd/db/dbd/JukyushaShokai/onClick_btnToReturnNinteiRireki
 dbd/db/dbd/JukyushaShokai/onLoad
 dbd/db/dbd/JukyushaShokai/onStart

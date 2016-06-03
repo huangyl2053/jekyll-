@@ -8,6 +8,42 @@ module DBC {
 
         export class Events {
 
+            public static onClick_radMadoguti(): string {
+                return "onClick_radMadoguti";
+            }
+
+            public static onBlur_txtStartYMD(): string {
+                return "onBlur_txtStartYMD";
+            }
+
+            public static onBlur_txtEndYMD(): string {
+                return "onBlur_txtEndYMD";
+            }
+
+            public static onClick_radKoza(): string {
+                return "onClick_radKoza";
+            }
+
+            public static onChange_ddlKozaID(): string {
+                return "onChange_ddlKozaID";
+            }
+
+            public static onOkClose_ddlKozaID(): string {
+                return "onOkClose_ddlKozaID";
+            }
+
+            public static onClick_radJyryoinin(): string {
+                return "onClick_radJyryoinin";
+            }
+
+            public static onBlur_txtKeiyakuNo(): string {
+                return "onBlur_txtKeiyakuNo";
+            }
+
+            public static onClick_btnKeiyakuNo(): string {
+                return "onClick_btnKeiyakuNo";
+            }
+
         }
 
         export class Controls {
@@ -89,6 +125,10 @@ module DBC {
                 return new UZA.TextBoxKinyuKikanShitenCode(this.convFiledName("txtKinyuKikanShitenCode"));
             }
 
+            public txtTenban(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtTenban"));
+            }
+
             public txtYokinShubetsu(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtYokinShubetsu"));
             }
@@ -121,8 +161,8 @@ module DBC {
                 return new UZA.TextBoxCode(this.convFiledName("txtKeiyakuNo"));
             }
 
-            public btnSelect(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnSelect"));
+            public btnSelect(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnSelect"));
             }
 
             public txtKeiyakuCode(): UZA.TextBoxCode {
@@ -139,6 +179,10 @@ module DBC {
 
             public txtKinyuKikanShitenCode1(): UZA.TextBoxKinyuKikanShitenCode {
                 return new UZA.TextBoxKinyuKikanShitenCode(this.convFiledName("txtKinyuKikanShitenCode1"));
+            }
+
+            public txtTenban1(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtTenban1"));
             }
 
             public txtYokinShubetsu1(): UZA.TextBox {

@@ -4,12 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho;
 
-import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaResult.NinteichosaKekkaTorikomiTaishosha;
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiProgress;
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiShinsei;
-import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho.ShujiiIkenshoTorikomiTaishosha;
-import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho.ShujiiIkenshoSakuseiIrai;
-import jp.co.ndensan.reams.db.dbe.business.core.KaigoDoctor.KaigoDoctor;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaresult.NinteichosaKekkaTorikomiTaishosha;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiShinsei;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikensho.ShujiiIkenshoTorikomiTaishosha;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikensho.ShujiiIkenshoSakuseiIrai;
+import jp.co.ndensan.reams.db.dbe.business.core.kaigodoctor.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import static org.hamcrest.CoreMatchers.instanceOf;

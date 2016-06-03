@@ -11,9 +11,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 地区認定調査員を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
-public class ChikuNinteiChosainMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class ChikuNinteiChosainMapperParameter {
 
     private final Code 調査地区コード;
     private final RString 認定調査委託先コード;

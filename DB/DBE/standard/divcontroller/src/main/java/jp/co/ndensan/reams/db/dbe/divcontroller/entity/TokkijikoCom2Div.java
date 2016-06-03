@@ -1,18 +1,17 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ITokkijikoCom2Div;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TokkijikoCom2 のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+
+/**
+ * TokkijikoCom2 のクラスファイル
+ *
  * @author 自動生成
  */
 public class TokkijikoCom2Div extends Panel implements ITokkijikoCom2Div {
@@ -22,6 +21,7 @@ public class TokkijikoCom2Div extends Panel implements ITokkijikoCom2Div {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ddlChosaItem")
     private DropDownList ddlChosaItem;
     @JsonProperty("txtTokkijikoContent")
@@ -42,7 +42,7 @@ public class TokkijikoCom2Div extends Panel implements ITokkijikoCom2Div {
 
     @JsonProperty("ddlChosaItem")
     public void setDdlChosaItem(DropDownList ddlChosaItem) {
-        this.ddlChosaItem=ddlChosaItem;
+        this.ddlChosaItem = ddlChosaItem;
     }
 
     @JsonProperty("txtTokkijikoContent")
@@ -52,7 +52,7 @@ public class TokkijikoCom2Div extends Panel implements ITokkijikoCom2Div {
 
     @JsonProperty("txtTokkijikoContent")
     public void setTxtTokkijikoContent(TextBoxMultiLine txtTokkijikoContent) {
-        this.txtTokkijikoContent=txtTokkijikoContent;
+        this.txtTokkijikoContent = txtTokkijikoContent;
     }
 
     @JsonProperty("lblSpace")
@@ -62,9 +62,8 @@ public class TokkijikoCom2Div extends Panel implements ITokkijikoCom2Div {
 
     @JsonProperty("lblSpace")
     public void setLblSpace(Label lblSpace) {
-        this.lblSpace=lblSpace;
+        this.lblSpace = lblSpace;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

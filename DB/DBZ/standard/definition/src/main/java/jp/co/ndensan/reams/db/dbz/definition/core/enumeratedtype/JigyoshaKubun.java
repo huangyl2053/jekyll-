@@ -20,37 +20,39 @@ public enum JigyoshaKubun implements IRStringConvertable {
      * なし <br/>
      * なし : 00。
      */
-    なし("00"),
+    なし("00", "なし"),
     /**
      * 地域包括支援センター <br/>
      * 地域包括支援センター : 10。
      */
-    地域包括支援センター("10"),
+    地域包括支援センター("10", "地域包括支援センター"),
     /**
      * 居宅介護支援事業者 <br/>
      * 居宅介護支援事業者 : 20。
      */
-    居宅介護支援事業者("20"),
+    居宅介護支援事業者("20", "居宅介護支援事業者"),
     /**
      * 指定介護老人福祉施設 <br/>
      * 指定介護老人福祉施設 : 30。
      */
-    指定介護老人福祉施設("30"),
+    指定介護老人福祉施設("30", "指定介護老人福祉施設"),
     /**
      * 介護老人保健施設 <br/>
      * 介護老人保健施設 : 40。
      */
-    介護老人保健施設("40"),
+    介護老人保健施設("40", "介護老人保健施設"),
     /**
      * 指定介護療養型医療施設 <br/>
      * 指定介護療養型医療施設 : 50。
      */
-    指定介護療養型医療施設("50");
+    指定介護療養型医療施設("50", "指定介護療養型医療施設");
 
     private final RString code;
+    private final RString fullName;
 
-    private JigyoshaKubun(String code) {
+    private JigyoshaKubun(String code, String fullName) {
         this.code = new RString(code);
+        this.fullName = new RString(fullName);
     }
 
     /**
@@ -60,6 +62,15 @@ public enum JigyoshaKubun implements IRStringConvertable {
      */
     public RString getCode() {
         return this.code;
+    }
+
+    /**
+     * 事業者区分コードの名称を返します。
+     *
+     * @return 事業者区分コードの名称
+     */
+    public RString get名称() {
+        return fullName;
     }
 
     /**

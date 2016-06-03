@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.kaigoninteishinsakaiiinshozokukikanjoho.KaigoNinteiShinsakaiIinShozokuKikanJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.kaigoninteishinsakaiiinshozokukikanjoho.KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.ninteishinsakaiiinshozokukikanjoho.KaigoNinteiShinsakaiIinShozokuKikanJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.ninteishinsakaiiinshozokukikanjoho.KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -32,12 +32,16 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護認定審査会委員情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class ShinsakaiIinJoho extends ParentModelBase<ShinsakaiIinJohoIdentifier, DbT5594ShinsakaiIinJohoEntity, ShinsakaiIinJoho> implements Serializable {
+public class ShinsakaiIinJoho
+        extends ParentModelBase<ShinsakaiIinJohoIdentifier, DbT5594ShinsakaiIinJohoEntity, ShinsakaiIinJoho>
+        implements Serializable {
 
     private final DbT5594ShinsakaiIinJohoEntity entity;
     private final ShinsakaiIinJohoIdentifier id;
-    private final Models<KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier, KaigoNinteiShinsakaiIinShozokuKikanJoho> kaigoNinteiShinsakaiIinShozokuKikanJoho;
+    private final Models<KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier, KaigoNinteiShinsakaiIinShozokuKikanJoho> shinsakaiIinShozokuKikan;
 
     /**
      * コンストラクタです。<br/>
@@ -53,7 +57,7 @@ public class ShinsakaiIinJoho extends ParentModelBase<ShinsakaiIinJohoIdentifier
                 介護認定審査会委員コード
         );
 
-        this.kaigoNinteiShinsakaiIinShozokuKikanJoho = Models.create(new ArrayList<KaigoNinteiShinsakaiIinShozokuKikanJoho>());
+        this.shinsakaiIinShozokuKikan = Models.create(new ArrayList<KaigoNinteiShinsakaiIinShozokuKikanJoho>());
 
     }
 
@@ -67,11 +71,12 @@ public class ShinsakaiIinJoho extends ParentModelBase<ShinsakaiIinJohoIdentifier
         this.entity = requireNonNull(entity.get介護認定審査会委員情報Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員情報"));
         this.id = new ShinsakaiIinJohoIdentifier(
                 entity.get介護認定審査会委員情報Entity().getShinsakaiIinCode());
-        List<KaigoNinteiShinsakaiIinShozokuKikanJoho> kaigoNinteiShinsakaiIinShozokuKikanJohoList = new ArrayList<>();
-        for (DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity kaigoNinteiShinsakaiIinShozokuKikanJohoEntity : entity.get介護認定審査会委員所属機関情報Entity()) {
-            kaigoNinteiShinsakaiIinShozokuKikanJohoList.add(new KaigoNinteiShinsakaiIinShozokuKikanJoho(kaigoNinteiShinsakaiIinShozokuKikanJohoEntity));
+        List<KaigoNinteiShinsakaiIinShozokuKikanJoho> shozokuKikanJohoList = new ArrayList<>();
+        for (DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity kikanJohoEntity : entity.get介護認定審査会委員所属機関情報Entity()) {
+            shozokuKikanJohoList.add(
+                    new KaigoNinteiShinsakaiIinShozokuKikanJoho(kikanJohoEntity));
         }
-        this.kaigoNinteiShinsakaiIinShozokuKikanJoho = Models.create(kaigoNinteiShinsakaiIinShozokuKikanJohoList);
+        this.shinsakaiIinShozokuKikan = Models.create(shozokuKikanJohoList);
 
     }
 
@@ -84,11 +89,11 @@ public class ShinsakaiIinJoho extends ParentModelBase<ShinsakaiIinJohoIdentifier
     ShinsakaiIinJoho(
             DbT5594ShinsakaiIinJohoEntity entity,
             ShinsakaiIinJohoIdentifier id,
-            Models<KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier, KaigoNinteiShinsakaiIinShozokuKikanJoho> kaigoNinteiShinsakaiIinShozokuKikanJoho
+            Models<KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier, KaigoNinteiShinsakaiIinShozokuKikanJoho> iinShozokuKikanJoho
     ) {
         this.entity = entity;
         this.id = id;
-        this.kaigoNinteiShinsakaiIinShozokuKikanJoho = kaigoNinteiShinsakaiIinShozokuKikanJoho;
+        this.shinsakaiIinShozokuKikan = iinShozokuKikanJoho;
     }
 
     /**
@@ -231,7 +236,7 @@ public class ShinsakaiIinJoho extends ParentModelBase<ShinsakaiIinJohoIdentifier
      *
      * @return 廃止フラグ
      */
-    public boolean get廃止フラグ() {
+    public boolean is廃止フラグ() {
         return entity.getHaishiFlag();
     }
 
@@ -265,10 +270,8 @@ public class ShinsakaiIinJoho extends ParentModelBase<ShinsakaiIinJohoIdentifier
     }
 
     /**
-     * 介護認定審査会委員情報配下の要素を削除対象とします。<br/>
-     * {@link DbT5594ShinsakaiIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 介護認定審査会委員情報配下の要素である介護認定審査会委員所属機関情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link ShinsakaiIinJoho}を返します。
+     * 介護認定審査会委員情報配下の要素を削除対象とします。<br/> {@link DbT5594ShinsakaiIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 介護認定審査会委員情報配下の要素である介護認定審査会委員所属機関情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link ShinsakaiIinJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link ShinsakaiIinJoho}
      * @throws IllegalStateException DbT5594ShinsakaiIinJohoEntityのデータ状態が変更の場合
@@ -283,19 +286,18 @@ public class ShinsakaiIinJoho extends ParentModelBase<ShinsakaiIinJohoIdentifier
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ShinsakaiIinJoho(
-                deletedEntity, id, kaigoNinteiShinsakaiIinShozokuKikanJoho.deleted());
+                deletedEntity, id, shinsakaiIinShozokuKikan.deleted());
     }
 
     @Override
     public boolean hasChanged() {
 
-        return hasChangedEntity() || kaigoNinteiShinsakaiIinShozokuKikanJoho.hasAnyChanged();
+        return hasChangedEntity() || shinsakaiIinShozokuKikan.hasAnyChanged();
 
     }
 
     /**
-     * 介護認定審査会委員情報のみを変更対象とします。<br/>
-     * {@link DbT5594ShinsakaiIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護認定審査会委員情報のみを変更対象とします。<br/> {@link DbT5594ShinsakaiIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShinsakaiIinJoho}
      */
@@ -306,7 +308,7 @@ public class ShinsakaiIinJoho extends ParentModelBase<ShinsakaiIinJohoIdentifier
             modifiedEntity.setState(EntityDataState.Modified);
         }
         return new ShinsakaiIinJoho(
-                modifiedEntity, id, kaigoNinteiShinsakaiIinShozokuKikanJoho);
+                modifiedEntity, id, shinsakaiIinShozokuKikan);
     }
 
     /**
@@ -317,8 +319,8 @@ public class ShinsakaiIinJoho extends ParentModelBase<ShinsakaiIinJohoIdentifier
      * @throws IllegalStateException 指定の識別子に該当する介護認定審査会委員所属機関情報がない場合
      */
     public KaigoNinteiShinsakaiIinShozokuKikanJoho getKaigoNinteiShinsakaiIinShozokuKikanJoho(KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier id) {
-        if (kaigoNinteiShinsakaiIinShozokuKikanJoho.contains(id)) {
-            return kaigoNinteiShinsakaiIinShozokuKikanJoho.clone().get(id);
+        if (shinsakaiIinShozokuKikan.contains(id)) {
+            return shinsakaiIinShozokuKikan.clone().get(id);
         }
         //TODO メッセージの検討
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
@@ -330,7 +332,7 @@ public class ShinsakaiIinJoho extends ParentModelBase<ShinsakaiIinJohoIdentifier
      * @return 介護認定審査会委員所属機関情報リスト
      */
     public List<KaigoNinteiShinsakaiIinShozokuKikanJoho> getKaigoNinteiShinsakaiIinShozokuKikanJohoList() {
-        return new ArrayList<>(kaigoNinteiShinsakaiIinShozokuKikanJoho.values());
+        return new ArrayList<>(shinsakaiIinShozokuKikan.values());
 
     }
 
@@ -340,7 +342,7 @@ public class ShinsakaiIinJoho extends ParentModelBase<ShinsakaiIinJohoIdentifier
      * @return {@link ShinsakaiIinJoho}のシリアライズ形式
      */
     protected Object writeReplace() {
-        return new _SerializationProxy(entity, id, kaigoNinteiShinsakaiIinShozokuKikanJoho);
+        return new _SerializationProxy(entity, id, shinsakaiIinShozokuKikan);
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -348,21 +350,21 @@ public class ShinsakaiIinJoho extends ParentModelBase<ShinsakaiIinJohoIdentifier
         private static final long serialVersionUID = -710031961519711799L;
         private final DbT5594ShinsakaiIinJohoEntity entity;
         private final ShinsakaiIinJohoIdentifier id;
-        private final Models<KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier, KaigoNinteiShinsakaiIinShozokuKikanJoho> kaigoNinteiShinsakaiIinShozokuKikanJoho;
+        private final Models<KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier, KaigoNinteiShinsakaiIinShozokuKikanJoho> shinsakaiIinShozokuKikan;
 
         private _SerializationProxy(
                 DbT5594ShinsakaiIinJohoEntity entity,
                 ShinsakaiIinJohoIdentifier id,
-                Models<KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier, KaigoNinteiShinsakaiIinShozokuKikanJoho> kaigoNinteiShinsakaiIinShozokuKikanJoho
+                Models<KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier, KaigoNinteiShinsakaiIinShozokuKikanJoho> shinsakaiIinShozokuKikan
         ) {
             this.entity = entity;
             this.id = id;
-            this.kaigoNinteiShinsakaiIinShozokuKikanJoho = kaigoNinteiShinsakaiIinShozokuKikanJoho;
+            this.shinsakaiIinShozokuKikan = shinsakaiIinShozokuKikan;
 
         }
 
         private Object readResolve() {
-            return new ShinsakaiIinJoho(this.entity, this.id, this.kaigoNinteiShinsakaiIinShozokuKikanJoho);
+            return new ShinsakaiIinJoho(this.entity, this.id, this.shinsakaiIinShozokuKikan);
         }
     }
 
@@ -373,7 +375,7 @@ public class ShinsakaiIinJoho extends ParentModelBase<ShinsakaiIinJohoIdentifier
      * @return {@link ShinsakaiIinJohoBuilder}
      */
     public ShinsakaiIinJohoBuilder createBuilderForEdit() {
-        return new ShinsakaiIinJohoBuilder(entity, id, kaigoNinteiShinsakaiIinShozokuKikanJoho);
+        return new ShinsakaiIinJohoBuilder(entity, id, shinsakaiIinShozokuKikan);
     }
 
     @Override

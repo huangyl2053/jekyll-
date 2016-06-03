@@ -139,7 +139,7 @@ public class KogakuGassanJikoFutanGakuMeisaiBuilder {
     /**
      * 70未満高額支給額を設定します。
      *
-     * @param 70未満高額支給額 70未満高額支給額
+     * @param 高額支給額_70未満 70未満高額支給額
      * @return {@link KogakuGassanJikoFutanGakuMeisaiBuilder}
      */
     public KogakuGassanJikoFutanGakuMeisaiBuilder set70未満高額支給額(Decimal 高額支給額_70未満) {

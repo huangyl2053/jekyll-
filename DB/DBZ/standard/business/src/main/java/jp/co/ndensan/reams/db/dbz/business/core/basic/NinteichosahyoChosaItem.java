@@ -145,8 +145,7 @@ public class NinteichosahyoChosaItem extends
     }
 
     /**
-     * 認定調査票_基本調査_調査項目のみを変更対象とします。<br/>
-     * {@link DbT5211NinteichosahyoChosaItemEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査票_基本調査_調査項目のみを変更対象とします。<br/> {@link DbT5211NinteichosahyoChosaItemEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosahyoChosaItem}
      */
@@ -161,8 +160,7 @@ public class NinteichosahyoChosaItem extends
     }
 
     /**
-     * 保持する認定調査票_基本調査_調査項目を削除対象とします。<br/>
-     * {@link DbT5211NinteichosahyoChosaItemEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する認定調査票_基本調査_調査項目を削除対象とします。<br/> {@link DbT5211NinteichosahyoChosaItemEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteichosahyoChosaItem}
      */
@@ -190,7 +188,7 @@ public class NinteichosahyoChosaItem extends
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

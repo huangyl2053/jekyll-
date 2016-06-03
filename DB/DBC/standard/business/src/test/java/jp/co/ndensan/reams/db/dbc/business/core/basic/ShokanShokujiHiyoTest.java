@@ -141,7 +141,7 @@ public class ShokanShokujiHiyoTest extends DbcTestBase {
 
         @Test
         public void get整理番号は_entityが持つ整理番号を返す() {
-            assertThat(sut.get整理番号(), is(ShokanShokujiHiyoEntity.getSeiriNp()));
+            assertThat(sut.get整理番号(), is(ShokanShokujiHiyoEntity.getSeiriNo()));
         }
 
         @Test

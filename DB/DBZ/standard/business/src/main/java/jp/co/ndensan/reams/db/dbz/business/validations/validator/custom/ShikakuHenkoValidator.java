@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.core.validation.IValidatableWithContext;
-import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.core.validation.OrderValidator;
 import jp.co.ndensan.reams.uz.uza.core.validation.PresenceValidator;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
@@ -148,7 +148,11 @@ public class ShikakuHenkoValidator implements IValidatableWithContext<ShikakuHen
         if (前履歴 == null || 変更日.isEmpty()) {
             return false;
         }
-        return !前履歴.getShikakuHenkoYMD().isBefore(変更日);
+        FlexibleDate shikakuHenkoYMD = 前履歴.getShikakuHenkoYMD();
+        if (shikakuHenkoYMD == null) {
+            return false;
+        }
+        return !shikakuHenkoYMD.isBefore(変更日);
     }
 
     private boolean is変更日が次の履歴データの変更日と重複(Optional<DbT1001HihokenshaDaichoEntity> optional) {
@@ -157,7 +161,11 @@ public class ShikakuHenkoValidator implements IValidatableWithContext<ShikakuHen
         if (次履歴 == null || 変更日.isEmpty()) {
             return false;
         }
-        return 次履歴.getShikakuHenkoYMD().isBefore(変更日);
+        FlexibleDate shikakuHenkoYMD = 次履歴.getShikakuHenkoYMD();
+        if (shikakuHenkoYMD == null) {
+            return false;
+        }
+        return shikakuHenkoYMD.isBefore(変更日);
     }
 
     private boolean has住所地特例履歴と期間が重複する履歴In(IItemList<DbT1001HihokenshaDaichoEntity> list) {
@@ -165,7 +173,10 @@ public class ShikakuHenkoValidator implements IValidatableWithContext<ShikakuHen
             return false;
         }
         for (DbT1001HihokenshaDaichoEntity model : list) {
-            if (model.getShikakuShutokuYMD().isEmpty() || model.getShikakuSoshitsuYMD().isEmpty()) {
+            FlexibleDate shikakuShutokuYMD = model.getShikakuShutokuYMD();
+            FlexibleDate shikakuSoshitsuYMD = model.getShikakuSoshitsuYMD();
+            if ((shikakuShutokuYMD == null || shikakuShutokuYMD.isEmpty())
+                    || (shikakuSoshitsuYMD == null || shikakuSoshitsuYMD.isEmpty())) {
                 return false;
             }
             if (OrderValidator.from(model.getShikakuShutokuYMD()).afterOrEquals(変更日).after(model.getShikakuSoshitsuYMD()).isValid()) {

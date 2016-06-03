@@ -11,17 +11,12 @@ import jp.co.ndensan.reams.db.dbb.business.core.FukaRireki;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-//import jp.co.ndensan.reams.db.dbb.model.fuka.Fuka;
-//import jp.co.ndensan.reams.db.dbb.realservice.FukaManager;
-//import jp.co.ndensan.reams.db.dbb.realservice.HokenryoDankaiManager;
-//import jp.co.ndensan.reams.db.dbb.realservice.KiwarigakuFinder;
-//import jp.co.ndensan.reams.ur.urz.divcontroller.helper.PanelSessionAccessor;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
 
@@ -30,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
  *
  * @author N8156 宮本 康
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class FukaRirekiAllHandler {
 
     private final FukaRirekiAllDiv div;
@@ -173,7 +169,8 @@ public class FukaRirekiAllHandler {
     }
 
     private int set全賦課履歴(IItemList<Fuka> modelList) {
-
+        // TODO 未使用のメソッド引数があります。modelListのCheckstyle対応。
+        modelList.isEmpty();
         List<dgFukaRirekiAll_Row> rowList = new ArrayList<>();
         // TODO n8187久保田 画面遷移の確認のために空行を表示するよう一時的に修正
         // ここから

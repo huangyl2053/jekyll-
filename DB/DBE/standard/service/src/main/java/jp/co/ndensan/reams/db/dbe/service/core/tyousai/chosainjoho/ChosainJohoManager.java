@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 調査員情報を管理するクラスです。
+ *
+ * @reamsid_L DBZ-9999-011 sunhaidi
  */
 public class ChosainJohoManager {
 
@@ -101,13 +103,14 @@ public class ChosainJohoManager {
     /**
      * 市町村コードと認定調査委託先コードで、調査員情報を取得します。
      *
-     * @param 市町村コード 市町村コード
-     * @param 認定調査委託先コード 認定調査委託先コード
-     * @param 認定調査員コード
+     * @param 市町村コード LasdecCode
+     * @param 認定調査委託先コード ChosaItakusakiCode
+     * @param 認定調査員コード ChosainCode
      * @return 件数
      */
     @Transaction
-    public DbT5913ChosainJohoEntity countByShichosonCodeAndNinteichosaItakusakiCode(LasdecCode 市町村コード, ChosaItakusakiCode 認定調査委託先コード, ChosainCode 認定調査員コード) {
+    public DbT5913ChosainJohoEntity countByShichosonCodeAndNinteichosaItakusakiCode(
+            LasdecCode 市町村コード, ChosaItakusakiCode 認定調査委託先コード, ChosainCode 認定調査員コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
         requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));

@@ -1635,4 +1635,5 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
 
 // </editor-fold>
 
+
 }

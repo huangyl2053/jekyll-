@@ -6,20 +6,21 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import lombok.Value;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import lombok.Value;
 
 /**
  * 過誤決定明細の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KagoKetteiMeisaiIdentifier implements Serializable {
 
     private final FlexibleYearMonth 取扱年月;
     private final RString 保険者区分;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
 
     /**
      * コンストラクタです。
@@ -30,7 +31,7 @@ public class KagoKetteiMeisaiIdentifier implements Serializable {
      */
     public KagoKetteiMeisaiIdentifier(FlexibleYearMonth 取扱年月,
             RString 保険者区分,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         this.取扱年月 = 取扱年月;
         this.保険者区分 = 保険者区分;
         this.履歴番号 = 履歴番号;

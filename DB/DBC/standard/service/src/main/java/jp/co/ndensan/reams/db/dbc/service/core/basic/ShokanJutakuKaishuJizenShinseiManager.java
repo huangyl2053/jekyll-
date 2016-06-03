@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払支給住宅改修事前申請を管理するクラスです。
+ *
+ * @reamsid_L DBC-0992-150 xicongwang
  */
 public class ShokanJutakuKaishuJizenShinseiManager {
 

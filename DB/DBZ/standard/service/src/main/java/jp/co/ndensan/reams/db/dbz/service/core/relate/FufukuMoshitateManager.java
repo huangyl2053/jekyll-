@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.FufukuMoshitate;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.FufukuMoshitateMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.FufukuMoshitateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7001FufukuMoshitateDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.IFufukuMoshitateMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.fufukumoshitate.IFufukuMoshitateMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 老齢福祉年金受給者の識別子です。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

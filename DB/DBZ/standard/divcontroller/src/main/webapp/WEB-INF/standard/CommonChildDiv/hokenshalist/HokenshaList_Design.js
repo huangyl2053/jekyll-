@@ -4,6 +4,9 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_ddlHokenshaList = function () {
+                return "onChange_ddlHokenshaList";
+            };
             return Events;
         })();
         HokenshaList.Events = Events;

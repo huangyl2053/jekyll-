@@ -28,30 +28,6 @@ var DBZ;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.NarabekaeJoken = function () {
-                return new UZA.Panel(this.convFiledName("NarabekaeJoken"));
-            };
-
-            Controls.prototype.ddlFirstPriority = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlFirstPriority"));
-            };
-
-            Controls.prototype.ddlSecondPriority = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlSecondPriority"));
-            };
-
-            Controls.prototype.ddlThirdPriority = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlThirdPriority"));
-            };
-
-            Controls.prototype.btnNarabekae = function () {
-                return new UZA.Button(this.convFiledName("btnNarabekae"));
-            };
-
-            Controls.prototype.NinteiTaskIchiran = function () {
-                return new UZA.PanelBatchParameter(this.convFiledName("NinteiTaskIchiran"));
-            };
-
             Controls.prototype.txtCompleteCount = function () {
                 return new UZA.TextBox(this.convFiledName("txtCompleteCount"));
             };
@@ -60,20 +36,8 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtTotalCount"));
             };
 
-            Controls.prototype.txtNarabekae = function () {
-                return new UZA.Button(this.convFiledName("txtNarabekae"));
-            };
-
             Controls.prototype.dgNinteiTaskList = function () {
                 return new UZA.DataGrid(this.convFiledName("dgNinteiTaskList"));
-            };
-
-            Controls.prototype.btnCSVShutsuryoku = function () {
-                return new UZA.ButtonBatchRegister(this.convFiledName("btnCSVShutsuryoku"));
-            };
-
-            Controls.prototype.btnIchiranhyoShutsuryoku = function () {
-                return new UZA.ButtonBatchRegister(this.convFiledName("btnIchiranhyoShutsuryoku"));
             };
             return Controls;
         })();

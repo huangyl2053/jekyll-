@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 高額介護サービス費給付対象者明細テーブルの項目定義クラスです。
  */
 public enum DbT3054KogakuKyufuTaishoshaMeisai implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -71,7 +71,11 @@ public enum DbT3054KogakuKyufuTaishoshaMeisai implements IColumnDefinition {
      * 高額給付根拠
      * <br/>低所得者等識別、世帯合算状況等
      */
-    kogakuKyufuKonkyo(10, 0);
+    kogakuKyufuKonkyo(10, 0),
+    /**
+     * 対象者受取年月
+     */
+    taishoshaUketoriYM(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

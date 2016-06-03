@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.Shinsakai;
 
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiWariateIinList;
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.Shinsakai;
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiWariateIin;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ShinsakaiWariateIinList;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.Shinsakai;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ShinsakaiWariateIin;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiMockBusinessCreator;

@@ -6,11 +6,10 @@
 package jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.shinsakaiiinjoho;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.kaigoninteishinsakaiiinshozokukikanjoho.KaigoNinteiShinsakaiIinShozokuKikanJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.kaigoninteishinsakaiiinshozokukikanjoho.KaigoNinteiShinsakaiIinShozokuKikanJohoBuilder;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.kaigoninteishinsakaiiinshozokukikanjoho.KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.ninteishinsakaiiinshozokukikanjoho.KaigoNinteiShinsakaiIinShozokuKikanJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.ninteishinsakaiiinshozokukikanjoho.KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -25,12 +24,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link ShinsakaiIinJoho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class ShinsakaiIinJohoBuilder {
 
     private final DbT5594ShinsakaiIinJohoEntity entity;
     private final ShinsakaiIinJohoIdentifier id;
-    private final Models<KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier, KaigoNinteiShinsakaiIinShozokuKikanJoho> kaigoNinteiShinsakaiIinShozokuKikanJoho;
+    private final Models<KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier, KaigoNinteiShinsakaiIinShozokuKikanJoho> shinsakaiIinShozokuKikan;
 
     /**
      * {@link DbT5594ShinsakaiIinJohoEntity}より{@link ShinsakaiIinJoho}の編集用Builderクラスを生成します。
@@ -44,11 +45,11 @@ public class ShinsakaiIinJohoBuilder {
     ShinsakaiIinJohoBuilder(
             DbT5594ShinsakaiIinJohoEntity entity,
             ShinsakaiIinJohoIdentifier id,
-            Models<KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier, KaigoNinteiShinsakaiIinShozokuKikanJoho> kaigoNinteiShinsakaiIinShozokuKikanJoho
+            Models<KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier, KaigoNinteiShinsakaiIinShozokuKikanJoho> shinsakaiIinShozokuKikan
     ) {
         this.entity = entity.clone();
         this.id = id;
-        this.kaigoNinteiShinsakaiIinShozokuKikanJoho = kaigoNinteiShinsakaiIinShozokuKikanJoho.clone();
+        this.shinsakaiIinShozokuKikan = shinsakaiIinShozokuKikan.clone();
 
     }
 
@@ -187,12 +188,12 @@ public class ShinsakaiIinJohoBuilder {
     /**
      * FAX番号を設定します。
      *
-     * @param FAX番号 FAX番号
+     * @param fax番号 FAX番号
      * @return {@link ShinsakaiIinJohoBuilder}
      */
-    public ShinsakaiIinJohoBuilder setFAX番号(TelNo FAX番号) {
-        requireNonNull(FAX番号, UrSystemErrorMessages.値がnull.getReplacedMessage("FAX番号"));
-        entity.setFaxNo(FAX番号);
+    public ShinsakaiIinJohoBuilder setFAX番号(TelNo fax番号) {
+        requireNonNull(fax番号, UrSystemErrorMessages.値がnull.getReplacedMessage("FAX番号"));
+        entity.setFaxNo(fax番号);
         return this;
     }
 
@@ -256,7 +257,7 @@ public class ShinsakaiIinJohoBuilder {
      */
     public ShinsakaiIinJohoBuilder setKaigoNinteiShinsakaiIinShozokuKikanJoho(KaigoNinteiShinsakaiIinShozokuKikanJoho 介護認定審査会委員所属機関情報) {
         if (hasSameIdentifier(介護認定審査会委員所属機関情報.identifier())) {
-            kaigoNinteiShinsakaiIinShozokuKikanJoho.add(介護認定審査会委員所属機関情報);
+            shinsakaiIinShozokuKikan.add(介護認定審査会委員所属機関情報);
             return this;
         }
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
@@ -272,7 +273,7 @@ public class ShinsakaiIinJohoBuilder {
      * @return {@link ShinsakaiIinJoho}のインスタンス
      */
     public ShinsakaiIinJoho build() {
-        return new ShinsakaiIinJoho(entity, id, kaigoNinteiShinsakaiIinShozokuKikanJoho);
+        return new ShinsakaiIinJoho(entity, id, shinsakaiIinShozokuKikan);
     }
 
 }

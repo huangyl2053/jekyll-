@@ -8,26 +8,26 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 給付実績社会福祉法人軽減額を管理するクラスです。
  */
-public class KyufuJissekiShakaiFukushiHojinKeigengaku 
-extends ModelBase<KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier,
-        DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity, 
+public class KyufuJissekiShakaiFukushiHojinKeigengaku
+        extends ModelBase<KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier,
+        DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity,
         KyufuJissekiShakaiFukushiHojinKeigengaku> implements Serializable {
 
     private final DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity;
@@ -92,8 +92,7 @@ extends ModelBase<KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier,
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}より{@link KyufuJissekiShakaiFukushiHojinKeigengaku}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}
+     * @param entity DBより取得した{@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}
      */
     public KyufuJissekiShakaiFukushiHojinKeigengaku(DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績社会福祉法人軽減額"));
@@ -112,8 +111,7 @@ extends ModelBase<KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier,
     /**
      * シリアライズ、ビルダー用コンストラクタです。
      *
-     * @param entity
-     * {@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}
+     * @param entity {@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}
      * @param id {@link KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier}
      */
     KyufuJissekiShakaiFukushiHojinKeigengaku(
@@ -284,7 +282,8 @@ extends ModelBase<KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier,
      * @return 再審査回数
      */
     public int get再審査回数() {
-        return entity.getSaishinsaKaisu();
+        Integer 再審査回数 = entity.getSaishinsaKaisu();
+        return 再審査回数 == null ? 0 : 再審査回数.intValue();
     }
 
     /**
@@ -293,7 +292,8 @@ extends ModelBase<KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier,
      * @return 過誤回数
      */
     public int get過誤回数() {
-        return entity.getKagoKaisu();
+        Integer 過誤回数 = entity.getKagoKaisu();
+        return 過誤回数 == null ? 0 : 過誤回数.intValue();
     }
 
     /**
@@ -326,8 +326,7 @@ extends ModelBase<KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier,
     /**
      * {@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}のクローンを返します。
      *
-     * @return
-     * {@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}のクローン
+     * @return {@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}のクローン
      */
     @Override
     public DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity toEntity() {
@@ -337,8 +336,7 @@ extends ModelBase<KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier,
     /**
      * 給付実績社会福祉法人軽減額の識別子{@link KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier}を返します。
      *
-     * @return
-     * 給付実績社会福祉法人軽減額の識別子{@link KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier}
+     * @return 給付実績社会福祉法人軽減額の識別子{@link KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier}
      */
     @Override
     public KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier identifier() {
@@ -385,7 +383,7 @@ extends ModelBase<KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier,
         private final DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity;
         private final KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier id;
 
-        private _SerializationProxy(DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity, 
+        private _SerializationProxy(DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity,
                 KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier id) {
             this.entity = entity;
             this.id = id;

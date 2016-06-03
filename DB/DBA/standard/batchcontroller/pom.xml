@@ -19,6 +19,14 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbaEntity</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dba</groupId>
+            <artifactId>DbaPersistence</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dba</groupId>
+            <artifactId>DbaService</artifactId>
+        </dependency>
         <!-- DBX -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
@@ -29,5 +37,15 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbaBusiness</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- URZ -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzService</artifactId>
+        </dependency>    
     </dependencies>
 </project>

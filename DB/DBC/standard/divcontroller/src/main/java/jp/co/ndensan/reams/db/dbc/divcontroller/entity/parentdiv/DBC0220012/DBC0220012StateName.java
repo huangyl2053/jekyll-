@@ -15,7 +15,9 @@ public enum DBC0220012StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    連絡票変更("連絡票変更");
+    連絡票変更("連絡票変更"),
+    連絡票削除("連絡票削除"),
+    完了メッセージ("完了メッセージ");
 
     private final RString name;
 

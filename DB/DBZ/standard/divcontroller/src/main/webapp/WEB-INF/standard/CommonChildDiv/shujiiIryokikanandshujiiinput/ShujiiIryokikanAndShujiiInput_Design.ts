@@ -12,12 +12,32 @@ module DBZ {
                 return "onBlur_txtShujiiIryokikan";
             }
 
+            public static onOKClose_btnIryokikanGuide(): string {
+                return "onOKClose_btnIryokikanGuide";
+            }
+
+            public static onClick_btnIryokikanGuide(): string {
+                return "onClick_btnIryokikanGuide";
+            }
+
+            public static onOKClose_btnShujiiRenrakuJiko(): string {
+                return "onOKClose_btnShujiiRenrakuJiko";
+            }
+
+            public static onBefore_btnShujiiRenrakuJiko(): string {
+                return "onBefore_btnShujiiRenrakuJiko";
+            }
+
             public static onClick_btnZankaiFukusha(): string {
                 return "onClick_btnZankaiFukusha";
             }
 
             public static onBlur_txtShujii(): string {
                 return "onBlur_txtShujii";
+            }
+
+            public static onOKClose_btnShujiiGuide(): string {
+                return "onOKClose_btnShujiiGuide";
             }
 
             public static onClick_btnShujiiGuide(): string {

@@ -8,8 +8,6 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3018KyufujissekiMeisaiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -17,19 +15,19 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikib
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 給付実績明細を管理するクラスです。
  */
-public class KyufujissekiMeisai 
-extends ModelBase<KyufujissekiMeisaiIdentifier, 
-        DbT3018KyufujissekiMeisaiEntity, 
-        KyufujissekiMeisai> implements Serializable {
+public class KyufujissekiMeisai
+        extends ModelBase<KyufujissekiMeisaiIdentifier, DbT3018KyufujissekiMeisaiEntity, KyufujissekiMeisai> implements Serializable {
 
     private final DbT3018KyufujissekiMeisaiEntity entity;
     private final KyufujissekiMeisaiIdentifier id;
@@ -235,7 +233,8 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      * @return 日数_回数
      */
     public int get日数_回数() {
-        return entity.getNissuKaisu();
+        Integer 日数_回数 = entity.getNissuKaisu();
+        return 日数_回数 == null ? 0 : 日数_回数.intValue();
     }
 
     /**
@@ -244,7 +243,8 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      * @return 公費１対象日数_回数
      */
     public int get公費１対象日数_回数() {
-        return entity.getKohi1TaishoNissuKaisu();
+        Integer 公費１対象日数_回数 = entity.getKohi1TaishoNissuKaisu();
+        return 公費１対象日数_回数 == null ? 0 : 公費１対象日数_回数.intValue();
     }
 
     /**
@@ -253,7 +253,8 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      * @return 公費２対象日数_回数
      */
     public int get公費２対象日数_回数() {
-        return entity.getKohi2TaishoNissuKaisu();
+        Integer 公費２対象日数_回数 = entity.getKohi2TaishoNissuKaisu();
+        return 公費２対象日数_回数 == null ? 0 : 公費２対象日数_回数.intValue();
     }
 
     /**
@@ -262,7 +263,8 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      * @return 公費３対象日数_回数
      */
     public int get公費３対象日数_回数() {
-        return entity.getKohi3TaishoNissuKaisu();
+        Integer 公費３対象日数_回数 = entity.getKohi3TaishoNissuKaisu();
+        return 公費３対象日数_回数 == null ? 0 : 公費３対象日数_回数.intValue();
     }
 
     /**
@@ -325,7 +327,8 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      * @return 後_日数_回数
      */
     public int get後_日数_回数() {
-        return entity.getAtoNissuKaisu();
+        Integer 後_日数_回数 = entity.getAtoNissuKaisu();
+        return 後_日数_回数 == null ? 0 : 後_日数_回数.intValue();
     }
 
     /**
@@ -334,7 +337,8 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      * @return 後_公費１対象日数_回数
      */
     public int get後_公費１対象日数_回数() {
-        return entity.getAtoKohi1TaishoNissuKaisu();
+        Integer 後_公費１対象日数_回数 = entity.getAtoKohi1TaishoNissuKaisu();
+        return 後_公費１対象日数_回数 == null ? 0 : 後_公費１対象日数_回数.intValue();
     }
 
     /**
@@ -343,7 +347,8 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      * @return 後_公費２対象日数_回数
      */
     public int get後_公費２対象日数_回数() {
-        return entity.getAtoKohi2TaishoNissukaisu();
+        Integer 後_公費２対象日数_回数 = entity.getAtoKohi2TaishoNissukaisu();
+        return 後_公費２対象日数_回数 == null ? 0 : 後_公費２対象日数_回数.intValue();
     }
 
     /**
@@ -352,7 +357,8 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      * @return 後_公費３対象日数_回数
      */
     public int get後_公費３対象日数_回数() {
-        return entity.getAtoKohi3TaishoNissuKaisu();
+        Integer 後_公費３対象日数_回数 = entity.getAtoKohi3TaishoNissuKaisu();
+        return 後_公費３対象日数_回数 == null ? 0 : 後_公費３対象日数_回数.intValue();
     }
 
     /**
@@ -397,7 +403,8 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      * @return 再審査回数
      */
     public int get再審査回数() {
-        return entity.getSaishinsaKaisu();
+        Integer 再審査回数 = entity.getSaishinsaKaisu();
+        return 再審査回数 == null ? 0 : 再審査回数.intValue();
     }
 
     /**
@@ -406,7 +413,8 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      * @return 過誤回数
      */
     public int get過誤回数() {
-        return entity.getKagoKaisu();
+        Integer 過誤回数 = entity.getKagoKaisu();
+        return 過誤回数 == null ? 0 : 過誤回数.intValue();
     }
 
     /**
@@ -457,8 +465,7 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
     }
 
     /**
-     * 保持する給付実績明細を削除対象とします。<br/>
-     * {@link DbT3018KyufujissekiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する給付実績明細を削除対象とします。<br/> {@link DbT3018KyufujissekiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KyufujissekiMeisai}
      */

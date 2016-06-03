@@ -2,14 +2,14 @@
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
 
-module DBE {
+module DBZ {
 
      export module KanryoDialog {
 
         export class Events {
 
-            public static CloseOK(): string {
-                return "CloseOK";
+            public static onClick_btnClose(): string {
+                return "onClick_btnClose";
             }
 
         }
@@ -26,11 +26,11 @@ module DBE {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBE.KanryoDialog.Controls.myType();
+                return this._myName + "_" + DBZ.KanryoDialog.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBE.KanryoDialog.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.KanryoDialog.Controls.myType() + "_" + fieldName;
             }
 
             public KanryoDialog(): UZA.Panel {
@@ -46,7 +46,7 @@ module DBE {
             }
 
             public WrapMessageMain(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("SuccessInfo_WrapMessageMain"));
+                return new UZA.Panel(this.convFiledName("WrapMessageMain"));
             }
 
             public lblMessageMain(): UZA.Label {

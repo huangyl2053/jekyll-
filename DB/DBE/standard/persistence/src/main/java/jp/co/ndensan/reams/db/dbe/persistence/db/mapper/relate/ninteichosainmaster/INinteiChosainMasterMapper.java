@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 調査員情報のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0280-010 sunhaidi
  */
 public interface INinteiChosainMasterMapper {
 

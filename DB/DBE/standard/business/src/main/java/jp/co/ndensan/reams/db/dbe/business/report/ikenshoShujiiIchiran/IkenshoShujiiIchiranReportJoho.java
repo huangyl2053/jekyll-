@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * 医療機関・主治医一覧表作成_帳票クラスパラメータクラスです。
+ *
+ * @reamsid_L DBE-0260-020 zuotao
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

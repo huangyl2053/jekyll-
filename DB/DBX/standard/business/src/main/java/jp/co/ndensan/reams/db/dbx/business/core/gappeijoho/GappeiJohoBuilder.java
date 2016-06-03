@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbx.business.core.gappeijoho;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
-import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson.GappeiShichosonBuilder;
 import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson.GappeiShichosonIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7055GappeiJohoEntity;
@@ -121,7 +120,7 @@ public class GappeiJohoBuilder {
      * キーが一致する場合は合併市町村情報リストに合併市町村情報{@link GappeiShichoson}をセットします。<br>
      * キーが一致しない場合、新たに追加します。<br>
      *
-     * @param 合併市町村情報 {@link GappeiShichoson}
+     * @param 合併市町村 {@link GappeiShichoson}
      * @return {@link GappeiShichosonBuilder}
      * @throws IllegalStateException キーが一致しない場合
      */

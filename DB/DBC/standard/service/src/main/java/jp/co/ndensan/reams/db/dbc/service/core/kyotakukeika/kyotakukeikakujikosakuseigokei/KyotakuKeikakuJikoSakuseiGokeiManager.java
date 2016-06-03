@@ -17,12 +17,13 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3009KyotakuKeikakuJiko
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 居宅給付計画自己作成合計を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class KyotakuKeikakuJikoSakuseiGokeiManager {
 
@@ -57,7 +58,7 @@ public class KyotakuKeikakuJikoSakuseiGokeiManager {
      */
     @Transaction
     public KyotakuKeikakuJikoSakuseiGokei get居宅給付計画自己作成合計(
-             HihokenshaNo 被保険者番号,
+            HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
             int 履歴番号,
             RString 居宅サービス区分,

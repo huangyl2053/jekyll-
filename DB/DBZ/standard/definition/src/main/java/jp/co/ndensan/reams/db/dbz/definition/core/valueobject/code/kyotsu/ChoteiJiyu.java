@@ -35,7 +35,7 @@ public class ChoteiJiyu implements ICodeValueObject, IDbColumnMappable, IValueOb
     private final Code code;
 
     static {
-        SUB_GYOMU_CODE = SubGyomuCode.DBZ介護共通;
+        SUB_GYOMU_CODE = SubGyomuCode.DBB介護賦課;
         CODE_SHUBETSU = DBZCodeShubetsu.調定事由.getCodeShubetsu();
     }
 

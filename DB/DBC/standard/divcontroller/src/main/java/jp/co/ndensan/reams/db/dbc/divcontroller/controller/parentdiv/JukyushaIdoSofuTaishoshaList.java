@@ -28,6 +28,8 @@ public class JukyushaIdoSofuTaishoshaList {
     }
 
     private void setJukyushaIdoRenrakuhyoSakusei(JukyushaIdoSofuTaishoshaListDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getJukyushaIdoSofuTaishoshaListPrintSetting();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
 //        panel.getJukyushaIdoSofuTaishoshaListPrintSetting().getTxtIssueDate().setValue(RDate.getNowDate());
 //        panel.getJukyushaIdoSofuTaishoshaListOutputOrder().getTxtSortName().setValue(cg.getAsRString("出力順名称"));

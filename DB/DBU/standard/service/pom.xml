@@ -14,6 +14,21 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+        <!-- DBA -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dba</groupId>
+            <artifactId>DbaService</artifactId>
+        </dependency>
+        <!-- DBC -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbc</groupId>
+            <artifactId>DbcService</artifactId>
+        </dependency>
+        <!-- DBD -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+            <artifactId>DbdService</artifactId>
+        </dependency>
         <!-- DBU -->
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -31,7 +46,11 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbuPersistence</artifactId>
         </dependency>
-
+        <!-- DBC -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbc</groupId>
+            <artifactId>DbcPersistence</artifactId>
+        </dependency>
         <!-- DBX -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
@@ -56,7 +75,17 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxPersistence</artifactId>
-            <version>1.1.2</version>
+            <version>${jp.co.ndensan.reams.uax.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbe</groupId>
+            <artifactId>DbePersistence</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxDefinition</artifactId>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

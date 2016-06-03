@@ -1,21 +1,20 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 受給者異動送付テーブルのエンティティクラスです。
@@ -34,17 +33,15 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private FlexibleDate idoYMD;
-    @PrimaryKey
-    private RString idoKubunCode;
-    @PrimaryKey
-    private RString jukyushaIdoJiyu;
-    @PrimaryKey
-    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private FlexibleYearMonth sofuYM;
     @PrimaryKey
     private HihokenshaNo hiHokenshaNo;
     @PrimaryKey
     private int rirekiNo;
+    private FlexibleDate idoYMD;
+    private RString idoKubunCode;
+    private RString jukyushaIdoJiyu;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private RString hiHokenshaNameKana;
     private FlexibleDate umareYMD;
     private RString seibetsuCode;
@@ -60,45 +57,45 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
     private RString minashiYokaigoJotaiKubunCode;
     private RString yokaigoJotaiKubunCode;
     private FlexibleDate ninteiYukoKikankaishiYMD;
-    private FlexibleDate ninteiYukoKikanShuryoYMD;
+    private RString ninteiYukoKikanShuryoYMD;
     private RString kyotakuServiceSakuseiKubunCode;
-    private JigyoshaNo kyotakuKaigoShienJigyoshoNo;
-    private FlexibleDate kyotakuServiceTekiyoKaishiYMD;
-    private FlexibleDate kyotakuServiceTekiyoShuryoYMD;
+    private RString kyotakuKaigoShienJigyoshoNo;
+    private RString kyotakuServiceTekiyoKaishiYMD;
+    private RString kyotakuServiceTekiyoShuryoYMD;
     private int homonTsushoServiceShikyuGendoKijungaku;
     private FlexibleDate homonTsushoServiceJogenKanriTekiyoKaishiYMD;
-    private FlexibleDate homonTsushoServiceJogenKanriTekiyoShuryoYMD;
+    private RString homonTsushoServiceJogenKanriTekiyoShuryoYMD;
     private int tankiNyushoServiceShikyuGendoKijungaku;
     private FlexibleDate tankinyushoServiceJogenKanriTekiyoKaishiYMD;
     private FlexibleDate tankinyushoServiceJogenKanriTekiyoShuryoYMD;
     private boolean kohiFutanJogenGengakuAriFlag;
-    private FlexibleDate shokanbaraikaKaishiYMD;
-    private FlexibleDate shokanbaraikaShuryoYMD;
-    private FlexibleDate kyufuritsuHikisageKaishiYMD;
-    private FlexibleDate kyufuritsuHikisageShuryoYMD;
+    private RString shokanbaraikaKaishiYMD;
+    private RString shokanbaraikaShuryoYMD;
+    private RString kyufuritsuHikisageKaishiYMD;
+    private RString kyufuritsuHikisageShuryoYMD;
     private RString gemmenShinseichuKubunCode;
     private RString riyoshaFutanKubunCode;
-    private HokenKyufuRitsu kyufuritsu;
-    private FlexibleDate tekiyoKaishiYMD;
-    private FlexibleDate tekiyoShuryoYMD;
+    private Decimal kyufuritsu;
+    private RString tekiyoKaishiYMD;
+    private RString tekiyoShuryoYMD;
     private RString hyojunFutanKubunCode;
-    private int futangaku;
-    private FlexibleDate futangakuTekiyoKaishiYMD;
-    private FlexibleDate futangakuTekiyoShuryoYMD;
+    private Decimal futangaku;
+    private RString futangakuTekiyoKaishiYMD;
+    private RString futangakuTekiyoShuryoYMD;
     private RString tokuteiNyushoshaNinteiShinseichuKubunCode;
     private RString tokuteiNyushoshaKaigoServiceKubunCode;
-    private boolean kaizeisoTokureiGengakuSochiTaishoFlag;
-    private int shokuhiFutanGendogaku;
-    private int kyojuhiUnitGataKoshitsuFutanGendogaku;
-    private int kyojuhiUnitGataJunKoshitsuFutanGendogaku;
-    private int kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku;
-    private int kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku;
-    private int kyujuhiTashoshitsuFutanGendogaku;
-    private FlexibleDate futanGendogakuTekiyoKaishiYMD;
-    private FlexibleDate futanGendogakuTekiyoShuryoYMD;
-    private int keigenritsu;
-    private FlexibleDate keigenritsuTekiyoKaishiYMD;
-    private FlexibleDate keigenritsuTekiyoShuryoYMD;
+    private RString kaizeisoTokureiGengakuSochiTaishoFlag;
+    private RString shokuhiFutanGendogaku;
+    private RString kyojuhiUnitGataKoshitsuFutanGendogaku;
+    private RString kyojuhiUnitGataJunKoshitsuFutanGendogaku;
+    private RString kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku;
+    private RString kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku;
+    private RString kyujuhiTashoshitsuFutanGendogaku;
+    private RString futanGendogakuTekiyoKaishiYMD;
+    private RString futanGendogakuTekiyoShuryoYMD;
+    private RString keigenritsu;
+    private RString keigenritsuTekiyoKaishiYMD;
+    private RString keigenritsuTekiyoShuryoYMD;
     private boolean shoTakinoKyotakuKaigoRiyozukiRiyoAriFlag;
     private RString kokiKoureiIryoHokenshaNo;
     private RString kokikoureiIryoHiHokenshaNo;
@@ -109,16 +106,18 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
     private FlexibleDate nijiyoboJigyoYukoKikanKaishiYMD;
     private FlexibleDate nijiyoboJigyoYukoKikanShuryoYMD;
     private boolean teiseiRenrakuhyoFlag;
-    private FlexibleYearMonth sofuYM;
     private RString jushochiTokureiTaishoshaKubunCode;
     private RString shisetsuShozaiHokenjaNo;
-    private FlexibleDate jushochiTokureiTekiyoKaishiYMD;
-    private FlexibleDate jushochiTokureiTekiyoShuryoYMD;
-    private int kyotakuhiShin1FutanGendogaku;
-    private int kyotakuhiShin2FutanGendogaku;
-    private int kyotakuhiShin3FutanGendogaku;
-    private FlexibleDate riyosyaFutanWariaiYukoKaishiYMD;
-    private FlexibleDate riyosyaFutanWariaiYukoShuryoYMD;
+    private RString jushochiTokureiTekiyoKaishiYMD;
+    private RString jushochiTokureiTekiyoShuryoYMD;
+    private RString kyotakuhiShin1FutanGendogaku;
+    private RString kyotakuhiShin2FutanGendogaku;
+    private RString kyotakuhiShin3FutanGendogaku;
+    private RString riyosyaFutanWariaiYukoKaishiYMD;
+    private RString riyosyaFutanWariaiYukoShuryoYMD;
+    private RString teiseiKubunCode;
+    private FlexibleDate teiseiYMD;
+    private boolean logicalDeletedFlag;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -164,6 +163,61 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
         this.lastUpdateReamsLoginId = lastUpdateReamsLoginId;
+    }
+
+    /**
+     * 送付年月のgetメソッドです。
+     * 
+     * @return 送付年月
+     */
+    public FlexibleYearMonth getSofuYM() {
+        return sofuYM;
+    }
+
+    /**
+     * 送付年月のsetメソッドです。
+     * 
+     * @param sofuYM 送付年月
+     */
+    public void setSofuYM(@Nonnull FlexibleYearMonth sofuYM) {
+        this.sofuYM = sofuYM;
+    }
+
+    /**
+     * 被保険者番号のgetメソッドです。
+     * 
+     * @return 被保険者番号
+     */
+    public HihokenshaNo getHiHokenshaNo() {
+        return hiHokenshaNo;
+    }
+
+    /**
+     * 被保険者番号のsetメソッドです。
+     * 
+     * @param hiHokenshaNo 被保険者番号
+     */
+    public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
+        this.hiHokenshaNo = hiHokenshaNo;
+    }
+
+    /**
+     * 履歴番号のgetメソッドです。
+     * 
+     * @return 履歴番号
+     */
+    @CheckForNull
+    public int getRirekiNo() {
+        return rirekiNo;
+    }
+
+    /**
+     * 履歴番号のsetメソッドです。
+     * 
+     * @param rirekiNo 履歴番号
+     */
+    public void setRirekiNo(int rirekiNo) {
+        this.rirekiNo = rirekiNo;
     }
 
     /**
@@ -248,42 +302,6 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      */
     public void setShoKisaiHokenshaNo(@Nonnull ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
-    }
-
-    /**
-     * 被保険者番号のgetメソッドです。
-     * 
-     * @return 被保険者番号
-     */
-    public HihokenshaNo getHiHokenshaNo() {
-        return hiHokenshaNo;
-    }
-
-    /**
-     * 被保険者番号のsetメソッドです。
-     * 
-     * @param hiHokenshaNo 被保険者番号
-     */
-    public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
-        this.hiHokenshaNo = hiHokenshaNo;
-    }
-
-    /**
-     * 履歴番号のgetメソッドです。
-     * 
-     * @return 履歴番号
-     */
-    public int getRirekiNo() {
-        return rirekiNo;
-    }
-
-    /**
-     * 履歴番号のsetメソッドです。
-     * 
-     * @param rirekiNo 履歴番号
-     */
-    public void setRirekiNo(@Nonnull int rirekiNo) {
-        this.rirekiNo = rirekiNo;
     }
 
     /**
@@ -609,7 +627,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 認定有効期間終了年月日
      */
     @CheckForNull
-    public FlexibleDate getNinteiYukoKikanShuryoYMD() {
+    public RString getNinteiYukoKikanShuryoYMD() {
         return ninteiYukoKikanShuryoYMD;
     }
 
@@ -618,7 +636,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param ninteiYukoKikanShuryoYMD 認定有効期間終了年月日
      */
-    public void setNinteiYukoKikanShuryoYMD(FlexibleDate ninteiYukoKikanShuryoYMD) {
+    public void setNinteiYukoKikanShuryoYMD(RString ninteiYukoKikanShuryoYMD) {
         this.ninteiYukoKikanShuryoYMD = ninteiYukoKikanShuryoYMD;
     }
 
@@ -653,7 +671,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 居宅介護支援事業所番号
      */
     @CheckForNull
-    public JigyoshaNo getKyotakuKaigoShienJigyoshoNo() {
+    public RString getKyotakuKaigoShienJigyoshoNo() {
         return kyotakuKaigoShienJigyoshoNo;
     }
 
@@ -664,7 +682,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param kyotakuKaigoShienJigyoshoNo 居宅介護支援事業所番号
      */
-    public void setKyotakuKaigoShienJigyoshoNo(JigyoshaNo kyotakuKaigoShienJigyoshoNo) {
+    public void setKyotakuKaigoShienJigyoshoNo(RString kyotakuKaigoShienJigyoshoNo) {
         this.kyotakuKaigoShienJigyoshoNo = kyotakuKaigoShienJigyoshoNo;
     }
 
@@ -674,7 +692,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 居宅サービス計画適用開始年月日
      */
     @CheckForNull
-    public FlexibleDate getKyotakuServiceTekiyoKaishiYMD() {
+    public RString getKyotakuServiceTekiyoKaishiYMD() {
         return kyotakuServiceTekiyoKaishiYMD;
     }
 
@@ -683,7 +701,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param kyotakuServiceTekiyoKaishiYMD 居宅サービス計画適用開始年月日
      */
-    public void setKyotakuServiceTekiyoKaishiYMD(FlexibleDate kyotakuServiceTekiyoKaishiYMD) {
+    public void setKyotakuServiceTekiyoKaishiYMD(RString kyotakuServiceTekiyoKaishiYMD) {
         this.kyotakuServiceTekiyoKaishiYMD = kyotakuServiceTekiyoKaishiYMD;
     }
 
@@ -693,7 +711,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 居宅サービス計画適用終了年月日
      */
     @CheckForNull
-    public FlexibleDate getKyotakuServiceTekiyoShuryoYMD() {
+    public RString getKyotakuServiceTekiyoShuryoYMD() {
         return kyotakuServiceTekiyoShuryoYMD;
     }
 
@@ -702,7 +720,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param kyotakuServiceTekiyoShuryoYMD 居宅サービス計画適用終了年月日
      */
-    public void setKyotakuServiceTekiyoShuryoYMD(FlexibleDate kyotakuServiceTekiyoShuryoYMD) {
+    public void setKyotakuServiceTekiyoShuryoYMD(RString kyotakuServiceTekiyoShuryoYMD) {
         this.kyotakuServiceTekiyoShuryoYMD = kyotakuServiceTekiyoShuryoYMD;
     }
 
@@ -750,7 +768,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 訪問通所サービス上限管理適用期間終了年月日
      */
     @CheckForNull
-    public FlexibleDate getHomonTsushoServiceJogenKanriTekiyoShuryoYMD() {
+    public RString getHomonTsushoServiceJogenKanriTekiyoShuryoYMD() {
         return homonTsushoServiceJogenKanriTekiyoShuryoYMD;
     }
 
@@ -759,7 +777,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param homonTsushoServiceJogenKanriTekiyoShuryoYMD 訪問通所サービス上限管理適用期間終了年月日
      */
-    public void setHomonTsushoServiceJogenKanriTekiyoShuryoYMD(FlexibleDate homonTsushoServiceJogenKanriTekiyoShuryoYMD) {
+    public void setHomonTsushoServiceJogenKanriTekiyoShuryoYMD(RString homonTsushoServiceJogenKanriTekiyoShuryoYMD) {
         this.homonTsushoServiceJogenKanriTekiyoShuryoYMD = homonTsushoServiceJogenKanriTekiyoShuryoYMD;
     }
 
@@ -845,7 +863,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 償還払化開始年月日
      */
     @CheckForNull
-    public FlexibleDate getShokanbaraikaKaishiYMD() {
+    public RString getShokanbaraikaKaishiYMD() {
         return shokanbaraikaKaishiYMD;
     }
 
@@ -854,7 +872,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param shokanbaraikaKaishiYMD 償還払化開始年月日
      */
-    public void setShokanbaraikaKaishiYMD(FlexibleDate shokanbaraikaKaishiYMD) {
+    public void setShokanbaraikaKaishiYMD(RString shokanbaraikaKaishiYMD) {
         this.shokanbaraikaKaishiYMD = shokanbaraikaKaishiYMD;
     }
 
@@ -864,7 +882,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 償還払化終了年月日
      */
     @CheckForNull
-    public FlexibleDate getShokanbaraikaShuryoYMD() {
+    public RString getShokanbaraikaShuryoYMD() {
         return shokanbaraikaShuryoYMD;
     }
 
@@ -873,7 +891,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param shokanbaraikaShuryoYMD 償還払化終了年月日
      */
-    public void setShokanbaraikaShuryoYMD(FlexibleDate shokanbaraikaShuryoYMD) {
+    public void setShokanbaraikaShuryoYMD(RString shokanbaraikaShuryoYMD) {
         this.shokanbaraikaShuryoYMD = shokanbaraikaShuryoYMD;
     }
 
@@ -883,7 +901,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 給付率引下げ開始年月日
      */
     @CheckForNull
-    public FlexibleDate getKyufuritsuHikisageKaishiYMD() {
+    public RString getKyufuritsuHikisageKaishiYMD() {
         return kyufuritsuHikisageKaishiYMD;
     }
 
@@ -892,7 +910,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param kyufuritsuHikisageKaishiYMD 給付率引下げ開始年月日
      */
-    public void setKyufuritsuHikisageKaishiYMD(FlexibleDate kyufuritsuHikisageKaishiYMD) {
+    public void setKyufuritsuHikisageKaishiYMD(RString kyufuritsuHikisageKaishiYMD) {
         this.kyufuritsuHikisageKaishiYMD = kyufuritsuHikisageKaishiYMD;
     }
 
@@ -902,7 +920,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 給付率引下げ終了年月日
      */
     @CheckForNull
-    public FlexibleDate getKyufuritsuHikisageShuryoYMD() {
+    public RString getKyufuritsuHikisageShuryoYMD() {
         return kyufuritsuHikisageShuryoYMD;
     }
 
@@ -911,7 +929,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param kyufuritsuHikisageShuryoYMD 給付率引下げ終了年月日
      */
-    public void setKyufuritsuHikisageShuryoYMD(FlexibleDate kyufuritsuHikisageShuryoYMD) {
+    public void setKyufuritsuHikisageShuryoYMD(RString kyufuritsuHikisageShuryoYMD) {
         this.kyufuritsuHikisageShuryoYMD = kyufuritsuHikisageShuryoYMD;
     }
 
@@ -975,7 +993,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 給付率
      */
     @CheckForNull
-    public HokenKyufuRitsu getKyufuritsu() {
+    public Decimal getKyufuritsu() {
         return kyufuritsu;
     }
 
@@ -984,7 +1002,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param kyufuritsu 給付率
      */
-    public void setKyufuritsu(HokenKyufuRitsu kyufuritsu) {
+    public void setKyufuritsu(Decimal kyufuritsu) {
         this.kyufuritsu = kyufuritsu;
     }
 
@@ -994,7 +1012,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 適用開始年月日
      */
     @CheckForNull
-    public FlexibleDate getTekiyoKaishiYMD() {
+    public RString getTekiyoKaishiYMD() {
         return tekiyoKaishiYMD;
     }
 
@@ -1003,7 +1021,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param tekiyoKaishiYMD 適用開始年月日
      */
-    public void setTekiyoKaishiYMD(FlexibleDate tekiyoKaishiYMD) {
+    public void setTekiyoKaishiYMD(RString tekiyoKaishiYMD) {
         this.tekiyoKaishiYMD = tekiyoKaishiYMD;
     }
 
@@ -1013,7 +1031,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 適用終了年月日
      */
     @CheckForNull
-    public FlexibleDate getTekiyoShuryoYMD() {
+    public RString getTekiyoShuryoYMD() {
         return tekiyoShuryoYMD;
     }
 
@@ -1022,7 +1040,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param tekiyoShuryoYMD 適用終了年月日
      */
-    public void setTekiyoShuryoYMD(FlexibleDate tekiyoShuryoYMD) {
+    public void setTekiyoShuryoYMD(RString tekiyoShuryoYMD) {
         this.tekiyoShuryoYMD = tekiyoShuryoYMD;
     }
 
@@ -1055,7 +1073,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 負担額
      */
     @CheckForNull
-    public int getFutangaku() {
+    public Decimal getFutangaku() {
         return futangaku;
     }
 
@@ -1064,7 +1082,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param futangaku 負担額
      */
-    public void setFutangaku(int futangaku) {
+    public void setFutangaku(Decimal futangaku) {
         this.futangaku = futangaku;
     }
 
@@ -1074,7 +1092,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 負担額適用開始年月日
      */
     @CheckForNull
-    public FlexibleDate getFutangakuTekiyoKaishiYMD() {
+    public RString getFutangakuTekiyoKaishiYMD() {
         return futangakuTekiyoKaishiYMD;
     }
 
@@ -1083,7 +1101,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param futangakuTekiyoKaishiYMD 負担額適用開始年月日
      */
-    public void setFutangakuTekiyoKaishiYMD(FlexibleDate futangakuTekiyoKaishiYMD) {
+    public void setFutangakuTekiyoKaishiYMD(RString futangakuTekiyoKaishiYMD) {
         this.futangakuTekiyoKaishiYMD = futangakuTekiyoKaishiYMD;
     }
 
@@ -1093,7 +1111,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 負担額適用終了年月日
      */
     @CheckForNull
-    public FlexibleDate getFutangakuTekiyoShuryoYMD() {
+    public RString getFutangakuTekiyoShuryoYMD() {
         return futangakuTekiyoShuryoYMD;
     }
 
@@ -1102,7 +1120,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param futangakuTekiyoShuryoYMD 負担額適用終了年月日
      */
-    public void setFutangakuTekiyoShuryoYMD(FlexibleDate futangakuTekiyoShuryoYMD) {
+    public void setFutangakuTekiyoShuryoYMD(RString futangakuTekiyoShuryoYMD) {
         this.futangakuTekiyoShuryoYMD = futangakuTekiyoShuryoYMD;
     }
 
@@ -1160,7 +1178,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 課税層の特例減額措置対象フラグ
      */
     @CheckForNull
-    public boolean getKaizeisoTokureiGengakuSochiTaishoFlag() {
+    public RString getKaizeisoTokureiGengakuSochiTaishoFlag() {
         return kaizeisoTokureiGengakuSochiTaishoFlag;
     }
 
@@ -1171,7 +1189,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param kaizeisoTokureiGengakuSochiTaishoFlag 課税層の特例減額措置対象フラグ
      */
-    public void setKaizeisoTokureiGengakuSochiTaishoFlag(boolean kaizeisoTokureiGengakuSochiTaishoFlag) {
+    public void setKaizeisoTokureiGengakuSochiTaishoFlag(RString kaizeisoTokureiGengakuSochiTaishoFlag) {
         this.kaizeisoTokureiGengakuSochiTaishoFlag = kaizeisoTokureiGengakuSochiTaishoFlag;
     }
 
@@ -1181,7 +1199,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 食費負担限度額
      */
     @CheckForNull
-    public int getShokuhiFutanGendogaku() {
+    public RString getShokuhiFutanGendogaku() {
         return shokuhiFutanGendogaku;
     }
 
@@ -1190,7 +1208,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param shokuhiFutanGendogaku 食費負担限度額
      */
-    public void setShokuhiFutanGendogaku(int shokuhiFutanGendogaku) {
+    public void setShokuhiFutanGendogaku(RString shokuhiFutanGendogaku) {
         this.shokuhiFutanGendogaku = shokuhiFutanGendogaku;
     }
 
@@ -1200,7 +1218,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 居住費ユニット型個室負担限度額
      */
     @CheckForNull
-    public int getKyojuhiUnitGataKoshitsuFutanGendogaku() {
+    public RString getKyojuhiUnitGataKoshitsuFutanGendogaku() {
         return kyojuhiUnitGataKoshitsuFutanGendogaku;
     }
 
@@ -1209,7 +1227,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param kyojuhiUnitGataKoshitsuFutanGendogaku 居住費ユニット型個室負担限度額
      */
-    public void setKyojuhiUnitGataKoshitsuFutanGendogaku(int kyojuhiUnitGataKoshitsuFutanGendogaku) {
+    public void setKyojuhiUnitGataKoshitsuFutanGendogaku(RString kyojuhiUnitGataKoshitsuFutanGendogaku) {
         this.kyojuhiUnitGataKoshitsuFutanGendogaku = kyojuhiUnitGataKoshitsuFutanGendogaku;
     }
 
@@ -1219,7 +1237,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 居住費ユニット型準個室負担限度額
      */
     @CheckForNull
-    public int getKyojuhiUnitGataJunKoshitsuFutanGendogaku() {
+    public RString getKyojuhiUnitGataJunKoshitsuFutanGendogaku() {
         return kyojuhiUnitGataJunKoshitsuFutanGendogaku;
     }
 
@@ -1228,7 +1246,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param kyojuhiUnitGataJunKoshitsuFutanGendogaku 居住費ユニット型準個室負担限度額
      */
-    public void setKyojuhiUnitGataJunKoshitsuFutanGendogaku(int kyojuhiUnitGataJunKoshitsuFutanGendogaku) {
+    public void setKyojuhiUnitGataJunKoshitsuFutanGendogaku(RString kyojuhiUnitGataJunKoshitsuFutanGendogaku) {
         this.kyojuhiUnitGataJunKoshitsuFutanGendogaku = kyojuhiUnitGataJunKoshitsuFutanGendogaku;
     }
 
@@ -1238,7 +1256,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 居住費従来型個室特養等負担限度額
      */
     @CheckForNull
-    public int getKyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku() {
+    public RString getKyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku() {
         return kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku;
     }
 
@@ -1247,7 +1265,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku 居住費従来型個室特養等負担限度額
      */
-    public void setKyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku(int kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku) {
+    public void setKyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku(RString kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku) {
         this.kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku = kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku;
     }
 
@@ -1257,7 +1275,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 居住費従来型個室老健療養等負担限度額
      */
     @CheckForNull
-    public int getKyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku() {
+    public RString getKyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku() {
         return kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku;
     }
 
@@ -1266,7 +1284,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku 居住費従来型個室老健療養等負担限度額
      */
-    public void setKyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku(int kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku) {
+    public void setKyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku(RString kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku) {
         this.kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku = kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku;
     }
 
@@ -1276,7 +1294,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 居住費多床室負担限度額
      */
     @CheckForNull
-    public int getKyujuhiTashoshitsuFutanGendogaku() {
+    public RString getKyujuhiTashoshitsuFutanGendogaku() {
         return kyujuhiTashoshitsuFutanGendogaku;
     }
 
@@ -1285,7 +1303,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param kyujuhiTashoshitsuFutanGendogaku 居住費多床室負担限度額
      */
-    public void setKyujuhiTashoshitsuFutanGendogaku(int kyujuhiTashoshitsuFutanGendogaku) {
+    public void setKyujuhiTashoshitsuFutanGendogaku(RString kyujuhiTashoshitsuFutanGendogaku) {
         this.kyujuhiTashoshitsuFutanGendogaku = kyujuhiTashoshitsuFutanGendogaku;
     }
 
@@ -1295,7 +1313,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 負担限度額適用開始年月日
      */
     @CheckForNull
-    public FlexibleDate getFutanGendogakuTekiyoKaishiYMD() {
+    public RString getFutanGendogakuTekiyoKaishiYMD() {
         return futanGendogakuTekiyoKaishiYMD;
     }
 
@@ -1304,7 +1322,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param futanGendogakuTekiyoKaishiYMD 負担限度額適用開始年月日
      */
-    public void setFutanGendogakuTekiyoKaishiYMD(FlexibleDate futanGendogakuTekiyoKaishiYMD) {
+    public void setFutanGendogakuTekiyoKaishiYMD(RString futanGendogakuTekiyoKaishiYMD) {
         this.futanGendogakuTekiyoKaishiYMD = futanGendogakuTekiyoKaishiYMD;
     }
 
@@ -1314,7 +1332,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 負担限度額適用終了年月日
      */
     @CheckForNull
-    public FlexibleDate getFutanGendogakuTekiyoShuryoYMD() {
+    public RString getFutanGendogakuTekiyoShuryoYMD() {
         return futanGendogakuTekiyoShuryoYMD;
     }
 
@@ -1323,7 +1341,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param futanGendogakuTekiyoShuryoYMD 負担限度額適用終了年月日
      */
-    public void setFutanGendogakuTekiyoShuryoYMD(FlexibleDate futanGendogakuTekiyoShuryoYMD) {
+    public void setFutanGendogakuTekiyoShuryoYMD(RString futanGendogakuTekiyoShuryoYMD) {
         this.futanGendogakuTekiyoShuryoYMD = futanGendogakuTekiyoShuryoYMD;
     }
 
@@ -1333,7 +1351,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 軽減率
      */
     @CheckForNull
-    public int getKeigenritsu() {
+    public RString getKeigenritsu() {
         return keigenritsu;
     }
 
@@ -1342,7 +1360,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param keigenritsu 軽減率
      */
-    public void setKeigenritsu(int keigenritsu) {
+    public void setKeigenritsu(RString keigenritsu) {
         this.keigenritsu = keigenritsu;
     }
 
@@ -1352,7 +1370,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 軽減率適用開始年月日
      */
     @CheckForNull
-    public FlexibleDate getKeigenritsuTekiyoKaishiYMD() {
+    public RString getKeigenritsuTekiyoKaishiYMD() {
         return keigenritsuTekiyoKaishiYMD;
     }
 
@@ -1361,7 +1379,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param keigenritsuTekiyoKaishiYMD 軽減率適用開始年月日
      */
-    public void setKeigenritsuTekiyoKaishiYMD(FlexibleDate keigenritsuTekiyoKaishiYMD) {
+    public void setKeigenritsuTekiyoKaishiYMD(RString keigenritsuTekiyoKaishiYMD) {
         this.keigenritsuTekiyoKaishiYMD = keigenritsuTekiyoKaishiYMD;
     }
 
@@ -1371,7 +1389,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 軽減率適用終了年月日
      */
     @CheckForNull
-    public FlexibleDate getKeigenritsuTekiyoShuryoYMD() {
+    public RString getKeigenritsuTekiyoShuryoYMD() {
         return keigenritsuTekiyoShuryoYMD;
     }
 
@@ -1380,7 +1398,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param keigenritsuTekiyoShuryoYMD 軽減率適用終了年月日
      */
-    public void setKeigenritsuTekiyoShuryoYMD(FlexibleDate keigenritsuTekiyoShuryoYMD) {
+    public void setKeigenritsuTekiyoShuryoYMD(RString keigenritsuTekiyoShuryoYMD) {
         this.keigenritsuTekiyoShuryoYMD = keigenritsuTekiyoShuryoYMD;
     }
 
@@ -1587,25 +1605,6 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
     }
 
     /**
-     * 送付年月のgetメソッドです。
-     * 
-     * @return 送付年月
-     */
-    @CheckForNull
-    public FlexibleYearMonth getSofuYM() {
-        return sofuYM;
-    }
-
-    /**
-     * 送付年月のsetメソッドです。
-     * 
-     * @param sofuYM 送付年月
-     */
-    public void setSofuYM(FlexibleYearMonth sofuYM) {
-        this.sofuYM = sofuYM;
-    }
-
-    /**
      * 住所地特例対象者区分コードのgetメソッドです。
      * 
      * @return 住所地特例対象者区分コード
@@ -1649,7 +1648,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 住所地特例適用開始日
      */
     @CheckForNull
-    public FlexibleDate getJushochiTokureiTekiyoKaishiYMD() {
+    public RString getJushochiTokureiTekiyoKaishiYMD() {
         return jushochiTokureiTekiyoKaishiYMD;
     }
 
@@ -1658,7 +1657,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param jushochiTokureiTekiyoKaishiYMD 住所地特例適用開始日
      */
-    public void setJushochiTokureiTekiyoKaishiYMD(FlexibleDate jushochiTokureiTekiyoKaishiYMD) {
+    public void setJushochiTokureiTekiyoKaishiYMD(RString jushochiTokureiTekiyoKaishiYMD) {
         this.jushochiTokureiTekiyoKaishiYMD = jushochiTokureiTekiyoKaishiYMD;
     }
 
@@ -1668,7 +1667,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 住所地特例適用終了日
      */
     @CheckForNull
-    public FlexibleDate getJushochiTokureiTekiyoShuryoYMD() {
+    public RString getJushochiTokureiTekiyoShuryoYMD() {
         return jushochiTokureiTekiyoShuryoYMD;
     }
 
@@ -1677,7 +1676,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param jushochiTokureiTekiyoShuryoYMD 住所地特例適用終了日
      */
-    public void setJushochiTokureiTekiyoShuryoYMD(FlexibleDate jushochiTokureiTekiyoShuryoYMD) {
+    public void setJushochiTokureiTekiyoShuryoYMD(RString jushochiTokureiTekiyoShuryoYMD) {
         this.jushochiTokureiTekiyoShuryoYMD = jushochiTokureiTekiyoShuryoYMD;
     }
 
@@ -1687,7 +1686,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 居宅費（新１）負担限度額
      */
     @CheckForNull
-    public int getKyotakuhiShin1FutanGendogaku() {
+    public RString getKyotakuhiShin1FutanGendogaku() {
         return kyotakuhiShin1FutanGendogaku;
     }
 
@@ -1696,7 +1695,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param kyotakuhiShin1FutanGendogaku 居宅費（新１）負担限度額
      */
-    public void setKyotakuhiShin1FutanGendogaku(int kyotakuhiShin1FutanGendogaku) {
+    public void setKyotakuhiShin1FutanGendogaku(RString kyotakuhiShin1FutanGendogaku) {
         this.kyotakuhiShin1FutanGendogaku = kyotakuhiShin1FutanGendogaku;
     }
 
@@ -1706,7 +1705,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 居宅費（新２）負担限度額
      */
     @CheckForNull
-    public int getKyotakuhiShin2FutanGendogaku() {
+    public RString getKyotakuhiShin2FutanGendogaku() {
         return kyotakuhiShin2FutanGendogaku;
     }
 
@@ -1715,7 +1714,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param kyotakuhiShin2FutanGendogaku 居宅費（新２）負担限度額
      */
-    public void setKyotakuhiShin2FutanGendogaku(int kyotakuhiShin2FutanGendogaku) {
+    public void setKyotakuhiShin2FutanGendogaku(RString kyotakuhiShin2FutanGendogaku) {
         this.kyotakuhiShin2FutanGendogaku = kyotakuhiShin2FutanGendogaku;
     }
 
@@ -1725,7 +1724,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 居宅費（新３）負担限度額
      */
     @CheckForNull
-    public int getKyotakuhiShin3FutanGendogaku() {
+    public RString getKyotakuhiShin3FutanGendogaku() {
         return kyotakuhiShin3FutanGendogaku;
     }
 
@@ -1734,7 +1733,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param kyotakuhiShin3FutanGendogaku 居宅費（新３）負担限度額
      */
-    public void setKyotakuhiShin3FutanGendogaku(int kyotakuhiShin3FutanGendogaku) {
+    public void setKyotakuhiShin3FutanGendogaku(RString kyotakuhiShin3FutanGendogaku) {
         this.kyotakuhiShin3FutanGendogaku = kyotakuhiShin3FutanGendogaku;
     }
 
@@ -1744,7 +1743,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 利用者負担割合有効開始日
      */
     @CheckForNull
-    public FlexibleDate getRiyosyaFutanWariaiYukoKaishiYMD() {
+    public RString getRiyosyaFutanWariaiYukoKaishiYMD() {
         return riyosyaFutanWariaiYukoKaishiYMD;
     }
 
@@ -1753,7 +1752,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param riyosyaFutanWariaiYukoKaishiYMD 利用者負担割合有効開始日
      */
-    public void setRiyosyaFutanWariaiYukoKaishiYMD(FlexibleDate riyosyaFutanWariaiYukoKaishiYMD) {
+    public void setRiyosyaFutanWariaiYukoKaishiYMD(RString riyosyaFutanWariaiYukoKaishiYMD) {
         this.riyosyaFutanWariaiYukoKaishiYMD = riyosyaFutanWariaiYukoKaishiYMD;
     }
 
@@ -1763,7 +1762,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @return 利用者負担割合有効終了日
      */
     @CheckForNull
-    public FlexibleDate getRiyosyaFutanWariaiYukoShuryoYMD() {
+    public RString getRiyosyaFutanWariaiYukoShuryoYMD() {
         return riyosyaFutanWariaiYukoShuryoYMD;
     }
 
@@ -1772,8 +1771,69 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * 
      * @param riyosyaFutanWariaiYukoShuryoYMD 利用者負担割合有効終了日
      */
-    public void setRiyosyaFutanWariaiYukoShuryoYMD(FlexibleDate riyosyaFutanWariaiYukoShuryoYMD) {
+    public void setRiyosyaFutanWariaiYukoShuryoYMD(RString riyosyaFutanWariaiYukoShuryoYMD) {
         this.riyosyaFutanWariaiYukoShuryoYMD = riyosyaFutanWariaiYukoShuryoYMD;
+    }
+
+    /**
+     * 訂正区分コードのgetメソッドです。
+     * <br/>
+     * <br/>2：修正、3：削除
+     * 
+     * @return 訂正区分コード
+     */
+    @CheckForNull
+    public RString getTeiseiKubunCode() {
+        return teiseiKubunCode;
+    }
+
+    /**
+     * 訂正区分コードのsetメソッドです。
+     * <br/>
+     * <br/>2：修正、3：削除
+     * 
+     * @param teiseiKubunCode 訂正区分コード
+     */
+    public void setTeiseiKubunCode(RString teiseiKubunCode) {
+        this.teiseiKubunCode = teiseiKubunCode;
+    }
+
+    /**
+     * 訂正年月日のgetメソッドです。
+     * 
+     * @return 訂正年月日
+     */
+    @CheckForNull
+    public FlexibleDate getTeiseiYMD() {
+        return teiseiYMD;
+    }
+
+    /**
+     * 訂正年月日のsetメソッドです。
+     * 
+     * @param teiseiYMD 訂正年月日
+     */
+    public void setTeiseiYMD(FlexibleDate teiseiYMD) {
+        this.teiseiYMD = teiseiYMD;
+    }
+
+    /**
+     * 論理削除フラグのgetメソッドです。
+     * 
+     * @return 論理削除フラグ
+     */
+    @CheckForNull
+    public boolean getLogicalDeletedFlag() {
+        return logicalDeletedFlag;
+    }
+
+    /**
+     * 論理削除フラグのsetメソッドです。
+     * 
+     * @param logicalDeletedFlag 論理削除フラグ
+     */
+    public void setLogicalDeletedFlag(boolean logicalDeletedFlag) {
+        this.logicalDeletedFlag = logicalDeletedFlag;
     }
 
     /**
@@ -1788,16 +1848,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.idoYMD, other.idoYMD)) {
-            return false;
-        }
-        if (!Objects.equals(this.idoKubunCode, other.idoKubunCode)) {
-            return false;
-        }
-        if (!Objects.equals(this.jukyushaIdoJiyu, other.jukyushaIdoJiyu)) {
-            return false;
-        }
-        if (!Objects.equals(this.shoKisaiHokenshaNo, other.shoKisaiHokenshaNo)) {
+        if (!Objects.equals(this.sofuYM, other.sofuYM)) {
             return false;
         }
         if (!Objects.equals(this.hiHokenshaNo, other.hiHokenshaNo)) {
@@ -1814,12 +1865,13 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      */
     @Override
     public void shallowCopy(DbT3001JukyushaIdoRenrakuhyoEntity entity) {
+        this.sofuYM = entity.sofuYM;
+        this.hiHokenshaNo = entity.hiHokenshaNo;
+        this.rirekiNo = entity.rirekiNo;
         this.idoYMD = entity.idoYMD;
         this.idoKubunCode = entity.idoKubunCode;
         this.jukyushaIdoJiyu = entity.jukyushaIdoJiyu;
         this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
-        this.hiHokenshaNo = entity.hiHokenshaNo;
-        this.rirekiNo = entity.rirekiNo;
         this.hiHokenshaNameKana = entity.hiHokenshaNameKana;
         this.umareYMD = entity.umareYMD;
         this.seibetsuCode = entity.seibetsuCode;
@@ -1884,7 +1936,6 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
         this.nijiyoboJigyoYukoKikanKaishiYMD = entity.nijiyoboJigyoYukoKikanKaishiYMD;
         this.nijiyoboJigyoYukoKikanShuryoYMD = entity.nijiyoboJigyoYukoKikanShuryoYMD;
         this.teiseiRenrakuhyoFlag = entity.teiseiRenrakuhyoFlag;
-        this.sofuYM = entity.sofuYM;
         this.jushochiTokureiTaishoshaKubunCode = entity.jushochiTokureiTaishoshaKubunCode;
         this.shisetsuShozaiHokenjaNo = entity.shisetsuShozaiHokenjaNo;
         this.jushochiTokureiTekiyoKaishiYMD = entity.jushochiTokureiTekiyoKaishiYMD;
@@ -1894,6 +1945,9 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
         this.kyotakuhiShin3FutanGendogaku = entity.kyotakuhiShin3FutanGendogaku;
         this.riyosyaFutanWariaiYukoKaishiYMD = entity.riyosyaFutanWariaiYukoKaishiYMD;
         this.riyosyaFutanWariaiYukoShuryoYMD = entity.riyosyaFutanWariaiYukoShuryoYMD;
+        this.teiseiKubunCode = entity.teiseiKubunCode;
+        this.teiseiYMD = entity.teiseiYMD;
+        this.logicalDeletedFlag = entity.logicalDeletedFlag;
     }
 
     /**
@@ -1902,9 +1956,12 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(idoYMD, idoKubunCode, jukyushaIdoJiyu, shoKisaiHokenshaNo, hiHokenshaNo, rirekiNo, hiHokenshaNameKana, umareYMD, seibetsuCode, shikakuShutokuYMD, shikakuSoshitsuYMD, rojinHokenShichosonNo, rojinHokenJukyushaNo, kohiFutanshaNo, koikiRengoHokenshaNo, shinseiShubetsuCode, henkoShinseichuKubunCode, shinseiYMD, minashiYokaigoJotaiKubunCode, yokaigoJotaiKubunCode, ninteiYukoKikankaishiYMD, ninteiYukoKikanShuryoYMD, kyotakuServiceSakuseiKubunCode, kyotakuKaigoShienJigyoshoNo, kyotakuServiceTekiyoKaishiYMD, kyotakuServiceTekiyoShuryoYMD, homonTsushoServiceShikyuGendoKijungaku, homonTsushoServiceJogenKanriTekiyoKaishiYMD, homonTsushoServiceJogenKanriTekiyoShuryoYMD, tankiNyushoServiceShikyuGendoKijungaku, tankinyushoServiceJogenKanriTekiyoKaishiYMD, tankinyushoServiceJogenKanriTekiyoShuryoYMD, kohiFutanJogenGengakuAriFlag, shokanbaraikaKaishiYMD, shokanbaraikaShuryoYMD, kyufuritsuHikisageKaishiYMD, kyufuritsuHikisageShuryoYMD, gemmenShinseichuKubunCode, riyoshaFutanKubunCode, kyufuritsu, tekiyoKaishiYMD, tekiyoShuryoYMD, hyojunFutanKubunCode, futangaku, futangakuTekiyoKaishiYMD, futangakuTekiyoShuryoYMD, tokuteiNyushoshaNinteiShinseichuKubunCode, tokuteiNyushoshaKaigoServiceKubunCode, kaizeisoTokureiGengakuSochiTaishoFlag, shokuhiFutanGendogaku, kyojuhiUnitGataKoshitsuFutanGendogaku, kyojuhiUnitGataJunKoshitsuFutanGendogaku, kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku, kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku, kyujuhiTashoshitsuFutanGendogaku, futanGendogakuTekiyoKaishiYMD, futanGendogakuTekiyoShuryoYMD, keigenritsu, keigenritsuTekiyoKaishiYMD, keigenritsuTekiyoShuryoYMD, shoTakinoKyotakuKaigoRiyozukiRiyoAriFlag, kokiKoureiIryoHokenshaNo, kokikoureiIryoHiHokenshaNo, kokuhoHokenshaNo, kokuhoHiHokenshaNo, kokuhoKojinNo, nijiyoboJigyoKubunCode, nijiyoboJigyoYukoKikanKaishiYMD, nijiyoboJigyoYukoKikanShuryoYMD, teiseiRenrakuhyoFlag, sofuYM, jushochiTokureiTaishoshaKubunCode, shisetsuShozaiHokenjaNo, jushochiTokureiTekiyoKaishiYMD, jushochiTokureiTekiyoShuryoYMD, kyotakuhiShin1FutanGendogaku, kyotakuhiShin2FutanGendogaku, kyotakuhiShin3FutanGendogaku, riyosyaFutanWariaiYukoKaishiYMD, riyosyaFutanWariaiYukoShuryoYMD);
+        return super.toMd5(sofuYM, hiHokenshaNo, rirekiNo, idoYMD, idoKubunCode, jukyushaIdoJiyu, shoKisaiHokenshaNo, hiHokenshaNameKana, umareYMD, seibetsuCode, shikakuShutokuYMD, shikakuSoshitsuYMD, rojinHokenShichosonNo, rojinHokenJukyushaNo, kohiFutanshaNo, koikiRengoHokenshaNo, shinseiShubetsuCode, henkoShinseichuKubunCode, shinseiYMD, minashiYokaigoJotaiKubunCode, yokaigoJotaiKubunCode, ninteiYukoKikankaishiYMD, ninteiYukoKikanShuryoYMD, kyotakuServiceSakuseiKubunCode, kyotakuKaigoShienJigyoshoNo, kyotakuServiceTekiyoKaishiYMD, kyotakuServiceTekiyoShuryoYMD, homonTsushoServiceShikyuGendoKijungaku, homonTsushoServiceJogenKanriTekiyoKaishiYMD, homonTsushoServiceJogenKanriTekiyoShuryoYMD, tankiNyushoServiceShikyuGendoKijungaku, tankinyushoServiceJogenKanriTekiyoKaishiYMD, tankinyushoServiceJogenKanriTekiyoShuryoYMD, kohiFutanJogenGengakuAriFlag, shokanbaraikaKaishiYMD, shokanbaraikaShuryoYMD, kyufuritsuHikisageKaishiYMD, kyufuritsuHikisageShuryoYMD, gemmenShinseichuKubunCode, riyoshaFutanKubunCode, kyufuritsu, tekiyoKaishiYMD, tekiyoShuryoYMD, hyojunFutanKubunCode, futangaku, futangakuTekiyoKaishiYMD, futangakuTekiyoShuryoYMD, tokuteiNyushoshaNinteiShinseichuKubunCode, tokuteiNyushoshaKaigoServiceKubunCode, kaizeisoTokureiGengakuSochiTaishoFlag, shokuhiFutanGendogaku, kyojuhiUnitGataKoshitsuFutanGendogaku, kyojuhiUnitGataJunKoshitsuFutanGendogaku, kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku, kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku, kyujuhiTashoshitsuFutanGendogaku, futanGendogakuTekiyoKaishiYMD, futanGendogakuTekiyoShuryoYMD, keigenritsu, keigenritsuTekiyoKaishiYMD, keigenritsuTekiyoShuryoYMD, shoTakinoKyotakuKaigoRiyozukiRiyoAriFlag, kokiKoureiIryoHokenshaNo, kokikoureiIryoHiHokenshaNo, kokuhoHokenshaNo, kokuhoHiHokenshaNo, kokuhoKojinNo, nijiyoboJigyoKubunCode, nijiyoboJigyoYukoKikanKaishiYMD, nijiyoboJigyoYukoKikanShuryoYMD, teiseiRenrakuhyoFlag, jushochiTokureiTaishoshaKubunCode, shisetsuShozaiHokenjaNo, jushochiTokureiTekiyoKaishiYMD, jushochiTokureiTekiyoShuryoYMD, kyotakuhiShin1FutanGendogaku, kyotakuhiShin2FutanGendogaku, kyotakuhiShin3FutanGendogaku, riyosyaFutanWariaiYukoKaishiYMD, riyosyaFutanWariaiYukoShuryoYMD, teiseiKubunCode, teiseiYMD, logicalDeletedFlag);
     }
 
 // </editor-fold>
+
+
+
 
 }

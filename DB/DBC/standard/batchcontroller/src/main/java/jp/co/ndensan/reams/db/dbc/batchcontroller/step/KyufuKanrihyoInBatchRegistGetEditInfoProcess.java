@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step;
 
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.persistence.mappers.IKyufukanrihyoDataTempTableMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufukanrihyodatatemptable.IKyufukanrihyoDataTempTableMapper;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.ShikibetsuTaishoSearchEntityHolder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;

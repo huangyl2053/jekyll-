@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic;
 /**
  * {@link jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity}のマッパーIFです。
  *
- * @author nXXXX ○○○○
+ * @author n1070 久保裕是
  */
 public interface IDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuMapper {
 

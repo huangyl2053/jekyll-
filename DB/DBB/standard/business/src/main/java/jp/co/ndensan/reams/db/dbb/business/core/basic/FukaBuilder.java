@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -517,7 +517,7 @@ public class FukaBuilder {
     /**
      * 確定介護保険料（年額）を設定します。
      *
-     * @param 確定介護保険料（年額） 確定介護保険料（年額）
+     * @param 確定介護保険料_年額 確定介護保険料（年額）
      * @return {@link FukaBuilder}
      */
     public FukaBuilder set確定介護保険料_年額(Decimal 確定介護保険料_年額) {
@@ -529,7 +529,7 @@ public class FukaBuilder {
     /**
      * 保険料段階（仮算定時）を設定します。
      *
-     * @param 保険料段階_仮算定時） 保険料段階（仮算定時）
+     * @param 保険料段階_仮算定時 保険料段階（仮算定時）
      * @return {@link FukaBuilder}
      */
     public FukaBuilder set保険料段階_仮算定時(RString 保険料段階_仮算定時) {
@@ -619,6 +619,12 @@ public class FukaBuilder {
         return new Fuka(entity, id);
     }
 
+    /**
+     * Fukaの編集を行うビルダークラスをを返します。
+     *
+     * @param createKibetsu 介護期別を管理するクラス
+     * @return Fukaの編集を行うビルダークラス
+     */
     public FukaBuilder setKibetsu(Kibetsu createKibetsu) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

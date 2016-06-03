@@ -12,10 +12,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 構成市町村情報を取得。
+ *
+ * @reamsid_L DBA-0170-020 linghuhang
  */
 public class KoseiShichosonMaster {
 
-    private DbT7051KoseiShichosonMasterEntity koseiShichosonMaster;
+    private DbT7051KoseiShichosonMasterEntity entity;
 
     /**
      * コンストラクタです。
@@ -26,10 +28,10 @@ public class KoseiShichosonMaster {
     /**
      * コンストラクタです。
      *
-     * @param koseiShichosonMaster DbT7051KoseiShichosonMasterEntity
+     * @param entity DbT7051KoseiShichosonMasterEntity
      */
-    public KoseiShichosonMaster(DbT7051KoseiShichosonMasterEntity koseiShichosonMaster) {
-        this.koseiShichosonMaster = koseiShichosonMaster;
+    public KoseiShichosonMaster(DbT7051KoseiShichosonMasterEntity entity) {
+        this.entity = entity;
     }
 
     /**
@@ -38,7 +40,7 @@ public class KoseiShichosonMaster {
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
-        return koseiShichosonMaster.getShichosonCode();
+        return entity.getShichosonCode();
     }
 
     /**
@@ -47,7 +49,7 @@ public class KoseiShichosonMaster {
      * @return 証記載保険者番号
      */
     public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
-        return koseiShichosonMaster.getShoKisaiHokenshaNo();
+        return entity.getShoKisaiHokenshaNo();
     }
 
     /**
@@ -56,6 +58,6 @@ public class KoseiShichosonMaster {
      * @return 市町村名称
      */
     public RString getShichosonMeisho() {
-        return koseiShichosonMaster.getShichosonMeisho();
+        return entity.getShichosonMeisho();
     }
 }

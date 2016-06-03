@@ -11,12 +11,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * HenkoInput のクラスファイル 
- * 
- * @author 自動生成
+ * HenkoInput のクラスファイル
+ *
+ * @reamsid_L DBA-1300-050 chengsanyuan
  */
 public class HenkoInputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -39,8 +39,8 @@ public class HenkoInputDiv extends Panel {
     private RString henkojiShichosonCode;
     @JsonProperty("henkojiHihokenshaNo")
     private RString henkojiHihokenshaNo;
-    @JsonProperty("henkojiShoriDatetime")
-    private RString henkojiShoriDatetime;
+    @JsonProperty("henkojiShikibetsuCode")
+    private RString henkojiShikibetsuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -193,21 +193,21 @@ public class HenkoInputDiv extends Panel {
     }
 
     /*
-     * gethenkojiShoriDatetime
-     * @return henkojiShoriDatetime
+     * gethenkojiShikibetsuCode
+     * @return henkojiShikibetsuCode
      */
-    @JsonProperty("henkojiShoriDatetime")
-    public RString getHenkojiShoriDatetime() {
-        return henkojiShoriDatetime;
+    @JsonProperty("henkojiShikibetsuCode")
+    public RString getHenkojiShikibetsuCode() {
+        return henkojiShikibetsuCode;
     }
 
     /*
-     * sethenkojiShoriDatetime
-     * @param henkojiShoriDatetime henkojiShoriDatetime
+     * sethenkojiShikibetsuCode
+     * @param henkojiShikibetsuCode henkojiShikibetsuCode
      */
-    @JsonProperty("henkojiShoriDatetime")
-    public void setHenkojiShoriDatetime(RString henkojiShoriDatetime) {
-        this.henkojiShoriDatetime = henkojiShoriDatetime;
+    @JsonProperty("henkojiShikibetsuCode")
+    public void setHenkojiShikibetsuCode(RString henkojiShikibetsuCode) {
+        this.henkojiShikibetsuCode = henkojiShikibetsuCode;
     }
 
     /*

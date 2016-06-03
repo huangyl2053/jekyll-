@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 構成市町村のビジネスクラスです。
+ *
+ * @reamsid_L DBA-0010-020 linghuhang
  */
 public class KoseiShichoson {
 
