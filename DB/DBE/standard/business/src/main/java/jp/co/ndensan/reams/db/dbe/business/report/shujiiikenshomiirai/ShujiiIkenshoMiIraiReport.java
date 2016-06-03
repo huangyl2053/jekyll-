@@ -39,7 +39,7 @@ public class ShujiiIkenshoMiIraiReport extends Report<ShujiiIkenshoMiIraiReportS
         }
         if (data.isEmpty()) {
             ShujiiIkenshoMiIraiEntity entity = new ShujiiIkenshoMiIraiEntity();
-            entity.set保険者名(new RString("該当データがありません"));
+            entity.set氏名(new RString("該当データがありません"));
             IShujiiIkenshoMiIraiEditor editor = new ShujiiIkenshoMiIraiEditor(entity, -1);
             IShujiiIkenshoMiIraiBuilder builder = new ShujiiIkenshoMiIraiBuilder(editor);
             reportSourceWriter.writeLine(builder);
