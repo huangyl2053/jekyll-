@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class ShujiiIkenshoMiteishutsuEditor implements IShujiiIkenshoMiteishutsuEditor {
 
-    private final RString 主治医意見書未提出者一覧表 = new RString("主治医意見書未提出者一覧表");
+    private final RString title = new RString("主治医意見書未提出者一覧表");
     private final ShujiiIkenshoMiteishutsuEntity item;
     private final int index;
 
@@ -52,8 +52,9 @@ public class ShujiiIkenshoMiteishutsuEditor implements IShujiiIkenshoMiteishutsu
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
                 fillType(FillType.ZERO).toDateString());
+        hakkoYMD.append(" ");
         hakkoYMD.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
-        source.title = 主治医意見書未提出者一覧表;
+        source.title = title;
         source.shichosonName = item.get保険者名();
         source.printTimeStamp = hakkoYMD.toRString();
         source.listIkemmiteishutsu_1 = getNo(index);
@@ -78,7 +79,7 @@ public class ShujiiIkenshoMiteishutsuEditor implements IShujiiIkenshoMiteishutsu
     }
 
     private RString set性別(RString 性別コード) {
-        RString 性別 = null;
+        RString 性別 = RString.EMPTY;
         if (性別コード != null) {
             性別 = Seibetsu.toValue(item.get性別()).get名称();
         }
@@ -86,7 +87,7 @@ public class ShujiiIkenshoMiteishutsuEditor implements IShujiiIkenshoMiteishutsu
     }
 
     private RString set申請区分(RString 申請区分申請時コード) {
-        RString 申請区分 = null;
+        RString 申請区分 = RString.EMPTY;
         if (申請区分申請時コード != null) {
             申請区分 = NinteiShinseiShinseijiKubunCode.toValue(item.get申請区分()).get名称();
         }

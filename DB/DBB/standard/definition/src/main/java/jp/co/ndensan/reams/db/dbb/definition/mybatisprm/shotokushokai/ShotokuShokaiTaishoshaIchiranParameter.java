@@ -32,8 +32,8 @@ public class ShotokuShokaiTaishoshaIchiranParameter implements IMyBatisParameter
      *
      * @param is住民税減免前後表示 boolean
      * @param 基準年度 RYear
-     * @param 抽出期間FROM
-     * @param 抽出期間TO
+     * @param 抽出期間FROM RString
+     * @param 抽出期間TO RString
      * @param システム日付 RString
      */
     public ShotokuShokaiTaishoshaIchiranParameter(boolean is住民税減免前後表示, RYear 基準年度,
