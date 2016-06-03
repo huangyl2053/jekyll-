@@ -205,16 +205,18 @@ public class KagoKetteiHokenshaInCsvFileRead {
     private void 過誤決定明細一時TBLに登録(FlexibleYearMonth 処理年月, List<KagoKetteiHokenshaInCsvEntity> csvlist) {
         IKagoKetteiHokenshaInCsvFileReadMapper mapper = this.mapperProvider.create(IKagoKetteiHokenshaInCsvFileReadMapper.class);
         int 連番 = INDEX_0;
+        int 履歴番号 = INDEX_0;
         for (int i = INDEX_0; i < csvlist.size(); i++) {
             KagoKetteiHokenshaInCsvEntity csvEntity = csvlist.get(i);
             List<KagoKetteiHokenshaInDataEntity> listDataEntity = csvEntity.getListDataEntity();
             for (int k = INDEX_0; k < listDataEntity.size(); k++) {
+                履歴番号 = 履歴番号 + 1;
                 List<KagoKetteiHokenshaInMeisaiCsvEntity> listMeisaiCsvEntity = listDataEntity.get(k).getListMeisaiCsvEntity();
                 for (int j = INDEX_0; j < listMeisaiCsvEntity.size(); j++) {
                     連番 = 連番 + 1;
                     DbWT3061KagoKetteiMeisaiTempEntity meisaiTempentity = new DbWT3061KagoKetteiMeisaiTempEntity();
                     meisaiTempentity.set取扱年月(new FlexibleYearMonth(listDataEntity.get(k).getHeadCsvEntity().getHdrToriatsukaiYm()));
-                    meisaiTempentity.set履歴番号(連番);
+                    meisaiTempentity.set履歴番号(履歴番号);
                     meisaiTempentity.set連番(連番);
                     if (listMeisaiCsvEntity.get(j).getJigyoshoNo() != null
                             && !listMeisaiCsvEntity.get(j).getJigyoshoNo().isEmpty()) {
