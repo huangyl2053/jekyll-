@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- @reamsid_L DBC-0980-302 surun -->
-<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kagoketteihokenshaincsvfileread.IKagoKetteiHokenshaInMapperCsvFileRead">
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kagoketteihokenshaincsvfileread.IKagoKetteiHokenshaInCsvFileReadMapper">
     <!--過誤決定集計一時テーブルを作成します-->
     <insert id="create過誤決定集計一時TBL">
         CREATE TEMP TABLE "DbWT3060KagoKetteiShukei"

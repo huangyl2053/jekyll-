@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3061KagoKe
  *
  * @reamsid_L DBC-0980-302 surun
  */
-public interface IKagoKetteiHokenshaInMapperCsvFileRead {
+public interface IKagoKetteiHokenshaInCsvFileReadMapper {
 
     /**
      * 過誤決定集計一時TBLを作成する。
