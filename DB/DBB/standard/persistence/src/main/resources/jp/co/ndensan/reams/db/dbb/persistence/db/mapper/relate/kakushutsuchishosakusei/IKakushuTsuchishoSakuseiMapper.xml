@@ -93,7 +93,7 @@
         ON 
             "ShikibetsuTaisho"."shikibetsuCode" = "DbT2002Fuka"."shikibetsuCode"
         INNER JOIN
-            rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','true','true','') AS "Atesaki"
+            rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
         ON 
             "Atesaki"."shikibetsuCode" = "DbT2002Fuka"."shikibetsuCode"
         LEFT JOIN
