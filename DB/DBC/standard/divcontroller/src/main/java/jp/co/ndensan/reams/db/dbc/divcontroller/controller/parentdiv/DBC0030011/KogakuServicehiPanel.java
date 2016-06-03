@@ -62,10 +62,10 @@ public class KogakuServicehiPanel {
      * @param div KogakuServicehiPanelDiv
      * @return 該当者検索画面
      */
-    public ResponseData<KogakuServicehiPanelDiv> onClick_btnSearchHihokensha(KogakuServicehiPanelDiv div) {
-        put指定_被保険者ViewState(div);
-        return ResponseData.of(div).forwardWithEventName(DBC0030011TransitionEventName.該当者検索へ).respond();
-    }
+//    public ResponseData<KogakuServicehiPanelDiv> onClick_btnSearchHihokensha(KogakuServicehiPanelDiv div) {
+//        put指定_被保険者ViewState(div);
+//        return ResponseData.of(div).forwardWithEventName(DBC0030011TransitionEventName.該当者検索へ).respond();
+//    }
 
     /**
      * 検索条件エリアの検索条件のonChange事件です。
@@ -162,7 +162,7 @@ public class KogakuServicehiPanel {
         } else {
             put指定_年月ViewState(div);
         }
-        return ResponseData.of(div).forwardWithEventName(DBC0030011TransitionEventName.連絡票変更).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0030011TransitionEventName.選択).respond();
     }
 
     private void put指定_被保険者ViewState(KogakuServicehiPanelDiv div) {

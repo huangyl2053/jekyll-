@@ -112,7 +112,7 @@ public class NinteiShinseiTodokedesha {
             div.getTxtShimei().setValue(mesho == null ? RString.EMPTY : mesho.value());
             AtenaKanaMeisho kanameisho = shikibetsutaisyo.getPsmEntity().getKanaMeisho();
             div.getTxtKanaShimei().setValue(kanameisho == null ? RString.EMPTY : kanameisho.value());
-            div.getLblHonninKankeiseiMei().setText(shikibetsutaisyo.getPsmEntity().getTsuzukigara());
+//            div.getLblHonninKankeiseiMei().setText(shikibetsutaisyo.getPsmEntity().getTsuzukigara());
             TsuzukigaraCode code = shikibetsutaisyo.getPsmEntity().getTsuzukigaraCode();
             div.getTxtHonninKankeisei().setValue(code == null ? RString.EMPTY : code.value());
             div.getTxtYubinNo().setValue(shikibetsutaisyo.getPsmEntity().getYubinNo());

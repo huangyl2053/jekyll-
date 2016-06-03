@@ -105,7 +105,7 @@ public class KaigoAtenaInfoDiv extends Panel implements IKaigoAtenaInfoDiv {
      */
     @Override
     public AtenaJusho get住所() {
-        return atenaInfo.getShokaiData().getTxtJusho().getDomain();
+        return new AtenaJusho(atenaInfo.getShokaiData().getTxtJusho().getValue());
     }
 
     /**
