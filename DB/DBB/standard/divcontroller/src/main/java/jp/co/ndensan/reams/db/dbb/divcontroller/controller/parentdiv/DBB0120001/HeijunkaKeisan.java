@@ -5,8 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.dbb0120001;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.dbbbt35003.Dbbbt35003FlowParameter;
-import jp.co.ndensan.reams.db.dbb.definition.core.valueobject.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TsuchishoIkkatsuHakkoTempData;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.HeijunkaKeisanDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0120001.HeijunkaKeisanHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0120001.HeijunkaKeisanValidationHandler;
@@ -64,11 +63,9 @@ public class HeijunkaKeisan {
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    public ResponseData<Dbbbt35003FlowParameter> onClick_btnHakko(HeijunkaKeisanDiv div) {
+    public ResponseData<TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter> onClick_btnHakko(HeijunkaKeisanDiv div) {
 
-        Dbbbt35003FlowParameter parameter = new Dbbbt35003FlowParameter();
-        TsuchishoIkkatsuHakkoTempData tempData = getHandler(div).getTempData();
-        parameter.toDbbt35003Parameter(tempData);
+        TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter parameter = getHandler(div).setBatchParameter();
         return ResponseData.of(parameter).respond();
     }
 
