@@ -37,7 +37,7 @@
             TEMP."hdrShoHokenshaNo",
             TEMP."sakuseiYmd",
             TEMP."hdrTorikomiYm"
-        FROM rgdb."DbWT3060KagoKetteiShukeiTemp" AS TEMP
+        FROM  "DbWT3060KagoKetteiShukei" AS TEMP
     </select>
     
     <select id="insert過誤決定明細" parameterType="java.util.Map" fetchSize="500">
@@ -91,8 +91,8 @@
             DbWT3061."tanisu",
             DbWT3061."hokenshaFutangaku"
         
-        FROM rgdb."DbWT3061KagoKetteiMeisaiTemp" AS DbWT3061,
-             rgdb."DbWT0001HihokenshaTemp" AS DbWT0001
+        FROM "DbWT3061KagoKetteiMeisai" AS DbWT3061,
+             "DbWT0001Hihokensha" AS DbWT0001
         WHERE 
             DbWT3061."renban" = DbWT0001."meisaiRenban") AS TEMP
       
