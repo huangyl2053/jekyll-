@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 特徴依頼情報作成状況のビジネスクラスです。
  *
- * @reamsid_L DBB-0660-030 cuilin
+ * @reamsid_L DBB-0660-040 cuilin
  */
 public class TokuchoIraiJohoSakuseiJokyo {
 
