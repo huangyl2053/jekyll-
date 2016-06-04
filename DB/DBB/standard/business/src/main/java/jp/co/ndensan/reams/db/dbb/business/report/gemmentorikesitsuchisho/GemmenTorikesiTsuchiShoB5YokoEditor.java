@@ -50,6 +50,7 @@ public class GemmenTorikesiTsuchiShoB5YokoEditor implements IGemmenTorikesiTsuch
     private final int i;
     private static final CodeShubetsu コード種別 = new CodeShubetsu("0006");
     private static final RString YEAR = new RString("年度");
+    private static final RString RSTRING_0 = new RString("0");
 
     /**
      * コンストラクタです。
@@ -137,15 +138,15 @@ public class GemmenTorikesiTsuchiShoB5YokoEditor implements IGemmenTorikesiTsuch
                     .fillType(FillType.BLANK).toDateString() : RString.EMPTY);
             Decimal 取消減免額 = 減免取消通知書情報.get減免の情報更正後().get取消減免額();
             source.torikeshiGenmenGaku = (取消減免額 != null ? DecimalFormatter
-                    .toコンマ区切りRString(取消減免額, 0) : RString.EMPTY);
+                    .toコンマ区切りRString(取消減免額, 0) : RSTRING_0);
             if (減免取消通知書情報.get賦課の情報更正前() != null) {
                 Decimal 取消前保険料額 = 減免取消通知書情報.get賦課の情報更正前().get確定介護保険料_年額();
                 source.torikeshiMaeHokenryoGaku = (取消前保険料額 != null ? DecimalFormatter
-                        .toコンマ区切りRString(取消前保険料額, 0) : RString.EMPTY);
+                        .toコンマ区切りRString(取消前保険料額, 0) : RSTRING_0);
             }
             Decimal 取消後保険料額 = 減免取消通知書情報.get減免の情報更正後().get確定介護保険料_年額();
             source.torikeshiAtoHokenryoGaku = (取消後保険料額 != null ? DecimalFormatter
-                    .toコンマ区切りRString(取消後保険料額, 0) : RString.EMPTY);
+                    .toコンマ区切りRString(取消後保険料額, 0) : RSTRING_0);
             Code 減免取消種類コード = 減免取消通知書情報.get減免の情報更正後().get減免種類コード();
             RString 取消理由1 = RString.EMPTY;
             if (減免取消種類コード != null) {

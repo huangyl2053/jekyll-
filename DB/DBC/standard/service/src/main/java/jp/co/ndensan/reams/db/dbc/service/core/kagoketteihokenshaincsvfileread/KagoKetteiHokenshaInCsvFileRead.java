@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.hokensha.Hokensha;
 import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
@@ -228,7 +229,7 @@ public class KagoKetteiHokenshaInCsvFileRead {
                     }
                     meisaiTempentity.set公費負担者番号(RString.EMPTY);
                     meisaiTempentity.set公費受給者番号(RString.EMPTY);
-                    meisaiTempentity.set公費証記載保険者番号(null);
+                    meisaiTempentity.set公費証記載保険者番号(ShoKisaiHokenshaNo.EMPTY);
                     meisaiTempentity.setサービス提供年月(new FlexibleYearMonth(listMeisaiCsvEntity.get(j).getServiceTeikyoYM()));
                     if (listMeisaiCsvEntity.get(j).getServiceShuruiCode() != null
                             && !listMeisaiCsvEntity.get(j).getServiceShuruiCode().isEmpty()) {
@@ -273,10 +274,10 @@ public class KagoKetteiHokenshaInCsvFileRead {
         hihokenshaTempentity.setサービス提供年月末日(new FlexibleDate(date));
         hihokenshaTempentity.set被保険者カナ氏名(meisaiCsvEntity.getOrgHihokenshaShimei());
         hihokenshaTempentity.set被保険者氏名(RString.EMPTY);
-        hihokenshaTempentity.set旧市町村コード(null);
-        hihokenshaTempentity.set変換被保険者番号(null);
+        hihokenshaTempentity.set旧市町村コード(LasdecCode.EMPTY);
+        hihokenshaTempentity.set変換被保険者番号(HihokenshaNo.EMPTY);
         hihokenshaTempentity.set登録被保険者番号(new HihokenshaNo(meisaiCsvEntity.getOrgHihokenshaNo()));
-        hihokenshaTempentity.set市町村コード(null);
+        hihokenshaTempentity.set市町村コード(LasdecCode.EMPTY);
         hihokenshaTempentity.set管内管外区分(RString.EMPTY);
         hihokenshaTempentity.set郵便番号(RString.EMPTY);
         hihokenshaTempentity.set町域コード(RString.EMPTY);

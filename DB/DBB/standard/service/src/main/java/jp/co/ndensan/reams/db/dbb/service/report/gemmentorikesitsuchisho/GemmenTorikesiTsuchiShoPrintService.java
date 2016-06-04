@@ -239,12 +239,12 @@ public class GemmenTorikesiTsuchiShoPrintService {
             }
 
             表示コード = researcher.create表示コード情報(減免取消通知書情報.get帳票制御共通().toEntity(),
-                    住所 != null ? 住所.get町域コード().value() : RString.EMPTY,
-                    行政区画 != null ? 行政区画.getGyoseiku().getコード().value() : RString.EMPTY,
-                    行政区画 != null ? 行政区画.getChiku1().getコード().value() : RString.EMPTY,
-                    行政区画 != null ? 行政区画.getChiku2().getコード().value() : RString.EMPTY,
-                    行政区画 != null ? 行政区画.getChiku3().getコード().value() : RString.EMPTY,
-                    減免取消通知書情報.get納組情報() != null
+                    (住所 != null && 住所.get町域コード() != null) ? 住所.get町域コード().value() : RString.EMPTY,
+                    (行政区画 != null && 行政区画.getGyoseiku() != null) ? 行政区画.getGyoseiku().getコード().value() : RString.EMPTY,
+                    (行政区画 != null && 行政区画.getChiku1() != null) ? 行政区画.getChiku1().getコード().value() : RString.EMPTY,
+                    (行政区画 != null && 行政区画.getChiku2() != null) ? 行政区画.getChiku2().getコード().value() : RString.EMPTY,
+                    (行政区画 != null && 行政区画.getChiku3() != null) ? 行政区画.getChiku3().getコード().value() : RString.EMPTY,
+                    (減免取消通知書情報.get納組情報() != null && 減免取消通知書情報.get納組情報().getNokumi() != null)
                     ? 減免取消通知書情報.get納組情報().getNokumi().getNokumiCode() : RString.EMPTY);
         }
         return 表示コード;
@@ -261,11 +261,13 @@ public class GemmenTorikesiTsuchiShoPrintService {
         KitsukiList 普徴期月リスト = fuchoKiUtil.get期月リスト();
         for (int index = INDEX_ONE; index <= INDEX_FOURTEEN; index++) {
             Kitsuki 期月普徴 = 普徴期月リスト.get期の最初月(index);
-            if (FuchokiJohoTsukiShoriKubun.随時.getName().equals(期月普徴.get月処理区分().getName())
-                    || FuchokiJohoTsukiShoriKubun.現年随時.getName().equals(期月普徴.get月処理区分().getName())) {
-                随時リスト.add(FuchokiJohoTsukiShoriKubun.随時.getName());
-            } else {
-                随時リスト.add(RString.EMPTY);
+            if (期月普徴.get月処理区分() != null) {
+                if (FuchokiJohoTsukiShoriKubun.随時.getName().equals(期月普徴.get月処理区分().getName())
+                        || FuchokiJohoTsukiShoriKubun.現年随時.getName().equals(期月普徴.get月処理区分().getName())) {
+                    随時リスト.add(FuchokiJohoTsukiShoriKubun.随時.getName());
+                } else {
+                    随時リスト.add(RString.EMPTY);
+                }
             }
         }
         return 随時リスト;
