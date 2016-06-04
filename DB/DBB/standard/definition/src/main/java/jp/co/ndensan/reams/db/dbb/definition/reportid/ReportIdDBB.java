@@ -17,6 +17,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBB {
 
     /**
+     * 所得照会票【Ａ４横（標準版）】
+     */
+    DBB100001(new ReportId("DBB100001_ShotokuShokaihyoA4Yoko"), new RString("所得照会票【Ａ４横（標準版）】")),
+    /**
+     * 所得照会票【Ａ４縦】
+     */
+    DBB100002(new ReportId("DBB100002_ShotokuShokaihyoA4Tate"), new RString("所得照会票【Ａ４縦】")),
+    /**
      * 保険料納入通知書（仮算定）【コンビニ期毎タイプ（連帳）】
      */
     DBB100029(new ReportId("DBB100029_KarisanteiNonyuTsuchishoCVSKigotoRencho"),
