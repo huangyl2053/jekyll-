@@ -101,7 +101,7 @@
     
     <!--過誤決定集計一時テーブルに登録します-->
     <insert id="過誤決定集計一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3060KagoKetteiShukeiTempEntity">
-        INSERT INTO rgdb."DbWT3060KagoKetteiShukeiTemp" 
+        INSERT INTO "DbWT3060KagoKetteiShukei"
         VALUES 
         (
         #{取扱年月},
@@ -125,7 +125,7 @@
     
     <!--過誤決定明細一時テーブルに登録します-->
     <insert id="過誤決定明細一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3061KagoKetteiMeisaiTempEntity">
-        INSERT INTO rgdb."DbWT3061KagoKetteiMeisaiTemp"
+        INSERT INTO "DbWT3061KagoKetteiMeisai"
         VALUES 
         (
         #{取扱年月},
@@ -148,7 +148,7 @@
     
     <!--被保険者一時テーブルに登録します-->
     <insert id="被保険者一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity">
-        INSERT INTO rgdb."DbWT0001HihokenshaTemp"
+        INSERT INTO "DbWT0001Hihokensha"
         VALUES 
         (
         #{連番},
@@ -183,7 +183,7 @@
     
     <!--処理結果リスト一時TBLに登録します-->
     <insert id="処理結果リスト一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity">
-        INSERT INTO rgdb."DbWT0002KokuhorenTorikomiErrorTemp"
+        INSERT INTO "DbWT0002KokuhorenTorikomiError"
         VALUES 
         (
         #{エラー区分},
