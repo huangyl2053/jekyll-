@@ -89,6 +89,7 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
             editor指定事業者_住所地特例対象施設_適用除外施設(entity, csvEntity, parameter);
         }
         editor計画(entity, csvEntity, parameter);
+        editor受給(entity, csvEntity, parameter);
         return csvEntity;
     }
 
@@ -530,10 +531,14 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
         }
         csvEntity.set計画事業者番号(isNull(entity.getDbT3006計画事業者番号())
                 ? RString.EMPTY : entity.getDbT3006計画事業者番号().value());
-        csvEntity.set計画事業者名(isNull(entity.getDbT7060事業者名称())
-                ? RString.EMPTY : entity.getDbT7060事業者名称().value());
-        csvEntity.set計画事業者カナ(isNull(entity.getDbT7060事業者名称カナ())
-                ? RString.EMPTY : entity.getDbT7060事業者名称カナ().value());
+        csvEntity.set計画事業者名(
+                isNull(entity.getDbT7060_Keikaku事業者名称())
+                ? RString.EMPTY
+                : entity.getDbT7060_Keikaku事業者名称().value());
+        csvEntity.set計画事業者カナ(
+                isNull(entity.getDbT7060_Keikaku事業者カナ名称())
+                ? RString.EMPTY
+                : entity.getDbT7060_Keikaku事業者カナ名称().value());
         csvEntity.set計画管理者名(isNull(entity.getDbT7062代表者名())
                 ? RString.EMPTY : entity.getDbT7062代表者名().value());
         csvEntity.set計画管理者カナ(isNull(entity.getDbT7062代表者名カナ())
@@ -550,8 +555,16 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
                 ? RString.EMPTY : entity.getDbT3007変更理由());
         csvEntity.set委託先計画事業者番号(isNull(entity.getDbT3006委託先事業者番号())
                 ? RString.EMPTY : entity.getDbT3006委託先事業者番号().value());
-        csvEntity.set委託先計画事業者名(isNull(entity.getDbT7060事業者名称())
-                ? RString.EMPTY : entity.getDbT7060事業者名称().value());
+
+    }
+
+    private void editor受給(HanyoListKyotakuServiceKeikakuEntity entity,
+            HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
+
+        csvEntity.set委託先計画事業者名(
+                isNull(entity.getDbT7060_Itaku事業者名称())
+                ? RString.EMPTY
+                : entity.getDbT7060_Itaku事業者名称().value());
         csvEntity.set受給申請事由(isNull(entity.getDbV4001受給申請事由())
                 ? RString.EMPTY : entity.getDbV4001受給申請事由().value());
         csvEntity.set受給申請日(dataToRString(entity.getDbV4001受給申請年月日(), parameter));

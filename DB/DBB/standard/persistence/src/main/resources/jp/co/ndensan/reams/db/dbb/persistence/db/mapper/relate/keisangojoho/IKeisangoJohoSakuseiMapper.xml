@@ -65,7 +65,7 @@
         "db2002Fuka"."fuSaishutsuKampuGaku"
     </sql>
     
-    <resultMap id="ResultMap_FukaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity" autoMapping="true">
+    <resultMap id="ResultMap_FukaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity" autoMapping="true">
         <result property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="tsuchishoNo" column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
@@ -127,7 +127,7 @@
     
     <resultMap id="resultMap_getKeisangoJohoSakusei" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.KeisangoJohoSakuseiRelateEntity" autoMapping="true">
         <association property="計算中間Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.ResultMap_KeisanTyukanTempEntity"/>
-        <association property="介護期別Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
+        <association property="介護期別Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
         <association property="調定共通介護継承Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
         <association property="収入情報取得PSMEntity" resultMap="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt702FindTotalShunyuFunctionMapper.totalShunyuResult"/>
     </resultMap>
@@ -151,7 +151,7 @@
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.allColumns_KeisanTyukanTemp"/>,
-            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>
         FROM
             "KeisanTyukanTemp" AS "KeisanTyukanTemp"
@@ -181,7 +181,7 @@
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.allColumns_KeisanTyukanTemp"/>,
-            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
             <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt702FindTotalShunyuFunctionMapper.columns_TotalShunyu"/>
         FROM
             "KeisanTyukanTemp" AS "KeisanTyukanTemp"

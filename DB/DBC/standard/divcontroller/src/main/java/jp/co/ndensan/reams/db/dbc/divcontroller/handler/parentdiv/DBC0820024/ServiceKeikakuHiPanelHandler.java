@@ -209,6 +209,27 @@ public class ServiceKeikakuHiPanelHandler {
     }
 
     /**
+     * 「確定する」ボタンを押下した際に実行します。合計の値の設定
+     */
+    public void set合計() {
+        List<dgdYichiran_Row> dataSource = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getDataSource();
+        Decimal 単位合計 = Decimal.ZERO;
+        // TODO ramlファイルの修正は許可されない、
+//        Decimal 請求額合計 = Decimal.ZERO;
+        for (dgdYichiran_Row row : dataSource) {
+            if (RowState.Deleted.equals(row.getRowState())) {
+                continue;
+            }
+            if (row.getDefaultDataName4().getValue() != null) {
+                単位合計 = 単位合計.add(row.getDefaultDataName4().getValue());
+            }
+            // TODO ramlファイルの修正は許可されない、
+//            if ()
+        }
+        div.getPanelServiceKeikakuhiUp().getTxtGokeiTanyi().setValue(単位合計);
+    }
+
+    /**
      * グリッドの修正、追加button Handlerのsetです。
      */
     private void set修正_追加() {

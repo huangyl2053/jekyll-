@@ -7,20 +7,39 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.Chosa
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoprint.IkenshoPrintParameterModel;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrintDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrintHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.PrintValidationHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.dgNinteiChosa_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.dgShujiiIkensho_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJohoBuilder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJohoIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJohoBuilder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJohoIdentifier;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ShujiiIkenshoIraiJohoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -116,6 +135,27 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
     }
 
     /**
+     * 選択された帳票を発行するボタンを押すバリデーションチェック処理です。
+     *
+     * @param div ChosaIraishoAndChosahyoAndIkenshoPrintDiv
+     * @return ResponseData<SourceDataCollection>
+     */
+    public ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv> onClick_btnPrintValidation(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validate();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+        if (new RString(DbQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 選択された帳票を発行するボタンを押す処理です。
      *
      * @param div ChosaIraishoAndChosahyoAndIkenshoPrintDiv
@@ -127,7 +167,104 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             printData(div, reportManager);
             response.data = reportManager.publish();
         }
+        updateData(div);
         return response;
+    }
+
+    private void updateData(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
+        IkenshoPrintParameterModel model = DataPassingConverter.deserialize(div.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
+        if (GamenSeniKbn.認定調査依頼.equals(model.get遷移元画面区分())) {
+            List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
+
+            for (dgNinteiChosa_Row row : selectedItems) {
+                update認定調査依頼情報(div, row);
+            }
+        }
+        if (GamenSeniKbn.主治医意見書依頼.equals(model.get遷移元画面区分())) {
+            List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
+            for (dgShujiiIkensho_Row row : selectedItems) {
+                update主治医意見書依頼情報(div, row);
+            }
+        }
+    }
+
+    private void update主治医意見書依頼情報(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, dgShujiiIkensho_Row row) {
+        Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> models = ViewStateHolder.get(ViewStateKeys.主治医意見書依頼情報, Models.class);
+        ShujiiIkenshoIraiJohoIdentifier identifier = new ShujiiIkenshoIraiJohoIdentifier(
+                new ShinseishoKanriNo(row.getShinseishoKanriNo()),
+                Integer.parseInt(row.getRirekiNo().toString()));
+
+        ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = models.get(identifier);
+        ShujiiIkenshoIraiJohoBuilder shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJoho.createBuilderForEdit();
+        RString radTeishutsuKigen = div.getRadTeishutsuKigen().getSelectedKey();
+        RDate date = RDate.getNowDate();
+        RString 期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, date, SubGyomuCode.DBE認定支援);
+        int 作成期限日数
+                = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数, date, SubGyomuCode.DBE認定支援).toString());
+        FlexibleDate 作成期限年月日 = null;
+        if (CONFIGVALUE1.equals(期限設定方法)) {
+            if (KEY0.equals(radTeishutsuKigen)) {
+                FlexibleDate 依頼年月日 = shujiiIkenshoIraiJoho.get主治医意見書作成依頼年月日();
+                作成期限年月日 = 依頼年月日.plusDay(作成期限日数);
+            } else if (KEY1.equals(radTeishutsuKigen)) {
+                作成期限年月日 = FlexibleDate.EMPTY;
+            } else if (KEY2.equals(radTeishutsuKigen)) {
+                RDate 共通日 = div.getTxtKyotsuDay().getValue();
+                作成期限年月日
+                        = (共通日 == null ? FlexibleDate.EMPTY : new FlexibleDate(共通日.plusDay(作成期限日数).toDateString()));
+            }
+        } else if (CONFIGVALUE2.equals(期限設定方法)) {
+            作成期限年月日 = new FlexibleDate(row.getNinteiShinseibi()).plusDay(作成期限日数);
+        }
+        shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set主治医意見書作成期限年月日(作成期限年月日);
+        FlexibleDate システム日付 = FlexibleDate.getNowDate();
+        if (!div.getChkInsatsuIkensho().getSelectedKeys().isEmpty()) {
+            shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set依頼書出力年月日(システム日付);
+        }
+        List<RString> selectedKeys = div.getChkIkenshoSakuseiIchiran().getSelectedKeys();
+        if (selectedKeys.contains(KEY0) || selectedKeys.contains(KEY1)) {
+            shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set意見書出力年月日(システム日付);
+        }
+        new ShujiiIkenshoIraiJohoManager().save主治医意見書作成依頼情報(shujiiIkenshoIraiJohoBuilder.build().modifiedModel());
+    }
+
+    private void update認定調査依頼情報(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, dgNinteiChosa_Row row) {
+        NinteichosaIraiJohoIdentifier identifier = new NinteichosaIraiJohoIdentifier(
+                new ShinseishoKanriNo(row.getShinseishoKanriNo()),
+                Integer.parseInt(row.getRirekiNo().toString()));
+        Models<NinteichosaIraiJohoIdentifier, NinteichosaIraiJoho> models = ViewStateHolder.get(ViewStateKeys.認定調査依頼情報, Models.class);
+        NinteichosaIraiJoho ninteichosaIraiJoho = models.get(identifier);
+        NinteichosaIraiJohoBuilder ninteichosaIraiJohoBuilder = ninteichosaIraiJoho.createBuilderForEdit();
+        RString radTeishutsuKigen = div.getRadTeishutsuKigen().getSelectedKey();
+        RDate date = RDate.getNowDate();
+        RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, date, SubGyomuCode.DBE認定支援);
+        int 認定調査作成期限日数
+                = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, date, SubGyomuCode.DBE認定支援).toString());
+        FlexibleDate 認定調査期限年月日 = null;
+        if (CONFIGVALUE1.equals(認定調査期限設定方法)) {
+            if (KEY0.equals(radTeishutsuKigen)) {
+                FlexibleDate 認定調査依頼年月日 = ninteichosaIraiJoho.get認定調査依頼年月日();
+                認定調査期限年月日 = 認定調査依頼年月日.plusDay(認定調査作成期限日数);
+            } else if (KEY1.equals(radTeishutsuKigen)) {
+                認定調査期限年月日 = FlexibleDate.EMPTY;
+            } else if (KEY2.equals(radTeishutsuKigen)) {
+                RDate 共通日 = div.getTxtKyotsuDay().getValue();
+                認定調査期限年月日
+                        = (共通日 == null ? FlexibleDate.EMPTY : new FlexibleDate(共通日.plusDay(認定調査作成期限日数).toDateString()));
+            }
+        } else if (CONFIGVALUE2.equals(認定調査期限設定方法)) {
+            認定調査期限年月日 = new FlexibleDate(row.getNinteiShinseibi()).plusDay(認定調査作成期限日数);
+        }
+        ninteichosaIraiJohoBuilder = ninteichosaIraiJohoBuilder.set認定調査期限年月日(認定調査期限年月日);
+        FlexibleDate システム日付 = FlexibleDate.getNowDate();
+        if (!div.getChk().getSelectedKeys().isEmpty()) {
+            ninteichosaIraiJohoBuilder = ninteichosaIraiJohoBuilder.set依頼書出力年月日(システム日付);
+        }
+        if (!div.getChkChosahyo().getSelectedKeys().isEmpty()
+                || !div.getChkOcrChosahyo().getSelectedKeys().isEmpty()) {
+            ninteichosaIraiJohoBuilder = ninteichosaIraiJohoBuilder.set調査票等出力年月日(システム日付);
+        }
+        NinteichosaIraiJohoManager.createInstance().save認定調査依頼情報(ninteichosaIraiJohoBuilder.build().modifiedModel());
     }
 
     private void printData(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, ReportManager reportManager) {
@@ -137,7 +274,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             printService.print要介護認定調査依頼書(getHandler(div).create認定調査依頼書印刷用パラメータ());
         }
         if (chk.contains(KEY1)) {
-            printService.print意見書作成依頼一覧表(getHandler(div).create意見書作成依頼一覧表_パラメータ());
+            printService.print認定調査依頼一覧表(getHandler(div).create認定調査依頼一覧表印刷用パラメータ());
         }
         List<RString> chkChosahyo = div.getChkChosahyo().getSelectedKeys();
         if (chkChosahyo.contains(KEY0)) {
@@ -168,25 +305,25 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         }
         List<RString> chkInsatsuIkensho = div.getChkInsatsuIkensho().getSelectedKeys();
         if (chkInsatsuIkensho.contains(KEY0)) {
-            printService.print意見書作成依頼書(null);
+            printService.print意見書作成依頼書(getHandler(div).create意見書作成依頼書_パラメータ());
         }
         if (chkInsatsuIkensho.contains(KEY1)) {
-            printService.print意見書作成依頼一覧表(null);
+            printService.print意見書作成依頼一覧表(getHandler(div).create意見書作成依頼一覧表_パラメータ());
         }
-//        List<RString> ichiran = div.getChkIkenshoSakuseiIchiran().getSelectedKeys();
+        List<RString> ichiran = div.getChkIkenshoSakuseiIchiran().getSelectedKeys();
 //        if (ichiran.contains(KEY0)) {
 //            // printService.print意見書作成依頼書(null);
 //        }
 //        if (ichiran.contains(KEY1)) {
 //            // printService.print意見書作成依頼書(null);
 //        }
-//        if (ichiran.contains(KEY2)) {
-//            // printService.print意見書作成依頼書(null);
-//        }
-//        List<RString> seikyusho = div.getChkIkenshoSakuseiryoSeikyusho().getSelectedKeys();
-//        if (seikyusho.contains(KEY0)) {
-//            // printService.print意見書作成依頼書(null);
-//        }
+        if (ichiran.contains(KEY2)) {
+            printService.print主治医意見書作成料請求書(getHandler(div).create主治医意見書作成料請求書_パラメータ());
+        }
+        List<RString> seikyusho = div.getChkIkenshoSakuseiryoSeikyusho().getSelectedKeys();
+        if (seikyusho.contains(KEY0)) {
+            printService.print介護保険診断命令書(getHandler(div).create介護保険診断命令書_パラメータ());
+        }
     }
 
     private void call認定調査差異チェック表(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {
@@ -392,5 +529,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
 
     private ChosaIraishoAndChosahyoAndIkenshoPrintHandler getHandler(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
         return new ChosaIraishoAndChosahyoAndIkenshoPrintHandler(div);
+    }
+
+    private PrintValidationHandler getValidationHandler(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
+        return new PrintValidationHandler(div);
     }
 }

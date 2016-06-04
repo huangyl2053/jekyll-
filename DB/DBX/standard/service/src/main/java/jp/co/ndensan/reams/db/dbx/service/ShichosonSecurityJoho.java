@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ChohyoKyotsuJus
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DousaKanren;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.RojinHokenJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
@@ -72,12 +73,23 @@ public final class ShichosonSecurityJoho {
     }
 
     /**
-     * 市町村セキュリティ情報を取得する
+     * 市町村セキュリティ情報を取得する(画面用)
      *
      * @param 業務分類 業務分類
      * @return 市町村セキュリティ情報
      */
     public static ShichosonSecurityJoho getShichosonSecurityJoho(GyomuBunrui 業務分類) {
+        return getShichosonSecurityJoho(業務分類, null);
+    }
+
+    /**
+     * 市町村セキュリティ情報を取得する(Batch用)
+     *
+     * @param 業務分類 業務分類
+     * @param loginUserId 画面からのloginUserId
+     * @return 市町村セキュリティ情報
+     */
+    public static ShichosonSecurityJoho getShichosonSecurityJoho(GyomuBunrui 業務分類, RString loginUserId) {
         requireNonNull(業務分類, UrErrorMessages.対象データなし.getMessage().toString());
         介護導入形態Dac = InstanceProvider.create(DbT7908KaigoDonyuKeitaiDac.class);
         構成市町村マスタDac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
@@ -86,7 +98,7 @@ public final class ShichosonSecurityJoho {
             return get未導入市町村セキュリティ情報();
         } else {
             DbT7908KaigoDonyuKeitaiEntity 介護導入形態 = entitys.get(0);
-            return get導入済市町村セキュリティ情報(介護導入形態);
+            return get導入済市町村セキュリティ情報(介護導入形態, loginUserId);
         }
     }
 
@@ -160,7 +172,7 @@ public final class ShichosonSecurityJoho {
         return 市町村セキュリティ情報;
     }
 
-    private static ShichosonSecurityJoho get導入済市町村セキュリティ情報(DbT7908KaigoDonyuKeitaiEntity 介護導入形態) {
+    private static ShichosonSecurityJoho get導入済市町村セキュリティ情報(DbT7908KaigoDonyuKeitaiEntity 介護導入形態, RString loginUserId) {
         ShichosonSecurityJoho 市町村セキュリティ情報 = new ShichosonSecurityJoho();
         市町村セキュリティ情報.set介護導入区分(導入済);
         if (new Code("120").equals(介護導入形態.getDonyuKeitaiCode())
@@ -170,7 +182,8 @@ public final class ShichosonSecurityJoho {
             converterKanriJohoToShichosonSecurityJoho(市町村セキュリティ情報, kanriJoho);
         } else if (new Code("111").equals(介護導入形態.getDonyuKeitaiCode())
                 || new Code("211").equals(介護導入形態.getDonyuKeitaiCode())) {
-            RString 市町村識別ID = getShichosonShikibetsuId(UrControlDataFactory.createInstance().getLoginInfo().getUserId()).get(0).getItemId();
+            RString 市町村識別ID = getShichosonShikibetsuId(
+                    ObjectUtil.defaultIfNull(loginUserId, UrControlDataFactory.createInstance().getLoginInfo().getUserId())).get(0).getItemId();
             if (市町村識別ID_DEFAULT.equals(市町村識別ID)) {
                 KanriJoho kanriJoho = getKanriJoho(介護導入形態);
                 converterKanriJohoToShichosonSecurityJoho(市町村セキュリティ情報, kanriJoho);

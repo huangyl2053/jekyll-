@@ -8,8 +8,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0030011;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.KogakuServicehiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.SearchKogakuHihokenshaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.SearchYMDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 「該当者を検索する」ボタンを押下時の入力チェックSpecです。
@@ -24,17 +27,42 @@ public enum KogakuServicehiPanelSpec implements IPredicate<KogakuServicehiPanelD
     被保険者を指定入力チェック {
                 @Override
                 public boolean apply(KogakuServicehiPanelDiv div) {
-                    SearchKogakuHihokenshaDiv panel = div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha();
-                    if (panel.getTxtHihoNo().getValue() != null && !panel.getTxtHihoNo().getValue().isEmpty()) {
+                    RString 被保番号;
+                    RDate 提供年月From;
+                    RDate 提供年月To;
+                    RDate 申請年月From;
+                    RDate 申請年月To;
+                    RDate 決定年月From;
+                    RDate 決定年月To;
+                    RString 画面フラグ = ViewStateHolder.get(ViewStateKeys.画面フラグ, RString.class);
+                    if (new RString("対象者検索").equals(画面フラグ)) {
+                        SearchKogakuHihokenshaDiv panel = div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha();
+                        被保番号 = panel.getTxtHihoNo().getValue();
+                        提供年月From = panel.getTxtTeikyoYMRange().getFromValue();
+                        提供年月To = panel.getTxtTeikyoYMRange().getToValue();
+                        申請年月From = panel.getTxtShinseiYMRange().getFromValue();
+                        申請年月To = panel.getTxtShinseiYMRange().getToValue();
+                        決定年月From = panel.getTxtKetteiYMRange().getFromValue();
+                        決定年月To = panel.getTxtKetteiYMRange().getToValue();
+                    } else {
+                        被保番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+                        提供年月From = ViewStateHolder.get(ViewStateKeys.提供年月From, RDate.class);
+                        提供年月To = ViewStateHolder.get(ViewStateKeys.提供年月To, RDate.class);
+                        申請年月From = ViewStateHolder.get(ViewStateKeys.申請年月From, RDate.class);
+                        申請年月To = ViewStateHolder.get(ViewStateKeys.申請年月To, RDate.class);
+                        決定年月From = ViewStateHolder.get(ViewStateKeys.決定年月From, RDate.class);
+                        決定年月To = ViewStateHolder.get(ViewStateKeys.決定年月To, RDate.class);
+                    }
+                    if (被保番号 != null && !被保番号.isEmpty()) {
                         return true;
                     }
-                    if (panel.getTxtTeikyoYMRange().getFromValue() != null || panel.getTxtTeikyoYMRange().getToValue() != null) {
+                    if (提供年月From != null || 提供年月To != null) {
                         return true;
                     }
-                    if (panel.getTxtShinseiYMRange().getFromValue() != null || panel.getTxtShinseiYMRange().getToValue() != null) {
+                    if (申請年月From != null || 申請年月To != null) {
                         return true;
                     }
-                    return panel.getTxtKetteiYMRange().getFromValue() != null || panel.getTxtKetteiYMRange().getToValue() != null;
+                    return 決定年月From != null || 決定年月To != null;
                 }
             },
     /**
@@ -85,8 +113,21 @@ public enum KogakuServicehiPanelSpec implements IPredicate<KogakuServicehiPanelD
     年月を指定入力チェック {
                 @Override
                 public boolean apply(KogakuServicehiPanelDiv div) {
-                    SearchYMDiv panel = div.getSearchKogakuServicehiPanel().getSearchYM();
-                    return !(panel.getTxtTeikyoYM().getValue() == null && panel.getTxtShinseiYM() == null && panel.getTxtKetteiYM() == null);
+                    RDate 提供年月;
+                    RDate 申請年月;
+                    RDate 決定年月;
+                    RString 画面フラグ = ViewStateHolder.get(ViewStateKeys.画面フラグ, RString.class);
+                    if (new RString("対象者検索").equals(画面フラグ)) {
+                        SearchYMDiv panel = div.getSearchKogakuServicehiPanel().getSearchYM();
+                        提供年月 = panel.getTxtTeikyoYM().getValue();
+                        申請年月 = panel.getTxtShinseiYM().getValue();
+                        決定年月 = panel.getTxtKetteiYM().getValue();
+                    } else {
+                        提供年月 = ViewStateHolder.get(ViewStateKeys.提供年月, RDate.class);
+                        申請年月 = ViewStateHolder.get(ViewStateKeys.申請年月, RDate.class);
+                        決定年月 = ViewStateHolder.get(ViewStateKeys.決定年月, RDate.class);
+                    }
+                    return !(提供年月 == null && 申請年月 == null && 決定年月 == null);
                 }
             };
 }

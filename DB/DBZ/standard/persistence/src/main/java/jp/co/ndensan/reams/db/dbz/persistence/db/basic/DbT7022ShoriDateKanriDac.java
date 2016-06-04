@@ -62,6 +62,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     private static final RString 年度内連番_0 = new RString("0000");
     private static final RString 年度内連番_1 = new RString("0001");
     private static final RString 年度内連番_2 = new RString("0002");
+    private static final RString 処理枝番 = new RString("0001");
 
     /**
      * 主キーで処理日付管理マスタを取得します。
@@ -231,7 +232,6 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(shoriEdaban, 処理枝番),
                                 eq(nendo, 年度),
                                 eq(nendoNaiRenban, 年度内連番))).
-                order(by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
 
@@ -970,5 +970,132 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                         new OrderBy(nendoNaiRenban, Order.DESC, NullsOrder.LAST)).
                 toObject(DbT7022ShoriDateKanriEntity.class);
 
+    }
+
+    /**
+     * 処理日付管理マスタ.最新調定日時を取得します。
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 処理名 RString
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity selectMax基準日(FlexibleYear 調定年度, RString 処理名) throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(max(kijunTimestamp)).
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(shoriEdaban, 年度内連番_1),
+                                eq(nendo, 調定年度),
+                                eq(shoriName, 処理名))).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから連携（当初）所得情報取得します。
+     *
+     * @param 年度 FlexibleYear
+     * @param 市町村識別ID LasdecCode
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select処理日付管理マスタ_当初所得情報抽出(FlexibleYear 年度, LasdecCode 市町村識別ID) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(shoriName, ShoriName.当初所得引出.get名称()),
+                                eq(shoriEdaban, 処理枝番),
+                                eq(shichosonCode, 市町村識別ID),
+                                eq(nendo, 年度),
+                                eq(nendoNaiRenban, 年度内連番_1))).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから連携（異動）所得情報取得します。
+     *
+     * @param 年度 FlexibleYear
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select処理日付管理マスタ_異動所得情報抽出(FlexibleYear 年度) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(shoriName, ShoriName.所得引出.get名称()),
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(nendo, 年度),
+                                eq(shoriEdaban, 処理枝番))).
+                order(by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタから処理状況の情報を取得する。
+     *
+     * @param 年度 FlexibleYear
+     * @param 処理名 RString
+     * @param 年度連番 RString
+     * @return List<DbT7022ShoriDateKanriEntity>
+     */
+    @Transaction
+    public List<DbT7022ShoriDateKanriEntity> select処理状況の情報(FlexibleYear 年度, RString 処理名, RString 年度連番) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(shoriName, 処理名),
+                                eq(shoriEdaban, 処理枝番),
+                                eq(nendo, 年度),
+                                eq(nendoNaiRenban, 年度連番))).
+                toList(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから捕捉月取得します。
+     *
+     * @param 年度 FlexibleYear
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity get特徴捕捉月(FlexibleYear 年度) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(nendo, 年度),
+                                or(eq(shoriName, ShoriName.特徴依頼情報作成.get名称()),
+                                        eq(shoriName, ShoriName.特徴異動情報作成.get名称()))
+                        )).
+                order(by(DbT7022ShoriDateKanri.kijunTimestamp, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから依頼金額計算状況取得します。
+     *
+     * @param 年度 FlexibleYear
+     * @return List<DbT7022ShoriDateKanriEntity>
+     */
+    @Transaction
+    public List<DbT7022ShoriDateKanriEntity> get依頼金額計算状況(FlexibleYear 年度) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(nendo, 年度),
+                                eq(shoriName, ShoriName.依頼金額計算.get名称()
+                                ))).
+                toList(DbT7022ShoriDateKanriEntity.class);
     }
 }

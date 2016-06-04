@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： ビジネス設計_DBBBZ35004_特徴平準化確定用XMLです。 --> 
+ <!-- @reamsid_L DBB-0830-020 wangkanglei -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunkakakutei.ITokuchoHeijunkaKakuteiMapper">
+
+    <!-- 調定共通（介護継承）.賦課処理状況を更新します-->
+    <update id="update賦課処理状況"
+            parameterType="java.util.Map">
+        UPDATE rgdb."UrT0705ChoteiKyotsu"
+        SET "fukaShoriJokyo" = 'true' 
+        FROM rgdb."UrT0705ChoteiKyotsu" AS "UrT0705"
+        INNER JOIN rgdb."DbT2003Kibetsu" AS "DbT2003"
+        ON "DbT2003"."choteiId" = "UrT0705"."choteiId"
+        INNER JOIN rgdb."DbT2002Fuka" AS "DbT2002"
+        ON "DbT2002"."choteiNendo" = "DbT2003"."choteiNendo"
+        AND "DbT2002"."fukaNendo" = "DbT2003"."fukaNendo"
+        AND "DbT2002"."tsuchishoNo" = "DbT2003"."tsuchishoNo"
+        AND "DbT2002"."rirekiNo" = "DbT2003"."rirekiNo"
+        WHERE "DbT2002"."fukaNendo" = #{fukaNendo}
+        AND "DbT2002"."choteiNichiji" = #{choteiNichiji}
+    </update>
+
+</mapper>

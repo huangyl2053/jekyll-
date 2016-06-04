@@ -11,9 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.DBB8110001TransitionEventName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.KakushuTsuchishoSakuseiKobetsuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB8110001.KakushuTsuchishoSakuseiKobetsuHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.idotaishoshaichiranparameter.IdoTaishoshaIchiranparameter;
 import jp.co.ndensan.reams.db.dbb.service.core.fukajoho.fukajoho.FukaJohoManager;
 import jp.co.ndensan.reams.db.dbb.service.report.kakushutsuchishosakusei.KakushuTsuchishoSakusei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
@@ -27,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -43,6 +47,14 @@ public class KakushuTsuchishoSakuseiKobetsu {
     private static final RString 変更通知書帳票_略称 = new RString("変更通知書帳票略称");
     private static final RString 減免通知書帳票_略称 = new RString("減免通知書帳票略称");
     private static final RString 徴収猶予通知書帳票_略称 = new RString("徴収猶予通知書帳票略称");
+    private static final RString 即時賦課更正 = new RString("DBBMN13001");
+    private static final RString 通知書発行後異動把握_仮算定 = new RString("DBBMN42001");
+    private static final RString 通知書発行後異動把握_本算定 = new RString("DBBMN32001");
+    private static final RString 戻る = new RString("btnBack");
+    private static final RString 再検索する = new RString("btnToResearch");
+    private static final RString 検索結果一覧へ = new RString("btnToSearchResult");
+    private static final RString フラグ_1 = new RString("1");
+    private static final RString 戻るフラグ = new RString("Direct");
 
     /**
      * 画面初期化のメソッドます。
@@ -51,12 +63,49 @@ public class KakushuTsuchishoSakuseiKobetsu {
      * @return ResponseData
      */
     public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onLoad(KakushuTsuchishoSakuseiKobetsuDiv div) {
+        TsuchishoNo 通知書番号;
+        FlexibleYear 賦課年度;
+        LasdecCode 市町村コード;
+        ShikibetsuCode 識別コード;
+        if (即時賦課更正.equals(ResponseHolder.getMenuID())) {
+            // TODO この画面が実装できない。
+            通知書番号 = null;
+            賦課年度 = null;
+            市町村コード = null;
+            識別コード = null;
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(再検索する, true);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索結果一覧へ, true);
+        } else if (通知書発行後異動把握_仮算定.equals(ResponseHolder.getMenuID())
+                || 通知書発行後異動把握_本算定.equals(ResponseHolder.getMenuID())) {
+            RString parameter = ViewStateHolder.get(ViewStateKeys.各種通知書作成戻るフラグ, RString.class);
+            if (戻るフラグ.equals(parameter)) {
+                // TODO
+                List<IdoTaishoshaIchiranparameter> listPar = ViewStateHolder.get(ViewStateKeys.異動者一覧Par, List.class);
+                通知書番号 = listPar.get(0).getTsuchishoNo();
+                賦課年度 = listPar.get(0).getFukaNendo();
+                市町村コード = null;
+                識別コード = listPar.get(0).getShikibetsuCode();
+            } else {
+                // TODO この画面が実装できない。
+                通知書番号 = null;
+                賦課年度 = null;
+                市町村コード = null;
+                識別コード = null;
+            }
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(再検索する, true);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索結果一覧へ, true);
+        } else {
+            FukaTaishoshaKey key = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
+            通知書番号 = key.get通知書番号();
+            賦課年度 = key.get賦課年度();
+            市町村コード = key.get市町村コード();
+            識別コード = key.get識別コード();
+            if (フラグ_1.equals(ViewStateHolder.get(ViewStateKeys.各種通知書作成フラグ, RString.class))) {
+                CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索結果一覧へ, true);
+            }
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(戻る, true);
+        }
 
-        FukaTaishoshaKey key = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
-        TsuchishoNo 通知書番号 = key.get通知書番号();
-        FlexibleYear 賦課年度 = key.get賦課年度();
-        LasdecCode 市町村コード = key.get市町村コード();
-        ShikibetsuCode 識別コード = key.get識別コード();
         KaigoFukaKihonSearchKey searchKey = new KaigoFukaKihonSearchKey.Builder(
                 通知書番号, 賦課年度, 市町村コード, 識別コード).build();
 
@@ -256,6 +305,21 @@ public class KakushuTsuchishoSakuseiKobetsu {
         Map<RString, FukaJoho> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
         getHandler(div).check賦課台帳(map);
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「戻る」ボタンのメソッドます。
+     *
+     * @param div KakushuTsuchishoSakuseiKobetsuDiv
+     * @return ResponseData
+     */
+    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onClick_btnBack(KakushuTsuchishoSakuseiKobetsuDiv div) {
+        if (通知書発行後異動把握_仮算定.equals(ResponseHolder.getMenuID())
+                || 通知書発行後異動把握_本算定.equals(ResponseHolder.getMenuID())) {
+            RString parameter = ViewStateHolder.get(ViewStateKeys.各種通知書作成戻るフラグ, RString.class);
+            return ResponseData.of(div).forwardWithEventName(DBB8110001TransitionEventName.戻る).parameter(parameter);
+        }
+        return ResponseData.of(div).forwardWithEventName(DBB8110001TransitionEventName.戻る).respond();
     }
 
     private KakushuTsuchishoSakuseiKobetsuHandler getHandler(KakushuTsuchishoSakuseiKobetsuDiv div) {

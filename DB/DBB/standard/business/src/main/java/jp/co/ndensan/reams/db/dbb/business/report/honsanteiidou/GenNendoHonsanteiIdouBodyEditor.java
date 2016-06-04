@@ -162,6 +162,8 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             edit項目追加2(source);
             edit項目追加3(source);
             edit項目追加4(source);
+            edit項目追加5(source);
+            edit項目追加6(source);
         }
         return source;
     }
@@ -174,7 +176,6 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
      */
     public GenNendoHonsanteiIdouSource edit項目追加(GenNendoHonsanteiIdouSource source) {
         if (計算後情報_宛名_口座_更正後Entity != null) {
-
             if (計算後情報_宛名_口座_更正後Entity.get減免前介護保険料_年額() != null) {
                 source.list3_3 = DecimalFormatter
                         .toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get減免前介護保険料_年額(), 0);
@@ -226,14 +227,6 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
                 source.list4_9 = DecimalFormatter
                         .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額03(), 0);
             }
-            if (計算後情報_宛名_口座_更正前Entity.get普徴期別金額04() != null && !source.fuchoKi4.isEmpty()) {
-                source.list4_10 = DecimalFormatter
-                        .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額04(), 0);
-            }
-            if (計算後情報_宛名_口座_更正前Entity.get普徴期別金額05() != null && !source.fuchoKi5.isEmpty()) {
-                source.list4_11 = DecimalFormatter
-                        .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額05(), 0);
-            }
         }
         return source;
     }
@@ -246,26 +239,6 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
      */
     public GenNendoHonsanteiIdouSource edit項目追加2(GenNendoHonsanteiIdouSource source) {
         if (計算後情報_宛名_口座_更正後Entity != null) {
-            if (計算後情報_宛名_口座_更正前Entity.get普徴期別金額06() != null && !source.fuchoKi6.isEmpty()) {
-                source.list4_12 = DecimalFormatter
-                        .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額06(), 0);
-            }
-            if (計算後情報_宛名_口座_更正前Entity.get普徴期別金額07() != null && !source.fuchoKi7.isEmpty()) {
-                source.list4_13 = DecimalFormatter
-                        .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額07(), 0);
-            }
-            if (計算後情報_宛名_口座_更正前Entity.get普徴期別金額08() != null && !source.fuchoKi8.isEmpty()) {
-                source.list4_14 = DecimalFormatter
-                        .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額08(), 0);
-            }
-            if (計算後情報_宛名_口座_更正前Entity.get普徴期別金額09() != null && !source.fuchoKi9.isEmpty()) {
-                source.list4_15 = DecimalFormatter
-                        .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額09(), 0);
-            }
-            if (計算後情報_宛名_口座_更正前Entity.get普徴期別金額10() != null && !source.fuchoKi10.isEmpty()) {
-                source.list4_16 = DecimalFormatter
-                        .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額10(), 0);
-            }
             if (計算後情報_宛名_口座_更正前Entity.get普徴期別金額11() != null && !source.fuchoKi11.isEmpty()) {
                 source.list4_17 = DecimalFormatter
                         .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額11(), 0);
@@ -368,34 +341,6 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
                 source.list5_9 = DecimalFormatter
                         .toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額03(), 0);
             }
-            if (計算後情報_宛名_口座_更正後Entity.get普徴期別金額04() != null && !source.fuchoKi4.isEmpty()) {
-                source.list5_10 = DecimalFormatter
-                        .toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額04(), 0);
-            }
-            if (計算後情報_宛名_口座_更正後Entity.get普徴期別金額05() != null && !source.fuchoKi5.isEmpty()) {
-                source.list5_11 = DecimalFormatter
-                        .toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額05(), 0);
-            }
-            if (計算後情報_宛名_口座_更正後Entity.get普徴期別金額06() != null && !source.fuchoKi6.isEmpty()) {
-                source.list5_12 = DecimalFormatter
-                        .toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額06(), 0);
-            }
-            if (計算後情報_宛名_口座_更正後Entity.get普徴期別金額07() != null && !source.fuchoKi7.isEmpty()) {
-                source.list5_13 = DecimalFormatter
-                        .toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額07(), 0);
-            }
-            if (計算後情報_宛名_口座_更正後Entity.get普徴期別金額08() != null && !source.fuchoKi8.isEmpty()) {
-                source.list5_14 = DecimalFormatter
-                        .toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額08(), 0);
-            }
-            if (計算後情報_宛名_口座_更正後Entity.get普徴期別金額09() != null && !source.fuchoKi9.isEmpty()) {
-                source.list5_15 = DecimalFormatter
-                        .toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額09(), 0);
-            }
-            if (計算後情報_宛名_口座_更正後Entity.get普徴期別金額10() != null && !source.fuchoKi10.isEmpty()) {
-                source.list5_16 = DecimalFormatter
-                        .toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額10(), 0);
-            }
         }
         return source;
     }
@@ -466,6 +411,86 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             source.shutsuryokujun3 = 並び順の３件目;
             source.shutsuryokujun4 = 並び順の４件目;
             source.shutsuryokujun5 = 並び順の５件目;
+        }
+        return source;
+    }
+
+    /**
+     * 本算定異動（現年度）結果一覧表帳票の項目編集です
+     *
+     * @param source GenNendoHonsanteiIdouSource
+     * @return GenNendoHonsanteiIdouSource
+     */
+    public GenNendoHonsanteiIdouSource edit項目追加5(GenNendoHonsanteiIdouSource source) {
+        if (計算後情報_宛名_口座_更正後Entity != null) {
+            if (計算後情報_宛名_口座_更正前Entity.get普徴期別金額04() != null && !source.fuchoKi4.isEmpty()) {
+                source.list4_10 = DecimalFormatter
+                        .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額04(), 0);
+            }
+            if (計算後情報_宛名_口座_更正前Entity.get普徴期別金額05() != null && !source.fuchoKi5.isEmpty()) {
+                source.list4_11 = DecimalFormatter
+                        .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額05(), 0);
+            }
+            if (計算後情報_宛名_口座_更正前Entity.get普徴期別金額06() != null && !source.fuchoKi6.isEmpty()) {
+                source.list4_12 = DecimalFormatter
+                        .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額06(), 0);
+            }
+            if (計算後情報_宛名_口座_更正前Entity.get普徴期別金額07() != null && !source.fuchoKi7.isEmpty()) {
+                source.list4_13 = DecimalFormatter
+                        .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額07(), 0);
+            }
+            if (計算後情報_宛名_口座_更正前Entity.get普徴期別金額08() != null && !source.fuchoKi8.isEmpty()) {
+                source.list4_14 = DecimalFormatter
+                        .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額08(), 0);
+            }
+            if (計算後情報_宛名_口座_更正前Entity.get普徴期別金額09() != null && !source.fuchoKi9.isEmpty()) {
+                source.list4_15 = DecimalFormatter
+                        .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額09(), 0);
+            }
+            if (計算後情報_宛名_口座_更正前Entity.get普徴期別金額10() != null && !source.fuchoKi10.isEmpty()) {
+                source.list4_16 = DecimalFormatter
+                        .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額10(), 0);
+            }
+        }
+        return source;
+    }
+
+    /**
+     * 本算定異動（現年度）結果一覧表帳票の項目編集です
+     *
+     * @param source GenNendoHonsanteiIdouSource
+     * @return GenNendoHonsanteiIdouSource
+     */
+    public GenNendoHonsanteiIdouSource edit項目追加6(GenNendoHonsanteiIdouSource source) {
+        if (計算後情報_宛名_口座_更正後Entity != null) {
+            if (計算後情報_宛名_口座_更正後Entity.get普徴期別金額04() != null && !source.fuchoKi4.isEmpty()) {
+                source.list5_10 = DecimalFormatter
+                        .toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額04(), 0);
+            }
+            if (計算後情報_宛名_口座_更正後Entity.get普徴期別金額05() != null && !source.fuchoKi5.isEmpty()) {
+                source.list5_11 = DecimalFormatter
+                        .toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額05(), 0);
+            }
+            if (計算後情報_宛名_口座_更正後Entity.get普徴期別金額06() != null && !source.fuchoKi6.isEmpty()) {
+                source.list5_12 = DecimalFormatter
+                        .toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額06(), 0);
+            }
+            if (計算後情報_宛名_口座_更正後Entity.get普徴期別金額07() != null && !source.fuchoKi7.isEmpty()) {
+                source.list5_13 = DecimalFormatter
+                        .toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額07(), 0);
+            }
+            if (計算後情報_宛名_口座_更正後Entity.get普徴期別金額08() != null && !source.fuchoKi8.isEmpty()) {
+                source.list5_14 = DecimalFormatter
+                        .toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額08(), 0);
+            }
+            if (計算後情報_宛名_口座_更正後Entity.get普徴期別金額09() != null && !source.fuchoKi9.isEmpty()) {
+                source.list5_15 = DecimalFormatter
+                        .toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額09(), 0);
+            }
+            if (計算後情報_宛名_口座_更正後Entity.get普徴期別金額10() != null && !source.fuchoKi10.isEmpty()) {
+                source.list5_16 = DecimalFormatter
+                        .toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額10(), 0);
+            }
         }
         return source;
     }

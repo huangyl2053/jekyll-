@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Mar 31 20:36:38 CST 2016 
+ * Thu Jun 02 09:21:48 CST 2016 
  */
 
 
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 
 public class dgShinseishaIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private ButtonDialog shokai;
     private RString status;
@@ -59,6 +59,9 @@ public class dgShinseishaIchiran_Row extends DataRow {
     private RString iryoKikanTelNo;
     private RString preRirekiNo;
     private RString shichosonCode;
+    private RString telNo;
+    private RString age;
+    private RString iryoKikanFaxNo;
 
     public dgShinseishaIchiran_Row() {
         super();
@@ -97,6 +100,9 @@ public class dgShinseishaIchiran_Row extends DataRow {
         this.iryoKikanTelNo = RString.EMPTY;
         this.preRirekiNo = RString.EMPTY;
         this.shichosonCode = RString.EMPTY;
+        this.telNo = RString.EMPTY;
+        this.age = RString.EMPTY;
+        this.iryoKikanFaxNo = RString.EMPTY;
         this.setOriginalData("shokai", shokai);
         this.setOriginalData("status", status);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
@@ -132,9 +138,12 @@ public class dgShinseishaIchiran_Row extends DataRow {
         this.setOriginalData("iryoKikanTelNo", iryoKikanTelNo);
         this.setOriginalData("preRirekiNo", preRirekiNo);
         this.setOriginalData("shichosonCode", shichosonCode);
+        this.setOriginalData("telNo", telNo);
+        this.setOriginalData("age", age);
+        this.setOriginalData("iryoKikanFaxNo", iryoKikanFaxNo);
     }
 
-    public dgShinseishaIchiran_Row(ButtonDialog shokai, RString status, RString hihokenshaNo, RString hihokennshaShimei, RString seibetsu, TextBoxDate shinseiDay, RString shinseiKubunShinseiji, RString jusho, RString shujiiIryoKikan, RString shujii, TextBoxDate shujiiIkenshoSakuseiIraiDay, RString iraiKubun, RString hokensha, RString zenkaiShujiiIryoKikan, RString zenkaiShujii, TextBoxDate iraishoShutsuryokuDay, TextBoxDate ikenshoShutsuryokuDay, TextBoxDate seikyushoShutsuryokuDay, RString rirekiNo, Boolean sakujoKbn, RString shujiiIryoKikanCode, RString shujiiCode, RString ishiKbnCode, Boolean shiteiiFlag, RString shiseishoKanriNo, TextBoxFlexibleDate birthYMD, RString hihokenshaShimeiKana, Boolean shisetsuNyushoFlag, RString yubinNo, RString koroshoIfShikibetsuCode, RString iryoukikanShozaichi, RString hokenshaNo, RString iryoKikanTelNo, RString preRirekiNo, RString shichosonCode) {
+    public dgShinseishaIchiran_Row(ButtonDialog shokai, RString status, RString hihokenshaNo, RString hihokennshaShimei, RString seibetsu, TextBoxDate shinseiDay, RString shinseiKubunShinseiji, RString jusho, RString shujiiIryoKikan, RString shujii, TextBoxDate shujiiIkenshoSakuseiIraiDay, RString iraiKubun, RString hokensha, RString zenkaiShujiiIryoKikan, RString zenkaiShujii, TextBoxDate iraishoShutsuryokuDay, TextBoxDate ikenshoShutsuryokuDay, TextBoxDate seikyushoShutsuryokuDay, RString rirekiNo, Boolean sakujoKbn, RString shujiiIryoKikanCode, RString shujiiCode, RString ishiKbnCode, Boolean shiteiiFlag, RString shiseishoKanriNo, TextBoxFlexibleDate birthYMD, RString hihokenshaShimeiKana, Boolean shisetsuNyushoFlag, RString yubinNo, RString koroshoIfShikibetsuCode, RString iryoukikanShozaichi, RString hokenshaNo, RString iryoKikanTelNo, RString preRirekiNo, RString shichosonCode, RString telNo, RString age, RString iryoKikanFaxNo) {
         super();
         this.setOriginalData("shokai", shokai);
         this.setOriginalData("status", status);
@@ -171,6 +180,9 @@ public class dgShinseishaIchiran_Row extends DataRow {
         this.setOriginalData("iryoKikanTelNo", iryoKikanTelNo);
         this.setOriginalData("preRirekiNo", preRirekiNo);
         this.setOriginalData("shichosonCode", shichosonCode);
+        this.setOriginalData("telNo", telNo);
+        this.setOriginalData("age", age);
+        this.setOriginalData("iryoKikanFaxNo", iryoKikanFaxNo);
         this.shokai = shokai;
         this.status = status;
         this.hihokenshaNo = hihokenshaNo;
@@ -206,6 +218,9 @@ public class dgShinseishaIchiran_Row extends DataRow {
         this.iryoKikanTelNo = iryoKikanTelNo;
         this.preRirekiNo = preRirekiNo;
         this.shichosonCode = shichosonCode;
+        this.telNo = telNo;
+        this.age = age;
+        this.iryoKikanFaxNo = iryoKikanFaxNo;
     }
 
     public ButtonDialog getShokai() {
@@ -346,6 +361,18 @@ public class dgShinseishaIchiran_Row extends DataRow {
 
     public RString getShichosonCode() {
         return shichosonCode;
+    }
+
+    public RString getTelNo() {
+        return telNo;
+    }
+
+    public RString getAge() {
+        return age;
+    }
+
+    public RString getIryoKikanFaxNo() {
+        return iryoKikanFaxNo;
     }
 
     public void setShokai(ButtonDialog shokai) {
@@ -521,6 +548,21 @@ public class dgShinseishaIchiran_Row extends DataRow {
     public void setShichosonCode(RString shichosonCode) {
         this.setOriginalData("shichosonCode", shichosonCode);
         this.shichosonCode = shichosonCode;
+    }
+
+    public void setTelNo(RString telNo) {
+        this.setOriginalData("telNo", telNo);
+        this.telNo = telNo;
+    }
+
+    public void setAge(RString age) {
+        this.setOriginalData("age", age);
+        this.age = age;
+    }
+
+    public void setIryoKikanFaxNo(RString iryoKikanFaxNo) {
+        this.setOriginalData("iryoKikanFaxNo", iryoKikanFaxNo);
+        this.iryoKikanFaxNo = iryoKikanFaxNo;
     }
 
     // </editor-fold>

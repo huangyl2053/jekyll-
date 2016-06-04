@@ -10,7 +10,8 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0130011.DBU0
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0130011.DBU0130011MainHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.roujinhokenjukyushadaichokanri.RoujinHokenJukyushaDaichoKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import static jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -33,12 +34,12 @@ public class DBU0130011Main {
      * @return ResponseData<DBU0130011MainDiv>
      */
     public ResponseData<DBU0130011MainDiv> onLoad(DBU0130011MainDiv div) {
-
-        createHandler(div).initialize(RoujinHokenJukyushaDaichoKanriManager.createInstance().getRoukenJukyuJoho(
-                ViewStateHolder.get(ViewStateKeys.老人保健受給者台帳管理_識別コード, ShikibetsuCode.class)));
-        // TODO 宛名基本情報実装しない
-        //div.getAtenaAreaPanel().getCcdKaigoAtenaInfo().load(ViewStateHolder.get(ViewStateKeys.老人保健受給者台帳管理_識別コード, ShikibetsuCode.class));
-        div.getAtenaAreaPanel().getCcdKaigoShikakuKihon().onLoad(ViewStateHolder.get(ViewStateKeys.老人保健受給者台帳管理_被保険者番号, HihokenshaNo.class));
+        TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
+        ShikibetsuCode shikibetsuCode = key.get識別コード();
+        HihokenshaNo hihokenshaNo = key.get被保険者番号();
+        createHandler(div).initialize(RoujinHokenJukyushaDaichoKanriManager.createInstance().getRoukenJukyuJoho(shikibetsuCode));
+        div.getAtenaAreaPanel().getCcdKaigoAtenaInfo().onLoad(shikibetsuCode);
+        div.getAtenaAreaPanel().getCcdKaigoShikakuKihon().onLoad(hihokenshaNo);
         return ResponseData.of(div).respond();
     }
 
@@ -54,7 +55,8 @@ public class DBU0130011Main {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-            createHandler(div).update老健受給情報();
+            TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
+            createHandler(div).update老健受給情報(key.get識別コード(), key.get被保険者番号());
         }
         return ResponseData.of(div).respond();
     }

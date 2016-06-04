@@ -25,7 +25,7 @@ public class KarisanteiFukaDaichoReport extends Report<KarisanteiFukaDaichoSourc
      *
      * @param targets List<KarisanteiFukaDaichoReport>
      */
-    protected KarisanteiFukaDaichoReport(List<KarisanteiFukaDaichoItem> targets) {
+    public KarisanteiFukaDaichoReport(List<KarisanteiFukaDaichoItem> targets) {
         this.targets = targets;
     }
 

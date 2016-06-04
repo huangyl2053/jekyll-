@@ -165,9 +165,12 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
                 item.setKyufuShu1(給付の種類);
                 item.setRiyu1(shoShiharai.get増減理由等());
             } else if (給付の種類.length() <= 文字数_76) {
+                item.setKyufuShu1(給付の種類.substring(ZERO, 文字数_38));
                 item.setKyufuShu2(給付の種類.substring(文字数_38));
                 item.setRiyu2(shoShiharai.get増減理由等());
             } else {
+                item.setKyufuShu1(給付の種類.substring(ZERO, 文字数_38));
+                item.setKyufuShu2(給付の種類.substring(文字数_38, 文字数_76));
                 item.setKyufuShu3(給付の種類.substring(文字数_76));
                 item.setRiyu3(shoShiharai.get増減理由等());
             }
@@ -188,7 +191,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
             item.setUketsukeYMD(shoShiharai.get受付年月日() == null ? RString.EMPTY : shoShiharai.get受付年月日().wareki().toDateString());
             item.setKetteiYMD(shoShiharai.get決定年月日() == null ? RString.EMPTY : shoShiharai.get決定年月日().wareki().toDateString());
             item.setHonninShiharaiGaku(shoShiharai.get本人支払額() == null ? RString.EMPTY : new RString(shoShiharai.get本人支払額().toString()));
-            item.setTaishoYM(shoShiharai.get提供年月().wareki().toDateString());
+            item.setTaishoYM(shoShiharai.get提供年月() == null ? RString.EMPTY : shoShiharai.get提供年月().wareki().toDateString());
             if (!RString.isNullOrEmpty(shoShiharai.get支払方法区分コード())) {
                 item.setKekka(ShikyuFushikyuKubun.toValue(shoShiharai.get支払方法区分コード()).get名称());
             }
@@ -212,11 +215,14 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
     }
 
     private RString set種類(RString kyufuShu, RString 種類) {
-
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(kyufuShu);
-        builder.append(カンマ);
-        builder.append(種類);
+        if (RString.isNullOrEmpty(kyufuShu)) {
+            return 種類;
+        }
+        RStringBuilder builder = new RStringBuilder(kyufuShu);
+        if (!RString.isNullOrEmpty(種類)) {
+            builder.append(カンマ);
+            builder.append(種類);
+        }
         return builder.toRString();
     }
 
@@ -256,49 +262,53 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
     }
 
     private void setNinshosha(ShokanKetteiTsuchiShoHihokenshabunItem item, NinshoshaSource ninshoshaSource) {
-        item.setHakkoYMD(ninshoshaSource.hakkoYMD);
-        item.setDenshiKoin(ninshoshaSource.denshiKoin);
-        item.setNinshoshaYakushokuMei(ninshoshaSource.ninshoshaYakushokuMei);
-        item.setNinshoshaYakushokuMei1(ninshoshaSource.ninshoshaYakushokuMei1);
-        item.setKoinMojiretsu(ninshoshaSource.koinMojiretsu);
-        item.setNinshoshaYakushokuMei2(ninshoshaSource.ninshoshaYakushokuMei2);
-        item.setNinshoshaShimeiKakenai(ninshoshaSource.ninshoshaShimeiKakenai);
-        item.setNinshoshaShimeiKakeru(ninshoshaSource.ninshoshaShimeiKakeru);
-        item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
+        if (ninshoshaSource != null) {
+            item.setHakkoYMD(ninshoshaSource.hakkoYMD);
+            item.setDenshiKoin(ninshoshaSource.denshiKoin);
+            item.setNinshoshaYakushokuMei(ninshoshaSource.ninshoshaYakushokuMei);
+            item.setNinshoshaYakushokuMei1(ninshoshaSource.ninshoshaYakushokuMei1);
+            item.setKoinMojiretsu(ninshoshaSource.koinMojiretsu);
+            item.setNinshoshaYakushokuMei2(ninshoshaSource.ninshoshaYakushokuMei2);
+            item.setNinshoshaShimeiKakenai(ninshoshaSource.ninshoshaShimeiKakenai);
+            item.setNinshoshaShimeiKakeru(ninshoshaSource.ninshoshaShimeiKakeru);
+            item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
+        }
     }
 
     private void setSofubutsuAtesaki(ShokanKetteiTsuchiShoHihokenshabunItem item, SofubutsuAtesakiSource atesakiSource) {
-        item.setYubinNo(atesakiSource.yubinNo);
-        item.setGyoseiku2(atesakiSource.gyoseiku);
-        item.setJusho4(atesakiSource.jusho1);
-        item.setJushoText(atesakiSource.jushoText);
-        item.setJusho5(atesakiSource.jusho2);
-        item.setJusho6(atesakiSource.jusho3);
-        item.setKatagakiText(atesakiSource.katagakiText);
-        item.setKatagaki3(atesakiSource.katagaki1);
-        item.setKatagakiSmall2(atesakiSource.katagakiSmall2);
-        item.setKatagaki4(atesakiSource.katagaki2);
-        item.setKatagakiSmall1(atesakiSource.katagakiSmall1);
-        item.setShimei5(atesakiSource.shimei1);
-        item.setShimeiSmall2(atesakiSource.shimeiSmall2);
-        item.setShimeiText(atesakiSource.shimeiText);
-        item.setMeishoFuyo2(atesakiSource.meishoFuyo2);
-        item.setShimeiSmall1(atesakiSource.shimeiSmall1);
-        item.setDainoKubunMei(atesakiSource.dainoKubunMei);
-        item.setShimei6(atesakiSource.shimei2);
-        item.setMeishoFuyo1(atesakiSource.meishoFuyo1);
-        item.setSamabunShimeiText(atesakiSource.samabunShimeiText);
-        item.setKakkoLeft2(atesakiSource.kakkoLeft2);
-        item.setSamabunShimei2(atesakiSource.samabunShimei2);
-        item.setSamabunShimeiSmall2(atesakiSource.samabunShimeiSmall2);
-        item.setSamaBun2(atesakiSource.samaBun2);
-        item.setKakkoRight2(atesakiSource.kakkoRight2);
-        item.setKakkoLeft1(atesakiSource.kakkoLeft1);
-        item.setSamabunShimei1(atesakiSource.samabunShimei1);
-        item.setSamaBun1(atesakiSource.samaBun1);
-        item.setKakkoRight1(atesakiSource.kakkoRight1);
-        item.setSamabunShimeiSmall1(atesakiSource.samabunShimeiSmall1);
-        item.setCustomerBarCode(atesakiSource.customerBarCode);
+        if (atesakiSource != null) {
+            item.setYubinNo(atesakiSource.yubinNo);
+            item.setGyoseiku2(atesakiSource.gyoseiku);
+            item.setJusho4(atesakiSource.jusho1);
+            item.setJushoText(atesakiSource.jushoText);
+            item.setJusho5(atesakiSource.jusho2);
+            item.setJusho6(atesakiSource.jusho3);
+            item.setKatagakiText(atesakiSource.katagakiText);
+            item.setKatagaki3(atesakiSource.katagaki1);
+            item.setKatagakiSmall2(atesakiSource.katagakiSmall2);
+            item.setKatagaki4(atesakiSource.katagaki2);
+            item.setKatagakiSmall1(atesakiSource.katagakiSmall1);
+            item.setShimei5(atesakiSource.shimei1);
+            item.setShimeiSmall2(atesakiSource.shimeiSmall2);
+            item.setShimeiText(atesakiSource.shimeiText);
+            item.setMeishoFuyo2(atesakiSource.meishoFuyo2);
+            item.setShimeiSmall1(atesakiSource.shimeiSmall1);
+            item.setDainoKubunMei(atesakiSource.dainoKubunMei);
+            item.setShimei6(atesakiSource.shimei2);
+            item.setMeishoFuyo1(atesakiSource.meishoFuyo1);
+            item.setSamabunShimeiText(atesakiSource.samabunShimeiText);
+            item.setKakkoLeft2(atesakiSource.kakkoLeft2);
+            item.setSamabunShimei2(atesakiSource.samabunShimei2);
+            item.setSamabunShimeiSmall2(atesakiSource.samabunShimeiSmall2);
+            item.setSamaBun2(atesakiSource.samaBun2);
+            item.setKakkoRight2(atesakiSource.kakkoRight2);
+            item.setKakkoLeft1(atesakiSource.kakkoLeft1);
+            item.setSamabunShimei1(atesakiSource.samabunShimei1);
+            item.setSamaBun1(atesakiSource.samaBun1);
+            item.setKakkoRight1(atesakiSource.kakkoRight1);
+            item.setSamabunShimeiSmall1(atesakiSource.samabunShimeiSmall1);
+            item.setCustomerBarCode(atesakiSource.customerBarCode);
+        }
     }
 
     private RString get帳票制御汎用(ChohyoSeigyoHanyoManager 帳票制御汎用Manager, RString 項目名) {
@@ -314,7 +324,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
     private RString getKey(ShokanKetteiTsuchiShoShiharai shoShiharai) {
         RStringBuilder rsb = new RStringBuilder();
         rsb.append(shoShiharai.get被保険者番号().value());
-        rsb.append(shoShiharai.get提供年月().toDateString());
+        rsb.append(shoShiharai.get提供年月() == null ? RString.EMPTY : shoShiharai.get提供年月().toDateString());
         rsb.append(shoShiharai.get整理番号());
         return rsb.toRString();
     }

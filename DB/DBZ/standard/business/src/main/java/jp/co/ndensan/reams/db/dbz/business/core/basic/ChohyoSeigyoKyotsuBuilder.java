@@ -159,6 +159,18 @@ public class ChohyoSeigyoKyotsuBuilder {
     }
 
     /**
+     * 代納人表示有無を設定します。
+     *
+     * @param 代納人表示有無 代納人表示有無
+     * @return {@link ChohyoSeigyoKyotsuBuilder}
+     */
+    public ChohyoSeigyoKyotsuBuilder set代納人表示有無(boolean 代納人表示有無) {
+        requireNonNull(代納人表示有無, UrSystemErrorMessages.値がnull.getReplacedMessage("代納人表示有無"));
+        entity.setDainoninHyojiUmu(代納人表示有無);
+        return this;
+    }
+
+    /**
      * カスタマバーコード使用有無を設定します。
      *
      * @param カスタマバーコード使用有無 カスタマバーコード使用有無

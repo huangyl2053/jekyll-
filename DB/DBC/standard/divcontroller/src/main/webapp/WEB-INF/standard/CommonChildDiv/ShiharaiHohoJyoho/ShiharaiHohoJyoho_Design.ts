@@ -28,12 +28,20 @@ module DBC {
                 return "onChange_ddlKozaID";
             }
 
+            public static onOkClose_ddlKozaID(): string {
+                return "onOkClose_ddlKozaID";
+            }
+
             public static onClick_radJyryoinin(): string {
                 return "onClick_radJyryoinin";
             }
 
             public static onBlur_txtKeiyakuNo(): string {
                 return "onBlur_txtKeiyakuNo";
+            }
+
+            public static onClick_btnKeiyakuNo(): string {
+                return "onClick_btnKeiyakuNo";
             }
 
         }
@@ -153,8 +161,8 @@ module DBC {
                 return new UZA.TextBoxCode(this.convFiledName("txtKeiyakuNo"));
             }
 
-            public btnSelect(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnSelect"));
+            public btnSelect(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnSelect"));
             }
 
             public txtKeiyakuCode(): UZA.TextBoxCode {

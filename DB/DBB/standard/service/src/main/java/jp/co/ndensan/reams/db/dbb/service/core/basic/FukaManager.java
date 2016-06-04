@@ -10,8 +10,8 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.FukaRireki;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2002FukaDac;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
@@ -27,10 +27,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class FukaManager {
 
-    private final RString RSTRING_調定年度 = new RString("調定年度");
-    private final RString RSTRING_賦課年度 = new RString("賦課年度");
-    private final RString RSTRING_通知書番号 = new RString("通知書番号");
-    private final RString RSTRING_履歴番号 = new RString("履歴番号");
+    private final RString 調定年度_メセージ = new RString("調定年度");
+    private final RString 賦課年度_メセージ = new RString("賦課年度");
+    private final RString 通知書番号_メセージ = new RString("通知書番号");
+    private final RString 履歴番号_メセージ = new RString("履歴番号");
     private final DbT2002FukaDac dac;
 
     /**
@@ -64,10 +64,10 @@ public class FukaManager {
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
             int 履歴番号) {
-        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_調定年度.toString()));
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_賦課年度.toString()));
-        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_通知書番号.toString()));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_履歴番号.toString()));
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(調定年度_メセージ.toString()));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度_メセージ.toString()));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通知書番号_メセージ.toString()));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(履歴番号_メセージ.toString()));
 
         DbT2002FukaEntity entity = dac.selectByKey(
                 調定年度,
@@ -152,8 +152,8 @@ public class FukaManager {
             FlexibleYear 賦課年度,
             HihokenshaNo 被保険者番号,
             RDateTime 調定日時) {
-        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_調定年度.toString()));
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_賦課年度.toString()));
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(調定年度_メセージ.toString()));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度_メセージ.toString()));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(調定日時, UrSystemErrorMessages.値がnull.getReplacedMessage("調定日時"));
 
@@ -186,10 +186,10 @@ public class FukaManager {
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
             int 履歴番号) {
-        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_調定年度.toString()));
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_賦課年度.toString()));
-        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_通知書番号.toString()));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_履歴番号.toString()));
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(調定年度_メセージ.toString()));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度_メセージ.toString()));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通知書番号_メセージ.toString()));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(履歴番号_メセージ.toString()));
 
         DbT2002FukaEntity entity = dac.selectFor任意対象比較(
                 調定年度,
@@ -214,8 +214,8 @@ public class FukaManager {
     public Fuka get介護賦課_賦課年度最新(
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号) {
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_賦課年度.toString()));
-        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(RSTRING_通知書番号.toString()));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度_メセージ.toString()));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通知書番号_メセージ.toString()));
 
         DbT2002FukaEntity entity = dac.selectByFukanendoSaishin(
                 賦課年度,

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010014.JigyoshaServiceDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBZCodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.core.hokenja.Hokenja;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
@@ -19,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -708,7 +708,7 @@ public class JigyoshaServiceHandler {
     }
 
     private void set夜間勤務条件基準() {
-        List<UzT0007CodeEntity> codeJoho = CodeMaster.getCode(SubGyomuCode.DBZ介護共通, new CodeShubetsu("0188"), FlexibleDate.getNowDate());
+        List<UzT0007CodeEntity> codeJoho = CodeMaster.getCode(SubGyomuCode.DBZ介護共通, DBZCodeShubetsu.夜間勤務条件基準.getコード(), FlexibleDate.getNowDate());
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         for (UzT0007CodeEntity code : codeJoho) {
             KeyValueDataSource data = new KeyValueDataSource(code.getコード().getColumnValue(), code.getコード名称());

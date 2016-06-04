@@ -26,18 +26,20 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninnteichousairai.NinnteiChousairaiFinder;
 import jp.co.ndensan.reams.db.dbe.service.report.ninnteichousairai.NinteiChosaIraiPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -106,7 +108,10 @@ public class NinteiChosaIrai {
         ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 保険者番号);
         List<NinnteiChousairaiBusiness> 認定調査委託先List = NinnteiChousairaiFinder.createInstance().getNinnteiChousaItaku(
                 NinnteiChousairaiParameter.createParam調査委託先Or未割付申請者(保険者番号, 支所コード)).records();
-        getHandler(div).set認定調査委託先一覧(認定調査委託先List);
+        boolean コード取得結果 = getHandler(div).set認定調査委託先一覧(認定調査委託先List);
+        if (!コード取得結果) {
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -394,6 +399,7 @@ public class NinteiChosaIrai {
                             .set認定調査期限年月日(認定調査期限年月日)
                             .set論理削除フラグ(false).build();
                     ninteichosaIraiJohoManager.save認定調査依頼情報(ninteichosaIraiJoho);
+                    update要介護認定申請情報(申請書管理番号, 調査員コード, 認定調査委託先コード);
                 }
 
                 if (ChosaKubun.再調査.get名称().equals(row.getChosaKubun())) {
@@ -414,6 +420,14 @@ public class NinteiChosaIrai {
             }
         }
         div.getDgWaritsukeZumiShinseishaIchiran().setDataSource(waritsukeZumiShinseishaIchiran);
+    }
+
+    private void update要介護認定申請情報(ShinseishoKanriNo 申請書管理番号, RString 調査員コード, RString 認定調査委託先コード) {
+        NinteiShinseiJohoManager manager = NinteiShinseiJohoManager.createInstance();
+        NinteiShinseiJoho ninteiShinseiJoho = manager.get要介護認定申請情報(申請書管理番号);
+        ninteiShinseiJoho = ninteiShinseiJoho.createBuilderForEdit().set認定調査委託先コード(new ChosaItakusakiCode(認定調査委託先コード))
+                .set認定調査員コード(new ChosainCode(調査員コード)).build();
+        manager.save要介護認定申請情報(ninteiShinseiJoho.modifiedModel());
     }
 
     private void updateNinteichosaIraiJoho(NinteiChosaIraiDiv div) {

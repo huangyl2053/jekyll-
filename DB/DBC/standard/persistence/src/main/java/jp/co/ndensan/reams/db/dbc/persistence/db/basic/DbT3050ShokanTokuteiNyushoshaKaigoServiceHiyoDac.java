@@ -12,11 +12,13 @@ import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyu
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo.meisaiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo.renban;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo.seiriNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo.serviceShuruiCode;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo.serviceTeikyoYM;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo.yoshikiNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -49,6 +51,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDac implements ISaveab
     private final RString 定数_様式番号 = new RString("様式番号");
     private final RString 定数_明細番号 = new RString("明細番号");
     private final RString 定数_連番 = new RString("連番");
+    private final RString 定数_サービス種類コード = new RString("サービス種類コード");
 
     /**
      * 主キーで償還払請求特定入所者介護サービス費用を取得します。
@@ -93,6 +96,43 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDac implements ISaveab
                                 eq(meisaiNo, 明細番号),
                                 eq(renban, 連番))).
                 toObject(DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity.class);
+    }
+
+    /**
+     * 主キーで償還払請求特定入所者介護サービス費用を取得します。
+     *
+     * @param 被保険者番号 HiHokenshaNo
+     * @param サービス提供年月 ServiceTeikyoYM
+     * @param 整理番号 SeiriNo
+     * @param 事業者番号 JigyoshaNo
+     * @param サービス種類コード ServiceShuruiCode
+     * @return List<DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity> selectByKey(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            ServiceShuruiCode サービス種類コード) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス提供年月.toString()));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_事業者番号.toString()));
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス種類コード.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号),
+                                eq(jigyoshaNo, 事業者番号),
+                                eq(serviceShuruiCode, サービス種類コード))).
+                toList(DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity.class);
     }
 
     /**

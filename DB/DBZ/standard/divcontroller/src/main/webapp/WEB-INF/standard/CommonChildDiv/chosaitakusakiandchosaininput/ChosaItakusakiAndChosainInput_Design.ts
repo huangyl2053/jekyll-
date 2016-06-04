@@ -12,12 +12,28 @@ module DBZ {
                 return "onBlur_TxtChosaItakusakiCode";
             }
 
+            public static onOKClose_BtnChosaItakusakiGuide(): string {
+                return "onOKClose_BtnChosaItakusakiGuide";
+            }
+
+            public static onClick_BtnChosaItakusakiGuide(): string {
+                return "onClick_BtnChosaItakusakiGuide";
+            }
+
             public static onClick_BtnZenkaiFukusha(): string {
                 return "onClick_BtnZenkaiFukusha";
             }
 
             public static onBlur_TxtChosainCode(): string {
                 return "onBlur_TxtChosainCode";
+            }
+
+            public static onOKClose_BtnChosainGuide(): string {
+                return "onOKClose_BtnChosainGuide";
+            }
+
+            public static onClick_BtnChosainGuide(): string {
+                return "onClick_BtnChosainGuide";
             }
 
             public static onClick_BtnClear(): string {

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -36,11 +35,11 @@ public enum ChosaAnser09 {
      * コード:5 名称:聞こえているのか判断不能 略称:聞こえているのか判断不能
      */
     聞こえているのか判断不能("5", "聞こえているのか判断不能");
-    private final Code code;
+    private final RString code;
     private final RString fullName;
 
     private ChosaAnser09(String code, String fullname) {
-        this.code = new Code(code);
+        this.code = new RString(code);
         this.fullName = new RString(fullname);
     }
 
@@ -49,7 +48,7 @@ public enum ChosaAnser09 {
      *
      * @return 認定調査項目内容09のコード
      */
-    public Code getコード() {
+    public RString getコード() {
         return code;
     }
 
@@ -68,10 +67,10 @@ public enum ChosaAnser09 {
      * @param code 認定調査項目内容09のコード
      * @return {@code code} に対応する認定調査項目内容09
      */
-    public static ChosaAnser09 toValue(Code code) {
-        for (ChosaAnser09 anser01 : ChosaAnser09.values()) {
-            if (anser01.code.equals(code)) {
-                return anser01;
+    public static ChosaAnser09 toValue(RString code) {
+        for (ChosaAnser09 anser09 : ChosaAnser09.values()) {
+            if (anser09.code.equals(code)) {
+                return anser09;
             }
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("認定調査項目内容09"));

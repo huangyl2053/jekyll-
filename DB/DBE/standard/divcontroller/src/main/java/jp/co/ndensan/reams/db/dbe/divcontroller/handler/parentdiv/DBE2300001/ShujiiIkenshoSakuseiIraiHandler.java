@@ -16,8 +16,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.Shuj
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.dgShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
@@ -149,6 +149,9 @@ public class ShujiiIkenshoSakuseiIraiHandler {
                 row.setYubinNo(申請者.getTemp_郵便番号().value());
             }
             row.setShisetsuNyushoFlag(申請者.isTemp_施設利用フラグ());
+            row.setTelNo(申請者.getTemp_電話番号() == null ? RString.EMPTY : 申請者.getTemp_電話番号().value());
+            row.setAge(new RString(String.valueOf(申請者.getTemp_年齢())));
+            row.setIryoKikanFaxNo(申請者.getTemp_医療機関所FAX());
             申請者一覧.add(row);
         }
         div.getShinseishaIchiran().setIsOpen(true);

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaitaishoshakensaku;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,11 +25,13 @@ public class KogakuShokaiTaishoshaKensakuSearch {
     private HihokenshaNo 被保険者番号;
     private FlexibleYearMonth 提供年月From;
     private FlexibleYearMonth 提供年月To;
-    private FlexibleYearMonth 申請年月From;
-    private FlexibleYearMonth 申請年月To;
-    private FlexibleYearMonth 決定年月From;
-    private FlexibleYearMonth 決定年月To;
+    private FlexibleDate 申請年月From;
+    private FlexibleDate 申請年月To;
+    private FlexibleDate 決定年月From;
+    private FlexibleDate 決定年月To;
     private FlexibleYearMonth 提供年月;
-    private FlexibleYearMonth 申請年月;
-    private FlexibleYearMonth 決定年月;
+    private FlexibleDate 申請年月初;
+    private FlexibleDate 申請年月末;
+    private FlexibleDate 決定年月初;
+    private FlexibleDate 決定年月末;
 }

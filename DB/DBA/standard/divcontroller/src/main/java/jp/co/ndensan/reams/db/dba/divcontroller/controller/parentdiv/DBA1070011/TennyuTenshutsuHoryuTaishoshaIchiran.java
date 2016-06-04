@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dba.service.core.tennyutenshutsuhoryutaishosha.Ten
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import static jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.TennyushutsuHoryuTaishosha;
@@ -25,7 +26,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.TennyushutsuHoryuTaishoshaIdenti
 import jp.co.ndensan.reams.db.dbz.business.core.TenshutsuHoryuTaishosha;
 import jp.co.ndensan.reams.db.dbz.business.core.TenshutsuHoryuTaishoshaIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -124,7 +124,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha> 転入保留対象者情報
                     = (Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha>) ViewStateHolder
-                    .get(ViewStateKeys.転入転出保留対象者管理_転入保留対象者情報, Models.class);
+                    .get(ViewStateKeys.転入保留対象者情報, Models.class);
             manager.delTennyushutsuHoryuTaishosha(転入保留対象者情報.get(new TennyushutsuHoryuTaishoshaIdentifier(
                     new ShikibetsuCode(click転入保留対象者.getShikibetsuCode().getText()),
                     Integer.parseInt(click転入保留対象者.getRirekiNo().toString()))));
@@ -159,7 +159,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Models<TenshutsuHoryuTaishoshaIdentifier, TenshutsuHoryuTaishosha> 転出保留対象者情報
                     = (Models<TenshutsuHoryuTaishoshaIdentifier, TenshutsuHoryuTaishosha>) ViewStateHolder
-                    .get(ViewStateKeys.転入転出保留対象者管理_転出保留対象者情報, Models.class);
+                    .get(ViewStateKeys.転出保留対象者情報, Models.class);
             manager.delTenshutsuHoryuTaishosha(転出保留対象者情報.get(new TenshutsuHoryuTaishoshaIdentifier(
                     new ShikibetsuCode(click転出保留対象者.getShikibetsuCode().getText()),
                     Integer.parseInt(click転出保留対象者.getRirekiNo().toString()))));
@@ -194,7 +194,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha> 広域保留対象者情報
                     = (Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha>) ViewStateHolder
-                    .get(ViewStateKeys.転入転出保留対象者管理_転入保留対象者情報, Models.class);
+                    .get(ViewStateKeys.転入保留対象者情報, Models.class);
             manager.delTennyushutsuHoryuTaishosha(広域保留対象者情報.get(new TennyushutsuHoryuTaishoshaIdentifier(
                     new ShikibetsuCode(click広域保留対象者.getShikibetsuCode().getText()),
                     Integer.parseInt(click広域保留対象者.getRirekiNo().toString()))));
@@ -245,8 +245,8 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
         List<TenshutsuHoryuTaishosha> 転出保留対象者情報List = manager.getAllTenshutsuHoryuTaishosha().records();
         Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha> 転入保留対象者情報 = Models.create(転入保留対象者情報List);
         Models<TenshutsuHoryuTaishoshaIdentifier, TenshutsuHoryuTaishosha> 転出保留対象者情報 = Models.create(転出保留対象者情報List);
-        ViewStateHolder.put(ViewStateKeys.転入転出保留対象者管理_転入保留対象者情報, 転入保留対象者情報);
-        ViewStateHolder.put(ViewStateKeys.転入転出保留対象者管理_転出保留対象者情報, 転出保留対象者情報);
+        ViewStateHolder.put(ViewStateKeys.転入保留対象者情報, 転入保留対象者情報);
+        ViewStateHolder.put(ViewStateKeys.転出保留対象者情報, 転出保留対象者情報);
     }
 
     private TennyuTenshutsuHoryuTaishoshaIchiranHandler getHandler(TennyuTenshutsuHoryuTaishoshaIchiranDiv div) {

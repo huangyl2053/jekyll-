@@ -73,7 +73,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisantei
     @Override
     public KarisanteiNonyuTsuchishoCVSKakukoSource edit(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
         editSource(source);
-        source.layout = KarisanteiNonyuTsuchishoCVSKakukoSource.Layouts.DBB100024_KarisanteiNonyuTsuchishoCVSKakukoCover;
+        source.layoutBreakItem = 1;
         return source;
     }
 
@@ -170,7 +170,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisantei
             source.keisanMeisaishoKisu = new RString(String.valueOf(item.get編集後仮算定通知書共通情報().get普徴期数()));
             if (item.get編集後仮算定通知書共通情報().get更正後() != null
                     && item.get編集後仮算定通知書共通情報().get更正後().get更正後普徴期別金額合計() != null) {
-                source.keisanMeisaishoHokenryoGaku = new RString(item.get編集後仮算定通知書共通情報().get更正後().get更正後普徴期別金額合計().toString());
+                source.keisanMeisaishoHokenryoGakuGokei = new RString(item.get編集後仮算定通知書共通情報().get更正後().get更正後普徴期別金額合計().toString());
             }
             if (item.get編集後仮算定通知書共通情報().get保険者名() != null) {
                 source.hokenshaName = new RString(item.get編集後仮算定通知書共通情報().get保険者名().toString());
@@ -412,7 +412,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisantei
             source.keisanMeisaishoShotokuDankai = item.get編集後仮算定通知書共通情報().get前年度情報().get前年度保険料段階();
             source.keisanMeisaishoNendo2 = item.get編集後仮算定通知書共通情報().get前年度情報().get前年度賦課年度();
             source.keisanMeisaishoKingaku1 = new RString(item.get編集後仮算定通知書共通情報().get前年度情報().get前年度保険料率().toString());
-            source.kaisanMeisaishoTokuchoGokei = new RString(item.get編集後仮算定通知書共通情報().get前年度情報().get前年度特徴期別金額01()
+            source.kaisanMeisaishoTokuchoGokeiGaku = new RString(item.get編集後仮算定通知書共通情報().get前年度情報().get前年度特徴期別金額01()
                     .add(item.get編集後仮算定通知書共通情報().get前年度情報().get前年度特徴期別金額02())
                     .add(item.get編集後仮算定通知書共通情報().get前年度情報().get前年度特徴期別金額03())
                     .add(item.get編集後仮算定通知書共通情報().get前年度情報().get前年度特徴期別金額04())

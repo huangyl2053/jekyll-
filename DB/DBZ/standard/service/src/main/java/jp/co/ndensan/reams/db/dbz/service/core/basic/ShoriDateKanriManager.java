@@ -148,9 +148,10 @@ public class ShoriDateKanriManager {
     @Transaction
     public boolean save処理日付管理マスタ(ShoriDateKanri 処理日付管理マスタ) {
         requireNonNull(処理日付管理マスタ, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日付管理マスタ"));
-        if (!処理日付管理マスタ.hasChanged()) {
-            return false;
-        }
+        // TODO
+//        if (!処理日付管理マスタ.hasChanged()) {
+//            return false;
+//        }
         return 1 == dac.save(処理日付管理マスタ.toEntity());
     }
 

@@ -102,7 +102,7 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
      * @return 判断結果
      */
     public boolean is修正データ無し(List<JigyoHokokuTokeiData> 修正データリスト) {
-        return (null == 修正データリスト || 修正データリスト.isEmpty());
+        return 修正データリスト.isEmpty();
     }
 
     /**
@@ -112,7 +112,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
      */
     public boolean is整合性チェック_件数_NG1() {
 
-        return is整合性チェック_件数_NG_整合_件数1_1() || is整合性チェック_件数_NG_整合_件数1_2() || is整合性チェック_件数_NG_整合_件数1_3();
+        return is整合性チェック_件数_NG_整合_件数1_1() || is整合性チェック_件数_NG_整合_件数1_2()
+                || is整合性チェック_件数_NG_整合_件数1_3();
     }
 
     /**
@@ -122,49 +123,68 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
      */
     public boolean is整合性チェック_件数_NG2() {
 
-        return is整合性チェック_件数_NG_整合_件数2_1() || is整合性チェック_件数_NG_整合_件数2_2() || is整合性チェック_件数_NG_整合_件数2_3();
+        return is整合性チェック_件数_NG_整合_件数2_1() || is整合性チェック_件数_NG_整合_件数2_2()
+                || is整合性チェック_件数_NG_整合_件数2_3();
     }
 
     private boolean is整合性チェック_件数_NG_整合_件数1_1() {
-        return is整合性チェック_件数_NG_1() || is整合性チェック_件数_NG_2() || is整合性チェック_件数_NG_3() || is整合性チェック_件数_NG_4()
-                || is整合性チェック_件数_NG_5() || is整合性チェック_件数_NG_6() || is整合性チェック_件数_NG_7() || is整合性チェック_件数_NG_8()
-                || is整合性チェック_件数_NG_9() || is整合性チェック_件数_NG_10() || is整合性チェック_件数_NG_11() || is整合性チェック_件数_NG_12()
+        return is整合性チェック_件数_NG_1() || is整合性チェック_件数_NG_2()
+                || is整合性チェック_件数_NG_3() || is整合性チェック_件数_NG_4()
+                || is整合性チェック_件数_NG_5() || is整合性チェック_件数_NG_6()
+                || is整合性チェック_件数_NG_7() || is整合性チェック_件数_NG_8()
+                || is整合性チェック_件数_NG_9() || is整合性チェック_件数_NG_10()
+                || is整合性チェック_件数_NG_11() || is整合性チェック_件数_NG_12()
                 || is整合性チェック_件数_NG_13();
 
     }
 
     private boolean is整合性チェック_件数_NG_整合_件数1_2() {
-        return is整合性チェック_件数_NG_14() || is整合性チェック_件数_NG_15() || is整合性チェック_件数_NG_16() || is整合性チェック_件数_NG_17()
-                || is整合性チェック_件数_NG_18() || is整合性チェック_件数_NG_19() || is整合性チェック_件数_NG_20() || is整合性チェック_件数_NG_21()
-                || is整合性チェック_件数_NG_22() || is整合性チェック_件数_NG_23() || is整合性チェック_件数_NG_24() || is整合性チェック_件数_NG_25()
+        return is整合性チェック_件数_NG_14() || is整合性チェック_件数_NG_15()
+                || is整合性チェック_件数_NG_16() || is整合性チェック_件数_NG_17()
+                || is整合性チェック_件数_NG_18() || is整合性チェック_件数_NG_19()
+                || is整合性チェック_件数_NG_20() || is整合性チェック_件数_NG_21()
+                || is整合性チェック_件数_NG_22() || is整合性チェック_件数_NG_23()
+                || is整合性チェック_件数_NG_24() || is整合性チェック_件数_NG_25()
                 || is整合性チェック_件数_NG_26();
     }
 
     private boolean is整合性チェック_件数_NG_整合_件数1_3() {
-        return is整合性チェック_件数_NG_27() || is整合性チェック_件数_NG_28() || is整合性チェック_件数_NG_29() || is整合性チェック_件数_NG_30()
-                || is整合性チェック_件数_NG_31() || is整合性チェック_件数_NG_32() || is整合性チェック_件数_NG_33() || is整合性チェック_件数_NG_34()
-                || is整合性チェック_件数_NG_35() || is整合性チェック_件数_NG_36() || is整合性チェック_件数_NG_37() || is整合性チェック_件数_NG_38();
+        return is整合性チェック_件数_NG_27() || is整合性チェック_件数_NG_28()
+                || is整合性チェック_件数_NG_29() || is整合性チェック_件数_NG_30()
+                || is整合性チェック_件数_NG_31() || is整合性チェック_件数_NG_32()
+                || is整合性チェック_件数_NG_33() || is整合性チェック_件数_NG_34()
+                || is整合性チェック_件数_NG_35() || is整合性チェック_件数_NG_36()
+                || is整合性チェック_件数_NG_37() || is整合性チェック_件数_NG_38();
     }
 
     private boolean is整合性チェック_件数_NG_整合_件数2_1() {
-        return is整合性チェック_件数_NG_1_1() || is整合性チェック_件数_NG_1_2() || is整合性チェック_件数_NG_1_3() || is整合性チェック_件数_NG_1_4()
-                || is整合性チェック_件数_NG_1_5() || is整合性チェック_件数_NG_1_6() || is整合性チェック_件数_NG_1_7() || is整合性チェック_件数_NG_1_8()
-                || is整合性チェック_件数_NG_1_9() || is整合性チェック_件数_NG_1_10() || is整合性チェック_件数_NG_1_11() || is整合性チェック_件数_NG_1_12()
+        return is整合性チェック_件数_NG_1_1() || is整合性チェック_件数_NG_1_2()
+                || is整合性チェック_件数_NG_1_3() || is整合性チェック_件数_NG_1_4()
+                || is整合性チェック_件数_NG_1_5() || is整合性チェック_件数_NG_1_6()
+                || is整合性チェック_件数_NG_1_7() || is整合性チェック_件数_NG_1_8()
+                || is整合性チェック_件数_NG_1_9() || is整合性チェック_件数_NG_1_10()
+                || is整合性チェック_件数_NG_1_11() || is整合性チェック_件数_NG_1_12()
                 || is整合性チェック_件数_NG_1_13();
 
     }
 
     private boolean is整合性チェック_件数_NG_整合_件数2_2() {
-        return is整合性チェック_件数_NG_1_14() || is整合性チェック_件数_NG_1_15() || is整合性チェック_件数_NG_1_16() || is整合性チェック_件数_NG_1_17()
-                || is整合性チェック_件数_NG_1_18() || is整合性チェック_件数_NG_1_19() || is整合性チェック_件数_NG_1_20() || is整合性チェック_件数_NG_1_21()
-                || is整合性チェック_件数_NG_1_22() || is整合性チェック_件数_NG_1_23() || is整合性チェック_件数_NG_1_24() || is整合性チェック_件数_NG_1_25()
+        return is整合性チェック_件数_NG_1_14() || is整合性チェック_件数_NG_1_15()
+                || is整合性チェック_件数_NG_1_16() || is整合性チェック_件数_NG_1_17()
+                || is整合性チェック_件数_NG_1_18() || is整合性チェック_件数_NG_1_19()
+                || is整合性チェック_件数_NG_1_20() || is整合性チェック_件数_NG_1_21()
+                || is整合性チェック_件数_NG_1_22() || is整合性チェック_件数_NG_1_23()
+                || is整合性チェック_件数_NG_1_24() || is整合性チェック_件数_NG_1_25()
                 || is整合性チェック_件数_NG_1_26();
     }
 
     private boolean is整合性チェック_件数_NG_整合_件数2_3() {
-        return is整合性チェック_件数_NG_1_27() || is整合性チェック_件数_NG_1_28() || is整合性チェック_件数_NG_1_29() || is整合性チェック_件数_NG_1_30()
-                || is整合性チェック_件数_NG_1_31() || is整合性チェック_件数_NG_1_32() || is整合性チェック_件数_NG_1_33() || is整合性チェック_件数_NG_1_34()
-                || is整合性チェック_件数_NG_1_35() || is整合性チェック_件数_NG_1_36() || is整合性チェック_件数_NG_1_37() || is整合性チェック_件数_NG_1_38();
+        return is整合性チェック_件数_NG_1_27() || is整合性チェック_件数_NG_1_28()
+                || is整合性チェック_件数_NG_1_29() || is整合性チェック_件数_NG_1_30()
+                || is整合性チェック_件数_NG_1_31() || is整合性チェック_件数_NG_1_32()
+                || is整合性チェック_件数_NG_1_33() || is整合性チェック_件数_NG_1_34()
+                || is整合性チェック_件数_NG_1_35() || is整合性チェック_件数_NG_1_36()
+                || is整合性チェック_件数_NG_1_37() || is整合性チェック_件数_NG_1_38();
     }
 
     private boolean is整合性チェック_件数_NG_1_1() {
@@ -177,7 +197,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 居宅介護予防サービス要介護５ = div.getPnlMain().getTbl1().getTextBox9().getValue();
         RString 居宅介護予防サービス要介護計 = div.getPnlMain().getTbl1().getTextBox10().getValue();
 
-        return 入力チェック2(居宅介護予防サービス経過的要介護, 居宅介護予防サービス要会護１, 居宅介護予防サービス要介護２, 居宅介護予防サービス要介護３,
+        return 入力チェック2(居宅介護予防サービス経過的要介護, 居宅介護予防サービス要会護１,
+                居宅介護予防サービス要介護２, 居宅介護予防サービス要介護３,
                 居宅介護予防サービス要介護４, 居宅介護予防サービス要介護５, 居宅介護予防サービス要介護計);
     }
 
@@ -191,7 +212,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 訪問サービス要介護５ = div.getPnlMain().getTbl1().getTextBox20().getValue();
         RString 訪問サービス要介護計 = div.getPnlMain().getTbl1().getTextBox21().getValue();
 
-        return 入力チェック2(訪問サービス経過的要介護, 訪問サービス要会護１, 訪問サービス要介護２, 訪問サービス要介護３, 訪問サービス要介護４,
+        return 入力チェック2(訪問サービス経過的要介護, 訪問サービス要会護１,
+                訪問サービス要介護２, 訪問サービス要介護３, 訪問サービス要介護４,
                 訪問サービス要介護５, 訪問サービス要介護計);
     }
 
@@ -205,7 +227,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 訪問介護要介護５ = div.getPnlMain().getTbl1().getTextBox31().getValue();
         RString 訪問介護要介護計 = div.getPnlMain().getTbl1().getTextBox32().getValue();
 
-        return 入力チェック2(訪問介護経過的要介護, 訪問介護要会護１, 訪問介護要介護２, 訪問介護要介護３, 訪問介護要介護４, 訪問介護要介護５, 訪問介護要介護計);
+        return 入力チェック2(訪問介護経過的要介護, 訪問介護要会護１, 訪問介護要介護２,
+                訪問介護要介護３, 訪問介護要介護４, 訪問介護要介護５, 訪問介護要介護計);
     }
 
     private boolean is整合性チェック_件数_NG_1_4() {
@@ -232,7 +255,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 訪問看護要介護５ = div.getPnlMain().getTbl1().getTextBox53().getValue();
         RString 訪問看護要介護計 = div.getPnlMain().getTbl1().getTextBox54().getValue();
 
-        return 入力チェック2(訪問看護経過的要介護, 訪問看護要会護１, 訪問看護要介護２, 訪問看護要介護３, 訪問看護要介護４, 訪問看護要介護５, 訪問看護要介護計);
+        return 入力チェック2(訪問看護経過的要介護, 訪問看護要会護１, 訪問看護要介護２,
+                訪問看護要介護３, 訪問看護要介護４, 訪問看護要介護５, 訪問看護要介護計);
     }
 
     private boolean is整合性チェック_件数_NG_1_6() {
@@ -245,8 +269,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 訪問リハビリテーション要介護５ = div.getPnlMain().getTbl1().getTextBox64().getValue();
         RString 訪問リハビリテーション要介護計 = div.getPnlMain().getTbl1().getTextBox65().getValue();
 
-        return 入力チェック2(訪問リハビリテーション経過的要介護, 訪問リハビリテーション要会護１, 訪問リハビリテーション要介護２,
-                訪問リハビリテーション要介護３, 訪問リハビリテーション要介護４, 訪問リハビリテーション要介護５, 訪問リハビリテーション要介護計);
+        return 入力チェック2(訪問リハビリテーション経過的要介護,
+                訪問リハビリテーション要会護１, 訪問リハビリテーション要介護２,
+                訪問リハビリテーション要介護３, 訪問リハビリテーション要介護４,
+                訪問リハビリテーション要介護５, 訪問リハビリテーション要介護計);
     }
 
     private boolean is整合性チェック_件数_NG_1_7() {
@@ -287,7 +313,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 通所介護要介護５ = div.getPnlMain().getTbl1().getTextBox97().getValue();
         RString 通所介護要介護計 = div.getPnlMain().getTbl1().getTextBox98().getValue();
 
-        return 入力チェック2(通所介護経過的要介護, 通所介護要会護１, 通所介護要介護２, 通所介護要介護３, 通所介護要介護４, 通所介護要介護５, 通所介護要介護計);
+        return 入力チェック2(通所介護経過的要介護, 通所介護要会護１,
+                通所介護要介護２, 通所介護要介護３, 通所介護要介護４, 通所介護要介護５, 通所介護要介護計);
     }
 
     private boolean is整合性チェック_件数_NG_1_10() {
@@ -300,8 +327,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 通所リハビリテーション要介護５ = div.getPnlMain().getTbl1().getTextBox108().getValue();
         RString 通所リハビリテーション要介護計 = div.getPnlMain().getTbl1().getTextBox109().getValue();
 
-        return 入力チェック2(通所リハビリテーション経過的要介護, 通所リハビリテーション要会護１, 通所リハビリテーション要介護２,
-                通所リハビリテーション要介護３, 通所リハビリテーション要介護４, 通所リハビリテーション要介護５, 通所リハビリテーション要介護計);
+        return 入力チェック2(通所リハビリテーション経過的要介護,
+                通所リハビリテーション要会護１, 通所リハビリテーション要介護２,
+                通所リハビリテーション要介護３, 通所リハビリテーション要介護４,
+                通所リハビリテーション要介護５, 通所リハビリテーション要介護計);
     }
 
     private boolean is整合性チェック_件数_NG_1_11() {
@@ -314,7 +343,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 短期入所サービス要介護５ = div.getPnlMain().getTbl1().getTextBox119().getValue();
         RString 短期入所サービス要介護計 = div.getPnlMain().getTbl1().getTextBox120().getValue();
 
-        return 入力チェック2(短期入所サービス経過的要介護, 短期入所サービス要会護１, 短期入所サービス要介護２, 短期入所サービス要介護３,
+        return 入力チェック2(短期入所サービス経過的要介護, 短期入所サービス要会護１,
+                短期入所サービス要介護２, 短期入所サービス要介護３,
                 短期入所サービス要介護４, 短期入所サービス要介護５, 短期入所サービス要介護計);
     }
 
@@ -343,8 +373,9 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 短期入所療養介護介護老人保健施設要介護計 = div.getPnlMain().getTbl1().getTextBox142().getValue();
 
         return 入力チェック2(短期入所療養介護介護老人保健施設経過的要介護, 短期入所療養介護介護老人保健施設要会護１,
-                短期入所療養介護介護老人保健施設要介護２, 短期入所療養介護介護老人保健施設要介護３, 短期入所療養介護介護老人保健施設要介護４,
-                短期入所療養介護介護老人保健施設要介護５, 短期入所療養介護介護老人保健施設要介護計);
+                短期入所療養介護介護老人保健施設要介護２, 短期入所療養介護介護老人保健施設要介護３,
+                短期入所療養介護介護老人保健施設要介護４, 短期入所療養介護介護老人保健施設要介護５,
+                短期入所療養介護介護老人保健施設要介護計);
     }
 
     private boolean is整合性チェック_件数_NG_1_14() {
@@ -358,8 +389,9 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 短期入所療養介護介護療養型医療施設等要介護計 = div.getPnlMain().getTbl1().getTextBox153().getValue();
 
         return 入力チェック2(短期入所療養介護介護療養型医療施設等経過的要介護, 短期入所療養介護介護療養型医療施設等要会護１,
-                短期入所療養介護介護療養型医療施設等要介護２, 短期入所療養介護介護療養型医療施設等要介護３, 短期入所療養介護介護療養型医療施設等要介護４,
-                短期入所療養介護介護療養型医療施設等要介護５, 短期入所療養介護介護療養型医療施設等要介護計);
+                短期入所療養介護介護療養型医療施設等要介護２, 短期入所療養介護介護療養型医療施設等要介護３,
+                短期入所療養介護介護療養型医療施設等要介護４, 短期入所療養介護介護療養型医療施設等要介護５,
+                短期入所療養介護介護療養型医療施設等要介護計);
     }
 
     private boolean is整合性チェック_件数_NG_1_15() {
@@ -372,8 +404,9 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 福祉用具住宅改修サービス要介護５ = div.getPnlMain().getTbl1().getTextBox163().getValue();
         RString 福祉用具住宅改修サービス要介護計 = div.getPnlMain().getTbl1().getTextBox164().getValue();
 
-        return 入力チェック2(福祉用具住宅改修サービス経過的要介護, 福祉用具住宅改修サービス要会護１, 福祉用具住宅改修サービス要介護２,
-                福祉用具住宅改修サービス要介護３, 福祉用具住宅改修サービス要介護４, 福祉用具住宅改修サービス要介護５, 福祉用具住宅改修サービス要介護計);
+        return 入力チェック2(福祉用具住宅改修サービス経過的要介護, 福祉用具住宅改修サービス要会護１,
+                福祉用具住宅改修サービス要介護２, 福祉用具住宅改修サービス要介護３, 福祉用具住宅改修サービス要介護４,
+                福祉用具住宅改修サービス要介護５, 福祉用具住宅改修サービス要介護計);
     }
 
     private boolean is整合性チェック_件数_NG_1_16() {
@@ -414,7 +447,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 住宅改修費要介護５ = div.getPnlMain().getTbl1().getTextBox196().getValue();
         RString 住宅改修費要介護計 = div.getPnlMain().getTbl1().getTextBox197().getValue();
 
-        return 入力チェック2(住宅改修費経過的要介護, 住宅改修費要会護１, 住宅改修費要介護２, 住宅改修費要介護３, 住宅改修費要介護４,
+        return 入力チェック2(住宅改修費経過的要介護, 住宅改修費要会護１,
+                住宅改修費要介護２, 住宅改修費要介護３, 住宅改修費要介護４,
                 住宅改修費要介護５, 住宅改修費要介護計);
     }
 
@@ -428,8 +462,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 特定施設入居者生活介護要介護５ = div.getPnlMain().getTbl1().getTextBox207().getValue();
         RString 特定施設入居者生活介護要介護計 = div.getPnlMain().getTbl1().getTextBox208().getValue();
 
-        return 入力チェック2(特定施設入居者生活介護経過的要介護, 特定施設入居者生活介護要会護１, 特定施設入居者生活介護要介護２,
-                特定施設入居者生活介護要介護３, 特定施設入居者生活介護要介護４, 特定施設入居者生活介護要介護５, 特定施設入居者生活介護要介護計);
+        return 入力チェック2(特定施設入居者生活介護経過的要介護,
+                特定施設入居者生活介護要会護１, 特定施設入居者生活介護要介護２,
+                特定施設入居者生活介護要介護３, 特定施設入居者生活介護要介護４,
+                特定施設入居者生活介護要介護５, 特定施設入居者生活介護要介護計);
     }
 
     private boolean is整合性チェック_件数_NG_1_20() {
@@ -442,8 +478,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 介護予防支援居宅介護支援要介護５ = div.getPnlMain().getTbl1().getTextBox218().getValue();
         RString 介護予防支援居宅介護支援要介護計 = div.getPnlMain().getTbl1().getTextBox219().getValue();
 
-        return 入力チェック2(介護予防支援居宅介護支援経過的要介護, 介護予防支援居宅介護支援要会護１, 介護予防支援居宅介護支援要介護２,
-                介護予防支援居宅介護支援要介護３, 介護予防支援居宅介護支援要介護４, 介護予防支援居宅介護支援要介護５, 介護予防支援居宅介護支援要介護計);
+        return 入力チェック2(介護予防支援居宅介護支援経過的要介護,
+                介護予防支援居宅介護支援要会護１, 介護予防支援居宅介護支援要介護２,
+                介護予防支援居宅介護支援要介護３, 介護予防支援居宅介護支援要介護４,
+                介護予防支援居宅介護支援要介護５, 介護予防支援居宅介護支援要介護計);
     }
 
     private boolean is整合性チェック_件数_NG_1_21() {
@@ -456,7 +494,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 地域密着型介護予防サービス要介護５ = div.getPnlMain().getTbl1().getTextBox229().getValue();
         RString 地域密着型介護予防サービス要介護計 = div.getPnlMain().getTbl1().getTextBox230().getValue();
 
-        return 入力チェック2(地域密着型介護予防サービス経過的要介護, 地域密着型介護予防サービス要会護１, 地域密着型介護予防サービス要介護２,
+        return 入力チェック2(地域密着型介護予防サービス経過的要介護,
+                地域密着型介護予防サービス要会護１, 地域密着型介護予防サービス要介護２,
                 地域密着型介護予防サービス要介護３, 地域密着型介護予防サービス要介護４, 地域密着型介護予防サービス要介護５,
                 地域密着型介護予防サービス要介護計);
     }
@@ -471,8 +510,9 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 定期巡回随時対応型訪問介護看護要介護５ = div.getPnlMain().getTbl1().getTextBox239().getValue();
         RString 定期巡回随時対応型訪問介護看護要介護計 = div.getPnlMain().getTbl1().getTextBox240().getValue();
 
-        return 入力チェック2(定期巡回随時対応型訪問介護看護経過的要介護, 定期巡回随時対応型訪問介護看護要会護１, 定期巡回随時対応型訪問介護看護要介護２,
-                定期巡回随時対応型訪問介護看護要介護３, 定期巡回随時対応型訪問介護看護要介護４, 定期巡回随時対応型訪問介護看護要介護５,
+        return 入力チェック2(定期巡回随時対応型訪問介護看護経過的要介護, 定期巡回随時対応型訪問介護看護要会護１,
+                定期巡回随時対応型訪問介護看護要介護２, 定期巡回随時対応型訪問介護看護要介護３,
+                定期巡回随時対応型訪問介護看護要介護４, 定期巡回随時対応型訪問介護看護要介護５,
                 定期巡回随時対応型訪問介護看護要介護計);
     }
 
@@ -486,7 +526,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 夜間対応型訪問介護要介護５ = div.getPnlMain().getTbl1().getTextBox249().getValue();
         RString 夜間対応型訪問介護要介護計 = div.getPnlMain().getTbl1().getTextBox250().getValue();
 
-        return 入力チェック2(夜間対応型訪問介護経過的要介護, 夜間対応型訪問介護要会護１, 夜間対応型訪問介護要介護２, 夜間対応型訪問介護要介護３,
+        return 入力チェック2(夜間対応型訪問介護経過的要介護, 夜間対応型訪問介護要会護１,
+                夜間対応型訪問介護要介護２, 夜間対応型訪問介護要介護３,
                 夜間対応型訪問介護要介護４, 夜間対応型訪問介護要介護５, 夜間対応型訪問介護要介護計);
     }
 
@@ -500,7 +541,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 認知症対応型通所介護要介護５ = div.getPnlMain().getTbl1().getTextBox260().getValue();
         RString 認知症対応型通所介護要介護計 = div.getPnlMain().getTbl1().getTextBox261().getValue();
 
-        return 入力チェック2(認知症対応型通所介護経過的要介護, 認知症対応型通所介護要会護１, 認知症対応型通所介護要介護２, 認知症対応型通所介護要介護３,
+        return 入力チェック2(認知症対応型通所介護経過的要介護, 認知症対応型通所介護要会護１,
+                認知症対応型通所介護要介護２, 認知症対応型通所介護要介護３,
                 認知症対応型通所介護要介護４, 認知症対応型通所介護要介護５, 認知症対応型通所介護要介護計);
     }
 
@@ -514,8 +556,9 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 小規模多機能型居宅介護要介護５ = div.getPnlMain().getTbl1().getTextBox271().getValue();
         RString 小規模多機能型居宅介護要介護計 = div.getPnlMain().getTbl1().getTextBox272().getValue();
 
-        return 入力チェック2(小規模多機能型居宅介護経過的要介護, 小規模多機能型居宅介護要会護１, 小規模多機能型居宅介護要介護２,
-                小規模多機能型居宅介護要介護３, 小規模多機能型居宅介護要介護４, 小規模多機能型居宅介護要介護５, 小規模多機能型居宅介護要介護計);
+        return 入力チェック2(小規模多機能型居宅介護経過的要介護, 小規模多機能型居宅介護要会護１,
+                小規模多機能型居宅介護要介護２, 小規模多機能型居宅介護要介護３, 小規模多機能型居宅介護要介護４,
+                小規模多機能型居宅介護要介護５, 小規模多機能型居宅介護要介護計);
     }
 
     private boolean is整合性チェック_件数_NG_1_26() {
@@ -528,8 +571,9 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 認知症対応型共同生活介護要介護５ = div.getPnlMain().getTbl1().getTextBox281().getValue();
         RString 認知症対応型共同生活介護要介護計 = div.getPnlMain().getTbl1().getTextBox282().getValue();
 
-        return 入力チェック2(認知症対応型共同生活介護経過的要介護, 認知症対応型共同生活介護要会護１, 認知症対応型共同生活介護要介護２,
-                認知症対応型共同生活介護要介護３, 認知症対応型共同生活介護要介護４, 認知症対応型共同生活介護要介護５, 認知症対応型共同生活介護要介護計);
+        return 入力チェック2(認知症対応型共同生活介護経過的要介護, 認知症対応型共同生活介護要会護１,
+                認知症対応型共同生活介護要介護２, 認知症対応型共同生活介護要介護３, 認知症対応型共同生活介護要介護４,
+                認知症対応型共同生活介護要介護５, 認知症対応型共同生活介護要介護計);
     }
 
     private boolean is整合性チェック_件数_NG_1_27() {
@@ -542,9 +586,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 地域密着型特定施設入居者生活介護要介護５ = div.getPnlMain().getTbl1().getTextBox291().getValue();
         RString 地域密着型特定施設入居者生活介護要介護計 = div.getPnlMain().getTbl1().getTextBox292().getValue();
 
-        return 入力チェック2(地域密着型特定施設入居者生活介護経過的要介護, 地域密着型特定施設入居者生活介護要会護１, 地域密着型特定施設入居者生活介護要介護２,
-                地域密着型特定施設入居者生活介護要介護３, 地域密着型特定施設入居者生活介護要介護４, 地域密着型特定施設入居者生活介護要介護５,
-                地域密着型特定施設入居者生活介護要介護計);
+        return 入力チェック2(地域密着型特定施設入居者生活介護経過的要介護,
+                地域密着型特定施設入居者生活介護要会護１, 地域密着型特定施設入居者生活介護要介護２,
+                地域密着型特定施設入居者生活介護要介護３, 地域密着型特定施設入居者生活介護要介護４,
+                地域密着型特定施設入居者生活介護要介護５, 地域密着型特定施設入居者生活介護要介護計);
     }
 
     private boolean is整合性チェック_件数_NG_1_28() {
@@ -557,10 +602,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 地域密着型介護老人福祉施設入所者生活介護要介護５ = div.getPnlMain().getTbl1().getTextBox301().getValue();
         RString 地域密着型介護老人福祉施設入所者生活介護要介護計 = div.getPnlMain().getTbl1().getTextBox302().getValue();
 
-        return 入力チェック2(地域密着型介護老人福祉施設入所者生活介護経過的要介護, 地域密着型介護老人福祉施設入所者生活介護要会護１,
-                地域密着型介護老人福祉施設入所者生活介護要介護２, 地域密着型介護老人福祉施設入所者生活介護要介護３,
-                地域密着型介護老人福祉施設入所者生活介護要介護４, 地域密着型介護老人福祉施設入所者生活介護要介護５,
-                地域密着型介護老人福祉施設入所者生活介護要介護計);
+        return 入力チェック2(地域密着型介護老人福祉施設入所者生活介護経過的要介護,
+                地域密着型介護老人福祉施設入所者生活介護要会護１, 地域密着型介護老人福祉施設入所者生活介護要介護２,
+                地域密着型介護老人福祉施設入所者生活介護要介護３, 地域密着型介護老人福祉施設入所者生活介護要介護４,
+                地域密着型介護老人福祉施設入所者生活介護要介護５, 地域密着型介護老人福祉施設入所者生活介護要介護計);
     }
 
     private boolean is整合性チェック_件数_NG_1_29() {
@@ -587,7 +632,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 施設サービス要介護５ = div.getPnlMain().getTbl1().getTextBox322().getValue();
         RString 施設サービス要介護計 = div.getPnlMain().getTbl1().getTextBox323().getValue();
 
-        return 入力チェック2(施設サービス経過的要介護, 施設サービス要会護１, 施設サービス要介護２, 施設サービス要介護３, 施設サービス要介護４,
+        return 入力チェック2(施設サービス経過的要介護, 施設サービス要会護１,
+                施設サービス要介護２, 施設サービス要介護３, 施設サービス要介護４,
                 施設サービス要介護５, 施設サービス要介護計);
     }
 
@@ -602,7 +648,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 介護老人福祉施設_1_要介護計 = div.getPnlMain().getTbl1().getTextBox334().getValue();
 
         return 入力チェック2(介護老人福祉施設_1_経過的要介護, 介護老人福祉施設_1_要会護１, 介護老人福祉施設_1_要介護２,
-                介護老人福祉施設_1_要介護３, 介護老人福祉施設_1_要介護４, 介護老人福祉施設_1_要介護５, 介護老人福祉施設_1_要介護計);
+                介護老人福祉施設_1_要介護３, 介護老人福祉施設_1_要介護４,
+                介護老人福祉施設_1_要介護５, 介護老人福祉施設_1_要介護計);
     }
 
     private boolean is整合性チェック_件数_NG_1_32() {
@@ -615,7 +662,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 介護老人保健施設_1_要介護５ = div.getPnlMain().getTbl1().getTextBox343().getValue();
         RString 介護老人保健施設_1_要介護計 = div.getPnlMain().getTbl1().getTextBox344().getValue();
 
-        return 入力チェック2(介護老人保健施設_1_経過的要介護, 介護老人保健施設_1_要会護１, 介護老人保健施設_1_要介護２, 介護老人保健施設_1_要介護３,
+        return 入力チェック2(介護老人保健施設_1_経過的要介護, 介護老人保健施設_1_要会護１,
+                介護老人保健施設_1_要介護２, 介護老人保健施設_1_要介護３,
                 介護老人保健施設_1_要介護４, 介護老人保健施設_1_要介護５, 介護老人保健施設_1_要介護計);
     }
 
@@ -629,7 +677,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 介護療養型医療施設_1_要介護５ = div.getPnlMain().getTbl1().getTextBox353().getValue();
         RString 介護療養型医療施設_1_要介護計 = div.getPnlMain().getTbl1().getTextBox354().getValue();
 
-        return 入力チェック2(介護療養型医療施設_1_経過的要介護, 介護療養型医療施設_1_要会護１, 介護療養型医療施設_1_要介護２, 介護療養型医療施設_1_要介護３,
+        return 入力チェック2(介護療養型医療施設_1_経過的要介護, 介護療養型医療施設_1_要会護１,
+                介護療養型医療施設_1_要介護２, 介護療養型医療施設_1_要介護３,
                 介護療養型医療施設_1_要介護４, 介護療養型医療施設_1_要介護５, 介護療養型医療施設_1_要介護計);
     }
 
@@ -643,7 +692,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 食事提供費用再掲要介護５ = div.getPnlMain().getTbl1().getTextBox364().getValue();
         RString 食事提供費用再掲要介護計 = div.getPnlMain().getTbl1().getTextBox365().getValue();
 
-        return 入力チェック2(食事提供費用再掲経過的要介護, 食事提供費用再掲要会護１, 食事提供費用再掲要介護２, 食事提供費用再掲要介護３,
+        return 入力チェック2(食事提供費用再掲経過的要介護, 食事提供費用再掲要会護１,
+                食事提供費用再掲要介護２, 食事提供費用再掲要介護３,
                 食事提供費用再掲要介護４, 食事提供費用再掲要介護５, 食事提供費用再掲要介護計);
     }
 
@@ -657,7 +707,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 介護老人福祉施設_2_要介護５ = div.getPnlMain().getTbl1().getTextBox375().getValue();
         RString 介護老人福祉施設_2_要介護計 = div.getPnlMain().getTbl1().getTextBox376().getValue();
 
-        return 入力チェック2(介護老人福祉施設_2_経過的要介護, 介護老人福祉施設_2_要会護１, 介護老人福祉施設_2_要介護２, 介護老人福祉施設_2_要介護３,
+        return 入力チェック2(介護老人福祉施設_2_経過的要介護, 介護老人福祉施設_2_要会護１,
+                介護老人福祉施設_2_要介護２, 介護老人福祉施設_2_要介護３,
                 介護老人福祉施設_2_要介護４, 介護老人福祉施設_2_要介護５, 介護老人福祉施設_2_要介護計);
     }
 
@@ -671,7 +722,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 介護老人保健施設_2_要介護５ = div.getPnlMain().getTbl1().getTextBox385().getValue();
         RString 介護老人保健施設_2_要介護計 = div.getPnlMain().getTbl1().getTextBox386().getValue();
 
-        return 入力チェック2(介護老人保健施設_2_経過的要介護, 介護老人保健施設_2_要会護１, 介護老人保健施設_2_要介護２, 介護老人保健施設_2_要介護３,
+        return 入力チェック2(介護老人保健施設_2_経過的要介護, 介護老人保健施設_2_要会護１,
+                介護老人保健施設_2_要介護２, 介護老人保健施設_2_要介護３,
                 介護老人保健施設_2_要介護４, 介護老人保健施設_2_要介護５, 介護老人保健施設_2_要介護計);
     }
 
@@ -685,7 +737,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 介護療養型医療施設_2_要介護５ = div.getPnlMain().getTbl1().getTextBox395().getValue();
         RString 介護療養型医療施設_2_要介護計 = div.getPnlMain().getTbl1().getTextBox396().getValue();
 
-        return 入力チェック2(介護療養型医療施設_2_経過的要介護, 介護療養型医療施設_2_要会護１, 介護療養型医療施設_2_要介護２, 介護療養型医療施設_2_要介護３,
+        return 入力チェック2(介護療養型医療施設_2_経過的要介護, 介護療養型医療施設_2_要会護１,
+                介護療養型医療施設_2_要介護２, 介護療養型医療施設_2_要介護３,
                 介護療養型医療施設_2_要介護４, 介護療養型医療施設_2_要介護５, 介護療養型医療施設_2_要介護計);
     }
 
@@ -699,7 +752,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 総計要介護５ = div.getPnlMain().getTbl1().getTextBox407().getValue();
         RString 総計要介護計 = div.getPnlMain().getTbl1().getTextBox408().getValue();
 
-        return 入力チェック2(総計経過的要介護, 総計要会護１, 総計要介護２, 総計要介護３, 総計要介護４, 総計要介護５, 総計要介護計);
+        return 入力チェック2(総計経過的要介護, 総計要会護１, 総計要介護２,
+                総計要介護３, 総計要介護４, 総計要介護５, 総計要介護計);
     }
 
     private boolean is整合性チェック_件数_NG_1() {
@@ -816,7 +870,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 短期入所療養介護介護老人保健施設要支援２ = div.getPnlMain().getTbl1().getTextBox134().getValue();
         RString 短期入所療養介護介護老人保健施設要支援計 = div.getPnlMain().getTbl1().getTextBox135().getValue();
 
-        return 入力チェック1(短期入所療養介護介護老人保健施設要支援１, 短期入所療養介護介護老人保健施設要支援２, 短期入所療養介護介護老人保健施設要支援計);
+        return 入力チェック1(短期入所療養介護介護老人保健施設要支援１,
+                短期入所療養介護介護老人保健施設要支援２, 短期入所療養介護介護老人保健施設要支援計);
     }
 
     private boolean is整合性チェック_件数_NG_14() {
@@ -835,7 +890,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 福祉用具住宅改修サービス要支援２ = div.getPnlMain().getTbl1().getTextBox156().getValue();
         RString 福祉用具住宅改修サービス要支援計 = div.getPnlMain().getTbl1().getTextBox157().getValue();
 
-        return 入力チェック1(福祉用具住宅改修サービス要支援１, 福祉用具住宅改修サービス要支援２, 福祉用具住宅改修サービス要支援計);
+        return 入力チェック1(福祉用具住宅改修サービス要支援１,
+                福祉用具住宅改修サービス要支援２, 福祉用具住宅改修サービス要支援計);
     }
 
     private boolean is整合性チェック_件数_NG_16() {
@@ -880,7 +936,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 介護予防支援居宅介護支援要支援２ = div.getPnlMain().getTbl1().getTextBox211().getValue();
         RString 介護予防支援居宅介護支援要支援計 = div.getPnlMain().getTbl1().getTextBox212().getValue();
 
-        return 入力チェック1(介護予防支援居宅介護支援要支援１, 介護予防支援居宅介護支援要支援２, 介護予防支援居宅介護支援要支援計);
+        return 入力チェック1(介護予防支援居宅介護支援要支援１,
+                介護予防支援居宅介護支援要支援２, 介護予防支援居宅介護支援要支援計);
     }
 
     private boolean is整合性チェック_件数_NG_21() {
@@ -889,7 +946,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 地域密着型介護予防サービス要支援２ = div.getPnlMain().getTbl1().getTextBox222().getValue();
         RString 地域密着型介護予防サービス要支援計 = div.getPnlMain().getTbl1().getTextBox223().getValue();
 
-        return 入力チェック1(地域密着型介護予防サービス要支援１, 地域密着型介護予防サービス要支援２, 地域密着型介護予防サービス要支援計);
+        return 入力チェック1(地域密着型介護予防サービス要支援１,
+                地域密着型介護予防サービス要支援２, 地域密着型介護予防サービス要支援計);
     }
 
     private boolean is整合性チェック_件数_NG_22() {
@@ -898,7 +956,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 定期巡回随時対応型訪問介護看護要支援２ = div.getPnlMain().getTbl1().getTextBox233().getValue();
         RString 定期巡回随時対応型訪問介護看護要支援計 = div.getPnlMain().getTbl1().getTextBox234().getValue();
 
-        return 入力チェック1(定期巡回随時対応型訪問介護看護要支援１, 定期巡回随時対応型訪問介護看護要支援２, 定期巡回随時対応型訪問介護看護要支援計);
+        return 入力チェック1(定期巡回随時対応型訪問介護看護要支援１,
+                定期巡回随時対応型訪問介護看護要支援２, 定期巡回随時対応型訪問介護看護要支援計);
     }
 
     private boolean is整合性チェック_件数_NG_23() {
@@ -934,7 +993,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 認知症対応型共同生活介護要支援２ = div.getPnlMain().getTbl1().getTextBox275().getValue();
         RString 認知症対応型共同生活介護要支援計 = div.getPnlMain().getTbl1().getTextBox276().getValue();
 
-        return 入力チェック1(認知症対応型共同生活介護要支援１, 認知症対応型共同生活介護要支援２, 認知症対応型共同生活介護要支援計);
+        return 入力チェック1(認知症対応型共同生活介護要支援１,
+                認知症対応型共同生活介護要支援２, 認知症対応型共同生活介護要支援計);
     }
 
     private boolean is整合性チェック_件数_NG_27() {
@@ -943,7 +1003,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         RString 地域密着型特定施設入居者生活介護要支援２ = div.getPnlMain().getTbl1().getTextBox285().getValue();
         RString 地域密着型特定施設入居者生活介護要支援計 = div.getPnlMain().getTbl1().getTextBox286().getValue();
 
-        return 入力チェック1(地域密着型特定施設入居者生活介護要支援１, 地域密着型特定施設入居者生活介護要支援２, 地域密着型特定施設入居者生活介護要支援計);
+        return 入力チェック1(地域密着型特定施設入居者生活介護要支援１,
+                地域密着型特定施設入居者生活介護要支援２, 地域密着型特定施設入居者生活介護要支援計);
     }
 
     private boolean is整合性チェック_件数_NG_28() {
@@ -1049,11 +1110,14 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
     private boolean 入力チェック1(RString 入力要支援１,
             RString 入力要支援２,
             RString 入力要支援計) {
-        Decimal 要支援１ = (null == 入力要支援１ || 入力要支援１.isEmpty() ? Decimal.ZERO : new Decimal(入力要支援１.toString()));
-        Decimal 要支援2 = (null == 入力要支援２ || 入力要支援２.isEmpty()) ? Decimal.ZERO : new Decimal(入力要支援２.toString());
-        Decimal 支援計 = (null == 入力要支援計 || 入力要支援計.isEmpty()) ? Decimal.ZERO : new Decimal(入力要支援計.toString());
+        Decimal 要支援１ = (入力要支援１ == null || 入力要支援１.isEmpty()
+                ? Decimal.ZERO : new Decimal(入力要支援１.toString()));
+        Decimal 要支援２ = (入力要支援２ == null || 入力要支援２.isEmpty())
+                ? Decimal.ZERO : new Decimal(入力要支援２.toString());
+        Decimal 支援計 = (入力要支援計
+                == null || 入力要支援計.isEmpty()) ? Decimal.ZERO : new Decimal(入力要支援計.toString());
 
-        return !要支援１.add(要支援2).equals(支援計);
+        return !要支援１.add(要支援２).equals(支援計);
     }
 
     private boolean 入力チェック2(RString 入力経過的要介護,
@@ -1063,13 +1127,20 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
             RString 入力要介護４,
             RString 入力要介護５,
             RString 入力要介護計) {
-        Decimal 経過的要介護 = (null == 入力経過的要介護 || 入力経過的要介護.isEmpty() ? Decimal.ZERO : new Decimal(入力経過的要介護.toString()));
-        Decimal 要会護１ = (null == 入力要会護１ || 入力要会護１.isEmpty()) ? Decimal.ZERO : new Decimal(入力要会護１.toString());
-        Decimal 要介護２ = (null == 入力要介護２ || 入力要介護２.isEmpty()) ? Decimal.ZERO : new Decimal(入力要介護２.toString());
-        Decimal 要会護３ = (null == 入力要介護３ || 入力要介護３.isEmpty()) ? Decimal.ZERO : new Decimal(入力要介護３.toString());
-        Decimal 要介護４ = (null == 入力要介護４ || 入力要介護４.isEmpty()) ? Decimal.ZERO : new Decimal(入力要介護４.toString());
-        Decimal 要会護５ = (null == 入力要介護５ || 入力要介護５.isEmpty()) ? Decimal.ZERO : new Decimal(入力要介護５.toString());
-        Decimal 要介護計 = (null == 入力要介護計 || 入力要介護計.isEmpty()) ? Decimal.ZERO : new Decimal(入力要介護計.toString());
+        Decimal 経過的要介護 = (入力経過的要介護 == null || 入力経過的要介護.isEmpty()
+                ? Decimal.ZERO : new Decimal(入力経過的要介護.toString()));
+        Decimal 要会護１ = (入力要会護１ == null || 入力要会護１.isEmpty())
+                ? Decimal.ZERO : new Decimal(入力要会護１.toString());
+        Decimal 要介護２ = (入力要介護２ == null || 入力要介護２.isEmpty())
+                ? Decimal.ZERO : new Decimal(入力要介護２.toString());
+        Decimal 要会護３ = (入力要介護３ == null || 入力要介護３.isEmpty())
+                ? Decimal.ZERO : new Decimal(入力要介護３.toString());
+        Decimal 要介護４ = (入力要介護４ == null || 入力要介護４.isEmpty())
+                ? Decimal.ZERO : new Decimal(入力要介護４.toString());
+        Decimal 要会護５ = (入力要介護５ == null || 入力要介護５.isEmpty())
+                ? Decimal.ZERO : new Decimal(入力要介護５.toString());
+        Decimal 要介護計 = (入力要介護計 == null || 入力要介護計.isEmpty())
+                ? Decimal.ZERO : new Decimal(入力要介護計.toString());
 
         return !経過的要介護.add(要会護１).add(要介護２).add(要会護３).add(要介護４).add(要会護５).equals(要介護計);
     }
@@ -1612,7 +1683,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         return 修正データリスト;
     }
 
-    private List<JigyoHokokuTokeiData> get事業報告修正データリスト(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
+    private List<JigyoHokokuTokeiData> get事業報告修正データリスト(
+            List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト) {
 
         修正データリスト = editor修正データリスト1(事業報告月報詳細データリスト, 修正データリスト);
@@ -1757,7 +1829,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
             }
         } else {
             if (entity == null) {
-                entity = set事業報告統計データ(事業報告月報詳細データリスト, 横番号, 縦番号, new Decimal(集計結果値.toString()));
+                entity = set事業報告統計データ(事業報告月報詳細データリスト, 横番号, 縦番号,
+                        new Decimal(集計結果値.toString()));
                 修正データリスト.add(entity);
                 return 修正データリスト;
             } else if (entity.get集計結果値() == null) {

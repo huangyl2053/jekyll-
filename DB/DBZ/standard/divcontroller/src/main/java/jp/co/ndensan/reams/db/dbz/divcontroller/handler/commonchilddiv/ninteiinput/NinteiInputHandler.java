@@ -7,14 +7,15 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteiin
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBDCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputDataPassModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.NinteiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.dgServiceIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteiinput.NinteiInputFinder;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -55,7 +56,8 @@ public class NinteiInputHandler {
         div.getTxtYukoKaishiYMD().setValue(model.get有効開始年月日());
         div.getTxtYukoShuryoYMD().setValue(model.get有効終了年月日());
         NinteiInputFinder ninteiInputFinder = NinteiInputFinder.createInstance();
-        List<UzT0007CodeEntity> entityList = CodeMaster.getCode(SubGyomuCode.DBD介護受給, new CodeShubetsu("0002"));
+        List<UzT0007CodeEntity> entityList = CodeMaster.getCode(SubGyomuCode.DBD介護受給,
+                DBDCodeShubetsu.指定サービス種類コード.getコード(), FlexibleDate.getNowDate());
         List<dgServiceIchiran_Row> rowList = new ArrayList<>();
         for (UzT0007CodeEntity entity : entityList) {
             dgServiceIchiran_Row row = new dgServiceIchiran_Row();
@@ -66,10 +68,16 @@ public class NinteiInputHandler {
         div.getDgServiceIchiran().setDataSource(rowList);
         List<JukyushaDaicho> jukyushaDaichoList = ninteiInputFinder.getサービス(model.get申請書管理番号()).records();
         setSelect(rowList, jukyushaDaichoList);
-        if (!new RString("TemnyuMode").equals(new RString(div.getMode_ShoriType().toString()))
-                && !new RString("InputMode").equals(new RString(div.getMode_ShoriType().toString()))
-                && !new RString("TokushuTsuikaMode").equals(new RString(div.getMode_ShoriType().toString()))
-                && !new RString("TokushuShuseiMode").equals(new RString(div.getMode_ShoriType().toString()))) {
+        if (new RString("TemnyuMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("InputMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("TokushuTsuikaMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("TokushuShuseiMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("TokushuShinseiTorikeshiMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("ShokkenTsuikaMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("ShokkenShuseiMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("KyakkaTorikeshiRirekiShusei").equals(new RString(div.getMode_ShoriType().toString()))) {
+            div.getDgServiceIchiran().setReadOnly(false);
+        } else {
             div.getDgServiceIchiran().setReadOnly(true);
         }
     }

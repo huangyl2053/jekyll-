@@ -230,14 +230,14 @@ public class KarisanteiHenkoTsuchishoB5YokoReport extends Report<KarisanteiHenko
     private void set普徴(int 行, KarisanteiHenkoTsuchishoB5YokoItem item, List<UniversalSignDeliveryInformation> 普徴納期情報リスト,
             EditedKariSanteiTsuchiShoKyotsuBeforeCorrection 更正前, EditedKariSanteiTsuchiShoKyotsuAfterCorrection 更正後) {
         RString 期別 = RString.EMPTY;
-        if (普徴納期情報リスト != null && 普徴納期情報リスト.get(行) != null && 普徴納期情報リスト.get(行).get期月() != null) {
+        if (普徴納期情報リスト != null && 普徴納期情報リスト.size() > 行 && 普徴納期情報リスト.get(行) != null && 普徴納期情報リスト.get(行).get期月() != null) {
             期別 = 普徴納期情報リスト.get(行).get期月().get期();
             item.setListKibetsu_5(普徴納期情報リスト.get(行).get期月().get期());
             item.setListKibetsu_6(普徴納期情報リスト.get(行).get期月().get月() != null ? 普徴納期情報リスト.get(行).get期月().get月().getコード() : RString.EMPTY);
         }
 
-        Decimal 更正前期別金額 = Decimal.ZERO;
-        Decimal 更正後期別金額 = Decimal.ZERO;
+        Decimal 更正前期別金額 = null;
+        Decimal 更正後期別金額 = null;
         List<UniversalPhase> 更正前普徴期別金額リスト = 更正前.get更正前普徴期別金額リスト();
         if (更正前普徴期別金額リスト == null) {
             更正前普徴期別金額リスト = new ArrayList<>();
@@ -256,22 +256,26 @@ public class KarisanteiHenkoTsuchishoB5YokoReport extends Report<KarisanteiHenko
                 更正後期別金額 = 期別金額.get金額();
             }
         }
-        if (更正前期別金額 == Decimal.ZERO && 更正後期別金額 == Decimal.ZERO) {
+        set更正前と更正後の期別金額(item, 更正前期別金額, 更正後期別金額);
+    }
+
+    private void set更正前と更正後の期別金額(KarisanteiHenkoTsuchishoB5YokoItem item, Decimal 更正前期別金額, Decimal 更正後期別金額) {
+        if ((更正前期別金額 == null || Decimal.ZERO.equals(更正前期別金額)) && (更正後期別金額 == null || Decimal.ZERO.equals(更正後期別金額))) {
             item.setListKibetsu_7(RString.EMPTY);
             item.setListKibetsu_8(RString.EMPTY);
-        } else if (更正前期別金額 == Decimal.ZERO && 更正後期別金額 != Decimal.ZERO) {
+        } else if ((更正前期別金額 == null || Decimal.ZERO.equals(更正前期別金額)) && (更正後期別金額 != null && !Decimal.ZERO.equals(更正後期別金額))) {
             item.setListKibetsu_7(new RString("0"));
 
             IKingakuFormatter 更正後期別金額formatter = KingakuFormatter.create(更正後期別金額);
             RString 更正後期別金額RStr = new RString(更正後期別金額formatter.format(KingakuUnit.円).setCommaSeparated().toString());
             item.setListKibetsu_8(更正後期別金額RStr);
-        } else if (更正前期別金額 != Decimal.ZERO && 更正後期別金額 == Decimal.ZERO) {
+        } else if ((更正前期別金額 != null && !Decimal.ZERO.equals(更正前期別金額)) && (更正後期別金額 == null || Decimal.ZERO.equals(更正後期別金額))) {
 
             IKingakuFormatter 更正前期別金額formatter = KingakuFormatter.create(更正前期別金額);
             RString 更正前期別金額RStr = new RString(更正前期別金額formatter.format(KingakuUnit.円).setCommaSeparated().toString());
             item.setListKibetsu_7(更正前期別金額RStr);
             item.setListKibetsu_8(new RString("0"));
-        } else if (更正前期別金額 != Decimal.ZERO && 更正後期別金額 != Decimal.ZERO) {
+        } else if (更正前期別金額 != null && !Decimal.ZERO.equals(更正前期別金額) && 更正後期別金額 != null && !Decimal.ZERO.equals(更正後期別金額)) {
             IKingakuFormatter 更正前期別金額formatter = KingakuFormatter.create(更正前期別金額);
             RString 更正前期別金額RStr = new RString(更正前期別金額formatter.format(KingakuUnit.円).setCommaSeparated().toString());
             item.setListKibetsu_7(更正前期別金額RStr);

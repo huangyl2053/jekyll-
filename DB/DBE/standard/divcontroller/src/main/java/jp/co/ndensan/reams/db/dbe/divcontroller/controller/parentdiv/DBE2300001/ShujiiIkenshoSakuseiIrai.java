@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2300001
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJohoIdentifier;
@@ -29,8 +30,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2300001.Shu
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiReportOutputService;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJohoIdentifier;
@@ -112,11 +113,14 @@ public class ShujiiIkenshoSakuseiIrai {
     private static final RString 意見書作成料_種別 = new RString("✔");
     private static final RString 再依頼申請者削除 = new RString("再依頼申請者を削除します。");
     private static final RString 依頼書印刷処理 = new RString("依頼書印刷処理");
+    private static final RString 星 = new RString("＊");
     private List<ShujiiIkenshoSakuseiIraishoItem> 主治医意見書作成依頼情報ItemList;
     private List<IkenshoSakuseiIraiIchiranhyoItem> 主治医意見書作成依頼一覧表ItemList;
     private List<ShujiiIkenshoSakuseiRyoSeikyushoItem> 主治医意見書作成料請求書ItemList;
     private List<KaigohokenShindanMeireishoHeaderItem> 介護保険診断命令書ItemList;
     private List<ShujiiIkenshoTeishutsuIraishoItem> 介護保険指定医依頼兼主治医意見書提出意見書ItemList;
+    private List<IkenshokinyuyoshiBusiness> 主治医意見書記入用紙List;
+    private List<IkenshokinyuyoshiBusiness> 主治医意見書記入用紙OCRList;
 
     /**
      * 主治医意見書作成依頼の初期化です。
@@ -234,10 +238,6 @@ public class ShujiiIkenshoSakuseiIrai {
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnHozon(ShujiiIkenshoSakuseiIraiDiv div) {
         ShujiiIkenshoSakuseiIraiValidationHandler validationHandler = createValidationHandler(div);
-        ValidationMessageControlPairs validationMessages = validationHandler.保存チェック();
-        if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
@@ -253,6 +253,19 @@ public class ShujiiIkenshoSakuseiIrai {
             RealInitialLocker.release(排他キー);
             return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 発行押下のチェック処理を行います。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onChange_ddlHokensha(ShujiiIkenshoSakuseiIraiDiv div) {
+        div.getCcdShujiiIryoKikanAndShujiiInput().initialize(
+                div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().getSelectedItem().get市町村コード(),
+                ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
         return ResponseData.of(div).respond();
     }
 
@@ -418,6 +431,8 @@ public class ShujiiIkenshoSakuseiIrai {
         主治医意見書作成料請求書ItemList = new ArrayList<>();
         介護保険診断命令書ItemList = new ArrayList<>();
         介護保険指定医依頼兼主治医意見書提出意見書ItemList = new ArrayList<>();
+        主治医意見書記入用紙List = new ArrayList<>();
+        主治医意見書記入用紙OCRList = new ArrayList<>();
 
         RDate sysdate = RDate.getNowDate();
         RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, sysdate, SubGyomuCode.DBE認定支援);
@@ -484,10 +499,8 @@ public class ShujiiIkenshoSakuseiIrai {
         iraishoItem.setHihokenshaNameKana(row.getHihokenshaShimeiKana());
         iraishoItem.setHihokenshaName(row.getHihokennshaShimei());
         iraishoItem.setJusho(row.getJusho());
-        iraishoItem.setBirthYMD(row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
         iraishoItem.setYubinNo(getEditedYubinNo(row.getYubinNo()));
-        RString hokenshaNo = row.getHokenshaNo().padRight(RString.HALF_SPACE, 数字_5);
+        RString hokenshaNo = row.getHokenshaNo().padRight(RString.HALF_SPACE, 数字_6);
         iraishoItem.setHokenshaNo1(hokenshaNo.substring(数字_0, 数字_1));
         iraishoItem.setHokenshaNo2(hokenshaNo.substring(数字_1, 数字_2));
         iraishoItem.setHokenshaNo3(hokenshaNo.substring(数字_2, 数字_3));
@@ -518,6 +531,28 @@ public class ShujiiIkenshoSakuseiIrai {
         CustomerBarCode barcode = new CustomerBarCode();
         CustomerBarCodeResult result = barcode.convertCustomerBarCode(row.getYubinNo(), row.getJusho());
         iraishoItem.setCustomerBarCode(result.getCustomerBarCode());
+        FlexibleDate birthYMD = row.getBirthYMD().getValue();
+        if (birthYMD != null) {
+            iraishoItem.setBirthYMD(birthYMD.wareki().eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
+            if (new RString("明").equals(birthYMD.getYear().wareki().getEra())) {
+                iraishoItem.setBirthGengoShowa(星);
+                iraishoItem.setBirthGengoTaisho(星);
+            } else if (new RString("大").equals(birthYMD.getYear().wareki().getEra())) {
+                iraishoItem.setBirthGengoMeiji(星);
+                iraishoItem.setBirthGengoShowa(星);
+            } else if (new RString("昭").equals(birthYMD.getYear().wareki().getEra())) {
+                iraishoItem.setBirthGengoTaisho(星);
+                iraishoItem.setBirthGengoMeiji(星);
+            }
+        }
+        if (!RString.isNullOrEmpty(row.getSeibetsu())) {
+            if (Seibetsu.男.get名称().equals(row.getSeibetsu())) {
+                iraishoItem.setSeibetsuWoman(星);
+            } else if (Seibetsu.女.get名称().equals(row.getSeibetsu())) {
+                iraishoItem.setSeibetsuMan(星);
+            }
+        }
         return iraishoItem;
     }
 
@@ -561,8 +596,80 @@ public class ShujiiIkenshoSakuseiIrai {
                 firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
         item.setListIchiranhyo_8(row.getSeibetsu());
         item.setListIchiranhyo_9(get主治医意見書作成期限年月日(row));
-        item.setTsuchibun1(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230002.getReportId(), KamokuCode.EMPTY, 数字_1).get(1));
+        item.setTsuchibun1(ReportUtil.get通知文(
+                SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230002.getReportId(), KamokuCode.EMPTY, 数字_1).get(数字_1));
         return item;
+    }
+
+    private IkenshokinyuyoshiBusiness create主治医意見書記入用紙(dgShinseishaIchiran_Row row) {
+        IkenshokinyuyoshiBusiness business = new IkenshokinyuyoshiBusiness();
+        business.setHihokenshaNameKana(row.getHihokenshaShimeiKana());
+        business.setHihokenshaName(row.getHihokennshaShimei());
+        business.setAge(row.getAge());
+        business.setHihokenshaTel(row.getTelNo());
+        business.setJusho(row.getJusho());
+        business.setShujiiName(row.getShujii());
+        business.setIryokikanName(row.getShujiiIryoKikan());
+        business.setIryokikanAdress(row.getIryoukikanShozaichi());
+        business.setIryokikanNameTel(row.getIryoKikanTelNo());
+        business.setIryokikanFax(row.getIryoKikanFaxNo());
+        business.setYubinNo(getEditedYubinNo(row.getYubinNo()));
+        FlexibleDate birthYMD = row.getBirthYMD().getValue();
+        if (birthYMD != null) {
+            business.setBirthYY(birthYMD.getYear().wareki().getEra());
+            business.setBirthMM(new RString(String.valueOf(birthYMD.getMonthValue())));
+            business.setBirthDD(new RString(String.valueOf(birthYMD.getDayValue())));
+            if (new RString("明").equals(birthYMD.getYear().wareki().getEra())) {
+                business.setBirthGengoShowa(星);
+                business.setBirthGengoTaisho(星);
+            } else if (new RString("大").equals(birthYMD.getYear().wareki().getEra())) {
+                business.setBirthGengoMeiji(星);
+                business.setBirthGengoShowa(星);
+            } else if (new RString("昭").equals(birthYMD.getYear().wareki().getEra())) {
+                business.setBirthGengoTaisho(星);
+                business.setBirthGengoMeiji(星);
+            }
+        }
+        if (!RString.isNullOrEmpty(row.getSeibetsu())) {
+            if (Seibetsu.男.get名称().equals(row.getSeibetsu())) {
+                business.setSeibetsuWoman(星);
+            } else if (Seibetsu.女.get名称().equals(row.getSeibetsu())) {
+                business.setSeibetsuMan(星);
+            }
+        }
+        RString hokenshaNo = row.getHokenshaNo().padRight(RString.HALF_SPACE, 数字_6);
+        business.setHokenshaNo1(hokenshaNo.substring(数字_0, 数字_1));
+        business.setHokenshaNo2(hokenshaNo.substring(数字_1, 数字_2));
+        business.setHokenshaNo3(hokenshaNo.substring(数字_2, 数字_3));
+        business.setHokenshaNo4(hokenshaNo.substring(数字_3, 数字_4));
+        business.setHokenshaNo5(hokenshaNo.substring(数字_4, 数字_5));
+        business.setHokenshaNo6(hokenshaNo.substring(数字_5));
+        RString hihokenshaNo = row.getHihokenshaNo().padRight(RString.HALF_SPACE, 数字_10);
+        business.setHihokenshaName(row.getHokensha());
+        business.setHihokenshaNo1(hihokenshaNo.substring(数字_0, 数字_1));
+        business.setHihokenshaNo2(hihokenshaNo.substring(数字_1, 数字_2));
+        business.setHihokenshaNo3(hihokenshaNo.substring(数字_2, 数字_3));
+        business.setHihokenshaNo4(hihokenshaNo.substring(数字_3, 数字_4));
+        business.setHihokenshaNo5(hihokenshaNo.substring(数字_4, 数字_5));
+        business.setHihokenshaNo6(hihokenshaNo.substring(数字_5, 数字_6));
+        business.setHihokenshaNo7(hihokenshaNo.substring(数字_6, 数字_7));
+        business.setHihokenshaNo8(hihokenshaNo.substring(数字_7, 数字_8));
+        business.setHihokenshaNo9(hihokenshaNo.substring(数字_8, 数字_9));
+        business.setHihokenshaNo10(hihokenshaNo.substring(数字_9));
+        RDate 認定申請日 = row.getShinseiDay().getValue();
+        if (認定申請日 != null) {
+            business.setShinseiYY1(認定申請日.getYear().wareki().getEra());
+            business.setShinseiYY2(認定申請日.getYear().wareki().toDateString().substring(数字_1));
+            business.setShinseiMM1(new RString(String.valueOf(認定申請日.getMonthValue() / 数字_10)));
+            business.setShinseiMM2(new RString(String.valueOf(認定申請日.getMonthValue() % 数字_10)));
+            business.setShinseiDD1(new RString(String.valueOf(認定申請日.getDayValue() / 数字_10)));
+            business.setShinseiDD2(new RString(String.valueOf(認定申請日.getDayValue() % 数字_10)));
+        }
+        return business;
+    }
+
+    private IkenshokinyuyoshiBusiness create主治医意見書記入用紙OCR(dgShinseishaIchiran_Row row) {
+        return create主治医意見書記入用紙(row);
     }
 
     private ShujiiIkenshoSakuseiRyoSeikyushoItem create主治医意見書作成料請求書(dgShinseishaIchiran_Row row) {
@@ -695,16 +802,29 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setHihokenshaName(row.getHihokennshaShimei());
         item.setHihokenshaNameKana(row.getHihokenshaShimeiKana());
         item.setJusho(row.getJusho());
-        if (row.getBirthYMD() != null) {
+        item.setYubinNo(getEditedYubinNo(row.getYubinNo()));
+        FlexibleDate birthYMD = row.getBirthYMD().getValue();
+        if (birthYMD != null) {
             item.setBirthYMD(row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
+            if (new RString("明").equals(birthYMD.getYear().wareki().getEra())) {
+                item.setBirthGengoShowa(星);
+                item.setBirthGengoTaisho(星);
+            } else if (new RString("大").equals(birthYMD.getYear().wareki().getEra())) {
+                item.setBirthGengoMeiji(星);
+                item.setBirthGengoShowa(星);
+            } else if (new RString("昭").equals(birthYMD.getYear().wareki().getEra())) {
+                item.setBirthGengoTaisho(星);
+                item.setBirthGengoMeiji(星);
+            }
         }
-        if (Seibetsu.女.getコード().equals(row.getSeibetsu())) {
-            item.setSeibetsuMan(Seibetsu.男.get名称());
-        } else if (Seibetsu.男.getコード().equals(row.getSeibetsu())) {
-            item.setSeibetsuMan(Seibetsu.女.get名称());
+        if (!RString.isNullOrEmpty(row.getSeibetsu())) {
+            if (Seibetsu.男.get名称().equals(row.getSeibetsu())) {
+                item.setSeibetsuWoman(星);
+            } else if (Seibetsu.女.get名称().equals(row.getSeibetsu())) {
+                item.setSeibetsuMan(星);
+            }
         }
-        item.setYubinNo(getEditedYubinNo(row.getYubinNo()));
         return item;
     }
 
@@ -716,12 +836,12 @@ public class ShujiiIkenshoSakuseiIrai {
             if (div.getIraiprint().getChkirai().getSelectedKeys().contains(SELECTED_KEY1)) {
                 主治医意見書作成依頼一覧表ItemList.add(create主治医意見書作成依頼一覧表(row));
             }
-//            if (div.getIraiprint().getChkprint().getSelectedKeys().contains(SELECTED_KEY0)) {
-//                // TODO 主治医意見書記入用紙帳票未実装
-//            }
-//            if (div.getIraiprint().getChkprint().getSelectedKeys().contains(SELECTED_KEY1)) {
-//                // TODO 主治医意見書記入用紙OCR帳票未実装
-//            }
+            if (div.getIraiprint().getChkprint().getSelectedKeys().contains(SELECTED_KEY0)) {
+                主治医意見書記入用紙List.add(create主治医意見書記入用紙(row));
+            }
+            if (div.getIraiprint().getChkprint().getSelectedKeys().contains(SELECTED_KEY1)) {
+                主治医意見書記入用紙OCRList.add(create主治医意見書記入用紙OCR(row));
+            }
             if (div.getIraiprint().getChkprint().getSelectedKeys().contains(SELECTED_KEY2)) {
                 主治医意見書作成料請求書ItemList.add(create主治医意見書作成料請求書(row));
             }
@@ -750,6 +870,12 @@ public class ShujiiIkenshoSakuseiIrai {
         }
         if (!介護保険指定医依頼兼主治医意見書提出意見書ItemList.isEmpty()) {
             outputService.print介護保険指定医依頼兼主治医意見書提出意見書(介護保険指定医依頼兼主治医意見書提出意見書ItemList);
+        }
+        if (!主治医意見書記入用紙List.isEmpty()) {
+            outputService.print主治医意見書記入用紙(主治医意見書記入用紙List);
+        }
+        if (!主治医意見書記入用紙OCRList.isEmpty()) {
+            outputService.print主治医意見書記入用紙OCR(主治医意見書記入用紙OCRList);
         }
     }
 

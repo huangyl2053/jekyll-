@@ -1046,9 +1046,9 @@
                 ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
             INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
                 ON  DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
+            LEFT   JOIN  rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
                 ON  DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" DbT5501
+            LEFT   JOIN  rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" DbT5501
                 ON  DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
         WHERE
                 DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
@@ -1057,8 +1057,8 @@
             AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
             AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
             AND DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
-            AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
             AND DbT5105."maskingKanryoYMD" IS NOT NULL
+            AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
             AND DbT5105."centerSoshinYMD" IS NULL
             AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
             AND DbT5101."logicalDeletedFlag" = FALSE
@@ -1079,9 +1079,9 @@
                 ON  DbT7051."shoKisaiHokenshaNo" = "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"
             INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho"
                 ON  "DbT5105NinteiKanryoJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
+            LEFT  JOIN  rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
                 ON  DbT5502."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" DbT5501
+            LEFT  JOIN  rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" DbT5501
                 ON  DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
         WHERE
                 "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
@@ -1090,8 +1090,8 @@
             AND "DbT5105NinteiKanryoJoho"."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
             AND "DbT5105NinteiKanryoJoho"."ikenshoTorokuKanryoYMD" IS NOT NULL
             AND "DbT5105NinteiKanryoJoho"."ichijiHanteiKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
             AND "DbT5105NinteiKanryoJoho"."maskingKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NULL
             AND "DbT5105NinteiKanryoJoho"."centerSoshinYMD" IS NULL
             AND "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" in (#{通常},#{延期})
             AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE

@@ -31,8 +31,6 @@ public class ShinsakaiIinJohoDiv extends Panel {
     private DataGrid<dgShozokuKikanIchiran_Row> dgShozokuKikanIchiran;
     @JsonProperty("lblShozokuKikan")
     private Label lblShozokuKikan;
-    @JsonProperty("btnToroku")
-    private Button btnToroku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -128,24 +126,6 @@ public class ShinsakaiIinJohoDiv extends Panel {
     @JsonProperty("lblShozokuKikan")
     public void setLblShozokuKikan(Label lblShozokuKikan) {
         this.lblShozokuKikan = lblShozokuKikan;
-    }
-
-    /*
-     * getbtnToroku
-     * @return btnToroku
-     */
-    @JsonProperty("btnToroku")
-    public Button getBtnToroku() {
-        return btnToroku;
-    }
-
-    /*
-     * setbtnToroku
-     * @param btnToroku btnToroku
-     */
-    @JsonProperty("btnToroku")
-    public void setBtnToroku(Button btnToroku) {
-        this.btnToroku = btnToroku;
     }
 
     // </editor-fold>

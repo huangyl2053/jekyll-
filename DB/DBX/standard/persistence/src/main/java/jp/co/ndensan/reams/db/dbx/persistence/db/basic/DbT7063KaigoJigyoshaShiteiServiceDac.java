@@ -18,8 +18,13 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -136,6 +141,37 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
                                 eq(serviceShuruiCode, サービス種類コード),
                                 eq(yukoKaishiYMD, 有効開始日)))
                 .toList(DbT7063KaigoJigyoshaShiteiServiceEntity.class);
+    }
+
+    /**
+     * 主キーで介護事業者指定サービスを取得します。
+     *
+     * @param 事業者番号 JigyoshaNo
+     * @param サービス種類コード ServiceShuruiCode
+     * @param 有効日 YukoKaishiYMD
+     * @return DbT7063KaigoJigyoshaShiteiServiceEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7063KaigoJigyoshaShiteiServiceEntity select事業者名称(
+            RString 事業者番号,
+            RString サービス種類コード,
+            FlexibleDate 有効日) throws NullPointerException {
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
+        requireNonNull(有効日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効日"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7063KaigoJigyoshaShiteiService.class).
+                where(and(
+                                eq(jigyoshaNo, 事業者番号),
+                                leq(DbT7063KaigoJigyoshaShiteiService.yukoKaishiYMD, 有効日),
+                                or(leq(有効日, DbT7063KaigoJigyoshaShiteiService.yukoShuryoYMD),
+                                        isNULL(DbT7063KaigoJigyoshaShiteiService.yukoShuryoYMD)),
+                                eq(serviceShuruiCode, サービス種類コード))).
+                order(by(DbT7063KaigoJigyoshaShiteiService.yukoKaishiYMD, Order.DESC)).limit(1).
+                toObject(DbT7063KaigoJigyoshaShiteiServiceEntity.class);
     }
 
     /**

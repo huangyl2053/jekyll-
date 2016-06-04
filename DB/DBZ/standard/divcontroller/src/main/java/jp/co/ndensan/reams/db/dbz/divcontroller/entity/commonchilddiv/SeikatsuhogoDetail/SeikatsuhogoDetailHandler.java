@@ -10,9 +10,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.seikatsuhogorireki.SeikaatsuhogoDataModel;
 import jp.co.ndensan.reams.ur.urd.definition.core.seikatsuhogo.KaigoRyoDairiNofuKubun;
 import jp.co.ndensan.reams.ur.urd.definition.core.seikatsuhogo.KyugoShisetsuNyuTaishoKubun;
+import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -31,7 +32,6 @@ public class SeikatsuhogoDetailHandler {
     private static final RString 表示モード_修正 = new RString("修正");
     private static final RString 表示モード_削除 = new RString("削除");
     private static final RString 表示モード_照会 = new RString("照会");
-    private static final CodeShubetsu コード種別 = new CodeShubetsu("0017");
     private static final RString 代理納付有 = new RString("1");
     private static final RString 該当 = new RString("gaito");
     private static final RString 非該当 = new RString("higaito");
@@ -83,7 +83,9 @@ public class SeikatsuhogoDetailHandler {
             List<RString> 扶助種類KEY = new ArrayList<>();
             for (KeyValueDataSource dataSource : div.getChkFujoShurui().getDataSource()) {
                 for (RString コード : 無連結扶助種類コード) {
-                    if (dataSource.getValue().equals(CodeMaster.getCodeMeisho(SubGyomuCode.URZ業務共通_共通系, コード種別, new Code(コード)))) {
+                    if (dataSource.getValue().equals(CodeMaster.getCodeMeisho(SubGyomuCode.URZ業務共通_共通系,
+                            URZCodeShubetsu.扶助種類コード.getCodeShubetsu(), new Code(コード),
+                            new FlexibleDate(RDate.getNowDate().toDateString())))) {
                         扶助種類KEY.add(dataSource.getKey());
                         break;
                     }

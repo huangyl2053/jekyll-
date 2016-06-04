@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -25,6 +26,8 @@ public class PrintPanelDiv extends Panel {
     private TextBoxDate txtNinteiJokyoTeikyoYMD;
     @JsonProperty("radPrintCondition")
     private RadioButton radPrintCondition;
+    @JsonProperty("hiddenitem")
+    private RString hiddenitem;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -66,6 +69,24 @@ public class PrintPanelDiv extends Panel {
     @JsonProperty("radPrintCondition")
     public void setRadPrintCondition(RadioButton radPrintCondition) {
         this.radPrintCondition = radPrintCondition;
+    }
+
+    /*
+     * gethiddenitem
+     * @return hiddenitem
+     */
+    @JsonProperty("hiddenitem")
+    public RString getHiddenitem() {
+        return hiddenitem;
+    }
+
+    /*
+     * sethiddenitem
+     * @param hiddenitem hiddenitem
+     */
+    @JsonProperty("hiddenitem")
+    public void setHiddenitem(RString hiddenitem) {
+        this.hiddenitem = hiddenitem;
     }
 
     // </editor-fold>

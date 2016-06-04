@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbu.service.core.kaigojuminhyobatchparameter.Kaigo
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 介護住民票個別事項連携情報作成【広域運用】画面Divを制御します。
@@ -57,6 +58,10 @@ public class KobetsuJikoRenkeiInfoSakuseiKoiki {
      * @return ResponseData<KobetsuJikoRenkeiInfoSakuseiKoikiDiv>
      */
     public ResponseData<KobetsuJikoRenkeiInfoSakuseiKoikiDiv> onClick_KakuButton(KobetsuJikoRenkeiInfoSakuseiKoikiDiv div) {
+        ValidationMessageControlPairs validationMessageControlPairs = getHandler(div).validateCheck();
+        if (validationMessageControlPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
+        }
         getHandler(div).onClick_KakuButton();
         return ResponseData.of(div).respond();
     }

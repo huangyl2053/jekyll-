@@ -943,20 +943,20 @@ public final class YoshikiIchinoyonHoseiHandler {
      * @return 整合性チェック結果(true:結果が不整合 ;false:結果が整合)
      */
     public boolean is合計結果チェック_NG(YoshikiIchinoyonHoseiDiv div) {
-        if (div.getYoshikiIchinoyonHosei9().getTxtFukushiShisetsuShinseiSu().getValue() == null
-                || div.getYoshikiIchinoyonHosei9().getTxtHokenShisetsuShinseiSu().getValue() == null
-                || div.getYoshikiIchinoyonHosei9().getTxtIryoShisetsuShinseiSu().getValue() == null
-                || div.getYoshikiIchinoyonHosei9().getTxtSeiKatsuKaigoShinseiSu().getValue() == null
-                || div.getYoshikiIchinoyonHosei9().getTxtSonotaShinseiSu().getValue() == null
-                || div.getYoshikiIchinoyonHosei9().getTxtKeiShinseiSu().getValue() == null) {
-            return true;
-        }
-        return !div.getYoshikiIchinoyonHosei9().getTxtFukushiShisetsuShinseiSu().getValue().add(
-                div.getYoshikiIchinoyonHosei9().getTxtHokenShisetsuShinseiSu().getValue()).add(
-                        div.getYoshikiIchinoyonHosei9().getTxtIryoShisetsuShinseiSu().getValue()).add(
-                        div.getYoshikiIchinoyonHosei9().getTxtSeiKatsuKaigoShinseiSu().getValue()).add(
-                        div.getYoshikiIchinoyonHosei9().getTxtSonotaShinseiSu().getValue()).equals(
-                        div.getYoshikiIchinoyonHosei9().getTxtKeiShinseiSu().getValue());
+        Decimal 申請件数_介護老人福祉施設 = div.getYoshikiIchinoyonHosei9().getTxtFukushiShisetsuShinseiSu().getValue()
+                == null ? Decimal.ZERO : div.getYoshikiIchinoyonHosei9().getTxtFukushiShisetsuShinseiSu().getValue();
+        Decimal 申請件数_介護老人保健施設 = div.getYoshikiIchinoyonHosei9().getTxtHokenShisetsuShinseiSu().getValue()
+                == null ? Decimal.ZERO : div.getYoshikiIchinoyonHosei9().getTxtHokenShisetsuShinseiSu().getValue();
+        Decimal 申請件数_介護療養型医療施設 = div.getYoshikiIchinoyonHosei9().getTxtIryoShisetsuShinseiSu().getValue()
+                == null ? Decimal.ZERO : div.getYoshikiIchinoyonHosei9().getTxtIryoShisetsuShinseiSu().getValue();
+        Decimal 申請件数_地域密着型 = div.getYoshikiIchinoyonHosei9().getTxtSeiKatsuKaigoShinseiSu().getValue() == null
+                ? Decimal.ZERO : div.getYoshikiIchinoyonHosei9().getTxtSeiKatsuKaigoShinseiSu().getValue();
+        Decimal 申請件数_その他 = div.getYoshikiIchinoyonHosei9().getTxtSonotaShinseiSu().getValue() == null
+                ? Decimal.ZERO : div.getYoshikiIchinoyonHosei9().getTxtSonotaShinseiSu().getValue();
+        Decimal 申請件数_計 = div.getYoshikiIchinoyonHosei9().getTxtKeiShinseiSu().getValue() == null
+                ? Decimal.ZERO : div.getYoshikiIchinoyonHosei9().getTxtKeiShinseiSu().getValue();
+        return !申請件数_介護老人福祉施設.add(申請件数_介護老人保健施設).add(申請件数_介護療養型医療施設).add(
+                申請件数_地域密着型).add(申請件数_その他).equals(申請件数_計);
     }
 
     /**
@@ -968,10 +968,10 @@ public final class YoshikiIchinoyonHoseiHandler {
      * @return 整合結果(true:結果が不整合 ;false:結果が整合)
      */
     private boolean is第4段階データ不整合(Decimal 第1号被保険者, Decimal 第2号被保険者, Decimal 合計) {
-        if (第1号被保険者 == null || 第2号被保険者 == null || 合計 == null) {
-            return true;
-        }
-        return !第1号被保険者.add(第2号被保険者).equals(合計);
+        Decimal 第1号被保険者値 = 第1号被保険者 == null ? Decimal.ZERO : 第1号被保険者;
+        Decimal 第2号被保険者値 = 第2号被保険者 == null ? Decimal.ZERO : 第2号被保険者;
+        Decimal 合計値 = 合計 == null ? Decimal.ZERO : 合計;
+        return !第1号被保険者値.add(第2号被保険者値).equals(合計値);
     }
 
     /**

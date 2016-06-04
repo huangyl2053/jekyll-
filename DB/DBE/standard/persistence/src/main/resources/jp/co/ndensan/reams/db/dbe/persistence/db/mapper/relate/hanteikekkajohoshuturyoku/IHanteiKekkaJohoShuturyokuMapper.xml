@@ -362,16 +362,18 @@
         WHERE
         dbT5511."shinsakaiKaisaiNo" = #{kaisaiBangou}
     </select>
-    <resultMap id="resultMap_getShinsakaiIinJoho" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity" autoMapping="true">
-        <result property="shinsakaiIinShimei" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
-        <result property="shinsakaiIinShikakuCode" column="shinsakaiIinShikakuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+    <resultMap id="resultMap_getShinsakaiIinJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.IinJohoRelateEntity" autoMapping="true">
+        <result property="shinsakaiIinShimei" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiIinShikakuCode" column="shinsakaiIinShikakuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kaigoninteiShinsakaiGichoKubunCode" column="kaigoninteiShinsakaiGichoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select id="getIinJoho" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
             resultMap="resultMap_getShinsakaiIinJoho"
             fetchSize="500">
         SELECT
         DbT5594."shinsakaiIinShimei",
-        DbT5594."shinsakaiIinShikakuCode"
+        DbT5594."shinsakaiIinShikakuCode",
+        DbT5503."kaigoninteiShinsakaiGichoKubunCode"
         FROM
         rgdb."DbT5503ShinsakaiWariateIinJoho" DbT5503
         INNER JOIN
@@ -491,6 +493,27 @@
         <result property="新規_状変一次判定要介護4数_2号被保険者" column="新規_状変一次判定要介護4数_2号被保険者"/>
         <result property="新規_状変一次判定要介護5数_2号被保険者" column="新規_状変一次判定要介護5数_2号被保険者"/>
         <result property="新規_状変の一次判定再調査数_2号被保険者" column="新規_状変の一次判定再調査数_2号被保険者"/>
+        <result property="状変の内2号被保険者数" column="状変の内2号被保険者数"/>
+        <result property="状変在宅数" column="状変在宅数"/>
+        <result property="状変施設数" column="状変施設数"/>
+        <result property="状変一次判定非該当数" column="状変一次判定非該当数"/>
+        <result property="状変一次判定要支援1数" column="状変一次判定要支援1数"/>
+        <result property="状変一次判定要支援2数" column="状変一次判定要支援2数"/>
+        <result property="状変一次判定要介護1数" column="状変一次判定要介護1数"/>
+        <result property="状変一次判定要介護2数" column="状変一次判定要介護2数"/>
+        <result property="状変一次判定要介護3数" column="状変一次判定要介護3数"/>
+        <result property="状変一次判定要介護4数" column="状変一次判定要介護4数"/>
+        <result property="状変一次判定要介護5数" column="状変一次判定要介護5数"/>
+        <result property="状変一次判定再調査数" column="状変一次判定再調査数"/>
+        <result property="状変一次判定非該当数_2号被保険者" column="状変一次判定非該当数_2号被保険者"/>
+        <result property="状変一次判定要支援1数_2号被保険者" column="状変一次判定要支援1数_2号被保険者"/>
+        <result property="状変一次判定要支援2数_2号被保険者" column="状変一次判定要支援2数_2号被保険者"/>
+        <result property="状変一次判定要介護1数_2号被保険者" column="状変一次判定要介護1数_2号被保険者"/>
+        <result property="状変一次判定要介護2数_2号被保険者" column="状変一次判定要介護2数_2号被保険者"/>
+        <result property="状変一次判定要介護3数_2号被保険者" column="状変一次判定要介護3数_2号被保険者"/>
+        <result property="状変一次判定要介護4数_2号被保険者" column="状変一次判定要介護4数_2号被保険者"/>
+        <result property="状変一次判定要介護5数_2号被保険者" column="状変一次判定要介護5数_2号被保険者"/>
+        <result property="状変の一次判定再調査数_2号被保険者" column="状変の一次判定再調査数_2号被保険者"/>
         <result property="更新申請件数" column="更新申請件数"/>
         <result property="更新申請内2号被保険者数" column="更新申請内2号被保険者数"/>
         <result property="更新申請在宅数" column="更新申請在宅数"/>
@@ -556,6 +579,27 @@
         SUM(TB."新規_状変の一次判定要介護4数_2号被保険者")  AS "新規_状変一次判定要介護4数_2号被保険者",
         SUM(TB."新規_状変の一次判定要介護5数_2号被保険者")  AS "新規_状変一次判定要介護5数_2号被保険者",
         SUM(TB."新規_状変の一次判定再調査数_2号被保険者")  AS "新規_状変の一次判定再調査数_2号被保険者",
+        SUM(TB.状変の内2号被保険者数) AS 状変の内2号被保険者数,
+        SUM(TB.状変の在宅数) AS 状変在宅数,
+        SUM(TB.状変の施設数) AS 状変施設数,
+        SUM(TB.状変の一次判定非該当数) AS 状変一次判定非該当数,
+        SUM(TB.状変の一次判定要支援1数) AS 状変一次判定要支援1数,
+        SUM(TB.状変の一次判定要支援2数) AS 状変一次判定要支援2数,
+        SUM(TB.状変の一次判定要介護1数) AS 状変一次判定要介護1数,
+        SUM(TB.状変の一次判定要介護2数) AS 状変一次判定要介護2数,
+        SUM(TB.状変の一次判定要介護3数) AS 状変一次判定要介護3数,
+        SUM(TB.状変の一次判定要介護4数) AS 状変一次判定要介護4数,
+        SUM(TB.状変の一次判定要介護5数) AS 状変一次判定要介護5数,
+        SUM(TB.状変の一次判定再調査数) AS 状変一次判定再調査数,
+        SUM(TB.状変の一次判定非該当数_2号被保険者) AS 状変一次判定非該当数_2号被保険者,
+        SUM(TB.状変の一次判定要支援1数_2号被保険者) AS 状変一次判定要支援1数_2号被保険者,
+        SUM(TB.状変の一次判定要支援2数_2号被保険者) AS 状変一次判定要支援2数_2号被保険者,
+        SUM(TB.状変の一次判定要介護1数_2号被保険者) AS 状変一次判定要介護1数_2号被保険者,
+        SUM(TB.状変の一次判定要介護2数_2号被保険者) AS 状変一次判定要介護2数_2号被保険者,
+        SUM(TB.状変の一次判定要介護3数_2号被保険者) AS 状変一次判定要介護3数_2号被保険者,
+        SUM(TB.状変の一次判定要介護4数_2号被保険者) AS 状変一次判定要介護4数_2号被保険者,
+        SUM(TB.状変の一次判定要介護5数_2号被保険者)  AS 状変一次判定要介護5数_2号被保険者,
+        SUM(TB.状変の一次判定再調査数_2号被保険者) AS 状変の一次判定再調査数_2号被保険者,
         SUM(TB."更新申請数")  AS "更新申請件数",
         SUM(TB."更新申請の内2号被保険者数")  AS "更新申請内2号被保険者数",
         SUM(TB."更新申請の在宅数")  AS "更新申請在宅数",
@@ -686,6 +730,78 @@
         AND DbT5101."chosaKubun" = '1' AND DbT5101."hihokenshaKubunCode" = '1'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定再調査数_2号被保険者",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "状変の内2号被保険者数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5101."shisetsuNyushoFlag" = FALSE
+        THEN 1
+        ELSE 0 END AS "状変の在宅数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5101."shisetsuNyushoFlag" = TRUE
+        THEN 1
+        ELSE 0 END AS "状変の施設数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5116."ichijiHanteiKekkaCode" = '01'
+        THEN 1
+        ELSE 0 END AS "状変の一次判定非該当数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5116."ichijiHanteiKekkaCode" = '12'
+        THEN 1
+        ELSE 0 END AS "状変の一次判定要支援1数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5116."ichijiHanteiKekkaCode" = '13'
+        THEN 1
+        ELSE 0 END AS "状変の一次判定要支援2数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5116."ichijiHanteiKekkaCode" = '21'
+        THEN 1
+        ELSE 0 END AS "状変の一次判定要介護1数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5116."ichijiHanteiKekkaCode" = '22'
+        THEN 1
+        ELSE 0 END AS "状変の一次判定要介護2数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5116."ichijiHanteiKekkaCode" = '23'
+        THEN 1
+        ELSE 0 END AS "状変の一次判定要介護3数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5116."ichijiHanteiKekkaCode" = '24'
+        THEN 1
+        ELSE 0 END AS "状変の一次判定要介護4数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5116."ichijiHanteiKekkaCode" = '25'
+        THEN 1
+        ELSE 0 END AS "状変の一次判定要介護5数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5101."chosaKubun" = '1'
+        THEN 1
+        ELSE 0 END AS "状変の一次判定再調査数",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5116."ichijiHanteiKekkaCode" = '01'
+        AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "状変の一次判定非該当数_2号被保険者",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5116."ichijiHanteiKekkaCode" = '12'
+        AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "状変の一次判定要支援1数_2号被保険者",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5116."ichijiHanteiKekkaCode" = '13'
+        AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "状変の一次判定要支援2数_2号被保険者",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5116."ichijiHanteiKekkaCode" = '21'
+        AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "状変の一次判定要介護1数_2号被保険者",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5116."ichijiHanteiKekkaCode" = '22'
+        AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "状変の一次判定要介護2数_2号被保険者",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5116."ichijiHanteiKekkaCode" = '23'
+        AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "状変の一次判定要介護3数_2号被保険者",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5116."ichijiHanteiKekkaCode" = '24'
+        AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "状変の一次判定要介護4数_2号被保険者",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5116."ichijiHanteiKekkaCode" = '25'
+        AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "状変の一次判定要介護5数_2号被保険者",
+        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '3') AND DbT5101."chosaKubun" = '1'
+        AND DbT5101."hihokenshaKubunCode" = '1'
+        THEN 1
+        ELSE 0 END AS "状変の一次判定再調査数_2号被保険者",
         CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '2'
         THEN 1
         ELSE 0 END AS "更新申請数",

@@ -24,12 +24,7 @@
         DbT1001."dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD",
         DbT1001."dbT1001HihokenshaDaicho_hihokennshaKubunCode",
         DbT1001."dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode",
-        <if test = "!chushutsuFlag">
-            NULL  AS "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
-        </if>
-        <if test = "chushutsuFlag">
-            "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
-        </if>      
+        DbT1001."dbT1001HihokenshaDaicho_shikakuSoshitsuYMD", 
         DbT1001."dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD",
         DbT1001."dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode",
         DbT1001."dbT1001HihokenshaDaicho_shikakuHenkoYMD",
@@ -57,12 +52,18 @@
            FROM
                rgdb."DbT1001HihokenshaDaicho"
            WHERE
-               "isDeleted" <![CDATA[<>]]> TRUE)DbT1001
+               "logicalDeletedFlag" <![CDATA[<>]]> TRUE)DbT1001
         WHERE
            rank_number = 1
+           <if test = "!chushutsuFlag">
+               AND DbT1001."dbT1001HihokenshaDaicho_shikakuSoshitsuYMD" IS NULL
+           </if>
         ORDER BY
            DbT1001."dbT1001HihokenshaDaicho_shikibetsuCode",
            DbT1001."dbT1001HihokenshaDaicho_shikakuShutokuYMD"
+           <if test="orderbyFlag">
+                , ${orderby}
+            </if>  
     </select>
     
     <select id="get被保険者台帳管理情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"
@@ -76,7 +77,7 @@
            FROM
                rgdb."DbT1001HihokenshaDaicho"
            WHERE
-               "isDeleted" <![CDATA[<>]]> TRUE)DbT1001
+               "logicalDeletedFlag" <![CDATA[<>]]> TRUE)DbT1001
         WHERE
             rank_number = 1
         AND DbT1001."dbT1001HihokenshaDaicho_shikibetsuCode" = #{shikibetsuCode}
@@ -168,7 +169,7 @@
         FROM
             rgdb."DbT7037ShoKofuKaishu"
         WHERE
-            "isDeleted" <![CDATA[<>]]> TRUE
+            "logicalDeletedFlag" <![CDATA[<>]]> TRUE
         AND "shikibetsuCode" = #{shikibetsuCode}
         ORDER BY
             "dbT7037ShoKofuKaishu_shikibetsuCode",

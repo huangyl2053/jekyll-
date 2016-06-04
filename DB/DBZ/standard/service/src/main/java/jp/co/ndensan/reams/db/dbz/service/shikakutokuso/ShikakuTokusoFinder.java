@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.service.shikakutokuso;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBZCodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShutokuJiyuDDL;
 import jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParameter;
@@ -15,7 +16,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakutoku.shikakutokuso.Ser
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shikakutokuso.IShikakuTokusoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -33,8 +33,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class ShikakuTokusoFinder {
 
     private final MapperProvider mapperProvider;
-    private static final CodeShubetsu CHIKU_CODE_SHUBETSU_0007 = new CodeShubetsu("0007");
-    private static final CodeShubetsu CHIKU_CODE_SHUBETSU_0010 = new CodeShubetsu("0010");
 
     /**
      * コンストラクタです。
@@ -104,7 +102,7 @@ public class ShikakuTokusoFinder {
      */
     @Transaction
     public SearchResult<ShutokuJiyuDDL> getShutokuJiyuDDL() {
-        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBA介護資格, CHIKU_CODE_SHUBETSU_0007);
+        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBA介護資格, DBZCodeShubetsu.申請届出代行区分.getコード(), FlexibleDate.getNowDate());
         List<ShutokuJiyuDDL> serviceShuruiList = new ArrayList<>();
         if (codeList == null || codeList.isEmpty()) {
             return SearchResult.of(Collections.<ShutokuJiyuDDL>emptyList(), 0, false);
@@ -126,7 +124,7 @@ public class ShikakuTokusoFinder {
      */
     @Transaction
     public SearchResult<ShutokuJiyuDDL> getSoshitsuJiyuDDL() {
-        List<UzT0007CodeEntity> codeList = CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格, CHIKU_CODE_SHUBETSU_0010);
+        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBA介護資格, DBZCodeShubetsu.医師の配置基準.getコード(), FlexibleDate.getNowDate());
         List<ShutokuJiyuDDL> serviceShuruiList = new ArrayList<>();
         if (codeList.isEmpty()) {
             return SearchResult.of(Collections.<ShutokuJiyuDDL>emptyList(), 0, false);

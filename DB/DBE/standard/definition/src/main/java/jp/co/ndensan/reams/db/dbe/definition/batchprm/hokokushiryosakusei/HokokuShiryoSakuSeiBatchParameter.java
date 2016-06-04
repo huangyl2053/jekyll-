@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbe.definition.batchprm.hokokushiryosakusei;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.JigyoJyokyoHokokuProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.JisshiJokyoTokeiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.ShinsahanteinoHenkojokyoProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.ShinsakaiShukeiGenzainojokyoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.ShinsakaiShukeihyoShinseiBetsuProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.SinsakaiHanteiJyokyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -10,14 +11,12 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 報告資料作成_バッチフロークラスパラメータクラスです。
  *
  * @reamsid_L DBE-1450-020 wangxiaodong
  */
-@Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
@@ -147,6 +146,13 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
     public SinsakaiHanteiJyokyoProcessParameter toSinsakaiHanteiJyokyoProcessParameter() {
 
         return new SinsakaiHanteiJyokyoProcessParameter(
+                jigyoJyokyoHokoku,
+                jissiJyokyoTokei,
+                sinsaHanteiJyokyo,
+                sinsakaiKanrenTokei,
+                csvShutsuryoku,
+                shutsuryokuFairu,
+                kijyunYMD,
                 RString.isNullOrEmpty(hokensyaNo),
                 hokensyaNo,
                 hiHokensyaKubun,
@@ -159,7 +165,6 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
                 RString.isNullOrEmpty(taishoGeppiTo),
                 taishoGeppiFrom,
                 taishoGeppiTo,
-                null,
                 isSinseiKubunSinseitoki,
                 isSinseiKubunHorei);
     }
@@ -172,6 +177,13 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
     public JigyoJyokyoHokokuProcessParameter toJigyoJyokyoHokokuProcessParameter() {
 
         return new JigyoJyokyoHokokuProcessParameter(
+                jigyoJyokyoHokoku,
+                jissiJyokyoTokei,
+                sinsaHanteiJyokyo,
+                sinsakaiKanrenTokei,
+                csvShutsuryoku,
+                shutsuryokuFairu,
+                kijyunYMD,
                 RString.isNullOrEmpty(hokensyaNo),
                 hokensyaNo,
                 isTaishoTsukiKubun,
@@ -193,6 +205,13 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
     public JisshiJokyoTokeiProcessParameter toJisshiJokyoTokeiProcessParameter() {
 
         return new JisshiJokyoTokeiProcessParameter(
+                jigyoJyokyoHokoku,
+                jissiJyokyoTokei,
+                sinsaHanteiJyokyo,
+                sinsakaiKanrenTokei,
+                csvShutsuryoku,
+                shutsuryokuFairu,
+                kijyunYMD,
                 RString.isNullOrEmpty(hokensyaNo),
                 hokensyaNo,
                 hiHokensyaKubun,
@@ -217,6 +236,13 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
     public ShinsahanteinoHenkojokyoProcessParameter toShinsahanteinoHenkojokyoProcessParameter() {
 
         return new ShinsahanteinoHenkojokyoProcessParameter(
+                jigyoJyokyoHokoku,
+                jissiJyokyoTokei,
+                sinsaHanteiJyokyo,
+                sinsakaiKanrenTokei,
+                csvShutsuryoku,
+                shutsuryokuFairu,
+                kijyunYMD,
                 RString.isNullOrEmpty(hokensyaNo),
                 hokensyaNo,
                 hiHokensyaKubun,
@@ -229,7 +255,6 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
                 RString.isNullOrEmpty(taishoGeppiTo),
                 taishoGeppiFrom,
                 taishoGeppiTo,
-                null,
                 isSinseiKubunSinseitoki,
                 isSinseiKubunHorei);
     }
@@ -242,6 +267,13 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
     public ShinsakaiShukeihyoShinseiBetsuProcessParameter toShinsakaiShukeihyoShinseiBetsuProcessParameter() {
 
         return new ShinsakaiShukeihyoShinseiBetsuProcessParameter(
+                jigyoJyokyoHokoku,
+                jissiJyokyoTokei,
+                sinsaHanteiJyokyo,
+                sinsakaiKanrenTokei,
+                csvShutsuryoku,
+                shutsuryokuFairu,
+                kijyunYMD,
                 RString.isNullOrEmpty(hokensyaNo),
                 hokensyaNo,
                 hiHokensyaKubun,
@@ -253,6 +285,64 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
                 RString.isNullOrEmpty(taishoGeppiFrom),
                 RString.isNullOrEmpty(taishoGeppiTo),
                 taishoGeppiFrom,
-                taishoGeppiTo);
+                taishoGeppiTo,
+                isSinseiKubunSinseitoki,
+                isSinseiKubunHorei);
     }
+
+    /**
+     * ShinsakaiShukeiGenzainojokyoProcessParameterに転換します。
+     *
+     * @return ShinsakaiShukeiGenzainojokyoProcessParameter
+     */
+    public ShinsakaiShukeiGenzainojokyoProcessParameter toShinsakaiShukeiGenzainojokyoProcessParameter() {
+
+        return new ShinsakaiShukeiGenzainojokyoProcessParameter(
+                jigyoJyokyoHokoku,
+                jissiJyokyoTokei,
+                sinsaHanteiJyokyo,
+                sinsakaiKanrenTokei,
+                csvShutsuryoku,
+                shutsuryokuFairu,
+                RString.isNullOrEmpty(hokensyaNo),
+                hokensyaNo,
+                hiHokensyaKubun,
+                -1 == gogitaiNo,
+                gogitaiNo,
+                kijyunYMD == null || RString.isNullOrEmpty(kijyunYMD.toDateString()),
+                kijyunYMD,
+                isTaishoTsukiKubun,
+                isTaishoGeppiKubun,
+                taishoNendoYM,
+                RString.isNullOrEmpty(taishoGeppiFrom),
+                RString.isNullOrEmpty(taishoGeppiTo),
+                taishoGeppiFrom,
+                taishoGeppiTo,
+                isSinseiKubunSinseitoki,
+                isSinseiKubunHorei);
+    }
+
+    /**
+     * CsvKenHokokuShiryoSakuseiProcessParameterに転換します。
+     *
+     * @return CsvKenHokokuShiryoSakuseiProcessParameter
+     */
+//    public CsvKenHokokuShiryoSakuseiProcessParameter toCsvKenHokokuShiryoSakuseiProcessParameter() {
+//
+//        return new CsvKenHokokuShiryoSakuseiProcessParameter(
+//                RString.isNullOrEmpty(hokensyaNo),
+//                hokensyaNo,
+//                hiHokensyaKubun,
+//                -1 == gogitaiNo,
+//                gogitaiNo,
+//                isTaishoTsukiKubun,
+//                isTaishoGeppiKubun,
+//                taishoNendoYM,
+//                RString.isNullOrEmpty(taishoGeppiFrom),
+//                RString.isNullOrEmpty(taishoGeppiTo),
+//                taishoGeppiFrom,
+//                taishoGeppiTo,
+//                isSinseiKubunSinseitoki,
+//                isSinseiKubunHorei);
+//    }
 }

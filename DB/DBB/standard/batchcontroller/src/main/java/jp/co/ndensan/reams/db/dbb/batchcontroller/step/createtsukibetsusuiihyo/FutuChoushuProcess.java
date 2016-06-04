@@ -8,16 +8,13 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.createtsukibetsusuiihyo.ReportDateHensyu;
-import jp.co.ndensan.reams.db.dbb.business.report.tsukibetsusuiihyo.TsukibetsuSuiihyoBodyItem;
-import jp.co.ndensan.reams.db.dbb.business.report.tsukibetsusuiihyo.TsukibetsuSuiihyoBodyTitleItem;
-import jp.co.ndensan.reams.db.dbb.business.report.tsukibetsusuiihyo.TsukibetsuSuiihyoHeaderItem;
 import jp.co.ndensan.reams.db.dbb.business.report.tsukibetsusuiihyo.TsukibetsuSuiihyoReport;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GemmenJyoho;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.ReportDate;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tsukibetsusuiihyo.TsukibetsuSuiihyoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.source.tsukibetsusuiihyo.TsukibetsuSuiihyoReportSource;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -32,12 +29,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -49,8 +44,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class FutuChoushuProcess extends BatchProcessBase<KoumokuGoukey> {
 
-    private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper.get普通徴収帳票データの取得");
+    private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate"
+            + ".createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper.get普通徴収帳票データの取得");
     private static final ReportId 帳票ID = ReportIdDBB.DBB300002.getReportId();
     private static final RString 処理年度 = new RString("処理年度");
     private static final RString 調定基準日 = new RString("調定基準日");
@@ -62,6 +57,7 @@ public class FutuChoushuProcess extends BatchProcessBase<KoumokuGoukey> {
     private static final RString 生年月日終了 = new RString("生年月日終了");
     private static final RString 選択対象 = new RString("選択対象");
     private static final RString 市町村 = new RString("市町村");
+    private static final int INT_8 = 8;
     private List<KoumokuGoukey> koumokuGoukeyList;
     private CreateTsukibetsuSuiihyoProcessParameter processPrm;
     private CreateTsukibetsuSuiihyoMyBatisParameter mybatisPrm;
@@ -102,53 +98,19 @@ public class FutuChoushuProcess extends BatchProcessBase<KoumokuGoukey> {
     @Override
     protected void afterExecute() {
         get合計部分の項目();
-        List<ReportDate> reportDateList2 = getReportDate(koumokuGoukeyList);
-        for (ReportDate reportDate : reportDateList2) {
-            reportDate.setChoshuHouhouTitle(new RString("普通徴収"));
-            reportDate.setGengo(mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString());
-            reportDate.setNendo(mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString());
-            reportDate.setHokenshaName(AssociationFinderFactory.createInstance().getAssociation().get市町村名());
-            reportDate.setHokenshaNo(AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_().getColumnValue());
-        }
-        TsukibetsuSuiihyoReport report2 = TsukibetsuSuiihyoReport.createFrom(setHeadItem(new RString("普通徴収")),
-                setBodyTitleItem(reportDateList2), setbodyItemList(reportDateList2));
+        TsukibetsuSuiihyoReport report = new TsukibetsuSuiihyoReport(getTsukibetsuSuiihyoEntity(koumokuGoukeyList));
         outputJokenhyoFactory();
-        report2.writeBy(reportSourceWriter);
+        report.writeBy(reportSourceWriter);
     }
 
-    private List<ReportDate> getReportDate(List<KoumokuGoukey> list) {
+    private TsukibetsuSuiihyoEntity getTsukibetsuSuiihyoEntity(List<KoumokuGoukey> list) {
         ReportDateHensyu reportDateHensyu = new ReportDateHensyu();
-        return reportDateHensyu.getReportDateList(list);
-    }
-
-    private TsukibetsuSuiihyoHeaderItem setHeadItem(RString choshuHouhouTitle) {
-        return new TsukibetsuSuiihyoHeaderItem(
+        return reportDateHensyu.getTsukibetsuSuiihyoEntity(list,
                 mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).getEra(),
                 mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().substring(2),
-                AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_().getColumnValue(),
+                new RString("普通徴収"),
                 AssociationFinderFactory.createInstance().getAssociation().get市町村名(),
-                choshuHouhouTitle);
-    }
-
-    private List<TsukibetsuSuiihyoBodyTitleItem> setBodyTitleItem(List<ReportDate> reportDateList) {
-        List<TsukibetsuSuiihyoBodyTitleItem> list = new ArrayList<>();
-        for (ReportDate reportDate : reportDateList) {
-            TsukibetsuSuiihyoBodyTitleItem bodyTitleItem = new TsukibetsuSuiihyoBodyTitleItem(reportDate.getListTitle_1());
-            list.add(bodyTitleItem);
-        }
-        return list;
-    }
-
-    private List<TsukibetsuSuiihyoBodyItem> setbodyItemList(List<ReportDate> reportDateList) {
-        List<TsukibetsuSuiihyoBodyItem> list = new ArrayList<>();
-        for (ReportDate reportDate : reportDateList) {
-            TsukibetsuSuiihyoBodyItem bodyItem = new TsukibetsuSuiihyoBodyItem(reportDate.getList_1(),
-                    reportDate.getList_2(), reportDate.getList_3(), reportDate.getList_4(), reportDate.getList_5(), reportDate.getList_6(),
-                    reportDate.getList_7(), reportDate.getList_8(), reportDate.getList_9(), reportDate.getList_10(), reportDate.getList_11(),
-                    reportDate.getList_12(), reportDate.getList_13(), reportDate.getList_14(), reportDate.getList_15(), reportDate.getList_16());
-            list.add(bodyItem);
-        }
-        return list;
+                AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_().getColumnValue());
     }
 
     private void outputJokenhyoFactory() {
@@ -186,7 +148,10 @@ public class FutuChoushuProcess extends BatchProcessBase<KoumokuGoukey> {
         List<RString> 出力条件 = new ArrayList<>();
         FlexibleYear 調定年度 = mybatisPrm.getChoteiNendo();
         出力条件.add(get条件(処理年度, 調定年度.wareki().toDateString()));
-        RDate 基準日 = new YMDHMS(mybatisPrm.getChoteiKijunNichiji().toString()).getDate();
+        FlexibleDate 基準日 = FlexibleDate.EMPTY;
+        if (!RString.isNullOrEmpty(mybatisPrm.getChoteiKijunNichiji())) {
+            基準日 = new FlexibleDate(mybatisPrm.getChoteiKijunNichiji().substring(0, INT_8));
+        }
         出力条件.add(get条件(調定基準日, 基準日.wareki().toDateString()));
         出力条件.add(get条件(各月資格基準日, mybatisPrm.getKakutukiShikakuKijunNichi()));
         出力条件.add(get条件(年齢開始, mybatisPrm.getAgeStart()));

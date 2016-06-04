@@ -31,6 +31,7 @@
         "DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho",
         "DbT5911ShujiiIryoKikanJoho"."jusho" AS "iryoKikanJusho",
         "DbT5911ShujiiIryoKikanJoho"."telNo"  AS "iryoKikanTelNo",
+        "DbT5911ShujiiIryoKikanJoho"."faxNo" AS "iryoKikanFaxNo",
         "DbT5912ShujiiJoho"."shujiiName",
         "DbT5301ShujiiIkenshoIraiJoho"."ikenshoSakuseiIraiYMD",
         "DbT5301ShujiiIkenshoIraiJoho"."iraishoShutsuryokuYMD",
@@ -614,6 +615,7 @@
         <result property="seikyushoShutsuryokuYMD" column="seikyushoShutsuryokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ikenshoIraiKubun" column="ikenshoIraiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="preIryoKikanMeisho" column="preIryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="iryoKikanFaxNo" column="iryoKikanFaxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="preShujiiName" column="preShujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="shinseiShinseijiKubunCode" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="rirekiNo" column="rirekiNo"/>

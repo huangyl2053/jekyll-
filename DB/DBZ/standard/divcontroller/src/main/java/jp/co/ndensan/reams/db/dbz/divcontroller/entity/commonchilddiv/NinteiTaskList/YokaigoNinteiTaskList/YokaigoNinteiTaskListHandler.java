@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTas
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.CyoSaNyuSyuBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.CyoSaiRaiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.GeTuReiSyoRiBusiness;
@@ -41,7 +42,6 @@ import jp.co.ndensan.reams.db.dbz.definition.param.yokaigoninteitasklist.Yokaigo
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -77,7 +77,6 @@ public class YokaigoNinteiTaskListHandler {
     private static final Code 認定ｿﾌﾄ2006 = new Code(new RString("06A"));
     private static final Code 認定ｿﾌﾄ2009_A = new Code(new RString("09A"));
     private static final Code 認定ｿﾌﾄ2009_B = new Code(new RString("09B"));
-    private static final CodeShubetsu コード種別 = new CodeShubetsu("5002");
     private static final int インデックス_0 = 0;
     private static final int インデックス_1 = 1;
     private static final int インデックス_2 = 2;
@@ -425,7 +424,9 @@ public class YokaigoNinteiTaskListHandler {
             row.getChosaTokusokuCount().setValue(new Decimal(business.get認定調査督促回数()));
             row.getChosaTokusokuLiit().setValue(new RDate(business.get認定調査期限年月日().toString()));
             row.setChosaTokusokuChiku(business.get地区コード() == null ? RString.EMPTY
-                    : CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, コード種別, new Code(business.get地区コード())));
+                    : CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
+                            DBECodeShubetsu.調査地区コード.getコード(),
+                            new Code(business.get地区コード()), new FlexibleDate(RDate.getNowDate().toDateString())));
             row.setNinteichosaIraiRirekiNo(new RString(String.valueOf(business.get認定調査依頼履歴番号())));
             row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
             調査依頼モードの日付設定(row, business);
@@ -579,7 +580,9 @@ public class YokaigoNinteiTaskListHandler {
                     : new RString(NinteichosaTokusokuHoho.toValue(business.get認定調査督促方法()).name()));
             row.getChosaTokusokuCount().setValue(new Decimal(business.get認定調査督促回数()));
             row.setChosaTokusokuChiku(business.get地区コード() == null ? RString.EMPTY
-                    : CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, コード種別, new Code(business.get地区コード())));
+                    : CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
+                            DBECodeShubetsu.調査地区コード.getコード(),
+                            new Code(business.get地区コード()), new FlexibleDate(RDate.getNowDate().toDateString())));
             row.setNinteiChosaItakusakiCode(business.get認定調査委託先コード() == null
                     ? RString.EMPTY : business.get認定調査委託先コード().value());
             row.setNinteiChosainCode(business.get調査員コード() == null

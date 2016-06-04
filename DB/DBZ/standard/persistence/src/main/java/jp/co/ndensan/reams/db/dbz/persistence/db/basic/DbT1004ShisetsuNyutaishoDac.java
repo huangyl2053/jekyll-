@@ -142,6 +142,20 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
     }
 
     /**
+     * 識別コードにより、最大履歴番号を取得です。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return 最大履歴番号
+     */
+    public DbT1004ShisetsuNyutaishoEntity get最大履歴番号(ShikibetsuCode 識別コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(max(rirekiNo)).
+                table(DbT1004ShisetsuNyutaisho.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                toObject(DbT1004ShisetsuNyutaishoEntity.class);
+    }
+
+    /**
      * 入退所日リストの取得です。
      *
      * @param 識別コード 識別コード

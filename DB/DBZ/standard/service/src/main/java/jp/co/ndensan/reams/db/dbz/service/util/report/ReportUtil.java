@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.util.report;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,10 +13,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNoHatsubanHoho;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.teikeibunhenkan.ITextHenkanRule;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
@@ -26,6 +30,8 @@ import jp.co.ndensan.reams.ur.urz.service.core.bunshono.BunshoNoFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.bunshono.IBunshoNoFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
 import jp.co.ndensan.reams.ux.uxx.entity.db.relate.tsuchishoteikeibun.TsuchishoTeikeibunEntity;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
@@ -237,6 +243,9 @@ public final class ReportUtil {
         TsuchishoTeikeibunInfo info = tsuchishoTeikeibunManager.get通知書定形文検索(subGyomuCode, reportId,
                 kamokuCode, patternNo, sentenceNo, kijunDate);
         ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(subGyomuCode, reportId);
+        if (info == null) {
+            return textHenkanRule.editText(RString.EMPTY);
+        }
         return textHenkanRule.editText(info.get文章());
     }
 
@@ -255,5 +264,42 @@ public final class ReportUtil {
             return kyotsu.get定型文文字サイズ();
         }
         return RString.EMPTY;
+    }
+
+    /**
+     * 出力順設定項目リストを取得します。
+     *
+     * @param shutsuryokujunId 出力順ID
+     * @param reportId 帳票ID
+     * @param subGyomuCode サブ業務コード
+     * @return List<ISetSortItem>
+     */
+    public static List<ISetSortItem> get出力順設定項目リスト(SubGyomuCode subGyomuCode, RString shutsuryokujunId, ReportId reportId) {
+        List<ISetSortItem> 設定項目リスト = new ArrayList<>();
+        IOutputOrder iOutputOrder = ReportUtil.get出力順ID(subGyomuCode, shutsuryokujunId, reportId);
+        if (iOutputOrder != null) {
+            設定項目リスト = iOutputOrder.get設定項目リスト();
+        }
+        return 設定項目リスト;
+    }
+
+    /**
+     * 出力順IDを取得します。
+     *
+     * @param shutsuryokujunId 出力順ID
+     * @param reportId 帳票ID
+     * @param subGyomuCode サブ業務コード
+     * @return List<ISetSortItem>
+     */
+    public static IOutputOrder get出力順ID(SubGyomuCode subGyomuCode, RString shutsuryokujunId, ReportId reportId) {
+        if (!RString.isNullOrEmpty(shutsuryokujunId)) {
+            IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
+            return chohyoShutsuryokujunFinder.get出力順(subGyomuCode,
+                    reportId,
+                    reamsLoginID,
+                    new Long(shutsuryokujunId.toString()));
+        }
+        return null;
     }
 }

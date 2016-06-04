@@ -35,8 +35,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuLoadHandler {
     private static final int NUMBER_6 = 6;
     private static final int NUMBER_7 = 7;
     private static final int NUMBER_8 = 8;
-    private static final int NUMBER_10 = 9;
-    private static final int NUMBER_9 = 10;
+    private static final int NUMBER_9 = 9;
+    private static final int NUMBER_10 = 10;
     private static final int NUMBER_11 = 11;
     private static final int NUMBER_12 = 12;
     private static final int NUMBER_13 = 13;
@@ -98,15 +98,6 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuLoadHandler {
     }
 
     /**
-     * setViewState
-     *
-     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
-     */
-    public void setViewState(JigyoHokokuGeppoParameter 引き継ぎデータ) {
-        initializeKihoneria(引き継ぎデータ);
-    }
-
-    /**
      * initializeKihoneria
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
@@ -129,22 +120,28 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuLoadHandler {
      * @return boolean DB操作結果
      */
     public boolean delete(JigyoHokokuGeppoParameter 引き継ぎデータ) {
-        int row = deleteByParameter(引き継ぎデータ, 集計番号_0101);
-        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0201);
-        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0301);
-        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0401);
-        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0102);
-        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0202);
-        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0302);
-        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0402);
-        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0103);
-        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0203);
-        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0303);
-        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0403);
-        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0104);
-        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0204);
-        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0304);
-        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0404);
+        int row = 0;
+        if (引き継ぎデータ.get行集計番号().startsWith(件数総数)) {
+            row = deleteByParameter(引き継ぎデータ, 集計番号_0101);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0102);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0103);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0104);
+        } else if (引き継ぎデータ.get行集計番号().startsWith(件数第２号被保険者分再掲)) {
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0201);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0202);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0203);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0204);
+        } else if (引き継ぎデータ.get行集計番号().startsWith(件数総数特例分)) {
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0301);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0302);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0303);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0304);
+        } else {
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0401);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0402);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0403);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0404);
+        }
         return 0 < row;
     }
 

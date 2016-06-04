@@ -23,7 +23,7 @@
      "layoutName": "DBZ0200001",
      "layoutTitle": "対象者検索",
      "eventName": "対象者特定",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0510011",
@@ -36,8 +36,8 @@
      "layoutSubGyomuCode": "DBU",
      "layoutName": "DBU0510011",
      "layoutTitle": "境界層該当者管理",
-     "eventName": "対象者検索に戻る",
-     "destroy": false,
+     "eventName": "research",
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
@@ -51,7 +51,7 @@
      "layoutName": "DBU0510011",
      "layoutTitle": "境界層該当者管理",
      "eventName": "処理完了",
-     "destroy": false,
+     "destroy": true,
      "condition": ""
     }
    ]

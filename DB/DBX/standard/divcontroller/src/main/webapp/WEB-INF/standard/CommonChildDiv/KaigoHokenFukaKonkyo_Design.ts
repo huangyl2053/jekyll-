@@ -441,48 +441,96 @@ module DBX {
                 return new UZA.TableCell(this.convFiledName("celKikan12"));
             }
 
-            public lblKikanData(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblKikanData"));
+            public lblKikanData1(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblKikanData1"));
             }
 
             public celKikan22(): UZA.TableCell {
                 return new UZA.TableCell(this.convFiledName("celKikan22"));
             }
 
-            public lblGessuData(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblGessuData"));
+            public lblGessuData1(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblGessuData1"));
             }
 
             public celKikan32(): UZA.TableCell {
                 return new UZA.TableCell(this.convFiledName("celKikan32"));
             }
 
-            public lblHokenryoDankaiKubunData(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblHokenryoDankaiKubunData"));
+            public lblHokenryoDankaiKubunData1(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblHokenryoDankaiKubunData1"));
             }
 
             public celKikan42(): UZA.TableCell {
                 return new UZA.TableCell(this.convFiledName("celKikan42"));
             }
 
-            public lblHokenryoritsuData(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblHokenryoritsuData"));
+            public lblHokenryoritsuData1(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblHokenryoritsuData1"));
             }
 
             public celKikan52(): UZA.TableCell {
                 return new UZA.TableCell(this.convFiledName("celKikan52"));
             }
 
-            public lblHokenryoSanshutsugakuData(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblHokenryoSanshutsugakuData"));
+            public lblHokenryoSanshutsugakuData1(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblHokenryoSanshutsugakuData1"));
             }
 
             public celKikan62(): UZA.TableCell {
                 return new UZA.TableCell(this.convFiledName("celKikan62"));
             }
 
-            public lblHokenryogakuData(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblHokenryogakuData"));
+            public lblHokenryogakuData1(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblHokenryogakuData1"));
+            }
+
+            public celKikan13(): UZA.TableCell {
+                return new UZA.TableCell(this.convFiledName("celKikan13"));
+            }
+
+            public lblKikanData2(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblKikanData2"));
+            }
+
+            public celKikan23(): UZA.TableCell {
+                return new UZA.TableCell(this.convFiledName("celKikan23"));
+            }
+
+            public lblGessuData2(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblGessuData2"));
+            }
+
+            public celKikan33(): UZA.TableCell {
+                return new UZA.TableCell(this.convFiledName("celKikan33"));
+            }
+
+            public lblHokenryoDankaiKubunData2(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblHokenryoDankaiKubunData2"));
+            }
+
+            public celKikan43(): UZA.TableCell {
+                return new UZA.TableCell(this.convFiledName("celKikan43"));
+            }
+
+            public lblHokenryoritsuData2(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblHokenryoritsuData2"));
+            }
+
+            public celKikan53(): UZA.TableCell {
+                return new UZA.TableCell(this.convFiledName("celKikan53"));
+            }
+
+            public lblHokenryoSanshutsugakuData2(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblHokenryoSanshutsugakuData2"));
+            }
+
+            public celKikan63(): UZA.TableCell {
+                return new UZA.TableCell(this.convFiledName("celKikan63"));
+            }
+
+            public lblHokenryogakuData2(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblHokenryogakuData2"));
             }
 
             public txtChoteiJiyu1(): UZA.TextBox {

@@ -596,4 +596,16 @@ public class KariSanteiIdoFuka {
             }
         }
     }
+
+    /**
+     * 基準日時取得のメソッドます。
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 処理名 RString
+     * @return 処理日付管理entity
+     */
+    public ShoriDateKanri get基準日時(FlexibleYear 調定年度, RString 処理名) {
+        DbT7022ShoriDateKanriEntity shoriDateKanri = 処理日付管理Dac.selectMax基準日(調定年度, 処理名);
+        return new ShoriDateKanri(shoriDateKanri);
+    }
 }

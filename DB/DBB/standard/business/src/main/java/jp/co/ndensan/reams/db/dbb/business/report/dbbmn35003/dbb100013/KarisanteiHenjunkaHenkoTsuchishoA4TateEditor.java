@@ -54,7 +54,7 @@ class KarisanteiHenjunkaHenkoTsuchishoA4TateEditor implements IKarisanteiHenjunk
         source.koseigoHokenryoGaku = item.getKoseigoHokenryoGaku();
         source.nofuzumiGaku = item.getNofuzumiGaku();
         source.kongoNofusubekiGaku = item.getKongoNofuSubekiGaku();
-        source.korekaraChoshuho = item.getKongoNofuSubekiGaku();
+        source.korekaraChoshuho = item.getKorekaraChoshuho();
         source.listKibetsu_1 = item.getListKibetsu_1();
         source.listKibetsu_2 = item.getListKibetsu_2();
         source.listKibetsu_3 = item.getListKibetsu_3();
@@ -64,7 +64,7 @@ class KarisanteiHenjunkaHenkoTsuchishoA4TateEditor implements IKarisanteiHenjunk
         source.listKibetsu_7 = item.getListKibetsu_7();
         source.listKibetsu_8 = item.getListKibetsu_8();
         source.listKibetsu_9 = item.getListKibetsu_9();
-        source.bankCode = item.getListKibetsu_8();
+        source.bankCode = item.getBankCode();
         source.bankName = item.getBankName();
         source.korekaraTokuchoGimusha = item.getKorekaraTokuchoGimusha();
         source.korekaraTokuchoTaishoNenkin = item.getKorekaraTokuchoTaishoNenkin();
@@ -72,8 +72,8 @@ class KarisanteiHenjunkaHenkoTsuchishoA4TateEditor implements IKarisanteiHenjunk
         source.kozaNo = item.getKozaNo();
         source.kozaMeigi = item.getKozaMeigi();
         source.choteiJiyu1 = item.getChoteiJiyu1();
-        source.choteiJiyu2 = item.getChoteiJiyu1();
-        source.choteiJiyu3 = item.getChoteiJiyu1();
+        source.choteiJiyu2 = item.getChoteiJiyu2();
+        source.choteiJiyu3 = item.getChoteiJiyu3();
         source.choteiJiyu4 = item.getChoteiJiyu4();
 
         source.customerBarCode = item.getCustomerBarCode();

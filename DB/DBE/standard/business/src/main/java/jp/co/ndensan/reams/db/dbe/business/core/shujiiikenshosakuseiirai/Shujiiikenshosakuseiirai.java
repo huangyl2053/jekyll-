@@ -207,6 +207,15 @@ public class Shujiiikenshosakuseiirai {
     }
 
     /**
+     * 医療機関所FAXを取得します。
+     *
+     * @return 医療機関所FAX
+     */
+    public RString getTemp_医療機関所FAX() {
+        return entity.getIryoKikanFaxNo();
+    }
+
+    /**
      * Temp_主治医を取得します。
      *
      * @return Temp_主治医

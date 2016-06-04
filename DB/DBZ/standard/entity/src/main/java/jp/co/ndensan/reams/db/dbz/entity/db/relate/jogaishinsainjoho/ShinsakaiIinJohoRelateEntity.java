@@ -51,5 +51,7 @@ public class ShinsakaiIinJohoRelateEntity {
     private RString ninteichosaItakusakiCode;
     private RString ninteiChosainNo;
     private RString sonotaKikanCode;
+    private RString shichosonCode;
+    private RString jogaiTaishoShinsakaiIinCode;
 
 }

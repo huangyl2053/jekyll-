@@ -219,16 +219,15 @@ public class TotalHandler {
                 .getTplShisetsuNyutaisho().getTxtShisetsuNyushoDate1().getValue());
         nyutai1.set退所年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
                 .getTplShisetsuNyutaisho().getTxtShisetsuTaishoDate1().getValue());
-        //TODO 入所施設コードと入所施設種類が存在しません
-        nyutai1.set入所施設コード(RString.EMPTY);
-        nyutai1.set入所施設種類(RString.EMPTY);
+        nyutai1.set入所施設コード(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getHidden入所施設コード１());
+        nyutai1.set入所施設種類(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getHidden入所施設種類１());
         NyutaiShoParameter nyutai2 = new NyutaiShoParameter();
         nyutai2.set入所年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
                 .getTplShisetsuNyutaisho().getTxtShisetsuNyushoDate2().getValue());
         nyutai2.set退所年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
                 .getTplShisetsuNyutaisho().getTxtShisetsuTaishoDate2().getValue());
-        nyutai2.set入所施設コード(RString.EMPTY);
-        nyutai2.set入所施設種類(RString.EMPTY);
+        nyutai2.set入所施設コード(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getHidden入所施設コード２());
+        nyutai2.set入所施設種類(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getHidden入所施設種類２());
         nyutaiList.add(nyutai1);
         nyutaiList.add(nyutai2);
         para.set入退所年月日(nyutaiList);
@@ -371,6 +370,7 @@ public class TotalHandler {
                 .getTplShienJigyosha().getTxtJigyosha1().getValue());
         shuto1.setTekiyoKaishiYMD(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
                 .getTplShienJigyosha().getTxtTekiyoStYMD1().getValue().toString()));
+        shuto1.setTekiyoShuryoYMD(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getHidden適用終了日１());
         ShienJigyoshaBusiness shuto2 = new ShienJigyoshaBusiness();
         shuto2.setTodokedeYMD(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
                 .getTplShienJigyosha().getTxtTodokedeYMD2().getValue().toString()));
@@ -378,6 +378,7 @@ public class TotalHandler {
                 .getTplShienJigyosha().getTxtJigyosha2().getValue());
         shuto2.setTekiyoKaishiYMD(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
                 .getTplShienJigyosha().getTxtTekiyoStYMD2().getValue().toString()));
+        shuto2.setTekiyoShuryoYMD(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getHidden適用終了日２());
         ShienJigyoshaBusiness shuto3 = new ShienJigyoshaBusiness();
         shuto3.setTodokedeYMD(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
                 .getTplShienJigyosha().getTxtTodokedeYMD3().getValue().toString()));
@@ -385,6 +386,7 @@ public class TotalHandler {
                 .getTplShienJigyosha().getTxtJigyosha3().getValue());
         shuto3.setTekiyoKaishiYMD(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
                 .getTplShienJigyosha().getTxtTekiyoStYMD3().getValue().toString()));
+        shuto3.setTekiyoShuryoYMD(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getHidden適用終了日３());
         shutoList.add(shuto1);
         shutoList.add(shuto2);
         shutoList.add(shuto3);

@@ -49,6 +49,20 @@
      "eventName": "終了する",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB8110001",
+     "layoutTitle": "各種通知書作成（個別）",
+     "eventName": "戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB8120001",
+     "toLayoutTitle": "介護保険料即時賦課更正",
+     "toState": "完了"
     }
    ]
   }

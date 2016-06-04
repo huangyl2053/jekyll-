@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Hihokens
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.IsExistJohoTeikyoDoui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -66,7 +67,7 @@ public class YokaigoNinteiJohoTeikyoHandler {
         div.getHakkoChohyo().setIsOpen(false);
         div.getNInteiRirekiInfo().setIsOpen(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnkensakuback"), false);
-        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_被保険者番号, RString.class);
         HihokenshaJyuhouBusiness 被保険者情報 = YokaigoNinteiJohoTeikyoFinder.createInstance().select被保険者情報(被保険者番号);
         if (被保険者情報 != null) {
             div.getTxtHihokenshaNo().setValue(被保険者情報.get被保険者番号());
@@ -158,13 +159,13 @@ public class YokaigoNinteiJohoTeikyoHandler {
         div.getNinteiKekkaShosai().getTxtNinteiChosaIraibi().setValue(row.getNinteichosaIraiYMD().getValue());
         div.getNinteiKekkaShosai().getTxtNinteiChosaJisshibi().setValue(row.getNinteiChosaJisshiDay().getValue());
         div.getNinteiKekkaShosai().getTxtNinteiChosaJuryobi().setValue(row.getNinteichosaJuryoYMD().getValue());
-        div.getCcdChosaItakusakiAndChosainInput().setTxtChosaItakusakiCode(row.getNinteiChosaItakusakiCode());
-        div.getCcdChosaItakusakiAndChosainInput().setTxtChosaItakusakiName(row.getJigyoshaMeisho());
-        div.getCcdChosaItakusakiAndChosainInput().setTxtChosainCode(row.getNinteiChosainCode());
-        div.getCcdChosaItakusakiAndChosainInput().setTxtChosainName(row.getChosainShimei());
+        div.getCcdChosaItakusakiAndChosainInput().initialize(new RString(ChosaItakusakiAndChosainInputDiv.ShoriType.SimpleInputMode.toString()),
+                row.getNinteiChosaItakusakiCode(), row.getJigyoshaMeisho(), row.getNinteiChosainCode(), row.getChosainShimei());
+        div.getCcdChosaItakusakiAndChosainInput().setHdnShichosonCode(row.getShichosonCode());
+        div.getCcdChosaItakusakiAndChosainInput().setHdnShinseishoKanriNo(RString.EMPTY);
         div.getNinteiKekkaShosai().getTxtIkenshoIraibi().setValue(row.getIkenshoSakuseiIraiYMD().getValue());
         div.getNinteiKekkaShosai().getTxtIkenshoJuryobi().setValue(row.getShujiiIkenshoJuryoDay().getValue());
-        div.getCcdShujiiIryoKikanAndShujiiInput().initialize(new LasdecCode(row.getShichosonCode()), ShinseishoKanriNo.EMPTY, SubGyomuCode.EMPTY, 
+        div.getCcdShujiiIryoKikanAndShujiiInput().initialize(new LasdecCode(row.getShichosonCode()), ShinseishoKanriNo.EMPTY, SubGyomuCode.EMPTY,
                 row.getShujiiIryokikanCode(), row.getIryoKikanMeisho(), row.getShujiiCode(), row.getShujiiName());
         div.getNinteiKekkaShosai().getTxtShinsakaiYoteibi().setValue(row.getShinsakaiKaisaiYoteiYMD().getValue());
         div.getNinteiKekkaShosai().getTxtShinsakaiKaisaibi().setValue(row.getKaigoNinteiShinsakaiKaisaiDay().getValue());

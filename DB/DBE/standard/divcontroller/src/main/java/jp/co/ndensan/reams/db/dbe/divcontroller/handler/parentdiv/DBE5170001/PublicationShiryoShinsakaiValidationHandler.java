@@ -62,7 +62,6 @@ public class PublicationShiryoShinsakaiValidationHandler {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.印刷範囲指定の前後順, div.getTxtShiryoNoStart(), div.getTxtSiryoNoEnd()));
             }
         }
-        // TODO QA1220_86490 回答まち、印刷対象なしのチェック
         return validPairs;
     }
 
@@ -71,8 +70,7 @@ public class PublicationShiryoShinsakaiValidationHandler {
         部数未入力(UrErrorMessages.入力値が不正_追加メッセージあり, "部数"),
         印刷帳票未選択(UrErrorMessages.選択されていない, "選択条件"),
         印刷範囲指定未入力(UrErrorMessages.入力値が不正_追加メッセージあり, "印刷範囲指定"),
-        印刷範囲指定の前後順(UrErrorMessages.終了日が開始日以前),
-        印刷対象なし(UrErrorMessages.対象データなし);
+        印刷範囲指定の前後順(UrErrorMessages.終了日が開始日以前);
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {

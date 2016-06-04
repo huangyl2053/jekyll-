@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.helper.FukaTaishoshaSearchValidationHelper;
@@ -73,6 +72,8 @@ public class FukaTaishoshaSearch {
     private static final ISearchCondition 条件無 = null;
     private static final int 最近処理者検索数 = 1;
     private static final int 最大取得件数 = new GaitoshaKensakuConfig().get最大取得件数();
+    private static final RString フラグ_1 = new RString("1");
+    private static final RString フラグ_2 = new RString("2");
 
     /**
      * 「初期化」時の処理です。
@@ -195,6 +196,7 @@ public class FukaTaishoshaSearch {
             save最近処理者(div, 対象者);
             div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(toRowList(newResult));
             set賦課年度(div);
+            ViewStateHolder.put(ViewStateKey.各種通知書作成フラグ, フラグ_1);
             // 次画面遷移
             return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
             // 検索結果が２件以上の場合
@@ -294,6 +296,7 @@ public class FukaTaishoshaSearch {
             }
             div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(toRowList(対象者));
         }
+        ViewStateHolder.put(ViewStateKey.各種通知書作成フラグ, フラグ_1);
         return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
     }
 
@@ -310,6 +313,7 @@ public class FukaTaishoshaSearch {
         save最近処理者(div);
         // ViewState_個人確定キーの保存
         put対象者Key(create対象者Key(div));
+        ViewStateHolder.put(ViewStateKey.各種通知書作成フラグ, フラグ_2);
         // 次画面遷移
         return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
     }

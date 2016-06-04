@@ -64,6 +64,7 @@ public class TaJushochiTokureisyaKanriManager {
 
     private static final RString 他特例居住 = new RString("05");
     private static final int 年齢_65 = 65;
+    private static final int 枝番 = 4;
     private static final RString 識別コード = new RString("識別コード");
     private final MapperProvider mapperProvider;
     private final DbT1003TashichosonJushochiTokureiDac dbT1003Dac;
@@ -238,10 +239,6 @@ public class TaJushochiTokureisyaKanriManager {
     @Transaction
     public void saveHihokenshaSositu(KaigoTatokuTekiyoJiyu 適用事由,
             FlexibleDate 適用年月日, FlexibleDate 適用届出年月日, ShikibetsuCode 識別コード) {
-        requireNonNull(適用事由, UrSystemErrorMessages.値がnull.getReplacedMessage("適用事由"));
-        requireNonNull(適用年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用年月日"));
-        requireNonNull(適用届出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用届出年月日"));
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード.toString()));
         HihokenshashikakusoshitsuManager.createInstance().saveHihokenshaShikakuSoshitsu(
                 識別コード, HihokenshaNo.EMPTY, 適用年月日, new RString("05"), 適用届出年月日);
     }
@@ -354,6 +351,37 @@ public class TaJushochiTokureisyaKanriManager {
                 RString.EMPTY, JigyoshaNo.EMPTY, RString.EMPTY);
         ITaJushochiTokureisyaKanriMapper daichoJohoMapper = mapperProvider.create(ITaJushochiTokureisyaKanriMapper.class);
         return daichoJohoMapper.select宛名情報(parameter);
+    }
+
+    /**
+     * 最新履歴番号を取得します。
+     *
+     * @param 識別コード 識別コード
+     * @return int 最新履歴番号
+     */
+    @Transaction
+    public int get最新履歴番号(ShikibetsuCode 識別コード) {
+        DbT1004ShisetsuNyutaishoEntity entity = 介護保険施設入退所Manager.get最大履歴番号(識別コード);
+        if (entity == null) {
+            return 1;
+        }
+        return entity.getRirekiNo() + 1;
+    }
+
+    /**
+     * 枝番を取得します。
+     *
+     * @param 識別コード 識別コード
+     * @param 異動日 異動日
+     * @return RString 最新枝番
+     */
+    @Transaction
+    public RString get最新枝番(ShikibetsuCode 識別コード, FlexibleDate 異動日) {
+        DbT1003TashichosonJushochiTokureiEntity entity = dbT1003Dac.get最大枝番(識別コード, 異動日);
+        if (entity == null) {
+            return new RString("0001");
+        }
+        return new RString(Integer.parseInt(entity.getEdaNo().toString()) + 1).padZeroToLeft(枝番);
     }
 
     private void set他市町村住所地特例(

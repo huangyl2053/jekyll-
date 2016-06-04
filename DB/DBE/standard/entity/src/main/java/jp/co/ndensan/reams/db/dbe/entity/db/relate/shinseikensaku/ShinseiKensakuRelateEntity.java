@@ -54,4 +54,5 @@ public class ShinseiKensakuRelateEntity implements Serializable {
     private RString iryoKikanMeisho;
     private AtenaMeisho shujiiName;
     private int ikenshoIraiRirekiNo;
+    private int ninteichosaIraiRirekiNo;
 }

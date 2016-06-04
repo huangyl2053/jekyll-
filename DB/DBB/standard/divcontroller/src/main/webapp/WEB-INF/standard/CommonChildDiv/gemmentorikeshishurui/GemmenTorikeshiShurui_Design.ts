@@ -8,6 +8,14 @@ module DBB {
 
         export class Events {
 
+            public static onClick_btnSelect(): string {
+                return "onClick_btnSelect";
+            }
+
+            public static onClick_btnCancel(): string {
+                return "onClick_btnCancel";
+            }
+
         }
 
         export class Controls {

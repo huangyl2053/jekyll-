@@ -492,9 +492,9 @@ public class KoumokuSyoukeyiProcess extends BatchProcessBase<NinsuKinkaku> {
                 ninsuKinkaku.setItiGetuKinkaku(getNinsuOrKinkakul(get不明の人数金額の取得().get(i).getFumeKinkaku()));
             } else if (二月.equals(get不明の人数金額の取得().get(i).getGetu())) {
                 ninsuKinkaku.setNiGetuNinsu(getNinsuOrKinkakul(get不明の人数金額の取得().get(i).getFumeNinsu()));
-                ninsuKinkaku.setNiGetuNinsu(getNinsuOrKinkakul(get不明の人数金額の取得().get(i).getFumeKinkaku()));
+                ninsuKinkaku.setNiGetuKinkaku(getNinsuOrKinkakul(get不明の人数金額の取得().get(i).getFumeKinkaku()));
             } else if (三月.equals(get不明の人数金額の取得().get(i).getGetu())) {
-                ninsuKinkaku.setSanGetuKinkaku(getNinsuOrKinkakul(get不明の人数金額の取得().get(i).getFumeNinsu()));
+                ninsuKinkaku.setSanGetuNinsu(getNinsuOrKinkakul(get不明の人数金額の取得().get(i).getFumeNinsu()));
                 ninsuKinkaku.setSanGetuKinkaku(getNinsuOrKinkakul(get不明の人数金額の取得().get(i).getFumeKinkaku()));
             }
         }

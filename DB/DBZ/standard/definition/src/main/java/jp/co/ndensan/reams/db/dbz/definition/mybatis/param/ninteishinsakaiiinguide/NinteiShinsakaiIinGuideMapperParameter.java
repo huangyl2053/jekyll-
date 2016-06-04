@@ -15,8 +15,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 審査会委員一覧情報のMyBatis用パラメータクラスです。
  *
- * @reamsid_L DBE-3000-030  lijia
- * 
+ * @reamsid_L DBE-3000-030 lijia
+ *
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -58,7 +58,7 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
      * @param sonotaKikanCode その他機関コード
      * @param kikenFlag 期限
      * @param haishiFlag 廃止
-     * @param maxKensu 最大取得件数上限
+     * @param maxKensu 最大取得件数
      * @param systemDate SYSTEMDATE
      * @param shoKisaiHokenshaNo 証記載保険者番号
      * @return 審査会委員一覧情報の検索パラメータ
@@ -125,7 +125,7 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
      * @param sonotaKikanCode その他機関コード
      * @param kikenFlag 期限
      * @param haishiFlag 廃止
-     * @param maxKensu 最大取得件数上限
+     * @param maxKensu 最大取得件数
      * @param systemDate SYSTEMDATE
      * @param shoKisaiHokenshaNo 証記載保険者番号
      * @return 審査会委員一覧情報の検索パラメータ

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbu.business.core.kyokaisogaitosha.KyokaisoHokenry
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.KyokaisoGaitoshaPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.dgKyokaisouGaitouItran_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.dghokenryoNofu_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBZCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoGaitosha;
@@ -22,7 +23,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoHokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoSochiShinsei;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -640,8 +640,10 @@ public class KyokaisoGaitoshaPanelHandler {
     }
 
     private List<KeyValueDataSource> 居住費軽減後居室種類ドロップダウンリスト() {
+        FlexibleDate 基准日 = new FlexibleDate(RDate.getNowDate().toDateString());
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        List<UzT0007CodeEntity> dataSourceList = CodeMaster.getCode(SubGyomuCode.DBZ介護共通, new CodeShubetsu("0243"));
+        List<UzT0007CodeEntity> dataSourceList = CodeMaster.getCode(SubGyomuCode.DBZ介護共通,
+                DBZCodeShubetsu.居室種類.getコード(), 基准日);
         for (UzT0007CodeEntity entity : dataSourceList) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(entity.getコード().getColumnValue());
@@ -785,9 +787,10 @@ public class KyokaisoGaitoshaPanelHandler {
         if (居住費軽減後居室種類コード == null || 居住費軽減後居室種類コード.isEmpty()) {
             return RString.EMPTY;
         }
+        FlexibleDate 基准日 = new FlexibleDate(RDate.getNowDate().toDateString());
         return CodeMaster.getCodeMeisho(
                 SubGyomuCode.DBZ介護共通,
-                new CodeShubetsu("0243"),
-                new Code(居住費軽減後居室種類コード));
+                DBZCodeShubetsu.居室種類.getコード(),
+                new Code(居住費軽減後居室種類コード), 基准日);
     }
 }

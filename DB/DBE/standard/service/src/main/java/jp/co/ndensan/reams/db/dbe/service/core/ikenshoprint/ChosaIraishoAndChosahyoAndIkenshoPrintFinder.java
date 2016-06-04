@@ -12,6 +12,10 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIra
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoprint.IChosaIraishoAndChosahyoAndIkenshoPrintMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJoho;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -84,6 +88,42 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintFinder {
             list.add(new ChosaIraishoAndChosahyoAndIkenshoPrintBusiness(entity));
         }
 
+        return SearchResult.of(list, list.size(), true);
+    }
+
+    /**
+     * 認定調査依頼情報を返します。
+     *
+     * @param parameter ChosaIraishoAndChosahyoAndIkenshoPrintParameter
+     * @return NinteichosaIraiJoho 更新用認定調査依頼情報
+     */
+    @Transaction
+    public SearchResult<NinteichosaIraiJoho> get更新用認定調査依頼情報(ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter) {
+        IChosaIraishoAndChosahyoAndIkenshoPrintMapper mapper = mapperProvider.create(IChosaIraishoAndChosahyoAndIkenshoPrintMapper.class);
+        List<DbT5201NinteichosaIraiJohoEntity> entityList = mapper.select更新用認定調査依頼情報(parameter);
+        List<NinteichosaIraiJoho> list = new ArrayList<>();
+        for (DbT5201NinteichosaIraiJohoEntity entity : entityList) {
+            entity.initializeMd5();
+            list.add(new NinteichosaIraiJoho(entity));
+        }
+        return SearchResult.of(list, list.size(), true);
+    }
+
+    /**
+     * 主治医意見書依頼情報を返します。
+     *
+     * @param parameter ChosaIraishoAndChosahyoAndIkenshoPrintParameter
+     * @return ShujiiIkenshoIraiJoho 更新用主治医意見書依頼情報
+     */
+    @Transaction
+    public SearchResult<ShujiiIkenshoIraiJoho> get更新用主治医意見書依頼情報(ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter) {
+        IChosaIraishoAndChosahyoAndIkenshoPrintMapper mapper = mapperProvider.create(IChosaIraishoAndChosahyoAndIkenshoPrintMapper.class);
+        List<DbT5301ShujiiIkenshoIraiJohoEntity> entityList = mapper.select更新用主治医意見書依頼情報(parameter);
+        List<ShujiiIkenshoIraiJoho> list = new ArrayList<>();
+        for (DbT5301ShujiiIkenshoIraiJohoEntity entity : entityList) {
+            entity.initializeMd5();
+            list.add(new ShujiiIkenshoIraiJoho(entity));
+        }
         return SearchResult.of(list, list.size(), true);
     }
 

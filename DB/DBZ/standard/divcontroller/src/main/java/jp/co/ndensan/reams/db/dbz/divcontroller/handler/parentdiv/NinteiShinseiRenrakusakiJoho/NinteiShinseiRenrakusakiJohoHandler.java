@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.NinteiShinsei
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBZCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
@@ -20,9 +21,10 @@ import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -88,7 +90,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
 
     private void set連絡先区分DDL() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(new CodeShubetsu("0008"));
+        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBZ介護共通, DBZCodeShubetsu.介護連絡先区分.getコード(), FlexibleDate.getNowDate());
         for (UzT0007CodeEntity code : codeList) {
             KeyValueDataSource dataSoruce = new KeyValueDataSource(code.getコード().getColumnValue(), code.getコード名称());
             dataSourceList.add(dataSoruce);

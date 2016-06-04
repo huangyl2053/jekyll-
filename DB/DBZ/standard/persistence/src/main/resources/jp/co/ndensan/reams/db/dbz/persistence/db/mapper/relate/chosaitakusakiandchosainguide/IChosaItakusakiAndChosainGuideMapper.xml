@@ -34,7 +34,10 @@
         AND
         DbT4910."shichosonCode" = DbT4913."shichosonCode"
         WHERE
-        DbT4913."shichosonCode" =#{市町村コード}
+            (
+        <if test="市町村コードフラグ">
+           AND DbT4913."shichosonCode" =#{市町村コード} 
+        </if>
         <if test="認定調査委託先コードFROMフラグ">
             AND
             DbT4910."ninteichosaItakusakiCode"<![CDATA[>=]]> #{認定調査委託先コードFROM}
@@ -99,10 +102,10 @@
             AND
             DbT4913."chosainKanaShimei" LIKE '%'||#{調査員カナ}||'%'
         </if>
+        1=1)
         <if test="usesSaidaiHyojiKensu" >
             LIMIT #{saidaiHyojiKensu}
         </if>
-
     </select>
     <select id="getKijuntsukiShichoson" resultMap="resultMap_getKijuntsukiShichosonjoho"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.param.ikninteichosaitakusakijoho.ChosaItakusakiAndChosainGuideParameter" fetchSize="500">
@@ -125,7 +128,10 @@
         AND
         DbT5910."shichosonCode" = DbT5913."shichosonCode"
         WHERE
-        DbT5913."shichosonCode" =#{市町村コード}
+          (
+         <if test="市町村コードフラグ">
+           AND  DbT5913."shichosonCode" =#{市町村コード}
+        </if>
         <if test="認定調査委託先コードFROMフラグ">
             AND
             DbT5910."ninteichosaItakusakiCode"<![CDATA[>=]]> #{認定調査委託先コードFROM}
@@ -182,6 +188,7 @@
             AND
             DbT5913."chosainKanaShimei" LIKE '%'||#{調査員カナ}||'%'
         </if>
+        1=1)
         <if test="usesSaidaiHyojiKensu" >
             LIMIT #{saidaiHyojiKensu}
         </if>

@@ -130,6 +130,9 @@ public class ShikakuJukiValidator {
      * @return FuseigoRiyu
      */
     public FuseigoRiyu checkFor除外不整合(IKojin 個人情報, TekiyoJogaisha 除外の情報) {
+        if (除外の情報 == null) {
+            return null;
+        }
         FuseigoRiyu 不整合理由 = null;
         if (JukiIdoJiyu.転入.get異動事由コード().equals(個人情報.get登録事由().get異動事由コード())
                 && JogaiTekiyoJiyu.除外者適用.getコード().equals(除外の情報.get適用除外適用事由コード())
@@ -164,6 +167,9 @@ public class ShikakuJukiValidator {
      * @return FuseigoRiyu
      */
     public FuseigoRiyu checkFor他特不整合(IKojin 個人情報, TashichosonJushochiTokurei 他特の情報) {
+        if (他特の情報 == null) {
+            return null;
+        }
         FuseigoRiyu 不整合理由 = null;
         if (JukiIdoJiyu.転入.get異動事由コード().equals(個人情報.get登録事由().get異動事由コード())
                 && TatokureiTekiyoJiyu.他特例適用.getコード().equals(他特の情報.get他市町村住所地特例適用事由コード())

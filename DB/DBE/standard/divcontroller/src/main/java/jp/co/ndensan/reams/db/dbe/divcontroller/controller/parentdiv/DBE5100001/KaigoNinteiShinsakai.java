@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.DBE5
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.DBE5100001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.KaigoNinteiShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100001.KaigoNinteiShinsakaiValidationHandler;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -70,7 +70,7 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        ViewStateHolder.put(ViewStateKeys.審査会一覧_開催番号, div.getCcdShinsakaiItiran().get開催番号List().get(数字_0));
+        ViewStateHolder.put(ViewStateKeys.開催番号, div.getCcdShinsakaiItiran().get開催番号List().get(数字_0));
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.個人別状況照会へ遷移する).respond();
     }
 
@@ -85,7 +85,7 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        ViewStateHolder.put(ViewStateKeys.審査会一覧_開催番号,
+        ViewStateHolder.put(ViewStateKeys.開催番号,
                 new KaigoNinteiShinsakaiParameter(div.getCcdShinsakaiItiran().get開催番号List()));
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.データ出力を実行する).respond();
     }
@@ -116,7 +116,7 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        ViewStateHolder.put(ViewStateKeys.審査会一覧_開催番号,
+        ViewStateHolder.put(ViewStateKeys.開催番号,
                 new KaigoNinteiShinsakaiParameter(div.getCcdShinsakaiItiran().get開催番号List()));
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.自動割付を実行する).respond();
     }
@@ -147,7 +147,7 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        ViewStateHolder.put(ViewStateKeys.審査会一覧_開催番号,
+        ViewStateHolder.put(ViewStateKeys.開催番号,
                 new KaigoNinteiShinsakaiParameter(div.getCcdShinsakaiItiran().get開催番号List()));
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.データ取込みを実行する).respond();
     }

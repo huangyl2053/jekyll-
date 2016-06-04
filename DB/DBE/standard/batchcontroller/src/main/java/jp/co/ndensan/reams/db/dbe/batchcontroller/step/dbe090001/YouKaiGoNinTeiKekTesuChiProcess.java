@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe090001;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.johoteikyoshiryo.JohoTeikyoShiryoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.johoteikyoshiryo.JohoTeikyoShiryoReport;
@@ -16,8 +14,9 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe090001.YouKaiGoNinTei
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.johoteikyoshiryo.JohoTeikyoShiryoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.youkaigoninteikekktesuchi.IYouKaiGoNinTeiKekTesuChiMapper;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
@@ -67,8 +66,7 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     private JohoTeikyoShiryoItem headItem;
     private IYouKaiGoNinTeiKekTesuChiMapper mapper;
     private YouKaiGoNinTeiKekTesuChiMybitisParamter mybatisPrm;
-    private List<JohoTeikyoShiryoItem> itemList;
-    private OutputParameter<List<JohoTeikyoShiryoItem>> outDataList;
+    private OutputParameter<JohoTeikyoShiryoItem> outDataList;
 
     static {
         OUT_DATA_LIST = new RString("outDataList");
@@ -80,7 +78,6 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
 
     @Override
     protected void initialize() {
-        itemList = new ArrayList();
         outDataList = new OutputParameter<>();
         mybatisPrm = paramter.toMybitisParameter();
         mapper = getMapper(IYouKaiGoNinTeiKekTesuChiMapper.class);
@@ -106,18 +103,19 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
         entity.setIkenshoIraiRirekiNo(Integer.valueOf(t.getIkenshoIraiRirekiNo().toString()));
         entity.setNinteiJohoTeikyoYMD(new FlexibleDate(mybatisPrm.get認定状況提供日()));
         mapper.updateShuJiIkenSyoSaKuSeiIraiJyouHou(entity);
+
+        JohoTeikyoShiryoReport report = new JohoTeikyoShiryoReport(headItem);
+        report.writeBy(retortWrite);
+        outDataList.setValue(headItem);
     }
 
     @Override
     protected void afterExecute() {
-        JohoTeikyoShiryoReport report = JohoTeikyoShiryoReport.createFrom(itemList);
-        report.writeBy(retortWrite);
-        outDataList.setValue(itemList);
     }
 
     private void eidtItem(YouKaiGoNinTeiKekTesuChiRelateEntity entity) {
         RString 認証者氏名 = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_ID, FlexibleDate.getNowDate(), retortWrite).ninshoshaYakushokuMei;
-        RString 帳票名 = DbBusinessConfig.get(ItakusakiChosainIchiranReportId.REPORTID_DBE090001, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 帳票名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定結果情報提供票主治医, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         RString 認定結果 = YokaigoJotaiKubun09.toValue(entity.getNijiHanteiYokaigoJotaiKubunCod()).get名称();
         Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, 通知文1);
         headItem = new JohoTeikyoShiryoItem(RDate.getNowDate(),
@@ -141,6 +139,5 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
                 通知文.get(通知文8),
                 通知文.get(通知文9),
                 通知文.get(通知文10));
-        itemList.add(headItem);
     }
 }

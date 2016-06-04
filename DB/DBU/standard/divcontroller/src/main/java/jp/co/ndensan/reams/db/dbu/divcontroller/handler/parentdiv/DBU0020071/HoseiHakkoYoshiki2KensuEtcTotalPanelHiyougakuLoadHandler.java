@@ -32,8 +32,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuLoadHandler {
     private static final int NUMBER_6 = 6;
     private static final int NUMBER_7 = 7;
     private static final int NUMBER_8 = 8;
-    private static final int NUMBER_10 = 9;
-    private static final int NUMBER_9 = 10;
+    private static final int NUMBER_9 = 9;
+    private static final int NUMBER_10 = 10;
     private static final int NUMBER_11 = 11;
     private static final int NUMBER_12 = 12;
     private static final int NUMBER_13 = 13;
@@ -78,7 +78,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuLoadHandler {
      *
      * @param div HoseiHakkoYoshiki2KensuEtcTotalPanelDiv
      */
-    public HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuLoadHandler(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
+    public HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuLoadHandler(
+            HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
         this.div = div;
     }
 

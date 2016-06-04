@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  */
 public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaItakusakiAndChosainInputDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -59,6 +59,8 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
     private RString hdnShinseishoKanriNo;
     @JsonProperty("hdnShichosonCode")
     private RString hdnShichosonCode;
+    @JsonProperty("hdnDataPass")
+    private RString hdnDataPass;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -303,6 +305,24 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
     }
 
     /*
+     * gethdnDataPass
+     * @return hdnDataPass
+     */
+    @JsonProperty("hdnDataPass")
+    public RString getHdnDataPass() {
+        return hdnDataPass;
+    }
+
+    /*
+     * sethdnDataPass
+     * @param hdnDataPass hdnDataPass
+     */
+    @JsonProperty("hdnDataPass")
+    public void setHdnDataPass(RString hdnDataPass) {
+        this.hdnDataPass = hdnDataPass;
+    }
+
+    /*
      * [共有子DIVモード]
      */
     @JsonProperty("modes")
@@ -352,6 +372,11 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
     @Override
     public void initialize(RString モード) {
         getHandler().initialize(モード);
+    }
+
+    @Override
+    public void initialize(RString モード, RString 調査委託先コード, RString 調査委託先名, RString 調査員コード, RString 調査員名) {
+        getHandler().initialize(モード, 調査委託先コード, 調査委託先名, 調査員コード, 調査員名);
     }
 
     @JsonIgnore

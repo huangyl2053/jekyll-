@@ -44,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -191,9 +192,13 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
 
     @Override
     protected void afterExecute() {
-        eucCsvWriter.close();
+        if (eucCsvWriter != null) {
+            eucCsvWriter.close();
+        }
         AccessLogger.log(AccessLogType.照会, toPersonalData());
-        manager.spool(eucFilePath);
+        if (eucFilePath != null) {
+            manager.spool(eucFilePath);
+        }
     }
 
     private void mainsyori() {
@@ -462,8 +467,9 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
     }
 
     private PersonalData toPersonalData() {
+        List<NenreiToutatsuYoteishaCheckListEntity> entityList = nenreiCheckListJyohoEntity.get年齢到達予定者チェックリスト();
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
-                nenreiCheckListJyohoEntity.get年齢到達予定者チェックリスト().get(0).getHihokenshaNo().value());
-        return PersonalData.of(nenreiCheckListJyohoEntity.get年齢到達予定者チェックリスト().get(0).getShikibetsuCode(), expandedInfo);
+                entityList.isEmpty() ? RString.EMPTY : entityList.get(0).getHihokenshaNo().value());
+        return PersonalData.of(entityList.isEmpty() ? ShikibetsuCode.EMPTY : entityList.get(0).getShikibetsuCode(), expandedInfo);
     }
 }

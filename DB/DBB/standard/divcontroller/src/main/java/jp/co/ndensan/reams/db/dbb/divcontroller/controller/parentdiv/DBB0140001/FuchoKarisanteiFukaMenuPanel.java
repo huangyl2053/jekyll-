@@ -5,9 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0140001;
 
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisantei.FuchoKarisanteiBatchParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0140001.FuchoKarisanteiFukaMenuPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0140001.FuchoKarisanteiFukaMenuPanelHandler;
+import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0140001.FuchoKarisanteiFukaMenuPanelValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 普徴仮算定賦課のクラスです。
@@ -28,6 +31,46 @@ public class FuchoKarisanteiFukaMenuPanel {
         handler.load管理情報確認();
         handler.load算定帳票作成();
         handler.load帳票作成個別情報();
+        return createResponseData(div);
+    }
+
+    /**
+     * 普徴仮算定賦課メニューから起動の場合、「実行する」ボタンの事件です。
+     *
+     * @param div FuchoKarisanteiFukaMenuPanelDiv
+     * @return バッチパラメータを引き渡し
+     */
+    public ResponseData<FuchoKarisanteiBatchParameter> onClick_btnFuchoKarisanteiFukaBatch(FuchoKarisanteiFukaMenuPanelDiv div) {
+        FuchoKarisanteiBatchParameter parameter = getHandler(div).getバッチパラメータ();
+        return ResponseData.of(parameter).respond();
+    }
+
+    /**
+     * 普徴仮算定通知書一括発行メニューからの場合、「実行する」ボタンの事件です。
+     *
+     * @param div FuchoKarisanteiFukaMenuPanelDiv
+     * @return バッチパラメータを引き渡し
+     */
+    public ResponseData<FuchoKarisanteiBatchParameter> onClick_btnFuchoKarisanteiTsuchishoBatch(FuchoKarisanteiFukaMenuPanelDiv div) {
+        FuchoKarisanteiBatchParameter parameter = getHandler(div).getバッチパラメータ();
+        return ResponseData.of(parameter).respond();
+    }
+
+    /**
+     * 「実行する」ボタンを押下するとチェックです。
+     *
+     * @param div FuchoKarisanteiFukaMenuPanelDiv
+     * @return 普徴仮算定賦課画面
+     */
+    public ResponseData<FuchoKarisanteiFukaMenuPanelDiv> onClick_Check(FuchoKarisanteiFukaMenuPanelDiv div) {
+        // TODO 普徴開始通知書（仮算定）のチェックがオンの場合  どのように判断しますか？
+        FuchoKarisanteiFukaMenuPanelValidationHandler validationHandler = new FuchoKarisanteiFukaMenuPanelValidationHandler(div);
+        ValidationMessageControlPairs pairs;
+        pairs = validationHandler.validate発行日();
+        pairs.add(validationHandler.validate提供年月());
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         return createResponseData(div);
     }
 

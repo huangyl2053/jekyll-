@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
-import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
+import jp.co.ndensan.reams.db.dbb.definition.core.gemmenchoshuyuyo.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2004GemmenEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2004GemmenDac;
@@ -106,7 +106,7 @@ public class GemmenDacTest {
             entity.setFukaNendo(賦課年度);
             entity.setTsuchishoNo(通知書番号);
             entity.setRirekiNo(履歴番号);
-            entity.setJotaiKubun(状態区分1.code());
+            entity.setJotaiKubun(状態区分1.getコード());
 
             減免Dac.save(entity);
         }

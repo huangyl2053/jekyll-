@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuIdentifier;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -73,16 +74,19 @@ public class ShoKaishuKirokuKanriHandler {
             if (businessList != null && !businessList.isEmpty()) {
                 for (ShoKofuKaishu jigyoshaInput : businessList) {
                     dgKoufuKaishu_Row dgJigyoshaItiran = new dgKoufuKaishu_Row();
-                    dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0006), new Code(jigyoshaInput.get交付証種類())));
+                    dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0006),
+                            new Code(jigyoshaInput.get交付証種類()), FlexibleDate.getNowDate()));
                     if (jigyoshaInput.get交付年月日() != null && jigyoshaInput.get交付年月日().isValid()) {
                         dgJigyoshaItiran.setKoufuDate(jigyoshaInput.get交付年月日().wareki().toDateString());
                     } else {
                         dgJigyoshaItiran.setKoufuDate(RString.EMPTY);
                     }
                     if (CODESHUBETSU_001.equals(jigyoshaInput.get交付証種類())) {
-                        dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0002), new Code(jigyoshaInput.get交付事由())));
+                        dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0002),
+                                new Code(jigyoshaInput.get交付事由()), FlexibleDate.getNowDate()));
                     } else {
-                        dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0004), new Code(jigyoshaInput.get交付事由())));
+                        dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0004),
+                                new Code(jigyoshaInput.get交付事由()), FlexibleDate.getNowDate()));
                     }
                     dgJigyoshaItiran.setKofuRiyu(jigyoshaInput.get交付理由());
                     if (jigyoshaInput.get回収年月日() != null && jigyoshaInput.get回収年月日().isValid()) {
@@ -91,9 +95,11 @@ public class ShoKaishuKirokuKanriHandler {
                         dgJigyoshaItiran.setKaishuDate(RString.EMPTY);
                     }
                     if (CODESHUBETSU_001.equals(jigyoshaInput.get交付証種類())) {
-                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0003), new Code(jigyoshaInput.get回収事由())));
+                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0003),
+                                new Code(jigyoshaInput.get回収事由()), FlexibleDate.getNowDate()));
                     } else {
-                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0005), new Code(jigyoshaInput.get回収事由())));
+                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0005),
+                                new Code(jigyoshaInput.get回収事由()), FlexibleDate.getNowDate()));
                     }
                     if (jigyoshaInput.get有効期限() != null && jigyoshaInput.get有効期限().isValid()) {
                         dgJigyoshaItiran.setYukoKigen((jigyoshaInput.get有効期限().wareki().toDateString()));
@@ -120,16 +126,19 @@ public class ShoKaishuKirokuKanriHandler {
             if (businessList != null && !businessList.isEmpty()) {
                 for (ShoKofuKaishu jigyoshaInput : businessList) {
                     dgKoufuKaishu_Row dgJigyoshaItiran = new dgKoufuKaishu_Row();
-                    dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0006), new Code(jigyoshaInput.get交付証種類())));
+                    dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0006),
+                            new Code(jigyoshaInput.get交付証種類()), FlexibleDate.getNowDate()));
                     if (jigyoshaInput.get交付年月日() != null && jigyoshaInput.get交付年月日().isValid()) {
                         dgJigyoshaItiran.setKoufuDate(jigyoshaInput.get交付年月日().wareki().toDateString());
                     } else {
                         dgJigyoshaItiran.setKoufuDate(RString.EMPTY);
                     }
                     if (CODESHUBETSU_001.equals(jigyoshaInput.get交付証種類())) {
-                        dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0002), new Code(jigyoshaInput.get交付事由())));
+                        dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0002),
+                                new Code(jigyoshaInput.get交付事由()), FlexibleDate.getNowDate()));
                     } else {
-                        dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0004), new Code(jigyoshaInput.get交付事由())));
+                        dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0004),
+                                new Code(jigyoshaInput.get交付事由()), FlexibleDate.getNowDate()));
                     }
                     dgJigyoshaItiran.setKoufuJiyuNo(jigyoshaInput.get交付事由());
                     dgJigyoshaItiran.setKofuRiyu(jigyoshaInput.get交付理由());
@@ -139,9 +148,11 @@ public class ShoKaishuKirokuKanriHandler {
                         dgJigyoshaItiran.setKaishuDate(RString.EMPTY);
                     }
                     if (CODESHUBETSU_001.equals(jigyoshaInput.get交付証種類())) {
-                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0003), new Code(jigyoshaInput.get回収事由())));
+                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0003),
+                                new Code(jigyoshaInput.get回収事由()), FlexibleDate.getNowDate()));
                     } else {
-                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0005), new Code(jigyoshaInput.get回収事由())));
+                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0005),
+                                new Code(jigyoshaInput.get回収事由()), FlexibleDate.getNowDate()));
                     }
                     dgJigyoshaItiran.setKaishuJiyuNo(jigyoshaInput.get回収事由());
                     if (jigyoshaInput.get有効期限() != null && jigyoshaInput.get有効期限().isValid()) {
@@ -243,10 +254,10 @@ public class ShoKaishuKirokuKanriHandler {
         div.getPanelInput().getTxtKoufuType().setValue(dgKoufuKaishuRow.getKoufuType());
         div.getPanelInput().getTxtKoufuDate().setValue(new RDate(dgKoufuKaishuRow.getKoufuDate().toString()));
         div.getPanelInput().getTxtYukouKigen().setValue(new RDate(dgKoufuKaishuRow.getYukoKigen().toString()));
-        div.getPanelInput().getDdlKoufuJiyu().setSelectedValue(dgKoufuKaishuRow.getKoufuJiyu());
+        div.getPanelInput().getDdlKoufuJiyu().setSelectedKey(dgKoufuKaishuRow.getKoufuJiyuNo());
         div.getPanelInput().getTxaKoufuRiyu().setValue(dgKoufuKaishuRow.getKofuRiyu());
         div.getPanelInput().getTxtKaisyuDate().setValue(new RDate(dgKoufuKaishuRow.getKaishuDate().toString()));
-        div.getPanelInput().getDdlKaisyuJiyu().setSelectedValue(dgKoufuKaishuRow.getKaishuJiyu());
+        div.getPanelInput().getDdlKaisyuJiyu().setSelectedKey(dgKoufuKaishuRow.getKaishuJiyuNo());
         div.getPanelInput().getTxaKaishuRiyu().setValue(dgKoufuKaishuRow.getKaishuRiyu());
         div.getPanelInput().getBtnConfirm().setDisabled(false);
         div.getPanelInput().getBtnCancel().setDisabled(false);

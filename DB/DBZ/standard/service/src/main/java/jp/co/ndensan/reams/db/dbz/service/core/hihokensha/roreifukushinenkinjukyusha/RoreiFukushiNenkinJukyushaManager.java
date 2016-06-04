@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 老齢福祉年金受給者を管理するクラスです。
+ *
  * @reamsid_L DBA-0220-020 dongyabin
  */
 public class RoreiFukushiNenkinJukyushaManager {
@@ -61,7 +62,7 @@ public class RoreiFukushiNenkinJukyushaManager {
         if (!老齢福祉年金受給者.hasChanged()) {
             return false;
         }
-        return 1 == dac.save(老齢福祉年金受給者.toEntity());
+        return 1 == dac.saveOrDeletePhysicalBy(老齢福祉年金受給者.toEntity());
     }
 
     /**

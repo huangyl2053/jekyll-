@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoHokenryoDankaiIdentifier
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoSochiShinsei;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoSochiShinseiIdentifier;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -63,8 +64,11 @@ public class KyokaisoGaitoshaPanel {
      */
     public ResponseData<KyokaisoGaitoshaPanelDiv> onLoad(KyokaisoGaitoshaPanelDiv div) {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_状態, RString.class);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_被保険者番号, HihokenshaNo.class);
-        div.getCcdKaigoAtena().onLoad(ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_識別コード, ShikibetsuCode.class));
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(
+                jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
+        ShikibetsuCode 識別コード = ViewStateHolder.get(
+                jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+        div.getCcdKaigoAtena().onLoad(識別コード);
         div.getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         List<KyokaisoGaitoshaJoho> 境界層該当一覧情報
                 = KyokaisoGaitoshaManager.createInstance().getKyokaisoGaitoshaJohoList(被保険者番号).records();
@@ -104,7 +108,8 @@ public class KyokaisoGaitoshaPanel {
      */
     public ResponseData<KyokaisoGaitoshaPanelDiv> onClick_ShowSelectButton(KyokaisoGaitoshaPanelDiv div) {
         dgKyokaisouGaitouItran_Row row = div.getDgKyokaisouGaitouItran().getActiveRow();
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_被保険者番号, HihokenshaNo.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(
+                jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
         List<KyokaisoHokenryo> 境界層保険料段階情報
                 = get境界層保険料段階情報(被保険者番号, new Decimal(row.getLinkNo().toString()));
         getHandler(div).onClick_ShowSelectButton(row, 境界層保険料段階情報);
@@ -119,7 +124,8 @@ public class KyokaisoGaitoshaPanel {
      */
     public ResponseData<KyokaisoGaitoshaPanelDiv> onClick_ShowModifyButton(KyokaisoGaitoshaPanelDiv div) {
         dgKyokaisouGaitouItran_Row row = div.getDgKyokaisouGaitouItran().getActiveRow();
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_被保険者番号, HihokenshaNo.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(
+                jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
         List<KyokaisoHokenryo> 境界層保険料段階情報
                 = get境界層保険料段階情報(被保険者番号, new Decimal(row.getLinkNo().toString()));
         getHandler(div).onClick_ShowModifyButton(row, 境界層保険料段階情報);
@@ -134,7 +140,8 @@ public class KyokaisoGaitoshaPanel {
      */
     public ResponseData<KyokaisoGaitoshaPanelDiv> onClick_ShowDeleteButton(KyokaisoGaitoshaPanelDiv div) {
         dgKyokaisouGaitouItran_Row row = div.getDgKyokaisouGaitouItran().getActiveRow();
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_被保険者番号, HihokenshaNo.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(
+                jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
         List<KyokaisoHokenryo> 境界層保険料段階情報
                 = get境界層保険料段階情報(被保険者番号, new Decimal(row.getLinkNo().toString()));
         getHandler(div).onClick_ShowDeleteButton(row, 境界層保険料段階情報);
@@ -223,7 +230,8 @@ public class KyokaisoGaitoshaPanel {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_被保険者番号, HihokenshaNo.class);
+            HihokenshaNo 被保険者番号 = ViewStateHolder.get(
+                    jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
             dgKyokaisouGaitouItran_Row row = div.getDgKyokaisouGaitouItran().getActiveRow();
             KyokaisoGaitoshaParameter parameter = KyokaisoGaitoshaParameter.createParamFor被保険者番号(被保険者番号);
             int 最新履歴番号 = KyokaisoGaitoshaManager.createInstance().get最新履歴番号(parameter).intValue();
@@ -321,7 +329,8 @@ public class KyokaisoGaitoshaPanel {
      */
     public ResponseData<KyokaisoGaitoshaPanelDiv> onClick_btnKakutei(KyokaisoGaitoshaPanelDiv div) {
 
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_被保険者番号, HihokenshaNo.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(
+                jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
         RString イベント状態 = div.getKyokaisouGaitouItiran().getIranState();
         dgKyokaisouGaitouItran_Row row = div.getDgKyokaisouGaitouItran().getActiveRow();
         dghokenryoNofu_Row nofu_Row = div.getDghokenryoNofu().getActiveRow();

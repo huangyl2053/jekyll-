@@ -61,7 +61,8 @@ public enum DbzErrorMessages implements IMessageGettable, IValidationMessage {
     被保険者履歴に期間重複(47, "被保険者履歴に期間の重複があります。"),
     他の期間情報との期間重複(48, "他の期間情報と期間の重複があります。"),
     比較項目不一致(49, "比較項目が不一致です。：?"),
-    適用期間対象外(50, "次の情報は適用期間の対象外です。：?");
+    適用期間対象外(50, "次の情報は適用期間の対象外です。：?"),
+    最低限の入力なし(51, "いずれかの項目を入力してください：?");
 
     private final transient Message message;
 

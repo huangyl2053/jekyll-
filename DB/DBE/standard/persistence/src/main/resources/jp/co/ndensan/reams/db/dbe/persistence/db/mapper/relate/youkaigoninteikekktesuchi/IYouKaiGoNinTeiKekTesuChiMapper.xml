@@ -91,10 +91,6 @@
             AND
             rgdb."DbT5101NinteiShinseiJoho"."shujiiCode" = #{主治医コード}
         </if>
-        <if test="useMaDaNyuRyouKu">
-            AND
-            rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoYMD" IS NULL
-        </if>
         GROUP BY
         rgdb."DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode",
         rgdb."DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho",
@@ -158,10 +154,6 @@
         <if test="useNijiHanteiYMDTo">
             AND
             rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiYMD" <![CDATA[<=]]> #{二次判定期間To}
-        </if>
-        <if test="useMaDaNyuRyouKu">
-            AND
-            rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoYMD" IS NULL
         </if>
         ORDER BY
         rgdb."DbT5101NinteiShinseiJoho"."hihokenshaNo"

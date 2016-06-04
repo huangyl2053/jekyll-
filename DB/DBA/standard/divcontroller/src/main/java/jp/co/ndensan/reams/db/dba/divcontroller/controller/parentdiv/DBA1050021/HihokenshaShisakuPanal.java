@@ -142,7 +142,7 @@ public class HihokenshaShisakuPanal {
         List<HihokenshaDaicho> 住所地特例情報
                 = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdJushochiTokureiRirekiList().getDataList();
         List<HihokenshaDaicho> 資格変更履歴情報
-                = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShikakuHenkoRireki().getGridData().records();
+                = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShikakuHenkoRireki().getGridDataFor資格詳細異動().records();
         List<HihokenshaDaicho> 資格訂正登録リスト = new ArrayList<>();
         RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_状態, RString.class);
         if (状態_追加.equals(初期_状態)) {

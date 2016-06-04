@@ -54,7 +54,6 @@ public class ShinsahanteinoHenkojokyoMyBatisParameter implements IMyBatisParamet
      * @param isEmptyTaishoGeppiTo 空対象月日終了
      * @param taishoGeppiFrom 対象月日開始
      * @param taishoGeppiTo 対象月日終了
-     * @param shichosonCode 市町村コード
      * @param isShinseiji 申請区分(申請時)
      * @param isHorei 申請区分(法令)
      */
@@ -71,7 +70,6 @@ public class ShinsahanteinoHenkojokyoMyBatisParameter implements IMyBatisParamet
             boolean isEmptyTaishoGeppiTo,
             RString taishoGeppiFrom,
             RString taishoGeppiTo,
-            LasdecCode shichosonCode,
             boolean isShinseiji,
             boolean isHorei) {
         this.isEmptyHokensyaNo = isEmptyHokensyaNo;
@@ -86,7 +84,6 @@ public class ShinsahanteinoHenkojokyoMyBatisParameter implements IMyBatisParamet
         this.isEmptyTaishoGeppiTo = isEmptyTaishoGeppiTo;
         this.taishoGeppiFrom = taishoGeppiFrom;
         this.taishoGeppiTo = taishoGeppiTo;
-        this.shichosonCode = shichosonCode;
         this.isShinseiji = isShinseiji;
         this.isHorei = isHorei;
     }

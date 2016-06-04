@@ -34,6 +34,7 @@ public class PublicationShiryoShinsakaiHandler {
     private final RString 出力条件_一次判定結果票 = new RString("key1");
     private final RString 出力条件_特記事項_一次判定結果票 = new RString("key2");
     private final RString 出力条件_主治医意見書 = new RString("key3");
+    private final RString 委員用出力条件_審査会資料 = new RString("key1");
     private final RString 委員用出力条件_予備判定記入表 = new RString("key2");
     private final RString 出力スタイル_A4 = new RString("1");
     private final PublicationShiryoShinsakaiDiv div;
@@ -252,14 +253,14 @@ public class PublicationShiryoShinsakaiHandler {
         List<RString> 印刷帳票_事務局リスト = new ArrayList<>();
         List<RString> 印刷帳票_委員リスト = new ArrayList<>();
         RDate 日期 = RDate.getNowDate();
+        RString 出力順 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料出力順, 日期, SubGyomuCode.DBE認定支援);
         RString 出力スタイル = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料出力スタイル, 日期, SubGyomuCode.DBE認定支援);
         RString 印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷タイプ, 日期, SubGyomuCode.DBE認定支援);
         RString 部数_事務局 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料部数_事務局, 日期, SubGyomuCode.DBE認定支援);
         RString 部数_委員 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料部数_委員, 日期, SubGyomuCode.DBE認定支援);
         RString 印刷帳票_事務局 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_事務局, 日期, SubGyomuCode.DBE認定支援);
         RString 印刷帳票_委員 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員, 日期, SubGyomuCode.DBE認定支援);
-        // TODO QA1210回答まち、
-//        RString 概況特記一覧 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料概況特記一覧, 日期, SubGyomuCode.DBE認定支援);
+        div.getTxtShutsuryokuJun().setValue(出力順);
         div.getDdlShutsuryokuStyleZenken().setSelectedKey(出力スタイル);
         div.getRadShutsuryokuStyleZenken().setSelectedKey(印刷タイプ);
         div.getTxtCopyNumForJimukyoku1().setValue(new Decimal(部数_事務局.toString()));
@@ -288,6 +289,7 @@ public class PublicationShiryoShinsakaiHandler {
             印刷帳票_事務局リスト.add(事務用出力条件_予備判定記入表);
             印刷帳票_事務局リスト.add(事務用出力条件_概況特記一覧);
         }
+        印刷帳票_事務局リスト.add(事務用出力条件_審査会資料);
         div.getChkPrintChoyoJimu().setSelectedItemsByKey(印刷帳票_事務局リスト);
         if (個別設定.equals(印刷帳票_委員)) {
             RString 審査会開催通知書 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員_開催通知書, 日期, SubGyomuCode.DBE認定支援);
@@ -303,6 +305,7 @@ public class PublicationShiryoShinsakaiHandler {
             印刷帳票_委員リスト.add(作成条件_全件);
             印刷帳票_委員リスト.add(委員用出力条件_予備判定記入表);
         }
+        印刷帳票_委員リスト.add(委員用出力条件_審査会資料);
         div.getChkPrintChohyoIin().setSelectedItemsByKey(印刷帳票_委員リスト);
     }
 
@@ -314,7 +317,6 @@ public class PublicationShiryoShinsakaiHandler {
         RString 一次判定結果票 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_事務局_一次判定結果票, 日期, SubGyomuCode.DBE認定支援);
         RString 特記事項_一次判定結果票 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_事務局_特記事項_一次判定結果票, 日期, SubGyomuCode.DBE認定支援);
         RString 主治医意見書 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_事務局_主治医意見書, 日期, SubGyomuCode.DBE認定支援);
-        // TODO QA1210回答まち、
         if (個別設定.equals(審査会資料)) {
             if (is事務局項目を選択(特記事項)) {
                 審査会資料リスト.add(作成条件_全件);
@@ -345,7 +347,6 @@ public class PublicationShiryoShinsakaiHandler {
         RString 一次判定結果票 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員_一次判定結果票, 日期, SubGyomuCode.DBE認定支援);
         RString 特記事項_一次判定結果票 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員_特記事項_一次判定結果票, 日期, SubGyomuCode.DBE認定支援);
         RString 主治医意見書 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員_主治医意見書, 日期, SubGyomuCode.DBE認定支援);
-        // TODO QA1210回答まち、
         if (個別設定.equals(審査会資料)) {
             if (is事務局項目を選択(特記事項)) {
                 審査会資料リスト.add(作成条件_全件);

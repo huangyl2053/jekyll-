@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
 /*
  * このコードはツールによって生成されました。
+ *
+ * @reamsid_L DBE-1300-120 houtianpeng
  */
 public interface IShinseiSonotaJohoInputDiv extends ICommonChildDivBaseProperties {
 
@@ -71,20 +73,6 @@ public interface IShinseiSonotaJohoInputDiv extends ICommonChildDivBasePropertie
      * @return 受給資格者証発効日２
      */
     FlexibleDate get受給資格者証発効日２();
-
-    /**
-     * 使用データベース決定サブ業務コード(隠し項目)を設定します。
-     *
-     * @param hdnDatabaseSubGyomuCode サブ業務コード
-     */
-    public void setHdnDatabaseSubGyomuCode(RString hdnDatabaseSubGyomuCode);
-
-    /**
-     * 申請書管理番号(隠し項目)を設定します。
-     *
-     * @param hdnShinseishoKanriNo 申請書管理番号
-     */
-    public void setHdnShinseishoKanriNo(RString hdnShinseishoKanriNo);
 
     /**
      * 共有子Divにモードをセットします。

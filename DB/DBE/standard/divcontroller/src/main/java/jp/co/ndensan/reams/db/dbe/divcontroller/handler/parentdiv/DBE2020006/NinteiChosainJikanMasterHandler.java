@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosainjikan.NinteiChosain
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.NinteiChosainJikanMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.dgTimeScheduleList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosainjikan.NinteiChosainJikanMasterManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
@@ -1413,7 +1414,9 @@ public class NinteiChosainJikanMasterHandler {
     }
 
     private KeyValueDataSource 調査地区ドロップダウンリスト(Code 調査地区コード) {
-        UzT0007CodeEntity 指定調査地区 = CodeMaster.getCode(SubGyomuCode.DBE認定支援, コード種別, 調査地区コード);
+        FlexibleDate 基准日 = new FlexibleDate(RDate.getNowDate().toDateString());
+        UzT0007CodeEntity 指定調査地区 = CodeMaster.getCode(SubGyomuCode.DBE認定支援,
+                DBECodeShubetsu.調査地区コード.getコード(), 調査地区コード, 基准日);
         KeyValueDataSource keyValue = new KeyValueDataSource();
         keyValue.setKey(指定調査地区.getコード().value());
         keyValue.setValue(指定調査地区.getコード名称());

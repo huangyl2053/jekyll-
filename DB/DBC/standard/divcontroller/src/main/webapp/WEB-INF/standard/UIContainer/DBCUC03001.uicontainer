@@ -25,6 +25,16 @@
      "eventName": "処理完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "3",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0300012",
+     "layoutTitle": "受領委任契約事業者登録・追加",
+     "eventName": "検索に戻る",
+     "destroy": false,
+     "condition": ""
     }
    ]
   }

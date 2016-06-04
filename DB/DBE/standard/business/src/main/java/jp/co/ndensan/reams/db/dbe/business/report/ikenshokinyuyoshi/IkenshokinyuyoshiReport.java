@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshi;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshokinyuyoshi.IkenshokinyuyoshiEntity;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.ikenshokinyuyoshi.IkenshokinyuyoshiReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,15 +18,25 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class IkenshokinyuyoshiReport extends Report<IkenshokinyuyoshiReportSource> {
 
-    private final IkenshokinyuyoshiEntity entity;
+    private IkenshokinyuyoshiBusiness business;
+    private List<IkenshokinyuyoshiBusiness> businessList;
 
     /**
      * インスタンスを生成します。
      *
-     * @param entity 要介護認定主治医意見書記入用紙のentity
+     * @param business 要介護認定主治医意見書記入用紙のBusiness
      */
-    public IkenshokinyuyoshiReport(IkenshokinyuyoshiEntity entity) {
-        this.entity = entity;
+    public IkenshokinyuyoshiReport(IkenshokinyuyoshiBusiness business) {
+        this.business = business;
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param businessList 要介護認定主治医意見書記入用紙のBusinessList
+     */
+    public IkenshokinyuyoshiReport(List<IkenshokinyuyoshiBusiness> businessList) {
+        this.businessList = businessList;
     }
 
     /**
@@ -35,8 +46,17 @@ public class IkenshokinyuyoshiReport extends Report<IkenshokinyuyoshiReportSourc
      */
     @Override
     public void writeBy(ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter) {
-        IIkenshokinyuyoshiEditor editor = new IkenshokinyuyoshiEditorImpl(entity);
-        IIkenshokinyuyoshiBuilder builder = new IkenshokinyuyoshiBuilderImpl(editor);
-        reportSourceWriter.writeLine(builder);
+        if (business == null) {
+            for (IkenshokinyuyoshiBusiness ikenshokinyuyoshiBusiness : businessList) {
+                IIkenshokinyuyoshiEditor editor = new IkenshokinyuyoshiEditorImpl(ikenshokinyuyoshiBusiness);
+                IIkenshokinyuyoshiBuilder builder = new IkenshokinyuyoshiBuilderImpl(editor);
+                reportSourceWriter.writeLine(builder);
+            }
+        } else {
+            IIkenshokinyuyoshiEditor editor = new IkenshokinyuyoshiEditorImpl(business);
+            IIkenshokinyuyoshiBuilder builder = new IkenshokinyuyoshiBuilderImpl(editor);
+            reportSourceWriter.writeLine(builder);
+        }
+
     }
 }

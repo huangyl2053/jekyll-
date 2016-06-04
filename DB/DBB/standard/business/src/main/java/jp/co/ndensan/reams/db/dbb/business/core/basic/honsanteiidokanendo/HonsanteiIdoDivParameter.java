@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendo.HonsanteiIdoKanendoResult;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -25,7 +26,7 @@ public class HonsanteiIdoDivParameter {
     private RString 処理対象;
     private YMDHMS 抽出開始日時;
     private YMDHMS 抽出終了日時;
-    private List<HonsanteiIdoParameter> 出力帳票一覧;
+    private List<HonsanteiIdoKanendoResult> 出力帳票一覧;
     private RString 決定_チェックボックス;
     private List<FlexibleYear> 決定_対象賦課年度;
     private RString 決定_文書番号;
@@ -43,5 +44,4 @@ public class HonsanteiIdoDivParameter {
     private RString 納入_生活保護対象者;
     private RString 納入_ページごとに山分け;
     private boolean 一括発行起動フラグ;
-    private RString 算定期;
 }

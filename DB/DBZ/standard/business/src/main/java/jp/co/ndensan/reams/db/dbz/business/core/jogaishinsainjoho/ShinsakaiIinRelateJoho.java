@@ -250,4 +250,22 @@ public class ShinsakaiIinRelateJoho {
     public RString getその他機関コード() {
         return entity.getSonotaKikanCode();
     }
+
+    /**
+     * 市町村コードを取得します。
+     *
+     * @return 市町村コード
+     */
+    public RString get市町村コード() {
+        return entity.getShichosonCode();
+    }
+
+    /**
+     * 除外対象審査会委員コードを取得します。
+     *
+     * @return 除外対象審査会委員コード
+     */
+    public RString get除外対象審査会委員コード() {
+        return entity.getJogaiTaishoShinsakaiIinCode();
+    }
 }

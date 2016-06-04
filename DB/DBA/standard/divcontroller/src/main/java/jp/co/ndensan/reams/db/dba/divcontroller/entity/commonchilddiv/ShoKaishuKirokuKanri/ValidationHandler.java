@@ -33,6 +33,11 @@ public class ValidationHandler {
         this.shoDiv = shoDiv;
     }
 
+    /**
+     * 交付日と有効期限の整合性チェックです。
+     *
+     * @param validPairs ValidationMessageControlPairs
+     */
     public void 交付日と有効期限の整合性チェック(ValidationMessageControlPairs validPairs) {
         if (shoDiv.getPanelInput().getTxtKoufuType().getValue() != null
                 && new RString("資格者証").equals(shoDiv.getPanelInput().getTxtKoufuType().getValue())
@@ -40,10 +45,15 @@ public class ValidationHandler {
                 && shoDiv.getPanelInput().getTxtYukouKigen().getValue() != null)
                 && (!shoDiv.getPanelInput().getTxtKoufuDate().getValue().
                 isBefore(shoDiv.getPanelInput().getTxtYukouKigen().getValue()))) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.ValidateA, shoDiv.getPanelInput().getTxtKoufuType()));
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.ValidateA, shoDiv.getPanelInput().getTxtKoufuDate()));
         }
     }
 
+    /**
+     * 交付事由の必須チェックです。
+     *
+     * @param validPairs ValidationMessageControlPairs
+     */
     public void 交付事由の必須チェック(ValidationMessageControlPairs validPairs) {
         if (shoDiv.getPanelInput().getDdlKoufuJiyu().getSelectedValue() != null
                 && RString.EMPTY.equals(shoDiv.getPanelInput().getDdlKoufuJiyu().getSelectedValue())) {
@@ -51,6 +61,11 @@ public class ValidationHandler {
         }
     }
 
+    /**
+     * 交付理由の最大桁数です。
+     *
+     * @param validPairs ValidationMessageControlPairs
+     */
     public void 交付理由の最大桁数(ValidationMessageControlPairs validPairs) {
         if (shoDiv.getPanelInput().getTxaKoufuRiyu().getValue() != null
                 && 桁数_256 < shoDiv.getPanelInput().getTxaKoufuRiyu().getValue().length()) {
@@ -58,6 +73,11 @@ public class ValidationHandler {
         }
     }
 
+    /**
+     * 回収理由のの最大桁数です。
+     *
+     * @param validPairs ValidationMessageControlPairs
+     */
     public void 回収理由のの最大桁数(ValidationMessageControlPairs validPairs) {
         if (shoDiv.getPanelInput().getTxaKaishuRiyu().getValue() != null
                 && 桁数_256 < shoDiv.getPanelInput().getTxaKaishuRiyu().getValue().length()) {
@@ -65,6 +85,11 @@ public class ValidationHandler {
         }
     }
 
+    /**
+     * 交付日と回収日の順番の整合性チェックです。
+     *
+     * @param validPairs ValidationMessageControlPairs
+     */
     public void 交付日と回収日の順番の整合性チェック(ValidationMessageControlPairs validPairs) {
         if (shoDiv.getPanelInput().getTxtKoufuDate().getValue() != null
                 && shoDiv.getPanelInput().getTxtKaisyuDate().getValue() != null
@@ -76,6 +101,11 @@ public class ValidationHandler {
         }
     }
 
+    /**
+     * 交付日がセットになっているかの入力チェックです。
+     *
+     * @param validPairs ValidationMessageControlPairs
+     */
     public void 交付日がセットになっているかの入力チェック(ValidationMessageControlPairs validPairs) {
         if (shoDiv.getPanelInput().getTxtKoufuDate().getValue() == null
                 && shoDiv.getPanelInput().getTxaKoufuRiyu().getValue() != null) {
@@ -83,6 +113,11 @@ public class ValidationHandler {
         }
     }
 
+    /**
+     * 交付事由がセットになっているかの入力チェックです。
+     *
+     * @param validPairs ValidationMessageControlPairs
+     */
     public void 交付事由がセットになっているかの入力チェック(ValidationMessageControlPairs validPairs) {
         if (RString.EMPTY.equals(shoDiv.getPanelInput().getDdlKoufuJiyu().getSelectedValue())
                 && shoDiv.getPanelInput().getTxtKoufuDate().getValue() != null) {
@@ -90,6 +125,11 @@ public class ValidationHandler {
         }
     }
 
+    /**
+     * 回収日がセットになっているかの入力チェックです。
+     *
+     * @param validPairs ValidationMessageControlPairs
+     */
     public void 回収日がセットになっているかの入力チェック(ValidationMessageControlPairs validPairs) {
         if (shoDiv.getPanelInput().getTxtKaisyuDate().getValue() == null
                 && shoDiv.getPanelInput().getTxaKaishuRiyu().getValue() != null) {
@@ -97,6 +137,11 @@ public class ValidationHandler {
         }
     }
 
+    /**
+     * 回収事由がセットになっているかの入力チェックです。
+     *
+     * @param validPairs ValidationMessageControlPairs
+     */
     public void 回収事由がセットになっているかの入力チェック(ValidationMessageControlPairs validPairs) {
         if (RString.EMPTY.equals(shoDiv.getPanelInput().getDdlKaisyuJiyu().getSelectedValue())
                 && shoDiv.getPanelInput().getTxtKaisyuDate().getValue() != null) {

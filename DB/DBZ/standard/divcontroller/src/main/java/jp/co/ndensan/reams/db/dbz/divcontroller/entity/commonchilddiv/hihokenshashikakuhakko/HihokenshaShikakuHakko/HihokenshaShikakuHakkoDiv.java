@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokensh
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
@@ -36,9 +36,9 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("YukoKigenInfo")
-    private YukoKigenInfoDiv YukoKigenInfo;
+    private YukoKigenInfoDiv yukoKigenInfo;
     @JsonProperty("NinteiInfo")
-    private NinteiInfoDiv NinteiInfo;
+    private NinteiInfoDiv ninteiInfo;
     @JsonProperty("tabHihokenshaShikakuShosai")
     private tabHihokenshaShikakuShosaiDiv tabHihokenshaShikakuShosai;
     @JsonProperty("hidden入所施設コード１")
@@ -71,8 +71,9 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return YukoKigenInfo
      */
     @JsonProperty("YukoKigenInfo")
+    @Override
     public YukoKigenInfoDiv getYukoKigenInfo() {
-        return YukoKigenInfo;
+        return yukoKigenInfo;
     }
 
     /*
@@ -80,8 +81,8 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @param YukoKigenInfo YukoKigenInfo
      */
     @JsonProperty("YukoKigenInfo")
-    public void setYukoKigenInfo(YukoKigenInfoDiv YukoKigenInfo) {
-        this.YukoKigenInfo = YukoKigenInfo;
+    public void setYukoKigenInfo(YukoKigenInfoDiv yukoKigenInfo) {
+        this.yukoKigenInfo = yukoKigenInfo;
     }
 
     /*
@@ -89,8 +90,9 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return NinteiInfo
      */
     @JsonProperty("NinteiInfo")
+    @Override
     public NinteiInfoDiv getNinteiInfo() {
-        return NinteiInfo;
+        return ninteiInfo;
     }
 
     /*
@@ -98,8 +100,8 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @param NinteiInfo NinteiInfo
      */
     @JsonProperty("NinteiInfo")
-    public void setNinteiInfo(NinteiInfoDiv NinteiInfo) {
-        this.NinteiInfo = NinteiInfo;
+    public void setNinteiInfo(NinteiInfoDiv ninteiInfo) {
+        this.ninteiInfo = ninteiInfo;
     }
 
     /*
@@ -107,6 +109,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return tabHihokenshaShikakuShosai
      */
     @JsonProperty("tabHihokenshaShikakuShosai")
+    @Override
     public tabHihokenshaShikakuShosaiDiv getTabHihokenshaShikakuShosai() {
         return tabHihokenshaShikakuShosai;
     }
@@ -125,6 +128,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return hidden入所施設コード１
      */
     @JsonProperty("hidden入所施設コード１")
+    @Override
     public RString getHidden入所施設コード１() {
         return hidden入所施設コード１;
     }
@@ -143,6 +147,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return hidden入所施設種類１
      */
     @JsonProperty("hidden入所施設種類１")
+    @Override
     public RString getHidden入所施設種類１() {
         return hidden入所施設種類１;
     }
@@ -161,6 +166,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return hidden入所施設コード２
      */
     @JsonProperty("hidden入所施設コード２")
+    @Override
     public RString getHidden入所施設コード２() {
         return hidden入所施設コード２;
     }
@@ -179,6 +185,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return hidden入所施設種類２
      */
     @JsonProperty("hidden入所施設種類２")
+    @Override
     public RString getHidden入所施設種類２() {
         return hidden入所施設種類２;
     }
@@ -197,6 +204,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return hidden入所施設コード３
      */
     @JsonProperty("hidden入所施設コード３")
+    @Override
     public RString getHidden入所施設コード３() {
         return hidden入所施設コード３;
     }
@@ -215,6 +223,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return hidden入所施設種類３
      */
     @JsonProperty("hidden入所施設種類３")
+    @Override
     public RString getHidden入所施設種類３() {
         return hidden入所施設種類３;
     }
@@ -233,6 +242,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return hidden適用終了日１
      */
     @JsonProperty("hidden適用終了日１")
+    @Override
     public RString getHidden適用終了日１() {
         return hidden適用終了日１;
     }
@@ -251,6 +261,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return hidden適用終了日２
      */
     @JsonProperty("hidden適用終了日２")
+    @Override
     public RString getHidden適用終了日２() {
         return hidden適用終了日２;
     }
@@ -269,6 +280,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return hidden適用終了日３
      */
     @JsonProperty("hidden適用終了日３")
+    @Override
     public RString getHidden適用終了日３() {
         return hidden適用終了日３;
     }

@@ -13,8 +13,16 @@ import jp.co.ndensan.reams.db.dbb.business.report.karisanteifukadaicho.Karisante
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteifukadaicho.KarisanteiFukaDaichoReport;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteifukadaicho.KarisanteiFukaDaichoSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Printer;
+import jp.co.ndensan.reams.uz.uza.report.Report;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
+import jp.co.ndensan.reams.uz.uza.report.ReportManager;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
  * 帳票設計_DBBRP00006_2_賦課台帳（仮算定）
@@ -32,6 +40,33 @@ public class KarisanteiFukaDaichoPrintService {
     private static final int NUM6 = 6;
     private static final int NUM7 = 7;
     private static final int PAGEBYNUM = 8;
+
+    /**
+     * printメソッド
+     *
+     * @param entities EditedKariSanteiFukaDaichoJoho
+     * @param reportManager ReportManager
+     */
+    public void printSingle(EditedKariSanteiFukaDaichoJoho entities, ReportManager reportManager) {
+        KarisanteiFukaDaichoProperty property = new KarisanteiFukaDaichoProperty();
+        try (ReportAssembler<KarisanteiFukaDaichoSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KarisanteiFukaDaichoSource> reportSourceWriter
+                    = new ReportSourceWriter(assembler);
+            List<KarisanteiFukaDaichoItem> targets = setitens(entities);
+            new KarisanteiFukaDaichoReport(targets).writeBy(reportSourceWriter);
+        }
+    }
+
+    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
+            IReportProperty<T> property, ReportManager manager) {
+        ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
+        for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
+            builder.addBreak(breaker);
+        }
+        builder.isHojinNo(property.containsHojinNo());
+        builder.isKojinNo(property.containsKojinNo());
+        return builder.<T>create();
+    }
 
     /**
      * printメソッド
