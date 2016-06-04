@@ -164,9 +164,17 @@ public class ShotokuShokaiTaishoshaIchiranHandler {
             dgTaishoshaIchiran_Row row = new dgTaishoshaIchiran_Row();
             row.getTxtHihokenshaNo().setValue(被保険者番号);
             row.getTxtKetsugoCode().setValue(世帯コードAnd識別コード);
+            row.getTxtSetaiCode().setValue(世帯コード);
+            row.getTxtShikibetsuCode().setValue(識別コード);
             row.getTxtKetsugo1().setValue(氏名);
+            row.getTxtKanaShimei().setValue(氏名_カナ);
+            row.getTxtShimei().setValue(氏名_漢字);
             row.getTxtKetsugo3().setValue(生年月日And性別);
+            row.getTxtUmareYMD().setValue(生年月日);
+            row.getTxtSebetsu().setValue(性別);
             row.getTxtKetsugo5().setValue(照会日And送付先自治体名);
+            row.getTxtShokaiYMD().setValue(照会日);
+            row.getTxtShokaisakiCityName().setValue(送付先自治体名);
             dataSource.add(row);
             AccessLogger.log(AccessLogType.照会, toPersonalData(taishosha.getEntity().getShikibetsuCode()));
         }
@@ -180,11 +188,12 @@ public class ShotokuShokaiTaishoshaIchiranHandler {
     public void do遷移前データ準備() {
         dgTaishoshaIchiran_Row selected = div.getDgTaishoshaIchiran().getClickedItem();
         RString 被保険者番号 = selected.getTxtHihokenshaNo().getValue();
-        RString 世帯コードAnd識別コード = selected.getTxtKetsugoCode().getText();
-        RString 世帯コード = 世帯コードAnd識別コード.split(改行タグ.toString()).get(0);
-        RString 識別コード = 世帯コードAnd識別コード.split(改行タグ.toString()).get(1);
+        RString 世帯コード = selected.getTxtSetaiCode().getValue();
+        RString 識別コード = selected.getTxtShikibetsuCode().getValue();
         RYear 所得年度 = div.getTxtChushutsuKijunNendo().getDomain();
-        FukaTaishoshaKey key = new FukaTaishoshaKey(new HihokenshaNo(被保険者番号), new ShikibetsuCode(識別コード), new SetaiCode(世帯コード), LasdecCode.EMPTY, new FlexibleYear(所得年度.toString()),
+        //TODO QA836 引数は不全です
+        FukaTaishoshaKey key = new FukaTaishoshaKey(new HihokenshaNo(被保険者番号), new ShikibetsuCode(識別コード),
+                new SetaiCode(世帯コード), LasdecCode.EMPTY, new FlexibleYear(所得年度.toString()),
                 new TsuchishoNo(被保険者番号.substringReturnAsPossible(被保険者番号.length() - NUM_3)), new FlexibleYear(所得年度.toString()));
         ViewStateHolder.put(ViewStateKey.賦課対象者, key);
         Map<RString, Object> keyMap = new HashMap<>();

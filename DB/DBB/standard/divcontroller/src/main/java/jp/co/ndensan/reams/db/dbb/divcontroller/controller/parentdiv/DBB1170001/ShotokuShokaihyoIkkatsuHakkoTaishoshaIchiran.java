@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1170001;
 
+import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1170001.DBB1170001TransitionEventName.完了;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1170001.DBB1170001TransitionEventName.選択;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1170001.ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1170001.ShotokuShokaiTaishoshaIchiranHandler;
@@ -56,6 +57,17 @@ public class ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiran {
             ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv div) {
         getHandler(div).do遷移前データ準備();
         return ResponseData.of(div).forwardWithEventName(選択).respond();
+    }
+
+    /**
+     * 「完了」ボタンを押下する。<br/>
+     *
+     * @param div {@link ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv 対象者一覧Div}
+     * @return 所得照会状況一覧Divを持つResponseData
+     */
+    public ResponseData<ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv> onClick_btnBack(
+            ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv div) {
+        return ResponseData.of(div).forwardWithEventName(完了).respond();
     }
 
     private ShotokuShokaiTaishoshaIchiranHandler getHandler(ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv div) {
