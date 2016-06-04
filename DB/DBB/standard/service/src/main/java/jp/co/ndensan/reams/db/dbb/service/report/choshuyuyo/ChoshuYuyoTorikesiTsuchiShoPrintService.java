@@ -66,6 +66,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class ChoshuYuyoTorikesiTsuchiShoPrintService {
 
     private static final RString 種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
+    private static final RString RSTRING_0 = new RString("0");
     private static final RString RSTRING_1 = new RString("1");
     private static final RString 波線 = new RString("～");
     private static final RString 期_1 = new RString("01");
@@ -283,7 +284,7 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
                 if (特徴期別金額 != null) {
                     期別徴収猶予期間.set特徴期別金額(DecimalFormatter.toコンマ区切りRString(特徴期別金額, 0));
                 } else {
-                    期別徴収猶予期間.set特徴期別金額(RString.EMPTY);
+                    期別徴収猶予期間.set特徴期別金額(RSTRING_0);
                 }
             } else {
                 期別徴収猶予期間.set特徴期(RString.EMPTY);
@@ -299,7 +300,7 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
                     期別徴収猶予期間.set普徴期別金額(DecimalFormatter
                             .toコンマ区切りRString(普徴期別金額, 0));
                 } else {
-                    期別徴収猶予期間.set普徴期別金額(RString.EMPTY);
+                    期別徴収猶予期間.set普徴期別金額(RSTRING_0);
                 }
                 期別徴収猶予期間.set徴収猶予期間(get徴収猶予期間(徴収猶予取消通知書情報, 普徴期月));
             } else {

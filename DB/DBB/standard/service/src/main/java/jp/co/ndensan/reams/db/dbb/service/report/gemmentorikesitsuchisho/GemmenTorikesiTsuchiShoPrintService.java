@@ -60,6 +60,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class GemmenTorikesiTsuchiShoPrintService {
 
     private static final RString 種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
+    private static final RString RSTRING_0 = new RString("0");
     private static final RString RSTRING_1 = new RString("1");
     private static final RString RSTRING_2 = new RString("-");
     private static final int INDEX_ONE = 1;
@@ -312,14 +313,14 @@ public class GemmenTorikesiTsuchiShoPrintService {
                 更正前後期割額.set特徴期別金額取消前(DecimalFormatter
                         .toコンマ区切りRString(特徴期別金額取消前, 0));
             } else {
-                更正前後期割額.set特徴期別金額取消前(RString.EMPTY);
+                更正前後期割額.set特徴期別金額取消前(RSTRING_0);
             }
             Decimal 特徴期別金額取消後 = set特徴期別金額取消後(期月特徴.get期(), 減免取消通知書情報);
             if (特徴期別金額取消後 != null) {
                 更正前後期割額.set特徴期別金額取消後(DecimalFormatter
                         .toコンマ区切りRString(特徴期別金額取消後, 0));
             } else {
-                更正前後期割額.set特徴期別金額取消後(RString.EMPTY);
+                更正前後期割額.set特徴期別金額取消後(RSTRING_0);
             }
             if (特徴期別金額取消前 != null && 特徴期別金額取消後 != null) {
                 更正前後期割額.set特徴減免取消額(DecimalFormatter
@@ -331,7 +332,7 @@ public class GemmenTorikesiTsuchiShoPrintService {
                 更正前後期割額.set特徴減免取消額(RSTRING_2.concat(DecimalFormatter
                         .toコンマ区切りRString(特徴期別金額取消前, 0)));
             } else {
-                更正前後期割額.set特徴減免取消額(RString.EMPTY);
+                更正前後期割額.set特徴減免取消額(RSTRING_0);
             }
         } else {
             更正前後期割額.set特徴期(RString.EMPTY);
@@ -348,14 +349,14 @@ public class GemmenTorikesiTsuchiShoPrintService {
                 更正前後期割額.set普徴期別金額取消前(DecimalFormatter
                         .toコンマ区切りRString(普徴期別金額取消前, 0));
             } else {
-                更正前後期割額.set普徴期別金額取消前(RString.EMPTY);
+                更正前後期割額.set普徴期別金額取消前(RSTRING_0);
             }
             Decimal 普徴期別金額取消後 = set普徴期別金額取消後(期月普徴.get月AsInt(), 減免取消通知書情報);
             if (普徴期別金額取消後 != null) {
                 更正前後期割額.set普徴期別金額取消後(DecimalFormatter
                         .toコンマ区切りRString(普徴期別金額取消後, 0));
             } else {
-                更正前後期割額.set普徴期別金額取消後(RString.EMPTY);
+                更正前後期割額.set普徴期別金額取消後(RSTRING_0);
             }
             if (普徴期別金額取消後 != null && 普徴期別金額取消前 != null) {
                 更正前後期割額.set普徴減免取消額(DecimalFormatter
@@ -367,7 +368,7 @@ public class GemmenTorikesiTsuchiShoPrintService {
                 更正前後期割額.set普徴減免取消額(RSTRING_2.concat(DecimalFormatter
                         .toコンマ区切りRString(普徴期別金額取消前, 0)));
             } else {
-                更正前後期割額.set普徴減免取消額(RString.EMPTY);
+                更正前後期割額.set普徴減免取消額(RSTRING_0);
             }
         } else {
             更正前後期割額.set普徴月(RString.EMPTY);
