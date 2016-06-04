@@ -208,9 +208,7 @@ public class ShokanShikyuKetteiInManager {
                 if (福祉用具List != null && 福祉用具List.size() == 1) {
                     mapper.update償還払支給判定結果一時_事業者番号登録(福祉用具事業所番号Entity);
                 } else {
-                    if (福祉用具List == null || (福祉用具List != null && 福祉用具List.size() >= 2)) {
-                        mapper.update償還払支給判定結果一時_更新DB有無(福祉用具事業所番号Entity);
-                    }
+                    mapper.update償還払支給判定結果一時_更新DB有無(福祉用具事業所番号Entity);
                 }
             }
         }
@@ -225,9 +223,7 @@ public class ShokanShikyuKetteiInManager {
                 if (住宅改修List != null && 住宅改修List.size() == 1) {
                     mapper.update償還払支給判定結果一時_事業者番号登録(住宅改修事業所番号Entity);
                 } else {
-                    if (住宅改修List == null || (住宅改修List != null && 住宅改修List.size() >= 2)) {
-                        mapper.update償還払支給判定結果一時_更新DB有無(住宅改修事業所番号Entity);
-                    }
+                    mapper.update償還払支給判定結果一時_更新DB有無(住宅改修事業所番号Entity);
                 }
             }
         }
@@ -655,6 +651,7 @@ public class ShokanShikyuKetteiInManager {
                 if (判定結果Entity != null) {
                     update(処理年月, 支給不支給区分, 判定結果Entity, 判定結果集計Entity);
                 } else {
+                    判定結果Entity = new DbT3036ShokanHanteiKekkaEntity();
                     insert(処理年月, 支給不支給区分, 判定結果Entity, 判定結果集計Entity);
                 }
             }
@@ -701,7 +698,7 @@ public class ShokanShikyuKetteiInManager {
 
     private void insert(FlexibleYearMonth 処理年月, RString 支給不支給区分,
             DbT3036ShokanHanteiKekkaEntity 判定結果Entity, ShokanShikyuKetteiInResultEntity 判定結果集計Entity) {
-        判定結果Entity = new DbT3036ShokanHanteiKekkaEntity();
+
         if (RSTRING_1.equals(支給不支給区分)) {
             判定結果Entity.setHiHokenshaNo(判定結果集計Entity.getDbWT0001_登録被保険者番号());
             判定結果Entity.setServiceTeikyoYM(判定結果集計Entity.getDbWT3036_サービス提供年月());
