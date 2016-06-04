@@ -254,12 +254,12 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
                 住所 = 徴収猶予取消通知書情報.get宛名().get住所();
             }
             表示コード = researcher.create表示コード情報(徴収猶予取消通知書情報.get帳票制御共通().toEntity(),
-                    住所 != null ? 住所.get町域コード().value() : RString.EMPTY,
-                    行政区画 != null ? 行政区画.getGyoseiku().getコード().value() : RString.EMPTY,
-                    行政区画 != null ? 行政区画.getChiku1().getコード().value() : RString.EMPTY,
-                    行政区画 != null ? 行政区画.getChiku2().getコード().value() : RString.EMPTY,
-                    行政区画 != null ? 行政区画.getChiku3().getコード().value() : RString.EMPTY,
-                    徴収猶予取消通知書情報.get納組情報() != null
+                    (住所 != null && 住所.get町域コード() != null) ? 住所.get町域コード().value() : RString.EMPTY,
+                    (行政区画 != null && 行政区画.getGyoseiku() != null) ? 行政区画.getGyoseiku().getコード().value() : RString.EMPTY,
+                    (行政区画 != null && 行政区画.getChiku1() != null) ? 行政区画.getChiku1().getコード().value() : RString.EMPTY,
+                    (行政区画 != null && 行政区画.getChiku2() != null) ? 行政区画.getChiku2().getコード().value() : RString.EMPTY,
+                    (行政区画 != null && 行政区画.getChiku3() != null) ? 行政区画.getChiku3().getコード().value() : RString.EMPTY,
+                    (徴収猶予取消通知書情報.get納組情報() != null && 徴収猶予取消通知書情報.get納組情報().getNokumi() != null)
                     ? 徴収猶予取消通知書情報.get納組情報().getNokumi().getNokumiCode() : RString.EMPTY);
         }
         return 表示コード;
