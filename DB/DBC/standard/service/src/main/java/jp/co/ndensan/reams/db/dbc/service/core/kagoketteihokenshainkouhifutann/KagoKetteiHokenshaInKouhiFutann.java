@@ -283,7 +283,7 @@ public class KagoKetteiHokenshaInKouhiFutann {
         hihokenshaTempentity.set被保険者カナ氏名(meisaiCsvEntity.get公費受給者氏名());
         hihokenshaTempentity.set被保険者氏名(RString.EMPTY);
         hihokenshaTempentity.set旧市町村コード(LasdecCode.EMPTY);
-        hihokenshaTempentity.set変換被保険者番号(HihokenshaNo.EMPTY);
+        hihokenshaTempentity.set変換被保険者番号(null);
         hihokenshaTempentity.set登録被保険者番号(new HihokenshaNo(meisaiCsvEntity.get被保険者番号()));
         hihokenshaTempentity.set市町村コード(LasdecCode.EMPTY);
         hihokenshaTempentity.set管内管外区分(RString.EMPTY);
