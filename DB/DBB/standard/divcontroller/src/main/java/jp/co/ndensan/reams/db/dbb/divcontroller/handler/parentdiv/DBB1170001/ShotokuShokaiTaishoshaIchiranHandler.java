@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1170001;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +12,6 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.shotokushokai.ShotokuShokaiTaishosha;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1170001.ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1170001.dgTaishoshaIchiran_Row;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbb.service.core.shotokushokai.ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -21,7 +19,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbz.business.config.ShotokuHikidashiConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.business.core.chihokokyodantai.ShichosonAtesaki;
 import jp.co.ndensan.reams.ur.urz.definition.core.tashichosonsofusakimaintenance.SofusakiGroup;
@@ -44,7 +41,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面設計_DBBGM51001_所得照会状況一覧のハンドラクラス
@@ -93,9 +89,9 @@ public class ShotokuShokaiTaishoshaIchiranHandler {
     /**
      * onload方法
      *
+     * @param keyMap Map<RString, Object>
      */
-    public void onload() {
-        Map<RString, Object> keyMap = ViewStateHolder.get(ViewStateKeys.所得照会状況一覧KEY, Map.class);
+    public void onload(Map<RString, Object> keyMap) {
         if (null != keyMap) {
             RYear 基準年度 = (RYear) keyMap.get(キー抽出基準年度);
             RDate 期間FROM年月日 = (RDate) keyMap.get(キー抽出期間FROM年月日);
@@ -108,10 +104,10 @@ public class ShotokuShokaiTaishoshaIchiranHandler {
             div.getTxtChushutsuEdYMD().setValue(期間TO年月日);
             div.getTxtChushutsuEdTime().setValue(期間TO時分秒);
             do対象者を抽出する();
-            ViewStateHolder.remove(ViewStateKeys.所得照会状況一覧KEY.name());
         } else {
             FlexibleYear 日付関連_調定年度
-                    = new FlexibleYear(DbBusinessConfig.get(ConfigKeysHizuke.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
+                    = new FlexibleYear(DbBusinessConfig.get(
+                                    ConfigKeysHizuke.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
             RDateTime now = RDateTime.now();
             div.getTxtChushutsuKijunNendo().setDomain(new RYear(日付関連_調定年度.getYearValue()));
             div.getTxtChushutsuStTime().setValue(RTime.of(0, 0, 0));
@@ -182,31 +178,41 @@ public class ShotokuShokaiTaishoshaIchiranHandler {
     }
 
     /**
-     * 遷移前データを準備する
+     * 遷移前データを準備する、所得照会回答内容登録画面の引数
      *
+     * @return FukaTaishoshaKey
      */
-    public void do遷移前データ準備() {
+    public FukaTaishoshaKey do遷移前データ準備_引数() {
         dgTaishoshaIchiran_Row selected = div.getDgTaishoshaIchiran().getClickedItem();
         RString 被保険者番号 = selected.getTxtHihokenshaNo().getValue();
         RString 世帯コード = selected.getTxtSetaiCode().getValue();
         RString 識別コード = selected.getTxtShikibetsuCode().getValue();
         RYear 所得年度 = div.getTxtChushutsuKijunNendo().getDomain();
         //TODO QA836 引数は不全です
-        FukaTaishoshaKey key = new FukaTaishoshaKey(new HihokenshaNo(被保険者番号), new ShikibetsuCode(識別コード),
+        return new FukaTaishoshaKey(new HihokenshaNo(被保険者番号), new ShikibetsuCode(識別コード),
                 new SetaiCode(世帯コード), LasdecCode.EMPTY, new FlexibleYear(所得年度.toString()),
-                new TsuchishoNo(被保険者番号.substringReturnAsPossible(被保険者番号.length() - NUM_3)), new FlexibleYear(所得年度.toString()));
-        ViewStateHolder.put(ViewStateKey.賦課対象者, key);
+                new TsuchishoNo(被保険者番号.substringReturnAsPossible(被保険者番号.length() - NUM_3)),
+                new FlexibleYear(所得年度.toString()));
+    }
+
+    /**
+     * 遷移前データを準備する、抽出条件
+     *
+     * @return Map<RString, Object>
+     */
+    public Map<RString, Object> do遷移前データ準備_抽出条件() {
         Map<RString, Object> keyMap = new HashMap<>();
         RDate 期間FROM年月日 = div.getTxtChushutsuStYMD().getValue();
         RTime 期間FROM時分秒 = div.getTxtChushutsuStTime().getValue();
         RDate 期間TO年月日 = div.getTxtChushutsuEdYMD().getValue();
         RTime 期間TO時分秒 = div.getTxtChushutsuEdTime().getValue();
+        RYear 所得年度 = div.getTxtChushutsuKijunNendo().getDomain();
         keyMap.put(キー抽出基準年度, 所得年度);
         keyMap.put(キー抽出期間FROM年月日, 期間FROM年月日);
         keyMap.put(キー抽出期間FROM時分秒, 期間FROM時分秒);
         keyMap.put(キー抽出期間TO年月日, 期間TO年月日);
         keyMap.put(キー抽出期間TO時分秒, 期間TO時分秒);
-        ViewStateHolder.put(ViewStateKeys.所得照会状況一覧KEY, (Serializable) keyMap);
+        return keyMap;
     }
 
     private List<ShotokuShokaiTaishosha> do対象者一覧データを取得() {
