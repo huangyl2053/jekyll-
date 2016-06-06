@@ -13,7 +13,7 @@
         <relativePath>../../</relativePath>
     </parent>
     <properties>
-        <jp.co.ndensan.reams.dbx.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbx.version>
+        <jp.co.ndensan.reams.dbx.version>1.10.0</jp.co.ndensan.reams.dbx.version>
     </properties>
     <modules>
         <module>entity</module>
@@ -60,7 +60,7 @@
                 <version>${jp.co.ndensan.reams.dbx.version}</version>
                 <exclusions>
                     <exclusion>
-                        <groupId>jp.co.ndensan.reams.db.dbx</groupId>					
+                        <groupId>jp.co.ndensan.reams.db.dbx</groupId>
                         <artifactId>DbxPersistence</artifactId>
                     </exclusion>
                 </exclusions>
@@ -112,7 +112,7 @@
                 <version>${project.version}</version>
                 <exclusions>
                     <exclusion>
-                        <groupId>${project.groupId}</groupId>					
+                        <groupId>${project.groupId}</groupId>
                         <artifactId>DbzPersistence</artifactId>
                     </exclusion>
                 </exclusions>
