@@ -2,19 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
 import java.util.Collections;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2003KibetsuEntityGenerator;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2003KibetsuEntityGenerator.DEFAULT_履歴番号;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2003KibetsuEntityGenerator.DEFAULT_期;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2003KibetsuEntityGenerator.DEFAULT_調定年度;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2003KibetsuEntityGenerator.DEFAULT_賦課年度;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2003KibetsuEntityGenerator.DEFAULT_通知書番号;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_調定年度;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2003KibetsuEntityGenerator;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2003KibetsuEntityGenerator.DEFAULT_期;
-import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -36,7 +36,7 @@ import org.junit.runner.RunWith;
  */
 @Ignore
 @RunWith(Enclosed.class)
-public class DbT2003KibetsuDacTest extends DbxTestDacBase {
+public class DbT2003KibetsuDacTest extends DbbTestDacBase {
 
     private static final TsuchishoNo 通知書番号_01 = new TsuchishoNo("2");
     private static final TsuchishoNo 通知書番号_02 = new TsuchishoNo("3");
@@ -48,7 +48,7 @@ public class DbT2003KibetsuDacTest extends DbxTestDacBase {
         sut = InstanceProvider.create(DbT2003KibetsuDac.class);
     }
 
-    public static class selectByKeyのテスト extends DbxTestDacBase {
+    public static class selectByKeyのテスト extends DbbTestDacBase {
 
         @Before
         public void setUp() {
@@ -147,7 +147,7 @@ public class DbT2003KibetsuDacTest extends DbxTestDacBase {
         }
     }
 
-    public static class selectAllのテスト extends DbxTestDacBase {
+    public static class selectAllのテスト extends DbbTestDacBase {
 
         @Test
         public void 介護期別が存在する場合_selectAllは_全件を返す() {
@@ -174,7 +174,7 @@ public class DbT2003KibetsuDacTest extends DbxTestDacBase {
         }
     }
 
-    public static class insertのテスト extends DbxTestDacBase {
+    public static class insertのテスト extends DbbTestDacBase {
 
         @Test
         public void 介護期別エンティティを渡すと_insertは_介護期別を追加する() {
@@ -196,7 +196,7 @@ public class DbT2003KibetsuDacTest extends DbxTestDacBase {
         }
     }
 
-    public static class updateのテスト extends DbxTestDacBase {
+    public static class updateのテスト extends DbbTestDacBase {
 
         @Before
         public void setUp() {
@@ -234,7 +234,7 @@ public class DbT2003KibetsuDacTest extends DbxTestDacBase {
         }
     }
 
-    public static class deleteのテスト extends DbxTestDacBase {
+    public static class deleteのテスト extends DbbTestDacBase {
 
         @Before
         public void setUp() {
