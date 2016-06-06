@@ -14,12 +14,12 @@
     </parent>
     <properties>
         <jp.co.ndensan.reams.dbz.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbz.version>
-        <jp.co.ndensan.reams.dbx.version>1.10.0</jp.co.ndensan.reams.dbx.version>
+        <jp.co.ndensan.reams.dbx.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbx.version>
         <jp.co.ndensan.reams.dba.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dba.version>
-        <jp.co.ndensan.reams.dbb.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbb.version>
-        <jp.co.ndensan.reams.dbc.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbc.version>
-        <jp.co.ndensan.reams.dbd.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbd.version>
-        <jp.co.ndensan.reams.dbe.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbe.version>
+		<jp.co.ndensan.reams.dbb.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbb.version>
+		<jp.co.ndensan.reams.dbc.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbc.version>
+		<jp.co.ndensan.reams.dbd.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbd.version>
+		<jp.co.ndensan.reams.dbe.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbe.version>
     </properties>
     <modules>
         <module>entity</module>
@@ -32,7 +32,7 @@
     </modules>
     <dependencyManagement>
         <dependencies>
-            <!-- DBX -->
+			<!-- DBX -->
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbx</groupId>
                 <artifactId>DbxTestHelper</artifactId>
@@ -144,7 +144,7 @@
                 <artifactId>DbzBatchController</artifactId>
                 <version>${jp.co.ndensan.reams.dbz.version}</version>
             </dependency>
-            <!-- DBA -->
+			<!-- DBA -->
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dba</groupId>
                 <artifactId>DbaDefinition</artifactId>
@@ -201,7 +201,7 @@
                 <artifactId>DbaBatchController</artifactId>
                 <version>${jp.co.ndensan.reams.dba.version}</version>
             </dependency>
-            <!-- DBB -->
+			<!-- DBB -->
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbb</groupId>
                 <artifactId>DbbDefinition</artifactId>
@@ -258,7 +258,7 @@
                 <artifactId>DbbBatchController</artifactId>
                 <version>${jp.co.ndensan.reams.dbb.version}</version>
             </dependency>
-            <!-- DBC -->
+			<!-- DBC -->
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbc</groupId>
                 <artifactId>DbcDefinition</artifactId>
@@ -315,7 +315,7 @@
                 <artifactId>DbcBatchController</artifactId>
                 <version>${jp.co.ndensan.reams.dbc.version}</version>
             </dependency>
-            <!-- DBD -->
+			<!-- DBD -->
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbd</groupId>
                 <artifactId>DbdDefinition</artifactId>
@@ -372,7 +372,7 @@
                 <artifactId>DbdBatchController</artifactId>
                 <version>${jp.co.ndensan.reams.dbd.version}</version>
             </dependency>
-            <!-- DBE -->
+			<!-- DBE -->
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbe</groupId>
                 <artifactId>DbeDefinition</artifactId>

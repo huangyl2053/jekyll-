@@ -14,7 +14,7 @@
     </parent>
     <properties>
         <jp.co.ndensan.reams.dbz.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbz.version>
-        <jp.co.ndensan.reams.dbx.version>1.10.0</jp.co.ndensan.reams.dbx.version>
+        <jp.co.ndensan.reams.dbx.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbx.version>
         <jp.co.ndensan.reams.dbd.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbd.version>
     </properties>
     <modules>
@@ -28,7 +28,7 @@
     </modules>
     <dependencyManagement>
         <dependencies>
-            <!-- DBX -->
+			<!-- DBX -->
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbx</groupId>
                 <artifactId>DbxTestHelper</artifactId>
@@ -140,7 +140,7 @@
                 <artifactId>DbzBatchController</artifactId>
                 <version>${jp.co.ndensan.reams.dbz.version}</version>
             </dependency>
-            <!-- DBD -->
+			<!-- DBD -->
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbd</groupId>
                 <artifactId>DbdDefinition</artifactId>
