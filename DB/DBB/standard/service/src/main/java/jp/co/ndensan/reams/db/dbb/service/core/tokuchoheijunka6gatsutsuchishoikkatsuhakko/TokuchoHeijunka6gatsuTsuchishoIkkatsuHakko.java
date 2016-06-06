@@ -630,12 +630,12 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         dbT2002FukaEntity.setHokenryoDankai(更正後計算後情報.getHokenryoDankai());
         dbT2002FukaEntity.setHokenryoDankai1(更正後計算後情報.getHokenryoDankai1());
         dbT2002FukaEntity.setNengakuHokenryo1(更正後計算後情報.getNengakuHokenryo1());
-        dbT2002FukaEntity.setTsukiwariStartYM1(更正後計算後情報.getTsukiwariStartYM1().getYearMonth());
-        dbT2002FukaEntity.setTsukiwariEndYM1(更正後計算後情報.getTsukiwariEndYM1().getYearMonth());
+        dbT2002FukaEntity.setTsukiwariStartYM1(更正後計算後情報.getTsukiwariStartYM1());
+        dbT2002FukaEntity.setTsukiwariEndYM1(更正後計算後情報.getTsukiwariEndYM1());
         dbT2002FukaEntity.setHokenryoDankai2(更正後計算後情報.getHokenryoDankai2());
         dbT2002FukaEntity.setNengakuHokenryo2(更正後計算後情報.getNengakuHokenryo2());
-        dbT2002FukaEntity.setTsukiwariStartYM2(更正後計算後情報.getTsukiwariStartYM2().getYearMonth());
-        dbT2002FukaEntity.setTsukiwariEndYM2(更正後計算後情報.getTsukiwariEndYM2().getYearMonth());
+        dbT2002FukaEntity.setTsukiwariStartYM2(更正後計算後情報.getTsukiwariStartYM2());
+        dbT2002FukaEntity.setTsukiwariEndYM2(更正後計算後情報.getTsukiwariEndYM2());
         dbT2002FukaEntity.setChoteiNichiji(更正後計算後情報.getChoteiNichiji());
         dbT2002FukaEntity.setChoteiJiyu1(更正後計算後情報.getChoteiJiyu1());
         dbT2002FukaEntity.setChoteiJiyu2(更正後計算後情報.getChoteiJiyu2());
