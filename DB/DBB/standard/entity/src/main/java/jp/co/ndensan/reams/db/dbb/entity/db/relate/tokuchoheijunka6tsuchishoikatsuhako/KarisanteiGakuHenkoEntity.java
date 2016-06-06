@@ -92,7 +92,7 @@ public class KarisanteiGakuHenkoEntity implements Serializable {
         entity.setCaT0714SeikyuHoho_gyomubetsuPrimaryKey(納組.getSeikyuHoho().getGyomubetsuPrimaryKey());
         entity.setCaT0714SeikyuHoho_gyomuKoyuKey(納組.getSeikyuHoho().getGyomuKoyuKey());
         entity.setCaT0714SeikyuHoho_shiharaiHoho(納組.getSeikyuHoho().getShiharaiHoho());
-        entity.setCaT0714SeikyuHoho_zennoKubun(納組.getSeikyuHoho().getZennoKubun());
+        //entity.setCaT0714SeikyuHoho_zennoKubun(納組.getSeikyuHoho().getZennoKubun());
         entity.setCaT0714SeikyuHoho_creditKeizokuTorokuKey(納組.getSeikyuHoho().getCreditKeizokuTorokuKey());
         entity.setCaT0714SeikyuHoho_kaishiYMD(納組.getSeikyuHoho().getKaishiYMD());
         entity.setCaT0714SeikyuHoho_shuryoYMD(納組.getSeikyuHoho().getShuryoYMD());
@@ -579,13 +579,13 @@ public class KarisanteiGakuHenkoEntity implements Serializable {
 
     private void set対象者_追加含む情報_更正後(DbT2002FukaTempTableEntity entity) {
         entity.setNenkinTokuchoKaifuJoho_insertDantaiCd(対象者_追加含む情報_更正後.getInsertDantaiCd());
-        entity.setNenkinTokuchoKaifuJoho_insertTimestamp(対象者_追加含む情報_更正後.getInsertTimestamp());
-        entity.setNenkinTokuchoKaifuJoho_insertReamsLoginId(対象者_追加含む情報_更正後.getInsertReamsLoginId());
-        entity.setNenkinTokuchoKaifuJoho_insertContextId(対象者_追加含む情報_更正後.getInsertContextId());
-        entity.setNenkinTokuchoKaifuJoho_isDeleted(対象者_追加含む情報_更正後.isDeleted());
-        entity.setNenkinTokuchoKaifuJoho_updateCount(対象者_追加含む情報_更正後.getUpdateCount());
-        entity.setNenkinTokuchoKaifuJoho_lastUpdateTimestamp(対象者_追加含む情報_更正後.getLastUpdateTimestamp());
-        entity.setNenkinTokuchoKaifuJoho_lastUpdateReamsLoginId(対象者_追加含む情報_更正後.getLastUpdateReamsLoginId());
+//        entity.setNenkinTokuchoKaifuJoho_insertTimestamp(対象者_追加含む情報_更正後.getInsertTimestamp());
+//        entity.setNenkinTokuchoKaifuJoho_insertReamsLoginId(対象者_追加含む情報_更正後.getInsertReamsLoginId());
+//        entity.setNenkinTokuchoKaifuJoho_insertContextId(対象者_追加含む情報_更正後.getInsertContextId());
+//        entity.setNenkinTokuchoKaifuJoho_isDeleted(対象者_追加含む情報_更正後.isDeleted());
+//        entity.setNenkinTokuchoKaifuJoho_updateCount(対象者_追加含む情報_更正後.getUpdateCount());
+//        entity.setNenkinTokuchoKaifuJoho_lastUpdateTimestamp(対象者_追加含む情報_更正後.getLastUpdateTimestamp());
+//        entity.setNenkinTokuchoKaifuJoho_lastUpdateReamsLoginId(対象者_追加含む情報_更正後.getLastUpdateReamsLoginId());
         entity.setNenkinTokuchoKaifuJoho_gyomuCode(対象者_追加含む情報_更正後.getGyomuCode());
         entity.setNenkinTokuchoKaifuJoho_shoriNendo(対象者_追加含む情報_更正後.getShoriNendo());
         entity.setNenkinTokuchoKaifuJoho_tsuchiNaiyoCode(対象者_追加含む情報_更正後.getTsuchiNaiyoCode());
