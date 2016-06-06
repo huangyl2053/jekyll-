@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.fuka.FukaMapperParameter;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import static org.hamcrest.CoreMatchers.is;
