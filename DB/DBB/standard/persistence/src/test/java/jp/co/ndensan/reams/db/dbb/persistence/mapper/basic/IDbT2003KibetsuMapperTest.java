@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMap
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2003KibetsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2003KibetsuDac;
-import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.testhelper.DbTestHelper;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -26,7 +26,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Enclosed.class)
 @Ignore
-public class IDbT2003KibetsuMapperTest extends DbxTestDacBase {
+public class IDbT2003KibetsuMapperTest extends DbbTestDacBase {
 
     private static DbT2003KibetsuEntity entity;
     private static DbTestHelper dbTestHelper;
@@ -35,11 +35,11 @@ public class IDbT2003KibetsuMapperTest extends DbxTestDacBase {
 
     @BeforeClass
     public static void setUpClass() {
-        DbxTestDacBase.beforeSetUpClass();
+        DbbTestDacBase.setUpClass();
         dbTestHelper = new DbTestHelper();
     }
 
-    public static class getEntityメソッドTest extends DbxTestDacBase {
+    public static class getEntityメソッドTest extends DbbTestDacBase {
 
         @Before
         public void setUp() {
