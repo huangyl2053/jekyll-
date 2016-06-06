@@ -141,17 +141,17 @@ public class DbT2002FukaTempTableEntity extends DbTableEntityBase<DbT2002FukaTem
     @TempTableColumnOrder(35)
     private Decimal koseigo_nengakuHokenryo1;
     @TempTableColumnOrder(36)
-    private FlexibleDate koseigo_tsukiwariStartYM1;
+    private FlexibleYearMonth koseigo_tsukiwariStartYM1;
     @TempTableColumnOrder(37)
-    private FlexibleDate koseigo_tsukiwariEndYM1;
+    private FlexibleYearMonth koseigo_tsukiwariEndYM1;
     @TempTableColumnOrder(38)
     private RString koseigo_hokenryoDankai2;
     @TempTableColumnOrder(39)
     private Decimal koseigo_nengakuHokenryo2;
     @TempTableColumnOrder(40)
-    private FlexibleDate koseigo_tsukiwariStartYM2;
+    private FlexibleYearMonth koseigo_tsukiwariStartYM2;
     @TempTableColumnOrder(41)
-    private FlexibleDate koseigo_tsukiwariEndYM2;
+    private FlexibleYearMonth koseigo_tsukiwariEndYM2;
     @TempTableColumnOrder(42)
     private YMDHMS koseigo_choteiNichiji;
     @TempTableColumnOrder(43)
