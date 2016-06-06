@@ -18,9 +18,11 @@ import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.core.zenkokujusho.ZenkokuJushoSearchShurui;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.entity.db.basic.zenkokujusho.UrT0101ZenkokuJusho;
-import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaFinderFactory;
+//import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaManagerFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaSearchItem;
-import jp.co.ndensan.reams.ur.urz.service.core.hokenja.IHokenjaFinder;
+//import jp.co.ndensan.reams.ur.urz.service.core.hokenja.IHokenjaFinder;
+import jp.co.ndensan.reams.ur.urz.service.core.hokenja.IHokenjaManager;
 import jp.co.ndensan.reams.ur.urz.service.core.zenkokujusho.IZenkokuJushoFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.zenkokujusho.ZenkokuJushoFinderFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -45,14 +47,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class HokenshaNyuryokuHojoFinder {
 
-    private final IHokenjaFinder hokenshafinder;
+    private final IHokenjaManager hokenshafinder;
     private final IZenkokuJushoFinder kokuFinder;
 
     /**
      * コンストラクタです。
      */
     HokenshaNyuryokuHojoFinder() {
-        this.hokenshafinder = HokenjaFinderFactory.createInstance();
+        this.hokenshafinder = HokenjaManagerFactory.createInstance();
         this.kokuFinder = ZenkokuJushoFinderFactory.createInstance();
     }
 
@@ -63,7 +65,7 @@ public class HokenshaNyuryokuHojoFinder {
      * @param UrT0507HokenjaDac urT0507Dac
      * @paramMapperProvider mapperProvider
      */
-    HokenshaNyuryokuHojoFinder(IHokenjaFinder hokenshafinder, IZenkokuJushoFinder kokuFinder) {
+    HokenshaNyuryokuHojoFinder(IHokenjaManager hokenshafinder, IZenkokuJushoFinder kokuFinder) {
         this.hokenshafinder = hokenshafinder;
         this.kokuFinder = kokuFinder;
     }

@@ -70,11 +70,11 @@ public class ShinsakaiJizenKekkaJohoBuilderTest extends DbeTestBase {
             assertThat(business.get介護認定審査会審査順(), is(DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.DEFAULT_介護認定審査会審査順));
         }
 
-        @Test
-        public void 戻り値の一次判定結果変更理由は_設定した値と同じ一次判定結果変更理由を返す() {
-            business = sut.set一次判定結果変更理由(DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.DEFAULT_一次判定結果変更理由).build();
-            assertThat(business.get一次判定結果変更理由(), is(DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.DEFAULT_一次判定結果変更理由));
-        }
+//        @Test
+//        public void 戻り値の一次判定結果変更理由は_設定した値と同じ一次判定結果変更理由を返す() {
+//            business = sut.set一次判定結果変更理由(DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.DEFAULT_一次判定結果変更理由).build();
+//            assertThat(business.get一次判定結果変更理由(), is(DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.DEFAULT_一次判定結果変更理由));
+//        }
 
         @Test
         public void 戻り値の二次判定結果コードは_設定した値と同じ二次判定結果コードを返す() {

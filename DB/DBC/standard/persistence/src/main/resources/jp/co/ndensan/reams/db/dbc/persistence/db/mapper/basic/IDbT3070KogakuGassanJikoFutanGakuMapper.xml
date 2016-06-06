@@ -79,7 +79,10 @@
          "DbT3070KogakuGassanJikoFutanGaku"."sofuTaishoGaiFlag" as "dbT3070KogakuGassanJikoFutanGaku_sofuTaishoGaiFlag",
          "DbT3070KogakuGassanJikoFutanGaku"."jikoFutanKeisanYMD" as "dbT3070KogakuGassanJikoFutanGaku_jikoFutanKeisanYMD",
          "DbT3070KogakuGassanJikoFutanGaku"."shomeiShoSakuseiYMD" as "dbT3070KogakuGassanJikoFutanGaku_shomeiShoSakuseiYMD",
-         "DbT3070KogakuGassanJikoFutanGaku"."koki_KokuhoShoriKubun" as "dbT3070KogakuGassanJikoFutanGaku_koki_KokuhoShoriKubun"
+         "DbT3070KogakuGassanJikoFutanGaku"."koki_KokuhoShoriKubun" as "dbT3070KogakuGassanJikoFutanGaku_koki_KokuhoShoriKubun",
+         "DbT3070KogakuGassanJikoFutanGaku"."jikoFutangakuShomeishoRealHakkoFlag" as "dbT3070KogakuGassanJikoFutanGaku_jikoFutangakuShomeishoRealHakkoFlag",
+         "DbT3070KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" as "dbT3070KogakuGassanJikoFutanGaku_batchHoseiJissiYMD",
+         "DbT3070KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" as "dbT3070KogakuGassanJikoFutanGaku_realHoseiJissiYMD"
     </sql>
 
 
@@ -89,7 +92,7 @@
         <id property="taishoNendo" column="dbT3070KogakuGassanJikoFutanGaku_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="hokenshaNo" column="dbT3070KogakuGassanJikoFutanGaku_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
         <id property="shikyuShinseishoSeiriNo" column="dbT3070KogakuGassanJikoFutanGaku_shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="rirekiNo" column="dbT3070KogakuGassanJikoFutanGaku_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <id property="rirekiNo" column="dbT3070KogakuGassanJikoFutanGaku_rirekiNo" />
         <result property="insertDantaiCd" column="dbT3070KogakuGassanJikoFutanGaku_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT3070KogakuGassanJikoFutanGaku_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT3070KogakuGassanJikoFutanGaku_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -148,6 +151,9 @@
         <result property="jikoFutanKeisanYMD" column="dbT3070KogakuGassanJikoFutanGaku_jikoFutanKeisanYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shomeiShoSakuseiYMD" column="dbT3070KogakuGassanJikoFutanGaku_shomeiShoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="koki_KokuhoShoriKubun" column="dbT3070KogakuGassanJikoFutanGaku_koki_KokuhoShoriKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jikoFutangakuShomeishoRealHakkoFlag" column="dbT3070KogakuGassanJikoFutanGaku_jikoFutangakuShomeishoRealHakkoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="batchHoseiJissiYMD" column="dbT3070KogakuGassanJikoFutanGaku_batchHoseiJissiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="realHoseiJissiYMD" column="dbT3070KogakuGassanJikoFutanGaku_realHoseiJissiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
 
 </mapper>

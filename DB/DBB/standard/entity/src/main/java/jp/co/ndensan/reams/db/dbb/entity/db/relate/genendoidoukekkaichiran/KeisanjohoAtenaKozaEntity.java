@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -59,12 +60,12 @@ public class KeisanjohoAtenaKozaEntity {
     private RString 保険料段階;
     private RString 保険料算定段階1;
     private Decimal 算定年額保険料1;
-    private FlexibleDate 月割開始年月1;
-    private FlexibleDate 月割終了年月1;
+    private FlexibleYearMonth 月割開始年月1;
+    private FlexibleYearMonth 月割終了年月1;
     private RString 保険料算定段階2;
     private Decimal 算定年額保険料2;
-    private FlexibleDate 月割開始年月2;
-    private FlexibleDate 月割終了年月2;
+    private FlexibleYearMonth 月割開始年月2;
+    private FlexibleYearMonth 月割終了年月2;
     private YMDHMS 調定日時;
     private RString 調定事由1;
     private RString 調定事由2;

@@ -31,7 +31,7 @@ public class KogakuKyufuTaishoshaMeisaiIdentifierTest extends DbcTestBase {
     private static FlexibleYearMonth 主キー名2;
     private static JigyoshaNo 主キー名3;
     private static ServiceShuruiCode 主キー名4;
-    private static Decimal 主キー名5;
+    private static int 主キー名5;
 
     @BeforeClass
     public static void setUpClass() {

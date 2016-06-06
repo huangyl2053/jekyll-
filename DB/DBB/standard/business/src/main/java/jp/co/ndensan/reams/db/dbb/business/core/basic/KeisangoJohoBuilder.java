@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -313,7 +314,7 @@ public class KeisangoJohoBuilder {
      * @param 月割開始年月1 月割開始年月1
      * @return {@link KeisangoJohoBuilder}
      */
-    public KeisangoJohoBuilder set月割開始年月1(FlexibleDate 月割開始年月1) {
+    public KeisangoJohoBuilder set月割開始年月1(FlexibleYearMonth 月割開始年月1) {
         requireNonNull(月割開始年月1, UrSystemErrorMessages.値がnull.getReplacedMessage("月割開始年月1"));
         entity.setTsukiwariStartYM1(月割開始年月1);
         return this;
@@ -325,7 +326,7 @@ public class KeisangoJohoBuilder {
      * @param 月割終了年月1 月割終了年月1
      * @return {@link KeisangoJohoBuilder}
      */
-    public KeisangoJohoBuilder set月割終了年月1(FlexibleDate 月割終了年月1) {
+    public KeisangoJohoBuilder set月割終了年月1(FlexibleYearMonth 月割終了年月1) {
         requireNonNull(月割終了年月1, UrSystemErrorMessages.値がnull.getReplacedMessage("月割終了年月1"));
         entity.setTsukiwariEndYM1(月割終了年月1);
         return this;
@@ -361,7 +362,7 @@ public class KeisangoJohoBuilder {
      * @param 月割開始年月2 月割開始年月2
      * @return {@link KeisangoJohoBuilder}
      */
-    public KeisangoJohoBuilder set月割開始年月2(FlexibleDate 月割開始年月2) {
+    public KeisangoJohoBuilder set月割開始年月2(FlexibleYearMonth 月割開始年月2) {
         requireNonNull(月割開始年月2, UrSystemErrorMessages.値がnull.getReplacedMessage("月割開始年月2"));
         entity.setTsukiwariStartYM2(月割開始年月2);
         return this;
@@ -373,7 +374,7 @@ public class KeisangoJohoBuilder {
      * @param 月割終了年月2 月割終了年月2
      * @return {@link KeisangoJohoBuilder}
      */
-    public KeisangoJohoBuilder set月割終了年月2(FlexibleDate 月割終了年月2) {
+    public KeisangoJohoBuilder set月割終了年月2(FlexibleYearMonth 月割終了年月2) {
         requireNonNull(月割終了年月2, UrSystemErrorMessages.値がnull.getReplacedMessage("月割終了年月2"));
         entity.setTsukiwariEndYM2(月割終了年月2);
         return this;

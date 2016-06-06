@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -104,17 +105,17 @@ public class DbTKeisangoJohoTempTableEntity extends DbTableEntityBase<DbTKeisang
     @TempTableColumnOrder(35)
     private Decimal nengakuHokenryo1;
     @TempTableColumnOrder(36)
-    private FlexibleDate tsukiwariStartYM1;
+    private FlexibleYearMonth tsukiwariStartYM1;
     @TempTableColumnOrder(37)
-    private FlexibleDate tsukiwariEndYM1;
+    private FlexibleYearMonth tsukiwariEndYM1;
     @TempTableColumnOrder(38)
     private RString hokenryoDankai2;
     @TempTableColumnOrder(39)
     private Decimal nengakuHokenryo2;
     @TempTableColumnOrder(40)
-    private FlexibleDate tsukiwariStartYM2;
+    private FlexibleYearMonth tsukiwariStartYM2;
     @TempTableColumnOrder(41)
-    private FlexibleDate tsukiwariEndYM2;
+    private FlexibleYearMonth tsukiwariEndYM2;
     @TempTableColumnOrder(42)
     private YMDHMS choteiNichiji;
     @TempTableColumnOrder(43)

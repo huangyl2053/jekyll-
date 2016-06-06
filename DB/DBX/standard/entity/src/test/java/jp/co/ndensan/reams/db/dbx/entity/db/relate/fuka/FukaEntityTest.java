@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.entity.db.relate.fuka;
+
+package jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka;
 
 import java.util.Arrays;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
-import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -22,11 +23,11 @@ import org.junit.runner.RunWith;
  * @author LDNS 張　浩星
  */
 @RunWith(Enclosed.class)
-public class FukaEntityTest extends DbxTestBase {
+public class FukaEntityTest extends DbbTestBase {
 
     private static FukaEntity sut;
 
-    public static class 新規作成時 extends DbxTestBase {
+    public static class 新規作成時 extends DbbTestBase {
 
         @Before
         public void setUp() {
@@ -45,7 +46,7 @@ public class FukaEntityTest extends DbxTestBase {
 
     }
 
-    public static class initializeMd5ToEntities後 extends DbxTestBase {
+    public static class initializeMd5ToEntities後 extends DbbTestBase {
 
         @Before
         public void setUp() {
@@ -70,5 +71,5 @@ public class FukaEntityTest extends DbxTestBase {
         sut.set介護賦課Entity(new DbT2002FukaEntity());
         sut.set介護期別Entity(Arrays.asList(new DbT2003KibetsuEntity()));
     }
-
+    
 }

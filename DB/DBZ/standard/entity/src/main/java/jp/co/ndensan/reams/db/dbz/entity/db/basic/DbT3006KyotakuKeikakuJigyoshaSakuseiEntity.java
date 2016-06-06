@@ -14,6 +14,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 
 /**
  * DbT3006KyotakuKeikakuJigyoshaSakuseiの項目定義クラスです
@@ -21,7 +22,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
  */
 public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBase<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3006KyotakuKeikakuJigyoshaSakusei");
 
@@ -43,13 +43,14 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
     private FlexibleDate tekiyoShuryoYMD;
     private RString sakuseiKubunCode;
     private JigyoshaNo keikakuJigyoshaNo;
+    private ServiceShuruiCode serviceShuruiCode;
     private JigyoshaNo itakusakiJigyoshaNo;
     private FlexibleDate jigyoshaHenkoYMD;
     private RString jigyoshaHenkoJiyu;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -58,7 +59,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -67,7 +68,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -76,16 +77,17 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -94,7 +96,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * 被保険者番号のgetメソッドです。
-     *
+     * 
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -103,7 +105,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * 被保険者番号のsetメソッドです。
-     *
+     * 
      * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
@@ -112,7 +114,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * 対象年月のgetメソッドです。
-     *
+     * 
      * @return 対象年月
      */
     public FlexibleYearMonth getTaishoYM() {
@@ -121,7 +123,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * 対象年月のsetメソッドです。
-     *
+     * 
      * @param taishoYM 対象年月
      */
     public void setTaishoYM(@Nonnull FlexibleYearMonth taishoYM) {
@@ -130,7 +132,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * 履歴番号のgetメソッドです。
-     *
+     * 
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -139,7 +141,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * 履歴番号のsetメソッドです。
-     *
+     * 
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(@Nonnull int rirekiNo) {
@@ -148,7 +150,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * 適用開始年月日のgetメソッドです。
-     *
+     * 
      * @return 適用開始年月日
      */
     public FlexibleDate getTekiyoKaishiYMD() {
@@ -157,7 +159,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * 適用開始年月日のsetメソッドです。
-     *
+     * 
      * @param tekiyoKaishiYMD 適用開始年月日
      */
     public void setTekiyoKaishiYMD(@Nonnull FlexibleDate tekiyoKaishiYMD) {
@@ -166,7 +168,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * 適用終了年月日のgetメソッドです。
-     *
+     * 
      * @return 適用終了年月日
      */
     @CheckForNull
@@ -176,7 +178,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * 適用終了年月日のsetメソッドです。
-     *
+     * 
      * @param tekiyoShuryoYMD 適用終了年月日
      */
     public void setTekiyoShuryoYMD(FlexibleDate tekiyoShuryoYMD) {
@@ -187,7 +189,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
      * 作成区分コードのgetメソッドです。
      * <br/>
      * <br/>1：指定居宅介護支援事業者作成、2：基準該当居宅介護支援事業者作成、4：介護予防支援事業者作成
-     *
+     * 
      * @return 作成区分コード
      */
     public RString getSakuseiKubunCode() {
@@ -198,7 +200,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
      * 作成区分コードのsetメソッドです。
      * <br/>
      * <br/>1：指定居宅介護支援事業者作成、2：基準該当居宅介護支援事業者作成、4：介護予防支援事業者作成
-     *
+     * 
      * @param sakuseiKubunCode 作成区分コード
      */
     public void setSakuseiKubunCode(@Nonnull RString sakuseiKubunCode) {
@@ -207,7 +209,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * 計画事業者番号のgetメソッドです。
-     *
+     * 
      * @return 計画事業者番号
      */
     public JigyoshaNo getKeikakuJigyoshaNo() {
@@ -216,7 +218,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * 計画事業者番号のsetメソッドです。
-     *
+     * 
      * @param keikakuJigyoshaNo 計画事業者番号
      */
     public void setKeikakuJigyoshaNo(@Nonnull JigyoshaNo keikakuJigyoshaNo) {
@@ -224,10 +226,28 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
     }
 
     /**
+     * サービス種類コードのgetメソッドです。
+     * 
+     * @return サービス種類コード
+     */
+    public ServiceShuruiCode getServiceShuruiCode() {
+        return serviceShuruiCode;
+    }
+
+    /**
+     * サービス種類コードのsetメソッドです。
+     * 
+     * @param serviceShuruiCode サービス種類コード
+     */
+    public void setServiceShuruiCode(@Nonnull ServiceShuruiCode serviceShuruiCode) {
+        this.serviceShuruiCode = serviceShuruiCode;
+    }
+
+    /**
      * 委託先事業者番号のgetメソッドです。
      * <br/>
      * <br/>地域包括支援センターの委託先
-     *
+     * 
      * @return 委託先事業者番号
      */
     @CheckForNull
@@ -239,7 +259,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
      * 委託先事業者番号のsetメソッドです。
      * <br/>
      * <br/>地域包括支援センターの委託先
-     *
+     * 
      * @param itakusakiJigyoshaNo 委託先事業者番号
      */
     public void setItakusakiJigyoshaNo(JigyoshaNo itakusakiJigyoshaNo) {
@@ -248,7 +268,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * 事業者変更年月日のgetメソッドです。
-     *
+     * 
      * @return 事業者変更年月日
      */
     @CheckForNull
@@ -258,7 +278,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * 事業者変更年月日のsetメソッドです。
-     *
+     * 
      * @param jigyoshaHenkoYMD 事業者変更年月日
      */
     public void setJigyoshaHenkoYMD(FlexibleDate jigyoshaHenkoYMD) {
@@ -267,7 +287,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * 事業者変更事由のgetメソッドです。
-     *
+     * 
      * @return 事業者変更事由
      */
     @CheckForNull
@@ -277,7 +297,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * 事業者変更事由のsetメソッドです。
-     *
+     * 
      * @param jigyoshaHenkoJiyu 事業者変更事由
      */
     public void setJigyoshaHenkoJiyu(RString jigyoshaHenkoJiyu) {
@@ -286,9 +306,9 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * このエンティティの主キーが他の{@literal DbT3006KyotakuKeikakuJigyoshaSakuseiEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3006KyotakuKeikakuJigyoshaSakuseiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -320,6 +340,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
         this.tekiyoShuryoYMD = entity.tekiyoShuryoYMD;
         this.sakuseiKubunCode = entity.sakuseiKubunCode;
         this.keikakuJigyoshaNo = entity.keikakuJigyoshaNo;
+        this.serviceShuruiCode = entity.serviceShuruiCode;
         this.itakusakiJigyoshaNo = entity.itakusakiJigyoshaNo;
         this.jigyoshaHenkoYMD = entity.jigyoshaHenkoYMD;
         this.jigyoshaHenkoJiyu = entity.jigyoshaHenkoJiyu;
@@ -327,13 +348,13 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hihokenshaNo, taishoYM, rirekiNo, tekiyoKaishiYMD, tekiyoShuryoYMD, sakuseiKubunCode, keikakuJigyoshaNo, itakusakiJigyoshaNo, jigyoshaHenkoYMD, jigyoshaHenkoJiyu);
+        return super.toMd5(hihokenshaNo, taishoYM, rirekiNo, tekiyoKaishiYMD, tekiyoShuryoYMD, sakuseiKubunCode, keikakuJigyoshaNo, serviceShuruiCode, itakusakiJigyoshaNo, jigyoshaHenkoYMD, jigyoshaHenkoJiyu);
     }
 
 // </editor-fold>
+
 }

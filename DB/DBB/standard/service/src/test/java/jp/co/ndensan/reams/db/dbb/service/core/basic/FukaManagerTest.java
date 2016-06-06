@@ -10,7 +10,8 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.persistence.db.relate.FukaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
@@ -36,12 +37,14 @@ import static org.mockito.Mockito.when;
 public class FukaManagerTest {
 
     private static DbT2002FukaDac dac;
+    private static FukaDac relateDac;
     private static FukaManager sut;
 
     @BeforeClass
     public static void test() {
         dac = mock(DbT2002FukaDac.class);
-        sut = new FukaManager(dac);
+        relateDac = mock(FukaDac.class);
+        sut = new FukaManager(dac, relateDac);
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。

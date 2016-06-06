@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.ModelBase;
@@ -349,7 +350,7 @@ public class KeisangoJoho
      *
      * @return 月割開始年月1
      */
-    public FlexibleDate get月割開始年月1() {
+    public FlexibleYearMonth get月割開始年月1() {
         return entity.getTsukiwariStartYM1();
     }
 
@@ -358,7 +359,7 @@ public class KeisangoJoho
      *
      * @return 月割終了年月1
      */
-    public FlexibleDate get月割終了年月1() {
+    public FlexibleYearMonth get月割終了年月1() {
         return entity.getTsukiwariEndYM1();
     }
 
@@ -385,7 +386,7 @@ public class KeisangoJoho
      *
      * @return 月割開始年月2
      */
-    public FlexibleDate get月割開始年月2() {
+    public FlexibleYearMonth get月割開始年月2() {
         return entity.getTsukiwariStartYM2();
     }
 
@@ -394,7 +395,7 @@ public class KeisangoJoho
      *
      * @return 月割終了年月2
      */
-    public FlexibleDate get月割終了年月2() {
+    public FlexibleYearMonth get月割終了年月2() {
         return entity.getTsukiwariEndYM2();
     }
 

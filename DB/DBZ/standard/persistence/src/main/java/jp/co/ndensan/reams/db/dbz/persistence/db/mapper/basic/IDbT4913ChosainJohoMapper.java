@@ -5,19 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJohoEntity;
-
 /**
+ * {@link jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJohoEntity}のマッパーIFです。
  *
- * @author LDNS chenty
+ * @author n1070 久保裕是
  */
 public interface IDbT4913ChosainJohoMapper {
 
-    /**
-     * {@link  DbT4913ChosainJohoEntity}を取得します。
-     *
-     * @return {@link  DbT4913ChosainJohoEntity}
-     * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
-     */
-    DbT4913ChosainJohoEntity getEntity();
 }

@@ -15,11 +15,13 @@ import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 受領委任事業者テーブルのエンティティクラスです。
  * <br/> 受領委任契約をしている事業者を管理します。
  */
+@OnNextSchema("rgdb")
 public class DbT7061JuryoIninJigyoshaEntity extends DbTableEntityBase<DbT7061JuryoIninJigyoshaEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName

@@ -32,6 +32,8 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     private ServiceJokyoPanelDiv ServiceJokyoPanel;
     @JsonProperty("radServiceKubun")
     private RadioButton radServiceKubun;
+    @JsonProperty("rdoJutakuKaishu")
+    private RadioButton rdoJutakuKaishu;
     @JsonProperty("KubetsuKyufuPanel")
     private KubetsuKyufuPanelDiv KubetsuKyufuPanel;
     @JsonProperty("ZaitakuServicePanel")
@@ -145,6 +147,24 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     @JsonProperty("radServiceKubun")
     public void setRadServiceKubun(RadioButton radServiceKubun) {
         this.radServiceKubun = radServiceKubun;
+    }
+
+    /*
+     * getrdoJutakuKaishu
+     * @return rdoJutakuKaishu
+     */
+    @JsonProperty("rdoJutakuKaishu")
+    public RadioButton getRdoJutakuKaishu() {
+        return rdoJutakuKaishu;
+    }
+
+    /*
+     * setrdoJutakuKaishu
+     * @param rdoJutakuKaishu rdoJutakuKaishu
+     */
+    @JsonProperty("rdoJutakuKaishu")
+    public void setRdoJutakuKaishu(RadioButton rdoJutakuKaishu) {
+        this.rdoJutakuKaishu = rdoJutakuKaishu;
     }
 
     /*

@@ -51,32 +51,32 @@ public class KagoKetteiMeisaiManagerTest {
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             RString 主キー2 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_保険者区分;
-            Decimal 主キー3 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_履歴番号;
             sut.get過誤決定明細(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleYearMonth 主キー1 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_取扱年月;
-            Decimal 主キー3 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_履歴番号;
             sut.get過誤決定明細(主キー1, null, 主キー3);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
-            FlexibleYearMonth 主キー1 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_取扱年月;
-            RString 主キー2 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_保険者区分;
-            sut.get過誤決定明細(主キー1, 主キー2, null);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
+//            FlexibleYearMonth 主キー1 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_取扱年月;
+//            RString 主キー2 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_保険者区分;
+//            sut.get過誤決定明細(主キー1, 主キー2, null);
+//        }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(FlexibleYearMonth.class), any(RString.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(FlexibleYearMonth.class), any(RString.class), any(int.class))).thenReturn(null);
 
             FlexibleYearMonth 主キー1 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_取扱年月;
             RString 主キー2 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_保険者区分;
-            Decimal 主キー3 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_履歴番号;
             KagoKetteiMeisai result = sut.get過誤決定明細(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
@@ -85,11 +85,11 @@ public class KagoKetteiMeisaiManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3061KagoKetteiMeisaiEntity entity = DbT3061KagoKetteiMeisaiEntityGenerator.createDbT3061KagoKetteiMeisaiEntity();
-            when(dac.selectByKey(any(FlexibleYearMonth.class), any(RString.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(FlexibleYearMonth.class), any(RString.class), any(int.class))).thenReturn(entity);
 
             FlexibleYearMonth 主キー1 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_取扱年月;
             RString 主キー2 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_保険者区分;
-            Decimal 主キー3 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_履歴番号;
             KagoKetteiMeisai result = sut.get過誤決定明細(主キー1, 主キー2, 主キー3);
 
             assertThat(result.get取扱年月().toDateString(), is(DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_取扱年月.toDateString()));

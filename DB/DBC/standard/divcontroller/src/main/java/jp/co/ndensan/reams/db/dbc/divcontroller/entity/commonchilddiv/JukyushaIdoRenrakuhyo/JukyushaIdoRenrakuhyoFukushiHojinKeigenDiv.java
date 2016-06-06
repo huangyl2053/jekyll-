@@ -23,8 +23,8 @@ public class JukyushaIdoRenrakuhyoFukushiHojinKeigenDiv extends Panel {
      */
     @JsonProperty("txtKeigenritsu")
     private TextBoxNum txtKeigenritsu;
-    @JsonProperty("txtKeigenritsuTekiyoDateRange")
-    private TextBoxDateRange txtKeigenritsuTekiyoDateRange;
+    @JsonProperty("txtKeigenritsuTekiyoYMD")
+    private TextBoxDateRange txtKeigenritsuTekiyoYMD;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -51,21 +51,21 @@ public class JukyushaIdoRenrakuhyoFukushiHojinKeigenDiv extends Panel {
     }
 
     /*
-     * gettxtKeigenritsuTekiyoDateRange
-     * @return txtKeigenritsuTekiyoDateRange
+     * gettxtKeigenritsuTekiyoYMD
+     * @return txtKeigenritsuTekiyoYMD
      */
-    @JsonProperty("txtKeigenritsuTekiyoDateRange")
-    public TextBoxDateRange getTxtKeigenritsuTekiyoDateRange() {
-        return txtKeigenritsuTekiyoDateRange;
+    @JsonProperty("txtKeigenritsuTekiyoYMD")
+    public TextBoxDateRange getTxtKeigenritsuTekiyoYMD() {
+        return txtKeigenritsuTekiyoYMD;
     }
 
     /*
-     * settxtKeigenritsuTekiyoDateRange
-     * @param txtKeigenritsuTekiyoDateRange txtKeigenritsuTekiyoDateRange
+     * settxtKeigenritsuTekiyoYMD
+     * @param txtKeigenritsuTekiyoYMD txtKeigenritsuTekiyoYMD
      */
-    @JsonProperty("txtKeigenritsuTekiyoDateRange")
-    public void setTxtKeigenritsuTekiyoDateRange(TextBoxDateRange txtKeigenritsuTekiyoDateRange) {
-        this.txtKeigenritsuTekiyoDateRange = txtKeigenritsuTekiyoDateRange;
+    @JsonProperty("txtKeigenritsuTekiyoYMD")
+    public void setTxtKeigenritsuTekiyoYMD(TextBoxDateRange txtKeigenritsuTekiyoYMD) {
+        this.txtKeigenritsuTekiyoYMD = txtKeigenritsuTekiyoYMD;
     }
 
     // </editor-fold>

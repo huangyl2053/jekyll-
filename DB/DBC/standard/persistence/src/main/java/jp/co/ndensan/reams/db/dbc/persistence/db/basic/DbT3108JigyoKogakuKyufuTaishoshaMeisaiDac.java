@@ -49,7 +49,7 @@ public class DbT3108JigyoKogakuKyufuTaishoshaMeisaiDac implements ISaveable<DbT3
             FlexibleYearMonth サービス提供年月,
             JigyoshaNo 事業者番号,
             ServiceShuruiCode サービス種類コード,
-            Decimal 履歴番号) throws NullPointerException {
+            int 履歴番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));

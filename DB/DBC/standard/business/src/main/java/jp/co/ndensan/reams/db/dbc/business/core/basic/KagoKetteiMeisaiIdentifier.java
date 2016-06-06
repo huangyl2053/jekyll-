@@ -20,7 +20,7 @@ public class KagoKetteiMeisaiIdentifier implements Serializable {
 
     private final FlexibleYearMonth 取扱年月;
     private final RString 保険者区分;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
 
     /**
      * コンストラクタです。
@@ -31,7 +31,7 @@ public class KagoKetteiMeisaiIdentifier implements Serializable {
      */
     public KagoKetteiMeisaiIdentifier(FlexibleYearMonth 取扱年月,
             RString 保険者区分,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         this.取扱年月 = 取扱年月;
         this.保険者区分 = 保険者区分;
         this.履歴番号 = 履歴番号;

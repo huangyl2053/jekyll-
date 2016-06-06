@@ -30,7 +30,7 @@ public final class DbT5508ShinsakaiJizenKekkaJohoEntityGenerator {
         entity.setShinsakaiKaisaiNo(DEFAULT_介護認定審査会開催番号);
         entity.setShinsakaiIinCode(DEFAULT_介護認定審査会委員コード);
         entity.setShinsakaiOrder(DEFAULT_介護認定審査会審査順);
-        entity.setIchijiHanteiHenkoRiyu(DEFAULT_一次判定結果変更理由);
+//        entity.setIchijiHanteiHenkoRiyu(DEFAULT_一次判定結果変更理由);
         entity.setNijiHanteiKekkaCode(DEFAULT_二次判定結果コード);
         return entity;
     }

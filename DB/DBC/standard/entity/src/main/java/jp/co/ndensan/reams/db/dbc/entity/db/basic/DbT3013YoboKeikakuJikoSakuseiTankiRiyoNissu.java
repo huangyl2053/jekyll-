@@ -52,13 +52,21 @@ public enum DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu implements IColumnDefini
      */
     rirekiNo(5, 0),
     /**
+     * 利用年月
+     */
+    riyoYM(2147483647, 0),
+    /**
      * 前回迄利用日数
      */
     zenkaiRiyoNissu(3, 0),
     /**
      * 今回計画利用日数
      */
-    konkaiKeikakuRiyoNissu(3, 0);
+    konkaiKeikakuRiyoNissu(3, 0),
+    /**
+     * 暫定区分
+     */
+    zanteiKubun(1, 0);
 
     private final int maxLength;
     private final int scale;

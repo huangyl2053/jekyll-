@@ -56,6 +56,10 @@ var DBE;
                 return new UZA.RadioButton(this.convFiledName("radServiceKubun"));
             };
 
+            Controls.prototype.rdoJutakuKaishu = function () {
+                return new UZA.RadioButton(this.convFiledName("rdoJutakuKaishu"));
+            };
+
             Controls.prototype.KubetsuKyufuPanel = function () {
                 return new UZA.Panel(this.convFiledName("KubetsuKyufuPanel"));
             };

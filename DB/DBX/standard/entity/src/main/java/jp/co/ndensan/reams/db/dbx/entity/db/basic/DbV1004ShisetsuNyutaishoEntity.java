@@ -11,10 +11,12 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 介護保険施設入退所Aliveテーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbV1004ShisetsuNyutaishoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
 

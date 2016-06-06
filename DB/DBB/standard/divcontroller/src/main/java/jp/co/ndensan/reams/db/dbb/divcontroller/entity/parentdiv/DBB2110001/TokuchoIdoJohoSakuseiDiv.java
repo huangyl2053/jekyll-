@@ -209,16 +209,6 @@ public class TokuchoIdoJohoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Icon getIcoShikakuSoshitsu07() {
-        return this.getTbldgTokuchoIdoJoho().getIcoShikakuSoshitsu07();
-    }
-
-    @JsonIgnore
-    public Icon getIcoJutokuGaito07() {
-        return this.getTbldgTokuchoIdoJoho().getIcoJutokuGaito07();
-    }
-
-    @JsonIgnore
     public CheckBoxList getChkSentaku08() {
         return this.getTbldgTokuchoIdoJoho().getChkSentaku08();
     }
@@ -241,11 +231,6 @@ public class TokuchoIdoJohoSakuseiDiv extends Panel {
     @JsonIgnore
     public Icon getIcoJutokuGaito08() {
         return this.getTbldgTokuchoIdoJoho().getIcoJutokuGaito08();
-    }
-
-    @JsonIgnore
-    public Icon getIcoTokuchotsuikaIrai08() {
-        return this.getTbldgTokuchoIdoJoho().getIcoTokuchotsuikaIrai08();
     }
 
     @JsonIgnore

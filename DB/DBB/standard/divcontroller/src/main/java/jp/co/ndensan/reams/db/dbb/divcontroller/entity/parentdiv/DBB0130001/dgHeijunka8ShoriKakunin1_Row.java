@@ -1,9 +1,9 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130001;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 17 10:03:29 JST 2014 
+ * Wed Mar 30 21:32:08 JST 2016 
  */
 
 
@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgHeijunka8ShoriKakunin1_Row extends DataRow {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString txtShoriMei;
     private RString txtJokyo;
@@ -29,6 +30,9 @@ public class dgHeijunka8ShoriKakunin1_Row extends DataRow {
         this.txtShoriMei = RString.EMPTY;
         this.txtJokyo = RString.EMPTY;
         this.txtShoriNichiji = RString.EMPTY;
+        this.setOriginalData("txtShoriMei", txtShoriMei);
+        this.setOriginalData("txtJokyo", txtJokyo);
+        this.setOriginalData("txtShoriNichiji", txtShoriNichiji);
     }
 
     public dgHeijunka8ShoriKakunin1_Row(RString txtShoriMei, RString txtJokyo, RString txtShoriNichiji) {
@@ -68,4 +72,5 @@ public class dgHeijunka8ShoriKakunin1_Row extends DataRow {
         this.txtShoriNichiji = txtShoriNichiji;
     }
 
+    // </editor-fold>
 }

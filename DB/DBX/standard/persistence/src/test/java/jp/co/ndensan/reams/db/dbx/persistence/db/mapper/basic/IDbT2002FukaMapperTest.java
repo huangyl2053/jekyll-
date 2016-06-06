@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic;
+package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic;
 
+import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2002FukaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
-import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.testhelper.DbTestHelper;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -25,7 +26,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Enclosed.class)
 @Ignore
-public class IDbT2002FukaMapperTest extends DbxTestDacBase {
+public class IDbT2002FukaMapperTest extends DbbTestDacBase {
 
     private static DbT2002FukaEntity entity;
     private static DbTestHelper dbTestHelper;
@@ -34,11 +35,11 @@ public class IDbT2002FukaMapperTest extends DbxTestDacBase {
 
     @BeforeClass
     public static void setUpClass() {
-        DbxTestDacBase.beforeSetUpClass();
+        DbbTestDacBase.setUpClass();
         dbTestHelper = new DbTestHelper();
     }
 
-    public static class getEntityメソッドTest extends DbxTestDacBase {
+    public static class getEntityメソッドTest extends DbbTestDacBase {
 
         @Before
         public void setUp() {

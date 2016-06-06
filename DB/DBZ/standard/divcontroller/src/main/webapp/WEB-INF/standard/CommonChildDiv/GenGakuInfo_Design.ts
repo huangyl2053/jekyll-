@@ -41,8 +41,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("TainoNendo"));
             }
 
-            public txtHanteiKijunYMD(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtHanteiKijunYMD"));
+            public txtHanteiKijunYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtHanteiKijunYMD"));
             }
 
             public btnKensaku(): UZA.Button {
@@ -54,11 +54,11 @@ module DBZ {
             }
 
             public GenGakuKeisan(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan"));
+                return new UZA.Panel(this.convFiledName("GenGakuKeisan"));
             }
 
             public ChoshuKenKeimetsuKikan1(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan_ChoshuKenKeimetsuKikan1"));
+                return new UZA.Panel(this.convFiledName("ChoshuKenKeimetsuKikan1"));
             }
 
             public lblChoShushometsu1(): UZA.Label {
@@ -70,7 +70,7 @@ module DBZ {
             }
 
             public Kakesan(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan_ChoshuKenKeimetsuKikan1_Kakesan"));
+                return new UZA.Panel(this.convFiledName("Kakesan"));
             }
 
             public lblKakesan(): UZA.Label {
@@ -78,11 +78,11 @@ module DBZ {
             }
 
             public ChoshuKenKeimetsuKikan2(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan_ChoshuKenKeimetsuKikan2"));
+                return new UZA.Panel(this.convFiledName("ChoshuKenKeimetsuKikan2"));
             }
 
             public ChoshuKenKeimetsuKikan3(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan_ChoshuKenKeimetsuKikan2_ChoshuKenKeimetsuKikan3"));
+                return new UZA.Panel(this.convFiledName("ChoshuKenKeimetsuKikan3"));
             }
 
             public lblChoShushometsu2(): UZA.Label {
@@ -98,7 +98,7 @@ module DBZ {
             }
 
             public ChoshuKenKeimetsuKikan4(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan_ChoshuKenKeimetsuKikan2_ChoshuKenKeimetsuKikan4"));
+                return new UZA.Panel(this.convFiledName("ChoshuKenKeimetsuKikan4"));
             }
 
             public lblChoShushometsu3(): UZA.Label {
@@ -110,7 +110,7 @@ module DBZ {
             }
 
             public Kasan(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan_ChoshuKenKeimetsuKikan2_Kasan"));
+                return new UZA.Panel(this.convFiledName("Kasan"));
             }
 
             public lblKasan(): UZA.Label {
@@ -118,7 +118,7 @@ module DBZ {
             }
 
             public NofuZumiKikan(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan_ChoshuKenKeimetsuKikan2_NofuZumiKikan"));
+                return new UZA.Panel(this.convFiledName("NofuZumiKikan"));
             }
 
             public lblNofuZumiKikan(): UZA.Label {
@@ -130,7 +130,7 @@ module DBZ {
             }
 
             public GnegakuKikan(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan_GnegakuKikan"));
+                return new UZA.Panel(this.convFiledName("GnegakuKikan"));
             }
 
             public lblKeisanShiki(): UZA.Label {
@@ -138,7 +138,7 @@ module DBZ {
             }
 
             public GenGakuKikan2(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan_GnegakuKikan_GenGakuKikan2"));
+                return new UZA.Panel(this.convFiledName("GenGakuKikan2"));
             }
 
             public lblGenGakuKikan(): UZA.Label {
@@ -157,8 +157,8 @@ module DBZ {
                 return new UZA.CheckBoxList(this.convFiledName("chkHyojiKirikae"));
             }
 
-            public txtNendo(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtNendo"));
+            public txtNendo(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNendo"));
             }
 
             public dgTainoShosaiInfo(): UZA.DataGrid {
@@ -290,7 +290,7 @@ module DBZ {
             }
 
             public Modoru(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TainoGengakuShosaiInfo_Modoru"));
+                return new UZA.Panel(this.convFiledName("Modoru"));
             }
 
             public btnModoru(): UZA.Button {

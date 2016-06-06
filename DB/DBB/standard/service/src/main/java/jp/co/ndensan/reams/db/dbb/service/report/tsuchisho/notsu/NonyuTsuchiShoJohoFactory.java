@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokitsuki.NokitsukiCollection;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
+import jp.co.ndensan.reams.ur.urc.business.core.zenkizenno.ZenkiZennoKanri;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.authority.AuthorityKind;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.JigyoKubun;
@@ -51,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -330,14 +332,14 @@ public class NonyuTsuchiShoJohoFactory {
             shunoKanri.toEntity().setKibetsu(期);
             ShunoKey 収納キー = new ShunoKey(shunoKanri, 収納科目, 納期月リスト.get納期月From期(期));
             SeikyuItemMeisai 請求明細 = new SeikyuItemMeisai(
-                    収納キー, get金額By期(普徴期別金額リスト, 期), Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Collections.EMPTY_LIST);
+                    収納キー, get金額By期(普徴期別金額リスト, 期), Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Collections.EMPTY_LIST, 納期情報.get納期().get納期限());
             List<SeikyuItemMeisai> 請求明細リスト = new ArrayList<>();
             請求明細リスト.add(請求明細);
             SeikyuItem 編集元情報 = new SeikyuItem(地方公共団体コード, SeikyushoType.納付書, new RYear(調定年度.toDateString()),
                     納期情報.get納期().get通知書発行日(), 識別コード, 納期情報.get納期().get納期限(), null,
                     ToriatsukaiKigenCheckKubun.発行日を取扱期限とする, false, RString.EMPTY, false,
                     0, FukusuKibetsuShuyakuKamoku.複数科目を集約しない, FukusuKibetsuShuyakuNendo.年度毎に集約する, 請求明細リスト,
-                    納期情報.get納期().get現年過年区分());
+                    納期情報.get納期().get現年過年区分(), ZenkiZennoKanri.newBuilder().build(), RDate.MAX);
             SeikyuManager seikyuManager = new SeikyuManager();
             List<SeikyuForPrinting> 請求情報リスト1 = seikyuManager.get印字用請求情報(SubGyomuCode.DBB介護賦課, 納付書タイプ, 編集元情報);
             請求情報リスト.addAll(請求情報リスト1);

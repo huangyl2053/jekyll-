@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC12110",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "高額合算支給決定通知書発行（一括）",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC1211011",
+     "toLayoutTitle": "高額合算支給決定通知書作成(一括)",
+     "toState": "支給決定通知書発行"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1211011",
+     "layoutTitle": "高額合算支給決定通知書作成(一括)",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

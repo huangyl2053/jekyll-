@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -314,8 +315,8 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
     private void set月別取得段階(KeisangojohoAtenaKozaEntity entity, KanendoIdouKekkaIchiranSource item) {
         RString 更正前後区分 = entity.get更正前後区分();
 
-        FlexibleDate 月割開始年月1 = entity.get月割開始年月1();
-        FlexibleDate 月割終了年月1 = entity.get月割終了年月1();
+        FlexibleYearMonth 月割開始年月1 = entity.get月割開始年月1();
+        FlexibleYearMonth 月割終了年月1 = entity.get月割終了年月1();
         if (null != 月割開始年月1 && null != 月割終了年月1) {
             int 開始月1 = 月割開始年月1.getMonthValue();
             int 終了月1 = 月割終了年月1.getMonthValue();
@@ -323,8 +324,8 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
             set月別取得段階(item, 開始月1, 終了月1, 保険料算定段階1, 更正前後区分);
         }
 
-        FlexibleDate 月割開始年月2 = entity.get月割開始年月2();
-        FlexibleDate 月割終了年月2 = entity.get月割終了年月2();
+        FlexibleYearMonth 月割開始年月2 = entity.get月割開始年月2();
+        FlexibleYearMonth 月割終了年月2 = entity.get月割終了年月2();
         if (null != 月割開始年月2 && null != 月割終了年月2) {
             int 開始月2 = 月割開始年月2.getMonthValue();
             int 終了月2 = 月割終了年月2.getMonthValue();

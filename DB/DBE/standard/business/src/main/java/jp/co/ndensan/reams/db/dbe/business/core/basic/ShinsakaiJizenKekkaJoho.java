@@ -111,9 +111,9 @@ public class ShinsakaiJizenKekkaJoho
      *
      * @return 一次判定結果変更理由
      */
-    public RString get一次判定結果変更理由() {
-        return entity.getIchijiHanteiHenkoRiyu();
-    }
+//    public RString get一次判定結果変更理由() {
+//        return entity.getIchijiHanteiHenkoRiyu();
+//    }
 
     /**
      * 二次判定結果コードを返します。

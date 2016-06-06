@@ -196,7 +196,7 @@ public class DbT3061KagoKetteiMeisaiDacTest extends DbcTestDacBase {
         public static void insert(
                 FlexibleYearMonth 取扱年月,
                 RString 保険者区分,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3061KagoKetteiMeisaiEntity entity = DbT3061KagoKetteiMeisaiEntityGenerator.createDbT3061KagoKetteiMeisaiEntity();
             entity.setToriatsukaiYM(取扱年月);
             entity.setHokenshaKubun(保険者区分);

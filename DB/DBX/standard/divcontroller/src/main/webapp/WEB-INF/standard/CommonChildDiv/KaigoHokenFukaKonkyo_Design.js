@@ -424,14 +424,6 @@ var DBX;
                 return new UZA.Label(this.convFiledName("lblHokenryoSanshutsugaku"));
             };
 
-            Controls.prototype.celKikan61 = function () {
-                return new UZA.TableCell(this.convFiledName("celKikan61"));
-            };
-
-            Controls.prototype.lblHokenryogaku = function () {
-                return new UZA.Label(this.convFiledName("lblHokenryogaku"));
-            };
-
             Controls.prototype.celKikan12 = function () {
                 return new UZA.TableCell(this.convFiledName("celKikan12"));
             };
@@ -472,14 +464,6 @@ var DBX;
                 return new UZA.Label(this.convFiledName("lblHokenryoSanshutsugakuData1"));
             };
 
-            Controls.prototype.celKikan62 = function () {
-                return new UZA.TableCell(this.convFiledName("celKikan62"));
-            };
-
-            Controls.prototype.lblHokenryogakuData1 = function () {
-                return new UZA.Label(this.convFiledName("lblHokenryogakuData1"));
-            };
-
             Controls.prototype.celKikan13 = function () {
                 return new UZA.TableCell(this.convFiledName("celKikan13"));
             };
@@ -518,14 +502,6 @@ var DBX;
 
             Controls.prototype.lblHokenryoSanshutsugakuData2 = function () {
                 return new UZA.Label(this.convFiledName("lblHokenryoSanshutsugakuData2"));
-            };
-
-            Controls.prototype.celKikan63 = function () {
-                return new UZA.TableCell(this.convFiledName("celKikan63"));
-            };
-
-            Controls.prototype.lblHokenryogakuData2 = function () {
-                return new UZA.Label(this.convFiledName("lblHokenryogakuData2"));
             };
 
             Controls.prototype.txtChoteiJiyu1 = function () {
