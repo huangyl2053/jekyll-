@@ -118,7 +118,10 @@ public class NenpoYoushi3 {
 
         補正フラグ = entity.get補正フラグ();
         if (補正フラグ.equals(フラグ_修正)) {
-            List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データ();
+            List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データ(ViewStateHolder.
+                    get(NenpoYoushi3ViewStateKeys.保険料収納状況データ, Models.class),
+                    ViewStateHolder.
+                    get(NenpoYoushi3ViewStateKeys.保険給付支払状況データ, Models.class));
             if (修正データリスト == null || 修正データリスト.isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
             }
@@ -164,7 +167,10 @@ public class NenpoYoushi3 {
      * @return ResponseData<NenpoYoushi3Div>
      */
     public ResponseData<NenpoYoushi3Div> onClick_modoru(NenpoYoushi3Div div) {
-        List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データ();
+        List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データ(ViewStateHolder.
+                get(NenpoYoushi3ViewStateKeys.保険料収納状況データ, Models.class),
+                ViewStateHolder.
+                get(NenpoYoushi3ViewStateKeys.保険給付支払状況データ, Models.class));
         if (修正データリスト == null || 修正データリスト.isEmpty()) {
             return ResponseData.of(div).forwardWithEventName(DBU0060041TransitionEventName.検索に戻る).respond();
         }
