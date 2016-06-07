@@ -76,8 +76,9 @@ public class JogaiShinsainJoho {
      */
     public ResponseData<JogaiShinsainJohoDiv> onSelect_ShinsakaiIinIchiran(JogaiShinsainJohoDiv div) {
         div.setHdnModel(選択);
-        set所属機関一覧(div.getDgShinsakaiIinIchiran().getActiveRow().getShinsakaiIinCode(), div, true);
-        div.getTxtShinsakaiIinCode().setValue(div.getDgShinsakaiIinIchiran().getActiveRow().getShinsakaiIinCode());
+        RString 審査会委員コード = div.getDgShinsakaiIinIchiran().getActiveRow().getShinsakaiIinCode();
+        set所属機関一覧(審査会委員コード, div, true);
+        div.getTxtShinsakaiIinCode().setValue(審査会委員コード);
         return ResponseData.of(div).respond();
     }
 
@@ -191,21 +192,25 @@ public class JogaiShinsainJoho {
         List<dgShinsakaiIinIchiran_Row> rowList = new ArrayList<>();
         for (ShinsakaiIinRelateJoho joho : johoList) {
             RStringBuilder 所属機関 = new RStringBuilder();
-            所属機関.append(nullToEmpty(getService().get医療機関名称(joho.get市町村コード(), joho.get主治医医療機関コード())));
-            所属機関.append(nullToEmpty(getService().get事業者名称(joho.get市町村コード(), joho.get主治医医療機関コード())));
-            所属機関.append(getService().get機関名称(joho.get証記載保険者番号(), joho.get主治医医療機関コード()));
+            所属機関 = nullToEmpty(所属機関, getService().get医療機関名称(joho.get市町村コード(), joho.get主治医医療機関コード()));
+            所属機関 = nullToEmpty(所属機関, getService().get事業者名称(joho.get市町村コード(), joho.get主治医医療機関コード()));
+            所属機関 = nullToEmpty(所属機関, getService().get機関名称(joho.get証記載保険者番号(), joho.get主治医医療機関コード()));
             rowList.add(new dgShinsakaiIinIchiran_Row(joho.get介護認定審査会委員コード(), 申請書管理番号, 所属機関.toRString()));
         }
         div.getDgShinsakaiIinIchiran().setDataSource(rowList);
     }
 
-    private RString nullToEmpty(RString 名称) {
+    private RStringBuilder nullToEmpty(RStringBuilder 所属機関, RString 名称) {
         RStringBuilder sb = new RStringBuilder();
         if (!RString.isNullOrEmpty(名称)) {
-            sb.append(名称);
-            sb.append(所属機関_TMP);
+            if (RString.isNullOrEmpty(所属機関.toRString())) {
+                sb.append(名称);
+            } else {
+                sb.append(所属機関_TMP);
+                sb.append(名称);
+            }
         }
-        return sb.toRString();
+        return sb;
     }
 
     private JogaiShinsainJohoHandler getHandler(JogaiShinsainJohoDiv div) {
