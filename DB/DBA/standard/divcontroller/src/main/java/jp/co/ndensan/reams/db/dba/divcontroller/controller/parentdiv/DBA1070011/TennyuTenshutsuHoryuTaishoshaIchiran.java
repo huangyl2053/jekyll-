@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiC
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import static jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.TennyushutsuHoryuTaishosha;
 import jp.co.ndensan.reams.db.dbz.business.core.TennyushutsuHoryuTaishoshaIdentifier;
@@ -105,17 +104,17 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
         dgTennyu_Row click転入保留対象者 = div.getDgTennyu().getActiveRow();
         TaishoshaKey key = new TaishoshaKey(new HihokenshaNo(click転入保留対象者.getHihokenshaNo().getText()),
                 new ShikibetsuCode(click転入保留対象者.getShikibetsuCode().getText()), SetaiCode.EMPTY);
-        ViewStateHolder.put(資格対象者, key);
+        ViewStateHolder.put(ViewStateKeys.資格対象者, key);
         RString selectedKey = click転入保留対象者.getNextTask().getSelectedKey();
         if (KEY_資格取得.equals(selectedKey) || selectedKey.isEmpty()) {
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転入).parameter(PARAMETER_資格取得);
         }
         if (KEY_他特例適用.equals(selectedKey)) {
-            ViewStateHolder.put(資格対象者, key);
+            ViewStateHolder.put(ViewStateKeys.資格対象者, key);
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転入).parameter(PARAMETER_他特例適用);
         }
         if (KEY_除外者適用.equals(selectedKey)) {
-            ViewStateHolder.put(資格対象者, key);
+            ViewStateHolder.put(ViewStateKeys.資格対象者, key);
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転入).parameter(PARAMETER_除外者適用);
         }
         if (!ResponseHolder.isReRequest()) {
@@ -144,13 +143,13 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
         dgTenshutsu_Row click転出保留対象者 = div.getDgTenshutsu().getActiveRow();
         TaishoshaKey key = new TaishoshaKey(new HihokenshaNo(click転出保留対象者.getHihokenshaNo().getText()),
                 new ShikibetsuCode(click転出保留対象者.getShikibetsuCode().getText()), SetaiCode.EMPTY);
-        ViewStateHolder.put(資格対象者, key);
+        ViewStateHolder.put(ViewStateKeys.資格対象者, key);
         if (KEY_資格喪失.equals(click転出保留対象者.getNextTask().getSelectedKey())
                 || click転出保留対象者.getNextTask().getSelectedKey().isEmpty()) {
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転出).parameter(PARAMETER_資格喪失);
         }
         if (KEY_住所地特例適用.equals(click転出保留対象者.getNextTask().getSelectedKey())) {
-            ViewStateHolder.put(資格対象者, key);
+            ViewStateHolder.put(ViewStateKeys.資格対象者, key);
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転出).parameter(PARAMETER_住所地特例適用);
         }
         if (!ResponseHolder.isReRequest()) {
@@ -179,13 +178,13 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
         dgKoiki_Row click広域保留対象者 = div.getDgKoiki().getClickedItem();
         TaishoshaKey key = new TaishoshaKey(new HihokenshaNo(click広域保留対象者.getHihokennshaNo().getText()),
                 new ShikibetsuCode(click広域保留対象者.getShikibetsuCode().getText()), SetaiCode.EMPTY);
-        ViewStateHolder.put(資格対象者, key);
+        ViewStateHolder.put(ViewStateKeys.資格対象者, key);
         if (KEY_資格取得異動.equals(click広域保留対象者.getNextTask().getSelectedKey())
                 || click広域保留対象者.getNextTask().getSelectedKey().isEmpty()) {
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.広域).parameter(PARAMETER_資格取得異動);
         }
         if (KEY_住所地特例適用.equals(click広域保留対象者.getNextTask().getSelectedKey())) {
-            ViewStateHolder.put(資格対象者, key);
+            ViewStateHolder.put(ViewStateKeys.資格対象者, key);
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.広域).parameter(PARAMETER_住所地特例適用);
         }
         if (!ResponseHolder.isReRequest()) {
@@ -224,7 +223,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             dgTenshutsu_Row row = div.getDgTenshutsu().getSelectedItems().get(0);
             TaishoshaKey key = new TaishoshaKey(new HihokenshaNo(row.getHihokenshaNo().getText()),
                     new ShikibetsuCode(row.getShikibetsuCode().getText()), SetaiCode.EMPTY);
-            ViewStateHolder.put(資格対象者, key);
+            ViewStateHolder.put(ViewStateKeys.資格対象者, key);
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転出).parameter(PARAMETER_資格喪失);
         }
         return ResponseData.of(div).respond();
