@@ -275,7 +275,7 @@ public class TennyuHoryuTokuteiHandler {
         for (ddlTennyuHoryuTokuteiJushoIchiran_Row list : dgKoufuKaishuList) {
             if (RowState.Added.equals(list.getRowState())) {
                 RString 管理番号 = manager.getKanriNo();
-                RendoHoryuTokuteiJusho rendoHoryu = new RendoHoryuTokuteiJusho(管理番号 == null ? new RString("1")
+                RendoHoryuTokuteiJusho rendoHoryu = new RendoHoryuTokuteiJusho(RString.isNullOrEmpty(管理番号) ? new RString("1")
                         : new RString(String.valueOf(Integer.parseInt(管理番号.toString()) + 1)), new LasdecCode(list.getTxtShichosonCode()));
                 RendoHoryuTokuteiJushoBuilder builder = rendoHoryu.createBuilderForEdit();
                 builder.set住所(new AtenaJusho(list.getTxtJusho()));
