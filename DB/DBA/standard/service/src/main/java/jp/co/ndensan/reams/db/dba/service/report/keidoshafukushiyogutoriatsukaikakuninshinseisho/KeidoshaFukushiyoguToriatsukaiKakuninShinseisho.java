@@ -42,8 +42,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書Printクラスです。
  *
- * @reamsid_L DBA-0540-480  lijia
- * 
+ * @reamsid_L DBA-0540-480 lijia
+ *
  */
 public class KeidoshaFukushiyoguToriatsukaiKakuninShinseisho {
 
@@ -59,13 +59,13 @@ public class KeidoshaFukushiyoguToriatsukaiKakuninShinseisho {
         KeidoshaFukushiYoguTaiyoKakuninShinseishoProerty proerty = new KeidoshaFukushiYoguTaiyoKakuninShinseishoProerty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<KeidoshaFukushiYoguTaiyoKakuninShinseishoReportSource> assembler = createAssembler(proerty, reportManager)) {
+                ReportSourceWriter<KeidoshaFukushiYoguTaiyoKakuninShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                        null, RString.EMPTY);
+                        null, reportSourceWriter.getImageFolderPath());
                 for (KeidoshaFukushiYoguTaiyoKakuninShinseishoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
-                    ReportSourceWriter<KeidoshaFukushiYoguTaiyoKakuninShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
                 }
             }

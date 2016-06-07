@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 /**
  *
  * 介護保険受領委任払い契約申請書Printクラスです。
+ *
  * @reamsid_L DBA-0540-060 dongyabin
  */
 public class JuryoIninbaraiKeiyakuShinseisho {
@@ -61,13 +62,13 @@ public class JuryoIninbaraiKeiyakuShinseisho {
         JuryoIninharaiKeiyakuShinseishoProerty proerty = new JuryoIninharaiKeiyakuShinseishoProerty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<JuryoIninharaiKeiyakuShinseishoReportSource> assembler = createAssembler(proerty, reportManager)) {
+                ReportSourceWriter<JuryoIninharaiKeiyakuShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                        null, null);
+                        null, reportSourceWriter.getImageFolderPath());
                 for (JuryoIninharaiKeiyakuShinseishoReport report : toReports(住宅福祉出力区分,
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
-                    ReportSourceWriter<JuryoIninharaiKeiyakuShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
                 }
             }

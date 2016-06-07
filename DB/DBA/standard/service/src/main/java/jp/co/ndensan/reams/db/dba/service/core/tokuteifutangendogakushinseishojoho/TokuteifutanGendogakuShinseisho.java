@@ -104,13 +104,13 @@ public class TokuteifutanGendogakuShinseisho {
         TokuteiFutangendogakuShinseishoProperty proerty = new TokuteiFutangendogakuShinseishoProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokuteiFutangendogakuShinseishoReportSource> assembler = createAssembler(proerty, reportManager)) {
+                ReportSourceWriter<TokuteiFutangendogakuShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                        null, null);
+                        null, reportSourceWriter.getImageFolderPath());
                 for (TokuteiFutangendogakuShinseishoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei, 識別コード)) {
-                    ReportSourceWriter<TokuteiFutangendogakuShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
                 }
             }

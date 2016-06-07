@@ -68,13 +68,13 @@ public class DainigoHihokenshashoKofuShinseisho {
         HihokenshashokoufuShinseishoProperty proerty = new HihokenshashokoufuShinseishoProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<HihokenshashokoufuShinseishoReportSource> assembler = createAssembler(proerty, reportManager)) {
+                ReportSourceWriter<HihokenshashokoufuShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator
                         .create(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                                null, null);
+                                null, reportSourceWriter.getImageFolderPath());
                 for (HihokenshashokoufuShinseishoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
-                    ReportSourceWriter<HihokenshashokoufuShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
                 }
             }

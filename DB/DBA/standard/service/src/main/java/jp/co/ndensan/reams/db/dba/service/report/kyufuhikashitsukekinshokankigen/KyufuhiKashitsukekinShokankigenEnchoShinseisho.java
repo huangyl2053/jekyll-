@@ -67,8 +67,7 @@ public class KyufuhiKashitsukekinShokankigenEnchoShinseisho {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KyufuhiKashitsukekinShokankigenEnchoShinseisho}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KyufuhiKashitsukekinShokankigenEnchoShinseisho}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KyufuhiKashitsukekinShokankigenEnchoShinseisho}のインスタンス
      */
     public static KyufuhiKashitsukekinShokankigenEnchoShinseisho createInstance() {
         return InstanceProvider.create(KyufuhiKashitsukekinShokankigenEnchoShinseisho.class);
@@ -86,13 +85,13 @@ public class KyufuhiKashitsukekinShokankigenEnchoShinseisho {
         KyufuhiKashitsukekinShokankigenEnchoShinseishoProerty proerty = new KyufuhiKashitsukekinShokankigenEnchoShinseishoProerty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<KyufuKashitsukekinShokanKigenEnchoShinseishoReportSource> assembler = createAssembler(proerty, reportManager)) {
+                ReportSourceWriter<KyufuKashitsukekinShokanKigenEnchoShinseishoReportSource> reportSourceWriter
+                        = new ReportSourceWriter(assembler);
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
-                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), null, RString.EMPTY);
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), null, reportSourceWriter.getImageFolderPath());
                 for (KyufuhiKashitsukekinShokankigenEnchoShinseishoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei, 被保険者番号)) {
-                    ReportSourceWriter<KyufuKashitsukekinShokanKigenEnchoShinseishoReportSource> reportSourceWriter
-                            = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
                 }
             }

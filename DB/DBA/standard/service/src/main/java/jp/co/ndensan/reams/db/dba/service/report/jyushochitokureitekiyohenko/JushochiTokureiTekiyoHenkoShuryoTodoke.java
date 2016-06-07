@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dba.business.report.jyushochitokureitekiyohenko.Jy
 import jp.co.ndensan.reams.db.dba.entity.report.jyushochitokureitekiyohenko.JyushochiTokureiTekiyoHenkoReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
@@ -67,8 +67,7 @@ public class JushochiTokureiTekiyoHenkoShuryoTodoke {
                         NinshoshaDenshikoinshubetsuCode.保険者印, reportSourceWrite).ninshoshaYakushokuMei;
                 for (JyushochiTokureiTekiyoHenkoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
                         認証者)) {
-                    ReportSourceWriter<JyushochiTokureiTekiyoHenkoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                    report.writeBy(reportSourceWriter);
+                    report.writeBy(reportSourceWrite);
                 }
             }
             return reportManager.publish();

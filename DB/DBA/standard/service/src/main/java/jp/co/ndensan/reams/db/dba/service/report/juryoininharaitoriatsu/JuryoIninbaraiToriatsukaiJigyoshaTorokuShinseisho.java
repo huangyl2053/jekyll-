@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dba.service.report.juryoininharaitoriatsu;
 
 import java.util.ArrayList;
@@ -31,42 +30,44 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 /**
  *
  * 介護保険受領委任払い取扱事業者登録申請書のPrintクラスです。
+ *
  * @reamsid_L DBA-0540-080 dongyabin
  */
 public class JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho {
-    
+
     /**
      * 介護保険受領委任払い取扱事業者登録申請書Print処理です。
+     *
      * @return 介護保険受領委任払い取扱事業者登録申請書作成_帳票
      */
     public SourceDataCollection createJuryoIninbaraiToriatsukaiJigyoshaTorokuShinseishoChohyo() {
         JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishProerty proerty = new JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishProerty();
         try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishoReportSource> assembler = 
-                    createAssembler(proerty, reportManager)) {
+            try (ReportAssembler<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishoReportSource> assembler
+                    = createAssembler(proerty, reportManager)) {
+                ReportSourceWriter<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishoReportSource> reportSourceWriter
+                        = new ReportSourceWriter(assembler);
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, 
+                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                        null, null);
-                for (JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishReport report : toReports(ninshoshaSourceBuilder.buildSource()
-                        .ninshoshaYakushokuMei)) {
-                    ReportSourceWriter<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishoReportSource> reportSourceWriter = 
-                            new ReportSourceWriter(assembler);
-                        report.writeBy(reportSourceWriter);
+                        null, reportSourceWriter.getImageFolderPath());
+                for (JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishReport report
+                        : toReports(ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
+                    report.writeBy(reportSourceWriter);
                 }
             }
             return reportManager.publish();
         }
     }
-    
+
     private static List<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishReport> toReports(RString ninshoshaYakushokuMei) {
         List<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishReport> list = new ArrayList<>();
         JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishItem item = new JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishItem(ninshoshaYakushokuMei);
         list.add(JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishReport.createReport(item));
         return list;
     }
-    
-     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
+
+    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
             IReportProperty<T> property, ReportManager manager) {
         ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
         for (BreakAggregator<? super T, ?> breaker : property.breakers()) {

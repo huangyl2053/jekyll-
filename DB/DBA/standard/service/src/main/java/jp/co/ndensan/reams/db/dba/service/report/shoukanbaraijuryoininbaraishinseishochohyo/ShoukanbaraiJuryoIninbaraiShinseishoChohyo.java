@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dba.business.report.shoukanbaraijuryoininbaraishin
 import jp.co.ndensan.reams.db.dba.entity.report.shoukanbaraijuryoininbaraishinseishochohyo.ShokanharaiJuryoIninShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
@@ -74,16 +74,16 @@ public class ShoukanbaraiJuryoIninbaraiShinseishoChohyo {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<ShokanharaiJuryoIninShinseishoReportSource> assembler
                     = createAssembler(property, reportManager)) {
+                ReportSourceWriter<ShokanharaiJuryoIninShinseishoReportSource> reportWriter
+                        = new ReportSourceWriter(assembler);
                 INinshoshaSourceBuilderCreator builderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder builder = builderCreator.create(
                         GyomuCode.DB介護保険,
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                         null,
-                        null);
+                        reportWriter.getImageFolderPath());
                 for (ShokanharaiJuryoIninShinseishoReport report
                         : toReports(get被保険者基本情報(識別コード, 被保険者番号), builder.buildSource())) {
-                    ReportSourceWriter<ShokanharaiJuryoIninShinseishoReportSource> reportWriter
-                            = new ReportSourceWriter(assembler);
                     report.writeBy(reportWriter);
                 }
             }

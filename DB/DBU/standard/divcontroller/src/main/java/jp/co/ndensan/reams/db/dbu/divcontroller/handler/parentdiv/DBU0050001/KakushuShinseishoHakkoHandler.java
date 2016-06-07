@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0050001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.core.shinseishoshurui.ShinseishoChohyoShurui;
+import jp.co.ndensan.reams.db.dba.service.core.hihokenshashokoufushinseisho.DainigoHihokenshashoKofuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshashonadosaikofushinseisho.HihokenshashonadoSaikofuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.core.itakuservicekeikalusakuseiiraitodokedesho.KyotakuServiceKeikakuSakuseiIraiTodokedesho;
 import jp.co.ndensan.reams.db.dba.service.core.joseikinkyufushinseisho.JoseikinKyufuShinseisho;
@@ -39,13 +40,11 @@ import jp.co.ndensan.reams.db.dbd.service.report.tokubetsuchiikikasanhomonkaigo.
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050001.KakushuShinseishoHakkoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050001.dgKakushushinsei_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 各種申請書の発行処理です。
@@ -67,10 +66,12 @@ public class KakushuShinseishoHakkoHandler {
      * コンストラクタです。
      *
      * @param div 各種申請書Div
+     * @param data 資格対象者
      */
-    public KakushuShinseishoHakkoHandler(KakushuShinseishoHakkoDiv div) {
+    public KakushuShinseishoHakkoHandler(KakushuShinseishoHakkoDiv div,
+            TaishoshaKey data) {
         this.div = div;
-        this.data = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
+        this.data = data;
     }
 
     /**
@@ -116,8 +117,8 @@ public class KakushuShinseishoHakkoHandler {
                     sourceData = todoke.createHihokenshashonadoSaikofuShinseishoChohyo(識別コード, 被保険者番号);
                 }
                 if (ShinseishoChohyoShurui.介護保険被保険者証交付申請書_第2号被保険者.get名称().equals(row.getShinseisho())) {
-                    ShikakuShutokuIdoSoshitsuTodoke todoke = new ShikakuShutokuIdoSoshitsuTodoke();
-                    sourceData = todoke.createShikakuShutokuIdoSoshitsuTodokeChohyo(識別コード, 被保険者番号);
+                    DainigoHihokenshashoKofuShinseisho todoke = new DainigoHihokenshashoKofuShinseisho();
+                    sourceData = todoke.createDainigoHihokenshashoKofuShinseishoChohyo(識別コード, 被保険者番号);
                 }
                 if (ShinseishoChohyoShurui.介護保険住所地特例適用_変更_終了届.get名称().equals(row.getShinseisho())) {
                     JushochiTokureiTekiyoHenkoShuryoTodoke todoke = new JushochiTokureiTekiyoHenkoShuryoTodoke();

@@ -72,13 +72,13 @@ public class JoseikinKyufuShinseisho {
         JoseikinKyufuShinseishoProperty proerty = new JoseikinKyufuShinseishoProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<JoseikinKyufuShinseishoReportSource> assembler = createAssembler(proerty, reportManager)) {
+                ReportSourceWriter<JoseikinKyufuShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator
                         .create(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                                null, assembler.getImageFolderPath());
+                                null, reportSourceWriter.getImageFolderPath());
                 for (JoseikinKyufuShinseishoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
-                    ReportSourceWriter<JoseikinKyufuShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
                 }
             }
