@@ -17,8 +17,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.dgIryohokenIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.datagridRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -27,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 資格異動訂正の画面処理Handlerクラスです。
@@ -42,11 +39,6 @@ public class SikakuIdouTeiseiHandler {
     private static final RString 状態_登録 = new RString("登録");
     private static final RString 表示モード = new RString("HihokenrirekiNashiMode");
     private final SikakuIdouTeiseiDiv div;
-    /**
-     * テストデータ
-     */
-    private final HihokenshaNo 被保険者番号;
-    private final ShikibetsuCode 識別コード;
 
     /**
      * コンストラクタです。
@@ -55,15 +47,16 @@ public class SikakuIdouTeiseiHandler {
      */
     public SikakuIdouTeiseiHandler(SikakuIdouTeiseiDiv div) {
         this.div = div;
-        TaishoshaKey key = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
-        this.識別コード = key.get識別コード();
-        this.被保険者番号 = key.get被保険者番号();
     }
 
     /**
      * 画面を初期化します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 識別コード 識別コード
+     * @return SikakuIdouTeiseiJoho
      */
-    public void onLoad() {
+    public SikakuIdouTeiseiJoho onLoad(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         kaigoShikakuKihon_onload(被保険者番号, 表示モード);
         kaigoNinteiAtenaInfo_onload(識別コード);
         div.getShikakuShutokuJoho().getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().initialize(被保険者番号, 識別コード);
@@ -78,8 +71,8 @@ public class SikakuIdouTeiseiHandler {
                 .initialize(識別コード, 被保険者番号);
         SikakuIdouTeiseiJoho joho = new SikakuIdouTeiseiJoho();
         joho.setIryoHokenJohoList(set初期化時の医療保険情報());
-        joho.setRoreiFukushiJohoList(set初期化時の老福年金情報());
-        ViewStateHolder.put(ViewStateKeys.資格異動の訂正_初期化時医療保険情報, joho);
+        joho.setRoreiFukushiJohoList(set初期化時の老福年金情報(識別コード));
+        return joho;
     }
 
     private void setButtonDisable() {
@@ -114,7 +107,7 @@ public class SikakuIdouTeiseiHandler {
         return oldList;
     }
 
-    private List<RoreiFukushiJoho> set初期化時の老福年金情報() {
+    private List<RoreiFukushiJoho> set初期化時の老福年金情報(ShikibetsuCode 識別コード) {
         List<RoreiFukushiJoho> roreiFukushiJohoList = new ArrayList<>();
         for (datagridRireki_Row row : div.getShikakuShutokuJoho()
                 .getTplRofukuNenkin().getRohukuNenkin().getCcdRohukuNenkin().getDataGridList()) {
@@ -142,14 +135,11 @@ public class SikakuIdouTeiseiHandler {
      *
      * @param 状態 状態
      */
-    public void setパラメータ(RString 状態) {
-        ViewStateHolder.put(ViewStateKeys.資格異動の訂正_識別コード, 識別コード);
-        ViewStateHolder.put(ViewStateKeys.資格異動の訂正_被保番号, 被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.資格異動の訂正_状態, 状態);
+    public ShikakuRirekiJoho setパラメータ(RString 状態) {
+        ShikakuRirekiJoho joho = new ShikakuRirekiJoho();
         if (!new RString("追加").equals(状態)) {
             dgShikakuShutokuRireki_Row row = div.getShikakuShutokuJoho().getShikakuTokusoRirekii()
                     .getCcdShikakuTokusoRireki().getDataGridSelectItem();
-            ShikakuRirekiJoho joho = new ShikakuRirekiJoho();
             joho.setDaNo(row.getDaNo());
             joho.setHihokenshaKubun(row.getHihokenshaKubun());
             joho.setHihokenshaKubunKey(row.getHihokenshaKubunKey());
@@ -170,19 +160,20 @@ public class SikakuIdouTeiseiHandler {
             joho.setSoshitsuJiyuKey(row.getSoshitsuJiyuKey());
             joho.setSoshitsuTodokedeDate(row.getSoshitsuTodokedeDate().getValue());
             joho.setState(row.getState());
-            ViewStateHolder.put(ViewStateKeys.資格異動の訂正_資格得喪情報, joho);
         }
+        return joho;
     }
 
     /**
      * 保存処理します。
      *
+     * @param 識別コード 識別コード
+     * @param joho 初期化時の医療保険情報
      */
-    public void save() {
-        SikakuIdouTeiseiJoho joho = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_初期化時医療保険情報, SikakuIdouTeiseiJoho.class);
+    public void save(ShikibetsuCode 識別コード, SikakuIdouTeiseiJoho joho) {
         HihokenshaShikakuTeiseiManager service = HihokenshaShikakuTeiseiManager.createInstance();
         if (チェックNG.equals(service.checkIryoHoken(joho.getIryoHokenJohoList(), set初期化時の医療保険情報()))
-                && チェックNG.equals(service.checkRofukuNenkin(joho.getRoreiFukushiJohoList(), set初期化時の老福年金情報()))) {
+                && チェックNG.equals(service.checkRofukuNenkin(joho.getRoreiFukushiJohoList(), set初期化時の老福年金情報(識別コード)))) {
             throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
         }
         div.getShikakuShutokuJoho().getTplIryoHoken().getIryoHokenRirekii().getCcdIryoHokenRireki().save();

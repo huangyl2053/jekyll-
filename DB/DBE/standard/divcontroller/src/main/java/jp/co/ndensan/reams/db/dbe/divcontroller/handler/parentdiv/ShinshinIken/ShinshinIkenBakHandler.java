@@ -15,9 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShinshinIk
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku01;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku02;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -111,23 +109,33 @@ public class ShinshinIkenBakHandler {
      * コンストラクタです。
      *
      * @param div 画面情報
+     * @param 要介護認定申請情報 要介護認定申請情報
+     * @param 管理番号 管理番号
+     * @param 履歴番号 履歴番号
+     * @param 要介護認定主治医意見書情報_TMP 要介護認定主治医意見書情報_TMP
      */
-    public ShinshinIkenBakHandler(ShinshinIkenDiv div) {
+    public ShinshinIkenBakHandler(ShinshinIkenDiv div,
+            NinteiShinseiJoho 要介護認定申請情報,
+            RString 管理番号,
+            RString 履歴番号,
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報_TMP) {
         this.div = div;
-        this.要介護認定申請情報 = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_意見書情報, NinteiShinseiJoho.class);
-        this.管理番号 = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class);
-        this.履歴番号 = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class);
-        this.要介護認定主治医意見書情報_TMP = ViewStateHolder.get(ViewStateKeys.心身の意見入力_要介護認定主治医意見書情報, ShujiiIkenshoJoho.class);
+        this.要介護認定申請情報 = 要介護認定申請情報;
+        this.管理番号 = 管理番号;
+        this.履歴番号 = 履歴番号;
+        this.要介護認定主治医意見書情報_TMP = 要介護認定主治医意見書情報_TMP;
     }
 
     /**
      * 確定ボタンを押します。
+     *
+     * @return 要介護認定申請情報
      */
-    public void onClickBtnKakutei() {
-        set呼び出し元画面への戻り値();
+    public NinteiShinseiJoho onClickBtnKakutei() {
+        return set呼び出し元画面への戻り値();
     }
 
-    private void set呼び出し元画面への戻り値() {
+    private NinteiShinseiJoho set呼び出し元画面への戻り値() {
         set意見項目Emtpy(要介護認定主治医意見書情報_TMP, 寝たきり度);
         for (RString key : div.getChkShogaiKoreishaNichijoSeikatsuJiritsudo().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, 寝たきり度, key);
@@ -220,10 +228,10 @@ public class ShinshinIkenBakHandler {
         for (RString key : div.getChkKakoTaijuHenka().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, 過去6カ月の体重の変化, set過去6カ月の体重(key));
         }
-        set呼び出し元画面への戻り値_下();
+        return set呼び出し元画面への戻り値_下();
     }
 
-    private void set呼び出し元画面への戻り値_下() {
+    private NinteiShinseiJoho set呼び出し元画面への戻り値_下() {
         set意見項目(要介護認定主治医意見書情報_TMP, 四肢欠損, keyToItemNasiari(div.getChkShishiKesson().getSelectedKeys()));
         set記入項目(要介護認定主治医意見書情報_TMP, 四肢欠損_記入項目, div.getTxtShishiKessonBui().getValue());
         set意見項目(要介護認定主治医意見書情報_TMP, 麻痺, keyToItemNasiari(div.getChkMahi().getSelectedKeys()));
@@ -306,7 +314,8 @@ public class ShinshinIkenBakHandler {
                 Integer.valueOf(履歴番号.toString()));
         要介護認定申請情報.createBuilderForEdit().setShujiiIkenshoIraiJoho(要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key)
                 .createBuilderForEdit().setShujiiIkenshoJoho(要介護認定主治医意見書情報_TMP).build());
-        ViewStateHolder.put(ViewStateKeys.主治医意見書登録_意見書情報, 要介護認定申請情報);
+        return 要介護認定申請情報;
+
     }
 
     private void set意見項目Emtpy(ShujiiIkenshoJoho 要介護認定主治医意見書情報_T, int 連番) {

@@ -134,7 +134,10 @@ public class NenpoYoushiki2No8 {
      * @return ResponseData<NenpoYoushiki2No8Div>
      */
     public ResponseData<NenpoYoushiki2No8Div> onClick_modoru(NenpoYoushiki2No8Div div) {
-        List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データ();
+        List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データ(ViewStateHolder.
+                get(NenpoYoushiki2No8ViewStateKeys.件数データグリッド, Models.class),
+                ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.費用額データグリッド, Models.class),
+                ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.給付額データグリッド, Models.class));
         if (修正データリスト == null || 修正データリスト.isEmpty()) {
             return ResponseData.of(div).forwardWithEventName(DBU0060031TransitionEventName.検索に戻る).respond();
         }
@@ -161,7 +164,10 @@ public class NenpoYoushiki2No8 {
                 = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
         補正フラグ = entity.get補正フラグ();
         if (補正フラグ.equals(フラグ_修正)) {
-            List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データ();
+            List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データ(ViewStateHolder.
+                    get(NenpoYoushiki2No8ViewStateKeys.件数データグリッド, Models.class),
+                    ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.費用額データグリッド, Models.class),
+                    ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.給付額データグリッド, Models.class));
             if (修正データリスト == null || 修正データリスト.isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
             }

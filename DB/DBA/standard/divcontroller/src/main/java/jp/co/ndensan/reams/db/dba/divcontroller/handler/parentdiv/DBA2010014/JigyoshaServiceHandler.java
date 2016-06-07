@@ -10,7 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010014.JigyoshaServiceDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBZCodeShubetsu;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.core.hokenja.Hokenja;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsu;
@@ -26,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
@@ -56,13 +54,14 @@ public class JigyoshaServiceHandler {
 
     /**
      * 追加状態の画面設定します。
+     *
+     * @param 事業者番号 事業者番号
      */
-    public void set状態_追加() {
+    public void set状態_追加(RString 事業者番号) {
         div.getJigyoshaServiceKihon().getTxtTorokuHokenshaName().setDisabled(true);
         div.getJigyoshaServiceKihon().getDdlServiceShuruiChiikiMitchaku().setDisabled(false);
         div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNo().setDisabled(true);
-        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNo().setValue(ViewStateHolder
-                .get(ViewStateKeys.サービス登録_事業者番号, RString.class));
+        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNo().setValue(事業者番号);
     }
 
     /**
