@@ -80,6 +80,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
         if (導入形態コード.is広域()) {
             div.getTplTennyu().setVisible(false);
             div.getTplTenshutsu().setVisible(false);
+            div.getTabTennyuTenshutsuHoryuTaishosha().setSelectedItem(div.getTplKoiki());
         } else {
             div.getTplKoiki().setVisible(false);
         }

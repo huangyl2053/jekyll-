@@ -37,7 +37,9 @@ public class TennyuTenshutsuHoryuTaishoshaIchiranHandler {
         for (ITennyuTenshutsuHoryuTaishosha taishosha : 転出保留対象者情報) {
             dgTenshutsu_Row row = new dgTenshutsu_Row();
             row.getShichosonCode().setValue(taishosha.get市町村コード().value());
-            row.getHihokenshaNo().setValue(taishosha.get被保険者番号().value());
+            if (taishosha.get被保険者番号() != null) {
+                row.getHihokenshaNo().setValue(taishosha.get被保険者番号().value());
+            }
             row.getShikibetsuCode().setValue(taishosha.get識別コード().value());
             row.setRirekiNo(new RString(taishosha.get履歴番号()));
             if (taishosha.get宛名氏名() != null) {
@@ -79,7 +81,9 @@ public class TennyuTenshutsuHoryuTaishoshaIchiranHandler {
         for (ITennyuTenshutsuHoryuTaishosha taishosha : 転入保留対象者情報) {
             dgTennyu_Row row = new dgTennyu_Row();
             row.getShichosonCode().setValue(taishosha.get市町村コード().value());
-            row.getHihokenshaNo().setValue(taishosha.get被保険者番号().value());
+            if (taishosha.get被保険者番号() != null) {
+                row.getHihokenshaNo().setValue(taishosha.get被保険者番号().value());
+            }
             row.getShikibetsuCode().setValue(taishosha.get識別コード().value());
             row.setRirekiNo(new RString(taishosha.get履歴番号()));
             if (taishosha.get宛名氏名() != null) {
@@ -121,7 +125,9 @@ public class TennyuTenshutsuHoryuTaishoshaIchiranHandler {
         for (ITennyuTenshutsuHoryuTaishosha taishosha : 広域保留対象者情報) {
             dgKoiki_Row row = new dgKoiki_Row();
             row.getShichosonCode().setValue(taishosha.get市町村コード().value());
-            row.getHihokennshaNo().setValue(taishosha.get被保険者番号().value());
+            if (taishosha.get被保険者番号() != null) {
+                row.getHihokennshaNo().setValue(taishosha.get被保険者番号().value());
+            }
             row.getShikibetsuCode().setValue(taishosha.get識別コード().value());
             row.setRirekiNo(new RString(taishosha.get履歴番号()));
             if (taishosha.get宛名氏名() != null) {
