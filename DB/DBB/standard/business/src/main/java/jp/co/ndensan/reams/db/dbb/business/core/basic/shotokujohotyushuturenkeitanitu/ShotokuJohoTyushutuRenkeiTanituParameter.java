@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeitanitu;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.shichoson.ShichosonJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -12,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 出力帳票一覧のクラスです。
  *
- * @reamsid_L DBB-1690-050 sunhui
+ * @reamsid_L DBB-1690-030 sunhui
  */
 @lombok.Getter
 @lombok.Setter
@@ -20,10 +22,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShotokuJohoTyushutuRenkeiTanituParameter {
 
     private FlexibleYear 処理年度;
-    private RString 所得情報取込処理状態;
-    private ReportId 出力順ID;
+    private List<ShichosonJohoEntity> 市町村情報List;
+    private RString 出力順ID;
     private ReportId 帳票ID;
     private RString 共有ファイル名;
-    private ReportId 共有ファイルID;
+    private RString 共有ファイルID;
     private RString 処理区分;
 }

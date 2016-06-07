@@ -63,6 +63,8 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     private static final RString 年度内連番_1 = new RString("0001");
     private static final RString 年度内連番_2 = new RString("0002");
     private static final RString 処理枝番 = new RString("0001");
+    private static final RString FORMAT_補00 = new RString("00%s");
+    private static final RString 処理枝番_0001 = new RString("0001");
 
     /**
      * 主キーで処理日付管理マスタを取得します。
@@ -999,19 +1001,42 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
      * 処理日付管理マスタテーブルから連携（当初）所得情報取得します。
      *
      * @param 年度 FlexibleYear
-     * @param 市町村識別ID LasdecCode
+     * @param 市町村識別ID RString
      * @return DbT7022ShoriDateKanriEntity
      */
     @Transaction
-    public DbT7022ShoriDateKanriEntity select処理日付管理マスタ_当初所得情報抽出(FlexibleYear 年度, LasdecCode 市町村識別ID) {
+    public DbT7022ShoriDateKanriEntity select処理日付管理マスタ_当初所得情報抽出(FlexibleYear 年度, RString 市町村識別ID) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
                                 eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
                                 eq(shoriName, ShoriName.当初所得引出.get名称()),
-                                eq(shoriEdaban, 処理枝番),
-                                eq(shichosonCode, 市町村識別ID),
+                                eq(shoriEdaban, 処理枝番_0001),
+                                eq(shichosonCode, new LasdecCode(市町村識別ID)),
+                                eq(nendo, 年度),
+                                eq(nendoNaiRenban, 年度内連番_1))).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから連携（当初）所得情報取得します。
+     *
+     * @param 年度 FlexibleYear
+     * @param 市町村コード LasdecCode
+     * @param 市町村識別ID RString
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select処理日付管理マスタ_所得情報抽出連携当初(FlexibleYear 年度, LasdecCode 市町村コード, RString 市町村識別ID) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(shichosonCode, 市町村コード),
+                                eq(shoriName, ShoriName.当初所得引出.get名称()),
+                                eq(shoriEdaban, String.format(FORMAT_補00.toString(), 市町村識別ID)),
                                 eq(nendo, 年度),
                                 eq(nendoNaiRenban, 年度内連番_1))).
                 toObject(DbT7022ShoriDateKanriEntity.class);
@@ -1032,7 +1057,31 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(shoriName, ShoriName.所得引出.get名称()),
                                 eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
                                 eq(nendo, 年度),
-                                eq(shoriEdaban, 処理枝番))).
+                                eq(shoriEdaban, 処理枝番_0001))).
+                order(by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから連携（異動）所得情報取得します。
+     *
+     * @param 年度 FlexibleYear
+     * @param 市町村コード LasdecCode
+     * @param 市町村識別ID RString
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select処理日付管理マスタ_所得情報抽出連携異動(FlexibleYear 年度, LasdecCode 市町村コード, RString 市町村識別ID) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(shichosonCode, 市町村コード),
+                                eq(shoriName, ShoriName.所得引出.get名称()),
+                                eq(shoriEdaban, String.format(FORMAT_補00.toString(), 市町村識別ID)),
+                                eq(nendo, 年度),
+                                eq(nendoNaiRenban, 年度内連番_1))).
                 order(by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }

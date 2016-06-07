@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeitanitu;
+package jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeikoiki;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,12 +15,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 出力帳票一覧のクラスです。
  *
- * @reamsid_L DBB-1690-050 sunhui
+ * @reamsid_L DBB-1690-040 sunhui
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShotokuJohoBatchresultTanituParameter implements Serializable {
+public class ShotokuJohoTyushutuRenkeiKoikiParameter implements Serializable {
 
     private FlexibleYear 処理年度;
     private List<ShichosonJohoEntity> 市町村情報List;

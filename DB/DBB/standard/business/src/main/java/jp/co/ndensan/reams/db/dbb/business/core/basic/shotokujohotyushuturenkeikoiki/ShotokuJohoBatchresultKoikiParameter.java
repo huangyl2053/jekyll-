@@ -7,12 +7,13 @@ package jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkei
 
 import java.io.Serializable;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.shichoson.ShichosonEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.shichoson.ShichosonJohoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 出力帳票一覧のクラスです。
+ * 所得情報抽出・連携（広域用）出力帳票一覧のクラスです。
  *
  * @reamsid_L DBB-1690-040 sunhui
  */
@@ -22,9 +23,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShotokuJohoBatchresultKoikiParameter implements Serializable {
 
     private FlexibleYear 処理年度;
-    private List<ShichosonEntity> 市町村情報List;
+    private List<ShichosonJohoEntity> 市町村情報List;
     private RString 出力順ID;
-    private RString 帳票ID;
+    private ReportId 帳票ID;
     private RString 共有ファイル名;
     private RString 共有ファイルID;
     private RString 処理区分;
