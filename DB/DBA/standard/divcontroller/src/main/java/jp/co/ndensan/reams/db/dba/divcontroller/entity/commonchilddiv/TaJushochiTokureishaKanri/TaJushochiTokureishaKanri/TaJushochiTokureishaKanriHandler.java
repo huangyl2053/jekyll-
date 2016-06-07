@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiBuilder;
@@ -238,9 +239,9 @@ public class TaJushochiTokureishaKanriHandler {
         if (is解除日) {
             for (dgJushochiTokureiRireki_Row rireki_Row : rowList) {
                 if (変更後適用日.equals(rireki_Row.getHenkouzenTekiyoYMD())) {
-                    変更後枝番 = new RString(Integer.parseInt(rireki_Row.getHenkouzenEdaNo().toString()) + 1).padZeroToLeft(4);
+                    変更後枝番 = new RString(Integer.parseInt(rireki_Row.getHenkouzenEdaNo().trim().toString()) + 1).padZeroToLeft(4);
                 } else {
-                    変更後枝番 = new RString(Integer.parseInt(row.getHenkouzenEdaNo().toString()) + 1).padZeroToLeft(4);
+                    変更後枝番 = new RString(Integer.parseInt(row.getHenkouzenEdaNo().trim().toString()) + 1).padZeroToLeft(4);
                 }
             }
         }
@@ -387,6 +388,8 @@ public class TaJushochiTokureishaKanriHandler {
             rowList.add(row);
             int 最新履歴番号 = TaJushochiTokureisyaKanriManager.createInstance().get最新履歴番号(識別コード);
             ShisetsuNyutaisho taisho = new ShisetsuNyutaisho(識別コード, 最新履歴番号);
+            変更後枝番 = TaJushochiTokureisyaKanriManager.createInstance().
+                    get最新枝番(識別コード, new FlexibleDate(div.getTxtTekiyobi().getValue().toString()));
             TashichosonJushochiTokurei 住所地特例の識別子
                     = new TashichosonJushochiTokurei(識別コード, new FlexibleDate(div.getTxtTekiyobi().getValue().toString()), 変更後枝番);
             他住所地特例Model.add(住所地特例の識別子);
@@ -419,7 +422,7 @@ public class TaJushochiTokureishaKanriHandler {
             }
             row.setRowState(RowState.Modified);
             RString 変更前枝番 = row.getEdaNo();
-            変更後枝番 = new RString(Integer.parseInt(変更前枝番.toString()) + 1).padZeroToLeft(4);
+            変更後枝番 = new RString(Integer.parseInt(変更前枝番.trim().toString()) + 1).padZeroToLeft(4);
             row.setHenkouzenEdaNo(変更後枝番);
             TashichosonJushochiTokurei 住所地特例の識別子
                     = new TashichosonJushochiTokurei(識別コード, new FlexibleDate(div.getTxtKaijyobi().getValue().toString()), 変更後枝番);
@@ -489,7 +492,7 @@ public class TaJushochiTokureishaKanriHandler {
                 FlexibleDate 適用異動日 = new FlexibleDate(rowList.get(0).getTekiyoYMD().getValue().toString());
                 dgJushochiTokureiRireki_Row 適用情報 = rowList.get(0);
                 TashichosonJushochiTokureiIdentifier 住所地特例の識別子
-                        = new TashichosonJushochiTokureiIdentifier(識別コード, 適用異動日, new RString("0001"));
+                        = new TashichosonJushochiTokureiIdentifier(識別コード, 適用異動日, TaJushochiTokureisyaKanriManager.createInstance().get最新枝番(識別コード, 適用異動日));
                 TaJushochiTokureisyaKanriManager.createInstance().regTaJushochiTokurei(set適用状態他住所地特例(他住所地特例Model.get(住所地特例の識別子), 適用情報).toEntity());
                 Collections.sort(rowList, new DateComparatorRirekiNo());
                 int 最新履歴番号 = TaJushochiTokureisyaKanriManager.createInstance().get最新履歴番号(識別コード);
@@ -827,13 +830,20 @@ public class TaJushochiTokureishaKanriHandler {
             ShisetsuNyutaisho taisho,
             dgJushochiTokureiRireki_Row row) {
         UaFt200FindShikibetsuTaishoEntity 宛名情報 = get宛名情報();
+        ShisetsuNyutaishoBuilder 施設入退所 = taisho.createBuilderForEdit();
+        if (!RString.isNullOrEmpty(row.getNyushoShisetsuShurui())) {
+            施設入退所.set入所施設種類(row.getNyushoShisetsuShurui());
+        }
+        if (!RString.isNullOrEmpty(row.getNyushoShisetsu())) {
+            施設入退所.set入所施設コード(new JigyoshaNo(row.getNyushoShisetsu()));
+        }
+        if (row.getNyushoYMD() != null && row.getNyushoYMD().getValue() != null) {
+            施設入退所.set入所年月日(new FlexibleDate(row.getNyushoYMD().getValue().toString()));
+        }
         return taisho.createBuilderForEdit()
                 .set市町村コード(宛名情報.getGenLasdecCode())
                 .set台帳種別(new RString("2"))
-                .set入所施設種類(row.getNyushoShisetsuShurui())
-                .set入所施設コード(new JigyoshaNo(row.getNyushoShisetsu()))
                 .set入所処理年月日(new FlexibleDate(RDate.getNowDateTime().getDate().toDateString()))
-                .set入所年月日(new FlexibleDate(row.getNyushoYMD().getValue().toString()))
                 .build();
     }
 
