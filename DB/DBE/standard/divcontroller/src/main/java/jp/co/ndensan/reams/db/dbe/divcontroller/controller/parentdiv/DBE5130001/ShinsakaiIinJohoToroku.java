@@ -396,7 +396,8 @@ public class ShinsakaiIinJohoToroku {
      */
     public ResponseData onClick_btnToroku(ShinsakaiIinJohoTorokuDiv div) {
         ValidationMessageControlPairs validationMessages
-                = new ShinsakaiIinJohoTorokuValidationHandler(div).審査会委員情報入力チェック();
+                = new ShinsakaiIinJohoTorokuValidationHandler(div).審査会委員情報入力チェック(
+                        更新モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class)));
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
