@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaikaisaioshirasetsuchi;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +22,7 @@ import lombok.Setter;
 public class ShinsakaiKaisaiOshiraseTsuchiItem {
 
     private RString 文書番号;
-    private RString 発行日;
+    private RDate 発行日;
     private RString 宛名郵便番号;
     private RString 宛名住所;
     private RString 宛名機関名;
@@ -40,11 +42,12 @@ public class ShinsakaiKaisaiOshiraseTsuchiItem {
     private RString 認証者役職名2行目;
     private RString 通知文1;
     private RString 通知文2;
-    private RString 開催日時;
+    private FlexibleDate 開催予定年月日;
+    private RString 予定時刻;
     private RString 開催会場;
     private RString 合議体;
     private RString 開催番号;
-    private RString 開催日;
+    private FlexibleDate 開催日;
     private RString 開催時刻;
     private RString 合議体番号;
     private RString 会場;
