@@ -90,8 +90,14 @@ public class JogaiShinsainJohoHandler {
         }
     }
 
+    /**
+     * 未入力のメッセージを定義します。
+     */
     public static enum RRVMessages implements IValidationMessage {
 
+        /**
+         * 未入力
+         */
         未入力(UrWarningMessages.未入力, "審査会委員コード");
         private final Message message;
 
