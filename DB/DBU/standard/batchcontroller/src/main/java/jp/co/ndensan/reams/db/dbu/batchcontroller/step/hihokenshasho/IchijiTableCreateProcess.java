@@ -22,17 +22,15 @@ import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshasho.IIk
 import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashohakkoichiranhyo.HihokenshashoHakkoIchiranHyoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
+import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -85,8 +83,14 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
             }
             iIkkatsuHakkoMapper.updateShisetyuJotaiFlag();
         } else {
+            Map<Integer, RString> 改頁Map = ReportUtil.get改頁項目(SubGyomuCode.DBA介護資格,
+                    processPrm.getShutsuryokujunId(),
+                    帳票ID);
+            Map<Integer, ISetSortItem> 出力順Map = ReportUtil.get出力順項目(SubGyomuCode.DBA介護資格,
+                    processPrm.getShutsuryokujunId(),
+                    帳票ID);
             List<IchiranyoShohakkoshaEntity> ichiranyoShohakkoshaEntityList = new HihokenshashoHakkoIchiranHyoFinder().
-                    createHihokenshashoHakkoIchiranHyo(processPrm.getKofuYMD(), データ抽出list, get出力順());
+                    createHihokenshashoHakkoIchiranHyo(processPrm.getKofuYMD(), データ抽出list, 出力順Map, 改頁Map);
             for (IchiranyoShohakkoshaEntity ichiranyoShohakkoshaEntity : ichiranyoShohakkoshaEntityList) {
                 itemList.add(setItem(ichiranyoShohakkoshaEntity));
             }
@@ -126,19 +130,6 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
                 entity.get施設名(),
                 entity.get計画事業所名(),
                 entity.get交付_非交付事由());
-    }
-
-    private IOutputOrder get出力順() {
-        IOutputOrder shutsuryokujunId = null;
-        IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
-        if (!RString.isNullOrEmpty(processPrm.getShutsuryokujunId())) {
-            shutsuryokujunId = chohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBA介護資格,
-                    帳票ID,
-                    reamsLoginID,
-                    Long.valueOf(processPrm.getShutsuryokujunId().toString()));
-        }
-        return shutsuryokujunId;
     }
 
     private void アクセスログ(IkkatsuHakkoRelateEntity entity) {
@@ -195,7 +186,8 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
                     mybatisPrm.getShikibetsuCode(),
                     new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
                     mybatisPrm.getPsmAtesaki(),
-                    mybatisPrm.getNenreiTotatsuYMD());
+                    mybatisPrm.getNenreiTotatsuYMD(),
+                    RString.EMPTY);
             List<IkkatsuHakkoRelateEntity> 年齢到達予定者List = iIkkatsuHakkoMapper.getNenreiTotatsuYotesha(mybatisParam);
             for (IkkatsuHakkoRelateEntity nenreiTotatsuYotesha : 年齢到達予定者List) {
                 HihokenshaNo hihokenshaNo = HihokenshanotsukibanFinder.createInstance().

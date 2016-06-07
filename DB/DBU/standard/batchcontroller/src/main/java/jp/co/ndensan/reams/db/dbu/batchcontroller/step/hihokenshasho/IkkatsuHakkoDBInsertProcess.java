@@ -140,7 +140,8 @@ public class IkkatsuHakkoDBInsertProcess extends SimpleBatchProcessBase {
                 mybatisPrm.getShikibetsuCode(),
                 mybatisPrm.getPsmShikibetsuTaisho(),
                 mybatisPrm.getPsmAtesaki(),
-                mybatisPrm.getNenreiTotatsuYMD());
+                mybatisPrm.getNenreiTotatsuYMD(),
+                RString.EMPTY);
         IkkatsuHakkoRelateEntity rirekiNoEntity = iIkkatsuHakkoMapper.getSaishinrirekiNo(mybatisParam);
         int rirekiNo;
         if (rirekiNoEntity == null) {

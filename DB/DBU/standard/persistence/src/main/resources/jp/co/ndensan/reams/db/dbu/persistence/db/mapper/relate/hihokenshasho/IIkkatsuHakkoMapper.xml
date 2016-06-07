@@ -2424,6 +2424,9 @@ and open the template in the editor.
         "shisetyuJotaiFlag"
         FROM
         "TmpHihokenshasho_Ichi"
+        <if test="orderbyFlag">
+            ${orderby}
+        </if> 
     </select>
       
     <!--同一被保険者番号の最大履歴番号を取得します。 -->

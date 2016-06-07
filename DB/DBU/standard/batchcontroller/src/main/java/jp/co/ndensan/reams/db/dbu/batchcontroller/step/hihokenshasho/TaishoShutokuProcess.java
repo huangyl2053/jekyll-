@@ -255,7 +255,8 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
                 mybatisPrm.getShikibetsuCode(),
                 mybatisPrm.getPsmShikibetsuTaisho(),
                 mybatisPrm.getPsmAtesaki(),
-                ageCalculator.get年齢到達日(NENREI_VALUE));
+                ageCalculator.get年齢到達日(NENREI_VALUE),
+                RString.EMPTY);
         return mybatisParam;
     }
 
@@ -274,7 +275,8 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
                 mybatisPrm.getShikibetsuCode(),
                 mybatisPrm.getPsmShikibetsuTaisho(),
                 mybatisPrm.getPsmAtesaki(),
-                mybatisPrm.getNenreiTotatsuYMD());
+                mybatisPrm.getNenreiTotatsuYMD(),
+                RString.EMPTY);
         return mybatisParam;
     }
 }

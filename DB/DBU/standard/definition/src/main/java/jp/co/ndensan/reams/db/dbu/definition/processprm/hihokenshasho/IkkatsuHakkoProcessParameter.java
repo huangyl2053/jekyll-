@@ -130,6 +130,7 @@ public class IkkatsuHakkoProcessParameter implements IBatchProcessParameter {
                 shikibetsuCode,
                 psmShikibetsuTaisho,
                 psmAtesaki,
-                nenreiTotatsuYMD);
+                nenreiTotatsuYMD,
+                RString.EMPTY);
     }
 }

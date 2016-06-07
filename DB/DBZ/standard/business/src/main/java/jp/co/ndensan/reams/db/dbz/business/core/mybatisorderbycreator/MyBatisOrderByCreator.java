@@ -124,9 +124,16 @@ public final class MyBatisOrderByCreator {
             if (commaCount != 0) {
                 orderByClause = orderByClause.append(SPACE).append(COMMA);
             }
-            orderByClause = orderByClause.append(SPACE).append(tableName)
-                    .append(POINT).append(QUOTES).append(mapping.toValue(setSortItem.getDB項目名()).getItem()).append(QUOTES)
-                    .append(SPACE).append(setSortItem.get昇降順().getOrder());
+            if (!RString.isNullOrEmpty(tableName)) {
+                orderByClause = orderByClause.append(SPACE).append(tableName)
+                        .append(POINT).append(QUOTES).append(mapping.toValue(setSortItem.getDB項目名()).getItem()).append(QUOTES)
+                        .append(SPACE).append(setSortItem.get昇降順().getOrder());
+            } else {
+                orderByClause = orderByClause.append(SPACE).append(QUOTES).
+                        append(mapping.toValue(setSortItem.getDB項目名()).getItem()).append(QUOTES)
+                        .append(SPACE).append(setSortItem.get昇降順().getOrder());
+            }
+
             commaCount++;
         }
         return orderByClause.toRString();
