@@ -37,7 +37,7 @@ public class HihohenshashoHakoKanriboCsvDataSakuseiEntity {
     private RString kofuYMD;
     @CsvField(order = 90, name = "交付事由コード")
     private RString kofuJiyuCode;
-    @CsvField(order = 100, name = "交付事由_略称")
+    @CsvField(order = 100, name = "交付事由(略称)")
     private RString kofuJiyuRyakusho;
     @CsvField(order = 110, name = "交付事由")
     private RString kofuJiyu;
