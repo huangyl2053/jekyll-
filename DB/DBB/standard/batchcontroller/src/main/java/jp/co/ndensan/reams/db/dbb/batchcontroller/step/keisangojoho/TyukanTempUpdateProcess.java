@@ -15,12 +15,12 @@ import jp.co.ndensan.reams.ca.cax.entity.db.relate.TotalShunyuRelateEntity;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.keisangojoho.KeisangoJohoSakuseiProcessParamter;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.DbTKeisangoJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.KeisangoJohoSakuseiRelateEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisangoJohoSakuseiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -91,6 +91,7 @@ public class TyukanTempUpdateProcess extends BatchProcessBase<KeisangoJohoSakuse
         if (!tsuchishoNo.equals(entity.get介護期別Entity().getTsuchishoNo())) {
             tsuchishoNo = entity.get介護期別Entity().getTsuchishoNo();
             set期別金額(entity);
+            set徴収方法(entity.get介護徴収方法Entity());
             計算中間Temp.update(計算中間Entity);
         }
     }
@@ -111,7 +112,6 @@ public class TyukanTempUpdateProcess extends BatchProcessBase<KeisangoJohoSakuse
             if (!tsuchishoNo.equals(entity.get介護期別Entity().getTsuchishoNo())) {
                 tsuchishoNo = entity.get介護期別Entity().getTsuchishoNo();
                 set収入情報(entity);
-                set徴収方法(entity.get介護徴収方法Entity());
                 計算中間Temp.update(計算中間Entity);
             }
         }
@@ -273,7 +273,6 @@ public class TyukanTempUpdateProcess extends BatchProcessBase<KeisangoJohoSakuse
         } else {
             計算中間Entity.setKoseiZengoKubun(更正前後区分_更正後);
         }
-        //TODO QA1089 介護徴収方法テーブルのデータはどこから取得
         計算中間Entity.setChoshuHoho4gatsu(entity.getChoshuHoho4gatsu());
         計算中間Entity.setChoshuHoho5gatsu(entity.getChoshuHoho5gatsu());
         計算中間Entity.setChoshuHoho6gatsu(entity.getChoshuHoho6gatsu());
