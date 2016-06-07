@@ -243,9 +243,9 @@ public class NijihanteiKekkaOutputHandler {
         AccessLogger.log(AccessLogType.照会, toPersonalData(ShikibetsuCode.EMPTY));
     }
 
-    private PersonalData toPersonalData(ShikibetsuCode 識別コード) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("003"), new RString("識別コード"), 識別コード.value());
-        return PersonalData.of(識別コード, expandedInfo);
+    private PersonalData toPersonalData(ShikibetsuCode 申請書管理番号) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号.value());
+        return PersonalData.of(申請書管理番号, expandedInfo);
     }
 
     private void hokenjouhou() {
