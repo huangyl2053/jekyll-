@@ -77,18 +77,15 @@ public class HeijunkaKakuteiHandler {
                     処理枝番,
                     new FlexibleYear(調定年度.toString()),
                     年度内連番);
-            if (処理日付管理 != null) {
-                基準日時 = 処理日付管理.get基準日時();
-            }
         } else if (特徴平準化_特徴8月分.equals(ResponseHolder.getMenuID())) {
             処理日付管理 = manager.get処理日付管理マスタ(SubGyomuCode.DBB介護賦課,
                     ShoriName.特徴平準化計算_8月分.get名称(),
                     処理枝番,
                     new FlexibleYear(調定年度.toString()),
                     年度内連番);
-            if (処理日付管理 != null) {
-                基準日時 = 処理日付管理.get基準日時();
-            }
+        }
+        if (処理日付管理 != null) {
+            基準日時 = 処理日付管理.get基準日時();
         }
         div.getHeijunkaKakuteiShoriNaiyo().getTxtFukaNendo().setValue(調定年度);
 
