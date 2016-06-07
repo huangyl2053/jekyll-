@@ -828,12 +828,12 @@ public class NinteiChosaIraiHandler {
         for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
             RString ninteiShinseiDay = row.getNinteiShinseiDay().getValue().wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
                     .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
-            List<RString> 保険者番号リスト = get被保険者番号(row.getHokensha());
+            List<RString> 保険者番号リスト = get被保険者番号(row.getHokenshaNo());
             List<RString> 被保険者番号リスト = get被保険者番号(row.getHihokenshaNo());
             List<RString> 認定調査員コードリスト = get認定調査員コード(row.getNinteiChosainCode());
             List<RString> 認定調査委託先コードリスト = get認定調査委託先コード(row.getNinteiChosaItakusakiCode());
             RString 生年月日 = row.getSeinengappiYMD();
-            RString 年号 = new FlexibleDate(生年月日).wareki().toDateString();
+            RString 年号 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI).toDateString();
             RString 前回認定年月日 = row.getZenkaiNinteiYMD();
             RString 前回要介護状態区分コード = row.getZenYokaigoKubunCode();
             RString 要支援 = RString.EMPTY;
@@ -888,17 +888,17 @@ public class NinteiChosaIraiHandler {
                     row.getZenkaiChosaItakusaki(),
                     row.getHihokenshaKana(),
                     row.getHihokenshaShimei(),
-                    Seibetsu.男.getコード().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY,
-                    Seibetsu.女.getコード().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY,
+                    Seibetsu.男.get名称().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY,
+                    Seibetsu.女.get名称().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY,
                     row.getJusho(),
                     row.getYubinNo(),
                     row.getTelNo(),
                     年号.startsWith(元号_明治) ? 記号 : RString.EMPTY,
                     年号.startsWith(元号_大正) ? 記号 : RString.EMPTY,
                     年号.startsWith(元号_昭和) ? 記号 : RString.EMPTY,
-                    !RString.isNullOrEmpty(生年月日) ? 生年月日.substring(0, INDEX_3) : RString.EMPTY,
-                    !RString.isNullOrEmpty(生年月日) ? 生年月日.substring(INDEX_3, INDEX_4) : RString.EMPTY,
-                    !RString.isNullOrEmpty(生年月日) ? 生年月日.substring(INDEX_4, INDEX_5) : RString.EMPTY,
+                    年号.substring(INDEX_3, INDEX_5),
+                    年号.substring(INDEX_6, INDEX_8),
+                    年号.substring(INDEX_9),
                     row.getAge(),
                     row.getRenrakusakiJusho(),
                     row.getRenrakusakiYubinNo(),

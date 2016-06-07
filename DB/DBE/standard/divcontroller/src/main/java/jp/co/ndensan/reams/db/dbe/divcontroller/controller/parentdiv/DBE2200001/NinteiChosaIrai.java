@@ -116,6 +116,17 @@ public class NinteiChosaIrai {
     }
 
     /**
+     * 保険者リストの選択処理です。
+     *
+     * @param div NinteiChosaIraiDiv
+     * @return ResponseData<NinteiChosaIraiDiv>
+     */
+    public ResponseData<NinteiChosaIraiDiv> onChange_ccdHokenshaList(NinteiChosaIraiDiv div) {
+        onLoad(div);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 認定調査委託先一覧の選択処理です。
      *
      * @param div NinteiChosaIraiDiv
