@@ -61,6 +61,7 @@ public class ShokanShikyuKetteiInManager {
     private static final RString RSTRING_0 = new RString("0");
     private static final RString RSTRING_1 = new RString("1");
     private static final RString RSTRING_2 = new RString("2");
+    private static final RString SPLIT = new RString("～");
     private static final RString 備考1 = new RString("関連データ：償還払支給申請データ");
     private static final RString 備考2 = new RString("支給判定結果は再処理前のまま更新していません.");
 
@@ -119,11 +120,14 @@ public class ShokanShikyuKetteiInManager {
     }
 
     /**
-     * データチェック
+     * データチェックとDB登録
      *
+     * @param 処理年月 FlexibleYearMonth
+     * @param 再処理区分 RString
+     * @param 支給不支給区分 RString
      */
     @Transaction
-    public void checkData() {
+    public void checkDataAndDbRegister(FlexibleYearMonth 処理年月, RString 再処理区分, RString 支給不支給区分) {
         IShokanShikyuKetteiInMapper mapper = mapperProvider.create(IShokanShikyuKetteiInMapper.class);
         List<ShokanShikyuKetteiInResultEntity> 判定結果被保険一時List = mapper.get判定結果被保険一時();
         if (判定結果被保険一時List != null && !判定結果被保険一時List.isEmpty()) {
@@ -142,7 +146,10 @@ public class ShokanShikyuKetteiInManager {
             }
         }
         List<ShokanShikyuKetteiInResultEntity> 警告エラーDataList = mapper.get警告エラーデータ();
-        List<ShokanShikyuKetteiInResultEntity> 処理対象外List = get処理対象外List(警告エラーDataList);
+        List<ShokanShikyuKetteiInResultEntity> 処理対象外List = new ArrayList<>();
+        if (警告エラーDataList != null && !警告エラーDataList.isEmpty()) {
+            処理対象外List = get処理対象外List(警告エラーDataList);
+        }
         if (!処理対象外List.isEmpty()) {
             for (ShokanShikyuKetteiInResultEntity 処理対象外Entity : 処理対象外List) {
                 mapper.update重複データ(処理対象外Entity);
@@ -150,50 +157,48 @@ public class ShokanShikyuKetteiInManager {
         }
         update福祉用具事業所番号();
         update住宅改修事業所番号();
+        dbRegister(処理年月, 再処理区分, 支給不支給区分, mapper);
+
     }
 
     private List<ShokanShikyuKetteiInResultEntity> get処理対象外List(List<ShokanShikyuKetteiInResultEntity> 警告エラーDataList) {
-        List<ShokanShikyuKetteiInResultEntity> 処理対象List = new ArrayList<>();
         List<ShokanShikyuKetteiInResultEntity> 処理対象外List = new ArrayList<>();
-        if (警告エラーDataList != null && !警告エラーDataList.isEmpty()) {
-            for (int i = 0; i < 警告エラーDataList.size() - 1; i++) {
-                ShokanShikyuKetteiInResultEntity 該当警告Entity = 警告エラーDataList.get(i);
-                ShokanShikyuKetteiInResultEntity next警告Entity = 警告エラーDataList.get(i + 1);
-                if ((該当警告Entity.getDbWT0001_登録被保険者番号() != null
-                        && !該当警告Entity.getDbWT0001_登録被保険者番号().equals(next警告Entity.getDbWT0001_登録被保険者番号()))
-                        || (該当警告Entity.getDbWT3036_サービス提供年月() != null
-                        && !該当警告Entity.getDbWT3036_サービス提供年月().equals(next警告Entity.getDbWT3036_サービス提供年月()))
-                        || (該当警告Entity.getDbWT3036_整理番号() != null
-                        && !該当警告Entity.getDbWT3036_整理番号().equals(next警告Entity.getDbWT3036_整理番号()))
-                        || (該当警告Entity.getDbWT3036_事業所番号() != null
-                        && !該当警告Entity.getDbWT3036_事業所番号().equals(next警告Entity.getDbWT3036_事業所番号()))
-                        || (該当警告Entity.getDbWT3036_サービス種類コード() != null
-                        && !該当警告Entity.getDbWT3036_サービス種類コード().equals(next警告Entity.getDbWT3036_サービス種類コード()))) {
-                    処理対象List.add(該当警告Entity);
-                } else {
-                    処理対象外List = get処理対象外(該当警告Entity, next警告Entity,
-                            処理対象List, 処理対象外List);
+        for (int i = 0; i < 警告エラーDataList.size() - 1; i++) {
+            ShokanShikyuKetteiInResultEntity 該当警告Entity = 警告エラーDataList.get(i);
+            ShokanShikyuKetteiInResultEntity next警告Entity = 警告エラーDataList.get(i + 1);
+
+            if (該当警告Entity != null && next警告Entity != null) {
+                RString 被保険者番号now = 該当警告Entity.getDbWT0001_登録被保険者番号() != null
+                        ? 該当警告Entity.getDbWT0001_登録被保険者番号().value() : RString.EMPTY;
+                RString サービス提供年月now = 該当警告Entity.getDbWT3036_サービス提供年月() != null
+                        ? 該当警告Entity.getDbWT3036_サービス提供年月().toDateString() : RString.EMPTY;
+                RString 整理番号now = 該当警告Entity.getDbWT3036_整理番号();
+                RString 事業所番号now = 該当警告Entity.getDbWT3036_事業所番号() != null
+                        ? 該当警告Entity.getDbWT3036_事業所番号().value() : RString.EMPTY;
+                RString サービス種類コードnow = 該当警告Entity.getDbWT3036_サービス種類コード() != null
+                        ? 該当警告Entity.getDbWT3036_サービス種類コード().value() : RString.EMPTY;
+                Decimal 単位数now = 該当警告Entity.getDbWT3036_単位数();
+                RString 備考1now = 該当警告Entity.getDbWT3036_備考1();
+                RString 被保険者番号next = next警告Entity.getDbWT0001_登録被保険者番号() != null
+                        ? 該当警告Entity.getDbWT0001_登録被保険者番号().value() : RString.EMPTY;
+                RString サービス提供年月next = next警告Entity.getDbWT3036_サービス提供年月() != null
+                        ? 該当警告Entity.getDbWT3036_サービス提供年月().toDateString() : RString.EMPTY;
+                RString 整理番号next = next警告Entity.getDbWT3036_整理番号();
+                RString 事業所番号next = next警告Entity.getDbWT3036_事業所番号() != null
+                        ? 該当警告Entity.getDbWT3036_事業所番号().value() : RString.EMPTY;
+                RString サービス種類コードnext = next警告Entity.getDbWT3036_サービス種類コード() != null
+                        ? 該当警告Entity.getDbWT3036_サービス種類コード().value() : RString.EMPTY;
+                Decimal 単位数next = next警告Entity.getDbWT3036_単位数();
+                RString 備考1next = next警告Entity.getDbWT3036_備考1();
+                RString nowBreakKey = 被保険者番号now.concat(SPLIT).concat(サービス提供年月now).concat(SPLIT)
+                        .concat(整理番号now).concat(SPLIT).concat(事業所番号now).concat(SPLIT).concat(サービス種類コードnow);
+                RString nextBreakKey = 被保険者番号next.concat(SPLIT).concat(サービス提供年月next).concat(SPLIT)
+                        .concat(整理番号next).concat(SPLIT).concat(事業所番号next).concat(SPLIT).concat(サービス種類コードnext);
+                if (nowBreakKey.equals(nextBreakKey) && 単位数now.equals(単位数next) && !備考1now.equals(備考1next)) {
+                    処理対象外List.add(該当警告Entity);
                 }
             }
-        }
-        return 処理対象List;
-    }
 
-    private List<ShokanShikyuKetteiInResultEntity> get処理対象外(ShokanShikyuKetteiInResultEntity 該当警告Entity,
-            ShokanShikyuKetteiInResultEntity next警告Entity,
-            List<ShokanShikyuKetteiInResultEntity> 処理対象List,
-            List<ShokanShikyuKetteiInResultEntity> 処理対象外List) {
-
-        if (該当警告Entity.getDbWT3036_単位数() != null && 該当警告Entity.getDbWT3036_備考1() != null) {
-            if (該当警告Entity.getDbWT3036_単位数().equals(next警告Entity.getDbWT3036_単位数())
-                    && 該当警告Entity.getDbWT3036_備考1().equals(next警告Entity.getDbWT3036_備考1())) {
-                処理対象List.add(該当警告Entity);
-            } else if (!該当警告Entity.getDbWT3036_単位数().equals(next警告Entity.getDbWT3036_単位数())) {
-                処理対象List.add(該当警告Entity);
-            } else if (該当警告Entity.getDbWT3036_単位数().equals(next警告Entity.getDbWT3036_単位数())
-                    && !該当警告Entity.getDbWT3036_備考1().equals(next警告Entity.getDbWT3036_備考1())) {
-                処理対象外List.add(該当警告Entity);
-            }
         }
         return 処理対象外List;
 
@@ -237,9 +242,7 @@ public class ShokanShikyuKetteiInManager {
      * @param 再処理区分 RString
      * @param 支給不支給区分 RString
      */
-    @Transaction
-    public void dbRegister(FlexibleYearMonth 処理年月, RString 再処理区分, RString 支給不支給区分) {
-        IShokanShikyuKetteiInMapper mapper = mapperProvider.create(IShokanShikyuKetteiInMapper.class);
+    private void dbRegister(FlexibleYearMonth 処理年月, RString 再処理区分, RString 支給不支給区分, IShokanShikyuKetteiInMapper mapper) {
         update償還払請求集計(支給不支給区分, mapper);
         mapper.update償還払支給判定結果一時();
         if (RSTRING_1.equals(再処理区分)) {
