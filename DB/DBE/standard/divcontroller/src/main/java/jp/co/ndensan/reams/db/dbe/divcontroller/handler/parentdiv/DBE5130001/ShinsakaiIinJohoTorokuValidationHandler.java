@@ -5,7 +5,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.Shin
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.dgShinsaInJohoIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -15,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
@@ -41,11 +39,12 @@ public class ShinsakaiIinJohoTorokuValidationHandler {
     /**
      * 審査会委員入力情報をチェックします。
      *
+     * @param is更新モード boolean
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 審査会委員情報入力チェック() {
+    public ValidationMessageControlPairs 審査会委員情報入力チェック(boolean is更新モード) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (!更新モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class))) {
+        if (!is更新モード) {
             boolean is重複コード = is重複コード(div.getTxtShinsainCode().getValue());
             if (is重複コード) {
                 validationMessages.add(new ValidationMessageControlPair(ShinsakaiIinJohoTorokuValidationMessage.既に登録済));
