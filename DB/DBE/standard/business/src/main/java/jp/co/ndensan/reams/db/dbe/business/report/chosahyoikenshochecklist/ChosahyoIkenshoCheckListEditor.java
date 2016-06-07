@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAns
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser15;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser16;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser17;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku01;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
@@ -100,6 +102,9 @@ public class ChosahyoIkenshoCheckListEditor implements IChosahyoIkenshoCheckList
             source = editSource09B今回意見書1(source);
             source = editSource09B今回意見書2(source);
         }
+        source.konkaiChosahyo75 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(item.getDbT5203_shogaiNichijoSeikatsuJiritsudoCode().value()).get名称();
+        source.konkaiChosahyo76 = NinchishoNichijoSeikatsuJiritsudoCode
+                .toValue(item.getDbT5203_ninchishoNichijoSeikatsuJiritsudoCode().value()).get名称();
         source.flag1 = 今回調査票と今回意見書の結果比較(source.konkaiChosahyo1, source.konkaiIkensho1);
         source.flag2 = 今回調査票と今回意見書の結果比較(source.konkaiChosahyo2, source.konkaiIkensho2);
         source.flag3 = 今回調査票と今回意見書の結果比較(source.konkaiChosahyo3, source.konkaiIkensho3);

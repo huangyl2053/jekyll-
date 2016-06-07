@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 認定調査予定未定者一覧表のReportです。
  *
- * @reamsid_L DBE-1390-110 dongyabin
+ * @reamsid_L DBE-1390-190 dongyabin
  */
 public class ChosahyoIkenshoCheckListReport extends Report<ChosahyoIkenshoCheckListReportSource> {
 
