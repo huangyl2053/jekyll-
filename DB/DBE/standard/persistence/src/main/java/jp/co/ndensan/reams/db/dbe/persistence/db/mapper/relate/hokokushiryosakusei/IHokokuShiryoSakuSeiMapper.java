@@ -1,12 +1,14 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hokokushiryosakusei;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.CsvKenHokokuShiryoSakuseiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.JigyoJyokyoHokokuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.JisshiJokyoTokeiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsahanteinoHenkojokyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsakaiShukeiGenzainojokyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsakaiShukeihyoShinseiBetsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.SinsakaiHanteiJyokyoMyBatisParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.CsvKenHokokuShiryoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.JigyoJyokyoHokokuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.JigyoJyokyoHokokuHeaderEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.JisshiJokyoTokeiEntity;
@@ -142,13 +144,13 @@ public interface IHokokuShiryoSakuSeiMapper {
      * @param parameter CsvKenHokokuShiryoSakuseiMyBatisParameter
      * @return SinsakaiHanteiJyokyoHeaderEntity
      */
-//    List<SinsakaiHanteiJyokyoHeaderEntity> getCsvKenHokokuShiryoSakuseiHeader(CsvKenHokokuShiryoSakuseiMyBatisParameter parameter);
-//
-//    /**
-//     * 県報告用資料情報ヘッダ情報リストを取得します。
-//     *
-//     * @param parameter CsvKenHokokuShiryoSakuseiMyBatisParameter
-//     * @return CsvKenHokokuShiryoEntity
-//     */
-//    List<CsvKenHokokuShiryoEntity> getCsvKenHokokuShiryoSakusei(CsvKenHokokuShiryoSakuseiMyBatisParameter parameter);
+    List<SinsakaiHanteiJyokyoHeaderEntity> getCsvKenHokokuShiryoSakuseiHeader(CsvKenHokokuShiryoSakuseiMyBatisParameter parameter);
+
+    /**
+     * 県報告用資料情報ヘッダ情報リストを取得します。
+     *
+     * @param parameter CsvKenHokokuShiryoSakuseiMyBatisParameter
+     * @return CsvKenHokokuShiryoEntity
+     */
+    List<CsvKenHokokuShiryoEntity> getCsvKenHokokuShiryoSakusei(CsvKenHokokuShiryoSakuseiMyBatisParameter parameter);
 }

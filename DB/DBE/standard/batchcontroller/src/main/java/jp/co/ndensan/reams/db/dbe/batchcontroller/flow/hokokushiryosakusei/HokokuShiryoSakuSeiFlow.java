@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.hokokushiryosakusei;
 
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.CsvKenHokokuShiryoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JigyoJyokyoHokokuDataSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JigyoJyokyoHokokuProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JisshiJokyoTokeiProcess;
@@ -30,7 +31,7 @@ public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBa
     private static final String 審査会集計表判定別 = "shinsakaishukeihyoHanteiBetsu";
     private static final String 審査会集計表申請区分別 = "shinsakaiShukeihyoShinseiBetsu";
     private static final String 審査会集計表現在状況別 = "shinsakaiShukeiGenzainojokyo";
-//    private static final String 県報告用資料情報作成 = "csvKenHokokuShiryoSakusei";
+    private static final String 県報告用資料情報作成 = "csvKenHokokuShiryoSakusei";
 
     @Override
     protected void defineFlow() {
@@ -51,9 +52,9 @@ public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBa
             executeStep(審査会集計表申請区分別);
             executeStep(審査会集計表現在状況別);
         }
-//        if (getParameter().isCsvShutsuryoku()) {
-//            executeStep(県報告用資料情報作成);
-//        }
+        if (getParameter().isCsvShutsuryoku()) {
+            executeStep(県報告用資料情報作成);
+        }
     }
 
     /**
@@ -160,9 +161,9 @@ public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBa
      *
      * @return バッチコマンド
      */
-//    @Step(県報告用資料情報作成)
-//    protected IBatchFlowCommand selectCsvKenHokokuShiryo() {
-//        return loopBatch(CsvKenHokokuShiryoSakuseiProcess.class)
-//                .arguments(getParameter().toCsvKenHokokuShiryoSakuseiProcessParameter()).define();
-//    }
+    @Step(県報告用資料情報作成)
+    protected IBatchFlowCommand selectCsvKenHokokuShiryo() {
+        return loopBatch(CsvKenHokokuShiryoSakuseiProcess.class)
+                .arguments(getParameter().toCsvKenHokokuShiryoSakuseiProcessParameter()).define();
+    }
 }

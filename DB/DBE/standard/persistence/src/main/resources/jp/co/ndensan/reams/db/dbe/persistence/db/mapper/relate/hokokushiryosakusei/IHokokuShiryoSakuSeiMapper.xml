@@ -2382,7 +2382,7 @@
         , "nijiHanteiYokaigoJotaiKubunCode"
     </select>
 
-<!--    <select id="getCsvKenHokokuShiryoSakuseiHeader"
+    <select id="getCsvKenHokokuShiryoSakuseiHeader"
             resultMap="hokokushiryosakusei_SinsakaiHanteiJyokyoHeader"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.CsvKenHokokuShiryoSakuseiMyBatisParameter"
             fetchSize="500">
@@ -2391,12 +2391,6 @@
         ,F."shichosonCode"
         ,F."shichosonMeisho"
         ,C."shoKisaiHokenshaNo"
-        <if test="isShinseiji">
-            ,C."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,C."ninteiShinseiHoreiKubunCode"
-        </if>
         ,MIN(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMin
         ,MAX(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMax
         ,COUNT(A."shinsakaiKaisaiNo") AS shinsakaiKaisaiNoCount
@@ -2487,22 +2481,10 @@
         ,F."shichosonCode"
         ,F."shichosonMeisho"
         ,C."shoKisaiHokenshaNo"
-        <if test="isShinseiji">
-            ,C."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,C."ninteiShinseiHoreiKubunCode"
-        </if>
         ORDER BY
         A."gogitaiNo"
         ,F."shichosonCode"
         ,C."shoKisaiHokenshaNo"
-        <if test="isShinseiji">
-            ,C."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,C."ninteiShinseiHoreiKubunCode"
-        </if>
     </select>
 
     <select id="getCsvKenHokokuShiryoSakusei"
@@ -2511,12 +2493,6 @@
             fetchSize="500">
         SELECT E."ichijiHanteiKekkaCode"
         , D."nijiHanteiYokaigoJotaiKubunCode"
-        <if test="isShinseiji">
-            ,C."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,C."ninteiShinseiHoreiKubunCode"
-        </if>
         , COUNT(C."hihokenshaNo") AS hihokenshaCount
         FROM rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" A
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" B
@@ -2546,7 +2522,7 @@
         AND F."maskingKanryoYMD" IS NOT NULL
         AND F."ninteichosaKanryoYMD" IS NOT NULL
         AND E."ichijiHanteiKekkaCode" IN ('01', '12', '13', '21', '22', '23', '24', '25')
-        AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('01', '12', '13', '21', '22', '23', '24', '25', '31')
+        AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('01', '12', '13', '21', '22', '23', '24', '25')
         <if test="!isEmptyHokensyaNo">
             AND C."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>
@@ -2582,22 +2558,10 @@
         GROUP BY
         E."ichijiHanteiKekkaCode"
         , D."nijiHanteiYokaigoJotaiKubunCode"
-        <if test="isShinseiji">
-            ,C."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,C."ninteiShinseiHoreiKubunCode"
-        </if>
         ORDER BY
         E."ichijiHanteiKekkaCode"
         , D."nijiHanteiYokaigoJotaiKubunCode"
-        <if test="isShinseiji">
-            ,C."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,C."ninteiShinseiHoreiKubunCode"
-        </if>
-    </select>-->
+    </select>
 
     <resultMap id="hokokushiryosakusei_JisshiJokyoTokei"
                type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.JisshiJokyoTokeiEntity"
@@ -2668,15 +2632,13 @@
         <result property="hihokenshaCount" column="hihokenshaCount" />
     </resultMap>
 
-    <!--    <resultMap id="hokokushiryosakusei_CsvKenHokokuShiryoSakusei"
+    <resultMap id="hokokushiryosakusei_CsvKenHokokuShiryoSakusei"
                type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.CsvKenHokokuShiryoEntity"
                autoMapping="true">
         <result property="ichijiHanteiKekkaCode" column="ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="nijiHanteiYokaigoJotaiKubunCode" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
-        <result property="ninteiShinseiShinseijiKubunCode" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
-        <result property="ninteiShinseiHoreiKubunCode" column="ninteiShinseiHoreiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="hihokenshaCount" column="hihokenshaCount" />
-    </resultMap>-->
+    </resultMap>
 
     <resultMap id="hokokushiryosakusei_ShinsakaishukeihyoHanteiBetsu"
                type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.ShinsakaishukeihyoHanteiBetsuEntity"
