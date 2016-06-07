@@ -329,9 +329,11 @@
         'DBA',
         '000000',
         #{shoriName},
-        TO_CHAR(TO_NUMBER((SELECT MAX("shoriEdaban") FROM rgdb."DbT7022ShoriDateKanri"),  '0009') + 1, 'FM0009'),
+        TO_CHAR(TO_NUMBER((SELECT coalesce(MAX("shoriEdaban"), '0') FROM rgdb."DbT7022ShoriDateKanri" where "subGyomuCode" = 'DBA'
+        AND "shichosonCode" = '000000' AND "shoriName" = #{shoriName})   ,  '0009') + 1, 'FM0009'),
         TO_CHAR(NOW(),'yyyy'),
-        TO_CHAR(TO_NUMBER((SELECT MAX("nendoNaiRenban") FROM rgdb."DbT7022ShoriDateKanri"),  '0009') + 1, 'FM0009'),
+        TO_CHAR(TO_NUMBER((SELECT coalesce(MAX("nendoNaiRenban"), '0') FROM rgdb."DbT7022ShoriDateKanri" where "subGyomuCode" = 'DBA'
+        AND "shichosonCode" = '000000' AND "shoriName" = #{shoriName}),  '0009') + 1, 'FM0009'),
         #{taishoKaishiYMD},
         #{taishoShuryoYMD})
     </insert>
