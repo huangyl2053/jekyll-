@@ -95,8 +95,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
-            onClick_btnTsuiKa(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_btnTsuiKa(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if ((更新モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()) && isUpdateHasChange(div))
                 || (isAddHasChange(div) && 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()))) {
             if (!ResponseHolder.isReRequest()) {
@@ -121,8 +120,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
-            onClick_dataGridOnSelectByDeleteButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_dataGridOnSelectByDeleteButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
                     UrQuestionMessages.削除の確認.getMessage().evaluate());
@@ -141,8 +139,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
-            onClick_dataGridOnSelectByModifyButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_dataGridOnSelectByModifyButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if ((更新モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()) && isUpdateHasChange(div))
                 || (isAddHasChange(div) && 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()))) {
             if (!ResponseHolder.isReRequest()) {
@@ -181,8 +178,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
-            onClick_btnback(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_btnback(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if ((更新モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()) && isUpdateHasChange(div))
                 || (isAddHasChange(div) && 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()))) {
             if (!ResponseHolder.isReRequest()) {
@@ -206,8 +202,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
-            onClick_btnSyuuSei(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_btnSyuuSei(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         開催場所コードの重複チェック(div);
         開催地区コードの存在チェック(div);
         getHandler(div).開催場所一覧の更新();
@@ -221,8 +216,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
-            onClick_btnUpdate(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_btnUpdate(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -230,7 +224,9 @@ public class NinteiShinsakaiKaisaibashoToroku {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).save();
+            Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList
+                    = ViewStateHolder.get(ViewStateKeys.開催場所情報一覧, Models.class);
+            getHandler(div).save(shinsakaiKaisaiBashoJohoList);
             onLoad(div);
         }
         return ResponseData.of(div).respond();

@@ -115,7 +115,7 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
 
     private void eidtItem(YouKaiGoNinTeiKekTesuChiRelateEntity entity) {
         RString 認証者氏名 = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_ID, FlexibleDate.getNowDate(), retortWrite).ninshoshaYakushokuMei;
-        RString 帳票名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定結果情報提供票主治医, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 帳票名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定結果情報提供票_主治医, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         RString 認定結果 = YokaigoJotaiKubun09.toValue(entity.getNijiHanteiYokaigoJotaiKubunCod()).get名称();
         Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, 通知文1);
         headItem = new JohoTeikyoShiryoItem(RDate.getNowDate(),

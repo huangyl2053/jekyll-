@@ -25,8 +25,8 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -52,8 +52,8 @@ public class NenpoYoushi3 {
     private FlexibleYear 集計対象年;
     private LasdecCode 市町村コード;
     private RString 様式種類コード;
-    private FlexibleDate 報告年度;
-    private FlexibleDate 集計年度;
+    private RDate 報告年度;
+    private RDate 集計年度;
     private RString 保険者コード;
     private RString 保険者名称;
     private RString 補正フラグ;
@@ -67,8 +67,8 @@ public class NenpoYoushi3 {
     public ResponseData<NenpoYoushi3Div> onLoad(NenpoYoushi3Div div) {
         ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity
                 = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
-        報告年度 = new FlexibleDate(entity.get画面報告年度());
-        集計年度 = new FlexibleDate(entity.get画面集計年度());
+        報告年度 = new RDate(entity.get画面報告年度().toString());
+        集計年度 = new RDate(entity.get画面集計年度().toString());
         保険者コード = entity.get保険者コード();
         保険者名称 = entity.get市町村名称();
         補正フラグ = entity.get補正フラグ();
@@ -118,10 +118,7 @@ public class NenpoYoushi3 {
 
         補正フラグ = entity.get補正フラグ();
         if (補正フラグ.equals(フラグ_修正)) {
-            List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データ(ViewStateHolder.
-                    get(NenpoYoushi3ViewStateKeys.保険料収納状況データ, Models.class),
-                    ViewStateHolder.
-                    get(NenpoYoushi3ViewStateKeys.保険給付支払状況データ, Models.class));
+            List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データ();
             if (修正データリスト == null || 修正データリスト.isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
             }
@@ -167,10 +164,7 @@ public class NenpoYoushi3 {
      * @return ResponseData<NenpoYoushi3Div>
      */
     public ResponseData<NenpoYoushi3Div> onClick_modoru(NenpoYoushi3Div div) {
-        List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データ(ViewStateHolder.
-                get(NenpoYoushi3ViewStateKeys.保険料収納状況データ, Models.class),
-                ViewStateHolder.
-                get(NenpoYoushi3ViewStateKeys.保険給付支払状況データ, Models.class));
+        List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データ();
         if (修正データリスト == null || 修正データリスト.isEmpty()) {
             return ResponseData.of(div).forwardWithEventName(DBU0060041TransitionEventName.検索に戻る).respond();
         }

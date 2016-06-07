@@ -68,17 +68,21 @@ public class HihokenshaShisakuPanal {
      */
     public ResponseData<HihokenshaShisakuPanalDiv> onLoad(HihokenshaShisakuPanalDiv div) {
         RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_状態, RString.class);
+        HihokenshaNo 被保番号 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_被保番号, HihokenshaNo.class);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_識別コード, ShikibetsuCode.class);
+        ShikakuRirekiJoho 資格得喪情報
+                = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_資格得喪情報, ShikakuRirekiJoho.class);
         if (状態_追加.equals(初期_状態)) {
-            getHandler(div).initialize(初期_状態);
+            getHandler(div).initialize(初期_状態, 被保番号, 識別コード, 資格得喪情報);
             return ResponseData.of(div).setState(DBA1050021StateName.追加状態);
         } else if (状態_修正.equals(初期_状態)) {
-            getHandler(div).initialize(初期_状態);
+            getHandler(div).initialize(初期_状態, 被保番号, 識別コード, 資格得喪情報);
             return ResponseData.of(div).setState(DBA1050021StateName.修正状態);
         } else if (状態_削除.equals(初期_状態)) {
-            getHandler(div).initialize(初期_状態);
+            getHandler(div).initialize(初期_状態, 被保番号, 識別コード, 資格得喪情報);
             return ResponseData.of(div).setState(DBA1050021StateName.削除状態);
         } else if (状態_照会.equals(初期_状態)) {
-            getHandler(div).initialize(初期_状態);
+            getHandler(div).initialize(初期_状態, 被保番号, 識別コード, 資格得喪情報);
             return ResponseData.of(div).setState(DBA1050021StateName.照会状態);
         }
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {

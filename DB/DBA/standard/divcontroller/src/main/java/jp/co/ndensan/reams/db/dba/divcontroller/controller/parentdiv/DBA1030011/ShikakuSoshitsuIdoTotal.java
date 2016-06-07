@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.Shik
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1030011.ShikakuSoshitsuIdoTotalHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -52,7 +53,7 @@ public class ShikakuSoshitsuIdoTotal {
      * @return レスポンス
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onLoad(ShikakuSoshitsuIdoTotalDiv div) {
-        createHandler(div).load();
+        createHandler(div).load(ViewStateHolder.get(ViewStateKeys.資格喪失異動_状態_被保履歴タブ, RString.class));
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             div.setReadOnly(true);
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
@@ -72,15 +73,19 @@ public class ShikakuSoshitsuIdoTotal {
         ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
         RString title = div.getShikakuSoshitsuJoho().getTabInputs().getSelectedItem().getTitle();
         if (DEFAULT.equals(title)) {
-            createHandler(div).onOpenTplDefault();
+            ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_被保履歴タブ, createHandler(div)
+                    .onOpenTplDefault(ViewStateHolder.get(ViewStateKeys.資格喪失異動_状態_被保履歴タブ, RString.class)));
         } else if (IRYOU.equals(title)) {
-            createHandler(div).onOpenTplIryou();
+            ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_医療保険タブ, createHandler(div)
+                    .onOpenTplIryou(ViewStateHolder.get(ViewStateKeys.資格喪失異動_状態_医療保険タブ, RString.class)));
         } else if (RONEN.equals(title)) {
-            createHandler(div).onOpenTplRoNen();
+            createHandler(div).onOpenTplRoNen(ViewStateHolder.get(ViewStateKeys.資格喪失異動_状態_医療保険タブ, RString.class));
         } else if (SHISETSU.equals(title)) {
-            createHandler(div).onOpenTplShisetsu();
+            ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_施設入退所タブ, createHandler(div)
+                    .onOpenTplShisetsu(ViewStateHolder.get(ViewStateKeys.資格喪失異動_状態_施設入退所タブ, RString.class)));
         } else if (SHORUIJOKYO.equals(title)) {
-            createHandler(div).onOpenTplShoruiJokyo();
+            ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_証類状況タブ, createHandler(div)
+                    .onOpenTplShoruiJokyo(ViewStateHolder.get(ViewStateKeys.資格喪失異動_状態_証類状況タブ, RString.class)));
         }
         response.data = div;
         return response;
@@ -214,6 +219,7 @@ public class ShikakuSoshitsuIdoTotal {
     }
 
     private ShikakuSoshitsuIdoTotalHandler createHandler(ShikakuSoshitsuIdoTotalDiv div) {
-        return new ShikakuSoshitsuIdoTotalHandler(div);
+        TaishoshaKey key = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
+        return new ShikakuSoshitsuIdoTotalHandler(div, key);
     }
 }

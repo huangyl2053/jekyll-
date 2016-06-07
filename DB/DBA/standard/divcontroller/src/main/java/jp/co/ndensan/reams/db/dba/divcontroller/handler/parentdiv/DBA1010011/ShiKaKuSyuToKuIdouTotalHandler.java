@@ -66,10 +66,6 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
     private static final RString 追加 = new RString("追加");
     private static final RString 表示モード = new RString("HihokenrirekiNashiMode");
     private static final RString FIRSTREQUEST以外 = new RString("2");
-    private RString 状態_被保履歴タブ = RString.EMPTY;
-    private RString 状態_医療保険タブ = RString.EMPTY;
-    private RString 状態_老福年金タブ = RString.EMPTY;
-    private RString 状態_施設入退所タブ = RString.EMPTY;
     private HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
     private ShikibetsuCode 識別コード = ShikibetsuCode.EMPTY;
 
@@ -79,10 +75,10 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
      * コンストラクタです。
      *
      * @param div 資格取得異動Div
+     * @param key 対象者
      */
-    public ShiKaKuSyuToKuIdouTotalHandler(ShikakuShutokuIdoTotalDiv div) {
+    public ShiKaKuSyuToKuIdouTotalHandler(ShikakuShutokuIdoTotalDiv div, TaishoshaKey key) {
         this.div = div;
-        TaishoshaKey key = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
         被保険者番号 = key.get被保険者番号();
         識別コード = key.get識別コード();
     }
@@ -105,22 +101,25 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
 
     /**
      * 資格取得異動の初期化します。
+     *
+     * @param 状態_被保履歴タブ 状態_被保履歴タブ
      */
-    public void load() {
+    public void load(RString 状態_被保履歴タブ) {
         kaigoShikakuKihon_onload(被保険者番号, 表示モード);
         kaigoNinteiAtenaInfo_onload(識別コード);
-        onOpenTplDefault();
+        onOpenTplDefault(状態_被保履歴タブ);
     }
 
     /**
      * 被保履歴タブを打開です。
+     *
+     * @param 状態_被保履歴タブ 状態_被保履歴タブ
+     * @return 状態_被保履歴タブ 状態_被保履歴タブ
      */
-    public void onOpenTplDefault() {
-        状態_被保履歴タブ = ViewStateHolder.get(ViewStateKeys.資格取得異動_状態_被保履歴タブ, RString.class);
-        if (RString.isNullOrEmpty(状態_被保履歴タブ) || !状態_被保履歴タブ.equals(FIRSTREQUEST以外)) {
+    public RString onOpenTplDefault(RString 状態_被保履歴タブ) {
+        if (RString.isNullOrEmpty(状態_被保履歴タブ) || !FIRSTREQUEST以外.equals(状態_被保履歴タブ)) {
             div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().initialize(被保険者番号, 識別コード);
             状態_被保履歴タブ = new RString("2");
-            ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_被保履歴タブ, 状態_被保履歴タブ);
         }
         if (資格取得情報パネル初期のチェック()) {
             資格取得情報パネルの非活性初期化();
@@ -128,6 +127,7 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
             資格取得情報パネルの活性初期化();
         }
         get被保番号表示有無制御();
+        return 状態_被保履歴タブ;
     }
 
     /**
@@ -172,39 +172,45 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
 
     /**
      * 医療保険タブを打開です。
+     *
+     * @param 状態_医療保険タブ 状態_医療保険タブ
+     * @return 状態_医療保険タブ 状態_医療保険タブ
      */
-    public void onOpenTplIryou() {
-        状態_医療保険タブ = ViewStateHolder.get(ViewStateKeys.資格取得異動_状態_医療保険タブ, RString.class);
-        if (RString.isNullOrEmpty(状態_医療保険タブ) || !状態_医療保険タブ.equals(FIRSTREQUEST以外)) {
+    public RString onOpenTplIryou(RString 状態_医療保険タブ) {
+        if (RString.isNullOrEmpty(状態_医療保険タブ) || !FIRSTREQUEST以外.equals(状態_医療保険タブ)) {
             div.getShikakuShutokuJoho().getTplIryoHoken().getIryoHokenRirekiMain().getCcdIryoHokenRireki()
                     .initialize(状態_登録, 識別コード.getColumnValue());
             状態_医療保険タブ = new RString("2");
-            ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_医療保険タブ, 状態_医療保険タブ);
         }
+        return 状態_医療保険タブ;
     }
 
     /**
      * 老福年金タブを打開です。
+     *
+     * @param 状態_老福年金タブ 状態_老福年金タブ
+     * @return 状態_老福年金タブ 状態_老福年金タブ
      */
-    public void onOpenTplRoNen() {
-        状態_老福年金タブ = ViewStateHolder.get(ViewStateKeys.資格取得異動_状態_老福年金タブ, RString.class);
-        if (RString.isNullOrEmpty(状態_老福年金タブ) || !状態_老福年金タブ.equals(FIRSTREQUEST以外)) {
+    public RString onOpenTplRoNen(RString 状態_老福年金タブ) {
+        if (RString.isNullOrEmpty(状態_老福年金タブ) || !FIRSTREQUEST以外.equals(状態_老福年金タブ)) {
             div.getShikakuShutokuJoho().getTplRofukuNenkin().getRohukuNenkin().getCcdRohukuNenkin().initialize(識別コード, 被保険者番号);
             状態_老福年金タブ = new RString("2");
-            ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_老福年金タブ, 状態_老福年金タブ);
         }
+        return 状態_老福年金タブ;
     }
 
     /**
      * 施設入退所タブを打開です。
+     *
+     * @param 状態_施設入退所タブ 状態_施設入退所タブ
+     * @return 状態_施設入退所タブ 状態_施設入退所タブ
      */
-    public void onOpenTplShisetsu() {
-        状態_施設入退所タブ = ViewStateHolder.get(ViewStateKeys.資格取得異動_状態_施設入退所タブ, RString.class);
-        if (RString.isNullOrEmpty(状態_施設入退所タブ) || !状態_施設入退所タブ.equals(FIRSTREQUEST以外)) {
+    public RString onOpenTplShisetsu(RString 状態_施設入退所タブ) {
+        if (RString.isNullOrEmpty(状態_施設入退所タブ) || !FIRSTREQUEST以外.equals(状態_施設入退所タブ)) {
             div.getShikakuShutokuJoho().getTplShisetsuNyutaisho().getCcdShisetsuNyutaishoRirekiKanri().initialize(識別コード);
             状態_施設入退所タブ = new RString("2");
-            ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_施設入退所タブ, 状態_施設入退所タブ);
         }
+        return 状態_施設入退所タブ;
     }
 
     /**
