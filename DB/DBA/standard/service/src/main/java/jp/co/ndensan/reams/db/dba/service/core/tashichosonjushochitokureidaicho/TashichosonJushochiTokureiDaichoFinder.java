@@ -105,7 +105,12 @@ public class TashichosonJushochiTokureiDaichoFinder {
         }
         List<OtherAddressInfEntity> 他市町村住所地特例者情報 = get他市町村住所地特例者情報(識別コード);
         if (他市町村住所地特例者情報.isEmpty()) {
-            return getOtherAddressLedgerBusinessList(otherAddressLedgerLst);
+            OtherAddressLedgerEntity otherAddressLedger = new OtherAddressLedgerEntity();
+            set他市町村住所地特例者台帳情報(otherAddressLedger, null, 宛名情報.get(0), null, null, ONEPAGE);
+            OtherAddressLedgerBusiness otherAddressLedgerBusiness = new OtherAddressLedgerBusiness(otherAddressLedger);
+            List<OtherAddressLedgerBusiness> otherAddressLedgerBusinessList = new ArrayList<>();
+            otherAddressLedgerBusinessList.add(otherAddressLedgerBusiness);
+            return otherAddressLedgerBusinessList;
         }
         LasdecCode 市町村コード = 他市町村住所地特例者情報.get(0).get市町村コード();
         RString 市町村名称 = get市町村名称(市町村コード);
@@ -145,8 +150,12 @@ public class TashichosonJushochiTokureiDaichoFinder {
         JushoHenshu jushoHenshu = JushoHenshu.createInstance();
         他市町村住所地特例者台帳情報.set印刷日時(dateTimeEdit(RDate.getNowDateTime()));
         他市町村住所地特例者台帳情報.setページ目(ページ目);
-        他市町村住所地特例者台帳情報.set市町村コード(市町村コード);
-        他市町村住所地特例者台帳情報.set市町村名称(市町村名称);
+        if (市町村コード != null) {
+            他市町村住所地特例者台帳情報.set市町村コード(市町村コード);
+        }
+        if (市町村名称 != null) {
+            他市町村住所地特例者台帳情報.set市町村名称(市町村名称);
+        }
         他市町村住所地特例者台帳情報.set状態(他住所地特例者);
         他市町村住所地特例者台帳情報.set電話番号タイトル(連絡先);
         他市町村住所地特例者台帳情報.set電話番号１(ObjectUtil.defaultIfNull(宛名識別対象取得PSM.getRenrakusaki1(), TelNo.EMPTY).getColumnValue());
@@ -180,23 +189,25 @@ public class TashichosonJushochiTokureiDaichoFinder {
         } else {
             他市町村住所地特例者台帳情報.set転出年月日(宛名識別対象取得PSM.getTenshutsuYoteiIdoYMD());
         }
-        他市町村住所地特例者台帳情報.setNo(他市町村住所地特例者情報.getNo());
-        他市町村住所地特例者台帳情報.set適用年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get適用年月日()));
-        他市町村住所地特例者台帳情報.set適用届出年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get適用届出年月日()));
-        他市町村住所地特例者台帳情報.set他市町村住所地特例適用事由コード(他市町村住所地特例者情報.get適用事由コード());
-        他市町村住所地特例者台帳情報.set他市町村住所地特例適用事由名称(他市町村住所地特例者情報.get適用事由名称());
-        他市町村住所地特例者台帳情報.set入所年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get入所年月日()));
-        他市町村住所地特例者台帳情報.set事業者名称(他市町村住所地特例者情報.get事業者名称());
-        他市町村住所地特例者台帳情報.set電話番号(他市町村住所地特例者情報.get電話番号());
-        他市町村住所地特例者台帳情報.set解除年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get解除年月日()));
-        他市町村住所地特例者台帳情報.set解除届出年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get解除届出年月日()));
-        他市町村住所地特例者台帳情報.set他市町村住所地特例解除事由コード(他市町村住所地特例者情報.get解除事由コード());
-        他市町村住所地特例者台帳情報.set他市町村住所地特例解除事由名称(他市町村住所地特例者情報.get解除事由名称());
-        他市町村住所地特例者台帳情報.set退所年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get退所年月日()));
-        他市町村住所地特例者台帳情報.set事業者住所(他市町村住所地特例者情報.get事業者住所());
-        他市町村住所地特例者台帳情報.set郵便番号(他市町村住所地特例者情報.get郵便番号());
-        他市町村住所地特例者台帳情報.set保険者名称(他市町村住所地特例者情報.get保険者名称());
-        他市町村住所地特例者台帳情報.set他被保番号(他市町村住所地特例者情報.get他被保番号());
+        if (他市町村住所地特例者情報 != null) {
+            他市町村住所地特例者台帳情報.setNo(他市町村住所地特例者情報.getNo());
+            他市町村住所地特例者台帳情報.set適用年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get適用年月日()));
+            他市町村住所地特例者台帳情報.set適用届出年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get適用届出年月日()));
+            他市町村住所地特例者台帳情報.set他市町村住所地特例適用事由コード(他市町村住所地特例者情報.get適用事由コード());
+            他市町村住所地特例者台帳情報.set他市町村住所地特例適用事由名称(他市町村住所地特例者情報.get適用事由名称());
+            他市町村住所地特例者台帳情報.set入所年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get入所年月日()));
+            他市町村住所地特例者台帳情報.set事業者名称(他市町村住所地特例者情報.get事業者名称());
+            他市町村住所地特例者台帳情報.set電話番号(他市町村住所地特例者情報.get電話番号());
+            他市町村住所地特例者台帳情報.set解除年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get解除年月日()));
+            他市町村住所地特例者台帳情報.set解除届出年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get解除届出年月日()));
+            他市町村住所地特例者台帳情報.set他市町村住所地特例解除事由コード(他市町村住所地特例者情報.get解除事由コード());
+            他市町村住所地特例者台帳情報.set他市町村住所地特例解除事由名称(他市町村住所地特例者情報.get解除事由名称());
+            他市町村住所地特例者台帳情報.set退所年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get退所年月日()));
+            他市町村住所地特例者台帳情報.set事業者住所(他市町村住所地特例者情報.get事業者住所());
+            他市町村住所地特例者台帳情報.set郵便番号(他市町村住所地特例者情報.get郵便番号());
+            他市町村住所地特例者台帳情報.set保険者名称(他市町村住所地特例者情報.get保険者名称());
+            他市町村住所地特例者台帳情報.set他被保番号(他市町村住所地特例者情報.get他被保番号());
+        }
     }
 
     private FillTypeFormatted flexibleDateToFillTypeFormatted(FlexibleDate date) {
