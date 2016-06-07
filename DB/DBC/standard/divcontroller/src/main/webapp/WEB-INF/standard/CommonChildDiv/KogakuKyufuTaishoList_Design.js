@@ -4,8 +4,32 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_modify = function () {
+                return "onClick_modify";
+            };
+
             Events.onMulti_dgKyufuJissekiMeisaiList = function () {
                 return "onMulti_dgKyufuJissekiMeisaiList";
+            };
+
+            Events.onOkClose_btnJgyosha = function () {
+                return "onOkClose_btnJgyosha";
+            };
+
+            Events.onBeforeOpenDialog_btnJgyosha = function () {
+                return "onBeforeOpenDialog_btnJgyosha";
+            };
+
+            Events.onOkClose_btnServiceSyurui = function () {
+                return "onOkClose_btnServiceSyurui";
+            };
+
+            Events.onBeforeOpenDialog_btnServiceSyurui = function () {
+                return "onBeforeOpenDialog_btnServiceSyurui";
+            };
+
+            Events.onClick_btnkakutei = function () {
+                return "onClick_btnkakutei";
             };
             return Events;
         })();
@@ -125,6 +149,10 @@ var DBC;
 
             Controls.prototype.btnkakutei = function () {
                 return new UZA.Button(this.convFiledName("btnkakutei"));
+            };
+
+            Controls.prototype.rowId = function () {
+                return new UZA.TextBoxNum(this.convFiledName("rowId"));
             };
             return Controls;
         })();

@@ -8,8 +8,32 @@ module DBC {
 
         export class Events {
 
+            public static onClick_modify(): string {
+                return "onClick_modify";
+            }
+
             public static onMulti_dgKyufuJissekiMeisaiList(): string {
                 return "onMulti_dgKyufuJissekiMeisaiList";
+            }
+
+            public static onOkClose_btnJgyosha(): string {
+                return "onOkClose_btnJgyosha";
+            }
+
+            public static onBeforeOpenDialog_btnJgyosha(): string {
+                return "onBeforeOpenDialog_btnJgyosha";
+            }
+
+            public static onOkClose_btnServiceSyurui(): string {
+                return "onOkClose_btnServiceSyurui";
+            }
+
+            public static onBeforeOpenDialog_btnServiceSyurui(): string {
+                return "onBeforeOpenDialog_btnServiceSyurui";
+            }
+
+            public static onClick_btnkakutei(): string {
+                return "onClick_btnkakutei";
             }
 
         }
@@ -131,6 +155,10 @@ module DBC {
 
             public btnkakutei(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnkakutei"));
+            }
+
+            public rowId(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("rowId"));
             }
 
         }
