@@ -172,4 +172,30 @@
         "DbT2002Fuka"."tsuchishoNo",
         "DbT2003Kibetsu"."ki"
     </select>
+    
+    <select id="get平準化後の賦課の情報_画面" resultMap="resultMap_FukaInfo"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.HeinjunkaAfterParameter" fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
+        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>
+        FROM
+        rgdb."DbV2002Fuka" AS "DbT2002Fuka"
+        INNER JOIN
+        rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
+        ON
+        "DbT2003Kibetsu"."choteiNendo" = "DbT2002Fuka"."choteiNendo" and
+        "DbT2003Kibetsu"."fukaNendo" = "DbT2002Fuka"."fukaNendo" and
+        "DbT2003Kibetsu"."tsuchishoNo" = "DbT2002Fuka"."tsuchishoNo" and
+        "DbT2003Kibetsu"."rirekiNo" = "DbT2002Fuka"."rirekiNo" and
+        "DbT2003Kibetsu"."choshuHouhou" = '1'
+        INNER JOIN
+        rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
+        ON
+        "UrT0705ChoteiKyotsu"."choteiId" = "DbT2003Kibetsu"."choteiId"
+        WHERE "DbT2002Fuka"."choteiNendo" = #{調定年度}
+        AND "DbT2002Fuka"."fukaNendo" = #{賦課年度}
+        AND "DbT2002Fuka"."choteiNichiji" = #{調定日時}
+        AND "DbT2002Fuka"."hokenryoDankaiKarisanntei" = #{保険料段階}
+    </select>
 </mapper>

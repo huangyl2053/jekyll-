@@ -160,15 +160,16 @@ public class HeijunkaKakuteiHandler {
         List<dgHeijunkaKakutei_Row> rowList = div.getHeijunkaSagakuKakunin().getDgHeijunkaKakutei().getDataSource();
         List<HokenryoDankaibetu> 保険料段階と差額List = new ArrayList<>();
         HokenryoDankaibetu entity;
+        boolean flag = true;
         for (dgHeijunkaKakutei_Row row : rowList) {
             entity = new HokenryoDankaibetu();
             entity.set保険料段階(row.getTxtDankaiKubun());
-            if (row.getTxtSagaku().getValue() != null) {
-                entity.set差額(row.getTxtSagaku().getValue());
-            } else {
-                entity.set差額(Decimal.ZERO);
-            }
+            Decimal 差額 = row.getTxtSagaku().getValue() != null ? row.getTxtSagaku().getValue() : Decimal.ZERO;
+            entity.set差額(差額);
             保険料段階と差額List.add(entity);
+            if (!Decimal.ZERO.equals(差額)) {
+                flag = false;
+            }
         }
         List<Taishokensu> taishokensuList = new ArrayList<>();
         if (特徴平準化_特徴6月分.equals(ResponseHolder.getMenuID())) {
@@ -179,7 +180,8 @@ public class HeijunkaKakuteiHandler {
                     遷移区分_0,
                     保険料段階と差額List);
         } else if (特徴平準化_特徴8月分.equals(ResponseHolder.getMenuID())) {
-            taishokensuList = TokuchoHeijunkaKakutei.createInstance().getKakuteiKensu(new FlexibleYear(調定年度.toString()),
+            taishokensuList = TokuchoHeijunkaKakutei.createInstance().getKakuteiKensu(
+                    new FlexibleYear(調定年度.toString()),
                     new FlexibleYear(調定年度.toString()),
                     基準日時,
                     遷移区分_1,
@@ -193,12 +195,6 @@ public class HeijunkaKakuteiHandler {
             Taishokensu taishokensuEntity = map.get(dgRow.getTxtDankaiKubun());
             dgRow.setTxtKakuteiKensu(new RString(taishokensuEntity.get確定対象件数()));
             dgRow.setTxtTaishogaiKensu(new RString(taishokensuEntity.get対象外件数()));
-        }
-        boolean flag = true;
-        for (dgHeijunkaKakutei_Row row : rowList) {
-            if (!Decimal.ZERO.equals(row.getTxtSagaku().getValue())) {
-                flag = false;
-            }
         }
         return flag;
     }

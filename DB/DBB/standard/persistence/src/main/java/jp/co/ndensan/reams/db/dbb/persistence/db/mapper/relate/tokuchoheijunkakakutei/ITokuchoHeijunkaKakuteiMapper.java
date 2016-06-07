@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunkakakutei;
 
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunkakakutei.TokuchoHeinjunkaKakuteiEntity;
 
 /**
  * ビジネス設計_DBBBZ35004_特徴平準化確定のマッパーインタフェースです。
@@ -32,7 +34,8 @@ public interface ITokuchoHeijunkaKakuteiMapper {
      *
      * @param entity TokuchoHeinjunkaKakuteiEntity
      */
-//    void inset特徴平準化賦課Temp(TokuchoHeinjunkaKakuteiEntity entity);
+    void inset特徴平準化賦課Temp(TokuchoHeinjunkaKakuteiEntity entity);
+
     /**
      * 平準化後の賦課の情報を取得
      *
@@ -45,11 +48,12 @@ public interface ITokuchoHeijunkaKakuteiMapper {
      *
      * @param entity TokuchoHeinjunkaKakuteiEntity
      */
-//    void update特徴平準化賦課Temp(TokuchoHeinjunkaKakuteiEntity entity);
+    void update特徴平準化賦課Temp(TokuchoHeinjunkaKakuteiEntity entity);
+
     /**
      * 特徴平準化賦課Tempを取得
      *
      * @return TokuchoHeinjunkaKakuteiEntity
      */
-//    List<TokuchoHeinjunkaKakuteiEntity> select特徴平準化賦課Temp();
+    List<TokuchoHeinjunkaKakuteiEntity> select特徴平準化賦課Temp();
 }

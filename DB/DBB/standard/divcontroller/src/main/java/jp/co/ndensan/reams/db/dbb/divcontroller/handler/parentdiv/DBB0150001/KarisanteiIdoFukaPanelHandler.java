@@ -323,7 +323,7 @@ public class KarisanteiIdoFukaPanelHandler {
         }
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         for (ShutsuryokuKiKoho entity : 出力期) {
-            dataSource.add(new KeyValueDataSource(entity.get期月().get月().getコード(), entity.get表示文字列()));
+            dataSource.add(new KeyValueDataSource(entity.get期月().get期(), entity.get表示文字列()));
         }
         div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getDdlNotsuShuturyokuki()
                 .setDataSource(dataSource);
@@ -578,7 +578,7 @@ public class KarisanteiIdoFukaPanelHandler {
                 .getDdlNotsuShuturyokuki().getSelectedValue();
         if (!出力期.isEmpty()) {
             Noki 普徴納期 = FukaNokiResearcher.createInstance()
-                    .get普徴納期(Integer.valueOf(出力期.substring(NUM_0, NUM_2).toString()));
+                    .get普徴納期(Integer.valueOf(出力期.toString()));
             div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getTxtNotsuHakkoYMD()
                     .setValue(普徴納期.get通知書発行日());
         }

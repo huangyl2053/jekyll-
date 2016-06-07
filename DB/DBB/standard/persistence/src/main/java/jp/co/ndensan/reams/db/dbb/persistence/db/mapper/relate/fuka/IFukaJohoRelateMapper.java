@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka;
 
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.HeinjunkaAfterParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fukajoho.FukaJohoRelateMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 
@@ -39,4 +40,12 @@ public interface IFukaJohoRelateMapper {
      * @return List<FukaJohoRelateEntity>
      */
     List<FukaJohoRelateEntity> get賦課の情報(Map<String, Object> parameter);
+
+    /**
+     * 平準化後の賦課の情報を取得します。。
+     *
+     * @param parameter 賦課の情報検索条件
+     * @return FukaJohoRelateEntity
+     */
+    FukaJohoRelateEntity get平準化後の賦課の情報_画面(HeinjunkaAfterParameter parameter);
 }

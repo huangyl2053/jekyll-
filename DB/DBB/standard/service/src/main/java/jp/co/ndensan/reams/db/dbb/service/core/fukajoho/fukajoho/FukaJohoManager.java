@@ -10,6 +10,7 @@ import java.util.Map;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.HeinjunkaAfterParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fukajoho.FukaJohoRelateMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
@@ -148,5 +149,23 @@ public class FukaJohoManager {
         for (Kibetsu 介護期別 : 介護期別List) {
             介護期別Manager.save介護期別(介護期別);
         }
+    }
+
+    /**
+     * 平準化後の賦課の情報_画面を取得します。
+     *
+     * @param parameter 賦課の情報検索条件
+     * @return FukaJoho nullが返る可能性があります。
+     */
+    @Transaction
+    public FukaJoho get平準化後の賦課の情報_画面(HeinjunkaAfterParameter parameter) {
+        IFukaJohoRelateMapper mapper = mapperProvider.create(IFukaJohoRelateMapper.class);
+
+        FukaJohoRelateEntity relateEntity = mapper.get平準化後の賦課の情報_画面(parameter);
+        if (relateEntity == null) {
+            return null;
+        }
+        relateEntity.initializeMd5ToEntities();
+        return new FukaJoho(relateEntity);
     }
 }
