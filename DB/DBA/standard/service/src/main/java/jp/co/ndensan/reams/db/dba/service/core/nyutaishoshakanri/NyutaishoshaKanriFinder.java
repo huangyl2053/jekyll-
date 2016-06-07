@@ -21,9 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class NyutaishoshaKanriFinder {
 
-    private static final RString 介護保険施設 = new RString("11");
-    private static final RString 住所地特例対象施設 = new RString("12");
-    private static final RString 適用除外施設 = new RString("21");
+    private static final RString 被保険者 = new RString("1");
+    private static final RString 他町村住所地特例者 = new RString("2");
+    private static final RString 適用除外者 = new RString("3");
     private final MapperProvider mapperProvider;
 
     /**
@@ -56,29 +56,22 @@ public class NyutaishoshaKanriFinder {
      *
      * @param 入所年月日 入所年月日
      * @param 退所年月日 退所年月日
-     * @param 入所施設種類 入所施設種類
+     * @param 台帳種別 台帳種別
      * @return rirekiKikanJufukuFlag
      */
     @Transaction
-    public Boolean isRirekiKikanJufukuFlag(FlexibleDate 入所年月日, FlexibleDate 退所年月日, RString 入所施設種類) {
+    public boolean isRirekiKikanJufukuFlag(FlexibleDate 入所年月日, FlexibleDate 退所年月日, RString 台帳種別) {
         int count = 0;
         INyutaishoshaKanriMapper mapper = mapperProvider.create(INyutaishoshaKanriMapper.class);
-        NyutaishoshaKanriMapperParameter parameter;
-        switch (入所施設種類.toString()) {
-            case "11":
-                parameter = NyutaishoshaKanriMapperParameter.createSelectByKeyParam(入所年月日, 退所年月日, 介護保険施設);
-                count = mapper.getHihokenshaDaichoCount(parameter);
-                break;
-            case "21":
-                parameter = NyutaishoshaKanriMapperParameter.createSelectByKeyParam(入所年月日, 退所年月日, 適用除外施設);
-                count = mapper.getTekiyoJogaishaCount(parameter);
-                break;
-            case "12":
-                parameter = NyutaishoshaKanriMapperParameter.createSelectByKeyParam(入所年月日, 退所年月日, 住所地特例対象施設);
-                count = mapper.getTashichosonJushochiTokureiCount(parameter);
-                break;
-            default:
-                break;
+        NyutaishoshaKanriMapperParameter parameter = NyutaishoshaKanriMapperParameter.createSelectByKeyParam(入所年月日, 退所年月日);
+        if (被保険者.equals(台帳種別)) {
+            count = mapper.getHihokenshaDaichoCount(parameter);
+        }
+        if (他町村住所地特例者.equals(台帳種別)) {
+            count = mapper.getTashichosonJushochiTokureiCount(parameter);
+        }
+        if (適用除外者.equals(台帳種別)) {
+            count = mapper.getTekiyoJogaishaCount(parameter);
         }
         return 2 <= count;
     }
