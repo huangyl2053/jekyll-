@@ -2,12 +2,12 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- @reamsid_L DBC-0980-550 zhangrui -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper">
-    <select id="selectbyKeyUndeleted" resultMap="ResultMap_DbT3104KokuhorenInterfaceKanriEntity" 
+    <select id="selectbyKeyUndeleted" resultMap="ResultMap_DbT3104KokuhorenInterfaceKanriEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenInterfaceUpdateMybaticParameter" fetchSize="500">
-        select * from rgdb."DbT3104KokuhorenInterfaceKanri" As DbT3104 
+        select * from rgdb."DbT3104KokuhorenInterfaceKanri" As DbT3104
         where DbT3104."shoriYM" = #{shoriYM} and DbT3104."kokanShikibetsuNo" = #{kokanShikibetsuNo}
     </select>
-    
+
     <!--テーブルDbT3104KokuhorenInterfaceKanriの項目をDbT3104KokuhorenInterfaceKanriEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT3104KokuhorenInterfaceKanriEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity" autoMapping="true">
         <id property="shoriYM" column="dbT3104KokuhorenInterfaceKanri_shoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
@@ -44,8 +44,8 @@
         <result property="kagoCtrlShoriYM" column="dbT3104KokuhorenInterfaceKanri_kagoCtrlShoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="jissekiDataShinsaYM" column="dbT3104KokuhorenInterfaceKanri_jissekiDataShinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
     </resultMap>
-    
-    
+
+
     <!-- 処理結果リスト一時TBLを作成します。 -->
     <insert id="create処理結果リスト一時TBL">
         CREATE TEMP TABLE "DbWT0002KokuhorenTorikomiError"
@@ -63,11 +63,11 @@
         "biko" varchar(20)
         )
     </insert>
-    
+
     <!--処理結果リスト一時テーブルに登録します-->
     <insert id="insert処理結果リスト一時TBL" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.SyoriKekkaListItijiEntity">
-        INSERT INTO "DbWT0002KokuhorenTorikomiError" 
-        VALUES 
+        INSERT INTO "DbWT0002KokuhorenTorikomiError"
+        VALUES
         (
         #{エラー区分},
         #{証記載保険者番号},
@@ -81,10 +81,10 @@
         #{被保険者氏名},
         #{備考})
     </insert>
-    
-        <!--処理結果リスト一時テーブルに更新します-->
+
+    <!--処理結果リスト一時テーブルに更新します-->
     <update id="update処理結果リスト一時TBL" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.SyoriKekkaListItijiEntity">
-        UPDATE "DbWT0002KokuhorenTorikomiError" 
+        UPDATE "DbWT0002KokuhorenTorikomiError"
         set
         "errorKubunCode" = #{エラー区分},
         "shoHokanehshaNo" = #{証記載保険者番号},
@@ -98,24 +98,24 @@
         "hihokenshaShimei" = #{被保険者氏名},
         "biko" = #{備考}
     </update>
-    
+
     <select id="select処理結果リスト一時TBL" resultMap="resultMap_ShoriKekkaList" fetchSize="500">
         SELECT *
         FROM "DbWT0002KokuhorenTorikomiError"
         ORDER BY "errorKubunCode" ASC,
-                 "shoHokanehshaNo" ASC,
-                 "hihokenshaNo" ASC,
-                 "key1" ASC,
-                 "key2" ASC,
-                 "key3" ASC,
-                 "key4" ASC,
-                 "key5" ASC
+        "shoHokanehshaNo" ASC,
+        "hihokenshaNo" ASC,
+        "key1" ASC,
+        "key2" ASC,
+        "key3" ASC,
+        "key4" ASC,
+        "key5" ASC
     </select>
-    
+
     <select id="select処理結果リストUNIQUE" resultMap="resultMap_ShoriKekkaList" fetchSize="500">
         SELECT *
         FROM "DbWT0002KokuhorenTorikomiError" as TEMP
-        where TEMP.errorKubunCode = #{errorKubunCode} 
+        where TEMP.errorKubunCode = #{errorKubunCode}
         and TEMP.shoHokanehshaNo = #{shoHokanehshaNo}
         and TEMP.hihokenshaNo = #{hihokenshaNo}
         and TEMP.key1 = #{key1}
@@ -124,7 +124,7 @@
         and TEMP.key4 = #{key4}
         and TEMP.key5 = #{key5}
     </select>
-    
+
     <resultMap id="resultMap_ShoriKekkaList" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.SyoriKekkaListItijiEntity" autoMapping="true">
         <result property="エラー区分" column="errorKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="証記載保険者番号" column="shoHokanehshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
@@ -138,13 +138,13 @@
         <result property="被保険者氏名" column="hihokenshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="備考" column="biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    
-    
+
+
     <select id="selectALL被保険者" resultMap="resultMap_DbWT0001HihokenshaTempEntity" fetchSize="500">
         SELECT TEMP.*
         FROM "rgdb"."DbWT0001HihokenshaTemp" as TEMP
     </select>
-    
+
     <!--被保険者番号変換対象を取ります-->
     <select id="select被保険者番号変換対象" resultMap="resultMap_DbWT0001HihokenshaTempEntity" fetchSize="500">
         SELECT TEMP.*
@@ -152,16 +152,16 @@
         where TEMP."serviceTeikyoYmd" <![CDATA[<]]> #{変換基準日}
         and TEMP."hihokenshaNo" not like 'H%'
     </select>
-    
+
     <!--旧市町村コード登録-->
     <update id="update被保険者一時TBLWith旧市町村コード">
-        UPDATE "rgdb"."DbWT0001HihokenshaTemp" 
+        UPDATE "rgdb"."DbWT0001HihokenshaTemp"
         set
         "oldShichosonCode" = #{旧市町村コード}
         where
         "shoHokenshaNo" = #{証記載保険者番号}
     </update>
-    
+
     <!--テーブルHihokenshaItijiEntityの項目をDbWT0001HihokenshaTempEntityの項目にマッピングします。-->
     <resultMap id="resultMap_DbWT0001HihokenshaTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.HihokenshaItijiEntity" autoMapping="true">
         <id property="meisaiRenban" column="dbWT0001HihokenshaTemp_meisaiRenban" />
@@ -192,8 +192,8 @@
         <result property="setaiShuyakuNo" column="dbWT0001HihokenshaTemp_setaiShuyakuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shikibetsuCode" column="dbWT0001HihokenshaTemp_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
     </resultMap>
-    
-        <!--新被保険者番号対象を取ります-->
+
+    <!--新被保険者番号対象を取ります-->
     <select id="select新被保険者番号" resultMap="resultMap_HihokenshaAndHenkanBangoEntity" fetchSize="500">
         SELECT TEMP.*,
         HENKAN."shichosonCode" as "shichosonCode2",
@@ -201,41 +201,41 @@
         HENKAN."kyuNo" as "kyuNo",
         HENKAN."kyuShichosonCode" as "kyuShichosonCode"
         FROM "rgdb"."DbWT0001HihokenshaTemp" as TEMP LEFT JOIN
-             "rgdb"."DbT7026ShinKyuHihokenshaNoHenkan" as HENKAN
+        "rgdb"."DbT7026ShinKyuHihokenshaNoHenkan" as HENKAN
         ON TEMP."oldShichosonCode" = HENKAN."shichosonCode"
         and TEMP."hihokenshaNo" = HENKAN."kyuNo"
     </select>
-    
-        <!--新被保険者番号（＝新旧被保険者番号変換テーブル．新番号）を変換被保険者番号に登録する-->
+
+    <!--新被保険者番号（＝新旧被保険者番号変換テーブル．新番号）を変換被保険者番号に登録する-->
     <update id="update被保険者一時TBLWith新被保険者番号">
-        UPDATE "rgdb"."DbWT0001HihokenshaTemp" 
+        UPDATE "rgdb"."DbWT0001HihokenshaTemp"
         set
         "henkanHihokenshaNo" = #{新番号},
         "hihokenshaNo" = #{新番号}
         where
         "meisaiRenban" = #{連番}
     </update>
-    
+
     <update id="update被保険者一時TBLWith現被保険者番号">
-        UPDATE "rgdb"."DbWT0001HihokenshaTemp" 
+        UPDATE "rgdb"."DbWT0001HihokenshaTemp"
         set
         "henkanHihokenshaNo" = "orgHihokenshaNo",
         "hihokenshaNo" = "orgHihokenshaNo"
         where "serviceTeikyoYmd" <![CDATA[>=]]> #{変換基準日}
         OR "hihokenshaNo" LIKE 'H%'
     </update>
-    
+
     <update id="update被保険者番号WithEmpty変換被保険者番号">
-        UPDATE "rgdb"."DbWT0001HihokenshaTemp" 
+        UPDATE "rgdb"."DbWT0001HihokenshaTemp"
         set
         "henkanHihokenshaNo" = "orgHihokenshaNo",
         "hihokenshaNo" = "orgHihokenshaNo"
         where TEMP."henkanHihokenshaNo" = ''
     </update>
-    
-     <!--被保険者一時TBLと新旧被保険者番号変換TBL並びの項目をDbT3104KokuhorenInterfaceKanriEntityの項目にマッピングします。-->
+
+    <!--被保険者一時TBLと新旧被保険者番号変換TBL並びの項目をDbT3104KokuhorenInterfaceKanriEntityの項目にマッピングします。-->
     <resultMap id="resultMap_HihokenshaAndHenkanBangoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.HihokenshaAndHenkanBangoEntity" autoMapping="true">
-        <result property="meisaiRenban" column="dbWT0001HihokenshaTemp_meisaiRenban" />
+        <!--        <result property="meisaiRenban" column="dbWT0001HihokenshaTemp_meisaiRenban" />
         <result property="shoHokenshaNo" column="dbWT0001HihokenshaTemp_shoHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
         <result property="orgHihokenshaNo" column="dbWT0001HihokenshaTemp_orgHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="serviceTeikyoYmd" column="dbWT0001HihokenshaTemp_serviceTeikyoYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -265,27 +265,27 @@
         <result property="shichosonCode2" column="dbT7026ShinKyuHihokenshaNoHenkan_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="shinNo" column="dbT7026ShinKyuHihokenshaNoHenkan_shinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kyuNo" column="dbT7026ShinKyuHihokenshaNoHenkan_kyuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kyuShichosonCode" column="dbT7026ShinKyuHihokenshaNoHenkan_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="kyuShichosonCode" column="dbT7026ShinKyuHihokenshaNoHenkan_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>-->
     </resultMap>
-    
-    
-           <!--被保険者・宛名情報を取ります-->
+
+
+    <!--被保険者・宛名情報を取ります-->
     <select id="select被保険者And宛名情報" resultMap="resultMap_HihokenshaAndDaichouAndAtenaEntity" fetchSize="500">
-      SELECT 
+        SELECT
         <include refid="allColumns_DbWT0001HihokenshaTemp"/> ,
         <include refid="allColumns_DbV1001HihokenshaDaicho"/> ,
         <include refid="allColumns_UaFt200FindShikibetsuTaishoEntity"/>
-        FROM "rgdb"."DbWT0001HihokenshaTemp" as TEMP 
-        left join "rgdb"."DbV1001HihokenshaDaicho" as DAICHO 
+        FROM "rgdb"."DbWT0001HihokenshaTemp" as TEMP
+        left join "rgdb"."DbV1001HihokenshaDaicho" as DAICHO
         ON TEMP."henkanHihokenshaNo" = DAICHO."hihokenshaNo"
         left join rgua."UaFt200FindShikibetsuTaisho"('','',TRUE,'DB',false,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,false,false,true,true,true,true,
         true,'','','','','','','','',true,'','',true,false,true,'','','','','','','','','','','','','','','','','','','{}') as ATENA
         ON DAICHO."shikibetsuCode" = ATENA."shikibetsuCode"
     </select>
-    
+
     <update id="update被保険者一時TBLWith被保険者宛名情報" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.HihokenshaItijiEntity">
-        UPDATE "rgdb"."DbWT0001HihokenshaTemp" 
+        UPDATE "rgdb"."DbWT0001HihokenshaTemp"
         set
         "shichosonCode" = #{shichosonCode},
         "kannaiKangaiKubun" = #{kannaiKangaiKubun},
@@ -306,7 +306,7 @@
         "setaiShuyakuNo" = #{setaiShuyakuNo}
         where "meisaiRenban" = #{meisaiRenban}
     </update>
-    
+
     <!--HihokenshaAndDaichouAndAtenaEntityの項目にマッピングします。-->
     <resultMap id="resultMap_HihokenshaAndDaichouAndAtenaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.HihokenshaAndDaichouAndAtenaEntity" autoMapping="true">
         <id property="id" column="dbWT0001HihokenshaTemp_meisaiRenban"/>
@@ -537,7 +537,7 @@
             <result property="yusenShimeiTimestamp"               column="ShikibetsuTaisho_yusenShimeiTimestamp"               typeHandler="RDateTimeTypeHandler" />
         </association>
     </resultMap>
-    
+
     <sql id="allColumns_DbWT0001HihokenshaTemp">
         TEMP."meisaiRenban" as dbWT0001HihokenshaTemp_meisaiRenban,
         TEMP."shoHokenshaNo" as dbWT0001HihokenshaTemp_shoHokenshaNo,
@@ -567,7 +567,7 @@
         TEMP."setaiShuyakuNo" as dbWT0001HihokenshaTemp_setaiShuyakuNo,
         TEMP."shikibetsuCode" as dbWT0001HihokenshaTemp_shikibetsuCode
     </sql>
-    
+
     <sql id="allColumns_DbV1001HihokenshaDaicho">
         DAICHO."hihokenshaNo" as DAICHO_hihokenshaNo,
         DAICHO."idoYMD" as DAICHO_idoYMD,
@@ -794,5 +794,5 @@
         ATENA."yusenShimeiUpdateCount" as ShikibetsuTaisho_yusenShimeiUpdateCount,
         ATENA."yusenShimeiTimestamp" as ShikibetsuTaisho_yusenShimeiTimestamp
     </sql>
-    
+
 </mapper>
