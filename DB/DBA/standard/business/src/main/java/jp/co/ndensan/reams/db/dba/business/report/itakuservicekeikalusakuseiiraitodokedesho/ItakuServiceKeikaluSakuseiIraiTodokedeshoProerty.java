@@ -21,6 +21,6 @@ public class ItakuServiceKeikaluSakuseiIraiTodokedeshoProerty extends ReportProp
      * コンストラクタです。
      */
     public ItakuServiceKeikaluSakuseiIraiTodokedeshoProerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBC800004.getReportId());
+        super(SubGyomuCode.DBC介護給付, ReportIdDBA.DBC800004.getReportId());
     }
 }

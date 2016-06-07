@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * KyotakuKaigoJutakuKaishuhiJizenShinseishoProertyのプロパティです。
  *
- * @reamsid_L DBA-0540-703  lijia
- * 
+ * @reamsid_L DBA-0540-703 lijia
+ *
  */
 public class KyotakuKaigoJutakuKaishuhiJizenShinseishoProerty extends ReportPropertyBase<JutakuKaishuhiJizenShinseishoJuryoIninHaraiReportSource> {
 
@@ -22,6 +22,6 @@ public class KyotakuKaigoJutakuKaishuhiJizenShinseishoProerty extends ReportProp
      * コンストラクタです。
      */
     public KyotakuKaigoJutakuKaishuhiJizenShinseishoProerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBC800011.getReportId());
+        super(SubGyomuCode.DBC介護給付, ReportIdDBA.DBC800011.getReportId());
     }
 }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dba.business.report.juryoininharaitoriatsu;
 
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
@@ -12,18 +11,18 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- * 
+ *
  * {@link HihokenshashoHakkoIchiranHyoProerty}のプロパティです。
+ *
  * @reamsid_L DBA-0540-684 dongyabin
  */
-public class JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishProerty extends 
+public class JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishProerty extends
         ReportPropertyBase<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishoReportSource> {
-    
-    
+
     /**
      * コンストラクタです。
      */
     public JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishProerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBC800001.getReportId());
+        super(SubGyomuCode.DBC介護給付, ReportIdDBA.DBC800001.getReportId());
     }
 }

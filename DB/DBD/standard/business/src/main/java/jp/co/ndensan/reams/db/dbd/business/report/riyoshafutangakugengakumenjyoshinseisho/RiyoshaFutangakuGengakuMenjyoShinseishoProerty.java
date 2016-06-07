@@ -21,6 +21,6 @@ public class RiyoshaFutangakuGengakuMenjyoShinseishoProerty extends ReportProper
      * コンストラクタです。
      */
     public RiyoshaFutangakuGengakuMenjyoShinseishoProerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBD.DBD800002.getReportId());
+        super(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD800002.getReportId());
     }
 }
