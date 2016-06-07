@@ -909,6 +909,44 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
     }
 
     /**
+     * 調定IDを返します。
+     *
+     * @return 調定ID List<Long>
+     */
+    public List<Long> get調定ID() {
+
+        if (kibetsu == null || kibetsu.values() == null || kibetsu.values().isEmpty()) {
+            return null;
+        }
+        List<Long> 調定IDList = new ArrayList<>();
+        List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
+        for (Kibetsu 介護期別 : 介護期別List) {
+            ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(介護期別.get調定ID().longValue());
+            調定IDList.add(介護期別.getChoteiKyotsu(identifier).get調定ID());
+        }
+        return 調定IDList;
+    }
+
+    /**
+     * 収納IDを返します。
+     *
+     * @return 収納ID List<Long>
+     */
+    public List<Long> get収納ID() {
+
+        if (kibetsu == null || kibetsu.values() == null || kibetsu.values().isEmpty()) {
+            return null;
+        }
+        List<Long> 収納IDList = new ArrayList<>();
+        List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
+        for (Kibetsu 介護期別 : 介護期別List) {
+            ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(介護期別.get調定ID().longValue());
+            収納IDList.add(介護期別.getChoteiKyotsu(identifier).get収納ID());
+        }
+        return 収納IDList;
+    }
+
+    /**
      * 期別金額を返します。
      *
      * @param 期 int
