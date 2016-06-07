@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shinsakaikaisaioshirasetsuchi;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaikaisaioshirasetsuchi.ShinsakaiKaisaiOshiraseTsuchiItem;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaikaisaioshirasetsuchi.ShinsakaiKaisaiOshiraseTsuchiReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -18,39 +17,26 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShinsakaiKaisaiOshiraseTsuchiReport extends Report<ShinsakaiKaisaiOshiraseTsuchiReportSource> {
 
-    private final List<ShinsakaiKaisaiOshiraseTsuchiItem> itemList;
+    private final ShinsakaiKaisaiOshiraseTsuchiItem item;
 
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 介護認定審査会開催のお知らせのITEMLIST
-     * @return 介護認定審査会開催のお知らせのReport
+     * @param item 介護認定審査会開催のお知らせのITEMLIST
      */
-    public static ShinsakaiKaisaiOshiraseTsuchiReport createFrom(List<ShinsakaiKaisaiOshiraseTsuchiItem> itemList) {
-
-        return new ShinsakaiKaisaiOshiraseTsuchiReport(itemList);
+    public ShinsakaiKaisaiOshiraseTsuchiReport(ShinsakaiKaisaiOshiraseTsuchiItem item) {
+        this.item = item;
     }
 
     /**
-     * インスタンスを生成します。
-     *
-     * @param itemList 介護認定審査会開催のお知らせのITEMLIST
-     */
-    protected ShinsakaiKaisaiOshiraseTsuchiReport(List<ShinsakaiKaisaiOshiraseTsuchiItem> itemList) {
-
-        this.itemList = itemList;
-    }
-
-    /**
+     * 介護認定審査会開催のお知らせを生成します。
      *
      * @param reportSourceWriter 介護認定審査会開催のお知らせReportSourceクラス
      */
     @Override
     public void writeBy(ReportSourceWriter<ShinsakaiKaisaiOshiraseTsuchiReportSource> reportSourceWriter) {
-        for (ShinsakaiKaisaiOshiraseTsuchiItem item : itemList) {
-            IShinsakaiKaisaiOshiraseTsuchiEditor editor = new ShinsakaiKaisaiOshiraseTsuchiEditor(item);
-            IShinsakaiKaisaiOshiraseTsuchiBuilder builder = new ShinsakaiKaisaiOshiraseTsuchiBuilderImpl(editor);
-            reportSourceWriter.writeLine(builder);
-        }
+        IShinsakaiKaisaiOshiraseTsuchiEditor editor = new ShinsakaiKaisaiOshiraseTsuchiEditor(item);
+        IShinsakaiKaisaiOshiraseTsuchiBuilder builder = new ShinsakaiKaisaiOshiraseTsuchiBuilderImpl(editor);
+        reportSourceWriter.writeLine(builder);
     }
 }

@@ -38,31 +38,31 @@ class ShinsakaiKaisaiOshiraseTsuchiEditor implements IShinsakaiKaisaiOshiraseTsu
     }
 
     private ShinsakaiKaisaiOshiraseTsuchiReportSource editHeader(ShinsakaiKaisaiOshiraseTsuchiReportSource source) {
+        source.bunshoNo = item.get文書番号();
         source.hakkoYMD1 = item.get発行日();
         source.denshiKoin = item.get電子公印();
-        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
-        source.ninshoshaYakushokuMei2 = item.getNinshoshaYakushokuMei2();
-        source.ninshoshaYakushokuMei1 = item.getNinshoshaYakushokuMei1();
-        source.ninshoshaShimeiKakenai = item.getNinshoshaShimeiKakenai();
-        source.ninshoshaShimeiKakeru = item.getNinshoshaShimeiKakeru();
-        source.koinMojiretsu = item.getKoinMojiretsu();
-        source.koinShoryaku = item.get公印省略();
-        source.atesaki = item.get宛先();
-        source.bunshoNo = item.get文書番号();
-        //TODO 86954 対応待ち。2016/06/02
-//        source.yubinNo = item.getYubinNo();
-//        source.jushoText = item.getJushoText();
-//        source.kikanNameText = item.getKikanNameText();
-//        source.shimeiText = item.getShimeiText();
-//        source.meishoFuyo = item.getMeishoFuyo();
-//        source.customerBarCode = item.getCustomerBarCode();
-//        source.atenaRenban = item.getAtenaRenban();
+        source.yubinNo = item.get宛名郵便番号();
+        source.jushoText = item.get宛名住所();
+        source.kikanNameText = item.get宛名機関名();
+        source.shimeiText = item.get宛名氏名();
+        source.meishoFuyo = item.get宛名名称付与();
+//        source.atesaki = item.get宛先();
         source.title = new RString("介護認定審査会開催のお知らせ");
-        source.tsuchibun1 = item.get通知文3();
+        source.denshiKoin = item.get電子公印();
+        source.koinMojiretsu = item.get電子公印文字列();
+        source.koinShoryaku = item.get電子公印省略();
+        source.customerBarCode = item.getカスタマーバーコード();
+        source.pageCount = item.getページ番号();
+        source.ninshoshaShimeiKakenai = item.get認証者氏名公印掛けない();
+        source.ninshoshaShimeiKakeru = item.get認証者氏名公印掛ける();
+        source.ninshoshaYakushokuMei = item.get認証者役職名();
+        source.ninshoshaYakushokuMei1 = item.get認証者役職名1行目();
+        source.ninshoshaYakushokuMei2 = item.get認証者役職名2行目();
+        source.tsuchibun1 = item.get通知文1();
+        source.tsuchibun2 = item.get通知文2();
         source.shinsakaiKaisaiYMD = item.get開催日時();
         source.kaisaiKaijo = item.get開催会場();
         source.gogitaiNo = item.get合議体番号();
-        source.tsuchibun2 = item.get通知文3();
         source.listKaisaiJoho_1 = item.get開催番号();
         source.listKaisaiJoho_2 = item.get開催日();
         source.listKaisaiJoho_3 = item.get開催日時();

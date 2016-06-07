@@ -30,51 +30,49 @@ public class ShinsakaiKaisaiOshiraseTsuchiReportSource implements IReportSource 
     public RString koinMojiretsu;
     @ReportItem(name = "koinShoryaku", length = 15, order = 9)
     public RString koinShoryaku;
-    @ReportItem(name = "atesaki", length = 40, order = 10)
-    public RString atesaki;
-    @ReportItem(name = "bunshoNo", length = 35, order = 11)
+    @ReportItem(name = "bunshoNo", length = 35, order = 10)
     public RString bunshoNo;
-    @ReportItem(name = "yubinNo", length = 8, order = 12)
+    @ReportItem(name = "yubinNo", length = 8, order = 11)
     public RString yubinNo;
-    @ReportItem(name = "jushoText", order = 13)
+    @ReportItem(name = "jushoText", order = 12)
     public RString jushoText;
-    @ReportItem(name = "kikanNameText", order = 14)
+    @ReportItem(name = "kikanNameText", order = 13)
     public RString kikanNameText;
-    @ReportItem(name = "shimeiText", order = 15)
+    @ReportItem(name = "shimeiText", order = 14)
     public RString shimeiText;
-    @ReportItem(name = "meishoFuyo", length = 3, order = 16)
+    @ReportItem(name = "meishoFuyo", length = 3, order = 15)
     public RString meishoFuyo;
-    @ReportItem(name = "customerBarCode", order = 17)
+    @ReportItem(name = "customerBarCode", order = 16)
     public RString customerBarCode;
-    @ReportItem(name = "atenaRenban", length = 8, order = 18)
-    public RString atenaRenban;
-    @ReportItem(name = "title", length = 30, order = 19)
+    @ReportItem(name = "pageCount", length = 8, order = 17)
+    public RString pageCount;
+    @ReportItem(name = "title", length = 30, order = 18)
     public RString title;
-    @ReportItem(name = "tsuchibun1", order = 20)
+    @ReportItem(name = "tsuchibun1", order = 19)
     public RString tsuchibun1;
-    @ReportItem(name = "shinsakaiKaisaiYMD", length = 22, order = 21)
+    @ReportItem(name = "shinsakaiKaisaiYMD", length = 22, order = 20)
     public RString shinsakaiKaisaiYMD;
-    @ReportItem(name = "kaisaiKaijo", length = 20, order = 22)
+    @ReportItem(name = "kaisaiKaijo", length = 20, order = 21)
     public RString kaisaiKaijo;
-    @ReportItem(name = "gogitaiNo", length = 3, order = 23)
+    @ReportItem(name = "gogitaiNo", length = 3, order = 22)
     public RString gogitaiNo;
-    @ReportItem(name = "tsuchibun2", order = 24)
+    @ReportItem(name = "tsuchibun2", order = 23)
     public RString tsuchibun2;
-    @ReportItem(name = "listKaisaiJoho_1", length = 5, order = 25)
+    @ReportItem(name = "listKaisaiJoho_1", length = 5, order = 24)
     public RString listKaisaiJoho_1;
-    @ReportItem(name = "listKaisaiJoho_2", length = 11, order = 26)
+    @ReportItem(name = "listKaisaiJoho_2", length = 11, order = 25)
     public RString listKaisaiJoho_2;
-    @ReportItem(name = "listKaisaiJoho_3", length = 5, order = 27)
+    @ReportItem(name = "listKaisaiJoho_3", length = 5, order = 26)
     public RString listKaisaiJoho_3;
-    @ReportItem(name = "listKaisaiJoho_4", length = 2, order = 28)
+    @ReportItem(name = "listKaisaiJoho_4", length = 2, order = 27)
     public RString listKaisaiJoho_4;
-    @ReportItem(name = "listKaisaiJoho_5", length = 20, order = 29)
+    @ReportItem(name = "listKaisaiJoho_5", length = 20, order = 28)
     public RString listKaisaiJoho_5;
-    @ReportItem(name = "listJusho_1", length = 30, order = 30)
+    @ReportItem(name = "listJusho_1", length = 30, order = 29)
     public RString listJusho_1;
-    @ReportItem(name = "listTelNo_1", length = 13, order = 31)
+    @ReportItem(name = "listTelNo_1", length = 13, order = 30)
     public RString listTelNo_1;
-    @ReportItem(name = "tsuchibun3", order = 32)
+    @ReportItem(name = "tsuchibun3", order = 31)
     public RString tsuchibun3;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
@@ -82,4 +80,13 @@ public class ShinsakaiKaisaiOshiraseTsuchiReportSource implements IReportSource 
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * 改ページ条件のキーです。
+     */
+    public enum ReportSourceFields {
+
+        pageCount,
+
+    }
 }
