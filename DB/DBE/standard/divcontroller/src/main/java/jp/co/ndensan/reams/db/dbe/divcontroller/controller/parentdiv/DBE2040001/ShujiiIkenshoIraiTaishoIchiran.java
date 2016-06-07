@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2040001.Shu
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
@@ -56,6 +58,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -267,8 +270,15 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                     getValidationHandler().意見書出力年月日が未確定の完了必須チェック(validationMessages);
                     return ResponseData.of(div).addValidationMessages(validationMessages).respond();
                 }
+                Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
+                        = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
+                RString 申請書管理番号 = row.getShinseishoKanriNo();
+                if (!RString.isNullOrEmpty(申請書管理番号)) {
+                    NinteiKanryoJoho ninteiKanryoJoho = サービス一覧情報Model.get(
+                            new NinteiKanryoJohoIdentifier(new ShinseishoKanriNo(申請書管理番号)));
+                    getHandler(div).要介護認定完了情報更新(ninteiKanryoJoho);
+                }
             }
-            getHandler(div).要介護認定完了情報更新();
             前排他キーの解除(SHINSEISHOKANRINO);
             div.getCcdKanryoMsg().setMessage(new RString("完了処理・主治医意見書依頼"), RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2040001StateName.完了);

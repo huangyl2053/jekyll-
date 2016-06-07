@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2020010
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ninteichosascheduleinput.NinteiChosaSchedule;
+import jp.co.ndensan.reams.db.dbe.business.core.basic.ninteichosascheduleinput.NinteiChosaScheduleGamenkoumuku;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinseirirekijoho.ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
@@ -125,9 +126,25 @@ public class NinteiChosaScheduleInput {
             div.setShinseishoKanriNo3(申請者管理番号);
             set対象者個人基本情報Temp変数(申請者管理番号);
         }
+        RString key_予約可否 = get予約可のKEY(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_予約可否, RString.class));
+        RString key_予約状況 = get予約状況のKEY(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_予約状況, RString.class));
+        RString key_モード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class);
+        RString key_認定調査員コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_認定調査員コード, RString.class);
+        RString key_認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, RString.class);
+        RString key_時間枠 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_時間枠, RString.class);
+        FlexibleDate key_設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
+        RString 対象者を検索するモード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_対象者を検索するモード, RString.class);
+        NinteiChosaScheduleGamenkoumuku 画面項目 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_画面項目,
+                NinteiChosaScheduleGamenkoumuku.class);
+        if (画面ステート_1.equals(対象者を検索するモード)) {
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_対象者を検索するモード, RString.EMPTY);
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, 画面項目.get調査日値());
+        }
         getHandler(div).onLoad(temp_申請者管理番号3, temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況,
                 temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名, temp_カナ氏名,
-                temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
+                temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ,
+                key_予約可否, key_予約状況, key_モード, key_認定調査員コード, key_認定調査委託先コード,
+                key_時間枠, key_設定日, 対象者を検索するモード, 画面項目);
         return ResponseData.of(div).respond();
     }
 
@@ -286,51 +303,31 @@ public class NinteiChosaScheduleInput {
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, temp_地区コード);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面ステート, 画面ステート);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_対象者を検索するモード, 画面ステート_1);
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_認定調査員コード値,
-                div.getWariateJokyo().getTxtNinteiChosainCode().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_認定調査員コード状態,
-                div.getWariateJokyo().getTxtNinteiChosainCode().isDisabled());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_認定調査員氏名値, div.getWariateJokyo().getTxtNinteiChosainName().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_認定調査委託先コード値,
-                div.getWariateJokyo().getTxtNinteiChosaItakusakiCode().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_認定調査委託先名称値,
-                div.getWariateJokyo().getTxtNinteiChosaItakusakiName().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_調査日値,
-                div.getWariateJokyo().getTxtNinteiChosaDate().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_調査日時値,
-                div.getWariateJokyo().getTxtNinteiChosaTime().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_時間枠値,
-                div.getWariateJokyo().getTxtNinteiChosaTimeFrame().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_予約可否値,
-                div.getWariateJokyo().getRadYoyakuKahi().getSelectedKey());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_予約可否状態,
-                div.getWariateJokyo().getRadYoyakuKahi().isDisabled());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_備考値,
-                div.getWariateJokyo().getTxtNinteiChosaBiko().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_備考状態,
-                div.getWariateJokyo().getTxtNinteiChosaBiko().isDisabled());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_予約状況値,
-                div.getWariateJokyo().getRadYoyakuJokyo().getSelectedKey());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_予約状況状態,
-                div.getWariateJokyo().getRadYoyakuJokyo().isDisabled());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_被保番号状態,
-                div.getTaishoshaShosai().getTxtHihoBangoNumber().isDisabled());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_場所値,
-                div.getTaishoshaShosai().getTxtBasho().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_場所状態,
-                div.getTaishoshaShosai().getTxtBasho().isDisabled());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_駐車場値,
-                div.getTaishoshaShosai().getTxtChushajo().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_立会人１値,
-                div.getTaishoshaShosai().getTxtTachiainin1().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_連絡先１値,
-                div.getTaishoshaShosai().getTxtRenrakusaki1().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_立会人２値,
-                div.getTaishoshaShosai().getTxtTachiainin2().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_連絡先２値,
-                div.getTaishoshaShosai().getTxtRenrakusaki2().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_対象者メモ値,
-                div.getTaishoshaShosai().getTxtTaishoshaShosaiMemo().getValue());
+        NinteiChosaScheduleGamenkoumuku gamenkoumuku = new NinteiChosaScheduleGamenkoumuku();
+        gamenkoumuku.set認定調査員コード値(div.getWariateJokyo().getTxtNinteiChosainCode().getValue());
+        gamenkoumuku.set認定調査員コード状態(div.getWariateJokyo().getTxtNinteiChosainCode().isDisabled());
+        gamenkoumuku.set認定調査員氏名値(div.getWariateJokyo().getTxtNinteiChosainName().getValue());
+        gamenkoumuku.set認定調査委託先コード値(div.getWariateJokyo().getTxtNinteiChosaItakusakiCode().getValue());
+        gamenkoumuku.set認定調査委託先名称値(div.getWariateJokyo().getTxtNinteiChosainName().getValue());
+        gamenkoumuku.set調査日値(div.getWariateJokyo().getTxtNinteiChosaDate().getValue());
+        gamenkoumuku.set調査日時値(div.getWariateJokyo().getTxtNinteiChosaTime().getValue());
+        gamenkoumuku.set時間枠値(div.getWariateJokyo().getTxtNinteiChosaTimeFrame().getValue());
+        gamenkoumuku.set予約可否値(div.getWariateJokyo().getRadYoyakuKahi().getSelectedKey());
+        gamenkoumuku.set予約可否状態(div.getWariateJokyo().getRadYoyakuKahi().isDisabled());
+        gamenkoumuku.set備考値(div.getWariateJokyo().getTxtNinteiChosaBiko().getValue());
+        gamenkoumuku.set備考状態(div.getWariateJokyo().getTxtNinteiChosaBiko().isDisabled());
+        gamenkoumuku.set予約状況値(div.getWariateJokyo().getRadYoyakuJokyo().getSelectedKey());
+        gamenkoumuku.set予約状況状態(div.getWariateJokyo().getRadYoyakuJokyo().isDisabled());
+        gamenkoumuku.set被保番号状態(div.getTaishoshaShosai().getTxtHihoBangoNumber().isDisabled());
+        gamenkoumuku.set場所値(div.getTaishoshaShosai().getTxtBasho().getValue());
+        gamenkoumuku.set場所状態(div.getTaishoshaShosai().getTxtBasho().isDisabled());
+        gamenkoumuku.set駐車場値(div.getTaishoshaShosai().getTxtChushajo().getValue());
+        gamenkoumuku.set立会人１値(div.getTaishoshaShosai().getTxtTachiainin1().getValue());
+        gamenkoumuku.set連絡先１値(div.getTaishoshaShosai().getTxtRenrakusaki1().getValue());
+        gamenkoumuku.set立会人２値(div.getTaishoshaShosai().getTxtTachiainin2().getValue());
+        gamenkoumuku.set連絡先２値(div.getTaishoshaShosai().getTxtRenrakusaki2().getValue());
+        gamenkoumuku.set対象者メモ値(div.getTaishoshaShosai().getTxtTaishoshaShosaiMemo().getValue());
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_画面項目, gamenkoumuku);
         return ResponseData.of(div).forwardWithEventName(DBE2020010TransitionEventName.更新_対象者を検索する).respond();
     }
 
