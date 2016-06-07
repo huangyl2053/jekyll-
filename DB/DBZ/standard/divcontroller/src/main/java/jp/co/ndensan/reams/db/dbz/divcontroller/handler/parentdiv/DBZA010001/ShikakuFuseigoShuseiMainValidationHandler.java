@@ -14,12 +14,10 @@ import jp.co.ndensan.reams.db.dbz.business.core.shikakufuseigo.ShikakuFuseigoBus
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001.ShikakuFuseigoShuseiMainDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo.ShikakuFuseigoShuseiService;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 資格不整合修正の抽象ValidationHandleクラスです。
@@ -52,24 +50,27 @@ public class ShikakuFuseigoShuseiMainValidationHandler {
      * 更新前の整合性チェック
      *
      * @param 台帳種別 RString
+     * @param shikakuFusei 不整合修正中
+     * @param 修正後の資格の情報 HihokenshaDaicho
+     * @param 修正後の除外の情報 TekiyoJogaisha
+     * @param 修正後の他特の情報 TashichosonJushochiTokurei
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs beforeUpdCheck(RString 台帳種別) {
+    public ValidationMessageControlPairs beforeUpdCheck(RString 台帳種別, ShikakuFuseigoBusiness shikakuFusei, HihokenshaDaicho 修正後の資格の情報,
+            TekiyoJogaisha 修正後の除外の情報, TashichosonJushochiTokurei 修正後の他特の情報) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        ShikakuFuseigoBusiness shikakuFusei = ViewStateHolder.get(
-                ViewStateKeys.資格不整合_不整合修正中, ShikakuFuseigoBusiness.class);
         Map<RString, DbzErrorMessages> msg = new HashMap<>();
         if (台帳種別.equals(DaichoType.被保険者.getコード())) {
             msg = service.validate被保台帳整合(shikakuFusei.get個人情報(),
-                    ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の資格の情報, HihokenshaDaicho.class));
+                    修正後の資格の情報);
         }
         if (台帳種別.equals(DaichoType.適用除外者.getコード())) {
             msg = service.validate被保台帳整合(shikakuFusei.get個人情報(),
-                    ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の除外の情報, TekiyoJogaisha.class));
+                    修正後の除外の情報);
         }
         if (台帳種別.equals(DaichoType.他市町村住所地特例者.getコード())) {
             msg = service.validate被保台帳整合(shikakuFusei.get個人情報(),
-                    ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の他特の情報, TashichosonJushochiTokurei.class));
+                    修正後の他特の情報);
         }
         if (msg.get(対象項目_資格取得日) != null) {
             validationMessages.add(new ValidationMessageControlPair(msg.get(対象項目_資格取得日), div.getTxtShikakuShutokuYmd()));
