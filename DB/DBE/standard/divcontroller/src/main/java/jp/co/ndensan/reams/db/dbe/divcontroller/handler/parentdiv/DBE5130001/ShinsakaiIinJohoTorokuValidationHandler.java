@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
  */
 public class ShinsakaiIinJohoTorokuValidationHandler {
 
-    private static final RString 更新モード = new RString("更新");
     private final ShinsakaiIinJohoTorokuDiv div;
 
     /**
