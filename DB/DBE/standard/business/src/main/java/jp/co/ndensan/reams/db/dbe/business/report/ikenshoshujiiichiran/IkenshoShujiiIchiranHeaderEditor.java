@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran;
+package jp.co.ndensan.reams.db.dbe.business.report.ikenshoshujiiichiran;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji.ShujiiHateiJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji.ShujiiOutputPage1;
