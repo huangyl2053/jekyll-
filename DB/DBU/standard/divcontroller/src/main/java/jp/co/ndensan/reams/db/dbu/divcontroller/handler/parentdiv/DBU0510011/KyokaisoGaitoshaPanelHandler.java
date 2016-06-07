@@ -19,9 +19,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBZCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoGaitosha;
+import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoGaitoshaBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoHokenryoDankai;
+import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoHokenryoDankaiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoSochiShinsei;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoSochiShinseiBuilder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -36,7 +38,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
@@ -48,7 +49,6 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 public class KyokaisoGaitoshaPanelHandler {
 
     private static final RString 照会 = new RString("照会");
-    private static final RString 更新 = new RString("更新");
     private static final RString 措置_該当区分 = new RString("1");
     private static final RString 措置_非該当区分 = new RString("2");
     private static final RString 措置区分_該当 = new RString("該当");
@@ -78,21 +78,20 @@ public class KyokaisoGaitoshaPanelHandler {
      * 画面初期化処理です。
      *
      * @param 境界層該当一覧情報 境界層該当一覧情報
+     * @param 状態 状態
      */
-    public void onLoad(List<KyokaisoGaitoshaJoho> 境界層該当一覧情報) {
-        RString 状態 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_状態, RString.class);
+    public void onLoad(List<KyokaisoGaitoshaJoho> 境界層該当一覧情報, RString 状態) {
         div.getDdlKyojuhiGendogakuDankai().setDataSource(居住費軽減負担限度額段階ドロップダウンリスト());
         div.getDdlKyoshituShurui().setDataSource(居住費軽減後居室種類ドロップダウンリスト());
         div.getDdlShokuhiGakenFutanGendogakuDankai().setDataSource(居住費軽減負担限度額段階ドロップダウンリスト());
         if (照会.equals(状態)) {
-            set境界層該当一覧(境界層該当一覧情報, 状態);
+            set境界層該当一覧(境界層該当一覧情報);
             div.getBtnTuika().setVisible(false);
             div.getDgKyokaisouGaitouItran().getGridSetting().setIsShowSelectButtonColumn(true);
             div.getDgKyokaisouGaitouItran().getGridSetting().setIsShowModifyButtonColumn(false);
             div.getDgKyokaisouGaitouItran().getGridSetting().setIsShowDeleteButtonColumn(false);
-        }
-        if (更新.equals(状態)) {
-            set境界層該当一覧(境界層該当一覧情報, 状態);
+        } else {
+            set境界層該当一覧(境界層該当一覧情報);
         }
     }
 
@@ -126,16 +125,18 @@ public class KyokaisoGaitoshaPanelHandler {
      *
      * @param row 境界層該当一覧選択したデータ
      * @param 境界層保険料段階情報 境界層保険料段階情報
+     * @param 状態 状態
      */
     public void onClick_ShowSelectButton(
             dgKyokaisouGaitouItran_Row row,
-            List<KyokaisoHokenryo> 境界層保険料段階情報) {
+            List<KyokaisoHokenryo> 境界層保険料段階情報,
+            RString 状態) {
         div.getKyokaisouGaitouItiran().setIranState(RString.EMPTY);
         div.getDdlSeidaiJogengaku().setDataSource(
                 読替後高額介護世帯上限額ドロップダウンリスト(new RDate(row.getShinseiDate().toString())));
         div.getDdlTekiyouSuruShutokuDankai().setDataSource(
                 所得段階ドロップダウンリスト(new RDate(row.getShinseiDate().toString())));
-        set境界層該当明細(row, 境界層保険料段階情報);
+        set境界層該当明細(row, 境界層保険料段階情報, 状態);
         set境界層該当明細非活性();
     }
 
@@ -144,10 +145,12 @@ public class KyokaisoGaitoshaPanelHandler {
      *
      * @param row 境界層該当一覧選択したデータ
      * @param 境界層保険料段階情報 境界層保険料段階情報
+     * @param 状態 状態
      */
     public void onClick_ShowModifyButton(
             dgKyokaisouGaitouItran_Row row,
-            List<KyokaisoHokenryo> 境界層保険料段階情報) {
+            List<KyokaisoHokenryo> 境界層保険料段階情報,
+            RString 状態) {
         div.getKyokaisouGaitouItiran().setIranState(状態_修正);
         div.getBtnTuikaSuru().setDisabled(false);
         div.getBtnCancel().setDisabled(false);
@@ -156,7 +159,7 @@ public class KyokaisoGaitoshaPanelHandler {
                 読替後高額介護世帯上限額ドロップダウンリスト(new RDate(row.getShinseiDate().toString())));
         div.getDdlTekiyouSuruShutokuDankai().setDataSource(
                 所得段階ドロップダウンリスト(new RDate(row.getShinseiDate().toString())));
-        set境界層該当明細(row, 境界層保険料段階情報);
+        set境界層該当明細(row, 境界層保険料段階情報, 状態);
         set境界層該当明細活性();
     }
 
@@ -165,16 +168,18 @@ public class KyokaisoGaitoshaPanelHandler {
      *
      * @param row 境界層該当一覧選択したデータ
      * @param 境界層保険料段階情報 境界層保険料段階情報
+     * @param 状態 状態
      */
     public void onClick_ShowDeleteButton(
             dgKyokaisouGaitouItran_Row row,
-            List<KyokaisoHokenryo> 境界層保険料段階情報) {
+            List<KyokaisoHokenryo> 境界層保険料段階情報,
+            RString 状態) {
         div.getKyokaisouGaitouItiran().setIranState(状態_削除);
         div.getDdlSeidaiJogengaku().setDataSource(
                 読替後高額介護世帯上限額ドロップダウンリスト(new RDate(row.getShinseiDate().toString())));
         div.getDdlTekiyouSuruShutokuDankai().setDataSource(
                 所得段階ドロップダウンリスト(new RDate(row.getShinseiDate().toString())));
-        set境界層該当明細(row, 境界層保険料段階情報);
+        set境界層該当明細(row, 境界層保険料段階情報, 状態);
         set境界層該当明細非活性();
     }
 
@@ -307,15 +312,15 @@ public class KyokaisoGaitoshaPanelHandler {
      */
     public KyokaisoHokenryoDankai editHokenryoDankai(
             KyokaisoHokenryoDankai hokenryoDankai) {
-        FlexibleYearMonth 適用終了年月 = FlexibleYearMonth.EMPTY;
+        KyokaisoHokenryoDankaiBuilder 境界層保険料段階 = hokenryoDankai.createBuilderForEdit();
         if (div.getTxtHohenryoNofuToDate().getValue() != null) {
-            適用終了年月 = new FlexibleYearMonth(div.getTxtHohenryoNofuToDate().getValue().seireki().getYearMonth().replace(new RString("."), RString.EMPTY));
+            境界層保険料段階.set適用終了年月(new FlexibleYearMonth(
+                    div.getTxtHohenryoNofuToDate().getValue().seireki().getYearMonth().replace(new RString("."), RString.EMPTY)));
         }
-        return hokenryoDankai.createBuilderForEdit()
-                .set適用終了年月(適用終了年月)
-                .set保険料納付減額後保険料段階(div.getDdlTekiyouSuruShutokuDankai().getSelectedKey() == null
-                        ? RString.EMPTY : div.getDdlTekiyouSuruShutokuDankai().getSelectedKey())
-                .build();
+        if (div.getDdlTekiyouSuruShutokuDankai().getSelectedKey() != null && !div.getDdlTekiyouSuruShutokuDankai().getSelectedKey().isEmpty()) {
+            境界層保険料段階.set保険料納付減額後保険料段階(div.getDdlTekiyouSuruShutokuDankai().getSelectedKey());
+        }
+        return 境界層保険料段階.build();
     }
 
     /**
@@ -337,26 +342,54 @@ public class KyokaisoGaitoshaPanelHandler {
      * @return 境界層該当者情報
      */
     public KyokaisoGaitosha editKyokaisoGaitosha(KyokaisoGaitosha kyokaisoGaitosha) {
-        Decimal 高額ｻｰﾋﾞｽ費減額後上限額 = new Decimal("0");
-        if (!div.getDdlSeidaiJogengaku().getSelectedKey().isEmpty()) {
-            高額ｻｰﾋﾞｽ費減額後上限額 = new Decimal(div.getDdlSeidaiJogengaku().getSelectedKey().toString());
+        KyokaisoGaitoshaBuilder 境界層該当者情報 = kyokaisoGaitosha.createBuilderForEdit();
+        if (div.getTxtKaishibi() != null && div.getTxtKaishibi().getValue() != null) {
+            境界層該当者情報.set適用開始年月日(new FlexibleDate(div.getTxtKaishibi().getValue().toDateString()));
         }
-        return kyokaisoGaitosha.createBuilderForEdit()
-                .set適用開始年月日(new FlexibleDate(div.getTxtKaishibi().getValue().toDateString()))
-                .set適用終了年月日(new FlexibleDate(div.getTxtShuryobi().getValue().toDateString()))
-                .set境界層措置決定年月日(new FlexibleDate(div.getTxtKeteibi().getValue().toDateString()))
-                .set給付額減額記載解除フラグ(div.getRadKyufukakuGengakuKisaiKaijyo().getSelectedKey())
-                .set標準負担額額該当フラグ(div.getRadHyojunFutanGaku().getSelectedKey())
-                .set標準負担軽減後負担額(div.getTxtHyojunFutanKeigenAtoFutanGaku().getValue())
-                .set居住費等負担額減額該当フラグ(div.getRadKyojuhiFutanGakuGengaku().getSelectedKey())
-                .set居住費軽減後居室種類コード(div.getDdlKyoshituShurui().getSelectedKey())
-                .set居住費軽減後負担額(div.getTxtKeigenAtoFutanGaku().getValue())
-                .set食費負担額減額該当フラグ(div.getRadShokuhiFutangakuGengaku().getSelectedKey())
-                .set食費軽減後負担額(div.getTxtShokuhiGenkenAtoFutangaku().getValue())
-                .set高額ｻｰﾋﾞｽ費上限額減額該当フラグ(div.getRadGogakuServiceJokengaku().getSelectedKey())
-                .set高額ｻｰﾋﾞｽ費減額後上限額(高額ｻｰﾋﾞｽ費減額後上限額)
-                .set保険料納付減額フラグ(div.getRadHokenryoNofuGengaku().getSelectedKey())
-                .build();
+        if (div.getTxtShuryobi() != null && div.getTxtShuryobi().getValue() != null) {
+            境界層該当者情報.set適用終了年月日(new FlexibleDate(div.getTxtShuryobi().getValue().toDateString()));
+        }
+        if (div.getTxtKeteibi() != null && div.getTxtKeteibi().getValue() != null) {
+            境界層該当者情報.set境界層措置決定年月日(new FlexibleDate(div.getTxtKeteibi().getValue().toDateString()));
+        }
+        if (!RString.isNullOrEmpty(div.getRadKyufukakuGengakuKisaiKaijyo().getSelectedKey())) {
+            境界層該当者情報.set給付額減額記載解除フラグ(div.getRadKyufukakuGengakuKisaiKaijyo().getSelectedKey());
+        }
+        if (!RString.isNullOrEmpty(div.getRadHyojunFutanGaku().getSelectedKey())) {
+            境界層該当者情報.set標準負担額額該当フラグ(div.getRadHyojunFutanGaku().getSelectedKey());
+        }
+        if (div.getTxtHyojunFutanKeigenAtoFutanGaku() != null && div.getTxtHyojunFutanKeigenAtoFutanGaku().getValue() != null) {
+            境界層該当者情報.set標準負担軽減後負担額(div.getTxtHyojunFutanKeigenAtoFutanGaku().getValue());
+        }
+        if (!RString.isNullOrEmpty(div.getRadKyojuhiFutanGakuGengaku().getSelectedKey())) {
+            境界層該当者情報.set居住費等負担額減額該当フラグ(div.getRadKyojuhiFutanGakuGengaku().getSelectedKey());
+        }
+        return set項目(境界層該当者情報);
+    }
+
+    private KyokaisoGaitosha set項目(KyokaisoGaitoshaBuilder 境界層該当者情報) {
+        if (!RString.isNullOrEmpty(div.getDdlKyoshituShurui().getSelectedKey())) {
+            境界層該当者情報.set居住費軽減後居室種類コード(div.getDdlKyoshituShurui().getSelectedKey());
+        }
+        if (div.getTxtKeigenAtoFutanGaku() != null && div.getTxtKeigenAtoFutanGaku().getValue() != null) {
+            境界層該当者情報.set居住費軽減後負担額(div.getTxtKeigenAtoFutanGaku().getValue());
+        }
+        if (!RString.isNullOrEmpty(div.getRadShokuhiFutangakuGengaku().getSelectedKey())) {
+            境界層該当者情報.set食費負担額減額該当フラグ(div.getRadShokuhiFutangakuGengaku().getSelectedKey());
+        }
+        if (div.getTxtShokuhiGenkenAtoFutangaku() != null && div.getTxtShokuhiGenkenAtoFutangaku().getValue() != null) {
+            境界層該当者情報.set食費軽減後負担額(div.getTxtShokuhiGenkenAtoFutangaku().getValue());
+        }
+        if (!RString.isNullOrEmpty(div.getRadGogakuServiceJokengaku().getSelectedKey())) {
+            境界層該当者情報.set高額ｻｰﾋﾞｽ費上限額減額該当フラグ(div.getRadGogakuServiceJokengaku().getSelectedKey());
+        }
+        if (!RString.isNullOrEmpty(div.getDdlSeidaiJogengaku().getSelectedKey())) {
+            境界層該当者情報.set高額ｻｰﾋﾞｽ費減額後上限額(new Decimal(div.getDdlSeidaiJogengaku().getSelectedKey().toString()));
+        }
+        if (!RString.isNullOrEmpty(div.getRadHokenryoNofuGengaku().getSelectedKey())) {
+            境界層該当者情報.set保険料納付減額フラグ(div.getRadHokenryoNofuGengaku().getSelectedKey());
+        }
+        return 境界層該当者情報.build();
     }
 
     /**
@@ -366,23 +399,58 @@ public class KyokaisoGaitoshaPanelHandler {
      * @return 境界層措置申請情報
      */
     public KyokaisoSochiShinsei editKyokaisoSochiShinsei(KyokaisoSochiShinsei kyokaisoSochiShinsei) {
-        return kyokaisoSochiShinsei.createBuilderForEdit()
-                .set申請年月日(new FlexibleDate(div.getTxtShiseibi().getValue().toDateString()))
-                .set受付年月日(new FlexibleDate(div.getTxtShiseibi().getValue().toDateString()))
-                .set申請_廃止年月日(new FlexibleDate(div.getTxtShiseiHaishibi().getValue().toDateString()))
-                .set保護不要根拠減額金額(div.getTxtHogoFuyoKonshoGengakuKingaku().getValue())
+        KyokaisoSochiShinseiBuilder 境界層措置申請 = kyokaisoSochiShinsei.createBuilderForEdit();
+        if (div.getTxtShiseibi() != null && div.getTxtShiseibi().getValue() != null) {
+            境界層措置申請.set申請年月日(new FlexibleDate(div.getTxtShiseibi().getValue().toDateString()));
+        }
+        if (div.getTxtShiseibi() != null && div.getTxtShiseibi().getValue() != null) {
+            境界層措置申請.set受付年月日(new FlexibleDate(div.getTxtShiseibi().getValue().toDateString()));
+        }
+        if (div.getTxtShiseiHaishibi() != null && div.getTxtShiseiHaishibi().getValue() != null) {
+            境界層措置申請.set申請_廃止年月日(new FlexibleDate(div.getTxtShiseiHaishibi().getValue().toDateString()));
+        }
+        if (div.getTxtHogoFuyoKonshoGengakuKingaku() != null && div.getTxtHogoFuyoKonshoGengakuKingaku().getValue() != null) {
+            境界層措置申請.set保護不要根拠減額金額(div.getTxtHogoFuyoKonshoGengakuKingaku().getValue());
+        }
+        if (div.getTxtShomeishoKoufuDate() != null && div.getTxtShomeishoKoufuDate().getValue() != null) {
+            境界層措置申請.set境界層証明書交付年月日(new FlexibleDate(div.getTxtShomeishoKoufuDate().getValue().toDateString()));
+        }
+        if (div.getTxtKyufugakuJikoFutanGetsugaku() != null && div.getTxtKyufugakuJikoFutanGetsugaku().getValue() != null) {
+            境界層措置申請.set給付額減額取消_減額自己負担月額(div.getTxtKyufugakuJikoFutanGetsugaku().getValue());
+        }
+        if (div.getTxtKyojuhiJikoFutanGetsugaku() != null && div.getTxtKyojuhiJikoFutanGetsugaku().getValue() != null) {
+            境界層措置申請.set居住費軽減_減額自己負担月額(div.getTxtKyojuhiJikoFutanGetsugaku().getValue());
+        }
+        if (!RString.isNullOrEmpty(div.getDdlKyojuhiGendogakuDankai().getSelectedKey())) {
+            境界層措置申請.set居住費軽減_負担限度額段階コード(div.getDdlKyojuhiGendogakuDankai().getSelectedKey());
+        }
+        return set項目(境界層措置申請);
+    }
+
+    private KyokaisoSochiShinsei set項目(KyokaisoSochiShinseiBuilder 境界層措置申請) {
+        if (div.getTxtShokuhiJikoFutanGetsugaku() != null && div.getTxtShokuhiJikoFutanGetsugaku().getValue() != null) {
+            境界層措置申請.set食費軽減_減額自己負担月額(div.getTxtShokuhiJikoFutanGetsugaku().getValue());
+        }
+        if (!RString.isNullOrEmpty(div.getDdlShokuhiGakenFutanGendogakuDankai().getSelectedKey())) {
+            境界層措置申請.set食費軽減_負担限度額段階コード(div.getDdlShokuhiGakenFutanGendogakuDankai().getSelectedKey());
+        }
+        if (div.getTxtKaigoHokenryoJikoFutanGetsugaku() != null && div.getTxtKaigoHokenryoJikoFutanGetsugaku().getValue() != null) {
+            境界層措置申請.set利用者負担世帯合算額_減額自己負担月額(div.getTxtKaigoHokenryoJikoFutanGetsugaku().getValue());
+        }
+        if (div.getTxtRiyoshaFutanSeidaiGokeigaku() != null && div.getTxtRiyoshaFutanSeidaiGokeigaku().getValue() != null) {
+            境界層措置申請.set保険料減額_減額自己負担月額(div.getTxtRiyoshaFutanSeidaiGokeigaku().getValue());
+        }
+        if (div.getTxtJikoFutanGetsugakuGokeigaku() != null && div.getTxtJikoFutanGetsugakuGokeigaku().getValue() != null) {
+            境界層措置申請.set減額自己負担月額合計額(div.getTxtJikoFutanGetsugakuGokeigaku().getValue());
+        }
+        if (div.getTxtKeteibi() != null && div.getTxtKeteibi().getValue() != null) {
+            境界層措置申請.set境界層措置決定年月日(new FlexibleDate(div.getTxtKeteibi().getValue().toDateString()));
+        }
+        if (!RString.isNullOrEmpty(div.getRadSochiGaitouKubun().getSelectedKey())) {
+            境界層措置申請.set措置該当_非該当区分(div.getRadSochiGaitouKubun().getSelectedKey());
+        }
+        return 境界層措置申請
                 .set申請_廃止区分(new RString("1"))
-                .set境界層証明書交付年月日(new FlexibleDate(div.getTxtShomeishoKoufuDate().getValue().toDateString()))
-                .set給付額減額取消_減額自己負担月額(div.getTxtKyufugakuJikoFutanGetsugaku().getValue())
-                .set居住費軽減_減額自己負担月額(div.getTxtKyojuhiJikoFutanGetsugaku().getValue())
-                .set居住費軽減_負担限度額段階コード(div.getDdlKyojuhiGendogakuDankai().getSelectedKey())
-                .set食費軽減_減額自己負担月額(div.getTxtShokuhiJikoFutanGetsugaku().getValue())
-                .set食費軽減_負担限度額段階コード(div.getDdlShokuhiGakenFutanGendogakuDankai().getSelectedKey())
-                .set利用者負担世帯合算額_減額自己負担月額(div.getTxtKaigoHokenryoJikoFutanGetsugaku().getValue())
-                .set保険料減額_減額自己負担月額(div.getTxtRiyoshaFutanSeidaiGokeigaku().getValue())
-                .set減額自己負担月額合計額(div.getTxtJikoFutanGetsugakuGokeigaku().getValue())
-                .set境界層措置決定年月日(new FlexibleDate(div.getTxtKeteibi().getValue().toDateString()))
-                .set措置該当_非該当区分(div.getRadSochiGaitouKubun().getSelectedKey())
                 .build();
     }
 
@@ -424,7 +492,7 @@ public class KyokaisoGaitoshaPanelHandler {
         div.getKyokaisouGaitouItiran().setIranState(RString.EMPTY);
     }
 
-    private void set境界層該当一覧(List<KyokaisoGaitoshaJoho> 境界層該当一覧情報, RString 状態) {
+    private void set境界層該当一覧(List<KyokaisoGaitoshaJoho> 境界層該当一覧情報) {
         List<dgKyokaisouGaitouItran_Row> rowList = new ArrayList<>();
         for (KyokaisoGaitoshaJoho 境界層該当一覧 : 境界層該当一覧情報) {
             dgKyokaisouGaitouItran_Row row = new dgKyokaisouGaitouItran_Row();
@@ -481,7 +549,7 @@ public class KyokaisoGaitoshaPanelHandler {
 
     private void set境界層該当明細(
             dgKyokaisouGaitouItran_Row row,
-            List<KyokaisoHokenryo> 境界層保険料段階情報) {
+            List<KyokaisoHokenryo> 境界層保険料段階情報, RString 状態) {
         div.getDghokenryoNofu().getGridSetting().setIsShowSelectButtonColumn(true);
         div.getTxtShiseibi().setValue(new RDate(row.getShinseiDate().toString()));
         div.getRadSochiGaitouKubun().setSelectedKey(row.getSochiGaitoHigaito());
@@ -500,7 +568,7 @@ public class KyokaisoGaitoshaPanelHandler {
         select読替後高額介護世帯上限額(new RDate(row.getShinseiDate().toString()),
                 row.getKogakuServicehiJogengakuGengakugoJogengaku());
         div.getRadHokenryoNofuGengaku().setSelectedKey(row.getHokenryoNofuGengakuFlag());
-        境界層保険料段階一覧(境界層保険料段階情報, new RDate(row.getShinseiDate().toString()));
+        境界層保険料段階一覧(境界層保険料段階情報, new RDate(row.getShinseiDate().toString()), 状態);
         div.getTxtShiseiHaishibi().setValue(new RDate(row.getShinseiHaishiYMD().toString()));
         div.getTxtHogoFuyoKonshoGengakuKingaku().setValue(new Decimal(row.getHogoFuyoKonkyoGengakuKingaku().toString()));
         div.getTxtShomeishoKoufuDate().setValue(new RDate(row.getKyokaisoShomeishoKofuYMD().toString()));
@@ -523,8 +591,7 @@ public class KyokaisoGaitoshaPanelHandler {
 
     }
 
-    private void 境界層保険料段階一覧(List<KyokaisoHokenryo> 境界層保険料段階情報, RDate 申請年月日) {
-        RString 状態 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_状態, RString.class);
+    private void 境界層保険料段階一覧(List<KyokaisoHokenryo> 境界層保険料段階情報, RDate 申請年月日, RString 状態) {
         List<dghokenryoNofu_Row> nofu_rowList = new ArrayList<>();
         for (KyokaisoHokenryo 境界層保険料段階 : 境界層保険料段階情報) {
             dghokenryoNofu_Row nofu_row = new dghokenryoNofu_Row();
