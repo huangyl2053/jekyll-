@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.choteiNendo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.choteiNichiji;
@@ -14,8 +16,6 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.hihokenshaN
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.rirekiNo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
+import jp.co.ndensan.reams.uz.uza.util.db.Restrictions;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -204,6 +205,19 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
         return accessor.select().
                 table(DbT2002Fuka.class).
                 toList(DbT2002FukaEntity.class);
+    }
+
+    /**
+     * Max賦課年度を返します。
+     *
+     * @return Max賦課年度
+     */
+    @Transaction
+    public FlexibleYear selectMax賦課年度() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(Restrictions.max(fukaNendo)).
+                table(DbT2002Fuka.class).toObject(FlexibleYear.class);
     }
 
     /**
