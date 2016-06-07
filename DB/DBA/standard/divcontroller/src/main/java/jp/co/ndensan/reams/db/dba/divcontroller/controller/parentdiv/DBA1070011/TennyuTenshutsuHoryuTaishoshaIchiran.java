@@ -110,11 +110,9 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転入).parameter(PARAMETER_資格取得);
         }
         if (KEY_他特例適用.equals(selectedKey)) {
-            ViewStateHolder.put(ViewStateKeys.資格対象者, key);
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転入).parameter(PARAMETER_他特例適用);
         }
         if (KEY_除外者適用.equals(selectedKey)) {
-            ViewStateHolder.put(ViewStateKeys.資格対象者, key);
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転入).parameter(PARAMETER_除外者適用);
         }
         if (!ResponseHolder.isReRequest()) {
@@ -149,7 +147,6 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転出).parameter(PARAMETER_資格喪失);
         }
         if (KEY_住所地特例適用.equals(click転出保留対象者.getNextTask().getSelectedKey())) {
-            ViewStateHolder.put(ViewStateKeys.資格対象者, key);
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転出).parameter(PARAMETER_住所地特例適用);
         }
         if (!ResponseHolder.isReRequest()) {
@@ -184,7 +181,6 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.広域).parameter(PARAMETER_資格取得異動);
         }
         if (KEY_住所地特例適用.equals(click広域保留対象者.getNextTask().getSelectedKey())) {
-            ViewStateHolder.put(ViewStateKeys.資格対象者, key);
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.広域).parameter(PARAMETER_住所地特例適用);
         }
         if (!ResponseHolder.isReRequest()) {
