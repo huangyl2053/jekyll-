@@ -43,25 +43,34 @@ public class KaigohokenShindanMeireishoHeaderEditor implements IKaigohokenShinda
     @Override
     public KaigohokenShindanMeireishoReportSource edit(KaigohokenShindanMeireishoReportSource source) {
         return editHeader(source);
-
     }
 
     private KaigohokenShindanMeireishoReportSource editHeader(KaigohokenShindanMeireishoReportSource source) {
 
-        source.shomeiHakkoYMD = item.getShomeiHakkoYMD();
-        source.shichosonMei = item.getShichosonMei();
-        source.shuchoMei = item.getShuchoMei();
-        source.koinShoryaku = item.getKoinShoryaku();
-        source.denshiKoin = item.getDenshiKoin();
-        source.bunshoNo = item.getBunshoNo();
+        source.title = TITLE;
         if (item.getHakkoYMD() == null || item.getHakkoYMD().isEmpty()) {
             source.hakkoYMD = RString.EMPTY;
         } else {
             source.hakkoYMD = パターン12(new RDate(item.getHakkoYMD().toString()));
         }
-        source.title = TITLE;
+        source.denshiKoin = item.getDenshiKoin();
+        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
+        source.ninshoshaYakushokuMei1 = item.getNinshoshaYakushokuMei1();
+        source.ninshoshaYakushokuMei2 = item.getNinshoshaYakushokuMei2();
+        source.ninshoshaShimeiKakenai = item.getNinshoshaShimeiKakenai();
+        source.ninshoshaShimeiKakeru = item.getNinshoshaShimeiKakeru();
+        source.koinMojiretsu = item.getKoinMojiretsu();
+        source.koinShoryaku = item.getKoinShoryaku();
+        source.bunshoNo = item.getBunshoNo();
+        source.yubinNo = item.getYubinNo();
+        source.jushoText = item.getJushoText();
+        source.hihokenshaName1 = item.getHihokenshaName1();
+        source.meishoFuyo = item.getMeishoFuyo();
+        source.customerBarCode = item.getCustomerBarCode();
+        source.atenaRenban = item.getAtenaRenban();
+        source.sonota = item.getSonota();
         source.tsuchibun1 = item.getTsuchibun1();
-        source.tsuchibun2 = item.getTsuchibun2();
+        source.hihokenshaName2 = item.getHihokenshaName2();
         RString hihokenshaNo = item.getHihokenshaNo();
         if (hihokenshaNo == null) {
             hihokenshaNo = RString.EMPTY;
@@ -79,7 +88,6 @@ public class KaigohokenShindanMeireishoHeaderEditor implements IKaigohokenShinda
         source.hihokenshaNo8 = hihokenshaNo.substring(結束_位置7, 結束_位置8);
         source.hihokenshaNo9 = hihokenshaNo.substring(結束_位置8, 結束_位置9);
         source.hihokenshaNo10 = hihokenshaNo.substring(結束_位置9, 結束_位置10);
-        source.hihokenshaName = item.getHihokenshaName();
         source.iryokikanName = item.getIryokikanName();
         source.tantoIshiName = item.getTantoIshiName();
         source.iryokikanJusho = item.getIryokikanJusho();
@@ -90,24 +98,8 @@ public class KaigohokenShindanMeireishoHeaderEditor implements IKaigohokenShinda
             source.jushinKikan = item.getJushinKikan();
         }
         source.jushinArea = item.getJushinArea();
-        source.tsuchibun3 = item.getTsuchibun3();
-        source.tsuchibun4 = item.getTsuchibun4();
-        source.tsuchibun5 = item.getTsuchibun5();
-        source.tsuchibun6 = item.getTsuchibun6();
-        source.tsuchibun7 = item.getTsuchibun7();
-        source.tsuchibun8 = item.getTsuchibun8();
-        source.tsuchibun9 = item.getTsuchibun9();
-        source.tsuchibun10 = item.getTsuchibun10();
-        source.tsuchibun11 = item.getTsuchibun11();
-        source.tsuchibun12 = item.getTsuchibun12();
-        source.tsuchibun13 = item.getTsuchibun13();
-        source.tsuchibun14 = item.getTsuchibun14();
-        source.tsuchibun15 = item.getTsuchibun15();
-        source.tsuchibun16 = item.getTsuchibun16();
-        source.tsuchibun17 = item.getTsuchibun17();
-        source.remban = item.getRemban();
+        source.tsuchibun2 = item.getTsuchibun2();
         return source;
-
     }
 
     private RString パターン12(RDate rDate) {
