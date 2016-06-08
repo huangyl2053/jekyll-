@@ -62,10 +62,11 @@ public class SeikatsuhogoDetailHandler {
         div.getTxtJukyushaNo().setValue(nullTOEmpty(生活保護受給Object.get受給者番号()));
         div.getTxtJukyuKaishiYMD().setValue(生活保護受給Object.get受給開始日());
         div.getTxtJukyuHaishiYMD().setValue(生活保護受給Object.get受給廃止日());
-        div.getRadDairinofuKubun().setSelectedValue(介護保険料代理納付区分.equals(生活保護受給Object.get納付区分())
+        div.getRadDairinofuKubun().setSelectedKey(介護保険料代理納付区分.equals(生活保護受給Object.get納付区分())
                 ? 該当 : 非該当);
         div.getTxtDainoNofuYM().setValue(生活保護受給Object.get納付年月());
-        if (入退所区分_未該当.equals(生活保護受給Object.get入退所区分())) {
+        if (RString.isNullOrEmpty(生活保護受給Object.get入退所区分())
+                && 入退所区分_未該当.equals(生活保護受給Object.get入退所区分())) {
             div.getRadNyutaishoKubun().setSelectedValue(入退所区分_未該当);
         } else {
             div.getRadNyutaishoKubun().setSelectedValue(生活保護受給Object.get入退所区分());
