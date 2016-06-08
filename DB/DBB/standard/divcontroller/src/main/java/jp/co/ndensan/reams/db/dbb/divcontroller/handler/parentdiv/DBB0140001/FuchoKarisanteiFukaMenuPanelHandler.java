@@ -222,6 +222,7 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
             List<KeyValueDataSource> 出力期のタイプ = get出力期のタイプ(期月リスト, 出力期のタイプ_全件);
             帳票作成個別情報Panel.getDdlNotsuShuturyokuki2().setDataSource(出力期のタイプ);
         }
+        帳票作成個別情報Panel.getDdlNotsuShuturyokuki2().setSelectedIndex(ゼロ_定値);
         帳票作成個別情報Panel.getChkNotsuTaishosha2().setDataSource(get対象者());
         帳票作成個別情報Panel.getChkNotsuTaishosha2().setSelectedItems(get対象者());
         帳票作成個別情報Panel.getRadNotsuSeikatsuHogo2().setDataSource(get生活保護対象者とページ());
