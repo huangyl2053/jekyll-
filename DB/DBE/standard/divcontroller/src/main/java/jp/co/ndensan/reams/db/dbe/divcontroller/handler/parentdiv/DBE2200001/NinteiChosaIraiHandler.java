@@ -118,9 +118,13 @@ public class NinteiChosaIraiHandler {
 
     /**
      * 画面初期化処理です。
+     *
+     * @param flg 初期化判断
      */
-    public void load() {
-        div.getCcdHokenshaList().loadHokenshaList();
+    public void load(boolean flg) {
+        if (flg) {
+            div.getCcdHokenshaList().loadHokenshaList();
+        }
         div.getTxtChosaItakusakiCode().clearValue();
         div.getTxtChosaItakusakiMeisho().clearValue();
         div.getTxtChosaItakusakiChiku().clearValue();
@@ -484,6 +488,7 @@ public class NinteiChosaIraiHandler {
         row.setNinteiChosainCode(nullToEmpty(business.getNinteiChosainCode()));
         row.setHokenshaNo(nullToEmpty(business.getHokenshaNo()));
         row.setNinteiChosaItakusakiCode(nullToEmpty(business.getNinteiChosaItakusakiCode()));
+        row.setShichosonCode(nullToEmpty(business.getShichosonCode()));
         row.setRenrakusakiYubinNo(business.getRenrakusakiYubinNo() == null ? RString.EMPTY : business.getRenrakusakiYubinNo().value());
         row.setRenrakusakiTelNo(business.getRenrakusakiTelNo() == null ? RString.EMPTY : business.getRenrakusakiTelNo().value());
         row.setRenrakusakiKeitaiTelNo(business.getRenrakusakiKeitaiTelNo() == null ? RString.EMPTY : business.getRenrakusakiKeitaiTelNo().value());
@@ -727,7 +732,7 @@ public class NinteiChosaIraiHandler {
             builder.append("*");
             builder.append((new RString(String.valueOf(宛名連番++))).padZeroToLeft(INDEX_6));
             builder.append("#");
-            ChosainJoho 調査員情報 = new ChosainJohoManager().get調査員情報(new LasdecCode(row.getHokenshaNo()),
+            ChosainJoho 調査員情報 = new ChosainJohoManager().get調査員情報(new LasdecCode(row.getShichosonCode()),
                     new ChosaItakusakiCode(row.getNinteiChosaItakusakiCode()),
                     new ChosainCode(row.getNinteiChosainCode()));
             Map<Integer, RString> 通知文
