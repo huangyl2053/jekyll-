@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
-import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskigoto.NonyuTsuchishoCVSKigotoSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskigoto.NonyuTsuchishoCVSKigotoRenchoSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 保険料納入通知書（本算定）【コンビニ期毎タイプ】のReportです。
+ * 保険料納入通知書（本算定）【コンビニマルチ収納タイプ】納付書のReportです。
  *
  * @reamsid_L DBB-9110-130 huangh
  */
-public class NonyuTsuchishoCVSKigotoReport extends INonyuTsuchisho<NonyuTsuchishoCVSKigotoSource> {
+public class NonyuTsuchishoCVSKigotoRenchoReport extends INonyuTsuchisho<NonyuTsuchishoCVSKigotoRenchoSource> {
 
     private final HonSanteiNonyuTsuchiShoJoho item;
     private final NinshoshaSource ninshoshaSource;
@@ -26,10 +26,10 @@ public class NonyuTsuchishoCVSKigotoReport extends INonyuTsuchisho<NonyuTsuchish
     /**
      * インスタンスを生成します。
      *
-     * @param item 保険料納入通知書（本算定）【コンビニ期毎タイプ】のITEM
+     * @param item 保険料納入通知書（本算定）【コンビニ期毎タイプ】連帳のITEM
      * @param ninshoshaSource NinshoshaSource
      */
-    public NonyuTsuchishoCVSKigotoReport(
+    public NonyuTsuchishoCVSKigotoRenchoReport(
             HonSanteiNonyuTsuchiShoJoho item,
             NinshoshaSource ninshoshaSource) {
 
@@ -38,18 +38,18 @@ public class NonyuTsuchishoCVSKigotoReport extends INonyuTsuchisho<NonyuTsuchish
     }
 
     @Override
-    public void writeBy(ReportSourceWriter<NonyuTsuchishoCVSKigotoSource> reportSourceWriter) {
+    public void writeBy(ReportSourceWriter<NonyuTsuchishoCVSKigotoRenchoSource> reportSourceWriter) {
 
-        INonyuTsuchishoCVSKigotoEditor coverEditor = new NonyuTsuchishoCVSKigotoEditor(item, ninshoshaSource, 1);
-        INonyuTsuchishoCVSKigotoBuilder builder = new NonyuTsuchishoCVSKigotoBuilder(coverEditor);
+        INonyuTsuchishoCVSKigotoRenchoEditor coverEditor = new NonyuTsuchishoCVSKigotoRenchoEditor(item, ninshoshaSource, 1);
+        INonyuTsuchishoCVSKigotoRenchoBuilder builder = new NonyuTsuchishoCVSKigotoRenchoBuilder(coverEditor);
         reportSourceWriter.writeLine(builder);
     }
 
     @Override
     public List<INonyuTsuchisho> devidedByPage() {
         List<INonyuTsuchisho> nonyuTsuchishoList = new ArrayList<>();
-        NonyuTsuchishoCVSKigotoReport report
-                = new NonyuTsuchishoCVSKigotoReport(item, ninshoshaSource);
+        NonyuTsuchishoCVSKigotoRenchoReport report
+                = new NonyuTsuchishoCVSKigotoRenchoReport(item, ninshoshaSource);
         nonyuTsuchishoList.add(report);
         return nonyuTsuchishoList;
     }
