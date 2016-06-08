@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorListBuilder;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorListIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.report.fukaerror.FukaErrorListCsvItem;
 import jp.co.ndensan.reams.db.dbb.business.report.fukaerror.FukaErrorListCsvItemList;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ErrorCode;
@@ -19,7 +18,6 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.dgFu
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportShoriKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -28,8 +26,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
@@ -57,7 +53,6 @@ public class FukaErrorReportViewHandler {
      */
     public void initialize(List<FukaErrorList> 賦課エラー情報) {
         set賦課エラー情報(賦課エラー情報);
-        ViewStateHolder.put(ViewStateKeys.賦課エラー一覧, Models.create(賦課エラー情報));
         setButtonDisplayNone();
     }
 
@@ -112,11 +107,6 @@ public class FukaErrorReportViewHandler {
         }
         buttonDiv.getBtnMishori().setDisplayNone(false);
         buttonDiv.setDisabled(false);
-        Models<FukaErrorListIdentifier, FukaErrorList> models = ViewStateHolder.get(ViewStateKeys.賦課エラー一覧, Models.class);
-        ViewStateHolder.put(ViewStateKeys.賦課エラー一覧_賦課エラー情報, models.get(
-                new FukaErrorListIdentifier(new SubGyomuCode(row.getSubGyomuCode()),
-                        row.getNaibuChohyoId(), new FlexibleYear(row.getFukaNendo().getValue().getYear().toDateString()),
-                        new TsuchishoNo(row.getTsuchishoNo()))));
     }
 
     private void set賦課エラー情報(List<FukaErrorList> 賦課エラー情報) {
