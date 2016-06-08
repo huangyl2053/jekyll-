@@ -9,14 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanri;
 import jp.co.ndensan.reams.db.dba.definition.core.jogaishatorokuparamter.JogaishaTorokuParamter;
-import static jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysJukyuShikakuShomeishoHakko.資格取得除外者登録キー;
-import static jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysJukyuShikakuShomeishoHakko.除外者データキー;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1080011.JogaishaTorokuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1080011.dgNenreiTotatshusha_Row;
 import jp.co.ndensan.reams.db.dba.service.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
-import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -34,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -86,7 +81,7 @@ public class JogaishaTorokuHandler {
                 row.getJogaiKaijyoDate().setValue(new RDate(資格取得除外者.getShikakuShutokuJogaiKaijoYMD().toString()));
             }
             rowList.add(row);
-            アクセスログ();
+            アクセスログ(資格取得除外者.getShikibetsuCode());
         }
         div.getJogaishaTorokuIchiran().getNenreiTotatsh().getDgNenreiTotatshusha().setDataSource(rowList);
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().setDisabled(true);
@@ -100,9 +95,9 @@ public class JogaishaTorokuHandler {
     /**
      * 対象者検索画面から遷移します。
      *
+     * @param jogaishaTorokuSetter 除外者データ
      */
-    public void onLoadKen() {
-        JogaishaTorokuSetter jogaishaTorokuSetter = ViewStateHolder.get(除外者データキー, JogaishaTorokuSetter.class);
+    public void onLoadKen(JogaishaTorokuSetter jogaishaTorokuSetter) {
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiKaijyoYMD().setValue(jogaishaTorokuSetter.getJogaiKaijyoYMD());
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiRiyu().setValue(jogaishaTorokuSetter.getJogaiRiyu());
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiTekiyoYMD().setValue(jogaishaTorokuSetter.getJogaiTekiyoYMD());
@@ -126,6 +121,7 @@ public class JogaishaTorokuHandler {
             row.getJogaiTekiyoDate().setValue(param.getJogaiTekiyoDate());
             row.getJogaiKaijyoDate().setValue(param.getJogaiKaijyoDate());
             rowList.add(row);
+            アクセスログ(new ShikibetsuCode(param.getShikibetsuCode()));
         }
         div.getJogaishaTorokuIchiran().getNenreiTotatsh().getDgNenreiTotatshusha().setDataSource(rowList);
     }
@@ -219,8 +215,9 @@ public class JogaishaTorokuHandler {
     /**
      * 識別対象検索ボタンを押下します。
      *
+     * @return JogaishaTorokuSetter
      */
-    public void onClick_Search() {
+    public JogaishaTorokuSetter onClick_Search() {
         List<dgNenreiTotatshusha_Row> list = div.getJogaishaTorokuIchiran().getNenreiTotatsh().getDgNenreiTotatshusha().getDataSource();
         ArrayList<JogaishaTorokuParamter> params = new ArrayList<>();
         for (dgNenreiTotatshusha_Row param : list) {
@@ -246,8 +243,7 @@ public class JogaishaTorokuHandler {
         除外者データ.setJogaiKaijyoYMD(div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiKaijyoYMD().getValue());
         除外者データ.setJogaiTekiyoYMD(div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiTekiyoYMD().getValue());
         除外者データ.setViewState(params);
-        ViewStateHolder.put(除外者データキー, 除外者データ);
-        ViewStateHolder.put(資格取得除外者登録キー, new RString("DBA18001"));
+        return 除外者データ;
     }
 
     /**
@@ -282,22 +278,23 @@ public class JogaishaTorokuHandler {
     }
 
     private PersonalData toPersonalData(ShikibetsuCode 識別コード) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("003"), new RString("識別コード"), 識別コード.value());
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("識別コード"), 識別コード.value());
         return PersonalData.of(識別コード, expandedInfo);
     }
 
     private PersonalData withPersonalData(ShikibetsuCode 識別コード) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("003"), new RString("識別コード"), 識別コード.value());
-        return PersonalData.withHojinNo(ShikibetsuCode.EMPTY, expandedInfo);
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("識別コード"), 識別コード.value());
+        return PersonalData.withHojinNo(識別コード, expandedInfo);
     }
 
     /**
      * アクセスログを出力します。
      *
+     * @param 識別コード ShikibetsuCode
      */
-    public void アクセスログ() {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード()));
-        AccessLogger.log(AccessLogType.照会, withPersonalData(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード()));
+    public void アクセスログ(ShikibetsuCode 識別コード) {
+        AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード));
+        AccessLogger.log(AccessLogType.照会, withPersonalData(識別コード));
     }
 
     private void set除外対象者エリア(dgNenreiTotatshusha_Row row) {
