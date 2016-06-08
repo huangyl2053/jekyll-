@@ -93,7 +93,8 @@ public class SeikatsuhogoDetailHandler {
                 div.getChkFujoShurui().setSelectedItemsByKey(扶助種類KEY);
             }
         }
-        if (!new RString(カラ).equals(生活保護受給Object.get受給停止期間())) {
+        if (!RString.isNullOrEmpty(生活保護受給Object.get受給停止期間())
+                && !new RString(カラ).equals(生活保護受給Object.get受給停止期間())) {
             List<RString> 受給停止期間 = 生活保護受給Object.get受給停止期間().split(連結);
             List<RString> 停止終了日 = new ArrayList<>();
             boolean 識別 = true;
