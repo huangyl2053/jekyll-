@@ -8,8 +8,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Seikatsuh
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.seikatsuhogorireki.SeikaatsuhogoDataModel;
-import jp.co.ndensan.reams.ur.urd.definition.core.seikatsuhogo.KaigoRyoDairiNofuKubun;
-import jp.co.ndensan.reams.ur.urd.definition.core.seikatsuhogo.KyugoShisetsuNyuTaishoKubun;
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -32,7 +30,7 @@ public class SeikatsuhogoDetailHandler {
     private static final RString 表示モード_修正 = new RString("修正");
     private static final RString 表示モード_削除 = new RString("削除");
     private static final RString 表示モード_照会 = new RString("照会");
-    private static final RString 代理納付有 = new RString("1");
+    private static final RString 介護保険料代理納付区分 = new RString("代理納付有");
     private static final RString 該当 = new RString("gaito");
     private static final RString 非該当 = new RString("higaito");
     private static final RString 入退所区分_未該当 = new RString("未該当");
@@ -64,13 +62,13 @@ public class SeikatsuhogoDetailHandler {
         div.getTxtJukyushaNo().setValue(nullTOEmpty(生活保護受給Object.get受給者番号()));
         div.getTxtJukyuKaishiYMD().setValue(生活保護受給Object.get受給開始日());
         div.getTxtJukyuHaishiYMD().setValue(生活保護受給Object.get受給廃止日());
-        div.getRadDairinofuKubun().setSelectedKey(代理納付有.equals(new KaigoRyoDairiNofuKubun(生活保護受給Object.get納付区分()).value().code())
+        div.getRadDairinofuKubun().setSelectedValue(介護保険料代理納付区分.equals(生活保護受給Object.get納付区分())
                 ? 該当 : 非該当);
         div.getTxtDainoNofuYM().setValue(生活保護受給Object.get納付年月());
-        if (入退所区分_未該当.equals(new KyugoShisetsuNyuTaishoKubun(生活保護受給Object.get入退所区分()).value().toRString())) {
+        if (入退所区分_未該当.equals(生活保護受給Object.get入退所区分())) {
             div.getRadNyutaishoKubun().setSelectedValue(入退所区分_未該当);
         } else {
-            div.getRadNyutaishoKubun().setSelectedValue(new KyugoShisetsuNyuTaishoKubun(生活保護受給Object.get入退所区分()).value().toRString());
+            div.getRadNyutaishoKubun().setSelectedValue(生活保護受給Object.get入退所区分());
         }
         if (生活保護受給Object.get入所日() == null || RString.isNullOrEmpty(生活保護受給Object.get入所日().toDateString())) {
             div.getTxtNyutaishoYMD().setValue(生活保護受給Object.get退所日());
