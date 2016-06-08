@@ -6,10 +6,13 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0140001;
 
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisantei.FuchoKarisanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0140001.DBB0140001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0140001.FuchoKarisanteiFukaMenuPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0140001.FuchoKarisanteiFukaMenuPanelHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0140001.FuchoKarisanteiFukaMenuPanelValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -19,19 +22,26 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class FuchoKarisanteiFukaMenuPanel {
 
+    private static final RString 普徴仮算定賦課メニュー = new RString("DBBMN34001");
+
     /**
      * 普徴仮算定賦課のonLoad事件です。
      *
-     * @param div FuFuchoKarisanteiFukaMenuPanelDiv * @return 普徴仮算定賦課画面
+     * @param div FuFuchoKarisanteiFukaMenuPanelDiv
      * @return 普徴仮算定賦課画面
      */
     public ResponseData<FuchoKarisanteiFukaMenuPanelDiv> onLoad(FuchoKarisanteiFukaMenuPanelDiv div) {
         FuchoKarisanteiFukaMenuPanelHandler handler = getHandler(div);
+        RString メニューID = ResponseHolder.getMenuID();
         handler.load処理状況();
         handler.load管理情報確認();
         handler.load算定帳票作成();
         handler.load帳票作成個別情報();
-        return createResponseData(div);
+        if (普徴仮算定賦課メニュー.equals(メニューID)) {
+            return ResponseData.of(div).setState(DBB0140001StateName.普徴仮算定賦課);
+        } else {
+            return ResponseData.of(div).setState(DBB0140001StateName.普徴仮算定通知書一括発行);
+        }
     }
 
     /**
@@ -63,13 +73,15 @@ public class FuchoKarisanteiFukaMenuPanel {
      * @return 普徴仮算定賦課画面
      */
     public ResponseData<FuchoKarisanteiFukaMenuPanelDiv> onClick_Check(FuchoKarisanteiFukaMenuPanelDiv div) {
-        // TODO 普徴開始通知書（仮算定）のチェックがオンの場合  どのように判断しますか？
-        FuchoKarisanteiFukaMenuPanelValidationHandler validationHandler = new FuchoKarisanteiFukaMenuPanelValidationHandler(div);
-        ValidationMessageControlPairs pairs;
-        pairs = validationHandler.validate発行日();
-        pairs.add(validationHandler.validate提供年月());
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        boolean has普徴 = getHandler(div).can実行チェック();
+        if (has普徴) {
+            FuchoKarisanteiFukaMenuPanelValidationHandler validationHandler = new FuchoKarisanteiFukaMenuPanelValidationHandler(div);
+            ValidationMessageControlPairs pairs;
+            pairs = validationHandler.validate発行日();
+            pairs.add(validationHandler.validate提供年月());
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
         }
         return createResponseData(div);
     }

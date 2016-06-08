@@ -50,12 +50,6 @@ public class FuchoKariSanteiFuka {
     private static final RString 出力期表示方法_分 = new RString("分");
     private static final RString 出力期表示方法_2 = new RString("2");
     private static final RString 出力期表示方法_ = new RString("~");
-    private static final RString 現金納付者_0 = new RString("0");
-    private static final RString 現金納付者 = new RString("現金納付者");
-    private static final RString 口座振替者_1 = new RString("1");
-    private static final RString 口座振替者 = new RString("口座振替者");
-    private static final RString すべて選択_2 = new RString("2");
-    private static final RString すべて選択 = new RString("（すべて選択）");
     private static final int 定値_1期 = 1;
     private static final int 定値_2期 = 2;
     private static final int 定値_3期 = 3;
@@ -176,13 +170,7 @@ public class FuchoKariSanteiFuka {
             }
         }
         resultParameter.set出力期(entity.get出力期());
-        if (すべて選択.equals(entity.get対象者())) {
-            resultParameter.set対象者フラグ(すべて選択_2);
-        } else if (現金納付者.equals(entity.get対象者())) {
-            resultParameter.set対象者フラグ(現金納付者_0);
-        } else if (口座振替者.equals(entity.get対象者())) {
-            resultParameter.set対象者フラグ(口座振替者_1);
-        }
+        resultParameter.set対象者フラグ(entity.get対象者());
         resultParameter.set生活保護者をまとめて先頭に出力フラグ(entity.get生活保護者をまとめて先頭に出力フラグ());
         resultParameter.setページごとに山分けフラグ(entity.getページごとに山分けフラグ());
         resultParameter.set一括発行起動フラグ(entity.is一括発行起動フラグ());
@@ -395,7 +383,7 @@ public class FuchoKariSanteiFuka {
             ReportId 帳票ID) {
         ChohyoSeigyoHanyo 帳票タイプその他 = getChohyoSeigyoKey(SubGyomuCode.DBB介護賦課, 帳票ID, 調定年度, その他納入通知書タイプ);
         if (帳票タイプその他 == null) {
-            throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
+            throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage().evaluate());
         }
         if (コンビニマルチ収納タイプ.equals(帳票タイプその他.get設定値())) {
             if (区分_ゼロ.equals(納通連帳区分)) {
