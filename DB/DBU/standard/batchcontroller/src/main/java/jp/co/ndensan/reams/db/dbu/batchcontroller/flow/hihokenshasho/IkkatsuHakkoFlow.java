@@ -31,7 +31,9 @@ public class IkkatsuHakkoFlow extends BatchFlowBase<IkkatsuHakkoBatchParameter> 
         executeStep(ICHIJITABLEUPDATE_PROCESS);
         executeStep(IKKATSUHAKKOREPORT_PROCESS);
         executeStep(ICHIRANHYOREPORTPROCESS);
-        executeStep(IKKATSUHAKKODBINSERT_PROCESS);
+        if (!getParameter().isTestShutsuryokuFlag()) {
+            executeStep(IKKATSUHAKKODBINSERT_PROCESS);
+        }
     }
 
     private static final String CREATEICHIJITABLE_PROCESS = "createIchijiTableProcess";

@@ -7,7 +7,6 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6020011.Hiho
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 被保険者台帳発行のクラスです。
@@ -40,7 +39,7 @@ public class HihokenshaDaichoIkkatsuHakkoPanel {
         IkkatsuSakuseiBatchParameter parameter = HihokenshaDaichoIkkatsuSakusei.createHihokenshaDaichoBatchParameter(
                 div.getHihokenshaDaichoHakkoChushutsuJokenPanel().getRadChushutsuSoshitsusha().getSelectedIndex() == 0,
                 div.getHihokenshaDaichoHakkoListPanel().isIsPublish(),
-                new RString(String.valueOf(div.getCcdChohyoShutsuryokujun().get出力順ID())),
+                div.getCcdChohyoShutsuryokujun().get出力順ID(),
                 UrControlDataFactory.createInstance().getLoginInfo().getUserId());
         return ResponseData.of(parameter).respond();
     }

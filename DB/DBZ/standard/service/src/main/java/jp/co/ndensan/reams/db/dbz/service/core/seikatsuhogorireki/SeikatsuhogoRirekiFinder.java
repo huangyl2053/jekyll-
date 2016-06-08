@@ -114,9 +114,9 @@ public class SeikatsuhogoRirekiFinder {
                     teishiShuryo.append(連結);
                 }
                 if (!RString.isNullOrEmpty(entity.getFujoShuruiCode())
-                        && !RString.isNullOrEmpty(CodeMaster.getCodeRyakusho(SubGyomuCode.DBZ介護共通, コード種別,
+                        && !RString.isNullOrEmpty(CodeMaster.getCodeRyakusho(SubGyomuCode.URZ業務共通_共通系, コード種別,
                                         new Code(entity.getFujoShuruiCode()), FlexibleDate.getNowDate()))) {
-                    codeRyakusho.append(CodeMaster.getCodeRyakusho(SubGyomuCode.DBZ介護共通, コード種別,
+                    codeRyakusho.append(CodeMaster.getCodeRyakusho(SubGyomuCode.URZ業務共通_共通系, コード種別,
                             new Code(entity.getFujoShuruiCode()), FlexibleDate.getNowDate()));
                     codeRyakusho.append(連結);
                 }

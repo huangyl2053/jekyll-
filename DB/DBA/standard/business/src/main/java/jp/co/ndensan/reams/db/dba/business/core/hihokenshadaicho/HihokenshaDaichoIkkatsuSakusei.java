@@ -50,7 +50,7 @@ public final class HihokenshaDaichoIkkatsuSakusei {
      */
     public static IkkatsuSakuseiBatchParameter createHihokenshaDaichoBatchParameter(boolean 資格喪失者抽出フラグ,
             boolean 出力フラグ,
-            RString 出力順ID,
+            Long 出力順ID,
             RString 登録ユーザーID) {
         return new IkkatsuSakuseiBatchParameter(資格喪失者抽出フラグ, 出力フラグ, 出力順ID, 登録ユーザーID);
     }

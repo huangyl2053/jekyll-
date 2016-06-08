@@ -25,7 +25,7 @@ public class HakkoJoken {
      * 画面初期化処理です。
      *
      * @param div 画面情報
-     * @return ResponseData<ShujiiikensyoKanrenTyouhyou>
+     * @return ResponseData<HakkoJokenDiv>
      */
     public ResponseData<HakkoJokenDiv> onLoad(HakkoJokenDiv div) {
 

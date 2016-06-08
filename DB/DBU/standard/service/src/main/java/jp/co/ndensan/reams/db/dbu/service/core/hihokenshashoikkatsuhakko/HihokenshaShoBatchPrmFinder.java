@@ -81,7 +81,7 @@ public class HihokenshaShoBatchPrmFinder {
      * @return HihokenList List<HihokenshashoIkkatsuHakkoModel>
      *
      */
-    public SearchResult<HihokenshashoIkkatsuHakkoModel> getAgainHakko(RString 処理枝番) {
+    public SearchResult<HihokenshashoIkkatsuHakkoModel> getAgainHakko(List<RString> 処理枝番) {
         List<HihokenshashoIkkatsuHakkoModel> hihokenList = new ArrayList<>();
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         LasdecCode 市町村コード = association.get地方公共団体コード();

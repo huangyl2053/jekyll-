@@ -91,7 +91,7 @@ public class HihokenshaDaichoIchiranHyoFinder {
      */
     @Transaction
     public List<HihokenshaDaichoIchiranHyoRelateEntity> getChohyoIchiran(
-            RString shutsuryokujunId, List<HihokenshaDaichoSakusei> hihokenshaList) {
+            Long shutsuryokujunId, List<HihokenshaDaichoSakusei> hihokenshaList) {
         int リストNO = 0;
         List<HihokenshaDaichoIchiranHyoRelateEntity> 被保険者台帳一覧表List = new ArrayList<>();
 

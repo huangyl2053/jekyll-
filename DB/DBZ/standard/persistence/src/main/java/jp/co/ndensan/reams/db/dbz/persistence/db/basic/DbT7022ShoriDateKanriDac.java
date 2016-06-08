@@ -493,7 +493,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
      */
     @Transaction
     public DbT7022ShoriDateKanriEntity selectBy再発行(
-            RString 処理枝番,
+            List<RString> 処理枝番,
             LasdecCode 導入団体取得) throws NullPointerException {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);

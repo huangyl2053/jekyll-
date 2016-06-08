@@ -40,9 +40,8 @@ public class ChohyoSelect {
      * @return ResponseData<ChohyoSelectDiv>
      */
     public ResponseData<ChohyoSelectDiv> onLoad(ChohyoSelectDiv div) {
-        boolean 共通画面使用有無 = true;
         SubGyomuCode サブ業務コード = ControlDataHolder.getSubGyomuCD();
-        List<ChohyoSeigyoKyotsu> resultList = finder.select帳票分類名称(サブ業務コード, 共通画面使用有無).records();
+        List<ChohyoSeigyoKyotsu> resultList = finder.select帳票分類名称(サブ業務コード, true).records();
         getHandler(div).initialize(resultList);
         return ResponseData.of(div).respond();
     }
@@ -57,7 +56,6 @@ public class ChohyoSelect {
         ViewStateHolder.put(ViewStateKeys.帳票分類ID, div.getDgChohyoIchiran().getDataSource().get(0).getChohyoBunruiId());
         ViewStateHolder.put(ViewStateKeys.帳票分類名称, div.getDgChohyoIchiran().getDataSource().get(0).getChohyoBunruiName());
         return ResponseData.of(div).respond();
-
     }
 
     private ChohyoSelectHandler getHandler(ChohyoSelectDiv div) {

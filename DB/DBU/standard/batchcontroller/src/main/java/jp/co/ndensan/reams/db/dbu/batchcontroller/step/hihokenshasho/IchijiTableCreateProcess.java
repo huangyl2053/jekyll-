@@ -235,6 +235,5 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
         } else {
             受給者台帳異動Map.put(被保険者異動Entiy.getHihokenshaNo().value(), 被保険者異動Entiy);
         }
-
     }
 }

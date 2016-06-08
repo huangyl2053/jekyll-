@@ -134,6 +134,7 @@ public class SikakuIdouTeiseiHandler {
      * 画面遷移のパラメータの設定します。
      *
      * @param 状態 状態
+     * @return ShikakuRirekiJoho
      */
     public ShikakuRirekiJoho setパラメータ(RString 状態) {
         ShikakuRirekiJoho joho = new ShikakuRirekiJoho();

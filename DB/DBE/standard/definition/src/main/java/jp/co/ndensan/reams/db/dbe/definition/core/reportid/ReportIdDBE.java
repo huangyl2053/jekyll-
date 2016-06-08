@@ -16,6 +16,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBE {
 
     /**
+     * 委員用一次判定結果票A3の帳票ID。
+     */
+    DBE517085(new ReportId("DBE517085_IchijihanteikekkahyoA3"), new RString("委員用一次判定結果票A3")),
+    /**
+     * 委員用一次判定結果票A4の帳票ID。
+     */
+    DBE517038(new ReportId("DBE517038_ichijihanteikekkahyo"), new RString("委員用一次判定結果票A4")),
+    /**
      * 委員用主治医意見書A3の帳票ID。
      */
     DBE517005(new ReportId("DBE517005_ShujiiikenshoA3"), new RString("委員用主治医意見書A3")),
@@ -337,7 +345,11 @@ public enum ReportIdDBE {
     /**
      * 主治医意見書作成依頼変更者一覧表の帳票ＩＤです。
      */
-    DBE013002(new ReportId("DBE013002_ShijiiIkenshoIraiHenko"), new RString("主治医意見書作成依頼変更者一覧表"));
+    DBE013002(new ReportId("DBE013002_ShijiiIkenshoIraiHenko"), new RString("主治医意見書作成依頼変更者一覧表")),
+    /**
+     * 主治医意見書作成依頼変更者一覧表の帳票ＩＤです。
+     */
+    DBE013006(new ReportId("DBE013006_ShujiiIkenshoSeikyuIchiran"), new RString("主治医意見書作成料請求一覧表"));
 
     private final ReportId reportId;
 

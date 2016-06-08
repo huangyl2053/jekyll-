@@ -31,7 +31,6 @@ public class NinteiChosaSchedulePanel {
     private static final RString 画面ステート_1 = new RString("1");
     private static final RString 画面ステート_2 = new RString("2");
     private static final RString 画面ステート_3 = new RString("3");
-    private static final RString 初期状態 = new RString("初期状態");
     private static final RString 遷移元画面番号 = new RString("01");
     private static final RString モード = new RString("1");
     private static final int 月_12 = 12;
@@ -43,7 +42,6 @@ public class NinteiChosaSchedulePanel {
      * @return ResponseData<NinteiChosaSchedulePanelDiv>
      */
     public ResponseData<NinteiChosaSchedulePanelDiv> onLoad(NinteiChosaSchedulePanelDiv div) {
-        ViewStateHolder.put(ViewStateKeys.状態, 初期状態);
         getHandler(div).initialize();
         return createResponse(div);
     }

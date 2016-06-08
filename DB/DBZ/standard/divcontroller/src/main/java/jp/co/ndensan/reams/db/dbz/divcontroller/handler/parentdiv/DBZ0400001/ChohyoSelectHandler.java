@@ -37,10 +37,10 @@ public class ChohyoSelectHandler {
     public void initialize(List<ChohyoSeigyoKyotsu> 分類名称) {
 
         List<dgChohyoIchiran_Row> rowList = new ArrayList<>();
-        for (ChohyoSeigyoKyotsu list : 分類名称) {
+        for (ChohyoSeigyoKyotsu kyotsu : 分類名称) {
             dgChohyoIchiran_Row row = new dgChohyoIchiran_Row();
-            row.setChohyoBunruiId(list.get帳票分類ID().value());
-            row.setChohyoBunruiName(list.get帳票分類名称());
+            row.setChohyoBunruiId(kyotsu.get帳票分類ID().value());
+            row.setChohyoBunruiName(kyotsu.get帳票分類名称());
             rowList.add(row);
         }
         div.getDgChohyoIchiran().setDataSource(rowList);
