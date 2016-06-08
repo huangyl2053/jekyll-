@@ -163,47 +163,25 @@ public class SaishinsaKetteiHokenshaInCsvFileRead {
             for (int j = INDEX_0; j < listDataEntity.size(); j++) {
                 DbWT3063SaishinsaKetteiShukeiTempEntity shukeiTempentity = new DbWT3063SaishinsaKetteiShukeiTempEntity();
                 RString 保険者番号 = csvEntity.getControlCsvEntity().getHokenshaNo();
-                shukeiTempentity.set取扱年月(new FlexibleYearMonth(listDataEntity.get(j).getCsvHeadEntity().get取扱年月()));
+                if (listDataEntity.get(j).getCsvHeadEntity().get取扱年月() != null
+                        && !listDataEntity.get(j).getCsvHeadEntity().get取扱年月().isEmpty()) {
+                    shukeiTempentity.set取扱年月(new FlexibleYearMonth(listDataEntity.get(j).getCsvHeadEntity().get取扱年月()));
+                }
                 shukeiTempentity.set履歴番号(++連番);
-                shukeiTempentity.set証記載保険者番号(new ShoKisaiHokenshaNo(listDataEntity.get(j).getCsvHeadEntity()
-                        .get証記載保険者番号().substring(2)));
+                if (listDataEntity.get(j).getCsvHeadEntity().get証記載保険者番号() != null
+                        && !listDataEntity.get(j).getCsvHeadEntity().get証記載保険者番号().isEmpty()
+                        && listDataEntity.get(j).getCsvHeadEntity().get証記載保険者番号().length() >= INDEX_3) {
+                    shukeiTempentity.set証記載保険者番号(new ShoKisaiHokenshaNo(listDataEntity.get(j).getCsvHeadEntity()
+                            .get証記載保険者番号().substring(2)));
+                }
                 shukeiTempentity.set証記載保険者名(listDataEntity.get(j).getCsvHeadEntity().get証記載保険者名());
-                shukeiTempentity.set作成年月日(new FlexibleDate(listDataEntity.get(j).getCsvHeadEntity().get作成年月日()));
+                if (listDataEntity.get(j).getCsvHeadEntity().get作成年月日() != null
+                        && !listDataEntity.get(j).getCsvHeadEntity().get作成年月日().isEmpty()) {
+                    shukeiTempentity.set作成年月日(new FlexibleDate(listDataEntity.get(j).getCsvHeadEntity().get作成年月日()));
+                }
                 shukeiTempentity.set国保連合会名(listDataEntity.get(j).getCsvHeadEntity().get国保連合会名());
                 shukeiTempentity.set審査委員会名(listDataEntity.get(j).getCsvHeadEntity().get審査委員会名());
-                if (listDataEntity.get(j).getCsvGokeiEntity().get介護給付費請求件数() != null
-                        && !listDataEntity.get(j).getCsvGokeiEntity().get介護給付費請求件数().isEmpty()) {
-                    shukeiTempentity.set介護給付費請求件数(Integer.parseInt(listDataEntity.get(j).getCsvGokeiEntity()
-                            .get介護給付費請求件数().toString()));
-                } else {
-                    shukeiTempentity.set介護給付費請求件数(INDEX_0);
-                }
-                if (listDataEntity.get(j).getCsvGokeiEntity().get介護給付費請求単位数() != null
-                        && !listDataEntity.get(j).getCsvGokeiEntity().get介護給付費請求単位数().isEmpty()) {
-                    shukeiTempentity.set介護給付費請求単位数(new Decimal(listDataEntity.get(j).getCsvGokeiEntity().
-                            get介護給付費請求単位数().toString()));
-                } else {
-                    shukeiTempentity.set介護給付費請求単位数(Decimal.ZERO);
-                }
-                if (listDataEntity.get(j).getCsvGokeiEntity().get介護給付費請求保険者負担額() != null
-                        && !listDataEntity.get(j).getCsvGokeiEntity().get介護給付費請求保険者負担額().isEmpty()) {
-                    shukeiTempentity.set介護給付費請求保険者負担額(new Decimal(listDataEntity.get(j).getCsvGokeiEntity()
-                            .get介護給付費請求保険者負担額().toString()));
-                } else {
-                    shukeiTempentity.set介護給付費請求保険者負担額(Decimal.ZERO);
-                }
-                shukeiTempentity.set介護給付費決定件数(Integer.parseInt(listDataEntity.get(j).getCsvGokeiEntity()
-                        .get介護給付費総合事業費決定件数().toString()));
-                shukeiTempentity.set介護給付費決定単位数(new Decimal(listDataEntity.get(j).getCsvGokeiEntity()
-                        .get介護給付費総合事業費決定単位数().toString()));
-                shukeiTempentity.set介護給付費決定保険者負担額(new Decimal(listDataEntity.get(j).getCsvGokeiEntity()
-                        .get介護給付費総合事業費決定保険者負担額().toString()));
-                shukeiTempentity.set介護給付費調整件数(Integer.parseInt(listDataEntity.get(j).getCsvGokeiEntity()
-                        .get介護給付費総合事業費調整件数().toString()));
-                shukeiTempentity.set介護給付費調整単位数(new Decimal(listDataEntity.get(j).getCsvGokeiEntity()
-                        .get介護給付費総合事業費調整単位数().toString()));
-                shukeiTempentity.set介護給付費調整保険者負担額(new Decimal(listDataEntity.get(j).getCsvGokeiEntity()
-                        .get介護給付費総合事業費調整保険者負担額().toString()));
+                set件数と単位数と費用額(shukeiTempentity, listDataEntity.get(j));
                 shukeiTempentity.set高額介護サービス費請求件数(INDEX_0);
                 shukeiTempentity.set高額介護サービス費請求単位数(Decimal.ZERO);
                 shukeiTempentity.set高額介護サービス費請求保険者負担額(Decimal.ZERO);
@@ -214,7 +192,9 @@ public class SaishinsaKetteiHokenshaInCsvFileRead {
                 shukeiTempentity.set高額介護サービス費調整単位数(Decimal.ZERO);
                 shukeiTempentity.set高額介護サービス費調整保険者負担額(Decimal.ZERO);
                 shukeiTempentity.set取込年月(処理年月);
-                shukeiTempentity.set保険者番号(new ShoKisaiHokenshaNo(保険者番号));
+                if (保険者番号 != null && !保険者番号.isEmpty()) {
+                    shukeiTempentity.set保険者番号(new ShoKisaiHokenshaNo(保険者番号));
+                }
                 HokenshaNyuryokuHojoFinder hokenshaNyuryokuHojoFinder = HokenshaNyuryokuHojoFinder.createInstance();
                 Hokensha hokensha = hokenshaNyuryokuHojoFinder.getHokensha(new HokenjaNo(保険者番号));
                 if (hokensha != null) {
@@ -223,6 +203,60 @@ public class SaishinsaKetteiHokenshaInCsvFileRead {
                 mapper.再審査決定集計一時TBLに登録(shukeiTempentity);
             }
 
+        }
+    }
+
+    private void set件数と単位数と費用額(DbWT3063SaishinsaKetteiShukeiTempEntity shukeiTempentity, SaishinsaKetteiHokenshaInDataEntity dataEntity) {
+        if (dataEntity.getCsvGokeiEntity().get介護給付費請求件数() != null
+                && !dataEntity.getCsvGokeiEntity().get介護給付費請求件数().isEmpty()) {
+            shukeiTempentity.set介護給付費請求件数(Integer.parseInt(dataEntity.getCsvGokeiEntity()
+                    .get介護給付費請求件数().toString()));
+        } else {
+            shukeiTempentity.set介護給付費請求件数(INDEX_0);
+        }
+        if (dataEntity.getCsvGokeiEntity().get介護給付費請求単位数() != null
+                && !dataEntity.getCsvGokeiEntity().get介護給付費請求単位数().isEmpty()) {
+            shukeiTempentity.set介護給付費請求単位数(new Decimal(dataEntity.getCsvGokeiEntity().
+                    get介護給付費請求単位数().toString()));
+        } else {
+            shukeiTempentity.set介護給付費請求単位数(Decimal.ZERO);
+        }
+        if (dataEntity.getCsvGokeiEntity().get介護給付費請求保険者負担額() != null
+                && !dataEntity.getCsvGokeiEntity().get介護給付費請求保険者負担額().isEmpty()) {
+            shukeiTempentity.set介護給付費請求保険者負担額(new Decimal(dataEntity.getCsvGokeiEntity()
+                    .get介護給付費請求保険者負担額().toString()));
+        } else {
+            shukeiTempentity.set介護給付費請求保険者負担額(Decimal.ZERO);
+        }
+        if (dataEntity.getCsvGokeiEntity().get介護給付費総合事業費決定件数() != null
+                && !dataEntity.getCsvGokeiEntity().get介護給付費総合事業費決定件数().isEmpty()) {
+            shukeiTempentity.set介護給付費決定件数(Integer.parseInt(dataEntity.getCsvGokeiEntity()
+                    .get介護給付費総合事業費決定件数().toString()));
+        }
+        if (dataEntity.getCsvGokeiEntity().get介護給付費総合事業費決定単位数() != null
+                && !dataEntity.getCsvGokeiEntity().get介護給付費総合事業費決定単位数().isEmpty()) {
+            shukeiTempentity.set介護給付費決定単位数(new Decimal(dataEntity.getCsvGokeiEntity()
+                    .get介護給付費総合事業費決定単位数().toString()));
+        }
+        if (dataEntity.getCsvGokeiEntity().get介護給付費総合事業費決定保険者負担額() != null
+                && !dataEntity.getCsvGokeiEntity().get介護給付費総合事業費決定保険者負担額().isEmpty()) {
+            shukeiTempentity.set介護給付費決定保険者負担額(new Decimal(dataEntity.getCsvGokeiEntity()
+                    .get介護給付費総合事業費決定保険者負担額().toString()));
+        }
+        if (dataEntity.getCsvGokeiEntity().get介護給付費総合事業費調整件数() != null
+                && !dataEntity.getCsvGokeiEntity().get介護給付費総合事業費調整件数().isEmpty()) {
+            shukeiTempentity.set介護給付費調整件数(Integer.parseInt(dataEntity.getCsvGokeiEntity()
+                    .get介護給付費総合事業費調整件数().toString()));
+        }
+        if (dataEntity.getCsvGokeiEntity().get介護給付費総合事業費調整単位数() != null
+                && !dataEntity.getCsvGokeiEntity().get介護給付費総合事業費調整単位数().isEmpty()) {
+            shukeiTempentity.set介護給付費調整単位数(new Decimal(dataEntity.getCsvGokeiEntity()
+                    .get介護給付費総合事業費調整単位数().toString()));
+        }
+        if (dataEntity.getCsvGokeiEntity().get介護給付費総合事業費調整保険者負担額() != null
+                && !dataEntity.getCsvGokeiEntity().get介護給付費総合事業費調整保険者負担額().isEmpty()) {
+            shukeiTempentity.set介護給付費調整保険者負担額(new Decimal(dataEntity.getCsvGokeiEntity()
+                    .get介護給付費総合事業費調整保険者負担額().toString()));
         }
     }
 
@@ -240,48 +274,36 @@ public class SaishinsaKetteiHokenshaInCsvFileRead {
                 for (int j = INDEX_0; j < listMeisaiCsvEntity.size(); j++) {
                     連番 = 連番 + 1;
                     DbWT3064SaishinsaKetteiMeisaiTempEntity meisaiTempentity = new DbWT3064SaishinsaKetteiMeisaiTempEntity();
-                    meisaiTempentity.set取扱年月(new FlexibleYearMonth(listDataEntity.get(k).getCsvHeadEntity().get取扱年月()));
+                    if (listDataEntity.get(k).getCsvHeadEntity().get取扱年月() != null
+                            && !listDataEntity.get(k).getCsvHeadEntity().get取扱年月().isEmpty()) {
+                        meisaiTempentity.set取扱年月(new FlexibleYearMonth(listDataEntity.get(k).getCsvHeadEntity().get取扱年月()));
+                    }
                     meisaiTempentity.set履歴番号(履歴番号);
                     meisaiTempentity.set連番(連番);
                     if (listMeisaiCsvEntity.get(j).get事業所番号() != null
                             && !listMeisaiCsvEntity.get(j).get事業所番号().isEmpty()) {
                         meisaiTempentity.set事業所番号(new JigyoshaNo(listMeisaiCsvEntity.get(j).get事業所番号()));
                     }
-                    meisaiTempentity.set事業所名(listMeisaiCsvEntity.get(j).get事業所名());
+                    if (listMeisaiCsvEntity.get(j).get事業所名() != null
+                            && !listMeisaiCsvEntity.get(j).get事業所名().isEmpty()) {
+                        meisaiTempentity.set事業所名(listMeisaiCsvEntity.get(j).get事業所名());
+                    }
                     meisaiTempentity.set公費負担者番号(RString.EMPTY);
                     meisaiTempentity.set公費受給者番号(RString.EMPTY);
                     meisaiTempentity.set公費証記載保険者番号(null);
-                    meisaiTempentity.setサービス提供年月(new FlexibleYearMonth(listMeisaiCsvEntity.get(j).getサービス提供年月()));
-                    if (listMeisaiCsvEntity.get(j).getサービス種類コード() != null
-                            && !listMeisaiCsvEntity.get(j).getサービス種類コード().isEmpty()) {
-                        meisaiTempentity.setサービス種類コード(new ServiceShuruiCode(listMeisaiCsvEntity.get(j).getサービス種類コード()));
+                    setサービスと申立(meisaiTempentity, listMeisaiCsvEntity.get(j));
+                    if (listMeisaiCsvEntity.get(j).get決定単位数() != null
+                            && !listMeisaiCsvEntity.get(j).get決定単位数().isEmpty()) {
+                        meisaiTempentity.set決定単位数(new Decimal(listMeisaiCsvEntity.get(j).get決定単位数().toString()));
                     }
-                    if (listMeisaiCsvEntity.get(j).getサービス種類名() != null
-                            && !listMeisaiCsvEntity.get(j).getサービス種類名().isEmpty()) {
-                        meisaiTempentity.setサービス種類名(listMeisaiCsvEntity.get(j).getサービス種類名());
+                    if (listMeisaiCsvEntity.get(j).get調整単位数() != null
+                            && !listMeisaiCsvEntity.get(j).get調整単位数().isEmpty()) {
+                        meisaiTempentity.set調整単位数(new Decimal(listMeisaiCsvEntity.get(j).get調整単位数().toString()));
                     }
-
-                    if (listMeisaiCsvEntity.get(j).get申立事由コード() != null
-                            && !listMeisaiCsvEntity.get(j).get申立事由コード().isEmpty()) {
-                        meisaiTempentity.set申立事由コード(new Code(listMeisaiCsvEntity.get(j).get申立事由コード()));
+                    if (listMeisaiCsvEntity.get(j).get保険者負担額() != null
+                            && !listMeisaiCsvEntity.get(j).get保険者負担額().isEmpty()) {
+                        meisaiTempentity.set保険者負担額(new Decimal(listMeisaiCsvEntity.get(j).get保険者負担額().toString()));
                     }
-                    if (listMeisaiCsvEntity.get(j).get申立事由() != null
-                            && !listMeisaiCsvEntity.get(j).get申立事由().isEmpty()) {
-                        meisaiTempentity.set申立事由(listMeisaiCsvEntity.get(j).get申立事由());
-                    }
-                    if (listMeisaiCsvEntity.get(j).get再審査結果コード() != null
-                            && !listMeisaiCsvEntity.get(j).get再審査結果コード().isEmpty()) {
-                        meisaiTempentity.set再審査結果コード(new Code(listMeisaiCsvEntity.get(j).get再審査結果コード()));
-                    }
-                    meisaiTempentity.set当初請求単位数(new Decimal(listMeisaiCsvEntity.get(j).get当初請求単位数().toString()));
-                    meisaiTempentity.set原審単位数(new Decimal(listMeisaiCsvEntity.get(j).get原審単位数().toString()));
-                    if (listMeisaiCsvEntity.get(j).get申立単位数() != null
-                            && !listMeisaiCsvEntity.get(j).get申立単位数().isEmpty()) {
-                        meisaiTempentity.set申立単位数(new Decimal(listMeisaiCsvEntity.get(j).get申立単位数().toString()));
-                    }
-                    meisaiTempentity.set決定単位数(new Decimal(listMeisaiCsvEntity.get(j).get決定単位数().toString()));
-                    meisaiTempentity.set調整単位数(new Decimal(listMeisaiCsvEntity.get(j).get調整単位数().toString()));
-                    meisaiTempentity.set保険者負担額(new Decimal(listMeisaiCsvEntity.get(j).get保険者負担額().toString()));
                     meisaiTempentity.set取込年月(処理年月);
                     mapper.再審査決定明細一時TBLに登録(meisaiTempentity);
                     被保険者一時TBLに登録(連番, listDataEntity.get(k), listMeisaiCsvEntity.get(j));
@@ -293,23 +315,72 @@ public class SaishinsaKetteiHokenshaInCsvFileRead {
         }
     }
 
+    private void setサービスと申立(DbWT3064SaishinsaKetteiMeisaiTempEntity meisaiTempentity, SaishinsaKetteiHokenshaInCsvMeisaiEntity meisaiEntity) {
+        if (meisaiEntity.getサービス提供年月() != null
+                && !meisaiEntity.getサービス提供年月().isEmpty()) {
+            meisaiTempentity.setサービス提供年月(new FlexibleYearMonth(meisaiEntity.getサービス提供年月()));
+        }
+        if (meisaiEntity.getサービス種類コード() != null
+                && !meisaiEntity.getサービス種類コード().isEmpty()) {
+            meisaiTempentity.setサービス種類コード(new ServiceShuruiCode(meisaiEntity.getサービス種類コード()));
+        }
+        if (meisaiEntity.getサービス種類名() != null
+                && !meisaiEntity.getサービス種類名().isEmpty()) {
+            meisaiTempentity.setサービス種類名(meisaiEntity.getサービス種類名());
+        }
+        if (meisaiEntity.get申立事由コード() != null
+                && !meisaiEntity.get申立事由コード().isEmpty()) {
+            meisaiTempentity.set申立事由コード(new Code(meisaiEntity.get申立事由コード()));
+        }
+        if (meisaiEntity.get申立事由() != null
+                && !meisaiEntity.get申立事由().isEmpty()) {
+            meisaiTempentity.set申立事由(meisaiEntity.get申立事由());
+        }
+        if (meisaiEntity.get再審査結果コード() != null
+                && !meisaiEntity.get再審査結果コード().isEmpty()) {
+            meisaiTempentity.set再審査結果コード(new Code(meisaiEntity.get再審査結果コード()));
+        }
+        if (meisaiEntity.get当初請求単位数() != null
+                && !meisaiEntity.get当初請求単位数().isEmpty()) {
+            meisaiTempentity.set当初請求単位数(new Decimal(meisaiEntity.get当初請求単位数().toString()));
+        }
+        if (meisaiEntity.get原審単位数() != null
+                && !meisaiEntity.get原審単位数().isEmpty()) {
+            meisaiTempentity.set原審単位数(new Decimal(meisaiEntity.get原審単位数().toString()));
+        }
+        if (meisaiEntity.get申立単位数() != null
+                && !meisaiEntity.get申立単位数().isEmpty()) {
+            meisaiTempentity.set申立単位数(new Decimal(meisaiEntity.get申立単位数().toString()));
+        }
+
+    }
+
     @Transaction
     private void 被保険者一時TBLに登録(int 連番, SaishinsaKetteiHokenshaInDataEntity dataEntity,
             SaishinsaKetteiHokenshaInCsvMeisaiEntity meisaiCsvEntity) {
         ISaishinsaKetteiHokenshaInCsvFileReadMapper mapper = this.mapperProvider.create(ISaishinsaKetteiHokenshaInCsvFileReadMapper.class);
         DbWT0001HihokenshaTempEntity hihokenshaTempentity = new DbWT0001HihokenshaTempEntity();
         hihokenshaTempentity.set連番(連番);
-        hihokenshaTempentity.set証記載保険者番号(new ShoKisaiHokenshaNo(dataEntity.getCsvHeadEntity().get証記載保険者番号().substring(2)));
-        hihokenshaTempentity.set被保険者番号(new HihokenshaNo(meisaiCsvEntity.get被保険者番号()));
-        FlexibleYearMonth flexibleYearMonth = new FlexibleYearMonth(meisaiCsvEntity.getサービス提供年月());
-        int day = flexibleYearMonth.getLastDay();
-        RString date = flexibleYearMonth.toDateString().concat(new RString(day));
-        hihokenshaTempentity.setサービス提供年月末日(new FlexibleDate(date));
+        if (dataEntity.getCsvHeadEntity().get証記載保険者番号() != null && !dataEntity.getCsvHeadEntity().get証記載保険者番号().isEmpty()
+                && dataEntity.getCsvHeadEntity().get証記載保険者番号().length() >= INDEX_3) {
+            hihokenshaTempentity.set証記載保険者番号(new ShoKisaiHokenshaNo(dataEntity.getCsvHeadEntity().get証記載保険者番号().substring(2)));
+        }
+        if (meisaiCsvEntity.get被保険者番号() != null && !meisaiCsvEntity.get被保険者番号().isEmpty()) {
+            hihokenshaTempentity.set被保険者番号(new HihokenshaNo(meisaiCsvEntity.get被保険者番号()));
+        }
+        if (meisaiCsvEntity.getサービス提供年月() != null && !meisaiCsvEntity.getサービス提供年月().isEmpty()) {
+            FlexibleYearMonth flexibleYearMonth = new FlexibleYearMonth(meisaiCsvEntity.getサービス提供年月());
+            int day = flexibleYearMonth.getLastDay();
+            RString date = flexibleYearMonth.toDateString().concat(new RString(day));
+            hihokenshaTempentity.setサービス提供年月末日(new FlexibleDate(date));
+        }
         hihokenshaTempentity.set被保険者カナ氏名(meisaiCsvEntity.get被保険者氏名());
         hihokenshaTempentity.set被保険者氏名(RString.EMPTY);
         hihokenshaTempentity.set旧市町村コード(LasdecCode.EMPTY);
         hihokenshaTempentity.set変換被保険者番号(null);
-        hihokenshaTempentity.set登録被保険者番号(new HihokenshaNo(meisaiCsvEntity.get被保険者番号()));
+        if (meisaiCsvEntity.get被保険者番号() != null && !meisaiCsvEntity.get被保険者番号().isEmpty()) {
+            hihokenshaTempentity.set登録被保険者番号(new HihokenshaNo(meisaiCsvEntity.get被保険者番号()));
+        }
         hihokenshaTempentity.set市町村コード(LasdecCode.EMPTY);
         hihokenshaTempentity.set管内管外区分(RString.EMPTY);
         hihokenshaTempentity.set郵便番号(RString.EMPTY);
