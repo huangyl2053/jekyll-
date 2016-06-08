@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBAUC11311",
+ "displayWizard": false,
+ "subGyomuCode": "DBA",
+ "steps": [
+  {
+   "id": 1,
+   "name": "異動チェックリスト",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1130011",
+     "toLayoutTitle": "異動チェックリスト",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1130011",
+     "layoutTitle": "異動チェックリスト",
+     "eventName": "処理終了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3081DaisanshaKoiKyufugakuGengakuマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3081DaisanshaKoiKyufugakuGengakuMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3081DaisanshaKoiKyufugakuGengaku">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3081DaisanshaKoiKyufugakuGengakuMapper.allColumns_DbT3081DaisanshaKoiKyufugakuGengaku" />
+     FROM
+         rgdb."DbT3081DaisanshaKoiKyufugakuGengaku"
+     WHERE
+         rgdb."DbT3081DaisanshaKoiKyufugakuGengaku"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3081DaisanshaKoiKyufugakuGengaku">
+         "DbT3081DaisanshaKoiKyufugakuGengaku"."hihokenshaNo" as "dbT3081DaisanshaKoiKyufugakuGengaku_hihokenshaNo",
+         "DbT3081DaisanshaKoiKyufugakuGengaku"."todokedeKanriNo" as "dbT3081DaisanshaKoiKyufugakuGengaku_todokedeKanriNo",
+         "DbT3081DaisanshaKoiKyufugakuGengaku"."rirekiNo" as "dbT3081DaisanshaKoiKyufugakuGengaku_rirekiNo",
+         "DbT3081DaisanshaKoiKyufugakuGengaku"."insertDantaiCd" as "dbT3081DaisanshaKoiKyufugakuGengaku_insertDantaiCd",
+         "DbT3081DaisanshaKoiKyufugakuGengaku"."insertTimestamp" as "dbT3081DaisanshaKoiKyufugakuGengaku_insertTimestamp",
+         "DbT3081DaisanshaKoiKyufugakuGengaku"."insertReamsLoginId" as "dbT3081DaisanshaKoiKyufugakuGengaku_insertReamsLoginId",
+         "DbT3081DaisanshaKoiKyufugakuGengaku"."insertContextId" as "dbT3081DaisanshaKoiKyufugakuGengaku_insertContextId",
+         "DbT3081DaisanshaKoiKyufugakuGengaku"."isDeleted" as "dbT3081DaisanshaKoiKyufugakuGengaku_isDeleted",
+         "DbT3081DaisanshaKoiKyufugakuGengaku"."updateCount" as "dbT3081DaisanshaKoiKyufugakuGengaku_updateCount",
+         "DbT3081DaisanshaKoiKyufugakuGengaku"."lastUpdateTimestamp" as "dbT3081DaisanshaKoiKyufugakuGengaku_lastUpdateTimestamp",
+         "DbT3081DaisanshaKoiKyufugakuGengaku"."lastUpdateReamsLoginId" as "dbT3081DaisanshaKoiKyufugakuGengaku_lastUpdateReamsLoginId",
+         "DbT3081DaisanshaKoiKyufugakuGengaku"."gengakuTaishoKingaku" as "dbT3081DaisanshaKoiKyufugakuGengaku_gengakuTaishoKingaku",
+         "DbT3081DaisanshaKoiKyufugakuGengaku"."gengakuKaishiYMD" as "dbT3081DaisanshaKoiKyufugakuGengaku_gengakuKaishiYMD",
+         "DbT3081DaisanshaKoiKyufugakuGengaku"."gengakuShuryoYMD" as "dbT3081DaisanshaKoiKyufugakuGengaku_gengakuShuryoYMD"
+    </sql>
+
+
+    <!--テーブルDbT3081DaisanshaKoiKyufugakuGengakuの項目をDbT3081DaisanshaKoiKyufugakuGengakuEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3081DaisanshaKoiKyufugakuGengakuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3081DaisanshaKoiKyufugakuGengakuEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT3081DaisanshaKoiKyufugakuGengaku_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="todokedeKanriNo" column="dbT3081DaisanshaKoiKyufugakuGengaku_todokedeKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="rirekiNo" column="dbT3081DaisanshaKoiKyufugakuGengaku_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3081DaisanshaKoiKyufugakuGengaku_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3081DaisanshaKoiKyufugakuGengaku_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3081DaisanshaKoiKyufugakuGengaku_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3081DaisanshaKoiKyufugakuGengaku_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3081DaisanshaKoiKyufugakuGengaku_isDeleted" />
+        <result property="updateCount" column="dbT3081DaisanshaKoiKyufugakuGengaku_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3081DaisanshaKoiKyufugakuGengaku_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3081DaisanshaKoiKyufugakuGengaku_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gengakuTaishoKingaku" column="dbT3081DaisanshaKoiKyufugakuGengaku_gengakuTaishoKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gengakuKaishiYMD" column="dbT3081DaisanshaKoiKyufugakuGengaku_gengakuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="gengakuShuryoYMD" column="dbT3081DaisanshaKoiKyufugakuGengaku_gengakuShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+
+</mapper>

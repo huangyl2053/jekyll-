@@ -1,0 +1,42 @@
+﻿{
+ "uiContainerName": "DBCUC03001",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "受領委任契約申請登録・追加",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0300012",
+     "toLayoutTitle": "受領委任契約事業者登録・追加",
+     "toState": ""
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0300012",
+     "layoutTitle": "受領委任契約事業者登録・追加",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "3",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0300012",
+     "layoutTitle": "受領委任契約事業者登録・追加",
+     "eventName": "検索に戻る",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

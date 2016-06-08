@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3118ShikibetsuNoKanriマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3118ShikibetsuNoKanriMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3118ShikibetsuNoKanri">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3118ShikibetsuNoKanriMapper.allColumns_DbT3118ShikibetsuNoKanri" />
+     FROM
+         rgdb."DbT3118ShikibetsuNoKanri"
+     WHERE
+         rgdb."DbT3118ShikibetsuNoKanri"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3118ShikibetsuNoKanri">
+         "DbT3118ShikibetsuNoKanri"."shikibetsuNo" as "dbT3118ShikibetsuNoKanri_shikibetsuNo",
+         "DbT3118ShikibetsuNoKanri"."tekiyoKaishiYM" as "dbT3118ShikibetsuNoKanri_tekiyoKaishiYM",
+         "DbT3118ShikibetsuNoKanri"."insertDantaiCd" as "dbT3118ShikibetsuNoKanri_insertDantaiCd",
+         "DbT3118ShikibetsuNoKanri"."insertTimestamp" as "dbT3118ShikibetsuNoKanri_insertTimestamp",
+         "DbT3118ShikibetsuNoKanri"."insertReamsLoginId" as "dbT3118ShikibetsuNoKanri_insertReamsLoginId",
+         "DbT3118ShikibetsuNoKanri"."insertContextId" as "dbT3118ShikibetsuNoKanri_insertContextId",
+         "DbT3118ShikibetsuNoKanri"."isDeleted" as "dbT3118ShikibetsuNoKanri_isDeleted",
+         "DbT3118ShikibetsuNoKanri"."updateCount" as "dbT3118ShikibetsuNoKanri_updateCount",
+         "DbT3118ShikibetsuNoKanri"."lastUpdateTimestamp" as "dbT3118ShikibetsuNoKanri_lastUpdateTimestamp",
+         "DbT3118ShikibetsuNoKanri"."lastUpdateReamsLoginId" as "dbT3118ShikibetsuNoKanri_lastUpdateReamsLoginId",
+         "DbT3118ShikibetsuNoKanri"."tekiyoShuryoYM" as "dbT3118ShikibetsuNoKanri_tekiyoShuryoYM",
+         "DbT3118ShikibetsuNoKanri"."meisho" as "dbT3118ShikibetsuNoKanri_meisho",
+         "DbT3118ShikibetsuNoKanri"."ryakusho" as "dbT3118ShikibetsuNoKanri_ryakusho",
+         "DbT3118ShikibetsuNoKanri"."meisho2" as "dbT3118ShikibetsuNoKanri_meisho2",
+         "DbT3118ShikibetsuNoKanri"."shikibetsuNoKubon" as "dbT3118ShikibetsuNoKanri_shikibetsuNoKubon",
+         "DbT3118ShikibetsuNoKanri"."kyufujissekiKubun" as "dbT3118ShikibetsuNoKanri_kyufujissekiKubun",
+         "DbT3118ShikibetsuNoKanri"."kyufuBunruiKubun" as "dbT3118ShikibetsuNoKanri_kyufuBunruiKubun",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode01" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode01",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode02" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode02",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode03" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode03",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode04" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode04",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode05" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode05",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode06" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode06",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode07" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode07",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode08" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode08",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode09" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode09",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode10" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode10",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode11" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode11",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode12" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode12",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode13" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode13",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode14" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode14",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode15" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode15",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode16" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode16",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode17" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode17",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode18" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode18",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode19" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode19",
+         "DbT3118ShikibetsuNoKanri"."sentakuKanoShuruiCode20" as "dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode20",
+         "DbT3118ShikibetsuNoKanri"."shafukuSentakuKanoShuruiCode01" as "dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode01",
+         "DbT3118ShikibetsuNoKanri"."shafukuSentakuKanoShuruiCode02" as "dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode02",
+         "DbT3118ShikibetsuNoKanri"."shafukuSentakuKanoShuruiCode03" as "dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode03",
+         "DbT3118ShikibetsuNoKanri"."shafukuSentakuKanoShuruiCode04" as "dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode04",
+         "DbT3118ShikibetsuNoKanri"."shafukuSentakuKanoShuruiCode05" as "dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode05",
+         "DbT3118ShikibetsuNoKanri"."shafukuSentakuKanoShuruiCode06" as "dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode06",
+         "DbT3118ShikibetsuNoKanri"."shafukuSentakuKanoShuruiCode07" as "dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode07",
+         "DbT3118ShikibetsuNoKanri"."shafukuSentakuKanoShuruiCode08" as "dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode08",
+         "DbT3118ShikibetsuNoKanri"."shafukuSentakuKanoShuruiCode09" as "dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode09",
+         "DbT3118ShikibetsuNoKanri"."shafukuSentakuKanoShuruiCode10" as "dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode10",
+         "DbT3118ShikibetsuNoKanri"."kihonSetteiKubun" as "dbT3118ShikibetsuNoKanri_kihonSetteiKubun",
+         "DbT3118ShikibetsuNoKanri"."meisaiSetteiKubun" as "dbT3118ShikibetsuNoKanri_meisaiSetteiKubun",
+         "DbT3118ShikibetsuNoKanri"."kinkyuShisetsuRyoyoSetteiKubun" as "dbT3118ShikibetsuNoKanri_kinkyuShisetsuRyoyoSetteiKubun",
+         "DbT3118ShikibetsuNoKanri"."tokuteiShinryoSetteiKubun" as "dbT3118ShikibetsuNoKanri_tokuteiShinryoSetteiKubun",
+         "DbT3118ShikibetsuNoKanri"."shokujiHiyosetteiKubun" as "dbT3118ShikibetsuNoKanri_shokujiHiyosetteiKubun",
+         "DbT3118ShikibetsuNoKanri"."kyotakuKeikakuSetteiKubun" as "dbT3118ShikibetsuNoKanri_kyotakuKeikakuSetteiKubun",
+         "DbT3118ShikibetsuNoKanri"."fukushoyouguKonyuSetteiKubun" as "dbT3118ShikibetsuNoKanri_fukushoyouguKonyuSetteiKubun",
+         "DbT3118ShikibetsuNoKanri"."jutakukaishuSetteiKubun" as "dbT3118ShikibetsuNoKanri_jutakukaishuSetteiKubun",
+         "DbT3118ShikibetsuNoKanri"."kogakuKaigoSetteiKubun" as "dbT3118ShikibetsuNoKanri_kogakuKaigoSetteiKubun",
+         "DbT3118ShikibetsuNoKanri"."tokuteishinryoTokubetsuryoyoSetteiKubun" as "dbT3118ShikibetsuNoKanri_tokuteishinryoTokubetsuryoyoSetteiKubun",
+         "DbT3118ShikibetsuNoKanri"."tokuteinyushoshaSetteiKubun" as "dbT3118ShikibetsuNoKanri_tokuteinyushoshaSetteiKubun",
+         "DbT3118ShikibetsuNoKanri"."shakaifukushiKeigenSetteiKubun" as "dbT3118ShikibetsuNoKanri_shakaifukushiKeigenSetteiKubun",
+         "DbT3118ShikibetsuNoKanri"."careManagementSetteiKubun" as "dbT3118ShikibetsuNoKanri_careManagementSetteiKubun",
+         "DbT3118ShikibetsuNoKanri"."tokuteiShikkanSetteiKubun" as "dbT3118ShikibetsuNoKanri_tokuteiShikkanSetteiKubun",
+         "DbT3118ShikibetsuNoKanri"."meisaiJushochitokureiSetteiKubun" as "dbT3118ShikibetsuNoKanri_meisaiJushochitokureiSetteiKubun",
+         "DbT3118ShikibetsuNoKanri"."shukeiSetteiKubun" as "dbT3118ShikibetsuNoKanri_shukeiSetteiKubun",
+         "DbT3118ShikibetsuNoKanri"."hyoujiJun" as "dbT3118ShikibetsuNoKanri_hyoujiJun",
+         "DbT3118ShikibetsuNoKanri"."kagoMoshitateYoshikiNo" as "dbT3118ShikibetsuNoKanri_kagoMoshitateYoshikiNo"
+    </sql>
+
+
+    <!--テーブルDbT3118ShikibetsuNoKanriの項目をDbT3118ShikibetsuNoKanriEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3118ShikibetsuNoKanriEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity" autoMapping="true">
+        <id property="shikibetsuNo" column="dbT3118ShikibetsuNoKanri_shikibetsuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="tekiyoKaishiYM" column="dbT3118ShikibetsuNoKanri_tekiyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3118ShikibetsuNoKanri_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3118ShikibetsuNoKanri_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3118ShikibetsuNoKanri_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3118ShikibetsuNoKanri_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3118ShikibetsuNoKanri_isDeleted" />
+        <result property="updateCount" column="dbT3118ShikibetsuNoKanri_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3118ShikibetsuNoKanri_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3118ShikibetsuNoKanri_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tekiyoShuryoYM" column="dbT3118ShikibetsuNoKanri_tekiyoShuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="meisho" column="dbT3118ShikibetsuNoKanri_meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ryakusho" column="dbT3118ShikibetsuNoKanri_ryakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="meisho2" column="dbT3118ShikibetsuNoKanri_meisho2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikibetsuNoKubon" column="dbT3118ShikibetsuNoKanri_shikibetsuNoKubon" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyufujissekiKubun" column="dbT3118ShikibetsuNoKanri_kyufujissekiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyufuBunruiKubun" column="dbT3118ShikibetsuNoKanri_kyufuBunruiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode01" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode02" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode03" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode04" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode05" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode06" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode07" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode08" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode09" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode10" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode11" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode12" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode13" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode14" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode15" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode16" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode16" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode17" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode17" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode18" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode18" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode19" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode19" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sentakuKanoShuruiCode20" column="dbT3118ShikibetsuNoKanri_sentakuKanoShuruiCode20" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shafukuSentakuKanoShuruiCode01" column="dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shafukuSentakuKanoShuruiCode02" column="dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shafukuSentakuKanoShuruiCode03" column="dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shafukuSentakuKanoShuruiCode04" column="dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shafukuSentakuKanoShuruiCode05" column="dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shafukuSentakuKanoShuruiCode06" column="dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shafukuSentakuKanoShuruiCode07" column="dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shafukuSentakuKanoShuruiCode08" column="dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shafukuSentakuKanoShuruiCode09" column="dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shafukuSentakuKanoShuruiCode10" column="dbT3118ShikibetsuNoKanri_shafukuSentakuKanoShuruiCode10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kihonSetteiKubun" column="dbT3118ShikibetsuNoKanri_kihonSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="meisaiSetteiKubun" column="dbT3118ShikibetsuNoKanri_meisaiSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kinkyuShisetsuRyoyoSetteiKubun" column="dbT3118ShikibetsuNoKanri_kinkyuShisetsuRyoyoSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuteiShinryoSetteiKubun" column="dbT3118ShikibetsuNoKanri_tokuteiShinryoSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shokujiHiyosetteiKubun" column="dbT3118ShikibetsuNoKanri_shokujiHiyosetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyotakuKeikakuSetteiKubun" column="dbT3118ShikibetsuNoKanri_kyotakuKeikakuSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fukushoyouguKonyuSetteiKubun" column="dbT3118ShikibetsuNoKanri_fukushoyouguKonyuSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jutakukaishuSetteiKubun" column="dbT3118ShikibetsuNoKanri_jutakukaishuSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kogakuKaigoSetteiKubun" column="dbT3118ShikibetsuNoKanri_kogakuKaigoSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuteishinryoTokubetsuryoyoSetteiKubun" column="dbT3118ShikibetsuNoKanri_tokuteishinryoTokubetsuryoyoSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuteinyushoshaSetteiKubun" column="dbT3118ShikibetsuNoKanri_tokuteinyushoshaSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shakaifukushiKeigenSetteiKubun" column="dbT3118ShikibetsuNoKanri_shakaifukushiKeigenSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="careManagementSetteiKubun" column="dbT3118ShikibetsuNoKanri_careManagementSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuteiShikkanSetteiKubun" column="dbT3118ShikibetsuNoKanri_tokuteiShikkanSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="meisaiJushochitokureiSetteiKubun" column="dbT3118ShikibetsuNoKanri_meisaiJushochitokureiSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shukeiSetteiKubun" column="dbT3118ShikibetsuNoKanri_shukeiSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hyoujiJun" column="dbT3118ShikibetsuNoKanri_hyoujiJun" />
+        <result property="kagoMoshitateYoshikiNo" column="dbT3118ShikibetsuNoKanri_kagoMoshitateYoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>

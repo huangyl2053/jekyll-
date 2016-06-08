@@ -1,0 +1,6 @@
+﻿shinseiYMD,UDD015YMD,FlexibleDate,,,,,申請年月日,A
+ketteiYMD,UDD015YMD,FlexibleDate,,,,,決定年月日,A
+tekiyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,適用開始年月日,A
+tekiyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,適用終了年月日,A
+ketteiKubun,varchar,RString,,,,,決定区分,A
+hiShoninRiyu,varchar,RString,,,,,非承認理由,A

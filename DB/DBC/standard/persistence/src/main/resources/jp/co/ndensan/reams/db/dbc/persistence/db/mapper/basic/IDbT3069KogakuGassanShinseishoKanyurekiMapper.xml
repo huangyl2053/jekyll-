@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3069KogakuGassanShinseishoKanyurekiマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3069KogakuGassanShinseishoKanyurekiMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3069KogakuGassanShinseishoKanyureki">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3069KogakuGassanShinseishoKanyurekiMapper.allColumns_DbT3069KogakuGassanShinseishoKanyureki" />
+     FROM
+         rgdb."DbT3069KogakuGassanShinseishoKanyureki"
+     WHERE
+         rgdb."DbT3069KogakuGassanShinseishoKanyureki"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3069KogakuGassanShinseishoKanyureki">
+         "DbT3069KogakuGassanShinseishoKanyureki"."hihokenshaNo" as "dbT3069KogakuGassanShinseishoKanyureki_hihokenshaNo",
+         "DbT3069KogakuGassanShinseishoKanyureki"."taishoNendo" as "dbT3069KogakuGassanShinseishoKanyureki_taishoNendo",
+         "DbT3069KogakuGassanShinseishoKanyureki"."hokenshaNo" as "dbT3069KogakuGassanShinseishoKanyureki_hokenshaNo",
+         "DbT3069KogakuGassanShinseishoKanyureki"."seiriNo" as "dbT3069KogakuGassanShinseishoKanyureki_seiriNo",
+         "DbT3069KogakuGassanShinseishoKanyureki"."rirekiNo" as "dbT3069KogakuGassanShinseishoKanyureki_rirekiNo",
+         "DbT3069KogakuGassanShinseishoKanyureki"."kanyurekiNo" as "dbT3069KogakuGassanShinseishoKanyureki_kanyurekiNo",
+         "DbT3069KogakuGassanShinseishoKanyureki"."insertDantaiCd" as "dbT3069KogakuGassanShinseishoKanyureki_insertDantaiCd",
+         "DbT3069KogakuGassanShinseishoKanyureki"."insertTimestamp" as "dbT3069KogakuGassanShinseishoKanyureki_insertTimestamp",
+         "DbT3069KogakuGassanShinseishoKanyureki"."insertReamsLoginId" as "dbT3069KogakuGassanShinseishoKanyureki_insertReamsLoginId",
+         "DbT3069KogakuGassanShinseishoKanyureki"."insertContextId" as "dbT3069KogakuGassanShinseishoKanyureki_insertContextId",
+         "DbT3069KogakuGassanShinseishoKanyureki"."isDeleted" as "dbT3069KogakuGassanShinseishoKanyureki_isDeleted",
+         "DbT3069KogakuGassanShinseishoKanyureki"."updateCount" as "dbT3069KogakuGassanShinseishoKanyureki_updateCount",
+         "DbT3069KogakuGassanShinseishoKanyureki"."lastUpdateTimestamp" as "dbT3069KogakuGassanShinseishoKanyureki_lastUpdateTimestamp",
+         "DbT3069KogakuGassanShinseishoKanyureki"."lastUpdateReamsLoginId" as "dbT3069KogakuGassanShinseishoKanyureki_lastUpdateReamsLoginId",
+         "DbT3069KogakuGassanShinseishoKanyureki"."hokenshaMei" as "dbT3069KogakuGassanShinseishoKanyureki_hokenshaMei",
+         "DbT3069KogakuGassanShinseishoKanyureki"."kanyuKaishiYMD" as "dbT3069KogakuGassanShinseishoKanyureki_kanyuKaishiYMD",
+         "DbT3069KogakuGassanShinseishoKanyureki"."kanyuShuryoYMD" as "dbT3069KogakuGassanShinseishoKanyureki_kanyuShuryoYMD",
+         "DbT3069KogakuGassanShinseishoKanyureki"."jikoFutanShomeisho_SeiriNo" as "dbT3069KogakuGassanShinseishoKanyureki_jikoFutanShomeisho_SeiriNo"
+    </sql>
+
+
+    <!--テーブルDbT3069KogakuGassanShinseishoKanyurekiの項目をDbT3069KogakuGassanShinseishoKanyurekiEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3069KogakuGassanShinseishoKanyurekiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3069KogakuGassanShinseishoKanyurekiEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT3069KogakuGassanShinseishoKanyureki_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="taishoNendo" column="dbT3069KogakuGassanShinseishoKanyureki_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="hokenshaNo" column="dbT3069KogakuGassanShinseishoKanyureki_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="seiriNo" column="dbT3069KogakuGassanShinseishoKanyureki_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="rirekiNo" column="dbT3069KogakuGassanShinseishoKanyureki_rirekiNo" />
+        <id property="kanyurekiNo" column="dbT3069KogakuGassanShinseishoKanyureki_kanyurekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3069KogakuGassanShinseishoKanyureki_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3069KogakuGassanShinseishoKanyureki_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3069KogakuGassanShinseishoKanyureki_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3069KogakuGassanShinseishoKanyureki_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3069KogakuGassanShinseishoKanyureki_isDeleted" />
+        <result property="updateCount" column="dbT3069KogakuGassanShinseishoKanyureki_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3069KogakuGassanShinseishoKanyureki_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3069KogakuGassanShinseishoKanyureki_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenshaMei" column="dbT3069KogakuGassanShinseishoKanyureki_hokenshaMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kanyuKaishiYMD" column="dbT3069KogakuGassanShinseishoKanyureki_kanyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kanyuShuryoYMD" column="dbT3069KogakuGassanShinseishoKanyureki_kanyuShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jikoFutanShomeisho_SeiriNo" column="dbT3069KogakuGassanShinseishoKanyureki_jikoFutanShomeisho_SeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>

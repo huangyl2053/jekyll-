@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>jp.co.ndensan.reams.db.dbu</groupId>
+        <artifactId>dbu</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>DbuService</artifactId>
+    <packaging>jar</packaging>
+    <name>DbuService</name>
+    <properties>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+        <!-- DBA -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dba</groupId>
+            <artifactId>DbaService</artifactId>
+        </dependency>
+        <!-- DBC -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbc</groupId>
+            <artifactId>DbcService</artifactId>
+        </dependency>
+        <!-- DBD -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+            <artifactId>DbdService</artifactId>
+        </dependency>
+        <!-- DBU -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbuDefinition</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbuEntity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbuBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbuPersistence</artifactId>
+        </dependency>
+        <!-- DBC -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbc</groupId>
+            <artifactId>DbcPersistence</artifactId>
+        </dependency>
+        <!-- DBX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxService</artifactId>
+        </dependency>
+        <!-- DBZ -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzService</artifactId>
+        </dependency>
+        <!-- 公開系 -->
+        <!-- テスト -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzTestHelper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbuEntity</artifactId>
+            <type>test-jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxPersistence</artifactId>
+            <version>${jp.co.ndensan.reams.uax.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbe</groupId>
+            <artifactId>DbePersistence</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxDefinition</artifactId>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+</project>

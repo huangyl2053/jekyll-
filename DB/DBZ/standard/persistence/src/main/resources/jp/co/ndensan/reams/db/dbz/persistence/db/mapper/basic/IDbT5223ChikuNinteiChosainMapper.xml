@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5223ChikuNinteiChosainマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5223ChikuNinteiChosainMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5223ChikuNinteiChosain">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5223ChikuNinteiChosainMapper.allColumns_DbT5223ChikuNinteiChosain" />
+     FROM
+         rgdb."DbT5223ChikuNinteiChosain"
+     WHERE
+         rgdb."DbT5223ChikuNinteiChosain"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5223ChikuNinteiChosain">
+         "DbT5223ChikuNinteiChosain"."chosaChikuCode" as "dbT5223ChikuNinteiChosain_chosaChikuCode",
+         "DbT5223ChikuNinteiChosain"."ninteiChosaItakusakiCode" as "dbT5223ChikuNinteiChosain_ninteiChosaItakusakiCode",
+         "DbT5223ChikuNinteiChosain"."ninteiChosainCode" as "dbT5223ChikuNinteiChosain_ninteiChosainCode",
+         "DbT5223ChikuNinteiChosain"."shichosonCode" as "dbT5223ChikuNinteiChosain_shichosonCode",
+         "DbT5223ChikuNinteiChosain"."insertDantaiCd" as "dbT5223ChikuNinteiChosain_insertDantaiCd",
+         "DbT5223ChikuNinteiChosain"."insertTimestamp" as "dbT5223ChikuNinteiChosain_insertTimestamp",
+         "DbT5223ChikuNinteiChosain"."insertReamsLoginId" as "dbT5223ChikuNinteiChosain_insertReamsLoginId",
+         "DbT5223ChikuNinteiChosain"."insertContextId" as "dbT5223ChikuNinteiChosain_insertContextId",
+         "DbT5223ChikuNinteiChosain"."isDeleted" as "dbT5223ChikuNinteiChosain_isDeleted",
+         "DbT5223ChikuNinteiChosain"."updateCount" as "dbT5223ChikuNinteiChosain_updateCount",
+         "DbT5223ChikuNinteiChosain"."lastUpdateTimestamp" as "dbT5223ChikuNinteiChosain_lastUpdateTimestamp",
+         "DbT5223ChikuNinteiChosain"."lastUpdateReamsLoginId" as "dbT5223ChikuNinteiChosain_lastUpdateReamsLoginId",
+         "DbT5223ChikuNinteiChosain"."yusenNo" as "dbT5223ChikuNinteiChosain_yusenNo",
+         "DbT5223ChikuNinteiChosain"."biko" as "dbT5223ChikuNinteiChosain_biko"
+    </sql>
+
+
+    <!--テーブルDbT5223ChikuNinteiChosainの項目をDbT5223ChikuNinteiChosainEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5223ChikuNinteiChosainEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5223ChikuNinteiChosainEntity" autoMapping="true">
+        <id property="chosaChikuCode" column="dbT5223ChikuNinteiChosain_chosaChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <id property="ninteiChosaItakusakiCode" column="dbT5223ChikuNinteiChosain_ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="ninteiChosainCode" column="dbT5223ChikuNinteiChosain_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shichosonCode" column="dbT5223ChikuNinteiChosain_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT5223ChikuNinteiChosain_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5223ChikuNinteiChosain_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5223ChikuNinteiChosain_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5223ChikuNinteiChosain_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5223ChikuNinteiChosain_isDeleted" />
+        <result property="updateCount" column="dbT5223ChikuNinteiChosain_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5223ChikuNinteiChosain_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5223ChikuNinteiChosain_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yusenNo" column="dbT5223ChikuNinteiChosain_yusenNo" />
+        <result property="biko" column="dbT5223ChikuNinteiChosain_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+<select id="getEntity" resultMap="ResultMap_DbT5223ChikuNinteiChosainEntity">
+    SELECT
+    <include refid="allColumns_DbT5223ChikuNinteiChosain" />
+    FROM
+    rgdb."DbT5223ChikuNinteiChosain"
+</select>
+</mapper>

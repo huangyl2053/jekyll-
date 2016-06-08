@@ -1,0 +1,3 @@
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,DbUDD013ShinseishoKanriNo,,,,,申請書管理番号,A
+renban,int2,int,,,,,連番,A
+jogaiTaishoShinsakaiIinCode,varchar,RString,,,,,除外対象審査会委員コード,A

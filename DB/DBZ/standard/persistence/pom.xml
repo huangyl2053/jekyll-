@@ -1,0 +1,66 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+        <artifactId>dbz</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>DbzPersistence</artifactId>
+    <packaging>jar</packaging>
+    <name>DbzPersistence</name>
+    <properties>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+        <!-- DBZ -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzDefinition</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzEntity</artifactId>
+        </dependency>
+        <!-- DBX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxDefinition</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxTestHelper</artifactId>
+        </dependency>
+        <!-- UAX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxPersistence</artifactId>
+        </dependency>
+
+        <!-- �ｽe�ｽX�ｽg -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzTestHelper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzEntity</artifactId>
+            <type>test-jar</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzBusiness</artifactId>
+            <type>test-jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxEntity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxPersistence</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+</project>

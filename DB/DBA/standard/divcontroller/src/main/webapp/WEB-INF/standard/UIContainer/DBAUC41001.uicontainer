@@ -1,0 +1,102 @@
+﻿{
+ "uiContainerName": "DBAUC41001",
+ "displayWizard": false,
+ "subGyomuCode": "DBA",
+ "steps": [
+  {
+   "id": 1,
+   "name": "被保険者照会",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0200001",
+     "layoutTitle": "対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA4010011",
+     "toLayoutTitle": "被保険者照会",
+     "toState": "被保険者照会"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA4010011",
+     "layoutTitle": "被保険者照会",
+     "eventName": "検索条件",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA4010011",
+     "layoutTitle": "被保険者照会",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA4010011",
+     "layoutTitle": "被保険者照会",
+     "eventName": "検索一覧",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "",
+     "toState": "該当者一覧"
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA4010011",
+     "layoutTitle": "被保険者照会",
+     "eventName": "被保険者詳細",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1050021",
+     "toLayoutTitle": "被保険者資格詳細異動",
+     "toState": "照会状態"
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1050021",
+     "layoutTitle": "被保険者資格詳細異動",
+     "eventName": "履歴一覧に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA4010011",
+     "toLayoutTitle": "被保険者照会",
+     "toState": "被保険者照会"
+    }
+   ]
+  }
+ ]
+}

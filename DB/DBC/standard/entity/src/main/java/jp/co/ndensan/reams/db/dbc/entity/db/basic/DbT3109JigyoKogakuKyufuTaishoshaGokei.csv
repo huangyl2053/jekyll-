@@ -1,0 +1,15 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
+rirekiNo,int2,int,,,,,履歴番号,A
+serviceHiyoGokeiGakuGokei,numeric,Decimal,,,,,サービス費用合計額合計,A
+riyoshaFutanGakuGokei,numeric,Decimal,,,,,利用者負担額合計,A
+santeiKijunGaku,numeric,Decimal,,,,,算定基準額,A
+shiharaiSumiKingakuGokei,numeric,Decimal,,,,,支払済金額合計,A
+jigyoKogakuShikyuGaku,numeric,Decimal,,,,,事業高額支給額,A
+tashoshaUketoriYM,UDD014YM,FlexibleYearMonth,,,,,対象者受取年月,A
+taishoshaHanteiShinsaYM,UDD014YM,FlexibleYearMonth,,,,,対象者判定審査年月,A
+setaiShuyakuNo,varchar,RString,,,,,世帯集約番号,A
+kyokaisoTaishoshaFlag,bool,boolean,,,,,境界層対象者フラグ,A
+hojinKeigenTaishoFlag,bool,boolean,,,,,社会福祉法人軽減対象フラグ,A
+kogakuTaishoGaiFlag,bool,boolean,,,,,高額対象外フラグ,A
+jidoShokanTaishoFlag,bool,boolean,,,,,自動償還対象フラグ,A

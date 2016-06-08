@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUCC1002",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "特別徴収",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB9020002",
+     "toLayoutTitle": "特別徴収",
+     "toState": "初期状態"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB9020002",
+     "layoutTitle": "特別徴収",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

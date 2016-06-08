@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5590ShinsakaiIinJogaiJohoマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5590ShinsakaiIinJogaiJohoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5590ShinsakaiIinJogaiJoho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5590ShinsakaiIinJogaiJohoMapper.allColumns_DbT5590ShinsakaiIinJogaiJoho" />
+     FROM
+         rgdb."DbT5590ShinsakaiIinJogaiJoho"
+     WHERE
+         rgdb."DbT5590ShinsakaiIinJogaiJoho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5590ShinsakaiIinJogaiJoho">
+         "DbT5590ShinsakaiIinJogaiJoho"."shinseishoKanriNo" as "dbT5590ShinsakaiIinJogaiJoho_shinseishoKanriNo",
+         "DbT5590ShinsakaiIinJogaiJoho"."renban" as "dbT5590ShinsakaiIinJogaiJoho_renban",
+         "DbT5590ShinsakaiIinJogaiJoho"."insertDantaiCd" as "dbT5590ShinsakaiIinJogaiJoho_insertDantaiCd",
+         "DbT5590ShinsakaiIinJogaiJoho"."insertTimestamp" as "dbT5590ShinsakaiIinJogaiJoho_insertTimestamp",
+         "DbT5590ShinsakaiIinJogaiJoho"."insertReamsLoginId" as "dbT5590ShinsakaiIinJogaiJoho_insertReamsLoginId",
+         "DbT5590ShinsakaiIinJogaiJoho"."insertContextId" as "dbT5590ShinsakaiIinJogaiJoho_insertContextId",
+         "DbT5590ShinsakaiIinJogaiJoho"."isDeleted" as "dbT5590ShinsakaiIinJogaiJoho_isDeleted",
+         "DbT5590ShinsakaiIinJogaiJoho"."updateCount" as "dbT5590ShinsakaiIinJogaiJoho_updateCount",
+         "DbT5590ShinsakaiIinJogaiJoho"."lastUpdateTimestamp" as "dbT5590ShinsakaiIinJogaiJoho_lastUpdateTimestamp",
+         "DbT5590ShinsakaiIinJogaiJoho"."lastUpdateReamsLoginId" as "dbT5590ShinsakaiIinJogaiJoho_lastUpdateReamsLoginId",
+         "DbT5590ShinsakaiIinJogaiJoho"."jogaiTaishoShinsakaiIinCode" as "dbT5590ShinsakaiIinJogaiJoho_jogaiTaishoShinsakaiIinCode"
+    </sql>
+
+
+    <!--テーブルDbT5590ShinsakaiIinJogaiJohoの項目をDbT5590ShinsakaiIinJogaiJohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5590ShinsakaiIinJogaiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5590ShinsakaiIinJogaiJohoEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT5590ShinsakaiIinJogaiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="renban" column="dbT5590ShinsakaiIinJogaiJoho_renban" />
+        <result property="insertDantaiCd" column="dbT5590ShinsakaiIinJogaiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5590ShinsakaiIinJogaiJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5590ShinsakaiIinJogaiJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5590ShinsakaiIinJogaiJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5590ShinsakaiIinJogaiJoho_isDeleted" />
+        <result property="updateCount" column="dbT5590ShinsakaiIinJogaiJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5590ShinsakaiIinJogaiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5590ShinsakaiIinJogaiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jogaiTaishoShinsakaiIinCode" column="dbT5590ShinsakaiIinJogaiJoho_jogaiTaishoShinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+   <select id="getEntity" resultMap="ResultMap_DbT5590ShinsakaiIinJogaiJohoEntity">
+        SELECT
+        <include refid="allColumns_DbT5590ShinsakaiIinJogaiJoho"/>
+        FROM
+        rgdb."DbT5590ShinsakaiIinJogaiJoho"
+    </select>
+</mapper>

@@ -1,0 +1,6 @@
+﻿nendo,UDD012YSeireki,FlexibleYear,,,,,年度,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+edaNo,int2,int,,,,,枝番号,A
+setaiinHihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,世帯員被保険者番号,A
+setaiinShotokuRirekiNo,int2,int,,,,,世帯員所得履歴番号,A

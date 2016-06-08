@@ -1,0 +1,10 @@
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
+ninteichosaRirekiNo,int2,int,,,,,要介護認定調査履歴番号,A
+koroshoIfShikibetsuCode,UDD035Code,Code,,,,,厚労省IF識別コード,A
+tokutenTotal1gun,int2,int,,,,,素点合計　第１郡,A
+tokutenTotal2gun,int2,int,,,,,素点合計　第２郡,A
+tokutenTotal3gun,int2,int,,,,,素点合計　第３郡,A
+tokutenTotal4gun,int2,int,,,,,素点合計　第４郡,A
+tokutenTotal5gun,int2,int,,,,,素点合計　第５郡,A
+tokutenTotal6gun,int2,int,,,,,素点合計　第６郡,A
+tokutenTotal7gun,int2,int,,,,,素点合計　第７郡,A

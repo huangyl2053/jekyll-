@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7054KanrenHihokenshaNoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7054KanrenHihokenshaNoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7054KanrenHihokenshaNo">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7054KanrenHihokenshaNoMapper.allColumns_DbT7054KanrenHihokenshaNo" />
+     FROM
+         rgdb."DbT7054KanrenHihokenshaNo"
+     WHERE
+         rgdb."DbT7054KanrenHihokenshaNo"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7054KanrenHihokenshaNo">
+         "DbT7054KanrenHihokenshaNo"."shoKisaiHokenshaNo" as "dbT7054KanrenHihokenshaNo_shoKisaiHokenshaNo",
+         "DbT7054KanrenHihokenshaNo"."saishinHihokenshaNo" as "dbT7054KanrenHihokenshaNo_saishinHihokenshaNo",
+         "DbT7054KanrenHihokenshaNo"."insertDantaiCd" as "dbT7054KanrenHihokenshaNo_insertDantaiCd",
+         "DbT7054KanrenHihokenshaNo"."insertTimestamp" as "dbT7054KanrenHihokenshaNo_insertTimestamp",
+         "DbT7054KanrenHihokenshaNo"."insertReamsLoginId" as "dbT7054KanrenHihokenshaNo_insertReamsLoginId",
+         "DbT7054KanrenHihokenshaNo"."insertContextId" as "dbT7054KanrenHihokenshaNo_insertContextId",
+         "DbT7054KanrenHihokenshaNo"."isDeleted" as "dbT7054KanrenHihokenshaNo_isDeleted",
+         "DbT7054KanrenHihokenshaNo"."updateCount" as "dbT7054KanrenHihokenshaNo_updateCount",
+         "DbT7054KanrenHihokenshaNo"."lastUpdateTimestamp" as "dbT7054KanrenHihokenshaNo_lastUpdateTimestamp",
+         "DbT7054KanrenHihokenshaNo"."lastUpdateReamsLoginId" as "dbT7054KanrenHihokenshaNo_lastUpdateReamsLoginId",
+         "DbT7054KanrenHihokenshaNo"."kyuuHihokenshaNo" as "dbT7054KanrenHihokenshaNo_kyuuHihokenshaNo",
+         "DbT7054KanrenHihokenshaNo"."shikibetsuCode" as "dbT7054KanrenHihokenshaNo_shikibetsuCode"
+    </sql>
+
+
+    <!--テーブルDbT7054KanrenHihokenshaNoの項目をDbT7054KanrenHihokenshaNoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7054KanrenHihokenshaNoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7054KanrenHihokenshaNoEntity" autoMapping="true">
+        <id property="shoKisaiHokenshaNo" column="dbT7054KanrenHihokenshaNo_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
+        <id property="saishinHihokenshaNo" column="dbT7054KanrenHihokenshaNo_saishinHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7054KanrenHihokenshaNo_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7054KanrenHihokenshaNo_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7054KanrenHihokenshaNo_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7054KanrenHihokenshaNo_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7054KanrenHihokenshaNo_isDeleted" />
+        <result property="updateCount" column="dbT7054KanrenHihokenshaNo_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7054KanrenHihokenshaNo_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7054KanrenHihokenshaNo_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyuuHihokenshaNo" column="dbT7054KanrenHihokenshaNo_kyuuHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shikibetsuCode" column="dbT7054KanrenHihokenshaNo_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+    </resultMap>
+    
+        <select id="getEntity" resultMap="ResultMap_DbT7054KanrenHihokenshaNoEntity">
+	SELECT
+	<include refid="allColumns_DbT7054KanrenHihokenshaNo"/>
+	FROM
+	rgdb."DbT7054KanrenHihokenshaNo"
+	</select>
+
+</mapper>

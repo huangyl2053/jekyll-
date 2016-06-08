@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBAUC11411",
+ "displayWizard": false,
+ "subGyomuCode": "DBA",
+ "steps": [
+  {
+   "id": 1,
+   "name": "住基連動登録者リスト作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1140011",
+     "toLayoutTitle": "住基連動登録者リスト作成",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1140011",
+     "layoutTitle": "住基連動登録者リスト作成",
+     "eventName": "処理終了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

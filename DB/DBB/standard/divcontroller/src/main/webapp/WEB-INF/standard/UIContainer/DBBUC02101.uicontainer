@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC02101",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "調定簿作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0210001",
+     "toLayoutTitle": "介護保険料調定簿作成",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0210001",
+     "layoutTitle": "介護保険料調定簿作成",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

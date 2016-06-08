@@ -1,0 +1,14 @@
+﻿recordShubetsu,varchar,RString,,,,,A
+recordNo,varchar,RString,,,,,A
+volumeRenban,varchar,RString,,,,,A
+recordKensu,varchar,RString,,,,,A
+dataShubetsu,varchar,RString,,,,,A
+fukushijimushoTokuteiNo,varchar,RString,,,,,A
+hokenshaNo,varchar,RString,,,,,A
+jigyoshoNo,varchar,RString,,,,,A
+todofukenNo,varchar,RString,,,,,A
+baitaiKubun,varchar,RString,,,,,A
+shoriTaishoYM,varchar,RString,,,,,A
+fileKanriNo,varchar,RString,,,,,A
+fileBunruiCode,varchar,RString,,,,,A
+jissekiDataShinsaYM,varchar,RString,,,,,A

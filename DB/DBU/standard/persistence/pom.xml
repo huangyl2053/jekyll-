@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>jp.co.ndensan.reams.db.dbu</groupId>
+        <artifactId>dbu</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>DbuPersistence</artifactId>
+    <packaging>jar</packaging>
+    <name>DbuPersistence</name>
+    <properties>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+        <!-- DBU -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbuDefinition</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbuEntity</artifactId>
+        </dependency>
+        <!-- DBA -->
+        <!-- DBB -->
+        <!-- DBC -->
+        <!-- DBD -->
+        <!-- DBE -->
+        <!-- DBX -->
+        <!-- DBZ -->
+        <!-- UAX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxPersistence</artifactId>
+            <version>${jp.co.ndensan.reams.uax.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzPersistence</artifactId>
+        </dependency>
+        <!-- 公開系 -->
+        <!-- テスト -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzTestHelper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbuEntity</artifactId>
+            <type>test-jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxBusiness</artifactId>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+</project>

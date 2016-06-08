@@ -1,0 +1,10 @@
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
+doitsuRemban,int2,int,,,,,同一連番,A
+isHikiwatashi,bool,boolean,,,,,引き渡しフラグ,A
+hikiwatashiYMDHM,UDD017YMDHM,YMDHM,,,,,引き渡し日時,A
+hikiwatashiKaijoYMDHM,UDD017YMDHM,YMDHM,,,,,引き渡し解除日時,A
+hikiwatashiCount,int2,int,,,,,引き渡しカウント,A
+torikomiYMDHM,UDD017YMDHM,YMDHM,,,,,取り込み日時,A
+saiSofuKubun,bpchar,RString,,,,,再送付区分,A
+saiChosaSofuKubun,bpchar,RString,,,,,再調査送付区分,A
+saiIkenshoSofuKubun,bpchar,RString,,,,,再意見書送付区分,A

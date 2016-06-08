@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC18100",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "給付費貸付金返還徴収登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC1810000",
+     "toLayoutTitle": "給付費貸付金返還徴収登録",
+     "toState": "申請一覧"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1810000",
+     "layoutTitle": "給付費貸付金返還徴収登録",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

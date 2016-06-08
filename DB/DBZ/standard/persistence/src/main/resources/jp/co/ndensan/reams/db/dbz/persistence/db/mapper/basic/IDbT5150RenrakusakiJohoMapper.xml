@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5150RenrakusakiJohoマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5150RenrakusakiJohoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5150RenrakusakiJoho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5150RenrakusakiJohoMapper.allColumns_DbT5150RenrakusakiJoho" />
+     FROM
+         rgdb."DbT5150RenrakusakiJoho"
+     WHERE
+         rgdb."DbT5150RenrakusakiJoho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5150RenrakusakiJoho">
+         "DbT5150RenrakusakiJoho"."shinseishoKanriNo" as "dbT5150RenrakusakiJoho_shinseishoKanriNo",
+         "DbT5150RenrakusakiJoho"."renban" as "dbT5150RenrakusakiJoho_renban",
+         "DbT5150RenrakusakiJoho"."insertDantaiCd" as "dbT5150RenrakusakiJoho_insertDantaiCd",
+         "DbT5150RenrakusakiJoho"."insertTimestamp" as "dbT5150RenrakusakiJoho_insertTimestamp",
+         "DbT5150RenrakusakiJoho"."insertReamsLoginId" as "dbT5150RenrakusakiJoho_insertReamsLoginId",
+         "DbT5150RenrakusakiJoho"."insertContextId" as "dbT5150RenrakusakiJoho_insertContextId",
+         "DbT5150RenrakusakiJoho"."isDeleted" as "dbT5150RenrakusakiJoho_isDeleted",
+         "DbT5150RenrakusakiJoho"."updateCount" as "dbT5150RenrakusakiJoho_updateCount",
+         "DbT5150RenrakusakiJoho"."lastUpdateTimestamp" as "dbT5150RenrakusakiJoho_lastUpdateTimestamp",
+         "DbT5150RenrakusakiJoho"."lastUpdateReamsLoginId" as "dbT5150RenrakusakiJoho_lastUpdateReamsLoginId",
+         "DbT5150RenrakusakiJoho"."renrakusakiKubunNo" as "dbT5150RenrakusakiJoho_renrakusakiKubunNo",
+         "DbT5150RenrakusakiJoho"."shishoCode" as "dbT5150RenrakusakiJoho_shishoCode",
+         "DbT5150RenrakusakiJoho"."renrakusakiShimei" as "dbT5150RenrakusakiJoho_renrakusakiShimei",
+         "DbT5150RenrakusakiJoho"."renrakusakiKanaSimei" as "dbT5150RenrakusakiJoho_renrakusakiKanaSimei",
+         "DbT5150RenrakusakiJoho"."renrakusakiTuzukigara" as "dbT5150RenrakusakiJoho_renrakusakiTuzukigara",
+         "DbT5150RenrakusakiJoho"."renrakusakiYubinNo" as "dbT5150RenrakusakiJoho_renrakusakiYubinNo",
+         "DbT5150RenrakusakiJoho"."renrakusakiJusho" as "dbT5150RenrakusakiJoho_renrakusakiJusho",
+         "DbT5150RenrakusakiJoho"."renrakusakiTelNo" as "dbT5150RenrakusakiJoho_renrakusakiTelNo",
+         "DbT5150RenrakusakiJoho"."renrakusakiKeitaiTelNo" as "dbT5150RenrakusakiJoho_renrakusakiKeitaiTelNo",
+         "DbT5150RenrakusakiJoho"."priority" as "dbT5150RenrakusakiJoho_priority"
+    </sql>
+
+
+    <!--テーブルDbT5150RenrakusakiJohoの項目をDbT5150RenrakusakiJohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5150RenrakusakiJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJohoEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT5150RenrakusakiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="renban" column="dbT5150RenrakusakiJoho_renban" />
+        <result property="insertDantaiCd" column="dbT5150RenrakusakiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5150RenrakusakiJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5150RenrakusakiJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5150RenrakusakiJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5150RenrakusakiJoho_isDeleted" />
+        <result property="updateCount" column="dbT5150RenrakusakiJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5150RenrakusakiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5150RenrakusakiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="renrakusakiKubunNo" column="dbT5150RenrakusakiJoho_renrakusakiKubunNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shishoCode" column="dbT5150RenrakusakiJoho_shishoCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShishoCodeTypeHandler"/>
+        <result property="renrakusakiShimei" column="dbT5150RenrakusakiJoho_renrakusakiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="renrakusakiKanaSimei" column="dbT5150RenrakusakiJoho_renrakusakiKanaSimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="renrakusakiTuzukigara" column="dbT5150RenrakusakiJoho_renrakusakiTuzukigara" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="renrakusakiYubinNo" column="dbT5150RenrakusakiJoho_renrakusakiYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="renrakusakiJusho" column="dbT5150RenrakusakiJoho_renrakusakiJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="renrakusakiTelNo" column="dbT5150RenrakusakiJoho_renrakusakiTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="renrakusakiKeitaiTelNo" column="dbT5150RenrakusakiJoho_renrakusakiKeitaiTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="priority" column="dbT5150RenrakusakiJoho_priority" />
+    </resultMap>
+    
+    <select id="getEntity" resultMap="ResultMap_DbT5150RenrakusakiJohoEntity">
+        SELECT
+        <include refid="allColumns_DbT5150RenrakusakiJoho"/>
+        FROM
+        rgdb."DbT5150RenrakusakiJoho"
+    </select>
+</mapper>

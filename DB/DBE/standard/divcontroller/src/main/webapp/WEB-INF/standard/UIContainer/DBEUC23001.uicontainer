@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC23001",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "主治医意見書作成依頼",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2300001",
+     "toLayoutTitle": "主治医意見書作成依頼",
+     "toState": "検索"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2300001",
+     "layoutTitle": "主治医意見書作成依頼",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

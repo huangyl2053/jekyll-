@@ -1,0 +1,9 @@
+﻿shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+rirekiNo,varchar,RString,,,,,A
+shikibetsuCodeSochiMoto,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+shichosonCodeSochiMoto,UDD023LasdecCode,LasdecCode,,,,,A
+hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+hihokenshaNoSochiMoto,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+kaishiYMD,UDD015YMD,FlexibleDate,,,,,A
+shuryoYMD,UDD015YMD,FlexibleDate,,,,,A

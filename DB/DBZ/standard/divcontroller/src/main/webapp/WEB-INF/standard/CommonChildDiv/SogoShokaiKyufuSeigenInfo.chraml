@@ -1,0 +1,1055 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;SogoShokaiKyufuSeigenInfo&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;onClick_btnClose&quot;,&quot;heightForDialog&quot;:&quot;Auto&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.SogoShokaiKyufuSeigenInfo"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G2 UzCompositeChild" id="SogoShokaiKyufuSeigenInfo" style="margin: 0px 0em; width: auto;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;SogoShokaiKyufuSeigenInfo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;SogoShokaiKyufuSeigenInfo&quot;,&quot;title&quot;:&quot;給付制限情報&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;SogoShokaiKyufuSeigenInfo&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dbu/db/dbu/SogoShokaiInfo/onLoad_KyufuSeigenInfo&quot;}],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="SogoShokaiKyufuSeigenInfo_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">給付制限情報</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="SogoShokaiKyufuSeigenInfo_panel_body_area"><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSeigenTorokuJokyo" style="width: 277px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtSeigenTorokuJokyo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;200px&quot;,&quot;selectControlID&quot;:&quot;txtSeigenTorokuJokyo_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;登録状況&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeigenTorokuJokyo_labelL" style="width: 70px;"><span>登録状況</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtSeigenTorokuJokyo_core" style="width: 200px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSeigenShuryoJokyo" style="width: 272px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtSeigenShuryoJokyo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;200px&quot;,&quot;selectControlID&quot;:&quot;txtSeigenShuryoJokyo_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;終了状況&quot;,&quot;labelLWidth&quot;:&quot;65px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeigenShuryoJokyo_labelL" style="width: 65px;"><span>終了状況</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtSeigenShuryoJokyo_core" style="width: 200px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzPanel FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable ClearFloat marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default Width-G2 UzCompositeChild" id="SogoShokaiKyufuSeigenHenko" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;SogoShokaiKyufuSeigenHenko&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;SogoShokaiKyufuSeigenHenko&quot;,&quot;title&quot;:&quot;支払方法変更&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;SogoShokaiKyufuSeigenHenko&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;panelDisplay&quot;:1,&quot;canPost&quot;:true}"><div class="UzPanelHeader clearBackground" id="SogoShokaiKyufuSeigenHenko_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">支払方法変更</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M Panel-GroupBox ui-droppable ui-sortable" id="SogoShokaiKyufuSeigenHenko_panel_body_area"><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSeigenHenkoYokokuTorokuYMD" style="width: 172px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtSeigenHenkoYokokuTorokuYMD&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtSeigenHenkoYokokuTorokuYMD_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;予告登録日&quot;,&quot;labelLWidth&quot;:&quot;85px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeigenHenkoYokokuTorokuYMD_labelL" style="width: 85px;"><span>予告登録日</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtSeigenHenkoYokokuTorokuYMD_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSeigenHenkoKetteiYMD" style="width: 137px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtSeigenHenkoKetteiYMD&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtSeigenHenkoKetteiYMD_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;決定日&quot;,&quot;labelLWidth&quot;:&quot;50px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeigenHenkoKetteiYMD_labelL" style="width: 50px;"><span>決定日</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtSeigenHenkoKetteiYMD_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSeigenHenkoSashitomeSyuryoYMD" style="width: 202px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtSeigenHenkoSashitomeSyuryoYMD&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtSeigenHenkoSashitomeSyuryoYMD_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;一時差止終了日&quot;,&quot;labelLWidth&quot;:&quot;115px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeigenHenkoSashitomeSyuryoYMD_labelL" style="width: 115px;"><span>一時差止終了日</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtSeigenHenkoSashitomeSyuryoYMD_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSeigenHenkoTekiyoShuryoYMD" style="width: 167px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtSeigenHenkoTekiyoShuryoYMD&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtSeigenHenkoTekiyoShuryoYMD_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;適用終了日&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeigenHenkoTekiyoShuryoYMD_labelL" style="width: 80px;"><span>適用終了日</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtSeigenHenkoTekiyoShuryoYMD_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div></div></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtSeigenTainoKojoKetteiYMD" style="width: 252px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtSeigenTainoKojoKetteiYMD&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtSeigenTainoKojoKetteiYMD_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;滞納保険料控除決定日&quot;,&quot;labelLWidth&quot;:&quot;165px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeigenTainoKojoKetteiYMD_labelL" style="width: 165px;"><span>滞納保険料控除決定日</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtSeigenTainoKojoKetteiYMD_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div title="" class="UzTextBoxDateRange TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtSeigenChoshuShometsuKikan" style="width: 402px; height: 21px;" data-control-type="TextBoxDateRange" data-obj="{&quot;fieldName&quot;:&quot;txtSeigenChoshuShometsuKikan&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDateRange&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtSeigenChoshuShometsuKikan_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;保険料徴収権消滅期間&quot;,&quot;fromSelectControlID&quot;:&quot;txtSeigenChoshuShometsuKikanFrom&quot;,&quot;toSelectControlID&quot;:&quot;txtSeigenChoshuShometsuKikanTo&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeigenChoshuShometsuKikan_labelL" style="width: 165px;"><span>保険料徴収権消滅期間</span></span><span class="CoreElement UzTextBox TextBoxDateRangeCore" id="txtSeigenChoshuShometsuKikan_core" data-control-type="TextBoxDateRange"><input tabindex="-1" class="UzTextBox UzTextBoxDateRange readonlyColor AsIfDisabled" id="txtSeigenChoshuShometsuKikanFrom" style="margin: 0em; width: 80px; font-family: inherit; font-size: inherit;" type="text" readonly="readonly" placeholder="" data-control-type="TextBoxDateRange" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""><span class="UzTextBoxDateRange Label-L text-align-center Width-XS" id="txtSeigenChoshuShometsuKikanArrow" style="text-align: center; margin-right: 0.8em; margin-left: 0.8em;">～</span><input tabindex="-1" class="UzTextBox UzTextBoxDateRange readonlyColor AsIfDisabled" id="txtSeigenChoshuShometsuKikanTo" style="margin: 0em; width: 80px; font-family: inherit; font-size: inherit;" type="text" readonly="readonly" placeholder="" data-control-type="TextBoxDateRange" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></span></div><div title="" class="UzTextBoxDateRange TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSeigenNofuzumiKikan" style="width: 367px; height: 21px;" data-control-type="TextBoxDateRange" data-obj="{&quot;fieldName&quot;:&quot;txtSeigenNofuzumiKikan&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDateRange&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtSeigenNofuzumiKikan_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;保険料納付済期間&quot;,&quot;fromSelectControlID&quot;:&quot;txtSeigenNofuzumiKikanFrom&quot;,&quot;toSelectControlID&quot;:&quot;txtSeigenNofuzumiKikanTo&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeigenNofuzumiKikan_labelL" style="width: 130px;"><span>保険料納付済期間</span></span><span class="CoreElement UzTextBox TextBoxDateRangeCore" id="txtSeigenNofuzumiKikan_core" data-control-type="TextBoxDateRange"><input tabindex="-1" class="UzTextBox UzTextBoxDateRange readonlyColor AsIfDisabled" id="txtSeigenNofuzumiKikanFrom" style="margin: 0em; width: 80px; font-family: inherit; font-size: inherit;" type="text" readonly="readonly" placeholder="" data-control-type="TextBoxDateRange" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""><span class="UzTextBoxDateRange Label-L text-align-center Width-XS" id="txtSeigenNofuzumiKikanArrow" style="text-align: center; margin-right: 0.8em; margin-left: 0.8em;">～</span><input tabindex="-1" class="UzTextBox UzTextBoxDateRange readonlyColor AsIfDisabled" id="txtSeigenNofuzumiKikanTo" style="margin: 0em; width: 80px; font-family: inherit; font-size: inherit;" type="text" readonly="readonly" placeholder="" data-control-type="TextBoxDateRange" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></span></div><div title="" class="UzPanel FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable ClearFloat marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default Width-G2 UzCompositeChild" id="SogoShokaiKyufuSeigenGengaku" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;SogoShokaiKyufuSeigenGengaku&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;SogoShokaiKyufuSeigenGengaku&quot;,&quot;title&quot;:&quot;給付減額&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;SogoShokaiKyufuSeigenGengaku&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;panelDisplay&quot;:1,&quot;canPost&quot;:true}"><div class="UzPanelHeader clearBackground" id="SogoShokaiKyufuSeigenGengaku_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">給付減額</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M Panel-GroupBox ui-droppable ui-sortable" id="SogoShokaiKyufuSeigenGengaku_panel_body_area"><div title="" class="UzTextBoxDateRange TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSeigenGengakuKikan" style="width: 307px; height: 21px;" data-control-type="TextBoxDateRange" data-obj="{&quot;fieldName&quot;:&quot;txtSeigenGengakuKikan&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDateRange&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtSeigenGengakuKikan_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;減額期間&quot;,&quot;fromSelectControlID&quot;:&quot;txtSeigenGengakuKikanFrom&quot;,&quot;toSelectControlID&quot;:&quot;txtSeigenGengakuKikanTo&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeigenGengakuKikan_labelL" style="width: 70px;"><span>減額期間</span></span><span class="CoreElement UzTextBox TextBoxDateRangeCore" id="txtSeigenGengakuKikan_core" data-control-type="TextBoxDateRange"><input tabindex="-1" class="UzTextBox UzTextBoxDateRange readonlyColor AsIfDisabled" id="txtSeigenGengakuKikanFrom" style="margin: 0em; width: 80px; font-family: inherit; font-size: inherit;" type="text" readonly="readonly" placeholder="" data-control-type="TextBoxDateRange" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""><span class="UzTextBoxDateRange Label-L text-align-center Width-XS" id="txtSeigenGengakuKikanArrow" style="text-align: center; margin-right: 0.8em; margin-left: 0.8em;">～</span><input tabindex="-1" class="UzTextBox UzTextBoxDateRange readonlyColor AsIfDisabled" id="txtSeigenGengakuKikanTo" style="margin: 0em; width: 80px; font-family: inherit; font-size: inherit;" type="text" readonly="readonly" placeholder="" data-control-type="TextBoxDateRange" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></span></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSeigenGengakuKetteiYMD" style="width: 137px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtSeigenGengakuKetteiYMD&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtSeigenGengakuKetteiYMD_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;決定日&quot;,&quot;labelLWidth&quot;:&quot;50px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeigenGengakuKetteiYMD_labelL" style="width: 50px;"><span>決定日</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtSeigenGengakuKetteiYMD_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div title="" class="UzTextBoxDateRange TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSeigenGengakuTekiyoKikan" style="width: 302px; height: 21px;" data-control-type="TextBoxDateRange" data-obj="{&quot;fieldName&quot;:&quot;txtSeigenGengakuTekiyoKikan&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDateRange&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtSeigenGengakuTekiyoKikan_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;適用期間&quot;,&quot;fromSelectControlID&quot;:&quot;txtSeigenGengakuTekiyoKikanFrom&quot;,&quot;toSelectControlID&quot;:&quot;txtSeigenGengakuTekiyoKikanTo&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeigenGengakuTekiyoKikan_labelL" style="width: 65px;"><span>適用期間</span></span><span class="CoreElement UzTextBox TextBoxDateRangeCore" id="txtSeigenGengakuTekiyoKikan_core" data-control-type="TextBoxDateRange"><input tabindex="-1" class="UzTextBox UzTextBoxDateRange readonlyColor AsIfDisabled" id="txtSeigenGengakuTekiyoKikanFrom" style="margin: 0em; width: 80px; font-family: inherit; font-size: inherit;" type="text" readonly="readonly" placeholder="" data-control-type="TextBoxDateRange" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""><span class="UzTextBoxDateRange Label-L text-align-center Width-XS" id="txtSeigenGengakuTekiyoKikanArrow" style="text-align: center; margin-right: 0.8em; margin-left: 0.8em;">～</span><input tabindex="-1" class="UzTextBox UzTextBoxDateRange readonlyColor AsIfDisabled" id="txtSeigenGengakuTekiyoKikanTo" style="margin: 0em; width: 80px; font-family: inherit; font-size: inherit;" type="text" readonly="readonly" placeholder="" data-control-type="TextBoxDateRange" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></span></div></div></div><button title="" class="UzButton JSControl controlMargin-M ClearFloat FloatRight marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnClose" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnClose&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnClose&quot;,&quot;onClick&quot;:&quot;onClick_btnClose&quot;,&quot;text&quot;:&quot;閉じる&quot;}"><span>閉じる</span></button></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiKyufuSeigenInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnClose", {
+                get: function () {
+                    return "onClick_btnClose";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        SogoShokaiKyufuSeigenInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "SogoShokaiKyufuSeigenInfo";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.SogoShokaiKyufuSeigenInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtSeigenTorokuJokyo = function () {
+                return new UZA.TextBox(this.convFiledName("txtSeigenTorokuJokyo"));
+            };
+
+            Controls.prototype.txtSeigenShuryoJokyo = function () {
+                return new UZA.TextBox(this.convFiledName("txtSeigenShuryoJokyo"));
+            };
+
+            Controls.prototype.SogoShokaiKyufuSeigenHenko = function () {
+                return new UZA.Panel(this.convFiledName("SogoShokaiKyufuSeigenHenko"));
+            };
+
+            Controls.prototype.txtSeigenHenkoYokokuTorokuYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSeigenHenkoYokokuTorokuYMD"));
+            };
+
+            Controls.prototype.txtSeigenHenkoKetteiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSeigenHenkoKetteiYMD"));
+            };
+
+            Controls.prototype.txtSeigenHenkoSashitomeSyuryoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSeigenHenkoSashitomeSyuryoYMD"));
+            };
+
+            Controls.prototype.txtSeigenHenkoTekiyoShuryoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSeigenHenkoTekiyoShuryoYMD"));
+            };
+
+            Controls.prototype.txtSeigenTainoKojoKetteiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSeigenTainoKojoKetteiYMD"));
+            };
+
+            Controls.prototype.txtSeigenChoshuShometsuKikan = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtSeigenChoshuShometsuKikan"));
+            };
+
+            Controls.prototype.txtSeigenNofuzumiKikan = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtSeigenNofuzumiKikan"));
+            };
+
+            Controls.prototype.SogoShokaiKyufuSeigenGengaku = function () {
+                return new UZA.Panel(this.convFiledName("SogoShokaiKyufuSeigenGengaku"));
+            };
+
+            Controls.prototype.txtSeigenGengakuKikan = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtSeigenGengakuKikan"));
+            };
+
+            Controls.prototype.txtSeigenGengakuKetteiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSeigenGengakuKetteiYMD"));
+            };
+
+            Controls.prototype.txtSeigenGengakuTekiyoKikan = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtSeigenGengakuTekiyoKikan"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        SogoShokaiKyufuSeigenInfo.Controls = Controls;
+    })(DBZ.SogoShokaiKyufuSeigenInfo || (DBZ.SogoShokaiKyufuSeigenInfo = {}));
+    var SogoShokaiKyufuSeigenInfo = DBZ.SogoShokaiKyufuSeigenInfo;
+
+    var SogoShokaiKyufuSeigenInfo_Design = (function (_super) {
+        __extends(SogoShokaiKyufuSeigenInfo_Design, _super);
+        function SogoShokaiKyufuSeigenInfo_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, SogoShokaiKyufuSeigenInfo_Design.myLayout, fieldName);
+        }
+        SogoShokaiKyufuSeigenInfo_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        SogoShokaiKyufuSeigenInfo_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        SogoShokaiKyufuSeigenInfo_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "SogoShokaiKyufuSeigenInfo",
+                    "items": [
+                        {
+                            "fieldName": "txtSeigenTorokuJokyo",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "200",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSeigenTorokuJokyo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "登録状況",
+                            "labelRText": "",
+                            "labelLWidth": "70",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtSeigenShuryoJokyo",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "200",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSeigenShuryoJokyo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "終了状況",
+                            "labelRText": "",
+                            "labelLWidth": "65",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "SogoShokaiKyufuSeigenHenko",
+                            "items": [
+                                {
+                                    "fieldName": "txtSeigenHenkoYokokuTorokuYMD",
+                                    "items": [],
+                                    "controlType": "TextBoxDate",
+                                    "width": "80",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtSeigenHenkoYokokuTorokuYMD_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "予告登録日",
+                                    "labelRText": "",
+                                    "labelLWidth": "85",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "txtSeigenHenkoKetteiYMD",
+                                    "items": [],
+                                    "controlType": "TextBoxDate",
+                                    "width": "80",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtSeigenHenkoKetteiYMD_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "決定日",
+                                    "labelRText": "",
+                                    "labelLWidth": "50",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "txtSeigenHenkoSashitomeSyuryoYMD",
+                                    "items": [],
+                                    "controlType": "TextBoxDate",
+                                    "width": "80",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtSeigenHenkoSashitomeSyuryoYMD_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "一時差止終了日",
+                                    "labelRText": "",
+                                    "labelLWidth": "115",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "txtSeigenHenkoTekiyoShuryoYMD",
+                                    "items": [],
+                                    "controlType": "TextBoxDate",
+                                    "width": "80",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtSeigenHenkoTekiyoShuryoYMD_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "適用終了日",
+                                    "labelRText": "",
+                                    "labelLWidth": "80",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "permitCharactor": "./_-"
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "G2",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "SogoShokaiKyufuSeigenHenko",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "支払方法変更",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": false,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "SogoShokaiKyufuSeigenHenko"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": false,
+                            "backgroundColor": 0,
+                            "widthAuto": true,
+                            "panelDisplay": 1,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto"
+                        },
+                        {
+                            "fieldName": "txtSeigenTainoKojoKetteiYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSeigenTainoKojoKetteiYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "滞納保険料控除決定日",
+                            "labelRText": "",
+                            "labelLWidth": "165",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtSeigenChoshuShometsuKikan",
+                            "items": [],
+                            "controlType": "TextBoxDateRange",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSeigenChoshuShometsuKikan_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "labelLText": "保険料徴収権消滅期間",
+                            "labelRText": "",
+                            "labelLWidth": "165",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "permitCharactor": "",
+                            "fromPlaceHolder": "",
+                            "toPlaceHolder": "",
+                            "minDate": "",
+                            "maxDate": "",
+                            "fromText": "",
+                            "toText": "",
+                            "fromValue": "",
+                            "toValue": "",
+                            "fromSelectControlID": "txtSeigenChoshuShometsuKikanFrom",
+                            "toSelectControlID": "txtSeigenChoshuShometsuKikanTo"
+                        },
+                        {
+                            "fieldName": "txtSeigenNofuzumiKikan",
+                            "items": [],
+                            "controlType": "TextBoxDateRange",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSeigenNofuzumiKikan_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "labelLText": "保険料納付済期間",
+                            "labelRText": "",
+                            "labelLWidth": "130",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "permitCharactor": "",
+                            "fromPlaceHolder": "",
+                            "toPlaceHolder": "",
+                            "minDate": "",
+                            "maxDate": "",
+                            "fromText": "",
+                            "toText": "",
+                            "fromValue": "",
+                            "toValue": "",
+                            "fromSelectControlID": "txtSeigenNofuzumiKikanFrom",
+                            "toSelectControlID": "txtSeigenNofuzumiKikanTo"
+                        },
+                        {
+                            "fieldName": "SogoShokaiKyufuSeigenGengaku",
+                            "items": [
+                                {
+                                    "fieldName": "txtSeigenGengakuKikan",
+                                    "items": [],
+                                    "controlType": "TextBoxDateRange",
+                                    "width": "80",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtSeigenGengakuKikan_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "labelLText": "減額期間",
+                                    "labelRText": "",
+                                    "labelLWidth": "70",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "permitCharactor": "",
+                                    "fromPlaceHolder": "",
+                                    "toPlaceHolder": "",
+                                    "minDate": "",
+                                    "maxDate": "",
+                                    "fromText": "",
+                                    "toText": "",
+                                    "fromValue": "",
+                                    "toValue": "",
+                                    "fromSelectControlID": "txtSeigenGengakuKikanFrom",
+                                    "toSelectControlID": "txtSeigenGengakuKikanTo"
+                                },
+                                {
+                                    "fieldName": "txtSeigenGengakuKetteiYMD",
+                                    "items": [],
+                                    "controlType": "TextBoxDate",
+                                    "width": "80",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtSeigenGengakuKetteiYMD_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "決定日",
+                                    "labelRText": "",
+                                    "labelLWidth": "50",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "txtSeigenGengakuTekiyoKikan",
+                                    "items": [],
+                                    "controlType": "TextBoxDateRange",
+                                    "width": "80",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtSeigenGengakuTekiyoKikan_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "labelLText": "適用期間",
+                                    "labelRText": "",
+                                    "labelLWidth": "65",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "permitCharactor": "",
+                                    "fromPlaceHolder": "",
+                                    "toPlaceHolder": "",
+                                    "minDate": "",
+                                    "maxDate": "",
+                                    "fromText": "",
+                                    "toText": "",
+                                    "fromValue": "",
+                                    "toValue": "",
+                                    "fromSelectControlID": "txtSeigenGengakuTekiyoKikanFrom",
+                                    "toSelectControlID": "txtSeigenGengakuTekiyoKikanTo"
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "G2",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "SogoShokaiKyufuSeigenGengaku",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "給付減額",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": false,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "SogoShokaiKyufuSeigenGengaku"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": false,
+                            "backgroundColor": 0,
+                            "widthAuto": true,
+                            "panelDisplay": 1,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto"
+                        },
+                        {
+                            "fieldName": "btnClose",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnClose",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "閉じる",
+                            "onClick": "onClick_btnClose",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G2",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0",
+                    "marginRight": "0",
+                    "selectControlID": "SogoShokaiKyufuSeigenInfo",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "給付制限情報",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "SogoShokaiKyufuSeigenInfo"
+                        }
+                    ],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": "dbu/db/dbu/SogoShokaiInfo/onLoad_KyufuSeigenInfo"
+                        }
+                    ],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": true,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto"
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "businessId": "DBZ",
+            "controlName": "SogoShokaiKyufuSeigenInfo",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "onClick_btnClose",
+            "canTransferEvent": true,
+            "heightForDialog": "Auto"
+        };
+        return SogoShokaiKyufuSeigenInfo_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.SogoShokaiKyufuSeigenInfo_Design = SogoShokaiKyufuSeigenInfo_Design;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiKyufuSeigenInfo) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new SogoShokaiKyufuSeigenInfo.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        SogoShokaiKyufuSeigenInfo.ModeController = ModeController;
+    })(DBZ.SogoShokaiKyufuSeigenInfo || (DBZ.SogoShokaiKyufuSeigenInfo = {}));
+    var SogoShokaiKyufuSeigenInfo = DBZ.SogoShokaiKyufuSeigenInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiKyufuSeigenInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new SogoShokaiKyufuSeigenInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        SogoShokaiKyufuSeigenInfo.PublicProperties = PublicProperties;
+    })(DBZ.SogoShokaiKyufuSeigenInfo || (DBZ.SogoShokaiKyufuSeigenInfo = {}));
+    var SogoShokaiKyufuSeigenInfo = DBZ.SogoShokaiKyufuSeigenInfo;
+})(DBZ || (DBZ = {}));
+</script>
+  <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['SOGOSHOKAIKYUFUSEIGENINFO'] = {};
+DBZ['SOGOSHOKAIKYUFUSEIGENINFO'].SogoShokaiKyufuSeigenInfoRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_SogoShokaiKyufuSeigenInfo').getProperty();parameter0.txtSeigenTorokuJokyo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenTorokuJokyo').getProperty();parameter0.txtSeigenShuryoJokyo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenShuryoJokyo').getProperty();parameter0.SogoShokaiKyufuSeigenHenko = Uz.JSControlUtil.getJSControl(parentFieldName + '_SogoShokaiKyufuSeigenHenko').getProperty();parameter0.SogoShokaiKyufuSeigenHenko.txtSeigenHenkoYokokuTorokuYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenHenkoYokokuTorokuYMD').getProperty();parameter0.SogoShokaiKyufuSeigenHenko.txtSeigenHenkoKetteiYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenHenkoKetteiYMD').getProperty();parameter0.SogoShokaiKyufuSeigenHenko.txtSeigenHenkoSashitomeSyuryoYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenHenkoSashitomeSyuryoYMD').getProperty();parameter0.SogoShokaiKyufuSeigenHenko.txtSeigenHenkoTekiyoShuryoYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenHenkoTekiyoShuryoYMD').getProperty();parameter0.txtSeigenTainoKojoKetteiYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenTainoKojoKetteiYMD').getProperty();parameter0.txtSeigenChoshuShometsuKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenChoshuShometsuKikan').getProperty();parameter0.txtSeigenNofuzumiKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenNofuzumiKikan').getProperty();parameter0.SogoShokaiKyufuSeigenGengaku = Uz.JSControlUtil.getJSControl(parentFieldName + '_SogoShokaiKyufuSeigenGengaku').getProperty();parameter0.SogoShokaiKyufuSeigenGengaku.txtSeigenGengakuKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenGengakuKikan').getProperty();parameter0.SogoShokaiKyufuSeigenGengaku.txtSeigenGengakuKetteiYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenGengakuKetteiYMD').getProperty();parameter0.SogoShokaiKyufuSeigenGengaku.txtSeigenGengakuTekiyoKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenGengakuTekiyoKikan').getProperty();parameter0.btnClose = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnClose').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+DBZ['SOGOSHOKAIKYUFUSEIGENINFO'].SogoShokaiKyufuSeigenHenkoRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_SogoShokaiKyufuSeigenHenko').getProperty();parameter0.txtSeigenHenkoYokokuTorokuYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenHenkoYokokuTorokuYMD').getProperty();parameter0.txtSeigenHenkoKetteiYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenHenkoKetteiYMD').getProperty();parameter0.txtSeigenHenkoSashitomeSyuryoYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenHenkoSashitomeSyuryoYMD').getProperty();parameter0.txtSeigenHenkoTekiyoShuryoYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenHenkoTekiyoShuryoYMD').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+DBZ['SOGOSHOKAIKYUFUSEIGENINFO'].SogoShokaiKyufuSeigenGengakuRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_SogoShokaiKyufuSeigenGengaku').getProperty();parameter0.txtSeigenGengakuKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenGengakuKikan').getProperty();parameter0.txtSeigenGengakuKetteiYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenGengakuKetteiYMD').getProperty();parameter0.txtSeigenGengakuTekiyoKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeigenGengakuTekiyoKikan').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiKyufuSeigenInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnClose = function () {
+                return "onClick_btnClose";
+            };
+            return Events;
+        })();
+        SogoShokaiKyufuSeigenInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "SogoShokaiKyufuSeigenInfo";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.SogoShokaiKyufuSeigenInfo.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.SogoShokaiKyufuSeigenInfo.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.SogoShokaiKyufuSeigenInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtSeigenTorokuJokyo = function () {
+                return new UZA.TextBox(this.convFiledName("txtSeigenTorokuJokyo"));
+            };
+
+            Controls.prototype.txtSeigenShuryoJokyo = function () {
+                return new UZA.TextBox(this.convFiledName("txtSeigenShuryoJokyo"));
+            };
+
+            Controls.prototype.SogoShokaiKyufuSeigenHenko = function () {
+                return new UZA.Panel(this.convFiledName("SogoShokaiKyufuSeigenHenko"));
+            };
+
+            Controls.prototype.txtSeigenHenkoYokokuTorokuYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSeigenHenkoYokokuTorokuYMD"));
+            };
+
+            Controls.prototype.txtSeigenHenkoKetteiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSeigenHenkoKetteiYMD"));
+            };
+
+            Controls.prototype.txtSeigenHenkoSashitomeSyuryoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSeigenHenkoSashitomeSyuryoYMD"));
+            };
+
+            Controls.prototype.txtSeigenHenkoTekiyoShuryoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSeigenHenkoTekiyoShuryoYMD"));
+            };
+
+            Controls.prototype.txtSeigenTainoKojoKetteiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSeigenTainoKojoKetteiYMD"));
+            };
+
+            Controls.prototype.txtSeigenChoshuShometsuKikan = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtSeigenChoshuShometsuKikan"));
+            };
+
+            Controls.prototype.txtSeigenNofuzumiKikan = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtSeigenNofuzumiKikan"));
+            };
+
+            Controls.prototype.SogoShokaiKyufuSeigenGengaku = function () {
+                return new UZA.Panel(this.convFiledName("SogoShokaiKyufuSeigenGengaku"));
+            };
+
+            Controls.prototype.txtSeigenGengakuKikan = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtSeigenGengakuKikan"));
+            };
+
+            Controls.prototype.txtSeigenGengakuKetteiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSeigenGengakuKetteiYMD"));
+            };
+
+            Controls.prototype.txtSeigenGengakuTekiyoKikan = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtSeigenGengakuTekiyoKikan"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+            return Controls;
+        })();
+        SogoShokaiKyufuSeigenInfo.Controls = Controls;
+    })(DBZ.SogoShokaiKyufuSeigenInfo || (DBZ.SogoShokaiKyufuSeigenInfo = {}));
+    var SogoShokaiKyufuSeigenInfo = DBZ.SogoShokaiKyufuSeigenInfo;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiKyufuSeigenInfo) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new SogoShokaiKyufuSeigenInfo.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        SogoShokaiKyufuSeigenInfo.ModeController = ModeController;
+    })(DBZ.SogoShokaiKyufuSeigenInfo || (DBZ.SogoShokaiKyufuSeigenInfo = {}));
+    var SogoShokaiKyufuSeigenInfo = DBZ.SogoShokaiKyufuSeigenInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiKyufuSeigenInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new SogoShokaiKyufuSeigenInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        SogoShokaiKyufuSeigenInfo.PublicProperties = PublicProperties;
+    })(DBZ.SogoShokaiKyufuSeigenInfo || (DBZ.SogoShokaiKyufuSeigenInfo = {}));
+    var SogoShokaiKyufuSeigenInfo = DBZ.SogoShokaiKyufuSeigenInfo;
+})(DBZ || (DBZ = {}));
+</script></div>

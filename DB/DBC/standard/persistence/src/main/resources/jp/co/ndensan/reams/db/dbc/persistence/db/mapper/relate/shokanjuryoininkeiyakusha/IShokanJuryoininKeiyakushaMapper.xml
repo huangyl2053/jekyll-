@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 受領委任契約（福祉用具購入費・住宅改修費）登録・追加・修正・照会のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-2130-030 xicongwang -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanjuryoininkeiyakusha.IShokanJuryoininKeiyakushaMapper">
+
+    <resultMap id="resultMap_ShokanJuryoininKeiyakusha" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaEntity" autoMapping="true">
+        <id property="dbt3078entity.hihokenshaNo" column="dbT3078ShokanJuryoininKeiyakusha_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="dbt3078entity.shinseiYMD" column="dbT3078ShokanJuryoininKeiyakusha_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="dbt3078entity.keiyakuJigyoshaNo" column="dbT3078ShokanJuryoininKeiyakusha_keiyakuJigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="dbt3078entity.keiyakuServiceShurui" column="dbT3078ShokanJuryoininKeiyakusha_keiyakuServiceShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="dbt3078entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3078ShokanJuryoininKeiyakushaMapper.ResultMap_DbT3078ShokanJuryoininKeiyakushaEntity"/>
+        <association property="dbt3077entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3077JuryoininKeiyakuJigyoshaMapper.ResultMap_DbT3077JuryoininKeiyakuJigyoshaEntity"/>
+    </resultMap>    
+    <select id="get契約事業者一覧"
+            resultMap="resultMap_ShokanJuryoininKeiyakusha"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaListParameter" 
+            fetchSize="500">
+        SELECT
+            A.*,
+            B.*
+        FROM
+            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3078ShokanJuryoininKeiyakushaMapper.noDeleted_DbT3078ShokanJuryoininKeiyakusha" />) A
+        INNER JOIN
+            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3077JuryoininKeiyakuJigyoshaMapper.noDeleted_DbT3077JuryoininKeiyakuJigyosha" />) B
+            ON
+              A."dbT3078ShokanJuryoininKeiyakusha_keiyakuJigyoshaNo" = B."dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaNo"
+        WHERE
+           1=1
+           <if test="被保険者番号!=null">
+           AND A."dbT3078ShokanJuryoininKeiyakusha_hihokenshaNo" = #{被保険者番号}
+           </if> 
+           <if test="契約申請日FROM!=null">
+           AND A."dbT3078ShokanJuryoininKeiyakusha_shinseiYMD" <![CDATA[>=]]> #{契約申請日FROM}
+           </if> 
+           <if test="契約申請日TO!=null">
+           AND A."dbT3078ShokanJuryoininKeiyakusha_shinseiYMD" <![CDATA[<=]]> #{契約申請日TO}
+           </if>     
+           <if test="契約決定日FROM!=null">
+           AND A."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" <![CDATA[>=]]> #{契約決定日FROM}
+           </if> 
+           <if test="契約決定日TO!=null">
+           AND A."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" <![CDATA[<=]]> #{契約決定日TO}
+           </if>   
+           <if test="契約事業者番号!=null">
+           AND A."dbT3078ShokanJuryoininKeiyakusha_keiyakuJigyoshaNo" = #{契約事業者番号}
+           </if>  
+           <if test="契約サービス種類!=null">
+           AND A."dbT3078ShokanJuryoininKeiyakusha_keiyakuServiceShurui" = #{契約サービス種類}
+           </if> 
+           <if test="契約年度!=null">
+           AND SUBSTRING(A."dbT3078ShokanJuryoininKeiyakusha_keiyakuNo",1,4) = #{契約年度}
+           </if> 
+           <if test="契約番号!=null">
+           AND A."dbT3078ShokanJuryoininKeiyakusha_keiyakuNo" = #{契約番号}
+           </if> 
+    </select>
+</mapper>

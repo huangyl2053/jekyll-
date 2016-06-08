@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC60201",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "意見書作成実績照会",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE6020001",
+     "toLayoutTitle": "意見書作成実績照会",
+     "toState": "初期表示"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE6020001",
+     "layoutTitle": "意見書作成実績照会",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

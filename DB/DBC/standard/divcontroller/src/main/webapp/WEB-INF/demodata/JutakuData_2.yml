@@ -1,0 +1,33 @@
+## YAML Template.
+---
+- hihokenshaNo: 1111111114
+- hihokenshaNo: 1111111114
+  shikibetsuCode: 1111111112
+  hihokenshaKubun: 1111111111
+  shimeiAndKanaShimsei: デンサン　タロウ
+  gender: 男
+  birthDay: 19330325
+  yubinNo: 999-9999
+  jusho: 長野県長野市1-2-3
+  juminShubetsu: 日本人住民
+  setaiCode: 1111111113
+- state: 追加
+  shinseiKubun: 支給申請
+  teikyoYM: 平25.07
+  shinseiDate: 平25.07.01
+  shinsaResult: ""
+  shinsaDate: ""
+  shikyuKubun: ""
+  ketteiDate: ""
+  seiriNo: 1234567891
+  jizenShinsei: 事前申請有
+- state: 追加
+  shinseiKubun: 支給申請
+  teikyoYM: 平25.07
+  shinseiDate: 平25.07.01
+  shinsaResult: ""
+  shinsaDate: ""
+  shikyuKubun: ""
+  ketteiDate: ""
+  seiriNo: 1234567892
+  jizenShinsei: ""

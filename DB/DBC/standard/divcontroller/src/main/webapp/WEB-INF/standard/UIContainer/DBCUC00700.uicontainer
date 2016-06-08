@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC00700",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "過誤申立書送付情報照会",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0070011",
+     "toLayoutTitle": "過誤申立書送付情報照会",
+     "toState": ""
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0070011",
+     "layoutTitle": "過誤申立書送付情報照会",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

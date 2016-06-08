@@ -1,0 +1,6 @@
+﻿gogitaiNo,int2,int,,,,,合議体番号,A
+gogitaiYukoKikanKaishiYMD,UDD015YMD,FlexibleDate,,,,,合議体有効期間開始年月日,A
+gogitaiYukoKikanShuryoYMD,UDD015YMD,FlexibleDate,,,,,合議体有効期間終了年月日,A
+shinsakaiIinCode,varchar,RString,,,,,介護認定審査会委員コード,A
+gogitaichoKubunCode,UDD035Code,Code,,,,,合議体長区分コード,A
+substituteFlag,bool,boolean,,,,,補欠,A

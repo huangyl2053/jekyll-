@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3101NijiYoboKihonCheckListマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3101NijiYoboKihonCheckListMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3101NijiYoboKihonCheckList">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3101NijiYoboKihonCheckListMapper.allColumns_DbT3101NijiYoboKihonCheckList" />
+     FROM
+         rgdb."DbT3101NijiYoboKihonCheckList"
+     WHERE
+         rgdb."DbT3101NijiYoboKihonCheckList"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3101NijiYoboKihonCheckList">
+         "DbT3101NijiYoboKihonCheckList"."hihokenshaNo" as "dbT3101NijiYoboKihonCheckList_hihokenshaNo",
+         "DbT3101NijiYoboKihonCheckList"."uketsukeYMD" as "dbT3101NijiYoboKihonCheckList_uketsukeYMD",
+         "DbT3101NijiYoboKihonCheckList"."rirekiNo" as "dbT3101NijiYoboKihonCheckList_rirekiNo",
+         "DbT3101NijiYoboKihonCheckList"."insertDantaiCd" as "dbT3101NijiYoboKihonCheckList_insertDantaiCd",
+         "DbT3101NijiYoboKihonCheckList"."insertTimestamp" as "dbT3101NijiYoboKihonCheckList_insertTimestamp",
+         "DbT3101NijiYoboKihonCheckList"."insertReamsLoginId" as "dbT3101NijiYoboKihonCheckList_insertReamsLoginId",
+         "DbT3101NijiYoboKihonCheckList"."insertContextId" as "dbT3101NijiYoboKihonCheckList_insertContextId",
+         "DbT3101NijiYoboKihonCheckList"."isDeleted" as "dbT3101NijiYoboKihonCheckList_isDeleted",
+         "DbT3101NijiYoboKihonCheckList"."updateCount" as "dbT3101NijiYoboKihonCheckList_updateCount",
+         "DbT3101NijiYoboKihonCheckList"."lastUpdateTimestamp" as "dbT3101NijiYoboKihonCheckList_lastUpdateTimestamp",
+         "DbT3101NijiYoboKihonCheckList"."lastUpdateReamsLoginId" as "dbT3101NijiYoboKihonCheckList_lastUpdateReamsLoginId",
+         "DbT3101NijiYoboKihonCheckList"."kinyuYMD" as "dbT3101NijiYoboKihonCheckList_kinyuYMD",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko01" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko01",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko02" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko02",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko03" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko03",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko04" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko04",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko05" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko05",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko06" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko06",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko07" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko07",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko08" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko08",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko09" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko09",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko10" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko10",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko11" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko11",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko12Shincho" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko12Shincho",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko12Taiju" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko12Taiju",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko13" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko13",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko14" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko14",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko15" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko15",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko16" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko16",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko17" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko17",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko18" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko18",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko19" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko19",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko20" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko20",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko21" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko21",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko22" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko22",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko23" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko23",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko24" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko24",
+         "DbT3101NijiYoboKihonCheckList"."shitsumonJiko25" as "dbT3101NijiYoboKihonCheckList_shitsumonJiko25"
+    </sql>
+
+
+    <!--テーブルDbT3101NijiYoboKihonCheckListの項目をDbT3101NijiYoboKihonCheckListEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3101NijiYoboKihonCheckListEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3101NijiYoboKihonCheckListEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT3101NijiYoboKihonCheckList_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="uketsukeYMD" column="dbT3101NijiYoboKihonCheckList_uketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="rirekiNo" column="dbT3101NijiYoboKihonCheckList_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT3101NijiYoboKihonCheckList_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3101NijiYoboKihonCheckList_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3101NijiYoboKihonCheckList_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3101NijiYoboKihonCheckList_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3101NijiYoboKihonCheckList_isDeleted" />
+        <result property="updateCount" column="dbT3101NijiYoboKihonCheckList_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3101NijiYoboKihonCheckList_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3101NijiYoboKihonCheckList_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kinyuYMD" column="dbT3101NijiYoboKihonCheckList_kinyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shitsumonJiko01" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko01" />
+        <result property="shitsumonJiko02" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko02" />
+        <result property="shitsumonJiko03" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko03" />
+        <result property="shitsumonJiko04" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko04" />
+        <result property="shitsumonJiko05" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko05" />
+        <result property="shitsumonJiko06" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko06" />
+        <result property="shitsumonJiko07" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko07" />
+        <result property="shitsumonJiko08" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko08" />
+        <result property="shitsumonJiko09" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko09" />
+        <result property="shitsumonJiko10" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko10" />
+        <result property="shitsumonJiko11" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko11" />
+        <result property="shitsumonJiko12Shincho" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko12Shincho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shitsumonJiko12Taiju" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko12Taiju" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shitsumonJiko13" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko13" />
+        <result property="shitsumonJiko14" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko14" />
+        <result property="shitsumonJiko15" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko15" />
+        <result property="shitsumonJiko16" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko16" />
+        <result property="shitsumonJiko17" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko17" />
+        <result property="shitsumonJiko18" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko18" />
+        <result property="shitsumonJiko19" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko19" />
+        <result property="shitsumonJiko20" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko20" />
+        <result property="shitsumonJiko21" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko21" />
+        <result property="shitsumonJiko22" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko22" />
+        <result property="shitsumonJiko23" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko23" />
+        <result property="shitsumonJiko24" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko24" />
+        <result property="shitsumonJiko25" column="dbT3101NijiYoboKihonCheckList_shitsumonJiko25" />
+    </resultMap>
+
+</mapper>

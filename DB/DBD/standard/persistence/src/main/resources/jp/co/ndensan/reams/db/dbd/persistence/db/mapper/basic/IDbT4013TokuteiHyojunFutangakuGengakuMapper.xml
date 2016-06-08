@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4013TokuteiHyojunFutangakuGengakuマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4013TokuteiHyojunFutangakuGengakuMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4013TokuteiHyojunFutangakuGengaku">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4013TokuteiHyojunFutangakuGengakuMapper.allColumns_DbT4013TokuteiHyojunFutangakuGengaku" />
+     FROM
+         rgdb."DbT4013TokuteiHyojunFutangakuGengaku"
+     WHERE
+         rgdb."DbT4013TokuteiHyojunFutangakuGengaku"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4013TokuteiHyojunFutangakuGengaku">
+         "DbT4013TokuteiHyojunFutangakuGengaku"."shoKisaiHokenshaNo" as "dbT4013TokuteiHyojunFutangakuGengaku_shoKisaiHokenshaNo",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."hihokenshaNo" as "dbT4013TokuteiHyojunFutangakuGengaku_hihokenshaNo",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."rirekiNo" as "dbT4013TokuteiHyojunFutangakuGengaku_rirekiNo",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."insertDantaiCd" as "dbT4013TokuteiHyojunFutangakuGengaku_insertDantaiCd",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."insertTimestamp" as "dbT4013TokuteiHyojunFutangakuGengaku_insertTimestamp",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."insertReamsLoginId" as "dbT4013TokuteiHyojunFutangakuGengaku_insertReamsLoginId",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."insertContextId" as "dbT4013TokuteiHyojunFutangakuGengaku_insertContextId",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."isDeleted" as "dbT4013TokuteiHyojunFutangakuGengaku_isDeleted",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."updateCount" as "dbT4013TokuteiHyojunFutangakuGengaku_updateCount",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."lastUpdateTimestamp" as "dbT4013TokuteiHyojunFutangakuGengaku_lastUpdateTimestamp",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."lastUpdateReamsLoginId" as "dbT4013TokuteiHyojunFutangakuGengaku_lastUpdateReamsLoginId",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."shinseiYMD" as "dbT4013TokuteiHyojunFutangakuGengaku_shinseiYMD",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."ketteiYMD" as "dbT4013TokuteiHyojunFutangakuGengaku_ketteiYMD",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."tekiyoKaishiYMD" as "dbT4013TokuteiHyojunFutangakuGengaku_tekiyoKaishiYMD",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."tekiyoShuryoYMD" as "dbT4013TokuteiHyojunFutangakuGengaku_tekiyoShuryoYMD",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."ketteiKubun" as "dbT4013TokuteiHyojunFutangakuGengaku_ketteiKubun",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."hiShoninRiyu" as "dbT4013TokuteiHyojunFutangakuGengaku_hiShoninRiyu",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."shinseiJiyu" as "dbT4013TokuteiHyojunFutangakuGengaku_shinseiJiyu",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."riyoshaFutanDankai" as "dbT4013TokuteiHyojunFutangakuGengaku_riyoshaFutanDankai",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."hyojunFutanKubun" as "dbT4013TokuteiHyojunFutangakuGengaku_hyojunFutanKubun",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."kyoshitsuShubetsu" as "dbT4013TokuteiHyojunFutangakuGengaku_kyoshitsuShubetsu",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."shokuhiFutanGendogaku" as "dbT4013TokuteiHyojunFutangakuGengaku_shokuhiFutanGendogaku",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."unitTypeKoshitsu" as "dbT4013TokuteiHyojunFutangakuGengaku_unitTypeKoshitsu",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."unitTypeJunKoshitsu" as "dbT4013TokuteiHyojunFutangakuGengaku_unitTypeJunKoshitsu",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."juraiTypeKoshitsu_Tokuyo" as "dbT4013TokuteiHyojunFutangakuGengaku_juraiTypeKoshitsu_Tokuyo",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."juraiTypeKoshitsu_Roken_Ryoyo" as "dbT4013TokuteiHyojunFutangakuGengaku_juraiTypeKoshitsu_Roken_Ryoyo",
+         "DbT4013TokuteiHyojunFutangakuGengaku"."tashoshitsu" as "dbT4013TokuteiHyojunFutangakuGengaku_tashoshitsu"
+    </sql>
+
+
+    <!--テーブルDbT4013TokuteiHyojunFutangakuGengakuの項目をDbT4013TokuteiHyojunFutangakuGengakuEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4013TokuteiHyojunFutangakuGengakuEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4013TokuteiHyojunFutangakuGengakuEntity" autoMapping="true">
+        <id property="shoKisaiHokenshaNo" column="dbT4013TokuteiHyojunFutangakuGengaku_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="hihokenshaNo" column="dbT4013TokuteiHyojunFutangakuGengaku_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="rirekiNo" column="dbT4013TokuteiHyojunFutangakuGengaku_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT4013TokuteiHyojunFutangakuGengaku_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4013TokuteiHyojunFutangakuGengaku_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4013TokuteiHyojunFutangakuGengaku_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4013TokuteiHyojunFutangakuGengaku_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4013TokuteiHyojunFutangakuGengaku_isDeleted" />
+        <result property="updateCount" column="dbT4013TokuteiHyojunFutangakuGengaku_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4013TokuteiHyojunFutangakuGengaku_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4013TokuteiHyojunFutangakuGengaku_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiYMD" column="dbT4013TokuteiHyojunFutangakuGengaku_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ketteiYMD" column="dbT4013TokuteiHyojunFutangakuGengaku_ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tekiyoKaishiYMD" column="dbT4013TokuteiHyojunFutangakuGengaku_tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tekiyoShuryoYMD" column="dbT4013TokuteiHyojunFutangakuGengaku_tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ketteiKubun" column="dbT4013TokuteiHyojunFutangakuGengaku_ketteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hiShoninRiyu" column="dbT4013TokuteiHyojunFutangakuGengaku_hiShoninRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiJiyu" column="dbT4013TokuteiHyojunFutangakuGengaku_shinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="riyoshaFutanDankai" column="dbT4013TokuteiHyojunFutangakuGengaku_riyoshaFutanDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hyojunFutanKubun" column="dbT4013TokuteiHyojunFutangakuGengaku_hyojunFutanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyoshitsuShubetsu" column="dbT4013TokuteiHyojunFutangakuGengaku_kyoshitsuShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shokuhiFutanGendogaku" column="dbT4013TokuteiHyojunFutangakuGengaku_shokuhiFutanGendogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="unitTypeKoshitsu" column="dbT4013TokuteiHyojunFutangakuGengaku_unitTypeKoshitsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="unitTypeJunKoshitsu" column="dbT4013TokuteiHyojunFutangakuGengaku_unitTypeJunKoshitsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="juraiTypeKoshitsu_Tokuyo" column="dbT4013TokuteiHyojunFutangakuGengaku_juraiTypeKoshitsu_Tokuyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="juraiTypeKoshitsu_Roken_Ryoyo" column="dbT4013TokuteiHyojunFutangakuGengaku_juraiTypeKoshitsu_Roken_Ryoyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tashoshitsu" column="dbT4013TokuteiHyojunFutangakuGengaku_tashoshitsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+
+</mapper>

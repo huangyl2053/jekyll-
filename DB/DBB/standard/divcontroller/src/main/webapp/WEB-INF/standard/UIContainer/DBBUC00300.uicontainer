@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC00300",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "賦課確定",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0030001",
+     "toLayoutTitle": "賦課確定",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0030001",
+     "layoutTitle": "賦課確定",
+     "eventName": "終了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

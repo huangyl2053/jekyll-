@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<!-- @reamsid_L DBA-1090-021 huangh -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokenshoshikakushohakko.IHihokenshoShikakushoHakkoMapper">
+
+    <resultMap id="被保険者証資格証発行情報取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoEntity" autoMapping="true">
+        <result property="要介護認定状態区分コード" column="TB1_yokaigoJotaiKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="受給申請年月日" column="TB1_jukyuShinseiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="認定年月日" column="TB1_ninteiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="認定有効期間開始年月日" column="TB1_ninteiYukoKikanKaishiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="認定有効期間終了年月日" column="TB1_ninteiYukoKikanShuryoYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="支給限度単位数" column="TB1_shikyuGendoTanisu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DemicalTypeHandler" />
+        <result property="支給限度有効開始年月日" column="TB1_shikyuGendoKaishiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="支給限度有効終了年月日" column="TB1_shikyuGendoShuryoYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="介護認定審査会意見" column="C_shinsakaiIken"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+
+    <resultMap id="限度額データ取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.ServiceTypeListEntity" autoMapping="true">
+        <result property="限度額" column="A_shikyuGendoTaniSu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DemicalTypeHandler" />
+        <result property="サービス種類コード" column="A_serviceShuruiCode"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler" />
+        <result property="サービス種類名称" column="B_serviceShuruiMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+
+    <resultMap id="居宅給付計画届出情報取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.KyotakuKeikakuTodokedeEntity" autoMapping="true">
+        <result property="被保険者番号" column="hihokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="対象年月" column="taishoYM"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+        <result property="履歴番号" column="rirekiNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="届出年月日" column="todokedeYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="居宅計画区分" column="kyotakuKeikaKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="適用開始年月日" column="tekiyoKaishiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="適用終了年月日" column="tekiyoShuryoYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="計画事業者番号" column="keikakuJigyoshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="委託先事業者番号" column="itakusakiJigyoshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+    </resultMap>
+
+    <select id="被保険者証資格証発行情報取得" parameterType="jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter"
+            resultMap="被保険者証資格証発行情報取得ResultMap" fetchSize="500">
+        SELECT
+        TB1."yokaigoJotaiKubunCode" AS TB1_yokaigoJotaiKubunCode,
+        TB1."jukyuShinseiYMD" AS TB1_jukyuShinseiYMD,
+        TB1."ninteiYMD" AS TB1_ninteiYMD,
+        TB1."ninteiYukoKikanKaishiYMD" AS TB1_ninteiYukoKikanKaishiYMD,
+        TB1."ninteiYukoKikanShuryoYMD" AS TB1_ninteiYukoKikanShuryoYMD,
+        TB1."shikyuGendoTanisu" AS TB1_shikyuGendoTanisu,
+        TB1."shikyuGendoKaishiYMD" AS TB1_shikyuGendoKaishiYMD,
+        TB1."shikyuGendoShuryoYMD" AS TB1_shikyuGendoShuryoYMD,
+        C."shinsakaiIken" AS C_shinsakaiIken
+        FROM
+        (
+        SELECT
+        A."hihokenshaNo",
+        A."shikibetsuCode",
+        A."shinseishoKanriNo",
+        A."jukyuShinseiYMD",
+        A."ninteiYMD",
+        A."yokaigoJotaiKubunCode",
+        A."ninteiYukoKikanKaishiYMD",
+        A."ninteiYukoKikanShuryoYMD",
+        A."shikyuGendoTanisu",
+        A."shikyuGendoKaishiYMD",
+        A."shikyuGendoShuryoYMD"
+        From
+        rgdb."DbT4001JukyushaDaicho" AS A
+        WHERE
+        A."hihokenshaNo" = #{被保険者番号}
+        AND A."yukoMukoKubun" = #{有効無効区分}
+        AND A."logicalDeletedFlag" = #{論理削除フラグ}
+        ORDER BY
+        A."rirekiNo" DESC,
+        A."edaban" DESC
+        LIMIT 1
+
+        ) AS TB1
+        LEFT JOIN
+        rgdb."DbT4102NinteiKekkaJoho" AS C
+        ON
+        TB1."shinseishoKanriNo" = C."shinseishoKanriNo"
+
+    </select>
+
+    <select id="限度額データ取得" parameterType="jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter"
+            resultMap="限度額データ取得ResultMap" fetchSize="500">
+        SELECT
+        A."serviceShuruiCode" AS A_serviceShuruiCode,
+        A."shikyuGendoTaniSu" AS A_shikyuGendoTaniSu,
+        B."serviceShuruiMeisho" AS B_serviceShuruiMeisho
+        FROM
+        rgdb."DbT7111ServiceShuruiShikyuGendoGaku" AS A
+        LEFT JOIN
+        rgdb."DbT7130KaigoServiceShurui" AS B
+        ON
+        A."serviceShuruiCode" = B."serviceShuruiCd"
+        AND B."teikyoKaishiYM" <![CDATA[<=]]> A."tekiyoKaishiYM"
+        AND A."tekiyoKaishiYM" <![CDATA[<=]]> B."teikyoshuryoYM"
+        WHERE
+        A."yoKaigoJotaiKubun" = '1'
+        AND #{認定有効期間開始年月日} <![CDATA[<=]]> A."tekiyoKaishiYM"
+        AND A."tekiyoKaishiYM" <![CDATA[<=]]> #{認定有効期間終了年月日}
+        ORDER BY
+        A_serviceShuruiCode ASC
+
+    </select>
+
+    <select id="居宅給付計画届出情報取得" resultMap="居宅給付計画届出情報取得ResultMap" fetchSize="500">
+        SELECT
+        A."hihokenshaNo" AS hihokenshaNo,
+        A."taishoYM" AS taishoYM,
+        A."rirekiNo" AS rirekiNo,
+        A."todokedeYMD" AS todokedeYMD,
+        A."kyotakuKeikaKubun" AS kyotakuKeikaKubun,
+        A."tekiyoKaishiYMD" AS tekiyoKaishiYMD,
+        A."tekiyoShuryoYMD" AS tekiyoShuryoYMD,
+        A."keikakuJigyoshaNo" AS keikakuJigyoshaNo,
+        A."itakusakiJigyoshaNo" AS itakusakiJigyoshaNo
+        FROM
+        (SELECT
+        KyotakuKeikakuTodokede."hihokenshaNo" AS "hihokenshaNo",
+        KyotakuKeikakuTodokede."taishoYM" AS "taishoYM",
+        KyotakuKeikakuTodokede."rirekiNo" AS "rirekiNo",
+        KyotakuKeikakuTodokede."todokedeYMD" AS "todokedeYMD",
+        '1' AS "kyotakuKeikaKubun",
+        KyotakuKeikakuJigyoshaSakusei."tekiyoKaishiYMD" AS "tekiyoKaishiYMD",
+        KyotakuKeikakuJigyoshaSakusei."tekiyoShuryoYMD" AS "tekiyoShuryoYMD",
+        KyotakuKeikakuJigyoshaSakusei."keikakuJigyoshaNo" AS "keikakuJigyoshaNo",
+        KyotakuKeikakuJigyoshaSakusei."itakusakiJigyoshaNo" AS "itakusakiJigyoshaNo"
+        FROM
+        rgdb."DbT3005KyotakuKeikakuTodokede" AS KyotakuKeikakuTodokede
+        INNER JOIN
+        rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS KyotakuKeikakuJigyoshaSakusei
+        ON
+        KyotakuKeikakuTodokede."hihokenshaNo" = KyotakuKeikakuJigyoshaSakusei."hihokenshaNo"
+        AND KyotakuKeikakuTodokede."taishoYM" = KyotakuKeikakuJigyoshaSakusei."taishoYM"
+        AND KyotakuKeikakuTodokede."rirekiNo" = KyotakuKeikakuJigyoshaSakusei."rirekiNo"
+        WHERE
+        KyotakuKeikakuTodokede."hihokenshaNo" = #{被保険者番号}
+        UNION
+        SELECT
+        KyotakuKeikakuTodokede."hihokenshaNo" AS "hihokenshaNo",
+        KyotakuKeikakuTodokede."taishoYM" AS "taishoYM",
+        KyotakuKeikakuTodokede."rirekiNo" AS "rirekiNo",
+        KyotakuKeikakuTodokede."todokedeYMD" AS "todokedeYMD",
+        '2' AS "kyotakuKeikaKubun",
+        KyotakuKeikakuJikoSakusei."tekiyoKaishiYMD",
+        KyotakuKeikakuJikoSakusei."tekiyoShuryoYMD",
+        '' AS "keikakuJigyoshaNo",
+        '' AS "itakusakiJigyoshaNo"
+        FROM
+        rgdb."DbT3005KyotakuKeikakuTodokede" AS KyotakuKeikakuTodokede
+        INNER JOIN
+        rgdb."DbT3007KyotakuKeikakuJikoSakusei" AS KyotakuKeikakuJikoSakusei
+        ON
+        KyotakuKeikakuTodokede."hihokenshaNo" = KyotakuKeikakuJikoSakusei."hihokenshaNo"
+        AND KyotakuKeikakuTodokede."taishoYM" = KyotakuKeikakuJikoSakusei."taishoYM"
+        AND KyotakuKeikakuTodokede."rirekiNo" = KyotakuKeikakuJikoSakusei."rirekiNo"
+        WHERE
+        KyotakuKeikakuTodokede."hihokenshaNo" = #{被保険者番号}) AS A
+        ORDER BY A."tekiyoKaishiYMD"
+        LIMIT 3
+    </select>
+
+</mapper>

@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC21100",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "特別徴収異動情報作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB2110001",
+     "toLayoutTitle": "特別徴収送付情報作成",
+     "toState": "特徴異動情報"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB2110001",
+     "layoutTitle": "特別徴収送付情報作成",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

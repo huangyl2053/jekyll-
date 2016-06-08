@@ -1,0 +1,8 @@
+﻿shinsakaiIinCode,varchar,RString,,,,,介護認定審査会委員コード,A
+remban,int4,int,,,,,連番,A
+shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
+shujiiIryokikanCode,varchar,RString,,,,,主治医医療機関コード,A
+shujiiCode,varchar,RString,,,,,主治医コード,A
+ninteichosaItakusakiCode,varchar,RString,,,,,認定調査委託先コード,A
+ninteiChosainNo,varchar,RString,,,,,認定調査員コード,A
+sonotaKikanCode,varchar,RString,,,,,その他機関コード,A

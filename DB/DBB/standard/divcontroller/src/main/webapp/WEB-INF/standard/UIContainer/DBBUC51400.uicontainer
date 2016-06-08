@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC51400",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "納付額データ作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB5140001",
+     "toLayoutTitle": "納付額データ作成",
+     "toState": "バッチ起動_単一"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB5140001",
+     "layoutTitle": "納付額データ作成",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

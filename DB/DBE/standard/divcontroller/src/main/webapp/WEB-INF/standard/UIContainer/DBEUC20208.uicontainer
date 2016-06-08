@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC20208",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "調査地区部グループマスタ",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2020008",
+     "toLayoutTitle": "調査地区グループマスタ",
+     "toState": "編集"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2020008",
+     "layoutTitle": "調査地区グループマスタ",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

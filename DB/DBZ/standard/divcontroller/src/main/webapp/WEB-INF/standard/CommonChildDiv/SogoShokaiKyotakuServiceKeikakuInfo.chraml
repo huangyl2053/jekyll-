@@ -1,0 +1,792 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;SogoShokaiKyotakuServiceKeikakuInfo&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;onClick_btnClose&quot;,&quot;heightForDialog&quot;:&quot;Auto&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.SogoShokaiKyotakuServiceKeikakuInfo"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G2 UzCompositeChild" id="SogoShokaiKyotakuServiceKeikakuInfo" style="margin: 0px 0em; width: auto;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;SogoShokaiKyotakuServiceKeikakuInfo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;SogoShokaiKyotakuServiceKeikakuInfo&quot;,&quot;title&quot;:&quot;居宅サービス計画情報&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;SogoShokaiKyotakuServiceKeikakuInfo&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dbu/db/dbu/SogoShokaiInfo/onLoad_KyotakuServiceKeikakuInfo&quot;}],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="SogoShokaiKyotakuServiceKeikakuInfo_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">居宅サービス計画情報</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="SogoShokaiKyotakuServiceKeikakuInfo_panel_body_area"><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtKeikakuTodokedeYMD" style="width: 187px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtKeikakuTodokedeYMD&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtKeikakuTodokedeYMD_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;届出日&quot;,&quot;labelLWidth&quot;:&quot;100px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtKeikakuTodokedeYMD_labelL" style="width: 100px;"><span>届出日</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtKeikakuTodokedeYMD_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtKeikakuHenkoYMD" style="width: 137px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtKeikakuHenkoYMD&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtKeikakuHenkoYMD_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;変更日&quot;,&quot;labelLWidth&quot;:&quot;50px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtKeikakuHenkoYMD_labelL" style="width: 50px;"><span>変更日</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtKeikakuHenkoYMD_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtKeikakuJigyoshaShurui" style="width: 257px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtKeikakuJigyoshaShurui&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtKeikakuJigyoshaShurui_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;事業者種類&quot;,&quot;labelLWidth&quot;:&quot;100px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtKeikakuJigyoshaShurui_labelL" style="width: 100px;"><span>事業者種類</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtKeikakuJigyoshaShurui_core" style="width: 150px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtKeikakuJigyoshaNo" style="width: 187px; height: 21px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtKeikakuJigyoshaNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtKeikakuJigyoshaNo_core&quot;,&quot;readOnly&quot;:true,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;事業者&quot;,&quot;labelLWidth&quot;:&quot;100px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtKeikakuJigyoshaNo_labelL" style="width: 100px;"><span>事業者</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input readonlyColor" id="txtKeikakuJigyoshaNo_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginRight-XS UzCompositeChild" id="txtKeikakuJigyoshaName" style="width: 305px; height: 21px; margin-left: 0em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtKeikakuJigyoshaName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;300px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtKeikakuJigyoshaName_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[]}"><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtKeikakuJigyoshaName_core" style="width: 300px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtKeikakuServiceShurui" style="width: 307px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtKeikakuServiceShurui&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;200px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtKeikakuServiceShurui_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;サービス種類&quot;,&quot;labelLWidth&quot;:&quot;100px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtKeikakuServiceShurui_labelL" style="width: 100px;"><span>サービス種類</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtKeikakuServiceShurui_core" style="width: 200px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtKeikakuSakuseiKubun" style="width: 257px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtKeikakuSakuseiKubun&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;selectControlID&quot;:&quot;txtKeikakuSakuseiKubun_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;計画作成区分&quot;,&quot;labelLWidth&quot;:&quot;100px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtKeikakuSakuseiKubun_labelL" style="width: 100px;"><span>計画作成区分</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtKeikakuSakuseiKubun_core" style="width: 150px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtKeikakuYM" style="width: 167px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtKeikakuYM&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;60px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtKeikakuYM_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;計画年月&quot;,&quot;labelLWidth&quot;:&quot;100px&quot;,&quot;ymdKubun&quot;:1}"><span class="word-wrap-break-word Label-L text-align-right" id="txtKeikakuYM_labelL" style="width: 100px;"><span>計画年月</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtKeikakuYM_core" style="width: 60px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div title="" class="UzTextBoxDateRange TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtKeikakuKikan" style="width: 278px; height: 21px;" data-control-type="TextBoxDateRange" data-obj="{&quot;fieldName&quot;:&quot;txtKeikakuKikan&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDateRange&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtKeikakuKikan_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;期間&quot;,&quot;fromSelectControlID&quot;:&quot;txtKeikakuKikanFrom&quot;,&quot;toSelectControlID&quot;:&quot;txtKeikakuKikanTo&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtKeikakuKikan_labelL" style="width: 41px;"><span>期間</span></span><span class="CoreElement UzTextBox TextBoxDateRangeCore" id="txtKeikakuKikan_core" data-control-type="TextBoxDateRange"><input tabindex="-1" class="UzTextBox UzTextBoxDateRange readonlyColor AsIfDisabled" id="txtKeikakuKikanFrom" style="margin: 0em; width: 80px; font-family: inherit; font-size: inherit;" type="text" readonly="readonly" placeholder="" data-control-type="TextBoxDateRange" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""><span class="UzTextBoxDateRange Label-L text-align-center Width-XS" id="txtKeikakuKikanArrow" style="text-align: center; margin-right: 0.8em; margin-left: 0.8em;">～</span><input tabindex="-1" class="UzTextBox UzTextBoxDateRange readonlyColor AsIfDisabled" id="txtKeikakuKikanTo" style="margin: 0em; width: 80px; font-family: inherit; font-size: inherit;" type="text" readonly="readonly" placeholder="" data-control-type="TextBoxDateRange" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></span></div><button title="" class="UzButton JSControl controlMargin-M ClearFloat FloatRight marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnClose" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnClose&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnClose&quot;,&quot;onClick&quot;:&quot;onClick_btnClose&quot;,&quot;text&quot;:&quot;閉じる&quot;}"><span>閉じる</span></button></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiKyotakuServiceKeikakuInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnClose", {
+                get: function () {
+                    return "onClick_btnClose";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        SogoShokaiKyotakuServiceKeikakuInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "SogoShokaiKyotakuServiceKeikakuInfo";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.SogoShokaiKyotakuServiceKeikakuInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtKeikakuTodokedeYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKeikakuTodokedeYMD"));
+            };
+
+            Controls.prototype.txtKeikakuHenkoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKeikakuHenkoYMD"));
+            };
+
+            Controls.prototype.txtKeikakuJigyoshaShurui = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeikakuJigyoshaShurui"));
+            };
+
+            Controls.prototype.txtKeikakuJigyoshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtKeikakuJigyoshaNo"));
+            };
+
+            Controls.prototype.txtKeikakuJigyoshaName = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeikakuJigyoshaName"));
+            };
+
+            Controls.prototype.txtKeikakuServiceShurui = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeikakuServiceShurui"));
+            };
+
+            Controls.prototype.txtKeikakuSakuseiKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeikakuSakuseiKubun"));
+            };
+
+            Controls.prototype.txtKeikakuYM = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKeikakuYM"));
+            };
+
+            Controls.prototype.txtKeikakuKikan = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtKeikakuKikan"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        SogoShokaiKyotakuServiceKeikakuInfo.Controls = Controls;
+    })(DBZ.SogoShokaiKyotakuServiceKeikakuInfo || (DBZ.SogoShokaiKyotakuServiceKeikakuInfo = {}));
+    var SogoShokaiKyotakuServiceKeikakuInfo = DBZ.SogoShokaiKyotakuServiceKeikakuInfo;
+
+    var SogoShokaiKyotakuServiceKeikakuInfo_Design = (function (_super) {
+        __extends(SogoShokaiKyotakuServiceKeikakuInfo_Design, _super);
+        function SogoShokaiKyotakuServiceKeikakuInfo_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, SogoShokaiKyotakuServiceKeikakuInfo_Design.myLayout, fieldName);
+        }
+        SogoShokaiKyotakuServiceKeikakuInfo_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        SogoShokaiKyotakuServiceKeikakuInfo_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        SogoShokaiKyotakuServiceKeikakuInfo_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "SogoShokaiKyotakuServiceKeikakuInfo",
+                    "items": [
+                        {
+                            "fieldName": "txtKeikakuTodokedeYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKeikakuTodokedeYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "届出日",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtKeikakuHenkoYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKeikakuHenkoYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "変更日",
+                            "labelRText": "",
+                            "labelLWidth": "50",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtKeikakuJigyoshaShurui",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "150",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKeikakuJigyoshaShurui_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "事業者種類",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtKeikakuJigyoshaNo",
+                            "items": [],
+                            "controlType": "TextBoxCode",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKeikakuJigyoshaNo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "事業者",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 2,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": "",
+                            "formatLength": "10"
+                        },
+                        {
+                            "fieldName": "txtKeikakuJigyoshaName",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "300",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKeikakuJigyoshaName_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtKeikakuServiceShurui",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "200",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKeikakuServiceShurui_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "サービス種類",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtKeikakuSakuseiKubun",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "150",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKeikakuSakuseiKubun_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "計画作成区分",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtKeikakuYM",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "60",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKeikakuYM_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "計画年月",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 1,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtKeikakuKikan",
+                            "items": [],
+                            "controlType": "TextBoxDateRange",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKeikakuKikan_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "labelLText": "期間",
+                            "labelRText": "",
+                            "labelLWidth": "41",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "permitCharactor": "",
+                            "fromPlaceHolder": "",
+                            "toPlaceHolder": "",
+                            "minDate": "",
+                            "maxDate": "",
+                            "fromText": "",
+                            "toText": "",
+                            "fromValue": "",
+                            "toValue": "",
+                            "fromSelectControlID": "txtKeikakuKikanFrom",
+                            "toSelectControlID": "txtKeikakuKikanTo"
+                        },
+                        {
+                            "fieldName": "btnClose",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnClose",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "閉じる",
+                            "onClick": "onClick_btnClose",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G2",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0",
+                    "marginRight": "0",
+                    "selectControlID": "SogoShokaiKyotakuServiceKeikakuInfo",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "居宅サービス計画情報",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "SogoShokaiKyotakuServiceKeikakuInfo"
+                        }
+                    ],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": "dbu/db/dbu/SogoShokaiInfo/onLoad_KyotakuServiceKeikakuInfo"
+                        }
+                    ],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": true,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto"
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "businessId": "DBZ",
+            "controlName": "SogoShokaiKyotakuServiceKeikakuInfo",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "onClick_btnClose",
+            "canTransferEvent": true,
+            "heightForDialog": "Auto"
+        };
+        return SogoShokaiKyotakuServiceKeikakuInfo_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.SogoShokaiKyotakuServiceKeikakuInfo_Design = SogoShokaiKyotakuServiceKeikakuInfo_Design;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiKyotakuServiceKeikakuInfo) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new SogoShokaiKyotakuServiceKeikakuInfo.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        SogoShokaiKyotakuServiceKeikakuInfo.ModeController = ModeController;
+    })(DBZ.SogoShokaiKyotakuServiceKeikakuInfo || (DBZ.SogoShokaiKyotakuServiceKeikakuInfo = {}));
+    var SogoShokaiKyotakuServiceKeikakuInfo = DBZ.SogoShokaiKyotakuServiceKeikakuInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiKyotakuServiceKeikakuInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new SogoShokaiKyotakuServiceKeikakuInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        SogoShokaiKyotakuServiceKeikakuInfo.PublicProperties = PublicProperties;
+    })(DBZ.SogoShokaiKyotakuServiceKeikakuInfo || (DBZ.SogoShokaiKyotakuServiceKeikakuInfo = {}));
+    var SogoShokaiKyotakuServiceKeikakuInfo = DBZ.SogoShokaiKyotakuServiceKeikakuInfo;
+})(DBZ || (DBZ = {}));
+</script>
+    <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['SOGOSHOKAIKYOTAKUSERVICEKEIKAKUINFO'] = {};
+DBZ['SOGOSHOKAIKYOTAKUSERVICEKEIKAKUINFO'].SogoShokaiKyotakuServiceKeikakuInfoRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_SogoShokaiKyotakuServiceKeikakuInfo').getProperty();parameter0.txtKeikakuTodokedeYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKeikakuTodokedeYMD').getProperty();parameter0.txtKeikakuHenkoYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKeikakuHenkoYMD').getProperty();parameter0.txtKeikakuJigyoshaShurui = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKeikakuJigyoshaShurui').getProperty();parameter0.txtKeikakuJigyoshaNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKeikakuJigyoshaNo').getProperty();parameter0.txtKeikakuJigyoshaName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKeikakuJigyoshaName').getProperty();parameter0.txtKeikakuServiceShurui = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKeikakuServiceShurui').getProperty();parameter0.txtKeikakuSakuseiKubun = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKeikakuSakuseiKubun').getProperty();parameter0.txtKeikakuYM = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKeikakuYM').getProperty();parameter0.txtKeikakuKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKeikakuKikan').getProperty();parameter0.btnClose = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnClose').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiKyotakuServiceKeikakuInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnClose = function () {
+                return "onClick_btnClose";
+            };
+            return Events;
+        })();
+        SogoShokaiKyotakuServiceKeikakuInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "SogoShokaiKyotakuServiceKeikakuInfo";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.SogoShokaiKyotakuServiceKeikakuInfo.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.SogoShokaiKyotakuServiceKeikakuInfo.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.SogoShokaiKyotakuServiceKeikakuInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtKeikakuTodokedeYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKeikakuTodokedeYMD"));
+            };
+
+            Controls.prototype.txtKeikakuHenkoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKeikakuHenkoYMD"));
+            };
+
+            Controls.prototype.txtKeikakuJigyoshaShurui = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeikakuJigyoshaShurui"));
+            };
+
+            Controls.prototype.txtKeikakuJigyoshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtKeikakuJigyoshaNo"));
+            };
+
+            Controls.prototype.txtKeikakuJigyoshaName = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeikakuJigyoshaName"));
+            };
+
+            Controls.prototype.txtKeikakuServiceShurui = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeikakuServiceShurui"));
+            };
+
+            Controls.prototype.txtKeikakuSakuseiKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeikakuSakuseiKubun"));
+            };
+
+            Controls.prototype.txtKeikakuYM = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKeikakuYM"));
+            };
+
+            Controls.prototype.txtKeikakuKikan = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtKeikakuKikan"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+            return Controls;
+        })();
+        SogoShokaiKyotakuServiceKeikakuInfo.Controls = Controls;
+    })(DBZ.SogoShokaiKyotakuServiceKeikakuInfo || (DBZ.SogoShokaiKyotakuServiceKeikakuInfo = {}));
+    var SogoShokaiKyotakuServiceKeikakuInfo = DBZ.SogoShokaiKyotakuServiceKeikakuInfo;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiKyotakuServiceKeikakuInfo) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new SogoShokaiKyotakuServiceKeikakuInfo.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        SogoShokaiKyotakuServiceKeikakuInfo.ModeController = ModeController;
+    })(DBZ.SogoShokaiKyotakuServiceKeikakuInfo || (DBZ.SogoShokaiKyotakuServiceKeikakuInfo = {}));
+    var SogoShokaiKyotakuServiceKeikakuInfo = DBZ.SogoShokaiKyotakuServiceKeikakuInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiKyotakuServiceKeikakuInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new SogoShokaiKyotakuServiceKeikakuInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        SogoShokaiKyotakuServiceKeikakuInfo.PublicProperties = PublicProperties;
+    })(DBZ.SogoShokaiKyotakuServiceKeikakuInfo || (DBZ.SogoShokaiKyotakuServiceKeikakuInfo = {}));
+    var SogoShokaiKyotakuServiceKeikakuInfo = DBZ.SogoShokaiKyotakuServiceKeikakuInfo;
+})(DBZ || (DBZ = {}));
+</script></div>

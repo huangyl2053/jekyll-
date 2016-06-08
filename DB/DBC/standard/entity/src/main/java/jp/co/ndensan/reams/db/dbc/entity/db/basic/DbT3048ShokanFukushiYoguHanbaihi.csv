@@ -1,0 +1,17 @@
+﻿hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
+seiriNo,varchar,RString,,,,,整理番号,A
+jigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,事業者番号,A
+yoshikiNo,varchar,RString,,,,,様式番号,A
+meisaiNo,varchar,RString,,,,,明細番号,A
+renban,varchar,RString,,,,,連番,A
+serviceCode,DbUDD007ServiceCode,ServiceCode,,,,,サービスコード,A
+fukushiYoguHanbaiYMD,UDD015YMD,FlexibleDate,,,,,福祉用具販売年月日,A
+fukushiYoguShohinName,varchar,RString,,,,,福祉用具商品名,A
+fukushiYoguShumokuCode,varchar,RString,,,,,福祉用具種目コード,A
+fukushiYoguSeizoJigyoshaName,varchar,RString,,,,,福祉用具製造事業者名,A
+fukushiYoguHanbaiJigyoshaName,varchar,RString,,,,,福祉用具販売事業者名,A
+kounyuKingaku,int4,int,,,,,購入金額,A
+hinmokuCode,varchar,RString,,,,,品目コード,A
+shinsaHohoKubunCode,varchar,RString,,,,,審査方法区分コード,A
+sagakuKingaku,int4,int,,,,,差額金額,A

@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC56101",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "更新申請対象者管理",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD5610001",
+     "toLayoutTitle": "更新対象者管理",
+     "toState": "初期表示"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD5610001",
+     "layoutTitle": "更新対象者管理",
+     "eventName": "完了状態",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

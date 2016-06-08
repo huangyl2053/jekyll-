@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7069KaigoToiawasesakiマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7069KaigoToiawasesakiMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7069KaigoToiawasesaki">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7069KaigoToiawasesakiMapper.allColumns_DbT7069KaigoToiawasesaki" />
+     FROM
+         rgdb."DbT7069KaigoToiawasesaki"
+     WHERE
+         rgdb."DbT7069KaigoToiawasesaki"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7069KaigoToiawasesaki">
+         "DbT7069KaigoToiawasesaki"."subGyomuCode" as "dbT7069KaigoToiawasesaki_subGyomuCode",
+         "DbT7069KaigoToiawasesaki"."chohyoBunruiID" as "dbT7069KaigoToiawasesaki_chohyoBunruiID",
+         "DbT7069KaigoToiawasesaki"."insertDantaiCd" as "dbT7069KaigoToiawasesaki_insertDantaiCd",
+         "DbT7069KaigoToiawasesaki"."insertTimestamp" as "dbT7069KaigoToiawasesaki_insertTimestamp",
+         "DbT7069KaigoToiawasesaki"."insertReamsLoginId" as "dbT7069KaigoToiawasesaki_insertReamsLoginId",
+         "DbT7069KaigoToiawasesaki"."insertContextId" as "dbT7069KaigoToiawasesaki_insertContextId",
+         "DbT7069KaigoToiawasesaki"."isDeleted" as "dbT7069KaigoToiawasesaki_isDeleted",
+         "DbT7069KaigoToiawasesaki"."updateCount" as "dbT7069KaigoToiawasesaki_updateCount",
+         "DbT7069KaigoToiawasesaki"."lastUpdateTimestamp" as "dbT7069KaigoToiawasesaki_lastUpdateTimestamp",
+         "DbT7069KaigoToiawasesaki"."lastUpdateReamsLoginId" as "dbT7069KaigoToiawasesaki_lastUpdateReamsLoginId",
+         "DbT7069KaigoToiawasesaki"."yubinNo" as "dbT7069KaigoToiawasesaki_yubinNo",
+         "DbT7069KaigoToiawasesaki"."shozaichi" as "dbT7069KaigoToiawasesaki_shozaichi",
+         "DbT7069KaigoToiawasesaki"."choshaName" as "dbT7069KaigoToiawasesaki_choshaName",
+         "DbT7069KaigoToiawasesaki"."telNo" as "dbT7069KaigoToiawasesaki_telNo",
+         "DbT7069KaigoToiawasesaki"."naisenNo" as "dbT7069KaigoToiawasesaki_naisenNo",
+         "DbT7069KaigoToiawasesaki"."bushoName" as "dbT7069KaigoToiawasesaki_bushoName",
+         "DbT7069KaigoToiawasesaki"."tantoshaName" as "dbT7069KaigoToiawasesaki_tantoshaName"
+    </sql>
+
+
+    <!--テーブルDbT7069KaigoToiawasesakiの項目をDbT7069KaigoToiawasesakiEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7069KaigoToiawasesakiEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7069KaigoToiawasesakiEntity" autoMapping="true">
+        <id property="subGyomuCode" column="dbT7069KaigoToiawasesaki_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
+        <id property="chohyoBunruiID" column="dbT7069KaigoToiawasesaki_chohyoBunruiID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ReportIdTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7069KaigoToiawasesaki_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7069KaigoToiawasesaki_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7069KaigoToiawasesaki_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7069KaigoToiawasesaki_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7069KaigoToiawasesaki_isDeleted" />
+        <result property="updateCount" column="dbT7069KaigoToiawasesaki_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7069KaigoToiawasesaki_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7069KaigoToiawasesaki_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yubinNo" column="dbT7069KaigoToiawasesaki_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="shozaichi" column="dbT7069KaigoToiawasesaki_shozaichi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshaName" column="dbT7069KaigoToiawasesaki_choshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="telNo" column="dbT7069KaigoToiawasesaki_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="naisenNo" column="dbT7069KaigoToiawasesaki_naisenNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="bushoName" column="dbT7069KaigoToiawasesaki_bushoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tantoshaName" column="dbT7069KaigoToiawasesaki_tantoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <select id="getEntity" resultMap="ResultMap_DbT7069KaigoToiawasesakiEntity">
+	SELECT
+	<include refid="allColumns_DbT7069KaigoToiawasesaki"/>
+	FROM
+	rgdb."DbT7069KaigoToiawasesaki"
+	</select>
+
+</mapper>

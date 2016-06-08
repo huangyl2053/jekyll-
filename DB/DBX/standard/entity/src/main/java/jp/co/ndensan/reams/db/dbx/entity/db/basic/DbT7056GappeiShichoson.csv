@@ -1,0 +1,14 @@
+﻿gappeiYMD,UDD015YMD,FlexibleDate,,,,,合併年月日,A
+chiikiNo,varchar,RString,,,,,地域番号,A
+kyuShichosonCode,UDD023LasdecCode,LasdecCode,,,,,旧市町村コード,A
+unyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,運用開始年月日,A
+unyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,運用終了年月日,A
+kyuHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,旧保険者番号,A
+kyuShichosonMeisho,varchar,RString,,,,,旧市町村名称,A
+todofukenMeisho,varchar,RString,,,,,都道府県名称,A
+gunMeisho,varchar,RString,,,,,郡名称,A
+yubinNo,UDD003YubinNo,YubinNo,,,,,郵便番号,A
+telNo,UDD026TelNo,TelNo,,,,,電話番号,A
+rojinhokenShichosonNo,varchar,RString,,,,,老人保健市町村番号,A
+rokenJukyushaNoTaikei,varchar,RString,,,,,老人保健受給者番号体系,A
+hyojiUmu,varchar,RString,,,,,表示有無,A

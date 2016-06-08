@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC01101",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "特徴仮算定通知書一括発行",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0110001",
+     "toLayoutTitle": "特徴仮算定賦課",
+     "toState": "通知書一括発行"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0110001",
+     "layoutTitle": "特徴仮算定賦課",
+     "eventName": "終了する",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

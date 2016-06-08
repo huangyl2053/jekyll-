@@ -1,0 +1,60 @@
+﻿{
+ "uiContainerName": "DBAUC82001",
+ "displayWizard": false,
+ "subGyomuCode": "DBA",
+ "steps": [
+  {
+   "id": 1,
+   "name": "介護資格帳票管理",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0400001",
+     "toLayoutTitle": "帳票選択",
+     "toState": "一覧表示"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0400001",
+     "layoutTitle": "帳票選択",
+     "eventName": "帳票選択",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0400002",
+     "toLayoutTitle": "帳票制御メンテナンス",
+     "toState": "メンテナンス"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0400002",
+     "layoutTitle": "帳票制御メンテナンス",
+     "eventName": "戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0400001",
+     "toLayoutTitle": "帳票選択",
+     "toState": "一覧表示"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0400002",
+     "layoutTitle": "帳票制御メンテナンス",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

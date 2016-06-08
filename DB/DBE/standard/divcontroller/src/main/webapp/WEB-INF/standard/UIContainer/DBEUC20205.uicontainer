@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC20205",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "地区認定調査員マスタ",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2020005",
+     "toLayoutTitle": "地区認定調査員マスタ",
+     "toState": "編集"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2020005",
+     "layoutTitle": "地区認定調査員マスタ",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

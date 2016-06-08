@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3099TandokuJoseiShuruiマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3099TandokuJoseiShuruiMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3099TandokuJoseiShurui">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3099TandokuJoseiShuruiMapper.allColumns_DbT3099TandokuJoseiShurui" />
+     FROM
+         rgdb."DbT3099TandokuJoseiShurui"
+     WHERE
+         rgdb."DbT3099TandokuJoseiShurui"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3099TandokuJoseiShurui">
+         "DbT3099TandokuJoseiShurui"."tandokuJoseiShuruiCode" as "dbT3099TandokuJoseiShurui_tandokuJoseiShuruiCode",
+         "DbT3099TandokuJoseiShurui"."joseiServiceShuruiCode" as "dbT3099TandokuJoseiShurui_joseiServiceShuruiCode",
+         "DbT3099TandokuJoseiShurui"."tekiyoKaishiYM" as "dbT3099TandokuJoseiShurui_tekiyoKaishiYM",
+         "DbT3099TandokuJoseiShurui"."rirekiNo" as "dbT3099TandokuJoseiShurui_rirekiNo",
+         "DbT3099TandokuJoseiShurui"."insertDantaiCd" as "dbT3099TandokuJoseiShurui_insertDantaiCd",
+         "DbT3099TandokuJoseiShurui"."insertTimestamp" as "dbT3099TandokuJoseiShurui_insertTimestamp",
+         "DbT3099TandokuJoseiShurui"."insertReamsLoginId" as "dbT3099TandokuJoseiShurui_insertReamsLoginId",
+         "DbT3099TandokuJoseiShurui"."insertContextId" as "dbT3099TandokuJoseiShurui_insertContextId",
+         "DbT3099TandokuJoseiShurui"."isDeleted" as "dbT3099TandokuJoseiShurui_isDeleted",
+         "DbT3099TandokuJoseiShurui"."updateCount" as "dbT3099TandokuJoseiShurui_updateCount",
+         "DbT3099TandokuJoseiShurui"."lastUpdateTimestamp" as "dbT3099TandokuJoseiShurui_lastUpdateTimestamp",
+         "DbT3099TandokuJoseiShurui"."lastUpdateReamsLoginId" as "dbT3099TandokuJoseiShurui_lastUpdateReamsLoginId",
+         "DbT3099TandokuJoseiShurui"."tekiyoShuryoYM" as "dbT3099TandokuJoseiShurui_tekiyoShuryoYM",
+         "DbT3099TandokuJoseiShurui"."joseiServiceShuriMeisho" as "dbT3099TandokuJoseiShurui_joseiServiceShuriMeisho",
+         "DbT3099TandokuJoseiShurui"."joseiTani" as "dbT3099TandokuJoseiShurui_joseiTani",
+         "DbT3099TandokuJoseiShurui"."joseiNaiyo" as "dbT3099TandokuJoseiShurui_joseiNaiyo"
+    </sql>
+
+
+    <!--テーブルDbT3099TandokuJoseiShuruiの項目をDbT3099TandokuJoseiShuruiEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3099TandokuJoseiShuruiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3099TandokuJoseiShuruiEntity" autoMapping="true">
+        <id property="tandokuJoseiShuruiCode" column="dbT3099TandokuJoseiShurui_tandokuJoseiShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="joseiServiceShuruiCode" column="dbT3099TandokuJoseiShurui_joseiServiceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <id property="tekiyoKaishiYM" column="dbT3099TandokuJoseiShurui_tekiyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="rirekiNo" column="dbT3099TandokuJoseiShurui_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3099TandokuJoseiShurui_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3099TandokuJoseiShurui_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3099TandokuJoseiShurui_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3099TandokuJoseiShurui_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3099TandokuJoseiShurui_isDeleted" />
+        <result property="updateCount" column="dbT3099TandokuJoseiShurui_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3099TandokuJoseiShurui_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3099TandokuJoseiShurui_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tekiyoShuryoYM" column="dbT3099TandokuJoseiShurui_tekiyoShuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="joseiServiceShuriMeisho" column="dbT3099TandokuJoseiShurui_joseiServiceShuriMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="joseiTani" column="dbT3099TandokuJoseiShurui_joseiTani" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="joseiNaiyo" column="dbT3099TandokuJoseiShurui_joseiNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>

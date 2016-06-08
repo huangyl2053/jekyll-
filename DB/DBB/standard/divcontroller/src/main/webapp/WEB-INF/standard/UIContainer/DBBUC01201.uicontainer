@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC01201",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "特徴平準化（特徴6月分）通知書一括発行",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0120001",
+     "toLayoutTitle": "特別徴収平準化計算（特別徴収6・8月分）",
+     "toState": "通知書一括発行"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0120001",
+     "layoutTitle": "特別徴収平準化計算（特別徴収6・8月分）",
+     "eventName": "終了する",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

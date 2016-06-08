@@ -1,0 +1,7 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+tekiyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,適用開始年月日,A
+tekiyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,適用終了年月日,A
+uketsukeYMD,UDD015YMD,FlexibleDate,,,,,受付年月日,A
+ketteiYMD,UDD015YMD,FlexibleDate,,,,,決定年月日,A
+checklistJisshiYMD,UDD015YMD,FlexibleDate,,,,,チェックリスト実施日,A

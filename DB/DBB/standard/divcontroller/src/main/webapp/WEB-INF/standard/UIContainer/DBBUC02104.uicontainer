@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC02104",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "所得段階別被保険者数一覧表作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0210031",
+     "toLayoutTitle": "所得段階別被保険者数一覧表作成",
+     "toState": "バッチ起動"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0210031",
+     "layoutTitle": "所得段階別被保険者数一覧表作成",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

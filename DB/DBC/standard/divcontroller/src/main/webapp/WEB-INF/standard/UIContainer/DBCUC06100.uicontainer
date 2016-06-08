@@ -1,0 +1,70 @@
+﻿{
+ "uiContainerName": "DBCUC06100",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "福祉用具購入費支給申請一括審査決定",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0610011",
+     "toLayoutTitle": "福祉用具購入費支給申請一括審査・決定",
+     "toState": "検索"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0610011",
+     "layoutTitle": "福祉用具購入費支給申請一括審査・決定",
+     "eventName": "修正",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0600021",
+     "toLayoutTitle": "福祉用具購入費支給申請登録",
+     "toState": "修正"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0600021",
+     "layoutTitle": "福祉用具購入費支給申請登録",
+     "eventName": "一覧に戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0610011",
+     "toLayoutTitle": "福祉用具購入費支給申請一括審査・決定",
+     "toState": "審査"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0610011",
+     "layoutTitle": "福祉用具購入費支給申請一括審査・決定",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "5",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0600021",
+     "layoutTitle": "福祉用具購入費支給申請登録",
+     "eventName": "処理終了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

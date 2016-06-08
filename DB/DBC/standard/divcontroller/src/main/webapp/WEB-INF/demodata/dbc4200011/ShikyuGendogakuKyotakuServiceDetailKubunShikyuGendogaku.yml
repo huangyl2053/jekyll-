@@ -1,0 +1,15 @@
+## YAML Template.
+---
+- idoDate: 平26.07.01
+  radIdoKubun: new
+  idoJiyu: 転入
+  yukoDateRangefrom: 平26.07.01
+  yukoDateRangeto: ""
+  shikyuGendoKijungakuYokaigo1: 5003
+  shikyuGendoKijungakuYokaigo2: 10473
+  shikyuGendoKijungakuYokaigo3: 16692
+  shikyuGendoKijungakuYokaigo4: 19616
+  shikyuGendoKijungakuYokaigo5: 26931
+  shikyuGendoKijungakuKyotakuShien: 0
+  shikyuGendoKijungakuYoshien1: 30806
+  shikyuGendoKijungakuYoshien2: 36065

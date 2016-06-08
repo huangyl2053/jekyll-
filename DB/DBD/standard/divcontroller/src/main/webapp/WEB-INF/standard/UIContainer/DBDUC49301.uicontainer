@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC49301",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "要介護認定一括更新",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD4930001",
+     "toLayoutTitle": "要介護認定一括更新",
+     "toState": "初期表示"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD4930001",
+     "layoutTitle": "要介護認定一括更新",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

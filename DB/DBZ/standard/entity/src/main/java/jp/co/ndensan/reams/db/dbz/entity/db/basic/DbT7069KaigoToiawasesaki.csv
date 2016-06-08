@@ -1,0 +1,9 @@
+﻿subGyomuCode,UDD055SubGyomuCode,SubGyomuCode,,,,,サブ業務コード,A
+chohyoBunruiID,UDD032ReportId,ReportId,,,,,帳票分類ID,A
+yubinNo,UDD003YubinNo,YubinNo,,,,,郵便番号,A
+shozaichi,varchar,RString,,,,,所在地,A
+choshaName,varchar,RString,,,,,庁舎名,A
+telNo,UDD026TelNo,TelNo,,,,,電話番号,A
+naisenNo,varchar,RString,,,,,内線番号,A
+bushoName,varchar,RString,,,,,部署名,A
+tantoshaName,varchar,RString,,,,,担当者名,A

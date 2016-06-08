@@ -1,0 +1,1517 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;RoreiFukushiNenkinJoho&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;RoreiFukushiNenkinJoho&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;onClick_btnClose&quot;,&quot;dialogCloseEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;Auto&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;enterKeyAssignedControl&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-control-name="DBZ.RoreiFukushiNenkinJoho" data-is-composite-control="true"><div title="" class="UzPanel FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginTop-Default marginBottom-Default UzCommonChildDivPanel Panel-Shadow Width-G2 UzCompositeChild" id="RoreiFukushiNenkinJoho" style="margin: 0px 0em; width: auto;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;RoreiFukushiNenkinJoho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;RoreiFukushiNenkinJoho&quot;,&quot;title&quot;:&quot;老齢福祉年金情報&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;RoreiFukushiNenkinJoho&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dbu/db/dbu/SogoShokaiInfo/onLoad_NinteiInfo&quot;}],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;focusPositionID&quot;:&quot;restoreLayoutButton&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="RoreiFukushiNenkinJoho_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">老齢福祉年金情報</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="RoreiFukushiNenkinJoho_panel_body_area"><div class="UzDataGrid JSControl FloatLeft controlMargin-M Height-S marginLeft-S marginRight-S UzCompositeChild" id="dgRoreiFukushiNenkinJoho" style="width: 198px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgRoreiFukushiNenkinJoho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;198px&quot;,&quot;marginLeft&quot;:&quot;S&quot;,&quot;marginRight&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;dgRoreiFukushiNenkinJoho&quot;,&quot;height&quot;:&quot;S&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowClearSortButton&quot;:false,&quot;isShowSelectedRowCount&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowRowState&quot;:false,&quot;columns&quot;:[{&quot;columnName&quot;:&quot;開始日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;startDate&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;disabled&quot;:false,&quot;readOnly&quot;:true,&quot;required&quot;:false,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;placeHolder&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;isShowCalendarOpenerIcon&quot;:false},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;startDate&quot;},{&quot;columnName&quot;:&quot;終了日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;endDate&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;disabled&quot;:false,&quot;readOnly&quot;:true,&quot;required&quot;:false,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;placeHolder&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;isShowCalendarOpenerIcon&quot;:false},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;endDate&quot;}],&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0,&quot;groupHeaderHeight&quot;:0},&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;isShowCancelButtonColumn&quot;:false,&quot;isErrorAndWarningColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;cancelButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgRoreiFukushiNenkinJoho_grid_table" role="" style="width: 198px; height: 176px; position: relative;"></div><div id="dgRoreiFukushiNenkinJoho_footer" style="width: 198px; height: 25px;"></div></div><button title="" class="UzButton JSControl controlMargin-M ClearFloat FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnClose" style="width: 120px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnClose&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;120px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnClose&quot;,&quot;onClick&quot;:&quot;onClick_btnClose&quot;,&quot;text&quot;:&quot;閉じる&quot;}"><span>閉じる</span></button></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiNinteiInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnClose", {
+                get: function () {
+                    return "onClick_btnClose";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        SogoShokaiNinteiInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "SogoShokaiNinteiInfo";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.SogoShokaiNinteiInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtNinteiShinseiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiShinseiYMD"));
+            };
+
+            Controls.prototype.txtNinteiShinseiKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiShinseiKubun"));
+            };
+
+            Controls.prototype.txtNinteiYukoKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiYukoKubun"));
+            };
+
+            Controls.prototype.txtNinteiChosaJissiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaJissiYMD"));
+            };
+
+            Controls.prototype.txtNinteiChosaJuryoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaJuryoYMD"));
+            };
+
+            Controls.prototype.txtNinteiChosaKanryoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaKanryoYMD"));
+            };
+
+            Controls.prototype.txtNinteiChosaItakusaki = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiChosaItakusaki"));
+            };
+
+            Controls.prototype.txtNinteiChosain = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiChosain"));
+            };
+
+            Controls.prototype.txtNinteiShujiiIryoKikan = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiShujiiIryoKikan"));
+            };
+
+            Controls.prototype.txtNinteiShujii = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiShujii"));
+            };
+
+            Controls.prototype.txtNinteiIkenshoJuryoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiIkenshoJuryoYMD"));
+            };
+
+            Controls.prototype.txtNinteiIkenshoKanryoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiIkenshoKanryoYMD"));
+            };
+
+            Controls.prototype.txtNinteiIchijiHantei = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiIchijiHantei"));
+            };
+
+            Controls.prototype.txtNinteiIchijiHanteiNinchi = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiIchijiHanteiNinchi"));
+            };
+
+            Controls.prototype.txtNinteiIchijiHanteiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiIchijiHanteiYMD"));
+            };
+
+            Controls.prototype.txtNinteiIchijiKanryoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiIchijiKanryoYMD"));
+            };
+
+            Controls.prototype.txtNinteiNinteiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiNinteiYMD"));
+            };
+
+            Controls.prototype.txtNinteiJotaiKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiJotaiKubun"));
+            };
+
+            Controls.prototype.txtNinteiYukoKikan = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtNinteiYukoKikan"));
+            };
+
+            Controls.prototype.txtNinteiIdoJiyu = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiIdoJiyu"));
+            };
+
+            Controls.prototype.txtNinteiIdoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiIdoYMD"));
+            };
+
+            Controls.prototype.txtNinteiSoshitsuYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiSoshitsuYMD"));
+            };
+
+            Controls.prototype.txtNinteiTorikeshiRiyu = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiTorikeshiRiyu"));
+            };
+
+            Controls.prototype.txtNinteiTorikeshiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiTorikeshiYMD"));
+            };
+
+            Controls.prototype.txtNinteiTokuteiShippei = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiTokuteiShippei"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        SogoShokaiNinteiInfo.Controls = Controls;
+    })(DBZ.SogoShokaiNinteiInfo || (DBZ.SogoShokaiNinteiInfo = {}));
+    var SogoShokaiNinteiInfo = DBZ.SogoShokaiNinteiInfo;
+
+    var SogoShokaiNinteiInfo_Design = (function (_super) {
+        __extends(SogoShokaiNinteiInfo_Design, _super);
+        function SogoShokaiNinteiInfo_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, SogoShokaiNinteiInfo_Design.myLayout, fieldName);
+        }
+        SogoShokaiNinteiInfo_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        SogoShokaiNinteiInfo_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        SogoShokaiNinteiInfo_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "SogoShokaiNinteiInfo",
+                    "items": [
+                        {
+                            "fieldName": "txtNinteiShinseiYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiShinseiYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "申請日",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtNinteiShinseiKubun",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "100",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiShinseiKubun_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "申請区分(法令)",
+                            "labelRText": "",
+                            "labelLWidth": "115",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtNinteiYukoKubun",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "60",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiYukoKubun_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "申請有効区分",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtNinteiChosaJissiYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiChosaJissiYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "調査実施日",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtNinteiChosaJuryoYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiChosaJuryoYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "調査受領日",
+                            "labelRText": "",
+                            "labelLWidth": "80",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtNinteiChosaKanryoYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiChosaKanryoYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "調査完了日",
+                            "labelRText": "",
+                            "labelLWidth": "80",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtNinteiChosaItakusaki",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "200",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiChosaItakusaki_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "調査委託先",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtNinteiChosain",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "200",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiChosain_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "調査員",
+                            "labelRText": "",
+                            "labelLWidth": "50",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtNinteiShujiiIryoKikan",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "200",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiShujiiIryoKikan_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "医療機関",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtNinteiShujii",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "200",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiShujii_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "主治医",
+                            "labelRText": "",
+                            "labelLWidth": "50",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtNinteiIkenshoJuryoYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiIkenshoJuryoYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "意見書受領日",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtNinteiIkenshoKanryoYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiIkenshoKanryoYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "意見書登録完了日",
+                            "labelRText": "",
+                            "labelLWidth": "130",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtNinteiIchijiHantei",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiIchijiHantei_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "一次判定結果",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtNinteiIchijiHanteiNinchi",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiIchijiHanteiNinchi_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "一次判定結果(認知症加算)",
+                            "labelRText": "",
+                            "labelLWidth": "195",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtNinteiIchijiHanteiYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiIchijiHanteiYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "一次判定日",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtNinteiIchijiKanryoYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiIchijiKanryoYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "一次判定完了日",
+                            "labelRText": "",
+                            "labelLWidth": "115",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtNinteiNinteiYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiNinteiYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "認定日",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtNinteiJotaiKubun",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiJotaiKubun_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "状態区分",
+                            "labelRText": "",
+                            "labelLWidth": "65",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtNinteiYukoKikan",
+                            "items": [],
+                            "controlType": "TextBoxDateRange",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiYukoKikan_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "labelLText": "有効期間",
+                            "labelRText": "",
+                            "labelLWidth": "65",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "permitCharactor": "",
+                            "fromPlaceHolder": "",
+                            "toPlaceHolder": "",
+                            "minDate": "",
+                            "maxDate": "",
+                            "fromText": "",
+                            "toText": "",
+                            "fromValue": "",
+                            "toValue": "",
+                            "fromSelectControlID": "txtNinteiYukoKikanFrom",
+                            "toSelectControlID": "txtNinteiYukoKikanTo"
+                        },
+                        {
+                            "fieldName": "txtNinteiIdoJiyu",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "200",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiIdoJiyu_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "異動事由",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtNinteiIdoYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiIdoYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "異動日",
+                            "labelRText": "",
+                            "labelLWidth": "50",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtNinteiSoshitsuYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiSoshitsuYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "喪失日",
+                            "labelRText": "",
+                            "labelLWidth": "50",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtNinteiTorikeshiRiyu",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "200",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiTorikeshiRiyu_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "取消理由",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtNinteiTorikeshiYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiTorikeshiYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "取消日",
+                            "labelRText": "",
+                            "labelLWidth": "50",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtNinteiTokuteiShippei",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "300",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiTokuteiShippei_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "特定疾病",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "btnClose",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnClose",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "閉じる",
+                            "onClick": "onClick_btnClose",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G2",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0",
+                    "marginRight": "0",
+                    "selectControlID": "SogoShokaiNinteiInfo",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "認定情報",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "SogoShokaiNinteiInfo"
+                        }
+                    ],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": "dbu/db/dbu/SogoShokaiInfo/onLoad_NinteiInfo"
+                        }
+                    ],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": true,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto"
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "businessId": "DBZ",
+            "controlName": "SogoShokaiNinteiInfo",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "onClick_btnClose",
+            "canTransferEvent": true,
+            "heightForDialog": "Auto"
+        };
+        return SogoShokaiNinteiInfo_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.SogoShokaiNinteiInfo_Design = SogoShokaiNinteiInfo_Design;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiNinteiInfo) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new SogoShokaiNinteiInfo.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        SogoShokaiNinteiInfo.ModeController = ModeController;
+    })(DBZ.SogoShokaiNinteiInfo || (DBZ.SogoShokaiNinteiInfo = {}));
+    var SogoShokaiNinteiInfo = DBZ.SogoShokaiNinteiInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiNinteiInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new SogoShokaiNinteiInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        SogoShokaiNinteiInfo.PublicProperties = PublicProperties;
+    })(DBZ.SogoShokaiNinteiInfo || (DBZ.SogoShokaiNinteiInfo = {}));
+    var SogoShokaiNinteiInfo = DBZ.SogoShokaiNinteiInfo;
+})(DBZ || (DBZ = {}));
+</script>
+  
+                 
+     <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['ROREIFUKUSHINENKINJOHO'] = {};
+DBZ['ROREIFUKUSHINENKINJOHO'].RoreiFukushiNenkinJohoRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_RoreiFukushiNenkinJoho').getProperty();parameter0.dgRoreiFukushiNenkinJoho = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgRoreiFukushiNenkinJoho').getProperty();parameter0.btnClose = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnClose').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (RoreiFukushiNenkinJoho) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnClose = function () {
+                return "onClick_btnClose";
+            };
+            return Events;
+        })();
+        RoreiFukushiNenkinJoho.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "RoreiFukushiNenkinJoho";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.RoreiFukushiNenkinJoho.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.RoreiFukushiNenkinJoho.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.RoreiFukushiNenkinJoho = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgRoreiFukushiNenkinJoho = function () {
+                return new UZA.DataGrid(this.convFiledName("dgRoreiFukushiNenkinJoho"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+            return Controls;
+        })();
+        RoreiFukushiNenkinJoho.Controls = Controls;
+    })(DBZ.RoreiFukushiNenkinJoho || (DBZ.RoreiFukushiNenkinJoho = {}));
+    var RoreiFukushiNenkinJoho = DBZ.RoreiFukushiNenkinJoho;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (RoreiFukushiNenkinJoho) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new RoreiFukushiNenkinJoho.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new RoreiFukushiNenkinJoho.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        RoreiFukushiNenkinJoho.ModeController = ModeController;
+    })(DBZ.RoreiFukushiNenkinJoho || (DBZ.RoreiFukushiNenkinJoho = {}));
+    var RoreiFukushiNenkinJoho = DBZ.RoreiFukushiNenkinJoho;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (RoreiFukushiNenkinJoho) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new RoreiFukushiNenkinJoho.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        RoreiFukushiNenkinJoho.PublicProperties = PublicProperties;
+    })(DBZ.RoreiFukushiNenkinJoho || (DBZ.RoreiFukushiNenkinJoho = {}));
+    var RoreiFukushiNenkinJoho = DBZ.RoreiFukushiNenkinJoho;
+})(DBZ || (DBZ = {}));
+</script></div>

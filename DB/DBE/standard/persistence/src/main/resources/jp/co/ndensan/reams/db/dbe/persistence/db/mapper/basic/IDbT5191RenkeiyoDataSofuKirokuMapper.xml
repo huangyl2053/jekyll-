@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5191RenkeiyoDataSofuKirokuマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5191RenkeiyoDataSofuKirokuMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5191RenkeiyoDataSofuKiroku">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5191RenkeiyoDataSofuKirokuMapper.allColumns_DbT5191RenkeiyoDataSofuKiroku" />
+     FROM
+         rgdb."DbT5191RenkeiyoDataSofuKiroku"
+     WHERE
+         rgdb."DbT5191RenkeiyoDataSofuKiroku"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5191RenkeiyoDataSofuKiroku">
+         "DbT5191RenkeiyoDataSofuKiroku"."shinseishoKanriNo" as "dbT5191RenkeiyoDataSofuKiroku_shinseishoKanriNo",
+         "DbT5191RenkeiyoDataSofuKiroku"."shiryoSakuseiYMD" as "dbT5191RenkeiyoDataSofuKiroku_shiryoSakuseiYMD",
+         "DbT5191RenkeiyoDataSofuKiroku"."insertDantaiCd" as "dbT5191RenkeiyoDataSofuKiroku_insertDantaiCd",
+         "DbT5191RenkeiyoDataSofuKiroku"."insertTimestamp" as "dbT5191RenkeiyoDataSofuKiroku_insertTimestamp",
+         "DbT5191RenkeiyoDataSofuKiroku"."insertReamsLoginId" as "dbT5191RenkeiyoDataSofuKiroku_insertReamsLoginId",
+         "DbT5191RenkeiyoDataSofuKiroku"."insertContextId" as "dbT5191RenkeiyoDataSofuKiroku_insertContextId",
+         "DbT5191RenkeiyoDataSofuKiroku"."isDeleted" as "dbT5191RenkeiyoDataSofuKiroku_isDeleted",
+         "DbT5191RenkeiyoDataSofuKiroku"."updateCount" as "dbT5191RenkeiyoDataSofuKiroku_updateCount",
+         "DbT5191RenkeiyoDataSofuKiroku"."lastUpdateTimestamp" as "dbT5191RenkeiyoDataSofuKiroku_lastUpdateTimestamp",
+         "DbT5191RenkeiyoDataSofuKiroku"."lastUpdateReamsLoginId" as "dbT5191RenkeiyoDataSofuKiroku_lastUpdateReamsLoginId",
+         "DbT5191RenkeiyoDataSofuKiroku"."hikiwatashiKubun" as "dbT5191RenkeiyoDataSofuKiroku_hikiwatashiKubun",
+         "DbT5191RenkeiyoDataSofuKiroku"."hikiwatashiTimeStamp" as "dbT5191RenkeiyoDataSofuKiroku_hikiwatashiTimeStamp",
+         "DbT5191RenkeiyoDataSofuKiroku"."saiSoufuKubun" as "dbT5191RenkeiyoDataSofuKiroku_saiSoufuKubun",
+         "DbT5191RenkeiyoDataSofuKiroku"."saiChousaSofuKubun" as "dbT5191RenkeiyoDataSofuKiroku_saiChousaSofuKubun",
+         "DbT5191RenkeiyoDataSofuKiroku"."saiIkenshoSofuKubun" as "dbT5191RenkeiyoDataSofuKiroku_saiIkenshoSofuKubun",
+         "DbT5191RenkeiyoDataSofuKiroku"."saiImageSofuKubun" as "dbT5191RenkeiyoDataSofuKiroku_saiImageSofuKubun",
+         "DbT5191RenkeiyoDataSofuKiroku"."saiSoshinYMD" as "dbT5191RenkeiyoDataSofuKiroku_saiSoshinYMD"
+    </sql>
+
+
+    <!--テーブルDbT5191RenkeiyoDataSofuKirokuの項目をDbT5191RenkeiyoDataSofuKirokuEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5191RenkeiyoDataSofuKirokuEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5191RenkeiyoDataSofuKirokuEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT5191RenkeiyoDataSofuKiroku_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="shiryoSakuseiYMD" column="dbT5191RenkeiyoDataSofuKiroku_shiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT5191RenkeiyoDataSofuKiroku_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5191RenkeiyoDataSofuKiroku_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5191RenkeiyoDataSofuKiroku_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5191RenkeiyoDataSofuKiroku_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5191RenkeiyoDataSofuKiroku_isDeleted" />
+        <result property="updateCount" column="dbT5191RenkeiyoDataSofuKiroku_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5191RenkeiyoDataSofuKiroku_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5191RenkeiyoDataSofuKiroku_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hikiwatashiKubun" column="dbT5191RenkeiyoDataSofuKiroku_hikiwatashiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hikiwatashiTimeStamp" column="dbT5191RenkeiyoDataSofuKiroku_hikiwatashiTimeStamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="saiSoufuKubun" column="dbT5191RenkeiyoDataSofuKiroku_saiSoufuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="saiChousaSofuKubun" column="dbT5191RenkeiyoDataSofuKiroku_saiChousaSofuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="saiIkenshoSofuKubun" column="dbT5191RenkeiyoDataSofuKiroku_saiIkenshoSofuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="saiImageSofuKubun" column="dbT5191RenkeiyoDataSofuKiroku_saiImageSofuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="saiSoshinYMD" column="dbT5191RenkeiyoDataSofuKiroku_saiSoshinYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    <select id="getEntity" resultMap="ResultMap_DbT5191RenkeiyoDataSofuKirokuEntity">
+        SELECT
+        <include refid="allColumns_DbT5191RenkeiyoDataSofuKiroku"/>
+        FROM
+        rgdb."DbT5191RenkeiyoDataSofuKiroku"
+    </select>
+</mapper>

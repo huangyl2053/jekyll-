@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBUUC05200",
+ "displayWizard": false,
+ "subGyomuCode": "DBU",
+ "steps": [
+  {
+   "id": 1,
+   "name": "境界層管理マスタリスト作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0520011",
+     "toLayoutTitle": "境界層管理マスタリスト作成",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0520011",
+     "layoutTitle": "境界層管理マスタリスト作成",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

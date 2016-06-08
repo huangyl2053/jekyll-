@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3037ShokanJuryoininMeisaiマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3037ShokanJuryoininMeisaiMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3037ShokanJuryoininMeisai">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3037ShokanJuryoininMeisaiMapper.allColumns_DbT3037ShokanJuryoininMeisai" />
+     FROM
+         rgdb."DbT3037ShokanJuryoininMeisai"
+     WHERE
+         rgdb."DbT3037ShokanJuryoininMeisai"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3037ShokanJuryoininMeisai">
+         "DbT3037ShokanJuryoininMeisai"."hiHokenshaNo" as "dbT3037ShokanJuryoininMeisai_hiHokenshaNo",
+         "DbT3037ShokanJuryoininMeisai"."serviceTeikyoYM" as "dbT3037ShokanJuryoininMeisai_serviceTeikyoYM",
+         "DbT3037ShokanJuryoininMeisai"."seiriNo" as "dbT3037ShokanJuryoininMeisai_seiriNo",
+         "DbT3037ShokanJuryoininMeisai"."insertDantaiCd" as "dbT3037ShokanJuryoininMeisai_insertDantaiCd",
+         "DbT3037ShokanJuryoininMeisai"."insertTimestamp" as "dbT3037ShokanJuryoininMeisai_insertTimestamp",
+         "DbT3037ShokanJuryoininMeisai"."insertReamsLoginId" as "dbT3037ShokanJuryoininMeisai_insertReamsLoginId",
+         "DbT3037ShokanJuryoininMeisai"."insertContextId" as "dbT3037ShokanJuryoininMeisai_insertContextId",
+         "DbT3037ShokanJuryoininMeisai"."isDeleted" as "dbT3037ShokanJuryoininMeisai_isDeleted",
+         "DbT3037ShokanJuryoininMeisai"."updateCount" as "dbT3037ShokanJuryoininMeisai_updateCount",
+         "DbT3037ShokanJuryoininMeisai"."lastUpdateTimestamp" as "dbT3037ShokanJuryoininMeisai_lastUpdateTimestamp",
+         "DbT3037ShokanJuryoininMeisai"."lastUpdateReamsLoginId" as "dbT3037ShokanJuryoininMeisai_lastUpdateReamsLoginId",
+         "DbT3037ShokanJuryoininMeisai"."keiyakuNo" as "dbT3037ShokanJuryoininMeisai_keiyakuNo",
+         "DbT3037ShokanJuryoininMeisai"."shiharaiKingaku" as "dbT3037ShokanJuryoininMeisai_shiharaiKingaku"
+    </sql>
+
+
+    <!--テーブルDbT3037ShokanJuryoininMeisaiの項目をDbT3037ShokanJuryoininMeisaiEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3037ShokanJuryoininMeisaiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3037ShokanJuryoininMeisaiEntity" autoMapping="true">
+        <id property="hiHokenshaNo" column="dbT3037ShokanJuryoininMeisai_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="serviceTeikyoYM" column="dbT3037ShokanJuryoininMeisai_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="seiriNo" column="dbT3037ShokanJuryoininMeisai_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3037ShokanJuryoininMeisai_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3037ShokanJuryoininMeisai_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3037ShokanJuryoininMeisai_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3037ShokanJuryoininMeisai_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3037ShokanJuryoininMeisai_isDeleted" />
+        <result property="updateCount" column="dbT3037ShokanJuryoininMeisai_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3037ShokanJuryoininMeisai_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3037ShokanJuryoininMeisai_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="keiyakuNo" column="dbT3037ShokanJuryoininMeisai_keiyakuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiharaiKingaku" column="dbT3037ShokanJuryoininMeisai_shiharaiKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,109 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;HanteiKekkaIchiranPrint&quot;,&quot;businessId&quot;:&quot;DBE&quot;,&quot;controlName&quot;:&quot;HanteiKekkaIchiranPrint&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBE.HanteiKekkaIchiranPrint"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel Width-G1 UzCompositeChild" id="HanteiKekkaIchiranPrint" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;HanteiKekkaIchiranPrint&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;HanteiKekkaIchiranPrint&quot;,&quot;title&quot;:&quot;判定結果一覧印刷&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;HanteiKekkaIchiranPrint&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="HanteiKekkaIchiranPrint_panel_header_area" style="display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">判定結果一覧印刷</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="HanteiKekkaIchiranPrint_panel_body_area"><div class="WithLabel TextBoxOuterDiv UzTextBoxCode JSControl FloatLeft marginLeft-XS controlMargin-M UzCompositeChild" id="txtHokenshaCode" style="width: 224px; height: 21px; margin-right: 0px; position: relative; opacity: 1;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtHokenshaCode&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;100px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtHokenshaCode_core&quot;,&quot;labelLText&quot;:&quot;保険者&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right Width-S" id="txtHokenshaCode_labelL"><span>保険者</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Off" id="txtHokenshaCode_core" style="width: 100px;" type="text" placeholder=""></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginRight-XS controlMargin-M UzCompositeChild" id="txtHokenshaName" style="width: 249px; margin-left: 0px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtHokenshaName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;M&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtHokenshaName_core&quot;,&quot;suggest&quot;:[]}"><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana Width-M" id="txtHokenshaName_core" type="text" placeholder=""></div><div class="UzCheckBoxList JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M ClearFloat UzCompositeChild" id="chkPrintChohyo" style="width: 368px; height: 19px;" data-control-type="CheckBoxList" data-obj="{&quot;fieldName&quot;:&quot;chkPrintChohyo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CheckBoxList&quot;,&quot;width&quot;:&quot;M&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;chkPrintChohyo_core&quot;,&quot;icon&quot;:[],&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;介護認定審査判定結果(鑑)&quot;}],&quot;labelLText&quot;:&quot;同時発行&quot;,&quot;selectedItems&quot;:[],&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right Width-S" id="chkPrintChohyo_labelL"><span>同時発行</span></span><span class="checkBoxSpan FloatLeft Width-M" id="chkPrintChohyo_core"><input id="chkPrintChohyo_key0" type="checkbox" value="介護認定審査判定結果(鑑)" data-key="key0"><label for="chkPrintChohyo_key0" data-key="key0">介護認定審査判定結果(鑑)</label></span></div><div class="UzSpace JSControl controlMargin-M ClearFloat Height-XS Width-Default UzCompositeChild" id="spSpace1" style="opacity: 1;" data-control-type="Space" data-obj="{&quot;fieldName&quot;:&quot;spSpace1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Space&quot;,&quot;width&quot;:&quot;Default&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;spSpace1&quot;}"></div><button class="UzButton JSControl controlMargin-M FloatRight marginLeft-XS marginRight-XS ClearFloat Width-S UzCompositeChild" id="btnModoru" style="opacity: 0.8;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnModoru&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnModoru&quot;,&quot;text&quot;:&quot;戻る&quot;}"><span>戻る</span></button><button class="UzButtonBatchRegister JSControl controlMargin-M Width-S FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnPritBatch" type="button" data-control-type="ButtonBatchRegister" data-obj="{&quot;fieldName&quot;:&quot;btnPritBatch&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;ButtonBatchRegister&quot;,&quot;width&quot;:&quot;S&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnPritBatch&quot;,&quot;postParameterPanelNames&quot;:[],&quot;text&quot;:&quot;印刷する&quot;,&quot;dataPassing&quot;:[],&quot;visibleCloseButton&quot;:false}"><span>印刷する</span></button></div></div>    
+   <script class="RamlConvert" type="text/javascript">
+var DBE= DBE? DBE: {};
+DBE['HANTEIKEKKAICHIRANPRINT'] = {};
+DBE['HANTEIKEKKAICHIRANPRINT'].HanteiKekkaIchiranPrintRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_HanteiKekkaIchiranPrint').getProperty();parameter0.txtHokenshaCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHokenshaCode').getProperty();parameter0.txtHokenshaName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHokenshaName').getProperty();parameter0.chkPrintChohyo = Uz.JSControlUtil.getJSControl(parentFieldName + '_chkPrintChohyo').getProperty();parameter0.spSpace1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_spSpace1').getProperty();parameter0.btnModoru = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnModoru').getProperty();parameter0.btnPritBatch = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnPritBatch').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBE;
+(function (DBE) {
+    (function (HanteiKekkaIchiranPrint) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        HanteiKekkaIchiranPrint.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "HanteiKekkaIchiranPrint";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBE.HanteiKekkaIchiranPrint.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBE.HanteiKekkaIchiranPrint.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.HanteiKekkaIchiranPrint = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtHokenshaCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtHokenshaCode"));
+            };
+
+            Controls.prototype.txtHokenshaName = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokenshaName"));
+            };
+
+            Controls.prototype.chkPrintChohyo = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkPrintChohyo"));
+            };
+
+            Controls.prototype.spSpace1 = function () {
+                return new UZA.Space(this.convFiledName("spSpace1"));
+            };
+
+            Controls.prototype.btnModoru = function () {
+                return new UZA.Button(this.convFiledName("btnModoru"));
+            };
+
+            Controls.prototype.btnPritBatch = function () {
+                return new UZA.ButtonBatchRegister(this.convFiledName("btnPritBatch"));
+            };
+            return Controls;
+        })();
+        HanteiKekkaIchiranPrint.Controls = Controls;
+    })(DBE.HanteiKekkaIchiranPrint || (DBE.HanteiKekkaIchiranPrint = {}));
+    var HanteiKekkaIchiranPrint = DBE.HanteiKekkaIchiranPrint;
+})(DBE || (DBE = {}));
+var DBE;
+(function (DBE) {
+    (function (HanteiKekkaIchiranPrint) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new HanteiKekkaIchiranPrint.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new HanteiKekkaIchiranPrint.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        HanteiKekkaIchiranPrint.ModeController = ModeController;
+    })(DBE.HanteiKekkaIchiranPrint || (DBE.HanteiKekkaIchiranPrint = {}));
+    var HanteiKekkaIchiranPrint = DBE.HanteiKekkaIchiranPrint;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (HanteiKekkaIchiranPrint) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new HanteiKekkaIchiranPrint.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        HanteiKekkaIchiranPrint.PublicProperties = PublicProperties;
+    })(DBE.HanteiKekkaIchiranPrint || (DBE.HanteiKekkaIchiranPrint = {}));
+    var HanteiKekkaIchiranPrint = DBE.HanteiKekkaIchiranPrint;
+})(DBE || (DBE = {}));
+</script></div>

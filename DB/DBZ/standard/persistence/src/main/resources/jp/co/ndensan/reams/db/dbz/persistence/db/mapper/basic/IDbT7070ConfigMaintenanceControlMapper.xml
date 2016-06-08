@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7070ConfigMaintenanceControlマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7070ConfigMaintenanceControlMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7070ConfigMaintenanceControl">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7070ConfigMaintenanceControlMapper.allColumns_DbT7070ConfigMaintenanceControl" />
+     FROM
+         rgdb."DbT7070ConfigMaintenanceControl"
+     WHERE
+         rgdb."DbT7070ConfigMaintenanceControl"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7070ConfigMaintenanceControl">
+         "DbT7070ConfigMaintenanceControl"."subGyomuCode" as "dbT7070ConfigMaintenanceControl_subGyomuCode",
+         "DbT7070ConfigMaintenanceControl"."configName" as "dbT7070ConfigMaintenanceControl_configName",
+         "DbT7070ConfigMaintenanceControl"."insertDantaiCd" as "dbT7070ConfigMaintenanceControl_insertDantaiCd",
+         "DbT7070ConfigMaintenanceControl"."insertTimestamp" as "dbT7070ConfigMaintenanceControl_insertTimestamp",
+         "DbT7070ConfigMaintenanceControl"."insertReamsLoginId" as "dbT7070ConfigMaintenanceControl_insertReamsLoginId",
+         "DbT7070ConfigMaintenanceControl"."insertContextId" as "dbT7070ConfigMaintenanceControl_insertContextId",
+         "DbT7070ConfigMaintenanceControl"."isDeleted" as "dbT7070ConfigMaintenanceControl_isDeleted",
+         "DbT7070ConfigMaintenanceControl"."updateCount" as "dbT7070ConfigMaintenanceControl_updateCount",
+         "DbT7070ConfigMaintenanceControl"."lastUpdateTimestamp" as "dbT7070ConfigMaintenanceControl_lastUpdateTimestamp",
+         "DbT7070ConfigMaintenanceControl"."lastUpdateReamsLoginId" as "dbT7070ConfigMaintenanceControl_lastUpdateReamsLoginId",
+         "DbT7070ConfigMaintenanceControl"."hyojiJun1" as "dbT7070ConfigMaintenanceControl_hyojiJun1",
+         "DbT7070ConfigMaintenanceControl"."hyojiJun2" as "dbT7070ConfigMaintenanceControl_hyojiJun2",
+         "DbT7070ConfigMaintenanceControl"."hyojiJun3" as "dbT7070ConfigMaintenanceControl_hyojiJun3"
+    </sql>
+
+
+    <!--テーブルDbT7070ConfigMaintenanceControlの項目をDbT7070ConfigMaintenanceControlEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7070ConfigMaintenanceControlEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7070ConfigMaintenanceControlEntity" autoMapping="true">
+        <id property="subGyomuCode" column="dbT7070ConfigMaintenanceControl_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
+        <id property="configName" column="dbT7070ConfigMaintenanceControl_configName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7070ConfigMaintenanceControl_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7070ConfigMaintenanceControl_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7070ConfigMaintenanceControl_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7070ConfigMaintenanceControl_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7070ConfigMaintenanceControl_isDeleted" />
+        <result property="updateCount" column="dbT7070ConfigMaintenanceControl_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7070ConfigMaintenanceControl_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7070ConfigMaintenanceControl_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hyojiJun1" column="dbT7070ConfigMaintenanceControl_hyojiJun1" />
+        <result property="hyojiJun2" column="dbT7070ConfigMaintenanceControl_hyojiJun2" />
+        <result property="hyojiJun3" column="dbT7070ConfigMaintenanceControl_hyojiJun3" />
+    </resultMap>
+
+</mapper>

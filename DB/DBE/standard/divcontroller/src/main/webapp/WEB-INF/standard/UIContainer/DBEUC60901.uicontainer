@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC60901",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "認定調査委託料入力",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE6090001",
+     "toLayoutTitle": "認定調査委託料入力",
+     "toState": "初期表示"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE6090001",
+     "layoutTitle": "認定調査委託料入力",
+     "eventName": "完了状態",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

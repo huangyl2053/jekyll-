@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC04900",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "高額介護サービス費支給決定通知書作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0490011",
+     "toLayoutTitle": "高額介護サービス費支給決定通知書作成",
+     "toState": ""
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0490011",
+     "layoutTitle": "高額介護サービス費支給決定通知書作成",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

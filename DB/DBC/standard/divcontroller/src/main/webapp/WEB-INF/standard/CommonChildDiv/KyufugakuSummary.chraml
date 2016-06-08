@@ -1,0 +1,1770 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBC&quot;,&quot;controlName&quot;:&quot;KyufugakuSummary&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;btnLimitOverCheck_displayNone&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;btnRireki_displayNone&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;btnRireki_text&quot;,&quot;editType&quot;:0}]},&quot;btnLimitOverCheck_displayNone&quot;:false,&quot;btnRireki_displayNone&quot;:false,&quot;btnRireki_text&quot;:&quot;過去の住宅改修費を確認する&quot;}" data-is-composite-control="true" data-control-name="DBC.KyufugakuSummary"><div title="" class="UzPanel FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginRight-XS marginTop-Default marginBottom-Default UzCommonChildDivPanel UzCompositeChild" id="KyufugakuSummary" style="width: auto; margin-top: 0px; margin-bottom: 0px; margin-left: 0em;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KyufugakuSummary&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;880px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;KyufugakuSummary&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KyufugakuSummary&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KyufugakuSummary_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="KyufugakuSummary_panel_body_area"><div title="" class="UzTablePanel FloatLeft JSControl controlMargin-M Width-XS marginLeft-XS marginRight-XS UzCompositeChild" id="tblSeikyuSummary" data-control-type="TablePanel" data-obj="{&quot;fieldName&quot;:&quot;tblSeikyuSummary&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TablePanel&quot;,&quot;selectControlID&quot;:&quot;tblSeikyuSummary&quot;,&quot;html&quot;:&quot;<table cellspacing=\&quot;0\&quot; cellpadding=\&quot;0\&quot;>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td><td id='R1C5'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C6'></td></tr>\n  </tbody>\n</table>\n&quot;}"><div id="tempDiv"></div><table cellspacing="0" cellpadding="0">  <tbody>    <tr><td id="R1C1" data-connect-tablepanel="tblSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="cel11" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;cel11&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;cel11&quot;,&quot;connectTd&quot;:&quot;R1C1&quot;}" data-connect-tablepanel="tblSeikyuSummary" data-connect-td="R1C1"><span title="" class="UzLabel word-wrap-break-word JSControl controlMargin-M Width-XS ClearFloat FloatCenter text-align-center UzCompositeChild" id="lblSummary" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblSummary&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;displayNone&quot;:true,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;lblSummary&quot;,&quot;text&quot;:&quot;集計&quot;,&quot;align&quot;:1}"><span>集計</span></span></div></td><td id="R1C2" data-connect-tablepanel="tblSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="cel12" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;cel12&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;cel12&quot;,&quot;connectTd&quot;:&quot;R1C2&quot;}" data-connect-tablepanel="tblSeikyuSummary" data-connect-td="R1C2"><span title="" class="UzLabel word-wrap-break-word JSControl controlMargin-M ClearFloat FloatCenter text-align-center UzCompositeChild" id="lblHiyoTotal" style="width: 85px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblHiyoTotal&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;85px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;lblHiyoTotal&quot;,&quot;text&quot;:&quot;費用額合計&quot;,&quot;align&quot;:1}"><span>費用額合計</span></span></div></td><td id="R1C3" data-connect-tablepanel="tblSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="cel13" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;cel13&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;cel13&quot;,&quot;connectTd&quot;:&quot;R1C3&quot;}" data-connect-tablepanel="tblSeikyuSummary" data-connect-td="R1C3"><span title="" class="UzLabel word-wrap-break-word JSControl controlMargin-M ClearFloat FloatCenter text-align-center UzCompositeChild" id="lblHokenTaishoHiyo" style="width: 115px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblHokenTaishoHiyo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;115px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;lblHokenTaishoHiyo&quot;,&quot;text&quot;:&quot;保険対象費用額&quot;,&quot;align&quot;:1}"><span>保険対象費用額</span></span></div></td><td id="R1C4" data-connect-tablepanel="tblSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="cel14" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;cel14&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;cel14&quot;,&quot;connectTd&quot;:&quot;R1C4&quot;}" data-connect-tablepanel="tblSeikyuSummary" data-connect-td="R1C4"><span title="" class="UzLabel word-wrap-break-word JSControl controlMargin-M ClearFloat FloatCenter text-align-center UzCompositeChild" id="lblHokenKyufuAmount" style="width: 85px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblHokenKyufuAmount&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;85px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;lblHokenKyufuAmount&quot;,&quot;text&quot;:&quot;保険給付額&quot;,&quot;align&quot;:1}"><span>保険給付額</span></span></div></td><td id="R1C5" data-connect-tablepanel="tblSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="cel15" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;cel15&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;cel15&quot;,&quot;connectTd&quot;:&quot;R1C5&quot;}" data-connect-tablepanel="tblSeikyuSummary" data-connect-td="R1C5"><span title="" class="UzLabel word-wrap-break-word JSControl controlMargin-M ClearFloat FloatCenter text-align-center UzCompositeChild" id="lblRiyoshaFutanAmount" style="width: 100px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblRiyoshaFutanAmount&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;100px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;lblRiyoshaFutanAmount&quot;,&quot;text&quot;:&quot;利用者負担額&quot;,&quot;align&quot;:1}"><span>利用者負担額</span></span></div></td></tr>    <tr><td id="R2C1" data-connect-tablepanel="tblSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="cel21" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;cel21&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;cel21&quot;,&quot;connectTd&quot;:&quot;R2C1&quot;}" data-connect-tablepanel="tblSeikyuSummary" data-connect-td="R2C1"><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS text-align-right UzCompositeChild" id="lblSummaryMae" style="width: 145px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblSummaryMae&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;145px&quot;,&quot;selectControlID&quot;:&quot;lblSummaryMae&quot;,&quot;text&quot;:&quot;前回までの支払結果&quot;}"><span>前回までの支払結果</span></span></div></td><td id="R2C2" data-connect-tablepanel="tblSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="cel22" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;cel22&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;cel22&quot;,&quot;connectTd&quot;:&quot;R2C2&quot;}" data-connect-tablepanel="tblSeikyuSummary" data-connect-td="R2C2"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl controlMargin-M ClearFloat FloatCenter UzCompositeChild" id="txtHiyoTotalMae" style="width: 91px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtHiyoTotalMae&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;70px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;txtHiyoTotalMae_core&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;90px&quot;,&quot;labelRWidth&quot;:&quot;15px&quot;,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;,&quot;isComma&quot;:true}"><input class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input" id="txtHiyoTotalMae_core" style="width: 70px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></td><td id="R2C3" data-connect-tablepanel="tblSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="cel23" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;cel23&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;cel23&quot;,&quot;connectTd&quot;:&quot;R2C3&quot;}" data-connect-tablepanel="tblSeikyuSummary" data-connect-td="R2C3"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl controlMargin-M ClearFloat FloatCenter UzCompositeChild" id="txtHokenTaishoHiyoMae" style="width: 121px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtHokenTaishoHiyoMae&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;70px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;txtHokenTaishoHiyoMae_core&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;90px&quot;,&quot;labelRWidth&quot;:&quot;15px&quot;,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;,&quot;isComma&quot;:true}"><input class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input" id="txtHokenTaishoHiyoMae_core" style="width: 70px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></td><td id="R2C4" data-connect-tablepanel="tblSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="cel24" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;cel24&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;cel24&quot;,&quot;connectTd&quot;:&quot;R2C4&quot;}" data-connect-tablepanel="tblSeikyuSummary" data-connect-td="R2C4"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtHokenKyufuAmountMae" style="width: 75px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtHokenKyufuAmountMae&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;70px&quot;,&quot;selectControlID&quot;:&quot;txtHokenKyufuAmountMae_core&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;90px&quot;,&quot;labelRWidth&quot;:&quot;15px&quot;,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;,&quot;isComma&quot;:true}"><input class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input" id="txtHokenKyufuAmountMae_core" style="width: 70px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></td><td id="R2C5" data-connect-tablepanel="tblSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="cel25" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;cel25&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;cel25&quot;,&quot;connectTd&quot;:&quot;R2C5&quot;}" data-connect-tablepanel="tblSeikyuSummary" data-connect-td="R2C5"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl controlMargin-M ClearFloat FloatCenter UzCompositeChild" id="txtRiyoshaFutanAmountMae" style="width: 106px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtRiyoshaFutanAmountMae&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;70px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;txtRiyoshaFutanAmountMae_core&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;90px&quot;,&quot;labelRWidth&quot;:&quot;15px&quot;,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;,&quot;isComma&quot;:true}"><input class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input" id="txtRiyoshaFutanAmountMae_core" style="width: 70px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></td><td id="R2C6" data-connect-tablepanel="tblSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="cell26" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;cell26&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;cell26&quot;,&quot;connectTd&quot;:&quot;R2C6&quot;}" data-connect-tablepanel="tblSeikyuSummary" data-connect-td="R2C6"><button title="" class="UzButtonDialog FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS Width-M heightTextBoxMatchesFlag heightTextBoxMatches UzCompositeChild" id="btnRireki" type="button" data-control-type="ButtonDialog" data-obj="{&quot;fieldName&quot;:&quot;btnRireki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;ButtonDialog&quot;,&quot;width&quot;:&quot;M&quot;,&quot;selectControlID&quot;:&quot;btnRireki&quot;,&quot;text&quot;:&quot;過去の住宅改修費を確認する&quot;,&quot;heightTextBoxMatches&quot;:true,&quot;displayChildDivName&quot;:&quot;DBC.JutakuKaishuhiRireki&quot;,&quot;dataPassing&quot;:[],&quot;onBeforeOpenDialog&quot;:&quot;onClick_btnRireki&quot;}"><span>過去の住宅改修費を確認する</span></button></div></td></tr>    <tr><td id="R3C1" data-connect-tablepanel="tblSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="cel31" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;cel31&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;cel31&quot;,&quot;connectTd&quot;:&quot;R3C1&quot;}" data-connect-tablepanel="tblSeikyuSummary" data-connect-td="R3C1"><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS text-align-right UzCompositeChild" id="lblSummaryNow" style="width: 145px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblSummaryNow&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;145px&quot;,&quot;selectControlID&quot;:&quot;lblSummaryNow&quot;,&quot;text&quot;:&quot;今回の支払状況&quot;}"><span>今回の支払状況</span></span></div></td><td id="R3C2" data-connect-tablepanel="tblSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="cel32" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;cel32&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;cel32&quot;,&quot;connectTd&quot;:&quot;R3C2&quot;}" data-connect-tablepanel="tblSeikyuSummary" data-connect-td="R3C2"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl controlMargin-M ClearFloat FloatCenter UzCompositeChild" id="txtHiyoTotalNow" style="width: 88px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtHiyoTotalNow&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;70px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;txtHiyoTotalNow_core&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;90px&quot;,&quot;labelRWidth&quot;:&quot;15px&quot;,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;,&quot;isComma&quot;:true}"><input class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input" id="txtHiyoTotalNow_core" style="width: 70px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></td><td id="R3C3" data-connect-tablepanel="tblSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="cel33" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;cel33&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;cel33&quot;,&quot;connectTd&quot;:&quot;R3C3&quot;}" data-connect-tablepanel="tblSeikyuSummary" data-connect-td="R3C3"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl controlMargin-M ClearFloat FloatCenter UzCompositeChild" id="txtHokenTaishoHiyoNow" style="width: 118px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtHokenTaishoHiyoNow&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;70px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;txtHokenTaishoHiyoNow_core&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;90px&quot;,&quot;labelRWidth&quot;:&quot;15px&quot;,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;,&quot;isComma&quot;:true}"><input class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input" id="txtHokenTaishoHiyoNow_core" style="width: 70px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></td><td id="R3C4" data-connect-tablepanel="tblSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="cel34" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;cel34&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;cel34&quot;,&quot;connectTd&quot;:&quot;R3C4&quot;}" data-connect-tablepanel="tblSeikyuSummary" data-connect-td="R3C4"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtHokenKyufuAmountNow" style="width: 75px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtHokenKyufuAmountNow&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;70px&quot;,&quot;selectControlID&quot;:&quot;txtHokenKyufuAmountNow_core&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;90px&quot;,&quot;labelRWidth&quot;:&quot;15px&quot;,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;,&quot;isComma&quot;:true}"><input class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input" id="txtHokenKyufuAmountNow_core" style="width: 70px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></td><td id="R3C5" data-connect-tablepanel="tblSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="cel35" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;cel35&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;cel35&quot;,&quot;connectTd&quot;:&quot;R3C5&quot;}" data-connect-tablepanel="tblSeikyuSummary" data-connect-td="R3C5"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl controlMargin-M ClearFloat FloatCenter UzCompositeChild" id="txtRiyoshaFutanAmountNow" style="width: 103px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtRiyoshaFutanAmountNow&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;70px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;txtRiyoshaFutanAmountNow_core&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;90px&quot;,&quot;labelRWidth&quot;:&quot;15px&quot;,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;,&quot;isComma&quot;:true}"><input class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input" id="txtRiyoshaFutanAmountNow_core" style="width: 70px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></td><td id="R3C6" data-connect-tablepanel="tblSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="cel36" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;cel36&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;cel36&quot;,&quot;connectTd&quot;:&quot;R3C6&quot;}" data-connect-tablepanel="tblSeikyuSummary" data-connect-td="R3C6"><button title="" class="UzButton FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS Width-M heightTextBoxMatchesFlag heightTextBoxMatches UzCompositeChild" id="btnLimitOverCheck" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnLimitOverCheck&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;M&quot;,&quot;selectControlID&quot;:&quot;btnLimitOverCheck&quot;,&quot;onClick&quot;:&quot;onClick_btnCheckGendogaku&quot;,&quot;text&quot;:&quot;限度額をチェックする&quot;,&quot;heightTextBoxMatches&quot;:true}"><span>限度額をチェックする</span></button></div></td></tr>  </tbody></table></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBC;
+(function (DBC) {
+    (function (KyufugakuSummary) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnCheckGendogaku", {
+                get: function () {
+                    return "onClick_btnCheckGendogaku";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnRireki", {
+                get: function () {
+                    return "onClick_btnRireki";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        KyufugakuSummary.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "KyufugakuSummary";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.KyufugakuSummary = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.tblSeikyuSummary = function () {
+                return new UZA.TablePanel(this.convFiledName("tblSeikyuSummary"));
+            };
+
+            Controls.prototype.cel11 = function () {
+                return new UZA.TableCell(this.convFiledName("cel11"));
+            };
+
+            Controls.prototype.lblSummary = function () {
+                return new UZA.Label(this.convFiledName("lblSummary"));
+            };
+
+            Controls.prototype.cel12 = function () {
+                return new UZA.TableCell(this.convFiledName("cel12"));
+            };
+
+            Controls.prototype.lblHiyoTotal = function () {
+                return new UZA.Label(this.convFiledName("lblHiyoTotal"));
+            };
+
+            Controls.prototype.cel13 = function () {
+                return new UZA.TableCell(this.convFiledName("cel13"));
+            };
+
+            Controls.prototype.lblHokenTaishoHiyo = function () {
+                return new UZA.Label(this.convFiledName("lblHokenTaishoHiyo"));
+            };
+
+            Controls.prototype.cel21 = function () {
+                return new UZA.TableCell(this.convFiledName("cel21"));
+            };
+
+            Controls.prototype.lblSummaryMae = function () {
+                return new UZA.Label(this.convFiledName("lblSummaryMae"));
+            };
+
+            Controls.prototype.cel22 = function () {
+                return new UZA.TableCell(this.convFiledName("cel22"));
+            };
+
+            Controls.prototype.txtHiyoTotalMae = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtHiyoTotalMae"));
+            };
+
+            Controls.prototype.cel23 = function () {
+                return new UZA.TableCell(this.convFiledName("cel23"));
+            };
+
+            Controls.prototype.txtHokenTaishoHiyoMae = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtHokenTaishoHiyoMae"));
+            };
+
+            Controls.prototype.cel31 = function () {
+                return new UZA.TableCell(this.convFiledName("cel31"));
+            };
+
+            Controls.prototype.lblSummaryNow = function () {
+                return new UZA.Label(this.convFiledName("lblSummaryNow"));
+            };
+
+            Controls.prototype.cel32 = function () {
+                return new UZA.TableCell(this.convFiledName("cel32"));
+            };
+
+            Controls.prototype.txtHiyoTotalNow = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtHiyoTotalNow"));
+            };
+
+            Controls.prototype.cel33 = function () {
+                return new UZA.TableCell(this.convFiledName("cel33"));
+            };
+
+            Controls.prototype.txtHokenTaishoHiyoNow = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtHokenTaishoHiyoNow"));
+            };
+
+            Controls.prototype.cel14 = function () {
+                return new UZA.TableCell(this.convFiledName("cel14"));
+            };
+
+            Controls.prototype.lblHokenKyufuAmount = function () {
+                return new UZA.Label(this.convFiledName("lblHokenKyufuAmount"));
+            };
+
+            Controls.prototype.cel15 = function () {
+                return new UZA.TableCell(this.convFiledName("cel15"));
+            };
+
+            Controls.prototype.lblRiyoshaFutanAmount = function () {
+                return new UZA.Label(this.convFiledName("lblRiyoshaFutanAmount"));
+            };
+
+            Controls.prototype.cel24 = function () {
+                return new UZA.TableCell(this.convFiledName("cel24"));
+            };
+
+            Controls.prototype.txtHokenKyufuAmountMae = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtHokenKyufuAmountMae"));
+            };
+
+            Controls.prototype.cel25 = function () {
+                return new UZA.TableCell(this.convFiledName("cel25"));
+            };
+
+            Controls.prototype.txtRiyoshaFutanAmountMae = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtRiyoshaFutanAmountMae"));
+            };
+
+            Controls.prototype.cel34 = function () {
+                return new UZA.TableCell(this.convFiledName("cel34"));
+            };
+
+            Controls.prototype.txtHokenKyufuAmountNow = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtHokenKyufuAmountNow"));
+            };
+
+            Controls.prototype.cel35 = function () {
+                return new UZA.TableCell(this.convFiledName("cel35"));
+            };
+
+            Controls.prototype.txtRiyoshaFutanAmountNow = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtRiyoshaFutanAmountNow"));
+            };
+
+            Controls.prototype.cel36 = function () {
+                return new UZA.TableCell(this.convFiledName("cel36"));
+            };
+
+            Controls.prototype.btnLimitOverCheck = function () {
+                return new UZA.Button(this.convFiledName("btnLimitOverCheck"));
+            };
+
+            Controls.prototype.cell26 = function () {
+                return new UZA.TableCell(this.convFiledName("cell26"));
+            };
+
+            Controls.prototype.btnRireki = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnRireki"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        KyufugakuSummary.Controls = Controls;
+    })(DBC.KyufugakuSummary || (DBC.KyufugakuSummary = {}));
+    var KyufugakuSummary = DBC.KyufugakuSummary;
+
+    var KyufugakuSummary_Design = (function (_super) {
+        __extends(KyufugakuSummary_Design, _super);
+        function KyufugakuSummary_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, KyufugakuSummary_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(KyufugakuSummary_Design.prototype, "btnLimitOverCheck_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[15]["fieldName"] + "_" + this.layout.items[0].items[0].items[15].items[0]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[15]["fieldName"] + "_" + this.layout.items[0].items[0].items[15].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[15]["fieldName"] + "_" + this.layout.items[0].items[0].items[15].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[15]["fieldName"] + "_" + this.layout.items[0].items[0].items[15].items[0]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[0].items[15].items[0]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(KyufugakuSummary_Design.prototype, "btnRireki_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[16]["fieldName"] + "_" + this.layout.items[0].items[0].items[16].items[0]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[16]["fieldName"] + "_" + this.layout.items[0].items[0].items[16].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[16]["fieldName"] + "_" + this.layout.items[0].items[0].items[16].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[16]["fieldName"] + "_" + this.layout.items[0].items[0].items[16].items[0]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[0].items[16].items[0]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(KyufugakuSummary_Design.prototype, "btnRireki_text", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[16]["fieldName"] + "_" + this.layout.items[0].items[0].items[16].items[0]["fieldName"])["text"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[16]["fieldName"] + "_" + this.layout.items[0].items[0].items[16].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[16]["fieldName"] + "_" + this.layout.items[0].items[0].items[16].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[16]["fieldName"] + "_" + this.layout.items[0].items[0].items[16].items[0]["fieldName"])["text"] = value;
+                } else {
+                    this.layout.items[0].items[0].items[16].items[0]["text"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        KyufugakuSummary_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("btnLimitOverCheck_displayNone");
+            Uz.JSControlUtil.registProperty("btnRireki_displayNone");
+            Uz.JSControlUtil.registProperty("btnRireki_text");
+        };
+
+        KyufugakuSummary_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["btnLimitOverCheck_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[15]["fieldName"] + "_" + this.layout.items[0].items[0].items[15].items[0]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["btnRireki_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[16]["fieldName"] + "_" + this.layout.items[0].items[0].items[16].items[0]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["btnRireki_text"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[16]["fieldName"] + "_" + this.layout.items[0].items[0].items[16].items[0]["fieldName"]).getEditablePropertyInfo()["text"];
+
+            return editablePropertyInfo;
+        };
+        KyufugakuSummary_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "KyufugakuSummary",
+                    "items": [
+                        {
+                            "fieldName": "tblSeikyuSummary",
+                            "items": [
+                                {
+                                    "fieldName": "cel11",
+                                    "items": [
+                                        {
+                                            "fieldName": "lblSummary",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "XS",
+                                            "visible": true,
+                                            "displayNone": true,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "lblSummary",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "集計",
+                                            "decorationClass": "",
+                                            "align": 1
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
+                                    "selectControlID": "cel11",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R1C1"
+                                },
+                                {
+                                    "fieldName": "cel12",
+                                    "items": [
+                                        {
+                                            "fieldName": "lblHiyoTotal",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "85px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "lblHiyoTotal",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "費用額合計",
+                                            "decorationClass": "",
+                                            "align": 1
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
+                                    "selectControlID": "cel12",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R1C2"
+                                },
+                                {
+                                    "fieldName": "cel13",
+                                    "items": [
+                                        {
+                                            "fieldName": "lblHokenTaishoHiyo",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "115px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "lblHokenTaishoHiyo",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "保険対象費用額",
+                                            "decorationClass": "",
+                                            "align": 1
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
+                                    "selectControlID": "cel13",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R1C3"
+                                },
+                                {
+                                    "fieldName": "cel21",
+                                    "items": [
+                                        {
+                                            "fieldName": "lblSummaryMae",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "145px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "lblSummaryMae",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "前回までの支払結果",
+                                            "decorationClass": "",
+                                            "align": 2
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
+                                    "selectControlID": "cel21",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R2C1"
+                                },
+                                {
+                                    "fieldName": "cel22",
+                                    "items": [
+                                        {
+                                            "fieldName": "txtHiyoTotalMae",
+                                            "items": [],
+                                            "controlType": "TextBoxNum",
+                                            "width": "70px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtHiyoTotalMae_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": false,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "labelLText": "",
+                                            "labelRText": "",
+                                            "labelLWidth": "90px",
+                                            "labelRWidth": "15px",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "value": "",
+                                            "decorationClass": "",
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 2,
+                                            "textKind": 2,
+                                            "isComboBox": false,
+                                            "suggest": [],
+                                            "maxValue": 1.7976931348623157e+308,
+                                            "minValue": 0,
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
+                                    "selectControlID": "cel22",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R2C2"
+                                },
+                                {
+                                    "fieldName": "cel23",
+                                    "items": [
+                                        {
+                                            "fieldName": "txtHokenTaishoHiyoMae",
+                                            "items": [],
+                                            "controlType": "TextBoxNum",
+                                            "width": "70px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtHokenTaishoHiyoMae_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": false,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "labelLText": "",
+                                            "labelRText": "",
+                                            "labelLWidth": "90px",
+                                            "labelRWidth": "15px",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "value": "",
+                                            "decorationClass": "",
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 2,
+                                            "textKind": 2,
+                                            "isComboBox": false,
+                                            "suggest": [],
+                                            "maxValue": 1.7976931348623157e+308,
+                                            "minValue": 0,
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
+                                    "selectControlID": "cel23",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R2C3"
+                                },
+                                {
+                                    "fieldName": "cel31",
+                                    "items": [
+                                        {
+                                            "fieldName": "lblSummaryNow",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "145px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "lblSummaryNow",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "今回の支払状況",
+                                            "decorationClass": "",
+                                            "align": 2
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
+                                    "selectControlID": "cel31",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R3C1"
+                                },
+                                {
+                                    "fieldName": "cel32",
+                                    "items": [
+                                        {
+                                            "fieldName": "txtHiyoTotalNow",
+                                            "items": [],
+                                            "controlType": "TextBoxNum",
+                                            "width": "70px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtHiyoTotalNow_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": false,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "labelLText": "",
+                                            "labelRText": "",
+                                            "labelLWidth": "90px",
+                                            "labelRWidth": "15px",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "value": "",
+                                            "decorationClass": "",
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 2,
+                                            "textKind": 2,
+                                            "isComboBox": false,
+                                            "suggest": [],
+                                            "maxValue": 1.7976931348623157e+308,
+                                            "minValue": 0,
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
+                                    "selectControlID": "cel32",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R3C2"
+                                },
+                                {
+                                    "fieldName": "cel33",
+                                    "items": [
+                                        {
+                                            "fieldName": "txtHokenTaishoHiyoNow",
+                                            "items": [],
+                                            "controlType": "TextBoxNum",
+                                            "width": "70px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtHokenTaishoHiyoNow_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": false,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "labelLText": "",
+                                            "labelRText": "",
+                                            "labelLWidth": "90px",
+                                            "labelRWidth": "15px",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "value": "",
+                                            "decorationClass": "",
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 2,
+                                            "textKind": 2,
+                                            "isComboBox": false,
+                                            "suggest": [],
+                                            "maxValue": 1.7976931348623157e+308,
+                                            "minValue": 0,
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
+                                    "selectControlID": "cel33",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R3C3"
+                                },
+                                {
+                                    "fieldName": "cel14",
+                                    "items": [
+                                        {
+                                            "fieldName": "lblHokenKyufuAmount",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "85px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "lblHokenKyufuAmount",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "保険給付額",
+                                            "decorationClass": "",
+                                            "align": 1
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
+                                    "selectControlID": "cel14",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R1C4"
+                                },
+                                {
+                                    "fieldName": "cel15",
+                                    "items": [
+                                        {
+                                            "fieldName": "lblRiyoshaFutanAmount",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "100px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "lblRiyoshaFutanAmount",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "利用者負担額",
+                                            "decorationClass": "",
+                                            "align": 1
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
+                                    "selectControlID": "cel15",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R1C5"
+                                },
+                                {
+                                    "fieldName": "cel24",
+                                    "items": [
+                                        {
+                                            "fieldName": "txtHokenKyufuAmountMae",
+                                            "items": [],
+                                            "controlType": "TextBoxNum",
+                                            "width": "70px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtHokenKyufuAmountMae_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": false,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "labelLText": "",
+                                            "labelRText": "",
+                                            "labelLWidth": "90px",
+                                            "labelRWidth": "15px",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "value": "",
+                                            "decorationClass": "",
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 2,
+                                            "textKind": 2,
+                                            "isComboBox": false,
+                                            "suggest": [],
+                                            "maxValue": 1.7976931348623157e+308,
+                                            "minValue": 0,
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
+                                    "selectControlID": "cel24",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R2C4"
+                                },
+                                {
+                                    "fieldName": "cel25",
+                                    "items": [
+                                        {
+                                            "fieldName": "txtRiyoshaFutanAmountMae",
+                                            "items": [],
+                                            "controlType": "TextBoxNum",
+                                            "width": "70px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtRiyoshaFutanAmountMae_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": false,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "labelLText": "",
+                                            "labelRText": "",
+                                            "labelLWidth": "90px",
+                                            "labelRWidth": "15px",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "value": "",
+                                            "decorationClass": "",
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 2,
+                                            "textKind": 2,
+                                            "isComboBox": false,
+                                            "suggest": [],
+                                            "maxValue": 1.7976931348623157e+308,
+                                            "minValue": 0,
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
+                                    "selectControlID": "cel25",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R2C5"
+                                },
+                                {
+                                    "fieldName": "cel34",
+                                    "items": [
+                                        {
+                                            "fieldName": "txtHokenKyufuAmountNow",
+                                            "items": [],
+                                            "controlType": "TextBoxNum",
+                                            "width": "70px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtHokenKyufuAmountNow_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": false,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "labelLText": "",
+                                            "labelRText": "",
+                                            "labelLWidth": "90px",
+                                            "labelRWidth": "15px",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "value": "",
+                                            "decorationClass": "",
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 2,
+                                            "textKind": 2,
+                                            "isComboBox": false,
+                                            "suggest": [],
+                                            "maxValue": 1.7976931348623157e+308,
+                                            "minValue": 0,
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
+                                    "selectControlID": "cel34",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R3C4"
+                                },
+                                {
+                                    "fieldName": "cel35",
+                                    "items": [
+                                        {
+                                            "fieldName": "txtRiyoshaFutanAmountNow",
+                                            "items": [],
+                                            "controlType": "TextBoxNum",
+                                            "width": "70px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtRiyoshaFutanAmountNow_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": false,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "labelLText": "",
+                                            "labelRText": "",
+                                            "labelLWidth": "90px",
+                                            "labelRWidth": "15px",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "value": "",
+                                            "decorationClass": "",
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 2,
+                                            "textKind": 2,
+                                            "isComboBox": false,
+                                            "suggest": [],
+                                            "maxValue": 1.7976931348623157e+308,
+                                            "minValue": 0,
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
+                                    "selectControlID": "cel35",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R3C5"
+                                },
+                                {
+                                    "fieldName": "cel36",
+                                    "items": [
+                                        {
+                                            "fieldName": "btnLimitOverCheck",
+                                            "items": [],
+                                            "controlType": "Button",
+                                            "width": "M",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "btnLimitOverCheck",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "text": "限度額をチェックする",
+                                            "onClick": "onClick_btnCheckGendogaku",
+                                            "icon": 0,
+                                            "onBeforeClick": "",
+                                            "onAfterClick": "",
+                                            "appearance": 0,
+                                            "imageFileUrl": "",
+                                            "imageWidth": "",
+                                            "imageHeight": "",
+                                            "heightTextBoxMatches": true
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
+                                    "selectControlID": "cel36",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R3C6"
+                                },
+                                {
+                                    "fieldName": "cell26",
+                                    "items": [
+                                        {
+                                            "fieldName": "btnRireki",
+                                            "items": [],
+                                            "controlType": "ButtonDialog",
+                                            "width": "M",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "btnRireki",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "text": "過去の住宅改修費を確認する",
+                                            "onClick": "",
+                                            "icon": 0,
+                                            "onBeforeClick": "",
+                                            "onAfterClick": "",
+                                            "appearance": 0,
+                                            "imageFileUrl": "",
+                                            "imageWidth": "",
+                                            "imageHeight": "",
+                                            "heightTextBoxMatches": true,
+                                            "displayChildDivName": "DBC.JutakuKaishuhiRireki",
+                                            "dataPassing": [],
+                                            "visibleCloseButton": true,
+                                            "onOkClose": "",
+                                            "onBeforeOpenDialog": "onClick_btnRireki"
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
+                                    "selectControlID": "cell26",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R2C6"
+                                }
+                            ],
+                            "controlType": "TablePanel",
+                            "width": "XS",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "tblSeikyuSummary",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "html": "<table cellspacing=\"0\" cellpadding=\"0\">\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td><td id='R1C5'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C6'></td></tr>\n  </tbody>\n</table>\n"
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "880px",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0em",
+                    "marginRight": "XS",
+                    "selectControlID": "KyufugakuSummary",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "KyufugakuSummary"
+                        }
+                    ],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": true,
+                    "backgroundColor": 0,
+                    "widthAuto": true,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "canPost": true
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0em",
+            "marginRight": "0em",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBC",
+            "controlName": "KyufugakuSummary",
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "btnLimitOverCheck",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "btnLimitOverCheck_displayNone"
+                },
+                {
+                    "publicChildFieldName": "btnRireki",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "btnRireki_displayNone"
+                },
+                {
+                    "publicChildFieldName": "btnRireki",
+                    "publicChildProperty": "text",
+                    "newPropertyName": "btnRireki_text"
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": ""
+        };
+        return KyufugakuSummary_Design;
+    })(Uz.CommonChildDiv);
+    DBC.KyufugakuSummary_Design = KyufugakuSummary_Design;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (KyufugakuSummary) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KyufugakuSummary.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KyufugakuSummary.ModeController = ModeController;
+    })(DBC.KyufugakuSummary || (DBC.KyufugakuSummary = {}));
+    var KyufugakuSummary = DBC.KyufugakuSummary;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (KyufugakuSummary) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new KyufugakuSummary.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("btnLimitOverCheck_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("btnRireki_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("btnRireki_text", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getbtnLimitOverCheck_displayNone = function () {
+                return this.controls.btnLimitOverCheck().displayNone;
+            };
+
+            PublicProperties.prototype.setbtnLimitOverCheck_displayNone = function (value) {
+                this.controls.btnLimitOverCheck().displayNone = value;
+            };
+
+            PublicProperties.prototype.getbtnRireki_displayNone = function () {
+                return this.controls.btnRireki().displayNone;
+            };
+
+            PublicProperties.prototype.setbtnRireki_displayNone = function (value) {
+                this.controls.btnRireki().displayNone = value;
+            };
+
+            PublicProperties.prototype.getbtnRireki_text = function () {
+                return this.controls.btnRireki().text;
+            };
+
+            PublicProperties.prototype.setbtnRireki_text = function (value) {
+                this.controls.btnRireki().text = value;
+            };
+            return PublicProperties;
+        })();
+        KyufugakuSummary.PublicProperties = PublicProperties;
+    })(DBC.KyufugakuSummary || (DBC.KyufugakuSummary = {}));
+    var KyufugakuSummary = DBC.KyufugakuSummary;
+})(DBC || (DBC = {}));
+</script>
+  <script class="RamlConvert" type="text/javascript">
+var DBC= DBC? DBC: {};
+DBC['KYUFUGAKUSUMMARY'] = {};
+DBC['KYUFUGAKUSUMMARY'].KyufugakuSummaryRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KyufugakuSummary').getProperty();parameter0.tblSeikyuSummary = Uz.JSControlUtil.getJSControl(parentFieldName + '_tblSeikyuSummary').getProperty();parameter0.tblSeikyuSummary.cel11 = Uz.JSControlUtil.getJSControl(parentFieldName + '_cel11').getProperty();parameter0.tblSeikyuSummary.cel11.lblSummary = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblSummary').getProperty();parameter0.tblSeikyuSummary.cel12 = Uz.JSControlUtil.getJSControl(parentFieldName + '_cel12').getProperty();parameter0.tblSeikyuSummary.cel12.lblHiyoTotal = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblHiyoTotal').getProperty();parameter0.tblSeikyuSummary.cel13 = Uz.JSControlUtil.getJSControl(parentFieldName + '_cel13').getProperty();parameter0.tblSeikyuSummary.cel13.lblHokenTaishoHiyo = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblHokenTaishoHiyo').getProperty();parameter0.tblSeikyuSummary.cel14 = Uz.JSControlUtil.getJSControl(parentFieldName + '_cel14').getProperty();parameter0.tblSeikyuSummary.cel14.lblHokenKyufuAmount = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblHokenKyufuAmount').getProperty();parameter0.tblSeikyuSummary.cel15 = Uz.JSControlUtil.getJSControl(parentFieldName + '_cel15').getProperty();parameter0.tblSeikyuSummary.cel15.lblRiyoshaFutanAmount = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblRiyoshaFutanAmount').getProperty();parameter0.tblSeikyuSummary.cel21 = Uz.JSControlUtil.getJSControl(parentFieldName + '_cel21').getProperty();parameter0.tblSeikyuSummary.cel21.lblSummaryMae = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblSummaryMae').getProperty();parameter0.tblSeikyuSummary.cel22 = Uz.JSControlUtil.getJSControl(parentFieldName + '_cel22').getProperty();parameter0.tblSeikyuSummary.cel22.txtHiyoTotalMae = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHiyoTotalMae').getProperty();parameter0.tblSeikyuSummary.cel23 = Uz.JSControlUtil.getJSControl(parentFieldName + '_cel23').getProperty();parameter0.tblSeikyuSummary.cel23.txtHokenTaishoHiyoMae = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHokenTaishoHiyoMae').getProperty();parameter0.tblSeikyuSummary.cel24 = Uz.JSControlUtil.getJSControl(parentFieldName + '_cel24').getProperty();parameter0.tblSeikyuSummary.cel24.txtHokenKyufuAmountMae = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHokenKyufuAmountMae').getProperty();parameter0.tblSeikyuSummary.cel25 = Uz.JSControlUtil.getJSControl(parentFieldName + '_cel25').getProperty();parameter0.tblSeikyuSummary.cel25.txtRiyoshaFutanAmountMae = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtRiyoshaFutanAmountMae').getProperty();parameter0.tblSeikyuSummary.cell26 = Uz.JSControlUtil.getJSControl(parentFieldName + '_cell26').getProperty();parameter0.tblSeikyuSummary.cell26.btnRireki = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnRireki').getProperty();parameter0.tblSeikyuSummary.cel31 = Uz.JSControlUtil.getJSControl(parentFieldName + '_cel31').getProperty();parameter0.tblSeikyuSummary.cel31.lblSummaryNow = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblSummaryNow').getProperty();parameter0.tblSeikyuSummary.cel32 = Uz.JSControlUtil.getJSControl(parentFieldName + '_cel32').getProperty();parameter0.tblSeikyuSummary.cel32.txtHiyoTotalNow = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHiyoTotalNow').getProperty();parameter0.tblSeikyuSummary.cel33 = Uz.JSControlUtil.getJSControl(parentFieldName + '_cel33').getProperty();parameter0.tblSeikyuSummary.cel33.txtHokenTaishoHiyoNow = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHokenTaishoHiyoNow').getProperty();parameter0.tblSeikyuSummary.cel34 = Uz.JSControlUtil.getJSControl(parentFieldName + '_cel34').getProperty();parameter0.tblSeikyuSummary.cel34.txtHokenKyufuAmountNow = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHokenKyufuAmountNow').getProperty();parameter0.tblSeikyuSummary.cel35 = Uz.JSControlUtil.getJSControl(parentFieldName + '_cel35').getProperty();parameter0.tblSeikyuSummary.cel35.txtRiyoshaFutanAmountNow = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtRiyoshaFutanAmountNow').getProperty();parameter0.tblSeikyuSummary.cel36 = Uz.JSControlUtil.getJSControl(parentFieldName + '_cel36').getProperty();parameter0.tblSeikyuSummary.cel36.btnLimitOverCheck = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnLimitOverCheck').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBC;
+(function (DBC) {
+    (function (KyufugakuSummary) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnRireki = function () {
+                return "onClick_btnRireki";
+            };
+
+            Events.onClick_btnCheckGendogaku = function () {
+                return "onClick_btnCheckGendogaku";
+            };
+            return Events;
+        })();
+        KyufugakuSummary.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KyufugakuSummary";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBC.KyufugakuSummary.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBC.KyufugakuSummary.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KyufugakuSummary = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.tblSeikyuSummary = function () {
+                return new UZA.TablePanel(this.convFiledName("tblSeikyuSummary"));
+            };
+
+            Controls.prototype.cel11 = function () {
+                return new UZA.TableCell(this.convFiledName("cel11"));
+            };
+
+            Controls.prototype.lblSummary = function () {
+                return new UZA.Label(this.convFiledName("lblSummary"));
+            };
+
+            Controls.prototype.cel12 = function () {
+                return new UZA.TableCell(this.convFiledName("cel12"));
+            };
+
+            Controls.prototype.lblHiyoTotal = function () {
+                return new UZA.Label(this.convFiledName("lblHiyoTotal"));
+            };
+
+            Controls.prototype.cel13 = function () {
+                return new UZA.TableCell(this.convFiledName("cel13"));
+            };
+
+            Controls.prototype.lblHokenTaishoHiyo = function () {
+                return new UZA.Label(this.convFiledName("lblHokenTaishoHiyo"));
+            };
+
+            Controls.prototype.cel14 = function () {
+                return new UZA.TableCell(this.convFiledName("cel14"));
+            };
+
+            Controls.prototype.lblHokenKyufuAmount = function () {
+                return new UZA.Label(this.convFiledName("lblHokenKyufuAmount"));
+            };
+
+            Controls.prototype.cel15 = function () {
+                return new UZA.TableCell(this.convFiledName("cel15"));
+            };
+
+            Controls.prototype.lblRiyoshaFutanAmount = function () {
+                return new UZA.Label(this.convFiledName("lblRiyoshaFutanAmount"));
+            };
+
+            Controls.prototype.cel21 = function () {
+                return new UZA.TableCell(this.convFiledName("cel21"));
+            };
+
+            Controls.prototype.lblSummaryMae = function () {
+                return new UZA.Label(this.convFiledName("lblSummaryMae"));
+            };
+
+            Controls.prototype.cel22 = function () {
+                return new UZA.TableCell(this.convFiledName("cel22"));
+            };
+
+            Controls.prototype.txtHiyoTotalMae = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtHiyoTotalMae"));
+            };
+
+            Controls.prototype.cel23 = function () {
+                return new UZA.TableCell(this.convFiledName("cel23"));
+            };
+
+            Controls.prototype.txtHokenTaishoHiyoMae = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtHokenTaishoHiyoMae"));
+            };
+
+            Controls.prototype.cel24 = function () {
+                return new UZA.TableCell(this.convFiledName("cel24"));
+            };
+
+            Controls.prototype.txtHokenKyufuAmountMae = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtHokenKyufuAmountMae"));
+            };
+
+            Controls.prototype.cel25 = function () {
+                return new UZA.TableCell(this.convFiledName("cel25"));
+            };
+
+            Controls.prototype.txtRiyoshaFutanAmountMae = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtRiyoshaFutanAmountMae"));
+            };
+
+            Controls.prototype.cell26 = function () {
+                return new UZA.TableCell(this.convFiledName("cell26"));
+            };
+
+            Controls.prototype.btnRireki = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnRireki"));
+            };
+
+            Controls.prototype.cel31 = function () {
+                return new UZA.TableCell(this.convFiledName("cel31"));
+            };
+
+            Controls.prototype.lblSummaryNow = function () {
+                return new UZA.Label(this.convFiledName("lblSummaryNow"));
+            };
+
+            Controls.prototype.cel32 = function () {
+                return new UZA.TableCell(this.convFiledName("cel32"));
+            };
+
+            Controls.prototype.txtHiyoTotalNow = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtHiyoTotalNow"));
+            };
+
+            Controls.prototype.cel33 = function () {
+                return new UZA.TableCell(this.convFiledName("cel33"));
+            };
+
+            Controls.prototype.txtHokenTaishoHiyoNow = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtHokenTaishoHiyoNow"));
+            };
+
+            Controls.prototype.cel34 = function () {
+                return new UZA.TableCell(this.convFiledName("cel34"));
+            };
+
+            Controls.prototype.txtHokenKyufuAmountNow = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtHokenKyufuAmountNow"));
+            };
+
+            Controls.prototype.cel35 = function () {
+                return new UZA.TableCell(this.convFiledName("cel35"));
+            };
+
+            Controls.prototype.txtRiyoshaFutanAmountNow = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtRiyoshaFutanAmountNow"));
+            };
+
+            Controls.prototype.cel36 = function () {
+                return new UZA.TableCell(this.convFiledName("cel36"));
+            };
+
+            Controls.prototype.btnLimitOverCheck = function () {
+                return new UZA.Button(this.convFiledName("btnLimitOverCheck"));
+            };
+            return Controls;
+        })();
+        KyufugakuSummary.Controls = Controls;
+    })(DBC.KyufugakuSummary || (DBC.KyufugakuSummary = {}));
+    var KyufugakuSummary = DBC.KyufugakuSummary;
+})(DBC || (DBC = {}));
+var DBC;
+(function (DBC) {
+    (function (KyufugakuSummary) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KyufugakuSummary.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KyufugakuSummary.ModeController = ModeController;
+    })(DBC.KyufugakuSummary || (DBC.KyufugakuSummary = {}));
+    var KyufugakuSummary = DBC.KyufugakuSummary;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (KyufugakuSummary) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new KyufugakuSummary.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("btnLimitOverCheck_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("btnRireki_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("btnRireki_text", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getbtnLimitOverCheck_displayNone = function () {
+                return this.controls.btnLimitOverCheck().displayNone;
+            };
+
+            PublicProperties.prototype.setbtnLimitOverCheck_displayNone = function (value) {
+                this.controls.btnLimitOverCheck().displayNone = value;
+            };
+
+            PublicProperties.prototype.getbtnRireki_displayNone = function () {
+                return this.controls.btnRireki().displayNone;
+            };
+
+            PublicProperties.prototype.setbtnRireki_displayNone = function (value) {
+                this.controls.btnRireki().displayNone = value;
+            };
+
+            PublicProperties.prototype.getbtnRireki_text = function () {
+                return this.controls.btnRireki().text;
+            };
+
+            PublicProperties.prototype.setbtnRireki_text = function (value) {
+                this.controls.btnRireki().text = value;
+            };
+            return PublicProperties;
+        })();
+        KyufugakuSummary.PublicProperties = PublicProperties;
+    })(DBC.KyufugakuSummary || (DBC.KyufugakuSummary = {}));
+    var KyufugakuSummary = DBC.KyufugakuSummary;
+})(DBC || (DBC = {}));
+</script></div>

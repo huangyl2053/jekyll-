@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC20202",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "支払方法変更管理リスト",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD2020002",
+     "toLayoutTitle": "支払方法変更管理リスト",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD2020002",
+     "layoutTitle": "支払方法変更管理リスト",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 調定簿作成のマッピング用XMLです。 -->
+<!-- @reamsid_L DBB-0760-030 lishengli -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper">
+
+    <select  id="get特別徴収帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey" fetchSize="500">
+        SELECT
+            koumokuGoukey."hokenryoDankai",
+            koumokuGoukey."yoGetuNinsuuGoukeyi" AS "yoGetuNinsuuGoukeyi",
+            koumokuGoukey."goGetuNinsuuGoukeyi" AS "goGetuNinsuuGoukeyi",
+            koumokuGoukey."rokuGetuNinsuuGoukeyi" AS "rokuGetuNinsuuGoukeyi",
+            koumokuGoukey."nanaGetuNinsuuGoukeyi" AS "nanaGetuNinsuuGoukeyi",
+            koumokuGoukey."hatiGetuNinsuuGoukeyi" AS "hatiGetuNinsuuGoukeyi",
+            koumokuGoukey."kyuGetuNinsuuGoukeyi" AS "kyuGetuNinsuuGoukeyi",
+            koumokuGoukey."jyuGetuNinsuuGoukeyi" AS "jyuGetuNinsuuGoukeyi",
+            koumokuGoukey."jyuitiGetuNinsuuGoukeyi" AS "jyuitiGetuNinsuuGoukeyi",
+            koumokuGoukey."jyuniGetuNinsuuGoukeyi" AS "jyuniGetuNinsuuGoukeyi",
+            koumokuGoukey."itiGetuNinsuuGoukeyi" AS "itiGetuNinsuuGoukeyi",
+            koumokuGoukey."niGetuNinsuuGoukeyi" AS "niGetuNinsuuGoukeyi",
+            koumokuGoukey."sanGetuNinsuuGoukeyi" AS "sanGetuNinsuuGoukeyi",
+            koumokuGoukey."現年随時の人数合計" AS "現年随時の人数合計",
+            koumokuGoukey."過年度の人数合計" AS "過年度の人数合計",
+            koumokuGoukey."歳出還付の人数合計" AS "歳出還付の人数合計",
+            koumokuGoukey."該当段階の人数合計" AS "該当段階の人数合計",
+            koumokuGoukey."総人数合計" AS "総人数合計",
+            koumokuGoukey."yoGetuKinkakuGoukeyi" AS "yoGetuKinkakuGoukeyi",
+            koumokuGoukey."goGetuKinkakuGoukeyi" AS "goGetuKinkakuGoukeyi",
+            koumokuGoukey."rokuGetuKinkakuGoukeyi" AS "rokuGetuKinkakuGoukeyi",
+            koumokuGoukey."nanaGetuKinkakuGoukeyi" AS "nanaGetuKinkakuGoukeyi",
+            koumokuGoukey."hatiGetuKinkakuGoukeyi" AS "hatiGetuKinkakuGoukeyi",
+            koumokuGoukey."kyuGetuKinkakuGoukeyi" AS "kyuGetuKinkakuGoukeyi",
+            koumokuGoukey."jyuGetuKinkakuGoukeyi" AS "jyuGetuKinkakuGoukeyi",
+            koumokuGoukey."jyuitiGetuKinkakuGoukeyi" AS "jyuitiGetuKinkakuGoukeyi",
+            koumokuGoukey."jyuniGetuKinkakuGoukeyi" AS "jyuniGetuKinkakuGoukeyi",
+            koumokuGoukey."itiGetuKinkakuGoukeyi" AS "itiGetuKinkakuGoukeyi",
+            koumokuGoukey."niGetuKinkakuGoukeyi" AS "niGetuKinkakuGoukeyi",
+            koumokuGoukey."sanGetuKinkakuGoukeyi" AS "sanGetuKinkakuGoukeyi",
+            koumokuGoukey."現年随時の金額合計" AS "現年随時の金額合計",
+            koumokuGoukey."過年度の金額合計" AS "過年度の金額合計",
+            koumokuGoukey."歳出還付の金額合計" AS "歳出還付の金額合計",
+            koumokuGoukey."該当段階の金額合計" AS "該当段階の金額合計"
+        FROM "TmpKoumokuGoukey_Ichi" AS koumokuGoukey
+        WHERE koumokuGoukey."choshuHouhou" = '1'
+        ORDER BY koumokuGoukey."hokenryoDankai"
+    </select>
+    
+    <select  id="get普通徴収帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey" fetchSize="500">
+        SELECT
+            koumokuGoukey."hokenryoDankai",
+            koumokuGoukey."yoGetuNinsuuGoukeyi" AS "yoGetuNinsuuGoukeyi",
+            koumokuGoukey."goGetuNinsuuGoukeyi" AS "goGetuNinsuuGoukeyi",
+            koumokuGoukey."rokuGetuNinsuuGoukeyi" AS "rokuGetuNinsuuGoukeyi",
+            koumokuGoukey."nanaGetuNinsuuGoukeyi" AS "nanaGetuNinsuuGoukeyi",
+            koumokuGoukey."hatiGetuNinsuuGoukeyi" AS "hatiGetuNinsuuGoukeyi",
+            koumokuGoukey."kyuGetuNinsuuGoukeyi" AS "kyuGetuNinsuuGoukeyi",
+            koumokuGoukey."jyuGetuNinsuuGoukeyi" AS "jyuGetuNinsuuGoukeyi",
+            koumokuGoukey."jyuitiGetuNinsuuGoukeyi" AS "jyuitiGetuNinsuuGoukeyi",
+            koumokuGoukey."jyuniGetuNinsuuGoukeyi" AS "jyuniGetuNinsuuGoukeyi",
+            koumokuGoukey."itiGetuNinsuuGoukeyi" AS "itiGetuNinsuuGoukeyi",
+            koumokuGoukey."niGetuNinsuuGoukeyi" AS "niGetuNinsuuGoukeyi",
+            koumokuGoukey."sanGetuNinsuuGoukeyi" AS "sanGetuNinsuuGoukeyi",
+            koumokuGoukey."現年随時の人数合計" AS "現年随時の人数合計",
+            koumokuGoukey."過年度の人数合計" AS "過年度の人数合計",
+            koumokuGoukey."歳出還付の人数合計" AS "歳出還付の人数合計",
+            koumokuGoukey."該当段階の人数合計" AS "該当段階の人数合計",
+            koumokuGoukey."総人数合計" AS "総人数合計",
+            koumokuGoukey."yoGetuKinkakuGoukeyi" AS "yoGetuKinkakuGoukeyi",
+            koumokuGoukey."goGetuKinkakuGoukeyi" AS "goGetuKinkakuGoukeyi",
+            koumokuGoukey."rokuGetuKinkakuGoukeyi" AS "rokuGetuKinkakuGoukeyi",
+            koumokuGoukey."nanaGetuKinkakuGoukeyi" AS "nanaGetuKinkakuGoukeyi",
+            koumokuGoukey."hatiGetuKinkakuGoukeyi" AS "hatiGetuKinkakuGoukeyi",
+            koumokuGoukey."kyuGetuKinkakuGoukeyi" AS "kyuGetuKinkakuGoukeyi",
+            koumokuGoukey."jyuGetuKinkakuGoukeyi" AS "jyuGetuKinkakuGoukeyi",
+            koumokuGoukey."jyuitiGetuKinkakuGoukeyi" AS "jyuitiGetuKinkakuGoukeyi",
+            koumokuGoukey."jyuniGetuKinkakuGoukeyi" AS "jyuniGetuKinkakuGoukeyi",
+            koumokuGoukey."itiGetuKinkakuGoukeyi" AS "itiGetuKinkakuGoukeyi",
+            koumokuGoukey."niGetuKinkakuGoukeyi" AS "niGetuKinkakuGoukeyi",
+            koumokuGoukey."sanGetuKinkakuGoukeyi" AS "sanGetuKinkakuGoukeyi",
+            koumokuGoukey."現年随時の金額合計" AS "現年随時の金額合計",
+            koumokuGoukey."過年度の金額合計" AS "過年度の金額合計",
+            koumokuGoukey."歳出還付の金額合計" AS "歳出還付の金額合計",
+            koumokuGoukey."該当段階の金額合計" AS "該当段階の金額合計"
+        FROM "TmpKoumokuGoukey_Ichi" AS koumokuGoukey
+        WHERE koumokuGoukey."choshuHouhou" = '2'
+        ORDER BY koumokuGoukey."hokenryoDankai"
+    </select>
+    
+    <select  id="get合計帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey" fetchSize="500"> 
+        SELECT
+            gokeyBubunKoumoku."hokenryoDankai",
+            gokeyBubunKoumoku."yoGetuNinsuuGoukeyi",
+            gokeyBubunKoumoku."goGetuNinsuuGoukeyi",
+            gokeyBubunKoumoku."rokuGetuNinsuuGoukeyi",
+            gokeyBubunKoumoku."nanaGetuNinsuuGoukeyi",
+            gokeyBubunKoumoku."hatiGetuNinsuuGoukeyi",
+            gokeyBubunKoumoku."kyuGetuNinsuuGoukeyi",
+            gokeyBubunKoumoku."jyuGetuNinsuuGoukeyi",
+            gokeyBubunKoumoku."jyuitiGetuNinsuuGoukeyi",
+            gokeyBubunKoumoku."jyuniGetuNinsuuGoukeyi",
+            gokeyBubunKoumoku."itiGetuNinsuuGoukeyi",
+            gokeyBubunKoumoku."niGetuNinsuuGoukeyi",
+            gokeyBubunKoumoku."sanGetuNinsuuGoukeyi",
+            gokeyBubunKoumoku."現年随時の人数合計",
+            gokeyBubunKoumoku."過年度の人数合計",
+            gokeyBubunKoumoku."歳出還付の人数合計",
+            gokeyBubunKoumoku."該当段階の人数合計",
+            gokeyBubunKoumoku."総人数合計",
+            gokeyBubunKoumoku."yoGetuKinkakuGoukeyi",
+            gokeyBubunKoumoku."goGetuKinkakuGoukeyi",
+            gokeyBubunKoumoku."rokuGetuKinkakuGoukeyi",
+            gokeyBubunKoumoku."nanaGetuKinkakuGoukeyi",
+            gokeyBubunKoumoku."hatiGetuKinkakuGoukeyi",
+            gokeyBubunKoumoku."kyuGetuKinkakuGoukeyi",
+            gokeyBubunKoumoku."jyuGetuKinkakuGoukeyi",
+            gokeyBubunKoumoku."jyuitiGetuKinkakuGoukeyi",
+            gokeyBubunKoumoku."jyuniGetuKinkakuGoukeyi",
+            gokeyBubunKoumoku."itiGetuKinkakuGoukeyi",
+            gokeyBubunKoumoku."niGetuKinkakuGoukeyi",
+            gokeyBubunKoumoku."sanGetuKinkakuGoukeyi",
+            gokeyBubunKoumoku."現年随時の金額合計",
+            gokeyBubunKoumoku."過年度の金額合計",
+            gokeyBubunKoumoku."歳出還付の金額合計",
+            gokeyBubunKoumoku."該当段階の金額合計",
+            gokeyBubunKoumoku."総金額合計"
+        FROM "TmpGokeyBubunKoumoku_Ichi" AS gokeyBubunKoumoku
+        ORDER BY gokeyBubunKoumoku."hokenryoDankai"
+    </select>
+    
+    <select  id="get減免帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GemmenJyoho" fetchSize="500"> 
+        SELECT
+            gemmenJyoho."hokenryoDankai",
+            gemmenJyoho."hokenryoDankaiKanendoNinsu",
+            gemmenJyoho."hoDankaiKanendoGemmenGaku",
+            gemmenJyoho."hoDankaiKanendoNinsuGoukeyi",
+            gemmenJyoho."hoDankaiKanendoGemenGakuGoukei"
+        FROM "TmpGemmenJyoho_Ichi" AS gemmenJyoho
+        WHERE gemmenJyoho."choteiNendo" IS NULL
+              AND gemmenJyoho."fukaNendo" IS NULL
+        ORDER BY gemmenJyoho."hokenryoDankai"
+    </select>
+    
+    <resultMap id="resultMap_HihokenshaDaichoPsm" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.HihokenshaDaichoPsm" autoMapping="true">
+        <result property="hihokenshaNo" column="hihokenshaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="idoYMD" column="hihokenshaDaicho_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="edaNo" column="hihokenshaDaicho_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="idoJiyuCode" column="hihokenshaDaicho_idoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="hihokenshaDaicho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikibetsuCode" column="hihokenshaDaicho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuShutokuJiyuCode" column="hihokenshaDaicho_shikakuShutokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuShutokuYMD" column="hihokenshaDaicho_shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuShutokuTodokedeYMD" column="hihokenshaDaicho_shikakuShutokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ichigoShikakuShutokuYMD" column="hihokenshaDaicho_ichigoShikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hihokennshaKubunCode" column="hihokenshaDaicho_hihokennshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuSoshitsuJiyuCode" column="hihokenshaDaicho_shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuSoshitsuYMD" column="hihokenshaDaicho_shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuSoshitsuTodokedeYMD" column="hihokenshaDaicho_shikakuSoshitsuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuHenkoJiyuCode" column="hihokenshaDaicho_shikakuHenkoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuHenkoYMD" column="hihokenshaDaicho_shikakuHenkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuHenkoTodokedeYMD" column="hihokenshaDaicho_shikakuHenkoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiTekiyoJiyuCode" column="hihokenshaDaicho_jushochitokureiTekiyoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushochitokureiTekiyoYMD" column="hihokenshaDaicho_jushochitokureiTekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiTTodokedeYMD" column="hihokenshaDaicho_jushochitokureiTTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiKaijoJiyuCode" column="hihokenshaDaicho_jushochitokureiKaijoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushochitokureiKaijoYMD" column="hihokenshaDaicho_jushochitokureiKaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiKTodokedeYMD" column="hihokenshaDaicho_jushochitokureiKTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochiTokureiFlag" column="hihokenshaDaicho_jushochiTokureiFlag" />
+        <result property="koikinaiJushochiTokureiFlag" column="hihokenshaDaicho_koikinaiJushochiTokureiFlag" />
+        <result property="koikinaiToSShichosonCode" column="hihokenshaDaicho_koikinaiToSShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyuShichosonCode" column="hihokenshaDaicho_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="logicalDeletedFlag" column="hihokenshaDaicho_logicalDeletedFlag" />
+        <result property="shikibetsuCode" column="psm_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choikiCode" column="psm_choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gyoseikuCode" column="psm_gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gyoseikuName" column="psm_gyoseikuName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chikuCode1" column="psm_chikuCode1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chikuName1" column="psm_chikuName1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chikuCode2" column="psm_chikuCode2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chikuName2" column="psm_chikuName2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chikuCode3" column="psm_chikuCode3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chikuName3" column="psm_chikuName3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seinengappiYMD" column="psm_seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yoGetuSikakuumuFlg" column="sikakuJyoukyou_yoGetuSikakuumuFlg"/>
+        <result property="goGetuSikakuumuFlg" column="sikakuJyoukyou_goGetuSikakuumuFlg"/>
+        <result property="rokuGetuSikakuumuFlg" column="sikakuJyoukyou_rokuGetuSikakuumuFlg"/>
+        <result property="nanaGetuSikakuumuFlg" column="sikakuJyoukyou_nanaGetuSikakuumuFlg"/>
+        <result property="hatiGetuSikakuumuFlg" column="sikakuJyoukyou_hatiGetuSikakuumuFlg"/>
+        <result property="kyuGetuSikakuumuFlg" column="sikakuJyoukyou_kyuGetuSikakuumuFlg"/>
+        <result property="jyuGetuSikakuumuFlg" column="sikakuJyoukyou_jyuGetuSikakuumuFlg"/>
+        <result property="jyuitiGetuSikakuumuFlg" column="sikakuJyoukyou_jyuitiGetuSikakuumuFlg"/>
+        <result property="jyuniGetuSikakuumuFlg" column="sikakuJyoukyou_jyuniGetuSikakuumuFlg"/>
+        <result property="itiGetuSikakuumuFlg" column="sikakuJyoukyou_itiGetuSikakuumuFlg"/>
+        <result property="niGetuSikakuumuFlg" column="sikakuJyoukyou_niGetuSikakuumuFlg"/>
+        <result property="sanGetuSikakuumuFlg" column="sikakuJyoukyou_sanGetuSikakuumuFlg"/>
+    </resultMap>
+    
+    <select id="get被保険者台帳管理と宛名のデータ" resultMap="resultMap_HihokenshaDaichoPsm" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT
+            HihokenshaDaicho."hihokenshaNo" AS "hihokenshaDaicho_hihokenshaNo",
+            HihokenshaDaicho."idoYMD" AS "hihokenshaDaicho_idoYMD",
+            HihokenshaDaicho."edaNo" AS "hihokenshaDaicho_edaNo",
+            HihokenshaDaicho."idoJiyuCode" AS "hihokenshaDaicho_idoJiyuCode",
+            HihokenshaDaicho."shichosonCode" AS "hihokenshaDaicho_shichosonCode",
+            HihokenshaDaicho."shikibetsuCode" AS "hihokenshaDaicho_shikibetsuCode",
+            HihokenshaDaicho."shikakuShutokuJiyuCode" AS "hihokenshaDaicho_shikakuShutokuJiyuCode",
+            HihokenshaDaicho."shikakuShutokuYMD" AS "hihokenshaDaicho_shikakuShutokuYMD",
+            HihokenshaDaicho."shikakuShutokuTodokedeYMD" AS "hihokenshaDaicho_shikakuShutokuTodokedeYMD",
+            HihokenshaDaicho."ichigoShikakuShutokuYMD" AS "hihokenshaDaicho_ichigoShikakuShutokuYMD",
+            HihokenshaDaicho."hihokennshaKubunCode" AS "hihokenshaDaicho_hihokennshaKubunCode",
+            HihokenshaDaicho."shikakuSoshitsuJiyuCode" AS "hihokenshaDaicho_shikakuSoshitsuJiyuCode",
+            HihokenshaDaicho."shikakuSoshitsuYMD" AS "hihokenshaDaicho_shikakuSoshitsuYMD",
+            HihokenshaDaicho."shikakuSoshitsuTodokedeYMD" AS "hihokenshaDaicho_shikakuSoshitsuTodokedeYMD",
+            HihokenshaDaicho."shikakuHenkoJiyuCode" AS "hihokenshaDaicho_shikakuHenkoJiyuCode",
+            HihokenshaDaicho."shikakuHenkoYMD" AS "hihokenshaDaicho_shikakuHenkoYMD",
+            HihokenshaDaicho."shikakuHenkoTodokedeYMD" AS "hihokenshaDaicho_shikakuHenkoTodokedeYMD",
+            HihokenshaDaicho."jushochitokureiTekiyoJiyuCode" AS "hihokenshaDaicho_jushochitokureiTekiyoJiyuCode",
+            HihokenshaDaicho."jushochitokureiTekiyoYMD" AS "hihokenshaDaicho_jushochitokureiTekiyoYMD",
+            HihokenshaDaicho."jushochitokureiTekiyoTodokedeYMD" AS "hihokenshaDaicho_jushochitokureiTTodokedeYMD",
+            HihokenshaDaicho."jushochitokureiKaijoJiyuCode" AS "hihokenshaDaicho_jushochitokureiKaijoJiyuCode",
+            HihokenshaDaicho."jushochitokureiKaijoYMD" AS "hihokenshaDaicho_jushochitokureiKaijoYMD",
+            HihokenshaDaicho."jushochitokureiKaijoTodokedeYMD" AS "hihokenshaDaicho_jushochitokureiKTodokedeYMD",
+            HihokenshaDaicho."jushochiTokureiFlag" AS "hihokenshaDaicho_jushochiTokureiFlag",
+            HihokenshaDaicho."koikinaiJushochiTokureiFlag" AS "hihokenshaDaicho_koikinaiJushochiTokureiFlag",
+            HihokenshaDaicho."koikinaiTokureiSochimotoShichosonCode" AS "hihokenshaDaicho_koikinaiToSShichosonCode",
+            HihokenshaDaicho."kyuShichosonCode" AS "hihokenshaDaicho_kyuShichosonCode",
+            HihokenshaDaicho."logicalDeletedFlag" AS "hihokenshaDaicho_logicalDeletedFlag",
+            PSM."shikibetsuCode" AS "psm_shikibetsuCode",
+            PSM."choikiCode" AS "psm_choikiCode",
+            PSM."gyoseikuCode" AS "psm_gyoseikuCode",
+            PSM."gyoseikuName" AS "psm_gyoseikuName",
+            PSM."chikuCode1" AS "psm_chikuCode1",
+            PSM."chikuName1" AS "psm_chikuName1",
+            PSM."chikuCode2" AS "psm_chikuCode2",
+            PSM."chikuName2" AS "psm_chikuName2",
+            PSM."chikuCode3" AS "psm_chikuCode3",
+            PSM."chikuName3" AS "psm_chikuName3",
+            PSM."seinengappiYMD" AS "psm_seinengappiYMD"
+        FROM rgdb."DbT1001HihokenshaDaicho" AS HihokenshaDaicho
+        INNER JOIN rgua.${psmShikibetsuTaisho} AS PSM
+            ON PSM."shikibetsuCode" = HihokenshaDaicho."shikibetsuCode"
+        WHERE HihokenshaDaicho."hihokennshaKubunCode" = '1'
+            AND HihokenshaDaicho."ichigoShikakuShutokuYMD" IS NOT NULL
+            AND HihokenshaDaicho."ichigoShikakuShutokuYMD" <![CDATA[<=]]> #{調定年度3月31日}
+            AND (HihokenshaDaicho."shikakuSoshitsuYMD" IS NULL 
+                OR HihokenshaDaicho."shikakuSoshitsuYMD" <![CDATA[>]]>  #{調定年度0401})
+            AND HihokenshaDaicho."logicalDeletedFlag" = 'false'
+        <if test="ageFlg">
+            <if test="is1と3場合">
+                AND PSM."seinengappiYMD" <![CDATA[>=]]> #{開始生年月日}
+                AND PSM."seinengappiYMD" <![CDATA[<=]]> #{終了生年月日}
+            </if>
+            <if test="is2場合">
+                AND PSM."seinengappiYMD" <![CDATA[<=]]> #{終了生年月日}
+            </if>
+        </if>
+        <if test="seinengappiYMDFlg">
+            AND PSM."seinengappiYMD" <![CDATA[>=]]> #{seinengappiYMDStart}
+            AND PSM."seinengappiYMD" <![CDATA[<=]]> #{seinengappiYMDEnd}
+        </if>
+        <if test="is町域">
+            <if test="hasCodeList">
+                AND PSM."choikiCode" IN 
+                <foreach  
+                    collection="sentakuKekkaList"  
+                    item="code"  
+                    open="("  
+                    separator=","  
+                    close=")">  
+                     #{code} 
+                </foreach>
+            </if>
+        </if>
+        <if test="is行政区">
+            <if test="hasCodeList">
+                AND PSM."gyoseikuCode" IN 
+                <foreach  
+                    collection="sentakuKekkaList"  
+                    item="code"  
+                    open="("  
+                    separator=","  
+                    close=")">  
+                     #{code} 
+                </foreach>
+            </if>
+        </if>
+        <if test="is地区1">
+            <if test="hasCodeList">
+                AND PSM."chikuCode1" IN 
+                <foreach  
+                    collection="sentakuKekkaList"  
+                    item="code"  
+                    open="("  
+                    separator=","  
+                    close=")">  
+                     #{code} 
+                </foreach>
+            </if>
+        </if>
+        <if test="is地区2">
+            <if test="hasCodeList">
+                AND PSM."chikuCode2" IN 
+                <foreach  
+                    collection="sentakuKekkaList"  
+                    item="code"  
+                    open="("  
+                    separator=","  
+                    close=")">  
+                     #{code} 
+                </foreach>
+            </if>
+        </if>
+        <if test="is地区3">
+            <if test="hasCodeList">
+                AND PSM."chikuCode3" IN 
+                <foreach  
+                    collection="sentakuKekkaList"  
+                    item="code"  
+                    open="("  
+                    separator=","  
+                    close=")">  
+                     #{code} 
+                </foreach>
+            </if>
+        </if>
+        <if test="is市町村コード">
+            AND HihokenshaDaicho."shichosonCode" = #{shichosonCode}
+        </if>
+        <if test="is市町村と旧市町村">
+            AND HihokenshaDaicho."shichosonCode" = #{shichosonCode}
+            AND HihokenshaDaicho."kyuShichosonCode" = #{kyuShichosonCode}
+        </if>
+    </select>
+    
+    <select  id="get各月資格の取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.HihokenshaDaichoPsm" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            "TmpSikakuJyoukyou_Ichi".*
+        FROM "TmpSikakuJyoukyou_Ichi" AS "TmpSikakuJyoukyou_Ichi"
+    </select>
+    
+    <select  id="getデータの取得" resultMap="resultMap_現年度データの取得" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            kayigoJyoho.*
+        FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
+    </select>
+    
+    <select  id="get項目小計一時テーブルデータの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuSyoukeyi"
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            koumokuSyoukeyi."hokenryoDankai",
+            koumokuSyoukeyi."choshuHouhou",
+            SUM(koumokuSyoukeyi."yoGetuNinsu") AS "yoGetuNinsu",
+            SUM(koumokuSyoukeyi."goGetuNinsu") AS "goGetuNinsu",
+            SUM(koumokuSyoukeyi."rokuGetuNinsu") AS "rokuGetuNinsu",
+            SUM(koumokuSyoukeyi."nanaGetuNinsu") AS "nanaGetuNinsu",
+            SUM(koumokuSyoukeyi."hatiGetuNinsu") AS "hatiGetuNinsu",
+            SUM(koumokuSyoukeyi."kyuGetuNinsu") AS "kyuGetuNinsu",
+            SUM(koumokuSyoukeyi."jyuGetuNinsu") AS "jyuGetuNinsu",
+            SUM(koumokuSyoukeyi."jyuitiGetuNinsu") AS "jyuitiGetuNinsu",
+            SUM(koumokuSyoukeyi."jyuniGetuNinsu") AS "jyuniGetuNinsu",
+            SUM(koumokuSyoukeyi."itiGetuNinsu") AS "itiGetuNinsu",
+            SUM(koumokuSyoukeyi."niGetuNinsu") AS "niGetuNinsu",
+            SUM(koumokuSyoukeyi."sanGetuNinsu") AS "sanGetuNinsu",
+            SUM(koumokuSyoukeyi."gennenSuyijiNinsu") AS "gennenSuyijiNinsu",
+            SUM(koumokuSyoukeyi."kanendoNinsu") AS "kanendoNinsu",
+            SUM(koumokuSyoukeyi."sayisyutuKanpuNinsu") AS "sayisyutuKanpuNinsu",
+            SUM(koumokuSyoukeyi."yoGetuKinkaku") AS "yoGetuKinkaku",
+            SUM(koumokuSyoukeyi."goGetuKinkaku") AS "goGetuKinkaku",
+            SUM(koumokuSyoukeyi."rokuGetuKinkaku") AS "rokuGetuKinkaku",
+            SUM(koumokuSyoukeyi."nanaGetuKinkaku") AS "nanaGetuKinkaku",
+            SUM(koumokuSyoukeyi."hatiGetuKinkaku") AS "hatiGetuKinkaku",
+            SUM(koumokuSyoukeyi."kyuGetuKinkaku") AS "kyuGetuKinkaku",
+            SUM(koumokuSyoukeyi."jyuGetuKinkaku") AS "jyuGetuKinkaku",
+            SUM(koumokuSyoukeyi."jyuitiGetuKinkaku") AS "jyuitiGetuKinkaku",
+            SUM(koumokuSyoukeyi."jyuniGetuKinkaku") AS "jyuniGetuKinkaku",
+            SUM(koumokuSyoukeyi."itiGetuKinkaku") AS "itiGetuKinkaku",
+            SUM(koumokuSyoukeyi."niGetuKinkaku") AS "niGetuKinkaku",
+            SUM(koumokuSyoukeyi."sanGetuKinkaku") AS "sanGetuKinkaku",
+            SUM(koumokuSyoukeyi."gennenSuyijiKinkaku") AS "gennenSuyijiKinkaku",
+            SUM(koumokuSyoukeyi."kanendoKinkaku") AS "kanendoKinkaku",
+            SUM(koumokuSyoukeyi."sayisyutuKanpuKinkaku") AS "sayisyutuKanpuKinkaku"
+        FROM "TmpKoumokuSyoukeyi_Ichi" AS koumokuSyoukeyi
+        GROUP BY koumokuSyoukeyi."choshuHouhou", koumokuSyoukeyi."hokenryoDankai"
+    </select>
+    
+    <select  id="get項目小計一時テーブル合計データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuSyoukeyi"
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            koumokuSyoukeyi."choshuHouhou",
+            SUM(koumokuSyoukeyi."yoGetuNinsu") AS "yoGetuNinsu",
+            SUM(koumokuSyoukeyi."goGetuNinsu") AS "goGetuNinsu",
+            SUM(koumokuSyoukeyi."rokuGetuNinsu") AS "rokuGetuNinsu",
+            SUM(koumokuSyoukeyi."nanaGetuNinsu") AS "nanaGetuNinsu",
+            SUM(koumokuSyoukeyi."hatiGetuNinsu") AS "hatiGetuNinsu",
+            SUM(koumokuSyoukeyi."kyuGetuNinsu") AS "kyuGetuNinsu",
+            SUM(koumokuSyoukeyi."jyuGetuNinsu") AS "jyuGetuNinsu",
+            SUM(koumokuSyoukeyi."jyuitiGetuNinsu") AS "jyuitiGetuNinsu",
+            SUM(koumokuSyoukeyi."jyuniGetuNinsu") AS "jyuniGetuNinsu",
+            SUM(koumokuSyoukeyi."itiGetuNinsu") AS "itiGetuNinsu",
+            SUM(koumokuSyoukeyi."niGetuNinsu") AS "niGetuNinsu",
+            SUM(koumokuSyoukeyi."sanGetuNinsu") AS "sanGetuNinsu",
+            SUM(koumokuSyoukeyi."yoGetuKinkaku") AS "yoGetuKinkaku",
+            SUM(koumokuSyoukeyi."goGetuKinkaku") AS "goGetuKinkaku",
+            SUM(koumokuSyoukeyi."rokuGetuKinkaku") AS "rokuGetuKinkaku",
+            SUM(koumokuSyoukeyi."nanaGetuKinkaku") AS "nanaGetuKinkaku",
+            SUM(koumokuSyoukeyi."hatiGetuKinkaku") AS "hatiGetuKinkaku",
+            SUM(koumokuSyoukeyi."kyuGetuKinkaku") AS "kyuGetuKinkaku",
+            SUM(koumokuSyoukeyi."jyuGetuKinkaku") AS "jyuGetuKinkaku",
+            SUM(koumokuSyoukeyi."jyuitiGetuKinkaku") AS "jyuitiGetuKinkaku",
+            SUM(koumokuSyoukeyi."jyuniGetuKinkaku") AS "jyuniGetuKinkaku",
+            SUM(koumokuSyoukeyi."itiGetuKinkaku") AS "itiGetuKinkaku",
+            SUM(koumokuSyoukeyi."niGetuKinkaku") AS "niGetuKinkaku",
+            SUM(koumokuSyoukeyi."sanGetuKinkaku") AS "sanGetuKinkaku",
+            SUM(koumokuSyoukeyi."gennenSuyijiKinkaku") AS "gennenSuyijiKinkaku",
+            SUM(koumokuSyoukeyi."kanendoKinkaku") AS "kanendoKinkaku",
+            SUM(koumokuSyoukeyi."sayisyutuKanpuKinkaku") AS "sayisyutuKanpuKinkaku"
+        FROM "TmpKoumokuSyoukeyi_Ichi" AS koumokuSyoukeyi
+        GROUP BY koumokuSyoukeyi."choshuHouhou"
+    </select>
+    
+    <select  id="get項目合計一時テーブルデータの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey"
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT
+            koumokuGoukey."hokenryoDankai",
+            sum(koumokuGoukey."yoGetuNinsuuGoukeyi") AS "yoGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."goGetuNinsuuGoukeyi") AS "goGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."rokuGetuNinsuuGoukeyi") AS "rokuGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."nanaGetuNinsuuGoukeyi") AS "nanaGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."hatiGetuNinsuuGoukeyi") AS "hatiGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."kyuGetuNinsuuGoukeyi") AS "kyuGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."jyuGetuNinsuuGoukeyi") AS "jyuGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."jyuitiGetuNinsuuGoukeyi") AS "jyuitiGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."jyuniGetuNinsuuGoukeyi") AS "jyuniGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."itiGetuNinsuuGoukeyi") AS "itiGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."niGetuNinsuuGoukeyi") AS "niGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."sanGetuNinsuuGoukeyi") AS "sanGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."現年随時の人数合計") AS "現年随時の人数合計",
+            sum(koumokuGoukey."過年度の人数合計") AS "過年度の人数合計",
+            sum(koumokuGoukey."歳出還付の人数合計") AS "歳出還付の人数合計",
+            sum(koumokuGoukey."該当段階の人数合計") AS "該当段階の人数合計",
+            sum(koumokuGoukey."総人数合計") AS "総人数合計",
+            sum(koumokuGoukey."yoGetuKinkakuGoukeyi") AS "yoGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."goGetuKinkakuGoukeyi") AS "goGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."rokuGetuKinkakuGoukeyi") AS "rokuGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."nanaGetuKinkakuGoukeyi") AS "nanaGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."hatiGetuKinkakuGoukeyi") AS "hatiGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."kyuGetuKinkakuGoukeyi") AS "kyuGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."jyuGetuKinkakuGoukeyi") AS "jyuGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."jyuitiGetuKinkakuGoukeyi") AS "jyuitiGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."jyuniGetuKinkakuGoukeyi") AS "jyuniGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."itiGetuKinkakuGoukeyi") AS "itiGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."niGetuKinkakuGoukeyi") AS "niGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."sanGetuKinkakuGoukeyi") AS "sanGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."現年随時の金額合計") AS "現年随時の金額合計",
+            sum(koumokuGoukey."過年度の金額合計") AS "過年度の金額合計",
+            sum(koumokuGoukey."歳出還付の金額合計") AS "歳出還付の金額合計",
+            sum(koumokuGoukey."該当段階の金額合計") AS "該当段階の金額合計"
+        FROM "TmpKoumokuGoukey_Ichi" AS koumokuGoukey
+        WHERE koumokuGoukey."hokenryoDankai" <![CDATA[<>]]> '合計'
+        GROUP BY koumokuGoukey."hokenryoDankai"
+    </select>
+    
+    <select  id="get項目合計一時テーブル合計データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey"
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT
+            sum(koumokuGoukey."yoGetuNinsuuGoukeyi") AS "yoGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."goGetuNinsuuGoukeyi") AS "goGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."rokuGetuNinsuuGoukeyi") AS "rokuGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."nanaGetuNinsuuGoukeyi") AS "nanaGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."hatiGetuNinsuuGoukeyi") AS "hatiGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."kyuGetuNinsuuGoukeyi") AS "kyuGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."jyuGetuNinsuuGoukeyi") AS "jyuGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."jyuitiGetuNinsuuGoukeyi") AS "jyuitiGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."jyuniGetuNinsuuGoukeyi") AS "jyuniGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."itiGetuNinsuuGoukeyi") AS "itiGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."niGetuNinsuuGoukeyi") AS "niGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."sanGetuNinsuuGoukeyi") AS "sanGetuNinsuuGoukeyi",
+            sum(koumokuGoukey."現年随時の人数合計") AS "現年随時の人数合計",
+            sum(koumokuGoukey."過年度の人数合計") AS "過年度の人数合計",
+            sum(koumokuGoukey."歳出還付の人数合計") AS "歳出還付の人数合計",
+            sum(koumokuGoukey."該当段階の人数合計") AS "該当段階の人数合計",
+            sum(koumokuGoukey."総人数合計") AS "総人数合計",
+            sum(koumokuGoukey."yoGetuKinkakuGoukeyi") AS "yoGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."goGetuKinkakuGoukeyi") AS "goGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."rokuGetuKinkakuGoukeyi") AS "rokuGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."nanaGetuKinkakuGoukeyi") AS "nanaGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."hatiGetuKinkakuGoukeyi") AS "hatiGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."kyuGetuKinkakuGoukeyi") AS "kyuGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."jyuGetuKinkakuGoukeyi") AS "jyuGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."jyuitiGetuKinkakuGoukeyi") AS "jyuitiGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."jyuniGetuKinkakuGoukeyi") AS "jyuniGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."itiGetuKinkakuGoukeyi") AS "itiGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."niGetuKinkakuGoukeyi") AS "niGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."sanGetuKinkakuGoukeyi") AS "sanGetuKinkakuGoukeyi",
+            sum(koumokuGoukey."現年随時の金額合計") AS "現年随時の金額合計",
+            sum(koumokuGoukey."過年度の金額合計") AS "過年度の金額合計",
+            sum(koumokuGoukey."歳出還付の金額合計") AS "歳出還付の金額合計",
+            sum(koumokuGoukey."該当段階の金額合計") AS "該当段階の金額合計"
+        FROM "TmpKoumokuGoukey_Ichi" AS koumokuGoukey
+        WHERE koumokuGoukey."hokenryoDankai" <![CDATA[<>]]> '合計'
+    </select>
+    
+    <resultMap id="resultMap_現年度データの取得" 
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GennendoDate" autoMapping="true">
+        <result property="choteiNendo" column="fuka_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fukaNendo" column="fuka_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tsuchishoNo" column="fuka_tsuchishoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="rirekiNo" column="fuka_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaNo" column="fuka_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenryoDankai" column="fuka_hokenryoDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tkSaishutsuKampuGaku" column="fuka_tkSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuSaishutsuKampuGaku" column="fuka_fuSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="choshuHouhou" column="kibetsu_choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ki" column="kibetsu_ki"/>
+        <result property="choteiId" column="kibetsu_choteiId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="choteigaku" column="choteiKyotsu_choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gemmenGaku" column="fuka_gemmenGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+    
+    <select  id="get現年度データの取得" resultMap="resultMap_現年度データの取得" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            fuka."choteiNendo" AS "fuka_choteiNendo",
+            fuka."fukaNendo" AS "fuka_fukaNendo",
+            fuka."tsuchishoNo" AS "fuka_tsuchishoNo",
+            fuka."rirekiNo" AS "fuka_rirekiNo",
+            fuka."hihokenshaNo" AS "fuka_hihokenshaNo",
+            COALESCE(fuka."hokenryoDankai2",fuka."hokenryoDankai1") AS "fuka_hokenryoDankai",
+            fuka."tkSaishutsuKampuGaku" AS "fuka_tkSaishutsuKampuGaku",
+            fuka."fuSaishutsuKampuGaku" AS "fuka_fuSaishutsuKampuGaku",
+            kibetsu."choshuHouhou" AS "kibetsu_choshuHouhou",
+            kibetsu."ki" AS "kibetsu_ki",
+            kibetsu."choteiId" AS "kibetsu_choteiId",
+            choteiKyotsu."choteigaku" AS "choteiKyotsu_choteigaku"
+        FROM rgdb."DbT2002Fuka" AS fuka
+        INNER JOIN rgdb."DbT2003Kibetsu" AS kibetsu
+            ON fuka."choteiNendo" = kibetsu."choteiNendo"
+            AND fuka."fukaNendo" = kibetsu."fukaNendo"
+            AND fuka."tsuchishoNo" = kibetsu."tsuchishoNo"
+            AND fuka."rirekiNo" = kibetsu."rirekiNo"
+        INNER JOIN rgdb."UrT0705ChoteiKyotsu" choteiKyotsu
+            ON kibetsu."choteiId" = choteiKyotsu."choteiId"
+        INNER JOIN (
+                    SELECT  T."choteiNendo", 
+                            T."fukaNendo", 
+                            T."tsuchishoNo", 
+                            MAX(T."rirekiNo") AS "rirekiNo",
+                            T."hihokenshaNo"
+                    FROM rgdb."DbT2002Fuka" AS T
+                    WHERE T."choteiNendo" = #{choteiNendo}
+                        AND T."fukaNendo" = #{choteiNendo}
+                        AND T."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
+                    GROUP BY T."choteiNendo", T."fukaNendo", T."tsuchishoNo", T."hihokenshaNo") AS fukaT
+            ON fukaT."choteiNendo" = fuka."choteiNendo"
+            AND fukaT."fukaNendo" = fuka."fukaNendo"
+            AND fukaT."tsuchishoNo" = fuka."tsuchishoNo"
+            AND fukaT."rirekiNo" = fuka."rirekiNo"
+            AND fukaT."hihokenshaNo" = fuka."hihokenshaNo"
+        WHERE fuka."choteiNendo" = #{choteiNendo}
+            AND fuka."fukaNendo" = #{choteiNendo}
+            AND fuka."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
+        ORDER BY fuka."tsuchishoNo"
+    </select>
+    
+    <select  id="get過年度のデータの取得" resultMap="resultMap_現年度データの取得" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            fuka."choteiNendo" AS "fuka_choteiNendo",
+            fuka."fukaNendo" AS "fuka_fukaNendo",
+            fuka."tsuchishoNo" AS "fuka_tsuchishoNo",
+            fuka."rirekiNo" AS "fuka_rirekiNo",
+            fuka."hihokenshaNo" AS "fuka_hihokenshaNo",
+            COALESCE(fuka."hokenryoDankai2",fuka."hokenryoDankai1") AS "fuka_hokenryoDankai",
+            fuka."tkSaishutsuKampuGaku" AS "fuka_tkSaishutsuKampuGaku",
+            fuka."fuSaishutsuKampuGaku" AS "fuka_fuSaishutsuKampuGaku",
+            kibetsu."choshuHouhou" AS "kibetsu_choshuHouhou",
+            kibetsu."ki" AS "kibetsu_ki",
+            kibetsu."choteiId" AS "kibetsu_choteiId",
+            choteiKyotsu."choteigaku" AS "choteiKyotsu_choteigaku"
+        FROM rgdb."DbT2002Fuka" AS fuka
+        INNER JOIN rgdb."DbT2003Kibetsu" AS kibetsu
+            ON fuka."choteiNendo" = kibetsu."choteiNendo"
+            AND fuka."fukaNendo" = kibetsu."fukaNendo"
+            AND fuka."tsuchishoNo" = kibetsu."tsuchishoNo"
+            AND fuka."rirekiNo" = kibetsu."rirekiNo"
+        INNER JOIN rgdb."UrT0705ChoteiKyotsu" choteiKyotsu
+            ON kibetsu."choteiId" = choteiKyotsu."choteiId"
+        INNER JOIN (
+                    SELECT  T."choteiNendo", 
+                            T."fukaNendo", 
+                            T."tsuchishoNo", 
+                            MAX(T."rirekiNo") AS "rirekiNo",
+                            T."hihokenshaNo"
+                    FROM rgdb."DbT2002Fuka" AS T
+                    WHERE T."choteiNendo" = #{choteiNendo}
+                        AND (T."fukaNendo" = #{調定年度減1} OR T."fukaNendo" = #{調定年度減2})
+                        AND T."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
+                    GROUP BY T."choteiNendo", T."fukaNendo", T."tsuchishoNo", T."hihokenshaNo") AS fukaT
+            ON fukaT."choteiNendo" = fuka."choteiNendo"
+            AND (fukaT."fukaNendo" = (CAST(CAST(fuka."fukaNendo" AS integer ) -1 AS character(4)))
+                OR fukaT."fukaNendo" = (CAST(CAST(fuka."fukaNendo" AS integer ) -2 AS character(4))))
+            AND fukaT."tsuchishoNo" = fuka."tsuchishoNo"
+            AND fukaT."rirekiNo" = fuka."rirekiNo"
+            AND fukaT."hihokenshaNo" = fuka."hihokenshaNo"
+        WHERE fuka."choteiNendo" = #{choteiNendo}
+            AND (fuka."fukaNendo" = #{調定年度減1} OR fuka."fukaNendo" = #{調定年度減2})
+            AND fuka."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
+        ORDER BY fuka."tsuchishoNo"
+    </select>
+    
+    <select  id="get不明のデータの取得" resultMap="resultMap_現年度データの取得" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            DISTINCT ON(fuka."hihokenshaNo") fuka."hihokenshaNo" AS "fuka_hihokenshaNo",
+            fuka."choteiNendo" AS "fuka_choteiNendo",
+            fuka."fukaNendo" AS "fuka_fukaNendo",
+            fuka."tsuchishoNo" AS "fuka_tsuchishoNo",
+            fuka."rirekiNo" AS "fuka_rirekiNo",
+            fuka."hihokenshaNo" AS "fuka_hihokenshaNo",
+            COALESCE(fuka."hokenryoDankai2",fuka."hokenryoDankai1") AS "fuka_hokenryoDankai",
+            kibetsu."choshuHouhou" AS "kibetsu_choshuHouhou",
+            kibetsu."ki" AS "kibetsu_ki",
+            kibetsu."choteiId" AS "kibetsu_choteiId",
+            choteiKyotsu."choteigaku" AS "choteiKyotsu_choteigaku"
+        FROM rgdb."DbT2002Fuka" AS fuka
+        INNER JOIN rgdb."DbT2003Kibetsu" AS kibetsu
+            ON fuka."choteiNendo" = kibetsu."choteiNendo"
+            AND fuka."fukaNendo" = kibetsu."fukaNendo"
+            AND fuka."tsuchishoNo" = kibetsu."tsuchishoNo"
+            AND fuka."rirekiNo" = kibetsu."rirekiNo"
+        INNER JOIN rgdb."DbT1001HihokenshaDaicho" AS HihokenshaDaicho
+            ON fuka."hihokenshaNo" = HihokenshaDaicho."hihokenshaNo"
+        INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS choteiKyotsu
+            ON kibetsu."choteiId" = choteiKyotsu."choteiId"
+        INNER JOIN (
+                    SELECT  T."choteiNendo", 
+                            T."fukaNendo", 
+                            T."tsuchishoNo", 
+                            MAX(T."rirekiNo") AS "rirekiNo",
+                            T."hihokenshaNo"
+                    FROM rgdb."DbT2002Fuka" AS T
+                    WHERE T."choteiNendo" = #{choteiNendo}
+                        AND T."fukaNendo" = #{choteiNendo}
+                        AND T."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
+                    GROUP BY T."choteiNendo", T."fukaNendo", T."tsuchishoNo", T."hihokenshaNo") AS fukaT
+            ON fukaT."choteiNendo" = fuka."choteiNendo"
+            AND fukaT."fukaNendo" = fuka."fukaNendo"
+            AND fukaT."tsuchishoNo" = fuka."tsuchishoNo"
+            AND fukaT."rirekiNo" = fuka."rirekiNo"
+            AND fukaT."hihokenshaNo" = fuka."hihokenshaNo"
+        WHERE fuka."choteiNendo" = #{choteiNendo}
+            AND fuka."fukaNendo" = #{choteiNendo}
+            AND fuka."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
+            AND (fuka."hokenryoDankai1" IS NULL AND fuka."hokenryoDankai2" IS NULL
+                    AND HihokenshaDaicho."shikakuSoshitsuYMD" <![CDATA[>=]]> #{調定年度0401} AND HihokenshaDaicho."shikakuSoshitsuYMD" <![CDATA[<=]]> #{調定年度0430})
+            OR ((fuka."hokenryoDankai1" IS NOT NULL OR fuka."hokenryoDankai2" IS NOT NULL)
+                    AND HihokenshaDaicho."shikakuSoshitsuYMD" <![CDATA[>=]]> #{調定年度0401} AND HihokenshaDaicho."shikakuSoshitsuYMD" <![CDATA[<=]]> #{調定年度0430})
+        ORDER BY fuka."hihokenshaNo", fuka."tsuchishoNo"
+    </select>
+
+    <select  id="get減免部分のデータの取得" resultMap="resultMap_現年度データの取得" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            fuka."choteiNendo" AS "fuka_choteiNendo",
+            fuka."fukaNendo" AS "fuka_fukaNendo",
+            fuka."tsuchishoNo" AS "fuka_tsuchishoNo",
+            fuka."rirekiNo" AS "fuka_rirekiNo",
+            fuka."hihokenshaNo" AS "fuka_hihokenshaNo",
+            COALESCE(fuka."hokenryoDankai2",fuka."hokenryoDankai1") AS "fuka_hokenryoDankai",
+            fuka."gemmenGaku" AS "fuka_gemmenGaku"
+        FROM rgdb."DbT2002Fuka" AS fuka
+        INNER JOIN (
+                    SELECT  T."choteiNendo", 
+                            T."fukaNendo", 
+                            T."tsuchishoNo", 
+                            MAX(T."rirekiNo") AS "rirekiNo",
+                            T."hihokenshaNo"
+                    FROM rgdb."DbT2002Fuka" AS T
+                    WHERE T."choteiNendo" = #{choteiNendo}
+                        AND (T."fukaNendo" = #{choteiNendo} OR T."fukaNendo" = #{調定年度減1} OR T."fukaNendo" = #{調定年度減2}) 
+                        AND T."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
+                    GROUP BY T."choteiNendo", T."fukaNendo", T."tsuchishoNo", T."hihokenshaNo") AS fukaT
+            ON fukaT."choteiNendo" = fuka."choteiNendo"
+            AND (fukaT."fukaNendo" = '2016'
+                OR fukaT."fukaNendo" = (CAST(CAST(fuka."fukaNendo" AS integer ) -1 AS character(4))) 
+                OR fukaT."fukaNendo" = (CAST(CAST(fuka."fukaNendo" AS integer ) -2 AS character(4))))
+            AND fukaT."tsuchishoNo" = fuka."tsuchishoNo"
+            AND fukaT."rirekiNo" = fuka."rirekiNo"
+            AND fukaT."hihokenshaNo" = fuka."hihokenshaNo"
+        WHERE fuka."choteiNendo" = #{choteiNendo}
+            AND (fuka."fukaNendo"  = #{choteiNendo} OR fuka."fukaNendo"  = #{調定年度減1} OR fuka."fukaNendo"  = #{調定年度減2})
+            AND fuka."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
+        ORDER BY fuka."tsuchishoNo"
+    </select>
+    
+    <resultMap id="resultMap_4月の人数金額" 
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.NinsuKinkaku" autoMapping="true">
+        <result property="choteiNendo" column="kayigoJyoho_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fukaNendo" column="kayigoJyoho_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHouhou" column="kayigoJyoho_choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenryoDankai" column="kayigoJyoho_hokenryoDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yoGetuNinsu" column="kayigoJyoho_yoGetuNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yoGetuKinkaku" column="kayigoJyoho_yoGetuKinkaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="goGetuNinsu" column="kayigoJyoho_goGetuNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="goGetuKinkaku" column="kayigoJyoho_goGetuKinkaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="rokuGetuNinsu" column="kayigoJyoho_rokuGetuNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="rokuGetuKinkaku" column="kayigoJyoho_rokuGetuKinkaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nanaGetuNinsu" column="kayigoJyoho_nanaGetuNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nanaGetuKinkaku" column="kayigoJyoho_nanaGetuKinkaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="hatiGetuNinsu" column="kayigoJyoho_hatiGetuNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="hatiGetuKinkaku" column="kayigoJyoho_hatiGetuKinkaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kyuGetuNinsu" column="kayigoJyoho_kyuGetuNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kyuGetuKinkaku" column="kayigoJyoho_kyuGetuKinkaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="jyuGetuNinsu" column="kayigoJyoho_jyuGetuNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="jyuGetuKinkaku" column="kayigoJyoho_jyuGetuKinkaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="jyuitiGetuNinsu" column="kayigoJyoho_jyuitiGetuNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="jyuitiGetuKinkaku" column="kayigoJyoho_jyuitiGetuKinkaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="jyuniGetuNinsu" column="kayigoJyoho_jyuniGetuNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="jyuniGetuKinkaku" column="kayigoJyoho_jyuniGetuKinkaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="itiGetuNinsu" column="kayigoJyoho_itiGetuNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="itiGetuKinkaku" column="kayigoJyoho_itiGetuKinkaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="niGetuNinsu" column="kayigoJyoho_niGetuNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="niGetuKinkaku" column="kayigoJyoho_niGetuKinkaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sanGetuNinsu" column="kayigoJyoho_sanGetuNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sanGetuKinkaku" column="kayigoJyoho_sanGetuKinkaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gennenSuyijiNinsu" column="kayigoJyoho_gennenSuyijiNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gennenSuyijiKinkaku" column="kayigoJyoho_gennenSuyijiKinkaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kanendoNinsu" column="kayigoJyoho_kanendoNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kanendoKinkaku" column="kayigoJyoho_kanendoKinkaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sayisyutuKanpuNinsu" column="kayigoJyoho_sayisyutuKanpuNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sayisyutuKanpuKinkaku" column="kayigoJyoho_sayisyutuKanpuKinkaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        
+        <result property="fumeNinsu" column="kayigoJyoho_fumeNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fumeKinkaku" column="kayigoJyoho_fumeKinkaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="getu" column="kayigoJyoho_getu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        
+        <result property="kanendoNinsu" column="kayigoJyoho_kanendoNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kanendoGemmenGaku" column="kayigoJyoho_kanendoGemmenGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kanendoNinsuGoukeyi" column="kayigoJyoho_kanendoNinsuGoukeyi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kanendoGemmenGakuGokeyi" column="kayigoJyoho_kanendoGemmenGakuGoukeyi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+    
+    <select  id="get4月の人数金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+            kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+            COUNT(kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_yoGetuNinsu",
+            kayigoJyoho."hokenryoDankai" AS "kayigoJyoho_hokenryoDankai",
+            kayigoJyoho."choshuHouhou" AS "kayigoJyoho_choshuHouhou",
+            SUM(kayigoJyoho."choteigaku") AS "kayigoJyoho_yoGetuKinkaku"
+        FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
+        WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+            AND kayigoJyoho."fukaNendo" = #{choteiNendo}
+            AND kayigoJyoho."hihokenshaNo" IN(
+                                                SELECT sikakuJyoukyou."hihokenshaNo"
+                                                FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                WHERE sikakuJyoukyou."yoGetuSikakuumuFlg" = true
+                                                )
+            AND kayigoJyoho."getu" = '04'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
+        GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+    </select>
+    
+    <select  id="get5月の人数金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+            kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+            COUNT(kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_goGetuNinsu",
+            kayigoJyoho."hokenryoDankai" AS "kayigoJyoho_hokenryoDankai",
+            kayigoJyoho."choshuHouhou" AS "kayigoJyoho_choshuHouhou",
+            SUM(kayigoJyoho."choteigaku") AS "kayigoJyoho_goGetuKinkaku"
+        FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
+        WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+            AND kayigoJyoho."fukaNendo" = #{choteiNendo}
+            AND kayigoJyoho."hihokenshaNo" IN(
+                                                SELECT sikakuJyoukyou."hihokenshaNo"
+                                                FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                WHERE sikakuJyoukyou."goGetuSikakuumuFlg" = true
+                                                )
+            AND kayigoJyoho."getu" = '05'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
+        GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+    </select>
+    
+    <select  id="get6月の人数金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+            kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+            COUNT(kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_rokuGetuNinsu",
+            kayigoJyoho."hokenryoDankai" AS "kayigoJyoho_hokenryoDankai",
+            kayigoJyoho."choshuHouhou" AS "kayigoJyoho_choshuHouhou",
+            SUM(kayigoJyoho."choteigaku") AS "kayigoJyoho_rokuGetuKinkaku"
+        FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
+        WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+            AND kayigoJyoho."fukaNendo" = #{choteiNendo}
+            AND kayigoJyoho."hihokenshaNo" IN(
+                                                SELECT sikakuJyoukyou."hihokenshaNo"
+                                                FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                WHERE sikakuJyoukyou."rokuGetuSikakuumuFlg" = true
+                                                )
+            AND kayigoJyoho."getu" = '06'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
+        GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+    </select>
+    
+    <select  id="get7月の人数金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+            kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+            COUNT(kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_nanaGetuNinsu",
+            kayigoJyoho."hokenryoDankai" AS "kayigoJyoho_hokenryoDankai",
+            kayigoJyoho."choshuHouhou" AS "kayigoJyoho_choshuHouhou",
+            SUM(kayigoJyoho."choteigaku") AS "kayigoJyoho_nanaGetuKinkaku"
+        FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
+        WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+            AND kayigoJyoho."fukaNendo" = #{choteiNendo}
+            AND kayigoJyoho."hihokenshaNo" IN(
+                                                SELECT sikakuJyoukyou."hihokenshaNo"
+                                                FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                WHERE sikakuJyoukyou."nanaGetuSikakuumuFlg" = true
+                                                )
+            AND kayigoJyoho."getu" = '07'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
+        GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+    </select>
+    
+    <select  id="get8月の人数金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+            kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+            COUNT(kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_hatiGetuNinsu",
+            kayigoJyoho."hokenryoDankai" AS "kayigoJyoho_hokenryoDankai",
+            kayigoJyoho."choshuHouhou" AS "kayigoJyoho_choshuHouhou",
+            SUM(kayigoJyoho."choteigaku") AS "kayigoJyoho_hatiGetuKinkaku"
+        FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
+        WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+            AND kayigoJyoho."fukaNendo" = #{choteiNendo}
+            AND kayigoJyoho."hihokenshaNo" IN(
+                                                SELECT sikakuJyoukyou."hihokenshaNo"
+                                                FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                WHERE sikakuJyoukyou."hatiGetuSikakuumuFlg" = true
+                                                )
+            AND kayigoJyoho."getu" = '08'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
+        GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+    </select>
+    
+    <select  id="get9月の人数金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+            kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+            COUNT(kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_kyuGetuNinsu",
+            kayigoJyoho."hokenryoDankai" AS "kayigoJyoho_hokenryoDankai",
+            kayigoJyoho."choshuHouhou" AS "kayigoJyoho_choshuHouhou",
+            SUM(kayigoJyoho."choteigaku") AS "kayigoJyoho_kyuGetuKinkaku"
+        FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
+        WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+            AND kayigoJyoho."fukaNendo" = #{choteiNendo}
+            AND kayigoJyoho."hihokenshaNo" IN(
+                                                SELECT sikakuJyoukyou."hihokenshaNo"
+                                                FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                WHERE sikakuJyoukyou."kyuGetuSikakuumuFlg" = true
+                                                )
+            AND kayigoJyoho."getu" = '09'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
+        GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+    </select>
+    
+    <select  id="get10月の人数金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+            kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+            COUNT(kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_jyuGetuNinsu",
+            kayigoJyoho."hokenryoDankai" AS "kayigoJyoho_hokenryoDankai",
+            kayigoJyoho."choshuHouhou" AS "kayigoJyoho_choshuHouhou",
+            SUM(kayigoJyoho."choteigaku") AS "kayigoJyoho_jyuGetuKinkaku"
+        FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
+        WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+            AND kayigoJyoho."fukaNendo" = #{choteiNendo}
+            AND kayigoJyoho."hihokenshaNo" IN(
+                                                SELECT sikakuJyoukyou."hihokenshaNo"
+                                                FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                WHERE sikakuJyoukyou."jyuGetuSikakuumuFlg" = true
+                                                )
+            AND kayigoJyoho."getu" = '10'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
+        GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+    </select>
+    
+    <select  id="get11月の人数金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+            kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+            COUNT(kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_jyuitiGetuNinsu",
+            kayigoJyoho."hokenryoDankai" AS "kayigoJyoho_hokenryoDankai",
+            kayigoJyoho."choshuHouhou" AS "kayigoJyoho_choshuHouhou",
+            SUM(kayigoJyoho."choteigaku") AS "kayigoJyoho_jyuitiGetuKinkaku"
+        FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
+        WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+            AND kayigoJyoho."fukaNendo" = #{choteiNendo}
+            AND kayigoJyoho."hihokenshaNo" IN(
+                                                SELECT sikakuJyoukyou."hihokenshaNo"
+                                                FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                WHERE sikakuJyoukyou."jyuitiGetuSikakuumuFlg" = true
+                                                )
+            AND kayigoJyoho."getu" = '11'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
+        GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+    </select>
+    
+    <select  id="get12月の人数金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+            kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+            COUNT(kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_jyuniGetuNinsu",
+            kayigoJyoho."hokenryoDankai" AS "kayigoJyoho_hokenryoDankai",
+            kayigoJyoho."choshuHouhou" AS "kayigoJyoho_choshuHouhou",
+            SUM(kayigoJyoho."choteigaku") AS "kayigoJyoho_jyuniGetuKinkaku"
+        FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
+        WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+            AND kayigoJyoho."fukaNendo" = #{choteiNendo}
+            AND kayigoJyoho."hihokenshaNo" IN(
+                                                SELECT sikakuJyoukyou."hihokenshaNo"
+                                                FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                WHERE sikakuJyoukyou."jyuniGetuSikakuumuFlg" = true
+                                                )
+            AND kayigoJyoho."getu" = '12'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
+        GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+    </select>
+    
+    <select  id="get1月の人数金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+            kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+            COUNT(kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_itiGetuNinsu",
+            kayigoJyoho."hokenryoDankai" AS "kayigoJyoho_hokenryoDankai",
+            kayigoJyoho."choshuHouhou" AS "kayigoJyoho_choshuHouhou",
+            SUM(kayigoJyoho."choteigaku") AS "kayigoJyoho_itiGetuKinkaku"
+        FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
+        WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+            AND kayigoJyoho."fukaNendo" = #{choteiNendo}
+            AND kayigoJyoho."hihokenshaNo" IN(
+                                                SELECT sikakuJyoukyou."hihokenshaNo"
+                                                FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                WHERE sikakuJyoukyou."itiGetuSikakuumuFlg" = true
+                                                )
+            AND kayigoJyoho."getu" = '01'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
+        GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+    </select>
+    
+    <select  id="get2月の人数金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+            kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+            COUNT(kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_niGetuNinsu",
+            kayigoJyoho."hokenryoDankai" AS "kayigoJyoho_hokenryoDankai",
+            kayigoJyoho."choshuHouhou" AS "kayigoJyoho_choshuHouhou",
+            SUM(kayigoJyoho."choteigaku") AS "kayigoJyoho_niGetuKinkaku"
+        FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
+        WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+            AND kayigoJyoho."fukaNendo" = #{choteiNendo}
+            AND kayigoJyoho."hihokenshaNo" IN(
+                                                SELECT sikakuJyoukyou."hihokenshaNo"
+                                                FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                WHERE sikakuJyoukyou."niGetuSikakuumuFlg" = true
+                                                )
+            AND kayigoJyoho."getu" = '02'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
+        GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+    </select>
+    
+    <select  id="get3月の人数金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+            kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+            COUNT(kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_sanGetuNinsu",
+            kayigoJyoho."hokenryoDankai" AS "kayigoJyoho_hokenryoDankai",
+            kayigoJyoho."choshuHouhou" AS "kayigoJyoho_choshuHouhou",
+            SUM(kayigoJyoho."choteigaku") AS "kayigoJyoho_sanGetuKinkaku"
+        FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
+        WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+            AND kayigoJyoho."fukaNendo" = #{choteiNendo}
+            AND kayigoJyoho."hihokenshaNo" IN(
+                                                SELECT sikakuJyoukyou."hihokenshaNo"
+                                                FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                WHERE sikakuJyoukyou."sanGetuSikakuumuFlg" = true
+                                                )
+            AND kayigoJyoho."getu" = '03'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
+        GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+    </select>
+    
+    <select  id="get現年随時の人数金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+            kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+            COUNT(DISTINCT kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_gennenSuyijiNinsu",
+            kayigoJyoho."hokenryoDankai" AS "kayigoJyoho_hokenryoDankai",
+            kayigoJyoho."choshuHouhou" AS "kayigoJyoho_choshuHouhou",
+            SUM(kayigoJyoho."choteigaku") AS "kayigoJyoho_gennenSuyijiKinkaku"
+        FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
+        WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+            AND kayigoJyoho."fukaNendo" = #{choteiNendo}
+            AND kayigoJyoho."hihokenshaNo" IN(
+                                                SELECT sikakuJyoukyou."hihokenshaNo"
+                                                FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                )
+            AND kayigoJyoho."getu" = '随'
+            AND kayigoJyoho."dankaiFumeyiFlg" = false
+        GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+    </select>
+    
+    <select  id="get過年度の人数金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+            kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+            COUNT(kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_kanendoNinsu",
+            kayigoJyoho."hokenryoDankai" AS "kayigoJyoho_hokenryoDankai",
+            kayigoJyoho."choshuHouhou" AS "kayigoJyoho_choshuHouhou",
+            SUM(kayigoJyoho."choteigaku") AS "kayigoJyoho_kanendoKinkaku"
+        FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
+        WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+            AND (kayigoJyoho."fukaNendo" = #{調定年度減1} OR kayigoJyoho."fukaNendo" = #{調定年度減2})
+            AND kayigoJyoho."hihokenshaNo" IN(
+                                                SELECT sikakuJyoukyou."hihokenshaNo"
+                                                FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                )
+        GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+    </select>
+    
+     <select  id="get特別徴収歳出還付の人数金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+            SELECT 
+                kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+                kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+                COUNT(kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_sayisyutuKanpuNinsu",
+                kayigoJyoho."hokenryoDankai" AS "kayigoJyoho_hokenryoDankai",
+                kayigoJyoho."choshuHouhou" AS "kayigoJyoho_choshuHouhou",
+                SUM(kayigoJyoho."tkSaishutsuKampuGaku") AS "kayigoJyoho_sayisyutuKanpuKinkaku"
+            FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
+            WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+                AND kayigoJyoho."fukaNendo" = #{choteiNendo}
+                AND kayigoJyoho."hihokenshaNo" IN(
+                                                    SELECT sikakuJyoukyou."hihokenshaNo"
+                                                    FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                    )
+                AND kayigoJyoho."tkSaishutsuKampuGaku" <![CDATA[<>]]> '0'
+                AND kayigoJyoho."choshuHouhou" = '1'
+            GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+     </select>
+     <select  id="get普通徴収歳出還付の人数金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+             SELECT 
+                kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+                kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+                COUNT(kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_sayisyutuKanpuNinsu",
+                kayigoJyoho."hokenryoDankai" AS "kayigoJyoho_hokenryoDankai",
+                kayigoJyoho."choshuHouhou" AS "kayigoJyoho_choshuHouhou",
+                SUM(kayigoJyoho."fuSaishutsuKampuGaku") AS "kayigoJyoho_sayisyutuKanpuKinkaku"
+            FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
+            WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+                AND kayigoJyoho."fukaNendo" = #{choteiNendo}
+                AND kayigoJyoho."hihokenshaNo" IN(
+                                                    SELECT sikakuJyoukyou."hihokenshaNo"
+                                                    FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                    )
+                AND kayigoJyoho."fuSaishutsuKampuGaku" <![CDATA[<>]]> '0'
+                AND kayigoJyoho."choshuHouhou" = '2'
+            GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+    </select>
+    
+    <select  id="get不明の人数と金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+            kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+            COUNT(kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_fumeNinsu",
+            kayigoJyoho."getu" AS "kayigoJyoho_getu",
+            kayigoJyoho."choshuHouhou" AS "kayigoJyoho_choshuHouhou",
+            SUM(kayigoJyoho."choteigaku") AS "kayigoJyoho_fumeKinkaku"
+        FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
+        WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+            AND kayigoJyoho."fukaNendo" = #{choteiNendo}
+            AND kayigoJyoho."hihokenshaNo" IN(
+                                                SELECT sikakuJyoukyou."hihokenshaNo"
+                                                FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                )
+            AND kayigoJyoho."dankaiFumeyiFlg" = true
+        GROUP BY kayigoJyoho."choshuHouhou", kayigoJyoho."getu", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+    </select>
+    
+    <select  id="get減免部分の人数と金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+            kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+            COUNT(kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_kanendoNinsu",
+            kayigoJyoho."hokenryoDankai" AS "kayigoJyoho_hokenryoDankai",
+            SUM(kayigoJyoho."gemmenGaku") AS "kayigoJyoho_kanendoGemmenGaku"
+        FROM "TmpGemmenKayigoJyoho_Ichi" AS kayigoJyoho
+        WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+            AND (kayigoJyoho."fukaNendo" = #{調定年度減1} OR kayigoJyoho."fukaNendo" = #{調定年度減2})
+            AND kayigoJyoho."hihokenshaNo" IN(
+                                                SELECT sikakuJyoukyou."hihokenshaNo"
+                                                FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                )
+        GROUP BY kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+    </select>
+    
+    <select  id="get減免部分合計の人数と金額" resultMap="resultMap_4月の人数金額" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            kayigoJyoho."choteiNendo" AS "kayigoJyoho_choteiNendo",
+            kayigoJyoho."fukaNendo" AS "kayigoJyoho_fukaNendo",
+            COUNT(kayigoJyoho."hihokenshaNo") AS "kayigoJyoho_kanendoNinsuGoukeyi",
+            kayigoJyoho."hokenryoDankai" AS "kayigoJyoho_hokenryoDankai",
+            SUM(kayigoJyoho."gemmenGaku") AS "kayigoJyoho_kanendoGemmenGakuGoukeyi"
+        FROM "TmpGemmenKayigoJyoho_Ichi" AS kayigoJyoho
+        WHERE kayigoJyoho."choteiNendo" = #{choteiNendo}
+            AND (kayigoJyoho."fukaNendo" = #{choteiNendo} OR kayigoJyoho."fukaNendo" = #{調定年度減1} OR kayigoJyoho."fukaNendo" = #{調定年度減2})
+            AND kayigoJyoho."hihokenshaNo" IN(
+                                                SELECT sikakuJyoukyou."hihokenshaNo"
+                                                FROM "TmpSikakuJyoukyou_Ichi" AS sikakuJyoukyou
+                                                )
+        GROUP BY kayigoJyoho."hokenryoDankai", kayigoJyoho."choteiNendo", kayigoJyoho."fukaNendo"
+    </select>
+    
+    <resultMap id="resultMap_GemmenJyoho" 
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GemmenJyoho" autoMapping="true">
+        <result property="hokenryoDankai" column="gemmenJyoho_hokenryoDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenryoDankaiKanendoNinsu" column="gemmenJyoho_hokenryoDankaiKanendoNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="hoDankaiKanendoGemmenGaku" column="gemmenJyoho_hokenryoDankaiKanendoGemmenGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="hoDankaiKanendoNinsuGoukeyi" column="gemmenJyoho_hokenryoDankaiKanendoNinsuGoukeyi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="hoDankaiKanendoGemenGakuGoukei" column="gemmenJyoho_hokenryoDankaiKanendoGemmenGakuGoukeyi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+    
+    <select  id="get減免部分過年度の人数合計と金額合計" resultMap="resultMap_GemmenJyoho" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            SUM(GemmenJyoho."hokenryoDankaiKanendoNinsu") AS "gemmenJyoho_hokenryoDankaiKanendoNinsu",
+            SUM(GemmenJyoho."hoDankaiKanendoGemmenGaku") AS "gemmenJyoho_hokenryoDankaiKanendoGemmenGaku",
+            SUM(GemmenJyoho."hoDankaiKanendoNinsuGoukeyi") AS "gemmenJyoho_hokenryoDankaiKanendoNinsuGoukeyi",
+            SUM(GemmenJyoho."hoDankaiKanendoGemenGakuGoukei") AS "gemmenJyoho_hokenryoDankaiKanendoGemmenGakuGoukeyi"
+        FROM "TmpGemmenJyoho_Ichi" AS GemmenJyoho
+        WHERE GemmenJyoho."choteiNendo" IS NULL
+            AND GemmenJyoho."fukaNendo" IS NULL
+    </select>
+    
+    <select  id="get該当段階の過年度の人数と金額合計" resultMap="resultMap_GemmenJyoho" 
+             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+        SELECT 
+            GemmenJyoho."hokenryoDankai" AS "gemmenJyoho_hokenryoDankai",
+            SUM(GemmenJyoho."hokenryoDankaiKanendoNinsu") AS "gemmenJyoho_hokenryoDankaiKanendoNinsu",
+            SUM(GemmenJyoho."hoDankaiKanendoGemmenGaku") AS "gemmenJyoho_hokenryoDankaiKanendoGemmenGaku",
+            SUM(GemmenJyoho."hoDankaiKanendoNinsuGoukeyi") AS "gemmenJyoho_hokenryoDankaiKanendoNinsuGoukeyi",
+            SUM(GemmenJyoho."hoDankaiKanendoGemenGakuGoukei") AS "gemmenJyoho_hokenryoDankaiKanendoGemmenGakuGoukeyi"
+        FROM "TmpGemmenJyoho_Ichi" AS GemmenJyoho
+        GROUP BY GemmenJyoho."hokenryoDankai"
+    </select>
+    
+</mapper>

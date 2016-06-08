@@ -1,0 +1,98 @@
+﻿{
+ "uiContainerName": "DBEUC24101",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "個人依頼内容更新(認定調査票・主治医意見書編集)",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2410001",
+     "toLayoutTitle": "個人依頼内容更新（認定調査票・主治医意見書編集）",
+     "toState": "初期表示"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2410001",
+     "layoutTitle": "個人依頼内容更新（認定調査票・主治医意見書編集）",
+     "eventName": "認定調査依頼へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2010002",
+     "toLayoutTitle": "認定調査依頼（手動）",
+     "toState": "default"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2010002",
+     "layoutTitle": "認定調査依頼（手動）",
+     "eventName": "個人依頼内容更新に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2410001",
+     "toLayoutTitle": "個人依頼内容更新（認定調査票・主治医意見書編集）",
+     "toState": "初期表示"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2410001",
+     "layoutTitle": "個人依頼内容更新（認定調査票・主治医意見書編集）",
+     "eventName": "調査依頼完了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2410001",
+     "layoutTitle": "個人依頼内容更新（認定調査票・主治医意見書編集）",
+     "eventName": "主治医意見書作成依頼へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2410002",
+     "toLayoutTitle": "主治医意見書作成依頼（手動）",
+     "toState": ""
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2410002",
+     "layoutTitle": "主治医意見書作成依頼（手動）",
+     "eventName": "個人依頼内容更新に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2410001",
+     "toLayoutTitle": "個人依頼内容更新（認定調査票・主治医意見書編集）",
+     "toState": "初期表示"
+    },
+    {
+     "id": "7",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2410001",
+     "layoutTitle": "個人依頼内容更新（認定調査票・主治医意見書編集）",
+     "eventName": "意見書依頼完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

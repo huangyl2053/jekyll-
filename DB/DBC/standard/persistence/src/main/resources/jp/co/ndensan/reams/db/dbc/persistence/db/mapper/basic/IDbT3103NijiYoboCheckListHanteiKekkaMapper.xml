@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3103NijiYoboCheckListHanteiKekkaマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3103NijiYoboCheckListHanteiKekkaMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3103NijiYoboCheckListHanteiKekka">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3103NijiYoboCheckListHanteiKekkaMapper.allColumns_DbT3103NijiYoboCheckListHanteiKekka" />
+     FROM
+         rgdb."DbT3103NijiYoboCheckListHanteiKekka"
+     WHERE
+         rgdb."DbT3103NijiYoboCheckListHanteiKekka"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3103NijiYoboCheckListHanteiKekka">
+         "DbT3103NijiYoboCheckListHanteiKekka"."hihokenshaNo" as "dbT3103NijiYoboCheckListHanteiKekka_hihokenshaNo",
+         "DbT3103NijiYoboCheckListHanteiKekka"."uketsukeYMD" as "dbT3103NijiYoboCheckListHanteiKekka_uketsukeYMD",
+         "DbT3103NijiYoboCheckListHanteiKekka"."rirekiNo" as "dbT3103NijiYoboCheckListHanteiKekka_rirekiNo",
+         "DbT3103NijiYoboCheckListHanteiKekka"."insertDantaiCd" as "dbT3103NijiYoboCheckListHanteiKekka_insertDantaiCd",
+         "DbT3103NijiYoboCheckListHanteiKekka"."insertTimestamp" as "dbT3103NijiYoboCheckListHanteiKekka_insertTimestamp",
+         "DbT3103NijiYoboCheckListHanteiKekka"."insertReamsLoginId" as "dbT3103NijiYoboCheckListHanteiKekka_insertReamsLoginId",
+         "DbT3103NijiYoboCheckListHanteiKekka"."insertContextId" as "dbT3103NijiYoboCheckListHanteiKekka_insertContextId",
+         "DbT3103NijiYoboCheckListHanteiKekka"."isDeleted" as "dbT3103NijiYoboCheckListHanteiKekka_isDeleted",
+         "DbT3103NijiYoboCheckListHanteiKekka"."updateCount" as "dbT3103NijiYoboCheckListHanteiKekka_updateCount",
+         "DbT3103NijiYoboCheckListHanteiKekka"."lastUpdateTimestamp" as "dbT3103NijiYoboCheckListHanteiKekka_lastUpdateTimestamp",
+         "DbT3103NijiYoboCheckListHanteiKekka"."lastUpdateReamsLoginId" as "dbT3103NijiYoboCheckListHanteiKekka_lastUpdateReamsLoginId",
+         "DbT3103NijiYoboCheckListHanteiKekka"."tensu_SeikatsuKinoZenpan" as "dbT3103NijiYoboCheckListHanteiKekka_tensu_SeikatsuKinoZenpan",
+         "DbT3103NijiYoboCheckListHanteiKekka"."tensu_UndokiKino" as "dbT3103NijiYoboCheckListHanteiKekka_tensu_UndokiKino",
+         "DbT3103NijiYoboCheckListHanteiKekka"."tensu_Eiyo" as "dbT3103NijiYoboCheckListHanteiKekka_tensu_Eiyo",
+         "DbT3103NijiYoboCheckListHanteiKekka"."tensu_Koku" as "dbT3103NijiYoboCheckListHanteiKekka_tensu_Koku",
+         "DbT3103NijiYoboCheckListHanteiKekka"."tensu_Tojikomori" as "dbT3103NijiYoboCheckListHanteiKekka_tensu_Tojikomori",
+         "DbT3103NijiYoboCheckListHanteiKekka"."tensu_NinchiNoryoku" as "dbT3103NijiYoboCheckListHanteiKekka_tensu_NinchiNoryoku",
+         "DbT3103NijiYoboCheckListHanteiKekka"."tensu_Utsu" as "dbT3103NijiYoboCheckListHanteiKekka_tensu_Utsu",
+         "DbT3103NijiYoboCheckListHanteiKekka"."shien_SeikatsuKinoZenpan" as "dbT3103NijiYoboCheckListHanteiKekka_shien_SeikatsuKinoZenpan",
+         "DbT3103NijiYoboCheckListHanteiKekka"."shien_UndokiKino" as "dbT3103NijiYoboCheckListHanteiKekka_shien_UndokiKino",
+         "DbT3103NijiYoboCheckListHanteiKekka"."shien_Eiyo" as "dbT3103NijiYoboCheckListHanteiKekka_shien_Eiyo",
+         "DbT3103NijiYoboCheckListHanteiKekka"."shien_Koku" as "dbT3103NijiYoboCheckListHanteiKekka_shien_Koku",
+         "DbT3103NijiYoboCheckListHanteiKekka"."shien_Tojikomori" as "dbT3103NijiYoboCheckListHanteiKekka_shien_Tojikomori",
+         "DbT3103NijiYoboCheckListHanteiKekka"."shien_NinchiNoryoku" as "dbT3103NijiYoboCheckListHanteiKekka_shien_NinchiNoryoku",
+         "DbT3103NijiYoboCheckListHanteiKekka"."shien_Utsu" as "dbT3103NijiYoboCheckListHanteiKekka_shien_Utsu",
+         "DbT3103NijiYoboCheckListHanteiKekka"."nijiYobo_ShukantekiKenkouKan" as "dbT3103NijiYoboCheckListHanteiKekka_nijiYobo_ShukantekiKenkouKan"
+    </sql>
+
+
+    <!--テーブルDbT3103NijiYoboCheckListHanteiKekkaの項目をDbT3103NijiYoboCheckListHanteiKekkaEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3103NijiYoboCheckListHanteiKekkaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3103NijiYoboCheckListHanteiKekkaEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT3103NijiYoboCheckListHanteiKekka_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="uketsukeYMD" column="dbT3103NijiYoboCheckListHanteiKekka_uketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="rirekiNo" column="dbT3103NijiYoboCheckListHanteiKekka_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT3103NijiYoboCheckListHanteiKekka_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3103NijiYoboCheckListHanteiKekka_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3103NijiYoboCheckListHanteiKekka_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3103NijiYoboCheckListHanteiKekka_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3103NijiYoboCheckListHanteiKekka_isDeleted" />
+        <result property="updateCount" column="dbT3103NijiYoboCheckListHanteiKekka_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3103NijiYoboCheckListHanteiKekka_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3103NijiYoboCheckListHanteiKekka_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tensu_SeikatsuKinoZenpan" column="dbT3103NijiYoboCheckListHanteiKekka_tensu_SeikatsuKinoZenpan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tensu_UndokiKino" column="dbT3103NijiYoboCheckListHanteiKekka_tensu_UndokiKino" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tensu_Eiyo" column="dbT3103NijiYoboCheckListHanteiKekka_tensu_Eiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tensu_Koku" column="dbT3103NijiYoboCheckListHanteiKekka_tensu_Koku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tensu_Tojikomori" column="dbT3103NijiYoboCheckListHanteiKekka_tensu_Tojikomori" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tensu_NinchiNoryoku" column="dbT3103NijiYoboCheckListHanteiKekka_tensu_NinchiNoryoku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tensu_Utsu" column="dbT3103NijiYoboCheckListHanteiKekka_tensu_Utsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shien_SeikatsuKinoZenpan" column="dbT3103NijiYoboCheckListHanteiKekka_shien_SeikatsuKinoZenpan" />
+        <result property="shien_UndokiKino" column="dbT3103NijiYoboCheckListHanteiKekka_shien_UndokiKino" />
+        <result property="shien_Eiyo" column="dbT3103NijiYoboCheckListHanteiKekka_shien_Eiyo" />
+        <result property="shien_Koku" column="dbT3103NijiYoboCheckListHanteiKekka_shien_Koku" />
+        <result property="shien_Tojikomori" column="dbT3103NijiYoboCheckListHanteiKekka_shien_Tojikomori" />
+        <result property="shien_NinchiNoryoku" column="dbT3103NijiYoboCheckListHanteiKekka_shien_NinchiNoryoku" />
+        <result property="shien_Utsu" column="dbT3103NijiYoboCheckListHanteiKekka_shien_Utsu" />
+        <result property="nijiYobo_ShukantekiKenkouKan" column="dbT3103NijiYoboCheckListHanteiKekka_nijiYobo_ShukantekiKenkouKan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>

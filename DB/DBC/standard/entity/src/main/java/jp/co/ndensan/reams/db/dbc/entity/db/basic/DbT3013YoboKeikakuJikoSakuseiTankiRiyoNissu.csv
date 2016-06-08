@@ -1,0 +1,7 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+taishoYM,UDD014YM,FlexibleYearMonth,,,,,対象年月,A
+rirekiNo,int2,int,,,,,履歴番号,A
+riyoYM,UDD014YM,FlexibleYearMonth,,,,,利用年月,A
+zenkaiRiyoNissu,numeric,Decimal,,,,,前回迄利用日数,A
+konkaiKeikakuRiyoNissu,numeric,Decimal,,,,,今回計画利用日数,A
+zanteiKubun,varchar,RString,,,,,暫定区分,A

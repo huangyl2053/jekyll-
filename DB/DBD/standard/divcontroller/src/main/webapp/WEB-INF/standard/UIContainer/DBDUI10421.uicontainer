@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUI10421",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "特別地域加算軽減実績管理リスト",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD1040021",
+     "toLayoutTitle": "特別地域加算軽減実績管理リスト",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD1040021",
+     "layoutTitle": "特別地域加算軽減実績管理リスト",
+     "eventName": "完了状態",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

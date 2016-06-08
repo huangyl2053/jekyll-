@@ -1,0 +1,60 @@
+﻿{
+ "uiContainerName": "DBCUC11700",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "自己負担額証明書作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0200001",
+     "layoutTitle": "対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC1170011",
+     "toLayoutTitle": "自己負担額証明書作成",
+     "toState": "帳票発行"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1170011",
+     "layoutTitle": "自己負担額証明書作成",
+     "eventName": "検索に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1170011",
+     "layoutTitle": "自己負担額証明書作成",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

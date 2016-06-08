@@ -1,0 +1,12 @@
+﻿shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
+rirekiNo,varchar,RString,,,,,履歴番号,A
+kokuhoNo,varchar,RString,,,,,国保番号,A
+kokuhoHokenshaNo,varchar,RString,,,,,国保保険者番号,A
+kokuhoHokenshoNo,varchar,RString,,,,,国保保険証番号,A
+kokuhoKojinNo,varchar,RString,,,,,国保個人番号,A
+shikakuShutokuYMD,varchar,RString,,,,,資格取得日,A
+shikakuSoshitsuYMD,varchar,RString,,,,,資格喪失日,A
+taishokuGaitoYMD,varchar,RString,,,,,退職該当日,A
+taishokuHigaitoYMD,varchar,RString,,,,,退職非該当日,A
+kojinKubunCode,varchar,RString,,,,,個人区分コード,A
+torokuKubun,varchar,RString,,,,,登録区分,A

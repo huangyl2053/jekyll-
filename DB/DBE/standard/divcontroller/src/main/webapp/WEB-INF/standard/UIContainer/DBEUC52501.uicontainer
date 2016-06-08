@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC52501",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "判定結果情報出力",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5250001",
+     "toLayoutTitle": "判定結果情報出力（介護認定審査会）",
+     "toState": "判定結果情報出力"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5250001",
+     "layoutTitle": "判定結果情報出力（介護認定審査会）",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

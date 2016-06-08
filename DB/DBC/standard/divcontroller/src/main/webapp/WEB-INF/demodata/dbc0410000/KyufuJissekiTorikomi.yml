@@ -1,0 +1,5 @@
+## YAML Template.
+---
+- KyufuJissekiTorikomiId: 0
+  処理対象年月: 20140601
+  再処理区分: !!str 処理なし

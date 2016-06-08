@@ -1,0 +1,982 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;title&quot;:&quot;高額介護サービス費明細&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KogakuServicehiDetail&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;eraseBorder&quot;:false,&quot;panelDisplay&quot;:0,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;title&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;eraseBorder&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;panelDisplay&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;tplJudgementResult_title&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;tplKetteiJoho_visible&quot;,&quot;editType&quot;:1}]},&quot;tplJudgementResult_title&quot;:&quot;判定結果&quot;,&quot;tplKetteiJoho_visible&quot;:true}" data-is-composite-control="true" data-control-name="DBZ.KogakuServicehiDetail"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginRight-XS marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G12 UzCompositeChild" id="KogakuServicehiDetail" style="margin-top: 0px; margin-bottom: 0px; margin-left: 0em;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KogakuServicehiDetail&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G12&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;KogakuServicehiDetail&quot;,&quot;title&quot;:&quot;高額介護サービス費明細&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KogakuServicehiDetail&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KogakuServicehiDetail_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">高額介護サービス費明細</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="KogakuServicehiDetail_panel_body_area"><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtTeikyoYM" style="width: 131px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtTeikyoYM&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;60px&quot;,&quot;selectControlID&quot;:&quot;txtTeikyoYM_core&quot;,&quot;labelLText&quot;:&quot;提供年月&quot;,&quot;labelLWidth&quot;:&quot;64px&quot;,&quot;ymdKubun&quot;:1}"><span class="word-wrap-break-word Label-L text-align-right" id="txtTeikyoYM_labelL" style="width: 64px;"><span>提供年月</span></span><input class="UzTextBox CoreElement" id="txtTeikyoYM_core" style="width: 60px;" type="text" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div title="" class="UzTabContainer ui-tabs ui-widget ui-widget-content ui-corner-all FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="tabKogakuServicehiDetail" style="width: 1040px;" data-control-type="TabContainer" data-obj="{&quot;fieldName&quot;:&quot;tabKogakuServicehiDetail&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TabContainer&quot;,&quot;width&quot;:&quot;1040px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;tabKogakuServicehiDetail&quot;,&quot;tabpanelPosition&quot;:[],&quot;initialTab&quot;:&quot;0&quot;}"><ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all ui-sortable" role="tablist"><li tabindex="0" class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" aria-selected="true" aria-controls="tplShinseisha" aria-labelledby="ui-id-4"><a tabindex="-1" class="ui-tabs-anchor" id="ui-id-4" role="presentation" style="background-color: transparent;" href="#tplShinseisha">申請者情報</a></li><li tabindex="-1" class="ui-state-default ui-corner-top" role="tab" aria-selected="false" aria-controls="tplKoza" aria-labelledby="ui-id-12"><a tabindex="-1" class="ui-tabs-anchor" id="ui-id-12" role="presentation" style="background-color: transparent;" href="#tplKoza">口座情報</a></li><li tabindex="-1" class="ui-state-default ui-corner-top" role="tab" aria-selected="false" aria-controls="tplJudgementResult" aria-labelledby="ui-id-29"><a tabindex="-1" class="ui-tabs-anchor" id="ui-id-29" role="presentation" style="background-color: transparent;" href="#tplJudgementResult">判定結果</a></li><li tabindex="-1" class="ui-state-default ui-corner-top" role="tab" aria-selected="false" aria-controls="tplKetteiJoho" aria-labelledby="ui-id-34"><a tabindex="-1" class="ui-tabs-anchor" id="ui-id-34" role="presentation" style="background-color: transparent;" href="#tplKetteiJoho">高額決定情報</a></li></ul><div title="" class="UzTabPanel FloatLeft JSControl controlMargin-M ui-tabs-panel ui-widget-content ui-corner-bottom Width-XS marginLeft-XS marginRight-XS ui-droppable ui-sortable UzCompositeChild" id="tplShinseisha" role="tabpanel" aria-expanded="true" aria-hidden="false" aria-labelledby="ui-id-4" style="width: 1049px; height: 342px; display: block;" data-control-type="TabPanel" data-obj="{&quot;fieldName&quot;:&quot;tplShinseisha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TabPanel&quot;,&quot;selectControlID&quot;:&quot;tplShinseisha&quot;,&quot;title&quot;:&quot;申請者情報&quot;,&quot;lazyLoadingControls&quot;:{}}"><div title="" class="JSControl UzCompositeControl FloatLeft Width-XS" id="Shinseisha" style="margin: 0em 0em 0em 2.4em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;Shinseisha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;2.4em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;Shinseisha&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ShinseishaInfo&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;panelDisplay&quot;:0,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;btnJigyoshaInputGuide_displayNone&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;txtUkestukeDate_displayNone&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;title&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;panelDisplay&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;txtJigyoshaNo_disabled&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;txtShinseishaName_labelLText&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;txtYubinNo_displayNone&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;txtAddress_displayNone&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;btnJigyoshaInputGuide_disabled&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;shinseishaInfo_eraseBorder&quot;,&quot;editType&quot;:1}]},&quot;btnJigyoshaInputGuide_displayNone&quot;:false,&quot;txtUkestukeDate_displayNone&quot;:true,&quot;txtJigyoshaNo_disabled&quot;:false,&quot;txtShinseishaName_labelLText&quot;:&quot;氏名&quot;,&quot;txtYubinNo_displayNone&quot;:false,&quot;txtAddress_displayNone&quot;:false,&quot;btnJigyoshaInputGuide_disabled&quot;:false,&quot;shinseishaInfo_eraseBorder&quot;:true}" data-is-composite-control="true" data-control-name="DBZ.ShinseishaInfo"></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum FloatLeft JSControl controlMargin-M ClearFloat marginRight-XS UzCompositeChild" id="txtShiharaiTotalAmount" style="width: 224px; height: 21px; margin-left: 0em;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtShiharaiTotalAmount&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtShiharaiTotalAmount_core&quot;,&quot;labelLText&quot;:&quot;支払金額合計&quot;,&quot;labelLWidth&quot;:&quot;105px&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;isComma&quot;:true,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShiharaiTotalAmount_labelL" style="width: 105px;"><span>支払金額合計</span></span><input class="UzTextBox CoreElement Width-S text-align-right ime-mode-Off ui-autocomplete-input" id="txtShiharaiTotalAmount_core" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzTextBoxMultiLine TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M ClearFloat marginRight-XS Height-XS UzCompositeChild" id="txtShinseiRiyu" style="width: 672px; height: 51px; margin-left: 0.3em;" data-control-type="TextBoxMultiLine" data-obj="{&quot;fieldName&quot;:&quot;txtShinseiRiyu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxMultiLine&quot;,&quot;width&quot;:&quot;565px&quot;,&quot;wrap&quot;:true,&quot;marginLeft&quot;:&quot;0.3em&quot;,&quot;selectControlID&quot;:&quot;txtShinseiRiyu_text_area&quot;,&quot;height&quot;:&quot;XS&quot;,&quot;labelLText&quot;:&quot;申請理由&quot;,&quot;countDisp&quot;:false}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShinseiRiyu_labelL" style="width: 100px; vertical-align: top;"><span>申請理由</span></span><span class="CoreElement UzTextBox" id="txtShinseiRiyu_core" style="width: 565px;"><textarea class="UzTextBox UzTextBoxMultiLine Height-XS NoneJcountLine" id="txtShinseiRiyu_text_area" style="width: 569px;" placeholder="" type="text" data-control-type="TextBoxMultiLine"></textarea></span><div id="txtShinseiRiyu_text_countDiv"><span class="word-wrap-break-word Label-L text-align-right" id="txtShinseiRiyu_labelL_count" style="width: 100px;"></span></div></div></div><div title="" class="UzTabPanel FloatLeft JSControl controlMargin-M ui-tabs-panel ui-widget-content ui-corner-bottom Width-XS marginLeft-XS marginRight-XS ui-droppable ui-sortable UzCompositeChild" id="tplKoza" role="tabpanel" aria-expanded="false" aria-hidden="true" aria-labelledby="ui-id-12" style="width: 1049px; height: 342px; display: none;" data-control-type="TabPanel" data-obj="{&quot;fieldName&quot;:&quot;tplKoza&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TabPanel&quot;,&quot;selectControlID&quot;:&quot;tplKoza&quot;,&quot;title&quot;:&quot;口座情報&quot;,&quot;lazyLoadingControls&quot;:{}}"><div title="" class="JSControl UzCompositeControl FloatLeft Width-XS ClearFloat" id="PaymentMethod" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;PaymentMethod&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;PaymentMethod&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;PaymentMethod&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;eraseBorder&quot;:true,&quot;panelDisplay&quot;:0,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;title&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;panelDisplay&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;KozaPayment_title&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;onClick_radPayMethod&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;Juryoinin_displayNone&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;Madoguchi_displayNone&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;Koza_displayNone&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;eraseBorder&quot;,&quot;editType&quot;:1}]},&quot;onClick_radPayMethod&quot;:&quot;&quot;,&quot;Juryoinin_displayNone&quot;:false,&quot;Madoguchi_displayNone&quot;:false,&quot;Koza_displayNone&quot;:false}" data-is-composite-control="true" data-control-name="DBZ.PaymentMethod"></div></div><div title="" class="UzTabPanel FloatLeft JSControl controlMargin-M ui-tabs-panel ui-widget-content ui-corner-bottom Width-XS marginLeft-XS marginRight-XS ui-droppable ui-sortable UzCompositeChild" id="tplJudgementResult" role="tabpanel" aria-expanded="false" aria-hidden="true" aria-labelledby="ui-id-29" style="width: 1049px; height: 342px; display: none;" data-control-type="TabPanel" data-obj="{&quot;fieldName&quot;:&quot;tplJudgementResult&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TabPanel&quot;,&quot;selectControlID&quot;:&quot;tplJudgementResult&quot;,&quot;title&quot;:&quot;判定結果&quot;,&quot;lazyLoadingControls&quot;:{}}"><div title="" class="JSControl UzCompositeControl FloatLeft Width-XS" id="JudgementResult" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;JudgementResult&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;JudgementResult&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KogakuServicehiJudgementResult&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;eraseBorder&quot;:false,&quot;panelDisplay&quot;:0,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;title&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;eraseBorder&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;panelDisplay&quot;,&quot;editType&quot;:0}]}}" data-is-composite-control="true" data-control-name="DBZ.KogakuServicehiJudgementResult"></div></div><div tabindex="-1" title="" class="UzTabPanel FloatLeft JSControl controlMargin-M ui-tabs-panel ui-widget-content ui-corner-bottom Width-XS marginLeft-XS marginRight-XS ui-droppable ui-sortable UzCompositeChild" id="tplKetteiJoho" role="tabpanel" aria-expanded="false" aria-hidden="true" aria-labelledby="ui-id-34" style="width: 1049px; height: 342px; display: none;" data-control-type="TabPanel" data-obj="{&quot;fieldName&quot;:&quot;tplKetteiJoho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TabPanel&quot;,&quot;disabled&quot;:true,&quot;selectControlID&quot;:&quot;tplKetteiJoho&quot;,&quot;title&quot;:&quot;高額決定情報&quot;,&quot;lazyLoadingControls&quot;:{}}"></div></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    var KogakuServicehiDetail_Design = (function (_super) {
+        __extends(KogakuServicehiDetail_Design, _super);
+        function KogakuServicehiDetail_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, KogakuServicehiDetail_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(KogakuServicehiDetail_Design.prototype, "title", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"] = value;
+                } else {
+                    this.layout.items[0]["title"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(KogakuServicehiDetail_Design.prototype, "eraseBorder", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
+                } else {
+                    this.layout.items[0]["eraseBorder"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(KogakuServicehiDetail_Design.prototype, "panelDisplay", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"] = value;
+                } else {
+                    this.layout.items[0]["panelDisplay"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(KogakuServicehiDetail_Design.prototype, "tplJudgementResult_title", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[2]["fieldName"])["title"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[2]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[2]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[2]["fieldName"])["title"] = value;
+                } else {
+                    this.layout.items[0].items[1].items[2]["title"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(KogakuServicehiDetail_Design.prototype, "tplKetteiJoho_visible", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[3]["fieldName"])["visible"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[3]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[3]["fieldName"])["visible"] = value;
+                } else {
+                    this.layout.items[0].items[1].items[3]["visible"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        KogakuServicehiDetail_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("title");
+            Uz.JSControlUtil.registProperty("eraseBorder");
+            Uz.JSControlUtil.registProperty("panelDisplay");
+            Uz.JSControlUtil.registProperty("tplJudgementResult_title");
+            Uz.JSControlUtil.registProperty("tplKetteiJoho_visible");
+        };
+
+        KogakuServicehiDetail_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
+            editablePropertyInfo["eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
+            editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
+            editablePropertyInfo["tplJudgementResult_title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[2]["fieldName"]).getEditablePropertyInfo()["title"];
+            editablePropertyInfo["tplKetteiJoho_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[3]["fieldName"]).getEditablePropertyInfo()["visible"];
+
+            return editablePropertyInfo;
+        };
+        KogakuServicehiDetail_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "KogakuServicehiDetail",
+                    "items": [
+                        {
+                            "fieldName": "txtTeikyoYM",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "60px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtTeikyoYM_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "value": "",
+                            "labelLText": "提供年月",
+                            "labelRText": "",
+                            "labelLWidth": "64px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "ymdKubun": 1,
+                            "displayFormat": 0,
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "tabKogakuServicehiDetail",
+                            "items": [
+                                {
+                                    "fieldName": "tplShinseisha",
+                                    "items": [
+                                        {
+                                            "fieldName": "Shinseisha",
+                                            "items": [],
+                                            "controlType": "CommonChildDiv",
+                                            "width": "XS",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "2.4em",
+                                            "marginRight": "0em",
+                                            "selectControlID": "Shinseisha",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "title": "",
+                                            "relation": [],
+                                            "packageName": "",
+                                            "businessId": "DBZ",
+                                            "controlName": "ShinseishaInfo",
+                                            "marginTop": "0em",
+                                            "marginBottom": "0em",
+                                            "originalProperty": [],
+                                            "dataPassingForDialog": [],
+                                            "dialogOkEventNameForDialog": "",
+                                            "dialogCancelEventNameForDialog": "",
+                                            "canTransferEvent": true,
+                                            "heightForDialog": "M",
+                                            "firstFocusFieldName": "",
+                                            "lastFocusFieldName": "",
+                                            "modes": [],
+                                            "publicEvents": [],
+                                            "publicEventsAlias": [],
+                                            "panelDisplay": 0,
+                                            "eraseBorderTop": true,
+                                            "eraseBorderBottom": true,
+                                            "eraseBorderRight": true,
+                                            "eraseBorderLeft": true,
+                                            "btnJigyoshaInputGuide_displayNone": false,
+                                            "txtUkestukeDate_displayNone": true,
+                                            "txtJigyoshaNo_disabled": false,
+                                            "txtShinseishaName_labelLText": "氏名",
+                                            "txtYubinNo_displayNone": false,
+                                            "txtAddress_displayNone": false,
+                                            "btnJigyoshaInputGuide_disabled": false,
+                                            "shinseishaInfo_eraseBorder": true
+                                        },
+                                        {
+                                            "fieldName": "txtShiharaiTotalAmount",
+                                            "items": [],
+                                            "controlType": "TextBoxNum",
+                                            "width": "S",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "0em",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtShiharaiTotalAmount_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": false,
+                                            "required": false,
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 2,
+                                            "placeHolder": "",
+                                            "textKind": 2,
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "isComboBox": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "suggest": [],
+                                            "value": "",
+                                            "labelLText": "支払金額合計",
+                                            "labelRText": "",
+                                            "labelLWidth": "105px",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "decorationClass": "",
+                                            "permitCharactor": "+-,.\\",
+                                            "maxValue": 1.7976931348623157e+308,
+                                            "minValue": 0,
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": 0
+                                        },
+                                        {
+                                            "fieldName": "txtShinseiRiyu",
+                                            "items": [],
+                                            "controlType": "TextBoxMultiLine",
+                                            "width": "565px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "0.3em",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtShinseiRiyu_text_area",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": false,
+                                            "height": "XS",
+                                            "required": false,
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "placeHolder": "",
+                                            "textKind": 0,
+                                            "isPrivateInfo": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "value": "",
+                                            "labelLText": "申請理由",
+                                            "labelRText": "",
+                                            "labelLWidth": "100px",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "decorationClass": "",
+                                            "limitLength": 20,
+                                            "countDisp": false
+                                        }
+                                    ],
+                                    "controlType": "TabPanel",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "tplShinseisha",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "title": "申請者情報",
+                                    "onActive": "",
+                                    "onFirstActive": "",
+                                    "lazyLoadingControls": {}
+                                },
+                                {
+                                    "fieldName": "tplKoza",
+                                    "items": [
+                                        {
+                                            "fieldName": "PaymentMethod",
+                                            "items": [],
+                                            "controlType": "CommonChildDiv",
+                                            "width": "XS",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "0em",
+                                            "marginRight": "0em",
+                                            "selectControlID": "PaymentMethod",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "title": "",
+                                            "relation": [],
+                                            "packageName": "",
+                                            "businessId": "DBZ",
+                                            "controlName": "PaymentMethod",
+                                            "marginTop": "0em",
+                                            "marginBottom": "0em",
+                                            "originalProperty": [],
+                                            "dataPassingForDialog": [],
+                                            "dialogOkEventNameForDialog": "",
+                                            "dialogCancelEventNameForDialog": "",
+                                            "canTransferEvent": true,
+                                            "heightForDialog": "M",
+                                            "firstFocusFieldName": "",
+                                            "lastFocusFieldName": "",
+                                            "modes": [],
+                                            "publicEvents": [],
+                                            "publicEventsAlias": [],
+                                            "eraseBorder": true,
+                                            "panelDisplay": 0,
+                                            "eraseBorderTop": true,
+                                            "eraseBorderBottom": true,
+                                            "eraseBorderRight": true,
+                                            "eraseBorderLeft": true,
+                                            "KozaPayment_title": "",
+                                            "onClick_radPayMethod": "",
+                                            "Juryoinin_displayNone": false,
+                                            "Madoguchi_displayNone": false,
+                                            "Koza_displayNone": false
+                                        }
+                                    ],
+                                    "controlType": "TabPanel",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "tplKoza",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "title": "口座情報",
+                                    "onActive": "",
+                                    "onFirstActive": "",
+                                    "lazyLoadingControls": {}
+                                },
+                                {
+                                    "fieldName": "tplJudgementResult",
+                                    "items": [
+                                        {
+                                            "fieldName": "JudgementResult",
+                                            "items": [],
+                                            "controlType": "CommonChildDiv",
+                                            "width": "XS",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "0em",
+                                            "marginRight": "0em",
+                                            "selectControlID": "JudgementResult",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "title": "",
+                                            "relation": [],
+                                            "packageName": "",
+                                            "businessId": "DBZ",
+                                            "controlName": "KogakuServicehiJudgementResult",
+                                            "marginTop": "0em",
+                                            "marginBottom": "0em",
+                                            "originalProperty": [],
+                                            "dataPassingForDialog": [],
+                                            "dialogOkEventNameForDialog": "",
+                                            "dialogCancelEventNameForDialog": "",
+                                            "canTransferEvent": true,
+                                            "heightForDialog": "M",
+                                            "firstFocusFieldName": "",
+                                            "lastFocusFieldName": "",
+                                            "modes": [],
+                                            "publicEvents": [],
+                                            "publicEventsAlias": [],
+                                            "panelDisplay": 0,
+                                            "eraseBorderTop": true,
+                                            "eraseBorderBottom": true,
+                                            "eraseBorderRight": true,
+                                            "eraseBorderLeft": true
+                                        }
+                                    ],
+                                    "controlType": "TabPanel",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "tplJudgementResult",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "title": "判定結果",
+                                    "onActive": "",
+                                    "onFirstActive": "",
+                                    "lazyLoadingControls": {}
+                                },
+                                {
+                                    "fieldName": "tplKetteiJoho",
+                                    "items": [],
+                                    "controlType": "TabPanel",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": true,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "tplKetteiJoho",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "title": "高額決定情報",
+                                    "onActive": "",
+                                    "onFirstActive": "",
+                                    "lazyLoadingControls": {}
+                                }
+                            ],
+                            "controlType": "TabContainer",
+                            "width": "1040px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "tabKogakuServicehiDetail",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onChange": "",
+                            "selectedItem": null,
+                            "tabpanelPosition": [
+                                "tplShinseisha",
+                                "tplKoza",
+                                "tplJudgementResult",
+                                "tplKetteiJoho"
+                            ],
+                            "isDraggable": false,
+                            "selectedItemFieldName": "",
+                            "initialTab": "0",
+                            "isLazyLoading": false
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G12",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0em",
+                    "marginRight": "XS",
+                    "selectControlID": "KogakuServicehiDetail",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "高額介護サービス費明細",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "KogakuServicehiDetail"
+                        }
+                    ],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "canPost": true,
+                    "eraseBorderTop": false,
+                    "eraseBorderBottom": false,
+                    "eraseBorderRight": false,
+                    "eraseBorderLeft": false
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0em",
+            "marginRight": "0em",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBZ",
+            "controlName": "KogakuServicehiDetail",
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "KogakuServicehiDetail",
+                    "publicChildProperty": "title",
+                    "newPropertyName": "title"
+                },
+                {
+                    "publicChildFieldName": "KogakuServicehiDetail",
+                    "publicChildProperty": "eraseBorder",
+                    "newPropertyName": "eraseBorder"
+                },
+                {
+                    "publicChildFieldName": "KogakuServicehiDetail",
+                    "publicChildProperty": "panelDisplay",
+                    "newPropertyName": "panelDisplay"
+                },
+                {
+                    "publicChildFieldName": "tplJudgementResult",
+                    "publicChildProperty": "title",
+                    "newPropertyName": "tplJudgementResult_title"
+                },
+                {
+                    "publicChildFieldName": "tplKetteiJoho",
+                    "publicChildProperty": "visible",
+                    "newPropertyName": "tplKetteiJoho_visible"
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
+        };
+        return KogakuServicehiDetail_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.KogakuServicehiDetail_Design = KogakuServicehiDetail_Design;
+
+    (function (KogakuServicehiDetail) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KogakuServicehiDetail.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KogakuServicehiDetail";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.KogakuServicehiDetail.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + fieldName;
+            };
+
+            Controls.prototype.KogakuServicehiDetail = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtTeikyoYM = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtTeikyoYM"));
+            };
+
+            Controls.prototype.tabKogakuServicehiDetail = function () {
+                return new UZA.TabContainer(this.convFiledName("tabKogakuServicehiDetail"));
+            };
+
+            Controls.prototype.tplShinseisha = function () {
+                return new UZA.TabPanel(this.convFiledName("tplShinseisha"));
+            };
+
+            Controls.prototype.txtShiharaiTotalAmount = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtShiharaiTotalAmount"));
+            };
+
+            Controls.prototype.txtShinseiRiyu = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtShinseiRiyu"));
+            };
+
+            Controls.prototype.tplKoza = function () {
+                return new UZA.TabPanel(this.convFiledName("tplKoza"));
+            };
+
+            Controls.prototype.tplJudgementResult = function () {
+                return new UZA.TabPanel(this.convFiledName("tplJudgementResult"));
+            };
+
+            Controls.prototype.tplKetteiJoho = function () {
+                return new UZA.TabPanel(this.convFiledName("tplKetteiJoho"));
+            };
+            return Controls;
+        })();
+        KogakuServicehiDetail.Controls = Controls;
+    })(DBZ.KogakuServicehiDetail || (DBZ.KogakuServicehiDetail = {}));
+    var KogakuServicehiDetail = DBZ.KogakuServicehiDetail;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (KogakuServicehiDetail) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KogakuServicehiDetail.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KogakuServicehiDetail.ModeController = ModeController;
+    })(DBZ.KogakuServicehiDetail || (DBZ.KogakuServicehiDetail = {}));
+    var KogakuServicehiDetail = DBZ.KogakuServicehiDetail;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (KogakuServicehiDetail) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new KogakuServicehiDetail.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("title", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("eraseBorder", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("panelDisplay", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("tplJudgementResult_title", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("tplKetteiJoho_visible", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.gettitle = function () {
+                return this.controls.KogakuServicehiDetail().title;
+            };
+
+            PublicProperties.prototype.settitle = function (value) {
+                this.controls.KogakuServicehiDetail().title = value;
+            };
+
+            PublicProperties.prototype.geteraseBorder = function () {
+                return this.controls.KogakuServicehiDetail().eraseBorder;
+            };
+
+            PublicProperties.prototype.seteraseBorder = function (value) {
+                this.controls.KogakuServicehiDetail().eraseBorder = value;
+            };
+
+            PublicProperties.prototype.getpanelDisplay = function () {
+                return this.controls.KogakuServicehiDetail().panelDisplay;
+            };
+
+            PublicProperties.prototype.setpanelDisplay = function (value) {
+                this.controls.KogakuServicehiDetail().panelDisplay = value;
+            };
+
+            PublicProperties.prototype.gettplJudgementResult_title = function () {
+                return this.controls.tplJudgementResult().title;
+            };
+
+            PublicProperties.prototype.settplJudgementResult_title = function (value) {
+                this.controls.tplJudgementResult().title = value;
+            };
+
+            PublicProperties.prototype.gettplKetteiJoho_visible = function () {
+                return this.controls.tplKetteiJoho().visible;
+            };
+
+            PublicProperties.prototype.settplKetteiJoho_visible = function (value) {
+                this.controls.tplKetteiJoho().visible = value;
+            };
+            return PublicProperties;
+        })();
+        KogakuServicehiDetail.PublicProperties = PublicProperties;
+    })(DBZ.KogakuServicehiDetail || (DBZ.KogakuServicehiDetail = {}));
+    var KogakuServicehiDetail = DBZ.KogakuServicehiDetail;
+})(DBZ || (DBZ = {}));
+</script>
+  
+  <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['KOGAKUSERVICEHIDETAIL'] = {};
+DBZ['KOGAKUSERVICEHIDETAIL'].KogakuServicehiDetailRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KogakuServicehiDetail').getProperty();parameter0.txtTeikyoYM = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtTeikyoYM').getProperty();parameter0.tabKogakuServicehiDetail = Uz.JSControlUtil.getJSControl(parentFieldName + '_tabKogakuServicehiDetail').getProperty();parameter0.tabKogakuServicehiDetail.tplShinseisha = Uz.JSControlUtil.getJSControl(parentFieldName + '_tplShinseisha').getProperty();parameter0.tabKogakuServicehiDetail.tplShinseisha.Shinseisha = Uz.JSControlUtil.getJSControl(parentFieldName + '_Shinseisha').getPostParameter();parameter0.tabKogakuServicehiDetail.tplShinseisha.txtShiharaiTotalAmount = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShiharaiTotalAmount').getProperty();parameter0.tabKogakuServicehiDetail.tplShinseisha.txtShinseiRiyu = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShinseiRiyu').getProperty();parameter0.tabKogakuServicehiDetail.tplKoza = Uz.JSControlUtil.getJSControl(parentFieldName + '_tplKoza').getProperty();parameter0.tabKogakuServicehiDetail.tplKoza.PaymentMethod = Uz.JSControlUtil.getJSControl(parentFieldName + '_PaymentMethod').getPostParameter();parameter0.tabKogakuServicehiDetail.tplJudgementResult = Uz.JSControlUtil.getJSControl(parentFieldName + '_tplJudgementResult').getProperty();parameter0.tabKogakuServicehiDetail.tplJudgementResult.JudgementResult = Uz.JSControlUtil.getJSControl(parentFieldName + '_JudgementResult').getPostParameter();parameter0.tabKogakuServicehiDetail.tplKetteiJoho = Uz.JSControlUtil.getJSControl(parentFieldName + '_tplKetteiJoho').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (KogakuServicehiDetail) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KogakuServicehiDetail.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KogakuServicehiDetail";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.KogakuServicehiDetail.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.KogakuServicehiDetail.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KogakuServicehiDetail = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtTeikyoYM = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtTeikyoYM"));
+            };
+
+            Controls.prototype.tabKogakuServicehiDetail = function () {
+                return new UZA.TabContainer(this.convFiledName("tabKogakuServicehiDetail"));
+            };
+
+            Controls.prototype.tplShinseisha = function () {
+                return new UZA.TabPanel(this.convFiledName("tplShinseisha"));
+            };
+
+            Controls.prototype.Shinseisha = function () {
+                return new DBZ.ShinseishaInfo.ModeController(this.convFiledName("Shinseisha"));
+            };
+
+            Controls.prototype.txtShiharaiTotalAmount = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtShiharaiTotalAmount"));
+            };
+
+            Controls.prototype.txtShinseiRiyu = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtShinseiRiyu"));
+            };
+
+            Controls.prototype.tplKoza = function () {
+                return new UZA.TabPanel(this.convFiledName("tplKoza"));
+            };
+
+            Controls.prototype.PaymentMethod = function () {
+                return new DBZ.PaymentMethod.ModeController(this.convFiledName("PaymentMethod"));
+            };
+
+            Controls.prototype.tplJudgementResult = function () {
+                return new UZA.TabPanel(this.convFiledName("tplJudgementResult"));
+            };
+
+            Controls.prototype.JudgementResult = function () {
+                return new DBZ.KogakuServicehiJudgementResult.ModeController(this.convFiledName("JudgementResult"));
+            };
+
+            Controls.prototype.tplKetteiJoho = function () {
+                return new UZA.TabPanel(this.convFiledName("tplKetteiJoho"));
+            };
+            return Controls;
+        })();
+        KogakuServicehiDetail.Controls = Controls;
+    })(DBZ.KogakuServicehiDetail || (DBZ.KogakuServicehiDetail = {}));
+    var KogakuServicehiDetail = DBZ.KogakuServicehiDetail;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (KogakuServicehiDetail) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KogakuServicehiDetail.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KogakuServicehiDetail.ModeController = ModeController;
+    })(DBZ.KogakuServicehiDetail || (DBZ.KogakuServicehiDetail = {}));
+    var KogakuServicehiDetail = DBZ.KogakuServicehiDetail;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (KogakuServicehiDetail) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new KogakuServicehiDetail.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("title", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("eraseBorder", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("panelDisplay", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("tplJudgementResult_title", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("tplKetteiJoho_visible", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.gettitle = function () {
+                return this.controls.KogakuServicehiDetail().title;
+            };
+
+            PublicProperties.prototype.settitle = function (value) {
+                this.controls.KogakuServicehiDetail().title = value;
+            };
+
+            PublicProperties.prototype.geteraseBorder = function () {
+                return this.controls.KogakuServicehiDetail().eraseBorder;
+            };
+
+            PublicProperties.prototype.seteraseBorder = function (value) {
+                this.controls.KogakuServicehiDetail().eraseBorder = value;
+            };
+
+            PublicProperties.prototype.getpanelDisplay = function () {
+                return this.controls.KogakuServicehiDetail().panelDisplay;
+            };
+
+            PublicProperties.prototype.setpanelDisplay = function (value) {
+                this.controls.KogakuServicehiDetail().panelDisplay = value;
+            };
+
+            PublicProperties.prototype.gettplJudgementResult_title = function () {
+                return this.controls.tplJudgementResult().title;
+            };
+
+            PublicProperties.prototype.settplJudgementResult_title = function (value) {
+                this.controls.tplJudgementResult().title = value;
+            };
+
+            PublicProperties.prototype.gettplKetteiJoho_visible = function () {
+                return this.controls.tplKetteiJoho().visible;
+            };
+
+            PublicProperties.prototype.settplKetteiJoho_visible = function (value) {
+                this.controls.tplKetteiJoho().visible = value;
+            };
+            return PublicProperties;
+        })();
+        KogakuServicehiDetail.PublicProperties = PublicProperties;
+    })(DBZ.KogakuServicehiDetail || (DBZ.KogakuServicehiDetail = {}));
+    var KogakuServicehiDetail = DBZ.KogakuServicehiDetail;
+})(DBZ || (DBZ = {}));
+</script></div>

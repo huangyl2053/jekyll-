@@ -1,0 +1,615 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBC&quot;,&quot;controlName&quot;:&quot;SearchServiceCodeDialog&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;onClick_btnSelectRow&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;onClick_btnCloseDialog&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;onClickDialogBtnCancel&quot;,&quot;editType&quot;:0}]},&quot;onClickDialogBtnCancel&quot;:&quot;onClick_btnCloseDialog&quot;}" data-is-composite-control="true" data-control-name="DBC.SearchServiceCodeDialog"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default UzCommonChildDivPanel UzCompositeChild" id="SearchServiceCodeDialog" style="width: 590px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;SearchServiceCodeDialog&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;590px&quot;,&quot;selectControlID&quot;:&quot;SearchServiceCodeDialog&quot;,&quot;title&quot;:&quot;サービスコード選択&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;SearchServiceCodeDialog&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="SearchServiceCodeDialog_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">サービスコード選択</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="SearchServiceCodeDialog_panel_body_area"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtServiceShuruiCode" style="width: 132px; height: 36px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtServiceShuruiCode&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;20px&quot;,&quot;selectControlID&quot;:&quot;txtServiceShuruiCode_core&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;サービスコード&quot;,&quot;labelLWidth&quot;:&quot;105px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtServiceShuruiCode_labelL" style="width: 105px;"><span>サービスコード</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input" id="txtServiceShuruiCode_core" style="width: 20px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M marginRight-XS UzCompositeChild" id="txtServiceItemCode" style="width: 40px; height: 21px; margin-left: -0.2em;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtServiceItemCode&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;35px&quot;,&quot;marginLeft&quot;:&quot;-0.2em&quot;,&quot;selectControlID&quot;:&quot;txtServiceItemCode_core&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[]}"><input class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input" id="txtServiceItemCode_core" style="width: 35px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtKijunYM" style="width: 131px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtKijunYM&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;60px&quot;,&quot;selectControlID&quot;:&quot;txtKijunYM_core&quot;,&quot;textKind&quot;:0,&quot;labelLText&quot;:&quot;基準年月&quot;,&quot;labelLWidth&quot;:&quot;64px&quot;,&quot;ymdKubun&quot;:1}"><span class="word-wrap-break-word Label-L text-align-right" id="txtKijunYM_labelL" style="width: 64px;"><span>基準年月</span></span><input class="UzTextBox CoreElement" id="txtKijunYM_core" style="width: 60px;" type="text" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><button title="" class="UzButton JSControl controlMargin-M Width-M FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnSearchServiceCode" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnSearchServiceCode&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;M&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnSearchServiceCode&quot;,&quot;text&quot;:&quot;サービスコードを検索する&quot;}" value="undefined"><span>サービスコードを検索する</span></button><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS Height-M UzCompositeChild" id="dgServiceCode" style="width: 570px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgServiceCode&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;570px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;dgServiceCode&quot;,&quot;height&quot;:&quot;M&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:false,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;確定&quot;,&quot;dataName&quot;:&quot;btnSelectRow&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:50,&quot;visible&quot;:true,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;...&quot;,&quot;onClick&quot;:&quot;onClick_btnSelectRow&quot;,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;btnSelectRow&quot;},{&quot;columnName&quot;:&quot;サービスコード&quot;,&quot;dataName&quot;:&quot;txtServiceCode&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:500,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtServiceCode&quot;}]},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgServiceCode_grid_table" role="" style="width: 570px; height: 365px; position: relative;"></div><div id="dgServiceCode_footer" style="width: 570px; height: 25px;"></div></div><button title="" class="UzButton FloatLeft JSControl controlMargin-M Width-M marginLeft-XS marginRight-XS UzCompositeChild" id="btnCancel" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnCancel&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;M&quot;,&quot;selectControlID&quot;:&quot;btnCancel&quot;,&quot;onClick&quot;:&quot;onClick_btnCloseDialog&quot;,&quot;text&quot;:&quot;サービスコード検索をやめる&quot;}" value="undefined"><span>サービスコード検索をやめる</span></button></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBC;
+(function (DBC) {
+    (function (SearchServiceCodeDialog) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnCloseDialog", {
+                get: function () {
+                    return "onClick_btnCloseDialog";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        SearchServiceCodeDialog.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "SearchServiceCodeDialog";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.SearchServiceCodeDialog = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtServiceShuruiCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtServiceShuruiCode"));
+            };
+
+            Controls.prototype.txtServiceItemCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtServiceItemCode"));
+            };
+
+            Controls.prototype.txtKijunYM = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKijunYM"));
+            };
+
+            Controls.prototype.btnSearchServiceCode = function () {
+                return new UZA.Button(this.convFiledName("btnSearchServiceCode"));
+            };
+
+            Controls.prototype.dgServiceCode = function () {
+                return new UZA.DataGrid(this.convFiledName("dgServiceCode"));
+            };
+
+            Controls.prototype.btnCancel = function () {
+                return new UZA.Button(this.convFiledName("btnCancel"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        SearchServiceCodeDialog.Controls = Controls;
+    })(DBC.SearchServiceCodeDialog || (DBC.SearchServiceCodeDialog = {}));
+    var SearchServiceCodeDialog = DBC.SearchServiceCodeDialog;
+
+    var SearchServiceCodeDialog_Design = (function (_super) {
+        __extends(SearchServiceCodeDialog_Design, _super);
+        function SearchServiceCodeDialog_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, SearchServiceCodeDialog_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(SearchServiceCodeDialog_Design.prototype, "onClickDialogBtnCancel", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["onClick"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["onClick"] = value;
+                } else {
+                    this.layout.items[0].items[5]["onClick"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        SearchServiceCodeDialog_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("onClickDialogBtnCancel");
+        };
+
+        SearchServiceCodeDialog_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["onClickDialogBtnCancel"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["onClick"];
+
+            return editablePropertyInfo;
+        };
+        SearchServiceCodeDialog_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "SearchServiceCodeDialog",
+                    "items": [
+                        {
+                            "fieldName": "txtServiceShuruiCode",
+                            "items": [],
+                            "controlType": "TextBoxCode",
+                            "width": "20",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "required": false,
+                            "maxLength": 1000000000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "readOnly": false,
+                            "placeHolder": "",
+                            "textKind": 2,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "サービスコード",
+                            "labelRText": "",
+                            "labelLWidth": "105",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "permitCharactor": "",
+                            "formatLength": "2"
+                        },
+                        {
+                            "fieldName": "txtServiceItemCode",
+                            "items": [],
+                            "controlType": "TextBoxCode",
+                            "width": "35",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "-0.2",
+                            "marginRight": "XS",
+                            "required": false,
+                            "maxLength": 1000000000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "readOnly": false,
+                            "placeHolder": "",
+                            "textKind": 2,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "permitCharactor": "",
+                            "formatLength": "4"
+                        },
+                        {
+                            "fieldName": "txtKijunYM",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "60",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "required": false,
+                            "readOnly": false,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "value": "",
+                            "labelLText": "基準年月",
+                            "labelRText": "",
+                            "labelLWidth": "64",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "permitCharactor": "./_-",
+                            "ymdKubun": 1,
+                            "displayFormat": 0
+                        },
+                        {
+                            "fieldName": "btnSearchServiceCode",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "M",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "text": "サービスコードを検索する",
+                            "onClick": "",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": ""
+                        },
+                        {
+                            "fieldName": "dgServiceCode",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "570",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "gridSetting": {
+                                "rowHeight": 25,
+                                "isMultiSelectable": false,
+                                "isShowFooter": true,
+                                "isShowFilter": false,
+                                "isShowFilterButton": false,
+                                "isShowRowState": false,
+                                "header": {
+                                    "combineColumns": [],
+                                    "frozenColumn": "",
+                                    "headerHeight": 0
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "確定",
+                                        "dataName": "btnSelectRow",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 50,
+                                        "visible": true,
+                                        "cellType": 8,
+                                        "cellDetails": {
+                                            "cellType": 8,
+                                            "text": "...",
+                                            "onClick": "onClick_btnSelectRow",
+                                            "imageFileUrl": "",
+                                            "imageWidth": "",
+                                            "imageHeight": ""
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "btnSelectRow"
+                                    },
+                                    {
+                                        "columnName": "サービスコード",
+                                        "dataName": "txtServiceCode",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 500,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtServiceCode"
+                                    }
+                                ]
+                            },
+                            "height": "M",
+                            "onSort": "",
+                            "onSelect": "",
+                            "onSelectByDblClick": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "txtItem",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1
+                        },
+                        {
+                            "fieldName": "btnCancel",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "M",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "text": "サービスコード検索をやめる",
+                            "onClick": "onClick_btnCloseDialog",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": ""
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "590",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "XS",
+                    "marginRight": "XS",
+                    "onLoad": "",
+                    "title": "サービスコード選択",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "SearchServiceCodeDialog"
+                        }
+                    ],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorderTop": false,
+                    "eraseBorderBottom": false,
+                    "eraseBorderRight": false,
+                    "eraseBorderLeft": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "isGroupBox": false
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "relation": [],
+            "businessId": "DBC",
+            "controlName": "SearchServiceCodeDialog",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "btnCancel",
+                    "publicChildProperty": "onClick",
+                    "newPropertyName": "onClickDialogBtnCancel"
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "onClick_btnSelectRow",
+            "dialogCancelEventNameForDialog": "onClick_btnCloseDialog"
+        };
+        return SearchServiceCodeDialog_Design;
+    })(Uz.CommonChildDiv);
+    DBC.SearchServiceCodeDialog_Design = SearchServiceCodeDialog_Design;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (SearchServiceCodeDialog) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new SearchServiceCodeDialog.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        SearchServiceCodeDialog.ModeController = ModeController;
+    })(DBC.SearchServiceCodeDialog || (DBC.SearchServiceCodeDialog = {}));
+    var SearchServiceCodeDialog = DBC.SearchServiceCodeDialog;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (SearchServiceCodeDialog) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new SearchServiceCodeDialog.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("onClickDialogBtnCancel", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getonClickDialogBtnCancel = function () {
+                return this.controls.btnCancel().onClick;
+            };
+
+            PublicProperties.prototype.setonClickDialogBtnCancel = function (value) {
+                this.controls.btnCancel().onClick = value;
+            };
+            return PublicProperties;
+        })();
+        SearchServiceCodeDialog.PublicProperties = PublicProperties;
+    })(DBC.SearchServiceCodeDialog || (DBC.SearchServiceCodeDialog = {}));
+    var SearchServiceCodeDialog = DBC.SearchServiceCodeDialog;
+})(DBC || (DBC = {}));
+</script>
+  <script class="RamlConvert" type="text/javascript">
+var DBC= DBC? DBC: {};
+DBC['SEARCHSERVICECODEDIALOG'] = {};
+DBC['SEARCHSERVICECODEDIALOG'].SearchServiceCodeDialogRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_SearchServiceCodeDialog').getProperty();parameter0.txtServiceShuruiCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtServiceShuruiCode').getProperty();parameter0.txtServiceItemCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtServiceItemCode').getProperty();parameter0.txtKijunYM = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKijunYM').getProperty();parameter0.btnSearchServiceCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnSearchServiceCode').getProperty();parameter0.dgServiceCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgServiceCode').getProperty();parameter0.btnCancel = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnCancel').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBC;
+(function (DBC) {
+    (function (SearchServiceCodeDialog) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnCloseDialog = function () {
+                return "onClick_btnCloseDialog";
+            };
+            return Events;
+        })();
+        SearchServiceCodeDialog.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "SearchServiceCodeDialog";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBC.SearchServiceCodeDialog.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBC.SearchServiceCodeDialog.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.SearchServiceCodeDialog = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtServiceShuruiCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtServiceShuruiCode"));
+            };
+
+            Controls.prototype.txtServiceItemCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtServiceItemCode"));
+            };
+
+            Controls.prototype.txtKijunYM = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKijunYM"));
+            };
+
+            Controls.prototype.btnSearchServiceCode = function () {
+                return new UZA.Button(this.convFiledName("btnSearchServiceCode"));
+            };
+
+            Controls.prototype.dgServiceCode = function () {
+                return new UZA.DataGrid(this.convFiledName("dgServiceCode"));
+            };
+
+            Controls.prototype.btnCancel = function () {
+                return new UZA.Button(this.convFiledName("btnCancel"));
+            };
+            return Controls;
+        })();
+        SearchServiceCodeDialog.Controls = Controls;
+    })(DBC.SearchServiceCodeDialog || (DBC.SearchServiceCodeDialog = {}));
+    var SearchServiceCodeDialog = DBC.SearchServiceCodeDialog;
+})(DBC || (DBC = {}));
+var DBC;
+(function (DBC) {
+    (function (SearchServiceCodeDialog) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new SearchServiceCodeDialog.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        SearchServiceCodeDialog.ModeController = ModeController;
+    })(DBC.SearchServiceCodeDialog || (DBC.SearchServiceCodeDialog = {}));
+    var SearchServiceCodeDialog = DBC.SearchServiceCodeDialog;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (SearchServiceCodeDialog) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new SearchServiceCodeDialog.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("onClickDialogBtnCancel", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getonClickDialogBtnCancel = function () {
+                return this.controls.btnCancel().onClick;
+            };
+
+            PublicProperties.prototype.setonClickDialogBtnCancel = function (value) {
+                this.controls.btnCancel().onClick = value;
+            };
+            return PublicProperties;
+        })();
+        SearchServiceCodeDialog.PublicProperties = PublicProperties;
+    })(DBC.SearchServiceCodeDialog || (DBC.SearchServiceCodeDialog = {}));
+    var SearchServiceCodeDialog = DBC.SearchServiceCodeDialog;
+})(DBC || (DBC = {}));
+</script></div>

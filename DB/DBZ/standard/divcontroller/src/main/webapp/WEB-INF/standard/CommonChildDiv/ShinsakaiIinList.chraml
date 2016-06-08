@@ -1,0 +1,519 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBE&quot;,&quot;controlName&quot;:&quot;ShinsakaiIinList&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;CloseCancel&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBE.ShinsakaiIinList"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginRight-XS marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G9 UzCompositeChild" id="ShinsakaiIinList" style="margin-top: 0px; margin-bottom: 0px; margin-left: 0em;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ShinsakaiIinList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G9&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;ShinsakaiIinList&quot;,&quot;title&quot;:&quot;審査会委員一覧&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ShinsakaiIinList&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/ShinsakaiIinList/onLoad&quot;}],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ShinsakaiIinList_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">審査会委員一覧</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="ShinsakaiIinList_panel_body_area"><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS Height-S UzCompositeChild" id="dgShinsakaiIinChildList" style="width: 814px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgShinsakaiIinChildList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;814px&quot;,&quot;selectControlID&quot;:&quot;dgShinsakaiIinChildList&quot;,&quot;height&quot;:&quot;S&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:35,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:true,&quot;isShowFilterButton&quot;:true,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:true,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;選択&quot;,&quot;dataName&quot;:&quot;btnToSelect&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:50,&quot;visible&quot;:false,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;選択&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;},&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;btnToSelect&quot;},{&quot;columnName&quot;:&quot;審査会委員番号&quot;,&quot;dataName&quot;:&quot;shinsakaiIinNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;shinsakaiIinNo&quot;},{&quot;columnName&quot;:&quot;氏名&quot;,&quot;dataName&quot;:&quot;shimei&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;shimei&quot;},{&quot;columnName&quot;:&quot;カナ氏名&quot;,&quot;dataName&quot;:&quot;kanaShimei&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;kanaShimei&quot;},{&quot;columnName&quot;:&quot;氏名&quot;,&quot;dataName&quot;:&quot;shimeiAndKanaShimei&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:210,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;shimeiAndKanaShimei&quot;},{&quot;columnName&quot;:&quot;所属機関&quot;,&quot;dataName&quot;:&quot;shozokuKikan&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:210,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;shozokuKikan&quot;},{&quot;columnName&quot;:&quot;性別&quot;,&quot;dataName&quot;:&quot;gender&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:60,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;gender&quot;},{&quot;columnName&quot;:&quot;資格&quot;,&quot;dataName&quot;:&quot;shikaku&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:160,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;shikaku&quot;}]},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgShinsakaiIinChildList_grid_table" role="" style="width: 814px; height: 176px; position: relative;"></div><div id="dgShinsakaiIinChildList_footer" style="width: 814px; height: 25px;"></div></div><button title="" class="UzButton JSControl controlMargin-M ClearFloat FloatRight marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnClose" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnClose&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnClose&quot;,&quot;onClick&quot;:&quot;CloseCancel&quot;,&quot;text&quot;:&quot;取消&quot;}"><span>取消</span></button></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBE;
+(function (DBE) {
+    (function (ShinsakaiIinList) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "CloseCancel", {
+                get: function () {
+                    return "CloseCancel";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        ShinsakaiIinList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ShinsakaiIinList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ShinsakaiIinList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgShinsakaiIinChildList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgShinsakaiIinChildList"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ShinsakaiIinList.Controls = Controls;
+    })(DBE.ShinsakaiIinList || (DBE.ShinsakaiIinList = {}));
+    var ShinsakaiIinList = DBE.ShinsakaiIinList;
+
+    var ShinsakaiIinList_Design = (function (_super) {
+        __extends(ShinsakaiIinList_Design, _super);
+        function ShinsakaiIinList_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, ShinsakaiIinList_Design.myLayout, fieldName);
+        }
+        ShinsakaiIinList_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        ShinsakaiIinList_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        ShinsakaiIinList_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "ShinsakaiIinList",
+                    "items": [
+                        {
+                            "fieldName": "dgShinsakaiIinChildList",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "814",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "dgShinsakaiIinChildList",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "S",
+                            "gridSetting": {
+                                "rowHeight": 35,
+                                "isMultiSelectable": false,
+                                "isShowHeader": true,
+                                "isShowFooter": true,
+                                "isShowFilter": true,
+                                "isShowFilterButton": true,
+                                "isShowRowState": false,
+                                "isShowSelectButtonColumn": true,
+                                "isShowModifyButtonColumn": false,
+                                "isShowDeleteButtonColumn": false,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
+                                "header": {
+                                    "combineColumns": [],
+                                    "frozenColumn": "",
+                                    "headerHeight": 0
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "選択",
+                                        "dataName": "btnToSelect",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 50,
+                                        "visible": false,
+                                        "cellType": 8,
+                                        "cellDetails": {
+                                            "cellType": 8,
+                                            "text": "選択",
+                                            "onClick": "",
+                                            "imageFileUrl": "",
+                                            "imageWidth": "",
+                                            "imageHeight": ""
+                                        },
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "btnToSelect"
+                                    },
+                                    {
+                                        "columnName": "審査会委員番号",
+                                        "dataName": "shinsakaiIinNo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shinsakaiIinNo"
+                                    },
+                                    {
+                                        "columnName": "氏名",
+                                        "dataName": "shimei",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 150,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shimei"
+                                    },
+                                    {
+                                        "columnName": "カナ氏名",
+                                        "dataName": "kanaShimei",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 150,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "kanaShimei"
+                                    },
+                                    {
+                                        "columnName": "氏名",
+                                        "dataName": "shimeiAndKanaShimei",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 210,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shimeiAndKanaShimei"
+                                    },
+                                    {
+                                        "columnName": "所属機関",
+                                        "dataName": "shozokuKikan",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 210,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shozokuKikan"
+                                    },
+                                    {
+                                        "columnName": "性別",
+                                        "dataName": "gender",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 60,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "gender"
+                                    },
+                                    {
+                                        "columnName": "資格",
+                                        "dataName": "shikaku",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 160,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shikaku"
+                                    }
+                                ]
+                            },
+                            "onSort": "",
+                            "onSelect": "",
+                            "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
+                            "onAfterRequest": "",
+                            "onAfterRequestByDblClick": "",
+                            "onAfterRequestBySelectButton": "",
+                            "onAfterRequestByModifyButton": "",
+                            "onAfterRequestByDeleteButton": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "gender",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1
+                        },
+                        {
+                            "fieldName": "btnClose",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnClose",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onClick": "CloseCancel",
+                            "text": "取消",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G9",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0",
+                    "marginRight": "XS",
+                    "selectControlID": "ShinsakaiIinList",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "審査会委員一覧",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": false,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "ShinsakaiIinList"
+                        }
+                    ],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": "dbe/db/dbe/ShinsakaiIinList/onLoad"
+                        }
+                    ],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto"
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "businessId": "DBE",
+            "controlName": "ShinsakaiIinList",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "CloseCancel",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
+        };
+        return ShinsakaiIinList_Design;
+    })(Uz.CommonChildDiv);
+    DBE.ShinsakaiIinList_Design = ShinsakaiIinList_Design;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (ShinsakaiIinList) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShinsakaiIinList.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ShinsakaiIinList.ModeController = ModeController;
+    })(DBE.ShinsakaiIinList || (DBE.ShinsakaiIinList = {}));
+    var ShinsakaiIinList = DBE.ShinsakaiIinList;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (ShinsakaiIinList) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ShinsakaiIinList.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ShinsakaiIinList.PublicProperties = PublicProperties;
+    })(DBE.ShinsakaiIinList || (DBE.ShinsakaiIinList = {}));
+    var ShinsakaiIinList = DBE.ShinsakaiIinList;
+})(DBE || (DBE = {}));
+</script>
+  <script class="RamlConvert" type="text/javascript">
+var DBE= DBE? DBE: {};
+DBE['SHINSAKAIIINLIST'] = {};
+DBE['SHINSAKAIIINLIST'].ShinsakaiIinListRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ShinsakaiIinList').getProperty();parameter0.dgShinsakaiIinChildList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgShinsakaiIinChildList').getProperty();parameter0.btnClose = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnClose').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBE;
+(function (DBE) {
+    (function (ShinsakaiIinList) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.CloseCancel = function () {
+                return "CloseCancel";
+            };
+            return Events;
+        })();
+        ShinsakaiIinList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ShinsakaiIinList";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBE.ShinsakaiIinList.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBE.ShinsakaiIinList.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ShinsakaiIinList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgShinsakaiIinChildList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgShinsakaiIinChildList"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+            return Controls;
+        })();
+        ShinsakaiIinList.Controls = Controls;
+    })(DBE.ShinsakaiIinList || (DBE.ShinsakaiIinList = {}));
+    var ShinsakaiIinList = DBE.ShinsakaiIinList;
+})(DBE || (DBE = {}));
+var DBE;
+(function (DBE) {
+    (function (ShinsakaiIinList) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShinsakaiIinList.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ShinsakaiIinList.ModeController = ModeController;
+    })(DBE.ShinsakaiIinList || (DBE.ShinsakaiIinList = {}));
+    var ShinsakaiIinList = DBE.ShinsakaiIinList;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (ShinsakaiIinList) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ShinsakaiIinList.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ShinsakaiIinList.PublicProperties = PublicProperties;
+    })(DBE.ShinsakaiIinList || (DBE.ShinsakaiIinList = {}));
+    var ShinsakaiIinList = DBE.ShinsakaiIinList;
+})(DBE || (DBE = {}));
+</script></div>

@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>jp.co.ndensan.reams.db.dbc</groupId>
+        <artifactId>dbc</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>DbcDefinition</artifactId>
+    <packaging>jar</packaging>
+    <name>DbcDefinition</name>
+    <properties>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+        <!-- DBC -->
+        <!-- DBD -->
+        <!-- DBX -->
+        <!-- DBZ -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzDefinition</artifactId>
+        </dependency>
+        <!-- UAX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxDefinition</artifactId>
+        </dependency>
+        <!-- å…¬é–‹ç³» -->
+        <!-- ãƒ?‚¹ãƒ?-->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzTestHelper</artifactId>
+        </dependency>
+
+    </dependencies>
+</project>

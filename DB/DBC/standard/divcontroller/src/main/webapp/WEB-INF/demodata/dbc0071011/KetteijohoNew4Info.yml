@@ -1,0 +1,186 @@
+## YAML Template. 最新
+---
+## setDefault取扱年月
+- toriatsukaiYM: 201404
+  ketteiHokenshaSakuseiYMD: 201404
+  ketteiKohiSakuseiYMD: 201404
+## set決定保険者情報
+## create決定保険者集計
+- hokenshaCell11: 0
+  hokenshaCell12: 0
+  hokenshaCell13: 0
+  hokenshaCell21: -245
+  hokenshaCell22: -528957
+  hokenshaCell23: -4941623
+  hokenshaCell31: 0
+  hokenshaCell32: 0
+  hokenshaCell33: 0
+  hokenshaCell41: -1
+  hokenshaCell42: -42780
+  hokenshaCell43: -30690
+## create決定保険者明細  
+## create決定保険者明細List
+## createRow保険者
+- hokenshaJigyoshaNo: "0000000001"
+  hokenshaJigyoshaName: 電算事業者1
+  hokenshaHihoNo: "0000000011"
+  hokenshaHihoName: 電算 仁
+  hokenshaStyle: 21:居宅サービス介護給付費明細書(短期入所生活介護)
+  hokenshaMoshitateRiyu: 02:請求誤りによる実績取り下げ
+  hokenshaServiceTeikyoYM: 平26.04
+  hokenshaServiceType: 11:訪問介護
+  hokenshaTanisu: 3000
+  hkenshaFutangaku: 100000
+- hokenshaJigyoshaNo: "0000000002" 
+  hokenshaJigyoshaName: 電算事業者2
+  hokenshaHihoNo: "0000000012"
+  hokenshaHihoName: 電算 太陽
+  hokenshaStyle: 21:居宅サービス介護給付費明細書(短期入所生活介護)
+  hokenshaMoshitateRiyu: 02:請求誤りによる実績取り下げ
+  hokenshaServiceTeikyoYM: 平26.04
+  hokenshaServiceType: 11:訪問介護
+  hokenshaTanisu: 3000
+  hkenshaFutangaku: 100000
+- hokenshaJigyoshaNo: "0000000003"
+  hokenshaJigyoshaName: 電算事業者3
+  hokenshaHihoNo: "0000000013"
+  hokenshaHihoName: 電算 大
+  hokenshaStyle: 21:居宅サービス介護給付費明細書(短期入所生活介護)
+  hokenshaMoshitateRiyu: 02:請求誤りによる実績取り下げ
+  hokenshaServiceTeikyoYM: 平26.04
+  hokenshaServiceType: 11:訪問介護
+  hokenshaTanisu: 3000
+  hkenshaFutangaku: 100000
+- hokenshaJigyoshaNo: "0000000004"
+  hokenshaJigyoshaName: 電算事業者4
+  hokenshaHihoNo: "0000000014"
+  hokenshaHihoName: 電算 圭
+  hokenshaStyle: 21:居宅サービス介護給付費明細書(短期入所生活介護)
+  hokenshaMoshitateRiyu: 02:請求誤りによる実績取り下げ
+  hokenshaServiceTeikyoYM: 平26.04
+  hokenshaServiceType: 11:訪問介護
+  hokenshaTanisu: 3000
+  hkenshaFutangaku: 100000
+- hokenshaJigyoshaNo: "0000000005"
+  hokenshaJigyoshaName: 電算事業者5
+  hokenshaHihoNo: "0000000015"
+  hokenshaHihoName: 電算 真也
+  hokenshaStyle: 21:居宅サービス介護給付費明細書(短期入所生活介護)
+  hokenshaMoshitateRiyu: 02:請求誤りによる実績取り下げ
+  hokenshaServiceTeikyoYM: 平26.04
+  hokenshaServiceType: 11:訪問介護
+  hokenshaTanisu: 3000
+  hkenshaFutangaku: 100000
+- hokenshaJigyoshaNo: "0000000006"
+  hokenshaJigyoshaName: 電算事業者6
+  hokenshaHihoNo: "0000000016"
+  hokenshaHihoName: 電算 康介
+  hokenshaStyle: 21:居宅サービス介護給付費明細書(短期入所生活介護)
+  hokenshaMoshitateRiyu: 02:請求誤りによる実績取り下げ
+  hokenshaServiceTeikyoYM: 平26.04
+  hokenshaServiceType: 11:訪問介護
+  hokenshaTanisu: 3000
+  hkenshaFutangaku: 100000
+- hokenshaJigyoshaNo: "0000000007"
+  hokenshaJigyoshaName: 電算事業者7
+  hokenshaHihoNo: "0000000017"
+  hokenshaHihoName: 電算 康介
+  hokenshaStyle: 21:居宅サービス介護給付費明細書(短期入所生活介護)
+  hokenshaMoshitateRiyu: 02:請求誤りによる実績取り下げ
+  hokenshaServiceTeikyoYM: 平26.04
+  hokenshaServiceType: 11:訪問介護
+  hokenshaTanisu: 3000
+  hkenshaFutangaku: 100000
+- hokenshaJigyoshaNo: "0000000008"
+  hokenshaJigyoshaName: 電算事業者8
+  hokenshaHihoNo: "0000000018"
+  hokenshaHihoName: 電算 諒
+  hokenshaStyle: 21:居宅サービス介護給付費明細書(短期入所生活介護)
+  hokenshaMoshitateRiyu: 02:請求誤りによる実績取り下げ
+  hokenshaServiceTeikyoYM: 平26.04
+  hokenshaServiceType: 11:訪問介護
+  hokenshaTanisu: 3000
+  hkenshaFutangaku: 100000
+- hokenshaJigyoshaNo: "0000000009"
+  hokenshaJigyoshaName: 電算事業者9
+  hokenshaHihoNo: "0000000019"
+  hokenshaHihoName: 電算 凌
+  hokenshaStyle: 21:居宅サービス介護給付費明細書(短期入所生活介護)
+  hokenshaMoshitateRiyu: 02:請求誤りによる実績取り下げ
+  hokenshaServiceTeikyoYM: 平26.04
+  hokenshaServiceType: 11:訪問介護
+  hokenshaTanisu: 3000
+  hkenshaFutangaku: 100000
+- hokenshaJigyoshaNo: "0000000010"
+  hokenshaJigyoshaName: 電算事業者10
+  hokenshaHihoNo: "0000000011"
+  hokenshaHihoName: 電算 怜
+  hokenshaStyle: 21:居宅サービス介護給付費明細書(短期入所生活介護)
+  hokenshaMoshitateRiyu: 02:請求誤りによる実績取り下げ
+  hokenshaServiceTeikyoYM: 平26.04
+  hokenshaServiceType: 11:訪問介護
+  hokenshaTanisu: 3000
+  hkenshaFutangaku: 100000
+  
+## set決定公費負担者情報  
+## create決定保険者集計
+- kohiCell11: 0
+  kohiCell12: 0
+  kohiCell13: 0
+  kohiCell21: -15
+  kohiCell22: -15
+  kohiCell23: -15
+  kohiCell31: -407
+  kohiCell32: -69407
+  kohiCell33: -69407
+## create決定公費負担者明細  
+## create決定公費負担者明細List
+## createRow公費負担者
+- kohiJigyoshaNo: "1000000001"
+  kohiJigyoshaName: 電算事業者1
+  kohiHihoNo: "0000000011"
+  kohiHihoName: 電算 仁
+  kohiStyle: 21:居宅サービス介護給付費明細書(短期入所生活介護)
+  kohiMoshitateRiyu: 02:請求誤りによる実績取り下げ
+  kohiServiceTeikyoYM: 平26.04
+  kohiServiceType: 11:訪問介護
+  kohiTanisu: 2000
+  kohiFutangaku: 100000
+  kohiJukyushaNo: "0000001"
+  kohiFutanshaNo: "00000001"
+- kohiJigyoshaNo: "2000000001"
+  kohiJigyoshaName: 電算事業者2
+  kohiHihoNo: "0000000012"
+  kohiHihoName: 電算 翼
+  kohiStyle: 21:居宅サービス介護給付費明細書(短期入所生活介護)
+  kohiMoshitateRiyu: 02:請求誤りによる実績取り下げ
+  kohiServiceTeikyoYM: 平26.04
+  kohiServiceType: 11:訪問介護
+  kohiTanisu: 2000
+  kohiFutangaku: 100000
+  kohiJukyushaNo: "0000001"
+  kohiFutanshaNo: "00000001"
+- kohiJigyoshaNo: "3000000001"
+  kohiJigyoshaName: 電算事業者3
+  kohiHihoNo: "0000000013"
+  kohiHihoName: 電算 翔太
+  kohiStyle: 21:居宅サービス介護給付費明細書(短期入所生活介護)
+  kohiMoshitateRiyu: 02:請求誤りによる実績取り下げ
+  kohiServiceTeikyoYM: 平26.04
+  kohiServiceType: 11:訪問介護
+  kohiTanisu: 2000
+  kohiFutangaku: 100000
+  kohiJukyushaNo: "0000001"
+  kohiFutanshaNo: "00000001"
+- kohiJigyoshaNo: "4000000001"
+  kohiJigyoshaName: 電算事業者4
+  kohiHihoNo: "0000000014"
+  kohiHihoName: 電算 翔大
+  kohiStyle: 21:居宅サービス介護給付費明細書(短期入所生活介護)
+  kohiMoshitateRiyu: 02:請求誤りによる実績取り下げ
+  kohiServiceTeikyoYM: 平26.04
+  kohiServiceType: 11:訪問介護
+  kohiTanisu: 2000
+  kohiFutangaku: 100000
+  kohiJukyushaNo: "0000001"
+  kohiFutanshaNo: "00000001"

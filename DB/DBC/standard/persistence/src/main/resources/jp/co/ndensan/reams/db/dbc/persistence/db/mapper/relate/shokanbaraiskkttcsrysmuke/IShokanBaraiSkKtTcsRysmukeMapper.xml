@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-1000-050 chengsanyuan -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanbaraiskkttcsrysmuke.IShokanBaraiSkKtTcsRysmukeMapper">
+
+    <resultMap id="resultMap_JuninInfo" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraiskkttcsrysmuke.ShokanBaraiSkKtTcsRysmukeEntity" autoMapping="true">
+        <result property="hihokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shikyushinseiServiceYM" column="shikyushinseiServiceYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="keiyakuJigyoshaNo" column="keiyakuJigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikyushinseiSeiriNo" column="shikyushinseiSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="keiyakuJigyoshaName" column="keiyakuJigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="keiyakuJigyoshaYubinNo" column="keiyakuJigyoshaYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="keiyakuJigyoshaJusho" column="keiyakuJigyoshaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="keiyakuDaihyoshaName" column="keiyakuDaihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="keiyakuJigyoshaTelNo" column="keiyakuJigyoshaTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+    </resultMap>
+
+    <select id="get受任者情報" resultMap="resultMap_JuninInfo"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraiskkttcsrysmuke.ShokanBaraiSkKtTcsRysmukeParameter" fetchSize="500">
+        SELECT
+        A."hihokenshaNo"
+        , A."keiyakuJigyoshaNo"
+        , A."shikyushinseiServiceYM"
+        , A."shikyushinseiSeiriNo"
+        , B."keiyakuJigyoshaName"
+        , B."keiyakuDaihyoshaName"
+        , B."keiyakuJigyoshaYubinNo"
+        , B."keiyakuJigyoshaJusho"
+        , B."keiyakuJigyoshaTelNo"
+        FROM  rgdb."DbT3078ShokanJuryoininKeiyakusha" AS A
+        LEFT JOIN rgdb."DbT3077JuryoininKeiyakuJigyosha" AS B
+        ON A."keiyakuJigyoshaNo" = B."keiyakuJigyoshaNo"
+        WHERE A."hihokenshaNo" = #{被保険者番号}
+        AND A."shikyushinseiSeiriNo" = #{支給申請償還整理番号}
+        AND A."shikyushinseiServiceYM" = #{支給申請サービス提供年月}
+    </select>
+</mapper>

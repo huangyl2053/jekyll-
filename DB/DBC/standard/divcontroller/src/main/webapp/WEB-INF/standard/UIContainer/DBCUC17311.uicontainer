@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC17311",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "総合事業種類支給限度額登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC1731011",
+     "toLayoutTitle": "総合事業種類支給限度額登録",
+     "toState": "照会状態"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1731011",
+     "layoutTitle": "総合事業種類支給限度額登録",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

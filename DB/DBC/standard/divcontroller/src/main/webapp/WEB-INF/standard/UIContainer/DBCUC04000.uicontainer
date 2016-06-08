@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC04000",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "高額介護サービス費給付対象者登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0400011",
+     "toLayoutTitle": "高額介護サービス費給付対象者登録",
+     "toState": "初期状態"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0400011",
+     "layoutTitle": "高額介護サービス費給付対象者登録",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

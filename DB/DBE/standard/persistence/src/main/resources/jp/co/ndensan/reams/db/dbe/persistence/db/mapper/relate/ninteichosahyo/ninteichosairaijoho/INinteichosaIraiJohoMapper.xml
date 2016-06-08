@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 認定調査依頼情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosahyo.ninteichosairaijoho.INinteichosaIraiJohoMapper">
+
+    <select id="select認定調査依頼情報ByKey" resultMap="resultMap_NinteichosaIraiJohoEntity" fetchSize="500">
+        <include refid="selectNinteichosaIraiJohoEntity" />
+    </select>
+
+    <select id="select認定調査依頼情報リストBy主キー1" resultMap="resultMap_NinteichosaIraiJohoEntity" fetchSize="500">
+        <include refid="selectNinteichosaIraiJohoEntity" />
+    </select>
+
+    <!-- TODO RelateEntityを取得できるSQLに修正してください。where句はMapperParameterクラスに合わせて修正します。 -->
+    <sql id="selectNinteichosaIraiJohoEntity">
+        SELECT
+        dbT5201NinteichosaIraiJoho.*,
+        ninteichosahyoGaikyoChosa.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.noDeleted_DbT5201NinteichosaIraiJoho" />) AS dbT5201NinteichosaIraiJoho
+        LEFT JOIN
+        (
+            SELECT
+            dbT5202NinteichosahyoGaikyoChosa.*,
+            dbT5206GaikyoTokki.*,
+            dbT5205NinteichosahyoTokkijiko.*,
+            dbT5207NinteichosahyoServiceJokyo.*,
+            dbT5208NinteichosahyoServiceJokyoFlag.*,
+            dbT5209NinteichosahyoKinyuItem.*,
+            dbT5210NinteichosahyoShisetsuRiyo.*,
+            ninteichosahyoKihonChosa.*
+            FROM
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5202NinteichosahyoGaikyoChosaMapper.noDeleted_DbT5202NinteichosahyoGaikyoChosa" />) AS dbT5202NinteichosahyoGaikyoChosa
+            LEFT JOIN
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5206GaikyoTokkiMapper.noDeleted_DbT5206GaikyoTokki" />) AS dbT5206GaikyoTokki
+            ON
+            dbT5202NinteichosahyoGaikyoChosa."dbT5202NinteichosahyoGaikyoChosa_shinseishoKanriNo" = dbT5206GaikyoTokki."dbT5206GaikyoTokki_shinseishoKanriNo" AND
+            dbT5202NinteichosahyoGaikyoChosa."dbT5202NinteichosahyoGaikyoChosa_ninteichosaRirekiNo" = dbT5206GaikyoTokki."dbT5206GaikyoTokki_ninteichosaRirekiNo"
+
+            LEFT JOIN
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5205NinteichosahyoTokkijikoMapper.noDeleted_DbT5205NinteichosahyoTokkijiko" />) AS dbT5205NinteichosahyoTokkijiko
+            ON
+            dbT5202NinteichosahyoGaikyoChosa."dbT5202NinteichosahyoGaikyoChosa_shinseishoKanriNo" = dbT5205NinteichosahyoTokkijiko."dbT5205NinteichosahyoTokkijiko_shinseishoKanriNo" AND
+            dbT5202NinteichosahyoGaikyoChosa."dbT5202NinteichosahyoGaikyoChosa_ninteichosaRirekiNo" = dbT5205NinteichosahyoTokkijiko."dbT5205NinteichosahyoTokkijiko_ninteichosaRirekiNo"
+
+            LEFT JOIN
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5207NinteichosahyoServiceJokyoMapper.noDeleted_DbT5207NinteichosahyoServiceJokyo" />) AS dbT5207NinteichosahyoServiceJokyo
+            ON
+            dbT5202NinteichosahyoGaikyoChosa."dbT5202NinteichosahyoGaikyoChosa_shinseishoKanriNo" = dbT5207NinteichosahyoServiceJokyo."dbT5207NinteichosahyoServiceJokyo_shinseishoKanriNo" AND
+            dbT5202NinteichosahyoGaikyoChosa."dbT5202NinteichosahyoGaikyoChosa_ninteichosaRirekiNo" = dbT5207NinteichosahyoServiceJokyo."dbT5207NinteichosahyoServiceJokyo_ninteichosaRirekiNo"
+
+            LEFT JOIN
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5208NinteichosahyoServiceJokyoFlagMapper.noDeleted_DbT5208NinteichosahyoServiceJokyoFlag" />) AS dbT5208NinteichosahyoServiceJokyoFlag
+            ON
+            dbT5202NinteichosahyoGaikyoChosa."dbT5202NinteichosahyoGaikyoChosa_shinseishoKanriNo" = dbT5208NinteichosahyoServiceJokyoFlag."dbT5208NinteichosahyoServiceJokyoFlag_shinseishoKanriNo" AND
+            dbT5202NinteichosahyoGaikyoChosa."dbT5202NinteichosahyoGaikyoChosa_ninteichosaRirekiNo" = dbT5208NinteichosahyoServiceJokyoFlag."dbT5208NinteichosahyoServiceJokyoFlag_ninteichosaRirekiNo"
+
+            LEFT JOIN
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5209NinteichosahyoKinyuItemMapper.noDeleted_DbT5209NinteichosahyoKinyuItem" />) AS dbT5209NinteichosahyoKinyuItem
+            ON
+            dbT5202NinteichosahyoGaikyoChosa."dbT5202NinteichosahyoGaikyoChosa_shinseishoKanriNo" = dbT5209NinteichosahyoKinyuItem."dbT5209NinteichosahyoKinyuItem_shinseishoKanriNo" AND
+            dbT5202NinteichosahyoGaikyoChosa."dbT5202NinteichosahyoGaikyoChosa_ninteichosaRirekiNo" = dbT5209NinteichosahyoKinyuItem."dbT5209NinteichosahyoKinyuItem_ninteichosaRirekiNo"
+
+            LEFT JOIN
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5210NinteichosahyoShisetsuRiyoMapper.noDeleted_DbT5210NinteichosahyoShisetsuRiyo" />) dbT5210NinteichosahyoShisetsuRiyo
+            ON
+            dbT5202NinteichosahyoGaikyoChosa."dbT5202NinteichosahyoGaikyoChosa_shinseishoKanriNo" = dbT5210NinteichosahyoShisetsuRiyo."dbT5210NinteichosahyoShisetsuRiyo_shinseishoKanriNo" AND
+            dbT5202NinteichosahyoGaikyoChosa."dbT5202NinteichosahyoGaikyoChosa_ninteichosaRirekiNo" = dbT5210NinteichosahyoShisetsuRiyo."dbT5210NinteichosahyoShisetsuRiyo_ninteichosaRirekiNo"
+
+            LEFT JOIN
+            (
+                SELECT
+                dbT5203NinteichosahyoKihonChosa.*,
+                dbT5211NinteichosahyoChosaItem.*,
+                ninteichosahyoKihonChosaScore.*
+                FROM
+                (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5203NinteichosahyoKihonChosaMapper.noDeleted_DbT5203NinteichosahyoKihonChosa" />) AS dbT5203NinteichosahyoKihonChosa
+                LEFT JOIN
+                (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5211NinteichosahyoChosaItemMapper.noDeleted_DbT5211NinteichosahyoChosaItem" />) AS dbT5211NinteichosahyoChosaItem
+                ON
+                dbT5203NinteichosahyoKihonChosa."dbT5203NinteichosahyoKihonChosa_shinseishoKanriNo" = dbT5211NinteichosahyoChosaItem."dbT5211NinteichosahyoChosaItem_shinseishoKanriNo" AND
+                dbT5203NinteichosahyoKihonChosa."dbT5203NinteichosahyoKihonChosa_ninteichosaRirekiNo" = dbT5211NinteichosahyoChosaItem."dbT5211NinteichosahyoChosaItem_ninteichosaRirekiNo"
+                LEFT JOIN 
+                (   
+                    SELECT 
+                    dbT5204NinteichosahyoKihonChosaScore.*,
+                    dbT5212NinteichosahyoKihonChosaScoreItem.*
+                    FROM 
+                    (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5204NinteichosahyoKihonChosaScoreMapper.noDeleted_DbT5204NinteichosahyoKihonChosaScore" />) AS dbT5204NinteichosahyoKihonChosaScore
+                    LEFT JOIN
+                    (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5212NinteichosahyoKihonChosaScoreItemMapper.noDeleted_DbT5212NinteichosahyoKihonChosaScoreItem" />) AS dbT5212NinteichosahyoKihonChosaScoreItem
+                    ON
+                    dbT5204NinteichosahyoKihonChosaScore."dbT5204NinteichosahyoKihonChosaScore_shinseishoKanriNo" = dbT5212NinteichosahyoKihonChosaScoreItem."dbT5212NinteichosahyoKihonChosaScoreItem_shinseishoKanriNo" AND
+                    dbT5204NinteichosahyoKihonChosaScore."dbT5204NinteichosahyoKihonChosaScore_ninteichosaRirekiNo" = dbT5212NinteichosahyoKihonChosaScoreItem."dbT5212NinteichosahyoKihonChosaScoreItem_ninteichosaRirekiNo"
+                ) AS ninteichosahyoKihonChosaScore
+                ON
+                dbT5203NinteichosahyoKihonChosa."dbT5203NinteichosahyoKihonChosa_shinseishoKanriNo" = ninteichosahyoKihonChosaScore."dbT5204NinteichosahyoKihonChosaScore_shinseishoKanriNo" AND
+                dbT5203NinteichosahyoKihonChosa."dbT5203NinteichosahyoKihonChosa_ninteichosaRirekiNo" = ninteichosahyoKihonChosaScore."dbT5204NinteichosahyoKihonChosaScore_ninteichosaRirekiNo" 
+
+            ) AS ninteichosahyoKihonChosa
+            ON
+            dbT5202NinteichosahyoGaikyoChosa."dbT5202NinteichosahyoGaikyoChosa_shinseishoKanriNo" = ninteichosahyoKihonChosa."dbT5203NinteichosahyoKihonChosa_shinseishoKanriNo" AND
+            dbT5202NinteichosahyoGaikyoChosa."dbT5202NinteichosahyoGaikyoChosa_ninteichosaRirekiNo" = ninteichosahyoKihonChosa."dbT5203NinteichosahyoKihonChosa_ninteichosaRirekiNo"
+
+        ) AS ninteichosahyoGaikyoChosa
+        ON
+        dbT5201NinteichosaIraiJoho."dbT5201NinteichosaIraiJoho_shinseishoKanriNo" = ninteichosahyoGaikyoChosa."dbT5202NinteichosahyoGaikyoChosa_shinseishoKanriNo" AND
+        dbT5201NinteichosaIraiJoho."dbT5201NinteichosaIraiJoho_ninteichosaIraiRirekiNo" = ninteichosahyoGaikyoChosa."dbT5202NinteichosahyoGaikyoChosa_ninteichosaRirekiNo"
+        WHERE
+        dbT5201NinteichosaIraiJoho."dbT5201NinteichosaIraiJoho_shinseishoKanriNo" = #{shinseishoKanriNo}
+        AND dbT5201NinteichosaIraiJoho."dbT5201NinteichosaIraiJoho_ninteichosaIraiRirekiNo" = #{ninteichosaIraiRirekiNo}
+    </sql>
+
+    <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
+    <resultMap id="resultMap_NinteichosaIraiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyo.ninteichosairaijoho.NinteichosaIraiJohoEntity" autoMapping="true">
+        <id property="認定調査依頼情報Entity.shinseishoKanriNo" column="dbT5201NinteichosaIraiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="認定調査依頼情報Entity.ninteichosaIraiRirekiNo" column="dbT5201NinteichosaIraiJoho_ninteichosaIraiRirekiNo" />
+        <association property="認定調査依頼情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity"/>
+        <collection property="認定調査票_概況調査Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosahyo.ninteichosahyogaikyochosa.INinteichosahyoGaikyoChosaMapper.resultMap_NinteichosahyoGaikyoChosaEntity"/>
+    </resultMap>
+
+</mapper>

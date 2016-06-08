@@ -1,0 +1,60 @@
+﻿{
+ "uiContainerName": "DBEUC20401",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "完了処理主治医意見書依頼",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2040001",
+     "toLayoutTitle": "完了処理・主治医意見書依頼",
+     "toState": "初期　登録状態"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2040001",
+     "layoutTitle": "完了処理・主治医意見書依頼",
+     "eventName": "主治医意見書作成依頼画面へ遷移する",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2410002",
+     "toLayoutTitle": "主治医意見書作成依頼（手動）",
+     "toState": "主治医意見書作成依頼"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2410002",
+     "layoutTitle": "主治医意見書作成依頼（手動）",
+     "eventName": "個人依頼内容更新に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2040001",
+     "toLayoutTitle": "完了処理・主治医意見書依頼",
+     "toState": "完了状態"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2040001",
+     "layoutTitle": "完了処理・主治医意見書依頼",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBA-0360-010 duanzhanli-->
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nyutaishoshakanri.INyutaishoshaKanriMapper">
+
+<!--介護保険施設情報件数を取得します-->
+    <select id="getHihokenshaDaichoCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
+        SELECT  
+            COUNT(*)
+        FROM     
+            (SELECT 
+                 DbT1001HihokenshaDaicho.*, 
+                 ROW_NUMBER() over(partition by "shikibetsuCode","shikakuShutokuYMD" order by "shikibetsuCode" asc,
+                 "shikakuShutokuYMD" asc,"idoYMD" desc,"edaNo" desc) as rrkno
+           FROM
+               rgdb."DbT1001HihokenshaDaicho" AS DbT1001HihokenshaDaicho
+           WHERE
+               "logicalDeletedFlag" = FALSE) AS DbT1001        
+        WHERE    
+                DbT1001."shikakuSoshitsuYMD" <![CDATA[<=]]> #{入所年月日} 
+            AND DbT1001."shikakuShutokuYMD" <![CDATA[>=]]> #{退所年月日}
+            AND DbT1001.rrkno = 1
+    </select>
+    
+    <!--適用除外施設情報件数を取得します-->
+    <select id="getTekiyoJogaishaCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
+        SELECT  
+            COUNT(*)
+        FROM      
+            (SELECT 
+                DbT1002TekiyoJogaisha.*, 
+                ROW_NUMBER() over(partition by "shikibetsuCode","tekiyoYMD" order by "shikibetsuCode" asc,
+                "tekiyoYMD" asc,"idoYMD" desc,"edaNo" desc) as rrkno
+            FROM
+                rgdb."DbT1002TekiyoJogaisha" AS DbT1002TekiyoJogaisha
+            WHERE
+                "logicalDeletedFlag" = FALSE) AS DbT1002        
+        WHERE    
+            DbT1002."kaijoYMD" <![CDATA[<=]]> #{入所年月日}
+        AND DbT1002."tekiyoYMD" <![CDATA[>=]]> #{退所年月日}
+        AND DbT1002.rrkno = 1
+    </select>
+      
+    <!--住所地特例対象施設情報件数を取得します-->
+    <select id="getTashichosonJushochiTokureiCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
+        SELECT  
+            COUNT(*)
+        FROM      
+            (SELECT 
+                    DbT1003TashichosonJushochiTokurei.*, 
+                    ROW_NUMBER() over(partition by "shikibetsuCode","tekiyoYMD" order by "shikibetsuCode" asc,
+                    "tekiyoYMD" asc,"idoYMD" desc,"edaNo" desc) as rrkno
+            FROM
+                rgdb."DbT1003TashichosonJushochiTokurei" AS DbT1003TashichosonJushochiTokurei
+            WHERE
+                "logicalDeletedFlag" = FALSE) AS DbT1003        
+        WHERE    
+            DbT1003."kaijoYMD" <![CDATA[<=]]> #{入所年月日}
+        AND DbT1003."tekiyoYMD" <![CDATA[>=]]> #{退所年月日}
+        AND DbT1003.rrkno = 1
+    </select>
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7122SogoJigyoServiceCodeマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT7122SogoJigyoServiceCodeMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7122SogoJigyoServiceCode">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT7122SogoJigyoServiceCodeMapper.allColumns_DbT7122SogoJigyoServiceCode" />
+     FROM
+         rgdb."DbT7122SogoJigyoServiceCode"
+     WHERE
+         rgdb."DbT7122SogoJigyoServiceCode"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7122SogoJigyoServiceCode">
+         "DbT7122SogoJigyoServiceCode"."serviceShuruiCode" as "dbT7122SogoJigyoServiceCode_serviceShuruiCode",
+         "DbT7122SogoJigyoServiceCode"."serviceKomokuCode" as "dbT7122SogoJigyoServiceCode_serviceKomokuCode",
+         "DbT7122SogoJigyoServiceCode"."tekiyoKaishiYM" as "dbT7122SogoJigyoServiceCode_tekiyoKaishiYM",
+         "DbT7122SogoJigyoServiceCode"."rirekiNo" as "dbT7122SogoJigyoServiceCode_rirekiNo",
+         "DbT7122SogoJigyoServiceCode"."insertDantaiCd" as "dbT7122SogoJigyoServiceCode_insertDantaiCd",
+         "DbT7122SogoJigyoServiceCode"."insertTimestamp" as "dbT7122SogoJigyoServiceCode_insertTimestamp",
+         "DbT7122SogoJigyoServiceCode"."insertReamsLoginId" as "dbT7122SogoJigyoServiceCode_insertReamsLoginId",
+         "DbT7122SogoJigyoServiceCode"."insertContextId" as "dbT7122SogoJigyoServiceCode_insertContextId",
+         "DbT7122SogoJigyoServiceCode"."isDeleted" as "dbT7122SogoJigyoServiceCode_isDeleted",
+         "DbT7122SogoJigyoServiceCode"."updateCount" as "dbT7122SogoJigyoServiceCode_updateCount",
+         "DbT7122SogoJigyoServiceCode"."lastUpdateTimestamp" as "dbT7122SogoJigyoServiceCode_lastUpdateTimestamp",
+         "DbT7122SogoJigyoServiceCode"."lastUpdateReamsLoginId" as "dbT7122SogoJigyoServiceCode_lastUpdateReamsLoginId",
+         "DbT7122SogoJigyoServiceCode"."tekiyoShuryoYM" as "dbT7122SogoJigyoServiceCode_tekiyoShuryoYM",
+         "DbT7122SogoJigyoServiceCode"."serviceMeisho" as "dbT7122SogoJigyoServiceCode_serviceMeisho",
+         "DbT7122SogoJigyoServiceCode"."taniSu" as "dbT7122SogoJigyoServiceCode_taniSu",
+         "DbT7122SogoJigyoServiceCode"."gendoGakuTaishogaiFlag" as "dbT7122SogoJigyoServiceCode_gendoGakuTaishogaiFlag",
+         "DbT7122SogoJigyoServiceCode"."taniSuShikibetsuCode" as "dbT7122SogoJigyoServiceCode_taniSuShikibetsuCode",
+         "DbT7122SogoJigyoServiceCode"."gaibuServiceRiyoKubun" as "dbT7122SogoJigyoServiceCode_gaibuServiceRiyoKubun",
+         "DbT7122SogoJigyoServiceCode"."tokubetsuChiikiKasanFlag" as "dbT7122SogoJigyoServiceCode_tokubetsuChiikiKasanFlag",
+         "DbT7122SogoJigyoServiceCode"."teiRitsu_TeiGakuKubun" as "dbT7122SogoJigyoServiceCode_teiRitsu_TeiGakuKubun",
+         "DbT7122SogoJigyoServiceCode"."riyoshaFutanGaku" as "dbT7122SogoJigyoServiceCode_riyoshaFutanGaku",
+         "DbT7122SogoJigyoServiceCode"."kyufuRitsu" as "dbT7122SogoJigyoServiceCode_kyufuRitsu",
+         "DbT7122SogoJigyoServiceCode"."nijiYoboTaishosha_JissiKubun" as "dbT7122SogoJigyoServiceCode_nijiYoboTaishosha_JissiKubun",
+         "DbT7122SogoJigyoServiceCode"."yoShien1_JisshiKubun" as "dbT7122SogoJigyoServiceCode_yoShien1_JisshiKubun",
+         "DbT7122SogoJigyoServiceCode"."yoShien2_JisshiKubun" as "dbT7122SogoJigyoServiceCode_yoShien2_JisshiKubun"
+    </sql>
+
+
+    <!--テーブルDbT7122SogoJigyoServiceCodeの項目をDbT7122SogoJigyoServiceCodeEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7122SogoJigyoServiceCodeEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7122SogoJigyoServiceCodeEntity" autoMapping="true">
+        <id property="serviceShuruiCode" column="dbT7122SogoJigyoServiceCode_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <id property="serviceKomokuCode" column="dbT7122SogoJigyoServiceCode_serviceKomokuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceKomokuCodeTypeHandler"/>
+        <id property="tekiyoKaishiYM" column="dbT7122SogoJigyoServiceCode_tekiyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="rirekiNo" column="dbT7122SogoJigyoServiceCode_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT7122SogoJigyoServiceCode_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7122SogoJigyoServiceCode_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7122SogoJigyoServiceCode_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7122SogoJigyoServiceCode_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7122SogoJigyoServiceCode_isDeleted" />
+        <result property="updateCount" column="dbT7122SogoJigyoServiceCode_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7122SogoJigyoServiceCode_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7122SogoJigyoServiceCode_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tekiyoShuryoYM" column="dbT7122SogoJigyoServiceCode_tekiyoShuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="serviceMeisho" column="dbT7122SogoJigyoServiceCode_serviceMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="taniSu" column="dbT7122SogoJigyoServiceCode_taniSu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gendoGakuTaishogaiFlag" column="dbT7122SogoJigyoServiceCode_gendoGakuTaishogaiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="taniSuShikibetsuCode" column="dbT7122SogoJigyoServiceCode_taniSuShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gaibuServiceRiyoKubun" column="dbT7122SogoJigyoServiceCode_gaibuServiceRiyoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokubetsuChiikiKasanFlag" column="dbT7122SogoJigyoServiceCode_tokubetsuChiikiKasanFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teiRitsu_TeiGakuKubun" column="dbT7122SogoJigyoServiceCode_teiRitsu_TeiGakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="riyoshaFutanGaku" column="dbT7122SogoJigyoServiceCode_riyoshaFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kyufuRitsu" column="dbT7122SogoJigyoServiceCode_kyufuRitsu" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenKyufuRitsuTypeHandler"/>
+        <result property="nijiYoboTaishosha_JissiKubun" column="dbT7122SogoJigyoServiceCode_nijiYoboTaishosha_JissiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yoShien1_JisshiKubun" column="dbT7122SogoJigyoServiceCode_yoShien1_JisshiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yoShien2_JisshiKubun" column="dbT7122SogoJigyoServiceCode_yoShien2_JisshiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,17 @@
+﻿kokanJohoShikibetsuNo,DbUDD009KokanShikibetsuNo,KokanShikibetsuNo,,,,,交換情報識別番号,A
+inputShikibetsuNo,DbUDD010NyuryokuShikibetsuNo,NyuryokuShikibetsuNo,,,,,入力識別番号,A
+recodeShubetsuCode,varchar,RString,,,,,レコード種別コード,A
+shokisaiHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,証記載保険者番号,A
+hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
+jigyoshoNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,事業所番号,A
+toshiNo,varchar,RString,,,,,通し番号,A
+meisaiNo,bpchar,RString,,,,,明細番号,A
+serviceCode,DbUDD007ServiceCode,ServiceCode,,,,,サービスコード,A
+jutakuKaishuchakkoYMD,UDD015YMD,FlexibleDate,,,,,住宅改修着工年月日,A
+jutakuKaishuJigyoshaName,varchar,RString,,,,,住宅改修事業者名,A
+juutakukaishuJyutakuAdress,varchar,RString,,,,,住宅改修住宅住所,A
+kaishuKingaku,int4,Decimal,,,,,改修金額,A
+shinsaYM,UDD014YM,FlexibleYearMonth,,,,,審査年月,A
+seiriNo,varchar,RString,,,,,整理番号,A
+torikomiYM,UDD014YM,FlexibleYearMonth,,,,,取込年月,A

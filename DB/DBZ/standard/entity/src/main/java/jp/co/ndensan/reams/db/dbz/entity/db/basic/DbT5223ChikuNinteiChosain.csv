@@ -1,0 +1,6 @@
+﻿chosaChikuCode,UDD035Code,Code,,,,,調査地区コード,A
+ninteiChosaItakusakiCode,varchar,RString,,,,,認定調査委託先コード,A
+ninteiChosainCode,varchar,RString,,,,,認定調査員コード,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+yusenNo,int2,int,,,,,優先番号,A
+biko,text,RString,,,,,備考,A

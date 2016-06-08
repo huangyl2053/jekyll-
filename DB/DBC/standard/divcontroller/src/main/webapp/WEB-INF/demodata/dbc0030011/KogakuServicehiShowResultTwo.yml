@@ -1,0 +1,21 @@
+## YAML Template.
+---
+- teikyoYMShowTwo: 201405
+  setaiShuyakuNo: "0000000035"
+  ## 氏名 LEFT 
+  hihoNoL: "00000000027"
+  hhoNameR: 電算　太郎
+  hihoNoR: "00000000035"
+  hihoNameL: 電算　花子
+- bkoL: 備考
+  uketsukeDateL: 20140601
+  ketteiDateL: 20140701
+  shiharaiAmountL: 50000
+  fushikyuRiyuL: 支給対象者となる。 
+  shikyuAmountL: 26750
+- bkoR: 備考
+  uketsukeDateR: 20140601
+  ketteiDateR: 20140701
+  shiharaiAmountR: 30000
+  fushikyuRiyuR: 支給対象者となる。
+  shikyuAmountR: 16050

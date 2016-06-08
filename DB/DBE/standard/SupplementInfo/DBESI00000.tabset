@@ -1,0 +1,16 @@
+﻿{
+ "transitionList": [
+  {
+   "id": "0",
+   "businessId": "DBZ",
+   "controlName": "TainoInfo"
+  },
+  {
+   "id": 1,
+   "businessId": "DBZ",
+   "controlName": "SetaiInfo"
+  }
+ ],
+ "subGyomuCode": "DBE",
+ "tabSetName": "DBESI00000"
+}

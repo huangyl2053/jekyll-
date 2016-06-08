@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT2020ShotokuShokaihyoHakkoRirekiマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2020ShotokuShokaihyoHakkoRirekiMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT2020ShotokuShokaihyoHakkoRireki">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2020ShotokuShokaihyoHakkoRirekiMapper.allColumns_DbT2020ShotokuShokaihyoHakkoRireki" />
+     FROM
+         rgdb."DbT2020ShotokuShokaihyoHakkoRireki"
+     WHERE
+         rgdb."DbT2020ShotokuShokaihyoHakkoRireki"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT2020ShotokuShokaihyoHakkoRireki">
+         "DbT2020ShotokuShokaihyoHakkoRireki"."shoriNendo" as "dbT2020ShotokuShokaihyoHakkoRireki_shoriNendo",
+         "DbT2020ShotokuShokaihyoHakkoRireki"."shikibetsuCode" as "dbT2020ShotokuShokaihyoHakkoRireki_shikibetsuCode",
+         "DbT2020ShotokuShokaihyoHakkoRireki"."rirekiNo" as "dbT2020ShotokuShokaihyoHakkoRireki_rirekiNo",
+         "DbT2020ShotokuShokaihyoHakkoRireki"."insertDantaiCd" as "dbT2020ShotokuShokaihyoHakkoRireki_insertDantaiCd",
+         "DbT2020ShotokuShokaihyoHakkoRireki"."insertTimestamp" as "dbT2020ShotokuShokaihyoHakkoRireki_insertTimestamp",
+         "DbT2020ShotokuShokaihyoHakkoRireki"."insertReamsLoginId" as "dbT2020ShotokuShokaihyoHakkoRireki_insertReamsLoginId",
+         "DbT2020ShotokuShokaihyoHakkoRireki"."insertContextId" as "dbT2020ShotokuShokaihyoHakkoRireki_insertContextId",
+         "DbT2020ShotokuShokaihyoHakkoRireki"."isDeleted" as "dbT2020ShotokuShokaihyoHakkoRireki_isDeleted",
+         "DbT2020ShotokuShokaihyoHakkoRireki"."updateCount" as "dbT2020ShotokuShokaihyoHakkoRireki_updateCount",
+         "DbT2020ShotokuShokaihyoHakkoRireki"."lastUpdateTimestamp" as "dbT2020ShotokuShokaihyoHakkoRireki_lastUpdateTimestamp",
+         "DbT2020ShotokuShokaihyoHakkoRireki"."lastUpdateReamsLoginId" as "dbT2020ShotokuShokaihyoHakkoRireki_lastUpdateReamsLoginId",
+         "DbT2020ShotokuShokaihyoHakkoRireki"."shokaisakiLasdecCode" as "dbT2020ShotokuShokaihyoHakkoRireki_shokaisakiLasdecCode",
+         "DbT2020ShotokuShokaihyoHakkoRireki"."setaiCode" as "dbT2020ShotokuShokaihyoHakkoRireki_setaiCode",
+         "DbT2020ShotokuShokaihyoHakkoRireki"."hakkoReamsLoginId" as "dbT2020ShotokuShokaihyoHakkoRireki_hakkoReamsLoginId",
+         "DbT2020ShotokuShokaihyoHakkoRireki"."hakkoYMD" as "dbT2020ShotokuShokaihyoHakkoRireki_hakkoYMD",
+         "DbT2020ShotokuShokaihyoHakkoRireki"."sakuseiTimestamp" as "dbT2020ShotokuShokaihyoHakkoRireki_sakuseiTimestamp"
+    </sql>
+
+
+    <!--テーブルDbT2020ShotokuShokaihyoHakkoRirekiの項目をDbT2020ShotokuShokaihyoHakkoRirekiEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT2020ShotokuShokaihyoHakkoRirekiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2020ShotokuShokaihyoHakkoRirekiEntity" autoMapping="true">
+        <id property="shoriNendo" column="dbT2020ShotokuShokaihyoHakkoRireki_shoriNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="shikibetsuCode" column="dbT2020ShotokuShokaihyoHakkoRireki_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <id property="rirekiNo" column="dbT2020ShotokuShokaihyoHakkoRireki_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT2020ShotokuShokaihyoHakkoRireki_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT2020ShotokuShokaihyoHakkoRireki_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT2020ShotokuShokaihyoHakkoRireki_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT2020ShotokuShokaihyoHakkoRireki_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT2020ShotokuShokaihyoHakkoRireki_isDeleted" />
+        <result property="updateCount" column="dbT2020ShotokuShokaihyoHakkoRireki_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT2020ShotokuShokaihyoHakkoRireki_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT2020ShotokuShokaihyoHakkoRireki_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shokaisakiLasdecCode" column="dbT2020ShotokuShokaihyoHakkoRireki_shokaisakiLasdecCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="setaiCode" column="dbT2020ShotokuShokaihyoHakkoRireki_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <result property="hakkoReamsLoginId" column="dbT2020ShotokuShokaihyoHakkoRireki_hakkoReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hakkoYMD" column="dbT2020ShotokuShokaihyoHakkoRireki_hakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="sakuseiTimestamp" column="dbT2020ShotokuShokaihyoHakkoRireki_sakuseiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+    </resultMap>
+
+</mapper>

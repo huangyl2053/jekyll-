@@ -1,0 +1,737 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBC&quot;,&quot;controlName&quot;:&quot;ServiceTeikyoShomeishoList&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;AddButtonVisible&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;AddButtonDisplayNone&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;AddButtonOnClick&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;ShomeishoHeight&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;ShomeishoOnSelect&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;ShomeishoOnSelectDblClick&quot;,&quot;editType&quot;:0}]},&quot;AddButtonVisible&quot;:true,&quot;AddButtonDisplayNone&quot;:false,&quot;AddButtonOnClick&quot;:&quot;&quot;,&quot;ShomeishoHeight&quot;:&quot;175px&quot;,&quot;ShomeishoOnSelect&quot;:&quot;&quot;,&quot;ShomeishoOnSelectDblClick&quot;:&quot;&quot;}" data-is-composite-control="true" data-control-name="DBC.ServiceTeikyoShomeishoList"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel StateChangable UzCommonChildDivPanel Width-G2 UzCompositeChild" id="ServiceTeikyoShomeishoList" style="margin: 0em; width: auto;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ServiceTeikyoShomeishoList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;ServiceTeikyoShomeishoList&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ServiceTeikyoShomeishoList_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete ui-droppable ui-sortable" id="ServiceTeikyoShomeishoList_panel_body_area"><button title="" class="UzButton FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="btnAdd" style="width: 150px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnAdd&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;btnAdd&quot;,&quot;text&quot;:&quot;証明書情報を追加する&quot;}" value="undefined"><span>証明書情報を追加する</span></button><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="dgServiceTeikyoShomeishoList" style="width: 960px; height: 175px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgServiceTeikyoShomeishoList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;960px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;dgServiceTeikyoShomeishoList&quot;,&quot;height&quot;:&quot;175px&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:true,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;btnSelect&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:35,&quot;visible&quot;:true,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;選&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;btnSelect&quot;},{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;btnEdit&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:35,&quot;visible&quot;:true,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;修&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;btnEdit&quot;},{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;btnDelete&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:35,&quot;visible&quot;:true,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;削&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;btnDelete&quot;},{&quot;columnName&quot;:&quot;サービス提供証明書&quot;,&quot;dataName&quot;:&quot;txtShomeisho&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:400,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtShomeisho&quot;},{&quot;columnName&quot;:&quot;事業者&quot;,&quot;dataName&quot;:&quot;txtJigyosha&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:360,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtJigyosha&quot;},{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;btnGokei&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:45,&quot;visible&quot;:true,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;合計&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;btnGokei&quot;}]},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgServiceTeikyoShomeishoList_grid_table" role="" style="width: 960px; height: 150px; position: relative;"></div><div id="dgServiceTeikyoShomeishoList_footer" style="width: 960px; height: 25px;"></div></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBC;
+(function (DBC) {
+    (function (ServiceTeikyoShomeishoList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ServiceTeikyoShomeishoList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ServiceTeikyoShomeishoList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ServiceTeikyoShomeishoList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.dgServiceTeikyoShomeishoList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgServiceTeikyoShomeishoList"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ServiceTeikyoShomeishoList.Controls = Controls;
+    })(DBC.ServiceTeikyoShomeishoList || (DBC.ServiceTeikyoShomeishoList = {}));
+    var ServiceTeikyoShomeishoList = DBC.ServiceTeikyoShomeishoList;
+
+    var ServiceTeikyoShomeishoList_Design = (function (_super) {
+        __extends(ServiceTeikyoShomeishoList_Design, _super);
+        function ServiceTeikyoShomeishoList_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, ServiceTeikyoShomeishoList_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(ServiceTeikyoShomeishoList_Design.prototype, "AddButtonVisible", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["visible"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["visible"] = value;
+                } else {
+                    this.layout.items[0].items[0]["visible"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ServiceTeikyoShomeishoList_Design.prototype, "AddButtonDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[0]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ServiceTeikyoShomeishoList_Design.prototype, "AddButtonOnClick", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onClick"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onClick"] = value;
+                } else {
+                    this.layout.items[0].items[0]["onClick"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ServiceTeikyoShomeishoList_Design.prototype, "ShomeishoGridSetting", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["gridSetting"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["gridSetting"] = value;
+                } else {
+                    this.layout.items[0].items[1]["gridSetting"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ServiceTeikyoShomeishoList_Design.prototype, "ShomeishoHeight", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["height"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["height"] = value;
+                } else {
+                    this.layout.items[0].items[1]["height"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ServiceTeikyoShomeishoList_Design.prototype, "ShomeishoOnSelect", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelect"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelect"] = value;
+                } else {
+                    this.layout.items[0].items[1]["onSelect"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ServiceTeikyoShomeishoList_Design.prototype, "ShomeishoOnSelectDblClick", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelectByDblClick"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelectByDblClick"] = value;
+                } else {
+                    this.layout.items[0].items[1]["onSelectByDblClick"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        ServiceTeikyoShomeishoList_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("AddButtonVisible");
+            Uz.JSControlUtil.registProperty("AddButtonDisplayNone");
+            Uz.JSControlUtil.registProperty("AddButtonOnClick");
+            Uz.JSControlUtil.registProperty("ShomeishoGridSetting");
+            Uz.JSControlUtil.registProperty("ShomeishoHeight");
+            Uz.JSControlUtil.registProperty("ShomeishoOnSelect");
+            Uz.JSControlUtil.registProperty("ShomeishoOnSelectDblClick");
+        };
+
+        ServiceTeikyoShomeishoList_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["AddButtonVisible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["visible"];
+            editablePropertyInfo["AddButtonDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["AddButtonOnClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["ShomeishoGridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
+            editablePropertyInfo["ShomeishoHeight"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["height"];
+            editablePropertyInfo["ShomeishoOnSelect"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onSelect"];
+            editablePropertyInfo["ShomeishoOnSelectDblClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onSelectByDblClick"];
+
+            return editablePropertyInfo;
+        };
+        ServiceTeikyoShomeishoList_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "ServiceTeikyoShomeishoList",
+                    "items": [
+                        {
+                            "fieldName": "btnAdd",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "150",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "onClick": "",
+                            "text": "証明書情報を追加する",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": ""
+                        },
+                        {
+                            "fieldName": "dgServiceTeikyoShomeishoList",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "960",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "gridSetting": {
+                                "rowHeight": 25,
+                                "isMultiSelectable": false,
+                                "isShowFooter": true,
+                                "isShowFilter": false,
+                                "isShowFilterButton": false,
+                                "isShowRowState": true,
+                                "header": {
+                                    "combineColumns": [],
+                                    "frozenColumn": "",
+                                    "headerHeight": 0
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "",
+                                        "dataName": "btnSelect",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 35,
+                                        "visible": true,
+                                        "cellType": 8,
+                                        "cellDetails": {
+                                            "cellType": 8,
+                                            "text": "選",
+                                            "onClick": "",
+                                            "imageFileUrl": "",
+                                            "imageWidth": "",
+                                            "imageHeight": ""
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "btnSelect"
+                                    },
+                                    {
+                                        "columnName": "",
+                                        "dataName": "btnEdit",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 35,
+                                        "visible": true,
+                                        "cellType": 8,
+                                        "cellDetails": {
+                                            "cellType": 8,
+                                            "text": "修",
+                                            "onClick": "",
+                                            "imageFileUrl": "",
+                                            "imageWidth": "",
+                                            "imageHeight": ""
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "btnEdit"
+                                    },
+                                    {
+                                        "columnName": "",
+                                        "dataName": "btnDelete",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 35,
+                                        "visible": true,
+                                        "cellType": 8,
+                                        "cellDetails": {
+                                            "cellType": 8,
+                                            "text": "削",
+                                            "onClick": "",
+                                            "imageFileUrl": "",
+                                            "imageWidth": "",
+                                            "imageHeight": ""
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "btnDelete"
+                                    },
+                                    {
+                                        "columnName": "サービス提供証明書",
+                                        "dataName": "txtShomeisho",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 400,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtShomeisho"
+                                    },
+                                    {
+                                        "columnName": "事業者",
+                                        "dataName": "txtJigyosha",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 360,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtJigyosha"
+                                    },
+                                    {
+                                        "columnName": "",
+                                        "dataName": "btnGokei",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 45,
+                                        "visible": true,
+                                        "cellType": 8,
+                                        "cellDetails": {
+                                            "cellType": 8,
+                                            "text": "合計",
+                                            "onClick": "",
+                                            "imageFileUrl": "",
+                                            "imageWidth": "",
+                                            "imageHeight": ""
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "btnGokei"
+                                    }
+                                ]
+                            },
+                            "height": "175",
+                            "onSort": "",
+                            "onSelect": "",
+                            "onSelectByDblClick": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "M",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0",
+                    "marginRight": "0",
+                    "onLoad": "",
+                    "title": "",
+                    "marginTop": "0",
+                    "marginBottom": "0",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "ShokanShikyuShinseishoList"
+                        }
+                    ],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorderTop": true,
+                    "eraseBorderBottom": true,
+                    "eraseBorderRight": true,
+                    "eraseBorderLeft": true,
+                    "backgroundColor": 0,
+                    "widthAuto": true,
+                    "isGroupBox": false
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "relation": [],
+            "businessId": "DBC",
+            "controlName": "ServiceTeikyoShomeishoList",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "btnAdd",
+                    "publicChildProperty": "visible",
+                    "newPropertyName": "AddButtonVisible"
+                },
+                {
+                    "publicChildFieldName": "btnAdd",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "AddButtonDisplayNone"
+                },
+                {
+                    "publicChildFieldName": "btnAdd",
+                    "publicChildProperty": "onClick",
+                    "newPropertyName": "AddButtonOnClick"
+                },
+                {
+                    "publicChildFieldName": "dgServiceTeikyoShomeishoList",
+                    "publicChildProperty": "gridSetting",
+                    "newPropertyName": "ShomeishoGridSetting"
+                },
+                {
+                    "publicChildFieldName": "dgServiceTeikyoShomeishoList",
+                    "publicChildProperty": "height",
+                    "newPropertyName": "ShomeishoHeight"
+                },
+                {
+                    "publicChildFieldName": "dgServiceTeikyoShomeishoList",
+                    "publicChildProperty": "onSelect",
+                    "newPropertyName": "ShomeishoOnSelect"
+                },
+                {
+                    "publicChildFieldName": "dgServiceTeikyoShomeishoList",
+                    "publicChildProperty": "onSelectByDblClick",
+                    "newPropertyName": "ShomeishoOnSelectDblClick"
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": ""
+        };
+        return ServiceTeikyoShomeishoList_Design;
+    })(Uz.CommonChildDiv);
+    DBC.ServiceTeikyoShomeishoList_Design = ServiceTeikyoShomeishoList_Design;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (ServiceTeikyoShomeishoList) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ServiceTeikyoShomeishoList.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ServiceTeikyoShomeishoList.ModeController = ModeController;
+    })(DBC.ServiceTeikyoShomeishoList || (DBC.ServiceTeikyoShomeishoList = {}));
+    var ServiceTeikyoShomeishoList = DBC.ServiceTeikyoShomeishoList;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (ServiceTeikyoShomeishoList) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ServiceTeikyoShomeishoList.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("AddButtonVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("AddButtonDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("AddButtonOnClick", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("ShomeishoHeight", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("ShomeishoOnSelect", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("ShomeishoOnSelectDblClick", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getAddButtonVisible = function () {
+                return this.controls.btnAdd().visible;
+            };
+
+            PublicProperties.prototype.setAddButtonVisible = function (value) {
+                this.controls.btnAdd().visible = value;
+            };
+
+            PublicProperties.prototype.getAddButtonDisplayNone = function () {
+                return this.controls.btnAdd().displayNone;
+            };
+
+            PublicProperties.prototype.setAddButtonDisplayNone = function (value) {
+                this.controls.btnAdd().displayNone = value;
+            };
+
+            PublicProperties.prototype.getAddButtonOnClick = function () {
+                return this.controls.btnAdd().onClick;
+            };
+
+            PublicProperties.prototype.setAddButtonOnClick = function (value) {
+                this.controls.btnAdd().onClick = value;
+            };
+
+            PublicProperties.prototype.getShomeishoHeight = function () {
+                return this.controls.dgServiceTeikyoShomeishoList().height;
+            };
+
+            PublicProperties.prototype.setShomeishoHeight = function (value) {
+                this.controls.dgServiceTeikyoShomeishoList().height = value;
+            };
+
+            PublicProperties.prototype.getShomeishoOnSelect = function () {
+                return this.controls.dgServiceTeikyoShomeishoList().onSelect;
+            };
+
+            PublicProperties.prototype.setShomeishoOnSelect = function (value) {
+                this.controls.dgServiceTeikyoShomeishoList().onSelect = value;
+            };
+
+            PublicProperties.prototype.getShomeishoOnSelectDblClick = function () {
+                return this.controls.dgServiceTeikyoShomeishoList().onSelectByDblClick;
+            };
+
+            PublicProperties.prototype.setShomeishoOnSelectDblClick = function (value) {
+                this.controls.dgServiceTeikyoShomeishoList().onSelectByDblClick = value;
+            };
+            return PublicProperties;
+        })();
+        ServiceTeikyoShomeishoList.PublicProperties = PublicProperties;
+    })(DBC.ServiceTeikyoShomeishoList || (DBC.ServiceTeikyoShomeishoList = {}));
+    var ServiceTeikyoShomeishoList = DBC.ServiceTeikyoShomeishoList;
+})(DBC || (DBC = {}));
+</script>
+  <script class="RamlConvert" type="text/javascript">
+var DBC= DBC? DBC: {};
+DBC['SERVICETEIKYOSHOMEISHOLIST'] = {};
+DBC['SERVICETEIKYOSHOMEISHOLIST'].ServiceTeikyoShomeishoListRequest = function(parentFieldName){ 
+var paramArray = [];
+return paramArray;
+ };
+</script><script>var DBC;
+(function (DBC) {
+    (function (ServiceTeikyoShomeishoList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ServiceTeikyoShomeishoList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ServiceTeikyoShomeishoList";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBC.ServiceTeikyoShomeishoList.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBC.ServiceTeikyoShomeishoList.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ServiceTeikyoShomeishoList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.dgServiceTeikyoShomeishoList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgServiceTeikyoShomeishoList"));
+            };
+            return Controls;
+        })();
+        ServiceTeikyoShomeishoList.Controls = Controls;
+    })(DBC.ServiceTeikyoShomeishoList || (DBC.ServiceTeikyoShomeishoList = {}));
+    var ServiceTeikyoShomeishoList = DBC.ServiceTeikyoShomeishoList;
+})(DBC || (DBC = {}));
+var DBC;
+(function (DBC) {
+    (function (ServiceTeikyoShomeishoList) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ServiceTeikyoShomeishoList.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ServiceTeikyoShomeishoList.ModeController = ModeController;
+    })(DBC.ServiceTeikyoShomeishoList || (DBC.ServiceTeikyoShomeishoList = {}));
+    var ServiceTeikyoShomeishoList = DBC.ServiceTeikyoShomeishoList;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (ServiceTeikyoShomeishoList) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ServiceTeikyoShomeishoList.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("AddButtonVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("AddButtonDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("AddButtonOnClick", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("ShomeishoHeight", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("ShomeishoOnSelect", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("ShomeishoOnSelectDblClick", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getAddButtonVisible = function () {
+                return this.controls.btnAdd().visible;
+            };
+
+            PublicProperties.prototype.setAddButtonVisible = function (value) {
+                this.controls.btnAdd().visible = value;
+            };
+
+            PublicProperties.prototype.getAddButtonDisplayNone = function () {
+                return this.controls.btnAdd().displayNone;
+            };
+
+            PublicProperties.prototype.setAddButtonDisplayNone = function (value) {
+                this.controls.btnAdd().displayNone = value;
+            };
+
+            PublicProperties.prototype.getAddButtonOnClick = function () {
+                return this.controls.btnAdd().onClick;
+            };
+
+            PublicProperties.prototype.setAddButtonOnClick = function (value) {
+                this.controls.btnAdd().onClick = value;
+            };
+
+            PublicProperties.prototype.getShomeishoHeight = function () {
+                return this.controls.dgServiceTeikyoShomeishoList().height;
+            };
+
+            PublicProperties.prototype.setShomeishoHeight = function (value) {
+                this.controls.dgServiceTeikyoShomeishoList().height = value;
+            };
+
+            PublicProperties.prototype.getShomeishoOnSelect = function () {
+                return this.controls.dgServiceTeikyoShomeishoList().onSelect;
+            };
+
+            PublicProperties.prototype.setShomeishoOnSelect = function (value) {
+                this.controls.dgServiceTeikyoShomeishoList().onSelect = value;
+            };
+
+            PublicProperties.prototype.getShomeishoOnSelectDblClick = function () {
+                return this.controls.dgServiceTeikyoShomeishoList().onSelectByDblClick;
+            };
+
+            PublicProperties.prototype.setShomeishoOnSelectDblClick = function (value) {
+                this.controls.dgServiceTeikyoShomeishoList().onSelectByDblClick = value;
+            };
+            return PublicProperties;
+        })();
+        ServiceTeikyoShomeishoList.PublicProperties = PublicProperties;
+    })(DBC.ServiceTeikyoShomeishoList || (DBC.ServiceTeikyoShomeishoList = {}));
+    var ServiceTeikyoShomeishoList = DBC.ServiceTeikyoShomeishoList;
+})(DBC || (DBC = {}));
+</script></div>

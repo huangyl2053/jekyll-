@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+        <artifactId>dbd</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>DbdDefinition</artifactId>
+    <packaging>jar</packaging>
+    <name>DbdDefinition</name>
+    <properties>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+		<!-- DBD -->
+		<!-- DBX -->
+		<!-- DBZ -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzDefinition</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzTestHelper</artifactId>
+        </dependency>
+		<!-- 公開系 -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzDefinition</artifactId>
+        </dependency>
+		<!-- テスト -->
+    </dependencies>
+</project>

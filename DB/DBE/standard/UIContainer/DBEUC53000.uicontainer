@@ -1,0 +1,33 @@
+﻿{
+ "transitionList": [
+  {
+   "id": "2",
+   "layoutSubGyomuCode": "DBE",
+   "layoutName": "DBE5030001",
+   "eventName": "selectShinsakai",
+   "toLayoutSubGyomuCode": "DBE",
+   "toLayoutName": "DBE5030002",
+   "toEventName": ""
+  },
+  {
+   "id": "3",
+   "layoutSubGyomuCode": "DBE",
+   "layoutName": "DBE5030002",
+   "eventName": "returnIchiran",
+   "toLayoutSubGyomuCode": "DBE",
+   "toLayoutName": "DBE5030001",
+   "toEventName": ""
+  },
+  {
+   "id": "4",
+   "layoutSubGyomuCode": "DBE",
+   "layoutName": "DBE5030001",
+   "eventName": "selectRow",
+   "toLayoutSubGyomuCode": "DBE",
+   "toLayoutName": "DBE5030002",
+   "toEventName": ""
+  }
+ ],
+ "subGyomuCode": "DBE",
+ "uiContainerName": "DBEUC53000"
+}

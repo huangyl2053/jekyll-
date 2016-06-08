@@ -1,0 +1,102 @@
+﻿{
+ "uiContainerName": "DBCUC00300",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "高額介護サービス費照会",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0030011",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0030011",
+     "layoutTitle": "対象者検索",
+     "eventName": "選択",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0030012",
+     "toLayoutTitle": "高額介護サービス費照会",
+     "toState": "照会"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0030012",
+     "layoutTitle": "高額介護サービス費照会",
+     "eventName": "再検索",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0030011",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0030012",
+     "layoutTitle": "高額介護サービス費照会",
+     "eventName": "検索結果一覧",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0030011",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
+    },
+    {
+     "id": "5",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0030012",
+     "layoutTitle": "高額介護サービス費照会",
+     "eventName": "完了",
+     "destroy": true,
+     "condition": ""
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0030012",
+     "layoutTitle": "高額介護サービス費照会",
+     "eventName": "世帯情報表示",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0030013",
+     "toLayoutTitle": "高額介護サービス費照会",
+     "toState": "世帯情報一覧"
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0030013",
+     "layoutTitle": "高額介護サービス費照会",
+     "eventName": "戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0030012",
+     "toLayoutTitle": "高額介護サービス費照会",
+     "toState": ""
+    }
+   ]
+  }
+ ]
+}

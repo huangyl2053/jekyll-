@@ -1,0 +1,7 @@
+﻿shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
+genshobunHihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,原処分被保険者番号,A
+shinsaseikyuTodokedeYMD,UDD015YMD,FlexibleDate,,,,,審査請求届出日,A
+bemmeishoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,弁明書作成日,A
+bemmeishaEdaban,int2,int,,,,,弁明者枝番,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+bemmeisha,text,RString,,,,,弁明者,A

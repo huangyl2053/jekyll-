@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4031ShinseishoHakkoKohoshasマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4031ShinseishoHakkoKohoshasMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4031ShinseishoHakkoKohoshas">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4031ShinseishoHakkoKohoshasMapper.allColumns_DbT4031ShinseishoHakkoKohoshas" />
+     FROM
+         rgdb."DbT4031ShinseishoHakkoKohoshas"
+     WHERE
+         rgdb."DbT4031ShinseishoHakkoKohoshas"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4031ShinseishoHakkoKohoshas">
+         "DbT4031ShinseishoHakkoKohoshas"."haakuShoriID" as "dbT4031ShinseishoHakkoKohoshas_haakuShoriID",
+         "DbT4031ShinseishoHakkoKohoshas"."hihokenshaNo" as "dbT4031ShinseishoHakkoKohoshas_hihokenshaNo",
+         "DbT4031ShinseishoHakkoKohoshas"."insertDantaiCd" as "dbT4031ShinseishoHakkoKohoshas_insertDantaiCd",
+         "DbT4031ShinseishoHakkoKohoshas"."insertTimestamp" as "dbT4031ShinseishoHakkoKohoshas_insertTimestamp",
+         "DbT4031ShinseishoHakkoKohoshas"."insertReamsLoginId" as "dbT4031ShinseishoHakkoKohoshas_insertReamsLoginId",
+         "DbT4031ShinseishoHakkoKohoshas"."insertContextId" as "dbT4031ShinseishoHakkoKohoshas_insertContextId",
+         "DbT4031ShinseishoHakkoKohoshas"."isDeleted" as "dbT4031ShinseishoHakkoKohoshas_isDeleted",
+         "DbT4031ShinseishoHakkoKohoshas"."updateCount" as "dbT4031ShinseishoHakkoKohoshas_updateCount",
+         "DbT4031ShinseishoHakkoKohoshas"."lastUpdateTimestamp" as "dbT4031ShinseishoHakkoKohoshas_lastUpdateTimestamp",
+         "DbT4031ShinseishoHakkoKohoshas"."lastUpdateReamsLoginId" as "dbT4031ShinseishoHakkoKohoshas_lastUpdateReamsLoginId",
+         "DbT4031ShinseishoHakkoKohoshas"."willBeRenewed" as "dbT4031ShinseishoHakkoKohoshas_willBeRenewed",
+         "DbT4031ShinseishoHakkoKohoshas"."shikibetsuCode" as "dbT4031ShinseishoHakkoKohoshas_shikibetsuCode",
+         "DbT4031ShinseishoHakkoKohoshas"."setaiKazeiKubun" as "dbT4031ShinseishoHakkoKohoshas_setaiKazeiKubun",
+         "DbT4031ShinseishoHakkoKohoshas"."honninKazeiKubun" as "dbT4031ShinseishoHakkoKohoshas_honninKazeiKubun",
+         "DbT4031ShinseishoHakkoKohoshas"."isRoreiFukushiNenkinJukyusha" as "dbT4031ShinseishoHakkoKohoshas_isRoreiFukushiNenkinJukyusha",
+         "DbT4031ShinseishoHakkoKohoshas"."isSeikatsuHogoJukyusha" as "dbT4031ShinseishoHakkoKohoshas_isSeikatsuHogoJukyusha",
+         "DbT4031ShinseishoHakkoKohoshas"."riyoshaFutanDankai" as "dbT4031ShinseishoHakkoKohoshas_riyoshaFutanDankai",
+         "DbT4031ShinseishoHakkoKohoshas"."gokeiShotokuKingaku" as "dbT4031ShinseishoHakkoKohoshas_gokeiShotokuKingaku",
+         "DbT4031ShinseishoHakkoKohoshas"."nenkinShunyuGaku" as "dbT4031ShinseishoHakkoKohoshas_nenkinShunyuGaku",
+         "DbT4031ShinseishoHakkoKohoshas"."jigyoshaNo" as "dbT4031ShinseishoHakkoKohoshas_jigyoshaNo"
+    </sql>
+
+
+    <!--テーブルDbT4031ShinseishoHakkoKohoshasの項目をDbT4031ShinseishoHakkoKohoshasEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4031ShinseishoHakkoKohoshasEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4031ShinseishoHakkoKohoshasEntity" autoMapping="true">
+        <id property="haakuShoriID" column="dbT4031ShinseishoHakkoKohoshas_haakuShoriID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <id property="hihokenshaNo" column="dbT4031ShinseishoHakkoKohoshas_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT4031ShinseishoHakkoKohoshas_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4031ShinseishoHakkoKohoshas_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4031ShinseishoHakkoKohoshas_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4031ShinseishoHakkoKohoshas_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4031ShinseishoHakkoKohoshas_isDeleted" />
+        <result property="updateCount" column="dbT4031ShinseishoHakkoKohoshas_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4031ShinseishoHakkoKohoshas_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4031ShinseishoHakkoKohoshas_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="willBeRenewed" column="dbT4031ShinseishoHakkoKohoshas_willBeRenewed" />
+        <result property="shikibetsuCode" column="dbT4031ShinseishoHakkoKohoshas_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="setaiKazeiKubun" column="dbT4031ShinseishoHakkoKohoshas_setaiKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="honninKazeiKubun" column="dbT4031ShinseishoHakkoKohoshas_honninKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="isRoreiFukushiNenkinJukyusha" column="dbT4031ShinseishoHakkoKohoshas_isRoreiFukushiNenkinJukyusha" />
+        <result property="isSeikatsuHogoJukyusha" column="dbT4031ShinseishoHakkoKohoshas_isSeikatsuHogoJukyusha" />
+        <result property="riyoshaFutanDankai" column="dbT4031ShinseishoHakkoKohoshas_riyoshaFutanDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gokeiShotokuKingaku" column="dbT4031ShinseishoHakkoKohoshas_gokeiShotokuKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nenkinShunyuGaku" column="dbT4031ShinseishoHakkoKohoshas_nenkinShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="jigyoshaNo" column="dbT4031ShinseishoHakkoKohoshas_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+    </resultMap>
+
+</mapper>

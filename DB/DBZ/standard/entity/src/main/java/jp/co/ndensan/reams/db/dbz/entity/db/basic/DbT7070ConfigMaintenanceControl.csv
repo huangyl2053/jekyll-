@@ -1,0 +1,5 @@
+﻿subGyomuCode,UDD055SubGyomuCode,SubGyomuCode,,,,,サブ業務コード,A
+configName,text,RString,,,,,コンフィグ名,A
+hyojiJun1,int2,int,,,,,表示順１,A
+hyojiJun2,int2,int,,,,,表示順２,A
+hyojiJun3,int2,int,,,,,表示順３,A

@@ -1,0 +1,12 @@
+## YAML Template.
+---
+- SetaiName: 電算　次郎
+  SetaiGender: 男
+  SetaiBirthDay: "昭52.02.21"
+  SetaiTsuzukiGara:  "子"
+  SetaiShikibetsuCode: "123456789012"
+- SetaiName: 電算　三郎
+  SetaiGender: 男
+  SetaiBirthDay: 昭54.02.21
+  SetaiTsuzukiGara: 子
+  SetaiShikibetsuCode: "123456789013"

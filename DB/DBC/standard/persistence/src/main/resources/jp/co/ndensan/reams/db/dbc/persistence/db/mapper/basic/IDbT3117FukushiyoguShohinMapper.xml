@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3117FukushiyoguShohinマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3117FukushiyoguShohinMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3117FukushiyoguShohin">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3117FukushiyoguShohinMapper.allColumns_DbT3117FukushiyoguShohin" />
+     FROM
+         rgdb."DbT3117FukushiyoguShohin"
+     WHERE
+         rgdb."DbT3117FukushiyoguShohin"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3117FukushiyoguShohin">
+         "DbT3117FukushiyoguShohin"."shohinNo" as "dbT3117FukushiyoguShohin_shohinNo",
+         "DbT3117FukushiyoguShohin"."kanriKaishiYMD" as "dbT3117FukushiyoguShohin_kanriKaishiYMD",
+         "DbT3117FukushiyoguShohin"."insertDantaiCd" as "dbT3117FukushiyoguShohin_insertDantaiCd",
+         "DbT3117FukushiyoguShohin"."insertTimestamp" as "dbT3117FukushiyoguShohin_insertTimestamp",
+         "DbT3117FukushiyoguShohin"."insertReamsLoginId" as "dbT3117FukushiyoguShohin_insertReamsLoginId",
+         "DbT3117FukushiyoguShohin"."insertContextId" as "dbT3117FukushiyoguShohin_insertContextId",
+         "DbT3117FukushiyoguShohin"."isDeleted" as "dbT3117FukushiyoguShohin_isDeleted",
+         "DbT3117FukushiyoguShohin"."updateCount" as "dbT3117FukushiyoguShohin_updateCount",
+         "DbT3117FukushiyoguShohin"."lastUpdateTimestamp" as "dbT3117FukushiyoguShohin_lastUpdateTimestamp",
+         "DbT3117FukushiyoguShohin"."lastUpdateReamsLoginId" as "dbT3117FukushiyoguShohin_lastUpdateReamsLoginId",
+         "DbT3117FukushiyoguShohin"."kanriShuryoYMD" as "dbT3117FukushiyoguShohin_kanriShuryoYMD",
+         "DbT3117FukushiyoguShohin"."shohinmei" as "dbT3117FukushiyoguShohin_shohinmei",
+         "DbT3117FukushiyoguShohin"."seizoJigyoshamei" as "dbT3117FukushiyoguShohin_seizoJigyoshamei",
+         "DbT3117FukushiyoguShohin"."hinmokuCode" as "dbT3117FukushiyoguShohin_hinmokuCode"
+    </sql>
+
+
+    <!--テーブルDbT3117FukushiyoguShohinの項目をDbT3117FukushiyoguShohinEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3117FukushiyoguShohinEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3117FukushiyoguShohinEntity" autoMapping="true">
+        <id property="shohinNo" column="dbT3117FukushiyoguShohin_shohinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="kanriKaishiYMD" column="dbT3117FukushiyoguShohin_kanriKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3117FukushiyoguShohin_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3117FukushiyoguShohin_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3117FukushiyoguShohin_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3117FukushiyoguShohin_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3117FukushiyoguShohin_isDeleted" />
+        <result property="updateCount" column="dbT3117FukushiyoguShohin_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3117FukushiyoguShohin_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3117FukushiyoguShohin_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kanriShuryoYMD" column="dbT3117FukushiyoguShohin_kanriShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shohinmei" column="dbT3117FukushiyoguShohin_shohinmei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seizoJigyoshamei" column="dbT3117FukushiyoguShohin_seizoJigyoshamei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hinmokuCode" column="dbT3117FukushiyoguShohin_hinmokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5510IchiGojiHanteiKekkaJohoマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5510IchiGojiHanteiKekkaJohoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5510IchiGojiHanteiKekkaJoho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5510IchiGojiHanteiKekkaJohoMapper.allColumns_DbT5510IchiGojiHanteiKekkaJoho" />
+     FROM
+         rgdb."DbT5510IchiGojiHanteiKekkaJoho"
+     WHERE
+         rgdb."DbT5510IchiGojiHanteiKekkaJoho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5510IchiGojiHanteiKekkaJoho">
+         "DbT5510IchiGojiHanteiKekkaJoho"."shinseishoKanriNo" as "dbT5510IchiGojiHanteiKekkaJoho_shinseishoKanriNo",
+         "DbT5510IchiGojiHanteiKekkaJoho"."insertDantaiCd" as "dbT5510IchiGojiHanteiKekkaJoho_insertDantaiCd",
+         "DbT5510IchiGojiHanteiKekkaJoho"."insertTimestamp" as "dbT5510IchiGojiHanteiKekkaJoho_insertTimestamp",
+         "DbT5510IchiGojiHanteiKekkaJoho"."insertReamsLoginId" as "dbT5510IchiGojiHanteiKekkaJoho_insertReamsLoginId",
+         "DbT5510IchiGojiHanteiKekkaJoho"."insertContextId" as "dbT5510IchiGojiHanteiKekkaJoho_insertContextId",
+         "DbT5510IchiGojiHanteiKekkaJoho"."isDeleted" as "dbT5510IchiGojiHanteiKekkaJoho_isDeleted",
+         "DbT5510IchiGojiHanteiKekkaJoho"."updateCount" as "dbT5510IchiGojiHanteiKekkaJoho_updateCount",
+         "DbT5510IchiGojiHanteiKekkaJoho"."lastUpdateTimestamp" as "dbT5510IchiGojiHanteiKekkaJoho_lastUpdateTimestamp",
+         "DbT5510IchiGojiHanteiKekkaJoho"."lastUpdateReamsLoginId" as "dbT5510IchiGojiHanteiKekkaJoho_lastUpdateReamsLoginId",
+         "DbT5510IchiGojiHanteiKekkaJoho"."ichiGojiHanteiYMD" as "dbT5510IchiGojiHanteiKekkaJoho_ichiGojiHanteiYMD",
+         "DbT5510IchiGojiHanteiKekkaJoho"."ichiGojiHanteiKekkaCode" as "dbT5510IchiGojiHanteiKekkaJoho_ichiGojiHanteiKekkaCode",
+         "DbT5510IchiGojiHanteiKekkaJoho"."ichiGojiHanteiKekkaNinchishoKasanCode" as "dbT5510IchiGojiHanteiKekkaJoho_ichiGojiHanteiKekkaNinchishoKasanCode",
+         "DbT5510IchiGojiHanteiKekkaJoho"."kijunJikan" as "dbT5510IchiGojiHanteiKekkaJoho_kijunJikan",
+         "DbT5510IchiGojiHanteiKekkaJoho"."kijunJikanShokuji" as "dbT5510IchiGojiHanteiKekkaJoho_kijunJikanShokuji",
+         "DbT5510IchiGojiHanteiKekkaJoho"."kijunJikanHaisetsu" as "dbT5510IchiGojiHanteiKekkaJoho_kijunJikanHaisetsu",
+         "DbT5510IchiGojiHanteiKekkaJoho"."kijunJikanIdo" as "dbT5510IchiGojiHanteiKekkaJoho_kijunJikanIdo",
+         "DbT5510IchiGojiHanteiKekkaJoho"."kijunJikanSeiketsuHoji" as "dbT5510IchiGojiHanteiKekkaJoho_kijunJikanSeiketsuHoji",
+         "DbT5510IchiGojiHanteiKekkaJoho"."kijunJikanKansetsuCare" as "dbT5510IchiGojiHanteiKekkaJoho_kijunJikanKansetsuCare",
+         "DbT5510IchiGojiHanteiKekkaJoho"."kijunJikanBPSDKanren" as "dbT5510IchiGojiHanteiKekkaJoho_kijunJikanBPSDKanren",
+         "DbT5510IchiGojiHanteiKekkaJoho"."kijunJikanKinoKunren" as "dbT5510IchiGojiHanteiKekkaJoho_kijunJikanKinoKunren",
+         "DbT5510IchiGojiHanteiKekkaJoho"."kijunJikanIryoKanren" as "dbT5510IchiGojiHanteiKekkaJoho_kijunJikanIryoKanren",
+         "DbT5510IchiGojiHanteiKekkaJoho"."kijunJikanNinchishoKasan" as "dbT5510IchiGojiHanteiKekkaJoho_kijunJikanNinchishoKasan",
+         "DbT5510IchiGojiHanteiKekkaJoho"."chukanHyokaKomoku1gun" as "dbT5510IchiGojiHanteiKekkaJoho_chukanHyokaKomoku1gun",
+         "DbT5510IchiGojiHanteiKekkaJoho"."chukanHyokaKomoku2gun" as "dbT5510IchiGojiHanteiKekkaJoho_chukanHyokaKomoku2gun",
+         "DbT5510IchiGojiHanteiKekkaJoho"."chukanHyokaKomoku3gun" as "dbT5510IchiGojiHanteiKekkaJoho_chukanHyokaKomoku3gun",
+         "DbT5510IchiGojiHanteiKekkaJoho"."chukanHyokaKomoku4gun" as "dbT5510IchiGojiHanteiKekkaJoho_chukanHyokaKomoku4gun",
+         "DbT5510IchiGojiHanteiKekkaJoho"."chukanHyokaKomoku5gun" as "dbT5510IchiGojiHanteiKekkaJoho_chukanHyokaKomoku5gun",
+         "DbT5510IchiGojiHanteiKekkaJoho"."ichiGojiHnateiKeikokuCode" as "dbT5510IchiGojiHanteiKekkaJoho_ichiGojiHnateiKeikokuCode",
+         "DbT5510IchiGojiHanteiKekkaJoho"."jotaiAnteiseiCode" as "dbT5510IchiGojiHanteiKekkaJoho_jotaiAnteiseiCode",
+         "DbT5510IchiGojiHanteiKekkaJoho"."ninchishoJiritsudoIIijoNoGaizensei" as "dbT5510IchiGojiHanteiKekkaJoho_ninchishoJiritsudoIIijoNoGaizensei",
+         "DbT5510IchiGojiHanteiKekkaJoho"."suiteiKyufuKubunCode" as "dbT5510IchiGojiHanteiKekkaJoho_suiteiKyufuKubunCode"
+    </sql>
+
+
+    <!--テーブルDbT5510IchiGojiHanteiKekkaJohoの項目をDbT5510IchiGojiHanteiKekkaJohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5510IchiGojiHanteiKekkaJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5510IchiGojiHanteiKekkaJohoEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT5510IchiGojiHanteiKekkaJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT5510IchiGojiHanteiKekkaJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5510IchiGojiHanteiKekkaJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5510IchiGojiHanteiKekkaJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5510IchiGojiHanteiKekkaJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5510IchiGojiHanteiKekkaJoho_isDeleted" />
+        <result property="updateCount" column="dbT5510IchiGojiHanteiKekkaJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5510IchiGojiHanteiKekkaJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5510IchiGojiHanteiKekkaJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichiGojiHanteiYMD" column="dbT5510IchiGojiHanteiKekkaJoho_ichiGojiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ichiGojiHanteiKekkaCode" column="dbT5510IchiGojiHanteiKekkaJoho_ichiGojiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ichiGojiHanteiKekkaNinchishoKasanCode" column="dbT5510IchiGojiHanteiKekkaJoho_ichiGojiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kijunJikan" column="dbT5510IchiGojiHanteiKekkaJoho_kijunJikan" />
+        <result property="kijunJikanShokuji" column="dbT5510IchiGojiHanteiKekkaJoho_kijunJikanShokuji" />
+        <result property="kijunJikanHaisetsu" column="dbT5510IchiGojiHanteiKekkaJoho_kijunJikanHaisetsu" />
+        <result property="kijunJikanIdo" column="dbT5510IchiGojiHanteiKekkaJoho_kijunJikanIdo" />
+        <result property="kijunJikanSeiketsuHoji" column="dbT5510IchiGojiHanteiKekkaJoho_kijunJikanSeiketsuHoji" />
+        <result property="kijunJikanKansetsuCare" column="dbT5510IchiGojiHanteiKekkaJoho_kijunJikanKansetsuCare" />
+        <result property="kijunJikanBPSDKanren" column="dbT5510IchiGojiHanteiKekkaJoho_kijunJikanBPSDKanren" />
+        <result property="kijunJikanKinoKunren" column="dbT5510IchiGojiHanteiKekkaJoho_kijunJikanKinoKunren" />
+        <result property="kijunJikanIryoKanren" column="dbT5510IchiGojiHanteiKekkaJoho_kijunJikanIryoKanren" />
+        <result property="kijunJikanNinchishoKasan" column="dbT5510IchiGojiHanteiKekkaJoho_kijunJikanNinchishoKasan" />
+        <result property="chukanHyokaKomoku1gun" column="dbT5510IchiGojiHanteiKekkaJoho_chukanHyokaKomoku1gun" />
+        <result property="chukanHyokaKomoku2gun" column="dbT5510IchiGojiHanteiKekkaJoho_chukanHyokaKomoku2gun" />
+        <result property="chukanHyokaKomoku3gun" column="dbT5510IchiGojiHanteiKekkaJoho_chukanHyokaKomoku3gun" />
+        <result property="chukanHyokaKomoku4gun" column="dbT5510IchiGojiHanteiKekkaJoho_chukanHyokaKomoku4gun" />
+        <result property="chukanHyokaKomoku5gun" column="dbT5510IchiGojiHanteiKekkaJoho_chukanHyokaKomoku5gun" />
+        <result property="ichiGojiHnateiKeikokuCode" column="dbT5510IchiGojiHanteiKekkaJoho_ichiGojiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="jotaiAnteiseiCode" column="dbT5510IchiGojiHanteiKekkaJoho_jotaiAnteiseiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ninchishoJiritsudoIIijoNoGaizensei" column="dbT5510IchiGojiHanteiKekkaJoho_ninchishoJiritsudoIIijoNoGaizensei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="suiteiKyufuKubunCode" column="dbT5510IchiGojiHanteiKekkaJoho_suiteiKyufuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+    </resultMap>
+   <select id="getEntity" resultMap="ResultMap_DbT5510IchiGojiHanteiKekkaJohoEntity">
+        SELECT
+        <include refid="allColumns_DbT5510IchiGojiHanteiKekkaJoho"/>
+        FROM
+        rgdb."DbT5510IchiGojiHanteiKekkaJoho"
+    </select>
+</mapper>

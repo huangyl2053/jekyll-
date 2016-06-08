@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7204YokaigoNinteiGaibuDataOutputHistoryマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT7204YokaigoNinteiGaibuDataOutputHistoryMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7204YokaigoNinteiGaibuDataOutputHistory">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT7204YokaigoNinteiGaibuDataOutputHistoryMapper.allColumns_DbT7204YokaigoNinteiGaibuDataOutputHistory" />
+     FROM
+         rgdb."DbT7204YokaigoNinteiGaibuDataOutputHistory"
+     WHERE
+         rgdb."DbT7204YokaigoNinteiGaibuDataOutputHistory"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7204YokaigoNinteiGaibuDataOutputHistory">
+         "DbT7204YokaigoNinteiGaibuDataOutputHistory"."dataKubun" as "dbT7204YokaigoNinteiGaibuDataOutputHistory_dataKubun",
+         "DbT7204YokaigoNinteiGaibuDataOutputHistory"."insertDantaiCd" as "dbT7204YokaigoNinteiGaibuDataOutputHistory_insertDantaiCd",
+         "DbT7204YokaigoNinteiGaibuDataOutputHistory"."insertTimestamp" as "dbT7204YokaigoNinteiGaibuDataOutputHistory_insertTimestamp",
+         "DbT7204YokaigoNinteiGaibuDataOutputHistory"."insertReamsLoginId" as "dbT7204YokaigoNinteiGaibuDataOutputHistory_insertReamsLoginId",
+         "DbT7204YokaigoNinteiGaibuDataOutputHistory"."insertContextId" as "dbT7204YokaigoNinteiGaibuDataOutputHistory_insertContextId",
+         "DbT7204YokaigoNinteiGaibuDataOutputHistory"."isDeleted" as "dbT7204YokaigoNinteiGaibuDataOutputHistory_isDeleted",
+         "DbT7204YokaigoNinteiGaibuDataOutputHistory"."updateCount" as "dbT7204YokaigoNinteiGaibuDataOutputHistory_updateCount",
+         "DbT7204YokaigoNinteiGaibuDataOutputHistory"."lastUpdateTimestamp" as "dbT7204YokaigoNinteiGaibuDataOutputHistory_lastUpdateTimestamp",
+         "DbT7204YokaigoNinteiGaibuDataOutputHistory"."lastUpdateReamsLoginId" as "dbT7204YokaigoNinteiGaibuDataOutputHistory_lastUpdateReamsLoginId",
+         "DbT7204YokaigoNinteiGaibuDataOutputHistory"."dataOutputKaishiYMDHM" as "dbT7204YokaigoNinteiGaibuDataOutputHistory_dataOutputKaishiYMDHM",
+         "DbT7204YokaigoNinteiGaibuDataOutputHistory"."dataOutputShuryoYMDHM" as "dbT7204YokaigoNinteiGaibuDataOutputHistory_dataOutputShuryoYMDHM"
+    </sql>
+
+
+    <!--テーブルDbT7204YokaigoNinteiGaibuDataOutputHistoryの項目をDbT7204YokaigoNinteiGaibuDataOutputHistoryEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity" autoMapping="true">
+        <id property="dataKubun" column="dbT7204YokaigoNinteiGaibuDataOutputHistory_dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7204YokaigoNinteiGaibuDataOutputHistory_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7204YokaigoNinteiGaibuDataOutputHistory_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7204YokaigoNinteiGaibuDataOutputHistory_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7204YokaigoNinteiGaibuDataOutputHistory_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7204YokaigoNinteiGaibuDataOutputHistory_isDeleted" />
+        <result property="updateCount" column="dbT7204YokaigoNinteiGaibuDataOutputHistory_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7204YokaigoNinteiGaibuDataOutputHistory_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7204YokaigoNinteiGaibuDataOutputHistory_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dataOutputKaishiYMDHM" column="dbT7204YokaigoNinteiGaibuDataOutputHistory_dataOutputKaishiYMDHM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMTypeHandler"/>
+        <result property="dataOutputShuryoYMDHM" column="dbT7204YokaigoNinteiGaibuDataOutputHistory_dataOutputShuryoYMDHM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMTypeHandler"/>
+    </resultMap>
+   <select id="getEntity" resultMap="ResultMap_DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity">
+        SELECT
+        <include refid="allColumns_DbT7204YokaigoNinteiGaibuDataOutputHistory"/>
+        FROM
+        rgdb."DbT7204YokaigoNinteiGaibuDataOutputHistory"
+    </select>
+</mapper>

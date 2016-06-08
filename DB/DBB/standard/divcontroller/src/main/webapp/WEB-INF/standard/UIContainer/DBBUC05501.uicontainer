@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC05501",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "仮算定異動通知書一括発行",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0550002",
+     "toLayoutTitle": "本算定異動（過年度）賦課確定（削除込）",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0550002",
+     "layoutTitle": "本算定異動（過年度）賦課確定（削除込）",
+     "eventName": "終了する",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

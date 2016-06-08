@@ -1,0 +1,103 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei;
+
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+/**
+ * 申請区分（申請時）コードを表す列挙型です。
+ *
+ * @reamsid_L DBZ-9999-023 liangbc
+ */
+public enum NinteiShinseiShinseijiKubunCode {
+
+    /**
+     * コード:1 名称:新規申請 略称:新規
+     */
+    新規申請("1", "新規申請", "新規"),
+    /**
+     * コード:2 名称:更新申請 略称:更新
+     */
+    更新申請("2", "更新申請", "更新"),
+    /**
+     * コード:3 名称:区分変更申請 略称:区変
+     */
+    区分変更申請("3", "区分変更申請", "区変"),
+    /**
+     * コード:4 名称:職権 略称:職権
+     */
+    職権("4", "職権", "職権"),
+    /**
+     * コード:5 名称:転入申請 略称:転入
+     */
+    転入申請("5", "転入申請", "転入"),
+    /**
+     * コード:6 名称:資格喪失（死亡） 略称:喪失
+     */
+    資格喪失_死亡("6", "資格喪失（死亡）", "喪失"),
+    /**
+     * コード:A 名称:新規申請（事前） 略称:定義なし
+     */
+    新規申請_事前("A", "新規申請（事前）", ""),
+    /**
+     * コード:B 名称:更新申請（事前） 略称:定義なし
+     */
+    更新申請_事前("B", "更新申請（事前）", "");
+
+    private final RString code;
+    private final RString fullName;
+    private final RString shortName;
+
+    private NinteiShinseiShinseijiKubunCode(String code, String fullname, String shortName) {
+        this.code = new RString(code);
+        this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
+    }
+
+    /**
+     * 申請区分（申請時）コードを返します。
+     *
+     * @return 申請区分（申請時）コード
+     */
+    public RString getコード() {
+        return code;
+    }
+
+    /**
+     * 申請区分（申請時）コードの名称を返します。
+     *
+     * @return 申請区分（申請時）コードの名称
+     */
+    public RString get名称() {
+        return fullName;
+    }
+
+    /**
+     * 申請区分（申請時）コードの略称を返します。
+     *
+     * @return 申請区分（申請時）コードの略称
+     */
+    public RString get略称() {
+        return shortName;
+    }
+
+    /**
+     * 申請区分（申請時）コードと一致する内容を探します。
+     *
+     * @param code 申請区分（申請時）コード
+     * @return {@code code} に対応する申請区分（申請時）コード
+     */
+    public static NinteiShinseiShinseijiKubunCode toValue(RString code) {
+
+        for (NinteiShinseiShinseijiKubunCode kubunCode : NinteiShinseiShinseijiKubunCode.values()) {
+            if (kubunCode.code.equals(code)) {
+                return kubunCode;
+            }
+        }
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("申請区分（申請時）コード"));
+    }
+}

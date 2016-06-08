@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5129Tennyuマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5129TennyuMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5129Tennyu">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5129TennyuMapper.allColumns_DbT5129Tennyu" />
+     FROM
+         rgdb."DbT5129Tennyu"
+     WHERE
+         rgdb."DbT5129Tennyu"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5129Tennyu">
+         "DbT5129Tennyu"."shinseishoKanriNo" as "dbT5129Tennyu_shinseishoKanriNo",
+         "DbT5129Tennyu"."insertDantaiCd" as "dbT5129Tennyu_insertDantaiCd",
+         "DbT5129Tennyu"."insertTimestamp" as "dbT5129Tennyu_insertTimestamp",
+         "DbT5129Tennyu"."insertReamsLoginId" as "dbT5129Tennyu_insertReamsLoginId",
+         "DbT5129Tennyu"."insertContextId" as "dbT5129Tennyu_insertContextId",
+         "DbT5129Tennyu"."isDeleted" as "dbT5129Tennyu_isDeleted",
+         "DbT5129Tennyu"."updateCount" as "dbT5129Tennyu_updateCount",
+         "DbT5129Tennyu"."lastUpdateTimestamp" as "dbT5129Tennyu_lastUpdateTimestamp",
+         "DbT5129Tennyu"."lastUpdateReamsLoginId" as "dbT5129Tennyu_lastUpdateReamsLoginId",
+         "DbT5129Tennyu"."nijiHanteiYMD" as "dbT5129Tennyu_nijiHanteiYMD",
+         "DbT5129Tennyu"."nijiHanteiYokaigoJotaiKubunCode" as "dbT5129Tennyu_nijiHanteiYokaigoJotaiKubunCode",
+         "DbT5129Tennyu"."nijiHanteiNinteiYukoKikan" as "dbT5129Tennyu_nijiHanteiNinteiYukoKikan",
+         "DbT5129Tennyu"."nijiHanteiNinteiYukoKaishiYMD" as "dbT5129Tennyu_nijiHanteiNinteiYukoKaishiYMD",
+         "DbT5129Tennyu"."nijiHanteiNinteiYukoShuryoYMD" as "dbT5129Tennyu_nijiHanteiNinteiYukoShuryoYMD",
+         "DbT5129Tennyu"."shinsakaiShiryoSakuseiYMD" as "dbT5129Tennyu_shinsakaiShiryoSakuseiYMD",
+         "DbT5129Tennyu"."shinsakaiKaisaiNo" as "dbT5129Tennyu_shinsakaiKaisaiNo",
+         "DbT5129Tennyu"."shinsakaiIken" as "dbT5129Tennyu_shinsakaiIken",
+         "DbT5129Tennyu"."ichijiHanteiKekkaHenkoRiyu" as "dbT5129Tennyu_ichijiHanteiKekkaHenkoRiyu",
+         "DbT5129Tennyu"."yokaigoJotaizoReiCode" as "dbT5129Tennyu_yokaigoJotaizoReiCode",
+         "DbT5129Tennyu"."ninteishinsakaiIkenShurui" as "dbT5129Tennyu_ninteishinsakaiIkenShurui",
+         "DbT5129Tennyu"."shinsakaiMemo" as "dbT5129Tennyu_shinsakaiMemo",
+         "DbT5129Tennyu"."nijiHanteiKekkaInputHoho" as "dbT5129Tennyu_nijiHanteiKekkaInputHoho",
+         "DbT5129Tennyu"."nijiHanteiKekkaInputYMD" as "dbT5129Tennyu_nijiHanteiKekkaInputYMD"
+    </sql>
+
+
+    <!--テーブルDbT5129Tennyuの項目をDbT5129TennyuEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5129TennyuEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5129TennyuEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT5129Tennyu_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT5129Tennyu_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5129Tennyu_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5129Tennyu_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5129Tennyu_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5129Tennyu_isDeleted" />
+        <result property="updateCount" column="dbT5129Tennyu_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5129Tennyu_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5129Tennyu_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiHanteiYMD" column="dbT5129Tennyu_nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nijiHanteiYokaigoJotaiKubunCode" column="dbT5129Tennyu_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="nijiHanteiNinteiYukoKikan" column="dbT5129Tennyu_nijiHanteiNinteiYukoKikan" />
+        <result property="nijiHanteiNinteiYukoKaishiYMD" column="dbT5129Tennyu_nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nijiHanteiNinteiYukoShuryoYMD" column="dbT5129Tennyu_nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinsakaiShiryoSakuseiYMD" column="dbT5129Tennyu_shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinsakaiKaisaiNo" column="dbT5129Tennyu_shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiIken" column="dbT5129Tennyu_shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichijiHanteiKekkaHenkoRiyu" column="dbT5129Tennyu_ichijiHanteiKekkaHenkoRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokaigoJotaizoReiCode" column="dbT5129Tennyu_yokaigoJotaizoReiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ninteishinsakaiIkenShurui" column="dbT5129Tennyu_ninteishinsakaiIkenShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiMemo" column="dbT5129Tennyu_shinsakaiMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiHanteiKekkaInputHoho" column="dbT5129Tennyu_nijiHanteiKekkaInputHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="nijiHanteiKekkaInputYMD" column="dbT5129Tennyu_nijiHanteiKekkaInputYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,46 @@
+﻿{
+ "uiContainerName": "DBCUC00400",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "受給者異動連絡票情報照会",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0220011",
+     "toLayoutTitle": "対象者検索",
+     "toState": ""
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0220011",
+     "layoutTitle": "対象者検索",
+     "eventName": "連絡票情報照会",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0220014",
+     "toLayoutTitle": "受給者異動連絡票情報照会",
+     "toState": ""
+    },
+    {
+     "id": "3",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0220014",
+     "layoutTitle": "受給者異動連絡票情報照会",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

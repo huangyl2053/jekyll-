@@ -1,0 +1,13 @@
+﻿shikibetsuCd,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
+rirekiNo,varchar,RString,,,,,履歴番号,A
+kokiHokenshaNoCity,varchar,RString,,,,,後期高齢保険者番号(市町村),A
+kokiHokenshaNoKoiki,varchar,RString,,,,,後期高齢保険者番号(広域),A
+kokikoreiHihokenshaNo,varchar,RString,,,,,後期高齢被保険者番号,A
+shikakuShutokuJiyuCode,varchar,RString,,,,,資格取得事由コード,A
+shikakuShutokuYMD,varchar,RString,,,,,資格取得日,A
+shikakuSoshitsuJiyuCode,varchar,RString,,,,,資格喪失事由コード,A
+shikakuSoshitsuYMD,varchar,RString,,,,,資格喪失日,A
+hokenshaKaishiYMD,varchar,RString,,,,,保険者適用開始日,A
+hokenshaShuryoYMD,varchar,RString,,,,,保険者適用終了日,A
+kojinKubunCode,varchar,RString,,,,,個人区分コード,A
+torokuKubun,varchar,RString,,,,,登録区分,A

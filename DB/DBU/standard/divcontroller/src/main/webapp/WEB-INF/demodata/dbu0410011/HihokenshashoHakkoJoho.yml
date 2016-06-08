@@ -1,0 +1,58 @@
+## YAML Template.
+---
+
+-  hokensha: "南魚沼市"
+   kofujiyu: "notSelected"
+   yokaigodo: "要介護１"
+   yukokigen: "20140731"
+   yukokikanfrom: "平25.06.01"
+   yukokikanto: "平26.05.31"
+   shinseibi: "20140601"
+
+-  kijungaku: "16600"
+   yukokikanfrom: "平25.06.01"
+   yukokikanto: "平26.05.31"
+   shuruishikyusu: "3"
+   shurui1: "訪問介護"
+   shuruikijungaku1: "16,500"
+   shurui2: "訪問入浴介護"
+   shuruikijungaku2: "16,500"
+   shurui3: "居宅介護支援"
+   shuruikijungaku3: "16,500"
+
+-  shinsakaiiken: "審査会意見＠＠＠＠＠＠＠"
+
+-  seigennaiyo1: "支払方法の変更"
+   seigennaiyo2: "支払一時差止め"
+   seigennaiyo3: "保険給付額減額"
+   seigenkikanfrom1: "平26.01.01"
+   seigenkikanfrom2: "平26.01.01"
+   seigenkikanfrom3: "平26.01.01"
+   seigenkikanto1: "平26.12.31"
+   seigenkikanto2: "平26.12.31"
+   seigenkikanto3: "平26.12.31"
+
+-  jigyoshamei1: "電算居宅介護支援事業者１"
+   jigyoshamei2: "電算居宅介護支援事業者２"
+   jigyoshamei3: "電算居宅介護支援事業者３"
+   todokedebi1: "20140401"
+   todokedebi2: "20130401"
+   todokedebi3: "20120401"
+
+-  shisetsushurui1: "通所介護"
+   shisetsushurui2: "通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ"
+   shisetsushurui3: "訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ"
+   shisetsumei1: "電算通所ケアサービス"
+   shisetsumei2: "電算通所リハビリサービス"
+   shisetsumei3: "電算訪問リハビリサービス"
+   nyushobi1: "20110401"
+   nyushobi2: "20100401"
+   nyushobi3: "20090401"
+   taishobi1: "20120331"
+   taishobi2: "20110331"
+   taishobi3: "20100331"
+
+
+
+
+

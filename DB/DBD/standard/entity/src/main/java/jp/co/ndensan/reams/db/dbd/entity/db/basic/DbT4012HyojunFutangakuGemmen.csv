@@ -1,0 +1,13 @@
+﻿shinseiYMD,UDD015YMD,FlexibleDate,,,,,shinseiYMD,A
+ketteiYMD,UDD015YMD,FlexibleDate,,,,,ketteiYMD,A
+tekiyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,tekiyoKaishiYMD,A
+tekiyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,tekiyoShuryoYMD,A
+ketteiKubun,varchar,RString,,,,,ketteiKubun,A
+hiShoninRiyu,varchar,RString,,,,,hiShoninRiyu,A
+shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+shinseiJiyu,varchar,RString,,,,,申請事由,A
+gengakuKubun,varchar,RString,,,,,減額区分,A
+gengakugoKingaku,numeric,Decimal,,,,,減額後金額,A
+hyojunFutanKubun,varchar,RString,,,,,標準負担区分,A

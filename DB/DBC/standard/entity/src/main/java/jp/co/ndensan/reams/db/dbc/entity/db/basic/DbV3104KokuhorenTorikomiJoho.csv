@@ -1,0 +1,7 @@
+﻿shoriYM,UDD014YM,FlexibleYearMonth,,,,,shoriYM,A
+kokanShikibetsuNo,varchar,RString,,,,,kokanShikibetsuNo,A
+shoriJotaiKubun,bpchar,RString,,,,,shoriJotaiKubun,A
+zen_shorijotaikubun,bpchar,RString,,,,,zen_shorijotaikubun,A
+zenzen_shorijotaikubun,bpchar,RString,,,,,zenzen_shorijotaikubun,A
+tougetsushoridate,UDD018YMDHMS,YMDHMS,,,,,tougetsushoridate,A
+saiShoriKanoKubun,bool,boolean,,,,,saiShoriKanoKubun,A

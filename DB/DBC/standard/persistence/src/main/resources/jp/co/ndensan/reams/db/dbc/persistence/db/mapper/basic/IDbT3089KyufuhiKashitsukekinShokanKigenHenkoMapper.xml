@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3089KyufuhiKashitsukekinShokanKigenHenkoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3089KyufuhiKashitsukekinShokanKigenHenkoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3089KyufuhiKashitsukekinShokanKigenHenko">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3089KyufuhiKashitsukekinShokanKigenHenkoMapper.allColumns_DbT3089KyufuhiKashitsukekinShokanKigenHenko" />
+     FROM
+         rgdb."DbT3089KyufuhiKashitsukekinShokanKigenHenko"
+     WHERE
+         rgdb."DbT3089KyufuhiKashitsukekinShokanKigenHenko"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3089KyufuhiKashitsukekinShokanKigenHenko">
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."hihokenshaNo" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_hihokenshaNo",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."kashitsukeKanriNo" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_kashitsukeKanriNo",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."shokanKigenEnchoUketsukeYMD" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_shokanKigenEnchoUketsukeYMD",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."rirekiNo" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_rirekiNo",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."insertDantaiCd" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_insertDantaiCd",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."insertTimestamp" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_insertTimestamp",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."insertReamsLoginId" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_insertReamsLoginId",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."insertContextId" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_insertContextId",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."isDeleted" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_isDeleted",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."updateCount" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_updateCount",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."lastUpdateTimestamp" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_lastUpdateTimestamp",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."lastUpdateReamsLoginId" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_lastUpdateReamsLoginId",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."shokanKigenEnchoShinseiYMD" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_shokanKigenEnchoShinseiYMD",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."kariukeninYubinNo" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_kariukeninYubinNo",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."kariukeninJusho" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_kariukeninJusho",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."kariukeninShimeiKana" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_kariukeninShimeiKana",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."kariukeninShimei" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_kariukeninShimei",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."kariukeninTelNo" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_kariukeninTelNo",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."miShokanKingaku" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_miShokanKingaku",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."enchoKiboKaishiYMD" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_enchoKiboKaishiYMD",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."enchoKiboShuryoYMD" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_enchoKiboShuryoYMD",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."enchoRiyu" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_enchoRiyu",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."henkoKetteiYMD" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_henkoKetteiYMD",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."henkoShonin_FuShoninKubun" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_henkoShonin_FuShoninKubun",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."henkoGoShokanKigenYMD" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_henkoGoShokanKigenYMD",
+         "DbT3089KyufuhiKashitsukekinShokanKigenHenko"."henkoFuShoninRiyu" as "dbT3089KyufuhiKashitsukekinShokanKigenHenko_henkoFuShoninRiyu"
+    </sql>
+
+
+    <!--テーブルDbT3089KyufuhiKashitsukekinShokanKigenHenkoの項目をDbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="kashitsukeKanriNo" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_kashitsukeKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shokanKigenEnchoUketsukeYMD" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_shokanKigenEnchoUketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="rirekiNo" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_isDeleted" />
+        <result property="updateCount" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shokanKigenEnchoShinseiYMD" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_shokanKigenEnchoShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kariukeninYubinNo" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_kariukeninYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="kariukeninJusho" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_kariukeninJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kariukeninShimeiKana" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_kariukeninShimeiKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="kariukeninShimei" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_kariukeninShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="kariukeninTelNo" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_kariukeninTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="miShokanKingaku" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_miShokanKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="enchoKiboKaishiYMD" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_enchoKiboKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="enchoKiboShuryoYMD" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_enchoKiboShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="enchoRiyu" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_enchoRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="henkoKetteiYMD" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_henkoKetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="henkoShonin_FuShoninKubun" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_henkoShonin_FuShoninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="henkoGoShokanKigenYMD" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_henkoGoShokanKigenYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="henkoFuShoninRiyu" column="dbT3089KyufuhiKashitsukekinShokanKigenHenko_henkoFuShoninRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>

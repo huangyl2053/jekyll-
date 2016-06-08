@@ -1,0 +1,541 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;NenReiTotatsuSrchConInfo&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[{&quot;eventName&quot;:&quot;onClick_btnKensaku&quot;}],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.NenReiTotatsuSrchConInfo"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText StateChangable UzCommonChildDivPanel Width-G12 UzCompositeChild" id="NenReiTotatsuSrchConInfo" style="margin: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;NenReiTotatsuSrchConInfo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G12&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;NenReiTotatsuSrchConInfo&quot;,&quot;title&quot;:&quot;年齢到達条件&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;NenReiTotatsuSrchConInfo&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="NenReiTotatsuSrchConInfo_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">年齢到達条件</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="NenReiTotatsuSrchConInfo_panel_body_area"><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel UzTextBoxFlexibleDate FloatLeft JSControl controlMargin-M UzCompositeChild" id="txtZenkaiFrom" style="width: 204px; height: 21px; margin-right: 0px; margin-left: 0px;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtZenkaiFrom&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtZenkaiFrom_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;前回処理期間&quot;}"><span class="word-wrap-break-word Label-L Width-S text-align-right" id="txtZenkaiFrom_labelL"><span>前回処理期間</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtZenkaiFrom_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel UzTextBoxFlexibleDate FloatLeft JSControl controlMargin-M marginRight-XS UzCompositeChild" id="txtZenkaiTo" style="width: 107px; height: 21px; margin-left: 0px;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtZenkaiTo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtZenkaiTo_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;～&quot;,&quot;labelLWidth&quot;:&quot;20px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtZenkaiTo_labelL" style="width: 20px;"><span>～</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtZenkaiTo_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><button title="" class="UzButton FloatLeft JSControl controlMargin-M Width-S UzCompositeChild" id="btnKensaku" style="margin-right: 0px; margin-left: 0px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnKensaku&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;btnKensaku&quot;,&quot;text&quot;:&quot;検索する&quot;,&quot;onClick&quot;:&quot;onClick_btnKensaku&quot;}"><span>検索する</span></button><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel UzTextBoxFlexibleDate FloatLeft JSControl controlMargin-M ClearFloat UzCompositeChild" id="txtNenreiTotatsuKikanFrom" style="width: 204px; height: 21px; margin-right: 0px; margin-left: 0px;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtNenreiTotatsuKikanFrom&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtNenreiTotatsuKikanFrom_core&quot;,&quot;labelLText&quot;:&quot;年齢到達期間&quot;}"><span class="word-wrap-break-word Label-L Width-S text-align-right" id="txtNenreiTotatsuKikanFrom_labelL"><span>年齢到達期間</span></span><input class="UzTextBox CoreElement" id="txtNenreiTotatsuKikanFrom_core" style="width: 80px;" type="text" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel UzTextBoxFlexibleDate FloatLeft JSControl controlMargin-M marginRight-XS UzCompositeChild" id="txtNenreiTotatsuKikanTo" style="width: 107px; height: 21px; margin-left: 0px;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtNenreiTotatsuKikanTo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtNenreiTotatsuKikanTo_core&quot;,&quot;labelLText&quot;:&quot;～&quot;,&quot;labelLWidth&quot;:&quot;20px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtNenreiTotatsuKikanTo_labelL" style="width: 20px;"><span>～</span></span><input class="UzTextBox CoreElement" id="txtNenreiTotatsuKikanTo_core" style="width: 80px;" type="text" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    var NenReiTotatsuSrchConInfo_Design = (function (_super) {
+        __extends(NenReiTotatsuSrchConInfo_Design, _super);
+        function NenReiTotatsuSrchConInfo_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, NenReiTotatsuSrchConInfo_Design.myLayout, fieldName);
+        }
+        NenReiTotatsuSrchConInfo_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        NenReiTotatsuSrchConInfo_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        NenReiTotatsuSrchConInfo_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "NenReiTotatsuSrchConInfo",
+                    "items": [
+                        {
+                            "fieldName": "txtZenkaiFrom",
+                            "items": [],
+                            "controlType": "TextBoxFlexibleDate",
+                            "width": "80px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0px",
+                            "marginRight": "0px",
+                            "selectControlID": "txtZenkaiFrom_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "前回処理期間",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "decorationClass": ""
+                        },
+                        {
+                            "fieldName": "txtZenkaiTo",
+                            "items": [],
+                            "controlType": "TextBoxFlexibleDate",
+                            "width": "80px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0px",
+                            "marginRight": "XS",
+                            "selectControlID": "txtZenkaiTo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "～",
+                            "labelRText": "",
+                            "labelLWidth": "20px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "decorationClass": ""
+                        },
+                        {
+                            "fieldName": "btnKensaku",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0px",
+                            "marginRight": "0px",
+                            "selectControlID": "btnKensaku",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "検索する",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
+                            "onClick": "onClick_btnKensaku",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        },
+                        {
+                            "fieldName": "txtNenreiTotatsuKikanFrom",
+                            "items": [],
+                            "controlType": "TextBoxFlexibleDate",
+                            "width": "80px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0px",
+                            "marginRight": "0px",
+                            "selectControlID": "txtNenreiTotatsuKikanFrom_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "年齢到達期間",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "decorationClass": ""
+                        },
+                        {
+                            "fieldName": "txtNenreiTotatsuKikanTo",
+                            "items": [],
+                            "controlType": "TextBoxFlexibleDate",
+                            "width": "80px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0px",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNenreiTotatsuKikanTo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "～",
+                            "labelRText": "",
+                            "labelLWidth": "20px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "decorationClass": ""
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G12",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0px",
+                    "marginRight": "0px",
+                    "selectControlID": "NenReiTotatsuSrchConInfo",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "年齢到達条件",
+                    "marginTop": "0px",
+                    "marginBottom": "0px",
+                    "isOpen": true,
+                    "canOpenAndClose": false,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "NenReiTotatsuSrchConInfo"
+                        }
+                    ],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "canPost": true
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0px",
+            "marginRight": "0px",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBZ",
+            "controlName": "NenReiTotatsuSrchConInfo",
+            "marginTop": "0px",
+            "marginBottom": "0px",
+            "originalProperty": [],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [
+                {
+                    "eventName": "onClick_btnKensaku"
+                }
+            ],
+            "publicEventsAlias": []
+        };
+        return NenReiTotatsuSrchConInfo_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.NenReiTotatsuSrchConInfo_Design = NenReiTotatsuSrchConInfo_Design;
+
+    (function (NenReiTotatsuSrchConInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnKensaku = function () {
+                return "onClick_btnKensaku";
+            };
+            return Events;
+        })();
+        NenReiTotatsuSrchConInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "NenReiTotatsuSrchConInfo";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.NenReiTotatsuSrchConInfo.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + fieldName;
+            };
+
+            Controls.prototype.NenReiTotatsuSrchConInfo = function () {
+                return new UZA.Panel(this.convFiledName("NenReiTotatsuSrchConInfo"));
+            };
+
+            Controls.prototype.txtZenkaiFrom = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtZenkaiFrom"));
+            };
+
+            Controls.prototype.txtZenkaiTo = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtZenkaiTo"));
+            };
+
+            Controls.prototype.btnKensaku = function () {
+                return new UZA.Button(this.convFiledName("btnKensaku"));
+            };
+
+            Controls.prototype.txtNenreiTotatsuKikanFrom = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNenreiTotatsuKikanFrom"));
+            };
+
+            Controls.prototype.txtNenreiTotatsuKikanTo = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNenreiTotatsuKikanTo"));
+            };
+            return Controls;
+        })();
+        NenReiTotatsuSrchConInfo.Controls = Controls;
+    })(DBZ.NenReiTotatsuSrchConInfo || (DBZ.NenReiTotatsuSrchConInfo = {}));
+    var NenReiTotatsuSrchConInfo = DBZ.NenReiTotatsuSrchConInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (NenReiTotatsuSrchConInfo) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.controls = new NenReiTotatsuSrchConInfo.Controls(fieldName);
+            }
+            ModeController.prototype.DisplayMode = function () {
+                return new Modes.DisplayMode(this.controls);
+            };
+            return ModeController;
+        })();
+        NenReiTotatsuSrchConInfo.ModeController = ModeController;
+
+        (function (Modes) {
+            var DisplayMode = (function () {
+                function DisplayMode(controls) {
+                    this.controls = controls;
+                }
+                DisplayMode.prototype.KensakuInput = function () {
+                    this.controls.btnKensaku().displayNone = false;
+                };
+
+                DisplayMode.prototype.ChushutsuInput = function () {
+                    this.controls.btnKensaku().displayNone = true;
+                };
+                return DisplayMode;
+            })();
+            Modes.DisplayMode = DisplayMode;
+        })(NenReiTotatsuSrchConInfo.Modes || (NenReiTotatsuSrchConInfo.Modes = {}));
+        var Modes = NenReiTotatsuSrchConInfo.Modes;
+    })(DBZ.NenReiTotatsuSrchConInfo || (DBZ.NenReiTotatsuSrchConInfo = {}));
+    var NenReiTotatsuSrchConInfo = DBZ.NenReiTotatsuSrchConInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (NenReiTotatsuSrchConInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new NenReiTotatsuSrchConInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        NenReiTotatsuSrchConInfo.PublicProperties = PublicProperties;
+    })(DBZ.NenReiTotatsuSrchConInfo || (DBZ.NenReiTotatsuSrchConInfo = {}));
+    var NenReiTotatsuSrchConInfo = DBZ.NenReiTotatsuSrchConInfo;
+})(DBZ || (DBZ = {}));
+</script>
+  <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['NENREITOTATSUSRCHCONINFO'] = {};
+DBZ['NENREITOTATSUSRCHCONINFO'].NenReiTotatsuSrchConInfoRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_NenReiTotatsuSrchConInfo').getProperty();parameter0.txtZenkaiFrom = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtZenkaiFrom').getProperty();parameter0.txtZenkaiTo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtZenkaiTo').getProperty();parameter0.btnKensaku = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnKensaku').getProperty();parameter0.txtNenreiTotatsuKikanFrom = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtNenreiTotatsuKikanFrom').getProperty();parameter0.txtNenreiTotatsuKikanTo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtNenreiTotatsuKikanTo').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (NenReiTotatsuSrchConInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnKensaku = function () {
+                return "onClick_btnKensaku";
+            };
+            return Events;
+        })();
+        NenReiTotatsuSrchConInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "NenReiTotatsuSrchConInfo";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.NenReiTotatsuSrchConInfo.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.NenReiTotatsuSrchConInfo.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.NenReiTotatsuSrchConInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtZenkaiFrom = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtZenkaiFrom"));
+            };
+
+            Controls.prototype.txtZenkaiTo = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtZenkaiTo"));
+            };
+
+            Controls.prototype.btnKensaku = function () {
+                return new UZA.Button(this.convFiledName("btnKensaku"));
+            };
+
+            Controls.prototype.txtNenreiTotatsuKikanFrom = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNenreiTotatsuKikanFrom"));
+            };
+
+            Controls.prototype.txtNenreiTotatsuKikanTo = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNenreiTotatsuKikanTo"));
+            };
+            return Controls;
+        })();
+        NenReiTotatsuSrchConInfo.Controls = Controls;
+    })(DBZ.NenReiTotatsuSrchConInfo || (DBZ.NenReiTotatsuSrchConInfo = {}));
+    var NenReiTotatsuSrchConInfo = DBZ.NenReiTotatsuSrchConInfo;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (NenReiTotatsuSrchConInfo) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.controls = new NenReiTotatsuSrchConInfo.Controls(fieldName);
+            }
+            ModeController.prototype.DisplayMode = function () {
+                return new Modes.DisplayMode(this.controls);
+            };
+            return ModeController;
+        })();
+        NenReiTotatsuSrchConInfo.ModeController = ModeController;
+
+        (function (Modes) {
+            var DisplayMode = (function () {
+                function DisplayMode(controls) {
+                    this.controls = controls;
+                }
+                DisplayMode.prototype.KensakuInput = function () {
+                    this.controls.btnKensaku().displayNone = false;
+                };
+
+                DisplayMode.prototype.ChushutsuInput = function () {
+                    this.controls.btnKensaku().displayNone = true;
+                };
+                return DisplayMode;
+            })();
+            Modes.DisplayMode = DisplayMode;
+        })(NenReiTotatsuSrchConInfo.Modes || (NenReiTotatsuSrchConInfo.Modes = {}));
+        var Modes = NenReiTotatsuSrchConInfo.Modes;
+    })(DBZ.NenReiTotatsuSrchConInfo || (DBZ.NenReiTotatsuSrchConInfo = {}));
+    var NenReiTotatsuSrchConInfo = DBZ.NenReiTotatsuSrchConInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (NenReiTotatsuSrchConInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new NenReiTotatsuSrchConInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        NenReiTotatsuSrchConInfo.PublicProperties = PublicProperties;
+    })(DBZ.NenReiTotatsuSrchConInfo || (DBZ.NenReiTotatsuSrchConInfo = {}));
+    var NenReiTotatsuSrchConInfo = DBZ.NenReiTotatsuSrchConInfo;
+})(DBZ || (DBZ = {}));
+</script></div>
