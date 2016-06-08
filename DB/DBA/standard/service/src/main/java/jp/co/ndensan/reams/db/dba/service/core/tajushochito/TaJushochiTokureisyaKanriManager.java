@@ -381,7 +381,8 @@ public class TaJushochiTokureisyaKanriManager {
         if (entity == null) {
             return new RString("0001");
         }
-        return new RString(Integer.parseInt(entity.getEdaNo().toString()) + 1).padZeroToLeft(枝番);
+        return entity.getEdaNo() == null || entity.getEdaNo().isEmpty()
+                ? new RString("0001") : new RString(Integer.parseInt(entity.getEdaNo().toString()) + 1).padZeroToLeft(枝番);
     }
 
     private void set他市町村住所地特例(
