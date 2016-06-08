@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public class TainoKeikokuMainHandler {
 
-    private TainoKeikokuMainDiv div;
+    private final TainoKeikokuMainDiv div;
+
+    private static final int 小数点以下の有効桁数 = 3;
 
     /**
      * コンストラクタです。
@@ -47,9 +49,9 @@ public class TainoKeikokuMainHandler {
         div.getTainoKeikoku().getTblKyufugakuGengaku().getLblGengakuTainohanteiKijunbi().setText(
                 滞納判定結果.get滞納判定基準日().wareki().toDateString());
         div.getTainoKeikoku().getTblKyufugakuGengaku2().getLblGengakuChosukenShometsu().setText(
-                new RString(滞納判定結果.get給付額減額().get徴収権消滅期間().roundDownTo(3).toString()));
+                new RString(滞納判定結果.get給付額減額().get徴収権消滅期間().roundDownTo(小数点以下の有効桁数).toString()));
         div.getTainoKeikoku().getTblKyufugakuGengaku2().getLblGengakuNofuzumi().setText(
-                new RString(滞納判定結果.get給付額減額().get納付済期間().roundDownTo(3).toString()));
+                new RString(滞納判定結果.get給付額減額().get納付済期間().roundDownTo(小数点以下の有効桁数).toString()));
         div.getTainoKeikoku().getTblKyufugakuGengaku2().getLblGengakuNofukgakuGengaku().setText(
                 new RStringBuilder(滞納判定結果.get給付額減額().get給付額減額期間()).append("ヶ月").toRString());
     }
