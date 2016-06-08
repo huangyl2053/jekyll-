@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.shokanshinseilisthandle
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanShinseiList.ShokanShinseiList.ShokanShinseiListDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanshinseiichiran.ShokanShinseiIchiranManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -23,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払申請一覧のチェッククラスです。
@@ -47,9 +45,10 @@ public class ShokanShinseiValidationHandler {
     /**
      * サービス年月の有効性チェック。
      *
+     * @param 被保険者番号 HihokenshaNo
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs サービス年月の有効性チェック() {
+    public ValidationMessageControlPairs サービス年月の有効性チェック(HihokenshaNo 被保険者番号) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (RDate.getNowDate().getYearMonth().isBefore(requestDiv.getTxtServiceYM().getValue().getYearMonth())) {
             validationMessages.add(new ValidationMessageControlPair(
@@ -59,11 +58,9 @@ public class ShokanShinseiValidationHandler {
                             RDate.getNowDate().getYearMonth().wareki().eraType(EraType.KANJI_RYAKU).
                             firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString().toString())));
         }
-        int count = ShokanShinseiIchiranManager.createInstance().getShokanShinseiCount(
-                ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号,
-                        HihokenshaNo.class
-                ), new FlexibleYearMonth(
-                        requestDiv.getTxtServiceYM().getValue().getYearMonth().toDateString()));
+        int count = ShokanShinseiIchiranManager.createInstance().getShokanShinseiCount(被保険者番号, new FlexibleYearMonth(
+                requestDiv.getTxtServiceYM().getValue().getYearMonth().toDateString())
+        );
         if (count >= 1) {
             validationMessages.add(new ValidationMessageControlPair(
                     new ShokanShinseiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(UrErrorMessages.既に登録済,
