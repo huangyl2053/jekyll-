@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.gemmenshu
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jun 01 14:52:00 CST 2016
+ * Tue Jun 07 20:48:24 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
  * @reamsid_L DBB-1660-030 xupeng
  */
 public class dgGemmenShurui_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private RString txtNaiyo;
     private RString txtHyojiMongon;

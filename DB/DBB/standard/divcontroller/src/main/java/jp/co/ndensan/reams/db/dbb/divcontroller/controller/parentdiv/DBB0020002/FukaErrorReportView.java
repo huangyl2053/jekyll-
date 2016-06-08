@@ -8,13 +8,16 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0020002
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorListIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.report.fukaerror.FukaErrorListCsvItem;
 import jp.co.ndensan.reams.db.dbb.business.report.fukaerror.FukaErrorListCsvItemList;
 import jp.co.ndensan.reams.db.dbb.business.report.fukaerror.FukaErrorListCsvReport;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.DBB0020002TransitionEventName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.FukaErrorReportViewDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.dgFukaErrorList_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0020002.FukaErrorReportViewHandler;
 import jp.co.ndensan.reams.db.dbb.service.core.fukaerror.FukaErrorListService;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReport;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportCommon;
@@ -37,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -47,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 
 /**
@@ -90,6 +95,7 @@ public class FukaErrorReportView {
             List<FukaErrorList> 賦課エラー情報 = FukaErrorListService.createInstance().getFukaErrorList(最新リスト作成日時).records();
             kihonDiv.setKihonDataAndCreationDateTime(fukaError);
             createHandler(div).initialize(賦課エラー情報);
+            ViewStateHolder.put(ViewStateKeys.賦課エラー一覧, Models.create(賦課エラー情報));
         } else {
             createHandler(div).initialize(new ArrayList<FukaErrorList>());
         }
@@ -153,6 +159,12 @@ public class FukaErrorReportView {
     public ResponseData onSelect_dgFukaErrorList(FukaErrorReportViewDiv div) {
 
         createHandler(div).onSelect_dgFukaErrorList();
+        Models<FukaErrorListIdentifier, FukaErrorList> models = ViewStateHolder.get(ViewStateKeys.賦課エラー一覧, Models.class);
+        dgFukaErrorList_Row row = div.getDgFukaErrorList().getSelectedItems().get(0);
+        ViewStateHolder.put(ViewStateKeys.賦課エラー一覧_賦課エラー情報, models.get(
+                new FukaErrorListIdentifier(new SubGyomuCode(row.getSubGyomuCode()),
+                        row.getNaibuChohyoId(), new FlexibleYear(row.getFukaNendo().getValue().getYear().toDateString()),
+                        new TsuchishoNo(row.getTsuchishoNo()))));
         return ResponseData.of(div).respond();
     }
 

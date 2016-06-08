@@ -5,7 +5,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.saishinsaketteihokenshainmasutatoroku.ISaishinsaKetteiHokenshaInMasutaTorokuMapper">
 
     <!--再審査決定明細一時TBLの全データ--> 
-    <select id="getSaiShinsaKetteiMeisaiTempTBLData"
+    <select resultOrdered="true" id="getSaiShinsaKetteiMeisaiTempTBLData"
             resultMap="resultMap_SaiShinsaKetteiMeisaiTempEntity" fetchSize="500">
         <include refid="selectSaiShinsaKetteiMeisaiTempEntity" />
     </select>
@@ -118,7 +118,7 @@
     </resultMap> 
 
     <!--再審査決定集計一時TBLの全データ--> 
-    <select id="getSaiShinsaKetteiShukeiTempTBLData"
+    <select resultOrdered="true" id="getSaiShinsaKetteiShukeiTempTBLData"
             resultMap="resultMap_SaiShinsaKetteiShukeiTempEntity" fetchSize="500">
         <include refid="selectSaiShinsaKetteiShukeiTempEntity" />
     </select>
