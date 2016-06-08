@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -164,6 +165,14 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
                 old識別コード = new識別コード;
             }
         }
+        nenreiTotatsushaJouhouEntity.set取得情報_前_事由(
+                getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), nenreiTotatsushaJouhouEntity.get取得情報_前_事由()));
+        nenreiTotatsushaJouhouEntity.set取得情報_後_事由(
+                getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), nenreiTotatsushaJouhouEntity.get取得情報_後_事由()));
+        nenreiTotatsushaJouhouEntity.set喪失情報_前_事由(
+                getCodeNameByCode(DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(), nenreiTotatsushaJouhouEntity.get喪失情報_前_事由()));
+        nenreiTotatsushaJouhouEntity.set喪失情報_後_事由(
+                getCodeNameByCode(DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(), nenreiTotatsushaJouhouEntity.get喪失情報_後_事由()));
         nenreiTotatsushaJouhoulist.add(nenreiTotatsushaJouhouEntity);
     }
 
@@ -230,5 +239,16 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
                     .createShikibetsuTaisho(shikibetsuTaishoentity).get名称()
                     .getName());
         }
+    }
+
+    private RString getCodeNameByCode(CodeShubetsu codeShubetsu, RString code) {
+        if (RString.isNullOrEmpty(code)) {
+            return RString.EMPTY;
+        }
+        return CodeMaster.getCodeRyakusho(
+                SubGyomuCode.DBA介護資格,
+                codeShubetsu,
+                new Code(code),
+                new FlexibleDate(RDate.getNowDate().toDateString()));
     }
 }
