@@ -34,6 +34,7 @@
         AND
         DbT4910."shichosonCode" = DbT4913."shichosonCode"
         WHERE
+        1=1
             (
         <if test="市町村コードフラグ">
            AND DbT4913."shichosonCode" =#{市町村コード} 
@@ -102,7 +103,7 @@
             AND
             DbT4913."chosainKanaShimei" LIKE '%'||#{調査員カナ}||'%'
         </if>
-        1=1)
+          )
         <if test="usesSaidaiHyojiKensu" >
             LIMIT #{saidaiHyojiKensu}
         </if>
@@ -128,6 +129,7 @@
         AND
         DbT5910."shichosonCode" = DbT5913."shichosonCode"
         WHERE
+        1=1
           (
          <if test="市町村コードフラグ">
            AND  DbT5913."shichosonCode" =#{市町村コード}
@@ -188,7 +190,7 @@
             AND
             DbT5913."chosainKanaShimei" LIKE '%'||#{調査員カナ}||'%'
         </if>
-        1=1)
+         )
         <if test="usesSaidaiHyojiKensu" >
             LIMIT #{saidaiHyojiKensu}
         </if>
