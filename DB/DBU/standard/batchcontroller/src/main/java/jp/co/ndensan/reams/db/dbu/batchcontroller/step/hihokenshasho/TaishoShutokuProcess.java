@@ -70,15 +70,10 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
 
     private void 再発行チェック() {
         if (対象List != null) {
-            switch (processPrm.getSaihakkoFlag().toString()) {
-                case "0":
-                    再発行チェックしない();
-                    break;
-                case "1":
-                    再発行チェックする();
-                    break;
-                default:
-                    break;
+            if (processPrm.isSaihakkoFlag()) {
+                再発行チェックする();
+            } else {
+                再発行チェックしない();
             }
         }
     }
