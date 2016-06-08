@@ -228,7 +228,7 @@ public class FukakonkyoAndKiwari {
         div.getLblHokenryoDankai1().setText(HokenryoDankaiUtil.edit表示用保険料段階(保険料段階1));
         div.getLblHokenryoritsu1().setText(FukaMapper.addComma(保険料段階1.get保険料率()));
         div.getLblHokenryoSansyutsu1().setText(calc保険料算出額(保険料段階1.get保険料率(), 月数1));
-        div.getLblHokenryo1().setText(FukaMapper.addComma(model.get算定年額保険料1()));
+//        div.getLblHokenryo1().setText(FukaMapper.addComma(model.get算定年額保険料1()));
 
         if (model.get月割開始年月2().isValid()) {
             RString 月数2 = getBetweenMonths(model.get月割開始年月2(), model.get月割終了年月2());
@@ -239,7 +239,7 @@ public class FukakonkyoAndKiwari {
             div.getLblHokenryoDankai2().setText(HokenryoDankaiUtil.edit表示用保険料段階(保険料段階2));
             div.getLblHokenryoritsu2().setText(FukaMapper.addComma(保険料段階2.get保険料率()));
             div.getLblHokenryoSansyutsu2().setText(calc保険料算出額(保険料段階2.get保険料率(), 月数2));
-            div.getLblHokenryo1().setText(FukaMapper.addComma(model.get算定年額保険料1()));
+//            div.getLblHokenryo1().setText(FukaMapper.addComma(model.get算定年額保険料1()));
         } else {
             div.getTblKikan2().setDisplayNone(true);
         }
