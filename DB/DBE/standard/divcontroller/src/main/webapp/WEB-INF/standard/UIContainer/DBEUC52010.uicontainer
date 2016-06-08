@@ -1,11 +1,11 @@
 ﻿{
- "uiContainerName": "DBEUC52001",
+ "uiContainerName": "DBEUC52010",
  "displayWizard": false,
  "subGyomuCode": "DBE",
  "steps": [
   {
    "id": 1,
-   "name": "介護認定審査会委員事前審査結果登録",
+   "name": "介護認定審査会委員事前審査D",
    "transitionList": [
     {
      "id": "1",
@@ -14,7 +14,7 @@
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE5100001",
      "toLayoutTitle": "審査会一覧",
-     "toState": "事前審査結果登録"
+     "toState": "事前審査"
     },
     {
      "id": "2",
@@ -26,31 +26,31 @@
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE5200001",
-     "toLayoutTitle": "介護認定審査会委員事前審査結果登録",
-     "toState": "事前審査結果登録"
+     "toLayoutName": "DBE5210010",
+     "toLayoutTitle": "介護認定審査会委員事前審査",
+     "toState": "初期状態"
     },
     {
      "id": "3",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE5200001",
-     "layoutTitle": "介護認定審査会委員事前審査結果登録",
+     "layoutName": "DBE5210010",
+     "layoutTitle": "介護認定審査会委員事前審査",
      "eventName": "一覧に戻る",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE5100001",
      "toLayoutTitle": "審査会一覧",
-     "toState": "事前審査結果登録"
+     "toState": "事前審査"
     },
     {
      "id": "4",
      "type": "end",
      "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE5200001",
-     "layoutTitle": "介護認定審査会委員事前審査結果登録",
-     "eventName": "処理完了",
+     "layoutName": "DBE5210010",
+     "layoutTitle": "介護認定審査会委員事前審査",
+     "eventName": "完了処理",
      "destroy": false,
      "condition": ""
     }

@@ -7,20 +7,19 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.IKiwarigakuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.KiwarigakuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.IKiwarigakuDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
 
 /**
- * tblFukaKonkyo のクラスファイル
- *
+ * tblFukaKonkyo のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class tblFukaKonkyoDiv extends TablePanel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -180,15 +179,13 @@ public class tblFukaKonkyoDiv extends TablePanel {
 
     // </editor-fold>
 }
-
 /**
- * celFukaKonkyo のクラスファイル
- *
+ * celFukaKonkyo のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celFukaKonkyoAttblFukaKonkyo extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("tblFukakonkyoMeisai")
     private tblFukakonkyoMeisaiDiv tblFukakonkyoMeisai;
     @JsonProperty("lblDamy")
@@ -292,15 +289,13 @@ class celFukaKonkyoAttblFukaKonkyo extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celKiwari のクラスファイル
- *
+ * celKiwari のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celKiwariAttblFukaKonkyo extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("ccdKiwarigaku")
     private KiwarigakuDiv ccdKiwarigaku;
 
@@ -315,15 +310,13 @@ class celKiwariAttblFukaKonkyo extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celKikan のクラスファイル
- *
+ * celKikan のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celKikanAttblFukaKonkyo extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("Kikan")
     private KikanDiv Kikan;
     @JsonProperty("FukakonkyoNengaku")
@@ -367,15 +360,13 @@ class celKikanAttblFukaKonkyo extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celChoteiJiyu のクラスファイル
- *
+ * celChoteiJiyu のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celChoteiJiyuAttblFukaKonkyo extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("txtFukashokaiChoteiJiyu1")
     private TextBox txtFukashokaiChoteiJiyu1;
     @JsonProperty("txtFukashokaiChoteiJiyu2")

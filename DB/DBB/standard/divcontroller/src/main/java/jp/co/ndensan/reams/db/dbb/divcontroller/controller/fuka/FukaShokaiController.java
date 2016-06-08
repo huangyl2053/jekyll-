@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
+import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShoriName;
@@ -250,6 +251,23 @@ public final class FukaShokaiController {
             return rankoid;
         }
         return Optional.empty();
+    }
+
+    /**
+     * 前年度の保険料段階クラスを取得します。
+     *
+     * @param fuka 賦課モデル
+     * @return 前年度の保険料段階クラス
+     */
+    public static Optional<Fuka> findZennendoFukaModel(Fuka fuka) {
+        FlexibleYear 前年度 = fuka.get賦課年度().minusYear(1);
+
+        Optional<Fuka> modeloid = Optional.ofNullable(new FukaManager().get介護賦課_賦課年度最新(前年度, fuka.get通知書番号()));
+        if (!modeloid.isPresent()) {
+            return Optional.empty();
+        }
+
+        return modeloid;
     }
 
     /**

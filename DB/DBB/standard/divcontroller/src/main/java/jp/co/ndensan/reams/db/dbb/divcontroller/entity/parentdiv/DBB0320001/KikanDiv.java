@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KikanDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -98,11 +98,6 @@ public class KikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblHokenryo() {
-        return this.getTblKikan1().getLblHokenryo();
-    }
-
-    @JsonIgnore
     public Label getLblKikan1() {
         return this.getTblKikan1().getLblKikan1();
     }
@@ -128,11 +123,6 @@ public class KikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblHokenryo1() {
-        return this.getTblKikan1().getLblHokenryo1();
-    }
-
-    @JsonIgnore
     public Label getLblKikan2() {
         return this.getTblKikan2().getLblKikan2();
     }
@@ -155,11 +145,6 @@ public class KikanDiv extends Panel {
     @JsonIgnore
     public Label getLblHokenryoSansyutsu2() {
         return this.getTblKikan2().getLblHokenryoSansyutsu2();
-    }
-
-    @JsonIgnore
-    public Label getLblHokenryo2() {
-        return this.getTblKikan2().getLblHokenryo2();
     }
 
     // </editor-fold>
