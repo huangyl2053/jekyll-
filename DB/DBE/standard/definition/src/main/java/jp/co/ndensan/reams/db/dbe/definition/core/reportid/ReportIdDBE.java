@@ -87,6 +87,14 @@ public enum ReportIdDBE {
      */
     DBE202001(new ReportId("DBE202001_ChosaSchedulehyo"), new RString("認定調査スケジュール表(調査員)")),
     /**
+     * 追加資料鑑の帳票ＩＤです。
+     */
+    DBE517009(new ReportId("DBE517009_TsuikashiryokagamiA3"), new RString("追加資料鑑")),
+    /**
+     * 追加資料鑑の帳票ＩＤです。
+     */
+    DBE517019(new ReportId("DBE517019_TsuikashiryokagamiA4"), new RString("追加資料鑑")),
+    /**
      * 介護保険診断命令書の帳票ＩＤです。
      */
     DBE235001(new ReportId("DBE235001_kaigohokenShindanMeireisho"), new RString("介護保険診断命令書")),
