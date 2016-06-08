@@ -4,7 +4,7 @@
 <!-- @reamsid_L DBB-1850-030 sunhui -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoteishitaisyosyadoutei.ITokuchoTeishiTaisyosyaDouteiMapper">
     <!--特徴対象者同定情報取得 -->
-    <select id="select処理日付管理マスタ"
+    <select resultOrdered="true" id="select処理日付管理マスタ"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoteishitaisyosyadoutei.TokuchoTeishiTaisyosyaDouteiMybatisParameter"
             resultMap="resultMap_ShoriDateKanriEntity" fetchSize="500">
         <include refid="selectShoriDateKanriEntity" />
@@ -32,7 +32,7 @@
     </resultMap>  
     
     <!--処理状況一覧情報取得 -->
-    <select id="select処理状況一覧情報"
+    <select resultOrdered="true" id="select処理状況一覧情報"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoteishitaisyosyadoutei.TokuchoTeishiTaisyosyaDouteiMybatisParameter"
             resultMap="resultMap_ShoriJokyoJohoEntity" fetchSize="500">
         <include refid="selectShoriJokyoJohoEntity" />
@@ -74,7 +74,7 @@
     </resultMap>
     
     <!--今回処理内容情報取得 -->
-    <select id="select今回処理内容情報"
+    <select resultOrdered="true" id="select今回処理内容情報"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoteishitaisyosyadoutei.TokuchoTeishiTaisyosyaDouteiMybatisParameter"
             resultMap="resultMap_KonkaiShoriNaiyoJohoEntity" fetchSize="500">
         <include refid="selectKonkaiShoriNaiyoJohoEntity" />
