@@ -274,7 +274,7 @@ public final class ReportUtil {
      * @param subGyomuCode サブ業務コード
      * @return List<ISetSortItem>
      */
-    public static Map<Integer, ISetSortItem> get出力順項目(SubGyomuCode subGyomuCode, RString shutsuryokujunId, ReportId reportId) {
+    public static Map<Integer, ISetSortItem> get出力順項目(SubGyomuCode subGyomuCode, Long shutsuryokujunId, ReportId reportId) {
         List<ISetSortItem> 設定項目リスト = new ArrayList<>();
         IOutputOrder iOutputOrder = ReportUtil.get出力順ID(subGyomuCode, shutsuryokujunId, reportId);
         if (iOutputOrder != null) {
@@ -297,7 +297,7 @@ public final class ReportUtil {
      * @param subGyomuCode サブ業務コード
      * @return List<ISetSortItem>
      */
-    public static Map<Integer, RString> get改頁項目(SubGyomuCode subGyomuCode, RString shutsuryokujunId, ReportId reportId) {
+    public static Map<Integer, RString> get改頁項目(SubGyomuCode subGyomuCode, Long shutsuryokujunId, ReportId reportId) {
         List<ISetSortItem> 設定項目リスト = new ArrayList<>();
         IOutputOrder iOutputOrder = ReportUtil.get出力順ID(subGyomuCode, shutsuryokujunId, reportId);
         if (iOutputOrder != null) {
@@ -322,8 +322,8 @@ public final class ReportUtil {
      * @param subGyomuCode サブ業務コード
      * @return List<ISetSortItem>
      */
-    public static IOutputOrder get出力順ID(SubGyomuCode subGyomuCode, RString shutsuryokujunId, ReportId reportId) {
-        if (!RString.isNullOrEmpty(shutsuryokujunId)) {
+    public static IOutputOrder get出力順ID(SubGyomuCode subGyomuCode, Long shutsuryokujunId, ReportId reportId) {
+        if (shutsuryokujunId != null) {
             IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
             RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
             return chohyoShutsuryokujunFinder.get出力順(subGyomuCode,

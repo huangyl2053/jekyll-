@@ -208,7 +208,7 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
     private void get出力順() {
         IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
         RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
-        if (!RString.isNullOrEmpty(processPrm.getShutsuryokujunId())) {
+        if (processPrm.getShutsuryokujunId() != null) {
             IOutputOrder shutsuryokujunId = chohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBA介護資格,
                     帳票ID,
                     reamsLoginID,

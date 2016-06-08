@@ -31,7 +31,7 @@ public class IkkatsuSakuseiBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_SHUTSURYOKUFLAG, name = "出力フラグ")
     private boolean shutsuryokuFlag;
     @BatchParameter(key = KEY_SHUTSURYOKUJUN_ID, name = "出力順ID")
-    private RString shutsuryokujunId;
+    private Long shutsuryokujunId;
     @BatchParameter(key = KEY_LOGINUSER_ID, name = "登録ユーザーID")
     private RString loginUserId;
 
@@ -45,7 +45,7 @@ public class IkkatsuSakuseiBatchParameter extends BatchParameterBase {
      */
     public IkkatsuSakuseiBatchParameter(boolean chushutsuFlag,
             boolean shutsuryokuFlag,
-            RString shutsuryokujunId,
+            Long shutsuryokujunId,
             RString loginUserId) {
         this.chushutsuFlag = chushutsuFlag;
         this.shutsuryokuFlag = shutsuryokuFlag;
