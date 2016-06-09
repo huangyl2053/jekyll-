@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value
-public class ShinsakaiWariateJohoIdentifier implements Serializable {
+public class ShinsakaiWariateJoho2Identifier implements Serializable {
 
     private static final long serialVersionUID = 4807488577740704806L;
     private final RString 介護認定審査会開催番号;
@@ -28,7 +28,7 @@ public class ShinsakaiWariateJohoIdentifier implements Serializable {
      * @param 介護認定審査会開催番号 介護認定審査会開催番号
      * @param 申請書管理番号 申請書管理番号
      */
-    public ShinsakaiWariateJohoIdentifier(RString 介護認定審査会開催番号,
+    public ShinsakaiWariateJoho2Identifier(RString 介護認定審査会開催番号,
             ShinseishoKanriNo 申請書管理番号) {
         this.介護認定審査会開催番号 = 介護認定審査会開催番号;
         this.申請書管理番号 = 申請書管理番号;

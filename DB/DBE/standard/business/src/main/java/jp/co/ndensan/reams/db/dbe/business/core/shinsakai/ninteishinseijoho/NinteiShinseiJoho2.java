@@ -35,12 +35,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  *
  * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class NinteiShinseiJoho
-        extends ModelBase<NinteiShinseiJohoIdentifier, DbT5101NinteiShinseiJohoEntity, NinteiShinseiJoho>
+public class NinteiShinseiJoho2
+        extends ModelBase<NinteiShinseiJoho2Identifier, DbT5101NinteiShinseiJohoEntity, NinteiShinseiJoho2>
         implements Serializable {
 
     private final DbT5101NinteiShinseiJohoEntity entity;
-    private final NinteiShinseiJohoIdentifier id;
+    private final NinteiShinseiJoho2Identifier id;
 
     /**
      * コンストラクタです。<br/>
@@ -48,11 +48,11 @@ public class NinteiShinseiJoho
      *
      * @param 申請書管理番号 申請書管理番号
      */
-    public NinteiShinseiJoho(ShinseishoKanriNo 申請書管理番号) {
+    public NinteiShinseiJoho2(ShinseishoKanriNo 申請書管理番号) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         this.entity = new DbT5101NinteiShinseiJohoEntity();
         this.entity.setShinseishoKanriNo(申請書管理番号);
-        this.id = new NinteiShinseiJohoIdentifier(
+        this.id = new NinteiShinseiJoho2Identifier(
                 申請書管理番号
         );
     }
@@ -63,9 +63,9 @@ public class NinteiShinseiJoho
      *
      * @param entity DBより取得した{@link DbT5101NinteiShinseiJohoEntity}
      */
-    public NinteiShinseiJoho(DbT5101NinteiShinseiJohoEntity entity) {
+    public NinteiShinseiJoho2(DbT5101NinteiShinseiJohoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定申請情報"));
-        this.id = new NinteiShinseiJohoIdentifier(
+        this.id = new NinteiShinseiJoho2Identifier(
                 entity.getShinseishoKanriNo());
     }
 
@@ -75,9 +75,9 @@ public class NinteiShinseiJoho
      * @param entity {@link DbT5101NinteiShinseiJohoEntity}
      * @param id {@link NinteiShinseiJohoIdentifier}
      */
-    NinteiShinseiJoho(
+    NinteiShinseiJoho2(
             DbT5101NinteiShinseiJohoEntity entity,
-            NinteiShinseiJohoIdentifier id
+            NinteiShinseiJoho2Identifier id
     ) {
         this.entity = entity;
         this.id = id;
@@ -783,7 +783,7 @@ public class NinteiShinseiJoho
      * @return 要介護認定申請情報の識別子{@link NinteiShinseiJohoIdentifier}
      */
     @Override
-    public NinteiShinseiJohoIdentifier identifier() {
+    public NinteiShinseiJoho2Identifier identifier() {
         return this.id;
     }
 
@@ -792,12 +792,12 @@ public class NinteiShinseiJoho
      *
      * @return 変更対象処理実施後の{@link NinteiShinseiJoho}
      */
-    public NinteiShinseiJoho modifiedModel() {
+    public NinteiShinseiJoho2 modifiedModel() {
         DbT5101NinteiShinseiJohoEntity modifiedEntity = entity.clone();
         if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
             modifiedEntity.setState(EntityDataState.Modified);
         }
-        return new NinteiShinseiJoho(
+        return new NinteiShinseiJoho2(
                 modifiedEntity, id);
     }
 
@@ -807,7 +807,7 @@ public class NinteiShinseiJoho
      * @return 削除対象処理実施後の{@link NinteiShinseiJoho}
      */
     @Override
-    public NinteiShinseiJoho deleted() {
+    public NinteiShinseiJoho2 deleted() {
         DbT5101NinteiShinseiJohoEntity deletedEntity = this.toEntity();
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
@@ -815,7 +815,7 @@ public class NinteiShinseiJoho
             //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
-        return new NinteiShinseiJoho(deletedEntity, id);
+        return new NinteiShinseiJoho2(deletedEntity, id);
     }
 
     /**
@@ -836,15 +836,15 @@ public class NinteiShinseiJoho
     private static final class _SerializationProxy implements Serializable {
 
         private final DbT5101NinteiShinseiJohoEntity entity;
-        private final NinteiShinseiJohoIdentifier id;
+        private final NinteiShinseiJoho2Identifier id;
 
-        private _SerializationProxy(DbT5101NinteiShinseiJohoEntity entity, NinteiShinseiJohoIdentifier id) {
+        private _SerializationProxy(DbT5101NinteiShinseiJohoEntity entity, NinteiShinseiJoho2Identifier id) {
             this.entity = entity;
             this.id = id;
         }
 
         private Object readResolve() {
-            return new NinteiShinseiJoho(this.entity, this.id);
+            return new NinteiShinseiJoho2(this.entity, this.id);
         }
     }
 
@@ -854,8 +854,8 @@ public class NinteiShinseiJoho
      *
      * @return Builder
      */
-    public NinteiShinseiJohoBuilder createBuilderForEdit() {
-        return new NinteiShinseiJohoBuilder(entity, id);
+    public NinteiShinseiJoho2Builder createBuilderForEdit() {
+        return new NinteiShinseiJoho2Builder(entity, id);
     }
 
     @Override
@@ -873,7 +873,7 @@ public class NinteiShinseiJoho
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final NinteiShinseiJoho other = (NinteiShinseiJoho) obj;
+        final NinteiShinseiJoho2 other = (NinteiShinseiJoho2) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }

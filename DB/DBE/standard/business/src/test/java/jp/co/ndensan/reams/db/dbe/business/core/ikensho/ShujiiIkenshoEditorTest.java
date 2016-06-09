@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ikensho;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemGroupOf2009;
@@ -144,7 +145,7 @@ public class ShujiiIkenshoEditorTest extends DbeTestBase {
     }
 
     private static ShujiiIkensho createNewIkensho() {
-        return new ShujiiIkensho(new EnumMap<>(ShujiiIkenshoItemKubun.class), ShujiiIkenshoItemGroupOf2009.values());
+        return new ShujiiIkensho(new EnumMap<>(ShujiiIkenshoItemKubun.class), Arrays.asList(ShujiiIkenshoItemGroupOf2009.values()));
     }
 
     private static ShujiiIkensho createIkensho() {

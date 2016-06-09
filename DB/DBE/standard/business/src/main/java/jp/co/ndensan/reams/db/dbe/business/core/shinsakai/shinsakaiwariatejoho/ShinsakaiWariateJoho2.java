@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2Identifier;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
@@ -30,13 +30,13 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  *
  * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class ShinsakaiWariateJoho
-        extends ModelBase<ShinsakaiWariateJohoIdentifier, DbT5502ShinsakaiWariateJohoEntity, ShinsakaiWariateJoho>
+public class ShinsakaiWariateJoho2
+        extends ModelBase<ShinsakaiWariateJoho2Identifier, DbT5502ShinsakaiWariateJohoEntity, ShinsakaiWariateJoho2>
         implements Serializable {
 
     private final DbT5502ShinsakaiWariateJohoEntity entity;
-    private final ShinsakaiWariateJohoIdentifier id;
-    private final Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> ninteiShinseiJoho;
+    private final ShinsakaiWariateJoho2Identifier id;
+    private final Models<NinteiShinseiJoho2Identifier, NinteiShinseiJoho2> ninteiShinseiJoho;
 
     /**
      * コンストラクタです。<br/>
@@ -45,35 +45,35 @@ public class ShinsakaiWariateJoho
      * @param 介護認定審査会開催番号 介護認定審査会開催番号
      * @param 申請書管理番号 申請書管理番号
      */
-    public ShinsakaiWariateJoho(RString 介護認定審査会開催番号,
+    public ShinsakaiWariateJoho2(RString 介護認定審査会開催番号,
             ShinseishoKanriNo 申請書管理番号) {
         requireNonNull(介護認定審査会開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         this.entity = new DbT5502ShinsakaiWariateJohoEntity();
         this.entity.setShinsakaiKaisaiNo(介護認定審査会開催番号);
         this.entity.setShinseishoKanriNo(申請書管理番号);
-        this.id = new ShinsakaiWariateJohoIdentifier(
+        this.id = new ShinsakaiWariateJoho2Identifier(
                 介護認定審査会開催番号,
                 申請書管理番号
         );
-        this.ninteiShinseiJoho = Models.create(new ArrayList<NinteiShinseiJoho>());
+        this.ninteiShinseiJoho = Models.create(new ArrayList<NinteiShinseiJoho2>());
     }
 
     /**
      * コンストラクタです。<br/>
-     * DBより取得した{@link DbT5502ShinsakaiWariateJohoEntity}より{@link ShinsakaiWariateJoho}を生成します。
+     * DBより取得した{@link DbT5502ShinsakaiWariateJoho2Entity}より{@link ShinsakaiWariateJoho2}を生成します。
      *
-     * @param entity DBより取得した{@link DbT5502ShinsakaiWariateJohoEntity}
+     * @param entity DBより取得した{@link DbT5502ShinsakaiWariateJoho2Entity}
      */
-    public ShinsakaiWariateJoho(ShinsakaiWariateJohoRelateEntity entity) {
+    public ShinsakaiWariateJoho2(ShinsakaiWariateJohoRelateEntity entity) {
         this.entity = requireNonNull(entity.get介護認定審査会割当情報Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当情報"));
-        this.id = new ShinsakaiWariateJohoIdentifier(
+        this.id = new ShinsakaiWariateJoho2Identifier(
                 entity.get介護認定審査会割当情報Entity().getShinsakaiKaisaiNo(),
                 entity.get介護認定審査会割当情報Entity().getShinseishoKanriNo());
 
-        List<NinteiShinseiJoho> ninteiShinseiJohoList = new ArrayList<>();
+        List<NinteiShinseiJoho2> ninteiShinseiJohoList = new ArrayList<>();
         for (DbT5101NinteiShinseiJohoEntity niniEntity : entity.get要介護認定申請情報Entity()) {
-            ninteiShinseiJohoList.add(new NinteiShinseiJoho(niniEntity));
+            ninteiShinseiJohoList.add(new NinteiShinseiJoho2(niniEntity));
         }
         this.ninteiShinseiJoho = Models.create(ninteiShinseiJohoList);
     }
@@ -81,13 +81,13 @@ public class ShinsakaiWariateJoho
     /**
      * シリアライズ、ビルダー用コンストラクタです。
      *
-     * @param entity {@link DbT5502ShinsakaiWariateJohoEntity}
-     * @param id {@link ShinsakaiWariateJohoIdentifier}
+     * @param entity {@link DbT5502ShinsakaiWariateJoho2Entity}
+     * @param id {@link ShinsakaiWariateJoho2Identifier}
      */
-    ShinsakaiWariateJoho(
+    ShinsakaiWariateJoho2(
             DbT5502ShinsakaiWariateJohoEntity entity,
-            ShinsakaiWariateJohoIdentifier id,
-            Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> ninteiShinseiJoho
+            ShinsakaiWariateJoho2Identifier id,
+            Models<NinteiShinseiJoho2Identifier, NinteiShinseiJoho2> ninteiShinseiJoho
     ) {
         this.entity = entity;
         this.id = id;
@@ -185,9 +185,9 @@ public class ShinsakaiWariateJoho
     }
 
     /**
-     * {@link DbT5502ShinsakaiWariateJohoEntity}のクローンを返します。
+     * {@link DbT5502ShinsakaiWariateJoho2Entity}のクローンを返します。
      *
-     * @return {@link DbT5502ShinsakaiWariateJohoEntity}のクローン
+     * @return {@link DbT5502ShinsakaiWariateJoho2Entity}のクローン
      */
     @Override
     public DbT5502ShinsakaiWariateJohoEntity toEntity() {
@@ -195,22 +195,22 @@ public class ShinsakaiWariateJoho
     }
 
     /**
-     * 介護認定審査会割当情報の識別子{@link ShinsakaiWariateJohoIdentifier}を返します。
+     * 介護認定審査会割当情報の識別子{@link ShinsakaiWariateJoho22Identifier}を返します。
      *
-     * @return 介護認定審査会割当情報の識別子{@link ShinsakaiWariateJohoIdentifier}
+     * @return 介護認定審査会割当情報の識別子{@link ShinsakaiWariateJoho22Identifier}
      */
     @Override
-    public ShinsakaiWariateJohoIdentifier identifier() {
+    public ShinsakaiWariateJoho2Identifier identifier() {
         return this.id;
     }
 
     /**
      * 要介護認定申請情報を取得します。
      *
-     * @param id NinteiShinseiJohoIdentifier
-     * @return NinteiShinseiJoho
+     * @param id NinteiShinseiJoho2Identifier
+     * @return NinteiShinseiJoho2
      */
-    public NinteiShinseiJoho getNinteiShinseiJoho(NinteiShinseiJohoIdentifier id) {
+    public NinteiShinseiJoho2 getNinteiShinseiJoho2(NinteiShinseiJoho2Identifier id) {
         if (ninteiShinseiJoho.contains(id)) {
             return ninteiShinseiJoho.clone().get(id);
         }
@@ -221,33 +221,35 @@ public class ShinsakaiWariateJoho
     /**
      * 要介護認定申請情報リストを取得します。
      *
-     * @return List<NinteiShinseiJoho>
+     * @return List<NinteiShinseiJoho2>
      */
-    public List<NinteiShinseiJoho> getNinteiShinseiJohoList() {
+    public List<NinteiShinseiJoho2> getNinteiShinseiJoho2List() {
         return new ArrayList<>(ninteiShinseiJoho.values());
     }
 
     /**
-     * 介護認定審査会割当情報のみを変更対象とします。<br/> {@link DbT5502ShinsakaiWariateJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護認定審査会割当情報のみを変更対象とします。<br/>
+     * {@link DbT5502ShinsakaiWariateJoho2Entity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
-     * @return 変更対象処理実施後の{@link ShinsakaiWariateJoho}
+     * @return 変更対象処理実施後の{@link ShinsakaiWariateJoho2}
      */
-    public ShinsakaiWariateJoho modifiedModel() {
+    public ShinsakaiWariateJoho2 modifiedModel() {
         DbT5502ShinsakaiWariateJohoEntity modifiedEntity = entity.clone();
         if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
             modifiedEntity.setState(EntityDataState.Modified);
         }
-        return new ShinsakaiWariateJoho(
+        return new ShinsakaiWariateJoho2(
                 modifiedEntity, id, ninteiShinseiJoho);
     }
 
     /**
-     * 保持する介護認定審査会割当情報を削除対象とします。<br/> {@link DbT5502ShinsakaiWariateJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護認定審査会割当情報を削除対象とします。<br/>
+     * {@link DbT5502ShinsakaiWariateJoho2Entity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
-     * @return 削除対象処理実施後の{@link ShinsakaiWariateJoho}
+     * @return 削除対象処理実施後の{@link ShinsakaiWariateJoho2}
      */
     @Override
-    public ShinsakaiWariateJoho deleted() {
+    public ShinsakaiWariateJoho2 deleted() {
         DbT5502ShinsakaiWariateJohoEntity deletedEntity = this.toEntity();
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
@@ -255,13 +257,13 @@ public class ShinsakaiWariateJoho
             //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
-        return new ShinsakaiWariateJoho(deletedEntity, id, ninteiShinseiJoho.deleted());
+        return new ShinsakaiWariateJoho2(deletedEntity, id, ninteiShinseiJoho.deleted());
     }
 
     /**
-     * {@link ShinsakaiWariateJoho}のシリアライズ形式を提供します。
+     * {@link ShinsakaiWariateJoho2}のシリアライズ形式を提供します。
      *
-     * @return {@link ShinsakaiWariateJoho}のシリアライズ形式
+     * @return {@link ShinsakaiWariateJoho2}のシリアライズ形式
      */
     protected Object writeReplace() {
         return new _SerializationProxy(entity, id, ninteiShinseiJoho);
@@ -277,13 +279,13 @@ public class ShinsakaiWariateJoho
         private static final long serialVersionUID = 2243645461859993680L;
 
         private final DbT5502ShinsakaiWariateJohoEntity entity;
-        private final ShinsakaiWariateJohoIdentifier id;
-        private final Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> ninteiShinseiJoho;
+        private final ShinsakaiWariateJoho2Identifier id;
+        private final Models<NinteiShinseiJoho2Identifier, NinteiShinseiJoho2> ninteiShinseiJoho;
 
         private _SerializationProxy(
                 DbT5502ShinsakaiWariateJohoEntity entity,
-                ShinsakaiWariateJohoIdentifier id,
-                Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> ninteiShinseiJoho
+                ShinsakaiWariateJoho2Identifier id,
+                Models<NinteiShinseiJoho2Identifier, NinteiShinseiJoho2> ninteiShinseiJoho
         ) {
             this.entity = entity;
             this.id = id;
@@ -291,7 +293,7 @@ public class ShinsakaiWariateJoho
         }
 
         private Object readResolve() {
-            return new ShinsakaiWariateJoho(this.entity, this.id, this.ninteiShinseiJoho);
+            return new ShinsakaiWariateJoho2(this.entity, this.id, this.ninteiShinseiJoho);
         }
     }
 
@@ -301,8 +303,8 @@ public class ShinsakaiWariateJoho
      *
      * @return Builder
      */
-    public ShinsakaiWariateJohoBuilder createBuilderForEdit() {
-        return new ShinsakaiWariateJohoBuilder(entity, id, ninteiShinseiJoho);
+    public ShinsakaiWariateJoho2Builder createBuilderForEdit() {
+        return new ShinsakaiWariateJoho2Builder(entity, id, ninteiShinseiJoho);
     }
 
     @Override
@@ -320,7 +322,7 @@ public class ShinsakaiWariateJoho
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ShinsakaiWariateJoho other = (ShinsakaiWariateJoho) obj;
+        final ShinsakaiWariateJoho2 other = (ShinsakaiWariateJoho2) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
