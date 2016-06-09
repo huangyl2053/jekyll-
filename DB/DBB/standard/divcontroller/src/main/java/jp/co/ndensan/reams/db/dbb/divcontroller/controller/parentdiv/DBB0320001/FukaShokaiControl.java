@@ -72,11 +72,11 @@ public class FukaShokaiControl {
 
         FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, AtenaMeisho.EMPTY);
 
-        if (key == null) {
-            return createResponseData(div);
-        } else {
+//        if (key == null) {
+//            return createResponseData(div);
+//        } else {
             return createResponseData(setDisplay(div, key));
-        }
+//        }
         
     }
 
