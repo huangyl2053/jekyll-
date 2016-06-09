@@ -5,7 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.core.taishoshasearch.FukaTaishoshaRelateBusiness;
+import jp.co.ndensan.reams.db.dbz.business.core.taishoshasearch.TaishoshaRelateBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.FukaTaishoshaRelateEntity;
@@ -58,7 +63,7 @@ public class TaishoshaFinder {
      * @return 資格対象者
      */
     @Transaction
-    public SearchResult<TaishoshaRelateEntity> get資格対象者(ISearchCondition 条件, ISearchCondition 除外条件, IShikibetsuTaishoSearchKey 宛名キー, int 最大件数) {
+    public SearchResult<TaishoshaRelateBusiness> get資格対象者(ISearchCondition 条件, ISearchCondition 除外条件, IShikibetsuTaishoSearchKey 宛名キー, int 最大件数) {
 
         ITrueFalseCriteria 介護条件 = getCriteria(条件, 除外条件);
         IPsmCriteria 宛名psm = getPsmCriteria(宛名キー);
@@ -70,7 +75,16 @@ public class TaishoshaFinder {
             totalCount = dac.get資格対象者Count(介護条件, 宛名psm, is内部結合);
         }
 
-        return SearchResult.of(result, totalCount, (最大件数 < totalCount));
+        List<TaishoshaRelateBusiness> list = new ArrayList<>();
+
+        for (TaishoshaRelateEntity entity : result) {
+            list.add(new TaishoshaRelateBusiness(entity));
+        }
+
+        IItemList<TaishoshaRelateBusiness> resultB = ItemList.of(list);
+
+
+        return SearchResult.of(resultB, totalCount, (最大件数 < totalCount));
     }
 
     /**
@@ -83,7 +97,7 @@ public class TaishoshaFinder {
      * @return 賦課対象者
      */
     @Transaction
-    public SearchResult<FukaTaishoshaRelateEntity> get賦課対象者(ISearchCondition 条件, ISearchCondition 除外条件, IShikibetsuTaishoSearchKey 宛名キー, int 最大件数) {
+    public SearchResult<FukaTaishoshaRelateBusiness> get賦課対象者(ISearchCondition 条件, ISearchCondition 除外条件, IShikibetsuTaishoSearchKey 宛名キー, int 最大件数) {
 
         FukaSearchMenu menu = FukaSearchMenu.toValue(ResponseHolder.getMenuID());
 //        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
@@ -98,7 +112,15 @@ public class TaishoshaFinder {
             totalCount = dac.get賦課対象者Count(介護条件, 宛名psm, is内部結合);
         }
 
-        return SearchResult.of(result, totalCount, (最大件数 < totalCount));
+        List<FukaTaishoshaRelateBusiness> list = new ArrayList<>();
+
+        for (FukaTaishoshaRelateEntity entity : result) {
+            list.add(new FukaTaishoshaRelateBusiness(entity));
+        }
+        
+        IItemList<FukaTaishoshaRelateBusiness> resultB = ItemList.of(list);
+
+        return SearchResult.of(resultB, totalCount, (最大件数 < totalCount));
     }
 
     private ITrueFalseCriteria getCriteria(ISearchCondition 条件, ISearchCondition 除外条件) {
