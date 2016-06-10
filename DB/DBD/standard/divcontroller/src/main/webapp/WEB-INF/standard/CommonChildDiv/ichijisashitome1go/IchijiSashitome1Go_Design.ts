@@ -45,12 +45,12 @@ module DBD {
                 return new UZA.Button(this.convFiledName("btnKojoToroku"));
             }
 
-            public SashitomeOrKojoJokyoShokai(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("SashitomeOrKojoJokyoShokai"));
-            }
-
             public btnSashitomeOrKojoJokyoShokai(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnSashitomeOrKojoJokyoShokai"));
+            }
+
+            public dgKyufuIchijiSashitomeTorokuOrHokenryoKojoToroku(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgKyufuIchijiSashitomeTorokuOrHokenryoKojoToroku"));
             }
 
             public ShokanJoho(): UZA.Panel {
@@ -67,10 +67,6 @@ module DBD {
 
             public dgSashitomeOrKojoJokyoShokai(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgSashitomeOrKojoJokyoShokai"));
-            }
-
-            public dgKyufuIchijiSashitomeTorokuOrHokenryoKojoToroku(): UZA.DataGrid {
-                return new UZA.DataGrid(this.convFiledName("dgKyufuIchijiSashitomeTorokuOrHokenryoKojoToroku"));
             }
 
             public SashitomeTorokuOrKojoTorokuOrKojoJokyoShokai(): UZA.Panel {

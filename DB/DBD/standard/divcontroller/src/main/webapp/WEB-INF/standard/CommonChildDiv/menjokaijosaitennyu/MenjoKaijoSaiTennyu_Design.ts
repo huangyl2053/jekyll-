@@ -33,10 +33,6 @@ module DBD {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public dgIchigoKyufugakuGengakuMenjoKaijoOrSaitennyu(): UZA.DataGrid {
-                return new UZA.DataGrid(this.convFiledName("dgIchigoKyufugakuGengakuMenjoKaijoOrSaitennyu"));
-            }
-
             public linIchigoKyufugakuGengakuMenjoKaijoOrSaitennyuGrid(): UZA.HorizontalLine {
                 return new UZA.HorizontalLine(this.convFiledName("linIchigoKyufugakuGengakuMenjoKaijoOrSaitennyuGrid"));
             }
@@ -127,6 +123,10 @@ module DBD {
 
             public btnTorikeshi(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnTorikeshi"));
+            }
+
+            public dgIchigoKyufugakuGengakuMenjoKaijoOrSaitennyu(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgIchigoKyufugakuGengakuMenjoKaijoOrSaitennyu"));
             }
 
             public btnIchigoKyufugakuGengakuMenjoKaijoOrSaitennyuKyufugakuGengakuTorokuClose(): UZA.Button {

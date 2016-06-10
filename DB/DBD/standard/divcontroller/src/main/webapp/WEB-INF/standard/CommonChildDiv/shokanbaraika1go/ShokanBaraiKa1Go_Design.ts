@@ -33,6 +33,10 @@ module DBD {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
+            public TorokuJokyo(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("TorokuJokyo"));
+            }
+
             public txtTorokuJokyo(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtTorokuJokyo"));
             }
@@ -43,10 +47,6 @@ module DBD {
 
             public txtTekiyoKikanShuryo(): UZA.TextBoxFlexibleDate {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoKikanShuryo"));
-            }
-
-            public txtShuryoJokyo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtShuryoJokyo"));
             }
 
             public linTorokuJokyo(): UZA.HorizontalLine {
@@ -139,6 +139,10 @@ module DBD {
 
             public btnTorikeshi(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnTorikeshi"));
+            }
+
+            public ddlShuryoJokyo(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlShuryoJokyo"));
             }
 
         }

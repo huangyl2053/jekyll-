@@ -40,12 +40,12 @@ var DBD;
                 return new UZA.Button(this.convFiledName("btnKojoToroku"));
             };
 
-            Controls.prototype.SashitomeOrKojoJokyoShokai = function () {
-                return new UZA.Panel(this.convFiledName("SashitomeOrKojoJokyoShokai"));
-            };
-
             Controls.prototype.btnSashitomeOrKojoJokyoShokai = function () {
                 return new UZA.Button(this.convFiledName("btnSashitomeOrKojoJokyoShokai"));
+            };
+
+            Controls.prototype.dgKyufuIchijiSashitomeTorokuOrHokenryoKojoToroku = function () {
+                return new UZA.DataGrid(this.convFiledName("dgKyufuIchijiSashitomeTorokuOrHokenryoKojoToroku"));
             };
 
             Controls.prototype.ShokanJoho = function () {
@@ -62,10 +62,6 @@ var DBD;
 
             Controls.prototype.dgSashitomeOrKojoJokyoShokai = function () {
                 return new UZA.DataGrid(this.convFiledName("dgSashitomeOrKojoJokyoShokai"));
-            };
-
-            Controls.prototype.dgKyufuIchijiSashitomeTorokuOrHokenryoKojoToroku = function () {
-                return new UZA.DataGrid(this.convFiledName("dgKyufuIchijiSashitomeTorokuOrHokenryoKojoToroku"));
             };
 
             Controls.prototype.SashitomeTorokuOrKojoTorokuOrKojoJokyoShokai = function () {

@@ -28,6 +28,10 @@ var DBD;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
+            Controls.prototype.TorokuJokyo = function () {
+                return new UZA.Panel(this.convFiledName("TorokuJokyo"));
+            };
+
             Controls.prototype.txtTorokuJokyo = function () {
                 return new UZA.TextBox(this.convFiledName("txtTorokuJokyo"));
             };
@@ -38,10 +42,6 @@ var DBD;
 
             Controls.prototype.txtTekiyoKikanShuryo = function () {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoKikanShuryo"));
-            };
-
-            Controls.prototype.txtShuryoJokyo = function () {
-                return new UZA.TextBox(this.convFiledName("txtShuryoJokyo"));
             };
 
             Controls.prototype.linTorokuJokyo = function () {
@@ -134,6 +134,10 @@ var DBD;
 
             Controls.prototype.btnTorikeshi = function () {
                 return new UZA.Button(this.convFiledName("btnTorikeshi"));
+            };
+
+            Controls.prototype.ddlShuryoJokyo = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlShuryoJokyo"));
             };
             return Controls;
         })();

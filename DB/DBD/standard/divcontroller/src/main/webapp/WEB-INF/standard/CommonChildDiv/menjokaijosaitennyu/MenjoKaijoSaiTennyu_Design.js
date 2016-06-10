@@ -28,10 +28,6 @@ var DBD;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.dgIchigoKyufugakuGengakuMenjoKaijoOrSaitennyu = function () {
-                return new UZA.DataGrid(this.convFiledName("dgIchigoKyufugakuGengakuMenjoKaijoOrSaitennyu"));
-            };
-
             Controls.prototype.linIchigoKyufugakuGengakuMenjoKaijoOrSaitennyuGrid = function () {
                 return new UZA.HorizontalLine(this.convFiledName("linIchigoKyufugakuGengakuMenjoKaijoOrSaitennyuGrid"));
             };
@@ -122,6 +118,10 @@ var DBD;
 
             Controls.prototype.btnTorikeshi = function () {
                 return new UZA.Button(this.convFiledName("btnTorikeshi"));
+            };
+
+            Controls.prototype.dgIchigoKyufugakuGengakuMenjoKaijoOrSaitennyu = function () {
+                return new UZA.DataGrid(this.convFiledName("dgIchigoKyufugakuGengakuMenjoKaijoOrSaitennyu"));
             };
 
             Controls.prototype.btnIchigoKyufugakuGengakuMenjoKaijoOrSaitennyuKyufugakuGengakuTorokuClose = function () {
