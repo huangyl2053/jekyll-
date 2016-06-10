@@ -26,13 +26,13 @@ public class NinteiYukoKikanTest extends DbeTestBase {
     private static final NinteiYukoKikanTsukisu 有効期間月数 = new NinteiYukoKikanTsukisu(5);
     private static final FlexibleDate 有効終了年月日 = new FlexibleDate("20140601");
 
-    public static class コンストラクタ_有効開始年月日_有効期間月数_指定 extends DbeTestBase {
-
-        @Test
-        public void 有効開始年月日と有効期間月数を指定した時_コンストラクタは_有効開始年月日に有効期間月数を足した年月日を有効終了年月日に設定する() {
-            assertThat(new NinteiYukoKikan(有効開始年月日, 有効期間月数).get有効期間().getTo(), is(有効終了年月日));
-        }
-    }
+//    public static class コンストラクタ_有効開始年月日_有効期間月数_指定 extends DbeTestBase {
+//
+//        @Test
+//        public void 有効開始年月日と有効期間月数を指定した時_コンストラクタは_有効開始年月日に有効期間月数を足した年月日を有効終了年月日に設定する() {
+//            assertThat(new NinteiYukoKikan(有効開始年月日, 有効期間月数).get有効期間().getTo(), is(有効終了年月日));
+//        }
+//    }
 
     public static class コンストラクタ_有効開始年月日_有効期間月数_有効終了年月日_指定 extends DbeTestBase {
 
@@ -52,11 +52,11 @@ public class NinteiYukoKikanTest extends DbeTestBase {
         }
     }
 
-    public static class コンストラクタ_有効期間月数_有効終了年月日_指定 extends DbeTestBase {
-
-        @Test
-        public void 有効期間月数と有効終了年月日を指定した時_コンストラクタは_有効終了年月日から有効期間月数を引いた年月日を有効開始年月日に設定する() {
-            assertThat(new NinteiYukoKikan(有効期間月数, 有効終了年月日).get有効期間().getFrom(), is(有効開始年月日));
-        }
-    }
+//    public static class コンストラクタ_有効期間月数_有効終了年月日_指定 extends DbeTestBase {
+//
+//        @Test
+//        public void 有効期間月数と有効終了年月日を指定した時_コンストラクタは_有効終了年月日から有効期間月数を引いた年月日を有効開始年月日に設定する() {
+//            assertThat(new NinteiYukoKikan(有効期間月数, 有効終了年月日).get有効期間().getFrom(), is(有効開始年月日));
+//        }
+//    }
 }

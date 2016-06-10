@@ -10,25 +10,25 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJohoEntit
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
- * {@link ShinsakaiOnseiJoho}の編集を行うビルダークラスです。
+ * {@link ShinsakaiOnseiJoho2}の編集を行うビルダークラスです。
  *
  * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class ShinsakaiOnseiJohoBuilder {
+public class ShinsakaiOnseiJoho2Builder {
 
     private final DbT5512ShinsakaiOnseiJohoEntity entity;
-    private final ShinsakaiOnseiJohoIdentifier id;
+    private final ShinsakaiOnseiJoho2Identifier id;
 
     /**
-     * {@link DbT5512ShinsakaiOnseiJohoEntity}より{@link ShinsakaiOnseiJoho}の編集用Builderクラスを生成します。
+     * {@link DbT5512ShinsakaiOnseiJohoEntity}より{@link ShinsakaiOnseiJoho2}の編集用Builderクラスを生成します。
      *
      * @param entity {@link DbT5512ShinsakaiOnseiJohoEntity}
-     * @param id {@link ShinsakaiOnseiJohoIdentifier}
+     * @param id {@link ShinsakaiOnseiJoho2Identifier}
      *
      */
-    ShinsakaiOnseiJohoBuilder(
+    ShinsakaiOnseiJoho2Builder(
             DbT5512ShinsakaiOnseiJohoEntity entity,
-            ShinsakaiOnseiJohoIdentifier id
+            ShinsakaiOnseiJoho2Identifier id
     ) {
         this.entity = entity.clone();
         this.id = id;
@@ -39,20 +39,21 @@ public class ShinsakaiOnseiJohoBuilder {
      * 審査会音声ファイルを設定します。
      *
      * @param 審査会音声ファイル 審査会音声ファイル
-     * @return {@link ShinsakaiOnseiJohoBuilder}
+     * @return {@link ShinsakaiOnseiJoho2Builder}
      */
-    public ShinsakaiOnseiJohoBuilder set審査会音声ファイル(byte[] 審査会音声ファイル) {
+    @SuppressWarnings("checkstyle:illegaltoken")
+    public ShinsakaiOnseiJoho2Builder set審査会音声ファイル(byte[] 審査会音声ファイル) {
         requireNonNull(審査会音声ファイル, UrSystemErrorMessages.値がnull.getReplacedMessage("審査会音声ファイル"));
         entity.setShinsakaiOnseiFile(審査会音声ファイル);
         return this;
     }
 
     /**
-     * {@link ShinsakaiOnseiJoho}のインスタンスを生成します。
+     * {@link ShinsakaiOnseiJoho2}のインスタンスを生成します。
      *
-     * @return {@link ShinsakaiOnseiJoho}のインスタンス
+     * @return {@link ShinsakaiOnseiJoho2}のインスタンス
      */
-    public ShinsakaiOnseiJoho build() {
-        return new ShinsakaiOnseiJoho(entity, id);
+    public ShinsakaiOnseiJoho2 build() {
+        return new ShinsakaiOnseiJoho2(entity, id);
     }
 }

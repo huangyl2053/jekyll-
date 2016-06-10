@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value
-public class NinteiShinseiJohoIdentifier implements Serializable {
+public class NinteiShinseiJoho2Identifier implements Serializable {
 
     private static final long serialVersionUID = 1598540204956738647L;
     private final ShinseishoKanriNo 申請書管理番号;
@@ -25,7 +25,7 @@ public class NinteiShinseiJohoIdentifier implements Serializable {
      *
      * @param 申請書管理番号 申請書管理番号
      */
-    public NinteiShinseiJohoIdentifier(ShinseishoKanriNo 申請書管理番号) {
+    public NinteiShinseiJoho2Identifier(ShinseishoKanriNo 申請書管理番号) {
         this.申請書管理番号 = 申請書管理番号;
     }
 

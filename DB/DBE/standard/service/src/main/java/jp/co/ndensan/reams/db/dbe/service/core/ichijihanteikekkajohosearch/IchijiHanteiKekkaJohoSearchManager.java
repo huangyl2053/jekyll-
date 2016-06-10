@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.service.core.ichijihanteikekkajohosearch;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchBusiness;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchMapper;
@@ -119,7 +119,7 @@ public class IchijiHanteiKekkaJohoSearchManager {
 //    }
     private Code get厚労省IF識別コード(ShinseishoKanriNo 申請書管理番号) {
         NinteiShinseiJohoManager ninteiShinseiJohoManager = new NinteiShinseiJohoManager();
-        NinteiShinseiJoho ninteiShinseiJoho = ninteiShinseiJohoManager.get要介護認定申請情報(申請書管理番号);
+        NinteiShinseiJoho2 ninteiShinseiJoho = ninteiShinseiJohoManager.get要介護認定申請情報(申請書管理番号);
         if (null == ninteiShinseiJoho) {
             return Code.EMPTY;
         } else {

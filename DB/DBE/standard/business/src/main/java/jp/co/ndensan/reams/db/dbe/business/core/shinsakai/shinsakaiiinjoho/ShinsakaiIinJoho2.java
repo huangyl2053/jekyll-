@@ -28,12 +28,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  *
  * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class ShinsakaiIinJoho
-        extends ModelBase<ShinsakaiIinJohoIdentifier, DbT5594ShinsakaiIinJohoEntity, ShinsakaiIinJoho>
+public class ShinsakaiIinJoho2
+        extends ModelBase<ShinsakaiIinJoho2Identifier, DbT5594ShinsakaiIinJohoEntity, ShinsakaiIinJoho2>
         implements Serializable {
 
     private final DbT5594ShinsakaiIinJohoEntity entity;
-    private final ShinsakaiIinJohoIdentifier id;
+    private final ShinsakaiIinJoho2Identifier id;
 
     /**
      * コンストラクタです。<br/>
@@ -41,24 +41,24 @@ public class ShinsakaiIinJoho
      *
      * @param 介護認定審査会委員コード 介護認定審査会委員コード
      */
-    public ShinsakaiIinJoho(RString 介護認定審査会委員コード) {
+    public ShinsakaiIinJoho2(RString 介護認定審査会委員コード) {
         requireNonNull(介護認定審査会委員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員コード"));
         this.entity = new DbT5594ShinsakaiIinJohoEntity();
         this.entity.setShinsakaiIinCode(介護認定審査会委員コード);
-        this.id = new ShinsakaiIinJohoIdentifier(
+        this.id = new ShinsakaiIinJoho2Identifier(
                 介護認定審査会委員コード
         );
     }
 
     /**
      * コンストラクタです。<br/>
-     * DBより取得した{@link DbT5594ShinsakaiIinJohoEntity}より{@link ShinsakaiIinJoho}を生成します。
+     * DBより取得した{@link DbT5594ShinsakaiIinJohoEntity}より{@link ShinsakaiIinJoho2}を生成します。
      *
      * @param entity DBより取得した{@link DbT5594ShinsakaiIinJohoEntity}
      */
-    public ShinsakaiIinJoho(DbT5594ShinsakaiIinJohoEntity entity) {
+    public ShinsakaiIinJoho2(DbT5594ShinsakaiIinJohoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員情報"));
-        this.id = new ShinsakaiIinJohoIdentifier(
+        this.id = new ShinsakaiIinJoho2Identifier(
                 entity.getShinsakaiIinCode());
     }
 
@@ -66,11 +66,11 @@ public class ShinsakaiIinJoho
      * シリアライズ、ビルダー用コンストラクタです。
      *
      * @param entity {@link DbT5594ShinsakaiIinJohoEntity}
-     * @param id {@link ShinsakaiIinJohoIdentifier}
+     * @param id {@link ShinsakaiIinJoho2Identifier}
      */
-    ShinsakaiIinJoho(
+    ShinsakaiIinJoho2(
             DbT5594ShinsakaiIinJohoEntity entity,
-            ShinsakaiIinJohoIdentifier id
+            ShinsakaiIinJoho2Identifier id
     ) {
         this.entity = entity;
         this.id = id;
@@ -240,36 +240,38 @@ public class ShinsakaiIinJoho
     }
 
     /**
-     * 介護認定審査会委員情報の識別子{@link ShinsakaiIinJohoIdentifier}を返します。
+     * 介護認定審査会委員情報の識別子{@link ShinsakaiIinJoho2Identifier}を返します。
      *
-     * @return 介護認定審査会委員情報の識別子{@link ShinsakaiIinJohoIdentifier}
+     * @return 介護認定審査会委員情報の識別子{@link ShinsakaiIinJoho2Identifier}
      */
     @Override
-    public ShinsakaiIinJohoIdentifier identifier() {
+    public ShinsakaiIinJoho2Identifier identifier() {
         return this.id;
     }
 
     /**
-     * 介護認定審査会委員情報のみを変更対象とします。<br/> {@link DbT5594ShinsakaiIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護認定審査会委員情報のみを変更対象とします。<br/>
+     * {@link DbT5594ShinsakaiIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
-     * @return 変更対象処理実施後の{@link ShinsakaiIinJoho}
+     * @return 変更対象処理実施後の{@link ShinsakaiIinJoho2}
      */
-    public ShinsakaiIinJoho modifiedModel() {
+    public ShinsakaiIinJoho2 modifiedModel() {
         DbT5594ShinsakaiIinJohoEntity modifiedEntity = entity.clone();
         if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
             modifiedEntity.setState(EntityDataState.Modified);
         }
-        return new ShinsakaiIinJoho(
+        return new ShinsakaiIinJoho2(
                 modifiedEntity, id);
     }
 
     /**
-     * 保持する介護認定審査会委員情報を削除対象とします。<br/> {@link DbT5594ShinsakaiIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護認定審査会委員情報を削除対象とします。<br/>
+     * {@link DbT5594ShinsakaiIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
-     * @return 削除対象処理実施後の{@link ShinsakaiIinJoho}
+     * @return 削除対象処理実施後の{@link ShinsakaiIinJoho2}
      */
     @Override
-    public ShinsakaiIinJoho deleted() {
+    public ShinsakaiIinJoho2 deleted() {
         DbT5594ShinsakaiIinJohoEntity deletedEntity = this.toEntity();
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
@@ -277,13 +279,13 @@ public class ShinsakaiIinJoho
 
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
-        return new ShinsakaiIinJoho(deletedEntity, id);
+        return new ShinsakaiIinJoho2(deletedEntity, id);
     }
 
     /**
-     * {@link ShinsakaiIinJoho}のシリアライズ形式を提供します。
+     * {@link ShinsakaiIinJoho2}のシリアライズ形式を提供します。
      *
-     * @return {@link ShinsakaiIinJoho}のシリアライズ形式
+     * @return {@link ShinsakaiIinJoho2}のシリアライズ形式
      */
     protected Object writeReplace() {
         return new _SerializationProxy(entity, id);
@@ -298,15 +300,15 @@ public class ShinsakaiIinJoho
     private static final class _SerializationProxy implements Serializable {
 
         private final DbT5594ShinsakaiIinJohoEntity entity;
-        private final ShinsakaiIinJohoIdentifier id;
+        private final ShinsakaiIinJoho2Identifier id;
 
-        private _SerializationProxy(DbT5594ShinsakaiIinJohoEntity entity, ShinsakaiIinJohoIdentifier id) {
+        private _SerializationProxy(DbT5594ShinsakaiIinJohoEntity entity, ShinsakaiIinJoho2Identifier id) {
             this.entity = entity;
             this.id = id;
         }
 
         private Object readResolve() {
-            return new ShinsakaiIinJoho(this.entity, this.id);
+            return new ShinsakaiIinJoho2(this.entity, this.id);
         }
     }
 
@@ -316,8 +318,8 @@ public class ShinsakaiIinJoho
      *
      * @return Builder
      */
-    public ShinsakaiIinJohoBuilder createBuilderForEdit() {
-        return new ShinsakaiIinJohoBuilder(entity, id);
+    public ShinsakaiIinJoho2Builder createBuilderForEdit() {
+        return new ShinsakaiIinJoho2Builder(entity, id);
     }
 
     @Override
@@ -335,7 +337,7 @@ public class ShinsakaiIinJoho
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ShinsakaiIinJoho other = (ShinsakaiIinJoho) obj;
+        final ShinsakaiIinJoho2 other = (ShinsakaiIinJoho2) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }

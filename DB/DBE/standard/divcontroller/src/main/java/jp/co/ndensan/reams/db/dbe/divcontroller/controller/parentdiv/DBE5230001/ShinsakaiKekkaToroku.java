@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5230001
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho2;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho2Identifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanBusiness;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.ShinsakaiKekkaTorokuDiv;
@@ -48,8 +48,8 @@ public class ShinsakaiKekkaToroku {
         List<ShinsakaiKekkaTorokuBusiness> headList = manager.getヘッドエリア内容検索(開催番号).records();
         List<ShinsakaiKekkaTorokuIChiRanBusiness> iChiRanList = manager.get審査会委員一覧検索(開催番号).records();
         getHandler(div).onLoad(headList, iChiRanList);
-        List<ShinsakaiKaisaiYoteiJoho> yoteiJohoList = manager.get審査会委員一覧検索_業務概念_1(開催番号).records();
-        Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> shinsakaiKaisaiYoteiJoho = Models.create(yoteiJohoList);
+        List<ShinsakaiKaisaiYoteiJoho2> yoteiJohoList = manager.get審査会委員一覧検索_業務概念_1(開催番号).records();
+        Models<ShinsakaiKaisaiYoteiJoho2Identifier, ShinsakaiKaisaiYoteiJoho2> shinsakaiKaisaiYoteiJoho = Models.create(yoteiJohoList);
         ViewStateHolder.put(ViewStateKeys.介護認定審査会開催結果登録_介護認定審査会開催予定情報, shinsakaiKaisaiYoteiJoho);
 
         List<NinteiShinseiJoho> shinseiJohoList = manager.get審査会委員一覧検索_業務概念_2(開催番号).records();
