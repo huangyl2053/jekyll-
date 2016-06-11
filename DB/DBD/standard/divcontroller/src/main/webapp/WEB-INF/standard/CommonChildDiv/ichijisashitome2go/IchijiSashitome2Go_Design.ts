@@ -65,12 +65,12 @@ module DBD {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNigoYokokushaTorokuYokokuTorokubi"));
             }
 
-            public txtNigoYokokushaTorokuBenmeishoTeishutsuKigen(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNigoYokokushaTorokuBenmeishoTeishutsuKigen"));
+            public txtBemmeishoTeishutsuKigenYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtBemmeishoTeishutsuKigenYMD"));
             }
 
-            public txtNigoYokokushaTorokuTsuchiHakkobi(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNigoYokokushaTorokuTsuchiHakkobi"));
+            public txtYokokuTsuchiHakkoYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYokokuTsuchiHakkoYMD"));
             }
 
             public txtNigoBenmeishoJuriBenmeishoUketsukebi(): UZA.TextBoxFlexibleDate {
@@ -81,44 +81,44 @@ module DBD {
                 return new UZA.DropDownList(this.convFiledName("ddlNigoBenmeishoJuriBenmeiRiyu"));
             }
 
-            public txtNigoBenmeishoJuriBenmeiNaiyoKetteibi(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNigoBenmeishoJuriBenmeiNaiyoKetteibi"));
+            public txtBemmeiNaiyoKetteiYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtBemmeiNaiyoKetteiYMD"));
             }
 
             public ddlNigoBenmeishoJuriBenmeiShinsakekka(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlNigoBenmeishoJuriBenmeiShinsakekka"));
             }
 
-            public txtNigoIchijiSashitomeTorokuSashitomeKetteibi(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNigoIchijiSashitomeTorokuSashitomeKetteibi"));
+            public txtSashitomeKetteiYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKetteiYMD"));
             }
 
-            public txtNigoIchijiSashitomeTorokuHokenshoTeishitsuKigen(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNigoIchijiSashitomeTorokuHokenshoTeishitsuKigen"));
+            public txtHokenshaTeishutsuKigenYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtHokenshaTeishutsuKigenYMD"));
             }
 
-            public txtNigoIchijiSashitomeTorokuTsuchiHakkobi(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNigoIchijiSashitomeTorokuTsuchiHakkobi"));
+            public txtSashitomeTsuchiHakkoYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeTsuchiHakkoYMD"));
             }
 
-            public txtNigoIchijiSashitomeKaijoIraiUketsukebi(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNigoIchijiSashitomeKaijoIraiUketsukebi"));
+            public txtIraiUketsukeYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIraiUketsukeYMD"));
             }
 
-            public ddlNigoIchijiSashitomeKaijoIraiRiyu(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlNigoIchijiSashitomeKaijoIraiRiyu"));
+            public ddlIraiRiyu(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlIraiRiyu"));
             }
 
-            public txtNigoIchijiSashitomeKaijoIraibi(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNigoIchijiSashitomeKaijoIraibi"));
+            public txtIraiYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIraiYMD"));
             }
 
-            public txtNigoIchijiSashitomeKaijoIraiNaiyoKetteibi(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNigoIchijiSashitomeKaijoIraiNaiyoKetteibi"));
+            public txtIraiNaiyoKetteiYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIraiNaiyoKetteiYMD"));
             }
 
-            public ddlNigoIchijiSashitomeKaijoIraiChosaKekka(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlNigoIchijiSashitomeKaijoIraiChosaKekka"));
+            public ddlIraiShinsaKekka(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlIraiShinsaKekka"));
             }
 
             public KakuteiTorikeshi(): UZA.Panel {

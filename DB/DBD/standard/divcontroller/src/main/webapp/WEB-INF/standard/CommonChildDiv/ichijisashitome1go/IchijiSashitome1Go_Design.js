@@ -28,10 +28,6 @@ var DBD;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.SashitomeTorokuOrKojoToroku = function () {
-                return new UZA.Panel(this.convFiledName("SashitomeTorokuOrKojoToroku"));
-            };
-
             Controls.prototype.btnSashitomeToroku = function () {
                 return new UZA.Button(this.convFiledName("btnSashitomeToroku"));
             };
@@ -44,108 +40,112 @@ var DBD;
                 return new UZA.Button(this.convFiledName("btnSashitomeOrKojoJokyoShokai"));
             };
 
-            Controls.prototype.dgKyufuIchijiSashitomeTorokuOrHokenryoKojoToroku = function () {
-                return new UZA.DataGrid(this.convFiledName("dgKyufuIchijiSashitomeTorokuOrHokenryoKojoToroku"));
+            Controls.prototype.dgSashitomeKojoIchiran = function () {
+                return new UZA.DataGrid(this.convFiledName("dgSashitomeKojoIchiran"));
             };
 
             Controls.prototype.ShokanJoho = function () {
                 return new UZA.Panel(this.convFiledName("ShokanJoho"));
             };
 
-            Controls.prototype.lblKyufuIchijiSashitomeTorokuShokanJoho = function () {
-                return new UZA.Label(this.convFiledName("lblKyufuIchijiSashitomeTorokuShokanJoho"));
+            Controls.prototype.lblShokanJoho = function () {
+                return new UZA.Label(this.convFiledName("lblShokanJoho"));
             };
 
-            Controls.prototype.txtKyufuIchijiSashitomeTorokuSagakuGokeiKingaku = function () {
-                return new UZA.TextBoxNum(this.convFiledName("txtKyufuIchijiSashitomeTorokuSagakuGokeiKingaku"));
+            Controls.prototype.txtSagakuKingakuGokei = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtSagakuKingakuGokei"));
             };
 
-            Controls.prototype.dgSashitomeOrKojoJokyoShokai = function () {
-                return new UZA.DataGrid(this.convFiledName("dgSashitomeOrKojoJokyoShokai"));
+            Controls.prototype.dgShokanJoho = function () {
+                return new UZA.DataGrid(this.convFiledName("dgShokanJoho"));
             };
 
-            Controls.prototype.SashitomeTorokuOrKojoTorokuOrKojoJokyoShokai = function () {
-                return new UZA.Panel(this.convFiledName("SashitomeTorokuOrKojoTorokuOrKojoJokyoShokai"));
+            Controls.prototype.SashitomeKojoJokyo = function () {
+                return new UZA.Panel(this.convFiledName("SashitomeKojoJokyo"));
             };
 
             Controls.prototype.txtSashitomeTorokuKubun = function () {
                 return new UZA.TextBox(this.convFiledName("txtSashitomeTorokuKubun"));
             };
 
-            Controls.prototype.txtSashitomeTorokuSashitomeTorokubi = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeTorokuSashitomeTorokubi"));
+            Controls.prototype.txtSashitomeTorokuYMD = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeTorokuYMD"));
             };
 
-            Controls.prototype.txtSashitomeTorokuSashitomeNofuKigen = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeTorokuSashitomeNofuKigen"));
+            Controls.prototype.txtSashitomeTorokuTsuchiHakkoYMD = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeTorokuTsuchiHakkoYMD"));
             };
 
-            Controls.prototype.txtSashitomeTorokuTuchiHakkobi = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeTorokuTuchiHakkobi"));
+            Controls.prototype.txtSashitomeNofuKigenYMD = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeNofuKigenYMD"));
+            };
+
+            Controls.prototype.txtSashitomeKaijoYMD = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKaijoYMD"));
             };
 
             Controls.prototype.txtKojoTorokuKubun = function () {
                 return new UZA.TextBox(this.convFiledName("txtKojoTorokuKubun"));
             };
 
-            Controls.prototype.txtKojoTorokuKojoKetteibi = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKojoTorokuKojoKetteibi"));
+            Controls.prototype.txtKojoKetteiYMD = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKojoKetteiYMD"));
             };
 
-            Controls.prototype.txtKojoTorokuHokenshoTeishutsuKigen = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKojoTorokuHokenshoTeishutsuKigen"));
+            Controls.prototype.txtKojoTorokuTsuchiHakkoYMD = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKojoTorokuTsuchiHakkoYMD"));
             };
 
-            Controls.prototype.txtKojoTorokuTuchiHakkobi = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKojoTorokuTuchiHakkobi"));
+            Controls.prototype.txtHokenshoTeishutsuKigenYMD = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtHokenshoTeishutsuKigenYMD"));
             };
 
-            Controls.prototype.ddlKojoTorokuKojoNo = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlKojoTorokuKojoNo"));
+            Controls.prototype.ddlTorokuKojoNo = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlTorokuKojoNo"));
             };
 
             Controls.prototype.SashitomeToroku = function () {
                 return new UZA.Panel(this.convFiledName("SashitomeToroku"));
             };
 
-            Controls.prototype.txtSashitomeKojoJokyoShokaiSashitomeTorokubi = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKojoJokyoShokaiSashitomeTorokubi"));
+            Controls.prototype.txtShokaiSashitomeTorokuYMD = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShokaiSashitomeTorokuYMD"));
             };
 
-            Controls.prototype.txtSashitomeKojoJokyoShokaiSashitomeNofuKigen = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKojoJokyoShokaiSashitomeNofuKigen"));
+            Controls.prototype.txtShokaiSashitomeNofuKigenYMD = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShokaiSashitomeNofuKigenYMD"));
             };
 
-            Controls.prototype.txtSashitomeKojoJokyoShokaiSashitomeTorokuTsuchiHakkobi = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKojoJokyoShokaiSashitomeTorokuTsuchiHakkobi"));
+            Controls.prototype.txtShokaiSashitomeTorokuTsuchiHakkoYMD = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShokaiSashitomeTorokuTsuchiHakkoYMD"));
             };
 
             Controls.prototype.SasitomeKaijo = function () {
                 return new UZA.Panel(this.convFiledName("SasitomeKaijo"));
             };
 
-            Controls.prototype.txtSashitomeKojoJokyoShokaiSashitomeKaijobi = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKojoJokyoShokaiSashitomeKaijobi"));
+            Controls.prototype.txtShokaiSashitomeKaijoYMD = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShokaiSashitomeKaijoYMD"));
             };
 
-            Controls.prototype.Kojotoroku = function () {
-                return new UZA.Panel(this.convFiledName("Kojotoroku"));
+            Controls.prototype.KojoToroku = function () {
+                return new UZA.Panel(this.convFiledName("KojoToroku"));
             };
 
-            Controls.prototype.txtSashitomeKojoJokyoShokaiKojoKetteibi = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKojoJokyoShokaiKojoKetteibi"));
+            Controls.prototype.txtShokaiKojoKetteiYMD = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShokaiKojoKetteiYMD"));
             };
 
-            Controls.prototype.txtSashitomeKojoJokyoShokaiHokenshoTeishutsuKigen = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKojoJokyoShokaiHokenshoTeishutsuKigen"));
+            Controls.prototype.txtShokaiHokenshoTeishutsuKigenYMD = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShokaiHokenshoTeishutsuKigenYMD"));
             };
 
-            Controls.prototype.txtSashitomeKojoJokyoShokaiKojoTorokuTsuchiHakkobi = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKojoJokyoShokaiKojoTorokuTsuchiHakkobi"));
+            Controls.prototype.txtShokaiKojoTorokuTsuchiHakkoYMD = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShokaiKojoTorokuTsuchiHakkoYMD"));
             };
 
-            Controls.prototype.txtSashitomeOrKojoJokyoShokaiKojoTorokuKojoNo = function () {
-                return new UZA.TextBox(this.convFiledName("txtSashitomeOrKojoJokyoShokaiKojoTorokuKojoNo"));
+            Controls.prototype.txtShokaiKojoNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtShokaiKojoNo"));
             };
 
             Controls.prototype.TainoJokyo = function () {

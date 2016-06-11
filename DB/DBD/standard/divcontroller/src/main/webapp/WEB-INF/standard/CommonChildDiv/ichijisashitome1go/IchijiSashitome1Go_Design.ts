@@ -33,10 +33,6 @@ module DBD {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public SashitomeTorokuOrKojoToroku(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("SashitomeTorokuOrKojoToroku"));
-            }
-
             public btnSashitomeToroku(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnSashitomeToroku"));
             }
@@ -49,108 +45,112 @@ module DBD {
                 return new UZA.Button(this.convFiledName("btnSashitomeOrKojoJokyoShokai"));
             }
 
-            public dgKyufuIchijiSashitomeTorokuOrHokenryoKojoToroku(): UZA.DataGrid {
-                return new UZA.DataGrid(this.convFiledName("dgKyufuIchijiSashitomeTorokuOrHokenryoKojoToroku"));
+            public dgSashitomeKojoIchiran(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgSashitomeKojoIchiran"));
             }
 
             public ShokanJoho(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("ShokanJoho"));
             }
 
-            public lblKyufuIchijiSashitomeTorokuShokanJoho(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblKyufuIchijiSashitomeTorokuShokanJoho"));
+            public lblShokanJoho(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblShokanJoho"));
             }
 
-            public txtKyufuIchijiSashitomeTorokuSagakuGokeiKingaku(): UZA.TextBoxNum {
-                return new UZA.TextBoxNum(this.convFiledName("txtKyufuIchijiSashitomeTorokuSagakuGokeiKingaku"));
+            public txtSagakuKingakuGokei(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtSagakuKingakuGokei"));
             }
 
-            public dgSashitomeOrKojoJokyoShokai(): UZA.DataGrid {
-                return new UZA.DataGrid(this.convFiledName("dgSashitomeOrKojoJokyoShokai"));
+            public dgShokanJoho(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgShokanJoho"));
             }
 
-            public SashitomeTorokuOrKojoTorokuOrKojoJokyoShokai(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("SashitomeTorokuOrKojoTorokuOrKojoJokyoShokai"));
+            public SashitomeKojoJokyo(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("SashitomeKojoJokyo"));
             }
 
             public txtSashitomeTorokuKubun(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtSashitomeTorokuKubun"));
             }
 
-            public txtSashitomeTorokuSashitomeTorokubi(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeTorokuSashitomeTorokubi"));
+            public txtSashitomeTorokuYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeTorokuYMD"));
             }
 
-            public txtSashitomeTorokuSashitomeNofuKigen(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeTorokuSashitomeNofuKigen"));
+            public txtSashitomeTorokuTsuchiHakkoYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeTorokuTsuchiHakkoYMD"));
             }
 
-            public txtSashitomeTorokuTuchiHakkobi(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeTorokuTuchiHakkobi"));
+            public txtSashitomeNofuKigenYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeNofuKigenYMD"));
+            }
+
+            public txtSashitomeKaijoYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKaijoYMD"));
             }
 
             public txtKojoTorokuKubun(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtKojoTorokuKubun"));
             }
 
-            public txtKojoTorokuKojoKetteibi(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKojoTorokuKojoKetteibi"));
+            public txtKojoKetteiYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKojoKetteiYMD"));
             }
 
-            public txtKojoTorokuHokenshoTeishutsuKigen(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKojoTorokuHokenshoTeishutsuKigen"));
+            public txtKojoTorokuTsuchiHakkoYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKojoTorokuTsuchiHakkoYMD"));
             }
 
-            public txtKojoTorokuTuchiHakkobi(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKojoTorokuTuchiHakkobi"));
+            public txtHokenshoTeishutsuKigenYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtHokenshoTeishutsuKigenYMD"));
             }
 
-            public ddlKojoTorokuKojoNo(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlKojoTorokuKojoNo"));
+            public ddlTorokuKojoNo(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlTorokuKojoNo"));
             }
 
             public SashitomeToroku(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("SashitomeToroku"));
             }
 
-            public txtSashitomeKojoJokyoShokaiSashitomeTorokubi(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKojoJokyoShokaiSashitomeTorokubi"));
+            public txtShokaiSashitomeTorokuYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShokaiSashitomeTorokuYMD"));
             }
 
-            public txtSashitomeKojoJokyoShokaiSashitomeNofuKigen(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKojoJokyoShokaiSashitomeNofuKigen"));
+            public txtShokaiSashitomeNofuKigenYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShokaiSashitomeNofuKigenYMD"));
             }
 
-            public txtSashitomeKojoJokyoShokaiSashitomeTorokuTsuchiHakkobi(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKojoJokyoShokaiSashitomeTorokuTsuchiHakkobi"));
+            public txtShokaiSashitomeTorokuTsuchiHakkoYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShokaiSashitomeTorokuTsuchiHakkoYMD"));
             }
 
             public SasitomeKaijo(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("SasitomeKaijo"));
             }
 
-            public txtSashitomeKojoJokyoShokaiSashitomeKaijobi(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKojoJokyoShokaiSashitomeKaijobi"));
+            public txtShokaiSashitomeKaijoYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShokaiSashitomeKaijoYMD"));
             }
 
-            public Kojotoroku(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("Kojotoroku"));
+            public KojoToroku(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KojoToroku"));
             }
 
-            public txtSashitomeKojoJokyoShokaiKojoKetteibi(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKojoJokyoShokaiKojoKetteibi"));
+            public txtShokaiKojoKetteiYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShokaiKojoKetteiYMD"));
             }
 
-            public txtSashitomeKojoJokyoShokaiHokenshoTeishutsuKigen(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKojoJokyoShokaiHokenshoTeishutsuKigen"));
+            public txtShokaiHokenshoTeishutsuKigenYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShokaiHokenshoTeishutsuKigenYMD"));
             }
 
-            public txtSashitomeKojoJokyoShokaiKojoTorokuTsuchiHakkobi(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKojoJokyoShokaiKojoTorokuTsuchiHakkobi"));
+            public txtShokaiKojoTorokuTsuchiHakkoYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShokaiKojoTorokuTsuchiHakkoYMD"));
             }
 
-            public txtSashitomeOrKojoJokyoShokaiKojoTorokuKojoNo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtSashitomeOrKojoJokyoShokaiKojoTorokuKojoNo"));
+            public txtShokaiKojoNo(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtShokaiKojoNo"));
             }
 
             public TainoJokyo(): UZA.Panel {
