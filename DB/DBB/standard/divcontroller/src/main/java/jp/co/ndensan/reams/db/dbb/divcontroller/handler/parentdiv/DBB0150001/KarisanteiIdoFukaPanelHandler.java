@@ -575,7 +575,7 @@ public class KarisanteiIdoFukaPanelHandler {
      */
     public void set納入通知書の発行日() {
         RString 出力期 = div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
-                .getDdlNotsuShuturyokuki().getSelectedValue();
+                .getDdlNotsuShuturyokuki().getSelectedKey();
         if (!出力期.isEmpty()) {
             Noki 普徴納期 = FukaNokiResearcher.createInstance()
                     .get普徴納期(Integer.valueOf(出力期.toString()));
