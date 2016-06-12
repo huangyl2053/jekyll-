@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import jp.co.ndensan.reams.uz.uza.util.db.OrderBy;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -145,4 +146,32 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuDac implements ISaveable<DbT
                 limit(1).
                 toObject(DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity.class);
     }
+
+    /**
+     * 主キーで共同処理用受給者異動基本送付を取得します。
+     *
+     * @param 被保険者番号 HiHokenshaNo
+     * @param 異動年月日 IdoYMD
+     * @return DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity> selectByKey(
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 異動年月日) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3002KyodoShoriyoJukyushaIdoKihonSofu.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(idoYMD, 異動年月日),
+                                eq(logicalDeletedFlag, false)))
+                .order(by(rirekiNo, Order.DESC)).limit(2).
+                toList(DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity.class);
+    }
+
 }

@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.kyodoshorijukyushaidorenrakuhyo;
 
+import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.KyodoshoriyoJukyushaIdoRenrakuhyoEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodoshoriyojukyushaidorenrakuhyo.KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodoshoriyojukyushaidorenrakuhyo.KyodoshoriyoJukyushaIdoRenrakuhyoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
