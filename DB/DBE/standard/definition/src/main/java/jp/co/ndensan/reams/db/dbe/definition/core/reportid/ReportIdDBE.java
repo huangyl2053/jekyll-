@@ -353,7 +353,11 @@ public enum ReportIdDBE {
     /**
      * 主治医意見書作成依頼変更者一覧表の帳票ＩＤです。
      */
-    DBE013006(new ReportId("DBE013006_ShujiiIkenshoSeikyuIchiran"), new RString("主治医意見書作成料請求一覧表"));
+    DBE013006(new ReportId("DBE013006_ShujiiIkenshoSeikyuIchiran"), new RString("主治医意見書作成料請求一覧表")),
+    /**
+     * 要介護認定申請モニタリストの帳票ＩＤです。
+     */
+    DBE011002(new ReportId("DBE011002_ShinseiMonitor"), new RString("要介護認定申請モニタリスト"));
 
     private final ReportId reportId;
 
