@@ -37,8 +37,8 @@ public class TennyuHoryuTokuteiJusho {
     public ResponseData<TennyuHoryuTokuteiJushoDiv> onLoad(TennyuHoryuTokuteiJushoDiv requestDiv) {
         TennyuHoryuTokuteiManager manager = TennyuHoryuTokuteiManager.createInstance();
         List<TennyuHoryuTokuteiBusiness> businessList = manager.getTennyuHoryuTokuteiJushoIchiran().records();
-        createHandlerOf(requestDiv).onLoad(businessList);
         ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, 台帳種別表示無し);
+        createHandlerOf(requestDiv).onLoad(businessList);
         List<RendoHoryuTokuteiJusho> 転入保留特定住所情報 = manager.get連動保留特定住所().records();
         Models<RendoHoryuTokuteiJushoIdentifier, RendoHoryuTokuteiJusho> rendoHoryuTokutei
                 = Models.create(転入保留特定住所情報);

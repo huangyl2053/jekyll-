@@ -50,11 +50,13 @@ public class KaigoJyuminValidationHandler {
                 validationMessages.add(new ValidationMessageControlPair(new KaigoJyuminValidationHandler.RRVMessages(
                         UrErrorMessages.必須, "今回開始時")));
             }
-            if ((RDateTime.of(div.getKonkaiInfoInput().getTxtZenkaiChushutsuToYMD().getValue() == null
-                    ? RDate.getNowDate().toDateString() : div.getKonkaiInfoInput().getTxtZenkaiChushutsuToYMD().getValue().toDateString(),
-                    div.getKonkaiInfoInput().getTxtZenkaiChushutsuToTime().getValue() == null
-                    ? RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH_mm)
-                    : div.getKonkaiInfoInput().getTxtZenkaiChushutsuToTime().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
+            if (div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().getValue() != null
+                    && div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().getValue() != null
+                    && (RDateTime.of(div.getKonkaiInfoInput().getTxtZenkaiChushutsuToYMD().getValue() == null
+                            ? RDate.getNowDate().toDateString() : div.getKonkaiInfoInput().getTxtZenkaiChushutsuToYMD().getValue().toDateString(),
+                            div.getKonkaiInfoInput().getTxtZenkaiChushutsuToTime().getValue() == null
+                            ? RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH_mm)
+                            : div.getKonkaiInfoInput().getTxtZenkaiChushutsuToTime().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
                     .isBefore(RDateTime.of(div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().getValue().toDateString(),
                                     div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().getValue()
                                     .toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))))) {
