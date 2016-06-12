@@ -169,32 +169,52 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
 
     private void editCompNofushoBookItem_1(KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource source,
             NonyuTsuchiShoKiJoho 納入通知書期情報, boolean is納入通知書期情報がある) {
-        source.nofushoHokenryoGaku1 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : new RString("**********");
-        source.nofushoNokigen1 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : new RString("***********");
-        source.nofushoNofuIn1 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
-        source.nofushoKozaCom1 = is納入通知書期情報がある ? 納入通知書期情報.get納付書領収印欄() : RString.EMPTY;
-        source.nofushoZuiji1 = is納入通知書期情報がある ? 納入通知書期情報.get随時表記() : RString.EMPTY;
-        source.nofuzumishoTitleNendoBun1 = RString.EMPTY;
-        source.nofuzumishoTitleKi1 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
-        source.nofuzumishoTitleTsuki1 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
-        source.nofozumishoTitleNendo1 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : new RString("******");
-        source.nofuzumishoOCR11 = is納入通知書期情報がある ? null == 納入通知書期情報.getOcr()
-                ? RString.EMPTY : 納入通知書期情報.getOcr().get(1) : new RString("*******************");
-        source.nofuzumishoOCR21 = is納入通知書期情報がある ? null == 納入通知書期情報.getOcr()
-                ? RString.EMPTY : 納入通知書期情報.getOcr().get(2) : new RString("********************");
-        source.nofuzumishoOCR31 = is納入通知書期情報がある ? null == 納入通知書期情報.getOcr()
-                ? RString.EMPTY : 納入通知書期情報.getOcr().get(INT3) : new RString("************");
-        source.nofuzumishoNofuGaku1 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : new RString("**********");
+        if (is納入通知書期情報がある) {
+            source.nofushoHokenryoGaku1 = 納入通知書期情報.get納付書納付額欄();
+            source.nofushoNokigen1 = 納入通知書期情報.get納期限表記();
+            source.nofushoNofuIn1 = 納入通知書期情報.get領収日付欄();
+            source.nofushoKozaCom1 = 納入通知書期情報.get納付書領収印欄();
+            source.nofushoZuiji1 = 納入通知書期情報.get随時表記();
+            source.nofuzumishoTitleNendoBun1 = RString.EMPTY;
+            source.nofuzumishoTitleKi1 = 納入通知書期情報.get期表記();
+            source.nofuzumishoTitleTsuki1 = 納入通知書期情報.get月表記();
+            source.nofozumishoTitleNendo1 = 納付書共通.get調定年度表記();
+            source.nofuzumishoOCR11 = null == 納入通知書期情報.getOcr()
+                    ? RString.EMPTY : 納入通知書期情報.getOcr().get(1);
+            source.nofuzumishoOCR21 = null == 納入通知書期情報.getOcr()
+                    ? RString.EMPTY : 納入通知書期情報.getOcr().get(2);
+            source.nofuzumishoOCR31 = null == 納入通知書期情報.getOcr()
+                    ? RString.EMPTY : 納入通知書期情報.getOcr().get(INT3);
+            source.nofuzumishoNofuGaku1 = 納入通知書期情報.get納付書納付額欄();
+            source.nofuzumishoNokigen1 = 納入通知書期情報.get納期限表記();
+            source.nofuzumishoNofuIn1 = 納入通知書期情報.get領収日付欄();
+            source.nofuzumishoKozaCom1 = 納入通知書期情報.get納付書領収印欄();
+            source.nofuzumishoZuiji1 = 納入通知書期情報.get随時表記();
+        } else {
+            source.nofushoHokenryoGaku1 = new RString("**********");
+            source.nofushoNokigen1 = new RString("***********");
+            source.nofushoNofuIn1 = new RString("**");
+            source.nofushoKozaCom1 = RString.EMPTY;
+            source.nofushoZuiji1 = RString.EMPTY;
+            source.nofuzumishoTitleNendoBun1 = RString.EMPTY;
+            source.nofuzumishoTitleKi1 = new RString("**");
+            source.nofuzumishoTitleTsuki1 = new RString("**");
+            source.nofozumishoTitleNendo1 = new RString("******");
+            source.nofuzumishoOCR11 = new RString("*******************");
+            source.nofuzumishoOCR21 = new RString("********************");
+            source.nofuzumishoOCR31 = new RString("************");
+            source.nofuzumishoNofuGaku1 = new RString("**********");
+            source.nofuzumishoNokigen1 = new RString("***********");
+            source.nofuzumishoNofuIn1 = new RString("**");
+            source.nofuzumishoKozaCom1 = RString.EMPTY;
+            source.nofuzumishoZuiji1 = RString.EMPTY;
+        }
         source.nofuzumishoJusho1 = 納付書共通.get住所();
         source.nofuzumishoKatagaki1 = 納付書共通.get方書();
         source.nofuzumishoHihokenshaName1 = 納付書共通.get納付者氏名();
         if (納付書共通.get世帯コード() != null) {
             source.nofuzumishoSetaiCode1 = 納付書共通.get世帯コード().getColumnValue();
         }
-        source.nofuzumishoNokigen1 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : new RString("***********");
-        source.nofuzumishoNofuIn1 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
-        source.nofuzumishoKozaCom1 = is納入通知書期情報がある ? 納入通知書期情報.get納付書領収印欄() : RString.EMPTY;
-        source.nofuzumishoZuiji1 = is納入通知書期情報がある ? 納入通知書期情報.get随時表記() : RString.EMPTY;
         source.nofuzumishoshichosonName1 = 納付書共通.get納付書市町村名();
         source.pagerenban4 = ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分())
                 ? new RString(String.valueOf(連番)).concat("-4") : new RString("1-4");
@@ -268,8 +288,6 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
         PrecedingFiscalYearInformation 前年度情報
                 = null == 編集後仮算定通知書共通情報.get前年度情報() ? new PrecedingFiscalYearInformation() : 編集後仮算定通知書共通情報.get前年度情報();
         SanteiNoKiso 算定の基礎 = null == 仮算定納入通知書情報.get算定の基礎() ? new SanteiNoKiso() : 仮算定納入通知書情報.get算定の基礎();
-        List<UniversalPhase> 普徴期別金額リスト
-                = null == 更正後.get更正後普徴期別金額リスト() ? new ArrayList<UniversalPhase>() : 更正後.get更正後普徴期別金額リスト();
         source.keisanMeisaishoKaishiKi = get最小の月();
         source.kaisanMeisaishoShuryoKi = get最大の月();
         source.keisanMeisaishoNendo1 = 前年度情報.get前年度賦課年度();
@@ -289,6 +307,15 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
                 = is算定の基礎は空白(算定の基礎, INT3) ? RString.EMPTY : null == 前年度情報.get前年度最終期普徴期別介護保険料()
                 ? RString.EMPTY : new RString(前年度情報.get前年度最終期普徴期別介護保険料().toString());
         source.keisanMeisaishoKisu = new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴期数()));
+        editレイヤ１_1_1(source, 更正後, 納入通知書期情報リストの一番目, 納入通知書期情報リストの二番目);
+    }
+
+    private void editレイヤ１_1_1(KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource source,
+            EditedKariSanteiTsuchiShoKyotsuAfterCorrection 更正後,
+            NonyuTsuchiShoKiJoho 納入通知書期情報リストの一番目,
+            NonyuTsuchiShoKiJoho 納入通知書期情報リストの二番目) {
+        List<UniversalPhase> 普徴期別金額リスト
+                = null == 更正後.get更正後普徴期別金額リスト() ? new ArrayList<UniversalPhase>() : 更正後.get更正後普徴期別金額リスト();
         if (更正後.get更正後介護保険料減免額() != null) {
             source.keisanMeisaishoGenmenGaku = new RString(更正後.get更正後介護保険料減免額().toString());
         }

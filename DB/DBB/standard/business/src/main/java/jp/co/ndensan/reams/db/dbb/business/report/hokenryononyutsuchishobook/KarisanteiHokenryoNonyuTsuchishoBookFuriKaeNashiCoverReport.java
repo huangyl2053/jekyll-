@@ -75,14 +75,13 @@ public class KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverReport
         }
         if (仮算定納入通知書情報.get仮算定納入通知書制御情報() != null
                 && 仮算定納入通知書情報.get編集後仮算定通知書共通情報() != null
-                && 仮算定納入通知書情報.get編集後仮算定通知書共通情報().get更正後() != null) {
-            if (ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分())
-                    && KozaKubun.口座振替.equals(仮算定納入通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後口座区分())
-                    && 仮算定納入通知書情報.get仮算定納入通知書制御情報().get納入通知書制御情報() != null
-                    && HyojiUmu.表示しない
-                    .equals(仮算定納入通知書情報.get仮算定納入通知書制御情報().get納入通知書制御情報().getコンビニ_ブック口座用納付書表示())) {
-                仮算定納入通知書情報.set編集範囲区分(HenshuHaniKubun.Coverのみ);
-            }
+                && 仮算定納入通知書情報.get編集後仮算定通知書共通情報().get更正後() != null
+                && ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分())
+                && KozaKubun.口座振替.equals(仮算定納入通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後口座区分())
+                && 仮算定納入通知書情報.get仮算定納入通知書制御情報().get納入通知書制御情報() != null
+                && HyojiUmu.表示しない
+                .equals(仮算定納入通知書情報.get仮算定納入通知書制御情報().get納入通知書制御情報().getコンビニ_ブック口座用納付書表示())) {
+            仮算定納入通知書情報.set編集範囲区分(HenshuHaniKubun.Coverのみ);
         }
         edit納入通知書期情報(納入通知書期情報リスト, writer);
     }
