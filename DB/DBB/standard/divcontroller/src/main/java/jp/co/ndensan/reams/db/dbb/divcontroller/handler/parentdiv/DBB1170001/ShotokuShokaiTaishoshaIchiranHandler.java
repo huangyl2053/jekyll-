@@ -185,13 +185,11 @@ public class ShotokuShokaiTaishoshaIchiranHandler {
     public FukaTaishoshaKey do遷移前データ準備_引数() {
         dgTaishoshaIchiran_Row selected = div.getDgTaishoshaIchiran().getClickedItem();
         RString 被保険者番号 = selected.getTxtHihokenshaNo().getValue();
-        RString 世帯コード = selected.getTxtSetaiCode().getValue();
         RString 識別コード = selected.getTxtShikibetsuCode().getValue();
         RYear 所得年度 = div.getTxtChushutsuKijunNendo().getDomain();
-        //TODO QA836 引数は不全です
         return new FukaTaishoshaKey(new HihokenshaNo(被保険者番号), new ShikibetsuCode(識別コード),
-                new SetaiCode(世帯コード), LasdecCode.EMPTY, new FlexibleYear(所得年度.toString()),
-                new TsuchishoNo(被保険者番号.substringReturnAsPossible(被保険者番号.length() - NUM_3)),
+                SetaiCode.EMPTY, LasdecCode.EMPTY, new FlexibleYear(所得年度.toString()),
+                TsuchishoNo.EMPTY,
                 new FlexibleYear(所得年度.toString()));
     }
 
