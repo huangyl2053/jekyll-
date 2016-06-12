@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  * 滞納判定結果のクラスです。
  *
- * @reamsid_L DBD-5620-060 liangbc
+ * @reamsid_L DBD-3620-060 liangbc
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

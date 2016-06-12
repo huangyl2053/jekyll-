@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 滞納状況取得のビジネスクラスです。
  *
- * @reamsid_L DBD-5620-060 liangbc
+ * @reamsid_L DBD-3620-060 liangbc
  */
 public class TainoJokyoResearcher {
 
