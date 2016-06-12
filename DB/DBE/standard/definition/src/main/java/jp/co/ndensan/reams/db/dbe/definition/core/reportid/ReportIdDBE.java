@@ -40,9 +40,13 @@ public enum ReportIdDBE {
      */
     DBE515001(new ReportId("DBE515001_ShinsakaiKaisaiOshiraseTsuchi"), new RString("介護認定審査会開催のお知らせ")),
     /**
-     * 事務局用介護認定審査対象者一覧表の帳票ID。
+     * 事務局用介護認定審査対象者一覧表A3の帳票ID。
      */
-    DBE517011(new ReportId("DBE517011_ShinsakaishiryoA4"), new RString("事務局用介護認定審査対象者一覧表")),
+    DBE517001(new ReportId("DBE517001_ShinsakaishiryoA3"), new RString("事務局用介護認定審査対象者一覧表A3")),
+    /**
+     * 事務局用介護認定審査対象者一覧表A4の帳票ID。
+     */
+    DBE517011(new ReportId("DBE517011_ShinsakaishiryoA4"), new RString("事務局用介護認定審査対象者一覧表A4")),
     /**
      * 医療機関・主治医一覧表の帳票ID。
      */
