@@ -13,12 +13,12 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
 /**
  * DBUのエラーメッセージ定義列挙型です。
  *
- * @author N9606 漢那 憲作
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public enum DbuErrorMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    開始日不正(1, "?以降の日付を設定してください。"),
+    最大取得件数範囲外(2, "最大取得件数は1～999の範囲で設定してください。");
 
     private final Message message;
 
