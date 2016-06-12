@@ -50,7 +50,7 @@
      "layoutSubGyomuCode": "DBU",
      "layoutName": "DBU0510011",
      "layoutTitle": "境界層該当者管理",
-     "eventName": "処理完了",
+     "eventName": "complete",
      "destroy": false,
      "condition": ""
     }

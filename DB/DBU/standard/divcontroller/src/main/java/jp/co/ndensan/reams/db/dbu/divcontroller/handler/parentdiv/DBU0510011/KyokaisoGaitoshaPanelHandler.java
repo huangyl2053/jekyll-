@@ -525,8 +525,8 @@ public class KyokaisoGaitoshaPanelHandler {
             row.setGengakuJikofutanGetsugakuGokeigaku(new RString(nullToZero(境界層該当一覧.get減額自己負担月額合計額()).toString()));
             row.setRirekiNo(new RString(境界層該当一覧.get履歴番号().toString()));
             row.setLinkNo(new RString(境界層該当一覧.getリンク番号().toString()));
-            row.setShinseiHaishiYMD(new RString(境界層該当一覧.get申請_廃止年月日().toString()));
-            row.setKyokaisoShomeishoKofuYMD(new RString(境界層該当一覧.get境界層証明書交付年月日().toString()));
+            row.setShinseiHaishiYMD(日期転換(境界層該当一覧.get申請_廃止年月日()));
+            row.setKyokaisoShomeishoKofuYMD(日期転換(境界層該当一覧.get境界層証明書交付年月日()));
             row.setShokuhiKeigenGengakuJikofutanGetsugaku(new RString(
                     nullToZero(境界層該当一覧.get食費軽減_減額自己負担月額()).toString()));
             row.setSochiGaitoHigaito(境界層該当一覧.get措置該当_非該当区分());
@@ -547,15 +547,38 @@ public class KyokaisoGaitoshaPanelHandler {
         div.getDgKyokaisouGaitouItran().setDataSource(rowList);
     }
 
+    private RString 日期転換(FlexibleDate 日期) {
+        if (日期 != null && !日期.isEmpty()) {
+            return new RString(日期.toString());
+        }
+        return RString.EMPTY;
+    }
+
+    private void 日期転換(dgKyokaisouGaitouItran_Row row) {
+        if (!RString.isNullOrEmpty(row.getKyokaisoSochiKetteiDate())) {
+            div.getTxtKeteibi().setValue(new RDate(row.getKyokaisoSochiKetteiDate().toString()));
+        }
+        if (!RString.isNullOrEmpty(row.getKaishiDate())) {
+            div.getTxtKaishibi().setValue(new RDate(row.getKaishiDate().toString()));
+        }
+        if (!RString.isNullOrEmpty(row.getShuryoDate())) {
+            div.getTxtShuryobi().setValue(new RDate(row.getShuryoDate().toString()));
+        }
+        if (!RString.isNullOrEmpty(row.getShinseiHaishiYMD())) {
+            div.getTxtShiseiHaishibi().setValue(new RDate(row.getShinseiHaishiYMD().toString()));
+        }
+        if (!RString.isNullOrEmpty(row.getKyokaisoShomeishoKofuYMD())) {
+            div.getTxtShomeishoKoufuDate().setValue(new RDate(row.getKyokaisoShomeishoKofuYMD().toString()));
+        }
+    }
+
     private void set境界層該当明細(
             dgKyokaisouGaitouItran_Row row,
             List<KyokaisoHokenryo> 境界層保険料段階情報, RString 状態) {
         div.getDghokenryoNofu().getGridSetting().setIsShowSelectButtonColumn(true);
         div.getTxtShiseibi().setValue(new RDate(row.getShinseiDate().toString()));
         div.getRadSochiGaitouKubun().setSelectedKey(row.getSochiGaitoHigaito());
-        div.getTxtKeteibi().setValue(new RDate(row.getKyokaisoSochiKetteiDate().toString()));
-        div.getTxtKaishibi().setValue(new RDate(row.getKaishiDate().toString()));
-        div.getTxtShuryobi().setValue(new RDate(row.getShuryoDate().toString()));
+        日期転換(row);
         div.getRadKyufukakuGengakuKisaiKaijyo().setSelectedKey(row.getKyuhugakuGengakuKisaiKaijoFlag());
         div.getRadHyojunFutanGaku().setSelectedKey(row.getHyojunFutanGengakuGaitoFlag());
         div.getTxtHyojunFutanKeigenAtoFutanGaku().setValue(new Decimal(row.getHyojunFutanKeigengoFutangaku().toString()));
@@ -569,9 +592,7 @@ public class KyokaisoGaitoshaPanelHandler {
                 row.getKogakuServicehiJogengakuGengakugoJogengaku());
         div.getRadHokenryoNofuGengaku().setSelectedKey(row.getHokenryoNofuGengakuFlag());
         境界層保険料段階一覧(境界層保険料段階情報, new RDate(row.getShinseiDate().toString()), 状態);
-        div.getTxtShiseiHaishibi().setValue(new RDate(row.getShinseiHaishiYMD().toString()));
         div.getTxtHogoFuyoKonshoGengakuKingaku().setValue(new Decimal(row.getHogoFuyoKonkyoGengakuKingaku().toString()));
-        div.getTxtShomeishoKoufuDate().setValue(new RDate(row.getKyokaisoShomeishoKofuYMD().toString()));
         div.getTxtKyufugakuJikoFutanGetsugaku().setValue(
                 new Decimal(row.getKyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku().toString()));
         select居住費軽減負担限度額段階(row.getKyojuhiKeigenFutanGendogakuDankaiCode());
@@ -689,7 +710,8 @@ public class KyokaisoGaitoshaPanelHandler {
     private void select居住費軽減負担限度額段階(RString 居住費軽減負担限度額段階コード) {
         List<KeyValueDataSource> 居住費軽減負担限度額段階List = 居住費軽減負担限度額段階ドロップダウンリスト();
         for (KeyValueDataSource keyValue : 居住費軽減負担限度額段階List) {
-            if (居住費軽減負担限度額段階コード.equals(keyValue.getKey())) {
+            if (!RString.isNullOrEmpty(居住費軽減負担限度額段階コード)
+                    && 居住費軽減負担限度額段階コード.equals(keyValue.getKey())) {
                 div.getDdlKyojuhiGendogakuDankai().setSelectedKey(居住費軽減負担限度額段階コード);
                 div.getDdlKyojuhiGendogakuDankai().setSelectedValue(keyValue.getValue());
             }
@@ -699,7 +721,8 @@ public class KyokaisoGaitoshaPanelHandler {
     private void select食費軽減負担限度額段階(RString 食費軽減負担限度額段階コード) {
         List<KeyValueDataSource> 居住費軽減負担限度額段階List = 居住費軽減負担限度額段階ドロップダウンリスト();
         for (KeyValueDataSource keyValue : 居住費軽減負担限度額段階List) {
-            if (食費軽減負担限度額段階コード.equals(keyValue.getKey())) {
+            if (!RString.isNullOrEmpty(食費軽減負担限度額段階コード)
+                    && 食費軽減負担限度額段階コード.equals(keyValue.getKey())) {
                 div.getDdlShokuhiGakenFutanGendogakuDankai().setSelectedKey(食費軽減負担限度額段階コード);
                 div.getDdlShokuhiGakenFutanGendogakuDankai().setSelectedValue(keyValue.getValue());
             }
@@ -723,7 +746,8 @@ public class KyokaisoGaitoshaPanelHandler {
     private void select居住費軽減後居室種類(RString 居住費軽減後居室種類コード) {
         List<KeyValueDataSource> 居住費軽減後居室種類List = 居住費軽減後居室種類ドロップダウンリスト();
         for (KeyValueDataSource keyValue : 居住費軽減後居室種類List) {
-            if (居住費軽減後居室種類コード.equals(keyValue.getKey())) {
+            if (!RString.isNullOrEmpty(居住費軽減後居室種類コード)
+                    && 居住費軽減後居室種類コード.equals(keyValue.getKey())) {
                 div.getDdlKyoshituShurui().setSelectedKey(居住費軽減後居室種類コード);
                 div.getDdlKyoshituShurui().setSelectedValue(keyValue.getValue());
             }
@@ -733,7 +757,7 @@ public class KyokaisoGaitoshaPanelHandler {
     private void select読替後高額介護世帯上限額(RDate 申請日, RString 高額介護世帯上限額) {
         List<KeyValueDataSource> 高額介護世帯上限額List = 読替後高額介護世帯上限額ドロップダウンリスト(申請日);
         for (KeyValueDataSource keyValue : 高額介護世帯上限額List) {
-            if (高額介護世帯上限額.equals(keyValue.getKey())) {
+            if (!RString.isNullOrEmpty(高額介護世帯上限額) && 高額介護世帯上限額.equals(keyValue.getKey())) {
                 div.getDdlSeidaiJogengaku().setSelectedKey(高額介護世帯上限額);
                 div.getDdlSeidaiJogengaku().setSelectedValue(keyValue.getValue());
             }
@@ -793,7 +817,7 @@ public class KyokaisoGaitoshaPanelHandler {
     private RString select所得段階(RDate 申請日, RString 段階インデックス) {
         List<KeyValueDataSource> dataSourceList = 所得段階ドロップダウンリスト(申請日);
         for (KeyValueDataSource keyValue : dataSourceList) {
-            if (段階インデックス.equals(keyValue.getKey())) {
+            if (!RString.isNullOrEmpty(段階インデックス) && 段階インデックス.equals(keyValue.getKey())) {
                 return keyValue.getValue();
             }
         }
