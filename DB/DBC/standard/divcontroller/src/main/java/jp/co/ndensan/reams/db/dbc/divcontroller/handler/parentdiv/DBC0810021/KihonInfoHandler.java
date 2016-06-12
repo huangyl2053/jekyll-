@@ -149,21 +149,28 @@ public class KihonInfoHandler {
             FlexibleYearMonth サービス年月) {
 
         FlexibleDate date = new FlexibleDate(RDate.getNowDate().toDateString());
-        UzT0007CodeEntity code = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                new CodeShubetsu(計画作成区分), new Code(shokanKihon.get居宅サービス計画作成区分コード()), date);
-        if (code != null) {
-            List<KeyValueDataSource> keyValueDataSource1 = new ArrayList<>();
-            keyValueDataSource1.add(new KeyValueDataSource(KEY, code.getコード名称()));
-            div.getPanelKihon().getPanelKyotaku().getDdlKeikakuSakuseiKubun().setDataSource(keyValueDataSource1);
-            div.getPanelKihon().getPanelKyotaku().getDdlKeikakuSakuseiKubun().setSelectedKey(KEY);
+        if (shokanKihon.get居宅サービス計画作成区分コード() != null) {
+            UzT0007CodeEntity code = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
+                    new CodeShubetsu(計画作成区分), new Code(shokanKihon.get居宅サービス計画作成区分コード()), date);
+            if (code != null) {
+                List<KeyValueDataSource> keyValueDataSource1 = new ArrayList<>();
+                keyValueDataSource1.add(new KeyValueDataSource(KEY, code.getコード名称()));
+                div.getPanelKihon().getPanelKyotaku().getDdlKeikakuSakuseiKubun().setDataSource(keyValueDataSource1);
+                div.getPanelKihon().getPanelKyotaku().getDdlKeikakuSakuseiKubun().setSelectedKey(KEY);
+            }
         }
-        if (!shokanKihon.get旧措置入所者特例コード().isEmpty() && 有.equals(shokanKihon.get旧措置入所者特例コード())) {
+
+        if (shokanKihon.get旧措置入所者特例コード() != null
+                && !shokanKihon.get旧措置入所者特例コード().isEmpty()
+                && 有.equals(shokanKihon.get旧措置入所者特例コード())) {
             List<RString> sources = new ArrayList<>();
             sources.add(KEY);
             div.getPanelKihon().getPanelKyotaku().getChkKyusochi().setSelectedItemsByKey(sources);
         }
 
-        if (!shokanKihon.get居宅サービス計画作成区分コード().isEmpty() && !自己作成.equals(shokanKihon.get居宅サービス計画作成区分コード())) {
+        if (shokanKihon.get居宅サービス計画作成区分コード() != null
+                && !shokanKihon.get居宅サービス計画作成区分コード().isEmpty()
+                && !自己作成.equals(shokanKihon.get居宅サービス計画作成区分コード())) {
             if (shokanKihon.get事業者番号() != null) {
                 div.getPanelKihon().getPanelKyotaku().getTxtJigyosha().setValue(shokanKihon.get事業者番号().value());
             }
@@ -173,14 +180,21 @@ public class KihonInfoHandler {
                         .getJigyoshaName().value());
             }
         }
-        div.getPanelKihon().getPanelKyotaku().getTxtHokenKyufuritsu().setValue(shokanKihon.get保険給付率().value());
-        if (!shokanKihon.get開始年月日().isEmpty()) {
-            div.getPanelKihon().getPanelServiceKikan().getTxtServiceKikan().setFromValue(new RDate(shokanKihon.get開始年月日().toString()));
+        if (shokanKihon.get保険給付率() != null) {
+            div.getPanelKihon().getPanelKyotaku().getTxtHokenKyufuritsu().setValue(shokanKihon.get保険給付率().value());
         }
-        if (!shokanKihon.get中止年月日().isEmpty()) {
-            div.getPanelKihon().getPanelServiceKikan().getTxtServiceKikan().setToValue(new RDate(shokanKihon.get中止年月日().toString()));
+        if (shokanKihon.get開始年月日() != null && !shokanKihon.get開始年月日().isEmpty()) {
+            div.getPanelKihon().getPanelServiceKikan().getTxtServiceKikan().setFromValue(
+                    new RDate(shokanKihon.get開始年月日().toString()));
         }
+        if (shokanKihon.get中止年月日() != null && !shokanKihon.get中止年月日().isEmpty()) {
+            div.getPanelKihon().getPanelServiceKikan().getTxtServiceKikan().setToValue(
+                    new RDate(shokanKihon.get中止年月日().toString()));
+        }
+        set基本内容(shokanKihon, サービス年月, date);
+    }
 
+    private void set基本内容(ShokanKihon shokanKihon, FlexibleYearMonth サービス年月, FlexibleDate date) {
         List<RString> list = new ArrayList<>();
         list.add(STR_2171);
         list.add(STR_2172);
@@ -200,7 +214,7 @@ public class KihonInfoHandler {
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class);
         if (平成２１年４月.isBeforeOrEquals(サービス年月) && list.contains(様式番号)) {
             div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setVisible(false);
-        } else {
+        } else if (shokanKihon.get中止理由_入所_院前の状況コード() != null) {
             UzT0007CodeEntity code4 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
                     new CodeShubetsu(中止理由), new Code(shokanKihon.get中止理由_入所_院前の状況コード()), date);
             List<KeyValueDataSource> keyValueDataSource2 = new ArrayList<>();
@@ -208,13 +222,13 @@ public class KihonInfoHandler {
             div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setDataSource(keyValueDataSource2);
             div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setSelectedKey(KEY);
         }
-        if (!shokanKihon.get入所_院年月日().isEmpty()) {
+        if (shokanKihon.get入所_院年月日() != null && !shokanKihon.get入所_院年月日().isEmpty()) {
             div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().setValue(new RDate(
                     shokanKihon.get入所_院年月日().toString()));
         }
         div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoJitsuNissu().setValue(
                 new Decimal(shokanKihon.get入所_院実日数()));
-        if (!shokanKihon.get退所_院年月日().isEmpty()) {
+        if (shokanKihon.get退所_院年月日() != null && !shokanKihon.get退所_院年月日().isEmpty()) {
             div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtTaishoYMD().setValue(new RDate(
                     shokanKihon.get退所_院年月日().toString()));
         }
@@ -223,7 +237,7 @@ public class KihonInfoHandler {
                 || (平成２１年４月.isBeforeOrEquals(サービス年月)
                 && !list.contains(様式番号))) {
             div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setVisible(false);
-        } else {
+        } else if (shokanKihon.get中止理由_入所_院前の状況コード() != null) {
             UzT0007CodeEntity code3 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
                     new CodeShubetsu(入所院前の状況), new Code(shokanKihon.get中止理由_入所_院前の状況コード()), date);
             List<KeyValueDataSource> keyValueDataSource3 = new ArrayList<>();
@@ -231,11 +245,13 @@ public class KihonInfoHandler {
             div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setDataSource(keyValueDataSource3);
             div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setSelectedKey(KEY);
         }
-        UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                new CodeShubetsu(退所院後の状況), new Code(shokanKihon.get退所_院後の状態コード()), date);
-        List<KeyValueDataSource> keyValueDataSource4 = new ArrayList<>();
-        keyValueDataSource4.add(new KeyValueDataSource(KEY, code2.getコード名称()));
-        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlTaishoMaeState().setDataSource(keyValueDataSource4);
-        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlTaishoMaeState().setSelectedKey(KEY);
+        if (shokanKihon.get退所_院後の状態コード() != null) {
+            UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
+                    new CodeShubetsu(退所院後の状況), new Code(shokanKihon.get退所_院後の状態コード()), date);
+            List<KeyValueDataSource> keyValueDataSource4 = new ArrayList<>();
+            keyValueDataSource4.add(new KeyValueDataSource(KEY, code2.getコード名称()));
+            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlTaishoMaeState().setDataSource(keyValueDataSource4);
+            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlTaishoMaeState().setSelectedKey(KEY);
+        }
     }
 }
