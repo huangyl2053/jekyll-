@@ -32,6 +32,10 @@ public enum ReportIdDBE {
      */
     DBE517152(new ReportId("DBE517151_Shujiiikensho1A4"), new RString("委員用主治医意見書A4")),
     /**
+     * 事務局用予備判定記入表の帳票ID。
+     */
+    DBE517002(new ReportId("DBE517002_JimukyokuyoYobihanteiKinyuhyo"), new RString("事務局用予備判定記入表")),
+    /**
      * 介護認定審査会開催のお知らせの帳票ID。
      */
     DBE515001(new ReportId("DBE515001_ShinsakaiKaisaiOshiraseTsuchi"), new RString("介護認定審査会開催のお知らせ")),
