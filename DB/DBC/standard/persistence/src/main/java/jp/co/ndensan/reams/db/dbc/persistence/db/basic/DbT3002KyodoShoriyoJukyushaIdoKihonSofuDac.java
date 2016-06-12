@@ -36,7 +36,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 共同処理用受給者異動基本送付のデータアクセスクラスです。
+ * 共同処理用受給者異動基本送付のデータアクセスクラスです。、
+ *
+ * @reamsid_L DBC-4390-020 xupeng
  */
 public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuDac implements ISaveable<DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity> {
 

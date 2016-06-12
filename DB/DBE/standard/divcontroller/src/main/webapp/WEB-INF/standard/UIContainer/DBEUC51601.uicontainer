@@ -75,7 +75,7 @@
      "layoutName": "DBE5100002",
      "layoutTitle": "審査会自動割付",
      "eventName": "審査会一覧へ戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE5100001",

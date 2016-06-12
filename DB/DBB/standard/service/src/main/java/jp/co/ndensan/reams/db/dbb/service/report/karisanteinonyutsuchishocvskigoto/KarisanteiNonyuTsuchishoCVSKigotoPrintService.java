@@ -10,8 +10,10 @@ import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskigoto.KarisanteiNonyuTsuchishoCVSKigotoProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskigoto.KarisanteiNonyuTsuchishoCVSKigotoRenchoProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskigoto.KarisanteiNonyuTsuchishoCVSKigotoReport;
+import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskigoto.KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvskigoto.KarisanteiNonyuTsuchishoCVSKigotoSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvskigoto.KarisanteiNonyuTsuchishoCVSMultiRenchoCoverSource;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
@@ -99,13 +101,13 @@ public class KarisanteiNonyuTsuchishoCVSKigotoPrintService {
     private SourceDataCollection print全てページDBB100029DevidedByPage(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報) {
         KarisanteiNonyuTsuchishoCVSKigotoRenchoProperty property = new KarisanteiNonyuTsuchishoCVSKigotoRenchoProperty();
         try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<KarisanteiNonyuTsuchishoCVSKigotoSource> assembler = createAssembler(property, reportManager)) {
-                ReportSourceWriter<KarisanteiNonyuTsuchishoCVSKigotoSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            try (ReportAssembler<KarisanteiNonyuTsuchishoCVSMultiRenchoCoverSource> assembler = createAssembler(property, reportManager)) {
+                ReportSourceWriter<KarisanteiNonyuTsuchishoCVSMultiRenchoCoverSource> reportSourceWriter = new ReportSourceWriter(assembler);
 
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 List<INonyuTsuchisho> reportList
-                        = KarisanteiNonyuTsuchishoCVSKigotoReport.createFrom(仮算定納入通知書情報, ninshoshaSource, true).devidedByPage();
+                        = KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport.createFrom(仮算定納入通知書情報, ninshoshaSource).devidedByPage();
                 for (INonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
@@ -123,7 +125,7 @@ public class KarisanteiNonyuTsuchishoCVSKigotoPrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 List<INonyuTsuchisho> reportList
-                        = KarisanteiNonyuTsuchishoCVSKigotoReport.createFrom(仮算定納入通知書情報, ninshoshaSource, false).devidedByPage();
+                        = KarisanteiNonyuTsuchishoCVSKigotoReport.createFrom(仮算定納入通知書情報, ninshoshaSource).devidedByPage();
                 for (INonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
@@ -134,13 +136,13 @@ public class KarisanteiNonyuTsuchishoCVSKigotoPrintService {
 
     private void print全てページDBB100029(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, ReportManager reportManager) {
         KarisanteiNonyuTsuchishoCVSKigotoRenchoProperty property = new KarisanteiNonyuTsuchishoCVSKigotoRenchoProperty();
-        try (ReportAssembler<KarisanteiNonyuTsuchishoCVSKigotoSource> assembler = createAssembler(property, reportManager)) {
-            ReportSourceWriter<KarisanteiNonyuTsuchishoCVSKigotoSource> reportSourceWriter = new ReportSourceWriter(assembler);
+        try (ReportAssembler<KarisanteiNonyuTsuchishoCVSMultiRenchoCoverSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KarisanteiNonyuTsuchishoCVSMultiRenchoCoverSource> reportSourceWriter = new ReportSourceWriter(assembler);
 
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-            KarisanteiNonyuTsuchishoCVSKigotoReport report
-                    = KarisanteiNonyuTsuchishoCVSKigotoReport.createFrom(仮算定納入通知書情報, ninshoshaSource, true);
+            KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport report
+                    = KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport.createFrom(仮算定納入通知書情報, ninshoshaSource);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -153,7 +155,7 @@ public class KarisanteiNonyuTsuchishoCVSKigotoPrintService {
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             KarisanteiNonyuTsuchishoCVSKigotoReport report
-                    = KarisanteiNonyuTsuchishoCVSKigotoReport.createFrom(仮算定納入通知書情報, ninshoshaSource, false);
+                    = KarisanteiNonyuTsuchishoCVSKigotoReport.createFrom(仮算定納入通知書情報, ninshoshaSource);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -167,7 +169,7 @@ public class KarisanteiNonyuTsuchishoCVSKigotoPrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 KarisanteiNonyuTsuchishoCVSKigotoReport report
-                        = KarisanteiNonyuTsuchishoCVSKigotoReport.createFrom(仮算定納入通知書情報, ninshoshaSource, false);
+                        = KarisanteiNonyuTsuchishoCVSKigotoReport.createFrom(仮算定納入通知書情報, ninshoshaSource);
                 report.writeBy(reportSourceWriter);
             }
             return reportManager.publish();
@@ -177,13 +179,13 @@ public class KarisanteiNonyuTsuchishoCVSKigotoPrintService {
     private SourceDataCollection print全てページDBB100029(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報) {
         KarisanteiNonyuTsuchishoCVSKigotoRenchoProperty property = new KarisanteiNonyuTsuchishoCVSKigotoRenchoProperty();
         try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<KarisanteiNonyuTsuchishoCVSKigotoSource> assembler = createAssembler(property, reportManager)) {
-                ReportSourceWriter<KarisanteiNonyuTsuchishoCVSKigotoSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            try (ReportAssembler<KarisanteiNonyuTsuchishoCVSMultiRenchoCoverSource> assembler = createAssembler(property, reportManager)) {
+                ReportSourceWriter<KarisanteiNonyuTsuchishoCVSMultiRenchoCoverSource> reportSourceWriter = new ReportSourceWriter(assembler);
 
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-                KarisanteiNonyuTsuchishoCVSKigotoReport report
-                        = KarisanteiNonyuTsuchishoCVSKigotoReport.createFrom(仮算定納入通知書情報, ninshoshaSource, true);
+                KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport report
+                        = KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport.createFrom(仮算定納入通知書情報, ninshoshaSource);
                 report.writeBy(reportSourceWriter);
             }
             return reportManager.publish();

@@ -40,7 +40,6 @@ public class KarisanteiNonyuTsuchishoCVSKigotoEditor implements IKarisanteiNonyu
     private final NinshoshaSource ninshoshaSource;
     private final EditedAtesaki 編集後宛先;
     private static final int INT6 = 6;
-    private final boolean is連帳;
 
     /**
      * インスタンスを生成します。
@@ -49,13 +48,12 @@ public class KarisanteiNonyuTsuchishoCVSKigotoEditor implements IKarisanteiNonyu
      * @param ninshoshaSource 認証者情報
      * @param 納入通知書期情報 納入通知書期情報
      * @param 連番 連番
-     * @param is連帳 is連帳
      */
     protected KarisanteiNonyuTsuchishoCVSKigotoEditor(
             KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報,
             NinshoshaSource ninshoshaSource,
             NonyuTsuchiShoKiJoho 納入通知書期情報,
-            int 連番, boolean is連帳) {
+            int 連番) {
         this.仮算定納入通知書情報 = 仮算定納入通知書情報;
         this.編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報.get編集後仮算定通知書共通情報()
                 ? new EditedKariSanteiTsuchiShoKyotsu() : 仮算定納入通知書情報.get編集後仮算定通知書共通情報();
@@ -63,7 +61,6 @@ public class KarisanteiNonyuTsuchishoCVSKigotoEditor implements IKarisanteiNonyu
         this.連番 = 連番;
         this.ninshoshaSource = ninshoshaSource;
         this.編集後宛先 = 編集後仮算定通知書共通情報.get編集後宛先();
-        this.is連帳 = is連帳;
     }
 
     @Override
@@ -116,11 +113,6 @@ public class KarisanteiNonyuTsuchishoCVSKigotoEditor implements IKarisanteiNonyu
         //TODO 納入通知書期情報.コンビニ時支払期限表記
         if (納入通知書期情報.getコンビニ支払期限() != null) {
             source.cvsToriatsukaikigen = 納入通知書期情報.getコンビニ支払期限().toDateString();
-        }
-        if (is連帳) {
-            source.funyuFukanBango = new RString("F-").concat(new RString(連番).padLeft("0", INT6)).concat("-3");
-        } else {
-            source.funyuFukanBango = RString.EMPTY;
         }
     }
 

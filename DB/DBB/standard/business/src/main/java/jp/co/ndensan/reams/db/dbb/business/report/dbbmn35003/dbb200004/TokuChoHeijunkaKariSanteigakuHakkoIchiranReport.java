@@ -44,11 +44,6 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReport
     private static final int INDEX_6 = 6;
     private static final int INDEX_8 = 8;
 
-    private final RString 出力順１;
-    private final RString 出力順２;
-    private final RString 出力順３;
-    private final RString 出力順４;
-    private final RString 出力順５;
     private final RDateTime 帳票作成日時;
 
     /**
@@ -56,23 +51,12 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReport
      *
      * @param editedDataList 編集後仮算定通知書共通情報entityのリスト
      * @param outputOrder outputOrder
-     * @param 出力順１ 出力順１
-     * @param 出力順２ 出力順２
-     * @param 出力順３ 出力順３
-     * @param 出力順４ 出力順４
-     * @param 出力順５ 出力順５
      * @param 帳票作成日時 帳票作成日時
      */
     public TokuChoHeijunkaKariSanteigakuHakkoIchiranReport(List<EditedKariSanteiTsuchiShoKyotsu> editedDataList,
-            IOutputOrder outputOrder,
-            RString 出力順１, RString 出力順２, RString 出力順３, RString 出力順４, RString 出力順５, RDateTime 帳票作成日時) {
+            IOutputOrder outputOrder, RDateTime 帳票作成日時) {
         this.editedDataList = editedDataList != null ? editedDataList : new ArrayList<EditedKariSanteiTsuchiShoKyotsu>();
         this.outputOrder = outputOrder;
-        this.出力順１ = 出力順１;
-        this.出力順２ = 出力順２;
-        this.出力順３ = 出力順３;
-        this.出力順４ = 出力順４;
-        this.出力順５ = 出力順５;
         this.帳票作成日時 = 帳票作成日時;
     }
 
@@ -99,6 +83,11 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReport
         RString 改頁３ = RString.EMPTY;
         RString 改頁４ = RString.EMPTY;
         RString 改頁５ = RString.EMPTY;
+        RString 出力順１ = RString.EMPTY;
+        RString 出力順２ = RString.EMPTY;
+        RString 出力順３ = RString.EMPTY;
+        RString 出力順４ = RString.EMPTY;
+        RString 出力順５ = RString.EMPTY;
 
         List<ISetSortItem> list = outputOrder.get設定項目リスト();
         if (list == null) {
@@ -119,6 +108,22 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReport
         }
         if (list.size() > INDEX_4 && list.get(INDEX_4).is改頁項目()) {
             改頁５ = list.get(INDEX_4).get項目名();
+        }
+
+        if (list.size() > INDEX_0) {
+            出力順１ = list.get(INDEX_0).get項目名();
+        }
+        if (list.size() > INDEX_1) {
+            出力順２ = list.get(INDEX_1).get項目名();
+        }
+        if (list.size() > INDEX_2) {
+            出力順３ = list.get(INDEX_2).get項目名();
+        }
+        if (list.size() > INDEX_3) {
+            出力順４ = list.get(INDEX_3).get項目名();
+        }
+        if (list.size() > INDEX_4) {
+            出力順５ = list.get(INDEX_4).get項目名();
         }
 
         RTime time = 帳票作成日時.getTime();

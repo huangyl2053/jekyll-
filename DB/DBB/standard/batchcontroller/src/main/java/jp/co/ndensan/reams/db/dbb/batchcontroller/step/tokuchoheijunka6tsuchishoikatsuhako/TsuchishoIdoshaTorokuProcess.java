@@ -27,7 +27,7 @@ public class TsuchishoIdoshaTorokuProcess extends SimpleBatchProcessBase {
 
             param.set帳票作成日時(parameter.get帳票作成日時());
             param.set出力順ID(出力帳票entity.get出力順ID());
-            param.set出力対象区分(parameter.get出力対象区分());
+            param.set出力対象区分(Integer.valueOf(parameter.get出力対象区分().toString()));
             param.set帳票ID(出力帳票entity.get帳票ID());
 
             service.insTsuchishoHakkogoIdosha(param);
