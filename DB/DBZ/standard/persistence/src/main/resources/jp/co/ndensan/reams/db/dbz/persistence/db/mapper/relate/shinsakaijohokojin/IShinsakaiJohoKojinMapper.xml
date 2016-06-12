@@ -73,6 +73,7 @@ and open the template in the editor.
         INNER JOIN rgdb."DbT5593GogitaiWariateIinJoho" AS D
             ON C."gogitaiNo" = D."gogitaiNo"
             AND C."gogitaiYukoKikanKaishiYMD" = D."gogitaiYukoKikanKaishiYMD"
+            AND C."gogitaiYukoKikanShuryoYMD" = D."gogitaiYukoKikanShuryoYMD"
             AND B."shinsakaiIinCode" = D."shinsakaiIinCode"
             AND D."substituteFlag" = False
         WHERE
@@ -102,6 +103,7 @@ and open the template in the editor.
         INNER JOIN rgdb."DbT5593GogitaiWariateIinJoho" AS D
             ON C."gogitaiNo" = D."gogitaiNo"
             AND C."gogitaiYukoKikanKaishiYMD" = D."gogitaiYukoKikanKaishiYMD"
+            AND C."gogitaiYukoKikanShuryoYMD" = D."gogitaiYukoKikanShuryoYMD"
             AND B."shinsakaiIinCode" = D."shinsakaiIinCode"
             AND D."substituteFlag" = True
         WHERE
