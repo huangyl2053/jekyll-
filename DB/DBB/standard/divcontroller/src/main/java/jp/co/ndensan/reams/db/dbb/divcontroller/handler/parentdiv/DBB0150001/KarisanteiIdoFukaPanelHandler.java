@@ -566,7 +566,7 @@ public class KarisanteiIdoFukaPanelHandler {
                 納入通知書Flag = true;
             }
         }
-        KarisanteiIdoFukaPanelHandlerValidationHandler validation = new KarisanteiIdoFukaPanelHandlerValidationHandler(div);
+        KarisanteiIdoFukaPanelValidationHandler validation = new KarisanteiIdoFukaPanelValidationHandler(div);
         ValidationMessageControlPairs pairs = validation.必須チェックValidate(
                 仮算定額変更通知書Flag, 納入通知書Flag, 特徴開始通知書Flag);
         return pairs;

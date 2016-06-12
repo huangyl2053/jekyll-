@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0890-010 wangkanglei
  */
-public enum KarisanteiIdoFukaPanelHandlerSpec implements IPredicate<KarisanteiIdoFukaPanelDiv> {
+public enum KarisanteiIdoFukaPanelSpec implements IPredicate<KarisanteiIdoFukaPanelDiv> {
 
     /**
      * 仮算定額変更通知書の発行日
