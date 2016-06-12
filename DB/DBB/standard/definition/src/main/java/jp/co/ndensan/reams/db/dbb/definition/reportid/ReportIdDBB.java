@@ -395,6 +395,10 @@ public enum ReportIdDBB {
      */
     DBB200023(new ReportId("DBB200023_TokubetsuChoshuIraikingakuMeisaiIchiran"), new RString("特別徴収依頼金額明細一覧表")),
     /**
+     * 所得照会票発行一覧表の帳票ID
+     */
+    DBB200024(new ReportId("DBB200024_ShotokushokaihyoHakkoIchiran"), new RString("所得照会票発行一覧表")),
+    /**
      *
      * 本算定異動（過年度）結果一覧表の帳票ID
      */
