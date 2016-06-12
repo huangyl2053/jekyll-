@@ -86,7 +86,7 @@ public class DBU0130011Main {
      * @return ResponseData<DBU0130011MainDiv>
      */
     public ResponseData<DBU0130011MainDiv> onClick_btnBack(DBU0130011MainDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBU0130011TransitionEventName.対象者特定).respond();
+        return ResponseData.of(div).forwardWithEventName(DBU0130011TransitionEventName.対象者一覧に戻る).respond();
     }
 
     private DBU0130011MainHandler createHandler(DBU0130011MainDiv div) {
