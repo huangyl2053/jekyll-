@@ -8,12 +8,17 @@ package jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7055GappeiJohoDac;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.GappeiCityJyoho;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.KouikiGappeiJyoho;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.GappeiCityJyohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.KouikiGappeiJyohoRelateEntity;
@@ -40,8 +45,11 @@ public class GappeiCityJohoBFinder {
 
     private static final RString 広域 = new RString("1");
     private static final RString 単一 = new RString("2");
+    private static final RString 合併区分_なし = new RString("0");
     private static final RString 合併区分_あり = new RString("1");
     private static final RString 表示有無区分 = new RString("表示有無区分");
+    private static final RString RS_合併市町村情報検索キー = new RString("合併市町村情報検索キー");
+    private static final RString RS1 = new RString("1");
     private final MapperProvider mapperProvider;
     private final DbT7055GappeiJohoDac dac;
 
@@ -312,5 +320,101 @@ public class GappeiCityJohoBFinder {
             kouikiGappeiJyohoList.add(new KouikiGappeiJyoho(entity));
         }
         return SearchResult.of(kouikiGappeiJyohoList, 0, false);
+    }
+
+    /**
+     * start被保険者番号の変換対象を特定するための基準日を取得します。
+     *
+     * @param gyomubunrui GyomuBunrui
+     * @return FlexibleDate
+     */
+    public FlexibleDate getHihokenshaBangoHenkanKijunbi(GyomuBunrui gyomubunrui) {
+        ShichosonSecurityJoho shichosonsecurityjoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(gyomubunrui);
+        if (shichosonsecurityjoho == null) {
+            return null;
+        }
+        DonyuKeitaiCode donyukeitaicode = shichosonsecurityjoho.get導入形態コード();
+        RDate nowDate = RDate.getNowDate();
+        if (donyukeitaicode.is単一()) {
+            if (合併区分_なし.equals(DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, nowDate, SubGyomuCode.DBU介護統計報告))) {
+                return FlexibleDate.EMPTY;
+            } else if (合併区分_あり.equals(DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, nowDate, SubGyomuCode.DBU介護統計報告))) {
+                GappeiCityJohoBFinder finder = new GappeiCityJohoBFinder();
+                SearchResult<GappeiCityJyoho> result = finder.getSaishintannitsugappeijoho(RS1);
+                return result == null || result.records() == null || result.records().isEmpty() ? null : result.records().get(0).get国保連データ連携開始年月日();
+            }
+        } else {
+            return new FlexibleDate(DbBusinessConfig.get(ConfigNameDBU.保険者発足情報_広域保険者_合併保険者_発足日, nowDate, SubGyomuCode.DBU介護統計報告));
+        }
+        return FlexibleDate.EMPTY;
+    }
+
+    /**
+     * 導入形態コード渡して、被保険者番号の変換対象を特定するための基準日を取得します。
+     *
+     * @param gyomubunrui GyomuBunrui
+     * @param donyukeitaicode DonyukeitaiCode
+     * @return FlexibleDate
+     */
+    public FlexibleDate getHihokenshaBangoHenkanKijunbi(GyomuBunrui gyomubunrui, DonyuKeitaiCode donyukeitaicode) {
+        RDate nowDate = RDate.getNowDate();
+        if (donyukeitaicode.is単一()) {
+            if (合併区分_なし.equals(DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, nowDate, SubGyomuCode.DBU介護統計報告))) {
+                return FlexibleDate.EMPTY;
+            } else if (合併区分_あり.equals(DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, nowDate, SubGyomuCode.DBU介護統計報告))) {
+                GappeiCityJohoBFinder finder = new GappeiCityJohoBFinder();
+                SearchResult<GappeiCityJyoho> result = finder.getSaishintannitsugappeijoho(RS1);
+                return result == null || result.records() == null || result.records().isEmpty() ? null : result.records().get(0).get国保連データ連携開始年月日();
+            }
+        } else {
+            return new FlexibleDate(DbBusinessConfig.get(ConfigNameDBU.保険者発足情報_広域保険者_合併保険者_発足日, nowDate, SubGyomuCode.DBU介護統計報告));
+        }
+        return FlexibleDate.EMPTY;
+    }
+
+    /**
+     * 合併市町村情報検索キーより合併市町村情報を検索して、全合併市町村情報を取得します。
+     *
+     * @param 表示有無区分 RString
+     * @param 合併市町村情報検索キー GappeiJyohoSpecificParameter
+     * @param gyomubunrui GyomuBunrui
+     * @return SearchResult<GappeiCityJyoho>
+     */
+    public SearchResult<GappeiCityJyoho> getGappeijohokensaku(RString 表示有無区分, GappeiJyohoSpecificParameter 合併市町村情報検索キー, GyomuBunrui gyomubunrui) {
+        if (合併市町村情報検索キー == null) {
+            throw new ApplicationException(DbzErrorMessages.必須パラメータ未設定.getMessage().replace(RS_合併市町村情報検索キー.toString()));
+        }
+        ShichosonSecurityJoho shichosonsecurityjoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(gyomubunrui);
+        if (shichosonsecurityjoho == null) {
+            return null;
+        }
+        DonyuKeitaiCode donyukeitaicode = shichosonsecurityjoho.get導入形態コード();
+        GappeiCityJohoBFinder finder = new GappeiCityJohoBFinder();
+        if (donyukeitaicode.is単一()) {
+            return finder.getTannitsugappeijohokensaku(表示有無区分, 合併市町村情報検索キー.getShichosonCode(), 合併市町村情報検索キー.getHokenshaNo());
+        } else {
+            return finder.getKouikigappeijohokensaku(表示有無区分, 合併市町村情報検索キー.getShichosonCode(), 合併市町村情報検索キー.getHokenshaNo());
+        }
+    }
+
+    /**
+     * 最新の合併市町村情報を取得します。
+     *
+     * @param 表示有無区分 RString
+     * @param gyomubunrui GyomuBunrui
+     * @return SearchResult<GappeiCityJyoho>
+     */
+    public SearchResult<GappeiCityJyoho> getSaishingappeijoho(RString 表示有無区分, GyomuBunrui gyomubunrui) {
+        ShichosonSecurityJoho shichosonsecurityjoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(gyomubunrui);
+        if (shichosonsecurityjoho == null) {
+            return null;
+        }
+        DonyuKeitaiCode donyukeitaicode = shichosonsecurityjoho.get導入形態コード();
+        GappeiCityJohoBFinder finder = new GappeiCityJohoBFinder();
+        if (donyukeitaicode.is単一()) {
+            return finder.getSaishintannitsugappeijoho(表示有無区分);
+        } else {
+            return finder.getKouikigappeijohokennsaku(表示有無区分);
+        }
     }
 }
