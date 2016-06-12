@@ -43,48 +43,6 @@ public class KogakuServicehiPanelValidator {
     }
 
     /**
-     * 提供年月チェックです。
-     *
-     * @return エラーメッセージ
-     */
-    public IValidationMessages validate提供年月() {
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div)
-                .ifNot(KogakuServicehiPanelSpec.提供年月チェック)
-                .thenAdd(KogakuServicehiPanelValidationMessage.提供年月チェック)
-                .messages());
-        return messages;
-    }
-
-    /**
-     * 申請年月チェックです。
-     *
-     * @return エラーメッセージ
-     */
-    public IValidationMessages validate申請年月() {
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div)
-                .ifNot(KogakuServicehiPanelSpec.申請年月チェック)
-                .thenAdd(KogakuServicehiPanelValidationMessage.申請年月チェック)
-                .messages());
-        return messages;
-    }
-
-    /**
-     * 決定年月チェックです。
-     *
-     * @return エラーメッセージ
-     */
-    public IValidationMessages validate決定年月() {
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div)
-                .ifNot(KogakuServicehiPanelSpec.決定年月チェック)
-                .thenAdd(KogakuServicehiPanelValidationMessage.決定年月チェック)
-                .messages());
-        return messages;
-    }
-
-    /**
      * 年月を指定入力チェックです。
      *
      * @return エラーメッセージ
