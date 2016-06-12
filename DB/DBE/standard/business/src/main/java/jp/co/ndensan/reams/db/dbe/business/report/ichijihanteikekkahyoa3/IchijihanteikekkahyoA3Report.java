@@ -172,8 +172,8 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
     private IchijihanteikekkahyoA3Body getBody3() {
         IchijihanteikekkahyoA3Body body = new IchijihanteikekkahyoA3Body();
         body.setYobo_listYobokyufu_1(item.get介護予防訪問看護());
-        body.setKaigo_listKaigokyufu1_1(item.get介護予防認知症対応型共同生活介護_グループホーム());
-        body.setYobo_listYobokyufu1_1(item.get訪問看護());
+        body.setYobo_listYobokyufu1_1(item.get介護予防認知症対応型共同生活介護_グループホーム());
+        body.setKaigo_listKaigokyufu_1(item.get訪問看護());
         body.setKaigo_listKaigokyufu1_1(item.get認知症対応型共同生活介護_グループホーム());
         body.setListFuseigo1_1(item.get結果比較_麻痺_左_下肢());
         body.setListFuseigo5_1(item.get結果比較_日常の意思決定());

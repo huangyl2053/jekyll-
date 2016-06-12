@@ -68,6 +68,7 @@ public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4R
         bodyList.add(getBody18());
         bodyList.add(getBody19());
         bodyList.add(getBody20());
+        bodyList.add(getBody21());
         return bodyList;
     }
 
@@ -76,9 +77,7 @@ public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4R
         body.setListNichijoseikatsujiritsudo_1(item.get障害高齢者自立度());
         body.setListtokki8_1(item.get障害高齢者自立度_ある());
         body.setYobo_listKaigokyufu_1(item.get介護予防訪問介護_ﾎｰﾑﾍﾙﾌﾟ_訪問型ｻｰﾋﾞｽ());
-        body.setYobo_listKaigokyufu_1(item.get介護予防認知症対応型通所介護());
         body.setKaigo_listKaigokyufu_1(item.get訪問介護_ホームヘルプサービス());
-        body.setKaigo_listKaigokyufu_1(item.get認知症対応型通所介護());
         body.setListtokki1_1(item.get調査結果_麻痺_左_上肢_ある());
         body.setListIchigun_1(item.get調査結果_麻痺_左_上肢());
         body.setListIchigun_2(get段階改善1(item.get段階改善_麻痺_左_上肢()));
@@ -117,9 +116,7 @@ public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4R
         body.setListNichijoseikatsujiritsudo_1(item.get認知症高齢者自立度());
         body.setListtokki8_1(item.get認知症高齢者自立度_ある());
         body.setYobo_listKaigokyufu_1(item.get介護予防訪問入浴介護());
-        body.setYobo_listKaigokyufu_1(item.get介護予防小規模多機能型居宅介護());
         body.setKaigo_listKaigokyufu_1(item.get訪問入浴介護());
-        body.setKaigo_listKaigokyufu_1(item.get小規模多機能型居宅介護());
         body.setListtokki1_1(item.get調査結果_麻痺_右_上肢_ある());
         body.setListIchigun_1(item.get調査結果_麻痺_右_上肢());
         body.setListIchigun_2(get段階改善1(item.get段階改善_麻痺_右_上肢()));
@@ -156,9 +153,8 @@ public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4R
     private IchijihanteikekkahyoA4Body getBody3() {
         IchijihanteikekkahyoA4Body body = new IchijihanteikekkahyoA4Body();
         body.setYobo_listKaigokyufu_1(item.get介護予防訪問看護());
-        body.setKaigo_listKaigokyufu_1(item.get介護予防認知症対応型共同生活介護_グループホーム());
-        body.setYobo_listKaigokyufu_1(item.get訪問看護());
-        body.setKaigo_listKaigokyufu_1(item.get認知症対応型共同生活介護_グループホーム());
+        body.setKaigo_listKaigokyufu_1(item.get訪問看護());
+
         body.setListtokki1_1(item.get調査結果_麻痺_左_下肢_ある());
         body.setListIchigun_1(item.get調査結果_麻痺_左_下肢());
         body.setListIchigun_2(get段階改善1(item.get段階改善_麻痺_左_下肢()));
@@ -196,7 +192,7 @@ public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4R
         IchijihanteikekkahyoA4Body body = new IchijihanteikekkahyoA4Body();
         body.setYobo_listKaigokyufu_1(item.get介護予防訪問リハビリテーション());
         body.setKaigo_listKaigokyufu_1(item.get訪問リハビリテーション());
-        body.setKaigo_listKaigokyufu_1(item.get地域密着型特定施設入居者生活介護());
+
         body.setListtokki1_1(item.get調査結果_麻痺_右_下肢_ある());
         body.setListIchigun_1(item.get調査結果_麻痺_右_下肢());
         body.setListIchigun_2(get段階改善1(item.get段階改善_麻痺_右_下肢()));
@@ -234,7 +230,7 @@ public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4R
         IchijihanteikekkahyoA4Body body = new IchijihanteikekkahyoA4Body();
         body.setYobo_listKaigokyufu_1(item.get介護予防居宅療養管理指導());
         body.setKaigo_listKaigokyufu_1(item.get居宅療養管理指導());
-        body.setKaigo_listKaigokyufu_1(item.get地域密着型介護老人福祉施設入所者生活介護());
+
         body.setListtokki1_1(item.get調査結果_麻痺_その他_ある());
         body.setListIchigun_1(item.get調査結果_麻痺_その他());
         body.setListIchigun_2(get段階改善1(item.get段階改善_麻痺_その他()));
@@ -272,7 +268,7 @@ public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4R
         IchijihanteikekkahyoA4Body body = new IchijihanteikekkahyoA4Body();
         body.setYobo_listKaigokyufu_1(item.get介護予防通所介護_ﾃﾞｲｻｰﾋﾞｽ_通所型ｻｰﾋﾞｽ());
         body.setKaigo_listKaigokyufu_1(item.get通所介護_デイサービス());
-        body.setKaigo_listKaigokyufu_1(item.get定期巡回_随時対応型訪問介護看護());
+
         body.setListtokki1_1(item.get調査結果_拘縮_肩関節_ある());
         body.setListIchigun_1(item.get調査結果_拘縮_肩関節());
         body.setListIchigun_2(get段階改善1(item.get段階改善_拘縮_肩関節()));
@@ -310,7 +306,7 @@ public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4R
         IchijihanteikekkahyoA4Body body = new IchijihanteikekkahyoA4Body();
         body.setYobo_listKaigokyufu_1(item.get介護予防通所リハビリテーション());
         body.setKaigo_listKaigokyufu_1(item.get通所リハビリテーション());
-        body.setKaigo_listKaigokyufu_1(item.get看護小規模多機能型居宅介護());
+
         body.setListtokki1_1(item.get調査結果_拘縮_股関節_ある());
         body.setListIchigun_1(item.get調査結果_拘縮_股関節());
         body.setListIchigun_2(get段階改善1(item.get段階改善_拘縮_股関節()));
@@ -473,6 +469,7 @@ public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4R
 
     private IchijihanteikekkahyoA4Body getBody14() {
         IchijihanteikekkahyoA4Body body = new IchijihanteikekkahyoA4Body();
+        body.setYobo_listKaigokyufu_1(item.get介護予防認知症対応型通所介護());
         body.setKaigo_listKaigokyufu_1(item.get夜間対応型訪問介護());
         body.setListtokki1_1(item.get調査結果_歩行_ある());
         body.setListIchigun_1(item.get調査結果_歩行());
@@ -489,6 +486,8 @@ public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4R
 
     private IchijihanteikekkahyoA4Body getBody15() {
         IchijihanteikekkahyoA4Body body = new IchijihanteikekkahyoA4Body();
+        body.setYobo_listKaigokyufu_1(item.get介護予防小規模多機能型居宅介護());
+        body.setKaigo_listKaigokyufu_1(item.get認知症対応型通所介護());
         body.setListtokki1_1(item.get調査結果_立ち上がり_ある());
         body.setListIchigun_1(item.get調査結果_立ち上がり());
         body.setListIchigun_2(get段階改善1(item.get段階改善_立ち上がり()));
@@ -504,6 +503,8 @@ public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4R
 
     private IchijihanteikekkahyoA4Body getBody16() {
         IchijihanteikekkahyoA4Body body = new IchijihanteikekkahyoA4Body();
+        body.setYobo_listKaigokyufu_1(item.get介護予防認知症対応型共同生活介護_グループホーム());
+        body.setKaigo_listKaigokyufu_1(item.get小規模多機能型居宅介護());
         body.setListtokki1_1(item.get調査結果_話がまとまらない_ある());
         body.setListIchigun_1(item.get調査結果_片足での立位());
         body.setListIchigun_2(get段階改善1(item.get段階改善_片足での立位()));
@@ -514,6 +515,7 @@ public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4R
 
     private IchijihanteikekkahyoA4Body getBody17() {
         IchijihanteikekkahyoA4Body body = new IchijihanteikekkahyoA4Body();
+        body.setKaigo_listKaigokyufu_1(item.get認知症対応型共同生活介護_グループホーム());
         body.setListtokki1_1(item.get調査結果_洗身_ある());
         body.setListIchigun_1(item.get調査結果_洗身());
         body.setListIchigun_2(get段階改善1(item.get段階改善_洗身()));
@@ -524,6 +526,7 @@ public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4R
 
     private IchijihanteikekkahyoA4Body getBody18() {
         IchijihanteikekkahyoA4Body body = new IchijihanteikekkahyoA4Body();
+        body.setKaigo_listKaigokyufu_1(item.get地域密着型特定施設入居者生活介護());
         body.setListtokki1_1(item.get調査結果_つめ切り_ある());
         body.setListIchigun_1(item.get調査結果_つめ切り());
         body.setListIchigun_2(get段階改善1(item.get段階改善_つめ切り()));
@@ -534,6 +537,7 @@ public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4R
 
     private IchijihanteikekkahyoA4Body getBody19() {
         IchijihanteikekkahyoA4Body body = new IchijihanteikekkahyoA4Body();
+        body.setKaigo_listKaigokyufu_1(item.get地域密着型介護老人福祉施設入所者生活介護());
         body.setListtokki1_1(item.get調査結果_視力_ある());
         body.setListIchigun_1(item.get調査結果_視力());
         body.setListIchigun_2(get段階改善1(item.get段階改善_視力()));
@@ -544,11 +548,18 @@ public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4R
 
     private IchijihanteikekkahyoA4Body getBody20() {
         IchijihanteikekkahyoA4Body body = new IchijihanteikekkahyoA4Body();
+        body.setKaigo_listKaigokyufu_1(item.get定期巡回_随時対応型訪問介護看護());
         body.setListtokki1_1(item.get調査結果_聴力_ある());
         body.setListIchigun_1(item.get調査結果_聴力());
         body.setListIchigun_2(get段階改善1(item.get段階改善_聴力()));
         body.setListIchigun_3(get段階改善2(item.get段階改善_聴力()));
         body.setListIchigun_4(item.get前回結果_聴力());
+        return body;
+    }
+
+    private IchijihanteikekkahyoA4Body getBody21() {
+        IchijihanteikekkahyoA4Body body = new IchijihanteikekkahyoA4Body();
+        body.setKaigo_listKaigokyufu_1(item.get看護小規模多機能型居宅介護());
         return body;
     }
 
