@@ -79,14 +79,13 @@ public class TokuchoTeishiTaisyosyaDoutei {
     }
 
     /**
-     * 処理日付管理マスタからデータを取得する。
-     *
+     * 特徴対象者同定情報取得
      *
      * @param 処理年度 FlexibleYear
      * @param モード RString
      * @return List<ShoriDateKanriResult> 特徴対象者同定情報リスト<処理日付管理Result>
      */
-    public List<ShoriDateKanriResult> get特徴対象者同定情報(FlexibleYear 処理年度, RString モード) {
+    public List<ShoriDateKanriResult> getTokuchoTaishoJoho(FlexibleYear 処理年度, RString モード) {
         List<ShoriDateKanriResult> resultEntityList = new ArrayList<>();
         ITokuchoTeishiTaisyosyaDouteiMapper mapper = mapperProvider.create(ITokuchoTeishiTaisyosyaDouteiMapper.class);
 
@@ -96,19 +95,6 @@ public class TokuchoTeishiTaisyosyaDoutei {
         param.set処理年度(処理年度);
         param.set最新の広域構成市町村(最新の広域構成市町村);
         param.set表示(表示);
-
-        if (単一保険者.equals(モード)) {
-            List<ShoriDateKanriEntity> resultEntity = mapper.select処理日付管理マスタ(param);
-            if (resultEntity == null || resultEntity.isEmpty()) {
-                return new ArrayList<>();
-            }
-            for (ShoriDateKanriEntity entity : resultEntity) {
-                ShoriDateKanriResult result = new ShoriDateKanriResult();
-                result.set基準年月日(entity.get基準年月日());
-                result.set市町村コード(entity.get市町村コード());
-                resultEntityList.add(result);
-            }
-        }
 
         if (広域保険者.equals(モード)) {
             List<DbT7022ShoriDateKanriEntity> entityList = shoriDateKanriDac.selectShoriDateKanri(介護賦課, 処理名, 処理年度);
@@ -122,19 +108,32 @@ public class TokuchoTeishiTaisyosyaDoutei {
                 resultEntityList.add(result);
             }
         }
+
+        if (単一保険者.equals(モード)) {
+            List<ShoriDateKanriEntity> resultEntity = mapper.select処理日付管理マスタ(param);
+            if (resultEntity == null || resultEntity.isEmpty()) {
+                return new ArrayList<>();
+            }
+            for (ShoriDateKanriEntity entity : resultEntity) {
+                ShoriDateKanriResult result = new ShoriDateKanriResult();
+                result.set基準年月日(entity.get基準年月日());
+                result.set市町村コード(entity.get市町村コード());
+                resultEntityList.add(result);
+            }
+        }
         return resultEntityList;
     }
 
     /**
      *
-     * 処理日付管理マスタからデータを取得する。
+     * 処理状況一覧情報取得
      *
      * @param 処理年度 FlexibleYear
      * @param 対象者情報取得月 RString
      * @param モード RString
      * @return List<ShoriJokyoJohoResult> 処理状況一覧情報リスト<処理状況一覧情報Result>
      */
-    public List<ShoriJokyoJohoResult> get処理状況一覧情報(FlexibleYear 処理年度, RString 対象者情報取得月, RString モード) {
+    public List<ShoriJokyoJohoResult> getShoriJokyoList(FlexibleYear 処理年度, RString 対象者情報取得月, RString モード) {
         List<ShoriJokyoJohoResult> resultEntityList = new ArrayList<>();
         ITokuchoTeishiTaisyosyaDouteiMapper mapper = mapperProvider.create(ITokuchoTeishiTaisyosyaDouteiMapper.class);
 
@@ -186,7 +185,7 @@ public class TokuchoTeishiTaisyosyaDoutei {
      * @param モード RString
      * @return KonkaiShoriNaiyoJohoEntity 今回処理内容情報取得
      */
-    public KonkaiShoriNaiyoJohoResult get今回処理内容情報取得(FlexibleYear 処理年度, RString モード) {
+    public KonkaiShoriNaiyoJohoResult getKonkaiShoriNaiyoJoho(FlexibleYear 処理年度, RString モード) {
         KonkaiShoriNaiyoJohoResult resultEntity = new KonkaiShoriNaiyoJohoResult();
         ITokuchoTeishiTaisyosyaDouteiMapper mapper = mapperProvider.create(ITokuchoTeishiTaisyosyaDouteiMapper.class);
 
@@ -224,7 +223,7 @@ public class TokuchoTeishiTaisyosyaDoutei {
      * @param 開始月 RString
      * @return KonkaiShoriNaiyoJohoEntity 今回処理内容情報取得
      */
-    public TokuchoTeishiTaisyosyaDouteiBatchParameter getバッチパラメータ取得(
+    public TokuchoTeishiTaisyosyaDouteiBatchParameter getBatchiPara(
             List<RString> 捕捉月, RString 開始月) {
         TokuchoTeishiTaisyosyaDouteiBatchParameter param = new TokuchoTeishiTaisyosyaDouteiBatchParameter();
         RString 処理年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
@@ -251,7 +250,7 @@ public class TokuchoTeishiTaisyosyaDoutei {
             entity.set捕捉月１(new RString(処理年度.toString().concat(月捕捉_02.toString())));
             entity.set捕捉月２(null);
             entity.set捕捉月３(null);
-            特別徴収開始月 = get特別徴収開始月_01_02(開始月, 処理年度);
+            特別徴収開始月 = get特別徴収開始月_01(開始月, 処理年度);
             entity.set特別徴収開始月(特別徴収開始月);
         } else if (年度内連番_2.equals(年度内連番)) {
             RString 開始月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_4月捕捉, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
@@ -259,7 +258,7 @@ public class TokuchoTeishiTaisyosyaDoutei {
             entity.set捕捉月１(new RString(処理年度.toString().concat(月捕捉_04.toString())));
             entity.set捕捉月２(null);
             entity.set捕捉月３(null);
-            特別徴収開始月 = get特別徴収開始月_01_02(開始月, 処理年度);
+            特別徴収開始月 = get特別徴収開始月_02(開始月, 処理年度);
             entity.set特別徴収開始月(特別徴収開始月);
         } else if (年度内連番_3.equals(年度内連番)) {
             RString 開始月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
@@ -279,7 +278,6 @@ public class TokuchoTeishiTaisyosyaDoutei {
                 RString 開始月_06 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 entity = get特別徴収開始月_05(開始月_06, 処理年度);
             }
-
         } else if (年度内連番_6.equals(年度内連番)) {
             RString 開始月_12 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_12月捕捉, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
             RString 開始月_10 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_10月捕捉, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
@@ -300,12 +298,20 @@ public class TokuchoTeishiTaisyosyaDoutei {
         return entity;
     }
 
-    private RString get特別徴収開始月_01_02(RString 開始月, FlexibleYear 処理年度) {
+    private RString get特別徴収開始月_01(RString 開始月, FlexibleYear 処理年度) {
         RString 特別徴収開始月 = RString.EMPTY;
         if (月捕捉_00.equals(開始月)) {
             特別徴収開始月 = null;
         } else if (月捕捉_06.equals(開始月)) {
             特別徴収開始月 = new RString(処理年度.toString().concat(月捕捉_08.toString()));
+        }
+        return 特別徴収開始月;
+    }
+
+    private RString get特別徴収開始月_02(RString 開始月, FlexibleYear 処理年度) {
+        RString 特別徴収開始月 = RString.EMPTY;
+        if (月捕捉_00.equals(開始月)) {
+            特別徴収開始月 = null;
         } else if (月捕捉_10.equals(開始月)) {
             特別徴収開始月 = new RString(処理年度.toString().concat(月捕捉_10.toString()));
         }

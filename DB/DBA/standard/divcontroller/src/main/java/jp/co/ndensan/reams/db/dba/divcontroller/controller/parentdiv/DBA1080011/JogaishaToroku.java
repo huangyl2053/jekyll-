@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanri;
 import static jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysJukyuShikakuShomeishoHakko.資格取得除外者登録キー;
+import static jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysJukyuShikakuShomeishoHakko.除外者データキー;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1080011.DBA1080011StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1080011.JogaishaTorokuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1080011.dgNenreiTotatshusha_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1080011.JogaishaTorokuHandler;
+import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1080011.JogaishaTorokuSetter;
 import jp.co.ndensan.reams.db.dba.service.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriManager;
 import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaisha;
 import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaishaBuilder;
@@ -58,7 +60,8 @@ public class JogaishaToroku {
                     = Models.create(資格取得除外者一覧);
             ViewStateHolder.put(ViewStateKeys.資格取得除外者登録_資格取得除外者一覧, shikakuShutokuJogaisha);
         } else {
-            getHandler(requestDiv).onLoadKen();
+            JogaishaTorokuSetter jogaishaTorokuSetter = ViewStateHolder.get(除外者データキー, JogaishaTorokuSetter.class);
+            getHandler(requestDiv).onLoadKen(jogaishaTorokuSetter);
         }
         return ResponseData.of(requestDiv).setState(DBA1080011StateName.初期状態);
     }
@@ -140,7 +143,9 @@ public class JogaishaToroku {
      * @return ResponseData<JogaishaTorokuDiv>
      */
     public ResponseData<JogaishaTorokuDiv> onClick_Search(JogaishaTorokuDiv requestDiv) {
-        getHandler(requestDiv).onClick_Search();
+        JogaishaTorokuSetter 除外者データ = getHandler(requestDiv).onClick_Search();
+        ViewStateHolder.put(除外者データキー, 除外者データ);
+        ViewStateHolder.put(資格取得除外者登録キー, new RString("DBA18001"));
         return ResponseData.of(requestDiv).setState(DBA1080011StateName.初期状態);
     }
 
@@ -194,7 +199,7 @@ public class JogaishaToroku {
                 builder.set資格取得除外解除年月日(dgRowList.get(i).getJogaiKaijyoDate().getValue() == null
                         ? FlexibleDate.EMPTY : new FlexibleDate(dgRowList.get(i).getJogaiKaijyoDate().getValue().toDateString()));
                 insertKuJogaishaList.add(builder.build());
-                getHandler(requestDiv).アクセスログ();
+                getHandler(requestDiv).アクセスログ(new ShikibetsuCode(dgRowList.get(i).getShikibetsuCode()));
             }
             if (RowState.Modified.equals(dgRowList.get(i).getRowState())) {
                 ShikakuShutokuJogaishaIdentifier key = new ShikakuShutokuJogaishaIdentifier(new ShikibetsuCode(dgRowList.get(i).getShikibetsuCode()),
@@ -211,7 +216,7 @@ public class JogaishaToroku {
                 shikakubuilder.set履歴番号(Integer.parseInt(dgRowList.get(i).getRirekiNo().toString()));
                 shikakuShutokuJogaisha.toEntity().setState(EntityDataState.Modified);
                 updateKuJogaishaList.add(shikakubuilder.build());
-                getHandler(requestDiv).アクセスログ();
+                getHandler(requestDiv).アクセスログ(new ShikibetsuCode(dgRowList.get(i).getShikibetsuCode()));
             }
         }
         ShikakuShutokuJogaishaKanriManager.createInstance().delShikakuShutokuJogaisha(deleteKuJogaishaList);

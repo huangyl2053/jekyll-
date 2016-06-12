@@ -26,7 +26,7 @@ public class IkkatsuSusakuseiProcessParameter implements IBatchProcessParameter 
 
     private boolean chushutsuFlag;
     private boolean shutsuryokuFlag;
-    private RString shutsuryokujunId;
+    private Long shutsuryokujunId;
     private LasdecCode shichosonCode;
     private ShikibetsuCode shikibetsuCode;
     private RString psmShikibetsuTaisho;
@@ -43,7 +43,7 @@ public class IkkatsuSusakuseiProcessParameter implements IBatchProcessParameter 
      */
     public IkkatsuSusakuseiProcessParameter(boolean 資格喪失者抽出フラグ,
             boolean 出力フラグ,
-            RString 出力順ID,
+            Long 出力順ID,
             RString 登録ユーザーID) {
         this.chushutsuFlag = 資格喪失者抽出フラグ;
         this.shutsuryokuFlag = 出力フラグ;

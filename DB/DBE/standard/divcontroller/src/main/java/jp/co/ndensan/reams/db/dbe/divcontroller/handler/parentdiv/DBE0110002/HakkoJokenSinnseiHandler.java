@@ -46,14 +46,12 @@ public class HakkoJokenSinnseiHandler {
         if (要介護認定申請モニタリストフラグ) {
             SELECT_LIST.add(SELECT_KEY0);
             div.getChkSakuseiChohyo().setSelectedItemsByKey(SELECT_LIST);
-            SELECT_LIST.clear();
         }
         if (要支援認定等申請者一覧フラグ) {
             SELECT_LIST.add(SELECT_KEY1);
             div.getChkSakuseiChohyo().setSelectedItemsByKey(SELECT_LIST);
-            SELECT_LIST.clear();
         }
-
+        SELECT_LIST.clear();
     }
 
     /**

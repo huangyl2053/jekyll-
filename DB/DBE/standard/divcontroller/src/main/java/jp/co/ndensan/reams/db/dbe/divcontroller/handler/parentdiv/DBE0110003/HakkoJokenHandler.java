@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class HakkoJokenHandler {
 
     private static final RString SELECT_KEY0 = new RString("key0");
+    private static final RString SELECT_KEY1 = new RString("key1");
+    private static final RString SELECT_KEY2 = new RString("key2");
     private static final List<RString> SELECT_LIST = new ArrayList<>();
     private final HakkoJokenDiv div;
 
@@ -74,6 +76,12 @@ public class HakkoJokenHandler {
             div.getNinteiChosaYoteiMiteishaIchiranJoken().setIsOpen(false);
             div.getNinteiChosaYoteiMiteishaIchiranJoken().getRadJoken1().setDisabled(true);
             div.getNinteiChosaYoteiMiteishaIchiranJoken().getTxtYoteiMiteishaShinseiYMD().setDisabled(true);
+        } else {
+            if (div.getRadJoken1().getSelectedKey().contains(SELECT_KEY0)) {
+                div.getNinteiChosaYoteiMiteishaIchiranJoken().getTxtYoteiMiteishaShinseiYMD().clearFromValue();
+                div.getNinteiChosaYoteiMiteishaIchiranJoken().getTxtYoteiMiteishaShinseiYMD().clearToValue();
+                div.getNinteiChosaYoteiMiteishaIchiranJoken().getTxtYoteiMiteishaShinseiYMD().setDisabled(true);
+            }
         }
         if (!認定調査依頼先変更者一覧表フラグ) {
             div.getNinteiChosaIraisakiHenkoshaIchiranhyoJoken().setIsOpen(false);
@@ -85,6 +93,36 @@ public class HakkoJokenHandler {
             div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtCheckListShinseiYMD().setDisabled(true);
             div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsaYMD().setDisabled(true);
             div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsakai().setDisabled(true);
+        } else {
+            if (div.getRadJoken3().getSelectedKey().contains(SELECT_KEY0)) {
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtCheckListShinseiYMD().clearFromValue();
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtCheckListShinseiYMD().clearToValue();
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsaYMD().clearValue();
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsakai().clearValue();
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtCheckListShinseiYMD().setDisabled(true);
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsaYMD().setDisabled(true);
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsakai().setDisabled(true);
+            } else if (div.getRadJoken3().getSelectedKey().contains(SELECT_KEY1)) {
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtCheckListShinseiYMD().setDisabled(false);
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsaYMD().clearValue();
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsakai().clearValue();
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsaYMD().setDisabled(true);
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsakai().setDisabled(true);
+            } else if (div.getRadJoken3().getSelectedKey().contains(SELECT_KEY2)) {
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsaYMD().setDisabled(false);
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtCheckListShinseiYMD().clearFromValue();
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtCheckListShinseiYMD().clearToValue();
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsakai().clearValue();
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtCheckListShinseiYMD().setDisabled(true);
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsakai().setDisabled(true);
+            } else {
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsakai().setDisabled(false);
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtCheckListShinseiYMD().clearFromValue();
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtCheckListShinseiYMD().clearToValue();
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsaYMD().clearValue();
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtCheckListShinseiYMD().setDisabled(true);
+                div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsaYMD().setDisabled(true);
+            }
         }
     }
 }

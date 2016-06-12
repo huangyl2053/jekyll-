@@ -223,6 +223,7 @@
         <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo"/>
         <result property="hokenshaNo" column="hokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteiChosaItakusakiCode" column="ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="renrakusakiTuzukigara" column="renrakusakiTuzukigara" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="renrakusakiYubinNo" column="renrakusakiYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="renrakusakiJusho" column="renrakusakiJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
@@ -272,6 +273,7 @@
         ,dbT5201."ninteiChosainCode" AS "ninteiChosainCode"
         ,dbT5101."shoKisaiHokenshaNo" AS "hokenshaNo"
         ,dbT5201."ninteichosaItakusakiCode" AS "ninteichosaItakusakiCode"
+        ,dbT5913."shichosonCode" AS "shichosonCode"
         ,G."renrakusakiShimei" AS "renrakusakiShimei"
         ,G."renrakusakiYubinNo" AS "renrakusakiYubinNo"
         ,G."renrakusakiTelNo" AS "renrakusakiTelNo"

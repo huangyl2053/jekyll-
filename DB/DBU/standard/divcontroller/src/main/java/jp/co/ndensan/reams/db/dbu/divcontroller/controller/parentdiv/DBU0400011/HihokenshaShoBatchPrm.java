@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0400011;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.core.enumeratedtype.config.ConfigKeysHihokenshashoIndicationMethod;
 import jp.co.ndensan.reams.db.dba.service.core.nenreitoutatuyoteishachecklist.NenreiToutatuYoteishaCheckListManager;
 import jp.co.ndensan.reams.db.dbu.business.core.hihokenshashoikkatsuhakko.HihokenshashoIkkatsuHakkoModel;
@@ -85,9 +87,25 @@ public class HihokenshaShoBatchPrm {
         } else if (タイプ_B4横1.equals(type) || タイプ_B4横2.equals(type)) {
             chohyoID = REPORTID_B4;
         }
-        // TODO  Redmine：#73393(帳票出力順の取得)
-        nenreiToutatuYoteishaManager.get帳票分類ID(SubGyomuCode.DBU介護統計報告, chohyoID).get帳票分類ID();
+        div.getHihokenshaShoShutsuryokuJun().load(SubGyomuCode.DBA介護資格,
+                nenreiToutatuYoteishaManager.get帳票分類ID(SubGyomuCode.DBA介護資格, chohyoID).get帳票分類ID());
         response.data = div;
+        return response;
+    }
+
+    /**
+     * 「再発行する」のselectイベントを処理します。
+     *
+     * @param div 介護保険被保険者証一括作成Div
+     * @return ResponseData<HihokenshaShoBatchPrmDiv>
+     */
+    public ResponseData<HihokenshaShoBatchPrmDiv> onChange_RadShutsuryokuJoken(HihokenshaShoBatchPrmDiv div) {
+        ResponseData<HihokenshaShoBatchPrmDiv> response = new ResponseData<>();
+        if (ViewStateHolder.get(ViewStateKeys.介護保険被保険者証一括作成_出力条件, RString.class).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
+            div.getChkSaiHakko().setReadOnly(true);
+        } else {
+            div.getChkSaiHakko().setReadOnly(false);
+        }
         return response;
     }
 
@@ -99,13 +117,11 @@ public class HihokenshaShoBatchPrm {
      */
     public ResponseData<HihokenshaShoBatchPrmDiv> onClick_CheckBoxSelect(HihokenshaShoBatchPrmDiv div) {
         ResponseData<HihokenshaShoBatchPrmDiv> response = new ResponseData<>();
-        if (ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_被保険者番号, RString.class).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
-            div.getChkSaiHakko().setDisabled(true);
-        } else {
-            div.getChkSaiHakko().setDisabled(false);
-            ViewStateHolder.put(ViewStateKeys.介護保険被保険者証一括作成_出力条件, div.getRadShutsuryokuJoken().getSelectedKey());
-        }
-        SearchResult<HihokenshashoIkkatsuHakkoModel> resultList = service.getAgainHakko(JYUKYUMONO_RADIO_SENTAKU);
+        List<RString> 処理枝番 = new ArrayList<>();
+        処理枝番.add(JYUKYUMONO_RADIO_SENTAKU);
+        処理枝番.add(GAITOMONO_RADIO_SENTAKU);
+        処理枝番.add(JNENNREI_RADIO_SENTAKU);
+        SearchResult<HihokenshashoIkkatsuHakkoModel> resultList = service.getAgainHakko(処理枝番);
         getHandler(div).saihakkoSelect(resultList.records());
         response.data = div;
         return response;
@@ -120,22 +136,18 @@ public class HihokenshaShoBatchPrm {
     public ResponseData<IkkatsuHakkoBatchParameter> onClick_btnJikkou(HihokenshaShoBatchPrmDiv div) {
         IkkatsuHakkoBatchParameter param = new IkkatsuHakkoBatchParameter(
                 div.getRadShutsuryokuJoken().getSelectedKey(),
-                div.getTxtKonkaiChushutsuFromYMD() != null ? new FlexibleDate(div.getTxtKonkaiChushutsuFromYMD().getValue().toDateString())
-                : FlexibleDate.EMPTY,
+                getFlexibleDate(div.getTxtKonkaiChushutsuFromYMD().getValue()),
                 div.getTxtKonkaiChushutsuFromTime().getValue(),
-                div.getTxtKonkaiChushutsuToYMD() != null ? new FlexibleDate(div.getTxtKonkaiChushutsuToYMD().getValue().toDateString())
-                : FlexibleDate.EMPTY,
+                getFlexibleDate(div.getTxtKonkaiChushutsuToYMD().getValue()),
                 div.getTxtKonkaiChushutsuToTime().getValue(),
-                div.getTxtKonkaiShoriKijunYMD() != null ? new FlexibleDate(div.getTxtKonkaiShoriKijunYMD().getValue().toDateString())
-                : FlexibleDate.EMPTY,
+                getFlexibleDate(div.getTxtKonkaiShoriKijunYMD().getValue()),
                 div.getTxtKonkaiShoriKijunTime().getValue(),
-                div.getTxtKofuYMD() != null ? new FlexibleDate(div.getTxtKofuYMD().getValue().toDateString()) : FlexibleDate.EMPTY,
-                div.getChkTest().getSelectedValues().get(0),
-                div.getChkSaiHakko().getSelectedValues().get(0),
-                div.getTxtHakkoYMD() != null ? new FlexibleDate(div.getTxtHakkoYMD().getValue().toDateString()) : FlexibleDate.EMPTY,
+                getFlexibleDate(div.getTxtKofuYMD().getValue()),
+                div.getChkTest().isAllSelected(),
+                div.getChkSaiHakko().isAllSelected(),
+                getFlexibleDate(div.getTxtHakkoYMD().getValue()),
                 div.getTxtHakkoTime().getValue(),
-                // TODO  Redmine：#73393(帳票出力順の取得)
-                new RString("出力順ID"),
+                div.getHihokenshaShoShutsuryokuJun().get出力順ID(),
                 DbBusinessConfig.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_証表示タイプ, RDate.getNowDate(), SubGyomuCode.DBA介護資格));
         return ResponseData.of(param).respond();
     }
@@ -172,6 +184,14 @@ public class HihokenshaShoBatchPrm {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         return ResponseData.of(div).respond();
+    }
+
+    private FlexibleDate getFlexibleDate(RDate date) {
+        FlexibleDate 戻り値 = FlexibleDate.EMPTY;
+        if (date != null) {
+            戻り値 = new FlexibleDate(date.toDateString());
+        }
+        return 戻り値;
     }
 
     private HihokenshaShoBatchPrmHandler getHandler(HihokenshaShoBatchPrmDiv div) {

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0030011;
 
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -20,23 +20,11 @@ public enum KogakuServicehiPanelValidationMessage implements IValidationMessage 
     /**
      * 被保番号、提供年月、申請年月、決定年月の最小限に一つが入力必要
      */
-    被保険者を指定入力チェック(UrErrorMessages.必須項目_追加メッセージあり, "被保険者番号、提供年月、申請年月、決定年月"),
-    /**
-     * 提供年月期間が不正
-     */
-    提供年月チェック(UrErrorMessages.終了日が開始日以前),
-    /**
-     * 申請年月期間が不正
-     */
-    申請年月チェック(UrErrorMessages.終了日が開始日以前),
-    /**
-     * 決定年月期間が不正
-     */
-    決定年月チェック(UrErrorMessages.終了日が開始日以前),
+    被保険者を指定入力チェック(DbzErrorMessages.最低限の入力なし, "被保険者番号、提供年月、申請年月、決定年月"),
     /**
      * 提供年月、申請年月、決定年月の最小限に一つが入力必要
      */
-    年月を指定入力チェック(UrErrorMessages.必須項目_追加メッセージあり, "提供年月、申請年月、決定年月");
+    年月を指定入力チェック(DbzErrorMessages.最低限の入力なし, "提供年月、申請年月、決定年月");
 
     private final Message message;
 

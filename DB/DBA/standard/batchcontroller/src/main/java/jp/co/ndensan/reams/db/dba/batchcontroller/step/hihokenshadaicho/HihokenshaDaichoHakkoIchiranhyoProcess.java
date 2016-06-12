@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.batchcontroller.step.hihokenshadaicho;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaichosakusei.HihokenshaDaichoSakusei;
@@ -292,37 +291,34 @@ public class HihokenshaDaichoHakkoIchiranhyoProcess extends BatchKeyBreakBase<Db
     }
 
     private void get出力順項目() {
-        List<ISetSortItem> itemList = ReportUtil.get出力順設定項目リスト(SubGyomuCode.DBA介護資格,
+        Map<Integer, RString> 改頁Map = ReportUtil.get改頁項目(SubGyomuCode.DBA介護資格,
                 processPrm.getShutsuryokujunId(),
-                ReportIdDBA.DBA100009.getReportId());
-        if (itemList != null && itemList.size() >= INT5) {
-            Map<Integer, RString> 改頁Map = new HashMap();
-            List<ISetSortItem> 出力順List = new ArrayList<>();
-            int i = 1;
-            int y = 1;
-            for (ISetSortItem iSetSortItem : itemList) {
-                if (i <= INT5) {
-                    出力順List.add(iSetSortItem);
-                }
-                i++;
-            }
-            for (ISetSortItem iSetSortItem : 出力順List) {
-                if (iSetSortItem.is改頁項目()) {
-                    改頁Map.put(y++, iSetSortItem.get項目名());
-                }
-            }
-            出力順1 = 出力順List.get(0).get項目名();
-            出力順2 = 出力順List.get(1).get項目名();
-            出力順3 = 出力順List.get(2).get項目名();
-            出力順4 = 出力順List.get(INT3).get項目名();
-            出力順5 = 出力順List.get(INT4).get項目名();
-            改頁1 = 改頁Map.get(1);
-            改頁2 = 改頁Map.get(2);
-            改頁3 = 改頁Map.get(INT3);
-            改頁4 = 改頁Map.get(INT4);
-            改頁5 = 改頁Map.get(INT5);
-            getPageBreakKeys();
+                帳票ID);
+        Map<Integer, ISetSortItem> 出力順Map = ReportUtil.get出力順項目(SubGyomuCode.DBA介護資格,
+                processPrm.getShutsuryokujunId(),
+                帳票ID);
+        if (出力順Map.get(0) != null) {
+            出力順1 = 出力順Map.get(0).get項目名();
         }
+        if (出力順Map.get(1) != null) {
+            出力順2 = 出力順Map.get(1).get項目名();
+        }
+        if (出力順Map.get(2) != null) {
+            出力順3 = 出力順Map.get(2).get項目名();
+        }
+        if (出力順Map.get(INT3) != null) {
+            出力順4 = 出力順Map.get(INT3).get項目名();
+        }
+        if (出力順Map.get(INT4) != null) {
+            出力順5 = 出力順Map.get(INT4).get項目名();
+        }
+        改頁1 = 改頁Map.get(0);
+        改頁2 = 改頁Map.get(1);
+        改頁3 = 改頁Map.get(2);
+        改頁4 = 改頁Map.get(INT3);
+        改頁5 = 改頁Map.get(INT4);
+        getPageBreakKeys();
+
     }
 
     private void getPageBreakKeys() {

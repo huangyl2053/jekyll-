@@ -49,6 +49,7 @@ public class HakkoJoken {
             div.getNinteiChosaYoteiMiteishaIchiranJoken().getTxtYoteiMiteishaShinseiYMD().clearFromValue();
             div.getNinteiChosaYoteiMiteishaIchiranJoken().getTxtYoteiMiteishaShinseiYMD().clearToValue();
             div.getNinteiChosaYoteiMiteishaIchiranJoken().getTxtYoteiMiteishaShinseiYMD().setDisabled(true);
+            div.getNinteiChosaYoteiMiteishaIchiranJoken().setIsOpen(false);
         }
         return ResponseData.of(div).respond();
     }
@@ -66,6 +67,7 @@ public class HakkoJoken {
             div.getNinteiChosaIraisakiHenkoshaIchiranhyoJoken().getTxtIraisakiHenkoshaIchiranShinseiYMD().clearFromValue();
             div.getNinteiChosaIraisakiHenkoshaIchiranhyoJoken().getTxtIraisakiHenkoshaIchiranShinseiYMD().clearToValue();
             div.getNinteiChosaIraisakiHenkoshaIchiranhyoJoken().getTxtIraisakiHenkoshaIchiranShinseiYMD().setDisabled(true);
+            div.getNinteiChosaIraisakiHenkoshaIchiranhyoJoken().setIsOpen(false);
         }
         return ResponseData.of(div).respond();
     }
@@ -89,6 +91,7 @@ public class HakkoJoken {
             div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtCheckListShinseiYMD().setDisabled(true);
             div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsaYMD().setDisabled(true);
             div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsakai().setDisabled(true);
+            div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().setIsOpen(false);
         }
         return ResponseData.of(div).respond();
     }

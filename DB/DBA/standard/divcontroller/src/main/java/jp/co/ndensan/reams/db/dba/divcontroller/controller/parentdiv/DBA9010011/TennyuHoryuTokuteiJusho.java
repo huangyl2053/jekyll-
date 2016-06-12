@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.RendoHoryuTokuteiJusho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RendoHoryuTokuteiJushoIdentifier;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -25,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class TennyuHoryuTokuteiJusho {
 
+    private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
+
     /**
      * 転入保留特定住所一覧初期化の設定します。<br/>
      *
@@ -35,6 +38,7 @@ public class TennyuHoryuTokuteiJusho {
         TennyuHoryuTokuteiManager manager = TennyuHoryuTokuteiManager.createInstance();
         List<TennyuHoryuTokuteiBusiness> businessList = manager.getTennyuHoryuTokuteiJushoIchiran().records();
         createHandlerOf(requestDiv).onLoad(businessList);
+        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, 台帳種別表示無し);
         List<RendoHoryuTokuteiJusho> 転入保留特定住所情報 = manager.get連動保留特定住所().records();
         Models<RendoHoryuTokuteiJushoIdentifier, RendoHoryuTokuteiJusho> rendoHoryuTokutei
                 = Models.create(転入保留特定住所情報);
@@ -50,6 +54,7 @@ public class TennyuHoryuTokuteiJusho {
      */
     public ResponseData<TennyuHoryuTokuteiJushoDiv> onClick_btnAdd(TennyuHoryuTokuteiJushoDiv requestDiv) {
         createHandlerOf(requestDiv).onClick_btnAdd();
+        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, 台帳種別表示無し);
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -65,6 +70,7 @@ public class TennyuHoryuTokuteiJusho {
             return ResponseData.of(requestDiv).addValidationMessages(validationMessageControlPairs).respond();
         }
         createHandlerOf(requestDiv).onClick_btnKakutei();
+        clearValue(requestDiv);
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -97,9 +103,21 @@ public class TennyuHoryuTokuteiJusho {
      * @return ResponseData<TennyuHoryuTokuteiJushoDiv>
      */
     public ResponseData<TennyuHoryuTokuteiJushoDiv> onClick_SaveButton(TennyuHoryuTokuteiJushoDiv requestDiv) {
-        createHandlerOf(requestDiv).onClick_SaveButton();
+        Models<RendoHoryuTokuteiJushoIdentifier, RendoHoryuTokuteiJusho> models
+                = ViewStateHolder.get(ViewStateKeys.転入保留特定住所一覧情報, Models.class);
+        createHandlerOf(requestDiv).onClick_SaveButton(models);
         onLoad(requestDiv);
         return ResponseData.of(requestDiv).respond();
+    }
+
+    private void clearValue(TennyuHoryuTokuteiJushoDiv div) {
+        div.getCcdShichousonInputGuide().clear();
+        div.getCcdJushoInputGuide().clear();
+        div.getCcdBunchiInput().clear();
+        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, 台帳種別表示無し);
+        div.getCcdSisetuInputGuide().clear();
+        div.getTennyuHoryuTokuteiJushoNyuryoku().setDisabled(true);
+        div.getBtnKakutei().setDisabled(true);
     }
 
     private TennyuHoryuTokuteiHandler createHandlerOf(TennyuHoryuTokuteiJushoDiv requestDiv) {

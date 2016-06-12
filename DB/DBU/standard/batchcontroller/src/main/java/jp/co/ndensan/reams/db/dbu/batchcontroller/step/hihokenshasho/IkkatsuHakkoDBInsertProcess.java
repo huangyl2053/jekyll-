@@ -59,7 +59,7 @@ public class IkkatsuHakkoDBInsertProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void process() {
-        if (processPrm.getTestShutsuryokuFlag().toString().equals("0")) {
+        if (!processPrm.isTestShutsuryokuFlag()) {
             for (IkkatsuHakkoRelateEntity entity : 被保険者証一覧リスト) {
                 iIkkatsuHakkoMapper.insertShoKofuKaishu(set証交付回収Entity(entity));
             }

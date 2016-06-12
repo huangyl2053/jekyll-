@@ -77,7 +77,7 @@ public class ShokanShinseiList {
      */
     public ResponseData<ShokanShinseiListDiv> onClick_InsertButton(ShokanShinseiListDiv requestDiv) {
         ShokanShinseiValidationHandler validationHandler = createValidationHandler(requestDiv);
-        ValidationMessageControlPairs validationMessages = validationHandler.サービス年月の有効性チェック();
+        ValidationMessageControlPairs validationMessages = validationHandler.サービス年月の有効性チェック(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class));
         if (validationMessages.iterator().hasNext() && !ResponseHolder.isWarningIgnoredRequest()) {
             return ResponseData.of(requestDiv).addValidationMessages(validationMessages).respond();
         }

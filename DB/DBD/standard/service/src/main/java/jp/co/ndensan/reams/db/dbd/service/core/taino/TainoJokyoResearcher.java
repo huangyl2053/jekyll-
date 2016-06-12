@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.service.core.taino;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.taino.TainoKiSummary;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.taino.TainoJokyoMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.taino.TainoJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.taino.ITainoJokyoMapper;
-import jp.co.ndensan.reams.db.dbd.service.report.futangendogakuninteishinseisho.FutanGendogakuNinteiShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
@@ -46,9 +46,9 @@ public class TainoJokyoResearcher {
     private static final int 一年の月数 = 12;
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link FutanGendogakuNinteiShinseisho}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link TainoJokyoResearcher}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link FutanGendogakuNinteiShinseisho}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TainoJokyoResearcher}のインスタンス
      */
     public static TainoJokyoResearcher createInstance() {
         return InstanceProvider.create(TainoJokyoResearcher.class);
@@ -164,7 +164,12 @@ public class TainoJokyoResearcher {
                 new滞納情報List.add(滞納情報);
             }
         }
-        Collections.sort(new滞納情報List);
+        Collections.sort(滞納情報List, new Comparator<TainoKiSummary>() {
+            @Override
+            public int compare(TainoKiSummary o1, TainoKiSummary o2) {
+                return o1.get調定年度().compareTo(o2.get調定年度());
+            }
+        });
         return new滞納情報List;
     }
 

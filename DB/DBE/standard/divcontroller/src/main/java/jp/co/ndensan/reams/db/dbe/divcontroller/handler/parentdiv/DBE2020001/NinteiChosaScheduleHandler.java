@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaschedule.NinteichosaS
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.NinteiChosaSchedulePanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.dgNinteiChosaSchedule_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.sukejurutouroku.SukejuruTourokuFinder;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -29,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Seireki;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
@@ -41,7 +39,6 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 public class NinteiChosaScheduleHandler {
 
     private final NinteiChosaSchedulePanelDiv ninteidiv;
-    private static final RString 状態_初期状態 = new RString("初期状態");
 
     /**
      * コンストラクタです。
@@ -57,7 +54,6 @@ public class NinteiChosaScheduleHandler {
      *
      */
     public void initialize() {
-        状態_初期状態.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class));
         ninteidiv.getTxtSetteiYM().setValue(new FlexibleDate(RDate.getNowDate().toString()));
         List<ChikuShichosonBusiness> chikuList = SukejuruTourokuFinder.createInstance()
                 .getChikuShichosonList().records();

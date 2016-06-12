@@ -100,7 +100,7 @@ public class NinteiChosaIrai {
      * @return ResponseData<NinteiChosaIraiDiv>
      */
     public ResponseData<NinteiChosaIraiDiv> onLoad(NinteiChosaIraiDiv div) {
-        getHandler(div).load();
+        getHandler(div).load(true);
 
         ShoKisaiHokenshaNo 保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
         RString 支所コード = ShishoSecurityJoho.createInstance().getShishoCode(ControlDataHolder.getUserId());
@@ -122,7 +122,17 @@ public class NinteiChosaIrai {
      * @return ResponseData<NinteiChosaIraiDiv>
      */
     public ResponseData<NinteiChosaIraiDiv> onChange_ccdHokenshaList(NinteiChosaIraiDiv div) {
-        onLoad(div);
+        getHandler(div).load(false);
+        ShoKisaiHokenshaNo 保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
+        RString 支所コード = ShishoSecurityJoho.createInstance().getShishoCode(ControlDataHolder.getUserId());
+        ViewStateHolder.put(ViewStateKeys.支所コード, 支所コード);
+        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 保険者番号);
+        List<NinnteiChousairaiBusiness> 認定調査委託先List = NinnteiChousairaiFinder.createInstance().getNinnteiChousaItaku(
+                NinnteiChousairaiParameter.createParam調査委託先Or未割付申請者(保険者番号, 支所コード)).records();
+        boolean コード取得結果 = getHandler(div).set認定調査委託先一覧(認定調査委託先List);
+        if (!コード取得結果) {
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
+        }
         return ResponseData.of(div).respond();
     }
 

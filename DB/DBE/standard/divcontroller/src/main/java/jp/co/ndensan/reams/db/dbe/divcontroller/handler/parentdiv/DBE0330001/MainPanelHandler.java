@@ -120,6 +120,17 @@ public class MainPanelHandler {
     }
 
     /**
+     * 「認定状況提供日未入力チェック」メッセジーの取得します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs getメッセジー_入力データなし() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.対象データなし_追加メッセージあり, "認定状況提供日")));
+        return validPairs;
+    }
+
+    /**
      * 「対象データなし」メッセジーの取得します。
      *
      * @return ValidationMessageControlPairs
