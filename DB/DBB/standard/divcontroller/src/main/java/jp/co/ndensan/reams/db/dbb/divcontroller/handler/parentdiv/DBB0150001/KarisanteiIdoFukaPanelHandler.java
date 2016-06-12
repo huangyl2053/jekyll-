@@ -175,6 +175,8 @@ public class KarisanteiIdoFukaPanelHandler {
             } else {
                 div.getKarisanteiIdoFukaChohyoHakko().getCcdChohyoIchiran().load(
                         SubGyomuCode.DBB介護賦課, 帳票グループコード_1);
+                div.getShoriJokyo().getTokuchoHosoku().getTxtTaishoTokuchoKaishiTsuki().setValue(RString.EMPTY);
+                div.getShoriJokyo().getTokuchoHosoku().getRadTokuchoHosokuIraiKingakuKeisan().setDisabled(true);
                 set保険料段階と保険料率();
                 管理情報確認の制御処理(date);
             }
@@ -238,7 +240,7 @@ public class KarisanteiIdoFukaPanelHandler {
             RString 普徴仮算定異動新規賦課方法 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定異動新規賦課方法, date,
                     SubGyomuCode.DBB介護賦課);
             dgRow.setKomoku(普徴仮算定異動新規賦課方法_項目);
-            dgRow.setNaiyo(FuchoZanteiKeisanHoho.toValue(普徴仮算定異動新規賦課方法).get名称());
+            dgRow.setNaiyo(FuchoZanteiKeisanHoho.toValue(普徴仮算定異動新規賦課方法).get略称());
             dgRowList.add(dgRow);
 
             if (一律今年度.equals(普徴仮算定異動新規賦課方法)) {
@@ -267,7 +269,7 @@ public class KarisanteiIdoFukaPanelHandler {
             RString 特徴開始計算方法 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_8月開始, 日時,
                     SubGyomuCode.DBB介護賦課);
             dgRow.setKomoku(特徴開始計算方法_項目);
-            dgRow.setNaiyo(TokuchoIraikingakuKeisanHoho8Gatsu.toValue(特徴開始計算方法).get名称());
+            dgRow.setNaiyo(TokuchoIraikingakuKeisanHoho8Gatsu.toValue(特徴開始計算方法).get略称());
             dgRowList.add(dgRow);
         }
         div.getShoriJokyo().getKanriJohoKakunin().getDgKomokuNaiyo().setDataSource(dgRowList);

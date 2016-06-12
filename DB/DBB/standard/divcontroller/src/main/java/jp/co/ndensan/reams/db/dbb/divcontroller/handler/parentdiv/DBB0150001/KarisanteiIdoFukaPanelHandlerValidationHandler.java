@@ -69,7 +69,6 @@ public class KarisanteiIdoFukaPanelHandlerValidationHandler {
                 .add(KarisanteiIdoFukaHandlerValidationMessages.特徴開始通知書仮算定の発行日入力チェック,
                         div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getTxtTokuKaishiTsuchiHakkoYMD())
                 .add(KarisanteiIdoFukaHandlerValidationMessages.処理対象と出力期の一致チェック,
-                        div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getDdlShorigetsu(),
                         div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getDdlNotsuShuturyokuki())
                 .build();
     }
