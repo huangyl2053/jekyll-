@@ -99,7 +99,8 @@ public class NinteiChosaScheduleMemoInformation {
      * @return ResponseData
      */
     public ResponseData onClick_EditCommon(NinteiChosaScheduleMemoInformationDiv div) {
-        getHandler(div).getEditCommon();
+        Code 地区コード = new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
+        getHandler(div).getEditCommon(地区コード);
         return ResponseData.of(div).setState(DBE2020004StateName.スケジュールメモ);
     }
 
@@ -121,7 +122,8 @@ public class NinteiChosaScheduleMemoInformation {
      * @return ResponseData
      */
     public ResponseData onClick_EditAuto(NinteiChosaScheduleMemoInformationDiv div) {
-        getHandler(div).getEditAuto();
+        Code 地区コード = new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
+        getHandler(div).getEditAuto(地区コード);
         return ResponseData.of(div).setState(DBE2020004StateName.スケジュールメモ);
     }
 
