@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako;
 
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -20,15 +21,16 @@ import lombok.Setter;
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TsuchishoHakoEntity {
+public class TsuchishoHakoEntity implements IBatchProcessParameter {
 
     private RString 帳票分類ID;
     private FlexibleYear 調定年度;
     private FlexibleYear 賦課年度;
-    private RString 出力対象区分;
+    private int 出力対象区分;
     private FlexibleDate 発行日;
     private RDateTime 帳票作成日時;
     private RString 出力順ID;
     private RString 帳票ID;
+    private boolean 一括発行フラグ;
 
 }

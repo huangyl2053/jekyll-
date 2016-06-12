@@ -39,16 +39,16 @@ public class KarisanteiGakuHenkoEntity implements Serializable {
     public DbT2002FukaTempTableEntity toDbT2002FukaTempTableEntity() {
         DbT2002FukaTempTableEntity entity = new DbT2002FukaTempTableEntity();
         set更正後_計算後情報の全項目(entity);
-        set宛名(entity);
-        set宛先(entity);
-        set納組(entity);
-        set口座(entity);
-        set対象者_追加含む情報_更正後(entity);
+        set宛名の全項目(entity);
+        set宛先の全項目(entity);
+        set納組の全項目(entity);
+        set口座の全項目(entity);
+        set対象者_追加含む情報_更正後の全項目(entity);
         return entity;
 
     }
 
-    private void set口座(DbT2002FukaTempTableEntity entity) {
+    private void set口座の全項目(DbT2002FukaTempTableEntity entity) {
         entity.setKoza_kozaId(口座.get口座ID());
         entity.setKoza_shikibetsuCode(口座.get識別コード());
         entity.setKoza_gyomuCode(口座.get業務コード());
@@ -84,7 +84,7 @@ public class KarisanteiGakuHenkoEntity implements Serializable {
         entity.setKoza_temban(口座.get店番());
     }
 
-    private void set納組(DbT2002FukaTempTableEntity entity) {
+    private void set納組の全項目(DbT2002FukaTempTableEntity entity) {
 
         entity.setCaT0714SeikyuHoho_insertDantaiCd(納組.getSeikyuHoho().getInsertDantaiCd());
         entity.setCaT0714SeikyuHoho_isDeleted(納組.getSeikyuHoho().getIsDeleted());
@@ -111,7 +111,7 @@ public class KarisanteiGakuHenkoEntity implements Serializable {
         entity.setCaT0752Nokumi_daihyoshaShimei(納組.getNokumi().getDaihyoshaShimei());
     }
 
-    private void set宛先(DbT2002FukaTempTableEntity entity) {
+    private void set宛先の全項目(DbT2002FukaTempTableEntity entity) {
         entity.setAtesaki_shikibetsuCode(宛先.getShikibetsuCode());
         entity.setAtesaki_atesakiShubetsu(宛先.getAtesakiShubetsu());
         entity.setAtesaki_gyomubetsuPrimaryKey(宛先.getGyomubetsuPrimaryKey());
@@ -245,7 +245,7 @@ public class KarisanteiGakuHenkoEntity implements Serializable {
         entity.setAtesaki_dainoninShikibetsuCode(宛先.getDainoninShikibetsuCode());
     }
 
-    private void set宛名(DbT2002FukaTempTableEntity entity) {
+    private void set宛名の全項目(DbT2002FukaTempTableEntity entity) {
 
         entity.setAtena_shikibetsuCode(宛名.getShikibetsuCode());
         entity.setAtena_genLasdecCode(宛名.getGenLasdecCode());
@@ -384,10 +384,10 @@ public class KarisanteiGakuHenkoEntity implements Serializable {
         entity.setAtena_tennyumaeZenkokuJushoCode(宛名.getTennyumaeZenkokuJushoCode());
         entity.setAtena_tennyumaeJusho(宛名.getTennyumaeJusho());
         entity.setAtena_tennyumaeBanchi(宛名.getTennyumaeBanchi());
-        set宛名_２(entity);
+        set宛名の全項目_２(entity);
     }
 
-    private void set宛名_２(DbT2002FukaTempTableEntity entity) {
+    private void set宛名の全項目_２(DbT2002FukaTempTableEntity entity) {
         entity.setAtena_tennyumaeKatagaki(宛名.getTennyumaeKatagaki());
         entity.setAtena_tennyumaeSetainushimei(宛名.getTennyumaeSetainushimei());
         entity.setAtena_tennyumaeKyusei(宛名.getTennyumaeKyusei());
@@ -577,15 +577,8 @@ public class KarisanteiGakuHenkoEntity implements Serializable {
         entity.setKoseigo_fuShunyuGaku14(更正後計算後情報.getFuShunyuGaku14());
     }
 
-    private void set対象者_追加含む情報_更正後(DbT2002FukaTempTableEntity entity) {
+    private void set対象者_追加含む情報_更正後の全項目(DbT2002FukaTempTableEntity entity) {
         entity.setNenkinTokuchoKaifuJoho_insertDantaiCd(対象者_追加含む情報_更正後.getInsertDantaiCd());
-//        entity.setNenkinTokuchoKaifuJoho_insertTimestamp(対象者_追加含む情報_更正後.getInsertTimestamp());
-//        entity.setNenkinTokuchoKaifuJoho_insertReamsLoginId(対象者_追加含む情報_更正後.getInsertReamsLoginId());
-//        entity.setNenkinTokuchoKaifuJoho_insertContextId(対象者_追加含む情報_更正後.getInsertContextId());
-//        entity.setNenkinTokuchoKaifuJoho_isDeleted(対象者_追加含む情報_更正後.isDeleted());
-//        entity.setNenkinTokuchoKaifuJoho_updateCount(対象者_追加含む情報_更正後.getUpdateCount());
-//        entity.setNenkinTokuchoKaifuJoho_lastUpdateTimestamp(対象者_追加含む情報_更正後.getLastUpdateTimestamp());
-//        entity.setNenkinTokuchoKaifuJoho_lastUpdateReamsLoginId(対象者_追加含む情報_更正後.getLastUpdateReamsLoginId());
         entity.setNenkinTokuchoKaifuJoho_gyomuCode(対象者_追加含む情報_更正後.getGyomuCode());
         entity.setNenkinTokuchoKaifuJoho_shoriNendo(対象者_追加含む情報_更正後.getShoriNendo());
         entity.setNenkinTokuchoKaifuJoho_tsuchiNaiyoCode(対象者_追加含む情報_更正後.getTsuchiNaiyoCode());
@@ -602,7 +595,7 @@ public class KarisanteiGakuHenkoEntity implements Serializable {
         entity.setNenkinTokuchoKaifuJoho_hihokenshaNo(対象者_追加含む情報_更正後.getHihokenshaNo());
         entity.setNenkinTokuchoKaifuJoho_kokuhoSetaiCode(対象者_追加含む情報_更正後.getKokuhoSetaiCode());
         entity.setNenkinTokuchoKaifuJoho_dtCityCode(対象者_追加含む情報_更正後.getDtCityCode());
-        entity.setNenkinTokuchoKaifuJoho_dtTokubetsuChoshuGimushaCode(対象者_追加含む情報_更正後.getDtTokubetsuChoshuGimushaCode());
+        entity.setNenkinTokuchoKaifuJoho_dtTokubetsuChoshuGimushaCode(対象者_追加含む情報_更正後.getDtTokubetsuChoshuGimushaCode().getColumnValue());
         entity.setNenkinTokuchoKaifuJoho_dtTsuchiNaiyoCode(対象者_追加含む情報_更正後.getDtTsuchiNaiyoCode());
         entity.setNenkinTokuchoKaifuJoho_dtBaitaiCode(対象者_追加含む情報_更正後.getDtBaitaiCode());
         entity.setNenkinTokuchoKaifuJoho_dtTokubetsuChoshuSeidoCode(対象者_追加含む情報_更正後.getDtTokubetsuChoshuSeidoCode());

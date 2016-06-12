@@ -55,7 +55,9 @@ public class TokuchoHeijunka6gatsuMyBatisParameter implements IMyBatisParameter 
 
         this.業務コード = SubGyomuCode.DBB介護賦課;
         this.調定年度 = 調定年度;
-        this.調定年度minus1 = 調定年度.minusYear(1);
+        if (調定年度 != null) {
+            this.調定年度minus1 = 調定年度.minusYear(1);
+        }
         this.通知内容コード = 通知内容コード;
         this.更正前後区分 = 更正前後区分;
         this.作成処理名 = 作成処理名;

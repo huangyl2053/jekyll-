@@ -83,6 +83,9 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReport extends Report<Karisan
     }
 
     private void setOutputItemList() {
+        if (仮算定納入通知書情報 == null || 仮算定納入通知書情報.get編集後仮算定通知書共通情報() == null) {
+            return;
+        }
         KarisanteiHenjunkaHenkoTsuchishoB5YokoItem item;
 
         EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = 仮算定納入通知書情報.get編集後仮算定通知書共通情報();

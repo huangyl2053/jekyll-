@@ -6,10 +6,13 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.dbb0120001;
 
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.DBB0120001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.HeijunkaKeisanDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0120001.HeijunkaKeisanHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0120001.HeijunkaKeisanValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -19,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class HeijunkaKeisan {
 
+    private final RString 特徴平準化_特徴6月分_メニュー = new RString("DBBMN35001");
+
     /**
      * コントロールdivが「生成」された際の処理です。(オンロード)<br/>
      *
@@ -27,7 +32,10 @@ public class HeijunkaKeisan {
      */
     public ResponseData<HeijunkaKeisanDiv> onLoad(HeijunkaKeisanDiv div) {
         getHandler(div).initialize();
-        return ResponseData.of(div).respond();
+        if (ResponseHolder.getMenuID().equals(特徴平準化_特徴6月分_メニュー)) {
+            return ResponseData.of(div).setState(DBB0120001StateName.平準化計算);
+        }
+        return ResponseData.of(div).setState(DBB0120001StateName.通知書一括発行);
     }
 
     /**
