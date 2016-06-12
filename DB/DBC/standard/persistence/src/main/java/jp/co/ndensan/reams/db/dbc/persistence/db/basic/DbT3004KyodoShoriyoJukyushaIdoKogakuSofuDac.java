@@ -37,6 +37,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 共同処理用受給者異動高額送付のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-4390-020 xupeng
  */
 public class DbT3004KyodoShoriyoJukyushaIdoKogakuSofuDac implements ISaveable<DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity> {
 
