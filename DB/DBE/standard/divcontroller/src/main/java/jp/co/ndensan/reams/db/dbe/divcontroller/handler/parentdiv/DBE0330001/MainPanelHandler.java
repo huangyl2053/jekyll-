@@ -73,7 +73,7 @@ public class MainPanelHandler {
             if (youKaiGoNinTeiKekTesuChi.get認定状況提供日() == null || youKaiGoNinTeiKekTesuChi.get認定状況提供日().isEmpty()) {
                 認定状況提供日フラグ = true;
             } else {
-                認定状況提供日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get二次判定日().toString()));
+                認定状況提供日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get認定状況提供日().toString()));
             }
             TextBoxDate 生年月日 = new TextBoxDate();
             TextBoxDate 申請日 = new TextBoxDate();
