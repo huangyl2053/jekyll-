@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 滞納情報Entityのクラスです。
  *
- * @reamsid_L DBD-5620-060 liangbc
+ * @reamsid_L DBD-3620-060 liangbc
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
