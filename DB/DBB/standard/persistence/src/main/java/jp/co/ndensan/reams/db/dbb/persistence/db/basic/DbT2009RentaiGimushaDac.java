@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 連帯納付義務者のデータアクセスクラスです。
+ *
+ * @reamsid_L DBB-1640-020 lijunjun
  */
 public class DbT2009RentaiGimushaDac implements ISaveable<DbT2009RentaiGimushaEntity> {
 
