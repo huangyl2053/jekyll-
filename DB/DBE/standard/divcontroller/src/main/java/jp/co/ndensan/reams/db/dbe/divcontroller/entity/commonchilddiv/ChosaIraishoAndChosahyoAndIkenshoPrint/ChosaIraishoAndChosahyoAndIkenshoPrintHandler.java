@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
@@ -59,6 +60,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -78,6 +80,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     private static final RString 元号_明治 = new RString("明治");
     private static final RString 元号_大正 = new RString("大正");
     private static final RString 元号_昭和 = new RString("昭和");
+    private static final RString 文字列_まで = new RString("まで");
+    private static final RString 連結 = new RString("～");
     private static final RString 記号 = new RString("✔");
     private static final RString HOUSI = new RString("*");
     private static final RString 文字列1 = new RString("1");
@@ -578,7 +582,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 List<RString> 認定調査員コードリスト = get認定調査員コード(business.get認定調査員コード());
                 List<RString> 認定調査委託先コードリスト = get認定調査委託先コード(business.get認定調査委託先コード());
                 RString 生年月日 = business.get生年月日();
-                RString 年号 = new FlexibleDate(生年月日).wareki().toDateString();
+                RString 年号 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI).toDateString();
                 RString 前回認定年月日 = business.get前回認定年月日();
                 RString 前回要介護状態区分コード = business.get前回要介護状態区分コード();
                 RString 要支援 = RString.EMPTY;
@@ -641,9 +645,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         年号.startsWith(元号_明治) ? 記号 : RString.EMPTY,
                         年号.startsWith(元号_大正) ? 記号 : RString.EMPTY,
                         年号.startsWith(元号_昭和) ? 記号 : RString.EMPTY,
-                        !RString.isNullOrEmpty(生年月日) ? 生年月日.substring(0, INDEX_3) : RString.EMPTY,
-                        !RString.isNullOrEmpty(生年月日) ? 生年月日.substring(INDEX_3, INDEX_4) : RString.EMPTY,
-                        !RString.isNullOrEmpty(生年月日) ? 生年月日.substring(INDEX_4, INDEX_5) : RString.EMPTY,
+                        年号.substring(INDEX_3, INDEX_5),
+                        年号.substring(INDEX_6, INDEX_8),
+                        年号.substring(INDEX_9),
                         business.get年齢(),
                         business.get連絡先住所(),
                         business.get連絡先郵便番号(),
@@ -1127,16 +1131,266 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     }
 
     /**
+     * 主治医意見書記入情報1印刷用パラメータを作成します。
+     *
+     * @return 主治医意見書記入情報1
+     */
+    public List<IkenshokinyuyoshiBusiness> create主治医意見書記入情報1_パラメータ() {
+        List<IkenshokinyuyoshiBusiness> itemList = new ArrayList<>();
+        List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
+
+        for (dgShujiiIkensho_Row row : selectedItems) {
+            ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
+                    = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
+
+            List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
+                    .get主治医意見書記入用紙(parameter).records();
+            if (!businessList.isEmpty()) {
+                ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
+                List<RString> 保険者番号リスト = get被保険者番号(business.get保険者番号());
+                List<RString> 被保険者番号リスト = get被保険者番号(business.get被保険者番号());
+                RString 生年月日 = business.get生年月日();
+                RString 年号 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI).toDateString();
+                IkenshokinyuyoshiBusiness item = new IkenshokinyuyoshiBusiness();
+                item.setHokenshaNo1(保険者番号リスト.get(0));
+                item.setHokenshaNo2(保険者番号リスト.get(1));
+                item.setHokenshaNo3(保険者番号リスト.get(2));
+                item.setHokenshaNo4(保険者番号リスト.get(INDEX_3));
+                item.setHokenshaNo5(保険者番号リスト.get(INDEX_4));
+                item.setHokenshaNo6(保険者番号リスト.get(INDEX_5));
+                item.setHihokenshaNo1(被保険者番号リスト.get(0));
+                item.setHihokenshaNo2(被保険者番号リスト.get(1));
+                item.setHihokenshaNo3(被保険者番号リスト.get(2));
+                item.setHihokenshaNo4(被保険者番号リスト.get(INDEX_3));
+                item.setHihokenshaNo5(被保険者番号リスト.get(INDEX_4));
+                item.setHihokenshaNo6(被保険者番号リスト.get(INDEX_5));
+                item.setHihokenshaNo7(被保険者番号リスト.get(INDEX_6));
+                item.setHihokenshaNo8(被保険者番号リスト.get(INDEX_7));
+                item.setHihokenshaNo9(被保険者番号リスト.get(INDEX_8));
+                item.setHihokenshaNo10(被保険者番号リスト.get(INDEX_9));
+                item.setHihokenshaNameKana(business.get被保険者氏名カナ());
+                item.setHihokenshaName(business.get被保険者氏名());
+                item.setAge(business.get年齢());
+                item.setHihokenshaTel(business.get電話番号());
+                item.setJusho(business.get住所());
+                item.setShujiiName(business.get主治医氏名());
+                item.setIryokikanName(business.get医療機関名称());
+                item.setIryokikanAdress(business.get医療機関住所());
+                item.setIryokikanNameTel(business.get医療機関電話番号());
+                item.setIryokikanFax(business.get医療機関FAX番号());
+                item.setYubinNo(business.get郵便番号());
+                item.setBirthYY(年号.substring(INDEX_3, INDEX_5));
+                item.setBirthMM(年号.substring(INDEX_6, INDEX_8));
+                item.setBirthDD(年号.substring(INDEX_9));
+                RString ninteiShinseiDay = new FlexibleDate(business.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
+                        .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+                item.setShinseiYY1(ninteiShinseiDay.substring(1, 2));
+                item.setShinseiYY2(ninteiShinseiDay.substring(2, INDEX_3));
+                item.setShinseiMM1(ninteiShinseiDay.substring(INDEX_4, INDEX_5));
+                item.setShinseiMM2(ninteiShinseiDay.substring(INDEX_5, INDEX_6));
+                item.setShinseiDD1(ninteiShinseiDay.substring(INDEX_7, INDEX_8));
+                item.setShinseiDD2(ninteiShinseiDay.substring(INDEX_8));
+                item.setSeibetsuMan(Seibetsu.男.getコード().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY);
+                item.setSeibetsuWoman(Seibetsu.女.getコード().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY);
+                item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? 記号 : RString.EMPTY);
+                item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? 記号 : RString.EMPTY);
+                item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? 記号 : RString.EMPTY);
+                itemList.add(item);
+            }
+        }
+        return itemList;
+    }
+
+    /**
+     * 主治医意見書記入情報2印刷用パラメータを作成します。
+     *
+     * @return 主治医意見書記入情報2
+     */
+    public List<IkenshokinyuyoshiBusiness> create主治医意見書記入情報2_パラメータ() {
+        List<IkenshokinyuyoshiBusiness> itemList = new ArrayList<>();
+        List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
+
+        for (dgShujiiIkensho_Row row : selectedItems) {
+            ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
+                    = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
+
+            List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
+                    .get主治医意見書記入用紙(parameter).records();
+            if (!businessList.isEmpty()) {
+                ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
+                List<RString> 保険者番号リスト = get被保険者番号(business.get保険者番号());
+                List<RString> 被保険者番号リスト = get被保険者番号(business.get被保険者番号());
+                RString 生年月日 = business.get生年月日();
+                IkenshokinyuyoshiBusiness item = new IkenshokinyuyoshiBusiness();
+                item.setHokenshaNo1(保険者番号リスト.get(0));
+                item.setHokenshaNo2(保険者番号リスト.get(1));
+                item.setHokenshaNo3(保険者番号リスト.get(2));
+                item.setHokenshaNo4(保険者番号リスト.get(INDEX_3));
+                item.setHokenshaNo5(保険者番号リスト.get(INDEX_4));
+                item.setHokenshaNo6(保険者番号リスト.get(INDEX_5));
+                item.setHihokenshaNo1(被保険者番号リスト.get(0));
+                item.setHihokenshaNo2(被保険者番号リスト.get(1));
+                item.setHihokenshaNo3(被保険者番号リスト.get(2));
+                item.setHihokenshaNo4(被保険者番号リスト.get(INDEX_3));
+                item.setHihokenshaNo5(被保険者番号リスト.get(INDEX_4));
+                item.setHihokenshaNo6(被保険者番号リスト.get(INDEX_5));
+                item.setHihokenshaNo7(被保険者番号リスト.get(INDEX_6));
+                item.setHihokenshaNo8(被保険者番号リスト.get(INDEX_7));
+                item.setHihokenshaNo9(被保険者番号リスト.get(INDEX_8));
+                item.setHihokenshaNo10(被保険者番号リスト.get(INDEX_9));
+                RString ninteiShinseiDay = new FlexibleDate(business.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
+                        .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+                item.setShinseiYY1(ninteiShinseiDay.substring(1, 2));
+                item.setShinseiYY2(ninteiShinseiDay.substring(2, INDEX_3));
+                item.setShinseiMM1(ninteiShinseiDay.substring(INDEX_4, INDEX_5));
+                item.setShinseiMM2(ninteiShinseiDay.substring(INDEX_5, INDEX_6));
+                item.setShinseiDD1(ninteiShinseiDay.substring(INDEX_7, INDEX_8));
+                item.setShinseiDD2(ninteiShinseiDay.substring(INDEX_8));
+                itemList.add(item);
+            }
+        }
+        return itemList;
+    }
+
+    /**
+     * 主治医意見書記入情報3印刷用パラメータを作成します。
+     *
+     * @return 主治医意見書記入情報3
+     */
+    public List<IkenshokinyuyoshiBusiness> create主治医意見書記入情報3_パラメータ() {
+        List<IkenshokinyuyoshiBusiness> itemList = new ArrayList<>();
+        List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
+
+        for (dgShujiiIkensho_Row row : selectedItems) {
+            ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
+                    = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
+
+            List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
+                    .get主治医意見書記入用紙(parameter).records();
+            if (!businessList.isEmpty()) {
+                ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
+                List<RString> 保険者番号リスト = get被保険者番号(business.get保険者番号());
+                List<RString> 被保険者番号リスト = get被保険者番号(business.get被保険者番号());
+                RString 生年月日 = business.get生年月日();
+                IkenshokinyuyoshiBusiness item = new IkenshokinyuyoshiBusiness();
+                item.setHokenshaNo1(保険者番号リスト.get(0));
+                item.setHokenshaNo2(保険者番号リスト.get(1));
+                item.setHokenshaNo3(保険者番号リスト.get(2));
+                item.setHokenshaNo4(保険者番号リスト.get(INDEX_3));
+                item.setHokenshaNo5(保険者番号リスト.get(INDEX_4));
+                item.setHokenshaNo6(保険者番号リスト.get(INDEX_5));
+                item.setHihokenshaNo1(被保険者番号リスト.get(0));
+                item.setHihokenshaNo2(被保険者番号リスト.get(1));
+                item.setHihokenshaNo3(被保険者番号リスト.get(2));
+                item.setHihokenshaNo4(被保険者番号リスト.get(INDEX_3));
+                item.setHihokenshaNo5(被保険者番号リスト.get(INDEX_4));
+                item.setHihokenshaNo6(被保険者番号リスト.get(INDEX_5));
+                item.setHihokenshaNo7(被保険者番号リスト.get(INDEX_6));
+                item.setHihokenshaNo8(被保険者番号リスト.get(INDEX_7));
+                item.setHihokenshaNo9(被保険者番号リスト.get(INDEX_8));
+                item.setHihokenshaNo10(被保険者番号リスト.get(INDEX_9));
+                item.setHihokenshaTel(business.get電話番号());
+                RString ninteiShinseiDay = new FlexibleDate(business.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
+                        .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+                item.setShinseiYY1(ninteiShinseiDay.substring(1, 2));
+                item.setShinseiYY2(ninteiShinseiDay.substring(2, INDEX_3));
+                item.setShinseiMM1(ninteiShinseiDay.substring(INDEX_4, INDEX_5));
+                item.setShinseiMM2(ninteiShinseiDay.substring(INDEX_5, INDEX_6));
+                item.setShinseiDD1(ninteiShinseiDay.substring(INDEX_7, INDEX_8));
+                item.setShinseiDD2(ninteiShinseiDay.substring(INDEX_8));
+                itemList.add(item);
+            }
+        }
+        return itemList;
+    }
+
+    /**
      * 介護保険診断命令書印刷用パラメータを作成します。
      *
      * @return 介護保険診断命令書パラメータ
      */
     public List<KaigohokenShindanMeireishoHeaderItem> create介護保険診断命令書_パラメータ() {
         List<KaigohokenShindanMeireishoHeaderItem> itemList = new ArrayList<>();
+        List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
+        int 宛名連番 = 1;
+        RString 受診場所 = div.getShindanMeirei().getTxtJushinBasho().getValue();
+        for (dgShujiiIkensho_Row row : selectedItems) {
+            ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
+                    = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
+
+            List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
+                    .get介護保険診断命令書(parameter).records();
+            if (!businessList.isEmpty()) {
+                ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
+                RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE235001.getReportId(), FlexibleDate.getNowDate());
+                RString customerBarCode = ReportUtil.getCustomerBarCode(business.get医療機関住所(), business.get医療機関郵便番号());
+                RStringBuilder builder = new RStringBuilder();
+                builder.append("*");
+                builder.append((new RString(String.valueOf(宛名連番++))).padZeroToLeft(INDEX_6));
+                builder.append("#");
+                Map<Integer, RString> 通知文
+                        = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE235001.getReportId(), KamokuCode.EMPTY, 1);
+                KaigohokenShindanMeireishoHeaderItem item = new KaigohokenShindanMeireishoHeaderItem(
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        文書番号,
+                        business.get医療機関郵便番号(),
+                        business.get医療機関住所(),
+                        business.get被保険者氏名(),
+                        get名称付与(),
+                        customerBarCode,
+                        builder.toRString(),
+                        business.get被保険者番号(),
+                        通知文.get(1),
+                        business.get被保険者氏名(),
+                        business.get被保険者番号(),
+                        business.get医療機関名称(),
+                        business.get主治医氏名(),
+                        business.get医療機関住所(),
+                        business.get医療機関電話番号(),
+                        get受診日時または期間(),
+                        受診場所,
+                        通知文.get(2)
+                );
+                itemList.add(item);
+            }
+        }
         return itemList;
     }
 
-     /**
+    private RString get受診日時または期間() {
+        RStringBuilder 受診日時または期間 = new RStringBuilder();
+        RString radJyushinKikan = div.getShindanMeirei().getRadJyushinKikan().getSelectedKey();
+
+        if (KEY0.equals(radJyushinKikan)) {
+            RDate ymd = div.getShindanMeirei().getTxtJyushinymd().getValue();
+            RTime time = div.getShindanMeirei().getTxtJushinTime().getValue();
+
+            受診日時または期間.append(ymd.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            受診日時または期間.append(time.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
+            受診日時または期間.append(文字列_まで);
+        } else {
+            RDate from = div.getShindanMeirei().getTxtJushinKikan().getFromValue();
+            RDate to = div.getShindanMeirei().getTxtJushinKikan().getToValue();
+            受診日時または期間.append(from.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            受診日時または期間.append(連結);
+            受診日時または期間.append(to.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            受診日時または期間.append(文字列_まで);
+        }
+        return 受診日時または期間.toRString();
+    }
+
+    /**
      * 主治医意見書記入用紙印刷用パラメータを作成します。
      *
      * @return 主治医意見書記入用紙パラメータ

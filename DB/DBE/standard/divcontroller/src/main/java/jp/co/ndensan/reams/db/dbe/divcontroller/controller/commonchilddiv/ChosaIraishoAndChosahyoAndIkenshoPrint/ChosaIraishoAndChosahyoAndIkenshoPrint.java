@@ -62,6 +62,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
     private static final RString DBE221022 = new RString("DBE221022_chosahyoTokkijiko.rse");
     private static final RString DBE221041 = new RString("DBE221041_tokkijikoOCR.rse");
     private static final RString DBE221011 = new RString("DBE221011_chosahyoGaikyochosa.rse");
+    private static final RString DBE231012 = new RString("DBE231012_ikenshokinyuyoshiOCR.rse");
+    private static final RString DBE231014 = new RString("DBE231014_ikenshokinyuyoshiOCR.rse");
+    private static final RString DBE231002 = new RString("DBE231002_ikenshokinyuyoshi.rse");
 
     /**
      * 共通子DIVを初期化します。
@@ -311,18 +314,89 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             printService.print意見書作成依頼一覧表(getHandler(div).create意見書作成依頼一覧表_パラメータ());
         }
         List<RString> ichiran = div.getChkIkenshoSakuseiIchiran().getSelectedKeys();
-//        if (ichiran.contains(KEY0)) {
-//            // printService.print意見書作成依頼書(null);
-//        }
-//        if (ichiran.contains(KEY1)) {
-//            // printService.print意見書作成依頼書(null);
-//        }
+        if (ichiran.contains(KEY0)) {
+            call主治医意見書記入用紙(div, printService);
+        }
+        if (ichiran.contains(KEY1)) {
+            call主治医意見書記入用紙OCR(div, printService);
+        }
         if (ichiran.contains(KEY2)) {
             printService.print主治医意見書作成料請求書(getHandler(div).create主治医意見書作成料請求書_パラメータ());
         }
         List<RString> seikyusho = div.getChkIkenshoSakuseiryoSeikyusho().getSelectedKeys();
         if (seikyusho.contains(KEY0)) {
             printService.print介護保険診断命令書(getHandler(div).create介護保険診断命令書_パラメータ());
+        }
+    }
+
+    private void call主治医意見書記入用紙(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {
+        RDate date = RDate.getNowDate();
+        if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面1枚目1, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面1枚目2, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面1枚目3, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面2枚目1, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面2枚目2, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面2枚目3, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+            } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面1, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面2, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面3, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+            }
+        }
+        if (CONFIGVALUE3.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面1枚目1, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面1枚目2, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面1枚目3, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面2枚目1, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面2枚目2, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面2枚目3, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+            } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面1, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面2, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面3, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+            }
+        }
+    }
+
+    private void call主治医意見書記入用紙OCR(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {
+        RDate date = RDate.getNowDate();
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面1, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面2, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面3, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+            } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面1, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面2, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面3, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+            }
         }
     }
 
@@ -519,11 +593,22 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             printService.print認定調査票_特記事項(getHandler(div).create認定調査票_特記事項パラメータ());
         }
         if (DBE221041.equals(rseValue)) {
-            // TODO
             printService.print認定調査票_特記事項(getHandler(div).create認定調査票_特記事項パラメータ());
         }
         if (DBE221011.equals(rseValue)) {
             printService.print認定調査票_概況調査(getHandler(div).create認定調査票_概況調査パラメータ());
+        }
+
+        if (DBE231012.equals(rseValue)) {
+            printService.print主治医意見書記入用紙(getHandler(div).create主治医意見書記入情報1_パラメータ());
+        }
+
+        if (DBE231014.equals(rseValue)) {
+            printService.print主治医意見書記入用紙(getHandler(div).create主治医意見書記入情報2_パラメータ());
+        }
+
+        if (DBE231002.equals(rseValue)) {
+            printService.print主治医意見書記入用紙(getHandler(div).create主治医意見書記入情報3_パラメータ());
         }
     }
 
