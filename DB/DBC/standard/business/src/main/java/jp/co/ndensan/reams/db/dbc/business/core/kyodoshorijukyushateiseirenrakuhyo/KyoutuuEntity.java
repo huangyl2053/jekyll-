@@ -17,7 +17,7 @@ import lombok.Setter;
 /**
  * 共同処理用受給者異動情報の共通項目Entity
  *
- * @reamsid_L DBC-1950-030 chenaoqi
+ * @reamsid_L DBC-1952-020 chenaoqi
  */
 @Getter
 @Setter
