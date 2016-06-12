@@ -7,9 +7,12 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0230011;
 
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0230011.KobetsuJikoRenkeiInfoSakuseiKoikiDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -46,6 +49,17 @@ public class KaigoJyuminValidationHandler {
             if (div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().getValue() == null) {
                 validationMessages.add(new ValidationMessageControlPair(new KaigoJyuminValidationHandler.RRVMessages(
                         UrErrorMessages.必須, "今回開始時")));
+            }
+            if ((RDateTime.of(div.getKonkaiInfoInput().getTxtZenkaiChushutsuToYMD().getValue() == null
+                    ? RDate.getNowDate().toDateString() : div.getKonkaiInfoInput().getTxtZenkaiChushutsuToYMD().getValue().toDateString(),
+                    div.getKonkaiInfoInput().getTxtZenkaiChushutsuToTime().getValue() == null
+                    ? RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH_mm)
+                    : div.getKonkaiInfoInput().getTxtZenkaiChushutsuToTime().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
+                    .isBefore(RDateTime.of(div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().getValue().toDateString(),
+                                    div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().getValue()
+                                    .toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))))) {
+                validationMessages.add(new ValidationMessageControlPair(new KaigoJyuminValidationHandler.RRVMessages(
+                        UrErrorMessages.期間が不正_追加メッセージあり２, "今回開始日と今回開始時", "前回終了日と前回終了時")));
             }
         }
         return validationMessages;
