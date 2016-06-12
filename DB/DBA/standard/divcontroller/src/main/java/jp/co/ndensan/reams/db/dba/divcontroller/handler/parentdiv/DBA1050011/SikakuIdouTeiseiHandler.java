@@ -114,8 +114,8 @@ public class SikakuIdouTeiseiHandler {
             RoreiFukushiJoho joho = new RoreiFukushiJoho();
             joho.set識別コード(識別コード);
             joho.set状態(row.getJotai());
-            joho.set受給開始年月日(stringToFlexibleDate(row.getStartDate().getValue().toDateString()));
-            joho.set受給廃止年月日(stringToFlexibleDate(row.getEndDate().getValue().toDateString()));
+            joho.set受給開始年月日(rdateToFlexibleDate(row.getStartDate().getValue()));
+            joho.set受給廃止年月日(rdateToFlexibleDate(row.getEndDate().getValue()));
             roreiFukushiJohoList.add(joho);
         }
         return roreiFukushiJohoList;
@@ -126,6 +126,14 @@ public class SikakuIdouTeiseiHandler {
         if (!RString.isNullOrEmpty(date)) {
             RDate date_tmp = new RDate(date.toString());
             flexDate = new FlexibleDate(date_tmp.toDateString());
+        }
+        return flexDate;
+    }
+
+    private FlexibleDate rdateToFlexibleDate(RDate date) {
+        FlexibleDate flexDate = FlexibleDate.EMPTY;
+        if (date != null) {
+            flexDate = new FlexibleDate(date.toDateString());
         }
         return flexDate;
     }
