@@ -18,9 +18,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
-import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
+import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
+import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -63,10 +66,11 @@ public class JushochiTokureiTekiyoHenkoShuryoTodoke {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<JyushochiTokureiTekiyoHenkoReportSource> assembler = createAssembler(proerty, reportManager)) {
                 ReportSourceWriter<JyushochiTokureiTekiyoHenkoReportSource> reportSourceWrite = new ReportSourceWriter(assembler);
-                RString 認証者 = ReportUtil.get認証者情報(SubGyomuCode.DBA介護資格, proerty.reportId(), null,
-                        NinshoshaDenshikoinshubetsuCode.保険者印, reportSourceWrite).ninshoshaYakushokuMei;
+                INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
+                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), null, reportSourceWrite.getImageFolderPath());
                 for (JyushochiTokureiTekiyoHenkoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
-                        認証者)) {
+                        ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
                     report.writeBy(reportSourceWrite);
                 }
             }
