@@ -62,7 +62,7 @@ public class ShikakuKihonJohoHandler {
     /**
      * 適用情報Gridの設定。
      *
-     * 
+     *
      * @param masterList 適用情報取得
      */
     public void 適用情報Gridの設定(List<TaJushochiTokureisyaKanriMaster> masterList) {
@@ -143,10 +143,12 @@ public class ShikakuKihonJohoHandler {
 
         dgJushochiTokureiRireki_Row row = div.getTajutokuTekiyoJohoIchiran().getDgJushochiTokureiRireki().getActiveRow();
         Hokenja hokenja = 保険者情報取得(new HokenjaNo(row.getSochiHokenshaNo()));
-        div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().
-                getTxtYubinNo().setValue(hokenja.get郵便番号() == null ? YubinNo.EMPTY : hokenja.get郵便番号());
-        div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtJusho().
-                setValue(hokenja.get住所() == null ? RString.EMPTY : hokenja.get住所());
+        if (hokenja != null) {
+            div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().
+                    getTxtYubinNo().setValue(hokenja.get郵便番号() == null ? YubinNo.EMPTY : hokenja.get郵便番号());
+            div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtJusho().
+                    setValue(hokenja.get住所() == null ? RString.EMPTY : hokenja.get住所());
+        }
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtYakushoMei().setValue(row.getSochiHokenshaMeisho());
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().set枝番(row.getEdaNo());
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().
@@ -195,6 +197,7 @@ public class ShikakuKihonJohoHandler {
             }
         }
     }
+
     /**
      * 他市町村住所地特例連絡票の編集。
      *
