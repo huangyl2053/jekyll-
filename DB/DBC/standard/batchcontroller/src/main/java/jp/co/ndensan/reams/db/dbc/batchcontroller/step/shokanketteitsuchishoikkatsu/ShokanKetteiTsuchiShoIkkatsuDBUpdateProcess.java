@@ -60,7 +60,11 @@ public class ShokanKetteiTsuchiShoIkkatsuDBUpdateProcess extends BatchProcessBas
     @Override
     protected void process(DbT3036ShokanHanteiKekkaEntity entity) {
         RDate 決定日 = parameter.getKetteiYMD();
-        entity.setKetteiYMD(new FlexibleDate(決定日.getYearValue(), 決定日.getMonthValue(), 決定日.getDayValue()));
+        if (決定日 != null) {
+            entity.setKetteiYMD(new FlexibleDate(決定日.getYearValue(), 決定日.getMonthValue(), 決定日.getDayValue()));
+        } else {
+            entity.setKetteiYMD(null);
+        }
         dbT3036Writer.update(entity);
     }
 
