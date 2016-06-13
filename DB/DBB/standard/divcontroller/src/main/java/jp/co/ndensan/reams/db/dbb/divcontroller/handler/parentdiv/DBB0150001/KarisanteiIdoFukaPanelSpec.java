@@ -93,7 +93,7 @@ public enum KarisanteiIdoFukaPanelSpec implements IPredicate<KarisanteiIdoFukaPa
         public static boolean is処理対象と出力期の一致(KarisanteiIdoFukaPanelDiv div) {
             RString key1 = div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getDdlShorigetsu().getSelectedKey();
             RString key2 = div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
-                    .getDdlNotsuShuturyokuki().getSelectedKey();
+                    .getDdlNotsuShuturyokuki().getSelectedValue();
             RString 出力期_月 = key2.split("月").get(0);
             return key1.equals(出力期_月.substring(出力期_月.length() - 2, 出力期_月.length()));
         }
