@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0400011.Hih
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0400011.ValidationHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashoikkatsuhakko.HihokenshaShoBatchPrmFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -74,7 +74,7 @@ public class HihokenshaShoBatchPrm {
             validationMessages.add(new ValidationMessageControlPair(RRVMessage.ValidateA, div.getRadShutsuryokuJoken()));
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        ViewStateHolder.put(ViewStateKeys.介護保険被保険者証一括作成_出力条件, div.getRadShutsuryokuJoken().getSelectedKey());
+        ViewStateHolder.put(ViewStateKeys.出力条件, div.getRadShutsuryokuJoken().getSelectedKey());
         SearchResult<HihokenshashoIkkatsuHakkoModel> resultList = service.getChushutsuKikan(div.getRadShutsuryokuJoken().getSelectedKey());
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnHakko"), false);
         getHandler(div).onLoad(resultList.records());
@@ -101,11 +101,12 @@ public class HihokenshaShoBatchPrm {
      */
     public ResponseData<HihokenshaShoBatchPrmDiv> onChange_RadShutsuryokuJoken(HihokenshaShoBatchPrmDiv div) {
         ResponseData<HihokenshaShoBatchPrmDiv> response = new ResponseData<>();
-        if (ViewStateHolder.get(ViewStateKeys.介護保険被保険者証一括作成_出力条件, RString.class).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
-            div.getChkSaiHakko().setReadOnly(true);
+        if (ViewStateHolder.get(ViewStateKeys.出力条件, RString.class).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
+            div.getChkSaiHakko().setDisabled(true);
         } else {
-            div.getChkSaiHakko().setReadOnly(false);
+            div.getChkSaiHakko().setDisabled(false);
         }
+        response.data = div;
         return response;
     }
 

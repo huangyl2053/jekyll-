@@ -90,7 +90,6 @@ public class HihokenshaDaichoHakkoIchiranhyoProcess extends BatchKeyBreakBase<Db
     private static final RString TELEPHONENOTITLE = new RString("連絡先");
     private static final int INT3 = 3;
     private static final int INT4 = 4;
-    private static final int INT5 = 5;
     private RString 出力順1 = RString.EMPTY;
     private RString 出力順2 = RString.EMPTY;
     private RString 出力順3 = RString.EMPTY;
