@@ -273,8 +273,8 @@ public class KihonInfoMainPanelHandler {
                     様式番号,
                     明細番号);
         } else {
-            明細番号 = RString.EMPTY;
             if (shokanKihon == null) {
+                明細番号 = RString.EMPTY;
                 shokanKihon = new ShokanKihon(
                         被保険者番号,
                         サービス年月,
