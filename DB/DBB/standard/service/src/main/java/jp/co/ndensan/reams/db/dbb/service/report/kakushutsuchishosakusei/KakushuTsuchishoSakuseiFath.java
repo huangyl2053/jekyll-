@@ -471,22 +471,22 @@ public class KakushuTsuchishoSakuseiFath {
                 return get収入額(thisKibetsu.getChoteiKyotsu(identifier));
             }
         }
-        return Decimal.ZERO;
+        return null;
     }
 
     private Decimal get収入額(ChoteiKyotsu 調定共通情報) {
         if (収入情報取得PSM == null || 収入情報取得PSM.isEmpty() || 調定共通情報 == null) {
-            return Decimal.ZERO;
+            return null;
         }
         for (TotalShunyuRelateEntity 収入情報 : 収入情報取得PSM) {
             if (収入情報.get収納キーRelateEntity() == null || 収入情報.get収納キーRelateEntity().get収納管理Entity() == null) {
                 continue;
             }
             if (調定共通情報.get収納ID().equals(収入情報.get収納キーRelateEntity().get収納管理Entity().getShunoId())) {
-                return 収入情報.get最新収入Entity() == null ? Decimal.ZERO : 収入情報.get最新収入Entity().getShunyugaku();
+                return 収入情報.get最新収入Entity() == null ? null : 収入情報.get最新収入Entity().getShunyugaku();
             }
         }
-        return Decimal.ZERO;
+        return null;
     }
 
     /**
