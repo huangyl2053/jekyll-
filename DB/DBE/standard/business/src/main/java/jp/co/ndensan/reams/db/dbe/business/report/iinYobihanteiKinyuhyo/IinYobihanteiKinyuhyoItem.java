@@ -18,13 +18,10 @@ import lombok.Getter;
 public class IinYobihanteiKinyuhyoItem {
 
     private final RString 作成年月日;
-    private final RString 帳票名;
-    private final RString 頁番号;
     private final RString 審査会開催番号;
     private final RString no;
     private final RString 申請区分;
     private final RString 被保険者区分;
-    private final RString 氏名;
     private final RString 性別;
     private final RString 年齢;
     private final RString 前回二次判定;
@@ -42,13 +39,10 @@ public class IinYobihanteiKinyuhyoItem {
      * インスタンスを生成します。
      *
      * @param 作成年月日 作成年月日
-     * @param 帳票名 帳票名
-     * @param 頁番号 頁番号
      * @param 審査会開催番号 審査会開催番号
      * @param no no
      * @param 申請区分 申請区分
      * @param 被保険者区分 被保険者区分
-     * @param 氏名 氏名
      * @param 性別 性別
      * @param 年齢 年齢
      * @param 前回二次判定 前回二次判定
@@ -62,20 +56,17 @@ public class IinYobihanteiKinyuhyoItem {
      * @param 調査員特記事項 調査員特記事項
      * @param 主治医意見書 主治医意見書
      */
-    public IinYobihanteiKinyuhyoItem(RString 作成年月日, RString 帳票名, RString 頁番号,
+    public IinYobihanteiKinyuhyoItem(RString 作成年月日,
             RString 審査会開催番号, RString no, RString 申請区分, RString 被保険者区分,
-            RString 氏名, RString 性別, RString 年齢, RString 前回二次判定,
+            RString 性別, RString 年齢, RString 前回二次判定,
             RString 前回認定有効期間, RString 一次判定, RString 二次判定, RString 状態像,
             RString 認定有効期間, RString 特定疾病コード, RString 特定疾病名称, RString 調査員特記事項,
             RString 主治医意見書) {
         this.作成年月日 = 作成年月日;
-        this.帳票名 = 帳票名;
-        this.頁番号 = 頁番号;
         this.審査会開催番号 = 審査会開催番号;
         this.no = no;
         this.申請区分 = 申請区分;
         this.被保険者区分 = 被保険者区分;
-        this.氏名 = 氏名;
         this.性別 = 性別;
         this.年齢 = 年齢;
         this.前回二次判定 = 前回二次判定;
