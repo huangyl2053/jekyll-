@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class ShikyuShinseiDetailDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,6 +29,8 @@ public class ShikyuShinseiDetailDiv extends Panel {
     private panelHeadDiv panelHead;
     @JsonProperty("pnlShinsei")
     private pnlShinseiDiv pnlShinsei;
+    @JsonProperty("CheckFlag")
+    private RString CheckFlag;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -87,6 +90,24 @@ public class ShikyuShinseiDetailDiv extends Panel {
     @JsonProperty("pnlShinsei")
     public void setPnlShinsei(pnlShinseiDiv pnlShinsei) {
         this.pnlShinsei = pnlShinsei;
+    }
+
+    /*
+     * getCheckFlag
+     * @return CheckFlag
+     */
+    @JsonProperty("CheckFlag")
+    public RString getCheckFlag() {
+        return CheckFlag;
+    }
+
+    /*
+     * setCheckFlag
+     * @param CheckFlag CheckFlag
+     */
+    @JsonProperty("CheckFlag")
+    public void setCheckFlag(RString CheckFlag) {
+        this.CheckFlag = CheckFlag;
     }
 
     // </editor-fold>
