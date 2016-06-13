@@ -75,7 +75,7 @@ public class TokuteifutanGendogakuShinseisho {
      * コンストラクタ。
      *
      */
-    public TokuteifutanGendogakuShinseisho() {
+    TokuteifutanGendogakuShinseisho() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
@@ -86,6 +86,15 @@ public class TokuteifutanGendogakuShinseisho {
      */
     TokuteifutanGendogakuShinseisho(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link TokuteifutanGendogakuShinseisho}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link TokuteifutanGendogakuShinseisho}のインスタンス
+     */
+    public static TokuteifutanGendogakuShinseisho createInstance() {
+        return InstanceProvider.create(TokuteifutanGendogakuShinseisho.class);
     }
 
     /**

@@ -149,7 +149,7 @@ public class KakushuShinseishoHakkoHandler {
                             .createKaigoHokenRiyoshaFutangakuGengakuMenjyoShinseishoChohyo(識別コード, 被保険者番号);
                 }
                 if (ShinseishoChohyoShurui.介護保険特定負担限度額申請書.get名称().equals(row.getShinseisho())) {
-                    TokuteifutanGendogakuShinseisho todoke = new TokuteifutanGendogakuShinseisho();
+                    TokuteifutanGendogakuShinseisho todoke = TokuteifutanGendogakuShinseisho.createInstance();
                     sourceData = todoke.createTokuteifutanGendogakuShinseishoChohyo(識別コード, 被保険者番号);
                 }
                 if (ShinseishoChohyoShurui.社会福祉法人等利用者負担軽減対象確認申請書.get名称().equals(row.getShinseisho())) {
