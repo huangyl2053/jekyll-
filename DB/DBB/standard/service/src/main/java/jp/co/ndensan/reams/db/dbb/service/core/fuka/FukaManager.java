@@ -99,7 +99,7 @@ public class FukaManager {
             FukaNokiResearcher 納期) {
         if (Decimal.ZERO.compareTo(介護賦課.get特徴期別金額01()) < 0) {
             save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
-                    介護賦課.get特徴期別金額01(), RDate.getNowDate(), 1);
+                    介護賦課.get特徴期別金額01(), 納期.get特徴納期(1).get納期限(), 1);
         }
         if (Decimal.ZERO.compareTo(介護賦課.get特徴期別金額02()) < 0) {
             save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
