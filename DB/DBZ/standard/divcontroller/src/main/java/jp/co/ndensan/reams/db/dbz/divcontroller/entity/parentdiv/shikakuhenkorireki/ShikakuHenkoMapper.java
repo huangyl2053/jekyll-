@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakuhenkorireki;
 
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IPredicate;
@@ -40,15 +41,16 @@ public class ShikakuHenkoMapper {
             }
 
             private boolean hasSame資格変更事由(DbT1001HihokenshaDaichoEntity t) {
-                return t.getShikakuHenkoJiyuCode().equals(rowValue.getHenkoJiyuKey());
+                return Objects.equals(t.getShikakuHenkoJiyuCode(), rowValue.getHenkoJiyuKey());
+  
             }
 
             private boolean hasSame資格変更年月日(DbT1001HihokenshaDaichoEntity t) {
-                return t.getShikakuHenkoYMD().equals(rowValue.getHenkoDate().getValue());
+                return Objects.equals(t.getShikakuHenkoYMD(), (rowValue.getHenkoDate().getValue()));
             }
 
             private boolean hasSame資格変更届出年月日(DbT1001HihokenshaDaichoEntity t) {
-                return t.getShikakuHenkoTodokedeYMD().equals(rowValue.getHenkoTodokedeDate().getValue());
+                return Objects.equals(t.getShikakuHenkoTodokedeYMD(), (rowValue.getHenkoTodokedeDate().getValue()));
             }
         };
     }
@@ -91,7 +93,7 @@ public class ShikakuHenkoMapper {
 
                 //TODO n8178 城間篤人 資格変更事由にはEMPTYが入る可能性があるが、コードがそれを考慮する形になっていないためif文で仮対応。
                 //該当する項目が存在しない場合の動作が決まった後に修正。
-                if (!model.getShikakuHenkoJiyuCode().isEmpty()) {
+                if (!RString.isNullOrEmpty(model.getShikakuHenkoJiyuCode())) {
                     row.setHenkoJiyuKey(model.getShikakuHenkoJiyuCode());
                     row.setHenkoJiyu(model.getShikakuHenkoJiyuCode());
                 }
@@ -99,7 +101,10 @@ public class ShikakuHenkoMapper {
                 row.getHenkoTodokedeDate().setValue(model.getShikakuHenkoTodokedeYMD());
                 //TODO n8178 城間篤人 旧保険者を取得する方法は用意されたため、この代替実装は不要になる。後日置き換えが必要
                 //row.setKyuHokensha(Kyuhokensha.toValue(model.get旧市町村コード().getColumnValue()).getName());
-                row.setSochimotoHokensha(model.getKoikinaiTokureiSochimotoShichosonCode().getColumnValue());
+                LasdecCode sochimotoShichosonCode = model.getKoikinaiTokureiSochimotoShichosonCode();
+                if (sochimotoShichosonCode != null) {
+                    row.setSochimotoHokensha(sochimotoShichosonCode.getColumnValue());
+                }
                 return row;
             }
         };
