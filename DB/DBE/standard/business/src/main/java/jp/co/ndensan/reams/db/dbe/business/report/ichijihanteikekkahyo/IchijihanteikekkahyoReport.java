@@ -36,7 +36,7 @@ public class IchijihanteikekkahyoReport extends Report<IchijihanteikekkahyoRepor
      * @param reportSourceWriter 帳票Writer
      */
     @Override
-    protected void writeBy(ReportSourceWriter<IchijihanteikekkahyoReportSource> reportSourceWriter) {
+    public void writeBy(ReportSourceWriter<IchijihanteikekkahyoReportSource> reportSourceWriter) {
         for (int i = ZERO; i < MAXCOUNT; i++) {
             IIchijihanteikekkahyoEditor editor = new IchijihanteikekkahyoEditor(entity, i);
             IIchijihanteikekkahyoBuilder builder = new IchijihanteikekkahyoBuilder(editor);
