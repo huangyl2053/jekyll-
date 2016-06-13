@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogofujoshurui;
+package jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogofujoshurui;
 
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0526SeikatsuHogoFujoShuruiEntity;
 

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.business.core.hihokenshadaichosakusei;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.HihokenshaDaichoDivisionEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.HihokenshaDaichoSakuseiEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.RoreiFukushiNenkinJukyushaDivisionEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SeikatsuHogoJukyushaDivisionEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokenshadaichosakusei.SeikatsuHogoJukyushaDivisionEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SetaiLeftEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SetaiRightEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.ShoKofuKaishuDivisionSumEntity;

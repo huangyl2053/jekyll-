@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogojukyusha;
+package jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShurui;
-import jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShuruiIdentifier;
-import jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogoteishikikan.SeikatsuHogoTeishikikan;
-import jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogoteishikikan.SeikatsuHogoTeishikikanIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShurui;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShuruiIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogoteishikikan.SeikatsuHogoTeishikikan;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogoteishikikan.SeikatsuHogoTeishikikanIdentifier;
 import jp.co.ndensan.reams.ur.urd.definition.core.seikatsuhogo.KaigoRyoDairiNofuKubun;
 import jp.co.ndensan.reams.ur.urd.definition.core.seikatsuhogo.KyugoShisetsuNyuTaishoKubun;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;

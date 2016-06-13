@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokensha.seikatsuhogojukyusha;
+package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokensha.seikatsuhogojukyusha;
 
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaMapperParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaMapperParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 
 /**
  * 生活保護受給者のマッパーインタフェースです。

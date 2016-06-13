@@ -3,7 +3,7 @@
 <!-- 概要： 生活保護受給者のマッピング用XMLです。 -->
 <!-- @reamsid_L DBA-9999-011 sunhaidi -->
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokensha.seikatsuhogojukyusha.ISeikatsuHogoJukyushaMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokensha.seikatsuhogojukyusha.ISeikatsuHogoJukyushaMapper">
 <!--    
     <select id="select生活保護受給者ByKey" resultMap="resultMap_SeikatsuHogoJukyushaEntity" fetchSize="500">
         <include refid="selectSeikatsuHogoJukyushaEntity" />
