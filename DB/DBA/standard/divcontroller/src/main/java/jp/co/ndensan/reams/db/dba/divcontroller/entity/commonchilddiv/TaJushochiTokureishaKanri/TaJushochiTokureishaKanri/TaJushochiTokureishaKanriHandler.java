@@ -497,7 +497,9 @@ public class TaJushochiTokureishaKanriHandler {
                 Collections.sort(rowList, new DateComparatorRirekiNo());
                 int 最新履歴番号 = TaJushochiTokureisyaKanriManager.createInstance().get最新履歴番号(識別コード);
                 ShisetsuNyutaishoIdentifier taisho = new ShisetsuNyutaishoIdentifier(識別コード, 最新履歴番号);
-                TaJushochiTokureisyaKanriManager.createInstance().regShisetsuNyutaisho(set適用状態介護保険施設入退所(保険施設入退所Model.get(taisho), 適用情報).toEntity());
+                if (保険施設入退所Model.get(taisho) != null) {
+                    TaJushochiTokureisyaKanriManager.createInstance().regShisetsuNyutaisho(set適用状態介護保険施設入退所(保険施設入退所Model.get(taisho), 適用情報).toEntity());
+                }
                 Collections.sort(rowList, new DateComparator());
                 break;
             } else if (解除モード.equals(new RString(div.getMode_DisplayMode().toString()))) {
@@ -510,7 +512,9 @@ public class TaJushochiTokureishaKanriHandler {
                 TaJushochiTokureisyaKanriManager.createInstance().regTaJushochiTokurei(set解除状態他住所地特例(他住所地特例Model.get(住所地特例の識別子),
                         他住所地特例Model.get(更新前住所地特例の識別子), row).toEntity());
                 ShisetsuNyutaishoIdentifier taisho = new ShisetsuNyutaishoIdentifier(識別コード, Integer.parseInt(row.getRirekiNo().toString()));
-                TaJushochiTokureisyaKanriManager.createInstance().updShisetsuNyutaisho(set解除状態介護保険施設入退所(保険施設入退所Model.get(taisho), row).toEntity());
+                if (保険施設入退所Model.get(taisho) != null) {
+                    TaJushochiTokureisyaKanriManager.createInstance().updShisetsuNyutaisho(set解除状態介護保険施設入退所(保険施設入退所Model.get(taisho), row).toEntity());
+                }
                 if (他特例解除.equals(row.getKaijoJiyu())) {
                     if (!TaJushochiTokureisyaKanriManager.createInstance().checkAge(識別コード, new FlexibleDate(row.getKaijoYMD().getValue().toString()))) {
                         if (new RString(DbaQuestionMessages.資格取得確認.getMessage().getCode())
@@ -840,7 +844,7 @@ public class TaJushochiTokureishaKanriHandler {
         if (row.getNyushoYMD() != null && row.getNyushoYMD().getValue() != null) {
             施設入退所.set入所年月日(new FlexibleDate(row.getNyushoYMD().getValue().toString()));
         }
-        return taisho.createBuilderForEdit()
+        return 施設入退所
                 .set市町村コード(宛名情報.getGenLasdecCode())
                 .set台帳種別(new RString("2"))
                 .set入所処理年月日(new FlexibleDate(RDate.getNowDateTime().getDate().toDateString()))
@@ -850,8 +854,11 @@ public class TaJushochiTokureishaKanriHandler {
     private ShisetsuNyutaisho set解除状態介護保険施設入退所(
             ShisetsuNyutaisho taisho,
             dgJushochiTokureiRireki_Row row) {
-        return taisho.createBuilderForEdit()
-                .set退所年月日(new FlexibleDate(row.getTaishoYMD().getValue().toString()))
+        ShisetsuNyutaishoBuilder 施設入退所 = taisho.createBuilderForEdit();
+        if (row.getTaishoYMD() != null && row.getTaishoYMD().getValue() != null) {
+            施設入退所.set退所年月日(new FlexibleDate(row.getTaishoYMD().getValue().toString()));
+        }
+        return 施設入退所
                 .set退所処理年月日(new FlexibleDate(RDate.getNowDateTime().getDate().toDateString()))
                 .build();
     }

@@ -44,11 +44,11 @@
         UNION
         SELECT
         '2'  AS 明細合計区分,
-        ''   AS  事業者番号,
-        ''  AS  サービス種類コード,
+        null   AS  事業者番号,
+        null  AS  サービス種類コード,
         '0' AS  サービス費用合計額,
         '0' AS  利用者負担額,
-        ''  AS  高額給付根拠,
+        null  AS  高額給付根拠,
         DbT3055KogakuKyufuTaishoshaGokei."serviceHiyoGokeiGakuGokei"  AS  サービス費用合計額合計,
         DbT3055KogakuKyufuTaishoshaGokei."riyoshaFutanGakuGokei"  AS  利用者負担額合計,
         DbT3055KogakuKyufuTaishoshaGokei."santeiKijunGaku"  AS  算定基準額,
@@ -90,11 +90,11 @@
         UNION
         SELECT
         '2'  AS 明細合計区分,
-        ''   AS  事業者番号,
-        ''  AS  サービス種類コード,
+        null   AS  事業者番号,
+        null  AS  サービス種類コード,
         '0' AS  サービス費用合計額,
         '0' AS  利用者負担額,
-        ''  AS  高額給付根拠,
+        null  AS  高額給付根拠,
         DbT3109JigyoKogakuKyufuTaishoshaGokei."serviceHiyoGokeiGakuGokei"  AS  サービス費用合計額合計,
         DbT3109JigyoKogakuKyufuTaishoshaGokei."riyoshaFutanGakuGokei"  AS  利用者負担額合計,
         DbT3109JigyoKogakuKyufuTaishoshaGokei."santeiKijunGaku"  AS  算定基準額,

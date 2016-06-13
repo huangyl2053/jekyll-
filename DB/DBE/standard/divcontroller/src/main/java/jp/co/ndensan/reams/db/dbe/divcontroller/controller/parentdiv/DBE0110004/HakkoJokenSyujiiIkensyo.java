@@ -1,0 +1,294 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0110004;
+
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110004.HakkoJokenSyujiiIkensyoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110004.HakkoJokenSyujiiIkensyoHandler;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+/**
+ * 画面設計_DBE0110004_主治医意見書に関する帳票発行画面クラスです
+ *
+ * @reamsid_L DBE-1390-070 xuyongchao
+ */
+public class HakkoJokenSyujiiIkensyo {
+
+    private static final RString SELECT_KEY0 = new RString("key0");
+
+    /**
+     * 画面初期化処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenSyujiiIkensyoDiv>
+     */
+    public ResponseData<HakkoJokenSyujiiIkensyoDiv> onLoad(HakkoJokenSyujiiIkensyoDiv div) {
+        getHandler(div).onLoad();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医意見書未提出者一覧条件パネルの処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenSyujiiIkensyoDiv>
+     */
+    public ResponseData<HakkoJokenSyujiiIkensyoDiv> onClick_chkMiteishutsushaIchiran(HakkoJokenSyujiiIkensyoDiv div) {
+        if (div.getChkMiteishutsushaIchiran().getSelectedKeys().contains(SELECT_KEY0)) {
+            div.getRadJoken1().setDisabled(false);
+            if (div.getRadJoken1().getSelectedKey().contains(SELECT_KEY0)) {
+                div.getTxtIraiNisu().setDisabled(false);
+                div.getTxtShinseiYMD1().clearFromValue();
+                div.getTxtShinseiYMD1().clearToValue();
+                div.getTxtShinseiYMD1().setDisabled(true);
+            } else {
+                div.getTxtIraiNisu().clearValue();
+                div.getTxtIraiNisu().setDisabled(true);
+                div.getTxtShinseiYMD1().setDisabled(false);
+            }
+        } else {
+            div.getRadJoken1().setDisabled(true);
+            div.getTxtIraiNisu().clearValue();
+            div.getTxtIraiNisu().setDisabled(true);
+            div.getTxtShinseiYMD1().clearFromValue();
+            div.getTxtShinseiYMD1().clearToValue();
+            div.getTxtShinseiYMD1().setDisabled(true);
+            div.getMiteishutsushaIchiranJoken().setIsOpen(false);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医意見書未提出者一覧条件ラジオボタンの処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenSyujiiIkensyoDiv>
+     */
+    public ResponseData<HakkoJokenSyujiiIkensyoDiv> onClick_radJoken1(HakkoJokenSyujiiIkensyoDiv div) {
+        if (div.getRadJoken1().getSelectedKey().contains(SELECT_KEY0)) {
+            div.getTxtIraiNisu().setDisabled(false);
+            div.getTxtShinseiYMD1().clearFromValue();
+            div.getTxtShinseiYMD1().clearToValue();
+            div.getTxtShinseiYMD1().setDisabled(true);
+        } else {
+            div.getTxtIraiNisu().clearValue();
+            div.getTxtIraiNisu().setDisabled(true);
+            div.getTxtShinseiYMD1().setDisabled(false);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医意見書５項目確認一覧表条件パネルの処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenSyujiiIkensyoDiv>
+     */
+    public ResponseData<HakkoJokenSyujiiIkensyoDiv> onClick_KakuninIchiranhyoJoken(HakkoJokenSyujiiIkensyoDiv div) {
+        if (div.getChkKakuninIchiranhyo().getSelectedKeys().contains(SELECT_KEY0)) {
+            div.getRadJoken2().setDisabled(false);
+            if (div.getRadJoken2().getSelectedKey().contains(SELECT_KEY0)) {
+                div.getTxtShinsakai2().clearValue();
+                div.getTxtShinsakai2().setDisabled(true);
+            } else {
+                div.getTxtShinsakai2().setDisabled(false);
+            }
+        } else {
+            div.getRadJoken2().setDisabled(true);
+            div.getTxtShinsakai2().clearValue();
+            div.getTxtShinsakai2().setDisabled(true);
+            div.getKakuninIchiranhyoJoken().setIsOpen(false);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医意見書５項目確認一覧表条件ラジオボタンの処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenSyujiiIkensyoDiv>
+     */
+    public ResponseData<HakkoJokenSyujiiIkensyoDiv> onClick_radJoken2(HakkoJokenSyujiiIkensyoDiv div) {
+        if (div.getRadJoken2().getSelectedKey().contains(SELECT_KEY0)) {
+            div.getTxtShinsakai2().clearValue();
+            div.getTxtShinsakai2().setDisabled(true);
+        } else {
+            div.getTxtShinsakai2().setDisabled(false);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医意見書依頼未処理者一覧表条件パネルの処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenSyujiiIkensyoDiv>
+     */
+    public ResponseData<HakkoJokenSyujiiIkensyoDiv> onClick_chkIraiMishorishaIchiranhyo(HakkoJokenSyujiiIkensyoDiv div) {
+        if (div.getChkIraiMishorishaIchiranhyo().getSelectedKeys().contains(SELECT_KEY0)) {
+            div.getRadJoken3().setDisabled(false);
+            if (div.getRadJoken3().getSelectedKey().contains(SELECT_KEY0)) {
+                div.getTxtShinsaYMD3().clearFromValue();
+                div.getTxtShinsaYMD3().clearToValue();
+                div.getTxtShinsaYMD3().setDisabled(true);
+            }
+        } else {
+            div.getRadJoken3().setDisabled(true);
+            div.getTxtShinsaYMD3().clearFromValue();
+            div.getTxtShinsaYMD3().clearToValue();
+            div.getTxtShinsaYMD3().setDisabled(true);
+            div.getIraiMishorishaIchiranhyoJoken().setIsOpen(false);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医意見書依頼未処理者一覧表条件ラジオボタンの処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenSyujiiIkensyoDiv>
+     */
+    public ResponseData<HakkoJokenSyujiiIkensyoDiv> onClick_radJoken3(HakkoJokenSyujiiIkensyoDiv div) {
+        if (div.getRadJoken3().getSelectedKey().contains(SELECT_KEY0)) {
+            div.getTxtShinsaYMD3().clearFromValue();
+            div.getTxtShinsaYMD3().clearToValue();
+            div.getTxtShinsaYMD3().setDisabled(true);
+        } else {
+            div.getTxtShinsaYMD3().setDisabled(false);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医意見書作成依頼変更者一覧表条件パネルの処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenSyujiiIkensyoDiv>
+     */
+    public ResponseData<HakkoJokenSyujiiIkensyoDiv> onClick_chkSakuseiIraiHenkoushaIchiranhyoJoken(HakkoJokenSyujiiIkensyoDiv div) {
+        if (div.getChkSakuseiIraiHenkoushaIchiranhyoJoken().getSelectedKeys().contains(SELECT_KEY0)) {
+            div.getTxtShinseiYMD4().setDisabled(false);
+        } else {
+            div.getTxtShinseiYMD4().clearFromValue();
+            div.getTxtShinseiYMD4().clearToValue();
+            div.getTxtShinseiYMD4().setDisabled(true);
+            div.getSakuseiIraiHenkoushaIchiranhyoJoken().setIsOpen(false);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医意見書依頼済み一覧表条件パネルの処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenSyujiiIkensyoDiv>
+     */
+    public ResponseData<HakkoJokenSyujiiIkensyoDiv> onClick_chkIraiZumiIchiranhyoJoken(HakkoJokenSyujiiIkensyoDiv div) {
+        if (div.getChkIraiZumiIchiranhyoJoken().getSelectedKeys().contains(SELECT_KEY0)) {
+            div.getRadJoken5().setDisabled(false);
+            if (div.getRadJoken5().getSelectedKey().contains(SELECT_KEY0)) {
+                div.getTxtShoriYMD5().setDisabled(false);
+                div.getTxtShinseiYMD5().clearFromValue();
+                div.getTxtShinseiYMD5().clearToValue();
+                div.getTxtShinseiYMD5().setDisabled(true);
+            } else {
+                div.getTxtShinseiYMD5().setDisabled(false);
+                div.getTxtShoriYMD5().clearFromValue();
+                div.getTxtShoriYMD5().clearToValue();
+                div.getTxtShoriYMD5().setDisabled(true);
+            }
+        } else {
+            div.getRadJoken5().setDisabled(true);
+            div.getTxtShoriYMD5().clearFromValue();
+            div.getTxtShoriYMD5().clearToValue();
+            div.getTxtShoriYMD5().setDisabled(true);
+            div.getTxtShinseiYMD5().clearFromValue();
+            div.getTxtShinseiYMD5().clearToValue();
+            div.getTxtShinseiYMD5().setDisabled(true);
+            div.getIraiZumiIchiranhyoJoken().setIsOpen(false);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医意見書依頼済み一覧表条件ラジオボタンの処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenSyujiiIkensyoDiv>
+     */
+    public ResponseData<HakkoJokenSyujiiIkensyoDiv> onClick_radJoken5(HakkoJokenSyujiiIkensyoDiv div) {
+        if (div.getRadJoken5().getSelectedKey().contains(SELECT_KEY0)) {
+            div.getTxtShoriYMD5().setDisabled(false);
+            div.getTxtShinseiYMD5().clearFromValue();
+            div.getTxtShinseiYMD5().clearToValue();
+            div.getTxtShinseiYMD5().setDisabled(true);
+        } else {
+            div.getTxtShinseiYMD5().setDisabled(false);
+            div.getTxtShoriYMD5().clearFromValue();
+            div.getTxtShoriYMD5().clearToValue();
+            div.getTxtShoriYMD5().setDisabled(true);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医意見書作成料請求一覧表条件パネルの処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenSyujiiIkensyoDiv>
+     */
+    public ResponseData<HakkoJokenSyujiiIkensyoDiv> onClick_chkSakuseiryoSeikyuIchiranhyo(HakkoJokenSyujiiIkensyoDiv div) {
+        if (div.getChkSakuseiryoSeikyuIchiranhyo().getSelectedKeys().contains(SELECT_KEY0)) {
+            div.getRadSeikyuIchiranJoken().setDisabled(false);
+            if (div.getRadSeikyuIchiranJoken().getSelectedKey().contains(SELECT_KEY0)) {
+                div.getTxtSeikyuIchiranShoriYMD().setDisabled(false);
+                div.getTxtJuryoYMD().clearFromValue();
+                div.getTxtJuryoYMD().clearToValue();
+                div.getTxtJuryoYMD().setDisabled(true);
+            } else {
+                div.getTxtJuryoYMD().setDisabled(false);
+                div.getTxtSeikyuIchiranShoriYMD().clearFromValue();
+                div.getTxtSeikyuIchiranShoriYMD().clearToValue();
+                div.getTxtSeikyuIchiranShoriYMD().setDisabled(true);
+            }
+        } else {
+            div.getRadSeikyuIchiranJoken().setDisabled(true);
+            div.getTxtSeikyuIchiranShoriYMD().clearFromValue();
+            div.getTxtSeikyuIchiranShoriYMD().clearToValue();
+            div.getTxtSeikyuIchiranShoriYMD().setDisabled(true);
+            div.getTxtJuryoYMD().clearFromValue();
+            div.getTxtJuryoYMD().clearToValue();
+            div.getTxtJuryoYMD().setDisabled(true);
+            div.getSakuseiryoSeikyuIchiranhyoJoken().setIsOpen(false);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医意見書作成料請求一覧表条件ラジオボタンの処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenSyujiiIkensyoDiv>
+     */
+    public ResponseData<HakkoJokenSyujiiIkensyoDiv> onClick_radSeikyuIchiranJoken(HakkoJokenSyujiiIkensyoDiv div) {
+        if (div.getRadSeikyuIchiranJoken().getSelectedKey().contains(SELECT_KEY0)) {
+            div.getTxtSeikyuIchiranShoriYMD().setDisabled(false);
+            div.getTxtJuryoYMD().clearFromValue();
+            div.getTxtJuryoYMD().clearToValue();
+            div.getTxtJuryoYMD().setDisabled(true);
+        } else {
+            div.getTxtJuryoYMD().setDisabled(false);
+            div.getTxtSeikyuIchiranShoriYMD().clearFromValue();
+            div.getTxtSeikyuIchiranShoriYMD().clearToValue();
+            div.getTxtSeikyuIchiranShoriYMD().setDisabled(true);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private HakkoJokenSyujiiIkensyoHandler getHandler(HakkoJokenSyujiiIkensyoDiv div) {
+        return new HakkoJokenSyujiiIkensyoHandler(div);
+    }
+}

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.commonchilddiv.KogakuKyufuTaishoList;
 
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoListCheckHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoListHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.dgTaishoshaIchiran_Row;
@@ -141,8 +142,7 @@ public class KogakuKyufuTaishoList {
     public ResponseData<KogakuKyufuTaishoListDiv> onClick_btnTorikeshi(
             KogakuKyufuTaishoListDiv div) {
         getHandler(div).高額明細合計データ編集非活性(true);
-        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
-        getHandler(div).set高額明細合計データ編集エリア(サービス提供年月);
+        getHandler(div).clear高額明細合計データ編集エリア();
         return createResponse(div);
     }
 
@@ -157,7 +157,7 @@ public class KogakuKyufuTaishoList {
         RString モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (!削除.equals(モード)) {
-            validPairs = getHandler(div).確定チェック();
+            validPairs = getCheckHandler(div).確定チェック();
         }
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -185,7 +185,8 @@ public class KogakuKyufuTaishoList {
                 || new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()))
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).modifyRow(row);
+            RString state = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+            getHandler(div).modifyRow(row, state);
         }
         return createResponse(div);
     }
@@ -196,6 +197,10 @@ public class KogakuKyufuTaishoList {
 
     private KogakuKyufuTaishoListHandler getHandler(KogakuKyufuTaishoListDiv div) {
         return new KogakuKyufuTaishoListHandler(div);
+    }
+
+    private KogakuKyufuTaishoListCheckHandler getCheckHandler(KogakuKyufuTaishoListDiv div) {
+        return new KogakuKyufuTaishoListCheckHandler(div);
     }
 
 }

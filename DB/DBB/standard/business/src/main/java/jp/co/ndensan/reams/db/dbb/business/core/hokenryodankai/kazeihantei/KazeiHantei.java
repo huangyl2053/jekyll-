@@ -44,12 +44,19 @@ public class KazeiHantei {
         for (IKazeiHantei kazeihantei : kazeiHanteiList) {
             if (kazeihantei.isMatch(hokenryoDankaiHanteiParameter)) {
                 hokenryoDankai = kazeihantei.hokenryoDankaiShiyo(hokenryoDankaiHanteiParameter);
-                if (hokenryoDankaiHanteiParameter.getFukaKonkyo().getSetaiKazeiKubun().equals(KazeiKubun.valueOf("課税"))) {
-                    hokenryoDankai = HokenryoDankaiHosei.hokenryoDankaiHosei(hokenryoDankaiHanteiParameter, hokenryoDankai);
-                }
+                kazeiKubunHantei(hokenryoDankai, hokenryoDankaiHanteiParameter);
                 break;
             } else {
                 kazeihantei.hokenryoDankaiShiyoShinai(hokenryoDankaiHanteiParameter);
+            }
+        }
+        return hokenryoDankai;
+    }
+
+    private RString kazeiKubunHantei(RString hokenryoDankai, HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
+        for (KazeiKubun kazeiKubun : hokenryoDankaiHanteiParameter.getFukaKonkyo().getSetaiinKazeiKubunList()) {
+            if (KazeiKubun.課税.getコード().equals(kazeiKubun.getコード())) {
+                hokenryoDankai = HokenryoDankaiHosei.hokenryoDankaiHosei(hokenryoDankaiHanteiParameter, hokenryoDankai);
             }
         }
         return hokenryoDankai;

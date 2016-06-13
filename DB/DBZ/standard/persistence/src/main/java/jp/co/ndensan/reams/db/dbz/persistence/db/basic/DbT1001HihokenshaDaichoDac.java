@@ -42,6 +42,8 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -55,7 +57,10 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
 
     private static final RString メッセージ_識別コード = new RString("識別コード");
     private static final RString メッセージ_被保険者番号 = new RString("被保険者番号");
+    private static final RString メッセージ_サービス年月 = new RString("サービス年月");
     private static final RString メッセージ_異動日 = new RString("異動日");
+    private static final int 開始桁 = 1;
+    private static final int 終了桁 = 6;
     @InjectSession
     private SqlSession session;
 
@@ -100,6 +105,60 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 toList(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * Max異動日
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @return DbT1001HihokenshaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity selectMax異動日(
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_サービス年月.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                or(leq(substr(idoYMD, 開始桁, 終了桁), サービス年月), eq(substr(idoYMD, 開始桁, 終了桁), サービス年月)),
+                                not(eq(logicalDeletedFlag, false))
+                        )).
+                order(by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
+                limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * Min異動日
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @return DbT1001HihokenshaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity selectMin異動日(
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_サービス年月.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                leq(サービス年月, substr(idoYMD, 開始桁, 終了桁)),
+                                not(eq(logicalDeletedFlag, false))
+                        )).
+                order(by(DbT1001HihokenshaDaicho.idoYMD, Order.ASC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
+                limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
     }
 
     /**
