@@ -64,7 +64,6 @@ public class ShotokuShokaiTaishoshaIchiranHandler {
     private static final RString 無し = new RString("無し");
     private static final RString 連番_0001 = new RString("0001");
     private static final RString 連番_0002 = new RString("0002");
-    private static final int NUM_3 = 3;
 
     /**
      * コンストラクタ
