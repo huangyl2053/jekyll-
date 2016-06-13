@@ -18,14 +18,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 特徴平準化賦課Temp
+ * 賦課Temp
  *
  * @reamsid_L DBB-0830-050 xuhao
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuchoHeinjunkaKakuteiEntity {
+public class FukaTempEntity {
 
     private FlexibleYear 平準化前調定年度;
     private FlexibleYear 平準化前賦課年度;
@@ -168,5 +168,6 @@ public class TokuchoHeinjunkaKakuteiEntity {
     private Decimal 普徴期別金額14;
     private RString 調定ID;
     private RString 収納ID;
+    private RString 対象区分;
 
 }

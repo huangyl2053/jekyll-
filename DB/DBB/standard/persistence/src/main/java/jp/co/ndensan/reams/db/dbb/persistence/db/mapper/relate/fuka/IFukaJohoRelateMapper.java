@@ -48,4 +48,12 @@ public interface IFukaJohoRelateMapper {
      * @return FukaJohoRelateEntity
      */
     FukaJohoRelateEntity get平準化後の賦課の情報_画面(HeinjunkaAfterParameter parameter);
+
+    /**
+     * 平準化後の賦課の情報を取得します。。
+     *
+     * @param parameter 賦課の情報検索条件
+     * @return List<FukaJohoRelateEntity>
+     */
+    List<FukaJohoRelateEntity> get平準化後の賦課の情報(HeinjunkaAfterParameter parameter);
 }
