@@ -37,7 +37,7 @@ class DankaiHanteiRoreiNenkin implements IDai1DankaiHantei {
         boolean result = false;
 
         if (hokenryoDankaiHanteiParameter.getFukaKonkyo().getRoreiNenkinStartYMD() != null
-                && hokenryoDankaiHanteiParameter.getFukaKonkyo().getSetaiKazeiKubun().equals(KazeiKubun.valueOf("非課税"))) {
+                && kazeiKubunHantei(hokenryoDankaiHanteiParameter)) {
             老齢年金開始日 = getRealDateCalendar(hokenryoDankaiHanteiParameter.getFukaKonkyo().getRoreiNenkinStartYMD());
             if (hokenryoDankaiHanteiParameter.getFukaKonkyo().getRoreiNenkinEndYMD() != null) {
                 老齢年金終了日 = getRealDateCalendar(hokenryoDankaiHanteiParameter.getFukaKonkyo().getRoreiNenkinEndYMD());
@@ -52,6 +52,15 @@ class DankaiHanteiRoreiNenkin implements IDai1DankaiHantei {
 
         return result;
 
+    }
+
+    private boolean kazeiKubunHantei(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
+        for (KazeiKubun kazeiKubun : hokenryoDankaiHanteiParameter.getFukaKonkyo().getSetaiinKazeiKubunList()) {
+            if (KazeiKubun.非課税.getコード().equals(kazeiKubun.getコード())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

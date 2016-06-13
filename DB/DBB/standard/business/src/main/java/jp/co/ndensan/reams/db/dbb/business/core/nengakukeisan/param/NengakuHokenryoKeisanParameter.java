@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param;
 
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**
  * 保険料段階判定パラメータというクラスです。
@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  */
 public class NengakuHokenryoKeisanParameter {
 
-    private FlexibleDate 賦課年度;
+    private FlexibleYear 賦課年度;
     private NengakuFukaKonkyo 年額賦課根拠;
     private NengakuSeigyoJoho 年額制御情報;
 
@@ -22,7 +22,7 @@ public class NengakuHokenryoKeisanParameter {
      *
      * @return FlexibleDate
      */
-    public FlexibleDate get賦課年度() {
+    public FlexibleYear get賦課年度() {
         return 賦課年度;
     }
 
@@ -49,7 +49,7 @@ public class NengakuHokenryoKeisanParameter {
      *
      * @param 賦課年度 賦課年度
      */
-    public void set賦課年度(FlexibleDate 賦課年度) {
+    public void set賦課年度(FlexibleYear 賦課年度) {
         this.賦課年度 = 賦課年度;
     }
 
