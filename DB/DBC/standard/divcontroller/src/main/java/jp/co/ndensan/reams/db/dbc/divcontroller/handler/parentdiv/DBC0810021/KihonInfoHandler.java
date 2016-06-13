@@ -217,10 +217,12 @@ public class KihonInfoHandler {
         } else if (shokanKihon.get中止理由_入所_院前の状況コード() != null) {
             UzT0007CodeEntity code4 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
                     new CodeShubetsu(中止理由), new Code(shokanKihon.get中止理由_入所_院前の状況コード()), date);
-            List<KeyValueDataSource> keyValueDataSource2 = new ArrayList<>();
-            keyValueDataSource2.add(new KeyValueDataSource(KEY, code4.getコード名称()));
-            div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setDataSource(keyValueDataSource2);
-            div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setSelectedKey(KEY);
+            if (code4 != null) {
+                List<KeyValueDataSource> keyValueDataSource2 = new ArrayList<>();
+                keyValueDataSource2.add(new KeyValueDataSource(KEY, code4.getコード名称()));
+                div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setDataSource(keyValueDataSource2);
+                div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setSelectedKey(KEY);
+            }
         }
         if (shokanKihon.get入所_院年月日() != null && !shokanKihon.get入所_院年月日().isEmpty()) {
             div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().setValue(new RDate(
@@ -240,18 +242,22 @@ public class KihonInfoHandler {
         } else if (shokanKihon.get中止理由_入所_院前の状況コード() != null) {
             UzT0007CodeEntity code3 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
                     new CodeShubetsu(入所院前の状況), new Code(shokanKihon.get中止理由_入所_院前の状況コード()), date);
-            List<KeyValueDataSource> keyValueDataSource3 = new ArrayList<>();
-            keyValueDataSource3.add(new KeyValueDataSource(KEY, code3.getコード名称()));
-            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setDataSource(keyValueDataSource3);
-            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setSelectedKey(KEY);
+            if (code3 != null) {
+                List<KeyValueDataSource> keyValueDataSource3 = new ArrayList<>();
+                keyValueDataSource3.add(new KeyValueDataSource(KEY, code3.getコード名称()));
+                div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setDataSource(keyValueDataSource3);
+                div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setSelectedKey(KEY);
+            }
         }
         if (shokanKihon.get退所_院後の状態コード() != null) {
             UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
                     new CodeShubetsu(退所院後の状況), new Code(shokanKihon.get退所_院後の状態コード()), date);
-            List<KeyValueDataSource> keyValueDataSource4 = new ArrayList<>();
-            keyValueDataSource4.add(new KeyValueDataSource(KEY, code2.getコード名称()));
-            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlTaishoMaeState().setDataSource(keyValueDataSource4);
-            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlTaishoMaeState().setSelectedKey(KEY);
+            if (code2 != null) {
+                List<KeyValueDataSource> keyValueDataSource4 = new ArrayList<>();
+                keyValueDataSource4.add(new KeyValueDataSource(KEY, code2.getコード名称()));
+                div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlTaishoMaeState().setDataSource(keyValueDataSource4);
+                div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlTaishoMaeState().setSelectedKey(KEY);
+            }
         }
     }
 }
