@@ -16,7 +16,7 @@ public interface IShinseiSonotaJohoInputDiv extends ICommonChildDivBasePropertie
      *
      * @return 異動事由Key
      */
-    RString get移動事由();
+    RString get異動事由();
 
     /**
      * 選択されている削除事由のKeyを取得します。
@@ -44,7 +44,7 @@ public interface IShinseiSonotaJohoInputDiv extends ICommonChildDivBasePropertie
      *
      * @return 取消日
      */
-    FlexibleDate get取下日();
+    FlexibleDate get取消日();
 
     /**
      * 当初認定期間開始日を取得します。
@@ -89,6 +89,68 @@ public interface IShinseiSonotaJohoInputDiv extends ICommonChildDivBasePropertie
     /**
      * 画面の初期化処理を行います。
      */
-    void initialize();
+    public void initialize();
 
+    /**
+     * 異動事由の設定。
+     *
+     * @param key RString
+     */
+    public void set異動事由(RString key);
+
+    /**
+     * 削除事由の設定。
+     *
+     * @param key RString
+     */
+    public void set削除事由(RString key);
+
+    /**
+     * 理由の設定。
+     *
+     * @param value RString
+     */
+    public void set理由(RString value);
+
+    /**
+     * 喪失日の設定。
+     *
+     * @param day FlexibleDate
+     */
+    public void set喪失日(FlexibleDate day);
+
+    /**
+     * 取消日の設定。
+     *
+     * @param day FlexibleDate
+     */
+    public void set取消日(FlexibleDate day);
+
+    /**
+     * 当初認定期間の設定。
+     *
+     * @param day FlexibleDate
+     */
+    public void set当初認定期間From(FlexibleDate day);
+
+    /**
+     * 当初認定期間の設定。
+     *
+     * @param day FlexibleDate
+     */
+    public void set当初認定期間To(FlexibleDate day);
+
+    /**
+     * 発行日１の設定。
+     *
+     * @param day FlexibleDate
+     */
+    public void set発行日１(FlexibleDate day);
+
+    /**
+     * 発行日２の設定。
+     *
+     * @param day FlexibleDate
+     */
+    public void set発行日2(FlexibleDate day);
 }
