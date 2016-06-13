@@ -15,6 +15,13 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3004KyodoShoriyoJukyushaIdo
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3004KyodoShoriyoJukyushaIdoKogakuSofuDac;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -130,27 +137,120 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoSakusei {
             出力用共同処理用受給者訂正情報Entity.set高額送付情報_異動年月日(変更後訂正情報Entity.get高額送付情報_異動年月日());
             出力用共同処理用受給者訂正情報Entity.set訂正区分(変更後訂正情報Entity.get訂正区分());
             出力用共同処理用受給者訂正情報Entity.set訂正年月日(変更後訂正情報Entity.get訂正年月日());
+            出力用共同処理用受給者訂正情報Entity = get変化有り訂正情報Entity(変更前訂正情報Entity,
+                    変更後訂正情報Entity,
+                    出力用共同処理用受給者訂正情報Entity);
         }
-        if (変更前訂正情報Entity != null && !変更前訂正情報Entity.equals(変更後訂正情報Entity)) {
-            出力用共同処理用受給者訂正情報Entity.set氏名(変更後訂正情報Entity.get氏名());
-            出力用共同処理用受給者訂正情報Entity.set証記載保険者番号(変更後訂正情報Entity.get証記載保険者番号());
-            出力用共同処理用受給者訂正情報Entity.set電話番号(変更後訂正情報Entity.get電話番号());
-            出力用共同処理用受給者訂正情報Entity.set郵便番号(変更後訂正情報Entity.get郵便番号());
-            出力用共同処理用受給者訂正情報Entity.set住所(変更後訂正情報Entity.get住所());
-            出力用共同処理用受給者訂正情報Entity.set住所カナ(変更後訂正情報Entity.get住所カナ());
-            出力用共同処理用受給者訂正情報Entity.set帳票出力順序コード(変更後訂正情報Entity.get帳票出力順序コード());
-            出力用共同処理用受給者訂正情報Entity.set開始年月日(変更後訂正情報Entity.get開始年月日());
-            出力用共同処理用受給者訂正情報Entity.set終了年月日(変更後訂正情報Entity.get終了年月日());
-            出力用共同処理用受給者訂正情報Entity.set区分(変更後訂正情報Entity.get区分());
-            出力用共同処理用受給者訂正情報Entity.set一時差止金額(変更後訂正情報Entity.get一時差止金額());
-            出力用共同処理用受給者訂正情報Entity.set世帯主被保険者番号(変更後訂正情報Entity.get世帯主被保険者番号());
-            出力用共同処理用受給者訂正情報Entity.set世帯所得区分(変更後訂正情報Entity.get世帯所得区分());
-            出力用共同処理用受給者訂正情報Entity.set所得区分(変更後訂正情報Entity.get所得区分());
-            出力用共同処理用受給者訂正情報Entity.set利用者負担第２段階(変更後訂正情報Entity.is利用者負担第２段階());
-            出力用共同処理用受給者訂正情報Entity.set老齢福祉年金受給の有無(変更後訂正情報Entity.is老齢福祉年金受給の有無());
-            出力用共同処理用受給者訂正情報Entity.set支給申請書出力の有無(変更後訂正情報Entity.is支給申請書出力の有無());
-        }
+
         return 出力用共同処理用受給者訂正情報Entity;
+    }
+
+    private KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity get変化有り訂正情報Entity(
+            KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity 変更前訂正情報Entity,
+            KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity 変更後訂正情報Entity,
+            KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity 出力用共同処理用受給者訂正情報Entity) {
+        if (変更前訂正情報Entity != null) {
+            if (変更後訂正情報Entity.get氏名() != null
+                    && !変更後訂正情報Entity.get氏名().equals(変更前訂正情報Entity.get氏名())) {
+                出力用共同処理用受給者訂正情報Entity.set氏名(変更後訂正情報Entity.get氏名());
+            } else {
+                出力用共同処理用受給者訂正情報Entity.set氏名(RString.EMPTY);
+            }
+            if (変更後訂正情報Entity.get証記載保険者番号() != null
+                    && !変更後訂正情報Entity.get証記載保険者番号().equals(変更前訂正情報Entity.get証記載保険者番号())) {
+                出力用共同処理用受給者訂正情報Entity.set証記載保険者番号(変更後訂正情報Entity.get証記載保険者番号());
+            } else {
+                出力用共同処理用受給者訂正情報Entity.set証記載保険者番号(ShoKisaiHokenshaNo.EMPTY);
+            }
+            if (変更後訂正情報Entity.get電話番号() != null
+                    && !変更後訂正情報Entity.get電話番号().equals(変更前訂正情報Entity.get電話番号())) {
+                出力用共同処理用受給者訂正情報Entity.set電話番号(変更後訂正情報Entity.get電話番号());
+            } else {
+                出力用共同処理用受給者訂正情報Entity.set電話番号(TelNo.EMPTY);
+            }
+            if (変更後訂正情報Entity.get郵便番号() != null
+                    && !変更後訂正情報Entity.get郵便番号().equals(変更前訂正情報Entity.get郵便番号())) {
+                出力用共同処理用受給者訂正情報Entity.set郵便番号(変更後訂正情報Entity.get郵便番号());
+            } else {
+                出力用共同処理用受給者訂正情報Entity.set郵便番号(YubinNo.EMPTY);
+            }
+            if (変更後訂正情報Entity.get住所() != null
+                    && !変更後訂正情報Entity.get住所().equals(変更前訂正情報Entity.get住所())) {
+                出力用共同処理用受給者訂正情報Entity.set住所(変更後訂正情報Entity.get住所());
+            } else {
+                出力用共同処理用受給者訂正情報Entity.set住所(RString.EMPTY);
+            }
+            if (変更後訂正情報Entity.get住所カナ() != null
+                    && !変更後訂正情報Entity.get住所カナ().equals(変更前訂正情報Entity.get住所カナ())) {
+                出力用共同処理用受給者訂正情報Entity.set住所カナ(変更後訂正情報Entity.get住所カナ());
+            } else {
+                出力用共同処理用受給者訂正情報Entity.set住所カナ(RString.EMPTY);
+            }
+            if (変更後訂正情報Entity.get帳票出力順序コード() != null
+                    && !変更後訂正情報Entity.get帳票出力順序コード().equals(変更前訂正情報Entity.get帳票出力順序コード())) {
+                出力用共同処理用受給者訂正情報Entity.set帳票出力順序コード(変更後訂正情報Entity.get帳票出力順序コード());
+            } else {
+                出力用共同処理用受給者訂正情報Entity.set帳票出力順序コード(RString.EMPTY);
+            }
+            出力用共同処理用受給者訂正情報Entity = get区分情報Entity(変更前訂正情報Entity,
+                    変更後訂正情報Entity,
+                    出力用共同処理用受給者訂正情報Entity);
+        }
+
+        return 出力用共同処理用受給者訂正情報Entity;
+
+    }
+
+    private KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity get区分情報Entity(KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity 変更前訂正情報Entity,
+            KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity 変更後訂正情報Entity,
+            KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity 出力用共同処理用受給者訂正情報Entity) {
+        if (変更後訂正情報Entity.get開始年月日() != null
+                && !変更後訂正情報Entity.get開始年月日().equals(変更前訂正情報Entity.get開始年月日())) {
+            出力用共同処理用受給者訂正情報Entity.set開始年月日(変更後訂正情報Entity.get開始年月日());
+        } else {
+            出力用共同処理用受給者訂正情報Entity.set開始年月日(FlexibleDate.EMPTY);
+        }
+        if (変更後訂正情報Entity.get終了年月日() != null
+                && !変更後訂正情報Entity.get終了年月日().equals(変更前訂正情報Entity.get終了年月日())) {
+            出力用共同処理用受給者訂正情報Entity.set終了年月日(変更後訂正情報Entity.get終了年月日());
+        } else {
+            出力用共同処理用受給者訂正情報Entity.set終了年月日(FlexibleDate.EMPTY);
+        }
+        if (変更後訂正情報Entity.get区分() != null
+                && !変更後訂正情報Entity.get区分().equals(変更前訂正情報Entity.get区分())) {
+            出力用共同処理用受給者訂正情報Entity.set区分(変更後訂正情報Entity.get区分());
+        } else {
+            出力用共同処理用受給者訂正情報Entity.set区分(RString.EMPTY);
+        }
+        if (変更後訂正情報Entity.get一時差止金額() != null
+                && !変更後訂正情報Entity.get一時差止金額().equals(変更前訂正情報Entity.get一時差止金額())) {
+            出力用共同処理用受給者訂正情報Entity.set一時差止金額(変更後訂正情報Entity.get一時差止金額());
+        } else {
+            出力用共同処理用受給者訂正情報Entity.set一時差止金額(Decimal.ZERO);
+        }
+        if (変更後訂正情報Entity.get世帯主被保険者番号() != null
+                && !変更後訂正情報Entity.get世帯主被保険者番号().equals(変更前訂正情報Entity.get世帯主被保険者番号())) {
+            出力用共同処理用受給者訂正情報Entity.set世帯主被保険者番号(変更後訂正情報Entity.get世帯主被保険者番号());
+        } else {
+            出力用共同処理用受給者訂正情報Entity.set世帯主被保険者番号(HihokenshaNo.EMPTY);
+        }
+        if (変更後訂正情報Entity.get世帯所得区分() != null
+                && !変更後訂正情報Entity.get世帯所得区分().equals(変更前訂正情報Entity.get世帯所得区分())) {
+            出力用共同処理用受給者訂正情報Entity.set世帯所得区分(変更後訂正情報Entity.get世帯所得区分());
+        } else {
+            出力用共同処理用受給者訂正情報Entity.set世帯所得区分(RString.EMPTY);
+        }
+        if (変更後訂正情報Entity.get所得区分() != null
+                && !変更後訂正情報Entity.get所得区分().equals(変更前訂正情報Entity.get所得区分())) {
+            出力用共同処理用受給者訂正情報Entity.set所得区分(変更後訂正情報Entity.get所得区分());
+        } else {
+            出力用共同処理用受給者訂正情報Entity.set所得区分(RString.EMPTY);
+        }
+        出力用共同処理用受給者訂正情報Entity.set利用者負担第２段階(変更後訂正情報Entity.is利用者負担第２段階());
+        出力用共同処理用受給者訂正情報Entity.set老齢福祉年金受給の有無(変更後訂正情報Entity.is老齢福祉年金受給の有無());
+        出力用共同処理用受給者訂正情報Entity.set支給申請書出力の有無(変更後訂正情報Entity.is支給申請書出力の有無());
+        return 出力用共同処理用受給者訂正情報Entity;
+
     }
 
     private KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity get変更前訂正情報(KyodoshoriyoJukyushaIdoRenrakuhyoSakuseiEntity divEntity) {

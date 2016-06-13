@@ -55,8 +55,6 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoToroku {
             共同処理用受給者異動連絡票Entity.set住所(divEntity.get基本情報Entity().getAddress());
             共同処理用受給者異動連絡票Entity.set住所カナ(divEntity.get基本情報Entity().getDdressKana());
             共同処理用受給者異動連絡票Entity.set帳票出力順序コード(divEntity.get基本情報Entity().getChohyoOutputJunjyoCode());
-            共同処理用受給者異動連絡票Entity.set訂正区分(divEntity.get基本情報Entity().getTeiseiKubunCode());
-            共同処理用受給者異動連絡票Entity.set訂正年月日(divEntity.get基本情報Entity().getTeiseiYMD());
         }
         if (divEntity.get償還情報Entity() != null) {
             共同処理用受給者異動連絡票Entity.set償還送付情報_異動年月日(divEntity.get償還情報Entity().getIdoYMD());
