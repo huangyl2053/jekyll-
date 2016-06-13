@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShoteiShikkanShisetsuRyoyo;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820028.DBC0820028StateName.削除モード;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820028.DBC0820028StateName.新規修正モード;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820028.DBC0820028TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820028.KinkyujiShoteiShikanPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820028.dgdKinkyujiShoteiList_Row;
@@ -49,7 +51,8 @@ public class KinkyujiShoteiShikanPanel {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 登録_削除 = new RString("登録_削除");
-    private static final RString 申請を保存する = new RString("Element1");
+    private static final RString 申請を保存する = new RString("btnUpdate");
+    private static final RString 申請を削除する = new RString("btnDelete");
 
     /**
      * 償還払い費支給申請決定_サービス提供証明書(緊急時・所定疾患)画面初期化
@@ -102,8 +105,10 @@ public class KinkyujiShoteiShikanPanel {
             div.getDgdKinkyujiShoteiList().setReadOnly(true);
             div.getPanelDetail().setDisplayNone(true);
             ViewStateHolder.put(ViewStateKeys.状態, new RString(""));
+            return ResponseData.of(div).setState(削除モード);
+        } else {
+            return ResponseData.of(div).setState(新規修正モード);
         }
-        return ResponseData.of(div).respond();
     }
 
     /**
@@ -399,7 +404,7 @@ public class KinkyujiShoteiShikanPanel {
                             replace(削除.toString())).respond();
                 }
                 if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
+                    CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を削除する, true);
                     return createResponse(div);
                 }
             } else {

@@ -21,7 +21,6 @@ import lombok.Setter;
 public class TaShichosonJushochiTokureisyaIdoTeiseiParamter {
 
     private final List<ShisetsuNyutaishoData> 入退所データリスト;
-
     private final List<TekiyouJouhou> 適用情報グリッド;
 
     /**

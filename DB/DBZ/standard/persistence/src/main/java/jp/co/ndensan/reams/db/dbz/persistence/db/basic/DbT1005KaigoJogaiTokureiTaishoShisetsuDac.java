@@ -23,9 +23,6 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -115,30 +112,20 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
      * 主キーで介護除外住所地特例対象施設を取得します。
      *
      * @param 事業者種別 JigyoshaShubetsu
-     * @param 事業者番号 JigyoshaNo
-     * @param 有効開始年月日 YukoKaishiYMD
      * @return List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity>
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> select介護除外住所地特例対象施設(
-            RString 事業者種別,
-            JigyoshaNo 事業者番号,
-            FlexibleDate 有効開始年月日) throws NullPointerException {
+            RString 事業者種別) throws NullPointerException {
         requireNonNull(事業者種別, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者種別"));
-        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage((事業者番号_事業者).toString()));
-        requireNonNull(有効開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始年月日"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).
-                where(and(
-                                eq(DbT1005KaigoJogaiTokureiTaishoShisetsu.jigyoshaShubetsu, 事業者種別),
-                                eq(DbT1005KaigoJogaiTokureiTaishoShisetsu.jigyoshaNo, 事業者番号),
-                                leq(DbT1005KaigoJogaiTokureiTaishoShisetsu.yukoKaishiYMD, 有効開始年月日),
-                                or(leq(有効開始年月日, DbT1005KaigoJogaiTokureiTaishoShisetsu.yukoShuryoYMD),
-                                        isNULL(DbT1005KaigoJogaiTokureiTaishoShisetsu.yukoShuryoYMD)))).
+                where(eq(DbT1005KaigoJogaiTokureiTaishoShisetsu.jigyoshaShubetsu, 事業者種別)).
+                order(by(yukoKaishiYMD, Order.DESC)).limit(1).
                 toList(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
     }
 

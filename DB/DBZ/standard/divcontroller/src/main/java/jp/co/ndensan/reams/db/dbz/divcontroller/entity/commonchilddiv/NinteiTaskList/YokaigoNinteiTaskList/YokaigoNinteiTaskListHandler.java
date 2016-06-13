@@ -154,7 +154,6 @@ public class YokaigoNinteiTaskListHandler {
     private static final int インデックス_74 = 74;
     private static final int インデックス_75 = 75;
 
-
     /**
      * コンストラクタです。
      *
@@ -436,8 +435,9 @@ public class YokaigoNinteiTaskListHandler {
         div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
+
     private void 調査依頼モードの日付設定(dgNinteiTaskList_Row row, CyoSaiRaiBusiness business) {
-        
+
         if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
             row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
         }
@@ -717,6 +717,7 @@ public class YokaigoNinteiTaskListHandler {
         div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
+
     private void 一次判定モードの日付設定(dgNinteiTaskList_Row row, IChiJiHanTeiBusiness business) {
         if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
             row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
@@ -737,6 +738,7 @@ public class YokaigoNinteiTaskListHandler {
             }
         }
     }
+
     private void マスキングモード(List<MaSuKinGuBusiness> マスキングList) {
 
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
@@ -770,6 +772,7 @@ public class YokaigoNinteiTaskListHandler {
         div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
+
     private void マスキングモードの日付設定(dgNinteiTaskList_Row row, MaSuKinGuBusiness business) {
         if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
             row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
@@ -787,6 +790,7 @@ public class YokaigoNinteiTaskListHandler {
             row.getMaskingKanryoDay().setValue(new RDate(business.getマスキング完了年月日().toString()));
         }
     }
+
     private void 審査会登録モード(List<ShinSaKaiToRoKuBusiness> 審査会登録List) {
 
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
@@ -837,11 +841,11 @@ public class YokaigoNinteiTaskListHandler {
         if (business.getマスキング完了年月日() != null && !business.getマスキング完了年月日().isEmpty()) {
             row.getMaskingKanryoDay().setValue(new RDate(business.getマスキング完了年月日().toString()));
         }
-        if (business.get認定審査会完了年月日() != null && !business.get認定審査会完了年月日().isEmpty()) {
-            row.getShinsakaiKanryoDay().setValue(new RDate(business.get認定審査会完了年月日().toString()));
-        }
         if (business.get認定審査会割当完了年月日() != null && !business.get認定審査会割当完了年月日().isEmpty()) {
-            row.getShinsakaiwaritukeDay().setValue(new RDate(business.get認定審査会割当完了年月日().toString()));
+            row.getShinsakaiKanryoDay().setValue(new RDate(business.get認定審査会割当完了年月日().toString()));
+        }
+        if (business.get介護認定審査会割当年月日() != null && !business.get介護認定審査会割当年月日().isEmpty()) {
+            row.getShinsakaiwaritukeDay().setValue(new RDate(business.get介護認定審査会割当年月日().toString()));
         }
         if (business.get介護認定審査会開催予定年月日() != null && !business.get介護認定審査会開催予定年月日().isEmpty()) {
             row.getShinsakaiKaisaiDay().setValue(new RDate(business.get介護認定審査会開催予定年月日().toString()));
@@ -854,6 +858,7 @@ public class YokaigoNinteiTaskListHandler {
             row.getChosahyoKanryoDay().setValue(new RDate(business.get認定調査完了年月日().toString()));
         }
     }
+
     private void 二次判定モード(List<NiJiHanTeiBusiness> 二次判定List) {
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_1).setVisible(true);
@@ -908,6 +913,7 @@ public class YokaigoNinteiTaskListHandler {
         div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
+
     private void 月例処理モード(List<GeTuReiSyoRiBusiness> 月例処理List) {
 
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
@@ -945,6 +951,7 @@ public class YokaigoNinteiTaskListHandler {
         div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
+
     private void 共通状態() {
 
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(false);

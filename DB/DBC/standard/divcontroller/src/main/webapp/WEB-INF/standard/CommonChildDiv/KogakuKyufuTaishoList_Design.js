@@ -4,8 +4,16 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnTsuika = function () {
+                return "onClick_btnTsuika";
+            };
+
             Events.onClick_modify = function () {
                 return "onClick_modify";
+            };
+
+            Events.onClick_delete = function () {
+                return "onClick_delete";
             };
 
             Events.onMulti_dgKyufuJissekiMeisaiList = function () {
@@ -26,6 +34,10 @@ var DBC;
 
             Events.onBeforeOpenDialog_btnServiceSyurui = function () {
                 return "onBeforeOpenDialog_btnServiceSyurui";
+            };
+
+            Events.onClick_btnTorikeshi = function () {
+                return "onClick_btnTorikeshi";
             };
 
             Events.onClick_btnkakutei = function () {

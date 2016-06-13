@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyu
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 07 16:34:35 CST 2016
+ * Sun Jun 12 15:21:36 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * dgTaishoshaIchiran_Row のクラスファイル
+ * 画面設計_DBCKD00006_高額給付対象一覧共有子Div
  *
  * @reamsid_L DBC-2020-030 quxiaodong
  */

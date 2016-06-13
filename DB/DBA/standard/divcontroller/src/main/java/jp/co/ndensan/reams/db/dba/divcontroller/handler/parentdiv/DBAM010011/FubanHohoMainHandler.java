@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBAM010011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.hihokenshno.HihokenshaNoFubammotoJoho;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.hihokenshno.HihokenshaNoFubanHoho;
+import jp.co.ndensan.reams.db.dba.definition.core.hihokenshno.HihokenshaNoFubammotoJoho;
+import jp.co.ndensan.reams.db.dba.definition.core.hihokenshno.HihokenshaNoFubanHoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBAM010011.FubanHohoMainDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;

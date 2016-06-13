@@ -10,7 +10,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuFukaKonkyoTest;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -56,7 +56,7 @@ public class ShikakuSoshitsuNendonaiTest {
 
         NengakuHokenryoKeisanParameter nengakuHokenryoKeisanParameter = new NengakuHokenryoKeisanParameter();
         nengakuHokenryoKeisanParameter.set年額賦課根拠(NengakuFukaKonkyoTest.set資格喪失日が年度開始日以前の場合falseを返す());
-        nengakuHokenryoKeisanParameter.set賦課年度(new FlexibleDate("2014"));
+        nengakuHokenryoKeisanParameter.set賦課年度(new FlexibleYear("2014"));
         assertThat(soushitu.judgeHasuu(nengakuHokenryoKeisanParameter), is(false));
     }
 
@@ -66,7 +66,7 @@ public class ShikakuSoshitsuNendonaiTest {
 
         NengakuHokenryoKeisanParameter nengakuHokenryoKeisanParameter = new NengakuHokenryoKeisanParameter();
         nengakuHokenryoKeisanParameter.set年額賦課根拠(NengakuFukaKonkyoTest.set資格喪失日が年度内の場合はtrueを返す());
-        nengakuHokenryoKeisanParameter.set賦課年度(new FlexibleDate("2014"));
+        nengakuHokenryoKeisanParameter.set賦課年度(new FlexibleYear("2014"));
         assertThat(soushitu.judgeHasuu(nengakuHokenryoKeisanParameter), is(true));
     }
 
@@ -76,7 +76,7 @@ public class ShikakuSoshitsuNendonaiTest {
 
         NengakuHokenryoKeisanParameter nengakuHokenryoKeisanParameter = new NengakuHokenryoKeisanParameter();
         nengakuHokenryoKeisanParameter.set年額賦課根拠(NengakuFukaKonkyoTest.set資格喪失日が年度終了日以降の場合falseを返す());
-        nengakuHokenryoKeisanParameter.set賦課年度(new FlexibleDate("2014"));
+        nengakuHokenryoKeisanParameter.set賦課年度(new FlexibleYear("2014"));
         assertThat(soushitu.judgeHasuu(nengakuHokenryoKeisanParameter), is(false));
     }
 
@@ -86,7 +86,7 @@ public class ShikakuSoshitsuNendonaiTest {
 
         NengakuHokenryoKeisanParameter nengakuHokenryoKeisanParameter = new NengakuHokenryoKeisanParameter();
         nengakuHokenryoKeisanParameter.set年額賦課根拠(NengakuFukaKonkyoTest.set資格喪失日が空白の場合falseを返す());
-        nengakuHokenryoKeisanParameter.set賦課年度(new FlexibleDate("2014"));
+        nengakuHokenryoKeisanParameter.set賦課年度(new FlexibleYear("2014"));
         assertThat(soushitu.judgeHasuu(nengakuHokenryoKeisanParameter), is(false));
     }
 

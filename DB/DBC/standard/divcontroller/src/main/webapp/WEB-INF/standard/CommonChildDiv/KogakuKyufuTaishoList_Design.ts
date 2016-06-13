@@ -8,8 +8,16 @@ module DBC {
 
         export class Events {
 
+            public static onClick_btnTsuika(): string {
+                return "onClick_btnTsuika";
+            }
+
             public static onClick_modify(): string {
                 return "onClick_modify";
+            }
+
+            public static onClick_delete(): string {
+                return "onClick_delete";
             }
 
             public static onMulti_dgKyufuJissekiMeisaiList(): string {
@@ -30,6 +38,10 @@ module DBC {
 
             public static onBeforeOpenDialog_btnServiceSyurui(): string {
                 return "onBeforeOpenDialog_btnServiceSyurui";
+            }
+
+            public static onClick_btnTorikeshi(): string {
+                return "onClick_btnTorikeshi";
             }
 
             public static onClick_btnkakutei(): string {

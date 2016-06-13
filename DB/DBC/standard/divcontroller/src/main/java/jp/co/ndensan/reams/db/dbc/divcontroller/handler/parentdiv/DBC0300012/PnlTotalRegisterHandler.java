@@ -47,6 +47,7 @@ public final class PnlTotalRegisterHandler {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 保存する = new RString("Element3");
+    private static final RString 預金種別コード = new RString("0085");
 
     /**
      * コンストラクタです。
@@ -83,7 +84,7 @@ public final class PnlTotalRegisterHandler {
         JuryoininKeiyakuJigyosha data = ViewStateHolder
                 .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
         JuryoininKeiyakuJigyosha recode = JuryoininKeiyakuJigyoshaManager.createInstance()
-                .getJuryoininKeiyakuJigyosha(data.get契約事業者番号(), data.get開始年月日());
+                .getJuryoininKeiyakuJigyosha(data.get契約事業者番号(), data.get開始年月日(), data.get終了年月日());
         if (recode == null) {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         }
@@ -124,14 +125,16 @@ public final class PnlTotalRegisterHandler {
         div.getPnlKeyakuJigyosya().getCcdKinyukikan().search(recode.get金融機関コード(),
                 recode.get支店コード(), FlexibleDate.getNowDate());
         List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
-                new CodeShubetsu(new RString("0085")), new FlexibleDate(RDate.getNowDate().toDateString()));
-        if (codeList != null) {
-            List<KeyValueDataSource> keyValueDataSource = new ArrayList<>();
+                new CodeShubetsu(預金種別コード), FlexibleDate.getNowDate());
+        List<KeyValueDataSource> keyValueDataSource = new ArrayList<>();
+        if (codeList != null && !codeList.isEmpty()) {
             for (UzT0007CodeEntity code : codeList) {
-                keyValueDataSource.add(new KeyValueDataSource(code.getコード().value(), code.getコード名称()));
+                keyValueDataSource.add(new KeyValueDataSource(code.getコード().getColumnValue(), code.getコード名称()));
             }
             div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setDataSource(keyValueDataSource);
             div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setSelectedKey(recode.get口座種別());
+        } else {
+            div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setDataSource(keyValueDataSource);
         }
         if (div.getPnlKeyakuJigyosya().getCcdKinyukikan().isゆうちょ銀行()) {
             div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setVisible(false);
@@ -214,7 +217,7 @@ public final class PnlTotalRegisterHandler {
     public boolean has画面変更有無() {
         RString states = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (登録.equals(states)) {
-            return has登録情報有無();
+            return has契約登録情報有無() || has送付登録情報有無();
         }
         if (!修正.equals(states)) {
             return false;
@@ -229,15 +232,15 @@ public final class PnlTotalRegisterHandler {
             return true;
         }
 
-        return has送付情報変更有無(param);
+        return has送付情報変更有無1(param) || has送付情報変更有無2(param);
     }
 
     /**
-     * 登録情報有無の判定
+     * 契約登録情報有無の判定
      *
      * @return boolean
      */
-    private boolean has登録情報有無() {
+    private boolean has契約登録情報有無() {
         return div.getPnlKeyakuJigyosya().getTxtKeyakubi().getFromValue() != null
                 || div.getPnlKeyakuJigyosya().getTxtKeyakubi().getToValue() != null
                 || !div.getPnlKeyakuJigyosya().getDdlKeyakusyurui().getSelectedKey().isEmpty()
@@ -246,8 +249,16 @@ public final class PnlTotalRegisterHandler {
                 || !div.getPnlKeyakuJigyosya().getTxtJigyosyaYubinNo().getValue().isEmpty()
                 || !div.getPnlKeyakuJigyosya().getTxtJigyosyaTel().getDomain().isEmpty()
                 || !div.getPnlKeyakuJigyosya().getTxtJigyosyaFax().getDomain().isEmpty()
-                || !div.getPnlKeyakuJigyosya().getTxtJigyosyaJyusyo().getDomain().isEmpty()
-                || !div.getPnlKeyakuJigyosya().getTxtSofusakiYubin().getValue().isEmpty()
+                || !div.getPnlKeyakuJigyosya().getTxtJigyosyaJyusyo().getDomain().isEmpty();
+    }
+
+    /**
+     * 送付登録情報有無の判定
+     *
+     * @return boolean
+     */
+    private boolean has送付登録情報有無() {
+        return !div.getPnlKeyakuJigyosya().getTxtSofusakiYubin().getValue().isEmpty()
                 || !div.getPnlKeyakuJigyosya().getTxtSofusakiJigyosya().getDomain().isEmpty()
                 || !div.getPnlKeyakuJigyosya().getTxtSofusakiJigyosyaKana().getDomain().isEmpty()
                 || !div.getPnlKeyakuJigyosya().getTxtSofusakiJyusyo().getDomain().isEmpty()
@@ -279,43 +290,55 @@ public final class PnlTotalRegisterHandler {
         return !param.get開始年月日().equals(txtKeyakubiFrom)
                 || !param.get終了年月日().equals(txtKeyakubiTo)
                 || !param.get契約種類().equals(keyakusyurui)
-                || !param.get契約事業者名称().equals(keyakuJigyosyaMeisyo)
-                || !param.get契約事業者カナ名称().equals(keyakuJigyosyaMeisyoKana)
-                || !param.get契約事業者郵便番号().equals(txtJigyosyaYubinNo)
-                || !param.get契約事業者電話番号().equals(txtJigyosyaTel)
-                || !param.get契約事業者FAX番号().equals(txtJigyosyaFax)
-                || !param.get契約事業者住所().equals(txtJigyosyaJyusyo);
+                || !(param.get契約事業者名称() == null ? AtenaMeisho.EMPTY : param.get契約事業者名称()).equals(keyakuJigyosyaMeisyo)
+                || !(param.get契約事業者カナ名称() == null ? AtenaKanaMeisho.EMPTY : param.get契約事業者カナ名称())
+                .equals(keyakuJigyosyaMeisyoKana)
+                || !(param.get契約事業者郵便番号() == null ? YubinNo.EMPTY : param.get契約事業者郵便番号()).equals(txtJigyosyaYubinNo)
+                || !(param.get契約事業者電話番号() == null ? TelNo.EMPTY : param.get契約事業者電話番号()).equals(txtJigyosyaTel)
+                || !(param.get契約事業者FAX番号() == null ? TelNo.EMPTY : param.get契約事業者FAX番号()).equals(txtJigyosyaFax)
+                || !(param.get契約事業者住所() == null ? AtenaJusho.EMPTY : param.get契約事業者住所()).equals(txtJigyosyaJyusyo);
     }
 
     /**
-     * 送付情報変更有無
+     * 送付情報変更有無1
      *
      * @param param JuryoininKeiyakuJigyosha
      * @return boolean
      */
-    private boolean has送付情報変更有無(JuryoininKeiyakuJigyosha param) {
+    private boolean has送付情報変更有無1(JuryoininKeiyakuJigyosha param) {
         YubinNo txtSofusakiYubin = div.getPnlKeyakuJigyosya().getTxtSofusakiYubin().getValue();
         AtenaMeisho txtSofusakiJigyosya = div.getPnlKeyakuJigyosya().getTxtSofusakiJigyosya().getDomain();
         AtenaKanaMeisho txtSofusakiJigyosyaKana = div.getPnlKeyakuJigyosya().getTxtSofusakiJigyosyaKana().getDomain();
         AtenaJusho txtSofusakiJyusyo = div.getPnlKeyakuJigyosya().getTxtSofusakiJyusyo().getDomain();
         RString txtSofusakiBusyo = div.getPnlKeyakuJigyosya().getTxtSofusakiBusyo().getValue();
+        return !(param.get送付先郵便番号() == null ? YubinNo.EMPTY : param.get送付先郵便番号()).equals(txtSofusakiYubin)
+                || !(param.get送付先事業者名称() == null ? AtenaMeisho.EMPTY : param.get送付先事業者名称()).equals(txtSofusakiJigyosya)
+                || !(param.get送付先事業者カナ名称() == null ? AtenaKanaMeisho.EMPTY : param.get送付先事業者カナ名称())
+                .equals(txtSofusakiJigyosyaKana)
+                || !(param.get送付先住所() == null ? AtenaJusho.EMPTY : param.get送付先住所()).equals(txtSofusakiJyusyo)
+                || !(param.get送付先部署() == null ? RString.EMPTY : param.get送付先部署()).equals(txtSofusakiBusyo);
+    }
+
+    /**
+     * 送付情報変更有無2
+     *
+     * @param param JuryoininKeiyakuJigyosha
+     * @return boolean
+     */
+    private boolean has送付情報変更有無2(JuryoininKeiyakuJigyosha param) {
         KinyuKikanCode kinyuKikanCode = div.getPnlKeyakuJigyosya().getCcdKinyukikan().getKinyuKikanCode();
         KinyuKikanShitenCode kinyuKikanShitenCode = div.getPnlKeyakuJigyosya().getCcdKinyukikan().getKinyuKikanShitenCode();
         RString sofusakiKouzasyubetu = div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().getSelectedKey();
         RString txtSofusakiKouzabango = div.getPnlKeyakuJigyosya().getTxtSofusakiKouzabango().getValue();
         AtenaMeisho txtSofusakiKouzaMeiginin = div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeiginin().getDomain();
         AtenaKanaMeisho txtSofusakiKouzaMeigininKana = div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeigininKana().getDomain();
-        return !param.get送付先郵便番号().equals(txtSofusakiYubin)
-                || !param.get送付先事業者名称().equals(txtSofusakiJigyosya)
-                || !param.get送付先事業者カナ名称().equals(txtSofusakiJigyosyaKana)
-                || !param.get送付先住所().equals(txtSofusakiJyusyo)
-                || !param.get送付先部署().equals(txtSofusakiBusyo)
-                || !param.get金融機関コード().equals(kinyuKikanCode)
+        return !param.get金融機関コード().equals(kinyuKikanCode)
                 || !param.get支店コード().equals(kinyuKikanShitenCode)
-                || !param.get口座種別().equals(sofusakiKouzasyubetu)
-                || !param.get口座番号().equals(txtSofusakiKouzabango)
-                || !param.get口座名義人().equals(txtSofusakiKouzaMeiginin)
-                || !param.get口座名義人カナ().equals(txtSofusakiKouzaMeigininKana);
+                || !(param.get口座種別() == null ? RString.EMPTY : param.get口座種別()).equals(sofusakiKouzasyubetu)
+                || !(param.get口座番号() == null ? RString.EMPTY : param.get口座番号()).equals(txtSofusakiKouzabango)
+                || !(param.get口座名義人() == null ? AtenaMeisho.EMPTY : param.get口座名義人()).equals(txtSofusakiKouzaMeiginin)
+                || !(param.get口座名義人カナ() == null ? AtenaKanaMeisho.EMPTY : param.get口座名義人カナ())
+                .equals(txtSofusakiKouzaMeigininKana);
     }
 
     /**
@@ -384,15 +407,15 @@ public final class PnlTotalRegisterHandler {
         div.getPnlKeyakuJigyosya().getTxtSofusakiJyusyo().clearDomain();
         div.getPnlKeyakuJigyosya().getTxtSofusakiBusyo().clearValue();
         List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
-                new CodeShubetsu(new RString("0085")), new FlexibleDate(RDate.getNowDate().toDateString()));
-        if (codeList != null) {
-            List<KeyValueDataSource> keyValueDataSource = new ArrayList<>();
+                new CodeShubetsu(預金種別コード), FlexibleDate.getNowDate());
+        List<KeyValueDataSource> keyValueDataSource = new ArrayList<>();
+        if (codeList != null && !codeList.isEmpty()) {
             for (UzT0007CodeEntity code : codeList) {
-                keyValueDataSource.add(new KeyValueDataSource(code.getコード().value(), code.getコード名称()));
+                keyValueDataSource.add(new KeyValueDataSource(code.getコード().getColumnValue(), code.getコード名称()));
             }
-            div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setDataSource(keyValueDataSource);
             div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setIsBlankLine(true);
         }
+        div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setDataSource(keyValueDataSource);
         if (div.getPnlKeyakuJigyosya().getCcdKinyukikan().isゆうちょ銀行()) {
             div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setVisible(false);
         }

@@ -80,26 +80,7 @@ public class KogakuKyuufuTaishouList {
                 result.add(new KogakuKyuufuTaishouListEntityResult(entity));
             }
         }
-        for (KogakuKyuufuTaishouListEntityResult kogaEntity : result) {
-            if (kogaEntity.getEntity().get事業者番号() == null) {
-                kogaEntity.getEntity().set事業者名(null);
-            } else {
-                DbT7060KaigoJigyoshaEntity 介護事業者名称 = 介護事業者管理Dac.select事業者の名称(
-                        kogaEntity.getEntity().get事業者番号(), new FlexibleDate(サービス提供年月.toString()));
-                DbT7063KaigoJigyoshaShiteiServiceEntity 介護事業者指定事業者名称 = 介護事業者指定サービスDac.
-                        select事業者名称(kogaEntity.getEntity().get事業者番号().value(), kogaEntity.getEntity().
-                                getサービス種類コード().value(), new FlexibleDate(サービス提供年月.toString()));
-                set事業者名称(介護事業者名称, 介護事業者指定事業者名称, kogaEntity);
-            }
-            if (kogaEntity.getEntity().getサービス種類コード() == null
-                    || kogaEntity.getEntity().getサービス種類コード().value() == null) {
-                kogaEntity.getEntity().setサービス種類(null);
-            } else {
-                DbT7130KaigoServiceShuruiEntity 種類略称 = 介護サービス種類Dac.selectサービス種類名称Andサービス種類略称(
-                        kogaEntity.getEntity().getサービス種類コード().value(), サービス提供年月);
-                setサービス種類(種類略称, kogaEntity);
-            }
-        }
+        set事業者名称と種類(サービス提供年月, result);
         return result;
     }
 
@@ -124,8 +105,15 @@ public class KogakuKyuufuTaishouList {
                 result.add(new KogakuKyuufuTaishouListEntityResult(entity));
             }
         }
+        set事業者名称と種類(サービス提供年月, result);
+        return result;
+    }
+
+    private void set事業者名称と種類(FlexibleYearMonth サービス提供年月,
+            List<KogakuKyuufuTaishouListEntityResult> result) {
         for (KogakuKyuufuTaishouListEntityResult kogaEntity : result) {
-            if (kogaEntity.getEntity().get事業者番号() == null) {
+            if (kogaEntity.getEntity().get事業者番号() == null || kogaEntity.getEntity().
+                    getサービス種類コード() == null) {
                 kogaEntity.getEntity().set事業者名(null);
             } else {
                 DbT7060KaigoJigyoshaEntity 介護事業者名称 = 介護事業者管理Dac.select事業者の名称(
@@ -144,7 +132,6 @@ public class KogakuKyuufuTaishouList {
                 setサービス種類(種類略称, kogaEntity);
             }
         }
-        return result;
     }
 
     private void set事業者名称(DbT7060KaigoJigyoshaEntity 介護事業者名称,
@@ -159,7 +146,8 @@ public class KogakuKyuufuTaishouList {
         }
     }
 
-    private void setサービス種類(DbT7130KaigoServiceShuruiEntity 種類略称, KogakuKyuufuTaishouListEntityResult result) {
+    private void setサービス種類(DbT7130KaigoServiceShuruiEntity 種類略称,
+            KogakuKyuufuTaishouListEntityResult result) {
         if (種類略称 == null) {
             result.getEntity().setサービス種類(null);
         } else {

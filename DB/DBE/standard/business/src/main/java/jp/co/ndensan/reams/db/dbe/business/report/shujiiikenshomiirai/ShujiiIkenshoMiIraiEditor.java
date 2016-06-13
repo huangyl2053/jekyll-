@@ -52,7 +52,7 @@ public class ShujiiIkenshoMiIraiEditor implements IShujiiIkenshoMiIraiEditor {
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
                 fillType(FillType.ZERO).toDateString());
-        hakkoYMD.append(" ");
+        hakkoYMD.append(RString.HALF_SPACE);
         hakkoYMD.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         source.title = title;
         source.shichosonName = item.get保険者名();
@@ -80,7 +80,7 @@ public class ShujiiIkenshoMiIraiEditor implements IShujiiIkenshoMiIraiEditor {
 
     private RString set性別(RString 性別コード) {
         RString 性別 = RString.EMPTY;
-        if (性別コード != null) {
+        if (!RString.isNullOrEmpty(性別コード)) {
             性別 = Seibetsu.toValue(item.get性別()).get名称();
         }
         return 性別;
@@ -95,7 +95,7 @@ public class ShujiiIkenshoMiIraiEditor implements IShujiiIkenshoMiIraiEditor {
 
     private RString set申請区分(RString 申請区分申請時コード) {
         RString 申請区分 = RString.EMPTY;
-        if (申請区分申請時コード != null) {
+        if (!RString.isNullOrEmpty(申請区分申請時コード)) {
             申請区分 = NinteiShinseiShinseijiKubunCode.toValue(item.get認定申請区分申請時コード()).get名称();
         }
         return 申請区分;

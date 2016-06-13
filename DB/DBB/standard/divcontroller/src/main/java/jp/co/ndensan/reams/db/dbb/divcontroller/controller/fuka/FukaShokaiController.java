@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.business.viewstate.MaeRirekiKey;
-import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.DbbViewStateKey;
+import jp.co.ndensan.reams.db.dbb.definition.core.viewstate.DbbViewStateKey;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;

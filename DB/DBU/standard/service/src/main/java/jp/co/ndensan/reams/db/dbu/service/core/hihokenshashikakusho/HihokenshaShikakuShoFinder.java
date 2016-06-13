@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.service.core.hihokenshashikakusho;
 
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.kofusho.KofushoShurui;
+import jp.co.ndensan.reams.db.dba.definition.core.kofusho.KofushoShurui;
 import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashikakushodata.HihokenshaShikakuShoDataParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.hihokenshashikakushodataentity.HihokenshaShikakuShoDataEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;

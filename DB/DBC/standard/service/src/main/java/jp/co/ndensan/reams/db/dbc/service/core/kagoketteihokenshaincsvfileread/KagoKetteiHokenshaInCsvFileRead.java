@@ -102,26 +102,12 @@ public class KagoKetteiHokenshaInCsvFileRead {
         mapper.create過誤決定明細一時TBL();
         mapper.create被保険者一時TBL();
         mapper.create処理結果リスト一時TBL();
-        return 一時TBLに読込と登録(処理年月, 保存先フォルダ, エントリ情報List);
+        return 取込件数確認(処理年月, 保存先フォルダ, エントリ情報List);
     }
 
-    /**
-     * 一時TBLに読込と登録
-     *
-     * @param 処理年月 FlexibleYearMonth
-     * @param 保存先フォルダ RString
-     * @param エントリ情報List List<RString>
-     */
     @Transaction
-    private FlowEntity 一時TBLに読込と登録(FlexibleYearMonth 処理年月, RString 保存先フォルダ, List<RString> エントリ情報List) {
+    private FlowEntity 取込件数確認(FlexibleYearMonth 処理年月, RString 保存先フォルダ, List<RString> エントリ情報List) {
         List<KagoKetteiHokenshaInCsvEntity> csvlist = csvファイル読込(保存先フォルダ, エントリ情報List);
-        過誤決定集計一時TBLに登録(処理年月, csvlist);
-        過誤決定明細一時TBLに登録(処理年月, csvlist);
-        return 取込件数確認(csvlist);
-    }
-
-    @Transaction
-    private FlowEntity 取込件数確認(List<KagoKetteiHokenshaInCsvEntity> csvlist) {
         IKagoKetteiHokenshaInCsvFileReadMapper mapper = this.mapperProvider.create(IKagoKetteiHokenshaInCsvFileReadMapper.class);
         DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
         FlowEntity getEntity = バッチフロ(csvlist);
@@ -129,6 +115,9 @@ public class KagoKetteiHokenshaInCsvFileRead {
         errorTempentity.setエラー区分(NUM);
         if (レコード件数合算 == INDEX_0) {
             mapper.処理結果リスト一時TBLに登録(errorTempentity);
+        } else {
+            過誤決定集計一時TBLに登録(処理年月, csvlist);
+            過誤決定明細一時TBLに登録(処理年月, csvlist);
         }
         return getEntity;
 
@@ -136,13 +125,20 @@ public class KagoKetteiHokenshaInCsvFileRead {
 
     private FlowEntity バッチフロ(List<KagoKetteiHokenshaInCsvEntity> csvlist) {
         flowEntity = new FlowEntity();
-        FlexibleYearMonth 処理対象年月 = new FlexibleYearMonth(csvlist.get(0).getControlCsvEntity().getShoriYM());
-        int レコード件数合算 = 0;
-        for (int i = INDEX_0; i < csvlist.size(); i++) {
-            int レコード件数 = Integer.parseInt(csvlist.get(i).getControlCsvEntity().getCodeNum().toString());
-            レコード件数合算 = レコード件数合算 + レコード件数;
+        if (csvlist.size() > INDEX_0 && csvlist.get(0).getControlCsvEntity() != null
+                && csvlist.get(0).getControlCsvEntity().getShoriYM() != null) {
+            FlexibleYearMonth 処理対象年月 = new FlexibleYearMonth(csvlist.get(0).getControlCsvEntity().getShoriYM());
+            flowEntity.setShoriYM(処理対象年月);
         }
-        flowEntity.setShoriYM(処理対象年月);
+        int レコード件数合算 = 0;
+        if (csvlist.size() > INDEX_0) {
+            for (int i = INDEX_0; i < csvlist.size(); i++) {
+                if (csvlist.get(i).getControlCsvEntity() != null && csvlist.get(i).getControlCsvEntity().getCodeNum() != null) {
+                    int レコード件数 = Integer.parseInt(csvlist.get(i).getControlCsvEntity().getCodeNum().toString());
+                    レコード件数合算 = レコード件数合算 + レコード件数;
+                }
+            }
+        }
         flowEntity.setCodeNum(レコード件数合算);
         return flowEntity;
     }
