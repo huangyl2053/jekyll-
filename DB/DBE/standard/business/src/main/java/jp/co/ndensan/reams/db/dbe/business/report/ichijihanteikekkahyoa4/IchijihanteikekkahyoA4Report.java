@@ -564,14 +564,14 @@ public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4R
     }
 
     private RString get段階改善1(RString 段階改善) {
-        if (!RString.isNullOrEmpty(段階改善) && 段階改善.length() > 1) {
+        if (!RString.isNullOrEmpty(段階改善) && 1 < 段階改善.length()) {
             return 段階改善.substring(0, 1);
         }
         return RString.EMPTY;
     }
 
     private RString get段階改善2(RString 段階改善) {
-        if (!RString.isNullOrEmpty(段階改善) && 段階改善.length() > 1) {
+        if (!RString.isNullOrEmpty(段階改善) && 1 < 段階改善.length()) {
             return 段階改善.substring(1);
         }
         return RString.EMPTY;
