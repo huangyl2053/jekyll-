@@ -433,12 +433,12 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
         if (entity.getInsertTimestamp() == null) {
             tashaJukiDataEntity.set挿入日時(RString.EMPTY);
         } else {
-            tashaJukiDataEntity.set挿入日時(new RString(entity.getInsertTimestamp().toString()));
+            tashaJukiDataEntity.set挿入日時(entity.getInsertTimestamp().format西暦("yyyyMMddHHmmss"));
         }
         if (entity.getLastUpdateTimestamp() == null) {
             tashaJukiDataEntity.set更新日時(RString.EMPTY);
         } else {
-            tashaJukiDataEntity.set更新日時(new RString(entity.getLastUpdateTimestamp().toString()));
+            tashaJukiDataEntity.set更新日時(entity.getLastUpdateTimestamp().format西暦("yyyyMMddHHmmss"));
         }
         tashaJukiDataEntity.set受給者市町村コード(entity.getDbT4001ShichosonCode());
         tashaJukiDataEntity.set受給者被保険者番号(entity.getDbT4001HihokenshaNo());
@@ -523,12 +523,12 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
         if (entity.getDbT4001InsertTimestamp() == null) {
             tashaJukiDataEntity.set受給者挿入日時(RString.EMPTY);
         } else {
-            tashaJukiDataEntity.set受給者挿入日時(new RString(entity.getDbT4001InsertTimestamp().toString()));
+            tashaJukiDataEntity.set受給者挿入日時(entity.getDbT4001InsertTimestamp().format西暦("yyyyMMddHHmmss"));
         }
         if (entity.getDbT4001LastUpdateTimestamp() == null) {
             tashaJukiDataEntity.set受給者更新日時(RString.EMPTY);
         } else {
-            tashaJukiDataEntity.set受給者更新日時(new RString(entity.getDbT4001LastUpdateTimestamp().toString()));
+            tashaJukiDataEntity.set受給者更新日時(entity.getDbT4001LastUpdateTimestamp().format西暦("yyyyMMddHHmmss"));
         }
         return tashaJukiDataEntity;
     }
