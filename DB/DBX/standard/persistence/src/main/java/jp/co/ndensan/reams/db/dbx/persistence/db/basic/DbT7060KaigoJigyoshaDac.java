@@ -194,4 +194,30 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
                 .order(by(DbT7060KaigoJigyosha.yukoKaishiYMD, Order.DESC)).limit(1)
                 .toObject(DbT7060KaigoJigyoshaEntity.class);
     }
+
+    /**
+     * 入所施設名称の取得。
+     *
+     * @param 事業者番号 JigyoshaNo
+     * @param システム日付 FlexibleDate
+     * @return List<DbT7060KaigoJigyoshaEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT7060KaigoJigyoshaEntity> select介護事業者(
+            JigyoshaNo 事業者番号,
+            FlexibleDate システム日付) throws NullPointerException {
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT事業者番号.toString()));
+        requireNonNull(システム日付, UrSystemErrorMessages.値がnull.getReplacedMessage(TXTシステム日付.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7060KaigoJigyosha.class).
+                where(and(
+                                eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号),
+                                leq(DbT7060KaigoJigyosha.yukoKaishiYMD, システム日付),
+                                or(leq(システム日付, DbT7060KaigoJigyosha.yukoShuryoYMD), isNULL(DbT7060KaigoJigyosha.yukoShuryoYMD)))).
+                toList(DbT7060KaigoJigyoshaEntity.class);
+    }
 }
