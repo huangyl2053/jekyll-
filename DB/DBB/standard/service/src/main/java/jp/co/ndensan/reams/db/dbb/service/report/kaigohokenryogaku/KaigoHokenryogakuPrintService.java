@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
@@ -42,6 +43,25 @@ public class KaigoHokenryogakuPrintService {
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
+
+    /**
+     * 介護保険料額変更通知書発行一覧表(単一帳票出力用)
+     *
+     * @param 編集後本算定通知書共通情報List List<EditedHonSanteiTsuchiShoKyotsu>
+     * @param 帳票作成日時 RDateTime
+     * @param 出力順ID Long
+     * @param タイトル RString
+     * @return SourceDataCollection
+     */
+    public SourceDataCollection printSingle(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List, RDateTime 帳票作成日時,
+            Long 出力順ID, RString タイトル) {
+        SourceDataCollection collection;
+        try (ReportManager reportManager = new ReportManager()) {
+            printタイプ(編集後本算定通知書共通情報List, 帳票作成日時, 出力順ID, reportManager, タイトル);
+            collection = reportManager.publish();
+        }
+        return collection;
+    }
 
     /**
      * printメソッド
@@ -74,7 +94,7 @@ public class KaigoHokenryogakuPrintService {
 
     private List<RString> get出力順(Long 出力順ID) {
         IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200012.getReportId(), 出力順ID);
+                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB100039.getReportId(), 出力順ID);
         List<RString> 並び順List = new ArrayList<>();
         int i = 0;
         if (並び順 != null) {
