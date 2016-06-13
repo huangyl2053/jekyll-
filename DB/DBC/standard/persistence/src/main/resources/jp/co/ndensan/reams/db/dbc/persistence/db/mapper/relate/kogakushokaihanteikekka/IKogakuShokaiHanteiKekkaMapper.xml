@@ -7,51 +7,51 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaihanteikekka.KogakuShokaiHanteiKekkaParam"
             fetchSize="500">
         SELECT
-            A.*,
-            B.*,
-            C.*,
-            D.*,
-            E.*,
-            F.*
+        A.*,
+        B.*,
+        C.*,
+        D.*,
+        E.*,
+        F.*
         FROM
-            (SELECT *
-             FROM rgdb."DbT3056KogakuShikyuShinsei" AS A1
-             WHERE NOT EXITS (
-                SELECT *
-                FROM rgdb."DbT3056KogakuShikyuShinsei" AS A2
-                WHERE A1."hihokenshaNo" = A2."hihokenshaNo"
-                AND   A1."serviceTeikyoYM" = A2."serviceTeikyoYM"
-                AND   A1."shoKisaiHokenshaNo" = A2."shoKisaiHokenshaNo"
-                AND   A1."rirekiNo" < A2."rirekiNo")) AS A
+        (SELECT *
+        FROM rgdb."DbT3056KogakuShikyuShinsei" AS A1
+        WHERE NOT EXITS (
+        SELECT *
+        FROM rgdb."DbT3056KogakuShikyuShinsei" AS A2
+        WHERE A1."hihokenshaNo" = A2."hihokenshaNo"
+        AND   A1."serviceTeikyoYM" = A2."serviceTeikyoYM"
+        AND   A1."shoKisaiHokenshaNo" = A2."shoKisaiHokenshaNo"
+        AND   A1."rirekiNo" &lt; A2."rirekiNo")) AS A
         LEFT JOIN rgdb."DbT3057KogakuShikyuHanteiKekka" AS B
         ON      A."hihokenshaNo" = B."hihokenshaNo"
-            AND A."serviceTeikyoYM" = B."serviceTeikyoYM"
-            AND A."shoKisaiHokenshaNo" = B."shoKisaiHokenshaNo"
-            AND A."rirekiNo" = B."rirekiNo"
+        AND A."serviceTeikyoYM" = B."serviceTeikyoYM"
+        AND A."shoKisaiHokenshaNo" = B."shoKisaiHokenshaNo"
+        AND A."rirekiNo" = B."rirekiNo"
         LEFT JOIN rgdb."DbT3058KogakuShikyuShinsaKettei" AS C
         ON      A."hihokenshaNo" = C."hihokenshaNo"
-            AND A."serviceTeikyoYM" = C."serviceTeikyoYM"
-            AND A."shoKisaiHokenshaNo" = C."shoKisaiHokenshaNo"
-            AND A."rirekiNo" = C."rirekiNo"
+        AND A."serviceTeikyoYM" = C."serviceTeikyoYM"
+        AND A."shoKisaiHokenshaNo" = C."shoKisaiHokenshaNo"
+        AND A."rirekiNo" = C."rirekiNo"
         LEFT JOIN rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS D
         ON      A."hihokenshaNo" = D."hihokenshaNo"
-            AND A."serviceTeikyoYM" = D."serviceTeikyoYM"
-            AND A."rirekiNo" = D."rirekiNo"
+        AND A."serviceTeikyoYM" = D."serviceTeikyoYM"
+        AND A."rirekiNo" = D."rirekiNo"
         LEFT JOIN rgdb."DbT3054KogakuKyufuTaishoshaMeisai" AS E
         ON      A."hihokenshaNo" = E."hihokenshaNo"
-            AND A."serviceTeikyoYM" = E."serviceTeikyoYM"
-            AND A."rirekiNo" = E."rirekiNo" 
-        LEFT JOIN 
-            (SELECT *
-             FROM rgdb."DbT7060KaigoJigyosha"
-             WHERE "yukoShuryoYMD" is NULL
-             OR "yukoShuryoYMD" = '') AS F
+        AND A."serviceTeikyoYM" = E."serviceTeikyoYM"
+        AND A."rirekiNo" = E."rirekiNo"
+        LEFT JOIN
+        (SELECT *
+        FROM rgdb."DbT7060KaigoJigyosha"
+        WHERE "yukoShuryoYMD" is NULL
+        OR "yukoShuryoYMD" = '') AS F
         ON E."jigyoshaNo" = F."jigyoshaNo"
         WHERE A."hihokenshaNo" = #{被保険者番号}
         AND   A."serviceTeikyoYM" = #{提供年月}
         ORDER BY
-            E."jigyoshaNo" ASC
-            E."serviceShuruiCode" ASC
+        E."jigyoshaNo" ASC
+        E."serviceShuruiCode" ASC
     </select>
     <resultMap id="resultMap_KogakuShokai"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaihanteikekka.KogakuShokaiHanteiKekkaEntity" autoMapping="true">
@@ -71,51 +71,51 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaihanteikekka.KogakuShokaiHanteiKekkaParam"
             fetchSize="500">
         SELECT
-            A.*,
-            B.*,
-            C.*,
-            D.*,
-            E.*,
-            F.*
+        A.*,
+        B.*,
+        C.*,
+        D.*,
+        E.*,
+        F.*
         FROM
-            (SELECT *
-             FROM rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A1
-             WHERE NOT EXITS (
-                SELECT *
-                FROM rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A2
-                WHERE A1."hihokenshaNo" = A2."hihokenshaNo"
-                AND   A1."serviceTeikyoYM" = A2."serviceTeikyoYM"
-                AND   A1."shoKisaiHokenshaNo" = A2."shoKisaiHokenshaNo"
-                AND   A1."rirekiNo" < A2."rirekiNo")) AS A
+        (SELECT *
+        FROM rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A1
+        WHERE NOT EXITS (
+        SELECT *
+        FROM rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A2
+        WHERE A1."hihokenshaNo" = A2."hihokenshaNo"
+        AND   A1."serviceTeikyoYM" = A2."serviceTeikyoYM"
+        AND   A1."shoKisaiHokenshaNo" = A2."shoKisaiHokenshaNo"
+        AND   A1."rirekiNo" &lt; A2."rirekiNo")) AS A
         LEFT JOIN rgdb."DbT3111JigyoKogakuShikyuHanteiKekka" AS B
         ON      A."hihokenshaNo" = B."hihokenshaNo"
-            AND A."serviceTeikyoYM" = B."serviceTeikyoYM"
-            AND A."shoKisaiHokenshaNo" = B."shoKisaiHokenshaNo"
-            AND A."rirekiNo" = B."rirekiNo"
+        AND A."serviceTeikyoYM" = B."serviceTeikyoYM"
+        AND A."shoKisaiHokenshaNo" = B."shoKisaiHokenshaNo"
+        AND A."rirekiNo" = B."rirekiNo"
         LEFT JOIN rgdb."DbT3112KogakuShikyuShinsaKettei" AS C
         ON      A."hihokenshaNo" = C."hihokenshaNo"
-            AND A."serviceTeikyoYM" = C."serviceTeikyoYM"
-            AND A."shoKisaiHokenshaNo" = C."shoKisaiHokenshaNo"
-            AND A."rirekiNo" = C."rirekiNo"
+        AND A."serviceTeikyoYM" = C."serviceTeikyoYM"
+        AND A."shoKisaiHokenshaNo" = C."shoKisaiHokenshaNo"
+        AND A."rirekiNo" = C."rirekiNo"
         LEFT JOIN rgdb."DbT3109JigyoKogakuKyufuTaishoshaGokei" AS D
         ON      A."hihokenshaNo" = D."hihokenshaNo"
-            AND A."serviceTeikyoYM" = D."serviceTeikyoYM"
-            AND A."rirekiNo" = D."rirekiNo"
+        AND A."serviceTeikyoYM" = D."serviceTeikyoYM"
+        AND A."rirekiNo" = D."rirekiNo"
         LEFT JOIN rgdb."DbT3108JigyoKogakuKyufuTaishoshaMeisai" AS E
         ON      A."hihokenshaNo" = E."hihokenshaNo"
-            AND A."serviceTeikyoYM" = E."serviceTeikyoYM"
-            AND A."rirekiNo" = E."rirekiNo" 
-        LEFT JOIN 
-            (SELECT *
-             FROM rgdb."DbT7060KaigoJigyosha"
-             WHERE "yukoShuryoYMD" is NULL
-             OR "yukoShuryoYMD" = '') AS F
+        AND A."serviceTeikyoYM" = E."serviceTeikyoYM"
+        AND A."rirekiNo" = E."rirekiNo"
+        LEFT JOIN
+        (SELECT *
+        FROM rgdb."DbT7060KaigoJigyosha"
+        WHERE "yukoShuryoYMD" is NULL
+        OR "yukoShuryoYMD" = '') AS F
         ON E."jigyoshaNo" = F."jigyoshaNo"
         WHERE A."hihokenshaNo" = #{被保険者番号}
         AND   A."serviceTeikyoYM" = #{提供年月}
         ORDER BY
-            E."jigyoshaNo" ASC
-            E."serviceShuruiCode" ASC
+        E."jigyoshaNo" ASC
+        E."serviceShuruiCode" ASC
     </select>
     <resultMap id="resultMap_JigyoKogakuShokai"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaihanteikekka.JigyoKogakuShokaiHanteiKekkaEntity" autoMapping="true">
