@@ -30,6 +30,7 @@ public class KogakuKyufuTaishoListHandler {
     private static final RString 総合事業高額介護サービス費照会 = new RString("DBCMN11016");
     private static final RString 照会モード = new RString("照会モード");
     private static final RString 明細編集モード = new RString("明細編集モード");
+    private static final RString 合計 = new RString("合計");
     private static final RString 平成17年10月 = new RString("200510");
     private static final RString 平成17年11月 = new RString("200511");
     private static final RString key0 = new RString("key0");
@@ -110,7 +111,11 @@ public class KogakuKyufuTaishoListHandler {
                 row.setData1(koEntity.getEntity().get事業者番号().value());
             }
             row.setData2(koEntity.getEntity().get事業者名());
-            row.setData3(koEntity.getEntity().getサービス種類());
+            if (ONE_RS.equals(koEntity.getEntity().get明細合計区分())) {
+                row.setData3(koEntity.getEntity().getサービス種類());
+            } else {
+                row.setData3(合計);
+            }
             if (ONE_RS.equals(koEntity.getEntity().get明細合計区分())
                     && koEntity.getEntity().getサービス費用合計額() != null) {
                 row.getData4().setValue(koEntity.getEntity().getサービス費用合計額());
@@ -136,7 +141,8 @@ public class KogakuKyufuTaishoListHandler {
             }
             row.setData9(koEntity.getEntity().get高額給付根拠());
             row.setData10(koEntity.getEntity().get明細合計区分());
-            if (koEntity.getEntity().getサービス種類コード() != null) {
+            if (koEntity.getEntity().getサービス種類コード() != null
+                    && ONE_RS.equals(koEntity.getEntity().get明細合計区分())) {
                 row.setData11(koEntity.getEntity().getサービス種類コード().value());
             }
             rowList.add(row);
