@@ -1288,4 +1288,33 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 order(by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.ASC)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
+
+    /**
+     * 処理日付管理マスタテーブルから依頼金額計算状況取得します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 処理名 ShoriName
+     * @param 年度 Nendo
+     * @param 年度内連番 NendoNaiRenban
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity get特徴依頼情報作成の基準日時含みエンティティ(SubGyomuCode サブ業務コード,
+            RString 処理名, FlexibleYear 年度, RString 年度内連番) {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度.toString()));
+        requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage(年度内連番メッセージ.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, サブ業務コード),
+                                eq(shoriName, 処理名),
+                                eq(nendo, 年度),
+                                eq(nendoNaiRenban, 年度内連番))).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
 }

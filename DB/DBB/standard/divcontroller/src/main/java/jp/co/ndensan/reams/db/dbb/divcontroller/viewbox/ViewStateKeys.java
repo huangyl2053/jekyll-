@@ -111,6 +111,10 @@ public enum ViewStateKeys {
     /**
      * 所得照会状況一覧KEY
      */
-    所得照会状況一覧KEY;
+    所得照会状況一覧KEY,
+    /**
+     * 特徴送付情報作成FLAG
+     */
+    特徴送付情報作成FLAG;
 
 }
