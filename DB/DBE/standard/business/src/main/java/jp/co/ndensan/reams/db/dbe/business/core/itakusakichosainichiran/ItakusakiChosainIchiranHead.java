@@ -3,21 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package jp.co.ndensan.reams.db.dbe.business.report.itakusakichosainichiran;
+package jp.co.ndensan.reams.db.dbe.business.core.itakusakichosainichiran;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
  *
- * 認定調査委託先・認定調査員一覧表リスト一覧表情報です。
+ * 調査委託先・調査員一覧表ヘッダのITEMです。
+ *
  * @reamsid_L DBE-0290-020 dongyabin
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ItakusakiChosainIchiranBodyItem {
-    
+public class ItakusakiChosainIchiranHead {
+
+    private final RString iryoKikanCodeFrom;
+    private final RString iryoKikanCodeTo;
+    private final RString shujiiCodeFrom;
+    private final RString shujiiCodeTo;
+    private final RString shujiiJokyo;
+    private final RString cityCode;
+    private final RString cityName;
+    private final RString sort;
+    private final RString page;
     private final RString shujiiIryokikanCode;
     private final RString iryoKikanMeishoKana;
     private final RString iryoKikanMeisho;
@@ -35,9 +44,19 @@ public class ItakusakiChosainIchiranBodyItem {
     private final RString chosainShikakuName;
     private final RString shinryokaName;
     private final boolean shujiiJokyoFlag;
-    
+
     /**
      * インスタンスを生成します。
+     *
+     * @param iryoKikanCodeFrom 認定調査委託先コードFrom
+     * @param iryoKikanCodeTo 認定調査委託先コードTo
+     * @param shujiiCodeFrom 調査員コードFrom
+     * @param shujiiCodeTo 調査員コードTo
+     * @param shujiiJokyo 調査員の状況判定
+     * @param cityCode 市町村コード
+     * @param cityName 市町村名
+     * @param sort 並び順
+     * @param page 改頁
      * @param shujiiIryokikanCode 調査委託先コード
      * @param iryoKikanMeishoKana 名称(ｶﾅ)
      * @param iryoKikanMeisho 名称
@@ -56,7 +75,16 @@ public class ItakusakiChosainIchiranBodyItem {
      * @param shinryokaName 所属機関名
      * @param shujiiJokyoFlag 有無
      */
-    public ItakusakiChosainIchiranBodyItem(RString shujiiIryokikanCode,
+    public ItakusakiChosainIchiranHead(RString iryoKikanCodeFrom,
+            RString iryoKikanCodeTo,
+            RString shujiiCodeFrom,
+            RString shujiiCodeTo,
+            RString shujiiJokyo,
+            RString cityCode,
+            RString cityName,
+            RString sort,
+            RString page,
+            RString shujiiIryokikanCode,
             RString iryoKikanMeishoKana,
             RString daihyoshaNameKana,
             RString yubinNo,
@@ -72,8 +100,16 @@ public class ItakusakiChosainIchiranBodyItem {
             RString daihyoshaName,
             RString shujiiName,
             RString seibetsu,
-            RString shinryokaName
-    ) {
+            RString shinryokaName) {
+        this.iryoKikanCodeFrom = iryoKikanCodeFrom;
+        this.iryoKikanCodeTo = iryoKikanCodeTo;
+        this.shujiiCodeFrom = shujiiCodeFrom;
+        this.shujiiCodeTo = shujiiCodeTo;
+        this.shujiiJokyo = shujiiJokyo;
+        this.cityCode = cityCode;
+        this.cityName = cityName;
+        this.sort = sort;
+        this.page = page;
         this.shujiiIryokikanCode = shujiiIryokikanCode;
         this.iryoKikanMeishoKana = iryoKikanMeishoKana;
         this.iryoKikanMeisho = iryoKikanMeisho;
@@ -91,7 +127,6 @@ public class ItakusakiChosainIchiranBodyItem {
         this.chosainShikakuName = chosainShikakuName;
         this.shinryokaName = shinryokaName;
         this.shujiiJokyoFlag = shujiiJokyoFlag;
-
     }
-    
+
 }

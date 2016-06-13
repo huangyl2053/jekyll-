@@ -5,12 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.itakusakichosainichiran;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.report.itakusakichosainichiran.ItakusakiChosainIchiranBodyItem;
-import jp.co.ndensan.reams.db.dbe.business.report.itakusakichosainichiran.ItakusakiChosainIchiranHeadItem;
+import jp.co.ndensan.reams.db.dbe.business.core.itakusakichosainichiran.ItakusakiChosainIchiranHead;
 import jp.co.ndensan.reams.db.dbe.business.report.itakusakichosainichiran.ItakusakiChosainIchiranReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.itakusakichosainichiran.ItakusakiChosainIchiranQueryProcessParemeter;
@@ -22,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -40,28 +37,12 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchKeyBreakBase<Itaku
             = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.itakusakichosainichiran."
                     + "IItakusakiChosainIchiranMapper.getNinteiChoSain");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE592001.getReportId();
-    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("listIchiranhyoUpper_1")));
+    private static final List<RString> PAGE_BREAK_KEYS = Collections
+            .unmodifiableList(Arrays.asList(new RString(ItakusakiChosainIchiranReportSource.ReportSourceFields.listIchiranhyoUpper_1.name())));
     private ItakusakiChosainIchiranQueryProcessParemeter paramter;
-    List<ItakusakiChosainIchiranBodyItem> bodyItem;
-    ItakusakiChosainIchiranHeadItem headItem;
-    InputParameter<ItakusakiChosainIchiranQueryProcessParemeter> parameterClass;
     @BatchWriter
     private BatchReportWriter<ItakusakiChosainIchiranReportSource> batchWrite;
     private ReportSourceWriter<ItakusakiChosainIchiranReportSource> retortWrite;
-
-    @Override
-    protected void initialize() {
-        bodyItem = new ArrayList<>();
-        headItem = new ItakusakiChosainIchiranHeadItem(paramter.getItakusakiCodeFrom(),
-                paramter.getItakusakiCodeTo(),
-                paramter.getChosainNoFrom(),
-                paramter.getChosainNoTo(),
-                paramter.getJyoukyou(),
-                paramter.getShichosonCode(),
-                paramter.getShichosonMeisho(),
-                paramter.getNarabiJun(),
-                paramter.getNextPage());
-    }
 
     @Override
     protected IBatchReader createReader() {
@@ -78,12 +59,9 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchKeyBreakBase<Itaku
 
     @Override
     protected void afterExecute() {
-        ItakusakiChosainIchiranReport report = ItakusakiChosainIchiranReport.createFrom(headItem, bodyItem);
-        report.writeBy(retortWrite);
-
     }
 
-    private ItakusakiChosainIchiranBodyItem setBodyItemm(ItakusakiChosainIchiranRelateEntity entity) {
+    private ItakusakiChosainIchiranHead setBodyItemm(ItakusakiChosainIchiranRelateEntity entity) {
         RString dDbT5910_YubinNo = RString.EMPTY;
         RString dbT5910_TelNo = RString.EMPTY;
         if (entity.getDbT5910_YubinNo() != null) {
@@ -93,7 +71,16 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchKeyBreakBase<Itaku
             dbT5910_TelNo = entity.getDbT5910_TelNo().value();
         }
 
-        return new ItakusakiChosainIchiranBodyItem(entity.getDbT5910_NinteichosaItakusakiCode(),
+        return new ItakusakiChosainIchiranHead(paramter.getItakusakiCodeFrom(),
+                paramter.getItakusakiCodeTo(),
+                paramter.getChosainNoFrom(),
+                paramter.getChosainNoTo(),
+                paramter.getJyoukyou(),
+                paramter.getShichosonCode(),
+                paramter.getShichosonMeisho(),
+                paramter.getNarabiJun(),
+                paramter.getNextPage(),
+                entity.getDbT5910_NinteichosaItakusakiCode(),
                 entity.getDbT5910_JigyoshaMeishoKana(),
                 entity.getDbT5910_DaihyoshaNameKana(),
                 dDbT5910_YubinNo,
@@ -115,9 +102,8 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchKeyBreakBase<Itaku
     @Override
     protected void keyBreakProcess(ItakusakiChosainIchiranRelateEntity current) {
         if (hasBrek(getBefore(), current)) {
-            ItakusakiChosainIchiranReport report = ItakusakiChosainIchiranReport.createFrom(headItem, bodyItem);
+            ItakusakiChosainIchiranReport report = new ItakusakiChosainIchiranReport(setBodyItemm(current));
             report.writeBy(retortWrite);
-            bodyItem = new ArrayList<>();
         }
     }
 
@@ -127,6 +113,7 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchKeyBreakBase<Itaku
 
     @Override
     protected void usualProcess(ItakusakiChosainIchiranRelateEntity entity) {
-        bodyItem.add(setBodyItemm(entity));
+        ItakusakiChosainIchiranReport report = new ItakusakiChosainIchiranReport(setBodyItemm(entity));
+        report.writeBy(retortWrite);
     }
 }
