@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikensho5komoku;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,11 +20,6 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShujiiIkensho5komokuEntity {
 
-    private RString title;
-    private RString 出力対象;
-    private RDateTime printTimeStamp;
-    private int 頁番号;
-    private int no;
     private RString 保険者番号;
     private RString 保険者名;
     private RString 氏名;

@@ -52,7 +52,7 @@ public class ShijiiIkenshoIraiHenkoEditor implements IShijiiIkenshoIraiHenkoEdit
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
                 fillType(FillType.ZERO).toDateString());
-        hakkoYMD.append(" ");
+        hakkoYMD.append(RString.HALF_SPACE);
         hakkoYMD.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         source.title = title;
         source.shichosonName = item.get保険者名();
