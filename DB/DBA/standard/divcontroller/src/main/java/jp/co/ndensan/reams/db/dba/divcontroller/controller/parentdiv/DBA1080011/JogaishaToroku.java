@@ -8,8 +8,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1080011
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanri;
-import static jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysJukyuShikakuShomeishoHakko.資格取得除外者登録キー;
-import static jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysJukyuShikakuShomeishoHakko.除外者データキー;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1080011.DBA1080011StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1080011.JogaishaTorokuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1080011.dgNenreiTotatshusha_Row;
@@ -19,6 +17,8 @@ import jp.co.ndensan.reams.db.dba.service.core.shikakushutokujogaishakanri.Shika
 import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaisha;
 import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaishaBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaishaIdentifier;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.config.ConfigKeysJukyuShikakuShomeishoHakko.資格取得除外者登録キー;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.config.ConfigKeysJukyuShikakuShomeishoHakko.除外者データキー;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;

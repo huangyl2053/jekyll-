@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.service.core.hihokenshashochohyo;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.core.enumeratedtype.config.ConfigKeysHihokenshashoIndicationMethod;
+import jp.co.ndensan.reams.db.dba.definition.core.config.ConfigKeysHihokenshashoIndicationMethod;
 import jp.co.ndensan.reams.db.dbu.business.core.hihokenshashochohyo.HihokenshashoChoBusiness;
 import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.AtenaMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.HihokenshashoChohyoParameter;
