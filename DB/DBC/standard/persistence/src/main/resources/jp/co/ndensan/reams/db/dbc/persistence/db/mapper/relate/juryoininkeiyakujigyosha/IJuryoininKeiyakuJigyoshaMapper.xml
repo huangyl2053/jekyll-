@@ -67,7 +67,7 @@
             AND ((KINYUKIKANSHITEN."kaishiYMD" <![CDATA[<=]]> #{systemDate}
                     AND #{systemDate} <![CDATA[<=]]> KINYUKIKANSHITEN."shuryoYMD")
                 OR (KINYUKIKANSHITEN."kaishiYMD" <![CDATA[<=]]> #{kaishiYMD}
-                    AND #{kaishiYMD} <![CDATA[<=]]> KINYUKIKANSHITEN."shuryoYMD")
-                )
+                    AND #{shuryoYMD} <![CDATA[<=]]> KINYUKIKANSHITEN."shuryoYMD")
+                ) 
     </select>
 </mapper>

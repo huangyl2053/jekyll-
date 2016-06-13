@@ -37,6 +37,9 @@ public final class PtnTotalHandler {
 
     private final PtnTotalDiv div;
     private static final RString 参照 = new RString("参照");
+    private static final RString KEY_1 = new RString("1");
+    private static final RString KEY_2 = new RString("2");
+    private static final RString KEY_3 = new RString("3");
 
     /**
      * コンストラクタです。
@@ -69,7 +72,7 @@ public final class PtnTotalHandler {
             div.getPnlData().getDgKeiyakuJigyosya().getGridSetting().setIsShowDeleteButtonColumn(false);
         }
         if (初期フラグ) {
-            div.getPnlCondition().getRdoBango().setSelectedKey(new RString("1"));
+            div.getPnlCondition().getRdoBango().setSelectedKey(KEY_1);
         }
         div.getPnlCondition().getTxtJigyosyakeyakuNo().clearValue();
         div.getPnlCondition().getTxtJigyosyakeyakuNo().setDisabled(false);
@@ -215,10 +218,10 @@ public final class PtnTotalHandler {
         AtenaJusho keiyakuJigyoshaJusho = null;
         boolean sameJusho = false;
 
-        if (new RString("1").equals(div.getPnlCondition().getRdoBango().getSelectedKey())) {
+        if (KEY_1.equals(div.getPnlCondition().getRdoBango().getSelectedKey())) {
             selectedBango = true;
             keiyakuJigyoshaNo = new RString(div.getPnlCondition().getTxtJigyosyakeyakuNo().getValue().toString());
-        } else if (new RString("2").equals(div.getPnlCondition().getRdoMeisyo().getSelectedKey())) {
+        } else if (KEY_2.equals(div.getPnlCondition().getRdoMeisyo().getSelectedKey())) {
             selectedName = true;
             if (!div.getPnlCondition().getTxtMeisyoKana().getValue().isNullOrEmpty()) {
                 keiyakuJigyoshaKanaName = new AtenaKanaMeisho(div.getPnlCondition().getTxtMeisyoKana().getValue());
@@ -235,7 +238,7 @@ public final class PtnTotalHandler {
             if (!RString.EMPTY.equals(div.getPnlCondition().getDdlKeiyakuSyurui().getSelectedKey())) {
                 keiyakuShurui = div.getPnlCondition().getDdlKeiyakuSyurui().getSelectedKey();
             }
-        } else if (new RString("3").equals(div.getPnlCondition().getRdoJyusyo().getSelectedKey())) {
+        } else if (KEY_3.equals(div.getPnlCondition().getRdoJyusyo().getSelectedKey())) {
             selectedJusho = true;
             if (!div.getPnlCondition().getTxtYubin().getValue().isEmpty()) {
                 keiyakuJigyoshaYubinNo = div.getPnlCondition().getTxtYubin().getValue();
@@ -270,7 +273,7 @@ public final class PtnTotalHandler {
             div.getPnlData().getDgKeiyakuJigyosya().setDataSource(data);
             return;
         }
-        int count = 0;
+        int count;
         int limit = div.getPnlCondition().getTxtMaxCount().getValue().intValue();
         if (dataList.size() > limit) {
             count = limit;
@@ -280,12 +283,19 @@ public final class PtnTotalHandler {
         ViewStateHolder.put(ViewStateKeys.受領委任契約事業者一覧データ, (ArrayList<JuryoininKeiyakuJigyosha>) dataList);
         ViewStateHolder.put(ViewStateKeys.受領委任契約事業者検索最大件数, div.getPnlCondition().getTxtMaxCount().getValue());
 
+        setGrid(count, dataList);
+    }
+
+    private void setGrid(int count, List<JuryoininKeiyakuJigyosha> dataList) {
+        List<dgKeiyakuJigyosya_Row> data = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             dgKeiyakuJigyosya_Row row = new dgKeiyakuJigyosya_Row();
 
             row.setTxtKeiyakuJigyoshaNo(dataList.get(i).get契約事業者番号());
-            row.setTxtKeiyakuJigyoshaName(dataList.get(i).get契約事業者名称().value());
-            row.setTxtKeiyakuJigyoshaJusho(dataList.get(i).get契約事業者住所().value());
+            row.setTxtKeiyakuJigyoshaName(dataList.get(i).get契約事業者名称() == null ? null
+                    : dataList.get(i).get契約事業者名称().getColumnValue());
+            row.setTxtKeiyakuJigyoshaJusho(dataList.get(i).get契約事業者住所() == null ? null
+                    : dataList.get(i).get契約事業者住所().getColumnValue());
             TextBoxDate 開始年月日 = new TextBoxDate();
             RDate 開始年月日RDate = RDate.canConvert(new RString(dataList.get(i).get開始年月日().toString()))
                     ? new RDate(dataList.get(i).get開始年月日().toString()) : null;
