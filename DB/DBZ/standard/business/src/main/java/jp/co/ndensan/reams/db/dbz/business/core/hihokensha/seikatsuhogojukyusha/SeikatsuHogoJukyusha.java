@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogojukyusha;
+package jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShurui;
-import jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShuruiIdentifier;
-import jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogoteishikikan.SeikatsuHogoTeishikikan;
-import jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogoteishikikan.SeikatsuHogoTeishikikanIdentifier;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShurui;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShuruiIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogoteishikikan.SeikatsuHogoTeishikikan;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogoteishikikan.SeikatsuHogoTeishikikanIdentifier;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.ur.urd.definition.core.seikatsuhogo.KaigoRyoDairiNofuKubun;
 import jp.co.ndensan.reams.ur.urd.definition.core.seikatsuhogo.KyugoShisetsuNyuTaishoKubun;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;
@@ -217,8 +217,7 @@ public class SeikatsuHogoJukyusha
     }
 
     /**
-     * 生活保護受給者配下の要素を削除対象とします。<br/>
-     * {@link UrT0508SeikatsuHogoJukyushaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 生活保護受給者配下の要素を削除対象とします。<br/> {@link UrT0508SeikatsuHogoJukyushaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      * 生活保護受給者配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link SeikatsuHogoJukyusha}を返します。
      *
      * @return 削除対象処理実施後の{@link SeikatsuHogoJukyusha}
@@ -243,8 +242,7 @@ public class SeikatsuHogoJukyusha
     }
 
     /**
-     * 生活保護受給者のみを変更対象とします。<br/>
-     * {@link UrT0508SeikatsuHogoJukyushaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 生活保護受給者のみを変更対象とします。<br/> {@link UrT0508SeikatsuHogoJukyushaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link SeikatsuHogoJukyusha}
      */
