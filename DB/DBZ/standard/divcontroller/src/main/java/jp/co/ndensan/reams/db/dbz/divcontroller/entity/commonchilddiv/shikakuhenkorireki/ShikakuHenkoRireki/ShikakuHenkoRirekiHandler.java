@@ -119,13 +119,13 @@ public class ShikakuHenkoRirekiHandler {
                 row.setDeleteButtonState(DataGridButtonState.Disabled);
                 row.setModifyButtonState(DataGridButtonState.Disabled);
             }
-            div.setInputMode(ViewExecutionStatus.Add.getValue());
         } else if (ShikakuHenkoRirekiDiv.DisplayType.teiseitoroku.equals(div.getMode_DisplayType())) {
             div.setMode_ShoriNichijiDisplayMode(ShikakuHenkoRirekiDiv.ShoriNichijiDisplayMode.VisibleFalse);
             div.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.toroku);
             div.getBtnHenkoKakutei().setVisible(true);
             div.getBtnHenkoTorikeshi().setVisible(true);
         }
+        div.setInputMode(ViewExecutionStatus.Add.getValue());
     }
 
     /**
