@@ -67,7 +67,7 @@ public final class ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter implement
                 batchParamter.get振込予定日() == null ? null : new FlexibleDate(batchParamter.get振込予定日().toDateString()),
                 dataFrom, dataTo,
                 batchParamter.get発行日() == null ? null : new FlexibleDate(batchParamter.get発行日().toDateString()),
-                batchParamter.get決定者受付年月() == null ? null : new FlexibleYearMonth(batchParamter.get発行日().getYearMonth().toDateString()),
+                batchParamter.get決定者受付年月() == null ? null : new FlexibleYearMonth(batchParamter.get決定者受付年月().toDateString()),
                 batchParamter.get抽出モード(), batchParamter.get印書(), batchParamter.get決定日());
     }
 }
