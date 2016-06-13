@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.enumeratedtype;
+package jp.co.ndensan.reams.db.dbb.definition.core.viewstate;
 
 /**
  * 介護賦課のViewStateで用いる、値と紐付くキーです。
