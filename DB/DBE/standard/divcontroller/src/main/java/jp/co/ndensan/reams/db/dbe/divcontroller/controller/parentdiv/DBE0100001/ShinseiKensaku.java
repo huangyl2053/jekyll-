@@ -121,6 +121,9 @@ public class ShinseiKensaku {
         RString 証記載保険者番号 = row.getShoKisaiHokenshaNo();
         RString 被保険者番号 = row.getHihokenshaNo();
         RString 主治医意見書作成依頼履歴番号 = row.getIkenshoIraiRirekiNo();
+        div.getBtnClear().setDisabled(false);
+        div.getTxtMaxDisp().setDisabled(false);
+        div.getBtnKensaku().setDisabled(false);
         if (MENUID_DBEMN11001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_申請書管理番号, 申請書管理番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
