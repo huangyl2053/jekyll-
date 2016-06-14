@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5160001;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.taishouwaritsuke.TaishouWaritsukeViewStateKey;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001.DBE5160001StateName;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 介護認定審査会対象者割付クラスです。
@@ -46,7 +48,8 @@ public class TaishouWaritsuke {
      * @return レスポンスデータ
      */
     public ResponseData<TaishouWaritsukeDiv> onLoad(TaishouWaritsukeDiv div) {
-        getHandler(div).initializtion();
+        RString 介護認定審査会番号 = ViewStateHolder.get(TaishouWaritsukeViewStateKey.介護認定審査会番号, RString.class);
+        getHandler(div).initializtion(介護認定審査会番号);
         return ResponseData.of(div).setState(DBE5160001StateName.審査会割付);
     }
 

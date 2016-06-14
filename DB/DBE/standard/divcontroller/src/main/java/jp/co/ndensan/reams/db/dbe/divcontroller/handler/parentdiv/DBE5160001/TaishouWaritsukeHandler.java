@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariatejoho.S
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.KohoshaIchiran;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.TaishouWaritsukeHead;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.Taishouichiran;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.taishouwaritsuke.TaishouWaritsukeViewStateKey;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.IsShinsakaiJidoWaritsuke;
@@ -49,7 +48,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
@@ -84,8 +82,7 @@ public class TaishouWaritsukeHandler {
     /**
      * 画面初期化表示、画面項目に設定されている値をクリアする。
      */
-    public void initializtion() {
-        RString 介護認定審査会番号 = ViewStateHolder.get(TaishouWaritsukeViewStateKey.介護認定審査会番号, RString.class);
+    public void initializtion(RString 介護認定審査会番号) {
         div.getShinsakaiTaishoshaWaritsuke().setKaigoNinteiShinsakaiKaisaiNo(介護認定審査会番号);
         ヘッドエリア検索();
         対象者一覧検索();
