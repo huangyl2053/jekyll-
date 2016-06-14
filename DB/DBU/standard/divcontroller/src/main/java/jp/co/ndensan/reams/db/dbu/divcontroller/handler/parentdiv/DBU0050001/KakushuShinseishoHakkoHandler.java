@@ -175,14 +175,6 @@ public class KakushuShinseishoHakkoHandler {
                     KyufugakuGengakuMenjoShinseisho todoke = new KyufugakuGengakuMenjoShinseisho();
                     sourceData = todoke.createKyufugakuGengakuMenjoShinseishoChohyo(識別コード, 被保険者番号);
                 }
-                if (ShinseishoChohyoShurui.支払方法変更_償還払い化_終了申請書.get名称().equals(row.getShinseisho())) {
-                    ShiharaiHohoHenkoShuryoShinseisho todoke = new ShiharaiHohoHenkoShuryoShinseisho();
-                    sourceData = todoke.createShiharaiHohoHenkoShuryoShinseishoChohyo(被保険者番号, 識別コード);
-                }
-                if (ShinseishoChohyoShurui.介護保険受領委任払い取扱事業者登録申請書.get名称().equals(row.getShinseisho())) {
-                    JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho todoke = new JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho();
-                    sourceData = todoke.createJuryoIninbaraiToriatsukaiJigyoshaTorokuShinseishoChohyo();
-                }
                 sourceData = reportPublish_bak(sourceData, row);
             }
         }
@@ -192,6 +184,14 @@ public class KakushuShinseishoHakkoHandler {
     private SourceDataCollection reportPublish_bak(SourceDataCollection sourceData, dgKakushushinsei_Row row) {
         ShikibetsuCode 識別コード = data.get識別コード();
         HihokenshaNo 被保険者番号 = data.get被保険者番号();
+        if (ShinseishoChohyoShurui.支払方法変更_償還払い化_終了申請書.get名称().equals(row.getShinseisho())) {
+            ShiharaiHohoHenkoShuryoShinseisho todoke = new ShiharaiHohoHenkoShuryoShinseisho();
+            sourceData = todoke.createShiharaiHohoHenkoShuryoShinseishoChohyo(被保険者番号, 識別コード);
+        }
+        if (ShinseishoChohyoShurui.介護保険受領委任払い取扱事業者登録申請書.get名称().equals(row.getShinseisho())) {
+            JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho todoke = new JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho();
+            sourceData = todoke.createJuryoIninbaraiToriatsukaiJigyoshaTorokuShinseishoChohyo();
+        }
         if (ShinseishoChohyoShurui.介護保険受領委任払い契約申請書_福祉用具.get名称().equals(row.getShinseisho())) {
             JuryoIninbaraiKeiyakuShinseisho todoke = new JuryoIninbaraiKeiyakuShinseisho();
             sourceData = todoke.createJuryoIninbaraiKeiyakuShinseishoChohyo(new RString("2"));

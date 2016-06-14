@@ -119,7 +119,7 @@ public class KaigoHokenryoNofugakuShomeishoKofuShinseisho {
                         郵便番号,
                         entity.get電話番号(),
                         entity.get住所(),
-                        null,
+                        new RString("1"),
                         ninshoshaYakushokuMei);
         list.add(NofugakuShomeishoKofuShinseishoReport.createReport(item));
         return list;
