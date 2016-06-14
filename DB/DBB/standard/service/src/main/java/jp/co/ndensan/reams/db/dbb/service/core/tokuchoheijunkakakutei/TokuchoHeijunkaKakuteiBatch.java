@@ -361,7 +361,7 @@ public class TokuchoHeijunkaKakuteiBatch {
                 entity.set対象区分(コード_ONE);
 
             } else {
-                entity = get賦課Entity_遷移区分0(差額, 賦課情報, entity);
+                entity = get賦課Entity_遷移区分_0(差額, 賦課情報, entity);
             }
 
         }
@@ -371,16 +371,16 @@ public class TokuchoHeijunkaKakuteiBatch {
                 entity.set対象区分(コード_ONE);
 
             } else {
-                entity = get賦課Entity_遷移区分1(差額, 賦課情報, entity);
+                entity = get賦課Entity_遷移区分_1(差額, 賦課情報, entity);
             }
         }
         return entity;
     }
 
-    private FukaTempEntity get賦課Entity_遷移区分0(Decimal 差額, TokuchoHeinjunkaKakuteiEntity 賦課情報, FukaTempEntity entity) {
+    private FukaTempEntity get賦課Entity_遷移区分_0(Decimal 差額, TokuchoHeinjunkaKakuteiEntity 賦課情報, FukaTempEntity entity) {
         Decimal 期別差額 = Decimal.ZERO;
-        if (賦課情報.get平準化前特徴期別金額02() != null && 賦課情報.get平準化前特徴期別金額02() != null) {
-            期別差額 = 賦課情報.get平準化前特徴期別金額02().subtract(賦課情報.get平準化前特徴期別金額02()).abs();
+        if (賦課情報.get平準化前特徴期別金額02() != null && 賦課情報.get特徴期別金額02() != null) {
+            期別差額 = 賦課情報.get平準化前特徴期別金額02().subtract(賦課情報.get特徴期別金額02()).abs();
         }
         if (期別差額.subtract(差額).doubleValue() < 0) {
             entity = create賦課Entity(賦課情報);
@@ -393,7 +393,7 @@ public class TokuchoHeijunkaKakuteiBatch {
         return entity;
     }
 
-    private FukaTempEntity get賦課Entity_遷移区分1(Decimal 差額, TokuchoHeinjunkaKakuteiEntity 賦課情報, FukaTempEntity entity) {
+    private FukaTempEntity get賦課Entity_遷移区分_1(Decimal 差額, TokuchoHeinjunkaKakuteiEntity 賦課情報, FukaTempEntity entity) {
         Decimal 期別差額 = Decimal.ZERO;
         if (賦課情報.get平準化前特徴期別金額03() != null && 賦課情報.get特徴期別金額03() != null) {
             期別差額 = 賦課情報.get平準化前特徴期別金額03().subtract(賦課情報.get特徴期別金額03()).abs();
