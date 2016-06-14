@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.keiyakuno.KeiyakuNo;
+import jp.co.ndensan.reams.db.dbc.definition.core.keiyakuno.KeiyakuNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;

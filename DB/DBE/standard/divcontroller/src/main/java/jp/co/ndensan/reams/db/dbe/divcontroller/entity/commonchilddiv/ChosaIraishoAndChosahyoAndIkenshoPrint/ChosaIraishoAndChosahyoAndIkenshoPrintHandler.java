@@ -74,6 +74,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
 
     private static final RString CONFIGVALUE1 = new RString("1");
+    private static final RString CONFIGVALUE2 = new RString("2");
     private static final RString KEY0 = new RString("0");
     private static final RString KEY1 = new RString("1");
     private static final RString KEY2 = new RString("2");
@@ -201,9 +202,17 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 rowList.add(row);
             }
             div.getDgShujiiIkensho().setDataSource(rowList);
-            div.setHiddenData(getInputData());
             setDisableToShujiiIkenshoChk();
         }
+        RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法,
+                RDate.getNowDate(), SubGyomuCode.DBE認定支援,
+                div.getCcdHokenshaList().getSelectedItem().get市町村コード());
+        if (CONFIGVALUE2.equals(認定調査期限設定方法)) {
+            div.getRadTeishutsuKigen().setDisabled(false);
+        } else {
+            div.getRadTeishutsuKigen().setDisabled(true);
+        }
+        div.setHiddenData(getInputData());
     }
 
     /**
@@ -326,38 +335,29 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         RDate 適用基準日 = RDate.getNowDate();
         RString 概況調査_用紙タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_用紙タイプ,
                 適用基準日, SubGyomuCode.DBE認定支援, 市町村コード);
-
+        List<RString> keyList = new ArrayList<>();
+        List<RString> ocrKeyList = new ArrayList<>();
         if (CONFIGVALUE1.equals(概況調査_用紙タイプ)) {
-            List<RString> keyList = new ArrayList<>();
             keyList.add(KEY0);
-            div.getChkChosahyo().setDisabledItemsByKey(keyList);
         } else {
-            List<RString> keyList = new ArrayList<>();
-            keyList.add(KEY0);
-            div.getChkOcrChosahyo().setDisabledItemsByKey(keyList);
+            ocrKeyList.add(KEY0);
         }
         RString 基本調査_用紙タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_用紙タイプ,
                 適用基準日, SubGyomuCode.DBE認定支援, 市町村コード);
         if (CONFIGVALUE1.equals(基本調査_用紙タイプ)) {
-            List<RString> keyList = new ArrayList<>();
             keyList.add(KEY1);
-            div.getChkChosahyo().setDisabledItemsByKey(keyList);
         } else {
-            List<RString> keyList = new ArrayList<>();
-            keyList.add(KEY1);
-            div.getChkOcrChosahyo().setDisabledItemsByKey(keyList);
+            ocrKeyList.add(KEY1);
         }
         RString 特記事項_用紙タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ,
                 適用基準日, SubGyomuCode.DBE認定支援, 市町村コード);
         if (CONFIGVALUE1.equals(特記事項_用紙タイプ)) {
-            List<RString> keyList = new ArrayList<>();
             keyList.add(KEY2);
-            div.getChkChosahyo().setDisabledItemsByKey(keyList);
         } else {
-            List<RString> keyList = new ArrayList<>();
-            keyList.add(KEY2);
-            div.getChkOcrChosahyo().setDisabledItemsByKey(keyList);
+            ocrKeyList.add(KEY2);
         }
+        div.getChkChosahyo().setDisabledItemsByKey(keyList);
+        div.getChkOcrChosahyo().setDisabledItemsByKey(ocrKeyList);
     }
 
     private void setDisableToShujiiIkenshoChk() {
@@ -1220,7 +1220,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
                 List<RString> 保険者番号リスト = get被保険者番号(business.get保険者番号());
                 List<RString> 被保険者番号リスト = get被保険者番号(business.get被保険者番号());
-                RString 生年月日 = business.get生年月日();
                 IkenshokinyuyoshiBusiness item = new IkenshokinyuyoshiBusiness();
                 item.setHokenshaNo1(保険者番号リスト.get(0));
                 item.setHokenshaNo2(保険者番号リスト.get(1));
@@ -1271,7 +1270,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
                 List<RString> 保険者番号リスト = get被保険者番号(business.get保険者番号());
                 List<RString> 被保険者番号リスト = get被保険者番号(business.get被保険者番号());
-                RString 生年月日 = business.get生年月日();
                 IkenshokinyuyoshiBusiness item = new IkenshokinyuyoshiBusiness();
                 item.setHokenshaNo1(保険者番号リスト.get(0));
                 item.setHokenshaNo2(保険者番号リスト.get(1));
@@ -1388,16 +1386,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             受診日時または期間.append(文字列_まで);
         }
         return 受診日時または期間.toRString();
-    }
-
-    /**
-     * 主治医意見書記入用紙印刷用パラメータを作成します。
-     *
-     * @return 主治医意見書記入用紙パラメータ
-     */
-    public List<KaigohokenShindanMeireishoHeaderItem> create主治医意見書記入用紙_パラメータ() {
-        List<KaigohokenShindanMeireishoHeaderItem> itemList = new ArrayList<>();
-        return itemList;
     }
 
     private void set意見書作成料(ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business, ShujiiIkenshoSakuseiRyoSeikyushoItem item) {

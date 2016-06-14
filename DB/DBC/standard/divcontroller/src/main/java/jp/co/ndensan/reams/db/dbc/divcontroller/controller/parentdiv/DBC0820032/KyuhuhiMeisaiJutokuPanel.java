@@ -48,6 +48,7 @@ public class KyuhuhiMeisaiJutokuPanel {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 申請を保存する = new RString("btnUpdate");
+    private static final RString 申請を削除する = new RString("btnDelete");
 
     /**
      * onLoad事件
@@ -242,24 +243,44 @@ public class KyuhuhiMeisaiJutokuPanel {
      * @return ResponseData
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnSave(KyuhuhiMeisaiJutokuPanelDiv div) {
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            return 保存処理(div, 削除);
+        boolean flag = getHandler(div).is内容変更状態();
+        if (flag) {
+            return 保存処理(div);
         } else {
-            boolean flag = getHandler(div).is内容変更状態();
-            if (flag) {
-                return 保存処理(div, 登録);
-            } else {
-                return notChanges(div);
-            }
+            return notChanges(div);
         }
     }
 
-    private ResponseData<KyuhuhiMeisaiJutokuPanelDiv> 保存処理(KyuhuhiMeisaiJutokuPanelDiv div, RString 状態) {
+    /**
+     * 「申請を削除する」ボタンのメソッドます。
+     *
+     * @param div KyuhuhiMeisaiJutokuPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnDelete(KyuhuhiMeisaiJutokuPanelDiv div) {
+        try {
+            if (!ResponseHolder.isReRequest()) {
+                getHandler(div).保存処理();
+                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
+                        .replace(削除.toString())).respond();
+            }
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を削除する, true);
+                return createResponse(div);
+            }
+            return ResponseData.of(div).respond();
+        } catch (Exception e) {
+            e.toString();
+            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
+        }
+    }
+
+    private ResponseData<KyuhuhiMeisaiJutokuPanelDiv> 保存処理(KyuhuhiMeisaiJutokuPanelDiv div) {
         try {
             if (!ResponseHolder.isReRequest()) {
                 getHandler(div).保存処理();
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
-                        replace(状態.toString())).respond();
+                        replace(登録.toString())).respond();
             }
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);

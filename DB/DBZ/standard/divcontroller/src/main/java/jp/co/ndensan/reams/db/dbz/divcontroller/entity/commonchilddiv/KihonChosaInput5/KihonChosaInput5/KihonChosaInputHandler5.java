@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ListControlTextIcon;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -63,14 +62,16 @@ public class KihonChosaInputHandler5 {
     /**
      * 認定基本調査入力を確認を押下する。
      *
+     * @param 認定調査基本情報リスト 認定調査基本情報リスト
+     * @return 認定調査基本情報リスト
+     *
      */
-    public void onClick_btnConfirm() {
-        ArrayList<KihonChosaInput> 認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.第五群認定調査基本情報リスト, ArrayList.class);
+    public ArrayList<KihonChosaInput> onClick_btnConfirm(ArrayList<KihonChosaInput> 認定調査基本情報リスト) {
         if (null == 認定調査基本情報リスト) {
             認定調査基本情報リスト = new ArrayList<>();
         }
         第五群社会生活への適用Confirm(認定調査基本情報リスト);
-        ViewStateHolder.put(ViewStateKey.第五群認定調査基本情報リスト, 認定調査基本情報リスト);
+        return 認定調査基本情報リスト;
     }
 
     private void 第五群社会生活への適用Confirm(ArrayList<KihonChosaInput> 認定調査基本情報リスト) {
@@ -139,13 +140,13 @@ public class KihonChosaInputHandler5 {
      *
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @param 認定調査基本情報リスト 認定調査基本情報リスト
      */
-    public void onLoad(ShinseishoKanriNo 申請書管理番号, RString 認定調査依頼履歴番号) {
+    public void onLoad(ShinseishoKanriNo 申請書管理番号, RString 認定調査依頼履歴番号, List<KihonChosaInput> 認定調査基本情報リスト) {
         if (申請書管理番号 != null) {
             div.getShakaiSekatsu().setShinseishoKanriNo(申請書管理番号.getColumnValue());
         }
         div.getShakaiSekatsu().setRecordNumber(認定調査依頼履歴番号);
-        ArrayList<KihonChosaInput> 認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.第五群認定調査基本情報リスト, ArrayList.class);
         if (null == 認定調査基本情報リスト) {
             認定調査基本情報リスト = new ArrayList<>();
         }
@@ -156,7 +157,7 @@ public class KihonChosaInputHandler5 {
         onLoad第五群社会生活への適用(認定調査基本情報リスト, 認定調査前回結果表示);
     }
 
-    private void onLoad第五群社会生活への適用(ArrayList<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
+    private void onLoad第五群社会生活への適用(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
         List<RString> 薬の内服Keys = new ArrayList<>();
         List<RString> 前回薬の内服Keys = new ArrayList<>();
         List<RString> 金銭の管理Keys = new ArrayList<>();
@@ -418,18 +419,6 @@ public class KihonChosaInputHandler5 {
             }
         }
         return iconList;
-    }
-
-    /**
-     * 引数定義<br/>
-     *
-     */
-    public enum ViewStateKey {
-
-        /**
-         * 認定調査基本情報リストです。
-         */
-        第五群認定調査基本情報リスト;
     }
 
 }

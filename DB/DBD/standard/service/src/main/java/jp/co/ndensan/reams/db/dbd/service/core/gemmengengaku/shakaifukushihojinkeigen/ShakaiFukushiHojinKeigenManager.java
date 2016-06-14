@@ -12,9 +12,9 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.Shak
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shakaifukushihojinkeigen.ShakaifukuRiyoshaFutanKeigenToJotai;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiBuilder;
-import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenMapperParameter;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -157,7 +157,7 @@ public class ShakaiFukushiHojinKeigenManager {
         GemmenGengakuShinsei newGemmenGengakuShinsei = new GemmenGengakuShinsei(
                 gemmenGengakuShinsei.get証記載保険者番号(),
                 gemmenGengakuShinsei.get被保険者番号(),
-                GemmenGengakuShurui.社会福祉法人等軽減.getコード(),
+                GemmenGengakuShurui.社会福祉法人等利用者負担軽減.getコード(),
                 履歴番号);
         GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder = newGemmenGengakuShinsei.createBuilderForEdit();
         if (gemmenGengakuShinsei.get申請届出代行区分() != null) {
@@ -199,12 +199,12 @@ public class ShakaiFukushiHojinKeigenManager {
         ShakaifukuRiyoshaFutanKeigenBuilder builder = 修正社会福祉法人等利用者負担軽減情報.createBuilderForEdit();
         edit修正社会福祉法人等利用者負担軽減情報(社会福祉法人等利用者負担軽減情報, builder, isメニューID);
         List<GemmenGengakuShinsei> 減免減額申請リスト = 修正社会福祉法人等利用者負担軽減情報.getGemmenGengakuShinseiList();
-        GemmenGengakuShinsei 減免減額申請 = get減免減額申請By減免減額種類(減免減額申請リスト, GemmenGengakuShurui.社会福祉法人等軽減.getコード());
+        GemmenGengakuShinsei 減免減額申請 = get減免減額申請By減免減額種類(減免減額申請リスト, GemmenGengakuShurui.社会福祉法人等利用者負担軽減.getコード());
         if (null == 減免減額申請) {
             減免減額申請 = new GemmenGengakuShinsei(
                     修正社会福祉法人等利用者負担軽減情報.get証記載保険者番号(),
                     修正社会福祉法人等利用者負担軽減情報.get被保険者番号(),
-                    GemmenGengakuShurui.社会福祉法人等軽減.getコード(),
+                    GemmenGengakuShurui.社会福祉法人等利用者負担軽減.getコード(),
                     修正社会福祉法人等利用者負担軽減情報.get履歴番号());
         }
         builder.setGemmenGengakuShinsei(get修正減免減額申請(
@@ -322,7 +322,8 @@ public class ShakaiFukushiHojinKeigenManager {
                                 社会福祉法人等利用者負担軽減情報.get証記載保険者番号(),
                                 社会福祉法人等利用者負担軽減情報.get被保険者番号(),
                                 社会福祉法人等利用者負担軽減情報.get履歴番号()));
-        manager.delete社会福祉法人等利用者負担軽減By減免減額種類(削除社会福祉法人等利用者負担軽減情報, GemmenGengakuShurui.社会福祉法人等軽減.getコード());
+        manager.delete社会福祉法人等利用者負担軽減By減免減額種類(
+                削除社会福祉法人等利用者負担軽減情報, GemmenGengakuShurui.社会福祉法人等利用者負担軽減.getコード());
     }
 
     private void 追加処理(ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報, boolean isメニューID) {

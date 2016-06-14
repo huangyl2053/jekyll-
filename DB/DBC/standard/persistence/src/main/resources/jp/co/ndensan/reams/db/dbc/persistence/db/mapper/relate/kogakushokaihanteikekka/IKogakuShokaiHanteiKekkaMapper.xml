@@ -22,7 +22,7 @@
         WHERE A1."hihokenshaNo" = A2."hihokenshaNo"
         AND   A1."serviceTeikyoYM" = A2."serviceTeikyoYM"
         AND   A1."shoKisaiHokenshaNo" = A2."shoKisaiHokenshaNo"
-        AND   A1."rirekiNo" &lt; A2."rirekiNo")) AS A
+        AND   A1."rirekiNo" <![CDATA[<]]> A2."rirekiNo")) AS A
         LEFT JOIN rgdb."DbT3057KogakuShikyuHanteiKekka" AS B
         ON      A."hihokenshaNo" = B."hihokenshaNo"
         AND A."serviceTeikyoYM" = B."serviceTeikyoYM"
@@ -86,7 +86,7 @@
         WHERE A1."hihokenshaNo" = A2."hihokenshaNo"
         AND   A1."serviceTeikyoYM" = A2."serviceTeikyoYM"
         AND   A1."shoKisaiHokenshaNo" = A2."shoKisaiHokenshaNo"
-        AND   A1."rirekiNo" &lt; A2."rirekiNo")) AS A
+        AND   A1."rirekiNo" <![CDATA[<]]> A2."rirekiNo")) AS A
         LEFT JOIN rgdb."DbT3111JigyoKogakuShikyuHanteiKekka" AS B
         ON      A."hihokenshaNo" = B."hihokenshaNo"
         AND A."serviceTeikyoYM" = B."serviceTeikyoYM"

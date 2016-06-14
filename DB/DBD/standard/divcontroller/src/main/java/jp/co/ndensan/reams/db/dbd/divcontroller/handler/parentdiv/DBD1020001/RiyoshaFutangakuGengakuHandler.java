@@ -191,7 +191,8 @@ public class RiyoshaFutangakuGengakuHandler {
                 gemmenGengakuShinsei = 該当DB申請.getGemmenGengakuShinseiList().get(0);
             } else {
                 ViewStateHolder.put(Dbd1020001Keys.新規申請の履歴番号, 履歴番号);
-                gemmenGengakuShinsei = new GemmenGengakuShinsei(証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.code(), 履歴番号);
+                gemmenGengakuShinsei = new GemmenGengakuShinsei(
+                        証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.getコード(), 履歴番号);
             }
             builder = 該当DB申請.createBuilderForEdit();
         } else {
@@ -206,12 +207,14 @@ public class RiyoshaFutangakuGengakuHandler {
                 Integer 新規申請の履歴番号 = ViewStateHolder.get(Dbd1020001Keys.新規申請の履歴番号, Integer.class);
                 履歴番号 = 新規申請の履歴番号 - 1;
                 ViewStateHolder.put(Dbd1020001Keys.新規申請の履歴番号, 履歴番号);
-                gemmenGengakuShinsei = new GemmenGengakuShinsei(証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.code(), 履歴番号);
+                gemmenGengakuShinsei = new GemmenGengakuShinsei(
+                        証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.getコード(), 履歴番号);
                 builder = new RiyoshaFutangakuGengaku(証記載保険者番号, 被保険者番号, 履歴番号).createBuilderForEdit();
             }
         }
 
-        GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder = setGemmenGengakuShinseiBuilderBy入力データ(gemmenGengakuShinsei.createBuilderForEdit());
+        GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder
+                = setGemmenGengakuShinseiBuilderBy入力データ(gemmenGengakuShinsei.createBuilderForEdit());
         RString 旧措置 = div.getDdlKyusochiKubun().getSelectedKey();
         RString 決定区分 = div.getRadKetteiKubun().getSelectedKey();
         RString 決定区分コード;
@@ -345,7 +348,8 @@ public class RiyoshaFutangakuGengakuHandler {
                 gemmenGengakuShinsei = 該当DB申請.getGemmenGengakuShinseiList().get(0);
             } else {
                 ViewStateHolder.put(Dbd1020001Keys.新規申請の履歴番号, 履歴番号);
-                gemmenGengakuShinsei = new GemmenGengakuShinsei(証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.code(), 履歴番号);
+                gemmenGengakuShinsei = new GemmenGengakuShinsei(
+                        証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.getコード(), 履歴番号);
             }
             builder = 該当DB申請.createBuilderForEdit();
         } else {
@@ -360,12 +364,14 @@ public class RiyoshaFutangakuGengakuHandler {
                 Integer 新規申請の履歴番号 = ViewStateHolder.get(Dbd1020001Keys.新規申請の履歴番号, Integer.class);
                 履歴番号 = 新規申請の履歴番号 - 1;
                 ViewStateHolder.put(Dbd1020001Keys.新規申請の履歴番号, 履歴番号);
-                gemmenGengakuShinsei = new GemmenGengakuShinsei(証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.code(), 履歴番号);
+                gemmenGengakuShinsei = new GemmenGengakuShinsei(
+                        証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.getコード(), 履歴番号);
                 builder = new RiyoshaFutangakuGengaku(証記載保険者番号, 被保険者番号, 履歴番号).createBuilderForEdit();
             }
         }
 
-        GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder = setGemmenGengakuShinseiBuilderBy入力データ(gemmenGengakuShinsei.createBuilderForEdit());
+        GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder
+                = setGemmenGengakuShinseiBuilderBy入力データ(gemmenGengakuShinsei.createBuilderForEdit());
         builder.set申請事由(div.getTxtShinseiRiyu().getValue());
         builder.set申請年月日(div.getTxtShinseiYmd().getValue());
         builder.setGemmenGengakuShinsei(gemmenGengakuShinseiBuilder.build());
@@ -928,7 +934,8 @@ public class RiyoshaFutangakuGengakuHandler {
         if (該当DB申請.getGemmenGengakuShinseiList().size() > 0) {
             gemmenGengakuShinsei = 該当DB申請.getGemmenGengakuShinseiList().get(0);
         } else {
-            gemmenGengakuShinsei = new GemmenGengakuShinsei(ShoKisaiHokenshaNo.EMPTY, HihokenshaNo.EMPTY, GemmenGengakuShurui.利用者負担額減額.code(), 0);
+            gemmenGengakuShinsei = new GemmenGengakuShinsei(
+                    ShoKisaiHokenshaNo.EMPTY, HihokenshaNo.EMPTY, GemmenGengakuShurui.利用者負担額減額.getコード(), 0);
         }
 
         RString 申請届出代行区分page = get申請届出代行区分page();

@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysSogoJigyo
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysSogoJigyoSeikyugakuTuchi;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysSogoJigyoShikakuShogohyo;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo;
-import jp.co.ndensan.reams.db.dbc.definition.core.kokuhoreninterface.ConfigKeysKokuhorenTorikomi;
+import jp.co.ndensan.reams.db.dbc.definition.core.config.ConfigKeysKokuhorenTorikomi;
 import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.KokuhorenTorikomiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.dgKokuhorenTorikomiList_Row;

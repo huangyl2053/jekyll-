@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-9999-023 liangbc
  */
-public enum ConfigKeysFuSikyuKetteishaIchiran {
+public enum ConfigKeysFuSikyuKetteishaIchiran implements IConfigKeysKokuhorenTorikomi {
 
     /**
      * コード:無し 名称:国保連取込_償還払不支給決定者一覧情報 略称:定義なし
@@ -64,6 +64,60 @@ public enum ConfigKeysFuSikyuKetteishaIchiran {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    @Override
+    public Enum getバッチID() {
+        return 国保連取込_償還払不支給決定者一覧情報_バッチID;
+    }
+
+    @Override
+    public Enum get一覧表示順() {
+        return 国保連取込_償還払不支給決定者一覧情報_一覧表示順;
+    }
+
+    @Override
+    public Enum get交換情報識別番号() {
+        return 国保連取込_償還払不支給決定者一覧情報_交換情報識別番号;
+    }
+
+    @Override
+    public Enum get再処理不可区分() {
+        return 国保連取込_償還払不支給決定者一覧情報_再処理不可区分;
+    }
+
+    @Override
+    public Enum get処理サイクル区分() {
+        return 国保連取込_償還払不支給決定者一覧情報_処理サイクル区分;
+    }
+
+    @Override
+    public Enum get処理月() {
+        return 国保連取込_償還払不支給決定者一覧情報_処理月;
+    }
+
+    @Override
+    public Enum get処理名称() {
+        return 国保連取込_償還払不支給決定者一覧情報_処理名称;
+    }
+
+    @Override
+    public Enum get排他チェック有り区分() {
+        return 国保連取込_償還払不支給決定者一覧情報_排他チェック有り区分;
+    }
+
+    @Override
+    public Enum get有効区分() {
+        return 国保連取込_償還払不支給決定者一覧情報_有効区分;
+    }
+
+    /**
+     * 国保連取込_償還払不支給決定者一覧情報
+     *
+     * @return 国保連取込_償還払不支給決定者一覧情報
+     */
+    public static IConfigKeysKokuhorenTorikomi getEnum() {
+        return 国保連取込_償還払不支給決定者一覧情報;
     }
 
     /**

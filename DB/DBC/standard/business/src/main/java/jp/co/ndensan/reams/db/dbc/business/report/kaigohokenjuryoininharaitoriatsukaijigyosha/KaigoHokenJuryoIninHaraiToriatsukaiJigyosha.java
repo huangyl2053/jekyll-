@@ -19,9 +19,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KaigoHokenJuryoIninHaraiToriatsukaiJigyosha {
 
-    private YubinNo 送付先郵便番号;
-    private AtenaJusho 送付先住所;
-
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoHokenJuryoIninHaraiToriatsukaiJigyosha}のインスタンスを返します。
      *
@@ -43,8 +40,8 @@ public class KaigoHokenJuryoIninHaraiToriatsukaiJigyosha {
         CustomerBarCode code = new CustomerBarCode();
         HokenJuryoIninHaraiToriatsukaiEntity sukaiEntity = new HokenJuryoIninHaraiToriatsukaiEntity();
         if (entity != null) {
-            送付先郵便番号 = entity.getSofusakiYubinNo();
-            送付先住所 = entity.getSofusakiJusho();
+            YubinNo 送付先郵便番号 = entity.getSofusakiYubinNo();
+            AtenaJusho 送付先住所 = entity.getSofusakiJusho();
             sukaiEntity.set送付先郵便番号(送付先郵便番号);
             sukaiEntity.set送付先住所(送付先住所);
             sukaiEntity.set送付先事業者名称(entity.getSofusakiJigyoshaName());

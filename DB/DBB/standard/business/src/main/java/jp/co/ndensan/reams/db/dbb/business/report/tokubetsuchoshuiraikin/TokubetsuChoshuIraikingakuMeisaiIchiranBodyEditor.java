@@ -43,8 +43,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
         if (null != 編集後共通情報) {
             source.listUpper_1 = 編集後共通情報.get通知書番号().getColumnValue();
             source.listUpper_2 = 編集後共通情報.get識別コード().getColumnValue();
-            //TODO 特徴捕捉月は見つけりませんので、今セットしない SELF177 QA848
-//            source.listCenter_4 = 通知書情報.get特徴捕捉月();
+            source.listCenter_4 = 通知書情報.get特徴捕捉月();
             source.listLower_1 = 編集後共通情報.get被保険者番号().getColumnValue();
             if (null != 編集後共通情報.get編集後宛先()) {
                 set編集後宛先(source, 編集後共通情報.get編集後宛先());

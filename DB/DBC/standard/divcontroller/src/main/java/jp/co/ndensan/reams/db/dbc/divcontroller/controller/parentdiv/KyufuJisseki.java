@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiYoguHanbaihi;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiYoshiki;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KyufuJissekiYoshikiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.KyufuJissekiYoshikiKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.dbc0010000.CareManagementhiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.dbc0010000.FukushiYoguKonyuhiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.dbc0010000.JutakuKaishuhiDiv;

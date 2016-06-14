@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120090.RegistTempSaveP
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120090.TempTableEditProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120090.TempTableUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanshikyuketteiin.DBC120090_ShokanShikyuKetteiInBacthParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.IcchiJoken;
+import jp.co.ndensan.reams.db.dbc.definition.core.IcchiJoken;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.shokanshikyuketteiin.ShokanShikyuKetteiInProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

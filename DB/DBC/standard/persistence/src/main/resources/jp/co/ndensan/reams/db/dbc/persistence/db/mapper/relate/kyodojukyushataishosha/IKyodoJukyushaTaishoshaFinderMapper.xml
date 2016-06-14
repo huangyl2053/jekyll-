@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- @reamsid_L DBC-1951-050 chenaoqi -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyodojukyushataishosha.IKyodoJukyushaTaishoshaFinderMapper">
-    <select id="get基本送付情報" 
+    <select resultOrdered="true" id="get基本送付情報" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoJukyushaTaishoshaParameter"
             resultMap="ResultMap_DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity" fetchSize="500">
         <include refid="selectDbT3002" />
@@ -30,7 +30,7 @@
             order by DbT3002."idoYMD"
     </sql>
     
-    <select id="get被保険者氏名" 
+    <select resultOrdered="true" id="get被保険者氏名" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoJukyushaTaishoshaParameter"
             resultMap="ResultMap_DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity" fetchSize="500">
         <include refid="select被保険者氏名" />
@@ -53,7 +53,7 @@
                type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity">
     </resultMap> 
     
-    <select id="get償還送付情報" 
+    <select resultOrdered="true" id="get償還送付情報" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoJukyushaTaishoshaParameter"
             resultMap="ResultMap_DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity" fetchSize="500">
         <include refid="selectDbT3003" />

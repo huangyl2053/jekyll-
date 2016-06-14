@@ -31,7 +31,6 @@ public class KokuhorenKyoutsuuInterfaceKanriKousinManager {
     private static final int 定数_2 = 2;
     private static final int 定数_3 = 3;
     private static final int 定数_4 = 4;
-    private static final RString 送付取込区分_取込 = new RString("2");
     private static final RString 処理状態区分_終了 = new RString("3");
     private static final RString ERROR_MESSAGE = new RString("国保連インタフェース管理テーブル");
     private static final RString MESSAGE_処理年月 = new RString("処理年月");
@@ -74,7 +73,6 @@ public class KokuhorenKyoutsuuInterfaceKanriKousinManager {
         requireNonNull(エントリ情報List, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGE_エントリ情報LIST.toString()));
         DbT3104KokuhorenInterfaceKanriEntity entity = 国保連インターフェース管理Dac.selectByKeyUndeleted(処理年月, 交換情報識別番号);
         if (null != entity) {
-            entity.setSofuTorikomiKubun(送付取込区分_取込);
             entity.setShoriJotaiKubun(処理状態区分_終了);
             entity.setShoriJisshiTimestamp(YMDHMS.now());
             entity.setSaiShoriFukaKubun(false);
