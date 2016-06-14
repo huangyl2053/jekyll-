@@ -16,7 +16,7 @@
         <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="waritsukesumiKensu" column="Temp_waritsukeCount"/>
     </resultMap>
-    <select id="selectNinnteiChousaItaku" resultMap="result_NinnteiChousairaiEntity"
+    <select resultOrdered="true" id="selectNinnteiChousaItaku" resultMap="result_NinnteiChousairaiEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
         SELECT
         DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode" AS Temp_ninteichosaItakusakiCode
@@ -107,7 +107,7 @@
         <result property="waritsukesumiKensu" column="Temp_waritsukeCount"/>
         <result property="chosaKanoNinzuPerMonth" column="chosaKanoNinzuPerMonth" />
     </resultMap>
-    <select id="selectChousaIn" resultMap="result_ChousaIn"
+    <select resultOrdered="true" id="selectChousaIn" resultMap="result_ChousaIn"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
         SELECT
         DbT5913ChosainJoho."ninteiChosainCode" AS Temp_ninteiChosainCode
@@ -231,7 +231,7 @@
         <result property="renrakusakiKeitaiTelNo" column="renrakusakiKeitaiTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="renrakusakiShimei" column="renrakusakiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
-    <select id="getWaritsuke" resultMap="result_WaritsukeEntity"
+    <select resultOrdered="true" id="getWaritsuke" resultMap="result_WaritsukeEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
         SELECT
         dbT5101."koroshoIfShikibetsuCode"         AS "koroshoIfShikibetsuCode"
@@ -422,7 +422,7 @@
         <collection property="ninteichosaIraiJohoEntity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity"/>
     </resultMap>
 
-    <select id="getNinteichosaIraiJohoList" resultMap="getNinteichosaIraiJohoList_resultMap"
+    <select resultOrdered="true" id="getNinteichosaIraiJohoList" resultMap="getNinteichosaIraiJohoList_resultMap"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
         SELECT
         DbT5105NinteiKanryoJoho.*,
@@ -633,7 +633,7 @@
         <result property="ninteiChosainCode" column="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />
     </resultMap>
-    <select id="getShiteWaritsuke" resultMap="result_ShiteWaritsukeEntity"
+    <select resultOrdered="true" id="getShiteWaritsuke" resultMap="result_ShiteWaritsukeEntity"
              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
         SELECT
         dbT5101."koroshoIfShikibetsuCode" AS "koroshoIfShikibetsuCode"
@@ -763,7 +763,7 @@
         <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />
         <result property="ninteiChosainCode" column="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select id="getShiteWaritsukeSai" resultMap="result_ShiteWaritsukeSaiEntity"
+    <select resultOrdered="true" id="getShiteWaritsukeSai" resultMap="result_ShiteWaritsukeSaiEntity"
                  parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
         SELECT
         dbT5101."koroshoIfShikibetsuCode" AS "koroshoIfShikibetsuCode"
@@ -886,7 +886,7 @@
         dbT5101."chosaKubun"
     </select>
 
-    <select id="getNinteichosaIraiJoho" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity"
+    <select resultOrdered="true" id="getNinteichosaIraiJoho" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity"
                     parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT
         DbT5201NinteichosaIraiJoho.*
@@ -913,7 +913,7 @@
         <result property="ninchishoSeikatsuJiritsudo" column="ninchishoSeikatsuJiritsudo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shogaiSeikatsuJiritsudo" column="shogaiSeikatsuJiritsudo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select id="get認定調査票差異チェック票情報" resultMap="result_SaiChekkuhyoEntity"
+    <select resultOrdered="true" id="get認定調査票差異チェック票情報" resultMap="result_SaiChekkuhyoEntity"
                     parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.SaiChekkuhyoParameter" fetchSize="500">
         SELECT 
              DbT5116IchijiHanteiKekkaJoho."ichijiHanteiKekkaCode" AS "ichijiHanteiKekkaCode"

@@ -4,7 +4,7 @@
 <!-- @reamsid_L DBE-0150-020 lishengli -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaishiryoa4.IShinsakaishiryoA4Mapper">
-    <select id="get審査員一覧取得" resultType="jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho"
+    <select resultOrdered="true" id="get審査員一覧取得" resultType="jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryoa4.ShinsakaishiryoA4Parameter"  fetchSize="500">
         SELECT
             DbT5594ShinsakaiIinJoho."shinsakaiIinShimei" AS "shinsakaiIinShimei"
@@ -35,7 +35,7 @@
         <result property="kijunJikan" column="T1_kijunJikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <select id="get審査対象者一覧" resultMap="resultMap_ShinsakaishiryoA4Entity"
+    <select resultOrdered="true" id="get審査対象者一覧" resultMap="resultMap_ShinsakaishiryoA4Entity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryoa4.ShinsakaishiryoA4Parameter"   fetchSize="500">
         SELECT
         T1."shinseishoKanriNo" AS "T1_shinseishoKanriNo",

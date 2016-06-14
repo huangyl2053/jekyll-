@@ -17,7 +17,7 @@
         <result property="shisetsuCode" column="DbT7023RendoHoryu_shisetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="jigyoshaName" column="DbT7023RendoHoryu_jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
     </resultMap>
-    <select id="getTennyuHoryuTokuteiJushoIchiran" resultMap="resultMap_TennyuHoryuTokuteiEntity" fetchSize="500">
+    <select resultOrdered="true" id="getTennyuHoryuTokuteiJushoIchiran" resultMap="resultMap_TennyuHoryuTokuteiEntity" fetchSize="500">
         SELECT
         DbT7023Rendo."kanriNo" AS "DbT7023RendoHoryu_kanriNo"
         , DbT7023Rendo."shichosonCode" AS "DbT7023RendoHoryu_shichosonCode"
@@ -73,7 +73,7 @@
         <result property="shisetsuShurui" column="DbT7023RendoHoryu_shisetsuShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shisetsuCode" column="DbT7023RendoHoryu_shisetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    <select id="get連動保留特定住所" resultMap="resultMap_DbT7023Entity" fetchSize="500">
+    <select resultOrdered="true" id="get連動保留特定住所" resultMap="resultMap_DbT7023Entity" fetchSize="500">
         SELECT
         DbT7023Rendo."kanriNo" AS "DbT7023RendoHoryu_kanriNo",
         DbT7023Rendo."shichosonCode" AS "DbT7023RendoHoryu_shichosonCode",

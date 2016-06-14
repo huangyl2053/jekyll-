@@ -8,7 +8,7 @@
 <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
 <result property="age" column="age"/>
 </resultMap>
-    <select id = "getSelect"
+    <select resultOrdered="true" id = "getSelect"
             resultMap = "NinteiShinseishaKihonInfoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.param.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoParameter" fetchSize="500">
         SELECT

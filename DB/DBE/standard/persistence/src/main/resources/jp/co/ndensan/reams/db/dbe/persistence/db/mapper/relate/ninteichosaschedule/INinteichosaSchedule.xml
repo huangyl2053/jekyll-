@@ -33,7 +33,7 @@
       <result property="ninteiChosainCode" column="DbT5223_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
       <result property="chosainShimei" column="DbT5913ChosainJoho_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />   
     </resultMap>
-    <select id="selectNinteichosaScheduleList"
+    <select resultOrdered="true" id="selectNinteichosaScheduleList"
             resultMap="resultMap_INinteichosaScheduleRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteichosaScheduleMybatisParameter" fetchSize="500">
         SELECT
@@ -147,7 +147,7 @@
             LIMIT #{saidaiHyojiKensu}
         </if>
     </select> 
-    <select id="selectKoseiShichosonMasterList"
+    <select resultOrdered="true" id="selectKoseiShichosonMasterList"
              resultMap="resultMap_INinteichosaScheduleRelateEntity"
              parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter" fetchSize="500">
         SELECT
@@ -275,7 +275,7 @@
             LIMIT #{saidaiHyojiKensu}
         </if>
     </select>
-    <select id="selectNinteiShinseiJohoList"
+    <select resultOrdered="true" id="selectNinteiShinseiJohoList"
              resultMap="resultMap_INinteichosaScheduleRelateEntity"
              parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter" fetchSize="500">
         SELECT
@@ -406,7 +406,7 @@
             LIMIT #{saidaiHyojiKensu}
         </if>
     </select>
-    <select id="selectNinteichosaIraiJohoList"
+    <select resultOrdered="true" id="selectNinteichosaIraiJohoList"
               resultMap="resultMap_INinteichosaScheduleRelateEntity"
               parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter" fetchSize="500">
         SELECT
@@ -513,7 +513,7 @@
             LIMIT #{saidaiHyojiKensu}
         </if>
     </select>
-    <select id="select保険者ドロップダウンリスト"
+    <select resultOrdered="true" id="select保険者ドロップダウンリスト"
              resultMap="resultMap_ChikuShichosonRelateEntity"
              parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter" fetchSize="500">
         SELECT
@@ -526,7 +526,7 @@
         AND
         DbT5224."chosaChikuCode" = #{対象地区}
     </select>
-    <select id="select認定調査委託先ドロップダウンリスト"
+    <select resultOrdered="true" id="select認定調査委託先ドロップダウンリスト"
              resultMap="resultMap_ChikuNinteiChosainRelateEntity"
              parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter" fetchSize="500">
         SELECT

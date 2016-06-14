@@ -28,7 +28,7 @@
         <result property="kozaMeiginin" column="DbT3077_kozaMeiginin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="kozaMeigininKana" column="DbT3077_kozaMeigininKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
     </resultMap>
-    <select id="get口座IDリストByKozaParameter"
+    <select resultOrdered="true" id="get口座IDリストByKozaParameter"
             resultMap="shiharaiHohoJyoho_kozaId"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter" fetchSize="500">
         SELECT "kozaId"
@@ -41,7 +41,7 @@
         UaT0310."kaishiYMD" DESC
     </select>
 
-    <select id="get口座情報ByKey"
+    <select resultOrdered="true" id="get口座情報ByKey"
              resultMap="resultMap_Koza"
              parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter" fetchSize="500">
         SELECT
@@ -60,7 +60,7 @@
         UaT0310_kaishiYMD DESC
     </select>
 
-    <select id="get契約事業者情報" resultMap="resultMap_DbT3077JuryoininKeiyakuJigyoshaEntity"
+    <select resultOrdered="true" id="get契約事業者情報" resultMap="resultMap_DbT3077JuryoininKeiyakuJigyoshaEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KeiyakushaParameter" fetchSize="500">
         SELECT
         DbT3077."keiyakuJigyoshaNo" AS "DbT3077_keiyakuJigyoshaNo"

@@ -5,12 +5,12 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.riyoshafutangengaku.IRiyoshaFutangakuGengakuMapper">
 
-    <select id="select利用者負担額減額ByKey" resultMap="resultMap_RiyoshaFutangakuGengakuEntity"
+    <select resultOrdered="true" id="select利用者負担額減額ByKey" resultMap="resultMap_RiyoshaFutangakuGengakuEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuMapperParameter" fetchSize="500">
         <include refid="selectRiyoshaFutangakuGengakuEntity" />
     </select>
 
-    <select id="select利用者負担額減額リストBy主キー1" resultMap="resultMap_RiyoshaFutangakuGengakuEntity"
+    <select resultOrdered="true" id="select利用者負担額減額リストBy主キー1" resultMap="resultMap_RiyoshaFutangakuGengakuEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuMapperParameter" fetchSize="500">
         <include refid="selectRiyoshaFutangakuGengakuEntity" />
     </select>
@@ -41,7 +41,7 @@
         </where>
     </sql>
 
-    <select id="select利用者負担額減額情報By被保険者番号"
+    <select resultOrdered="true" id="select利用者負担額減額情報By被保険者番号"
             resultMap="resultMap_RiyoshaFutangakuGengakuEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuServiceMapperParameter"
             fetchSize="500">

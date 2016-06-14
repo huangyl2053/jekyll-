@@ -9,7 +9,7 @@
 <result property="nyushoShisetsuCode" column="nyushoShisetsuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
 </resultMap>
 
-<select id = "getSelect"
+<select resultOrdered="true" id = "getSelect"
     resultMap="ShisetSunyushoInfoRelateEntity"
     parameterType="jp.co.ndensan.reams.db.dbz.definition.param.shisetsunyushoinfo.ShisetSunyushoInfoParameter" fetchSize="500">
 SELECT

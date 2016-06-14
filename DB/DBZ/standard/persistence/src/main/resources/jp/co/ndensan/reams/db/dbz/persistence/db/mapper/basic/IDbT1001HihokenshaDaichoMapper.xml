@@ -98,13 +98,13 @@
     </resultMap>
 	
 	
-	<select id="getEntity" resultMap="ResultMap_DbT1001HihokenshaDaichoEntity">
+	<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT1001HihokenshaDaichoEntity">
 	SELECT
 	<include refid="allColumns_DbT1001HihokenshaDaicho"/>
 	FROM
 	rgdb."DbT1001HihokenshaDaicho"
 	</select>
-    <select id="get資格の情報" resultMap="ResultMap_DbT1001HihokenshaDaichoEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.hihokenshadaicho.HihokenshaDaichoSearchCondition" fetchSize="500">
+    <select resultOrdered="true" id="get資格の情報" resultMap="ResultMap_DbT1001HihokenshaDaichoEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.hihokenshadaicho.HihokenshaDaichoSearchCondition" fetchSize="500">
         SELECT
           A.* 
         FROM
@@ -130,7 +130,7 @@
         ORDER BY
           A."dbT1001HihokenshaDaicho_idoYMD" DESC
     </select>
-    <select id="ge広域運用識別コード情報の取得処理" 
+    <select resultOrdered="true" id="ge広域運用識別コード情報の取得処理" 
             resultMap="ResultMap_DbT1001HihokenshaDaichoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbz.definition.core.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuParameter" fetchSize="500">
 	SELECT

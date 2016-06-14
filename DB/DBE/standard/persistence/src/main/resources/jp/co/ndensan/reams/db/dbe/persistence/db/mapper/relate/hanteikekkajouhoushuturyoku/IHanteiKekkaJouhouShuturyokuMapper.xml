@@ -20,7 +20,7 @@
         <result property="shinsakaiKaisaiYMD" column="DbT5511_shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinsakaiKekkaJohoChushutsuYMD" column="DbT7211_shinsakaiKekkaJohoChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    <select id="getNinteiChousaSukeList"
+    <select resultOrdered="true" id="getNinteiChousaSukeList"
                 resultMap="resultMap_HanteiKekkaJouhouShuturyokuRelateEntity" 
                 parameterType="jp.co.ndensan.reams.db.dbe.definition.core.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuParameter" fetchSize="500">
         SELECT 

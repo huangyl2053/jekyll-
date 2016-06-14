@@ -4,7 +4,7 @@
 <!-- @reamsid_L DBE-0160-010 wangxiaodong -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaikaisaikekka.IShinsakaiKaisaiKekkaMapper">
-    <select id="getヘッドエリア内容検索" resultMap="resultMap_ShinsakaiKaisaiYoteiJohoEntity"
+    <select resultOrdered="true" id="getヘッドエリア内容検索" resultMap="resultMap_ShinsakaiKaisaiYoteiJohoEntity"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"  fetchSize="500">
         SELECT
         '第' || DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" || '回審査会' AS "shinsakaiKaisaiMei"
@@ -49,7 +49,7 @@
         <result property="開催会場" column="shinsakaiKaisaiBasho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <select id="get審査会委員一覧検索" resultMap="resultMap_ShinsakaiWariateIinJohoEntity"
+    <select resultOrdered="true" id="get審査会委員一覧検索" resultMap="resultMap_ShinsakaiWariateIinJohoEntity"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"   fetchSize="500">
         SELECT
         DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode" AS "shinsakaiIinCode"
@@ -90,7 +90,7 @@
         <result property="委員退席時間" column="taisekiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <select id="get開催予定情報更新"
+    <select resultOrdered="true" id="get開催予定情報更新"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"
             resultMap="resultMap_YoteiJohoEntity" fetchSize="500">
         SELECT
@@ -116,7 +116,7 @@
         <collection property="介護認定審査会割当委員情報RelateEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiwariateiinjoho.IShinsakaiWariateIinJohoMapper.resultMap_ShinsakaiWariateIinJohoEntity"/>
     </resultMap>
 
-    <select id="get連番" resultType="int" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+    <select resultOrdered="true" id="get連番" resultType="int" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT
         COALESCE(MAX(DbT5512ShinsakaiOnseiJoho."renban"), 0) AS "renban"
         FROM
