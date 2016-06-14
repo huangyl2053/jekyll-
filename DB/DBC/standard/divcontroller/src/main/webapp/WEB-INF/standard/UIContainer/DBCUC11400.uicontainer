@@ -36,13 +36,13 @@
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC1140011",
      "layoutTitle": "自己負担額情報補正",
-     "eventName": "自己負担額情報入力",
+     "eventName": "自己負担額入力へ",
      "destroy": false,
-     "condition": "",
+     "condition": "平成２０年度",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC1140012",
      "toLayoutTitle": "自己負担額情報入力",
-     "toState": "default"
+     "toState": "平成２０年度"
     },
     {
      "id": "4",
@@ -67,6 +67,20 @@
      "eventName": "完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1140011",
+     "layoutTitle": "自己負担額情報補正",
+     "eventName": "自己負担額入力へ",
+     "destroy": false,
+     "condition": "平成２０年度以外",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC1140012",
+     "toLayoutTitle": "自己負担額情報入力",
+     "toState": "平成２０年度以外"
     }
    ]
   }

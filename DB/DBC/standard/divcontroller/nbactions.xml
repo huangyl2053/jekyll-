@@ -23,5 +23,16 @@
         <properties>
             <skipTests>true</skipTests>
         </properties>
-    </action>    
+    </action>
+    <action>
+            <actionName>CUSTOM-build_no_test</actionName>
+            <displayName>build_no_test</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+            </goals>
+            <properties>
+                <skipTests>true</skipTests>
+            </properties>
+        </action>    
 </actions>

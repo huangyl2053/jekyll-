@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320001;
 
-import jp.co.ndensan.reams.db.dbb.business.HokenryoDankaiUtil;
+import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.definition.core.viewstate.DbbViewStateKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
@@ -19,11 +19,15 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.Kika
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.tblFukaKonkyoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.tblFukakonkyoMeisaiDiv;
 import jp.co.ndensan.reams.db.dbb.service.core.FukaMiscManager;
+import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
+import jp.co.ndensan.reams.db.dbb.service.core.relate.KiwarigakuManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -43,6 +47,8 @@ public class FukakonkyoAndKiwari {
     private static final int AUGUST = 8;
     private static final int POINT_OF_ROUND_DOWN = 0;
     private static final int NUMBER_OF_MONTHS_OF_A_YEAR = 12;
+    private KiwarigakuManager manager;
+    private HokenryoDankaiSettings 保険料段階取得;
 
     /**
      * コントロールdivが「生成」された際の処理です。
@@ -82,6 +88,8 @@ public class FukakonkyoAndKiwari {
      */
     public ResponseData<FukakonkyoAndKiwariDiv> initialize(FukakonkyoAndKiwariDiv div) {
 
+        init();
+
         final FukaMiscManager manager = new FukaMiscManager();
         FukaTaishoshaKey fukaTaishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
 
@@ -103,6 +111,8 @@ public class FukakonkyoAndKiwari {
      * @return レスポンスデータ
      */
     public ResponseData<FukakonkyoAndKiwariDiv> reLoad(FukakonkyoAndKiwariDiv div) {
+
+        init();
 
         Fuka model = FukaShokaiController.getFukaModelByFukaShokaiKey();
 
@@ -204,42 +214,56 @@ public class FukakonkyoAndKiwari {
 
         div.getLblNenkinShunyuValue().setText(FukaMapper.addComma(model.get公的年金収入額()));
 
-        div.getLblHokenryoDankaiValue().setText(
-                HokenryoDankaiUtil.edit表示用保険料段階(
-                        FukaShokaiController.findHokenryoDankai(model.get賦課年度(), model.get保険料段階())));
+        div.getLblHokenryoDankaiValue().setText(保険料段階取得.get保険料段階ListIn(model.get賦課年度())
+                .getBy段階区分(get保険料算定段階(model)).get表記());
+//        div.getLblHokenryoDankaiValue().setText(
+//                HokenryoDankaiUtil.edit表示用保険料段階(
+//                        FukaShokaiController.findHokenryoDankai(model.get賦課年度(), model.get保険料段階())));
     }
 
     private void set賦課根拠Of仮算定(tblFukakonkyoMeisaiDiv div, Fuka model) {
-        Optional<HokenryoDankai> 保険料段階 = FukaShokaiController.findZennendoHokenryoDankai(model);
-        if (保険料段階.isPresent()) {
-            div.getLblZenHokenryoDankaiValue().setText(HokenryoDankaiUtil.edit表示用保険料段階(保険料段階.get()));
-            div.getLblZenHokenryoritsuValue().setText(FukaMapper.toRString(保険料段階.get().get保険料率()));
+//        Optional<HokenryoDankai> 保険料段階 = FukaShokaiController.findZennendoHokenryoDankai(model);
+        Optional<Fuka> zennenModel = FukaShokaiController.findZennendoFukaModel(model);
+        if (zennenModel.isPresent()) {
+            Fuka zennenFuka = zennenModel.get();
+            HokenryoDankai zennenHokenryoDankai = 保険料段階取得.get保険料段階ListIn(zennenFuka.get賦課年度())
+                    .getBy段階区分(get保険料算定段階(zennenFuka));
+            div.getLblZenHokenryoDankaiValue().setText(zennenHokenryoDankai.get表記());
+            div.getLblZenHokenryoritsuValue().setText(FukaMapper.addComma(zennenHokenryoDankai.get保険料率()));
         }
+
+//        if (保険料段階.isPresent()) {
+//            div.getLblZenHokenryoDankaiValue().setText(HokenryoDankaiUtil.edit表示用保険料段階(保険料段階.get()));
+//            div.getLblZenHokenryoritsuValue().setText(FukaMapper.toRString(保険料段階.get().get保険料率()));
+//        }
         div.getLblZenNengakuHokenryoValue().setText(FukaMapper.addComma(model.get確定介護保険料_年額()));
     }
 
     private void set期間(KikanDiv div, Fuka model) {
 
         RString 月数1 = getBetweenMonths(model.get月割開始年月1(), model.get月割終了年月1());
-        HokenryoDankai 保険料段階1 = FukaShokaiController.findHokenryoDankai(model.get賦課年度(), model.get保険料算定段階1());
-
+//        HokenryoDankai 保険料段階1 = FukaShokaiController.findHokenryoDankai(model.get賦課年度(), model.get保険料算定段階1());
+        HokenryoDankai 保険料段階1 = 保険料段階取得.get保険料段階ListIn(model.get賦課年度())
+                .getBy段階区分(model.get保険料算定段階1());
         div.getLblKikan1().setText(toRange(model.get月割開始年月1(), model.get月割終了年月1()));
         div.getLblTsukiSu1().setText(月数1);
-        div.getLblHokenryoDankai1().setText(HokenryoDankaiUtil.edit表示用保険料段階(保険料段階1));
-        div.getLblHokenryoritsu1().setText(FukaMapper.addComma(保険料段階1.get保険料率()));
-        div.getLblHokenryoSansyutsu1().setText(calc保険料算出額(保険料段階1.get保険料率(), 月数1));
-        div.getLblHokenryo1().setText(FukaMapper.addComma(model.get算定年額保険料1()));
+        div.getLblHokenryoDankai1().setText(保険料段階1.get表記());
+        div.getLblHokenryoritsu1().setText(FukaMapper.addComma(model.get算定年額保険料1()));
+        div.getLblHokenryoSansyutsu1().setText(calc保険料算出額(model.get算定年額保険料1(), 月数1));
+//        div.getLblHokenryo1().setText(FukaMapper.addComma(model.get算定年額保険料1()));
 
         if (model.get月割開始年月2().isValid()) {
             RString 月数2 = getBetweenMonths(model.get月割開始年月2(), model.get月割終了年月2());
-            HokenryoDankai 保険料段階2 = FukaShokaiController.findHokenryoDankai(model.get賦課年度(), model.get保険料算定段階2());
+//            HokenryoDankai 保険料段階2 = FukaShokaiController.findHokenryoDankai(model.get賦課年度(), model.get保険料算定段階2());
+            HokenryoDankai 保険料段階2 = 保険料段階取得.get保険料段階ListIn(model.get賦課年度())
+                    .getBy段階区分(model.get保険料算定段階2());
 
             div.getLblKikan2().setText(toRange(model.get月割開始年月2(), model.get月割終了年月2()));
             div.getLblTsukiSu2().setText(月数2);
-            div.getLblHokenryoDankai2().setText(HokenryoDankaiUtil.edit表示用保険料段階(保険料段階2));
-            div.getLblHokenryoritsu2().setText(FukaMapper.addComma(保険料段階2.get保険料率()));
-            div.getLblHokenryoSansyutsu2().setText(calc保険料算出額(保険料段階2.get保険料率(), 月数2));
-            div.getLblHokenryo1().setText(FukaMapper.addComma(model.get算定年額保険料1()));
+            div.getLblHokenryoDankai2().setText(保険料段階2.get表記());
+            div.getLblHokenryoritsu2().setText(FukaMapper.addComma(model.get算定年額保険料2()));
+            div.getLblHokenryoSansyutsu2().setText(calc保険料算出額(model.get算定年額保険料2(), 月数2));
+//            div.getLblHokenryo1().setText(FukaMapper.addComma(model.get算定年額保険料1()));
         } else {
             div.getTblKikan2().setDisplayNone(true);
         }
@@ -251,13 +275,15 @@ public class FukakonkyoAndKiwari {
         }
         Decimal result = 保険料率.multiply(Integer.parseInt(月数.toString())).divide(NUMBER_OF_MONTHS_OF_A_YEAR);
 
-        return FukaMapper.addComma(result.roundDownTo(POINT_OF_ROUND_DOWN));
+        return FukaMapper.addComma(result.roundHalfUpTo(POINT_OF_ROUND_DOWN));
     }
 
     private void set年額Of仮算定(FukakonkyoAndKiwariDiv div, Fuka model) {
-        div.getTxtZanteiKeisanjoHokenryoGaku().setValue(model.get減免前介護保険料_年額());
+
+        Decimal 徴収額合計 = get徴収額合計(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get履歴番号());
+        div.getTxtZanteiKeisanjoHokenryoGaku().setValue(徴収額合計.add(model.get減免額()));
         div.getTxtZanteiGemmenGaku().setValue(model.get減免額());
-        div.getTxtZanteiHokenryoGaku().setValue(model.get確定介護保険料_年額());
+        div.getTxtZanteiHokenryoGaku().setValue(徴収額合計);
     }
 
     private void set年額Of本算定(FukakonkyoNengakuDiv div, Fuka model) {
@@ -311,6 +337,25 @@ public class FukakonkyoAndKiwari {
         Integer source = to.getBetweenMonths(from);
 
         return new RString(source.toString());
+    }
+
+    private void init() {
+        保険料段階取得 = HokenryoDankaiSettings.createInstance();
+        this.manager = new KiwarigakuManager();
+    }
+
+    private RString get保険料算定段階(Fuka model) {
+        if (model.get保険料算定段階2().isNullOrEmpty()) {
+            return model.get保険料算定段階1();
+        } else {
+            return model.get保険料算定段階2();
+        }
+    }
+
+    private Decimal get徴収額合計(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, int 履歴番号) {
+
+        Kiwarigaku kiwari = manager.load期割額(調定年度, 賦課年度, 通知書番号, 履歴番号).get();
+        return kiwari.get普徴期別額合計().add(kiwari.get特徴期別額合計());
     }
 
     private ResponseData<FukakonkyoAndKiwariDiv> createResponseData(FukakonkyoAndKiwariDiv div) {

@@ -299,7 +299,7 @@ public class SetaiShotokuIchiranHandler {
         FlexibleYear 激変緩和終了年度 = fukakeisanConfig.get激変緩和終了年度();
 
         if (激変緩和開始年度.isBefore(賦課年度) && 賦課年度.isBefore(激変緩和終了年度)) {
-            shotokuRirekiGridSetting.getColumns().get(INDEX_6).setVisible(false);
+            shotokuRirekiGridSetting.getColumns().get(INDEX_6).setVisible(true);
         } else {
             shotokuRirekiGridSetting.getColumns().get(INDEX_6).setVisible(false);
         }

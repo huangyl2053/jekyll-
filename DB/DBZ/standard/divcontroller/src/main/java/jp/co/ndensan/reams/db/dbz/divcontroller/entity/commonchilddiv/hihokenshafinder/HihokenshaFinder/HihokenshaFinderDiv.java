@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author 自動生成
  */
 public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
