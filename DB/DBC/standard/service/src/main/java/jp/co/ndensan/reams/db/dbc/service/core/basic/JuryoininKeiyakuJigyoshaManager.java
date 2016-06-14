@@ -33,6 +33,10 @@ public class JuryoininKeiyakuJigyoshaManager {
 
     private final MapperProvider mapperProvider;
     private final DbT3077JuryoininKeiyakuJigyoshaDac dbT3077Dac;
+    private static final RString KEY_KEIYAKUJIGYOSHANO = new RString("keiyakuJigyoshaNo");
+    private static final RString KEY_KAISHIYMD = new RString("kaishiYMD");
+    private static final RString KEY_SHURYOYMD = new RString("shuryoYMD");
+    private static final RString KEY_SYSTEMDATE = new RString("systemDate");
 
     /**
      * コンストラクタです。
@@ -144,22 +148,25 @@ public class JuryoininKeiyakuJigyoshaManager {
      *
      * @param 契約事業者番号 RString
      * @param 契約日FROM FlexibleDate
+     * @param 契約日TO FlexibleDate
      * @return JuryoininKeiyakuJigyosha
      */
     @Transaction
     public JuryoininKeiyakuJigyosha getJuryoininKeiyakuJigyosha(
             RString 契約事業者番号,
-            FlexibleDate 契約日FROM) {
+            FlexibleDate 契約日FROM,
+            FlexibleDate 契約日TO) {
         IJuryoininKeiyakuJigyoshaMapper mapper = mapperProvider.create(IJuryoininKeiyakuJigyoshaMapper.class);
 
         Map<String, Object> parameter = new HashMap<>();
-        parameter.put("keiyakuJigyoshaNo", 契約事業者番号);
-        parameter.put("kaishiYMD", 契約日FROM);
-        parameter.put("systemDate", FlexibleDate.getNowDate());
-        DbT3077JuryoininKeiyakuJigyoshaEntity entity = mapper.get契約事業者(parameter);
-        if (entity == null) {
+        parameter.put(KEY_KEIYAKUJIGYOSHANO.toString(), 契約事業者番号);
+        parameter.put(KEY_KAISHIYMD.toString(), 契約日FROM);
+        parameter.put(KEY_SHURYOYMD.toString(), 契約日TO);
+        parameter.put(KEY_SYSTEMDATE.toString(), FlexibleDate.getNowDate());
+        List<DbT3077JuryoininKeiyakuJigyoshaEntity> entity = mapper.get契約事業者(parameter);
+        if (entity == null || entity.isEmpty()) {
             return null;
         }
-        return new JuryoininKeiyakuJigyosha(entity);
+        return new JuryoininKeiyakuJigyosha(entity.get(0));
     }
 }

@@ -211,14 +211,14 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             NinshoshaSource ninshosha) {
         List<KaigohokenShindanMeireishoHeaderItem> resultList = new ArrayList<>();
         for (KaigohokenShindanMeireishoHeaderItem item : itemList) {
-            item.setShomeiHakkoYMD(ninshosha.hakkoYMD);
+            item.setHakkoYMD(ninshosha.hakkoYMD);
             item.setDenshiKoin(ninshosha.denshiKoin);
-//            item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
-//            item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
-//            item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);
-//            item.setNinshoshaShimeiKakenai(ninshosha.ninshoshaShimeiKakenai);
-//            item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
-//            item.setKoinMojiretsu(ninshosha.koinMojiretsu);
+            item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
+            item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
+            item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);
+            item.setNinshoshaShimeiKakenai(ninshosha.ninshoshaShimeiKakenai);
+            item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
+            item.setKoinMojiretsu(ninshosha.koinMojiretsu);
             item.setKoinShoryaku(ninshosha.koinShoryaku);
             resultList.add(item);
         }

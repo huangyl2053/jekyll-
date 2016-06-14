@@ -6,23 +6,16 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710020;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.KetteiJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.ShiharaiHoho;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.ShoriJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListShokanbaraiJokyoCSVEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.hanyolistshokanbaraijokyo.HanyoListCsvDataCreate;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0301YokinShubetsuPatternEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.kinyukikan.KinyuKikanEntity;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -73,7 +66,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC701002");
     private static final RString CSV出力有無 = new RString("");
     private static final RString ITEM = new RString("～");
-    private static final RString SPLIT = new RString("|");
+//    private static final RString SPLIT = new RString("|");
     private static final RString ジョブ番号 = new RString("【ジョブ番号】");
     private static final RString 日本語ファイル名 = new RString("汎用リスト　償還払い状況CSV");
     private static final RString 英数字ファイル名 = new RString("HanyoList_ShokanbaraiJokyo.csv");
@@ -105,11 +98,11 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
     private List<PersonalData> personalDataList;
     private Association 地方公共団体;
     private Decimal 連番;
-    private RString preBreakKey;
-    private HanyoListShokanbaraiJokyoEntity preEntity;
-    private Map<RString, Object> mapFlag;
-    private List<DbT3038ShokanKihonEntity> lstDbt3038List;
-    private List<KinyuKikanEntity> lstKinyuKikanEntity;
+//    private RString preBreakKey;
+//    private HanyoListShokanbaraiJokyoEntity preEntity;
+//    private Map<RString, Object> mapFlag;
+//    private List<DbT3038ShokanKihonEntity> lstDbt3038List;
+//    private List<KinyuKikanEntity> lstKinyuKikanEntity;
 
     @BatchWriter
     private EucCsvWriter<HanyoListShokanbaraiJokyoCSVEntity> eucCsvWriter;
@@ -117,12 +110,12 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
     @Override
     protected void beforeExecute() {
         連番 = Decimal.ONE;
-        preBreakKey = RString.EMPTY;
+//        preBreakKey = RString.EMPTY;
         dataCreate = new HanyoListCsvDataCreate();
         personalDataList = new ArrayList<>();
-        mapFlag = new HashMap<>();
-        lstDbt3038List = new ArrayList<>();
-        lstKinyuKikanEntity = new ArrayList<>();
+//        mapFlag = new HashMap<>();
+//        lstDbt3038List = new ArrayList<>();
+//        lstKinyuKikanEntity = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
 
     }

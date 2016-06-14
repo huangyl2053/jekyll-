@@ -39,9 +39,9 @@ public class SystemTimeShutokuProcess extends SimpleBatchProcessBase {
     }
     private ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper mapper;
     private OutputParameter<RDateTime> systemTime;
-    private OutputParameter<RDateTime> kijunTime;
+    private OutputParameter<RString> kijunTime;
     RDateTime バッチ起動時処理日時_年月日時分秒;
-    RDateTime 基準日時;
+    RString 基準日時;
 
     @Override
     protected void beforeExecute() {
@@ -53,7 +53,7 @@ public class SystemTimeShutokuProcess extends SimpleBatchProcessBase {
     @Override
     protected void process() {
         バッチ起動時処理日時_年月日時分秒 = RDate.getNowDateTime();
-        mapper.get基準日時(new TokuchoHeijunka6gatsuMyBatisParameter(
+        基準日時 = mapper.get基準日時(new TokuchoHeijunka6gatsuMyBatisParameter(
                 false, parameter.get調定年度(), null, null, ShoriName.特徴平準化計算_6月分.get名称(), null, null, null, null));
     }
 

@@ -40,7 +40,6 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
     private final NofuShoKyotsu 納付書共通;
     private final int 連番;
     private final NinshoshaSource ninshoshaSource;
-    private final SofubutsuAtesakiSource sofubutsuAtesakiSource;
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -58,10 +57,12 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
      *
      * @param item {@link HokenryoNonyuTsuchishoKigotoItem}
      * @param 納入通知書期情報 納入通知書期情報
+     * @param ninshoshaSource 認証者情報
      * @param 連番 連番
      */
     protected HokenryoNonyuTsuchishoKigotoEditor(HokenryoNonyuTsuchishoKigotoItem item,
             NonyuTsuchiShoKiJoho 納入通知書期情報,
+            NinshoshaSource ninshoshaSource,
             int 連番) {
         this.本算定納入通知書情報 = null == item.get本算定納入通知書情報() ? new HonSanteiNonyuTsuchiShoJoho() : item.get本算定納入通知書情報();
         this.編集後本算定通知書共通情報 = null == 本算定納入通知書情報.get編集後本算定通知書共通情報()
@@ -71,8 +72,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         this.納入通知書期情報 = 納入通知書期情報;
         this.納付書共通 = null == 本算定納入通知書情報.get納付書共通() ? new NofuShoKyotsu() : 本算定納入通知書情報.get納付書共通();
         this.連番 = 連番;
-        this.ninshoshaSource = 本算定納入通知書情報.getNinshoshaSource();
-        this.sofubutsuAtesakiSource = 本算定納入通知書情報.getSofubutsuAtesakiSource();
+        this.ninshoshaSource = ninshoshaSource;
     }
 
     @Override
@@ -86,37 +86,46 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
     }
 
     private void editCompSofubutsuAtesaki(HokenryoNonyuTsuchishoKigotoSource source) {
-        source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
-        source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
-        source.gyoseiku = sofubutsuAtesakiSource.gyoseiku;
-        source.jusho1 = sofubutsuAtesakiSource.jusho1;
-        source.jusho2 = sofubutsuAtesakiSource.jusho2;
-        source.jusho3 = sofubutsuAtesakiSource.jusho3;
-        source.jushoText = sofubutsuAtesakiSource.jushoText;
-        source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
-        source.kakkoLeft2 = sofubutsuAtesakiSource.kakkoLeft2;
-        source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
-        source.kakkoRight2 = sofubutsuAtesakiSource.kakkoRight2;
-        source.katagaki1 = sofubutsuAtesakiSource.katagaki1;
-        source.katagaki2 = sofubutsuAtesakiSource.katagaki2;
-        source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
-        source.katagakiSmall2 = sofubutsuAtesakiSource.katagakiSmall2;
-        source.katagakiText = sofubutsuAtesakiSource.katagakiText;
-        source.meishoFuyo1 = sofubutsuAtesakiSource.meishoFuyo1;
-        source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;
-        source.samaBun1 = sofubutsuAtesakiSource.samaBun1;
-        source.samaBun2 = sofubutsuAtesakiSource.samaBun2;
-        source.samabunShimei1 = sofubutsuAtesakiSource.samabunShimei1;
-        source.samabunShimei2 = sofubutsuAtesakiSource.samabunShimei2;
-        source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
-        source.samabunShimeiSmall2 = sofubutsuAtesakiSource.samabunShimeiSmall2;
-        source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
-        source.shimei1 = sofubutsuAtesakiSource.shimei1;
-        source.shimei2 = sofubutsuAtesakiSource.shimei2;
-        source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
-        source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
-        source.shimeiText = sofubutsuAtesakiSource.shimeiText;
-        source.yubinNo = sofubutsuAtesakiSource.yubinNo;
+        if (本算定納入通知書情報.get編集後本算定通知書共通情報() != null
+                && 本算定納入通知書情報.get編集後本算定通知書共通情報().get編集後宛先() != null
+                && 本算定納入通知書情報.get編集後本算定通知書共通情報().get編集後宛先().getSofubutsuAtesakiSource() != null) {
+            SofubutsuAtesakiSource sofubutsuAtesakiSource
+                    = 本算定納入通知書情報.get編集後本算定通知書共通情報().get編集後宛先().getSofubutsuAtesakiSource().get送付物宛先ソース();
+            if (null == sofubutsuAtesakiSource) {
+                return;
+            }
+            source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
+            source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
+            source.gyoseiku = sofubutsuAtesakiSource.gyoseiku;
+            source.jusho1 = sofubutsuAtesakiSource.jusho1;
+            source.jusho2 = sofubutsuAtesakiSource.jusho2;
+            source.jusho3 = sofubutsuAtesakiSource.jusho3;
+            source.jushoText = sofubutsuAtesakiSource.jushoText;
+            source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
+            source.kakkoLeft2 = sofubutsuAtesakiSource.kakkoLeft2;
+            source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
+            source.kakkoRight2 = sofubutsuAtesakiSource.kakkoRight2;
+            source.katagaki1 = sofubutsuAtesakiSource.katagaki1;
+            source.katagaki2 = sofubutsuAtesakiSource.katagaki2;
+            source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
+            source.katagakiSmall2 = sofubutsuAtesakiSource.katagakiSmall2;
+            source.katagakiText = sofubutsuAtesakiSource.katagakiText;
+            source.meishoFuyo1 = sofubutsuAtesakiSource.meishoFuyo1;
+            source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;
+            source.samaBun1 = sofubutsuAtesakiSource.samaBun1;
+            source.samaBun2 = sofubutsuAtesakiSource.samaBun2;
+            source.samabunShimei1 = sofubutsuAtesakiSource.samabunShimei1;
+            source.samabunShimei2 = sofubutsuAtesakiSource.samabunShimei2;
+            source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
+            source.samabunShimeiSmall2 = sofubutsuAtesakiSource.samabunShimeiSmall2;
+            source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
+            source.shimei1 = sofubutsuAtesakiSource.shimei1;
+            source.shimei2 = sofubutsuAtesakiSource.shimei2;
+            source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
+            source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
+            source.shimeiText = sofubutsuAtesakiSource.shimeiText;
+            source.yubinNo = sofubutsuAtesakiSource.yubinNo;
+        }
     }
 
     private void editCompRyoshushoItem(HokenryoNonyuTsuchishoKigotoSource source) {

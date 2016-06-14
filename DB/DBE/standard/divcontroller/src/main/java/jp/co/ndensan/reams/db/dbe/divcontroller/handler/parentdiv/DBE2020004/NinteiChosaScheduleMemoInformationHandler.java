@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.dgLi
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiChosaScheduleMemo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiChosaScheduleMemoBuilder;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -23,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
@@ -132,8 +130,9 @@ public class NinteiChosaScheduleMemoInformationHandler {
     /**
      * 認定調査スケジュール登録4に共通編集アイコンを実行します。
      *
+     * @param 地区コード 地区コード
      */
-    public void getEditCommon() {
+    public void getEditCommon(Code 地区コード) {
 
         dgListOfCommonMemo_Row dgListOfCommonMemo_Row = div.getDgListOfCommonMemo().getSelectedItems().get(0);
         if (!追加.equals(div.get状態区分()) && dgListOfCommonMemo_Row.getJotai().isEmpty()) {
@@ -153,7 +152,7 @@ public class NinteiChosaScheduleMemoInformationHandler {
         div.getMaintenanceForMemo().getDdlShiteiChosaChiku().setDataSource(調査地区ドロップダウンリスト());
         div.set共通一覧インデックス(new RString(String.valueOf(div.getDgListOfCommonMemo().getClickedItem().getId())));
         編集と中止場合の状態();
-        共通の場合にメンテナンスの設定(dgListOfCommonMemo_Row);
+        共通の場合にメンテナンスの設定(dgListOfCommonMemo_Row, 地区コード);
     }
 
     /**
@@ -178,8 +177,9 @@ public class NinteiChosaScheduleMemoInformationHandler {
     /**
      * 認定調査スケジュール登録4に自地区編集アイコンを実行します。
      *
+     * @param 地区コード 地区コード
      */
-    public void getEditAuto() {
+    public void getEditAuto(Code 地区コード) {
 
         dgListOfJichikuMemo_Row dgListOfJichikuMemo_Row = div.getDgListOfJichikuMemo().getSelectedItems().get(0);
         if (!追加.equals(div.get状態区分()) && dgListOfJichikuMemo_Row.getJotai().isEmpty()) {
@@ -199,7 +199,7 @@ public class NinteiChosaScheduleMemoInformationHandler {
         div.getMaintenanceForMemo().getDdlShiteiChosaChiku().setDataSource(調査地区ドロップダウンリスト());
         div.set自地区一覧インデックス(new RString(String.valueOf(div.getDgListOfJichikuMemo().getClickedItem().getId())));
         編集と中止場合の状態();
-        自地区の場合にメンテナンスの設定(dgListOfJichikuMemo_Row);
+        自地区の場合にメンテナンスの設定(dgListOfJichikuMemo_Row, 地区コード);
     }
 
     /**
@@ -382,9 +382,8 @@ public class NinteiChosaScheduleMemoInformationHandler {
         div.getBtnDelete().setVisible(false);
     }
 
-    private void 共通の場合にメンテナンスの設定(dgListOfCommonMemo_Row dgListOfCommonMemo_Row) {
+    private void 共通の場合にメンテナンスの設定(dgListOfCommonMemo_Row dgListOfCommonMemo_Row, Code 地区コード) {
 
-        Code 地区コード = new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
         div.getMaintenanceForMemo().getTxtMemoNumber().setValue(dgListOfCommonMemo_Row.getMemono());
         div.getMaintenanceForMemo().getDdlMemoType().setSelectedKey(共通);
         div.getDdlShiteiChosaChiku().setSelectedKey(地区コード.value());
@@ -393,9 +392,8 @@ public class NinteiChosaScheduleMemoInformationHandler {
         div.getDdlMemoImportance().setSelectedValue(Importance.重要.get名称());
     }
 
-    private void 自地区の場合にメンテナンスの設定(dgListOfJichikuMemo_Row dgListOfJichikuMemo_Row) {
+    private void 自地区の場合にメンテナンスの設定(dgListOfJichikuMemo_Row dgListOfJichikuMemo_Row, Code 地区コード) {
 
-        Code 地区コード = new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
         div.getMaintenanceForMemo().getTxtMemoNumber().setValue(dgListOfJichikuMemo_Row.getMemono());
         div.getMaintenanceForMemo().getDdlMemoType().setSelectedKey(地区のみ);
         div.getDdlShiteiChosaChiku().setSelectedKey(地区コード.value());

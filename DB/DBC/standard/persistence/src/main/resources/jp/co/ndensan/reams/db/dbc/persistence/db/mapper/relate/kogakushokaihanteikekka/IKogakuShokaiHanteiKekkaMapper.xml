@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-3000-050 gongliang -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakushokaihanteikekka.IKogakuShokaiHanteiKekkaMapper">
+
+    <select resultOrdered="true" id="get高額介護支給判定結果" resultMap="resultMap_KogakuShokai"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaihanteikekka.KogakuShokaiHanteiKekkaParam"
+            fetchSize="500">
+        SELECT
+        A.*,
+        B.*,
+        C.*,
+        D.*,
+        E.*,
+        F.*
+        FROM
+        (SELECT *
+        FROM rgdb."DbT3056KogakuShikyuShinsei" AS A1
+        WHERE NOT EXITS (
+        SELECT *
+        FROM rgdb."DbT3056KogakuShikyuShinsei" AS A2
+        WHERE A1."hihokenshaNo" = A2."hihokenshaNo"
+        AND   A1."serviceTeikyoYM" = A2."serviceTeikyoYM"
+        AND   A1."shoKisaiHokenshaNo" = A2."shoKisaiHokenshaNo"
+        AND   A1."rirekiNo" &lt; A2."rirekiNo")) AS A
+        LEFT JOIN rgdb."DbT3057KogakuShikyuHanteiKekka" AS B
+        ON      A."hihokenshaNo" = B."hihokenshaNo"
+        AND A."serviceTeikyoYM" = B."serviceTeikyoYM"
+        AND A."shoKisaiHokenshaNo" = B."shoKisaiHokenshaNo"
+        AND A."rirekiNo" = B."rirekiNo"
+        LEFT JOIN rgdb."DbT3058KogakuShikyuShinsaKettei" AS C
+        ON      A."hihokenshaNo" = C."hihokenshaNo"
+        AND A."serviceTeikyoYM" = C."serviceTeikyoYM"
+        AND A."shoKisaiHokenshaNo" = C."shoKisaiHokenshaNo"
+        AND A."rirekiNo" = C."rirekiNo"
+        LEFT JOIN rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS D
+        ON      A."hihokenshaNo" = D."hihokenshaNo"
+        AND A."serviceTeikyoYM" = D."serviceTeikyoYM"
+        AND A."rirekiNo" = D."rirekiNo"
+        LEFT JOIN rgdb."DbT3054KogakuKyufuTaishoshaMeisai" AS E
+        ON      A."hihokenshaNo" = E."hihokenshaNo"
+        AND A."serviceTeikyoYM" = E."serviceTeikyoYM"
+        AND A."rirekiNo" = E."rirekiNo"
+        LEFT JOIN
+        (SELECT *
+        FROM rgdb."DbT7060KaigoJigyosha"
+        WHERE "yukoShuryoYMD" is NULL
+        OR "yukoShuryoYMD" = '') AS F
+        ON E."jigyoshaNo" = F."jigyoshaNo"
+        WHERE A."hihokenshaNo" = #{被保険者番号}
+        AND   A."serviceTeikyoYM" = #{提供年月}
+        ORDER BY
+        E."jigyoshaNo" ASC
+        E."serviceShuruiCode" ASC
+    </select>
+    <resultMap id="resultMap_KogakuShokai"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaihanteikekka.KogakuShokaiHanteiKekkaEntity" autoMapping="true">
+        <id property="高額介護サービス費支給申請Entity.hihokenshaNo" column="A.hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="高額介護サービス費支給申請Entity.serviceTeikyoYM" column="A.serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="高額介護サービス費支給申請Entity.shoKisaiHokenshaNo" column="A.shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="高額介護サービス費支給申請Entity.rirekiNo" column="A.rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <association property="高額介護サービス費支給申請Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.ResultMap_DbT3056KogakuShikyuShinseiEntity"/>
+        <association property="高額介護サービス費支給判定結果Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.ResultMap_DbT3057KogakuShikyuHanteiKekkaEntity"/>
+        <association property="高額介護サービス費支給審査決定Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3058KogakuShikyuShinsaKetteiEntity"/>
+        <association property="高額介護サービス費給付対象者合計Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3055KogakuKyufuTaishoshaGokeiEntity"/>
+        <collection property="高額介護サービス費給付対象者明細List" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3054KogakuKyufuTaishoshaMeisaiMapper.ResultMap_DbT3054KogakuKyufuTaishoshaMeisaiEntity"/>
+        <collection property="介護事業者List" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
+    </resultMap>
+
+    <select resultOrdered="true" id="get事業高額介護支給判定結果" resultMap="resultMap_JigyoKogakuShokai"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaihanteikekka.KogakuShokaiHanteiKekkaParam"
+            fetchSize="500">
+        SELECT
+        A.*,
+        B.*,
+        C.*,
+        D.*,
+        E.*,
+        F.*
+        FROM
+        (SELECT *
+        FROM rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A1
+        WHERE NOT EXITS (
+        SELECT *
+        FROM rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A2
+        WHERE A1."hihokenshaNo" = A2."hihokenshaNo"
+        AND   A1."serviceTeikyoYM" = A2."serviceTeikyoYM"
+        AND   A1."shoKisaiHokenshaNo" = A2."shoKisaiHokenshaNo"
+        AND   A1."rirekiNo" &lt; A2."rirekiNo")) AS A
+        LEFT JOIN rgdb."DbT3111JigyoKogakuShikyuHanteiKekka" AS B
+        ON      A."hihokenshaNo" = B."hihokenshaNo"
+        AND A."serviceTeikyoYM" = B."serviceTeikyoYM"
+        AND A."shoKisaiHokenshaNo" = B."shoKisaiHokenshaNo"
+        AND A."rirekiNo" = B."rirekiNo"
+        LEFT JOIN rgdb."DbT3112KogakuShikyuShinsaKettei" AS C
+        ON      A."hihokenshaNo" = C."hihokenshaNo"
+        AND A."serviceTeikyoYM" = C."serviceTeikyoYM"
+        AND A."shoKisaiHokenshaNo" = C."shoKisaiHokenshaNo"
+        AND A."rirekiNo" = C."rirekiNo"
+        LEFT JOIN rgdb."DbT3109JigyoKogakuKyufuTaishoshaGokei" AS D
+        ON      A."hihokenshaNo" = D."hihokenshaNo"
+        AND A."serviceTeikyoYM" = D."serviceTeikyoYM"
+        AND A."rirekiNo" = D."rirekiNo"
+        LEFT JOIN rgdb."DbT3108JigyoKogakuKyufuTaishoshaMeisai" AS E
+        ON      A."hihokenshaNo" = E."hihokenshaNo"
+        AND A."serviceTeikyoYM" = E."serviceTeikyoYM"
+        AND A."rirekiNo" = E."rirekiNo"
+        LEFT JOIN
+        (SELECT *
+        FROM rgdb."DbT7060KaigoJigyosha"
+        WHERE "yukoShuryoYMD" is NULL
+        OR "yukoShuryoYMD" = '') AS F
+        ON E."jigyoshaNo" = F."jigyoshaNo"
+        WHERE A."hihokenshaNo" = #{被保険者番号}
+        AND   A."serviceTeikyoYM" = #{提供年月}
+        ORDER BY
+        E."jigyoshaNo" ASC
+        E."serviceShuruiCode" ASC
+    </select>
+    <resultMap id="resultMap_JigyoKogakuShokai"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaihanteikekka.JigyoKogakuShokaiHanteiKekkaEntity" autoMapping="true">
+        <id property="事業高額介護サービス費支給申請Entity.hihokenshaNo" column="A.hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="事業高額介護サービス費支給申請Entity.serviceTeikyoYM" column="A.serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="事業高額介護サービス費支給申請Entity.shoKisaiHokenshaNo" column="A.shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="事業高額介護サービス費支給申請Entity.rirekiNo" column="A.rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <association property="事業高額介護サービス費支給申請Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3110JigyoKogakuShikyuShinseiMapper.ResultMap_DbT3110JigyoKogakuShikyuShinseiEntity"/>
+        <association property="事業高額介護サービス費支給判定結果Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3111JigyoKogakuShikyuHanteiKekkaMapper.ResultMap_DbT3111JigyoKogakuShikyuHanteiKekkaEntity"/>
+        <association property="事業高額介護サービス費支給審査決定Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3112KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3112KogakuShikyuShinsaKetteiEntity"/>
+        <association property="事業高額介護サービス費給付対象者合計Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3109JigyoKogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity"/>
+        <collection property="事業高額介護サービス費給付対象者明細List" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3108JigyoKogakuKyufuTaishoshaMeisaiMapper.ResultMap_DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity"/>
+        <collection property="介護事業者List" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
+    </resultMap>
+
+</mapper>

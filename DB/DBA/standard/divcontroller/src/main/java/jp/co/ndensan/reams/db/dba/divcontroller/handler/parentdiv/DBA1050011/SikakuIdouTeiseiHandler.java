@@ -114,8 +114,8 @@ public class SikakuIdouTeiseiHandler {
             RoreiFukushiJoho joho = new RoreiFukushiJoho();
             joho.set識別コード(識別コード);
             joho.set状態(row.getJotai());
-            joho.set受給開始年月日(stringToFlexibleDate(row.getStartDate().getValue().toDateString()));
-            joho.set受給廃止年月日(stringToFlexibleDate(row.getEndDate().getValue().toDateString()));
+            joho.set受給開始年月日(rdateToFlexibleDate(row.getStartDate().getValue()));
+            joho.set受給廃止年月日(rdateToFlexibleDate(row.getEndDate().getValue()));
             roreiFukushiJohoList.add(joho);
         }
         return roreiFukushiJohoList;
@@ -130,10 +130,19 @@ public class SikakuIdouTeiseiHandler {
         return flexDate;
     }
 
+    private FlexibleDate rdateToFlexibleDate(RDate date) {
+        FlexibleDate flexDate = FlexibleDate.EMPTY;
+        if (date != null) {
+            flexDate = new FlexibleDate(date.toDateString());
+        }
+        return flexDate;
+    }
+
     /**
      * 画面遷移のパラメータの設定します。
      *
      * @param 状態 状態
+     * @return ShikakuRirekiJoho
      */
     public ShikakuRirekiJoho setパラメータ(RString 状態) {
         ShikakuRirekiJoho joho = new ShikakuRirekiJoho();

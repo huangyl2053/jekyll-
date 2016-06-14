@@ -70,9 +70,6 @@ public class KogakuServicehiPanel {
             Map<RString, RString> mapStr = getHandler(div).get検索条件エリアRStr();
             if (指定_被保険者.equals(mapStr.get(指定R))) {
                 pairs = validationHandler.validate被保険者を指定入力();
-                pairs.add(validationHandler.validate提供年月());
-                pairs.add(validationHandler.validate申請年月());
-                pairs.add(validationHandler.validate決定年月());
             } else {
                 pairs = validationHandler.validate年月を指定入力();
             }
@@ -136,9 +133,6 @@ public class KogakuServicehiPanel {
         Map<RString, RString> mapStr = getHandler(div).get検索条件エリアRStr();
         if (指定_被保険者.equals(mapStr.get(指定R))) {
             pairs = validationHandler.validate被保険者を指定入力();
-            pairs.add(validationHandler.validate提供年月());
-            pairs.add(validationHandler.validate申請年月());
-            pairs.add(validationHandler.validate決定年月());
         } else {
             pairs = validationHandler.validate年月を指定入力();
         }

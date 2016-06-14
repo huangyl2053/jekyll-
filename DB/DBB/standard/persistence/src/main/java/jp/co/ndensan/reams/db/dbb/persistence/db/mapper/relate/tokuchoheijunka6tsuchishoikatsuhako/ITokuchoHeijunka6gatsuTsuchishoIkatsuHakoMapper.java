@@ -9,7 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KarisanteiGakuHenkoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,7 +25,7 @@ public interface ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper {
      * @param param パラメータ
      * @return 基準日時
      */
-    RDateTime get基準日時(TokuchoHeijunka6gatsuMyBatisParameter param);
+    RString get基準日時(TokuchoHeijunka6gatsuMyBatisParameter param);
 
     /**
      * 特徴平準化_6月分更新後とリアルのデータを抽出し、仮算定額変更情報一時テーブルに登録する。
@@ -96,12 +95,14 @@ public interface ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper {
     /**
      * 入力の出力対象区分によって、出力対象データを抽出する。
      *
+     * @param 帳票作成日時 帳票作成日時
+     * @param 基準日時 基準日時
      * @param 出力対象区分 出力対象区分
      * @param 出力順 出力順
-     * @param 帳票作成日時 帳票作成日時
      * @param 帳票ID 帳票ID
      */
-    void insert通知書発行後異動者(@Param("帳票作成日時") RDateTime 帳票作成日時,
+    void insert通知書発行後異動者(@Param("帳票作成日時") RString 帳票作成日時,
+            @Param("基準日時") RString 基準日時,
             @Param("出力対象区分") int 出力対象区分,
             @Param("帳票ID") RString 帳票ID,
             @Param("出力順") RString 出力順);

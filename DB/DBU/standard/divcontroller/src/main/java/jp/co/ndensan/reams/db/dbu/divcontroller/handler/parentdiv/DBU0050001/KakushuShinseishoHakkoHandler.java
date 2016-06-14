@@ -18,11 +18,13 @@ import jp.co.ndensan.reams.db.dba.service.core.shokanharaishikyushinseisho.Shouk
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseishojoho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.choshuyuyoshinseisho.ChoshuYuyoShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.hokenryogenmenchoshuyoyushinseisho.KaigoHokenryoGenmenShinseisho;
+import jp.co.ndensan.reams.db.dba.service.report.homonkaigoriyoushafutangakugengakushinseisho.HomonkaigoRiyoushaFutangakuGengakuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.jukyushikakushomeishokoufushinseisho.KaigoHokenJukyushikakuShomeishoKofuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.juryoininharaikeiyakushinseisho.JuryoIninbaraiKeiyakuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.juryoininharaitoriatsu.JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.jyushochitokureitekiyohenko.JushochiTokureiTekiyoHenkoShuryoTodoke;
 import jp.co.ndensan.reams.db.dba.service.report.keidoshafukushiyogutoriatsukaikakuninshinseisho.KeidoshaFukushiyoguToriatsukaiKakuninShinseisho;
+import jp.co.ndensan.reams.db.dba.service.report.kogakugassanservice.KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.kyotakuJutakukaishuhi.KyotakuJutakuKaishuhiShikyuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.kyotakukaigofukushi.KyotakuKaigoFukushiYoguKonyuhiShikyuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.kyotakukaigojutakukaishuhijizenshinseisho.KyotakuKaigoJutakuKaishuhiJizenShinseisho;
@@ -148,9 +150,17 @@ public class KakushuShinseishoHakkoHandler {
                     sourceData = RiyoshaFutangakuGengakuMenjyoShinseisho.createInstance()
                             .createKaigoHokenRiyoshaFutangakuGengakuMenjyoShinseishoChohyo(識別コード, 被保険者番号);
                 }
+                if (ShinseishoChohyoShurui.介護保険利用者負担額減額_免除申請書_旧措置者用.get名称().equals(row.getShinseisho())) {
+                    sourceData = RiyoshaFutangakuGengakuMenjyoShinseisho.createInstance()
+                            .createKaigoHokenRiyoshaFutangakuGengakuMenjyoShinseishoChohyo(識別コード, 被保険者番号);
+                }
                 if (ShinseishoChohyoShurui.介護保険特定負担限度額申請書.get名称().equals(row.getShinseisho())) {
-                    TokuteifutanGendogakuShinseisho todoke = new TokuteifutanGendogakuShinseisho();
+                    TokuteifutanGendogakuShinseisho todoke = TokuteifutanGendogakuShinseisho.createInstance();
                     sourceData = todoke.createTokuteifutanGendogakuShinseishoChohyo(識別コード, 被保険者番号);
+                }
+                if (ShinseishoChohyoShurui.介護保険特定負担限度額申請書.get名称().equals(row.getShinseisho())) {
+                    HomonkaigoRiyoushaFutangakuGengakuShinseisho todoke = new HomonkaigoRiyoushaFutangakuGengakuShinseisho();
+                    sourceData = todoke.createHomonkaigoRiyoushaFutangakuGengakuShinseishoChohyo(識別コード, 被保険者番号);
                 }
                 if (ShinseishoChohyoShurui.社会福祉法人等利用者負担軽減対象確認申請書.get名称().equals(row.getShinseisho())) {
                     ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho todoke = ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho
@@ -221,6 +231,11 @@ public class KakushuShinseishoHakkoHandler {
         if (ShinseishoChohyoShurui.介護保険高額介護_予防_サービス費支給_受領委任払_申請書.get名称().equals(row.getShinseisho())) {
             KogakuKaigoServicehiShikyuJuryoIninShinseisho todoke = new KogakuKaigoServicehiShikyuJuryoIninShinseisho();
             sourceData = todoke.createKogakuKaigoServicehiShikyuJuryoIninShinseishoChohyo(識別コード, 被保険者番号);
+        }
+        if (ShinseishoChohyoShurui.高額医療合算介護_介護予防_サービス費支給兼自己負担額証明書交付申請書.get名称().equals(row.getShinseisho())) {
+            KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseisho todoke
+                    = new KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseisho();
+            sourceData = todoke.createKogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseishoChohyo(識別コード, 被保険者番号);
         }
         if (ShinseishoChohyoShurui.介護保険助成金給付申請書.get名称().equals(row.getShinseisho())) {
             JoseikinKyufuShinseisho todoke = new JoseikinKyufuShinseisho();

@@ -16,6 +16,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBE {
 
     /**
+     * 委員用一次判定結果票A3の帳票ID。
+     */
+    DBE517085(new ReportId("DBE517085_IchijihanteikekkahyoA3"), new RString("委員用一次判定結果票A3")),
+    /**
+     * 委員用一次判定結果票A4の帳票ID。
+     */
+    DBE517038(new ReportId("DBE517038_ichijihanteikekkahyo"), new RString("委員用一次判定結果票A4")),
+    /**
      * 委員用主治医意見書A3の帳票ID。
      */
     DBE517005(new ReportId("DBE517005_ShujiiikenshoA3"), new RString("委員用主治医意見書A3")),
@@ -24,13 +32,21 @@ public enum ReportIdDBE {
      */
     DBE517152(new ReportId("DBE517151_Shujiiikensho1A4"), new RString("委員用主治医意見書A4")),
     /**
+     * 事務局用予備判定記入表の帳票ID。
+     */
+    DBE517002(new ReportId("DBE517002_JimukyokuyoYobihanteiKinyuhyo"), new RString("事務局用予備判定記入表")),
+    /**
      * 介護認定審査会開催のお知らせの帳票ID。
      */
     DBE515001(new ReportId("DBE515001_ShinsakaiKaisaiOshiraseTsuchi"), new RString("介護認定審査会開催のお知らせ")),
     /**
-     * 事務局用介護認定審査対象者一覧表の帳票ID。
+     * 事務局用介護認定審査対象者一覧表A3の帳票ID。
      */
-    DBE517011(new ReportId("DBE517011_ShinsakaishiryoA4"), new RString("事務局用介護認定審査対象者一覧表")),
+    DBE517001(new ReportId("DBE517001_ShinsakaishiryoA3"), new RString("事務局用介護認定審査対象者一覧表A3")),
+    /**
+     * 事務局用介護認定審査対象者一覧表A4の帳票ID。
+     */
+    DBE517011(new ReportId("DBE517011_ShinsakaishiryoA4"), new RString("事務局用介護認定審査対象者一覧表A4")),
     /**
      * 医療機関・主治医一覧表の帳票ID。
      */
@@ -86,6 +102,14 @@ public enum ReportIdDBE {
      * 認定調査スケジュール表(調査員)の帳票ＩＤです。
      */
     DBE202001(new ReportId("DBE202001_ChosaSchedulehyo"), new RString("認定調査スケジュール表(調査員)")),
+    /**
+     * 追加資料鑑の帳票ＩＤです。
+     */
+    DBE517009(new ReportId("DBE517009_TsuikashiryokagamiA3"), new RString("追加資料鑑")),
+    /**
+     * 追加資料鑑の帳票ＩＤです。
+     */
+    DBE517019(new ReportId("DBE517019_TsuikashiryokagamiA4"), new RString("追加資料鑑")),
     /**
      * 介護保険診断命令書の帳票ＩＤです。
      */
@@ -329,7 +353,15 @@ public enum ReportIdDBE {
     /**
      * 主治医意見書作成依頼変更者一覧表の帳票ＩＤです。
      */
-    DBE013002(new ReportId("DBE013002_ShijiiIkenshoIraiHenko"), new RString("主治医意見書作成依頼変更者一覧表"));
+    DBE013002(new ReportId("DBE013002_ShijiiIkenshoIraiHenko"), new RString("主治医意見書作成依頼変更者一覧表")),
+    /**
+     * 主治医意見書作成依頼変更者一覧表の帳票ＩＤです。
+     */
+    DBE013006(new ReportId("DBE013006_ShujiiIkenshoSeikyuIchiran"), new RString("主治医意見書作成料請求一覧表")),
+    /**
+     * 要介護認定申請モニタリストの帳票ＩＤです。
+     */
+    DBE011002(new ReportId("DBE011002_ShinseiMonitor"), new RString("要介護認定申請モニタリスト"));
 
     private final ReportId reportId;
 

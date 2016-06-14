@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.ikenshoprint;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenItem;
 import jp.co.ndensan.reams.db.dbe.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenProperty;
@@ -17,6 +18,8 @@ import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiI
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoReport;
+import jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiProperty;
+import jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiReport;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReport;
@@ -42,6 +45,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei.ShujiiIke
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
+import jp.co.ndensan.reams.db.dbe.entity.report.ikenshokinyuyoshi.IkenshokinyuyoshiReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaiichiranhyo.ChosaIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaisho.ChosaIraishoReportSource;
@@ -392,6 +396,20 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
     }
 
     /**
+     * 主治医意見書記入用紙を印刷します。
+     *
+     * @param items 主治医意見書記入用紙_帳票クラスパラメータクラス
+     */
+    public void print主治医意見書記入用紙(List<IkenshokinyuyoshiBusiness> items) {
+        IkenshokinyuyoshiProperty property = new IkenshokinyuyoshiProperty();
+        try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            IkenshokinyuyoshiReport report = new IkenshokinyuyoshiReport(items);
+            report.writeBy(reportSourceWriter);
+        }
+    }
+
+    /**
      * 介護保険診断命令書を印刷します。
      *
      * @param itemlist 介護保険診断命令書のITEMリストです。
@@ -400,19 +418,19 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
         KaigohokenShindanMeireishoProperty property = new KaigohokenShindanMeireishoProperty();
         try (ReportAssembler<KaigohokenShindanMeireishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<KaigohokenShindanMeireishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-//            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230002.getReportId(),
-//                    FlexibleDate.getNowDate(), reportSourceWriter);
-//            for (KaigohokenShindanMeireishoHeaderItem item : itemlist) {
-//                item.setDenshiKoin(ninshoshaSource.denshiKoin);
-//                item.setHakkoYMD(ninshoshaSource.hakkoYMD);
-//                item.setKoinMojiretsu(ninshoshaSource.koinMojiretsu);
-//                item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
-//                item.setNinshoshaShimeiKakenai(ninshoshaSource.ninshoshaShimeiKakenai);
-//                item.setNinshoshaShimeiKakeru(ninshoshaSource.ninshoshaShimeiKakeru);
-//                item.setNinshoshaYakushokuMei(ninshoshaSource.ninshoshaYakushokuMei);
-//                item.setNinshoshaYakushokuMei1(ninshoshaSource.ninshoshaYakushokuMei1);
-//                item.setNinshoshaYakushokuMei2(ninshoshaSource.ninshoshaYakushokuMei2);
-//            }
+            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230002.getReportId(),
+                    FlexibleDate.getNowDate(), reportSourceWriter);
+            for (KaigohokenShindanMeireishoHeaderItem item : itemlist) {
+                item.setDenshiKoin(ninshoshaSource.denshiKoin);
+                item.setHakkoYMD(ninshoshaSource.hakkoYMD);
+                item.setKoinMojiretsu(ninshoshaSource.koinMojiretsu);
+                item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
+                item.setNinshoshaShimeiKakenai(ninshoshaSource.ninshoshaShimeiKakenai);
+                item.setNinshoshaShimeiKakeru(ninshoshaSource.ninshoshaShimeiKakeru);
+                item.setNinshoshaYakushokuMei(ninshoshaSource.ninshoshaYakushokuMei);
+                item.setNinshoshaYakushokuMei1(ninshoshaSource.ninshoshaYakushokuMei1);
+                item.setNinshoshaYakushokuMei2(ninshoshaSource.ninshoshaYakushokuMei2);
+            }
             KaigohokenShindanMeireishoReport report = KaigohokenShindanMeireishoReport.createFrom(itemlist);
             report.writeBy(reportSourceWriter);
         }

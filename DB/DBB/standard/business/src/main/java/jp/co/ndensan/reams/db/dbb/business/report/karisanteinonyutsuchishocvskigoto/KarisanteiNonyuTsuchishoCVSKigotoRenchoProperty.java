@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskigoto;
 
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvskigoto.KarisanteiNonyuTsuchishoCVSKigotoSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvskigoto.KarisanteiNonyuTsuchishoCVSMultiRenchoCoverSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  *
  * @reamsid_L DBB-9110-070 wangjie2
  */
-public class KarisanteiNonyuTsuchishoCVSKigotoRenchoProperty extends ReportPropertyBase<KarisanteiNonyuTsuchishoCVSKigotoSource> {
+public class KarisanteiNonyuTsuchishoCVSKigotoRenchoProperty extends ReportPropertyBase<KarisanteiNonyuTsuchishoCVSMultiRenchoCoverSource> {
 
     /**
      * コンストラクタです。

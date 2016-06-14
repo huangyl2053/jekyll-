@@ -9,10 +9,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.kanendononyutsuchishocvskakuko.KanendoNonyuTsuchishoCVSKakukoProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.kanendononyutsuchishocvskakuko.KanendoNonyuTsuchishoCVSKakukoReport;
-import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.kanendononyutsuchishocvskakuko.KanendoNonyuTsuchishoCVSKakukoSource;
-import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiSource;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
@@ -92,10 +90,10 @@ public class KanendoNonyuTsuchishoCVSKakukoPrintService {
      * @return SourceDataCollection
      */
     public SourceDataCollection devidedByPage(HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報) {
-        KarisanteiNonyuTsuchishoCVSMultiProperty property = new KarisanteiNonyuTsuchishoCVSMultiProperty();
+        KanendoNonyuTsuchishoCVSKakukoProperty property = new KanendoNonyuTsuchishoCVSKakukoProperty();
         try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<KarisanteiNonyuTsuchishoCVSMultiSource> assembler = createAssembler(property, reportManager)) {
-                ReportSourceWriter<KarisanteiNonyuTsuchishoCVSMultiSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            try (ReportAssembler<KanendoNonyuTsuchishoCVSKakukoSource> assembler = createAssembler(property, reportManager)) {
+                ReportSourceWriter<KanendoNonyuTsuchishoCVSKakukoSource> reportSourceWriter = new ReportSourceWriter(assembler);
 
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),

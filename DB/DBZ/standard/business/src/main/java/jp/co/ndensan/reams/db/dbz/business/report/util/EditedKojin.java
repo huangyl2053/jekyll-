@@ -106,6 +106,17 @@ public class EditedKojin {
     }
 
     /**
+     * 生年月日ForCsv(共通ポリシーパターン36（1989/ 1/ 8 ）)を返します。
+     *
+     * @return 生年月日ForCsv
+     */
+    public RString get生年月日Csv() {
+        return 個人.get生年月日().toFlexibleDate()
+                .seireki().separator(Separator.SLASH)
+                .fillType(FillType.BLANK).toDateString();
+    }
+
+    /**
      * 性別を返します。
      *
      * @return 性別

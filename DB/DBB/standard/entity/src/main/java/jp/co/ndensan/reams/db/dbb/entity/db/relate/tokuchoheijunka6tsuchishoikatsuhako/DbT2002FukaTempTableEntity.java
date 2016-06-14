@@ -9,10 +9,8 @@ import java.util.UUID;
 import jp.co.ndensan.reams.ca.cax.definition.valueobject.code.ShiharaiHohoCodeValue;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshaKubun;
 import jp.co.ndensan.reams.ue.uex.definition.core.RenkeiShubetsu;
 import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
-import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuGimushaCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuSeidoCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCode;
 import jp.co.ndensan.reams.ur.urz.definition.core.code.ZennoKubunCodeValue;
@@ -56,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
@@ -87,10 +86,13 @@ public class DbT2002FukaTempTableEntity extends DbTableEntityBase<DbT2002FukaTem
     @TempTableColumnOrder(8)
     private RString koseigo_lastUpdateReamsLoginId;
     @TempTableColumnOrder(9)
+    @PrimaryKey
     private FlexibleYear koseigo_choteiNendo;
     @TempTableColumnOrder(10)
+    @PrimaryKey
     private FlexibleYear koseigo_fukaNendo;
     @TempTableColumnOrder(11)
+    @PrimaryKey
     private TsuchishoNo koseigo_tsuchishoNo;
     @TempTableColumnOrder(12)
     private RString koseigo_koseiZengoKubun;
@@ -1435,7 +1437,7 @@ public class DbT2002FukaTempTableEntity extends DbTableEntityBase<DbT2002FukaTem
     @TempTableColumnOrder(681)
     private RString nenkinTokuchoKaifuJoho_dtCityCode;
     @TempTableColumnOrder(682)
-    private TokubetsuChoshuGimushaCode nenkinTokuchoKaifuJoho_dtTokubetsuChoshuGimushaCode;
+    private Code nenkinTokuchoKaifuJoho_dtTokubetsuChoshuGimushaCode;
     @TempTableColumnOrder(683)
     private TsuchiNaiyoCode nenkinTokuchoKaifuJoho_dtTsuchiNaiyoCode;
     @TempTableColumnOrder(684)
@@ -1515,6 +1517,6 @@ public class DbT2002FukaTempTableEntity extends DbTableEntityBase<DbT2002FukaTem
     private RString zennendoTokuchoKibetsuKingaku06;
     // 被保険者区分
     @TempTableColumnOrder(720)
-    private HihokenshaKubun hihokenshaKubun;
+    private RString hihokenshaKubun;
 
 }

@@ -34,7 +34,7 @@ public class ShujiiikenshoReport extends Report<ShujiiikenshoReportSource> {
      * @param reportSourceWriter 帳票Writer
      */
     @Override
-    protected void writeBy(ReportSourceWriter<ShujiiikenshoReportSource> reportSourceWriter) {
+    public void writeBy(ReportSourceWriter<ShujiiikenshoReportSource> reportSourceWriter) {
         IShujiiikenshoEditor editor = new ShujiiikenshoEditor(entity);
         IShujiiikenshoBuilder builder = new ShujiiikenshoBuilder(editor);
         reportSourceWriter.writeLine(builder);

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3560-090 wangjie2 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.roreifukushinenkinjoho.IRoreiFukushiNenkinJohoMapper">
+     <select id="get老齢福祉年金情報"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo"
+            fetchSize="500" resultOrdered="true">
+        SELECT A.*
+        FROM rgdb."DbT7006RoreiFukushiNenkinJukyusha" A
+        INNER JOIN rgdb."DbV1001HihokenshaDaicho" B
+              ON A."shikibetsuCode" = B."shikibetsuCode"
+        WHERE B."hihokenshaNo" = #{被保険者番号}
+        ORDER BY A."jukyuKaishiYMD" DESC
+    </select>
+</mapper>

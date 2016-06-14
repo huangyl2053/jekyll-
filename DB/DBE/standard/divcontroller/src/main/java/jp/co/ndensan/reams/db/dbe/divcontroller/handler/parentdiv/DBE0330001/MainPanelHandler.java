@@ -73,7 +73,7 @@ public class MainPanelHandler {
             if (youKaiGoNinTeiKekTesuChi.get認定状況提供日() == null || youKaiGoNinTeiKekTesuChi.get認定状況提供日().isEmpty()) {
                 認定状況提供日フラグ = true;
             } else {
-                認定状況提供日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get二次判定日().toString()));
+                認定状況提供日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get認定状況提供日().toString()));
             }
             TextBoxDate 生年月日 = new TextBoxDate();
             TextBoxDate 申請日 = new TextBoxDate();
@@ -117,6 +117,17 @@ public class MainPanelHandler {
                 .append(div.getPrintPanel().getRadPrintCondition().getSelectedKey());
         div.getPrintPanel().setHiddenitem(rsb.toRString());
         div.getDgResultList().setDataSource(rowList);
+    }
+
+    /**
+     * 「認定状況提供日未入力チェック」メッセジーの取得します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs getメッセジー_入力データなし() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.対象データなし_追加メッセージあり, "認定状況提供日")));
+        return validPairs;
     }
 
     /**

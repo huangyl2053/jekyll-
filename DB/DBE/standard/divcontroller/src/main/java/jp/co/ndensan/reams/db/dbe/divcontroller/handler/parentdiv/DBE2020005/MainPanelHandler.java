@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuNinteiChosainIdentifi
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -30,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -87,8 +85,9 @@ public class MainPanelHandler {
     /**
      * 調査地区一覧の行クリックします。
      *
+     * @return chikuNinteiChosain
      */
-    public void onClik_btnSelect() {
+    public Models<ChikuNinteiChosainIdentifier, ChikuNinteiChosain> onClik_btnSelect() {
         dgChosaChikuList_Row dgRow = div.getChosaChikuPanel().getDgChosaChikuList().getSelectedItems().get(0);
         ChosaChikuMapperParameter paramer = new ChosaChikuMapperParameter();
         paramer.setChosaChikuCode(dgRow.getChosaChikuCode());
@@ -99,7 +98,6 @@ public class MainPanelHandler {
                 get地区認定調査員情報(new Code(dgRow.getChosaChikuCode()), new LasdecCode(dgRow.getShichosonCode())).records();
         Models<ChikuNinteiChosainIdentifier, ChikuNinteiChosain> chikuNinteiChosain
                 = Models.create(地区認定調査員情報);
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録5_地区認定調査員情報, chikuNinteiChosain);
         List<dgNinteiChosainList_Row> rowList = new ArrayList<>();
         if (!businessList.isEmpty()) {
             div.getCcdKanryoMessage().setVisible(true);
@@ -120,6 +118,7 @@ public class MainPanelHandler {
             div.getNinteiChosainPanel().setChosaChikuCode(dgRow.getChosaChikuCode());
         }
         div.getNinteiChosainPanel().getDgNinteiChosainList().setDataSource(rowList);
+        return chikuNinteiChosain;
     }
 
     /**
@@ -411,12 +410,11 @@ public class MainPanelHandler {
     /**
      * 保存するボタンが押下します。
      *
+     * @param models models
      */
-    public void btnUpdate() {
+    public void btnUpdate(Models<ChikuNinteiChosainIdentifier, ChikuNinteiChosain> models) {
         前排他制御処理();
         List<dgNinteiChosainList_Row> rowList = div.getNinteiChosainPanel().getDgNinteiChosainList().getDataSource();
-        Models<ChikuNinteiChosainIdentifier, ChikuNinteiChosain> models
-                = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録5_地区認定調査員情報, Models.class);
         for (dgNinteiChosainList_Row list : rowList) {
             if (追加.equals(list.getJotai())) {
                 ChikuNinteiChosain chikuNinteiChosain = new ChikuNinteiChosain(new Code(div.getNinteiChosainPanel().getChosaChikuCode()),

@@ -70,15 +70,13 @@ public class TokuteifutanGendogakuShinseisho {
     private static final int INDEX_3 = 3;
     private static final RString 連番 = new RString("1");
     private final MapperProvider mapperProvider;
-    private final ITokuteifutanGendogakuShinseishoRelateMapper tokuteifutanRelateMapper;
 
     /**
      * コンストラクタ。
      *
      */
-    public TokuteifutanGendogakuShinseisho() {
+    TokuteifutanGendogakuShinseisho() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.tokuteifutanRelateMapper = mapperProvider.create(ITokuteifutanGendogakuShinseishoRelateMapper.class);
     }
 
     /**
@@ -86,10 +84,17 @@ public class TokuteifutanGendogakuShinseisho {
      *
      * @param mapperProvider mapper取得
      */
-    TokuteifutanGendogakuShinseisho(MapperProvider mapperProvider,
-            ITokuteifutanGendogakuShinseishoRelateMapper tokuteifutanRelateMapper) {
+    TokuteifutanGendogakuShinseisho(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
-        this.tokuteifutanRelateMapper = tokuteifutanRelateMapper;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link TokuteifutanGendogakuShinseisho}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link TokuteifutanGendogakuShinseisho}のインスタンス
+     */
+    public static TokuteifutanGendogakuShinseisho createInstance() {
+        return InstanceProvider.create(TokuteifutanGendogakuShinseisho.class);
     }
 
     /**
@@ -244,19 +249,24 @@ public class TokuteifutanGendogakuShinseisho {
     }
 
     private DbT1004ShisetsuNyutaishoEntity get施設情報の取得(ShikibetsuCode 識別コード) {
+        ITokuteifutanGendogakuShinseishoRelateMapper tokuteifutanRelateMapper = mapperProvider
+                .create(ITokuteifutanGendogakuShinseishoRelateMapper.class);
         DbT1004ShisetsuNyutaishoEntity entity = tokuteifutanRelateMapper
                 .get施設情報(TokuteifutanMybatisParam.create施設情報パラメータ(識別コード.value()));
         return entity;
     }
 
     private DbT7060KaigoJigyoshaEntity get介護事業者_事業者情報の取得(RString 入所施設コード) {
+        ITokuteifutanGendogakuShinseishoRelateMapper tokuteifutanRelateMapper = mapperProvider
+                .create(ITokuteifutanGendogakuShinseishoRelateMapper.class);
         DbT7060KaigoJigyoshaEntity entity = tokuteifutanRelateMapper.get事業者情報(TokuteifutanMybatisParam
                 .create介護事業者パラメータ(入所施設コード));
         return entity;
     }
 
     private DbT1005KaigoJogaiTokureiTaishoShisetsuEntity get介護除外住所地特例対象施設_事業者情報の取得(RString 入所施設コード) {
-
+        ITokuteifutanGendogakuShinseishoRelateMapper tokuteifutanRelateMapper = mapperProvider
+                .create(ITokuteifutanGendogakuShinseishoRelateMapper.class);
         DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity = tokuteifutanRelateMapper
                 .get介護除外住所地特例対象施設情報(TokuteifutanMybatisParam.create介護除外住所地特例対象施設パラメータ(入所施設コード));
         return entity;

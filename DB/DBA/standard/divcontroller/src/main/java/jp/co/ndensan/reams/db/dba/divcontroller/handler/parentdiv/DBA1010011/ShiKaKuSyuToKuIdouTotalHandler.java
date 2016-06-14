@@ -92,9 +92,11 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
         RStringBuilder rstrBuilder = new RStringBuilder("ShikakuShutokuIdo");
         if (被保険者番号 == null || 被保険者番号.isEmpty()) {
             HihokenshaNo hihokenshaNo = HihokenshanotsukibanFinder.createInstance().getHihokenshanotsukiban(識別コード);
-            if (hihokenshaNo == null || hihokenshaNo.isEmpty()) {
+            if (!(hihokenshaNo == null || hihokenshaNo.isEmpty())) {
                 rstrBuilder.append("HihokenshaNo");
             }
+        } else {
+            rstrBuilder.append("HihokenshaNo");
         }
         return rstrBuilder.toRString();
     }

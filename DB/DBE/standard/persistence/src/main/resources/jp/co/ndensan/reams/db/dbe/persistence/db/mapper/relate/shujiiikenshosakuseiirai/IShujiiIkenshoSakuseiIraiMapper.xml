@@ -85,13 +85,6 @@
     <sql id="selectJouken">
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS "DbT5101NinteiShinseiJoho"
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS "DbT5105NinteiShinseiJoho"
-        ON
-        "DbT5105NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
-        AND "DbT5105NinteiShinseiJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND "DbT5105NinteiShinseiJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL
-        AND "DbT5105NinteiShinseiJoho"."ninteiShinsakaiKanryoYMD" IS NULL
-        AND "DbT5105NinteiShinseiJoho"."centerSoshinYMD" IS NULL
 
         LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS "DbT7051KoseiShichosonMaster"
         ON
@@ -174,17 +167,6 @@
             FROM rgdb."DbT5203NinteichosahyoKihonChosa" NinteichosahyoKihonChosa
             WHERE NinteichosahyoKihonChosa."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
         </if>
-        <if test="useShujiiIkenshoIraiJoho">
-            LEFT JOIN
-            rgdb."DbT5301ShujiiIkenshoIraiJoho" DbT5301ShujiiIkenshoIraiJoho
-            ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
-            AND DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo" =
-            (SELECT MAX(ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo")
-            FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" ShujiiIkenshoIraiJoho
-            WHERE ShujiiIkenshoIraiJoho."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
-            AND ShujiiIkenshoIraiJoho."logicalDeletedFlag" = FALSE)
-            AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE
-        </if>
         <if test="useShujiiIkenshoJoho">
             LEFT JOIN
             rgdb."DbT5302ShujiiIkenshoJoho" DbT5302ShujiiIkenshoJoho
@@ -237,9 +219,6 @@
         "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE
         AND ("DbT5101NinteiShinseiJoho"."shoriJotaiKubun" = #{shoriJotaiKubunTsujo}
         OR  "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" = #{shoriJotaiKubunEnki})
-        <if test="useHihokenshaNo">
-            AND  "DbT5101NinteiShinseiJoho"."hihokenshaNo" = #{hihokenshaNo}
-        </if>
         <if test="useHihokenshaNo">
             AND "DbT5101NinteiShinseiJoho"."hihokenshaNo" = #{hihokenshaNo}
         </if>

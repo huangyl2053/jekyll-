@@ -217,10 +217,9 @@ public class NinteiChosainJikanMasterManager {
     @Transaction
     public void 更新(DbT5221NinteichosaScheduleEntity 変更前データ, DbT5221NinteichosaScheduleEntity 変更後データ) {
         変更後データ.setState(EntityDataState.Added);
+        変更前データ.setState(EntityDataState.Deleted);
         dac.saveOrDelete(変更前データ);
-        if (!EntityDataState.Added.equals(変更前データ.getState())) {
-            dac.save(変更後データ);
-        }
+        dac.save(変更後データ);
     }
 
     /**

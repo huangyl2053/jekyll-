@@ -5,13 +5,16 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchisho
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.KarisanteigakuTempTblUpdateProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.KoseimaeJohoUpdateProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.SystemTimeShutokuProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoA4TypeProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoB5TypeProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoIdoshaTorokuProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter;
-import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.FukaJohoShutokuProcessParameter;
+import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoIdoshaTorokuProcessParameter;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
+import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -35,18 +38,23 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
     private static final String 通知書の発行 = "tsuchishoHako";
     private static final String 通知書発行後異動者の登録 = "tsuchishoIdoshaToroku";
 
-    private static final RString BATCH_ID = new RString("KeisangoJohoSakusei");
+    private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
 
     @Override
     protected void defineFlow() {
 
-        executeStep(システム日時の取得);
-        executeStep(計算後情報作成);
+        if (getParameter().is一括発行フラグ()) {
+            executeStep(システム日時の取得);
+            executeStep(計算後情報作成);
+        }
+
         executeStep(仮算定額変更情報一時テーブル作成);
         executeStep(更正前情報の更新);
         executeStep(前年度賦課情報一時テーブル作成);
         executeStep(仮算定額変更情報一時テーブルの更新);
+
         executeStep(通知書の発行);
+
         executeStep(通知書発行後異動者の登録);
     }
 
@@ -69,10 +77,17 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
      */
     @Step(計算後情報作成)
     protected IBatchFlowCommand keisangoJohoSakusei() {
-        for (OutputChohyoIchiran 出力帳票entity : getParameter().get出力帳票entity()) {
-            return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課, getKeisangoJohoSakuseiBatchParamter(出力帳票entity.get帳票分類ID())).define();
+        int size = getParameter().get出力帳票entity().size();
+        if (size == 0) {
+            return null;
         }
-        return null;
+        OutputChohyoIchiran 出力帳票entity;
+        for (int i = 0; i < size - 1; i++) {
+            出力帳票entity = getParameter().get出力帳票entity().get(i);
+            otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課, getKeisangoJohoSakuseiBatchParamter(出力帳票entity.get帳票分類ID())).define();
+        }
+        出力帳票entity = getParameter().get出力帳票entity().get(size - 1);
+        return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課, getKeisangoJohoSakuseiBatchParamter(出力帳票entity.get帳票分類ID())).define();
     }
 
     /**
@@ -129,9 +144,24 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
      */
     @Step(通知書の発行)
     protected IBatchFlowCommand tsuchishoHako() {
-        return simpleBatch(TsuchishoHakoProcess.class)
-                .arguments(createChohyoHakkoParameter())
-                .define();
+        int size = getParameter().get出力帳票entity().size();
+        if (size == 0) {
+            return null;
+        }
+        OutputChohyoIchiran 出力帳票entity;
+        for (int i = 0; i < size - 1; i++) {
+            出力帳票entity = getParameter().get出力帳票entity().get(i);
+            if (ReportIdDBB.DBB100012.getReportId().getColumnValue().equals(出力帳票entity.get帳票ID())) {
+                loopBatch(TsuchishoHakoB5TypeProcess.class).arguments(create通知書発行パラメータ(出力帳票entity)).define();
+            } else {
+                loopBatch(TsuchishoHakoA4TypeProcess.class).arguments(create通知書発行パラメータ(出力帳票entity)).define();
+            }
+        }
+        出力帳票entity = getParameter().get出力帳票entity().get(size - 1);
+        if (ReportIdDBB.DBB100012.getReportId().getColumnValue().equals(出力帳票entity.get帳票ID())) {
+            return loopBatch(TsuchishoHakoB5TypeProcess.class).arguments(create通知書発行パラメータ(出力帳票entity)).define();
+        }
+        return loopBatch(TsuchishoHakoA4TypeProcess.class).arguments(create通知書発行パラメータ(出力帳票entity)).define();
     }
 
     /**
@@ -142,7 +172,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
     @Step(通知書発行後異動者の登録)
     protected IBatchFlowCommand tsuchishoIdoshaToroku() {
         return simpleBatch(TsuchishoIdoshaTorokuProcess.class)
-                .arguments(createChohyoHakkoParameter())
+                .arguments(createTsuchishoIdoshaTorokuProcessParameter())
                 .define();
     }
 
@@ -163,17 +193,35 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
         return parameter;
     }
 
-    private TsuchishoHakoProcessParameter createChohyoHakkoParameter() {
+    private TsuchishoIdoshaTorokuProcessParameter createTsuchishoIdoshaTorokuProcessParameter() {
 
-        TsuchishoHakoProcessParameter parameter = new TsuchishoHakoProcessParameter();
+        TsuchishoIdoshaTorokuProcessParameter parameter = new TsuchishoIdoshaTorokuProcessParameter();
         parameter.set出力対象区分(getParameter().get出力対象指示フラグ());
         parameter.set調定年度(getParameter().get調定年度());
         parameter.set賦課年度(getParameter().get賦課年度());
         parameter.set発行日(getParameter().get発行日());
-        parameter.set帳票作成日時(getResult(RDateTime.class, new RString(システム日時の取得), SystemTimeShutokuProcess.KIJUN_TIME));
+        parameter.set帳票作成日時(getResult(RDateTime.class, new RString(システム日時の取得), SystemTimeShutokuProcess.SYSTEM_TIME));
+        parameter.set基準日時(getResult(RString.class, new RString(システム日時の取得), SystemTimeShutokuProcess.KIJUN_TIME));
         parameter.set出力帳票entity(getParameter().get出力帳票entity());
 
         return parameter;
+    }
+
+    private TsuchishoHakoProcessParameter create通知書発行パラメータ(OutputChohyoIchiran 出力帳票entity) {
+
+        TsuchishoHakoProcessParameter param = new TsuchishoHakoProcessParameter();
+
+        param.set帳票分類ID(出力帳票entity.get帳票分類ID());
+        param.set調定年度(getParameter().get調定年度());
+        param.set賦課年度(getParameter().get賦課年度());
+        param.set出力対象区分(Integer.valueOf(getParameter().get出力対象指示フラグ().toString()));
+        param.set発行日(getParameter().get発行日());
+        param.set帳票作成日時(getResult(RDateTime.class, new RString(システム日時の取得), SystemTimeShutokuProcess.SYSTEM_TIME));
+        param.set出力順ID(出力帳票entity.get出力順ID());
+        param.set帳票ID(出力帳票entity.get帳票ID());
+        param.set一括発行フラグ(getParameter().is一括発行フラグ());
+
+        return param;
     }
 
 }

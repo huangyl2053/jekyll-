@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho;
 
-import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.karisanteiidotsuchisho.SeikatsuHogoTaishosha;
-import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.karisanteiidotsuchisho.TaishoshaKubun;
+import jp.co.ndensan.reams.db.dbb.definition.core.karisanteiidotsuchisho.SeikatsuHogoTaishosha;
+import jp.co.ndensan.reams.db.dbb.definition.core.karisanteiidotsuchisho.TaishoshaKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.NonNull;
 

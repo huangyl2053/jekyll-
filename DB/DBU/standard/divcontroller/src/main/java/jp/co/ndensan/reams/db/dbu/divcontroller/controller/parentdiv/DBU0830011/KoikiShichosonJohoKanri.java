@@ -12,12 +12,11 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0830011.Koi
 import jp.co.ndensan.reams.db.dbu.service.core.koikishichosonjohokanri.KoikiShichosonJohoKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -34,8 +33,6 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class KoikiShichosonJohoKanri {
 
     private static final LockingKey LOCKINGKEY = new LockingKey(UrControlDataFactory.createInstance().getMenuID());
-    private static final QuestionMessage SYORIMESSAGE = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-            UrQuestionMessages.処理実行の確認.getMessage().evaluate());
 
     /**
      * 広域システム管理を初期化します。
@@ -44,11 +41,11 @@ public class KoikiShichosonJohoKanri {
      * @return ResponseData<KoikiShichosonJohoKanriDiv>
      */
     public ResponseData<KoikiShichosonJohoKanriDiv> onLoad(KoikiShichosonJohoKanriDiv div) {
+        if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
+            throw new PessimisticLockingException();
+        }
         List<KoseiShichosonMaster> masterList = KoikiShichosonJohoKanriManager.createInstance().get広域市町村一覧().records();
         getHandler(div).onLoad(masterList);
-        if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
-        }
         return ResponseData.of(div).setState(DBU0830011StateName.初期状態);
     }
 
@@ -75,7 +72,8 @@ public class KoikiShichosonJohoKanri {
      */
     public ResponseData<KoikiShichosonJohoKanriDiv> onClick_btnUpdate(KoikiShichosonJohoKanriDiv requestDiv) {
         if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(requestDiv).addMessage(SYORIMESSAGE).respond();
+            return ResponseData.of(requestDiv).addMessage(new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                    UrQuestionMessages.処理実行の確認.getMessage().evaluate())).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
@@ -132,7 +130,9 @@ public class KoikiShichosonJohoKanri {
      */
     public ResponseData<KoikiShichosonJohoKanriDiv> onClick_btnComplete(KoikiShichosonJohoKanriDiv requestDiv) {
         RealInitialLocker.release(LOCKINGKEY);
-        return ResponseData.of(requestDiv).respond();
+        requestDiv.getKanryoMessage().getCcdKaigoKanryoMessage().setMessage(new RString("広域市町村制御メンテナンス_保存処理は正常に行われました。"),
+                RString.EMPTY, RString.EMPTY, true);
+        return ResponseData.of(requestDiv).setState(DBU0830011StateName.完了状態);
     }
 
     private KoikiShichosonJohoKanriHandler getHandler(KoikiShichosonJohoKanriDiv div) {

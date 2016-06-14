@@ -182,6 +182,12 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
      * @return ResponseData
      */
     public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onClick_btnBatchRegisterCheck(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
+        if (div.getPrintPanel().getTxtNinteiJokyoTeikyoYMD().getValue() == null) {
+            ValidationMessageControlPairs validPairs = getHandler(div).getメッセジー_入力データなし();
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+        }
         if (div.getDgResultList().getDataSource().isEmpty()) {
             ValidationMessageControlPairs validPairs = getHandler(div).getメッセジー_対象データなし();
             if (validPairs.iterator().hasNext()) {

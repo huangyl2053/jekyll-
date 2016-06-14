@@ -14,11 +14,14 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5052KoseiShichosonShis
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 構成市町村支所マスタを管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-021 chengsanyuan
  */
 public class KoseiShichosonShishoMasterManager {
 
@@ -38,6 +41,15 @@ public class KoseiShichosonShishoMasterManager {
      */
     KoseiShichosonShishoMasterManager(DbT5052KoseiShichosonShishoMasterDac dac) {
         this.dac = dac;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link KoseiShichosonShishoMasterManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link KoseiShichosonShishoMasterManager}のインスタンス
+     */
+    public static KoseiShichosonShishoMasterManager createInstance() {
+        return InstanceProvider.create(KoseiShichosonShishoMasterManager.class);
     }
 
     /**
@@ -79,6 +91,22 @@ public class KoseiShichosonShishoMasterManager {
         }
 
         return businessList;
+    }
+
+    /**
+     * 市町村コードで構成市町村支所マスタを取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return KoseiShichosonShishoMasterの{@code list}
+     */
+    @Transaction
+    public SearchResult<KoseiShichosonShishoMaster> get構成市町村支所マスタ一覧By市町村コード(LasdecCode 市町村コード) {
+        List<KoseiShichosonShishoMaster> businessList = new ArrayList<>();
+        for (DbT5052KoseiShichosonShishoMasterEntity entity : dac.selectByShichosonCode(市町村コード)) {
+            entity.initializeMd5();
+            businessList.add(new KoseiShichosonShishoMaster(entity));
+        }
+        return SearchResult.of(businessList, 0, false);
     }
 
     /**

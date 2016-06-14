@@ -27,6 +27,7 @@ public final class Dbb100012MyBatisOrderByClauseCreator {
     private static RStringBuilder orderByClause;
     private static RString space;
     private static RString comma;
+    private static RString quote;
     private static int commaCount;
     private static int index5;
 
@@ -49,6 +50,7 @@ public final class Dbb100012MyBatisOrderByClauseCreator {
         orderByClause = new RStringBuilder("");
         space = new RString(" ");
         comma = new RString(",");
+        quote = new RString("\"");
         commaCount = 0;
         index5 = 5;
         if (outputOrder.get設定項目リスト().isEmpty()) {
@@ -65,12 +67,12 @@ public final class Dbb100012MyBatisOrderByClauseCreator {
             }
 
             if (commaCount != 0) {
-                orderByClause = orderByClause.append(space).append(comma).append(space)
-                        .append(reportItems.getMyBatis項目名(setSortItem.get項目ID())).append(space).append(setSortItem.get昇降順().getOrder());
+                orderByClause = orderByClause.append(space).append(comma).append(space).append(quote)
+                        .append(reportItems.getMyBatis項目名(setSortItem.get項目ID())).append(quote).append(space).append(setSortItem.get昇降順().getOrder());
 
             } else {
-                orderByClause = new RStringBuilder("order by").append(space)
-                        .append(reportItems.getMyBatis項目名(setSortItem.get項目ID())).append(space).append(setSortItem.get昇降順().getOrder());
+                orderByClause = new RStringBuilder("order by").append(space).append(quote)
+                        .append(reportItems.getMyBatis項目名(setSortItem.get項目ID())).append(quote).append(space).append(setSortItem.get昇降順().getOrder());
             }
             commaCount++;
         }

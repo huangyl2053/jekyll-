@@ -7,19 +7,19 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.KiwarigakuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.IKiwarigakuDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * FukakonkyoAndKiwari のクラスファイル
- *
+ * FukakonkyoAndKiwari のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class FukakonkyoAndKiwariDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -277,7 +277,7 @@ public class FukakonkyoAndKiwariDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTblKikan1(tblKikan1Div tblKikan1) {
+    public void  setTblKikan1(tblKikan1Div tblKikan1) {
         this.getTblFukaKonkyo().getKikan().setTblKikan1(tblKikan1);
     }
 
@@ -307,11 +307,6 @@ public class FukakonkyoAndKiwariDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblHokenryo() {
-        return this.getTblFukaKonkyo().getKikan().getTblKikan1().getLblHokenryo();
-    }
-
-    @JsonIgnore
     public Label getLblKikan1() {
         return this.getTblFukaKonkyo().getKikan().getTblKikan1().getLblKikan1();
     }
@@ -337,17 +332,12 @@ public class FukakonkyoAndKiwariDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblHokenryo1() {
-        return this.getTblFukaKonkyo().getKikan().getTblKikan1().getLblHokenryo1();
-    }
-
-    @JsonIgnore
     public tblKikan2Div getTblKikan2() {
         return this.getTblFukaKonkyo().getKikan().getTblKikan2();
     }
 
     @JsonIgnore
-    public void setTblKikan2(tblKikan2Div tblKikan2) {
+    public void  setTblKikan2(tblKikan2Div tblKikan2) {
         this.getTblFukaKonkyo().getKikan().setTblKikan2(tblKikan2);
     }
 
@@ -374,11 +364,6 @@ public class FukakonkyoAndKiwariDiv extends Panel {
     @JsonIgnore
     public Label getLblHokenryoSansyutsu2() {
         return this.getTblFukaKonkyo().getKikan().getTblKikan2().getLblHokenryoSansyutsu2();
-    }
-
-    @JsonIgnore
-    public Label getLblHokenryo2() {
-        return this.getTblFukaKonkyo().getKikan().getTblKikan2().getLblHokenryo2();
     }
 
     @JsonIgnore

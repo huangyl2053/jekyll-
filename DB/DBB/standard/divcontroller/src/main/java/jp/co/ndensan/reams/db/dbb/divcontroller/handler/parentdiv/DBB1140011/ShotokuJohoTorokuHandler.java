@@ -124,8 +124,10 @@ public final class ShotokuJohoTorokuHandler {
         ShikibetsuCode 識別コード = viewStateData.get識別コード();
         FlexibleYear 所得年度 = viewStateData.get賦課年度();
         YMDHMS 所得基準日時 = YMDHMS.now();
-        KaigoFukaKihonSearchKey searchKey = new KaigoFukaKihonSearchKey.Builder(通知書番号, 賦課年度, 市町村コード, 識別コード).build();
-        div.getKaigoFukaKihon().load(searchKey);
+        if (null != 通知書番号 && !TsuchishoNo.EMPTY.equals(通知書番号)) {
+            KaigoFukaKihonSearchKey searchKey = new KaigoFukaKihonSearchKey.Builder(通知書番号, 賦課年度, 市町村コード, 識別コード).build();
+            div.getKaigoFukaKihon().load(searchKey);
+        }
         div.getKaigoAtenaInfo().onLoad(識別コード);
         load世帯所得情報一覧(識別コード, 所得年度, 所得基準日時, true);
         日付関連_所得年度コンフィグによる制御(div.getSetaiShotokuInfo().getTxtSetaiIchiranKazeiNendo().getDomain());

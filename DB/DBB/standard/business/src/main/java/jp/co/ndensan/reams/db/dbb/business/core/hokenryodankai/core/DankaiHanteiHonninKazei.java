@@ -16,7 +16,13 @@ class DankaiHanteiHonninKazei implements IHanteiHoho {
 
     @Override
     public boolean matches(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
-        return hokenryoDankaiHanteiParameter.getFukaKonkyo().getHonninKazeiKubun().equals(KazeiKubun.valueOf("課税"));
+        if (!hokenryoDankaiHanteiParameter.getFukaKonkyo().getSetaiinKazeiKubunList().isEmpty()) {
+            for (KazeiKubun honninKazeiKubun : hokenryoDankaiHanteiParameter.getFukaKonkyo().getSetaiinKazeiKubunList()) {
+                if (KazeiKubun.課税.getコード().equals(honninKazeiKubun.getコード())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
-
 }

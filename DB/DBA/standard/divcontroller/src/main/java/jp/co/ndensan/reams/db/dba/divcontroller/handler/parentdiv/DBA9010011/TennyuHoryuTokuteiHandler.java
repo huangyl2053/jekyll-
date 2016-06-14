@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.RendoHoryuTokuteiJusho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RendoHoryuTokuteiJushoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RendoHoryuTokuteiJushoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ShichosonInput.ShichosonInputDiv;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
@@ -32,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
@@ -50,7 +48,6 @@ public class TennyuHoryuTokuteiHandler {
     private static final RString 保存 = new RString("TennyuHozon");
     private static final RString 市町村コード = new RString("txtShichosonCode");
     private static final RString 市町村名称 = new RString("txtShichosonName");
-    private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
     private static final int 桁数_5 = 5;
 
     /**
@@ -75,7 +72,6 @@ public class TennyuHoryuTokuteiHandler {
         div.getCcdShichousonInputGuide().load(RString.EMPTY);
         div.getCcdJushoInputGuide().initialize();
         div.getCcdBunchiInput().initialize();
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, 台帳種別表示無し);
         div.getCcdSisetuInputGuide().initialize();
         List<ddlTennyuHoryuTokuteiJushoIchiran_Row> dgKoufuKaishuList = new ArrayList<>();
         if (businessList != null && !businessList.isEmpty()) {
@@ -118,7 +114,6 @@ public class TennyuHoryuTokuteiHandler {
         div.getCcdShichousonInputGuide().clear();
         div.getCcdJushoInputGuide().clear();
         div.getCcdBunchiInput().clear();
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, 台帳種別表示無し);
         div.getCcdSisetuInputGuide().clear();
         div.getTennyuHoryuTokuteiJushoNyuryoku().setTxtJotai(追加);
         div.getCcdShichousonInputGuide().setInputMode(ShichosonInputDiv.InputMode.名称及びコード);
@@ -218,8 +213,6 @@ public class TennyuHoryuTokuteiHandler {
                 dgKoufuKaishuList.set(rowcount, row);
             }
         }
-        clearValue();
-        div.getBtnKakutei().setDisabled(true);
     }
 
     /**
@@ -266,11 +259,10 @@ public class TennyuHoryuTokuteiHandler {
     /**
      * 転入保留特定住所一覧を設定します。
      *
+     * @param models models
      */
-    public void onClick_SaveButton() {
+    public void onClick_SaveButton(Models<RendoHoryuTokuteiJushoIdentifier, RendoHoryuTokuteiJusho> models) {
         List<ddlTennyuHoryuTokuteiJushoIchiran_Row> dgKoufuKaishuList = div.getDdlTennyuHoryuTokuteiJushoIchiran().getDataSource();
-        Models<RendoHoryuTokuteiJushoIdentifier, RendoHoryuTokuteiJusho> models
-                = ViewStateHolder.get(ViewStateKeys.転入保留特定住所一覧情報, Models.class);
         TennyuHoryuTokuteiManager manager = TennyuHoryuTokuteiManager.createInstance();
         for (ddlTennyuHoryuTokuteiJushoIchiran_Row list : dgKoufuKaishuList) {
             if (RowState.Added.equals(list.getRowState())) {
@@ -313,14 +305,5 @@ public class TennyuHoryuTokuteiHandler {
                 manager.insertOrUpdateOrDel(rendoHoryu);
             }
         }
-    }
-
-    private void clearValue() {
-        div.getCcdShichousonInputGuide().clear();
-        div.getCcdJushoInputGuide().clear();
-        div.getCcdBunchiInput().clear();
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, 台帳種別表示無し);
-        div.getCcdSisetuInputGuide().clear();
-        div.getTennyuHoryuTokuteiJushoNyuryoku().setDisabled(true);
     }
 }

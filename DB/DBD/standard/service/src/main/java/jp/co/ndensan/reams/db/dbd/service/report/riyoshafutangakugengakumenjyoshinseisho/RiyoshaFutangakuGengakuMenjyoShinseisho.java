@@ -216,7 +216,7 @@ public class RiyoshaFutangakuGengakuMenjyoShinseisho {
         DbT4001JukyushaDaichoEntity 受給者台帳情報 = 受給者台帳Dac.select受給者台帳情報(shikibetsuTaisho.get現全国地方公共団体コード(),
                 被保険者番号,
                 new Code(YukoMukoKubun.有効.getコード()));
-        if (受給者台帳情報.getKyuSochishaFlag()) {
+        if (受給者台帳情報 != null && 受給者台帳情報.getKyuSochishaFlag()) {
             return new RString("（特別療養老人ホームの要介護旧措置入所者に関する認定申請）");
         }
         return RString.EMPTY;

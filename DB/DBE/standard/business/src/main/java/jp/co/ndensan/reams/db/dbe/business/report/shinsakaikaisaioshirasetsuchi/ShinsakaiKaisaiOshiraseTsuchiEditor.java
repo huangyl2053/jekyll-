@@ -48,7 +48,6 @@ class ShinsakaiKaisaiOshiraseTsuchiEditor implements IShinsakaiKaisaiOshiraseTsu
     private ShinsakaiKaisaiOshiraseTsuchiReportSource editHeader(ShinsakaiKaisaiOshiraseTsuchiReportSource source) {
         source.bunshoNo = item.get文書番号();
         source.hakkoYMD1 = getパターン9(item.get発行日());
-        source.denshiKoin = item.get電子公印();
         source.yubinNo = item.get宛名郵便番号();
         source.jushoText = item.get宛名住所();
         source.kikanNameText = item.get宛名機関名();

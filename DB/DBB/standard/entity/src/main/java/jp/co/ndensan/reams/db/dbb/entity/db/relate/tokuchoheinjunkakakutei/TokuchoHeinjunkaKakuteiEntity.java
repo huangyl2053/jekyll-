@@ -76,10 +76,6 @@ public class TokuchoHeinjunkaKakuteiEntity {
     private LasdecCode 平準化前賦課市町村コード;
     private Decimal 平準化前特徴歳出還付額;
     private Decimal 平準化前普徴歳出還付額;
-    private RString 平準化前徴収方法;
-    private int 平準化前期;
-    private Decimal 平準化前調定ID;
-    private Decimal 平準化前調定額;
     private Decimal 平準化前特徴期別金額01;
     private Decimal 平準化前特徴期別金額02;
     private Decimal 平準化前特徴期別金額03;
@@ -150,10 +146,6 @@ public class TokuchoHeinjunkaKakuteiEntity {
     private LasdecCode 賦課市町村コード;
     private Decimal 特徴歳出還付額;
     private Decimal 普徴歳出還付額;
-    private RString 徴収方法;
-    private int 期;
-    private Decimal 調定ID;
-    private Decimal 調定額;
     private Decimal 特徴期別金額01;
     private Decimal 特徴期別金額02;
     private Decimal 特徴期別金額03;
@@ -174,5 +166,7 @@ public class TokuchoHeinjunkaKakuteiEntity {
     private Decimal 普徴期別金額12;
     private Decimal 普徴期別金額13;
     private Decimal 普徴期別金額14;
+    private RString 調定ID;
+    private RString 収納ID;
 
 }

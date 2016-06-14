@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.DBE5
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.KaigoNinteiShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100001.KaigoNinteiShinsakaiValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.介護認定審査会共有一覧_開催番号;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -173,7 +174,8 @@ public class KaigoNinteiShinsakai {
     private ValidationMessageControlPairs check_審査会選択(KaigoNinteiShinsakaiDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         validationMessages.add(createValidationHandler(div).審査会データ空チェック());
-        validationMessages.add(createValidationHandler(div).審査会未選択チェック_選択());
+        validationMessages.add(createValidationHandler(div).
+                審査会未選択チェック_選択(ViewStateHolder.get(介護認定審査会共有一覧_開催番号, RString.class)));
         return validationMessages;
     }
 
@@ -197,7 +199,7 @@ public class KaigoNinteiShinsakai {
         state.put(メニューID_介護認定審査会審査対象データ出力, DBE5100001StateName.データ出力_モバイル);
         state.put(メニューID_介護認定審査会対象者割付, DBE5100001StateName.対象者割付);
         state.put(メニューID_介護認定審査会資料作成, DBE5100001StateName.審査会資料);
-        state.put(メニューID_介護認定審査会委員事前審査結果登録, DBE5100001StateName.事前結果登録);
+        state.put(メニューID_介護認定審査会委員事前審査結果登録, DBE5100001StateName.事前審査結果登録);
         state.put(メニューID_審査会開催結果登録, DBE5100001StateName.審査結果登録);
         state.put(メニューID_審査会審査結果登録, DBE5100001StateName.審査結果登録);
         state.put(メニューID_介護認定審査会審査結果データ取込み, DBE5100001StateName.データ取込み_モバイル);

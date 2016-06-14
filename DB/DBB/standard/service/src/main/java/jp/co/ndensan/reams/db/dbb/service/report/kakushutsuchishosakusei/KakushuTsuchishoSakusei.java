@@ -304,13 +304,18 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
             return 徴収方法_併徴;
         } else if (特徴フラグ) {
             return 徴収方法_特徴のみ;
+        } else if (普徴フラグ) {
+            return 徴収方法_普徴のみ;
         }
-        return 徴収方法_普徴のみ;
+        return RString.EMPTY;
     }
 
     private boolean get方法フラグ(List<Decimal> 期別金額List) {
 
         for (Decimal 期別金額 : 期別金額List) {
+            if (期別金額 == null) {
+                continue;
+            }
             if (期別金額.compareTo(Decimal.ONE) != 定値) {
                 return true;
             }

@@ -27,39 +27,35 @@ public class KarisanteiNonyuTsuchishoCVSKigotoReport extends INonyuTsuchisho<Kar
 
     private final KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報;
     private final NinshoshaSource ninshoshaSource;
-    private final boolean is連帳;
 
     /**
      * コンストラクタです。
      *
      * @param 仮算定納入通知書情報 仮算定納入通知書情報
      * @param ninshoshaSource 認証者情報
-     * @param is連帳 is連帳
      */
     protected KarisanteiNonyuTsuchishoCVSKigotoReport(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報,
-            NinshoshaSource ninshoshaSource, boolean is連帳) {
+            NinshoshaSource ninshoshaSource) {
         this.仮算定納入通知書情報 = 仮算定納入通知書情報;
         this.ninshoshaSource = ninshoshaSource;
-        this.is連帳 = is連帳;
     }
 
     /**
      *
      * @param 仮算定納入通知書情報 仮算定納入通知書情報
      * @param ninshoshaSource 認証者情報
-     * @param is連帳 is連帳
      * @return KarisanteiNonyuTsuchishoCVSKigotoReport
      * @throws NullPointerException 引数が{@code null}の時
      */
     public static KarisanteiNonyuTsuchishoCVSKigotoReport createFrom(
-            @NonNull KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, NinshoshaSource ninshoshaSource, boolean is連帳) {
-        return new KarisanteiNonyuTsuchishoCVSKigotoReport(仮算定納入通知書情報, ninshoshaSource, is連帳);
+            @NonNull KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, NinshoshaSource ninshoshaSource) {
+        return new KarisanteiNonyuTsuchishoCVSKigotoReport(仮算定納入通知書情報, ninshoshaSource);
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KarisanteiNonyuTsuchishoCVSKigotoSource> reportSourceWriter) {
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 仮算定納入通知書情報.get納入通知書期情報リスト();
-        if (納入通知書期情報リスト.isEmpty()) {
+        if (null == 納入通知書期情報リスト) {
             納入通知書期情報リスト = new ArrayList<>();
         }
         int 連番 = 1;
@@ -68,7 +64,7 @@ public class KarisanteiNonyuTsuchishoCVSKigotoReport extends INonyuTsuchisho<Kar
                 continue;
             }
             IKarisanteiNonyuTsuchishoCVSKigotoEditor editor
-                    = new KarisanteiNonyuTsuchishoCVSKigotoEditor(仮算定納入通知書情報, ninshoshaSource, 納入通知書期情報, 連番, is連帳);
+                    = new KarisanteiNonyuTsuchishoCVSKigotoEditor(仮算定納入通知書情報, ninshoshaSource, 納入通知書期情報, 連番);
             IKarisanteiNonyuTsuchishoCVSKigotoBuilder builder = new KarisanteiNonyuTsuchishoCVSKigotoBuilder(editor);
             reportSourceWriter.writeLine(builder);
             連番++;
@@ -95,7 +91,7 @@ public class KarisanteiNonyuTsuchishoCVSKigotoReport extends INonyuTsuchisho<Kar
             仮算定納入通知書情報Report.set編集範囲区分(HenshuHaniKubun.全てのレイアウト);
             仮算定納入通知書情報Report.set納入通知書期情報リスト(納入通知書期情報リストReport);
             KarisanteiNonyuTsuchishoCVSKigotoReport report
-                    = KarisanteiNonyuTsuchishoCVSKigotoReport.createFrom(仮算定納入通知書情報Report, ninshoshaSource, is連帳);
+                    = KarisanteiNonyuTsuchishoCVSKigotoReport.createFrom(仮算定納入通知書情報Report, ninshoshaSource);
             reportLst.add(report);
         }
         return reportLst;

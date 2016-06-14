@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishi
  * @reamsid_L DBE-1300-110 yaodongsheng
  */
 public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinseiTodokedeshaDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -54,7 +54,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
     @JsonProperty("txtKanaShimei")
     private TextBox txtKanaShimei;
     @JsonProperty("txtHonninKankeisei")
-    private TextBoxCode txtHonninKankeisei;
+    private TextBox txtHonninKankeisei;
     @JsonProperty("radKannaiKangai")
     private RadioButton radKannaiKangai;
     @JsonProperty("txtTelNo")
@@ -281,7 +281,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
      * @return txtHonninKankeisei
      */
     @JsonProperty("txtHonninKankeisei")
-    public TextBoxCode getTxtHonninKankeisei() {
+    public TextBox getTxtHonninKankeisei() {
         return txtHonninKankeisei;
     }
 
@@ -290,7 +290,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
      * @param txtHonninKankeisei txtHonninKankeisei
      */
     @JsonProperty("txtHonninKankeisei")
-    public void setTxtHonninKankeisei(TextBoxCode txtHonninKankeisei) {
+    public void setTxtHonninKankeisei(TextBox txtHonninKankeisei) {
         this.txtHonninKankeisei = txtHonninKankeisei;
     }
 

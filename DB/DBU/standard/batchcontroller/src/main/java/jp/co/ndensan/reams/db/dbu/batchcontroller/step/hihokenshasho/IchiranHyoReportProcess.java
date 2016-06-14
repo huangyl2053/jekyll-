@@ -24,11 +24,8 @@ import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashohakkoichiranhyo.Hiho
 import jp.co.ndensan.reams.db.dbz.business.core.mybatisorderbycreator.BreakPageCreator;
 import jp.co.ndensan.reams.db.dbz.business.core.mybatisorderbycreator.MyBatisOrderByCreator;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -142,61 +139,28 @@ public class IchiranHyoReportProcess extends BatchKeyBreakBase<IkkatsuHakkoRelat
                 entity.get交付_非交付事由());
     }
 
-    private IOutputOrder get出力順() {
-        IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
-        if (!RString.isNullOrEmpty(processPrm.getShutsuryokujunId())) {
-            IOutputOrder shutsuryokujunId = chohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBA介護資格,
-                    帳票ID,
-                    reamsLoginID,
-                    Long.valueOf(processPrm.getShutsuryokujunId().toString()));
-            if (shutsuryokujunId != null) {
-                return shutsuryokujunId;
-            }
-        }
-        return null;
-    }
-
     private void getSQLOrderBy() {
-        IOutputOrder shutsuryokujunId = get出力順();
-        if (shutsuryokujunId != null) {
-            RString orderBy = MyBatisOrderByCreator.createWithOutOrderBy(IchiranHyoReportShutsuryoItem.class, shutsuryokujunId);
-            mybatisPrm = IkkatsuHakkoMybatisParameter.
-                    createSelectByKeyParam(processPrm.getShutsuryokuJokenCode(),
-                            getKonkaiYMDHMS(processPrm.getKonkaiFromYMD(), processPrm.getKonkaiFromHMS()),
-                            processPrm.getKonkaiToYMD(),
-                            getKonkaiYMDHMS(processPrm.getKonkaiToYMD(), processPrm.getKonkaiToHMS()),
-                            processPrm.getKonkaiKijunYMD(),
-                            getKonkaiYMDHMS(processPrm.getKonkaiKijunYMD(), processPrm.getKonkaiKijunHMS()),
-                            processPrm.getKofuYMD(),
-                            processPrm.getShinseishoKanriNo(),
-                            processPrm.getSeinengappiToYMD(),
-                            processPrm.getSeinengappiFromYMD(),
-                            processPrm.getHihokenshaNo(),
-                            processPrm.getShikibetsuCode(),
-                            processPrm.getPsmShikibetsuTaisho(),
-                            processPrm.getPsmAtesaki(),
-                            processPrm.getNenreiTotatsuYMD(),
-                            orderBy);
-        } else {
-            mybatisPrm = IkkatsuHakkoMybatisParameter.
-                    createSelectByKeyParam(processPrm.getShutsuryokuJokenCode(),
-                            getKonkaiYMDHMS(processPrm.getKonkaiFromYMD(), processPrm.getKonkaiFromHMS()),
-                            processPrm.getKonkaiToYMD(),
-                            getKonkaiYMDHMS(processPrm.getKonkaiToYMD(), processPrm.getKonkaiToHMS()),
-                            processPrm.getKonkaiKijunYMD(),
-                            getKonkaiYMDHMS(processPrm.getKonkaiKijunYMD(), processPrm.getKonkaiKijunHMS()),
-                            processPrm.getKofuYMD(),
-                            processPrm.getShinseishoKanriNo(),
-                            processPrm.getSeinengappiToYMD(),
-                            processPrm.getSeinengappiFromYMD(),
-                            processPrm.getHihokenshaNo(),
-                            processPrm.getShikibetsuCode(),
-                            processPrm.getPsmShikibetsuTaisho(),
-                            processPrm.getPsmAtesaki(),
-                            processPrm.getNenreiTotatsuYMD(),
-                            RString.EMPTY);
-        }
+        IOutputOrder shutsuryokujunId = ReportUtil.get出力順ID(SubGyomuCode.DBA介護資格,
+                processPrm.getShutsuryokujunId(),
+                帳票ID);
+        RString orderBy = MyBatisOrderByCreator.createWithOutOrderBy(IchiranHyoReportShutsuryoItem.class, shutsuryokujunId);
+        mybatisPrm = IkkatsuHakkoMybatisParameter.
+                createSelectByKeyParam(processPrm.getShutsuryokuJokenCode(),
+                        getKonkaiYMDHMS(processPrm.getKonkaiFromYMD(), processPrm.getKonkaiFromHMS()),
+                        processPrm.getKonkaiToYMD(),
+                        getKonkaiYMDHMS(processPrm.getKonkaiToYMD(), processPrm.getKonkaiToHMS()),
+                        processPrm.getKonkaiKijunYMD(),
+                        getKonkaiYMDHMS(processPrm.getKonkaiKijunYMD(), processPrm.getKonkaiKijunHMS()),
+                        processPrm.getKofuYMD(),
+                        processPrm.getShinseishoKanriNo(),
+                        processPrm.getSeinengappiToYMD(),
+                        processPrm.getSeinengappiFromYMD(),
+                        processPrm.getHihokenshaNo(),
+                        processPrm.getShikibetsuCode(),
+                        processPrm.getPsmShikibetsuTaisho(),
+                        processPrm.getPsmAtesaki(),
+                        processPrm.getNenreiTotatsuYMD(),
+                        orderBy);
     }
 
     private RDateTime getKonkaiYMDHMS(FlexibleDate konkaiYMD, RTime konkaiHMS) {

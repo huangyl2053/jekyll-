@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.kyodoshorijukyushaidorenrakuhyo;
 
+import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.KyodoshoriyoJukyushaIdoRenrakuhyoEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodoshoriyojukyushaidorenrakuhyo.KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodoshoriyojukyushaidorenrakuhyo.KyodoshoriyoJukyushaIdoRenrakuhyoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -34,10 +34,10 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoToroku {
      */
     public KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity editKyodoshoriyoJukyushaIdoRenrakuhyo(
             KyodoshoriyoJukyushaIdoRenrakuhyoEntity divEntity) {
-        KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity 共同処理用受給者異動連絡票Entity = new KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity();
         if (divEntity == null) {
-            return 共同処理用受給者異動連絡票Entity;
+            return null;
         }
+        KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity 共同処理用受給者異動連絡票Entity = new KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity();
         共同処理用受給者異動連絡票Entity.set作成年月日(FlexibleDate.getNowDate());
         if (divEntity.get共通項目Entity() != null) {
 
@@ -55,8 +55,6 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoToroku {
             共同処理用受給者異動連絡票Entity.set住所(divEntity.get基本情報Entity().getAddress());
             共同処理用受給者異動連絡票Entity.set住所カナ(divEntity.get基本情報Entity().getDdressKana());
             共同処理用受給者異動連絡票Entity.set帳票出力順序コード(divEntity.get基本情報Entity().getChohyoOutputJunjyoCode());
-            共同処理用受給者異動連絡票Entity.set訂正区分(divEntity.get基本情報Entity().getTeiseiKubunCode());
-            共同処理用受給者異動連絡票Entity.set訂正年月日(divEntity.get基本情報Entity().getTeiseiYMD());
         }
         if (divEntity.get償還情報Entity() != null) {
             共同処理用受給者異動連絡票Entity.set償還送付情報_異動年月日(divEntity.get償還情報Entity().getIdoYMD());

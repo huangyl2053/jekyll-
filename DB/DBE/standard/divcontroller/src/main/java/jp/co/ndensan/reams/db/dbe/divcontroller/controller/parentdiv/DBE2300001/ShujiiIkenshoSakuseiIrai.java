@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJohoBuilder;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2Builder;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2Identifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshosakuseiirai.ShujiiIraiAtenaJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoHeaderItem;
@@ -102,12 +102,6 @@ public class ShujiiIkenshoSakuseiIrai {
     private static final int 数字_8 = 8;
     private static final int 数字_9 = 9;
     private static final int 数字_10 = 10;
-    private static final int 数字_11 = 11;
-    private static final int 数字_12 = 12;
-    private static final int 数字_13 = 13;
-    private static final int 数字_14 = 14;
-    private static final int 数字_15 = 15;
-    private static final int 数字_16 = 16;
     private static final int 数字_17 = 17;
     private static final RString 帳票発行 = new RString("btnHakkou");
     private static final RString 意見書作成料_種別 = new RString("✔");
@@ -183,7 +177,7 @@ public class ShujiiIkenshoSakuseiIrai {
         createHandler(div).init(manager.get申請者情報(param).records());
         Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報
                 = Models.create(manager.get主治医意見書作成依頼情報(param).records());
-        Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> 要介護認定申請情報
+        Models<NinteiShinseiJoho2Identifier, NinteiShinseiJoho2> 要介護認定申請情報
                 = Models.create(manager.get要介護認定申請情報(param).records());
         ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼_主治医意見書作成依頼情報, 主治医意見書作成依頼情報);
         ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼_要介護認定申請情報, 要介護認定申請情報);
@@ -336,7 +330,7 @@ public class ShujiiIkenshoSakuseiIrai {
     }
 
     private void toHozon(ShujiiIkenshoSakuseiIraiDiv div) {
-        Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> 要介護認定申請情報
+        Models<NinteiShinseiJoho2Identifier, NinteiShinseiJoho2> 要介護認定申請情報
                 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼_要介護認定申請情報, Models.class);
         Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報
                 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼_主治医意見書作成依頼情報, Models.class);
@@ -352,9 +346,9 @@ public class ShujiiIkenshoSakuseiIrai {
                 }
                 manager.save主治医意見書作成依頼情報(
                         create主治医意見書作成依頼情報(row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数, rirekiNo), EntityDataState.Added);
-                NinteiShinseiJoho shinseiJoho = 要介護認定申請情報.get(new NinteiShinseiJohoIdentifier(
+                NinteiShinseiJoho2 shinseiJoho = 要介護認定申請情報.get(new NinteiShinseiJoho2Identifier(
                         new ShinseishoKanriNo(row.getShiseishoKanriNo())));
-                NinteiShinseiJohoBuilder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
+                NinteiShinseiJoho2Builder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
                 shinseiJohoBuilder.set主治医医療機関コード(row.getShujiiIryoKikanCode());
                 shinseiJohoBuilder.set主治医コード(row.getShujiiCode());
                 shinseiJohoBuilder.set指定医フラグ(row.getShiteiiFlag());
@@ -370,9 +364,9 @@ public class ShujiiIkenshoSakuseiIrai {
                 manager.save主治医意見書作成依頼情報(
                         create主治医意見書作成依頼情報(row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数,
                                 Integer.parseInt(row.getRirekiNo().toString()) + 1), EntityDataState.Added);
-                NinteiShinseiJoho shinseiJoho = 要介護認定申請情報.get(new NinteiShinseiJohoIdentifier(
+                NinteiShinseiJoho2 shinseiJoho = 要介護認定申請情報.get(new NinteiShinseiJoho2Identifier(
                         new ShinseishoKanriNo(row.getShiseishoKanriNo())));
-                NinteiShinseiJohoBuilder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
+                NinteiShinseiJoho2Builder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
                 shinseiJohoBuilder.set主治医医療機関コード(row.getShujiiIryoKikanCode());
                 shinseiJohoBuilder.set主治医コード(row.getShujiiCode());
                 shinseiJohoBuilder.set指定医フラグ(row.getShiteiiFlag());
@@ -754,24 +748,9 @@ public class ShujiiIkenshoSakuseiIrai {
                         SubGyomuCode.DBE認定支援, ReportIdDBE.DBE235001.getReportId(), KamokuCode.EMPTY, 数字_1).get(数字_1);
         通知文定型文 = 通知文定型文.padRight(RString.HALF_SPACE, 数字_17);
         item.setTsuchibun1(通知文定型文.substring(数字_0, 数字_1));
-        item.setTsuchibun2(通知文定型文.substring(数字_1, 数字_2));
-        item.setTsuchibun3(通知文定型文.substring(数字_2, 数字_3));
-        item.setTsuchibun4(通知文定型文.substring(数字_3, 数字_4));
-        item.setTsuchibun5(通知文定型文.substring(数字_4, 数字_5));
-        item.setTsuchibun6(通知文定型文.substring(数字_5, 数字_6));
-        item.setTsuchibun7(通知文定型文.substring(数字_6, 数字_7));
-        item.setTsuchibun8(通知文定型文.substring(数字_7, 数字_8));
-        item.setTsuchibun9(通知文定型文.substring(数字_8, 数字_9));
-        item.setTsuchibun10(通知文定型文.substring(数字_9, 数字_10));
-        item.setTsuchibun11(通知文定型文.substring(数字_10, 数字_11));
-        item.setTsuchibun12(通知文定型文.substring(数字_11, 数字_12));
-        item.setTsuchibun13(通知文定型文.substring(数字_12, 数字_13));
-        item.setTsuchibun14(通知文定型文.substring(数字_13, 数字_14));
-        item.setTsuchibun15(通知文定型文.substring(数字_14, 数字_15));
-        item.setTsuchibun16(通知文定型文.substring(数字_15, 数字_16));
-        item.setTsuchibun17(通知文定型文.substring(数字_16));
+        item.setTsuchibun2(通知文定型文.substring(数字_1));
         item.setHihokenshaNo(row.getHihokenshaNo());
-        item.setHihokenshaName(row.getHihokennshaShimei());
+        item.setHihokenshaName2(row.getHihokennshaShimei());
         item.setIryokikanName(row.getShujiiIryoKikan());
         item.setTantoIshiName(row.getShujii());
         item.setIryokikanJusho(row.getIryoukikanShozaichi());

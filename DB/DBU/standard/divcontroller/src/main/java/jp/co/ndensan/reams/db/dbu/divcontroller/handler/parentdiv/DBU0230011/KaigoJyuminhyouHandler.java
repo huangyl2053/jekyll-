@@ -10,15 +10,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyokobetsukoikiunyo.KaigoJuminhyoKobetsuKoikiunyo;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0230011.KobetsuJikoRenkeiInfoSakuseiKoikiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0230011.dgKobetsuJikoRenkeiInfoSakuseiKoik_Row;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -178,15 +174,6 @@ public class KaigoJyuminhyouHandler {
                 dgRow.getTxtKonkaiStSakuseiTime().setValue(div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().getValue());
                 dgRowList.set(rowcount, dgRow);
                 div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().setDataSource(dgRowList);
-            } else if ((div.getKonkaiInfoInput().getTxtZenkaiChushutsuToYMD().getValue() == null
-                    && div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().getValue() != null)
-                    || (RDateTime.of(div.getKonkaiInfoInput().getTxtZenkaiChushutsuToYMD().getValue().toDateString(),
-                            div.getKonkaiInfoInput().getTxtZenkaiChushutsuToTime().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
-                    .isBefore(RDateTime.of(div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().getValue().toDateString(),
-                                    div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().getValue()
-                                    .toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))))) {
-                throw new ApplicationException(DbzErrorMessages.期間が不正_未来日付不可.getMessage()
-                        .replace("今回開始日と今回開始時", "前回終了日と前回終了時").evaluate());
             } else {
                 div.getKonkaiInfoInput().setIsOpen(false);
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);

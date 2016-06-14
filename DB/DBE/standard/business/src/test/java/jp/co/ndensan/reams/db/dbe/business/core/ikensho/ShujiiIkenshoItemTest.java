@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ikensho;
 
+import java.util.Arrays;
 import jp.co.ndensan.reams.db.dbe.business.core.ChoiceItem;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemGroup;
@@ -172,7 +173,7 @@ public class ShujiiIkenshoItemTest extends DbeTestBase {
                 flg == AS_意見書項目番号がNULL ? null : new ShujiiIkenshoItemNo(new RString("3-2")),
                 flg == AS_意見書項目区分がNULL ? null : ShujiiIkenshoItemKubun.短期記憶,
                 flg == AS_表示名称がNULL ? null : new RString("短期記憶"),
-                flg == AS_回答項目がNULL ? null : new ChoiceItem(ChoiceResultItem.MondaiNashiAri.values()),
+                flg == AS_回答項目がNULL ? null : new ChoiceItem(Arrays.asList(ChoiceResultItem.MondaiNashiAri.values())),
                 flg == AS_主要意見書項目 ? true : false);
     }
 }

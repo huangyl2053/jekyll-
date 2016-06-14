@@ -23,11 +23,11 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 滞納情報Entityのクラスです。
  *
- * @reamsid_L DBD-5620-060 liangbc
+ * @reamsid_L DBD-3620-060 liangbc
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class TainoKiSummary implements Comparable<TainoKiSummary> {
+public final class TainoKiSummary {
 
     private final FlexibleYear 賦課年度;
     private final FlexibleYear 調定年度;
@@ -180,16 +180,4 @@ public final class TainoKiSummary implements Comparable<TainoKiSummary> {
             return JikoKubun.空;
         }
     }
-
-    @Override
-    public int compareTo(TainoKiSummary o) {
-        if (this.get調定年度().isBefore(o.get調定年度())) {
-            return 1;
-        } else if (this.get調定年度().equals(o.get調定年度())) {
-            return 0;
-        } else {
-            return -1;
-        }
-    }
-
 }

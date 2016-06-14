@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.service.core.shisetsu.ShisetsuJohoInputGuideFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -153,7 +152,7 @@ public class ShisetsuJohoHandler {
             div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
             ShisetsuJohoInputGuideFinder shisetsuJoho = new ShisetsuJohoInputGuideFinder();
             SearchResult<KaigoJigyoshaInputGuide> kaigoJigyosha = shisetsuJoho.getKaigoJigyoshaInputGuide(
-                    new JigyoshaNo(div.getTxtNyuryokuShisetsuKodo().getValue()), FlexibleDate.getNowDate());
+                    new JigyoshaNo(div.getTxtNyuryokuShisetsuKodo().getValue()));
             if (!kaigoJigyosha.records().isEmpty()) {
                 div.getTxtNyuryokuShisetsuMeisho().setValue(kaigoJigyosha.records().get(0).get事業者名称().value());
                 div.getTxtNyuryokuShisetsuKodo().setValue(kaigoJigyosha.records().get(0).get事業者番号().value());
@@ -181,8 +180,7 @@ public class ShisetsuJohoHandler {
             div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
             ShisetsuJohoInputGuideFinder shisetsuJoho = new ShisetsuJohoInputGuideFinder();
             SearchResult<KaigoJogaiTokureiTaishoShisetsuInputGuide> kaigoJogaiTokureiTaisho = shisetsuJoho.
-                    getKaigoJogaiTokureiTaishoShisetsuInputGuide(JigyosyaType.住所地特例対象施設.getコード(),
-                            new JigyoshaNo(div.getTxtNyuryokuShisetsuKodo().getValue()), FlexibleDate.getNowDate());
+                    getKaigoJogaiTokureiTaishoShisetsuInputGuide(JigyosyaType.住所地特例対象施設.getコード());
             if (!kaigoJogaiTokureiTaisho.records().isEmpty()) {
 
                 div.getTxtNyuryokuShisetsuMeisho().setValue(kaigoJogaiTokureiTaisho.records().get(0).get事業者名称().value());
@@ -204,8 +202,7 @@ public class ShisetsuJohoHandler {
             div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
             ShisetsuJohoInputGuideFinder shisetsuJoho = new ShisetsuJohoInputGuideFinder();
             SearchResult<KaigoJogaiTokureiTaishoShisetsuInputGuide> kaigoJogaiTokureiTaisho = shisetsuJoho.
-                    getKaigoJogaiTokureiTaishoShisetsuInputGuide(JigyosyaType.適用除外施設.getコード(),
-                            new JigyoshaNo(div.getTxtNyuryokuShisetsuKodo().getValue()), FlexibleDate.getNowDate());
+                    getKaigoJogaiTokureiTaishoShisetsuInputGuide(JigyosyaType.適用除外施設.getコード());
             if (!kaigoJogaiTokureiTaisho.records().isEmpty()) {
 
                 div.getTxtNyuryokuShisetsuMeisho().setValue(kaigoJogaiTokureiTaisho.records().get(0).get事業者名称().value());
@@ -358,8 +355,7 @@ public class ShisetsuJohoHandler {
             div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
             div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
             ShisetsuJohoInputGuideFinder shisetsuJoho = new ShisetsuJohoInputGuideFinder();
-            SearchResult<KaigoJigyoshaInputGuide> kaigoJigyosha = shisetsuJoho.getKaigoJigyoshaInputGuide(
-                    入所施設コード, FlexibleDate.getNowDate());
+            SearchResult<KaigoJigyoshaInputGuide> kaigoJigyosha = shisetsuJoho.getKaigoJigyoshaInputGuide(入所施設コード);
             if (!kaigoJigyosha.records().isEmpty()) {
                 div.getTxtNyuryokuShisetsuMeisho().setValue(kaigoJigyosha.records().get(0).get事業者名称().value());
                 div.getTxtNyuryokuShisetsuKodo().setValue(kaigoJigyosha.records().get(0).get事業者番号().value());
@@ -387,8 +383,7 @@ public class ShisetsuJohoHandler {
             div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
             ShisetsuJohoInputGuideFinder shisetsuJoho = new ShisetsuJohoInputGuideFinder();
             SearchResult<KaigoJogaiTokureiTaishoShisetsuInputGuide> kaigoJogaiTokureiTaisho = shisetsuJoho.
-                    getKaigoJogaiTokureiTaishoShisetsuInputGuide(ShisetsuType.住所地特例対象施設.getコード(),
-                            入所施設コード, FlexibleDate.getNowDate());
+                    getKaigoJogaiTokureiTaishoShisetsuInputGuide(ShisetsuType.住所地特例対象施設.getコード());
             if (!kaigoJogaiTokureiTaisho.records().isEmpty()) {
 
                 div.getTxtNyuryokuShisetsuMeisho().setValue(kaigoJogaiTokureiTaisho.records().get(0).get事業者名称().value());
@@ -410,8 +405,7 @@ public class ShisetsuJohoHandler {
             div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
             ShisetsuJohoInputGuideFinder shisetsuJoho = new ShisetsuJohoInputGuideFinder();
             SearchResult<KaigoJogaiTokureiTaishoShisetsuInputGuide> kaigoJogaiTokureiTaisho = shisetsuJoho.
-                    getKaigoJogaiTokureiTaishoShisetsuInputGuide(ShisetsuType.適用除外施設.getコード(),
-                            入所施設コード, FlexibleDate.getNowDate());
+                    getKaigoJogaiTokureiTaishoShisetsuInputGuide(ShisetsuType.適用除外施設.getコード());
             if (!kaigoJogaiTokureiTaisho.records().isEmpty()) {
 
                 div.getTxtNyuryokuShisetsuMeisho().setValue(kaigoJogaiTokureiTaisho.records().get(0).get事業者名称().value());
