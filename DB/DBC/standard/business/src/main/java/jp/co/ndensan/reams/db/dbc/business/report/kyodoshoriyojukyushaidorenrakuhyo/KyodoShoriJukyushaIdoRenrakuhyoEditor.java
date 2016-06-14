@@ -39,9 +39,11 @@ public class KyodoShoriJukyushaIdoRenrakuhyoEditor implements IKyodoShoriJukyush
     private static final RString 定数_02 = new RString("02");
     private static final RString 定数_03 = new RString("03");
     private static final RString 定数_99 = new RString("99");
-    private static final RString セット = new RString("○");
+    private static final RString FORMAT_MARU = new RString("○");
+    private static final RString SPIT = new RString("-");
     private static final int INDEX_0 = 0;
     private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
     private static final int INDEX_32 = 32;
     private static final int INDEX_38 = 38;
 
@@ -86,7 +88,7 @@ public class KyodoShoriJukyushaIdoRenrakuhyoEditor implements IKyodoShoriJukyush
         TelNo 電話番号 = targets.get電話番号();
         source.telNo = 電話番号 != null ? 電話番号.value() : RString.EMPTY;
         YubinNo 郵便番号 = targets.get郵便番号();
-        source.yubinNo = 郵便番号 != null ? 郵便番号.value() : RString.EMPTY;
+        source.yubinNo = get郵便番号(郵便番号);
         source.ichiSashiKingaku = DecimalFormatter
                 .toコンマ区切りRString(targets.get一時差止金額(), 0);
         HihokenshaNo 世帯主被保険者番号 = targets.get世帯主被保険者番号();
@@ -104,12 +106,13 @@ public class KyodoShoriJukyushaIdoRenrakuhyoEditor implements IKyodoShoriJukyush
             異動年月日 = targets.get高額送付情報_異動年月日();
         }
         FillTypeFormatted 異動年月日Format = dateFormat(異動年月日);
-        source.idoGG = 異動年月日Format != null ? 異動年月日Format.getEra() : RString.EMPTY;
-        RString 異動年 = 異動年月日Format != null ? 異動年月日Format.getYear() : null;
-        source.idoYY = (異動年 != null && 異動年.length() >= INDEX_2)
-                ? 異動年.substring(異動年.length() - INDEX_2, 異動年.length()) : RString.EMPTY;
-        source.idoMM = 異動年月日Format != null ? 異動年月日Format.getMonth() : RString.EMPTY;
-        source.idoDD = 異動年月日Format != null ? 異動年月日Format.getDay() : RString.EMPTY;
+        if (異動年月日Format != null) {
+            source.idoGG = 異動年月日Format.getEra();
+            RString 異動年 = 異動年月日Format.getYear();
+            source.idoYY = getYear(異動年);
+            source.idoMM = 異動年月日Format.getMonth();
+            source.idoDD = 異動年月日Format.getDay();
+        }
 
     }
 
@@ -129,84 +132,87 @@ public class KyodoShoriJukyushaIdoRenrakuhyoEditor implements IKyodoShoriJukyush
 
     private void set年月日(KyodoShoriJukyushaIdoRenrakuhyoSource source) {
         FillTypeFormatted 作成年月日 = dateFormat(targets.get作成年月日());
-        source.sakuseiGG = 作成年月日 != null ? 作成年月日.getEra() : RString.EMPTY;
-        RString 作成年 = 作成年月日 != null ? 作成年月日.getYear() : null;
-        source.sakuseiYY = (作成年 != null && 作成年.length() >= INDEX_2)
-                ? 作成年.substring(作成年.length() - INDEX_2, 作成年.length()) : RString.EMPTY;
-        source.sakuseiMM = 作成年月日 != null ? 作成年月日.getMonth() : RString.EMPTY;
-        source.sakuseiDD = 作成年月日 != null ? 作成年月日.getDay() : RString.EMPTY;
+        if (作成年月日 != null) {
+            source.sakuseiGG = 作成年月日.getEra();
+            RString 作成年 = 作成年月日.getYear();
+            source.sakuseiYY = getYear(作成年);
+            source.sakuseiMM = 作成年月日.getMonth();
+            source.sakuseiDD = 作成年月日.getDay();
+        }
         FillTypeFormatted 開始年月日 = dateFormat(targets.get開始年月日());
-        source.kaishiGG = 開始年月日 != null ? 開始年月日.getEra() : RString.EMPTY;
-        RString 開始年 = 開始年月日 != null ? 開始年月日.getYear() : null;
-        source.kaishiYY = (開始年 != null && 開始年.length() >= INDEX_2)
-                ? 開始年.substring(開始年.length() - INDEX_2, 開始年.length()) : RString.EMPTY;
-        source.kaishiMM = 開始年月日 != null ? 開始年月日.getMonth() : RString.EMPTY;
-        source.kaishiDD = 開始年月日 != null ? 開始年月日.getDay() : RString.EMPTY;
+        if (開始年月日 != null) {
+
+            source.kaishiGG = 開始年月日.getEra();
+            RString 開始年 = 開始年月日.getYear();
+            source.kaishiYY = getYear(開始年);
+            source.kaishiMM = 開始年月日.getMonth();
+            source.kaishiDD = 開始年月日.getDay();
+        }
         FillTypeFormatted 終了年月日 = dateFormat(targets.get終了年月日());
-        source.shuryoGG = 終了年月日 != null ? 終了年月日.getEra() : RString.EMPTY;
-        RString 終了年 = 終了年月日 != null ? 終了年月日.getYear() : null;
-        source.shuryoYY = (終了年 != null && 終了年.length() >= INDEX_2)
-                ? 終了年.substring(終了年.length() - INDEX_2, 終了年.length()) : RString.EMPTY;
-        source.shuryoMM = 終了年月日 != null ? 終了年月日.getMonth() : RString.EMPTY;
-        source.shuryoDD = 終了年月日 != null ? 終了年月日.getDay() : RString.EMPTY;
+        if (終了年月日 != null) {
+            source.shuryoGG = 終了年月日.getEra();
+            RString 終了年 = 終了年月日.getYear();
+            source.shuryoYY = getYear(終了年);
+            source.shuryoDD = 終了年月日.getDay();
+        }
     }
 
     private void set異動事由区分(KyodoShoriJukyushaIdoRenrakuhyoSource source) {
         if (定数_1.equals(targets.get異動区分())) {
-            source.ichiSashiKbn1 = セット;
-            source.idoKbn1 = セット;
-        } else if (定数_2.equals(targets.get区分())) {
-            source.ichiSashiKbn2 = セット;
-            source.idoKbn2 = セット;
+            source.ichiSashiKbn1 = FORMAT_MARU;
+        }
+        if (定数_2.equals(targets.get区分())) {
+            source.ichiSashiKbn2 = FORMAT_MARU;
         }
         if (定数_01.equals(targets.get異動事由())) {
-            source.idoJiyu1 = セット;
+            source.idoJiyu1 = FORMAT_MARU;
         } else if (定数_02.equals(targets.get異動事由())) {
-            source.idoJiyu2 = セット;
+            source.idoJiyu2 = FORMAT_MARU;
         } else if (定数_03.equals(targets.get異動事由())) {
-            source.idoJiyu3 = セット;
+            source.idoJiyu3 = FORMAT_MARU;
         } else if (定数_99.equals(targets.get異動事由())) {
-            source.idoJiyu4 = セット;
+            source.idoJiyu4 = FORMAT_MARU;
         }
     }
 
     private void set世帯所得区分(KyodoShoriJukyushaIdoRenrakuhyoSource source) {
         if (定数_1.equals(targets.get世帯所得区分())) {
-            source.setaiShotokuKbn1 = セット;
+            source.setaiShotokuKbn1 = FORMAT_MARU;
         } else if (定数_2.equals(targets.get世帯所得区分())) {
-            source.setaiShotokuKbn2 = セット;
+            source.setaiShotokuKbn2 = FORMAT_MARU;
         } else if (定数_3.equals(targets.get世帯所得区分())) {
-            source.setaiShotokuKbn3 = セット;
+            source.setaiShotokuKbn3 = FORMAT_MARU;
         } else if (定数_4.equals(targets.get世帯所得区分())) {
-            source.setaiShotokuKbn4 = セット;
+            source.setaiShotokuKbn4 = FORMAT_MARU;
         }
         if (定数_1.equals(targets.get所得区分())) {
-            source.shotokuKbn1 = セット;
+            source.shotokuKbn1 = FORMAT_MARU;
         } else if (定数_2.equals(targets.get所得区分())) {
-            source.shotokuKbn2 = セット;
+            source.shotokuKbn2 = FORMAT_MARU;
         } else if (定数_3.equals(targets.get所得区分())) {
-            source.shotokuKbn3 = セット;
+            source.shotokuKbn3 = FORMAT_MARU;
         } else if (定数_4.equals(targets.get所得区分())) {
-            source.shotokuKbn4 = セット;
+            source.shotokuKbn4 = FORMAT_MARU;
         }
 
     }
 
     private void set利用者負担(KyodoShoriJukyushaIdoRenrakuhyoSource source) {
+        // QA:865
         if (!targets.is利用者負担第２段階()) {
-            source.riyoshaFutan1 = セット;
+            source.riyoshaFutan1 = FORMAT_MARU;
         } else {
-            source.riyoshaFutan2 = セット;
+            source.riyoshaFutan2 = FORMAT_MARU;
         }
         if (!targets.is老齢福祉年金受給の有無()) {
-            source.roreiUmu1 = セット;
+            source.roreiUmu1 = FORMAT_MARU;
         } else {
-            source.roreiUmu2 = セット;
+            source.roreiUmu2 = FORMAT_MARU;
         }
         if (!targets.is支給申請書出力の有無()) {
-            source.shikyuUmu1 = セット;
+            source.shikyuUmu1 = FORMAT_MARU;
         } else {
-            source.shikyuUmu2 = セット;
+            source.shikyuUmu2 = FORMAT_MARU;
         }
     }
 
@@ -217,5 +223,27 @@ public class KyodoShoriJukyushaIdoRenrakuhyoEditor implements IKyodoShoriJukyush
         return date.wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
                 .fillType(FillType.ZERO);
+    }
+
+    private RString getYear(RString 年) {
+        RString year = RString.EMPTY;
+        if (年 != null && INDEX_2 <= 年.length()) {
+            year = 年.substring(年.length() - INDEX_2, 年.length());
+        }
+        return year;
+    }
+
+    private RString get郵便番号(YubinNo 郵便番号) {
+        if (郵便番号 == null) {
+            return RString.EMPTY;
+        }
+        RString 郵便番号format = RString.EMPTY;
+        if (郵便番号.value().length() > INDEX_3) {
+            郵便番号format = 郵便番号.value().substring(INDEX_0, INDEX_3).concat(SPIT)
+                    .concat(郵便番号.value().substring(INDEX_3, 郵便番号.value().length()));
+        } else if (郵便番号.value().length() == INDEX_3) {
+            郵便番号format = 郵便番号.value();
+        }
+        return 郵便番号format;
     }
 }
