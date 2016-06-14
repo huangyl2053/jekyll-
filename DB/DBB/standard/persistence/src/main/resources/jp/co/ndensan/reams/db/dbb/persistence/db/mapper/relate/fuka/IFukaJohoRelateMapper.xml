@@ -6,13 +6,13 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper">
 
-    <select id="select賦課の情報ByKey" resultMap="resultMap_FukaInfo" 
+    <select resultOrdered="true" id="select賦課の情報ByKey" resultMap="resultMap_FukaInfo" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fukajoho.FukaJohoRelateMapperParameter"
             fetchSize="500">
         <include refid="selectFukaJohoRelateEntity" />
     </select>
 
-    <select id="select賦課の情報リストBy主キー1" resultMap="resultMap_FukaInfo" fetchSize="500">
+    <select resultOrdered="true" id="select賦課の情報リストBy主キー1" resultMap="resultMap_FukaInfo" fetchSize="500">
         <include refid="selectFukaJohoRelateEntity" />
     </select>
 
@@ -72,7 +72,7 @@
         <collection property="調定共通Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
     </resultMap>
 
-    <select id="select前年度賦課の情報ByKey" resultMap="resultMap_FukaInfo"
+    <select resultOrdered="true" id="select前年度賦課の情報ByKey" resultMap="resultMap_FukaInfo"
             parameterType="java.util.Map" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
@@ -144,7 +144,7 @@
         AND "DbT2003Kibetsu"."choteiId" = "UrT0705ChoteiKyotsu"."choteiId"
         AND "DbT2002Fuka"."hihokenshaNo" = #{hihokenshaNo}
     </select>
-    <select id="get賦課の情報" resultMap="resultMap_FukaInfo"
+    <select resultOrdered="true" id="get賦課の情報" resultMap="resultMap_FukaInfo"
             parameterType="java.util.Map" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
@@ -173,7 +173,7 @@
         "DbT2003Kibetsu"."ki"
     </select>
     
-    <select id="get平準化後の賦課の情報_画面" resultMap="resultMap_FukaInfo"
+    <select resultOrdered="true" id="get平準化後の賦課の情報_画面" resultMap="resultMap_FukaInfo"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.HeinjunkaAfterParameter" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
@@ -268,7 +268,7 @@
         <result property="tkSaishutsuKampuGaku" column="dbV2002Fuka_tkSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="fuSaishutsuKampuGaku" column="dbV2002Fuka_fuSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    <select id="get平準化後の賦課の情報" resultMap="resultMap_Fuka"
+    <select resultOrdered="true" id="get平準化後の賦課の情報" resultMap="resultMap_Fuka"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.HeinjunkaAfterParameter" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbV2002FukaMapper.allColumns_DbV2002Fuka"/>,

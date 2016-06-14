@@ -22,7 +22,7 @@
         <association property="介護期別Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
         <collection property="調定共通Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
     </resultMap>
-    <select id="get更正前後賦課の情報" resultMap="resultMap_KakushuTsuchisho"
+    <select resultOrdered="true" id="get更正前後賦課の情報" resultMap="resultMap_KakushuTsuchisho"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kakushutsuchishosakusei.KakushuTsuchishoEntityParameter" 
             fetchSize="500">
         SELECT
@@ -77,7 +77,7 @@
         <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
     </resultMap>
     
-    <select id="get宛名納組宛先口座" resultMap="resultMap_KakushuTsuchishoFind"
+    <select resultOrdered="true" id="get宛名納組宛先口座" resultMap="resultMap_KakushuTsuchishoFind"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kakushutsuchishosakusei.KakushuTsuchishoEntityParameter" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
@@ -119,7 +119,7 @@
         <association property="調定共通介護継承" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
     </resultMap>
     
-    <select id="get減免の情報更正後" resultMap="resultMap_GenmenInfo"
+    <select resultOrdered="true" id="get減免の情報更正後" resultMap="resultMap_GenmenInfo"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kakushutsuchishosakusei.KakushuTsuchishoEntityParameter" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
@@ -160,7 +160,7 @@
             "DbT2004Gemmen"."sakuseiKubun" = '2')))
     </select>
     
-    <select id="get減免の情報更正後_取消" resultMap="resultMap_GenmenInfo"
+    <select resultOrdered="true" id="get減免の情報更正後_取消" resultMap="resultMap_GenmenInfo"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kakushutsuchishosakusei.KakushuTsuchishoEntityParameter" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
@@ -207,7 +207,7 @@
         <association property="調定共通介護継承" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
     </resultMap>
     
-    <select id="get徴収猶予の情報更正後" resultMap="resultMap_ChoshuYuyoInfo"
+    <select resultOrdered="true" id="get徴収猶予の情報更正後" resultMap="resultMap_ChoshuYuyoInfo"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kakushutsuchishosakusei.KakushuTsuchishoEntityParameter" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
@@ -261,7 +261,7 @@
             "DbT2007KibetsuChoshuYuyo"."ki"
     </select>
     
-    <select id="get徴収猶予の情報更正後_取消" resultMap="resultMap_ChoshuYuyoInfo"
+    <select resultOrdered="true" id="get徴収猶予の情報更正後_取消" resultMap="resultMap_ChoshuYuyoInfo"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kakushutsuchishosakusei.KakushuTsuchishoEntityParameter" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
@@ -318,7 +318,7 @@
         <association property="介護賦課" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
     </resultMap>
     
-    <select id="get前年度賦課の情報" resultMap="resultMap_LastYearFuka"
+    <select resultOrdered="true" id="get前年度賦課の情報" resultMap="resultMap_LastYearFuka"
             parameterType="java.util.Map" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
@@ -391,7 +391,7 @@
             AND "DbT2002Fuka"."hihokenshaNo" = #{hihokenshaNo}
     </select>
     
-     <select id="get代納人の宛名情報" resultType="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity"
+     <select resultOrdered="true" id="get代納人の宛名情報" resultType="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity"
             parameterType="java.util.Map" fetchSize="500">
         SELECT
             宛名.*

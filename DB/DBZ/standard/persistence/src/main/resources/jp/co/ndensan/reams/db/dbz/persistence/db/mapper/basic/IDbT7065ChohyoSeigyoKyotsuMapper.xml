@@ -107,10 +107,14 @@
         DbT7065."chohyoBunruiMeisho" 
 	FROM
 	rgdb."DbT7065ChohyoSeigyoKyotsu" AS DbT7065
-       WHERE
-        <foreach collection="帳票分類ID" item="code" open="(" separator="OR" close=")" >
-              DbT7065."chohyoBunruiID"= #{code}  
-        </foreach>
-       AND DbT7065."subGyomuCode" = #{サブ業務コード}
+      WHERE
+        <if test="帳票分類IDフラグ">
+         DbT7065."chohyoBunruiID" IN
+        <foreach collection="帳票分類ID" item="code" open="(" separator="," close=")">
+              #{code}  
+        </foreach> 
+        AND
+        </if>
+        DbT7065."subGyomuCode" = #{サブ業務コード}
     </select>
 </mapper>
