@@ -42,7 +42,7 @@ public final class ChohyoSeigyoKyotsuParameter {
             SubGyomuCode サブ業務コード,
             List<ReportId> 帳票分類ID) {
         boolean 帳票分類IDフラグ = false;
-        if (帳票分類ID != null) {
+        if (帳票分類ID != null && !帳票分類ID.isEmpty()) {
             帳票分類IDフラグ = true;
         }
         return new ChohyoSeigyoKyotsuParameter(
