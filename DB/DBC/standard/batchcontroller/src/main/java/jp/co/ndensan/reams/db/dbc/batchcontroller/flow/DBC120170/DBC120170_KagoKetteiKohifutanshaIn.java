@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaTem
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaTempTableUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaWriteReportProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.kagoketteikohifutanshain.DBC120170_KagoKetteiKohifutanshaInBatchParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.IcchiJoken;
+import jp.co.ndensan.reams.db.dbc.definition.core.IcchiJoken;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
