@@ -20,7 +20,7 @@
         <result property="判定取込年月" column="判定取込年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="証記載番号" column="証記載番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
     </resultMap>
-    <select id="getKougakuShinseiIchiranJohyou"
+    <select resultOrdered="true" id="getKougakuShinseiIchiranJohyou"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakushinseiichiranjohyou.KougakuShinseiIchiranJohyouParameter"
             resultMap="resultMap_KougakuShinseiIchiranJohyouEntity" fetchSize="500">
         SELECT
@@ -58,14 +58,18 @@
          B."serviceTeikyoYM" = D."serviceTeikyoYM" AND
          B."rirekiNo" = D."rirekiNo"
          WHERE
-         B."hihokenshaNo" = #{hiHokenshaNo}   AND
-         #{serviceTeikyoYMFrom}<![CDATA[<=]]>B."serviceTeikyoYM" AND
-         B."serviceTeikyoYM"<![CDATA[<=]]>#{serviceTeikyoYMTo} 
+         B."hihokenshaNo" = #{hiHokenshaNo}  
+          <if test="serviceTeikyoYMFrom != null and !serviceTeikyoYMFrom.isEmpty()">
+            AND #{serviceTeikyoYMFrom}<![CDATA[<=]]>B."serviceTeikyoYM"
+          </if>
+          <if test="serviceTeikyoYMTo != null and !serviceTeikyoYMTo.isEmpty()">
+            AND B."serviceTeikyoYM"<![CDATA[<=]]>#{serviceTeikyoYMTo} 
+          </if>
         ORDER BY
         サービス年月  DESC,
         管理番号  DESC
     </select>
-    <select id="getJigyouKougakuShinseiIchiranJohyou"
+    <select resultOrdered="true" id="getJigyouKougakuShinseiIchiranJohyou"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakushinseiichiranjohyou.KougakuShinseiIchiranJohyouParameter"
             resultMap="resultMap_KougakuShinseiIchiranJohyouEntity" fetchSize="500">
          SELECT
@@ -101,9 +105,13 @@
          B."serviceTeikyoYM" = D."serviceTeikyoYM" AND
          B."rirekiNo" = D."rirekiNo"
          WHERE
-         B."hihokenshaNo" = #{hiHokenshaNo}   AND
-         #{serviceTeikyoYMFrom}<![CDATA[<=]]>B."serviceTeikyoYM" AND
-         B."serviceTeikyoYM"<![CDATA[<=]]>#{serviceTeikyoYMTo} 
+         B."hihokenshaNo" = #{hiHokenshaNo}   
+         <if test="serviceTeikyoYMFrom != null and !serviceTeikyoYMFrom.isEmpty()">
+            AND #{serviceTeikyoYMFrom}<![CDATA[<=]]>B."serviceTeikyoYM"
+         </if>
+         <if test="serviceTeikyoYMTo != null and !serviceTeikyoYMTo.isEmpty()">
+            AND B."serviceTeikyoYM"<![CDATA[<=]]>#{serviceTeikyoYMTo} 
+         </if>
         ORDER BY
         サービス年月  DESC,
         管理番号  DESC	
