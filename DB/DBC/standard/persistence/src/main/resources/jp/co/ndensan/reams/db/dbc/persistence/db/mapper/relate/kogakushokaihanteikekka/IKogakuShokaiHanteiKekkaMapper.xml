@@ -16,7 +16,7 @@
         FROM
         (SELECT *
         FROM rgdb."DbT3056KogakuShikyuShinsei" AS A1
-        WHERE NOT EXITS (
+        WHERE NOT EXISTS (
         SELECT *
         FROM rgdb."DbT3056KogakuShikyuShinsei" AS A2
         WHERE A1."hihokenshaNo" = A2."hihokenshaNo"
@@ -50,7 +50,7 @@
         WHERE A."hihokenshaNo" = #{被保険者番号}
         AND   A."serviceTeikyoYM" = #{提供年月}
         ORDER BY
-        E."jigyoshaNo" ASC
+        E."jigyoshaNo" ASC,
         E."serviceShuruiCode" ASC
     </select>
     <resultMap id="resultMap_KogakuShokai"
@@ -80,7 +80,7 @@
         FROM
         (SELECT *
         FROM rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A1
-        WHERE NOT EXITS (
+        WHERE NOT EXISTS (
         SELECT *
         FROM rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A2
         WHERE A1."hihokenshaNo" = A2."hihokenshaNo"
@@ -114,7 +114,7 @@
         WHERE A."hihokenshaNo" = #{被保険者番号}
         AND   A."serviceTeikyoYM" = #{提供年月}
         ORDER BY
-        E."jigyoshaNo" ASC
+        E."jigyoshaNo" ASC,
         E."serviceShuruiCode" ASC
     </select>
     <resultMap id="resultMap_JigyoKogakuShokai"
