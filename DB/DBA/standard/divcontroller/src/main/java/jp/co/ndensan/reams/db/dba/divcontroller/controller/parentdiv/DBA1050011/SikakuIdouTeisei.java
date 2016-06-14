@@ -38,7 +38,7 @@ public class SikakuIdouTeisei {
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString 状態_照会 = new RString("照会");
-    private static final LockingKey 前排他ロックキー = new LockingKey("ShikakuIdoTeisei");
+    private static final LockingKey 前排他ロックキー = new LockingKey("ShikakuIdoTeisei、HihokenshaNo");
 
     /**
      * 画面を初期化します。
