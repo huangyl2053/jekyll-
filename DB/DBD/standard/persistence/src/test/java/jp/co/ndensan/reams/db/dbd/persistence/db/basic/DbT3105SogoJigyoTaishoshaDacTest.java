@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbd.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3105SogoJigyoTaishoshaEntityGenerator;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3105SogoJigyoTaishoshaEntityGenerator.DEFAULT_履歴番号;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3105SogoJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT3105SogoJigyoTaishoshaEntityGenerator;
+import static jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT3105SogoJigyoTaishoshaEntityGenerator.DEFAULT_履歴番号;
+import static jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT3105SogoJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

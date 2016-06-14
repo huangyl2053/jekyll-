@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.core.basic;
+package jp.co.ndensan.reams.db.dbd.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -148,8 +148,7 @@ public class SogoJigyoTaishosha
     }
 
     /**
-     * 保持する総合事業対象者を削除対象とします。<br/>
-     * {@link DbT3105SogoJigyoTaishoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する総合事業対象者を削除対象とします。<br/> {@link DbT3105SogoJigyoTaishoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link SogoJigyoTaishosha}
      */

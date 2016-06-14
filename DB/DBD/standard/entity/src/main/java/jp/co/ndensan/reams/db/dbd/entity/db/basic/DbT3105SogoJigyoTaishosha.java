@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.entity.db.basic;
+package jp.co.ndensan.reams.db.dbd.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 

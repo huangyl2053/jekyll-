@@ -4,12 +4,12 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3105SogoJigyoTaishoshaMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3105SogoJigyoTaishoshaMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT3105SogoJigyoTaishosha">
      SELECT
-         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3105SogoJigyoTaishoshaMapper.allColumns_DbT3105SogoJigyoTaishosha" />
+         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3105SogoJigyoTaishoshaMapper.allColumns_DbT3105SogoJigyoTaishosha" />
      FROM
          rgdb."DbT3105SogoJigyoTaishosha"
      WHERE
@@ -36,7 +36,7 @@
 
 
     <!--テーブルDbT3105SogoJigyoTaishoshaの項目をDbT3105SogoJigyoTaishoshaEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT3105SogoJigyoTaishoshaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT3105SogoJigyoTaishoshaEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity" autoMapping="true">
         <id property="hihokenshaNo" column="dbT3105SogoJigyoTaishosha_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="rirekiNo" column="dbT3105SogoJigyoTaishosha_rirekiNo" />
         <result property="insertDantaiCd" column="dbT3105SogoJigyoTaishosha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
