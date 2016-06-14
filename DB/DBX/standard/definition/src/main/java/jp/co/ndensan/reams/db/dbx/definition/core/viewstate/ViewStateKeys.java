@@ -13,6 +13,10 @@ package jp.co.ndensan.reams.db.dbx.definition.core.viewstate;
 public enum ViewStateKeys {
 
     /**
+     * 審査会開催番号
+     */
+    審査会開催番号,
+    /**
      * キーが「識別コード」であることを表します
      */
     識別コード,
