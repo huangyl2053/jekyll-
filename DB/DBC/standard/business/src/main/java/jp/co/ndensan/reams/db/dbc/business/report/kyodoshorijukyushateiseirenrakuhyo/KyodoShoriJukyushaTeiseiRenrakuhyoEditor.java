@@ -211,7 +211,7 @@ public class KyodoShoriJukyushaTeiseiRenrakuhyoEditor implements IKyodoShoriJuky
     }
 
     private FillTypeFormatted dateFormat(FlexibleDate date) {
-        if (date != null && !date.isEmpty()) {
+        if (date == null || date.isEmpty()) {
             return null;
         }
         return date.wareki().eraType(EraType.KANJI)
