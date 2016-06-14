@@ -60,12 +60,36 @@
     },
     {
      "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB1170001",
+     "layoutTitle": "所得照会状況一覧",
+     "eventName": "選択",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB1140011",
+     "toLayoutTitle": "所得照会回答内容登録",
+     "toState": "初期状態"
+    },
+    {
+     "id": "6",
      "type": "end",
      "layoutSubGyomuCode": "DBB",
      "layoutName": "DBB1140011",
      "layoutTitle": "所得照会回答内容登録",
      "eventName": "完了",
      "destroy": true,
+     "condition": ""
+    },
+    {
+     "id": "7",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB1170001",
+     "layoutTitle": "所得照会状況一覧",
+     "eventName": "完了",
+     "destroy": false,
      "condition": ""
     }
    ]
