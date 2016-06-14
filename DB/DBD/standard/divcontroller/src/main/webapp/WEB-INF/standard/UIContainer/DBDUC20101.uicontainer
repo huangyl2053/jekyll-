@@ -36,7 +36,7 @@
      "layoutSubGyomuCode": "DBD",
      "layoutName": "DBD2010001",
      "layoutTitle": "支払方法変更管理",
-     "eventName": "検索に戻る",
+     "eventName": "検索条件へ",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
@@ -53,6 +53,20 @@
      "eventName": "処理完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD2010001",
+     "layoutTitle": "支払方法変更管理",
+     "eventName": "検索結果一覧へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
     }
    ]
   }

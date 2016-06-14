@@ -172,7 +172,7 @@ public class ShinseiJohoInput {
 //        new YokaigoNinteiShinseiManager().save(YokaigoNinteiShinseiDivMapper.toYokaigoNinteiShinsei(
 //                new YokaigoNinteiShinseiDivMapper.YokaigoNinteiShinseiDiv(div, hihokenshaDiv)));
 
-        new KankeiIin(div).save();
+//        new KankeiIin(div).save();
 //        } catch (Throwable e) {
 //            response.addMessage(new InformationMessage("", e.getMessage()));
 //        }
@@ -972,8 +972,9 @@ public class ShinseiJohoInput {
             //TODO n8178 城間篤人 ButtonのonBeforeClickイベントがUIデザイナ安定版で使用可能になった後、処理を移譲する。 2014年9月
             RString iinCode = editDiv.getTxtKankeiIinCode().getValue();
             for (dgKankeiIin_Row row : grid.getDataSource()) {
-                if (row.getId() == selectedRow.getId()) {
-                } else if (row.getCode().equals(iinCode)) {
+//                if (row.getId() == selectedRow.getId()) {
+//                } else
+                if (row.getCode().equals(iinCode)) {
                     return;
                 }
             }
@@ -994,20 +995,20 @@ public class ShinseiJohoInput {
             }
         }
 
-        public void save() {
+//        public void save() {
 //            JogaiShinsakaiIinManager manager = new JogaiShinsakaiIinManager();
-            for (dgKankeiIin_Row row : div.getDgKankeiIin().getDataSource()) {
+//            for (dgKankeiIin_Row row : div.getDgKankeiIin().getDataSource()) {
 
                 //TODO n8178 城間篤人 後日、Div用Mapperに処理を移譲予定 2014年9月
 //                JogaiShinsakaiIin jogaiIin = new JogaiShinsakaiIin(shoKisaiHokenshaNo, kaigoHihokenshaNo,
 //                        row.getKanriNo().getValue().intValue(), create審査会委員(row.getCode().toString()));
-                if (row.getRowState().equals(RowState.Added) || row.getRowState().equals(RowState.Modified)) {
+//                if (row.getRowState().equals(RowState.Added) || row.getRowState().equals(RowState.Modified)) {
 //                    manager.save(jogaiIin);
-                } else if (row.getRowState().equals(RowState.Deleted)) {
+//                } else if (row.getRowState().equals(RowState.Deleted)) {
 //                    manager.remove(jogaiIin);
-                }
-            }
-        }
+//                }
+//            }
+//        }
 
         //TODO n8178 城間篤人 除外審査会委員を生成するために、委員情報をDBから取得or除外情報のみで扱える形にクラスを修正のいずれかが必要。 2014年9月
         private ShinsakaiIin create審査会委員(String 委員コード) {

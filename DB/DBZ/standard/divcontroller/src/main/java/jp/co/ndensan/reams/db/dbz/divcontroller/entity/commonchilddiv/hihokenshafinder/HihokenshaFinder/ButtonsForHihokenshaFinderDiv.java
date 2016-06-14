@@ -14,17 +14,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ButtonsForHihokenshaFinderDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnClear")
-    private Button btnClear;
-    @JsonProperty("btnSearch")
-    private Button btnSearch;
     @JsonProperty("txtMaxNumber")
     private TextBoxNum txtMaxNumber;
 
@@ -34,42 +30,6 @@ public class ButtonsForHihokenshaFinderDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getbtnClear
-     * @return btnClear
-     */
-    @JsonProperty("btnClear")
-    public Button getBtnClear() {
-        return btnClear;
-    }
-
-    /*
-     * setbtnClear
-     * @param btnClear btnClear
-     */
-    @JsonProperty("btnClear")
-    public void setBtnClear(Button btnClear) {
-        this.btnClear = btnClear;
-    }
-
-    /*
-     * getbtnSearch
-     * @return btnSearch
-     */
-    @JsonProperty("btnSearch")
-    public Button getBtnSearch() {
-        return btnSearch;
-    }
-
-    /*
-     * setbtnSearch
-     * @param btnSearch btnSearch
-     */
-    @JsonProperty("btnSearch")
-    public void setBtnSearch(Button btnSearch) {
-        this.btnSearch = btnSearch;
-    }
-
     /*
      * gettxtMaxNumber
      * @return txtMaxNumber

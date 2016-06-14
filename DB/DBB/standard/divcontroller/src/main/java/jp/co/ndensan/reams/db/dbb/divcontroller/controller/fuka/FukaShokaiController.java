@@ -253,6 +253,23 @@ public final class FukaShokaiController {
     }
 
     /**
+     * 前年度の保険料段階クラスを取得します。
+     *
+     * @param fuka 賦課モデル
+     * @return 前年度の保険料段階クラス
+     */
+    public static Optional<Fuka> findZennendoFukaModel(Fuka fuka) {
+        FlexibleYear 前年度 = fuka.get賦課年度().minusYear(1);
+
+        Optional<Fuka> modeloid = Optional.ofNullable(new FukaManager().get介護賦課_賦課年度最新(前年度, fuka.get通知書番号()));
+        if (!modeloid.isPresent()) {
+            return Optional.empty();
+        }
+
+        return modeloid;
+    }
+
+    /**
      * 調定日時と処理日時管理マスタの対象終了日時を比較して算定状態を判定します。<br/>
      * 調定日時 ＞　対象終了日時　ならば本算定、それ以外は仮算定です。（対象終了日時が入ってないときも仮算定）<br/>
      * 処理名が本算定賦課の場合は連番・枝番が１つだけです。

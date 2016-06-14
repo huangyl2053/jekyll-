@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiiinjoho;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiiinjoho.ShinsakaiIinJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiiinjoho.ShinsakaiIinJoho2;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5594ShinsakaiIinJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -48,7 +48,7 @@ public class ShinsakaiIinJohoManager {
      * @return ShinsakaiIinJoho
      */
     @Transaction
-    public ShinsakaiIinJoho get介護認定審査会委員情報(
+    public ShinsakaiIinJoho2 get介護認定審査会委員情報(
             RString 介護認定審査会委員コード) {
         requireNonNull(介護認定審査会委員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員コード"));
 
@@ -58,7 +58,7 @@ public class ShinsakaiIinJohoManager {
             return null;
         }
         entity.initializeMd5();
-        return new ShinsakaiIinJoho(entity);
+        return new ShinsakaiIinJoho2(entity);
     }
 
     /**
@@ -67,12 +67,12 @@ public class ShinsakaiIinJohoManager {
      * @return ShinsakaiIinJohoの{@code list}
      */
     @Transaction
-    public List<ShinsakaiIinJoho> get介護認定審査会委員情報一覧() {
-        List<ShinsakaiIinJoho> businessList = new ArrayList<>();
+    public List<ShinsakaiIinJoho2> get介護認定審査会委員情報一覧() {
+        List<ShinsakaiIinJoho2> businessList = new ArrayList<>();
 
         for (DbT5594ShinsakaiIinJohoEntity entity : dac.selectAll()) {
             entity.initializeMd5();
-            businessList.add(new ShinsakaiIinJoho(entity));
+            businessList.add(new ShinsakaiIinJoho2(entity));
         }
 
         return businessList;
@@ -85,7 +85,7 @@ public class ShinsakaiIinJohoManager {
      * @return 更新件数 更新結果の件数を返します。
      */
     @Transaction
-    public boolean save介護認定審査会委員情報(ShinsakaiIinJoho 介護認定審査会委員情報) {
+    public boolean save介護認定審査会委員情報(ShinsakaiIinJoho2 介護認定審査会委員情報) {
         requireNonNull(介護認定審査会委員情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員情報"));
         if (!介護認定審査会委員情報.hasChanged()) {
             return false;
