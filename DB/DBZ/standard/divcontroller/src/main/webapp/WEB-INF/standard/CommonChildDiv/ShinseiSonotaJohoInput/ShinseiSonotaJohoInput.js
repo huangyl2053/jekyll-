@@ -28,7 +28,7 @@ var DBZ;
                 }
                 ShoriType.prototype.TokushuTsuikaMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = false;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -40,7 +40,7 @@ var DBZ;
 
                 ShoriType.prototype.TokushuShuseiMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = false;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -51,7 +51,7 @@ var DBZ;
                 };
                 ShoriType.prototype.TokushuSakujyoMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = true;
-                    this.controls.ddlSakujoJiyu().readOnly = false;
+                    this.controls.ddlSakujoJiyu().disabled = false;
                     this.controls.txtRiyu().readOnly = true;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -63,7 +63,7 @@ var DBZ;
 
                 ShoriType.prototype.TokushuRirekiShuseiMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = true;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -75,7 +75,7 @@ var DBZ;
 
                 ShoriType.prototype.NinteiMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = true;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -86,7 +86,7 @@ var DBZ;
                 };
                 ShoriType.prototype.KyakkaMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = false;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -98,7 +98,7 @@ var DBZ;
 
                 ShoriType.prototype.ShokkenKisaiMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = true;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -109,7 +109,7 @@ var DBZ;
                 };
                 ShoriType.prototype.TorikeshiMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = false;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -120,7 +120,7 @@ var DBZ;
                 };
                 ShoriType.prototype.ZenbuSoshitsuMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = false;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = false;
@@ -131,7 +131,7 @@ var DBZ;
                 };
                 ShoriType.prototype.IchibuSoshitsuMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = false;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = false;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -142,7 +142,7 @@ var DBZ;
                 };
                 ShoriType.prototype.JukyuShikakushashoMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = true;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -154,7 +154,7 @@ var DBZ;
 
                 ShoriType.prototype.ShokaiMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = true;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = true;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;

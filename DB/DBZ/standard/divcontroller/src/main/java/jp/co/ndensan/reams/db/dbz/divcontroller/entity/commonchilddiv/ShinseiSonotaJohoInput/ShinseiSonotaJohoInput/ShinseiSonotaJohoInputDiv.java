@@ -4,18 +4,20 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSo
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * ShinseiSonotaJohoInput のクラスファイル
@@ -23,7 +25,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @reamsid_L DBE-1300-120 houtianpeng
  */
 public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJohoInputDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -268,7 +271,7 @@ public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJo
             ShoriType[] enumArray = ShoriType.values();
 
             for (ShoriType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -286,66 +289,209 @@ public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJo
         return (ShoriType) _CommonChildDivModeUtil.getMode(this.modes, ShoriType.class);
     }
 
-    @Override
     public void setMode_ShoriType(ShoriType value) {
         _CommonChildDivModeUtil.setMode(this.modes, ShoriType.class, value);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    /**
+     * 異動事由の取得。
+     *
+     * @return 異動事由
+     */
     @Override
-    public RString get移動事由() {
+    public RString get異動事由() {
         return ddlIdoJiyu.getSelectedKey();
     }
 
+    /**
+     * 削除事由の取得。
+     *
+     */
     @Override
     public RString get削除事由() {
         return ddlSakujoJiyu.getSelectedKey();
     }
 
+    /**
+     * 理由の取得。
+     *
+     */
     @Override
     public RString get理由() {
         return txtRiyu.getValue();
     }
 
+    /**
+     * 喪失日の取得。
+     *
+     */
     @Override
     public FlexibleDate get喪失日() {
         return txtSoshitsuDay.getValue();
     }
 
+    /**
+     * 取下日の取得。
+     *
+     */
     @Override
-    public FlexibleDate get取下日() {
+    public FlexibleDate get取消日() {
         return txtTorisageDay.getValue();
     }
 
+    /**
+     * 当初認定期間開始の取得。
+     *
+     */
     @Override
     public FlexibleDate get当初認定期間開始() {
         return txtToshoNinteiKikanFrom.getValue();
     }
 
+    /**
+     * 当初認定期間終了の取得。
+     *
+     */
     @Override
     public FlexibleDate get当初認定期間終了() {
         return txtToshoNinteiKikanTo.getValue();
     }
 
+    /**
+     * 受給資格者証発行日１の取得。
+     *
+     */
     @Override
     public FlexibleDate get受給資格者証発行日１() {
         return txtJukyuShikakuHakkoDay1.getValue();
     }
 
+    /**
+     * 受給資格者証発効日２の取得。
+     *
+     */
     @Override
     public FlexibleDate get受給資格者証発効日２() {
         return txtJukyuShikakuHakkoDay2.getValue();
     }
 
+    /**
+     * クリア。
+     *
+     */
     @Override
     public void clear() {
         createHandler().clear();
     }
 
+    /**
+     * 初期化。
+     *
+     */
     @Override
     public void initialize() {
         createHandler().initialize();
+    }
+
+    /**
+     * 異動事由の設定。
+     *
+     * @param key RString
+     */
+    @Override
+    public void set異動事由(RString key) {
+
+        createHandler().setDdlIdoJiyu(key);
+    }
+
+    /**
+     * 削除事由の設定。
+     *
+     * @param key RString
+     */
+    @Override
+    public void set削除事由(RString key) {
+
+        createHandler().setDdlSakujoJiyu(key);
+    }
+
+    /**
+     * 理由の設定。
+     *
+     * @param value RString
+     */
+    @Override
+    public void set理由(RString value) {
+
+        createHandler().setTxtRiyu(value);
+    }
+
+    /**
+     * 喪失日の設定。
+     *
+     * @param day FlexibleDate
+     */
+    @Override
+    public void set喪失日(FlexibleDate day) {
+
+        createHandler().setTxtSoshitsuDay(day);
+    }
+
+    /**
+     * 取消日の設定。
+     *
+     * @param day FlexibleDate
+     */
+    @Override
+    public void set取消日(FlexibleDate day) {
+
+        createHandler().setTxtTorisageDay(day);
+    }
+
+    /**
+     * 当初認定期間の設定。
+     *
+     * @param day FlexibleDate
+     */
+    @Override
+    public void set当初認定期間From(FlexibleDate day) {
+
+        createHandler().setTxtToshoNinteiKikanFrom(day);
+    }
+
+    /**
+     * 当初認定期間の設定。
+     *
+     * @param day FlexibleDate
+     */
+    @Override
+    public void set当初認定期間To(FlexibleDate day) {
+
+        createHandler().setTxtToshoNinteiKikanTo(day);
+    }
+
+    /**
+     * 発行日１の設定。
+     *
+     * @param day FlexibleDate
+     */
+    @Override
+    public void set発行日１(FlexibleDate day) {
+
+        createHandler().setTxtJukyuShikakuHakkoDay1(day);
+    }
+
+    /**
+     * 発行日２の設定。
+     *
+     * @param day FlexibleDate
+     */
+    @Override
+    public void set発行日2(FlexibleDate day) {
+
+        createHandler().setTxtJukyuShikakuHakkoDay2(day);
     }
 
     private ShinseiSonotaJohoInputHandler createHandler() {

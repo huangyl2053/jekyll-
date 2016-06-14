@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.iinYobihanteiKinyuhyo;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.report.iinYobihanteiKinyuhyoReportSource.IinYobihanteiKinyuhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,34 +16,34 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class IinYobihanteiKinyuhyoReport extends Report<IinYobihanteiKinyuhyoReportSource> {
 
-    private final List<IinYobihanteiKinyuhyoItem> itemList;
+    private final IinYobihanteiKinyuhyoItem item;
 
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 委員用予備判定記入表のITEM
+     * @param item 委員用予備判定記入表のITEM
      * @return 委員用予備判定記入表のReport
      */
-    public static IinYobihanteiKinyuhyoReport createFrom(List<IinYobihanteiKinyuhyoItem> itemList) {
+    public static IinYobihanteiKinyuhyoReport createFrom(IinYobihanteiKinyuhyoItem item) {
 
-        return new IinYobihanteiKinyuhyoReport(itemList);
+        return new IinYobihanteiKinyuhyoReport(item);
     }
 
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 委員用予備判定記入表のITEM
+     * @param item 委員用予備判定記入表のITEM
      */
-    protected IinYobihanteiKinyuhyoReport(List<IinYobihanteiKinyuhyoItem> itemList) {
-        this.itemList = itemList;
+    protected IinYobihanteiKinyuhyoReport(IinYobihanteiKinyuhyoItem item) {
+        this.item = item;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<IinYobihanteiKinyuhyoReportSource> reportSourceWriter) {
-        for (IinYobihanteiKinyuhyoItem item : itemList) {
-            IinYobihanteiKinyuhyoEditor editor = new IinYobihanteiKinyuhyoEditor(item);
-            IinYobihanteiKinyuhyoBuilder builder = new IinYobihanteiKinyuhyoBuilder(editor);
-            reportSourceWriter.writeLine(builder);
-        }
+
+        IinYobihanteiKinyuhyoEditor editor = new IinYobihanteiKinyuhyoEditor(item);
+        IinYobihanteiKinyuhyoBuilder builder = new IinYobihanteiKinyuhyoBuilder(editor);
+        reportSourceWriter.writeLine(builder);
+
     }
 }

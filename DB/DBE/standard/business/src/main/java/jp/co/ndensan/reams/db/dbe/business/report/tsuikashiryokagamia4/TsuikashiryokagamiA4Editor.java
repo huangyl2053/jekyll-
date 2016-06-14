@@ -51,10 +51,10 @@ public class TsuikashiryokagamiA4Editor implements ITsuikashiryokagamiA4Editor {
         source.listhihokenshaName_1 = item.get被保険者氏名();
         source.listSeibetsu_1 = item.get性別();
         source.listSeibetsu_2 = item.get年齢();
-        source.listShinseiKubun_1 = item.get申請日();
-        source.listShinseiKubun_2 = item.get申請区分();
-        source.listShinseiYMD_1 = item.get前回一次();
-        source.listShinseiYMD_2 = item.get前回二次();
+        source.listShinseiYMD_1 = item.get申請日();
+        source.listShinseiYMD_2 = item.get前回一次();
+        source.listShinseiKubun_1 = item.get申請区分();
+        source.listShinseiKubun_2 = item.get前回二次();
         source.listZenkaiYukokikan_1 = item.get前回期間();
         source.listZenkaiYukokikan_2 = item.get寝たきり度();
         source.listZenkaiYukokikan_3 = item.get認知度();

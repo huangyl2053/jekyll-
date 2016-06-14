@@ -24,16 +24,6 @@ public class TsuikashiryokagamiA4ReportSource implements IReportSource {
     public RString tsuchibun4;
     @ReportItem(name = "tsuchibun5", length = 35, order = 6)
     public RString tsuchibun5;
-    @ReportItem(name = "shinsakaiKaisaiMM", length = 2, order = 7)
-    public RString shinsakaiKaisaiMM;
-    @ReportItem(name = "shinsakaiKaisaiDD", length = 2, order = 8)
-    public RString shinsakaiKaisaiDD;
-    @ReportItem(name = "hour", length = 2, order = 9)
-    public RString hour;
-    @ReportItem(name = "minute", length = 2, order = 10)
-    public RString minute;
-    @ReportItem(name = "shinsakaiKaisaiYY", length = 4, order = 11)
-    public RString shinsakaiKaisaiYY;
     @ReportItem(name = "shinsakaiKaisaiYMD", length = 21, order = 12)
     public RString shinsakaiKaisaiYMD;
     @ReportItem(name = "gogitaiNo", length = 2, order = 13)
