@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 賦課の情報を管理するクラスです。
  *
- * @reamsid_L DBB-9999-013 huangh
+ * @reamsid_L DBB-9999-013 xicongwang
  */
 public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEntity, FukaJoho> implements Serializable {
 
