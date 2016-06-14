@@ -40,7 +40,7 @@
         G."jikoKisanYMD" AS 時効起算年月日,
         G."jikoKisanYMDKubun" AS 時効起算日区分
         FROM
-        rgdb."${賦課Newest}" AS A
+        rgdb."DbV2002Fuka" AS A
         INNER JOIN
         rgdb."DbT2003Kibetsu" AS B
         ON
