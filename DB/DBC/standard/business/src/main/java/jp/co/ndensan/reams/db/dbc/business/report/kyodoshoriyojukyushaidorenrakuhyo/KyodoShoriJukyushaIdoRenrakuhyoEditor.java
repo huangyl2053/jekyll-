@@ -159,9 +159,13 @@ public class KyodoShoriJukyushaIdoRenrakuhyoEditor implements IKyodoShoriJukyush
 
     private void set異動事由区分(KyodoShoriJukyushaIdoRenrakuhyoSource source) {
         if (定数_1.equals(targets.get異動区分())) {
-            source.ichiSashiKbn1 = FORMAT_MARU;
+            source.idoKbn1 = FORMAT_MARU;
+        } else if (定数_2.equals(targets.get異動区分())) {
+            source.idoKbn2 = FORMAT_MARU;
         }
-        if (定数_2.equals(targets.get区分())) {
+        if (定数_1.equals(targets.get区分())) {
+            source.ichiSashiKbn1 = FORMAT_MARU;
+        } else if (定数_2.equals(targets.get区分())) {
             source.ichiSashiKbn2 = FORMAT_MARU;
         }
         if (定数_01.equals(targets.get異動事由())) {

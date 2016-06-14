@@ -54,7 +54,7 @@
     </resultMap>
 
     <!-- 高額介護サービス費給付対象者一時テーブルのデータの取得-->
-    <select id="select一時テーブル" resultMap="resultMap_KogakuKyufuTaishoshaInEntity" fetchSize="500">
+    <select resultOrdered="true" id="select一時テーブル" resultMap="resultMap_KogakuKyufuTaishoshaInEntity" fetchSize="500">
         SELECT DISTINCT
         一時テーブル."kokanShikibetsuNo",
         一時テーブル."shoKisaiHokenshaNo",
@@ -238,13 +238,13 @@
     </resultMap>
     
     <!-- 一時テーブルのデータの取得-->
-    <select id="select被保険者番号From一時テーブル" resultMap="resultMap_Hihokensha" fetchSize="500">
+    <select resultOrdered="true" id="select被保険者番号From一時テーブル" resultMap="resultMap_Hihokensha" fetchSize="500">
         SELECT DISTINCT 一時テーブル."hihokenshaNo"
         FROM "DbTKogakuKyufuTaishoshaDataTempTable" AS 一時テーブル
     </select>
     
     <!-- 被保険者台帳管理から市町村コード取得 -->
-    <select id="select市町村コードFrom被保険者台帳管理"
+    <select resultOrdered="true" id="select市町村コードFrom被保険者台帳管理"
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukyufutaishoshain.KogakuKyufuTaishoshaInParameter">
      SELECT
@@ -269,7 +269,7 @@
     </resultMap>
 
     <!-- 被保険者台帳管理から市町村コード取得 -->
-    <select id="select新被保険者番号From新旧被保険者番号変換"
+    <select resultOrdered="true" id="select新被保険者番号From新旧被保険者番号変換"
             resultMap="resultMap_DbT7026Entity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukyufutaishoshain.KogakuKyufuTaishoshaInParameter">
      SELECT
@@ -300,7 +300,7 @@
         <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" 
                 typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
     </resultMap>
-    <select id="select世帯集約番号" resultMap="resultMap_DbT3004Entity" fetchSize="500">
+    <select resultOrdered="true" id="select世帯集約番号" resultMap="resultMap_DbT3004Entity" fetchSize="500">
         SELECT 
         dbT3004."setaiShuyakuNo",
         dbT3004."hiHokenshaNo",

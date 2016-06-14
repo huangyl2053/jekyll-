@@ -3,7 +3,7 @@
 
 <!-- @reamsid_L DBC-3093-020 chenaoqi -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyolistshokanbaraijokyo.IHanyoListShokanbaraiJokyoMapper">
-    <select id="getCSVData"
+    <select resultOrdered="true" id="getCSVData"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoMybatisParameter"
             resultMap="resultMap_HanyoListShokanbaraiJokyoEntity" fetchSize="500">
         <include refid="selectHanyoListShokanbaraiJokyoEntity" />

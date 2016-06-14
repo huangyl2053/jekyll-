@@ -170,9 +170,9 @@ public class KyodoShoriJukyushaTeiseiRenrakuhyoEditor implements IKyodoShoriJuky
         } else if (定数_3.equals(targets.get訂正区分())) {
             source.teiseiKbn2 = FORMAT_MARU;
         }
-        if (定数_1.equals(targets.get異動区分())) {
+        if (定数_1.equals(targets.get区分())) {
             source.ichiSashiKbn1 = FORMAT_MARU;
-        } else if (定数_2.equals(targets.get異動区分())) {
+        } else if (定数_2.equals(targets.get区分())) {
             source.ichiSashiKbn2 = FORMAT_MARU;
         }
     }

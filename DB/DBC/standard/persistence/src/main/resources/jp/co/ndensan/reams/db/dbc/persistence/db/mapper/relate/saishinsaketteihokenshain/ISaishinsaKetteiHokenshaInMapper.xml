@@ -103,7 +103,7 @@
                 typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
     </resultMap>
    
-    <select id="selectAllMeisai" resultMap="resultMap_SaishinsaKetteiHokenshaInMeisaiEntity">
+    <select resultOrdered="true" id="selectAllMeisai" resultMap="resultMap_SaishinsaKetteiHokenshaInMeisaiEntity">
         SELECT 
             "toriatsukaiYM",
             "rirekiNo",
@@ -135,7 +135,7 @@
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
     </resultMap>
     
-    <select id="get新被保険者番号を取得" resultMap="resultMap_ShinKyuHihokenshaNoHenkanEntity" fetchSize="500">
+    <select resultOrdered="true" id="get新被保険者番号を取得" resultMap="resultMap_ShinKyuHihokenshaNoHenkanEntity" fetchSize="500">
         SELECT 
             新旧被保険者番号変換."shichosonCode",
             新旧被保険者番号変換."shinNo",
@@ -215,7 +215,7 @@
                 typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
    
-    <select id="select再審査決定通知書明細情報リスト" resultMap="resultMap_SaishinsaMeisaiPsmEntity"
+    <select resultOrdered="true" id="select再審査決定通知書明細情報リスト" resultMap="resultMap_SaishinsaMeisaiPsmEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.saishinsaketteihokenshain.SaishinsaKetteiHokenshaInParameter">
         SELECT 
             一時テーブル."toriatsukaiYM",
@@ -305,7 +305,7 @@
                 typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-    <select id="select再審査決定通知書集計情報" resultMap="resultMap_SaishinsaKetteiHokenshaInGokeiEntity">
+    <select resultOrdered="true" id="select再審査決定通知書集計情報" resultMap="resultMap_SaishinsaKetteiHokenshaInGokeiEntity">
         SELECT 
             "toriatsukaiYM",
             "rirekiNo",

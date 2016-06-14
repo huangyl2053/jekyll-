@@ -58,7 +58,7 @@
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3049ShokanJutakuKaishuMapper.ResultMap_DbT3049ShokanJutakuKaishuEntity"/>
     </resultMap>
     
-    <select id="get判定結果被保険一時" resultMap="resultMap_ShokanShikyuKetteiIn" fetchSize="500">
+    <select resultOrdered="true" id="get判定結果被保険一時" resultMap="resultMap_ShokanShikyuKetteiIn" fetchSize="500">
         SELECT
         DbWT3036."renban" as dbWT3036_連番,
         DbWT3036."shokisaiHokenshaNo" as dbWT3036_証記載保険者番号,
@@ -116,7 +116,7 @@
             AND DbWT3036. "seiriNo" = DbT3034. "seiriNo")
     </select>
     
-    <select id="get償還払支給判定結果集計" resultMap="resultMap_ShokanShikyuKetteiIn" fetchSize="500">
+    <select resultOrdered="true" id="get償還払支給判定結果集計" resultMap="resultMap_ShokanShikyuKetteiIn" fetchSize="500">
         SELECT
         DbWT3036."shokisaiHokenshaNo" as dbWT3036_証記載保険者番号,
         DbWT3036."sakuseiYmd" as dbWT3036_作成年月日,
@@ -185,7 +185,7 @@
         )
     </update>
     
-    <select id="get警告エラーデータ" resultMap="resultMap_ShokanShikyuKetteiIn" fetchSize="500">
+    <select resultOrdered="true" id="get警告エラーデータ" resultMap="resultMap_ShokanShikyuKetteiIn" fetchSize="500">
         SELECT DbWT3036."renban" as dbWT3036_連番,
         DbWT3036."shokisaiHokenshaNo" as dbWT3036_証記載保険者番号,
         DbWT3036."shokisaiHokenshaMei" as dbWT3036_証記載保険者名,
@@ -259,7 +259,7 @@
         AND "biko1" = #{dbWT3036_備考1}
     </update>
     
-    <select id="get福祉用具事業所番号" resultMap="resultMap_ShokanShikyuKetteiIn" fetchSize="500">
+    <select resultOrdered="true" id="get福祉用具事業所番号" resultMap="resultMap_ShokanShikyuKetteiIn" fetchSize="500">
         SELECT 
         一時TBL.dbWT3036_連番 as dbWT3036_連番,
         一時TBL.dbWT3036_証記載保険者番号 as dbWT3036_証記載保険者番号,
@@ -379,7 +379,7 @@
         AND "seiriNo" = #{dbWT3036_整理番号}
     </update>
     
-    <select id="get住宅改修事業所番号" resultMap="resultMap_ShokanShikyuKetteiIn" fetchSize="500">
+    <select resultOrdered="true" id="get住宅改修事業所番号" resultMap="resultMap_ShokanShikyuKetteiIn" fetchSize="500">
         SELECT 
         一時TBL.dbWT3036_連番 as dbWT3036_連番,
         一時TBL.dbWT3036_証記載保険者番号 as dbWT3036_証記載保険者番号,
@@ -490,7 +490,7 @@
         AND 一時TBL.単位数 =DbT3049."dbT3049ShokanJutakuKaishu_kaishuKingaku"
     </select>
     
-     <select id="select償還払請求集計データ" resultMap="resultMap_ShokanShukei" fetchSize="500">
+     <select resultOrdered="true" id="select償還払請求集計データ" resultMap="resultMap_ShokanShukei" fetchSize="500">
         SELECT 
         DbT3053.*,
         一時TBL.*
@@ -517,7 +517,7 @@
                      resultMap="resultMap_HihokenshaShokan"/>
     </resultMap>
     
-    <select id="select償還払請求食事費用データ" resultMap="resultMap_ShokanShokujiHiyo" fetchSize="500">
+    <select resultOrdered="true" id="select償還払請求食事費用データ" resultMap="resultMap_ShokanShokujiHiyo" fetchSize="500">
         SELECT 
         DbT3043.*,
         一時TBL.*
@@ -545,7 +545,7 @@
                      resultMap="resultMap_HihokenshaShokan"/>
     </resultMap>
     
-   <select id="select償還払請求サービス計画200004データ" resultMap="resultMap_ShokanServicePlan200004" fetchSize="500">
+   <select resultOrdered="true" id="select償還払請求サービス計画200004データ" resultMap="resultMap_ShokanServicePlan200004" fetchSize="500">
         SELECT 
         DbT3045.*,
         一時TBL.*
@@ -572,7 +572,7 @@
                      resultMap="resultMap_HihokenshaShokan"/>
     </resultMap>
     
-    <select id="select償還払請求サービス計画200604データ" resultMap="resultMap_ShokanServicePlan200604" fetchSize="500">
+    <select resultOrdered="true" id="select償還払請求サービス計画200604データ" resultMap="resultMap_ShokanServicePlan200604" fetchSize="500">
         SELECT 
         DbT3046.*,
         一時TBL.*
@@ -599,7 +599,7 @@
                      resultMap="resultMap_HihokenshaShokan"/>
     </resultMap>
     
-   <select id="select償還払請求サービス計画200904データ" resultMap="resultMap_ShokanServicePlan200904" fetchSize="500">
+   <select resultOrdered="true" id="select償還払請求サービス計画200904データ" resultMap="resultMap_ShokanServicePlan200904" fetchSize="500">
         SELECT 
         DbT3047.*,
         一時TBL.*
@@ -626,7 +626,7 @@
                      resultMap="resultMap_HihokenshaShokan"/>
     </resultMap>
     
-     <select id="select介護サービス費用データ" resultMap="resultMap_DbT3050ShokanTokutei" fetchSize="500">
+     <select resultOrdered="true" id="select介護サービス費用データ" resultMap="resultMap_DbT3050ShokanTokutei" fetchSize="500">
         SELECT 
         DbT3050.*,
         一時TBL.*
@@ -677,7 +677,7 @@
         where "koshinDBumu" = ''
     </update>
     
-     <select id="select償還払支給判定結果データ" 
+     <select resultOrdered="true" id="select償還払支給判定結果データ" 
              resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity" 
              parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshikyuketteiin.ShokanShikyuMyBatisParameter"
              fetchSize="500">
