@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 総合事業対象者を管理するクラスです。
+ *
+ * @reamsid_L DBD-3560-130 wangjie2
  */
 public class SogoJigyoTaishosha
         extends ModelBase<SogoJigyoTaishoshaIdentifier, DbT3105SogoJigyoTaishoshaEntity, SogoJigyoTaishosha> implements Serializable {
@@ -125,6 +127,15 @@ public class SogoJigyoTaishosha
      */
     public FlexibleDate get決定年月日() {
         return entity.getKetteiYMD();
+    }
+
+    /**
+     * チェックリスト実施日を返します。
+     *
+     * @return チェックリスト実施日
+     */
+    public FlexibleDate getチェックリスト実施日() {
+        return entity.getChecklistJisshiYMD();
     }
 
     /**
