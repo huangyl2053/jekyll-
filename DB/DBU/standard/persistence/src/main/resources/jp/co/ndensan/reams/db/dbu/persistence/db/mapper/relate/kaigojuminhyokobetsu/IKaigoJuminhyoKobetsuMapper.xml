@@ -9,7 +9,7 @@
         <result property="taishoKaishiTimestamp" column="dbT7022Shori_taishoKaishiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler" />
         <result property="taishoShuryoTimestamp" column="dbT7022Shori_taishoShuryoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler" />
     </resultMap>
-    <select id="selectList" resultMap="kaigoJuminhyoKobetsuResultMap" fetchSize="500">
+    <select resultOrdered="true" id="selectList" resultMap="kaigoJuminhyoKobetsuResultMap" fetchSize="500">
         SELECT
         dbt7051Kosei."shichosonShokibetsuID" AS dbt7051Kosei_shichosonShokibetsuID,
         dbt7051Kosei."shichosonCode" AS dbt7051Kosei_shichosonCode,

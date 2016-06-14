@@ -27,7 +27,7 @@
         <result property="shiteiiFlag" column="shiteiiFlag" />
         <result property="shujiiJohojokyoFlag" column="shujiiJohojokyoFlag" />
     </resultMap> 
-    <select id="get主治医医療機関_主治医情報" resultMap="resultMap_主治医医療機関_主治医情報" 
+    <select resultOrdered="true" id="get主治医医療機関_主治医情報" resultMap="resultMap_主治医医療機関_主治医情報" 
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter" 
             fetchSize="500">
         SELECT
@@ -116,7 +116,7 @@
         LIMIT #{maxCount}
     </select>
     
-    <select id="get子主治医医療機関_子主治医情報" resultMap="resultMap_主治医医療機関_主治医情報" 
+    <select resultOrdered="true" id="get子主治医医療機関_子主治医情報" resultMap="resultMap_主治医医療機関_主治医情報" 
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter" 
             fetchSize="500">
         SELECT

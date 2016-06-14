@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBE-3000-020 dongyabin -->
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.zenkaininteikekkajoho.IZenkaiNinteiKekkaJohoMapper">
-    <select id="get要介護度_前回受給" 
+    <select resultOrdered="true" id="get要介護度_前回受給" 
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"
             fetchSize="500">
         SELECT
@@ -18,7 +18,7 @@
             A."shinseishoKanriNo" = #{shinseishoKanriNo}
     </select>
     
-    <select id="get要介護度_前回認定" 
+    <select resultOrdered="true" id="get要介護度_前回認定" 
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"
             fetchSize="500">
         SELECT
@@ -33,7 +33,7 @@
             A."shinseishoKanriNo" = #{shinseishoKanriNo}
     </select>
     
-    <select id="get要介護度_今回受給" 
+    <select resultOrdered="true" id="get要介護度_今回受給" 
             resultMap="resultMap_ZenkaiNinteiKekkaJohoRelateEntity"
             fetchSize="500">
         SELECT
@@ -50,7 +50,7 @@
         A."shinseishoKanriNo" = #{shinseishoKanriNo}
     </select>
     
-    <select id="get要介護度_今回認定" 
+    <select resultOrdered="true" id="get要介護度_今回認定" 
             resultMap="resultMap_ZenkaiNinteiKekkaJohoRelateEntity"
             fetchSize="500">
         SELECT
@@ -67,7 +67,7 @@
         A."shinseishoKanriNo" = #{shinseishoKanriNo}
     </select>
     
-    <select id="get前回申請管理番号_受給" 
+    <select resultOrdered="true" id="get前回申請管理番号_受給" 
             resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
             fetchSize="500">
         SELECT 	
@@ -78,7 +78,7 @@
             A."shinseishoKanriNo" = #{shinseishoKanriNo}
     </select>
     
-    <select id="get前回申請管理番号_認定" 
+    <select resultOrdered="true" id="get前回申請管理番号_認定" 
             resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
             fetchSize="500">
         SELECT 	

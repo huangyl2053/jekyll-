@@ -37,7 +37,7 @@
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
 
-    <select id="get直近広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
+    <select resultOrdered="true" id="get直近広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.koikinaijushochitokurei.KoikinaiJushochiTokureiMybatisparamter" fetchSize="500">
         SELECT
         A."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
@@ -127,7 +127,7 @@
         </if>
     </select>
 
-    <select id="get基準日広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
+    <select resultOrdered="true" id="get基準日広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.koikinaijushochitokurei.KoikinaiJushochiTokureiMybatisparamter" fetchSize="500">
         SELECT
         DbT1001."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
@@ -222,7 +222,7 @@
         rank_number = 1
     </select>
 
-    <select id="get範囲広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
+    <select resultOrdered="true" id="get範囲広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.koikinaijushochitokurei.KoikinaiJushochiTokureiMybatisparamter" fetchSize="500">
         SELECT
         DbT1001."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
@@ -318,7 +318,7 @@
         rank_number = 1
     </select>
 
-    <select id="get広域特解除情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
+    <select resultOrdered="true" id="get広域特解除情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.koikinaijushochitokurei.KoikinaiKaijoParamter" fetchSize="500">
         SELECT
         DbT1001."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",

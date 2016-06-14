@@ -16,7 +16,7 @@
         <result column="B_jigyoshaName" property="jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
-    <select id="getKyotakuServiceKeikaku" resultMap="result_KyotakuServiceKeikakuRelateEntity" 
+    <select resultOrdered="true" id="getKyotakuServiceKeikaku" resultMap="result_KyotakuServiceKeikakuRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikakuinfo.KyotakuServiceKeikakuInfoRelateParameter" fetchSize="500">
         SELECT
         A."hihokenshaNo" AS "A_hihokenshaNo",                           

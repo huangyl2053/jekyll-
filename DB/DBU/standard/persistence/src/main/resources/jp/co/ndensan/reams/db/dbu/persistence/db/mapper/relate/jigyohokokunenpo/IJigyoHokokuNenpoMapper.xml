@@ -21,7 +21,7 @@
         <result property="yokoKomokuCode" column="yokoKomokuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
     </resultMap>
 
-    <select id="getJigyoHokokuNenpoList" resultMap="getJigyoHokokuNenpoListResultMap"
+    <select resultOrdered="true" id="getJigyoHokokuNenpoList" resultMap="getJigyoHokokuNenpoListResultMap"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.JigyoHokokuNenpoParameter" fetchSize="500">
         SELECT
         DISTINCT

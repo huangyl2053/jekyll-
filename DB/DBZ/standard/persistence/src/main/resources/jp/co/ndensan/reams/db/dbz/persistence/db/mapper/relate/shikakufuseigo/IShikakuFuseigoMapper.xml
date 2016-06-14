@@ -9,7 +9,7 @@
         <association property="dbt1014Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1014SeigoseiCheckMapper.ResultMap_DbT1014SeigoseiCheckEntity"/>
         <association property="ft200Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>    
-    <select id="get被保険者資格不整合一覧" 
+    <select resultOrdered="true" id="get被保険者資格不整合一覧" 
                 resultMap="shikakuResult"
                 parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakufuseigo.ShikakuFuseigoMybatisParameter" 
                 fetchSize="500">

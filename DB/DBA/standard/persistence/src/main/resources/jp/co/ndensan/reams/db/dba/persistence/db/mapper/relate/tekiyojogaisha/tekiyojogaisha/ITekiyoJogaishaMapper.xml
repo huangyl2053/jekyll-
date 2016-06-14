@@ -6,7 +6,7 @@
 <!-- @reamsid_L DBA-0210-020 dingyi -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tekiyojogaisha.tekiyojogaisha.ITekiyoJogaishaMapper">
     
-    <select id="get適用除外者" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" 
+    <select resultOrdered="true" id="get適用除外者" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" 
             resultMap="resultMap_get適用除外者" fetchSize="500">
         SELECT
             TekiyoJogaisha."shikibetsuCode" AS "tekiyoJogaisha_shikibetsuCode",
@@ -42,7 +42,7 @@
             TekiyoJogaisha."tekiyoYMD" DESC, TekiyoJogaisha."idoYMD" DESC, TekiyoJogaisha."edaNo" DESC
     </select>
     
-    <select id="get施設情報" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" 
+    <select resultOrdered="true" id="get施設情報" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" 
             resultMap="resultMap_get施設情報" fetchSize="500">
         SELECT
             ShisetsuNyutaisho."rirekiNo" AS "shisetsuNyutaisho_rirekiNo",
@@ -79,7 +79,7 @@
             ShisetsuNyutaisho."nyushoYMD" DESC, ShisetsuNyutaisho."taishoYMD" DESC
     </select>
     
-    <select id="getMax履歴番号" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" 
+    <select resultOrdered="true" id="getMax履歴番号" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" 
             resultType="Decimal" fetchSize="500">
         SELECT 
             MAX(ShisetsuNyutaisho."rirekiNo") AS "ShisetsuNyutaisho_rirekiNo"
@@ -89,7 +89,7 @@
             ShisetsuNyutaisho."shikibetsuCode" = #{識別コード}
     </select>
     
-    <select id="get適用除外者更新用" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" 
+    <select resultOrdered="true" id="get適用除外者更新用" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" 
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1002TekiyoJogaishaMapper.ResultMap_DbT1002TekiyoJogaishaEntity" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1002TekiyoJogaishaMapper.allColumns_DbT1002TekiyoJogaisha" />
@@ -112,7 +112,7 @@
             "DbT1002TekiyoJogaisha"."tekiyoYMD" DESC, "DbT1002TekiyoJogaisha"."idoYMD" DESC, "DbT1002TekiyoJogaisha"."edaNo" DESC
     </select>
     
-    <select id="get施設情報更新用" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" 
+    <select resultOrdered="true" id="get施設情報更新用" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" 
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.ResultMap_DbT1004ShisetsuNyutaishoEntity" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.allColumns_DbT1004ShisetsuNyutaisho"/> 
@@ -133,7 +133,7 @@
             "DbT1004ShisetsuNyutaisho"."nyushoYMD" DESC, "DbT1004ShisetsuNyutaisho"."taishoYMD" DESC
     </select>
     
-    <select id="select宛名情報" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
+    <select resultOrdered="true" id="select宛名情報" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" fetchSize="500">
         SELECT 
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />

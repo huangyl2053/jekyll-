@@ -5,12 +5,12 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.futangendogakunintei.IFutanGendogakuNinteiMapper">
 
-    <select id="select負担限度額認定ByKey" resultMap="resultMap_FutanGendogakuNinteiEntity"
+    <select resultOrdered="true" id="select負担限度額認定ByKey" resultMap="resultMap_FutanGendogakuNinteiEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiMapperParameter" fetchSize="500">
         <include refid="selectFutanGendogakuNinteiEntity" />
     </select>
 
-    <select id="select負担限度額認定リストBy主キー1" resultMap="resultMap_FutanGendogakuNinteiEntity"
+    <select resultOrdered="true" id="select負担限度額認定リストBy主キー1" resultMap="resultMap_FutanGendogakuNinteiEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiMapperParameter" fetchSize="500">
         <include refid="selectFutanGendogakuNinteiEntity" />
     </select>
@@ -41,7 +41,7 @@
         </where>
     </sql>
 
-    <select id="select負担限度額認定画面用リスト" resultMap="resultMap_FutanGendogakuNinteiEntity"
+    <select resultOrdered="true" id="select負担限度額認定画面用リスト" resultMap="resultMap_FutanGendogakuNinteiEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunintei.FutanGendogakuNinteiParameter" fetchSize="500">
         <include refid="selectFutanGendogakuNinteiGmenyListEntity" />
     </select>

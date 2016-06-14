@@ -13,7 +13,7 @@
         <association property="ft200Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
 
-    <select id="getKaigoNinteiAtenaInfoList" resultMap="kaigoninteiatenainfoResult"
+    <select resultOrdered="true" id="getKaigoNinteiAtenaInfoList" resultMap="kaigoninteiatenainfoResult"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigoninteiatenainfo.KaigoNinteiAtenaInfoParameter">
         SELECT
         DbT5101."hihokenshaName" AS "DbT5101_hihokenshaName",

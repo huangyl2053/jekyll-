@@ -52,14 +52,14 @@
         <result property="tokureiHyoki" column="dbT2013HokenryoDankai_tokureiHyoki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <select id="getEntity" resultMap="ResultMap_DbT2013HokenryoDankaiEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT2013HokenryoDankaiEntity">
         SELECT
         <include refid="allColumns_DbT2013HokenryoDankai" />
         FROM
         rgdb."DbT2013HokenryoDankai"
     </select>
 
-    <select id="getHokenryoDankai" resultMap="ResultMap_DbT2013HokenryoDankaiEntity">
+    <select resultOrdered="true" id="getHokenryoDankai" resultMap="ResultMap_DbT2013HokenryoDankaiEntity">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2013HokenryoDankaiMapper.allColumns_DbT2013HokenryoDankai" />
         FROM
@@ -70,7 +70,7 @@
         )
     </select>
 
-    <select id="getHokenryoDankaiKubun" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" resultMap="ResultMap_DbT2013HokenryoDankaiEntity">
+    <select resultOrdered="true" id="getHokenryoDankaiKubun" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" resultMap="ResultMap_DbT2013HokenryoDankaiEntity">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2013HokenryoDankaiMapper.allColumns_DbT2013HokenryoDankai" />
         FROM rgdb."DbT2013HokenryoDankai"

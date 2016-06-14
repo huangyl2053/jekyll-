@@ -18,7 +18,7 @@
         <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
         <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    <select id="get被保険者情報" resultMap="resultMap_HihokenshaJyuhouRelateEntity"
+    <select resultOrdered="true" id="get被保険者情報" resultMap="resultMap_HihokenshaJyuhouRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.yokaigoninteijohoteikyo.YokaigoNinteiJohoTeiParameter" fetchSize="500">
         SELECT
             A."shoKisaiHokenshaNo" AS shoKisaiHokenshaNo
@@ -76,7 +76,7 @@
         <result property="ikenshoDoiFlag" column="DbT5302_ikenshoDoiFlag" />
         <result property="shichosonCode" column="Dbt7051_shichosonCode"                                        typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    <select id="get認定履歴一覧" resultMap="resultMap_NinnteiRiriRelateEntity"
+    <select resultOrdered="true" id="get認定履歴一覧" resultMap="resultMap_NinnteiRiriRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.yokaigoninteijohoteikyo.YokaigoNinteiJohoTeiParameter" fetchSize="500">
         SELECT
             DbT5101NinteiShinseiJoho."ninteiShinseiYMD" AS DbT5101_ninteiShinseiYMD

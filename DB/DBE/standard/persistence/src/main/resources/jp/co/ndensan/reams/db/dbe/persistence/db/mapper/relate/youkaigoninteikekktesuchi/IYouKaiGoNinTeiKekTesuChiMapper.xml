@@ -33,7 +33,7 @@
         <result property="ikenshoIraiRirekiNo" column="dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <select id="getSyuJiSenTakuYiChiRan"
+    <select resultOrdered="true" id="getSyuJiSenTakuYiChiRan"
             resultMap="ResultMap_YouKaiGoNinTeiKekTesuChiRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter" fetchSize="500" >
         SELECT
@@ -104,7 +104,7 @@
         rgdb."DbT5912ShujiiJoho"."shujiiCode"
     </select>
 
-    <select id="getKeKaTsuChiSyuTsuRyoKuTaiSyou"
+    <select resultOrdered="true" id="getKeKaTsuChiSyuTsuRyoKuTaiSyou"
             resultMap="ResultMap_YouKaiGoNinTeiKekTesuChiRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter" fetchSize="500" >
         SELECT
@@ -159,7 +159,7 @@
         rgdb."DbT5101NinteiShinseiJoho"."hihokenshaNo"
     </select>
 
-    <select id="getCyouHyouSyuTsuRyoKu"
+    <select resultOrdered="true" id="getCyouHyouSyuTsuRyoKu"
             resultMap="ResultMap_YouKaiGoNinTeiKekTesuChiRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe090001.YouKaiGoNinTeiKekTesuChiMybitisParamter" fetchSize="500" >
         SELECT

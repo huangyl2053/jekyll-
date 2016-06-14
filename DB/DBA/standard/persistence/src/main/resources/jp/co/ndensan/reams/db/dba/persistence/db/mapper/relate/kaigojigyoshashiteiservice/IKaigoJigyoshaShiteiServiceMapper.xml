@@ -13,7 +13,7 @@
         <result property="serviceShuruiCode" column="DbT7063_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
-    <select id="getKaigoJigyoshaShiteiServiceRireki" resultMap="resultMap_getKaigoJogaiTokureiRelateEntity"
+    <select resultOrdered="true" id="getKaigoJigyoshaShiteiServiceRireki" resultMap="resultMap_getKaigoJogaiTokureiRelateEntity"
             parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" fetchSize="500">
         SELECT
         DbT7063."yukoKaishiYMD" as "DbT7063_yukoKaishiYMD",
@@ -30,7 +30,7 @@
         DbT7063."yukoKaishiYMD" DESC
     </select>
     
-    <select id="getKaigoJigyoshaShiteiService" resultMap="resultMap_getKaigoJogaiTokureiRelateEntity"
+    <select resultOrdered="true" id="getKaigoJigyoshaShiteiService" resultMap="resultMap_getKaigoJogaiTokureiRelateEntity"
             parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" fetchSize="500">
         SELECT
         DbT7063."yukoKaishiYMD" as "DbT7063_yukoKaishiYMD",

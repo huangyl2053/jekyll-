@@ -42,7 +42,7 @@
         
    </resultMap>
     
-   <select id="get申請者一覧内容"
+   <select resultOrdered="true" id="get申請者一覧内容"
            resultMap="resultMap_YokaigoNinteiShinchokuJohoShokaiRelateEntity" 
            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.yokaigoninteishinchokujohoshokai.YokaigoNinteiParamter" fetchSize="500">
         SELECT                

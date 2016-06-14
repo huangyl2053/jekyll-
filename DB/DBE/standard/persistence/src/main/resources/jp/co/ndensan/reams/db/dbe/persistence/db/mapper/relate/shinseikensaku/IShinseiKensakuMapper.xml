@@ -31,7 +31,7 @@
         <result property="ikenshoIraiRirekiNo" column="ikenshoIraiRirekiNo" />
         <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />
     </resultMap>
-    <select id="selectShinseiJoho" resultMap="ResultMap_ShinseiKensakuRelateEntity"
+    <select resultOrdered="true" id="selectShinseiJoho" resultMap="ResultMap_ShinseiKensakuRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinseikensaku.ShinseiKensakuMapperParameter" 
             fetchSize="500">
         SELECT 

@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBU-0550-020  wanghui -->
 <mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigojyuminhyokoukiu.IkaigojyuminhyokoukiuMapper">
 
-    <select id="getKaigoJuminhyoEntity" resultMap="resultMap_KaigoJuminhyoEntity" 
+    <select resultOrdered="true" id="getKaigoJuminhyoEntity" resultMap="resultMap_KaigoJuminhyoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuMapperParameter" fetchSize="500">
         SELECT
         dbT1001HihokenshaDaicho.*,
@@ -120,7 +120,7 @@
         <association property="dbT1001HihokenshaDaichoEntity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="dbT4001JukyushaDaichoEntity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
     </resultMap>
-    <select id="get処理日付管理マスタ登録処理"  
+    <select resultOrdered="true" id="get処理日付管理マスタ登録処理"  
        resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
      parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuMapperParameter" fetchSize="500">
         SELECT
