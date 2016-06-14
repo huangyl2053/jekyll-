@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0900031;
 
 import jp.co.ndensan.reams.db.dbu.business.core.benmeitoroku.BenmeiTorokuMeisaiJoho;
-import jp.co.ndensan.reams.db.dbu.definition.core.benmeitoroku.BenmeiTorokuViewStateKeys;
+import jp.co.ndensan.reams.db.dbu.definition.core.viewstate.BenmeiTorokuViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900031.BenmeiTorokuPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900031.DBU0900031StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900031.DBU0900031TransitionEventName;

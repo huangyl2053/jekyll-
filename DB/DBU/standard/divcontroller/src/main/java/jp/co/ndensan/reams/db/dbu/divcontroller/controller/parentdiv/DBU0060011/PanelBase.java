@@ -5,7 +5,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokunenpo.JigyoHokokuNenpoResult;
 import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokunenpo.ShichosonCodeNameResult;
 import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
-import jp.co.ndensan.reams.db.dbu.definition.enumeratedtype.DbuViewStateKey;
+import jp.co.ndensan.reams.db.dbu.definition.core.viewstate.DbuViewStateKey;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.DBU0060011TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.PanelBaseDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.dgHoseitaishoYoshiki_Row;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.definition.core.enumeratedtype.config;
+package jp.co.ndensan.reams.db.dbu.definition.core.configkeys;
 
 /**
  * 帳票共通住所編集方法に関連する業務コンフィグです。

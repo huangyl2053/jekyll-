@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbu.definition.enumeratedtype;
+package jp.co.ndensan.reams.db.dbu.definition.core.viewstate;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
