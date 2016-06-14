@@ -144,8 +144,8 @@ module DBZ
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = false;
-                    this.controls.txtToshoNinteiKikanFrom().readOnly = true;
-                    this.controls.txtToshoNinteiKikanTo().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = false;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = false;
                     this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
                     this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
                 }
