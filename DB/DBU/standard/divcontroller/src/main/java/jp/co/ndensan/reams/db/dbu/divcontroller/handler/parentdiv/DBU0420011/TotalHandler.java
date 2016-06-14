@@ -67,20 +67,20 @@ public class TotalHandler {
         if (MENUID_DBUMN12001.equals(ResponseHolder.getMenuID())) {
             div.getShikakuShaShoHakko().getBtnTainoInfo().setVisible(false);
             div.getShikakuShaShoHakko().getBtnGengakuInfo().setVisible(false);
-            div.getAtenaShikakuInfo().getCcdKaigoAtenaInfo().onLoad(識別コード);
-            div.getAtenaShikakuInfo().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getAtenaShikakuInfo().getCcdKaigoAtenaInfo().initialize(識別コード);
+            div.getAtenaShikakuInfo().getCcdKaigoShikakuKihon().initialize(被保険者番号);
             div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().initialize(被保険者番号, MENUID_DBUMN12001, 識別コード);
         }
         if (MENUID_DBUMN12002.equals(ResponseHolder.getMenuID())) {
             div.getShikakuShaShoHakko().getBtnTainoInfo().setVisible(false);
             div.getShikakuShaShoHakko().getBtnGengakuInfo().setVisible(false);
-            div.getAtenaShikakuInfo().getCcdKaigoAtenaInfo().onLoad(識別コード);
-            div.getAtenaShikakuInfo().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getAtenaShikakuInfo().getCcdKaigoAtenaInfo().initialize(識別コード);
+            div.getAtenaShikakuInfo().getCcdKaigoShikakuKihon().initialize(被保険者番号);
             div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().initialize(被保険者番号, MENUID_DBUMN12002, 識別コード);
         }
         if (MENUID_DBUMN12003.equals(ResponseHolder.getMenuID())) {
-            div.getAtenaShikakuInfo().getCcdKaigoAtenaInfo().onLoad(識別コード);
-            div.getAtenaShikakuInfo().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getAtenaShikakuInfo().getCcdKaigoAtenaInfo().initialize(識別コード);
+            div.getAtenaShikakuInfo().getCcdKaigoShikakuKihon().initialize(被保険者番号);
             div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko().initialize(被保険者番号.getColumnValue());
         }
     }

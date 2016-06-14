@@ -68,8 +68,8 @@ public class KyokaisoGaitoshaPanel {
                 jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
         ShikibetsuCode 識別コード = ViewStateHolder.get(
                 jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
-        div.getCcdKaigoAtena().onLoad(識別コード);
-        div.getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+        div.getCcdKaigoAtena().initialize(識別コード);
+        div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
         List<KyokaisoGaitoshaJoho> 境界層該当一覧情報
                 = KyokaisoGaitoshaManager.createInstance().getKyokaisoGaitoshaJohoList(被保険者番号).records();
         if (境界層該当一覧情報 == null || 境界層該当一覧情報.isEmpty()) {

@@ -81,8 +81,8 @@ public class KakushuShinseishoHakkoHandler {
      */
     public void onLoad() {
         ShikibetsuCode 識別コード = data.get識別コード();
-        div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        div.getShikakuKihonJoho().getCcdKaigoShikakuKihon().onLoad(識別コード);
+        div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
+        div.getShikakuKihonJoho().getCcdKaigoShikakuKihon().initialize(識別コード);
         List<dgKakushushinsei_Row> dateSource = new ArrayList<>();
         for (ShinseishoChohyoShurui 申請書帳票 : ShinseishoChohyoShurui.values()) {
             dgKakushushinsei_Row row = new dgKakushushinsei_Row(Boolean.FALSE, get業務名称(申請書帳票

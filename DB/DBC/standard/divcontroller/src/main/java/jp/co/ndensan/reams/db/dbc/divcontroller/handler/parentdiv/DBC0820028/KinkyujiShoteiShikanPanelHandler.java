@@ -108,8 +108,8 @@ public final class KinkyujiShoteiShikanPanelHandler {
             RString 様式番号,
             ShikibetsuCode 識別コード) {
 
-        div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+        div.getPanelCcd().getCcdKaigoAtenaInfo().initialize(識別コード);
+        div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
 
         div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
         div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.wareki().toDateString().toString()));

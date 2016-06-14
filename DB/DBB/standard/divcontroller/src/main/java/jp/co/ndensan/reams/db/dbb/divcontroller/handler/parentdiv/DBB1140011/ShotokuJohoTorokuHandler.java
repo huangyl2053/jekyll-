@@ -128,7 +128,7 @@ public final class ShotokuJohoTorokuHandler {
             KaigoFukaKihonSearchKey searchKey = new KaigoFukaKihonSearchKey.Builder(通知書番号, 賦課年度, 市町村コード, 識別コード).build();
             div.getKaigoFukaKihon().load(searchKey);
         }
-        div.getKaigoAtenaInfo().onLoad(識別コード);
+        div.getKaigoAtenaInfo().initialize(識別コード);
         load世帯所得情報一覧(識別コード, 所得年度, 所得基準日時, true);
         日付関連_所得年度コンフィグによる制御(div.getSetaiShotokuInfo().getTxtSetaiIchiranKazeiNendo().getDomain());
         AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード));

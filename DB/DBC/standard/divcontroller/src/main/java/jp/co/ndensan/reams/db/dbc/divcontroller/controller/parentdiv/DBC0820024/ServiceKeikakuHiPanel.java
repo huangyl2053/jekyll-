@@ -88,8 +88,8 @@ public class ServiceKeikakuHiPanel {
         ViewStateHolder.put(ViewStateKeys.画面モード, 登録モード);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         ServiceKeikakuHiPanelHandler handler = getHandler(div);
-        div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+        div.getPanelCcd().getCcdKaigoAtenaInfo().initialize(識別コード);
+        div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         if (明細番号 == null || 明細番号.isEmpty()) {
             return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.一覧に戻る).respond();
         }

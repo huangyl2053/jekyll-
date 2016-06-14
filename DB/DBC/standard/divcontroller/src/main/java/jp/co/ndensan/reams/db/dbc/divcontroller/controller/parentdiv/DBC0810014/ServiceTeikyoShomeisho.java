@@ -45,12 +45,12 @@ public class ServiceTeikyoShomeisho {
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(ViewStateHolder.get(
                 ViewStateKeys.償還払申請一覧_サービス年月, RString.class).toString())).getYearMonth().toDateString());
 
-        div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getPanelOne().getCcdKaigoAtenaInfo().initialize(識別コード);
         if (被保険者番号 == null || 被保険者番号.isEmpty()) {
             div.getPanelOne().getCcdKaigoShikakuKihon().setVisible(false);
             div.getPanelOne().getCcdKaigoShikakuKihon().setDisplayNone(true);
         } else {
-            div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getPanelOne().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         }
         List<ServiceTeikyoShomeishoResult> serviceTeikyoShomeishoList
                 = ShokanbaraiJyokyoShokai.createInstance().getServiceTeikyoShomeishoList(被保険者番号, サービス年月, 整理番号);

@@ -128,7 +128,7 @@ public class MainPanelHandler {
      * @param key KaigoFukaKihonSearchKey
      */
     public void setヘッダエリア(ShikibetsuCode 識別コード, KaigoFukaKihonSearchKey key) {
-        div.getAtenaInfo().getKiagoAtenaInfo().onLoad(識別コード);
+        div.getAtenaInfo().getKiagoAtenaInfo().initialize(識別コード);
         div.getAtenaInfo().getKaigoFukaKihon().load(key);
         this.set共通エリア();
 

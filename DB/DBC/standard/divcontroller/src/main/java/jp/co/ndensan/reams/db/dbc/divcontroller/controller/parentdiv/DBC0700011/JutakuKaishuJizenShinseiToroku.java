@@ -76,8 +76,8 @@ public class JutakuKaishuJizenShinseiToroku {
 
         被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        div.getKaigoShikakuKihonShaPanel().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        div.getKaigoShikakuKihonShaPanel().getCcdKaigoShikakuKihon().onLoad(識別コード);
+        div.getKaigoShikakuKihonShaPanel().getCcdKaigoAtenaInfo().initialize(識別コード);
+        div.getKaigoShikakuKihonShaPanel().getCcdKaigoShikakuKihon().initialize(識別コード);
 
         JutakuKaishuJizenShinseiTorokuDivHandler handler = getHandler(div);
         RString state = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);

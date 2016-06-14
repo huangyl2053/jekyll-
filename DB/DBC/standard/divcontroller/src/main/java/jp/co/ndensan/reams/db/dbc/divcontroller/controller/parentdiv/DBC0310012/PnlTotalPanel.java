@@ -100,9 +100,9 @@ public class PnlTotalPanel {
 
             TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
             ShikibetsuCode 識別コード = key.get識別コード();
-            div.getPnlCommon().getCcdAtena().onLoad(識別コード);
+            div.getPnlCommon().getCcdAtena().initialize(識別コード);
             HihokenshaNo 被保険者番号 = key.get被保険者番号();
-            div.getPnlCommon().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getPnlCommon().getCcdKaigoShikakuKihon().initialize(被保険者番号);
             RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
             if (事業者検索.equals(表示モード)) {
                 PnlTotalPanelParameter param = ViewStateHolder
@@ -132,7 +132,7 @@ public class PnlTotalPanel {
             }
             ViewStateHolder.put(ViewStateKeys.契約者一覧情報, shokanData);
             HihokenshaNo 被保険者番号 = new HihokenshaNo(parameter.get被保番号());
-            div.getPnlCommon().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getPnlCommon().getCcdKaigoShikakuKihon().initialize(被保険者番号);
 
             getHandler(div).set初期データ状態(画面モード, shokanData);
             getHandler(div).set初期データ(shokanData, parameter);

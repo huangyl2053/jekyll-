@@ -341,12 +341,12 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
             }
         }
         if (!RString.isNullOrEmpty(被保険者番号.getColumnValue())) {
-            div.getKihonJoho().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getKihonJoho().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         }
     }
 
     private void kaigoNinteiAtenaInfo_onload(ShikibetsuCode 識別コード) {
-        div.getKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
     }
 
     private LasdecCode get導入形態チェック() {

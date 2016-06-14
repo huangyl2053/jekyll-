@@ -84,7 +84,7 @@ public class KaigoAtenaJohoHandler {
         if (null == 識別コード) {
             識別コード = ShikibetsuCode.EMPTY;
         }
-        div.getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getCcdKaigoAtenaInfo().initialize(識別コード);
         div.getCcdKaigoFukaKihon().load(getSearchKey(key));
         TokubetuChosyutaisyosyaTorokuManager 特別徴収対象者登録Manager = TokubetuChosyutaisyosyaTorokuManager.createInstance();
         RString 年度内処理済み連番 = 特別徴収対象者登録Manager.getShorizumiRenban(賦課年度);
