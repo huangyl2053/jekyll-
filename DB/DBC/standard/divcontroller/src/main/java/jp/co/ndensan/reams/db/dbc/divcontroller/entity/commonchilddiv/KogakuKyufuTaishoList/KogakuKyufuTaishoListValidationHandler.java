@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * @reamsid_L DBC-2020-030 quxiaodong
  */
-public class KogakuKyufuTaishoListCheckHandler {
+public class KogakuKyufuTaishoListValidationHandler {
 
     private final KogakuKyufuTaishoListDiv div;
     private static final RString 事業者番号 = new RString("事業者番号");
@@ -32,7 +32,7 @@ public class KogakuKyufuTaishoListCheckHandler {
      *
      * @param div KogakuKyufuTaishoListDiv
      */
-    public KogakuKyufuTaishoListCheckHandler(KogakuKyufuTaishoListDiv div) {
+    public KogakuKyufuTaishoListValidationHandler(KogakuKyufuTaishoListDiv div) {
         this.div = div;
     }
 
@@ -42,8 +42,8 @@ public class KogakuKyufuTaishoListCheckHandler {
      * @param div 画面DIV
      * @return KogakuKyufuTaishoListDiv
      */
-    public static KogakuKyufuTaishoListCheckHandler of(KogakuKyufuTaishoListDiv div) {
-        return new KogakuKyufuTaishoListCheckHandler(div);
+    public static KogakuKyufuTaishoListValidationHandler of(KogakuKyufuTaishoListDiv div) {
+        return new KogakuKyufuTaishoListValidationHandler(div);
     }
 
     /**
@@ -56,17 +56,17 @@ public class KogakuKyufuTaishoListCheckHandler {
         if (div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue() == null
                 || div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue().equals(RString.EMPTY)) {
             validPairs.add(new ValidationMessageControlPair(
-                    new KogakuKyufuTaishoListCheckHandler.IdocheckMessages(UrErrorMessages.存在しない, 事業者番号.toString())));
+                    new KogakuKyufuTaishoListValidationHandler.IdocheckMessages(UrErrorMessages.存在しない, 事業者番号.toString())));
         }
         if (div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue() == null
                 || div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue().equals(RString.EMPTY)) {
             validPairs.add(new ValidationMessageControlPair(
-                    new KogakuKyufuTaishoListCheckHandler.IdocheckMessages(UrErrorMessages.コードマスタなし)));
+                    new KogakuKyufuTaishoListValidationHandler.IdocheckMessages(UrErrorMessages.コードマスタなし)));
         }
         if (div.getMeisaiGokeiHenshuPanel().getTxtHyoGkei().getValue().intValue()
                 < div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue().intValue()) {
             validPairs.add(new ValidationMessageControlPair(
-                    new KogakuKyufuTaishoListCheckHandler.IdocheckMessages(UrErrorMessages.大小関係が不正)));
+                    new KogakuKyufuTaishoListValidationHandler.IdocheckMessages(UrErrorMessages.大小関係が不正)));
         }
         List<dgTaishoshaIchiran_Row> rowData = div.getDgTaishoshaIchiran().getDataSource();
         List<dgTaishoshaIchiran_Row> rowList = new ArrayList<>();
@@ -75,15 +75,15 @@ public class KogakuKyufuTaishoListCheckHandler {
         for (dgTaishoshaIchiran_Row row : rowList) {
             if (div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue().equals(row.getData11())) {
                 validPairs.add(new ValidationMessageControlPair(
-                        new KogakuKyufuTaishoListCheckHandler.IdocheckMessages(
+                        new KogakuKyufuTaishoListValidationHandler.IdocheckMessages(
                                 UrErrorMessages.既に登録済, サービス種類コード.toString())));
             }
             if (div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue().equals(row.getData1())) {
-                validPairs.add(new ValidationMessageControlPair(new KogakuKyufuTaishoListCheckHandler.IdocheckMessages(
+                validPairs.add(new ValidationMessageControlPair(new KogakuKyufuTaishoListValidationHandler.IdocheckMessages(
                         UrErrorMessages.既に登録済, 事業者番号.toString())));
             }
             if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(row.getData10())) {
-                validPairs.add(new ValidationMessageControlPair(new KogakuKyufuTaishoListCheckHandler.IdocheckMessages(
+                validPairs.add(new ValidationMessageControlPair(new KogakuKyufuTaishoListValidationHandler.IdocheckMessages(
                         UrErrorMessages.既に登録済, 明細合計区分.toString())));
             }
         }
