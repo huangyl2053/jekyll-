@@ -8,64 +8,53 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-9999-023 liangbc
  */
-public enum ConfigKeysShikakuShogohyo {
+public enum ConfigKeysShikakuShogohyo implements IConfigKeysKokuhorenTorikomi {
 
     /**
      * コード:無し 名称:国保連取込_資格照合表情報 略称:定義なし
      */
-    国保連取込_資格照合表情報("無し", "国保連取込_資格照合表情報"),
+    国保連取込_資格照合表情報("国保連取込_資格照合表情報"),
     /**
      * コード:無し 名称:国保連取込_資格照合表情報_バッチID 略称:定義なし
      */
-    国保連取込_資格照合表情報_バッチID("無し", "国保連取込_資格照合表情報_バッチID"),
+    国保連取込_資格照合表情報_バッチID("国保連取込_資格照合表情報_バッチID"),
     /**
      * コード:無し 名称:国保連取込_資格照合表情報_一覧表示順 略称:定義なし
      */
-    国保連取込_資格照合表情報_一覧表示順("無し", "国保連取込_資格照合表情報_一覧表示順"),
+    国保連取込_資格照合表情報_一覧表示順("国保連取込_資格照合表情報_一覧表示順"),
     /**
      * コード:無し 名称:国保連取込_資格照合表情報_交換情報識別番号 略称:定義なし
      */
-    国保連取込_資格照合表情報_交換情報識別番号("無し", "国保連取込_資格照合表情報_交換情報識別番号"),
+    国保連取込_資格照合表情報_交換情報識別番号("国保連取込_資格照合表情報_交換情報識別番号"),
     /**
      * コード:無し 名称:国保連取込_資格照合表情報_再処理不可区分 略称:定義なし
      */
-    国保連取込_資格照合表情報_再処理不可区分("無し", "国保連取込_資格照合表情報_再処理不可区分"),
+    国保連取込_資格照合表情報_再処理不可区分("国保連取込_資格照合表情報_再処理不可区分"),
     /**
      * コード:無し 名称:国保連取込_資格照合表情報_処理サイクル区分 略称:定義なし
      */
-    国保連取込_資格照合表情報_処理サイクル区分("無し", "国保連取込_資格照合表情報_処理サイクル区分"),
+    国保連取込_資格照合表情報_処理サイクル区分("国保連取込_資格照合表情報_処理サイクル区分"),
     /**
      * コード:無し 名称:国保連取込_資格照合表情報_処理月 略称:定義なし
      */
-    国保連取込_資格照合表情報_処理月("無し", "国保連取込_資格照合表情報_処理月"),
+    国保連取込_資格照合表情報_処理月("国保連取込_資格照合表情報_処理月"),
     /**
      * コード:無し 名称:国保連取込_資格照合表情報_処理名称 略称:定義なし
      */
-    国保連取込_資格照合表情報_処理名称("無し", "国保連取込_資格照合表情報_処理名称"),
+    国保連取込_資格照合表情報_処理名称("国保連取込_資格照合表情報_処理名称"),
     /**
      * コード:無し 名称:国保連取込_資格照合表情報_排他チェック有り区分 略称:定義なし
      */
-    国保連取込_資格照合表情報_排他チェック有り区分("無し", "国保連取込_資格照合表情報_排他チェック有り区分"),
+    国保連取込_資格照合表情報_排他チェック有り区分("国保連取込_資格照合表情報_排他チェック有り区分"),
     /**
      * コード:無し 名称:国保連取込_資格照合表情報_有効区分 略称:定義なし
      */
-    国保連取込_資格照合表情報_有効区分("無し", "国保連取込_資格照合表情報_有効区分");
+    国保連取込_資格照合表情報_有効区分("国保連取込_資格照合表情報_有効区分");
 
-    private final RString code;
     private final RString fullName;
 
-    private ConfigKeysShikakuShogohyo(String code, String fullname) {
-        this.code = new RString(code);
+    private ConfigKeysShikakuShogohyo(String fullname) {
         this.fullName = new RString(fullname);
-    }
-
-    /**
-     * 資格照合表情報コンフィグキーのコードを返します。
-     *
-     * @return 資格照合表情報コンフィグキーのコード
-     */
-    public RString getコード() {
-        return code;
     }
 
     /**
@@ -77,16 +66,70 @@ public enum ConfigKeysShikakuShogohyo {
         return fullName;
     }
 
+    @Override
+    public Enum getバッチID() {
+        return 国保連取込_資格照合表情報_バッチID;
+    }
+
+    @Override
+    public Enum get一覧表示順() {
+        return 国保連取込_資格照合表情報_一覧表示順;
+    }
+
+    @Override
+    public Enum get交換情報識別番号() {
+        return 国保連取込_資格照合表情報_交換情報識別番号;
+    }
+
+    @Override
+    public Enum get再処理不可区分() {
+        return 国保連取込_資格照合表情報_再処理不可区分;
+    }
+
+    @Override
+    public Enum get処理サイクル区分() {
+        return 国保連取込_資格照合表情報_処理サイクル区分;
+    }
+
+    @Override
+    public Enum get処理月() {
+        return 国保連取込_資格照合表情報_処理月;
+    }
+
+    @Override
+    public Enum get処理名称() {
+        return 国保連取込_資格照合表情報_処理名称;
+    }
+
+    @Override
+    public Enum get排他チェック有り区分() {
+        return 国保連取込_資格照合表情報_排他チェック有り区分;
+    }
+
+    @Override
+    public Enum get有効区分() {
+        return 国保連取込_資格照合表情報_有効区分;
+    }
+
     /**
-     * 資格照合表情報コンフィグキーのコードと一致する内容を探します。
+     * 国保連取込_資格照合表情報
      *
-     * @param code 資格照合表情報コンフィグキーのコード
-     * @return {@code code} に対応する資格照合表情報コンフィグキー
+     * @return 国保連取込_資格照合表情報
      */
-    public static ConfigKeysShikakuShogohyo toValue(RString code) {
+    public static IConfigKeysKokuhorenTorikomi getEnum() {
+        return 国保連取込_資格照合表情報;
+    }
+
+    /**
+     * 資格照合表情報コンフィグキーの名称と一致する内容を探します。
+     *
+     * @param fullname 資格照合表情報コンフィグキーの名称
+     * @return {@code fullname} に対応する資格照合表情報コンフィグキー
+     */
+    public static ConfigKeysShikakuShogohyo toValue(RString fullname) {
 
         for (ConfigKeysShikakuShogohyo configKeysShikakuShogohyo : ConfigKeysShikakuShogohyo.values()) {
-            if (configKeysShikakuShogohyo.code.equals(code)) {
+            if (configKeysShikakuShogohyo.get名称().equals(fullname)) {
                 return configKeysShikakuShogohyo;
             }
         }

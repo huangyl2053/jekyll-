@@ -53,7 +53,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.dainonin.DainoninRelate;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.service.core.dainonin.DainoninRelateFinderFactory;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -214,14 +213,8 @@ public class KakushuTsuchishoSakuseiFath {
         賦課台帳情報.set代納人連絡先1(代納人連絡先1);
         賦課台帳情報.set代納人連絡先2(代納人連絡先2);
 
-        List<DbT1006KyokaisoGaitoshaEntity> 境界層当該者情報 = new ArrayList<>();
-        if (賦課の情報更正後.get調定日時() != null && !賦課の情報更正後.get調定日時().isEmpty()) {
-            境界層当該者情報 = 境界層該当者Dac.select境界層該当者(賦課の情報更正後.get被保険者番号(),
-                    new FlexibleDate(賦課の情報更正後.get調定日時().getDate().toDateString()));
-        }
-        if (境界層当該者情報 != null && !境界層当該者情報.isEmpty()) {
-            賦課台帳情報.set境界層当該者情報(境界層当該者情報.get(0));
-        }
+        DbT1006KyokaisoGaitoshaEntity 境界層当該者情報 = 境界層該当者Dac.select境界層該当者情報(賦課の情報更正後.get被保険者番号());
+        賦課台帳情報.set境界層当該者情報(境界層当該者情報);
         DbT1001HihokenshaDaichoEntity 被保険者台帳情報 = 被保険者台帳管理Dac.selectByHihokensha(賦課の情報更正後.get被保険者番号());
         賦課台帳情報.set被保険者台帳情報(被保険者台帳情報);
         List<DbT4021ShiharaiHohoHenkoEntity> 支払方法変更リスト = 支払方法変更Dac.get支支払方法変更(賦課の情報更正後.get被保険者番号());
@@ -521,9 +514,6 @@ public class KakushuTsuchishoSakuseiFath {
         if (定値_期毎.equals(納入通知書タイプ)
                 && KigotoTsuchishoType.標準版期毎タイプ.equals(納入通知書制御情報.get期毎納入通知書タイプ())) {
             return ReportIdDBB.DBB100014.getReportId();
-        } else if (定値_銀振型5期.equals(納入通知書タイプ)) {
-            throw new ApplicationException(UrErrorMessages.該当データなし
-                    .getMessage().replace(定値_銀振型5期.toString()).evaluate());
         } else if (定値_銀振型4期.equals(納入通知書タイプ)
                 && GinfuriTsuchishoType.標準版銀振タイプ.equals(納入通知書制御情報.get銀振納入通知書タイプ())) {
             return ReportIdDBB.DBB100018.getReportId();

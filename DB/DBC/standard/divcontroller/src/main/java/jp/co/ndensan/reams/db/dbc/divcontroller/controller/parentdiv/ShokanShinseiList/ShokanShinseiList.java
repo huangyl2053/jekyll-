@@ -76,11 +76,6 @@ public class ShokanShinseiList {
      * @return ShokanShinseiListDivのResponseData
      */
     public ResponseData<ShokanShinseiListDiv> onClick_InsertButton(ShokanShinseiListDiv requestDiv) {
-        ShokanShinseiValidationHandler validationHandler = createValidationHandler(requestDiv);
-        ValidationMessageControlPairs validationMessages = validationHandler.サービス年月の有効性チェック(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class));
-        if (validationMessages.iterator().hasNext() && !ResponseHolder.isWarningIgnoredRequest()) {
-            return ResponseData.of(requestDiv).addValidationMessages(validationMessages).respond();
-        }
         // TODO 疎通するために、QAのNo.750を暫定対応(正式対応方針はお客様確認中) Start
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, requestDiv.getTxtServiceYM().getValue().getYearMonth().toDateString());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, RString.EMPTY);
@@ -89,6 +84,11 @@ public class ShokanShinseiList {
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_様式番号, RString.EMPTY);
         // TODO 疎通するために、QAのNo.750を暫定対応(正式対応方針はお客様確認中) End
+        ShokanShinseiValidationHandler validationHandler = createValidationHandler(requestDiv);
+        ValidationMessageControlPairs validationMessages = validationHandler.サービス年月の有効性チェック(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class));
+        if (validationMessages.iterator().hasNext() && !ResponseHolder.isWarningIgnoredRequest()) {
+            return ResponseData.of(requestDiv).addValidationMessages(validationMessages).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }

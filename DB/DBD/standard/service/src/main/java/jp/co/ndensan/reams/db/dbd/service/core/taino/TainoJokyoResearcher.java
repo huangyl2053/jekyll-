@@ -21,14 +21,12 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.taino.TainoJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.taino.ITainoJokyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.taino.JikoKubun;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.DateDuration;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
@@ -138,12 +136,9 @@ public class TainoJokyoResearcher {
     }
 
     private List<TainoJohoRelateEntity> get滞納情報リスト(HihokenshaNo 被保険者番号, FlexibleDate 基準日) {
-        DbT2002FukaDac dbT2002FukaDac = InstanceProvider.create(DbT2002FukaDac.class);
-        FlexibleYear max賦課年度 = dbT2002FukaDac.selectMax賦課年度();
         FlexibleYear 賦課年度 = 基準日.getYear();
-        RString 賦課Newest = new RStringBuilder("DbT2002Fuka").append(max賦課年度.getYearValue()).toRString();
         TainoJokyoMapperParameter parameter
-                = TainoJokyoMapperParameter.createParameter(賦課Newest, new RDate(基準日.toString()), 被保険者番号, 賦課年度);
+                = TainoJokyoMapperParameter.createParameter(new RDate(基準日.toString()), 被保険者番号, 賦課年度);
         return InstanceProvider.create(ITainoJokyoMapper.class).selectTainoJoho(parameter);
 
     }

@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 不正な動作の原因になります。</br>
  * DBB2110001の状態名定義クラスです
  *
- * @reamsid_L DBB-1850-010 zhangrui
+ * @reamsid_L DBB-1840-010 zhangrui
  */
 public enum DBB2110001StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">

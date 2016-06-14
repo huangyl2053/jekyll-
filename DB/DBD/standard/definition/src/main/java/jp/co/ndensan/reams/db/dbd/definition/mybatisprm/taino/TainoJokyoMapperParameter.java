@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class TainoJokyoMapperParameter {
 
-    private final RString 賦課Newest;
     private final RDate 基準日;
     private final RDateTime 基準日時;
     private final HihokenshaNo 被保険者番号;
@@ -28,8 +27,7 @@ public final class TainoJokyoMapperParameter {
     private final FlexibleYear 賦課年度十年前;
     private static final int 十年前 = 10;
 
-    private TainoJokyoMapperParameter(RString 賦課Newest, RDate 基準日, HihokenshaNo 被保険者番号, FlexibleYear 賦課年度) {
-        this.賦課Newest = 賦課Newest;
+    private TainoJokyoMapperParameter(RDate 基準日, HihokenshaNo 被保険者番号, FlexibleYear 賦課年度) {
         this.基準日 = 基準日;
         this.基準日時 = RDateTime.of(new RString(基準日.plusDay(1).toString()), RString.EMPTY);
         this.被保険者番号 = 被保険者番号;
@@ -40,14 +38,13 @@ public final class TainoJokyoMapperParameter {
     /**
      * 滞納状況取得のパラメータを作成
      *
-     * @param 賦課Newest 賦課Newest
      * @param 基準日 基準日
      * @param 被保険者番号 被保険者番号
      * @param 賦課年度 賦課年度
      * @return 滞納状況取得のパラメータ
      */
-    public static TainoJokyoMapperParameter createParameter(RString 賦課Newest, RDate 基準日, HihokenshaNo 被保険者番号, FlexibleYear 賦課年度) {
-        return new TainoJokyoMapperParameter(賦課Newest, 基準日, 被保険者番号, 賦課年度);
+    public static TainoJokyoMapperParameter createParameter(RDate 基準日, HihokenshaNo 被保険者番号, FlexibleYear 賦課年度) {
+        return new TainoJokyoMapperParameter(基準日, 被保険者番号, 賦課年度);
     }
 
 }

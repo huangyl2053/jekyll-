@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchosofu.TokuChoSoufuJo
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -26,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @reamsid_L DBB-1840-030 zhangrui
  *
  */
-public class TokuChoSoufuJohoSakuseiManager {
+public class TokuChoSoufuJohoSakusei {
 
     private final DbT7022ShoriDateKanriDac 処理日付管理Dac;
 
@@ -60,10 +61,14 @@ public class TokuChoSoufuJohoSakuseiManager {
     private static final RString 件数表帳票ID_1 = new RString("DBB200020_TokubetsuChoshuIraiJohoKensuhyo");
     private static final RString 件数表帳票ID_2 = new RString("DBB200022_TokubetsuChoshuIdojohoKensuhyo");
 
+    private static final RString 賦課年度メッセージ = new RString("賦課年度");
+    private static final RString バッチパラメータメッセージ = new RString("バッチパラメータ");
+    private static final RString 処理対象月メッセージ = new RString("処理対象月");
+
     /**
      * コンストラクタです。
      */
-    public TokuChoSoufuJohoSakuseiManager() {
+    public TokuChoSoufuJohoSakusei() {
         init対象月連番Map();
         this.処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     }
@@ -73,7 +78,7 @@ public class TokuChoSoufuJohoSakuseiManager {
      *
      * @param 処理日付管理Dac DbT7022ShoriDateKanriDac
      */
-    public TokuChoSoufuJohoSakuseiManager(DbT7022ShoriDateKanriDac 処理日付管理Dac) {
+    public TokuChoSoufuJohoSakusei(DbT7022ShoriDateKanriDac 処理日付管理Dac) {
         init対象月連番Map();
         this.処理日付管理Dac = 処理日付管理Dac;
     }
@@ -93,12 +98,12 @@ public class TokuChoSoufuJohoSakuseiManager {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiManager}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakusei}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakusei}のインスタンス
      */
-    public static TokuChoSoufuJohoSakuseiManager createInstance() {
-        return InstanceProvider.create(TokuChoSoufuJohoSakuseiManager.class);
+    public static TokuChoSoufuJohoSakusei createInstance() {
+        return InstanceProvider.create(TokuChoSoufuJohoSakusei.class);
     }
 
     /**
@@ -108,7 +113,7 @@ public class TokuChoSoufuJohoSakuseiManager {
      * @return Map<RString, YMDHMS>
      */
     public Map<RString, YMDHMS> getShoriDate(FlexibleYear 賦課年度) {
-        requireNonNull(賦課年度);
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度メッセージ.toString()));
         Map<RString, YMDHMS> 処理日時Map = new HashMap<>();
         DbT7022ShoriDateKanriEntity 特徴依頼情報作成 = 処理日付管理Dac.get特徴依頼情報作成の基準日時含みエンティティ(
                 SubGyomuCode.DBB介護賦課, ShoriName.特徴依頼情報作成.get名称(), 賦課年度, 年度内連番_1);
@@ -140,9 +145,9 @@ public class TokuChoSoufuJohoSakuseiManager {
      * @return TokuChoSoufuJohoSakuseiBatchParameter
      */
     public TokuChoSoufuJohoSakuseiBatchParameter createTokuChoSoufuJohoParameter(TokuChoSoufuJohoSakuseiParameter divParam) {
-        requireNonNull(divParam);
-        requireNonNull(divParam.get賦課年度());
-        requireNonNull(divParam.get処理対象月());
+        requireNonNull(divParam, UrSystemErrorMessages.値がnull.getReplacedMessage(バッチパラメータメッセージ.toString()));
+        requireNonNull(divParam.get賦課年度(), UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度メッセージ.toString()));
+        requireNonNull(divParam.get処理対象月(), UrSystemErrorMessages.値がnull.getReplacedMessage(処理対象月メッセージ.toString()));
         TokuChoSoufuJohoSakuseiBatchParameter parameter = new TokuChoSoufuJohoSakuseiBatchParameter();
         parameter.set賦課年度(divParam.get賦課年度());
         RString 処理対象月 = divParam.get処理対象月();

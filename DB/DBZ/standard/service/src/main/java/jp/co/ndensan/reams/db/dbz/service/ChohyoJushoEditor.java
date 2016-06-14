@@ -43,11 +43,9 @@ public class ChohyoJushoEditor {
     private static final RString 定値_2 = new RString("2");
     private static final RString 定値_3 = new RString("3");
     private static final RString 定値_4 = new RString("4");
-    private static final RString 定値_5 = new RString("5");
     private static final RString 定値_L = new RString("（");
     private static final RString 定値_R = new RString("）");
     private static final RString 管内 = new RString("管内");
-    private static final RString 管外 = new RString("管外");
     private final DbT7065ChohyoSeigyoKyotsuDac dbt7065dac;
     private final List<JushoEditHoho> list;
     private DonyuKeitaiCode 導入形態コード;
@@ -72,16 +70,16 @@ public class ChohyoJushoEditor {
         if (shichosonsecurityjoho != null) {
             導入形態コード = shichosonsecurityjoho.get導入形態コード();
             if (導入形態コード != null && 導入形態コード.is単一()) {
-                step3(subgyomucode, 帳票分類ID, shichosonsecurityjoho, nowDate);
+                step帳票独自の場合(subgyomucode, 帳票分類ID, shichosonsecurityjoho, nowDate);
             } else if (導入形態コード != null && !導入形態コード.is単一()) {
-                step4(shichosonsecurityjoho, nowDate);
+                step市町村共通の場合(shichosonsecurityjoho, nowDate);
             }
         } else {
             throw new NullPointerException();
         }
     }
 
-    private void step3(SubGyomuCode subgyomucode, RString 帳票分類ID, ShichosonSecurityJoho shichosonsecurityjoho, RDate nowDate) {
+    private void step帳票独自の場合(SubGyomuCode subgyomucode, RString 帳票分類ID, ShichosonSecurityJoho shichosonsecurityjoho, RDate nowDate) {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         if (association == null) {
             throw new NullPointerException();
@@ -119,7 +117,7 @@ public class ChohyoJushoEditor {
         }
     }
 
-    private void step4(ShichosonSecurityJoho shichosonsecurityjoho, RDate nowDate) {
+    private void step市町村共通の場合(ShichosonSecurityJoho shichosonsecurityjoho, RDate nowDate) {
         JushoEditHoho jushoedithoho = new JushoEditHoho();
         jushoedithoho.set市町村コード(shichosonsecurityjoho.get市町村情報().get市町村コード());
         jushoedithoho.set管内住所編集_都道府県名付与有無(DbBusinessConfig.get(
@@ -137,19 +135,20 @@ public class ChohyoJushoEditor {
         jushoedithoho.set市町村名(RString.EMPTY);
         list.add(jushoedithoho);
         List<KoseiShichosonMaster> koseishichosonmasterlist = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
-        if (koseishichosonmasterlist != null && koseishichosonmasterlist.size() == NUM1) {
-            KoseiShichosonMaster koseishichosonmaster = koseishichosonmasterlist.get(0);
-            JushoEditHoho jushoedithoho1 = new JushoEditHoho();
-            jushoedithoho1.set市町村コード(koseishichosonmaster.get市町村コード());
-            jushoedithoho1.set管内住所編集_都道府県名付与有無(koseishichosonmaster.get帳票用都道府県名称表示有無());
-            jushoedithoho1.set管内住所編集_郡名付与有無(koseishichosonmaster.get帳票用郡名称表示有無());
-            jushoedithoho1.set管内住所編集_市町村名付与有無(koseishichosonmaster.get帳票用市町村名称表示有無());
-            jushoedithoho1.set管内住所編集_住所編集方法(koseishichosonmaster.get帳票用住所編集方法());
-            jushoedithoho1.set住所編集_方書表示有無(koseishichosonmaster.get帳票用方書表示有無());
-            jushoedithoho1.set都道府県名(koseishichosonmaster.get都道府県名称());
-            jushoedithoho1.set郡名(koseishichosonmaster.get郡名称());
-            jushoedithoho1.set市町村名(koseishichosonmaster.get市町村名称());
-            list.add(jushoedithoho1);
+        if (koseishichosonmasterlist != null) {
+            for (KoseiShichosonMaster koseishichosonmaster : koseishichosonmasterlist) {
+                JushoEditHoho jushoedithoho1 = new JushoEditHoho();
+                jushoedithoho1.set市町村コード(koseishichosonmaster.get市町村コード());
+                jushoedithoho1.set管内住所編集_都道府県名付与有無(koseishichosonmaster.get帳票用都道府県名称表示有無());
+                jushoedithoho1.set管内住所編集_郡名付与有無(koseishichosonmaster.get帳票用郡名称表示有無());
+                jushoedithoho1.set管内住所編集_市町村名付与有無(koseishichosonmaster.get帳票用市町村名称表示有無());
+                jushoedithoho1.set管内住所編集_住所編集方法(koseishichosonmaster.get帳票用住所編集方法());
+                jushoedithoho1.set住所編集_方書表示有無(koseishichosonmaster.get帳票用方書表示有無());
+                jushoedithoho1.set都道府県名(koseishichosonmaster.get都道府県名称());
+                jushoedithoho1.set郡名(koseishichosonmaster.get郡名称());
+                jushoedithoho1.set市町村名(koseishichosonmaster.get市町村名称());
+                list.add(jushoedithoho1);
+            }
         }
     }
 
@@ -165,6 +164,10 @@ public class ChohyoJushoEditor {
      * @return 編集後住所 RString
      */
     public RString editJusho(RString 管内管外区分, RString 住所, RString 番地, RString 方書, RString 行政区名, LasdecCode 市町村コード) {
+        住所 = 住所 != null ? 住所 : RString.EMPTY;
+        番地 = 番地 != null ? 番地 : RString.EMPTY;
+        方書 = 方書 != null ? 方書 : RString.EMPTY;
+        行政区名 = 行政区名 != null ? 行政区名 : RString.EMPTY;
         RString 編集後住所 = RString.EMPTY;
         JushoEditHoho jushoedithoho = new JushoEditHoho();
         if (導入形態コード.is単一() || 市町村コード == null || 市町村コード.isEmpty()) {
@@ -173,20 +176,20 @@ public class ChohyoJushoEditor {
             jushoedithoho = list.get(NUM0);
             for (JushoEditHoho entity : list) {
                 if (市町村コード.equals(entity.get市町村コード())) {
-                    jushoedithoho = new JushoEditHoho();
+                    jushoedithoho = entity;
                     break;
                 }
             }
         }
         if (管内.equals(管内管外区分)) {
-            編集後住所 = execute3(編集後住所, jushoedithoho, 住所, 番地, 行政区名, 方書);
-        } else if (管外.equals(管内管外区分)) {
-            編集後住所 = execute4(編集後住所, jushoedithoho, 住所, 番地, 行政区名, 方書);
+            編集後住所 = execute管内住所の編集(編集後住所, jushoedithoho, 住所, 番地, 行政区名, 方書);
+        } else {
+            編集後住所 = execute管外住所の編集(編集後住所, jushoedithoho, 住所, 番地, 行政区名, 方書);
         }
         return 編集後住所;
     }
 
-    private RString execute3(RString 編集後住所, JushoEditHoho jushoedithoho, RString 住所, RString 番地, RString 行政区名, RString 方書) {
+    private RString execute管内住所の編集(RString 編集後住所, JushoEditHoho jushoedithoho, RString 住所, RString 番地, RString 行政区名, RString 方書) {
         if (定値_1.equals(jushoedithoho.get管内住所編集_都道府県名付与有無()) && jushoedithoho.get都道府県名() != null) {
             編集後住所 = 編集後住所.concat(jushoedithoho.get都道府県名());
         }
@@ -208,13 +211,13 @@ public class ChohyoJushoEditor {
         } else if (定値_4.equals(jushoedithoho.get管内住所編集_住所編集方法())) {
             編集後住所 = 編集後住所.concat(番地);
         }
-        if (定値_1.equals(jushoedithoho.get住所編集_方書表示有無()) && RString.isNullOrEmpty(方書)) {
+        if (定値_1.equals(jushoedithoho.get住所編集_方書表示有無()) && !RString.isNullOrEmpty(方書)) {
             編集後住所 = 編集後住所.concat(RString.FULL_SPACE).concat(方書);
         }
         return 編集後住所;
     }
 
-    private RString execute4(RString 編集後住所, JushoEditHoho jushoedithoho, RString 住所, RString 番地, RString 行政区名, RString 方書) {
+    private RString execute管外住所の編集(RString 編集後住所, JushoEditHoho jushoedithoho, RString 住所, RString 番地, RString 行政区名, RString 方書) {
         if (定値_1.equals(jushoedithoho.get管内住所編集_住所編集方法())) {
             編集後住所 = 編集後住所.concat(住所).concat(番地);
         } else if (定値_2.equals(jushoedithoho.get管内住所編集_住所編集方法())) {
@@ -227,7 +230,7 @@ public class ChohyoJushoEditor {
         } else if (定値_4.equals(jushoedithoho.get管内住所編集_住所編集方法())) {
             編集後住所 = 編集後住所.concat(番地);
         }
-        if (定値_1.equals(jushoedithoho.get住所編集_方書表示有無()) && RString.isNullOrEmpty(方書)) {
+        if (定値_1.equals(jushoedithoho.get住所編集_方書表示有無()) && !RString.isNullOrEmpty(方書)) {
             編集後住所 = 編集後住所.concat(RString.FULL_SPACE).concat(方書);
         }
         return 編集後住所;

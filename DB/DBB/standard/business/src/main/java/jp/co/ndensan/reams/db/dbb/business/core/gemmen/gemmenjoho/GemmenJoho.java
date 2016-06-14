@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 減免の情報を管理するクラスです。
  *
- * @reamsid_L DBB-9999-013 huangh
+ * @reamsid_L DBB-9999-013 xicongwang
  */
 public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002FukaEntity, GemmenJoho> implements Serializable {
 

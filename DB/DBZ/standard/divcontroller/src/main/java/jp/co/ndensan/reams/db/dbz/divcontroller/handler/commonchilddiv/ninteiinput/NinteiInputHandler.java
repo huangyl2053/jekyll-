@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBDCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputDataPassModel;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputNaiyo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.NinteiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.dgServiceIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteiinput.NinteiInputFinder;
@@ -45,7 +46,7 @@ public class NinteiInputHandler {
      */
     public void initialize(NinteiInputDataPassModel model) {
         div.setHdnShinseishoKanriNo(model.get申請書管理番号() == null ? RString.EMPTY : model.get申請書管理番号().value());
-        div.getRadNinteiKubun().setSelectedValue(model.get認定区分());
+        div.getRadNinteiKubun().setSelectedKey(model.get認定区分());
         div.getChkMinashiKoshinNintei().setSelectedItemsByKey(model.getみなし更新認定());
         div.setHdnDatabaseSubGyomuCode(model.getSubGyomuCode());
         div.setHdnKoroshoIfShikibetsuCode(model.get厚労省IFコード());
@@ -80,6 +81,39 @@ public class NinteiInputHandler {
         } else {
             div.getDgServiceIchiran().setReadOnly(true);
         }
+    }
+
+    /**
+     * 画面一覧内容を取得。
+     *
+     * @return NinteiInputNaiyo NinteiInputNaiyo
+     */
+    public NinteiInputNaiyo getNaiyo() {
+        NinteiInputNaiyo naiyo = new NinteiInputNaiyo();
+        naiyo.set認定区分(div.getRadNinteiKubun().getSelectedKey());
+        naiyo.setみなし更新認定(div.getChkMinashiKoshinNintei().getSelectedKeys());
+        naiyo.set認定年月日(div.getTxtNinteiYMD().getValue());
+        naiyo.set有効終了年月日(div.getTxtYukoShuryoYMD().getValue());
+        naiyo.set有効開始年月日(div.getTxtYukoKaishiYMD().getValue());
+        naiyo.set要介護度コード(div.getTxtYokaigodoCode().getValue());
+        naiyo.set要介護度名称(div.getTxtYokaigodoName().getValue());
+        naiyo.set審査会意見(div.getTxtShinsakaiIken().getValue());
+        return naiyo;
+    }
+
+    /**
+     * Service一覧内容を取得。
+     *
+     * @return NinteiInputNaiyo NinteiInputNaiyo
+     */
+    public List<dgServiceIchiran_Row> getServiceRow() {
+        List<dgServiceIchiran_Row> rowList = new ArrayList<>();
+        for (dgServiceIchiran_Row row : div.getDgServiceIchiran().getDataSource()) {
+            if (row.getSelected()) {
+                rowList.add(row);
+            }
+        }
+        return rowList;
     }
 
     private void setSelect(List<dgServiceIchiran_Row> rowList, List<JukyushaDaicho> jukyushaDaichoList) {

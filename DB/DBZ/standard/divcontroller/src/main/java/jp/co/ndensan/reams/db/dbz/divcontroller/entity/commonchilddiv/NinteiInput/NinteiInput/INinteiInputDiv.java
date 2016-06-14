@@ -1,6 +1,8 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputDataPassModel;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputNaiyo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -32,4 +34,18 @@ public interface INinteiInputDiv extends ICommonChildDivBaseProperties {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 開始終了日前後順check();
+
+    /**
+     * 画面一覧内容を取得。
+     *
+     * @return NinteiInputNaiyo
+     */
+    public NinteiInputNaiyo getNaiyo();
+
+    /**
+     * Service一覧内容を取得。
+     *
+     * @return dgServiceIchiran_Row
+     */
+    public List<dgServiceIchiran_Row> getServiceRow();
 }

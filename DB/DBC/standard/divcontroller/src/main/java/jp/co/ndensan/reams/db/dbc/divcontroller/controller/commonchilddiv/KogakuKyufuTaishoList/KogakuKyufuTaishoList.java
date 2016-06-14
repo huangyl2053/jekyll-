@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.commonchilddiv.KogakuKyufuTaishoList;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoListCheckHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoListValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoListHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.dgTaishoshaIchiran_Row;
@@ -199,8 +199,8 @@ public class KogakuKyufuTaishoList {
         return new KogakuKyufuTaishoListHandler(div);
     }
 
-    private KogakuKyufuTaishoListCheckHandler getCheckHandler(KogakuKyufuTaishoListDiv div) {
-        return new KogakuKyufuTaishoListCheckHandler(div);
+    private KogakuKyufuTaishoListValidationHandler getCheckHandler(KogakuKyufuTaishoListDiv div) {
+        return new KogakuKyufuTaishoListValidationHandler(div);
     }
 
 }

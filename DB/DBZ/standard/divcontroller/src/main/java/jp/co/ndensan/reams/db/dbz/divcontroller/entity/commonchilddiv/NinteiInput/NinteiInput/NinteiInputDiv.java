@@ -11,9 +11,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputDataPassModel;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputNaiyo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteiinput.NinteiInputHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteiinput.NinteiInputValidationHandler;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
@@ -417,5 +419,25 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     @Override
     public ValidationMessageControlPairs 開始終了日前後順check() {
         return new NinteiInputValidationHandler(this).開始終了日前後順check();
+    }
+
+    /**
+     * 画面一覧内容を取得。
+     *
+     * @return NinteiInputNaiyo
+     */
+    @Override
+    public NinteiInputNaiyo getNaiyo() {
+        return new NinteiInputHandler(this).getNaiyo();
+    }
+
+    /**
+     * Service一覧内容を取得。
+     *
+     * @return dgServiceIchiran_Row
+     */
+    @Override
+    public List<dgServiceIchiran_Row> getServiceRow() {
+        return new NinteiInputHandler(this).getServiceRow();
     }
 }

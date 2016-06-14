@@ -14,7 +14,7 @@ import java.util.Map.Entry;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchosofu.TokuChoSoufuJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchosofu.TokuChoSoufuJohoSakuseiBatchParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2110001.TokuchoSofuJohoSakuseiDiv;
-import jp.co.ndensan.reams.db.dbb.service.core.tokuchosofu.TokuChoSoufuJohoSakuseiManager;
+import jp.co.ndensan.reams.db.dbb.service.core.tokuchosofu.TokuChoSoufuJohoSakusei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke;
@@ -95,7 +95,7 @@ public final class TokuchoSofuJohoSakuseiHandler {
     }
 
     private void do初期値取得() {
-        TokuChoSoufuJohoSakuseiManager manager = TokuChoSoufuJohoSakuseiManager.createInstance();
+        TokuChoSoufuJohoSakusei manager = TokuChoSoufuJohoSakusei.createInstance();
         FlexibleYear 賦課年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
         処理日時Map = manager.getShoriDate(賦課年度);
@@ -430,7 +430,7 @@ public final class TokuchoSofuJohoSakuseiHandler {
      * @return TokuChoSoufuJohoSakuseiBatchParameter
      */
     public TokuChoSoufuJohoSakuseiBatchParameter getバッチパラメータ() {
-        TokuChoSoufuJohoSakuseiManager manager = TokuChoSoufuJohoSakuseiManager.createInstance();
+        TokuChoSoufuJohoSakusei manager = TokuChoSoufuJohoSakusei.createInstance();
         TokuChoSoufuJohoSakuseiParameter param = new TokuChoSoufuJohoSakuseiParameter();
         param.set賦課年度(new RDate(div.getDdlFukaNendo().getSelectedValue().toString()).getYear());
         param.set処理対象月(get処理対象月().getKey());

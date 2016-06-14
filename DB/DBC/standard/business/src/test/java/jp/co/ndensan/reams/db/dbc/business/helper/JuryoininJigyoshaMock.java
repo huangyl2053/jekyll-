@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.JuryoininJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.KeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.Todokedesha;
 import jp.co.ndensan.reams.db.dbc.definition.core.eigyokeitai.EigyoKeitai;
-import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.keiyakuno.KeiyakuNo;
+import jp.co.ndensan.reams.db.dbc.definition.core.keiyakuno.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;

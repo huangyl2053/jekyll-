@@ -7,7 +7,7 @@
      <select id="get老齢福祉年金情報"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity" 
             parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo"
-            fetchSize="500">
+            fetchSize="500" resultOrdered="true">
         SELECT A.*
         FROM rgdb."DbT7006RoreiFukushiNenkinJukyusha" A
         INNER JOIN rgdb."DbV1001HihokenshaDaicho" B
