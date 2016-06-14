@@ -252,7 +252,7 @@
         
     <select id="get市町村コード"
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteihokenshain.KagoKetteiHokenshaInParameter">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.core.kagoketteihokenshain.KagoKetteiHokenshaInParameter">
      SELECT
          <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
      FROM
@@ -266,7 +266,7 @@
      LIMIT(1)
     </select>
     
-    <select id="get新被保険者番号" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteihokenshain.KagoKetteiHokenshaInParameter" 
+    <select id="get新被保険者番号" parameterType="jp.co.ndensan.reams.db.dbc.definition.core.kagoketteihokenshain.KagoKetteiHokenshaInParameter" 
         resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.ShihihokenshabangoTempTableEntity">
         SELECT 
         Henkan."shichosonCode",
