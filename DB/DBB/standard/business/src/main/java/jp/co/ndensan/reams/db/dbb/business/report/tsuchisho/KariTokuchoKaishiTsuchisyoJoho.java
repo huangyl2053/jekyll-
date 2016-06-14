@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 仮算定特徴開始通知書情報
@@ -29,4 +30,6 @@ public class KariTokuchoKaishiTsuchisyoJoho {
     private IAtesaki 宛先情報;
     private ShoriKubun 処理区分;
     private Association 地方公共団体;
+    private RString 特徴捕捉月;
+
 }
