@@ -38,10 +38,10 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
     private static final RString 処理日付管理マスタ無し = new RString("3");
     private static final RString 可 = new RString("1");
     private static final RString 不可 = new RString("2");
-    private static final RString データなし = new RString("データなし");
+    private static final RString データなし = new RString("5");
     private static final RString 状態なし = new RString("状態なし");
     private static final RString パーセント = new RString("%");
-    private static final RString 共有ファイル名 = new RString("BBKAIGO");
+    private static final RString 共有ファイル名 = new RString("BBKAIGOxxxxxxxx.CSV");
 
     /**
      * コンストラクタです。
