@@ -8,9 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110003;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110003.HakkoJokenDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 認定調査に関する帳票発行画面クラスです
@@ -36,12 +34,13 @@ public class HakkoJokenHandler {
 
     /**
      * 画面初期化処理です。
+     *
+     * @param 認定調査予定未定者一覧フラグ 遷移元画面から受け取った引数
+     * @param 認定調査依頼先変更者一覧表フラグ 遷移元画面から受け取った引数
+     * @param 認定調査結果と主治医意見書のチェックリストフラグ 遷移元画面から受け取った引数
      */
-    public void onLoad() {
-        boolean 認定調査予定未定者一覧フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_認定調査予定未定者一覧フラグ, Boolean.class);
-        boolean 認定調査依頼先変更者一覧表フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_認定調査依頼先変更者一覧表フラグ, Boolean.class);
-        boolean 認定調査結果と主治医意見書のチェックリストフラグ
-                = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_認定調査結果と主治医意見書のチェックリストフラグ, Boolean.class);
+    public void onLoad(boolean 認定調査予定未定者一覧フラグ, boolean 認定調査依頼先変更者一覧表フラグ,
+            boolean 認定調査結果と主治医意見書のチェックリストフラグ) {
         SELECT_LIST.clear();
         checkPanel(認定調査予定未定者一覧フラグ, 認定調査依頼先変更者一覧表フラグ, 認定調査結果と主治医意見書のチェックリストフラグ);
         if (認定調査予定未定者一覧フラグ) {
