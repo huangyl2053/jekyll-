@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0110004
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110004.HakkoJokenSyujiiIkensyoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110004.HakkoJokenSyujiiIkensyoHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面設計_DBE0110004_主治医意見書に関する帳票発行画面クラスです
@@ -26,7 +28,20 @@ public class HakkoJokenSyujiiIkensyo {
      * @return ResponseData<HakkoJokenSyujiiIkensyoDiv>
      */
     public ResponseData<HakkoJokenSyujiiIkensyoDiv> onLoad(HakkoJokenSyujiiIkensyoDiv div) {
-        getHandler(div).onLoad();
+        boolean 主治医意見書未提出者一覧フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_主治医意見書未提出者一覧フラグ,
+                Boolean.class);
+        boolean 主治医意見書５項目確認一覧表フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_主治医意見書５項目確認一覧表フラグ,
+                Boolean.class);
+        boolean 主治医意見書依頼未処理者一覧表フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_主治医意見書依頼未処理者一覧表フラグ,
+                Boolean.class);
+        boolean 主治医意見書作成依頼変更者一覧表フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_主治医意見書作成依頼変更者一覧表フラグ,
+                Boolean.class);
+        boolean 主治医意見書依頼済み一覧表フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_主治医意見書依頼済み一覧表フラグ,
+                Boolean.class);
+        boolean 主治医意見書作成料請求一覧表フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_主治医意見書作成料請求一覧表フラグ,
+                Boolean.class);
+        getHandler(div).onLoad(主治医意見書未提出者一覧フラグ, 主治医意見書５項目確認一覧表フラグ, 主治医意見書依頼未処理者一覧表フラグ,
+                主治医意見書作成依頼変更者一覧表フラグ, 主治医意見書依頼済み一覧表フラグ, 主治医意見書作成料請求一覧表フラグ);
         return ResponseData.of(div).respond();
     }
 

@@ -8,9 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110004;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110004.HakkoJokenSyujiiIkensyoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面設計_DBE0110004_主治医意見書に関する帳票発行handlerクラスです
@@ -34,25 +32,22 @@ public class HakkoJokenSyujiiIkensyoHandler {
 
     /**
      * 画面初期化処理です。
+     *
+     * @param 主治医意見書未提出者一覧フラグ 遷移元画面から受け取った引数
+     * @param 主治医意見書５項目確認一覧表フラグ 遷移元画面から受け取った引数
+     * @param 主治医意見書依頼未処理者一覧表フラグ 遷移元画面から受け取った引数
+     * @param 主治医意見書作成依頼変更者一覧表フラグ 遷移元画面から受け取った引数
+     * @param 主治医意見書依頼済み一覧表フラグ 遷移元画面から受け取った引数
+     * @param 主治医意見書作成料請求一覧表フラグ 遷移元画面から受け取った引数
      */
-    public void onLoad() {
-        boolean 主治医意見書未提出者一覧フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_主治医意見書未提出者一覧フラグ,
-                Boolean.class);
-        boolean 主治医意見書５項目確認一覧表フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_主治医意見書５項目確認一覧表フラグ,
-                Boolean.class);
-        boolean 主治医意見書依頼未処理者一覧表フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_主治医意見書依頼未処理者一覧表フラグ,
-                Boolean.class);
-        boolean 主治医意見書作成依頼変更者一覧表フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_主治医意見書作成依頼変更者一覧表フラグ,
-                Boolean.class);
-        boolean 主治医意見書依頼済み一覧表フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_主治医意見書依頼済み一覧表フラグ,
-                Boolean.class);
-        boolean 主治医意見書作成料請求一覧表フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_主治医意見書作成料請求一覧表フラグ,
-                Boolean.class);
+    public void onLoad(boolean 主治医意見書未提出者一覧フラグ, boolean 主治医意見書５項目確認一覧表フラグ,
+            boolean 主治医意見書依頼未処理者一覧表フラグ, boolean 主治医意見書作成依頼変更者一覧表フラグ, boolean 主治医意見書依頼済み一覧表フラグ,
+            boolean 主治医意見書作成料請求一覧表フラグ) {
         checkPanel(主治医意見書未提出者一覧フラグ, 主治医意見書５項目確認一覧表フラグ, 主治医意見書依頼未処理者一覧表フラグ,
                 主治医意見書作成依頼変更者一覧表フラグ, 主治医意見書依頼済み一覧表フラグ, 主治医意見書作成料請求一覧表フラグ);
         SELECT_LIST.clear();
         if (主治医意見書未提出者一覧フラグ) {
-            div.getMiteishutsushaIchiranJoken().setIsOpen(主治医意見書未提出者一覧フラグ);
+            div.getMiteishutsushaIchiranJoken().setIsOpen(true);
             SELECT_LIST.add(SELECT_KEY0);
             div.getChkMiteishutsushaIchiran().setSelectedItemsByKey(SELECT_LIST);
             SELECT_LIST.clear();
@@ -83,6 +78,9 @@ public class HakkoJokenSyujiiIkensyoHandler {
         }
         if (主治医意見書作成料請求一覧表フラグ) {
             div.getSakuseiryoSeikyuIchiranhyoJoken().setIsOpen(true);
+            SELECT_LIST.add(SELECT_KEY0);
+            div.getChkSakuseiryoSeikyuIchiranhyo().setSelectedItemsByKey(SELECT_LIST);
+            SELECT_LIST.clear();
         }
     }
 
