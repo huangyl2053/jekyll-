@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 発行帳票情報
+ * 計算後情報作成のビジネスです。
  *
  * @reamsid_L DBB-9060-010 duanzhanli
  */
