@@ -11,7 +11,7 @@
         <association property="宛先" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
         <association property="納組" resultMap="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.nokumiResult"/>
         <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt310FindKozaFunctionMapper.kozaResult"/>
-        <!--<association property="対象者_追加含む情報_更正後" resultMap="jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity" />-->
+        <association property="対象者_追加含む情報_更正後" resultMap="jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity" />
     </resultMap>
 
     <resultMap id="resultMap_出力対象情報の取得" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KarisanteiGakuHenkoEntity" autoMapping="true">
@@ -25,7 +25,7 @@
     </resultMap>
 
     <select id="get基準日時"
-            resultType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"
+            resultType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter"
             fetchSize="500">
         SELECT MAX(A."kijunTimestamp") AS "基準日時"
@@ -46,7 +46,7 @@
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt310FindKozaFunctionMapper.columns_Koza" />,
         年金特徴回付情報.*
         FROM
-        rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJohoTemp"
+        rgdb."DbT2015KeisangoJohoTemp" AS "DbT2015KeisangoJohoTemp"
         INNER JOIN
         rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,true,
@@ -336,7 +336,8 @@
         AND ("choshuHoho6gatsu" = #{特別徴収_厚生労働省} OR "choshuHoho6gatsu" = #{特別徴収_地共済})
     </update>
 
-    <select id="select出力対象情報" resultMap="resultMap_出力対象情報の取得">
+    <select id="select出力対象情報" resultMap="resultMap_出力対象情報の取得"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.ShutsuRyokuTaishoShutokuMyBatisParameter">
         SELECT *
         FROM rgdb."DbT2002FukaTemp" AS DbT2002FukaTemp
         WHERE
@@ -351,14 +352,14 @@
             AND (DbT2002FukaTemp."hihokenshaKubun" = '1' OR "hihokenshaKubun" = '2')
         </if>
         <if test="出力順 != null and !出力順.isEmpty()">
-            #{出力順}
+            ${出力順}
         </if>
     </select>
 
     <insert id="insert通知書発行後異動者">
         INSERT INTO
-        rgdb."DbT2017TsuchishoHakkogoIdosha" ("hohyoBunruiID", "chohyosakuseiTimestamp", "tsuchishoNo","shikibetsuCode", "hihokenshaNo", "keisanTimestamp", "gaitoRemban", "idoAriFlag")
-        SELECT 	#{帳票ID},#{帳票作成日時}, "koseigo_fukaNendo", "koseigo_hihokenshaNo", "koseigo_shikibetsuCode", "koseigo_choteiNendo", rownum, false
+        rgdb."DbT2017TsuchishoHakkogoIdosha" ("reportID", "chohyosakuseiTimestamp", "fukaNendo", "tsuchishoNo","shikibetsuCode", "hihokenshaNo", "keisanTimestamp", "gaitoRemban", "idoAriFlag")
+        SELECT 	#{帳票ID}, #{帳票作成日時}, "koseigo_fukaNendo", "koseigo_tsuchishoNo", "koseigo_shikibetsuCode", "koseigo_hihokenshaNo", #{基準日時}, row_number() over() as rownum, false
         FROM
         rgdb."DbT2002FukaTemp"
         WHERE
@@ -373,7 +374,7 @@
             AND (DbT2002FukaTemp."hihokenshaKubun" = '1' OR "hihokenshaKubun" = '2')
         </if>
         <if test="出力順 != null and !出力順.isEmpty()">
-            #{出力順}
+            ${出力順}
         </if>
     </insert>
 

@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchish
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchoheijunka6tsuchishoikatsuhako.Dbb100012MyBatisOrderByClauseCreator;
-import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb100012.KarisanteiHenjunkaHenkoTsuchishoB5YokoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb100013.KarisanteiHenjunkaHenkoTsuchishoA4TateReport;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReport;
@@ -18,8 +17,8 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchish
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KariSanteigakuHenkoTsuchishoHakkoIchiranData;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KarisanteiGakuHenkoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100012.KarisanteiHenjunkaHenkoTsuchishoB5YokoReportSource;
+import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoProcessParameter;
+import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100013.KarisanteiHenjunkaHenkoTsuchishoA4TateReportSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
@@ -55,20 +54,16 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @reamsid_L DBB-0820-030 xuyue
  */
-public class TsuchishoHakoProcess extends BatchProcessBase<KarisanteiGakuHenkoEntity> {
+public class TsuchishoHakoA4TypeProcess extends BatchProcessBase<KarisanteiGakuHenkoEntity> {
 
     @BatchWriter
-    private BatchReportWriter<KarisanteiHenjunkaHenkoTsuchishoB5YokoReportSource> batchReportWriterB5;
-    private ReportSourceWriter<KarisanteiHenjunkaHenkoTsuchishoB5YokoReportSource> reportSourceWriterB5;
-
-//    @BatchWriter
-//    private BatchReportWriter<KarisanteiHenjunkaHenkoTsuchishoA4TateReportSource> batchReportWriterA4;
-//    private ReportSourceWriter<KarisanteiHenjunkaHenkoTsuchishoA4TateReportSource> reportSourceWriterA4;
+    private BatchReportWriter<KarisanteiHenjunkaHenkoTsuchishoA4TateReportSource> batchReportWriterA4;
+    private ReportSourceWriter<KarisanteiHenjunkaHenkoTsuchishoA4TateReportSource> reportSourceWriterA4;
     @BatchWriter
     private BatchReportWriter<TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource> batchReportWriterIchiran;
     private ReportSourceWriter<TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource> reportSourceWriterIchiran;
 
-    private TsuchishoHakoEntity parameter;
+    private TsuchishoHakoProcessParameter parameter;
     private static final ReportId 帳票分類ID_DBB100012 = new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
             + "tokuchoheijunka6tsuchishoikatsuhako.ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper.select出力対象情報");
@@ -97,13 +92,12 @@ public class TsuchishoHakoProcess extends BatchProcessBase<KarisanteiGakuHenkoEn
         通知書一覧ページ数 = Decimal.ZERO;
 
         service = TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko.createInstance();
-
     }
 
     @Override
     protected IBatchReader createReader() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder = finder.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID_DBB100012, Long.parseLong(parameter.get出力順ID().toString()));
+        outputOrder = finder.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID_DBB100012, Long.parseLong(parameter.get出力順ID().toString()));
 
         RString 出力順 = RString.EMPTY;
         if (outputOrder != null) {
@@ -115,13 +109,8 @@ public class TsuchishoHakoProcess extends BatchProcessBase<KarisanteiGakuHenkoEn
 
     @Override
     protected void createWriter() {
-        if (ReportIdDBB.DBB100012.getReportId().getColumnValue().equals(parameter.get帳票ID())) {
-            batchReportWriterB5 = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100012.getReportId().getColumnValue(), SubGyomuCode.DBB介護賦課).create();
-            reportSourceWriterB5 = new ReportSourceWriter(batchReportWriterB5);
-        } else if (ReportIdDBB.DBB100013.getReportId().getColumnValue().equals(parameter.get帳票ID())) {
-//            batchReportWriterA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100013.getReportId().getColumnValue(), SubGyomuCode.DBB介護賦課).create();
-//            reportSourceWriterA4 = new ReportSourceWriter(batchReportWriterA4);
-        }
+        batchReportWriterA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100013.getReportId().getColumnValue(), SubGyomuCode.DBB介護賦課).create();
+        reportSourceWriterA4 = new ReportSourceWriter(batchReportWriterA4);
 
         List pageBreakKeys = new ArrayList<>();
         service.set改頁Key(outputOrder, pageBreakKeys);
@@ -144,13 +133,8 @@ public class TsuchishoHakoProcess extends BatchProcessBase<KarisanteiGakuHenkoEn
         kaigoToiawasesakiSource = KaigoToiawasesakiSourceBuilderCreator
                 .create(SubGyomuCode.DBB介護賦課, 帳票分類ID_DBB100012).buildSource();
 
-        if (ReportIdDBB.DBB100012.getReportId().getColumnValue().equals(parameter.get帳票ID())) {
-            ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID_DBB100012,
-                    parameter.get発行日(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriterB5);
-        } else if (ReportIdDBB.DBB100013.getReportId().getColumnValue().equals(parameter.get帳票ID())) {
-//            ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID_DBB100012,
-//                    parameter.get発行日(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriterA4);
-        }
+        ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID_DBB100012,
+                parameter.get発行日(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriterA4);
 
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         outputOrder = finder.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID_DBB100012, Long.parseLong(parameter.get出力順ID().toString()));
@@ -173,17 +157,10 @@ public class TsuchishoHakoProcess extends BatchProcessBase<KarisanteiGakuHenkoEn
         KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報 = new KariSanteiNonyuTsuchiShoJoho();
         仮算定納入通知書情報.set編集後仮算定通知書共通情報(編集後仮算定通知書);
 
-        if (ReportIdDBB.DBB100012.getReportId().getColumnValue().equals(parameter.get帳票ID())) {
-            KarisanteiHenjunkaHenkoTsuchishoB5YokoReport report = new KarisanteiHenjunkaHenkoTsuchishoB5YokoReport(
-                    仮算定納入通知書情報, 通知書番号.getColumnValue(), ninshoshaSource, kaigoToiawasesakiSource);
-            report.writeBy(reportSourceWriterB5);
-            通知書ページ数 = 通知書ページ数.add(new Decimal(batchReportWriterB5.getPageCount()));
-        } else if (ReportIdDBB.DBB100013.getReportId().getColumnValue().equals(parameter.get帳票ID())) {
-            KarisanteiHenjunkaHenkoTsuchishoA4TateReport report = new KarisanteiHenjunkaHenkoTsuchishoA4TateReport(
-                    仮算定納入通知書情報, 通知書番号.getColumnValue(), ninshoshaSource, kaigoToiawasesakiSource);
-//            report.writeBy(reportSourceWriterA4);
-//            通知書ページ数 = 通知書ページ数.add(new Decimal(batchReportWriterA4.getPageCount()));
-        }
+        KarisanteiHenjunkaHenkoTsuchishoA4TateReport report = new KarisanteiHenjunkaHenkoTsuchishoA4TateReport(
+                仮算定納入通知書情報, 通知書番号.getColumnValue(), ninshoshaSource, kaigoToiawasesakiSource);
+        report.writeBy(reportSourceWriterA4);
+        通知書ページ数 = 通知書ページ数.add(new Decimal(batchReportWriterA4.getPageCount()));
 
         連番++;
     }

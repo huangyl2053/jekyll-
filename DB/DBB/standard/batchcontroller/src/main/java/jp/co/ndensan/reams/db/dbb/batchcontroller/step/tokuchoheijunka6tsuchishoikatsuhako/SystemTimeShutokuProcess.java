@@ -39,9 +39,9 @@ public class SystemTimeShutokuProcess extends SimpleBatchProcessBase {
     }
     private ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper mapper;
     private OutputParameter<RDateTime> systemTime;
-    private OutputParameter<RDateTime> kijunTime;
+    private OutputParameter<RString> kijunTime;
     RDateTime バッチ起動時処理日時_年月日時分秒;
-    RDateTime 基準日時;
+    RString 基準日時;
 
     @Override
     protected void beforeExecute() {

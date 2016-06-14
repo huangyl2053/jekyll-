@@ -24,12 +24,12 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NokiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.HeijunkaHenkoOutputJoken;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter;
+import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.DbTKeisangoJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KariSanteigakuHenkoTsuchishoHakkoIchiranData;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KarisanteiGakuHenkoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6tsuchishoikatsuhako.ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
@@ -162,7 +162,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
      * @param 連番 連番
      */
     public void printTsuchisho(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書,
-            KarisanteiGakuHenkoEntity entity, TsuchishoHakoEntity param,
+            KarisanteiGakuHenkoEntity entity, TsuchishoHakoProcessParameter param,
             DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通情報, Association association,
             List<EditedKariSanteiTsuchiShoKyotsu> reportDataList, List<KariSanteigakuHenkoTsuchishoHakkoIchiranData> csvDataList, int 連番) {
 
@@ -187,13 +187,15 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
      * @param param 通知書発行プロセスのパラメータ
      */
     @Transaction
-    public void insTsuchishoHakkogoIdosha(TsuchishoHakoEntity param) {
+    public void insTsuchishoHakkogoIdosha(TsuchishoHakoProcessParameter param) {
 
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         IOutputOrder outputOrder = finder.get出力順(SubGyomuCode.DBB介護賦課, REPORT_ID_DBB100012, Long.parseLong(param.get出力順ID().toString()));
 
         RString 出力順 = Dbb100012MyBatisOrderByClauseCreator.create(DBB100012ShutsuryokujunEnum.class, outputOrder);
-        mapper.insert通知書発行後異動者(param.get帳票作成日時(), param.get出力対象区分(), param.get帳票ID(), 出力順);
+        mapper.insert通知書発行後異動者(param.get帳票作成日時().format西暦(new RString("yyyyMMddHHmmss").toString()),
+                param.get基準日時(),
+                param.get出力対象区分(), param.get帳票ID(), 出力順);
     }
 
     /**
@@ -241,7 +243,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
                 false, null, null, null, null, null, 被保険者区分, 特別徴収_厚生労働省, 特別徴収_地共済));
     }
 
-    private KariSanteiTsuchiShoKyotsu 仮算定額変更通知書情報の作成(TsuchishoHakoEntity param, KarisanteiGakuHenkoEntity tmpEntity,
+    private KariSanteiTsuchiShoKyotsu 仮算定額変更通知書情報の作成(TsuchishoHakoProcessParameter param, KarisanteiGakuHenkoEntity tmpEntity,
             DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通情報, Association association) {
 
         KariSanteiTsuchiShoKyotsu kariSanteiTsuchiShoKyotsu = new KariSanteiTsuchiShoKyotsu();
@@ -266,7 +268,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
     }
 
     private KariSanteigakuHenkoTsuchishoHakkoIchiranData csvData作成(EditedKariSanteiTsuchiShoKyotsu editedKariSanteiTsuchiShoKyotsu,
-            TsuchishoHakoEntity param, int 連番, TsuchishoNo 通知書番号) {
+            TsuchishoHakoProcessParameter param, int 連番, TsuchishoNo 通知書番号) {
 
         EditedKariSanteiTsuchiShoKyotsuBeforeCorrection 更正前;
         if (editedKariSanteiTsuchiShoKyotsu.get更正前() == null) {
@@ -395,6 +397,51 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         }
     }
 
+    private void set改頁名前(IOutputOrder outputOrder, List pageBreakKeys) {
+        RString 改頁１ = RString.EMPTY;
+        RString 改頁２ = RString.EMPTY;
+        RString 改頁３ = RString.EMPTY;
+        RString 改頁４ = RString.EMPTY;
+        RString 改頁５ = RString.EMPTY;
+        if (outputOrder != null) {
+            List<ISetSortItem> list = outputOrder.get設定項目リスト();
+            if (list == null) {
+                list = new ArrayList<>();
+            }
+            if (list.size() > INDEX_0 && list.get(INDEX_0).is改頁項目()) {
+                改頁１ = to帳票フィールド名前(list.get(INDEX_0));
+            }
+            if (list.size() > INDEX_1 && list.get(INDEX_1).is改頁項目()) {
+                改頁２ = to帳票フィールド名前(list.get(INDEX_1));
+            }
+            if (list.size() > INDEX_2 && list.get(INDEX_2).is改頁項目()) {
+                改頁３ = to帳票フィールド名前(list.get(INDEX_2));
+            }
+            if (list.size() > INDEX_3 && list.get(INDEX_3).is改頁項目()) {
+                改頁４ = to帳票フィールド名前(list.get(INDEX_3));
+            }
+            if (list.size() > INDEX_4 && list.get(INDEX_4).is改頁項目()) {
+                改頁５ = to帳票フィールド名前(list.get(INDEX_4));
+            }
+
+            if (!改頁１.isEmpty()) {
+                pageBreakKeys.add(改頁１);
+            }
+            if (!改頁２.isEmpty()) {
+                pageBreakKeys.add(改頁２);
+            }
+            if (!改頁３.isEmpty()) {
+                pageBreakKeys.add(改頁３);
+            }
+            if (!改頁４.isEmpty()) {
+                pageBreakKeys.add(改頁４);
+            }
+            if (!改頁５.isEmpty()) {
+                pageBreakKeys.add(改頁５);
+            }
+        }
+    }
+
     /**
      * 特別徴収平準化仮算定額変更通知書発行一覧表CSVを出力して、代行プリント送付票の出力とバッチ条件を出力します。
      *
@@ -407,13 +454,13 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
      * @param 通知書一覧ページ数
      */
     public void csv出力と代行プリント送付票の出力とバッチ条件の出力(List<KariSanteigakuHenkoTsuchishoHakkoIchiranData> csvDataList,
-            TsuchishoHakoEntity parameter, DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通情報,
+            TsuchishoHakoProcessParameter parameter, DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通情報,
             Association 導入団体クラス,
             IOutputOrder outputOrder, Decimal 通知書ページ数, Decimal 通知書一覧ページ数) {
 
         特別徴収平準化仮算定額変更通知書発行一覧表CSV出力(csvDataList);
-        代行プリント送付票の出力(parameter, 帳票制御共通情報, 導入団体クラス, outputOrder, 通知書ページ数, 通知書一覧ページ数);
-        バッチ出力条件リストの出力(parameter, 帳票制御共通情報, 導入団体クラス, outputOrder, csvDataList, 通知書一覧ページ数);
+        代行プリント送付票の出力(parameter, 帳票制御共通情報, 導入団体クラス, outputOrder, 通知書ページ数);
+        バッチ出力条件リストの出力(parameter, 導入団体クラス, outputOrder, csvDataList, 通知書ページ数);
 
     }
 
@@ -488,30 +535,29 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
      * @param 導入団体クラス 導入団体クラス
      * @param outputOrder outputOrder
      * @param 通知書ページ数 通知書ページ数
-     * @param 通知書一覧ページ数 通知書一覧ページ数
      */
-    private void 代行プリント送付票の出力(TsuchishoHakoEntity param, DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通情報,
+    private void 代行プリント送付票の出力(TsuchishoHakoProcessParameter param, DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通情報,
             Association 導入団体クラス,
-            IOutputOrder outputOrder, Decimal 通知書ページ数, Decimal 通知書一覧ページ数) {
+            IOutputOrder outputOrder, Decimal 通知書ページ数) {
         if (!帳票制御共通情報.getDaikoPrintUmu()) {
             return;
         }
 
         List<RString> 出力順項目List = new ArrayList<>();
-        List<RString> 改ページ項目List = new ArrayList<>();
+        int i = 1;
         if (outputOrder != null && outputOrder.get設定項目リスト() != null) {
-            for (ISetSortItem sortItem : outputOrder.get設定項目リスト()) {
-                出力順項目List.add(sortItem.get項目ID());
-                if (sortItem.is改頁項目()) {
-                    改ページ項目List.add(sortItem.get項目ID());
+            for (ISetSortItem setSortItem : outputOrder.get設定項目リスト()) {
+                if (i++ <= 5) {
+                    出力順項目List.add(setSortItem.get項目名());
                 }
             }
         }
 
-        List<Decimal> ページ数List = new ArrayList<>();
+        List<RString> 改ページ項目List = new ArrayList<>();
+        set改頁名前(outputOrder, 改ページ項目List);
 
+        List<Decimal> ページ数List = new ArrayList<>();
         ページ数List.add(通知書ページ数);
-        ページ数List.add(通知書一覧ページ数);
 
         List<RString> 抽出条件List = new ArrayList<>();
         RStringBuilder 発行日Builder = new RStringBuilder();
@@ -527,13 +573,12 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         } else {
             帳票名List.add(ReportIdDBB.DBB100013.getReportName());
         }
-        帳票名List.add(ReportIdDBB.DBB200004.getReportName());
 
         DaikoPrintItem daikoPrintItem = new DaikoPrintItem(SubGyomuCode.DBB介護賦課,
                 導入団体クラス.getLasdecCode_(), 導入団体クラス.get市町村名(),
                 ジョブ番号.concat(RString.HALF_SPACE).concat(new RString(String.valueOf(JobContextHolder.getJobId()))),
                 処理名,
-                帳票制御共通情報.getChohyoBunruiID().getColumnValue(),
+                param.get帳票ID(),
                 帳票名List, ページ数List, 抽出条件List,
                 出力順項目List, 改ページ項目List, Collections.<RString>emptyList());
         IDaikoPrint daikoPrint = DaikoPrintFactory.createInstance(daikoPrintItem);
@@ -544,15 +589,14 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
      * バッチ出力条件リストの出力を行います。
      *
      * @param param 帳票発行パラメータ
-     * @param 帳票制御共通情報 帳票制御共通情報
      * @param association 導入団体クラス
      * @param outputOrder IOutputOrder
      * @param csvDataList csvデータリスト
      * @param 通知書一覧ページ数 通知書一覧ページ数
      */
-    private void バッチ出力条件リストの出力(TsuchishoHakoEntity param, DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通情報, Association association,
+    private void バッチ出力条件リストの出力(TsuchishoHakoProcessParameter param, Association association,
             IOutputOrder outputOrder, List<KariSanteigakuHenkoTsuchishoHakkoIchiranData> csvDataList,
-            Decimal 通知書一覧ページ数) {
+            Decimal 通知書ページ数) {
 
         RString csv出力有無 = (csvDataList == null || csvDataList.isEmpty()) ? なし : あり;
         RString csvファイル名 = (csvDataList == null || csvDataList.isEmpty()) ? new RString("-") : CSVファイル名;
@@ -589,16 +633,23 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         出力条件List.add(出力対象Builder.toRString());
         出力条件List.add(出力順RStr);
 
+        RString 帳票名 = RString.EMPTY;
+        if (ReportIdDBB.DBB100012.getReportId().getColumnValue().equals(param.get帳票ID())) {
+            帳票名 = ReportIdDBB.DBB100012.getReportName();
+        } else {
+            帳票名 = ReportIdDBB.DBB100013.getReportName();
+        }
+
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                帳票制御共通情報.getChohyoBunruiID().getColumnValue(), association.getLasdecCode_().getColumnValue(), association.get市町村名(),
+                param.get帳票ID(), association.getLasdecCode_().getColumnValue(), association.get市町村名(),
                 ジョブ番号.concat(RString.HALF_SPACE).concat(new RString(String.valueOf(JobContextHolder.getJobId()))),
-                ReportIdDBB.DBB200004.getReportName(),
-                new RString(通知書一覧ページ数.toString()), csv出力有無, csvファイル名, 出力条件List);
+                帳票名,
+                new RString(通知書ページ数.toString()), csv出力有無, csvファイル名, 出力条件List);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
         printer.print();
     }
 
-    public RString to帳票物理名(RString 項目ID) {
+    private RString to帳票物理名(RString 項目ID) {
 
         RString 帳票物理名 = RString.EMPTY;
 
@@ -614,6 +665,27 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
             帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_性別;
         } else if (DBB100012ShutsuryokujunEnum.市町村コード.get項目ID().equals(項目ID)) {
             帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_市町村コード;
+        }
+
+        return 帳票物理名;
+    }
+
+    private RString to帳票フィールド名前(ISetSortItem item) {
+
+        RString 帳票物理名 = RString.EMPTY;
+
+        if (DBB100012ShutsuryokujunEnum.郵便番号.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = item.get項目名();
+        } else if (DBB100012ShutsuryokujunEnum.行政区コード.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = item.get項目名();
+        } else if (DBB100012ShutsuryokujunEnum.世帯コード.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = item.get項目名();
+        } else if (DBB100012ShutsuryokujunEnum.生年月日.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = item.get項目名();
+        } else if (DBB100012ShutsuryokujunEnum.性別.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = item.get項目名();
+        } else if (DBB100012ShutsuryokujunEnum.市町村コード.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = item.get項目名();
         }
 
         return 帳票物理名;
