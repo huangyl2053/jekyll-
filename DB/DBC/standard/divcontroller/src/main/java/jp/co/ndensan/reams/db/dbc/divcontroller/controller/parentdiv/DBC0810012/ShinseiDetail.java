@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810012.ShinseiDetailDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0810012.ShinseiDetailHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -44,23 +43,10 @@ public class ShinseiDetail {
         RString 整理番号 = ViewStateHolder.get(
                 ViewStateKeys.償還払申請一覧_整理番号, RString.class);
         RString 決定日 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_決定日, RString.class);
-        if (決定日.isNullOrEmpty()) {
-            div.getPanelHead().getBtnShokanBaraiKeteiInfo().setDisabled(true);
-        }
-
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
-        div.getPanelUp().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            div.getPanelUp().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
-        } else {
-            div.getPanelUp().getCcdKaigoAtenaInfo().setVisible(false);
-        }
-        ShinseiDetailHandler handler = getHandler(div);
-        handler.initPanelHead(サービス年月, 整理番号);
 
-        ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
-        List<ShokanShinsei> businessList = finder.getShokanbaraiShinseiJyohoDetail(
-                被保険者番号, サービス年月, 整理番号);
+        ShinseiDetailHandler handler = getHandler(div);
+        List<ShokanShinsei> businessList = handler.initPanelHead(被保険者番号, 識別コード, サービス年月, 整理番号, 決定日);
         if (businessList == null || businessList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
