@@ -80,7 +80,8 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
             row.setDefaultDataName3(new RString(String.valueOf(shokan.getEntity().get日数_回数())));
             row.getDefaultDataName4().setValue(new Decimal(shokan.getEntity().getサービス単位数()));
             row.setDefaultDataName5(shokan.getEntity().get摘要());
-            if (shokan.getEntity().get施設所在保険者番号() != null && !shokan.getEntity().get施設所在保険者番号().isEmpty()) {
+            if (shokan.getEntity().get施設所在保険者番号() != null
+                    && !shokan.getEntity().get施設所在保険者番号().isEmpty()) {
                 row.setDefaultDataName6(shokan.getEntity().get施設所在保険者番号().value());
             }
             row.setDefaultDataName7(shokan.getEntity().get連番());
@@ -145,7 +146,6 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
             div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().
                     getCcdHokenshaJoho().setHokenjaNo(row.getDefaultDataName6());
         }
-
     }
 
     /**

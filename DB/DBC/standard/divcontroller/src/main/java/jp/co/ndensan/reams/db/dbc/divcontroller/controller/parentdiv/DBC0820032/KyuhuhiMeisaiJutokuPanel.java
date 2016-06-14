@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMe
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820032.DBC0820032TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820032.KyuhuhiMeisaiJutokuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820032.dgJushochiTokutei_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820032.KyuhuhiMeisaiJutokuPanelValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.dbc0820032.KyuhuhiMeisaiJutokuPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
@@ -35,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -232,6 +234,10 @@ public class KyuhuhiMeisaiJutokuPanel {
         } else {
             row = getHandler(div).selectRow();
         }
+        ValidationMessageControlPairs validPairs = getCheckHandler(div).入力チェック();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         getHandler(div).modifyRow(row);
         return createResponse(div);
     }
@@ -424,8 +430,11 @@ public class KyuhuhiMeisaiJutokuPanel {
     }
 
     private KyuhuhiMeisaiJutokuPanelHandler getHandler(KyuhuhiMeisaiJutokuPanelDiv div) {
-
         return new KyuhuhiMeisaiJutokuPanelHandler(div);
+    }
+
+    private KyuhuhiMeisaiJutokuPanelValidationHandler getCheckHandler(KyuhuhiMeisaiJutokuPanelDiv div) {
+        return new KyuhuhiMeisaiJutokuPanelValidationHandler(div);
     }
 
     private ResponseData<KyuhuhiMeisaiJutokuPanelDiv> createResponse(KyuhuhiMeisaiJutokuPanelDiv div) {
