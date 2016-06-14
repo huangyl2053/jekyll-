@@ -647,7 +647,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             Class clazz = fukaJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                普徴納付済額.add((Decimal) getMethod.invoke(fukaJoho));
+                普徴納付済額.add(nullToZero((Decimal) getMethod.invoke(fukaJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -667,13 +667,20 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             Class clazz = fukaJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                特徴納付済額.add((Decimal) getMethod.invoke(fukaJoho));
+                特徴納付済額.add(nullToZero((Decimal) getMethod.invoke(fukaJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
         return 特徴納付済額;
+    }
+
+    private Decimal nullToZero(Decimal number) {
+        if (number == null) {
+            return Decimal.ZERO;
+        }
+        return number;
     }
 
     private Decimal get普徴納付済額(ShunyuJoho shunyuJoho, int start, int end) {
@@ -688,7 +695,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             Class clazz = shunyuJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                普徴納付済額.add((Decimal) getMethod.invoke(shunyuJoho));
+                普徴納付済額.add(nullToZero((Decimal) getMethod.invoke(shunyuJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -708,7 +715,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             Class clazz = shunyuJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                特徴納付済額.add((Decimal) getMethod.invoke(shunyuJoho));
+                特徴納付済額.add(nullToZero((Decimal) getMethod.invoke(shunyuJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
