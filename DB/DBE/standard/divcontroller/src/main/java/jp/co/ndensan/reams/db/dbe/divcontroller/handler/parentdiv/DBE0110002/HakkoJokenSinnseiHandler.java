@@ -8,9 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110002;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110002.HakkoJokenSinnseiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 申請に関する帳票発行画面クラスです
@@ -35,12 +33,11 @@ public class HakkoJokenSinnseiHandler {
 
     /**
      * 画面初期化処理です。
+     *
+     * @param 要介護認定申請モニタリストフラグ 遷移元画面から受け取った引数
+     * @param 要支援認定等申請者一覧フラグ 遷移元画面から受け取った引数
      */
-    public void onLoad() {
-        boolean 要介護認定申請モニタリストフラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_要介護認定申請モニタリストフラグ,
-                Boolean.class);
-        boolean 要支援認定等申請者一覧フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_要介護認定_要支援認定等申請者一覧フラグ,
-                Boolean.class);
+    public void onLoad(boolean 要介護認定申請モニタリストフラグ, boolean 要支援認定等申請者一覧フラグ) {
         SELECT_LIST.clear();
         checkPanel(要介護認定申請モニタリストフラグ, 要支援認定等申請者一覧フラグ);
         if (要介護認定申請モニタリストフラグ) {
