@@ -13,9 +13,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
-import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanbaraiJutakuShikyuGendogakuHanteiCheck;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030.SeikyuGakuShukeiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030.dgdSeikyugakushukei_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
@@ -25,19 +23,13 @@ import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.S
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -55,9 +47,6 @@ public class SeikyuGakuShukeiPanelHandler {
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可必須 = new RString("1");
     private static final RString 設定可任意 = new RString("2");
-    private static final RString 対象単位 = new RString("対象単位");
-    private static final RString 対象単位合計 = new RString("（対象単位+対象外単位）と等しい");
-    private static final RString 単位合計 = new RString("単位合計");
     private static final RString コロン = new RString(":");
     private static final int NUM = 10;
     private static final int NUM1 = 100;
@@ -381,84 +370,6 @@ public class SeikyuGakuShukeiPanelHandler {
         clear請求額集計登録();
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(false);
 
-    }
-
-    /**
-     * 入力チェック
-     *
-     * @return validPairs
-     */
-    public ValidationMessageControlPairs 入力チェック() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
-        RString 様式番号 = meisaiPar.get様式番号();
-        Decimal 限度額対象単位 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoTanyi().getValue();
-        Decimal 限度額対象外単位 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoGaiTanyi().getValue();
-        Decimal 保険分単位合計 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiHokenbun().getValue();
-        ServiceShuruiCode サービス種類コード = new ServiceShuruiCode(div.getPanelSeikyugakuShukei().
-                getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類コード());
-        ShokanbaraiJutakuShikyuGendogakuHanteiCheck shcheck = new ShokanbaraiJutakuShikyuGendogakuHanteiCheck();
-        boolean falg2 = true;
-        boolean falg1 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                getTxtKeikakuTanyi().getValue() != null && div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                getTxtTaishoTanyi().getValue() != null && div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                getTxtTaishoGaiTanyi().getValue() != null;
-        if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                getTxtTaishoTanyi().getValue() != null && div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                getTxtTaishoGaiTanyi().getValue() != null) {
-            falg2 = !div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                    getTxtKeikakuTanyi().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                            getTxtTaishoTanyi().getValue().add(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                                    getTxtTaishoGaiTanyi().getValue()));
-        }
-        boolean falg3 = shcheck.chkShokanbaraiJutakuShikyuGendogakuTaishoTani(様式番号, 限度額対象単位, サービス種類コード);
-        boolean falg4 = true;
-        if (限度額対象外単位 != null && 限度額対象単位 != null && 保険分単位合計 != null) {
-            falg4 = shcheck.chkShokanbaraiJutakuShikyuGendogakuTaniGokei(
-                    様式番号, 限度額対象外単位, 限度額対象単位, 保険分単位合計, サービス種類コード);
-        }
-        if (falg1 && falg2) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    DbcErrorMessages.計画単位数不一致)));
-        }
-        List<dgdSeikyugakushukei_Row> rowData = div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getDataSource();
-        List<dgdSeikyugakushukei_Row> rowList = new ArrayList<>();
-        rowList.addAll(rowData);
-        rowList.remove(div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getClickedItem());
-        for (dgdSeikyugakushukei_Row row : rowList) {
-            ServiceShuruiCode serviceCode = new ServiceShuruiCode(row.getDefaultDataName19());
-            if (div.getPanelSeikyugakuShukei().
-                    getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類コード().equals(serviceCode.value())) {
-                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                        DbcErrorMessages.サービス種類が登録済)));
-            }
-        }
-        if (falg3) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.必須, 対象単位.toString())));
-        }
-        if (限度額対象外単位 != null && 限度額対象単位 != null && 保険分単位合計 != null && falg4) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.項目に対する制約, 単位合計.toString(), 対象単位合計.toString())));
-        }
-
-        return validPairs;
-
-    }
-
-    private static class IdocheckMessages implements IValidationMessage {
-
-        private final Message message;
-
-        public IdocheckMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
     }
 
     /**

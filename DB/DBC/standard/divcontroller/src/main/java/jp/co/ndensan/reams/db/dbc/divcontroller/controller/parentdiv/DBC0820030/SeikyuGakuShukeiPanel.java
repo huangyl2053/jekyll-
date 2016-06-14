@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030.SeikyuGakuShukeiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030.dgdSeikyugakushukei_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820030.SeikyuGakuShukeiPanelHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820030.SeikyuGakuShukeiPanelValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
@@ -243,13 +244,11 @@ public class SeikyuGakuShukeiPanel {
         } else {
             row = getHandler(div).selectRow();
         }
-
-        ValidationMessageControlPairs validPairs = getHandler(div).入力チェック();
+        ValidationMessageControlPairs validPairs = getCheckHandler(div).入力チェック();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         getHandler(div).modifyRow(row);
-
         return createResponse(div);
     }
 
@@ -441,8 +440,11 @@ public class SeikyuGakuShukeiPanel {
     }
 
     private SeikyuGakuShukeiPanelHandler getHandler(SeikyuGakuShukeiPanelDiv div) {
-
         return new SeikyuGakuShukeiPanelHandler(div);
+    }
+
+    private SeikyuGakuShukeiPanelValidationHandler getCheckHandler(SeikyuGakuShukeiPanelDiv div) {
+        return new SeikyuGakuShukeiPanelValidationHandler(div);
     }
 
     private ResponseData<SeikyuGakuShukeiPanelDiv> createResponse(SeikyuGakuShukeiPanelDiv div) {
