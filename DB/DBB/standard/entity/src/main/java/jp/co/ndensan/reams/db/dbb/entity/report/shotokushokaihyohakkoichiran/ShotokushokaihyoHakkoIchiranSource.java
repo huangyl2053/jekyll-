@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.entity.report.shotokushokaihyohakkoichiran;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBBPR51001_所得照会票発行一覧表
@@ -73,6 +74,7 @@ public class ShotokushokaihyoHakkoIchiranSource implements IReportSource {
     public RString listUpper_6;
     @ReportItem(name = "listUpper_7", length = 6, order = 28)
     public RString listUpper_7;
+    @ReportPerson(id = "X")
     @ReportItem(name = "listLower_1", length = 15, order = 29)
     public RString listLower_1;
     @ReportItem(name = "listLower_2", length = 17, order = 30)
