@@ -39,7 +39,7 @@ public class TekiyoJogaishaIdoTeiseiHandler {
      * @param 識別コード 識別コード
      */
     public void initLoad(ShikibetsuCode 識別コード) {
-        div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
         init適用除外情報一覧エリア(識別コード);
         init施設入退所異動エリア(識別コード);
     }

@@ -6,8 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.service.core.kyodojukyushataishosha;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodojukyushataishosha.KyodoJukyushaTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoJukyushaTaishoshaParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity;
@@ -27,6 +28,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  * @reamsid_L DBC-1951-050 chenaoqi
  */
 public class KyodoJukyushaTaishoshaFinder {
+
+    private static final RString SPIT = new RString("～");
+    private static final RString 定数_1 = new RString("1");
+    private static final RString 定数_0 = new RString("0");
 
     private final MapperProvider mapperProvider;
 
@@ -80,45 +85,69 @@ public class KyodoJukyushaTaishoshaFinder {
         List<DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity> 償還送付情報list = mapper.get償還送付情報(parameter);
         List<DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity> 高額送付情報list = mapper.get高額送付情報(parameter);
         KyodoJukyushaTaishoshaEntity 対象者一覧情報 = new KyodoJukyushaTaishoshaEntity();
-        if (基本送付情報list != null && !基本送付情報list.isEmpty()) {
-            for (DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity 基本送付情報Entity : 基本送付情報list) {
-                対象者一覧情報 = new KyodoJukyushaTaishoshaEntity();
-                対象者一覧情報.set被保番号(基本送付情報Entity.getHiHokenshaNo());
-                対象者一覧情報.set異動日(基本送付情報Entity.getIdoYMD());
-                対象者一覧情報.set対象年月(基本送付情報Entity.getSofuYM());
-                対象者一覧情報.set履歴番号(基本送付情報Entity.getRirekiNo());
-                対象者一覧情報.set被保険者氏名(基本送付情報Entity.getHiHokenshaName());
-                対象者一覧情報.set論理削除フラグ(基本送付情報Entity.getIsDeleted());
-                対象者一覧情報List.add(対象者一覧情報);
+        Map map = new HashMap<>();
+        RString breakKey = RString.EMPTY;
+        for (DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity 基本送付情報Entity : 基本送付情報list) {
+            RString 異動日 = 基本送付情報Entity.getIdoYMD() != null
+                    ? new RString(基本送付情報Entity.getIdoYMD().toString()) : RString.EMPTY;
+            RString 送付年月 = 基本送付情報Entity.getSofuYM() != null
+                    ? 基本送付情報Entity.getSofuYM().toDateString() : RString.EMPTY;
+            RString 論理削除フラグ = 基本送付情報Entity.getLogicalDeletedFlag() ? 定数_1 : 定数_0;
+            breakKey = 異動日.concat(SPIT).concat(送付年月).concat(SPIT).concat(論理削除フラグ);
+            if (map.containsKey(breakKey)) {
+                continue;
             }
+            map.put(breakKey, true);
+            対象者一覧情報 = new KyodoJukyushaTaishoshaEntity();
+            対象者一覧情報.set被保番号(基本送付情報Entity.getHiHokenshaNo());
+            対象者一覧情報.set異動日(基本送付情報Entity.getIdoYMD());
+            対象者一覧情報.set対象年月(基本送付情報Entity.getSofuYM());
+            対象者一覧情報.set履歴番号(基本送付情報Entity.getRirekiNo());
+            対象者一覧情報.set被保険者氏名(基本送付情報Entity.getHiHokenshaName());
+            対象者一覧情報.set論理削除フラグ(基本送付情報Entity.getLogicalDeletedFlag());
+            対象者一覧情報List.add(対象者一覧情報);
         }
-        if (償還送付情報list != null && !償還送付情報list.isEmpty()) {
-            for (DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity 償還送付情報Entity : 償還送付情報list) {
-                対象者一覧情報 = new KyodoJukyushaTaishoshaEntity();
-                対象者一覧情報.set被保番号(償還送付情報Entity.getHiHokenshaNo());
-                対象者一覧情報.set異動日(償還送付情報Entity.getIdoYMD());
-                対象者一覧情報.set対象年月(償還送付情報Entity.getSofuYM());
-                対象者一覧情報.set履歴番号(償還送付情報Entity.getRirekiNo());
-                対象者一覧情報.set被保険者氏名(get償還被保険者氏名(償還送付情報Entity));
-                対象者一覧情報.set論理削除フラグ(償還送付情報Entity.getIsDeleted());
-                対象者一覧情報List.add(対象者一覧情報);
+        for (DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity 償還送付情報Entity : 償還送付情報list) {
+            RString 異動日 = 償還送付情報Entity.getIdoYMD() != null
+                    ? new RString(償還送付情報Entity.getIdoYMD().toString()) : RString.EMPTY;
+            RString 送付年月 = 償還送付情報Entity.getSofuYM() != null
+                    ? 償還送付情報Entity.getSofuYM().toDateString() : RString.EMPTY;
+            RString 論理削除フラグ = 償還送付情報Entity.getLogicalDeletedFlag() ? 定数_1 : 定数_0;
+            breakKey = 異動日.concat(SPIT).concat(送付年月).concat(SPIT).concat(論理削除フラグ);
+            if (map.containsKey(breakKey)) {
+                continue;
             }
-        }
+            map.put(breakKey, true);
+            対象者一覧情報 = new KyodoJukyushaTaishoshaEntity();
+            対象者一覧情報.set被保番号(償還送付情報Entity.getHiHokenshaNo());
+            対象者一覧情報.set異動日(償還送付情報Entity.getIdoYMD());
+            対象者一覧情報.set対象年月(償還送付情報Entity.getSofuYM());
+            対象者一覧情報.set履歴番号(償還送付情報Entity.getRirekiNo());
+            対象者一覧情報.set被保険者氏名(get償還被保険者氏名(償還送付情報Entity));
+            対象者一覧情報.set論理削除フラグ(償還送付情報Entity.getLogicalDeletedFlag());
+            対象者一覧情報List.add(対象者一覧情報);
 
-        if (高額送付情報list != null && !高額送付情報list.isEmpty()) {
-            for (DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity 高額送付情報Entity : 高額送付情報list) {
-                対象者一覧情報 = new KyodoJukyushaTaishoshaEntity();
-                対象者一覧情報.set被保番号(高額送付情報Entity.getHiHokenshaNo());
-                対象者一覧情報.set異動日(高額送付情報Entity.getIdoYMD());
-                対象者一覧情報.set対象年月(高額送付情報Entity.getSofuYM());
-                対象者一覧情報.set履歴番号(高額送付情報Entity.getRirekiNo());
-                対象者一覧情報.set被保険者氏名(get高額被保険者氏名(高額送付情報Entity));
-                対象者一覧情報.set論理削除フラグ(高額送付情報Entity.getIsDeleted());
-                対象者一覧情報List.add(対象者一覧情報);
-            }
         }
-        if (対象者一覧情報List.isEmpty()) {
-            return Collections.EMPTY_LIST;
+        for (DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity 高額送付情報Entity : 高額送付情報list) {
+            RString 異動日 = 高額送付情報Entity.getIdoYMD() != null
+                    ? new RString(高額送付情報Entity.getIdoYMD().toString()) : RString.EMPTY;
+            RString 送付年月 = 高額送付情報Entity.getSofuYM() != null
+                    ? 高額送付情報Entity.getSofuYM().toDateString() : RString.EMPTY;
+            RString 論理削除フラグ = 高額送付情報Entity.getLogicalDeletedFlag() ? 定数_1 : 定数_0;
+            breakKey = 異動日.concat(SPIT).concat(送付年月).concat(SPIT).concat(論理削除フラグ);
+            if (map.containsKey(breakKey)) {
+                continue;
+            }
+            map.put(breakKey, true);
+            対象者一覧情報 = new KyodoJukyushaTaishoshaEntity();
+            対象者一覧情報.set被保番号(高額送付情報Entity.getHiHokenshaNo());
+            対象者一覧情報.set異動日(高額送付情報Entity.getIdoYMD());
+            対象者一覧情報.set対象年月(高額送付情報Entity.getSofuYM());
+            対象者一覧情報.set履歴番号(高額送付情報Entity.getRirekiNo());
+            対象者一覧情報.set被保険者氏名(get高額被保険者氏名(高額送付情報Entity));
+            対象者一覧情報.set論理削除フラグ(高額送付情報Entity.getLogicalDeletedFlag());
+            対象者一覧情報List.add(対象者一覧情報);
+
         }
         return 対象者一覧情報List;
     }

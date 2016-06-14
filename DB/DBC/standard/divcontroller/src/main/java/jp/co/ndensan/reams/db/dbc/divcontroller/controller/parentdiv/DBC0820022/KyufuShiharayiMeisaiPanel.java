@@ -79,9 +79,9 @@ public class KyufuShiharayiMeisaiPanel {
                 償還払費申請検索.getServiceTeikyoYM());
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, sikibetuKey);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getPanelOne().getCcdKaigoAtenaInfo().initialize(識別コード);
         if (!被保険者番号.isEmpty()) {
-            div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getPanelOne().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         } else {
             div.getPanelOne().getCcdKaigoShikakuKihon().setVisible(false);
         }

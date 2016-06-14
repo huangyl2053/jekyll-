@@ -36,8 +36,8 @@ public class ShoKaishuKirokuKanriJohoHandler {
      * @param 被保険者番号 被保険者番号
      */
     public void onLoad(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
-        div.getKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        div.getKihonJoho().getCcdKaigoShikakuKihon().onLoad(識別コード);
+        div.getKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
+        div.getKihonJoho().getCcdKaigoShikakuKihon().initialize(識別コード);
         div.getShoKaishuList().getCcdShokaishuKirokuKanri().initialize(状態_更新, 被保険者番号);
     }
 }

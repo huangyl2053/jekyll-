@@ -83,7 +83,7 @@ public final class ShikyuShinseiDetailHandler {
      * @param 識別コード ShikibetsuCode
      */
     public void load介護宛名情報(ShikibetsuCode 識別コード) {
-        div.getPanelUp().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getPanelUp().getCcdKaigoAtenaInfo().initialize(識別コード);
     }
 
     /**
@@ -92,7 +92,7 @@ public final class ShikyuShinseiDetailHandler {
      * @param 識別コード ShikibetsuCode
      */
     public void load介護資格系基本情報(ShikibetsuCode 識別コード) {
-        div.getPanelUp().getCcdKaigoShikakuKihon().onLoad(識別コード);
+        div.getPanelUp().getCcdKaigoShikakuKihon().initialize(識別コード);
     }
 
     /**

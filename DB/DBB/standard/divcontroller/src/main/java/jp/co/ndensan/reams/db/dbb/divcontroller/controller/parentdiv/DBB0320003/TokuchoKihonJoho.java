@@ -54,7 +54,7 @@ public class TokuchoKihonJoho {
                 taishoshaKey.get通知書番号(), taishoshaKey.get賦課年度(),
                 new LasdecCode(taishoshaKey.get市町村コード().value()), taishoshaKey.get識別コード()).build();
         // 宛名情報の設定
-        div.getCcdKaigoAtenaInfo().onLoad(taishoshaKey.get識別コード());
+        div.getCcdKaigoAtenaInfo().initialize(taishoshaKey.get識別コード());
         // 賦課基本情報の設定
         div.getCcdKaigoFukaKihon().load(searchKey);
         return createResponseData(div);

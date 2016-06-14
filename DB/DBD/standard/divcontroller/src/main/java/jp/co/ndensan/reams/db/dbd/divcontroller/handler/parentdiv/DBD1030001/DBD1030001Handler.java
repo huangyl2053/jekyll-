@@ -126,8 +126,8 @@ public class DBD1030001Handler {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
             return false;
         }
-        div.getShafukuRiyoshaKeigen().getCcdAtenaInfo().onLoad(識別コード);
-        div.getShafukuRiyoshaKeigen().getCcdShikakuKihon().onLoad(被保険者番号);
+        div.getShafukuRiyoshaKeigen().getCcdAtenaInfo().initialize(識別コード);
+        div.getShafukuRiyoshaKeigen().getCcdShikakuKihon().initialize(被保険者番号);
         div.getShafukuRiyoshaKeigen().setHihokenshaNo(被保険者番号.getColumnValue());
         RString メニューID = ResponseHolder.getMenuID();
         if (申請メニューID.equals(メニューID)) {

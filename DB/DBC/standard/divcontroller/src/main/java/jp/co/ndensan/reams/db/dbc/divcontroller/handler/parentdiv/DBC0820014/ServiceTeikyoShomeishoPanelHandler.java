@@ -69,8 +69,8 @@ public class ServiceTeikyoShomeishoPanelHandler {
      * @param 被保険者番号 被保険者番号
      */
     public void load宛名と基本情報(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
-        div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+        div.getPanelOne().getCcdKaigoAtenaInfo().initialize(識別コード);
+        div.getPanelOne().getCcdKaigoShikakuKihon().initialize(被保険者番号);
     }
 
     /**

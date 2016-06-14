@@ -43,12 +43,12 @@ public class ShinseiSearch {
     public ResponseData<ShinseiSearchDiv> onLoad(ShinseiSearchDiv div) {
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
-        div.getPanelAtenaShikaku().getCcdKaigoAtenalInfo().onLoad(識別コード);
+        div.getPanelAtenaShikaku().getCcdKaigoAtenalInfo().initialize(識別コード);
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         if (被保険者番号 != null) {
-            div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         }
         div.getPanelShokan().getCcdShokanShinseiList().initialize(照会, 被保険者番号, FlexibleYearMonth.MIN, FlexibleYearMonth.MAX);
         return ResponseData.of(div).respond();

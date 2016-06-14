@@ -46,8 +46,8 @@ public class PnlTotal {
         HihokenshaNo 被保険者番号 = key.get被保険者番号();
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-        div.getKaigoCommonPanel().getCcdAtenaInfo().onLoad(識別コード);
-        div.getKaigoCommonPanel().getCcdShikakuKihon().onLoad(被保険者番号);
+        div.getKaigoCommonPanel().getCcdAtenaInfo().initialize(識別コード);
+        div.getKaigoCommonPanel().getCcdShikakuKihon().initialize(被保険者番号);
         PnlTotalHandler handler = getHandler(div);
         List<FukushiyouguKonyuhiShikyuShinseiResult> list = FukushiyoguKonyuhiShikyuShinsei.createInstance().
                 getShokanShikyuShinseiList(被保険者番号);
@@ -79,7 +79,7 @@ public class PnlTotal {
      * @return 福祉用具購入費支給申請_登録画面へ遷移
      */
     public ResponseData<PnlTotalDiv> onClick_byselectbutton(PnlTotalDiv div) {
-         getHandler(div).putViewStateHolder(参照);
+        getHandler(div).putViewStateHolder(参照);
         return ResponseData.of(div).forwardWithEventName(DBC0600011TransitionEventName.明細情報).respond();
     }
 

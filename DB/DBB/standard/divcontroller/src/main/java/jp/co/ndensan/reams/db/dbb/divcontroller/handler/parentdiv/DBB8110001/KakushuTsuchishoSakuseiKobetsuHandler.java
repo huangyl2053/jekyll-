@@ -1954,7 +1954,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
      * @param searchKey KaigoFukaKihonSearchKey
      */
     public void setヘッダパネル(ShikibetsuCode 識別コード, KaigoFukaKihonSearchKey searchKey) {
-        div.getJuminFukaShokai().getCcdKaigoatena().onLoad(識別コード);
+        div.getJuminFukaShokai().getCcdKaigoatena().initialize(識別コード);
         div.getJuminFukaShokai().getCcdFukaKihon().load(searchKey);
     }
 

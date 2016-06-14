@@ -104,9 +104,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onLoad(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        div.getKaigoCommonPanel().getCcdAtenaInfo().onLoad(識別コード);
+        div.getKaigoCommonPanel().getCcdAtenaInfo().initialize(識別コード);
         if (!被保険者番号.isEmpty()) {
-            div.getKaigoCommonPanel().getCcdShikakuKihon().onLoad(被保険者番号);
+            div.getKaigoCommonPanel().getCcdShikakuKihon().initialize(被保険者番号);
         } else {
             div.getKaigoCommonPanel().getCcdShikakuKihon().setDisplayNone(true);
         }
