@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IChiJiHanTeiRelateEntity;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -62,8 +62,8 @@ public class IChiJiHanTeiBusiness {
      *
      * @return 被保険者氏名
      */
-    public AtenaKanaMeisho get被保険者氏名() {
-        return entity.getHihokenshaKana();
+    public AtenaMeisho get被保険者氏名() {
+        return entity.getHihokenshaName();
     }
 
     /**
