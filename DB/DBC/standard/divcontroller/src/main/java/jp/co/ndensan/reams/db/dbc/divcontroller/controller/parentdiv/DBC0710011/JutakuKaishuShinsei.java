@@ -46,8 +46,8 @@ public class JutakuKaishuShinsei {
         TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = key.get識別コード();
         HihokenshaNo 被保険者番号 = key.get被保険者番号();
-        div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().onLoad(識別コード);
-        div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().onLoad(識別コード);
+        div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().initialize(識別コード);
+        div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().initialize(識別コード);
         JutakuKaishuShinseiHandler handler = getHandler(div);
         RString 画面モード = ResponseHolder.getState();
         handler.onLoad(被保険者番号, 画面モード);

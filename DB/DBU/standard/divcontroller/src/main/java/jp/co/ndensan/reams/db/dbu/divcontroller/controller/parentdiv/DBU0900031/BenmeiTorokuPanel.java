@@ -68,7 +68,7 @@ public class BenmeiTorokuPanel {
         審査請求届出日 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.審査請求届出日, FlexibleDate.class);
         弁明書作成日 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.弁明書作成日, FlexibleDate.class);
         RString 初期_状態 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.モード, RString.class);
-        panelDiv.getAtenaPanel().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        panelDiv.getAtenaPanel().getCcdKaigoAtenaInfo().initialize(識別コード);
         panelDiv.getShikakukihonPanel().getCcdKaigoShikakuKihon();
         get保存情報の取得(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
         if (初期_状態.equals(状態_更新)) {

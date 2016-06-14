@@ -108,9 +108,9 @@ public class RiyoshaFutangakuGengakuHandler {
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
 
-        div.getCcdAtenaInfo().onLoad(識別コード);
+        div.getCcdAtenaInfo().initialize(識別コード);
         div.getCcdShinseiJoho().initialize(識別コード);
-        div.getCcdKaigoKihon().onLoad(被保険者番号);
+        div.getCcdKaigoKihon().initialize(被保険者番号);
         if (ResponseHolder.getMenuID().equals(申請メニュー)) {
             div.getBtnInputNew().setText(申請情報を追加する);
             div.getRiyoshaFutangakuGengakuShinseiDetail().setTitle(申請情報);

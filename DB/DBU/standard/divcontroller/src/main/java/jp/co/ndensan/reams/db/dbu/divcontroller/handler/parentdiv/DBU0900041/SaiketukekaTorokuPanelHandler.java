@@ -63,8 +63,8 @@ public class SaiketukekaTorokuPanelHandler {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
 
-        div.getAtenaInfoCommonChildDiv().onLoad(識別コード);
-        div.getKaigoShikakuKihonCommonChildDiv().onLoad(被保険者番号);
+        div.getAtenaInfoCommonChildDiv().initialize(識別コード);
+        div.getKaigoShikakuKihonCommonChildDiv().initialize(被保険者番号);
     }
 
     /**

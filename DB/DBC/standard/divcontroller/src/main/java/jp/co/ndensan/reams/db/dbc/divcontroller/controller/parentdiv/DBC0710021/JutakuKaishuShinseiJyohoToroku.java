@@ -91,8 +91,8 @@ public class JutakuKaishuShinseiJyohoToroku {
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
 
-        div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().onLoad(識別コード);
-        div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().onLoad(識別コード);
+        div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().initialize(識別コード);
+        div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().initialize(識別コード);
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
         handler.onLoad(識別コード, 被保険者番号, サービス提供年月, 整理番号, 画面モード);
         return ResponseData.of(div).respond();

@@ -43,8 +43,8 @@ public class DBU0130011Main {
         ShikibetsuCode shikibetsuCode = key.get識別コード();
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
         initialize(div, RoujinHokenJukyushaDaichoKanriManager.createInstance().getRoukenJukyuJoho(shikibetsuCode));
-        div.getAtenaAreaPanel().getCcdKaigoAtenaInfo().onLoad(shikibetsuCode);
-        div.getAtenaAreaPanel().getCcdKaigoShikakuKihon().onLoad(hihokenshaNo);
+        div.getAtenaAreaPanel().getCcdKaigoAtenaInfo().initialize(shikibetsuCode);
+        div.getAtenaAreaPanel().getCcdKaigoShikakuKihon().initialize(hihokenshaNo);
         return ResponseData.of(div).respond();
     }
 

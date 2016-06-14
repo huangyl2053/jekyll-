@@ -66,8 +66,8 @@ public class KouzaInfoHandler {
      * @param 被保険者番号 HihokenshaNo
      */
     public void loadヘッダエリア(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
-        div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+        div.getPanelOne().getCcdKaigoAtenaInfo().initialize(識別コード);
+        div.getPanelOne().getCcdKaigoShikakuKihon().initialize(被保険者番号);
     }
 
     /**

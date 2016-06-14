@@ -39,8 +39,8 @@ public class PnlShokanHanteiKekka {
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
 
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
-        div.getPanelAtenaShikaku().getCcdKaigoAtenalInfo().onLoad(識別コード);
-        div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().onLoad(識別コード);
+        div.getPanelAtenaShikaku().getCcdKaigoAtenalInfo().initialize(識別コード);
+        div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().initialize(識別コード);
 
         HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
         FlexibleYearMonth 前月 = FlexibleDate.getNowDate().plusMonth(-1).getYearMonth();
