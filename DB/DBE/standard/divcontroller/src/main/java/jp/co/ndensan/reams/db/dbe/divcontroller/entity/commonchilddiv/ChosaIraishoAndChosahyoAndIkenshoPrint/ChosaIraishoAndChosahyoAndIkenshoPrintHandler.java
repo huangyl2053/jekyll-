@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintBusiness;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
 import jp.co.ndensan.reams.db.dbe.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenItem;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadItem;
@@ -667,7 +667,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
 
         for (dgNinteiChosa_Row row : selectedItems) {
-            NinteiShinseiJoho ninteiShinseiJoho = NinteiShinseiJohoManager.createInstance().get要介護認定申請情報(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+            NinteiShinseiJoho2 ninteiShinseiJoho = NinteiShinseiJohoManager.createInstance().get要介護認定申請情報(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
             if (ninteiShinseiJoho != null) {
                 RString ninteiShinseiDay = ninteiShinseiJoho.get認定申請年月日().wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
                         .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
@@ -712,7 +712,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
 
         for (dgNinteiChosa_Row row : selectedItems) {
-            NinteiShinseiJoho ninteiShinseiJoho = NinteiShinseiJohoManager.createInstance().get要介護認定申請情報(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+            NinteiShinseiJoho2 ninteiShinseiJoho = NinteiShinseiJohoManager.createInstance().get要介護認定申請情報(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
             if (ninteiShinseiJoho != null) {
                 RString ninteiShinseiDay = ninteiShinseiJoho.get認定申請年月日().wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
                         .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
@@ -758,7 +758,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
 
         for (dgNinteiChosa_Row row : selectedItems) {
-            NinteiShinseiJoho ninteiShinseiJoho = NinteiShinseiJohoManager.createInstance().get要介護認定申請情報(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+            NinteiShinseiJoho2 ninteiShinseiJoho = NinteiShinseiJohoManager.createInstance().get要介護認定申請情報(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
             if (ninteiShinseiJoho != null) {
                 RString ninteiShinseiDay = ninteiShinseiJoho.get認定申請年月日().wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
                         .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();

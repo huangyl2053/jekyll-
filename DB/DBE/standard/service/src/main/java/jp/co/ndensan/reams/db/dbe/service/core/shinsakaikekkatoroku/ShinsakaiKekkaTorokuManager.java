@@ -6,7 +6,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijohosakusei.GogitaiJohoSakuseiRsult;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter;
@@ -105,8 +105,8 @@ public class ShinsakaiKekkaTorokuManager {
      * @return SearchResult<ShinsakaiKaisaiYoteiJoho> 介護認定審査会開催予定情報Business
      */
     @Transaction
-    public SearchResult<ShinsakaiKaisaiYoteiJoho> get審査会委員一覧検索_業務概念_1(RString 開催番号) {
-        List<ShinsakaiKaisaiYoteiJoho> resultList = new ArrayList<>();
+    public SearchResult<ShinsakaiKaisaiYoteiJoho2> get審査会委員一覧検索_業務概念_1(RString 開催番号) {
+        List<ShinsakaiKaisaiYoteiJoho2> resultList = new ArrayList<>();
         List<DbT5502ShinsakaiWariateJohoEntity> entityList
                 = mapperProvider.create(IShinsakaiKekkaTorokuMapper.class)
                 .get審査会委員一覧更新_1(ShinsakaiKekkaTorokuParameter.createShinsakaiKekkaTorokuParameter(開催番号));

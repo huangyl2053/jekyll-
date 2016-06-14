@@ -1,0 +1,100 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBD&quot;,&quot;controlName&quot;:&quot;HikazeiNenkinKensaku&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCloseEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;100px&quot;,&quot;minHeight&quot;:&quot;200px&quot;,&quot;widthPercent&quot;:&quot;80&quot;,&quot;heightPercent&quot;:&quot;80&quot;,&quot;enterKeyAssignedControl&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;}" data-control-name="DBD.HikazeiNenkinKensaku" data-is-composite-control="true"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel Width-G1 UzCompositeChild" id="HikazeiNenkinKensaku" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;HikazeiNenkinKensaku&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;HikazeiNenkinKensaku&quot;,&quot;title&quot;:&quot;非課税年金検索&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;HikazeiNenkinKensaku&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="HikazeiNenkinKensaku_panel_header_area" style="display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">非課税年金検索</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="HikazeiNenkinKensaku_panel_body_area"><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="TextBox1" style="width: 189px; height: 20px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;TextBox1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;TextBox1_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;被保番号&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;labelLAlign&quot;:0}"><span class="word-wrap-break-word Label-L text-align-left" id="TextBox1_labelL" style="width: 70px;"><span>被保番号</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana readonlyColor Width-S" id="TextBox1_core" type="text" placeholder=""></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="TextBox2" style="width: 171px; height: 20px; display: block;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;TextBox2&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;TextBox2_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;年度&quot;,&quot;labelLWidth&quot;:&quot;XS&quot;,&quot;labelLAlign&quot;:0}"><span class="word-wrap-break-word Label-L text-align-left Width-XS" id="TextBox2_labelL"><span>年度</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana readonlyColor Width-S" id="TextBox2_core" type="text" placeholder=""></div><div class="UzDataGrid JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M Height-S ClearFloat UzCompositeChild" id="DataGrid1" style="width: 1158px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;DataGrid1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;1158px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;DataGrid1&quot;,&quot;height&quot;:&quot;S&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowClearSortButton&quot;:false,&quot;isShowSelectedRowCount&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowRowState&quot;:false,&quot;columns&quot;:[{&quot;columnName&quot;:&quot;氏名&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;氏名&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;氏名&quot;},{&quot;columnName&quot;:&quot;生年月日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;生年月日&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;生年月日&quot;},{&quot;columnName&quot;:&quot;性別&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;性別&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;性別&quot;},{&quot;columnName&quot;:&quot;年金保険者&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;年金保険者&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;年金保険者&quot;},{&quot;columnName&quot;:&quot;基礎年金番号&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;基礎年金番号&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;基礎年金番号&quot;},{&quot;columnName&quot;:&quot;現基礎年金番号&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;現基礎年金番号&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;現基礎年金番号&quot;},{&quot;columnName&quot;:&quot;年金コード&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;年金コード&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;年金コード&quot;},{&quot;columnName&quot;:&quot;対象年&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;対象年&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;対象年&quot;},{&quot;columnName&quot;:&quot;作成年月日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;作成年月日&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;作成年月日&quot;},{&quot;columnName&quot;:&quot;通知内容&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;通知内容&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;通知内容&quot;},{&quot;columnName&quot;:&quot;登録区分&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;登録区分&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;登録区分&quot;}],&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0,&quot;groupHeaderHeight&quot;:0},&quot;isShowSelectButtonColumn&quot;:true,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;isShowCancelButtonColumn&quot;:false,&quot;isErrorAndWarningColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;cancelButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="DataGrid1_grid_table" role="" style="width: 1158px; height: 176px; position: relative;"></div><div id="DataGrid1_footer" style="width: 1158px; height: 25px;"></div></div><button class="UzButton JSControl controlMargin-M Width-S ClearFloat FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="Button1" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;Button1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;Button1&quot;,&quot;text&quot;:&quot;閉じる&quot;}"><span>閉じる</span></button></div></div>      <script class="RamlConvert" type="text/javascript">
+var DBD= DBD? DBD: {};
+DBD['HIKAZEINENKINKENSAKU'] = {};
+DBD['HIKAZEINENKINKENSAKU'].HikazeiNenkinKensakuRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_HikazeiNenkinKensaku').getProperty();parameter0.TextBox1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_TextBox1').getProperty();parameter0.TextBox2 = Uz.JSControlUtil.getJSControl(parentFieldName + '_TextBox2').getProperty();parameter0.DataGrid1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_DataGrid1').getProperty();parameter0.Button1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_Button1').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBD;
+(function (DBD) {
+    (function (HikazeiNenkinKensaku) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        HikazeiNenkinKensaku.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "HikazeiNenkinKensaku";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBD.HikazeiNenkinKensaku.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBD.HikazeiNenkinKensaku.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.HikazeiNenkinKensaku = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.TextBox1 = function () {
+                return new UZA.TextBox(this.convFiledName("TextBox1"));
+            };
+
+            Controls.prototype.TextBox2 = function () {
+                return new UZA.TextBox(this.convFiledName("TextBox2"));
+            };
+
+            Controls.prototype.DataGrid1 = function () {
+                return new UZA.DataGrid(this.convFiledName("DataGrid1"));
+            };
+
+            Controls.prototype.Button1 = function () {
+                return new UZA.Button(this.convFiledName("Button1"));
+            };
+            return Controls;
+        })();
+        HikazeiNenkinKensaku.Controls = Controls;
+    })(DBD.HikazeiNenkinKensaku || (DBD.HikazeiNenkinKensaku = {}));
+    var HikazeiNenkinKensaku = DBD.HikazeiNenkinKensaku;
+})(DBD || (DBD = {}));
+var DBD;
+(function (DBD) {
+    (function (HikazeiNenkinKensaku) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new HikazeiNenkinKensaku.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new HikazeiNenkinKensaku.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        HikazeiNenkinKensaku.ModeController = ModeController;
+    })(DBD.HikazeiNenkinKensaku || (DBD.HikazeiNenkinKensaku = {}));
+    var HikazeiNenkinKensaku = DBD.HikazeiNenkinKensaku;
+})(DBD || (DBD = {}));
+
+var DBD;
+(function (DBD) {
+    (function (HikazeiNenkinKensaku) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new HikazeiNenkinKensaku.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        HikazeiNenkinKensaku.PublicProperties = PublicProperties;
+    })(DBD.HikazeiNenkinKensaku || (DBD.HikazeiNenkinKensaku = {}));
+    var HikazeiNenkinKensaku = DBD.HikazeiNenkinKensaku;
+})(DBD || (DBD = {}));
+</script></div>

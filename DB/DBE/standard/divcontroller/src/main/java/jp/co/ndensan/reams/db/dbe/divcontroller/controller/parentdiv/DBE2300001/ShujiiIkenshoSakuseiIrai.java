@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2300001
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJohoBuilder;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2Builder;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2Identifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshosakuseiirai.ShujiiIraiAtenaJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoHeaderItem;
@@ -179,7 +179,7 @@ public class ShujiiIkenshoSakuseiIrai {
         createHandler(div).init(manager.get申請者情報(param).records());
         Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報
                 = Models.create(manager.get主治医意見書作成依頼情報(param).records());
-        Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> 要介護認定申請情報
+        Models<NinteiShinseiJoho2Identifier, NinteiShinseiJoho2> 要介護認定申請情報
                 = Models.create(manager.get要介護認定申請情報(param).records());
         ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼_主治医意見書作成依頼情報, 主治医意見書作成依頼情報);
         ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼_要介護認定申請情報, 要介護認定申請情報);
@@ -323,7 +323,7 @@ public class ShujiiIkenshoSakuseiIrai {
     }
 
     private void toHozon(ShujiiIkenshoSakuseiIraiDiv div) {
-        Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> 要介護認定申請情報
+        Models<NinteiShinseiJoho2Identifier, NinteiShinseiJoho2> 要介護認定申請情報
                 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼_要介護認定申請情報, Models.class);
         Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報
                 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼_主治医意見書作成依頼情報, Models.class);
@@ -339,9 +339,9 @@ public class ShujiiIkenshoSakuseiIrai {
                 }
                 manager.save主治医意見書作成依頼情報(
                         create主治医意見書作成依頼情報(row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数, rirekiNo), EntityDataState.Added);
-                NinteiShinseiJoho shinseiJoho = 要介護認定申請情報.get(new NinteiShinseiJohoIdentifier(
+                NinteiShinseiJoho2 shinseiJoho = 要介護認定申請情報.get(new NinteiShinseiJoho2Identifier(
                         new ShinseishoKanriNo(row.getShiseishoKanriNo())));
-                NinteiShinseiJohoBuilder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
+                NinteiShinseiJoho2Builder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
                 shinseiJohoBuilder.set主治医医療機関コード(row.getShujiiIryoKikanCode());
                 shinseiJohoBuilder.set主治医コード(row.getShujiiCode());
                 shinseiJohoBuilder.set指定医フラグ(row.getShiteiiFlag());
@@ -357,9 +357,9 @@ public class ShujiiIkenshoSakuseiIrai {
                 manager.save主治医意見書作成依頼情報(
                         create主治医意見書作成依頼情報(row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数,
                                 Integer.parseInt(row.getRirekiNo().toString()) + 1), EntityDataState.Added);
-                NinteiShinseiJoho shinseiJoho = 要介護認定申請情報.get(new NinteiShinseiJohoIdentifier(
+                NinteiShinseiJoho2 shinseiJoho = 要介護認定申請情報.get(new NinteiShinseiJoho2Identifier(
                         new ShinseishoKanriNo(row.getShiseishoKanriNo())));
-                NinteiShinseiJohoBuilder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
+                NinteiShinseiJoho2Builder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
                 shinseiJohoBuilder.set主治医医療機関コード(row.getShujiiIryoKikanCode());
                 shinseiJohoBuilder.set主治医コード(row.getShujiiCode());
                 shinseiJohoBuilder.set指定医フラグ(row.getShiteiiFlag());

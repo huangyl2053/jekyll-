@@ -11,9 +11,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
+import jp.co.ndensan.reams.db.dbz.business.core.taishoshasearch.DbV7902FukaSearchBusiness;
+import jp.co.ndensan.reams.db.dbz.business.core.taishoshasearch.FukaTaishoshaRelateBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.helper.FukaTaishoshaSearchValidationHelper;
@@ -25,8 +26,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.Fuka
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.dgFukaGaitoshaList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearchEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.FukaTaishoshaRelateEntity;
+//import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearchEntity;
+//import jp.co.ndensan.reams.db.dbz.entity.db.relate.FukaTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaFinder;
 import jp.co.ndensan.reams.db.dbz.service.search.FukaSearchItem;
@@ -40,7 +41,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+//import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -168,16 +169,16 @@ public class FukaTaishoshaSearch {
 
 //        boolean 介護検索条件のみ = 検索条件Flag && !宛名条件修正Flag;
         // 該当者を検索する
-        SearchResult<FukaTaishoshaRelateEntity> result = get対象者(div.getSearchCondition().getCcdSearchCondition());
+        SearchResult<FukaTaishoshaRelateBusiness> result = get対象者(div.getSearchCondition().getCcdSearchCondition());
 
         // 検索結果の絞り込み
         // TODO 【資格、賦課共通】部分
         boolean is全年度 = div.getSearchCondition().getCcdSearchCondition().get賦課年度().isMaxOrMin();
-        IItemList<FukaTaishoshaRelateEntity> list = ItemList.empty();
+        IItemList<FukaTaishoshaRelateBusiness> list = ItemList.empty();
         if (!result.records().isEmpty()) {
             list = editList(result, is全年度);
         }
-        SearchResult<FukaTaishoshaRelateEntity> newResult = SearchResult.of(list);
+        SearchResult<FukaTaishoshaRelateBusiness> newResult = SearchResult.of(list);
 
         // 検索結果の件数判定
         int 検索結果件数 = newResult.totalCount();
@@ -188,7 +189,7 @@ public class FukaTaishoshaSearch {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
             // 検索結果が1件の場合
         } else if (検索結果件数 == 1) {
-            FukaTaishoshaRelateEntity 対象者 = newResult.records().toList().get(0);
+            FukaTaishoshaRelateBusiness 対象者 = newResult.records().toList().get(0);
             // ViewState_個人確定キーの保存
             put対象者Key(create対象者Key(対象者));
             // 最近処理者履歴の保存
@@ -219,13 +220,13 @@ public class FukaTaishoshaSearch {
         }
     }
 
-    private IItemList<FukaTaishoshaRelateEntity> editList(
-            SearchResult<FukaTaishoshaRelateEntity> result,
+    private IItemList<FukaTaishoshaRelateBusiness> editList(
+            SearchResult<FukaTaishoshaRelateBusiness> result,
             boolean is全年度) {
-        IItemList<FukaTaishoshaRelateEntity> list = ItemList.empty();
+        IItemList<FukaTaishoshaRelateBusiness> list = ItemList.empty();
         if (is全年度) {
             RString 被保険者番号 = RString.EMPTY;
-            for (FukaTaishoshaRelateEntity entity : result.records().toList()) {
+            for (FukaTaishoshaRelateBusiness entity : result.records().toList()) {
                 RString 被保険者番号_絞り込み前 = RString.EMPTY;
                 if (entity.get賦課検索エンティティ().getHihokenshaNo() != null) {
                     被保険者番号_絞り込み前 = entity.get賦課検索エンティティ().getHihokenshaNo().value();
@@ -239,7 +240,7 @@ public class FukaTaishoshaSearch {
             RString 被保険者番号 = RString.EMPTY;
             RString 賦課年度 = RString.EMPTY;
             RString 通知書番号 = RString.EMPTY;
-            for (FukaTaishoshaRelateEntity entity : result.records().toList()) {
+            for (FukaTaishoshaRelateBusiness entity : result.records().toList()) {
                 RString 被保険者番号_絞り込み前 = RString.EMPTY;
                 RString 賦課年度_絞り込み前 = RString.EMPTY;
                 RString 通知書番号_絞り込み前 = RString.EMPTY;
@@ -282,9 +283,9 @@ public class FukaTaishoshaSearch {
         IShikibetsuTaishoSearchKey 検索キー
                 = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー, true).set識別コード(識別コード).build();
         TaishoshaFinder finder = new TaishoshaFinder();
-        SearchResult<FukaTaishoshaRelateEntity> 対象者 = finder.get賦課対象者(条件無, 条件無, 検索キー, 最近処理者検索数);
+        SearchResult<FukaTaishoshaRelateBusiness> 対象者 = finder.get賦課対象者(条件無, 条件無, 検索キー, 最近処理者検索数);
         if (!対象者.records().isEmpty()) {
-            for (FukaTaishoshaRelateEntity entity : 対象者.records()) {
+            for (FukaTaishoshaRelateBusiness entity : 対象者.records()) {
                 put対象者Key(create対象者Key(entity));
                 save最近処理者(div, entity);
                 FlexibleYear 賦課年度 = entity.get賦課検索エンティティ().getFukaNendo();
@@ -339,7 +340,7 @@ public class FukaTaishoshaSearch {
         div.getGaitoshaList().getTxtFukanendo().setValue(new RDate(賦課年度.toString()));
     }
 
-    private SearchResult<FukaTaishoshaRelateEntity> get対象者(HihokenshaFinderDiv div) {
+    private SearchResult<FukaTaishoshaRelateBusiness> get対象者(HihokenshaFinderDiv div) {
         TaishoshaFinder finder = new TaishoshaFinder();
         FukaSearchMenu menu = FukaSearchMenu.toValue(ResponseHolder.getMenuID());
 //        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
@@ -424,11 +425,11 @@ public class FukaTaishoshaSearch {
 
     }
 
-    private FukaTaishoshaKey create対象者Key(FukaTaishoshaRelateEntity entity) {
-        DbV7902FukaSearchEntity 賦課検索 = entity.get賦課検索エンティティ();
-        UaFt200FindShikibetsuTaishoEntity 住基個人住登外 = entity.get住基個人住登外エンティティ();
-        IKojin 個人 = createKojin(住基個人住登外);
-        IShikibetsuTaisho 識別対象 = createShikibetsuTaisho(住基個人住登外);
+    private FukaTaishoshaKey create対象者Key(FukaTaishoshaRelateBusiness entity) {
+        DbV7902FukaSearchBusiness 賦課検索 = new DbV7902FukaSearchBusiness(entity.get賦課検索エンティティ());
+//        UaFt200FindShikibetsuTaishoEntity 住基個人住登外 = entity.get住基個人住登外エンティティ();
+        IKojin 個人 = createKojin(entity.get住基個人住登外エンティティ());
+        IShikibetsuTaisho 識別対象 = createShikibetsuTaisho(entity.get住基個人住登外エンティティ());
         return new FukaTaishoshaKey(
                 賦課検索.getHihokenshaNo() != null ? 賦課検索.getHihokenshaNo() : new HihokenshaNo(RString.EMPTY),
                 賦課検索.getShikibetsuCode() != null ? 賦課検索.getShikibetsuCode() : new ShikibetsuCode(RString.EMPTY),
@@ -450,19 +451,19 @@ public class FukaTaishoshaSearch {
                 new ShikibetsuCode(row.getTxtShikbetsuCode()), new AtenaMeisho(row.getTxtName()));
     }
 
-    private void save最近処理者(FukaTaishoshaSearchDiv div, FukaTaishoshaRelateEntity entity) {
+    private void save最近処理者(FukaTaishoshaSearchDiv div, FukaTaishoshaRelateBusiness entity) {
         div.getSearchCondition().getCcdSearchCondition().save最近処理者(
                 entity.get賦課検索エンティティ().getShikibetsuCode(),
                 createShikibetsuTaisho(entity.get住基個人住登外エンティティ()).get名称().getName());
     }
 
-    private List<dgFukaGaitoshaList_Row> toRowList(SearchResult<FukaTaishoshaRelateEntity> result) {
+    private List<dgFukaGaitoshaList_Row> toRowList(SearchResult<FukaTaishoshaRelateBusiness> result) {
         List<dgFukaGaitoshaList_Row> rowList = new ArrayList<>();
-        for (FukaTaishoshaRelateEntity 対象者 : result.records()) {
-            UaFt200FindShikibetsuTaishoEntity 住基個人住登外 = 対象者.get住基個人住登外エンティティ();
-            DbV7902FukaSearchEntity 賦課検索 = 対象者.get賦課検索エンティティ();
-            IKojin 個人 = createKojin(住基個人住登外);
-            IShikibetsuTaisho 識別対象 = createShikibetsuTaisho(住基個人住登外);
+        for (FukaTaishoshaRelateBusiness 対象者 : result.records()) {
+//            UaFt200FindShikibetsuTaishoEntity 住基個人住登外 = 対象者.get住基個人住登外エンティティ();
+            DbV7902FukaSearchBusiness 賦課検索 = new DbV7902FukaSearchBusiness(対象者.get賦課検索エンティティ());
+            IKojin 個人 = createKojin(対象者.get住基個人住登外エンティティ());
+            IShikibetsuTaisho 識別対象 = createShikibetsuTaisho(対象者.get住基個人住登外エンティティ());
             rowList.add(new dgFukaGaitoshaList_Row(
                     賦課検索.getChoteiNendo() != null ? 賦課検索.getChoteiNendo().toDateString() : RString.EMPTY,
                     賦課検索.getFukaNendo() != null ? 賦課検索.getFukaNendo().toDateString() : RString.EMPTY,

@@ -31,9 +31,9 @@ public class NinteiYukoKikan {
      * @param 有効開始年月日 有効開始年月日
      * @param 有効期間月数 有効期間月数
      */
-    public NinteiYukoKikan(FlexibleDate 有効開始年月日, NinteiYukoKikanTsukisu 有効期間月数) {
-        this(有効開始年月日, 有効期間月数, isNull(有効期間月数) || isNull(有効開始年月日) ? null : 有効開始年月日.plusMonth(有効期間月数.value()));
-    }
+//    public NinteiYukoKikan(FlexibleDate 有効開始年月日, NinteiYukoKikanTsukisu 有効期間月数) {
+//        this(有効開始年月日, 有効期間月数, isNull(有効期間月数) || isNull(有効開始年月日) ? null : 有効開始年月日.plusMonth(有効期間月数.value()));
+//    }
 
     /**
      * インスタンスを生成します。<br />
@@ -56,13 +56,13 @@ public class NinteiYukoKikan {
      * @param 有効期間月数 有効期間月数
      * @param 有効終了年月日 有効終了年月日
      */
-    public NinteiYukoKikan(NinteiYukoKikanTsukisu 有効期間月数, FlexibleDate 有効終了年月日) {
-        this(isNull(有効期間月数) || isNull(有効終了年月日) ? null : 有効終了年月日.minusMonth(有効期間月数.value()), 有効期間月数, 有効終了年月日);
-    }
+//    public NinteiYukoKikan(NinteiYukoKikanTsukisu 有効期間月数, FlexibleDate 有効終了年月日) {
+//        this(isNull(有効期間月数) || isNull(有効終了年月日) ? null : 有効終了年月日.minusMonth(有効期間月数.value()), 有効期間月数, 有効終了年月日);
+//    }
 
-    private static boolean isNull(Object object) {
-        return object == null;
-    }
+//    private static boolean isNull(Object object) {
+//        return object == null;
+//    }
 
     /**
      * 有効期間月数を返します。
