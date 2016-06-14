@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * TokuchoIdoJohoSaiSakusei のクラスファイル
  *
- * @reamsid_L DBB-1850-010 zhangrui
+ * @reamsid_L DBB-1840-010 zhangrui
  */
 public class TokuchoIdoJohoSaiSakuseiDiv extends Panel {
     /*
