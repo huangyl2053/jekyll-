@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
@@ -40,7 +39,6 @@ public class KougakuShinseiIchiranJohyou {
 
     private final MapperProvider mapperProvider;
     private final DbT1001HihokenshaDaichoDac 被保険者台帳管理Dac;
-    private final DbT7051KoseiShichosonMasterDac 構成市町村管理Dac;
     private static final RString 介護資格喪失事由 = new RString("0010");
     private static final RString 介護資格取得事由 = new RString("0007");
 
@@ -50,7 +48,6 @@ public class KougakuShinseiIchiranJohyou {
     public KougakuShinseiIchiranJohyou() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.被保険者台帳管理Dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
-        this.構成市町村管理Dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
     }
 
     /**
