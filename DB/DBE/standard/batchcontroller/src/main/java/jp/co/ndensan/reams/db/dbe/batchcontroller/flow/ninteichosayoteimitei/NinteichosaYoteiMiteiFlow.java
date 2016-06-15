@@ -22,13 +22,13 @@ public class NinteichosaYoteiMiteiFlow extends BatchFlowBase<NinteichosaYoteiMit
 
     @Override
     protected void defineFlow() {
-        if (getParameter().isNinteichosayoteimiteishaichiran()) {
+        if (getParameter().isNinteichosayoteimitei()) {
             executeStep(NINTEICHOSA_YOTEIMITEI);
         }
-        if (getParameter().isNinteichosairaisakihenkoshaichiranhyojoken()) {
+        if (getParameter().isNinteichosaijoken()) {
             executeStep(NINTEICHOSA_IRAIHENKO);
         }
-        if (getParameter().isNinteiChosaKekkaShujiiIkenshoCheckListJoken()) {
+        if (getParameter().isCheckListJoken()) {
             executeStep(CHOSAHYO_IKENSHOCHECKLIST);
         }
     }
