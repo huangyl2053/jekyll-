@@ -86,7 +86,7 @@ public class TokuteiNyushoshaHiyo {
      * @return ResponseData
      */
     public ResponseData<TokuteiNyushoshaHiyoDiv> onClick_dgdTokuteiYichiran(TokuteiNyushoshaHiyoDiv div) {
-        getHandler(div).set特定入所者費用照会パネル();
+        getHandler(div).set特定入所者費用照会パネル(ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
         div.getPanelTokutei().getPanelMeisai().setVisible(true);
         return createResponse(div);
     }

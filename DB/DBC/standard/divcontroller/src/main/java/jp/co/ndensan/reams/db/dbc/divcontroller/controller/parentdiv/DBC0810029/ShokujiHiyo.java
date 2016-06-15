@@ -157,7 +157,7 @@ public class ShokujiHiyo {
      * @return ResponseData
      */
     public ResponseData<ShokujiHiyoDiv> onClick_dgList_select(ShokujiHiyoDiv div) {
-        getHandler(div).set食事費用パネル２();
+        getHandler(div).set食事費用パネル２(ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
         return createResponse(div);
     }
 

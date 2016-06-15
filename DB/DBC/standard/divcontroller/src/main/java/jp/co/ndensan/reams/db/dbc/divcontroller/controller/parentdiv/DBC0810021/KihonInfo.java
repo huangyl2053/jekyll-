@@ -68,7 +68,7 @@ public class KihonInfo {
         }
         KaigoJigyoshaReturnEntity kaigoJigyoshaEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getKaigoJigyoshaInfo(サービス年月, 事業者番号);
-        getHandler(div).set基本内容エリア(shokanKihon, kaigoJigyoshaEntity, サービス年月);
+        getHandler(div).set基本内容エリア(shokanKihon, kaigoJigyoshaEntity, サービス年月, 様式番号);
 
         ShikibetsuNoKanriResult shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShikibetsubangoKanri(サービス年月, 様式番号);

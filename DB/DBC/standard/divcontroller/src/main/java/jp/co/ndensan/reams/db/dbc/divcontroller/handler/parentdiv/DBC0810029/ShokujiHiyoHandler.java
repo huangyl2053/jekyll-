@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810029.ShokujiHiyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810029.dgdShokuji_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -25,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -185,8 +183,10 @@ public class ShokujiHiyoHandler {
 
     /**
      * 食事費用パネル２の設定のメソッドます。
+     *
+     * @param サービス年月 FlexibleYearMonth
      */
-    public void set食事費用パネル２() {
+    public void set食事費用パネル２(FlexibleYearMonth サービス年月) {
         dgdShokuji_Row row = div.getPanelShokuji().getPanelShoikujiList().getDgdShokuji().getClickedItem();
         RString serviceCodeShuruyi = row.getDefaultDataName2().substring(0, NUM_2);
         div.getPanelShokuji().getPanelDetail2().getTxtServiceCodeShurui().setValue(serviceCodeShuruyi);
@@ -195,7 +195,7 @@ public class ShokujiHiyoHandler {
         List<KaigoServiceNaiyou> list = ShokanbaraiJyokyoShokai.createInstance().getServiceCodeInfo(
                 new KaigoServiceShuruiCode(serviceCodeShuruyi),
                 serviceCodeKoumoku,
-                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
+                サービス年月);
         if (list != null) {
             Collections.sort(list, new Comparator<KaigoServiceNaiyou>() {
                 @Override
