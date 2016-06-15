@@ -105,7 +105,7 @@ public class KyuhuhiMeisaiJutokuPanel {
         if (shikibetsuNoKanri == null) {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         } else {
-            getHandler(div).getボタンを制御(shikibetsuNoKanri);
+            getHandler(div).getボタンを制御(shikibetsuNoKanri, meisaiPar);
         }
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             div.getPnlBtnDetail().getPnlKyufuhiMeisai().getBtnAdd().setDisabled(true);
@@ -229,7 +229,8 @@ public class KyuhuhiMeisaiJutokuPanel {
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnConfirm(KyuhuhiMeisaiJutokuPanelDiv div) {
         dgJushochiTokutei_Row row;
-        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        if (登録.equals(state)) {
             row = new dgJushochiTokutei_Row();
         } else {
             row = getHandler(div).selectRow();
@@ -238,7 +239,7 @@ public class KyuhuhiMeisaiJutokuPanel {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        getHandler(div).modifyRow(row);
+        getHandler(div).modifyRow(row, state);
         return createResponse(div);
     }
 
@@ -266,7 +267,13 @@ public class KyuhuhiMeisaiJutokuPanel {
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnDelete(KyuhuhiMeisaiJutokuPanelDiv div) {
         try {
             if (!ResponseHolder.isReRequest()) {
-                getHandler(div).保存処理();
+                ShoukanharaihishinseimeisaikensakuParameter meisaiPar
+                        = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                                ShoukanharaihishinseimeisaikensakuParameter.class);
+                RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+                List<ShokanMeisaiJushochiTokureiResult> shkonlist
+                        = ViewStateHolder.get(ViewStateKeys.給付費明細住特, List.class);
+                getHandler(div).保存処理(meisaiPar, 処理モード, shkonlist);
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
                         .replace(削除.toString())).respond();
             }
@@ -284,7 +291,13 @@ public class KyuhuhiMeisaiJutokuPanel {
     private ResponseData<KyuhuhiMeisaiJutokuPanelDiv> 保存処理(KyuhuhiMeisaiJutokuPanelDiv div) {
         try {
             if (!ResponseHolder.isReRequest()) {
-                getHandler(div).保存処理();
+                ShoukanharaihishinseimeisaikensakuParameter meisaiPar
+                        = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                                ShoukanharaihishinseimeisaikensakuParameter.class);
+                RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+                List<ShokanMeisaiJushochiTokureiResult> shkonlist
+                        = ViewStateHolder.get(ViewStateKeys.給付費明細住特, List.class);
+                getHandler(div).保存処理(meisaiPar, 処理モード, shkonlist);
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
                         replace(登録.toString())).respond();
             }
@@ -315,7 +328,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      * @return ResponseData
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnKihonJoho(KyuhuhiMeisaiJutokuPanelDiv div) {
-        getHandler(div).putViewState();
+        setViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.基本情報).respond();
     }
 
@@ -326,7 +339,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      * @return ResponseData
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnKyufuhiMeisai(KyuhuhiMeisaiJutokuPanelDiv div) {
-        getHandler(div).putViewState();
+        setViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.給付費明細).respond();
     }
 
@@ -337,7 +350,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      * @return ResponseData
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnTokuteiShiryohi(KyuhuhiMeisaiJutokuPanelDiv div) {
-        getHandler(div).putViewState();
+        setViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.特定診療費).respond();
     }
 
@@ -348,7 +361,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      * @return ResponseData
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnServicePlanhi(KyuhuhiMeisaiJutokuPanelDiv div) {
-        getHandler(div).putViewState();
+        setViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.サービス計画費).respond();
     }
 
@@ -359,7 +372,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      * @return ResponseData
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnTokuteiNyushoshaHi(KyuhuhiMeisaiJutokuPanelDiv div) {
-        getHandler(div).putViewState();
+        setViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.特定入所者費用).respond();
     }
 
@@ -370,7 +383,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      * @return ResponseData
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnGokeiJoho(KyuhuhiMeisaiJutokuPanelDiv div) {
-        getHandler(div).putViewState();
+        setViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.合計情報).respond();
     }
 
@@ -380,8 +393,9 @@ public class KyuhuhiMeisaiJutokuPanel {
      * @param div KyuhuhiMeisaiJutokuPanelDiv
      * @return ResponseData
      */
-    public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnKinkyujiShoteiShikan(KyuhuhiMeisaiJutokuPanelDiv div) {
-        getHandler(div).putViewState();
+    public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnKinkyujiShoteiShikan(
+            KyuhuhiMeisaiJutokuPanelDiv div) {
+        setViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.緊急時_所定疾患).respond();
     }
 
@@ -391,8 +405,9 @@ public class KyuhuhiMeisaiJutokuPanel {
      * @param div KyuhuhiMeisaiJutokuPanelDiv
      * @return ResponseData
      */
-    public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnKinkyuShisetsuRyoyouhi(KyuhuhiMeisaiJutokuPanelDiv div) {
-        getHandler(div).putViewState();
+    public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnKinkyuShisetsuRyoyouhi(
+            KyuhuhiMeisaiJutokuPanelDiv div) {
+        setViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.緊急時施設療養費).respond();
     }
 
@@ -403,7 +418,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      * @return ResponseData
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnShokujiHi(KyuhuhiMeisaiJutokuPanelDiv div) {
-        getHandler(div).putViewState();
+        setViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.食事費用).respond();
     }
 
@@ -414,7 +429,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      * @return ResponseData
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnShiseigakuShukei(KyuhuhiMeisaiJutokuPanelDiv div) {
-        getHandler(div).putViewState();
+        setViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.請求額集計).respond();
     }
 
@@ -425,7 +440,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      * @return ResponseData
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnShafukuGahenGaku(KyuhuhiMeisaiJutokuPanelDiv div) {
-        getHandler(div).putViewState();
+        setViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.社福軽減額).respond();
     }
 
@@ -439,6 +454,20 @@ public class KyuhuhiMeisaiJutokuPanel {
 
     private ResponseData<KyuhuhiMeisaiJutokuPanelDiv> createResponse(KyuhuhiMeisaiJutokuPanelDiv div) {
         return ResponseData.of(div).respond();
+    }
+
+    private void setViewState(KyuhuhiMeisaiJutokuPanelDiv div) {
+        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
+        ViewStateHolder.put(ViewStateKeys.申請日, div.getPnlBtnDetail().getTxtShinseibi().getValue());
+        ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
+                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
+                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
+                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
+                new JigyoshaNo(div.getPnlBtnDetail().getTxtJigyoshaNo().getValue()),
+                div.getPnlBtnDetail().getTxtShomeisho().getValue(),
+                div.getPnlBtnDetail().getTxtMeisaiNo().getValue(),
+                null);
+        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
     }
 
 }
