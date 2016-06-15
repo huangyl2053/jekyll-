@@ -5,9 +5,9 @@
 package jp.co.ndensan.reams.db.dbx.business.core;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.NinteiShinseiKubunHorei;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.NinteiShinseiKubunShinsei;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.NinteiShinseiYukoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunHorei;
+import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiYukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

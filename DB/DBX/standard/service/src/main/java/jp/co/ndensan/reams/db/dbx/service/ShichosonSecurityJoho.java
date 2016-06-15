@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeys
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KanriJoho;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ChohyoKyotsuJushoHenshuHoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DousaKanren;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.RojinHokenJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.chohyo.kyotsu.ChohyoKyotsuJushoHenshuHoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.DousaKanren;
+import jp.co.ndensan.reams.db.dbx.definition.core.RojinHokenJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;

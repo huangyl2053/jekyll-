@@ -24,13 +24,13 @@ import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujyusyo.JutakuKaishuJy
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuyaokaigojyotaisandannkaihantei.JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager;
 import jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
+import jp.co.ndensan.reams.db.dbx.definition.core.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -311,7 +311,7 @@ public class JutakuKaishuShinseiJyohoToroku {
     public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onBeforeOpenDialog_btnJigyosha(
             JutakuKaishuShinseiJyohoTorokuDiv div) {
         JigyoshaMode jigyoshaMode = new JigyoshaMode();
-        jigyoshaMode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.code());
+        jigyoshaMode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.getコード());
         div.setJigyoshaMode(DataPassingConverter.serialize(jigyoshaMode));
         return ResponseData.of(div).respond();
     }
@@ -341,7 +341,7 @@ public class JutakuKaishuShinseiJyohoToroku {
     public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onBeforeOpenDialog_btnSakuSeiJigyosha(
             JutakuKaishuShinseiJyohoTorokuDiv div) {
         JigyoshaMode jigyoshaMode = new JigyoshaMode();
-        jigyoshaMode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.code());
+        jigyoshaMode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.getコード());
         div.setJigyoshaMode(DataPassingConverter.serialize(jigyoshaMode));
         return ResponseData.of(div).respond();
     }

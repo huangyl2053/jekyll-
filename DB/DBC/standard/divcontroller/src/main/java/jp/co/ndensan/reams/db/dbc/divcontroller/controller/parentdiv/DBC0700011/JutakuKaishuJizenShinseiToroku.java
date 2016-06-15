@@ -16,9 +16,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.JutakuKaishuJizenShinseiTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0700011.JutakuKaishuJizenShinseiTorokuDivHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -506,7 +506,7 @@ public class JutakuKaishuJizenShinseiToroku {
     public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onBeforeOpenDialog_btnJigyosha(
             JutakuKaishuJizenShinseiTorokuDiv div) {
         JigyoshaMode jigyoshaMode = new JigyoshaMode();
-        jigyoshaMode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.code());
+        jigyoshaMode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.getコード());
         div.setJigyoshaMode(DataPassingConverter.serialize(jigyoshaMode));
         return ResponseData.of(div).respond();
     }
@@ -534,7 +534,7 @@ public class JutakuKaishuJizenShinseiToroku {
     public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onBeforeOpenDialog_btnSakuSeiJigyosha(
             JutakuKaishuJizenShinseiTorokuDiv div) {
         JigyoshaMode jigyoshaMode = new JigyoshaMode();
-        jigyoshaMode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.code());
+        jigyoshaMode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.getコード());
         div.setJigyoshaMode(DataPassingConverter.serialize(jigyoshaMode));
         return ResponseData.of(div).respond();
     }

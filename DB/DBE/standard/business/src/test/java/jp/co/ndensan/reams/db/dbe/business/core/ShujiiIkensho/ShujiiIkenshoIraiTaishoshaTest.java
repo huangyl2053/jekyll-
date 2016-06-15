@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiProgr
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikensho.ShujiiIkenshoIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.core.kaigoiryokikan.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.core.kaigodoctor.KaigoDoctor;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
