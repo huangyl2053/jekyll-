@@ -27,7 +27,8 @@ public class ShujiiikenshoItem {
     private FlexibleDate 今回認定審査年月日;
     private RString 左の主治医意見書イメージ;
     private RString 右の主治医意見書イメージ;
-    private RString 主治医意見書イメージ;
+    private RString 主治医意見書イメージ一頁目;
+    private RString 主治医意見書イメージ二頁目;
     private RString 頁番号;
 
 }
