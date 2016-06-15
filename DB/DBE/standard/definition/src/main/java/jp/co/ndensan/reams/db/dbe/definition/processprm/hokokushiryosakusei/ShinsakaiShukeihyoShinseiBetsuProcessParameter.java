@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsakaiShukeihyoShinseiBetsuMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -32,6 +33,7 @@ public class ShinsakaiShukeihyoShinseiBetsuProcessParameter implements IBatchPro
     private RString hihokenshaKubun;
     private boolean isEmptyGogitaiNo;
     private int gogitaiNo;
+    private List<Integer> gogitaiNoList;
     private boolean isTaishoTsukiKubun;
     private boolean isTaishoGeppiKubun;
     private RString taishoNendoYM;
@@ -57,6 +59,7 @@ public class ShinsakaiShukeihyoShinseiBetsuProcessParameter implements IBatchPro
      * @param hihokenshaKubun 被保険者区分
      * @param isEmptyGogitaiNo 空合議体番号
      * @param gogitaiNo 合議体番号
+     * @param gogitaiNoList 合議体番号List
      * @param isTaishoTsukiKubun 対象月編集区分
      * @param isTaishoGeppiKubun 対象月日編集区分
      * @param taishoNendoYM 対象年月
@@ -80,6 +83,7 @@ public class ShinsakaiShukeihyoShinseiBetsuProcessParameter implements IBatchPro
             RString hihokenshaKubun,
             boolean isEmptyGogitaiNo,
             int gogitaiNo,
+            List<Integer> gogitaiNoList,
             boolean isTaishoTsukiKubun,
             boolean isTaishoGeppiKubun,
             RString taishoNendoYM,
@@ -101,6 +105,7 @@ public class ShinsakaiShukeihyoShinseiBetsuProcessParameter implements IBatchPro
         this.hihokenshaKubun = hihokenshaKubun;
         this.isEmptyGogitaiNo = isEmptyGogitaiNo;
         this.gogitaiNo = gogitaiNo;
+        this.gogitaiNoList = gogitaiNoList;
         this.isTaishoTsukiKubun = isTaishoTsukiKubun;
         this.isTaishoGeppiKubun = isTaishoGeppiKubun;
         this.taishoNendoYM = taishoNendoYM;
@@ -125,6 +130,7 @@ public class ShinsakaiShukeihyoShinseiBetsuProcessParameter implements IBatchPro
                 hihokenshaKubun,
                 isEmptyGogitaiNo,
                 gogitaiNo,
+                gogitaiNoList,
                 isTaishoTsukiKubun,
                 isTaishoGeppiKubun,
                 taishoNendoYM,
