@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -72,6 +73,18 @@ public class ChohyoSeigyoHanyoBuilder {
     public ChohyoSeigyoHanyoBuilder set項目名(RString 項目名) {
         requireNonNull(項目名, UrSystemErrorMessages.値がnull.getReplacedMessage("項目名"));
         entity.setKomokuName(項目名);
+        return this;
+    }
+
+    /**
+     * 管理年度を設定します。
+     *
+     * @param 管理年度 管理年度
+     * @return {@link ChohyoSeigyoHanyoBuilder}
+     */
+    public ChohyoSeigyoHanyoBuilder set管理年度(FlexibleYear 管理年度) {
+        requireNonNull(管理年度, UrSystemErrorMessages.値がnull.getReplacedMessage("管理年度"));
+        entity.setKanriNendo(管理年度);
         return this;
     }
 
