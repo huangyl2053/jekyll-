@@ -27,7 +27,7 @@ var DBZ;
                 }
                 ShoriType.prototype.SoshitsuMode = function () {
                     this.controls.ccdNinteiInput().ShoriType().InputMode();
-                    this.controls.ccdShinseiSonotaJohoInput().ShoriType().KyakkaMode();
+                    this.controls.ccdShinseiSonotaJohoInput().ShoriType().ZenbuSoshitsuMode();
                     this.controls.btnToroku().displayNone = false;
                 };
                 ShoriType.prototype.ShokkenTorikeshiInputMode = function () {

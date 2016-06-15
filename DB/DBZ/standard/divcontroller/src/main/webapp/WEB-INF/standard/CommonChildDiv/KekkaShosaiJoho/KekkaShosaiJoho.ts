@@ -31,7 +31,7 @@ module DBZ {
                 }
                 public SoshitsuMode(): void {
                     this.controls.ccdNinteiInput().ShoriType().InputMode();
-                    this.controls.ccdShinseiSonotaJohoInput().ShoriType().KyakkaMode();
+                    this.controls.ccdShinseiSonotaJohoInput().ShoriType().ZenbuSoshitsuMode();
                     this.controls.btnToroku().displayNone = false;
 
                 }
