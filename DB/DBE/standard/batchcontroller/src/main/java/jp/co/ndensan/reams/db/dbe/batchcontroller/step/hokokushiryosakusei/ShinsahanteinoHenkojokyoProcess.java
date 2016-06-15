@@ -87,8 +87,9 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchKeyBreakBase<SinsakaiH
     private static final RString 要介護3 = new RString("23");
     private static final RString 要介護4 = new RString("24");
     private static final RString 要介護5 = new RString("25");
-    private static final RString なし = new RString(0);
     private static final RString 実施済 = new RString("2");
+    private static final RString なし = new RString(0);
+    private static final RString 全合議体 = new RString("全合議体");
     private ShinsahanteinoHenkojokyoProcessParameter paramter;
     private IHokokuShiryoSakuSeiMapper mapper;
     private ShinsahanteinoHenkojokyo henkojokyo;
@@ -183,7 +184,6 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchKeyBreakBase<SinsakaiH
     private List<SinsakaiHanteiJyokyoEntity> get判定結果情報(
             SinsakaiHanteiJyokyoHeaderEntity current, RString 認定申請区分, int 認定有効期間) {
         ShinsahanteinoHenkojokyoMyBatisParameter batisParameter = paramter.toShinsahanteinoHenkojokyoMyBatisParameter();
-        batisParameter.setGogitaiNo(current.getGogitaiNo());
         batisParameter.setTaishoGeppiFrom(current.getShinsakaiKaisaiYMDMin());
         batisParameter.setTaishoGeppiTo(current.getShinsakaiKaisaiYMDMax());
         batisParameter.setShichosonCode(current.getShichosonCode());
@@ -207,8 +207,8 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchKeyBreakBase<SinsakaiH
 
     private void setヘッダ情報(SinsakaiHanteiJyokyoHeaderEntity current) {
         henkojokyo.setタイトル(タイトル);
-        henkojokyo.set合議体番号(new RString(current.getGogitaiNo()));
-        henkojokyo.set合議体名称(current.getGogitaiMei());
+        henkojokyo.set合議体番号(paramter.isEmptyGogitaiNo() ? RString.EMPTY : new RString(current.getGogitaiNo()));
+        henkojokyo.set合議体名称(paramter.isEmptyGogitaiNo() ? 全合議体 : current.getGogitaiMei());
         henkojokyo.set審査会開始年月日(current.getShinsakaiKaisaiYMDMin());
         henkojokyo.set審査会終了年月日(current.getShinsakaiKaisaiYMDMax());
         henkojokyo.set開催回数(new RString(current.getShinsakaiKaisaiNoCount()));
