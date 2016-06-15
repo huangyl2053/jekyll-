@@ -306,9 +306,8 @@
             resultMap="hokokushiryosakusei_gogitaiNo"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleDate"
             fetchSize="500">
-        SELECT dbt5591."gogitaiNo"
+        SELECT DISTINCT ON (dbt5591."gogitaiNo") "gogitaiNo"
         ,dbt5591."gogitaiMei"
-        ,dbt5591."gogitaiYukoKikanKaishiYMD"
         FROM rgdb."DbT5591GogitaiJoho" dbt5591
         WHERE dbt5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> #{systemDate}
         AND #{systemDate} <![CDATA[<=]]> dbt5591."gogitaiYukoKikanShuryoYMD"
@@ -2603,7 +2602,6 @@
 
     <resultMap id="hokokushiryosakusei_gogitaiNo" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJohoEntity" autoMapping="true">
         <id column="gogitaiNo" property="gogitaiNo"/>
-        <id column="gogitaiYukoKikanKaishiYMD" property="gogitaiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="gogitaiMei" column="gogitaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
@@ -2698,9 +2696,15 @@
                 AND A."hihokenshaKubunCode" IN ('2', '3')
             </when>
         </choose>
-        <if test="!isEmptyGogitaiNo">
-            AND E."gogitaiNo" = #{gogitaiNo}
-        </if>
+        <choose>
+            <when test="!isEmptyGogitaiNo">
+                AND E."gogitaiNo" = #{gogitaiNo}
+            </when>
+            <otherwise>
+                AND E."gogitaiNo" IN
+                <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
+            </otherwise>
+        </choose>
     </sql>
 
     <sql id="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo">
