@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.Jiss
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.ShinsahanteinoHenkojokyoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.ShinsakaiShukeiGenzainojokyoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.ShinsakaiShukeihyoShinseiBetsuProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.ShinsakaishukeihyoHanteiBetsuProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.SinsakaiHanteiJyokyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -180,6 +181,38 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
     }
 
     /**
+     * ShinsakaishukeihyoHanteiBetsuProcessParameterに転換します。
+     *
+     * @return ShinsakaishukeihyoHanteiBetsuProcessParameter
+     */
+    public ShinsakaishukeihyoHanteiBetsuProcessParameter toShinsakaishukeihyoHanteiBetsuProcessParameter() {
+
+        return new ShinsakaishukeihyoHanteiBetsuProcessParameter(
+                jigyoJyokyoHokoku,
+                jissiJyokyoTokei,
+                sinsaHanteiJyokyo,
+                sinsakaiKanrenTokei,
+                csvShutsuryoku,
+                shutsuryokuFairu,
+                kijyunYMD,
+                RString.isNullOrEmpty(hokensyaNo),
+                hokensyaNo,
+                hiHokensyaKubun,
+                -1 == gogitaiNo,
+                gogitaiNo,
+                gogitaiNoList,
+                isTaishoTsukiKubun,
+                isTaishoGeppiKubun,
+                taishoNendoYM,
+                RString.isNullOrEmpty(taishoGeppiFrom),
+                RString.isNullOrEmpty(taishoGeppiTo),
+                taishoGeppiFrom,
+                taishoGeppiTo,
+                isSinseiKubunSinseitoki,
+                isSinseiKubunHorei);
+    }
+
+    /**
      * JigyoJyokyoHokokuProcessParameterに転換します。
      *
      * @return JigyoJyokyoHokokuProcessParameter
@@ -290,6 +323,7 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
                 hiHokensyaKubun,
                 -1 == gogitaiNo,
                 gogitaiNo,
+                gogitaiNoList,
                 isTaishoTsukiKubun,
                 isTaishoGeppiKubun,
                 taishoNendoYM,
