@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -270,8 +271,8 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     //--------------- この行より下にコードを追加してください -------------------
     @JsonIgnore
     @Override
-    public void onLoadMode1() {
-        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadMode1();
+    public void initialize(KokuhorenDataTorikomiViewStateClass parmater) {
+        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadMode1(parmater);
     }
 
     @JsonIgnore
@@ -282,14 +283,18 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
 
     @JsonIgnore
     @Override
-    public void onLoadModeShutsuryokujunJoken2(SubGyomuCode サブ業務コード, ReportId 帳票ID) {
-        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadModeShutsuryokujunJoken2(サブ業務コード, 帳票ID);
+    public void initialize(SubGyomuCode サブ業務コード,
+            ReportId 帳票ID,
+            KokuhorenDataTorikomiViewStateClass parmater) {
+        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadModeShutsuryokujunJoken2(サブ業務コード, 帳票ID, parmater);
     }
 
     @JsonIgnore
     @Override
-    public void onLoadModeKakuninMsgJoken3(SubGyomuCode サブ業務コード, ReportId 帳票ID) {
-        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadModeKakuninMsgJoken3(サブ業務コード, 帳票ID);
+    public void initialize(KokuhorenDataTorikomiViewStateClass parmater,
+            SubGyomuCode サブ業務コード,
+            ReportId 帳票ID) {
+        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadModeKakuninMsgJoken3(サブ業務コード, 帳票ID, parmater);
     }
 
     @JsonIgnore

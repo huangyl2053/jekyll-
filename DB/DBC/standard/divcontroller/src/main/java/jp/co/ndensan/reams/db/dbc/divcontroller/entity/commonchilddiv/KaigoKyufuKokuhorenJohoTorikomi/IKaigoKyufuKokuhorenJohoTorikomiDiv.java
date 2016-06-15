@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KaigoKyufuKokuhorenJohoTorikomi;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -16,24 +17,28 @@ public interface IKaigoKyufuKokuhorenJohoTorikomiDiv extends ICommonChildDivBase
 
     /**
      * Mode1のメソッドます。
+     *
+     * @param parmater 国保連取込情報
      */
-    public void onLoadMode1();
+    public void initialize(KokuhorenDataTorikomiViewStateClass parmater);
 
     /**
      * ModeShutsuryokujunJoken2のメソッドます。
      *
      * @param サブ業務コード SubGyomuCode
      * @param 帳票ID ReportId
+     * @param parmater 国保連取込情報
      */
-    public void onLoadModeShutsuryokujunJoken2(SubGyomuCode サブ業務コード, ReportId 帳票ID);
+    public void initialize(SubGyomuCode サブ業務コード, ReportId 帳票ID, KokuhorenDataTorikomiViewStateClass parmater);
 
     /**
      * ModeKakuninMsgJoken3のメソッドます。
      *
+     * @param parmater 国保連取込情報
      * @param サブ業務コード SubGyomuCode
      * @param 帳票ID ReportId
      */
-    public void onLoadModeKakuninMsgJoken3(SubGyomuCode サブ業務コード, ReportId 帳票ID);
+    public void initialize(KokuhorenDataTorikomiViewStateClass parmater, SubGyomuCode サブ業務コード, ReportId 帳票ID);
 
     /**
      * get処理対象情報のメソッドます。

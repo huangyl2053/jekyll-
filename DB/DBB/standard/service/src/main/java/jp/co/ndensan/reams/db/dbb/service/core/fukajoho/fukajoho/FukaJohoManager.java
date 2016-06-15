@@ -155,18 +155,22 @@ public class FukaJohoManager {
      * 平準化後の賦課の情報_画面を取得します。
      *
      * @param parameter 賦課の情報検索条件
-     * @return FukaJoho nullが返る可能性があります。
+     * @return List<FukaJoho> nullが返る可能性があります。
      */
     @Transaction
-    public FukaJoho get平準化後の賦課の情報_画面(HeinjunkaAfterParameter parameter) {
+    public List<FukaJoho> get平準化後の賦課の情報_画面(HeinjunkaAfterParameter parameter) {
         IFukaJohoRelateMapper mapper = mapperProvider.create(IFukaJohoRelateMapper.class);
 
-        FukaJohoRelateEntity relateEntity = mapper.get平準化後の賦課の情報_画面(parameter);
-        if (relateEntity == null) {
+        List<FukaJohoRelateEntity> relateEntityList = mapper.get平準化後の賦課の情報_画面(parameter);
+        if (relateEntityList == null) {
             return null;
         }
-        relateEntity.initializeMd5ToEntities();
-        return new FukaJoho(relateEntity);
+        List<FukaJoho> fukajohoList = new ArrayList<>();
+        for (FukaJohoRelateEntity relateEntity : relateEntityList) {
+            relateEntity.initializeMd5ToEntities();
+            fukajohoList.add(new FukaJoho(relateEntity));
+        }
+        return fukajohoList;
     }
 
     /**
