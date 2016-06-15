@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUCN1400",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "事業分支給額計算",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBCN140001",
+     "toLayoutTitle": "事業分支給額計算",
+     "toState": "バッチ実行"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBCN140001",
+     "layoutTitle": "事業分支給額計算",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
