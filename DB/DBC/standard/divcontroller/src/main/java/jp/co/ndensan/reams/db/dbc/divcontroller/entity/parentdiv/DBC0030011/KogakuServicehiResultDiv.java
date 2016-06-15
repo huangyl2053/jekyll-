@@ -11,13 +11,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KogakuServicehiListPanel のクラスファイル
+ * KogakuServicehiResult のクラスファイル
  *
  * @reamsid_L DBC-3000-010 gongliang
  */
-public class KogakuServicehiListPanelDiv extends Panel {
+public class KogakuServicehiResultDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

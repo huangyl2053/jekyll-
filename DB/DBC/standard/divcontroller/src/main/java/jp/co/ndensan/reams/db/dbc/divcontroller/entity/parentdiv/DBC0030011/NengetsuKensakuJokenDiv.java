@@ -10,13 +10,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * SearchYM のクラスファイル
+ * NengetsuKensakuJoken のクラスファイル
  *
  * @reamsid_L DBC-3000-010 gongliang
  */
-public class SearchYMDiv extends Panel {
+public class NengetsuKensakuJokenDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
