@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kagoketteihokenshain.KagoKetteiH
 import jp.co.ndensan.reams.db.dbc.business.core.kagoketteihokenshain.KagoKetteiHokenshaInPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.kagoketteitbun.KagoKetteitsuchishoTorikomiIchiranHokenshaBunItem;
 import jp.co.ndensan.reams.db.dbc.business.report.kagoketteitbun.KagoKetteitsuchishoTorikomiIchiranHokenshaBunReport;
-import jp.co.ndensan.reams.db.dbc.definition.core.kagoketteihokenshain.KagoKetteiHokenshaInMybatisParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteihokenshain.KagoKetteiHokenshaInMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.KagoKetteiHokenshaInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteitbun.KagoKetteitsuchishoTorikomiIchiranHokenshaBunSource;
