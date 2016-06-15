@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.DBB0120002;
 import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB0120002.TokuchoHeinjunkaKakuteiDbUpdateProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.TokuchoHeinjunkaKakuteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunkakakutei.TokuchoHeijunkaKakuteiBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0830-030 xuhao
  */
-public class DBB012002_TokuchoHeinjunkaKakutei extends BatchFlowBase<TokuchoHeinjunkaKakuteiBatchParameter> {
+public class DBB0120002_TokuchoHeinjunkaKakuteiFlow extends BatchFlowBase<TokuchoHeijunkaKakuteiBatchParameter> {
 
     private static final String DB_UPDATE = "dbUpdateProcess";
 

@@ -148,7 +148,7 @@ public class TokuchoHeijunkaKakuteiBatch {
             FlexibleYear 調定年度,
             YMDHMS 調定日時) {
         ITokuchoHeinjunkaKakuteiMapper mapper = mProvider.create(ITokuchoHeinjunkaKakuteiMapper.class);
-        mapper.create特徴平準化賦課Temp();
+        mapper.特徴平準化賦課一時テーブルをクリア();
         HeinjunkaAfterParameter parameter = HeinjunkaAfterParameter.createParameter(調定年度, 賦課年度, 調定日時);
         FukaJohoManager manager = FukaJohoManager.createInstance();
         List<FukaJoho> 平準化後の賦課の情報List = manager.get平準化後の賦課の情報(parameter);
@@ -325,7 +325,7 @@ public class TokuchoHeijunkaKakuteiBatch {
      * @param 差額Map Map<RString, Decimal>
      */
     public void selectTaishoJoho(
-            Code 遷移区分,
+            RString 遷移区分,
             Map<RString, Decimal> 差額Map) {
         ITokuchoHeinjunkaKakuteiMapper mapper = mProvider.create(ITokuchoHeinjunkaKakuteiMapper.class);
         List<TokuchoHeinjunkaKakuteiEntity> 賦課情報List = mapper.select特徴平準化賦課Temp();
@@ -353,9 +353,9 @@ public class TokuchoHeijunkaKakuteiBatch {
      * @param 賦課情報 TokuchoHeinjunkaKakuteiEntity
      * @return 賦課Entity
      */
-    private FukaTempEntity 対象と対象外の判定(Code 遷移区分, Decimal 差額, TokuchoHeinjunkaKakuteiEntity 賦課情報) {
+    private FukaTempEntity 対象と対象外の判定(RString 遷移区分, Decimal 差額, TokuchoHeinjunkaKakuteiEntity 賦課情報) {
         FukaTempEntity entity = new FukaTempEntity();
-        if (遷移区分.value().equals(コード_ZREO)) {
+        if (遷移区分.equals(コード_ZREO)) {
             if (差額.equals(Decimal.ZERO)) {
                 entity = create賦課Entity(賦課情報);
                 entity.set対象区分(コード_ONE);
@@ -365,7 +365,7 @@ public class TokuchoHeijunkaKakuteiBatch {
             }
 
         }
-        if (遷移区分.value().equals(コード_ONE)) {
+        if (遷移区分.equals(コード_ONE)) {
             if (差額.equals(Decimal.ZERO)) {
                 entity = create賦課Entity(賦課情報);
                 entity.set対象区分(コード_ONE);
