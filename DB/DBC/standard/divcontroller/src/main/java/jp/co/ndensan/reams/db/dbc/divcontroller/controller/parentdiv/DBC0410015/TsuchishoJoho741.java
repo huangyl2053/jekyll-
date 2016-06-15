@@ -6,7 +6,10 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410015;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410015.TsuchishoJoho741Div;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
+import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 国保連情報受取データ取込_[741]請求明細・給付管理票返戻（保留）一覧表情報のクラスです。
@@ -22,7 +25,9 @@ public class TsuchishoJoho741 {
      * @return ResponseData
      */
     public ResponseData<TsuchishoJoho741Div> onLoad(TsuchishoJoho741Div div) {
-        div.getCcdKokurenJohoTorikomi().onLoadMode1();
+        KokuhorenDataTorikomiViewStateClass parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
+                KokuhorenDataTorikomiViewStateClass.class);
+        div.getCcdKokurenJohoTorikomi().initialize(parmater);
         return ResponseData.of(div).respond();
     }
 

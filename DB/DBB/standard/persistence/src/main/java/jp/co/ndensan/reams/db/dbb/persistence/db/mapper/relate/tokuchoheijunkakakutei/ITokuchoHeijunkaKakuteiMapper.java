@@ -41,7 +41,7 @@ public interface ITokuchoHeijunkaKakuteiMapper {
      *
      * @return 平準化後の賦課の情報
      */
-    FukaJohoRelateEntity select平準化前の賦課の情報();
+    List<FukaJohoRelateEntity> select平準化前の賦課の情報();
 
     /**
      * 特徴平準化賦課Tempをupdate
@@ -53,7 +53,12 @@ public interface ITokuchoHeijunkaKakuteiMapper {
     /**
      * 特徴平準化賦課Tempを取得
      *
-     * @return TokuchoHeinjunkaKakuteiEntity
+     * @return List<TokuchoHeinjunkaKakuteiEntity>
      */
     List<TokuchoHeinjunkaKakuteiEntity> select特徴平準化賦課Temp();
+
+    /**
+     * 特徴平準化賦課一時テーブルをクリア
+     */
+    void clear特徴平準化賦課Temp();
 }

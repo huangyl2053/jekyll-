@@ -9,7 +9,7 @@
     <update id="update賦課処理状況"
             parameterType="java.util.Map">
         UPDATE rgdb."UrT0705ChoteiKyotsu"
-        SET "fukaShoriJokyo" = 'true' 
+        SET "fukaShoriJokyo" = '1' 
         FROM rgdb."UrT0705ChoteiKyotsu" AS "UrT0705"
         INNER JOIN rgdb."DbT2003Kibetsu" AS "DbT2003"
         ON "DbT2003"."choteiId" = "UrT0705"."choteiId"
@@ -163,7 +163,9 @@
         "fuGaku11" numeric,
         "fuGaku12" numeric,
         "fuGaku13" numeric,
-        "fuGaku14" numeric
+        "fuGaku14" numeric,
+        "choteiId" character varying(100),
+        "shunoId" character varying(100)
         )
     </insert>
     
@@ -309,11 +311,13 @@
         #{普徴期別金額11},
         #{普徴期別金額12},
         #{普徴期別金額13},
-        #{普徴期別金額14}
+        #{普徴期別金額14},
+        #{調定ID},
+        #{収納ID}
         )
     </insert>
    
-    <select id="select平準化前の賦課の情報" resultMap="resultMap_FukaInfo" fetchSize="500">
+    <select resultOrdered="true" id="select平準化前の賦課の情報" resultMap="resultMap_FukaInfo" fetchSize="500">
         <include refid="selectHeinjunkaBefor" />
     </select>
     <sql id="selectHeinjunkaBefor">
@@ -438,12 +442,16 @@
         AND     "tsuchishoNo" = #{平準化前通知書番号}
         AND     "rirekiNo" - 1 = #{平準化前履歴番号}
     </update>
-    
-    <select id="select特徴平準化賦課Temp" resultMap="resultMap_TokuchoHeinjunkaKakuteiEntity" fetchSize="500">
+
+    <select resultOrdered="true" id="select特徴平準化賦課Temp" resultMap="resultMap_TokuchoHeinjunkaKakuteiEntity" fetchSize="500">
         SELECT TEMP.*
         FROM "TEMP_TABLE_TokuchoHeinjunkaFuka" AS TEMP
     </select>
-    
+
+    <delete id="clear特徴平準化賦課Temp" parameterType="java.util.Map">
+        delete from "TEMP_TABLE_TokuchoHeinjunkaFuka"
+    </delete>
+
     <resultMap id="resultMap_TokuchoHeinjunkaKakuteiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunkakakutei.TokuchoHeinjunkaKakuteiEntity">
         <result property="平準化前調定年度" column="choteiNendoBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="平準化前賦課年度" column="fukaNendoBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>

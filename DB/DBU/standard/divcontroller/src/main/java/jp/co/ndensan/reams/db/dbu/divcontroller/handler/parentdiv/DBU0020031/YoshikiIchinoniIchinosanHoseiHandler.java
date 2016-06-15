@@ -193,8 +193,8 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
     /**
      * 特定負担限度額と利用者負担の設定。
      *
-     * @param 特定負担限度額5list
-     * @param 利用者負担5list
+     * @param 特定負担限度額5list List
+     * @param 利用者負担5list List
      */
     public void set特定負担限度額と利用者負担(List<JigyoHokokuTokeiData> 特定負担限度額5list,
             List<JigyoHokokuTokeiData> 利用者負担5list) {
