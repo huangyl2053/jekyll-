@@ -29,7 +29,7 @@ public class ChohyoSeigyoHanyoIdentifierTest extends DbzTestBase {
     private static SubGyomuCode 主キー名1;
     private static ReportId 主キー名2;
     private static RString 主キー名3;
-    private final FlexibleYear 主キー名4;
+    private static FlexibleYear 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
