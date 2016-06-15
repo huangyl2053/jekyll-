@@ -1,6 +1,5 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0830011;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.KoseiShichosonMasterBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.KoseiShichosonMasterIdentifier;
@@ -32,8 +31,6 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class KoikiShichosonJohoKanri {
 
-    private static final LockingKey LOCKINGKEY = new LockingKey(UrControlDataFactory.createInstance().getMenuID());
-
     /**
      * 広域システム管理を初期化します。
      *
@@ -41,11 +38,10 @@ public class KoikiShichosonJohoKanri {
      * @return ResponseData<KoikiShichosonJohoKanriDiv>
      */
     public ResponseData<KoikiShichosonJohoKanriDiv> onLoad(KoikiShichosonJohoKanriDiv div) {
-        if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
+        if (!RealInitialLocker.tryGetLock(new LockingKey(UrControlDataFactory.createInstance().getMenuID()))) {
             throw new PessimisticLockingException();
         }
-        List<KoseiShichosonMaster> masterList = KoikiShichosonJohoKanriManager.createInstance().get広域市町村一覧().records();
-        getHandler(div).onLoad(masterList);
+        getHandler(div).onLoad(KoikiShichosonJohoKanriManager.createInstance().get広域市町村一覧().records());
         return ResponseData.of(div).setState(DBU0830011StateName.初期状態);
     }
 
@@ -85,6 +81,8 @@ public class KoikiShichosonJohoKanri {
             } else {
                 save市町村管理(requestDiv);
             }
+            requestDiv.getKanryoMessage().getCcdKaigoKanryoMessage().setMessage(
+                    new RString("広域市町村制御メンテナンス_保存処理は正常に行われました。"), RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(requestDiv).setState(DBU0830011StateName.完了状態);
         }
         return ResponseData.of(requestDiv).respond();
@@ -97,13 +95,13 @@ public class KoikiShichosonJohoKanri {
                 getHandler(requestDiv).get市町村識別ID()));
         KoseiShichosonMasterBuilder 市町村管理Builder = 修正前市町村.createBuilderForEdit();
         KoikiShichosonJohoKanriManager.createInstance().save市町村Master(getHandler(requestDiv).get市町村管理情報(市町村管理Builder));
-        RealInitialLocker.release(LOCKINGKEY);
+        RealInitialLocker.release(new LockingKey(UrControlDataFactory.createInstance().getMenuID()));
     }
 
     private void check(ValidationMessageControlPairs validationMessages, KoikiShichosonJohoKanriDiv requestDiv) {
         if (getHandler(requestDiv).is期間チェックフラグ()) {
             validationMessages.add(getValidationHandler().validateFor期間チェック(getHandler(requestDiv).get加入日(),
-                    getHandler(requestDiv).get脱退日()));
+                    getHandler(requestDiv).get脱退日(), requestDiv));
         }
         if (getHandler(requestDiv).isUpdate()) {
             validationMessages.add(getValidationHandler().validateFor更新内容チェック());
@@ -117,8 +115,7 @@ public class KoikiShichosonJohoKanri {
      * @return ResponseData<KoikiShichosonJohoKanriDiv>
      */
     public ResponseData<KoikiShichosonJohoKanriDiv> onClick_btnBack(KoikiShichosonJohoKanriDiv requestDiv) {
-        List<KoseiShichosonMaster> masterList = KoikiShichosonJohoKanriManager.createInstance().get広域市町村一覧().records();
-        getHandler(requestDiv).onLoad(masterList);
+        getHandler(requestDiv).onLoad(KoikiShichosonJohoKanriManager.createInstance().get広域市町村一覧().records());
         return ResponseData.of(requestDiv).setState(DBU0830011StateName.初期状態);
     }
 
@@ -129,10 +126,8 @@ public class KoikiShichosonJohoKanri {
      * @return ResponseData<KoikiShichosonJohoKanriDiv>
      */
     public ResponseData<KoikiShichosonJohoKanriDiv> onClick_btnComplete(KoikiShichosonJohoKanriDiv requestDiv) {
-        RealInitialLocker.release(LOCKINGKEY);
-        requestDiv.getKanryoMessage().getCcdKaigoKanryoMessage().setMessage(new RString("広域市町村制御メンテナンス_保存処理は正常に行われました。"),
-                RString.EMPTY, RString.EMPTY, true);
-        return ResponseData.of(requestDiv).setState(DBU0830011StateName.完了状態);
+        RealInitialLocker.release(new LockingKey(UrControlDataFactory.createInstance().getMenuID()));
+        return ResponseData.of(requestDiv).respond();
     }
 
     private KoikiShichosonJohoKanriHandler getHandler(KoikiShichosonJohoKanriDiv div) {
