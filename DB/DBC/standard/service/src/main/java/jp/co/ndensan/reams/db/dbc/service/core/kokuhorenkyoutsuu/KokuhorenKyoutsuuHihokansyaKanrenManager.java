@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.HihokenshaI
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.SyoriKekkaListItijiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.GappeiCityJyoho;
@@ -70,8 +71,7 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
      *
      */
     public void do被保険者関連処理() {
-        FlexibleDate 変換基準日 = FlexibleDate.getNowDate();
-//      FlexibleDate 変換基準日 = finder.getHihokenshaBangoHenkanKijunbi(GyomuBunrui.介護事務);
+        FlexibleDate 変換基準日 = finder.getHihokenshaBangoHenkanKijunbi(GyomuBunrui.介護事務);
         if (null == 変換基準日) {
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage()
                     .replace(MSG_被保険者番号変換基準日の取得.toString()));
@@ -103,8 +103,9 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
         if (!hokenshaNoSet.isEmpty()) {
             for (HokenshaNo hokenshaNo : hokenshaNoSet) {
                 List<GappeiCityJyoho> gcJohoList = new ArrayList<>();
+                // 870あり 方法の変数が不合です
 //                List<GappeiCityJyoho> gcJohoList = finder.getGappeijohokensaku(hokenshaNo);
-                if (null != gcJohoList && gcJohoList.size() > 0) {
+                if (null != gcJohoList && !gcJohoList.isEmpty()) {
                     mapper.update被保険者一時TBLWith旧市町村コード(hokenshaNo, gcJohoList.get(0).get旧市町村コード());
                     do新被保険者番号の登録(変換基準日);
                 }
