@@ -5,10 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shinseimonitor;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseimonitor.ShinseiMonitorEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinseimonitor.ShinseiMonitorReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -19,30 +17,24 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShinseiMonitorReport extends Report<ShinseiMonitorReportSource> {
 
-    private final List<ShinseiMonitorEntity> data;
+    private final ShinseiMonitorEntity data;
+    private final int index;
 
     /**
      * インスタンスを生成します。
      *
      * @param data 申請に関する帳票発行のdataList
+     * @param index 番号
      */
-    public ShinseiMonitorReport(List<ShinseiMonitorEntity> data) {
+    public ShinseiMonitorReport(ShinseiMonitorEntity data, int index) {
         this.data = data;
+        this.index = index;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<ShinseiMonitorReportSource> reportSourceWriter) {
-        for (int i = 0; i < data.size(); i++) {
-            IShinseiMonitorEditor editor = new ShinseiMonitorEditor(data.get(i), i);
-            IShinseiMonitorBuilder builder = new ShinseiMonitorBuilder(editor);
-            reportSourceWriter.writeLine(builder);
-        }
-        if (data.isEmpty()) {
-            ShinseiMonitorEntity entity = new ShinseiMonitorEntity();
-            entity.set氏名(new RString("該当データがありません"));
-            IShinseiMonitorEditor editor = new ShinseiMonitorEditor(entity, -1);
-            IShinseiMonitorBuilder builder = new ShinseiMonitorBuilder(editor);
-            reportSourceWriter.writeLine(builder);
-        }
+        IShinseiMonitorEditor editor = new ShinseiMonitorEditor(data, index);
+        IShinseiMonitorBuilder builder = new ShinseiMonitorBuilder(editor);
+        reportSourceWriter.writeLine(builder);
     }
 }

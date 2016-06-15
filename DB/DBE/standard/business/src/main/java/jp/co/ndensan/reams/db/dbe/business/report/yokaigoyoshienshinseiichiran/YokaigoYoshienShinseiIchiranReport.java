@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.yokaigoyoshienshinseiichiran;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.yokaigoyoshienshinseiichiran.YokaigoYoshienShinseiIchiranReportSource;
@@ -40,6 +41,19 @@ public class YokaigoYoshienShinseiIchiranReport extends Report<YokaigoYoshienShi
 
         return new YokaigoYoshienShinseiIchiranReport(
                 itemList);
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param item 要介護認定・要支援認定等申請者一覧表のITEM
+     * @return 要介護認定・要支援認定等申請者一覧表のReport
+     */
+    public static YokaigoYoshienShinseiIchiranReport createFrom(
+            @NonNull YokaigoYoshienShinseiIchiranItem item) {
+        List<YokaigoYoshienShinseiIchiranItem> list = new ArrayList<>();
+        list.add(item);
+        return new YokaigoYoshienShinseiIchiranReport(list);
     }
 
     /**
