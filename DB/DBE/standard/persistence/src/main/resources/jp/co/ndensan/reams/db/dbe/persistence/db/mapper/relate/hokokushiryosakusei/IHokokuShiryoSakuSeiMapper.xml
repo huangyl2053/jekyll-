@@ -448,10 +448,10 @@
         ON G."shinsakaiKaisaiNo" = dbt5502."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101
         ON dbt5502."shinseishoKanriNo" = dbt5101."shinseishoKanriNo"
-        WHERE
-        S.gogitaiNo = G."gogitaiNo"
-        AND dbt5101."shoKisaiHokenshaNo" = S."shoKisaiHokenshaNo"
-
+        WHERE dbt5101."shoKisaiHokenshaNo" = S."shoKisaiHokenshaNo"
+        <if test="!isEmptyGogitaiNo">
+            AND S.gogitaiNo = G."gogitaiNo"
+        </if>
         <choose>
             <when test="isTaishoTsukiKubun">
                 <if test="!isTaishoGeppiKubun">
@@ -482,10 +482,13 @@
         Group BY G."shinsakaiKaisaiNo" ) AS shinsakaiIinCount
         ) AS shinsakaiKaisaiNoCount
         FROM
-        (SELECT A."gogitaiNo" AS gogitaiNo
-        ,E."gogitaiMei"
-        ,F."shichosonCode"
+        (SELECT
+        F."shichosonCode"
         ,F."shichosonMeisho"
+        <if test="!isEmptyGogitaiNo">
+            ,A."gogitaiNo" AS gogitaiNo
+            ,E."gogitaiMei"
+        </if>
         ,C."shoKisaiHokenshaNo"
         <if test="isShinseiji">
             ,C."ninteiShinseiShinseijiKubunCode"
@@ -567,9 +570,15 @@
                 </if>
             </otherwise>
         </choose>
-        <if test="!isEmptyGogitaiNo">
-            AND A."gogitaiNo" = #{gogitaiNo}
-        </if>
+        <choose>
+            <when test="!isEmptyGogitaiNo">
+                AND A."gogitaiNo" = #{gogitaiNo}
+            </when>
+            <otherwise>
+                AND A."gogitaiNo" IN
+                <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
+            </otherwise>
+        </choose>
         <if test="isShinseiji">
             AND C."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
         </if>
@@ -577,10 +586,12 @@
             AND C."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
         </if>
         GROUP BY
-        A."gogitaiNo"
-        ,E."gogitaiMei"
-        ,F."shichosonCode"
+        F."shichosonCode"
         ,F."shichosonMeisho"
+        <if test="!isEmptyGogitaiNo">
+            ,A."gogitaiNo"
+            ,E."gogitaiMei"
+        </if>
         ,C."shoKisaiHokenshaNo"
         <if test="isShinseiji">
             ,C."ninteiShinseiShinseijiKubunCode"
@@ -2397,10 +2408,12 @@
             resultMap="hokokushiryosakusei_SinsakaiHanteiJyokyoHeader"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.CsvKenHokokuShiryoSakuseiMyBatisParameter"
             fetchSize="500">
-        SELECT A."gogitaiNo"
-        ,E."gogitaiMei"
-        ,F."shichosonCode"
+        SELECT F."shichosonCode"
         ,F."shichosonMeisho"
+        <if test="!isEmptyGogitaiNo">
+            ,A."gogitaiNo"
+            ,E."gogitaiMei"
+        </if>
         ,C."shoKisaiHokenshaNo"
         ,MIN(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMin
         ,MAX(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMax
@@ -2477,9 +2490,15 @@
                 </if>
             </otherwise>
         </choose>
-        <if test="!isEmptyGogitaiNo">
-            AND A."gogitaiNo" = #{gogitaiNo}
-        </if>
+        <choose>
+            <when test="!isEmptyGogitaiNo">
+                AND A."gogitaiNo" = #{gogitaiNo}
+            </when>
+            <otherwise>
+                AND A."gogitaiNo" IN
+                <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
+            </otherwise>
+        </choose>
         <if test="isShinseiji">
             AND C."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
         </if>
@@ -2487,14 +2506,18 @@
             AND C."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
         </if>
         GROUP BY
-        A."gogitaiNo"
-        ,E."gogitaiMei"
-        ,F."shichosonCode"
+        F."shichosonCode"
         ,F."shichosonMeisho"
+        <if test="!isEmptyGogitaiNo">
+            ,A."gogitaiNo"
+            ,E."gogitaiMei"
+        </if>
         ,C."shoKisaiHokenshaNo"
         ORDER BY
-        A."gogitaiNo"
-        ,F."shichosonCode"
+        F."shichosonCode"
+        <if test="!isEmptyGogitaiNo">
+            ,A."gogitaiNo"
+        </if>
         ,C."shoKisaiHokenshaNo"
     </select>
 
