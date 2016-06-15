@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyoshaBuilder;
 import jp.co.ndensan.reams.db.dbc.definition.core.keiyakushurui.JuryoIninKeiyakuShurui;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.PnlTotalRegisterDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.JuryoininKeiyakuJigyoshaManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -30,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
@@ -70,32 +68,18 @@ public final class PnlTotalRegisterHandler {
 
     /**
      * 初期化データの設定
+     *
+     * @param 処理モード RString
+     * @param record JuryoininKeiyakuJigyosha
      */
-    public void set初期データ() {
-        RString states = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (states == null) {
-            states = 登録;
-            ViewStateHolder.put(ViewStateKeys.処理モード, states);
-        }
-        if (登録.equals(states)) {
-            set登録初期データ();
-            return;
-        }
-        JuryoininKeiyakuJigyosha data = ViewStateHolder
-                .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
-        JuryoininKeiyakuJigyosha recode = JuryoininKeiyakuJigyoshaManager.createInstance()
-                .getJuryoininKeiyakuJigyosha(data.get契約事業者番号(), data.get開始年月日(), data.get終了年月日());
-        if (recode == null) {
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
-        }
-        ViewStateHolder.put(ViewStateKeys.受領委任契約事業者詳細データ, recode);
+    public void set初期データ(RString 処理モード, JuryoininKeiyakuJigyosha record) {
 
-        div.getPnlKeyakuJigyosya().getTxtJigyosyakeiyakuNo().setValue(recode.get契約事業者番号());
-        RDate 開始年月日RDate = RDate.canConvert(new RString(recode.get開始年月日().toString()))
-                ? new RDate(recode.get開始年月日().toString()) : null;
+        div.getPnlKeyakuJigyosya().getTxtJigyosyakeiyakuNo().setValue(record.get契約事業者番号());
+        RDate 開始年月日RDate = RDate.canConvert(new RString(record.get開始年月日().toString()))
+                ? new RDate(record.get開始年月日().toString()) : null;
         div.getPnlKeyakuJigyosya().getTxtKeyakubi().setFromValue(開始年月日RDate);
-        RDate 終了年月日RDate = RDate.canConvert(new RString(recode.get終了年月日().toString()))
-                ? new RDate(recode.get終了年月日().toString()) : null;
+        RDate 終了年月日RDate = RDate.canConvert(new RString(record.get終了年月日().toString()))
+                ? new RDate(record.get終了年月日().toString()) : null;
         div.getPnlKeyakuJigyosya().getTxtKeyakubi().setToValue(終了年月日RDate);
 
         List<KeyValueDataSource> keiyakuSyuruList = new ArrayList<>();
@@ -110,20 +94,20 @@ public final class PnlTotalRegisterHandler {
         keiyakuSyuruList.add(new KeyValueDataSource(
                 JuryoIninKeiyakuShurui.高額給付費.getコード(), JuryoIninKeiyakuShurui.高額給付費.get名称()));
         div.getPnlKeyakuJigyosya().getDdlKeyakusyurui().setDataSource(keiyakuSyuruList);
-        div.getPnlKeyakuJigyosya().getDdlKeyakusyurui().setSelectedKey(recode.get契約種類());
-        div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyo().setDomain(recode.get契約事業者名称());
-        div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyoKana().setDomain(recode.get契約事業者カナ名称());
-        div.getPnlKeyakuJigyosya().getTxtJigyosyaYubinNo().setValue(recode.get契約事業者郵便番号());
-        div.getPnlKeyakuJigyosya().getTxtJigyosyaTel().setDomain(recode.get契約事業者電話番号());
-        div.getPnlKeyakuJigyosya().getTxtJigyosyaFax().setDomain(recode.get契約事業者FAX番号());
-        div.getPnlKeyakuJigyosya().getTxtJigyosyaJyusyo().setDomain(recode.get契約事業者住所());
-        div.getPnlKeyakuJigyosya().getTxtSofusakiYubin().setValue(recode.get送付先郵便番号());
-        div.getPnlKeyakuJigyosya().getTxtSofusakiJigyosya().setDomain(recode.get送付先事業者名称());
-        div.getPnlKeyakuJigyosya().getTxtSofusakiJigyosyaKana().setDomain(recode.get送付先事業者カナ名称());
-        div.getPnlKeyakuJigyosya().getTxtSofusakiJyusyo().setDomain(recode.get送付先住所());
-        div.getPnlKeyakuJigyosya().getTxtSofusakiBusyo().setValue(recode.get送付先部署());
-        div.getPnlKeyakuJigyosya().getCcdKinyukikan().search(recode.get金融機関コード(),
-                recode.get支店コード(), FlexibleDate.getNowDate());
+        div.getPnlKeyakuJigyosya().getDdlKeyakusyurui().setSelectedKey(record.get契約種類());
+        div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyo().setDomain(record.get契約事業者名称());
+        div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyoKana().setDomain(record.get契約事業者カナ名称());
+        div.getPnlKeyakuJigyosya().getTxtJigyosyaYubinNo().setValue(record.get契約事業者郵便番号());
+        div.getPnlKeyakuJigyosya().getTxtJigyosyaTel().setDomain(record.get契約事業者電話番号());
+        div.getPnlKeyakuJigyosya().getTxtJigyosyaFax().setDomain(record.get契約事業者FAX番号());
+        div.getPnlKeyakuJigyosya().getTxtJigyosyaJyusyo().setDomain(record.get契約事業者住所());
+        div.getPnlKeyakuJigyosya().getTxtSofusakiYubin().setValue(record.get送付先郵便番号());
+        div.getPnlKeyakuJigyosya().getTxtSofusakiJigyosya().setDomain(record.get送付先事業者名称());
+        div.getPnlKeyakuJigyosya().getTxtSofusakiJigyosyaKana().setDomain(record.get送付先事業者カナ名称());
+        div.getPnlKeyakuJigyosya().getTxtSofusakiJyusyo().setDomain(record.get送付先住所());
+        div.getPnlKeyakuJigyosya().getTxtSofusakiBusyo().setValue(record.get送付先部署());
+        div.getPnlKeyakuJigyosya().getCcdKinyukikan().search(record.get金融機関コード(),
+                record.get支店コード(), FlexibleDate.getNowDate());
         List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
                 new CodeShubetsu(預金種別コード), FlexibleDate.getNowDate());
         List<KeyValueDataSource> keyValueDataSource = new ArrayList<>();
@@ -132,37 +116,51 @@ public final class PnlTotalRegisterHandler {
                 keyValueDataSource.add(new KeyValueDataSource(code.getコード().getColumnValue(), code.getコード名称()));
             }
             div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setDataSource(keyValueDataSource);
-            div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setSelectedKey(recode.get口座種別());
+            div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setSelectedKey(record.get口座種別());
         } else {
             div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setDataSource(keyValueDataSource);
         }
         if (div.getPnlKeyakuJigyosya().getCcdKinyukikan().isゆうちょ銀行()) {
             div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setVisible(false);
         }
-        div.getPnlKeyakuJigyosya().getTxtSofusakiKouzabango().setValue(recode.get口座番号());
-        div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeiginin().setDomain(recode.get口座名義人());
-        div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeigininKana().setDomain(recode.get口座名義人カナ());
-        if (参照.equals(states)) {
+        div.getPnlKeyakuJigyosya().getTxtSofusakiKouzabango().setValue(record.get口座番号());
+        div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeiginin().setDomain(record.get口座名義人());
+        div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeigininKana().setDomain(record.get口座名義人カナ());
+        if (参照.equals(処理モード)) {
             set項目非活性();
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存する, true);
-        } else if (削除.equals(states)) {
+        } else if (削除.equals(処理モード)) {
             set項目非活性();
         }
     }
 
     /**
+     * getRecord
+     *
+     * @param data JuryoininKeiyakuJigyosha
+     * @return JuryoininKeiyakuJigyosha
+     */
+    public JuryoininKeiyakuJigyosha getRecord(JuryoininKeiyakuJigyosha data) {
+        JuryoininKeiyakuJigyosha record = JuryoininKeiyakuJigyoshaManager.createInstance()
+                .getJuryoininKeiyakuJigyosha(data.get契約事業者番号(), data.get開始年月日(), data.get終了年月日());
+        if (record == null) {
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+        }
+        return record;
+    }
+
+    /**
      * 画面データの保存
      *
+     * @param 処理モード RString
+     * @param data JuryoininKeiyakuJigyosha
      * @return int
      */
-    public int save画面データ() {
-        RString states = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        JuryoininKeiyakuJigyosha data = ViewStateHolder
-                .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
-        if (修正.equals(states)) {
+    public int save画面データ(RString 処理モード, JuryoininKeiyakuJigyosha data) {
+        if (修正.equals(処理モード)) {
             data = get画面データ(data);
             return JuryoininKeiyakuJigyoshaManager.createInstance().updJuryoininKeiyakuJigyosha(data);
-        } else if (削除.equals(states)) {
+        } else if (削除.equals(処理モード)) {
             return JuryoininKeiyakuJigyoshaManager.createInstance().delJuryoininKeiyakuJigyosha(data);
         } else {
             JuryoininKeiyakuJigyosha insertData = new JuryoininKeiyakuJigyosha(RString.EMPTY);
@@ -195,11 +193,11 @@ public final class PnlTotalRegisterHandler {
     /**
      * 保存完了画面の入替
      *
+     * @param 処理モード RString
      * @param result int
      */
-    public void set保存完了(int result) {
-        RString states = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (削除.equals(states)) {
+    public void set保存完了(RString 処理モード, int result) {
+        if (削除.equals(処理モード)) {
             div.getPnlHakoubi().setDisplayNone(true);
         }
         if (result > 0) {
@@ -212,18 +210,17 @@ public final class PnlTotalRegisterHandler {
     /**
      * 画面データ変更有無の判定
      *
+     * @param 処理モード RString
+     * @param param JuryoininKeiyakuJigyosha
      * @return boolean
      */
-    public boolean has画面変更有無() {
-        RString states = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (登録.equals(states)) {
+    public boolean has画面変更有無(RString 処理モード, JuryoininKeiyakuJigyosha param) {
+        if (登録.equals(処理モード)) {
             return has契約登録情報有無() || has送付登録情報有無();
         }
-        if (!修正.equals(states)) {
+        if (!修正.equals(処理モード)) {
             return false;
         }
-        JuryoininKeiyakuJigyosha param = ViewStateHolder
-                .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
         if (!param.get契約事業者番号().equals(div.getPnlKeyakuJigyosya().getTxtJigyosyakeiyakuNo().getValue())) {
             return true;
         }
@@ -378,7 +375,7 @@ public final class PnlTotalRegisterHandler {
     /**
      * 登録初期データの設定
      */
-    private void set登録初期データ() {
+    public void set登録初期データ() {
         div.getPnlKeyakuJigyosya().getTxtJigyosyakeiyakuNo().clearValue();
         div.getPnlKeyakuJigyosya().getTxtJigyosyakeiyakuNo().setDisabled(true);
         div.getPnlKeyakuJigyosya().getTxtKeyakubi().clearFromValue();
