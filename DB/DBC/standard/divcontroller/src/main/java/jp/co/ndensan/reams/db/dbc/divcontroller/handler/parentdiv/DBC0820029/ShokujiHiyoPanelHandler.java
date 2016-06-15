@@ -728,6 +728,7 @@ public class ShokujiHiyoPanelHandler {
     /**
      * build_new_食事費用登録1のメソッド
      *
+     * @param paramter ShoukanharaihishinseimeisaikensakuParameter
      * @return ShokanShokujiHiyo
      */
     public ShokanShokujiHiyo build_new_食事費用登録1(ShoukanharaihishinseimeisaikensakuParameter paramter) {
@@ -854,6 +855,7 @@ public class ShokujiHiyoPanelHandler {
     /**
      * build_new_食事費用合計設定のメソッド
      *
+     * @param paramter ShoukanharaihishinseimeisaikensakuParameter
      * @return ShokanShokujiHiyo
      */
     public ShokanShokujiHiyo build_new_食事費用合計設定(ShoukanharaihishinseimeisaikensakuParameter paramter) {
