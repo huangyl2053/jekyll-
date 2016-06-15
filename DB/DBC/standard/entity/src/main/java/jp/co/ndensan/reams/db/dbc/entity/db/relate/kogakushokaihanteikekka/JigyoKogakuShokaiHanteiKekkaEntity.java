@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class JigyoKogakuShokaiHanteiKekkaEntity {
 
     /**
