@@ -4,7 +4,8 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyodojukyushataishosha.IKyodoJukyushaTaishoshaFinderMapper">
     <select resultOrdered="true" id="get基本送付情報" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoJukyushaTaishoshaParameter"
-            resultMap="ResultMap_DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity"
+            fetchSize="500">
         <include refid="selectDbT3002" />
     </select>
     
@@ -32,7 +33,7 @@
     
     <select resultOrdered="true" id="get被保険者氏名" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoJukyushaTaishoshaParameter"
-            resultMap="ResultMap_DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity" fetchSize="500">
         <include refid="select被保険者氏名" />
     </select>
     
@@ -49,13 +50,9 @@
             order by DbT3002."idoYMD" DESC
     </sql>
     
-    <resultMap id="ResultMap_DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity">
-    </resultMap> 
-    
     <select resultOrdered="true" id="get償還送付情報" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoJukyushaTaishoshaParameter"
-            resultMap="ResultMap_DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity" fetchSize="500">
         <include refid="selectDbT3003" />
     </select>
     
@@ -81,13 +78,9 @@
             order by DbT3003."idoYMD" DESC
     </sql>
     
-    <resultMap id="ResultMap_DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity">
-    </resultMap> 
-    
     <select id="get高額送付情報" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoJukyushaTaishoshaParameter"
-            resultMap="ResultMap_DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity" fetchSize="500">
         <include refid="selectDbT3004" />
     </select>
     
@@ -113,7 +106,4 @@
             order by DbT3004."idoYMD" DESC
     </sql>
     
-    <resultMap id="ResultMap_DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity">
-    </resultMap> 
 </mapper>

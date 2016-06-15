@@ -370,13 +370,26 @@
         AND 一時TBL.単位数 = DbT3048."dbT3048ShokanFukushiYoguHanbaihi_kounyuKingaku"
     </select>
     
-   <update id="update償還払支給判定結果一時_事業者番号登録" 
-            parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.ShokanShikyuKetteiInResultEntity">
+   <update id="update償還払支給判定結果一時_福祉用具事業者番号" 
+            parameterType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihiEntity">
         UPDATE rgdb."DbWT3036ShokanHanteiKekkaTemp"
-        SET    "wrkJigyoshoNo" = #{dbWT3036_ワーク事業所番号}
-        where "renban" = #{dbWT3036_連番}
-        AND "serviceTeikyoYm" = #{dbWT3036_サービス提供年月}
-        AND "seiriNo" = #{dbWT3036_整理番号}
+        SET    "wrkJigyoshoNo" = #{jigyoshaNo}
+        where "tanisuKingaku" = #{kounyuKingaku}
+        AND "serviceShuruiCode" IN ('41','44')
+        AND "jigyoshoNo" is null
+        AND "serviceTeikyoYm" = #{serviceTeikyoYM}
+        AND "seiriNo" = #{seiriNo}
+    </update>
+    
+    <update id="update償還払支給判定結果一時_住宅改修事業者番号" 
+            parameterType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity">
+        UPDATE rgdb."DbWT3036ShokanHanteiKekkaTemp"
+        SET    "wrkJigyoshoNo" = #{jigyoshaNo}
+        where "tanisuKingaku" = #{kaishuKingaku}
+         AND "serviceShuruiCode" IN ('42','45')
+        AND "jigyoshoNo" is null
+        AND "serviceTeikyoYm" = #{serviceTeikyoYM}
+        AND "seiriNo" = #{seiriNo}
     </update>
     
     <select resultOrdered="true" id="get住宅改修事業所番号" resultMap="resultMap_ShokanShikyuKetteiIn" fetchSize="500">
@@ -502,15 +515,22 @@
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanshikyuketteiin.IDbWT0001HihokenshaMapper.noDeleted_DbWT0001Hihokensha" />) As DbWT0001
         WHERE DbWT3036.dbWT3036_連番 = DbWT0001.dbWT0001_連番
         and DbWT3036.dbWT3036_更新DB有無 <![CDATA[<>]]> '1'
+        order by DbWT3036.dbWT3036_連番  ASC
         ) AS 一時TBL
         ON DbT3053. "dbT3053ShokanShukei_hiHokenshaNo" = 一時TBL.dbWT0001_登録被保険者番号
         AND DbT3053. "dbT3053ShokanShukei_serviceTeikyoYM" = 一時TBL.dbWT3036_サービス提供年月
         AND DbT3053. "dbT3053ShokanShukei_seiriNo" = 一時TBL.dbWT3036_整理番号
         AND DbT3053. "dbT3053ShokanShukei_jigyoshaNo" = 一時TBL.dbWT3036_ワーク事業所番号
         AND DbT3053. "dbT3053ShokanShukei_serviceShuruiCode" = 一時TBL.dbWT3036_サービス種類コード
+        
     </select>
     
     <resultMap id="resultMap_ShokanShukei" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.ShokanShikyuEntity" autoMapping="true">
+        <id column="dbT3053ShokanShukei_hiHokenshaNo"/>
+        <id column="dbT3053ShokanShukei_serviceTeikyoYM"/>
+        <id column="dbT3053ShokanShukei_seiriNo"/>
+        <id column="dbT3053ShokanShukei_jigyoshaNo"/>
+        <id column="dbT3053ShokanShukei_serviceShuruiCode"/>
         <association property="償還払請求集計Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.ResultMap_DbT3053ShokanShukeiEntity"/>
         <collection property="被保険者判定List"
@@ -530,15 +550,21 @@
         WHERE DbWT3036.dbWT3036_連番 = DbWT0001.dbWT0001_連番
         and DbWT3036.dbWT3036_サービス種類コード is null
         and DbWT3036.dbWT3036_更新DB有無 <![CDATA[<>]]> '1'
+        order by DbWT3036.dbWT3036_連番  ASC
         ) AS 一時TBL
         ON DbT3043. "dbT3043ShokanShokujiHiyo_hiHokenshaNo" = 一時TBL.dbWT0001_登録被保険者番号
         AND DbT3043. "dbT3043ShokanShokujiHiyo_serviceTeikyoYM" = 一時TBL.dbWT3036_サービス提供年月
         AND DbT3043. "dbT3043ShokanShokujiHiyo_seiriNo" = 一時TBL.dbWT3036_整理番号
         AND DbT3043. "dbT3043ShokanShokujiHiyo_jigyoshaNo" = 一時TBL.dbWT3036_ワーク事業所番号
+       
         
     </select>
     
     <resultMap id="resultMap_ShokanShokujiHiyo" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.ShokanShikyuEntity" autoMapping="true">
+        <id column="dbT3043ShokanShokujiHiyo_hiHokenshaNo"/>
+        <id column="dbT3043ShokanShokujiHiyo_serviceTeikyoYM"/>
+        <id column="dbT3043ShokanShokujiHiyo_seiriNo"/>
+        <id column="dbT3043ShokanShokujiHiyo_jigyoshaNo"/>
         <association property="償還払請求食事費用Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3043ShokanShokujiHiyoMapper.ResultMap_DbT3043ShokanShokujiHiyoEntity"/>
         <collection property="被保険者判定List"
@@ -557,15 +583,21 @@
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanshikyuketteiin.IDbWT0001HihokenshaMapper.noDeleted_DbWT0001Hihokensha" />) As DbWT0001
         WHERE DbWT3036.dbWT3036_連番 = DbWT0001.dbWT0001_連番
         and DbWT3036.dbWT3036_更新DB有無 <![CDATA[<>]]> '1'
+        order by DbWT3036.dbWT3036_連番  ASC
         ) AS 一時TBL
         ON DbT3045."dbT3045ShokanServicePlan200004_hiHokenshaNo" = 一時TBL.dbWT0001_登録被保険者番号
         AND DbT3045."dbT3045ShokanServicePlan200004_serviceTeikyoYM" = 一時TBL.dbWT3036_サービス提供年月
         AND DbT3045."dbT3045ShokanServicePlan200004_seiriNo" = 一時TBL.dbWT3036_整理番号
         AND DbT3045."dbT3045ShokanServicePlan200004_jigyoshaNo" = 一時TBL.dbWT3036_ワーク事業所番号
         AND substring(DbT3045. "dbT3045ShokanServicePlan200004_serviceCode",0,2) = 一時TBL.dbWT3036_サービス種類コード
+       
     </select>
     
     <resultMap id="resultMap_ShokanServicePlan200004" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.ShokanShikyuEntity" autoMapping="true">
+        <id column="dbT3045ShokanServicePlan200004_hiHokenshaNo"/>
+        <id column="dbT3045ShokanServicePlan200004_serviceTeikyoYM"/>
+        <id column="dbT3045ShokanServicePlan200004_seiriNo"/>
+        <id column="dbT3045ShokanServicePlan200004_jigyoshaNo"/>
         <association property="サービス計画200004Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3045ShokanServicePlan200004Mapper.ResultMap_DbT3045ShokanServicePlan200004Entity"/>
         <collection property="被保険者判定List"
@@ -584,15 +616,21 @@
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanshikyuketteiin.IDbWT0001HihokenshaMapper.noDeleted_DbWT0001Hihokensha" />) As DbWT0001
         WHERE DbWT3036.dbWT3036_連番 = DbWT0001.dbWT0001_連番
         and DbWT3036.dbWT3036_更新DB有無 <![CDATA[<>]]> '1'
+        order by DbWT3036.dbWT3036_連番  ASC
         ) AS 一時TBL
         ON DbT3046."dbT3046ShokanServicePlan200604_hiHokenshaNo" = 一時TBL.dbWT0001_登録被保険者番号
         AND DbT3046."dbT3046ShokanServicePlan200604_serviceTeikyoYM" = 一時TBL.dbWT3036_サービス提供年月
         AND DbT3046."dbT3046ShokanServicePlan200604_seiriNo" = 一時TBL.dbWT3036_整理番号
         AND DbT3046."dbT3046ShokanServicePlan200604_jigyoshaNo" = 一時TBL.dbWT3036_ワーク事業所番号
         AND substring(DbT3046."dbT3046ShokanServicePlan200604_serviceCode",0,2) = 一時TBL.dbWT3036_サービス種類コード
+       
     </select>
     
     <resultMap id="resultMap_ShokanServicePlan200604" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.ShokanShikyuEntity" autoMapping="true">
+        <id column="dbT3046ShokanServicePlan200604_hiHokenshaNo"/>
+        <id column="dbT3046ShokanServicePlan200604_serviceTeikyoYM"/>
+        <id column="dbT3046ShokanServicePlan200604_seiriNo"/>
+        <id column="dbT3046ShokanServicePlan200604_jigyoshaNo"/>
         <association property="サービス計画200604Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3046ShokanServicePlan200604Mapper.ResultMap_DbT3046ShokanServicePlan200604Entity"/>
         <collection property="被保険者判定List"
@@ -611,15 +649,21 @@
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanshikyuketteiin.IDbWT0001HihokenshaMapper.noDeleted_DbWT0001Hihokensha" />) As DbWT0001
         WHERE DbWT3036.dbWT3036_連番 = DbWT0001.dbWT0001_連番
         and DbWT3036.dbWT3036_更新DB有無 <![CDATA[<>]]> '1'
+        order by DbWT3036.dbWT3036_連番  ASC
         ) AS 一時TBL
         ON DbT3047."dbT3047ShokanServicePlan200904_hiHokenshaNo" = 一時TBL.dbWT0001_登録被保険者番号
         AND DbT3047."dbT3047ShokanServicePlan200904_serviceTeikyoYM" = 一時TBL.dbWT3036_サービス提供年月
         AND DbT3047."dbT3047ShokanServicePlan200904_seiriNo" = 一時TBL.dbWT3036_整理番号
         AND DbT3047."dbT3047ShokanServicePlan200904_jigyoshaNo" = 一時TBL.dbWT3036_ワーク事業所番号
         AND substring(DbT3047."dbT3047ShokanServicePlan200904_serviceCode",0,2) = 一時TBL.dbWT3036_サービス種類コード
+       
     </select>
     
     <resultMap id="resultMap_ShokanServicePlan200904" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.ShokanShikyuEntity" autoMapping="true">
+        <id column="dbT3047ShokanServicePlan200904_hiHokenshaNo"/>
+        <id column="dbT3047ShokanServicePlan200904_serviceTeikyoYM"/>
+        <id column="dbT3047ShokanServicePlan200904_seiriNo"/>
+        <id column="dbT3047ShokanServicePlan200904_jigyoshaNo"/>
         <association property="サービス計画200904Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3047ShokanServicePlan200904Mapper.ResultMap_DbT3047ShokanServicePlan200904Entity"/>
         <collection property="被保険者判定List"
@@ -638,15 +682,22 @@
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanshikyuketteiin.IDbWT0001HihokenshaMapper.noDeleted_DbWT0001Hihokensha" />) As DbWT0001
         WHERE DbWT3036.dbWT3036_連番 = DbWT0001.dbWT0001_連番
         and DbWT3036.dbWT3036_更新DB有無 <![CDATA[<>]]> '1'
+        order by DbWT3036.dbWT3036_連番  ASC
         ) AS 一時TBL
         ON  DbT3050."dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hiHokenshaNo" = 一時TBL.dbWT0001_登録被保険者番号
         AND DbT3050."dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_serviceTeikyoYM" = 一時TBL.dbWT3036_サービス提供年月
         AND DbT3050."dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_seiriNo" = 一時TBL.dbWT3036_整理番号
         AND DbT3050."dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_jigyoshaNo" = 一時TBL.dbWT3036_ワーク事業所番号
         AND DbT3050."dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_serviceShuruiCode" = 一時TBL.dbWT3036_サービス種類コード
+        
     </select>
     
     <resultMap id="resultMap_DbT3050ShokanTokutei" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.ShokanShikyuEntity" autoMapping="true">
+        <id column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hiHokenshaNo"/>
+        <id column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_serviceTeikyoYM"/>
+        <id column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_seiriNo"/>
+        <id column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_jigyoshaNo"/>
+         <id column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_serviceShuruiCode"/>
         <association property="介護サービス費用Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoMapper.ResultMap_DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity"/>
         <collection property="被保険者判定List"

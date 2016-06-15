@@ -126,13 +126,13 @@ public class KyodoShoriJukyushaTeiseiRenrakuhyoEditor implements IKyodoShoriJuky
         RString 住所カナ = targets.get住所カナ();
 
         source.jushoKana1 = (住所カナ != null && 住所カナ.length() >= INDEX_38)
-                ? 住所カナ.substring(INDEX_0, INDEX_38) : RString.EMPTY;
+                ? 住所カナ.substring(INDEX_0, INDEX_38) : 住所カナ.substring(INDEX_0, 住所カナ.length());
         source.jushoKana2 = (住所カナ != null && 住所カナ.length() >= INDEX_38)
                 ? 住所カナ.substring(INDEX_38, 住所カナ.length()) : RString.EMPTY;
         source.shutsuryokujunCode = targets.get帳票出力順序コード();
         RString 住所 = targets.get住所();
         source.jusho1 = (住所 != null && 住所.length() >= INDEX_32)
-                ? 住所.substring(INDEX_0, INDEX_32) : RString.EMPTY;
+                ? 住所.substring(INDEX_0, INDEX_32) : 住所.substring(INDEX_0, 住所.length());
         source.jusho2 = (住所 != null && 住所.length() >= INDEX_32)
                 ? 住所.substring(INDEX_32, 住所.length()) : RString.EMPTY;
     }

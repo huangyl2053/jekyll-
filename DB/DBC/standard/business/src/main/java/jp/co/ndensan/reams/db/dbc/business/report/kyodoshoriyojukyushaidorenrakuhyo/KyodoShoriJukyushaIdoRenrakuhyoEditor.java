@@ -119,13 +119,13 @@ public class KyodoShoriJukyushaIdoRenrakuhyoEditor implements IKyodoShoriJukyush
     private void set住所(KyodoShoriJukyushaIdoRenrakuhyoSource source) {
         RString 住所カナ = targets.get住所カナ();
         source.jushoKana1 = (住所カナ != null && 住所カナ.length() >= INDEX_38)
-                ? 住所カナ.substring(INDEX_0, INDEX_38) : RString.EMPTY;
+                ? 住所カナ.substring(INDEX_0, INDEX_38) : 住所カナ.substring(INDEX_0, 住所カナ.length());
         source.jushoKana2 = (住所カナ != null && 住所カナ.length() >= INDEX_38)
                 ? 住所カナ.substring(INDEX_38, 住所カナ.length()) : RString.EMPTY;
         source.shutsuryokujunCode = targets.get帳票出力順序コード();
         RString 住所 = targets.get住所();
         source.jusho1 = (住所 != null && 住所.length() >= INDEX_32)
-                ? 住所.substring(INDEX_0, INDEX_32) : RString.EMPTY;
+                ? 住所.substring(INDEX_0, INDEX_32) : 住所.substring(INDEX_0, 住所.length());
         source.jusho2 = (住所 != null && 住所.length() >= INDEX_32)
                 ? 住所.substring(INDEX_32, 住所.length()) : RString.EMPTY;
     }
@@ -153,6 +153,7 @@ public class KyodoShoriJukyushaIdoRenrakuhyoEditor implements IKyodoShoriJukyush
             source.shuryoGG = 終了年月日.getEra();
             RString 終了年 = 終了年月日.getYear();
             source.shuryoYY = getYear(終了年);
+            source.kaishiMM = 終了年月日.getMonth();
             source.shuryoDD = 終了年月日.getDay();
         }
     }

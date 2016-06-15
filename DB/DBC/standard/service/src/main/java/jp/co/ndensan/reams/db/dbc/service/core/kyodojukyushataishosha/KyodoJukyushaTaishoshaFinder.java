@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyodojukyushatais
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -84,14 +85,15 @@ public class KyodoJukyushaTaishoshaFinder {
         List<DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity> 基本送付情報list = mapper.get基本送付情報(parameter);
         List<DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity> 償還送付情報list = mapper.get償還送付情報(parameter);
         List<DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity> 高額送付情報list = mapper.get高額送付情報(parameter);
-        KyodoJukyushaTaishoshaEntity 対象者一覧情報 = new KyodoJukyushaTaishoshaEntity();
+        KyodoJukyushaTaishoshaEntity 対象者一覧情報;
         Map map = new HashMap<>();
-        RString breakKey = RString.EMPTY;
+        RString breakKey;
         for (DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity 基本送付情報Entity : 基本送付情報list) {
             RString 異動日 = 基本送付情報Entity.getIdoYMD() != null
                     ? new RString(基本送付情報Entity.getIdoYMD().toString()) : RString.EMPTY;
-            RString 送付年月 = 基本送付情報Entity.getSofuYM() != null
-                    ? 基本送付情報Entity.getSofuYM().toDateString() : RString.EMPTY;
+            FlexibleYearMonth 送付 = 基本送付情報Entity.getSofuYM();
+            RString 送付年月 = 送付 != null
+                    ? 送付.toDateString() : RString.EMPTY;
             RString 論理削除フラグ = 基本送付情報Entity.getLogicalDeletedFlag() ? 定数_1 : 定数_0;
             breakKey = 異動日.concat(SPIT).concat(送付年月).concat(SPIT).concat(論理削除フラグ);
             if (map.containsKey(breakKey)) {
@@ -110,8 +112,9 @@ public class KyodoJukyushaTaishoshaFinder {
         for (DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity 償還送付情報Entity : 償還送付情報list) {
             RString 異動日 = 償還送付情報Entity.getIdoYMD() != null
                     ? new RString(償還送付情報Entity.getIdoYMD().toString()) : RString.EMPTY;
-            RString 送付年月 = 償還送付情報Entity.getSofuYM() != null
-                    ? 償還送付情報Entity.getSofuYM().toDateString() : RString.EMPTY;
+            FlexibleYearMonth 送付 = 償還送付情報Entity.getSofuYM();
+            RString 送付年月 = 送付 != null
+                    ? 送付.toDateString() : RString.EMPTY;
             RString 論理削除フラグ = 償還送付情報Entity.getLogicalDeletedFlag() ? 定数_1 : 定数_0;
             breakKey = 異動日.concat(SPIT).concat(送付年月).concat(SPIT).concat(論理削除フラグ);
             if (map.containsKey(breakKey)) {
@@ -131,8 +134,9 @@ public class KyodoJukyushaTaishoshaFinder {
         for (DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity 高額送付情報Entity : 高額送付情報list) {
             RString 異動日 = 高額送付情報Entity.getIdoYMD() != null
                     ? new RString(高額送付情報Entity.getIdoYMD().toString()) : RString.EMPTY;
-            RString 送付年月 = 高額送付情報Entity.getSofuYM() != null
-                    ? 高額送付情報Entity.getSofuYM().toDateString() : RString.EMPTY;
+            FlexibleYearMonth 送付 = 高額送付情報Entity.getSofuYM();
+            RString 送付年月 = 送付 != null
+                    ? 送付.toDateString() : RString.EMPTY;
             RString 論理削除フラグ = 高額送付情報Entity.getLogicalDeletedFlag() ? 定数_1 : 定数_0;
             breakKey = 異動日.concat(SPIT).concat(送付年月).concat(SPIT).concat(論理削除フラグ);
             if (map.containsKey(breakKey)) {
