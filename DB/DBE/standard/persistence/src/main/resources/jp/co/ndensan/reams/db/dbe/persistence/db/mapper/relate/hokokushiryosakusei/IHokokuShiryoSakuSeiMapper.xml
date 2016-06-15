@@ -1200,7 +1200,7 @@
 
     <select resultOrdered="true" id="getShinsakaishukeihyoHanteiBetsuHeader"
             resultMap="hokokushiryosakusei_SinsakaiHanteiJyokyoHeader"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.SinsakaiHanteiJyokyoMyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsakaishukeihyoHanteiBetsuMyBatisParameter"
             fetchSize="500">
         SELECT F."shichosonCode"
         ,F."shichosonMeisho"
@@ -1285,9 +1285,15 @@
                 </if>
             </otherwise>
         </choose>
-        <if test="!isEmptyGogitaiNo">
-            AND A."gogitaiNo" = #{gogitaiNo}
-        </if>
+        <choose>
+            <when test="!isEmptyGogitaiNo">
+                AND E."gogitaiNo" = #{gogitaiNo}
+            </when>
+            <otherwise>
+                AND E."gogitaiNo" IN
+                <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
+            </otherwise>
+        </choose>
         <if test="isShinseiji">
             AND C."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
         </if>
@@ -1315,7 +1321,7 @@
 
     <select resultOrdered="true" id="getShinsakaishukeihyoHanteiBetsu"
             resultMap="hokokushiryosakusei_ShinsakaishukeihyoHanteiBetsu"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.SinsakaiHanteiJyokyoMyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsakaishukeihyoHanteiBetsuMyBatisParameter"
             fetchSize="500">
         SELECT I."nijiHanteiYokaigoJotaiKubunCode" AS zenkaiNijiHantei
         , D."nijiHanteiYokaigoJotaiKubunCode" AS konkaiNijiHantei
@@ -1376,9 +1382,15 @@
                 AND C."hihokenshaKubunCode" IN ('2', '3')
             </when>
         </choose>
-        <if test="!isEmptyGogitaiNo">
-            AND A."gogitaiNo" = #{gogitaiNo}
-        </if>
+        <choose>
+            <when test="!isEmptyGogitaiNo">
+                AND E."gogitaiNo" = #{gogitaiNo}
+            </when>
+            <otherwise>
+                AND E."gogitaiNo" IN
+                <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
+            </otherwise>
+        </choose>
         GROUP BY I."nijiHanteiYokaigoJotaiKubunCode"
         ,D."nijiHanteiYokaigoJotaiKubunCode"
         ORDER BY I."nijiHanteiYokaigoJotaiKubunCode"

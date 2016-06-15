@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.Jiss
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsahanteinoHenkojokyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsakaiShukeiGenzainojokyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsakaiShukeihyoShinseiBetsuMyBatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsakaishukeihyoHanteiBetsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.SinsakaiHanteiJyokyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.CsvKenHokokuShiryoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.JigyoJyokyoHokokuEntity;
@@ -109,18 +110,18 @@ public interface IHokokuShiryoSakuSeiMapper {
     /**
      * 介護認定審査会集計表（判定別）情報リストを取得します。
      *
-     * @param parameter ShinsahanteinoHenkojokyoMyBatisParameter
+     * @param parameter ShinsakaishukeihyoHanteiBetsuMyBatisParameter
      * @return SinsakaiHanteiJyokyoHeaderEntityリスト
      */
-    List<SinsakaiHanteiJyokyoHeaderEntity> getShinsakaishukeihyoHanteiBetsuHeader(ShinsahanteinoHenkojokyoMyBatisParameter parameter);
+    List<SinsakaiHanteiJyokyoHeaderEntity> getShinsakaishukeihyoHanteiBetsuHeader(ShinsakaishukeihyoHanteiBetsuMyBatisParameter parameter);
 
     /**
-     * 審査判定の変更状況情報リストを取得します。
+     * 介護認定審査会集計表（判定別）リストを取得します。
      *
-     * @param parameter ShinsahanteinoHenkojokyoMyBatisParameter
+     * @param parameter ShinsakaishukeihyoHanteiBetsuMyBatisParameter
      * @return ShinsakaishukeihyoHanteiBetsuEntity
      */
-    List<ShinsakaishukeihyoHanteiBetsuEntity> getShinsakaishukeihyoHanteiBetsu(SinsakaiHanteiJyokyoMyBatisParameter parameter);
+    List<ShinsakaishukeihyoHanteiBetsuEntity> getShinsakaishukeihyoHanteiBetsu(ShinsakaishukeihyoHanteiBetsuMyBatisParameter parameter);
 
     /**
      * 審査判定の変更状況情報リストを取得します。

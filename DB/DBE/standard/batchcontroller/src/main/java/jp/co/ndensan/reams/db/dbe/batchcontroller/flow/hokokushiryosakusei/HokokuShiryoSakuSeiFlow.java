@@ -131,7 +131,7 @@ public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBa
     @Step(審査会集計表判定別)
     protected IBatchFlowCommand selectShinsakaishukeihyoHanteiBetsu() {
         return loopBatch(ShinsakaishukeihyoHanteiBetsuProcess.class)
-                .arguments(getParameter().toSinsakaiHanteiJyokyoProcessParameter()).define();
+                .arguments(getParameter().toShinsakaishukeihyoHanteiBetsuProcessParameter()).define();
     }
 
     /**
