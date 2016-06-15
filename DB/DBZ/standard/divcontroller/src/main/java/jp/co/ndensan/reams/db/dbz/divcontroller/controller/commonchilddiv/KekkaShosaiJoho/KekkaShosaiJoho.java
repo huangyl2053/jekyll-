@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.kekkashosaijoho.KekkaShosaiJohoModel;
 import jp.co.ndensan.reams.db.dbz.business.core.kekkashosaijoho.KekkaShosaiJohoOutModel;
+import jp.co.ndensan.reams.db.dbz.business.core.kekkashosaijoho.KekkaShosaiJohoServiceShuri;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KekkaShosaiJoho.KekkaShosaiJoho.KekkaShosaiJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KekkaShosaiJoho.KekkaShosaiJoho.KekkaShosaiJohoValidationHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.dgServiceIchiran_Row;
@@ -16,7 +17,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSon
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.ShinseiSonotaJohoInputDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
@@ -40,12 +40,12 @@ public class KekkaShosaiJoho {
      * @param div 結果詳細情報画面Div
      * @return ResponseData<KekkaShosaiJohoDiv>
      */
-    public ResponseData<KekkaShosaiJohoDiv> intialize(KekkaShosaiJohoDiv div) {
+    public ResponseData<KekkaShosaiJohoDiv> onLoad(KekkaShosaiJohoDiv div) {
         KekkaShosaiJohoModel model = DataPassingConverter.deserialize(div.getHdnKekkaShosaiJohoModel(), KekkaShosaiJohoModel.class);
         RString mode = model.getMode();
         if (モード_喪失.equals(mode)) {
             div.getCcdNinteiInput().set状態(モード_入力);
-            div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.KyakkaMode);
+            div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.ZenbuSoshitsuMode);
             div.setMode_ShoriType(KekkaShosaiJohoDiv.ShoriType.SoshitsuMode);
         } else if (モード_職権取消入力.equals(mode)) {
             div.getCcdNinteiInput().set状態(モード_一部喪失);
@@ -89,9 +89,14 @@ public class KekkaShosaiJoho {
             return ResponseData.of(div).dialogOKClose();
         }
         if (モード_喪失.equals(mode) || モード_入力.equals(mode)) {
-            ValidationMessageControlPairs pairs = div.getCcdNinteiInput().開始終了日前後順check();
-            pairs.add(createValidationHandler(div).有効開始日check());
-            pairs.add(createValidationHandler(div).有効終了日check());
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            pairs.add(createValidationHandler(div).check有効開始日());
+            pairs.add(createValidationHandler(div).checkサービス区分());
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+            pairs.add(div.getCcdNinteiInput().開始終了日前後順check());
+            pairs.add(createValidationHandler(div).check有効終了日());
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
@@ -99,9 +104,9 @@ public class KekkaShosaiJoho {
         KekkaShosaiJohoOutModel outModel = new KekkaShosaiJohoOutModel();
         outModel.set認定内容(div.getCcdNinteiInput().getNaiyo());
         List<dgServiceIchiran_Row> rowList = div.getCcdNinteiInput().getServiceRow();
-        List<KeyValueDataSource> サービス類リスト = new ArrayList<>();
+        List<KekkaShosaiJohoServiceShuri> サービス類リスト = new ArrayList<>();
         for (dgServiceIchiran_Row row : rowList) {
-            サービス類リスト.add(new KeyValueDataSource(row.getCode(), row.getServiceName()));
+            サービス類リスト.add(new KekkaShosaiJohoServiceShuri(row.getCode(), row.getServiceName()));
         }
         outModel.setサービス類リスト(サービス類リスト);
         IShinseiSonotaJohoInputDiv sonotaJohoInputDiv = div.getCcdShinseiSonotaJohoInput();

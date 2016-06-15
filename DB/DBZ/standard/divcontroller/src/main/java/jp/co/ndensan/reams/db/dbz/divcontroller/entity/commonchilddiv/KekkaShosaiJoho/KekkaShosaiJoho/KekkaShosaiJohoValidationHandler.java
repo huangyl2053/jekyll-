@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class KekkaShosaiJohoValidationHandler {
 
+    private static final int MAX_COUNT = 31;
     private final KekkaShosaiJohoDiv div;
 
     /**
@@ -35,7 +36,7 @@ public class KekkaShosaiJohoValidationHandler {
      *
      * @return ValidationMessageControlPairs(バリデーション結果)
      */
-    public ValidationMessageControlPairs 有効開始日check() {
+    public ValidationMessageControlPairs check有効開始日() {
         ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
         if (div.getCcdNinteiInput().getNaiyo().get有効終了年月日() == null) {
             validationMessage.add(new ValidationMessageControlPair(KekkaShosaiJohoCheckMessages.validation有効開始日));
@@ -48,7 +49,7 @@ public class KekkaShosaiJohoValidationHandler {
      *
      * @return ValidationMessageControlPairs(バリデーション結果)
      */
-    public ValidationMessageControlPairs 有効終了日check() {
+    public ValidationMessageControlPairs check有効終了日() {
         ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
         if (div.getCcdNinteiInput().getNaiyo().get有効終了年月日() == null) {
             validationMessage.add(new ValidationMessageControlPair(KekkaShosaiJohoCheckMessages.validation有効終了日));
@@ -56,10 +57,24 @@ public class KekkaShosaiJohoValidationHandler {
         return validationMessage;
     }
 
+    /**
+     * サービス区分checkを行う。
+     *
+     * @return ValidationMessageControlPairs(バリデーション結果)
+     */
+    public ValidationMessageControlPairs checkサービス区分() {
+        ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
+        if (MAX_COUNT < div.getCcdNinteiInput().getServiceRow().size()) {
+            validationMessage.add(new ValidationMessageControlPair(KekkaShosaiJohoCheckMessages.validationサービス区分));
+        }
+        return validationMessage;
+    }
+
     private static enum KekkaShosaiJohoCheckMessages implements IValidationMessage {
 
         validation有効開始日(UrErrorMessages.対象データなし_追加メッセージあり, "開始日"),
-        validation有効終了日(UrWarningMessages.未入力, "終了日");
+        validation有効終了日(UrWarningMessages.未入力, "終了日"),
+        validationサービス区分(UrErrorMessages.入力値が不正_追加メッセージあり, "サービス区分が31項目以上選択されています。");
         private final Message message;
 
         private KekkaShosaiJohoCheckMessages(IMessageGettable message, String... replacements) {

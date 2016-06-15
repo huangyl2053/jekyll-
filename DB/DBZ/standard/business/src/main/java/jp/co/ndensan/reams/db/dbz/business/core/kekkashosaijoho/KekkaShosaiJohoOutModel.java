@@ -10,7 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputNaiyo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 結果詳細情報画面の出力パラメータです。
@@ -23,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class KekkaShosaiJohoOutModel implements Serializable {
 
     private NinteiInputNaiyo 認定内容;
-    private List<KeyValueDataSource> サービス類リスト;
+    private List<KekkaShosaiJohoServiceShuri> サービス類リスト;
     private RString 異動事由コード;
     private RString 除事由コード;
     private RString 理由;
