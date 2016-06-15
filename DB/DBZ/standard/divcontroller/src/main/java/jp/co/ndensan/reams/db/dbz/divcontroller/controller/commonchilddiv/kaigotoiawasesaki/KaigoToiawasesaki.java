@@ -139,10 +139,7 @@ public class KaigoToiawasesaki {
         if (帳票独自あり.equals(div.getHdnChohyoDokujiToiawasesakiUmu())) {
             KaigoToiawasesakiFinder.createInstance().insertOrUpdate(
                     getHandler(div).updateOrInsertTwoRow(
-                            ViewStateHolder.get(ViewStateKeys.介護問合せ先情報, Models.class),
-                            twoKey,
-                            KaigoToiawasesakiFinder.createInstance().getResult(
-                                    new SubGyomuCode(div.getHdnSubGyomuCode()), new ReportId(div.getHdnChohyoBunruiID()))).build());
+                            ViewStateHolder.get(ViewStateKeys.介護問合せ先情報, Models.class), twoKey).build());
         } else if (帳票独自無し.equals(div.getHdnChohyoDokujiToiawasesakiUmu())) {
             KaigoToiawasesakiFinder.createInstance().delete(ViewStateHolder.get(ViewStateKeys.介護問合せ先情報, Models.class), twoKey);
         }

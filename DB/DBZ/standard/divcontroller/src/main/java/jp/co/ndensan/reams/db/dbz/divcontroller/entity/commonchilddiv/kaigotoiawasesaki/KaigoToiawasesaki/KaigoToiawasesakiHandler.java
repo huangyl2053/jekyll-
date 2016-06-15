@@ -213,14 +213,21 @@ public class KaigoToiawasesakiHandler {
      *
      * @param models 介護問合せ先情報
      * @param twoKey 介護問合せ先の識別子
-     * @param 介護問合せ先 介護問合せ先
      * @return KaigoToiawasesakiBuilder ビルダークラス
      */
     public KaigoToiawasesakiBuilder updateOrInsertTwoRow(
-            Models<KaigoToiawasesakiIdentifier, KaigoToiawasesaki> models, KaigoToiawasesakiIdentifier twoKey,
-            KaigoToiawasesaki 介護問合せ先) {
+            Models<KaigoToiawasesakiIdentifier, KaigoToiawasesaki> models, KaigoToiawasesakiIdentifier twoKey) {
         KaigoToiawasesaki twoKaigoToiawasesaki = models.get(twoKey);
-        KaigoToiawasesakiBuilder twoBuilder = twoKaigoToiawasesaki.createBuilderForEdit();
+        KaigoToiawasesakiBuilder twoBuilder;
+        if (twoKaigoToiawasesaki == null) {
+            KaigoToiawasesaki kaigoToiawasesaki = new KaigoToiawasesaki(
+                    new SubGyomuCode(div.getHdnSubGyomuCode()), new ReportId(div.getHdnChohyoBunruiID()));
+            kaigoToiawasesaki.toEntity().setState(EntityDataState.Added);
+            twoBuilder = kaigoToiawasesaki.createBuilderForEdit();
+        } else {
+            twoKaigoToiawasesaki.toEntity().setState(EntityDataState.Modified);
+            twoBuilder = twoKaigoToiawasesaki.createBuilderForEdit();
+        }
         twoBuilder.set郵便番号(new YubinNo(
                 nullTOEmpty(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtYubinNo())));
         twoBuilder.set所在地(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtShozaichi());
@@ -230,13 +237,6 @@ public class KaigoToiawasesakiHandler {
         twoBuilder.set内線番号(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtNaisenNo());
         twoBuilder.set部署名(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtBushoName());
         twoBuilder.set担当者名(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtTantoshaName());
-        if (介護問合せ先 == null) {
-            twoBuilder.setサブ業務コード(new SubGyomuCode(div.getHdnSubGyomuCode()));
-            twoBuilder.set帳票分類ID(new ReportId(div.getHdnChohyoBunruiID()));
-            twoKaigoToiawasesaki.toEntity().setState(EntityDataState.Added);
-        } else {
-            twoKaigoToiawasesaki.toEntity().setState(EntityDataState.Modified);
-        }
         return twoBuilder;
     }
 
