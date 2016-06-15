@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @author 自動生成
  */
 public class KaigoUploadPanelDiv extends Panel implements IKaigoUploadPanelDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -159,21 +159,21 @@ public class KaigoUploadPanelDiv extends Panel implements IKaigoUploadPanelDiv {
     @JsonProperty("modes")
     private HashSet<Mode> modes;
 
-    public static enum isSimpleMode implements ICommonChildDivMode {
+    public static enum IsSimpleMode implements ICommonChildDivMode {
 
         TRUE("TRUE"),
         FALSE("FALSE");
 
         private final String name;
 
-        private isSimpleMode(final String name) {
+        private IsSimpleMode(final String name) {
             this.name = name;
         }
 
-        public static isSimpleMode getEnum(String str) {
-            isSimpleMode[] enumArray = isSimpleMode.values();
+        public static IsSimpleMode getEnum(String str) {
+            IsSimpleMode[] enumArray = IsSimpleMode.values();
 
-            for (isSimpleMode enumStr : enumArray) {
+            for (IsSimpleMode enumStr : enumArray) {
                 if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
@@ -188,12 +188,12 @@ public class KaigoUploadPanelDiv extends Panel implements IKaigoUploadPanelDiv {
 
     }
 
-    public isSimpleMode getMode_isSimpleMode() {
-        return (isSimpleMode) _CommonChildDivModeUtil.getMode( this.modes, isSimpleMode.class );
+    public IsSimpleMode getMode_IsSimpleMode() {
+        return (IsSimpleMode) _CommonChildDivModeUtil.getMode( this.modes, IsSimpleMode.class );
     }
 
-    public void setMode_isSimpleMode( isSimpleMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, isSimpleMode.class , value );
+    public void setMode_IsSimpleMode( IsSimpleMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, IsSimpleMode.class , value );
     }
 
     // </editor-fold>

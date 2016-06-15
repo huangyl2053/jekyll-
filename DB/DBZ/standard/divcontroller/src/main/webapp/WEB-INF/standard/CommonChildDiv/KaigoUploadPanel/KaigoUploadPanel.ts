@@ -22,18 +22,18 @@ module DBZ
 
             public priorities(): Array {
                 return [
-                    "isSimpleMode"
+                    "IsSimpleMode"
                 ];
             }
 
-            public isSimpleMode() {
-                return new Modes.isSimpleMode(this.controls);
+            public IsSimpleMode() {
+                return new Modes.IsSimpleMode(this.controls);
             }
 
         }
 
         export module Modes {
-            export class isSimpleMode {
+            export class IsSimpleMode {
                 private controls: Controls;
 
                 constructor(controls: Controls) {

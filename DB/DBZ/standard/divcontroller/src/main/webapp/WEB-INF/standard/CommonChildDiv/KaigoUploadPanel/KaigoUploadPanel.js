@@ -16,34 +16,34 @@ var DBZ;
 
             ModeController.prototype.priorities = function () {
                 return [
-                    "isSimpleMode"
+                    "IsSimpleMode"
                 ];
             };
 
-            ModeController.prototype.isSimpleMode = function () {
-                return new Modes.isSimpleMode(this.controls);
+            ModeController.prototype.IsSimpleMode = function () {
+                return new Modes.IsSimpleMode(this.controls);
             };
             return ModeController;
         })();
         KaigoUploadPanel.ModeController = ModeController;
 
         (function (Modes) {
-            var isSimpleMode = (function () {
-                function isSimpleMode(controls) {
+            var IsSimpleMode = (function () {
+                function IsSimpleMode(controls) {
                     this.controls = controls;
                 }
-                isSimpleMode.prototype.TRUE = function () {
+                IsSimpleMode.prototype.TRUE = function () {
                     this.controls.lblFileName().visible = true;
                     this.controls.lblUploadFileName().visible = true;
                 };
 
-                isSimpleMode.prototype.FALSE = function () {
+                IsSimpleMode.prototype.FALSE = function () {
                     this.controls.lblFileName().visible = false;
                     this.controls.lblUploadFileName().visible = false;
                 };
-                return isSimpleMode;
+                return IsSimpleMode;
             })();
-            Modes.isSimpleMode = isSimpleMode;
+            Modes.IsSimpleMode = IsSimpleMode;
         })(KaigoUploadPanel.Modes || (KaigoUploadPanel.Modes = {}));
         var Modes = KaigoUploadPanel.Modes;
     })(DBZ.KaigoUploadPanel || (DBZ.KaigoUploadPanel = {}));
