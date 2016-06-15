@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoToiawasesaki;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoToiawasesakiIdentifier;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7069KaigoToiawasesakiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7069KaigoToiawasesakiDac;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -104,11 +106,13 @@ public class KaigoToiawasesakiFinder {
     /**
      * 介護問合せ先情報{@link KaigoToiawasesaki}を物理削除します。
      *
-     * @param 介護問合せ先 {@link KaigoToiawasesaki}
+     * @param models 介護問合せ先情報
+     * @param twoKey 介護問合せ先の識別子
      * @return 物理削除件数 物理削除結果の件数を返します。
      */
     @Transaction
-    public boolean delete(KaigoToiawasesaki 介護問合せ先) {
+    public boolean delete(Models<KaigoToiawasesakiIdentifier, KaigoToiawasesaki> models, KaigoToiawasesakiIdentifier twoKey) {
+        KaigoToiawasesaki 介護問合せ先 = models.get(twoKey);
         if (介護問合せ先 != null) {
             return 1 == dbT7069dac.delete(介護問合せ先.toEntity());
         }

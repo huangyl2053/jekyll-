@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoToiawasesaki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoToiawasesakiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoToiawasesakiIdentifier;
-import jp.co.ndensan.reams.db.dbz.service.core.kaigotoiawasesaki.KaigoToiawasesakiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -62,16 +61,17 @@ public class KaigoToiawasesakiHandler {
 
     /**
      * 介護問合せ先ダイアログを表示します。
+     *
+     * @param oneBusiness 介護問合せ先を管理するクラス1
+     * @param twoBusiness 介護問合せ先を管理するクラス2
+     * @param 問合せ先管理単位 問合せ先管理単位
      */
-    public void onLoad() {
+    public void onLoad(KaigoToiawasesaki oneBusiness, KaigoToiawasesaki twoBusiness, RString 問合せ先管理単位) {
         List<dgToiawasesakiControl_Row> rowList = new ArrayList<>();
         dgToiawasesakiControl_Row oneRow = new dgToiawasesakiControl_Row();
         dgToiawasesakiControl_Row twoRow = new dgToiawasesakiControl_Row();
-        RString 問合せ先管理単位 = DbBusinessConfig.get(ConfigNameDBU.問合せ先_管理単位, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        SubGyomuCode subGyomuCode = SubGyomuCode.EMPTY;
         if (介護共通.equals(問合せ先管理単位)) {
             oneRow.setTxtToiawasesaki(SubGyomuCode.DBZ介護共通.getGyomuName());
-            subGyomuCode = SubGyomuCode.DBZ介護共通;
         } else if (サブ業務単位.equals(問合せ先管理単位)) {
             if (SubGyomuCode.DBA介護資格.value().equals(div.getHdnSubGyomuCode())) {
                 oneRow.setTxtToiawasesaki(問合せ先_資格共通);
@@ -86,11 +86,7 @@ public class KaigoToiawasesakiHandler {
             } else if (SubGyomuCode.DBU介護統計報告.value().equals(div.getHdnSubGyomuCode())) {
                 oneRow.setTxtToiawasesaki(問合せ先_統計共通);
             }
-            subGyomuCode = new SubGyomuCode(div.getHdnSubGyomuCode());
         }
-        KaigoToiawasesaki oneBusiness = KaigoToiawasesakiFinder.createInstance().getResult(subGyomuCode, CHOHYOBUNRUIID);
-        KaigoToiawasesaki twoBusiness = KaigoToiawasesakiFinder.createInstance().getResult(
-                new SubGyomuCode(div.getHdnSubGyomuCode()), new ReportId(div.getHdnChohyoBunruiID()));
         rowList.add(setDgToiawasesaki(oneBusiness, oneRow));
         if (twoBusiness == null) {
             div.setHdnChohyoDokujiToiawasesakiUmu(帳票独自無し);
@@ -183,11 +179,12 @@ public class KaigoToiawasesakiHandler {
     }
 
     /**
-     * 「保存」を押します。
+     * 一件目を更新します。
      *
      * @param models 介護問合せ先情報
+     * @return KaigoToiawasesakiBuilder ビルダークラス
      */
-    public void onbtn_Save(Models<KaigoToiawasesakiIdentifier, KaigoToiawasesaki> models) {
+    public KaigoToiawasesakiBuilder updateOneRow(Models<KaigoToiawasesakiIdentifier, KaigoToiawasesaki> models) {
         RString 問合せ先管理単位 = DbBusinessConfig.get(ConfigNameDBU.問合せ先_管理単位, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         KaigoToiawasesakiIdentifier oneKey = null;
         if (介護共通.equals(問合せ先管理単位)) {
@@ -206,30 +203,37 @@ public class KaigoToiawasesakiHandler {
         oneBuilder.set部署名(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(0).getTxtBushoName());
         oneBuilder.set担当者名(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(0).getTxtTantoshaName());
         oneKaigoToiawasesaki.toEntity().setState(EntityDataState.Modified);
-        KaigoToiawasesakiFinder.createInstance().insertOrUpdate(oneBuilder.build());
-        KaigoToiawasesakiIdentifier twoKey = new KaigoToiawasesakiIdentifier(new SubGyomuCode(div.getHdnSubGyomuCode()),
-                new ReportId(div.getHdnChohyoBunruiID()));
+        return oneBuilder;
+    }
+
+    /**
+     * 二件目を更新します。
+     *
+     * @param models 介護問合せ先情報
+     * @param twoKey 介護問合せ先の識別子
+     * @param 介護問合せ先 介護問合せ先
+     * @return KaigoToiawasesakiBuilder ビルダークラス
+     */
+    public KaigoToiawasesakiBuilder updateOrInsertTwoRow(
+            Models<KaigoToiawasesakiIdentifier, KaigoToiawasesaki> models, KaigoToiawasesakiIdentifier twoKey,
+            KaigoToiawasesaki 介護問合せ先) {
         KaigoToiawasesaki twoKaigoToiawasesaki = models.get(twoKey);
-        if (帳票独自あり.equals(div.getHdnChohyoDokujiToiawasesakiUmu())) {
-            KaigoToiawasesakiBuilder twoBuilder = twoKaigoToiawasesaki.createBuilderForEdit();
-            twoBuilder.set郵便番号(new YubinNo(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtYubinNo()));
-            twoBuilder.set所在地(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtShozaichi());
-            twoBuilder.set庁舎名(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtChoshaName());
-            twoBuilder.set電話番号(new TelNo(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtTelNo()));
-            twoBuilder.set内線番号(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtNaisenNo());
-            twoBuilder.set部署名(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtBushoName());
-            twoBuilder.set担当者名(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtTantoshaName());
-            if (KaigoToiawasesakiFinder.createInstance().getResult(
-                    new SubGyomuCode(div.getHdnSubGyomuCode()), new ReportId(div.getHdnChohyoBunruiID())) == null) {
-                twoBuilder.setサブ業務コード(new SubGyomuCode(div.getHdnSubGyomuCode()));
-                twoBuilder.set帳票分類ID(new ReportId(div.getHdnChohyoBunruiID()));
-            } else {
-                twoKaigoToiawasesaki.toEntity().setState(EntityDataState.Modified);
-            }
-            KaigoToiawasesakiFinder.createInstance().insertOrUpdate(oneBuilder.build());
-        } else if (帳票独自無し.equals(div.getHdnChohyoDokujiToiawasesakiUmu())) {
-            KaigoToiawasesakiFinder.createInstance().delete(twoKaigoToiawasesaki);
+        KaigoToiawasesakiBuilder twoBuilder = twoKaigoToiawasesaki.createBuilderForEdit();
+        twoBuilder.set郵便番号(new YubinNo(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtYubinNo()));
+        twoBuilder.set所在地(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtShozaichi());
+        twoBuilder.set庁舎名(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtChoshaName());
+        twoBuilder.set電話番号(new TelNo(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtTelNo()));
+        twoBuilder.set内線番号(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtNaisenNo());
+        twoBuilder.set部署名(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtBushoName());
+        twoBuilder.set担当者名(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtTantoshaName());
+        if (介護問合せ先 == null) {
+            twoBuilder.setサブ業務コード(new SubGyomuCode(div.getHdnSubGyomuCode()));
+            twoBuilder.set帳票分類ID(new ReportId(div.getHdnChohyoBunruiID()));
+            twoKaigoToiawasesaki.toEntity().setState(EntityDataState.Added);
+        } else {
+            twoKaigoToiawasesaki.toEntity().setState(EntityDataState.Modified);
         }
+        return twoBuilder;
     }
 
     private dgToiawasesakiControl_Row setDgToiawasesaki(KaigoToiawasesaki business, dgToiawasesakiControl_Row row) {
@@ -266,26 +270,20 @@ public class KaigoToiawasesakiHandler {
     }
 
     private void 問合せ先詳細の設定(RString 表示モード) {
+        dgToiawasesakiControl_Row row = div.getToiawasesakiControl().getDgToiawasesakiControl().getClickedItem();
         if (共通問合せ先.equals(div.getHdnSelectToiawasesaki())) {
             div.getToiawasesakiShosai().getLblHensyuTaisho().setText(
-                    div.getToiawasesakiControl().getDgToiawasesakiControl().getClickedItem().getTxtToiawasesaki());
+                    row.getTxtToiawasesaki());
         } else if (帳票独自問合せ先.equals(div.getHdnSelectToiawasesaki()) || 表示モード_追加.equals(表示モード)) {
             div.getToiawasesakiShosai().getLblHensyuTaisho().setText(問合せ先_帳票独自);
         }
-        div.getToiawasesakiShosai().getDetail1().getTxtYubinNo().setValue(
-                new YubinNo(div.getToiawasesakiControl().getDgToiawasesakiControl().getClickedItem().getTxtYubinNo()));
-        div.getToiawasesakiShosai().getDetail1().getTxtShozaichi().setValue(
-                div.getToiawasesakiControl().getDgToiawasesakiControl().getClickedItem().getTxtShozaichi());
-        div.getToiawasesakiShosai().getDetail1().getTxtChoshaName().setValue(
-                div.getToiawasesakiControl().getDgToiawasesakiControl().getClickedItem().getTxtChoshaName());
-        div.getToiawasesakiShosai().getDetail2().getTxtTelNo().setDomain(
-                new TelNo(div.getToiawasesakiControl().getDgToiawasesakiControl().getClickedItem().getTxtTelNo()));
-        div.getToiawasesakiShosai().getDetail2().getTxtNaisenNo().setValue(
-                div.getToiawasesakiControl().getDgToiawasesakiControl().getClickedItem().getTxtNaisenNo());
-        div.getToiawasesakiShosai().getDetail2().getTxtBushoName().setValue(
-                div.getToiawasesakiControl().getDgToiawasesakiControl().getClickedItem().getTxtBushoName());
-        div.getToiawasesakiShosai().getDetail2().getTxtTantoshaName().setValue(
-                div.getToiawasesakiControl().getDgToiawasesakiControl().getClickedItem().getTxtTantoshaName());
+        div.getToiawasesakiShosai().getDetail1().getTxtYubinNo().setValue(new YubinNo(row.getTxtYubinNo()));
+        div.getToiawasesakiShosai().getDetail1().getTxtShozaichi().setValue(row.getTxtShozaichi());
+        div.getToiawasesakiShosai().getDetail1().getTxtChoshaName().setValue(row.getTxtChoshaName());
+        div.getToiawasesakiShosai().getDetail2().getTxtTelNo().setDomain(new TelNo(row.getTxtTelNo()));
+        div.getToiawasesakiShosai().getDetail2().getTxtNaisenNo().setValue(row.getTxtNaisenNo());
+        div.getToiawasesakiShosai().getDetail2().getTxtBushoName().setValue(row.getTxtBushoName());
+        div.getToiawasesakiShosai().getDetail2().getTxtTantoshaName().setValue(row.getTxtTantoshaName());
     }
 
     private RString nullTOEmpty(RString 項目) {
