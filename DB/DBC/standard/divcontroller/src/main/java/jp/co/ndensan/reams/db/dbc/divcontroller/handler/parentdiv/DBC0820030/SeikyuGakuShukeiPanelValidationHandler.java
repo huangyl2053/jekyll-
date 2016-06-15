@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030.SeikyuGakuShukeiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030.dgdSeikyugakushukei_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -22,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(請求額集計）
@@ -60,13 +58,11 @@ public class SeikyuGakuShukeiPanelValidationHandler {
     /**
      * 入力チェック
      *
-     * @return validPairs
+     * @param meisaiPar ShoukanharaihishinseimeisaikensakuParameter
+     * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 入力チェック() {
+    public ValidationMessageControlPairs 入力チェック(ShoukanharaihishinseimeisaikensakuParameter meisaiPar) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(
-                ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
         RString 様式番号 = meisaiPar.get様式番号();
         Decimal 限度額対象単位 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoTanyi().getValue();
         Decimal 限度額対象外単位 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
