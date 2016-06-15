@@ -34,11 +34,11 @@ import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 介護認定審査会判定状況の取得バッチクラスです。
+ * 要介護状態区分別判定件数の取得バッチクラスです。
  *
  * @reamsid_L DBE-1450-020 wangxiaodong
  */
-public class JotaikubumbetsuhanteiProcess extends BatchKeyBreakBase<SinsakaiHanteiJyokyoHeaderEntity> {
+public class JotaikubunbetsuhanteiProcess extends BatchKeyBreakBase<SinsakaiHanteiJyokyoHeaderEntity> {
 
     private static final RString SELECT_HEADER = new RString("jp.co.ndensan.reams.db.dbe.persistence"
             + ".db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper.getJotaikubumbetsuhanteiHeader");
@@ -86,6 +86,7 @@ public class JotaikubumbetsuhanteiProcess extends BatchKeyBreakBase<SinsakaiHant
     private static final RString 割合計 = new RString("100%");
     private static final RString パーセント = new RString("%");
     private static final RString なし = new RString(0);
+    private static final RString 全合議体 = new RString("全合議体");
     private static final int 割合 = 100;
     private Jotaikubumbetsuhantei jotaikubumbetsuhantei;
     private SinsakaiHanteiJyokyoProcessParameter paramter;
@@ -128,23 +129,7 @@ public class JotaikubumbetsuhanteiProcess extends BatchKeyBreakBase<SinsakaiHant
     @Override
     protected void usualProcess(SinsakaiHanteiJyokyoHeaderEntity current) {
         isデータあり = true;
-        jotaikubumbetsuhantei.setタイトル(帳票タイトル);
-        jotaikubumbetsuhantei.set合議体名称(current.getGogitaiMei());
-        jotaikubumbetsuhantei.set開催開始年月日(current.getShinsakaiKaisaiYMDMin());
-        jotaikubumbetsuhantei.set開催終了年月日(current.getShinsakaiKaisaiYMDMax());
-        jotaikubumbetsuhantei.set開催回数(new RString(current.getShinsakaiKaisaiNoCount()));
-        jotaikubumbetsuhantei.set市町村番号(current.getShichosonCode().value());
-        jotaikubumbetsuhantei.set市町村名(current.getShichosonMeisho());
-        jotaikubumbetsuhantei.set発行日時(RDateTime.now());
-        jotaikubumbetsuhantei.set二次判定非該当タイトル(非該当タイトル);
-        jotaikubumbetsuhantei.set二次判定要支援1タイトル(要支援1タイトル);
-        jotaikubumbetsuhantei.set二次判定要支援2タイトル(要支援2タイトル);
-        jotaikubumbetsuhantei.set二次判定要介護1タイトル(要介護1タイトル);
-        jotaikubumbetsuhantei.set二次判定要介護2タイトル(要介護2タイトル);
-        jotaikubumbetsuhantei.set二次判定要介護3タイトル(要介護3タイトル);
-        jotaikubumbetsuhantei.set二次判定要介護4タイトル(要介護4タイトル);
-        jotaikubumbetsuhantei.set二次判定要介護5タイトル(要介護5タイトル);
-        jotaikubumbetsuhantei.set一次判定_計タイトル(計タイトル);
+        setHeader(current);
         List<SinsakaiHanteiJyokyoEntity> 審査判定状況 = get審査判定状況(current);
         set一次判定非該当(審査判定状況);
         set一次判定要支援1(審査判定状況);
@@ -178,7 +163,6 @@ public class JotaikubumbetsuhanteiProcess extends BatchKeyBreakBase<SinsakaiHant
 
     private List<SinsakaiHanteiJyokyoEntity> get審査判定状況(SinsakaiHanteiJyokyoHeaderEntity current) {
         SinsakaiHanteiJyokyoMyBatisParameter batisParameter = paramter.toSinsakaiHanteiJyokyoMyBatisParameter();
-        batisParameter.setGogitaiNo(current.getGogitaiNo());
         batisParameter.setTaishoGeppiFrom(current.getShinsakaiKaisaiYMDMin());
         batisParameter.setTaishoGeppiTo(current.getShinsakaiKaisaiYMDMax());
         batisParameter.setShichosonCode(current.getShichosonCode());
@@ -650,6 +634,26 @@ public class JotaikubumbetsuhanteiProcess extends BatchKeyBreakBase<SinsakaiHant
         jotaikubumbetsuhantei.set割合_軽度変更者数(RString.EMPTY);
         jotaikubumbetsuhantei.set割合_重度変更者数(RString.EMPTY);
         jotaikubumbetsuhantei.set割合_判定変更割合(RString.EMPTY);
+    }
+
+    private void setHeader(SinsakaiHanteiJyokyoHeaderEntity current) {
+        jotaikubumbetsuhantei.setタイトル(帳票タイトル);
+        jotaikubumbetsuhantei.set合議体名称(paramter.isEmptyGogitaiNo() ? 全合議体 : current.getGogitaiMei());
+        jotaikubumbetsuhantei.set開催開始年月日(current.getShinsakaiKaisaiYMDMin());
+        jotaikubumbetsuhantei.set開催終了年月日(current.getShinsakaiKaisaiYMDMax());
+        jotaikubumbetsuhantei.set開催回数(new RString(current.getShinsakaiKaisaiNoCount()));
+        jotaikubumbetsuhantei.set市町村番号(current.getShichosonCode().value());
+        jotaikubumbetsuhantei.set市町村名(current.getShichosonMeisho());
+        jotaikubumbetsuhantei.set発行日時(RDateTime.now());
+        jotaikubumbetsuhantei.set二次判定非該当タイトル(非該当タイトル);
+        jotaikubumbetsuhantei.set二次判定要支援1タイトル(要支援1タイトル);
+        jotaikubumbetsuhantei.set二次判定要支援2タイトル(要支援2タイトル);
+        jotaikubumbetsuhantei.set二次判定要介護1タイトル(要介護1タイトル);
+        jotaikubumbetsuhantei.set二次判定要介護2タイトル(要介護2タイトル);
+        jotaikubumbetsuhantei.set二次判定要介護3タイトル(要介護3タイトル);
+        jotaikubumbetsuhantei.set二次判定要介護4タイトル(要介護4タイトル);
+        jotaikubumbetsuhantei.set二次判定要介護5タイトル(要介護5タイトル);
+        jotaikubumbetsuhantei.set一次判定_計タイトル(計タイトル);
     }
 
     private void outputJokenhyo() {
