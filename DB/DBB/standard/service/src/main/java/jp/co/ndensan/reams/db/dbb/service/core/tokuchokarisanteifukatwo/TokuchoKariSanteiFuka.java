@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * ビジネス設計_DBBBZ21004_段階別被保険者数一覧表作成
@@ -53,6 +54,7 @@ public class TokuchoKariSanteiFuka {
      * @param 調定年度 FlexibleYear
      * @return YMDHMS
      */
+    @Transaction
     public YMDHMS getHonsanteiShoribi(FlexibleYear 調定年度) {
         DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select基準日時(調定年度);
         if (entity.getKijunTimestamp() != null) {
