@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuN
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -24,7 +25,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
  * @reamsid_L DBA-0360-030 linghuhang
  */
 public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuNyutaishoRirekiKanriDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -184,47 +186,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     @JsonProperty("modes")
     private HashSet<Mode> modes;
 
-    public static enum 表示widthサイズ implements ICommonChildDivMode {
-
-        モード1("モード1"),
-        モード2("モード2"),
-        モード3("モード3"),
-        モード4("モード4"),
-        モード5("モード5");
-
-        private final String name;
-
-        private 表示widthサイズ(final String name) {
-            this.name = name;
-        }
-
-        public static 表示widthサイズ getEnum(String str) {
-            表示widthサイズ[] enumArray = 表示widthサイズ.values();
-
-            for (表示widthサイズ enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
-                    return enumStr;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
-    }
-
-    public 表示widthサイズ getMode_表示widthサイズ() {
-        return (表示widthサイズ) _CommonChildDivModeUtil.getMode( this.modes, 表示widthサイズ.class );
-    }
-
-    public void setMode_表示widthサイズ( 表示widthサイズ value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 表示widthサイズ.class , value );
-    }
-
-    public static enum 利用 implements ICommonChildDivMode {
+    public static enum RiyoType implements ICommonChildDivMode {
 
         台帳種別表示機能("台帳種別表示機能"),
         全施設対象機能("全施設対象機能"),
@@ -234,15 +196,15 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
 
         private final String name;
 
-        private 利用(final String name) {
+        private RiyoType(final String name) {
             this.name = name;
         }
 
-        public static 利用 getEnum(String str) {
-            利用[] enumArray = 利用.values();
+        public static RiyoType getEnum(String str) {
+            RiyoType[] enumArray = RiyoType.values();
 
-            for (利用 enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+            for (RiyoType enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -256,15 +218,133 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
 
     }
 
-    public 利用 getMode_利用() {
-        return (利用) _CommonChildDivModeUtil.getMode( this.modes, 利用.class );
+    public RiyoType getMode_RiyoType() {
+        return (RiyoType) _CommonChildDivModeUtil.getMode(this.modes, RiyoType.class);
     }
 
-    public void setMode_利用( 利用 value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 利用.class , value );
+    public void setMode_RiyoType(RiyoType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, RiyoType.class, value);
     }
 
-    public static enum 表示heightサイズ implements ICommonChildDivMode {
+    public static enum MeisaiHyojiMode implements ICommonChildDivMode {
+
+        追加_修正("追加_修正"),
+        削除("削除"),
+        選択不可("選択不可"),
+        非表示("非表示");
+
+        private final String name;
+
+        private MeisaiHyojiMode(final String name) {
+            this.name = name;
+        }
+
+        public static MeisaiHyojiMode getEnum(String str) {
+            MeisaiHyojiMode[] enumArray = MeisaiHyojiMode.values();
+
+            for (MeisaiHyojiMode enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public MeisaiHyojiMode getMode_MeisaiHyojiMode() {
+        return (MeisaiHyojiMode) _CommonChildDivModeUtil.getMode(this.modes, MeisaiHyojiMode.class);
+    }
+
+    public void setMode_MeisaiHyojiMode(MeisaiHyojiMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, MeisaiHyojiMode.class, value);
+    }
+
+    public static enum WidthSize implements ICommonChildDivMode {
+
+        モード1("モード1"),
+        モード2("モード2"),
+        モード3("モード3"),
+        モード4("モード4"),
+        モード5("モード5");
+
+        private final String name;
+
+        private WidthSize(final String name) {
+            this.name = name;
+        }
+
+        public static WidthSize getEnum(String str) {
+            WidthSize[] enumArray = WidthSize.values();
+
+            for (WidthSize enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public WidthSize getMode_WidthSize() {
+        return (WidthSize) _CommonChildDivModeUtil.getMode(this.modes, WidthSize.class);
+    }
+
+    public void setMode_WidthSize(WidthSize value) {
+        _CommonChildDivModeUtil.setMode(this.modes, WidthSize.class, value);
+    }
+
+    public static enum HyojiMode implements ICommonChildDivMode {
+
+        登録("登録"),
+        照会("照会"),
+        照会選択有("照会選択有"),
+        資格異動("資格異動");
+
+        private final String name;
+
+        private HyojiMode(final String name) {
+            this.name = name;
+        }
+
+        public static HyojiMode getEnum(String str) {
+            HyojiMode[] enumArray = HyojiMode.values();
+
+            for (HyojiMode enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public HyojiMode getMode_HyojiMode() {
+        return (HyojiMode) _CommonChildDivModeUtil.getMode(this.modes, HyojiMode.class);
+    }
+
+    public void setMode_HyojiMode(HyojiMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, HyojiMode.class, value);
+    }
+
+    public static enum HeightSize implements ICommonChildDivMode {
 
         サイズ200("サイズ200"),
         サイズ250("サイズ250"),
@@ -276,15 +356,15 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
 
         private final String name;
 
-        private 表示heightサイズ(final String name) {
+        private HeightSize(final String name) {
             this.name = name;
         }
 
-        public static 表示heightサイズ getEnum(String str) {
-            表示heightサイズ[] enumArray = 表示heightサイズ.values();
+        public static HeightSize getEnum(String str) {
+            HeightSize[] enumArray = HeightSize.values();
 
-            for (表示heightサイズ enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+            for (HeightSize enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -298,90 +378,12 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
 
     }
 
-    public 表示heightサイズ getMode_表示heightサイズ() {
-        return (表示heightサイズ) _CommonChildDivModeUtil.getMode( this.modes, 表示heightサイズ.class );
+    public HeightSize getMode_HeightSize() {
+        return (HeightSize) _CommonChildDivModeUtil.getMode(this.modes, HeightSize.class);
     }
 
-    public void setMode_表示heightサイズ( 表示heightサイズ value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 表示heightサイズ.class , value );
-    }
-
-    public static enum 表示モード implements ICommonChildDivMode {
-
-        登録("登録"),
-        照会("照会"),
-        照会選択有("照会選択有"),
-        資格異動("資格異動");
-
-        private final String name;
-
-        private 表示モード(final String name) {
-            this.name = name;
-        }
-
-        public static 表示モード getEnum(String str) {
-            表示モード[] enumArray = 表示モード.values();
-
-            for (表示モード enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
-                    return enumStr;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
-    }
-
-    public 表示モード getMode_表示モード() {
-        return (表示モード) _CommonChildDivModeUtil.getMode( this.modes, 表示モード.class );
-    }
-
-    public void setMode_表示モード( 表示モード value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 表示モード.class , value );
-    }
-
-    public static enum 明細表示モード implements ICommonChildDivMode {
-
-        追加_修正("追加_修正"),
-        削除("削除"),
-        選択不可("選択不可"),
-        非表示("非表示");
-
-        private final String name;
-
-        private 明細表示モード(final String name) {
-            this.name = name;
-        }
-
-        public static 明細表示モード getEnum(String str) {
-            明細表示モード[] enumArray = 明細表示モード.values();
-
-            for (明細表示モード enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
-                    return enumStr;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
-    }
-
-    public 明細表示モード getMode_明細表示モード() {
-        return (明細表示モード) _CommonChildDivModeUtil.getMode( this.modes, 明細表示モード.class );
-    }
-
-    public void setMode_明細表示モード( 明細表示モード value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 明細表示モード.class , value );
+    public void setMode_HeightSize(HeightSize value) {
+        _CommonChildDivModeUtil.setMode(this.modes, HeightSize.class, value);
     }
 
     // </editor-fold>
@@ -421,27 +423,27 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
 
     @Override
     public void set表示モード(RString 表示) {
-        setMode_表示モード(表示モード.getEnum(表示.toString()));
+        setMode_HyojiMode(HyojiMode.getEnum(表示.toString()));
     }
 
     @Override
     public void set明細表示モード(RString 明細表示) {
-        setMode_明細表示モード(明細表示モード.getEnum(明細表示.toString()));
+        setMode_MeisaiHyojiMode(MeisaiHyojiMode.getEnum(明細表示.toString()));
     }
 
     @Override
     public void set利用モード(RString 利用モード) {
-        setMode_利用(利用.getEnum(利用モード.toString()));
+        setMode_RiyoType(RiyoType.getEnum(利用モード.toString()));
     }
 
     @Override
     public void set表示widthサイズ(RString widthサイズ) {
-        setMode_表示widthサイズ(表示widthサイズ.getEnum(widthサイズ.toString()));
+        setMode_WidthSize(WidthSize.getEnum(widthサイズ.toString()));
     }
 
     @Override
     public void set表示heightサイズ(RString heightサイズ) {
-        setMode_表示heightサイズ(表示heightサイズ.getEnum(heightサイズ.toString()));
+        setMode_HeightSize(HeightSize.getEnum(heightサイズ.toString()));
     }
 
     @Override

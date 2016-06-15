@@ -8,11 +8,11 @@ var DBZ;
             }
             ModeController.prototype.priorities = function () {
                 return [
-                    "表示モード",
-                    "表示Heightサイズ",
-                    "表示widthサイズ",
-                    "明細表示モード",
-                    "利用"
+                    "HyojiMode",
+                    "HeightSize",
+                    "WidthSize",
+                    "MeisaiHyojiMode",
+                    "RiyoType"
                 ];
             };
 
@@ -24,35 +24,35 @@ var DBZ;
                 return new ShisetsuNyutaishoRirekiKanri.PublicProperties(this.fieldName);
             };
 
-            ModeController.prototype.表示モード = function () {
-                return new Modes.表示モード(this.controls);
+            ModeController.prototype.HyojiMode = function () {
+                return new Modes.HyojiMode(this.controls);
             };
 
-            ModeController.prototype.表示Heightサイズ = function () {
-                return new Modes.表示heightサイズ(this.controls);
+            ModeController.prototype.HeightSize = function () {
+                return new Modes.HeightSize(this.controls);
             };
 
-            ModeController.prototype.表示widthサイズ = function () {
-                return new Modes.表示widthサイズ(this.controls);
+            ModeController.prototype.WidthSize = function () {
+                return new Modes.WidthSize(this.controls);
             };
 
-            ModeController.prototype.明細表示モード = function () {
-                return new Modes.明細表示モード(this.controls);
+            ModeController.prototype.MeisaiHyojiMode = function () {
+                return new Modes.MeisaiHyojiMode(this.controls);
             };
 
-            ModeController.prototype.利用 = function () {
-                return new Modes.利用(this.controls);
+            ModeController.prototype.RiyoType = function () {
+                return new Modes.RiyoType(this.controls);
             };
             return ModeController;
         })();
         ShisetsuNyutaishoRirekiKanri.ModeController = ModeController;
 
         (function (Modes) {
-            var 表示モード = (function () {
-                function 表示モード(controls) {
+            var HyojiMode = (function () {
+                function HyojiMode(controls) {
                     this.controls = controls;
                 }
-                表示モード.prototype.登録 = function () {
+                HyojiMode.prototype.登録 = function () {
                     this.controls.btnAddShisetsuNyutaisho().displayNone = false;
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
@@ -71,7 +71,7 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
                 };
 
-                表示モード.prototype.照会 = function () {
+                HyojiMode.prototype.照会 = function () {
                     this.controls.btnAddShisetsuNyutaisho().displayNone = true;
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
@@ -89,7 +89,7 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
                 };
-                表示モード.prototype.照会選択有 = function () {
+                HyojiMode.prototype.照会選択有 = function () {
                     this.controls.btnAddShisetsuNyutaisho().displayNone = true;
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
@@ -108,7 +108,7 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
                 };
 
-                表示モード.prototype.資格異動 = function () {
+                HyojiMode.prototype.資格異動 = function () {
                     this.controls.btnAddShisetsuNyutaisho().displayNone = false;
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
@@ -127,77 +127,77 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
                 };
-                return 表示モード;
+                return HyojiMode;
             })();
-            Modes.表示モード = 表示モード;
+            Modes.HyojiMode = HyojiMode;
 
-            var 表示heightサイズ = (function () {
-                function 表示heightサイズ(controls) {
+            var HeightSize = (function () {
+                function HeightSize(controls) {
                     this.controls = controls;
                 }
-                表示heightサイズ.prototype.サイズ200 = function () {
+                HeightSize.prototype.サイズ200 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().height = "200";
                 };
 
-                表示heightサイズ.prototype.サイズ250 = function () {
+                HeightSize.prototype.サイズ250 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().height = "250";
                 };
 
-                表示heightサイズ.prototype.サイズ300 = function () {
+                HeightSize.prototype.サイズ300 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().height = "300";
                 };
 
-                表示heightサイズ.prototype.サイズ350 = function () {
+                HeightSize.prototype.サイズ350 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().height = "350";
                 };
 
-                表示heightサイズ.prototype.サイズ400 = function () {
+                HeightSize.prototype.サイズ400 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().height = "400";
                 };
 
-                表示heightサイズ.prototype.サイズ450 = function () {
+                HeightSize.prototype.サイズ450 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().height = "450";
                 };
 
-                表示heightサイズ.prototype.サイズ500 = function () {
+                HeightSize.prototype.サイズ500 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().height = "500";
                 };
-                return 表示heightサイズ;
+                return HeightSize;
             })();
-            Modes.表示heightサイズ = 表示heightサイズ;
+            Modes.HeightSize = HeightSize;
 
-            var 表示widthサイズ = (function () {
-                function 表示widthサイズ(controls) {
+            var WidthSize = (function () {
+                function WidthSize(controls) {
                     this.controls = controls;
                 }
-                表示widthサイズ.prototype.モード1 = function () {
+                WidthSize.prototype.モード1 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().width = "1120";
                 };
 
-                表示widthサイズ.prototype.モード2 = function () {
+                WidthSize.prototype.モード2 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().width = "1070";
                 };
 
-                表示widthサイズ.prototype.モード3 = function () {
+                WidthSize.prototype.モード3 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().width = "990";
                 };
 
-                表示widthサイズ.prototype.モード4 = function () {
+                WidthSize.prototype.モード4 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().width = "890";
                 };
 
-                表示widthサイズ.prototype.モード5 = function () {
+                WidthSize.prototype.モード5 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().width = "810";
                 };
-                return 表示widthサイズ;
+                return WidthSize;
             })();
-            Modes.表示widthサイズ = 表示widthサイズ;
+            Modes.WidthSize = WidthSize;
 
-            var 明細表示モード = (function () {
-                function 明細表示モード(controls) {
+            var MeisaiHyojiMode = (function () {
+                function MeisaiHyojiMode(controls) {
                     this.controls = controls;
                 }
-                明細表示モード.prototype.追加_修正 = function () {
+                MeisaiHyojiMode.prototype.追加_修正 = function () {
                     this.controls.ShisetsuNyutaishoInput().displayNone = false;
                     this.controls.ShisetsuNyutaishoInput().readOnly = false;
 
@@ -210,7 +210,7 @@ var DBZ;
                     this.controls.btnShisetsuNyutaishoTorikeshi().displayNone = false;
                 };
 
-                明細表示モード.prototype.削除 = function () {
+                MeisaiHyojiMode.prototype.削除 = function () {
                     this.controls.ShisetsuNyutaishoInput().displayNone = false;
                     this.controls.ShisetsuNyutaishoInput().readOnly = false;
 
@@ -224,7 +224,7 @@ var DBZ;
                     this.controls.btnShisetsuNyutaishoTorikeshi().disabled = false;
                 };
 
-                明細表示モード.prototype.選択不可 = function () {
+                MeisaiHyojiMode.prototype.選択不可 = function () {
                     this.controls.ShisetsuNyutaishoInput().displayNone = false;
                     this.controls.ShisetsuNyutaishoInput().readOnly = true;
 
@@ -238,19 +238,19 @@ var DBZ;
                     this.controls.btnShisetsuNyutaishoTorikeshi().disabled = true;
                 };
 
-                明細表示モード.prototype.非表示 = function () {
+                MeisaiHyojiMode.prototype.非表示 = function () {
                     this.controls.ShisetsuNyutaishoInput().displayNone = true;
                     this.controls.ShisetsuNyutaishoInput().readOnly = true;
                 };
-                return 明細表示モード;
+                return MeisaiHyojiMode;
             })();
-            Modes.明細表示モード = 明細表示モード;
+            Modes.MeisaiHyojiMode = MeisaiHyojiMode;
 
-            var 利用 = (function () {
-                function 利用(controls) {
+            var RiyoType = (function () {
+                function RiyoType(controls) {
                     this.controls = controls;
                 }
-                利用.prototype.台帳種別表示機能 = function () {
+                RiyoType.prototype.台帳種別表示機能 = function () {
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
@@ -280,7 +280,7 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
                 };
 
-                利用.prototype.全施設対象機能 = function () {
+                RiyoType.prototype.全施設対象機能 = function () {
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
@@ -310,7 +310,7 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
                 };
 
-                利用.prototype.被保険者対象機能 = function () {
+                RiyoType.prototype.被保険者対象機能 = function () {
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
@@ -339,7 +339,7 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
                 };
 
-                利用.prototype.他市町村住所地特例者対象機能 = function () {
+                RiyoType.prototype.他市町村住所地特例者対象機能 = function () {
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
@@ -369,7 +369,7 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
                 };
 
-                利用.prototype.適用除外者対象機能 = function () {
+                RiyoType.prototype.適用除外者対象機能 = function () {
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
@@ -398,9 +398,9 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
                 };
-                return 利用;
+                return RiyoType;
             })();
-            Modes.利用 = 利用;
+            Modes.RiyoType = RiyoType;
         })(ShisetsuNyutaishoRirekiKanri.Modes || (ShisetsuNyutaishoRirekiKanri.Modes = {}));
         var Modes = ShisetsuNyutaishoRirekiKanri.Modes;
     })(DBZ.ShisetsuNyutaishoRirekiKanri || (DBZ.ShisetsuNyutaishoRirekiKanri = {}));
