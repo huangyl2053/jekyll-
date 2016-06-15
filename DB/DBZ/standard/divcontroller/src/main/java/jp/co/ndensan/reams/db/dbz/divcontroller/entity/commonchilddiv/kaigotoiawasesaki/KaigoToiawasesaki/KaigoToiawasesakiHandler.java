@@ -146,19 +146,25 @@ public class KaigoToiawasesakiHandler {
             row.setTxtTantoshaName(div.getToiawasesakiShosai().getDetail2().getTxtTantoshaName().getValue());
             div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().add(row);
         } else {
-            div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(0).setTxtYubinNo(
+            int index;
+            if (共通問合せ先.equals(div.getHdnSelectToiawasesaki())) {
+                index = 0;
+            } else {
+                index = 1;
+            }
+            div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(index).setTxtYubinNo(
                     div.getToiawasesakiShosai().getDetail1().getTxtYubinNo().getValue().value());
-            div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(0).setTxtShozaichi(
+            div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(index).setTxtShozaichi(
                     div.getToiawasesakiShosai().getDetail1().getTxtShozaichi().getValue());
-            div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(0).setTxtChoshaName(
+            div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(index).setTxtChoshaName(
                     div.getToiawasesakiShosai().getDetail1().getTxtChoshaName().getValue());
-            div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(0).setTxtTelNo(
+            div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(index).setTxtTelNo(
                     div.getToiawasesakiShosai().getDetail2().getTxtTelNo().getDomain().value());
-            div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(0).setTxtNaisenNo(
+            div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(index).setTxtNaisenNo(
                     div.getToiawasesakiShosai().getDetail2().getTxtNaisenNo().getValue());
-            div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(0).setTxtBushoName(
+            div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(index).setTxtBushoName(
                     div.getToiawasesakiShosai().getDetail2().getTxtBushoName().getValue());
-            div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(0).setTxtTantoshaName(
+            div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(index).setTxtTantoshaName(
                     div.getToiawasesakiShosai().getDetail2().getTxtTantoshaName().getValue());
         }
         入力表示制御(表示モード_表示);
@@ -168,13 +174,7 @@ public class KaigoToiawasesakiHandler {
      * 「入力取消」を押します。
      */
     public void onbtn_Cancel() {
-        div.getToiawasesakiShosai().getDetail1().getTxtYubinNo().clearValue();
-        div.getToiawasesakiShosai().getDetail1().getTxtShozaichi().clearValue();
-        div.getToiawasesakiShosai().getDetail1().getTxtChoshaName().clearValue();
-        div.getToiawasesakiShosai().getDetail2().getTxtTelNo().clearDomain();
-        div.getToiawasesakiShosai().getDetail2().getTxtNaisenNo().clearValue();
-        div.getToiawasesakiShosai().getDetail2().getTxtBushoName().clearValue();
-        div.getToiawasesakiShosai().getDetail2().getTxtTantoshaName().clearValue();
+        clearData();
         入力表示制御(表示モード_表示);
     }
 
@@ -195,10 +195,12 @@ public class KaigoToiawasesakiHandler {
         }
         KaigoToiawasesaki oneKaigoToiawasesaki = models.get(oneKey);
         KaigoToiawasesakiBuilder oneBuilder = oneKaigoToiawasesaki.createBuilderForEdit();
-        oneBuilder.set郵便番号(new YubinNo(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(0).getTxtYubinNo()));
+        oneBuilder.set郵便番号(new YubinNo(
+                nullTOEmpty(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(0).getTxtYubinNo())));
         oneBuilder.set所在地(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(0).getTxtShozaichi());
         oneBuilder.set庁舎名(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(0).getTxtChoshaName());
-        oneBuilder.set電話番号(new TelNo(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(0).getTxtTelNo()));
+        oneBuilder.set電話番号(new TelNo(
+                nullTOEmpty(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(0).getTxtTelNo())));
         oneBuilder.set内線番号(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(0).getTxtNaisenNo());
         oneBuilder.set部署名(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(0).getTxtBushoName());
         oneBuilder.set担当者名(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(0).getTxtTantoshaName());
@@ -219,10 +221,12 @@ public class KaigoToiawasesakiHandler {
             KaigoToiawasesaki 介護問合せ先) {
         KaigoToiawasesaki twoKaigoToiawasesaki = models.get(twoKey);
         KaigoToiawasesakiBuilder twoBuilder = twoKaigoToiawasesaki.createBuilderForEdit();
-        twoBuilder.set郵便番号(new YubinNo(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtYubinNo()));
+        twoBuilder.set郵便番号(new YubinNo(
+                nullTOEmpty(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtYubinNo())));
         twoBuilder.set所在地(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtShozaichi());
         twoBuilder.set庁舎名(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtChoshaName());
-        twoBuilder.set電話番号(new TelNo(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtTelNo()));
+        twoBuilder.set電話番号(new TelNo(
+                nullTOEmpty(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtTelNo())));
         twoBuilder.set内線番号(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtNaisenNo());
         twoBuilder.set部署名(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtBushoName());
         twoBuilder.set担当者名(div.getToiawasesakiControl().getDgToiawasesakiControl().getDataSource().get(1).getTxtTantoshaName());
@@ -237,13 +241,15 @@ public class KaigoToiawasesakiHandler {
     }
 
     private dgToiawasesakiControl_Row setDgToiawasesaki(KaigoToiawasesaki business, dgToiawasesakiControl_Row row) {
-        row.setTxtYubinNo(nullTOEmpty(business.get郵便番号().value()));
-        row.setTxtShozaichi(nullTOEmpty(business.get所在地()));
-        row.setTxtChoshaName(nullTOEmpty(business.get庁舎名()));
-        row.setTxtTelNo(nullTOEmpty(business.get電話番号().value()));
-        row.setTxtNaisenNo(nullTOEmpty(business.get内線番号()));
-        row.setTxtBushoName(nullTOEmpty(business.get部署名()));
-        row.setTxtTantoshaName(nullTOEmpty(business.get担当者名()));
+        if (business != null) {
+            row.setTxtYubinNo(nullTOEmpty(business.get郵便番号().value()));
+            row.setTxtShozaichi(nullTOEmpty(business.get所在地()));
+            row.setTxtChoshaName(nullTOEmpty(business.get庁舎名()));
+            row.setTxtTelNo(nullTOEmpty(business.get電話番号().value()));
+            row.setTxtNaisenNo(nullTOEmpty(business.get内線番号()));
+            row.setTxtBushoName(nullTOEmpty(business.get部署名()));
+            row.setTxtTantoshaName(nullTOEmpty(business.get担当者名()));
+        }
         return row;
     }
 
@@ -270,20 +276,35 @@ public class KaigoToiawasesakiHandler {
     }
 
     private void 問合せ先詳細の設定(RString 表示モード) {
-        dgToiawasesakiControl_Row row = div.getToiawasesakiControl().getDgToiawasesakiControl().getClickedItem();
-        if (共通問合せ先.equals(div.getHdnSelectToiawasesaki())) {
-            div.getToiawasesakiShosai().getLblHensyuTaisho().setText(
-                    row.getTxtToiawasesaki());
-        } else if (帳票独自問合せ先.equals(div.getHdnSelectToiawasesaki()) || 表示モード_追加.equals(表示モード)) {
-            div.getToiawasesakiShosai().getLblHensyuTaisho().setText(問合せ先_帳票独自);
+        if (表示モード_追加.equals(表示モード)) {
+            clearData();
+        } else {
+            dgToiawasesakiControl_Row row = div.getToiawasesakiControl().getDgToiawasesakiControl().getClickedItem();
+            if (共通問合せ先.equals(div.getHdnSelectToiawasesaki())) {
+                div.getToiawasesakiShosai().getLblHensyuTaisho().setText(
+                        row.getTxtToiawasesaki());
+            } else if (帳票独自問合せ先.equals(div.getHdnSelectToiawasesaki())) {
+                div.getToiawasesakiShosai().getLblHensyuTaisho().setText(問合せ先_帳票独自);
+            }
+            div.getToiawasesakiShosai().getDetail1().getTxtYubinNo().setValue(new YubinNo(nullTOEmpty(row.getTxtYubinNo())));
+            div.getToiawasesakiShosai().getDetail1().getTxtShozaichi().setValue(row.getTxtShozaichi());
+            div.getToiawasesakiShosai().getDetail1().getTxtChoshaName().setValue(row.getTxtChoshaName());
+            div.getToiawasesakiShosai().getDetail2().getTxtTelNo().setDomain(new TelNo(nullTOEmpty(row.getTxtTelNo())));
+            div.getToiawasesakiShosai().getDetail2().getTxtNaisenNo().setValue(row.getTxtNaisenNo());
+            div.getToiawasesakiShosai().getDetail2().getTxtBushoName().setValue(row.getTxtBushoName());
+            div.getToiawasesakiShosai().getDetail2().getTxtTantoshaName().setValue(row.getTxtTantoshaName());
         }
-        div.getToiawasesakiShosai().getDetail1().getTxtYubinNo().setValue(new YubinNo(row.getTxtYubinNo()));
-        div.getToiawasesakiShosai().getDetail1().getTxtShozaichi().setValue(row.getTxtShozaichi());
-        div.getToiawasesakiShosai().getDetail1().getTxtChoshaName().setValue(row.getTxtChoshaName());
-        div.getToiawasesakiShosai().getDetail2().getTxtTelNo().setDomain(new TelNo(row.getTxtTelNo()));
-        div.getToiawasesakiShosai().getDetail2().getTxtNaisenNo().setValue(row.getTxtNaisenNo());
-        div.getToiawasesakiShosai().getDetail2().getTxtBushoName().setValue(row.getTxtBushoName());
-        div.getToiawasesakiShosai().getDetail2().getTxtTantoshaName().setValue(row.getTxtTantoshaName());
+    }
+
+    private void clearData() {
+        div.getToiawasesakiShosai().getLblHensyuTaisho().setText(RString.EMPTY);
+        div.getToiawasesakiShosai().getDetail1().getTxtYubinNo().clearValue();
+        div.getToiawasesakiShosai().getDetail1().getTxtShozaichi().clearValue();
+        div.getToiawasesakiShosai().getDetail1().getTxtChoshaName().clearValue();
+        div.getToiawasesakiShosai().getDetail2().getTxtTelNo().clearDomain();
+        div.getToiawasesakiShosai().getDetail2().getTxtNaisenNo().clearValue();
+        div.getToiawasesakiShosai().getDetail2().getTxtBushoName().clearValue();
+        div.getToiawasesakiShosai().getDetail2().getTxtTantoshaName().clearValue();
     }
 
     private RString nullTOEmpty(RString 項目) {
