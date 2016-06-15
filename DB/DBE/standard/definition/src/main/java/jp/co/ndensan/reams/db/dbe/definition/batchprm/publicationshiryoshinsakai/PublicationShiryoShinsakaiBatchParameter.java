@@ -5,6 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.publicationshiryoshinsakai;
 
+import jp.co.ndensan.reams.db.dbe.definition.processprm.publicationshiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.publicationshiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.publicationshiryoshinsakai.IinTuikaSiryoProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.publicationshiryoshinsakai.IinTuutishoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -73,7 +77,7 @@ public class PublicationShiryoShinsakaiBatchParameter extends BatchParameterBase
     private RString sakuseiJoken;
     @BatchParameter(key = BANGOSTART, name = "開始資料番号")
     private RString bangoStart;
-    @BatchParameter(key = BANGOEND, name = "開始資料番号")
+    @BatchParameter(key = BANGOEND, name = "終了資料番号")
     private RString bangoEnd;
     @BatchParameter(key = CHOYOJIMUHUSU, name = "事務局用部数")
     private RString choyoJimuHusu;
@@ -128,7 +132,7 @@ public class PublicationShiryoShinsakaiBatchParameter extends BatchParameterBase
      * @param printHou 印刷方法
      * @param sakuseiJoken 作成条件
      * @param bangoStart 開始資料番号
-     * @param bangoEnd 開始資料番号
+     * @param bangoEnd 終了資料番号
      * @param choyoJimuHusu 事務局用部数
      * @param chohyoIinHusu 審査会委員用部数
      * @param choyoJimu_tuutishoFalg 事務_審査会開催通知書フラグ
@@ -203,5 +207,64 @@ public class PublicationShiryoShinsakaiBatchParameter extends BatchParameterBase
         this.chohyoIin_tokkiJikouHanteiFalg = chohyoIin_tokkiJikouHanteiFalg;
         this.chohyoIin_ikenshoFalg = chohyoIin_ikenshoFalg;
         this.chohyoIin_hanteiFalg = chohyoIin_hanteiFalg;
+    }
+
+    /**
+     * 審査会開催のお知らせ一覧情報ProcessParameterに転換します。
+     *
+     * @return IinTuutishoProcessParameter
+     */
+    public IinTuutishoProcessParameter toIinTuutishoProcessParameter() {
+        return new IinTuutishoProcessParameter(
+                shinsakaiKaisaiNo,
+                shuturyokuSutairu,
+                printHou,
+                chohyoIinHusu);
+    }
+
+    /**
+     * 委員用特記事項と一次判定結果票情報ProcessParameterに転換します。
+     *
+     * @return IinTokkiJikouItiziHanteiProcessParameter
+     */
+    public IinTokkiJikouItiziHanteiProcessParameter toIinTokkiJikouItiziHanteiProcessParameter() {
+        return new IinTokkiJikouItiziHanteiProcessParameter(shinsakaiKaisaiNo,
+                shuturyokuJun,
+                sakuseiJoken,
+                bangoStart,
+                bangoEnd,
+                shuturyokuSutairu,
+                printHou,
+                chohyoIinHusu,
+                shinsakaiKaisaiYoteiYMD,
+                shinsakaiKaishiYoteiTime,
+                gogitaiName);
+    }
+
+    /**
+     * 委員用介護認定審査対象者一覧表情報ProcessParameterに転換します。
+     *
+     * @return IinTokkiJikouItiziHanteiProcessParameter
+     */
+    public IinShinsakaiIinJohoProcessParameter toIinShinsakaiIinJohoProcessParameter() {
+        return new IinShinsakaiIinJohoProcessParameter(gogitaiNo,
+                shinsakaiKaisaiYoteiYMD,
+                shinsakaiKaisaiNo,
+                shuturyokuJun,
+                shuturyokuSutairu,
+                printHou,
+                chohyoIinHusu);
+    }
+
+    /**
+     * 介護認定追加資料鑑情報ProcessParameterに転換します。
+     *
+     * @return IinTuikaSiryoProcessParameter
+     */
+    public IinTuikaSiryoProcessParameter toIinTuikaSiryoProcessParameter() {
+        return new IinTuikaSiryoProcessParameter(shinsakaiKaisaiNo,
+                shuturyokuSutairu,
+                printHou,
+                chohyoIinHusu);
     }
 }
