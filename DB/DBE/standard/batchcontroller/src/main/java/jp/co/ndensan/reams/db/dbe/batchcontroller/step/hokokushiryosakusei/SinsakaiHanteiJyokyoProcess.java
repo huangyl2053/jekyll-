@@ -280,7 +280,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + 非該当要介護2被保険者数 + 非該当要介護3被保険者数 + 非該当要介護4被保険者数 + 非該当要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.isEmptyGogitaiNo() ? 全合議体 : current.getGogitaiMei(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
