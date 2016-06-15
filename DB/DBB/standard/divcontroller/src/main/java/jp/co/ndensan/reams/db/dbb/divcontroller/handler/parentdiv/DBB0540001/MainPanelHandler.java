@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.Main
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.choshuHouhou_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
-import jp.co.ndensan.reams.db.dbb.service.core.kanri.ChosyuHohoHenko;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -137,16 +136,12 @@ public class MainPanelHandler {
     /**
      * 世帯所得情報一覧エリアの設定
      *
-     * @param 賦課年度 賦課年度
-     * @param 被保険者番号 被保険者番号
+     * @param 賦課年度 FlexibleYear
+     * @param 被保険者番号 HihokenshaNo
+     * @param serviceResult ChoshuHohoResult
      */
-    public void set世帯所得情報一覧エリア(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
-
-        ChoshuHohoResult serviceResult = ChosyuHohoHenko.createInstance()
-                .getChosyuHoho(賦課年度, 被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.徴収方法データ, serviceResult.getHoho());
-        ViewStateHolder.put(ViewStateKeys.特別徴収停止日時, serviceResult.getHoho().get特別徴収停止日時());
-        ViewStateHolder.put(ViewStateKeys.特別徴収停止事由コード, serviceResult.getHoho().get特別徴収停止事由コード());
+    public void set世帯所得情報一覧エリア(FlexibleYear 賦課年度,
+            HihokenshaNo 被保険者番号, ChoshuHohoResult serviceResult) {
         RDate fukaNendo = new RDate(賦課年度.wareki().firstYear(FirstYear.ICHI_NEN).toDateString().toString());
         div.getChoshuInfo().getTxtFukaNendo().setValue(fukaNendo);
         if (null != serviceResult.getHoho().get本徴収_年金コード()) {
@@ -254,10 +249,11 @@ public class MainPanelHandler {
      *
      * @param 賦課年度 賦課年度
      * @param 被保険者番号 被保険者番号
+     * @param 徴収方法データ ChoshuHoho
      */
-    public void saveボタンを押下(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
-
-        dataSaveEdit(賦課年度, 被保険者番号);
+    public void saveボタンを押下(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号,
+            jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法データ) {
+        dataSaveEdit(賦課年度, 被保険者番号, 徴収方法データ);
     }
 
     private DataGridCellBgColor setBgColor(RString コード) {
@@ -602,18 +598,16 @@ public class MainPanelHandler {
         }
     }
 
-    private void dataSaveEdit(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
+    private void dataSaveEdit(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号,
+            jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法データ) {
         int 現在の月;
         final int three = 3;
         YMDHMS 特別徴収停止日時 = null;
         RString 特別徴収停止事由コード = null;
         RDate システム日付 = RDate.getNowDate();
-        jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法データ = ViewStateHolder.
-                get(ViewStateKeys.徴収方法データ, jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho.class);
         jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法_変更後
                 = new jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho(
                         賦課年度, 被保険者番号, 徴収方法データ.get履歴番号() + 1);
-
         RStringBuilder builder = new RStringBuilder(賦課年度.plusYear(1).toString());
         RString 賦課年度日付 = builder.append(RSTR_0331).toRString();
         RDate 賦課日付 = new RDate(賦課年度日付.toString());
