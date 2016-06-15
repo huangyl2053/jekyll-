@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.ninteiinput;
 
+import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NinteiInputNaiyo {
+public class NinteiInputNaiyo implements Serializable {
 
     private RString 認定区分;
     private List<RString> みなし更新認定;
