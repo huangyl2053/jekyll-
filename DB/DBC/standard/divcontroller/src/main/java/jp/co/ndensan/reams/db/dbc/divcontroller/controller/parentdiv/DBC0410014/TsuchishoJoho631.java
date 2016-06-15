@@ -6,7 +6,10 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410014;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410014.TsuchishoJoho631Div;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
+import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -23,7 +26,9 @@ public class TsuchishoJoho631 {
      * @return ResponseData
      */
     public ResponseData<TsuchishoJoho631Div> onLoad(TsuchishoJoho631Div div) {
-        div.getCcdKokurenJohoTorikomi().onLoadMode1();
+        KokuhorenDataTorikomiViewStateClass parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
+                KokuhorenDataTorikomiViewStateClass.class);
+        div.getCcdKokurenJohoTorikomi().initialize(parmater);
         return ResponseData.of(div).respond();
 
     }
