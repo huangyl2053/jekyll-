@@ -2793,9 +2793,15 @@
             AND A."nijiHanteiNinteiYukoKaishiYMD" <![CDATA[<=]]> #{kijyunYMD}
             AND #{kijyunYMD} <![CDATA[<=]]> A."nijiHanteiNinteiYukoShuryoYMD"
         </if>
-        <if test="!isEmptyGogitaiNo">
-            AND E."gogitaiNo" = #{gogitaiNo}
-        </if>
+        <choose>
+            <when test="!isEmptyGogitaiNo">
+                AND E."gogitaiNo" = #{gogitaiNo}
+            </when>
+            <otherwise>
+                AND E."gogitaiNo" IN
+                <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
+            </otherwise>
+        </choose>
     </sql>
 
 </mapper>

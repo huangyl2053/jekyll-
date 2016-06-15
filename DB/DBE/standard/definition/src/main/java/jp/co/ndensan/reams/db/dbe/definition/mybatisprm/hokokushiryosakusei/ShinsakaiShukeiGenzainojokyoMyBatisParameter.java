@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei;
 
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -25,6 +26,7 @@ public class ShinsakaiShukeiGenzainojokyoMyBatisParameter implements IMyBatisPar
     private boolean isEmptyKijyunYMD;
     private RString kijyunYMD;
     private int gogitaiNo;
+    private List<Integer> gogitaiNoList;
     private boolean isTaishoTsukiKubun;
     private boolean isTaishoGeppiKubun;
     private RString taishoNendoYM;
@@ -43,6 +45,7 @@ public class ShinsakaiShukeiGenzainojokyoMyBatisParameter implements IMyBatisPar
      * @param hihokenshaKubun 被保険者区分
      * @param isEmptyGogitaiNo 空合議体番号
      * @param gogitaiNo 合議体番号
+     * @param gogitaiNoList 合議体番号List
      * @param isEmptyKijyunYMD 空基準日
      * @param kijyunYMD 基準日
      * @param isTaishoTsukiKubun 対象月編集区分
@@ -61,6 +64,7 @@ public class ShinsakaiShukeiGenzainojokyoMyBatisParameter implements IMyBatisPar
             RString hihokenshaKubun,
             boolean isEmptyGogitaiNo,
             int gogitaiNo,
+            List<Integer> gogitaiNoList,
             boolean isEmptyKijyunYMD,
             RString kijyunYMD,
             boolean isTaishoTsukiKubun,
@@ -77,6 +81,7 @@ public class ShinsakaiShukeiGenzainojokyoMyBatisParameter implements IMyBatisPar
         this.hihokenshaKubun = hihokenshaKubun;
         this.isEmptyGogitaiNo = isEmptyGogitaiNo;
         this.gogitaiNo = gogitaiNo;
+        this.gogitaiNoList = gogitaiNoList;
         this.isEmptyKijyunYMD = isEmptyKijyunYMD;
         this.kijyunYMD = kijyunYMD;
         this.isTaishoTsukiKubun = isTaishoTsukiKubun;

@@ -154,12 +154,4 @@ public interface IHokokuShiryoSakuSeiMapper {
      * @return CsvKenHokokuShiryoEntity
      */
     List<CsvKenHokokuShiryoEntity> getCsvKenHokokuShiryoSakusei(CsvKenHokokuShiryoSakuseiMyBatisParameter parameter);
-
-    /**
-     * システム日付で合議体番号を取得します。
-     *
-     * @param systemDate FlexibleDate
-     * @return List<Integer>
-     */
-    List<Integer> getGogitaiNoForSyukei(FlexibleDate systemDate);
 }
