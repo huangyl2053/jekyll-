@@ -151,8 +151,8 @@ public class KaigoJyuminhyouHandler {
     public void onClick_KakuButton() {
         div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().setSelectable(true);
         div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().setModifyButtonState(DataGridButtonState.Enabled);
+        div.getKonkaiInfoInput().setIsOpen(false);
         if (div.getKonkaiInfoInput().getChkZenken().isAllSelected()) {
-            div.getKonkaiInfoInput().setIsOpen(false);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
             List<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgRowList = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getDataSource();
             int rowcount = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().getId();
@@ -164,7 +164,6 @@ public class KaigoJyuminhyouHandler {
             div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().setDataSource(dgRowList);
         } else {
             if (div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().getValue() == null) {
-                div.getKonkaiInfoInput().setIsOpen(false);
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
                 List<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgRowList = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getDataSource();
                 int rowcount = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().getId();
@@ -175,7 +174,6 @@ public class KaigoJyuminhyouHandler {
                 dgRowList.set(rowcount, dgRow);
                 div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().setDataSource(dgRowList);
             } else {
-                div.getKonkaiInfoInput().setIsOpen(false);
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
                 List<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgRowList = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getDataSource();
                 int rowcount = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().getId();
