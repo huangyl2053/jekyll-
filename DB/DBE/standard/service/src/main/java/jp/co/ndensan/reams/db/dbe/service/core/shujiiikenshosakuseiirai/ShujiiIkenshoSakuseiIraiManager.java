@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshosakuseiirai;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshosakuseiirai.ShujiiIraiAtenaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshosakuseiirai.Shujiiikenshosakuseiirai;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiParameter;
@@ -105,15 +105,15 @@ public class ShujiiIkenshoSakuseiIraiManager {
      * @return 要介護認定申請情報
      */
     @Transaction
-    public SearchResult<NinteiShinseiJoho> get要介護認定申請情報(ShujiiIkenshoSakuseiIraiParameter param) {
+    public SearchResult<NinteiShinseiJoho2> get要介護認定申請情報(ShujiiIkenshoSakuseiIraiParameter param) {
         IShujiiIkenshoSakuseiIraiMapper mapper = mapperProvider.create(IShujiiIkenshoSakuseiIraiMapper.class);
         List<DbT5101NinteiShinseiJohoEntity> entityList = mapper.get要介護認定申請情報(param);
-        List<NinteiShinseiJoho> businessList = new ArrayList<>();
+        List<NinteiShinseiJoho2> businessList = new ArrayList<>();
         if (entityList.isEmpty()) {
             return SearchResult.of(Collections.<Shujiiikenshosakuseiirai>emptyList(), 0, false);
         }
         for (DbT5101NinteiShinseiJohoEntity entity : entityList) {
-            businessList.add(new NinteiShinseiJoho(entity));
+            businessList.add(new NinteiShinseiJoho2(entity));
         }
         return SearchResult.of(businessList, businessList.size(), true);
     }
@@ -138,7 +138,7 @@ public class ShujiiIkenshoSakuseiIraiManager {
      * @param state 更新状態
      */
     @Transaction
-    public void save要介護認定申請情報(NinteiShinseiJoho 要介護認定申請情報, EntityDataState state) {
+    public void save要介護認定申請情報(NinteiShinseiJoho2 要介護認定申請情報, EntityDataState state) {
         DbT5101NinteiShinseiJohoEntity entity = 要介護認定申請情報.toEntity();
         entity.setState(state);
         要介護認定申請情報dac.save(entity);

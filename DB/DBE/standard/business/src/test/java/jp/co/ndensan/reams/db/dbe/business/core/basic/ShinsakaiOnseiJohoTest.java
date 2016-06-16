@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJoho2;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5512ShinsakaiOnseiJohoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
@@ -21,13 +21,13 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * {@link ShinsakaiOnseiJoho}のテストクラスです。
+ * {@link ShinsakaiOnseiJoho2}のテストクラスです。
  */
 @RunWith(Enclosed.class)
 @Ignore
 public class ShinsakaiOnseiJohoTest extends DbeTestBase {
 
-    private static DbT5512ShinsakaiOnseiJohoEntity ShinsakaiOnseiJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
+    private static DbT5512ShinsakaiOnseiJohoEntity ShinsakaiOnseiJoho2Entity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static RString 介護認定審査会開催番号;
@@ -42,24 +42,24 @@ public class ShinsakaiOnseiJohoTest extends DbeTestBase {
 
     public static class 主キーコンストラクタテスト extends DbeTestBase {
 
-        private static ShinsakaiOnseiJoho sut;
+        private static ShinsakaiOnseiJoho2 sut;
 
         @BeforeClass
         public static void setUpClass() {
-            ShinsakaiOnseiJohoEntity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
+            ShinsakaiOnseiJoho2Entity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
         }
 
 //TODO 主キー名を置換してください
         @Test
         public void 指定したキーが保持するDbT5512ShinsakaiOnseiJohoEntityにセットされている() {
-            sut = new ShinsakaiOnseiJoho(介護認定審査会開催番号, 連番);
+            sut = new ShinsakaiOnseiJoho2(介護認定審査会開催番号, 連番);
             assertThat(sut.get介護認定審査会開催番号(), is(介護認定審査会開催番号));
             assertThat(sut.get連番(), is(連番));
         }
 
         @Test
-        public void 指定したキーが保持するShinsakaiOnseiJohoIdentifierにセットされている() {
-            sut = new ShinsakaiOnseiJoho(介護認定審査会開催番号, 連番);
+        public void 指定したキーが保持するShinsakaiOnseiJoho2Identifierにセットされている() {
+            sut = new ShinsakaiOnseiJoho2(介護認定審査会開催番号, 連番);
             assertThat(sut.identifier().get介護認定審査会開催番号(), is(介護認定審査会開催番号));
             assertThat(sut.identifier().get連番(), is(連番));
         }
@@ -67,22 +67,22 @@ public class ShinsakaiOnseiJohoTest extends DbeTestBase {
 
     public static class Entityコンストラクタテスト extends DbeTestBase {
 
-        private static ShinsakaiOnseiJoho sut;
+        private static ShinsakaiOnseiJoho2 sut;
 
         @BeforeClass
         public static void setUpClass() {
-            ShinsakaiOnseiJohoEntity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
+            ShinsakaiOnseiJoho2Entity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
         }
 
         @Test(expected = NullPointerException.class)
         public void 指定したEntityがnullである場合_NullPointerExceptionとなる() {
-            sut = new ShinsakaiOnseiJoho(null);
+            sut = new ShinsakaiOnseiJoho2(null);
         }
 
         @Test
         public void 指定したDbT5512ShinsakaiOnseiJohoEntityのキー情報を識別子が持つ() {
 
-            sut = new ShinsakaiOnseiJoho(ShinsakaiOnseiJohoEntity);
+            sut = new ShinsakaiOnseiJoho2(ShinsakaiOnseiJoho2Entity);
 
             assertThat(sut.identifier().get介護認定審査会開催番号(), is(介護認定審査会開催番号));
             assertThat(sut.identifier().get連番(), is(連番));
@@ -91,57 +91,57 @@ public class ShinsakaiOnseiJohoTest extends DbeTestBase {
 
     public static class getterテスト extends DbeTestBase {
 
-        private static ShinsakaiOnseiJoho sut;
+        private static ShinsakaiOnseiJoho2 sut;
 
         @BeforeClass
         public static void setUpClass() {
-            ShinsakaiOnseiJohoEntity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
+            ShinsakaiOnseiJoho2Entity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
 
-            sut = new ShinsakaiOnseiJoho(ShinsakaiOnseiJohoEntity);
+            sut = new ShinsakaiOnseiJoho2(ShinsakaiOnseiJoho2Entity);
         }
 
         @Test
         public void get介護認定審査会開催番号は_entityが持つ介護認定審査会開催番号を返す() {
-            assertThat(sut.get介護認定審査会開催番号(), is(ShinsakaiOnseiJohoEntity.getShinsakaiKaisaiNo()));
+            assertThat(sut.get介護認定審査会開催番号(), is(ShinsakaiOnseiJoho2Entity.getShinsakaiKaisaiNo()));
         }
 
         @Test
         public void get連番は_entityが持つ連番を返す() {
-            assertThat(sut.get連番(), is(ShinsakaiOnseiJohoEntity.getRenban()));
+            assertThat(sut.get連番(), is(ShinsakaiOnseiJoho2Entity.getRenban()));
         }
 
         @Test
         public void get審査会音声ファイルは_entityが持つ審査会音声ファイルを返す() {
-            assertThat(sut.get審査会音声ファイル(), is(ShinsakaiOnseiJohoEntity.getShinsakaiOnseiFile()));
+            assertThat(sut.get審査会音声ファイル(), is(ShinsakaiOnseiJoho2Entity.getShinsakaiOnseiFile()));
         }
     }
 
     public static class toEntityテスト extends DbeTestBase {
 
-        private static ShinsakaiOnseiJoho sut;
+        private static ShinsakaiOnseiJoho2 sut;
 
         @BeforeClass
         public static void setUpClass() {
-            ShinsakaiOnseiJohoEntity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
+            ShinsakaiOnseiJoho2Entity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
 
-            sut = new ShinsakaiOnseiJoho(ShinsakaiOnseiJohoEntity);
+            sut = new ShinsakaiOnseiJoho2(ShinsakaiOnseiJoho2Entity);
         }
 
         @Test
         public void toEntityはコンストラクタで設定したentityと異なるインスタンスを返す() {
-            assertThat(sut.toEntity(), not(ShinsakaiOnseiJohoEntity));
+            assertThat(sut.toEntity(), not(ShinsakaiOnseiJoho2Entity));
         }
     }
 
     public static class SerializationProxyテスト extends DbeTestBase {
 
-        private static ShinsakaiOnseiJoho sut;
+        private static ShinsakaiOnseiJoho2 sut;
 
         @BeforeClass
         public static void setUpClass() {
-            ShinsakaiOnseiJohoEntity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
+            ShinsakaiOnseiJoho2Entity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
 
-            sut = new ShinsakaiOnseiJoho(ShinsakaiOnseiJohoEntity);
+            sut = new ShinsakaiOnseiJoho2(ShinsakaiOnseiJoho2Entity);
         }
 
         @Test
@@ -152,48 +152,48 @@ public class ShinsakaiOnseiJohoTest extends DbeTestBase {
 
     public static class deletedテスト extends DbeTestBase {
 
-        private static ShinsakaiOnseiJoho sut;
-        private static ShinsakaiOnseiJoho result;
+        private static ShinsakaiOnseiJoho2 sut;
+        private static ShinsakaiOnseiJoho2 result;
 
         @BeforeClass
         public static void setUpClass() {
-            ShinsakaiOnseiJohoEntity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
+            ShinsakaiOnseiJoho2Entity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
 
         }
 
         @Test
-        public void ShinsakaiOnseiJohoが保持するDbT5512ShinsakaiOnseiJohoEntityのEntityDataStateがUnchangedである場合_deletedメソッド_によりShinsakaiOnseiJohoが保持するDbT5512ShinsakaiOnseiJohoEntityのEntityDataStateがDeletedに指定されたShinsakaiOnseiJohoが返る() {
-            sut = TestSupport.setStateShinsakaiOnseiJoho(EntityDataState.Unchanged);
+        public void ShinsakaiOnseiJoho2が保持するDbT5512ShinsakaiOnseiJohoEntityのEntityDataStateがUnchangedである場合_deletedメソッド_によりShinsakaiOnseiJoho2が保持するDbT5512ShinsakaiOnseiJohoEntityのEntityDataStateがDeletedに指定されたShinsakaiOnseiJoho2が返る() {
+            sut = TestSupport.setStateShinsakaiOnseiJoho2(EntityDataState.Unchanged);
             result = sut.deleted();
             assertThat(result.toEntity().getState(), is(EntityDataState.Deleted));
         }
 
         @Test
-        public void ShinsakaiOnseiJohoが保持するDbT5512ShinsakaiOnseiJohoEntityのEntityDataStateがModifiedである場合_deletedメソッド_によりShinsakaiOnseiJohoが保持するDbT5512ShinsakaiOnseiJohoEntityのEntityDataStateがDeletedに指定されたShinsakaiOnseiJohoが返る() {
-            sut = TestSupport.setStateShinsakaiOnseiJoho(EntityDataState.Modified);
+        public void ShinsakaiOnseiJoho2が保持するDbT5512ShinsakaiOnseiJohoEntityのEntityDataStateがModifiedである場合_deletedメソッド_によりShinsakaiOnseiJoho2が保持するDbT5512ShinsakaiOnseiJohoEntityのEntityDataStateがDeletedに指定されたShinsakaiOnseiJoho2が返る() {
+            sut = TestSupport.setStateShinsakaiOnseiJoho2(EntityDataState.Modified);
             result = sut.deleted();
             assertThat(result.toEntity().getState(), is(EntityDataState.Deleted));
         }
 
         @Test
-        public void ShinsakaiOnseiJohoが保持するDbT5512ShinsakaiOnseiJohoEntityのEntityDataStateがDeletedである場合_deletedメソッド_によりShinsakaiOnseiJohoが保持するDbT5512ShinsakaiOnseiJohoEntityのEntityDataStateがDeletedに指定されたShinsakaiOnseiJohoが返る() {
-            sut = TestSupport.setStateShinsakaiOnseiJoho(EntityDataState.Deleted);
+        public void ShinsakaiOnseiJoho2が保持するDbT5512ShinsakaiOnseiJohoEntityのEntityDataStateがDeletedである場合_deletedメソッド_によりShinsakaiOnseiJoho2が保持するDbT5512ShinsakaiOnseiJohoEntityのEntityDataStateがDeletedに指定されたShinsakaiOnseiJoho2が返る() {
+            sut = TestSupport.setStateShinsakaiOnseiJoho2(EntityDataState.Deleted);
             result = sut.deleted();
             assertThat(result.toEntity().getState(), is(EntityDataState.Deleted));
         }
 
         @Test(expected = IllegalStateException.class)
-        public void ShinsakaiOnseiJohoが保持するDbT5512ShinsakaiOnseiJohoEntityのEntityDataStateがAddedである場合_deletedメソッド_により_IllegalStateExceptionが発火する() {
-            sut = TestSupport.setStateShinsakaiOnseiJoho(EntityDataState.Added);
+        public void ShinsakaiOnseiJoho2が保持するDbT5512ShinsakaiOnseiJohoEntityのEntityDataStateがAddedである場合_deletedメソッド_により_IllegalStateExceptionが発火する() {
+            sut = TestSupport.setStateShinsakaiOnseiJoho2(EntityDataState.Added);
             result = sut.deleted();
         }
     }
 
     private static class TestSupport {
 
-        public static ShinsakaiOnseiJoho setStateShinsakaiOnseiJoho(EntityDataState parentState) {
-            ShinsakaiOnseiJohoEntity.setState(parentState);
-            return new ShinsakaiOnseiJoho(ShinsakaiOnseiJohoEntity);
+        public static ShinsakaiOnseiJoho2 setStateShinsakaiOnseiJoho2(EntityDataState parentState) {
+            ShinsakaiOnseiJoho2Entity.setState(parentState);
+            return new ShinsakaiOnseiJoho2(ShinsakaiOnseiJoho2Entity);
         }
     }
 }

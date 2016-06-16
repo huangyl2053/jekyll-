@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.konicho.taishouwaritsuke;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.KohoshaIchiran;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.TaishouWaritsukeHead;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.Taishouichiran;
@@ -111,13 +111,13 @@ public class TaishouWaritsukeFinder {
      * @param 申請書管理番号 申請書管理番号
      * @return 要介護認定申請情報
      */
-    public NinteiShinseiJoho get申請書情報by申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
+    public NinteiShinseiJoho2 get申請書情報by申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
         DbT5101NinteiShinseiJohoDac dac = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
         DbT5101NinteiShinseiJohoEntity entity = dac.get申請書情報by申請書管理番号(申請書管理番号);
         if (entity != null) {
-            return new NinteiShinseiJoho(entity);
+            return new NinteiShinseiJoho2(entity);
         } else {
-            return new NinteiShinseiJoho(new DbT5101NinteiShinseiJohoEntity());
+            return new NinteiShinseiJoho2(new DbT5101NinteiShinseiJohoEntity());
         }
     }
 

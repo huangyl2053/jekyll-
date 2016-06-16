@@ -197,7 +197,7 @@ public class KaigoNinteiShinsakai {
         state.put(メニューID_介護認定審査会審査対象データ出力, DBE5100001StateName.データ出力_モバイル);
         state.put(メニューID_介護認定審査会対象者割付, DBE5100001StateName.対象者割付);
         state.put(メニューID_介護認定審査会資料作成, DBE5100001StateName.審査会資料);
-        state.put(メニューID_介護認定審査会委員事前審査結果登録, DBE5100001StateName.事前結果登録);
+        state.put(メニューID_介護認定審査会委員事前審査結果登録, DBE5100001StateName.事前審査結果登録);
         state.put(メニューID_審査会開催結果登録, DBE5100001StateName.審査結果登録);
         state.put(メニューID_審査会審査結果登録, DBE5100001StateName.審査結果登録);
         state.put(メニューID_介護認定審査会審査結果データ取込み, DBE5100001StateName.データ取込み_モバイル);

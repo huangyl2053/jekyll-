@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ikensho;
 
+import java.util.Arrays;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun;
@@ -30,7 +31,7 @@ public final class ShujiiIkenshoFactory {
     public static ShujiiIkensho<ShujiiIkenshoItemKubun, IShujiiIkenshoItem> create主治医意見書Instance(KoroshoIFKubun 厚労省IF識別区分) {
         switch (厚労省IF識別区分) {
             case V09A:
-                return new ShujiiIkensho(new ShujiiIkenshoRegulationOf2009().get意見書定義(), ShujiiIkenshoItemGroupOf2009.values());
+                return new ShujiiIkensho(new ShujiiIkenshoRegulationOf2009().get意見書定義(), Arrays.asList(ShujiiIkenshoItemGroupOf2009.values()));
             default:
                 return null;
         }

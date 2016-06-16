@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakuhenkorireki;
 
+import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -196,7 +197,10 @@ public class ShikakuHenkoRirekiHandler {
         row.setHenkoJiyu(model.getShikakuHenkoJiyuCode());
         row.getHenkoDate().setValue(model.getShikakuHenkoYMD());
         row.getHenkoTodokedeDate().setValue(model.getShikakuHenkoTodokedeYMD());
-        row.setSochimotoHokensha(model.getKoikinaiTokureiSochimotoShichosonCode().getColumnValue());
+        LasdecCode sochimotoShichosonCode = model.getKoikinaiTokureiSochimotoShichosonCode();
+        if (sochimotoShichosonCode != null) {
+            row.setSochimotoHokensha(sochimotoShichosonCode.getColumnValue());
+        }
 //        row.setKyuHokensha(getKyuHokenshaName(model.getKyuShichosonCode()));
         row.setKyuHokensha(getKyuHokenshaName());
         if (model.getLastUpdateTimestamp() != null) {
@@ -250,6 +254,7 @@ public class ShikakuHenkoRirekiHandler {
             case Delete:
                 deleteEntryData();
                 break;
+            default:
         }
     }
 
@@ -304,6 +309,7 @@ public class ShikakuHenkoRirekiHandler {
             case Delete:
 //                list = update履歴(shikakuHenkoRirekiDiv, ShikakuHenkoMapper.delete());
                 list = update履歴();
+                break;
             default:
                 break;
         }
@@ -441,8 +447,9 @@ public class ShikakuHenkoRirekiHandler {
             switch (editingModel.getState()) {
                 case Modified:
                     DbT1001HihokenshaDaichoEntity addingModel = editingModel;
-                    addingModel.getIdoYMD().plusDay(1);
+                    addingModel.setIdoYMD((addingModel.getIdoYMD().plusDay(1)));
                     mergedList.add(addingModel);
+                    break;
                 case Deleted:
                     baseModel.setIsDeleted(true);
                     mergedList.add(baseModel);
@@ -516,19 +523,23 @@ public class ShikakuHenkoRirekiHandler {
 
     private boolean equalsMeisaiTo(DbT1001HihokenshaDaichoEntity targetModel) {
 
-        if (!targetModel.getShikakuHenkoYMD().equals(shikakuHenkoRirekiDiv.getTxtHenkoDate().getValue())) {
+        if (!Objects.equal(targetModel.getShikakuHenkoYMD(), (shikakuHenkoRirekiDiv.getTxtHenkoDate().getValue()))) {
             return false;
         }
-        if (!targetModel.getShikakuHenkoTodokedeYMD().equals(shikakuHenkoRirekiDiv.getTxtHenkoTodokedeDate().getValue())) {
+        if (!Objects.equal(targetModel.getShikakuHenkoTodokedeYMD(), (shikakuHenkoRirekiDiv.getTxtHenkoTodokedeDate().getValue()))) {
             return false;
         }
-        if (!targetModel.getShikakuHenkoJiyuCode().equals(shikakuHenkoRirekiDiv.getDdlHenkoJiyu().getSelectedKey())) {
+        if (!Objects.equal(targetModel.getShikakuHenkoJiyuCode(), (shikakuHenkoRirekiDiv.getDdlHenkoJiyu().getSelectedKey()))) {
             return false;
         }
-        if (!targetModel.getKoikinaiTokureiSochimotoShichosonCode().value().equals((shikakuHenkoRirekiDiv.getDdlHenkoSochimotoHokensha().getSelectedKey()))) {
-            return false;
+        LasdecCode sochimotoShichosonCode = targetModel.getKoikinaiTokureiSochimotoShichosonCode();
+        if (sochimotoShichosonCode != null) {
+            if (!sochimotoShichosonCode.value().equals((shikakuHenkoRirekiDiv.getDdlHenkoSochimotoHokensha().getSelectedKey()))) {
+                return false;
+            }
         }
-        return !targetModel.getKyuShichosonCode().equals(new LasdecCode(shikakuHenkoRirekiDiv.getDdlHenkoKyuHokensha().getSelectedKey()));
+
+        return !Objects.equal(targetModel.getKyuShichosonCode(), (new LasdecCode(shikakuHenkoRirekiDiv.getDdlHenkoKyuHokensha().getSelectedKey())));
 
     }
 
