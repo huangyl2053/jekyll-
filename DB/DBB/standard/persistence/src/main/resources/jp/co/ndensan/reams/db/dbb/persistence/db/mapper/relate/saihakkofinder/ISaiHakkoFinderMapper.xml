@@ -22,7 +22,7 @@
      OR B."kazeiKubunGemmenGo"<![CDATA[<>]]>'4'
      )
      AND A."shoriNendo"=#{処理年度}
-     GROUP BY A."shoriNendo", A."hakkoReamsLoginId", A."sakuseiTimestamp"
+     GROUP BY A."shoriNendo", A."sakuseiTimestamp", A."hakkoReamsLoginId"
      ORDER BY A."sakuseiTimestamp" DESC
     </select>
     <resultMap id="resultMap_SaiHakkoEntity" autoMapping="true"

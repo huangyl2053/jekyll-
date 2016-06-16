@@ -61,6 +61,8 @@ public class SaiHakkoFinder {
                 SaiHakko 再発行対象 = new SaiHakko(entity);
                 再発行対象List.add(再発行対象);
             }
+        } else {
+            return null;
         }
         return 再発行対象List;
     }
