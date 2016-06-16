@@ -6,8 +6,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.ShotokuJo
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,6 +13,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
@@ -32,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
@@ -237,13 +238,14 @@ public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
                     return -1;
                 }
             });
+        } else {
+            Collections.sort(世帯員所得情報, new Comparator<SetaiinShotoku>() {
+                @Override
+                public int compare(SetaiinShotoku o1, SetaiinShotoku o2) {
+                    return orderBy本人区分And住民票表示順(o1, o2);
+                }
+            });
         }
-        Collections.sort(世帯員所得情報, new Comparator<SetaiinShotoku>() {
-            @Override
-            public int compare(SetaiinShotoku o1, SetaiinShotoku o2) {
-                return orderBy本人区分And住民票表示順(o1, o2);
-            }
-        });
 
         List<dgSetaiShotoku_Row> rows = new ArrayList<>();
         for (SetaiinShotoku setaiinShotoku : 世帯員所得情報) {
@@ -254,21 +256,26 @@ public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
             dgSetaiShotoku_Row row = new dgSetaiShotoku_Row();
             row.setShikibetsuCodeHihokenshaNo(
                     setaiinShotoku.get識別コード().getColumnValue().concat(BR).concat(setaiinShotoku.get被保険者番号().getColumnValue()));
-            row.setShimei(setaiinShotoku.getカナ氏名().concat(BR).concat(setaiinShotoku.get氏名()));
-            row.setSeinengappiSeibetsuZokugara(new RString(setaiinShotoku.get生年月日().toString())
-                    .concat(RString.FULL_SPACE).concat(setaiinShotoku.get性別()).concat(BR).concat(setaiinShotoku.get続柄()));
+            row.setShimei(ObjectUtil.defaultIfNull(setaiinShotoku.getカナ氏名(), RString.EMPTY).concat(BR).
+                    concat(ObjectUtil.defaultIfNull(setaiinShotoku.get氏名(), RString.EMPTY)));
+            row.setSeinengappiSeibetsuZokugara(new RString(ObjectUtil.defaultIfNull(setaiinShotoku.get生年月日(), FlexibleDate.EMPTY).toString()).
+                    concat(RString.FULL_SPACE).concat(ObjectUtil.defaultIfNull(setaiinShotoku.get性別(), RString.EMPTY)).concat(BR).
+                    concat(ObjectUtil.defaultIfNull(setaiinShotoku.get続柄(), RString.EMPTY)));
             row.setShubetsu(RString.EMPTY); //TODO 世帯員所得情報.住民状態
-            row.setIdoDate(new RString(setaiinShotoku.get住民情報_異動日().toString()));
+            row.setIdoDate(new RString(ObjectUtil.defaultIfNull(setaiinShotoku.get住民情報_異動日(), FlexibleDate.EMPTY).toString()));
             row.setRiyoshaFutandankai(利用者負担段階の判定(setaiinShotoku, is老齢福祉年金受給者, is生活保護受給者).get名称());
             row.setSeihoRorei(生保_老齢);
             row.setJuminzei(RString.EMPTY);//TODO 介護所得.非課税区分（減免前）
             row.setGokeiShotokuKingaku(
-                    new RString(KingakuFormatter.create(setaiinShotoku.get合計所得金額()).format(KingakuUnit.円).setCommaSeparated().toString()));
+                    new RString(KingakuFormatter.create(ObjectUtil.defaultIfNull(setaiinShotoku.get合計所得金額(), Decimal.ZERO)).
+                            format(KingakuUnit.円).setCommaSeparated().toString()));
             row.setNenkinShunyu(
-                    new RString(KingakuFormatter.create(setaiinShotoku.get年金収入額()).format(KingakuUnit.円).setCommaSeparated().toString()));
+                    new RString(KingakuFormatter.create(ObjectUtil.defaultIfNull(setaiinShotoku.get年金収入額(), Decimal.ZERO)).
+                            format(KingakuUnit.円).setCommaSeparated().toString()));
             row.setNenkinShotoku(
-                    new RString(KingakuFormatter.create(setaiinShotoku.get年金所得額()).format(KingakuUnit.円).setCommaSeparated().toString()));
-            row.setKoseiDate(new RString(setaiinShotoku.get更正日().toString()));
+                    new RString(KingakuFormatter.create(ObjectUtil.defaultIfNull(setaiinShotoku.get年金所得額(), Decimal.ZERO)).
+                            format(KingakuUnit.円).setCommaSeparated().toString()));
+            row.setKoseiDate(new RString(ObjectUtil.defaultIfNull(setaiinShotoku.get更正日(), FlexibleDate.EMPTY).toString()));
             rows.add(row);
         }
         getDgSetaiShotoku().setDataSource(rows);
@@ -278,7 +285,7 @@ public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
         List<KeyValueDataSource> 所得年度List = new ArrayList<>();
         RYear 日付関連_所得年度 = new RYear(DbBusinessConfig.get(ConfigNameDBD.日付関連_所得年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
         RYear 所得年度 = 日付関連_所得年度;
-        for (int 平成12年 = 2000; 平成12年 < 所得年度.getYearValue(); 平成12年++) {
+        for (int 平成12年 = 2000; 平成12年 < 所得年度.getYearValue();) {
             所得年度List.add(new KeyValueDataSource(所得年度.seireki().toDateString(), 所得年度.wareki().toDateString()));
             所得年度 = 所得年度.minusYear(1);
         }
@@ -305,7 +312,8 @@ public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
         if (KazeiKubun.課税.getコード().equals(世帯員所得情報.get課税区分_住民税減免前())) {
             return RiyoshaFutanDankai.第四段階;
         }
-        if (世帯員所得情報.get年金収入額().add(世帯員所得情報.get合計所得金額()).compareTo(new Decimal(800000)) <= 0) {
+        if (ObjectUtil.defaultIfNull(世帯員所得情報.get年金収入額(), Decimal.ZERO).add(
+                ObjectUtil.defaultIfNull(世帯員所得情報.get合計所得金額(), Decimal.ZERO)).compareTo(new Decimal(800000)) <= 0) {
             return RiyoshaFutanDankai.第二段階;
         }
         return RiyoshaFutanDankai.第三段階;
@@ -324,9 +332,11 @@ public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
     }
 
     private int orderBy本人区分And住民票表示順(SetaiinShotoku o1, SetaiinShotoku o2) {
-        if (Integer.parseInt(o1.get本人区分().toString()) < Integer.parseInt(o2.get本人区分().toString())) {
+        if ((o1.get本人区分() == null ? 0 : Integer.parseInt(o1.get本人区分().toString()))
+                < (o2.get本人区分() == null ? 0 : Integer.parseInt(o2.get本人区分().toString()))) {
             return -1;
-        } else if (Integer.parseInt(o1.get本人区分().toString()) == Integer.parseInt(o2.get本人区分().toString())) {
+        } else if ((o1.get本人区分() == null ? 0 : Integer.parseInt(o1.get本人区分().toString()))
+                == (o2.get本人区分() == null ? 0 : Integer.parseInt(o2.get本人区分().toString()))) {
             if (o1.get住民票表示順() < o2.get住民票表示順()) {
                 return -1;
             } else if (o1.get住民票表示順() == o2.get住民票表示順()) {
