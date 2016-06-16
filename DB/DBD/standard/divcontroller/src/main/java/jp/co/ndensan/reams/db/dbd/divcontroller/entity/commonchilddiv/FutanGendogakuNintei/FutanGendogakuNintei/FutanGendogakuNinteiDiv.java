@@ -6,17 +6,29 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.FutanGend
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxJusho;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 
 /**
- * FutanGendogakuNintei のクラスファイル 
- * 
+ * FutanGendogakuNintei のクラスファイル
+ *
  * @author 自動生成
  */
 public class FutanGendogakuNinteiDiv extends Panel implements IFutanGendogakuNinteiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,6 +41,8 @@ public class FutanGendogakuNinteiDiv extends Panel implements IFutanGendogakuNin
     private FutanGendogakuNinteiDetailDiv FutanGendogakuNinteiDetail;
     @JsonProperty("btnClose")
     private Button btnClose;
+    @JsonProperty("txtHiddenHihokenshaNo")
+    private RString txtHiddenHihokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -88,6 +102,24 @@ public class FutanGendogakuNinteiDiv extends Panel implements IFutanGendogakuNin
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
         this.btnClose = btnClose;
+    }
+
+    /*
+     * gettxtHiddenHihokenshaNo
+     * @return txtHiddenHihokenshaNo
+     */
+    @JsonProperty("txtHiddenHihokenshaNo")
+    public RString getTxtHiddenHihokenshaNo() {
+        return txtHiddenHihokenshaNo;
+    }
+
+    /*
+     * settxtHiddenHihokenshaNo
+     * @param txtHiddenHihokenshaNo txtHiddenHihokenshaNo
+     */
+    @JsonProperty("txtHiddenHihokenshaNo")
+    public void setTxtHiddenHihokenshaNo(RString txtHiddenHihokenshaNo) {
+        this.txtHiddenHihokenshaNo = txtHiddenHihokenshaNo;
     }
 
     /*
