@@ -35,9 +35,6 @@ public class PnlTotalSearchHandler {
     private static final RString 参照 = new RString("参照");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
-    private static final RString 契約者選択 = new RString("契約者選択");
-    private static final RString 対象者検索 = new RString("対象者検索");
-    private static final RString 事業者検索 = new RString("事業者検索");
 
     /**
      * 初期化
