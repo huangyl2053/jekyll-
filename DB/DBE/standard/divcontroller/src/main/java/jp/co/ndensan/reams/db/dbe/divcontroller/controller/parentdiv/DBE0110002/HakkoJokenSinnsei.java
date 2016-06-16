@@ -5,11 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0110002;
 
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinseijouhouinnsatu.ShinseiJouhouInsatuBatchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110002.HakkoJokenSinnseiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110002.HakkoJokenSinnseiHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110002.HakkoJokenSinnseiValidationHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -80,6 +83,51 @@ public class HakkoJokenSinnsei {
             div.getTxtShoriYMD().setDisabled(true);
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 実行ボタン処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenSinnseiDiv>
+     */
+    public ResponseData<ShinseiJouhouInsatuBatchParameter> onClick_Jikkou(HakkoJokenSinnseiDiv div) {
+        return ResponseData.of(getHandler(div).setBatchParameter()).respond();
+    }
+
+    /**
+     * 入力チェックです。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenSinnseiDiv>
+     */
+    public ResponseData<HakkoJokenSinnseiDiv> onClick_Check(HakkoJokenSinnseiDiv div) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).未入力チェック(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).未選択チェック(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).処理日範囲不正チェック(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).申請日範囲不正チェック(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        /* validPairs = getValidationHandler(div).申請日入力チェック(validationMessages);
+         if (validPairs.iterator().hasNext()) {
+         return ResponseData.of(div).addValidationMessages(validPairs).respond();
+         }*/
+        return ResponseData.of(div).respond();
+    }
+
+    private HakkoJokenSinnseiValidationHandler getValidationHandler(HakkoJokenSinnseiDiv div) {
+        return new HakkoJokenSinnseiValidationHandler(div);
     }
 
     private HakkoJokenSinnseiHandler getHandler(HakkoJokenSinnseiDiv div) {
