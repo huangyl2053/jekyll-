@@ -1,8 +1,12 @@
 package jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 委員用一次判定結果票A3のReportSourceクラスです。
@@ -230,6 +234,10 @@ public class IchijihanteikekkahyoA3ReportSource implements IReportSource {
     public RString yobo_imgSisetuTel;
     @ReportItem(name = "tokuteiFukushiKikan", length = 2, order = 109)
     public RString yobo_tokuteiFukushiKikan;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation shinseishoKanriNo;
     //なし
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
