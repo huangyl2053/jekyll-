@@ -8,6 +8,14 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNint
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
@@ -408,21 +416,6 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     @JsonProperty("modes")
     private HashSet<Mode> modes;
 
-    @Override
-    public void setInputMode(RString inputType) {
-        this.setMode_InputType(InputType.getEnum(inputType.toString()));
-    }
-
-    @Override
-    public void initialize() {
-        getHandler(this).initialize();
-    }
-
-    @Override
-    public KaigoNinteiShinseiKihonJohoInputDiv getKaigoNinteiShinseiKihonJohoInputDiv() {
-        return this;
-    }
-
     public static enum InputType implements ICommonChildDivMode {
 
         AllInputMode("AllInputMode"),
@@ -517,6 +510,88 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public void setInputMode(RString inputType) {
+        this.setMode_InputType(InputType.getEnum(inputType.toString()));
+    }
+
+    @Override
+    public void initialize() {
+        getHandler(this).initialize();
+    }
+
+    @Override
+    public KaigoNinteiShinseiKihonJohoInputDiv getKaigoNinteiShinseiKihonJohoInputDiv() {
+        return this;
+    }
+
+    @Override
+    public void setRadShinseishoKubun(RString selectKey) {
+        this.getRadShinseishoKubun().setSelectedKey(selectKey);
+    }
+
+    @Override
+    public void setTxtShinseiJokyo(RString value) {
+        this.getTxtShinseiJokyo().setValue(value);
+    }
+
+    @Override
+    public void setTxtShinseiYMD(RDate value) {
+        this.getTxtShinseiYMD().setValue(value);
+    }
+
+    @Override
+    public void setShinseiShubetsu(JukyuShinseiJiyu value) {
+        this.getDdlShinseiShubetsu().setSelectedKey(value.getコード());
+    }
+
+    @Override
+    public void setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode value) {
+        this.getDdlShinseiKubunShinseiji().setSelectedKey(value.getコード());
+    }
+
+    @Override
+    public void setShinseiKubunHorei(NinteiShinseiHoreiCode value) {
+        this.getDdlShinseiKubunHorei().setSelectedKey(value.getコード());
+    }
+
+    @Override
+    public void setShisho(ShishoCode shishoCode) {
+        this.getDdlShisho().setSelectedKey(shishoCode.value());
+    }
+
+    @Override
+    public void setKyuSochisha(List<RString> selectedKeys) {
+        this.getChkKyuSochisha().setSelectedItemsByKey(selectedKeys);
+    }
+
+    @Override
+    public void setHihokenshaKubun(HihokenshaKubunCode value) {
+        this.getDdlHihokenshaKubun().setSelectedKey(value.getコード());
+    }
+
+    @Override
+    public void setHihokenshaKubun(List<RString> selectedKeys) {
+        this.getChkShikakuShutokuMae().setSelectedItemsByKey(selectedKeys);
+    }
+
+    @Override
+    public void setTokuteiShippei(TokuteiShippei value) {
+        this.getDdlTokuteiShippei().setSelectedKey(value.getコード());
+    }
+
+    @Override
+    public void setServiceSakujoTeikeibun(RString teikeibun) {
+        this.getTxtServiceSakujo().setValue(teikeibun);
+        this.setHdnServiceSakujoTeikeibun(teikeibun);
+    }
+
+    @Override
+    public void setNinteiShinseRiyuTeikeibun(RString teikeibun) {
+        this.getTxtNinteiShinseRiyu().setValue(teikeibun);
+        this.setHdnNinteiRiyuTeikeibun(teikeibun);
+    }
+
     private KaigoNinteiShinseiKihonJohoInputHandler getHandler(KaigoNinteiShinseiKihonJohoInputDiv div) {
         return new KaigoNinteiShinseiKihonJohoInputHandler(div);
     }
