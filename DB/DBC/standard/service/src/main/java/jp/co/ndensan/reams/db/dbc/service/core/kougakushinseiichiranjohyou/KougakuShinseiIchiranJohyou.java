@@ -143,10 +143,9 @@ public class KougakuShinseiIchiranJohyou {
         } else {
             DbT1001HihokenshaDaichoEntity 被保険者台帳管理2 = 被保険者台帳管理Dac.
                     selectMin異動日(被保険者番号, サービス年月);
-            if (被保険者台帳管理2 != null && サービス年月.compareTo(new FlexibleYearMonth(
-                    被保険者台帳管理2.getIdoYMD().toString())) < 0) {
+            if (被保険者台帳管理2 != null) {
                 市町村コード = get市町村コード(被保険者台帳管理2);
-            } else if (被保険者台帳管理2 == null) {
+            } else {
                 throw new ApplicationException(DbcErrorMessages.対象年月被保険者データなし.getMessage());
             }
         }
