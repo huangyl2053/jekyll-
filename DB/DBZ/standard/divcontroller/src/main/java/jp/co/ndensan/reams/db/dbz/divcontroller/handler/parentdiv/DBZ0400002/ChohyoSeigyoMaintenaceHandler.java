@@ -43,8 +43,10 @@ public class ChohyoSeigyoMaintenaceHandler {
      * 帳票制御メンテナンス初期化の設定します。
      *
      * @param businessList 資格不整合一覧情報
+     * @param 帳票名称 帳票名称
      */
-    public void load(List<ChohyoSeigyoHanyo> businessList) {
+    public void load(List<ChohyoSeigyoHanyo> businessList, RString 帳票名称) {
+        div.getLblChohyoName().setText(帳票名称);
         List<dgCyohyoSeigyo_Row> rowList = new ArrayList<>();
         for (ChohyoSeigyoHanyo chohyoSeigyoHanyo : businessList) {
             dgCyohyoSeigyo_Row row = new dgCyohyoSeigyo_Row();

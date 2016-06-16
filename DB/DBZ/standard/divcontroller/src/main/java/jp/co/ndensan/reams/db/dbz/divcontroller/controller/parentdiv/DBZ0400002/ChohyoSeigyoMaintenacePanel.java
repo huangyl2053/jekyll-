@@ -60,6 +60,7 @@ public class ChohyoSeigyoMaintenacePanel {
     public ResponseData<ChohyoSeigyoMaintenacePanelDiv> onLoad(ChohyoSeigyoMaintenacePanelDiv div) {
         RStringBuilder lockKey = new RStringBuilder();
         RString 帳票分類ID = ViewStateHolder.get(ViewStateKeys.帳票分類ID, RString.class);
+        RString 帳票名称 = ViewStateHolder.get(ViewStateKeys.帳票分類名称, RString.class);
         div.getLblChohyoName().setText(ViewStateHolder.get(ViewStateKeys.帳票分類名称, RString.class));
         lockKey.append(UrControlDataFactory.createInstance().getMenuID())
                 .append(帳票分類ID);
@@ -72,7 +73,7 @@ public class ChohyoSeigyoMaintenacePanel {
         List<ChohyoSeigyoHanyo> businessList = chohyoSeigyoHanyoManager.get帳票制御汎用(subgyomuCode, new ReportId(帳票分類ID)).records();
         Models<ChohyoSeigyoHanyoIdentifier, ChohyoSeigyoHanyo> chohyoSeigyoHanyo = Models.create(businessList);
         ViewStateHolder.put(ViewStateKeys.帳票制御汎用メンテナンスGrid, chohyoSeigyoHanyo);
-        getHandler(div).load(businessList);
+        getHandler(div).load(businessList, 帳票名称);
         return ResponseData.of(div).respond();
     }
 
