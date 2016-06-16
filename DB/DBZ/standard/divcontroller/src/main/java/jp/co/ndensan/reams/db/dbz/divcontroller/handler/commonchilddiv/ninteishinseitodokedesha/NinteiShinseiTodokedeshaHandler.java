@@ -85,12 +85,12 @@ public class NinteiShinseiTodokedeshaHandler {
         naiyo.set電話番号(div.getTxtTelNo().getDomain().getColumnValue());
         if (管内.equals(div.getRadKannaiKangai().getSelectedKey())) {
             naiyo.set郵便番号(div.getTxtYubinNo().getValue());
-            div.getCcdChoikiInput().get町域コード().getColumnValue();
-            div.getCcdChoikiInput().get町域名称();
+            naiyo.set町域入力住所コード(div.getCcdChoikiInput().get町域コード().getColumnValue());
+            naiyo.set町域入力住所名称(div.getCcdChoikiInput().get町域名称());
         } else if (管外.equals(div.getRadKannaiKangai().getSelectedKey())) {
             naiyo.set全国郵便番号(div.getCcdZenkokuJushoInput().get郵便番号().value());
-            div.getCcdZenkokuJushoInput().get全国住所コード().getColumnValue();
-            div.getCcdZenkokuJushoInput().get全国住所名称();
+            naiyo.set全国住所コード(div.getCcdZenkokuJushoInput().get全国住所コード().getColumnValue());
+            naiyo.set全国住所名称(div.getCcdZenkokuJushoInput().get全国住所名称());
         }
         return naiyo;
     }
