@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.DBB0120002;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.DBB012002;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0830-030 xuhao
  */
-public class DBB0120002_TokuchoHeinjunkaKakuteiFlow extends BatchFlowBase<TokuchoHeijunkaKakuteiBatchParameter> {
+public class DBB012002_TokuchoHeinjunkaKakutei extends BatchFlowBase<TokuchoHeijunkaKakuteiBatchParameter> {
 
     private static final String DB_UPDATE = "dbUpdateProcess";
 

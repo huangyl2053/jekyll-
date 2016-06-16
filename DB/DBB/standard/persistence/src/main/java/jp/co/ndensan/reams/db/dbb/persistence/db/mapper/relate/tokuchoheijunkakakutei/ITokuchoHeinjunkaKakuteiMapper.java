@@ -21,9 +21,9 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunkakakutei.Tokuc
 public interface ITokuchoHeinjunkaKakuteiMapper {
 
     /**
-     * 特徴平準化賦課一時テーブルをクリアを作成する。
+     * create特徴平準化賦課Tempをクリアを作成する。
      */
-    void 特徴平準化賦課一時テーブルをクリア();
+    void create特徴平準化賦課Temp();
 
     /**
      * 特徴平準化賦課Tempをinset

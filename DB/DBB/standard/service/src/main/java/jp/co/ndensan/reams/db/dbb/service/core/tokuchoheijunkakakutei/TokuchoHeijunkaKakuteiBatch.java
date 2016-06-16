@@ -148,7 +148,7 @@ public class TokuchoHeijunkaKakuteiBatch {
             FlexibleYear 調定年度,
             YMDHMS 調定日時) {
         ITokuchoHeinjunkaKakuteiMapper mapper = mProvider.create(ITokuchoHeinjunkaKakuteiMapper.class);
-        mapper.特徴平準化賦課一時テーブルをクリア();
+        mapper.create特徴平準化賦課Temp();
         HeinjunkaAfterParameter parameter = HeinjunkaAfterParameter.createParameter(調定年度, 賦課年度, 調定日時);
         FukaJohoManager manager = FukaJohoManager.createInstance();
         List<FukaJoho> 平準化後の賦課の情報List = manager.get平準化後の賦課の情報(parameter);
