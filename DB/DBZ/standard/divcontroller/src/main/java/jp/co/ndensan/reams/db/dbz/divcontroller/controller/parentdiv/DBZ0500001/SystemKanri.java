@@ -13,21 +13,16 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.DBZ0500001.Sys
 import jp.co.ndensan.reams.db.dbz.service.core.configmaintenance.ConfigMaintenanceFinder;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * システム管理汎用クラスです。
@@ -59,10 +54,7 @@ public class SystemKanri {
         List<ConfigMaintenance> resultList = finder.getSyozokuKikan(サブ業務コード.value()).records();
         getHandler(div).initialize(resultList);
         if (!RealInitialLocker.tryGetLock(排他キー())) {
-            div.setReadOnly(true);
-            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            validationMessages.add(new ValidationMessageControlPair(ShisetsutourukuPanelErrorMessage.排他_他のユーザが使用中));
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            throw new PessimisticLockingException();
         }
         return ResponseData.of(div).respond();
     }
@@ -99,21 +91,6 @@ public class SystemKanri {
 
     private SystemKanriHandler getHandler(SystemKanriDiv div) {
         return new SystemKanriHandler(div);
-    }
-
-    private enum ShisetsutourukuPanelErrorMessage implements IValidationMessage {
-
-        排他_他のユーザが使用中(UrErrorMessages.排他_他のユーザが使用中);
-        private final Message message;
-
-        private ShisetsutourukuPanelErrorMessage(IMessageGettable message) {
-            this.message = message.getMessage();
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
     }
 
     private LockingKey 排他キー() {
