@@ -159,7 +159,6 @@ public class TokuchoSeidokanIFSakuseiHandler {
         result.set年度(new FlexibleYear(div.getTxtChoteiNendo().getValue().toString().substring(NUM0, NUM4)));
         result.set特徴開始年月(new RDate(div.getDdlKaishiYM().getSelectedValue().toString()));
         result.set遷移元メニュー(ResponseHolder.getMenuID());
-        TokuchoSeidokanIFSakuseiBatchParameter param = tokuchosedokaniftanichu.getBatchiPara(result);
-        return param;
+        return tokuchosedokaniftanichu.getBatchiPara(result);
     }
 }
