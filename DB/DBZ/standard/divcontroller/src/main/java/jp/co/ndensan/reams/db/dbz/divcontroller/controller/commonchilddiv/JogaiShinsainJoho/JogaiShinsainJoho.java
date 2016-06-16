@@ -41,7 +41,9 @@ public class JogaiShinsainJoho {
      */
     public ResponseData<JogaiShinsainJohoDiv> onLoad(JogaiShinsainJohoDiv div) {
         getHandler(div).画面項目にセットされている値をクリア();
+        getHandler(div).set画面状態();
         set画面情報(div);
+
         return ResponseData.of(div).respond();
     }
 
@@ -193,24 +195,23 @@ public class JogaiShinsainJoho {
         for (ShinsakaiIinRelateJoho joho : johoList) {
             RStringBuilder 所属機関 = new RStringBuilder();
             所属機関 = nullToEmpty(所属機関, getService().get医療機関名称(joho.get市町村コード(), joho.get主治医医療機関コード()));
-            所属機関 = nullToEmpty(所属機関, getService().get事業者名称(joho.get市町村コード(), joho.get主治医医療機関コード()));
-            所属機関 = nullToEmpty(所属機関, getService().get機関名称(joho.get証記載保険者番号(), joho.get主治医医療機関コード()));
-            rowList.add(new dgShinsakaiIinIchiran_Row(joho.get介護認定審査会委員コード(), 申請書管理番号, 所属機関.toRString()));
+            所属機関 = nullToEmpty(所属機関, getService().get事業者名称(joho.get市町村コード(), joho.get認定調査委託先コード()));
+            所属機関 = nullToEmpty(所属機関, getService().get機関名称(joho.get証記載保険者番号(), joho.getその他機関コード()));
+            rowList.add(new dgShinsakaiIinIchiran_Row(joho.get介護認定審査会委員コード(), joho.get介護認定審査会委員氏名().value(), 所属機関.toRString()));
         }
         div.getDgShinsakaiIinIchiran().setDataSource(rowList);
     }
 
     private RStringBuilder nullToEmpty(RStringBuilder 所属機関, RString 名称) {
-        RStringBuilder sb = new RStringBuilder();
         if (!RString.isNullOrEmpty(名称)) {
             if (RString.isNullOrEmpty(所属機関.toRString())) {
-                sb.append(名称);
+                所属機関.append(名称);
             } else {
-                sb.append(所属機関_TMP);
-                sb.append(名称);
+                所属機関.append(所属機関_TMP);
+                所属機関.append(名称);
             }
         }
-        return sb;
+        return 所属機関;
     }
 
     private JogaiShinsainJohoHandler getHandler(JogaiShinsainJohoDiv div) {
