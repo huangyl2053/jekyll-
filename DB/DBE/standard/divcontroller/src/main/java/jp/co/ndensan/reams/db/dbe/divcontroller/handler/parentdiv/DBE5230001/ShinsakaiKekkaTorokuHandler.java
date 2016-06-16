@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.HanteiKekkaCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.NinteiShinsakaiIkenShurui;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.YokaigoJotaizoReiCode;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.ShinsakaiKekkaTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.NinteiShinsakaiIkenShurui;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.YokaigoJotaizoReiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -72,8 +72,12 @@ public class ShinsakaiKekkaTorokuHandler {
                     setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, new CodeShubetsu("5001"), new Code(head.get審査会地区コード())));
             div.getKyotsuHyojiArea().getTxtTaishoNinzu().setValue(new RString(head.get対象人数()));
             div.getKyotsuHyojiArea().getTxtKaisaiNichiji().setValue(head.get開催日());
-            div.getKyotsuHyojiArea().getTxtKaisaiTimeRange().setFromValue(new RTime(head.get開催開始時間()));
-            div.getKyotsuHyojiArea().getTxtKaisaiTimeRange().setToValue(new RTime(head.get開催終了時間()));
+            if (!RString.isNullOrEmpty(head.get開催開始時間())) {
+                div.getKyotsuHyojiArea().getTxtKaisaiTimeRange().setFromValue(new RTime(head.get開催開始時間()));
+            }
+            if (!RString.isNullOrEmpty(head.get開催終了時間())) {
+                div.getKyotsuHyojiArea().getTxtKaisaiTimeRange().setToValue(new RTime(head.get開催終了時間()));
+            }
             div.getKyotsuHyojiArea().getTxtStutas().setValue(head.getステータス());
             List<KeyValueDataSource> selectedItem = new ArrayList<>();
             if (head.is審査会種類()) {
@@ -130,7 +134,7 @@ public class ShinsakaiKekkaTorokuHandler {
                     メモフラグ,
                     意見フラグ,
                     NinteiShinsakaiIkenShurui.toValue(business.get審査会意見種類()).get名称(),
-                    key0,
+                    business.get一次判定結果変更理由(),
                     key0,
                     key0,
                     key0,
@@ -139,7 +143,8 @@ public class ShinsakaiKekkaTorokuHandler {
                     business.get審査会メモ(),
                     business.get審査会意見(),
                     business.get審査会意見種類(),
-                    business.get一次判定結果変更理由());
+                    business.get一次判定結果変更理由(),
+                    RString.EMPTY);
             dataSource.add(row);
             メモフラグ = false;
             意見フラグ = false;
