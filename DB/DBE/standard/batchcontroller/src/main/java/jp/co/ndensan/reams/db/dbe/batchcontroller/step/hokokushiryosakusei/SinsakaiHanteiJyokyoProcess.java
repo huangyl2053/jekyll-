@@ -162,7 +162,10 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
     }
 
     private boolean hasBrek(SinsakaiHanteiJyokyoHeaderEntity before, SinsakaiHanteiJyokyoHeaderEntity current) {
-        return !(before.getGogitaiMei() == current.getGogitaiMei()
+        if (paramter.isEmptyGogitaiNo()) {
+            return !before.getShoKisaiHokenshaNo().equals(current.getShoKisaiHokenshaNo());
+        }
+        return !(before.getGogitaiNo() == current.getGogitaiNo()
                 && before.getShoKisaiHokenshaNo().equals(current.getShoKisaiHokenshaNo()));
     }
 
