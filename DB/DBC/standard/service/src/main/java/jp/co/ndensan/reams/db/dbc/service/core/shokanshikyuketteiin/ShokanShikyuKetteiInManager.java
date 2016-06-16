@@ -351,7 +351,7 @@ public class ShokanShikyuKetteiInManager {
     }
 
     private void updateサービス計画200604(RString 支給不支給区分, IShokanShikyuKetteiInMapper mapper) {
-        List<ShokanShikyuEntity> サービス計画200604List = mapper.select償還払請求サービス計画200004データ();
+        List<ShokanShikyuEntity> サービス計画200604List = mapper.select償還払請求サービス計画200604データ();
         if (サービス計画200604List != null && !サービス計画200604List.isEmpty()) {
             update償還払請求サービス計画200604(支給不支給区分, サービス計画200604List);
             for (ShokanShikyuEntity shokanShikyuEntity : サービス計画200604List) {
@@ -489,7 +489,7 @@ public class ShokanShikyuKetteiInManager {
                 } else if (RSTRING_2.equals(支給不支給区分)) {
                     サービス計画200004Entity.setShikyuKubunCode(RSTRING_2);
                     サービス計画200004Entity.setTensuKingaku(単位数合算値.intValue());
-                    サービス計画200004Entity.setZougenRiyu(get備考1理由(被保険者判定List));
+                    サービス計画200004Entity.setFushikyuRiyu(get備考1理由(被保険者判定List));
                     サービス計画200004Entity.setKounyuKaishuRireki(get備考2理由(被保険者判定List));
                     サービス計画200004Entity.setState(EntityDataState.Modified);
                     請求サービス計画200004Dac.save(サービス計画200004Entity);
@@ -523,7 +523,7 @@ public class ShokanShikyuKetteiInManager {
                 } else if (RSTRING_2.equals(支給不支給区分)) {
                     サービス計画200604Entity.setShikyuKubunCode(RSTRING_2);
                     サービス計画200604Entity.setTensuKingaku(単位数合算値.intValue());
-                    サービス計画200604Entity.setZougenRiyu(get備考1理由(被保険者判定List));
+                    サービス計画200604Entity.setFushikyuRiyu(get備考1理由(被保険者判定List));
                     サービス計画200604Entity.setKounyuKaishuRireki(get備考2理由(被保険者判定List));
                     サービス計画200604Entity.setState(EntityDataState.Modified);
                     請求サービス計画200604Dac.save(サービス計画200604Entity);
@@ -557,7 +557,7 @@ public class ShokanShikyuKetteiInManager {
                 } else if (RSTRING_2.equals(支給不支給区分)) {
                     サービス計画200904Entity.setShikyuKubunCode(RSTRING_2);
                     サービス計画200904Entity.setTensuKingaku(単位数合算値.intValue());
-                    サービス計画200904Entity.setZougenRiyu(get備考1理由(被保険者判定List));
+                    サービス計画200904Entity.setFushikyuRiyu(get備考1理由(被保険者判定List));
                     サービス計画200904Entity.setKounyuKaishuRireki(get備考2理由(被保険者判定List));
                     サービス計画200904Entity.setState(EntityDataState.Modified);
                     請求サービス計画200904Dac.save(サービス計画200904Entity);

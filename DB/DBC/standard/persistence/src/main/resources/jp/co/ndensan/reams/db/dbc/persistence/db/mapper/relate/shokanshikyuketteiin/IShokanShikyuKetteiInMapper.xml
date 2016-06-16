@@ -589,7 +589,7 @@
         AND DbT3045."dbT3045ShokanServicePlan200004_serviceTeikyoYM" = 一時TBL.dbWT3036_サービス提供年月
         AND DbT3045."dbT3045ShokanServicePlan200004_seiriNo" = 一時TBL.dbWT3036_整理番号
         AND DbT3045."dbT3045ShokanServicePlan200004_jigyoshaNo" = 一時TBL.dbWT3036_ワーク事業所番号
-        AND substring(DbT3045. "dbT3045ShokanServicePlan200004_serviceCode",0,2) = 一時TBL.dbWT3036_サービス種類コード
+        AND substring(DbT3045. "dbT3045ShokanServicePlan200004_serviceCode",1,2) = 一時TBL.dbWT3036_サービス種類コード
        
     </select>
     
@@ -622,7 +622,7 @@
         AND DbT3046."dbT3046ShokanServicePlan200604_serviceTeikyoYM" = 一時TBL.dbWT3036_サービス提供年月
         AND DbT3046."dbT3046ShokanServicePlan200604_seiriNo" = 一時TBL.dbWT3036_整理番号
         AND DbT3046."dbT3046ShokanServicePlan200604_jigyoshaNo" = 一時TBL.dbWT3036_ワーク事業所番号
-        AND substring(DbT3046."dbT3046ShokanServicePlan200604_serviceCode",0,2) = 一時TBL.dbWT3036_サービス種類コード
+        AND substring(DbT3046."dbT3046ShokanServicePlan200604_serviceCode",1,2) = 一時TBL.dbWT3036_サービス種類コード
        
     </select>
     
@@ -655,7 +655,7 @@
         AND DbT3047."dbT3047ShokanServicePlan200904_serviceTeikyoYM" = 一時TBL.dbWT3036_サービス提供年月
         AND DbT3047."dbT3047ShokanServicePlan200904_seiriNo" = 一時TBL.dbWT3036_整理番号
         AND DbT3047."dbT3047ShokanServicePlan200904_jigyoshaNo" = 一時TBL.dbWT3036_ワーク事業所番号
-        AND substring(DbT3047."dbT3047ShokanServicePlan200904_serviceCode",0,2) = 一時TBL.dbWT3036_サービス種類コード
+        AND substring(DbT3047."dbT3047ShokanServicePlan200904_serviceCode",1,2) = 一時TBL.dbWT3036_サービス種類コード
        
     </select>
     
