@@ -321,7 +321,7 @@ public enum ReportIdDBE {
     /**
      * 申請に関する帳票発行の帳票ＩＤです。
      */
-    DBE012002(new ReportId("DBE120002_NinteichosaIraiHenko"), new RString("認定調査依頼先変更者一覧表")),
+    DBE012002(new ReportId("DBE012002_NinteichosaIraiHenko"), new RString("認定調査依頼先変更者一覧表")),
     /**
      * 申請に関する帳票発行の帳票ＩＤです。
      */
