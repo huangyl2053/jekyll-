@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.shinsakaigijiroku;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.Sikaku;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.GoGyoumeIchiIchiRanEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.IinJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.SanGyoumeKuIchiRanEntity;
@@ -27,16 +28,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSource> {
 
     private final ShinsakaiGijirokuEntity item;
-    private final Integer index_9 = new Integer("9");
-    private final Integer index_8 = new Integer("8");
-    private final Integer index_7 = new Integer("7");
-    private final Integer index_6 = new Integer("6");
-    private final Integer index_5 = new Integer("5");
-    private final Integer index_4 = new Integer("4");
-    private final Integer index_3 = new Integer("3");
-    private final Integer index_2 = new Integer("2");
-    private final Integer index_1 = new Integer("1");
-    private final Integer index_0 = new Integer("0");
+    private static final int INDEX_9 = 9;
+    private static final int INDEX_8 = 8;
+    private static final int INDEX_7 = 7;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_0 = 0;
 
     private final List<GoGyoumeIchiIchiRanEntity> 委員情報リスト;
     private final List<GoGyoumeIchiIchiRanEntity> 調査員情報リスト;
@@ -68,7 +69,7 @@ public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSourc
         ShinsakaiGijirokuBodyEditor3 bodyEditor3 = null;
         ShinsakaiGijirokuBodyEditor4 bodyEditor4 = null;
         ShinsakaiGijirokuBodyEditor5 bodyEditor5 = null;
-        for (int i = 0; i < index_5; i++) {
+        for (int i = 0; i < INDEX_5; i++) {
             editor = new ShinsakaiGijirokuEditor(item);
             if (i < 2) {
                 bodyEditor1 = new ShinsakaiGijirokuBodyEditor1(新規と更新と区変の件数リスト.get(i));
@@ -76,10 +77,10 @@ public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSourc
                 bodyEditor3 = new ShinsakaiGijirokuBodyEditor3(新規と更新と区変の件数下リスト.get(i));
                 bodyEditor4 = new ShinsakaiGijirokuBodyEditor4(委員情報リスト.get(i));
                 bodyEditor5 = new ShinsakaiGijirokuBodyEditor5(合計数リスト.get(i));
-            } else if (i == index_3) {
+            } else if (i == INDEX_3) {
                 bodyEditor4 = new ShinsakaiGijirokuBodyEditor4(調査員情報リスト.get(i));
                 bodyEditor5 = new ShinsakaiGijirokuBodyEditor5(合計数リスト.get(i));
-            } else if (i == index_4) {
+            } else if (i == INDEX_4) {
                 bodyEditor4 = new ShinsakaiGijirokuBodyEditor4(その他情報リスト.get(i));
             }
             ShinsakaiGijirokuBuilder builder = new ShinsakaiGijirokuBuilder(editor, bodyEditor1, bodyEditor2, bodyEditor3, bodyEditor4, bodyEditor5);
@@ -92,23 +93,23 @@ public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSourc
         List<IinJohoRelateEntity> 調査員情報リストtemp = new ArrayList<>();
         List<IinJohoRelateEntity> その他情報リストtemp = new ArrayList<>();
         for (IinJohoRelateEntity entity : item.get委員情報()) {
-            if (!(new RString("13").equals(entity.getShinsakaiIinShikakuCode())
-                    && new RString("14").equals(entity.getShinsakaiIinShikakuCode()))) {
+            if (!(Sikaku.ホームヘルパー.getコード().equals(entity.getShinsakaiIinShikakuCode())
+                    && Sikaku.介護職員.getコード().equals(entity.getShinsakaiIinShikakuCode()))) {
                 委員情報リストtemp.add(entity);
-            } else if (new RString("13").equals(entity.getShinsakaiIinShikakuCode())
-                    && new RString("14").equals(entity.getShinsakaiIinShikakuCode())) {
+            } else if (Sikaku.ホームヘルパー.getコード().equals(entity.getShinsakaiIinShikakuCode())
+                    && Sikaku.介護職員.getコード().equals(entity.getShinsakaiIinShikakuCode())) {
                 調査員情報リストtemp.add(entity);
-            } else if (new RString("99").equals(entity.getShinsakaiIinShikakuCode())) {
+            } else if (Sikaku.その他.getコード().equals(entity.getShinsakaiIinShikakuCode())) {
                 その他情報リストtemp.add(entity);
             }
         }
         List<RString> temp委員リスト = new ArrayList<>();
         for (IinJohoRelateEntity entity : 委員情報リストtemp) {
             RStringBuilder rsb = new RStringBuilder();
-            if (new RString(index_1).equals(entity.getKaigoninteiShinsakaiGichoKubunCode())) {
+            if (new RString(INDEX_1).equals(entity.getKaigoninteiShinsakaiGichoKubunCode())) {
                 rsb.append(new RString("◎"));
                 rsb.append(entity.getShinsakaiIinShimei());
-            } else if (new RString(index_0).equals(entity.getKaigoninteiShinsakaiGichoKubunCode())) {
+            } else if (new RString(INDEX_0).equals(entity.getKaigoninteiShinsakaiGichoKubunCode())) {
                 rsb.append(entity.getShinsakaiIinShimei());
             }
             temp委員リスト.add(rsb.toRString());
@@ -119,101 +120,101 @@ public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSourc
     }
 
     private void edit員情報(List<RString> temp委員リスト) {
-        if (Integer.valueOf(temp委員リスト.size()).compareTo(index_5) >= 0) {
-            合計数リスト.add(new RString(index_5));
-            委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(index_0), temp委員リスト.get(index_1), temp委員リスト.get(index_2),
-                    temp委員リスト.get(index_3), temp委員リスト.get(index_4)));
+        if (temp委員リスト.size() >= INDEX_5) {
+            合計数リスト.add(new RString(INDEX_5));
+            委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(INDEX_0), temp委員リスト.get(INDEX_1), temp委員リスト.get(INDEX_2),
+                    temp委員リスト.get(INDEX_3), temp委員リスト.get(INDEX_4)));
         } else {
             合計数リスト.add(new RString(temp委員リスト.size()));
-            合計数リスト.add(new RString(index_0));
-            if (Integer.valueOf(temp委員リスト.size()).compareTo(index_1) == 0) {
-                委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(index_0), RString.EMPTY, RString.EMPTY,
+            合計数リスト.add(new RString(INDEX_0));
+            if (temp委員リスト.size() == INDEX_1) {
+                委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(INDEX_0), RString.EMPTY, RString.EMPTY,
                         RString.EMPTY, RString.EMPTY));
-            } else if (Integer.valueOf(temp委員リスト.size()).compareTo(index_2) == 0) {
-                委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(index_0),
-                        temp委員リスト.get(index_1), RString.EMPTY, RString.EMPTY, RString.EMPTY));
-            } else if (Integer.valueOf(temp委員リスト.size()).compareTo(index_3) == 0) {
-                委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(index_0),
-                        temp委員リスト.get(index_1), temp委員リスト.get(index_2), RString.EMPTY, RString.EMPTY));
-            } else if (Integer.valueOf(temp委員リスト.size()).compareTo(index_4) == 0) {
-                委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(index_0),
-                        temp委員リスト.get(index_1), temp委員リスト.get(index_2), temp委員リスト.get(index_3), RString.EMPTY));
+            } else if (temp委員リスト.size() == INDEX_2) {
+                委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(INDEX_0),
+                        temp委員リスト.get(INDEX_1), RString.EMPTY, RString.EMPTY, RString.EMPTY));
+            } else if (temp委員リスト.size() == INDEX_3) {
+                委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(INDEX_0),
+                        temp委員リスト.get(INDEX_1), temp委員リスト.get(INDEX_2), RString.EMPTY, RString.EMPTY));
+            } else if (temp委員リスト.size() == INDEX_4) {
+                委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(INDEX_0),
+                        temp委員リスト.get(INDEX_1), temp委員リスト.get(INDEX_2), temp委員リスト.get(INDEX_3), RString.EMPTY));
             }
             委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
         }
-        if (Integer.valueOf(temp委員リスト.size()).compareTo(index_5) > 0) {
-            合計数リスト.add(new RString(temp委員リスト.size() - index_5));
-            if (Integer.valueOf(temp委員リスト.size()).compareTo(index_6) == 0) {
-                委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(index_5), RString.EMPTY, RString.EMPTY,
+        if (temp委員リスト.size() > INDEX_5) {
+            合計数リスト.add(new RString(temp委員リスト.size() - INDEX_5));
+            if (temp委員リスト.size() == INDEX_6) {
+                委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(INDEX_5), RString.EMPTY, RString.EMPTY,
                         RString.EMPTY, RString.EMPTY));
-            } else if (Integer.valueOf(temp委員リスト.size()).compareTo(index_7) == 0) {
-                委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(index_5), temp委員リスト.get(index_6),
+            } else if (temp委員リスト.size() == INDEX_7) {
+                委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(INDEX_5), temp委員リスト.get(INDEX_6),
                         RString.EMPTY, RString.EMPTY, RString.EMPTY));
-            } else if (Integer.valueOf(temp委員リスト.size()).compareTo(index_8) == 0) {
-                委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(index_5), temp委員リスト.get(index_6),
-                        temp委員リスト.get(index_7), RString.EMPTY, RString.EMPTY));
-            } else if (Integer.valueOf(temp委員リスト.size()).compareTo(index_9) == 0) {
-                委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(index_5),
-                        temp委員リスト.get(index_6), temp委員リスト.get(index_7), temp委員リスト.get(index_8), RString.EMPTY));
+            } else if (temp委員リスト.size() == INDEX_8) {
+                委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(INDEX_5), temp委員リスト.get(INDEX_6),
+                        temp委員リスト.get(INDEX_7), RString.EMPTY, RString.EMPTY));
+            } else if (temp委員リスト.size() == INDEX_9) {
+                委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(INDEX_5),
+                        temp委員リスト.get(INDEX_6), temp委員リスト.get(INDEX_7), temp委員リスト.get(INDEX_8), RString.EMPTY));
             }
         }
     }
 
     private void edit調査員情報(List<IinJohoRelateEntity> 調査員情報リストtemp) {
-        if (Integer.valueOf(調査員情報リストtemp.size()).compareTo(index_5) >= 0) {
-            合計数リスト.add(new RString(index_5));
-            調査員情報リスト.add(new GoGyoumeIchiIchiRanEntity(調査員情報リストtemp.get(index_0).getShinsakaiIinShimei(),
-                    調査員情報リストtemp.get(index_0).getShinsakaiIinShimei(),
-                    調査員情報リストtemp.get(index_1).getShinsakaiIinShimei(),
-                    調査員情報リストtemp.get(index_2).getShinsakaiIinShimei(),
-                    調査員情報リストtemp.get(index_3).getShinsakaiIinShimei()));
+        if (調査員情報リストtemp.size() > INDEX_5) {
+            合計数リスト.add(new RString(INDEX_5));
+            調査員情報リスト.add(new GoGyoumeIchiIchiRanEntity(調査員情報リストtemp.get(INDEX_0).getShinsakaiIinShimei(),
+                    調査員情報リストtemp.get(INDEX_0).getShinsakaiIinShimei(),
+                    調査員情報リストtemp.get(INDEX_1).getShinsakaiIinShimei(),
+                    調査員情報リストtemp.get(INDEX_2).getShinsakaiIinShimei(),
+                    調査員情報リストtemp.get(INDEX_3).getShinsakaiIinShimei()));
         } else {
             合計数リスト.add(new RString(調査員情報リストtemp.size()));
-            if (Integer.valueOf(調査員情報リストtemp.size()).compareTo(index_1) == 0) {
-                調査員情報リスト.add(new GoGyoumeIchiIchiRanEntity(調査員情報リストtemp.get(index_0).getShinsakaiIinShimei(),
+            if (調査員情報リストtemp.size() == INDEX_1) {
+                調査員情報リスト.add(new GoGyoumeIchiIchiRanEntity(調査員情報リストtemp.get(INDEX_0).getShinsakaiIinShimei(),
                         RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
-            } else if (Integer.valueOf(調査員情報リストtemp.size()).compareTo(index_2) == 0) {
-                調査員情報リスト.add(new GoGyoumeIchiIchiRanEntity(調査員情報リストtemp.get(index_0).getShinsakaiIinShimei(),
-                        調査員情報リストtemp.get(index_1).getShinsakaiIinShimei(), RString.EMPTY, RString.EMPTY, RString.EMPTY));
-            } else if (Integer.valueOf(調査員情報リストtemp.size()).compareTo(index_3) == 0) {
-                調査員情報リスト.add(new GoGyoumeIchiIchiRanEntity(調査員情報リストtemp.get(index_0).getShinsakaiIinShimei(),
-                        調査員情報リストtemp.get(index_1).getShinsakaiIinShimei(),
-                        調査員情報リストtemp.get(index_2).getShinsakaiIinShimei(), RString.EMPTY, RString.EMPTY));
-            } else if (Integer.valueOf(調査員情報リストtemp.size()).compareTo(index_4) == 0) {
-                調査員情報リスト.add(new GoGyoumeIchiIchiRanEntity(調査員情報リストtemp.get(index_0).getShinsakaiIinShimei(),
-                        調査員情報リストtemp.get(index_1).getShinsakaiIinShimei(), 調査員情報リストtemp.get(index_2).getShinsakaiIinShimei(),
-                        調査員情報リストtemp.get(index_3).getShinsakaiIinShimei(), RString.EMPTY));
+            } else if (調査員情報リストtemp.size() == INDEX_2) {
+                調査員情報リスト.add(new GoGyoumeIchiIchiRanEntity(調査員情報リストtemp.get(INDEX_0).getShinsakaiIinShimei(),
+                        調査員情報リストtemp.get(INDEX_1).getShinsakaiIinShimei(), RString.EMPTY, RString.EMPTY, RString.EMPTY));
+            } else if (調査員情報リストtemp.size() == INDEX_3) {
+                調査員情報リスト.add(new GoGyoumeIchiIchiRanEntity(調査員情報リストtemp.get(INDEX_0).getShinsakaiIinShimei(),
+                        調査員情報リストtemp.get(INDEX_1).getShinsakaiIinShimei(),
+                        調査員情報リストtemp.get(INDEX_2).getShinsakaiIinShimei(), RString.EMPTY, RString.EMPTY));
+            } else if (調査員情報リストtemp.size() == INDEX_4) {
+                調査員情報リスト.add(new GoGyoumeIchiIchiRanEntity(調査員情報リストtemp.get(INDEX_0).getShinsakaiIinShimei(),
+                        調査員情報リストtemp.get(INDEX_1).getShinsakaiIinShimei(), 調査員情報リストtemp.get(INDEX_2).getShinsakaiIinShimei(),
+                        調査員情報リストtemp.get(INDEX_3).getShinsakaiIinShimei(), RString.EMPTY));
             }
         }
     }
 
     private void editその他情報(List<IinJohoRelateEntity> その他情報リストtemp) {
-        if (Integer.valueOf(その他情報リストtemp.size()).compareTo(index_5) >= 0) {
-            合計数リスト.add(new RString(index_5));
-            その他情報リスト.add(new GoGyoumeIchiIchiRanEntity(その他情報リストtemp.get(index_0).getShinsakaiIinShimei(),
-                    その他情報リストtemp.get(index_0).getShinsakaiIinShimei(),
-                    その他情報リストtemp.get(index_1).getShinsakaiIinShimei(),
-                    その他情報リストtemp.get(index_2).getShinsakaiIinShimei(),
-                    その他情報リストtemp.get(index_3).getShinsakaiIinShimei()));
+        if (その他情報リストtemp.size() >= INDEX_5) {
+            合計数リスト.add(new RString(INDEX_5));
+            その他情報リスト.add(new GoGyoumeIchiIchiRanEntity(その他情報リストtemp.get(INDEX_0).getShinsakaiIinShimei(),
+                    その他情報リストtemp.get(INDEX_0).getShinsakaiIinShimei(),
+                    その他情報リストtemp.get(INDEX_1).getShinsakaiIinShimei(),
+                    その他情報リストtemp.get(INDEX_2).getShinsakaiIinShimei(),
+                    その他情報リストtemp.get(INDEX_3).getShinsakaiIinShimei()));
         } else {
             合計数リスト.add(new RString(その他情報リストtemp.size()));
-            if (Integer.valueOf(その他情報リストtemp.size()).compareTo(index_1) == 0) {
-                その他情報リスト.add(new GoGyoumeIchiIchiRanEntity(その他情報リストtemp.get(index_0).getShinsakaiIinShimei(),
+            if (その他情報リストtemp.size() == INDEX_1) {
+                その他情報リスト.add(new GoGyoumeIchiIchiRanEntity(その他情報リストtemp.get(INDEX_0).getShinsakaiIinShimei(),
                         RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
-            } else if (Integer.valueOf(その他情報リストtemp.size()).compareTo(index_2) == 0) {
-                その他情報リスト.add(new GoGyoumeIchiIchiRanEntity(その他情報リストtemp.get(index_0).getShinsakaiIinShimei(),
-                        その他情報リストtemp.get(index_1).getShinsakaiIinShimei(), RString.EMPTY, RString.EMPTY, RString.EMPTY));
-            } else if (Integer.valueOf(その他情報リストtemp.size()).compareTo(index_3) == 0) {
-                その他情報リスト.add(new GoGyoumeIchiIchiRanEntity(その他情報リストtemp.get(index_0).getShinsakaiIinShimei(),
-                        その他情報リストtemp.get(index_1).getShinsakaiIinShimei(),
-                        その他情報リストtemp.get(index_2).getShinsakaiIinShimei(),
+            } else if (その他情報リストtemp.size() == INDEX_2) {
+                その他情報リスト.add(new GoGyoumeIchiIchiRanEntity(その他情報リストtemp.get(INDEX_0).getShinsakaiIinShimei(),
+                        その他情報リストtemp.get(INDEX_1).getShinsakaiIinShimei(), RString.EMPTY, RString.EMPTY, RString.EMPTY));
+            } else if (その他情報リストtemp.size() == INDEX_3) {
+                その他情報リスト.add(new GoGyoumeIchiIchiRanEntity(その他情報リストtemp.get(INDEX_0).getShinsakaiIinShimei(),
+                        その他情報リストtemp.get(INDEX_1).getShinsakaiIinShimei(),
+                        その他情報リストtemp.get(INDEX_2).getShinsakaiIinShimei(),
                         RString.EMPTY,
                         RString.EMPTY));
-            } else if (Integer.valueOf(その他情報リストtemp.size()).compareTo(index_4) == 0) {
-                その他情報リスト.add(new GoGyoumeIchiIchiRanEntity(その他情報リストtemp.get(index_0).getShinsakaiIinShimei(),
-                        その他情報リストtemp.get(index_1).getShinsakaiIinShimei(),
-                        その他情報リストtemp.get(index_2).getShinsakaiIinShimei(),
-                        その他情報リストtemp.get(index_3).getShinsakaiIinShimei(),
+            } else if (その他情報リストtemp.size() == INDEX_4) {
+                その他情報リスト.add(new GoGyoumeIchiIchiRanEntity(その他情報リストtemp.get(INDEX_0).getShinsakaiIinShimei(),
+                        その他情報リストtemp.get(INDEX_1).getShinsakaiIinShimei(),
+                        その他情報リストtemp.get(INDEX_2).getShinsakaiIinShimei(),
+                        その他情報リストtemp.get(INDEX_3).getShinsakaiIinShimei(),
                         RString.EMPTY));
             }
         }
