@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
@@ -28,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -119,11 +122,10 @@ public class KougakuShinseiIchiranJohyou {
      */
     public ShoKisaiHokenshaNo getShoKisaiHokenBangou(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月, RString 導入形態コード) {
-        ShoKisaiHokenshaNo 証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
+        ShoKisaiHokenshaNo 証記載保険者番号 = null;
         DbT1001HihokenshaDaichoEntity 被保険者台帳管理1 = 被保険者台帳管理Dac.selectMax異動日(被保険者番号, サービス年月);
         LasdecCode 市町村コード = LasdecCode.EMPTY;
-        if (被保険者台帳管理1 != null && new FlexibleYearMonth(
-                被保険者台帳管理1.getIdoYMD().toString()).compareTo(サービス年月) < 0) {
+        if (被保険者台帳管理1 != null && 被保険者台帳管理1.getIdoYMD().getYearMonth().compareTo(サービス年月) < 0) {
             List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
                     new CodeShubetsu(介護資格喪失事由), FlexibleDate.getNowDate());
             for (UzT0007CodeEntity list : codeList) {
@@ -153,11 +155,16 @@ public class KougakuShinseiIchiranJohyou {
         RString 導入形態コード2 = DonyuKeitaiCode.事務構成市町村.getCode();
         RString 導入形態コード3 = DonyuKeitaiCode.事務単一.getCode();
         if (導入形態コード.equals(導入形態コード2) || 導入形態コード.equals(導入形態コード3)) {
-            証記載保険者番号 = KoikiShichosonJohoFinder.
-                    createInstance().koseiShichosonJoho().records().get(0).get証記載保険者番号();
+            SearchResult<KoikiZenShichosonJoho> result1 = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho();
+            if (!result1.records().isEmpty()) {
+                証記載保険者番号 = result1.records().get(0).get証記載保険者番号();
+            }
         } else if (導入形態コード.equals(導入形態コード1)) {
-            証記載保険者番号 = KoikiShichosonJohoFinder.
-                    createInstance().shichosonCodeYoriShichosonJoho(市町村コード).records().get(0).get証記載保険者番号();
+            SearchResult<ShichosonCodeYoriShichoson> result2 = KoikiShichosonJohoFinder.
+                    createInstance().shichosonCodeYoriShichosonJoho(市町村コード);
+            if (!result2.records().isEmpty()) {
+                証記載保険者番号 = result2.records().get(0).get証記載保険者番号();
+            }
         }
         return 証記載保険者番号;
     }
