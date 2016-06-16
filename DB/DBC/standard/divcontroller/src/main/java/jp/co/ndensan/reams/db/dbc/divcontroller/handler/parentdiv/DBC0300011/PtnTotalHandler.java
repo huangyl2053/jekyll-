@@ -30,8 +30,6 @@ public final class PtnTotalHandler {
     private final PtnTotalDiv div;
     private static final RString 参照 = new RString("参照");
     private static final RString KEY_1 = new RString("1");
-    private static final RString KEY_2 = new RString("2");
-    private static final RString KEY_3 = new RString("3");
 
     /**
      * コンストラクタです。

@@ -35,8 +35,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class KouzaInfoHandler {
 
     private final KouzaInfoPanelDiv div;
-    private static final RString 登録 = new RString("登録");
-    private static final RString 修正 = new RString("修正");
     private static final RString 受託なし = new RString("1");
     private static final RString 受託あり = new RString("2");
     private static final RString 窓口払_コード = new RString("1");

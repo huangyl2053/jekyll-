@@ -457,10 +457,9 @@ public class PnlTotalPanelHandler {
         if (div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue().isEmpty()) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(契約事業者番号.toString()).evaluate());
         }
-        if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() != null) {
-            if (div.getPnlCommon().getPnlDetail().getRdoKettekubun().getSelectedKey().isEmpty()) {
-                throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(決定区分.toString()).evaluate());
-            }
+        if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() != null
+                && div.getPnlCommon().getPnlDetail().getRdoKettekubun().getSelectedKey().isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(決定区分.toString()).evaluate());
         }
         if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
                 .getRdoKettekubun().getSelectedKey())) {

@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbe.business.core.NinteichosaResult;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaresult.NinteichosaResultOfGaikyoKihon;
 import jp.co.ndensan.reams.db.dbe.business.helper.NinteichosaResultMock;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinteichosaIraiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinteichosaKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.NinteichosaIraiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import org.junit.experimental.runners.Enclosed;

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.kaigoiryokikan;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiiryokikan.IShujiiIryoKikan;
 import jp.co.ndensan.reams.db.dbe.definition.core.IryoKikanKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IryoKikanJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.IryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigoiryokikancode.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
