@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC17200",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "総合事業対象者登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC1720011",
+     "toLayoutTitle": "総合事業対象者登録",
+     "toState": "Default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1720011",
+     "layoutTitle": "総合事業対象者登録",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
