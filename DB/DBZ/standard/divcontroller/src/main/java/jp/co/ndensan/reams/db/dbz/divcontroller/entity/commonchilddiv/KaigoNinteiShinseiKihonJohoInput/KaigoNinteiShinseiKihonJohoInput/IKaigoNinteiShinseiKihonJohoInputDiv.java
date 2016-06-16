@@ -13,4 +13,6 @@ public interface IKaigoNinteiShinseiKihonJohoInputDiv extends ICommonChildDivBas
     void setInputMode(RString inputType);
 
     void initialize();
+
+    KaigoNinteiShinseiKihonJohoInputDiv getKaigoNinteiShinseiKihonJohoInputDiv();
 }
