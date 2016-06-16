@@ -8,11 +8,11 @@ package jp.co.ndensan.reams.db.dbc.business.report.kagoketteitbun;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteitbun.KagoKetteitsuchishoTorikomiIchiranHokenshaBunSource;
 
 /**
- * 過誤決定通知書情報取込一覧表（保険者分） 帳票HeaderEditor
+ * 過誤決定通知書情報取込一覧表（保険者分） 帳票KagoKetteitsuchishoTorikomiIchiranHokenshaBunHeaderEditor
  *
  * @reamsid_L DBC-0980-470 lijunjun
  */
-public class HeaderEditor implements IKagoKetteitsuchishoTorikomiIchiranHokenshaBunEditor {
+public class KagoKetteitsuchishoTorikomiIchiranHokenshaBunHeaderEditor implements IKagoKetteitsuchishoTorikomiIchiranHokenshaBunEditor {
 
     private final KagoKetteitsuchishoTorikomiIchiranHokenshaBunItem item;
 
@@ -21,7 +21,7 @@ public class HeaderEditor implements IKagoKetteitsuchishoTorikomiIchiranHokensha
      *
      * @param item KagoKetteitsuchishoTorikomiIchiranHokenshaBunItem
      */
-    public HeaderEditor(KagoKetteitsuchishoTorikomiIchiranHokenshaBunItem item) {
+    public KagoKetteitsuchishoTorikomiIchiranHokenshaBunHeaderEditor(KagoKetteitsuchishoTorikomiIchiranHokenshaBunItem item) {
         this.item = item;
     }
 
