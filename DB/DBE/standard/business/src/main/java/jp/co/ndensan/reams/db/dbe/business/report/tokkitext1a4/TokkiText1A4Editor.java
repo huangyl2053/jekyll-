@@ -118,13 +118,13 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
             sb.add(rsb.toRString());
         }
         for (int i = 0; i < sb.size(); i++) {
-            setxxx(sb.get(i), i, source);
+            setList(sb.get(i), i, source);
         }
         return source;
 
     }
 
-    private TokkiText1ReportSource setxxx(RString item, int index, TokkiText1ReportSource source) {
+    private TokkiText1ReportSource setList(RString item, int index, TokkiText1ReportSource source) {
 
         if (index == 連番_0) {
             source.tokkiText1 = item;

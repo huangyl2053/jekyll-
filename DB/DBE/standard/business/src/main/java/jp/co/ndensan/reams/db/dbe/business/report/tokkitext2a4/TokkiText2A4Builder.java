@@ -22,7 +22,7 @@ class TokkiText2A4Builder implements ITokkiText2A4Builder {
      *
      * @param editor {@link ITokkiText2A4Editor}
      */
-    public TokkiText1A4Builder(ITokkiText2A4Editor editor) {
+    public TokkiText2A4Builder(ITokkiText2A4Editor editor) {
         this.editor = editor;
     }
 
