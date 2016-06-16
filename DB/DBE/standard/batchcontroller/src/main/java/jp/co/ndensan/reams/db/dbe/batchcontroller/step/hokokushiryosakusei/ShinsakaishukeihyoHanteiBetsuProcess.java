@@ -151,7 +151,6 @@ public class ShinsakaishukeihyoHanteiBetsuProcess extends BatchKeyBreakBase<Sins
 
     private void setヘッダ情報(SinsakaiHanteiJyokyoHeaderEntity current) {
         shinsakaishukeihyo.setタイトル(タイトル);
-        shinsakaishukeihyo.set合議体番号(paramter.isEmptyGogitaiNo() ? RString.EMPTY : new RString(current.getGogitaiNo()));
         shinsakaishukeihyo.set審査会開始年月日(current.getShinsakaiKaisaiYMDMin());
         shinsakaishukeihyo.set審査会終了年月日(current.getShinsakaiKaisaiYMDMax());
         shinsakaishukeihyo.set開催回数(new RString(current.getShinsakaiKaisaiNoCount()));
