@@ -25,7 +25,7 @@ public class ShisetsuIdoJoho {
      */
     public ResponseData<ShisetsuIdoJohoDiv> onLoad(ShisetsuIdoJohoDiv div) {
         if (null == div.getShikibetsuCode() || div.getShikibetsuCode().isEmpty()) {
-            throw new SystemException("被保険者番号が設定されていません。");
+            throw new SystemException("識別コードが設定されていません。");
         }
         ShikibetsuCode 識別コード = new ShikibetsuCode(div.getShikibetsuCode());
         div.initializa(識別コード);
