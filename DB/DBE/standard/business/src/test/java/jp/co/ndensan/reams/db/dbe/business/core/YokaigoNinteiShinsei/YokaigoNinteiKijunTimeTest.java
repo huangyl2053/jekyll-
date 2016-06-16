@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiKijunTime;
 import java.util.EnumMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.YokaigoNinteiKijunTimeItem;
+import jp.co.ndensan.reams.db.dbe.definition.core.YokaigoNinteiKijunTimeItem;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.Test;
 import org.junit.Before;

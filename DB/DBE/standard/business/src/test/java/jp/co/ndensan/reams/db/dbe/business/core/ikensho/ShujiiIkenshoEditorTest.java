@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbe.business.core.ikensho;
 
 import java.util.Arrays;
 import java.util.EnumMap;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemGroupOf2009;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.IShujiiIkenshoItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.ShujiiIkenshoItemGroupOf2009;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.ShujiiIkenshoItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

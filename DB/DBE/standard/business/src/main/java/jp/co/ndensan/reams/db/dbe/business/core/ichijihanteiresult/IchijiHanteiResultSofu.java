@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IchijiHanteiResultSofuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.IchijiHanteiResultSofuKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**

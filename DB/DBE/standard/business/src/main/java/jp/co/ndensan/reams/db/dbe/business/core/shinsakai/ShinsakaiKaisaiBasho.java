@@ -5,9 +5,9 @@
 package jp.co.ndensan.reams.db.dbe.business.core.shinsakai;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiKaisaiBashoJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiBashoCode;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaikaisaichiku.ShinsakaiKaisaiChiku;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaikaisaichiku.ShinsakaiKaisaiChiku;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -114,7 +114,7 @@ public class ShinsakaiKaisaiBasho {
      * @return 有効・無効の判定結果
      */
     public boolean is有効() {
-        return 開催場所状況.is有効();
+        return 開催場所状況.is審査会開催場所状況();
     }
 
     @Override
