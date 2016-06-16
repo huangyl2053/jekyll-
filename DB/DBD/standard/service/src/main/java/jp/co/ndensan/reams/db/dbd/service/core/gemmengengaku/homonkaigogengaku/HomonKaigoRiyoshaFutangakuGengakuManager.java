@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.homonkaigogengaku;
 
+import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengaku;
@@ -13,6 +14,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.homonkaigogenga
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4016HomonKaigoRiyoshaFutangakuGengakuDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.homonkaigogengaku.IHomonKaigoRiyoshaFutangakuGengakuMapper;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shinsei.GemmenGengakuShinseiManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.util.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -106,5 +108,25 @@ public class HomonKaigoRiyoshaFutangakuGengakuManager {
         for (GemmenGengakuShinsei 減免減額申請 : 減免減額申請List) {
             減免減額申請Manager.save減免減額申請(減免減額申請);
         }
+    }
+
+    /**
+     * 主キーに合致する訪問介護利用者負担額減額を返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<HomonKaigoRiyoshaFutangakuGengaku>
+     */
+    @Transaction
+    public List<HomonKaigoRiyoshaFutangakuGengaku> get訪問介護利用者負担額減額By被保険者番号(HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        IHomonKaigoRiyoshaFutangakuGengakuMapper mapper = mapperProvider.create(IHomonKaigoRiyoshaFutangakuGengakuMapper.class);
+
+        List<HomonKaigoRiyoshaFutangakuGengakuEntity> relateEntityList = mapper.select訪問介護利用者負担額減額By被保険者番号(被保険者番号);
+        ArrayList<HomonKaigoRiyoshaFutangakuGengaku> 訪問介護利用者負担額減額List = new ArrayList<>();
+        for (HomonKaigoRiyoshaFutangakuGengakuEntity relateEntity : relateEntityList) {
+            relateEntity.initializeMd5ToEntities();
+            訪問介護利用者負担額減額List.add(new HomonKaigoRiyoshaFutangakuGengaku(relateEntity));
+        }
+        return 訪問介護利用者負担額減額List;
     }
 }
