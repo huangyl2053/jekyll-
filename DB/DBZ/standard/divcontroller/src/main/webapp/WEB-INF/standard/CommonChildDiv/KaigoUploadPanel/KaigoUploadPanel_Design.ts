@@ -8,8 +8,16 @@ module DBZ {
 
         export class Events {
 
-            public static onClick_BtnUpload(): string {
-                return "onClick_BtnUpload";
+            public static uploadFiles1(): string {
+                return "uploadFiles1";
+            }
+
+            public static uploadFiles(): string {
+                return "uploadFiles";
+            }
+
+            public static close_Dialog(): string {
+                return "close_Dialog";
             }
 
         }
@@ -37,6 +45,10 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
+            public uplUploadFile1(): UZA.UploadPanel {
+                return new UZA.UploadPanel(this.convFiledName("uplUploadFile1"));
+            }
+
             public uplUploadFile(): UZA.UploadPanel {
                 return new UZA.UploadPanel(this.convFiledName("uplUploadFile"));
             }
@@ -47,6 +59,10 @@ module DBZ {
 
             public lblUploadFileName(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblUploadFileName"));
+            }
+
+            public btnUpload1(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnUpload1"));
             }
 
             public btnUpload(): UZA.Button {
