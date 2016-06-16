@@ -115,6 +115,10 @@ public enum ViewStateKeys {
     /**
      * 特徴送付情報作成FLAG
      */
-    特徴送付情報作成FLAG;
+    特徴送付情報作成FLAG,
+    /**
+     * 特徴対象者同定実行FLAG
+     */
+    特徴対象者同定実行FLAG;
 
 }
