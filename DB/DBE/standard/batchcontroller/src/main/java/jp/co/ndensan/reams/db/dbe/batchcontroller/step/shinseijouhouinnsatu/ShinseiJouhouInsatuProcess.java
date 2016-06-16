@@ -109,9 +109,9 @@ public class ShinseiJouhouInsatuProcess extends BatchKeyBreakBase<ShinseiMonitor
     protected void keyBreakProcess(ShinseiMonitorEntity current) {
         if (hasBrek(getBefore(), current)) {
             AccessLogger.log(AccessLogType.照会, toPersonalData(current));
-            index_tmp++;
             ShinseiMonitorReport report = new ShinseiMonitorReport(current, index_tmp);
             report.writeBy(reportSourceWriter);
+            index_tmp++;
         }
     }
 
@@ -122,9 +122,9 @@ public class ShinseiJouhouInsatuProcess extends BatchKeyBreakBase<ShinseiMonitor
     @Override
     protected void usualProcess(ShinseiMonitorEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
-        index_tmp++;
         ShinseiMonitorReport report = new ShinseiMonitorReport(entity, index_tmp);
         report.writeBy(reportSourceWriter);
+        index_tmp++;
     }
 
     private PersonalData toPersonalData(ShinseiMonitorEntity entity) {

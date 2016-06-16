@@ -41,7 +41,9 @@ public class YokaigoyoShienchiran {
         item.setHihokenshaNo(entity.get被保険者番号());
         item.setSeinengappiYMD(entity.get生年月日());
         item.setSeibetsu(entity.get性別() == null ? Code.EMPTY : new Code(entity.get性別().toString()));
-        item.setKoroshoIfShikibetsuCode(entity.get前回二次判定結果コード() == null
+        item.setKoroshoIfShikibetsuCode(entity.get厚労省認定ソフトバージョン() == null
+                ? Code.EMPTY : new Code(entity.get厚労省認定ソフトバージョン().toString()));
+        item.setNijiHanteiYokaigoJotaiKubun(entity.get前回二次判定結果コード() == null
                 ? Code.EMPTY : new Code(entity.get前回二次判定結果コード().toString()));
         item.setNijiHanteiNinteiYukoKikan(entity.get前回月数());
         item.setNijiHanteiNinteiYukoKaishiYMD(entity.get前回認定有効期間開始日());
