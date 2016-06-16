@@ -285,7 +285,7 @@ public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
         List<KeyValueDataSource> 所得年度List = new ArrayList<>();
         RYear 日付関連_所得年度 = new RYear(DbBusinessConfig.get(ConfigNameDBD.日付関連_所得年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
         RYear 所得年度 = 日付関連_所得年度;
-        for (int 平成12年 = 2000; 平成12年 < 所得年度.getYearValue();) {
+        for (int 平成12年 = 2000; 平成12年 <= 所得年度.getYearValue();) {
             所得年度List.add(new KeyValueDataSource(所得年度.seireki().toDateString(), 所得年度.wareki().toDateString()));
             所得年度 = 所得年度.minusYear(1);
         }
