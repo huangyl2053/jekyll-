@@ -57,7 +57,7 @@ public class SystemKanriHandler {
      */
     public void initialize(List<ConfigMaintenance> コンフィグリスト) {
         RString サブ業務名 = ControlDataHolder.getSubGyomuCD().getGyomuName();
-        SubGyomuCode サブ業務 = ControlDataHolder.getSubGyomuCD();
+        SubGyomuCode サブ業務 = ControlDataHolder.getExecutionSubGyomuCode();
         List<dgSystemKanri_Row> rowList = new ArrayList<>();
         for (ConfigMaintenance configName : コンフィグリスト) {
             if (dbu.equals(new RString(サブ業務.toString()))) {
@@ -144,7 +144,7 @@ public class SystemKanriHandler {
      *
      */
     public void 保存処理() {
-        SubGyomuCode サブ業務 = ControlDataHolder.getSubGyomuCD();
+        SubGyomuCode サブ業務 = ControlDataHolder.getExecutionSubGyomuCode();
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
         RStringBuilder 変更理由 = new RStringBuilder();

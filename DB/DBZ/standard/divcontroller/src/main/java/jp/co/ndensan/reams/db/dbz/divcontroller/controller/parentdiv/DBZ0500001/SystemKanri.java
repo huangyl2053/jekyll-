@@ -55,7 +55,7 @@ public class SystemKanri {
      * @return ResponseData<ChohyoSelectDiv>
      */
     public ResponseData<SystemKanriDiv> onLoad(SystemKanriDiv div) {
-        SubGyomuCode サブ業務コード = ControlDataHolder.getSubGyomuCD();
+        SubGyomuCode サブ業務コード = ControlDataHolder.getExecutionSubGyomuCode();
         List<ConfigMaintenance> resultList = finder.getSyozokuKikan(サブ業務コード.value()).records();
         getHandler(div).initialize(resultList);
         if (!RealInitialLocker.tryGetLock(排他キー())) {
