@@ -41,6 +41,7 @@ public final class NinteichosaIraiHenkoData {
     private final RString 変更回数;
     private static NinteichosaIraiHenkoData data;
     private static int indexTmp;
+    private static int index;
 
     /**
      * コンストラクタです。
@@ -98,14 +99,18 @@ public final class NinteichosaIraiHenkoData {
      *
      * @param before 認定調査依頼先変更者のRelateEntity
      * @param nowEntity 認定調査依頼先変更者のRelateEntity
+     * @param count 条数
      * @return 認定調査依頼先変更者
      */
-    public static NinteichosaIraiHenkoData createEdit(NinteichosaIraiHenkoRelateEntity before, NinteichosaIraiHenkoRelateEntity nowEntity) {
+    public static NinteichosaIraiHenkoData createEdit(NinteichosaIraiHenkoRelateEntity before, NinteichosaIraiHenkoRelateEntity nowEntity,
+            int count) {
+
         if (before == null) {
             return null;
         }
+        index++;
         if (before.getShinseishoKanriNo().equals(nowEntity.getShinseishoKanriNo())) {
-            if (nowEntity.getNinteichosaIraiRirekiNo() > 2) {
+            if (nowEntity.getNinteichosaIraiRirekiNo() > 1) {
                 indexTmp++;
                 data = new NinteichosaIraiHenkoData(nowEntity.getShinseishoKanriNo().value(),
                         nowEntity.getHihokenshaNo(),
@@ -122,6 +127,9 @@ public final class NinteichosaIraiHenkoData {
                         nowEntity.getJigyoshaMeisho(),
                         nowEntity.getChosainShimei(),
                         new RString(indexTmp));
+            }
+            if (index == count) {
+                return data;
             }
         } else {
             indexTmp = 0;

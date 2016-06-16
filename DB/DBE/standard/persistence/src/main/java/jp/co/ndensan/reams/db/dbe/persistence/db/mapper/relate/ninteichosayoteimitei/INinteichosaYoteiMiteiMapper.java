@@ -44,4 +44,11 @@ public interface INinteichosaYoteiMiteiMapper {
      */
     List<ChosahyoIkenshoCheckListRelateEntity> getChosahyoIkenshoCheckList(ChosahyoIkenshoCheckListParamter paramter);
 
+    /**
+     * 認定調査依頼先変更者一覧表のデータの条数を取得します。
+     *
+     * @param paramter 認定調査依頼先変更者一覧表のデータ取得パラメータ
+     * @return 条数
+     */
+    int getCount(NinteichosaIraiHenkoMiteiParamter paramter);
 }
