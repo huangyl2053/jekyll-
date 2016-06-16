@@ -36,5 +36,9 @@ public class IinSonotashiryoSakuseiEntity {
     private RString 右のその他資料イメージ;
     private RString その他資料;
     private RString 頁番号;
+    private RString chosaGengo;
+    private RString sakuseiGengo;
+    private RString shinsaGengo;
+    private RString shinseiGengo;
 
 }

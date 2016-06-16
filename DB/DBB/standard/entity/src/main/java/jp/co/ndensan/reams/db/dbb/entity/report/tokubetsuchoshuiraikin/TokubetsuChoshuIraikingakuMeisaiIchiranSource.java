@@ -89,5 +89,47 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranSource implements IReportSou
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+
+    /**
+     * TokubetsuChoshuKaishiSourceのenum
+     */
+    public enum ReportSourceFields {
+
+        printTimeStamp,
+        nendo,
+        hokenshaNo,
+        hokenshaName,
+        shutsuryokujun1,
+        shutsuryokujun2,
+        shutsuryokujun3,
+        shutsuryokujun4,
+        shutsuryokujun5,
+        kaipage1,
+        kaipage2,
+        kaipage3,
+        kaipage4,
+        kaipage5,
+        nendoTitle,
+        listUpper_1,
+        listUpper_2,
+        listUpper_3,
+        listUpper_4,
+        listUpper_5,
+        listUpper_6,
+        listCenter_1,
+        listCenter_2,
+        listCenter_3,
+        listCenter_4,
+        listCenter_5,
+        listCenter_6,
+        listCenter_7,
+        listLower_1,
+        listLower_2,
+        listLower_3,
+        listLower_4,
+        listLower_5,
+        listLower_6,
+        keisanHoho
+    }
 // </editor-fold>
 }

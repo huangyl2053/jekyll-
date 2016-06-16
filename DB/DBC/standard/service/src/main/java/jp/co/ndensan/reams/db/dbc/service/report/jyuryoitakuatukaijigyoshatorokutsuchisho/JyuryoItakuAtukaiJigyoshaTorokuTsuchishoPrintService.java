@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeike
 import jp.co.ndensan.reams.uz.uza.biz.BushoCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -53,13 +52,9 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService {
 
-    private static final SubGyomuCode サブ業務コード = SubGyomuCode.DBC介護給付;
-    private static final ReportId ID = ReportIdDBC.DBC100032.getReportId();
     private static final int パターン番号 = 1;
     private static final int 項目番号_1 = 1;
     private static final int 項目番号_2 = 2;
-    private static final GyomuCode 業務コード = GyomuCode.DB介護保険;
-    private ToiawasesakiSource toiawasesakiSource;
 
     /**
      *
@@ -91,14 +86,15 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService {
         JyuryoItakuAtukaiJigyoshaTorokuTsuchishoProperty property = new JyuryoItakuAtukaiJigyoshaTorokuTsuchishoProperty();
         try (ReportAssembler<JyuryoItakuAtukaiJigyoshaTorokuTsuchishoSource> assembler = createAssembler(property, reportManager)) {
             IBunshoNoFinder finder = BunshoNoFinderFactory.createInstance();
-            RString 文書番号 = finder.get文書番号管理(ID, FlexibleDate.getNowDate()).edit文書番号();
+            RString 文書番号 = finder.get文書番号管理(ReportIdDBC.DBC100032.getReportId(), FlexibleDate.getNowDate()).edit文書番号();
             if (文書番号 == null) {
                 文書番号 = RString.EMPTY;
             }
 
             RString 通知書定型文１ = RString.EMPTY;
             TsuchishoTeikeibun keibun1 = new TsuchishoTeikeibunFinder()
-                    .get通知書定型文(サブ業務コード, ID, KamokuCode.EMPTY, パターン番号, 項目番号_1, FlexibleDate.getNowDate());
+                    .get通知書定型文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100032.getReportId(),
+                            KamokuCode.EMPTY, パターン番号, 項目番号_1, FlexibleDate.getNowDate());
             if (keibun1 != null) {
                 // TODO QA:874
                 通知書定型文１ = keibun1.get文章();
@@ -106,7 +102,8 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService {
 
             RString 通知書定型文2 = RString.EMPTY;
             TsuchishoTeikeibun keibun2 = new TsuchishoTeikeibunFinder()
-                    .get通知書定型文(サブ業務コード, ID, KamokuCode.EMPTY, パターン番号, 項目番号_2, FlexibleDate.getNowDate());
+                    .get通知書定型文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100032.getReportId(),
+                            KamokuCode.EMPTY, パターン番号, 項目番号_2, FlexibleDate.getNowDate());
             if (keibun2 != null) {
                 // TODO QA:874
                 通知書定型文2 = keibun2.get文章();
@@ -119,8 +116,12 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService {
                     認証者, 地方公共団体, assembler.getImageFolderPath(), new RDate(発行日.toString())).buildSource();
 
             IToiawasesakiFinder iToiawasesakiFinder = ToiawasesakiFinderFactory.createInstance();
-            Toiawasesaki toiawase = iToiawasesakiFinder.get問合せ先(業務コード, ID, BushoCode.EMPTY, RDate.getNowDate());
+            Toiawasesaki toiawase = iToiawasesakiFinder.
+                    get問合せ先(GyomuCode.DB介護保険, ReportIdDBC.DBC100032.getReportId(),
+                            BushoCode.EMPTY, RDate.getNowDate());
             IToiawasesakiSourceBuilder 問合せ先 = _ToiawasesakiSourceBuilderFactory.createInstance(toiawase);
+
+            ToiawasesakiSource toiawasesakiSource = null;
             if (問合せ先 != null) {
                 toiawasesakiSource = 問合せ先.buildSource();
             }

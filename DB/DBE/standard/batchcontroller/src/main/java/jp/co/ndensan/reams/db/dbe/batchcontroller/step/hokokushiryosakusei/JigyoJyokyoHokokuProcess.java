@@ -145,7 +145,8 @@ public class JigyoJyokyoHokokuProcess extends BatchKeyBreakBase<JigyoJyokyoHokok
     }
 
     private boolean hasBrek(JigyoJyokyoHokokuEntity before, JigyoJyokyoHokokuEntity current) {
-        return !(before.getNijiHanteiYM().equals(current.getNijiHanteiYM()));
+        return !((before.getNijiHanteiYM().equals(current.getNijiHanteiYM()))
+                && before.getShichosonCode().equals(current.getShichosonCode()));
     }
 
     private void set第1号被保険者(JigyoJyokyoHokokuEntity jigyoJyokyo) {

@@ -87,6 +87,47 @@ public class ShotokushokaihyoHakkoIchiranSource implements IReportSource {
     public RString listLower_5;
     @ReportItem(name = "listLower_6", length = 10, order = 34)
     public RString listLower_6;
+
+    /**
+     * ReportSourceFields
+     */
+    public enum ReportSourceFields {
+
+        printTimeStamp,
+        title,
+        nendo,
+        testShori,
+        hokenshaNo,
+        hokenshaName,
+        shutsuryokujun1,
+        shutsuryokujun2,
+        shutsuryokujun3,
+        shutsuryokujun4,
+        shutsuryokujun5,
+        kaipage1,
+        kaipage2,
+        kaipage3,
+        kaipage4,
+        kaipage5,
+        jushoTitle1,
+        komokuNameTitle1,
+        komokuNameTitle4,
+        jushoTitle2,
+        komokuNameTitle2,
+        listUpper_1,
+        listUpper_2,
+        listUpper_3,
+        listUpper_4,
+        listUpper_5,
+        listUpper_6,
+        listUpper_7,
+        listLower_1,
+        listLower_2,
+        listLower_3,
+        listLower_4,
+        listLower_5,
+        listLower_6
+    }
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

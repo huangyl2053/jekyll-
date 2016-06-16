@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraikin;
 
+import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraikin.param.TokubetsuChoshuIraikingakuMeisaiIchiranInputParam;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuiraikin.TokubetsuChoshuIraikingakuMeisaiIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -30,15 +31,6 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranHeaderEditor
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
-    private static final int NUM_5 = 5;
-    private static final int NUM_6 = 6;
-    private static final int NUM_7 = 7;
-    private static final int NUM_8 = 8;
-    private static final int NUM_9 = 9;
-    private static final int NUM_10 = 10;
-    private static final int NUM_11 = 11;
-    private static final int NUM_12 = 12;
-    private static final int NUM_13 = 13;
     private static final RString SAKUSEI = new RString("作成");
     private final YMDHMS 帳票作成日時;
     private final RYear 調定年度;
@@ -53,10 +45,10 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranHeaderEditor
     /**
      * インスタンスを生成します。
      *
-     * @param inputEntity {@link TokubetsuChoshuIraikingakuMeisaiIchiranInputEntity}
+     * @param inputEntity {@link TokubetsuChoshuIraikingakuMeisaiIchiranInputParam}
      */
     protected TokubetsuChoshuIraikingakuMeisaiIchiranHeaderEditor(
-            TokubetsuChoshuIraikingakuMeisaiIchiranInputEntity inputEntity) {
+            TokubetsuChoshuIraikingakuMeisaiIchiranInputParam inputEntity) {
         this.帳票作成日時 = inputEntity.get帳票作成日時();
         this.調定年度 = inputEntity.get調定年度();
         this.association = inputEntity.getAssociation();

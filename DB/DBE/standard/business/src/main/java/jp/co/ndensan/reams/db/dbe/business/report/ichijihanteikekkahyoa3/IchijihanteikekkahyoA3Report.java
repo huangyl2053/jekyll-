@@ -37,7 +37,7 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
      * @param reportSourceWriter 帳票Writer
      */
     @Override
-    protected void writeBy(ReportSourceWriter<IchijihanteikekkahyoA3ReportSource> reportSourceWriter) {
+    public void writeBy(ReportSourceWriter<IchijihanteikekkahyoA3ReportSource> reportSourceWriter) {
         IIchijihanteikekkahyoA3Editor headerEditor = new IchijihanteikekkahyoA3Editor(item);
         for (IchijihanteikekkahyoA3Body body : getBodyList()) {
             IIchijihanteikekkahyoA3Editor bodyEditor = new IchijihanteikekkahyoA3BodyEditor(body);

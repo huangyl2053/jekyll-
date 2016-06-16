@@ -361,7 +361,7 @@
         INNER JOIN rgdb."DbWT0001HihokenshaTemp" AS DbWT0001
         ON DbWT3036."renban" = DbWT0001."meisaiRenban"
         WHERE DbWT3036."serviceShuruiCode" IN ('41','44') 
-        AND DbWT3036."jigyoshoNo" is null) AS 一時TBL
+        AND DbWT3036."jigyoshoNo" is null or DbWT3036."jigyoshoNo" = '') AS 一時TBL
         LEFT JOIN 
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3048ShokanFukushiYoguHanbaihiMapper.noDeleted_DbT3048ShokanFukushiYoguHanbaihi" />) As DbT3048
         ON  一時TBL.登録被保険者番号 = DbT3048."dbT3048ShokanFukushiYoguHanbaihi_hiHokenshaNo"
@@ -376,7 +376,7 @@
         SET    "wrkJigyoshoNo" = #{jigyoshaNo}
         where "tanisuKingaku" = #{kounyuKingaku}
         AND "serviceShuruiCode" IN ('41','44')
-        AND "jigyoshoNo" is null
+        AND "jigyoshoNo" is null or "jigyoshoNo" = ''
         AND "serviceTeikyoYm" = #{serviceTeikyoYM}
         AND "seiriNo" = #{seiriNo}
     </update>
@@ -387,7 +387,7 @@
         SET    "wrkJigyoshoNo" = #{jigyoshaNo}
         where "tanisuKingaku" = #{kaishuKingaku}
          AND "serviceShuruiCode" IN ('42','45')
-        AND "jigyoshoNo" is null
+        AND "jigyoshoNo" is null or  "jigyoshoNo" = ''
         AND "serviceTeikyoYm" = #{serviceTeikyoYM}
         AND "seiriNo" = #{seiriNo}
     </update>
@@ -494,7 +494,7 @@
         INNER JOIN rgdb."DbWT0001HihokenshaTemp" AS DbWT0001
         ON DbWT3036."renban" = DbWT0001."meisaiRenban"
         WHERE DbWT3036."serviceShuruiCode" IN ('42','45') 
-        AND DbWT3036."jigyoshoNo" is null) AS 一時TBL
+        AND DbWT3036."jigyoshoNo" is null or DbWT3036."jigyoshoNo" = '') AS 一時TBL
         LEFT JOIN 
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3049ShokanJutakuKaishuMapper.noDeleted_DbT3049ShokanJutakuKaishu" />) As DbT3049
         ON  一時TBL.登録被保険者番号 = DbT3049."dbT3049ShokanJutakuKaishu_hiHokenshaNo"
@@ -725,7 +725,7 @@
     <update id="update償還払支給判定結果一時">
         UPDATE rgdb."DbWT3036ShokanHanteiKekkaTemp"
         SET    "koshinDBumu" = '1'
-        where "koshinDBumu" = ''
+        where "koshinDBumu" = '' or "koshinDBumu" is null
     </update>
     
      <select resultOrdered="true" id="select償還払支給判定結果データ" 

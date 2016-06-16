@@ -50,8 +50,7 @@ public final class TokuchoDoteiShoriHandler {
     private static final RString 漢字_処理なし = new RString("処理なし");
     private static final RString 対応状況_未対応 = new RString("未");
     private static final RString 対応状況_対応済 = new RString("済");
-    private static final int 十月 = 10;
-    private static final RString ZERO = new RString(0);
+    private static final int 月字数 = 2;
     private static final RString 単一市町村_MENU = new RString("単一市町村");
     private static final int BEGIN = 4;
     private static final int END = 6;
@@ -87,32 +86,41 @@ public final class TokuchoDoteiShoriHandler {
     private Entry<RString, Boolean> do初期値取得() {
         ShichosonSecurityJoho joho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         RString 保険者モード = モード_単一保険者;
-        RString 導入形態コード = joho.get導入形態コード().getColumnValue();
-        if (導入形態コード.equals(導入形態コード_112) || 導入形態コード.equals(導入形態コード_120)) {
-            保険者モード = モード_単一保険者;
-        } else if (導入形態コード.equals(導入形態コード_111)) {
-            保険者モード = モード_広域保険者;
+        boolean can実行 = false;
+        if (null != joho && null != joho.get導入形態コード()) {
+            RString 導入形態コード = joho.get導入形態コード().getColumnValue();
+            if (導入形態コード.equals(導入形態コード_112) || 導入形態コード.equals(導入形態コード_120)) {
+                保険者モード = モード_単一保険者;
+            } else if (導入形態コード.equals(導入形態コード_111)) {
+                保険者モード = モード_広域保険者;
+            }
+        } else {
+            return new SimpleEntry<>(保険者モード, can実行);
         }
         FlexibleYear 日付関連_調定年度 = new FlexibleYear(DbBusinessConfig.get(
                 ConfigKeysHizuke.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
         TokuchoTeishiTaisyosyaDoutei tokuchoTeishiTaisyosyaDoutei = TokuchoTeishiTaisyosyaDoutei.createInstance();
-        List<ShoriDateKanriResult> 特特徴対象者同定情報リスト = tokuchoTeishiTaisyosyaDoutei.getTokuchoTaishoJoho(日付関連_調定年度, 保険者モード);
-        boolean can実行 = false;
-        if (特特徴対象者同定情報リスト.isEmpty()) {
+        List<ShoriDateKanriResult> 特徴対象者同定情報リスト = tokuchoTeishiTaisyosyaDoutei.getTokuchoTaishoJoho(日付関連_調定年度, 保険者モード);
+        if (null == 特徴対象者同定情報リスト || 特徴対象者同定情報リスト.isEmpty()) {
             can実行 = false;
         } else {
-            for (ShoriDateKanriResult 特特徴対象者同定情報 : 特特徴対象者同定情報リスト) {
-                if (特特徴対象者同定情報.get基準年月日() == null
-                        || FlexibleDate.EMPTY.equals(特特徴対象者同定情報.get基準年月日())) {
+            for (ShoriDateKanriResult 特徴対象者同定情報 : 特徴対象者同定情報リスト) {
+                if (null == 特徴対象者同定情報.get基準年月日()
+                        || FlexibleDate.EMPTY.equals(特徴対象者同定情報.get基準年月日())) {
                     can実行 = true;
                     break;
                 }
             }
         }
+        if (!can実行) {
+            return new SimpleEntry<>(保険者モード, can実行);
+        }
         KonkaiShoriNaiyoJohoResult 今回処理内容情報 = tokuchoTeishiTaisyosyaDoutei.getKonkaiShoriNaiyoJoho(日付関連_調定年度, 保険者モード);
-        List<ShoriJokyoJohoResult> 処理状況一覧情報 = tokuchoTeishiTaisyosyaDoutei.getShoriJokyoList(
-                日付関連_調定年度, 今回処理内容情報.get対象者情報取得月().substringReturnAsPossible(BEGIN, END), 保険者モード);
-        do画面表示(保険者モード, 今回処理内容情報, 処理状況一覧情報);
+        if (null != 今回処理内容情報 && RString.isNullOrEmpty(今回処理内容情報.get対象者情報取得月())) {
+            List<ShoriJokyoJohoResult> 処理状況一覧情報 = tokuchoTeishiTaisyosyaDoutei.getShoriJokyoList(
+                    日付関連_調定年度, 今回処理内容情報.get対象者情報取得月().substringReturnAsPossible(BEGIN, END), 保険者モード);
+            do画面表示(保険者モード, 今回処理内容情報, 処理状況一覧情報);
+        }
         return new SimpleEntry<>(保険者モード, can実行);
     }
 
@@ -206,11 +214,7 @@ public final class TokuchoDoteiShoriHandler {
         TokuchoTeishiTaisyosyaDoutei tokuchoTeishiTaisyosyaDoutei = TokuchoTeishiTaisyosyaDoutei.createInstance();
         int 捕捉月1 = div.getTxtHosokuM1().getValue().getMonthValue();
         List<RString> 捕捉月 = new ArrayList<>();
-        if (捕捉月1 < 十月) {
-            捕捉月.add(ZERO.concat(new RString(捕捉月1)));
-        } else {
-            捕捉月.add(new RString(捕捉月1));
-        }
+        捕捉月.add(new RString(捕捉月1).padZeroToLeft(月字数));
         捕捉月.add(div.getTxtHosokuM2().getValue());
         捕捉月.add(div.getTxtHosokuM3().getValue());
 
@@ -219,11 +223,7 @@ public final class TokuchoDoteiShoriHandler {
             開始月str = RString.EMPTY;
         } else {
             int 開始月 = div.getTxtKaishiM().getValue().getMonthValue();
-            if (開始月 < 十月) {
-                開始月str = ZERO.concat(new RString(捕捉月1));
-            } else {
-                開始月str = new RString(捕捉月1);
-            }
+            開始月str = new RString(開始月).padZeroToLeft(月字数);
         }
         return tokuchoTeishiTaisyosyaDoutei.getBatchiPara(捕捉月, 開始月str);
     }

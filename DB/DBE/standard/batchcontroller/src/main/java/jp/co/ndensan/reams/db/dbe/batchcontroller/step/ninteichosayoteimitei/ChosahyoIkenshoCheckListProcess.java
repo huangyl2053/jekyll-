@@ -51,7 +51,7 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosayoteimitei."
-                    + "IChosahyoIkenshoCheckListMapper.getNinteichosaScheduleInput");
+                    + "INinteichosaYoteiMiteiMapper.getChosahyoIkenshoCheckList");
     private static final List<RString> PAGE_BREAK_KEYS = Collections
             .unmodifiableList(Arrays.asList(new RString(ChosahyoIkenshoCheckListReportSource.ReportSourceFields.hihokenshaNo.name())));
     private static final ReportId REPORT_ID = ReportIdDBE.DBE012003.getReportId();

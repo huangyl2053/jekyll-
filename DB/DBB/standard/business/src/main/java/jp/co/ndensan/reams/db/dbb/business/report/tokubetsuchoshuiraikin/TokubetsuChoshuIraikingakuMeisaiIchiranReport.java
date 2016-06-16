@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraikin;
 
+import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraikin.param.TokubetsuChoshuIraikingakuMeisaiIchiranInputParam;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariTokuchoKaishiTsuchisyoJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuiraikin.TokubetsuChoshuIraikingakuMeisaiIchiranSource;
@@ -64,13 +65,17 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranReport extends Report<Tokube
 
     @Override
     public void writeBy(ReportSourceWriter<TokubetsuChoshuIraikingakuMeisaiIchiranSource> reportSourceWriter) {
+        TokubetsuChoshuIraikingakuMeisaiIchiranInputParam headInput
+                = new TokubetsuChoshuIraikingakuMeisaiIchiranInputParam(null, 調定年度, 帳票作成日時,
+                        並び順の１件目, 並び順の２件目, 並び順の３件目, 並び順の４件目, 並び順の５件目,
+                        改頁項目List, association);
+        ITokubetsuChoshuIraikingakuMeisaiIchiranEditor headerEditor
+                = new TokubetsuChoshuIraikingakuMeisaiIchiranHeaderEditor(headInput);
         for (KariTokuchoKaishiTsuchisyoJoho 通知書情報 : 通知書情報List) {
-            TokubetsuChoshuIraikingakuMeisaiIchiranInputEntity inputEntity
-                    = new TokubetsuChoshuIraikingakuMeisaiIchiranInputEntity(通知書情報, 調定年度, 帳票作成日時,
+            TokubetsuChoshuIraikingakuMeisaiIchiranInputParam inputEntity
+                    = new TokubetsuChoshuIraikingakuMeisaiIchiranInputParam(通知書情報, 調定年度, 帳票作成日時,
                             並び順の１件目, 並び順の２件目, 並び順の３件目, 並び順の４件目, 並び順の５件目,
                             改頁項目List, association);
-            ITokubetsuChoshuIraikingakuMeisaiIchiranEditor headerEditor
-                    = new TokubetsuChoshuIraikingakuMeisaiIchiranHeaderEditor(inputEntity);
             ITokubetsuChoshuIraikingakuMeisaiIchiranEditor bodyEditor
                     = new TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor(inputEntity);
             ITokubetsuChoshuIraikingakuMeisaiIchiranBuilder builder

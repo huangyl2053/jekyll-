@@ -26,9 +26,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesak
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -277,20 +275,16 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
             EditedKariSanteiTsuchiShoKyotsuBeforeCorrection 更正前, EditedKariSanteiTsuchiShoKyotsuAfterCorrection 更正後) {
 
         if (更正前.get期間_自() != null) {
-            item.setShutokuYmdMae(new FlexibleDate(更正前.get期間_自()).wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            item.setShutokuYmdMae(更正前.get期間_自());
         }
         if (更正後.get期間_自() != null) {
-            item.setShutokuYmdAto(new FlexibleDate(更正後.get期間_自()).wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            item.setShutokuYmdAto(更正後.get期間_自());
         }
         if (更正前.get期間_至() != null) {
-            item.setSoshitsuYmdMae(new FlexibleDate(更正前.get期間_至()).wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            item.setSoshitsuYmdMae(更正前.get期間_至());
         }
         if (更正後.get期間_至() != null) {
-            item.setSoshitsuYmdAto(new FlexibleDate(更正後.get期間_至()).wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            item.setSoshitsuYmdAto(更正後.get期間_至());
         }
     }
 

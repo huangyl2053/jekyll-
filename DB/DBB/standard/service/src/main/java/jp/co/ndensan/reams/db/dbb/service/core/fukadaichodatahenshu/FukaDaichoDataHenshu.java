@@ -373,9 +373,9 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         set普通徴収_本算定(true, 賦課の情報_更正後, 賦課台帳情報.get収入情報(), 期月リスト_普徴, 編集後本算定賦課台帳情報);
         set普通徴収_増減額(編集後本算定賦課台帳情報);
         set普通徴収_収入額(賦課台帳情報.get収入情報(), 編集後本算定賦課台帳情報);
-        set本人_更正前後(賦課の情報_更正前, 賦課台帳情報.get被保険者台帳情報(), 賦課台帳情報.get境界層当該者情報(),
+        set本人_更正前後(false, 賦課の情報_更正前, 賦課台帳情報.get被保険者台帳情報(), 賦課台帳情報.get境界層当該者情報(),
                 本人個人_更正前, 編集後本算定賦課台帳情報);
-        set本人_更正前後(賦課の情報_更正後, 賦課台帳情報.get被保険者台帳情報(), 賦課台帳情報.get境界層当該者情報(),
+        set本人_更正前後(true, 賦課の情報_更正後, 賦課台帳情報.get被保険者台帳情報(), 賦課台帳情報.get境界層当該者情報(),
                 本人個人, 編集後本算定賦課台帳情報);
         編集後本算定賦課台帳情報.set世帯員情報リスト(世帯員情報リスト);
         編集後本算定賦課台帳情報.set特徴期(特徴期情報);
@@ -641,8 +641,8 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         set普通徴収_仮算定(true, 賦課の情報_更正後, 賦課台帳情報.get収入情報(), 期月リスト_普徴, 編集後仮算定賦課台帳情報);
         set普通徴収_増減額(編集後仮算定賦課台帳情報);
         set普通徴収_収入額(賦課台帳情報.get収入情報(), 編集後仮算定賦課台帳情報);
-        set本人_更正前後(賦課の情報_更正前, 賦課台帳情報.get被保険者台帳情報(), 本人個人_更正前, 編集後仮算定賦課台帳情報);
-        set本人_更正前後(賦課の情報_更正後, 賦課台帳情報.get被保険者台帳情報(), 本人個人, 編集後仮算定賦課台帳情報);
+        set本人_更正前後(false, 賦課の情報_更正前, 賦課台帳情報.get被保険者台帳情報(), 本人個人_更正前, 編集後仮算定賦課台帳情報);
+        set本人_更正前後(true, 賦課の情報_更正後, 賦課台帳情報.get被保険者台帳情報(), 本人個人, 編集後仮算定賦課台帳情報);
         編集後仮算定賦課台帳情報.set世帯員情報リスト(世帯員情報リスト);
         編集後仮算定賦課台帳情報.set特徴期(特徴期情報);
         編集後仮算定賦課台帳情報.set特徴月(特徴月情報);
@@ -784,7 +784,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         }
     }
 
-    private void set本人_更正前後(FukaAtena 賦課の情報, DbT1001HihokenshaDaichoEntity 被保険者台帳情報,
+    private void set本人_更正前後(boolean 前後区分, FukaAtena 賦課の情報, DbT1001HihokenshaDaichoEntity 被保険者台帳情報,
             EditedKojin 本人個人, EditedKariSanteiFukaDaichoJoho 編集後仮算定賦課台帳情報) {
 
         Honnin 本人 = new Honnin();
@@ -815,10 +815,14 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         本人.set本人合計取得金額(format金額(賦課の情報.get賦課情報().get合計所得金額()));
         本人.set本人課税区分(!RString.isNullOrEmpty(賦課の情報.get賦課情報().get課税区分())
                 ? KazeiKubun.toValue(賦課の情報.get賦課情報().get課税区分()).get名称() : RString.EMPTY);
-        編集後仮算定賦課台帳情報.set本人更正前(本人);
+        if (前後区分) {
+            編集後仮算定賦課台帳情報.set本人更正後(本人);
+        } else {
+            編集後仮算定賦課台帳情報.set本人更正前(本人);
+        }
     }
 
-    private void set本人_更正前後(FukaAtena 賦課の情報, DbT1001HihokenshaDaichoEntity 被保険者台帳情報,
+    private void set本人_更正前後(boolean 前後区分, FukaAtena 賦課の情報, DbT1001HihokenshaDaichoEntity 被保険者台帳情報,
             DbT1006KyokaisoGaitoshaEntity 境界層当該者情報, EditedKojin 本人個人, EditedHonSanteiFukaDaichoJoho 編集後本算定賦課台帳情報) {
 
         Honnin 本人 = new Honnin();
@@ -850,7 +854,11 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             本人.set本人限界層該当開始年月日(get年月日(境界層当該者情報.getTekiyoKaishiYMD()));
             本人.set本人限界層該当終了年月日(get年月日(境界層当該者情報.getTekiyoShuryoYMD()));
         }
-        編集後本算定賦課台帳情報.set本人更正前(本人);
+        if (前後区分) {
+            編集後本算定賦課台帳情報.set本人更正後(本人);
+        } else {
+            編集後本算定賦課台帳情報.set本人更正前(本人);
+        }
     }
 
     private Honnin get本人_更正前後(FukaAtena 賦課の情報, DbT1001HihokenshaDaichoEntity 被保険者台帳情報, EditedKojin 本人個人) {
@@ -891,7 +899,8 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
      */
     private RString get年月日(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
-            return 年月日.wareki().toDateString();
+            return 年月日.wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
         }
         return RString.EMPTY;
     }
@@ -1291,7 +1300,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             Class clazz = fukaJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                特徴仮算定保険料.add(get金額((Decimal) getMethod.invoke(fukaJoho)));
+                特徴仮算定保険料 = 特徴仮算定保険料.add(get金額((Decimal) getMethod.invoke(fukaJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1310,7 +1319,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             Class clazz = fukaJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                普徴納付済額.add(get金額((Decimal) getMethod.invoke(fukaJoho)));
+                普徴納付済額 = 普徴納付済額.add(get金額((Decimal) getMethod.invoke(fukaJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1330,7 +1339,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             Class clazz = 収入情報.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                特徴収入済額.add(get金額((Decimal) getMethod.invoke(収入情報)));
+                特徴収入済額 = 特徴収入済額.add(get金額((Decimal) getMethod.invoke(収入情報)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1350,7 +1359,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             Class clazz = 収入情報.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                普徴収入済額.add(get金額((Decimal) getMethod.invoke(収入情報)));
+                普徴収入済額 = 普徴収入済額.add(get金額((Decimal) getMethod.invoke(収入情報)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1515,7 +1524,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         Class clazz = 前年度情報.getClass();
         try {
             Method getMethod = clazz.getDeclaredMethod(sb.toString());
-            普徴納付済額.add(get金額((Decimal) getMethod.invoke(前年度情報)));
+            普徴納付済額 = 普徴納付済額.add(get金額((Decimal) getMethod.invoke(前年度情報)));
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
             Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
         }

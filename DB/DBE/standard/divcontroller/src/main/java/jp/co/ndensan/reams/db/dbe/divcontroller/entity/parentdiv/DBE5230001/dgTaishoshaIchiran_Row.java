@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 14 21:02:02 CST 2016 
+ * Thu Jun 16 15:31:58 CST 2016 
  */
 
 
@@ -56,6 +56,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
     private RString hidIken;
     private RString hidIkenCode;
     private RString hidIchiHenKou;
+    private RString upDateFlag;
 
     public dgTaishoshaIchiran_Row() {
         super();
@@ -93,6 +94,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.hidIken = RString.EMPTY;
         this.hidIkenCode = RString.EMPTY;
         this.hidIchiHenKou = RString.EMPTY;
+        this.upDateFlag = RString.EMPTY;
         this.setOriginalData("shinsakaiJunjo", shinsakaiJunjo);
         this.setOriginalData("hokenshaNo", hokenshaNo);
         this.setOriginalData("hokenshaMeisho", hokenshaMeisho);
@@ -127,9 +129,10 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("hidIken", hidIken);
         this.setOriginalData("hidIkenCode", hidIkenCode);
         this.setOriginalData("hidIchiHenKou", hidIchiHenKou);
+        this.setOriginalData("upDateFlag", upDateFlag);
     }
 
-    public dgTaishoshaIchiran_Row(RString shinsakaiJunjo, RString hokenshaNo, RString hokenshaMeisho, RString hihokenshaNo, RString shimei, RString hihoKubun, RString shinseiKubunShinseiji, RString shinseiKubunLaw, TextBoxFlexibleDate shinseiDay, TextBoxFlexibleDate zenkaiYukoKikanShuryoDay, RString zenkaiIchijiHantei, RString konkaiIchijiHantei, RString zenkaiNijiHantei, RString konkaiNijiHantei, RString hanteiKekka, TextBoxFlexibleDate nijiHanteiDate, RString tokuteiShippei, RString jotaizo, TextBoxFlexibleDate ninteiKikanKaishi, TextBoxFlexibleDate ninteiKikanShuryo, RString ninteiKikanTukisu, Boolean shinsakaiMemo, Boolean shinsakaiIken, RString shinsakaiIkenShurui, RString ichijiHanteiKekkaHenkoRiyu, RString chosahyoNetakirido, RString chosahyoNinchido, RString ikenshoNetakirido, RString ikenshoNinchido, RString seiNenGaBi, RString hidMemo, RString hidIken, RString hidIkenCode, RString hidIchiHenKou) {
+    public dgTaishoshaIchiran_Row(RString shinsakaiJunjo, RString hokenshaNo, RString hokenshaMeisho, RString hihokenshaNo, RString shimei, RString hihoKubun, RString shinseiKubunShinseiji, RString shinseiKubunLaw, TextBoxFlexibleDate shinseiDay, TextBoxFlexibleDate zenkaiYukoKikanShuryoDay, RString zenkaiIchijiHantei, RString konkaiIchijiHantei, RString zenkaiNijiHantei, RString konkaiNijiHantei, RString hanteiKekka, TextBoxFlexibleDate nijiHanteiDate, RString tokuteiShippei, RString jotaizo, TextBoxFlexibleDate ninteiKikanKaishi, TextBoxFlexibleDate ninteiKikanShuryo, RString ninteiKikanTukisu, Boolean shinsakaiMemo, Boolean shinsakaiIken, RString shinsakaiIkenShurui, RString ichijiHanteiKekkaHenkoRiyu, RString chosahyoNetakirido, RString chosahyoNinchido, RString ikenshoNetakirido, RString ikenshoNinchido, RString seiNenGaBi, RString hidMemo, RString hidIken, RString hidIkenCode, RString hidIchiHenKou, RString upDateFlag) {
         super();
         this.setOriginalData("shinsakaiJunjo", shinsakaiJunjo);
         this.setOriginalData("hokenshaNo", hokenshaNo);
@@ -165,6 +168,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("hidIken", hidIken);
         this.setOriginalData("hidIkenCode", hidIkenCode);
         this.setOriginalData("hidIchiHenKou", hidIchiHenKou);
+        this.setOriginalData("upDateFlag", upDateFlag);
         this.shinsakaiJunjo = shinsakaiJunjo;
         this.hokenshaNo = hokenshaNo;
         this.hokenshaMeisho = hokenshaMeisho;
@@ -199,6 +203,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.hidIken = hidIken;
         this.hidIkenCode = hidIkenCode;
         this.hidIchiHenKou = hidIchiHenKou;
+        this.upDateFlag = upDateFlag;
     }
 
     public RString getShinsakaiJunjo() {
@@ -335,6 +340,10 @@ public class dgTaishoshaIchiran_Row extends DataRow {
 
     public RString getHidIchiHenKou() {
         return hidIchiHenKou;
+    }
+
+    public RString getUpDateFlag() {
+        return upDateFlag;
     }
 
     public void setShinsakaiJunjo(RString shinsakaiJunjo) {
@@ -505,6 +514,11 @@ public class dgTaishoshaIchiran_Row extends DataRow {
     public void setHidIchiHenKou(RString hidIchiHenKou) {
         this.setOriginalData("hidIchiHenKou", hidIchiHenKou);
         this.hidIchiHenKou = hidIchiHenKou;
+    }
+
+    public void setUpDateFlag(RString upDateFlag) {
+        this.setOriginalData("upDateFlag", upDateFlag);
+        this.upDateFlag = upDateFlag;
     }
 
     // </editor-fold>

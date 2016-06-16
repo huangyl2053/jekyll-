@@ -50,6 +50,10 @@ public class IinSonotashiryoSakuseiA4Editor implements IIinSonotashiryoSakuseiA4
         source.shinsaMM = item.get今回認定審査月();
         source.shinsaDD = item.get今回認定審査日();
         source.imgSonotashiryo = item.getその他資料();
+        source.chosaGengo = item.getChosaGengo();
+        source.sakuseiGengo = item.getSakuseiGengo();
+        source.shinsaGengo = item.getShinsaGengo();
+        source.shinseiGengo = item.getShinseiGengo();
         return source;
     }
 }

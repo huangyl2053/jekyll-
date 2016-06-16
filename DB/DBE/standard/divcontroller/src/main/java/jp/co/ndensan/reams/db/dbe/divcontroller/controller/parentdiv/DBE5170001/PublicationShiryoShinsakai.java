@@ -41,22 +41,22 @@ public class PublicationShiryoShinsakai {
         RString 審査会一覧_開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         FlexibleDate 開催予定日 = ViewStateHolder.get(ViewStateKeys.開催予定日, FlexibleDate.class);
         RString 審査会会場 = ViewStateHolder.get(ViewStateKeys.審査会会場, RString.class);
-        RString 開始予定時間 = ViewStateHolder.get(ViewStateKeys.開始予定時間, RString.class);
+        RTime 開始予定時間 = ViewStateHolder.get(ViewStateKeys.開始予定時間, RTime.class);
         RString 資料作成 = ViewStateHolder.get(ViewStateKeys.資料作成, RString.class);
         RString 合議体番号 = ViewStateHolder.get(ViewStateKeys.合議体番号, RString.class);
         RString 合議体名称 = ViewStateHolder.get(ViewStateKeys.合議体名称, RString.class);
-        RString 予定定員 = ViewStateHolder.get(ViewStateKeys.予定定員, RString.class);
-        RString 割付人数 = ViewStateHolder.get(ViewStateKeys.割付人数, RString.class);
+        Decimal 予定定員 = ViewStateHolder.get(ViewStateKeys.予定定員, Decimal.class);
+        Decimal 割付人数 = ViewStateHolder.get(ViewStateKeys.割付人数, Decimal.class);
         FlexibleDate 処理日 = ViewStateHolder.get(ViewStateKeys.処理日, FlexibleDate.class);
         div.getTxtShinsakaiKaisaiNo().setValue(審査会一覧_開催番号);
         div.getTxtShinsakaiYoteiDate().setValue(開催予定日);
         div.getTxtShinsakaiKaijo().setValue(審査会会場);
-        div.getTxtShinsakaiKaishiYoteiTime().setValue(RTime.of(開始予定時間));
+        div.getTxtShinsakaiKaishiYoteiTime().setValue(開始予定時間);
         div.getTxtShiryoSakusei().setValue(資料作成);
         div.getTxtGogitaiNo().setValue(合議体番号);
         div.getTxtGogitaiName().setValue(合議体名称);
-        div.getTxtYoteiTeiin().setValue(new Decimal(予定定員.toString()));
-        div.getTxtWariateNinzu().setValue(new Decimal(割付人数.toString()));
+        div.getTxtYoteiTeiin().setValue(予定定員);
+        div.getTxtWariateNinzu().setValue(割付人数);
         div.getTxtOperationDate().setValue(処理日);
         RStringBuilder builder = new RStringBuilder();
         builder.append(new RString("DBEShinsakaiNo"))

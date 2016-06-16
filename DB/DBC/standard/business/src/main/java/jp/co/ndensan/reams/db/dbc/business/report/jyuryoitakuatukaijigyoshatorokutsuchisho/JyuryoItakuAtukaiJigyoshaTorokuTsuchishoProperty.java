@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.business.report.jyuryoitakuatukaijigyoshatoro
 
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.report.jyuryoitakuatukaijigyoshatorokutsuchishosource.JyuryoItakuAtukaiJigyoshaTorokuTsuchishoSource;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -18,12 +17,10 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  */
 public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoProperty extends ReportPropertyBase<JyuryoItakuAtukaiJigyoshaTorokuTsuchishoSource> {
 
-    private static final ReportId ID = ReportIdDBC.DBC100032.getReportId();
-
     /**
      * インスタンスを生成します。
      */
     public JyuryoItakuAtukaiJigyoshaTorokuTsuchishoProperty() {
-        super(SubGyomuCode.DBC介護給付, ID);
+        super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100032.getReportId());
     }
 }

@@ -46,7 +46,7 @@ public class ShinsakaiKekkaToroku {
      * コンストラクタです。
      */
     public ShinsakaiKekkaToroku() {
-        ViewStateHolder.put(ViewStateKeys.介護認定審査会開催結果登録_開催番号, new RString("9"));
+        ViewStateHolder.put(ViewStateKeys.介護認定審査会開催結果登録_開催番号, new RString("209007"));
         this.manager = ShinsakaiKekkaTorokuManager.createInstance();
         this.要介護認定結果情報Manager = NinteiShinseiJohoManager.createInstance();
         this.介護認定審査会開催予定情報manager = new ShinsakaiWariateJohoManager();
@@ -124,6 +124,27 @@ public class ShinsakaiKekkaToroku {
             getHandler(div).有効月数チェック();
             getHandler(div).有効月数範囲チェック();
             getHandler(div).入力チェック();
+            getHandler(div).setKobetsuHyojiArea();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「保存する」ボタンを押下しました。。
+     *
+     * @param div 介護認定審査会審査結果登録Div
+     * @return responseData
+     */
+    public ResponseData onClick_Save(ShinsakaiKekkaTorokuDiv div) {
+        getHandler(div).対象者一覧件数チェック();
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+
             getHandler(div).setKobetsuHyojiArea();
         }
         return ResponseData.of(div).respond();

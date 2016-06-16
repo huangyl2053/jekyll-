@@ -102,9 +102,10 @@ public class ChosahyoIkenshoCheckListEditor implements IChosahyoIkenshoCheckList
             source = editSource09B今回意見書1(source);
             source = editSource09B今回意見書2(source);
         }
-        source.konkaiChosahyo75 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(item.getDbT5203_shogaiNichijoSeikatsuJiritsudoCode().value()).get名称();
-        source.konkaiChosahyo76 = NinchishoNichijoSeikatsuJiritsudoCode
-                .toValue(item.getDbT5203_ninchishoNichijoSeikatsuJiritsudoCode().value()).get名称();
+        source.konkaiChosahyo75 = item.getDbT5203_shogaiNichijoSeikatsuJiritsudoCode() == null ? RString.EMPTY
+                : ShogaiNichijoSeikatsuJiritsudoCode.toValue(item.getDbT5203_shogaiNichijoSeikatsuJiritsudoCode().value()).get名称();
+        source.konkaiChosahyo76 = item.getDbT5203_ninchishoNichijoSeikatsuJiritsudoCode() == null ? RString.EMPTY
+                : NinchishoNichijoSeikatsuJiritsudoCode.toValue(item.getDbT5203_ninchishoNichijoSeikatsuJiritsudoCode().value()).get名称();
         source.flag1 = 今回調査票と今回意見書の結果比較(source.konkaiChosahyo1, source.konkaiIkensho1);
         source.flag2 = 今回調査票と今回意見書の結果比較(source.konkaiChosahyo2, source.konkaiIkensho2);
         source.flag3 = 今回調査票と今回意見書の結果比較(source.konkaiChosahyo3, source.konkaiIkensho3);
@@ -132,7 +133,11 @@ public class ChosahyoIkenshoCheckListEditor implements IChosahyoIkenshoCheckList
         source.flag25 = 今回調査票と今回意見書の結果比較(source.konkaiChosahyo75, source.konkaiIkensho25);
         source.flag26 = 今回調査票と今回意見書の結果比較(source.konkaiChosahyo76, source.konkaiIkensho26);
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        source.hihokenshaNoAcc = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.getDbT5101_hihokenshaNo());
+        RString 被保険者番号 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(item.getDbT5101_hihokenshaNo())) {
+            被保険者番号 = item.getDbT5101_hihokenshaNo();
+        }
+        source.hihokenshaNoAcc = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), 被保険者番号);
         return source;
     }
 

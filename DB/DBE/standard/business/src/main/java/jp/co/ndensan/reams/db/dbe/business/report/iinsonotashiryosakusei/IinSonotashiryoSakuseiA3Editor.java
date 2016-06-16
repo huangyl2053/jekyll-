@@ -51,6 +51,10 @@ public class IinSonotashiryoSakuseiA3Editor implements IIinSonotashiryoSakuseiA3
         source.shinsaDD = item.get今回認定審査日();
         source.imgSonotashiryo1 = item.get左のその他資料イメージ();
         source.imgSonotashiryo2 = item.get右のその他資料イメージ();
+        source.chosaGengo = item.getChosaGengo();
+        source.sakuseiGengo = item.getSakuseiGengo();
+        source.shinsaGengo = item.getShinsaGengo();
+        source.shinseiGengo = item.getShinseiGengo();
         return source;
     }
 }
