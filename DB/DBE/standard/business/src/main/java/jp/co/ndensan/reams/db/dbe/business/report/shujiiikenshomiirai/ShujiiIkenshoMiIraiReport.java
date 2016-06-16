@@ -5,10 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshomiirai;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshomiirai.ShujiiIkenshoMiIraiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshomiirai.ShujiiIkenshoMiIraiReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -19,30 +17,26 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShujiiIkenshoMiIraiReport extends Report<ShujiiIkenshoMiIraiReportSource> {
 
-    private final List<ShujiiIkenshoMiIraiEntity> data;
+    private final ShujiiIkenshoMiIraiEntity data;
+    private final int index;
 
     /**
      * インスタンスを生成します。
      *
      * @param data 申請に関する帳票発行のdataList
+     * @param index int
      */
-    public ShujiiIkenshoMiIraiReport(List<ShujiiIkenshoMiIraiEntity> data) {
+    public ShujiiIkenshoMiIraiReport(ShujiiIkenshoMiIraiEntity data, int index) {
         this.data = data;
+        this.index = index;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<ShujiiIkenshoMiIraiReportSource> reportSourceWriter) {
-        for (int i = 0; i < data.size(); i++) {
-            IShujiiIkenshoMiIraiEditor editor = new ShujiiIkenshoMiIraiEditor(data.get(i), i);
-            IShujiiIkenshoMiIraiBuilder builder = new ShujiiIkenshoMiIraiBuilder(editor);
-            reportSourceWriter.writeLine(builder);
-        }
-        if (data.isEmpty()) {
-            ShujiiIkenshoMiIraiEntity entity = new ShujiiIkenshoMiIraiEntity();
-            entity.set氏名(new RString("該当データがありません"));
-            IShujiiIkenshoMiIraiEditor editor = new ShujiiIkenshoMiIraiEditor(entity, -1);
-            IShujiiIkenshoMiIraiBuilder builder = new ShujiiIkenshoMiIraiBuilder(editor);
-            reportSourceWriter.writeLine(builder);
-        }
+
+        IShujiiIkenshoMiIraiEditor editor = new ShujiiIkenshoMiIraiEditor(data, index);
+        IShujiiIkenshoMiIraiBuilder builder = new ShujiiIkenshoMiIraiBuilder(editor);
+        reportSourceWriter.writeLine(builder);
+
     }
 }

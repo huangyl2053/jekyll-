@@ -73,8 +73,16 @@ public class ShujiiIkenshoSeikyuIchiranEditor implements IShujiiIkenshoSeikyuIch
         source.listIkeniraimishori_14 = item.get主治医意見書別途診療費();
         source.listIkeniraimishori_15 = dateFormat(item.get報酬支払年月日());
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        source.hokenshaNo = new ExpandedInformation(new Code("100"), new RString("保険者番号"), item.get保険者番号());
-        source.hihokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
+        if (item.get保険者番号() == null) {
+            source.hokenshaNo = null;
+        } else {
+            source.hokenshaNo = new ExpandedInformation(new Code("100"), new RString("保険者番号"), item.get保険者番号());
+        }
+        if (item.get被保険者番号() == null) {
+            source.hokenshaNo = null;
+        } else {
+            source.hihokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
+        }
         return source;
     }
 
