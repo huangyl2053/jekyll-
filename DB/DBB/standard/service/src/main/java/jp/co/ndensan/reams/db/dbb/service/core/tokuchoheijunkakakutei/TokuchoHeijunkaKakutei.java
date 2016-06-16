@@ -129,7 +129,7 @@ public class TokuchoHeijunkaKakutei {
                         特徴期別金額_後 = Decimal.ZERO;
                     }
                     int 金額1 = 特徴期別金額_前.subtract(特徴期別金額_後).abs().intValue();
-                    if (段階.get差額().intValue() <= 金額1) {
+                    if (金額1 <= 段階.get差額().intValue()) {
                         対象外件数 = 対象外件数 + 1;
                     } else {
                         確定対象件数 = 確定対象件数 + 1;
@@ -144,7 +144,7 @@ public class TokuchoHeijunkaKakutei {
                         平準化後特徴期別金額 = Decimal.ZERO;
                     }
                     int 金額2 = 平準化前特徴期別金額.subtract(平準化後特徴期別金額).abs().intValue();
-                    if (段階.get差額().intValue() <= 金額2) {
+                    if (金額2 <= 段階.get差額().intValue()) {
                         対象外件数 = 対象外件数 + 1;
                     } else {
                         確定対象件数 = 確定対象件数 + 1;
