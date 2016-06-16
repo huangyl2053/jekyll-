@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.shujiiikensho;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IkenshoSakuseiTokusokuHoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiTokusokuHoho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

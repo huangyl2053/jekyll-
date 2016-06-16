@@ -10,8 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinnteiChousairaiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinteichosaIraiJohoRelateBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.WaritsukeBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinteichosaIraiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.ChosaKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter;
@@ -39,6 +38,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJohoIdentif
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;

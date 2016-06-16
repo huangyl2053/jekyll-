@@ -5,12 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.HanteiKekkaCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.YokaigoJotaizoReiCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanRelateEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.YokaigoJotaizoReiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;

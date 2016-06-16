@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2020004;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.importance.Importance;
+import jp.co.ndensan.reams.db.dbe.definition.core.importance.Importance;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.DBE2020004StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.DBE2020004TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.NinteiChosaScheduleMemoInformationDiv;

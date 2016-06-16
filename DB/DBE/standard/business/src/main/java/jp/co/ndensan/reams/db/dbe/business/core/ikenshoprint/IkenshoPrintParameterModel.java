@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.ikenshoprint;
 
 import java.io.Serializable;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.gamensenikbn.GamenSeniKbn;
+import jp.co.ndensan.reams.db.dbe.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
 /**

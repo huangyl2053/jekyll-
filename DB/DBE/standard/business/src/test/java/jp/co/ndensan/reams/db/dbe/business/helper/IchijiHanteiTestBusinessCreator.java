@@ -20,13 +20,13 @@ import jp.co.ndensan.reams.db.dbe.business.core.SuiteiKyuhuKubun;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiChukanHyokaKomokuTokuten;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiKijunTime;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ChukanHyokaKomoku;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IchijiHanteiKeikokuShubetsu;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IchijiHanteiResultSofuKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KariIchijiHanteiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItem;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.YokaigoNinteiKijunTimeItem;
+import jp.co.ndensan.reams.db.dbe.definition.core.IchijiHanteiKeikokuShubetsu;
+import jp.co.ndensan.reams.db.dbe.definition.core.IchijiHanteiResultSofuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.NichijoSeikatsuJiritsudoKumiawaseItem;
+import jp.co.ndensan.reams.db.dbe.definition.core.YokaigoNinteiKijunTimeItem;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -49,7 +49,7 @@ public final class IchijiHanteiTestBusinessCreator {
 
         return IchijiHanteiResultDetail.builder().set申請書管理番号(new ShinseishoKanriNo(new RString("01")))
                 .set厚労省IF区分(KoroshoIFKubun.V02A)
-                .set厚労省IF区分(KariIchijiHanteiKubun.本判定)
+                .set厚労省IF区分(KariIchijiHanteiKubun.本一次判定)
                 .set一次判定年月日(new FlexibleDate("20060401"))
                 .set一次判定結果(create一次判定結果項目())
                 .set認知症加算一次判定結果(create認知症加算一次判定結果())

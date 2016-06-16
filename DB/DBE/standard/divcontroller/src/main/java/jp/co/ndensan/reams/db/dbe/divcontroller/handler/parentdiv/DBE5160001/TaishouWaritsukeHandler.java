@@ -15,10 +15,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariatejoho.S
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.KohoshaIchiran;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.TaishouWaritsukeHead;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.Taishouichiran;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.NinchishoNichijoSeikatsuJiritsudoCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.ShogaiNichijoSeikatsuJiritsudoCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.IsShinsakaiJidoWaritsuke;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.ShinsakaiYusenWaritsukeKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShinsakaiJidoWaritsuke;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiwariatejoho.ShinsakaiWariateJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.CountShinsakaiIinJogaiJohoMapperParameter;
@@ -36,8 +33,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DbeConfigKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;

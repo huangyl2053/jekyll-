@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ininteichosaschebusiness.ChikuSh
 import jp.co.ndensan.reams.db.dbe.business.core.ininteichosaschebusiness.NinteichosaSchedulBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteichosaScheduleMybatisParameter;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.YoyakuJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosa.YoyakuJokyo;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003.NinteiChosaSchedule3MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003.dgResultList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosaschedule.NinteichosaScheduleFinder;
