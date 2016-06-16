@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 申請情報印刷のバチパラメータクラスです。
@@ -15,6 +16,7 @@ import lombok.Getter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
+@Setter
 public class ShinseiJouhouInsatuBatchParameter extends BatchParameterBase {
 
     private static final String SHINSEI_MONITORFLAG = "shinseimonitorflag";
