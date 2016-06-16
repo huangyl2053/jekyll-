@@ -16,6 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBC {
 
     /**
+     * 介護保険受領委任払い取扱事業者登録通知書
+     */
+    DBC100032(new ReportId("DBC100032_JyuryoItakuAtukaiJigyoshaTorokuTsuchisho"), new RString("介護保険受領委任払い取扱事業者登録通知書 ")),
+    /**
      * 再審査決定通知書情報取込一覧表【保険者分】
      */
     DBC200048(new ReportId("DBC200048_SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBun"), new RString("再審査決定通知書情報取込一覧表【保険者分】")),
