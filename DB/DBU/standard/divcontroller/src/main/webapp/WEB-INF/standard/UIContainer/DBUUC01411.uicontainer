@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBUUC01411",
+ "displayWizard": true,
+ "subGyomuCode": "DBU",
+ "steps": [
+  {
+   "id": 1,
+   "name": "住民記録異動情報登録【他社・住基】",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0140011",
+     "toLayoutTitle": "住民記録異動情報登録【他社・住基】",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0140011",
+     "layoutTitle": "住民記録異動情報登録【他社・住基】",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
