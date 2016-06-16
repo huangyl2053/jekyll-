@@ -361,7 +361,19 @@ public enum ReportIdDBE {
     /**
      * 要介護認定申請モニタリストの帳票ＩＤです。
      */
-    DBE011002(new ReportId("DBE011002_ShinseiMonitor"), new RString("要介護認定申請モニタリスト"));
+    DBE011002(new ReportId("DBE011002_ShinseiMonitor"), new RString("要介護認定申請モニタリスト")),
+    /**
+     * 特記事項の帳票ＩＤです。
+     */
+    DBE091003(new ReportId("DBE091003_NinteiChosaTokkiImage"), new RString("特記事項")),
+    /**
+     * 特記事項の帳票ＩＤです。
+     */
+    DBE517131(new ReportId("DBE517131_TokkiText1A4"), new RString("特記事項")),
+    /**
+     * 特記事項の帳票ＩＤです。
+     */
+    DBE517134(new ReportId("DBE517134_TokkiText2A4"), new RString("特記事項"));
 
     private final ReportId reportId;
 
