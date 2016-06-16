@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business.report.iinsonotashiryosakusei;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.iinsonotashiryosakusei.IinSonotashiryoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinsonotashiryosakusei.SonotashiryoA4ReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 委員用その他資料のEditorです。
@@ -51,10 +50,10 @@ public class IinSonotashiryoSakuseiA4Editor implements IIinSonotashiryoSakuseiA4
         source.shinsaMM = item.get今回認定審査月();
         source.shinsaDD = item.get今回認定審査日();
         source.imgSonotashiryo = item.getその他資料();
-        source.chosaGengo = new RString("平成");
-        source.sakuseiGengo = new RString("平成");
-        source.shinsaGengo = new RString("平成");
-        source.shinseiGengo = new RString("平成");
+        source.chosaGengo = item.getChosaGengo();
+        source.sakuseiGengo = item.getSakuseiGengo();
+        source.shinsaGengo = item.getShinsaGengo();
+        source.shinseiGengo = item.getShinseiGengo();
         return source;
     }
 }
