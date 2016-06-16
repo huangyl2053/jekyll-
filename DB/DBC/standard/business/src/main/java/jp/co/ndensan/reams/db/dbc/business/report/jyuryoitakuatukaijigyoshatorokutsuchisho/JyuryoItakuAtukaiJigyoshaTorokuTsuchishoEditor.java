@@ -27,12 +27,8 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoEditor implements IJyuryoIt
 
     private final HokenJuryoIninHaraiToriatsukaiEntity entity;
     private final NinshoshaSource sourceBuilder;
-    private RString 送付先郵便番号;
-    private YubinNo 契約事業者郵便番号;
     private static final int THREE = 3;
     private static final int SEVEN = 7;
-    private FlexibleDate 契約開始年月日;
-    private FlexibleDate 契約終了年月日;
     private final RString 文書番号;
     private final RString 通知書定型文１;
     private final RString 通知書定型文2;
@@ -70,7 +66,7 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoEditor implements IJyuryoIt
                 source.bunshoNo = 文書番号;
             }
 
-            送付先郵便番号 = entity.get送付先郵便番号().getYubinNo();
+            RString 送付先郵便番号 = entity.get送付先郵便番号().getYubinNo();
             if (送付先郵便番号 != null) {
                 source.sofusakiYubinNo = new RString(送付先郵便番号.toString().
                         substring(0, THREE).concat("-").concat(送付先郵便番号.toString().substring(THREE, SEVEN)));
@@ -86,7 +82,7 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoEditor implements IJyuryoIt
             }
 
             source.jigyoshoName = entity.get契約事業者名称().value();
-            契約事業者郵便番号 = entity.get契約事業者郵便番号();
+            YubinNo 契約事業者郵便番号 = entity.get契約事業者郵便番号();
             if (契約事業者郵便番号 != null) {
                 source.jigyoshoYubinNo = new RString(契約事業者郵便番号.toString().
                         substring(0, THREE).concat("-").concat(契約事業者郵便番号.toString().substring(THREE, SEVEN)));
@@ -97,7 +93,7 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoEditor implements IJyuryoIt
             source.jigyoshoTorokuNo = entity.get受領委任払い取扱事業所登録番号();
             source.serviceShurui = JuryoIninKeiyakuShurui.toValue(entity.get契約種類()).get名称();
 
-            契約開始年月日 = entity.get契約開始年月日();
+            FlexibleDate 契約開始年月日 = entity.get契約開始年月日();
             if (契約開始年月日 != null) {
                 source.keiyakuKikanKaishiYmd = 契約開始年月日.
                         wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
@@ -106,7 +102,7 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoEditor implements IJyuryoIt
 
             source.keiyakuKikanKara = new RString("～");
 
-            契約終了年月日 = entity.get契約終了年月日();
+            FlexibleDate 契約終了年月日 = entity.get契約終了年月日();
             if (契約終了年月日 == null || 契約終了年月日.isEmpty()) {
                 source.keiyakuKikanShuryoYmd = new RString("～");
             } else {
