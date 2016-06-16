@@ -71,7 +71,7 @@
             ON TBL2."jogaiTaishoShinsakaiIinCode" = TBL4."shinsakaiIinCode"
           INNER JOIN rgdb."DbT7051KoseiShichosonMaster"AS TBL5
             ON TBL5."shoKisaiHokenshaNo" = TBL4."shoKisaiHokenshaNo"
-          WHERE TBL1."shinseishoKanriNo" = #{shinseishoKanriNo}
+          WHERE TBL1."zenkaiShinseishoKanriNo" = #{shinseishoKanriNo}
     </select>
     
     <select resultOrdered="true" id="getShinsakaiIinJohoByCode" resultMap="resultMap_ShinsakaiIinJohoEntity" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">

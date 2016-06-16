@@ -1300,7 +1300,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             Class clazz = fukaJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                特徴仮算定保険料.add(get金額((Decimal) getMethod.invoke(fukaJoho)));
+                特徴仮算定保険料 = 特徴仮算定保険料.add(get金額((Decimal) getMethod.invoke(fukaJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1319,7 +1319,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             Class clazz = fukaJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                普徴納付済額.add(get金額((Decimal) getMethod.invoke(fukaJoho)));
+                普徴納付済額 = 普徴納付済額.add(get金額((Decimal) getMethod.invoke(fukaJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1339,7 +1339,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             Class clazz = 収入情報.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                特徴収入済額.add(get金額((Decimal) getMethod.invoke(収入情報)));
+                特徴収入済額 = 特徴収入済額.add(get金額((Decimal) getMethod.invoke(収入情報)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1359,7 +1359,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             Class clazz = 収入情報.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                普徴収入済額.add(get金額((Decimal) getMethod.invoke(収入情報)));
+                普徴収入済額 = 普徴収入済額.add(get金額((Decimal) getMethod.invoke(収入情報)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1524,7 +1524,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         Class clazz = 前年度情報.getClass();
         try {
             Method getMethod = clazz.getDeclaredMethod(sb.toString());
-            普徴納付済額.add(get金額((Decimal) getMethod.invoke(前年度情報)));
+            普徴納付済額 = 普徴納付済額.add(get金額((Decimal) getMethod.invoke(前年度情報)));
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
             Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
         }
