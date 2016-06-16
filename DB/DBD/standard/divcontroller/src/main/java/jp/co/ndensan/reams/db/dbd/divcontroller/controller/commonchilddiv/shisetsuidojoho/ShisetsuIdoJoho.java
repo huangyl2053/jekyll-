@@ -5,12 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.commonchilddiv.shisetsuidojoho;
 
-import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.ShisetsuIdoJoho.ShisetsuIdoJoho.ShisetsuIdoJohoDiv;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 【共有子Div】 施設入退のDivControllerです。
@@ -26,15 +24,11 @@ public class ShisetsuIdoJoho {
      * @return ResponseData<ShisetsuIdoJohoDiv>
      */
     public ResponseData<ShisetsuIdoJohoDiv> onLoad(ShisetsuIdoJohoDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            if (null == div.getHihokenshaNo() || div.getHihokenshaNo().isEmpty()) {
-                throw new SystemException("被保険者番号が設定されていません。");
-            }
-            HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getHihokenshaNo());
-            if (!div.initializa(被保険者番号)) {
-                return ResponseData.of(div).addMessage(DbdInformationMessages.受給共通_被保データなし.getMessage()).respond();
-            }
+        if (null == div.getShikibetsuCode() || div.getShikibetsuCode().isEmpty()) {
+            throw new SystemException("被保険者番号が設定されていません。");
         }
+        ShikibetsuCode 識別コード = new ShikibetsuCode(div.getShikibetsuCode());
+        div.initializa(識別コード);
         return ResponseData.of(div).respond();
     }
 
