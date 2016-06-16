@@ -63,9 +63,9 @@ public class TokuchoSedokanIFTanichu {
      * @return List<TokuchoSedokanIFTanichuResult>
      */
     public List<TokuchoSedokanIFTanichuResult> getTokuchoKaishiYMList() {
-        List<DbT7022ShoriDateKanriEntity> entitylist = 処理日付管理マスタdac.selectallbykey(ShoriName.特徴対象者同定.get名称());
+        List<DbT7022ShoriDateKanriEntity> entityList = 処理日付管理マスタdac.selectallbykey(ShoriName.特徴対象者同定.get名称());
         List<TokuchoSedokanIFTanichuResult> resultlist = new ArrayList();
-        for (DbT7022ShoriDateKanriEntity entity : entitylist) {
+        for (DbT7022ShoriDateKanriEntity entity : entityList) {
             set特別徴収開始年月(entity, resultlist);
         }
         return resultlist;
@@ -74,17 +74,17 @@ public class TokuchoSedokanIFTanichu {
     private void set特別徴収開始年月(DbT7022ShoriDateKanriEntity entity, List<TokuchoSedokanIFTanichuResult> resultlist) {
         TokuchoSedokanIFTanichuResult result = new TokuchoSedokanIFTanichuResult();
         result.set年度(entity.getNendo());
-        if (年度内連番_0001.equals(entity.getNendoNaiRenban()) && result.get年度() != null) {
+        if (年度内連番_0001.equals(entity.getNendoNaiRenban())) {
             result.set特徴開始年月(new RDate(result.get年度().toDateString().concat(特別徴収開始年月_08).toString()));
-        } else if (年度内連番_0002.equals(entity.getNendoNaiRenban()) && result.get年度() != null) {
+        } else if (年度内連番_0002.equals(entity.getNendoNaiRenban())) {
             result.set特徴開始年月(new RDate(result.get年度().toDateString().concat(特別徴収開始年月_10).toString()));
-        } else if (年度内連番_0003.equals(entity.getNendoNaiRenban()) && result.get年度() != null) {
+        } else if (年度内連番_0003.equals(entity.getNendoNaiRenban())) {
             result.set特徴開始年月(new RDate(result.get年度().toDateString().concat(特別徴収開始年月_12).toString()));
-        } else if (年度内連番_0004.equals(entity.getNendoNaiRenban()) && result.get年度() != null) {
+        } else if (年度内連番_0004.equals(entity.getNendoNaiRenban())) {
             result.set特徴開始年月(new RDate(result.get年度().plusYear(NUM1).toDateString().concat(特別徴収開始年月_02).toString()));
-        } else if (年度内連番_0005.equals(entity.getNendoNaiRenban()) && result.get年度() != null) {
+        } else if (年度内連番_0005.equals(entity.getNendoNaiRenban())) {
             result.set特徴開始年月(new RDate(result.get年度().plusYear(NUM1).toDateString().concat(特別徴収開始年月_04).toString()));
-        } else if (年度内連番_0006.equals(entity.getNendoNaiRenban()) && result.get年度() != null) {
+        } else if (年度内連番_0006.equals(entity.getNendoNaiRenban())) {
             result.set特徴開始年月(new RDate(result.get年度().plusYear(NUM1).toDateString().concat(特別徴収開始年月_06).toString()));
         }
         resultlist.add(result);
@@ -99,12 +99,12 @@ public class TokuchoSedokanIFTanichu {
      */
     public List<ShoriDateKanri> getSyoriKanrenJoho(FlexibleYear 処理年度, RString 年度内連番) {
         RString 処理名 = ShoriName.特別徴収制度間ＩＦ作成.get名称();
-        List<DbT7022ShoriDateKanriEntity> list = 処理日付管理マスタdac.select基準日時toupdate(処理名, 年度内連番, 処理年度);
+        List<DbT7022ShoriDateKanriEntity> 処理日付管理マスタList = 処理日付管理マスタdac.select基準日時toupdate(処理名, 年度内連番, 処理年度);
         List<ShoriDateKanri> shoridatekanrilist = new ArrayList();
-        if (list.isEmpty()) {
+        if (処理日付管理マスタList.isEmpty()) {
             return null;
         } else {
-            for (DbT7022ShoriDateKanriEntity entity : list) {
+            for (DbT7022ShoriDateKanriEntity entity : 処理日付管理マスタList) {
                 shoridatekanrilist.add(new ShoriDateKanri(entity));
             }
         }
