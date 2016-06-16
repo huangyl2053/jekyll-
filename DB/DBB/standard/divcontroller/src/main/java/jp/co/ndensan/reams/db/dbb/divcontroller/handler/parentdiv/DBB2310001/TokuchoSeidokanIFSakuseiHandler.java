@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 public class TokuchoSeidokanIFSakuseiHandler {
 
     private static final RString MESSAGE_特徴対象者同定が終了しない = new RString("特徴対象者同定が終了しない");
-    private static final RString MESSAGE_特徴制度間F処理 = new RString("特徴対象者同定が終了しない");
+    private static final RString MESSAGE_特徴制度間F処理 = new RString("特徴制度間F処理");
     private static final RString 年度内連番_0001 = new RString("0001");
     private static final RString 年度内連番_0002 = new RString("0002");
     private static final RString 年度内連番_0003 = new RString("0003");
@@ -46,12 +46,12 @@ public class TokuchoSeidokanIFSakuseiHandler {
     private static final RString KEY0 = new RString("key0");
     private static final int NUM0 = 0;
     private static final int NUM1 = 1;
-    private static final int 月_2 = 2;
-    private static final int 月_4 = 4;
-    private static final int 月_6 = 6;
-    private static final int 月_8 = 8;
-    private static final int 月_10 = 10;
-    private static final int 月_12 = 12;
+    private static final int NUM2 = 2;
+    private static final int NUM4 = 4;
+    private static final int NUM6 = 6;
+    private static final int NUM8 = 8;
+    private static final int NUM10 = 10;
+    private static final int NUM12 = 12;
     private final TokuchoSedokanIFTanichu tokuchosedokaniftanichu;
     private final TokuchoSeidokanIFSakuseiDiv div;
 
@@ -71,7 +71,7 @@ public class TokuchoSeidokanIFSakuseiHandler {
      */
     public void initialize() {
         List<TokuchoSedokanIFTanichuResult> results = tokuchosedokaniftanichu.getTokuchoKaishiYMList();
-        List<KeyValueDataSource> dataSourcelist = new ArrayList();
+        List<KeyValueDataSource> dataSourceList = new ArrayList();
         if (results.isEmpty()) {
             throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().
                     replace(MESSAGE_特徴対象者同定が終了しない.toString(), MESSAGE_特徴制度間F処理.toString()));
@@ -89,11 +89,11 @@ public class TokuchoSeidokanIFSakuseiHandler {
                 KeyValueDataSource datasource = new KeyValueDataSource();
                 datasource.setKey(KEY.concat(new RString(i)));
                 datasource.setValue(result.get特徴開始年月().getYearMonth().wareki().toDateString());
-                dataSourcelist.add(datasource);
+                dataSourceList.add(datasource);
                 i = i + NUM1;
             }
         }
-        div.getDdlKaishiYM().setDataSource(dataSourcelist);
+        div.getDdlKaishiYM().setDataSource(dataSourceList);
         div.getDdlKaishiYM().setSelectedKey(KEY0);
         onChange_特別徴収開始年月();
     }
@@ -108,31 +108,31 @@ public class TokuchoSeidokanIFSakuseiHandler {
         int 選択値の月 = 特別徴収開始年月.getMonthValue();
         RString 年度内連番;
         switch (選択値の月) {
-            case 月_8:
+            case NUM8:
                 年度内連番 = 年度内連番_0001;
                 break;
-            case 月_10:
+            case NUM10:
                 年度内連番 = 年度内連番_0002;
                 break;
-            case 月_12:
+            case NUM12:
                 年度内連番 = 年度内連番_0003;
                 break;
-            case 月_2:
+            case NUM2:
                 年度内連番 = 年度内連番_0004;
                 break;
-            case 月_4:
+            case NUM4:
                 年度内連番 = 年度内連番_0005;
                 break;
-            case 月_6:
+            case NUM6:
                 年度内連番 = 年度内連番_0006;
                 break;
             default:
                 年度内連番 = RString.EMPTY;
         }
         FlexibleYear 処理年度 = new FlexibleYear(特別徴収開始年月.getYear().toDateString());
-        List<ShoriDateKanri> shoridatekanrilist = tokuchosedokaniftanichu.getSyoriKanrenJoho(処理年度, 年度内連番);
-        if (shoridatekanrilist == null || shoridatekanrilist.isEmpty() || shoridatekanrilist.get(0).get基準日時() == null
-                || shoridatekanrilist.get(0).get基準日時().isEmpty()) {
+        List<ShoriDateKanri> shoridatekanriList = tokuchosedokaniftanichu.getSyoriKanrenJoho(処理年度, 年度内連番);
+        if (shoridatekanriList == null || shoridatekanriList.isEmpty() || shoridatekanriList.get(0).get基準日時() == null
+                || shoridatekanriList.get(0).get基準日時().isEmpty()) {
             div.getTxtShoriJotai().setValue(未処理);
             div.getTxtZenKaiShoriYMD().clearValue();
             div.getTxtZenKaiShoriYMD().setPlaceHolder(RString.EMPTY);
@@ -140,10 +140,10 @@ public class TokuchoSeidokanIFSakuseiHandler {
             div.getTxtZenKaiShoriTime().setPlaceHolder(RString.EMPTY);
         } else {
             div.getTxtShoriJotai().setValue(処理済);
-            YMDHMS 基準日時 = shoridatekanrilist.get(0).get基準日時();
+            YMDHMS 基準日時 = shoridatekanriList.get(NUM0).get基準日時();
             if (基準日時 != null) {
                 div.getTxtZenKaiShoriYMD().setValue(基準日時.getDate());
-                div.getTxtZenKaiShoriTime().setValue(new RTime(new RString(基準日時.toString().substring(月_8))));
+                div.getTxtZenKaiShoriTime().setValue(new RTime(new RString(基準日時.toString().substring(NUM8))));
             }
         }
     }
@@ -156,10 +156,10 @@ public class TokuchoSeidokanIFSakuseiHandler {
      */
     public TokuchoSeidokanIFSakuseiBatchParameter getbatchparam(TokuchoSeidokanIFSakuseiDiv div) {
         TokuchoSedokanIFTanichuResult result = new TokuchoSedokanIFTanichuResult();
-        result.set年度(new FlexibleYear(div.getTxtChoteiNendo().getValue().toString().substring(NUM0, 月_4)));
+        result.set年度(new FlexibleYear(div.getTxtChoteiNendo().getValue().toString().substring(NUM0, NUM4)));
         result.set特徴開始年月(new RDate(div.getDdlKaishiYM().getSelectedValue().toString()));
         result.set遷移元メニュー(ResponseHolder.getMenuID());
-        TokuchoSeidokanIFSakuseiBatchParameter param = new TokuchoSeidokanIFSakuseiBatchParameter();
+        TokuchoSeidokanIFSakuseiBatchParameter param = tokuchosedokaniftanichu.getBatchiPara(result);
         return param;
     }
 }
