@@ -98,7 +98,7 @@ public class KaigojuminHyotrukuProcess {
      * @param shichosonCodeList List<RString>
      * @return a
      */
-    public int xx(KaigojuminHyotrukuProcessParameter processParameter, int a,
+    public int データ編集(KaigojuminHyotrukuProcessParameter processParameter, int a,
             int i, List<DbT7022ShoriDateKanriEntity> dbT7022List, List<RString> shichosonCodeList,
             RDateTime 処理日時, DbT7022ShoriDateKanriEntity entity) {
 
