@@ -88,6 +88,7 @@ public class ServiceKeikakuHiPanelHandler {
     /**
      * onLoad処理 サービス年月が200604～200903の場合
      *
+     * @param 画面モード RString
      * @param entity200604 ShokanServicePlan200604Result
      */
     public void onLoad200604(ShokanServicePlan200604Result entity200604, RString 画面モード) {

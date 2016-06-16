@@ -37,7 +37,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
 
     private final YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div;
-    private final RString 審査 = new RString("審査");
     private final RString 承認する = new RString("承認する");
     private final RString 却下する = new RString("却下する");
     private final RString 決定日R = new RString("決定日");
