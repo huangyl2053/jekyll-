@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukatwo;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.dankaibetuhihokensyasuichiranhyo;
 
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class BatchParameterEntity {
+public class DankaibetuHihokensyasuIchiranhyoBatchParameter {
 
     private FlexibleYear 調定年度;
     private FlexibleDate 本算定賦課処理日;

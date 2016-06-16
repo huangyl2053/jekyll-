@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteifukatwo;
+package jp.co.ndensan.reams.db.dbb.service.core.dankaibetuhihokensyasuichiranhyo;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukatwo.BatchParameterEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukatwo.InputeImageDivEntity;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.dankaibetuhihokensyasuichiranhyo.DankaibetuHihokensyasuIchiranhyoBatchParameter;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetuhihokensyasuichiranhyo.InputeImageDivEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -19,14 +19,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @reamsid_L DBB-1820-030 surun
  */
-public class TokuchoKariSanteiFuka {
+public class DankaibetuHihokensyasuIchiranhyo {
 
     private final DbT7022ShoriDateKanriDac 処理日付管理Dac;
 
     /**
      * コンストラクタです。
      */
-    TokuchoKariSanteiFuka() {
+    DankaibetuHihokensyasuIchiranhyo() {
         this.処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     }
 
@@ -35,17 +35,17 @@ public class TokuchoKariSanteiFuka {
      *
      * @param 処理日付管理Dac DbT7022ShoriDateKanriDac
      */
-    TokuchoKariSanteiFuka(DbT7022ShoriDateKanriDac 処理日付管理Dac) {
+    DankaibetuHihokensyasuIchiranhyo(DbT7022ShoriDateKanriDac 処理日付管理Dac) {
         this.処理日付管理Dac = 処理日付管理Dac;
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link TokuchoKariSanteiFuka}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link DankaibetuHihokensyasuIchiranhyo}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link TokuchoKariSanteiFuka}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link DankaibetuHihokensyasuIchiranhyo}のインスタンス
      */
-    public static TokuchoKariSanteiFuka createInstance() {
-        return InstanceProvider.create(TokuchoKariSanteiFuka.class);
+    public static DankaibetuHihokensyasuIchiranhyo createInstance() {
+        return InstanceProvider.create(DankaibetuHihokensyasuIchiranhyo.class);
     }
 
     /**
@@ -57,10 +57,10 @@ public class TokuchoKariSanteiFuka {
     @Transaction
     public YMDHMS getHonsanteiShoribi(FlexibleYear 調定年度) {
         DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select基準日時(調定年度);
-        if (entity.getKijunTimestamp() != null) {
-            return entity.getKijunTimestamp();
+        if (entity == null) {
+            return null;
         }
-        return null;
+        return entity.getKijunTimestamp();
     }
 
     /**
@@ -69,8 +69,8 @@ public class TokuchoKariSanteiFuka {
      * @param inputeImageDivEntity InputeImageDivEntity
      * @return BatchParameterEntity
      */
-    public BatchParameterEntity createDankaibechuHihokenshaCountParameter(InputeImageDivEntity inputeImageDivEntity) {
-        BatchParameterEntity batchParameterEntity = new BatchParameterEntity();
+    public DankaibetuHihokensyasuIchiranhyoBatchParameter createDankaibechuHihokenshaCountParameter(InputeImageDivEntity inputeImageDivEntity) {
+        DankaibetuHihokensyasuIchiranhyoBatchParameter batchParameterEntity = new DankaibetuHihokensyasuIchiranhyoBatchParameter();
         batchParameterEntity.set調定年度(inputeImageDivEntity.get調定年度());
         batchParameterEntity.set本算定賦課処理日(inputeImageDivEntity.get本算定賦課処理日());
         batchParameterEntity.set広域分市町村分区分(inputeImageDivEntity.get広域分市町村分区分());
