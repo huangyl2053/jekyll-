@@ -1358,13 +1358,6 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         return 普徴収入済額;
     }
 
-    private Decimal get金額(Decimal 金額) {
-        if (金額 == null) {
-            return Decimal.ZERO;
-        }
-        return 金額;
-    }
-
     private void set特別徴収_収入額(ShunyuJoho 収入情報, EditedKariSanteiFukaDaichoJoho 編集後仮算定賦課台帳情報) {
 
         if (収入情報 == null) {
@@ -1522,11 +1515,18 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         Class clazz = 前年度情報.getClass();
         try {
             Method getMethod = clazz.getDeclaredMethod(sb.toString());
-            普徴納付済額.add((Decimal) getMethod.invoke(前年度情報));
+            普徴納付済額.add(get金額((Decimal) getMethod.invoke(前年度情報)));
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
             Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 普徴納付済額;
+    }
+
+    private Decimal get金額(Decimal 金額) {
+        if (金額 == null) {
+            return Decimal.ZERO;
+        }
+        return 金額;
     }
 
     private RString create受給情報(DbV4001JukyushaDaichoEntity 受給者台帳情報, List<DbT4021ShiharaiHohoHenkoEntity> 支払方法変更リスト) {
