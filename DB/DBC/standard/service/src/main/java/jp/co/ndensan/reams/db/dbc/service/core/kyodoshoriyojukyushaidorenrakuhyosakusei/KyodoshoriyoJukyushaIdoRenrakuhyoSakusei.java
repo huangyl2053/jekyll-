@@ -124,7 +124,11 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoSakusei {
         }
         KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity 出力用共同処理用受給者訂正情報Entity = new KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity();
         KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity 変更前訂正情報Entity = get変更前訂正情報(divEntity);
+        if (変更前訂正情報Entity == null) {
+            return null;
+        }
         KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity 変更後訂正情報Entity = get変更後訂正情報(divEntity);
+
         if (変更後訂正情報Entity != null) {
             出力用共同処理用受給者訂正情報Entity.set作成年月日(変更後訂正情報Entity.get作成年月日());
             出力用共同処理用受給者訂正情報Entity.set証記載保険者番号(変更後訂正情報Entity.get証記載保険者番号());
@@ -245,9 +249,15 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoSakusei {
         } else {
             出力用共同処理用受給者訂正情報Entity.set所得区分(RString.EMPTY);
         }
-        出力用共同処理用受給者訂正情報Entity.set利用者負担第２段階(変更後訂正情報Entity.is利用者負担第２段階());
-        出力用共同処理用受給者訂正情報Entity.set老齢福祉年金受給の有無(変更後訂正情報Entity.is老齢福祉年金受給の有無());
-        出力用共同処理用受給者訂正情報Entity.set支給申請書出力の有無(変更後訂正情報Entity.is支給申請書出力の有無());
+        if (変更後訂正情報Entity.is利用者負担第２段階() != 変更前訂正情報Entity.is利用者負担第２段階()) {
+            出力用共同処理用受給者訂正情報Entity.set利用者負担第２段階(変更後訂正情報Entity.is利用者負担第２段階());
+        }
+        if (変更後訂正情報Entity.is老齢福祉年金受給の有無() != 変更前訂正情報Entity.is老齢福祉年金受給の有無()) {
+            出力用共同処理用受給者訂正情報Entity.set老齢福祉年金受給の有無(変更後訂正情報Entity.is老齢福祉年金受給の有無());
+        }
+        if (変更後訂正情報Entity.is支給申請書出力の有無() != 変更前訂正情報Entity.is支給申請書出力の有無()) {
+            出力用共同処理用受給者訂正情報Entity.set支給申請書出力の有無(変更後訂正情報Entity.is支給申請書出力の有無());
+        }
         return 出力用共同処理用受給者訂正情報Entity;
 
     }
@@ -256,8 +266,17 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoSakusei {
 
         KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity 変更前訂正情報Entity = new KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity();
         DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity 基本送付訂正情報Entity = get基本送付訂正情報(divEntity);
+        if (基本送付訂正情報Entity == null) {
+            return null;
+        }
         DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity 償還送付訂正情報Entity = get償還送付訂正情報(divEntity);
+        if (償還送付訂正情報Entity == null) {
+            return null;
+        }
         DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity 高額送付訂正情報Entity = get高額送付訂正情報(divEntity);
+        if (高額送付訂正情報Entity == null) {
+            return null;
+        }
         変更前訂正情報Entity.set作成年月日(divEntity.get日付());
         変更前訂正情報Entity.set帳票出力順序コード(divEntity.get帳票出力順序コード());
         if (基本送付訂正情報Entity != null) {
@@ -334,8 +353,6 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoSakusei {
         DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity 基本送付訂正情報Entity = new DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
         if (基本送付訂正情報List.size() == 2) {
             基本送付訂正情報Entity = 基本送付訂正情報List.get(1);
-        } else if (基本送付訂正情報List.size() == 1) {
-            基本送付訂正情報Entity = 基本送付訂正情報List.get(0);
         }
         return 基本送付訂正情報Entity;
 
@@ -350,8 +367,6 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoSakusei {
         DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity 償還送付訂正情報Entity = new DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity();
         if (償還送付訂正情報List.size() == 2) {
             償還送付訂正情報Entity = 償還送付訂正情報List.get(1);
-        } else if (償還送付訂正情報List.size() == 1) {
-            償還送付訂正情報Entity = 償還送付訂正情報List.get(0);
         }
         return 償還送付訂正情報Entity;
 
@@ -366,8 +381,6 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoSakusei {
         DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity 高額送付訂正情報Entity = new DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity();
         if (高額送付訂正情報List.size() == 2) {
             高額送付訂正情報Entity = 高額送付訂正情報List.get(1);
-        } else if (高額送付訂正情報List.size() == 1) {
-            高額送付訂正情報Entity = 高額送付訂正情報List.get(0);
         }
         return 高額送付訂正情報Entity;
     }
