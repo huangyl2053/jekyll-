@@ -43,11 +43,6 @@ public class ShotokushokaihyoHakkoIchiranProperty extends ReportPropertyBase<Sho
             BreakerCatalog<ShotokushokaihyoHakkoIchiranSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
 
-
-
-
-
-
             PAGE_BREAK_KEYS) {
             @Override
             public ReportLineRecord<ShotokushokaihyoHakkoIchiranSource> occuredBreak(
