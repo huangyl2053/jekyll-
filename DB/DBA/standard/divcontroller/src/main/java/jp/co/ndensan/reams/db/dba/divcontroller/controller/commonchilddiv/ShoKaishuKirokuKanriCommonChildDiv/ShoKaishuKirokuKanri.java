@@ -55,21 +55,13 @@ public class ShoKaishuKirokuKanri {
         if (dgKoufuKaishuRow.getYukoKigen() != null && !dgKoufuKaishuRow.getYukoKigen().isEmpty()) {
             requestDiv.getPanelInput().getTxtYukouKigen().setValue(new RDate(dgKoufuKaishuRow.getYukoKigen().toString()));
         }
-        if (被保険者証.equals(dgKoufuKaishuRow.getKoufuType())) {
-            requestDiv.getPanelInput().getDdlKoufuJiyu().setDataSource(getCode());
-        } else {
-            requestDiv.getPanelInput().getDdlKoufuJiyu().setDataSource(getCode());
-        }
+        requestDiv.getPanelInput().getDdlKoufuJiyu().setDataSource(getCode());
         requestDiv.getPanelInput().getDdlKoufuJiyu().setSelectedValue(dgKoufuKaishuRow.getKoufuJiyu());
         requestDiv.getPanelInput().getTxaKoufuRiyu().setValue(dgKoufuKaishuRow.getKofuRiyu());
         if (dgKoufuKaishuRow.getKaishuDate() != null && !dgKoufuKaishuRow.getKaishuDate().isEmpty()) {
             requestDiv.getPanelInput().getTxtKaisyuDate().setValue(new RDate(dgKoufuKaishuRow.getKaishuDate().toString()));
         }
-        if (被保険者証.equals(dgKoufuKaishuRow.getKoufuType())) {
-            requestDiv.getPanelInput().getDdlKaisyuJiyu().setDataSource(getCode());
-        } else {
-            requestDiv.getPanelInput().getDdlKaisyuJiyu().setDataSource(getCode());
-        }
+        requestDiv.getPanelInput().getDdlKaisyuJiyu().setDataSource(getCode());
         requestDiv.getPanelInput().getDdlKaisyuJiyu().setSelectedValue(dgKoufuKaishuRow.getKaishuJiyu());
         requestDiv.getPanelInput().getTxaKaishuRiyu().setValue(dgKoufuKaishuRow.getKaishuRiyu());
         return createResponseData(requestDiv);

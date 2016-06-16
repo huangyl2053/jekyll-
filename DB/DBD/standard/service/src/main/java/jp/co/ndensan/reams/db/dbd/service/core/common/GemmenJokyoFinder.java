@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengak
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmen;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenkoSummary;
-import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseiJokyoKubun;
@@ -31,6 +30,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.riyoshafutangen
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmenEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenjokyo.IGemmenJokyoMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
@@ -142,7 +142,7 @@ public class GemmenJokyoFinder {
     private List<TokubetsuchiikiKasanGemmen> get特別地域加算減免の情報(HihokenshaNo 被保険者番号) {
         IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
         GemmenJokyoParameter parameter = new GemmenJokyoParameter();
-        parameter.set減免減額種類コード(GemmenGengakuShurui.社会福祉法人等軽減.getコード());
+        parameter.set減免減額種類コード(GemmenGengakuShurui.社会福祉法人等利用者負担軽減.getコード());
         parameter.set被保険者番号(被保険者番号);
         List<TokubetsuchiikiKasanGemmen> 特別地域加算減免の情報List = new ArrayList<>();
         TokubetsuchiikiKasanGemmenEntity entity = mapper.get特別地域加算減免の情報(parameter);
@@ -168,7 +168,7 @@ public class GemmenJokyoFinder {
     private List<ShakaifukuRiyoshaFutanKeigen> get社会福祉法人等利用者負担軽減の情報(HihokenshaNo 被保険者番号) {
         IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
         GemmenJokyoParameter parameter = new GemmenJokyoParameter();
-        parameter.set減免減額種類コード(GemmenGengakuShurui.社会福祉法人等軽減.getコード());
+        parameter.set減免減額種類コード(GemmenGengakuShurui.社会福祉法人等利用者負担軽減.getコード());
         parameter.set被保険者番号(被保険者番号);
         ShafukuRiyoshaFutanKeigenEntity entity = mapper.get社会福祉法人等利用者負担軽減の情報(parameter);
         List<ShakaifukuRiyoshaFutanKeigen> 社会福祉法人等利用者負担軽減の情報List = new ArrayList<>();

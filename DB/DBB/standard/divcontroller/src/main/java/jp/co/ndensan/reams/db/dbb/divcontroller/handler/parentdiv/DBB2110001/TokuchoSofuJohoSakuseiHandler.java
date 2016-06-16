@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2110001.Toku
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchosofu.TokuChoSoufuJohoSakusei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -95,17 +94,17 @@ public final class TokuchoSofuJohoSakuseiHandler {
     }
 
     private void do初期値取得() {
+        RDate now = RDate.getNowDate();
         TokuChoSoufuJohoSakusei manager = TokuChoSoufuJohoSakusei.createInstance();
         FlexibleYear 賦課年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
-                RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
+                now, SubGyomuCode.DBB介護賦課));
         処理日時Map = manager.getShoriDate(賦課年度);
         set処理日時(処理日時Map);
         日付関連_所得年度コンフィグによる制御(賦課年度);
-        set初期状態();
+        set初期状態(now);
     }
 
-    private void set初期状態() {
-        RDate now = RDate.getNowDate();
+    private void set初期状態(RDate now) {
         int month = now.getMonthValue();
         switch (month) {
             case 月分_1:
@@ -156,9 +155,9 @@ public final class TokuchoSofuJohoSakuseiHandler {
                 div.getChkSentaku12().setVisible(true);
                 div.getChkSentaku01().setVisible(true);
         }
-        RString key_06月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, RDate.getNowDate(),
+        RString key_06月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, now,
                 SubGyomuCode.DBB介護賦課);
-        RString key_08月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_8月捕捉, RDate.getNowDate(),
+        RString key_08月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_8月捕捉, now,
                 SubGyomuCode.DBB介護賦課);
         if (特徴開始月_4月.equals(key_06月捕捉)) {
             div.getIcoTokuchotsuikaIrai10().setVisible(false);
@@ -434,27 +433,19 @@ public final class TokuchoSofuJohoSakuseiHandler {
         TokuChoSoufuJohoSakuseiParameter param = new TokuChoSoufuJohoSakuseiParameter();
         param.set賦課年度(new RDate(div.getDdlFukaNendo().getSelectedValue().toString()).getYear());
         param.set処理対象月(get処理対象月().getKey());
+        //TODO 出力順IDが見つけりません　QA869
         param.set出力順ID(RString.EMPTY);
         return manager.createTokuChoSoufuJohoParameter(param);
     }
 
     private void 日付関連_所得年度コンフィグによる制御(FlexibleYear 所得年度) {
         List<KeyValueDataSource> kazeiNendoList = new ArrayList();
-        FlexibleYear 基準年度 = new FlexibleYear("2000");
-        int index = 0;
-        RString selectedIndex = new RString("key0");
-        FlexibleYear 日付関連_所得年度
-                = new FlexibleYear(DbBusinessConfig.get(ConfigKeysHizuke.日付関連_所得年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
-        for (FlexibleYear 年度 = 日付関連_所得年度; 基準年度.isBeforeOrEquals(年度); 年度 = 年度.minusYear(1)) {
-            KeyValueDataSource keyValue = new KeyValueDataSource();
-            keyValue.setKey(new RString("key" + index));
-            keyValue.setValue(new RString(年度.wareki().getYear().toString()));
-            kazeiNendoList.add(keyValue);
-            if (年度.equals(所得年度)) {
-                selectedIndex = new RString("key" + index);
-            }
-            index++;
-        }
+        RString 年度 = new RString(所得年度.wareki().getYear().toString());
+        KeyValueDataSource keyValue = new KeyValueDataSource();
+        keyValue.setKey(年度);
+        keyValue.setValue(年度);
+        kazeiNendoList.add(keyValue);
+        RString selectedIndex = 年度;
         div.getDdlFukaNendo().setDataSource(kazeiNendoList);
         div.getDdlFukaNendo().setSelectedKey(selectedIndex);
     }

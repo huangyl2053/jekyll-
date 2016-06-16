@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0110003
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110003.HakkoJokenDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110003.HakkoJokenHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 認定調査に関する帳票発行画面クラスです
@@ -28,8 +30,11 @@ public class HakkoJoken {
      * @return ResponseData<HakkoJokenDiv>
      */
     public ResponseData<HakkoJokenDiv> onLoad(HakkoJokenDiv div) {
-
-        getHandler(div).onLoad();
+        boolean 認定調査予定未定者一覧フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_認定調査予定未定者一覧フラグ, Boolean.class);
+        boolean 認定調査依頼先変更者一覧表フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_認定調査依頼先変更者一覧表フラグ, Boolean.class);
+        boolean 認定調査結果と主治医意見書のチェックリストフラグ
+                = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_認定調査結果と主治医意見書のチェックリストフラグ, Boolean.class);
+        getHandler(div).onLoad(認定調査予定未定者一覧フラグ, 認定調査依頼先変更者一覧表フラグ, 認定調査結果と主治医意見書のチェックリストフラグ);
 
         return ResponseData.of(div).respond();
     }

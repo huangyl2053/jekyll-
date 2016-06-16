@@ -5,7 +5,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.kanri.INonyuTsuchiShoSeigyoJohoLoaderMapper">
     <select id="get仮算定納入通知書制御情報" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri.KariSanteiNonyuTsuchiShoSeigyoJohoParameter">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri.KariSanteiNonyuTsuchiShoSeigyoJohoParameter" resultOrdered="true">
         SELECT A."komokuName",
         A."komokuValue"
         FROM rgdb."DbT7067ChohyoSeigyoHanyo" A
@@ -54,7 +54,7 @@
         '単票発行_出力形式')
     </select>
     <select id="get本算定納入通知書制御情報" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri.KariSanteiNonyuTsuchiShoSeigyoJohoParameter">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri.KariSanteiNonyuTsuchiShoSeigyoJohoParameter" resultOrdered="true">
         SELECT A."komokuName",
         A."komokuValue"
         FROM rgdb."DbT7067ChohyoSeigyoHanyo" A

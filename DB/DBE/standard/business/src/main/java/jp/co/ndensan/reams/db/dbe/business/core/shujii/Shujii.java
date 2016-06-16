@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.shujii;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IshiJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.core.IshiJokyo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.IryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigodoctorcode.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigoiryokikancode.KaigoIryoKikanCode;

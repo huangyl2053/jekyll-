@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2210001
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.ChosaJisshiBashoCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.DBE2210001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.DBE2210001TransitionEventName;
@@ -43,15 +41,10 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyo
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoShisetsuRiyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoShisetsuRiyoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput1.KihonChosaInput1.KihonChosaInputHandler1;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput2.KihonChosaInput2.KihonChosaInputHandler2;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput3.KihonChosaInput3.KihonChosaInputHandler3;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput4.KihonChosaInput4.KihonChosaInputHandler4;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput5.KihonChosaInput5.KihonChosaInputHandler5;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput6.KihonChosaInput6.KihonChosaInputHandler6;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput7.KihonChosaInput7.KihonChosaInputHandler7;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoChosaItemManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoGaikyoChosaManager;
@@ -392,13 +385,13 @@ public class NinnteiChousaKekkaTouroku1 {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("前回値"));
         }
 
-        ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(KihonChosaInputHandler1.ViewStateKey.第一群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(KihonChosaInputHandler2.ViewStateKey.第二群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(KihonChosaInputHandler3.ViewStateKey.第三群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(KihonChosaInputHandler4.ViewStateKey.第四群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(KihonChosaInputHandler5.ViewStateKey.第五群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 特別な医療List = ViewStateHolder.get(KihonChosaInputHandler6.ViewStateKey.第六群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 自立度List = ViewStateHolder.get(KihonChosaInputHandler7.ViewStateKey.第七群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(ViewStateKeys.第一群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(ViewStateKeys.第二群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(ViewStateKeys.第三群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(ViewStateKeys.第四群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(ViewStateKeys.第五群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 特別な医療List = ViewStateHolder.get(ViewStateKeys.第六群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 自立度List = ViewStateHolder.get(ViewStateKeys.第七群認定調査基本情報リスト, ArrayList.class);
 
         if (!第1群List.isEmpty() || 第2群List.isEmpty() || 第3群List.isEmpty() || 第4群List.isEmpty()
                 || 第5群List.isEmpty() || 特別な医療List.isEmpty() || 自立度List.isEmpty()) {
@@ -422,13 +415,13 @@ public class NinnteiChousaKekkaTouroku1 {
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnKiteichiSettei(NinnteiChousaKekkaTouroku1Div div) {
 
-        ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(KihonChosaInputHandler1.ViewStateKey.第一群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(KihonChosaInputHandler2.ViewStateKey.第二群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(KihonChosaInputHandler3.ViewStateKey.第三群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(KihonChosaInputHandler4.ViewStateKey.第四群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(KihonChosaInputHandler5.ViewStateKey.第五群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 特別な医療List = ViewStateHolder.get(KihonChosaInputHandler6.ViewStateKey.第六群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 自立度List = ViewStateHolder.get(KihonChosaInputHandler7.ViewStateKey.第七群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(ViewStateKeys.第一群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(ViewStateKeys.第二群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(ViewStateKeys.第三群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(ViewStateKeys.第四群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(ViewStateKeys.第五群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 特別な医療List = ViewStateHolder.get(ViewStateKeys.第六群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 自立度List = ViewStateHolder.get(ViewStateKeys.第七群認定調査基本情報リスト, ArrayList.class);
 
         if (!第1群List.isEmpty() || 第2群List.isEmpty() || 第3群List.isEmpty() || 第4群List.isEmpty()
                 || 第5群List.isEmpty() || 特別な医療List.isEmpty() || 自立度List.isEmpty()) {
@@ -852,7 +845,7 @@ public class NinnteiChousaKekkaTouroku1 {
 
     private void 基本調査第1群更新() {
 
-        ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(KihonChosaInputHandler1.ViewStateKey.第一群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(ViewStateKeys.第一群認定調査基本情報リスト, ArrayList.class);
         if (第1群List == null || 第1群List.isEmpty()) {
             return;
         }
@@ -862,7 +855,7 @@ public class NinnteiChousaKekkaTouroku1 {
     }
 
     private void 基本調査第2群更新() {
-        ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(KihonChosaInputHandler2.ViewStateKey.第二群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(ViewStateKeys.第二群認定調査基本情報リスト, ArrayList.class);
         if (第2群List == null || 第2群List.isEmpty()) {
             return;
         }
@@ -872,7 +865,7 @@ public class NinnteiChousaKekkaTouroku1 {
     }
 
     private void 基本調査第3群更新() {
-        ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(KihonChosaInputHandler3.ViewStateKey.第三群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(ViewStateKeys.第三群認定調査基本情報リスト, ArrayList.class);
         if (第3群List == null || 第3群List.isEmpty()) {
             return;
         }
@@ -882,7 +875,7 @@ public class NinnteiChousaKekkaTouroku1 {
     }
 
     private void 基本調査第4群更新() {
-        ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(KihonChosaInputHandler4.ViewStateKey.第四群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(ViewStateKeys.第四群認定調査基本情報リスト, ArrayList.class);
         if (第4群List == null || 第4群List.isEmpty()) {
             return;
         }
@@ -892,7 +885,7 @@ public class NinnteiChousaKekkaTouroku1 {
     }
 
     private void 基本調査第5群更新() {
-        ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(KihonChosaInputHandler5.ViewStateKey.第五群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(ViewStateKeys.第五群認定調査基本情報リスト, ArrayList.class);
         if (第5群List == null || 第5群List.isEmpty()) {
             return;
         }
@@ -902,7 +895,7 @@ public class NinnteiChousaKekkaTouroku1 {
     }
 
     private void 基本調査第6群更新() {
-        ArrayList<KihonChosaInput> 第6群List = ViewStateHolder.get(KihonChosaInputHandler6.ViewStateKey.第六群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第6群List = ViewStateHolder.get(ViewStateKeys.第六群認定調査基本情報リスト, ArrayList.class);
         if (第6群List == null || 第6群List.isEmpty()) {
             return;
         }
@@ -913,7 +906,7 @@ public class NinnteiChousaKekkaTouroku1 {
 
     private void 基本調査第7群更新() {
 
-        ArrayList<KihonChosaInput> 第7群List = ViewStateHolder.get(KihonChosaInputHandler7.ViewStateKey.第七群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第7群List = ViewStateHolder.get(ViewStateKeys.第七群認定調査基本情報リスト, ArrayList.class);
         if (第7群List == null || 第7群List.isEmpty()) {
             return;
         }

@@ -65,7 +65,7 @@ public class PnlKeteiJohoMsg {
      */
     public ResponseData<PnlKeteiJohoMsgDiv> onLoad(PnlKeteiJohoMsgDiv div) {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        div.getKaigoCommonPanel().getCcdAtenaInfo().onLoad(識別コード);
+        div.getKaigoCommonPanel().getCcdAtenaInfo().initialize(識別コード);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
@@ -75,7 +75,7 @@ public class PnlKeteiJohoMsg {
         if (モード_参照.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存, true);
         }
-        div.getKaigoCommonPanel().getCcdShikakuKihon().onLoad(被保険者番号);
+        div.getKaigoCommonPanel().getCcdShikakuKihon().initialize(被保険者番号);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().setValue(new RDate(サービス年月.toString()));
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().setValue(給付率.value());
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().setValue(証明書);

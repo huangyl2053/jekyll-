@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult.NichijoSeikatsuJiritsudoKumiawase;
 import java.util.EnumMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItem;
+import jp.co.ndensan.reams.db.dbe.definition.core.NichijoSeikatsuJiritsudoKumiawaseItem;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.Test;
 import org.junit.Before;

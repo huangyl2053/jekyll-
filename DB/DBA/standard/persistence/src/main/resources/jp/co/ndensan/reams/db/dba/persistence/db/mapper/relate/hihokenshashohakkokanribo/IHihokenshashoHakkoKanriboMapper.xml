@@ -19,7 +19,7 @@
 
     </resultMap>
     
-    <select id="get証発行管理リスト情報"
+    <select resultOrdered="true" id="get証発行管理リスト情報"
             resultMap="resultMap_get証発行管理リスト情報"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshashohakkokanribo.HihokenshashoHakkoKanriboMybatisParameter" fetchSize="500">
         SELECT

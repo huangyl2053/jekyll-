@@ -6,12 +6,15 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410024;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410024.TsuchishoJoho652Div;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
+import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoBunruiKanriManager;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 国保連情報受取データ取込_[652]介護給付費再審査決定通知書（公費）情報のクラスです。
@@ -31,7 +34,9 @@ public class TsuchishoJoho652 {
     public ResponseData<TsuchishoJoho652Div> onLoad(TsuchishoJoho652Div div) {
         ChohyoBunruiKanri code = ChohyoBunruiKanriManager.createInstance().get帳票分類管理(SubGyomuCode.DBC介護給付,
                 new ReportId(帳票ID));
-        div.getCcdKokurenJohoTorikomi().onLoadModeShutsuryokujunJoken2(SubGyomuCode.DBC介護給付, code.get帳票分類ID());
+        KokuhorenDataTorikomiViewStateClass parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
+                KokuhorenDataTorikomiViewStateClass.class);
+        div.getCcdKokurenJohoTorikomi().initialize(SubGyomuCode.DBC介護給付, code.get帳票分類ID(), parmater);
         return ResponseData.of(div).respond();
     }
 

@@ -123,7 +123,7 @@ public class TokuChoSoufuJohoSakusei {
             処理日時Map.put(対象月_7月, null);
         }
         List<DbT7022ShoriDateKanriEntity> entityList = 処理日付管理Dac.selectShorikubun(SubGyomuCode.DBB介護賦課,
-                ShoriName.特徴依頼情報作成.get名称(), 賦課年度);
+                ShoriName.特徴異動情報作成.get名称(), 賦課年度);
         for (DbT7022ShoriDateKanriEntity entity : entityList) {
             RString 年度内連番 = entity.getNendoNaiRenban();
             if (対象月連番MAP.containsKey(年度内連番)) {

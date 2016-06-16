@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hanyolistatenaselect.HanyoListAtenaSelect;
 
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
-import jp.co.ndensan.reams.db.dbx.definition.core.hokenshakosei.HokenshaKosei;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;

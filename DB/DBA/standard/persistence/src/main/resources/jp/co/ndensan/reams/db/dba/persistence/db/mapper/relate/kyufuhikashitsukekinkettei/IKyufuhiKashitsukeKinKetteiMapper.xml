@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- @reamsid_L DBA-0540-440  lijia -->
+<!-- @reamsid_L DBA-0540-440 lijia -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kyufuhikashitsukekinkettei.IKyufuhiKashitsukeKinKetteiMapper">
 
     <resultMap id="resultMap_getKashitsukeKanriNo" type="jp.co.ndensan.reams.db.dba.entity.report.keidoshafukushiyogutaiyokakuninshinseisho.KyufuhiKashitsukeKinKetteiEntity" autoMapping="true">
@@ -9,7 +9,7 @@
         <result property="kashitsukeKanriNo" column="kashitsukeKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
-    <select id="getKashitsukeKanriNo" resultMap="resultMap_getKashitsukeKanriNo"
+    <select resultOrdered="true" id="getKashitsukeKanriNo" resultMap="resultMap_getKashitsukeKanriNo"
             parameterType="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" fetchSize="500">
         SELECT
         T1."hihokenshaNo" AS "hihokenshaNo",

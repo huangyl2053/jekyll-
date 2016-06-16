@@ -4,7 +4,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.CsvKe
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JigyoJyokyoHokokuDataSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JigyoJyokyoHokokuProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JisshiJokyoTokeiProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JotaikubumbetsuhanteiProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JotaikubunbetsuhanteiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.ShinsahanteinoHenkojokyoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.ShinsakaiShukeiGenzainojokyoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.ShinsakaiShukeihyoShinseiBetsuProcess;
@@ -108,7 +108,7 @@ public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBa
      */
     @Step(状態区分別判定)
     protected IBatchFlowCommand selectJotaikubumbetsuhantei() {
-        return loopBatch(JotaikubumbetsuhanteiProcess.class)
+        return loopBatch(JotaikubunbetsuhanteiProcess.class)
                 .arguments(getParameter().toSinsakaiHanteiJyokyoProcessParameter()).define();
     }
 
@@ -131,7 +131,7 @@ public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBa
     @Step(審査会集計表判定別)
     protected IBatchFlowCommand selectShinsakaishukeihyoHanteiBetsu() {
         return loopBatch(ShinsakaishukeihyoHanteiBetsuProcess.class)
-                .arguments(getParameter().toSinsakaiHanteiJyokyoProcessParameter()).define();
+                .arguments(getParameter().toShinsakaishukeihyoHanteiBetsuProcessParameter()).define();
     }
 
     /**

@@ -12,12 +12,10 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoHosokuMonth;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoStartMonth;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.report.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2001ChoshuHohoDac;
-import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokubetuchosyutaisyosyatoroku.ITokubetuChosyutaisyosyaTorokuMapper;
-import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbV2001ChoshuHohoAliveDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShoriName;
@@ -25,6 +23,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.Conf
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -42,8 +42,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class TokubetuChosyutaisyosyaTorokuManager {
 
-    private final MapperProvider mapperProvider;
-    private final TokubetuChosyutaisyosyaTorokusqlparamEntity sqlparams;
     private final RString 空白 = RString.EMPTY;
     private final RString 連番_0001 = new RString("0001");
     private final RString 連番_0002 = new RString("0002");
@@ -54,14 +52,6 @@ public class TokubetuChosyutaisyosyaTorokuManager {
     private final RString 普通徴収 = new RString("3");
     private final RString 特別徴収_厚生労働省 = new RString("1");
     private final RString 特別徴収_地共済 = new RString("2");
-
-    /**
-     * コンストラクタです。
-     */
-    public TokubetuChosyutaisyosyaTorokuManager() {
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.sqlparams = new TokubetuChosyutaisyosyaTorokusqlparamEntity();
-    }
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link FukaManager}のインスタンスを返します。
@@ -81,12 +71,10 @@ public class TokubetuChosyutaisyosyaTorokuManager {
      */
     @Transaction
     public SearchResult<ChoshuHoho> getChoshuHoho(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
-        ITokubetuChosyutaisyosyaTorokuMapper mapper = mapperProvider.create(ITokubetuChosyutaisyosyaTorokuMapper.class);
         List<ChoshuHoho> 最新介護徴収方法情報データLst = new ArrayList<>();
-        sqlparams.set被保険者番号(被保険者番号);
-        sqlparams.set賦課年度(賦課年度);
         ChoshuHoho 最新介護徴収方法情報データ;
-        DbT2001ChoshuHohoEntity 最新介護徴収方法情報データEntity = mapper.getChoshuHoho(sqlparams);
+        DbV2001ChoshuHohoAliveDac dac = InstanceProvider.create(DbV2001ChoshuHohoAliveDac.class);
+        DbT2001ChoshuHohoEntity 最新介護徴収方法情報データEntity = dac.select最新介護徴収方法(賦課年度, 被保険者番号);
         if (null != 最新介護徴収方法情報データEntity) {
             最新介護徴収方法情報データ = new ChoshuHoho(最新介護徴収方法情報データEntity);
         } else {
@@ -112,10 +100,9 @@ public class TokubetuChosyutaisyosyaTorokuManager {
      */
     @Transaction
     public SearchResult<ShoriDateKanri> getDateManagementMaster(FlexibleYear 賦課年度) {
-        ITokubetuChosyutaisyosyaTorokuMapper mapper = mapperProvider.create(ITokubetuChosyutaisyosyaTorokuMapper.class);
-        sqlparams.set賦課年度(賦課年度);
-        sqlparams.set処理名(ShoriName.特徴対象者同定);
-        List<DbT7022ShoriDateKanriEntity> 処理日付管理マスタデータEntiyリスト = mapper.getShorizumiRenban(sqlparams);
+        DbT7022ShoriDateKanriDac dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
+        List<DbT7022ShoriDateKanriEntity> 処理日付管理マスタデータEntiyリスト
+                = dac.selectFor年度内処理済み連番(ShoriName.特徴対象者同定.toRString(), 賦課年度);
         List<ShoriDateKanri> 処理日付管理マスタデータリスト = new ArrayList<>();
         for (DbT7022ShoriDateKanriEntity 処理日付管理マスタデータEntiy : 処理日付管理マスタデータEntiyリスト) {
             処理日付管理マスタデータリスト.add(new ShoriDateKanri(処理日付管理マスタデータEntiy));
@@ -188,7 +175,7 @@ public class TokubetuChosyutaisyosyaTorokuManager {
         if (null == choshuHohoSearchResult) {
             return 0;
         }
-        ChoshuHoho 最新介護徴収方法情報データ = getChoshuHoho(賦課年度, 被保険者番号).records().get(0);
+        ChoshuHoho 最新介護徴収方法情報データ = choshuHohoSearchResult.records().get(0);
         DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 最新介護徴収方法情報データ.toEntity();
         dbT2001ChoshuHohoEntity.setRirekiNo(dbT2001ChoshuHohoEntity.getRirekiNo() + 1);
         RString 年度内処理済み連番 = getShorizumiRenban(賦課年度);
@@ -385,10 +372,9 @@ public class TokubetuChosyutaisyosyaTorokuManager {
      */
     @Transaction
     public SearchResult<HihokenshaDaicho> getInsuredRegisterInformation(HihokenshaNo 被保険者番号) {
-        ITokubetuChosyutaisyosyaTorokuMapper mapper = mapperProvider.create(ITokubetuChosyutaisyosyaTorokuMapper.class);
-        sqlparams.set被保険者番号(被保険者番号);
-        sqlparams.set資格区分(ShikakuKubun._１号.getコード());
-        DbT1001HihokenshaDaichoEntity 被保険者台帳情報データEntity = mapper.getHihokenshaFlag(sqlparams);
+        DbT1001HihokenshaDaichoDac dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
+        DbT1001HihokenshaDaichoEntity 被保険者台帳情報データEntity
+                = dac.selectFor資格喪失フラグ(被保険者番号, ShikakuKubun._１号.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
         List<HihokenshaDaicho> 被保険者台帳情報データリスト = new ArrayList<>();
         if (null == 被保険者台帳情報データEntity) {
             return SearchResult.of(Collections.<HihokenshaDaicho>emptyList(), 0, false);
@@ -424,12 +410,9 @@ public class TokubetuChosyutaisyosyaTorokuManager {
      */
     @Transaction
     public SearchResult<ShoriDateKanri> getInsuredRegisterInformation(FlexibleYear 年度, ShoriName 処理名, RString 年度内連番) {
-        ITokubetuChosyutaisyosyaTorokuMapper mapper = mapperProvider.create(ITokubetuChosyutaisyosyaTorokuMapper.class);
-        sqlparams.setサブ業務コード(SubGyomuCode.DBB介護賦課);
-        sqlparams.set処理名(処理名);
-        sqlparams.set年度(年度);
-        sqlparams.set年度内連番(年度内連番);
-        List<DbT7022ShoriDateKanriEntity> 処理日付管理マスタデータEntityLst = mapper.getIraikinKijunbi(sqlparams);
+        DbT7022ShoriDateKanriDac dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
+        List<DbT7022ShoriDateKanriEntity> 処理日付管理マスタデータEntityLst
+                = dac.selectFor依頼金額計算基準日取得(SubGyomuCode.DBB介護賦課, 処理名.toRString(), 年度, 年度内連番);
         List<ShoriDateKanri> 処理日付管理マスタデータLst = new ArrayList<>();
         for (DbT7022ShoriDateKanriEntity 処理日付管理マスタデータEntity : 処理日付管理マスタデータEntityLst) {
             処理日付管理マスタデータLst.add(new ShoriDateKanri(処理日付管理マスタデータEntity));

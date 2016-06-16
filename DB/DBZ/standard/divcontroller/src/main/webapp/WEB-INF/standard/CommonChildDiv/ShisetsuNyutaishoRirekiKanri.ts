@@ -18,11 +18,11 @@ module DBZ {
 
             public priorities(): Array {
                 return [
-                    "表示モード",
-                    "表示Heightサイズ",
-                    "表示widthサイズ",
-                    "明細表示モード",
-                    "利用"
+                    "DisplayMode",
+                    "DataGridHeight",
+                    "DataGridWidth",
+                    "MeisaiMode",
+                    "Riyou"
                 ];
             }
 
@@ -34,25 +34,25 @@ module DBZ {
                 return new PublicProperties(this.fieldName);
             }
 
-            public 表示モード() {
-                return new Modes.表示モード(this.controls);
+            public DisplayMode() {
+                return new Modes.DisplayMode(this.controls);
             }
 
-            public 表示Heightサイズ() {
-                return new Modes.表示heightサイズ(this.controls);
+            public DataGridHeight() {
+                return new Modes.DataGridHeight(this.controls);
             }
 
-            public 表示widthサイズ() {
-                return new Modes.表示widthサイズ(this.controls);
+            public DataGridWidth() {
+                return new Modes.DataGridWidth(this.controls);
             }
 
 
-            public 明細表示モード() {
-                return new Modes.明細表示モード(this.controls);
+            public MeisaiMode() {
+                return new Modes.MeisaiMode(this.controls);
             }
 
-            public 利用() {
-                return new Modes.利用(this.controls);
+            public Riyou() {
+                return new Modes.Riyou(this.controls);
             }
 
         }
@@ -60,7 +60,7 @@ module DBZ {
         export module Modes {
 
 
-            export class 表示モード {
+            export class DisplayMode {
                 private controls: Controls;
                 private gridWidthCalc;
 
@@ -156,7 +156,7 @@ module DBZ {
                 }
             }
 
-            export class 表示heightサイズ {
+            export class DataGridHeight {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
@@ -193,7 +193,7 @@ module DBZ {
                 }
             }
 
-            export class 表示widthサイズ {
+            export class DataGridWidth {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
@@ -222,7 +222,7 @@ module DBZ {
             }
 
 
-            export class 明細表示モード {
+            export class MeisaiMode {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
@@ -289,7 +289,7 @@ module DBZ {
 
 
 
-            export class 利用{
+            export class Riyou{
 			private gridWidthCalc;
 			private controls: Controls;
                     constructor(controls: Controls) {

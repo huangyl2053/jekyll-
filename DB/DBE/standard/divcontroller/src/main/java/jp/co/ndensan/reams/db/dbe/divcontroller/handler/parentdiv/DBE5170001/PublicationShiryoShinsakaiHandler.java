@@ -78,6 +78,7 @@ public class PublicationShiryoShinsakaiHandler {
             事務_審査会資料.add(出力条件_特記事項_一次判定結果票);
             事務_審査会資料.add(出力条件_主治医意見書);
             委員.add(委員用出力条件_予備判定記入表);
+            委員.add(作成条件_全件);
             div.getChkPrintChoyoJimu().setDisabledItemsByKey(事務);
             div.getChkPrintChohyoShinsakaiJimu().setDisabledItemsByKey(事務_審査会資料);
             div.getChkPrintChohyoIin().setDisabledItemsByKey(委員);
@@ -92,6 +93,7 @@ public class PublicationShiryoShinsakaiHandler {
             事務_審査会資料.add(出力条件_特記事項_一次判定結果票);
             事務_審査会資料.add(出力条件_主治医意見書);
             委員.add(委員用出力条件_予備判定記入表);
+            委員.add(作成条件_全件);
             div.getChkPrintChoyoJimu().setDisabledItemsByKey(事務);
             div.getChkPrintChohyoShinsakaiJimu().setDisabledItemsByKey(事務_審査会資料);
             div.getChkPrintChohyoIin().setDisabledItemsByKey(委員);

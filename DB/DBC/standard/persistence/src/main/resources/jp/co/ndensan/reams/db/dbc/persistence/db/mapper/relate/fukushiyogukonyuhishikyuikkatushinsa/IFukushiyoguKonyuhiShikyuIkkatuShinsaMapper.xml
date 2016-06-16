@@ -4,7 +4,7 @@
 <!-- @reamsid_L DBC-1021-100 chenaoqi -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyuhishikyuikkatushinsa.IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper">
                     
-    <select id="select未審査申請"
+    <select resultOrdered="true" id="select未審査申請"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyuikkatushinsa.ShokanFukushiYoguHanbaihiParameter"
             resultMap="resultMap_ShokanShinseiEntity" fetchSize="500">
         <include refid="selectShokanShinseiEntity" />
@@ -75,7 +75,7 @@
             typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
     </resultMap> 
     
-    <select id="select識別コード"
+    <select resultOrdered="true" id="select識別コード"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyuikkatushinsa.HihokenshaNoParameter"
             resultMap="resultMap_HihokenshaNo" fetchSize="500">
         <include refid="selectHihokenshaNo" />

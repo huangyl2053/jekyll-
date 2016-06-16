@@ -156,7 +156,7 @@
     
     </resultMap>
     
-   <select id="selectKojinJokyoShokai"
+   <select resultOrdered="true" id="selectKojinJokyoShokai"
             resultMap="resultMap_KojinJokyoShokaiRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.kojinjokyoshokai.KojinJokyoShokaiParameter" fetchSize="500">
        SELECT 																	
@@ -244,7 +244,7 @@
 		DbT5123Nintei."shinseishoKanriNo"=#{shinseishoKanriNo}																
     </select>
     
-    <select id="selectKojinShinchokuJokyohyo"
+    <select resultOrdered="true" id="selectKojinShinchokuJokyohyo"
             resultMap="resultMap_KojinJokyoShokaiRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.kojinjokyoshokai.KojinJokyoShokaiParameter" fetchSize="500">
        SELECT												
@@ -569,7 +569,7 @@
         <result property="priority" column="dbT5150Renra_priority" />
     </resultMap>
     
-    <select id="selectRenrakusakiJoho"
+    <select resultOrdered="true" id="selectRenrakusakiJoho"
             resultMap="resultMap_RenrakusakiJohoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.kojinjokyoshokai.KojinJokyoShokaiParameter" fetchSize="500">
         SELECT 

@@ -67,26 +67,25 @@ public class KogakuShokaiHanteiKekkaFinder {
     public KogakuShokaiHanteiKekkaResult get支給判定結果(KogakuShokaiHanteiKekkaParam parameter) {
         IKogakuShokaiHanteiKekkaMapper mapper = mapperProvider.create(IKogakuShokaiHanteiKekkaMapper.class);
         KogakuShokaiHanteiKekkaResult result = new KogakuShokaiHanteiKekkaResult();
-        List<ShikyuMeisaiResult> 支給明細list = new ArrayList<>();
         if (メニューID_高額介護.equals(parameter.getメニューID())) {
             KogakuShokaiHanteiKekkaEntity entity = mapper.get高額介護支給判定結果(parameter);
             if (entity == null) {
                 return null;
             }
-            result = get高額介護情報(result, 支給明細list, entity);
+            result = get高額介護情報(entity);
         } else if (メニューID_総合事業高額介護.equals(parameter.getメニューID())) {
             JigyoKogakuShokaiHanteiKekkaEntity entity = mapper.get事業高額介護支給判定結果(parameter);
             if (entity == null) {
                 return null;
             }
-            result = get事業高額介護情報(result, 支給明細list, entity);
+            result = get事業高額介護情報(entity);
         }
         return result;
     }
 
-    private KogakuShokaiHanteiKekkaResult get高額介護情報(KogakuShokaiHanteiKekkaResult result,
-            List<ShikyuMeisaiResult> 支給明細list,
-            KogakuShokaiHanteiKekkaEntity entity) {
+    private KogakuShokaiHanteiKekkaResult get高額介護情報(KogakuShokaiHanteiKekkaEntity entity) {
+        KogakuShokaiHanteiKekkaResult result = new KogakuShokaiHanteiKekkaResult();
+        List<ShikyuMeisaiResult> 支給明細list = new ArrayList<>();
         List<DbT3054KogakuKyufuTaishoshaMeisaiEntity> 明細List = entity.get高額介護サービス費給付対象者明細List();
         DbT3057KogakuShikyuHanteiKekkaEntity 判定結果entity = entity.get高額介護サービス費支給判定結果Entity();
         DbT3055KogakuKyufuTaishoshaGokeiEntity 合計Entity = entity.get高額介護サービス費給付対象者合計Entity();
@@ -152,9 +151,9 @@ public class KogakuShokaiHanteiKekkaFinder {
         return result;
     }
 
-    private KogakuShokaiHanteiKekkaResult get事業高額介護情報(KogakuShokaiHanteiKekkaResult result,
-            List<ShikyuMeisaiResult> 支給明細list,
-            JigyoKogakuShokaiHanteiKekkaEntity entity) {
+    private KogakuShokaiHanteiKekkaResult get事業高額介護情報(JigyoKogakuShokaiHanteiKekkaEntity entity) {
+        KogakuShokaiHanteiKekkaResult result = new KogakuShokaiHanteiKekkaResult();
+        List<ShikyuMeisaiResult> 支給明細list = new ArrayList<>();
         List<DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity> 明細List = entity.get事業高額介護サービス費給付対象者明細List();
         DbT3111JigyoKogakuShikyuHanteiKekkaEntity 判定結果entity = entity.get事業高額介護サービス費支給判定結果Entity();
         DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity 合計Entity = entity.get事業高額介護サービス費給付対象者合計Entity();

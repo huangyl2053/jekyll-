@@ -16,13 +16,13 @@
         FROM
         (SELECT *
         FROM rgdb."DbT3056KogakuShikyuShinsei" AS A1
-        WHERE NOT EXITS (
+        WHERE NOT EXISTS (
         SELECT *
         FROM rgdb."DbT3056KogakuShikyuShinsei" AS A2
         WHERE A1."hihokenshaNo" = A2."hihokenshaNo"
         AND   A1."serviceTeikyoYM" = A2."serviceTeikyoYM"
         AND   A1."shoKisaiHokenshaNo" = A2."shoKisaiHokenshaNo"
-        AND   A1."rirekiNo" &lt; A2."rirekiNo")) AS A
+        AND   A1."rirekiNo" <![CDATA[<]]> A2."rirekiNo")) AS A
         LEFT JOIN rgdb."DbT3057KogakuShikyuHanteiKekka" AS B
         ON      A."hihokenshaNo" = B."hihokenshaNo"
         AND A."serviceTeikyoYM" = B."serviceTeikyoYM"
@@ -50,7 +50,7 @@
         WHERE A."hihokenshaNo" = #{被保険者番号}
         AND   A."serviceTeikyoYM" = #{提供年月}
         ORDER BY
-        E."jigyoshaNo" ASC
+        E."jigyoshaNo" ASC,
         E."serviceShuruiCode" ASC
     </select>
     <resultMap id="resultMap_KogakuShokai"
@@ -80,13 +80,13 @@
         FROM
         (SELECT *
         FROM rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A1
-        WHERE NOT EXITS (
+        WHERE NOT EXISTS (
         SELECT *
         FROM rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A2
         WHERE A1."hihokenshaNo" = A2."hihokenshaNo"
         AND   A1."serviceTeikyoYM" = A2."serviceTeikyoYM"
         AND   A1."shoKisaiHokenshaNo" = A2."shoKisaiHokenshaNo"
-        AND   A1."rirekiNo" &lt; A2."rirekiNo")) AS A
+        AND   A1."rirekiNo" <![CDATA[<]]> A2."rirekiNo")) AS A
         LEFT JOIN rgdb."DbT3111JigyoKogakuShikyuHanteiKekka" AS B
         ON      A."hihokenshaNo" = B."hihokenshaNo"
         AND A."serviceTeikyoYM" = B."serviceTeikyoYM"
@@ -114,7 +114,7 @@
         WHERE A."hihokenshaNo" = #{被保険者番号}
         AND   A."serviceTeikyoYM" = #{提供年月}
         ORDER BY
-        E."jigyoshaNo" ASC
+        E."jigyoshaNo" ASC,
         E."serviceShuruiCode" ASC
     </select>
     <resultMap id="resultMap_JigyoKogakuShokai"

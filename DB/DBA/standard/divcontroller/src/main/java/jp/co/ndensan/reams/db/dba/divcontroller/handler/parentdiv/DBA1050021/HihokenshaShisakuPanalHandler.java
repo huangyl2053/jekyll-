@@ -328,11 +328,11 @@ public class HihokenshaShisakuPanalHandler {
     }
 
     private void get宛名基本情報取得(ShikibetsuCode 識別コード) {
-        panelDiv.getKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        panelDiv.getKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
     }
 
     private void get資格系基本情報取得(HihokenshaNo 被保番号) {
-        panelDiv.getKihonJoho().getCcdKaigoShikakuKihon().onLoad(被保番号);
+        panelDiv.getKihonJoho().getCcdKaigoShikakuKihon().initialize(被保番号);
     }
 
     private void set資格詳細情報設定(

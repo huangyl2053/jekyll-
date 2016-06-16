@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2230001;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.DbeBusinessConfigKey;
+import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosa.DbeBusinessConfigKey;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2230001.NinteiChosaTokusokujoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;

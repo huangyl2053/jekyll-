@@ -5,7 +5,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyotakukeika.kyotakukeikakutodokede.IKyotakuKeikakuTodokedeMapper">
 
-    <select id="select居宅給付計画届出ByKey" 
+    <select resultOrdered="true" id="select居宅給付計画届出ByKey" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyotakukeika.kyotakukeikakutodokede.KyotakuKeikakuTodokedeMapperParameter" 
             resultMap="resultMap_KyotakuKeikakuTodokedeEntity" fetchSize="500">
         <include refid="selectKyotakuKeikakuTodokedeEntity" />

@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -226,7 +225,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoSakusei {
                 && !変更後訂正情報Entity.get一時差止金額().equals(変更前訂正情報Entity.get一時差止金額())) {
             出力用共同処理用受給者訂正情報Entity.set一時差止金額(変更後訂正情報Entity.get一時差止金額());
         } else {
-            出力用共同処理用受給者訂正情報Entity.set一時差止金額(Decimal.ZERO);
+            出力用共同処理用受給者訂正情報Entity.set一時差止金額(null);
         }
         if (変更後訂正情報Entity.get世帯主被保険者番号() != null
                 && !変更後訂正情報Entity.get世帯主被保険者番号().equals(変更前訂正情報Entity.get世帯主被保険者番号())) {

@@ -9,7 +9,7 @@
         <result property="chosaChikuCode"                   column="chikuShichoson_chosaChikuCode"                   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
-    <select id="get調査地区コード" 
+    <select resultOrdered="true" id="get調査地区コード" 
              resultMap="resultMap_ChosaChikuEntity"  
              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
         SELECT
@@ -25,7 +25,7 @@
         ORDER BY ChikuShichoson."yusenNo"
     </select>
     
-    <select id="get通常件数" 
+    <select resultOrdered="true" id="get通常件数" 
              resultType="int" 
              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
         SELECT
@@ -37,7 +37,7 @@
             AND NinteiChosaScheduleMemo."chosaChikuCode" = #{chosaChikuCode}
             AND NinteiChosaScheduleMemo."memoPriority" = '1'
     </select>
-    <select id="get重要件数" 
+    <select resultOrdered="true" id="get重要件数" 
              resultType="int" 
              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
         SELECT
@@ -61,7 +61,7 @@
         <result property="yoyakuKaoFlag"                       column="ninteichosaSchedule_yoyakuKaoFlag"/>
     </resultMap>
     
-   <select id="getChikuNinteiChosainRelateEntity" 
+   <select resultOrdered="true" id="getChikuNinteiChosainRelateEntity" 
              resultMap="resultMap_ChikuNinteiChosainRelateEntity" 
              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
         SELECT
@@ -91,7 +91,7 @@
                 AND ChikuNinteiChosain."shichosonCode" = #{shichosonCode}
     </select>
     
-   <select id="getChikuNinteiChosainRelateEntityKensaku" 
+   <select resultOrdered="true" id="getChikuNinteiChosainRelateEntityKensaku" 
             resultMap="resultMap_ChikuNinteiChosainRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
        SELECT
@@ -129,7 +129,7 @@
         <result property="shichosonMeisho"                     column="koseiShichosonMaster_shichosonMeisho"                   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
-    <select id="getChikuNinteiKoseiShichosonRelateRelateEntity" 
+    <select resultOrdered="true" id="getChikuNinteiKoseiShichosonRelateRelateEntity" 
              resultMap="resultMap_ChikuNinteiKoseiShichosonRelateEntity" 
              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
         SELECT
@@ -147,7 +147,7 @@
         <result property="jigyoshaMeisho"                      column="koseiShichosonMaster_jigyoshaMeisho"                    typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
-    <select id="getChikuNinteiNinteichosaRelateEntity" 
+    <select resultOrdered="true" id="getChikuNinteiNinteichosaRelateEntity" 
              resultMap="resultMap_ChikuNinteiNinteichosaRelateEntity" 
              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
         SELECT
@@ -166,7 +166,7 @@
         <result property="shinseishoKanriNo"                   column="ninteichosaSchedule_shinseishoKanriNo"                  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
     </resultMap>
     
-    <select id="getNinteichosaScheduleEntity" 
+    <select resultOrdered="true" id="getNinteichosaScheduleEntity" 
              resultMap="resultMap_NinteichosaScheduleEntity" 
              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
         SELECT

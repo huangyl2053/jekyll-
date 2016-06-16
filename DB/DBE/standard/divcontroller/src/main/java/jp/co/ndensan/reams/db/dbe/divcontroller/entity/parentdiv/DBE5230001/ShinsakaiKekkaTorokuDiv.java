@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiKekkaTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,6 +29,14 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     private ShinseishaIchiranDiv ShinseishaIchiran;
     @JsonProperty("KobetsuHyojiArea")
     private KobetsuHyojiAreaDiv KobetsuHyojiArea;
+    @JsonProperty("hdnHasChanged")
+    private RString hdnHasChanged;
+    @JsonProperty("hdnSampleText")
+    private RString hdnSampleText;
+    @JsonProperty("hdnSubGyomuCd")
+    private RString hdnSubGyomuCd;
+    @JsonProperty("hdnGroupCd")
+    private RString hdnGroupCd;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -87,6 +96,78 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     @JsonProperty("KobetsuHyojiArea")
     public void setKobetsuHyojiArea(KobetsuHyojiAreaDiv KobetsuHyojiArea) {
         this.KobetsuHyojiArea = KobetsuHyojiArea;
+    }
+
+    /*
+     * gethdnHasChanged
+     * @return hdnHasChanged
+     */
+    @JsonProperty("hdnHasChanged")
+    public RString getHdnHasChanged() {
+        return hdnHasChanged;
+    }
+
+    /*
+     * sethdnHasChanged
+     * @param hdnHasChanged hdnHasChanged
+     */
+    @JsonProperty("hdnHasChanged")
+    public void setHdnHasChanged(RString hdnHasChanged) {
+        this.hdnHasChanged = hdnHasChanged;
+    }
+
+    /*
+     * gethdnSampleText
+     * @return hdnSampleText
+     */
+    @JsonProperty("hdnSampleText")
+    public RString getHdnSampleText() {
+        return hdnSampleText;
+    }
+
+    /*
+     * sethdnSampleText
+     * @param hdnSampleText hdnSampleText
+     */
+    @JsonProperty("hdnSampleText")
+    public void setHdnSampleText(RString hdnSampleText) {
+        this.hdnSampleText = hdnSampleText;
+    }
+
+    /*
+     * gethdnSubGyomuCd
+     * @return hdnSubGyomuCd
+     */
+    @JsonProperty("hdnSubGyomuCd")
+    public RString getHdnSubGyomuCd() {
+        return hdnSubGyomuCd;
+    }
+
+    /*
+     * sethdnSubGyomuCd
+     * @param hdnSubGyomuCd hdnSubGyomuCd
+     */
+    @JsonProperty("hdnSubGyomuCd")
+    public void setHdnSubGyomuCd(RString hdnSubGyomuCd) {
+        this.hdnSubGyomuCd = hdnSubGyomuCd;
+    }
+
+    /*
+     * gethdnGroupCd
+     * @return hdnGroupCd
+     */
+    @JsonProperty("hdnGroupCd")
+    public RString getHdnGroupCd() {
+        return hdnGroupCd;
+    }
+
+    /*
+     * sethdnGroupCd
+     * @param hdnGroupCd hdnGroupCd
+     */
+    @JsonProperty("hdnGroupCd")
+    public void setHdnGroupCd(RString hdnGroupCd) {
+        this.hdnGroupCd = hdnGroupCd;
     }
 
     /*

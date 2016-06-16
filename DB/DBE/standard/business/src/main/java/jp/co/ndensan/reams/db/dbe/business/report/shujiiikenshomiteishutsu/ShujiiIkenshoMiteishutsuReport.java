@@ -5,10 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshomiteishutsu;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshomiteishutsu.ShujiiIkenshoMiteishutsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshomiteishutsu.ShujiiIkenshoMiteishutsuReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -19,30 +17,25 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShujiiIkenshoMiteishutsuReport extends Report<ShujiiIkenshoMiteishutsuReportSource> {
 
-    private final List<ShujiiIkenshoMiteishutsuEntity> data;
+    private final ShujiiIkenshoMiteishutsuEntity data;
+    private final int index;
 
     /**
      * インスタンスを生成します。
      *
      * @param data 申請に関する帳票発行のdataList
+     * @param index int
      */
-    public ShujiiIkenshoMiteishutsuReport(List<ShujiiIkenshoMiteishutsuEntity> data) {
+    public ShujiiIkenshoMiteishutsuReport(ShujiiIkenshoMiteishutsuEntity data, int index) {
         this.data = data;
+        this.index = index;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<ShujiiIkenshoMiteishutsuReportSource> reportSourceWriter) {
-        for (int i = 0; i < data.size(); i++) {
-            IShujiiIkenshoMiteishutsuEditor editor = new ShujiiIkenshoMiteishutsuEditor(data.get(i), i);
-            IShujiiIkenshoMiteishutsuBuilder builder = new ShujiiIkenshoMiteishutsuBuilder(editor);
-            reportSourceWriter.writeLine(builder);
-        }
-        if (data.isEmpty()) {
-            ShujiiIkenshoMiteishutsuEntity entity = new ShujiiIkenshoMiteishutsuEntity();
-            entity.set氏名(new RString("該当データがありません"));
-            IShujiiIkenshoMiteishutsuEditor editor = new ShujiiIkenshoMiteishutsuEditor(entity, -1);
-            IShujiiIkenshoMiteishutsuBuilder builder = new ShujiiIkenshoMiteishutsuBuilder(editor);
-            reportSourceWriter.writeLine(builder);
-        }
+
+        IShujiiIkenshoMiteishutsuEditor editor = new ShujiiIkenshoMiteishutsuEditor(data, index);
+        IShujiiIkenshoMiteishutsuBuilder builder = new ShujiiIkenshoMiteishutsuBuilder(editor);
+        reportSourceWriter.writeLine(builder);
     }
 }

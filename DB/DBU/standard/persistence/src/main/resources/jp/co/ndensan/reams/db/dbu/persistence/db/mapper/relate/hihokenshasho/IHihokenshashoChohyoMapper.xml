@@ -15,7 +15,7 @@
         <result property="seibetsuCode"    column="ShikibetsuTaisho_seibetsuCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="seinengappiFushoKubun"    column="ShikibetsuTaisho_seinengappiFushoKubun"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    <select id="get本人情報取得" resultMap="honninJohoEntity"
+    <select resultOrdered="true" id="get本人情報取得" resultMap="honninJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.AtenaMybatisParameter"
             fetchSize="500">
         SELECT
@@ -32,7 +32,7 @@
         <result property="banchi" column="Atesaki_banchi"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="katagaki"    column="Atesaki_katagaki"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    <select id="get送付先情報取得" resultMap="sofusakiJohoEntity"
+    <select resultOrdered="true" id="get送付先情報取得" resultMap="sofusakiJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.AtenaMybatisParameter"
             fetchSize="500">
         SELECT

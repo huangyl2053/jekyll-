@@ -4,9 +4,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshik
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  * @reamsid_L DBA-0030-012 liangbc
  */
 public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -313,7 +314,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
             認定履歴ボタンを[] enumArray = 認定履歴ボタンを.values();
 
             for (認定履歴ボタンを enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -328,11 +329,11 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     }
 
     public 認定履歴ボタンを getMode_認定履歴ボタンを() {
-        return (認定履歴ボタンを) _CommonChildDivModeUtil.getMode( this.modes, 認定履歴ボタンを.class );
+        return (認定履歴ボタンを) _CommonChildDivModeUtil.getMode(this.modes, 認定履歴ボタンを.class);
     }
 
-    public void setMode_認定履歴ボタンを( 認定履歴ボタンを value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 認定履歴ボタンを.class , value );
+    public void setMode_認定履歴ボタンを(認定履歴ボタンを value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 認定履歴ボタンを.class, value);
     }
 
     public static enum 被保履歴ボタンを implements ICommonChildDivMode {
@@ -350,7 +351,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
             被保履歴ボタンを[] enumArray = 被保履歴ボタンを.values();
 
             for (被保履歴ボタンを enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -365,11 +366,11 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     }
 
     public 被保履歴ボタンを getMode_被保履歴ボタンを() {
-        return (被保履歴ボタンを) _CommonChildDivModeUtil.getMode( this.modes, 被保履歴ボタンを.class );
+        return (被保履歴ボタンを) _CommonChildDivModeUtil.getMode(this.modes, 被保履歴ボタンを.class);
     }
 
-    public void setMode_被保履歴ボタンを( 被保履歴ボタンを value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 被保履歴ボタンを.class , value );
+    public void setMode_被保履歴ボタンを(被保履歴ボタンを value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 被保履歴ボタンを.class, value);
     }
 
     // </editor-fold>
@@ -386,7 +387,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
      */
     @Override
     @JsonIgnore
-    public void onLoad(ShikibetsuCode 識別コード) {
+    public void initialize(ShikibetsuCode 識別コード) {
         KaigoAtenaKihonFinder finder = KaigoAtenaKihonFinder.createInstance();
         KaigoAtenaKihonBusiness result = null;
         try {
@@ -410,7 +411,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
      */
     @Override
     @JsonIgnore
-    public void onLoad(HihokenshaNo 被保険者番号) {
+    public void initialize(HihokenshaNo 被保険者番号) {
         KaigoAtenaKihonFinder finder = KaigoAtenaKihonFinder.createInstance();
         KaigoAtenaKihonBusiness result = null;
         try {

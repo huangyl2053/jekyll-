@@ -80,7 +80,7 @@
         <result property="ninteiJohoTeikyoYMD" column="dbT5301ShujiiIkenshoIraiJoho_ninteiJohoTeikyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="logicalDeletedFlag" column="dbT5301ShujiiIkenshoIraiJoho_logicalDeletedFlag" />
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity">
         SELECT
         <include refid="allColumns_DbT5301ShujiiIkenshoIraiJoho" />
         FROM
@@ -96,7 +96,7 @@
         WHERE "shinseishoKanriNo" = #{申請書管理番号}
     </update>
 
-    <select id="getListForProcess" resultType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="1" >
+    <select resultOrdered="true" id="getListForProcess" resultType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="1" >
         SELECT
         '被保険者台帳リスト取得'
         FROM

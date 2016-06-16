@@ -6,32 +6,21 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shisetsuidojoho.IShisetsuIdoJohoMapper">
     <select id="get介護施設入退所情報" resultMap="resultMap_ShisetsuIdoJohoEntity"
             parameterType="jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode"  fetchSize="500" resultOrdered="true">
-        SELECT *
-        FROM(
         SELECT A."nyushoYMD" AS 入所年月日,
                A."taishoYMD" AS 退所年月日,
                A."nyushoShisetsuShurui" AS 入所施設種類,
                A."nyushoShisetsuCode" AS 入所施設コード,
-               B."jigyoshaName" AS 事業者名称
+               CASE A."nyushoShisetsuShurui"
+               WHEN '11' THEN B."jigyoshaName"
+               ELSE C."jigyoshaMeisho"
+               END AS 事業者名称
         FROM rgdb."DbV1004HihokenshaShisetsuNyutaisho" AS A
-        INNER JOIN rgdb."DbT7060KaigoJigyosha" AS B
+        LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS B
               ON B."jigyoshaNo" = A."nyushoShisetsuCode"
-                 AND A."nyushoShisetsuShurui" = '11'
-        WHERE A."shikibetsuCode" = #{識別コード}
-              AND A."nyushoShisetsuShurui" = '11'
-    UNION
-        SELECT A."nyushoYMD" AS 入所年月日,
-               A."taishoYMD" AS 退所年月日,
-               A."nyushoShisetsuShurui" AS 入所施設種類,
-               A."nyushoShisetsuCode" AS 入所施設コード,
-               C."jigyoshaMeisho" AS 事業者名称
-        FROM rgdb."DbV1004HihokenshaShisetsuNyutaisho" AS A
-        INNER JOIN rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS C
+        LEFT JOIN rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS C
               ON C."jigyoshaNo" = A."nyushoShisetsuCode"
-                 AND A."nyushoShisetsuShurui" <![CDATA[<>]]> '11'
         WHERE A."shikibetsuCode" = #{識別コード}
-              AND A."nyushoShisetsuShurui" <![CDATA[<>]]> '11') AS S
-        ORDER BY S."入所年月日" ASC
+        ORDER BY A."nyushoYMD" DESC
     </select>
     <resultMap id="resultMap_ShisetsuIdoJohoEntity"
                type="jp.co.ndensan.reams.db.dbd.entity.db.relate.shisetsuidojoho.ShisetsuIdoJohoEntity" autoMapping="true">

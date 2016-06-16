@@ -19,7 +19,7 @@
          <result property="支払済金額合計" column="支払済金額合計" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
          <result property="高額支給額" column="高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    <select id="getKogakuKyuufuTaishouList"
+    <select resultOrdered="true" id="getKogakuKyuufuTaishouList"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukyuufutaishoulist.KogakuKyuufuTaishouListParameter"
             resultMap="resultMap_KogakuKyuufuTaishouListEntity" fetchSize="500">
         SELECT *
@@ -65,7 +65,7 @@
         C.事業者番号  ASC,
         C.サービス種類コード  ASC
     </select>
-    <select id="getJigyouKogakuKyuufuTaishouList"
+    <select resultOrdered="true" id="getJigyouKogakuKyuufuTaishouList"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukyuufutaishoulist.KogakuKyuufuTaishouListParameter"
             resultMap="resultMap_KogakuKyuufuTaishouListEntity" fetchSize="500">
         SELECT *

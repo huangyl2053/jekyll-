@@ -37,7 +37,7 @@
         <result property="dekidakaSeikyugakuSagaku" column="dekidakaSeikyugakuSagaku" />
         <result property="updateCount" column="updateCount" />
     </resultMap>
-    <select id="getSyokanbaraiketteFukushiList"
+    <select resultOrdered="true" id="getSyokanbaraiketteFukushiList"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter"
             resultMap="resultMap_SyokanbaraiketeJohoEntity" fetchSize="500">
         SELECT
@@ -72,7 +72,7 @@
         DbT3048ShokanFukushiYoguHanbaihi."jigyoshaNo",
         DbT3048ShokanFukushiYoguHanbaihi."yoshikiNo"
     </select>
-    <select id="getSyokanbaraiketteJyutakuList"
+    <select resultOrdered="true" id="getSyokanbaraiketteJyutakuList"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter"
             resultMap="resultMap_SyokanbaraiketeJohoEntity" fetchSize="500">
         SELECT
@@ -114,7 +114,7 @@
         DbT3049ShokanJutakuKaishu."jigyoshaNo",
         DbT3049ShokanJutakuKaishu."yoshikiNo"
     </select>
-    <select id="getSyukeiJohoList"
+    <select resultOrdered="true" id="getSyukeiJohoList"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter"
             resultMap="resultMap_SyokanbaraiketeJohoEntity" fetchSize="500">
         SELECT
@@ -201,7 +201,7 @@
         償還払決定情報."yoshikiNo"
 
     </select>
-    <select id="get集計情報決定データ"
+    <select resultOrdered="true" id="get集計情報決定データ"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter"
             resultMap="resultMap_SyokanbaraiketeJohoDekidakaEntity" fetchSize="500">
         SELECT
@@ -238,7 +238,7 @@
         AND DbT3053ShokanShukei."seiriNo" = #{seiriNo}
     </select>
 
-    <select id="get償還払決定一覧"
+    <select resultOrdered="true" id="get償還払決定一覧"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoMapperParameter"
             resultMap="resultMap_SyokanbaraiketeJohoEntity" fetchSize="500">
         SELECT

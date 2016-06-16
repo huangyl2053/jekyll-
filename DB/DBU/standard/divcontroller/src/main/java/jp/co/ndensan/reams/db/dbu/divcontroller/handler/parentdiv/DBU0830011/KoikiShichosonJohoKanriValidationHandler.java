@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0830011;
 
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0830011.KoikiShichosonJohoKanriDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -23,15 +24,17 @@ public class KoikiShichosonJohoKanriValidationHandler {
     /**
      * 保存するボタンを押下するとき、期間チェックを行う。
      *
+     * @param requestDiv KoikiShichosonJohoKanriDiv
      * @param 広域加入年月日 広域脱退年月日
      * @param 広域脱退年月日 広域脱退年月日
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateFor期間チェック(FlexibleDate 広域加入年月日, FlexibleDate 広域脱退年月日) {
+    public ValidationMessageControlPairs validateFor期間チェック(FlexibleDate 広域加入年月日, FlexibleDate 広域脱退年月日,
+            KoikiShichosonJohoKanriDiv requestDiv) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         validationMessages.add(new ValidationMessageControlPair(new CheckMessages(UrErrorMessages.期間が不正_追加メッセージあり２,
                 広域加入年月日.toString(),
-                広域脱退年月日.toString())));
+                広域脱退年月日.toString()), requestDiv.getTxtKanyuYMD(), requestDiv.getTxtDattaiYMD()));
         return validationMessages;
     }
 

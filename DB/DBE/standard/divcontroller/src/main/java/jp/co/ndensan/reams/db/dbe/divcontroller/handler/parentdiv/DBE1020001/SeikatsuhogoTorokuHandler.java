@@ -45,6 +45,7 @@ public class SeikatsuhogoTorokuHandler {
         div.getCcdHokenshaList().loadHokenshaList();
         List<KeyValueDataSource> sourceList = new ArrayList<>();
         if (business != null) {
+            // TODO QA#88089待ち、画面の遷移不正です
 //            div.getCcdHokenshaList().setSelectedItem(business.get保険者());
             div.getTxtHihokenshaNo().setValue(business.get被保険者番号().value());
             div.getTxtShimei().setValue(business.get氏名().value());

@@ -54,7 +54,7 @@
         <result property="区分_前_資格" column="kubun_zen_shikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="区分_後_資格" column="kubun_go_shikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    <select id="getHiHokenshaDaichoList" resultMap="resultMap_getHiHokenshaDaichoList"
+    <select resultOrdered="true" id="getHiHokenshaDaichoList" resultMap="resultMap_getHiHokenshaDaichoList"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsutorokushalistbatch.NenreiTotatsuTorokushaListMybatisParameter"
             fetchSize="500">
         SELECT
@@ -355,7 +355,7 @@
         AND "shoriName" = #{shoriName}
     </update>
 
-    <select id="getPsmShikibetsuTaisho" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
+    <select resultOrdered="true" id="getPsmShikibetsuTaisho" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsutorokushalistbatch.NenreiTotatsuTorokushaListMybatisParameter"
             fetchSize="500">
         SELECT

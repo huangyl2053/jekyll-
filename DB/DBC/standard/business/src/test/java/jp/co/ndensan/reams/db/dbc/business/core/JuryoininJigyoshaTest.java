@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kogakukyufukeiyaku.KogakuKyufu
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufukeiyaku.ShokanbaraiKyufuKeiyakuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufukeiyaku.TokuteiFukushiYoguHanbaiKeiyakuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufukeiyaku.ToriatsukaiKakuyakushoKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.keiyakuno.KeiyakuNo;
+import jp.co.ndensan.reams.db.dbc.definition.core.keiyakuno.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

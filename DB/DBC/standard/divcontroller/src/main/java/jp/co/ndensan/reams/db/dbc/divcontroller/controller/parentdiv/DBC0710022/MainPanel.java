@@ -67,8 +67,8 @@ public class MainPanel {
         RString 証明書 = parameter.get証明書();
         RString 画面モード = parameter.get画面モード();
 
-        div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().onLoad(識別コード);
-        div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().onLoad(被保険者番号);
+        div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().initialize(識別コード);
+        div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().initialize(被保険者番号);
 
         getHandler(div).set初期化(証明書, 整理番号, サービス年月, 給付率);
 
@@ -192,7 +192,9 @@ public class MainPanel {
                 && shokanbaraiketteiJohoDiv.getTxtFuSyikyuriyu1().getValue().isNullOrEmpty()) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(MSG_理由.toString()));
         }
-        boolean flag = getHandler(div).is内容変更状態();
+        ShoukanFutsuKetteiJouhouTourokuParameter parameter = ViewStateHolder.get(
+                ViewStateKeys.住宅改修費支給申請_償還払決定情報登録画面データ, ShoukanFutsuKetteiJouhouTourokuParameter.class);
+        boolean flag = getHandler(div).is内容変更状態(parameter);
         if (flag) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
@@ -203,7 +205,9 @@ public class MainPanel {
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 try {
-                    boolean flags = getHandler(div).保存処理();
+                    ShokanharaKeteiJyohoParameter 検索情報キー = ViewStateHolder.get(ViewStateKeys.検索情報キー,
+                            ShokanharaKeteiJyohoParameter.class);
+                    boolean flags = getHandler(div).保存処理(検索情報キー);
                     setMessages(div, flags);
                 } catch (Exception e) {
                     div.getJutakuShikyuShinseiKanryoPanel().getKanryoMessage().setMessage(UrErrorMessages.異常終了,

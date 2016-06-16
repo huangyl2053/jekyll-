@@ -5,10 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoseikyuichiran;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshoseikyuichiran.ShujiiIkenshoSeikyuIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoseikyuichiran.ShujiiIkenshoSeikyuIchiranReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -19,30 +17,24 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShujiiIkenshoSeikyuIchiranReport extends Report<ShujiiIkenshoSeikyuIchiranReportSource> {
 
-    private final List<ShujiiIkenshoSeikyuIchiranEntity> data;
+    private final ShujiiIkenshoSeikyuIchiranEntity data;
+    private final int index;
 
     /**
      * インスタンスを生成します。
      *
      * @param data 申請に関する帳票発行のdataList
+     * @param index int
      */
-    public ShujiiIkenshoSeikyuIchiranReport(List<ShujiiIkenshoSeikyuIchiranEntity> data) {
+    public ShujiiIkenshoSeikyuIchiranReport(ShujiiIkenshoSeikyuIchiranEntity data, int index) {
         this.data = data;
+        this.index = index;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<ShujiiIkenshoSeikyuIchiranReportSource> reportSourceWriter) {
-        for (int i = 0; i < data.size(); i++) {
-            IShujiiIkenshoSeikyuIchiranEditor editor = new ShujiiIkenshoSeikyuIchiranEditor(data.get(i), i);
-            IShujiiIkenshoSeikyuIchiranBuilder builder = new ShujiiIkenshoSeikyuIchiranBuilder(editor);
-            reportSourceWriter.writeLine(builder);
-        }
-        if (data.isEmpty()) {
-            ShujiiIkenshoSeikyuIchiranEntity entity = new ShujiiIkenshoSeikyuIchiranEntity();
-            entity.set氏名(new RString("該当データがありません"));
-            IShujiiIkenshoSeikyuIchiranEditor editor = new ShujiiIkenshoSeikyuIchiranEditor(entity, -1);
-            IShujiiIkenshoSeikyuIchiranBuilder builder = new ShujiiIkenshoSeikyuIchiranBuilder(editor);
-            reportSourceWriter.writeLine(builder);
-        }
+        IShujiiIkenshoSeikyuIchiranEditor editor = new ShujiiIkenshoSeikyuIchiranEditor(data, index);
+        IShujiiIkenshoSeikyuIchiranBuilder builder = new ShujiiIkenshoSeikyuIchiranBuilder(editor);
+        reportSourceWriter.writeLine(builder);
     }
 }

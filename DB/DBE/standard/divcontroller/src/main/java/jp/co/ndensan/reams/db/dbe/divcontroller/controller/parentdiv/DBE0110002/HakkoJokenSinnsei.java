@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0110002
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110002.HakkoJokenSinnseiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110002.HakkoJokenSinnseiHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 申請に関する帳票発行画面クラスです
@@ -27,7 +29,11 @@ public class HakkoJokenSinnsei {
      * @return ResponseData<HakkoJokenSinnseiDiv>
      */
     public ResponseData<HakkoJokenSinnseiDiv> onLoad(HakkoJokenSinnseiDiv div) {
-        getHandler(div).onLoad();
+        boolean 要介護認定申請モニタリストフラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_要介護認定申請モニタリストフラグ,
+                Boolean.class);
+        boolean 要支援認定等申請者一覧フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_要介護認定_要支援認定等申請者一覧フラグ,
+                Boolean.class);
+        getHandler(div).onLoad(要介護認定申請モニタリストフラグ, 要支援認定等申請者一覧フラグ);
         return ResponseData.of(div).respond();
     }
 

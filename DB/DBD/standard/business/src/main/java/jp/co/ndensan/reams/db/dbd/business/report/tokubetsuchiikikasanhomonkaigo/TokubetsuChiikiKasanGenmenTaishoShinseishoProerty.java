@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.tokubetsuchiikikasanhomonkaigo;
 
-import jp.co.ndensan.reams.db.dbd.definition.core.reportid.ReportIdDBD;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataBuilder;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataIdentifier;
 import jp.co.ndensan.reams.db.dbu.definition.core.nenpoyoushi3.NenpoYoushi3DetalParameter;
-import jp.co.ndensan.reams.db.dbu.definition.core.nenpoyoushi3.NenpoYoushi3ViewStateKeys;
+import jp.co.ndensan.reams.db.dbu.definition.core.viewstate.NenpoYoushi3ViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060041.NenpoYoushi3Div;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

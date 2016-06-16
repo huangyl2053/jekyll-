@@ -26,6 +26,7 @@ public class ShinsakaishiryoItem {
     private RString 審査対象者数;
     private RString 審査員一覧;
     private int no;
+    private RString 審査会審査順;
     private RString 保険者;
     private RString 被保険者;
     private RString 氏名;

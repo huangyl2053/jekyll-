@@ -52,8 +52,8 @@ public class SinsaSeikyusyoMeisaiPanel {
         ResponseData<SinsaSeikyusyoMeisaiPanelDiv> responseData = new ResponseData<>();
 
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード();
-        requestDiv.getAtenaInfoCommonChildDiv().onLoad(識別コード);
-        requestDiv.getKaigoShikakuKihonCommonChildDiv().onLoad(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号());
+        requestDiv.getAtenaInfoCommonChildDiv().initialize(識別コード);
+        requestDiv.getKaigoShikakuKihonCommonChildDiv().initialize(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号());
         if (追加.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
 
             createHandlerOf(requestDiv).追加_初期化の編集();

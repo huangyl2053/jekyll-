@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.Shak
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shakaifukushihojinkeigen.ShakaifukuRiyoshaFutanKeigenToJotai;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiBuilder;
-import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shakaifukushihojinkeigen.GemmenKubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1030001Div;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.dgShinseiList_Row;
@@ -22,6 +21,7 @@ import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shakaifukushihojink
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shakaifukushihojinkeigen.ShakaiFukushiHojinKeigenService;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -126,8 +126,8 @@ public class DBD1030001Handler {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
             return false;
         }
-        div.getShafukuRiyoshaKeigen().getCcdAtenaInfo().onLoad(識別コード);
-        div.getShafukuRiyoshaKeigen().getCcdShikakuKihon().onLoad(被保険者番号);
+        div.getShafukuRiyoshaKeigen().getCcdAtenaInfo().initialize(識別コード);
+        div.getShafukuRiyoshaKeigen().getCcdShikakuKihon().initialize(被保険者番号);
         div.getShafukuRiyoshaKeigen().setHihokenshaNo(被保険者番号.getColumnValue());
         RString メニューID = ResponseHolder.getMenuID();
         if (申請メニューID.equals(メニューID)) {
@@ -835,7 +835,7 @@ public class DBD1030001Handler {
 
     private GemmenGengakuShinsei get減免減額申請From画面(ShoKisaiHokenshaNo 証記載保険者番号, Integer 追加履歴番号) {
         GemmenGengakuShinsei 減免減額申請 = new GemmenGengakuShinsei(証記載保険者番号,
-                get被保険者番号FromViewState(), GemmenGengakuShurui.社会福祉法人等軽減.getコード(), 追加履歴番号);
+                get被保険者番号FromViewState(), GemmenGengakuShurui.社会福祉法人等利用者負担軽減.getコード(), 追加履歴番号);
         GemmenGengakuShinseiBuilder builder = 減免減額申請.createBuilderForEdit();
         ShinseiJoho 減免減額申請情報 = div.getCcdShinseiJoho().get減免減額申請情報();
         if (減免減額申請情報.get申請届出代行区分() != null) {
@@ -1043,7 +1043,7 @@ public class DBD1030001Handler {
             減免減額申請 = 情報.getGemmenGengakuShinseiList().get(0);
         } else {
             減免減額申請 = new GemmenGengakuShinsei(get証記載保険者番号(),
-                    情報.get被保険者番号(), GemmenGengakuShurui.社会福祉法人等軽減.getコード(), 情報.get履歴番号());
+                    情報.get被保険者番号(), GemmenGengakuShurui.社会福祉法人等利用者負担軽減.getコード(), 情報.get履歴番号());
         }
         GemmenGengakuShinsei 画面減免減額申請 = gemmenGengakuShinseiList.get(0);
         GemmenGengakuShinseiBuilder 減免減額申請Builder = 画面減免減額申請.createBuilderForEdit();

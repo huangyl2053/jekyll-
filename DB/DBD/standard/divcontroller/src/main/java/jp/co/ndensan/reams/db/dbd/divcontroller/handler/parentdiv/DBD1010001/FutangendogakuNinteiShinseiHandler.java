@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunint
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiIdentifier;
-import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KyoshitsuShubetsu;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
@@ -29,6 +28,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.dgSh
 import jp.co.ndensan.reams.db.dbd.service.core.futangendogakunintei.futangendogakuninteishinsei.FutangendogakuNinteiShinseiManager;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutangendogakuNinteiService;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
+import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -133,8 +133,8 @@ public class FutangendogakuNinteiShinseiHandler {
         }
         div.setLockKey(new RString("DB").concat(被保険者番号.value()).concat(new RString("FutanGendoGaku")));
         RealInitialLocker.lock(new LockingKey(div.getLockKey()));
-        div.getCcdAtenaInfo().onLoad(識別コード);
-        div.getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+        div.getCcdAtenaInfo().initialize(識別コード);
+        div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
         div.getCcdShisetsuNyushoInfo().onLoad(識別コード);
         List<FutanGendogakuNintei> 申請一覧情報 = get申請一覧情報(被保険者番号);
         ArrayList<FutanGendogakuNintei> 申請一覧情報ArrayList = new ArrayList<>(申請一覧情報);

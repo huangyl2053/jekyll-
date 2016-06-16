@@ -32,9 +32,9 @@ import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakuKa
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuyaokaigojyotaisandannkaihantei.JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager;
 import jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbc.service.report.jutakukaishujizenshinseitsuchisho.JutakuKaishuJizenShinseiTsuchishoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -1442,7 +1442,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getTxtFushoninReason().setDisabled(true);
 
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
-                .getJutakuKaishuJizenShoninKetteiTsuchisho().setDisabled(true);
+                .getJutakuKaishuJizenShoninKetteiTsuchisho().setDisabledPublishCheckBox(true);
     }
 
     private void 修正モード初期化() {
@@ -1572,18 +1572,15 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getTxtFushoninReason()
                         .setValue(data.get不承認理由());
             }
-            if ((照会モード.equals(画面モード) || 取消モード.equals(画面モード) || 削除モード.equals(画面モード))
-                    && data.get事前申請決定通知発行日() != null) {
+            if (data.get事前申請決定通知発行日() != null) {
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                         .getJutakuKaishuJizenShoninKetteiTsuchisho().setIsPublish(true);
-            } else {
-                div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
-                        .getJutakuKaishuJizenShoninKetteiTsuchisho().setIsPublish(false);
-            }
-            if (data.get事前申請決定通知発行日() != null) {
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                         .getJutakuKaishuJizenShoninKetteiTsuchisho().getTxtHakkoYMD()
                         .setValue(new RDate(data.get事前申請決定通知発行日().toString()));
+            } else {
+                div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
+                        .getJutakuKaishuJizenShoninKetteiTsuchisho().setIsPublish(false);
             }
         }
     }

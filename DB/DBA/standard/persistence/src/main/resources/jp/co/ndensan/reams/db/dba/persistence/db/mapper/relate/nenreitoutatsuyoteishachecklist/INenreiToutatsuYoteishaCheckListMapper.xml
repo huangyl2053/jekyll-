@@ -20,7 +20,7 @@
         <result property="hihokennshaKubunCode"    column="DbT1001Hiho_hihokennshaKubunCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
-    <select id="getTorokuNenreiToutatsuYoteishaCheckList"
+    <select resultOrdered="true" id="getTorokuNenreiToutatsuYoteishaCheckList"
             resultMap="resultMap_NenreiToutatsuYoteishaCheckListEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter" fetchSize="500">
         SELECT
@@ -54,7 +54,7 @@
         DbT1001Hiho."logicalDeletedFlag" <![CDATA[<>]]> TRUE
     </select>
 
-    <select id="getTorokuNenreiToutatsuYoteishaCheckList2"
+    <select resultOrdered="true" id="getTorokuNenreiToutatsuYoteishaCheckList2"
             resultMap="resultMap_NenreiToutatsuYoteishaCheckListEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter"    fetchSize="500">
         SELECT
@@ -88,7 +88,7 @@
         DbT1001Hiho."hihokennshaKubunCode" = '2'
     </select>
 
-    <select id="getZenbuNenreiToutatsuYoteishaCheckList"
+    <select resultOrdered="true" id="getZenbuNenreiToutatsuYoteishaCheckList"
             resultMap="resultMap_NenreiToutatsuYoteishaCheckListEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter"
             fetchSize="500">
@@ -123,7 +123,7 @@
         )
     </select>
 
-    <select id="getZenbuNenreiToutatsuYoteishaCheckList2"
+    <select resultOrdered="true" id="getZenbuNenreiToutatsuYoteishaCheckList2"
             resultMap="resultMap_NenreiToutatsuYoteishaCheckListEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter"
             fetchSize="500">
@@ -212,7 +212,7 @@
     <resultMap id="resultMap_DbT1009ShikakuShutokuJogaishaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity" autoMapping="true">
         <result property="shikibetsuCode"   column="DbT1009Shikaku_shikibetsuCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
     </resultMap>
-    <select id="getShikakuShutokuJogaiList"
+    <select resultOrdered="true" id="getShikakuShutokuJogaiList"
             resultMap="resultMap_DbT1009ShikakuShutokuJogaishaEntity" fetchSize="500">
         SELECT
         "DbT1009Shikaku_shikibetsuCode"
@@ -231,7 +231,7 @@
         <result property="tekiyoYMD"    column="DbT1002Tekiyo_tekiyoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="kaijoYMD"    column="DbT1002Tekiyo_kaijoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
     </resultMap>
-    <select id="getTekiyoJogaiList"
+    <select resultOrdered="true" id="getTekiyoJogaiList"
             resultMap="resultMap_DbT1002TekiyoJogaishaEntity" fetchSize="500">
         SELECT
         "DbT1002Tekiyo_shikibetsuCode",
@@ -257,7 +257,7 @@
         <result property="tekiyoYMD"    column="DbT1003Tashicho_tekiyoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="kaijoYMD"    column="DbT1003Tashicho_kaijoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
     </resultMap>
-    <select id="getTashichosonJushochi"
+    <select resultOrdered="true" id="getTashichosonJushochi"
             resultMap="resultMap_DbT1003TashichosonJushochiTokureiEntity" fetchSize="500">
         SELECT
         "DbT1003Tashicho_shikibetsuCode",
@@ -281,7 +281,7 @@
         <result property="shikibetsuCode"   column="DbT1010Tennyu_shikibetsuCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
         <result property="torokuIdoYMD"    column="DbT1010Tennyu_torokuIdoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
     </resultMap>
-    <select id="getTennyushutsuHoryuTaishosha"
+    <select resultOrdered="true" id="getTennyushutsuHoryuTaishosha"
             resultMap="resultMap_DbT1010TennyushutsuHoryuTaishoshaEntity" fetchSize="500">
         SELECT
         "DbT1010Tennyu_shikibetsuCode",
@@ -301,7 +301,7 @@
         <result property="jukyuKaishiYMD"    column="UrT0508Seika_jukyuKaishiYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="jukyuHaishiYMD"    column="UrT0508Seika_jukyuHaishiYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
     </resultMap>
-    <select id="getSeikatsuHogojyu"
+    <select resultOrdered="true" id="getSeikatsuHogojyu"
             resultMap="resultMap_UrT0508SeikatsuHogoJukyushaEntity" parameterType="jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode" fetchSize="500">
         SELECT
         UrT0508Seika."shikibetsuCode" AS "UrT0508Seika_shikibetsuCode",

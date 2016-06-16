@@ -55,8 +55,8 @@ public class RoUReiFuKuShiNenKin {
     public ResponseData<RoUReiFuKuShiNenKinDiv> onLoad(RoUReiFuKuShiNenKinDiv div) {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード();
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号();
-        div.getKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        div.getKihonJoho().getCcdKaigoShikakuKihon().onLoad(識別コード);
+        div.getKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
+        div.getKihonJoho().getCcdKaigoShikakuKihon().initialize(識別コード);
         div.getRoreiFukushiNenkinJohoList().getCcdRoreiFukushiNenkinRireki().initialize(識別コード, 被保険者番号);
         アクセスログ(AccessLogType.照会, 識別コード);
         if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {

@@ -8,9 +8,8 @@ import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7067ChohyoSeigyoHanyoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -30,6 +29,7 @@ public class ChohyoSeigyoHanyoIdentifierTest extends DbzTestBase {
     private static SubGyomuCode 主キー名1;
     private static ReportId 主キー名2;
     private static RString 主キー名3;
+    private static FlexibleYear 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
@@ -42,7 +42,7 @@ public class ChohyoSeigyoHanyoIdentifierTest extends DbzTestBase {
 
         @Test
         public void シリアライズできる() {
-            ChohyoSeigyoHanyoIdentifier sut = new ChohyoSeigyoHanyoIdentifier(主キー名1, 主キー名2, 主キー名3);
+            ChohyoSeigyoHanyoIdentifier sut = new ChohyoSeigyoHanyoIdentifier(主キー名1, 主キー名2, 主キー名3, 主キー名4);
             assertThat(sut, is(IsSerializable.serializable()));
         }
     }

@@ -1,6 +1,6 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.ShisetsuIdoJoho.ShisetsuIdoJoho;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 import jp.co.ndensan.reams.uz.uza.ui.binding.IDialogDiv;
 
@@ -11,6 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.IDialogDiv;
  */
 public interface IShisetsuIdoJohoDiv extends ICommonChildDivBaseProperties, IDialogDiv {
 
-    public boolean initializa(HihokenshaNo 被保険者番号);
+    public boolean initializa(ShikibetsuCode 識別コード);
 
 }

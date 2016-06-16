@@ -66,12 +66,10 @@ public class ShotokushokaihyoHakkoIchiranReport extends
     @Override
     public void writeBy(ReportSourceWriter<ShotokushokaihyoHakkoIchiranSource> writer) {
         for (ShotokuShoukaiDataTempEntity 所得照会票発行一覧 : 所得照会票発行一覧リスト) {
-            for (KoikiZenShichosonJoho 構成市町村情報 : 構成市町村情報リスト) {
-                IShotokushokaihyoHakkoIchiranEditor editor = new ShotokushokaihyoHakkoIchiranEditor(所得照会票発行一覧,
-                        構成市町村情報, 出力順項目リスト, 改頁項目リスト, 照会年月日, 処理年度, テストプリント, association);
-                IShotokushokaihyoHakkoIchiranBuilder builder = new ShotokushokaihyoHakkoIchiranBuilder(editor);
-                writer.writeLine(builder);
-            }
+            IShotokushokaihyoHakkoIchiranEditor editor = new ShotokushokaihyoHakkoIchiranEditor(所得照会票発行一覧,
+                    構成市町村情報リスト, 出力順項目リスト, 改頁項目リスト, 照会年月日, 処理年度, テストプリント, association);
+            IShotokushokaihyoHakkoIchiranBuilder builder = new ShotokushokaihyoHakkoIchiranBuilder(editor);
+            writer.writeLine(builder);
         }
     }
 }

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hanyolist
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
-import jp.co.ndensan.reams.db.dbx.definition.core.hokenshakosei.HokenshaKosei;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;

@@ -52,7 +52,7 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
         source.listShinsainName_1 = item.get審査員一覧();
         source.shinsaTaishoshaCount = RStringUtil.convert半角to全角(item.get審査対象者数());
         if (((int) Math.floor(item.getNo() / INT_25) % 2 == 1)) {
-            source.listShinsei1_1 = new RString(item.getNo());
+            source.listShinsei1_1 = item.get審査会審査順();
             source.listShinsei1_2 = item.get保険者();
             source.listShinsei1_3 = item.get被保険者();
             source.listShinsei1_4 = item.get氏名();
@@ -66,7 +66,7 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
             source.listZenkaiｙukokikan1_1 = get二時判定認定有効年月日();
             source.listYukokikan1_1 = RString.EMPTY;
         } else {
-            source.listShinsei2_1 = new RString(item.getNo());
+            source.listShinsei2_1 = item.get審査会審査順();
             source.listShinsei2_2 = item.get保険者();
             source.listShinsei2_3 = item.get被保険者();
             source.listShinsei2_4 = item.get氏名();

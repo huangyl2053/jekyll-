@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ServiceCategoryShurui;
+import jp.co.ndensan.reams.db.dbc.definition.core.ServiceCategoryShurui;
 import jp.co.ndensan.reams.db.dbc.definition.core.servicecategory.ServiceCategory;
 import jp.co.ndensan.reams.db.dbc.definition.core.servicetitle.ServiceCategorySubTitle;
 import jp.co.ndensan.reams.db.dbc.definition.core.servicetitle.ServiceCategoryTitle;

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120100.ShokanFushikyuT
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120100.ShokanFushikyuWriteReportProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaTempTableInsertProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanfushikyuketteiin.DBC120100_ShokanFushikyuKetteiInBatchParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.IcchiJoken;
+import jp.co.ndensan.reams.db.dbc.definition.core.IcchiJoken;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;

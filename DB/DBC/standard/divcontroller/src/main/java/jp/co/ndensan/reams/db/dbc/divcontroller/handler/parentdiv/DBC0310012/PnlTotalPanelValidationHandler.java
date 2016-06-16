@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAt
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
@@ -26,15 +25,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class PnlTotalPanelValidationHandler {
 
     private final PnlTotalPanelDiv div;
-    private static final RString 契約申請受付日 = new RString("契約申請受付日");
-    private static final RString 契約申請日 = new RString("契約申請日");
-    private static final RString 契約事業者番号 = new RString("契約事業者番号");
-    private static final RString 決定区分 = new RString("決定区分");
-    private static final RString 不承認理由 = new RString("不承認理由");
-    private static final RString 年度 = new RString("年度");
-    private static final RString 番号 = new RString("番号");
-    private static final RString 受領委任契約番号 = new RString("受領委任契約番号");
-    private static final RString 償還受領委任契約者 = new RString("償還受領委任契約者");
 
     /**
      * コンストラクタです。
@@ -57,28 +47,9 @@ public class PnlTotalPanelValidationHandler {
 
     private ValidationDictionary createDictionary() {
         return new ValidationDictionaryBuilder()
-                .add(PnlTotalPanelValidationMessages.契約申請受付日未入力,
-                        div.getPnlCommon().getPnlDetail().getTxtKeyakushinseuketukebi())
-                .add(PnlTotalPanelValidationMessages.契約申請日未入力,
-                        div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi())
-                .add(PnlTotalPanelValidationMessages.契約事業者番号未入力,
-                        div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo())
-                .add(PnlTotalPanelValidationMessages.決定区分未入力,
-                        div.getPnlCommon().getPnlDetail().getRdoKettekubun())
-                .add(PnlTotalPanelValidationMessages.不承認理由未入力,
-                        div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu())
-                .add(PnlTotalPanelValidationMessages.年度未入力,
-                        div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear())
-                .add(PnlTotalPanelValidationMessages.番号1未入力,
-                        div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1())
-                .add(PnlTotalPanelValidationMessages.番号2未入力,
-                        div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2())
                 .add(PnlTotalPanelValidationMessages.金額不整合チェック,
                         div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku(),
                         div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku())
-                .add(PnlTotalPanelValidationMessages.受領委任契約番号重複チェック,
-                        div.getPnlCommon().getPnlDetail().getPnlHidari().getLblKeyakuNo())
-                .add(PnlTotalPanelValidationMessages.存在チェック)
                 .build();
     }
 
@@ -98,28 +69,8 @@ public class PnlTotalPanelValidationHandler {
         public IValidationMessages validate() {
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
             messages.add(ValidateChain.validateStart(div)
-                    .ifNot(PnlTotalPanelSpec.契約申請受付日)
-                    .thenAdd(PnlTotalPanelValidationMessages.契約申請受付日未入力)
-                    .ifNot(PnlTotalPanelSpec.契約申請日)
-                    .thenAdd(PnlTotalPanelValidationMessages.契約申請日未入力)
-                    .ifNot(PnlTotalPanelSpec.契約事業者番号)
-                    .thenAdd(PnlTotalPanelValidationMessages.契約事業者番号未入力)
-                    .ifNot(PnlTotalPanelSpec.決定区分)
-                    .thenAdd(PnlTotalPanelValidationMessages.決定区分未入力)
-                    .ifNot(PnlTotalPanelSpec.不承認理由)
-                    .thenAdd(PnlTotalPanelValidationMessages.不承認理由未入力)
-                    .ifNot(PnlTotalPanelSpec.年度)
-                    .thenAdd(PnlTotalPanelValidationMessages.年度未入力)
-                    .ifNot(PnlTotalPanelSpec.番号1)
-                    .thenAdd(PnlTotalPanelValidationMessages.番号1未入力)
-                    .ifNot(PnlTotalPanelSpec.番号2)
-                    .thenAdd(PnlTotalPanelValidationMessages.番号2未入力)
                     .ifNot(PnlTotalPanelSpec.金額)
                     .thenAdd(PnlTotalPanelValidationMessages.金額不整合チェック)
-                    .ifNot(PnlTotalPanelSpec.受領委任契約番号)
-                    .thenAdd(PnlTotalPanelValidationMessages.受領委任契約番号重複チェック)
-                    .ifNot(PnlTotalPanelSpec.存在)
-                    .thenAdd(PnlTotalPanelValidationMessages.存在チェック)
                     .messages());
             return messages;
         }
@@ -127,17 +78,7 @@ public class PnlTotalPanelValidationHandler {
 
     private static enum PnlTotalPanelValidationMessages implements IValidationMessage {
 
-        契約申請受付日未入力(UrErrorMessages.必須, 契約申請受付日.toString()),
-        契約申請日未入力(UrErrorMessages.必須, 契約申請日.toString()),
-        契約事業者番号未入力(UrErrorMessages.必須, 契約事業者番号.toString()),
-        決定区分未入力(UrErrorMessages.必須, 決定区分.toString()),
-        不承認理由未入力(UrErrorMessages.必須, 不承認理由.toString()),
-        年度未入力(UrErrorMessages.必須, 年度.toString()),
-        番号1未入力(UrErrorMessages.必須, 番号.toString()),
-        番号2未入力(UrErrorMessages.必須, 番号.toString()),
-        金額不整合チェック(UrErrorMessages.入力値が不正),
-        受領委任契約番号重複チェック(UrErrorMessages.既に存在, 受領委任契約番号.toString()),
-        存在チェック(UrErrorMessages.既に登録済, 償還受領委任契約者.toString());
+        金額不整合チェック(UrErrorMessages.入力値が不正);
         private final Message message;
 
         PnlTotalPanelValidationMessages(IMessageGettable message, String... replacements) {

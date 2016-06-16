@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ca.cax.business.core.shuno.ShunoKanri;
 import jp.co.ndensan.reams.ca.cax.business.core.shuno.ShunoKey;
 import jp.co.ndensan.reams.ca.cax.business.core.shuno.chotei.Chotei;
+import jp.co.ndensan.reams.ca.cax.definition.core.shuno.ShunoShoriJokyo;
 import jp.co.ndensan.reams.ca.cax.definition.core.shuno.chotei.ChoteiJiyu;
 import jp.co.ndensan.reams.ca.cax.definition.core.shuno.chotei.FukaShoriJokyo;
 import jp.co.ndensan.reams.ca.cax.definition.core.shuno.chotei.SaibanKeysChotei;
@@ -195,9 +196,10 @@ public class FukaManager {
             Decimal 調定額,
             RDate 納期限,
             int 期) {
-        shunoManager.save調定(get収納キークラス(介護賦課, shunoKamokuManager.get科目(徴収種別.equals(ChoshuHohoKibetsu.普通徴収)
-                ? ShunoKamokuShubetsu.介護保険料_普通徴収 : ShunoKamokuShubetsu.介護保険料_特別徴収), 期),
-                get調定クラス(介護賦課.get調定年度(), 調定額, 納期限));
+        IShunoKamoku 科目 = shunoKamokuManager.get科目(徴収種別.equals(ChoshuHohoKibetsu.普通徴収)
+                ? ShunoKamokuShubetsu.介護保険料_普通徴収 : ShunoKamokuShubetsu.介護保険料_特別徴収);
+        shunoManager.save調定(get収納キークラス(介護賦課, 科目, 期),
+                get調定クラス(介護賦課.get調定年度(), 調定額, 納期限, 科目));
         介護期別Manager.save介護期別(new Kibetsu(介護賦課.get調定年度(), 介護賦課.get賦課年度(),
                 介護賦課.get通知書番号(), 介護賦課.get履歴番号(), 徴収種別.getコード(), 期));
     }
@@ -206,9 +208,23 @@ public class FukaManager {
         return new ShunoKey(get収納管理(介護賦課, 科目, 期), 科目, get納期月(科目, 期));
     }
 
-    private Chotei get調定クラス(FlexibleYear 調定年度, Decimal 調定額, RDate 納期限) {
+    /**
+     * TODO rshare."UrT0707ChoteiJokyo" NOT NULL。 builder.set調定状況ID builder.set収納処理状況 builder.set合計件数 builder.set合計金額
+     * builder.set調定年月日
+     */
+    private Chotei get調定クラス(FlexibleYear 調定年度, Decimal 調定額, RDate 納期限, IShunoKamoku 科目) {
         Chotei.Builder builder = Chotei.newBuilder();
-        builder.set調定ID(Saiban.get(SubGyomuCode.CAX収滞公開, new RString(SaibanKeysChotei.調定ID.name())).next());
+        long id = Saiban.get(SubGyomuCode.CAX収滞公開, new RString(SaibanKeysChotei.調定ID.name())).next();
+        builder.set調定ID(id);
+        builder.set調定状況ID(id);
+        builder.set科目コード(科目.getコード());
+        builder.set科目枝番コード(科目.get枝番コード());
+        builder.set料金種別コード(new RyokinShubetsuCodeValue(RString.EMPTY));
+        builder.set事業区分(JigyoKubun.未使用);
+        builder.set収納処理状況(ShunoShoriJokyo.未取込);
+        builder.set合計件数(0);
+        builder.set合計金額(Decimal.ZERO);
+        builder.set調定年月日(RDate.getNowDate());
         builder.set収納ID(0L);
         builder.set更正回数(0);
         builder.set会計年度(new RYear(調定年度.getYearValue()));

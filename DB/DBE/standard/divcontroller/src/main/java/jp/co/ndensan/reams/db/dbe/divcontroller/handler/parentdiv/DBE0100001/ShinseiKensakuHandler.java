@@ -661,7 +661,7 @@ public class ShinseiKensakuHandler {
                 row.setShimei(nullToEmpty(被保険者氏名.getColumnValue()));
             }
             FlexibleDate 生年月日 = business.get生年月日();
-            if (生年月日 != null) {
+            if (生年月日 != null && !生年月日.isEmpty()) {
                 TextBoxDate hihokenshaBirthDay = new TextBoxDate();
                 hihokenshaBirthDay.setValue(new RDate(生年月日.toString()));
                 row.setHihokenshaBirthDay(hihokenshaBirthDay);

@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai;
 import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoJoho;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ikensho.IshiKubunCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001.KojinJokyoShokaiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShinseiTodokedeDaikoKubunCode;
@@ -25,10 +23,12 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaNinchishoKasanCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.IsExistJohoTeikyoDoui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShienShinseiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -253,19 +253,19 @@ public class KojinJokyoShokaiHandler {
             if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード() != null
                     && !kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().isEmpty()) {
                 一次判定結果 = IchijiHanteiKekkaCode06.
-                        toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get名称();
+                        toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get略称();
             }
         } else if (識別コード_02A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())) {
             if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード() != null
                     && !kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().isEmpty()) {
                 一次判定結果 = IchijiHanteiKekkaCode02.
-                        toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get名称();
+                        toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get略称();
             }
         } else if (識別コード_99A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())) {
             if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード() != null
                     && !kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().isEmpty()) {
                 一次判定結果 = IchijiHanteiKekkaCode99.
-                        toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get名称();
+                        toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get略称();
             }
         }
         if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード認知症加算() != null
@@ -278,7 +278,9 @@ public class KojinJokyoShokaiHandler {
         } else {
             RStringBuilder 一次判定 = new RStringBuilder();
             一次判定.append(一次判定結果);
-            一次判定.append("→");
+            if (!RString.isNullOrEmpty(一次判定結果) && !RString.isNullOrEmpty(一次判定結果認知症加算)) {
+                一次判定.append("→");
+            }
             一次判定.append(一次判定結果認知症加算);
             div.getTxtIchijiHantei().setValue(一次判定.toRString());
         }

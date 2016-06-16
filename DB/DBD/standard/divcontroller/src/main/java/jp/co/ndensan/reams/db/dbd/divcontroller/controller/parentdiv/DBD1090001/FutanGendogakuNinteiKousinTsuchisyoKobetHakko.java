@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.ShinseiRiyuKubun;
-import jp.co.ndensan.reams.db.dbd.definition.core.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090001.DBD1090001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090001.DBD1090001TransitionEventName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090001.FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv;
@@ -57,7 +57,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         ShikibetsuCode 識別コード = 資格対象者.get識別コード();
-        div.getCcdKaigoAtenaInfoDiv().onLoad(識別コード);
+        div.getCcdKaigoAtenaInfoDiv().initialize(識別コード);
 
         if (new RString(DbdInformationMessages.受給共通_被保データなし.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())) {
@@ -72,7 +72,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
 
             return ResponseData.of(div).addMessage(DbdInformationMessages.受給共通_被保データなし.getMessage()).respond();
         } else {
-            div.getCcdKaigoShikakuKihonDiv().onLoad(被保険者番号);
+            div.getCcdKaigoShikakuKihonDiv().initialize(被保険者番号);
         }
 
         div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getCcdBunshoBangoInputDiv()

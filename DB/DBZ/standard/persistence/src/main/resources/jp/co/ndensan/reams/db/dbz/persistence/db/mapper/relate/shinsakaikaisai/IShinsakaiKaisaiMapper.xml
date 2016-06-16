@@ -26,7 +26,7 @@
         <result property="gogitaiDummyFlag" column="gogitaiJoho_gogitaiDummyFlag"/>
     </resultMap>
     
-    <select id="get審査会一覧"
+    <select resultOrdered="true" id="get審査会一覧"
             resultMap="resultMap_ShinsakaiKaisaiRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.core.shinsakaikaisai.ShinsakaiKaisaiParameter" fetchSize="500">
         SELECT

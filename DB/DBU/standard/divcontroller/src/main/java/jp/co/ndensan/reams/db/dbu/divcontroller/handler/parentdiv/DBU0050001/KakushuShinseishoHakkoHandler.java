@@ -81,8 +81,8 @@ public class KakushuShinseishoHakkoHandler {
      */
     public void onLoad() {
         ShikibetsuCode 識別コード = data.get識別コード();
-        div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        div.getShikakuKihonJoho().getCcdKaigoShikakuKihon().onLoad(識別コード);
+        div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
+        div.getShikakuKihonJoho().getCcdKaigoShikakuKihon().initialize(識別コード);
         List<dgKakushushinsei_Row> dateSource = new ArrayList<>();
         for (ShinseishoChohyoShurui 申請書帳票 : ShinseishoChohyoShurui.values()) {
             dgKakushushinsei_Row row = new dgKakushushinsei_Row(Boolean.FALSE, get業務名称(申請書帳票
@@ -158,7 +158,7 @@ public class KakushuShinseishoHakkoHandler {
                     TokuteifutanGendogakuShinseisho todoke = TokuteifutanGendogakuShinseisho.createInstance();
                     sourceData = todoke.createTokuteifutanGendogakuShinseishoChohyo(識別コード, 被保険者番号);
                 }
-                if (ShinseishoChohyoShurui.介護保険特定負担限度額申請書.get名称().equals(row.getShinseisho())) {
+                if (ShinseishoChohyoShurui.訪問介護利用者負担額減額申請書.get名称().equals(row.getShinseisho())) {
                     HomonkaigoRiyoushaFutangakuGengakuShinseisho todoke = new HomonkaigoRiyoushaFutangakuGengakuShinseisho();
                     sourceData = todoke.createHomonkaigoRiyoushaFutangakuGengakuShinseishoChohyo(識別コード, 被保険者番号);
                 }
@@ -175,14 +175,6 @@ public class KakushuShinseishoHakkoHandler {
                     KyufugakuGengakuMenjoShinseisho todoke = new KyufugakuGengakuMenjoShinseisho();
                     sourceData = todoke.createKyufugakuGengakuMenjoShinseishoChohyo(識別コード, 被保険者番号);
                 }
-                if (ShinseishoChohyoShurui.支払方法変更_償還払い化_終了申請書.get名称().equals(row.getShinseisho())) {
-                    ShiharaiHohoHenkoShuryoShinseisho todoke = new ShiharaiHohoHenkoShuryoShinseisho();
-                    sourceData = todoke.createShiharaiHohoHenkoShuryoShinseishoChohyo(被保険者番号, 識別コード);
-                }
-                if (ShinseishoChohyoShurui.介護保険受領委任払い取扱事業者登録申請書.get名称().equals(row.getShinseisho())) {
-                    JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho todoke = new JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho();
-                    sourceData = todoke.createJuryoIninbaraiToriatsukaiJigyoshaTorokuShinseishoChohyo();
-                }
                 sourceData = reportPublish_bak(sourceData, row);
             }
         }
@@ -192,6 +184,14 @@ public class KakushuShinseishoHakkoHandler {
     private SourceDataCollection reportPublish_bak(SourceDataCollection sourceData, dgKakushushinsei_Row row) {
         ShikibetsuCode 識別コード = data.get識別コード();
         HihokenshaNo 被保険者番号 = data.get被保険者番号();
+        if (ShinseishoChohyoShurui.支払方法変更_償還払い化_終了申請書.get名称().equals(row.getShinseisho())) {
+            ShiharaiHohoHenkoShuryoShinseisho todoke = new ShiharaiHohoHenkoShuryoShinseisho();
+            sourceData = todoke.createShiharaiHohoHenkoShuryoShinseishoChohyo(被保険者番号, 識別コード);
+        }
+        if (ShinseishoChohyoShurui.介護保険受領委任払い取扱事業者登録申請書.get名称().equals(row.getShinseisho())) {
+            JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho todoke = new JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho();
+            sourceData = todoke.createJuryoIninbaraiToriatsukaiJigyoshaTorokuShinseishoChohyo();
+        }
         if (ShinseishoChohyoShurui.介護保険受領委任払い契約申請書_福祉用具.get名称().equals(row.getShinseisho())) {
             JuryoIninbaraiKeiyakuShinseisho todoke = new JuryoIninbaraiKeiyakuShinseisho();
             sourceData = todoke.createJuryoIninbaraiKeiyakuShinseishoChohyo(new RString("2"));

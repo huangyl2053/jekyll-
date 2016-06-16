@@ -7,12 +7,12 @@ package jp.co.ndensan.reams.db.dbe.business.core.ikensho;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.IAnswerItem;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shujiiikenshoitemno.ShujiiIkenshoItemNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.IShujiiIkenshoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.IShujiiIkenshoItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.IShujiiIkenshoItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.ShujiiIkenshoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.ShujiiIkenshoItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.shujiiikenshoitemno.ShujiiIkenshoItemNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

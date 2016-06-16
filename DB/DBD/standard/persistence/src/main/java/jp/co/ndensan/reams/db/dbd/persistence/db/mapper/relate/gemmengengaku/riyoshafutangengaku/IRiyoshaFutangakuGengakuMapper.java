@@ -39,4 +39,12 @@ public interface IRiyoshaFutangakuGengakuMapper {
      * @return List<RiyoshaFutangakuGengakuEntity>
      */
     List<RiyoshaFutangakuGengakuEntity> select利用者負担額減額情報By被保険者番号(RiyoshaFutangakuGengakuServiceMapperParameter parameter);
+
+    /**
+     * 利用者負担額減額の情報を取得します。
+     *
+     * @param parameter 利用者負担額減額検索条件
+     * @return List<RiyoshaFutangakuGengakuEntity>
+     */
+    List<RiyoshaFutangakuGengakuEntity> selectBy被保険者番号And減免減額種類(RiyoshaFutangakuGengakuServiceMapperParameter parameter);
 }

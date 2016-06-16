@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT3036ShokanHanteiKekkaEntity;
@@ -211,7 +212,8 @@ public class ShokanShikyuKetteiInManager {
             for (ShokanShikyuKetteiInResultEntity 福祉用具事業所番号Entity : 福祉用具事業所番号List) {
                 List<DbT3048ShokanFukushiYoguHanbaihiEntity> 福祉用具List = 福祉用具事業所番号Entity.get福祉用具List();
                 if (福祉用具List != null && 福祉用具List.size() == 1) {
-                    mapper.update償還払支給判定結果一時_事業者番号登録(福祉用具事業所番号Entity);
+
+                    mapper.update償還払支給判定結果一時_福祉用具事業者番号(福祉用具List.get(0));
                 } else {
                     mapper.update償還払支給判定結果一時_更新DB有無(福祉用具事業所番号Entity);
                 }
@@ -224,9 +226,9 @@ public class ShokanShikyuKetteiInManager {
         List<ShokanShikyuKetteiInResultEntity> 住宅改修事業所番号List = mapper.get住宅改修事業所番号();
         if (住宅改修事業所番号List != null && !住宅改修事業所番号List.isEmpty()) {
             for (ShokanShikyuKetteiInResultEntity 住宅改修事業所番号Entity : 住宅改修事業所番号List) {
-                List<DbT3048ShokanFukushiYoguHanbaihiEntity> 住宅改修List = 住宅改修事業所番号Entity.get福祉用具List();
+                List<DbT3049ShokanJutakuKaishuEntity> 住宅改修List = 住宅改修事業所番号Entity.get請求住宅改修List();
                 if (住宅改修List != null && 住宅改修List.size() == 1) {
-                    mapper.update償還払支給判定結果一時_事業者番号登録(住宅改修事業所番号Entity);
+                    mapper.update償還払支給判定結果一時_住宅改修事業者番号(住宅改修List.get(0));
                 } else {
                     mapper.update償還払支給判定結果一時_更新DB有無(住宅改修事業所番号Entity);
                 }

@@ -44,7 +44,7 @@ public class ShinsakaishiryoA4Editor implements IShinsakaishiryoA4Editor {
         source.listshinsainName_1 = item.get審査員一覧();
         source.gogitaiNo = RStringUtil.convert半角to全角(item.get合議体番号());
         source.shinsaTaishoshaCount = RStringUtil.convert半角to全角(item.get審査対象者数());
-        source.list1_1 = new RString(item.getNo());
+        source.list1_1 = item.get審査会審査順();
         source.list1_2 = item.get保険者();
         source.list1_3 = item.get被保険者();
         source.list1_4 = item.get氏名();

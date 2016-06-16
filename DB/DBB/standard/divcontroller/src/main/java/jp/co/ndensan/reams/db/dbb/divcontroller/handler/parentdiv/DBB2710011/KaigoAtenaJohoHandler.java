@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShoriName;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -29,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -68,10 +66,10 @@ public class KaigoAtenaJohoHandler {
     /**
      * 画面初期化処理です。
      *
+     * @param key FukaTaishoshaKey
      * @return 該当者一覧画面へ遷移フラグ
      */
-    public Boolean onload() {
-        FukaTaishoshaKey key = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
+    public Boolean onload(FukaTaishoshaKey key) {
         FlexibleYear 賦課年度 = null;
         ShikibetsuCode 識別コード = null;
         if (null != key) {
@@ -84,7 +82,7 @@ public class KaigoAtenaJohoHandler {
         if (null == 識別コード) {
             識別コード = ShikibetsuCode.EMPTY;
         }
-        div.getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getCcdKaigoAtenaInfo().initialize(識別コード);
         div.getCcdKaigoFukaKihon().load(getSearchKey(key));
         TokubetuChosyutaisyosyaTorokuManager 特別徴収対象者登録Manager = TokubetuChosyutaisyosyaTorokuManager.createInstance();
         RString 年度内処理済み連番 = 特別徴収対象者登録Manager.getShorizumiRenban(賦課年度);
@@ -290,26 +288,30 @@ public class KaigoAtenaJohoHandler {
 
     /**
      * 「保存する」ボタンを押下すること処理です。
+     *
+     * @param key FukaTaishoshaKey
      */
-    public void onClick_btnUpdate() {
+    public void onClick_btnUpdate(FukaTaishoshaKey key) {
         if (is年金情報パネルが空白() && div.getNenkinJohoKensaku().getBtnNenkinInfoKensaku().isDisabled()) {
             throw new ApplicationException(DbbErrorMessages.被保険者でないため変更不可.getMessage());
         }
         TokubetuChosyutaisyosyaTorokuManager 特別徴収対象者登録Manager = TokubetuChosyutaisyosyaTorokuManager.createInstance();
-        FlexibleYear 賦課年度 = ViewStateHolder.get(DBB2710011ViewStateKey.賦課年度, FlexibleYear.class);
-        //画面DIV．被保番号
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("12");
-        RString 基礎年金番号 = div.getNenkinJohoKensaku().getTxtKisoNenkinNo().getValue();
-        RString 年金コード = div.getNenkinJohoKensaku().getTxtNenkinCode().getValue();
-        int 登録件数 = 特別徴収対象者登録Manager.insChoshuHoho(賦課年度, 被保険者番号, 基礎年金番号, 年金コード);
-        FukaTaishoshaKey key = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
+        FlexibleYear 賦課年度 = null;
         ShikibetsuCode 識別コード = null;
         if (null != key) {
             識別コード = key.get識別コード();
+            賦課年度 = key.get賦課年度();
         }
         if (null == 識別コード) {
             識別コード = ShikibetsuCode.EMPTY;
         }
+        if (null == 賦課年度) {
+            賦課年度 = FlexibleYear.EMPTY;
+        }
+        HihokenshaNo 被保険者番号 = div.getCcdKaigoFukaKihon().get被保番号();
+        RString 基礎年金番号 = div.getNenkinJohoKensaku().getTxtKisoNenkinNo().getValue();
+        RString 年金コード = div.getNenkinJohoKensaku().getTxtNenkinCode().getValue();
+        int 登録件数 = 特別徴収対象者登録Manager.insChoshuHoho(賦課年度, 被保険者番号, 基礎年金番号, 年金コード);
         RString 氏名 = div.getCcdKaigoAtenaInfo().get氏名漢字();
         if (登録件数 > 0) {
             div.getCcdKaigoKanryoMessge().setMessage(UrInformationMessages.保存終了, 識別コード.getColumnValue(), 氏名, true);

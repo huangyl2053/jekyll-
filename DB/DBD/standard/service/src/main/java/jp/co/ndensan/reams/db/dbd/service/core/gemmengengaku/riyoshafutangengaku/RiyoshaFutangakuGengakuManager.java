@@ -130,7 +130,7 @@ public class RiyoshaFutangakuGengakuManager {
     @Transaction
     public boolean delete利用者負担額減額(RiyoshaFutangakuGengaku 利用者負担額減額) {
         requireNonNull(利用者負担額減額, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担額減額"));
-        delete減免減額申請リストBy減免減額種類(利用者負担額減額.getGemmenGengakuShinseiList(), GemmenGengakuShurui.利用者負担額減額.code());
+        delete減免減額申請リストBy減免減額種類(利用者負担額減額.getGemmenGengakuShinseiList(), GemmenGengakuShurui.利用者負担額減額.getコード());
         return 1 == dac.delete(利用者負担額減額.toEntity());
     }
 

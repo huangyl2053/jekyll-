@@ -42,6 +42,7 @@ public class YoshikiIchiBesshi {
     private static final RString 削除 = new RString("削除");
     private static final RString MSG_1 = new RString("当月末現在の世帯数");
     private static final RString MSG_2 = new RString("前月末世帯数から増減した世帯数の計算結果");
+    private static final Code DATA = new Code(new RString("0100"));
 
     /**
      * 画面ロードメソッド
@@ -81,7 +82,7 @@ public class YoshikiIchiBesshi {
                         引き継ぎデータ.get行統計対象区分(),
                         new LasdecCode(引き継ぎデータ.get行市町村コード()),
                         new Code(引き継ぎデータ.get行表番号()),
-                        new Code("0100"));
+                        DATA);
 
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)) && !ResponseHolder.isReRequest()) {
             JigyoHokokuGeppoHoseiHako.createInstance().deleteJigyoHokokuGeppoData(par);
@@ -91,7 +92,7 @@ public class YoshikiIchiBesshi {
             return ResponseData.of(div).addMessage(message).respond();
         }
 
-        List<JigyoHokokuTokeiData> 修正データ = handler.get修正データ();
+        List<JigyoHokokuTokeiData> 修正データ = handler.get修正データ(引き継ぎデータ);
         if (修正データ.isEmpty() && !ResponseHolder.isReRequest()) {
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         }
@@ -131,12 +132,10 @@ public class YoshikiIchiBesshi {
 
     private void getMessage(YoshikiIchiBesshiDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            div.getKanryoMessage().getCcdKanryoMessage().setSuccessMessage(new RString(
-                    UrInformationMessages.正常終了.getMessage().replace(削除.toString()).evaluate()));
+            getHandler(div).show削除正常終了();
         }
         if (更新.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            div.getKanryoMessage().getCcdKanryoMessage().setSuccessMessage(new RString(
-                    UrInformationMessages.正常終了.getMessage().replace(更新.toString()).evaluate()));
+            getHandler(div).show更新正常終了();
         }
     }
 
@@ -148,12 +147,14 @@ public class YoshikiIchiBesshi {
      */
     public ResponseData<YoshikiIchiBesshiDiv> onClick_btnBack(YoshikiIchiBesshiDiv div) {
         YoshikiIchiBesshiHandler handler = getHandler(div);
+        JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.事業報告基本,
+                JigyoHokokuGeppoParameter.class);
         if (!ResponseHolder.isReRequest()) {
             if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
                 return ResponseData.of(div).forwardWithEventName(
                         DBU0020061TransitionEventName.補正発行検索に戻る).respond();
             }
-            List<JigyoHokokuTokeiData> 修正データ = handler.get修正データ();
+            List<JigyoHokokuTokeiData> 修正データ = handler.get修正データ(引き継ぎデータ);
             if (修正データ.isEmpty()) {
                 return ResponseData.of(div).forwardWithEventName(
                         DBU0020061TransitionEventName.補正発行検索に戻る).respond();

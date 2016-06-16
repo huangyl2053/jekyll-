@@ -54,9 +54,9 @@ public class TokuteiNyushoshaHiyo {
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class);
         RDate 申請日 = new RDate(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_申請日, RString.class).toString());
 
-        div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getPanelCcd().getCcdKaigoAtenaInfo().initialize(識別コード);
         if (!被保険者番号.isEmpty()) {
-            div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         } else {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
@@ -86,7 +86,7 @@ public class TokuteiNyushoshaHiyo {
      * @return ResponseData
      */
     public ResponseData<TokuteiNyushoshaHiyoDiv> onClick_dgdTokuteiYichiran(TokuteiNyushoshaHiyoDiv div) {
-        getHandler(div).set特定入所者費用照会パネル();
+        getHandler(div).set特定入所者費用照会パネル(ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
         div.getPanelTokutei().getPanelMeisai().setVisible(true);
         return createResponse(div);
     }

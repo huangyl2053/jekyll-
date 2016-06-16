@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.KaigoJigyoshaReturnEntity;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810021.KihonInfoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -22,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
@@ -143,10 +141,13 @@ public class KihonInfoHandler {
      *
      * @param shokanKihon ShokanKihon
      * @param kaigoJigyoshaEntity KaigoJigyoshaReturnEntity
-     * @param サービス年月 サービス年月
+     * @param サービス年月 FlexibleYearMonth
+     * @param 様式番号 RString
      */
-    public void set基本内容エリア(ShokanKihon shokanKihon, KaigoJigyoshaReturnEntity kaigoJigyoshaEntity,
-            FlexibleYearMonth サービス年月) {
+    public void set基本内容エリア(ShokanKihon shokanKihon,
+            KaigoJigyoshaReturnEntity kaigoJigyoshaEntity,
+            FlexibleYearMonth サービス年月,
+            RString 様式番号) {
 
         FlexibleDate date = new FlexibleDate(RDate.getNowDate().toDateString());
         if (shokanKihon.get居宅サービス計画作成区分コード() != null) {
@@ -191,10 +192,13 @@ public class KihonInfoHandler {
             div.getPanelKihon().getPanelServiceKikan().getTxtServiceKikan().setToValue(
                     new RDate(shokanKihon.get中止年月日().toString()));
         }
-        set基本内容(shokanKihon, サービス年月, date);
+        set基本内容(shokanKihon, サービス年月, date, 様式番号);
     }
 
-    private void set基本内容(ShokanKihon shokanKihon, FlexibleYearMonth サービス年月, FlexibleDate date) {
+    private void set基本内容(ShokanKihon shokanKihon,
+            FlexibleYearMonth サービス年月,
+            FlexibleDate date,
+            RString 様式番号) {
         List<RString> list = new ArrayList<>();
         list.add(STR_2171);
         list.add(STR_2172);
@@ -211,7 +215,7 @@ public class KihonInfoHandler {
         list.add(STR_21A1);
         list.add(STR_21A2);
         list.add(STR_21A3);
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class);
+
         if (平成２１年４月.isBeforeOrEquals(サービス年月) && list.contains(様式番号)) {
             div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setVisible(false);
         } else if (shokanKihon.get中止理由_入所_院前の状況コード() != null) {

@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.dbe223001.NinteiChosaTokusokuj
 import jp.co.ndensan.reams.db.dbe.business.report.dbe223001.NinteiChosaTokusokujoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.DbeMapperInterfaces;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChohyoAtesakiKeisho;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe223001.NinteiChosaTokusokujoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.AtenaKikan;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.NinteiChosaTokusokujoRelateEntity;

@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.JuryoininJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.JuryoininJigyoshaList;
 import jp.co.ndensan.reams.db.dbc.business.core.mapper.JuryoininJigyoshaMapper;
 import jp.co.ndensan.reams.db.dbc.business.helper.JuryoininJigyoshaMock;
-import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.keiyakuno.KeiyakuNo;
+import jp.co.ndensan.reams.db.dbc.definition.core.keiyakuno.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.helper.JuryoininJigyoshaEntityMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
