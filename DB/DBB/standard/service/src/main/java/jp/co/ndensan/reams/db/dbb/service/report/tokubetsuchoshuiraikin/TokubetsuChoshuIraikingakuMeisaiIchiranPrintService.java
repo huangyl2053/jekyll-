@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.service.report.tokubetsuchoshuiraikin;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraikin.TokubetsuChoshuIraikingakuMeisaiIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraikin.TokubetsuChoshuIraikingakuMeisaiIchiranReport;
@@ -111,7 +109,6 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranPrintService {
                     i = i + 1;
                 }
             }
-            doSort(通知書情報List);
             new TokubetsuChoshuIraikingakuMeisaiIchiranReport(通知書情報List,
                     調定年度, 帳票作成日時, 並び順の１件目, 並び順の２件目, 並び順の３件目,
                     並び順の４件目, 並び順の５件目, 改頁項目List, association)
@@ -130,28 +127,4 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranPrintService {
         return builder.<T>create();
     }
 
-    private void doSort(List<KariTokuchoKaishiTsuchisyoJoho> list) {
-        Collections.sort(list, new Comparator<KariTokuchoKaishiTsuchisyoJoho>() {
-            @Override
-            public int compare(KariTokuchoKaishiTsuchisyoJoho o1, KariTokuchoKaishiTsuchisyoJoho o2) {
-                int flag = INDEX_0;
-                if (null != o2.get編集後仮算定通知書共通情報().get通知書番号()
-                        && null != o1.get編集後仮算定通知書共通情報().get通知書番号()) {
-                    flag = o2.get編集後仮算定通知書共通情報().get通知書番号()
-                            .compareTo(o1.get編集後仮算定通知書共通情報().get通知書番号());
-                }
-                if (INDEX_0 == flag && (null != o2.get編集後仮算定通知書共通情報().get識別コード()
-                        && null != o1.get編集後仮算定通知書共通情報().get識別コード())) {
-                    flag = o2.get編集後仮算定通知書共通情報().get識別コード()
-                            .compareTo(o1.get編集後仮算定通知書共通情報().get識別コード());
-                }
-                if (INDEX_0 == flag && (null != o2.get編集後仮算定通知書共通情報().get編集後宛先()
-                        && null != o1.get編集後仮算定通知書共通情報().get編集後宛先())) {
-                    flag = o2.get編集後仮算定通知書共通情報().get編集後宛先().get行政区コード()
-                            .compareTo(o1.get編集後仮算定通知書共通情報().get編集後宛先().get行政区コード());
-                }
-                return flag;
-            }
-        });
-    }
 }
