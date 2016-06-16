@@ -120,7 +120,7 @@ public class KaigojuminHyotrukuDBUpdateProcess extends BatchProcessBase<DbT7022S
         KaigojuminHyotrukuProcess process = new KaigojuminHyotrukuProcess();
         for (int i = 0; i < processParameter.getShichosonCode().size(); i++) {
             DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
-            a = process.xx(processParameter, a, i, dbT7022List, shichosonCodeList, 処理日時, entity);
+            a = process.データ編集(processParameter, a, i, dbT7022List, shichosonCodeList, 処理日時, entity);
             tableWrite.insert(entity);
         }
     }
