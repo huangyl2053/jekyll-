@@ -77,14 +77,14 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranPrintService {
      */
     public void printFukusu(List<KariTokuchoKaishiTsuchisyoJoho> 通知書情報List,
             RString 出力順ID, RYear 調定年度, YMDHMS 帳票作成日時, ReportManager reportManager) {
-        TokubetsuChoshuIraikingakuMeisaiIchiranProperty property = new TokubetsuChoshuIraikingakuMeisaiIchiranProperty();
+        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200023.getReportId(),
+                        Long.valueOf(出力順ID.toString()));
+        TokubetsuChoshuIraikingakuMeisaiIchiranProperty property = new TokubetsuChoshuIraikingakuMeisaiIchiranProperty(並び順);
         IAssociationFinder associationFinder = AssociationFinderFactory.createInstance();
         Association association = associationFinder.getAssociation();
         try (ReportAssembler<TokubetsuChoshuIraikingakuMeisaiIchiranSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<TokubetsuChoshuIraikingakuMeisaiIchiranSource> reportSourceWriter = new ReportSourceWriter(assembler);
-            IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                    .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200023.getReportId(),
-                            Long.valueOf(出力順ID.toString()));
             int i = 0;
             List<RString> 改頁項目List = new ArrayList<>();
             RString 並び順の１件目 = RString.EMPTY;

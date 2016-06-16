@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraikin;
+package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraikin.param;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariTokuchoKaishiTsuchisyoJoho;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYear;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokubetsuChoshuIraikingakuMeisaiIchiranInputEntity {
+public class TokubetsuChoshuIraikingakuMeisaiIchiranInputParam {
 
     private final KariTokuchoKaishiTsuchisyoJoho 通知書情報;
     private final RYear 調定年度;
@@ -46,7 +46,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranInputEntity {
      * @param 改頁項目List List<RString>
      * @param association Association
      */
-    public TokubetsuChoshuIraikingakuMeisaiIchiranInputEntity(KariTokuchoKaishiTsuchisyoJoho tsuchisyoJoho,
+    public TokubetsuChoshuIraikingakuMeisaiIchiranInputParam(KariTokuchoKaishiTsuchisyoJoho tsuchisyoJoho,
             RYear 調定年度, YMDHMS 帳票作成日時, RString 並び順の１件目, RString 並び順の２件目,
             RString 並び順の３件目, RString 並び順の４件目, RString 並び順の５件目, List<RString> 改頁項目List,
             Association association) {
