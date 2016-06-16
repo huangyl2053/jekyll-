@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.ninteichosatokkiimage.NinteiChosaTokkiImageEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosatokkiimage.NinteiChosaTokkiImageReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 特記事項のEditorです。
@@ -154,6 +157,8 @@ public class NinteiChosaTokkiImageEditor implements INinteiChosaTokkiImageEditor
         source.tokki22 = outList.get(連番_21);
         source.tokki23 = outList.get(連番_22);
         source.tokki24 = outList.get(連番_23);
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.hihokennshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
         return source;
     }
 
