@@ -40,6 +40,7 @@ public final class IdoTaishoshaIchiranHandler {
     private static final int TEN = 10;
     private static final int TWELVE = 12;
     private static final int FOURTEEN = 14;
+    private static final int 整数_ZERO = 0;
 
     private IdoTaishoshaIchiranHandler(IdoTaishoshaIchiranDiv div) {
         this.div = div;
@@ -83,7 +84,9 @@ public final class IdoTaishoshaIchiranHandler {
             }
         }
         div.getDdlSakuseiYMD().setDataSource(作成日時KeyValue);
-        div.getDdlSakuseiYMD().setSelectedIndex(0);
+        if (作成日時KeyValue.size() != 整数_ZERO) {
+            div.getDdlSakuseiYMD().setSelectedIndex(整数_ZERO);
+        }
     }
 
     /**
