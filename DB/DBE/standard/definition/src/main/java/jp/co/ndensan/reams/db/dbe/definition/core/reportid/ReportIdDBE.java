@@ -82,6 +82,10 @@ public enum ReportIdDBE {
     DBE230002(
             new ReportId("DBE230002_IkenshoSakuseiIraiIchiranhyo"), new RString("主治医意見書作成依頼一覧")),
     /**
+     * その他資料の帳票ID。
+     */
+    DBE517006(new ReportId("DBE517006_SonotashiryoA3"), new RString("その他資料")),
+    /**
      * 主治医意見書作成依頼一覧の帳票ＩＤです。
      */
     DBE230003(
