@@ -10,9 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shisetsuidojoho.ShisetsuIdoJoho;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shisetsuidojoho.ShisetsuIdoJohoEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shisetsuidojoho.IShisetsuIdoJohoMapper;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1001HihokenshaDaichoAliveDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -41,21 +38,6 @@ public class ShisetsuIdoJohoFinder {
      */
     public static ShisetsuIdoJohoFinder createIntance() {
         return InstanceProvider.create(ShisetsuIdoJohoFinder.class);
-    }
-
-    /**
-     * 被保険者番号より、被保険者台帳管理Newestから識別コードを取得します。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @return 識別コード
-     */
-    public ShikibetsuCode get識別コードBy被保険者番号(HihokenshaNo 被保険者番号) {
-        DbV1001HihokenshaDaichoAliveDac dac = InstanceProvider.create(DbV1001HihokenshaDaichoAliveDac.class);
-        DbV1001HihokenshaDaichoEntity entity = dac.get最新の被保険者台帳情報(被保険者番号);
-        if (entity != null) {
-            return entity.getShikibetsuCode();
-        }
-        return null;
     }
 
     /**
