@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoD
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020091.YoshikiNinonanaHoseiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
 import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -51,6 +52,8 @@ public class YoshikiNinonanaHoseiHandler {
     private static final RString 様式種類_040 = new RString("040");
     private static final RString 様式種類_140 = new RString("140");
     private static final RString 様式種類_240 = new RString("240");
+    private static final RString 更新 = new RString("更新");
+    private static final RString 削除 = new RString("削除");
 
     private final YoshikiNinonanaHoseiDiv div;
 
@@ -73,6 +76,38 @@ public class YoshikiNinonanaHoseiHandler {
     }
 
     /**
+     * setServive1非活性
+     */
+    public void setServive1非活性() {
+        div.getPnlMain().getPnlServive1().setDisabled(true);
+    }
+
+    /**
+     * setServive2非活性
+     */
+    public void setServive2非活性() {
+        div.getPnlMain().getPnlService2().setDisabled(true);
+    }
+
+    /**
+     * show削除正常終了
+     */
+    public void show削除正常終了() {
+        div.getPnlKanryo()
+                .getCcdKanryoMessage().setSuccessMessage(new RString(
+                                UrInformationMessages.正常終了.getMessage().replace(削除.toString()).evaluate()));
+    }
+
+    /**
+     * show更新正常終了
+     */
+    public void show更新正常終了() {
+        div.getPnlKanryo()
+                .getCcdKanryoMessage().setSuccessMessage(new RString(
+                                UrInformationMessages.正常終了.getMessage().replace(更新.toString()).evaluate()));
+    }
+
+    /**
      * 修正データリストより、修正データがないかどうかを判断する。
      *
      * @param 修正データリスト List<JigyoHokokuNenpoUpdateParameter>
@@ -83,9 +118,12 @@ public class YoshikiNinonanaHoseiHandler {
     }
 
     private boolean is整合性チェック_NG_1() {
-        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu1().getValue();
-        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu2().getValue();
-        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu3().getValue();
+        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaiyon()
+                .getTxtRiyoshaDaiyonKensu1().getValue();
+        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlDaiyon()
+                .getTxtRiyoshaDaiyonKensu2().getValue();
+        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlDaiyon()
+                .getTxtRiyoshaDaiyonKensu3().getValue();
         件数_世帯合算 = null == 件数_世帯合算 ? Decimal.ZERO : 件数_世帯合算;
         件数_その他 = null == 件数_その他 ? Decimal.ZERO : 件数_その他;
         件数_計 = null == 件数_計 ? Decimal.ZERO : 件数_計;
@@ -93,9 +131,12 @@ public class YoshikiNinonanaHoseiHandler {
             return true;
         }
 
-        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku1().getValue();
-        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku2().getValue();
-        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku3().getValue();
+        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaiyon()
+                .getTxtRiyoshaDaiyonKyufugaku1().getValue();
+        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlDaiyon()
+                .getTxtRiyoshaDaiyonKyufugaku2().getValue();
+        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlDaiyon()
+                .getTxtRiyoshaDaiyonKyufugaku3().getValue();
         給付額_世帯合算 = null == 給付額_世帯合算 ? Decimal.ZERO : 給付額_世帯合算;
         給付額_その他 = null == 給付額_その他 ? Decimal.ZERO : 給付額_その他;
         給付額_計 = null == 給付額_計 ? Decimal.ZERO : 給付額_計;
@@ -104,9 +145,12 @@ public class YoshikiNinonanaHoseiHandler {
     }
 
     private boolean is整合性チェック_NG_2() {
-        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu1().getValue();
-        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu2().getValue();
-        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu3().getValue();
+        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaisan()
+                .getTxtRiyoshaDaisanKensu1().getValue();
+        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlDaisan()
+                .getTxtRiyoshaDaisanKensu2().getValue();
+        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlDaisan()
+                .getTxtRiyoshaDaisanKensu3().getValue();
         件数_世帯合算 = null == 件数_世帯合算 ? Decimal.ZERO : 件数_世帯合算;
         件数_その他 = null == 件数_その他 ? Decimal.ZERO : 件数_その他;
         件数_計 = null == 件数_計 ? Decimal.ZERO : 件数_計;
@@ -114,9 +158,12 @@ public class YoshikiNinonanaHoseiHandler {
             return true;
         }
 
-        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku1().getValue();
-        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku2().getValue();
-        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku3().getValue();
+        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaisan()
+                .getTxtRiyoshaDaisanKyufugaku1().getValue();
+        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlDaisan()
+                .getTxtRiyoshaDaisanKyufugaku2().getValue();
+        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlDaisan()
+                .getTxtRiyoshaDaisanKyufugaku3().getValue();
         給付額_世帯合算 = null == 給付額_世帯合算 ? Decimal.ZERO : 給付額_世帯合算;
         給付額_その他 = null == 給付額_その他 ? Decimal.ZERO : 給付額_その他;
         給付額_計 = null == 給付額_計 ? Decimal.ZERO : 給付額_計;
@@ -124,9 +171,12 @@ public class YoshikiNinonanaHoseiHandler {
     }
 
     private boolean is整合性チェック_NG_3() {
-        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu1().getValue();
-        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu2().getValue();
-        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu3().getValue();
+        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaini()
+                .getTxtRiyoshaDainiKensu1().getValue();
+        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlDaini()
+                .getTxtRiyoshaDainiKensu2().getValue();
+        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlDaini()
+                .getTxtRiyoshaDainiKensu3().getValue();
         件数_世帯合算 = null == 件数_世帯合算 ? Decimal.ZERO : 件数_世帯合算;
         件数_その他 = null == 件数_その他 ? Decimal.ZERO : 件数_その他;
         件数_計 = null == 件数_計 ? Decimal.ZERO : 件数_計;
@@ -134,9 +184,12 @@ public class YoshikiNinonanaHoseiHandler {
             return true;
         }
 
-        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku1().getValue();
-        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku2().getValue();
-        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku3().getValue();
+        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaini()
+                .getTxtRiyoshaDainiKyufugaku1().getValue();
+        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlDaini()
+                .getTxtRiyoshaDainiKyufugaku2().getValue();
+        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlDaini()
+                .getTxtRiyoshaDainiKyufugaku3().getValue();
         給付額_世帯合算 = null == 給付額_世帯合算 ? Decimal.ZERO : 給付額_世帯合算;
         給付額_その他 = null == 給付額_その他 ? Decimal.ZERO : 給付額_その他;
         給付額_計 = null == 給付額_計 ? Decimal.ZERO : 給付額_計;
@@ -144,9 +197,12 @@ public class YoshikiNinonanaHoseiHandler {
     }
 
     private boolean is整合性チェック_NG_4() {
-        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu1().getValue();
-        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu2().getValue();
-        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu3().getValue();
+        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaiitu()
+                .getTxtRiyoshaDaiichiKensu1().getValue();
+        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlDaiitu()
+                .getTxtRiyoshaDaiichiKensu2().getValue();
+        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlDaiitu()
+                .getTxtRiyoshaDaiichiKensu3().getValue();
         件数_世帯合算 = null == 件数_世帯合算 ? Decimal.ZERO : 件数_世帯合算;
         件数_その他 = null == 件数_その他 ? Decimal.ZERO : 件数_その他;
         件数_計 = null == 件数_計 ? Decimal.ZERO : 件数_計;
@@ -154,9 +210,12 @@ public class YoshikiNinonanaHoseiHandler {
             return true;
         }
 
-        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku1().getValue();
-        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku2().getValue();
-        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku3().getValue();
+        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaiitu()
+                .getTxtRiyoshaDaiichiKyufugaku1().getValue();
+        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlDaiitu()
+                .getTxtRiyoshaDaiichiKyufugaku2().getValue();
+        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlDaiitu()
+                .getTxtRiyoshaDaiichiKyufugaku3().getValue();
         給付額_世帯合算 = null == 給付額_世帯合算 ? Decimal.ZERO : 給付額_世帯合算;
         給付額_その他 = null == 給付額_その他 ? Decimal.ZERO : 給付額_その他;
         給付額_計 = null == 給付額_計 ? Decimal.ZERO : 給付額_計;
@@ -174,9 +233,12 @@ public class YoshikiNinonanaHoseiHandler {
             return true;
         }
 
-        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKyufugaku1().getValue();
-        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKyufugaku2().getValue();
-        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKyufugaku3().getValue();
+        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlGokei()
+                .getTxtGokeiKyufugaku1().getValue();
+        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlGokei()
+                .getTxtGokeiKyufugaku2().getValue();
+        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlGokei()
+                .getTxtGokeiKyufugaku3().getValue();
         給付額_世帯合算 = null == 給付額_世帯合算 ? Decimal.ZERO : 給付額_世帯合算;
         給付額_その他 = null == 給付額_その他 ? Decimal.ZERO : 給付額_その他;
         給付額_計 = null == 給付額_計 ? Decimal.ZERO : 給付額_計;
@@ -184,9 +246,12 @@ public class YoshikiNinonanaHoseiHandler {
     }
 
     private boolean is整合性チェック_NG_6() {
-        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu1().getValue();
-        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu2().getValue();
-        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu3().getValue();
+        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan()
+                .getTxtSaikeiRiyoshaDaisanKensu1().getValue();
+        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan()
+                .getTxtSaikeiRiyoshaDaisanKensu2().getValue();
+        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan()
+                .getTxtSaikeiRiyoshaDaisanKensu3().getValue();
         件数_世帯合算 = null == 件数_世帯合算 ? Decimal.ZERO : 件数_世帯合算;
         件数_その他 = null == 件数_その他 ? Decimal.ZERO : 件数_その他;
         件数_計 = null == 件数_計 ? Decimal.ZERO : 件数_計;
@@ -194,9 +259,12 @@ public class YoshikiNinonanaHoseiHandler {
             return true;
         }
 
-        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku1().getValue();
-        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku2().getValue();
-        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku3().getValue();
+        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan()
+                .getTxtSaikeiRiyoshaDaisanKyufugaku1().getValue();
+        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan()
+                .getTxtSaikeiRiyoshaDaisanKyufugaku2().getValue();
+        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan()
+                .getTxtSaikeiRiyoshaDaisanKyufugaku3().getValue();
         給付額_世帯合算 = null == 給付額_世帯合算 ? Decimal.ZERO : 給付額_世帯合算;
         給付額_その他 = null == 給付額_その他 ? Decimal.ZERO : 給付額_その他;
         給付額_計 = null == 給付額_計 ? Decimal.ZERO : 給付額_計;
@@ -205,9 +273,12 @@ public class YoshikiNinonanaHoseiHandler {
 
     private boolean is整合性チェック_NG_7() {
 
-        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu1().getValue();
-        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu2().getValue();
-        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu3().getValue();
+        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaini()
+                .getTxtSaikeiRiyoshaDainiKensu1().getValue();
+        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaini()
+                .getTxtSaikeiRiyoshaDainiKensu2().getValue();
+        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaini()
+                .getTxtSaikeiRiyoshaDainiKensu3().getValue();
         件数_世帯合算 = null == 件数_世帯合算 ? Decimal.ZERO : 件数_世帯合算;
         件数_その他 = null == 件数_その他 ? Decimal.ZERO : 件数_その他;
         件数_計 = null == 件数_計 ? Decimal.ZERO : 件数_計;
@@ -215,9 +286,12 @@ public class YoshikiNinonanaHoseiHandler {
             return true;
         }
 
-        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku1().getValue();
-        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku2().getValue();
-        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku3().getValue();
+        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaini()
+                .getTxtSaikeiRiyoshaDainiKyufugaku1().getValue();
+        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaini()
+                .getTxtSaikeiRiyoshaDainiKyufugaku2().getValue();
+        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaini()
+                .getTxtSaikeiRiyoshaDainiKyufugaku3().getValue();
         給付額_世帯合算 = null == 給付額_世帯合算 ? Decimal.ZERO : 給付額_世帯合算;
         給付額_その他 = null == 給付額_その他 ? Decimal.ZERO : 給付額_その他;
         給付額_計 = null == 給付額_計 ? Decimal.ZERO : 給付額_計;
@@ -545,7 +619,8 @@ public class YoshikiNinonanaHoseiHandler {
             Decimal 縦番号,
             Code 集計番号) {
         for (JigyoHokokuTokeiData entity : 更新前データリスト) {
-            if (entity.get縦番号().equals(縦番号) && entity.get横番号().equals(横番号) && entity.get集計番号().equals(集計番号)) {
+            if (entity.get縦番号().equals(縦番号) && entity.get横番号().equals(横番号)
+                    && entity.get集計番号().equals(集計番号)) {
                 return entity;
             }
         }
@@ -642,10 +717,12 @@ public class YoshikiNinonanaHoseiHandler {
     private void load低所得者Ⅱ(JigyoHokokuTokeiData entity) {
         if (横番号_0001.equals(entity.get横番号())) {
             if (縦番号_0001.equals(entity.get縦番号())) {
-                div.getPnlMain().getPnlService2().getPnlU().getTxtTeishotokushaIIKensu().setValue(entity.get集計結果値());
+                div.getPnlMain().getPnlService2().getPnlU().getTxtTeishotokushaIIKensu()
+                        .setValue(entity.get集計結果値());
             }
             if (縦番号_0002.equals(entity.get縦番号())) {
-                div.getPnlMain().getPnlService2().getPnlU().getTxtTeishotokushaIIKyufugaku().setValue(entity.get集計結果値());
+                div.getPnlMain().getPnlService2().getPnlU().getTxtTeishotokushaIIKyufugaku()
+                        .setValue(entity.get集計結果値());
             }
         }
     }
@@ -653,10 +730,12 @@ public class YoshikiNinonanaHoseiHandler {
     private void load低所得者Ⅰ(JigyoHokokuTokeiData entity) {
         if (横番号_0001.equals(entity.get横番号())) {
             if (縦番号_0001.equals(entity.get縦番号())) {
-                div.getPnlMain().getPnlService2().getPnlE().getTxtTeishotokushaIKensu().setValue(entity.get集計結果値());
+                div.getPnlMain().getPnlService2().getPnlE().getTxtTeishotokushaIKensu()
+                        .setValue(entity.get集計結果値());
             }
             if (縦番号_0002.equals(entity.get縦番号())) {
-                div.getPnlMain().getPnlService2().getPnlE().getTxtTeishotokushaIKyufugaku().setValue(entity.get集計結果値());
+                div.getPnlMain().getPnlService2().getPnlE().getTxtTeishotokushaIKyufugaku()
+                        .setValue(entity.get集計結果値());
             }
         }
     }
@@ -709,25 +788,31 @@ public class YoshikiNinonanaHoseiHandler {
 
     private void load再掲利用者負担第二段階_件数(JigyoHokokuTokeiData entity) {
         if (横番号_0001.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu1().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu1()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0002.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu2().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu2()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0003.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu3().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu3()
+                    .setValue(entity.get集計結果値());
         }
     }
 
     private void load再掲利用者負担第二段階_給付額(JigyoHokokuTokeiData entity) {
         if (横番号_0001.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku1().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku1()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0002.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku2().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku2()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0003.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku3().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku3()
+                    .setValue(entity.get集計結果値());
         }
     }
 
@@ -742,25 +827,31 @@ public class YoshikiNinonanaHoseiHandler {
 
     private void load再掲利用者負担第三段階_件数(JigyoHokokuTokeiData entity) {
         if (横番号_0001.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu1().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu1()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0002.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu2().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu2()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0003.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu3().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu3()
+                    .setValue(entity.get集計結果値());
         }
     }
 
     private void load再掲利用者負担第三段階_給付額(JigyoHokokuTokeiData entity) {
         if (横番号_0001.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku1().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku1()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0002.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku2().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku2()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0003.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku3().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku3()
+                    .setValue(entity.get集計結果値());
         }
     }
 
@@ -808,25 +899,31 @@ public class YoshikiNinonanaHoseiHandler {
 
     private void load利用者負担第一段階_件数(JigyoHokokuTokeiData entity) {
         if (横番号_0001.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu1().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu1()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0002.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu2().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu2()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0003.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu3().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu3()
+                    .setValue(entity.get集計結果値());
         }
     }
 
     private void load利用者負担第一段階_給付額(JigyoHokokuTokeiData entity) {
         if (横番号_0001.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku1().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku1()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0002.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku2().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku2()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0003.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku3().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku3()
+                    .setValue(entity.get集計結果値());
         }
     }
 
@@ -841,25 +938,31 @@ public class YoshikiNinonanaHoseiHandler {
 
     private void load利用者負担第二段階_件数(JigyoHokokuTokeiData entity) {
         if (横番号_0001.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu1().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu1()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0002.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu2().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu2()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0003.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu3().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu3()
+                    .setValue(entity.get集計結果値());
         }
     }
 
     private void load利用者負担第二段階_給付額(JigyoHokokuTokeiData entity) {
         if (横番号_0001.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku1().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku1()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0002.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku2().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku2()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0003.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku3().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku3()
+                    .setValue(entity.get集計結果値());
         }
     }
 
@@ -874,25 +977,31 @@ public class YoshikiNinonanaHoseiHandler {
 
     private void load利用者負担第三段階_件数(JigyoHokokuTokeiData entity) {
         if (横番号_0001.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu1().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu1()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0002.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu2().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu2()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0003.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu3().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu3()
+                    .setValue(entity.get集計結果値());
         }
     }
 
     private void load利用者負担第三段階_給付額(JigyoHokokuTokeiData entity) {
         if (横番号_0001.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku1().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku1()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0002.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku2().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku2()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0003.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku3().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku3()
+                    .setValue(entity.get集計結果値());
         }
     }
 
@@ -907,25 +1016,31 @@ public class YoshikiNinonanaHoseiHandler {
 
     private void load利用者負担第四段階_件数(JigyoHokokuTokeiData entity) {
         if (横番号_0001.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu1().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu1()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0002.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu2().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu2()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0003.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu3().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu3()
+                    .setValue(entity.get集計結果値());
         }
     }
 
     private void load利用者負担第四段階_給付額(JigyoHokokuTokeiData entity) {
         if (横番号_0001.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku1().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku1()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0002.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku2().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku2()
+                    .setValue(entity.get集計結果値());
         }
         if (横番号_0003.equals(entity.get横番号())) {
-            div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku3().setValue(entity.get集計結果値());
+            div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku3()
+                    .setValue(entity.get集計結果値());
         }
     }
 

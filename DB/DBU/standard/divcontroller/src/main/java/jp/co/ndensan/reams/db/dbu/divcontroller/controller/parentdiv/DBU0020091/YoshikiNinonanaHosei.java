@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020091.Yos
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -61,12 +60,12 @@ public class YoshikiNinonanaHosei {
             if (様式種類.equalsIgnoreCase(様式種類_039)
                     || 様式種類.equalsIgnoreCase(様式種類_139)
                     || 様式種類.equalsIgnoreCase(様式種類_239)) {
-                div.getPnlMain().getPnlServive1().setDisabled(true);
+                handler.setServive1非活性();
                 return ResponseData.of(div).setState(DBU0020091StateName.削除状態1);
             } else if (様式種類.equalsIgnoreCase(様式種類_040)
                     || 様式種類.equalsIgnoreCase(様式種類_140)
                     || 様式種類.equalsIgnoreCase(様式種類_240)) {
-                div.getPnlMain().getPnlService2().setDisabled(true);
+                handler.setServive2非活性();
                 return ResponseData.of(div).setState(DBU0020091StateName.削除状態2);
             }
         }
@@ -96,20 +95,14 @@ public class YoshikiNinonanaHosei {
         RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
         YoshikiNinonanaHoseiHandler handler = getHandler(div);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)) && !ResponseHolder.isReRequest()) {
-
             handler.delete(引き継ぎデータ, 様式種類);
-            div.getPnlKanryo()
-                    .getCcdKanryoMessage().setSuccessMessage(new RString(
-                                    UrInformationMessages.正常終了.getMessage().replace(削除.toString()).evaluate()));
+            handler.show削除正常終了();
             return ResponseData.of(div).setState(DBU0020091StateName.完了状態);
-
         }
         List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(引き継ぎデータ, 様式種類);
-
         if (handler.is修正データ無し(修正データリスト) && !ResponseHolder.isReRequest()) {
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         }
-
         if (handler.is整合性チェック_NG() && !ResponseHolder.isReRequest()) {
             WarningMessage message = new WarningMessage(UrWarningMessages.相違.getMessage().getCode(),
                     UrWarningMessages.相違.getMessage().replace(
@@ -128,20 +121,14 @@ public class YoshikiNinonanaHosei {
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             handler.update(修正データリスト);
-
-            div.getPnlKanryo()
-                    .getCcdKanryoMessage().setSuccessMessage(new RString(
-                                    UrInformationMessages.正常終了.getMessage().replace(更新.toString()).evaluate()));
-
+            handler.show更新正常終了();
             return ResponseData.of(div).setState(DBU0020091StateName.完了状態);
         } else {
             return ResponseData.of(div).respond();
         }
-
     }
 
     /**
@@ -156,23 +143,19 @@ public class YoshikiNinonanaHosei {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
         YoshikiNinonanaHoseiHandler handler = getHandler(div);
-
         if (DBU0020091StateName.削除状態1.getName()
                 .equals(状態) || DBU0020091StateName.削除状態1.getName().equals(状態)) {
             return ResponseData.of(div).forwardWithEventName(DBU0020091TransitionEventName.補正発行検索に戻る).respond();
         }
         List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(引き継ぎデータ, 様式種類);
-
         if (handler.is修正データ無し(修正データリスト)) {
             return ResponseData.of(div).forwardWithEventName(DBU0020091TransitionEventName.補正発行検索に戻る).respond();
         }
-
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
