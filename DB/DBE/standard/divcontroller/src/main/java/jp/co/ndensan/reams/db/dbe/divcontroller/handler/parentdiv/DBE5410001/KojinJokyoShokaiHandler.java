@@ -11,9 +11,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShoka
 import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoJoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001.KojinJokyoShokaiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShinseiTodokedeDaikoKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
@@ -28,6 +27,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.IsExistJ
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShienShinseiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -195,7 +195,7 @@ public class KojinJokyoShokaiHandler {
         }
         if (kojinJokyoShokaiList.get(0).get二号特定疾病コード() != null && !kojinJokyoShokaiList.get(0).get二号特定疾病コード().isEmpty()) {
             div.getTxtTokuteiShippei().setValue(TokuteiShippei.
-                    toValue(new RString(kojinJokyoShokaiList.get(0).get二号特定疾病コード().toString())).toRString());
+                    toValue(new RString(kojinJokyoShokaiList.get(0).get二号特定疾病コード().toString())).get名称());
         }
         div.getTxtJohoTeikyoDoi().setValue(IsExistJohoTeikyoDoui.
                 toValue(kojinJokyoShokaiList.get(0).is情報提供への同意有無()).get名称());

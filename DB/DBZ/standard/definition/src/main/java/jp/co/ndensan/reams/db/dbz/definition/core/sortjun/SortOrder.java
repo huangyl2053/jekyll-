@@ -59,4 +59,5 @@ public enum SortOrder {
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("ソート順"));
     }
+
 }

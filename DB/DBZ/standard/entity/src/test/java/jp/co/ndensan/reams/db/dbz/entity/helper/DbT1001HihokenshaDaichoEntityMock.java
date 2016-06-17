@@ -6,9 +6,8 @@ package jp.co.ndensan.reams.db.dbz.entity.helper;
 
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoSaikofuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoSaikofuKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JushochitokureiKaijoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JushochitokureiTekiyoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.KoikinaiJushochitokureishaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.JushochitokureiKaijoJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
@@ -37,8 +36,7 @@ import static org.mockito.Mockito.*;
 public final class DbT1001HihokenshaDaichoEntityMock {
 
     /**
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の
-     * {@link org.mockito.Mockito#spy(java.lang.Object)  スパイインスタンス}を返します。
+     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の {@link org.mockito.Mockito#spy(java.lang.Object)  スパイインスタンス}を返します。
      *
      * @return DbT1001HihokenshaDaichoEntityのスパイ
      */
@@ -77,7 +75,7 @@ public final class DbT1001HihokenshaDaichoEntityMock {
          entity.setJushochitokureiKaijoTodokedeYMD(new FlexibleDate("00000000"));
          entity.setJushochitokureiKaijoYMD(new FlexibleDate("00000000"));
          entity.setJushochiTokureiFlag(JushochiTokureishaKubun.通常資格者.getコード());
-         entity.setKoikinaiJushochiTokureiFlag(KoikinaiJushochitokureishaKubun.通常資格者.getCode());
+         entity.setKoikinaiJushochiTokureiFlag(KoikinaiJushochitokureishaKubun.通常資格者.getコード());
          entity.setKoikinaiTokureiSochimotoShichosonCode(LasdecCode.EMPTY);
          entity.setKyuShichosonCode(null);
          entity.setSaikofuKubun(HihokenshashoSaikofuKubun.なし.getCode());

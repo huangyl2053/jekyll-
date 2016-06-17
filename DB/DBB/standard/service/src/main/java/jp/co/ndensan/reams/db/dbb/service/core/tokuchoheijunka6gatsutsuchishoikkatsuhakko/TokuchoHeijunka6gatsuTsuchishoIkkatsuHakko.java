@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSant
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiTsuchiShoKyotsuKomokuHenshu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NokiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.HeijunkaHenkoOutputJoken;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoProcessParameter;
@@ -42,7 +43,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki._Atesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
@@ -202,7 +202,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
      * 仮算定額変更情報一時テーブルのコラム「前年度特徴期別金額06」を更新します。
      */
     public void update前年度特徴期別金額06() {
-        RString 徴収方法 = ChoshuHohoKibetsu.特別徴収.code();
+        RString 徴収方法 = ChoshuHohoKibetsu.特別徴収.getコード();
         mapper.update前年度特徴期別金額06(new TokuchoHeijunka6gatsuMyBatisParameter(
                 false, null, null, null, null, 徴収方法, null, null, null));
     }

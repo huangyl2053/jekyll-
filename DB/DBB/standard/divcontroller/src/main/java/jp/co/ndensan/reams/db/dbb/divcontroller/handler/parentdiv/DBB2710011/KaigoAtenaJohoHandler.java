@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.tokubetuchosyutaisyosyatoroku.Tok
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShoriName;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -139,18 +139,18 @@ public class KaigoAtenaJohoHandler {
             TokubetuChosyutaisyosyaTorokuManager 特別徴収対象者登録Manager, FlexibleYear 賦課年度, RString 年度内処理済み連番) {
         FlexibleDate 依頼金額計算基準日 = null;
         if (連番_0001.equals(年度内処理済み連番)) {
-            依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.特徴依頼金額計算, 年度内処理済み連番);
+            依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.依頼金額計算, 年度内処理済み連番);
         } else if (連番_0002.equals(年度内処理済み連番)) {
             依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.本算定賦課, 年度内処理済み連番);
         } else if (連番_0003.equals(年度内処理済み連番)) {
-            依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.特徴依頼金額計算, 年度内処理済み連番);
+            依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.依頼金額計算, 年度内処理済み連番);
         } else if (連番_0004.equals(年度内処理済み連番)) {
-            依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.特徴依頼金額計算, 年度内処理済み連番);
+            依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.依頼金額計算, 年度内処理済み連番);
         } else if (連番_0005.equals(年度内処理済み連番)) {
-            依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.特徴依頼金額計算, 年度内処理済み連番);
+            依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.依頼金額計算, 年度内処理済み連番);
         } else if (連番_0006.equals(年度内処理済み連番)) {
             依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(
-                    new FlexibleYear(String.valueOf(賦課年度.getYearValue() + 1)), ShoriName.特徴依頼金額計算, 年度内処理済み連番);
+                    new FlexibleYear(String.valueOf(賦課年度.getYearValue() + 1)), ShoriName.依頼金額計算, 年度内処理済み連番);
         }
         return 依頼金額計算基準日;
     }

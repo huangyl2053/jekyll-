@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.choshuyuyo.ChoshuYuyoTorikesiT
 import jp.co.ndensan.reams.db.dbb.business.report.choshuyuyo.ChoshuYuyoTorikesiTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.choshuyuyo.KibetsuChoshyuYuyoKikan;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.choshuyuyo.KaigoHokenHokenryoChoshuyoyoTorikeshiTsuchishoA4TateSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.choshuyuyo.KaigoHokenHokenryoChoshuyoyoTorikeshiTsuchishoB5YokoSource;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
@@ -29,8 +30,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -459,7 +459,7 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
             RString 徴収方法 = 介護期別徴収猶予.get徴収方法();
             FlexibleDate 徴収猶予開始日 = FlexibleDate.EMPTY;
             FlexibleDate 徴収猶予終了日 = FlexibleDate.EMPTY;
-            if (ChoshuHohoKibetsu.普通徴収.code().equals(徴収方法) && 普徴期月.get期AsInt() == 介護期別徴収猶予.get期()) {
+            if (ChoshuHohoKibetsu.普通徴収.getコード().equals(徴収方法) && 普徴期月.get期AsInt() == 介護期別徴収猶予.get期()) {
                 徴収猶予開始日 = 介護期別徴収猶予.get徴収猶予開始日();
                 徴収猶予終了日 = 介護期別徴収猶予.get徴収猶予終了日();
                 if (徴収猶予開始日 != null && !徴収猶予開始日.isEmpty()

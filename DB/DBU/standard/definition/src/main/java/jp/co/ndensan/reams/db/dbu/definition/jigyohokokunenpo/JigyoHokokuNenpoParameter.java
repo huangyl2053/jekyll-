@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo;
 
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.TokeiTaishoKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.TokeiTaishoKubun;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

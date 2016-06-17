@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.param.shisetsunyushoinfo;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 施設入所情報を取得するのParameterクラスです。
  *
  * @reamsid_L DBE-3000-180 hezhenzhen
- *
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -34,6 +33,6 @@ public final class ShisetSunyushoInfoParameter {
      * @return ShisetSunyushoInfoParameter ShisetSunyushoInfoParameter
      */
     public static ShisetSunyushoInfoParameter createParam(ShikibetsuCode shikibetsuCode) {
-        return new ShisetSunyushoInfoParameter(shikibetsuCode, DaichoType.被保険者.getCode());
+        return new ShisetSunyushoInfoParameter(shikibetsuCode, DaichoType.被保険者.getコード());
     }
 }

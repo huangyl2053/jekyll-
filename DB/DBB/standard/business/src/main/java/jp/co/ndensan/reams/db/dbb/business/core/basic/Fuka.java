@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.code.KaigoShikaku
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GaitoHigaitoKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.GaitoHigaitoKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.ChoteiJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.core.code.FujoShuruiCodeValue;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -550,8 +550,7 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
     }
 
     /**
-     * 保持する介護賦課を削除対象とします。<br/>
-     * {@link DbT2002FukaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護賦課を削除対象とします。<br/> {@link DbT2002FukaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link Fuka}
      */

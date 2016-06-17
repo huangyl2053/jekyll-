@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step;
 
 import java.util.Arrays;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.DbcMapperInterfaces;
+import jp.co.ndensan.reams.db.dbc.definition.core.DbcMapperInterfaces;
 import jp.co.ndensan.reams.db.dbc.definition.core.KyufuKanrihyoTorikomi.KeikakuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.KyufuKanrihyoTorikomi.SakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.KyufuKanrihyoTorikomi.ShubetsuKubun;

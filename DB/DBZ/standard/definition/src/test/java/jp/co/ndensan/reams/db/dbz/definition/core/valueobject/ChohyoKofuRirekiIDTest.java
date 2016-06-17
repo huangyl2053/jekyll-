@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core.valueobject;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.chohyokofurirekiid.ChohyoKofuRirekiID;
+import jp.co.ndensan.reams.db.dbz.definition.core.chohyokofurirekiid.ChohyoKofuRirekiID;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;

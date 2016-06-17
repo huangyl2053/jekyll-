@@ -5,9 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.helper;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -27,9 +26,9 @@ public class ShisetsuNyutaishoEntityMock {
         /*
          entity.setShichosonCode(new LasdecCode(new RString("123456")));
          entity.setShikibetsuCode(new ShikibetsuCode(new RString("1111111111")));
-         entity.setRirekiNo(new 1);
+         entity.setRirekiNo(new1);
          entity.setDaichoShubetsu(DaichoType.被保険者.getCode());
-         entity.setNyushoShisetsuShurui(ShisetsuType.介護保険施設.getCode());
+         entity.setNyushoShisetsuShurui(ShisetsuType.介護保険施設.getコード());
          entity.setNyushoShisetsuCode(new JigyoshaNo("1234567890"));
          entity.setNyushoShoriYMD(new FlexibleDate("20110703"));
          entity.setNyushoYMD(new FlexibleDate("20110703"));

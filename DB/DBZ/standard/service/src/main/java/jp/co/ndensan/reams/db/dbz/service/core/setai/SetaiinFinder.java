@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoSetai;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShikibetsuCd;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HonninKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.setai.SetaiinParameter;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.setai.ISetaiinMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;

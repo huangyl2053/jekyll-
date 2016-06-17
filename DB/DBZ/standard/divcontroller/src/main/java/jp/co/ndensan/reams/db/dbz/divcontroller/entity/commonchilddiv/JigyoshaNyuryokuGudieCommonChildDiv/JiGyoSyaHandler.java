@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceJigyoshaInputGui
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceShuruiJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigojigyoshano.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyoshaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.kaigojigyoshano.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.JigyoshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.jigyosha.JigyoshaInputGuideFinder;
@@ -462,7 +462,7 @@ public class JiGyoSyaHandler {
         for (JigyoshaKubun type : JigyoshaKubun.values()) {
 
             KeyValueDataSource dataSource = new KeyValueDataSource();
-            dataSource.setKey(type.getコード());
+            dataSource.setKey(type.getCode());
             dataSource.setValue(type.get名称());
             dataSourceList.add(dataSource);
         }

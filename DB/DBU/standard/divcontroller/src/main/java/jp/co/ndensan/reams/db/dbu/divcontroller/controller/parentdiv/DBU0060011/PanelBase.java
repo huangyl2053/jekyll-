@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.Pane
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.dgHoseitaishoYoshiki_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0060011.PanelBaseHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokunenpo.JigyoHokokuNenpoHoseiHakoManager;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyohokokuNenpoHoseiHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.JigyohokokuNenpoHoseiHyoji;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

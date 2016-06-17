@@ -23,8 +23,8 @@ import jp.co.ndensan.reams.db.dbu.service.core.basic.kaigojyuminhyoutashajuki.Ka
 import jp.co.ndensan.reams.db.dbu.service.core.kaigojuminhyobatchparameter.KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuParameter;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.RenkeiDataFormatVersion;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SofuRenkeiDataKyoyuFileName;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.RenkeiDataFormatVersion;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SofuRenkeiDataKyoyuFileName;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7035RendoPatternEntity;
