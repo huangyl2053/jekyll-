@@ -1294,8 +1294,8 @@ public class DBD1030001Handler {
     /**
      * 社会福祉法人等利用者負担軽減申請画面を「申請情報を保存する」を押下する。
      *
-     * @param 情報と状態ArrayList　情報と状態ArrayList
-     * @param 識別コード　識別コード
+     * @param 情報と状態ArrayList 情報と状態ArrayList
+     * @param 識別コード 識別コード
      * @param 被保険者番号 被保険者番号
      */
     public void onClick_btnUpdate(ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayList,
@@ -1311,7 +1311,7 @@ public class DBD1030001Handler {
     /**
      * 変更有無チェックです。
      *
-     * @param 情報と状態ArrayList　情報と状態ArrayList
+     * @param 情報と状態ArrayList 情報と状態ArrayList
      * @return 変更有無
      */
     public boolean 変更有無チェック(ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayList) {
