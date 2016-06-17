@@ -368,6 +368,7 @@ public class KogakuKyufuTaishoListHandler {
         div.getDgTaishoshaIchiran().getGridSetting().setIsShowDeleteButtonColumn(false);
         div.getDgTaishoshaIchiran().getGridSetting().getColumns().get(2).setVisible(false);
         div.getMeisaiGokeiHenshuPanel().setDisplayNone(true);
+        div.getDgTaishoshaIchiran().getGridSetting().getColumns().get(0).setVisible(false);
     }
 
     /**
