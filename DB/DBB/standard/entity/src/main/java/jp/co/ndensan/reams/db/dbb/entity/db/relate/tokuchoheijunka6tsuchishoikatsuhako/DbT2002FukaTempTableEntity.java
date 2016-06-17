@@ -68,6 +68,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DbT2002FukaTempTableEntity extends DbTableEntityBase<DbT2002FukaTempTableEntity> implements IDbAccessable {
 
+    public static final RString TABLE_NAME = new RString("DbT2002FukaZennendoTemp");
+
     // 「更正後」計算後情報の全項目
     @TempTableColumnOrder(1)
     private RString koseigo_insertDantaiCd;
@@ -405,17 +407,17 @@ public class DbT2002FukaTempTableEntity extends DbTableEntityBase<DbT2002FukaTem
     @TempTableColumnOrder(165)
     private Decimal koseimae_nengakuHokenryo1;
     @TempTableColumnOrder(166)
-    private FlexibleDate koseimae_tsukiwariStartYM1;
+    private FlexibleYearMonth koseimae_tsukiwariStartYM1;
     @TempTableColumnOrder(167)
-    private FlexibleDate koseimae_tsukiwariEndYM1;
+    private FlexibleYearMonth koseimae_tsukiwariEndYM1;
     @TempTableColumnOrder(168)
     private RString koseimae_hokenryoDankai2;
     @TempTableColumnOrder(169)
     private Decimal koseimae_nengakuHokenryo2;
     @TempTableColumnOrder(170)
-    private FlexibleDate koseimae_tsukiwariStartYM2;
+    private FlexibleYearMonth koseimae_tsukiwariStartYM2;
     @TempTableColumnOrder(171)
-    private FlexibleDate koseimae_tsukiwariEndYM2;
+    private FlexibleYearMonth koseimae_tsukiwariEndYM2;
     @TempTableColumnOrder(172)
     private YMDHMS koseimae_choteiNichiji;
     @TempTableColumnOrder(173)

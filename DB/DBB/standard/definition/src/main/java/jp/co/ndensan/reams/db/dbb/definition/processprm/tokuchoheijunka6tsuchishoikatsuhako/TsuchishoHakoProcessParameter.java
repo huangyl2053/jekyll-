@@ -16,7 +16,7 @@ import lombok.Setter;
 /**
  * 帳票の発行パラメータを定義したEntityクラスです。
  *
- * @reamsid_L DBB-0820-040 xuyue
+ * @reamsid_L DBB-0820-030 xuyue
  */
 @Setter
 @Getter

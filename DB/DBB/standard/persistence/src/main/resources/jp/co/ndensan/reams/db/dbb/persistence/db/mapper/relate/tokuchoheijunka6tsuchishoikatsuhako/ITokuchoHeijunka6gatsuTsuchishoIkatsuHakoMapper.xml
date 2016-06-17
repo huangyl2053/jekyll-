@@ -24,7 +24,7 @@
         <association property="対象者_追加含む情報_更正後" resultMap="resultMap_更正後対象者追加含む情報" />
     </resultMap>
 
-    <select id="get基準日時"
+    <select resultOrdered="true" id="get基準日時"
             resultType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter"
             fetchSize="500">
@@ -35,7 +35,7 @@
         AND    A."shoriName"=#{作成処理名}
     </select>
 
-    <select id="select特徴平準化_6月分更新後とリアルのデータ"
+    <select resultOrdered="true" id="select特徴平準化_6月分更新後とリアルのデータ"
             resultMap="resultMap_KarisanteiGakuHenkoEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter" fetchSize="500">
         SELECT
@@ -88,157 +88,20 @@
         AND  "DbT2015KeisangoJohoTemp"."tkKibetsuGaku03" != 0
     </select>
 
-    <update id="update計算後情報更正前"
+    <select resultOrdered="true" id="select計算後情報For計算後情報更正前"
+            resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.DbTKeisangoJohoTempTableEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter">
-
-        UPDATE
-        rgdb."DbT2002FukaTemp" AS "DbT2002FukaTemp"
-        SET
-        "koseimae_insertDantaiCd" = DbT2015KeisangoJohoTemp."insertDantaiCd",
-        "koseimae_insertTimestamp" = DbT2015KeisangoJohoTemp."insertTimestamp",
-        "koseimae_insertReamsLoginId" = DbT2015KeisangoJohoTemp."insertReamsLoginId",
-        "koseimae_insertContextId" = DbT2015KeisangoJohoTemp."insertContextId",
-        "koseimae_isDeleted" = DbT2015KeisangoJohoTemp."isDeleted",
-        "koseimae_updateCount" = DbT2015KeisangoJohoTemp."updateCount",
-        "koseimae_lastUpdateTimestamp" = DbT2015KeisangoJohoTemp."lastUpdateTimestamp",
-        "koseimae_lastUpdateReamsLoginId" = DbT2015KeisangoJohoTemp."lastUpdateReamsLoginId",
-        "koseimae_choteiNendo" = DbT2015KeisangoJohoTemp."choteiNendo",
-        "koseimae_fukaNendo" = DbT2015KeisangoJohoTemp."fukaNendo",
-        "koseimae_tsuchishoNo" = DbT2015KeisangoJohoTemp."tsuchishoNo",
-        "koseimae_koseiZengoKubun" = DbT2015KeisangoJohoTemp."koseiZengoKubun",
-        "koseimae_sakuseiShoriName" = DbT2015KeisangoJohoTemp."sakuseiShoriName",
-        "koseimae_fukaRirekiNo" = DbT2015KeisangoJohoTemp."fukaRirekiNo",
-        "koseimae_hihokenshaNo" = DbT2015KeisangoJohoTemp."hihokenshaNo",
-        "koseimae_shikibetsuCode" = DbT2015KeisangoJohoTemp."shikibetsuCode",
-        "koseimae_setaiCode" = DbT2015KeisangoJohoTemp."setaiCode",
-        "koseimae_setaiInsu" = DbT2015KeisangoJohoTemp."setaiInsu",
-        "koseimae_shikakuShutokuYMD" = DbT2015KeisangoJohoTemp."shikakuShutokuYMD",
-        "koseimae_shikakuShutokuJiyu" = DbT2015KeisangoJohoTemp."shikakuShutokuJiyu",
-        "koseimae_shikakuSoshitsuYMD" = DbT2015KeisangoJohoTemp."shikakuSoshitsuYMD",
-        "koseimae_shikakuSoshitsuJiyu" = DbT2015KeisangoJohoTemp."shikakuSoshitsuJiyu",
-        "koseimae_seihofujoShurui" = DbT2015KeisangoJohoTemp."seihofujoShurui",
-        "koseimae_seihoKaishiYMD" = DbT2015KeisangoJohoTemp."seihoKaishiYMD",
-        "koseimae_seihoHaishiYMD" = DbT2015KeisangoJohoTemp."seihoHaishiYMD",
-        "koseimae_ronenKaishiYMD" = DbT2015KeisangoJohoTemp."ronenKaishiYMD",
-        "koseimae_ronenHaishiYMD" = DbT2015KeisangoJohoTemp."ronenHaishiYMD",
-        "koseimae_fukaYMD" = DbT2015KeisangoJohoTemp."fukaYMD",
-        "koseimae_kazeiKubun" = DbT2015KeisangoJohoTemp."kazeiKubun",
-        "koseimae_setaikazeiKubun" = DbT2015KeisangoJohoTemp."setaikazeiKubun",
-        "koseimae_gokeiShotokuGaku" = DbT2015KeisangoJohoTemp."gokeiShotokuGaku",
-        "koseimae_nenkinShunyuGaku" = DbT2015KeisangoJohoTemp."nenkinShunyuGaku",
-        "koseimae_hokenryoDankai" = DbT2015KeisangoJohoTemp."hokenryoDankai",
-        "koseimae_hokenryoDankai1" = DbT2015KeisangoJohoTemp."hokenryoDankai1",
-        "koseimae_nengakuHokenryo1" = DbT2015KeisangoJohoTemp."nengakuHokenryo1",
-        "koseimae_tsukiwariStartYM1" = DbT2015KeisangoJohoTemp."tsukiwariStartYM1",
-        "koseimae_tsukiwariEndYM1" = DbT2015KeisangoJohoTemp."tsukiwariEndYM1",
-        "koseimae_hokenryoDankai2" = DbT2015KeisangoJohoTemp."hokenryoDankai2",
-        "koseimae_nengakuHokenryo2" = DbT2015KeisangoJohoTemp."nengakuHokenryo2",
-        "koseimae_tsukiwariStartYM2" = DbT2015KeisangoJohoTemp."tsukiwariStartYM2",
-        "koseimae_tsukiwariEndYM2" = DbT2015KeisangoJohoTemp."tsukiwariEndYM2",
-        "koseimae_choteiNichiji" = DbT2015KeisangoJohoTemp."choteiNichiji",
-        "koseimae_choteiJiyu1" = DbT2015KeisangoJohoTemp."choteiJiyu1",
-        "koseimae_choteiJiyu2" = DbT2015KeisangoJohoTemp."choteiJiyu2",
-        "koseimae_choteiJiyu3" = DbT2015KeisangoJohoTemp."choteiJiyu3",
-        "koseimae_choteiJiyu4" = DbT2015KeisangoJohoTemp."choteiJiyu4",
-        "koseimae_koseiM" = DbT2015KeisangoJohoTemp."koseiM",
-        "koseimae_gemmenMaeHokenryo" = DbT2015KeisangoJohoTemp."gemmenMaeHokenryo",
-        "koseimae_gemmenGaku" = DbT2015KeisangoJohoTemp."gemmenGaku",
-        "koseimae_kakuteiHokenryo" = DbT2015KeisangoJohoTemp."kakuteiHokenryo",
-        "koseimae_hokenryoDankaiKarisanntei" = DbT2015KeisangoJohoTemp."hokenryoDankaiKarisanntei",
-        "koseimae_choshuHohoRirekiNo" = DbT2015KeisangoJohoTemp."choshuHohoRirekiNo",
-        "koseimae_idoKijunNichiji" = DbT2015KeisangoJohoTemp."idoKijunNichiji",
-        "koseimae_kozaKubun" = DbT2015KeisangoJohoTemp."kozaKubun",
-        "koseimae_kyokaisoKubun" = DbT2015KeisangoJohoTemp."kyokaisoKubun",
-        "koseimae_shokkenKubun" = DbT2015KeisangoJohoTemp."shokkenKubun",
-        "koseimae_fukaShichosonCode" = DbT2015KeisangoJohoTemp."fukaShichosonCode",
-        "koseimae_tkSaishutsuKampuGaku" = DbT2015KeisangoJohoTemp."tkSaishutsuKampuGaku",
-        "koseimae_fuSaishutsuKampuGaku" = DbT2015KeisangoJohoTemp."fuSaishutsuKampuGaku",
-        "koseimae_tkKibetsuGaku01" = DbT2015KeisangoJohoTemp."tkKibetsuGaku01",
-        "koseimae_tkKibetsuGaku02" = DbT2015KeisangoJohoTemp."tkKibetsuGaku02",
-        "koseimae_tkKibetsuGaku03" = DbT2015KeisangoJohoTemp."tkKibetsuGaku03",
-        "koseimae_tkKibetsuGaku04" = DbT2015KeisangoJohoTemp."tkKibetsuGaku04",
-        "koseimae_tkKibetsuGaku05" = DbT2015KeisangoJohoTemp."tkKibetsuGaku05",
-        "koseimae_tkKibetsuGaku06" = DbT2015KeisangoJohoTemp."tkKibetsuGaku06",
-        "koseimae_fuKibetsuGaku01" = DbT2015KeisangoJohoTemp."fuKibetsuGaku01",
-        "koseimae_fuKibetsuGaku02" = DbT2015KeisangoJohoTemp."fuKibetsuGaku02",
-        "koseimae_fuKibetsuGaku03" = DbT2015KeisangoJohoTemp."fuKibetsuGaku03",
-        "koseimae_fuKibetsuGaku04" = DbT2015KeisangoJohoTemp."fuKibetsuGaku04",
-        "koseimae_fuKibetsuGaku05" = DbT2015KeisangoJohoTemp."fuKibetsuGaku05",
-        "koseimae_fuKibetsuGaku06" = DbT2015KeisangoJohoTemp."fuKibetsuGaku06",
-        "koseimae_fuKibetsuGaku07" = DbT2015KeisangoJohoTemp."fuKibetsuGaku07",
-        "koseimae_fuKibetsuGaku08" = DbT2015KeisangoJohoTemp."fuKibetsuGaku08",
-        "koseimae_fuKibetsuGaku09" = DbT2015KeisangoJohoTemp."fuKibetsuGaku09",
-        "koseimae_fuKibetsuGaku10" = DbT2015KeisangoJohoTemp."fuKibetsuGaku10",
-        "koseimae_fuKibetsuGaku11" = DbT2015KeisangoJohoTemp."fuKibetsuGaku11",
-        "koseimae_fuKibetsuGaku12" = DbT2015KeisangoJohoTemp."fuKibetsuGaku12",
-        "koseimae_fuKibetsuGaku13" = DbT2015KeisangoJohoTemp."fuKibetsuGaku13",
-        "koseimae_fuKibetsuGaku14" = DbT2015KeisangoJohoTemp."fuKibetsuGaku14",
-        "koseimae_choshuHoho4gatsu" = DbT2015KeisangoJohoTemp."choshuHoho4gatsu",
-        "koseimae_choshuHoho5gatsu" = DbT2015KeisangoJohoTemp."choshuHoho5gatsu",
-        "koseimae_choshuHoho6gatsu" = DbT2015KeisangoJohoTemp."choshuHoho6gatsu",
-        "koseimae_choshuHoho7gatsu" = DbT2015KeisangoJohoTemp."choshuHoho7gatsu",
-        "koseimae_choshuHoho8gatsu" = DbT2015KeisangoJohoTemp."choshuHoho8gatsu",
-        "koseimae_choshuHoho9gatsu" = DbT2015KeisangoJohoTemp."choshuHoho9gatsu",
-        "koseimae_choshuHoho10gatsu" = DbT2015KeisangoJohoTemp."choshuHoho10gatsu",
-        "koseimae_choshuHoho11gatsu" = DbT2015KeisangoJohoTemp."choshuHoho11gatsu",
-        "koseimae_choshuHoho12gatsu" = DbT2015KeisangoJohoTemp."choshuHoho12gatsu",
-        "koseimae_choshuHoho1gatsu" = DbT2015KeisangoJohoTemp."choshuHoho1gatsu",
-        "koseimae_choshuHoho2gatsu" = DbT2015KeisangoJohoTemp."choshuHoho2gatsu",
-        "koseimae_choshuHoho3gatsu" = DbT2015KeisangoJohoTemp."choshuHoho3gatsu",
-        "koseimae_choshuHohoYoku4gatsu" = DbT2015KeisangoJohoTemp."choshuHohoYoku4gatsu",
-        "koseimae_choshuHohoYoku5gatsu" = DbT2015KeisangoJohoTemp."choshuHohoYoku5gatsu",
-        "koseimae_choshuHohoYoku6gatsu" = DbT2015KeisangoJohoTemp."choshuHohoYoku6gatsu",
-        "koseimae_choshuHohoYoku7gatsu" = DbT2015KeisangoJohoTemp."choshuHohoYoku7gatsu",
-        "koseimae_choshuHohoYoku8gatsu" = DbT2015KeisangoJohoTemp."choshuHohoYoku8gatsu",
-        "koseimae_choshuHohoYoku9gatsu" = DbT2015KeisangoJohoTemp."choshuHohoYoku9gatsu",
-        "koseimae_kariNenkinNo" = DbT2015KeisangoJohoTemp."kariNenkinNo",
-        "koseimae_kariNenkinCode" = DbT2015KeisangoJohoTemp."kariNenkinCode",
-        "koseimae_kariHosokuM" = DbT2015KeisangoJohoTemp."kariHosokuM",
-        "koseimae_honNenkinNo" = DbT2015KeisangoJohoTemp."honNenkinNo",
-        "koseimae_honNenkinCode" = DbT2015KeisangoJohoTemp."honNenkinCode",
-        "koseimae_honHosokuM" = DbT2015KeisangoJohoTemp."honHosokuM",
-        "koseimae_yokunendoKariNenkinNo" = DbT2015KeisangoJohoTemp."yokunendoKariNenkinNo",
-        "koseimae_yokunendoKariNenkinCode" = DbT2015KeisangoJohoTemp."yokunendoKariNenkinCode",
-        "koseimae_yokunendoKariHosokuM" = DbT2015KeisangoJohoTemp."yokunendoKariHosokuM",
-        "koseimae_iraiSohuzumiFlag" = DbT2015KeisangoJohoTemp."iraiSohuzumiFlag",
-        "koseimae_tsuikaIraiSohuzumiFlag" = DbT2015KeisangoJohoTemp."tsuikaIraiSohuzumiFlag",
-        "koseimae_tokuchoTeishiNichiji" = DbT2015KeisangoJohoTemp."tokuchoTeishiNichiji",
-        "koseimae_tokuchoTeishiJiyuCode" = DbT2015KeisangoJohoTemp."tokuchoTeishiJiyuCode",
-        "koseimae_tkShunyuGaku01" = DbT2015KeisangoJohoTemp."tkShunyuGaku01",
-        "koseimae_tkShunyuGaku02" = DbT2015KeisangoJohoTemp."tkShunyuGaku02",
-        "koseimae_tkShunyuGaku03" = DbT2015KeisangoJohoTemp."tkShunyuGaku03",
-        "koseimae_tkShunyuGaku04" = DbT2015KeisangoJohoTemp."tkShunyuGaku04",
-        "koseimae_tkShunyuGaku05" = DbT2015KeisangoJohoTemp."tkShunyuGaku05",
-        "koseimae_tkShunyuGaku06" = DbT2015KeisangoJohoTemp."tkShunyuGaku06",
-        "koseimae_fuShunyuGaku01" = DbT2015KeisangoJohoTemp."fuShunyuGaku01",
-        "koseimae_fuShunyuGaku02" = DbT2015KeisangoJohoTemp."fuShunyuGaku02",
-        "koseimae_fuShunyuGaku03" = DbT2015KeisangoJohoTemp."fuShunyuGaku03",
-        "koseimae_fuShunyuGaku04" = DbT2015KeisangoJohoTemp."fuShunyuGaku04",
-        "koseimae_fuShunyuGaku05" = DbT2015KeisangoJohoTemp."fuShunyuGaku05",
-        "koseimae_fuShunyuGaku06" = DbT2015KeisangoJohoTemp."fuShunyuGaku06",
-        "koseimae_fuShunyuGaku07" = DbT2015KeisangoJohoTemp."fuShunyuGaku07",
-        "koseimae_fuShunyuGaku08" = DbT2015KeisangoJohoTemp."fuShunyuGaku08",
-        "koseimae_fuShunyuGaku09" = DbT2015KeisangoJohoTemp."fuShunyuGaku09",
-        "koseimae_fuShunyuGaku10" = DbT2015KeisangoJohoTemp."fuShunyuGaku10",
-        "koseimae_fuShunyuGaku11" = DbT2015KeisangoJohoTemp."fuShunyuGaku11",
-        "koseimae_fuShunyuGaku12" = DbT2015KeisangoJohoTemp."fuShunyuGaku12",
-        "koseimae_fuShunyuGaku13" = DbT2015KeisangoJohoTemp."fuShunyuGaku13",
-        "koseimae_fuShunyuGaku14" = DbT2015KeisangoJohoTemp."fuShunyuGaku14",
-        "koseimaeJohoUmuKubun" = '1'
+        SELECT *
         FROM
         rgdb."DbT2015KeisangoJohoTemp"  AS DbT2015KeisangoJohoTemp
         WHERE
-        "DbT2002FukaTemp"."koseigo_choteiNendo" = DbT2015KeisangoJohoTemp."choteiNendo"
-        AND "DbT2002FukaTemp"."koseigo_fukaNendo" = DbT2015KeisangoJohoTemp."fukaNendo"
-        AND "DbT2002FukaTemp"."koseigo_fukaNendo" = DbT2015KeisangoJohoTemp."fukaNendo"
-        AND "DbT2002FukaTemp"."koseigo_tsuchishoNo" = DbT2015KeisangoJohoTemp."tsuchishoNo"
-        AND DbT2015KeisangoJohoTemp."koseiZengoKubun" = '1'
+        DbT2015KeisangoJohoTemp."koseiZengoKubun" = '1'
         <if test="一括発行起動">
             AND DbT2015KeisangoJohoTemp."sakuseiShoriName" = #{作成処理名}
         </if>
-    </update>
+    </select>
 
-    <select id="select前年度賦課情報"
+    <select resultOrdered="true" id="select前年度賦課情報"
             resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter">
         SELECT
@@ -275,13 +138,9 @@
         AND 賦課Newest."hihokenshaNo" =  B."被保険者番号"
     </select>
 
-    <update id="update前年度特徴期別金額06"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter">
-        UPDATE
-        rgdb."DbT2002FukaTemp" AS DbT2002FukaTemp
-        SET
-        "zennendoTokuchoKibetsuKingaku06" =
-        (SELECT
+    <select resultOrdered="true" id="select前年度特徴期別金額06"
+            resultType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler">
+        SELECT
         UrT0705ChoteiKyotsu."choteigaku"
         FROM
         rgdb."DbT2002FukaZennendoTemp" AS 前年度賦課
@@ -298,45 +157,51 @@
         ON UrT0705ChoteiKyotsu."choteiId" = DbT2003Kibetsu."choteiId"
         WHERE
         前年度賦課."hihokenshaNo" = DbT2002FukaTemp."hihokenshaNo"
-        )
-    </update>
+    </select>
 
-    <update id="update継続の被保険者区分"
+    <select resultOrdered="true" id="selectAll賦課TempTableEntity" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter">
-        UPDATE
-        rgdb."DbT2002FukaTemp" AS DbT2002FukaTemp
-        SET
-        "hihokenshaKubun" = #{被保険者区分}
+        SELECT *
+        FROM
+        rgdb."DbT2002FukaZennendoTemp"
+    </select>
+
+    <select resultOrdered="true" id="select継続の被保険者区分TempTableEntity"
+            resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter">
+        SELECT *
+        FROM
+        rgdb."DbT2002FukaZennendoTemp"
         WHERE
         "koseigo_choshuHoho4gatsu" IN (#{特別徴収_厚生労働省}, #{特別徴収_地共済})
         AND
         "zennendoTokuchoKibetsuKingaku06" != 0
-    </update>
+    </select>
 
-    <update id="update4月開始の被保険者区分"
+    <select resultOrdered="true" id="select4月開始の被保険者区分TempTableEntity"
+            resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter">
-        UPDATE
-        rgdb."DbT2002FukaTemp" AS DbT2002FukaTemp
-        SET
-        "hihokenshaKubun" = #{被保険者区分}
+        SELECT *
+        FROM
+        rgdb."DbT2002FukaZennendoTemp"
         WHERE
         "koseigo_choshuHoho4gatsu" IN (#{特別徴収_厚生労働省}, #{特別徴収_地共済})
         AND
-        "zennendoTokuchoKibetsuKingaku06" != 0
-    </update>
+        "zennendoTokuchoKibetsuKingaku06" = 0
+    </select>
 
-    <update id="update6月開始の被保険者区分"
+    <select resultOrdered="true" id="select6月開始の被保険者区分TempTableEntity"
+            resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter">
-        UPDATE
-        rgdb."DbT2002FukaTemp" AS DbT2002FukaTemp
-        SET
-        "hihokenshaKubun" = #{被保険者区分}
+        SELECT *
+        FROM
+        rgdb."DbT2002FukaZennendoTemp"
         WHERE
         ("koseigo_choshuHoho4gatsu" != #{特別徴収_厚生労働省} AND "koseigo_choshuHoho4gatsu" != #{特別徴収_地共済})
         AND ("choshuHoho6gatsu" = #{特別徴収_厚生労働省} OR "choshuHoho6gatsu" = #{特別徴収_地共済})
-    </update>
+    </select>
 
-    <select id="select出力対象情報" resultMap="resultMap_出力対象情報の取得"
+    <select resultOrdered="true" id="select出力対象情報" resultMap="resultMap_出力対象情報の取得"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.ShutsuRyokuTaishoShutokuMyBatisParameter">
         SELECT *
         FROM rgdb."DbT2002FukaTemp" AS DbT2002FukaTemp
@@ -356,10 +221,10 @@
         </if>
     </select>
 
-    <insert id="insert通知書発行後異動者">
-        INSERT INTO
-        rgdb."DbT2017TsuchishoHakkogoIdosha" ("reportID", "chohyosakuseiTimestamp", "fukaNendo", "tsuchishoNo","shikibetsuCode", "hihokenshaNo", "keisanTimestamp", "gaitoRemban", "idoAriFlag")
-        SELECT 	#{帳票ID}, #{帳票作成日時}, "koseigo_fukaNendo", "koseigo_tsuchishoNo", "koseigo_shikibetsuCode", "koseigo_hihokenshaNo", #{基準日時}, row_number() over() as rownum, false
+    <select resultOrdered="true" id = "select賦課For通知書発行後異動者"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.ShutsuRyokuTaishoShutokuMyBatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity">
+        SELECT *
         FROM
         rgdb."DbT2002FukaTemp"
         WHERE
@@ -376,7 +241,7 @@
         <if test="出力順 != null and !出力順.isEmpty()">
             ${出力順}
         </if>
-    </insert>
+    </select>
 
     <sql id="allColumns_DbT2015KeisangoJohoTemp">
         "DbT2015KeisangoJohoTemp"."insertDantaiCd" as "keisangoJohoTemp_insertDantaiCd",
@@ -1303,6 +1168,14 @@
     </resultMap>
 
     <resultMap id="resultMap_更正後対象者追加含む情報" type="jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity" autoMapping="true">
+        <id property="gyomuCode" column="nenkinTokuchoKaifuJoho_gyomuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler"/>
+        <id property="shoriNendo" column="nenkinTokuchoKaifuJoho_shoriNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="tsuchiNaiyoCode" column="nenkinTokuchoKaifuJoho_tsuchiNaiyoCode" typeHandler="jp.co.ndensan.reams.ue.uex.entity.typehandlers.TsuchiNaiyoCodeTypeHandler"/>
+        <id property="shoriTaishoYM" column="nenkinTokuchoKaifuJoho_shoriTaishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="kisoNenkinNo" column="nenkinTokuchoKaifuJoho_kisoNenkinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="nenkinCode" column="nenkinTokuchoKaifuJoho_nenkinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="koseiCityCode" column="nenkinTokuchoKaifuJoho_koseiCityCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="renban" column="nenkinTokuchoKaifuJoho_renban" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
         <result property="insertDantaiCd" column="nenkinTokuchoKaifuJoho_insertDantaiCd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="nenkinTokuchoKaifuJoho_insertTimestamp"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="nenkinTokuchoKaifuJoho_insertReamsLoginId"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>

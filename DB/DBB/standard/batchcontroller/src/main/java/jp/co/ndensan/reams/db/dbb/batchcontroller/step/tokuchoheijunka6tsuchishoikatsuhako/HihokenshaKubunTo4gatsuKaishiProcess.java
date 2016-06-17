@@ -5,9 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako;
 
-import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.KoseimaeJohoUpdateProcessParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.DbTKeisangoJohoTempTableEntity;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -18,26 +17,23 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 「賦課情報取得」処理の「「更正前」計算後情報の全項目の更新」です。
+ * 「賦課情報取得」処理の「4月開始の被保険者区分を更新する」処理です。
  *
  * @reamsid_L DBB-0820-030 xuyue
  */
-public class KoseimaeJohoUpdateProcess extends BatchProcessBase<DbT2002FukaTempTableEntity> {
-
-    KoseimaeJohoUpdateProcessParameter parameter;
+public class HihokenshaKubunTo4gatsuKaishiProcess extends BatchProcessBase<DbT2002FukaTempTableEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6tsuchishoikatsuhako."
-            + "ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper.selectAll賦課TempTableEntity");
+            + "ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper.select4月開始の被保険者区分TempTableEntity");
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter<DbT2002FukaTempTableEntity> batchEntityCreatedWriter;
 
-    private List<DbTKeisangoJohoTempTableEntity> 計算後List;
-
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID);
+        return new BatchDbReader(MYBATIS_SELECT_ID, new TokuchoHeijunka6gatsuMyBatisParameter(
+                false, null, null, null, null, ChoshuHohoKibetsu.特別徴収.getコード(), null, null, null));
     }
 
     @Override
@@ -47,16 +43,10 @@ public class KoseimaeJohoUpdateProcess extends BatchProcessBase<DbT2002FukaTempT
     }
 
     @Override
-    protected void beforeExecute() {
-        計算後List = (List<DbTKeisangoJohoTempTableEntity>) parameter.get計算後List();
-    }
-
-    @Override
     protected void process(DbT2002FukaTempTableEntity entity) {
         TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko service = TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko.createInstance();
-        if (service.find計算後情報For更正前(計算後List, entity) != null) {
-            batchEntityCreatedWriter.update(entity);
-        }
+
+        batchEntityCreatedWriter.update(service.set4月開始の被保険者区分_更新対象(entity));
     }
 
 }
