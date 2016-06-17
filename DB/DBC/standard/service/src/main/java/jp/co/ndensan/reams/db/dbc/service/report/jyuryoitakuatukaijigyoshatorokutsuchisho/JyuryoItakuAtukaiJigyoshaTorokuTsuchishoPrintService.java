@@ -26,8 +26,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.bunshono.IBunshoNoFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.toiawasesaki.IToiawasesakiFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.toiawasesaki.ToiawasesakiFinderFactory;
-import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibun;
-import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunFinder;
 import jp.co.ndensan.reams.uz.uza.biz.BushoCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
@@ -91,23 +89,11 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService {
                 文書番号 = RString.EMPTY;
             }
 
-            RString 通知書定型文１ = RString.EMPTY;
-            TsuchishoTeikeibun keibun1 = new TsuchishoTeikeibunFinder()
-                    .get通知書定型文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100032.getReportId(),
-                            KamokuCode.EMPTY, パターン番号, 項目番号_1, FlexibleDate.getNowDate());
-            if (keibun1 != null) {
-                // TODO QA:874
-                通知書定型文１ = keibun1.get文章();
-            }
+            RString 通知書定型文１ = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100032.getReportId(),
+                    KamokuCode.EMPTY, パターン番号, 項目番号_1, FlexibleDate.getNowDate());
 
-            RString 通知書定型文2 = RString.EMPTY;
-            TsuchishoTeikeibun keibun2 = new TsuchishoTeikeibunFinder()
-                    .get通知書定型文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100032.getReportId(),
-                            KamokuCode.EMPTY, パターン番号, 項目番号_2, FlexibleDate.getNowDate());
-            if (keibun2 != null) {
-                // TODO QA:874
-                通知書定型文2 = keibun2.get文章();
-            }
+            RString 通知書定型文2 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100032.getReportId(),
+                    KamokuCode.EMPTY, パターン番号, 項目番号_2, FlexibleDate.getNowDate());
 
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
             Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().
