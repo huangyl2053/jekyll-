@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class ShujiiikenshoA3Editor implements IShujiiikenshoA3Editor {
 
     private static final int INT_4 = 4;
-    private static final int INT_6 = 6;
+    private static final int INT_5 = 5;
     private static final int INT_7 = 7;
     private static final int INT_8 = 8;
     private static final int INT_10 = 10;
@@ -83,7 +83,7 @@ public class ShujiiikenshoA3Editor implements IShujiiikenshoA3Editor {
 
     private RString get月(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
-            return パターン12(年月日).substring(INT_6, INT_7);
+            return パターン12(年月日).substring(INT_5, INT_7);
         }
         return RString.EMPTY;
     }

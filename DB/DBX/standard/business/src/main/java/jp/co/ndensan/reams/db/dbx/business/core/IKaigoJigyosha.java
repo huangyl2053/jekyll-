@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.HojinsShubetsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShiteiKijunGaitoJigyoshoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.code.HojinsShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.code.ShiteiKijunGaitoJigyoshoKubun;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;

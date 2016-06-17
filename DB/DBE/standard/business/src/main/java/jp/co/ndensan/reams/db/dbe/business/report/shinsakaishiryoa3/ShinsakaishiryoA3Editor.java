@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
 
-    private static final int INT_25 = 25;
     private final ShinsakaishiryoItem item;
 
     /**
@@ -51,22 +50,9 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
         source.gogitaiNo = RStringUtil.convert半角to全角(item.get合議体番号());
         source.listShinsainName_1 = item.get審査員一覧();
         source.shinsaTaishoshaCount = RStringUtil.convert半角to全角(item.get審査対象者数());
-        if (((int) Math.floor(item.getNo() / INT_25) % 2 == 1)) {
-            source.listShinsei1_1 = new RString(item.getNo());
-            source.listShinsei1_2 = item.get保険者();
-            source.listShinsei1_3 = item.get被保険者();
-            source.listShinsei1_4 = item.get氏名();
-            source.listShinsei1_5 = item.get性別();
-            source.listShinsei1_6 = item.get年齢();
-            source.listShinsei1_7 = item.get前回二次();
-            source.listShinsei1_8 = item.get前回期間();
-            source.listShinsei1_9 = item.get一次判定();
-            source.listShinsei1_10 = item.get二次判定();
-            source.listShinsei1_11 = RString.EMPTY;
-            source.listZenkaiｙukokikan1_1 = get二時判定認定有効年月日();
-            source.listYukokikan1_1 = RString.EMPTY;
-        } else {
-            source.listShinsei2_1 = new RString(item.getNo());
+        int no = item.getNo();
+        if (no % 2 == 0) {
+            source.listShinsei2_1 = item.get審査会審査順();
             source.listShinsei2_2 = item.get保険者();
             source.listShinsei2_3 = item.get被保険者();
             source.listShinsei2_4 = item.get氏名();
@@ -79,6 +65,20 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
             source.listShinsei2_11 = RString.EMPTY;
             source.listZenkaiｙukokikan2_1 = get二時判定認定有効年月日();
             source.listYukokikan2_1 = RString.EMPTY;
+        } else {
+            source.listShinsei1_1 = item.get審査会審査順();
+            source.listShinsei1_2 = item.get保険者();
+            source.listShinsei1_3 = item.get被保険者();
+            source.listShinsei1_4 = item.get氏名();
+            source.listShinsei1_5 = item.get性別();
+            source.listShinsei1_6 = item.get年齢();
+            source.listShinsei1_7 = item.get前回二次();
+            source.listShinsei1_8 = item.get前回期間();
+            source.listShinsei1_9 = item.get一次判定();
+            source.listShinsei1_10 = item.get二次判定();
+            source.listShinsei1_11 = RString.EMPTY;
+            source.listZenkaiｙukokikan1_1 = get二時判定認定有効年月日();
+            source.listYukokikan1_1 = RString.EMPTY;
         }
         return source;
     }

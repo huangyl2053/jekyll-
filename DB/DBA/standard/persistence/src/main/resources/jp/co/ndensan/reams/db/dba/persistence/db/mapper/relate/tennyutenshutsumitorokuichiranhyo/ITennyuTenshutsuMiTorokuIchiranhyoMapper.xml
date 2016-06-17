@@ -70,7 +70,7 @@
         <result property="住所地特例フラグ" column="住所地特例フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
-    <select id="get転入保留対象者"
+    <select resultOrdered="true" id="get転入保留対象者"
               resultMap="resultMap_TennyuHosyutaiSyosyaEntity"
               parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tennyutenshutsumitorokuichiranhyo.TennyuTenshutsuMiTorokuIchiranhyoMybatisParameter"
               fetchSize="500">
@@ -137,7 +137,7 @@
         ORDER BY
             市町村コード asc
     </select> 
-    <select id="get転出保留対象者"
+    <select resultOrdered="true" id="get転出保留対象者"
               resultMap="resultMap_TensyuHosyutaiSyosyaEntity"
               parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tennyutenshutsumitorokuichiranhyo.TennyuTenshutsuMiTorokuIchiranhyoMybatisParameter"
               fetchSize="500">

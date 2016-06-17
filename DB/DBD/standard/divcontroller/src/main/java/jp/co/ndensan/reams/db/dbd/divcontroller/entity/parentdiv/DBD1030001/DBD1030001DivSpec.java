@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shakaifukushihojinkeigen.ShakaifukuRiyoshaFutanKeigenToJotai;
-import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1030001.DBD1030001Handler;
+import jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1030001.DBD1030001.DBD1030001ViewStateKey;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shakaifukushihojinkeigen.ShakaiFukushiHojinKeigenService;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -314,7 +314,7 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                 @Override
                 public boolean apply(DBD1030001Div div) {
                     ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayList
-                    = ViewStateHolder.get(DBD1030001Handler.DBD1030001ViewStateKey.申請一覧情報と状態, ArrayList.class);
+                    = ViewStateHolder.get(DBD1030001ViewStateKey.申請一覧情報と状態, ArrayList.class);
                     List<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態List = new ArrayList<>();
                     for (ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態 : 情報と状態ArrayList) {
                         if (!new RString("削除").equals(情報と状態.get状態())
@@ -355,7 +355,7 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                 @Override
                 public boolean apply(DBD1030001Div div) {
                     ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayList
-                    = ViewStateHolder.get(DBD1030001Handler.DBD1030001ViewStateKey.申請一覧情報と状態, ArrayList.class);
+                    = ViewStateHolder.get(DBD1030001ViewStateKey.申請一覧情報と状態, ArrayList.class);
                     for (ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態 : 情報と状態ArrayList) {
                         ShakaifukuRiyoshaFutanKeigen 情報 = 情報と状態.get社会福祉法人等利用者負担軽減情報();
                         if (new RString("追加").equals(情報と状態.get状態())

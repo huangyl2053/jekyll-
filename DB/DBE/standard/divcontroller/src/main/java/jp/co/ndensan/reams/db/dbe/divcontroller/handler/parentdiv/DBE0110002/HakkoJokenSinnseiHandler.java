@@ -7,10 +7,11 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110002;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinseijouhouinnsatu.ShinseiJouhouInsatuBatchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110002.HakkoJokenSinnseiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 申請に関する帳票発行画面クラスです
@@ -35,12 +36,11 @@ public class HakkoJokenSinnseiHandler {
 
     /**
      * 画面初期化処理です。
+     *
+     * @param 要介護認定申請モニタリストフラグ 遷移元画面から受け取った引数
+     * @param 要支援認定等申請者一覧フラグ 遷移元画面から受け取った引数
      */
-    public void onLoad() {
-        boolean 要介護認定申請モニタリストフラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_要介護認定申請モニタリストフラグ,
-                Boolean.class);
-        boolean 要支援認定等申請者一覧フラグ = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_要介護認定_要支援認定等申請者一覧フラグ,
-                Boolean.class);
+    public void onLoad(boolean 要介護認定申請モニタリストフラグ, boolean 要支援認定等申請者一覧フラグ) {
         SELECT_LIST.clear();
         checkPanel(要介護認定申請モニタリストフラグ, 要支援認定等申請者一覧フラグ);
         if (要介護認定申請モニタリストフラグ) {
@@ -74,5 +74,40 @@ public class HakkoJokenSinnseiHandler {
             div.getTxtShinseibi().setDisabled(true);
         }
 
+    }
+
+    /**
+     * バッチ用パラメータクラスを作成します。
+     *
+     * @return ShinseiJouhouInsatuBatchParameter
+     */
+    public ShinseiJouhouInsatuBatchParameter setBatchParameter() {
+        ShinseiJouhouInsatuBatchParameter shinseijouhoubatchParameter = new ShinseiJouhouInsatuBatchParameter();
+        if (div.getChkSakuseiChohyo().getSelectedKeys().contains(SELECT_KEY0)) {
+            shinseijouhoubatchParameter.setShinseimonitorflag(true);
+        } else {
+            shinseijouhoubatchParameter.setShinseimonitorflag(false);
+        }
+        if (div.getChkSakuseiChohyo().getSelectedKeys().contains(SELECT_KEY1)) {
+            shinseijouhoubatchParameter.setYokaigoyoshienseiichiranflag(true);
+        } else {
+            shinseijouhoubatchParameter.setYokaigoyoshienseiichiranflag(false);
+        }
+        if (div.getRadHakoJyoken().getSelectedKey().contains(SELECT_KEY0)) {
+            shinseijouhoubatchParameter.setSakuseijyouken(new RString("1"));
+            RDateTime rDataTimeFrom = RDateTime.of(div.getTxtShoriYMD().getFromValue().toDateString(), new RString(""));
+            RDateTime rDataTimeTo = RDateTime.of(div.getTxtShoriYMD().getToValue().toDateString(), new RString(""));
+            shinseijouhoubatchParameter.setShorikaFrom(rDataTimeFrom);
+            shinseijouhoubatchParameter.setShorikaTo(rDataTimeTo);
+
+        } else {
+            shinseijouhoubatchParameter.setSakuseijyouken(new RString("2"));
+            FlexibleDate flexibledataFrom = new FlexibleDate(div.getTxtShinseibi().getFromValue().toDateString());
+            FlexibleDate flexibledataTo = new FlexibleDate(div.getTxtShinseibi().getToValue().toDateString());
+            shinseijouhoubatchParameter.setShinnseikaFrom(flexibledataFrom);
+            shinseijouhoubatchParameter.setShinnseikaTo(flexibledataTo);
+
+        }
+        return shinseijouhoubatchParameter;
     }
 }

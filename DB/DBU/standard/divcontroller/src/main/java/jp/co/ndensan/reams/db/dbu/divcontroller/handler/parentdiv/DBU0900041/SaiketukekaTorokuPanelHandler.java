@@ -4,7 +4,7 @@ import jp.co.ndensan.reams.db.dbu.business.core.saiketukekameisaijoho.Saiketukek
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900041.SaiketukekaTorokuPanelDiv;
 import jp.co.ndensan.reams.db.dbu.service.core.saiketukekatoroku.SaiketukekaToroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -63,8 +63,8 @@ public class SaiketukekaTorokuPanelHandler {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
 
-        div.getAtenaInfoCommonChildDiv().onLoad(識別コード);
-        div.getKaigoShikakuKihonCommonChildDiv().onLoad(被保険者番号);
+        div.getAtenaInfoCommonChildDiv().initialize(識別コード);
+        div.getKaigoShikakuKihonCommonChildDiv().initialize(被保険者番号);
     }
 
     /**

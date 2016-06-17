@@ -21,7 +21,6 @@ import lombok.Setter;
 public class Shinsakaishukeihyo {
 
     private RString タイトル;
-    private RString 合議体番号;
     private RString 審査会開始年月日;
     private RString 審査会終了年月日;
     private RString 開催回数;

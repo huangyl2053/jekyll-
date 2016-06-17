@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1020001.Sei
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1020001.SeikatsuhogoTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.KoseiShichosonShishoMasterManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -54,8 +54,11 @@ public class SeikatsuhogoToroku {
     public ResponseData<SeikatsuhogoTorokuDiv> onLoad(SeikatsuhogoTorokuDiv div) {
         RString code = shishoSecurity.getShishoCode(ControlDataHolder.getUserId());
         Minashi2shisaiJoho business = ViewStateHolder.get(ViewStateKeys.みなし2号登録情報, Minashi2shisaiJoho.class);
-        List<KoseiShichosonShishoMaster> list = manager.get構成市町村支所マスタ一覧By市町村コード(
-                div.getCcdHokenshaList().getSelectedItem().get市町村コード()).records();
+        List<KoseiShichosonShishoMaster> list = new ArrayList<>();
+        if (business != null) {
+            list = manager.get構成市町村支所マスタ一覧By市町村コード(
+                    business.get保険者().get市町村コード()).records();
+        }
         getHandler(div).load(business, code, list);
         return ResponseData.of(div).respond();
     }
@@ -67,7 +70,6 @@ public class SeikatsuhogoToroku {
      * @return ResponseData<SeikatsuhogoTorokuDiv>
      */
     public ResponseData<SeikatsuhogoTorokuDiv> onChange_ddlHokenshaList(SeikatsuhogoTorokuDiv div) {
-        div.getCcdHokenshaList().getSelectedItem().get市町村コード();
         List<KoseiShichosonShishoMaster> list = manager.get構成市町村支所マスタ一覧By市町村コード(
                 div.getCcdHokenshaList().getSelectedItem().get市町村コード()).records();
         List<KeyValueDataSource> sourceList = new ArrayList<>();

@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbz.business.config.shikaku;
 
 import jp.co.ndensan.reams.db.dbz.business.config.ConfigValueBoolean;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoPrint;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.HihokenshaNoPrintType;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.HihokenshashoPrintType;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.KyotakuJigyoshaRirekiPrintType;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.YukoKigenPrintType;
+import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysHihokenshashoPrint;
+import jp.co.ndensan.reams.db.dbz.definition.core.configvalues.HihokenshaNoPrintType;
+import jp.co.ndensan.reams.db.dbz.definition.core.configvalues.HihokenshashoPrintType;
+import jp.co.ndensan.reams.db.dbz.definition.core.configvalues.KyotakuJigyoshaRirekiPrintType;
+import jp.co.ndensan.reams.db.dbz.definition.core.configvalues.YukoKigenPrintType;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

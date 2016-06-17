@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenSh
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.sonotakikanguide.SoNoTaKikanGuideModel;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;

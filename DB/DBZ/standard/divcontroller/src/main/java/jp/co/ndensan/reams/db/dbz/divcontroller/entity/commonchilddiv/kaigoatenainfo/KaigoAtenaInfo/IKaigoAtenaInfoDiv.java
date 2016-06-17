@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
  */
 public interface IKaigoAtenaInfoDiv extends ICommonChildDivBaseProperties {
 
-    void onLoad(ShikibetsuCode 識別コード);
+    void initialize(ShikibetsuCode 識別コード);
 
     RString get氏名漢字();
 

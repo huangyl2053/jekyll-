@@ -5,12 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB0120002;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.TokuchoHeinjunkaKakuteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunkakakutei.TokuchoHeijunkaKakuteiBatchParameter;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchoheijunkakakutei.TokuchoHeijunkaKakuteiBatch;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -31,11 +30,11 @@ public class TokuchoHeinjunkaKakuteiDbUpdateProcess extends SimpleBatchProcessBa
         PARAMETER = new RString("parameter");
     }
     private TokuchoHeijunkaKakuteiBatch batchService;
-    private final Code 遷移区分_0 = new Code("0");
-    private final Code 遷移区分_1 = new Code("1");
+    private final RString 遷移区分_0 = new RString("0");
+    private final RString 遷移区分_1 = new RString("1");
     private final RString 枝番 = new RString("0001");
 
-    InputParameter<TokuchoHeinjunkaKakuteiBatchParameter> parameter;
+    InputParameter<TokuchoHeijunkaKakuteiBatchParameter> parameter;
 
     @Override
     protected void beforeExecute() {

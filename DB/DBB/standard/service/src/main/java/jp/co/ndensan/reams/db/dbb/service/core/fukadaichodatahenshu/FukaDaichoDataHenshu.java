@@ -373,9 +373,9 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         set普通徴収_本算定(true, 賦課の情報_更正後, 賦課台帳情報.get収入情報(), 期月リスト_普徴, 編集後本算定賦課台帳情報);
         set普通徴収_増減額(編集後本算定賦課台帳情報);
         set普通徴収_収入額(賦課台帳情報.get収入情報(), 編集後本算定賦課台帳情報);
-        set本人_更正前後(賦課の情報_更正前, 賦課台帳情報.get被保険者台帳情報(), 賦課台帳情報.get境界層当該者情報(),
+        set本人_更正前後(false, 賦課の情報_更正前, 賦課台帳情報.get被保険者台帳情報(), 賦課台帳情報.get境界層当該者情報(),
                 本人個人_更正前, 編集後本算定賦課台帳情報);
-        set本人_更正前後(賦課の情報_更正後, 賦課台帳情報.get被保険者台帳情報(), 賦課台帳情報.get境界層当該者情報(),
+        set本人_更正前後(true, 賦課の情報_更正後, 賦課台帳情報.get被保険者台帳情報(), 賦課台帳情報.get境界層当該者情報(),
                 本人個人, 編集後本算定賦課台帳情報);
         編集後本算定賦課台帳情報.set世帯員情報リスト(世帯員情報リスト);
         編集後本算定賦課台帳情報.set特徴期(特徴期情報);
@@ -428,14 +428,22 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         HonSanteifukaUchiwakeIchi 本算定賦課内訳 = new HonSanteifukaUchiwakeIchi();
         HonSanteifukaUchiwakeIchi 本算定賦課内訳_更正後 = 編集後本算定賦課台帳情報.get本算定賦課内訳１更正後();
         HonSanteifukaUchiwakeIchi 本算定賦課内訳_更正前 = 編集後本算定賦課台帳情報.get本算定賦課内訳１更正前();
-        本算定賦課内訳.set本人合計所得金額(get増減額(本算定賦課内訳_更正後.get本人合計所得金額(), 本算定賦課内訳_更正前.get本人合計所得金額()));
-        本算定賦課内訳.set本人公的年金収入額(get増減額(本算定賦課内訳_更正後.get本人公的年金収入額(),
-                本算定賦課内訳_更正前.get本人公的年金収入額()));
+        if (本算定賦課内訳_更正前 == null) {
+            本算定賦課内訳.set本人合計所得金額(本算定賦課内訳_更正後.get本人合計所得金額());
+            本算定賦課内訳.set本人公的年金収入額(本算定賦課内訳_更正後.get本人公的年金収入額());
+            本算定賦課内訳.set本人算出保険料額(本算定賦課内訳_更正後.get本人算出保険料額());
+            本算定賦課内訳.set本人減免額(本算定賦課内訳_更正後.get本人減免額());
+            本算定賦課内訳.set年額保険料(本算定賦課内訳_更正後.get確定年額保険料());
+        } else {
+            本算定賦課内訳.set本人合計所得金額(get増減額(本算定賦課内訳_更正後.get本人合計所得金額(), 本算定賦課内訳_更正前.get本人合計所得金額()));
+            本算定賦課内訳.set本人公的年金収入額(get増減額(本算定賦課内訳_更正後.get本人公的年金収入額(),
+                    本算定賦課内訳_更正前.get本人公的年金収入額()));
+            本算定賦課内訳.set本人算出保険料額(get増減額(本算定賦課内訳_更正後.get本人算出保険料額(), 本算定賦課内訳_更正前.get本人算出保険料額()));
+            本算定賦課内訳.set本人減免額(get増減額(本算定賦課内訳_更正後.get本人減免額(), 本算定賦課内訳_更正前.get本人減免額()));
+            本算定賦課内訳.set年額保険料(get増減額(本算定賦課内訳_更正後.get確定年額保険料(), 本算定賦課内訳_更正前.get確定年額保険料()));
+        }
         本算定賦課内訳.set本人課税区分(RString.EMPTY);
         本算定賦課内訳.set世帯課税区分(RString.EMPTY);
-        本算定賦課内訳.set本人算出保険料額(get増減額(本算定賦課内訳_更正後.get本人算出保険料額(), 本算定賦課内訳_更正前.get本人算出保険料額()));
-        本算定賦課内訳.set本人減免額(get増減額(本算定賦課内訳_更正後.get本人減免額(), 本算定賦課内訳_更正前.get本人減免額()));
-        本算定賦課内訳.set年額保険料(get増減額(本算定賦課内訳_更正後.get確定年額保険料(), 本算定賦課内訳_更正前.get確定年額保険料()));
         本算定賦課内訳.set賦課基準日(RString.EMPTY);
         本算定賦課内訳.set調定年月日(RString.EMPTY);
         編集後本算定賦課台帳情報.set本算定賦課内訳１増減額(本算定賦課内訳);
@@ -633,8 +641,8 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         set普通徴収_仮算定(true, 賦課の情報_更正後, 賦課台帳情報.get収入情報(), 期月リスト_普徴, 編集後仮算定賦課台帳情報);
         set普通徴収_増減額(編集後仮算定賦課台帳情報);
         set普通徴収_収入額(賦課台帳情報.get収入情報(), 編集後仮算定賦課台帳情報);
-        set本人_更正前後(賦課の情報_更正前, 賦課台帳情報.get被保険者台帳情報(), 本人個人_更正前, 編集後仮算定賦課台帳情報);
-        set本人_更正前後(賦課の情報_更正後, 賦課台帳情報.get被保険者台帳情報(), 本人個人, 編集後仮算定賦課台帳情報);
+        set本人_更正前後(false, 賦課の情報_更正前, 賦課台帳情報.get被保険者台帳情報(), 本人個人_更正前, 編集後仮算定賦課台帳情報);
+        set本人_更正前後(true, 賦課の情報_更正後, 賦課台帳情報.get被保険者台帳情報(), 本人個人, 編集後仮算定賦課台帳情報);
         編集後仮算定賦課台帳情報.set世帯員情報リスト(世帯員情報リスト);
         編集後仮算定賦課台帳情報.set特徴期(特徴期情報);
         編集後仮算定賦課台帳情報.set特徴月(特徴月情報);
@@ -776,7 +784,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         }
     }
 
-    private void set本人_更正前後(FukaAtena 賦課の情報, DbT1001HihokenshaDaichoEntity 被保険者台帳情報,
+    private void set本人_更正前後(boolean 前後区分, FukaAtena 賦課の情報, DbT1001HihokenshaDaichoEntity 被保険者台帳情報,
             EditedKojin 本人個人, EditedKariSanteiFukaDaichoJoho 編集後仮算定賦課台帳情報) {
 
         Honnin 本人 = new Honnin();
@@ -807,10 +815,14 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         本人.set本人合計取得金額(format金額(賦課の情報.get賦課情報().get合計所得金額()));
         本人.set本人課税区分(!RString.isNullOrEmpty(賦課の情報.get賦課情報().get課税区分())
                 ? KazeiKubun.toValue(賦課の情報.get賦課情報().get課税区分()).get名称() : RString.EMPTY);
-        編集後仮算定賦課台帳情報.set本人更正前(本人);
+        if (前後区分) {
+            編集後仮算定賦課台帳情報.set本人更正後(本人);
+        } else {
+            編集後仮算定賦課台帳情報.set本人更正前(本人);
+        }
     }
 
-    private void set本人_更正前後(FukaAtena 賦課の情報, DbT1001HihokenshaDaichoEntity 被保険者台帳情報,
+    private void set本人_更正前後(boolean 前後区分, FukaAtena 賦課の情報, DbT1001HihokenshaDaichoEntity 被保険者台帳情報,
             DbT1006KyokaisoGaitoshaEntity 境界層当該者情報, EditedKojin 本人個人, EditedHonSanteiFukaDaichoJoho 編集後本算定賦課台帳情報) {
 
         Honnin 本人 = new Honnin();
@@ -842,7 +854,11 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             本人.set本人限界層該当開始年月日(get年月日(境界層当該者情報.getTekiyoKaishiYMD()));
             本人.set本人限界層該当終了年月日(get年月日(境界層当該者情報.getTekiyoShuryoYMD()));
         }
-        編集後本算定賦課台帳情報.set本人更正前(本人);
+        if (前後区分) {
+            編集後本算定賦課台帳情報.set本人更正後(本人);
+        } else {
+            編集後本算定賦課台帳情報.set本人更正前(本人);
+        }
     }
 
     private Honnin get本人_更正前後(FukaAtena 賦課の情報, DbT1001HihokenshaDaichoEntity 被保険者台帳情報, EditedKojin 本人個人) {
@@ -883,7 +899,8 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
      */
     private RString get年月日(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
-            return 年月日.wareki().toDateString();
+            return 年月日.wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
         }
         return RString.EMPTY;
     }
@@ -1098,15 +1115,25 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         TokubetsuChoshu 特別徴収増減額 = new TokubetsuChoshu();
         特別徴収増減額.set特徴調定月(RString.EMPTY);
         特別徴収増減額.set特徴調定月の期(RString.EMPTY);
-        特別徴収増減額.set特徴仮算定保険料(get増減額(特別徴収更正後.get特徴仮算定保険料(), 特別徴収更正前.get特徴仮算定保険料()));
         特別徴収増減額.set特徴納付済額(RString.EMPTY);
         特別徴収増減額.set特徴今後納付すべき額(RString.EMPTY);
-        特別徴収増減額.set特徴金額１(get増減額(特別徴収更正後.get特徴金額１(), 特別徴収更正前.get特徴金額１()));
-        特別徴収増減額.set特徴金額２(get増減額(特別徴収更正後.get特徴金額２(), 特別徴収更正前.get特徴金額２()));
-        特別徴収増減額.set特徴金額３(get増減額(特別徴収更正後.get特徴金額３(), 特別徴収更正前.get特徴金額３()));
-        特別徴収増減額.set特徴金額４(get増減額(特別徴収更正後.get特徴金額４(), 特別徴収更正前.get特徴金額４()));
-        特別徴収増減額.set特徴金額５(get増減額(特別徴収更正後.get特徴金額５(), 特別徴収更正前.get特徴金額５()));
-        特別徴収増減額.set特徴金額６(get増減額(特別徴収更正後.get特徴金額６(), 特別徴収更正前.get特徴金額６()));
+        if (特別徴収更正前 == null) {
+            特別徴収増減額.set特徴仮算定保険料(特別徴収更正後.get特徴仮算定保険料());
+            特別徴収増減額.set特徴金額１(特別徴収更正後.get特徴金額１());
+            特別徴収増減額.set特徴金額２(特別徴収更正後.get特徴金額２());
+            特別徴収増減額.set特徴金額３(特別徴収更正後.get特徴金額３());
+            特別徴収増減額.set特徴金額４(特別徴収更正後.get特徴金額４());
+            特別徴収増減額.set特徴金額５(特別徴収更正後.get特徴金額５());
+            特別徴収増減額.set特徴金額６(特別徴収更正後.get特徴金額６());
+        } else {
+            特別徴収増減額.set特徴仮算定保険料(get増減額(特別徴収更正後.get特徴仮算定保険料(), 特別徴収更正前.get特徴仮算定保険料()));
+            特別徴収増減額.set特徴金額１(get増減額(特別徴収更正後.get特徴金額１(), 特別徴収更正前.get特徴金額１()));
+            特別徴収増減額.set特徴金額２(get増減額(特別徴収更正後.get特徴金額２(), 特別徴収更正前.get特徴金額２()));
+            特別徴収増減額.set特徴金額３(get増減額(特別徴収更正後.get特徴金額３(), 特別徴収更正前.get特徴金額３()));
+            特別徴収増減額.set特徴金額４(get増減額(特別徴収更正後.get特徴金額４(), 特別徴収更正前.get特徴金額４()));
+            特別徴収増減額.set特徴金額５(get増減額(特別徴収更正後.get特徴金額５(), 特別徴収更正前.get特徴金額５()));
+            特別徴収増減額.set特徴金額６(get増減額(特別徴収更正後.get特徴金額６(), 特別徴収更正前.get特徴金額６()));
+        }
         特別徴収増減額.set特徴金額７(RString.EMPTY);
         特別徴収増減額.set特徴金額８(RString.EMPTY);
         特別徴収増減額.set特徴金額９(RString.EMPTY);
@@ -1125,15 +1152,25 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         TokubetsuChoshu 特別徴収増減額 = new TokubetsuChoshu();
         特別徴収増減額.set特徴調定月(RString.EMPTY);
         特別徴収増減額.set特徴調定月の期(RString.EMPTY);
-        特別徴収増減額.set特徴確定年額保険料(get増減額(特別徴収更正後.get特徴確定年額保険料(), 特別徴収更正前.get特徴確定年額保険料()));
         特別徴収増減額.set特徴納付済額(RString.EMPTY);
         特別徴収増減額.set特徴今後納付すべき額(RString.EMPTY);
-        特別徴収増減額.set特徴金額１(get増減額(特別徴収更正後.get特徴金額１(), 特別徴収更正前.get特徴金額１()));
-        特別徴収増減額.set特徴金額２(get増減額(特別徴収更正後.get特徴金額２(), 特別徴収更正前.get特徴金額２()));
-        特別徴収増減額.set特徴金額３(get増減額(特別徴収更正後.get特徴金額３(), 特別徴収更正前.get特徴金額３()));
-        特別徴収増減額.set特徴金額４(get増減額(特別徴収更正後.get特徴金額４(), 特別徴収更正前.get特徴金額４()));
-        特別徴収増減額.set特徴金額５(get増減額(特別徴収更正後.get特徴金額５(), 特別徴収更正前.get特徴金額５()));
-        特別徴収増減額.set特徴金額６(get増減額(特別徴収更正後.get特徴金額６(), 特別徴収更正前.get特徴金額６()));
+        if (特別徴収更正前 == null) {
+            特別徴収増減額.set特徴確定年額保険料(特別徴収更正後.get特徴確定年額保険料());
+            特別徴収増減額.set特徴金額１(特別徴収更正後.get特徴金額１());
+            特別徴収増減額.set特徴金額２(特別徴収更正後.get特徴金額２());
+            特別徴収増減額.set特徴金額３(特別徴収更正後.get特徴金額３());
+            特別徴収増減額.set特徴金額４(特別徴収更正後.get特徴金額４());
+            特別徴収増減額.set特徴金額５(特別徴収更正後.get特徴金額５());
+            特別徴収増減額.set特徴金額６(特別徴収更正後.get特徴金額６());
+        } else {
+            特別徴収増減額.set特徴確定年額保険料(get増減額(特別徴収更正後.get特徴確定年額保険料(), 特別徴収更正前.get特徴確定年額保険料()));
+            特別徴収増減額.set特徴金額１(get増減額(特別徴収更正後.get特徴金額１(), 特別徴収更正前.get特徴金額１()));
+            特別徴収増減額.set特徴金額２(get増減額(特別徴収更正後.get特徴金額２(), 特別徴収更正前.get特徴金額２()));
+            特別徴収増減額.set特徴金額３(get増減額(特別徴収更正後.get特徴金額３(), 特別徴収更正前.get特徴金額３()));
+            特別徴収増減額.set特徴金額４(get増減額(特別徴収更正後.get特徴金額４(), 特別徴収更正前.get特徴金額４()));
+            特別徴収増減額.set特徴金額５(get増減額(特別徴収更正後.get特徴金額５(), 特別徴収更正前.get特徴金額５()));
+            特別徴収増減額.set特徴金額６(get増減額(特別徴収更正後.get特徴金額６(), 特別徴収更正前.get特徴金額６()));
+        }
         特別徴収増減額.set特徴金額７(RString.EMPTY);
         特別徴収増減額.set特徴金額８(RString.EMPTY);
         特別徴収増減額.set特徴金額９(RString.EMPTY);
@@ -1153,23 +1190,41 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         FutsuChoshu 普通徴収 = new FutsuChoshu();
         普通徴収.set普徴調定月(RString.EMPTY);
         普通徴収.set普徴調定月の期(RString.EMPTY);
-        普通徴収.set普徴仮算定保険料(get増減額(普通徴収更正後.get普徴仮算定保険料(), 普通徴収更正前.get普徴仮算定保険料()));
         普通徴収.set普徴納付済額(RString.EMPTY);
         普通徴収.set普徴今後納付すべき額(RString.EMPTY);
-        普通徴収.set普徴金額１(get増減額(普通徴収更正後.get普徴金額１(), 普通徴収更正前.get普徴金額１()));
-        普通徴収.set普徴金額２(get増減額(普通徴収更正後.get普徴金額２(), 普通徴収更正前.get普徴金額２()));
-        普通徴収.set普徴金額３(get増減額(普通徴収更正後.get普徴金額３(), 普通徴収更正前.get普徴金額３()));
-        普通徴収.set普徴金額４(get増減額(普通徴収更正後.get普徴金額４(), 普通徴収更正前.get普徴金額４()));
-        普通徴収.set普徴金額５(get増減額(普通徴収更正後.get普徴金額５(), 普通徴収更正前.get普徴金額５()));
-        普通徴収.set普徴金額６(get増減額(普通徴収更正後.get普徴金額６(), 普通徴収更正前.get普徴金額６()));
-        普通徴収.set普徴金額７(get増減額(普通徴収更正後.get普徴金額７(), 普通徴収更正前.get普徴金額７()));
-        普通徴収.set普徴金額８(get増減額(普通徴収更正後.get普徴金額８(), 普通徴収更正前.get普徴金額８()));
-        普通徴収.set普徴金額９(get増減額(普通徴収更正後.get普徴金額９(), 普通徴収更正前.get普徴金額９()));
-        普通徴収.set普徴金額１０(get増減額(普通徴収更正後.get普徴金額１０(), 普通徴収更正前.get普徴金額１０()));
-        普通徴収.set普徴金額１１(get増減額(普通徴収更正後.get普徴金額１１(), 普通徴収更正前.get普徴金額１１()));
-        普通徴収.set普徴金額１２(get増減額(普通徴収更正後.get普徴金額１２(), 普通徴収更正前.get普徴金額１２()));
-        普通徴収.set普徴金額１３(get増減額(普通徴収更正後.get普徴金額１３(), 普通徴収更正前.get普徴金額１３()));
-        普通徴収.set普徴金額１４(get増減額(普通徴収更正後.get普徴金額１４(), 普通徴収更正前.get普徴金額１４()));
+        if (普通徴収更正前 == null) {
+            普通徴収.set普徴仮算定保険料(普通徴収更正後.get普徴仮算定保険料());
+            普通徴収.set普徴金額１(普通徴収更正後.get普徴金額１());
+            普通徴収.set普徴金額２(普通徴収更正後.get普徴金額２());
+            普通徴収.set普徴金額３(普通徴収更正後.get普徴金額３());
+            普通徴収.set普徴金額４(普通徴収更正後.get普徴金額４());
+            普通徴収.set普徴金額５(普通徴収更正後.get普徴金額５());
+            普通徴収.set普徴金額６(普通徴収更正後.get普徴金額６());
+            普通徴収.set普徴金額７(普通徴収更正後.get普徴金額７());
+            普通徴収.set普徴金額８(普通徴収更正後.get普徴金額８());
+            普通徴収.set普徴金額９(普通徴収更正後.get普徴金額９());
+            普通徴収.set普徴金額１０(普通徴収更正後.get普徴金額１０());
+            普通徴収.set普徴金額１１(普通徴収更正後.get普徴金額１１());
+            普通徴収.set普徴金額１２(普通徴収更正後.get普徴金額１２());
+            普通徴収.set普徴金額１３(普通徴収更正後.get普徴金額１３());
+            普通徴収.set普徴金額１４(普通徴収更正後.get普徴金額１４());
+        } else {
+            普通徴収.set普徴仮算定保険料(get増減額(普通徴収更正後.get普徴仮算定保険料(), 普通徴収更正前.get普徴仮算定保険料()));
+            普通徴収.set普徴金額１(get増減額(普通徴収更正後.get普徴金額１(), 普通徴収更正前.get普徴金額１()));
+            普通徴収.set普徴金額２(get増減額(普通徴収更正後.get普徴金額２(), 普通徴収更正前.get普徴金額２()));
+            普通徴収.set普徴金額３(get増減額(普通徴収更正後.get普徴金額３(), 普通徴収更正前.get普徴金額３()));
+            普通徴収.set普徴金額４(get増減額(普通徴収更正後.get普徴金額４(), 普通徴収更正前.get普徴金額４()));
+            普通徴収.set普徴金額５(get増減額(普通徴収更正後.get普徴金額５(), 普通徴収更正前.get普徴金額５()));
+            普通徴収.set普徴金額６(get増減額(普通徴収更正後.get普徴金額６(), 普通徴収更正前.get普徴金額６()));
+            普通徴収.set普徴金額７(get増減額(普通徴収更正後.get普徴金額７(), 普通徴収更正前.get普徴金額７()));
+            普通徴収.set普徴金額８(get増減額(普通徴収更正後.get普徴金額８(), 普通徴収更正前.get普徴金額８()));
+            普通徴収.set普徴金額９(get増減額(普通徴収更正後.get普徴金額９(), 普通徴収更正前.get普徴金額９()));
+            普通徴収.set普徴金額１０(get増減額(普通徴収更正後.get普徴金額１０(), 普通徴収更正前.get普徴金額１０()));
+            普通徴収.set普徴金額１１(get増減額(普通徴収更正後.get普徴金額１１(), 普通徴収更正前.get普徴金額１１()));
+            普通徴収.set普徴金額１２(get増減額(普通徴収更正後.get普徴金額１２(), 普通徴収更正前.get普徴金額１２()));
+            普通徴収.set普徴金額１３(get増減額(普通徴収更正後.get普徴金額１３(), 普通徴収更正前.get普徴金額１３()));
+            普通徴収.set普徴金額１４(get増減額(普通徴収更正後.get普徴金額１４(), 普通徴収更正前.get普徴金額１４()));
+        }
         編集後仮算定賦課台帳情報.set普通徴収増減額(普通徴収);
     }
 
@@ -1180,24 +1235,43 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         FutsuChoshu 普通徴収 = new FutsuChoshu();
         普通徴収.set普徴調定月(RString.EMPTY);
         普通徴収.set普徴調定月の期(RString.EMPTY);
-        普通徴収.set普徴仮算定保険料(get増減額(普通徴収更正後.get普徴仮算定保険料(), 普通徴収更正前.get普徴仮算定保険料()));
         普通徴収.set普徴納付済額(RString.EMPTY);
         普通徴収.set普徴今後納付すべき額(RString.EMPTY);
-        普通徴収.set普徴金額１(get増減額(普通徴収更正後.get普徴金額１(), 普通徴収更正前.get普徴金額１()));
-        普通徴収.set普徴金額２(get増減額(普通徴収更正後.get普徴金額２(), 普通徴収更正前.get普徴金額２()));
-        普通徴収.set普徴金額３(get増減額(普通徴収更正後.get普徴金額３(), 普通徴収更正前.get普徴金額３()));
-        普通徴収.set普徴金額４(get増減額(普通徴収更正後.get普徴金額４(), 普通徴収更正前.get普徴金額４()));
-        普通徴収.set普徴金額５(get増減額(普通徴収更正後.get普徴金額５(), 普通徴収更正前.get普徴金額５()));
-        普通徴収.set普徴金額６(get増減額(普通徴収更正後.get普徴金額６(), 普通徴収更正前.get普徴金額６()));
-        普通徴収.set普徴金額７(get増減額(普通徴収更正後.get普徴金額７(), 普通徴収更正前.get普徴金額７()));
-        普通徴収.set普徴金額８(get増減額(普通徴収更正後.get普徴金額８(), 普通徴収更正前.get普徴金額８()));
-        普通徴収.set普徴金額９(get増減額(普通徴収更正後.get普徴金額９(), 普通徴収更正前.get普徴金額９()));
-        普通徴収.set普徴金額１０(get増減額(普通徴収更正後.get普徴金額１０(), 普通徴収更正前.get普徴金額１０()));
-        普通徴収.set普徴金額１１(get増減額(普通徴収更正後.get普徴金額１１(), 普通徴収更正前.get普徴金額１１()));
-        普通徴収.set普徴金額１２(get増減額(普通徴収更正後.get普徴金額１２(), 普通徴収更正前.get普徴金額１２()));
-        普通徴収.set普徴金額１３(get増減額(普通徴収更正後.get普徴金額１３(), 普通徴収更正前.get普徴金額１３()));
-        普通徴収.set普徴金額１４(get増減額(普通徴収更正後.get普徴金額１４(), 普通徴収更正前.get普徴金額１４()));
-        普通徴収.set調整額歳出還付(get増減額(普通徴収更正後.get調整額歳出還付(), 普通徴収更正前.get調整額歳出還付()));
+        if (普通徴収更正前 == null) {
+            普通徴収.set普徴確定年額保険料(普通徴収更正後.get普徴確定年額保険料());
+            普通徴収.set普徴金額１(普通徴収更正後.get普徴金額１());
+            普通徴収.set普徴金額２(普通徴収更正後.get普徴金額２());
+            普通徴収.set普徴金額３(普通徴収更正後.get普徴金額３());
+            普通徴収.set普徴金額４(普通徴収更正後.get普徴金額４());
+            普通徴収.set普徴金額５(普通徴収更正後.get普徴金額５());
+            普通徴収.set普徴金額６(普通徴収更正後.get普徴金額６());
+            普通徴収.set普徴金額７(普通徴収更正後.get普徴金額７());
+            普通徴収.set普徴金額８(普通徴収更正後.get普徴金額８());
+            普通徴収.set普徴金額９(普通徴収更正後.get普徴金額９());
+            普通徴収.set普徴金額１０(普通徴収更正後.get普徴金額１０());
+            普通徴収.set普徴金額１１(普通徴収更正後.get普徴金額１１());
+            普通徴収.set普徴金額１２(普通徴収更正後.get普徴金額１２());
+            普通徴収.set普徴金額１３(普通徴収更正後.get普徴金額１３());
+            普通徴収.set普徴金額１４(普通徴収更正後.get普徴金額１４());
+            普通徴収.set調整額歳出還付(普通徴収更正後.get調整額歳出還付());
+        } else {
+            普通徴収.set普徴確定年額保険料(get増減額(普通徴収更正後.get普徴確定年額保険料(), 普通徴収更正前.get普徴確定年額保険料()));
+            普通徴収.set普徴金額１(get増減額(普通徴収更正後.get普徴金額１(), 普通徴収更正前.get普徴金額１()));
+            普通徴収.set普徴金額２(get増減額(普通徴収更正後.get普徴金額２(), 普通徴収更正前.get普徴金額２()));
+            普通徴収.set普徴金額３(get増減額(普通徴収更正後.get普徴金額３(), 普通徴収更正前.get普徴金額３()));
+            普通徴収.set普徴金額４(get増減額(普通徴収更正後.get普徴金額４(), 普通徴収更正前.get普徴金額４()));
+            普通徴収.set普徴金額５(get増減額(普通徴収更正後.get普徴金額５(), 普通徴収更正前.get普徴金額５()));
+            普通徴収.set普徴金額６(get増減額(普通徴収更正後.get普徴金額６(), 普通徴収更正前.get普徴金額６()));
+            普通徴収.set普徴金額７(get増減額(普通徴収更正後.get普徴金額７(), 普通徴収更正前.get普徴金額７()));
+            普通徴収.set普徴金額８(get増減額(普通徴収更正後.get普徴金額８(), 普通徴収更正前.get普徴金額８()));
+            普通徴収.set普徴金額９(get増減額(普通徴収更正後.get普徴金額９(), 普通徴収更正前.get普徴金額９()));
+            普通徴収.set普徴金額１０(get増減額(普通徴収更正後.get普徴金額１０(), 普通徴収更正前.get普徴金額１０()));
+            普通徴収.set普徴金額１１(get増減額(普通徴収更正後.get普徴金額１１(), 普通徴収更正前.get普徴金額１１()));
+            普通徴収.set普徴金額１２(get増減額(普通徴収更正後.get普徴金額１２(), 普通徴収更正前.get普徴金額１２()));
+            普通徴収.set普徴金額１３(get増減額(普通徴収更正後.get普徴金額１３(), 普通徴収更正前.get普徴金額１３()));
+            普通徴収.set普徴金額１４(get増減額(普通徴収更正後.get普徴金額１４(), 普通徴収更正前.get普徴金額１４()));
+            普通徴収.set調整額歳出還付(get増減額(普通徴収更正後.get調整額歳出還付(), 普通徴収更正前.get調整額歳出還付()));
+        }
         編集後本算定賦課台帳情報.set普通徴収増減額(普通徴収);
     }
 
@@ -1226,7 +1300,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             Class clazz = fukaJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                特徴仮算定保険料.add(get金額((Decimal) getMethod.invoke(fukaJoho)));
+                特徴仮算定保険料 = 特徴仮算定保険料.add(get金額((Decimal) getMethod.invoke(fukaJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1245,7 +1319,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             Class clazz = fukaJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                普徴納付済額.add(get金額((Decimal) getMethod.invoke(fukaJoho)));
+                普徴納付済額 = 普徴納付済額.add(get金額((Decimal) getMethod.invoke(fukaJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1265,7 +1339,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             Class clazz = 収入情報.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                特徴収入済額.add(get金額((Decimal) getMethod.invoke(収入情報)));
+                特徴収入済額 = 特徴収入済額.add(get金額((Decimal) getMethod.invoke(収入情報)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1285,19 +1359,12 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             Class clazz = 収入情報.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                普徴収入済額.add(get金額((Decimal) getMethod.invoke(収入情報)));
+                普徴収入済額 = 普徴収入済額.add(get金額((Decimal) getMethod.invoke(収入情報)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return 普徴収入済額;
-    }
-
-    private Decimal get金額(Decimal 金額) {
-        if (金額 == null) {
-            return Decimal.ZERO;
-        }
-        return 金額;
     }
 
     private void set特別徴収_収入額(ShunyuJoho 収入情報, EditedKariSanteiFukaDaichoJoho 編集後仮算定賦課台帳情報) {
@@ -1457,11 +1524,18 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         Class clazz = 前年度情報.getClass();
         try {
             Method getMethod = clazz.getDeclaredMethod(sb.toString());
-            普徴納付済額.add((Decimal) getMethod.invoke(前年度情報));
+            普徴納付済額 = 普徴納付済額.add(get金額((Decimal) getMethod.invoke(前年度情報)));
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
             Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 普徴納付済額;
+    }
+
+    private Decimal get金額(Decimal 金額) {
+        if (金額 == null) {
+            return Decimal.ZERO;
+        }
+        return 金額;
     }
 
     private RString create受給情報(DbV4001JukyushaDaichoEntity 受給者台帳情報, List<DbT4021ShiharaiHohoHenkoEntity> 支払方法変更リスト) {

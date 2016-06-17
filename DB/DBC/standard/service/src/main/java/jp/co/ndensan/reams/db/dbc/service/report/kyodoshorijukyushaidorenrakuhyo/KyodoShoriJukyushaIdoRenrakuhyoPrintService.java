@@ -41,7 +41,9 @@ public class KyodoShoriJukyushaIdoRenrakuhyoPrintService {
             KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity targets) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(targets, reportManager);
+            if (targets != null) {
+                print(targets, reportManager);
+            }
             collection = reportManager.publish();
         }
         return collection;

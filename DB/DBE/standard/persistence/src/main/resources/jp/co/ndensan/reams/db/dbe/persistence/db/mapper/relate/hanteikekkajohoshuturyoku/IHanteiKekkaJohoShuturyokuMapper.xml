@@ -29,7 +29,7 @@
         <result property="介護認定審査会意見" column="shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="count" column="COUNT" />
     </resultMap>
-    <select id="getHanteiKekkaIchiranList" resultMap="resultMap_HanteiKekkaIchiranList"
+    <select resultOrdered="true" id="getHanteiKekkaIchiranList" resultMap="resultMap_HanteiKekkaIchiranList"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
             fetchSize="500">
         SELECT
@@ -196,7 +196,7 @@
         <result property="合議体番号" column="gogitaiNo" />
         <result property="count" column="COUNT" />
     </resultMap>
-    <select id="getHanteiKekkaIchiranA3List" resultMap="resultMap_HanteiKekkaIchiranA3List"
+    <select resultOrdered="true" id="getHanteiKekkaIchiranA3List" resultMap="resultMap_HanteiKekkaIchiranA3List"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
             fetchSize="500">
         SELECT
@@ -351,7 +351,7 @@
         <result property="shinsakaiKaisaiYMD" column="審査会開催日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="gogitaiNo" column="合議体番号" />
     </resultMap>
-    <select id="getShinsakaiKaisaiKekkaJoho" resultMap="resultMap_ShinsakaiKaisaiKekkaJoho"
+    <select resultOrdered="true" id="getShinsakaiKaisaiKekkaJoho" resultMap="resultMap_ShinsakaiKaisaiKekkaJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
             fetchSize="500">
         SELECT
@@ -367,7 +367,7 @@
         <result property="shinsakaiIinShikakuCode" column="shinsakaiIinShikakuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kaigoninteiShinsakaiGichoKubunCode" column="kaigoninteiShinsakaiGichoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select id="getIinJoho" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+    <select resultOrdered="true" id="getIinJoho" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
             resultMap="resultMap_getShinsakaiIinJoho"
             fetchSize="500">
         SELECT
@@ -392,7 +392,7 @@
         <result property="shinsakaiKaisaiBashoName" column="shinsakaiKaisaiBashoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hanteiYoteiSu" column="hanteiYoteiSu" />
     </resultMap>
-    <select id="getShinsakaiJoho" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+    <select resultOrdered="true" id="getShinsakaiJoho" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
             resultMap="resultMap_getShinsakaiKaisaiKekkaJoho"
             fetchSize="500">
         SELECT
@@ -413,7 +413,7 @@
         GROUP BY
         DbT5511."shinsakaiKaisaiNo"
     </select>
-    <select id="getMiHanteiKensu" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+    <select resultOrdered="true" id="getMiHanteiKensu" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
             resultType="int">
         SELECT
         COUNT(0)
@@ -428,7 +428,7 @@
         AND DbT5502."hanteiKekkaCode" <![CDATA[<>]]>  '11')
     </select>
 
-    <select id="getMishinSaKensu" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+    <select resultOrdered="true" id="getMishinSaKensu" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
              resultType="int">
         SELECT
         COUNT(0)
@@ -440,7 +440,7 @@
         DbT5511."shinsakaiKaisaiNo" = #{kaisaiBangou}
         AND DbT5502."hanteiKekkaCode" = '11'
     </select>
-    <select id="getItiDoHanteiHenkoKensu" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+    <select resultOrdered="true" id="getItiDoHanteiHenkoKensu" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
              resultType="int">
         SELECT
         COUNT(0)
@@ -453,7 +453,7 @@
         WHERE
         DbT5511."shinsakaiKaisaiNo" = #{kaisaiBangou}
     </select>
-    <select id="getSinSakaiIkenTukeKensu" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+    <select resultOrdered="true" id="getSinSakaiIkenTukeKensu" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
             resultType="int">
         SELECT
         COUNT(0)
@@ -552,7 +552,7 @@
         <result property="二次判定_要介護４" column="二次判定_要介護４"/>
         <result property="二次判定_要介護５" column="二次判定_要介護５"/>
     </resultMap>
-    <select id="getShinsakaiKekkaJoho" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+    <select resultOrdered="true" id="getShinsakaiKekkaJoho" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
             resultMap="resultMap_getShinsakaiKekkaJoho">
         SELECT
         SUM(TB."新規申請件数") + SUM(TB."状態区分変更件数") AS 新規申請_状態区分変更件数,
@@ -924,7 +924,7 @@
         <result property="ninteiYukoshurouYMD" column="有効終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinsakaiKaisaiYMD" column="開催日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    <select id="getKekkatsuchiIchiranList" resultMap="resultMap_KekkatsuchiIchiran"
+    <select resultOrdered="true" id="getKekkatsuchiIchiranList" resultMap="resultMap_KekkatsuchiIchiran"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
             fetchSize="500">
         SELECT

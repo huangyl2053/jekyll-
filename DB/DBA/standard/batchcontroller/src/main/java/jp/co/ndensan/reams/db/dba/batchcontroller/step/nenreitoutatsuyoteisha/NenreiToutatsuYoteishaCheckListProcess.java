@@ -303,6 +303,7 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         getTennyushutsuHoryuTaishosha();
         for (DbT1010TennyushutsuHoryuTaishoshaEntity dbT1010entity : dbT1010Entity) {
             if (dbT1010entity.getShikibetsuCode().equals(entity.getShikibetsuCode())
+                    && entity.getNenreiyotainichi() != null && dbT1010entity.getTorokuIdoYMD() != null
                     && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1010entity.getTorokuIdoYMD())) {
                 entity.setJyotei(状態_転入保留対象者);
                 break;

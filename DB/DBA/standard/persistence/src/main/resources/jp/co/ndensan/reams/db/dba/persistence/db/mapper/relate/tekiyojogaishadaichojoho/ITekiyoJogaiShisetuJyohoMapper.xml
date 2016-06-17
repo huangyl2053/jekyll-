@@ -5,7 +5,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tekiyojogaishadaichojoho.ITekiyoJogaiShisetuJyohoMapper">
 
-    <select id="select宛名情報" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaishadaichojoho.TekiyoJogaiShisetuJyohoParameter" 
+    <select resultOrdered="true" id="select宛名情報" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaishadaichojoho.TekiyoJogaiShisetuJyohoParameter" 
             resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity" fetchSize="500">
         SELECT 
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
@@ -15,7 +15,7 @@
     </select>
 
     <!-- 適用除外施設情報の取得 -->    
-    <select id="select適用除外施設情報" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaishadaichojoho.TekiyoJogaiShisetuJyohoParameter" 
+    <select resultOrdered="true" id="select適用除外施設情報" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaishadaichojoho.TekiyoJogaiShisetuJyohoParameter" 
             resultMap="ResultMap_TekiyoJogaiShisetuJyohoRelateEntity" fetchSize="500">
         SELECT 
             DbT1002TekiyoJogaisha."shikibetsuCode" AS dbT1002TekiyoJogaisha_shikibetsuCode,

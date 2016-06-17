@@ -11,12 +11,10 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuK
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ShoKaishuKirokuKanriHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ValidationHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.dgKoufuKaishu_Row;
-import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -37,6 +35,10 @@ public class ShoKaishuKirokuKanri {
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString 被保険者証 = new RString("被保険者証");
+    private static final RString CODESHUBETSU_0002 = new RString("0002");
+    private static final RString CODESHUBETSU_0003 = new RString("0003");
+    private static final RString CODESHUBETSU_0004 = new RString("0004");
+    private static final RString CODESHUBETSU_0005 = new RString("0005");
 
     /**
      * 選択ボタン。<br/>
@@ -56,9 +58,9 @@ public class ShoKaishuKirokuKanri {
             requestDiv.getPanelInput().getTxtYukouKigen().setValue(new RDate(dgKoufuKaishuRow.getYukoKigen().toString()));
         }
         if (被保険者証.equals(dgKoufuKaishuRow.getKoufuType())) {
-            requestDiv.getPanelInput().getDdlKoufuJiyu().setDataSource(getCode());
+            requestDiv.getPanelInput().getDdlKoufuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0002)));
         } else {
-            requestDiv.getPanelInput().getDdlKoufuJiyu().setDataSource(getCode());
+            requestDiv.getPanelInput().getDdlKoufuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0004)));
         }
         requestDiv.getPanelInput().getDdlKoufuJiyu().setSelectedValue(dgKoufuKaishuRow.getKoufuJiyu());
         requestDiv.getPanelInput().getTxaKoufuRiyu().setValue(dgKoufuKaishuRow.getKofuRiyu());
@@ -66,18 +68,17 @@ public class ShoKaishuKirokuKanri {
             requestDiv.getPanelInput().getTxtKaisyuDate().setValue(new RDate(dgKoufuKaishuRow.getKaishuDate().toString()));
         }
         if (被保険者証.equals(dgKoufuKaishuRow.getKoufuType())) {
-            requestDiv.getPanelInput().getDdlKaisyuJiyu().setDataSource(getCode());
+            requestDiv.getPanelInput().getDdlKaisyuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0003)));
         } else {
-            requestDiv.getPanelInput().getDdlKaisyuJiyu().setDataSource(getCode());
+            requestDiv.getPanelInput().getDdlKaisyuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0005)));
         }
         requestDiv.getPanelInput().getDdlKaisyuJiyu().setSelectedValue(dgKoufuKaishuRow.getKaishuJiyu());
         requestDiv.getPanelInput().getTxaKaishuRiyu().setValue(dgKoufuKaishuRow.getKaishuRiyu());
         return createResponseData(requestDiv);
     }
 
-    private List<KeyValueDataSource> getCode() {
-        List<UzT0007CodeEntity> codeValueList = CodeMaster.getCode(SubGyomuCode.DBA介護資格, DBACodeShubetsu.交付証種類.getコード(),
-                FlexibleDate.getNowDate());
+    private List<KeyValueDataSource> getCode(CodeShubetsu codeShubetsu) {
+        List<UzT0007CodeEntity> codeValueList = CodeMaster.getCode(codeShubetsu);
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (UzT0007CodeEntity codeValueObject : codeValueList) {
             dataSourceList.add(new KeyValueDataSource(codeValueObject.getコード().getKey(), codeValueObject.getコード略称()));

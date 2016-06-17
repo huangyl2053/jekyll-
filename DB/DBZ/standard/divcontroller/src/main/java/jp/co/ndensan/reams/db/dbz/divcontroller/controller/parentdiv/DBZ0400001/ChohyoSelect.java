@@ -40,7 +40,7 @@ public class ChohyoSelect {
      * @return ResponseData<ChohyoSelectDiv>
      */
     public ResponseData<ChohyoSelectDiv> onLoad(ChohyoSelectDiv div) {
-        SubGyomuCode サブ業務コード = ControlDataHolder.getSubGyomuCD();
+        SubGyomuCode サブ業務コード = ControlDataHolder.getExecutionSubGyomuCode();
         List<ChohyoSeigyoKyotsu> resultList = finder.select帳票分類名称(サブ業務コード, true).records();
         getHandler(div).initialize(resultList);
         return ResponseData.of(div).respond();

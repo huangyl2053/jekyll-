@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010;
 
 import java.util.HashMap;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuKanrihyoInBatch;
-import jp.co.ndensan.reams.db.dbc.definition.DbcMapperInterfaces;
+import jp.co.ndensan.reams.db.dbc.definition.core.DbcMapperInterfaces;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3014KyufuKanrihyo200004Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3015KyufuKanrihyo200604Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbTKyufukanrihyoDataTempTableEntity;

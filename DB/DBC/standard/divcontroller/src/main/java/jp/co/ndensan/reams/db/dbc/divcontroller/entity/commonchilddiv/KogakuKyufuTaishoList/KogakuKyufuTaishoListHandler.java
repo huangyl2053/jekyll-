@@ -107,10 +107,12 @@ public class KogakuKyufuTaishoListHandler {
         List<dgTaishoshaIchiran_Row> rowList = new ArrayList<>();
         for (KogakuKyuufuTaishouListEntityResult koEntity : koTaList) {
             dgTaishoshaIchiran_Row row = new dgTaishoshaIchiran_Row();
-            if (koEntity.getEntity().get事業者番号() != null) {
+            if (koEntity.getEntity().get事業者番号() != null && ONE_RS.equals(koEntity.getEntity().get明細合計区分())) {
                 row.setData1(koEntity.getEntity().get事業者番号().value());
             }
-            row.setData2(koEntity.getEntity().get事業者名());
+            if (ONE_RS.equals(koEntity.getEntity().get明細合計区分())) {
+                row.setData2(koEntity.getEntity().get事業者名());
+            }
             if (ONE_RS.equals(koEntity.getEntity().get明細合計区分())) {
                 row.setData3(koEntity.getEntity().getサービス種類());
             } else {
@@ -366,6 +368,7 @@ public class KogakuKyufuTaishoListHandler {
         div.getDgTaishoshaIchiran().getGridSetting().setIsShowDeleteButtonColumn(false);
         div.getDgTaishoshaIchiran().getGridSetting().getColumns().get(2).setVisible(false);
         div.getMeisaiGokeiHenshuPanel().setDisplayNone(true);
+        div.getDgTaishoshaIchiran().getGridSetting().getColumns().get(0).setVisible(false);
     }
 
     /**
@@ -373,6 +376,9 @@ public class KogakuKyufuTaishoListHandler {
      */
     public void set明細編集モード() {
         div.getMeisaiGokeiHenshuPanel().setDisabled(true);
+        div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().setSelectedKey(key1);
+        div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().setSelectedKey(key1);
+        div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().setSelectedKey(key1);
     }
 
     private boolean checkState(dgTaishoshaIchiran_Row ddgRow) {

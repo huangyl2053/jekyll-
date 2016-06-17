@@ -68,7 +68,7 @@ public class ShisetsuNyutaishoMapperTest extends DbzTestBase {
 
         @Test
         public void get台帳種別のコードが_Entityの台帳種別と同一になる() {
-            assertThat(sut.get台帳種別().getCode(), is(entity.getDaichoShubetsu()));
+            assertThat(sut.get台帳種別().getコード(), is(entity.getDaichoShubetsu()));
         }
 
         @Test
@@ -93,7 +93,7 @@ public class ShisetsuNyutaishoMapperTest extends DbzTestBase {
 
         @Test
         public void get入所施設のget施設種類が_Entityの入所施設種類と同一になる() {
-            assertThat(sut.get入所施設().get施設種類().getCode(), is(entity.getNyushoShisetsuShurui()));
+            assertThat(sut.get入所施設().get施設種類().getコード(), is(entity.getNyushoShisetsuShurui()));
         }
 
         @Test
@@ -183,12 +183,12 @@ public class ShisetsuNyutaishoMapperTest extends DbzTestBase {
 
         @Test
         public void Entityの台帳種別と_施設入退所の台帳種別のコードが同一になる() {
-            assertThat(sut.getDaichoShubetsu(), is(施設入退所.get台帳種別().getCode()));
+            assertThat(sut.getDaichoShubetsu(), is(施設入退所.get台帳種別().getコード()));
         }
 
         @Test
         public void Entityの入所施設種類と_入所施設の施設種類が同一になる() {
-            assertThat(sut.getNyushoShisetsuShurui(), is(施設入退所.get入所施設().get施設種類().getCode()));
+            assertThat(sut.getNyushoShisetsuShurui(), is(施設入退所.get入所施設().get施設種類().getコード()));
         }
 
         @Test

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.hokenshakosei.HokenshaKosei;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;

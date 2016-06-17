@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -136,8 +137,7 @@ public class TokuchoIraiJohoSakuseiJokyo {
      * @return List<ShoriDateKanri>
      */
     public List<ShoriDateKanri> find年度内処理状況() {
-        FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
-                RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
+        FlexibleYear 調定年度 = FlexibleDate.getNowDate().getYear();
         List<RString> 処理名 = new ArrayList<>();
         処理名.add(ShoriName.特徴依頼情報作成.get名称());
         処理名.add(ShoriName.特徴異動情報作成.get名称());
@@ -155,8 +155,7 @@ public class TokuchoIraiJohoSakuseiJokyo {
      * @return List<ShoriDateKanri>
      */
     public List<ShoriDateKanri> find依頼金額計算処理状況() {
-        FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
-                RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
+        FlexibleYear 調定年度 = FlexibleDate.getNowDate().getYear();
         List<ShoriDateKanri> 処理状況 = new ArrayList<>();
         List<DbT7022ShoriDateKanriEntity> 処理状況の情報
                 = dac.select処理状況の情報(調定年度, ShoriName.依頼金額計算.get名称(), 連番);

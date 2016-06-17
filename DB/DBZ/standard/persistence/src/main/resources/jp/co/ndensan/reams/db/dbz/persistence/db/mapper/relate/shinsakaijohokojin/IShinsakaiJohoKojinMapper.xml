@@ -20,7 +20,7 @@ and open the template in the editor.
     </resultMap>
     
     
-    <select id="getKaisaikekkaandbashojoho"  
+    <select resultOrdered="true" id="getKaisaikekkaandbashojoho"  
             parameterType="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" 
             resultMap="KaisaiKekkaAndBashoJohoEntity">
         SELECT
@@ -54,7 +54,7 @@ and open the template in the editor.
         <result property="介護認定審査員資格コード" column="shinsakaiIinShikakuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
     
-    <select id="getShinsakaijyouhou" 
+    <select resultOrdered="true" id="getShinsakaijyouhou" 
             parameterType="jp.co.ndensan.reams.db.dbz.definition.param.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter" 
             resultMap="WariateIinAndIinJohoEntity">
         SELECT
@@ -84,7 +84,7 @@ and open the template in the editor.
     
    
     
-    <select id="getHoketsukaijyouhou"
+    <select resultOrdered="true" id="getHoketsukaijyouhou"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.param.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter" 
             resultMap="WariateIinAndIinJohoEntity">
         SELECT

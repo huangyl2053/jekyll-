@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
@@ -42,6 +43,25 @@ public class NonyuTsuchIchiranPrintService {
     private static final int INDEX_3 = 3;
     private static final int INDEX_2 = 2;
     private static final int INDEX_4 = 4;
+
+    /**
+     * 保険料納入通知書（本算定）発行一覧表(単一帳票出力用)
+     *
+     * @param 編集後本算定通知書共通情報List List<EditedHonSanteiTsuchiShoKyotsu>
+     * @param 帳票作成日時 RDateTime
+     * @param 出力期 int
+     * @param 出力順ID Long
+     * @return SourceDataCollection
+     */
+    public SourceDataCollection printSingle(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List,
+            RDateTime 帳票作成日時, int 出力期, Long 出力順ID) {
+        SourceDataCollection collection;
+        try (ReportManager reportManager = new ReportManager()) {
+            printタイプ(編集後本算定通知書共通情報List, 帳票作成日時, 出力期, 出力順ID, reportManager);
+            collection = reportManager.publish();
+        }
+        return collection;
+    }
 
     /**
      * printメソッド

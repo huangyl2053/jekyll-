@@ -6,7 +6,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinjoho.IShinsakaiIinJohoMapper">
 
-    <select id="getShinsakaiIinJohoEntity"
+    <select resultOrdered="true" id="getShinsakaiIinJohoEntity"
             resultMap="resultMap_ShinsakaiIinJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter" fetchSize="500">
         SELECT
@@ -33,7 +33,7 @@
         ;
     </select>
 
-    <select id="get審査会委員情報By表示条件"
+    <select resultOrdered="true" id="get審査会委員情報By表示条件"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter"
             resultMap="resultMap_ShinsakaiIinJohoEntity" fetchSize="500">
         SELECT
@@ -65,7 +65,7 @@
         dbT5594ShinsakaiIinJoho."dbT5594ShinsakaiIinJoho_shinsakaiIinCode"
     </select>
 
-    <select id="get所属機関一覧情報"
+    <select resultOrdered="true" id="get所属機関一覧情報"
             resultMap="resultMap_ShozokuKikanIchiranEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter"
             fetchSize="500">
@@ -103,7 +103,7 @@
         , DbT5595."sonotaKikanCode"
     </select>
 
-    <select id="get審査会委員カウント" resultType="int"
+    <select resultOrdered="true" id="get審査会委員カウント" resultType="int"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter"
             fetchSize="500">
         SELECT COUNT(0)

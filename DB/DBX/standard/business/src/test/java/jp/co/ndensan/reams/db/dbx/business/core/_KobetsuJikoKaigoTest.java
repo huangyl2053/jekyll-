@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbx.business.core;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.codeassigneditem.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeassigneditem.ShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.HokenShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.HokenShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.JushochiTokureishaKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShikakuHihokenshaKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.YoKaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.ShikakuHihokenshaKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;

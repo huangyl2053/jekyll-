@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.dokuji.KanryoInfoPhase;
+import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.KanryoInfoPhase;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -661,7 +661,7 @@ public class ShinseiKensakuHandler {
                 row.setShimei(nullToEmpty(被保険者氏名.getColumnValue()));
             }
             FlexibleDate 生年月日 = business.get生年月日();
-            if (生年月日 != null) {
+            if (生年月日 != null && !生年月日.isEmpty()) {
                 TextBoxDate hihokenshaBirthDay = new TextBoxDate();
                 hihokenshaBirthDay.setValue(new RDate(生年月日.toString()));
                 row.setHihokenshaBirthDay(hihokenshaBirthDay);

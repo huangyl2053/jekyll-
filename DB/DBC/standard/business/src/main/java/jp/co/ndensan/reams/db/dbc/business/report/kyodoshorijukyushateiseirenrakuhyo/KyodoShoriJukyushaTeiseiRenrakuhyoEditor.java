@@ -85,9 +85,10 @@ public class KyodoShoriJukyushaTeiseiRenrakuhyoEditor implements IKyodoShoriJuky
         source.telNo = 電話番号 != null ? 電話番号.value() : RString.EMPTY;
         YubinNo 郵便番号 = targets.get郵便番号();
         source.yubinNo = get郵便番号(郵便番号);
-
-        source.ichiSashiKingaku = DecimalFormatter
-                .toコンマ区切りRString(targets.get一時差止金額(), 0);
+        if (targets.get一時差止金額() != null) {
+            source.ichiSashiKingaku = DecimalFormatter
+                    .toコンマ区切りRString(targets.get一時差止金額(), 0);
+        }
         HihokenshaNo 世帯主被保険者番号 = targets.get世帯主被保険者番号();
         source.setainushiHihokenshaNo = 世帯主被保険者番号 != null ? 世帯主被保険者番号.value() : RString.EMPTY;
 
@@ -124,17 +125,20 @@ public class KyodoShoriJukyushaTeiseiRenrakuhyoEditor implements IKyodoShoriJuky
 
     private void set住所(KyodoShoriJukyushaTeiseiRenrakuhyoSource source) {
         RString 住所カナ = targets.get住所カナ();
-
-        source.jushoKana1 = (住所カナ != null && 住所カナ.length() >= INDEX_38)
-                ? 住所カナ.substring(INDEX_0, INDEX_38) : RString.EMPTY;
-        source.jushoKana2 = (住所カナ != null && 住所カナ.length() >= INDEX_38)
-                ? 住所カナ.substring(INDEX_38, 住所カナ.length()) : RString.EMPTY;
+        if (住所カナ != null) {
+            source.jushoKana1 = (住所カナ.length() >= INDEX_38
+                    ? 住所カナ.substring(INDEX_0, INDEX_38) : 住所カナ.substring(INDEX_0, 住所カナ.length()));
+            source.jushoKana2 = (住所カナ.length() >= INDEX_38
+                    ? 住所カナ.substring(INDEX_38, 住所カナ.length()) : RString.EMPTY);
+        }
         source.shutsuryokujunCode = targets.get帳票出力順序コード();
         RString 住所 = targets.get住所();
-        source.jusho1 = (住所 != null && 住所.length() >= INDEX_32)
-                ? 住所.substring(INDEX_0, INDEX_32) : RString.EMPTY;
-        source.jusho2 = (住所 != null && 住所.length() >= INDEX_32)
-                ? 住所.substring(INDEX_32, 住所.length()) : RString.EMPTY;
+        if (住所 != null) {
+            source.jusho1 = (住所.length() >= INDEX_32
+                    ? 住所.substring(INDEX_0, INDEX_32) : 住所.substring(INDEX_0, 住所.length()));
+            source.jusho2 = (住所.length() >= INDEX_32
+                    ? 住所.substring(INDEX_32, 住所.length()) : RString.EMPTY);
+        }
     }
 
     private void set年月日(KyodoShoriJukyushaTeiseiRenrakuhyoSource source) {

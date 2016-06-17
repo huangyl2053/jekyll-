@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- @reamsid_L DBU-0550-020  wanghui -->
 <mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigojuminhyotruku.IKaigojuminHyotrukuMapper">
- <select id="get宛名連動介護保険更新" 
+ <select resultOrdered="true" id="get宛名連動介護保険更新" 
          resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
         parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigojuminhyotruku.KaigojuminHyotrukuMapperParameter" fetchSize="500">
         SELECT

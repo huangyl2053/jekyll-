@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbe.business.core.gaikyotokkiyichirannyuroku.GaikyoTokkiYichiranNyurokuBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.chosahyokomoku.NinteichosaKomoku09B;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09B;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;

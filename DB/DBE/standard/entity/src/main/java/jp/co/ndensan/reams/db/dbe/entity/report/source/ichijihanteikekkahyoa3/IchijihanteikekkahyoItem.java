@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IchijihanteikekkahyoItem {
 
+    private RString 申請書管理番号;
     private RString 帳票名;
     private RString 管理番号;
     private RString 審査人数;

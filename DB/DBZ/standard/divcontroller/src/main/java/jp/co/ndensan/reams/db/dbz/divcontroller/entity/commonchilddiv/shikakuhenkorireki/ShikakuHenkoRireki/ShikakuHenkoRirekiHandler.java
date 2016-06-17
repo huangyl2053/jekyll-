@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.sikakukanrenido.SikakuKanrenIdo;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.param.sikakukanrenido.SikakuKanrenIdoParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;

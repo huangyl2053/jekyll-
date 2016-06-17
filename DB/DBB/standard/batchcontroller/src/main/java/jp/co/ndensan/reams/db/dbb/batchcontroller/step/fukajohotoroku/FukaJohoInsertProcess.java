@@ -55,8 +55,8 @@ public class FukaJohoInsertProcess extends BatchProcessBase<FukaJohoTorokuRelate
 
     private void insert介護期別(FukaJohoTorokuRelateEntity entity) {
         DbT2003KibetsuEntity db2003entity = new FukaJohoInsertResult().getDbT2003Entity(entity);
-        //db2003entity.setChoshuHouhou(get徴収方法(entity));
-        dbT2003Writer.insert(new FukaJohoInsertResult().getDbT2003Entity(entity));
+        db2003entity.setChoshuHouhou(get徴収方法(entity));
+        dbT2003Writer.insert(db2003entity);
     }
 
     private RString get徴収方法(FukaJohoTorokuRelateEntity entity) {

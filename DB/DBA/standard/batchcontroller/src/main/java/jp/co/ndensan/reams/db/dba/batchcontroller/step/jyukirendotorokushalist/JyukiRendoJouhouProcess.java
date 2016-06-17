@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.batchcontroller.step.jyukirendotorokushalist;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -44,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -78,6 +80,8 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
     private static final RString 解除異動 = new RString("解除異動");
     private static final RString 適用削除 = new RString("適用削除");
     private static final RString 解除削除 = new RString("解除削除");
+    private static final RString 改ページ = new RString("taishoJohotitle");
+    private List<RString> page_break_keys;
 
     private IJyukiRendoJouhouMapper jyukiRendoJouhouMapper;
     private JyukiRendoTorokushaListBatchProcessParameter processParameter;
@@ -90,6 +94,7 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
     protected void beforeExecute() {
         super.beforeExecute();
         jyukiRendoJouhouMapper = getMapper(IJyukiRendoJouhouMapper.class);
+        page_break_keys = Collections.unmodifiableList(Arrays.asList(改ページ));
     }
 
     @Override
@@ -234,7 +239,8 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         jyukiRendoTorokushaEntity.set住基連動情報(jyukiRendoJouhouList);
         JyukiRendoTorokushaListBatch jyukiRendoTorokushaListBatch = new JyukiRendoTorokushaListBatch();
         List<JukiRendoTorokuListItem> item = jyukiRendoTorokushaListBatch.getIdoCheckChohyoData(jyukiRendoTorokushaEntity);
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBA.DBA200007.getReportId().value()).create();
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBA.DBA200007.getReportId().value())
+                .addBreak(new BreakerCatalog<JukiRendoTorokuListReportSource>().simplePageBreaker(page_break_keys)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         JukiRendoTorokuListReport report = JukiRendoTorokuListReport.createFrom(item);
         report.writeBy(reportSourceWriter);

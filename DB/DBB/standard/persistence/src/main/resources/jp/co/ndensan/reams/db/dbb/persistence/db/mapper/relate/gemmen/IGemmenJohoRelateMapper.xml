@@ -6,7 +6,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.gemmen.IGemmenJohoRelateMapper">
 
-    <select resultOrdered="true" id="select減免の情報ByKey" resultMap="resultMap_GemmenJohoRelateEntity" 
+    <select id="select減免の情報ByKey" resultMap="resultMap_GemmenJohoRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gemmen.GemmenJohoRelateMapperParameter"
             fetchSize="500">
         <include refid="selectGemmenJohoRelateEntity" />
@@ -75,7 +75,7 @@
         <collection property="調定共通EntityList" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
     </resultMap>
     
-     <select resultOrdered="true" id="select減免の情報_決定更正後" resultMap="resultMap_GemmenJohoRelateEntity" 
+     <select id="select減免の情報_決定更正後" resultMap="resultMap_GemmenJohoRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gemmen.GemmenJohoRelateSonotaMapperParameter"
             fetchSize="500">
         SELECT
@@ -123,7 +123,7 @@
                  DbT2004Gemmen."dbT2004Gemmen_sakuseiKubun" = '2')))
     </select>
 
-     <select resultOrdered="true" id="select減免の情報_取消更正後" resultMap="resultMap_GemmenJohoRelateEntity" 
+     <select id="select減免の情報_取消更正後" resultMap="resultMap_GemmenJohoRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gemmen.GemmenJohoRelateSonotaMapperParameter"
             fetchSize="500">
         SELECT

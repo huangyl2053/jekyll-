@@ -53,6 +53,8 @@ public class PublicationShiryoShinsakaiHandler {
         List<RString> 事務 = new ArrayList<>();
         事務.add(事務用出力条件_概況特記);
         div.getChkPrintChoyoJimu().setDisabledItemsByKey(事務);
+        div.getTxtShiryoNoStart().setDisabled(true);
+        div.getTxtSiryoNoEnd().setDisabled(true);
     }
 
     /**
@@ -63,38 +65,54 @@ public class PublicationShiryoShinsakaiHandler {
         List<RString> 事務 = new ArrayList<>();
         List<RString> 事務_審査会資料 = new ArrayList<>();
         List<RString> 委員 = new ArrayList<>();
+        List<RString> 委員_審査会資料 = new ArrayList<>();
         if (作成条件_全件.equals(作成条件)) {
             事務.add(事務用出力条件_概況特記);
             div.getChkPrintChoyoJimu().setDisabledItemsByKey(事務);
             div.getChkPrintChohyoIin().setDisabledItemsByKey(委員);
+            div.getTxtShiryoNoStart().clearValue();
+            div.getTxtSiryoNoEnd().clearValue();
             div.getTxtShiryoNoStart().setDisabled(true);
             div.getTxtSiryoNoEnd().setDisabled(true);
         } else if (作成条件_範囲指定.equals(作成条件)) {
             事務.add(作成条件_全件);
             事務.add(事務用出力条件_予備判定記入表);
             事務.add(事務用出力条件_概況特記一覧);
+            事務.add(作成条件_範囲指定);
             事務_審査会資料.add(作成条件_全件);
             事務_審査会資料.add(作成条件_範囲指定);
             事務_審査会資料.add(出力条件_特記事項_一次判定結果票);
             事務_審査会資料.add(出力条件_主治医意見書);
             委員.add(委員用出力条件_予備判定記入表);
+            委員.add(作成条件_全件);
+            委員.add(作成条件_範囲指定);
+            委員_審査会資料.add(作成条件_全件);
+            委員_審査会資料.add(作成条件_範囲指定);
+            委員_審査会資料.add(出力条件_特記事項_一次判定結果票);
+            委員_審査会資料.add(出力条件_主治医意見書);
             div.getChkPrintChoyoJimu().setDisabledItemsByKey(事務);
             div.getChkPrintChohyoShinsakaiJimu().setDisabledItemsByKey(事務_審査会資料);
             div.getChkPrintChohyoIin().setDisabledItemsByKey(委員);
+            div.getChkPrintChohyoShinsakaiIin().setDisabledItemsByKey(委員_審査会資料);
             div.getTxtShiryoNoStart().setDisabled(false);
             div.getTxtSiryoNoEnd().setDisabled(false);
         } else {
             事務.add(作成条件_全件);
             事務.add(事務用出力条件_予備判定記入表);
             事務.add(事務用出力条件_概況特記一覧);
+            事務.add(作成条件_範囲指定);
             事務_審査会資料.add(作成条件_全件);
             事務_審査会資料.add(作成条件_範囲指定);
             事務_審査会資料.add(出力条件_特記事項_一次判定結果票);
             事務_審査会資料.add(出力条件_主治医意見書);
             委員.add(委員用出力条件_予備判定記入表);
+            委員.add(作成条件_全件);
+            委員.add(作成条件_範囲指定);
             div.getChkPrintChoyoJimu().setDisabledItemsByKey(事務);
             div.getChkPrintChohyoShinsakaiJimu().setDisabledItemsByKey(事務_審査会資料);
             div.getChkPrintChohyoIin().setDisabledItemsByKey(委員);
+            div.getTxtShiryoNoStart().clearValue();
+            div.getTxtSiryoNoEnd().clearValue();
             div.getTxtShiryoNoStart().setDisabled(true);
             div.getTxtSiryoNoEnd().setDisabled(true);
         }
@@ -286,7 +304,6 @@ public class PublicationShiryoShinsakaiHandler {
             印刷帳票_事務局リスト.add(事務用出力条件_予備判定記入表);
             印刷帳票_事務局リスト.add(事務用出力条件_概況特記一覧);
         }
-        印刷帳票_事務局リスト.add(作成条件_範囲指定);
         div.getChkPrintChoyoJimu().setSelectedItemsByKey(印刷帳票_事務局リスト);
         if (個別設定.equals(印刷帳票_委員)) {
             RString 審査会開催通知書 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員_開催通知書, 日期, SubGyomuCode.DBE認定支援);
@@ -302,7 +319,6 @@ public class PublicationShiryoShinsakaiHandler {
             印刷帳票_委員リスト.add(作成条件_全件);
             印刷帳票_委員リスト.add(委員用出力条件_予備判定記入表);
         }
-        印刷帳票_委員リスト.add(作成条件_範囲指定);
         div.getChkPrintChohyoIin().setSelectedItemsByKey(印刷帳票_委員リスト);
     }
 

@@ -10,7 +10,7 @@ and open the template in the editor.
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nyutaishoshakanri.INyutaishoshaKanriMapper">
 
 <!--介護保険施設情報件数を取得します-->
-    <select id="getHihokenshaDaichoCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
+    <select resultOrdered="true" id="getHihokenshaDaichoCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
         SELECT  
             COUNT(*)
         FROM     
@@ -29,7 +29,7 @@ and open the template in the editor.
     </select>
     
     <!--適用除外施設情報件数を取得します-->
-    <select id="getTekiyoJogaishaCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
+    <select resultOrdered="true" id="getTekiyoJogaishaCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
         SELECT  
             COUNT(*)
         FROM      
@@ -48,7 +48,7 @@ and open the template in the editor.
     </select>
       
     <!--住所地特例対象施設情報件数を取得します-->
-    <select id="getTashichosonJushochiTokureiCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
+    <select resultOrdered="true" id="getTashichosonJushochiTokureiCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
         SELECT  
             COUNT(*)
         FROM      

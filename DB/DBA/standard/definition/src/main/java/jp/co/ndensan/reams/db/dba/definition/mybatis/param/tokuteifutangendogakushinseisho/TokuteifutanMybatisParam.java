@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.mybatis.param.tokuteifutangendogakushinseisho;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -35,7 +35,7 @@ public final class TokuteifutanMybatisParam {
      * @return 介護保険特定負担限度額申請書の検索のパラメータ
      */
     public static TokuteifutanMybatisParam create施設情報パラメータ(RString 識別コード) {
-        return new TokuteifutanMybatisParam(DaichoType.被保険者.getCode(), 識別コード);
+        return new TokuteifutanMybatisParam(DaichoType.被保険者.getコード(), 識別コード);
     }
 
     /**

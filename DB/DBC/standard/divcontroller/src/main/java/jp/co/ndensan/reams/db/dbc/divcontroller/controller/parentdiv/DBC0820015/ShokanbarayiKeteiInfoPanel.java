@@ -67,9 +67,9 @@ public class ShokanbarayiKeteiInfoPanel {
                 paramter.getServiceTeikyoYM());
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, sikibetuKey);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getPanelOne().getCcdKaigoAtenaInfo().initialize(識別コード);
         if (!被保険者番号.isEmpty()) {
-            div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getPanelOne().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         } else {
             div.getPanelOne().getCcdKaigoShikakuKihon().setVisible(false);
         }
@@ -81,7 +81,7 @@ public class ShokanbarayiKeteiInfoPanel {
         }
         List<dgSyokanbaraikete_Row> 決定情報登録_償還払決定一覧 = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv()
                 .getDgSyokanbaraikete().getDataSource();
-        KetteJoho 決定情報 = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.決定情報, KetteJoho.class);
+        KetteJoho 決定情報 = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys.決定情報, KetteJoho.class);
         Map<RString, Integer> map_Row = new HashMap<>();
         for (dgSyokanbaraikete_Row list : 決定情報登録_償還払決定一覧) {
             map_Row.put(list.getNo(), list.getSagakuKingaku().getValue().intValue());

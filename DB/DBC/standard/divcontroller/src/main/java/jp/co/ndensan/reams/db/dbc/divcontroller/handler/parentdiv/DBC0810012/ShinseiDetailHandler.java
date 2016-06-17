@@ -57,9 +57,9 @@ public final class ShinseiDetailHandler {
             div.getPanelHead().getBtnShokanBaraiKeteiInfo().setDisabled(true);
         }
 
-        div.getPanelUp().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getPanelUp().getCcdKaigoAtenaInfo().initialize(識別コード);
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            div.getPanelUp().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getPanelUp().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         } else {
             div.getPanelUp().getCcdKaigoAtenaInfo().setVisible(false);
         }

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2230001;
 
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe223001.Dbe223001FlowParameter;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
+import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2230001.NinteiChosaTokusokujoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2230001.NinteiChosaTokusokujoHakkoHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;

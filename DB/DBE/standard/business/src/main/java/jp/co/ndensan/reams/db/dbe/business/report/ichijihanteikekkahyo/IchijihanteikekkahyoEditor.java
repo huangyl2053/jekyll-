@@ -114,16 +114,18 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
         source.listkijunTime_8 = item.get要介護認定等基準時間_医療関連();
         source.listkijunTime_9 = item.get要介護認定等基準時間_認知症加算();
         RString 警告コード = item.get警告コード();
-        RStringBuilder rstringBuilder = new RStringBuilder();
-        int len = 0;
-        while (-1 < 警告コード.indexOf("1", len)) {
-            int index1 = 警告コード.indexOf("1", len);
-            rstringBuilder.append(index1 + 1 < TEN ? "0" + String.valueOf(index1 + 1) : String.valueOf(index1 + 1));
-            rstringBuilder.append("、");
-            len = index1 + 1;
+        if (!RString.isNullOrEmpty(警告コード)) {
+            RStringBuilder rstringBuilder = new RStringBuilder();
+            int len = 0;
+            while (-1 < 警告コード.indexOf("1", len)) {
+                int index1 = 警告コード.indexOf("1", len);
+                rstringBuilder.append(index1 + 1 < TEN ? "0" + String.valueOf(index1 + 1) : String.valueOf(index1 + 1));
+                rstringBuilder.append("、");
+                len = index1 + 1;
+            }
+            RString result = rstringBuilder.toRString().substring(0, rstringBuilder.toRString().length() - 1);
+            source.keikokuNo = result;
         }
-        RString result = rstringBuilder.toRString().substring(0, rstringBuilder.toRString().length() - 1);
-        source.keikokuNo = result;
         source.listChukanhyoka_1 = item.get中間評価項目得点第1群();
         source.listChukanhyoka_2 = item.get中間評価項目得点第2群();
         source.listChukanhyoka_3 = item.get中間評価項目得点第3群();

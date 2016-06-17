@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShoriName;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -633,7 +633,7 @@ public final class NonyuTsuchishoTotalHandler {
                 ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         ShoriDateKanriManager manager = InstanceProvider.create(ShoriDateKanriManager.class);
         ShoriDateKanri result = manager.get抽出調定日時(SubGyomuCode.DBB介護賦課,
-                ShoriName.新年度管理情報作成.toRString(),
+                ShoriName.新年度管理情報作成.get名称(),
                 new FlexibleYear(調定年度).plusYear(1));
         RString 新年度管理情報 = 新年度管理情報_未作成;
         if (result != null && !FlexibleDate.EMPTY.equals(result.get基準年月日())) {

@@ -25,7 +25,7 @@
         <result property="kanrishaName" column="kanrishaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="serviceShuruiRyakusho" column="serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap> 
-    <select id="getJigyoshaJoho" resultMap="resultMap_getShikakuJohoEntity"
+    <select resultOrdered="true" id="getJigyoshaJoho" resultMap="resultMap_getShikakuJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaShisetsuKanriMapperParameter" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.allColumns_DbT7060KaigoJigyosha" />,
@@ -47,7 +47,7 @@
         AND
         rgdb."DbT7060KaigoJigyosha"."isDeleted"<![CDATA[<>]]> TRUE
     </select>
-    <select id="getServiceItiranHyojiJoho" resultMap="resultMap_getJigyoshaShiteiServiceEntity"
+    <select resultOrdered="true" id="getServiceItiranHyojiJoho" resultMap="resultMap_getJigyoshaShiteiServiceEntity"
              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiParameter" fetchSize="500">
         SELECT
         DbT7063."yukoKaishiYMD",
@@ -99,7 +99,7 @@
         ORDER BY
         DbT7063."serviceShuruiCode" ASC, DbT7063."yukoKaishiYMD" DESC
     </select>
-    <select id="getServiceItiranJoho" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7063KaigoJigyoshaShiteiServiceMapper.ResultMap_DbT7063KaigoJigyoshaShiteiServiceEntity"
+    <select resultOrdered="true" id="getServiceItiranJoho" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7063KaigoJigyoshaShiteiServiceMapper.ResultMap_DbT7063KaigoJigyoshaShiteiServiceEntity"
              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiParameter" fetchSize="500">
         SELECT
         DbT7063.*
@@ -146,7 +146,7 @@
         ORDER BY
         DbT7063."serviceShuruiCode" ASC, DbT7063."yukoKaishiYMD" DESC
     </select>
-    <select id="getCheckKikanJufuku" resultMap="resultMap_getKaigoJigyoshaRelateEntity"
+    <select resultOrdered="true" id="getCheckKikanJufuku" resultMap="resultMap_getKaigoJigyoshaRelateEntity"
              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaParameter" fetchSize="500">
         SELECT
             DbT7060."yukoKaishiYMD" as "DbT7060_yukoKaishiYMD" ,
@@ -160,7 +160,7 @@
             DbT7060."yukoKaishiYMD"<![CDATA[<>]]> #{yukoKaishiYMD}   
         </if>
     </select>
-    <select id="getCheckKikanJufukui" resultMap="resultMap_getKaigoJigyoshaRelateEntity"
+    <select resultOrdered="true" id="getCheckKikanJufukui" resultMap="resultMap_getKaigoJigyoshaRelateEntity"
              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaParameter" fetchSize="500">
         SELECT
             DbT1005."yukoKaishiYMD" as "DbT1005_yukoKaishiYMD",

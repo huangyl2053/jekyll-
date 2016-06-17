@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shisetsuidojoho.ShisetsuIdoJoho;
 import jp.co.ndensan.reams.db.dbd.service.core.shisetsuidojoho.ShisetsuIdoJohoFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
@@ -34,15 +35,11 @@ public class ShisetsuIdoJohoHandler {
     /**
      * 画面初期化処理です。
      *
-     * @param 被保険者番号 被保険者番号
+     * @param 識別コード 識別コード
      * @return is識別コード取得ある
      */
-    public boolean initializa(HihokenshaNo 被保険者番号) {
+    public boolean initializa(ShikibetsuCode 識別コード) {
         ShisetsuIdoJohoFinder finder = ShisetsuIdoJohoFinder.createIntance();
-        ShikibetsuCode 識別コード = finder.get識別コードBy被保険者番号(被保険者番号);
-        if (null == 識別コード) {
-            return false;
-        }
         List<ShisetsuIdoJoho> 介護施設入退所情報List = finder.get介護施設入退所情報(識別コード);
         div.getDgShisetsuIdoJoho().setDataSource(getDataSource(介護施設入退所情報List));
         return true;
@@ -65,6 +62,10 @@ public class ShisetsuIdoJohoHandler {
             dataSource.setJigyoshaName(介護施設入退所情報.get事業者名称());
             dataSource.setJigyoshaCode(介護施設入退所情報.get入所施設コード());
             //TODO 転出先保険者番号 法改正関連項目。テーブル未修正のため、TODOとする。
+            dataSource.setTenshutsusakiHokenshaNo(RString.EMPTY);
+            if (介護施設入退所情報.get入所施設種類() != null) {
+                dataSource.setShisetsuShurui(ShisetsuType.toValue(介護施設入退所情報.get入所施設種類()).get名称());
+            }
             dataSourceList.add(dataSource);
         }
         return dataSourceList;

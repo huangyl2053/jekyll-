@@ -315,7 +315,7 @@
         <collection property="調定共通Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
     </resultMap>
     
-    <select id="select平準化前の賦課の情報" resultMap="resultMap_FukaInfo"
+    <select resultOrdered="true" id="select平準化前の賦課の情報" resultMap="resultMap_FukaInfo"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.HeinjunkaAfterParameter" fetchSize="500">
         <include refid="selectHeinjunkaBefor" />
     </select>
@@ -567,7 +567,7 @@
         <result property="調定ID" column="choteiId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="収納ID" column="shunoId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select id="select特徴平準化賦課Temp" resultMap="resultMap_TokuchoHeinjunkaKakuteiEntity" fetchSize="500">
+    <select resultOrdered="true" id="select特徴平準化賦課Temp" resultMap="resultMap_TokuchoHeinjunkaKakuteiEntity" fetchSize="500">
         SELECT TEMP.*
         FROM "TEMP_TABLE_TokuchoHeinjunkaFuka" AS TEMP
     </select>
@@ -1059,7 +1059,7 @@
         <result property="収納ID" column="shunoId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="対象区分" column="taishoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select id="select賦課Temp" resultMap="resultMap_FukaTempEntity" fetchSize="500">
+    <select resultOrdered="true" id="select賦課Temp" resultMap="resultMap_FukaTempEntity" fetchSize="500">
         SELECT TEMP.*
         FROM "TEMP_TABLE_FukaTemp" AS TEMP
     </select>
@@ -1133,7 +1133,7 @@
         <association property="年金特徴回付情報_介護継承" resultMap="ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
-    <select id="selest特徴平準化確定一覧"
+    <select resultOrdered="true" id="selest特徴平準化確定一覧"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.TokuchoHeinjunkaKakuteiItirannParameter"
             resultMap="resultMap_selectTokuchoHeinjunkaKakuteiItirannEntity" fetchSize="500">
         <include refid="selectTokuchoHeinjunkaKakuteiItirannEntity" />
@@ -1142,7 +1142,6 @@
         SELECT TEMP.*,
                <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>,
                "UeT0511NenkinTokuchoKaifuJoho".*,
-               <!--<include refid="jp.co.ndensan.reams.bb.bbx.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumn_UeT0511NenkinTokuchoKaifuJoho"/>,-->
                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
         FROM "TEMP_TABLE_FukaTemp" AS TEMP
         INNER JOIN 

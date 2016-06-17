@@ -82,6 +82,10 @@ public enum ReportIdDBE {
     DBE230002(
             new ReportId("DBE230002_IkenshoSakuseiIraiIchiranhyo"), new RString("主治医意見書作成依頼一覧")),
     /**
+     * その他資料の帳票ID。
+     */
+    DBE517006(new ReportId("DBE517006_SonotashiryoA3"), new RString("その他資料")),
+    /**
      * 主治医意見書作成依頼一覧の帳票ＩＤです。
      */
     DBE230003(
@@ -321,7 +325,7 @@ public enum ReportIdDBE {
     /**
      * 申請に関する帳票発行の帳票ＩＤです。
      */
-    DBE012002(new ReportId("DBE120002_NinteichosaIraiHenko"), new RString("認定調査依頼先変更者一覧表")),
+    DBE012002(new ReportId("DBE012002_NinteichosaIraiHenko"), new RString("認定調査依頼先変更者一覧表")),
     /**
      * 申請に関する帳票発行の帳票ＩＤです。
      */
@@ -333,7 +337,7 @@ public enum ReportIdDBE {
     /**
      * 申請に関する帳票発行の帳票ＩＤです。
      */
-    DBE012003(new ReportId("DBE120002_NinteichosaIraiHenko"), new RString("認定調査結果と主治医意見書のチェックリスト")),
+    DBE012003(new ReportId("DBE012003_ChosahyoIkenshoCheckList"), new RString("認定調査結果と主治医意見書のチェックリスト")),
     /**
      * 主治医意見書未提出者一覧表の帳票ＩＤです。
      */
@@ -361,7 +365,19 @@ public enum ReportIdDBE {
     /**
      * 要介護認定申請モニタリストの帳票ＩＤです。
      */
-    DBE011002(new ReportId("DBE011002_ShinseiMonitor"), new RString("要介護認定申請モニタリスト"));
+    DBE011002(new ReportId("DBE011002_ShinseiMonitor"), new RString("要介護認定申請モニタリスト")),
+    /**
+     * 特記事項の帳票ＩＤです。
+     */
+    DBE091003(new ReportId("DBE091003_NinteiChosaTokkiImage"), new RString("特記事項")),
+    /**
+     * 特記事項の帳票ＩＤです。
+     */
+    DBE517131(new ReportId("DBE517131_TokkiText1A4"), new RString("特記事項")),
+    /**
+     * 特記事項の帳票ＩＤです。
+     */
+    DBE517134(new ReportId("DBE517134_TokkiText2A4"), new RString("特記事項"));
 
     private final ReportId reportId;
 

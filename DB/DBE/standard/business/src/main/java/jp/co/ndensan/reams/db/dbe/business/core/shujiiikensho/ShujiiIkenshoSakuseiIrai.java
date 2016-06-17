@@ -6,11 +6,11 @@ package jp.co.ndensan.reams.db.dbe.business.core.shujiiikensho;
 
 import jp.co.ndensan.reams.db.dbe.business.core.kaigodoctor.KaigoDoctor;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IkenshoIraiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IshiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.SakuseiryoSeikyuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.IshiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.SakuseiryoSeikyuKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 

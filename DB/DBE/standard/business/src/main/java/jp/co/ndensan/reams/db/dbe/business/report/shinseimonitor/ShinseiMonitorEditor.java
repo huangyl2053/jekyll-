@@ -79,8 +79,12 @@ public class ShinseiMonitorEditor implements IShinseiMonitorEditor {
         source.listShinseimonita_15 = dateFormat(item.get消除異動年月日());
         source.listShinseimonita_16 = RString.EMPTY;
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        source.hokenshaNo = new ExpandedInformation(new Code("100"), new RString("保険者番号"), item.get保険者番号());
-        source.hihokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
+        if (!RString.isNullOrEmpty(item.get保険者番号())) {
+            source.hokenshaNo = new ExpandedInformation(new Code("100"), new RString("保険者番号"), item.get保険者番号());
+        }
+        if (!RString.isNullOrEmpty(item.get被保険者番号())) {
+            source.hihokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
+        }
         return source;
     }
 

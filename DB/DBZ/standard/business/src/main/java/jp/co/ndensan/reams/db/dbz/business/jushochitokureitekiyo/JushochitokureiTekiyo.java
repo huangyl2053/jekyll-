@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.business.jushochitokureitekiyo;
 
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShikakuIdoBaseItem;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JushochitokureiTekiyoJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**

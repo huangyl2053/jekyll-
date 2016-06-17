@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.ShoYoshikiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoYoshikiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7037ShoKofuKaishuDac;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;

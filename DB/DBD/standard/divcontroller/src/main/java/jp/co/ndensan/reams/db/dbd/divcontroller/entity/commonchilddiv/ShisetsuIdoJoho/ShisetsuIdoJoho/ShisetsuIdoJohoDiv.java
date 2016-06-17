@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
@@ -29,8 +29,8 @@ public class ShisetsuIdoJohoDiv extends Panel implements IShisetsuIdoJohoDiv {
     private DataGrid<dgShisetsuIdoJoho_Row> dgShisetsuIdoJoho;
     @JsonProperty("btnClose")
     private Button btnClose;
-    @JsonProperty("hihokenshaNo")
-    private RString hihokenshaNo;
+    @JsonProperty("shikibetsuCode")
+    private RString shikibetsuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -75,28 +75,28 @@ public class ShisetsuIdoJohoDiv extends Panel implements IShisetsuIdoJohoDiv {
     }
 
     /*
-     * gethihokenshaNo
-     * @return hihokenshaNo
+     * getshikibetsuCode
+     * @return shikibetsuCode
      */
-    @JsonProperty("hihokenshaNo")
-    public RString getHihokenshaNo() {
-        return hihokenshaNo;
+    @JsonProperty("shikibetsuCode")
+    public RString getShikibetsuCode() {
+        return shikibetsuCode;
     }
 
     /*
-     * sethihokenshaNo
-     * @param hihokenshaNo hihokenshaNo
+     * setshikibetsuCode
+     * @param shikibetsuCode shikibetsuCode
      */
-    @JsonProperty("hihokenshaNo")
-    public void setHihokenshaNo(RString hihokenshaNo) {
-        this.hihokenshaNo = hihokenshaNo;
+    @JsonProperty("shikibetsuCode")
+    public void setShikibetsuCode(RString shikibetsuCode) {
+        this.shikibetsuCode = shikibetsuCode;
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public boolean initializa(HihokenshaNo 被保険者番号) {
-        return getHandler(this).initializa(被保険者番号);
+    public boolean initializa(ShikibetsuCode 識別コード) {
+        return getHandler(this).initializa(識別コード);
     }
 
     private ShisetsuIdoJohoHandler getHandler(ShisetsuIdoJohoDiv div) {

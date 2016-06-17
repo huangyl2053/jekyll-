@@ -37,8 +37,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JigyoshaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShinseiTodokedeDaikoKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.JigyoshaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -133,8 +133,8 @@ public class FutangendogakuNinteiShinseiHandler {
         }
         div.setLockKey(new RString("DB").concat(被保険者番号.value()).concat(new RString("FutanGendoGaku")));
         RealInitialLocker.lock(new LockingKey(div.getLockKey()));
-        div.getCcdAtenaInfo().onLoad(識別コード);
-        div.getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+        div.getCcdAtenaInfo().initialize(識別コード);
+        div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
         div.getCcdShisetsuNyushoInfo().onLoad(識別コード);
         List<FutanGendogakuNintei> 申請一覧情報 = get申請一覧情報(被保険者番号);
         ArrayList<FutanGendogakuNintei> 申請一覧情報ArrayList = new ArrayList<>(申請一覧情報);

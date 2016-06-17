@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.dgFu
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0020002.FukaErrorReportViewHandler;
 import jp.co.ndensan.reams.db.dbb.service.core.fukaerror.FukaErrorListService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReport;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportCommon;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportCommon;

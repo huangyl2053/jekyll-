@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.TokuteiShinryoServiceCode;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.TokuteiShinryouhiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.ddgToteishinryoTokubetushinryo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.dgdTokuteiShinryohi_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -27,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -175,16 +173,18 @@ public class TokuteiShinryohiHandler {
      *
      * @param list List<ShokanTokuteiShinryoTokubetsuRyoyo>
      * @param サービス年月 サービス年月
+     * @param 様式番号 RString
      */
     public void set特定診療費_特別診療費パネル(List<ShokanTokuteiShinryoTokubetsuRyoyo> list,
-            FlexibleYearMonth サービス年月) {
+            FlexibleYearMonth サービス年月,
+            RString 様式番号) {
 
         ShokanTokuteiShinryoTokubetsuRyoyo entity = list.get(0);
         TokuteiShinryoServiceCode serviceCode = ShokanbaraiJyokyoShokai.createInstance()
                 .getTokuteiShinryoServiceCodeInfo(
                         new ShikibetsuCode(entity.get識別番号()),
                         サービス年月,
-                        ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class));
+                        様式番号);
         div.getPanelThree().getPanelFive().getTxtShobyoMeiDown().setValue(entity.get傷病名());
         div.getPanelThree().getPanelFive().getTxtShikibetsuNo().setValue(entity.get識別番号());
         if (serviceCode != null && serviceCode.toEntity().getServiceMeisho() != null) {

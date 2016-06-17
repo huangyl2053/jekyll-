@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.kaigoninteichosain.KaigoNinteich
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairai.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.definition.core.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ChosainJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.kaigoninteichosainno.KaigoNinteichosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.kaigoninteichosainno.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;

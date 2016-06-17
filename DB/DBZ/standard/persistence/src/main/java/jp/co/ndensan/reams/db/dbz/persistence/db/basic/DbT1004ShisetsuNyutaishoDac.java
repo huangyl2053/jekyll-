@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaisho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaisho.daichoShubetsu;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaisho.nyushoYMD;
@@ -194,7 +194,7 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
                 table(DbT1004ShisetsuNyutaisho.class).
                 where(and(
                                 eq(shikibetsuCode, 識別コード),
-                                eq(daichoShubetsu, DaichoType.被保険者.getCode()))).
+                                eq(daichoShubetsu, DaichoType.被保険者.getコード()))).
                 order(by(taishoYMD, DESC)).
                 limit(INT_3).
                 toList(DbT1004ShisetsuNyutaishoEntity.class);

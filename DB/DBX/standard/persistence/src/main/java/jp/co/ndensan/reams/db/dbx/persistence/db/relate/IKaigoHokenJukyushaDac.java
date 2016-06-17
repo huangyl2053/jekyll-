@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbx.persistence.db.relate;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.YoKaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.KaigohokenJukyushaAndKojinEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

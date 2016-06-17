@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.GunshiCodeJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceShuruiJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigojigyoshano.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyoshaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.definition.core.kaigojigyoshano.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.JigyoshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.jigyosha.JigyoshaInputGuideFinder;
@@ -92,7 +92,7 @@ public class JiGyoSyaHandler {
      */
     public void search_Jigyosya(JigyoshaMode mode) {
 
-        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.介護保険施設.toRString())) {
+        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toString().equals(ShisetsuType.介護保険施設.toString())) {
 
             SearchResult<ServiceJigyoshaInputGuide> Jigyosha = JigyoshaInputGuideFinder.createInstance().getServiceJigyoshaInputGuide(
                     JigyoshaInputGuideParameter.createParam_ServiceJigyoshaInputGuide(new KaigoJigyoshaNo(
@@ -151,7 +151,7 @@ public class JiGyoSyaHandler {
             }
         }
 
-        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.住所地特例対象施設.toRString())) {
+        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toString().equals(ShisetsuType.住所地特例対象施設.toString())) {
 
             RString 管内 = RString.EMPTY;
             RString 管外 = RString.EMPTY;
@@ -221,7 +221,7 @@ public class JiGyoSyaHandler {
             }
         }
 
-        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.適用除外施設.toRString())) {
+        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toString().equals(ShisetsuType.適用除外施設.toString())) {
 
             SearchResult<ServiceJigyoshaInputGuide> Jigyosha = JigyoshaInputGuideFinder.createInstance().getTekiyoJogaiInputGuide(
                     JigyoshaInputGuideParameter.createParam_TekiyoJogaiInputGuide(new KaigoJigyoshaNo(
@@ -283,7 +283,7 @@ public class JiGyoSyaHandler {
      */
     public void initialize(JigyoshaMode mode) {
 
-        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.介護保険施設.toRString())) {
+        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toString().equals(ShisetsuType.介護保険施設.toString())) {
 
             if (修正.equals(ViewStateHolder.get(ViewStateKeys.事業者施設選択入力ガイド_モード, RString.class))
                     || 削除.equals(ViewStateHolder.get(ViewStateKeys.事業者施設選択入力ガイド_モード, RString.class))) {
@@ -311,7 +311,7 @@ public class JiGyoSyaHandler {
             search_GunshiCode(mode);
         }
 
-        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.住所地特例対象施設.toRString())) {
+        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toString().equals(ShisetsuType.住所地特例対象施設.toString())) {
 
             if (修正.equals(ViewStateHolder.get(ViewStateKeys.事業者施設選択入力ガイド_モード, RString.class))
                     || 削除.equals(ViewStateHolder.get(ViewStateKeys.事業者施設選択入力ガイド_モード, RString.class))) {
@@ -329,7 +329,7 @@ public class JiGyoSyaHandler {
             div.getOtherTokureiShisetsu().setDisplayNone(false);
         }
 
-        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.適用除外施設.toRString())) {
+        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toString().equals(ShisetsuType.適用除外施設.toString())) {
 
             if (修正.equals(ViewStateHolder.get(ViewStateKeys.事業者施設選択入力ガイド_モード, RString.class))
                     || 削除.equals(ViewStateHolder.get(ViewStateKeys.事業者施設選択入力ガイド_モード, RString.class))) {
@@ -354,7 +354,7 @@ public class JiGyoSyaHandler {
      */
     public void clear(JigyoshaMode mode) {
 
-        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.介護保険施設.toRString())) {
+        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toString().equals(ShisetsuType.介護保険施設.toString())) {
 
             IAssociationFinder finder = AssociationFinderFactory.createInstance();
             div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(true);
@@ -380,7 +380,7 @@ public class JiGyoSyaHandler {
             search_GunshiCode(mode);
         }
 
-        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.住所地特例対象施設.toRString())) {
+        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toString().equals(ShisetsuType.住所地特例対象施設.toString())) {
 
             div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(false);
             div.getOtherTokureiShisetsu().getRadKannaiKanngaiKubun().setSelectedKey(管内管外区分_全て);
@@ -399,7 +399,7 @@ public class JiGyoSyaHandler {
             div.getOtherTokureiShisetsu().setVisible(true);
         }
 
-        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.適用除外施設.toRString())) {
+        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toString().equals(ShisetsuType.適用除外施設.toString())) {
 
             div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(false);
             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(DbBusinessConfig.
@@ -462,7 +462,7 @@ public class JiGyoSyaHandler {
         for (JigyoshaKubun type : JigyoshaKubun.values()) {
 
             KeyValueDataSource dataSource = new KeyValueDataSource();
-            dataSource.setKey(type.getコード());
+            dataSource.setKey(type.getCode());
             dataSource.setValue(type.get名称());
             dataSourceList.add(dataSource);
         }

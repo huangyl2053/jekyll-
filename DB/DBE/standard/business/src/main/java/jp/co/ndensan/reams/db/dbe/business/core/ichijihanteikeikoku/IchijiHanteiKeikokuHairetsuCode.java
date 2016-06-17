@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikeikoku;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IchijiHanteiKeikokuShubetsu;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IchijiHanteiKeikokuUmu;
+import jp.co.ndensan.reams.db.dbe.definition.core.IchijiHanteiKeikokuShubetsu;
+import jp.co.ndensan.reams.db.dbe.definition.core.IchijiHanteiKeikokuUmu;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

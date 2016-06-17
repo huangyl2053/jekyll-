@@ -32,7 +32,7 @@ public class HokaShichosonJyusyochiTokureisyaKanriHandler {
      * @param 識別コード 識別コード
      */
     public void onLoad(ShikibetsuCode 識別コード) {
-        div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
         div.getShikakuKihonJoho().getCddTaJushochiTokureishaKanri().initialize(識別コード);
     }
 }

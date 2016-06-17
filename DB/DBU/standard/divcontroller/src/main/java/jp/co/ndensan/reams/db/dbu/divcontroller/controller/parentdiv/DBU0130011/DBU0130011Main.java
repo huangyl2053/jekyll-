@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbu.service.core.roujinhokenjukyushadaichokanri.Ro
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import static jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RojinHokenJukyushaJoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -43,8 +43,8 @@ public class DBU0130011Main {
         ShikibetsuCode shikibetsuCode = key.get識別コード();
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
         initialize(div, RoujinHokenJukyushaDaichoKanriManager.createInstance().getRoukenJukyuJoho(shikibetsuCode));
-        div.getAtenaAreaPanel().getCcdKaigoAtenaInfo().onLoad(shikibetsuCode);
-        div.getAtenaAreaPanel().getCcdKaigoShikakuKihon().onLoad(hihokenshaNo);
+        div.getAtenaAreaPanel().getCcdKaigoAtenaInfo().initialize(shikibetsuCode);
+        div.getAtenaAreaPanel().getCcdKaigoShikakuKihon().initialize(hihokenshaNo);
         return ResponseData.of(div).respond();
     }
 

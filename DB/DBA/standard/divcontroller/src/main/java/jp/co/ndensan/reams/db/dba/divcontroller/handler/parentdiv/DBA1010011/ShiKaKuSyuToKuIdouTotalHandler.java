@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.kyotsutokei.ConfigKeysGappeiJohoKanri;
+import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysGappeiJohoKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
@@ -341,12 +341,12 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
             }
         }
         if (!RString.isNullOrEmpty(被保険者番号.getColumnValue())) {
-            div.getKihonJoho().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getKihonJoho().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         }
     }
 
     private void kaigoNinteiAtenaInfo_onload(ShikibetsuCode 識別コード) {
-        div.getKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
     }
 
     private LasdecCode get導入形態チェック() {

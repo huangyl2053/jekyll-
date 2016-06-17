@@ -5,13 +5,13 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.shafukukeigen.IShafukuRiyoshaFutanKeigenMapper">
 
-    <select id="select社会福祉法人等利用者負担軽減ByKey" 
+    <select resultOrdered="true" id="select社会福祉法人等利用者負担軽減ByKey" 
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenMapperParameter"
             resultMap="resultMap_ShafukuRiyoshaFutanKeigenEntity" fetchSize="500">
         <include refid="selectShafukuRiyoshaFutanKeigenEntity" />
     </select>
 
-    <select id="select社会福祉法人等利用者負担軽減リストBy主キー1" 
+    <select resultOrdered="true" id="select社会福祉法人等利用者負担軽減リストBy主キー1" 
             resultMap="resultMap_ShafukuRiyoshaFutanKeigenEntity" 
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenMapperParameter"
             fetchSize="500">

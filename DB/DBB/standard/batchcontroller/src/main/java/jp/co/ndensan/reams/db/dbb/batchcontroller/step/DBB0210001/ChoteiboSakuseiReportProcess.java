@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.choteibo.ChoteiboKitsukiFuchoI
 import jp.co.ndensan.reams.db.dbb.business.report.choteibo.ChoteiboKitsukiItem;
 import jp.co.ndensan.reams.db.dbb.business.report.choteibo.ChoteiboKitsukiTokuchoItem;
 import jp.co.ndensan.reams.db.dbb.business.report.choteibo.ChoteiboReport;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choteibo.ChoteiboShoriHizukeMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.choteibo.ChoteiboProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
@@ -42,7 +43,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -269,9 +269,9 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         RString genmenSu = RString.EMPTY;
         RString nofuGakuSokei = RString.EMPTY;
         for (GokeiDataEntity 合計データ : 合計データリスト) {
-            if (ChoshuHohoKibetsu.普通徴収.code().equals(合計データ.get徴収方法())) {
+            if (ChoshuHohoKibetsu.普通徴収.getコード().equals(合計データ.get徴収方法())) {
                 kitsukiFuchoItem = makeKitsukiFuchoItem(合計データ);
-            } else if (ChoshuHohoKibetsu.特別徴収.code().equals(合計データ.get徴収方法())) {
+            } else if (ChoshuHohoKibetsu.特別徴収.getコード().equals(合計データ.get徴収方法())) {
                 kitsukiTokuchoItem = makeKitsukiTokuchoItem(合計データ);
             }
             genmenGaku = changeDecimalToRString(合計データ.get減免の調定額の総計());
@@ -400,9 +400,9 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         Decimal 普徴者数の合計 = Decimal.ZERO;
         Decimal 特徴者数の合計 = Decimal.ZERO;
         for (GokeiDataEntity 合計データ : 合計データリスト) {
-            if (ChoshuHohoKibetsu.普通徴収.code().equals(合計データ.get徴収方法())) {
+            if (ChoshuHohoKibetsu.普通徴収.getコード().equals(合計データ.get徴収方法())) {
                 dankaiGokeiFuchoItem = makeChoteiboDankaiGokeiFuchoItem(合計データ);
-            } else if (ChoshuHohoKibetsu.特別徴収.code().equals(合計データ.get徴収方法())) {
+            } else if (ChoshuHohoKibetsu.特別徴収.getコード().equals(合計データ.get徴収方法())) {
                 dankaiGokeiTokuchoItem = makeChoteiboDankaiGokeiTokuchoItem(合計データ);
             }
             listDankaiBetsuGokei_2 = listDankaiBetsuGokei_2.isEmpty()
@@ -506,9 +506,9 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         ChoteiboKitsukiTokuchoItem kitsukiTokuchoItem = null;
         ChoteiboKitsukiFuchoItem kitsukiFuchoItem = null;
         for (NendoDataEntity 年度データ : 年度データリスト) {
-            if (ChoshuHohoKibetsu.普通徴収.code().equals(年度データ.get徴収方法())) {
+            if (ChoshuHohoKibetsu.普通徴収.getコード().equals(年度データ.get徴収方法())) {
                 kitsukiFuchoItem = makeChoteiboKitsukiFuchoItem(年度データ);
-            } else if (ChoshuHohoKibetsu.特別徴収.code().equals(年度データ.get徴収方法())) {
+            } else if (ChoshuHohoKibetsu.特別徴収.getコード().equals(年度データ.get徴収方法())) {
                 kitsukiTokuchoItem = makeKitsukiTokuchoItem(年度データ);
             }
             genmenGaku = changeDecimalToRString(年度データ.get減免の調定額());
@@ -583,7 +583,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         }
-        
+
         if (年度データ.get調定年度().equals(年度データ.get賦課年度())) {
             return new ChoteiboKitsukiFuchoItem(
                     changeDecimalToRString(年度データ.get普通徴収の調定額の合計()),
@@ -680,7 +680,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
                     随時期月判断(第13期, 年度データ.get賦課年度()), 随時期月判断(第14期, 年度データ.get賦課年度()));
         }
     }
-    
+
     private RString get月As期By期月リスト(int 期, KitsukiList 期月リスト) {
         if (null == 期月リスト.get期の月(期) || 期月リスト.get期の月(期).isEmpty()) {
             return RString.EMPTY;
@@ -720,9 +720,9 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         Decimal 普徴者数の合計 = Decimal.ZERO;
         Decimal 特徴者数の合計 = Decimal.ZERO;
         for (NendoDataEntity 年度データ : 年度データリスト) {
-            if (ChoshuHohoKibetsu.普通徴収.code().equals(年度データ.get徴収方法())) {
+            if (ChoshuHohoKibetsu.普通徴収.getコード().equals(年度データ.get徴収方法())) {
                 dankaiGokeiFuchoItem = makeChoteiboDankaiGokeiFuchoItem(年度データ);
-            } else if (ChoshuHohoKibetsu.特別徴収.code().equals(年度データ.get徴収方法())) {
+            } else if (ChoshuHohoKibetsu.特別徴収.getコード().equals(年度データ.get徴収方法())) {
                 dankaiGokeiTokuchoItem = makeChoteiboDankaiGokeiTokuchoItem(年度データ);
             }
             listDankaiBetsuGokei_2 = listDankaiBetsuGokei_2.isEmpty()
@@ -853,9 +853,9 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         ChoteiboDankaiFuchoItem dankaiFuchoItem = null;
         ChoteiboDankaiTokuchoItem dankaiTokuchoItem = null;
         for (GokeiDataEntity 合計データ : 合計データリスト) {
-            if (ChoshuHohoKibetsu.普通徴収.code().equals(合計データ.get徴収方法())) {
+            if (ChoshuHohoKibetsu.普通徴収.getコード().equals(合計データ.get徴収方法())) {
                 dankaiFuchoItem = makeChoteiboDankaiFuchoItem(段階表記, 合計データ);
-            } else if (ChoshuHohoKibetsu.特別徴収.code().equals(合計データ.get徴収方法())) {
+            } else if (ChoshuHohoKibetsu.特別徴収.getコード().equals(合計データ.get徴収方法())) {
                 dankaiTokuchoItem = makeChoteiboDankaiTokuchoItem(段階表記, 合計データ);
             }
             if (null == 合計データ.get合計の段階リスト() || 合計データ.get合計の段階リスト().isEmpty()) {
@@ -984,9 +984,9 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         ChoteiboDankaiFuchoItem dankaiFuchoItem = null;
         ChoteiboDankaiTokuchoItem sankaiTokuchoItem = null;
         for (NendoDataEntity 年度データ : 年度データリスト) {
-            if (ChoshuHohoKibetsu.普通徴収.code().equals(年度データ.get徴収方法())) {
+            if (ChoshuHohoKibetsu.普通徴収.getコード().equals(年度データ.get徴収方法())) {
                 dankaiFuchoItem = makeChoteiboDankaiFuchoItem(段階表記, 年度データ);
-            } else if (ChoshuHohoKibetsu.特別徴収.code().equals(年度データ.get徴収方法())) {
+            } else if (ChoshuHohoKibetsu.特別徴収.getコード().equals(年度データ.get徴収方法())) {
                 sankaiTokuchoItem = makeChoteiboDankaiTokuchoItem(段階表記, 年度データ);
             }
             if (null != 年度データ.get段階小計リスト() && !年度データ.get段階小計リスト().isEmpty()) {
@@ -1355,12 +1355,12 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         List<GokeiBubunSoukeiEntity> 合計部分総計情報リスト = choteiboSakuseiMapper.selectAll合計部分総計情報();
         GokeiDataEntity 特別徴収合計データ = new GokeiDataEntity();
         List<DankaiShokeiEntity> 特別徴収合計の段階リスト = new ArrayList<>();
-        特別徴収合計データ.set徴収方法(ChoshuHohoKibetsu.特別徴収.code());
+        特別徴収合計データ.set徴収方法(ChoshuHohoKibetsu.特別徴収.getコード());
         特別徴収合計データ.set合計の段階リスト(特別徴収合計の段階リスト);
         GokeiDataEntity 普通徴収合計データ = new GokeiDataEntity();
         List<DankaiShokeiEntity> 普通徴収合計の段階リスト = new ArrayList<>();
         普通徴収合計データ.set合計の段階リスト(普通徴収合計の段階リスト);
-        普通徴収合計データ.set徴収方法(ChoshuHohoKibetsu.普通徴収.code());
+        普通徴収合計データ.set徴収方法(ChoshuHohoKibetsu.普通徴収.getコード());
         GokeiDataEntity その他合計データ = new GokeiDataEntity();
         List<DankaiShokeiEntity> その他合計の段階リスト = new ArrayList<>();
         その他合計データ.set合計の段階リスト(その他合計の段階リスト);
@@ -1392,21 +1392,21 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         List<KibetsuGokeiEntity> 期別合計リスト = choteiboSakuseiMapper.select期別合計情報(param);
         List<DankaiGokeiEntity> 段階合計リスト = choteiboSakuseiMapper.select段階合計情報(param);
         NendoDataEntity 年度特別徴収データ = new NendoDataEntity();
-        年度特別徴収データ.set徴収方法(ChoshuHohoKibetsu.特別徴収.code());
+        年度特別徴収データ.set徴収方法(ChoshuHohoKibetsu.特別徴収.getコード());
         年度特別徴収データ.set調定年度(choteiNendo);
         年度特別徴収データ.set賦課年度(fukaNendo);
         NendoDataEntity 年度普通徴収データ = new NendoDataEntity();
-        年度普通徴収データ.set徴収方法(ChoshuHohoKibetsu.普通徴収.code());
+        年度普通徴収データ.set徴収方法(ChoshuHohoKibetsu.普通徴収.getコード());
         年度普通徴収データ.set調定年度(choteiNendo);
         年度普通徴収データ.set賦課年度(fukaNendo);
-        add期別小計To年度データ(年度特別徴収データ, 期別小計リスト, ChoshuHohoKibetsu.特別徴収.code());
-        add期別小計To年度データ(年度普通徴収データ, 期別小計リスト, ChoshuHohoKibetsu.普通徴収.code());
-        add段階小計リストTo年度データ(年度特別徴収データ, 段階小計リスト, ChoshuHohoKibetsu.特別徴収.code());
-        add段階小計リストTo年度データ(年度普通徴収データ, 段階小計リスト, ChoshuHohoKibetsu.普通徴収.code());
-        add期別合計To年度データ(年度特別徴収データ, 期別合計リスト, ChoshuHohoKibetsu.特別徴収.code());
-        add期別合計To年度データ(年度普通徴収データ, 期別合計リスト, ChoshuHohoKibetsu.普通徴収.code());
-        add段階合計To年度データ(年度特別徴収データ, 段階合計リスト, ChoshuHohoKibetsu.特別徴収.code());
-        add段階合計To年度データ(年度普通徴収データ, 段階合計リスト, ChoshuHohoKibetsu.普通徴収.code());
+        add期別小計To年度データ(年度特別徴収データ, 期別小計リスト, ChoshuHohoKibetsu.特別徴収.getコード());
+        add期別小計To年度データ(年度普通徴収データ, 期別小計リスト, ChoshuHohoKibetsu.普通徴収.getコード());
+        add段階小計リストTo年度データ(年度特別徴収データ, 段階小計リスト, ChoshuHohoKibetsu.特別徴収.getコード());
+        add段階小計リストTo年度データ(年度普通徴収データ, 段階小計リスト, ChoshuHohoKibetsu.普通徴収.getコード());
+        add期別合計To年度データ(年度特別徴収データ, 期別合計リスト, ChoshuHohoKibetsu.特別徴収.getコード());
+        add期別合計To年度データ(年度普通徴収データ, 期別合計リスト, ChoshuHohoKibetsu.普通徴収.getコード());
+        add段階合計To年度データ(年度特別徴収データ, 段階合計リスト, ChoshuHohoKibetsu.特別徴収.getコード());
+        add段階合計To年度データ(年度普通徴収データ, 段階合計リスト, ChoshuHohoKibetsu.普通徴収.getコード());
         add特普徴者数の合計To年度データ(年度普通徴収データ, 段階合計リスト);
         年度データリスト.add(年度特別徴収データ);
         年度データリスト.add(年度普通徴収データ);
@@ -1476,13 +1476,13 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
                 年度データ.set減免の調定額(期別合計.getGenmenChoteigaku());
             }
             if (null != 期別合計.getChoshuHouhou()
-                    && ChoshuHohoKibetsu.特別徴収.code().equals(徴収方法)
+                    && ChoshuHohoKibetsu.特別徴収.getコード().equals(徴収方法)
                     && 徴収方法.equals(期別合計.getChoshuHouhou())) {
                 年度データ.set特別徴収の調定額の合計(期別合計.getTobetsuChoteigakuCount());
                 年度データ.set特徴歳出還付の件数(期別合計.getTkSaishutsuKampuCount());
                 年度データ.set特徴歳出還付の調定額(期別合計.getTkSaishutsuKampuChoteigaku());
             } else if (null != 期別合計.getChoshuHouhou()
-                    && ChoshuHohoKibetsu.普通徴収.code().equals(徴収方法)
+                    && ChoshuHohoKibetsu.普通徴収.getコード().equals(徴収方法)
                     && 徴収方法.equals(期別合計.getChoshuHouhou())) {
                 年度データ.set普通徴収の調定額の合計(期別合計.getFutsuChoteigakuCount());
                 年度データ.set普徴歳出還付の件数(期別合計.getFuSaishutsuKampuCount());

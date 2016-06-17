@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2005SetaiHaakuTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2019SetaiSudeTempEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.ISetaiShotokuKazeiHanteiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HonninKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojins;

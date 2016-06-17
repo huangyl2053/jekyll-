@@ -5,9 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.relate;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.relate.ShisetsuNyutaishoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.relate.KaigoJogaiTokureiTaishoShisetsuDac;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ShoriTimestamp;
@@ -155,7 +153,7 @@ public class ShisetsuNyutaishoTokureiTaishoRelateDacTest extends DbzTestDacBase 
             entity.setShichosonCode(市町村コード);
             entity.setRirekiNo(履歴番号);
             entity.setShikibetsuCode(識別コード);
-            entity.setDaichoShubetsu(台帳種別.getCode());
+            entity.setDaichoShubetsu(台帳種別.getコード());
             介護保険施設入退所Dac.save(entity);
         }
 

@@ -11,8 +11,8 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakuseitokusokujo.ShujiiIkenshoSakuseiTokusokujoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakuseitokusokujo.ShujiiIkenshoSakuseiTokusokujoReport;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShuturyokuJyoukenProcessParamter;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe233001.ShujiiIkenTokusokujoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshosakuseitokusokujo.ShujiiIkenshoSakuseiTokusokujoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe233001.IDbe233001RelateMapper;
@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -191,9 +192,10 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
         if (shujii == null) {
             shujii = new DbT5912ShujiiJohoEntity();
         }
+        YubinNo yubinNo = shujii.getYubinNo();
         RString 宛名郵便番号 = RString.EMPTY;
-        if (shujii.getYubinNo() != null) {
-            宛名郵便番号 = shujii.getYubinNo().getColumnValue();
+        if (yubinNo != null) {
+            宛名郵便番号 = yubinNo.getColumnValue();
         }
         CustomerBarCode barcode = new CustomerBarCode();
         RString 宛名名称付与 = RString.EMPTY;

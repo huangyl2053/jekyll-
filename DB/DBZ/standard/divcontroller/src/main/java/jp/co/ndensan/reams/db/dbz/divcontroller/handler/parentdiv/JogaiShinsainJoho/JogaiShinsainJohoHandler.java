@@ -58,7 +58,7 @@ public class JogaiShinsainJohoHandler {
             div.getBtnShinkiTsuika().setDisabled(true);
             div.getTxtShinsakaiIinCode().setDisabled(true);
             div.getBtnShinsakaiIinGuide().setDisabled(true);
-            div.getBtnToroku().setDisabled(false);
+            div.getBtnToroku().setDisabled(true);
         }
     }
 

@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.db.dbz.business.config.ShotokuHikidashiConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.Shotoku;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke;
+import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysHizuke;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.GekihenkanwaSochi;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.TorokuGyomu;
@@ -128,7 +128,7 @@ public final class ShotokuJohoTorokuHandler {
             KaigoFukaKihonSearchKey searchKey = new KaigoFukaKihonSearchKey.Builder(通知書番号, 賦課年度, 市町村コード, 識別コード).build();
             div.getKaigoFukaKihon().load(searchKey);
         }
-        div.getKaigoAtenaInfo().onLoad(識別コード);
+        div.getKaigoAtenaInfo().initialize(識別コード);
         load世帯所得情報一覧(識別コード, 所得年度, 所得基準日時, true);
         日付関連_所得年度コンフィグによる制御(div.getSetaiShotokuInfo().getTxtSetaiIchiranKazeiNendo().getDomain());
         AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード));

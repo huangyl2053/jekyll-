@@ -9,6 +9,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshikyuketteiin.DbWT0002InsertParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshikyuketteiin.ShokanShikyuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT3036ShokanHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.ShokanShikyuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.ShokanShikyuKetteiInResultEntity;
@@ -34,11 +36,18 @@ public interface IShokanShikyuKetteiInMapper {
     void update償還払支給判定結果一時_更新DB有無(ShokanShikyuKetteiInResultEntity entity);
 
     /**
-     * update償還払支給判定結果一時_更新DB有無
+     * update償還払支給判定結果一時_福祉用具事業者番号
      *
-     * @param entity ShokanShikyuKetteiInResultEntity
+     * @param entity DbT3048ShokanFukushiYoguHanbaihiEntity
      */
-    void update償還払支給判定結果一時_事業者番号登録(ShokanShikyuKetteiInResultEntity entity);
+    void update償還払支給判定結果一時_福祉用具事業者番号(DbT3048ShokanFukushiYoguHanbaihiEntity entity);
+
+    /**
+     * update償還払支給判定結果一時_住宅改修事業者番号
+     *
+     * @param entity DbT3049ShokanJutakuKaishuEntity
+     */
+    void update償還払支給判定結果一時_住宅改修事業者番号(DbT3049ShokanJutakuKaishuEntity entity);
 
     /**
      * insert処理結果リスト一時TBL_申請

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0050021;
 
+import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.InsuranceInformation;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenShoriDateKanri;
 import jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0050011.TaishokensakuJyouken;
@@ -45,6 +46,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
     private static final RString 内部処理モード_追加 = new RString("追加");
     private static final RString 画面表示_修正 = new RString("修正");
     private static final RString 画面表示_追加 = new RString("追加");
+    private static final RString ADD = new RString("add");
 
     /**
      * 介護保険特別会計経理状況登録_様式４を画面初期化処理しました。
@@ -54,7 +56,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
      */
     public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div> onload(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler handler = getHandler(div);
-        handler.onload();
+        handler.onload(get引き継ぎデータ());
         if (画面表示_追加.equals(div.getGamenMode())) {
             return ResponseData.of(div).setState(DBU0050021StateName.add);
         } else if (画面表示_修正.equals(div.getGamenMode())) {
@@ -102,11 +104,12 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         QuestionMessage message = new QuestionMessage(
                 UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
         if (内部処理モード_修正.equals(div.getShoriMode())) {
-            KaigoHokenJigyoHokokuNenpo 修正データ = handler.get修正データ();
+            KaigoHokenJigyoHokokuNenpo 修正データ = handler.get修正データ(get引き継ぎデータ());
             return 修正データ != null && !修正データ.get詳細データエリア().isEmpty() ? ResponseData.of(div).addMessage(message).respond() : null;
         } else if (内部処理モード_修正追加.equals(div.getShoriMode())
                 || 内部処理モード_追加.equals(div.getShoriMode())) {
-            return handler.is画面詳細エリア入力有(handler.get画面入力データ()) ? ResponseData.of(div).addMessage(message).respond() : null;
+            return handler.is画面詳細エリア入力有(handler.get画面入力データ(get引き継ぎデータ()))
+                    ? ResponseData.of(div).addMessage(message).respond() : null;
         }
         return ResponseData.of(div).respond();
     }
@@ -141,11 +144,12 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         QuestionMessage message = new QuestionMessage(
                 UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
         if (内部処理モード_修正.equals(div.getShoriMode())) {
-            KaigoHokenJigyoHokokuNenpo 修正データ = handler.get修正データ();
+            KaigoHokenJigyoHokokuNenpo 修正データ = handler.get修正データ(get引き継ぎデータ());
             return 修正データ != null && !修正データ.get詳細データエリア().isEmpty() ? ResponseData.of(div).addMessage(message).respond() : null;
         } else if (内部処理モード_修正追加.equals(div.getShoriMode())
                 || 内部処理モード_追加.equals(div.getShoriMode())) {
-            return handler.is画面詳細エリア入力有(handler.get画面入力データ()) ? ResponseData.of(div).addMessage(message).respond() : null;
+            return handler.is画面詳細エリア入力有(handler.get画面入力データ(get引き継ぎデータ()))
+                    ? ResponseData.of(div).addMessage(message).respond() : null;
         }
         return null;
     }
@@ -162,7 +166,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
             KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler handler = getHandler(div);
             QuestionMessage message = new QuestionMessage(
                     UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            responseData = handler.is画面詳細エリア入力有(handler.get画面入力データ()) ? ResponseData.of(div).addMessage(message).respond() : null;
+            responseData = handler.is画面詳細エリア入力有(handler.get画面入力データ(get引き継ぎデータ()))
+                    ? ResponseData.of(div).addMessage(message).respond() : null;
         }
         if (responseData != null) {
             return responseData;
@@ -193,10 +198,11 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         QuestionMessage message = new QuestionMessage(
                 UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
         if (内部処理モード_修正.equals(div.getShoriMode())) {
-            KaigoHokenJigyoHokokuNenpo 修正データ = handler.get修正データ();
+            KaigoHokenJigyoHokokuNenpo 修正データ = handler.get修正データ(get引き継ぎデータ());
             return 修正データ != null && !修正データ.get詳細データエリア().isEmpty() ? ResponseData.of(div).addMessage(message).respond() : null;
         } else if (内部処理モード_修正追加.equals(div.getShoriMode())) {
-            return handler.is画面詳細エリア入力有(handler.get画面入力データ()) ? ResponseData.of(div).addMessage(message).respond() : null;
+            return handler.is画面詳細エリア入力有(handler.get画面入力データ(get引き継ぎデータ()))
+                    ? ResponseData.of(div).addMessage(message).respond() : null;
         }
         return null;
     }
@@ -221,14 +227,14 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         if (!ResponseHolder.isReRequest()) {
             return getResponseData_btnSave(div);
         }
-        getHandler(div).onClick_btnSave();
+        getHandler(div).onClick_btnSave(get引き継ぎデータ());
         return ResponseData.of(div).respond();
     }
 
     private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div>
             getResponseData_btnSave(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler handler = getHandler(div);
-        KaigoHokenJigyoHokokuNenpo 画面入力データ = handler.get画面入力データ();
+        KaigoHokenJigyoHokokuNenpo 画面入力データ = handler.get画面入力データ(get引き継ぎデータ());
         QuestionMessage message = new QuestionMessage(
                 UrQuestionMessages.処理実行の確認.getMessage().getCode(), UrQuestionMessages.処理実行の確認.getMessage().evaluate());
         if (内部処理モード_追加.equals(div.getShoriMode())) {
@@ -257,7 +263,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
     private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div> getResponseData_btnSave_修正(
             KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div, QuestionMessage message) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler handler = getHandler(div);
-        KaigoHokenJigyoHokokuNenpo 修正データ = handler.get修正データ();
+        KaigoHokenJigyoHokokuNenpo 修正データ = handler.get修正データ(get引き継ぎデータ());
         if (修正データ != null && !修正データ.get詳細データエリア().isEmpty()) {
             return ResponseData.of(div).addMessage(message).respond();
         } else {
@@ -304,6 +310,15 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         }
         getHandler(div).onClick_btnConfirm();
         return ResponseData.of(div).respond();
+    }
+
+    private InsuranceInformation get引き継ぎデータ() {
+        InsuranceInformation 引き継ぎデータ
+                = ViewStateHolder.get(TaishokensakuJyouken.ViewStateKey.様式４, InsuranceInformation.class);
+        if (null == 引き継ぎデータ) {
+            引き継ぎデータ = new InsuranceInformation(ADD);
+        }
+        return 引き継ぎデータ;
     }
 
     private KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler getHandler(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div) {

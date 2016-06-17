@@ -4,17 +4,20 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * KonkaiShoriNaiyo のクラスファイル 
- * 
- * @author 自動生成
+ * KonkaiShoriNaiyo のクラスファイル
+ *
+ * @reamsid_L DBB-1850-010 zhangrui
  */
 public class KonkaiShoriNaiyoDiv extends PanelBatchParameter {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -118,7 +121,7 @@ public class KonkaiShoriNaiyoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtHosokuM2(TextBox txtHosokuM2) {
+    public void setTxtHosokuM2(TextBox txtHosokuM2) {
         this.getHosokuMKoikiPanel().setTxtHosokuM2(txtHosokuM2);
     }
 
@@ -128,7 +131,7 @@ public class KonkaiShoriNaiyoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtHosokuM3(TextBox txtHosokuM3) {
+    public void setTxtHosokuM3(TextBox txtHosokuM3) {
         this.getHosokuMKoikiPanel().setTxtHosokuM3(txtHosokuM3);
     }
 

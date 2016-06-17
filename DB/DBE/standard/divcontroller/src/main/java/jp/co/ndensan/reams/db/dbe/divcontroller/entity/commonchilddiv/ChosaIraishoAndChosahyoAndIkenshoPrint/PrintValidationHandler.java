@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaIrai
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoprint.IkenshoPrintParameterModel;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.gamensenikbn.GamenSeniKbn;
+import jp.co.ndensan.reams.db.dbe.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;

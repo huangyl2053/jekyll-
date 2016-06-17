@@ -5,7 +5,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fukajohotoroku.IFukaJohoTorokuMapper">
 
-    <select id="selectAll" resultMap="resultMap_DbT2002FukaJohoTemp" fetchSize="500">
+    <select resultOrdered="true" id="selectAll" resultMap="resultMap_DbT2002FukaJohoTemp" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fukajohotoroku.IFukaJohoTorokuMapper.allColumns_DbT2002FukaJohoTemp" />
         FROM
@@ -163,7 +163,7 @@
         <association property="賦課情報一時Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fukajohotoroku.IFukaJohoTorokuMapper.resultMap_DbT2002FukaJohoTemp"/>
     </resultMap>
 
-    <select id="get登録情報" resultMap="resultMap_FukaJohoToroku" fetchSize="500">
+    <select resultOrdered="true" id="get登録情報" resultMap="resultMap_FukaJohoToroku" fetchSize="500">
         SELECT
         <include refid="allColumns_DbT2002FukaJohoTemp" />,
         choteiIdToroku."choteiId",

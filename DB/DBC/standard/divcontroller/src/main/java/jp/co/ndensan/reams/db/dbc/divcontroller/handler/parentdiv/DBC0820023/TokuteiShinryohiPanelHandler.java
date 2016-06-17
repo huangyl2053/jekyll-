@@ -115,9 +115,9 @@ public class TokuteiShinryohiPanelHandler {
         div.getPanelTwo().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelTwo().getTxtMeisaibango().setValue(明細番号);
         div.getPanelTwo().getTxtShomeisho().setValue(証明書);
-        div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getPanelOne().getCcdKaigoAtenaInfo().initialize(識別コード);
         if (!被保険者番号.isEmpty()) {
-            div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getPanelOne().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         } else {
             div.getPanelOne().getCcdKaigoShikakuKihon().setVisible(false);
         }

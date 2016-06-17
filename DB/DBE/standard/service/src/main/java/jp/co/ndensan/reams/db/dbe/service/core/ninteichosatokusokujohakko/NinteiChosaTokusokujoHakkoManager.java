@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.ninteichosatokusokujohakko;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
+import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosatokusokujohakko.CountGaitouDataKenSu13Parameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosatokusokujohakko.CountGaitouDataKenSu2Parameter;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteitiyousaiirai.INinteiShinseiJohoMapper;

@@ -9,8 +9,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ServiceShuruiShikyuGendoGa
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7111ServiceShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7111ServiceShuruiShikyuGendoGakuDac;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.IYokaigoJotaiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.YokaigoJotaiKubun09A;
+import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubun09A;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;

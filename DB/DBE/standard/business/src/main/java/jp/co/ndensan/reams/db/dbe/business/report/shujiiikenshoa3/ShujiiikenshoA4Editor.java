@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class ShujiiikenshoA4Editor implements IShujiiikenshoA4Editor {
 
     private static final int INT_4 = 4;
-    private static final int INT_6 = 6;
+    private static final int INT_5 = 5;
     private static final int INT_7 = 7;
     private static final int INT_8 = 8;
     private static final int INT_10 = 10;
@@ -62,8 +62,7 @@ public class ShujiiikenshoA4Editor implements IShujiiikenshoA4Editor {
         source.shinsaYY = get年(item.get今回認定審査年月日());
         source.shinsaMM = get月(item.get今回認定審査年月日());
         source.shinsaDD = get日(item.get今回認定審査年月日());
-        //TODO 主治医意見書イメージset
-        source.imgIkensho1 = item.get主治医意見書イメージ();
+        source.imgIkensho1 = item.get主治医意見書イメージ一頁目();
         source.two_hokenshaNo = item.get保険者番号();
         source.two_hihokenshaNo = item.get被保険者番号();
         source.two_hihokenshaName = item.get名前();
@@ -83,7 +82,7 @@ public class ShujiiikenshoA4Editor implements IShujiiikenshoA4Editor {
         source.two_shinsaYY = get年(item.get今回認定審査年月日());
         source.two_shinsaMM = get月(item.get今回認定審査年月日());
         source.two_shinsaDD = get日(item.get今回認定審査年月日());
-        source.two_imgIkensho2 = item.get主治医意見書イメージ();
+        source.two_imgIkensho2 = item.get主治医意見書イメージ二頁目();
         return source;
     }
 
@@ -103,7 +102,7 @@ public class ShujiiikenshoA4Editor implements IShujiiikenshoA4Editor {
 
     private RString get月(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
-            return パターン12(年月日).substring(INT_6, INT_7);
+            return パターン12(年月日).substring(INT_5, INT_7);
         }
         return RString.EMPTY;
     }

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.definition.core.kogakuKaigoService;
+package jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

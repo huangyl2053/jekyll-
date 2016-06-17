@@ -15,11 +15,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariatejoho.S
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.KohoshaIchiran;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.TaishouWaritsukeHead;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.Taishouichiran;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.taishouwaritsuke.TaishouWaritsukeViewStateKey;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.NinchishoNichijoSeikatsuJiritsudoCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.ShogaiNichijoSeikatsuJiritsudoCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.IsShinsakaiJidoWaritsuke;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.ShinsakaiYusenWaritsukeKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShinsakaiJidoWaritsuke;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiwariatejoho.ShinsakaiWariateJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.CountShinsakaiIinJogaiJohoMapperParameter;
@@ -32,13 +28,16 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001.dgWa
 import jp.co.ndensan.reams.db.dbe.service.core.konicho.taishouwaritsuke.TaishouWaritsukeFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DbeConfigKey;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.config.DbeConfigKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -49,7 +48,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
@@ -84,8 +82,7 @@ public class TaishouWaritsukeHandler {
     /**
      * 画面初期化表示、画面項目に設定されている値をクリアする。
      */
-    public void initializtion() {
-        RString 介護認定審査会番号 = ViewStateHolder.get(TaishouWaritsukeViewStateKey.介護認定審査会番号, RString.class);
+    public void initializtion(RString 介護認定審査会番号) {
         div.getShinsakaiTaishoshaWaritsuke().setKaigoNinteiShinsakaiKaisaiNo(介護認定審査会番号);
         ヘッドエリア検索();
         対象者一覧検索();
@@ -283,7 +280,8 @@ public class TaishouWaritsukeHandler {
             div.getTxtShinsakaiKaijo().setValue(waritsukeHead.get介護認定審査会開催場所名称());
             div.getTxtShinsakaiChiku().setValue(waritsukeHead.get地区コード().getColumnValue());
             div.getTxtShinsakauChikuName().setValue(
-                    CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, new CodeShubetsu("5001"), waritsukeHead.get地区コード()));
+                    CodeMaster.getCodeMeisho(
+                            SubGyomuCode.DBE認定支援, new CodeShubetsu("5001"), waritsukeHead.get地区コード(), FlexibleDate.getNowDate()));
             div.getTxtKaisaiDate().setValue(waritsukeHead.get開催予定日());
             div.getTxtYoteiKaishiTime().setValue(new RTime(waritsukeHead.get予定開始時間()));
             div.getTxtYoteiShuryoTime().setValue(new RTime(waritsukeHead.get予定終了時間()));

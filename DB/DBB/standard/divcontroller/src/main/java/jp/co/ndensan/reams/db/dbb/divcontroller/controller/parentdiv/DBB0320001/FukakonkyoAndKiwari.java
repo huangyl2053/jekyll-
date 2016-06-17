@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.FukaMiscManager;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.relate.KiwarigakuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.SanteiState;
+import jp.co.ndensan.reams.db.dbz.definition.core.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -207,8 +207,8 @@ public class FukakonkyoAndKiwari {
     }
 
     private void set賦課根拠Of本算定(tblFukakonkyoMeisaiDiv div, Fuka model) {
-        div.getLblHonninKazeiValue().setText(model.get課税区分().toRString());
-        div.getLblSetaiKazeiValue().setText(model.get世帯課税区分().toRString());
+        div.getLblHonninKazeiValue().setText(model.get課税区分().get名称());
+        div.getLblSetaiKazeiValue().setText(model.get世帯課税区分().get名称());
 
         div.getLblShotokuSumValue().setText(FukaMapper.addComma(model.get合計所得金額()));
 

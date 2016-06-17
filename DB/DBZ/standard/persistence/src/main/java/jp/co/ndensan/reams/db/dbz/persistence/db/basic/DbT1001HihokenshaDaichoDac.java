@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.edaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.hihokennshaKubunCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.ichigoShikakuShutokuYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.idoYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.isDeleted;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.jushochitokureiKaijoJiyuCode;
@@ -21,6 +22,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.shichosonCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.shikakuShutokuYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.shikakuSoshitsuYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -40,6 +42,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.lt;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
@@ -126,7 +129,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                or(leq(substr(idoYMD, 開始桁, 終了桁), サービス年月), eq(substr(idoYMD, 開始桁, 終了桁), サービス年月)),
+                                leq(substr(idoYMD, 開始桁, 終了桁), サービス年月),
                                 not(eq(logicalDeletedFlag, false))
                         )).
                 order(by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
@@ -153,7 +156,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                leq(サービス年月, substr(idoYMD, 開始桁, 終了桁)),
+                                lt(サービス年月, substr(idoYMD, 開始桁, 終了桁)),
                                 not(eq(logicalDeletedFlag, false))
                         )).
                 order(by(DbT1001HihokenshaDaicho.idoYMD, Order.ASC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
@@ -696,6 +699,33 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(idoYMD, 異動日))).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者番号、異動日で最大の枝番を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 被保険者区分コード hihokennshaKubunCode
+     * @param システム日付 システム日付
+     * @return DbT1001HihokenshaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity selectFor資格喪失フラグ(
+            HihokenshaNo 被保険者番号,
+            RString 被保険者区分コード,
+            FlexibleDate システム日付) throws NullPointerException {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(hihokennshaKubunCode, 被保険者区分コード),
+                                leq(ichigoShikakuShutokuYMD, システム日付),
+                                or(isNULL(shikakuSoshitsuYMD), leq(システム日付, shikakuSoshitsuYMD)))).
+                order(by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).
+                limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
 }

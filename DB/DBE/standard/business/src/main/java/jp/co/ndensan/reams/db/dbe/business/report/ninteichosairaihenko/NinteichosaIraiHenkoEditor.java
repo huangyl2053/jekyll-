@@ -56,12 +56,13 @@ public class NinteichosaIraiHenkoEditor implements INinteichosaIraiHenkoEditor {
         source.listChosaIraihenko_1 = getNo(index);
         source.listChosaIraihenko_2 = item.get保険者番号();
         source.listChosaIraihenko_3 = item.get保険者名();
-        source.listChosaIraihenko_4 = item.get氏名() == null ? RString.EMPTY : item.get氏名().getColumnValue();
+        source.listChosaIraihenko_4 = item.get氏名() == null ? RString.EMPTY : item.get氏名().value();
         source.listChosaIraihenko_5 = item.get被保険者番号();
         source.listChosaIraihenko_6 = dateFormat(item.get生年月日());
-        source.listChosaIraihenko_7 = Seibetsu.toValue(item.get性別().getColumnValue()).get名称();
+        source.listChosaIraihenko_7 = item.get性別() == null ? RString.EMPTY : Seibetsu.toValue(item.get性別().value()).get名称();
         source.listChosaIraihenko_8 = dateFormat(item.get認定申請年月日());
-        source.listChosaIraihenko_9 = NinteiShinseiShinseijiKubunCode.toValue(item.get認定申請区分_申請時_コード().getColumnValue()).get名称();
+        source.listChosaIraihenko_9 = item.get認定申請区分_申請時_コード() == null ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.
+                toValue(item.get認定申請区分_申請時_コード().value()).get名称();
         source.listChosaIraihenko_10 = item.get変更回数();
         source.listChosaIraihenko_11 = item.get変更前調査事業所();
         source.listChosaIraihenko_12 = item.get変更前調査員();

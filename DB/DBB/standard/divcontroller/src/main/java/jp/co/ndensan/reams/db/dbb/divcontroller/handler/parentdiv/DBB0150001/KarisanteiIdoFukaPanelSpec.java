@@ -66,6 +66,10 @@ public enum KarisanteiIdoFukaPanelSpec implements IPredicate<KarisanteiIdoFukaPa
 
     private static class SpecHelper {
 
+        private static final RString 月 = new RString("月");
+        private static final int NUM_0 = 0;
+        private static final int NUM_2 = 2;
+
         public static boolean is仮算定額変更通知書の発行日(KarisanteiIdoFukaPanelDiv div) {
             RDate 仮算定額変更通知書_発行日 = div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
                     .getTxtKariHenkoTsuchiHakkoYMD().getValue();
@@ -94,8 +98,8 @@ public enum KarisanteiIdoFukaPanelSpec implements IPredicate<KarisanteiIdoFukaPa
             RString key1 = div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getDdlShorigetsu().getSelectedKey();
             RString key2 = div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
                     .getDdlNotsuShuturyokuki().getSelectedValue();
-            RString 出力期_月 = key2.split("月").get(0);
-            return key1.equals(出力期_月.substring(出力期_月.length() - 2, 出力期_月.length()));
+            RString 出力期_月 = key2.split(月.toString()).get(NUM_0);
+            return key1.equals(出力期_月.substring(出力期_月.length() - NUM_2, 出力期_月.length()));
         }
     }
 }

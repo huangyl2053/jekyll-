@@ -21,13 +21,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiShotokuIchiranCompara
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShotokuRirekiIchiranComparators;
 import jp.co.ndensan.reams.db.dbz.business.core.view.KaigoShotokuAlive;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysNenreiTotatsuKijunJoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysHizuke;
+import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysNenreiTotatsuKijunJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.GekihenkanwaSochi;
+import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.TorokuGyomu;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.accesslog.ExpandedInfomations;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.shotoku.GekihenkanwaSochi;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.shotoku.TorokuGyomu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.SetaiShotokuIchiranDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.SetaiShotokuIchiranDiv.DisplayMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.dgSetaiShotoku_Row;
@@ -371,17 +371,17 @@ public class SetaiShotokuIchiranHandler {
                     ? new RString(世帯員所得.get住民情報_異動日().wareki().separator(Separator.PERIOD).toDateString().toString())
                     : RString.EMPTY);
             row.setTxtJuminzeiGenmenMae(世帯員所得.get課税区分_住民税減免前() != null && !世帯員所得.get課税区分_住民税減免前().isEmpty()
-                    ? KazeiKubun.toValue(世帯員所得.get課税区分_住民税減免前()).toRString()
+                    ? KazeiKubun.toValue(世帯員所得.get課税区分_住民税減免前()).get名称()
                     : RString.EMPTY);
             row.setTxtJuminzeiGenmenAto(世帯員所得.get課税区分_住民税減免後() != null && !世帯員所得.get課税区分_住民税減免後().isEmpty()
-                    ? KazeiKubun.toValue(世帯員所得.get課税区分_住民税減免後()).toRString()
+                    ? KazeiKubun.toValue(世帯員所得.get課税区分_住民税減免後()).get名称()
                     : RString.EMPTY);
             row.setTxtJuminzei(世帯員所得.get課税区分_住民税減免前() != null && !世帯員所得.get課税区分_住民税減免前().isEmpty()
-                    ? KazeiKubun.toValue(世帯員所得.get課税区分_住民税減免前()).toRString()
+                    ? KazeiKubun.toValue(世帯員所得.get課税区分_住民税減免前()).get名称()
                     : RString.EMPTY);
-            row.setTxtGekihenTaishosha(GekihenkanwaSochi.対象.code()
+            row.setTxtGekihenTaishosha(GekihenkanwaSochi.対象.getコード()
                     .equals(世帯員所得.get激変緩和措置()) ? new RString("対象者")
-                    : GekihenkanwaSochi.対象外.toRString());
+                    : GekihenkanwaSochi.対象外.get名称());
             if (displayNenkingaku) {
                 row.setTxtKetsugo03(世帯員所得.get合計所得金額() != null
                         ? editComma(new RString(世帯員所得.get合計所得金額().toString())).concat(BR).concat(世帯員所得.get課税所得額() != null
@@ -429,7 +429,7 @@ public class SetaiShotokuIchiranHandler {
 
     private void editDgSetaiShotokuRow(SetaiinShotoku 世帯員所得, dgSetaiShotoku_Row row) {
         row.setTxtTorokuGyomu(世帯員所得.get登録業務() != null && !世帯員所得.get登録業務().isEmpty()
-                ? TorokuGyomu.toValue(世帯員所得.get登録業務()).toRString().concat(BR)
+                ? new RString(TorokuGyomu.toValue(世帯員所得.get登録業務()).toString()).concat(BR)
                 .concat(世帯員所得.get更正日() != null
                         ? 世帯員所得.get更正日().wareki().separator(Separator.PERIOD).toDateString().toString()
                         : RString.EMPTY.toString())
@@ -498,17 +498,17 @@ public class SetaiShotokuIchiranHandler {
             row.setTxtKetsugo01(setaiShotokuRow.getTxtKetsugo01());
             row.setTxtShimei(setaiShotokuRow.getTxtShimei());
             row.setTxtJuminzeiGenmenMae(介護所得情報.get課税区分_住民税減免前() != null && !介護所得情報.get課税区分_住民税減免前().isEmpty()
-                    ? KazeiKubun.toValue(介護所得情報.get課税区分_住民税減免前()).toRString()
+                    ? KazeiKubun.toValue(介護所得情報.get課税区分_住民税減免前()).get名称()
                     : RString.EMPTY);
             row.setTxtJuminzeiGenmenAto(介護所得情報.get課税区分_住民税減免後() != null && !介護所得情報.get課税区分_住民税減免後().isEmpty()
-                    ? KazeiKubun.toValue(介護所得情報.get課税区分_住民税減免後()).toRString()
+                    ? KazeiKubun.toValue(介護所得情報.get課税区分_住民税減免後()).get名称()
                     : RString.EMPTY);
             row.setTxtJuminzei(介護所得情報.get課税区分_住民税減免前() != null && !介護所得情報.get課税区分_住民税減免前().isEmpty()
-                    ? KazeiKubun.toValue(介護所得情報.get課税区分_住民税減免前()).toRString()
+                    ? KazeiKubun.toValue(介護所得情報.get課税区分_住民税減免前()).get名称()
                     : RString.EMPTY);
-            row.setTxtGekihenTaishosha(GekihenkanwaSochi.対象.code().equals(介護所得情報.get激変緩和措置())
+            row.setTxtGekihenTaishosha(GekihenkanwaSochi.対象.getコード().equals(介護所得情報.get激変緩和措置())
                     ? new RString("対象者")
-                    : GekihenkanwaSochi.対象外.toRString());
+                    : GekihenkanwaSochi.対象外.get名称());
             row.setTxtKetsugo03(介護所得情報.get合計所得金額() != null
                     ? editComma(new RString(介護所得情報.get合計所得金額().toString())).concat(BR)
                     .concat(介護所得情報.get課税所得額() != null
@@ -523,7 +523,7 @@ public class SetaiShotokuIchiranHandler {
                             : RString.EMPTY)
                     : RString.EMPTY);
             row.setTxtTorokuGyomu(介護所得情報.get登録業務() != null && !介護所得情報.get登録業務().isEmpty()
-                    ? TorokuGyomu.toValue(介護所得情報.get登録業務()).toRString().concat(BR)
+                    ? new RString(TorokuGyomu.toValue(介護所得情報.get登録業務()).toString()).concat(BR)
                     .concat(介護所得情報.get更正日() != null
                             ? 介護所得情報.get更正日().wareki().separator(Separator.PERIOD).toDateString().toString()
                             : RString.EMPTY.toString())

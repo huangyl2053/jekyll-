@@ -53,6 +53,7 @@ public class IdoTaishoshaIchiran {
     private static final RString 一覧表発行する = new RString("btnHakko");
     private static final RString 即時賦課更生へ = new RString("btnToSokujiKosei");
     private static final RString 各種通知書発行へ = new RString("btnToKakushuTsuchishoHakko");
+    private static final int 整数_ZERO = 0;
 
     /**
      * onLoad
@@ -64,7 +65,9 @@ public class IdoTaishoshaIchiran {
         List<PublishedReportInfo> 発行帳票情報List = TsuchiShoHakkogoIdoHaaku.createInstance().get帳票情報();
         Map<RString, RString> 帳票名Map = TsuchiShoHakkogoIdoHaaku.createInstance().get通知書名称(発行帳票情報List);
         div.getDdlTsuchishoMeisho().setDataSource(KeyValueDataSourceConverter.getDataSource(帳票名Map));
-        div.getDdlTsuchishoMeisho().setSelectedIndex(0);
+        if (帳票名Map.size() != 整数_ZERO) {
+            div.getDdlTsuchishoMeisho().setSelectedIndex(整数_ZERO);
+        }
         Map<ReportId, List<YMDHMS>> 発行日時Map = TsuchiShoHakkogoIdoHaaku.createInstance().get作成日時(発行帳票情報List);
         ViewStateHolder.put(ViewStateKeys.発行日時Map, (Serializable) 発行日時Map);
         getHandler(div).set作成日時();
@@ -211,7 +214,7 @@ public class IdoTaishoshaIchiran {
         TsuchiShoHakkogoIdoshaListJoho 発行後異動者一覧情報 = new TsuchiShoHakkogoIdoshaListJoho(
                 通知書発行日時, 最終計算処理日時, 通知書名, 異動者リスト);
         return ResponseData.of(new HakkogoIdoTaishoshaIchiranPrintService().
-                print(発行後異動者一覧情報, association, 帳票作成日時)).respond();
+                printSingle(発行後異動者一覧情報, association, 帳票作成日時)).respond();
     }
 
     private IdoTaishoshaIchiranHandler getHandler(IdoTaishoshaIchiranDiv div) {

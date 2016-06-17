@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shujiiikentokusokujohakko.ShujiiIkenTokusokujoHakkoTempData;
+import jp.co.ndensan.reams.db.dbe.definition.core.shujiiikentokusokujohakko.ShujiiIkenTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

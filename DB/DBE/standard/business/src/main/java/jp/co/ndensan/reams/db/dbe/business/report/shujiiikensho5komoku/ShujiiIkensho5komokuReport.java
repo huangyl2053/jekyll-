@@ -5,10 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho5komoku;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikensho5komoku.ShujiiIkensho5komokuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho5komoku.ShujiiIkensho5komokuReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -19,30 +17,24 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShujiiIkensho5komokuReport extends Report<ShujiiIkensho5komokuReportSource> {
 
-    private final List<ShujiiIkensho5komokuEntity> data;
+    private final ShujiiIkensho5komokuEntity data;
+    private final int index;
 
     /**
      * インスタンスを生成します。
      *
      * @param data 申請に関する帳票発行のdataList
+     * @param index int
      */
-    public ShujiiIkensho5komokuReport(List<ShujiiIkensho5komokuEntity> data) {
+    public ShujiiIkensho5komokuReport(ShujiiIkensho5komokuEntity data, int index) {
         this.data = data;
+        this.index = index;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<ShujiiIkensho5komokuReportSource> reportSourceWriter) {
-        for (int i = 0; i < data.size(); i++) {
-            IShujiiIkensho5komokuEditor editor = new ShujiiIkensho5komokuEditor(data.get(i), i);
-            IShujiiIkensho5komokuBuilder builder = new ShujiiIkensho5komokuBuilder(editor);
-            reportSourceWriter.writeLine(builder);
-        }
-        if (data.isEmpty()) {
-            ShujiiIkensho5komokuEntity entity = new ShujiiIkensho5komokuEntity();
-            entity.set氏名(new RString("該当データがありません"));
-            IShujiiIkensho5komokuEditor editor = new ShujiiIkensho5komokuEditor(entity, -1);
-            IShujiiIkensho5komokuBuilder builder = new ShujiiIkensho5komokuBuilder(editor);
-            reportSourceWriter.writeLine(builder);
-        }
+        IShujiiIkensho5komokuEditor editor = new ShujiiIkensho5komokuEditor(data, index);
+        IShujiiIkensho5komokuBuilder builder = new ShujiiIkensho5komokuBuilder(editor);
+        reportSourceWriter.writeLine(builder);
     }
 }

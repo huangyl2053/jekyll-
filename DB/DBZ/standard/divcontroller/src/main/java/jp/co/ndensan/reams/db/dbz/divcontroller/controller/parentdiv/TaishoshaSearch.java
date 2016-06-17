@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.taishoshasearch.DbV7901ShikakuSearchBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.taishoshasearch.TaishoshaRelateBusiness;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JushochitokureishaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihoKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.HihoKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.jushochitokureisha.JushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.helper.TaishoshaSearchValidationHelper;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshafinder.HihokenshaFinder.HihokenshaFinderDiv;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.DBZ0200001StateName.検索条件;
@@ -297,7 +297,7 @@ public class TaishoshaSearch {
         }
         if (div.is住所地特例者()) {
             条件List.add(SearchConditionFactory.condition(
-                    ShikakuSearchItem.住所地特例フラグ, StringOperator.完全一致, JushochitokureishaKubun.住所地特例者.code()));
+                    ShikakuSearchItem.住所地特例フラグ, StringOperator.完全一致, JushochitokureishaKubun.住所地特例者.getコード()));
         }
         ISearchCondition 介護条件 = null;
         for (INewSearchCondition 条件 : 条件List) {

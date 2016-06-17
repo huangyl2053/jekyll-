@@ -7,15 +7,18 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * TokuchoDoteiShori のクラスファイル 
- * 
- * @author 自動生成
+ * TokuchoDoteiShori のクラスファイル
+ *
+ * @reamsid_L DBB-1850-010 zhangrui
  */
 public class TokuchoDoteiShoriDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -99,7 +102,7 @@ public class TokuchoDoteiShoriDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShutokuM(TextBoxDate txtShutokuM) {
+    public void setTxtShutokuM(TextBoxDate txtShutokuM) {
         this.getKonkaiShoriNaiyo().setTxtShutokuM(txtShutokuM);
     }
 
@@ -109,7 +112,7 @@ public class TokuchoDoteiShoriDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHosokuM1(TextBoxDate txtHosokuM1) {
+    public void setTxtHosokuM1(TextBoxDate txtHosokuM1) {
         this.getKonkaiShoriNaiyo().setTxtHosokuM1(txtHosokuM1);
     }
 
@@ -119,7 +122,7 @@ public class TokuchoDoteiShoriDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setHosokuMKoikiPanel(HosokuMKoikiPanelDiv HosokuMKoikiPanel) {
+    public void setHosokuMKoikiPanel(HosokuMKoikiPanelDiv HosokuMKoikiPanel) {
         this.getKonkaiShoriNaiyo().setHosokuMKoikiPanel(HosokuMKoikiPanel);
     }
 
@@ -129,7 +132,7 @@ public class TokuchoDoteiShoriDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHosokuM2(TextBox txtHosokuM2) {
+    public void setTxtHosokuM2(TextBox txtHosokuM2) {
         this.getKonkaiShoriNaiyo().getHosokuMKoikiPanel().setTxtHosokuM2(txtHosokuM2);
     }
 
@@ -139,7 +142,7 @@ public class TokuchoDoteiShoriDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHosokuM3(TextBox txtHosokuM3) {
+    public void setTxtHosokuM3(TextBox txtHosokuM3) {
         this.getKonkaiShoriNaiyo().getHosokuMKoikiPanel().setTxtHosokuM3(txtHosokuM3);
     }
 
@@ -149,7 +152,7 @@ public class TokuchoDoteiShoriDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKaishiM(TextBoxDate txtKaishiM) {
+    public void setTxtKaishiM(TextBoxDate txtKaishiM) {
         this.getKonkaiShoriNaiyo().setTxtKaishiM(txtKaishiM);
     }
 
@@ -159,7 +162,7 @@ public class TokuchoDoteiShoriDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgTokuchoTaishoshaDoteiShoriKakuninTanitsu(DataGrid<dgTokuchoTaishoshaDoteiShoriKakuninTanitsu_Row> dgTokuchoTaishoshaDoteiShoriKakuninTanitsu) {
+    public void setDgTokuchoTaishoshaDoteiShoriKakuninTanitsu(DataGrid<dgTokuchoTaishoshaDoteiShoriKakuninTanitsu_Row> dgTokuchoTaishoshaDoteiShoriKakuninTanitsu) {
         this.getTokuchoTaishoshaDoteiShoriKakuninTanitsuPanel().setDgTokuchoTaishoshaDoteiShoriKakuninTanitsu(dgTokuchoTaishoshaDoteiShoriKakuninTanitsu);
     }
 
@@ -169,7 +172,7 @@ public class TokuchoDoteiShoriDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgTokuchoTaishoshaDoteiShoriKakuninKoiki(DataGrid<dgTokuchoTaishoshaDoteiShoriKakuninKoiki_Row> dgTokuchoTaishoshaDoteiShoriKakuninKoiki) {
+    public void setDgTokuchoTaishoshaDoteiShoriKakuninKoiki(DataGrid<dgTokuchoTaishoshaDoteiShoriKakuninKoiki_Row> dgTokuchoTaishoshaDoteiShoriKakuninKoiki) {
         this.getTokuchoTaishoshaDoteiShoriKakuninKoikiPanel().setDgTokuchoTaishoshaDoteiShoriKakuninKoiki(dgTokuchoTaishoshaDoteiShoriKakuninKoiki);
     }
 

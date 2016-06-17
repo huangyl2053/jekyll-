@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002Fuka;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002Fuka.choteiNendo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002Fuka.choteiNichiji;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002Fuka.fukaNendo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002Fuka.hokenryoDankai;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002Fuka.hokenryoDankaiKarisanntei;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002Fuka.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002Fuka.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002FukaEntity;
@@ -125,6 +125,6 @@ public class DbV2002FukaAliveDac implements ISaveable<DbV2002FukaEntity> {
                                 eq(choteiNendo, 調定年度),
                                 eq(fukaNendo, 賦課年度),
                                 eq(choteiNichiji, 調定日時),
-                                eq(hokenryoDankai, 保険料段階))).getCount();
+                                eq(hokenryoDankaiKarisanntei, 保険料段階))).getCount();
     }
 }

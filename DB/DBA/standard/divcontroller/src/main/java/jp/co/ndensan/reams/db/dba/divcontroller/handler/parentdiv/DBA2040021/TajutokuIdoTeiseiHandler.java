@@ -33,7 +33,7 @@ public class TajutokuIdoTeiseiHandler {
      * @param 識別コード 識別コード
      */
     public void load(ShikibetsuCode 識別コード) {
-        div.getTajutokuIdoTeiseiKihonJoho().getCcdKaigoAtenaJoho().onLoad(識別コード);
+        div.getTajutokuIdoTeiseiKihonJoho().getCcdKaigoAtenaJoho().initialize(識別コード);
         div.getTajutokuIdoTeiseiIdoJoho().getCcdTaJushochiTokureishaKanri().initialize(識別コード);
         div.getTajutokuIdoTeiseiIdoJoho().getShisetsuIdoJoho().getCcdShisetsuNyutaishoRirekiKanri().initialize(識別コード);
     }

@@ -7,14 +7,13 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5100001
 
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.taishouwaritsuke.TaishouWaritsukeViewStateKey;
+import jp.co.ndensan.reams.db.dbe.definition.core.viewstate.TaishouWaritsukeViewStateKey;
 import jp.co.ndensan.reams.db.dbe.definition.kaigoninteishinsakai.KaigoNinteiShinsakaiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.DBE5100001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.DBE5100001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.KaigoNinteiShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100001.KaigoNinteiShinsakaiValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import static jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.介護認定審査会共有一覧_開催番号;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -175,7 +174,7 @@ public class KaigoNinteiShinsakai {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         validationMessages.add(createValidationHandler(div).審査会データ空チェック());
         validationMessages.add(createValidationHandler(div).
-                審査会未選択チェック_選択(ViewStateHolder.get(介護認定審査会共有一覧_開催番号, RString.class)));
+                審査会未選択チェック_選択(ViewStateHolder.get(ViewStateKeys.開催番号, RString.class)));
         return validationMessages;
     }
 

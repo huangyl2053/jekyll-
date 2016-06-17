@@ -33,8 +33,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JigyoshaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShinseiTodokedeDaikoKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.JigyoshaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -108,9 +108,9 @@ public class RiyoshaFutangakuGengakuHandler {
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
 
-        div.getCcdAtenaInfo().onLoad(識別コード);
+        div.getCcdAtenaInfo().initialize(識別コード);
         div.getCcdShinseiJoho().initialize(識別コード);
-        div.getCcdKaigoKihon().onLoad(被保険者番号);
+        div.getCcdKaigoKihon().initialize(被保険者番号);
         if (ResponseHolder.getMenuID().equals(申請メニュー)) {
             div.getBtnInputNew().setText(申請情報を追加する);
             div.getRiyoshaFutangakuGengakuShinseiDetail().setTitle(申請情報);
@@ -831,7 +831,8 @@ public class RiyoshaFutangakuGengakuHandler {
         if (joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().size() > 0) {
             if (joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出代行区分() != null
                     && !joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出代行区分().isEmpty()) {
-                申請届出代行区分 = ShinseiTodokedeDaikoKubunCode.toValue(joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出代行区分());
+                申請届出代行区分 = ShinseiTodokedeDaikoKubunCode.toValue(
+                        joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出代行区分());
             }
             申請届出者氏名 = joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出者氏名();
             申請届出者氏名カナ = joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出者氏名カナ();

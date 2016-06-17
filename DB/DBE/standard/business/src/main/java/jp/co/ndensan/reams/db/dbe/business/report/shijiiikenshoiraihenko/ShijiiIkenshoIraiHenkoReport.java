@@ -5,10 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shijiiikenshoiraihenko;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shijiiikenshoiraihen.ShijiiIkenshoIraiHenko;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shijiiikenshoiraihenko.ShijiiIkenshoIraiHenkoReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -19,30 +17,25 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShijiiIkenshoIraiHenkoReport extends Report<ShijiiIkenshoIraiHenkoReportSource> {
 
-    private final List<ShijiiIkenshoIraiHenko> data;
+    private final ShijiiIkenshoIraiHenko data;
+    private final int index;
 
     /**
      * インスタンスを生成します。
      *
      * @param data 申請に関する帳票発行のdataList
+     * @param index int
      */
-    public ShijiiIkenshoIraiHenkoReport(List<ShijiiIkenshoIraiHenko> data) {
+    public ShijiiIkenshoIraiHenkoReport(ShijiiIkenshoIraiHenko data, int index) {
         this.data = data;
+        this.index = index;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<ShijiiIkenshoIraiHenkoReportSource> reportSourceWriter) {
-        for (int i = 0; i < data.size(); i++) {
-            IShijiiIkenshoIraiHenkoEditor editor = new ShijiiIkenshoIraiHenkoEditor(data.get(i), i);
-            IShijiiIkenshoIraiHenkoBuilder builder = new ShijiiIkenshoIraiHenkoBuilder(editor);
-            reportSourceWriter.writeLine(builder);
-        }
-        if (data.isEmpty()) {
-            ShijiiIkenshoIraiHenko entity = new ShijiiIkenshoIraiHenko();
-            entity.set氏名(new RString("該当データがありません"));
-            IShijiiIkenshoIraiHenkoEditor editor = new ShijiiIkenshoIraiHenkoEditor(entity, -1);
-            IShijiiIkenshoIraiHenkoBuilder builder = new ShijiiIkenshoIraiHenkoBuilder(editor);
-            reportSourceWriter.writeLine(builder);
-        }
+
+        IShijiiIkenshoIraiHenkoEditor editor = new ShijiiIkenshoIraiHenkoEditor(data, index);
+        IShijiiIkenshoIraiHenkoBuilder builder = new ShijiiIkenshoIraiHenkoBuilder(editor);
+        reportSourceWriter.writeLine(builder);
     }
 }

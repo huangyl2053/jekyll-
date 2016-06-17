@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyu
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sun Jun 12 15:21:36 CST 2016
+ * Fri Jun 17 10:23:14 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;

@@ -6,14 +6,15 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.yokaigoninteishinchokujohoshokai;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
  *
  * 申請者一覧内容検索のパラメータです。
+ *
  * @reamsid_L DBE-0210-010 dongyabin
  */
 @Getter

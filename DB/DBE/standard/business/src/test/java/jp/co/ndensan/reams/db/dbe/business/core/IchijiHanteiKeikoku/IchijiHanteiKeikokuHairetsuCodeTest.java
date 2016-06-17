@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiKeikoku;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikeikoku.IchijiHanteiKeikokuHairetsuCode;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IchijiHanteiKeikokuShubetsu;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IchijiHanteiKeikokuUmu;
+import jp.co.ndensan.reams.db.dbe.definition.core.IchijiHanteiKeikokuShubetsu;
+import jp.co.ndensan.reams.db.dbe.definition.core.IchijiHanteiKeikokuUmu;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

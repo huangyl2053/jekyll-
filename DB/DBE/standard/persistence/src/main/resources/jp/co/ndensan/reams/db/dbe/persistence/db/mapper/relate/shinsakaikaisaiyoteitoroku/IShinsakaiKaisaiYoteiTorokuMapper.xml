@@ -3,7 +3,7 @@
 
 <!-- @reamsid_L DBE-0130-010 yaodongsheng -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaikaisaiyoteitoroku.IShinsakaiKaisaiYoteiTorokuMapper">
-    <select id="getDbT5511Count" parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler">   
+    <select resultOrdered="true" id="getDbT5511Count" parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler">   
         SELECT 
             COUNT(0)
         FROM 
@@ -11,7 +11,7 @@
         WHERE
             "shinsakaiKaisaiNo" = #{開催番号}
     </select>
-    <select id="getDbT5501Count" parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler">   
+    <select resultOrdered="true" id="getDbT5501Count" parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler">   
         SELECT 
             COUNT(0)
         FROM 
