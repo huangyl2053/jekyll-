@@ -221,6 +221,12 @@ public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
 
     }
 
+    /**
+     * 世帯員所得情報の取得
+     *
+     * @param 識別コード 識別コード
+     * @param isDescByHihokenshaNo
+     */
     public void 世帯員所得情報の取得(ShikibetsuCode 識別コード, boolean isDescByHihokenshaNo) {
         SetaiinShotokuJohoFinder finder = SetaiinShotokuJohoFinder.createInstance();
         List<SetaiinShotoku> 世帯員所得情報 = finder.get世帯員所得情報(識別コード,
