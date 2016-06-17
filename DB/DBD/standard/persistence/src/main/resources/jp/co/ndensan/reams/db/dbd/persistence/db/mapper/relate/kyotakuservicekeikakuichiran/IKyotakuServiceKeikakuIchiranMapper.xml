@@ -86,53 +86,50 @@
         rgdb."DbT7060KaigoJigyosha"  AS  dbT7060_2
         WHERE
         dbT7060."jigyoshaNo" = dbT7060_2."jigyoshaNo"
-        AND dbT7060."yukoKaishiYMD" <![CDATA[<]]> dbT7060_2."yukoKaishiYMD"
+        AND dbT7060."yukoKaishiYMD" <<![CDATA[<]]>  dbT7060_2."yukoKaishiYMD"
         )
         )
 
         SELECT
-        A.taishoYM,
-        B.sakuseiKubunCode,
-        A.zanteiKubun,
-        B.keikakuJigyoshaNo,
-        C.jigyoshaName,
-        B.tekiyoKaishiYMD,
-        B.tekiyoShuryoYMD,
-        B.rirekiNo
+        A."taishoYM",
+        B."sakuseiKubunCode",
+        A."zanteiKubun",
+        B."keikakuJigyoshaNo",
+        C."jigyoshaName",
+        B."tekiyoKaishiYMD",
+        B."tekiyoShuryoYMD",
+        B."rirekiNo"
         FROM
         rgdb."DbT3005KyotakuKeikakuTodokede" AS A
         INNER JOIN
         rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS B
-        ON A.hihokenshaNo = B.hihokenshaNo
-        AND A.taishoYM = B.taishoYM
+        ON A."hihokenshaNo" = B."hihokenshaNo"
+        AND A."taishoYM" = B."taishoYM"
         INNER JOIN
         最新介護事業者 AS C
-        ON B.keikakuJigyoshaNo = C.jigyoshaNo
+        ON B."keikakuJigyoshaNo" = C."jigyoshaNo"
         WHERE
-        A.hihokenshaNo = #{被保険者番号}
+        A."hihokenshaNo" = #{被保険者番号}
         UNION
         SELECT
-        D.taishoYM,
-        E.sakuseiKubunCode,
-        D.zanteiKubun,
-        "" AS keikakuJigyoshaNo,
-        "" AS jigyoshaName,
-        E.tekiyoKaishiYMD,
-        E.tekiyoShuryoYMD,
-        E.rirekiNo
+        D."taishoYM",
+        E."sakuseiKubunCode",
+        D."zanteiKubun",
+        '' AS "keikakuJigyoshaNo",
+        '' AS "jigyoshaName",
+        E."tekiyoKaishiYMD",
+        E."tekiyoShuryoYMD",
+        E."rirekiNo"
         FROM
         rgdb."DbT3005KyotakuKeikakuTodokede" AS D
         INNER JOIN
         rgdb."DbT3007KyotakuKeikakuJikoSakusei" AS E
-        ON D.hihokenshaNo = E.hihokenshaNo
-        AND D.taishoYM = E.taishoYM
-        INNER JOIN
-        最新介護事業者 AS C
-        ON B.keikakuJigyoshaNo = C.jigyoshaNo
+        ON D."hihokenshaNo" = E."hihokenshaNo"
+        AND D."taishoYM" = E."taishoYM"
         WHERE
-        D.hihokenshaNo = #{被保険者番号}
+        D."hihokenshaNo" = #{被保険者番号}
         ) AS F
-        ORDER BY F.tekiyoKaishiYMD
+        ORDER BY F."tekiyoKaishiYMD"
     </sql>
 
     <sql id="selectKeikakuIraiJohoEntity">
@@ -152,82 +149,82 @@
         rgdb."DbT7060KaigoJigyosha"  AS  dbT7060_2
         WHERE
         dbT7060."jigyoshaNo" = dbT7060_2."jigyoshaNo"
-        AND dbT7060."yukoKaishiYMD" <![CDATA[<]]> dbT7060_2."yukoKaishiYMD"
+        AND dbT7060."yukoKaishiYMD" <<![CDATA[<]]> dbT7060_2."yukoKaishiYMD"
         )
         )
 
         SELECT
-        A.todokedeKubun,
-        A.todokedeYMD,
-        B.sakuseiKubunCode,
-        B.keikakuJigyoshaNo,
-        C.jigyoshaName AS keikaku_jigyoshaName,
-        C.yubinNo,
-        C.jigyoshaAddress,
-        D.daihyoshaShimei,
-        C.telNo,
-        B.itakusakiJigyoshaNo,
-        E.jigyoshaName AS itakusaki_jigyoshaName,
-        B.jigyoshaHenkoYMD,
-        B.tekiyoKaishiYMD,
-        B.tekiyoShuryoYMD,
-        B.jigyoshaHenkoJiyu
+        A."todokedeKubun",
+        A."todokedeYMD",
+        B."sakuseiKubunCode",
+        B."keikakuJigyoshaNo",
+        C."jigyoshaName" AS keikaku_jigyoshaName,
+        C."yubinNo",
+        C."jigyoshaAddress",
+        D."daihyoshaShimei",
+        C."telNo",
+        B."itakusakiJigyoshaNo",
+        E."jigyoshaName" AS itakusaki_jigyoshaName,
+        B."jigyoshaHenkoYMD",
+        B."tekiyoKaishiYMD",
+        B."tekiyoShuryoYMD",
+        B."jigyoshaHenkoJiyu"
         FROM
         rgdb."DbT3005KyotakuKeikakuTodokede" AS A
         INNER JOIN
         rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS B
-        ON A.hihokenshaNo = B.hihokenshaNo
-        AND A.taishoYM = B.taishoYM
+        ON A."hihokenshaNo" = B."hihokenshaNo"
+        AND A."taishoYM" = B."taishoYM"
         INNER JOIN
         最新介護事業者 AS C
-        ON B.keikakuJigyoshaNo = C.jigyoshaNo
+        ON B."keikakuJigyoshaNo" = C."jigyoshaNo"
         INNER JOIN
         rgdb."DbT7062KaigoJigyoshaDaihyosha" AS D
-        ON C.jigyoshaNo = D.jigyoshaNo
+        ON C."jigyoshaNo" = D."jigyoshaNo"
         INNER JOIN
         rgdb."DbT7060KaigoJigyosha" AS E
-        ON B.itakusakiJigyoshaNo = E.jigyoshaNo
+        ON B."itakusakiJigyoshaNo" = E."jigyoshaNo"
         WHERE
-        A.hihokenshaNo = #{被保険者番号}
+        A."hihokenshaNo" = #{被保険者番号}
     </sql>
 
     <sql id="selectServiceShuruiCodeEntity">
         SELECT
-        F.serviceShuruiCode
+        F."serviceShuruiCode"
         FROM
         rgdb."DbT7063KaigoJigyoshaShiteiService" AS F
         WHERE
-        (F.jigyoshaNo,F.yukoKaishiYMD) IN
+        (F."jigyoshaNo",F."yukoKaishiYMD") IN
         (SELECT
-        C.jigyoshaNo,C.yukoKaishiYMD
+        C."jigyoshaNo",C."yukoKaishiYMD"
         FROM
         rgdb."DbT7060KaigoJigyosha" AS C
         INNER JOIN
         rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS B
-        ON B.keikakuJigyoshaNo = C.jigyoshaNo
+        ON B."keikakuJigyoshaNo" = C."jigyoshaNo"
         WHERE
-        A.hihokenshaNo = #{被保険者番号}
-        ORDER BY C.yukoKaishiYMD DESC
+        B."hihokenshaNo" = #{被保険者番号}
+        ORDER BY C."yukoKaishiYMD" DESC
         LIMIT 1
         )
     </sql>
 
     <sql id="selectJikoSakuseiKeikakuJohoEntity">
         SELECT
-        B.taishoYM,
-        B.keikakuSakuseiYMD,
-        A.todokedeYMD,
-        B.tekiyoKaishiYMD,
-        B.tekiyoShuryoYMD,
-        A.zanteiKubun
+        B."taishoYM",
+        B."keikakuSakuseiYMD",
+        A."todokedeYMD",
+        B."tekiyoKaishiYMD",
+        B."tekiyoShuryoYMD",
+        A."zanteiKubun"
         FROM
         rgdb."DbT3005KyotakuKeikakuTodokede" AS A
         INNER JOIN
         rgdb."DbT3007KyotakuKeikakuJikoSakusei" AS B
-        ON A.hihokenshaNo = B.hihokenshaNo
-        AND A.taishoYM = B.taishoYM
+        ON A."hihokenshaNo" = B."hihokenshaNo"
+        AND A."taishoYM" = B."taishoYM"
         WHERE
-        A.hihokenshaNo = #{被保険者番号}
+        A."hihokenshaNo" = #{被保険者番号}
     </sql>
 
 </mapper>
