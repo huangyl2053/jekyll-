@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBZUCA0100",
+ "displayWizard": false,
+ "subGyomuCode": "DBZ",
+ "steps": [
+  {
+   "id": 1,
+   "name": "資格不整合修正",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZA010001",
+     "toLayoutTitle": "資格不整合修正",
+     "toState": "不整合一覧"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZA010001",
+     "layoutTitle": "資格不整合修正",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
