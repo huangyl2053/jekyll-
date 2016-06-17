@@ -43,6 +43,16 @@ public final class IkenshoJohoPrintMapperParameter implements IMyBatisParameter 
     private final RString 処理状態区分_通常;
     private final RString 処理状態区分_延期;
     private final FlexibleDate 主治医意見書作成依頼年月日;
+    private final boolean 主治医意見書依頼未処理者一覧表作成条件フラグ;
+    private final boolean 主治医意見書未提出者一覧作成条件フラグ;
+    private final boolean 主治医意見書未提出者一覧作成条件フラグ2;
+    private final boolean 主治医意見書依頼済み一覧表作成条件フラグ;
+    private final boolean 主治医意見書依頼済み一覧表作成条件フラグ2;
+    private final boolean 主治医意見書項目確認一覧表作成条件フラグ;
+    private final boolean 主治医意見書作成料請求一覧表作成条件フラグ;
+    private final boolean 主治医意見書作成料請求一覧表作成条件フラグ2;
+    private static final RString FLAG_1 = new RString("1");
+    private static final RString FLAG_2 = new RString("2");
 
     /**
      * コンストラクタです。
@@ -70,6 +80,14 @@ public final class IkenshoJohoPrintMapperParameter implements IMyBatisParameter 
      * @param 処理状態区分_通常 RString
      * @param 処理状態区分_延期 RString
      * @param 主治医意見書作成依頼年月日 FlexibleDate
+     * @param 主治医意見書依頼未処理者一覧表作成条件フラグ boolean
+     * @param 主治医意見書未提出者一覧作成条件フラグ boolean
+     * @param 主治医意見書未提出者一覧作成条件フラグ2 boolean
+     * @param 主治医意見書依頼済み一覧表作成条件フラグ boolean
+     * @param 主治医意見書依頼済み一覧表作成条件フラグ2 boolean
+     * @param 主治医意見書項目確認一覧表作成条件フラグ boolean
+     * @param 主治医意見書作成料請求一覧表作成条件フラグ boolean
+     * @param 主治医意見書作成料請求一覧表作成条件フラグ2 boolean
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     private IkenshoJohoPrintMapperParameter(
@@ -95,7 +113,16 @@ public final class IkenshoJohoPrintMapperParameter implements IMyBatisParameter 
             FlexibleDate 主治医意見書作成料請求一覧表受領日To,
             RString 処理状態区分_通常,
             RString 処理状態区分_延期,
-            FlexibleDate 主治医意見書作成依頼年月日) {
+            FlexibleDate 主治医意見書作成依頼年月日,
+            boolean 主治医意見書依頼未処理者一覧表作成条件フラグ,
+            boolean 主治医意見書未提出者一覧作成条件フラグ,
+            boolean 主治医意見書未提出者一覧作成条件フラグ2,
+            boolean 主治医意見書依頼済み一覧表作成条件フラグ,
+            boolean 主治医意見書依頼済み一覧表作成条件フラグ2,
+            boolean 主治医意見書項目確認一覧表作成条件フラグ,
+            boolean 主治医意見書作成料請求一覧表作成条件フラグ,
+            boolean 主治医意見書作成料請求一覧表作成条件フラグ2
+    ) {
         this.主治医意見書未提出者一覧作成条件 = 主治医意見書未提出者一覧作成条件;
         this.主治医意見書未提出者一覧申請日From = 主治医意見書未提出者一覧申請日From;
         this.主治医意見書未提出者一覧申請日To = 主治医意見書未提出者一覧申請日To;
@@ -119,6 +146,14 @@ public final class IkenshoJohoPrintMapperParameter implements IMyBatisParameter 
         this.処理状態区分_通常 = 処理状態区分_通常;
         this.処理状態区分_延期 = 処理状態区分_延期;
         this.主治医意見書作成依頼年月日 = 主治医意見書作成依頼年月日;
+        this.主治医意見書依頼未処理者一覧表作成条件フラグ = 主治医意見書依頼未処理者一覧表作成条件フラグ;
+        this.主治医意見書未提出者一覧作成条件フラグ = 主治医意見書未提出者一覧作成条件フラグ;
+        this.主治医意見書未提出者一覧作成条件フラグ2 = 主治医意見書未提出者一覧作成条件フラグ2;
+        this.主治医意見書依頼済み一覧表作成条件フラグ = 主治医意見書依頼済み一覧表作成条件フラグ;
+        this.主治医意見書依頼済み一覧表作成条件フラグ2 = 主治医意見書依頼済み一覧表作成条件フラグ2;
+        this.主治医意見書項目確認一覧表作成条件フラグ = 主治医意見書項目確認一覧表作成条件フラグ;
+        this.主治医意見書作成料請求一覧表作成条件フラグ = 主治医意見書作成料請求一覧表作成条件フラグ;
+        this.主治医意見書作成料請求一覧表作成条件フラグ2 = 主治医意見書作成料請求一覧表作成条件フラグ2;
     }
 
     /**
@@ -196,6 +231,15 @@ public final class IkenshoJohoPrintMapperParameter implements IMyBatisParameter 
                 主治医意見書作成料請求一覧表受領日To,
                 処理状態区分_通常,
                 処理状態区分_延期,
-                主治医意見書作成依頼年月日);
+                主治医意見書作成依頼年月日,
+                FLAG_2.equals(主治医意見書未提出者一覧作成条件),
+                FLAG_1.equals(主治医意見書未提出者一覧作成条件),
+                FLAG_2.equals(主治医意見書未提出者一覧作成条件),
+                FLAG_1.equals(主治医意見書依頼済み一覧表作成条件),
+                FLAG_2.equals(主治医意見書依頼済み一覧表作成条件),
+                FLAG_2.equals(主治医意見書項目確認一覧表作成条件),
+                FLAG_1.equals(主治医意見書作成料請求一覧表作成条件),
+                FLAG_2.equals(主治医意見書作成料請求一覧表作成条件)
+        );
     }
 }
