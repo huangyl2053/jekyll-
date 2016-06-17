@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ikenshojohoprint.IkenshoJohoPrintProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojohoprint.IkenshoJohoPrintRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shijiiikenshoiraihenko.ShijiiIkenshoIraiHenkoReportSource;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshojohoprint.IIkenshoJohoPrintMapper;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -59,6 +60,7 @@ public class ShijiiIkenshoIraiHenkoProcess
     private static final RString なし = new RString("無し");
     private IkenshoJohoPrintProcessParameter processParameter;
     private final IkenshoJohoPrintBusiness business = new IkenshoJohoPrintBusiness();
+    private int count;
 
     @BatchWriter
     private BatchReportWriter<ShijiiIkenshoIraiHenkoReportSource> batchWrite;
@@ -73,6 +75,8 @@ public class ShijiiIkenshoIraiHenkoProcess
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         導入団体コード = 導入団体クラス.getLasdecCode_().value();
         市町村名 = 導入団体クラス.get市町村名();
+        count = getMapper(IIkenshoJohoPrintMapper.class).get主治医意見書作成依頼変更者情報COUNT(
+                processParameter.toSinsakaiHanteiJyokyoMyBatisParameter());
     }
 
     @Override
@@ -91,20 +95,24 @@ public class ShijiiIkenshoIraiHenkoProcess
     @Override
     protected void usualProcess(IkenshoJohoPrintRelateEntity relateEntity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(relateEntity));
-        index_tmp++;
-        ShijiiIkenshoIraiHenko entity = business.toShijiiIkenshoIraiHenko(relateEntity);
-        ShijiiIkenshoIraiHenkoReport report = new ShijiiIkenshoIraiHenkoReport(entity, index_tmp);
-        report.writeBy(reportSourceWriter);
+        ShijiiIkenshoIraiHenko entity = business.toShijiiIkenshoIraiHenko(getBefore(), relateEntity, count);
+        if (entity != null) {
+            index_tmp++;
+            ShijiiIkenshoIraiHenkoReport report = new ShijiiIkenshoIraiHenkoReport(entity, index_tmp);
+            report.writeBy(reportSourceWriter);
+        }
     }
 
     @Override
     protected void keyBreakProcess(IkenshoJohoPrintRelateEntity relateEntity) {
-        ShijiiIkenshoIraiHenko entity = business.toShijiiIkenshoIraiHenko(relateEntity);
+        ShijiiIkenshoIraiHenko entity = business.toShijiiIkenshoIraiHenko(getBefore(), relateEntity, count);
         if (hasBrek(getBefore(), relateEntity)) {
             AccessLogger.log(AccessLogType.照会, toPersonalData(relateEntity));
-            ShijiiIkenshoIraiHenkoReport report = new ShijiiIkenshoIraiHenkoReport(entity, index_tmp);
-            report.writeBy(reportSourceWriter);
-            index_tmp++;
+            if (entity != null) {
+                ShijiiIkenshoIraiHenkoReport report = new ShijiiIkenshoIraiHenkoReport(entity, index_tmp);
+                report.writeBy(reportSourceWriter);
+                index_tmp++;
+            }
         }
     }
 

@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshoiraisumi.ShujiiI
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshomiirai.ShujiiIkenshoMiIraiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshomiteishutsu.ShujiiIkenshoMiteishutsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshoseikyuichiran.ShujiiIkenshoSeikyuIchiranEntity;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +26,9 @@ import lombok.Setter;
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IkenshoJohoPrintBusiness {
+
+    private int indexTmp;
+    private int index;
 
     /**
      * 主治医意見書依頼未処理者一覧情報を設定します。
@@ -40,7 +45,8 @@ public class IkenshoJohoPrintBusiness {
         shujiiIkenshoMiIraiEntity.set生年月日(entity.getSeinengappiYMD());
         shujiiIkenshoMiIraiEntity.set性別(entity.getSeibetsu().getColumnValue());
         shujiiIkenshoMiIraiEntity.set認定申請年月日(entity.getNinteiShinseiYMD());
-        shujiiIkenshoMiIraiEntity.set認定申請区分申請時コード(entity.getNinteiShinseiShinseijiKubunCode().getColumnValue());
+        Code 認定申請区分 = entity.getNinteiShinseiShinseijiKubunCode();
+        shujiiIkenshoMiIraiEntity.set認定申請区分申請時コード(認定申請区分 == null ? RString.EMPTY : 認定申請区分.getColumnValue());
         shujiiIkenshoMiIraiEntity.set前前回医療機関(entity.getIryoKikanMeisho3());
         shujiiIkenshoMiIraiEntity.set前前回主治医(entity.getShujiiName3());
         shujiiIkenshoMiIraiEntity.set前回医療機関(entity.getIryoKikanMeisho2());
@@ -53,26 +59,44 @@ public class IkenshoJohoPrintBusiness {
     /**
      * 主治医意見書作成依頼変更者一覧情報を設定します。
      *
+     * @param before IkenshoJohoPrintRelateEntity
      * @param entity IkenshoJohoPrintRelateEntity
+     * @param count 件数
      * @return ShijiiIkenshoIraiHenko
      */
-    public ShijiiIkenshoIraiHenko toShijiiIkenshoIraiHenko(IkenshoJohoPrintRelateEntity entity) {
+    public ShijiiIkenshoIraiHenko toShijiiIkenshoIraiHenko(IkenshoJohoPrintRelateEntity before, IkenshoJohoPrintRelateEntity entity, int count) {
         ShijiiIkenshoIraiHenko shijiiIkenshoIraiHenko = new ShijiiIkenshoIraiHenko();
-        shijiiIkenshoIraiHenko.set保険者番号(entity.getShoKisaiHokenshaNo());
-        shijiiIkenshoIraiHenko.set保険者名(entity.getShichosonMeisho());
-        shijiiIkenshoIraiHenko.set氏名(entity.getHihokenshaName());
-        shijiiIkenshoIraiHenko.set被保険者番号(entity.getHihokenshaNo());
-        shijiiIkenshoIraiHenko.set生年月日(entity.getSeinengappiYMD());
-        shijiiIkenshoIraiHenko.set性別(entity.getSeibetsu().getColumnValue());
-        shijiiIkenshoIraiHenko.set認定申請年月日(entity.getNinteiShinseiYMD());
-        shijiiIkenshoIraiHenko.set認定申請区分申請時コード(entity.getNinteiShinseiShinseijiKubunCode().getColumnValue());
-        //shijiiIkenshoIraiHenko.set変更回数(entity.getIryoKikanMeisho3());
-        //shijiiIkenshoIraiHenko.set変更前医療機関(entity.getShujiiName3());
-        //shijiiIkenshoIraiHenko.set変更前主治医(entity.getIryoKikanMeisho2());
-        //shijiiIkenshoIraiHenko.set変更後医療機関(entity.getShujiiName2());
-        //shijiiIkenshoIraiHenko.set変更後主治医(entity.getIryoKikanMeisho());
-        //shijiiIkenshoIraiHenko.set変更日(entity.getShujiiName());
-        return shijiiIkenshoIraiHenko;
+        if (before == null) {
+            return null;
+        }
+        index++;
+        if (before.getShinseishoKanriNo().equals(entity.getShinseishoKanriNo())) {
+            if (entity.getIkenshoIraiRirekiNo() > 2) {
+                indexTmp++;
+                shijiiIkenshoIraiHenko.set保険者番号(entity.getShoKisaiHokenshaNo());
+                shijiiIkenshoIraiHenko.set保険者名(entity.getShichosonMeisho());
+                shijiiIkenshoIraiHenko.set氏名(entity.getHihokenshaName());
+                shijiiIkenshoIraiHenko.set被保険者番号(entity.getHihokenshaNo());
+                shijiiIkenshoIraiHenko.set生年月日(entity.getSeinengappiYMD());
+                shijiiIkenshoIraiHenko.set性別(entity.getSeibetsu().getColumnValue());
+                shijiiIkenshoIraiHenko.set認定申請年月日(entity.getNinteiShinseiYMD());
+                Code 認定申請区分 = entity.getNinteiShinseiShinseijiKubunCode();
+                shijiiIkenshoIraiHenko.set認定申請区分申請時コード(認定申請区分 == null ? RString.EMPTY : 認定申請区分.getColumnValue());
+                shijiiIkenshoIraiHenko.set変更回数(indexTmp);
+                shijiiIkenshoIraiHenko.set変更前医療機関(before.getIryoKikanMeisho());
+                shijiiIkenshoIraiHenko.set変更前主治医(before.getShujiiName());
+                shijiiIkenshoIraiHenko.set変更後医療機関(entity.getIryoKikanMeisho());
+                shijiiIkenshoIraiHenko.set変更後主治医(entity.getShujiiName());
+                shijiiIkenshoIraiHenko.set変更日(entity.getIkenshoSakuseiIraiYMD());
+            }
+            if (index == count) {
+                return shijiiIkenshoIraiHenko;
+            }
+        } else {
+            indexTmp = 0;
+            return shijiiIkenshoIraiHenko;
+        }
+        return null;
     }
 
     /**
@@ -90,7 +114,8 @@ public class IkenshoJohoPrintBusiness {
         shujiiIkenshoMiteishutsuEntity.set生年月日(entity.getSeinengappiYMD());
         shujiiIkenshoMiteishutsuEntity.set性別(entity.getSeibetsu().getColumnValue());
         shujiiIkenshoMiteishutsuEntity.set申請日(entity.getNinteiShinseiYMD());
-        shujiiIkenshoMiteishutsuEntity.set申請区分(entity.getNinteiShinseiShinseijiKubunCode().getColumnValue());
+        Code 認定申請区分 = entity.getNinteiShinseiShinseijiKubunCode();
+        shujiiIkenshoMiteishutsuEntity.set申請区分(認定申請区分 == null ? RString.EMPTY : 認定申請区分.getColumnValue());
         shujiiIkenshoMiteishutsuEntity.set医療機関(entity.getIryoKikanMeisho());
         shujiiIkenshoMiteishutsuEntity.set主治医(entity.getShujiiName());
         shujiiIkenshoMiteishutsuEntity.set依頼日(entity.getIkenshoSakuseiIraiYMD());
@@ -115,7 +140,8 @@ public class IkenshoJohoPrintBusiness {
         shujiiIkenshoIraiSumiEntity.set生年月日(entity.getSeinengappiYMD());
         shujiiIkenshoIraiSumiEntity.set性別(entity.getSeibetsu().getColumnValue());
         shujiiIkenshoIraiSumiEntity.set認定申請年月日(entity.getNinteiShinseiYMD());
-        shujiiIkenshoIraiSumiEntity.set認定申請区分申請時コード(entity.getNinteiShinseiShinseijiKubunCode().getColumnValue());
+        Code 認定申請区分 = entity.getNinteiShinseiShinseijiKubunCode();
+        shujiiIkenshoIraiSumiEntity.set認定申請区分申請時コード(認定申請区分 == null ? RString.EMPTY : 認定申請区分.getColumnValue());
         shujiiIkenshoIraiSumiEntity.set医療機関(entity.getIryoKikanMeisho());
         shujiiIkenshoIraiSumiEntity.set主治医(entity.getShujiiName());
         shujiiIkenshoIraiSumiEntity.set依頼日(entity.getIkenshoSakuseiIraiYMD());
@@ -141,10 +167,13 @@ public class IkenshoJohoPrintBusiness {
         shujiiIkensho5komokuEntity.set生年月日(entity.getSeinengappiYMD());
         shujiiIkensho5komokuEntity.set性別(entity.getSeibetsu().getColumnValue());
         shujiiIkensho5komokuEntity.set認定申請年月日(entity.getNinteiShinseiYMD());
-        shujiiIkensho5komokuEntity.set認定申請区分申請時コード(entity.getNinteiShinseiShinseijiKubunCode().getColumnValue());
+        Code 認定申請区分 = entity.getNinteiShinseiShinseijiKubunCode();
+        shujiiIkensho5komokuEntity.set認定申請区分申請時コード(認定申請区分 == null ? RString.EMPTY : 認定申請区分.getColumnValue());
         shujiiIkensho5komokuEntity.set意見書連番(entity.getRemban());
         shujiiIkensho5komokuEntity.set意見項目(entity.getIkenItem());
-        shujiiIkensho5komokuEntity.set厚労省IF識別コード(entity.getKoroshoIfShikibetsuCode().getColumnValue());
+        Code 厚労省IF識別コード = entity.getKoroshoIfShikibetsuCode();
+        shujiiIkensho5komokuEntity.set厚労省IF識別コード(
+                厚労省IF識別コード == null ? RString.EMPTY : 厚労省IF識別コード.getColumnValue());
         return shujiiIkensho5komokuEntity;
     }
 
@@ -163,7 +192,8 @@ public class IkenshoJohoPrintBusiness {
         shujiiIkenshoSeikyuEntity.set生年月日(entity.getSeinengappiYMD());
         shujiiIkenshoSeikyuEntity.set性別(entity.getSeibetsu().getColumnValue());
         shujiiIkenshoSeikyuEntity.set認定申請年月日(entity.getNinteiShinseiYMD());
-        shujiiIkenshoSeikyuEntity.set認定申請区分申請時コード(entity.getNinteiShinseiShinseijiKubunCode().getColumnValue());
+        Code 認定申請区分 = entity.getNinteiShinseiShinseijiKubunCode();
+        shujiiIkenshoSeikyuEntity.set認定申請区分申請時コード(認定申請区分 == null ? RString.EMPTY : 認定申請区分.getColumnValue());
         shujiiIkenshoSeikyuEntity.set医療機関(entity.getIryoKikanMeisho());
         shujiiIkenshoSeikyuEntity.set主治医意見書受領年月日(entity.getIkenshoJuryoYMD());
         shujiiIkenshoSeikyuEntity.set主治医意見書記入年月日(entity.getIkenshoKinyuYMD());
