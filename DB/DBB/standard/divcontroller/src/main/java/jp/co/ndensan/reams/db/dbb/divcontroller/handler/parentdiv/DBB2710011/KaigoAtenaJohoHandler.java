@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -261,8 +262,8 @@ public class KaigoAtenaJohoHandler {
      * @return 年金名称
      */
     private RString get年金名称(RString 年金コード) {
-        return CodeMaster.getCodeMeisho(SubGyomuCode.DBB介護賦課, new CodeShubetsu("0046"),
-                new Code(年金コード.length() > INT3 ? 年金コード.substring(0, INT3) : 年金コード));
+        return CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0046"),
+                new Code(年金コード.length() > INT3 ? 年金コード.substring(0, INT3) : 年金コード), new FlexibleDate(RDate.getNowDate().toDateString()));
     }
 
     /**
