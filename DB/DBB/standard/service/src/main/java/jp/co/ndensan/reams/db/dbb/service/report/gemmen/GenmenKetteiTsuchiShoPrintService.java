@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
@@ -76,7 +77,7 @@ public class GenmenKetteiTsuchiShoPrintService {
 
     private static final RString 種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
     private static final RString 定数 = new RString("0");
-    private static final CodeShubetsu コード種別 = new CodeShubetsu("0004");
+    private static final CodeShubetsu コード種別 = DBBCodeShubetsu.保険料減免種類.getコード();
     private static final RString RSTRING_1 = new RString("1");
     private static final int INDEX_ZERO = 0;
     private static final int INDEX_ONE = 1;
