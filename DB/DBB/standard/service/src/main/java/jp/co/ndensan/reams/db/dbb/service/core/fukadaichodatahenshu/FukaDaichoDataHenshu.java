@@ -1238,7 +1238,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         普通徴収.set普徴納付済額(RString.EMPTY);
         普通徴収.set普徴今後納付すべき額(RString.EMPTY);
         if (普通徴収更正前 == null) {
-            普通徴収.set普徴仮算定保険料(普通徴収更正後.get普徴仮算定保険料());
+            普通徴収.set普徴確定年額保険料(普通徴収更正後.get普徴確定年額保険料());
             普通徴収.set普徴金額１(普通徴収更正後.get普徴金額１());
             普通徴収.set普徴金額２(普通徴収更正後.get普徴金額２());
             普通徴収.set普徴金額３(普通徴収更正後.get普徴金額３());
@@ -1255,7 +1255,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             普通徴収.set普徴金額１４(普通徴収更正後.get普徴金額１４());
             普通徴収.set調整額歳出還付(普通徴収更正後.get調整額歳出還付());
         } else {
-            普通徴収.set普徴仮算定保険料(get増減額(普通徴収更正後.get普徴仮算定保険料(), 普通徴収更正前.get普徴仮算定保険料()));
+            普通徴収.set普徴確定年額保険料(get増減額(普通徴収更正後.get普徴確定年額保険料(), 普通徴収更正前.get普徴確定年額保険料()));
             普通徴収.set普徴金額１(get増減額(普通徴収更正後.get普徴金額１(), 普通徴収更正前.get普徴金額１()));
             普通徴収.set普徴金額２(get増減額(普通徴収更正後.get普徴金額２(), 普通徴収更正前.get普徴金額２()));
             普通徴収.set普徴金額３(get増減額(普通徴収更正後.get普徴金額３(), 普通徴収更正前.get普徴金額３()));
