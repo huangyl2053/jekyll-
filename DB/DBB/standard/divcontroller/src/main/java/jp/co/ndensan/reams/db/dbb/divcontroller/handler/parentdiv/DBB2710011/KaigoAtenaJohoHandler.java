@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.Kaig
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.NenkinInfoKensakuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.NenkinJohoKensakuDiv;
 import jp.co.ndensan.reams.db.dbb.service.core.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokuManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBZCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
@@ -20,7 +21,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -262,8 +262,11 @@ public class KaigoAtenaJohoHandler {
      * @return 年金名称
      */
     private RString get年金名称(RString 年金コード) {
-        return CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0046"),
-                new Code(年金コード.length() > INT3 ? 年金コード.substring(0, INT3) : 年金コード), new FlexibleDate(RDate.getNowDate().toDateString()));
+        RString 年金名称 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                DBZCodeShubetsu.介護支援専門員の欠員による減算の状況の有無.getコード(),
+                new Code(年金コード.length() > INT3 ? 年金コード.substring(0, INT3) : 年金コード),
+                new FlexibleDate(RDate.getNowDate().toDateString()));
+        return null == 年金名称 ? RString.EMPTY : 年金名称;
     }
 
     /**
