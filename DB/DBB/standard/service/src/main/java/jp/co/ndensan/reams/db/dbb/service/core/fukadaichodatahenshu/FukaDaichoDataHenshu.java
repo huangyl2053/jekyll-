@@ -413,9 +413,10 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         本算定賦課内訳.set本人減免額(format金額_パターン(前後区分, 賦課の情報.get賦課情報().get減免額()));
         本算定賦課内訳.set確定年額保険料(format金額_パターン(前後区分, 賦課の情報.get賦課情報().get確定介護保険料_年額()));
         本算定賦課内訳.set賦課基準日(賦課の情報.get賦課情報().get賦課期日() != null && !賦課の情報.get賦課情報().get賦課期日().isEmpty()
-                ? 賦課の情報.get賦課情報().get賦課期日().wareki().toDateString() : RString.EMPTY);
+                ? get年月日(賦課の情報.get賦課情報().get賦課期日()) : RString.EMPTY);
         本算定賦課内訳.set調定年月日(賦課の情報.get賦課情報().get調定日時() != null && !賦課の情報.get賦課情報().get調定日時().isEmpty()
-                ? 賦課の情報.get賦課情報().get調定日時().getDate().wareki().toDateString() : RString.EMPTY);
+                ? 賦課の情報.get賦課情報().get調定日時().getDate().wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString() : RString.EMPTY);
         if (前後区分) {
             編集後本算定賦課台帳情報.set本算定賦課内訳１更正後(本算定賦課内訳);
         } else {
@@ -774,9 +775,10 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         仮算定内訳.set減免額(format金額(賦課の情報.get賦課情報().get減免額()));
         仮算定内訳.set仮算定確定保険料(format金額(賦課の情報.get賦課情報().get確定介護保険料_年額()));
         仮算定内訳.set賦課基準日(賦課の情報.get賦課情報().get賦課期日() != null && !賦課の情報.get賦課情報().get賦課期日().isEmpty()
-                ? 賦課の情報.get賦課情報().get賦課期日().wareki().toDateString() : RString.EMPTY);
+                ? get年月日(賦課の情報.get賦課情報().get賦課期日()) : RString.EMPTY);
         仮算定内訳.set調定年月日(賦課の情報.get賦課情報().get調定日時() != null && !賦課の情報.get賦課情報().get調定日時().isEmpty()
-                ? 賦課の情報.get賦課情報().get調定日時().getDate().wareki().toDateString() : RString.EMPTY);
+                ? 賦課の情報.get賦課情報().get調定日時().getDate().wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString() : RString.EMPTY);
         if (前後区分) {
             編集後仮算定賦課台帳情報.set仮算定内訳更正後(仮算定内訳);
         } else {
