@@ -867,13 +867,13 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         本人.set本人資格取得日(get年月日(賦課の情報.get賦課情報().get資格取得日()));
         if (賦課の情報.get賦課情報().get資格取得事由() != null && !賦課の情報.get賦課情報().get資格取得事由().isEmpty()) {
             RString 本人取得事由
-                    = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, コード種別0007, new Code(賦課の情報.get賦課情報().get資格取得事由()));
+                    = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, コード種別0007, new Code(賦課の情報.get賦課情報().get資格取得事由()));
             本人.set本人取得事由(本人取得事由);
         }
         本人.set本人資格喪失日(get年月日(賦課の情報.get賦課情報().get資格喪失日()));
         if (賦課の情報.get賦課情報().get資格喪失事由() != null && !賦課の情報.get賦課情報().get資格喪失事由().isEmpty()) {
             RString 本人喪失事由
-                    = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, コード種別0010, new Code(賦課の情報.get賦課情報().get資格喪失事由()));
+                    = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, コード種別0010, new Code(賦課の情報.get賦課情報().get資格喪失事由()));
             本人.set本人喪失事由(本人喪失事由);
         }
         if (被保険者台帳情報 != null) {
