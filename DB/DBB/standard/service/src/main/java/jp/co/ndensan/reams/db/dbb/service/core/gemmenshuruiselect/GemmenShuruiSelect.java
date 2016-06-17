@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.service.core.gemmenshuruiselect;
 
 import java.util.List;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -19,8 +19,6 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
  */
 public class GemmenShuruiSelect {
 
-    private static final CodeShubetsu 種別 = new CodeShubetsu("0004");
-
     /**
      * 減免種類情報を取得する
      *
@@ -29,7 +27,7 @@ public class GemmenShuruiSelect {
      */
     public List<UzT0007CodeEntity> getGemmenShurui(FlexibleDate システム日付) {
         List<UzT0007CodeEntity> list = CodeMaster.getCode(SubGyomuCode.DBB介護賦課,
-                種別, システム日付);
+                DBBCodeShubetsu.保険料減免種類.getコード(), システム日付);
         if (list.isEmpty()) {
             return null;
         }
