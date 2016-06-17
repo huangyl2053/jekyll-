@@ -176,7 +176,13 @@ public class KogakuKyufuTaishoListHandler {
         if (row.getData7().getValue() != null) {
             div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().setValue(row.getData7().getValue());
         }
-        RString 高額判定根拠 = row.getData9();
+        if (row.getData9() != null && !row.getData9().isEmpty()) {
+            set高額判定根拠(サービス提供年月, row.getData9());
+        }
+        div.getRowId().setValue(new Decimal(row.getId()));
+    }
+
+    private void set高額判定根拠(FlexibleYearMonth サービス提供年月, RString 高額判定根拠) {
         if (サービス提供年月 != null && サービス提供年月.compareTo(new FlexibleYearMonth(平成17年10月)) <= 0) {
             if (高額判定根拠.contains(月)) {
                 div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().setSelectedKey(key0);
@@ -255,7 +261,6 @@ public class KogakuKyufuTaishoListHandler {
                 div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setSelectedKey(key0);
             }
         }
-        div.getRowId().setValue(new Decimal(row.getId()));
     }
 
     public void clear高額明細合計データ編集エリア() {
