@@ -1,23 +1,24 @@
-package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001;
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120002;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShotokuJohoChushutsuTanitsuTashaPanel のクラスファイル 
- * 
- * @author 自動生成
+ * ShotokuJohoChushutsuTanitsuTashaPanel のクラスファイル
+ *
+ * @reamsid_L DBB-1690-030 sunhui
  */
 public class ShotokuJohoChushutsuTanitsuTashaPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -160,7 +161,7 @@ public class ShotokuJohoChushutsuTanitsuTashaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setUplUpload(UploadPanel uplUpload) {
+    public void setUplUpload(UploadPanel uplUpload) {
         this.getToriKomiTaisho().setUplUpload(uplUpload);
     }
 
@@ -170,7 +171,7 @@ public class ShotokuJohoChushutsuTanitsuTashaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnUpload(Button btnUpload) {
+    public void setBtnUpload(Button btnUpload) {
         this.getToriKomiTaisho().setBtnUpload(btnUpload);
     }
 

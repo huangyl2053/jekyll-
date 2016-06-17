@@ -4,26 +4,28 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShotokuRenkeiJohoIchiran のクラスファイル 
- * 
- * @author 自動生成
+ * ShotokuJohoIchiranTanitsuTasha のクラスファイル
+ *
+ * @reamsid_L DBB-1690-030 sunhui
  */
-public class ShotokuRenkeiJohoIchiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+public class ShotokuJohoIchiranTanitsuTashaDiv extends Panel {
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdChohyoShutsuryokujun")
-    private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
+    @JsonProperty("ccdChohyoShutsuryokujunTanitsuTasha")
+    private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujunTanitsuTasha;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,12 +34,12 @@ public class ShotokuRenkeiJohoIchiranDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdChohyoShutsuryokujun
-     * @return ccdChohyoShutsuryokujun
+     * getccdChohyoShutsuryokujunTanitsuTasha
+     * @return ccdChohyoShutsuryokujunTanitsuTasha
      */
-    @JsonProperty("ccdChohyoShutsuryokujun")
-    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
-        return ccdChohyoShutsuryokujun;
+    @JsonProperty("ccdChohyoShutsuryokujunTanitsuTasha")
+    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujunTanitsuTasha() {
+        return ccdChohyoShutsuryokujunTanitsuTasha;
     }
 
     // </editor-fold>

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001;
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120002;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -7,18 +7,18 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
 /**
- * ShotokuJohoChushutsuTanitsuTashaBatchParameter のクラスファイル 
- * 
- * @author 自動生成
+ * ShotokuJohoChushutsuTanitsuTashaBatchParameter のクラスファイル
+ *
+ * @reamsid_L DBB-1690-030 sunhui
  */
 public class ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -61,7 +61,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv extends PanelBatc
     }
 
     @JsonIgnore
-    public void  setTxtShoriNendoTanitsuTasha(TextBoxDate txtShoriNendoTanitsuTasha) {
+    public void setTxtShoriNendoTanitsuTasha(TextBoxDate txtShoriNendoTanitsuTasha) {
         this.getShotokuJohoChushutsuTanitsuTashaPanel().setTxtShoriNendoTanitsuTasha(txtShoriNendoTanitsuTasha);
     }
 
@@ -71,7 +71,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv extends PanelBatc
     }
 
     @JsonIgnore
-    public void  setLin2(HorizontalLine lin2) {
+    public void setLin2(HorizontalLine lin2) {
         this.getShotokuJohoChushutsuTanitsuTashaPanel().setLin2(lin2);
     }
 
@@ -81,7 +81,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv extends PanelBatc
     }
 
     @JsonIgnore
-    public void  setTxtTorikomiJotai(TextBox txtTorikomiJotai) {
+    public void setTxtTorikomiJotai(TextBox txtTorikomiJotai) {
         this.getShotokuJohoChushutsuTanitsuTashaPanel().setTxtTorikomiJotai(txtTorikomiJotai);
     }
 
@@ -91,7 +91,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv extends PanelBatc
     }
 
     @JsonIgnore
-    public void  setLin3(HorizontalLine lin3) {
+    public void setLin3(HorizontalLine lin3) {
         this.getShotokuJohoChushutsuTanitsuTashaPanel().setLin3(lin3);
     }
 
@@ -101,7 +101,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv extends PanelBatc
     }
 
     @JsonIgnore
-    public void  setToriKomiTaisho(ToriKomiTaishoDiv ToriKomiTaisho) {
+    public void setToriKomiTaisho(ToriKomiTaishoDiv ToriKomiTaisho) {
         this.getShotokuJohoChushutsuTanitsuTashaPanel().setToriKomiTaisho(ToriKomiTaisho);
     }
 
@@ -111,7 +111,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv extends PanelBatc
     }
 
     @JsonIgnore
-    public void  setUplUpload(UploadPanel uplUpload) {
+    public void setUplUpload(UploadPanel uplUpload) {
         this.getShotokuJohoChushutsuTanitsuTashaPanel().getToriKomiTaisho().setUplUpload(uplUpload);
     }
 
@@ -121,7 +121,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv extends PanelBatc
     }
 
     @JsonIgnore
-    public void  setBtnUpload(Button btnUpload) {
+    public void setBtnUpload(Button btnUpload) {
         this.getShotokuJohoChushutsuTanitsuTashaPanel().getToriKomiTaisho().setBtnUpload(btnUpload);
     }
 
@@ -131,7 +131,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv extends PanelBatc
     }
 
     @JsonIgnore
-    public void  setShotokuJohoIchiranTanitsuTasha(ShotokuJohoIchiranTanitsuTashaDiv ShotokuJohoIchiranTanitsuTasha) {
+    public void setShotokuJohoIchiranTanitsuTasha(ShotokuJohoIchiranTanitsuTashaDiv ShotokuJohoIchiranTanitsuTasha) {
         this.getShotokuJohoChushutsuTanitsuTashaPanel().setShotokuJohoIchiranTanitsuTasha(ShotokuJohoIchiranTanitsuTasha);
     }
 

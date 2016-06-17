@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeikoiki.ShotokuJohoBatchresultKoikiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeikoiki.ShotokuJohoTyushutuRenkeiKoikiParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJohoResult;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shichoson.ShichosonJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shichoson.ShoriHizukeKanriMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
@@ -74,10 +75,11 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
      * @param koikiZenShichosonJohoList List<KoikiZenShichosonJoho>
      * @param 遷移区分 RString
      * @param 年度 FlexibleYear
-     * @return List<ShichosonJohoEntity>
+     * @return List<ShichosonJohoResult>
      */
-    public List<ShichosonJohoEntity> getShichosonJoho(List<KoikiZenShichosonJoho> koikiZenShichosonJohoList,
+    public List<ShichosonJohoResult> getShichosonJoho(List<KoikiZenShichosonJoho> koikiZenShichosonJohoList,
             RString 遷移区分, FlexibleYear 年度) {
+        List<ShichosonJohoResult> shichosonJohoResultList = new ArrayList<>();
         List<ShichosonJohoEntity> shichosonJohoList = new ArrayList<>();
         ShoriHizukeKanriMaster kanriMasterEntity;
         for (KoikiZenShichosonJoho entity : koikiZenShichosonJohoList) {
@@ -118,7 +120,10 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
             shichosonJohoEntity.set処理区分(kanriMasterEntity.get処理区分());
             shichosonJohoList.add(shichosonJohoEntity);
         }
-        return shichosonJohoList;
+        for (ShichosonJohoEntity entity : shichosonJohoList) {
+            shichosonJohoResultList.add(new ShichosonJohoResult(entity));
+        }
+        return shichosonJohoResultList;
     }
 
     /**
