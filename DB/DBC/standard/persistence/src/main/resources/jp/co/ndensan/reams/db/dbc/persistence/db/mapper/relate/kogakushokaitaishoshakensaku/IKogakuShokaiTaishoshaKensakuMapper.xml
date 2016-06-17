@@ -59,7 +59,9 @@
         </if>
         ORDER BY
             A."hihokenshaNo" ASC,
-            A."serviceTeikyoYM" ASC
+            A."serviceTeikyoYM" ASC,
+            A."shoKisaiHokenshaNo" ASC,
+            A."rirekiNo" ASC
     </select>
     <resultMap id="resultMap_KogakuShokai"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensakuEntity" autoMapping="true">
@@ -129,14 +131,16 @@
         </if>
         ORDER BY
             A."hihokenshaNo" ASC,
-            A."serviceTeikyoYM" ASC
+            A."serviceTeikyoYM" ASC,
+            A."shoKisaiHokenshaNo" ASC,
+            A."rirekiNo" ASC
     </select>
     <resultMap id="resultMap_JigyoKogakuShokai"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaitaishoshakensaku.JigyoKogakuShokaiTaishoshaKensakuEntity" autoMapping="true">
-        <id property="事業高額介護サービス費支給申請Entity.hihokenshaNo" column="A.hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="事業高額介護サービス費支給申請Entity.serviceTeikyoYM" column="A.serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="事業高額介護サービス費支給申請Entity.shoKisaiHokenshaNo" column="A.shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
-        <id property="事業高額介護サービス費支給申請Entity.rirekiNo" column="A.rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <id property="事業高額介護サービス費支給申請Entity.hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="事業高額介護サービス費支給申請Entity.serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="事業高額介護サービス費支給申請Entity.shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="事業高額介護サービス費支給申請Entity.rirekiNo" column="rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <association property="事業高額介護サービス費支給申請Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3110JigyoKogakuShikyuShinseiMapper.ResultMap_DbT3110JigyoKogakuShikyuShinseiEntity"/>
         <association property="事業高額介護サービス費支給判定結果Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3111JigyoKogakuShikyuHanteiKekkaMapper.ResultMap_DbT3111JigyoKogakuShikyuHanteiKekkaEntity"/>
         <association property="事業高額介護サービス費支給審査決定Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3112KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3112KogakuShikyuShinsaKetteiEntity"/>
