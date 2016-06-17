@@ -112,7 +112,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
         FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
         RString 整理番号 = paramter.getSeiriNp();
-        boolean flag = false;
+        boolean flag = true;
         List<dgSyokanbaraikete_Row> rowList = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete()
                 .getDataSource();
         for (dgSyokanbaraikete_Row row : rowList) {
@@ -120,8 +120,9 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             RString 様式番号 = row.getYoshikiNo();
             int 件数 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShikibetsuNoKanri(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号);
-            if (件数 == 0) {
-                flag = true;
+            if (件数 != 0) {
+                flag = false;
+                break;
             }
         }
         return flag;
