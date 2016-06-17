@@ -40,32 +40,28 @@ var DBC;
                 return new UZA.CheckBoxList(this.convFiledName("cbZanteiKubun"));
             };
 
-            Controls.prototype.txtTaishoYM = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtTaishoYM"));
-            };
-
-            Controls.prototype.txtRiyohyoSakuseiYMD = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtRiyohyoSakuseiYMD"));
-            };
-
-            Controls.prototype.txtRiyohyoTodokedeYMD = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtRiyohyoTodokedeYMD"));
+            Controls.prototype.txtRiyoYM = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtRiyoYM"));
             };
 
             Controls.prototype.txtKubunShikyuGendogaku = function () {
                 return new UZA.TextBox(this.convFiledName("txtKubunShikyuGendogaku"));
             };
 
+            Controls.prototype.txtGendoKanriKikan = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtGendoKanriKikan"));
+            };
+
             Controls.prototype.ShuruiGendoKakunin = function () {
                 return new UZA.Button(this.convFiledName("ShuruiGendoKakunin"));
             };
 
-            Controls.prototype.txtRiyohyoSakuseisha = function () {
-                return new UZA.TextBox(this.convFiledName("txtRiyohyoSakuseisha"));
+            Controls.prototype.ddlKoshinKbn = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlKoshinKbn"));
             };
 
-            Controls.prototype.txtGendoKanriKikan = function () {
-                return new UZA.TextBoxDateRange(this.convFiledName("txtGendoKanriKikan"));
+            Controls.prototype.txtSofuYM = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSofuYM"));
             };
 
             Controls.prototype.btnZengetsuCopy = function () {

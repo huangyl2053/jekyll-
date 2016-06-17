@@ -47,32 +47,28 @@ module DBC {
                 return new UZA.CheckBoxList(this.convFiledName("cbZanteiKubun"));
             }
 
-            public txtTaishoYM(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtTaishoYM"));
-            }
-
-            public txtRiyohyoSakuseiYMD(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtRiyohyoSakuseiYMD"));
-            }
-
-            public txtRiyohyoTodokedeYMD(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtRiyohyoTodokedeYMD"));
+            public txtRiyoYM(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtRiyoYM"));
             }
 
             public txtKubunShikyuGendogaku(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtKubunShikyuGendogaku"));
             }
 
+            public txtGendoKanriKikan(): UZA.TextBoxDateRange {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtGendoKanriKikan"));
+            }
+
             public ShuruiGendoKakunin(): UZA.Button {
                 return new UZA.Button(this.convFiledName("ShuruiGendoKakunin"));
             }
 
-            public txtRiyohyoSakuseisha(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtRiyohyoSakuseisha"));
+            public ddlKoshinKbn(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlKoshinKbn"));
             }
 
-            public txtGendoKanriKikan(): UZA.TextBoxDateRange {
-                return new UZA.TextBoxDateRange(this.convFiledName("txtGendoKanriKikan"));
+            public txtSofuYM(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtSofuYM"));
             }
 
             public btnZengetsuCopy(): UZA.Button {
@@ -131,12 +127,12 @@ module DBC {
                 return new UZA.TextBox(this.convFiledName("txtJigyoshaName"));
             }
 
-            //public ccvServiceCode(): DBC.ServiceCodeInputCommonChildDiv.ModeController {
-            //    return new DBC.ServiceCodeInputCommonChildDiv.ModeController(this.convFiledName("ccvServiceCode"));
+            //public ccdServiceCode(): DBC.ServiceCodeInputCommonChildDiv.ModeController {
+            //    return new DBC.ServiceCodeInputCommonChildDiv.ModeController(this.convFiledName("ccdServiceCode"));
             //}
 
-            //public ccvServiceType(): DBZ.ServiceTypeInputCommonChildDiv.ModeController {
-            //    return new DBZ.ServiceTypeInputCommonChildDiv.ModeController(this.convFiledName("ccvServiceType"));
+            //public ccdServiceType(): DBZ.ServiceTypeInputCommonChildDiv.ModeController {
+            //    return new DBZ.ServiceTypeInputCommonChildDiv.ModeController(this.convFiledName("ccdServiceType"));
             //}
 
             public txtTani(): UZA.TextBoxNum {
