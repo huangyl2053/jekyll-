@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.DBC0820022StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.DBC0820022TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.KyufuShiharayiMeisaiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.dgdKyufuhiMeisai_Row;
@@ -104,9 +105,9 @@ public class KyufuShiharayiMeisaiPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             div.getPanelThree().getBtnAdd().setDisabled(true);
             div.getPanelThree().getDgdKyufuhiMeisai().setReadOnly(true);
+            return ResponseData.of(div).setState(DBC0820022StateName.削除モード);
         }
-
-        return createResponse(div);
+        return ResponseData.of(div).setState(DBC0820022StateName.新規修正モード);
     }
 
     /**

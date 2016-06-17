@@ -132,9 +132,9 @@ public class KyufuShiharayiMeisaiPanelHandler {
      * clear給付費明細登録
      */
     public void clear給付費明細登録() {
-        div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス種類コード(null);
-        div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス項目コード(null);
-        div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス名称(null);
+        div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス種類コード(RString.EMPTY);
+        div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス項目コード(RString.EMPTY);
+        div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス名称(RString.EMPTY);
         div.getPanelThree().getPanelFour().getTxtTanyi().clearValue();
         div.getPanelThree().getPanelFour().getTxtKaisu().clearValue();
         div.getPanelThree().getPanelFour().getTxtServiceTanyi().clearValue();

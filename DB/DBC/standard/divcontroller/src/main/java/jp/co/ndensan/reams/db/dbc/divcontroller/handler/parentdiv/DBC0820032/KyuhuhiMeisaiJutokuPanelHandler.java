@@ -149,13 +149,12 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
      * clear給付費明細登録
      */
     public void clear給付費明細登録() {
-
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().setサービス種類コード(null);
+                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().setサービス種類コード(RString.EMPTY);
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().setサービス項目コード(null);
+                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().setサービス項目コード(RString.EMPTY);
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().setサービス名称(null);
+                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().setサービス名称(RString.EMPTY);
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getCcdHokenshaJoho().clear();
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtTanyi().clearValue();
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtKaisu().clearValue();
