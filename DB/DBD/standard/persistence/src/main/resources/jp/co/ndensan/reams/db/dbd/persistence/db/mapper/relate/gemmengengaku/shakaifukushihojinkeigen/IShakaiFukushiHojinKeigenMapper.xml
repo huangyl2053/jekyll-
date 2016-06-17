@@ -7,7 +7,7 @@
     <select id="get社会福祉法人等利用者負担軽減の情報List"
             resultMap="resultMap_ShafukuRiyoshaFutanKeigenEntity" 
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.shakaifukushihojinkeigen.ShakaiFukushiHojinKeigenParameter"
-            fetchSize="500">
+            fetchSize="500" resultOrdered="true">
         SELECT 
         A.*,
         B.*
