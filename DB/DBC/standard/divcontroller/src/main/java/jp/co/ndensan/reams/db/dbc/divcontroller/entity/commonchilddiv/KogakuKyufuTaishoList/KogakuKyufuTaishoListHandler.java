@@ -375,6 +375,9 @@ public class KogakuKyufuTaishoListHandler {
      */
     public void set明細編集モード() {
         div.getMeisaiGokeiHenshuPanel().setDisabled(true);
+        div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().setSelectedKey(key1);
+        div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().setSelectedKey(key1);
+        div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().setSelectedKey(key1);
     }
 
     private boolean checkState(dgTaishoshaIchiran_Row ddgRow) {
