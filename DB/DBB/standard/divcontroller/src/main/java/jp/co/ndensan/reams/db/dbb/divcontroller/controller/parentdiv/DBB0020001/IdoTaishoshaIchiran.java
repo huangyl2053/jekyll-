@@ -214,7 +214,7 @@ public class IdoTaishoshaIchiran {
         TsuchiShoHakkogoIdoshaListJoho 発行後異動者一覧情報 = new TsuchiShoHakkogoIdoshaListJoho(
                 通知書発行日時, 最終計算処理日時, 通知書名, 異動者リスト);
         return ResponseData.of(new HakkogoIdoTaishoshaIchiranPrintService().
-                print(発行後異動者一覧情報, association, 帳票作成日時)).respond();
+                printSingle(発行後異動者一覧情報, association, 帳票作成日時)).respond();
     }
 
     private IdoTaishoshaIchiranHandler getHandler(IdoTaishoshaIchiranDiv div) {
