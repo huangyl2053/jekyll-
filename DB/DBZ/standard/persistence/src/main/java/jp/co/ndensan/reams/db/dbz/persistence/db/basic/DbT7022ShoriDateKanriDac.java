@@ -17,7 +17,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.s
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.shoriEdaban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.shoriName;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.subGyomuCode;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.taishoKaishiYMD;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -1435,7 +1434,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
         requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage(年度内連番メッセージ.toString()));
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.selectSpecific(taishoKaishiYMD).
+        return accessor.select().
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
                                 eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
