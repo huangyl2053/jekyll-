@@ -8,8 +8,32 @@ module DBD {
 
         export class Events {
 
+            public static onClick_select(): string {
+                return "onClick_select";
+            }
+
             public static CloseOK(): string {
                 return "CloseOK";
+            }
+
+            public static onClick_btnKeikakuIraiUketsuke(): string {
+                return "onClick_btnKeikakuIraiUketsuke";
+            }
+
+            public static onClick_btnJikosakuseiKeikaku(): string {
+                return "onClick_btnJikosakuseiKeikaku";
+            }
+
+            public static onClick_btnKyotakuService(): string {
+                return "onClick_btnKyotakuService";
+            }
+
+            public static onClick_btnShuruiGendoGakuKakunin(): string {
+                return "onClick_btnShuruiGendoGakuKakunin";
+            }
+
+            public static onSelect_dgKyotakuService(): string {
+                return "onSelect_dgKyotakuService";
             }
 
         }
