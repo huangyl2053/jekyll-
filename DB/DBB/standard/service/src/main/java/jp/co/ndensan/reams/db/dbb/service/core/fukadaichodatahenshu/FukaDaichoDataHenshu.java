@@ -1164,6 +1164,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             特別徴収増減額.set特徴金額４(特別徴収更正後.get特徴金額４());
             特別徴収増減額.set特徴金額５(特別徴収更正後.get特徴金額５());
             特別徴収増減額.set特徴金額６(特別徴収更正後.get特徴金額６());
+            特別徴収増減額.set調整額歳出還付(特別徴収更正後.get調整額歳出還付());
         } else {
             特別徴収増減額.set特徴確定年額保険料(get増減額(特別徴収更正後.get特徴確定年額保険料(), 特別徴収更正前.get特徴確定年額保険料()));
             特別徴収増減額.set特徴金額１(get増減額(特別徴収更正後.get特徴金額１(), 特別徴収更正前.get特徴金額１()));
@@ -1172,6 +1173,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             特別徴収増減額.set特徴金額４(get増減額(特別徴収更正後.get特徴金額４(), 特別徴収更正前.get特徴金額４()));
             特別徴収増減額.set特徴金額５(get増減額(特別徴収更正後.get特徴金額５(), 特別徴収更正前.get特徴金額５()));
             特別徴収増減額.set特徴金額６(get増減額(特別徴収更正後.get特徴金額６(), 特別徴収更正前.get特徴金額６()));
+            特別徴収増減額.set調整額歳出還付(get増減額(特別徴収更正後.get調整額歳出還付(), 特別徴収更正前.get調整額歳出還付()));
         }
         特別徴収増減額.set特徴金額７(RString.EMPTY);
         特別徴収増減額.set特徴金額８(RString.EMPTY);
@@ -1181,7 +1183,6 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         特別徴収増減額.set特徴金額１２(RString.EMPTY);
         特別徴収増減額.set特徴金額１３(RString.EMPTY);
         特別徴収増減額.set特徴金額１４(RString.EMPTY);
-        特別徴収増減額.set調整額歳出還付(get増減額(特別徴収増減額.get調整額歳出還付(), 特別徴収増減額.get調整額歳出還付()));
         編集後本算定賦課台帳情報.set特別徴収増減額(特別徴収増減額);
     }
 
