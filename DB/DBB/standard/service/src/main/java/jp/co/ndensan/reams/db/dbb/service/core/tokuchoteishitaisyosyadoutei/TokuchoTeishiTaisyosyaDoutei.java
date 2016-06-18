@@ -97,19 +97,6 @@ public class TokuchoTeishiTaisyosyaDoutei {
         param.set表示(表示);
 
         if (広域保険者.equals(モード)) {
-            List<DbT7022ShoriDateKanriEntity> entityList = shoriDateKanriDac.selectShoriDateKanri(介護賦課, 処理名, 処理年度);
-            if (entityList == null || entityList.isEmpty()) {
-                return resultEntityList;
-            }
-            for (DbT7022ShoriDateKanriEntity entity : entityList) {
-                ShoriDateKanriResult result = new ShoriDateKanriResult();
-                result.set市町村コード(entity.getShichosonCode());
-                result.set基準年月日(entity.getKijunYMD());
-                resultEntityList.add(result);
-            }
-        }
-
-        if (単一保険者.equals(モード)) {
             List<ShoriDateKanriEntity> resultEntity = mapper.select処理日付管理マスタ(param);
             if (resultEntity == null || resultEntity.isEmpty()) {
                 return new ArrayList<>();
@@ -118,6 +105,19 @@ public class TokuchoTeishiTaisyosyaDoutei {
                 ShoriDateKanriResult result = new ShoriDateKanriResult();
                 result.set基準年月日(entity.get基準年月日());
                 result.set市町村コード(entity.get市町村コード());
+                resultEntityList.add(result);
+            }
+        }
+
+        if (単一保険者.equals(モード)) {
+            List<DbT7022ShoriDateKanriEntity> entityList = shoriDateKanriDac.selectShoriDateKanri(介護賦課, 処理名, 処理年度);
+            if (entityList == null || entityList.isEmpty()) {
+                return resultEntityList;
+            }
+            for (DbT7022ShoriDateKanriEntity entity : entityList) {
+                ShoriDateKanriResult result = new ShoriDateKanriResult();
+                result.set市町村コード(entity.getShichosonCode());
+                result.set基準年月日(entity.getKijunYMD());
                 resultEntityList.add(result);
             }
         }
