@@ -98,11 +98,9 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
                 throw new ApplicationException(DbzErrorMessages.使用不可.getMessage()
                         .replace(所得引出方法が不正のため.toString()).evaluate());
             }
-        } else if (所得情報抽出_連携異動.equals(メニューID)) {
-            if (!REAMS以外.equals(config)) {
-                throw new ApplicationException(DbzErrorMessages.使用不可.getMessage()
-                        .replace(所得引出方法が不正のため.toString()).evaluate());
-            }
+        } else if (所得情報抽出_連携異動.equals(メニューID) && !REAMS以外.equals(config)) {
+            throw new ApplicationException(DbzErrorMessages.使用不可.getMessage()
+                    .replace(所得引出方法が不正のため.toString()).evaluate());
         }
     }
 
@@ -198,11 +196,9 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
                 throw new ApplicationException(DbzErrorMessages.処理日付管理マスタなし.getMessage()
                         .replace(当初所得引出.toString()).evaluate());
             }
-        } else if (所得情報抽出_連携異動.equals(メニューID)) {
-            if (処理区分_2.equals(処理区分)) {
-                throw new ApplicationException(DbbErrorMessages.処理不可_関連機能未処理済.getMessage()
-                        .replace(当初所得引出.toString()).replace(所得引出.toString()).evaluate());
-            }
+        } else if (所得情報抽出_連携異動.equals(メニューID) && 処理区分_2.equals(処理区分)) {
+            throw new ApplicationException(DbbErrorMessages.処理不可_関連機能未処理済.getMessage()
+                    .replace(当初所得引出.toString()).replace(所得引出.toString()).evaluate());
         }
     }
 

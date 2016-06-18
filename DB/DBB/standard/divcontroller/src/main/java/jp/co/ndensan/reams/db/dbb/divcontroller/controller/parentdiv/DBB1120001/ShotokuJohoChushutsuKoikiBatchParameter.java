@@ -58,7 +58,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
     public ResponseData<ShotokuJohoChushutsuKoikiBatchParameterDiv> onLoad(ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
         RString 遷移区分 = null;
         FlexibleYear 年度 = null;
-        ShotokuJohoChushutsuKoikiPanelDiv shotokuJohoChushutsuKoikiPanelDiv = div.getShotokuJohoChushutsuKoikiPanel();
+        ShotokuJohoChushutsuKoikiPanelDiv koikiPanelDiv = div.getShotokuJohoChushutsuKoikiPanel();
         ShotokuJohoChushutsuKoikiBatchParameterHandler handler = getHandler(div);
         handler.initCheck();
         handler.shichosonIchiran();
@@ -76,7 +76,6 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
                 .createInstance().getGenShichosonJoho();
         List<ShichosonJohoResult> shichosonJohoList = ShotokuJohoChushutsuRenkeiKoiki.createInstance()
                 .getShichosonJoho(koikiZenShichosonJohoList.records(), 遷移区分, 年度);
-        div.getShotokuJohoChushutsuKoikiPanel().getTxtShoriNendoKoiki().setDisabled(true);
         List<dgShichosonIchiran_Row> rowList = new ArrayList<>();
         for (ShichosonJohoResult result : shichosonJohoList) {
             dgShichosonIchiran_Row row = new dgShichosonIchiran_Row();
@@ -100,7 +99,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
             }
             rowList.add(row);
         }
-        DataGrid<dgShichosonIchiran_Row> grid = shotokuJohoChushutsuKoikiPanelDiv.getDgShichosonIchiran();
+        DataGrid<dgShichosonIchiran_Row> grid = koikiPanelDiv.getDgShichosonIchiran();
         grid.setDataSource(rowList);
         if (grid.getSelectedItems().isEmpty()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);

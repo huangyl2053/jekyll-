@@ -98,11 +98,9 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
         RString メニューID = ResponseHolder.getMenuID();
         RString config = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         RString config2 = DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-        if (所得情報抽出_連携異動.equals(メニューID)) {
-            if (!config.equals(config2)) {
-                throw new ApplicationException(DbzErrorMessages.使用不可.getMessage().replace(当初所得引出.toString())
-                        .replace(所得引出.toString()).evaluate());
-            }
+        if (所得情報抽出_連携異動.equals(メニューID) && !config.equals(config2)) {
+            throw new ApplicationException(DbzErrorMessages.使用不可.getMessage().replace(当初所得引出.toString())
+                    .replace(所得引出.toString()).evaluate());
         }
     }
 
@@ -140,6 +138,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
                         .replace(当初所得引出.toString()).evaluate());
             }
         }
+        div.getShotokuJohoChushutsuKoikiPanel().getTxtShoriNendoKoiki().setDisabled(true);
     }
 
     /**
