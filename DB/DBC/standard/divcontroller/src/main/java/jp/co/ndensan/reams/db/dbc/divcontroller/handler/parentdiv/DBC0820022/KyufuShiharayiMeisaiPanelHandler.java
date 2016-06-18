@@ -172,7 +172,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
         } else if (削除.equals(state)) {
             if (RowState.Added.equals(row.getRowState())) {
                 div.getPanelThree().getDgdKyufuhiMeisai().getDataSource().remove(
-                        Integer.parseInt(div.getPanelThree().getRowId().toString()));
+                        div.getPanelThree().getRowId().getValue().intValue());
                 clear給付費明細登録();
                 div.getPanelThree().getPanelFour().setDisabled(true);
             } else {
@@ -571,7 +571,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
         div.getPanelThree().getPanelFour().getTxtKaisu().setReadOnly(flag);
         div.getPanelThree().getPanelFour().getTxtServiceTanyi().setReadOnly(flag);
         div.getPanelThree().getPanelFour().getTxtTeikiyo().setReadOnly(flag);
-
+        div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setReadOnly(flag);
     }
 
 }

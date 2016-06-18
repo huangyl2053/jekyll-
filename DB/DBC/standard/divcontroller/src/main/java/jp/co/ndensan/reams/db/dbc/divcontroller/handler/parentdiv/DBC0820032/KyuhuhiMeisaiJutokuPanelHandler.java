@@ -192,7 +192,7 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
         } else if (削除.equals(state)) {
             if (RowState.Added.equals(row.getRowState())) {
                 div.getPnlBtnDetail().getPnlKyufuhiMeisai().getDgJushochiTokutei().getDataSource().remove(
-                        Integer.parseInt(div.getPnlBtnDetail().getPnlKyufuhiMeisai().getRowId().toString()));
+                        div.getPnlBtnDetail().getPnlKyufuhiMeisai().getRowId().getValue().intValue());
                 clear給付費明細登録();
                 div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().setVisible(true);
             } else {
