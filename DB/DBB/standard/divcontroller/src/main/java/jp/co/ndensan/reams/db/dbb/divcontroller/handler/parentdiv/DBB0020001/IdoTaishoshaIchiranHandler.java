@@ -63,28 +63,28 @@ public final class IdoTaishoshaIchiranHandler {
         RString select帳票ID = div.getDdlTsuchishoMeisho().getSelectedKey();
         Map<ReportId, List<YMDHMS>> map = ViewStateHolder.get(ViewStateKeys.発行日時Map, Map.class);
         List<YMDHMS> 作成日時List = map.get(new ReportId(select帳票ID));
-        Comparator<YMDHMS> comparator = new Comparator<YMDHMS>() {
-            @Override
-            public int compare(YMDHMS s1, YMDHMS s2) {
-                return s2.compareTo(s1);
+        if (作成日時List != null && 作成日時List.isEmpty()) {
+            Comparator<YMDHMS> comparator = new Comparator<YMDHMS>() {
+                @Override
+                public int compare(YMDHMS s1, YMDHMS s2) {
+                    return s2.compareTo(s1);
+                }
+            };
+            Collections.sort(作成日時List, comparator);
+            List<KeyValueDataSource> 作成日時KeyValue = new ArrayList<>();
+            for (YMDHMS 作成日時 : 作成日時List) {
+                RString hh = new RString(作成日時.toString().substring(EIGHT, TEN));
+                RString mm = new RString(作成日時.toString().substring(TEN, TWELVE));
+                RString ss = new RString(作成日時.toString().substring(TWELVE, FOURTEEN));
+                RString ymd = new RString(作成日時.getDate().wareki().toDateString().toString());
+                RString hms = hh.concat(new RString(":")).concat(mm).concat(new RString(":")).concat(ss);
+                RString ymdhms = ymd.concat(new RString(" ")).concat(hms);
+                if (!作成日時KeyValue.contains(
+                        new KeyValueDataSource(new RString(作成日時.toString()), ymdhms))) {
+                    作成日時KeyValue.add(new KeyValueDataSource(new RString(作成日時.toString()), ymdhms));
+                }
             }
-        };
-        Collections.sort(作成日時List, comparator);
-        List<KeyValueDataSource> 作成日時KeyValue = new ArrayList<>();
-        for (YMDHMS 作成日時 : 作成日時List) {
-            RString hh = new RString(作成日時.toString().substring(EIGHT, TEN));
-            RString mm = new RString(作成日時.toString().substring(TEN, TWELVE));
-            RString ss = new RString(作成日時.toString().substring(TWELVE, FOURTEEN));
-            RString ymd = new RString(作成日時.getDate().wareki().toDateString().toString());
-            RString hms = hh.concat(new RString(":")).concat(mm).concat(new RString(":")).concat(ss);
-            RString ymdhms = ymd.concat(new RString(" ")).concat(hms);
-            if (!作成日時KeyValue.contains(
-                    new KeyValueDataSource(new RString(作成日時.toString()), ymdhms))) {
-                作成日時KeyValue.add(new KeyValueDataSource(new RString(作成日時.toString()), ymdhms));
-            }
-        }
-        div.getDdlSakuseiYMD().setDataSource(作成日時KeyValue);
-        if (作成日時KeyValue.size() != 整数_ZERO) {
+            div.getDdlSakuseiYMD().setDataSource(作成日時KeyValue);
             div.getDdlSakuseiYMD().setSelectedIndex(整数_ZERO);
         }
     }
@@ -97,13 +97,15 @@ public final class IdoTaishoshaIchiranHandler {
         RString 帳票作成日時 = div.getDdlSakuseiYMD().getSelectedKey();
         YMDHMS par帳票作成日時 = new YMDHMS(帳票作成日時);
         YMDHMS 最終計算処理日時 = TsuchiShoHakkogoIdoHaaku.createInstance().get計算処理日時(par帳票ID, par帳票作成日時);
-        RString hh = new RString(最終計算処理日時.toString().substring(EIGHT, TEN));
-        RString mm = new RString(最終計算処理日時.toString().substring(TEN, TWELVE));
-        RString ss = new RString(最終計算処理日時.toString().substring(TWELVE, FOURTEEN));
-        RString ymd = new RString(最終計算処理日時.getDate().wareki().toDateString().toString());
-        RString hms = hh.concat(new RString(":")).concat(mm).concat(new RString(":")).concat(ss);
-        RString ymdhms = ymd.concat(new RString(" ")).concat(hms);
-        div.getTxtLastKeisanShoriTime().setValue(ymdhms);
+        if (最終計算処理日時 != null && 最終計算処理日時.isEmpty()) {
+            RString hh = new RString(最終計算処理日時.toString().substring(EIGHT, TEN));
+            RString mm = new RString(最終計算処理日時.toString().substring(TEN, TWELVE));
+            RString ss = new RString(最終計算処理日時.toString().substring(TWELVE, FOURTEEN));
+            RString ymd = new RString(最終計算処理日時.getDate().wareki().toDateString().toString());
+            RString hms = hh.concat(new RString(":")).concat(mm).concat(new RString(":")).concat(ss);
+            RString ymdhms = ymd.concat(new RString(" ")).concat(hms);
+            div.getTxtLastKeisanShoriTime().setValue(ymdhms);
+        }
     }
 
     /**
