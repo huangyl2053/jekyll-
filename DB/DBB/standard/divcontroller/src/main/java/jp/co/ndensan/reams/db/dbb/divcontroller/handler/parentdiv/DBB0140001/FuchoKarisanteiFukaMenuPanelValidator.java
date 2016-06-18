@@ -55,4 +55,33 @@ public class FuchoKarisanteiFukaMenuPanelValidator {
                 .messages());
         return messages;
     }
+
+    /**
+     * 帳票IDのチェック_型0です。
+     *
+     * @return エラーメッセージ
+     */
+    public IValidationMessages validate帳票IDのチェック_型0() {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(FuchoKarisanteiFukaMenuPanelSpec.帳票IDのチェック_型0)
+                .thenAdd(FuchoKarisanteiFukaMenuPanelValidationMessage.帳票IDのチェック_型0)
+                .messages());
+        return messages;
+    }
+
+    /**
+     * 帳票IDのチェック_型2です。
+     *
+     * @return エラーメッセージ
+     */
+    public IValidationMessages validate帳票IDのチェック_型2() {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(FuchoKarisanteiFukaMenuPanelSpec.帳票IDのチェック_型2)
+                .thenAdd(FuchoKarisanteiFukaMenuPanelValidationMessage.帳票IDのチェック_型2)
+                .messages());
+        return messages;
+    }
+
 }

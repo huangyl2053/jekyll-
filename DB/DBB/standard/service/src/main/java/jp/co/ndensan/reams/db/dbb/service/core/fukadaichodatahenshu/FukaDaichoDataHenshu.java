@@ -36,6 +36,8 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
@@ -47,10 +49,10 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -97,27 +99,21 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
     private static final RString 定数_受給者 = new RString("受給者");
     private static final RString 受給者_償還払い化 = new RString("償還払い化");
     private static final RString 受給者_給付額減額 = new RString("給付額減額");
-    private static final CodeShubetsu 調定事由_コード種別 = new CodeShubetsu("0003");
     private static final RString 定数_特徴方法 = new RString("get特徴期別金額");
     private static final RString 定数_普徴方法 = new RString("get普徴期別金額");
     private static final RString 定数_普徴収入 = new RString("get普徴収入額");
     private static final RString 定数_特徴収入 = new RString("get特徴収入額");
     private static final RString 定数_境界層該当 = new RString("境界層該当");
-    private static final CodeShubetsu コード種別0046 = new CodeShubetsu("0046");
-    private static final CodeShubetsu コード種別0047 = new CodeShubetsu("0047");
     private static final RString FORMAT_月 = new RString("月");
     private static final RString FORMAT_LEFT = new RString("（");
     private static final RString FORMAT_RIGHT = new RString("期）");
     private static final RString FORMAT_符号 = new RString(",");
     private static final RString FORMAT_ = new RString("-");
     private static final RString 定数_年度 = new RString("年度");
-    private static final CodeShubetsu コード種別0007 = new CodeShubetsu("0007");
-    private static final CodeShubetsu コード種別0010 = new CodeShubetsu("0010");
     private static final RString 定値_作成 = new RString("作成");
     private static final RString 定値_仮算定タイトル = new RString("仮算定賦課台帳");
     private static final RString 定値_本算定タイトル = new RString("賦課台帳");
     private static final RString 定数_住特 = new RString("住特");
-    private static final CodeShubetsu コード種別0001 = new CodeShubetsu("0001");
     private static final RString 公式 = new RString("×　1/12");
     private static final RString 定数_ゼロ = new RString("0");
 
@@ -204,14 +200,14 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         編集後仮算定賦課台帳情報.set本人所得段階変更(期_1.equals(賦課情報.get境界層区分()) ? 定数_境界層該当 : RString.EMPTY);
 
         if (賦課台帳情報.get対象者_追加含む_情報() != null && 賦課台帳情報.get対象者_追加含む_情報().getDT特別徴収義務者コード() != null) {
-            RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード種別0047,
+            RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
                     賦課台帳情報.get対象者_追加含む_情報().getDT特別徴収義務者コード().value());
             編集後仮算定賦課台帳情報.set本人特徴義務者(特別徴収義務者);
         }
         RString 年金コード = 賦課台帳情報.get徴収方法情報() != null ? 賦課台帳情報.get徴収方法情報().get仮徴収_年金コード() : RString.EMPTY;
         if (!RString.isNullOrEmpty(年金コード) && INT_3 <= 年金コード.length()) {
-            RString 特別徴収対象年金
-                    = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード種別0046, new Code(年金コード.substring(0, INT_3)));
+            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
+                    new Code(年金コード.substring(0, INT_3)));
             編集後仮算定賦課台帳情報.set本人特徴対象年金(特別徴収対象年金);
         }
         set編集後仮算定賦課台帳情報(編集後仮算定賦課台帳情報, 賦課台帳情報);
@@ -289,14 +285,14 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         編集後本算定賦課台帳情報.set本人所得段階変更(期_1.equals(賦課情報.get境界層区分()) ? 定数_境界層該当 : RString.EMPTY);
 
         if (賦課台帳情報.get対象者_追加含む_情報() != null && 賦課台帳情報.get対象者_追加含む_情報().getDT特別徴収義務者コード() != null) {
-            RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード種別0047,
+            RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
                     賦課台帳情報.get対象者_追加含む_情報().getDT特別徴収義務者コード().value());
             編集後本算定賦課台帳情報.set本人特徴義務者(特別徴収義務者);
         }
         RString 年金コード = 賦課台帳情報.get徴収方法情報() != null ? 賦課台帳情報.get徴収方法情報().get仮徴収_年金コード() : RString.EMPTY;
         if (!RString.isNullOrEmpty(年金コード) && INT_3 <= 年金コード.length()) {
-            RString 特別徴収対象年金
-                    = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード種別0046, new Code(年金コード.substring(0, INT_3)));
+            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                    UEXCodeShubetsu.年金コード.getCodeShubetsu(), new Code(年金コード.substring(0, INT_3)));
             編集後本算定賦課台帳情報.set本人特徴対象年金(特別徴収対象年金);
         }
         set編集後本算定賦課台帳情報(編集後本算定賦課台帳情報, 賦課台帳情報);
@@ -714,7 +710,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             int index = 0;
             for (RString 変更事由 : 変更事由リスト) {
                 index = index + 1;
-                RString 略称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, コード種別0001, new Code(変更事由));
+                RString 略称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.変更事由.getコード(), new Code(変更事由));
                 switch (index) {
                     case INT_1:
                         編集後仮算定賦課台帳情報.set変更事由1(略称);
@@ -745,7 +741,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             int index = 0;
             for (RString 変更事由 : 変更事由リスト) {
                 index = index + 1;
-                RString 略称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, コード種別0001, new Code(変更事由));
+                RString 略称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.変更事由.getコード(), new Code(変更事由));
                 switch (index) {
                     case INT_1:
                         編集後本算定賦課台帳情報.set変更事由1(略称);
@@ -868,14 +864,14 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         Honnin 本人 = new Honnin();
         本人.set本人資格取得日(get年月日(賦課の情報.get賦課情報().get資格取得日()));
         if (賦課の情報.get賦課情報().get資格取得事由() != null && !賦課の情報.get賦課情報().get資格取得事由().isEmpty()) {
-            RString 本人取得事由
-                    = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, コード種別0007, new Code(賦課の情報.get賦課情報().get資格取得事由()));
+            RString 本人取得事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
+                    DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), new Code(賦課の情報.get賦課情報().get資格取得事由()));
             本人.set本人取得事由(本人取得事由);
         }
         本人.set本人資格喪失日(get年月日(賦課の情報.get賦課情報().get資格喪失日()));
         if (賦課の情報.get賦課情報().get資格喪失事由() != null && !賦課の情報.get賦課情報().get資格喪失事由().isEmpty()) {
-            RString 本人喪失事由
-                    = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, コード種別0010, new Code(賦課の情報.get賦課情報().get資格喪失事由()));
+            RString 本人喪失事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
+                    DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(), new Code(賦課の情報.get賦課情報().get資格喪失事由()));
             本人.set本人喪失事由(本人喪失事由);
         }
         if (被保険者台帳情報 != null) {
@@ -1513,7 +1509,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         if (RString.isNullOrEmpty(調定事由)) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, 調定事由_コード種別, new Code(調定事由));
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.調定事由.getコード(), new Code(調定事由));
     }
 
     private Decimal get前年度普通徴収最終期保険料(FukaJoho 前年度情報, Kitsuki 最終法定納期) {
