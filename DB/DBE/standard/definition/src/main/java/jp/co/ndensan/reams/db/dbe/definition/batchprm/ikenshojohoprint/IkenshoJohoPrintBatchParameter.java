@@ -26,30 +26,30 @@ public class IkenshoJohoPrintBatchParameter extends BatchParameterBase {
     private static final String 未提出者一覧フラグ = "主治医意見書未提出者一覧フラグ";
     private static final String 未提出者一覧作成条件 = "主治医意見書未提出者一覧作成条件";
     private static final String 未提出者一覧依頼日数 = "主治医意見書未提出者一覧依頼日数";
-    private static final String 未提出者一覧申請日From = "主治医意見書未提出者一覧申請日From";
-    private static final String 未提出者一覧申請日To = "主治医意見書未提出者一覧申請日To";
+    private static final String 未提出者一覧申請開始日 = "主治医意見書未提出者一覧申請日From";
+    private static final String 未提出者一覧申請終了日 = "主治医意見書未提出者一覧申請日To";
     private static final String 項目確認一覧表フラグ = "主治医意見書５項目確認一覧表フラグ";
     private static final String 項目確認一覧表作成条件 = "主治医意見書５項目確認一覧表作成条件";
     private static final String 項目確認一覧表審査会 = "主治医意見書５項目確認一覧表審査会";
     private static final String 依頼未処理者一覧表フラグ = "主治医意見書依頼未処理者一覧表フラグ";
     private static final String 依頼未処理者一覧表作成条件 = "主治医意見書依頼未処理者一覧表作成条件";
-    private static final String 依頼未処理者一覧表申請日From = "主治医意見書依頼未処理者一覧表申請日From";
-    private static final String 依頼未処理者一覧表申請日To = "主治医意見書依頼未処理者一覧表申請日To";
+    private static final String 依頼未処理者一覧表申請開始日 = "主治医意見書依頼未処理者一覧表申請日From";
+    private static final String 依頼未処理者一覧表申請終了日 = "主治医意見書依頼未処理者一覧表申請日To";
     private static final String 作成依頼変更者一覧表フラグ = "主治医意見書作成依頼変更者一覧表フラグ";
-    private static final String 作成依頼変更者一覧表申請日From = "主治医意見書作成依頼変更者一覧表申請日From";
-    private static final String 作成依頼変更者一覧表申請日To = "主治医意見書作成依頼変更者一覧表申請日To";
+    private static final String 作成依頼変更者一覧表申請開始日 = "主治医意見書作成依頼変更者一覧表申請日From";
+    private static final String 作成依頼変更者一覧表申請終了日 = "主治医意見書作成依頼変更者一覧表申請日To";
     private static final String 依頼済み一覧表フラグ = "主治医意見書依頼済み一覧表フラグ";
     private static final String 依頼済み一覧表作成条件 = "主治医意見書依頼済み一覧表作成条件";
-    private static final String 依頼済み一覧表処理日From = "主治医意見書依頼済み一覧表処理日From";
-    private static final String 依頼済み一覧表処理日To = "主治医意見書依頼済み一覧表処理日To";
-    private static final String 依頼済み一覧表申請日From = "主治医意見書依頼済み一覧表申請日From";
-    private static final String 依頼済み一覧表申請日To = "主治医意見書依頼済み一覧表申請日To";
+    private static final String 依頼済み一覧表処理開始日 = "主治医意見書依頼済み一覧表処理日From";
+    private static final String 依頼済み一覧表処理終了日 = "主治医意見書依頼済み一覧表処理日To";
+    private static final String 依頼済み一覧表申請開始日 = "主治医意見書依頼済み一覧表申請日From";
+    private static final String 依頼済み一覧表申請終了日 = "主治医意見書依頼済み一覧表申請日To";
     private static final String 作成料請求一覧表フラグ = "主治医意見書作成料請求一覧表フラグ";
     private static final String 作成料請求一覧表作成条件 = "主治医意見書作成料請求一覧表作成条件";
-    private static final String 作成料請求一覧表処理日From = "主治医意見書作成料請求一覧表処理日From";
-    private static final String 作成料請求一覧表処理日To = "主治医意見書作成料請求一覧表処理日To";
-    private static final String 作成料請求一覧表受領日From = "主治医意見書作成料請求一覧表受領日From";
-    private static final String 作成料請求一覧表受領日To = "主治医意見書作成料請求一覧表受領日To";
+    private static final String 作成料請求一覧表処理開始日 = "主治医意見書作成料請求一覧表処理日From";
+    private static final String 作成料請求一覧表処理終了日 = "主治医意見書作成料請求一覧表処理日To";
+    private static final String 作成料請求一覧表受領開始日 = "主治医意見書作成料請求一覧表受領日From";
+    private static final String 作成料請求一覧表受領終了日 = "主治医意見書作成料請求一覧表受領日To";
 
     @BatchParameter(key = 未提出者一覧フラグ, name = "主治医意見書未提出者一覧フラグ")
     private final boolean 主治医意見書未提出者一覧フラグ;
@@ -57,9 +57,9 @@ public class IkenshoJohoPrintBatchParameter extends BatchParameterBase {
     private final RString 主治医意見書未提出者一覧作成条件;
     @BatchParameter(key = 未提出者一覧依頼日数, name = "主治医意見書未提出者一覧依頼日数")
     private final RString 主治医意見書未提出者一覧依頼日数;
-    @BatchParameter(key = 未提出者一覧申請日From, name = "主治医意見書未提出者一覧申請日From")
+    @BatchParameter(key = 未提出者一覧申請開始日, name = "主治医意見書未提出者一覧申請日From")
     private final FlexibleDate 主治医意見書未提出者一覧申請日From;
-    @BatchParameter(key = 未提出者一覧申請日To, name = "主治医意見書未提出者一覧申請日To")
+    @BatchParameter(key = 未提出者一覧申請終了日, name = "主治医意見書未提出者一覧申請日To")
     private final FlexibleDate 主治医意見書未提出者一覧申請日To;
     @BatchParameter(key = 項目確認一覧表フラグ, name = "主治医意見書５項目確認一覧表フラグ")
     private final boolean 主治医意見書５項目確認一覧表フラグ;
@@ -71,39 +71,39 @@ public class IkenshoJohoPrintBatchParameter extends BatchParameterBase {
     private final boolean 主治医意見書依頼未処理者一覧表フラグ;
     @BatchParameter(key = 依頼未処理者一覧表作成条件, name = "主治医意見書依頼未処理者一覧表作成条件")
     private final RString 主治医意見書依頼未処理者一覧表作成条件;
-    @BatchParameter(key = 依頼未処理者一覧表申請日From, name = "主治医意見書依頼未処理者一覧表申請日From")
+    @BatchParameter(key = 依頼未処理者一覧表申請開始日, name = "主治医意見書依頼未処理者一覧表申請日From")
     private final FlexibleDate 主治医意見書依頼未処理者一覧表申請日From;
-    @BatchParameter(key = 依頼未処理者一覧表申請日To, name = "主治医意見書依頼未処理者一覧表申請日To")
+    @BatchParameter(key = 依頼未処理者一覧表申請終了日, name = "主治医意見書依頼未処理者一覧表申請日To")
     private final FlexibleDate 主治医意見書依頼未処理者一覧表申請日To;
     @BatchParameter(key = 作成依頼変更者一覧表フラグ, name = "主治医意見書作成依頼変更者一覧表フラグ")
     private final boolean 主治医意見書作成依頼変更者一覧表フラグ;
-    @BatchParameter(key = 作成依頼変更者一覧表申請日From, name = "主治医意見書作成依頼変更者一覧表申請日From")
+    @BatchParameter(key = 作成依頼変更者一覧表申請開始日, name = "主治医意見書作成依頼変更者一覧表申請日From")
     private final FlexibleDate 主治医意見書作成依頼変更者一覧表申請日From;
-    @BatchParameter(key = 作成依頼変更者一覧表申請日To, name = "主治医意見書作成依頼変更者一覧表申請日To")
+    @BatchParameter(key = 作成依頼変更者一覧表申請終了日, name = "主治医意見書作成依頼変更者一覧表申請日To")
     private final FlexibleDate 主治医意見書作成依頼変更者一覧表申請日To;
     @BatchParameter(key = 依頼済み一覧表フラグ, name = "主治医意見書依頼済み一覧表フラグ")
     private final boolean 主治医意見書依頼済み一覧表フラグ;
     @BatchParameter(key = 依頼済み一覧表作成条件, name = "主治医意見書依頼済み一覧表作成条件")
     private final RString 主治医意見書依頼済み一覧表作成条件;
-    @BatchParameter(key = 依頼済み一覧表処理日From, name = "主治医意見書依頼済み一覧表処理日From")
+    @BatchParameter(key = 依頼済み一覧表処理開始日, name = "主治医意見書依頼済み一覧表処理日From")
     private final FlexibleDate 主治医意見書依頼済み一覧表処理日From;
-    @BatchParameter(key = 依頼済み一覧表処理日To, name = "主治医意見書依頼済み一覧表処理日To")
+    @BatchParameter(key = 依頼済み一覧表処理終了日, name = "主治医意見書依頼済み一覧表処理日To")
     private final FlexibleDate 主治医意見書依頼済み一覧表処理日To;
-    @BatchParameter(key = 依頼済み一覧表申請日From, name = "主治医意見書依頼済み一覧表申請日From")
+    @BatchParameter(key = 依頼済み一覧表申請開始日, name = "主治医意見書依頼済み一覧表申請日From")
     private final FlexibleDate 主治医意見書依頼済み一覧表申請日From;
-    @BatchParameter(key = 依頼済み一覧表申請日To, name = "主治医意見書依頼済み一覧表申請日To")
+    @BatchParameter(key = 依頼済み一覧表申請終了日, name = "主治医意見書依頼済み一覧表申請日To")
     private final FlexibleDate 主治医意見書依頼済み一覧表申請日To;
     @BatchParameter(key = 作成料請求一覧表フラグ, name = "主治医意見書作成料請求一覧表フラグ")
     private final boolean 主治医意見書作成料請求一覧表フラグ;
     @BatchParameter(key = 作成料請求一覧表作成条件, name = "主治医意見書作成料請求一覧表作成条件")
     private final RString 主治医意見書作成料請求一覧表作成条件;
-    @BatchParameter(key = 作成料請求一覧表処理日From, name = "主治医意見書作成料請求一覧表処理日From")
+    @BatchParameter(key = 作成料請求一覧表処理開始日, name = "主治医意見書作成料請求一覧表処理日From")
     private final FlexibleDate 主治医意見書作成料請求一覧表処理日From;
-    @BatchParameter(key = 作成料請求一覧表処理日To, name = "主治医意見書作成料請求一覧表処理日To")
+    @BatchParameter(key = 作成料請求一覧表処理終了日, name = "主治医意見書作成料請求一覧表処理日To")
     private final FlexibleDate 主治医意見書作成料請求一覧表処理日To;
-    @BatchParameter(key = 作成料請求一覧表受領日From, name = "主治医意見書作成料請求一覧表受領日From")
+    @BatchParameter(key = 作成料請求一覧表受領開始日, name = "主治医意見書作成料請求一覧表受領日From")
     private final FlexibleDate 主治医意見書作成料請求一覧表受領日From;
-    @BatchParameter(key = 作成料請求一覧表受領日To, name = "主治医意見書作成料請求一覧表受領日To")
+    @BatchParameter(key = 作成料請求一覧表受領終了日, name = "主治医意見書作成料請求一覧表受領日To")
     private final FlexibleDate 主治医意見書作成料請求一覧表受領日To;
 
     /**

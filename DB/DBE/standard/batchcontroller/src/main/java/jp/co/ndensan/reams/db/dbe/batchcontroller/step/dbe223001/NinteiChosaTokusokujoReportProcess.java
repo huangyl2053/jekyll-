@@ -10,17 +10,16 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe223001.NinteiChosaTokusokujoBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe223001.NinteiChosaTokusokujoReport;
-import jp.co.ndensan.reams.db.dbe.definition.core.DbeMapperInterfaces;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe223001.NinteiChosaTokusokujoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.AtenaKikan;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.NinteiChosaTokusokujoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.dbe223001.NinteiChosaTokusokujoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe223001.IDbe223001RelateMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
@@ -71,6 +70,9 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
     private static final RString 昭 = new RString("昭");
     private static final int 一桁 = 1;
 
+    private static final RString MYBATIS_SELECT_ID
+            = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe223001.IDbe223001RelateMapper.select要介護認定調査督促状ByKey");
+
     static {
         OUT_SHINSEISHO_KANRINO_LIST = new RString("outShinseishoKanriNoList");
     }
@@ -91,7 +93,7 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(DbeMapperInterfaces.要介護認定調査督促状データの抽出.getFullPath(), paramter.toNinteiChosaTokusokujoMybatisParameter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, paramter.toNinteiChosaTokusokujoMybatisParameter());
     }
 
     @Override

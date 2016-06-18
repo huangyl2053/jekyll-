@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoReport;
-import jp.co.ndensan.reams.db.dbe.definition.core.DbeMapperInterfaces;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity;
@@ -51,6 +50,9 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
     NinteiChosaTokusokuTaishoshaIchiranhyoItem item;
     private List<NinteiChosaTokusokuTaishoshaIchiranhyoItem> itemList;
 
+    private static final RString MYBATIS_SELECT_ID
+            = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe223001.IDbe223001RelateMapper.select認定調査督促対象者一覧表ByKey");
+
     static {
         OUT_DATA_LIST = new RString("outDataList");
     }
@@ -65,8 +67,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(DbeMapperInterfaces.認定調査督促対象者一覧表データの抽出.getFullPath(),
-                parameter.toNinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toNinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter());
     }
 
     @Override

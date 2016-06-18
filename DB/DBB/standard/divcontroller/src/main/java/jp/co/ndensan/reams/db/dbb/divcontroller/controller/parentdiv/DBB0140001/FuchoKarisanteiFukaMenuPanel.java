@@ -9,11 +9,13 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisantei.FuchoKaris
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0140001.DBB0140001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0140001.FuchoKarisanteiFukaMenuPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0140001.FuchoKarisanteiFukaMenuPanelHandler;
-import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0140001.FuchoKarisanteiFukaMenuPanelValidationHandler;
+import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 普徴仮算定賦課のクラスです。
@@ -31,12 +33,14 @@ public class FuchoKarisanteiFukaMenuPanel {
      * @return 普徴仮算定賦課画面
      */
     public ResponseData<FuchoKarisanteiFukaMenuPanelDiv> onLoad(FuchoKarisanteiFukaMenuPanelDiv div) {
+        RDate システム日時 = RDate.getNowDate();
         FuchoKarisanteiFukaMenuPanelHandler handler = getHandler(div);
         RString メニューID = ResponseHolder.getMenuID();
-        handler.load処理状況();
-        handler.load管理情報確認();
+        boolean is非活性 = handler.load処理状況(システム日時);
+        handler.load管理情報確認(システム日時);
         handler.load算定帳票作成();
-        handler.load帳票作成個別情報();
+        handler.load帳票作成個別情報(システム日時);
+        ViewStateHolder.put(ViewStateKeys.実行フラグ, is非活性);
         if (普徴仮算定賦課メニュー.equals(メニューID)) {
             return ResponseData.of(div).setState(DBB0140001StateName.普徴仮算定賦課);
         } else {
@@ -67,21 +71,27 @@ public class FuchoKarisanteiFukaMenuPanel {
     }
 
     /**
+     * 画面の初期化時、違うの状態の実行ボタンの設定です。
+     *
+     * @param div FuchoKarisanteiFukaMenuPanelDiv
+     * @return 普徴仮算定賦課画面
+     */
+    public ResponseData<FuchoKarisanteiFukaMenuPanelDiv> onStateTransition(FuchoKarisanteiFukaMenuPanelDiv div) {
+        boolean falg = ViewStateHolder.get(ViewStateKeys.実行フラグ, Boolean.class);
+        getHandler(div).set実行ボタン(falg);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「実行する」ボタンを押下するとチェックです。
      *
      * @param div FuchoKarisanteiFukaMenuPanelDiv
      * @return 普徴仮算定賦課画面
      */
     public ResponseData<FuchoKarisanteiFukaMenuPanelDiv> onClick_Check(FuchoKarisanteiFukaMenuPanelDiv div) {
-        boolean has普徴 = getHandler(div).can実行チェック();
-        if (has普徴) {
-            FuchoKarisanteiFukaMenuPanelValidationHandler validationHandler = new FuchoKarisanteiFukaMenuPanelValidationHandler(div);
-            ValidationMessageControlPairs pairs;
-            pairs = validationHandler.validate発行日();
-            pairs.add(validationHandler.validate提供年月());
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
-            }
+        ValidationMessageControlPairs pairs = getHandler(div).can実行チェック();
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         return createResponseData(div);
     }

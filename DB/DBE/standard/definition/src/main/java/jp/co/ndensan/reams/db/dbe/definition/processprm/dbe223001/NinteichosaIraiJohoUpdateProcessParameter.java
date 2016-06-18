@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.processprm.dbe223001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.UpdateMybatisParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.NinteichosaIraiUpdateMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -18,9 +18,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class UpdateProcessParameter implements IBatchProcessParameter {
+public class NinteichosaIraiJohoUpdateProcessParameter implements IBatchProcessParameter {
 
-    private List<RString> 申請書管理番号List;
+    private List<RString> 申請書管理番号;
     private RString temp_督促日;
     private RString temp_督促方法;
     private RString temp_督促メモ;
@@ -28,11 +28,11 @@ public class UpdateProcessParameter implements IBatchProcessParameter {
     /**
      * 認定調査依頼情報更新のMybatisパラメータを作成します。
      *
-     * @param 申請書管理番号 申請書管理番号
+     * @param 申請書管理番号List 申請書管理番号List
      * @return 認定調査依頼情報更新のMybatisパラメータ
      */
-    public UpdateMybatisParameter toNinteiChosaTokusokujoMybatisParameter(RString 申請書管理番号) {
-        return new UpdateMybatisParameter(申請書管理番号,
+    public NinteichosaIraiUpdateMybatisParameter toNinteiChosaTokusokujoMybatisParameter() {
+        return new NinteichosaIraiUpdateMybatisParameter(申請書管理番号,
                 this.temp_督促日,
                 this.temp_督促方法,
                 this.temp_督促メモ);
