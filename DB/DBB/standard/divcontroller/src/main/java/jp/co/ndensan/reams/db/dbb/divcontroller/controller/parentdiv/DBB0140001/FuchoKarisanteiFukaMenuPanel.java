@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisantei.FuchoKaris
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0140001.DBB0140001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0140001.FuchoKarisanteiFukaMenuPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0140001.FuchoKarisanteiFukaMenuPanelHandler;
-import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0140001.FuchoKarisanteiFukaMenuPanelValidationHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -25,9 +24,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class FuchoKarisanteiFukaMenuPanel {
 
-    private static final int イチ_定値 = 1;
-    private static final int ニ_定値 = 2;
-    private static final int ミ_定値 = 3;
     private static final RString 普徴仮算定賦課メニュー = new RString("DBBMN34001");
 
     /**
@@ -40,7 +36,7 @@ public class FuchoKarisanteiFukaMenuPanel {
         RDate システム日時 = RDate.getNowDate();
         FuchoKarisanteiFukaMenuPanelHandler handler = getHandler(div);
         RString メニューID = ResponseHolder.getMenuID();
-        boolean is非活性 = handler.load処理状況();
+        boolean is非活性 = handler.load処理状況(システム日時);
         handler.load管理情報確認(システム日時);
         handler.load算定帳票作成();
         handler.load帳票作成個別情報(システム日時);
@@ -93,20 +89,7 @@ public class FuchoKarisanteiFukaMenuPanel {
      * @return 普徴仮算定賦課画面
      */
     public ResponseData<FuchoKarisanteiFukaMenuPanelDiv> onClick_Check(FuchoKarisanteiFukaMenuPanelDiv div) {
-        int has普徴 = getHandler(div).can実行チェック();
-        FuchoKarisanteiFukaMenuPanelValidationHandler validationHandler = new FuchoKarisanteiFukaMenuPanelValidationHandler(div);
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        if (イチ_定値 == has普徴) {
-            pairs = validationHandler.validate発行日();
-            pairs.add(validationHandler.validate提供年月());
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
-            }
-        } else if (ニ_定値 == has普徴) {
-            pairs = validationHandler.validate帳票IDのチェック_型0();
-        } else if (ミ_定値 == has普徴) {
-            pairs = validationHandler.validate帳票IDのチェック_型2();
-        }
+        ValidationMessageControlPairs pairs = getHandler(div).can実行チェック();
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }

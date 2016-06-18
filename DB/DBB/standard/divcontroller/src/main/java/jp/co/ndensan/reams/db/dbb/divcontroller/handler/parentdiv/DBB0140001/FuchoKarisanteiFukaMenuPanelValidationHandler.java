@@ -50,7 +50,7 @@ public class FuchoKarisanteiFukaMenuPanelValidationHandler {
      *
      * @return {@link ValidationMessageControlPairs}
      */
-    public ValidationMessageControlPairs validate提供年月() {
+    public ValidationMessageControlPairs validate対象者未選択() {
         IValidationMessages message = new FuchoKarisanteiFukaMenuPanelValidator(div).validate対象者入力();
         return create対象者Dictionary().check(message);
     }

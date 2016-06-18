@@ -46,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 普徴仮算定賦課のHandlerです。
@@ -112,11 +113,11 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
     /**
      * 処理状況エリアの初期化メソッドです。
      *
+     * @param システム日時 RDate
      * @return is非活性 boolean
      */
-    public boolean load処理状況() {
+    public boolean load処理状況(RDate システム日時) {
         ShoriJokyoDiv 処理状況div = div.getMainPanelBatchParameter().getFuchoKarisanteiFukaKakunin().getShoriJokyo();
-        RDate システム日時 = RDate.getNowDate();
         boolean is非活性 = false;
         RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, システム日時, SubGyomuCode.DBB介護賦課);
         処理状況div.getFuchoKarisanteiShoriNaiyo().getTxtChoteiNendo().setDomain(new RYear(調定年度));
@@ -165,12 +166,11 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
      */
     public void load管理情報確認(RDate システム日と時) {
         List<dgKanrijoho2_Row> dataSource = new ArrayList<>();
-        RDate システム日時 = RDate.getNowDate();
         dgKanrijoho2_Row row1 = new dgKanrijoho2_Row();
         dgKanrijoho2_Row row2 = new dgKanrijoho2_Row();
         dgKanrijoho2_Row row3 = new dgKanrijoho2_Row();
         dgKanrijoho2_Row row4 = new dgKanrijoho2_Row();
-        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, システム日時, SubGyomuCode.DBB介護賦課);
+        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, システム日と時, SubGyomuCode.DBB介護賦課);
         RString 調定年月日R = 調定年度.concat(月日);
         RDate 調定年月日 = new RDate(調定年月日R.toString());
         row1.setTxtKoumoku(項目列_仮算定賦課方法);
@@ -181,12 +181,12 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
         row2.setTxtNaiyo(ZanteiKeisanHasuChosei.toValue(端数調整有無code).get略称());
         row3.setTxtKoumoku(項目列_納期限);
         KoseiTsukiHantei 更正月判定 = new KoseiTsukiHantei();
-        RDate 法定納期限 = FukaNokiResearcher.createInstance().get普徴納期(更正月判定.find更正月(システム日と時).get期AsInt()).get法定納期限();
+        RDate 法定納期限 = FukaNokiResearcher.createInstance().get普徴納期(更正月判定.find更正月(RDate.getNowDate()).get期AsInt()).get法定納期限();
         if (法定納期限 != null) {
             row3.setTxtNaiyo(法定納期限.wareki().toDateString());
         }
         row4.setTxtKoumoku(項目列_6月特徴開始者);
-        RString 列_6月特徴開始者code = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_6月, システム日時, SubGyomuCode.DBB介護賦課);
+        RString 列_6月特徴開始者code = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_6月, システム日と時, SubGyomuCode.DBB介護賦課);
         row4.setTxtNaiyo(TokuchoKaishiMaeFucho6Gatsu.toValue(列_6月特徴開始者code).get略称());
         dataSource.add(row1);
         dataSource.add(row2);
@@ -216,13 +216,12 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
      */
     public void load帳票作成個別情報(RDate システム日と時) {
         KoseiTsukiHantei 更正月判定 = new KoseiTsukiHantei();
-        RDate システム日時 = RDate.getNowDate();
         RDate 発行日 = FukaNokiResearcher.createInstance().get普徴納期(
-                更正月判定.find更正月(システム日と時).get期AsInt()).get通知書発行日();
+                更正月判定.find更正月(RDate.getNowDate()).get期AsInt()).get通知書発行日();
         FuchoTsuchiKobetsuJohoDiv 帳票作成個別情報Panel = div
                 .getMainPanelBatchParameter().getFuchoKarisanteiChohyoHakko2().getFuchoTsuchiKobetsuJoho();
         帳票作成個別情報Panel.getTxtHakkoYMD().setValue(発行日);
-        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, システム日時, SubGyomuCode.DBB介護賦課);
+        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, システム日と時, SubGyomuCode.DBB介護賦課);
         ChohyoSeigyoHanyo 出力方法 = FuchoKariSanteiFuka.createInstance()
                 .getChohyoSeigyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, new FlexibleYear(調定年度), 項目名);
         if (出力方法 == null) {
@@ -324,13 +323,17 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
     /**
      * 「実行する」ボタンを押下すると、ボタンを行する。
      *
-     * @return 普徴開始通知書（仮算定）のチェック
+     * @return ValidationMessageControlPairs
      */
-    public int can実行チェック() {
-        int has普徴 = ゼロ_定値;
+    public ValidationMessageControlPairs can実行チェック() {
+        boolean has普徴 = false;
+        boolean has型なし = false;
+        boolean has型5期 = false;
         Map<RString, RString> 出力帳票一覧 = div.getMainPanelBatchParameter()
                 .getFuchoKarisanteiChohyoHakko2().getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
         RDate システム日時 = RDate.getNowDate();
+        FuchoKarisanteiFukaMenuPanelValidationHandler validationHandler = new FuchoKarisanteiFukaMenuPanelValidationHandler(div);
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         for (Map.Entry<RString, RString> map : 出力帳票一覧.entrySet()) {
             RString 帳票分類Id = map.getKey();
             if (帳票分類ＩＤ_保険料納入通知書_仮算定.equals(帳票分類Id)) {
@@ -341,15 +344,26 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
                 RString 算定期 = 出力期.substring(ゼロ_定値, イチ_定値);
                 RString 納付書の型の設定値 = get納付書の型の設定値(算定期, 調定年月日);
                 if (納入通知書の型_なし.equals(納付書の型の設定値)) {
-                    return ニ_定値;
+                    has型なし = true;
                 } else if (納入通知書の型_銀振型5期タイプ.equals(納付書の型の設定値)) {
-                    return ミ_定値;
+                    has型5期 = true;
                 }
-            } else {
-                has普徴 = イチ_定値;
+                // TODO QA880 普徴開始通知書（仮算定）のチェックがオンの場合
+            } else if (1 == 1) {
+                has普徴 = true;
             }
         }
-        return has普徴;
+        if (has普徴) {
+            pairs = validationHandler.validate発行日();
+            pairs.add(validationHandler.validate対象者未選択());
+        }
+        if (has型なし) {
+            pairs.add(validationHandler.validate帳票IDのチェック_型0());
+        }
+        if (has型5期) {
+            pairs.add(validationHandler.validate帳票IDのチェック_型2());
+        }
+        return pairs;
     }
 
     private RString get納付書の型の設定値(RString 算定期, RDate 調定年月日) {
