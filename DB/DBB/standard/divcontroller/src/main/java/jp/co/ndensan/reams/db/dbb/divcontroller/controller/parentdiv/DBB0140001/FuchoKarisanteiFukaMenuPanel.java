@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0140001.Fuc
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0140001.FuchoKarisanteiFukaMenuPanelValidationHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -36,12 +37,13 @@ public class FuchoKarisanteiFukaMenuPanel {
      * @return 普徴仮算定賦課画面
      */
     public ResponseData<FuchoKarisanteiFukaMenuPanelDiv> onLoad(FuchoKarisanteiFukaMenuPanelDiv div) {
+        RDate システム日時 = RDate.getNowDate();
         FuchoKarisanteiFukaMenuPanelHandler handler = getHandler(div);
         RString メニューID = ResponseHolder.getMenuID();
         boolean is非活性 = handler.load処理状況();
-        handler.load管理情報確認();
+        handler.load管理情報確認(システム日時);
         handler.load算定帳票作成();
-        handler.load帳票作成個別情報();
+        handler.load帳票作成個別情報(システム日時);
         ViewStateHolder.put(ViewStateKeys.実行フラグ, is非活性);
         if (普徴仮算定賦課メニュー.equals(メニューID)) {
             return ResponseData.of(div).setState(DBB0140001StateName.普徴仮算定賦課);
