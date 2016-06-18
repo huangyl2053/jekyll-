@@ -115,7 +115,8 @@ public class YokaigoNinteiTaskListDiv extends Panel implements IYokaigoNinteiTas
         Masking("Masking"),
         ShinsakaiToroku("ShinsakaiToroku"),
         NijiHantei("NijiHantei"),
-        GetsureiShori("GetsureiShori");
+        GetsureiShori("GetsureiShori"),
+        ShinsaUketsuke("ShinsaUketsuke");
 
         private final String name;
 
