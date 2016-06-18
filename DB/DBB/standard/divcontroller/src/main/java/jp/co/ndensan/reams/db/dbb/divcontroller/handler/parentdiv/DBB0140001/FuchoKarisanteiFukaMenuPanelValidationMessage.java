@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0140001;
 
+import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -24,7 +25,15 @@ public enum FuchoKarisanteiFukaMenuPanelValidationMessage implements IValidation
     /**
      * 対象者選択必要
      */
-    対象者チェック(UrErrorMessages.必須項目_追加メッセージあり, "対象者");
+    対象者チェック(UrErrorMessages.必須項目_追加メッセージあり, "対象者"),
+    /**
+     * 納入通知書の型が「0:なし」の場合、エラーとする.
+     */
+    帳票IDのチェック_型0(DbbErrorMessages.帳票ID取得不可のため処理不可),
+    /**
+     * 納入通知書の型が「2:銀振型5期タイプ」の場合、エラーとする
+     */
+    帳票IDのチェック_型2(DbbErrorMessages.銀振5期タイプ仮算定なし);
 
     private final Message message;
 
