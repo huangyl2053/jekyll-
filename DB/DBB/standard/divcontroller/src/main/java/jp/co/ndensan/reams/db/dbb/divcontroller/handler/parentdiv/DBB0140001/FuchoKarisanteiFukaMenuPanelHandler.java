@@ -111,6 +111,8 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
 
     /**
      * 処理状況エリアの初期化メソッドです。
+     *
+     * @return is非活性 boolean
      */
     public boolean load処理状況() {
         ShoriJokyoDiv 処理状況div = div.getMainPanelBatchParameter().getFuchoKarisanteiFukaKakunin().getShoriJokyo();
@@ -132,7 +134,8 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
                 dataSource.add(row);
                 is非活性 = true;
             } else {
-                is非活性 = is実行ボタン非活性(処理日付管理マスタ.get(0));
+                YMDHMS 基準日時 = 処理日付管理マスタ.get(0).get基準日時();
+                is非活性 = 基準日時 == null || 基準日時.isEmpty();
                 dataSource = setグリッド(処理日付管理マスタ.get(0), dataSource, メニューID);
             }
         } else if (普徴仮算定通知書一括発行メニュー.equals(メニューID)) {
@@ -146,7 +149,8 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
                 dataSource.add(row);
                 is非活性 = true;
             } else {
-                is非活性 = is実行ボタン非活性(処理日付管理マスタ.get(0));
+                YMDHMS 基準日時 = 処理日付管理マスタ.get(0).get基準日時();
+                is非活性 = 基準日時 == null || 基準日時.isEmpty();
                 dataSource = setグリッド(処理日付管理マスタ.get(0), dataSource, メニューID);
             }
         }
@@ -156,8 +160,10 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
 
     /**
      * 管理情報確認グループの初期化メソッドです。
+     *
+     * @param システム日と時 RDate
      */
-    public void load管理情報確認() {
+    public void load管理情報確認(RDate システム日と時) {
         List<dgKanrijoho2_Row> dataSource = new ArrayList<>();
         RDate システム日時 = RDate.getNowDate();
         dgKanrijoho2_Row row1 = new dgKanrijoho2_Row();
@@ -175,7 +181,7 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
         row2.setTxtNaiyo(ZanteiKeisanHasuChosei.toValue(端数調整有無code).get略称());
         row3.setTxtKoumoku(項目列_納期限);
         KoseiTsukiHantei 更正月判定 = new KoseiTsukiHantei();
-        RDate 法定納期限 = FukaNokiResearcher.createInstance().get普徴納期(更正月判定.find更正月(システム日時).get期AsInt()).get法定納期限();
+        RDate 法定納期限 = FukaNokiResearcher.createInstance().get普徴納期(更正月判定.find更正月(システム日と時).get期AsInt()).get法定納期限();
         if (法定納期限 != null) {
             row3.setTxtNaiyo(法定納期限.wareki().toDateString());
         }
@@ -205,12 +211,14 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
 
     /**
      * 帳票作成個別情報エリアの初期化メソッドです。
+     *
+     * @param システム日と時 RDate
      */
-    public void load帳票作成個別情報() {
+    public void load帳票作成個別情報(RDate システム日と時) {
         KoseiTsukiHantei 更正月判定 = new KoseiTsukiHantei();
         RDate システム日時 = RDate.getNowDate();
         RDate 発行日 = FukaNokiResearcher.createInstance().get普徴納期(
-                更正月判定.find更正月(システム日時).get期AsInt()).get通知書発行日();
+                更正月判定.find更正月(システム日と時).get期AsInt()).get通知書発行日();
         FuchoTsuchiKobetsuJohoDiv 帳票作成個別情報Panel = div
                 .getMainPanelBatchParameter().getFuchoKarisanteiChohyoHakko2().getFuchoTsuchiKobetsuJoho();
         帳票作成個別情報Panel.getTxtHakkoYMD().setValue(発行日);
@@ -438,15 +446,6 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
             dataSource.add(row);
         }
         return dataSource;
-    }
-
-    private boolean is実行ボタン非活性(ShoriDateKanri 処理日付管理マスタ) {
-        YMDHMS 基準日時 = 処理日付管理マスタ.get基準日時();
-        if (基準日時 == null || 基準日時.isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     private List<KeyValueDataSource> get対象者() {
