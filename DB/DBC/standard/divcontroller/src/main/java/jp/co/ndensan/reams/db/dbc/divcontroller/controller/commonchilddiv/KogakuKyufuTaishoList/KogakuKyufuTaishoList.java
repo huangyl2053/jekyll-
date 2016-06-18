@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.commonchilddiv.KogakuKyufuTaishoList;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoListValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoListHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoListValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -41,6 +41,7 @@ public class KogakuKyufuTaishoList {
     public ResponseData<KogakuKyufuTaishoListDiv> onClick_btnTsuika(
             KogakuKyufuTaishoListDiv div) {
         getHandler(div).高額明細合計データ編集非活性(false);
+        getHandler(div).clear高額明細合計データ編集エリア();
         ViewStateHolder.put(ViewStateKeys.処理モード, 追加);
         return createResponse(div);
     }
@@ -56,7 +57,7 @@ public class KogakuKyufuTaishoList {
         getHandler(div).高額明細合計データ編集非活性(false);
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         getHandler(div).set高額明細合計データ編集エリア(サービス提供年月);
-        getHandler(div).制御(サービス提供年月);
+        getHandler(div).修正制御(サービス提供年月);
         ViewStateHolder.put(ViewStateKeys.処理モード, 修正);
         return createResponse(div);
     }
@@ -69,10 +70,9 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onClick_delete(
             KogakuKyufuTaishoListDiv div) {
-        getHandler(div).高額明細合計データ編集非活性(true);
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         getHandler(div).set高額明細合計データ編集エリア(サービス提供年月);
-        getHandler(div).制御(サービス提供年月);
+        getHandler(div).削除制御();
         ViewStateHolder.put(ViewStateKeys.処理モード, 削除);
         return createResponse(div);
     }
