@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100001.dgSh
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.KanryoInfoPhase;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.KanryoInfoPhase;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -175,47 +175,39 @@ public class ShinseiKensakuHandler {
     }
 
     private void editZenkaiJohoForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
-        boolean useZenkaiNinteiShinseiJoho = false;
         RString 前回認定調査委託先 = finderDiv.getTxtZenkaiNinteiChosaItakusakiName().getValue();
         if (!RString.isNullOrEmpty(前回認定調査委託先)) {
             parameter.setZenkaiNinteiChosaItakusaki(finderDiv.getHdnZenkaiChosaItakusakiCode());
             parameter.setUseZenkaiNinteiChosaItakusaki(true);
-            useZenkaiNinteiShinseiJoho = true;
         }
         RString 前回主治医医療機関 = finderDiv.getTxtZenkaiShujiiIryokikanName().getValue();
         if (!RString.isNullOrEmpty(前回主治医医療機関)) {
             parameter.setZenkaiShujiiIryokikanCode(finderDiv.getHdnZenkaiShujiiIryokikanCode());
             parameter.setUseZenkaiShujiiIryokikanCode(true);
-            useZenkaiNinteiShinseiJoho = true;
         }
 
         RString 前回二次判定結果コード = finderDiv.getDdlZenkaiNijiHanteiKekka().getSelectedKey();
         if (!RString.isNullOrEmpty(前回二次判定結果コード)) {
             parameter.setZenkaiJotaiKubunCode(前回二次判定結果コード);
             parameter.setUseZenkaiJotaiKubunCode(true);
-            useZenkaiNinteiShinseiJoho = true;
         }
 
         RString 前回認定有効期間 = finderDiv.getTxtZenkaiNinteiYukoKikan().getValue();
         if (!RString.isNullOrEmpty(前回認定有効期間)) {
             parameter.setZenkaiYukoKikan(Integer.parseInt(前回認定有効期間.toString()));
             parameter.setUseZenkaiYukoKikan(true);
-            useZenkaiNinteiShinseiJoho = true;
         }
 
         FlexibleDate 設定有効開始日FROM = finderDiv.getTxtZenkaiYukoKaishiDateFrom().getValue();
         if (設定有効開始日FROM != null && !FlexibleDate.EMPTY.equals(設定有効開始日FROM)) {
             parameter.setZenkaiYukoKikanStartFrom(設定有効開始日FROM);
             parameter.setUseZenkaiYukoKikanStartFrom(true);
-            useZenkaiNinteiShinseiJoho = true;
         }
         FlexibleDate 設定有効開始日To = finderDiv.getTxtZenkaiYukoKaishiDateTo().getValue();
         if (設定有効開始日To != null && !FlexibleDate.EMPTY.equals(設定有効開始日To)) {
             parameter.setZenkaiYukoKikanStartTo(設定有効開始日To);
             parameter.setUseZenkaiYukoKikanStartTo(true);
-            useZenkaiNinteiShinseiJoho = true;
         }
-        parameter.setUseZenkaiNinteiShinseiJoho(useZenkaiNinteiShinseiJoho);
         RString 原因疾患 = finderDiv.getTxtGeninShikkanCode().getValue();
         if (!RString.isNullOrEmpty(原因疾患)) {
             parameter.setGeninShikkanCode(原因疾患);
