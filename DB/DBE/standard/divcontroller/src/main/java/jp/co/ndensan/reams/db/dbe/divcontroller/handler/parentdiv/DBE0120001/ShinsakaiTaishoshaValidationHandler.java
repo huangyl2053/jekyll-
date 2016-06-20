@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- * 審査会個人別状況照会画面のバリデーションハンドラークラスです。
+ * 審査会個人別状況照会画面のチェッククラスです。
  *
  * @reamsid_L DBE-1380-010 jinjue
  */
