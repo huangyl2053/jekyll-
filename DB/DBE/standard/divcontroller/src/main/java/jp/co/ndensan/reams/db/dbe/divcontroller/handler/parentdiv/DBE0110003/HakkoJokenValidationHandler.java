@@ -157,8 +157,8 @@ public class HakkoJokenValidationHandler {
                 new LasdecCode("000000"), ConfigNameDBE.Reamsへの切り替え日.get名称());
         RDate kijyundate = new RDate(kijyun.toString());
         if (!div.getTxtYoteiMiteishaShinseiYMD().isDisabled()) {
-            int yearsfrom = shinnseikafrom.getBetweenYears(kijyundate);
-            int yearsto = shinnseikato.getBetweenYears(kijyundate);
+            int yearsfrom = kijyundate.getBetweenYears(shinnseikafrom);
+            int yearsto = kijyundate.getBetweenYears(shinnseikato);
             if ((yearsfrom > 2) || (yearsto > 2)) {
                 validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日入力チェック));
             }
@@ -179,8 +179,8 @@ public class HakkoJokenValidationHandler {
                 new LasdecCode("000000"), ConfigNameDBE.Reamsへの切り替え日.get名称());
         RDate kijyundate = new RDate(kijyun.toString());
         if (!div.getTxtIraisakiHenkoshaIchiranShinseiYMD().isDisabled()) {
-            int yearsfrom = shinnseikafrom.getBetweenYears(kijyundate);
-            int yearsto = shinnseikato.getBetweenYears(kijyundate);
+            int yearsfrom = kijyundate.getBetweenYears(shinnseikafrom);
+            int yearsto = kijyundate.getBetweenYears(shinnseikato);
             if ((yearsfrom > 2) || (yearsto > 2)) {
                 validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日入力チェック));
             }
@@ -201,8 +201,8 @@ public class HakkoJokenValidationHandler {
                 new LasdecCode("000000"), ConfigNameDBE.Reamsへの切り替え日.get名称());
         RDate kijyundate = new RDate(kijyun.toString());
         if (!div.getTxtCheckListShinseiYMD().isDisabled()) {
-            int yearsfrom = shinnseikafrom.getBetweenYears(kijyundate);
-            int yearsto = shinnseikato.getBetweenYears(kijyundate);
+            int yearsfrom = kijyundate.getBetweenYears(shinnseikafrom);
+            int yearsto = kijyundate.getBetweenYears(shinnseikato);
             if ((yearsfrom > 2) || (yearsto > 2)) {
                 validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日入力チェック));
             }

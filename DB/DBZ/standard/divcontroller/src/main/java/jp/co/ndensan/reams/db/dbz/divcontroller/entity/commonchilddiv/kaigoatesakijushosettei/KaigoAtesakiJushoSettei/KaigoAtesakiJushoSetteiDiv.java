@@ -4,22 +4,27 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoates
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
- * KaigoAtesakiJushoSettei のクラスファイル 
- * 
+ * KaigoAtesakiJushoSettei のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJushoSetteiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -314,7 +319,7 @@ public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJu
             DisplayJushoSetteiRad[] enumArray = DisplayJushoSetteiRad.values();
 
             for (DisplayJushoSetteiRad enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -329,14 +334,59 @@ public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJu
     }
 
     public DisplayJushoSetteiRad getMode_DisplayJushoSetteiRad() {
-        return (DisplayJushoSetteiRad) _CommonChildDivModeUtil.getMode( this.modes, DisplayJushoSetteiRad.class );
+        return (DisplayJushoSetteiRad) _CommonChildDivModeUtil.getMode(this.modes, DisplayJushoSetteiRad.class);
     }
 
-    public void setMode_DisplayJushoSetteiRad( DisplayJushoSetteiRad value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DisplayJushoSetteiRad.class , value );
+    public void setMode_DisplayJushoSetteiRad(DisplayJushoSetteiRad value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DisplayJushoSetteiRad.class, value);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    @JsonIgnore
+    public void initialize(RString サブ業務コード, RString 帳票分類ID) {
+        createHandler().initialize(サブ業務コード, 帳票分類ID);
+    }
 
+    @Override
+    @JsonIgnore
+    public void is帳票独自() {
+        createHandler().is帳票独自();
+    }
+
+    @Override
+    @JsonIgnore
+    public void is都道府県名表示() {
+        createHandler().is都道府県名表示();
+    }
+
+    @Override
+    @JsonIgnore
+    public void is郡名表示() {
+        createHandler().is郡名表示();
+    }
+
+    @Override
+    @JsonIgnore
+    public void is市町村名表示() {
+        createHandler().is市町村名表示();
+    }
+
+    @Override
+    @JsonIgnore
+    public void get町域編集方法() {
+        createHandler().get町域編集方法();
+    }
+
+    @Override
+    @JsonIgnore
+    public void is方書表示() {
+        createHandler().is方書表示();
+    }
+
+    @JsonIgnore
+    private KaigoAtesakiJushoSetteiHandler createHandler() {
+        return new KaigoAtesakiJushoSetteiHandler(this);
+    }
 }

@@ -48,8 +48,11 @@ public class SystemKanriHoyou {
      * @return ResponseData<ChohyoSelectDiv>
      */
     public ResponseData<SystemKanriHoyouDiv> onLoad(SystemKanriHoyouDiv div) {
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        controlData.getMenuID();
         SubGyomuCode サブ業務コード = ControlDataHolder.getExecutionSubGyomuCode();
-        if (!RealInitialLocker.tryGetLock(前排他ロックキー())) {
+        LockingKey 前排他ロックキー = new LockingKey(controlData.getMenuID().concat(new RString(サブ業務コード.toString())));
+        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             throw new PessimisticLockingException();
         }
         List<ConfigMaintenance> resultList = finder.getSyozokuKikan(サブ業務コード.value()).records();
@@ -94,19 +97,15 @@ public class SystemKanriHoyou {
      * @return ResponseData
      */
     public ResponseData<SystemKanriHoyouDiv> btnComplete(SystemKanriHoyouDiv div) {
-        RealInitialLocker.release(前排他ロックキー());
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        controlData.getMenuID();
+        SubGyomuCode サブ業務コード = ControlDataHolder.getExecutionSubGyomuCode();
+        LockingKey 前排他ロックキー = new LockingKey(controlData.getMenuID().concat(new RString(サブ業務コード.toString())));
+        RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(div).respond();
     }
 
     private SystemKanriHandler getHandler(SystemKanriHoyouDiv div) {
         return new SystemKanriHandler(div);
-    }
-
-    private LockingKey 前排他ロックキー() {
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        controlData.getMenuID();
-        SubGyomuCode サブ業務コード = ControlDataHolder.getExecutionSubGyomuCode();
-        LockingKey 前排他ロックキー = new LockingKey(controlData.getMenuID().concat(new RString(サブ業務コード.toString())));
-        return 前排他ロックキー;
     }
 }
