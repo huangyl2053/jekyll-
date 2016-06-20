@@ -103,6 +103,9 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranProperty
 
 
 
+
+
+
             pageBreakKeys) {
             @Override
             public ReportLineRecord<TokubetsuChoshuIraikingakuMeisaiIchiranSource> occuredBreak(
@@ -131,6 +134,8 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranProperty
             帳票物理名 = new RString(ReportSourceFields.listUpper_6.name());
         } else if (BreakerFieldsEnum.市町村コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.hokenshaNo.name());
+        } else if (BreakerFieldsEnum.被保険者番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.listLower_1.name());
         }
 
         return 帳票物理名;
