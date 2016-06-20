@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -20,6 +21,12 @@ public class IinTuutishoMyBatisParameter implements IMyBatisParameter {
 
     private RString shinsakaiKaisaiNo;
     private RString shinsakaiIinCode;
+    private RString shujiiIryokikanCode;
+    private RString shujiiCode;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private RString ninteiChosaItakusakiCode;
+    private RString ninteiChosainCode;
+    private RString sonotaKikanCode;
 
     /**
      * コンストラクタです。

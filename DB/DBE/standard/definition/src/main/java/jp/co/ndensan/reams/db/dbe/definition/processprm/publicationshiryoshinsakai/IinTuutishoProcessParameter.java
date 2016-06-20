@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbe.definition.processprm.publicationshiryoshinsa
 
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTuutishoMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 審査会資料一括作成（委員）のProcessParameterです。
@@ -22,7 +24,11 @@ public class IinTuutishoProcessParameter implements IBatchProcessParameter {
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuSutairu;
     private RString printHou;
-    private RString chohyoIinHusu;
+    private Decimal chohyoIinHusu;
+    private FlexibleDate shinsakaiKaisaiYoteiYMD;
+    private RString shinsakaiKaishiYoteiTime;
+    private RString shinsakaiKaisaiBashoName;
+    private RString gogitaiNo;
 
     /**
      * コンストラクタです。
@@ -31,16 +37,28 @@ public class IinTuutishoProcessParameter implements IBatchProcessParameter {
      * @param shuturyokuSutairu 出力スタイル
      * @param printHou 印刷方法
      * @param chohyoIinHusu 審査会委員用部数
+     * @param shinsakaiKaisaiYoteiYMD 開催予定年月日
+     * @param shinsakaiKaishiYoteiTime 予定時刻
+     * @param shinsakaiKaisaiBashoName 開催会場
+     * @param gogitaiNo 合議体番号
      */
     public IinTuutishoProcessParameter(
             RString shinsakaiKaisaiNo,
             RString shuturyokuSutairu,
             RString printHou,
-            RString chohyoIinHusu) {
+            Decimal chohyoIinHusu,
+            FlexibleDate shinsakaiKaisaiYoteiYMD,
+            RString shinsakaiKaishiYoteiTime,
+            RString shinsakaiKaisaiBashoName,
+            RString gogitaiNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuSutairu = shuturyokuSutairu;
         this.printHou = printHou;
         this.chohyoIinHusu = chohyoIinHusu;
+        this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
+        this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;
+        this.shinsakaiKaisaiBashoName = shinsakaiKaisaiBashoName;
+        this.gogitaiNo = gogitaiNo;
     }
 
     /**

@@ -8,31 +8,27 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsa
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 委員用特記事項と一次判定結果票情報のMyBatisParameterです。
+ * 要介護認定申請者に関する基本情報のMyBatisParameterです。
  *
  * @reamsid_L DBE-0150-200 linghuhang
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class IinTokkiJikouItiziHanteiMyBatisParameter implements IMyBatisParameter {
+public class IinTokkiJikouMyBatisParameter implements IMyBatisParameter {
 
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuJun;
-    private Decimal bangoStart;
-    private Decimal bangoEnd;
+    private RString bangoStart;
+    private RString bangoEnd;
     private ShinseishoKanriNo shinseishoKanri;
     private int ninteichosaRirekiNo;
     private RString genponKubun;
     private boolean isSakuseiJokenHani;
     private boolean isIsShuturyokuJun;
     private boolean isSakuseiJokenTuika;
-    private boolean isOrderKakuteiFlg;
-    private RString isShoriJotaiKubun0;
-    private RString isShoriJotaiKubun3;
 
     /**
      * コンストラクタです。
@@ -45,11 +41,11 @@ public class IinTokkiJikouItiziHanteiMyBatisParameter implements IMyBatisParamet
      * @param isSakuseiJokenTuika 作成条件_追加分ファグ
      * @param isIsShuturyokuJun 出力順ファグ
      */
-    public IinTokkiJikouItiziHanteiMyBatisParameter(
+    public IinTokkiJikouMyBatisParameter(
             RString shinsakaiKaisaiNo,
             RString shuturyokuJun,
-            Decimal bangoStart,
-            Decimal bangoEnd,
+            RString bangoStart,
+            RString bangoEnd,
             boolean isSakuseiJokenHani,
             boolean isSakuseiJokenTuika,
             boolean isIsShuturyokuJun) {

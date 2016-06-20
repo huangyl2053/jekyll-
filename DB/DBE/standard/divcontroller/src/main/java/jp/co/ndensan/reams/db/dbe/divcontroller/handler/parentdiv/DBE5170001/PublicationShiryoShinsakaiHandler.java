@@ -55,6 +55,7 @@ public class PublicationShiryoShinsakaiHandler {
         div.getChkPrintChoyoJimu().setDisabledItemsByKey(事務);
         div.getTxtShiryoNoStart().setDisabled(true);
         div.getTxtSiryoNoEnd().setDisabled(true);
+        set項目();
     }
 
     /**
@@ -65,7 +66,6 @@ public class PublicationShiryoShinsakaiHandler {
         List<RString> 事務 = new ArrayList<>();
         List<RString> 事務_審査会資料 = new ArrayList<>();
         List<RString> 委員 = new ArrayList<>();
-        List<RString> 委員_審査会資料 = new ArrayList<>();
         if (作成条件_全件.equals(作成条件)) {
             事務.add(事務用出力条件_概況特記);
             div.getChkPrintChoyoJimu().setDisabledItemsByKey(事務);
@@ -79,23 +79,14 @@ public class PublicationShiryoShinsakaiHandler {
             事務.add(事務用出力条件_予備判定記入表);
             事務.add(事務用出力条件_概況特記一覧);
             事務.add(作成条件_範囲指定);
-            事務_審査会資料.add(作成条件_全件);
-            事務_審査会資料.add(作成条件_範囲指定);
-            事務_審査会資料.add(出力条件_特記事項_一次判定結果票);
-            事務_審査会資料.add(出力条件_主治医意見書);
             委員.add(委員用出力条件_予備判定記入表);
             委員.add(作成条件_全件);
             委員.add(作成条件_範囲指定);
-            委員_審査会資料.add(作成条件_全件);
-            委員_審査会資料.add(作成条件_範囲指定);
-            委員_審査会資料.add(出力条件_特記事項_一次判定結果票);
-            委員_審査会資料.add(出力条件_主治医意見書);
             div.getChkPrintChoyoJimu().setDisabledItemsByKey(事務);
-            div.getChkPrintChohyoShinsakaiJimu().setDisabledItemsByKey(事務_審査会資料);
             div.getChkPrintChohyoIin().setDisabledItemsByKey(委員);
-            div.getChkPrintChohyoShinsakaiIin().setDisabledItemsByKey(委員_審査会資料);
             div.getTxtShiryoNoStart().setDisabled(false);
             div.getTxtSiryoNoEnd().setDisabled(false);
+            set項目();
         } else {
             事務.add(作成条件_全件);
             事務.add(事務用出力条件_予備判定記入表);
@@ -233,8 +224,39 @@ public class PublicationShiryoShinsakaiHandler {
         if (委員用出力条件帳票.contains(委員用出力条件_予備判定記入表)) {
             委員_予備判定記入表フラグ = new RString("1");
         }
+        return set項目(事務_審査会開催通知書フラグ,
+                事務_特記事項フラグ,
+                事務_一次判定結果票フラグ,
+                事務_特記事項_一次判定フラグ,
+                事務_主治医意見書フラグ,
+                事務_概況特記フラグ,
+                事務_予備判定記入表フラグ,
+                事務_概況特記一覧フラグ,
+                委員_審査会開催通知書フラグ,
+                委員_特記事項フラグ,
+                委員_一次判定結果票フラグ,
+                委員_特記事項_一次判定フラグ,
+                委員_主治医意見書フラグ,
+                委員_予備判定記入表フラグ);
+    }
+
+    private PublicationShiryoShinsakaiBatchParameter set項目(
+            RString 事務_審査会開催通知書フラグ,
+            RString 事務_特記事項フラグ,
+            RString 事務_一次判定結果票フラグ,
+            RString 事務_特記事項_一次判定フラグ,
+            RString 事務_主治医意見書フラグ,
+            RString 事務_概況特記フラグ,
+            RString 事務_予備判定記入表フラグ,
+            RString 事務_概況特記一覧フラグ,
+            RString 委員_審査会開催通知書フラグ,
+            RString 委員_特記事項フラグ,
+            RString 委員_一次判定結果票フラグ,
+            RString 委員_特記事項_一次判定フラグ,
+            RString 委員_主治医意見書フラグ,
+            RString 委員_予備判定記入表フラグ) {
         return new PublicationShiryoShinsakaiBatchParameter(
-                div.getTxtShinsakaiKaisaiNo().getValue(),
+                div.getTxtShinsakaiKaisaiNo().getValue().substring(2),
                 div.getTxtShinsakaiYoteiDate().getValue(),
                 new RString(div.getTxtShinsakaiKaishiYoteiTime().getValue().toString()),
                 div.getTxtShinsakaiKaijo().getValue(),
@@ -244,10 +266,14 @@ public class PublicationShiryoShinsakaiHandler {
                 div.getDdlShutsuryokuStyleZenken().getSelectedKey(),
                 div.getRadShutsuryokuStyleZenken().getSelectedKey(),
                 div.getRadSakuseiJokenType().getSelectedValue(),
-                new RString(div.getTxtShiryoNoStart().getValue().toString()),
-                new RString(div.getTxtSiryoNoEnd().getValue().toString()),
-                new RString(div.getTxtCopyNumForJimukyoku1().getValue().toString()),
-                new RString(div.getTxtCopyNumForShinsakaiIin1().getValue().toString()),
+                div.getTxtShiryoNoStart() == null || div.getTxtShiryoNoStart().getValue() == null
+                ? new Decimal(0) : div.getTxtShiryoNoStart().getValue(),
+                div.getTxtSiryoNoEnd() == null || div.getTxtSiryoNoEnd().getValue() == null
+                ? new Decimal(0) : div.getTxtSiryoNoEnd().getValue(),
+                div.getTxtCopyNumForJimukyoku1() == null || div.getTxtCopyNumForJimukyoku1().getValue() == null
+                ? new Decimal(0) : div.getTxtCopyNumForJimukyoku1().getValue(),
+                div.getTxtCopyNumForShinsakaiIin1() == null || div.getTxtCopyNumForShinsakaiIin1().getValue() == null
+                ? new Decimal(0) : div.getTxtCopyNumForShinsakaiIin1().getValue(),
                 事務_審査会開催通知書フラグ,
                 事務_特記事項フラグ,
                 事務_一次判定結果票フラグ,
@@ -384,5 +410,20 @@ public class PublicationShiryoShinsakaiHandler {
 
     private boolean is事務局項目を選択(RString 項目) {
         return 選択.equals(項目);
+    }
+
+    private void set項目() {
+        List<RString> 事務_審査会資料 = new ArrayList<>();
+        List<RString> 委員_審査会資料 = new ArrayList<>();
+        事務_審査会資料.add(作成条件_全件);
+        事務_審査会資料.add(作成条件_範囲指定);
+        事務_審査会資料.add(出力条件_特記事項_一次判定結果票);
+        事務_審査会資料.add(出力条件_主治医意見書);
+        委員_審査会資料.add(作成条件_全件);
+        委員_審査会資料.add(作成条件_範囲指定);
+        委員_審査会資料.add(出力条件_特記事項_一次判定結果票);
+        委員_審査会資料.add(出力条件_主治医意見書);
+        div.getChkPrintChohyoShinsakaiJimu().setDisabledItemsByKey(事務_審査会資料);
+        div.getChkPrintChohyoShinsakaiIin().setDisabledItemsByKey(委員_審査会資料);
     }
 }
