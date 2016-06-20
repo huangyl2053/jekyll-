@@ -39,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -90,7 +91,8 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KyodoshoriyoJukyushaIdoRenrakuhyo}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link KyodoshoriyoJukyushaIdoRenrakuhyo}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link KyodoshoriyoJukyushaIdoRenrakuhyo}のインスタンス
      */
     public static KyodoshoriyoJukyushaIdoRenrakuhyo createInstance() {
         return InstanceProvider.create(KyodoshoriyoJukyushaIdoRenrakuhyo.class);
@@ -150,10 +152,9 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
                 return null;
             }
             共通項目Entity.set証記載保険者番号(result.records().get(0).get証記載保険者番号());
-            //TODO QA内部番号858
-//            共通項目Entity.set被保険者番号(null);
         } else {
-            //TODO 「ビジネス設計_DBCKD00007_(共有子Div)受給者異動連絡票.xlsx」の「市町村コードと広住例措置元市町村コード取得
+            //TODO 「ビジネス設計_DBCKD00007_(共有子Div)受給者異動連絡票.xlsx」の
+            //「市町村コードと広住例措置元市町村コード取得」機能未開発
             LasdecCode 市町村コード = 市町村;
             LasdecCode 広住特措置元市町村コード = get();
             SearchResult<ShichosonCodeYoriShichoson> result;
@@ -165,13 +166,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
             if (result.records() == null || result.records().isEmpty()) {
                 return null;
             }
-            SearchResult<KoikiZenShichosonJoho> 市町村情報 = finder.koseiShichosonJoho();
-            if (市町村情報.records() == null || 市町村情報.records().isEmpty()) {
-                return null;
-            }
             共通項目Entity.set証記載保険者番号(result.records().get(0).get証記載保険者番号());
-            //TODO QA内部番号858
-//            共通項目Entity.set被保険者番号(new HihokenshaNo(市町村情報.records().get(0).get証記載保険者番号().value()));
         }
         return set共同処理用受給者異動情報_新規(被保険者番号, 共通項目Entity, 宛名);
     }
@@ -193,12 +188,9 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
             if (宛名.get名称().getName() != null && !宛名.get名称().getName().isEmpty()) {
                 基本情報Entity.setHiHokenshaName(宛名.get名称().getName().value());
             }
-            //TODO QA内部番号858
             基本情報Entity.setTelNo(宛名.get連絡先１());
             基本情報Entity.setYubinNo(宛名.get住所().get郵便番号());
-            基本情報Entity.setAddress(宛名.get住所().get住所());
-            //TODO QA内部番号858
-            基本情報Entity.setDdressKana(宛名.get住所().get住所());
+            基本情報Entity.setAddress(set住所(宛名));
         }
         entity.set基本情報Entity(基本情報Entity);
 
@@ -212,6 +204,15 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
         entity.set高額情報Entity(高額情報Entity);
 
         return entity;
+    }
+
+    private RString set住所(IKojin 宛名) {
+        RStringBuilder 住所 = new RStringBuilder(宛名.get住所().get住所());
+        住所 = 住所.append(宛名.get住所().get番地().getBanchi().value());
+        if (宛名.get住所().get方書() != null && !宛名.get住所().get方書().isEmpty()) {
+            住所 = 住所.append(RString.FULL_SPACE).append(宛名.get住所().get方書().value());
+        }
+        return 住所.toRString();
     }
 
     private KyodoshoriyoJukyushaIdoRenrakuhyoParam set共同処理用受給者異動情報_新規以外(
