@@ -90,7 +90,7 @@
         rgdb."DbT7060KaigoJigyosha"  AS  dbT7060_2
         WHERE
         dbT7060."jigyoshaNo" = dbT7060_2."jigyoshaNo"
-        AND dbT7060."yukoKaishiYMD" <<![CDATA[<]]>  dbT7060_2."yukoKaishiYMD"
+        AND dbT7060."yukoKaishiYMD" <![CDATA[<]]>  dbT7060_2."yukoKaishiYMD"
         )
         )
 
@@ -119,8 +119,8 @@
         D."taishoYM",
         E."sakuseiKubunCode",
         D."zanteiKubun",
-        '' AS "keikakuJigyoshaNo",
-        '' AS "jigyoshaName",
+        '' AS keikakuJigyoshaNo,
+        '' AS jigyoshaName,
         E."tekiyoKaishiYMD",
         E."tekiyoShuryoYMD",
         E."rirekiNo"
@@ -153,7 +153,7 @@
         rgdb."DbT7060KaigoJigyosha"  AS  dbT7060_2
         WHERE
         dbT7060."jigyoshaNo" = dbT7060_2."jigyoshaNo"
-        AND dbT7060."yukoKaishiYMD" <<![CDATA[<]]> dbT7060_2."yukoKaishiYMD"
+        AND dbT7060."yukoKaishiYMD" <![CDATA[<]]> dbT7060_2."yukoKaishiYMD"
         )
         )
 
