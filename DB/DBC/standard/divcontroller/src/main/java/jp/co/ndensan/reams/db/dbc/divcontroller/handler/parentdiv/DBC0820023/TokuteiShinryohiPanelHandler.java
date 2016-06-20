@@ -21,10 +21,10 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseiken
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -78,8 +78,6 @@ public class TokuteiShinryohiPanelHandler {
     private static final int NUMBER_５７６ = 576;
     private static final int NUMBER_６０８ = 608;
     private static final RString STR_0001 = new RString("0001");
-    private static final RString STR_0025 = new RString("0025");
-    private static final RString STR_0026 = new RString("0026");
     private static final RString FORMAT = new RString("%02d");
 
     /**
@@ -616,7 +614,7 @@ public class TokuteiShinryohiPanelHandler {
                 div.getTxtTanyi().setValue(new RString(serviceCode.toEntity().getTaniSu().toString()));
             }
             if (serviceCode.toEntity().getSanteiTani() != null) {
-                UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(STR_0025),
+                UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.算定単位.getコード(),
                         new Code(serviceCode.toEntity().getSanteiTani()), date);
                 RStringBuilder builder1 = new RStringBuilder();
                 builder1.append(code1.getコード名称());
@@ -627,7 +625,8 @@ public class TokuteiShinryohiPanelHandler {
                 div.getLblComment1().setText(RString.EMPTY);
             }
             if (serviceCode.toEntity().getSanteiSeiyakuKikan() != null) {
-                UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(STR_0026),
+                UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
+                        DBCCodeShubetsu.算定期間回数制限_期間_時期.getコード(),
                         new Code(serviceCode.toEntity().getSanteiSeiyakuKikan()), date);
                 RStringBuilder builder2 = new RStringBuilder();
                 builder2.append(code2.getコード名称());
@@ -1371,6 +1370,7 @@ public class TokuteiShinryohiPanelHandler {
         div.getPanelFour().getTxtSochi().setReadOnly(flag);
         div.getPanelFour().getTxtTejyutsu().setReadOnly(flag);
         div.getPanelFour().getBtnKeisan().setDisabled(flag);
+        div.getPanelFour().getBtnClear().setDisabled(flag);
         div.getPanelFour().getTxtMutiTekiyo().setReadOnly(flag);
     }
 
@@ -1384,6 +1384,7 @@ public class TokuteiShinryohiPanelHandler {
         div.getPanelFive().getTxtShikibetsuCode().setReadOnly(flag);
         div.getPanelFive().getBtnJigyosha().setDisabled(flag);
         div.getPanelFive().getBtnCal().setDisabled(flag);
+        div.getPanelFive().getBtnClear2().setDisabled(flag);
         div.getPanelFive().getTxtKaiyisuNisu().setReadOnly(flag);
         div.getPanelFive().getTxtTekiyoDown().setReadOnly(flag);
     }
