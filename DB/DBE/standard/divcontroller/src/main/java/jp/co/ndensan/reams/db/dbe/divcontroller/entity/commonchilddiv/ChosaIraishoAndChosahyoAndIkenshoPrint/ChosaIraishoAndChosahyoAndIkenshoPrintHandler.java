@@ -22,9 +22,9 @@ import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyochosa.Chos
 import jp.co.ndensan.reams.db.dbe.business.report.saichekkuhyo.SaiChekkuhyoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.ninteishinseijoho.NinteiShinseiJohoManager;
@@ -65,6 +65,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+
+
 
 /**
  * 依頼書・認定調査票(OCR)・主治医意見書印刷のハンドラークラスです。
@@ -208,9 +210,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                 div.getCcdHokenshaList().getSelectedItem().get市町村コード());
         if (CONFIGVALUE2.equals(認定調査期限設定方法)) {
-            div.getRadTeishutsuKigen().setDisabled(false);
-        } else {
             div.getRadTeishutsuKigen().setDisabled(true);
+        } else {
+            div.getRadTeishutsuKigen().setDisabled(false);
         }
         div.setHiddenData(getInputData());
     }
@@ -419,9 +421,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 RString 誕生日昭和 = HOUSI;
                 FlexibleDate seinengappiYMD = new FlexibleDate(business.get生年月日());
                 RString era = seinengappiYMD.wareki().eraType(EraType.KANJI).getEra();
-                RString 誕生日 = seinengappiYMD.wareki()
-                        .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                 if (元号_明治.equals(era)) {
                     誕生日明治 = RString.EMPTY;
                 } else if (元号_大正.equals(era)) {
@@ -479,7 +478,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         誕生日明治,
                         誕生日大正,
                         誕生日昭和,
-                        誕生日.substring(2),
+                        business.get生年月日(),
                         business.get被保険者氏名(),
                         性別男,
                         性別女,
