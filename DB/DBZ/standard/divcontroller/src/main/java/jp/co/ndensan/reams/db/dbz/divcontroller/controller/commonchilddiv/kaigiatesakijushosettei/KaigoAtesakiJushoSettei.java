@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatesa
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
- *
  * 介護宛先住所設定クラスです。
  *
  * @reamsid_L　DBU-3990-030　wanghui
