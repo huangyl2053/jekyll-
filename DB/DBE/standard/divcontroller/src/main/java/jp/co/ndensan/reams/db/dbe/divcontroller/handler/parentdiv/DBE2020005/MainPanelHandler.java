@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.dgChosaChikuList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.dgNinteiChosainList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.chosachiku.ChosaChikuManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuNinteiChosain;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuNinteiChosainBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuNinteiChosainIdentifier;
@@ -20,7 +21,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.Kijunt
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -70,10 +70,10 @@ public class MainPanelHandler {
             dgChosaChikuList_Row row = new dgChosaChikuList_Row();
             row.setNo(new RString(String.valueOf(index)));
             row.setChosaChikuCode(list.get調査地区コード());
-            row.setChosaChikuName(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, new CodeShubetsu("5002"),
+            row.setChosaChikuName(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード(),
                     new Code(list.get調査地区コード()), FlexibleDate.getNowDate()));
             row.setChosaChikuAbbreviatedName(CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援,
-                    new CodeShubetsu("5002"), new Code(list.get調査地区コード()), FlexibleDate.getNowDate()));
+                    DBECodeShubetsu.調査地区コード.getコード(), new Code(list.get調査地区コード()), FlexibleDate.getNowDate()));
             row.setShichosonCode(list.get市町村コード());
             row.setShichosnMeisho(list.get市町村名称());
             index++;
