@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 審査会個人別状況照会のServiceクラスです。
  *
- * // * @reamsid_L DBE-1380-010 jinjue
+ * @reamsid_L DBE-1380-010 jinjue
  */
 public class ShinsakaiTaishoshaFinder {
 
@@ -35,7 +35,7 @@ public class ShinsakaiTaishoshaFinder {
     }
 
     /**
-     * テスト用コンストラクタです。
+     * コンストラクタです。
      *
      * @param mapperProvider {@link MapperProvider}}
      */

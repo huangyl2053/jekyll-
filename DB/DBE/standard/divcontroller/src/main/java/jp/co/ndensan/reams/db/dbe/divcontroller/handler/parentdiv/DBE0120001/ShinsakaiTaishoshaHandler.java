@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- * クラスでのバリデーションを管理するハンドラークラスです。
+ * 審査会個人別状況照会のハンドラークラスです。
  *
  * @reamsid_L DBE-1380-010 jinjue
  */
@@ -55,7 +55,7 @@ public class ShinsakaiTaishoshaHandler {
     }
 
     /**
-     * 画面初期化表示、画面項目に設定されている値をクリアします。
+     * 画面初期化に画面項目の値を表示します。
      *
      * @param 予定情報 予定情報と結果情報
      * @param 一覧情報 List<ShinsakaiTaishoshaBusiness>

@@ -11,5 +11,5 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.IDialogDiv;
  */
 public interface IShotokuJokyoDiv extends ICommonChildDivBaseProperties, IDialogDiv {
 
-    void load(ShikibetsuCode 識別コード);
+    void initialize(ShikibetsuCode 識別コード);
 }
