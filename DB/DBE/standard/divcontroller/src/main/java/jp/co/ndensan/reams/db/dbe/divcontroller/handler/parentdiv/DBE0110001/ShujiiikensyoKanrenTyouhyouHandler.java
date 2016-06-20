@@ -47,18 +47,24 @@ public class ShujiiikensyoKanrenTyouhyouHandler {
      * 申請に関する帳票を選択します。
      */
     public void onClick_RadChohyoHakko() {
+        div.getChkShinsei().setReadOnly(true);
+        div.getChkNinteiChosa().setReadOnly(true);
+        div.getChkShujiiIkensho().setReadOnly(true);
         if (SELECT_KEY0.equals(div.getRadChohyoHakkoType().getSelectedKey())) {
             div.getShinseiHakko().setIsOpen(true);
             div.getNinteiChosaHakko().setIsOpen(false);
             div.getShujiiIkenshoHakko().setIsOpen(false);
+            div.getChkShinsei().setReadOnly(false);
         } else if (SELECT_KEY1.equals(div.getRadChohyoHakkoType().getSelectedKey())) {
             div.getShinseiHakko().setIsOpen(false);
             div.getNinteiChosaHakko().setIsOpen(true);
             div.getShujiiIkenshoHakko().setIsOpen(false);
+            div.getChkNinteiChosa().setReadOnly(false);
         } else {
             div.getShinseiHakko().setIsOpen(false);
             div.getNinteiChosaHakko().setIsOpen(false);
             div.getShujiiIkenshoHakko().setIsOpen(true);
+            div.getChkShujiiIkensho().setReadOnly(false);
         }
     }
 }
