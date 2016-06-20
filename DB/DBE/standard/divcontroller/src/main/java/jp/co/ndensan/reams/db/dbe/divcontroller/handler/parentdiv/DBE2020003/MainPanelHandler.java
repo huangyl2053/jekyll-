@@ -10,9 +10,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ininteichosaschebusiness.ChikuNinteiChosainBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ininteichosaschebusiness.ChikuShichosonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ininteichosaschebusiness.NinteichosaSchedulBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosa.YoyakuJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteichosaScheduleMybatisParameter;
-import jp.co.ndensan.reams.db.dbe.definition.core.chosa.YoyakuJokyo;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003.NinteiChosaSchedule3MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003.dgResultList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosaschedule.NinteichosaScheduleFinder;
@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShich
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -32,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
@@ -65,11 +63,13 @@ public class MainPanelHandler {
 
     /**
      * 画面初期化処理。
+     *
+     * @param 地区コード RString
      */
-    public void initialize() {
+    public void initialize(RString 地区コード) {
         div.getDdlTaishoChiku().setDataSource(調査地区ドロップダウンリスト());
         div.getSearchConditionPanel().getDdlTaishoChiku()
-                .setSelectedKey(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
+                .setSelectedKey(地区コード);
         set保険者DDL();
         set認定調査委託先コード();
         List<dgResultList_Row> rowList = new ArrayList<>();
@@ -78,11 +78,12 @@ public class MainPanelHandler {
 
     /**
      * ボタン押下で検索条件入力項目をクリアする。
+     *
+     * @param 地区コード RString
      */
-    public void 検索条件クリア() {
+    public void 検索条件クリア(RString 地区コード) {
         div.getDdlTaishoChiku().setDataSource(調査地区ドロップダウンリスト());
-        div.getSearchConditionPanel().getDdlTaishoChiku().setSelectedKey(ViewStateHolder.
-                get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
+        div.getSearchConditionPanel().getDdlTaishoChiku().setSelectedKey(地区コード);
         set保険者DDL();
         set認定調査委託先コード();
         div.getDdlHokensha().setSelectedKey(RString.EMPTY);
@@ -218,7 +219,7 @@ public class MainPanelHandler {
     private List<KeyValueDataSource> 調査地区ドロップダウンリスト() {
 
         List<KeyValueDataSource> dataSource = new ArrayList();
-        List<UzT0007CodeEntity> 指定調査地区 = CodeMaster.getCode(DBECodeShubetsu.調査地区コード.getコード());
+        List<UzT0007CodeEntity> 指定調査地区 = CodeMaster.getCode(DBECodeShubetsu.調査地区コード.getコード(), FlexibleDate.getNowDate());
         for (UzT0007CodeEntity entity : 指定調査地区) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(entity.getコード().value());
