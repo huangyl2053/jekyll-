@@ -20,6 +20,10 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  */
 public class NinteichosaYoteiMiteiFlow extends BatchFlowBase<NinteichosaYoteiMiteiBatchParamter> {
 
+    private static final String NINTEICHOSA_YOTEIMITEI = "ninteichosaYoteiMitei";
+    private static final String NINTEICHOSA_IRAIHENKO = "ninteichosaIraiHenko";
+    private static final String CHOSAHYO_IKENSHOCHECKLIST = "chosahyoIkenshoCheckList";
+
     @Override
     protected void defineFlow() {
         if (getParameter().isNinteichosayoteimitei()) {
@@ -32,10 +36,6 @@ public class NinteichosaYoteiMiteiFlow extends BatchFlowBase<NinteichosaYoteiMit
             executeStep(CHOSAHYO_IKENSHOCHECKLIST);
         }
     }
-
-    private static final String NINTEICHOSA_YOTEIMITEI = "ninteichosaYoteiMitei";
-    private static final String NINTEICHOSA_IRAIHENKO = "ninteichosaIraiHenko";
-    private static final String CHOSAHYO_IKENSHOCHECKLIST = "chosahyoIkenshoCheckList";
 
     @Step(NINTEICHOSA_YOTEIMITEI)
     IBatchFlowCommand ninteichosaYoteiMitei() {
