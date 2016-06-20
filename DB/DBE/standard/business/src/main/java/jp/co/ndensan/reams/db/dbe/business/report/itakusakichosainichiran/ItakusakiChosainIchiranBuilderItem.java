@@ -22,7 +22,6 @@ public class ItakusakiChosainIchiranBuilderItem implements ItakusakiChosainIchir
      * インスタンスを生成します。
      *
      * @param headEditor {@link ItakusakiChosainIchiranEditor}
-     * @param bodyEditor {@link ItakusakiChosainIchiranEditor}
      */
     public ItakusakiChosainIchiranBuilderItem(ItakusakiChosainIchiranEditor headEditor) {
         this.headEditor = headEditor;

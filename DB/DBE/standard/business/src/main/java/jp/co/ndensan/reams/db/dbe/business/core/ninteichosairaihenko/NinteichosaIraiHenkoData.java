@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaihenko;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairaihenko.NinteichosaIraiHenkoRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -39,9 +38,6 @@ public final class NinteichosaIraiHenkoData {
     private final RString 変更後調査事業所;
     private final RString 変更後調査員;
     private final RString 変更回数;
-    private static NinteichosaIraiHenkoData data;
-    private static int indexTmp;
-    private static int index;
 
     /**
      * コンストラクタです。
@@ -93,49 +89,4 @@ public final class NinteichosaIraiHenkoData {
         this.変更後調査員 = 変更後調査員;
         this.変更回数 = 変更回数;
     }
-
-    /**
-     * 認定調査依頼先変更者のパラメータを作成します。
-     *
-     * @param before 認定調査依頼先変更者のRelateEntity
-     * @param nowEntity 認定調査依頼先変更者のRelateEntity
-     * @param count 条数
-     * @return 認定調査依頼先変更者
-     */
-    public static NinteichosaIraiHenkoData createEdit(NinteichosaIraiHenkoRelateEntity before, NinteichosaIraiHenkoRelateEntity nowEntity,
-            int count) {
-
-        if (before == null) {
-            return null;
-        }
-        index++;
-        if (before.getShinseishoKanriNo().equals(nowEntity.getShinseishoKanriNo())) {
-            if (nowEntity.getNinteichosaIraiRirekiNo() > 1) {
-                indexTmp++;
-                data = new NinteichosaIraiHenkoData(nowEntity.getShinseishoKanriNo().value(),
-                        nowEntity.getHihokenshaNo(),
-                        nowEntity.getHihokenshaKana(),
-                        nowEntity.getHihokenshaName(),
-                        nowEntity.getSeibetsu(),
-                        nowEntity.getSeinengappiYMD(),
-                        nowEntity.getNinteiShinseiShinseijiKubunCode(),
-                        nowEntity.getNinteiShinseiYMD(),
-                        nowEntity.getShichosonMeisho(),
-                        nowEntity.getNinteichosaIraiYMD(),
-                        before.getJigyoshaMeisho(),
-                        before.getChosainShimei(),
-                        nowEntity.getJigyoshaMeisho(),
-                        nowEntity.getChosainShimei(),
-                        new RString(indexTmp));
-            }
-            if (index == count) {
-                return data;
-            }
-        } else {
-            indexTmp = 0;
-            return data;
-        }
-        return null;
-    }
-
 }
