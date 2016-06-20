@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110002.Hakk
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -131,12 +132,15 @@ public class HakkoJokenSinnseiValidationHandler {
         if (null == shinnseikato) {
             shinnseikato = RDate.MAX;
         }
-        RString kijyun = DbBusinessConfig.get(ConfigNameDBE.Reamsへの切り替え日, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString kijyun = DbBusinessConfig.get(ConfigNameDBE.Reamsへの切り替え日, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
+                new LasdecCode("000000"), ConfigNameDBE.Reamsへの切り替え日.get名称());
         RDate kijyundate = new RDate(kijyun.toString());
-        int yearsfrom = shinnseikafrom.getBetweenYears(kijyundate);
-        int yearsto = shinnseikato.getBetweenYears(kijyundate);
-        if ((yearsfrom > 2) || (yearsto > 2)) {
-            validPairs.add(new ValidationMessageControlPair(HakkoJokenSinnseiMessages.申請日入力チェック));
+        if (!div.getRadHakoJyoken().getSelectedKey().contains(SELECT_KEY0)) {
+            int yearsfrom = shinnseikafrom.getBetweenYears(kijyundate);
+            int yearsto = shinnseikato.getBetweenYears(kijyundate);
+            if ((yearsfrom > 2) || (yearsto > 2)) {
+                validPairs.add(new ValidationMessageControlPair(HakkoJokenSinnseiMessages.申請日入力チェック));
+            }
         }
         return validPairs;
 
