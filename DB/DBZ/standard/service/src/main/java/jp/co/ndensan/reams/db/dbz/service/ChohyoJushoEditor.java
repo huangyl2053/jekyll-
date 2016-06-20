@@ -37,7 +37,6 @@ public class ChohyoJushoEditor {
     private static final RString 帳票独自 = new RString("1");
     private static final RString 市町村共通 = new RString("0");
     private static final int NUM0 = 0;
-    private static final int NUM1 = 1;
     private static final RString 定値_0 = new RString("0");
     private static final RString 定値_1 = new RString("1");
     private static final RString 定値_2 = new RString("2");
@@ -202,7 +201,7 @@ public class ChohyoJushoEditor {
         if (定値_1.equals(jushoedithoho.get管内住所編集_住所編集方法())) {
             編集後住所 = 編集後住所.concat(住所).concat(番地);
         } else if (定値_2.equals(jushoedithoho.get管内住所編集_住所編集方法())) {
-            編集後住所.concat(行政区名).concat(番地);
+            編集後住所 = 編集後住所.concat(行政区名).concat(番地);
         } else if (定値_3.equals(jushoedithoho.get管内住所編集_住所編集方法())) {
             編集後住所 = 編集後住所.concat(住所).concat(番地);
             if (!RString.isNullOrEmpty(行政区名)) {
