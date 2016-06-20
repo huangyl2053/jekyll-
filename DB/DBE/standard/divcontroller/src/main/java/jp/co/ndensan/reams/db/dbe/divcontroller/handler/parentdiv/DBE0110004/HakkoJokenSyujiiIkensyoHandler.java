@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110004;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.ikenshojohoprint.IkenshoJohoPrintBatchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110004.HakkoJokenSyujiiIkensyoDiv;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -189,4 +191,121 @@ public class HakkoJokenSyujiiIkensyoHandler {
         }
     }
 
+    /**
+     * バッチ用パラメータクラスを作成します。
+     *
+     * @return ikenshoJohoPrintBatchParameter
+     */
+    public IkenshoJohoPrintBatchParameter setBatchParameter() {
+
+        boolean 主治医意見書未提出者一覧フラグ = div.getChkMiteishutsushaIchiran().getSelectedKeys().contains(SELECT_KEY0);
+        boolean 主治医意見書５項目確認一覧表フラグ = div.getChkKakuninIchiranhyo().getSelectedKeys().contains(SELECT_KEY0);
+        boolean 主治医意見書依頼未処理者一覧表フラグ = div.getChkIraiMishorishaIchiranhyo().getSelectedKeys().contains(SELECT_KEY0);
+        boolean 主治医意見書作成依頼変更者一覧表フラグ = div.getChkSakuseiIraiHenkoushaIchiranhyoJoken().getSelectedKeys().contains(SELECT_KEY0);
+        boolean 主治医意見書依頼済み一覧表フラグ = div.getChkIraiZumiIchiranhyoJoken().getSelectedKeys().contains(SELECT_KEY0);
+        boolean 主治医意見書作成料請求一覧表フラグ = div.getChkSakuseiryoSeikyuIchiranhyo().getSelectedKeys().contains(SELECT_KEY0);
+        RString 主治医意見書未提出者一覧作成条件 = null;
+        RString 主治医意見書未提出者一覧依頼日数 = null;
+        FlexibleDate 主治医意見書未提出者一覧申請日From = null;
+        FlexibleDate 主治医意見書未提出者一覧申請日To = null;
+        RString 主治医意見書５項目確認一覧表作成条件 = null;
+        RString 主治医意見書５項目確認一覧表審査会 = null;
+        RString 主治医意見書依頼未処理者一覧表作成条件 = null;
+        FlexibleDate 主治医意見書依頼未処理者一覧表申請日From = null;
+        FlexibleDate 主治医意見書依頼未処理者一覧表申請日To = null;
+        FlexibleDate 主治医意見書作成依頼変更者一覧表申請日From = null;
+        FlexibleDate 主治医意見書作成依頼変更者一覧表申請日To = null;
+        RString 主治医意見書依頼済み一覧表作成条件 = null;
+        FlexibleDate 主治医意見書依頼済み一覧表処理日From = null;
+        FlexibleDate 主治医意見書依頼済み一覧表処理日To = null;
+        FlexibleDate 主治医意見書依頼済み一覧表申請日From = null;
+        FlexibleDate 主治医意見書依頼済み一覧表申請日To = null;
+        RString 主治医意見書作成料請求一覧表作成条件 = null;
+        FlexibleDate 主治医意見書作成料請求一覧表処理日From = null;
+        FlexibleDate 主治医意見書作成料請求一覧表処理日To = null;
+        FlexibleDate 主治医意見書作成料請求一覧表受領日From = null;
+        FlexibleDate 主治医意見書作成料請求一覧表受領日To = null;
+
+        if (主治医意見書未提出者一覧フラグ) {
+            if (div.getRadJoken1().getSelectedKey().contains(SELECT_KEY0)) {
+                主治医意見書未提出者一覧作成条件 = new RString("1");
+                主治医意見書未提出者一覧依頼日数 = div.getTxtIraiNisu().getText();
+            } else {
+                主治医意見書未提出者一覧作成条件 = new RString("2");
+                主治医意見書未提出者一覧申請日From = new FlexibleDate(div.getTxtShinseiYMD1().getFromValue().toDateString());
+                主治医意見書未提出者一覧申請日To = new FlexibleDate(div.getTxtShinseiYMD1().getToValue().toDateString());
+            }
+        }
+        if (主治医意見書５項目確認一覧表フラグ) {
+            if (div.getRadJoken2().getSelectedKey().contains(SELECT_KEY0)) {
+                主治医意見書５項目確認一覧表作成条件 = new RString("1");
+            } else {
+                主治医意見書５項目確認一覧表作成条件 = new RString("2");
+                主治医意見書５項目確認一覧表審査会 = div.getTxtShinsakai2().getText();
+            }
+        }
+        if (主治医意見書依頼未処理者一覧表フラグ) {
+            主治医意見書依頼未処理者一覧表作成条件 = new RString("1");
+        } else {
+            主治医意見書依頼未処理者一覧表作成条件 = new RString("2");
+            主治医意見書依頼未処理者一覧表申請日From = new FlexibleDate(div.getTxtShinsaYMD3().getFromValue().toDateString());
+            主治医意見書依頼未処理者一覧表申請日To = new FlexibleDate(div.getTxtShinsaYMD3().getToValue().toDateString());
+        }
+        if (主治医意見書作成依頼変更者一覧表フラグ) {
+            主治医意見書作成依頼変更者一覧表申請日From = new FlexibleDate(div.getTxtShinseiYMD4().getFromValue().toDateString());
+            主治医意見書作成依頼変更者一覧表申請日To = new FlexibleDate(div.getTxtShinseiYMD4().getToValue().toDateString());
+        }
+        if (主治医意見書依頼済み一覧表フラグ) {
+            if (div.getRadJoken5().getSelectedKey().contains(SELECT_KEY0)) {
+                主治医意見書依頼済み一覧表作成条件 = new RString("1");
+                主治医意見書依頼済み一覧表処理日From = new FlexibleDate(div.getTxtShoriYMD5().getFromValue().toDateString());
+                主治医意見書依頼済み一覧表処理日To = new FlexibleDate(div.getTxtShoriYMD5().getToValue().toDateString());
+            } else {
+                主治医意見書依頼済み一覧表作成条件 = new RString("2");
+                主治医意見書依頼済み一覧表申請日From = new FlexibleDate(div.getTxtShinseiYMD5().getFromValue().toDateString());
+                主治医意見書依頼済み一覧表申請日To = new FlexibleDate(div.getTxtShinseiYMD5().getToValue().toDateString());
+            }
+        }
+        if (主治医意見書作成料請求一覧表フラグ) {
+            if (div.getRadSeikyuIchiranJoken().getSelectedKey().contains(SELECT_KEY0)) {
+                主治医意見書作成料請求一覧表作成条件 = new RString("1");
+                主治医意見書作成料請求一覧表処理日From = new FlexibleDate(div.getTxtSeikyuIchiranShoriYMD().getFromValue().toDateString());
+                主治医意見書作成料請求一覧表処理日To = new FlexibleDate(div.getTxtSeikyuIchiranShoriYMD().getToValue().toDateString());
+            } else {
+                主治医意見書作成料請求一覧表作成条件 = new RString("2");
+                主治医意見書作成料請求一覧表受領日From = new FlexibleDate(div.getTxtJuryoYMD().getFromValue().toDateString());
+                主治医意見書作成料請求一覧表受領日To = new FlexibleDate(div.getTxtJuryoYMD().getToValue().toDateString());
+            }
+        }
+        IkenshoJohoPrintBatchParameter ikenshoJohoPrintBatchParameter = new IkenshoJohoPrintBatchParameter(
+                主治医意見書未提出者一覧フラグ,
+                主治医意見書未提出者一覧作成条件,
+                主治医意見書未提出者一覧依頼日数,
+                主治医意見書未提出者一覧申請日From,
+                主治医意見書未提出者一覧申請日To,
+                主治医意見書５項目確認一覧表フラグ,
+                主治医意見書５項目確認一覧表作成条件,
+                主治医意見書５項目確認一覧表審査会,
+                主治医意見書依頼未処理者一覧表フラグ,
+                主治医意見書依頼未処理者一覧表作成条件,
+                主治医意見書依頼未処理者一覧表申請日From,
+                主治医意見書依頼未処理者一覧表申請日To,
+                主治医意見書作成依頼変更者一覧表フラグ,
+                主治医意見書作成依頼変更者一覧表申請日From,
+                主治医意見書作成依頼変更者一覧表申請日To,
+                主治医意見書依頼済み一覧表フラグ,
+                主治医意見書依頼済み一覧表作成条件,
+                主治医意見書依頼済み一覧表処理日From,
+                主治医意見書依頼済み一覧表処理日To,
+                主治医意見書依頼済み一覧表申請日From,
+                主治医意見書依頼済み一覧表申請日To,
+                主治医意見書作成料請求一覧表フラグ,
+                主治医意見書作成料請求一覧表作成条件,
+                主治医意見書作成料請求一覧表処理日From,
+                主治医意見書作成料請求一覧表処理日To,
+                主治医意見書作成料請求一覧表受領日From,
+                主治医意見書作成料請求一覧表受領日To);
+        return ikenshoJohoPrintBatchParameter;
+
+    }
 }
