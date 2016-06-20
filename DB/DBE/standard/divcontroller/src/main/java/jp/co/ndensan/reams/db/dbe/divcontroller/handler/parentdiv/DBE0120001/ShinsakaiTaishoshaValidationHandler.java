@@ -40,7 +40,7 @@ public class ShinsakaiTaishoshaValidationHandler {
      * @param 審査会対象者一覧 審査会対象者一覧データ
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateForKakutei(ShinsakaiTaishoshaBusiness 審査会対象者一覧) {
+    public ValidationMessageControlPairs validateForKakutei(List<ShinsakaiTaishoshaBusiness> 審査会対象者一覧) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         List<dgTaishoshaIchiran_Row> ichiranList = div.getDgTaishoshaIchiran().getDataSource();
         if (ichiranList.isEmpty()) {

@@ -62,7 +62,7 @@ public class ShinsakaiTaishoshaFinder {
         IShinsakaiTaishoshaRelateMapper mapper = mapperProvider.create(IShinsakaiTaishoshaRelateMapper.class);
         List<ShinsakaiTaishoshaRelateEntity> entity = mapper.
                 get予定情報と結果情報(ShinsakaiTaishoshaMapperParameter.createSelectBy情報(審査会開催番号));
-        if (entity == null) {
+        if (entity == null || entity.isEmpty()) {
             return null;
         }
         return new ShinsakaiTaishoshaBusiness(entity.get(0));
