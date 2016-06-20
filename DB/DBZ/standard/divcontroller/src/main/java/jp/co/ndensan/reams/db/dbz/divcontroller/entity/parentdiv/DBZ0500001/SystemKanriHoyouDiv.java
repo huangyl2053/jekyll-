@@ -5,15 +5,14 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0500001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * SystemKanri のクラスファイル 
+ * SystemKanriHoyou のクラスファイル 
  * 
  * @author 自動生成
  */
-public class SystemKanriDiv extends Panel {
+public class SystemKanriHoyouDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -21,10 +20,10 @@ public class SystemKanriDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblSubGyomu")
-    private Label lblSubGyomu;
-    @JsonProperty("dgSystemKanri")
-    private DataGrid<dgSystemKanri_Row> dgSystemKanri;
+    @JsonProperty("SystemKanri")
+    private SystemKanriDiv SystemKanri;
+    @JsonProperty("KanryoMessage")
+    private KanryoMessageDiv KanryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,39 +32,39 @@ public class SystemKanriDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getlblSubGyomu
-     * @return lblSubGyomu
+     * getSystemKanri
+     * @return SystemKanri
      */
-    @JsonProperty("lblSubGyomu")
-    public Label getLblSubGyomu() {
-        return lblSubGyomu;
+    @JsonProperty("SystemKanri")
+    public SystemKanriDiv getSystemKanri() {
+        return SystemKanri;
     }
 
     /*
-     * setlblSubGyomu
-     * @param lblSubGyomu lblSubGyomu
+     * setSystemKanri
+     * @param SystemKanri SystemKanri
      */
-    @JsonProperty("lblSubGyomu")
-    public void setLblSubGyomu(Label lblSubGyomu) {
-        this.lblSubGyomu = lblSubGyomu;
+    @JsonProperty("SystemKanri")
+    public void setSystemKanri(SystemKanriDiv SystemKanri) {
+        this.SystemKanri = SystemKanri;
     }
 
     /*
-     * getdgSystemKanri
-     * @return dgSystemKanri
+     * getKanryoMessage
+     * @return KanryoMessage
      */
-    @JsonProperty("dgSystemKanri")
-    public DataGrid<dgSystemKanri_Row> getDgSystemKanri() {
-        return dgSystemKanri;
+    @JsonProperty("KanryoMessage")
+    public KanryoMessageDiv getKanryoMessage() {
+        return KanryoMessage;
     }
 
     /*
-     * setdgSystemKanri
-     * @param dgSystemKanri dgSystemKanri
+     * setKanryoMessage
+     * @param KanryoMessage KanryoMessage
      */
-    @JsonProperty("dgSystemKanri")
-    public void setDgSystemKanri(DataGrid<dgSystemKanri_Row> dgSystemKanri) {
-        this.dgSystemKanri = dgSystemKanri;
+    @JsonProperty("KanryoMessage")
+    public void setKanryoMessage(KanryoMessageDiv KanryoMessage) {
+        this.KanryoMessage = KanryoMessage;
     }
 
     // </editor-fold>
