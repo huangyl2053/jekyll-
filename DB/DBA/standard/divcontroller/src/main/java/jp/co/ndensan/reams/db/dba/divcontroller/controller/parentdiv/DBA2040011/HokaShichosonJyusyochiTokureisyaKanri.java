@@ -234,8 +234,8 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
     private boolean get変更(HokaShichosonJyusyochiTokureisyaKanriDiv div) {
         boolean henko = false;
         for (dgShisetsuNyutaishoRireki_Row row : div.getCddShisetsuNyutaishoRirekiKanri().get施設入退所履歴一覧()) {
-            if (TSUIKA.equals(new RString(row.getRowState().toString())) || KOSHIN.equals(new RString(row.getRowState().toString()))
-                    || SAKUJYO.equals(new RString(row.getRowState().toString()))) {
+            if (TSUIKA.equals(row.getState()) || KOSHIN.equals(row.getState())
+                    || SAKUJYO.equals(row.getState())) {
                 henko = true;
                 break;
             }
