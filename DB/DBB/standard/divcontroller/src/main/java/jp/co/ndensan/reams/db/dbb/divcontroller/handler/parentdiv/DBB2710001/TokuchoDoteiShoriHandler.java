@@ -116,7 +116,7 @@ public final class TokuchoDoteiShoriHandler {
             return new SimpleEntry<>(保険者モード, can実行);
         }
         KonkaiShoriNaiyoJohoResult 今回処理内容情報 = tokuchoTeishiTaisyosyaDoutei.getKonkaiShoriNaiyoJoho(日付関連_調定年度, 保険者モード);
-        if (null != 今回処理内容情報 && RString.isNullOrEmpty(今回処理内容情報.get対象者情報取得月())) {
+        if (null != 今回処理内容情報 && !RString.isNullOrEmpty(今回処理内容情報.get対象者情報取得月())) {
             List<ShoriJokyoJohoResult> 処理状況一覧情報 = tokuchoTeishiTaisyosyaDoutei.getShoriJokyoList(
                     日付関連_調定年度, 今回処理内容情報.get対象者情報取得月().substringReturnAsPossible(BEGIN, END), 保険者モード);
             do画面表示(保険者モード, 今回処理内容情報, 処理状況一覧情報);
