@@ -36,6 +36,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class GoukeiInfoPanel {
 
+    private static final int SIX = 6;
+
     /**
      * onLoad
      *
@@ -85,7 +87,7 @@ public class GoukeiInfoPanel {
         if (entity == null) {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         } else {
-            getHandler(div).getボタンを制御(entity);
+            getHandler(div).getボタンを制御(entity, meisaiPar);
         }
 
         return ResponseData.of(div).respond();
@@ -108,7 +110,7 @@ public class GoukeiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnKihoninfo(GoukeiInfoPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820026TransitionEventName.基本情報).respond();
     }
 
@@ -119,7 +121,7 @@ public class GoukeiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnKyufuMeisai(GoukeiInfoPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820026TransitionEventName.給付費明細).respond();
     }
 
@@ -130,7 +132,7 @@ public class GoukeiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnTokuteiShiryohi(GoukeiInfoPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820026TransitionEventName.特定診療費).respond();
     }
 
@@ -141,7 +143,7 @@ public class GoukeiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnServiceKeikakuhi(GoukeiInfoPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820026TransitionEventName.サービス計画費).respond();
     }
 
@@ -152,7 +154,7 @@ public class GoukeiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnTokuteinyushosha(GoukeiInfoPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820026TransitionEventName.特定入所者費用).respond();
     }
 
@@ -163,7 +165,7 @@ public class GoukeiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnKyufuhiMeisaiJutoku(GoukeiInfoPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820026TransitionEventName.給付費明細_住特).respond();
     }
 
@@ -174,7 +176,7 @@ public class GoukeiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnKinkyujiShoteiShikan(GoukeiInfoPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820026TransitionEventName.緊急時_所定疾患).respond();
     }
 
@@ -185,7 +187,7 @@ public class GoukeiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnKinkyujiShisetsu(GoukeiInfoPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820026TransitionEventName.緊急時施設療養費).respond();
     }
 
@@ -196,7 +198,7 @@ public class GoukeiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnShokujihiyo(GoukeiInfoPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820026TransitionEventName.食事費用).respond();
     }
 
@@ -207,7 +209,7 @@ public class GoukeiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnSeikyugaku(GoukeiInfoPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820026TransitionEventName.請求額集計).respond();
     }
 
@@ -218,12 +220,27 @@ public class GoukeiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnShafuku(GoukeiInfoPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820026TransitionEventName.社福軽減額).respond();
     }
 
     private GoukeiInfoPanelHandler getHandler(GoukeiInfoPanelDiv div) {
         return new GoukeiInfoPanelHandler(div);
+    }
+
+    private void putViewState(GoukeiInfoPanelDiv div) {
+        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
+        ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
+        ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
+                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
+                new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().toDateString()
+                        .substring(0, SIX)),
+                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
+                new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue()),
+                div.getPanelHead().getTxtShomeisho().getValue(),
+                div.getPanelHead().getTxtMeisaiBango().getValue(),
+                null);
+        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
     }
 
 }

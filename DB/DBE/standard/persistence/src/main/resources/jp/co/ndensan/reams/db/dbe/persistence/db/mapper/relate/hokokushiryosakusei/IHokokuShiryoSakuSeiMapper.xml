@@ -649,7 +649,7 @@
                 A."gogitaiNo" = #{gogitaiNo}
             </when>
             <otherwise>
-                AND A."gogitaiNo" IN
+                A."gogitaiNo" IN
                 <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
             </otherwise>
         </choose>
@@ -1039,7 +1039,7 @@
         GROUP BY
         <if test="!isEmptyGogitaiNo">
             A."gogitaiNo",
-            ,E."gogitaiMei",
+            E."gogitaiMei",
         </if>
         F."shichosonCode"
         ,F."shichosonMeisho"

@@ -74,7 +74,7 @@ public class ChohyoSeigyoMaintenacePanel {
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             throw new PessimisticLockingException();
         }
-        SubGyomuCode subgyomuCode = ControlDataHolder.getSubGyomuCD();
+        SubGyomuCode subgyomuCode = ControlDataHolder.getExecutionSubGyomuCode();
         div.getCcdKaigoChohyoSeigyoKyotsu().initialize(subgyomuCode, new ReportId(帳票分類ID));
         List<ChohyoSeigyoHanyo> businessList = chohyoSeigyoHanyoManager.get帳票制御汎用(subgyomuCode, new ReportId(帳票分類ID)).records();
         Models<ChohyoSeigyoHanyoIdentifier, ChohyoSeigyoHanyo> chohyoSeigyoHanyo = Models.create(businessList);
@@ -122,7 +122,7 @@ public class ChohyoSeigyoMaintenacePanel {
                     return ResponseData.of(div).addValidationMessages(valimessage).respond();
                 }
             }
-            div.getCcdKaigoChohyoSeigyoKyotsu().save(ControlDataHolder.getSubGyomuCD(), new ReportId(帳票分類ID));
+            div.getCcdKaigoChohyoSeigyoKyotsu().save(ControlDataHolder.getExecutionSubGyomuCode(), new ReportId(帳票分類ID));
             Models<ChohyoSeigyoHanyoIdentifier, ChohyoSeigyoHanyo> models
                     = ViewStateHolder.get(ViewStateKeys.帳票制御汎用メンテナンスGrid, Models.class);
             for (dgCyohyoSeigyo_Row row : rowList) {

@@ -760,18 +760,18 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
             List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト,
             Decimal 縦番号,
-            RString 集計結果値1,
-            RString 集計結果値2,
-            RString 集計結果値3,
-            RString 集計結果値4,
-            RString 集計結果値5,
-            RString 集計結果値6,
-            RString 集計結果値7,
-            RString 集計結果値8,
-            RString 集計結果値9,
-            RString 集計結果値10,
-            RString 集計結果値11,
-            RString 集計結果値12) {
+            Decimal 集計結果値1,
+            Decimal 集計結果値2,
+            Decimal 集計結果値3,
+            Decimal 集計結果値4,
+            Decimal 集計結果値5,
+            Decimal 集計結果値6,
+            Decimal 集計結果値7,
+            Decimal 集計結果値8,
+            Decimal 集計結果値9,
+            Decimal 集計結果値10,
+            Decimal 集計結果値11,
+            Decimal 集計結果値12) {
         修正データリスト = set集計結果値(集計結果値1, 修正データリスト, 事業報告月報詳細データリスト, 横番号_1, 縦番号);
         修正データリスト = set集計結果値(集計結果値2, 修正データリスト, 事業報告月報詳細データリスト, 横番号_2, 縦番号);
         修正データリスト = set集計結果値(集計結果値3, 修正データリスト, 事業報告月報詳細データリスト, 横番号_3, 縦番号);
@@ -790,17 +790,17 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
     private List<JigyoHokokuTokeiData> get事業報告修正データ_2(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト,
             Decimal 縦番号,
-            RString 集計結果値1,
-            RString 集計結果値2,
-            RString 集計結果値3,
-            RString 集計結果値4,
-            RString 集計結果値5,
-            RString 集計結果値6,
-            RString 集計結果値7,
-            RString 集計結果値8,
-            RString 集計結果値9,
-            RString 集計結果値10,
-            RString 集計結果値11) {
+            Decimal 集計結果値1,
+            Decimal 集計結果値2,
+            Decimal 集計結果値3,
+            Decimal 集計結果値4,
+            Decimal 集計結果値5,
+            Decimal 集計結果値6,
+            Decimal 集計結果値7,
+            Decimal 集計結果値8,
+            Decimal 集計結果値9,
+            Decimal 集計結果値10,
+            Decimal 集計結果値11) {
         修正データリスト = set集計結果値(集計結果値1, 修正データリスト, 事業報告月報詳細データリスト, 横番号_1, 縦番号);
         修正データリスト = set集計結果値(集計結果値2, 修正データリスト, 事業報告月報詳細データリスト, 横番号_3, 縦番号);
         修正データリスト = set集計結果値(集計結果値3, 修正データリスト, 事業報告月報詳細データリスト, 横番号_4, 縦番号);
@@ -818,16 +818,16 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
     private List<JigyoHokokuTokeiData> get事業報告修正データ_1(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト,
             Decimal 縦番号,
-            RString 集計結果値1,
-            RString 集計結果値2,
-            RString 集計結果値3,
-            RString 集計結果値4,
-            RString 集計結果値5,
-            RString 集計結果値6,
-            RString 集計結果値7,
-            RString 集計結果値8,
-            RString 集計結果値9,
-            RString 集計結果値10) {
+            Decimal 集計結果値1,
+            Decimal 集計結果値2,
+            Decimal 集計結果値3,
+            Decimal 集計結果値4,
+            Decimal 集計結果値5,
+            Decimal 集計結果値6,
+            Decimal 集計結果値7,
+            Decimal 集計結果値8,
+            Decimal 集計結果値9,
+            Decimal 集計結果値10) {
         修正データリスト = set集計結果値(集計結果値1, 修正データリスト, 事業報告月報詳細データリスト, 横番号_3, 縦番号);
         修正データリスト = set集計結果値(集計結果値2, 修正データリスト, 事業報告月報詳細データリスト, 横番号_4, 縦番号);
         修正データリスト = set集計結果値(集計結果値3, 修正データリスト, 事業報告月報詳細データリスト, 横番号_5, 縦番号);
@@ -844,17 +844,17 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
     private List<JigyoHokokuTokeiData> get事業報告修正データ(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト,
             Decimal 縦番号,
-            RString 集計結果値1,
-            RString 集計結果値2,
-            RString 集計結果値3,
-            RString 集計結果値4,
-            RString 集計結果値5,
-            RString 集計結果値6,
-            RString 集計結果値7,
-            RString 集計結果値8,
-            RString 集計結果値9,
-            RString 集計結果値10,
-            RString 集計結果値11) {
+            Decimal 集計結果値1,
+            Decimal 集計結果値2,
+            Decimal 集計結果値3,
+            Decimal 集計結果値4,
+            Decimal 集計結果値5,
+            Decimal 集計結果値6,
+            Decimal 集計結果値7,
+            Decimal 集計結果値8,
+            Decimal 集計結果値9,
+            Decimal 集計結果値10,
+            Decimal 集計結果値11) {
         修正データリスト = set集計結果値(集計結果値1, 修正データリスト, 事業報告月報詳細データリスト, 横番号_2, 縦番号);
         修正データリスト = set集計結果値(集計結果値2, 修正データリスト, 事業報告月報詳細データリスト, 横番号_3, 縦番号);
         修正データリスト = set集計結果値(集計結果値3, 修正データリスト, 事業報告月報詳細データリスト, 横番号_4, 縦番号);
@@ -870,13 +870,13 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
     }
 
     private List<JigyoHokokuTokeiData> set集計結果値(
-            RString 集計結果値,
+            Decimal 集計結果値,
             List<JigyoHokokuTokeiData> 修正データリスト,
             List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             Decimal 横番号,
             Decimal 縦番号) {
         JigyoHokokuTokeiData entity = check事業報告統計データ(事業報告月報詳細データリスト, 横番号, 縦番号);
-        if (集計結果値 == null || 集計結果値.isEmpty()) {
+        if (集計結果値 == null) {
             if (entity != null && entity.get集計結果値() != null) {
                 entity = entity.createBuilderForEdit().set集計結果値(null).build();
                 entity = entity.modifiedModel();
@@ -885,17 +885,16 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
             }
         } else {
             if (entity == null) {
-                entity = set事業報告統計データ(事業報告月報詳細データリスト, 横番号, 縦番号,
-                        new Decimal(集計結果値.toString()));
+                entity = set事業報告統計データ(事業報告月報詳細データリスト, 横番号, 縦番号, 集計結果値);
                 修正データリスト.add(entity);
                 return 修正データリスト;
             } else if (entity.get集計結果値() == null) {
-                entity = entity.createBuilderForEdit().set集計結果値(new Decimal(集計結果値.toString())).build();
+                entity = entity.createBuilderForEdit().set集計結果値(集計結果値).build();
                 entity = entity.modifiedModel();
                 修正データリスト.add(entity);
                 return 修正データリスト;
-            } else if (!entity.get集計結果値().equals(new Decimal(集計結果値.toString()))) {
-                entity = entity.createBuilderForEdit().set集計結果値(new Decimal(集計結果値.toString())).build();
+            } else if (!entity.get集計結果値().equals(集計結果値)) {
+                entity = entity.createBuilderForEdit().set集計結果値(集計結果値).build();
                 entity = entity.modifiedModel();
                 修正データリスト.add(entity);
                 return 修正データリスト;

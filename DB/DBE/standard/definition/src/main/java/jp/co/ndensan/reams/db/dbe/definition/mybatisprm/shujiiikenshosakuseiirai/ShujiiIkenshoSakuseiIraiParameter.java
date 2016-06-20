@@ -20,4 +20,5 @@ public class ShujiiIkenshoSakuseiIraiParameter extends ShinseiKensakuMapperParam
 
     private RString shoriJotaiKubunTsujo;
     private RString shoriJotaiKubunEnki;
+    private boolean useZenkaiNinteiShinseiJoho;
 }

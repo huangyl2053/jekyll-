@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0020001;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,19 +13,12 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.tsuchishohakkogoidosha.TsuchiShoHakkoGoIdosha;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020001.IdoTaishoshaIchiranDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020001.dgIdoTaishoshaIchiran_Row;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.idotaishoshaichiranparameter.IdoTaishoshaIchiranparameter;
 import jp.co.ndensan.reams.db.dbb.service.report.tsuchishohakkogoidosha.TsuchiShoHakkogoIdoHaaku;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * IdoTaishoshaIchiranHandler
@@ -58,10 +50,11 @@ public final class IdoTaishoshaIchiranHandler {
 
     /**
      * set作成日時
+     *
+     * @param map Map
      */
-    public void set作成日時() {
+    public void set作成日時(Map<ReportId, List<YMDHMS>> map) {
         RString select帳票ID = div.getDdlTsuchishoMeisho().getSelectedKey();
-        Map<ReportId, List<YMDHMS>> map = ViewStateHolder.get(ViewStateKeys.発行日時Map, Map.class);
         List<YMDHMS> 作成日時List = map.get(new ReportId(select帳票ID));
         if (作成日時List != null && 作成日時List.isEmpty()) {
             Comparator<YMDHMS> comparator = new Comparator<YMDHMS>() {
@@ -149,21 +142,4 @@ public final class IdoTaishoshaIchiranHandler {
         div.getDgIdoTaishoshaIchiran().setDataSource(rowList);
     }
 
-    /**
-     * putViewState
-     */
-    public void putViewState() {
-        List<IdoTaishoshaIchiranparameter> listPar = new ArrayList<>();
-        List<dgIdoTaishoshaIchiran_Row> rowList = div.getDgIdoTaishoshaIchiran().getDataSource();
-        for (dgIdoTaishoshaIchiran_Row row : rowList) {
-            IdoTaishoshaIchiranparameter par = new IdoTaishoshaIchiranparameter(
-                    new FlexibleYear(row.getTexYSeireki().toString()),
-                    new HihokenshaNo(row.getTxtHihoNo().toString()),
-                    new TsuchishoNo(row.getTxtTsuchishoNo().toString()),
-                    new ShikibetsuCode(row.getTxtShikibetsuCode().toString())
-            );
-            listPar.add(par);
-        }
-        ViewStateHolder.put(ViewStateKeys.異動者一覧Par, (Serializable) listPar);
-    }
 }

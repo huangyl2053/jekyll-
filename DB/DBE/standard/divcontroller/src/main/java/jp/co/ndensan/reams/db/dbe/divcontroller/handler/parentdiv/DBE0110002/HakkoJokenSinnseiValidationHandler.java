@@ -136,8 +136,8 @@ public class HakkoJokenSinnseiValidationHandler {
                 new LasdecCode("000000"), ConfigNameDBE.Reamsへの切り替え日.get名称());
         RDate kijyundate = new RDate(kijyun.toString());
         if (!div.getRadHakoJyoken().getSelectedKey().contains(SELECT_KEY0)) {
-            int yearsfrom = shinnseikafrom.getBetweenYears(kijyundate);
-            int yearsto = shinnseikato.getBetweenYears(kijyundate);
+            int yearsfrom = kijyundate.getBetweenYears(shinnseikafrom);
+            int yearsto = kijyundate.getBetweenYears(shinnseikato);
             if ((yearsfrom > 2) || (yearsto > 2)) {
                 validPairs.add(new ValidationMessageControlPair(HakkoJokenSinnseiMessages.申請日入力チェック));
             }
