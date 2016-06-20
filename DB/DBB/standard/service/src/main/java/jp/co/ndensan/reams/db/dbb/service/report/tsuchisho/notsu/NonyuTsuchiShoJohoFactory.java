@@ -341,8 +341,10 @@ public class NonyuTsuchiShoJohoFactory {
                     0, FukusuKibetsuShuyakuKamoku.複数科目を集約しない, FukusuKibetsuShuyakuNendo.年度毎に集約する, 請求明細リスト,
                     納期情報.get納期().get現年過年区分(), ZenkiZennoKanri.newBuilder().build(), RDate.MAX);
             SeikyuManager seikyuManager = new SeikyuManager();
-            List<SeikyuForPrinting> 請求情報リスト1 = seikyuManager.get印字用請求情報(SubGyomuCode.DBB介護賦課, 納付書タイプ, 編集元情報);
-            請求情報リスト.addAll(請求情報リスト1);
+            if (納付書タイプ != null && 編集元情報 != null) {
+                List<SeikyuForPrinting> 請求情報リスト1 = seikyuManager.get印字用請求情報(SubGyomuCode.DBB介護賦課, 納付書タイプ, 編集元情報);
+                請求情報リスト.addAll(請求情報リスト1);
+            }
         }
         return 請求情報リスト;
     }
