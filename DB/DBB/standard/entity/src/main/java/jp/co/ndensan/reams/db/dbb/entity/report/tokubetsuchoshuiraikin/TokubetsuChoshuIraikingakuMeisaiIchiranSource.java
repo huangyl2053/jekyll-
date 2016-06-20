@@ -2,8 +2,8 @@ package jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuiraikin;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
-import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 特別徴収依頼金額明細一覧表帳票Source
@@ -45,7 +45,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranSource implements IReportSou
     public RString nendoTitle;
     @ReportItem(name = "listUpper_1", length = 20, order = 16)
     public RString listUpper_1;
-    @ReportExpandedInfo
+    @ReportPerson
     @ReportItem(name = "listUpper_2", length = 15, order = 17)
     public RString listUpper_2;
     @ReportItem(name = "listUpper_3", length = 9, order = 18)
