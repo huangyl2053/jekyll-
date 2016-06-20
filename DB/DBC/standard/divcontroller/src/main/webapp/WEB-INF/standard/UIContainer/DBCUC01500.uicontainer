@@ -1,11 +1,11 @@
 ﻿{
- "uiContainerName": "DBCUC01200",
+ "uiContainerName": "DBCUC01500",
  "displayWizard": false,
  "subGyomuCode": "DBC",
  "steps": [
   {
    "id": 1,
-   "name": "居宅サービス自己作成サービス利用票登録",
+   "name": "サービス提供票別表",
    "transitionList": [
     {
      "id": "1",
@@ -26,17 +26,17 @@
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC0120011",
-     "toLayoutTitle": "居宅サービス自己作成サービス利用票登録",
-     "toState": "初期表示"
+     "toLayoutName": "DBC0150011",
+     "toLayoutTitle": "サービス提供票別表",
+     "toState": "標準"
     },
     {
      "id": "3",
      "type": "end",
      "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0120011",
-     "layoutTitle": "居宅サービス自己作成サービス利用票登録",
-     "eventName": "完了",
+     "layoutName": "DBC0150011",
+     "layoutTitle": "サービス提供票別表",
+     "eventName": "dummy",
      "destroy": true,
      "condition": ""
     },
@@ -44,8 +44,8 @@
      "id": "4",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0120011",
-     "layoutTitle": "居宅サービス自己作成サービス利用票登録",
+     "layoutName": "DBC0150011",
+     "layoutTitle": "サービス提供票別表",
      "eventName": "再検索",
      "destroy": true,
      "condition": "",
@@ -58,8 +58,8 @@
      "id": "5",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0120011",
-     "layoutTitle": "居宅サービス自己作成サービス利用票登録",
+     "layoutName": "DBC0150011",
+     "layoutTitle": "サービス提供票別表",
      "eventName": "検索結果一覧",
      "destroy": true,
      "condition": "",

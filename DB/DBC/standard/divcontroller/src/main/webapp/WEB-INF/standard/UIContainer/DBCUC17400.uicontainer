@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC17400",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "総合事業（経過措置）対象者登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC1740011",
+     "toLayoutTitle": "二次予防情報対象者登録",
+     "toState": "Default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1740011",
+     "layoutTitle": "二次予防情報対象者登録",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
