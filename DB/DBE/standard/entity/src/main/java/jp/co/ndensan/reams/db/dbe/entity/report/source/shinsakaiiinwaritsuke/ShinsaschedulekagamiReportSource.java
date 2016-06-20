@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
  * @reamsid_L DBE-0130-080 xuyannan
  */
 public class ShinsaschedulekagamiReportSource implements IReportSource {
-    //TODO 業務に合わせてパスを変更してください
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "hakkoYMD", length = 12, order = 1)
@@ -43,8 +42,8 @@ public class ShinsaschedulekagamiReportSource implements IReportSource {
     public RString meishoFuyo;
     @ReportItem(name = "customerBarCode", order = 15)
     public RString customerBarCode;
-    @ReportItem(name = "atenaRenban", length = 8, order = 16)
-    public RString atenaRenban;
+    @ReportItem(name = "pageCount", length = 8, order = 16)
+    public RString pageCount;
     @ReportItem(name = "title", length = 50, order = 17)
     public RString title;
     @ReportItem(name = "tsuchibun1", order = 18)
