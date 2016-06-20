@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.mybatis.param.shikakushutokujogaishakanri;
+package jp.co.ndensan.reams.db.dba.definition.mybatisprm.shikakushutokujogaishakanri;
 
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

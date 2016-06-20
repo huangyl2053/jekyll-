@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.mybatis.param.hanyolisthihokenshadaicho;
+package jp.co.ndensan.reams.db.dba.definition.mybatisprm.hanyolisthihokenshadaicho;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HaniChushutsuKubun;

@@ -26,7 +26,7 @@ and open the template in the editor.
     </resultMap>
     
     <select resultOrdered="true" id="selct他市町村住所地特例" resultMap="result_get事業者名称"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.ShisetsuJyohoParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.ShisetsuJyohoParameter" fetchSize="500">
         SELECT
             dbT1004."daichoShubetsu",
             dbT1004."nyushoShisetsuShurui",
@@ -71,7 +71,7 @@ and open the template in the editor.
     </select>
    
     <select resultOrdered="true" id="get事業者名称_介護保険施設" resultMap="result_get事業者名称"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.ShisetsuJyohoParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.ShisetsuJyohoParameter" fetchSize="500">
         SELECT
             dbT7060."jigyoshaName" AS "jigyoshaMeisho",
             dbT7060."telNo",
@@ -92,7 +92,7 @@ and open the template in the editor.
     </select>
 
     <select resultOrdered="true" id="get事業者名称_住所地特例対象施設" resultMap="result_get事業者名称"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.ShisetsuJyohoParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.ShisetsuJyohoParameter" fetchSize="500">
         SELECT
             dbT1005."jigyoshaMeisho",
             dbT1005."telNo",

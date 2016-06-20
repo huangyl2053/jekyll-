@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashitaishotsuchisho;
+package jp.co.ndensan.reams.db.dba.definition.mybatisprm.tashihenkotsuchisho;
 
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
@@ -13,15 +13,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 他住特施設変更通知書データ作成の宛名識別取得のMyBatis用パラメータクラスです。
  *
- * 住特施設退所通知書のMyBatis用パラメータクラスです。
- *
- * @reamsid_L DBA-0380-010 huangh
+ * @reamsid_L DBA-0380-040 huangh
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
+public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
     private RString psmShikibetsuTaisho;
 
@@ -30,7 +29,7 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter e
      *
      * @param searchKey searchKey
      */
-    public TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter(IShikibetsuTaishoPSMSearchKey searchKey) {
+    public TaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatisParameter(IShikibetsuTaishoPSMSearchKey searchKey) {
         super(searchKey);
     }
 
@@ -42,5 +41,4 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter e
     public void setPsmShikibetsuTaisho(RString psmShikibetsuTaisho) {
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
-
 }
