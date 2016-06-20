@@ -129,7 +129,7 @@ public class KyotakuKaigoFukushiYoguKonyuhiShikyuShinseisho {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
                 SubGyomuCode.DBC介護給付,
-                new ReportId("DBC800013_FukushiYoguKonyuhiShinseishoJuryoIninHarai"),
+                new ReportId("DBC800018_kyufuhiKariireiShinseisho"),
                 KamokuCode.EMPTY,
                 1,
                 項目番号,
