@@ -139,7 +139,7 @@ public class KyufuhiKashitsukekinShokankigenEnchoShinseisho {
             RString 帳票文言 = tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
             RString 借受年月日 = get借受年月日(被保険者番号).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).toDateString();
-            return 帳票文言.replace(new RString("@@@@"), 借受年月日);
+            return 帳票文言.replace(new RString("＠＠＠＠"), 借受年月日);
         }
         return RString.EMPTY;
     }
