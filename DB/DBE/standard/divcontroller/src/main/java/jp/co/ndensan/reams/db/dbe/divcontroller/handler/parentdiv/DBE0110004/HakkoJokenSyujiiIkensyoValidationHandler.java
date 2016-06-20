@@ -212,56 +212,32 @@ public class HakkoJokenSyujiiIkensyoValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 未入力チェック(ValidationMessageControlPairs validPairs) {
-        if (div.getChkMiteishutsushaIchiran().getSelectedKeys().contains(SELECT_KEY0)) {
-            if (div.getRadJoken1().getSelectedKey().contains(SELECT_KEY0) && null == div.getTxtIraiNisu().getValue()) {
-                validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.未入力チェック));
-            } else {
-                if ((null == div.getTxtShinseiYMD1().getFromValue()) || (null == div.getTxtShinseiYMD1().getToValue())) {
-                    validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.未入力チェック));
-                }
-            }
-
+        if ((!div.getTxtIraiNisu().isDisabled()) && (null == div.getTxtIraiNisu().getValue())) {
+            validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.未入力チェック));
         }
-        if (div.getChkKakuninIchiranhyo().getSelectedKeys().contains(SELECT_KEY0)) {
-            if (!div.getRadJoken2().getSelectedKey().contains(SELECT_KEY0) && null == div.getTxtShinsakai2().getValue()) {
-                validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.未入力チェック));
-            }
+        if ((!div.getTxtShinseiYMD1().isDisabled()) && (null == div.getTxtShinseiYMD1().getToValue())) {
+            validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.未入力チェック));
         }
-        if (div.getChkIraiMishorishaIchiranhyo().getSelectedKeys().contains(SELECT_KEY0)) {
-            if (!div.getRadJoken3().getSelectedKey().contains(SELECT_KEY0)
-                    && ((null == div.getTxtShinsaYMD3().getFromValue()) || (null == div.getTxtShinsaYMD3().getToValue()))) {
-                validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.未入力チェック));
-            }
+        if ((!div.getTxtShinsakai2().isDisabled()) && (null == div.getTxtShinsakai2().getValue())) {
+            validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.未入力チェック));
         }
-        未入力チェック1(validPairs);
-        return validPairs;
-    }
-
-    private ValidationMessageControlPairs 未入力チェック1(ValidationMessageControlPairs validPairs) {
-        if (div.getChkSakuseiIraiHenkoushaIchiranhyoJoken().getSelectedKeys().contains(SELECT_KEY0)) {
-            if ((null == div.getTxtShinseiYMD4().getFromValue()) || (null == div.getTxtShinseiYMD4().getToValue())) {
-                validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.未入力チェック));
-            }
+        if ((!div.getTxtShinsaYMD3().isDisabled()) && (null == div.getTxtShinsaYMD3().getToValue())) {
+            validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.未入力チェック));
         }
-        if (div.getChkIraiZumiIchiranhyoJoken().getSelectedKeys().contains(SELECT_KEY0)) {
-            if (div.getRadJoken5().getSelectedKey().contains(SELECT_KEY0)
-                    && ((null == div.getTxtShoriYMD5().getFromValue()) || (null == div.getTxtShoriYMD5().getToValue()))) {
-                validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.未入力チェック));
-            } else {
-                if ((null == div.getTxtShinseiYMD5().getFromValue()) || (null == div.getTxtShinseiYMD5().getToValue())) {
-                    validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.未入力チェック));
-                }
-            }
+        if ((!div.getTxtShinseiYMD4().isDisabled()) && (null == div.getTxtShinseiYMD4().getToValue())) {
+            validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.未入力チェック));
         }
-        if (div.getChkSakuseiryoSeikyuIchiranhyo().getSelectedKeys().contains(SELECT_KEY0)) {
-            if (div.getRadSeikyuIchiranJoken().getSelectedKey().contains(SELECT_KEY0)
-                    && ((null == div.getTxtSeikyuIchiranShoriYMD().getFromValue()) || (null == div.getTxtSeikyuIchiranShoriYMD().getToValue()))) {
-                validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.未入力チェック));
-            } else {
-                if ((null == div.getTxtJuryoYMD().getFromValue()) || (null == div.getTxtJuryoYMD().getToValue())) {
-                    validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.未入力チェック));
-                }
-            }
+        if ((!div.getTxtShoriYMD5().isDisabled()) && (null == div.getTxtShoriYMD5().getToValue())) {
+            validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.未入力チェック));
+        }
+        if ((!div.getTxtShinseiYMD5().isDisabled()) && (null == div.getTxtShinseiYMD5().getToValue())) {
+            validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.未入力チェック));
+        }
+        if ((!div.getTxtSeikyuIchiranShoriYMD().isDisabled()) && (null == div.getTxtSeikyuIchiranShoriYMD().getToValue())) {
+            validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.未入力チェック));
+        }
+        if ((!div.getTxtJuryoYMD().isDisabled()) && (null == div.getTxtJuryoYMD().getToValue())) {
+            validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.未入力チェック));
         }
         return validPairs;
     }

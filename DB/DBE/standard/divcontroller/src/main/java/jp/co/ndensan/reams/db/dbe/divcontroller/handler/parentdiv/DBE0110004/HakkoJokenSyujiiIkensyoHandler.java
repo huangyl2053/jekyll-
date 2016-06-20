@@ -245,11 +245,13 @@ public class HakkoJokenSyujiiIkensyoHandler {
             }
         }
         if (主治医意見書依頼未処理者一覧表フラグ) {
-            主治医意見書依頼未処理者一覧表作成条件 = new RString("1");
-        } else {
-            主治医意見書依頼未処理者一覧表作成条件 = new RString("2");
-            主治医意見書依頼未処理者一覧表申請日From = new FlexibleDate(div.getTxtShinsaYMD3().getFromValue().toDateString());
-            主治医意見書依頼未処理者一覧表申請日To = new FlexibleDate(div.getTxtShinsaYMD3().getToValue().toDateString());
+            if (div.getTxtShinsaYMD3().isDisabled()) {
+                主治医意見書依頼未処理者一覧表作成条件 = new RString("1");
+            } else {
+                主治医意見書依頼未処理者一覧表作成条件 = new RString("2");
+                主治医意見書依頼未処理者一覧表申請日From = new FlexibleDate(div.getTxtShinsaYMD3().getFromValue().toDateString());
+                主治医意見書依頼未処理者一覧表申請日To = new FlexibleDate(div.getTxtShinsaYMD3().getToValue().toDateString());
+            }
         }
         if (主治医意見書作成依頼変更者一覧表フラグ) {
             主治医意見書作成依頼変更者一覧表申請日From = new FlexibleDate(div.getTxtShinseiYMD4().getFromValue().toDateString());
