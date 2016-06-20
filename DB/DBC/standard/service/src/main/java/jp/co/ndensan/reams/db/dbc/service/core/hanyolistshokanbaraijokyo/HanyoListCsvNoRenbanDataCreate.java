@@ -17,10 +17,12 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
@@ -39,7 +41,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
@@ -71,9 +72,6 @@ public class HanyoListCsvNoRenbanDataCreate {
     private static final RString 入所施設種類_11 = new RString("11");
     private static final RString 入所施設種類_12 = new RString("12");
     private static final RString 入所施設種類_21 = new RString("21");
-    private static final CodeShubetsu 申請取消事由コード種別 = new CodeShubetsu("0028");
-    private static final CodeShubetsu 資格取得事由コード種別 = new CodeShubetsu("0007");
-    private static final CodeShubetsu 資格喪失事由コード種別 = new CodeShubetsu("0010");
     private static final RString INDEX_1 = new RString("1");
     private static final RString INDEX_2 = new RString("2");
     private static final RString 住特 = new RString("住特");
@@ -413,7 +411,7 @@ public class HanyoListCsvNoRenbanDataCreate {
             RString 申請取消事由 = RString.EMPTY;
             RString 申請取消事由Code = entity.get支給申請Entity().getKaishuShinseiTorikeshijiyuCode();
             if (申請取消事由Code != null && !申請取消事由Code.isEmpty()) {
-                申請取消事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, 申請取消事由コード種別,
+                申請取消事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.住宅改修費申請取消事由コード.getコード(),
                         new Code(申請取消事由Code), FlexibleDate.getNowDate());
             }
             csvEntity.set申請取消事由(申請取消事由);
@@ -466,7 +464,7 @@ public class HanyoListCsvNoRenbanDataCreate {
                 ? entity.get被保険者番号().getColumnValue() : RString.EMPTY);
         RString 資格取得事由 = RString.EMPTY;
         if (entity.get資格取得事由コード() != null && !entity.get資格取得事由コード().isEmpty()) {
-            資格取得事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, 資格取得事由コード種別,
+            資格取得事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(),
                     new Code(entity.get資格取得事由コード()), FlexibleDate.getNowDate());
         }
         csvEntity.set資格取得事由(資格取得事由);
@@ -474,7 +472,7 @@ public class HanyoListCsvNoRenbanDataCreate {
         csvEntity.set資格取得届出日(dataToRString(entity.get資格取得届出年月日(), parameter));
         RString 資格喪失事由 = RString.EMPTY;
         if (entity.get資格喪失事由コード() != null && !entity.get資格喪失事由コード().isEmpty()) {
-            資格喪失事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, 資格喪失事由コード種別,
+            資格喪失事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu(),
                     new Code(entity.get資格喪失事由コード()), FlexibleDate.getNowDate());
         }
         csvEntity.set喪失事由(資格喪失事由);

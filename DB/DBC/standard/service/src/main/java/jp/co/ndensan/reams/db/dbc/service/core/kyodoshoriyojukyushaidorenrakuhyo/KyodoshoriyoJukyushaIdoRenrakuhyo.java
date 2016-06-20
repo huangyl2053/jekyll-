@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.service.core.kyodoshoriyojukyushaidorenrakuhyo;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.KyodoshoriyoJukyushaIdoRenrakuhyoEntity;
-import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.KyoutuuEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyodoshoriyoJukyushaIdoRenrakuhyoParam;
+import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyoutuuEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_IdoKubunCode;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity;
@@ -104,9 +104,9 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
      * @param 異動日 FlexibleDate
      * @param 被保険者番号 HihokenshaNo
      * @param 対象年月 FlexibleYearMonth
-     * @return KyodoshoriyoJukyushaIdoRenrakuhyoEntity
+     * @return KyodoshoriyoJukyushaIdoRenrakuhyoParam
      */
-    public KyodoshoriyoJukyushaIdoRenrakuhyoEntity getJukyushaIdoJoho(RString 処理モード, boolean 論理削除,
+    public KyodoshoriyoJukyushaIdoRenrakuhyoParam getJukyushaIdoJoho(RString 処理モード, boolean 論理削除,
             FlexibleDate 異動日, HihokenshaNo 被保険者番号, FlexibleYearMonth 対象年月) {
         if (新規.equals(処理モード)) {
             DbV1001HihokenshaDaichoEntity entity = 被保険者台帳管理Dac.get最新の被保険者台帳情報(被保険者番号);
@@ -138,7 +138,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
         }
     }
 
-    private KyodoshoriyoJukyushaIdoRenrakuhyoEntity get証記載保険者番号と保険者番号(
+    private KyodoshoriyoJukyushaIdoRenrakuhyoParam get証記載保険者番号と保険者番号(
             HihokenshaNo 被保険者番号, IKojin 宛名) {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
@@ -180,9 +180,9 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
         return null;
     }
 
-    private KyodoshoriyoJukyushaIdoRenrakuhyoEntity set共同処理用受給者異動情報_新規(
+    private KyodoshoriyoJukyushaIdoRenrakuhyoParam set共同処理用受給者異動情報_新規(
             HihokenshaNo 被保険者番号, KyoutuuEntity 共通項目Entity, IKojin 宛名) {
-        KyodoshoriyoJukyushaIdoRenrakuhyoEntity entity = new KyodoshoriyoJukyushaIdoRenrakuhyoEntity();
+        KyodoshoriyoJukyushaIdoRenrakuhyoParam entity = new KyodoshoriyoJukyushaIdoRenrakuhyoParam();
         共通項目Entity.set被保険者番号(被保険者番号);
         共通項目Entity.set異動区分(JukyushaIF_IdoKubunCode.新規.getコード());
         共通項目Entity.set異動事由(null);
@@ -214,11 +214,11 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
         return entity;
     }
 
-    private KyodoshoriyoJukyushaIdoRenrakuhyoEntity set共同処理用受給者異動情報_新規以外(
+    private KyodoshoriyoJukyushaIdoRenrakuhyoParam set共同処理用受給者異動情報_新規以外(
             DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity dbT3002Entity,
             DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity dbT3003Entity,
             DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity dbT3004Entity) {
-        KyodoshoriyoJukyushaIdoRenrakuhyoEntity entity = new KyodoshoriyoJukyushaIdoRenrakuhyoEntity();
+        KyodoshoriyoJukyushaIdoRenrakuhyoParam entity = new KyodoshoriyoJukyushaIdoRenrakuhyoParam();
 
         KyoutuuEntity 共通項目Entity = new KyoutuuEntity();
         if (dbT3002Entity != null) {

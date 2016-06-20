@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.choshuyuyo;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
 import jp.co.ndensan.reams.db.dbb.entity.report.choshuyuyo.KaigoHokenHokenryoChoshuyoyoTorikeshiTsuchishoA4TateSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
@@ -16,7 +17,6 @@ import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigo
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -47,7 +47,6 @@ public class ChoshuYuyoTorikesiTsuchiShoA4TateEditor implements IChoshuYuyoTorik
     private final List<RString> 随時リスト;
     private final EditedAtesaki 編集後宛先;
     private final int i;
-    private static final CodeShubetsu コード種別 = new CodeShubetsu("0005");
     private static final RString YEAR = new RString("年度");
 
     /**
@@ -139,7 +138,7 @@ public class ChoshuYuyoTorikesiTsuchiShoA4TateEditor implements IChoshuYuyoTorik
             Code 徴収猶予取消種類コード = 徴収猶予取消通知書情報.get徴収猶予の情報().get徴収猶予種類コード();
             RString 取消理由1 = RString.EMPTY;
             if (徴収猶予取消種類コード != null) {
-                取消理由1 = CodeMaster.getCodeMeisho(SubGyomuCode.DBB介護賦課, コード種別,
+                取消理由1 = CodeMaster.getCodeMeisho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.保険料徴収猶予取消種類.getコード(),
                         徴収猶予取消種類コード, FlexibleDate.getNowDate());
             }
             source.torikeshiRiyu1 = 取消理由1;

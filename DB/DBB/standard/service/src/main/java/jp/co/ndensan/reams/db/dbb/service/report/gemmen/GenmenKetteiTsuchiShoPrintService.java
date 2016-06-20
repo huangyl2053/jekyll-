@@ -43,7 +43,6 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -77,7 +76,6 @@ public class GenmenKetteiTsuchiShoPrintService {
 
     private static final RString 種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
     private static final RString 定数 = new RString("0");
-    private static final CodeShubetsu コード種別 = DBBCodeShubetsu.保険料減免種類.getコード();
     private static final RString RSTRING_1 = new RString("1");
     private static final int INDEX_ZERO = 0;
     private static final int INDEX_ONE = 1;
@@ -327,10 +325,10 @@ public class GenmenKetteiTsuchiShoPrintService {
                     .get減免の情報更正後().get確定介護保険料_年額(), 0));
             Code 減免種類コード = 減免決定通知書情報.get減免の情報更正後().get減免種類コード();
             if (flag == INDEX_ONE && 減免種類コード != null) {
-                item.set減免理由1(CodeMaster.getCodeMeisho(SubGyomuCode.DBB介護賦課, コード種別,
+                item.set減免理由1(CodeMaster.getCodeMeisho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.保険料減免種類.getコード(),
                         減免種類コード, FlexibleDate.getNowDate()));
             } else if (flag == INDEX_TWO && 減免種類コード != null) {
-                item.set減免理由1(CodeMaster.getCodeMeisho(SubGyomuCode.DBB介護賦課, コード種別,
+                item.set減免理由1(CodeMaster.getCodeMeisho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.保険料減免種類.getコード(),
                         減免種類コード, FlexibleDate.getNowDate()));
             }
             item.set減免理由2(減免決定通知書情報.get減免の情報更正後().get減免事由());

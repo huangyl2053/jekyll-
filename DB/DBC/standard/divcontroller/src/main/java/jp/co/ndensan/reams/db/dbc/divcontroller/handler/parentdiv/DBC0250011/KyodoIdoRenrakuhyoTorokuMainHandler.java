@@ -9,9 +9,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoKihonSofu;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoKogakuSofu;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoShokanSofu;
-import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.KyodoshoriyoJukyushaIdoRenrakuhyoEntity;
-import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.KyoutuuEntity;
-import jp.co.ndensan.reams.db.dbc.business.core.kyodoshoriyojukyushaidorenrakuhyo.KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyodoshoriyoJukyushaIdoRenrakuhyoParam;
+import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyoutuuEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.kyodoshoriyojukyushaidorenrakuhyo.param.KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0250011.KyodoIdoRenrakuhyoTorokuMainDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.kyodoshorijukyushaidorenrakuhyo.KyodoshoriyoJukyushaIdoRenrakuhyoToroku;
 import jp.co.ndensan.reams.db.dbc.service.report.kyodoshorijukyushaidorenrakuhyo.KyodoShoriJukyushaIdoRenrakuhyoPrintService;
@@ -108,7 +108,7 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
      */
     public void データの登録(ShikibetsuCode 識別コード) {
         // TODO
-        KyodoshoriyoJukyushaIdoRenrakuhyoEntity entity = new KyodoshoriyoJukyushaIdoRenrakuhyoEntity();
+        KyodoshoriyoJukyushaIdoRenrakuhyoParam entity = new KyodoshoriyoJukyushaIdoRenrakuhyoParam();
         KyoutuuEntity 共通項目Entity = entity.get共通項目Entity();
         HihokenshaNo 被保険者番号 = 共通項目Entity.get被保険者番号();
 
@@ -202,7 +202,7 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
      */
     public SourceDataCollection to帳票発行処理() {
         // TODO
-        KyodoshoriyoJukyushaIdoRenrakuhyoEntity entity = new KyodoshoriyoJukyushaIdoRenrakuhyoEntity();
+        KyodoshoriyoJukyushaIdoRenrakuhyoParam entity = new KyodoshoriyoJukyushaIdoRenrakuhyoParam();
         KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity 異動連絡票データ = KyodoshoriyoJukyushaIdoRenrakuhyoToroku
                 .createInstance().editKyodoshoriyoJukyushaIdoRenrakuhyo(entity);
         KyodoShoriJukyushaIdoRenrakuhyoPrintService printService = new KyodoShoriJukyushaIdoRenrakuhyoPrintService();
@@ -214,7 +214,7 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
      */
     public void set更新完了メッセージ() {
         // TODO
-        KyodoshoriyoJukyushaIdoRenrakuhyoEntity entity = new KyodoshoriyoJukyushaIdoRenrakuhyoEntity();
+        KyodoshoriyoJukyushaIdoRenrakuhyoParam entity = new KyodoshoriyoJukyushaIdoRenrakuhyoParam();
         div.getKanryoMessage().setMessage(完了メッセージメイン,
                 entity.get基本情報Entity().getHiHokenshaNo().getColumnValue(),
                 entity.get基本情報Entity().getHiHokenshaName(),
