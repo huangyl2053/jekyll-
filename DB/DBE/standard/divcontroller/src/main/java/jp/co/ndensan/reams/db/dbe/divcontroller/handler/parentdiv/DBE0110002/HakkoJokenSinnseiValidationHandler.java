@@ -82,7 +82,7 @@ public class HakkoJokenSinnseiValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 未入力チェック(ValidationMessageControlPairs validPairs) {
-        if (div.getChkSakuseiChohyo().getSelectedKeys().contains(SELECT_KEY0)) {
+        if (div.getRadHakoJyoken().getSelectedKey().contains(SELECT_KEY0)) {
             if ((null == div.getTxtShoriYMD().getFromValue()) || (null == div.getTxtShoriYMD().getToValue())) {
                 validPairs.add(new ValidationMessageControlPair(HakkoJokenSinnseiMessages.未入力チェック));
             }
