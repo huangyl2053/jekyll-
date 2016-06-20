@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaichosakusei.HihokenshaDaichoSakusei;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.HihokenshaDaichoDivisionEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.HihokenshaDaichoSakuseiEntity;

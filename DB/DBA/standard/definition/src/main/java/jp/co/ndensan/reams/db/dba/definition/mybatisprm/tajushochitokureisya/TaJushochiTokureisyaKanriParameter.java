@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisya;
+package jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisya;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

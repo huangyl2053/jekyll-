@@ -13,7 +13,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriMaster;
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TashichosonBusiness;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TaJushochiTokureisyaKanriRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TashichosonRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokureisyakanri.ITaJushochiTokureisyaKanriMapper;

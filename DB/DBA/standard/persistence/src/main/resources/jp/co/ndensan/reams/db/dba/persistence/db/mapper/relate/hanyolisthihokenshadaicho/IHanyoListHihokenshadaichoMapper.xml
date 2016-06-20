@@ -31,7 +31,7 @@
         <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
     </resultMap>
     <select resultOrdered="true" id="get汎用リスト被保険者台帳データの取得" resultMap="resultMap_HanyoListHihokenshadaichoRelateEntity" 
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.hanyolisthihokenshadaicho.HanyoListHihokenshadaichoMyBatisParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hanyolisthihokenshadaicho.HanyoListHihokenshadaichoMyBatisParameter" fetchSize="500">
         SELECT
         DbT1001."hihokenshaNo" AS "DbT1001_hihokenshaNo",
         DbT1001."shichosonCode" AS "DbT1001_shichosonCode",

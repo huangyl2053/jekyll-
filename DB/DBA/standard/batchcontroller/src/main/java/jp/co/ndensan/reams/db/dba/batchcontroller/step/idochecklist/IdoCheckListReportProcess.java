@@ -13,7 +13,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.idochecklist.IdoCheckListBatch;
 import jp.co.ndensan.reams.db.dba.business.report.idochecklist.IdoCheckListReport;
 import jp.co.ndensan.reams.db.dba.definition.core.idochecklist.IdochecklistTitle;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.idochecklist.IdoCheckListGetDataParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.idochecklist.IdoCheckListGetDataParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.idochecklist.IdoCheckListGetDataProcessParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist.IdoCheckListEntity;

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dba.business.core.hihokensha.iryohokenkanyujokyo.I
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.jukyushadaicho.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.shisetsunyutaisho.ShisetsuNyutaisho;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokensha.hihokenshadaicho.HihokenshaDaichoMapperParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokensha.hihokenshadaicho.HihokenshaDaichoMapperParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokensha.hihokenshadaicho.HihokenshaDaichoRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokensha.hihokenshadaicho.IHihokenshaDaichoMapper;
 import jp.co.ndensan.reams.db.dba.service.core.hihokensha.iryohokenkanyujokyo.IryohokenKanyuJokyoManager;

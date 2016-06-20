@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA4010011
 
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaichosakusei.HihokenshaDaichoSakusei;
 import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.ShikakuRirekiJoho;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011.DBA4010011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011.HihokenshaShokaiTotalDiv;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaichosakusei.HihokenshaDaichoSakuseiManager;

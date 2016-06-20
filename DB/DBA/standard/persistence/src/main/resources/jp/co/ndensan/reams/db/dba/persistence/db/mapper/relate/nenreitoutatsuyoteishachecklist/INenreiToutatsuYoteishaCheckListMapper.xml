@@ -22,7 +22,7 @@
 
     <select resultOrdered="true" id="getTorokuNenreiToutatsuYoteishaCheckList"
             resultMap="resultMap_NenreiToutatsuYoteishaCheckListEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter" fetchSize="500">
         SELECT
         PSM."shikibetsuCode" AS "PSM_shikibetsuCode",
         PSM."meisho" AS "PSM_meisho",
@@ -56,7 +56,7 @@
 
     <select resultOrdered="true" id="getTorokuNenreiToutatsuYoteishaCheckList2"
             resultMap="resultMap_NenreiToutatsuYoteishaCheckListEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter"    fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter"    fetchSize="500">
         SELECT
         PSM."shikibetsuCode" AS "PSM_shikibetsuCode",
         PSM."meisho" AS "PSM_meisho",
@@ -90,7 +90,7 @@
 
     <select resultOrdered="true" id="getZenbuNenreiToutatsuYoteishaCheckList"
             resultMap="resultMap_NenreiToutatsuYoteishaCheckListEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter"
             fetchSize="500">
         SELECT
         PSM."shikibetsuCode" AS "PSM_shikibetsuCode",
@@ -125,7 +125,7 @@
 
     <select resultOrdered="true" id="getZenbuNenreiToutatsuYoteishaCheckList2"
             resultMap="resultMap_NenreiToutatsuYoteishaCheckListEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter"
             fetchSize="500">
         SELECT
         PSM."shikibetsuCode" AS "PSM_shikibetsuCode",

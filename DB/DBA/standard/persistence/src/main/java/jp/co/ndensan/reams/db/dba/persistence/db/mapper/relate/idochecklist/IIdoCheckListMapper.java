@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.idochecklist;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.idochecklist.IdoCheckListGetDataParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.idochecklist.IdoCheckListGetDataParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist.IdoInfoEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist.ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureidaicho
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureidaicho.OtherAddressLedgerBusiness;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.atena.OtherAddressInformationRecipientNameMybatisParam;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.otheraddressledger.OtherAddressInformationParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
