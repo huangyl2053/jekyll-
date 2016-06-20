@@ -5,11 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0110003;
 
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosayoteimitei.NinteichosaYoteiMiteiBatchParamter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110003.HakkoJokenDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110003.HakkoJokenHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110003.HakkoJokenValidationHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -157,6 +160,63 @@ public class HakkoJoken {
         }
 
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 実行ボタン処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenDiv>
+     */
+    public ResponseData<NinteichosaYoteiMiteiBatchParamter> onClick_Jikkou(HakkoJokenDiv div) {
+        return ResponseData.of(getHandler(div).setBatchParameter()).respond();
+    }
+
+    /**
+     * 入力チェックです。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenDiv>
+     */
+    public ResponseData<HakkoJokenDiv> onClick_Check(HakkoJokenDiv div) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).未選択チェック(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).未入力チェック(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).申請日範囲不正チェック1(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).申請日範囲不正チェック2(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).申請日範囲不正チェック3(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).申請日入力チェック1(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).申請日入力チェック2(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).申請日入力チェック3(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private HakkoJokenValidationHandler getValidationHandler(HakkoJokenDiv div) {
+        return new HakkoJokenValidationHandler(div);
     }
 
     private HakkoJokenHandler getHandler(HakkoJokenDiv div) {
