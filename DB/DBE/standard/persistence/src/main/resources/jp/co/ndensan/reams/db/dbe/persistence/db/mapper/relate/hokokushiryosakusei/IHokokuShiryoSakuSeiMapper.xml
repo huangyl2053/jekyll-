@@ -483,12 +483,12 @@
         ) AS shinsakaiKaisaiNoCount
         FROM
         (SELECT
+        <if test="!isEmptyGogitaiNo">
+            A."gogitaiNo" AS gogitaiNo,
+            E."gogitaiMei",
+        </if>
         F."shichosonCode"
         ,F."shichosonMeisho"
-        <if test="!isEmptyGogitaiNo">
-            ,A."gogitaiNo" AS gogitaiNo
-            ,E."gogitaiMei"
-        </if>
         ,C."shoKisaiHokenshaNo"
         <if test="isShinseiji">
             ,C."ninteiShinseiShinseijiKubunCode"
@@ -586,12 +586,12 @@
             AND C."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
         </if>
         GROUP BY
+        <if test="!isEmptyGogitaiNo">
+            A."gogitaiNo",
+            E."gogitaiMei",
+        </if>
         F."shichosonCode"
         ,F."shichosonMeisho"
-        <if test="!isEmptyGogitaiNo">
-            ,A."gogitaiNo"
-            ,E."gogitaiMei"
-        </if>
         ,C."shoKisaiHokenshaNo"
         <if test="isShinseiji">
             ,C."ninteiShinseiShinseijiKubunCode"
@@ -600,8 +600,10 @@
             ,C."ninteiShinseiHoreiKubunCode"
         </if>
         ORDER BY
-        A."gogitaiNo"
-        ,F."shichosonCode"
+        <if test="!isEmptyGogitaiNo">
+            A."gogitaiNo",
+        </if>
+        F."shichosonCode"
         ,C."shoKisaiHokenshaNo"
         <if test="isShinseiji">
             ,C."ninteiShinseiShinseijiKubunCode"
@@ -759,12 +761,13 @@
         Group BY G."shinsakaiKaisaiNo" ) AS shinsakaiIinCount
         ) AS shinsakaiKaisaiNoCount
         FROM
-        (SELECT F."shichosonCode"
-        ,F."shichosonMeisho"
+        (SELECT
         <if test="!isEmptyGogitaiNo">
-            ,A."gogitaiNo" AS gogitaiNo
-            ,E."gogitaiMei"
+            A."gogitaiNo" AS gogitaiNo,
+            E."gogitaiMei",
         </if>
+        F."shichosonCode"
+        ,F."shichosonMeisho"
         <if test="isShinseiji">
             ,C."ninteiShinseiShinseijiKubunCode"
         </if>
@@ -861,12 +864,12 @@
             AND C."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
         </if>
         GROUP BY
+        <if test="!isEmptyGogitaiNo">
+            A."gogitaiNo",
+            E."gogitaiMei",
+        </if>
         F."shichosonCode"
         ,F."shichosonMeisho"
-        <if test="!isEmptyGogitaiNo">
-            ,A."gogitaiNo"
-            ,E."gogitaiMei"
-        </if>
         <if test="isShinseiji">
             ,C."ninteiShinseiShinseijiKubunCode"
         </if>
@@ -874,8 +877,10 @@
             ,C."ninteiShinseiHoreiKubunCode"
         </if>
         ORDER BY
-        A."gogitaiNo"
-        ,F."shichosonCode"
+        <if test="!isEmptyGogitaiNo">
+            A."gogitaiNo",
+        </if>
+        F."shichosonCode"
         <if test="isShinseiji">
             ,C."ninteiShinseiShinseijiKubunCode"
         </if>
@@ -929,12 +934,13 @@
         Group BY G."shinsakaiKaisaiNo" ) AS shinsakaiIinCount
         ) AS shinsakaiKaisaiNoCount
         FROM
-        (SELECT F."shichosonCode"
-        ,F."shichosonMeisho"
+        (SELECT
         <if test="!isEmptyGogitaiNo">
-            ,A."gogitaiNo"
-            ,E."gogitaiMei"
+            A."gogitaiNo" AS gogitaiNo,
+            E."gogitaiMei",
         </if>
+        F."shichosonCode"
+        ,F."shichosonMeisho"
         <if test="isShinseiji">
             ,C."ninteiShinseiShinseijiKubunCode"
         </if>
@@ -1031,12 +1037,12 @@
             AND C."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
         </if>
         GROUP BY
+        <if test="!isEmptyGogitaiNo">
+            A."gogitaiNo",
+            ,E."gogitaiMei",
+        </if>
         F."shichosonCode"
         ,F."shichosonMeisho"
-        <if test="!isEmptyGogitaiNo">
-            ,A."gogitaiNo"
-            ,E."gogitaiMei"
-        </if>
         <if test="isShinseiji">
             ,C."ninteiShinseiShinseijiKubunCode"
         </if>
@@ -1044,8 +1050,10 @@
             ,C."ninteiShinseiHoreiKubunCode"
         </if>
         ORDER BY
-        A."gogitaiNo"
-        ,F."shichosonCode"
+        <if test="!isEmptyGogitaiNo">
+            A."gogitaiNo",
+        </if>
+        F."shichosonCode"
         <if test="isShinseiji">
             ,C."ninteiShinseiShinseijiKubunCode"
         </if>
@@ -2554,12 +2562,13 @@
             resultMap="hokokushiryosakusei_SinsakaiHanteiJyokyoHeader"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.CsvKenHokokuShiryoSakuseiMyBatisParameter"
             fetchSize="500">
-        SELECT F."shichosonCode"
-        ,F."shichosonMeisho"
+        SELECT
         <if test="!isEmptyGogitaiNo">
-            ,A."gogitaiNo"
-            ,E."gogitaiMei"
+            A."gogitaiNo",
+            E."gogitaiMei",
         </if>
+        F."shichosonCode"
+        ,F."shichosonMeisho"
         ,C."shoKisaiHokenshaNo"
         ,MIN(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMin
         ,MAX(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMax
@@ -2652,18 +2661,18 @@
             AND C."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
         </if>
         GROUP BY
+        <if test="!isEmptyGogitaiNo">
+            A."gogitaiNo",
+            E."gogitaiMei",
+        </if>
         F."shichosonCode"
         ,F."shichosonMeisho"
-        <if test="!isEmptyGogitaiNo">
-            ,A."gogitaiNo"
-            ,E."gogitaiMei"
-        </if>
         ,C."shoKisaiHokenshaNo"
         ORDER BY
-        F."shichosonCode"
         <if test="!isEmptyGogitaiNo">
-            ,A."gogitaiNo"
+            A."gogitaiNo",
         </if>
+        F."shichosonCode"
         ,C."shoKisaiHokenshaNo"
     </select>
 
