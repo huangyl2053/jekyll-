@@ -235,7 +235,7 @@ public interface IShiryoShinsakaiIinMapper {
      * @param parameter IinTuutishoMyBatisParameter
      * @return List<IinTuikaSiryoEntity> 追加資料鑑情報
      */
-    List<IinTuikaSiryoEntity> getShinsakaiKaisaiKekkaJoho(IinTuutishoMyBatisParameter parameter);
+    IinTuikaSiryoEntity getShinsakaiKaisaiKekkaJoho(IinTuutishoMyBatisParameter parameter);
 
     /**
      * 追加審査対象一覧情報を取得する。

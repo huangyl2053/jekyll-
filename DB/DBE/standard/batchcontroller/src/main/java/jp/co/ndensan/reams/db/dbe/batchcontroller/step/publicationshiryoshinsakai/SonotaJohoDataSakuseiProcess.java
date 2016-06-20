@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.publicationshiryoshinsakai;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.iinsonotashiryosakusei.IinSonotashiryoSakuseiA3Report;
 import jp.co.ndensan.reams.db.dbe.business.report.iinsonotashiryosakusei.IinSonotashiryoSakuseiA4Report;
@@ -28,8 +30,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -38,10 +38,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -53,8 +50,13 @@ public class SonotaJohoDataSakuseiProcess extends BatchKeyBreakBase<SonotaJohoEn
 
     private static final RString SELECT_TSONOTAJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.publicationshiryoshinsakai.IShiryoShinsakaiIinMapper.getSonotaJoho");
+    private static final List<RString> PAGE_BREAK_KEYS_A3 = Collections.unmodifiableList(Arrays.asList(
+            new RString(SonotashiryoA3ReportSource.ReportSourceFields.hokenshaNo.name())));
+    private static final List<RString> PAGE_BREAK_KEYS_A4 = Collections.unmodifiableList(Arrays.asList(
+            new RString(SonotashiryoA4ReportSource.ReportSourceFields.hokenshaNo.name())));
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
+    private IinSonotashiryoSakuseiEntity item;
     @BatchWriter
     private BatchReportWriter<SonotashiryoA4ReportSource> batchWriteA4;
     private ReportSourceWriter<SonotashiryoA4ReportSource> reportSourceWriterA4;
@@ -67,7 +69,6 @@ public class SonotaJohoDataSakuseiProcess extends BatchKeyBreakBase<SonotaJohoEn
     private static final int INT_7 = 7;
     private static final int INT_8 = 8;
     private static final int INT_10 = 10;
-    private int 総ページ数 = 0;
 
     @Override
     protected void initialize() {
@@ -82,12 +83,8 @@ public class SonotaJohoDataSakuseiProcess extends BatchKeyBreakBase<SonotaJohoEn
 
     @Override
     protected void usualProcess(SonotaJohoEntity entity) {
-        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
-        personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                entity.getShinseishoKanriNo().getColumnValue()));
-        AccessLogger.log(AccessLogType.照会, personalData);
-        IinSonotashiryoSakuseiEntity item = new IinSonotashiryoSakuseiEntity();
-        set項目(item, entity);
+        item = new IinSonotashiryoSakuseiEntity();
+        set項目(entity);
         if (出力スタイル_A4.equals(paramter.getShuturyokuSutairu())) {
             // TODO QA回答まち、ファイル名が無し。
 //            item.setその他資料(共有ファイルを引き出す(entity.getImageSharedFileId(), 出力スタイル_A4));
@@ -104,13 +101,20 @@ public class SonotaJohoDataSakuseiProcess extends BatchKeyBreakBase<SonotaJohoEn
 
     @Override
     protected void createWriter() {
-        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517016.getReportId().value()).create();
-        reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);
-        batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517006.getReportId().value()).create();
-        reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);
+        if (出力スタイル_A4.equals(paramter.getShuturyokuSutairu())) {
+            batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517016.getReportId().value())
+                    .addBreak(new BreakerCatalog<SonotashiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A4))
+                    .create();
+            reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);
+        } else {
+            batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517006.getReportId().value())
+                    .addBreak(new BreakerCatalog<SonotashiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
+                    .create();
+            reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);
+        }
     }
 
-    private void set項目(IinSonotashiryoSakuseiEntity item, SonotaJohoEntity entity) {
+    private void set項目(SonotaJohoEntity entity) {
         item.set保険者番号(entity.getShoKisaiHokenshaNo());
         item.set被保険者番号(entity.getHihokenshaNo());
         item.set名前(entity.getHihokenshaName().getColumnValue());
@@ -147,7 +151,13 @@ public class SonotaJohoDataSakuseiProcess extends BatchKeyBreakBase<SonotaJohoEn
     @Override
     protected void keyBreakProcess(SonotaJohoEntity current) {
         if (hasBrek(getBefore(), current)) {
-            総ページ数 = 総ページ数 + 1;
+            if (出力スタイル_A4.equals(paramter.getShuturyokuSutairu())) {
+                IinSonotashiryoSakuseiA4Report report = new IinSonotashiryoSakuseiA4Report(item);
+                report.writeBy(reportSourceWriterA4);
+            } else {
+                IinSonotashiryoSakuseiA3Report report = new IinSonotashiryoSakuseiA3Report(item);
+                report.writeBy(reportSourceWriterA3);
+            }
         }
     }
 
@@ -163,24 +173,27 @@ public class SonotaJohoDataSakuseiProcess extends BatchKeyBreakBase<SonotaJohoEn
     private void outputJokenhyoFactory() {
         RString id;
         RString idName;
+        RString 総ページ数;
         if (出力スタイル_A4.equals(paramter.getShuturyokuSutairu())) {
             id = ReportIdDBE.DBE517016.getReportId().getColumnValue();
             idName = ReportIdDBE.DBE517016.getReportName();
+            総ページ数 = new RString(batchWriteA4.getPageCount());
         } else {
             id = ReportIdDBE.DBE517006.getReportId().getColumnValue();
             idName = ReportIdDBE.DBE517006.getReportName();
+            総ページ数 = new RString(batchWriteA3.getPageCount());
         }
         Association association = AssociationFinderFactory.createInstance().getAssociation();
-        EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
+        EucFileOutputJokenhyoItem jokenhyoItem = new EucFileOutputJokenhyoItem(
                 id,
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 idName,
-                new RString(総ページ数),
+                総ページ数,
                 RString.EMPTY,
                 出力条件());
-        OutputJokenhyoFactory.createInstance(item).print();
+        OutputJokenhyoFactory.createInstance(jokenhyoItem).print();
     }
 
     private List<RString> 出力条件() {
@@ -200,7 +213,7 @@ public class SonotaJohoDataSakuseiProcess extends BatchKeyBreakBase<SonotaJohoEn
 
     private RString get年(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
-            return パターン12(年月日).substring(2, INT_4);
+            return パターン12(年月日).substring(0, INT_4);
         }
         return RString.EMPTY;
     }
