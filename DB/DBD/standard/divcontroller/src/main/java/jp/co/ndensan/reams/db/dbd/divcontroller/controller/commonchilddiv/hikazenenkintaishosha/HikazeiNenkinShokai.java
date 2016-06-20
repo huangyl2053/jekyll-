@@ -3,39 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.divcontroller.controller.commonchilddiv.shotokujokyo;
+package jp.co.ndensan.reams.db.dbd.divcontroller.controller.commonchilddiv.hikazenenkintaishosha;
 
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.HikazeiNenkinShokai.HikazeiNenkinShokai.HikazeiNenkinShokaiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.ShotokuJokyo.ShotokuJokyo.ShotokuJokyoDiv;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
  *
- * 【共有子Div】 所得状況のDivControllerです。
+ * 【共有子Div】 非課税年金のDivControllerです。
  *
- * @reamsid_L DBD-3650-110 liangbc
+ * @reamsid_L DBD-3650-140 liangbc
  */
-public class ShotokuJokyo {
+public class HikazeiNenkinShokai {
 
     /**
      * 初期化
      *
      * @param div ShotokuJokyoDiv
-     * @return ResponseData<ShotokuJokyoDiv>
+     * @return ResponseData<HikazeiNenkinShokaiDiv>
      */
-    public ResponseData<ShotokuJokyoDiv> initialize(ShotokuJokyoDiv div) {
-        div.initialize(new ShikibetsuCode(div.getTxtShikibetsuCode()));
+    public ResponseData<HikazeiNenkinShokaiDiv> initialize(HikazeiNenkinShokaiDiv div) {
+        div.initialize();
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 再表示する
+     * 再表示
      *
      * @param div ShotokuJokyoDiv
-     * @return ResponseData<ShotokuJokyoDiv>
+     * @return ResponseData<HikazeiNenkinShokaiDiv>
      */
-    public ResponseData<ShotokuJokyoDiv> onClick_Saihyoji(ShotokuJokyoDiv div) {
-        div.世帯員所得情報の取得(new ShikibetsuCode(div.getTxtShikibetsuCode()), true);
+    public ResponseData<HikazeiNenkinShokaiDiv> onClick_btnSaiHyoji(HikazeiNenkinShokaiDiv div) {
+        div.再表示();
         return ResponseData.of(div).respond();
     }
 
@@ -45,7 +45,7 @@ public class ShotokuJokyo {
      * @param div ShotokuJokyoDiv
      * @return ResponseData<ShotokuJokyoDiv>
      */
-    public ResponseData<ShotokuJokyoDiv> onClick_btnRirekiClose(ShotokuJokyoDiv div) {
+    public ResponseData<ShotokuJokyoDiv> onClick_btnClose(ShotokuJokyoDiv div) {
         return ResponseData.of(div).dialogOKClose();
     }
 }
