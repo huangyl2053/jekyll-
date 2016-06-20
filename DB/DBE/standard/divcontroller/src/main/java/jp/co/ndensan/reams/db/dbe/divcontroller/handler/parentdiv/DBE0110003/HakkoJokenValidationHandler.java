@@ -28,9 +28,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class HakkoJokenValidationHandler {
 
     private static final RString SELECT_KEY0 = new RString("key0");
-    private static final RString SELECT_KEY1 = new RString("key1");
-    private static final RString SELECT_KEY2 = new RString("key2");
-    private static final RString SELECT_KEY3 = new RString("key3");
     private final HakkoJokenDiv div;
 
     /**
@@ -51,14 +48,10 @@ public class HakkoJokenValidationHandler {
     public ValidationMessageControlPairs 申請日範囲不正チェック1(ValidationMessageControlPairs validPairs) {
         RDate shinnseikafrom = div.getTxtYoteiMiteishaShinseiYMD().getFromValue();
         RDate shinnseikato = div.getTxtYoteiMiteishaShinseiYMD().getToValue();
-        if (shinnseikafrom == null) {
-            shinnseikafrom = RDate.MIN;
-        }
-        if (shinnseikato == null) {
-            shinnseikato = RDate.MAX;
-        }
-        if (shinnseikato.isBefore(shinnseikafrom)) {
-            validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日範囲不正チェック));
+        if (!div.getTxtYoteiMiteishaShinseiYMD().isDisabled()) {
+            if (shinnseikato.isBefore(shinnseikafrom)) {
+                validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日範囲不正チェック));
+            }
         }
         return validPairs;
 
@@ -73,14 +66,10 @@ public class HakkoJokenValidationHandler {
     public ValidationMessageControlPairs 申請日範囲不正チェック2(ValidationMessageControlPairs validPairs) {
         RDate shinnseikafrom = div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getFromValue();
         RDate shinnseikato = div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getToValue();
-        if (shinnseikafrom == null) {
-            shinnseikafrom = RDate.MIN;
-        }
-        if (shinnseikato == null) {
-            shinnseikato = RDate.MAX;
-        }
-        if (shinnseikato.isBefore(shinnseikafrom)) {
-            validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日範囲不正チェック));
+        if (!div.getTxtIraisakiHenkoshaIchiranShinseiYMD().isDisabled()) {
+            if (shinnseikato.isBefore(shinnseikafrom)) {
+                validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日範囲不正チェック));
+            }
         }
         return validPairs;
 
@@ -95,14 +84,10 @@ public class HakkoJokenValidationHandler {
     public ValidationMessageControlPairs 申請日範囲不正チェック3(ValidationMessageControlPairs validPairs) {
         RDate shinnseikafrom = div.getTxtCheckListShinseiYMD().getFromValue();
         RDate shinnseikato = div.getTxtCheckListShinseiYMD().getToValue();
-        if (shinnseikafrom == null) {
-            shinnseikafrom = RDate.MIN;
-        }
-        if (shinnseikato == null) {
-            shinnseikato = RDate.MAX;
-        }
-        if (shinnseikato.isBefore(shinnseikafrom)) {
-            validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日範囲不正チェック));
+        if (!div.getTxtCheckListShinseiYMD().isDisabled()) {
+            if (shinnseikato.isBefore(shinnseikafrom)) {
+                validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日範囲不正チェック));
+            }
         }
         return validPairs;
 
@@ -130,27 +115,29 @@ public class HakkoJokenValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 未入力チェック(ValidationMessageControlPairs validPairs) {
-        if (div.getChkNinteiChosaYoteiMiteishaIchiran().getSelectedKeys().contains(SELECT_KEY0)
-                && div.getRadJoken1().getSelectedKey().contains(SELECT_KEY1)) {
+        if (!div.getTxtYoteiMiteishaShinseiYMD().isDisabled()) {
             if ((null == div.getTxtYoteiMiteishaShinseiYMD().getFromValue()) || (null == div.getTxtYoteiMiteishaShinseiYMD().getToValue())) {
                 validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.未入力チェック));
             }
         }
-        if (div.getChkNinteiChosaIraisakiHenkoshaIchiranhyoJoken().getSelectedKeys().contains(SELECT_KEY0)) {
+        if (!div.getTxtIraisakiHenkoshaIchiranShinseiYMD().isDisabled()) {
             if ((null == div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getFromValue())
                     || (null == div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getToValue())) {
                 validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.未入力チェック));
             }
         }
-        if (div.getChkNinteiChosaKekkaShujiiIkenshoCheckListJoken().getSelectedKeys().contains(SELECT_KEY0)
-                && div.getRadJoken3().getSelectedKey().contains(SELECT_KEY1)) {
+        if (!div.getTxtCheckListShinseiYMD().isDisabled()) {
             if ((null == div.getTxtCheckListShinseiYMD().getFromValue()) || (null == div.getTxtCheckListShinseiYMD().getToValue())) {
                 validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.未入力チェック));
             }
-            if (div.getRadJoken3().getSelectedKey().contains(SELECT_KEY2) && (null == div.getTxtShinsaYMD().getValue())) {
+        }
+        if (!div.getTxtShinsaYMD().isDisabled()) {
+            if (null == div.getTxtShinsaYMD().getValue()) {
                 validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.未入力チェック));
             }
-            if (div.getRadJoken3().getSelectedKey().contains(SELECT_KEY3) && (null == div.getTxtShinsakai().getValue())) {
+        }
+        if (!div.getTxtShinsakai().isDisabled()) {
+            if (null == div.getTxtShinsakai().getValue()) {
                 validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.未入力チェック));
             }
         }
@@ -166,19 +153,15 @@ public class HakkoJokenValidationHandler {
     public ValidationMessageControlPairs 申請日入力チェック1(ValidationMessageControlPairs validPairs) {
         RDate shinnseikafrom = div.getTxtYoteiMiteishaShinseiYMD().getFromValue();
         RDate shinnseikato = div.getTxtYoteiMiteishaShinseiYMD().getToValue();
-        if (null == shinnseikafrom) {
-            shinnseikafrom = RDate.MIN;
-        }
-        if (null == shinnseikato) {
-            shinnseikato = RDate.MAX;
-        }
         RString kijyun = DbBusinessConfig.get(ConfigNameDBE.Reamsへの切り替え日, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                 new LasdecCode("000000"), ConfigNameDBE.Reamsへの切り替え日.get名称());
         RDate kijyundate = new RDate(kijyun.toString());
-        int yearsfrom = shinnseikafrom.getBetweenYears(kijyundate);
-        int yearsto = shinnseikato.getBetweenYears(kijyundate);
-        if ((yearsfrom > 2) || (yearsto > 2)) {
-            validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日入力チェック));
+        if (!div.getTxtYoteiMiteishaShinseiYMD().isDisabled()) {
+            int yearsfrom = shinnseikafrom.getBetweenYears(kijyundate);
+            int yearsto = shinnseikato.getBetweenYears(kijyundate);
+            if ((yearsfrom > 2) || (yearsto > 2)) {
+                validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日入力チェック));
+            }
         }
         return validPairs;
     }
@@ -192,16 +175,10 @@ public class HakkoJokenValidationHandler {
     public ValidationMessageControlPairs 申請日入力チェック2(ValidationMessageControlPairs validPairs) {
         RDate shinnseikafrom = div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getFromValue();
         RDate shinnseikato = div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getToValue();
-        if (null == shinnseikafrom) {
-            shinnseikafrom = RDate.MIN;
-        }
-        if (null == shinnseikato) {
-            shinnseikato = RDate.MAX;
-        }
         RString kijyun = DbBusinessConfig.get(ConfigNameDBE.Reamsへの切り替え日, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                 new LasdecCode("000000"), ConfigNameDBE.Reamsへの切り替え日.get名称());
         RDate kijyundate = new RDate(kijyun.toString());
-        if (div.getChkNinteiChosaIraisakiHenkoshaIchiranhyoJoken().getSelectedKeys().contains(SELECT_KEY0)) {
+        if (!div.getTxtIraisakiHenkoshaIchiranShinseiYMD().isDisabled()) {
             int yearsfrom = shinnseikafrom.getBetweenYears(kijyundate);
             int yearsto = shinnseikato.getBetweenYears(kijyundate);
             if ((yearsfrom > 2) || (yearsto > 2)) {
@@ -220,17 +197,10 @@ public class HakkoJokenValidationHandler {
     public ValidationMessageControlPairs 申請日入力チェック3(ValidationMessageControlPairs validPairs) {
         RDate shinnseikafrom = div.getTxtCheckListShinseiYMD().getFromValue();
         RDate shinnseikato = div.getTxtCheckListShinseiYMD().getToValue();
-        if (null == shinnseikafrom) {
-            shinnseikafrom = RDate.MIN;
-        }
-        if (null == shinnseikato) {
-            shinnseikato = RDate.MAX;
-        }
         RString kijyun = DbBusinessConfig.get(ConfigNameDBE.Reamsへの切り替え日, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                 new LasdecCode("000000"), ConfigNameDBE.Reamsへの切り替え日.get名称());
         RDate kijyundate = new RDate(kijyun.toString());
-        if (div.getChkNinteiChosaKekkaShujiiIkenshoCheckListJoken().getSelectedKeys().contains(SELECT_KEY0)
-                && div.getRadJoken3().getSelectedKey().contains(SELECT_KEY1)) {
+        if (!div.getTxtCheckListShinseiYMD().isDisabled()) {
             int yearsfrom = shinnseikafrom.getBetweenYears(kijyundate);
             int yearsto = shinnseikato.getBetweenYears(kijyundate);
             if ((yearsfrom > 2) || (yearsto > 2)) {
