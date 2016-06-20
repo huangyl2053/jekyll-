@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.Toku
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.ddgToteishinryoTokubetushinryo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.dgdTokuteiShinryohi_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -44,8 +44,6 @@ public class TokuteiShinryohiHandler {
     private static final RString 設定可_任意 = new RString("2");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
     private static final RString 改行 = new RString("\n");
-    private static final RString STR_0025 = new RString("0025");
-    private static final RString STR_0026 = new RString("0026");
     private static final int NUM_0 = 0;
 
     /**
@@ -191,7 +189,7 @@ public class TokuteiShinryohiHandler {
             FlexibleDate date = new FlexibleDate(RDate.getNowDate().toDateString());
             div.getPanelThree().getPanelFive().getTxtName().setValue(serviceCode.toEntity().getServiceMeisho());
             if (serviceCode.toEntity().getSanteiTani() != null) {
-                UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(STR_0025),
+                UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.算定単位.getコード(),
                         new Code(serviceCode.toEntity().getSanteiTani()), date);
                 RStringBuilder builder1 = new RStringBuilder();
                 builder1.append(code1.getコード名称());
@@ -202,7 +200,8 @@ public class TokuteiShinryohiHandler {
                 div.getPanelThree().getPanelFive().getLblComment1().setText(RString.EMPTY);
             }
             if (serviceCode.toEntity().getSanteiSeiyakuKikan() != null) {
-                UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(STR_0026),
+                UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
+                        DBCCodeShubetsu.算定期間回数制限_期間_時期.getコード(),
                         new Code(serviceCode.toEntity().getSanteiSeiyakuKikan()), date);
                 RStringBuilder builder2 = new RStringBuilder();
                 builder2.append(code2.getコード名称());

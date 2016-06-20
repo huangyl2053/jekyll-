@@ -709,6 +709,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         div.getPanelTokutei().getPanelMeisai().getTxtHokenbun().setReadOnly(flag);
         div.getPanelTokutei().getPanelMeisai().getTxtRiyoshafutangaku().setReadOnly(flag);
         div.getPanelTokutei().getPanelMeisai().getBtnKeisan().setDisabled(flag);
+        div.getPanelTokutei().getPanelMeisai().getBtnClear().setDisabled(flag);
     }
 
     /**
