@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakus
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -88,13 +87,17 @@ public class KyotakuServiceKeikakuIchiranHandler {
             row.setJigyoshaNo(entity.get事業者番号() != null ? entity.get事業者番号().value() : RString.EMPTY);
             row.setJigyoshaName(entity.get事業者名称() != null ? entity.get事業者名称().value() : RString.EMPTY);
 
-            TextBoxFlexibleDate 開始年月日 = new TextBoxFlexibleDate();
-            開始年月日.setValue(entity.get適用開始年月日());
-            row.setTaishoYM(開始年月日);
+            if (entity.get適用開始年月日() != null) {
+                TextBoxFlexibleDate 開始年月日 = new TextBoxFlexibleDate();
+                開始年月日.setValue(entity.get適用開始年月日());
+                row.setStartDate(開始年月日);
+            }
 
-            TextBoxFlexibleDate 終了年月日 = new TextBoxFlexibleDate();
-            終了年月日.setValue(entity.get適用終了年月日());
-            row.setTaishoYM(終了年月日);
+            if (entity.get適用終了年月日() != null) {
+                TextBoxFlexibleDate 終了年月日 = new TextBoxFlexibleDate();
+                終了年月日.setValue(entity.get適用終了年月日());
+                row.setEndDate(終了年月日);
+            }
 
             row.setRirekiNo(new RString(String.valueOf(entity.get履歴番号())));
             Boolean 有効Flg = true;
@@ -220,10 +223,18 @@ public class KyotakuServiceKeikakuIchiranHandler {
             }
 
             div.getDvKeikakuIraiUketsuke().getTxtIraiShinseiDate().setValue(計画依頼受付情報result.get(0).get届出年月日());
-            div.getDvKeikakuIraiUketsuke().getTxtKeikakuTekiyoStartDate().
-                    setValue(new RDate(計画依頼受付情報result.get(0).get適用開始年月日().toString()));
-            div.getDvKeikakuIraiUketsuke().getTxtIraiKeikakuTekiyoEndDate().
-                    setValue(new RDate(計画依頼受付情報result.get(0).get適用終了年月日().toString()));
+            if (計画依頼受付情報result.get(0).get適用開始年月日() != null && !計画依頼受付情報result.get(0).get適用開始年月日().isEmpty()) {
+                div.getDvKeikakuIraiUketsuke().getTxtKeikakuTekiyoStartDate().
+                        setValue(new RDate(計画依頼受付情報result.get(0).get適用開始年月日().toString()));
+            } else {
+                div.getDvKeikakuIraiUketsuke().getTxtKeikakuTekiyoStartDate().clearValue();
+            }
+            if (計画依頼受付情報result.get(0).get適用終了年月日() != null && !計画依頼受付情報result.get(0).get適用終了年月日().isEmpty()) {
+                div.getDvKeikakuIraiUketsuke().getTxtIraiKeikakuTekiyoEndDate().
+                        setValue(new RDate(計画依頼受付情報result.get(0).get適用終了年月日().toString()));
+            } else {
+                div.getDvKeikakuIraiUketsuke().getTxtIraiKeikakuTekiyoEndDate().clearValue();
+            }
             div.getDvKeikakuIraiUketsuke().getTxtKeikakuSakuseiKubun().
                     setValue(KyotakuservicekeikakuSakuseikubunCode.toValue(計画依頼受付情報result.get(0).get作成区分コード()).get名称());
             div.getDvKeikakuIraiUketsuke().getTxtJigyoshaNo().setValue(計画依頼受付情報result.get(0).get計画事業者番号().value());
@@ -234,7 +245,11 @@ public class KyotakuServiceKeikakuIchiranHandler {
             div.getDvKeikakuIraiUketsuke().getTxtTelNo().setDomain(計画依頼受付情報result.get(0).get電話番号());
             div.getDvKeikakuIraiUketsuke().getTxtItakusakiJigyoshaNo().setValue(計画依頼受付情報result.get(0).get委託先事業者番号().value());
             div.getDvKeikakuIraiUketsuke().getTxtItakusakiJigyoshaName().setValue(計画依頼受付情報result.get(0).get委託先事業者名().value());
-            div.getDvKeikakuIraiUketsuke().getTxtHenkoDate().setValue(new RDate(計画依頼受付情報result.get(0).get事業者変更年月日().toString()));
+            if (計画依頼受付情報result.get(0).get事業者変更年月日() != null && !計画依頼受付情報result.get(0).get事業者変更年月日().isEmpty()) {
+                div.getDvKeikakuIraiUketsuke().getTxtHenkoDate().setValue(new RDate(計画依頼受付情報result.get(0).get事業者変更年月日().toString()));
+            } else {
+                div.getDvKeikakuIraiUketsuke().getTxtHenkoDate().clearValue();
+            }
             div.getDvKeikakuIraiUketsuke().getTxtHenkoRiyu().setValue(計画依頼受付情報result.get(0).get事業者変更事由());
         }
 
@@ -341,7 +356,7 @@ public class KyotakuServiceKeikakuIchiranHandler {
         List<DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity> dbt3008Result
                 = KyotakuServiceKeikakuIchiranFinder.createInstance().居宅サービス明細情報の取得(
                         被保険者番号,
-                        new FlexibleYearMonth(div.getDgKyotakuServiceKeikakuIchiran().getClickedItem().getTaishoYM().getText()),
+                        div.getDgKyotakuServiceKeikakuIchiran().getClickedItem().getTaishoYM().getValue().getYearMonth(),
                         Integer.valueOf(div.getDgKyotakuServiceKeikakuIchiran().getClickedItem().getRirekiNo().toString()));
         if (dbt3008Result != null && !dbt3008Result.isEmpty()) {
             List<dgKyotakuService_Row> dgServiceList = new ArrayList<>();
@@ -397,32 +412,32 @@ public class KyotakuServiceKeikakuIchiranHandler {
 
     private void 居宅サービス情報データグリッドを選択() {
 
-        dgKyotakuService_Row serviceRow = new dgKyotakuService_Row();
+        dgKyotakuService_Row serviceRow = div.getDgKyotakuService().getActiveRow();
         div.getDvKyotakuMeisai().getTxtKyotakuJigyoshaNo().setValue(serviceRow.getJigyoshaNo());
         //TODO
         div.getDvKyotakuMeisai().getTxtKyotakuJigyoshaName().setValue(serviceRow.getJigyoshaNo());
         div.getDvKyotakuMeisai().getTxtServiceCode1().setValue(new RString("TODO"));
         div.getDvKyotakuMeisai().getTxtServiceCode2().setValue(new RString("TODO"));
         div.getDvKyotakuMeisai().getTxtServiceName().setValue(new RString("TODO"));
-        div.getDvKyotakuMeisai().getTxtTani().setValue(new Decimal(Integer.valueOf(serviceRow.getTani().toString())));
-        div.getDvKyotakuMeisai().getTxtWaribikiTekiyogoRitsu().setValue(new Decimal(Integer.valueOf(serviceRow.getWaribikigoRitsu().toString())));
-        div.getDvKyotakuMeisai().getTxtWaribikiTekiyogoTani().setValue(new Decimal(Integer.valueOf(serviceRow.getWaribikigoTani().toString())));
-        div.getDvKyotakuMeisai().getTxtKaisu().setValue(new Decimal(Integer.valueOf(serviceRow.getKaisu().toString())));
-        div.getDvKyotakuMeisai().getTxtServiceTani().setValue(new Decimal(Integer.valueOf(serviceRow.getServiceTani().toString())));
+        div.getDvKyotakuMeisai().getTxtTani().setValue(new Decimal(serviceRow.getTani().toString()));
+        div.getDvKyotakuMeisai().getTxtWaribikiTekiyogoRitsu().setValue(new Decimal(serviceRow.getWaribikigoRitsu().toString()));
+        div.getDvKyotakuMeisai().getTxtWaribikiTekiyogoTani().setValue(new Decimal(serviceRow.getWaribikigoTani().toString()));
+        div.getDvKyotakuMeisai().getTxtKaisu().setValue(new Decimal(serviceRow.getKaisu().toString()));
+        div.getDvKyotakuMeisai().getTxtServiceTani().setValue(new Decimal(serviceRow.getServiceTani().toString()));
         div.getDvKyotakuMeisai().getTxtShuruiGendoChokaTani().
-                setValue(new Decimal(Integer.valueOf(serviceRow.getShuruiGendoKijunChoka().toString())));
-        div.getDvKyotakuMeisai().getTxtShuruiGendonaiTani().setValue(new Decimal(Integer.valueOf(serviceRow.getShuruiGendoKijunNai().toString())));
-        div.getDvKyotakuMeisai().getTxtTaniTanka().setValue(new Decimal(Integer.valueOf(serviceRow.getTaniTanka().toString())));
+                setValue(new Decimal(serviceRow.getShuruiGendoKijunChoka().toString()));
+        div.getDvKyotakuMeisai().getTxtShuruiGendonaiTani().setValue(new Decimal(serviceRow.getShuruiGendoKijunNai().toString()));
+        div.getDvKyotakuMeisai().getTxtTaniTanka().setValue(new Decimal(serviceRow.getTaniTanka().toString()));
         div.getDvKyotakuMeisai().getTxtKubunGendoChokaTani().
-                setValue(new Decimal(Integer.valueOf(serviceRow.getKubunGendoKijunChoka().toString())));
-        div.getDvKyotakuMeisai().getTxtKubunGendonaiTani().setValue(new Decimal(Integer.valueOf(serviceRow.getKubunGendoKijunNai().toString())));
-        div.getDvKyotakuMeisai().getTxtKyufuRitsu().setValue(new Decimal(Integer.valueOf(serviceRow.getKyufuRitsu().toString())));
-        div.getDvKyotakuMeisai().getTxtHiyoSogaku().setValue(new Decimal(Integer.valueOf(serviceRow.getHiyoSogaku().toString())));
-        div.getDvKyotakuMeisai().getTxtHokenKyufuGaku().setValue(new Decimal(Integer.valueOf(serviceRow.getHokenKyufuGaku().toString())));
+                setValue(new Decimal(serviceRow.getKubunGendoKijunChoka().toString()));
+        div.getDvKyotakuMeisai().getTxtKubunGendonaiTani().setValue(new Decimal(serviceRow.getKubunGendoKijunNai().toString()));
+        div.getDvKyotakuMeisai().getTxtKyufuRitsu().setValue(new Decimal(serviceRow.getKyufuRitsu().toString()));
+        div.getDvKyotakuMeisai().getTxtHiyoSogaku().setValue(new Decimal(serviceRow.getHiyoSogaku().toString()));
+        div.getDvKyotakuMeisai().getTxtHokenKyufuGaku().setValue(new Decimal(serviceRow.getHokenKyufuGaku().toString()));
         div.getDvKyotakuMeisai().getTxtHokenTaishoRiyoshaFutanGaku().
-                setValue(new Decimal(Integer.valueOf(serviceRow.getRiyoushaFutanTaishobun().toString())));
+                setValue(new Decimal(serviceRow.getRiyoushaFutanTaishobun().toString()));
         div.getDvKyotakuMeisai().getTxtZengakuRiyoshaFutanngaku().
-                setValue(new Decimal(Integer.valueOf(serviceRow.getRiyoushaFutanZengaku().toString())));
+                setValue(new Decimal(serviceRow.getRiyoushaFutanZengaku().toString()));
     }
 
     private void 種類限度額確認ボタン押下時() {
