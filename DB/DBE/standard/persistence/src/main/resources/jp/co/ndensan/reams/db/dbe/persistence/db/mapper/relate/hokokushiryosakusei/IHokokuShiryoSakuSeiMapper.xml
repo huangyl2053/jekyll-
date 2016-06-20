@@ -1039,7 +1039,7 @@
         GROUP BY
         <if test="!isEmptyGogitaiNo">
             A."gogitaiNo",
-            ,E."gogitaiMei",
+            E."gogitaiMei",
         </if>
         F."shichosonCode"
         ,F."shichosonMeisho"
