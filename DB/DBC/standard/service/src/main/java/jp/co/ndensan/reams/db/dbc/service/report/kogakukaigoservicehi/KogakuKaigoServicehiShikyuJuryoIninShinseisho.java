@@ -204,10 +204,16 @@ public class KogakuKaigoServicehiShikyuJuryoIninShinseisho {
     }
 
     private RString getサービス提供年月(HihokenshaNo 被保険者番号) {
+        RString サービス提供年月 = RString.EMPTY;
         List<DbT3055KogakuKyufuTaishoshaGokeiEntity> entityList = dac.get高額介護サービス費給付対象者合計の最新データ(被保険者番号);
         if (!entityList.isEmpty()) {
-            return entityList.get(0).getServiceTeikyoYM().toDateString();
+            RStringBuilder sb = new RStringBuilder();
+            sb.append(entityList.get(0).getServiceTeikyoYM().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).getYear());
+            sb.append(entityList.get(0).getServiceTeikyoYM().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).getMonth());
+            サービス提供年月 = sb.toRString();
         }
-        return RString.EMPTY;
+        return サービス提供年月;
     }
 }
