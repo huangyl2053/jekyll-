@@ -32,9 +32,9 @@ public class ShinsakaiTaishosha {
      */
     public ResponseData<ShinsakaiTaishoshaDiv> onLoad(ShinsakaiTaishoshaDiv div) {
         RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class);
-        List<ShinsakaiTaishoshaBusiness> 予定情報 = ShinsakaiTaishoshaFinder.createInstance().get情報(審査会開催番号).records();
-        ShinsakaiTaishoshaBusiness 審査会対象者一覧 = ShinsakaiTaishoshaFinder.createInstance().get予定情報と結果情報(審査会開催番号);
-        getHandler(div).onLoad(審査会対象者一覧, 予定情報);
+        List<ShinsakaiTaishoshaBusiness> 審査会対象者一覧 = ShinsakaiTaishoshaFinder.createInstance().get情報(審査会開催番号).records();
+        ShinsakaiTaishoshaBusiness 予定情報 = ShinsakaiTaishoshaFinder.createInstance().get予定情報と結果情報(審査会開催番号);
+        getHandler(div).onLoad(予定情報, 審査会対象者一覧);
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKakutei(審査会対象者一覧);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
