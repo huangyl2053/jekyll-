@@ -253,19 +253,19 @@ public class KojinJokyoShokaiHandler {
             if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード() != null
                     && !kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().isEmpty()) {
                 一次判定結果 = IchijiHanteiKekkaCode06.
-                        toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get略称();
+                        toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get名称();
             }
         } else if (識別コード_02A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())) {
             if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード() != null
                     && !kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().isEmpty()) {
                 一次判定結果 = IchijiHanteiKekkaCode02.
-                        toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get略称();
+                        toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get名称();
             }
         } else if (識別コード_99A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())) {
             if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード() != null
                     && !kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().isEmpty()) {
                 一次判定結果 = IchijiHanteiKekkaCode99.
-                        toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get略称();
+                        toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get名称();
             }
         }
         if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード認知症加算() != null

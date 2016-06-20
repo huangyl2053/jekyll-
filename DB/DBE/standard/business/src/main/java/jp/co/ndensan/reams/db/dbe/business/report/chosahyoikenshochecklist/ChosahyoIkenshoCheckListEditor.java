@@ -218,7 +218,7 @@ public class ChosahyoIkenshoCheckListEditor implements IChosahyoIkenshoCheckList
         if (NinteichosaKomokuMapping09A.移動.getコード().equals(item.getDbT5211_remban())) {
             source.konkaiChosahyo22 = ChosaAnser10.toValue(item.getDbT5211_researchItem()).get名称();
         }
-        if (NinteichosaKomokuMapping09A.嚥下.getコード().equals(item.getDbT5211_remban())) {
+        if (NinteichosaKomokuMapping09A.えん下.getコード().equals(item.getDbT5211_remban())) {
             source.konkaiChosahyo23 = ChosaAnser11.toValue(item.getDbT5211_researchItem()).get名称();
         }
         if (NinteichosaKomokuMapping09A.食事摂取.getコード().equals(item.getDbT5211_remban())) {
@@ -574,7 +574,7 @@ public class ChosahyoIkenshoCheckListEditor implements IChosahyoIkenshoCheckList
         if (NinteichosaKomokuMapping09B.移動.getコード().equals(item.getDbT5211_remban())) {
             source.konkaiChosahyo22 = ChosaAnser10.toValue(item.getDbT5211_researchItem()).get名称();
         }
-        if (NinteichosaKomokuMapping09B.嚥下.getコード().equals(item.getDbT5211_remban())) {
+        if (NinteichosaKomokuMapping09B.えん下.getコード().equals(item.getDbT5211_remban())) {
             source.konkaiChosahyo23 = ChosaAnser11.toValue(item.getDbT5211_researchItem()).get名称();
         }
         if (NinteichosaKomokuMapping09B.食事摂取.getコード().equals(item.getDbT5211_remban())) {
