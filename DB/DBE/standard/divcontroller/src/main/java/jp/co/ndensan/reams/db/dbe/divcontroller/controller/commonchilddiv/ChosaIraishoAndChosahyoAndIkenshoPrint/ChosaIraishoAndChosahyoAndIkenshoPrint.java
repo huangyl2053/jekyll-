@@ -256,7 +256,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
                         = (共通日 == null ? FlexibleDate.EMPTY : new FlexibleDate(共通日.plusDay(認定調査作成期限日数).toDateString()));
             }
         } else if (CONFIGVALUE2.equals(認定調査期限設定方法)) {
-            認定調査期限年月日 = new FlexibleDate(row.getNinteiShinseibi()).plusDay(認定調査作成期限日数);
+            認定調査期限年月日 = new FlexibleDate(new RDate(row.getNinteiShinseibi().toString()).plusDay(認定調査作成期限日数).toDateString());
         }
         ninteichosaIraiJohoBuilder = ninteichosaIraiJohoBuilder.set認定調査期限年月日(認定調査期限年月日);
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
