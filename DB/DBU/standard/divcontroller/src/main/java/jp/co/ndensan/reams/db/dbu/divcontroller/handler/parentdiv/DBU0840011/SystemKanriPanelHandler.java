@@ -193,6 +193,7 @@ public class SystemKanriPanelHandler {
     /**
      * 保存ボタン。
      *
+     * @param メニューID メニューID
      */
     public void set_保存ボタン(RString メニューID) {
         setDB_更新(ConfigNameDBU.保険者情報_保険者番号, div.getSystemKanri().getTxtHokenjaCode().getValue());
@@ -238,8 +239,8 @@ public class SystemKanriPanelHandler {
     /**
      * DBを更新です。
      *
-     * @param key Enum
-     * @param values RString
+     * @param key キー名称
+     * @param values キー値
      */
     private void setDB_更新(Enum key, RString values) {
         BusinessConfig.update(key, values, get変更理由(), RString.EMPTY, RDate.getNowDate());
