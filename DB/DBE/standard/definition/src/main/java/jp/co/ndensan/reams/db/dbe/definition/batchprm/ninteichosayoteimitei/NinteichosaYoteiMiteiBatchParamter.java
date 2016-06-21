@@ -84,7 +84,7 @@ public class NinteichosaYoteiMiteiBatchParamter extends BatchParameterBase {
      * @return ItakusakiChosainIchiranMybitisParamter
      */
     public NinteichosaIraiHenkoProcessParamter toNinteichosaIraiHenkoParamter() {
-        return new NinteichosaIraiHenkoProcessParamter(yoteimiteiymdFrom,
+        return new NinteichosaIraiHenkoProcessParamter(iraisakihenkymdFrom,
                 iraisakihenkymdTo);
     }
 
