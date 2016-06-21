@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.Hihok
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.HihokenshaDaichoSakuseiEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.HihokenshaEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.RoreiFukushiNenkinJukyushaDivisionEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokenshadaichosakusei.SeikatsuHogoJukyushaDivisionEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SetaiDivisionEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SetaiLeftEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SetaiRightEntity;
@@ -46,6 +45,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEnti
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokenshadaichosakusei.SeikatsuHogoJukyushaDivisionEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1008IryohokenKanyuJokyoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7006RoreiFukushiNenkinJukyushaDac;
@@ -124,6 +124,7 @@ public class HihokenshaDaichoSakuseiManager {
     private static final RString MINUTE = new RString("分");
     private static final RString SECOND = new RString("秒");
     private static final RString REPLACED_MESSAGE = new RString("parameter");
+    private static boolean flag = false;
 
     private final MapperProvider mapperProvider;
     private final DbT7006RoreiFukushiNenkinJukyushaDac 老齢福祉年金受給者Dac;
@@ -184,6 +185,7 @@ public class HihokenshaDaichoSakuseiManager {
     public SearchResult<HihokenshaDaichoSakusei> getHihokenshaDaichoSakusei(
             HihokenshaDaichoSakuseiParameter parameter) {
         requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage(REPLACED_MESSAGE.toString()));
+        flag = true;
         HihokenshaEntity hihokenshaEntity = get被保険者情報(parameter);
         List<HihokenshaDaichoSakusei> businessList = getHihokenshaDaichoHenshu(hihokenshaEntity).records();
         return SearchResult.of(businessList, 0, false);
@@ -390,7 +392,12 @@ public class HihokenshaDaichoSakuseiManager {
                 hihokenshaEntity.getDbT7037ShoKofuKaishuEntityList());
         List<SeikatsuHogoJukyushaDivisionEntity> 分割した生活保護受給者List = get分割した生活保護受給者リスト(
                 hihokenshaEntity.getShisetsuNyutaishoEntityList());
-        List<SetaiDivisionEntity> 分割した世帯一覧情報List = get分割した世帯情報リスト(hihokenshaEntity.getSetaiinShotokuList());
+        List<SetaiDivisionEntity> 分割した世帯一覧情報List;
+//        if (flag) {
+        分割した世帯一覧情報List = get分割した世帯情報リスト(hihokenshaEntity.getSetaiinShotokuList());
+//        } else {
+//            分割した世帯一覧情報List = get分割した世帯一覧リスト(hihokenshaEntity.getSetaiinJohoEntityList());
+//        }
         int maxCount = getMaxList件数(分割した被保険者台帳管理List, 分割した老齢福祉年金受給者List,
                 分割した証交付回収List, 分割した生活保護受給者List, 分割した世帯一覧情報List);
         for (int i = 0; i < maxCount; i++) {
@@ -404,7 +411,12 @@ public class HihokenshaDaichoSakuseiManager {
             hihokenshaDaichoSakuseiEntity.setHihokenshaNo(hihokenshaEntity.getHihokenshaNo());
             hihokenshaDaichoSakuseiEntity.setKanaMeisho(hihokenshaEntity.getKanaMeisho());
             hihokenshaDaichoSakuseiEntity.setMeisho(hihokenshaEntity.getMeisho());
-            hihokenshaDaichoSakuseiEntity.setSeinengappiYMD(flexRString(hihokenshaEntity.getSeinengappiYMD()));
+            if (flag) {
+                hihokenshaDaichoSakuseiEntity.setSeinengappiYMD(flexRString(hihokenshaEntity.getSeinengappiYMD()));
+            } else {
+                hihokenshaDaichoSakuseiEntity.setSeinengappiYMD(hihokenshaEntity.getSeinengappiYMD() == null ? RString.EMPTY
+                        : new RString(hihokenshaEntity.getSeinengappiYMD().toString()));
+            }
             hihokenshaDaichoSakuseiEntity.setSeibetsuCode(hihokenshaEntity.getSeibetsuCode());
             hihokenshaDaichoSakuseiEntity.setSetaiCode(hihokenshaEntity.getSetaiCode());
             hihokenshaDaichoSakuseiEntity.setShikibetsuCode(hihokenshaEntity.getShikibetsuCode());
@@ -1189,6 +1201,64 @@ public class HihokenshaDaichoSakuseiManager {
         return 分割した世帯情報List;
     }
 
+//    private List get分割した世帯一覧リスト(List<SetaiinJohoEntity> setaiinJohoEntityList) {
+//        List<SetaiDivisionEntity> 分割した世帯情報List = new ArrayList<>();
+//        SetaiDivisionEntity setaiDivisionEntity = new SetaiDivisionEntity();
+//        int nocount = 0;
+//        List<RString> 世帯左No = new ArrayList<>();
+//        List<ShikibetsuCode> 世帯左識別コード = new ArrayList<>();
+//        List<RString> 氏名 = new ArrayList<>();
+//        List<RString> 世帯性別 = new ArrayList<>();
+//        List<RString> 世帯生年月日 = new ArrayList<>();
+//        List<RString> 世帯続柄 = new ArrayList<>();
+//        List<HihokenshaNo> 世帯被保険者番号 = new ArrayList<>();
+//        if (setaiinJohoEntityList == null || setaiinJohoEntityList.isEmpty()) {
+//            setaiDivisionEntity.set世帯左No(世帯左No);
+//            setaiDivisionEntity.set世帯被保険者番号(世帯被保険者番号);
+//            分割した世帯情報List.add(setaiDivisionEntity);
+//        } else {
+//            for (SetaiinJohoEntity entity : setaiinJohoEntityList) {
+//                世帯左No.add(new RString(String.valueOf(nocount + 1)));
+//                世帯左識別コード.add(entity.getUaFt200Entity().getShikibetsuCode());
+//                氏名.add(entity.getUaFt200Entity().getKanjiShimei() == null ? RString.EMPTY : entity.getUaFt200Entity().getKanjiShimei().value());
+//                世帯性別.add(entity.getUaFt200Entity().getSeibetsuCode());
+//                世帯生年月日.add(flexRString(entity.getUaFt200Entity().getSeinengappiYMD()));
+//                世帯続柄.add(entity.getUaFt200Entity().getTsuzukigara());
+//                //世帯被保険者番号.add(entity.get被保険者番号());
+//                if ((nocount + 1) % NOCOUNT_5 == 0) {
+//                    setaiDivisionEntity.set世帯左No(世帯左No);
+//                    setaiDivisionEntity.set世帯左識別コード(世帯左識別コード);
+//                    setaiDivisionEntity.set氏名(氏名);
+//                    setaiDivisionEntity.set世帯性別(世帯性別);
+//                    setaiDivisionEntity.set世帯生年月日(世帯生年月日);
+//                    setaiDivisionEntity.set世帯続柄(世帯続柄);
+//                    setaiDivisionEntity.set世帯被保険者番号(世帯被保険者番号);
+//                    分割した世帯情報List.add(setaiDivisionEntity);
+//                    世帯左No = new ArrayList<>();
+//                    世帯左識別コード = new ArrayList<>();
+//                    氏名 = new ArrayList<>();
+//                    世帯性別 = new ArrayList<>();
+//                    世帯生年月日 = new ArrayList<>();
+//                    世帯続柄 = new ArrayList<>();
+//                    世帯被保険者番号 = new ArrayList<>();
+//                    setaiDivisionEntity = new SetaiDivisionEntity();
+//                } else if (setaiinJohoEntityList.size() - setaiinJohoEntityList.size() % NOCOUNT_10 < (nocount + 1)) {
+//                    setaiDivisionEntity.set世帯左No(世帯左No);
+//                    setaiDivisionEntity.set世帯左識別コード(世帯左識別コード);
+//                    setaiDivisionEntity.set氏名(氏名);
+//                    setaiDivisionEntity.set世帯性別(世帯性別);
+//                    setaiDivisionEntity.set世帯生年月日(世帯生年月日);
+//                    setaiDivisionEntity.set世帯続柄(世帯続柄);
+//                    setaiDivisionEntity.set世帯被保険者番号(世帯被保険者番号);
+//                }
+//                nocount++;
+//            }
+//        }
+//        if (nocount % NOCOUNT_5 != 0) {
+//            分割した世帯情報List.add(setaiDivisionEntity);
+//        }
+//        return 分割した世帯情報List;
+//    }
     private int getMaxList件数(List<HihokenshaDaichoDivisionEntity> 分割した被保険者台帳管理List,
             List<RoreiFukushiNenkinJukyushaDivisionEntity> 分割した老齢福祉年金受給者List,
             List<ShoKofuKaishuDivisionEntity> 分割した証交付回収List,
