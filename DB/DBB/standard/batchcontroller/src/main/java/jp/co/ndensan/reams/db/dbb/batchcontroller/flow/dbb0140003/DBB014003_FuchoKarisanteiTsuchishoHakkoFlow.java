@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.DBB0140003;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb0140003;
 
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisanteitsuchishohakko.FuchoKarisanteiTsuchishoHakkoBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

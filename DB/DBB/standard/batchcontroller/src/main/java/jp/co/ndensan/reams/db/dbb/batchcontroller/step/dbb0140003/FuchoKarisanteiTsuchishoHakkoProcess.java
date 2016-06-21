@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB0140003;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb0140003;
 
 /**
  * 賦課情報の取得 一時テーブルへ登録です。
