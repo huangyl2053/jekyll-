@@ -149,7 +149,7 @@ public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
                 SubGyomuCode.DBD介護受給,
-                new ReportId("DBC800013_FukushiYoguKonyuhiShinseishoJuryoIninHarai"),
+                new ReportId("DBD800006_ShafukuRiyoshaFutangakuKeigentaishoShinseisho"),
                 KamokuCode.EMPTY,
                 1,
                 1,
