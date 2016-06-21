@@ -66,10 +66,9 @@ public class JimukyokuyoYobihanteiKinyuhyoReportSource implements IReportSource 
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
-
-    @ReportPerson(id = "X")
+    @ReportPerson(id = "A")
     public ShikibetsuCode shikibetuCode;
-    @ReportExpandedInfo(id = "X")
+    @ReportExpandedInfo(id = "A")
     public ExpandedInformation hishokenshaNo;
 
     /**
@@ -77,6 +76,6 @@ public class JimukyokuyoYobihanteiKinyuhyoReportSource implements IReportSource 
      */
     public enum ReportSourceFields {
 
-        shichosonNo,
+        shinsakaiKaisaiNo,
     }
 }

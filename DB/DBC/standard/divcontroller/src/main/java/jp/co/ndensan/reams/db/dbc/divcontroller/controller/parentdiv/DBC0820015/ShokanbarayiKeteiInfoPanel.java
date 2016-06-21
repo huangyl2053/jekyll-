@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -91,6 +92,8 @@ public class ShokanbarayiKeteiInfoPanel {
         }
         ViewStateHolder.put(ViewStateKeys.決定情報登録_償還払決定一覧, (Serializable) map_Row);
         ViewStateHolder.put(ViewStateKeys.決定情報登録_決定情報, 決定情報);
+        ViewStateHolder.put(ViewStateKeys.前回支払金額, div.getCcdShokanbaraiketteiJoho()
+                .getShokanbaraiketteiJohoDiv().getTxtShiharaikingakugoke().getValue());
         return ResponseData.of(div).respond();
     }
 
@@ -187,7 +190,8 @@ public class ShokanbarayiKeteiInfoPanel {
         try {
             if (flag) {
                 if (!ResponseHolder.isReRequest()) {
-                    getHandler(div).登録Save();
+                    Decimal 支払金額合計初期 = ViewStateHolder.get(ViewStateKeys.前回支払金額, Decimal.class);
+                    getHandler(div).登録Save(支払金額合計初期);
                     return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
                             .replace(登録.toString())).respond();
                 }

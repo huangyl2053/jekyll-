@@ -45,7 +45,7 @@ class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoEditorImpl implements 
         source.hihokenshaYubinNo = item.get郵便番号();
         source.hihokenJusho = item.get住所();
         source.hihokenshaTelNo = item.get電話番号();
-        source.tsuchiBun = item.get通知文();
+        source.hihokenJusho1 = item.get通知文();
         source.remban = new RString("1");
         return source;
     }

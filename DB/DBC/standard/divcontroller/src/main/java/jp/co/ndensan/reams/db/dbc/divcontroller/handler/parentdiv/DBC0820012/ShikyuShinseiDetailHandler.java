@@ -57,6 +57,7 @@ public final class ShikyuShinseiDetailHandler {
     private static final RString 受託あり = new RString("2");
     private static final RString 受託なし = new RString("1");
     private static final RString 整理番号_ADD = new RString("0000");
+    private static final RString 証記載保険者番号 = new RString("000011");
 
     /**
      * コンストラクタです。
@@ -118,6 +119,8 @@ public final class ShikyuShinseiDetailHandler {
             }
             div.getPanelHead().getTxtSeiribango().setValue(整理番号);
             div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
+            //TODO ビジネス設計_DBCKD00007_(共有子Div)受給者異動連絡票（画面）.xlsx の[証記載保険者番号と広域保険者番号取得]シート機能未開発
+            div.getPnlShinsei().getTxtKisaiHokensyaBango().setValue(証記載保険者番号);
             div.getPnlShinsei().getChkKokuhorenSaiso().setVisible(false);
             return null;
         }
@@ -218,7 +221,6 @@ public final class ShikyuShinseiDetailHandler {
         div.getPnlShinsei().getTxtShinseiYMD().setDisabled(flag);
         div.getPnlShinsei().getTxtUketsukeYMD().setDisabled(flag);
         div.getPnlShinsei().getRdoShinseisyaKubun().setDisabled(flag);
-        div.getPnlShinsei().getTxtKisaiHokensyaBango().setDisabled(flag);
         div.getPnlShinsei().getTxtShimeikana().setDisabled(flag);
         div.getPnlShinsei().getTxtShimeiKanji().setDisabled(flag);
         div.getPnlShinsei().getTxtTelNo().setDisabled(flag);
@@ -318,19 +320,6 @@ public final class ShikyuShinseiDetailHandler {
     }
 
     private boolean is変更あり_UPD(ShokanShinsei 償還払支給申請) {
-        if (償還払支給申請.get証記載保険者番号() != null && !償還払支給申請.get証記載保険者番号().isEmpty()) {
-            if (div.getPnlShinsei().getTxtKisaiHokensyaBango().getValue() == null
-                    || div.getPnlShinsei().getTxtKisaiHokensyaBango().getValue().isEmpty()) {
-                return true;
-            } else if (!償還払支給申請.get証記載保険者番号().value().equals(div.getPnlShinsei().getTxtKisaiHokensyaBango().getValue())) {
-                return true;
-            }
-        } else {
-            if (div.getPnlShinsei().getTxtKisaiHokensyaBango().getValue() != null
-                    && !div.getPnlShinsei().getTxtKisaiHokensyaBango().getValue().isEmpty()) {
-                return true;
-            }
-        }
 
         if (償還払支給申請.is国保連再送付フラグ()) {
             if (div.getPnlShinsei().getChkKokuhorenSaiso().getSelectedItems().isEmpty()) {

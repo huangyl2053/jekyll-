@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 画面設計_DBBGM81002_1_特徴対象者同定（一括）のハンドラクラス
@@ -51,7 +50,6 @@ public final class TokuchoDoteiShoriHandler {
     private static final RString 対応状況_未対応 = new RString("未");
     private static final RString 対応状況_対応済 = new RString("済");
     private static final int 月字数 = 2;
-    private static final RString 単一市町村_MENU = new RString("単一市町村");
     private static final int BEGIN = 4;
     private static final int END = 6;
 
@@ -86,7 +84,7 @@ public final class TokuchoDoteiShoriHandler {
     private Entry<RString, Boolean> do初期値取得() {
         ShichosonSecurityJoho joho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         RString 保険者モード = モード_単一保険者;
-        boolean can実行 = false;
+        boolean can実行 = true;
         if (null != joho && null != joho.get導入形態コード()) {
             RString 導入形態コード = joho.get導入形態コード().getColumnValue();
             if (導入形態コード.equals(導入形態コード_112) || 導入形態コード.equals(導入形態コード_120)) {
@@ -95,7 +93,7 @@ public final class TokuchoDoteiShoriHandler {
                 保険者モード = モード_広域保険者;
             }
         } else {
-            return new SimpleEntry<>(保険者モード, can実行);
+            return new SimpleEntry<>(保険者モード, false);
         }
         FlexibleYear 日付関連_調定年度 = new FlexibleYear(DbBusinessConfig.get(
                 ConfigKeysHizuke.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
@@ -107,7 +105,7 @@ public final class TokuchoDoteiShoriHandler {
             for (ShoriDateKanriResult 特徴対象者同定情報 : 特徴対象者同定情報リスト) {
                 if (null == 特徴対象者同定情報.get基準年月日()
                         || FlexibleDate.EMPTY.equals(特徴対象者同定情報.get基準年月日())) {
-                    can実行 = true;
+                    can実行 = false;
                     break;
                 }
             }
@@ -116,10 +114,16 @@ public final class TokuchoDoteiShoriHandler {
             return new SimpleEntry<>(保険者モード, can実行);
         }
         KonkaiShoriNaiyoJohoResult 今回処理内容情報 = tokuchoTeishiTaisyosyaDoutei.getKonkaiShoriNaiyoJoho(日付関連_調定年度, 保険者モード);
-        if (null != 今回処理内容情報 && RString.isNullOrEmpty(今回処理内容情報.get対象者情報取得月())) {
+        if (null != 今回処理内容情報 && !RString.isNullOrEmpty(今回処理内容情報.get対象者情報取得月())) {
             List<ShoriJokyoJohoResult> 処理状況一覧情報 = tokuchoTeishiTaisyosyaDoutei.getShoriJokyoList(
                     日付関連_調定年度, 今回処理内容情報.get対象者情報取得月().substringReturnAsPossible(BEGIN, END), 保険者モード);
+            if (処理状況一覧情報.isEmpty()) {
+                can実行 = false;
+            }
             do画面表示(保険者モード, 今回処理内容情報, 処理状況一覧情報);
+        } else {
+
+            can実行 = false;
         }
         return new SimpleEntry<>(保険者モード, can実行);
     }
@@ -127,10 +131,11 @@ public final class TokuchoDoteiShoriHandler {
     /**
      * 「実行する」ボタンの活性状態。
      *
+     * @param state RString
      * @param can実行 boolean
      */
-    public void set実行ボタン(boolean can実行) {
-        if (単一市町村_MENU.equals(ResponseHolder.getMenuID())) {
+    public void set実行ボタン(RString state, boolean can実行) {
+        if (モード_単一保険者.equals(state)) {
             if (can実行) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する_単一市町村, false);
             } else {

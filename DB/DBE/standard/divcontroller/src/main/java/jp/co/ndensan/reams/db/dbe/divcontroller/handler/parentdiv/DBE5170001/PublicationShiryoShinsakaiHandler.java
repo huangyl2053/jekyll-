@@ -49,13 +49,13 @@ public class PublicationShiryoShinsakaiHandler {
      * 介護認定審査会資料作成の初期化を設定します。
      */
     public void onLoad() {
+        set項目();
         出力条件の設定();
         List<RString> 事務 = new ArrayList<>();
         事務.add(事務用出力条件_概況特記);
         div.getChkPrintChoyoJimu().setDisabledItemsByKey(事務);
         div.getTxtShiryoNoStart().setDisabled(true);
         div.getTxtSiryoNoEnd().setDisabled(true);
-        set項目();
     }
 
     /**
@@ -311,7 +311,6 @@ public class PublicationShiryoShinsakaiHandler {
             RString 概況特記 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_事務局_概況特記, 日期, SubGyomuCode.DBE認定支援);
             RString 予備判定記入票 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_事務局_予備判定記入表, 日期, SubGyomuCode.DBE認定支援);
             RString 概況特記一覧 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_事務局_概況特記一覧, 日期, SubGyomuCode.DBE認定支援);
-            事務局用の審査会資料設定();
             if (is事務局項目を選択(審査会対象者一覧)) {
                 印刷帳票_事務局リスト.add(作成条件_全件);
             }
@@ -330,11 +329,11 @@ public class PublicationShiryoShinsakaiHandler {
             印刷帳票_事務局リスト.add(事務用出力条件_予備判定記入表);
             印刷帳票_事務局リスト.add(事務用出力条件_概況特記一覧);
         }
+        事務局用の審査会資料設定();
         div.getChkPrintChoyoJimu().setSelectedItemsByKey(印刷帳票_事務局リスト);
         if (個別設定.equals(印刷帳票_委員)) {
             RString 審査会開催通知書 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員_開催通知書, 日期, SubGyomuCode.DBE認定支援);
             RString 予備判定記入票 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員_予備判定記入表, 日期, SubGyomuCode.DBE認定支援);
-            委員の審査会資料設定();
             if (is事務局項目を選択(審査会開催通知書)) {
                 印刷帳票_委員リスト.add(作成条件_全件);
             }
@@ -345,6 +344,7 @@ public class PublicationShiryoShinsakaiHandler {
             印刷帳票_委員リスト.add(作成条件_全件);
             印刷帳票_委員リスト.add(委員用出力条件_予備判定記入表);
         }
+        委員の審査会資料設定();
         div.getChkPrintChohyoIin().setSelectedItemsByKey(印刷帳票_委員リスト);
     }
 

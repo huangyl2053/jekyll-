@@ -84,10 +84,11 @@ public class SystemKanriHoyou {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).保存処理();
+            div.getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(new RString("コンフィグ制御メンテナンス_保存処理は正常に行われました。"),
+                    RString.EMPTY, RString.EMPTY);
+            return ResponseData.of(div).setState(DBZ0500001StateName.完了状態);
         }
-        div.getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(new RString("コンフィグ制御メンテナンス_保存処理は正常に行われました。"),
-                RString.EMPTY, RString.EMPTY);
-        return ResponseData.of(div).setState(DBZ0500001StateName.完了状態);
+        return ResponseData.of(div).respond();
     }
 
     /**

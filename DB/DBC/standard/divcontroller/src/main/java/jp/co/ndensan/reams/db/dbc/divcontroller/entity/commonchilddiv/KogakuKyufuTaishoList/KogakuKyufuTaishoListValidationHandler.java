@@ -75,21 +75,30 @@ public class KogakuKyufuTaishoListValidationHandler {
         List<dgTaishoshaIchiran_Row> rowList = new ArrayList<>();
         rowList.addAll(rowData);
         rowList.remove(div.getDgTaishoshaIchiran().getClickedItem());
+        boolean flag1 = false;
+        boolean flag2 = false;
+        boolean flag3 = false;
         for (dgTaishoshaIchiran_Row row : rowList) {
             if (div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue().equals(row.getData11())) {
+                flag1 = true;
+            }
+            if (div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue().equals(row.getData1())) {
+                flag2 = true;
+            }
+            if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(row.getData10())) {
+                flag3 = true;
+            }
+            if (flag1 && flag2 && flag3) {
                 validPairs.add(new ValidationMessageControlPair(
                         new KogakuKyufuTaishoListValidationHandler.IdocheckMessages(
                                 UrErrorMessages.既に登録済, サービス種類コード.toString())));
-            }
-            if (div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue().equals(row.getData1())) {
                 validPairs.add(new ValidationMessageControlPair(
                         new KogakuKyufuTaishoListValidationHandler.IdocheckMessages(
                                 UrErrorMessages.既に登録済, 事業者番号.toString())));
-            }
-            if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(row.getData10())) {
                 validPairs.add(new ValidationMessageControlPair(
                         new KogakuKyufuTaishoListValidationHandler.IdocheckMessages(
                                 UrErrorMessages.既に登録済, 明細合計区分.toString())));
+                break;
             }
         }
         return validPairs;

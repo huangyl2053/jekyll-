@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 帳票設計_DBBRP43002_4_特別徴収開始通知書（本算定）TokubetsuChoshuKaishiEditor
@@ -101,11 +102,11 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
                 get更正後().get特徴期別金額リスト() != null && !編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト().isEmpty()) {
             for (CharacteristicsPhase entity : 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト()) {
                 if (entity != null && entity.get期() != null && Integer.valueOf(entity.get期().toString()) == NUM4) {
-                    source.listLower_7 = new RString(entity.get金額().toString());
+                    source.listLower_7 = (entity.get金額() == null ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(entity.get金額(), 0));
                 } else if (entity != null && entity.get期() != null && Integer.valueOf(entity.get期().toString()) == NUM5) {
-                    source.listLower_9 = new RString(entity.get金額().toString());
+                    source.listLower_9 = (entity.get金額() == null ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(entity.get金額(), 0));
                 } else if (entity != null && entity.get期() != null && Integer.valueOf(entity.get期().toString()) == NUM6) {
-                    source.listLower_11 = new RString(entity.get金額().toString());
+                    source.listLower_11 = (entity.get金額() == null ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(entity.get金額(), 0));
                 }
             }
         }

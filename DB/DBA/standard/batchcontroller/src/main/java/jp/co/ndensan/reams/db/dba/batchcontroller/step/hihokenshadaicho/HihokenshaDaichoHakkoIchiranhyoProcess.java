@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.mybatisorderbycreator.BreakPageCreator;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.setai.SetaiinFinder;
@@ -190,7 +191,7 @@ public class HihokenshaDaichoHakkoIchiranhyoProcess extends BatchKeyBreakBase<Db
             HihokenshaDaichoHakkoIchiranhyoBodyItem bodyItem = new HihokenshaDaichoHakkoIchiranhyoBodyItem(
                     entity.get被保険者番号().value(),
                     entity.get氏名カナ() != null && !entity.get氏名カナ().isEmpty() ? entity.get氏名カナ().value() : RString.EMPTY,
-                    entity.get性別(),
+                    !RString.isNullOrEmpty(entity.get性別()) ? Seibetsu.toValue(entity.get性別()).get名称() : RString.EMPTY,
                     entity.get年齢(),
                     entity.get行政区() != null && !entity.get行政区().isEmpty() ? entity.get行政区().value() : RString.EMPTY,
                     entity.get郵便番号() != null && !entity.get郵便番号().isEmpty() ? entity.get郵便番号().value() : RString.EMPTY,

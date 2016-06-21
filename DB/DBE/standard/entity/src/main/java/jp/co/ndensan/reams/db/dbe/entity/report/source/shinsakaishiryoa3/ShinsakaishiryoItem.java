@@ -20,6 +20,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShinsakaishiryoItem {
 
+    private RString 申請書管理番号;
     private RString 審査会番号;
     private RString 審査会開催年月日;
     private RString 合議体番号;
