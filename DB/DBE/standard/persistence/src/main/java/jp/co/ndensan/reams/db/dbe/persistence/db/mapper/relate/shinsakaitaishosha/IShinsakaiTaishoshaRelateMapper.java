@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaitaishosha;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaitaishosha.ShinsakaiTaishoshaMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaitaishosha.ShinsakaiTaishoshaMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaitaishosha.ShinsakaiTaishoshaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
