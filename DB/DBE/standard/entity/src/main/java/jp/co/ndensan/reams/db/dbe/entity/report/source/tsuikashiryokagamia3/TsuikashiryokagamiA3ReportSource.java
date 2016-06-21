@@ -1,12 +1,8 @@
 package jp.co.ndensan.reams.db.dbe.entity.report.source.tsuikashiryokagamia3;
 
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
-import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
-import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 追加資料鑑のReportSource
@@ -84,16 +80,12 @@ public class TsuikashiryokagamiA3ReportSource implements IReportSource {
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
-    @ReportPerson(id = "X")
-    public ShikibetsuCode shikibetuCode;
-    @ReportExpandedInfo(id = "X")
-    public ExpandedInformation hishokenshaNo;
 
     /**
      * 改ページ条件のキーです。
      */
     public enum ReportSourceFields {
 
-        shichosonNo,
+        shinsakaiNo,
     }
 }
