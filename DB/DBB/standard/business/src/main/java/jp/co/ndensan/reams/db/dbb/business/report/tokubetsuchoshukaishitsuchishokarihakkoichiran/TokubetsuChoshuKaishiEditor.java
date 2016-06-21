@@ -101,11 +101,11 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
                 get更正後().get特徴期別金額リスト() != null && !編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト().isEmpty()) {
             for (CharacteristicsPhase entity : 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト()) {
                 if (entity != null && entity.get期() != null && Integer.valueOf(entity.get期().toString()) == NUM4) {
-                    source.listLower_7 = new RString(entity.get金額().toString());
+                    source.listLower_7 = isNull(entity.get金額()) ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(entity.get金額(), 0);
                 } else if (entity != null && entity.get期() != null && Integer.valueOf(entity.get期().toString()) == NUM5) {
-                    source.listLower_9 = new RString(entity.get金額().toString());
+                    source.listLower_9 = isNull(entity.get金額()) ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(entity.get金額(), 0);
                 } else if (entity != null && entity.get期() != null && Integer.valueOf(entity.get期().toString()) == NUM6) {
-                    source.listLower_11 = new RString(entity.get金額().toString());
+                    source.listLower_11 = isNull(entity.get金額()) ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(entity.get金額(), 0);
                 }
             }
         }
