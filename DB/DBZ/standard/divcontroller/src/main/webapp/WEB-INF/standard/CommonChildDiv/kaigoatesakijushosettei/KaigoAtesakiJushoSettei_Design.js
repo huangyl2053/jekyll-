@@ -4,8 +4,12 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onCkCloseBtnAtesakiJushoSettei = function () {
-                return "onCkCloseBtnAtesakiJushoSettei";
+            Events.onChange_radJushoSettei = function () {
+                return "onChange_radJushoSettei";
+            };
+
+            Events.onOkClose_radJushoSettei = function () {
+                return "onOkClose_radJushoSettei";
             };
             return Events;
         })();

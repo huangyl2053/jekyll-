@@ -254,8 +254,10 @@ public class NijihanteiKekkaOutputHandler {
         List<AuthorityItem> 市町村識別ID = ShichosonSecurityJoho.getShichosonShikibetsuId(loginId);
         if (市町村識別ID != null && !市町村識別ID.isEmpty()) {
             KoseiShichosonJoho 市町村情報 = ShichosonSecurityJoho.getKouseiShichosonJoho(市町村識別ID.get(0).getItemId());
-            nijidiv.getKensakuJoken().getTxtHokenshaNo().setValue(new RString(市町村情報.get証記載保険者番号().toString()));
-            nijidiv.getKensakuJoken().getTxtHokenshaName().setValue(市町村情報.get市町村名称());
+            if (市町村情報 != null) {
+                nijidiv.getKensakuJoken().getTxtHokenshaNo().setValue(new RString(市町村情報.get証記載保険者番号().toString()));
+                nijidiv.getKensakuJoken().getTxtHokenshaName().setValue(市町村情報.get市町村名称());
+            }
         }
     }
 }

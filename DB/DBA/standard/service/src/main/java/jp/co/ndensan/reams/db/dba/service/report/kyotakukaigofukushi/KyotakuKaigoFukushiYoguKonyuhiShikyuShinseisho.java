@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.
 import jp.co.ndensan.reams.db.dba.business.report.fukushiyogukonyuhi.FukushiYoguKonyuhiShinseishoJuryoIninHaraiItem;
 import jp.co.ndensan.reams.db.dba.business.report.fukushiyogukonyuhi.FukushiYoguKonyuhiShinseishoJuryoIninHaraiProperty;
 import jp.co.ndensan.reams.db.dba.business.report.fukushiyogukonyuhi.FukushiYoguKonyuhiShinseishoJuryoIninHaraiReport;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.report.fukushiyogukonyuhi.FukushiYoguKonyuhiShinseishoJuryoIninHaraiReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -26,7 +27,6 @@ import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeik
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -129,7 +129,7 @@ public class KyotakuKaigoFukushiYoguKonyuhiShikyuShinseisho {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
                 SubGyomuCode.DBC介護給付,
-                new ReportId("DBC800018_kyufuhiKariireiShinseisho"),
+                ReportIdDBA.DBC800013.getReportId(),
                 KamokuCode.EMPTY,
                 1,
                 項目番号,

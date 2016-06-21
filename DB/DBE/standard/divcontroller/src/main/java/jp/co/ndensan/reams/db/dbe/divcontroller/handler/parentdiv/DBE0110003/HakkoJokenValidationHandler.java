@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class HakkoJokenValidationHandler {
 
     private static final RString SELECT_KEY0 = new RString("key0");
+    private static final RString LASDEC_CODE = new RString("000000");
     private final HakkoJokenDiv div;
 
     /**
@@ -151,7 +152,7 @@ public class HakkoJokenValidationHandler {
         RDate shinnseikafrom = div.getTxtYoteiMiteishaShinseiYMD().getFromValue();
         RDate shinnseikato = div.getTxtYoteiMiteishaShinseiYMD().getToValue();
         RString kijyun = DbBusinessConfig.get(ConfigNameDBE.Reamsへの切り替え日, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
-                new LasdecCode("000000"), ConfigNameDBE.Reamsへの切り替え日.get名称());
+                new LasdecCode(LASDEC_CODE), ConfigNameDBE.Reamsへの切り替え日.get名称());
         RDate kijyundate = new RDate(kijyun.toString());
         if (!div.getTxtYoteiMiteishaShinseiYMD().isDisabled()) {
             int yearsfrom = kijyundate.getBetweenYears(shinnseikafrom);
@@ -173,7 +174,7 @@ public class HakkoJokenValidationHandler {
         RDate shinnseikafrom = div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getFromValue();
         RDate shinnseikato = div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getToValue();
         RString kijyun = DbBusinessConfig.get(ConfigNameDBE.Reamsへの切り替え日, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
-                new LasdecCode("000000"), ConfigNameDBE.Reamsへの切り替え日.get名称());
+                new LasdecCode(LASDEC_CODE), ConfigNameDBE.Reamsへの切り替え日.get名称());
         RDate kijyundate = new RDate(kijyun.toString());
         if (!div.getTxtIraisakiHenkoshaIchiranShinseiYMD().isDisabled()) {
             int yearsfrom = kijyundate.getBetweenYears(shinnseikafrom);
@@ -195,7 +196,7 @@ public class HakkoJokenValidationHandler {
         RDate shinnseikafrom = div.getTxtCheckListShinseiYMD().getFromValue();
         RDate shinnseikato = div.getTxtCheckListShinseiYMD().getToValue();
         RString kijyun = DbBusinessConfig.get(ConfigNameDBE.Reamsへの切り替え日, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
-                new LasdecCode("000000"), ConfigNameDBE.Reamsへの切り替え日.get名称());
+                new LasdecCode(LASDEC_CODE), ConfigNameDBE.Reamsへの切り替え日.get名称());
         RDate kijyundate = new RDate(kijyun.toString());
         if (!div.getTxtCheckListShinseiYMD().isDisabled()) {
             int yearsfrom = kijyundate.getBetweenYears(shinnseikafrom);
