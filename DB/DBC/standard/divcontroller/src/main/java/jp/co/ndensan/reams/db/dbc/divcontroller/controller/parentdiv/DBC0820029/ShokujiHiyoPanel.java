@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.DBC0820029StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.DBC0820029TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.ShokujiHiyoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.dgdShokuji_Row;
@@ -91,13 +92,7 @@ public class ShokujiHiyoPanel {
         getHandler(div).setヘッダーエリア(サービス提供年月, 申請日, 事業者番号, 明細番号, 様式番号);
 
         if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
-            div.getPanelShokuji().getPanelShoikujiList().setDisplayNone(true);
-            div.getPanelShokuji().getPanelDetailGokei().setDisplayNone(true);
-            div.getPanelShokuji().getPanelDetail1().setVisible(true);
-            div.getPanelShokuji().getPanelDetail2().setVisible(false);
-            div.getPanelShokuji().getPanelDetail1().getBtnCancel1().setVisible(false);
-            div.getPanelShokuji().getPanelDetail1().getBtnConfirm1().setVisible(false);
-
+            getHandler(div).set平成１５年３月_状態();
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
                     .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号,
                             サービス提供年月,
@@ -111,19 +106,13 @@ public class ShokujiHiyoPanel {
             }
             ViewStateHolder.put(ViewStateKeys.償還払請求食事費用データ, (Serializable) shokanShokujiHiyoList);
         }
-
         if (平成１５年３月.isBefore(サービス提供年月)
                 && サービス提供年月.isBeforeOrEquals(平成17年９月)) {
 
             getデータ(div, 被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         }
-
         if (平成17年１０月.isBeforeOrEquals(サービス提供年月)) {
-            div.getPanelShokuji().getPanelShoikujiList().setDisplayNone(true);
-            div.getPanelShokuji().getPanelDetailGokei().setVisible(true);
-            div.getPanelShokuji().getPanelDetailGokei().getTxtTeikyohiGokei().setReadOnly(false);
-            div.getPanelShokuji().getPanelDetail1().setVisible(false);
-            div.getPanelShokuji().getPanelDetail2().setVisible(false);
+            getHandler(div).set平成17年１０月_状態();
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
                     .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号,
                             サービス提供年月,
@@ -137,7 +126,6 @@ public class ShokujiHiyoPanel {
             }
             ViewStateHolder.put(ViewStateKeys.償還払請求食事費用データ, (Serializable) shokanShokujiHiyoList);
         }
-
         SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー,
                 SikibetuNokennsakuki.class);
         ShikibetsuNoKanri shikibetsuNoKanri = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
@@ -150,33 +138,10 @@ public class ShokujiHiyoPanel {
             getHandler(div).getボタンを制御(shikibetsuNoKanri, paramter);
         }
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
-                div.getPanelShokuji().getPanelShoikujiList().setVisible(false);
-                div.getPanelShokuji().getPanelDetailGokei().setVisible(false);
-                div.getPanelShokuji().getPanelDetail1().setVisible(true);
-                div.getPanelShokuji().getPanelDetail1().setReadOnly(true);
-                div.getPanelShokuji().getPanelDetail2().setVisible(false);
-                div.getPanelShokuji().getPanelDetail1().getBtnCancel1().setVisible(false);
-                div.getPanelShokuji().getPanelDetail1().getBtnConfirm1().setVisible(false);
-            }
-            if (平成１５年３月.isBefore(サービス提供年月)
-                    && サービス提供年月.isBeforeOrEquals(平成17年９月)) {
-                div.getPanelShokuji().getPanelShoikujiList().setVisible(true);
-                div.getPanelShokuji().getPanelShoikujiList().setReadOnly(true);
-                div.getPanelShokuji().getPanelDetailGokei().setVisible(true);
-                div.getPanelShokuji().getPanelDetailGokei().setReadOnly(true);
-                div.getPanelShokuji().getPanelDetail1().setVisible(false);
-                div.getPanelShokuji().getPanelDetail2().setVisible(false);
-            }
-            if (平成17年１０月.isBeforeOrEquals(サービス提供年月)) {
-                div.getPanelShokuji().getPanelShoikujiList().setVisible(false);
-                div.getPanelShokuji().getPanelDetailGokei().setVisible(true);
-                div.getPanelShokuji().getPanelDetailGokei().setReadOnly(true);
-                div.getPanelShokuji().getPanelDetail1().setVisible(false);
-                div.getPanelShokuji().getPanelDetail2().setVisible(false);
-            }
+            getHandler(div).setボタン状態(サービス提供年月);
+            return ResponseData.of(div).setState(DBC0820029StateName.削除モード);
         }
-        return createResponse(div);
+        return ResponseData.of(div).setState(DBC0820029StateName.新規修正モード);
     }
 
     /**
@@ -197,10 +162,7 @@ public class ShokujiHiyoPanel {
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 明細番号) {
-        div.getPanelShokuji().getPanelShoikujiList().setVisible(true);
-        div.getPanelShokuji().getPanelDetailGokei().setVisible(true);
-        div.getPanelShokuji().getPanelDetail1().setDisplayNone(true);
-        div.getPanelShokuji().getPanelDetail2().setVisible(false);
+        getHandler(div).set平成１５年３月_平成17年１０月_状態();
 
         List<ShokanMeisai> shokanMeisaiList = ShokanbaraiJyokyoShokai.createInstance()
                 .getShokujiHiyoDataList(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
@@ -222,7 +184,7 @@ public class ShokujiHiyoPanel {
                 throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage()
                         .replace(標準負担額日額.toString()));
             }
-            div.getPanelShokuji().getPanelDetailGokei().getTxtHigaku().setValue(標準負担額_日額);
+            getHandler(div).set標準負担額日額(標準負担額_日額);
         }
         ViewStateHolder.put(ViewStateKeys.償還払請求食事費用, (Serializable) shokanMeisaiList);
     }
