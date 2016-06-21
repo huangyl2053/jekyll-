@@ -38,7 +38,6 @@ public class HakkoJoken {
         boolean 認定調査結果と主治医意見書のチェックリストフラグ
                 = ViewStateHolder.get(ViewStateKeys.要介護認定申請_依頼業務照会_認定調査結果と主治医意見書のチェックリストフラグ, Boolean.class);
         getHandler(div).onLoad(認定調査予定未定者一覧フラグ, 認定調査依頼先変更者一覧表フラグ, 認定調査結果と主治医意見書のチェックリストフラグ);
-
         return ResponseData.of(div).respond();
     }
 
@@ -118,7 +117,6 @@ public class HakkoJoken {
         } else {
             div.getNinteiChosaYoteiMiteishaIchiranJoken().getTxtYoteiMiteishaShinseiYMD().setDisabled(false);
         }
-
         return ResponseData.of(div).respond();
     }
 
@@ -158,7 +156,6 @@ public class HakkoJoken {
             div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtCheckListShinseiYMD().setDisabled(true);
             div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsaYMD().setDisabled(true);
         }
-
         return ResponseData.of(div).respond();
     }
 
@@ -222,5 +219,4 @@ public class HakkoJoken {
     private HakkoJokenHandler getHandler(HakkoJokenDiv div) {
         return new HakkoJokenHandler(div);
     }
-
 }

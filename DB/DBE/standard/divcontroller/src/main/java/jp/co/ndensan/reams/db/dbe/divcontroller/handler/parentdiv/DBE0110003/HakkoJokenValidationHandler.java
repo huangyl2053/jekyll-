@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * 認定調査に関する帳票発行画面のバリデーションクラスです
  *
  *
- * @reamsid_L DBE-1390-050 xuyongchao
+ * @reamsid_L DBE-1390-060 xuyongchao
  */
 public class HakkoJokenValidationHandler {
 
@@ -54,7 +54,6 @@ public class HakkoJokenValidationHandler {
             }
         }
         return validPairs;
-
     }
 
     /**
@@ -72,7 +71,6 @@ public class HakkoJokenValidationHandler {
             }
         }
         return validPairs;
-
     }
 
     /**
@@ -90,7 +88,6 @@ public class HakkoJokenValidationHandler {
             }
         }
         return validPairs;
-
     }
 
     /**
@@ -227,5 +224,4 @@ public class HakkoJokenValidationHandler {
             return message;
         }
     }
-
 }

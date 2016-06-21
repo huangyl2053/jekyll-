@@ -88,25 +88,23 @@ public class TokuteiShinryohiPanel {
         getHandler(div).set申請共通エリア(サービス年月, 事業者番号, 申請日, 明細番号, 様式番号, 被保険者番号, 識別コード);
 
         if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
-            getHandler(div).setエリア制御(true, true, false, true);
+            getHandler(div).setエリア制御(サービス年月);
             ArrayList<ShokanTokuteiShinryohi> shokanTokuteiShinryohiList = new ArrayList<>();
             if (明細番号 != null && !明細番号.isEmpty()) {
                 shokanTokuteiShinryohiList = (ArrayList<ShokanTokuteiShinryohi>) ShokanbaraiJyokyoShokai.createInstance()
                         .getTokuteiShinryohiData(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-                isEmpty特定診療費データ(shokanTokuteiShinryohiList);
             }
             getHandler(div).set特定診療費一覧グリッド(shokanTokuteiShinryohiList);
             ViewStateHolder.put(ViewStateKeys.償還払請求特定診療費データ, shokanTokuteiShinryohiList);
         }
         if (平成１５年４月.isBeforeOrEquals(サービス年月)) {
-            getHandler(div).setエリア制御(true, true, true, false);
+            getHandler(div).setエリア制御(サービス年月);
             ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> shokanTokuteiShinryoTokubetsuRyoyoList = new ArrayList<>();
             if (明細番号 != null && !明細番号.isEmpty()) {
                 shokanTokuteiShinryoTokubetsuRyoyoList
                         = (ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo>) ShokanbaraiJyokyoShokai.createInstance()
                         .getTokuteyiShinnryouhiTokubeturyoyohi(被保険者番号, サービス年月, 整理番号, 事業者番号,
                                 様式番号, 明細番号, null);
-                isEmpty特別療養費一覧(shokanTokuteiShinryoTokubetsuRyoyoList);
             }
             getHandler(div).set特定診療費_特別診療費一覧グリッド(shokanTokuteiShinryoTokubetsuRyoyoList);
             ViewStateHolder.put(ViewStateKeys.償還払請求特定診療費_特別療養費一覧, shokanTokuteiShinryoTokubetsuRyoyoList);
@@ -123,18 +121,6 @@ public class TokuteiShinryohiPanel {
             return ResponseData.of(div).setState(DBC0820023StateName.削除モード);
         }
         return ResponseData.of(div).setState(DBC0820023StateName.新規修正モード);
-    }
-
-    private void isEmpty特別療養費一覧(ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> entityList) {
-        if (entityList.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
-        }
-    }
-
-    private void isEmpty特定診療費データ(ArrayList<ShokanTokuteiShinryohi> entityList) {
-        if (entityList.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
-        }
     }
 
     /**
