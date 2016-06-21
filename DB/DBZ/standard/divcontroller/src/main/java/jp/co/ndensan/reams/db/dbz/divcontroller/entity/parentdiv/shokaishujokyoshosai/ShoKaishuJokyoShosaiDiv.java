@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishujokyo
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
@@ -134,7 +133,7 @@ public class ShoKaishuJokyoShosaiDiv extends Panel implements IShoKaishuJokyoSho
     @JsonProperty("modes")
     private HashSet<Mode> modes;
 
-    public static enum 表示方法 implements ICommonChildDivMode {
+    public static enum HyojiHoho implements ICommonChildDivMode {
 
         照会("照会"),
         入力("入力"),
@@ -142,14 +141,14 @@ public class ShoKaishuJokyoShosaiDiv extends Panel implements IShoKaishuJokyoSho
 
         private final String name;
 
-        private 表示方法(final String name) {
+        private HyojiHoho(final String name) {
             this.name = name;
         }
 
-        public static 表示方法 getEnum(String str) {
-            表示方法[] enumArray = 表示方法.values();
+        public static HyojiHoho getEnum(String str) {
+            HyojiHoho[] enumArray = HyojiHoho.values();
 
-            for (表示方法 enumStr : enumArray) {
+            for (HyojiHoho enumStr : enumArray) {
                 if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
@@ -164,12 +163,12 @@ public class ShoKaishuJokyoShosaiDiv extends Panel implements IShoKaishuJokyoSho
 
     }
 
-    public 表示方法 getMode_表示方法() {
-        return (表示方法) _CommonChildDivModeUtil.getMode(this.modes, 表示方法.class);
+    public HyojiHoho getMode_表示方法() {
+        return (HyojiHoho) _CommonChildDivModeUtil.getMode(this.modes, HyojiHoho.class);
     }
 
-    public void setMode_表示方法(表示方法 value) {
-        _CommonChildDivModeUtil.setMode(this.modes, 表示方法.class, value);
+    public void setMode_表示方法(HyojiHoho value) {
+        _CommonChildDivModeUtil.setMode(this.modes, HyojiHoho.class, value);
     }
 
     //--------------- この行より下にコードを追加してください -------------------
