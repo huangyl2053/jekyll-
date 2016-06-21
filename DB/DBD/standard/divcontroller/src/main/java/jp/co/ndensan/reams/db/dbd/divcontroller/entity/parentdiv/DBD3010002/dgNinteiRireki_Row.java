@@ -1,17 +1,16 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3010002;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jul 01 09:09:14 JST 2014 
+ * Tue Jun 21 14:12:46 CST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 
 /**
@@ -21,58 +20,83 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgNinteiRireki_Row extends DataRow {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
-    private Button btnDetail;
-    private TextBoxFlexibleDate ninteiShinseiDate;
-    private RString shinseiKubunHorei;
+    private RString nintei;
+    private TextBoxFlexibleDate shinseiDate;
     private TextBoxFlexibleDate ninteiDate;
     private RString yokaigodo;
     private TextBoxFlexibleDate kaishiDate;
     private TextBoxFlexibleDate shuryoDate;
+    private RString so;
     private RString shinsakaiIken;
+    private RString shichosonCode;
+    private RString rirekiNo;
+    private RString edaban;
+    private RString jukyuShinseiJiyu;
 
     public dgNinteiRireki_Row() {
         super();
-        this.btnDetail = new Button();
-        this.ninteiShinseiDate = new TextBoxFlexibleDate();
-        this.shinseiKubunHorei = RString.EMPTY;
+        this.nintei = RString.EMPTY;
+        this.shinseiDate = new TextBoxFlexibleDate();
         this.ninteiDate = new TextBoxFlexibleDate();
         this.yokaigodo = RString.EMPTY;
         this.kaishiDate = new TextBoxFlexibleDate();
         this.shuryoDate = new TextBoxFlexibleDate();
+        this.so = RString.EMPTY;
         this.shinsakaiIken = RString.EMPTY;
-    }
-
-    public dgNinteiRireki_Row(Button btnDetail, TextBoxFlexibleDate ninteiShinseiDate, RString shinseiKubunHorei, TextBoxFlexibleDate ninteiDate, RString yokaigodo, TextBoxFlexibleDate kaishiDate, TextBoxFlexibleDate shuryoDate, RString shinsakaiIken) {
-        super();
-        this.setOriginalData("btnDetail", btnDetail);
-        this.setOriginalData("ninteiShinseiDate", ninteiShinseiDate);
-        this.setOriginalData("shinseiKubunHorei", shinseiKubunHorei);
+        this.shichosonCode = RString.EMPTY;
+        this.rirekiNo = RString.EMPTY;
+        this.edaban = RString.EMPTY;
+        this.jukyuShinseiJiyu = RString.EMPTY;
+        this.setOriginalData("nintei", nintei);
+        this.setOriginalData("shinseiDate", shinseiDate);
         this.setOriginalData("ninteiDate", ninteiDate);
         this.setOriginalData("yokaigodo", yokaigodo);
         this.setOriginalData("kaishiDate", kaishiDate);
         this.setOriginalData("shuryoDate", shuryoDate);
+        this.setOriginalData("so", so);
         this.setOriginalData("shinsakaiIken", shinsakaiIken);
-        this.btnDetail = btnDetail;
-        this.ninteiShinseiDate = ninteiShinseiDate;
-        this.shinseiKubunHorei = shinseiKubunHorei;
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.setOriginalData("rirekiNo", rirekiNo);
+        this.setOriginalData("edaban", edaban);
+        this.setOriginalData("jukyuShinseiJiyu", jukyuShinseiJiyu);
+    }
+
+    public dgNinteiRireki_Row(RString nintei, TextBoxFlexibleDate shinseiDate, TextBoxFlexibleDate ninteiDate, RString yokaigodo, TextBoxFlexibleDate kaishiDate, TextBoxFlexibleDate shuryoDate, RString so, RString shinsakaiIken, RString shichosonCode, RString rirekiNo, RString edaban, RString jukyuShinseiJiyu) {
+        super();
+        this.setOriginalData("nintei", nintei);
+        this.setOriginalData("shinseiDate", shinseiDate);
+        this.setOriginalData("ninteiDate", ninteiDate);
+        this.setOriginalData("yokaigodo", yokaigodo);
+        this.setOriginalData("kaishiDate", kaishiDate);
+        this.setOriginalData("shuryoDate", shuryoDate);
+        this.setOriginalData("so", so);
+        this.setOriginalData("shinsakaiIken", shinsakaiIken);
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.setOriginalData("rirekiNo", rirekiNo);
+        this.setOriginalData("edaban", edaban);
+        this.setOriginalData("jukyuShinseiJiyu", jukyuShinseiJiyu);
+        this.nintei = nintei;
+        this.shinseiDate = shinseiDate;
         this.ninteiDate = ninteiDate;
         this.yokaigodo = yokaigodo;
         this.kaishiDate = kaishiDate;
         this.shuryoDate = shuryoDate;
+        this.so = so;
         this.shinsakaiIken = shinsakaiIken;
+        this.shichosonCode = shichosonCode;
+        this.rirekiNo = rirekiNo;
+        this.edaban = edaban;
+        this.jukyuShinseiJiyu = jukyuShinseiJiyu;
     }
 
-    public Button getBtnDetail() {
-        return btnDetail;
+    public RString getNintei() {
+        return nintei;
     }
 
-    public TextBoxFlexibleDate getNinteiShinseiDate() {
-        return ninteiShinseiDate;
-    }
-
-    public RString getShinseiKubunHorei() {
-        return shinseiKubunHorei;
+    public TextBoxFlexibleDate getShinseiDate() {
+        return shinseiDate;
     }
 
     public TextBoxFlexibleDate getNinteiDate() {
@@ -91,23 +115,38 @@ public class dgNinteiRireki_Row extends DataRow {
         return shuryoDate;
     }
 
+    public RString getSo() {
+        return so;
+    }
+
     public RString getShinsakaiIken() {
         return shinsakaiIken;
     }
 
-    public void setBtnDetail(Button btnDetail) {
-        this.setOriginalData("btnDetail", btnDetail);
-        this.btnDetail = btnDetail;
+    public RString getShichosonCode() {
+        return shichosonCode;
     }
 
-    public void setNinteiShinseiDate(TextBoxFlexibleDate ninteiShinseiDate) {
-        this.setOriginalData("ninteiShinseiDate", ninteiShinseiDate);
-        this.ninteiShinseiDate = ninteiShinseiDate;
+    public RString getRirekiNo() {
+        return rirekiNo;
     }
 
-    public void setShinseiKubunHorei(RString shinseiKubunHorei) {
-        this.setOriginalData("shinseiKubunHorei", shinseiKubunHorei);
-        this.shinseiKubunHorei = shinseiKubunHorei;
+    public RString getEdaban() {
+        return edaban;
+    }
+
+    public RString getJukyuShinseiJiyu() {
+        return jukyuShinseiJiyu;
+    }
+
+    public void setNintei(RString nintei) {
+        this.setOriginalData("nintei", nintei);
+        this.nintei = nintei;
+    }
+
+    public void setShinseiDate(TextBoxFlexibleDate shinseiDate) {
+        this.setOriginalData("shinseiDate", shinseiDate);
+        this.shinseiDate = shinseiDate;
     }
 
     public void setNinteiDate(TextBoxFlexibleDate ninteiDate) {
@@ -130,9 +169,35 @@ public class dgNinteiRireki_Row extends DataRow {
         this.shuryoDate = shuryoDate;
     }
 
+    public void setSo(RString so) {
+        this.setOriginalData("so", so);
+        this.so = so;
+    }
+
     public void setShinsakaiIken(RString shinsakaiIken) {
         this.setOriginalData("shinsakaiIken", shinsakaiIken);
         this.shinsakaiIken = shinsakaiIken;
     }
 
+    public void setShichosonCode(RString shichosonCode) {
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.shichosonCode = shichosonCode;
+    }
+
+    public void setRirekiNo(RString rirekiNo) {
+        this.setOriginalData("rirekiNo", rirekiNo);
+        this.rirekiNo = rirekiNo;
+    }
+
+    public void setEdaban(RString edaban) {
+        this.setOriginalData("edaban", edaban);
+        this.edaban = edaban;
+    }
+
+    public void setJukyuShinseiJiyu(RString jukyuShinseiJiyu) {
+        this.setOriginalData("jukyuShinseiJiyu", jukyuShinseiJiyu);
+        this.jukyuShinseiJiyu = jukyuShinseiJiyu;
+    }
+
+    // </editor-fold>
 }
