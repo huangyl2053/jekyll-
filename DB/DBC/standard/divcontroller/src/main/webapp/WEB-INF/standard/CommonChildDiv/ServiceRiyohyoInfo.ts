@@ -50,7 +50,6 @@ module DBC
                     // 追加ボタン三つ
                     this.controls.btnBeppyoMeisaiNew().displayNone = false;
                     this.controls.btnBeppyoGokeiNew().displayNone = false;
-                    this.controls.btnBeppyoMeisaiGokeiNew().displayNone = false;
                     // 明細部分
                     this.controls.ServiceRiyohyoBeppyoMeisai().disabled = false;
                     this.controls.btnCalcMeisai().displayNone = false;
@@ -70,7 +69,6 @@ module DBC
                     // 追加ボタン三つ
                     this.controls.btnBeppyoMeisaiNew().displayNone =true;
                     this.controls.btnBeppyoGokeiNew().displayNone =true;
-                    this.controls.btnBeppyoMeisaiGokeiNew().displayNone =true;
                     // 明細部分
                     this.controls.ServiceRiyohyoBeppyoMeisai().disabled = true;
                     this.controls.btnCalcMeisai().displayNone = true;

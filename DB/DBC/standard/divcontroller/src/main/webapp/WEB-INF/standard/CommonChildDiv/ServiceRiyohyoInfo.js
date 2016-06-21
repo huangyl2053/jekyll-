@@ -39,7 +39,6 @@ var DBC;
 
                     this.controls.btnBeppyoMeisaiNew().displayNone = false;
                     this.controls.btnBeppyoGokeiNew().displayNone = false;
-                    this.controls.btnBeppyoMeisaiGokeiNew().displayNone = false;
 
                     this.controls.ServiceRiyohyoBeppyoMeisai().disabled = false;
                     this.controls.btnCalcMeisai().displayNone = false;
@@ -58,7 +57,6 @@ var DBC;
 
                     this.controls.btnBeppyoMeisaiNew().displayNone = true;
                     this.controls.btnBeppyoGokeiNew().displayNone = true;
-                    this.controls.btnBeppyoMeisaiGokeiNew().displayNone = true;
 
                     this.controls.ServiceRiyohyoBeppyoMeisai().disabled = true;
                     this.controls.btnCalcMeisai().displayNone = true;
