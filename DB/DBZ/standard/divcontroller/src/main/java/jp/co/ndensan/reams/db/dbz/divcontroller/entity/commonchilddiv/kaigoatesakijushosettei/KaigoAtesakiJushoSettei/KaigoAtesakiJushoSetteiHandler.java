@@ -29,8 +29,6 @@ public class KaigoAtesakiJushoSetteiHandler {
 
     private final KaigoAtesakiJushoSetteiDiv div;
     private final KaigoAtesakiJushoSetteiFinder finader;
-    private final RString 帳票独自 = new RString("1");
-    private final RString 市町村共通 = new RString("0");
     private final RString 都道府県 = new RString("都道府県");
     private final RString 郡 = new RString("郡");
     private final RString append郡 = new RString("＋郡");
@@ -46,6 +44,10 @@ public class KaigoAtesakiJushoSetteiHandler {
     private final RString 住所行政区番地 = new RString("住所＋番地、（行政区）");
     private final RString 番地のみ = new RString("＋番地のみ");
     private final RString append番地のみ = new RString("番地のみ");
+    private final RString 町域編集方法 = new RString("5");
+    private final RString 町域編集方法_2 = new RString("2");
+    private final RString 町域編集方法_3 = new RString("3");
+    private final RString 町域編集方法_4 = new RString("4");
 
     /**
      * 介護宛先住所設定Handlerクラスです。
@@ -77,12 +79,12 @@ public class KaigoAtesakiJushoSetteiHandler {
             }
         }
         DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通 = finader.select帳票制御共通(サブ業務コード, 帳票分類ID);
-        if (帳票独自.equals(帳票制御共通.getJushoHenshuKubun())) {
-            div.getRadJushoSettei().setSelectedKey(帳票独自);
+        if (JushoHenshuKubun.帳票独自.getコード().equals(帳票制御共通.getJushoHenshuKubun())) {
+            div.getRadJushoSettei().setSelectedKey(JushoHenshuKubun.帳票独自.getコード());
         } else {
-            div.getRadJushoSettei().setSelectedKey(市町村共通);
+            div.getRadJushoSettei().setSelectedKey(JushoHenshuKubun.市町村共通.getコード());
         }
-        if (帳票独自.equals(div.getRadJushoSettei().getSelectedKey())) {
+        if (JushoHenshuKubun.市町村共通.getコード().equals(div.getRadJushoSettei().getSelectedKey())) {
             RString 市町村共通_都道府県名表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無,
                     RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
             RString 市町村共通_郡名表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無,
@@ -100,33 +102,33 @@ public class KaigoAtesakiJushoSetteiHandler {
             div.setHdnChohyoDokujiKatagaki(市町村共通_方書表示有無);
         } else {
             if (帳票制御共通.getJushoHenshuTodoufukenMeiHyojiUmu()) {
-                RString 市町村共通_都道府県名表示有無 = 帳票独自;
+                RString 市町村共通_都道府県名表示有無 = JushoHenshuKubun.帳票独自.getコード();
                 div.setHdnChohyoDokujiTodofukenMei(市町村共通_都道府県名表示有無);
             } else {
-                RString 市町村共通_都道府県名表示有無 = 市町村共通;
+                RString 市町村共通_都道府県名表示有無 = JushoHenshuKubun.市町村共通.getコード();
                 div.setHdnChohyoDokujiTodofukenMei(市町村共通_都道府県名表示有無);
             }
             if (帳票制御共通.getJushoHenshuGunMeiHyojiUmu()) {
-                RString 帳票独自_郡名表示有無 = 帳票独自;
+                RString 帳票独自_郡名表示有無 = JushoHenshuKubun.帳票独自.getコード();
                 div.setHdnChohyoDokujiGunMei(帳票独自_郡名表示有無);
             } else {
-                RString 帳票独自_郡名表示有無 = 市町村共通;
+                RString 帳票独自_郡名表示有無 = JushoHenshuKubun.市町村共通.getコード();
                 div.setHdnChohyoDokujiGunMei(帳票独自_郡名表示有無);
             }
             if (帳票制御共通.getJushoHenshuShichosonMeiHyojiUmu()) {
-                RString 帳票独自_市町村名表示有無 = 帳票独自;
+                RString 帳票独自_市町村名表示有無 = JushoHenshuKubun.帳票独自.getコード();
                 div.setHdnChohyoDokujiShichosonMei(帳票独自_市町村名表示有無);
             } else {
-                RString 帳票独自_市町村名表示有無 = 市町村共通;
+                RString 帳票独自_市町村名表示有無 = JushoHenshuKubun.市町村共通.getコード();
                 div.setHdnChohyoDokujiShichosonMei(帳票独自_市町村名表示有無);
             }
             RString 帳票独自_町域編集方法 = 帳票制御共通.getJushoHenshuChoikiHenshuHoho();
             div.setHdnChohyoDokujiHensyuHoho(帳票独自_町域編集方法);
             if (帳票制御共通.getJushoHenshuKatagakiHyojiUmu()) {
-                RString 帳票独自_方書表示有無 = 帳票独自;
+                RString 帳票独自_方書表示有無 = JushoHenshuKubun.帳票独自.getコード();
                 div.setHdnChohyoDokujiKatagaki(帳票独自_方書表示有無);
             } else {
-                RString 帳票独自_方書表示有無 = 市町村共通;
+                RString 帳票独自_方書表示有無 = JushoHenshuKubun.市町村共通.getコード();
                 div.setHdnChohyoDokujiKatagaki(帳票独自_方書表示有無);
             }
         }
@@ -138,7 +140,7 @@ public class KaigoAtesakiJushoSetteiHandler {
      *
      */
     public void setradJushoSettei() {
-        if (帳票独自.equals(div.getRadJushoSettei().getSelectedKey())) {
+        if (JushoHenshuKubun.帳票独自.getコード().equals(div.getRadJushoSettei().getSelectedKey())) {
             div.getBtnAtesakiJushoSettei().setDisabled(false);
         } else {
             div.getBtnAtesakiJushoSettei().setDisabled(true);
@@ -151,7 +153,7 @@ public class KaigoAtesakiJushoSetteiHandler {
      * @return 帳票独自を選択している場合はTrueを返す。それ以外は、Falseを返す。
      */
     public boolean is帳票独自() {
-        return 帳票独自.equals(div.getRadJushoSettei().getSelectedKey());
+        return JushoHenshuKubun.帳票独自.getコード().equals(div.getRadJushoSettei().getSelectedKey());
     }
 
     /**
@@ -160,7 +162,7 @@ public class KaigoAtesakiJushoSetteiHandler {
      * @return 帳票独自_都道府県名表示有無 を元にbooleanを返す。
      */
     public boolean is都道府県名表示() {
-        return 帳票独自.equals(div.getHdnChohyoDokujiTodofukenMei());
+        return JushoHenshuKubun.帳票独自.getコード().equals(div.getHdnChohyoDokujiTodofukenMei());
     }
 
     /**
@@ -169,7 +171,7 @@ public class KaigoAtesakiJushoSetteiHandler {
      * @return .帳票独自_郡名表示有無 を元にbooleanを返す。
      */
     public boolean is郡名表示() {
-        return 帳票独自.equals(div.getHdnChohyoDokujiGunMei());
+        return JushoHenshuKubun.帳票独自.getコード().equals(div.getHdnChohyoDokujiGunMei());
     }
 
     /**
@@ -178,7 +180,7 @@ public class KaigoAtesakiJushoSetteiHandler {
      * @return .帳票独自_市町村名表示有無 を元にbooleanを返す。
      */
     public boolean is市町村名表示() {
-        return 帳票独自.equals(div.getHdnChohyoDokujiShichosonMei());
+        return JushoHenshuKubun.帳票独自.getコード().equals(div.getHdnChohyoDokujiShichosonMei());
     }
 
     /**
@@ -196,7 +198,7 @@ public class KaigoAtesakiJushoSetteiHandler {
      * @return 帳票独自_方書表示有無 を元にbooleanを返す。
      */
     public boolean is方書表示() {
-        return 帳票独自.equals(div.getHdnChohyoDokujiKatagaki());
+        return JushoHenshuKubun.帳票独自.getコード().equals(div.getHdnChohyoDokujiKatagaki());
     }
 
     /**
@@ -205,111 +207,54 @@ public class KaigoAtesakiJushoSetteiHandler {
      */
     public void 宛先住所編集書式() {
         RStringBuilder 書式 = new RStringBuilder();
-        if (is帳票独自()) {
-            if (帳票独自.equals(div.getHdnChohyoDokujiTodofukenMei())) {
-                書式.append(都道府県);
-            }
-            if (帳票独自.equals(div.getHdnChohyoDokujiGunMei())) {
-                if (!書式.toRString().isEmpty()) {
-                    書式.append(append郡);
-                } else {
-                    書式.append(郡);
-                }
-            }
-            if (帳票独自.equals(div.getHdnChohyoDokujiShichosonMei())) {
-                if (!書式.toRString().isEmpty()) {
-                    書式.append(append市町村);
-                } else {
-                    書式.append(市町村);
-                }
-            }
-            if (帳票独自.equals(div.getHdnChohyoDokujiKatagaki())) {
-                if (!書式.toRString().isEmpty()) {
-                    書式.append(append方書);
-                } else {
-                    書式.append(方書);
-                }
-            }
-            if (new RString("5").equals(div.getHdnChohyoDokujiHensyuHoho())) {
+        if (JushoHenshuKubun.帳票独自.getコード().equals(div.getHdnChohyoDokujiTodofukenMei())) {
+            書式.append(都道府県);
+        }
+        if (JushoHenshuKubun.帳票独自.getコード().equals(div.getHdnChohyoDokujiGunMei())) {
+            if (!書式.toRString().isEmpty()) {
+                書式.append(append郡);
             } else {
-                if (帳票独自.equals(div.getHdnChohyoDokujiHensyuHoho())) {
-                    if (!書式.toRString().isEmpty()) {
-                        書式.append(住所);
-                    } else {
-                        書式.append(番地);
-                    }
-                } else if (new RString("2").equals(div.getHdnChohyoDokujiHensyuHoho())) {
-                    if (!書式.toRString().isEmpty()) {
-                        書式.append(行政区);
-                    } else {
-                        書式.append(行政区番地);
-                    }
-                } else if (new RString("3").equals(div.getHdnChohyoDokujiHensyuHoho())) {
-                    if (!書式.toRString().isEmpty()) {
-                        書式.append(住所番地);
-                    } else {
-                        書式.append(住所行政区番地);
-                    }
-                } else if (new RString("4").equals(div.getHdnChohyoDokujiHensyuHoho())) {
-                    if (!書式.toRString().isEmpty()) {
-                        書式.append(番地のみ);
-                    } else {
-                        書式.append(append番地のみ);
-                    }
-                }
+                書式.append(郡);
             }
-        } else {
-            if (帳票独自.equals(div.getHdnChohyoDokujiTodofukenMei())) {
-                書式.append(都道府県);
-            }
-            if (帳票独自.equals(div.getHdnChohyoDokujiGunMei())) {
-                if (!書式.toRString().isEmpty()) {
-                    書式.append(append郡);
-                } else {
-                    書式.append(郡);
-                }
-            }
-            if (帳票独自.equals(div.getHdnChohyoDokujiShichosonMei())) {
-                if (!書式.toRString().isEmpty()) {
-                    書式.append(append市町村);
-                } else {
-                    書式.append(市町村);
-                }
-            }
-            if (帳票独自.equals(div.getHdnChohyoDokujiHensyuHoho())) {
-                if (!書式.toRString().isEmpty()) {
-                    書式.append(append方書);
-                } else {
-                    書式.append(方書);
-                }
-            }
-            if (new RString("5").equals(div.getHdnChohyoDokujiHensyuHoho())) {
-
+        }
+        if (JushoHenshuKubun.帳票独自.getコード().equals(div.getHdnChohyoDokujiShichosonMei())) {
+            if (!書式.toRString().isEmpty()) {
+                書式.append(append市町村);
             } else {
-                if (帳票独自.equals(div.getHdnChohyoDokujiHensyuHoho())) {
-                    if (!書式.toRString().isEmpty()) {
-                        書式.append(住所);
-                    } else {
-                        書式.append(番地);
-                    }
-                } else if (new RString("2").equals(div.getHdnChohyoDokujiHensyuHoho())) {
-                    if (!書式.toRString().isEmpty()) {
-                        書式.append(行政区);
-                    } else {
-                        書式.append(行政区番地);
-                    }
-                } else if (new RString("3").equals(div.getHdnChohyoDokujiHensyuHoho())) {
-                    if (!書式.toRString().isEmpty()) {
-                        書式.append(住所番地);
-                    } else {
-                        書式.append(住所行政区番地);
-                    }
-                } else if (new RString("4").equals(div.getHdnChohyoDokujiHensyuHoho())) {
-                    if (!書式.toRString().isEmpty()) {
-                        書式.append(番地のみ);
-                    } else {
-                        書式.append(append番地のみ);
-                    }
+                書式.append(市町村);
+            }
+        }
+        if (JushoHenshuKubun.帳票独自.getコード().equals(div.getHdnChohyoDokujiKatagaki())) {
+            if (!書式.toRString().isEmpty()) {
+                書式.append(append方書);
+            } else {
+                書式.append(方書);
+            }
+        }
+        if (!町域編集方法.equals(div.getHdnChohyoDokujiHensyuHoho())) {
+            if (JushoHenshuKubun.帳票独自.getコード().equals(div.getHdnChohyoDokujiHensyuHoho())) {
+                if (!書式.toRString().isEmpty()) {
+                    書式.append(住所);
+                } else {
+                    書式.append(番地);
+                }
+            } else if (町域編集方法_2.equals(div.getHdnChohyoDokujiHensyuHoho())) {
+                if (!書式.toRString().isEmpty()) {
+                    書式.append(行政区);
+                } else {
+                    書式.append(行政区番地);
+                }
+            } else if (町域編集方法_3.equals(div.getHdnChohyoDokujiHensyuHoho())) {
+                if (!書式.toRString().isEmpty()) {
+                    書式.append(住所番地);
+                } else {
+                    書式.append(住所行政区番地);
+                }
+            } else if (町域編集方法_4.equals(div.getHdnChohyoDokujiHensyuHoho())) {
+                if (!書式.toRString().isEmpty()) {
+                    書式.append(番地のみ);
+                } else {
+                    書式.append(append番地のみ);
                 }
             }
         }
