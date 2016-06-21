@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShik
 //import jp.co.ndensan.reams.db.dbz.business.hokensha.IKoikiKoseiShichoson;
 //import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.HihokenshaShikakuHakkoDiv.発行証タイプ.被保険者証;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.HihokenshaShikakuHakkoDiv.HakkoshoType.被保険者証;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -92,9 +92,9 @@ public class HihokenshaShikakuHakkoHandler {
 
         div.getTxtKofuDate().setValue(FlexibleDate.getNowDate());
 
-        List<KeyValueDataSource> kofuJiyuList = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).create交付事由List(is直前履歴);
+        List<KeyValueDataSource> kofuJiyuList = HakkoShoTypeBehaviors.createBy(div.getMode_HakkoshoType()).create交付事由List(is直前履歴);
         div.getDdlKofuJiyu().setDataSource(kofuJiyuList);
-        if ((div.getMode_発行証タイプ() == 被保険者証) && is直前履歴) {
+        if ((div.getMode_HakkoshoType() == 被保険者証) && is直前履歴) {
             div.getDdlKofuJiyu().setSelectedKey(KOFUJIYU_CHOKUZEN.getKey());
             div.getDdlKofuJiyu().setReadOnly(true);
         }
@@ -138,7 +138,7 @@ public class HihokenshaShikakuHakkoHandler {
 //        div.getTxtHokensha().setValue(hokenshaHyoji);
 //    }
 //    private void set有効期限(NinteiShinseiKekkaModel 認定申請結果) {
-//        if (div.getMode_発行証タイプ() == 資格者証) {
+//        if (div.getMode_HakkoshoType() == 資格者証) {
 //            FlexibleDate 有効期限 = new HihokenshaShikakuHakko().get有効期限初期値(
 //                    認定申請結果.get要介護認定申請情報モデル().getNinteiShinseiShinseijiKubunCode(),
 //                    認定申請結果.get要介護認定申請情報モデル().getNinteiShinseiYMD(),
@@ -228,7 +228,7 @@ public class HihokenshaShikakuHakkoHandler {
     //}
 /*    private void set審査会意見(NinteiShinseiKekkaModel 認定申請結果) {
 
-     int 最大長 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).get審査会意見最大長();
+     int 最大長 = HakkoShoTypeBehaviors.createBy(div.getMode_HakkoshoType()).get審査会意見最大長();
      List<IKaigoService> serviceList = new ArrayList<>();
      IKaigoServiceManager manager = KaigoServiceManagerFactory.createInstance();
      FlexibleYearMonth ServiceYM = 認定申請結果.get要介護認定結果情報モデル().getNijiHanteiYMD().getYearMonth();
@@ -297,7 +297,7 @@ public class HihokenshaShikakuHakkoHandler {
 //        List<KyufuSeigenShutsuryoku> 給付制限 = new ArrayList<>();
 //        List<KyufuSeigenShutsuryoku> 優先的 = new ArrayList<>();
 //        List<KyufuSeigenShutsuryoku> 優先外 = new ArrayList<>();
-//        IHakkoShoTypeBehavior behaviorByMode = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ());
+//        IHakkoShoTypeBehavior behaviorByMode = HakkoShoTypeBehaviors.createBy(div.getMode_HakkoshoType());
 //        ShiharaiHohoHenkoManager manager = new ShiharaiHohoHenkoManager();
 //        ShiharaiHohoHenkoShuryobunKisaiKubun 支払方法終了分記載区分 = behaviorByMode.load支払方法終了分記載区分();
 //        RString 支払方法記載文言 = behaviorByMode.load支払方法記載文言();
@@ -339,8 +339,8 @@ public class HihokenshaShikakuHakkoHandler {
 //    private List<KyufuSeigenShutsuryoku> create２号被保険者給付制限(
 //            HihokenshaNo 被保険者番号) {
 //        List<KyufuSeigenShutsuryoku> 給付制限 = new ArrayList<>();
-//        ShiharaiHohoHenkoShuryobunKisaiKubun 差止終了分記載区分 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).load差止終了分記載区分();
-//        RString 差止記載文言 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).load差止記載文言();
+//        ShiharaiHohoHenkoShuryobunKisaiKubun 差止終了分記載区分 = HakkoShoTypeBehaviors.createBy(div.getMode_HakkoshoType()).load差止終了分記載区分();
+//        RString 差止記載文言 = HakkoShoTypeBehaviors.createBy(div.getMode_HakkoshoType()).load差止記載文言();
     //       IItemList<ShiharaiHohoHenkoModel> history = new ShiharaiHohoHenkoManager().get2号差止履歴(被保険者番号);
 //
 //        if (差止終了分記載区分 == ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する) {
@@ -482,7 +482,7 @@ public class HihokenshaShikakuHakkoHandler {
 //                        }
 //                    }
 //
-//                    支援事業者名称 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).load支援事業者名称(計画事業者名称, 委託先事業者名称);
+//                    支援事業者名称 = HakkoShoTypeBehaviors.createBy(div.getMode_HakkoshoType()).load支援事業者名称(計画事業者名称, 委託先事業者名称);
 //    適用開始日  = model.get居宅給付計画事業者作成モデル().get().getTekiyoKaishiYMD();
 //    適用終了日  = model.get居宅給付計画事業者作成モデル().get().getTekiyoShuryoYMD();
 //}

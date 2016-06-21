@@ -533,10 +533,9 @@ public class ShikakuHenkoRirekiHandler {
             return false;
         }
         LasdecCode sochimotoShichosonCode = targetModel.getKoikinaiTokureiSochimotoShichosonCode();
-        if (sochimotoShichosonCode != null) {
-            if (!sochimotoShichosonCode.value().equals((shikakuHenkoRirekiDiv.getDdlHenkoSochimotoHokensha().getSelectedKey()))) {
+        if (sochimotoShichosonCode != null && !sochimotoShichosonCode.value().equals((shikakuHenkoRirekiDiv.getDdlHenkoSochimotoHokensha().getSelectedKey()))) {
                 return false;
-            }
+            
         }
 
         return !Objects.equal(targetModel.getKyuShichosonCode(), (new LasdecCode(shikakuHenkoRirekiDiv.getDdlHenkoKyuHokensha().getSelectedKey())));
