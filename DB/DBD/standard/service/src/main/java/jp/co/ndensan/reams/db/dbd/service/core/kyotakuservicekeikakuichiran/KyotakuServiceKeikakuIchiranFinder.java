@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.KeikakuIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.KyotakuServiceKeikakuIchiranEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.ServiceShuruiCodeEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.ShuruiGendoKakuEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.kyotakuservicekeikakuichiran.IKyotakuServiceKeikakuIchiranMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity;
@@ -22,7 +23,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbV4001JukyushaDaichoAliveDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -34,9 +34,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class KyotakuServiceKeikakuIchiranFinder {
 
     private final MapperProvider mapperProvider;
-    private static final int INDEX_2 = 2;
-    private static final int INDEX_4 = 4;
-    private static final RString 空白KEY = new RString("-1");
 
     /**
      * コンストラクタです。
@@ -178,5 +175,28 @@ public class KyotakuServiceKeikakuIchiranFinder {
                 履歴番号);
 
         return 居宅サービス明細情報;
+    }
+
+    /**
+     * 種類限度額一覧を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年月 HihokenshaNo
+     * @param 履歴番号 int
+     * @return List<ShuruiGendoKakuEntity>
+     */
+    @Transaction
+    public List<ShuruiGendoKakuEntity> 種類限度額一覧の取得(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth 対象年月,
+            int 履歴番号) {
+
+        IKyotakuServiceKeikakuIchiranMapper mapper = mapperProvider.create(IKyotakuServiceKeikakuIchiranMapper.class);
+        List<ShuruiGendoKakuEntity> 種類限度額一覧List = mapper.get種類限度額一覧(
+                被保険者番号,
+                対象年月,
+                履歴番号);
+
+        return 種類限度額一覧List;
     }
 }

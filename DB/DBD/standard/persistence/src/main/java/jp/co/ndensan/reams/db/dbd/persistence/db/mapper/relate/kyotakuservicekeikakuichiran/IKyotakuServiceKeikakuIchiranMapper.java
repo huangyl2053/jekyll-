@@ -10,7 +10,10 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.KeikakuIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.KyotakuServiceKeikakuIchiranEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.ServiceShuruiCodeEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.ShuruiGendoKakuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 共有子Div「居宅計画」のMapperです。
@@ -50,4 +53,17 @@ public interface IKyotakuServiceKeikakuIchiranMapper {
      * @return List<JikoSakuseiKeikakuJohoEntity>
      */
     List<JikoSakuseiKeikakuJohoEntity> get自己作成計画情報(HihokenshaNo 被保険者番号);
+
+    /**
+     * 種類限度額一覧を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年月 FlexibleYearMonth
+     * @param 履歴番号 int
+     * @return List<ShuruiGendoKakuEntity>
+     */
+    List<ShuruiGendoKakuEntity> get種類限度額一覧(
+            @Param("被保険者番号") HihokenshaNo 被保険者番号,
+            @Param("対象年月") FlexibleYearMonth 対象年月,
+            @Param("履歴番号") int 履歴番号);
 }
