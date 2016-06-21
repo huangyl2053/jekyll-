@@ -19,10 +19,10 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -36,11 +36,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
     private static final RString 所得情報ファイル = new RString("BBKAIGOxxxxxxxx.CSV");
     private static final RString 共有ファイル名 = new RString("ShotokuJohoChushutsuTanitsuTasha");
     private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegisterTanitsuTasha");
-    private static final RString 所得情報抽出_連携当初 = new RString("DBBMN51009");
-    private static final RString 所得情報抽出_連携異動 = new RString("DBBMN51010");
     private static final ReportId 帳票ID = new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran");
-    private static final ReportId バッチID_当初単一市町村連携 = new ReportId("DBB1120001_ToushoShotokuJohoChushutsuRenkeiTanitsu");
-    private static final ReportId バッチID_異動単一市町村連携 = new ReportId("DBB1120003_ShotokuJohoChushutsuRenkeiTanitsu");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -52,9 +48,10 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv> onLoad(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div, FileData[] files) {
+        RDate currentTime = RDate.getNowDate();
         ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler handler = getHandler(div);
-        handler.initCheck();
-        handler.initTorikoShori(files);
+        handler.initCheck(currentTime);
+        handler.initTorikoShori(files, currentTime);
         div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtShoriNendoTanitsuTasha().setDisabled(true);
         div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().setDisabled(true);
         div.getShotokuJohoChushutsuTanitsuTashaPanel().getToriKomiTaisho().getUplUpload().setDisabled(false);
@@ -135,14 +132,6 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div) {
         ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler handler = getHandler(div);
         ShotokuJohoTyushutuRenkeiTanituParameter parameter = handler.getBatchParamter();
-        RString メニューID = ResponseHolder.getMenuID();
-        if (所得情報抽出_連携当初.equals(メニューID)) {
-            div.getShotokuJohoChushutsuTanitsuTashaPanel().getCcdChohyoShutsuryokujunTanitsuTasha()
-                    .load(SubGyomuCode.DBB介護賦課, バッチID_当初単一市町村連携);
-        } else if (所得情報抽出_連携異動.equals(メニューID)) {
-            div.getShotokuJohoChushutsuTanitsuTashaPanel().getCcdChohyoShutsuryokujunTanitsuTasha()
-                    .load(SubGyomuCode.DBB介護賦課, バッチID_異動単一市町村連携);
-        }
         return ResponseData.of(parameter).respond();
     }
 
