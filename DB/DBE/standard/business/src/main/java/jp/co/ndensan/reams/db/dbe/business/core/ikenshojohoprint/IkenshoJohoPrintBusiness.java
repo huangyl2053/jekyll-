@@ -29,6 +29,7 @@ public class IkenshoJohoPrintBusiness {
 
     private int indexTmp;
     private int index;
+    private ShijiiIkenshoIraiHenko shijiiIkenshoIraiHenko;
 
     /**
      * 主治医意見書依頼未処理者一覧情報を設定します。
@@ -65,7 +66,6 @@ public class IkenshoJohoPrintBusiness {
      * @return ShijiiIkenshoIraiHenko
      */
     public ShijiiIkenshoIraiHenko toShijiiIkenshoIraiHenko(IkenshoJohoPrintRelateEntity before, IkenshoJohoPrintRelateEntity entity, int count) {
-        ShijiiIkenshoIraiHenko shijiiIkenshoIraiHenko = new ShijiiIkenshoIraiHenko();
         if (before == null) {
             return null;
         }
@@ -73,6 +73,7 @@ public class IkenshoJohoPrintBusiness {
         if (before.getShinseishoKanriNo().equals(entity.getShinseishoKanriNo())) {
             if (entity.getIkenshoIraiRirekiNo() > 2) {
                 indexTmp++;
+                shijiiIkenshoIraiHenko = new ShijiiIkenshoIraiHenko();
                 shijiiIkenshoIraiHenko.set保険者番号(entity.getShoKisaiHokenshaNo());
                 shijiiIkenshoIraiHenko.set保険者名(entity.getShichosonMeisho());
                 shijiiIkenshoIraiHenko.set氏名(entity.getHihokenshaName());
@@ -89,12 +90,15 @@ public class IkenshoJohoPrintBusiness {
                 shijiiIkenshoIraiHenko.set変更後主治医(entity.getShujiiName());
                 shijiiIkenshoIraiHenko.set変更日(entity.getIkenshoSakuseiIraiYMD());
             }
-            if (index == count) {
+            if (index == count && indexTmp > 0) {
+                indexTmp = 0;
                 return shijiiIkenshoIraiHenko;
             }
         } else {
-            indexTmp = 0;
-            return shijiiIkenshoIraiHenko;
+            if (indexTmp > 0) {
+                indexTmp = 0;
+                return shijiiIkenshoIraiHenko;
+            }
         }
         return null;
     }
