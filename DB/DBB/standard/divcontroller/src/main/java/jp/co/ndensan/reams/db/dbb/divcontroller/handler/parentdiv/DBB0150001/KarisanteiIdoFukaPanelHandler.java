@@ -329,6 +329,7 @@ public class KarisanteiIdoFukaPanelHandler {
         }
         div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getDdlNotsuShuturyokuki()
                 .setDataSource(dataSource);
+        div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getDdlNotsuShuturyokuki().setSelectedIndex(NUM_0);
         set納入通知書の発行日();
     }
 
@@ -336,7 +337,6 @@ public class KarisanteiIdoFukaPanelHandler {
 
         List<ChohyoMeter> 各通知書の帳票ID = get各通知書の帳票ID();
         FuchoKiUtil util = new FuchoKiUtil();
-        // TODO 算定期
         KitsukiList 期月リスト = util.get期月リスト();
         RString 処理対象月 = div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getDdlShorigetsu().getSelectedKey();
         RString 算定期 = new RString(期月リスト.get月の期(Tsuki.toValue(処理対象月)).get期AsInt());
