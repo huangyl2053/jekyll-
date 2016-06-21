@@ -79,7 +79,12 @@ public class JimukyokuyoYobihanteiKinyuhyoEditor implements IJimukyokuyoYobihant
             source.listTaishoshaIchiran_5 = YokaigoJotaiKubun09.toValue(item.get前回二次判定()).get名称();
         }
 
-        source.listTaishoshaIchiran_6 = item.get前回認定有効期間().concat(new RString("ヵ月"));
+        if (item.get前回認定有効期間() == null) {
+            source.listTaishoshaIchiran_6 = RString.EMPTY;
+        } else {
+            source.listTaishoshaIchiran_6 = item.get前回認定有効期間().concat(new RString("ヵ月"));
+
+        }
         source.listTaishoshaIchiran_7 = IchijiHanteiKekkaCode09.toValue(item.get一次判定()).get名称();
         source.listTaishoshaIchiran_8 = RString.EMPTY;
         source.listTaishoshaIchiran_9 = RString.EMPTY;
