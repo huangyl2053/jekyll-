@@ -472,9 +472,7 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
                 更新前データ.get集計単位(),
                 縦番号,
                 横番号);
-        if (件数 == null) {
-            画面データ = 画面データ.createBuilderForEdit().set集計結果値(Decimal.ZERO).build();
-        } else {
+        if (件数 != null) {
             画面データ = 画面データ.createBuilderForEdit().set集計結果値(件数).build();
         }
         return 画面データ;
