@@ -306,8 +306,10 @@ public class ShokanbarayiKeteiInfoPanelHandler {
 
     /**
      * 登録Save
+     *
+     * @param 支払金額合計初期 Decimal
      */
-    public void 登録Save() {
+    public void 登録Save(Decimal 支払金額合計初期) {
         ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
                 ShoukanharaihishinseikensakuParameter.class);
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
@@ -319,8 +321,8 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 .getShokanbaraiketteiJohoDiv().getRdoShikyukubun().getSelectedKey();
         Decimal 支払金額合計 = div.getCcdShokanbaraiketteiJoho()
                 .getShokanbaraiketteiJohoDiv().getTxtShiharaikingakugoke().getValue();
-        int 差額金額 = div.getCcdShokanbaraiketteiJoho()
-                .getShokanbaraiketteiJohoDiv().getTxtSagakuGoke().getValue().intValue();
+        Decimal 差額金額 = div.getCcdShokanbaraiketteiJoho()
+                .getShokanbaraiketteiJohoDiv().getTxtSagakuGoke().getValue();
         RString 増減理由等 = div.getCcdShokanbaraiketteiJoho()
                 .getShokanbaraiketteiJohoDiv().getTxtZogenriyu().getValue();
         RString 不支給理由等1 = div.getCcdShokanbaraiketteiJoho()
@@ -358,6 +360,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                     整理番号,
                     決定年月日,
                     支給区分,
+                    支払金額合計初期,
                     支払金額合計,
                     差額金額,
                     増減理由等,
