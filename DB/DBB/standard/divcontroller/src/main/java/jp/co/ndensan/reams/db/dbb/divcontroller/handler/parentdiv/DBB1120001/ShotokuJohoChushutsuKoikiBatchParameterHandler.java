@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeik
 import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJohoResult;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.ShotokuJohoChushutsuKoikiBatchParameterDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.ShotokuJohoChushutsuKoikiPanelDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.dgShichosonIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -22,9 +24,13 @@ import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurity
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -47,6 +53,8 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
     private static final RString 所得引出 = new RString("所得引出");
     private static final RString 広域職員でないため = new RString("広域職員でないため");
     private static final RString なし = new RString("0");
+    private static final RString 処理待ち = new RString("処理待ち");
+    private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegisterKoiki");
 
     /**
      * コンストラクタです。
@@ -83,9 +91,9 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
         }
 
         RString メニューID = ResponseHolder.getMenuID();
-        RString config = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, currentTime, SubGyomuCode.DBB介護賦課);
-        RString config2 = DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, currentTime, SubGyomuCode.DBB介護賦課);
-        if (所得情報抽出_連携異動.equals(メニューID) && !config.equals(config2)) {
+        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, currentTime, SubGyomuCode.DBB介護賦課);
+        RString 所得年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, currentTime, SubGyomuCode.DBB介護賦課);
+        if (所得情報抽出_連携異動.equals(メニューID) && !調定年度.equals(所得年度)) {
             throw new ApplicationException(DbbErrorMessages.処理不可_関連機能未処理済.getMessage().replace(当初所得引出.toString())
                     .replace(所得引出.toString()).evaluate());
         }
@@ -112,6 +120,40 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
                         .replace(当初所得引出.toString()).evaluate());
             }
         }
+        ShotokuJohoChushutsuKoikiPanelDiv koikiPanelDiv = div.getShotokuJohoChushutsuKoikiPanel();
+        List<dgShichosonIchiran_Row> rowList = new ArrayList<>();
+        for (ShichosonJohoResult result : shichosonJohoList) {
+            dgShichosonIchiran_Row row = new dgShichosonIchiran_Row();
+            if (result.getEntity().get市町村コード() != null) {
+                row.getTxtCityCode().setValue(result.getEntity().get市町村コード().value());
+            }
+            if (result.getEntity().get市町村名() != null) {
+                row.getTxtCityName().setValue(result.getEntity().get市町村名());
+            }
+            YMDHMS 基準日時 = result.getEntity().get処理日時();
+            RString 年月日 = 基準日時.getRDateTime().getDate().wareki().toDateString();
+            RString 時刻 = 基準日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);
+            if (result.getEntity().get処理日時() != null) {
+                row.getTxtSaishinShoriNitiji().setValue(年月日.concat(時刻));
+            }
+            RString 処理状態 = result.getEntity().get表示用処理状態();
+            if (処理状態 != null) {
+                row.getTxtShoriState().setValue(処理状態);
+                if (処理待ち.equals(処理状態)) {
+                    row.setSelectable(true);
+                } else {
+                    row.setSelectable(false);
+                }
+            }
+            rowList.add(row);
+        }
+        DataGrid<dgShichosonIchiran_Row> grid = koikiPanelDiv.getDgShichosonIchiran();
+        grid.setDataSource(rowList);
+        if (grid.getSelectedItems().isEmpty()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, false);
+        }
     }
 
     /**
@@ -134,7 +176,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
      * @return ShotokuJohoTyushutuRenkeiKoikiParameter 所得情報抽出・連携_バッチパラメータクラスです
      */
     public ShotokuJohoTyushutuRenkeiKoikiParameter getBatchParamter() {
-        // to-do
+        // TODO:バッチが実装でいます
         ShotokuJohoTyushutuRenkeiKoikiParameter batchparam = new ShotokuJohoTyushutuRenkeiKoikiParameter();
         batchparam.set共有ファイルID(null);
         batchparam.set共有ファイル名(null);
