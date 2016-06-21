@@ -40,7 +40,7 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onClick_btnTsuika(
             KogakuKyufuTaishoListDiv div) {
-        getHandler(div).高額明細合計データ編集非活性(false);
+        getHandler(div).画面制御(false);
         getHandler(div).clear高額明細合計データ編集エリア();
         ViewStateHolder.put(ViewStateKeys.処理モード, 追加);
         return createResponse(div);
@@ -54,9 +54,9 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onClick_modify(
             KogakuKyufuTaishoListDiv div) {
-        getHandler(div).高額明細合計データ編集非活性(false);
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         getHandler(div).set高額明細合計データ編集エリア(サービス提供年月);
+        getHandler(div).画面制御(false);
         getHandler(div).修正制御(サービス提供年月);
         ViewStateHolder.put(ViewStateKeys.処理モード, 修正);
         return createResponse(div);
@@ -72,6 +72,7 @@ public class KogakuKyufuTaishoList {
             KogakuKyufuTaishoListDiv div) {
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         getHandler(div).set高額明細合計データ編集エリア(サービス提供年月);
+        getHandler(div).画面制御(true);
         getHandler(div).削除制御();
         ViewStateHolder.put(ViewStateKeys.処理モード, 削除);
         return createResponse(div);
@@ -141,8 +142,7 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onClick_btnTorikeshi(
             KogakuKyufuTaishoListDiv div) {
-        getHandler(div).高額明細合計データ編集非活性(true);
-        getHandler(div).clear高額明細合計データ編集エリア();
+        getHandler(div).画面制御(true);
         return createResponse(div);
     }
 
@@ -162,7 +162,6 @@ public class KogakuKyufuTaishoList {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        getHandler(div).高額明細合計データ編集非活性(false);
         dgTaishoshaIchiran_Row row;
         if (追加.equals(モード)) {
             row = new dgTaishoshaIchiran_Row();
@@ -185,8 +184,7 @@ public class KogakuKyufuTaishoList {
                 || new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()))
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            RString state = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-            getHandler(div).modifyRow(row, state);
+            getHandler(div).modifyRow(row, モード);
         }
         return createResponse(div);
     }
