@@ -20,7 +20,7 @@ import lombok.Getter;
 public class HanteiKekkaJohoShuturyokuMybatisParameter implements IMyBatisParameter {
 
     private final RString hakkouTyouhyou;
-    private final RString kaisaiBangou;
+    private final List<RString> kaisaiBangou;
     private final List<RString> shoriJotaiKubun;
     private final RString shoKisaiHokenshaNo;
     private final boolean isShoKisaiHokenshaNoFlag;
@@ -36,7 +36,7 @@ public class HanteiKekkaJohoShuturyokuMybatisParameter implements IMyBatisParame
      */
     protected HanteiKekkaJohoShuturyokuMybatisParameter(
             RString hakkouTyouhyou,
-            RString kaisaiBangou,
+            List<RString> kaisaiBangou,
             List<RString> shoriJotaiKubun,
             RString shoKisaiHokenshaNo,
             boolean isShoKisaiHokenshaNoFlag) {
@@ -58,7 +58,7 @@ public class HanteiKekkaJohoShuturyokuMybatisParameter implements IMyBatisParame
      */
     public static HanteiKekkaJohoShuturyokuMybatisParameter creatParameter(
             RString hakkouTyouhyou,
-            RString kaisaiBangou,
+            List<RString> kaisaiBangou,
             List<RString> shoriJotaiKubun,
             RString shoKisaiHokenshaNo) {
         boolean isShoKisaiHokenshaNoFlag = false;

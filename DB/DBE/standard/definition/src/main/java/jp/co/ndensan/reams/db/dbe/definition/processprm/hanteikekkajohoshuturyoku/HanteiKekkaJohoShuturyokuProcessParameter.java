@@ -23,7 +23,7 @@ import lombok.Setter;
 public class HanteiKekkaJohoShuturyokuProcessParameter implements IBatchProcessParameter {
 
     private RString hakkouTyouhyou;
-    private RString kaisaiBangou;
+    private List<RString> kaisaiBangou;
     private List<RString> shoriJotaiKubun;
     private RString shoKisaiHokenshaNo;
 
@@ -35,7 +35,7 @@ public class HanteiKekkaJohoShuturyokuProcessParameter implements IBatchProcessP
      */
     public HanteiKekkaJohoShuturyokuProcessParameter(
             RString hakkouTyouhyou,
-            RString kaisaiBangou) {
+            List<RString> kaisaiBangou) {
         this.hakkouTyouhyou = hakkouTyouhyou;
         this.kaisaiBangou = kaisaiBangou;
     }
