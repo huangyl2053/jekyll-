@@ -84,7 +84,7 @@ public final class TokuchoDoteiShoriHandler {
     private Entry<RString, Boolean> do初期値取得() {
         ShichosonSecurityJoho joho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         RString 保険者モード = モード_単一保険者;
-        boolean can実行 = true;
+        boolean can実行 = false;
         if (null != joho && null != joho.get導入形態コード()) {
             RString 導入形態コード = joho.get導入形態コード().getColumnValue();
             if (導入形態コード.equals(導入形態コード_112) || 導入形態コード.equals(導入形態コード_120)) {
@@ -105,7 +105,7 @@ public final class TokuchoDoteiShoriHandler {
             for (ShoriDateKanriResult 特徴対象者同定情報 : 特徴対象者同定情報リスト) {
                 if (null == 特徴対象者同定情報.get基準年月日()
                         || FlexibleDate.EMPTY.equals(特徴対象者同定情報.get基準年月日())) {
-                    can実行 = false;
+                    can実行 = true;
                     break;
                 }
             }
