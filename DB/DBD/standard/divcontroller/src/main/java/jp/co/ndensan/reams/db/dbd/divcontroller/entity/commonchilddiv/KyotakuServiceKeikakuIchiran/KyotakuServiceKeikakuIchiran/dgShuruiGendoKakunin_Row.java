@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.KyotakuSe
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 17 14:44:28 CST 2016 
+ * Tue Jun 21 20:01:56 CST 2016 
  */
 
 

@@ -28,12 +28,32 @@ module DBD {
                 return "onClick_btnKyotakuService";
             }
 
+            public static onClickClose_keikakuIraiUketsuke(): string {
+                return "onClickClose_keikakuIraiUketsuke";
+            }
+
+            public static onClickClose_jikosakuseiKeikaku(): string {
+                return "onClickClose_jikosakuseiKeikaku";
+            }
+
             public static onClick_btnShuruiGendoGakuKakunin(): string {
                 return "onClick_btnShuruiGendoGakuKakunin";
             }
 
             public static onSelect_dgKyotakuService(): string {
                 return "onSelect_dgKyotakuService";
+            }
+
+            public static onClickClose_kyotakuServiceJoho(): string {
+                return "onClickClose_kyotakuServiceJoho";
+            }
+
+            public static onClickClose_kyotakuServiceMeisai(): string {
+                return "onClickClose_kyotakuServiceMeisai";
+            }
+
+            public static onClickClose_shuruiGendoGakuKakunin(): string {
+                return "onClickClose_shuruiGendoGakuKakunin";
             }
 
         }

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.jyuryoitakuatukaijigyoshatorokutsuchisho;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hokenjuryoininharaitoriatsukai.HokenJuryoIninHaraiToriatsukaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.jyuryoitakuatukaijigyoshatorokutsuchishosource.JyuryoItakuAtukaiJigyoshaTorokuTsuchishoSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -21,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoReport extends Report<JyuryoItakuAtukaiJigyoshaTorokuTsuchishoSource> {
 
-    private final List<HokenJuryoIninHaraiToriatsukaiEntity> targets;
+    private final HokenJuryoIninHaraiToriatsukaiEntity target;
     private final NinshoshaSource sourceBuilder;
     private final ToiawasesakiSource toiawasesakiSource;
     private final RString 文書番号;
@@ -31,7 +30,7 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoReport extends Report<Jyury
     /**
      * インスタンスを生成します。
      *
-     * @param targets List<HokenJuryoIninHaraiToriatsukaiEntity>
+     * @param target HokenJuryoIninHaraiToriatsukaiEntity
      * @param sourceBuilder NinshoshaSource
      * @param toiawasesakiSource ToiawasesakiSource
      * @param 文書番号 RString
@@ -39,13 +38,13 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoReport extends Report<Jyury
      * @param 通知書定型文2 RString
      */
     public JyuryoItakuAtukaiJigyoshaTorokuTsuchishoReport(
-            List<HokenJuryoIninHaraiToriatsukaiEntity> targets,
+            HokenJuryoIninHaraiToriatsukaiEntity target,
             NinshoshaSource sourceBuilder,
             ToiawasesakiSource toiawasesakiSource,
             RString 文書番号,
             RString 通知書定型文１,
             RString 通知書定型文2) {
-        this.targets = targets;
+        this.target = target;
         this.sourceBuilder = sourceBuilder;
         this.toiawasesakiSource = toiawasesakiSource;
         this.文書番号 = 文書番号;
@@ -55,13 +54,11 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoReport extends Report<Jyury
 
     @Override
     public void writeBy(ReportSourceWriter<JyuryoItakuAtukaiJigyoshaTorokuTsuchishoSource> reportSourceWriter) {
-        for (HokenJuryoIninHaraiToriatsukaiEntity target : this.targets) {
-            IJyuryoItakuAtukaiJigyoshaTorokuTsuchishoEditor editor
-                    = new JyuryoItakuAtukaiJigyoshaTorokuTsuchishoEditor(target, sourceBuilder, toiawasesakiSource,
-                            文書番号, 通知書定型文１, 通知書定型文2);
-            IJyuryoItakuAtukaiJigyoshaTorokuTsuchishoBuilder builder
-                    = new JyuryoItakuAtukaiJigyoshaTorokuTsuchishoBuilder(editor);
-            reportSourceWriter.writeLine(builder);
-        }
+        IJyuryoItakuAtukaiJigyoshaTorokuTsuchishoEditor editor
+                = new JyuryoItakuAtukaiJigyoshaTorokuTsuchishoEditor(target, sourceBuilder, toiawasesakiSource,
+                        文書番号, 通知書定型文１, 通知書定型文2);
+        IJyuryoItakuAtukaiJigyoshaTorokuTsuchishoBuilder builder
+                = new JyuryoItakuAtukaiJigyoshaTorokuTsuchishoBuilder(editor);
+        reportSourceWriter.writeLine(builder);
     }
 }

@@ -106,6 +106,66 @@ public class KyotakuServiceKeikakuIchiran {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 計画依頼受付情報「閉じる」ボタンをクリンクするです。
+     *
+     * @param div コントロールdiv
+     * @return スポンスデータ
+     */
+    public ResponseData<KyotakuServiceKeikakuIchiranDiv> onClickClose_keikakuIraiUketsuke(KyotakuServiceKeikakuIchiranDiv div) {
+
+        getHandler(div).to状態１();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 自己作成計画情報「閉じる」ボタンをクリンクするです。
+     *
+     * @param div コントロールdiv
+     * @return スポンスデータ
+     */
+    public ResponseData<KyotakuServiceKeikakuIchiranDiv> onClickClose_jikosakuseiKeikaku(KyotakuServiceKeikakuIchiranDiv div) {
+
+        getHandler(div).to状態１();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 居宅サービス明細「閉じる」ボタンをクリンクするです。
+     *
+     * @param div コントロールdiv
+     * @return スポンスデータ
+     */
+    public ResponseData<KyotakuServiceKeikakuIchiranDiv> onClickClose_kyotakuServiceMeisai(KyotakuServiceKeikakuIchiranDiv div) {
+
+        getHandler(div).to状態４();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 種類限度確認「閉じる」ボタンをクリンクするです。
+     *
+     * @param div コントロールdiv
+     * @return スポンスデータ
+     */
+    public ResponseData<KyotakuServiceKeikakuIchiranDiv> onClickClose_shuruiGendoGakuKakunin(KyotakuServiceKeikakuIchiranDiv div) {
+
+        getHandler(div).to状態４();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 居宅サービス情報「閉じる」ボタンをクリンクするです。
+     *
+     * @param div コントロールdiv
+     * @return スポンスデータ
+     */
+    public ResponseData<KyotakuServiceKeikakuIchiranDiv> onClickClose_kyotakuServiceJoho(KyotakuServiceKeikakuIchiranDiv div) {
+
+        getHandler(div).to状態１();
+        return ResponseData.of(div).respond();
+    }
+
     private KyotakuServiceKeikakuIchiranHandler getHandler(KyotakuServiceKeikakuIchiranDiv div) {
         return new KyotakuServiceKeikakuIchiranHandler(div);
     }

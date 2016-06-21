@@ -30,6 +30,12 @@
         <include refid="selectJikoSakuseiKeikakuJohoEntity" />
     </select>
 
+    <select id="get種類限度額一覧"
+            resultMap="resultMap_ShuruiGendoKakuEntity" fetchSize="500"
+            resultOrdered="true">
+        <include refid="selectShuruiGendoKakuEntity" />
+    </select>
+
     <resultMap id="resultMap_KyotakuServiceKeikakuIchiranEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.KyotakuServiceKeikakuIchiranEntity" autoMapping="true">
         <result property="対象年月" column="taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="作成区分コード" column="sakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -70,6 +76,13 @@
         <result property="適用開始年月日" column="tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="適用終了年月日" column="tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="暫定区分" column="zanteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <resultMap id="resultMap_ShuruiGendoKakuEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.ShuruiGendoKakuEntity" autoMapping="true">
+        <result property="サービス種類" column="サービス種類" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="支給限度単位数" column="支給限度単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="種類限度内単位数" column="種類限度内単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="限度超過単位数" column="限度超過単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
 
     <sql id="selectKyotakuServiceKeikakuIchiranEntity">
@@ -229,6 +242,23 @@
         AND A."taishoYM" = B."taishoYM"
         WHERE
         A."hihokenshaNo" = #{被保険者番号}
+    </sql>
+
+    <sql id="selectShuruiGendoKakuEntity">
+        SELECT
+        A."serviceShuruiCode" AS サービス種類,
+        A."shikyuGendoTaniSu" AS 支給限度単位数,
+        B."shuruiGendoNaiTaniSu_Nissu" AS 種類限度内単位数,
+        (A."shikyuGendoTaniSu"-B."shuruiGendoNaiTaniSu_Nissu") AS 限度超過単位数
+        FROM
+        rgdb."DbT7111ServiceShuruiShikyuGendoGaku" AS A
+        INNER JOIN
+        rgdb."DbT3008KyotakuKeikakuJikosakuseiMeisai" AS B
+        ON A."serviceShuruiCode" = B."serviceShuruiCode"
+        WHERE
+        B."hihokenshaNo" = #{被保険者番号}
+        AND B."taishoYM" = #{対象年月}
+        AND B."rirekiNo" = #{履歴番号}
     </sql>
 
 </mapper>

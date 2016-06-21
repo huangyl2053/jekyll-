@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.report.kaigohokenjuryoininharaitoriat
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.hokenjuryoininharaitoriatsukai.HokenJuryoIninHaraiToriatsukaiResult;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.hokenjuryoininharaitoriatsukai.HokenJuryoIninHaraiToriatsukaiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3077JuryoininKeiyakuJigyoshaDac;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -63,7 +64,8 @@ public class KaigoHokenJuryoIninHaraiToriatsukaiJigyosha {
     public HokenJuryoIninHaraiToriatsukaiResult setHokenJuryoIninHaraiToriatsukai(
             JuryoininKeiyakuJigyosha param) {
         CustomerBarCode code = new CustomerBarCode();
-        HokenJuryoIninHaraiToriatsukaiResult sukaiEntity = new HokenJuryoIninHaraiToriatsukaiResult();
+        HokenJuryoIninHaraiToriatsukaiResult result = new HokenJuryoIninHaraiToriatsukaiResult();
+        HokenJuryoIninHaraiToriatsukaiEntity sukaiEntity = new HokenJuryoIninHaraiToriatsukaiEntity();
         if (param != null) {
             YubinNo 送付先郵便番号 = param.get送付先郵便番号();
             AtenaJusho 送付先住所 = param.get送付先住所();
@@ -83,7 +85,8 @@ public class KaigoHokenJuryoIninHaraiToriatsukaiJigyosha {
             sukaiEntity.set契約終了年月日(param.get終了年月日());
             sukaiEntity.set契約種類(param.get契約種類());
         }
-        return sukaiEntity;
+        result.setEntity(sukaiEntity);
+        return result;
     }
 
     /**
