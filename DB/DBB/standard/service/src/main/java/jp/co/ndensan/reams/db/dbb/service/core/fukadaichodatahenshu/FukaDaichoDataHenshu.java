@@ -848,7 +848,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         if (本人個人 != null) {
             本人.set本人生年月日(本人個人.get生年月日For帳票());
         }
-        if (境界層当該者情報 != null) {
+        if (境界層当該者情報 != null && 前後区分) {
             本人.set本人限界層該当開始年月日(get年月日(境界層当該者情報.getTekiyoKaishiYMD()));
             本人.set本人限界層該当終了年月日(get年月日(境界層当該者情報.getTekiyoShuryoYMD()));
         }
