@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 特徴未同定情報のデータアクセスクラスです。
  *
- * @reamsid_L DBB-1850-050 zhangrui
+ * @reamsid_L DBB-9999-012 zhangrui
  */
 public class DbT2019TokuchoMidoteiJohoDac implements ISaveable<DbT2019TokuchoMidoteiJohoEntity> {
 

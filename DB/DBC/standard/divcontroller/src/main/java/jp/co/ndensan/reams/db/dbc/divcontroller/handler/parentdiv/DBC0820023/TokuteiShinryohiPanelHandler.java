@@ -328,40 +328,42 @@ public class TokuteiShinryohiPanelHandler {
      */
     public void set特定診療費一覧グリッド(List<ShokanTokuteiShinryohi> shokanTokuteiShinryohiList) {
         List<ddgToteishinryoTokubetushinryo_Row> dataSource = new ArrayList<>();
-        for (ShokanTokuteiShinryohi entity : shokanTokuteiShinryohiList) {
-            ddgToteishinryoTokubetushinryo_Row row = new ddgToteishinryoTokubetushinryo_Row();
-            row.setShobyouName(entity.get傷病名());
-            row.getShidouKanri().setValue(new Decimal(entity.get指導管理料等単位数()));
-            row.getRihabiri().setValue(new Decimal(entity.getリハビリテーション単位数()));
-            row.getSeishinka().setValue(new Decimal(entity.get精神科専門療法単位数()));
-            row.getEkusuLine().setValue(new Decimal(entity.get単純エックス線単位数()));
-            row.getSochi().setValue(new Decimal(entity.get措置単位数()));
-            row.getTejyutsu().setValue(new Decimal(entity.get手術単位数()));
-            row.getGoukeyiTanyi().setValue(new Decimal(entity.get合計単位数()));
-            RStringBuilder builder = new RStringBuilder();
-            builder.append(entity.get摘要１());
-            builder.append(entity.get摘要２());
-            builder.append(entity.get摘要３());
-            builder.append(entity.get摘要４());
-            builder.append(entity.get摘要５());
-            builder.append(entity.get摘要６());
-            builder.append(entity.get摘要７());
-            builder.append(entity.get摘要８());
-            builder.append(entity.get摘要９());
-            builder.append(entity.get摘要１０());
-            builder.append(entity.get摘要１１());
-            builder.append(entity.get摘要１２());
-            builder.append(entity.get摘要１３());
-            builder.append(entity.get摘要１４());
-            builder.append(entity.get摘要１５());
-            builder.append(entity.get摘要１６());
-            builder.append(entity.get摘要１７());
-            builder.append(entity.get摘要１８());
-            builder.append(entity.get摘要１９());
-            builder.append(entity.get摘要２０());
-            row.setMutiTekiyo(builder.toRString());
-            row.setNumber(entity.get連番());
-            dataSource.add(row);
+        if (!shokanTokuteiShinryohiList.isEmpty()) {
+            for (ShokanTokuteiShinryohi entity : shokanTokuteiShinryohiList) {
+                ddgToteishinryoTokubetushinryo_Row row = new ddgToteishinryoTokubetushinryo_Row();
+                row.setShobyouName(entity.get傷病名());
+                row.getShidouKanri().setValue(new Decimal(entity.get指導管理料等単位数()));
+                row.getRihabiri().setValue(new Decimal(entity.getリハビリテーション単位数()));
+                row.getSeishinka().setValue(new Decimal(entity.get精神科専門療法単位数()));
+                row.getEkusuLine().setValue(new Decimal(entity.get単純エックス線単位数()));
+                row.getSochi().setValue(new Decimal(entity.get措置単位数()));
+                row.getTejyutsu().setValue(new Decimal(entity.get手術単位数()));
+                row.getGoukeyiTanyi().setValue(new Decimal(entity.get合計単位数()));
+                RStringBuilder builder = new RStringBuilder();
+                builder.append(entity.get摘要１());
+                builder.append(entity.get摘要２());
+                builder.append(entity.get摘要３());
+                builder.append(entity.get摘要４());
+                builder.append(entity.get摘要５());
+                builder.append(entity.get摘要６());
+                builder.append(entity.get摘要７());
+                builder.append(entity.get摘要８());
+                builder.append(entity.get摘要９());
+                builder.append(entity.get摘要１０());
+                builder.append(entity.get摘要１１());
+                builder.append(entity.get摘要１２());
+                builder.append(entity.get摘要１３());
+                builder.append(entity.get摘要１４());
+                builder.append(entity.get摘要１５());
+                builder.append(entity.get摘要１６());
+                builder.append(entity.get摘要１７());
+                builder.append(entity.get摘要１８());
+                builder.append(entity.get摘要１９());
+                builder.append(entity.get摘要２０());
+                row.setMutiTekiyo(builder.toRString());
+                row.setNumber(entity.get連番());
+                dataSource.add(row);
+            }
         }
         div.getDdgToteishinryoTokubetushinryo().setDataSource(dataSource);
     }
@@ -560,16 +562,18 @@ public class TokuteiShinryohiPanelHandler {
      */
     public void set特定診療費_特別診療費一覧グリッド(List<ShokanTokuteiShinryoTokubetsuRyoyo> list) {
         List<dgdTokuteiShinryohi_Row> dataSource = new ArrayList<>();
-        for (ShokanTokuteiShinryoTokubetsuRyoyo entity : list) {
-            dgdTokuteiShinryohi_Row row = new dgdTokuteiShinryohi_Row();
-            row.setDefaultDataName1(entity.get傷病名());
-            row.setDefaultDataName2(entity.get識別番号());
-            row.getDefaultDataName3().setValue(new Decimal(entity.get単位数()));
-            row.getDefaultDataName4().setValue(new Decimal(entity.get回数()));
-            row.getDefaultDataName5().setValue(new Decimal(entity.get合計単位数()));
-            row.setDefaultDataName6(entity.get摘要());
-            row.setDefaultDataName7(entity.get連番());
-            dataSource.add(row);
+        if (!list.isEmpty()) {
+            for (ShokanTokuteiShinryoTokubetsuRyoyo entity : list) {
+                dgdTokuteiShinryohi_Row row = new dgdTokuteiShinryohi_Row();
+                row.setDefaultDataName1(entity.get傷病名());
+                row.setDefaultDataName2(entity.get識別番号());
+                row.getDefaultDataName3().setValue(new Decimal(entity.get単位数()));
+                row.getDefaultDataName4().setValue(new Decimal(entity.get回数()));
+                row.getDefaultDataName5().setValue(new Decimal(entity.get合計単位数()));
+                row.setDefaultDataName6(entity.get摘要());
+                row.setDefaultDataName7(entity.get連番());
+                dataSource.add(row);
+            }
         }
         div.getPanelThree().getDgdTokuteiShinryohi().setDataSource(dataSource);
     }
@@ -869,10 +873,12 @@ public class TokuteiShinryohiPanelHandler {
             List<ShokanTokuteiShinryohi> shokanTokuteiShinryohiList) {
         int max連番 = 0;
         Map<RString, ShokanTokuteiShinryohi> map = new HashMap<>();
-        for (ShokanTokuteiShinryohi entity : shokanTokuteiShinryohiList) {
-            map.put(entity.get連番(), entity);
-            if (max連番 < Integer.valueOf(entity.get連番().toString())) {
-                max連番 = Integer.valueOf(entity.get連番().toString());
+        if (!shokanTokuteiShinryohiList.isEmpty()) {
+            for (ShokanTokuteiShinryohi entity : shokanTokuteiShinryohiList) {
+                map.put(entity.get連番(), entity);
+                if (max連番 < Integer.valueOf(entity.get連番().toString())) {
+                    max連番 = Integer.valueOf(entity.get連番().toString());
+                }
             }
         }
         for (ddgToteishinryoTokubetushinryo_Row ddg : div.getDdgToteishinryoTokubetushinryo().getDataSource()) {
@@ -915,10 +921,12 @@ public class TokuteiShinryohiPanelHandler {
             List<ShokanTokuteiShinryoTokubetsuRyoyo> shokanTokuteiShinryoTokubetsuRyoyoList) {
         int max連番 = 0;
         Map<RString, ShokanTokuteiShinryoTokubetsuRyoyo> map = new HashMap<>();
-        for (ShokanTokuteiShinryoTokubetsuRyoyo entity : shokanTokuteiShinryoTokubetsuRyoyoList) {
-            map.put(entity.get連番(), entity);
-            if (max連番 < Integer.valueOf(entity.get連番().toString())) {
-                max連番 = Integer.valueOf(entity.get連番().toString());
+        if (!shokanTokuteiShinryoTokubetsuRyoyoList.isEmpty()) {
+            for (ShokanTokuteiShinryoTokubetsuRyoyo entity : shokanTokuteiShinryoTokubetsuRyoyoList) {
+                map.put(entity.get連番(), entity);
+                if (max連番 < Integer.valueOf(entity.get連番().toString())) {
+                    max連番 = Integer.valueOf(entity.get連番().toString());
+                }
             }
         }
         for (dgdTokuteiShinryohi_Row dgdRow : div.getDgdTokuteiShinryohi().getDataSource()) {
@@ -1392,19 +1400,20 @@ public class TokuteiShinryohiPanelHandler {
     /**
      * エリア制御のメソッドます。
      *
-     * @param グリッドFlag boolean
-     * @param 特別診療費登録Flag boolean
-     * @param グリッドFlag2 boolean
-     * @param 特定診療費Flag boolean
+     * @param サービス年月 FlexibleYearMonth
      */
-    public void setエリア制御(boolean グリッドFlag,
-            boolean 特別診療費登録Flag,
-            boolean グリッドFlag2,
-            boolean 特定診療費Flag) {
-        div.getDgdTokuteiShinryohi().setDisplayNone(グリッドFlag);
-        div.getDdgToteishinryoTokubetushinryo().setVisible(特別診療費登録Flag);
-        div.getPanelFour().setVisible(グリッドFlag2);
-        div.getPanelFive().setDisplayNone(特定診療費Flag);
+    public void setエリア制御(FlexibleYearMonth サービス年月) {
+        if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
+            div.getDgdTokuteiShinryohi().setDisplayNone(true);
+            div.getDdgToteishinryoTokubetushinryo().setVisible(true);
+            div.getPanelFour().setVisible(false);
+            div.getPanelFive().setDisplayNone(true);
+        } else if (平成１５年４月.isBeforeOrEquals(サービス年月)) {
+            div.getDgdTokuteiShinryohi().setVisible(true);
+            div.getDdgToteishinryoTokubetushinryo().setDisplayNone(true);
+            div.getPanelFour().setDisplayNone(true);
+            div.getPanelFive().setVisible(false);
+        }
     }
 
     /**
