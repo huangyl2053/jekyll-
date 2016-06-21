@@ -52,7 +52,6 @@ public class ShujiiIkensho5komokuProcess extends BatchKeyBreakBase<IkenshoJohoPr
     private static final ReportId REPORT_ID = ReportIdDBE.DBE013005.getReportId();
     private static final List<RString> PAGE_BREAK_KEYS = Collections
             .unmodifiableList(Arrays.asList(new RString(ShujiiIkensho5komokuReportSource.ReportSourceFields.shichosonName.name())));
-    private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString MIDDLELINE = RString.EMPTY;
     private static final RString なし = new RString("無し");
     private static final RString 未完了 = new RString("1");
@@ -91,10 +90,10 @@ public class ShujiiIkensho5komokuProcess extends BatchKeyBreakBase<IkenshoJohoPr
     @Override
     protected void usualProcess(IkenshoJohoPrintRelateEntity relateEntity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(relateEntity));
-        index_tmp++;
         ShujiiIkensho5komokuEntity entity = business.toShujiiIkensho5komokuEntity(relateEntity);
         ShujiiIkensho5komokuReport report = new ShujiiIkensho5komokuReport(entity, index_tmp);
         report.writeBy(reportSourceWriter);
+        index_tmp++;
     }
 
     @Override
@@ -131,8 +130,6 @@ public class ShujiiIkensho5komokuProcess extends BatchKeyBreakBase<IkenshoJohoPr
 
     private void バッチ出力条件リストの出力() {
         RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
-        ジョブ番号_Tmp.append(JOBNO_NAME);
-        ジョブ番号_Tmp.append(RString.HALF_SPACE);
         ジョブ番号_Tmp.append(JobContextHolder.getJobId());
         RString ジョブ番号 = ジョブ番号_Tmp.toRString();
         RString 帳票名 = ReportIdDBE.DBE013005.getReportName();

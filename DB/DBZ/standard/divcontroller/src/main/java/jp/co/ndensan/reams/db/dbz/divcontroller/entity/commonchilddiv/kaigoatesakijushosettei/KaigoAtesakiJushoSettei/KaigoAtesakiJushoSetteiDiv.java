@@ -12,14 +12,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * KaigoAtesakiJushoSettei のクラスファイル 
- * 
+ * KaigoAtesakiJushoSettei のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJushoSetteiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,16 +37,6 @@ public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJu
     private ButtonDialog btnAtesakiJushoSettei;
     @JsonProperty("txtAtesakiJushoSettei")
     private TextBox txtAtesakiJushoSettei;
-    @JsonProperty("hdnShichosonKyotsuTodofukenMei")
-    private RString hdnShichosonKyotsuTodofukenMei;
-    @JsonProperty("hdnShichosonKyotsuGunMei")
-    private RString hdnShichosonKyotsuGunMei;
-    @JsonProperty("hdnShichosonKyotsuShichosonMei")
-    private RString hdnShichosonKyotsuShichosonMei;
-    @JsonProperty("hdnShichosonKyotsuHensyuHoho")
-    private RString hdnShichosonKyotsuHensyuHoho;
-    @JsonProperty("hdnShichosonKyotsuKatagaki")
-    private RString hdnShichosonKyotsuKatagaki;
     @JsonProperty("hdnChohyoDokujiTodofukenMei")
     private RString hdnChohyoDokujiTodofukenMei;
     @JsonProperty("hdnChohyoDokujiGunMei")
@@ -111,96 +106,6 @@ public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJu
     @JsonProperty("txtAtesakiJushoSettei")
     public void setTxtAtesakiJushoSettei(TextBox txtAtesakiJushoSettei) {
         this.txtAtesakiJushoSettei = txtAtesakiJushoSettei;
-    }
-
-    /*
-     * gethdnShichosonKyotsuTodofukenMei
-     * @return hdnShichosonKyotsuTodofukenMei
-     */
-    @JsonProperty("hdnShichosonKyotsuTodofukenMei")
-    public RString getHdnShichosonKyotsuTodofukenMei() {
-        return hdnShichosonKyotsuTodofukenMei;
-    }
-
-    /*
-     * sethdnShichosonKyotsuTodofukenMei
-     * @param hdnShichosonKyotsuTodofukenMei hdnShichosonKyotsuTodofukenMei
-     */
-    @JsonProperty("hdnShichosonKyotsuTodofukenMei")
-    public void setHdnShichosonKyotsuTodofukenMei(RString hdnShichosonKyotsuTodofukenMei) {
-        this.hdnShichosonKyotsuTodofukenMei = hdnShichosonKyotsuTodofukenMei;
-    }
-
-    /*
-     * gethdnShichosonKyotsuGunMei
-     * @return hdnShichosonKyotsuGunMei
-     */
-    @JsonProperty("hdnShichosonKyotsuGunMei")
-    public RString getHdnShichosonKyotsuGunMei() {
-        return hdnShichosonKyotsuGunMei;
-    }
-
-    /*
-     * sethdnShichosonKyotsuGunMei
-     * @param hdnShichosonKyotsuGunMei hdnShichosonKyotsuGunMei
-     */
-    @JsonProperty("hdnShichosonKyotsuGunMei")
-    public void setHdnShichosonKyotsuGunMei(RString hdnShichosonKyotsuGunMei) {
-        this.hdnShichosonKyotsuGunMei = hdnShichosonKyotsuGunMei;
-    }
-
-    /*
-     * gethdnShichosonKyotsuShichosonMei
-     * @return hdnShichosonKyotsuShichosonMei
-     */
-    @JsonProperty("hdnShichosonKyotsuShichosonMei")
-    public RString getHdnShichosonKyotsuShichosonMei() {
-        return hdnShichosonKyotsuShichosonMei;
-    }
-
-    /*
-     * sethdnShichosonKyotsuShichosonMei
-     * @param hdnShichosonKyotsuShichosonMei hdnShichosonKyotsuShichosonMei
-     */
-    @JsonProperty("hdnShichosonKyotsuShichosonMei")
-    public void setHdnShichosonKyotsuShichosonMei(RString hdnShichosonKyotsuShichosonMei) {
-        this.hdnShichosonKyotsuShichosonMei = hdnShichosonKyotsuShichosonMei;
-    }
-
-    /*
-     * gethdnShichosonKyotsuHensyuHoho
-     * @return hdnShichosonKyotsuHensyuHoho
-     */
-    @JsonProperty("hdnShichosonKyotsuHensyuHoho")
-    public RString getHdnShichosonKyotsuHensyuHoho() {
-        return hdnShichosonKyotsuHensyuHoho;
-    }
-
-    /*
-     * sethdnShichosonKyotsuHensyuHoho
-     * @param hdnShichosonKyotsuHensyuHoho hdnShichosonKyotsuHensyuHoho
-     */
-    @JsonProperty("hdnShichosonKyotsuHensyuHoho")
-    public void setHdnShichosonKyotsuHensyuHoho(RString hdnShichosonKyotsuHensyuHoho) {
-        this.hdnShichosonKyotsuHensyuHoho = hdnShichosonKyotsuHensyuHoho;
-    }
-
-    /*
-     * gethdnShichosonKyotsuKatagaki
-     * @return hdnShichosonKyotsuKatagaki
-     */
-    @JsonProperty("hdnShichosonKyotsuKatagaki")
-    public RString getHdnShichosonKyotsuKatagaki() {
-        return hdnShichosonKyotsuKatagaki;
-    }
-
-    /*
-     * sethdnShichosonKyotsuKatagaki
-     * @param hdnShichosonKyotsuKatagaki hdnShichosonKyotsuKatagaki
-     */
-    @JsonProperty("hdnShichosonKyotsuKatagaki")
-    public void setHdnShichosonKyotsuKatagaki(RString hdnShichosonKyotsuKatagaki) {
-        this.hdnShichosonKyotsuKatagaki = hdnShichosonKyotsuKatagaki;
     }
 
     /*
@@ -338,5 +243,50 @@ public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJu
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    @JsonIgnore
+    public void initialize(RString サブ業務コード, RString 帳票分類ID) {
+        createHandler().initialize(サブ業務コード, 帳票分類ID);
+    }
 
+    @Override
+    @JsonIgnore
+    public void is帳票独自() {
+        createHandler().is帳票独自();
+    }
+
+    @Override
+    @JsonIgnore
+    public void is都道府県名表示() {
+        createHandler().is都道府県名表示();
+    }
+
+    @Override
+    @JsonIgnore
+    public void is郡名表示() {
+        createHandler().is郡名表示();
+    }
+
+    @Override
+    @JsonIgnore
+    public void is市町村名表示() {
+        createHandler().is市町村名表示();
+    }
+
+    @Override
+    @JsonIgnore
+    public void get町域編集方法() {
+        createHandler().get町域編集方法();
+    }
+
+    @Override
+    @JsonIgnore
+    public void is方書表示() {
+        createHandler().is方書表示();
+    }
+
+    @JsonIgnore
+    private KaigoAtesakiJushoSetteiHandler createHandler() {
+        return new KaigoAtesakiJushoSetteiHandler(this);
+    }
 }

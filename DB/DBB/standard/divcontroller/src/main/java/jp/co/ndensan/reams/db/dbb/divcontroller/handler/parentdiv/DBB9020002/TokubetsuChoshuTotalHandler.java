@@ -44,7 +44,7 @@ import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShoriName;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
@@ -165,7 +165,7 @@ public final class TokubetsuChoshuTotalHandler {
     public void set調定年度DDL(FlexibleYear 調定年度) {
         RString 新年度管理情報 = 未作成;
         ShoriDateKanriManager manager = InstanceProvider.create(ShoriDateKanriManager.class);
-        ShoriDateKanri result = manager.get基準年月日(ShoriName.新年度管理情報作成.toRString(), 調定年度.plusYear(1));
+        ShoriDateKanri result = manager.get基準年月日(ShoriName.新年度管理情報作成.get名称(), 調定年度.plusYear(1));
         if (result == null) {
             新年度管理情報 = 未作成;
         } else if (result.get基準年月日() != null && !result.get基準年月日().isEmpty()) {

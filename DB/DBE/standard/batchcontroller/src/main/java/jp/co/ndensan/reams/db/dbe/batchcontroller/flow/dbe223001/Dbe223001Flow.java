@@ -10,11 +10,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoCsvProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe223001.NinteiChosaTokusokujoReportProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe223001.UpadteDataProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe223001.NinteichosaIraiJohoUpdateProcess;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe223001.Dbe223001FlowParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoCsvProcessParameter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe223001.UpdateProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe223001.NinteichosaIraiJohoUpdateProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -94,7 +94,7 @@ public class Dbe223001Flow extends BatchFlowBase<Dbe223001FlowParameter> {
      */
     @Step(認定調査督促対象者一覧表の更新)
     protected IBatchFlowCommand updateData() {
-        return simpleBatch(UpadteDataProcess.class)
+        return loopBatch(NinteichosaIraiJohoUpdateProcess.class)
                 .arguments(createUpdateParameter())
                 .define();
     }
@@ -112,13 +112,13 @@ public class Dbe223001Flow extends BatchFlowBase<Dbe223001FlowParameter> {
         return parameter;
     }
 
-    private UpdateProcessParameter createUpdateParameter() {
-        UpdateProcessParameter updateProcessParameter = new UpdateProcessParameter();
+    private NinteichosaIraiJohoUpdateProcessParameter createUpdateParameter() {
+        NinteichosaIraiJohoUpdateProcessParameter updateProcessParameter = new NinteichosaIraiJohoUpdateProcessParameter();
         List<RString> noList = new ArrayList<>();
         if (要介護認定調査督促状_選択された.equals(getParameter().getTemp_要介護認定調査督促状().toString())) {
             noList = getResult(List.class, new RString(要介護認定調査督促状の作成), NinteiChosaTokusokujoReportProcess.OUT_SHINSEISHO_KANRINO_LIST);
         }
-        updateProcessParameter.set申請書管理番号List(noList);
+        updateProcessParameter.set申請書管理番号(noList);
         updateProcessParameter.setTemp_督促日(new RString(getParameter().getTemp_督促日().toString()));
         updateProcessParameter.setTemp_督促メモ(new RString(String.valueOf(getParameter().getTemp_督促メモ())));
         updateProcessParameter.setTemp_督促方法(new RString(String.valueOf(getParameter().getTemp_督促方法())));

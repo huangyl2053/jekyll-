@@ -71,19 +71,21 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      * @param 被保険者番号 HihokenshaNo
      * @param サービス年月 FlexibleYearMonth
      * @param 整理番号 RString
+     * @param 画面モード RString
      */
     public void initialize(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
-            RString 整理番号
+            RString 整理番号,
+            RString 画面モード
     ) {
-        if (登録.equals(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class))) {
+        if (登録.equals(画面モード)) {
             div.getPanelTwo().getTxtServiceTeikyoYM().clearValue();
             div.getPanelTwo().getTxtSeiriBango().clearValue();
             div.getCcdShokanbaraiketteiJoho().loadInitialize(
                     被保険者番号, サービス年月, 整理番号, 業務区分, 修正);
             div.getPanelTwo().getTxtShoriMode().setValue(新規);
         }
-        if (修正.equals(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class))) {
+        if (修正.equals(画面モード)) {
             div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki()
                     .toDateString().toString()));
             div.getCcdShokanbaraiketteiJoho().loadInitialize(
@@ -91,7 +93,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
             div.getPanelTwo().getTxtShoriMode().setValue(修正);
         }
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class))) {
+        if (削除.equals(画面モード)) {
             div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki()
                     .toDateString().toString()));
             div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
@@ -104,15 +106,14 @@ public class ShokanbarayiKeteiInfoPanelHandler {
     /**
      * isチェック処理
      *
+     * @param paramter ShoukanharaihishinseikensakuParameter
      * @return flag
      */
-    public boolean isチェック処理() {
-        ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
-                ShoukanharaihishinseikensakuParameter.class);
+    public boolean isチェック処理(ShoukanharaihishinseikensakuParameter paramter) {
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
         FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
         RString 整理番号 = paramter.getSeiriNp();
-        boolean flag = false;
+        boolean flag = true;
         List<dgSyokanbaraikete_Row> rowList = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete()
                 .getDataSource();
         for (dgSyokanbaraikete_Row row : rowList) {
@@ -120,32 +121,12 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             RString 様式番号 = row.getYoshikiNo();
             int 件数 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShikibetsuNoKanri(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号);
-            if (件数 == 0) {
-                flag = true;
+            if (件数 != 0) {
+                flag = false;
+                break;
             }
         }
         return flag;
-    }
-
-    /**
-     * putViewState
-     */
-    public void putViewState() {
-        FlexibleYearMonth サービス提供年月 = null;
-        RString 整理番号 = null;
-        if (div.getPanelTwo().getTxtServiceTeikyoYM().getValue() != null) {
-            サービス提供年月 = new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().toDateString()
-                    .substring(定数_0, 定数_6));
-        }
-        if (div.getPanelTwo().getTxtSeiriBango().getValue() != null) {
-            整理番号 = div.getPanelTwo().getTxtSeiriBango().getValue();
-        }
-
-        ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
-                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                サービス提供年月,
-                整理番号, null, null, null, null);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
     }
 
     /**
@@ -325,8 +306,10 @@ public class ShokanbarayiKeteiInfoPanelHandler {
 
     /**
      * 登録Save
+     *
+     * @param 支払金額合計初期 Decimal
      */
-    public void 登録Save() {
+    public void 登録Save(Decimal 支払金額合計初期) {
         ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
                 ShoukanharaihishinseikensakuParameter.class);
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
@@ -338,8 +321,8 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 .getShokanbaraiketteiJohoDiv().getRdoShikyukubun().getSelectedKey();
         Decimal 支払金額合計 = div.getCcdShokanbaraiketteiJoho()
                 .getShokanbaraiketteiJohoDiv().getTxtShiharaikingakugoke().getValue();
-        int 差額金額 = div.getCcdShokanbaraiketteiJoho()
-                .getShokanbaraiketteiJohoDiv().getTxtSagakuGoke().getValue().intValue();
+        Decimal 差額金額 = div.getCcdShokanbaraiketteiJoho()
+                .getShokanbaraiketteiJohoDiv().getTxtSagakuGoke().getValue();
         RString 増減理由等 = div.getCcdShokanbaraiketteiJoho()
                 .getShokanbaraiketteiJohoDiv().getTxtZogenriyu().getValue();
         RString 不支給理由等1 = div.getCcdShokanbaraiketteiJoho()
@@ -377,6 +360,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                     整理番号,
                     決定年月日,
                     支給区分,
+                    支払金額合計初期,
                     支払金額合計,
                     差額金額,
                     増減理由等,

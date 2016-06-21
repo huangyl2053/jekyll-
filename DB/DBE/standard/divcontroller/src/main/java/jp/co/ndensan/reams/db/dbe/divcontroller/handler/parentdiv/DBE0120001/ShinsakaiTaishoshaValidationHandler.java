@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- * 審査会個人別状況照会画面のバリデーションハンドラークラスです。
+ * 審査会個人別状況照会画面のチェッククラスです。
  *
  * @reamsid_L DBE-1380-010 jinjue
  */
@@ -40,7 +40,7 @@ public class ShinsakaiTaishoshaValidationHandler {
      * @param 審査会対象者一覧 審査会対象者一覧データ
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateForKakutei(ShinsakaiTaishoshaBusiness 審査会対象者一覧) {
+    public ValidationMessageControlPairs validateForKakutei(List<ShinsakaiTaishoshaBusiness> 審査会対象者一覧) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         List<dgTaishoshaIchiran_Row> ichiranList = div.getDgTaishoshaIchiran().getDataSource();
         if (ichiranList.isEmpty()) {

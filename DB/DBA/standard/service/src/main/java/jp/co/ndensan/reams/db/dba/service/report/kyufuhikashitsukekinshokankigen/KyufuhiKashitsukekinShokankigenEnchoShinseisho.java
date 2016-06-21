@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kyufuhikashitsuke
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kyufuhikashitsukekinshakuyoshojuri.IKyufuhiKashitsukekinShakuyoshoJuriMapper;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
@@ -139,7 +139,7 @@ public class KyufuhiKashitsukekinShokankigenEnchoShinseisho {
             RString 帳票文言 = tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
             RString 借受年月日 = get借受年月日(被保険者番号).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).toDateString();
-            return 帳票文言.replace(new RString("@@@@"), 借受年月日);
+            return 帳票文言.replace(new RString("’＠＠＠＠’"), 借受年月日);
         }
         return RString.EMPTY;
     }

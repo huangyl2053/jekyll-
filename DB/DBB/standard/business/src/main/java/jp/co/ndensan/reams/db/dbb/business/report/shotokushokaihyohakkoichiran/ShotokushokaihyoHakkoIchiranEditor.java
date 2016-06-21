@@ -56,6 +56,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     private static final RString 住登外日本人 = new RString("3");
     private static final RString 本人 = new RString("1");
     private static final RString 世帯員 = new RString("2");
+    private static final RString 年度 = new RString("年度");
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -116,7 +117,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         source.printTimeStamp = 作成年月.concat(RString.FULL_SPACE).concat(作成時分);
         source.title = 所得照会一覧表;
         if (処理年度 != null) {
-            source.nendo = 処理年度.wareki().toDateString();
+            source.nendo = 処理年度.wareki().toDateString().concat(年度);
         }
         if (テストプリント) {
             source.testShori = テストプリント_印字;

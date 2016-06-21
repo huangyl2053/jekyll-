@@ -423,15 +423,15 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
     @Transaction
     public SourceDataCollection publish(KakushuTsuchishoParameter parameter) {
 
+        SourceDataCollection sourceDataCollection = new SourceDataCollection();
         if (parameter == null || parameter.get発行する帳票List() == null || parameter.get発行する帳票List().isEmpty()) {
-            return null;
+            return sourceDataCollection;
         }
         KakushuTsuchishoCommonInfo 通知書共通情報 = search通知書共通情報(parameter);
 
         if (通知書共通情報 == null || 通知書共通情報.get賦課の情報_更正後() == null) {
-            return null;
+            return sourceDataCollection;
         }
-        SourceDataCollection sourceDataCollection;
         List<ReportSourceDataCollection> reportSourceDataCollection = new ArrayList<>();
         List<RString> 発行する帳票List = parameter.get発行する帳票List();
         try (ReportManager reportManager = new ReportManager()) {

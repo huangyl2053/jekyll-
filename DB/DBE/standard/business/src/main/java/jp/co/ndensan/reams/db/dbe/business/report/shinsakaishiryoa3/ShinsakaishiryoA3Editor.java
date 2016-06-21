@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishiryoa3;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa3.ShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa3.ShinsakaishiryoItem;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -15,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 事務局用介護認定審査対象者一覧表A3のEditorクラスです。
@@ -23,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
 
-    private static final int INT_25 = 25;
     private final ShinsakaishiryoItem item;
 
     /**
@@ -51,21 +53,8 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
         source.gogitaiNo = RStringUtil.convert半角to全角(item.get合議体番号());
         source.listShinsainName_1 = item.get審査員一覧();
         source.shinsaTaishoshaCount = RStringUtil.convert半角to全角(item.get審査対象者数());
-        if (((int) Math.floor(item.getNo() / INT_25) % 2 == 1)) {
-            source.listShinsei1_1 = item.get審査会審査順();
-            source.listShinsei1_2 = item.get保険者();
-            source.listShinsei1_3 = item.get被保険者();
-            source.listShinsei1_4 = item.get氏名();
-            source.listShinsei1_5 = item.get性別();
-            source.listShinsei1_6 = item.get年齢();
-            source.listShinsei1_7 = item.get前回二次();
-            source.listShinsei1_8 = item.get前回期間();
-            source.listShinsei1_9 = item.get一次判定();
-            source.listShinsei1_10 = item.get二次判定();
-            source.listShinsei1_11 = RString.EMPTY;
-            source.listZenkaiｙukokikan1_1 = get二時判定認定有効年月日();
-            source.listYukokikan1_1 = RString.EMPTY;
-        } else {
+        int no = item.getNo();
+        if (no % 2 == 0) {
             source.listShinsei2_1 = item.get審査会審査順();
             source.listShinsei2_2 = item.get保険者();
             source.listShinsei2_3 = item.get被保険者();
@@ -79,6 +68,26 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
             source.listShinsei2_11 = RString.EMPTY;
             source.listZenkaiｙukokikan2_1 = get二時判定認定有効年月日();
             source.listYukokikan2_1 = RString.EMPTY;
+        } else {
+            source.listShinsei1_1 = item.get審査会審査順();
+            source.listShinsei1_2 = item.get保険者();
+            source.listShinsei1_3 = item.get被保険者();
+            source.listShinsei1_4 = item.get氏名();
+            source.listShinsei1_5 = item.get性別();
+            source.listShinsei1_6 = item.get年齢();
+            source.listShinsei1_7 = item.get前回二次();
+            source.listShinsei1_8 = item.get前回期間();
+            source.listShinsei1_9 = item.get一次判定();
+            source.listShinsei1_10 = item.get二次判定();
+            source.listShinsei1_11 = RString.EMPTY;
+            source.listZenkaiｙukokikan1_1 = get二時判定認定有効年月日();
+            source.listYukokikan1_1 = RString.EMPTY;
+        }
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        if (item.get申請書管理番号() == null) {
+            source.shinseishoKanriNo = null;
+        } else {
+            source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
         }
         return source;
     }

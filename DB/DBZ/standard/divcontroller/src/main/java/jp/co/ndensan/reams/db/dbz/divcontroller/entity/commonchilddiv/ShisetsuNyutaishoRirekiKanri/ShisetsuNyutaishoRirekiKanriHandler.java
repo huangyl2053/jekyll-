@@ -367,21 +367,21 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
     }
 
     private void 資格異動モード() {
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, new RString("台帳種別表示無し"));
+        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys.台帳種別表示, new RString("台帳種別表示無し"));
         switch (div.getMode_Riyou()) {
             case 台帳種別表示機能:
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
+                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
                 break;
             case 全施設対象機能:
                 break;
             case 被保険者対象機能:
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.被保険者, new RString("被保険者"));
+                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys.被保険者, new RString("被保険者"));
                 break;
             case 他市町村住所地特例者対象機能:
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.他市町村住所地特例者, new RString("他市町村住所地特例者"));
+                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys.他市町村住所地特例者, new RString("他市町村住所地特例者"));
                 break;
             case 適用除外者対象機能:
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.適用除外者, new RString("適用除外者"));
+                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys.適用除外者, new RString("適用除外者"));
                 break;
             default:
                 break;

@@ -270,8 +270,6 @@ public class ShinseiKensakuMapperParameter {
     private boolean useNinteiKekkaJoho;
     // 画面詳細条件の介護認定審査会の開催日/開催番号を入力する場合
     private boolean useShinsakaiKaisaiKekkaJoho;
-    // 画面詳細条件の前回情報を入力する場合
-    private boolean useZenkaiNinteiShinseiJoho;
     // 画面詳細条件のその他情報の原因疾患を入力する場合
     private boolean useGeninShikkan;
     // 画面詳細条件の完了情報を入力する場合

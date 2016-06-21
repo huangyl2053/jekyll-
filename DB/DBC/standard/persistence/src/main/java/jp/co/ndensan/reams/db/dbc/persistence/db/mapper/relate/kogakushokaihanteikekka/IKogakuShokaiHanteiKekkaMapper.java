@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakushokaihanteikekka;
 
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaihanteikekka.KogakuShokaiHanteiKekkaParam;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaihanteikekka.JigyoKogakuShokaiHanteiKekkaEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaihanteikekka.KogakuShokaiHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaihanteikekka.JigyoKogakuShokaiHanteiKekkaIchiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaihanteikekka.KogakuShokaiHanteiKekkaIchiEntity;
 
 /**
  * ビジネス設計_DBCMN11004_世帯合算並列表示（画面）のMapperです。
@@ -22,7 +22,7 @@ public interface IKogakuShokaiHanteiKekkaMapper {
      * @param param KogakuShokaiHanteiKekkaParam
      * @return KogakuShokaiHanteiKekkaEntity
      */
-    KogakuShokaiHanteiKekkaEntity get高額介護支給判定結果(KogakuShokaiHanteiKekkaParam param);
+    KogakuShokaiHanteiKekkaIchiEntity get高額介護支給判定結果(KogakuShokaiHanteiKekkaParam param);
 
     /**
      * 事業高額介護サービス費照会の場合、支給判定結果を取得する。
@@ -30,5 +30,5 @@ public interface IKogakuShokaiHanteiKekkaMapper {
      * @param param KogakuShokaiHanteiKekkaParam
      * @return JigyoKogakuShokaiHanteiKekkaEntity
      */
-    JigyoKogakuShokaiHanteiKekkaEntity get事業高額介護支給判定結果(KogakuShokaiHanteiKekkaParam param);
+    JigyoKogakuShokaiHanteiKekkaIchiEntity get事業高額介護支給判定結果(KogakuShokaiHanteiKekkaParam param);
 }

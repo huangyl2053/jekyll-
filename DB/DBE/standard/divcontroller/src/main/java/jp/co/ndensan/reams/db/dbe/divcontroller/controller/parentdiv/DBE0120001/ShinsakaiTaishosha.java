@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0120001
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaitaishosha.ShinsakaiTaishoshaBusiness;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0120001.DBE0120001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0120001.ShinsakaiTaishoshaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0120001.ShinsakaiTaishoshaHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0120001.ShinsakaiTaishoshaValidationHandler;
@@ -31,10 +32,10 @@ public class ShinsakaiTaishosha {
      * @return ResponseData<ShinsakaiTaishoshaDiv>
      */
     public ResponseData<ShinsakaiTaishoshaDiv> onLoad(ShinsakaiTaishoshaDiv div) {
-        RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class);
-        List<ShinsakaiTaishoshaBusiness> 予定情報 = ShinsakaiTaishoshaFinder.createInstance().get情報(審査会開催番号).records();
-        ShinsakaiTaishoshaBusiness 審査会対象者一覧 = ShinsakaiTaishoshaFinder.createInstance().get予定情報と結果情報(審査会開催番号);
-        getHandler(div).onLoad(審査会対象者一覧, 予定情報);
+        RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        List<ShinsakaiTaishoshaBusiness> 審査会対象者一覧 = ShinsakaiTaishoshaFinder.createInstance().get情報(審査会開催番号).records();
+        ShinsakaiTaishoshaBusiness 予定情報 = ShinsakaiTaishoshaFinder.createInstance().get予定情報と結果情報(審査会開催番号);
+        getHandler(div).onLoad(予定情報, 審査会対象者一覧);
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKakutei(審査会対象者一覧);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -49,17 +50,9 @@ public class ShinsakaiTaishosha {
      * @return ResponseData
      */
     public ResponseData<ShinsakaiTaishoshaDiv> btn_Shokai(ShinsakaiTaishoshaDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 「審査会一覧」画面へ遷移します。
-     *
-     * @param div ShinsakaiTaishoshaDiv
-     * @return ResponseData
-     */
-    public ResponseData<ShinsakaiTaishoshaDiv> btn_Modoru(ShinsakaiTaishoshaDiv div) {
-        return ResponseData.of(div).respond();
+        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.要介護認定申請検索_申請書管理番号,
+                div.getDgTaishoshaIchiran().getClickedItem().getShinseishoKanriNo());
+        return ResponseData.of(div).forwardWithEventName(DBE0120001TransitionEventName.対象者選択).respond();
     }
 
     private ShinsakaiTaishoshaValidationHandler getValidationHandler(ShinsakaiTaishoshaDiv div) {

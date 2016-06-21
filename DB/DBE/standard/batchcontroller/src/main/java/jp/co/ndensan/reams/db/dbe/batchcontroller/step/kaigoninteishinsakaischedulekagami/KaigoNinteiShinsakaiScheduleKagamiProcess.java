@@ -43,7 +43,6 @@ import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
  */
 public class KaigoNinteiShinsakaiScheduleKagamiProcess extends BatchProcessBase<KaigoNinteiShinsakaiScheduleKagamiRelateEntity> {
 
-    private static final RString 宛名連番 = new RString("1");
     private static final int KEY = 2;
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.kaigoninteishinsakaischedulekagami."
@@ -105,7 +104,7 @@ public class KaigoNinteiShinsakaiScheduleKagamiProcess extends BatchProcessBase<
                 processParamter.getShinsakaiKaisaiKikanFrom(), processParamter.getShinsakaiKaisaiKikanTo(), compNinshosha.denshiKoin,
                 compNinshosha.hakkoYMD, compNinshosha.koinMojiretsu, compNinshosha.koinShoryaku, compNinshosha.ninshoshaShimeiKakeru,
                 compNinshosha.ninshoshaShimeiKakenai, compNinshosha.ninshoshaYakushokuMei, compNinshosha.ninshoshaYakushokuMei1,
-                compNinshosha.ninshoshaYakushokuMei2, 宛名連番, customerBarCode, entity.getYubinNo(), entity.getJushoText(), 宛名機関名,
+                compNinshosha.ninshoshaYakushokuMei2, customerBarCode, entity.getYubinNo(), entity.getJushoText(), 宛名機関名,
                 entity.getShimeiText(), ChohyoAtesakiKeisho.toValue(DbBusinessConfig.get(
                                 ConfigNameDBE.介護認定審査会スケジュール表鏡_宛先敬称, RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称(),
                 通知文Map.get(1), 通知文Map.get(KEY));

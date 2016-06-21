@@ -4,8 +4,32 @@ var DBD;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_select = function () {
+                return "onClick_select";
+            };
+
             Events.CloseOK = function () {
                 return "CloseOK";
+            };
+
+            Events.onClick_btnKeikakuIraiUketsuke = function () {
+                return "onClick_btnKeikakuIraiUketsuke";
+            };
+
+            Events.onClick_btnJikosakuseiKeikaku = function () {
+                return "onClick_btnJikosakuseiKeikaku";
+            };
+
+            Events.onClick_btnKyotakuService = function () {
+                return "onClick_btnKyotakuService";
+            };
+
+            Events.onClick_btnShuruiGendoGakuKakunin = function () {
+                return "onClick_btnShuruiGendoGakuKakunin";
+            };
+
+            Events.onSelect_dgKyotakuService = function () {
+                return "onSelect_dgKyotakuService";
             };
             return Events;
         })();

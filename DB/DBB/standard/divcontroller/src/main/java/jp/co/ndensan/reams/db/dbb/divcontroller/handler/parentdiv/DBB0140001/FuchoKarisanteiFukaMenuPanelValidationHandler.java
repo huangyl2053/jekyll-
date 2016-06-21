@@ -50,7 +50,7 @@ public class FuchoKarisanteiFukaMenuPanelValidationHandler {
      *
      * @return {@link ValidationMessageControlPairs}
      */
-    public ValidationMessageControlPairs validate提供年月() {
+    public ValidationMessageControlPairs validate対象者未選択() {
         IValidationMessages message = new FuchoKarisanteiFukaMenuPanelValidator(div).validate対象者入力();
         return create対象者Dictionary().check(message);
     }
@@ -59,5 +59,37 @@ public class FuchoKarisanteiFukaMenuPanelValidationHandler {
         return new ValidationDictionaryBuilder()
                 .add(FuchoKarisanteiFukaMenuPanelValidationMessage.対象者チェック, div.getMainPanelBatchParameter()
                         .getFuchoKarisanteiChohyoHakko2().getFuchoTsuchiKobetsuJoho().getChkNotsuTaishosha2()).build();
+    }
+
+    /**
+     * 帳票IDのチェック_型0チェックです。
+     *
+     * @return {@link ValidationMessageControlPairs}
+     */
+    public ValidationMessageControlPairs validate帳票IDのチェック_型0() {
+        IValidationMessages message = new FuchoKarisanteiFukaMenuPanelValidator(div).validate帳票IDのチェック_型0();
+        return create帳票IDのチェック_型0().check(message);
+    }
+
+    private ValidationDictionary create帳票IDのチェック_型0() {
+        return new ValidationDictionaryBuilder()
+                .add(FuchoKarisanteiFukaMenuPanelValidationMessage.帳票IDのチェック_型0, div.getMainPanelBatchParameter()
+                        .getFuchoKarisanteiChohyoHakko2()).build();
+    }
+
+    /**
+     * 帳票IDのチェック_型2チェックです。
+     *
+     * @return {@link ValidationMessageControlPairs}
+     */
+    public ValidationMessageControlPairs validate帳票IDのチェック_型2() {
+        IValidationMessages message = new FuchoKarisanteiFukaMenuPanelValidator(div).validate帳票IDのチェック_型2();
+        return create帳票IDのチェック_型2().check(message);
+    }
+
+    private ValidationDictionary create帳票IDのチェック_型2() {
+        return new ValidationDictionaryBuilder()
+                .add(FuchoKarisanteiFukaMenuPanelValidationMessage.帳票IDのチェック_型2, div.getMainPanelBatchParameter()
+                        .getFuchoKarisanteiChohyoHakko2()).build();
     }
 }

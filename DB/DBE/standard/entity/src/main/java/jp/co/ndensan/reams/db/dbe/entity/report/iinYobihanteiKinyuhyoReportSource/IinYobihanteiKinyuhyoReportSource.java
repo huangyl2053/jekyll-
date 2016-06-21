@@ -15,8 +15,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
  * @reamsid_L DBE-0150-150 wangrenze
  */
 public class IinYobihanteiKinyuhyoReportSource implements IReportSource {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
 
+// <editor-fold defaultstate="collapsed" desc="Generated Code">
     @ReportItem(name = "title", length = 50, order = 1)
     public RString title;
     @ReportItem(name = "shinsakaiKaisaiNo", length = 15, order = 2)
@@ -57,4 +57,12 @@ public class IinYobihanteiKinyuhyoReportSource implements IReportSource {
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * 改ページ条件のキーです。
+     */
+    public enum ReportSourceFields {
+
+        shinsakaiKaisaiNo,
+    }
 }

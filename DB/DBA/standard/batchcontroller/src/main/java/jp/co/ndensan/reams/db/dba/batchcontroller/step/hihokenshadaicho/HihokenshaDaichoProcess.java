@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.mybatisorderbycreator.MyBatisOrderByCreator;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.setai.SetaiinFinder;
@@ -133,6 +134,7 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
         被保険者Entity.setShichosonMeisho(get市町村名称(entity));
         被保険者Entity.setHihokenshaNoTitle(HIHOKENSHANOTITLE);
         被保険者Entity.setHihokenshaNo(entity.getHihokenshaNo());
+        被保険者Entity.setShikibetsuCode(entity.getShikibetsuCode());
         UaFt200FindShikibetsuTaishoEntity 識別対象Entity = get宛名識別対象取得(entity.getShikibetsuCode());
         if (識別対象Entity != null) {
             IShikibetsuTaisho shikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(識別対象Entity);
@@ -140,7 +142,7 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
             被保険者Entity.setKanaMeisho(shikibetsuTaisho.get名称().getKana());
             被保険者Entity.setMeisho(shikibetsuTaisho.get名称().getName());
             被保険者Entity.setSeinengappiYMD(iKojin.get生年月日().toFlexibleDate());
-            被保険者Entity.setSeibetsuCode(iKojin.get性別().getCode());
+            被保険者Entity.setSeibetsuCode(Seibetsu.toValue(iKojin.get性別().getCode()).get名称());
             被保険者Entity.setSetaiCode(iKojin.get世帯コード());
             被保険者Entity.setShikibetsuCode(iKojin.get識別コード());
             IGyoseiKukaku iGyoseiKukaku = iKojin.get行政区画();
@@ -222,6 +224,8 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
                                 processPrm.getPsmShikibetsuTaisho(),
                                 orderBy);
             }
+        } else {
+            mybatisPrm = processPrm.toIkkatsuHakkoMybatisParameter();
         }
     }
 

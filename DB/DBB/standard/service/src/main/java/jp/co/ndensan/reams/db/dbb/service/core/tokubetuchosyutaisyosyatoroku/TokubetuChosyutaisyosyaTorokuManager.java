@@ -18,8 +18,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShoriName;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysTokuchoHosoku;
+import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysTokuchoHosoku;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
@@ -102,7 +102,7 @@ public class TokubetuChosyutaisyosyaTorokuManager {
     public SearchResult<ShoriDateKanri> getDateManagementMaster(FlexibleYear 賦課年度) {
         DbT7022ShoriDateKanriDac dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
         List<DbT7022ShoriDateKanriEntity> 処理日付管理マスタデータEntiyリスト
-                = dac.selectFor年度内処理済み連番(ShoriName.特徴対象者同定.toRString(), 賦課年度);
+                = dac.selectFor年度内処理済み連番(ShoriName.特徴対象者同定.get名称(), 賦課年度);
         List<ShoriDateKanri> 処理日付管理マスタデータリスト = new ArrayList<>();
         for (DbT7022ShoriDateKanriEntity 処理日付管理マスタデータEntiy : 処理日付管理マスタデータEntiyリスト) {
             処理日付管理マスタデータリスト.add(new ShoriDateKanri(処理日付管理マスタデータEntiy));
@@ -412,7 +412,7 @@ public class TokubetuChosyutaisyosyaTorokuManager {
     public SearchResult<ShoriDateKanri> getInsuredRegisterInformation(FlexibleYear 年度, ShoriName 処理名, RString 年度内連番) {
         DbT7022ShoriDateKanriDac dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
         List<DbT7022ShoriDateKanriEntity> 処理日付管理マスタデータEntityLst
-                = dac.selectFor依頼金額計算基準日取得(SubGyomuCode.DBB介護賦課, 処理名.toRString(), 年度, 年度内連番);
+                = dac.selectFor依頼金額計算基準日取得(SubGyomuCode.DBB介護賦課, 処理名.get名称(), 年度, 年度内連番);
         List<ShoriDateKanri> 処理日付管理マスタデータLst = new ArrayList<>();
         for (DbT7022ShoriDateKanriEntity 処理日付管理マスタデータEntity : 処理日付管理マスタデータEntityLst) {
             処理日付管理マスタデータLst.add(new ShoriDateKanri(処理日付管理マスタデータEntity));

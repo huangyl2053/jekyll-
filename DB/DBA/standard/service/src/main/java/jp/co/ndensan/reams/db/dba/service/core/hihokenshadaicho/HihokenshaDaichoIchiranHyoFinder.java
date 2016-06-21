@@ -156,9 +156,11 @@ public class HihokenshaDaichoIchiranHyoFinder {
         iIkkatsuSakuseiMapper = mapperProvider.create(IIkkatsuSakuseiMapper.class);
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
-        //TODO  段站立　QA553　住民種別が設定必要の確認
         List<JuminShubetsu> juminShubetsu = new ArrayList<>();
         juminShubetsu.add(JuminShubetsu.外国人);
+        juminShubetsu.add(JuminShubetsu.日本人);
+        juminShubetsu.add(JuminShubetsu.住登外個人_日本人);
+        juminShubetsu.add(JuminShubetsu.住登外個人_外国人);
         key.set住民種別(juminShubetsu);
         key.set識別コード(entity.get識別コード());
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
@@ -172,7 +174,7 @@ public class HihokenshaDaichoIchiranHyoFinder {
     private RString get年齢(HihokenshaDaichoSakusei entity, IShikibetsuTaisho 識別対象) {
         RString seinengappiYMD = entity.get生年月日();
         FlexibleDate 生年月日;
-        if (seinengappiYMD != null) {
+        if (!RString.isNullOrEmpty(seinengappiYMD)) {
             生年月日 = new FlexibleDate(entity.get生年月日());
         } else {
             生年月日 = FlexibleDate.EMPTY;

@@ -16,10 +16,10 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntit
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysShiharaiHohoHenko;
+import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter;
 import static jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter.createParam;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
@@ -366,7 +366,7 @@ public class HihokenshashoShikakushoHakkoFinder {
             RString 入所施設種類 = dbT1004EntityList.get(i).getNyushoShisetsuShurui();
             RString 事業者名称 = RString.EMPTY;
 
-            if (ShisetsuType.介護保険施設.getCode().equals(入所施設種類)) {
+            if (ShisetsuType.介護保険施設.getコード().equals(入所施設種類)) {
 
                 List<DbT7060KaigoJigyoshaEntity> dbT7060List = dbT7060Dac.
                         select事業者名称(dbT1004EntityList.get(i).getNyushoShisetsuCode());
@@ -375,7 +375,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                         && dbT7060List.get(0).getJigyoshaName() != null) {
                     事業者名称 = dbT7060List.get(0).getJigyoshaName().value();
                 }
-            } else if (ShisetsuType.住所地特例対象施設.getCode().equals(入所施設種類)) {
+            } else if (ShisetsuType.住所地特例対象施設.getコード().equals(入所施設種類)) {
                 List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> dbT1005List = dbT1005Dac.
                         selectJigyoshaJohoFor施設名取得(dbT1004EntityList.get(i).getNyushoShisetsuCode());
 

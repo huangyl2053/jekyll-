@@ -36,6 +36,8 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
@@ -47,10 +49,10 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -97,27 +99,21 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
     private static final RString 定数_受給者 = new RString("受給者");
     private static final RString 受給者_償還払い化 = new RString("償還払い化");
     private static final RString 受給者_給付額減額 = new RString("給付額減額");
-    private static final CodeShubetsu 調定事由_コード種別 = new CodeShubetsu("0003");
     private static final RString 定数_特徴方法 = new RString("get特徴期別金額");
     private static final RString 定数_普徴方法 = new RString("get普徴期別金額");
     private static final RString 定数_普徴収入 = new RString("get普徴収入額");
     private static final RString 定数_特徴収入 = new RString("get特徴収入額");
     private static final RString 定数_境界層該当 = new RString("境界層該当");
-    private static final CodeShubetsu コード種別0046 = new CodeShubetsu("0046");
-    private static final CodeShubetsu コード種別0047 = new CodeShubetsu("0047");
     private static final RString FORMAT_月 = new RString("月");
     private static final RString FORMAT_LEFT = new RString("（");
     private static final RString FORMAT_RIGHT = new RString("期）");
     private static final RString FORMAT_符号 = new RString(",");
     private static final RString FORMAT_ = new RString("-");
     private static final RString 定数_年度 = new RString("年度");
-    private static final CodeShubetsu コード種別0007 = new CodeShubetsu("0007");
-    private static final CodeShubetsu コード種別0010 = new CodeShubetsu("0010");
     private static final RString 定値_作成 = new RString("作成");
     private static final RString 定値_仮算定タイトル = new RString("仮算定賦課台帳");
     private static final RString 定値_本算定タイトル = new RString("賦課台帳");
     private static final RString 定数_住特 = new RString("住特");
-    private static final CodeShubetsu コード種別0001 = new CodeShubetsu("0001");
     private static final RString 公式 = new RString("×　1/12");
     private static final RString 定数_ゼロ = new RString("0");
 
@@ -204,14 +200,14 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         編集後仮算定賦課台帳情報.set本人所得段階変更(期_1.equals(賦課情報.get境界層区分()) ? 定数_境界層該当 : RString.EMPTY);
 
         if (賦課台帳情報.get対象者_追加含む_情報() != null && 賦課台帳情報.get対象者_追加含む_情報().getDT特別徴収義務者コード() != null) {
-            RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード種別0047,
+            RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
                     賦課台帳情報.get対象者_追加含む_情報().getDT特別徴収義務者コード().value());
             編集後仮算定賦課台帳情報.set本人特徴義務者(特別徴収義務者);
         }
         RString 年金コード = 賦課台帳情報.get徴収方法情報() != null ? 賦課台帳情報.get徴収方法情報().get仮徴収_年金コード() : RString.EMPTY;
         if (!RString.isNullOrEmpty(年金コード) && INT_3 <= 年金コード.length()) {
-            RString 特別徴収対象年金
-                    = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード種別0046, new Code(年金コード.substring(0, INT_3)));
+            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
+                    new Code(年金コード.substring(0, INT_3)));
             編集後仮算定賦課台帳情報.set本人特徴対象年金(特別徴収対象年金);
         }
         set編集後仮算定賦課台帳情報(編集後仮算定賦課台帳情報, 賦課台帳情報);
@@ -289,14 +285,14 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         編集後本算定賦課台帳情報.set本人所得段階変更(期_1.equals(賦課情報.get境界層区分()) ? 定数_境界層該当 : RString.EMPTY);
 
         if (賦課台帳情報.get対象者_追加含む_情報() != null && 賦課台帳情報.get対象者_追加含む_情報().getDT特別徴収義務者コード() != null) {
-            RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード種別0047,
+            RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
                     賦課台帳情報.get対象者_追加含む_情報().getDT特別徴収義務者コード().value());
             編集後本算定賦課台帳情報.set本人特徴義務者(特別徴収義務者);
         }
         RString 年金コード = 賦課台帳情報.get徴収方法情報() != null ? 賦課台帳情報.get徴収方法情報().get仮徴収_年金コード() : RString.EMPTY;
         if (!RString.isNullOrEmpty(年金コード) && INT_3 <= 年金コード.length()) {
-            RString 特別徴収対象年金
-                    = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード種別0046, new Code(年金コード.substring(0, INT_3)));
+            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                    UEXCodeShubetsu.年金コード.getCodeShubetsu(), new Code(年金コード.substring(0, INT_3)));
             編集後本算定賦課台帳情報.set本人特徴対象年金(特別徴収対象年金);
         }
         set編集後本算定賦課台帳情報(編集後本算定賦課台帳情報, 賦課台帳情報);
@@ -413,9 +409,10 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         本算定賦課内訳.set本人減免額(format金額_パターン(前後区分, 賦課の情報.get賦課情報().get減免額()));
         本算定賦課内訳.set確定年額保険料(format金額_パターン(前後区分, 賦課の情報.get賦課情報().get確定介護保険料_年額()));
         本算定賦課内訳.set賦課基準日(賦課の情報.get賦課情報().get賦課期日() != null && !賦課の情報.get賦課情報().get賦課期日().isEmpty()
-                ? 賦課の情報.get賦課情報().get賦課期日().wareki().toDateString() : RString.EMPTY);
+                ? get年月日(賦課の情報.get賦課情報().get賦課期日()) : RString.EMPTY);
         本算定賦課内訳.set調定年月日(賦課の情報.get賦課情報().get調定日時() != null && !賦課の情報.get賦課情報().get調定日時().isEmpty()
-                ? 賦課の情報.get賦課情報().get調定日時().getDate().wareki().toDateString() : RString.EMPTY);
+                ? 賦課の情報.get賦課情報().get調定日時().getDate().wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString() : RString.EMPTY);
         if (前後区分) {
             編集後本算定賦課台帳情報.set本算定賦課内訳１更正後(本算定賦課内訳);
         } else {
@@ -713,7 +710,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             int index = 0;
             for (RString 変更事由 : 変更事由リスト) {
                 index = index + 1;
-                RString 略称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, コード種別0001, new Code(変更事由));
+                RString 略称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.変更事由.getコード(), new Code(変更事由));
                 switch (index) {
                     case INT_1:
                         編集後仮算定賦課台帳情報.set変更事由1(略称);
@@ -744,7 +741,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             int index = 0;
             for (RString 変更事由 : 変更事由リスト) {
                 index = index + 1;
-                RString 略称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, コード種別0001, new Code(変更事由));
+                RString 略称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.変更事由.getコード(), new Code(変更事由));
                 switch (index) {
                     case INT_1:
                         編集後本算定賦課台帳情報.set変更事由1(略称);
@@ -774,9 +771,10 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         仮算定内訳.set減免額(format金額(賦課の情報.get賦課情報().get減免額()));
         仮算定内訳.set仮算定確定保険料(format金額(賦課の情報.get賦課情報().get確定介護保険料_年額()));
         仮算定内訳.set賦課基準日(賦課の情報.get賦課情報().get賦課期日() != null && !賦課の情報.get賦課情報().get賦課期日().isEmpty()
-                ? 賦課の情報.get賦課情報().get賦課期日().wareki().toDateString() : RString.EMPTY);
+                ? get年月日(賦課の情報.get賦課情報().get賦課期日()) : RString.EMPTY);
         仮算定内訳.set調定年月日(賦課の情報.get賦課情報().get調定日時() != null && !賦課の情報.get賦課情報().get調定日時().isEmpty()
-                ? 賦課の情報.get賦課情報().get調定日時().getDate().wareki().toDateString() : RString.EMPTY);
+                ? 賦課の情報.get賦課情報().get調定日時().getDate().wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString() : RString.EMPTY);
         if (前後区分) {
             編集後仮算定賦課台帳情報.set仮算定内訳更正後(仮算定内訳);
         } else {
@@ -850,7 +848,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         if (本人個人 != null) {
             本人.set本人生年月日(本人個人.get生年月日For帳票());
         }
-        if (境界層当該者情報 != null) {
+        if (境界層当該者情報 != null && 前後区分) {
             本人.set本人限界層該当開始年月日(get年月日(境界層当該者情報.getTekiyoKaishiYMD()));
             本人.set本人限界層該当終了年月日(get年月日(境界層当該者情報.getTekiyoShuryoYMD()));
         }
@@ -866,14 +864,14 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         Honnin 本人 = new Honnin();
         本人.set本人資格取得日(get年月日(賦課の情報.get賦課情報().get資格取得日()));
         if (賦課の情報.get賦課情報().get資格取得事由() != null && !賦課の情報.get賦課情報().get資格取得事由().isEmpty()) {
-            RString 本人取得事由
-                    = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, コード種別0007, new Code(賦課の情報.get賦課情報().get資格取得事由()));
+            RString 本人取得事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
+                    DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), new Code(賦課の情報.get賦課情報().get資格取得事由()));
             本人.set本人取得事由(本人取得事由);
         }
         本人.set本人資格喪失日(get年月日(賦課の情報.get賦課情報().get資格喪失日()));
         if (賦課の情報.get賦課情報().get資格喪失事由() != null && !賦課の情報.get賦課情報().get資格喪失事由().isEmpty()) {
-            RString 本人喪失事由
-                    = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, コード種別0010, new Code(賦課の情報.get賦課情報().get資格喪失事由()));
+            RString 本人喪失事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
+                    DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(), new Code(賦課の情報.get賦課情報().get資格喪失事由()));
             本人.set本人喪失事由(本人喪失事由);
         }
         if (被保険者台帳情報 != null) {
@@ -1162,6 +1160,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             特別徴収増減額.set特徴金額４(特別徴収更正後.get特徴金額４());
             特別徴収増減額.set特徴金額５(特別徴収更正後.get特徴金額５());
             特別徴収増減額.set特徴金額６(特別徴収更正後.get特徴金額６());
+            特別徴収増減額.set調整額歳出還付(特別徴収更正後.get調整額歳出還付());
         } else {
             特別徴収増減額.set特徴確定年額保険料(get増減額(特別徴収更正後.get特徴確定年額保険料(), 特別徴収更正前.get特徴確定年額保険料()));
             特別徴収増減額.set特徴金額１(get増減額(特別徴収更正後.get特徴金額１(), 特別徴収更正前.get特徴金額１()));
@@ -1170,6 +1169,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             特別徴収増減額.set特徴金額４(get増減額(特別徴収更正後.get特徴金額４(), 特別徴収更正前.get特徴金額４()));
             特別徴収増減額.set特徴金額５(get増減額(特別徴収更正後.get特徴金額５(), 特別徴収更正前.get特徴金額５()));
             特別徴収増減額.set特徴金額６(get増減額(特別徴収更正後.get特徴金額６(), 特別徴収更正前.get特徴金額６()));
+            特別徴収増減額.set調整額歳出還付(get増減額(特別徴収更正後.get調整額歳出還付(), 特別徴収更正前.get調整額歳出還付()));
         }
         特別徴収増減額.set特徴金額７(RString.EMPTY);
         特別徴収増減額.set特徴金額８(RString.EMPTY);
@@ -1179,7 +1179,6 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         特別徴収増減額.set特徴金額１２(RString.EMPTY);
         特別徴収増減額.set特徴金額１３(RString.EMPTY);
         特別徴収増減額.set特徴金額１４(RString.EMPTY);
-        特別徴収増減額.set調整額歳出還付(get増減額(特別徴収増減額.get調整額歳出還付(), 特別徴収増減額.get調整額歳出還付()));
         編集後本算定賦課台帳情報.set特別徴収増減額(特別徴収増減額);
     }
 
@@ -1238,7 +1237,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         普通徴収.set普徴納付済額(RString.EMPTY);
         普通徴収.set普徴今後納付すべき額(RString.EMPTY);
         if (普通徴収更正前 == null) {
-            普通徴収.set普徴仮算定保険料(普通徴収更正後.get普徴仮算定保険料());
+            普通徴収.set普徴確定年額保険料(普通徴収更正後.get普徴確定年額保険料());
             普通徴収.set普徴金額１(普通徴収更正後.get普徴金額１());
             普通徴収.set普徴金額２(普通徴収更正後.get普徴金額２());
             普通徴収.set普徴金額３(普通徴収更正後.get普徴金額３());
@@ -1255,7 +1254,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             普通徴収.set普徴金額１４(普通徴収更正後.get普徴金額１４());
             普通徴収.set調整額歳出還付(普通徴収更正後.get調整額歳出還付());
         } else {
-            普通徴収.set普徴仮算定保険料(get増減額(普通徴収更正後.get普徴仮算定保険料(), 普通徴収更正前.get普徴仮算定保険料()));
+            普通徴収.set普徴確定年額保険料(get増減額(普通徴収更正後.get普徴確定年額保険料(), 普通徴収更正前.get普徴確定年額保険料()));
             普通徴収.set普徴金額１(get増減額(普通徴収更正後.get普徴金額１(), 普通徴収更正前.get普徴金額１()));
             普通徴収.set普徴金額２(get増減額(普通徴収更正後.get普徴金額２(), 普通徴収更正前.get普徴金額２()));
             普通徴収.set普徴金額３(get増減額(普通徴収更正後.get普徴金額３(), 普通徴収更正前.get普徴金額３()));
@@ -1300,7 +1299,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             Class clazz = fukaJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                特徴仮算定保険料.add(get金額((Decimal) getMethod.invoke(fukaJoho)));
+                特徴仮算定保険料 = 特徴仮算定保険料.add(get金額((Decimal) getMethod.invoke(fukaJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1319,7 +1318,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             Class clazz = fukaJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                普徴納付済額.add(get金額((Decimal) getMethod.invoke(fukaJoho)));
+                普徴納付済額 = 普徴納付済額.add(get金額((Decimal) getMethod.invoke(fukaJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1339,7 +1338,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             Class clazz = 収入情報.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                特徴収入済額.add(get金額((Decimal) getMethod.invoke(収入情報)));
+                特徴収入済額 = 特徴収入済額.add(get金額((Decimal) getMethod.invoke(収入情報)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1359,7 +1358,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             Class clazz = 収入情報.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                普徴収入済額.add(get金額((Decimal) getMethod.invoke(収入情報)));
+                普徴収入済額 = 普徴収入済額.add(get金額((Decimal) getMethod.invoke(収入情報)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1510,7 +1509,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         if (RString.isNullOrEmpty(調定事由)) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, 調定事由_コード種別, new Code(調定事由));
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.調定事由.getコード(), new Code(調定事由));
     }
 
     private Decimal get前年度普通徴収最終期保険料(FukaJoho 前年度情報, Kitsuki 最終法定納期) {
@@ -1524,7 +1523,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         Class clazz = 前年度情報.getClass();
         try {
             Method getMethod = clazz.getDeclaredMethod(sb.toString());
-            普徴納付済額.add(get金額((Decimal) getMethod.invoke(前年度情報)));
+            普徴納付済額 = 普徴納付済額.add(get金額((Decimal) getMethod.invoke(前年度情報)));
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
             Logger.getLogger(FukaDaichoDataHenshu.class.getName()).log(Level.SEVERE, null, ex);
         }

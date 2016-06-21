@@ -6,7 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaitaishosha.IShinsakaiTaishoshaRelateMapper">
 
     <select id="get予定情報と結果情報" resultMap="resultMap_ShinsakaiTaishoshaRelateEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaitaishosha.ShinsakaiTaishoshaMapperParameter"   fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaitaishosha.ShinsakaiTaishoshaMapperParameter"   fetchSize="500">
        	SELECT 														
 		A."shinsakaiKaisaiNo" as "shinsakaiKaisaiNo",
                 B."gogitaiMei" as "gogitaiMei",

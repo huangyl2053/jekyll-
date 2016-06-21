@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dba.business.report.juryoininharaikeiyakushinseish
 import jp.co.ndensan.reams.db.dba.business.report.juryoininharaikeiyakushinseisho.JuryoIninharaiKeiyakuShinseishoProerty;
 import jp.co.ndensan.reams.db.dba.business.report.juryoininharaikeiyakushinseisho.JuryoIninharaiKeiyakuShinseishoReport;
 import jp.co.ndensan.reams.db.dba.entity.report.juryoininharaikeiyakushinseisho.JuryoIninharaiKeiyakuShinseishoReportSource;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;

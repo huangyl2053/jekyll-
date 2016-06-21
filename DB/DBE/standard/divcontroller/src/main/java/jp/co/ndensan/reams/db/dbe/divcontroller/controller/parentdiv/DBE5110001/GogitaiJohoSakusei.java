@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5110001.Gog
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaijoho.GogitaiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijohosakusei.GogitaiJohoSakuseiFinder;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.KyoyuFileName;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.KyoyuFileName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
@@ -248,9 +248,9 @@ public class GogitaiJohoSakusei {
      */
     public ResponseData<GogitaiJohoSakuseiDiv> onOkClose_btnShinsainSelect(GogitaiJohoSakuseiDiv div) {
         RString 介護認定審査会委員コード = ViewStateHolder.get(
-                jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.介護認定審査会委員コード, RString.class);
+                jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys.介護認定審査会委員コード, RString.class);
         RString 審査会委員名称 = ViewStateHolder.get(
-                jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.審査会委員名称, RString.class);
+                jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys.審査会委員名称, RString.class);
         boolean flag = false;
         for (dgShinsainList_Row row : div.getDgShinsainList().getDataSource()) {
             if (row.getShinsakaiIinCode().equals(介護認定審査会委員コード)) {
@@ -288,9 +288,9 @@ public class GogitaiJohoSakusei {
      */
     public ResponseData<GogitaiJohoSakuseiDiv> onOkClose_btnSubShinsainSelect(GogitaiJohoSakuseiDiv div) {
         RString 介護認定審査会委員コード = ViewStateHolder.get(
-                jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.介護認定審査会委員コード, RString.class);
+                jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys.介護認定審査会委員コード, RString.class);
         RString 審査会委員名称 = ViewStateHolder.get(
-                jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.審査会委員名称, RString.class);
+                jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys.審査会委員名称, RString.class);
         boolean flag = false;
         for (dgHoketsuShinsainList_Row row : div.getDgHoketsuShinsainList().getDataSource()) {
             if (row.getHoketsuShinsakaiIinCode().equals(介護認定審査会委員コード)) {

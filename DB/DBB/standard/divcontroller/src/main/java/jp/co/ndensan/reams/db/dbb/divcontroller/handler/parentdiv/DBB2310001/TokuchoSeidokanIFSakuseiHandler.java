@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 public class TokuchoSeidokanIFSakuseiHandler {
 
     private static final RString MESSAGE_特徴対象者同定が終了しない = new RString("特徴対象者同定が終了しない");
-    private static final RString MESSAGE_特徴制度間F処理 = new RString("特徴制度間F処理");
+    private static final RString MESSAGE_特徴制度間F処理 = new RString("特徴制度間I/F処理");
     private static final RString 年度内連番_0001 = new RString("0001");
     private static final RString 年度内連番_0002 = new RString("0002");
     private static final RString 年度内連番_0003 = new RString("0003");
@@ -159,7 +159,6 @@ public class TokuchoSeidokanIFSakuseiHandler {
         result.set年度(new FlexibleYear(div.getTxtChoteiNendo().getValue().toString().substring(NUM0, NUM4)));
         result.set特徴開始年月(new RDate(div.getDdlKaishiYM().getSelectedValue().toString()));
         result.set遷移元メニュー(ResponseHolder.getMenuID());
-        TokuchoSeidokanIFSakuseiBatchParameter param = tokuchosedokaniftanichu.getBatchiPara(result);
-        return param;
+        return tokuchosedokaniftanichu.getBatchiPara(result);
     }
 }

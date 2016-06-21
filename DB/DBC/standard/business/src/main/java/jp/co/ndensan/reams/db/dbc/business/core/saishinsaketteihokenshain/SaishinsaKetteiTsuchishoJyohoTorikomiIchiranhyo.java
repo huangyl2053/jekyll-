@@ -10,12 +10,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.saishinsaketteihokenshain.SaishinsaKetteiHokenshaInItem;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshain.SaishinsaKetteiHokenshaInGokeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshain.SaishinsaMeisaiPsmEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -59,7 +59,6 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
-    private static final CodeShubetsu コード種別 = new CodeShubetsu("0020");
 
     /**
      * 再審査決定通知書情報取込一覧表（保険者分）帳票データ作成
@@ -153,7 +152,7 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
                 item.set申立事由コード(明細Entity.getMoushitateJiyuCode());
                 item.set申立事由(明細Entity.getMoushitateJiyu());
                 UzT0007CodeEntity codeEntity = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                        コード種別, new Code(明細Entity.getSaishinsaResultCode()));
+                        DBCCodeShubetsu.再審査結果コード.getコード(), new Code(明細Entity.getSaishinsaResultCode()));
                 item.set再審査結果(codeEntity.getコード名称());
                 item.set再審査結果コード(明細Entity.getSaishinsaResultCode());
                 item.set当初請求単位数(DecimalFormatter.toコンマ区切りRString(明細Entity.getToshoSeikyuTanisu(), 0));

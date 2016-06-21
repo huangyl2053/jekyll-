@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.business.comparator;
 
 import java.util.Comparator;
 import jp.co.ndensan.reams.db.dbz.business.core.Hihokensha;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.SortOrder;
+import jp.co.ndensan.reams.db.dbz.definition.core.sortjun.SortOrder;
 
 /**
  * {@link Hihokensha Hihokensha}専用のcomparatorを集めたクラスです。
@@ -42,7 +42,7 @@ public final class HihokenshaComparators {
 
         @Override
         public int compare(Hihokensha hihokensha1, Hihokensha hihokensha2) {
-            return hihokensha1.get処理日時().compareTo(hihokensha2.get処理日時()) * order.rate();
+            return hihokensha1.get処理日時().compareTo(hihokensha2.get処理日時()) * order.getコード();
         }
     }
 
@@ -72,7 +72,7 @@ public final class HihokenshaComparators {
 
         @Override
         public int compare(Hihokensha hihokensha1, Hihokensha hihokensha2) {
-            return hihokensha1.get市町村コード().compareTo(hihokensha2.get市町村コード()) * order.rate();
+            return hihokensha1.get市町村コード().compareTo(hihokensha2.get市町村コード()) * order.getコード();
         }
     }
 }

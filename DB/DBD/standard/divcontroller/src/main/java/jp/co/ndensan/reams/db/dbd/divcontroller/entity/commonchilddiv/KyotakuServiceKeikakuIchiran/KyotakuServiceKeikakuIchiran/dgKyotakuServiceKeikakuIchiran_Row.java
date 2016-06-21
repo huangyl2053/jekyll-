@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.KyotakuSe
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Apr 27 22:56:31 JST 2016 
+ * Fri Jun 17 14:44:27 CST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgKyotakuServiceKeikakuIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private TextBoxFlexibleDate taishoYM;
     private RString keikakuSakuseiKubun;
@@ -30,6 +30,7 @@ public class dgKyotakuServiceKeikakuIchiran_Row extends DataRow {
     private TextBoxFlexibleDate startDate;
     private TextBoxFlexibleDate endDate;
     private RString yukomuko;
+    private RString rirekiNo;
 
     public dgKyotakuServiceKeikakuIchiran_Row() {
         super();
@@ -41,6 +42,7 @@ public class dgKyotakuServiceKeikakuIchiran_Row extends DataRow {
         this.startDate = new TextBoxFlexibleDate();
         this.endDate = new TextBoxFlexibleDate();
         this.yukomuko = RString.EMPTY;
+        this.rirekiNo = RString.EMPTY;
         this.setOriginalData("taishoYM", taishoYM);
         this.setOriginalData("keikakuSakuseiKubun", keikakuSakuseiKubun);
         this.setOriginalData("zan", zan);
@@ -49,9 +51,10 @@ public class dgKyotakuServiceKeikakuIchiran_Row extends DataRow {
         this.setOriginalData("startDate", startDate);
         this.setOriginalData("endDate", endDate);
         this.setOriginalData("yukomuko", yukomuko);
+        this.setOriginalData("rirekiNo", rirekiNo);
     }
 
-    public dgKyotakuServiceKeikakuIchiran_Row(TextBoxFlexibleDate taishoYM, RString keikakuSakuseiKubun, RString zan, RString jigyoshaNo, RString jigyoshaName, TextBoxFlexibleDate startDate, TextBoxFlexibleDate endDate, RString yukomuko) {
+    public dgKyotakuServiceKeikakuIchiran_Row(TextBoxFlexibleDate taishoYM, RString keikakuSakuseiKubun, RString zan, RString jigyoshaNo, RString jigyoshaName, TextBoxFlexibleDate startDate, TextBoxFlexibleDate endDate, RString yukomuko, RString rirekiNo) {
         super();
         this.setOriginalData("taishoYM", taishoYM);
         this.setOriginalData("keikakuSakuseiKubun", keikakuSakuseiKubun);
@@ -61,6 +64,7 @@ public class dgKyotakuServiceKeikakuIchiran_Row extends DataRow {
         this.setOriginalData("startDate", startDate);
         this.setOriginalData("endDate", endDate);
         this.setOriginalData("yukomuko", yukomuko);
+        this.setOriginalData("rirekiNo", rirekiNo);
         this.taishoYM = taishoYM;
         this.keikakuSakuseiKubun = keikakuSakuseiKubun;
         this.zan = zan;
@@ -69,6 +73,7 @@ public class dgKyotakuServiceKeikakuIchiran_Row extends DataRow {
         this.startDate = startDate;
         this.endDate = endDate;
         this.yukomuko = yukomuko;
+        this.rirekiNo = rirekiNo;
     }
 
     public TextBoxFlexibleDate getTaishoYM() {
@@ -101,6 +106,10 @@ public class dgKyotakuServiceKeikakuIchiran_Row extends DataRow {
 
     public RString getYukomuko() {
         return yukomuko;
+    }
+
+    public RString getRirekiNo() {
+        return rirekiNo;
     }
 
     public void setTaishoYM(TextBoxFlexibleDate taishoYM) {
@@ -141,6 +150,11 @@ public class dgKyotakuServiceKeikakuIchiran_Row extends DataRow {
     public void setYukomuko(RString yukomuko) {
         this.setOriginalData("yukomuko", yukomuko);
         this.yukomuko = yukomuko;
+    }
+
+    public void setRirekiNo(RString rirekiNo) {
+        this.setOriginalData("rirekiNo", rirekiNo);
+        this.rirekiNo = rirekiNo;
     }
 
     // </editor-fold>

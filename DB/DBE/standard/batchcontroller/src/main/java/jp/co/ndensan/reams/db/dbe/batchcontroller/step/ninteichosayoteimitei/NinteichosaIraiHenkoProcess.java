@@ -10,11 +10,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaihenko.NinteichosaIraiHenkoData;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaihenko.NinteichosaIraiHenkoDataChange;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosairaihenko.NinteichosaIraiHenkoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosayoteimitei.NinteichosaIraiHenkoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairaihenko.NinteichosaIraiHenkoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosairaihenko.NinteichosaIraiHenkoReportSource;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosayoteimitei.INinteichosaYoteiMiteiMapper;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -65,6 +67,7 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
     private int index_tmp = 0;
     private RString 導入団体コード;
     private RString 市町村名;
+    private int countData;
 
     @Override
     protected void beforeExecute() {
@@ -72,6 +75,7 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         導入団体コード = 導入団体クラス.getLasdecCode_().value();
         市町村名 = 導入団体クラス.get市町村名();
+        countData = getMapper(INinteichosaYoteiMiteiMapper.class).getCount(paramter.toMybitisParamter());
     }
 
     @Override
@@ -105,7 +109,7 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
                     MIDDLELINE,
                     MIDDLELINE,
                     MIDDLELINE);
-            NinteichosaIraiHenkoReport report = new NinteichosaIraiHenkoReport(data, index_tmp);
+            NinteichosaIraiHenkoReport report = new NinteichosaIraiHenkoReport(data, -1);
             report.writeBy(reportSourceWriter);
         }
         バッチ出力条件リストの出力();
@@ -115,7 +119,7 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
     protected void keyBreakProcess(NinteichosaIraiHenkoRelateEntity current) {
         if (hasBrek(getBefore(), current)) {
             AccessLogger.log(AccessLogType.照会, toPersonalData(current));
-            NinteichosaIraiHenkoData data = NinteichosaIraiHenkoData.createEdit(getBefore(), current);
+            NinteichosaIraiHenkoData data = NinteichosaIraiHenkoDataChange.createEdit(getBefore(), current, countData);
             if (data != null) {
                 NinteichosaIraiHenkoReport report = new NinteichosaIraiHenkoReport(data, index_tmp);
                 report.writeBy(reportSourceWriter);
@@ -131,7 +135,7 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
     @Override
     protected void usualProcess(NinteichosaIraiHenkoRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
-        NinteichosaIraiHenkoData data = NinteichosaIraiHenkoData.createEdit(getBefore(), entity);
+        NinteichosaIraiHenkoData data = NinteichosaIraiHenkoDataChange.createEdit(getBefore(), entity, countData);
         if (data != null) {
             NinteichosaIraiHenkoReport report = new NinteichosaIraiHenkoReport(data, index_tmp);
             report.writeBy(reportSourceWriter);

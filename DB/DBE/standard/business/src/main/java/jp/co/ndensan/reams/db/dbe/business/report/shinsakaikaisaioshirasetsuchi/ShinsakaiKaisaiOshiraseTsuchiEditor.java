@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shinsakaikaisaioshirasetsuchi;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaikaisaioshirasetsuchi.ShinsakaiKaisaiOshiraseTsuchiItem;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaikaisaioshirasetsuchi.ShinsakaiKaisaiOshiraseTsuchiReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -24,6 +25,9 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 class ShinsakaiKaisaiOshiraseTsuchiEditor implements IShinsakaiKaisaiOshiraseTsuchiEditor {
 
     private static final int INT_4 = 4;
+    private static final int INT_0 = 0;
+    private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
     private final ShinsakaiKaisaiOshiraseTsuchiItem item;
 
     /**
@@ -38,7 +42,8 @@ class ShinsakaiKaisaiOshiraseTsuchiEditor implements IShinsakaiKaisaiOshiraseTsu
     /**
      *
      * @param source 介護認定審査会開催のお知らせReportSourceクラス
-     * @return ShinsakaiKaisaiOshiraseTsuchiReportSource 介護認定審査会開催のお知らせReportSourceクラス
+     * @return ShinsakaiKaisaiOshiraseTsuchiReportSource
+     * 介護認定審査会開催のお知らせReportSourceクラス
      */
     @Override
     public ShinsakaiKaisaiOshiraseTsuchiReportSource edit(ShinsakaiKaisaiOshiraseTsuchiReportSource source) {
@@ -53,7 +58,7 @@ class ShinsakaiKaisaiOshiraseTsuchiEditor implements IShinsakaiKaisaiOshiraseTsu
         source.kikanNameText = item.get宛名機関名();
         source.shimeiText = item.get宛名氏名();
         source.meishoFuyo = item.get宛名名称付与();
-        source.title = new RString("介護認定審査会開催のお知らせ");
+        source.title = item.get帳票名();
         source.denshiKoin = item.get電子公印();
         source.koinMojiretsu = item.get電子公印文字列();
         source.koinShoryaku = item.get電子公印省略();
@@ -68,12 +73,12 @@ class ShinsakaiKaisaiOshiraseTsuchiEditor implements IShinsakaiKaisaiOshiraseTsu
         source.tsuchibun2 = item.get通知文2();
         source.shinsakaiKaisaiYMD = get開催日時();
         source.kaisaiKaijo = item.get開催会場();
-        source.gogitaiNo = item.get合議体番号();
+        source.gogitaiNo = item.get合議体();
         source.listKaisaiJoho_1 = get開催番号();
         source.listKaisaiJoho_2 = item.get開催日() != null && !item.get開催日().isEmpty()
                 ? item.get開催日().wareki().toDateString() : RString.EMPTY;
         source.listKaisaiJoho_3 = get開催時刻();
-        source.listKaisaiJoho_4 = item.get合議体();
+        source.listKaisaiJoho_4 = item.get合議体番号().padZeroToLeft(INT_2);
         source.listKaisaiJoho_5 = item.get会場();
         source.listJusho_1 = item.get住所();
         source.listTelNo_1 = item.get電話番号();
@@ -82,10 +87,11 @@ class ShinsakaiKaisaiOshiraseTsuchiEditor implements IShinsakaiKaisaiOshiraseTsu
     }
 
     private RString get開催時刻() {
+        List<RString> 予定時刻 = item.get予定時刻().split(":");
         RStringBuilder 開催時刻 = new RStringBuilder();
-        開催時刻.append(item.get予定時刻().substring(0, 2));
-        開催時刻.append(new RString(":"));
-        開催時刻.append(item.get予定時刻().substring(2));
+        開催時刻.append(予定時刻.get(INT_0).padZeroToLeft(INT_2))
+                .append(new RString(":"))
+                .append(予定時刻.get(INT_1).padZeroToLeft(INT_2));
         return 開催時刻.toRString();
     }
 
@@ -98,12 +104,14 @@ class ShinsakaiKaisaiOshiraseTsuchiEditor implements IShinsakaiKaisaiOshiraseTsu
     }
 
     private RString get開催日時() {
+        List<RString> 予定時刻 = item.get予定時刻().split(":");
         RStringBuilder 開催日時 = new RStringBuilder();
-        開催日時.append(getパターン9(item.get開催予定年月日()));
-        開催日時.append(item.get予定時刻().substring(0, 2));
-        開催日時.append(new RString("時"));
-        開催日時.append(item.get予定時刻().substring(2));
-        開催日時.append(new RString("分"));
+        開催日時.append(getパターン9(item.get開催予定年月日()))
+                .append(new RString(" "))
+                .append(予定時刻.get(INT_0).padZeroToLeft(INT_2))
+                .append(new RString("時"))
+                .append(予定時刻.get(INT_1).padZeroToLeft(INT_2))
+                .append(new RString("分"));
         return 開催日時.toRString();
     }
 

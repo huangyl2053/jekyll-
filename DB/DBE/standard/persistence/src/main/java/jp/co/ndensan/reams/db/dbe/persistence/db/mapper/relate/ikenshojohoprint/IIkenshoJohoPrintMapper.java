@@ -33,6 +33,14 @@ public interface IIkenshoJohoPrintMapper {
     List<IkenshoJohoPrintRelateEntity> get主治医意見書作成依頼変更者情報(IkenshoJohoPrintMapperParameter mapperParameter);
 
     /**
+     * 主治医意見書作成依頼変更者一覧情報のデータの件数を取得します。
+     *
+     * @param mapperParameter 意見書情報印刷のMyBatis用パラメータ
+     * @return count 件数
+     */
+    int get主治医意見書作成依頼変更者情報COUNT(IkenshoJohoPrintMapperParameter mapperParameter);
+
+    /**
      * 主治医意見書未提出者一覧情報を条件指定検索で複数件取得します。
      *
      * @param mapperParameter 意見書情報印刷のMyBatis用パラメータ

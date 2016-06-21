@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.DBC0820022StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.DBC0820022TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.KyufuShiharayiMeisaiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.dgdKyufuhiMeisai_Row;
@@ -21,7 +22,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.Shokanbar
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -50,7 +50,7 @@ public class KyufuShiharayiMeisaiPanel {
     private static final RString 登録 = new RString("登録");
     private static final RString 申請を保存する = new RString("btnUpdate");
     private static final RString 申請を削除する = new RString("btnDelete");
-    private static final ServiceShuruiCode サービス種類コード = new ServiceShuruiCode("50");
+//    private static final ServiceShuruiCode サービス種類コード = new ServiceShuruiCode("50");
 
     /**
      * onLoad事件
@@ -88,7 +88,7 @@ public class KyufuShiharayiMeisaiPanel {
         getHandler(div).set申請共通エリア(サービス年月, 事業者番号, 申請日, 明細番号, 様式番号);
         List<ShokanMeisaiResult> entityList = ShokanbaraiJyokyoShokai.createInstance().
                 getShokanbarayiSeikyuMeisayiList(
-                        被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null, サービス種類コード);
+                        被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null, null);
         div.getPanelThree().getPanelFour().setVisible(false);
         getHandler(div).initialize(entityList);
         ViewStateHolder.put(ViewStateKeys.給付費明細登録, (Serializable) entityList);
@@ -104,9 +104,9 @@ public class KyufuShiharayiMeisaiPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             div.getPanelThree().getBtnAdd().setDisabled(true);
             div.getPanelThree().getDgdKyufuhiMeisai().setReadOnly(true);
+            return ResponseData.of(div).setState(DBC0820022StateName.削除モード);
         }
-
-        return createResponse(div);
+        return ResponseData.of(div).setState(DBC0820022StateName.新規修正モード);
     }
 
     /**

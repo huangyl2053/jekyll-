@@ -73,6 +73,8 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakushinseiichiranjohyou.KougakuShinseiIchiranJohyouParameter"
             resultMap="resultMap_KougakuShinseiIchiranJohyouEntity" fetchSize="500">
          SELECT
+        B."serviceTeikyoYM" AS サービス年月,
+        B."rirekiNo" AS 管理番号,
         A."riyoshaFutanGakuGokei" AS 利用者負担額合計,
         A."santeiKijunGaku" AS 算定基準額,
         A."shiharaiSumiKingakuGokei" AS 支払済額合計,

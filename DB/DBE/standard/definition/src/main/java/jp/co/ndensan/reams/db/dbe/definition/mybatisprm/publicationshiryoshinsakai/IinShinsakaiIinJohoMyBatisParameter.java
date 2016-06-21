@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,11 +24,12 @@ public class IinShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuJun;
-    private boolean isShuturyokuJun;
+    private boolean isIsShuturyokuJun;
     private boolean isHaishiFlag_False;
     private boolean isHaishiFlag_True;
     private boolean isOrderKakuteiFlg;
     private FlexibleDate sisutemuYMD;
+    private ShinseishoKanriNo shinseishoKanriNo;
 
     /**
      * コンストラクタです。
@@ -36,18 +38,18 @@ public class IinShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
      * @param shinsakaiKaisaiYoteiYMD 介護認定審査会開催予定年月日
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      * @param shuturyokuJun 出力順
-     * @param isShuturyokuJun 出力順ファグ
+     * @param isIsShuturyokuJun 出力順ファグ
      */
     public IinShinsakaiIinJohoMyBatisParameter(
             RString gogitaiNo,
             FlexibleDate shinsakaiKaisaiYoteiYMD,
             RString shinsakaiKaisaiNo,
             RString shuturyokuJun,
-            boolean isShuturyokuJun) {
+            boolean isIsShuturyokuJun) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuJun = shuturyokuJun;
         this.gogitaiNo = gogitaiNo;
         this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
-        this.isShuturyokuJun = isShuturyokuJun;
+        this.isIsShuturyokuJun = isIsShuturyokuJun;
     }
 }

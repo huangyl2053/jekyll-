@@ -21,8 +21,6 @@ public class SystemKanriDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("KanryoMessage")
-    private KanryoMessageDiv KanryoMessage;
     @JsonProperty("lblSubGyomu")
     private Label lblSubGyomu;
     @JsonProperty("dgSystemKanri")
@@ -34,24 +32,6 @@ public class SystemKanriDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getKanryoMessage
-     * @return KanryoMessage
-     */
-    @JsonProperty("KanryoMessage")
-    public KanryoMessageDiv getKanryoMessage() {
-        return KanryoMessage;
-    }
-
-    /*
-     * setKanryoMessage
-     * @param KanryoMessage KanryoMessage
-     */
-    @JsonProperty("KanryoMessage")
-    public void setKanryoMessage(KanryoMessageDiv KanryoMessage) {
-        this.KanryoMessage = KanryoMessage;
-    }
-
     /*
      * getlblSubGyomu
      * @return lblSubGyomu

@@ -210,12 +210,12 @@ public class FukaTest extends DbbTestBase {
 
         @Test
         public void get課税区分は_entityが持つ課税区分を返す() {
-            assertThat(sut.get課税区分().toRString(), is(FukaEntity.getKazeiKubun()));
+            assertThat(sut.get課税区分().get名称(), is(FukaEntity.getKazeiKubun()));
         }
 
         @Test
         public void get世帯課税区分は_entityが持つ世帯課税区分を返す() {
-            assertThat(sut.get世帯課税区分().toRString(), is(FukaEntity.getSetaikazeiKubun()));
+            assertThat(sut.get世帯課税区分().get名称(), is(FukaEntity.getSetaikazeiKubun()));
         }
 
         @Test

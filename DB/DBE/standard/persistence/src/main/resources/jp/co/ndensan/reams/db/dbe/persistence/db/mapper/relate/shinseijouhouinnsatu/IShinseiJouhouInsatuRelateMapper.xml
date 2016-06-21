@@ -30,7 +30,7 @@
         <result property="消除異動年月日" column="D_shojoIdoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
     
-   <select id="selectShinseiJouhou"
+   <select resultOrdered="true" id="selectShinseiJouhou"
             resultMap="resultMap_ShinseiJouhouInsatuEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseijouhouinnsatu.ShinseiJouhouInsatuMybatisParameter" fetchSize="500">
        SELECT

@@ -37,5 +37,23 @@ public enum FuchoKarisanteiFukaMenuPanelSpec implements IPredicate<FuchoKarisant
                     .getFuchoKarisanteiChohyoHakko2().getFuchoTsuchiKobetsuJoho().getChkNotsuTaishosha2().getSelectedItems();
                     return selectedItems != null && !selectedItems.isEmpty();
                 }
+            },
+    /**
+     * 「実行する」ボタンを押下すると、保険料納入通知書（仮算定）のチェックがオンの場合、納入通知書の型が「0:なし」の場合、エラーとする
+     */
+    帳票IDのチェック_型0 {
+                @Override
+                public boolean apply(FuchoKarisanteiFukaMenuPanelDiv div) {
+                    return false;
+                }
+            },
+    /**
+     * 「実行する」ボタンを押下すると、保険料納入通知書（仮算定）のチェックがオンの場合、納入通知書の型が「2:銀振型5期タイプ」の場合、エラーとする
+     */
+    帳票IDのチェック_型2 {
+                @Override
+                public boolean apply(FuchoKarisanteiFukaMenuPanelDiv div) {
+                    return false;
+                }
             };
 }

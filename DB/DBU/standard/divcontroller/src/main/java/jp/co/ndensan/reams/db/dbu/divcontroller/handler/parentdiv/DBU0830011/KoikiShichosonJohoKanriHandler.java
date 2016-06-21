@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.RozinhokenbangotaikeiCh
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaiyusenChikuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShotokuHikidashiHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.TokuchoBunpaiShuyaku;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinShimeiHyojihoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinShimeiHyojihoho;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

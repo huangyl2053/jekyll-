@@ -80,11 +80,9 @@ public class YokaigoYoshienShinseiIchiranReport extends Report<YokaigoYoshienShi
         RStringBuilder printTimeStamp = new RStringBuilder();
         printTimeStamp.append(date);
         printTimeStamp.append(time);
-        int renban = 1;
         for (YokaigoYoshienShinseiIchiranItem item : itemList) {
             item.setTitle(ReportIdDBE.DBE011001.getReportName());
             item.setPrintTimeStamp(printTimeStamp.toRString());
-            item.setRenban(new RString(String.valueOf(renban++)));
             IYokaigoYoshienShinseiIchiranEditor editor = new YokaigoYoshienShinseiIchiranEditorImpl(item);
             IYokaigoYoshienShinseiIchiranBuilder builder = new YokaigoYoshienShinseiIchiranBuilderImpl(editor);
             reportSourceWriter.writeLine(builder);

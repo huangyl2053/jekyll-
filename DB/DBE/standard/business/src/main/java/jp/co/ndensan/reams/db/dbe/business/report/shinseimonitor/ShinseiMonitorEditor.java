@@ -71,7 +71,7 @@ public class ShinseiMonitorEditor implements IShinseiMonitorEditor {
         source.listShinseimonita_7 = set性別(item.get性別());
         source.listShinseimonita_8 = set申請区分(item.get前回申請区分());
         source.listShinseimonita_9 = set前回二次判定結果();
-        source.listShinseimonita_10 = new RString(item.get前回月数());
+        source.listShinseimonita_10 = item.get前回月数() == 0 ? RString.EMPTY : new RString(item.get前回月数());
         source.listShinseimonita_11 = dateFormat(item.get前回認定有効期間開始日());
         source.listShinseimonita_12 = dateFormat(item.get前回認定有効期間終了日());
         source.listShinseimonita_13 = dateFormat(item.get前回認定申請年月日());
@@ -79,8 +79,12 @@ public class ShinseiMonitorEditor implements IShinseiMonitorEditor {
         source.listShinseimonita_15 = dateFormat(item.get消除異動年月日());
         source.listShinseimonita_16 = RString.EMPTY;
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        source.hokenshaNo = new ExpandedInformation(new Code("100"), new RString("保険者番号"), item.get保険者番号());
-        source.hihokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
+        if (!RString.isNullOrEmpty(item.get保険者番号())) {
+            source.hokenshaNo = new ExpandedInformation(new Code("100"), new RString("保険者番号"), item.get保険者番号());
+        }
+        if (!RString.isNullOrEmpty(item.get被保険者番号())) {
+            source.hihokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
+        }
         return source;
     }
 

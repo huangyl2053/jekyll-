@@ -80,6 +80,81 @@ public class ShokujiHiyoPanelHandler {
     }
 
     /**
+     * setボタン状態
+     *
+     * @param サービス提供年月 FlexibleYearMonth
+     */
+    public void setボタン状態(FlexibleYearMonth サービス提供年月) {
+        if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
+            div.getPanelShokuji().getPanelShoikujiList().setVisible(false);
+            div.getPanelShokuji().getPanelDetailGokei().setVisible(false);
+            div.getPanelShokuji().getPanelDetail1().setVisible(true);
+            div.getPanelShokuji().getPanelDetail1().setReadOnly(true);
+            div.getPanelShokuji().getPanelDetail2().setVisible(false);
+            div.getPanelShokuji().getPanelDetail1().getBtnCancel1().setVisible(false);
+            div.getPanelShokuji().getPanelDetail1().getBtnConfirm1().setVisible(false);
+        }
+        if (平成１５年３月.isBefore(サービス提供年月)
+                && サービス提供年月.isBeforeOrEquals(平成17年９月)) {
+            div.getPanelShokuji().getPanelShoikujiList().setVisible(true);
+            div.getPanelShokuji().getPanelShoikujiList().setReadOnly(true);
+            div.getPanelShokuji().getPanelDetailGokei().setVisible(true);
+            div.getPanelShokuji().getPanelDetailGokei().setReadOnly(true);
+            div.getPanelShokuji().getPanelDetail1().setVisible(false);
+            div.getPanelShokuji().getPanelDetail2().setVisible(false);
+        }
+        if (平成17年１０月.isBeforeOrEquals(サービス提供年月)) {
+            div.getPanelShokuji().getPanelShoikujiList().setVisible(false);
+            div.getPanelShokuji().getPanelDetailGokei().setVisible(true);
+            div.getPanelShokuji().getPanelDetailGokei().setReadOnly(true);
+            div.getPanelShokuji().getPanelDetail1().setVisible(false);
+            div.getPanelShokuji().getPanelDetail2().setVisible(false);
+        }
+    }
+
+    /**
+     * set平成１５年３月_平成17年１０月_状態
+     */
+    public void set平成１５年３月_平成17年１０月_状態() {
+        div.getPanelShokuji().getPanelShoikujiList().setVisible(true);
+        div.getPanelShokuji().getPanelDetailGokei().setVisible(true);
+        div.getPanelShokuji().getPanelDetail1().setDisplayNone(true);
+        div.getPanelShokuji().getPanelDetail2().setVisible(false);
+    }
+
+    /**
+     * set平成17年１０月_状態
+     */
+    public void set平成17年１０月_状態() {
+        div.getPanelShokuji().getPanelShoikujiList().setDisplayNone(true);
+        div.getPanelShokuji().getPanelDetailGokei().setVisible(true);
+        div.getPanelShokuji().getPanelDetailGokei().getTxtTeikyohiGokei().setReadOnly(false);
+        div.getPanelShokuji().getPanelDetail1().setVisible(false);
+        div.getPanelShokuji().getPanelDetail2().setVisible(false);
+    }
+
+    /**
+     * set平成１５年３月_状態
+     */
+    public void set平成１５年３月_状態() {
+        div.getPanelShokuji().getPanelShoikujiList().setDisplayNone(true);
+        div.getPanelShokuji().getPanelDetailGokei().setDisplayNone(true);
+        div.getPanelShokuji().getPanelDetail1().setVisible(true);
+        div.getPanelShokuji().getPanelDetail2().setVisible(false);
+        div.getPanelShokuji().getPanelDetail1().getBtnCancel1().setVisible(false);
+        div.getPanelShokuji().getPanelDetail1().getBtnConfirm1().setVisible(false);
+    }
+
+    /**
+     * set標準負担額日額
+     *
+     * @param 標準負担額日額 Decimal
+     */
+    public void set標準負担額日額(Decimal 標準負担額日額) {
+        div.getPanelShokuji().getPanelDetailGokei().getTxtHigaku().setValue(標準負担額日額);
+    }
+
+    /**
      * 保存処理confirmのメソッド
      *
      * @param row dgdShokuji_Row

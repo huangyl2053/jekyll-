@@ -21,10 +21,10 @@ public class ShotokuJokyo {
      * 初期化
      *
      * @param div ShotokuJokyoDiv
-     * @return ResponseData<GemmenShokaiDiv>
+     * @return ResponseData<ShotokuJokyoDiv>
      */
-    public ResponseData<ShotokuJokyoDiv> onLoad(ShotokuJokyoDiv div) {
-        div.load(new ShikibetsuCode(div.getTxtShikibetsuCode()));
+    public ResponseData<ShotokuJokyoDiv> initialize(ShotokuJokyoDiv div) {
+        div.initialize(new ShikibetsuCode(div.getTxtShikibetsuCode()));
         return ResponseData.of(div).respond();
     }
 
@@ -32,7 +32,7 @@ public class ShotokuJokyo {
      * 再表示する
      *
      * @param div ShotokuJokyoDiv
-     * @return ResponseData<GemmenShokaiDiv>
+     * @return ResponseData<ShotokuJokyoDiv>
      */
     public ResponseData<ShotokuJokyoDiv> onClick_Saihyoji(ShotokuJokyoDiv div) {
         div.世帯員所得情報の取得(new ShikibetsuCode(div.getTxtShikibetsuCode()), true);
@@ -43,7 +43,7 @@ public class ShotokuJokyo {
      * 所得状況画面を閉じる。
      *
      * @param div ShotokuJokyoDiv
-     * @return ResponseData<GemmenShokaiDiv>
+     * @return ResponseData<ShotokuJokyoDiv>
      */
     public ResponseData<ShotokuJokyoDiv> onClick_btnRirekiClose(ShotokuJokyoDiv div) {
         return ResponseData.of(div).dialogOKClose();

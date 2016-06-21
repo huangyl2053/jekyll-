@@ -58,7 +58,6 @@ public class ShinsaschedulekagamiEditorImpl implements IShinsaschedulekagamiEdit
         source.shimeiText = item.getShimeiText();
         source.meishoFuyo = item.getMeishoFuyo();
         source.customerBarCode = item.getCustomerBarCode();
-        source.atenaRenban = item.getAtenaRenban();
         source.title = item.getTitle();
         source.tsuchibun1 = item.getTsuchibun1();
         source.shoriMikomiKaishiYMD = item.getShoriMikomiKaishiYMD() == null

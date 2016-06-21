@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
@@ -329,7 +329,7 @@ public final class ReportUtil {
             return chohyoShutsuryokujunFinder.get出力順(subGyomuCode,
                     reportId,
                     reamsLoginID,
-                    new Long(shutsuryokujunId.toString()));
+                    Long.valueOf(shutsuryokujunId.toString()));
         }
         return null;
     }

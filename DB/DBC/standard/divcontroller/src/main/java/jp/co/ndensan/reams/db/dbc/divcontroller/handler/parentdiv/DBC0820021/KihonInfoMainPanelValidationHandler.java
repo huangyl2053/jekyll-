@@ -28,6 +28,8 @@ public class KihonInfoMainPanelValidationHandler {
     private final KihonInfoMainPanelDiv div;
     private static final RString 入所年月日 = new RString("入所年月日");
     private static final RString 基本情報_STR = new RString("基本情報");
+    private static final RString 入所院実日数_STR = new RString("入所（院）実日数");
+    private static final RString 入所院前の状況_STR = new RString("入所（院）前の状況");
 
     /**
      * コンストラクタです。
@@ -49,6 +51,26 @@ public class KihonInfoMainPanelValidationHandler {
     }
 
     /**
+     * 入所（院）実日数のバリデーションチェック。
+     *
+     * @return バリデーション突合結果
+     */
+    public ValidationMessageControlPairs 入所院実日数の必須チェックValidate() {
+        IValidationMessages messages = new ControlValidator(div).入所院実日数の必須チェックValidate();
+        return 入所院実日数Dictionary().check(messages);
+    }
+
+    /**
+     * 入所（院）前の状況のバリデーションチェック。
+     *
+     * @return バリデーション突合結果
+     */
+    public ValidationMessageControlPairs 入所院前の状況の必須チェックValidate() {
+        IValidationMessages messages = new ControlValidator(div).入所院前の状況の必須チェックValidate();
+        return 入所院前の状況Dictionary().check(messages);
+    }
+
+    /**
      * 明細番号のバリデーションチェック。
      *
      * @return バリデーション突合結果
@@ -62,6 +84,18 @@ public class KihonInfoMainPanelValidationHandler {
         return new ValidationDictionaryBuilder()
                 .add(KihonInfoMainPanelValidationMessages.入所年月日必須チェック,
                         div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD()).build();
+    }
+
+    private ValidationDictionary 入所院実日数Dictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(KihonInfoMainPanelValidationMessages.入所院実日数必須チェック,
+                        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoJitsuNissu()).build();
+    }
+
+    private ValidationDictionary 入所院前の状況Dictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(KihonInfoMainPanelValidationMessages.入所院前の状況必須チェック,
+                        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState()).build();
     }
 
     private ValidationDictionary 明細番号Dictionary() {
@@ -79,7 +113,7 @@ public class KihonInfoMainPanelValidationHandler {
         }
 
         /**
-         * 「入所年月日のバリデーションチェック。
+         * 入所年月日のバリデーションチェック。
          *
          * @return バリデーション突合結果
          */
@@ -88,6 +122,34 @@ public class KihonInfoMainPanelValidationHandler {
             messages.add(ValidateChain.validateStart(div)
                     .ifNot(KihonInfoMainPanelSpec.入所年月日)
                     .thenAdd(KihonInfoMainPanelValidationMessages.入所年月日必須チェック)
+                    .messages());
+            return messages;
+        }
+
+        /**
+         * 入所（院）実日数のバリデーションチェック。
+         *
+         * @return バリデーション突合結果
+         */
+        public IValidationMessages 入所院実日数の必須チェックValidate() {
+            IValidationMessages messages = ValidationMessagesFactory.createInstance();
+            messages.add(ValidateChain.validateStart(div)
+                    .ifNot(KihonInfoMainPanelSpec.入所院実日数)
+                    .thenAdd(KihonInfoMainPanelValidationMessages.入所院実日数必須チェック)
+                    .messages());
+            return messages;
+        }
+
+        /**
+         * 入所（院）前の状況のバリデーションチェック。
+         *
+         * @return バリデーション突合結果
+         */
+        public IValidationMessages 入所院前の状況の必須チェックValidate() {
+            IValidationMessages messages = ValidationMessagesFactory.createInstance();
+            messages.add(ValidateChain.validateStart(div)
+                    .ifNot(KihonInfoMainPanelSpec.入所院前の状況)
+                    .thenAdd(KihonInfoMainPanelValidationMessages.入所院前の状況必須チェック)
                     .messages());
             return messages;
         }
@@ -110,6 +172,8 @@ public class KihonInfoMainPanelValidationHandler {
     private static enum KihonInfoMainPanelValidationMessages implements IValidationMessage {
 
         入所年月日必須チェック(UrErrorMessages.必須項目_追加メッセージあり, 入所年月日.toString()),
+        入所院実日数必須チェック(UrErrorMessages.必須項目_追加メッセージあり, 入所院実日数_STR.toString()),
+        入所院前の状況必須チェック(UrErrorMessages.必須項目_追加メッセージあり, 入所院前の状況_STR.toString()),
         明細番号チェック(UrErrorMessages.対象データなし_追加メッセージあり, 基本情報_STR.toString());
 
         private final Message message;

@@ -13,7 +13,7 @@ import static jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei.
 import static jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei.広域市町村;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigoninteiatenainfo.KaigoNinteiAtenaInfoBusiness;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.HdnShoriTypeStatus;
+import jp.co.ndensan.reams.db.dbz.definition.core.hokensha.HdnShoriTypeStatus;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigoninteiatenainfo.KaigoNinteiAtenaInfoParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv.AtenaType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv.ShoriType;

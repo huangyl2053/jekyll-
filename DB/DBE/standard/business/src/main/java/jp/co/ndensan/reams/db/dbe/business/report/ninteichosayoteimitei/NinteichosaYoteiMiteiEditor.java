@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business.report.ninteichosayoteimitei;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosayoteimitei.NinteichosaYoteiMiteiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosayoteimitei.NinteichosaYoteiMiteiReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -58,10 +60,11 @@ public class NinteichosaYoteiMiteiEditor implements INinteichosaYoteiMiteiEditor
         source.listChosaYoteimitei_4 = item.getDbT5101_hihokenshaName() == null ? RString.EMPTY : item.getDbT5101_hihokenshaName().value();
         source.listChosaYoteimitei_5 = item.getDbT5101_hihokenshaNo();
         source.listChosaYoteimitei_6 = dateFormat(item.getDbT5101_ninteiShinseiYMD());
-        source.listChosaYoteimitei_7 = item.getDbT5101_seibetsu() == null ? RString.EMPTY : item.getDbT5101_seibetsu().value();
+        source.listChosaYoteimitei_7 = item.getDbT5101_seibetsu() == null ? RString.EMPTY : Seibetsu.toValue(item
+                .getDbT5101_seibetsu().value()).get名称();
         source.listChosaYoteimitei_8 = dateFormat(item.getDbT5101_seinengappiYMD());
-        source.listChosaYoteimitei_9 = item.getDbT5101_ninteiShinseiShinseijiKubunCode() == null ? RString.EMPTY : item
-                .getDbT5101_ninteiShinseiShinseijiKubunCode().value();
+        source.listChosaYoteimitei_9 = item.getDbT5101_ninteiShinseiShinseijiKubunCode() == null ? RString.EMPTY : NinteiShinseiShinseijiKubunCode
+                .toValue(item.getDbT5101_ninteiShinseiShinseijiKubunCode().value()).get名称();
         source.listChosaYoteimitei_10 = item.getDbT5910_ZenZenkai_jigyoshaMeisho();
         source.listChosaYoteimitei_11 = item.getDbT5913_ZenZenkai_chosainShimei();
         source.listChosaYoteimitei_12 = item.getDbT5910_Zenkai_jigyoshaMeisho();
@@ -69,8 +72,14 @@ public class NinteichosaYoteiMiteiEditor implements INinteichosaYoteiMiteiEditor
         source.listChosaYoteimitei_14 = item.getDbT5910_jigyoshaMeisho();
         source.listChosaYoteimitei_15 = item.getDbT5913_chosainShimei();
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        source.hokenshaNo = new ExpandedInformation(new Code("100"), new RString("保険者番号"), item.getDbT5101_shoKisaiHokenshaNo());
-        source.hihokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.getDbT5101_hihokenshaNo());
+        RString 保険者番号 = RString.EMPTY;
+        RString 被保険者番号 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(item.getDbT5101_shoKisaiHokenshaNo())) {
+            保険者番号 = item.getDbT5101_shoKisaiHokenshaNo();
+            被保険者番号 = item.getDbT5101_hihokenshaNo();
+        }
+        source.hokenshaNo = new ExpandedInformation(new Code("100"), new RString("保険者番号"), 保険者番号);
+        source.hihokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), 被保険者番号);
         return source;
     }
 

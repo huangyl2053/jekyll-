@@ -132,8 +132,18 @@ public class KaigoToiawasesaki {
      * @return ResponseData<KaigoToiawasesakiDiv>
      */
     public ResponseData<KaigoToiawasesakiDiv> onClick_btnSave(KaigoToiawasesakiDiv div) {
-        KaigoToiawasesakiFinder.createInstance().insertOrUpdate(
-                getHandler(div).updateOneRow(ViewStateHolder.get(ViewStateKeys.介護問合せ先情報, Models.class)).build());
+        RString 問合せ先管理単位 = DbBusinessConfig.get(ConfigNameDBU.問合せ先_管理単位, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        KaigoToiawasesakiIdentifier oneKey = null;
+        if (介護共通.equals(問合せ先管理単位)) {
+            oneKey = new KaigoToiawasesakiIdentifier(SubGyomuCode.DBZ介護共通, CHOHYOBUNRUIID);
+        } else if (サブ業務単位.equals(問合せ先管理単位)) {
+            oneKey = new KaigoToiawasesakiIdentifier(new SubGyomuCode(div.getHdnSubGyomuCode()),
+                    CHOHYOBUNRUIID);
+        }
+        if (ViewStateHolder.get(ViewStateKeys.介護問合せ先情報, Models.class).get(oneKey) != null) {
+            KaigoToiawasesakiFinder.createInstance().insertOrUpdate(
+                    getHandler(div).updateOneRow(ViewStateHolder.get(ViewStateKeys.介護問合せ先情報, Models.class), oneKey).build());
+        }
         KaigoToiawasesakiIdentifier twoKey = new KaigoToiawasesakiIdentifier(new SubGyomuCode(div.getHdnSubGyomuCode()),
                 new ReportId(div.getHdnChohyoBunruiID()));
         if (帳票独自あり.equals(div.getHdnChohyoDokujiToiawasesakiUmu())) {

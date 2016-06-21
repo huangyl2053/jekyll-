@@ -85,7 +85,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7131KaigoServiceNaiyouDac;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -145,6 +145,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
     private static final FlexibleYearMonth 定値_提供購入年月 = new FlexibleYearMonth("200304");
     private static final FlexibleYearMonth 提供購入年月_200509 = new FlexibleYearMonth("200509");
     private static final FlexibleYearMonth サービス年月_200904 = new FlexibleYearMonth("200904");
+    private static final RString モード_修正 = new RString("修正");
 
     /**
      * コンストラクタです。
@@ -997,6 +998,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                 dbT3036entity.setKetteiYMD(parameter.get決定年月日());
                 dbT3036entity.setShikyuHushikyuKetteiKubun(parameter.get支給区分());
                 dbT3036entity.setShiharaiKingaku(parameter.get支払金額合計());
+                set前回支払金額(parameter, dbT3036entity);
+                dbT3036entity.setSagakuKingakuGokei(parameter.get差額金額());
                 dbT3036entity.setState(EntityDataState.Modified);
                 償還払支給判定結果Dac.save(dbT3036entity);
                 修正前支給区分 = parameter.get支給区分();
@@ -1027,6 +1030,14 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                     = SyokanbaraiShikyuKetteKyufuJssekiHensyuManager.createInstance();
             manager.dealKyufujisseki(parameter.get画面モード(), parameter.get識別コード(),
                     entity, 修正前支給区分);
+        }
+    }
+
+    private void set前回支払金額(SyokanbaraihiShikyuShinseiKetteParameter parameter, DbT3036ShokanHanteiKekkaEntity dbT3036entity) {
+        if (モード_修正.equals(parameter.get画面モード())) {
+            if (!parameter.get支払金額合計初期().equals(parameter.get支払金額合計())) {
+                dbT3036entity.setZenkaiShiharaiKingaku(parameter.get支払金額合計初期());
+            }
         }
     }
 

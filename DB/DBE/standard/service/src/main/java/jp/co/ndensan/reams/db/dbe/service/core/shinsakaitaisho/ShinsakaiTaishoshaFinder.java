@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaitaishosha.ShinsakaiTaishoshaBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaitaishosha.ShinsakaiTaishoshaMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaitaishosha.ShinsakaiTaishoshaMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaitaishosha.ShinsakaiTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaitaishosha.IShinsakaiTaishoshaRelateMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 審査会個人別状況照会のServiceクラスです。
  *
- * // * @reamsid_L DBE-1380-010 jinjue
+ * @reamsid_L DBE-1380-010 jinjue
  */
 public class ShinsakaiTaishoshaFinder {
 
@@ -35,7 +35,7 @@ public class ShinsakaiTaishoshaFinder {
     }
 
     /**
-     * テスト用コンストラクタです。
+     * コンストラクタです。
      *
      * @param mapperProvider {@link MapperProvider}}
      */
@@ -62,7 +62,7 @@ public class ShinsakaiTaishoshaFinder {
         IShinsakaiTaishoshaRelateMapper mapper = mapperProvider.create(IShinsakaiTaishoshaRelateMapper.class);
         List<ShinsakaiTaishoshaRelateEntity> entity = mapper.
                 get予定情報と結果情報(ShinsakaiTaishoshaMapperParameter.createSelectBy情報(審査会開催番号));
-        if (entity == null) {
+        if (entity == null || entity.isEmpty()) {
             return null;
         }
         return new ShinsakaiTaishoshaBusiness(entity.get(0));

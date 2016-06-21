@@ -64,8 +64,8 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hiroshimadomain.IHiroshimaDomainMapper.get転入転出異動情報");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBA200011_KoikinaiTenkyoKekkaIchiranhyo.csv");
-    private static final ReportId DBA200011 = new ReportId("DBA200011_KoikinaiTenkyoKekkaIchiranhyo");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBU200004_KoikinaiTenkyoKekkaIchiranhyo.csv");
+    private static final ReportId DBU200004 = new ReportId("DBU200004_KoikinaiTenkyoKekkaIchiranhyo");
     private static final RString INDEX = new RString("000000");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString DELIMITER = new RString(" ");
@@ -112,10 +112,10 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(DBA200011.value()).create();
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(DBU200004.value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         RString spoolWorkPath = Path.getTmpDirectoryPath();
-        eucFilePath = Path.combinePath(spoolWorkPath, new RString("DBA200011_KoikinaiTenkyoKekkaIchiranhyo.csv"));
+        eucFilePath = Path.combinePath(spoolWorkPath, new RString("DBU200004_KoikinaiTenkyoKekkaIchiranhyo.csv"));
         eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).

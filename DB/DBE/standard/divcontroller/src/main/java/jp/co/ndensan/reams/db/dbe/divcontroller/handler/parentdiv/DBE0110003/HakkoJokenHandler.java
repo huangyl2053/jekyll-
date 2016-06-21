@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110003;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosayoteimitei.NinteichosaYoteiMiteiBatchParamter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110003.HakkoJokenDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -20,6 +21,7 @@ public class HakkoJokenHandler {
     private static final RString SELECT_KEY0 = new RString("key0");
     private static final RString SELECT_KEY1 = new RString("key1");
     private static final RString SELECT_KEY2 = new RString("key2");
+    private static final RString SELECT_KEY3 = new RString("key3");
     private static final List<RString> SELECT_LIST = new ArrayList<>();
     private final HakkoJokenDiv div;
 
@@ -123,5 +125,52 @@ public class HakkoJokenHandler {
                 div.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().getTxtShinsaYMD().setDisabled(true);
             }
         }
+    }
+
+    /**
+     * バッチ用パラメータクラスを作成します。
+     *
+     * @return ninteichosaYoteiMiteiBatchParamter
+     */
+    public NinteichosaYoteiMiteiBatchParamter setBatchParameter() {
+        NinteichosaYoteiMiteiBatchParamter ninteichosaYoteiMiteiBatchParamter = new NinteichosaYoteiMiteiBatchParamter();
+        if (div.getChkNinteiChosaYoteiMiteishaIchiran().getSelectedKeys().contains(SELECT_KEY0)) {
+            ninteichosaYoteiMiteiBatchParamter.setNinteichosayoteimitei(true);
+            if (div.getRadJoken1().getSelectedKey().contains(SELECT_KEY0)) {
+                ninteichosaYoteiMiteiBatchParamter.setJoken1(new RString("1"));
+            } else {
+                ninteichosaYoteiMiteiBatchParamter.setJoken1(new RString("2"));
+                ninteichosaYoteiMiteiBatchParamter.setYoteimiteiymdFrom(div.getTxtYoteiMiteishaShinseiYMD().getFromValue().toDateString());
+                ninteichosaYoteiMiteiBatchParamter.setYoteimiteiymdTo(div.getTxtYoteiMiteishaShinseiYMD().getToValue().toDateString());
+            }
+        } else {
+            ninteichosaYoteiMiteiBatchParamter.setNinteichosayoteimitei(false);
+        }
+        if (div.getChkNinteiChosaIraisakiHenkoshaIchiranhyoJoken().getSelectedKeys().contains(SELECT_KEY0)) {
+            ninteichosaYoteiMiteiBatchParamter.setNinteichosaijoken(true);
+            ninteichosaYoteiMiteiBatchParamter.setIraisakihenkymdFrom(div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getFromValue().toDateString());
+            ninteichosaYoteiMiteiBatchParamter.setIraisakihenkymdTo(div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getToValue().toDateString());
+        } else {
+            ninteichosaYoteiMiteiBatchParamter.setNinteichosaijoken(false);
+        }
+        if (div.getChkNinteiChosaKekkaShujiiIkenshoCheckListJoken().getSelectedKeys().contains(SELECT_KEY0)) {
+            ninteichosaYoteiMiteiBatchParamter.setCheckListJoken(true);
+            if (div.getRadJoken3().getSelectedKey().contains(SELECT_KEY3)) {
+                ninteichosaYoteiMiteiBatchParamter.setJoken3(new RString("4"));
+                ninteichosaYoteiMiteiBatchParamter.setShinsakai(new RString(div.getTxtShinsakai().toString()));
+            } else if (div.getRadJoken3().getSelectedKey().contains(SELECT_KEY1)) {
+                ninteichosaYoteiMiteiBatchParamter.setJoken3(new RString("2"));
+                ninteichosaYoteiMiteiBatchParamter.setCheckListShinseiYMDFrom(div.getTxtCheckListShinseiYMD().getFromValue().toDateString());
+                ninteichosaYoteiMiteiBatchParamter.setCheckListShinseiYMDTo(div.getTxtCheckListShinseiYMD().getToValue().toDateString());
+            } else if (div.getRadJoken3().getSelectedKey().contains(SELECT_KEY2)) {
+                ninteichosaYoteiMiteiBatchParamter.setJoken3(new RString("3"));
+                ninteichosaYoteiMiteiBatchParamter.setShinsaYMD(new RString(div.getTxtShinsaYMD().toString()));
+            } else {
+                ninteichosaYoteiMiteiBatchParamter.setJoken3(new RString("1"));
+            }
+        } else {
+            ninteichosaYoteiMiteiBatchParamter.setCheckListJoken(false);
+        }
+        return ninteichosaYoteiMiteiBatchParamter;
     }
 }

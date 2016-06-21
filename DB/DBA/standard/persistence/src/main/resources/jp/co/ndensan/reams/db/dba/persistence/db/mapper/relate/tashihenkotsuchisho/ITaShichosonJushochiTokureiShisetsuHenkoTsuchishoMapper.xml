@@ -66,7 +66,7 @@ and open the template in the editor.
     </select>
     <select id="selectTaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatis"
             resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashihenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatisParameter">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tashihenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatisParameter">
         SELECT
         A."kanaMeisho"AS "カナ名称",
         A."meisho" AS "名称",
@@ -77,7 +77,7 @@ and open the template in the editor.
     </select>
     <select id="selectTatokuKanrenChohyoRenrakuhyoMybatis"
             resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashihenkotsuchisho.TatokuKanrenChohyoRenrakuhyoMybatisParameter">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tashihenkotsuchisho.TatokuKanrenChohyoRenrakuhyoMybatisParameter">
         SELECT
         A."kanaMeisho" AS "カナ名称",
         A."meisho" AS "名称",

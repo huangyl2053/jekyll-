@@ -4,7 +4,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigojuminhyo.IKaigoJuminhyoMapper">
 
     <select resultOrdered="true" id="getKaigoJuminhyoEntity" resultMap="resultMap_KaigoJuminhyoEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigojuminhyo.KaigoJuminhyoMapperParameter" fetchSize="500">
         SELECT
         dbT1001HihokenshaDaicho.*,
         dbT4001JukyushaDaicho.*

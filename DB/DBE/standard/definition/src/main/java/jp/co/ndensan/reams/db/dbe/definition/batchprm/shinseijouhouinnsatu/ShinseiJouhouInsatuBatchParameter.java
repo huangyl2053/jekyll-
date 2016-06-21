@@ -19,6 +19,7 @@ import lombok.Setter;
 @Setter
 public class ShinseiJouhouInsatuBatchParameter extends BatchParameterBase {
 
+    private static final long serialVersionUID = -3010965675691712156L;
     private static final String SHINSEI_MONITORFLAG = "shinseimonitorflag";
     private static final String YOKAIGOYOSHIENSEII_CHIRANFLAG = "yokaigoyoshienseiichiranflag";
     private static final String SAKUSEI_JYOUKEN = "sakuseijyouken";

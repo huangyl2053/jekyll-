@@ -34,7 +34,7 @@
     </resultMap>
 
     <select resultOrdered="true" id="selct他市町村住所地特例" resultMap="result_selct他市町村住所地特例"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter" fetchSize="500">
         SELECT
         dbT1003."shikibetsuCode"               AS "shikibetsuCode",
         dbT1003."idoYMD"                       AS "idoYMD",
@@ -120,7 +120,7 @@
         <result property="jigyoshaName" column="jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="get事業者名称_介護保険施設" resultMap="result_get事業者名称_介護保険施設"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter" fetchSize="500">
         SELECT
         dbT7060."jigyoshaName" AS "jigyoshaName"
         FROM
@@ -141,7 +141,7 @@
         <result property="jigyoshaMeisho" column="jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="get事業者名称_住所地特例対象施設" resultMap="result_get事業者名称_住所地特例対象施設"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter" fetchSize="500">
         SELECT
         dbT1005."jigyoshaMeisho" AS "jigyoshaMeisho"
         FROM
@@ -161,7 +161,7 @@
 
     </select>
     <select resultOrdered="true" id="select宛名情報" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
@@ -172,7 +172,7 @@
 
     <select resultOrdered="true" id="select施設入退所情報リスト件数取得"
             resultType="java.lang.Integer"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisya.TaJushochiTokureisyaKanriParameter">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisya.TaJushochiTokureisyaKanriParameter">
         SELECT
         COUNT(*)
         FROM
@@ -188,7 +188,7 @@
     
     
     <select resultOrdered="true" id="get他市町村住所地特例" resultMap="ResultMap_TashichosonRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1003TashichosonJushochiTokureiMapper.allColumns_DbT1003TashichosonJushochiTokurei"/>,
            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.allColumns_DbT1004ShisetsuNyutaisho"/> 

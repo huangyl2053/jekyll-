@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsa
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 委員用特記事項と一次判定結果票情報のMyBatisParameterです。
@@ -21,13 +22,13 @@ public class IinTokkiJikouItiziHanteiMyBatisParameter implements IMyBatisParamet
 
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuJun;
-    private RString bangoStart;
-    private RString bangoEnd;
+    private Decimal bangoStart;
+    private Decimal bangoEnd;
     private ShinseishoKanriNo shinseishoKanri;
     private int ninteichosaRirekiNo;
     private RString genponKubun;
     private boolean isSakuseiJokenHani;
-    private boolean isShuturyokuJun;
+    private boolean isIsShuturyokuJun;
     private boolean isSakuseiJokenTuika;
     private boolean isOrderKakuteiFlg;
     private RString isShoriJotaiKubun0;
@@ -42,22 +43,22 @@ public class IinTokkiJikouItiziHanteiMyBatisParameter implements IMyBatisParamet
      * @param bangoEnd 終了資料番号
      * @param isSakuseiJokenHani 作成条件_範囲指定ファグ
      * @param isSakuseiJokenTuika 作成条件_追加分ファグ
-     * @param isShuturyokuJun 出力順ファグ
+     * @param isIsShuturyokuJun 出力順ファグ
      */
     public IinTokkiJikouItiziHanteiMyBatisParameter(
             RString shinsakaiKaisaiNo,
             RString shuturyokuJun,
-            RString bangoStart,
-            RString bangoEnd,
+            Decimal bangoStart,
+            Decimal bangoEnd,
             boolean isSakuseiJokenHani,
             boolean isSakuseiJokenTuika,
-            boolean isShuturyokuJun) {
+            boolean isIsShuturyokuJun) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuJun = shuturyokuJun;
         this.bangoStart = bangoStart;
         this.bangoEnd = bangoEnd;
         this.isSakuseiJokenHani = isSakuseiJokenHani;
         this.isSakuseiJokenTuika = isSakuseiJokenTuika;
-        this.isShuturyokuJun = isShuturyokuJun;
+        this.isIsShuturyokuJun = isIsShuturyokuJun;
     }
 }

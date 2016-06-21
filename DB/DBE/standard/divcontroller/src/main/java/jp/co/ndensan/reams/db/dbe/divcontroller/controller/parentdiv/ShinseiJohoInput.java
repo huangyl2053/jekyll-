@@ -33,8 +33,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.Sins
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.dgKankeiIin_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.dgShisetsuRereki_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.TeikeibunKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.TeikeibunShubetsuElseTokki;
+import jp.co.ndensan.reams.db.dbz.definition.core.teikeibun.TeikeibunKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.teikeibun.TeikeibunShubetsuElseTokki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -1031,8 +1031,8 @@ public class ShinseiJohoInput {
 
         @Override
         public void onLoad() {
-            div.setTeikeiKbn(TeikeibunKubun.特記事項以外.getCode());
-            div.setTeikeiShubetsu(TeikeibunShubetsuElseTokki.申請理由.getCode());
+            div.setTeikeiKbn(TeikeibunKubun.特記事項以外.getコード());
+            div.setTeikeiShubetsu(TeikeibunShubetsuElseTokki.申請理由.getコード());
         }
 
         @Override

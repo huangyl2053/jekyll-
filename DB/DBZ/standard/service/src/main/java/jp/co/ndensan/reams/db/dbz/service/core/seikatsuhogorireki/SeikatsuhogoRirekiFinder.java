@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.seikatsuhogorireki.Seikatsuho
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.seikatsuhogorireki.ISeikatsuhogoRirekiMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urd.definition.core.seikatsuhogo.KaigoRyoDairiNofuKubunType;
+import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class SeikatsuhogoRirekiFinder {
 
     private final MapperProvider mapperProvider;
-    private final CodeShubetsu コード種別 = new CodeShubetsu("0017");
     private final RString 連結 = new RString("／");
 
     /**
@@ -114,10 +113,10 @@ public class SeikatsuhogoRirekiFinder {
                     teishiShuryo.append(連結);
                 }
                 if (!RString.isNullOrEmpty(entity.getFujoShuruiCode())
-                        && !RString.isNullOrEmpty(CodeMaster.getCodeRyakusho(SubGyomuCode.URZ業務共通_共通系, コード種別,
-                                        new Code(entity.getFujoShuruiCode()), FlexibleDate.getNowDate()))) {
-                    codeRyakusho.append(CodeMaster.getCodeRyakusho(SubGyomuCode.URZ業務共通_共通系, コード種別,
-                            new Code(entity.getFujoShuruiCode()), FlexibleDate.getNowDate()));
+                        && !RString.isNullOrEmpty(CodeMaster.getCodeRyakusho(SubGyomuCode.URZ業務共通_共通系, URZCodeShubetsu.扶助種類コード
+                                        .getCodeShubetsu(), new Code(entity.getFujoShuruiCode()), FlexibleDate.getNowDate()))) {
+                    codeRyakusho.append(CodeMaster.getCodeRyakusho(SubGyomuCode.URZ業務共通_共通系, URZCodeShubetsu.扶助種類コード
+                            .getCodeShubetsu(), new Code(entity.getFujoShuruiCode()), FlexibleDate.getNowDate()));
                     codeRyakusho.append(連結);
                 }
                 relateEntity.setFujoShuruiCode(shuruiCode.toRString());

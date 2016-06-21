@@ -6,28 +6,37 @@
 package jp.co.ndensan.reams.db.dbc.service.core.kogakushokaihanteikekka;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakushokaihanteikekka.KogakuShokaiHanteiKekkaResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakushokaihanteikekka.ShikyuMeisaiResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaihanteikekka.KogakuShokaiHanteiKekkaParam;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3056KogakuShikyuShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3058KogakuShikyuShinsaKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3110JigyoKogakuShikyuShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3112KogakuShikyuShinsaKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaihanteikekka.JigyoKogakuShokaiHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaihanteikekka.JigyoKogakuShokaiHanteiKekkaIchiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaihanteikekka.KogakuShokaiHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaihanteikekka.KogakuShokaiHanteiKekkaIchiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakushokaihanteikekka.IKogakuShokaiHanteiKekkaMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -39,6 +48,8 @@ public class KogakuShokaiHanteiKekkaFinder {
 
     private final MapperProvider mapperProvider;
     private static final RString 審査結果反映区分_反映済 = new RString("1");
+    private static final RString 明細 = new RString("明細");
+    private static final RString 事業者名 = new RString("事業者名称");
     private static final RString メニューID_高額介護 = new RString("DBCMN11004");
     private static final RString メニューID_総合事業高額介護 = new RString("DBCMN11016");
 
@@ -68,29 +79,28 @@ public class KogakuShokaiHanteiKekkaFinder {
         IKogakuShokaiHanteiKekkaMapper mapper = mapperProvider.create(IKogakuShokaiHanteiKekkaMapper.class);
         KogakuShokaiHanteiKekkaResult result = new KogakuShokaiHanteiKekkaResult();
         if (メニューID_高額介護.equals(parameter.getメニューID())) {
-            KogakuShokaiHanteiKekkaEntity entity = mapper.get高額介護支給判定結果(parameter);
-            if (entity == null) {
+            KogakuShokaiHanteiKekkaIchiEntity entity = mapper.get高額介護支給判定結果(parameter);
+            if (entity == null || entity.get高額判定結果_決定情報List() == null || entity.get高額判定結果_決定情報List().isEmpty()) {
                 return null;
             }
-            result = get高額介護情報(entity);
+            result = get高額介護情報(entity.get高額判定結果_決定情報List());
         } else if (メニューID_総合事業高額介護.equals(parameter.getメニューID())) {
-            JigyoKogakuShokaiHanteiKekkaEntity entity = mapper.get事業高額介護支給判定結果(parameter);
-            if (entity == null) {
+            JigyoKogakuShokaiHanteiKekkaIchiEntity entity = mapper.get事業高額介護支給判定結果(parameter);
+            if (entity == null || entity.get事業高額判定結果_決定情報List() == null || entity.get事業高額判定結果_決定情報List().isEmpty()) {
                 return null;
             }
-            result = get事業高額介護情報(entity);
+            result = get事業高額介護情報(entity.get事業高額判定結果_決定情報List());
         }
         return result;
     }
 
-    private KogakuShokaiHanteiKekkaResult get高額介護情報(KogakuShokaiHanteiKekkaEntity entity) {
+    private KogakuShokaiHanteiKekkaResult get高額介護情報(List<KogakuShokaiHanteiKekkaEntity> entityList) {
         KogakuShokaiHanteiKekkaResult result = new KogakuShokaiHanteiKekkaResult();
         List<ShikyuMeisaiResult> 支給明細list = new ArrayList<>();
-        List<DbT3054KogakuKyufuTaishoshaMeisaiEntity> 明細List = entity.get高額介護サービス費給付対象者明細List();
-        DbT3057KogakuShikyuHanteiKekkaEntity 判定結果entity = entity.get高額介護サービス費支給判定結果Entity();
-        DbT3055KogakuKyufuTaishoshaGokeiEntity 合計Entity = entity.get高額介護サービス費給付対象者合計Entity();
-        DbT3058KogakuShikyuShinsaKetteiEntity 審査決定Entity = entity.get高額介護サービス費支給審査決定Entity();
-        List<DbT7060KaigoJigyoshaEntity> 介護事業者List = entity.get介護事業者List();
+        DbT3057KogakuShikyuHanteiKekkaEntity 判定結果entity = entityList.get(0).get高額介護サービス費支給判定結果Entity();
+        DbT3055KogakuKyufuTaishoshaGokeiEntity 合計Entity = entityList.get(0).get高額介護サービス費給付対象者合計Entity();
+        DbT3058KogakuShikyuShinsaKetteiEntity 審査決定Entity = entityList.get(0).get高額介護サービス費支給審査決定Entity();
+        List<Map<RString, Object>> 明細Listと事業者名称 = get明細Listと事業者名称(entityList);
         if (合計Entity != null) {
             result.set世帯集約番号(合計Entity.getSetaiShuyakuNo());
             result.set自動償還対象フラグ(合計Entity.getJidoShokanTaishoFlag());
@@ -98,12 +108,16 @@ public class KogakuShokaiHanteiKekkaFinder {
             result.set世帯集約番号(RString.EMPTY);
             result.set自動償還対象フラグ(Boolean.FALSE);
         }
-        if (明細List != null && !明細List.isEmpty()) {
-            result.set高額給付根拠(明細List.get(0).getKogakuKyufuKonkyo());
-            for (DbT3054KogakuKyufuTaishoshaMeisaiEntity 明細entity : 明細List) {
+        if (明細Listと事業者名称 != null && !明細Listと事業者名称.isEmpty()) {
+            DbT3054KogakuKyufuTaishoshaMeisaiEntity 明細entity1件目
+                    = (DbT3054KogakuKyufuTaishoshaMeisaiEntity) 明細Listと事業者名称.get(0).get(明細);
+            result.set高額給付根拠(明細entity1件目.getKogakuKyufuKonkyo());
+            for (Map<RString, Object> map : 明細Listと事業者名称) {
+                DbT3054KogakuKyufuTaishoshaMeisaiEntity 明細entity = (DbT3054KogakuKyufuTaishoshaMeisaiEntity) map.get(明細);
                 ShikyuMeisaiResult 支給明細entity = new ShikyuMeisaiResult();
                 支給明細entity.set事業者番号(明細entity.getJigyoshaNo());
-                支給明細entity.set事業者名称(get事業者名称(明細entity.getJigyoshaNo(), 介護事業者List));
+                AtenaMeisho 事業者名称 = (AtenaMeisho) map.get(事業者名);
+                支給明細entity.set事業者名称(事業者名称);
                 支給明細entity.setサービス種類コード(明細entity.getServiceShuruiCode());
                 支給明細entity.setサービス費用合計(明細entity.getServiceHiyoGokeiGaku());
                 支給明細entity.set利用者負担額(明細entity.getRiyoshaFutanGaku());
@@ -134,7 +148,7 @@ public class KogakuShokaiHanteiKekkaFinder {
             result.set高額給付根拠(RString.EMPTY);
         }
         result.set支給明細list(支給明細list);
-        result.set受付年月日(entity.get高額介護サービス費支給申請Entity().getUketsukeYMD());
+        result.set受付年月日(entityList.get(0).get高額介護サービス費支給申請Entity().getUketsukeYMD());
         if (判定結果entity != null) {
             result.set決定年月日(判定結果entity.getKetteiYMD());
             result.set審査方法区分(判定結果entity.getShinsaHohoKubun());
@@ -151,14 +165,13 @@ public class KogakuShokaiHanteiKekkaFinder {
         return result;
     }
 
-    private KogakuShokaiHanteiKekkaResult get事業高額介護情報(JigyoKogakuShokaiHanteiKekkaEntity entity) {
+    private KogakuShokaiHanteiKekkaResult get事業高額介護情報(List<JigyoKogakuShokaiHanteiKekkaEntity> entityList) {
         KogakuShokaiHanteiKekkaResult result = new KogakuShokaiHanteiKekkaResult();
         List<ShikyuMeisaiResult> 支給明細list = new ArrayList<>();
-        List<DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity> 明細List = entity.get事業高額介護サービス費給付対象者明細List();
-        DbT3111JigyoKogakuShikyuHanteiKekkaEntity 判定結果entity = entity.get事業高額介護サービス費支給判定結果Entity();
-        DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity 合計Entity = entity.get事業高額介護サービス費給付対象者合計Entity();
-        DbT3112KogakuShikyuShinsaKetteiEntity 審査決定Entity = entity.get事業高額介護サービス費支給審査決定Entity();
-        List<DbT7060KaigoJigyoshaEntity> 介護事業者List = entity.get介護事業者List();
+        DbT3111JigyoKogakuShikyuHanteiKekkaEntity 判定結果entity = entityList.get(0).get事業高額介護サービス費支給判定結果Entity();
+        DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity 合計Entity = entityList.get(0).get事業高額介護サービス費給付対象者合計Entity();
+        DbT3112KogakuShikyuShinsaKetteiEntity 審査決定Entity = entityList.get(0).get事業高額介護サービス費支給審査決定Entity();
+        List<Map<RString, Object>> 事業明細Listと事業者名称 = get事業明細Listと事業者名称(entityList);
         if (合計Entity != null) {
             result.set世帯集約番号(合計Entity.getSetaiShuyakuNo());
             result.set自動償還対象フラグ(合計Entity.getJidoShokanTaishoFlag());
@@ -166,12 +179,16 @@ public class KogakuShokaiHanteiKekkaFinder {
             result.set世帯集約番号(RString.EMPTY);
             result.set自動償還対象フラグ(Boolean.FALSE);
         }
-        if (明細List != null && !明細List.isEmpty()) {
-            result.set高額給付根拠(明細List.get(0).getJigyoKogakuKyufuKonkyo());
-            for (DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity 明細entity : 明細List) {
+        if (事業明細Listと事業者名称 != null && !事業明細Listと事業者名称.isEmpty()) {
+            DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity 明細entity1件目
+                    = (DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity) 事業明細Listと事業者名称.get(0).get(明細);
+            result.set高額給付根拠(明細entity1件目.getJigyoKogakuKyufuKonkyo());
+            for (Map<RString, Object> map : 事業明細Listと事業者名称) {
+                DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity 明細entity = (DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity) map.get(明細);
                 ShikyuMeisaiResult 支給明細entity = new ShikyuMeisaiResult();
                 支給明細entity.set事業者番号(明細entity.getJigyoshaNo());
-                支給明細entity.set事業者名称(get事業者名称(明細entity.getJigyoshaNo(), 介護事業者List));
+                AtenaMeisho 事業者名称 = (AtenaMeisho) map.get(事業者名);
+                支給明細entity.set事業者名称(事業者名称);
                 支給明細entity.setサービス種類コード(明細entity.getServiceShuruiCode());
                 支給明細entity.setサービス費用合計(明細entity.getServiceHiyoGokeiGaku());
                 支給明細entity.set利用者負担額(明細entity.getRiyoshaFutanGaku());
@@ -202,7 +219,7 @@ public class KogakuShokaiHanteiKekkaFinder {
             result.set高額給付根拠(RString.EMPTY);
         }
         result.set支給明細list(支給明細list);
-        result.set受付年月日(entity.get事業高額介護サービス費支給申請Entity().getUketsukeYMD());
+        result.set受付年月日(entityList.get(0).get事業高額介護サービス費支給申請Entity().getUketsukeYMD());
         if (判定結果entity != null) {
             result.set決定年月日(判定結果entity.getKetteiYMD());
             result.set審査方法区分(判定結果entity.getShinsaHohoKubun());
@@ -251,14 +268,60 @@ public class KogakuShokaiHanteiKekkaFinder {
         return result;
     }
 
-    private AtenaMeisho get事業者名称(JigyoshaNo 事業者番号, List<DbT7060KaigoJigyoshaEntity> 介護事業者List) {
-        if (介護事業者List != null && !介護事業者List.isEmpty()) {
-            for (DbT7060KaigoJigyoshaEntity entity : 介護事業者List) {
-                if (事業者番号 != null && 事業者番号.equals(entity.getJigyoshaNo())) {
-                    return entity.getJigyoshaName();
+    private List<Map<RString, Object>> get明細Listと事業者名称(List<KogakuShokaiHanteiKekkaEntity> entityList) {
+        List<Map<RString, Object>> mapList = new ArrayList<>();
+        DbT3056KogakuShikyuShinseiEntity 支給申請Entity = entityList.get(0).get高額介護サービス費支給申請Entity();
+        HihokenshaNo hihokenshaNo = 支給申請Entity.getHihokenshaNo();
+        FlexibleYearMonth serviceTeikyoYM = 支給申請Entity.getServiceTeikyoYM();
+        Decimal rirekiNo = 支給申請Entity.getRirekiNo();
+        List<DbT3054KogakuKyufuTaishoshaMeisaiEntity> 明細List = new ArrayList<>();
+        for (KogakuShokaiHanteiKekkaEntity entity : entityList) {
+            DbT3056KogakuShikyuShinseiEntity 支給申請_明細Entity = entity.get高額介護サービス費支給申請Entity();
+            if (hihokenshaNo.equals(支給申請_明細Entity.getHihokenshaNo())
+                    && serviceTeikyoYM.equals(支給申請_明細Entity.getServiceTeikyoYM())
+                    && rirekiNo.equals(支給申請_明細Entity.getRirekiNo())) {
+                DbT3054KogakuKyufuTaishoshaMeisaiEntity 明細entity = entity.get高額介護サービス費給付対象者明細Entity();
+                if (明細entity == null || 明細List.contains(明細entity)) {
+                    continue;
                 }
+                Map<RString, Object> map = new HashMap<>();
+                map.put(明細, 明細entity);
+                DbT7060KaigoJigyoshaEntity 介護事業者entity = entity.get介護事業者Entity();
+                AtenaMeisho 事業者名称 = 介護事業者entity == null ? AtenaMeisho.EMPTY : 介護事業者entity.getJigyoshaName();
+                map.put(事業者名, 事業者名称);
+                mapList.add(map);
+                明細List.add(明細entity);
             }
         }
-        return AtenaMeisho.EMPTY;
+        return mapList;
     }
+
+    private List<Map<RString, Object>> get事業明細Listと事業者名称(List<JigyoKogakuShokaiHanteiKekkaEntity> entityList) {
+        List<Map<RString, Object>> mapList = new ArrayList<>();
+        DbT3110JigyoKogakuShikyuShinseiEntity 支給申請Entity = entityList.get(0).get事業高額介護サービス費支給申請Entity();
+        HihokenshaNo hihokenshaNo = 支給申請Entity.getHihokenshaNo();
+        FlexibleYearMonth serviceTeikyoYM = 支給申請Entity.getServiceTeikyoYM();
+        Decimal rirekiNo = 支給申請Entity.getRirekiNo();
+        List<DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity> 明細List = new ArrayList<>();
+        for (JigyoKogakuShokaiHanteiKekkaEntity entity : entityList) {
+            DbT3110JigyoKogakuShikyuShinseiEntity 支給申請_明細Entity = entity.get事業高額介護サービス費支給申請Entity();
+            if (hihokenshaNo.equals(支給申請_明細Entity.getHihokenshaNo())
+                    && serviceTeikyoYM.equals(支給申請_明細Entity.getServiceTeikyoYM())
+                    && rirekiNo.equals(支給申請_明細Entity.getRirekiNo())) {
+                DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity 明細entity = entity.get事業高額介護サービス費給付対象者明細Entity();
+                if (明細entity == null || 明細List.contains(明細entity)) {
+                    continue;
+                }
+                Map<RString, Object> map = new HashMap<>();
+                map.put(明細, 明細entity);
+                DbT7060KaigoJigyoshaEntity 介護事業者entity = entity.get介護事業者Entity();
+                AtenaMeisho 事業者名称 = 介護事業者entity == null ? AtenaMeisho.EMPTY : 介護事業者entity.getJigyoshaName();
+                map.put(事業者名, 事業者名称);
+                mapList.add(map);
+                明細List.add(明細entity);
+            }
+        }
+        return mapList;
+    }
+
 }

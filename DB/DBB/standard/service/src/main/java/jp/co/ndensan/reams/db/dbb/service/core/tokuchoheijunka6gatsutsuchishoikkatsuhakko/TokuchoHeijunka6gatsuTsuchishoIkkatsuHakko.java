@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dbb.service.core.tokuchoheijunka6gatsutsuchishoikkatsuhakko;
 
 import java.io.File;
@@ -11,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHohoBuilder;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchoheijunka6tsuchishoikatsuhako.Dbb100012MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranProperty.DBB100012ShutsuryokujunEnum;
@@ -22,15 +16,18 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSant
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiTsuchiShoKyotsuKomokuHenshu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NokiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.HeijunkaHenkoOutputJoken;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2017TsuchishoHakkogoIdoshaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.DbTKeisangoJohoTempTableEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KariSanteigakuHenkoTsuchishoHakkoIchiranData;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KarisanteiGakuHenkoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2017TsuchishoHakkogoIdoshaDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6tsuchishoikatsuhako.ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
@@ -42,8 +39,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki._Atesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
@@ -61,8 +58,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.report.daikoprint.DaikoPrintItem;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.daikoprint.DaikoPrintFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.daikoprint.IDaikoPrint;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
@@ -70,6 +65,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFa
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameter;
@@ -109,13 +105,16 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
 
     private final MapperProvider mapperProvider;
     private final ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper mapper;
+    private final DbT2017TsuchishoHakkogoIdoshaDac dac;
+    private final DbT7065ChohyoSeigyoKyotsuDac dbt7065dac;
 
+    private static final ReportId 帳票分類ID_DBB100012 = new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBB200004"));
     private static final ReportId REPORT_ID_DBB100012 = new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
     private static final RString 処理名 = new RString("特徴平準化（特徴6月分）通知書一括発行");
     private static final RString ファイル名 = new RString("TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranData.csv");
-    private static final RString ファイル名_Temp = new RString("TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranDataTemp.csv");
+    private static final RString ファイル名TEMP = new RString("TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranDataTemp.csv");
     private static final RString 拡張子_TEMP = new RString("Temp");
     private static final RString CSVファイル名 = new RString("特別徴収平準化仮算定額変更通知書発行一覧表");
     private static final RString EUCファイル名 = new RString("TokuChoHeijunkaTsuchishoHakkoIchiran.csv");
@@ -131,6 +130,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
 
     /**
      * コンストラクタです。
@@ -138,6 +138,8 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
     TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.mapper = mapperProvider.create(ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper.class);
+        this.dac = InstanceProvider.create(DbT2017TsuchishoHakkogoIdoshaDac.class);
+        this.dbt7065dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
     }
 
     /**
@@ -154,7 +156,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
      *
      * @param 編集後仮算定通知書 編集後仮算定通知書
      * @param entity 帳票対象データ
-     * @param param　プロセスのパラメータ
+     * @param param プロセスのパラメータ
      * @param 帳票制御共通情報 帳票制御共通情報
      * @param association association
      * @param reportDataList 一覧帳票のデータリスト
@@ -184,63 +186,255 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
     /**
      * 通知書発行後異動者登録
      *
-     * @param param 通知書発行プロセスのパラメータ
+     * @param fukaTemp 介護賦課一時テーブルのエンティティ
+     * @param param パラメータ
+     * @param 連番 連番
      */
     @Transaction
-    public void insTsuchishoHakkogoIdosha(TsuchishoHakoProcessParameter param) {
+    public void insTsuchishoHakkogoIdosha(DbT2002FukaTempTableEntity fukaTemp, TsuchishoHakoProcessParameter param, int 連番) {
 
-        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder = finder.get出力順(SubGyomuCode.DBB介護賦課, REPORT_ID_DBB100012, Long.parseLong(param.get出力順ID().toString()));
-
-        RString 出力順 = Dbb100012MyBatisOrderByClauseCreator.create(DBB100012ShutsuryokujunEnum.class, outputOrder);
-        mapper.insert通知書発行後異動者(param.get帳票作成日時().format西暦(new RString("yyyyMMddHHmmss").toString()),
-                param.get基準日時(),
-                param.get出力対象区分(), param.get帳票ID(), 出力順);
+        DbT2017TsuchishoHakkogoIdoshaEntity entity = new DbT2017TsuchishoHakkogoIdoshaEntity();
+        entity.setReportID(new ReportId(param.get帳票ID()));
+        entity.setChohyosakuseiTimestamp(new YMDHMS(param.get帳票作成日時()));
+        entity.setFukaNendo(fukaTemp.getKoseigo_fukaNendo());
+        entity.setTsuchishoNo(fukaTemp.getKoseigo_tsuchishoNo());
+        entity.setShikibetsuCode(fukaTemp.getKoseigo_shikibetsuCode());
+        entity.setHihokenshaNo(fukaTemp.getKoseigo_hihokenshaNo());
+        entity.setKeisanTimestamp(new YMDHMS(param.get基準日時()));
+        entity.setGaitoRemban(連番);
+        entity.setIdoAriFlag(false);
+        dac.save(entity);
     }
 
     /**
-     * 仮算定額変更情報一時テーブルのコラム「前年度特徴期別金額06」を更新します。
+     * 帳票制御共通情報を取得します。
+     *
+     * @return 帳票制御共通情報
      */
-    public void update前年度特徴期別金額06() {
-        RString 徴収方法 = ChoshuHohoKibetsu.特別徴収.code();
-        mapper.update前年度特徴期別金額06(new TokuchoHeijunka6gatsuMyBatisParameter(
-                false, null, null, null, null, 徴収方法, null, null, null));
+    public DbT7065ChohyoSeigyoKyotsuEntity find帳票制御共通情報() {
+        return dbt7065dac.selectByKey(SubGyomuCode.DBB介護賦課, 帳票分類ID_DBB100012);
     }
 
     /**
-     * 仮算定額変更情報一時テーブルの「被保険者区分」を「継続」に更新します。
+     * 更正前計算後情報を取得します。
+     *
+     * @param list 計算後情報リスト
+     * @param entity 介護賦課一時テーブルのエンティティ
+     * @return 更正前計算後情報
      */
-    public void update継続の被保険者区分() {
+    public DbTKeisangoJohoTempTableEntity find計算後情報For更正前(List<DbTKeisangoJohoTempTableEntity> list, DbT2002FukaTempTableEntity entity) {
+        if (list == null) {
+            return null;
+        }
+        for (DbTKeisangoJohoTempTableEntity keisango : list) {
+            if (keisango.getChoteiNendo().equals(entity.getKoseigo_choteiNendo())
+                    && keisango.getFukaNendo().equals(entity.getKoseigo_fukaNendo())
+                    && keisango.getTsuchishoNo().equals(entity.getKoseigo_tsuchishoNo())) {
+                return keisango;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 更正前計算後情報の設定処理です。
+     *
+     * @param keisangoEntity 計算後情報
+     * @param entity 介護賦課一時テーブルのエンティティ
+     * @return 更正前計算後情報
+     */
+    public DbT2002FukaTempTableEntity set更正前計算後情報(DbTKeisangoJohoTempTableEntity keisangoEntity, DbT2002FukaTempTableEntity entity) {
+
+        entity.setKoseimae_insertDantaiCd(keisangoEntity.getInsertDantaiCd());
+        entity.setKoseimae_insertTimestamp(keisangoEntity.getInsertTimestamp());
+        entity.setKoseimae_insertReamsLoginId(keisangoEntity.getInsertReamsLoginId());
+        entity.setKoseimae_insertContextId(keisangoEntity.getInsertContextId());
+        entity.setKoseimae_isDeleted(keisangoEntity.isDeleted());
+        entity.setKoseimae_updateCount(keisangoEntity.getUpdateCount());
+        entity.setKoseimae_lastUpdateTimestamp(keisangoEntity.getLastUpdateTimestamp());
+        entity.setKoseimae_lastUpdateReamsLoginId(keisangoEntity.getLastUpdateReamsLoginId());
+        entity.setKoseimae_choteiNendo(keisangoEntity.getChoteiNendo());
+        entity.setKoseimae_fukaNendo(keisangoEntity.getFukaNendo());
+        entity.setKoseimae_tsuchishoNo(keisangoEntity.getTsuchishoNo());
+        entity.setKoseimae_koseiZengoKubun(keisangoEntity.getKoseiZengoKubun());
+        entity.setKoseimae_sakuseiShoriName(keisangoEntity.getSakuseiShoriName());
+        entity.setKoseimae_fukaRirekiNo(keisangoEntity.getFukaRirekiNo());
+        entity.setKoseimae_hihokenshaNo(keisangoEntity.getHihokenshaNo());
+        entity.setKoseimae_shikibetsuCode(keisangoEntity.getShikibetsuCode());
+        entity.setKoseimae_setaiCode(keisangoEntity.getSetaiCode());
+        entity.setKoseimae_setaiInsu(keisangoEntity.getSetaiInsu());
+        entity.setKoseimae_shikakuShutokuYMD(keisangoEntity.getShikakuShutokuYMD());
+        entity.setKoseimae_shikakuShutokuJiyu(keisangoEntity.getShikakuShutokuJiyu());
+        entity.setKoseimae_shikakuSoshitsuYMD(keisangoEntity.getShikakuSoshitsuYMD());
+        entity.setKoseimae_shikakuSoshitsuJiyu(keisangoEntity.getShikakuSoshitsuJiyu());
+        entity.setKoseimae_seihofujoShurui(keisangoEntity.getSeihofujoShurui());
+        entity.setKoseimae_seihoKaishiYMD(keisangoEntity.getSeihoKaishiYMD());
+        entity.setKoseimae_seihoHaishiYMD(keisangoEntity.getSeihoHaishiYMD());
+        entity.setKoseimae_ronenKaishiYMD(keisangoEntity.getRonenKaishiYMD());
+        entity.setKoseimae_ronenHaishiYMD(keisangoEntity.getRonenHaishiYMD());
+        entity.setKoseimae_fukaYMD(keisangoEntity.getFukaYMD());
+        entity.setKoseimae_kazeiKubun(keisangoEntity.getKazeiKubun());
+        entity.setKoseimae_setaikazeiKubun(keisangoEntity.getSetaikazeiKubun());
+        entity.setKoseimae_gokeiShotokuGaku(keisangoEntity.getGokeiShotokuGaku());
+        entity.setKoseimae_nenkinShunyuGaku(keisangoEntity.getNenkinShunyuGaku());
+        entity.setKoseimae_hokenryoDankai(keisangoEntity.getHokenryoDankai());
+        entity.setKoseimae_hokenryoDankai1(keisangoEntity.getHokenryoDankai1());
+        entity.setKoseimae_nengakuHokenryo1(keisangoEntity.getNengakuHokenryo1());
+        entity.setKoseimae_tsukiwariStartYM1(keisangoEntity.getTsukiwariStartYM1());
+        entity.setKoseimae_tsukiwariEndYM1(keisangoEntity.getTsukiwariEndYM1());
+        entity.setKoseimae_hokenryoDankai2(keisangoEntity.getHokenryoDankai2());
+        entity.setKoseimae_nengakuHokenryo2(keisangoEntity.getNengakuHokenryo2());
+        entity.setKoseimae_tsukiwariStartYM2(keisangoEntity.getTsukiwariStartYM2());
+        entity.setKoseimae_tsukiwariEndYM2(keisangoEntity.getTsukiwariEndYM2());
+        entity.setKoseimae_choteiNichiji(keisangoEntity.getChoteiNichiji());
+        entity.setKoseimae_choteiJiyu1(keisangoEntity.getChoteiJiyu1());
+        entity.setKoseimae_choteiJiyu2(keisangoEntity.getChoteiJiyu2());
+        entity.setKoseimae_choteiJiyu3(keisangoEntity.getChoteiJiyu3());
+        entity.setKoseimae_choteiJiyu4(keisangoEntity.getChoteiJiyu4());
+        entity.setKoseimae_koseiM(keisangoEntity.getKoseiM());
+        entity.setKoseimae_gemmenMaeHokenryo(keisangoEntity.getGemmenMaeHokenryo());
+        entity.setKoseimae_gemmenGaku(keisangoEntity.getGemmenGaku());
+        entity.setKoseimae_kakuteiHokenryo(keisangoEntity.getKakuteiHokenryo());
+        entity.setKoseimae_hokenryoDankaiKarisanntei(keisangoEntity.getHokenryoDankaiKarisanntei());
+        entity.setKoseimae_choshuHohoRirekiNo(keisangoEntity.getChoshuHohoRirekiNo());
+        entity.setKoseimae_idoKijunNichiji(keisangoEntity.getIdoKijunNichiji());
+        entity.setKoseimae_kozaKubun(keisangoEntity.getKozaKubun());
+        entity.setKoseimae_kyokaisoKubun(keisangoEntity.getKyokaisoKubun());
+        entity.setKoseimae_shokkenKubun(keisangoEntity.getShokkenKubun());
+        entity.setKoseimae_fukaShichosonCode(keisangoEntity.getFukaShichosonCode());
+        entity.setKoseimae_tkSaishutsuKampuGaku(keisangoEntity.getTkSaishutsuKampuGaku());
+        entity.setKoseimae_fuSaishutsuKampuGaku(keisangoEntity.getFuSaishutsuKampuGaku());
+        entity.setKoseimae_tkKibetsuGaku01(keisangoEntity.getTkKibetsuGaku01());
+        entity.setKoseimae_tkKibetsuGaku02(keisangoEntity.getTkKibetsuGaku02());
+        entity.setKoseimae_tkKibetsuGaku03(keisangoEntity.getTkKibetsuGaku03());
+        entity.setKoseimae_tkKibetsuGaku04(keisangoEntity.getTkKibetsuGaku04());
+        entity.setKoseimae_tkKibetsuGaku05(keisangoEntity.getTkKibetsuGaku05());
+        entity.setKoseimae_tkKibetsuGaku06(keisangoEntity.getTkKibetsuGaku06());
+        entity.setKoseimae_fuKibetsuGaku01(keisangoEntity.getFuKibetsuGaku01());
+        entity.setKoseimae_fuKibetsuGaku02(keisangoEntity.getFuKibetsuGaku02());
+        entity.setKoseimae_fuKibetsuGaku03(keisangoEntity.getFuKibetsuGaku03());
+        entity.setKoseimae_fuKibetsuGaku04(keisangoEntity.getFuKibetsuGaku04());
+        entity.setKoseimae_fuKibetsuGaku05(keisangoEntity.getFuKibetsuGaku05());
+        entity.setKoseimae_fuKibetsuGaku06(keisangoEntity.getFuKibetsuGaku06());
+        entity.setKoseimae_fuKibetsuGaku07(keisangoEntity.getFuKibetsuGaku07());
+        entity.setKoseimae_fuKibetsuGaku08(keisangoEntity.getFuKibetsuGaku08());
+        entity.setKoseimae_fuKibetsuGaku09(keisangoEntity.getFuKibetsuGaku09());
+        entity.setKoseimae_fuKibetsuGaku10(keisangoEntity.getFuKibetsuGaku10());
+        entity.setKoseimae_fuKibetsuGaku11(keisangoEntity.getFuKibetsuGaku11());
+        entity.setKoseimae_fuKibetsuGaku12(keisangoEntity.getFuKibetsuGaku12());
+        entity.setKoseimae_fuKibetsuGaku13(keisangoEntity.getFuKibetsuGaku13());
+        entity.setKoseimae_fuKibetsuGaku14(keisangoEntity.getFuKibetsuGaku14());
+        entity.setKoseimae_choshuHoho4gatsu(keisangoEntity.getChoshuHoho4gatsu());
+        entity.setKoseimae_choshuHoho5gatsu(keisangoEntity.getChoshuHoho5gatsu());
+        entity.setKoseimae_choshuHoho6gatsu(keisangoEntity.getChoshuHoho6gatsu());
+        entity.setKoseimae_choshuHoho7gatsu(keisangoEntity.getChoshuHoho7gatsu());
+        entity.setKoseimae_choshuHoho8gatsu(keisangoEntity.getChoshuHoho8gatsu());
+        entity.setKoseimae_choshuHoho9gatsu(keisangoEntity.getChoshuHoho9gatsu());
+        entity.setKoseimae_choshuHoho10gatsu(keisangoEntity.getChoshuHoho10gatsu());
+        entity.setKoseimae_choshuHoho11gatsu(keisangoEntity.getChoshuHoho11gatsu());
+        entity.setKoseimae_choshuHoho12gatsu(keisangoEntity.getChoshuHoho12gatsu());
+        entity.setKoseimae_choshuHoho1gatsu(keisangoEntity.getChoshuHoho1gatsu());
+        entity.setKoseimae_choshuHoho2gatsu(keisangoEntity.getChoshuHoho2gatsu());
+        entity.setKoseimae_choshuHoho3gatsu(keisangoEntity.getChoshuHoho3gatsu());
+        entity.setKoseimae_choshuHohoYoku4gatsu(keisangoEntity.getChoshuHohoYoku4gatsu());
+        entity.setKoseimae_choshuHohoYoku5gatsu(keisangoEntity.getChoshuHohoYoku5gatsu());
+        entity.setKoseimae_choshuHohoYoku6gatsu(keisangoEntity.getChoshuHohoYoku6gatsu());
+        entity.setKoseimae_choshuHohoYoku7gatsu(keisangoEntity.getChoshuHohoYoku7gatsu());
+        entity.setKoseimae_choshuHohoYoku8gatsu(keisangoEntity.getChoshuHohoYoku8gatsu());
+        entity.setKoseimae_choshuHohoYoku9gatsu(keisangoEntity.getChoshuHohoYoku9gatsu());
+        entity.setKoseimae_kariNenkinNo(keisangoEntity.getKariNenkinNo());
+        entity.setKoseimae_kariNenkinCode(keisangoEntity.getKariNenkinCode());
+        entity.setKoseimae_kariHosokuM(keisangoEntity.getKariHosokuM());
+        entity.setKoseimae_honNenkinNo(keisangoEntity.getHonNenkinNo());
+        entity.setKoseimae_honNenkinCode(keisangoEntity.getHonNenkinCode());
+        entity.setKoseimae_honHosokuM(keisangoEntity.getHonHosokuM());
+        entity.setKoseimae_yokunendoKariNenkinNo(keisangoEntity.getYokunendoKariNenkinNo());
+        entity.setKoseimae_yokunendoKariNenkinCode(keisangoEntity.getYokunendoKariNenkinCode());
+        entity.setKoseimae_yokunendoKariHosokuM(keisangoEntity.getYokunendoKariHosokuM());
+        entity.setKoseimae_iraiSohuzumiFlag(keisangoEntity.isIraiSohuzumiFlag());
+        entity.setKoseimae_tsuikaIraiSohuzumiFlag(keisangoEntity.isTsuikaIraiSohuzumiFlag());
+        entity.setKoseimae_tokuchoTeishiNichiji(keisangoEntity.getTokuchoTeishiNichiji());
+        entity.setKoseimae_tokuchoTeishiJiyuCode(keisangoEntity.getTokuchoTeishiJiyuCode());
+        entity.setKoseimae_tkShunyuGaku01(keisangoEntity.getTkShunyuGaku01());
+        entity.setKoseimae_tkShunyuGaku02(keisangoEntity.getTkShunyuGaku02());
+        entity.setKoseimae_tkShunyuGaku03(keisangoEntity.getTkShunyuGaku03());
+        entity.setKoseimae_tkShunyuGaku04(keisangoEntity.getTkShunyuGaku04());
+        entity.setKoseimae_tkShunyuGaku05(keisangoEntity.getTkShunyuGaku05());
+        entity.setKoseimae_tkShunyuGaku06(keisangoEntity.getTkShunyuGaku06());
+        entity.setKoseimae_fuShunyuGaku01(keisangoEntity.getFuShunyuGaku01());
+        entity.setKoseimae_fuShunyuGaku02(keisangoEntity.getFuShunyuGaku02());
+        entity.setKoseimae_fuShunyuGaku03(keisangoEntity.getFuShunyuGaku03());
+        entity.setKoseimae_fuShunyuGaku04(keisangoEntity.getFuShunyuGaku04());
+        entity.setKoseimae_fuShunyuGaku05(keisangoEntity.getFuShunyuGaku05());
+        entity.setKoseimae_fuShunyuGaku06(keisangoEntity.getFuShunyuGaku06());
+        entity.setKoseimae_fuShunyuGaku07(keisangoEntity.getFuShunyuGaku07());
+        entity.setKoseimae_fuShunyuGaku08(keisangoEntity.getFuShunyuGaku08());
+        entity.setKoseimae_fuShunyuGaku09(keisangoEntity.getFuShunyuGaku09());
+        entity.setKoseimae_fuShunyuGaku10(keisangoEntity.getFuShunyuGaku10());
+        entity.setKoseimae_fuShunyuGaku11(keisangoEntity.getFuShunyuGaku11());
+        entity.setKoseimae_fuShunyuGaku12(keisangoEntity.getFuShunyuGaku12());
+        entity.setKoseimae_fuShunyuGaku13(keisangoEntity.getFuShunyuGaku13());
+        entity.setKoseimae_fuShunyuGaku14(keisangoEntity.getFuShunyuGaku14());
+        entity.setKoseimaeJohoUmuKubun(new RString("1"));
+        return entity;
+    }
+
+    /**
+     * 前年度・特徴期別金額06の値を取得します。
+     *
+     * @return 前年度・特徴期別金額06
+     */
+    public RString get前年度特徴期別金額06() {
+        return mapper.select前年度特徴期別金額06(ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 前年度・特徴期別金額06を更新します。
+     *
+     * @param entity 介護賦課一時テーブルのエンティティ
+     * @param 前年度特徴期別金額06 前年度特徴期別金額06
+     * @return 介護賦課一時テーブルのエンティティ
+     */
+    public DbT2002FukaTempTableEntity set前年度特徴期別金額06_更新対象(DbT2002FukaTempTableEntity entity, RString 前年度特徴期別金額06) {
+
+        entity.setZennendoTokuchoKibetsuKingaku06(前年度特徴期別金額06);
+        return entity;
+    }
+
+    /**
+     * 継続の被保険者区分を更新します。
+     *
+     * @param entity 介護賦課一時テーブルのエンティティ
+     * @return 介護賦課一時テーブルのエンティティ
+     */
+    public DbT2002FukaTempTableEntity set継続の被保険者区分_更新対象(DbT2002FukaTempTableEntity entity) {
         RString 被保険者区分 = new RString("0");
-        RString 特別徴収_厚生労働省 = jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho.特別徴収_厚生労働省.getコード();
-        RString 特別徴収_地共済 = jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho.特別徴収_地共済.getコード();
-
-        mapper.update継続の被保険者区分(new TokuchoHeijunka6gatsuMyBatisParameter(
-                false, null, null, null, null, null, 被保険者区分, 特別徴収_厚生労働省, 特別徴収_地共済));
+        entity.setHihokenshaKubun(被保険者区分);
+        return entity;
     }
 
     /**
-     * 仮算定額変更情報一時テーブルの「被保険者区分」を「4月開始」更新します。
+     * 介護賦課一時テーブルのエンティティの被保険者区分を4月開始にセットします。
+     *
+     * @param entity 介護賦課一時テーブルのエンティティ
+     * @return 介護賦課一時テーブルのエンティティ
      */
-    public void update4月開始の被保険者区分() {
+    public DbT2002FukaTempTableEntity set4月開始の被保険者区分_更新対象(DbT2002FukaTempTableEntity entity) {
         RString 被保険者区分 = new RString("1");
-        RString 特別徴収_厚生労働省 = jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho.特別徴収_厚生労働省.getコード();
-        RString 特別徴収_地共済 = jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho.特別徴収_地共済.getコード();
-
-        mapper.update4月開始の被保険者区分(new TokuchoHeijunka6gatsuMyBatisParameter(
-                false, null, null, null, null, null, 被保険者区分, 特別徴収_厚生労働省, 特別徴収_地共済));
+        entity.setHihokenshaKubun(被保険者区分);
+        return entity;
     }
 
     /**
-     * 仮算定額変更情報一時テーブルの「被保険者区分」を「6月開始」に更新します。
+     * 介護賦課一時テーブルのエンティティの被保険者区分を6月開始にセットします。
+     *
+     * @param entity 介護賦課一時テーブルのエンティティ
+     * @return 介護賦課一時テーブルのエンティティ
      */
-    public void update6月開始の被保険者区分() {
+    public DbT2002FukaTempTableEntity set6月開始の被保険者区分_更新対象(DbT2002FukaTempTableEntity entity) {
         RString 被保険者区分 = new RString("2");
-        RString 特別徴収_厚生労働省 = jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho.特別徴収_厚生労働省.getコード();
-        RString 特別徴収_地共済 = jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho.特別徴収_地共済.getコード();
-
-        mapper.update6月開始の被保険者区分(new TokuchoHeijunka6gatsuMyBatisParameter(
-                false, null, null, null, null, null, 被保険者区分, 特別徴収_厚生労働省, 特別徴収_地共済));
+        entity.setHihokenshaKubun(被保険者区分);
+        return entity;
     }
 
     private KariSanteiTsuchiShoKyotsu 仮算定額変更通知書情報の作成(TsuchishoHakoProcessParameter param, KarisanteiGakuHenkoEntity tmpEntity,
@@ -267,14 +461,14 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         return kariSanteiTsuchiShoKyotsu;
     }
 
-    private KariSanteigakuHenkoTsuchishoHakkoIchiranData csvData作成(EditedKariSanteiTsuchiShoKyotsu editedKariSanteiTsuchiShoKyotsu,
+    private KariSanteigakuHenkoTsuchishoHakkoIchiranData csvData作成(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通,
             TsuchishoHakoProcessParameter param, int 連番, TsuchishoNo 通知書番号) {
 
         EditedKariSanteiTsuchiShoKyotsuBeforeCorrection 更正前;
-        if (editedKariSanteiTsuchiShoKyotsu.get更正前() == null) {
+        if (編集後仮算定通知書共通.get更正前() == null) {
             更正前 = new EditedKariSanteiTsuchiShoKyotsuBeforeCorrection();
         } else {
-            更正前 = editedKariSanteiTsuchiShoKyotsu.get更正前();
+            更正前 = 編集後仮算定通知書共通.get更正前();
         }
 
         KariSanteigakuHenkoTsuchishoHakkoIchiranData data = new KariSanteigakuHenkoTsuchishoHakkoIchiranData();
@@ -284,26 +478,26 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         data.set作成日時(調定日時);
         data.set年度(param.get賦課年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString());
         data.set連番(new RString(連番));
-        if (editedKariSanteiTsuchiShoKyotsu.get編集後宛先() != null) {
-            data.set郵便番号(editedKariSanteiTsuchiShoKyotsu.get編集後宛先().get郵便番号());
-            data.set住所(editedKariSanteiTsuchiShoKyotsu.get編集後宛先().get編集後住所());
-            data.set町域管内管外住所(editedKariSanteiTsuchiShoKyotsu.get編集後宛先().get町域());
-            if (editedKariSanteiTsuchiShoKyotsu.get編集後宛先().get行政区コード() != null) {
-                data.set行政区コード(editedKariSanteiTsuchiShoKyotsu.get編集後宛先().get行政区コード().getColumnValue());
+        if (編集後仮算定通知書共通.get編集後宛先() != null) {
+            data.set郵便番号(編集後仮算定通知書共通.get編集後宛先().get郵便番号());
+            data.set住所(編集後仮算定通知書共通.get編集後宛先().get編集後住所());
+            data.set町域管内管外住所(編集後仮算定通知書共通.get編集後宛先().get町域());
+            if (編集後仮算定通知書共通.get編集後宛先().get行政区コード() != null) {
+                data.set行政区コード(編集後仮算定通知書共通.get編集後宛先().get行政区コード().getColumnValue());
             }
         }
-        if (editedKariSanteiTsuchiShoKyotsu.get編集後個人() != null) {
-            data.set性別(editedKariSanteiTsuchiShoKyotsu.get編集後個人().get性別());
-            data.set生年月日(editedKariSanteiTsuchiShoKyotsu.get編集後個人().get生年月日());
+        if (編集後仮算定通知書共通.get編集後個人() != null) {
+            data.set性別(編集後仮算定通知書共通.get編集後個人().get性別());
+            data.set生年月日(編集後仮算定通知書共通.get編集後個人().get生年月日());
 
-            if (editedKariSanteiTsuchiShoKyotsu.get編集後個人().get番地() != null) {
-                data.set番地(editedKariSanteiTsuchiShoKyotsu.get編集後個人().get番地().getColumnValue());
+            if (編集後仮算定通知書共通.get編集後個人().get番地() != null) {
+                data.set番地(編集後仮算定通知書共通.get編集後個人().get番地().getColumnValue());
             }
-            if (editedKariSanteiTsuchiShoKyotsu.get編集後個人().get世帯コード() != null) {
-                data.set世帯コード(editedKariSanteiTsuchiShoKyotsu.get編集後個人().get世帯コード().getColumnValue());
+            if (編集後仮算定通知書共通.get編集後個人().get世帯コード() != null) {
+                data.set世帯コード(編集後仮算定通知書共通.get編集後個人().get世帯コード().getColumnValue());
             }
-            if (editedKariSanteiTsuchiShoKyotsu.get編集後個人().get名称() != null) {
-                data.set被保険者氏名(editedKariSanteiTsuchiShoKyotsu.get編集後個人().get名称().getName().getColumnValue());
+            if (編集後仮算定通知書共通.get編集後個人().get名称() != null) {
+                data.set被保険者氏名(編集後仮算定通知書共通.get編集後個人().get名称().getName().getColumnValue());
             }
         }
 
@@ -320,16 +514,16 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
             data.set通知書番号(通知書番号.getColumnValue());
         }
 
-        set更正後(editedKariSanteiTsuchiShoKyotsu, data);
+        set更正後(編集後仮算定通知書共通, data);
         return data;
     }
 
-    private void set更正後(EditedKariSanteiTsuchiShoKyotsu editedKariSanteiTsuchiShoKyotsu, KariSanteigakuHenkoTsuchishoHakkoIchiranData data) {
+    private void set更正後(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通, KariSanteigakuHenkoTsuchishoHakkoIchiranData data) {
         EditedKariSanteiTsuchiShoKyotsuAfterCorrection 更正後;
-        if (editedKariSanteiTsuchiShoKyotsu.get更正後() == null) {
+        if (編集後仮算定通知書共通.get更正後() == null) {
             更正後 = new EditedKariSanteiTsuchiShoKyotsuAfterCorrection();
         } else {
-            更正後 = editedKariSanteiTsuchiShoKyotsu.get更正後();
+            更正後 = 編集後仮算定通知書共通.get更正後();
         }
         data.set特別徴収業務者コード(更正後.get更正後特別徴収義務者コード());
         data.set特別徴収業務者(更正後.get更正後特別徴収義務者());
@@ -445,13 +639,13 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
     /**
      * 特別徴収平準化仮算定額変更通知書発行一覧表CSVを出力して、代行プリント送付票の出力とバッチ条件を出力します。
      *
-     * @param csvDataList
-     * @param parameter
-     * @param 帳票制御共通情報
-     * @param 導入団体クラス
-     * @param outputOrder
-     * @param 通知書ページ数
-     * @param 通知書一覧ページ数
+     * @param csvDataList csvデータリスト
+     * @param parameter parameter
+     * @param 帳票制御共通情報 帳票制御共通情報
+     * @param 導入団体クラス 導入団体クラス
+     * @param outputOrder outputOrder
+     * @param 通知書ページ数 通知書ページ数
+     * @param 通知書一覧ページ数 通知書一覧ページ数
      */
     public void csv出力と代行プリント送付票の出力とバッチ条件の出力(List<KariSanteigakuHenkoTsuchishoHakkoIchiranData> csvDataList,
             TsuchishoHakoProcessParameter parameter, DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通情報,
@@ -472,17 +666,17 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
 
-        RString EUC共通_文字コード = DbBusinessConfig.get(ConfigNameDBU.EUC共通_文字コード, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        RString euc共通_文字コード = DbBusinessConfig.get(ConfigNameDBU.EUC共通_文字コード, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         RString tempPathName = Path.combinePath(spoolWorkPath, ファイル名);
-        if (!new RString("1").equals(EUC共通_文字コード)) {
-            tempPathName = Path.combinePath(spoolWorkPath, ファイル名_Temp);
+        if (!new RString("1").equals(euc共通_文字コード)) {
+            tempPathName = Path.combinePath(spoolWorkPath, ファイル名TEMP);
         }
 
         CsvListWriter csvListWriter = new CsvListWriter.InstanceBuilder(tempPathName).canAppend(false)
                 .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).setNewLine(NewLine.CRLF)
                 .hasHeader(true).build();
 
-        if (!new RString("1").equals(EUC共通_文字コード)) {
+        if (!new RString("1").equals(euc共通_文字コード)) {
             文字コード変換(tempPathName);
         }
 
@@ -518,10 +712,10 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
     }
 
     private CharacterConvertTable getCharacterConvertTable() {
-        RString EUC共通_文字コード = DbBusinessConfig.get(ConfigNameDBU.EUC共通_文字コード, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-        if (new RString("2").equals(EUC共通_文字コード)) {
+        RString euc共通_文字コード = DbBusinessConfig.get(ConfigNameDBU.EUC共通_文字コード, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        if (new RString("2").equals(euc共通_文字コード)) {
             return CharacterConvertTable.Sjis;
-        } else if (new RString("3").equals(EUC共通_文字コード)) {
+        } else if (new RString("3").equals(euc共通_文字コード)) {
             return CharacterConvertTable.SjisRuiji;
         }
         return null;
@@ -547,7 +741,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         int i = 1;
         if (outputOrder != null && outputOrder.get設定項目リスト() != null) {
             for (ISetSortItem setSortItem : outputOrder.get設定項目リスト()) {
-                if (i++ <= 5) {
+                if (i++ <= INDEX_5) {
                     出力順項目List.add(setSortItem.get項目名());
                 }
             }

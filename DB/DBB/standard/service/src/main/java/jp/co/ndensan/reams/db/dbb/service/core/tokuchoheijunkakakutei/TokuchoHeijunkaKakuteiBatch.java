@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuGimushaCode;
+import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -45,7 +46,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -99,8 +99,6 @@ public class TokuchoHeijunkaKakuteiBatch {
     private final RString 差額以下のため対象外 = new RString("差額以下のため対象外");
     private static final RString キー_調定ID = new RString("choteiId");
     private static final RString キー_収納ID = new RString("shunoId");
-    private static final CodeShubetsu コード種別_0047 = new CodeShubetsu("0047");
-    private static final CodeShubetsu コード種別_0046 = new CodeShubetsu("0046");
     private static final RString 定数_被保険者番号 = new RString("被保険者番号");
     private static final RString タイトル = new RString("介護保険　特徴仮算定平準化確定一覧表");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBB200029"));
@@ -157,7 +155,7 @@ public class TokuchoHeijunkaKakuteiBatch {
             mapper.inset特徴平準化賦課Temp(entity);
         }
         List<FukaJohoRelateEntity> relateEntityList = mapper.select平準化前の賦課の情報();
-        if (relateEntityList != null) {
+        if (relateEntityList != null && !relateEntityList.isEmpty()) {
             for (FukaJohoRelateEntity relateEntity : relateEntityList) {
                 relateEntity.initializeMd5ToEntities();
                 FukaJoho 平準化前の賦課の情報 = new FukaJoho(relateEntity);
@@ -667,25 +665,26 @@ public class TokuchoHeijunkaKakuteiBatch {
         set氏名(特徴平準化確定一覧, entity);
         set行政区コード(特徴平準化確定一覧, entity);
         set町域コード(特徴平準化確定一覧, entity);
-        entity.set住所(get住所(特徴平準化確定一覧));
         set町域_管内_管外住所(特徴平準化確定一覧, entity);
         set番地(特徴平準化確定一覧, entity);
         entity.set保険料段階_仮算定時(特徴平準化確定一覧.getFukeEntity().get保険料段階_仮算定時());
         HokenryoDankaiList 保険料段階リスト = new HokenryoDankaiSettings().getCurrent保険料段階List();
         HokenryoDankai 保険料段階 = 保険料段階リスト.getBy段階区分(特徴平準化確定一覧.getFukeEntity().get保険料段階_仮算定時());
-        RString 今年度保険料率 = new RString(保険料段階.get保険料率().toString());
-        entity.set今年度保険料率(今年度保険料率);
+        if (保険料段階.get保険料率() != null) {
+            RString 今年度保険料率 = DecimalFormatter.toコンマ区切りRString(保険料段階.get保険料率(), 整数_ZREO);
+            entity.set今年度保険料率(今年度保険料率);
+        }
         TokubetsuChoshuGimushaCode 特別徴収業務者コード = 特徴平準化確定一覧.get年金特徴回付情報_介護継承().getDtTokubetsuChoshuGimushaCode();
         if (特別徴収業務者コード != null) {
             entity.set特別徴収業務者コード(特別徴収業務者コード.toRString());
-            RString 特別徴収業務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード種別_0047, 特別徴収業務者コード.value());
+            RString 特別徴収業務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), 特別徴収業務者コード.value());
             entity.set特別徴収業務者(特別徴収業務者);
         }
         RString 特別徴収対象年金コード = 特徴平準化確定一覧.get徴収方法Newest().getKariNenkinCode();
         entity.set特別徴収対象年金コード(特別徴収対象年金コード);
         if (特別徴収対象年金コード != null) {
             RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                    コード種別_0046, new Code(特別徴収対象年金コード.substring(整数_ZREO, 整数_THREE)));
+                    UEXCodeShubetsu.年金コード.getCodeShubetsu(), new Code(特別徴収対象年金コード.substring(整数_ZREO, 整数_THREE)));
             entity.set特別徴収対象年金(特別徴収対象年金);
         }
         set変更前特徴額_１期(特徴平準化確定一覧, entity);
@@ -911,11 +910,6 @@ public class TokuchoHeijunkaKakuteiBatch {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(コード_ログコード), 定数_被保険者番号,
                 entity.getFukeEntity().get被保険者番号().value());
         return PersonalData.of(entity.getFukeEntity().get識別コード(), expandedInfo);
-    }
-
-    private RString get住所(TokuchoHeinjunkaKakuteiItirannEntity 特徴平準化確定一覧) {
-        // TODO QA855
-        return RString.EMPTY;
     }
 
     /**

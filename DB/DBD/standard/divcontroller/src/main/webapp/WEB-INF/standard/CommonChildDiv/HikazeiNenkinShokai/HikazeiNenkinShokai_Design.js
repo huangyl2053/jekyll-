@@ -4,8 +4,12 @@ var DBD;
         var Events = (function () {
             function Events() {
             }
-            Events.CloseOK = function () {
-                return "CloseOK";
+            Events.onClick_btnClose = function () {
+                return "onClick_btnClose";
+            };
+
+            Events.onClick_btnSaiHyoji = function () {
+                return "onClick_btnSaiHyoji";
             };
             return Events;
         })();

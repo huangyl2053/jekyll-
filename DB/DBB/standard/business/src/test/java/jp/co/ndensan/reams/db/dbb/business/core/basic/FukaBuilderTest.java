@@ -167,13 +167,13 @@ public class FukaBuilderTest extends DbbTestBase {
         @Test
         public void 戻り値の課税区分は_設定した値と同じ課税区分を返す() {
             business = sut.set課税区分(DbT2002FukaEntityGenerator.DEFAULT_課税区分).build();
-            assertThat(business.get課税区分().toRString(), is(DbT2002FukaEntityGenerator.DEFAULT_課税区分));
+            assertThat(business.get課税区分().get名称(), is(DbT2002FukaEntityGenerator.DEFAULT_課税区分));
         }
 
         @Test
         public void 戻り値の世帯課税区分は_設定した値と同じ世帯課税区分を返す() {
             business = sut.set世帯課税区分(DbT2002FukaEntityGenerator.DEFAULT_世帯課税区分).build();
-            assertThat(business.get世帯課税区分().toRString(), is(DbT2002FukaEntityGenerator.DEFAULT_世帯課税区分));
+            assertThat(business.get世帯課税区分().get名称(), is(DbT2002FukaEntityGenerator.DEFAULT_世帯課税区分));
         }
 
         @Test

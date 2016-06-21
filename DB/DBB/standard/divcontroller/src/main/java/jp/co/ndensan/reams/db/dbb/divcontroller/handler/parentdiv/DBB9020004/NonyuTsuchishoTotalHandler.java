@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShoriName;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -484,15 +484,14 @@ public final class NonyuTsuchishoTotalHandler {
     public void save(List<ChohyoSeigyoHanyo> 帳票制御汎用リスト) {
         div.getNotsuInfo().getCcdKaigoChohyoSeigyoKyotsu().save(SubGyomuCode.DBB介護賦課, new ReportId(帳票分類ID));
         ChohyoSeigyoHanyoManager manager = new ChohyoSeigyoHanyoManager();
-        宛先住所コード出力順等リスト作成(manager, 帳票制御汎用リスト);
-        口座文言領収日付欄等リスト作成(manager, 帳票制御汎用リスト);
-        差額令書当初出力方法等仮算定リスト作成(manager, 帳票制御汎用リスト);
-        差額令書当初出力方法等本算定リスト作成(manager, 帳票制御汎用リスト);
+        宛先住所コード出力順等リスト作成(帳票制御汎用リスト);
+        口座文言領収日付欄等リスト作成(帳票制御汎用リスト);
+        差額令書当初出力方法等仮算定リスト作成(帳票制御汎用リスト);
+        差額令書当初出力方法等本算定リスト作成(帳票制御汎用リスト);
         manager.update帳票制御汎用(帳票制御汎用リスト);
     }
 
-    private void 宛先住所コード出力順等リスト作成(ChohyoSeigyoHanyoManager manager,
-            List<ChohyoSeigyoHanyo> 帳票制御汎用リスト) {
+    private void 宛先住所コード出力順等リスト作成(List<ChohyoSeigyoHanyo> 帳票制御汎用リスト) {
         ChohyoSeigyoHanyo 帳票制御汎用_項目名 = 帳票制御汎用リスト.get(帳票制御汎用_1条目);
         帳票制御汎用リスト.set(帳票制御汎用_1条目, 帳票制御汎用_項目名.createBuilderForEdit().set設定値(
                 div.getNotsuInfo().getTxtHakkoBusu().getValue()).build());
@@ -507,8 +506,7 @@ public final class NonyuTsuchishoTotalHandler {
                 div.getNotsuInfo().getRadSokujiHakkoKeishiki().getSelectedKey()).build());
     }
 
-    private void 口座文言領収日付欄等リスト作成(ChohyoSeigyoHanyoManager manager,
-            List<ChohyoSeigyoHanyo> 帳票制御汎用リスト) {
+    private void 口座文言領収日付欄等リスト作成(List<ChohyoSeigyoHanyo> 帳票制御汎用リスト) {
         ChohyoSeigyoHanyo 帳票制御汎用_領収証書納付額欄 = 帳票制御汎用リスト.get(帳票制御汎用_5条目);
         帳票制御汎用リスト.set(帳票制御汎用_5条目, 帳票制御汎用_領収証書納付額欄.createBuilderForEdit().set設定値(
                 div.getNotsuInfo().getDdlKozaMongonRyoshushoNofugaku().getSelectedKey()).build());
@@ -544,8 +542,7 @@ public final class NonyuTsuchishoTotalHandler {
                 div.getNotsuInfo().getDdlOCRShutsuryokuHoho().getSelectedKey()).build());
     }
 
-    private void 差額令書当初出力方法等仮算定リスト作成(ChohyoSeigyoHanyoManager manager,
-            List<ChohyoSeigyoHanyo> 帳票制御汎用リスト) {
+    private void 差額令書当初出力方法等仮算定リスト作成(List<ChohyoSeigyoHanyo> 帳票制御汎用リスト) {
         ChohyoSeigyoHanyo 仮算定_差額令書発行指示 = 帳票制御汎用リスト.get(帳票制御汎用_16条目);
         帳票制御汎用リスト.set(帳票制御汎用_16条目, 仮算定_差額令書発行指示.createBuilderForEdit().set設定値(
                 div.getNotsuInfo().getRadSagakuReishoHakkoUmuK().getSelectedKey()).build());
@@ -581,8 +578,7 @@ public final class NonyuTsuchishoTotalHandler {
                 div.getNotsuInfo().getDdlKiso3().getSelectedKey()).build());
     }
 
-    private void 差額令書当初出力方法等本算定リスト作成(ChohyoSeigyoHanyoManager manager,
-            List<ChohyoSeigyoHanyo> 帳票制御汎用リスト) {
+    private void 差額令書当初出力方法等本算定リスト作成(List<ChohyoSeigyoHanyo> 帳票制御汎用リスト) {
         ChohyoSeigyoHanyo 帳票制御汎用_差額令書発行指示 = 帳票制御汎用リスト.get(帳票制御汎用_27条目);
         帳票制御汎用リスト.set(帳票制御汎用_27条目, 帳票制御汎用_差額令書発行指示.createBuilderForEdit().set設定値(
                 div.getNotsuInfo().getRadSagakuReishoHakkoUmuH().getSelectedKey()).build());
@@ -633,7 +629,7 @@ public final class NonyuTsuchishoTotalHandler {
                 ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         ShoriDateKanriManager manager = InstanceProvider.create(ShoriDateKanriManager.class);
         ShoriDateKanri result = manager.get抽出調定日時(SubGyomuCode.DBB介護賦課,
-                ShoriName.新年度管理情報作成.toRString(),
+                ShoriName.新年度管理情報作成.get名称(),
                 new FlexibleYear(調定年度).plusYear(1));
         RString 新年度管理情報 = 新年度管理情報_未作成;
         if (result != null && !FlexibleDate.EMPTY.equals(result.get基準年月日())) {

@@ -66,7 +66,7 @@
         AND DbT5105NinteiKanryoJoho."centerSoshinYMD" IS NULL 
         AND DbT5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
         AND DbT5101."logicalDeletedFlag" = FALSE
-        <if test="#{主治医意見書依頼未処理者一覧表作成条件 == '2'}">
+        <if test="主治医意見書依頼未処理者一覧表作成条件フラグ">
             AND
             DbT5101."ninteiShinseiYMD" <![CDATA[>=]]> #{主治医意見書依頼未処理者一覧表申請日From}
             AND
@@ -111,7 +111,9 @@
         DbT5101."ninteiShinseiYMD" AS "ninteiShinseiYMD",
         DbT7051."shichosonMeisho" AS "shichosonMeisho",
         DbT5911."iryoKikanMeisho" AS "iryoKikanMeisho",
-        DbT5912."shujiiName" AS "shujiiName"
+        DbT5912."shujiiName" AS "shujiiName",
+        DbT5301."ikenshoIraiRirekiNo" AS "ikenshoIraiRirekiNo",
+        DbT5301."ikenshoSakuseiIraiYMD" AS "ikenshoSakuseiIraiYMD"
         FROM	
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
@@ -132,11 +134,7 @@
         AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
         AND DbT5105."centerSoshinYMD" IS NULL
         AND DbT5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
-        AND DbT5101."logicalDeletedFlag" = FALSE
-        AND
-        DbT5101."ninteiShinseiYMD" <![CDATA[>=]]> #{主治医意見書作成依頼変更者一覧表申請日From}
-        AND
-        DbT5101."ninteiShinseiYMD" <![CDATA[<=]]> #{主治医意見書作成依頼変更者一覧表申請日To} 
+        AND DbT5101."logicalDeletedFlag" = FALSE        
         ORDER BY
         DbT5101."hihokenshaKana",
         DbT5101."ninteiShinseiYMD"
@@ -154,7 +152,38 @@
         <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="iryoKikanMeisho" column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shujiiName" column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ikenshoIraiRirekiNo" column="ikenshoIraiRirekiNo" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="ikenshoSakuseiIraiYMD" column="ikenshoSakuseiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
+    
+    <select id="get主治医意見書作成依頼変更者情報COUNT" resultType="Integer"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshojohoprint.IkenshoJohoPrintMapperParameter" 
+            fetchSize="500" resultOrdered="true">
+        SELECT	
+        COUNT(1)
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
+        ON DbT5101."shinseishoKanriNo"=DbT5105."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
+        ON DbT7051."shoKisaiHokenshaNo"=DbT5101."shoKisaiHokenshaNo"
+        LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
+        ON DbT5101."shinseishoKanriNo"=DbT5301."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911
+        ON DbT5101."shujiiIryokikanCode"=DbT5911."shujiiIryokikanCode"
+        AND DbT5911."shichosonCode"=DbT7051."shichosonCode"
+        LEFT JOIN rgdb."DbT5912ShujiiJoho" AS DbT5912
+        ON DbT5912."shujiiIryokikanCode"=DbT5101."shujiiIryokikanCode"
+        AND DbT5912."shujiiCode"=DbT5101."shujiiCode"
+        AND DbT5912."shichosonCode"=DbT7051."shichosonCode"	
+        WHERE	
+        DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+        AND DbT5105."centerSoshinYMD" IS NULL
+        AND DbT5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
+        AND DbT5101."logicalDeletedFlag" = FALSE
+       
+    </select>
     
     <select id="get主治医意見書未提出者情報" resultMap="resultMap_主治医意見書未提出者" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshojohoprint.IkenshoJohoPrintMapperParameter" 
@@ -206,11 +235,11 @@
         AND DbT5105NinteiKanryoJoho."centerSoshinYMD" IS NULL
         AND DbT5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
         AND DbT5101."logicalDeletedFlag" = FALSE
-        <if test="#{主治医意見書未提出者一覧作成条件 == '1'}">
+        <if test="主治医意見書未提出者一覧作成条件フラグ">
             AND
             DbT5301."ikenshoSakuseiIraiYMD" <![CDATA[>=]]> #{主治医意見書作成依頼年月日}
         </if>
-        <if test="#{主治医意見書未提出者一覧作成条件 == '2'}">
+        <if test="主治医意見書未提出者一覧作成条件フラグ2">
             AND
             DbT5101."ninteiShinseiYMD" <![CDATA[>=]]> #{主治医意見書未提出者一覧申請日From}
             AND
@@ -312,13 +341,13 @@
         DbT5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
         AND
         DbT5101."isDeleted" = FALSE
-        <if test="#{主治医意見書依頼済み一覧表作成条件 == '1'}">
+        <if test="主治医意見書依頼済み一覧表作成条件フラグ">
             AND
             DbT5302."ikenshoReadYMD" <![CDATA[>=]]> #{主治医意見書依頼済み一覧表処理日From}
             AND
             DbT5302."ikenshoReadYMD" <![CDATA[<=]]> #{主治医意見書依頼済み一覧表処理日To}
         </if>
-        <if test="#{主治医意見書依頼済み一覧表作成条件 == '2'}">
+        <if test="主治医意見書依頼済み一覧表作成条件フラグ2">
             AND
             DbT5101."ninteiShinseiYMD" <![CDATA[>=]]> #{主治医意見書依頼済み一覧表申請日From}
             AND
@@ -410,7 +439,7 @@
         DbT5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
         AND
         DbT5101."isDeleted" = FALSE
-        <if test="#{主治医意見書項目確認一覧表作成条件 == '2'}">
+        <if test="主治医意見書項目確認一覧表作成条件フラグ">
             AND
             DbT5501."shinsakaiKaisaiNo" = #{主治医意見書５項目確認一覧表審査会}
         </if>
@@ -507,18 +536,19 @@
         DbT5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
         AND
         DbT5101."isDeleted" = FALSE
-        <if test="#{主治医意見書作成料請求一覧表作成条件 == '1'}">
+        <if test="主治医意見書作成料請求一覧表作成条件フラグ">
             AND
             DbT5302."ikenshoReadYMD" <![CDATA[>=]]> #{主治医意見書作成料請求一覧表受領日From}
             AND
             DbT5302."ikenshoReadYMD" <![CDATA[<=]]> #{主治医意見書作成料請求一覧表受領日To}
         </if>
-        <if test="#{主治医意見書作成料請求一覧表作成条件 == '2'}">
+        <if test="主治医意見書作成料請求一覧表作成条件フラグ2">
             AND
             DbT5302."ikenshoJuryoYMD" <![CDATA[>=]]> #{主治医意見書作成料請求一覧表受領日From}
             AND
             DbT5302."ikenshoJuryoYMD" <![CDATA[<=]]> #{主治医意見書作成料請求一覧表受領日To} 
         </if>
+        
         ORDER BY
         DbT5101."hihokenshaKana",
         DbT5101."ninteiShinseiYMD"

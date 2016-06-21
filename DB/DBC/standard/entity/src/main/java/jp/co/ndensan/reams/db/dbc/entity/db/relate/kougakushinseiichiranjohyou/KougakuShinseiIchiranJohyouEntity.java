@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakushinseiichiranjohyou;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -31,5 +31,5 @@ public class KougakuShinseiIchiranJohyouEntity {
     private FlexibleYearMonth 対象取込年月;
     private FlexibleYearMonth 判定送付年月;
     private FlexibleYearMonth 判定取込年月;
-    private ShoKisaiHokenshaNo 証記載番号;
+    private HokenshaNo 証記載番号;
 }

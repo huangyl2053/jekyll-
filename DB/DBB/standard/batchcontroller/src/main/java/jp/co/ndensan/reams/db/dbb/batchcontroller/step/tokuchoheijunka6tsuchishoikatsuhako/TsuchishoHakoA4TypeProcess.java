@@ -14,18 +14,17 @@ import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHe
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.ShutsuRyokuTaishoShutokuMyBatisParameter;
+import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KariSanteigakuHenkoTsuchishoHakkoIchiranData;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KarisanteiGakuHenkoEntity;
-import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100013.KarisanteiHenjunkaHenkoTsuchishoA4TateReportSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.service.report.parts.kaigotoiawasesaki.KaigoToiawasesakiSourceBuilderCreator;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -47,7 +46,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 「帳票の発行」処理です。
@@ -70,7 +68,6 @@ public class TsuchishoHakoA4TypeProcess extends BatchProcessBase<KarisanteiGakuH
 
     private EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書;
     private TsuchishoNo 通知書番号;
-    private DbT7065ChohyoSeigyoKyotsuDac dac;
     private DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通情報;
     private Association association;
     private TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko service;
@@ -109,14 +106,16 @@ public class TsuchishoHakoA4TypeProcess extends BatchProcessBase<KarisanteiGakuH
 
     @Override
     protected void createWriter() {
-        batchReportWriterA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100013.getReportId().getColumnValue(), SubGyomuCode.DBB介護賦課).create();
+        batchReportWriterA4 = BatchReportFactory.
+                createBatchReportWriter(ReportIdDBB.DBB100013.getReportId().getColumnValue(), SubGyomuCode.DBB介護賦課).create();
         reportSourceWriterA4 = new ReportSourceWriter(batchReportWriterA4);
 
         List pageBreakKeys = new ArrayList<>();
         service.set改頁Key(outputOrder, pageBreakKeys);
 
         if (!pageBreakKeys.isEmpty()) {
-            batchReportWriterIchiran = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200004.getReportId().getColumnValue(), SubGyomuCode.DBB介護賦課)
+            batchReportWriterIchiran = BatchReportFactory.
+                    createBatchReportWriter(ReportIdDBB.DBB200004.getReportId().getColumnValue(), SubGyomuCode.DBB介護賦課)
                     .addBreak(new BreakerCatalog<TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource>().simplePageBreaker(pageBreakKeys)).create();
         } else {
             batchReportWriterIchiran = BatchReportFactory.
@@ -127,8 +126,7 @@ public class TsuchishoHakoA4TypeProcess extends BatchProcessBase<KarisanteiGakuH
 
     @Override
     protected void beforeExecute() {
-        dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
-        帳票制御共通情報 = dac.selectByKey(SubGyomuCode.DBB介護賦課, 帳票分類ID_DBB100012);
+        帳票制御共通情報 = service.find帳票制御共通情報();
         association = AssociationFinderFactory.createInstance().getAssociation();
         kaigoToiawasesakiSource = KaigoToiawasesakiSourceBuilderCreator
                 .create(SubGyomuCode.DBB介護賦課, 帳票分類ID_DBB100012).buildSource();
@@ -171,7 +169,7 @@ public class TsuchishoHakoA4TypeProcess extends BatchProcessBase<KarisanteiGakuH
         TokuChoHeijunkaKariSanteigakuHakkoIchiranReport report = new TokuChoHeijunkaKariSanteigakuHakkoIchiranReport(reportDataList,
                 outputOrder, parameter.get帳票作成日時());
         report.writeBy(reportSourceWriterIchiran);
-        通知書一覧ページ数.add(batchReportWriterIchiran.getPageCount());
+        通知書一覧ページ数.add(new Decimal(batchReportWriterIchiran.getPageCount()));
 
         service.csv出力と代行プリント送付票の出力とバッチ条件の出力(csvDataList, parameter, 帳票制御共通情報, association, outputOrder,
                 通知書ページ数, 通知書一覧ページ数);

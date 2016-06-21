@@ -162,7 +162,10 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
     }
 
     private boolean hasBrek(SinsakaiHanteiJyokyoHeaderEntity before, SinsakaiHanteiJyokyoHeaderEntity current) {
-        return !(before.getGogitaiMei() == current.getGogitaiMei()
+        if (paramter.isEmptyGogitaiNo()) {
+            return !before.getShoKisaiHokenshaNo().equals(current.getShoKisaiHokenshaNo());
+        }
+        return !(before.getGogitaiNo() == current.getGogitaiNo()
                 && before.getShoKisaiHokenshaNo().equals(current.getShoKisaiHokenshaNo()));
     }
 
@@ -910,7 +913,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                         FORMAT.format(new Decimal(二次判定要介護4計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 合計計 == 0 || 二次判定要介護5計 == 0 ? 割合なし : new RString(
                         FORMAT.format(new Decimal(二次判定要介護5計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
-                new RString("100%"),
+                new RString("100.0%"),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,

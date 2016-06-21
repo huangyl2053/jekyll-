@@ -41,15 +41,18 @@ public class NinteiChosaSchedule3Main {
      */
     public ResponseData<NinteiChosaSchedule3MainDiv> onLoad(NinteiChosaSchedule3MainDiv div) {
         if (スケジュール編集初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class))) {
-            getHandler(div).initialize();
+            RString 地区コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class);
+            getHandler(div).initialize(地区コード);
             return ResponseData.of(div).setState(DBE2020003StateName.スケジュール編集);
         }
         if (スケジュール照会初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class))) {
-            getHandler(div).initialize();
+            RString 地区コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class);
+            getHandler(div).initialize(地区コード);
             return ResponseData.of(div).setState(DBE2020003StateName.スケジュール照会);
         }
         if (未定者管理初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class))) {
-            getHandler(div).initialize();
+            RString 地区コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class);
+            getHandler(div).initialize(地区コード);
             return ResponseData.of(div).setState(DBE2020003StateName.未定者);
         }
         return ResponseData.of(div).respond();
@@ -62,7 +65,8 @@ public class NinteiChosaSchedule3Main {
      * @return ResponseData
      */
     public ResponseData<NinteiChosaSchedule3MainDiv> onClick_Condition(NinteiChosaSchedule3MainDiv div) {
-        getHandler(div).検索条件クリア();
+        RString 地区コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class);
+        getHandler(div).検索条件クリア(地区コード);
         return ResponseData.of(div).respond();
     }
 

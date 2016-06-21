@@ -185,12 +185,15 @@ public class KihonInfoMainPanel {
      */
     public ResponseData<KihonInfoMainPanelDiv> onClick_btnSave(KihonInfoMainPanelDiv div) {
         try {
+            List<RString> 様式番号List = ViewStateHolder.get(ViewStateKeys.様式番号List, List.class);
+            FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
+            RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
             boolean flag = getHandler(div).get内容変更状態(ViewStateHolder.get(ViewStateKeys.償還払請求基本データ, ShokanKihon.class),
-                    ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
-                    ViewStateHolder.get(ViewStateKeys.様式番号List, List.class),
-                    ViewStateHolder.get(ViewStateKeys.様式番号, RString.class));
+                    サービス年月,
+                    様式番号List,
+                    様式番号);
             if (flag) {
-                return check入力項目(div);
+                return check入力項目(div, 様式番号List, サービス年月, 様式番号);
             } else {
                 return check内容変更(div);
             }
@@ -232,7 +235,10 @@ public class KihonInfoMainPanel {
         return ResponseData.of(div).respond();
     }
 
-    private ResponseData<KihonInfoMainPanelDiv> check入力項目(KihonInfoMainPanelDiv div) {
+    private ResponseData<KihonInfoMainPanelDiv> check入力項目(KihonInfoMainPanelDiv div,
+            List<RString> 様式番号List,
+            FlexibleYearMonth サービス年月,
+            RString 様式番号) {
         boolean 相違Flag = !new RString(UrWarningMessages.相違.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode());
         boolean 日数３０日超過Flag = !new RString(DbcWarningMessages.日数３０日超過.getMessage().getCode())
@@ -244,8 +250,7 @@ public class KihonInfoMainPanel {
                 && 日数３０日超過Flag
                 && 正常終了Flag) {
             ValidationMessageControlPairs pairs = getHandler(div).get入力チェックメッセージ(
-                    ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
-                    ViewStateHolder.get(ViewStateKeys.様式番号, RString.class));
+                    様式番号List, サービス年月, 様式番号);
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }

@@ -57,6 +57,8 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
     private final RString 標準版ブックタイプ = new RString("001");
     private final RString 標準版コンビニタイプ = new RString("101");
     private final RString 飯田市版コンビニタイプ = new RString("10E");
+    private final RString コンビニマルチ収納タイプ = new RString("301");
+    private final RString コンビニ角公タイプ = new RString("302");
     private final RString 差額令書発行指示 = new RString("差額令書発行指示");
     private final RString 当初出力_中期開始期 = new RString("当初出力_中期開始期");
     private final RString 当初出力_後期開始期 = new RString("当初出力_後期開始期");
@@ -223,6 +225,10 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
                 その他納入通知書タイプ設定値 = SonotaTsuchishoType.標準版コンビニタイプ;
             } else if (飯田市版コンビニタイプ.equals(設定値)) {
                 その他納入通知書タイプ設定値 = SonotaTsuchishoType.飯田市版コンビニタイプ;
+            } else if (コンビニマルチ収納タイプ.equals(設定値)) {
+                その他納入通知書タイプ設定値 = SonotaTsuchishoType.コンビニマルチ収納タイプ;
+            } else if (コンビニ角公タイプ.equals(設定値)) {
+                その他納入通知書タイプ設定値 = SonotaTsuchishoType.コンビニ角公タイプ;
             } else {
                 その他納入通知書タイプ設定値 = SonotaTsuchishoType.上田市版コンビニタイプ;
             }

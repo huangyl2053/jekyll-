@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsak
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 委員用特記事項と一次判定結果票情報のProcessParameterです。
@@ -23,16 +24,17 @@ public class IinTokkiJikouItiziHanteiProcessParameter implements IBatchProcessPa
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuJun;
     private RString sakuseiJoken;
-    private RString bangoStart;
-    private RString bangoEnd;
+    private Decimal bangoStart;
+    private Decimal bangoEnd;
     private final RString 作成条件_範囲指定 = new RString("範囲指定");
     private final RString 作成条件_追加分 = new RString("追加分");
     private RString shuturyokuSutairu;
     private RString printHou;
-    private RString chohyoIinHusu;
+    private Decimal chohyoIinHusu;
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private RString shinsakaiKaishiYoteiTime;
     private RString gogitaiName;
+    private RString gogitaiNo;
 
     /**
      * コンストラクタです。
@@ -48,19 +50,21 @@ public class IinTokkiJikouItiziHanteiProcessParameter implements IBatchProcessPa
      * @param shinsakaiKaisaiYoteiYMD 介護認定審査会開催予定年月日
      * @param shinsakaiKaishiYoteiTime 介護認定審査会開始予定時刻
      * @param gogitaiName 合議体名称
+     * @param gogitaiNo 合議体番号
      */
     public IinTokkiJikouItiziHanteiProcessParameter(
             RString shinsakaiKaisaiNo,
             RString shuturyokuJun,
             RString sakuseiJoken,
-            RString bangoStart,
-            RString bangoEnd,
+            Decimal bangoStart,
+            Decimal bangoEnd,
             RString shuturyokuSutairu,
             RString printHou,
-            RString chohyoIinHusu,
+            Decimal chohyoIinHusu,
             FlexibleDate shinsakaiKaisaiYoteiYMD,
             RString shinsakaiKaishiYoteiTime,
-            RString gogitaiName) {
+            RString gogitaiName,
+            RString gogitaiNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuJun = shuturyokuJun;
         this.sakuseiJoken = sakuseiJoken;
@@ -72,6 +76,7 @@ public class IinTokkiJikouItiziHanteiProcessParameter implements IBatchProcessPa
         this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
         this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;
         this.gogitaiName = gogitaiName;
+        this.gogitaiNo = gogitaiNo;
     }
 
     /**

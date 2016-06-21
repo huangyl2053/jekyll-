@@ -65,8 +65,10 @@ public class SeikatsuhogoTorokuHandler {
                 sourceList.add(new KeyValueDataSource(master.get支所コード().value(), master.get支所コード().value()));
             }
         } else {
-            sourceList.add(new KeyValueDataSource(code, code));
-            div.getDdlShisho().setDataSource(sourceList);
+            if (!RString.isNullOrEmpty(code)) {
+                sourceList.add(new KeyValueDataSource(code, code));
+                div.getDdlShisho().setDataSource(sourceList);
+            }
         }
         div.setHdnKey_Dialog(new RString("1"));
         div.setHdnKey_GyomuCode(GyomuCode.DB介護保険.value());

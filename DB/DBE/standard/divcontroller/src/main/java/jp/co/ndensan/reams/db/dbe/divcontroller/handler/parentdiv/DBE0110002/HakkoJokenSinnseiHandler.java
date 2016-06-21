@@ -7,7 +7,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110002;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinseijouhouinnsatu.ShinseiJouhouInsatuBatchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110002.HakkoJokenSinnseiDiv;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -70,6 +73,38 @@ public class HakkoJokenSinnseiHandler {
             div.getTxtShoriYMD().setDisabled(true);
             div.getTxtShinseibi().setDisabled(true);
         }
+    }
 
+    /**
+     * バッチ用パラメータクラスを作成します。
+     *
+     * @return ShinseiJouhouInsatuBatchParameter
+     */
+    public ShinseiJouhouInsatuBatchParameter setBatchParameter() {
+        ShinseiJouhouInsatuBatchParameter shinseijouhoubatchParameter = new ShinseiJouhouInsatuBatchParameter();
+        if (div.getChkSakuseiChohyo().getSelectedKeys().contains(SELECT_KEY0)) {
+            shinseijouhoubatchParameter.setShinseimonitorflag(true);
+        } else {
+            shinseijouhoubatchParameter.setShinseimonitorflag(false);
+        }
+        if (div.getChkSakuseiChohyo().getSelectedKeys().contains(SELECT_KEY1)) {
+            shinseijouhoubatchParameter.setYokaigoyoshienseiichiranflag(true);
+        } else {
+            shinseijouhoubatchParameter.setYokaigoyoshienseiichiranflag(false);
+        }
+        if (div.getRadHakoJyoken().getSelectedKey().contains(SELECT_KEY0)) {
+            shinseijouhoubatchParameter.setSakuseijyouken(new RString("1"));
+            RDateTime rDataTimeFrom = RDateTime.of(div.getTxtShoriYMD().getFromValue().toDateString(), new RString(""));
+            RDateTime rDataTimeTo = RDateTime.of(div.getTxtShoriYMD().getToValue().toDateString(), new RString(""));
+            shinseijouhoubatchParameter.setShorikaFrom(rDataTimeFrom);
+            shinseijouhoubatchParameter.setShorikaTo(rDataTimeTo);
+        } else {
+            shinseijouhoubatchParameter.setSakuseijyouken(new RString("2"));
+            FlexibleDate flexibledataFrom = new FlexibleDate(div.getTxtShinseibi().getFromValue().toDateString());
+            FlexibleDate flexibledataTo = new FlexibleDate(div.getTxtShinseibi().getToValue().toDateString());
+            shinseijouhoubatchParameter.setShinnseikaFrom(flexibledataFrom);
+            shinseijouhoubatchParameter.setShinnseikaTo(flexibledataTo);
+        }
+        return shinseijouhoubatchParameter;
     }
 }

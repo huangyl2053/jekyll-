@@ -11,16 +11,16 @@ import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.
 import jp.co.ndensan.reams.db.dba.business.report.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoItem;
 import jp.co.ndensan.reams.db.dba.business.report.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoProperty;
 import jp.co.ndensan.reams.db.dba.business.report.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoReport;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tokuteifutangendogakushinseisho.TokuteifutanMybatisParam;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tokuteifutangendogakushinseisho.TokuteifutanMybatisParam;
 import jp.co.ndensan.reams.db.dba.entity.report.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tokuteifutangendogakushinseisho.ITokuteifutanGendogakuShinseishoRelateMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinSeinengappiHyojihoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
@@ -220,7 +220,7 @@ public class TokuteifutanGendogakuShinseisho {
         RString 施設名称 = RString.EMPTY;
         List<RString> list = new ArrayList<>();
         if (dbT1004ShisetsuNyutaishoEntity != null) {
-            if (ShisetsuType.介護保険施設.getCode().equals(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuShurui())) {
+            if (ShisetsuType.介護保険施設.getコード().equals(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuShurui())) {
                 DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyoshaEntity = get介護事業者_事業者情報の取得(dbT1004ShisetsuNyutaishoEntity
                         .getNyushoShisetsuCode().value());
                 施設郵便番号 = dbT7060KaigoJigyoshaEntity == null
@@ -232,7 +232,7 @@ public class TokuteifutanGendogakuShinseisho {
                 施設名称 = dbT7060KaigoJigyoshaEntity == null
                         ? RString.EMPTY : getAtenaMeishoValue(dbT7060KaigoJigyoshaEntity.getJigyoshaName());
             }
-            if (ShisetsuType.住所地特例対象施設.getCode().equals(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuShurui())) {
+            if (ShisetsuType.住所地特例対象施設.getコード().equals(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuShurui())) {
                 DbT1005KaigoJogaiTokureiTaishoShisetsuEntity dbT1005Entity
                         = get介護除外住所地特例対象施設_事業者情報の取得(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuCode().value());
                 施設郵便番号 = dbT1005Entity == null ? RString.EMPTY : getYubinNoValue(dbT1005Entity.getYubinNo());

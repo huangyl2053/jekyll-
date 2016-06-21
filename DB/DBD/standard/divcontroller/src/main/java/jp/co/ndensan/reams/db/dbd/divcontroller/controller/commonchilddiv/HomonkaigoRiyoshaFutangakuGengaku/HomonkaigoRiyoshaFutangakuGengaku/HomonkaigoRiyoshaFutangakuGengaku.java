@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.Homonkaigo
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 共有子Div「訪問介護利用者負担額減額」のControllerクラスです。
@@ -29,18 +30,19 @@ public class HomonkaigoRiyoshaFutangakuGengaku {
      */
     public ResponseData<HomonkaigoRiyoshaFutangakuGengakuDiv> onLoad(HomonkaigoRiyoshaFutangakuGengakuDiv div) {
 
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHiddenHihokenshaNo());
-        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
-            throw new SystemException("被保険者番号が設定されていません。");
-        }
+        if (!ResponseHolder.isReRequest()) {
+            HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHiddenHihokenshaNo());
+            if (被保険者番号 == null || 被保険者番号.isEmpty()) {
+                throw new SystemException("被保険者番号が設定されていません。");
+            }
 
-        List<HomonKaigoRiyoshaFutangakuGengaku> 表示リスト = getHandler(div).表示リスト取得(被保険者番号);
-        if (表示リスト == null || 表示リスト.isEmpty()) {
-            return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_申請情報なし.getMessage()).respond();
-        } else {
-            getHandler(div).initialize(表示リスト);
+            List<HomonKaigoRiyoshaFutangakuGengaku> 表示リスト = getHandler(div).表示リスト取得(被保険者番号);
+            if (表示リスト == null || 表示リスト.isEmpty()) {
+                return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_申請情報なし.getMessage()).respond();
+            } else {
+                getHandler(div).initialize(表示リスト);
+            }
         }
-
         return ResponseData.of(div).respond();
     }
 

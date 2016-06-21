@@ -69,18 +69,13 @@ public final class ShinseiJouhouInsatuMybatisParameter implements IMyBatisParame
             FlexibleDate shinnseikaTo,
             boolean sakuseijyoukenuser,
             RString psmShikibetsuTaisho) {
-        if (new RString("1").equals(sakuseijyouken)) {
-            sakuseijyoukenuser = true;
-        } else if (new RString("2").equals(sakuseijyouken)) {
-            sakuseijyoukenuser = false;
-        }
         return new ShinseiJouhouInsatuMybatisParameter(
                 sakuseijyouken,
                 shorikaFrom,
                 shorikaTo,
                 shinnseikaFrom,
                 shinnseikaTo,
-                sakuseijyoukenuser,
+                new RString("1").equals(sakuseijyouken),
                 psmShikibetsuTaisho);
     }
 }
