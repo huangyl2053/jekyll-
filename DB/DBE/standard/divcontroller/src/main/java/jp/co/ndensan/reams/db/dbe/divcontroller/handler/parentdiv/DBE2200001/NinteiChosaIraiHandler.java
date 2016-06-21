@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbe.business.report.chosahyokihonchosakatamen.Chos
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaItem;
 import jp.co.ndensan.reams.db.dbe.business.report.saichekkuhyo.SaiChekkuhyoItem;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.SaiChekkuhyoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.NinteiChosaIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgChosaItakusakiIchiran_Row;
@@ -21,10 +21,10 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgMi
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgWaritsukeZumiShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgchosainIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninnteichousairai.NinnteiChousairaiFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
@@ -62,6 +62,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+
 
 /**
  * 認定調査員マスタ画面のハンドラークラスです。
@@ -163,18 +164,16 @@ public class NinteiChosaIraiHandler {
             chosaItakusakiCode.setValue(nullToEmpty(business.getNinteichosaItakusakiCode()));
             row.setChosaItakusakiCode(chosaItakusakiCode);
             row.setChosaItakusakiMeisho(nullToEmpty(business.getJigyoshaMeisho()));
-            RString codeName = null;
             if (business.getWaritsukeChiku() != null) {
-                codeName = CodeMaster.getCodeMeisho(
+                RString codeName = CodeMaster.getCodeMeisho(
                         SubGyomuCode.DBE認定支援,
                         DBECodeShubetsu.調査地区コード.getコード(),
                         new Code(business.getWaritsukeChiku().value()), 基準日);
-
-            }
-            if (codeName != null) {
-                row.setChosaChiku(codeName);
-            } else {
-                return false;
+                if (codeName != null) {
+                    row.setChosaChiku(codeName);
+                } else {
+                    return false;
+                }
             }
 
             TextBoxNum waritsukeTeiin = new TextBoxNum();
