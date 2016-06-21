@@ -55,7 +55,7 @@ public class IinHanteiDataSakuseiProcess extends BatchKeyBreakBase<HanteiJohoEnt
     private static final RString SELECT_HANTEIJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.publicationshiryoshinsakai.IShiryoShinsakaiIinMapper.getHanteiJoho");
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
-            new RString(IinYobihanteiKinyuhyoReportSource.ReportSourceFields.shichosonNo.name())));
+            new RString(IinYobihanteiKinyuhyoReportSource.ReportSourceFields.shinsakaiKaisaiNo.name())));
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     private IinYobihanteiKinyuhyoItem item;
