@@ -58,7 +58,7 @@ class ShinsakaiKaisaiOshiraseTsuchiEditor implements IShinsakaiKaisaiOshiraseTsu
         source.kikanNameText = item.get宛名機関名();
         source.shimeiText = item.get宛名氏名();
         source.meishoFuyo = item.get宛名名称付与();
-        source.title = new RString("介護認定審査会開催のお知らせ");
+        source.title = item.get帳票名();
         source.denshiKoin = item.get電子公印();
         source.koinMojiretsu = item.get電子公印文字列();
         source.koinShoryaku = item.get電子公印省略();
@@ -73,12 +73,12 @@ class ShinsakaiKaisaiOshiraseTsuchiEditor implements IShinsakaiKaisaiOshiraseTsu
         source.tsuchibun2 = item.get通知文2();
         source.shinsakaiKaisaiYMD = get開催日時();
         source.kaisaiKaijo = item.get開催会場();
-        source.gogitaiNo = item.get合議体番号();
+        source.gogitaiNo = item.get合議体();
         source.listKaisaiJoho_1 = get開催番号();
         source.listKaisaiJoho_2 = item.get開催日() != null && !item.get開催日().isEmpty()
                 ? item.get開催日().wareki().toDateString() : RString.EMPTY;
         source.listKaisaiJoho_3 = get開催時刻();
-        source.listKaisaiJoho_4 = item.get合議体();
+        source.listKaisaiJoho_4 = item.get合議体番号().padZeroToLeft(INT_2);
         source.listKaisaiJoho_5 = item.get会場();
         source.listJusho_1 = item.get住所();
         source.listTelNo_1 = item.get電話番号();
