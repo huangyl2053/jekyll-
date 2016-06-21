@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -55,7 +56,7 @@ public class IinHanteiDataSakuseiProcess extends BatchKeyBreakBase<HanteiJohoEnt
     private static final RString SELECT_HANTEIJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.publicationshiryoshinsakai.IShiryoShinsakaiIinMapper.getHanteiJoho");
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
-            new RString(IinYobihanteiKinyuhyoReportSource.ReportSourceFields.shichosonNo.name())));
+            new RString(IinYobihanteiKinyuhyoReportSource.ReportSourceFields.shinsakaiKaisaiNo.name())));
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     private IinYobihanteiKinyuhyoItem item;
@@ -117,21 +118,26 @@ public class IinHanteiDataSakuseiProcess extends BatchKeyBreakBase<HanteiJohoEnt
         item = new IinYobihanteiKinyuhyoItem(作成年月日(),
                 paramter.getShinsakaiKaisaiNo(),
                 new RString(entity.getShinsakaiOrder()),
-                entity.getShichosonMeisho(),
-                NinteiShinseiShinseijiKubunCode.toValue(
+                entity.getShinseijiKubunCode() == null || entity.getShinseijiKubunCode().isEmpty() ? RString.EMPTY
+                : NinteiShinseiShinseijiKubunCode.toValue(
                         entity.getShinseijiKubunCode().getColumnValue()).get名称(),
-                entity.getHihokenshaNo(),
-                entity.getHihokenshaName().getColumnValue(),
-                Seibetsu.toValue(entity.getSeibetsu().getColumnValue()).get名称(),
+                HihokenshaKubunCode.toValue(entity.getHihokenshaKubunCode()).get名称(),
+                entity.getSeibetsu() == null || entity.getSeibetsu().isEmpty() ? RString.EMPTY
+                : Seibetsu.toValue(entity.getSeibetsu().getColumnValue()).get名称(),
                 new RString(entity.getAge()),
-                YokaigoJotaiKubun09.toValue(entity.getYokaigoJotaiKubunCode().getColumnValue()).get名称(),
+                entity.getYokaigoJotaiKubunCode() == null || entity.getYokaigoJotaiKubunCode().isEmpty() ? RString.EMPTY
+                : YokaigoJotaiKubun09.toValue(entity.getYokaigoJotaiKubunCode().getColumnValue()).get名称(),
                 new RString(entity.getHanteiNinteiYukoKikan()),
-                IchijiHanteiKekkaCode09.toValue(entity.getIchijiHanteiKekkaCode().getColumnValue()).get名称(),
+                entity.getIchijiHanteiKekkaCode() == null || entity.getIchijiHanteiKekkaCode().isEmpty() ? RString.EMPTY
+                : IchijiHanteiKekkaCode09.toValue(entity.getIchijiHanteiKekkaCode().getColumnValue()).get名称(),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
-                entity.getNigoTokuteiShippeiCode().getColumnValue(),
-                TokuteiShippei.toValue(entity.getNigoTokuteiShippeiCode().getColumnValue()).get名称());
+                entity.getNigoTokuteiShippeiCode() == null || entity.getNigoTokuteiShippeiCode().isEmpty() ? RString.EMPTY
+                : entity.getNigoTokuteiShippeiCode().getColumnValue(),
+                entity.getNigoTokuteiShippeiCode() == null || entity.getNigoTokuteiShippeiCode().isEmpty() ? RString.EMPTY
+                : TokuteiShippei.toValue(entity.getNigoTokuteiShippeiCode().getColumnValue()).get名称(),
+                RString.EMPTY, RString.EMPTY);
     }
 
     private RString 作成年月日() {
@@ -157,7 +163,7 @@ public class IinHanteiDataSakuseiProcess extends BatchKeyBreakBase<HanteiJohoEnt
             idName = ReportIdDBE.DBE517003.getReportName();
         }
         Association association = AssociationFinderFactory.createInstance().getAssociation();
-        EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
+        EucFileOutputJokenhyoItem jokenhyoItem = new EucFileOutputJokenhyoItem(
                 id,
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
@@ -166,7 +172,7 @@ public class IinHanteiDataSakuseiProcess extends BatchKeyBreakBase<HanteiJohoEnt
                 総ページ数,
                 RString.EMPTY,
                 出力条件());
-        OutputJokenhyoFactory.createInstance(item).print();
+        OutputJokenhyoFactory.createInstance(jokenhyoItem).print();
     }
 
     private List<RString> 出力条件() {

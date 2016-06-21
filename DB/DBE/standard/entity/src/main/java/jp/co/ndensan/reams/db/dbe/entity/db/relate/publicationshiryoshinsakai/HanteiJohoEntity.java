@@ -22,6 +22,7 @@ public class HanteiJohoEntity {
     private int shinsakaiOrder;
     private RString shichosonMeisho;
     private Code shinseijiKubunCode;
+    private RString hihokenshaKubunCode;
     private RString hihokenshaNo;
     private AtenaMeisho hihokenshaName;
     private Code seibetsu;
