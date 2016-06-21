@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.MobileDataShutsuryokuFlag;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5201NinteichosaIraiJohoDac;
@@ -170,8 +171,11 @@ public class NinteichosaIraiManager {
     @Transaction
     public SearchResult<NinteichosaIraiBusiness> select調査結果入力用データ(List<ShinseishoKanriNo> 申請書管理番号リスト) {
         INinteichosaIraiMapper mapper = mapperProvider.create(INinteichosaIraiMapper.class);
+        RString 概況調査テキストイメージ区分 = DbBusinessConfig.get(
+                ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         List<ChosaKekkaNyuryokuMobileRelateEntity> relateEntityList = mapper.select調査結果入力用データ(new NinteichosaIraiParameter(
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, 申請書管理番号リスト));
+                RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                概況調査テキストイメージ区分, ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 申請書管理番号リスト));
         if (relateEntityList.isEmpty()) {
             return SearchResult.of(Collections.<NinteichosaIraiBusiness>emptyList(), 0, false);
         }
