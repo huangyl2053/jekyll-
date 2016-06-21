@@ -90,7 +90,8 @@ public class JimukyokuyoYobihanteiKinyuhyoEditor implements IJimukyokuyoYobihant
         source.listShinseiKubun_1 = NinteiShinseiShinseijiKubunCode.toValue(item.get申請区分()).get名称();
         source.listNo_1 = item.getNo();
         source.listHokenshaName_1 = item.get保険者();
-        source.shinsakaiKaisaiNo = new RString(item.get審査会開催番号().length() - INT_LENGTH);
+        source.shinsakaiKaisaiNo = new RString(item.get審査会開催番号().toString()
+                .substring(item.get審査会開催番号().length() - INT_LENGTH));
         source.kaisaiYMD = getパターン33(new RDate(item.get開催年月日().toString()));
         source.kaisaiHH = item.get開催時().padZeroToLeft(INT_NUM);
         source.kaisaiMM = item.get開催分().padZeroToLeft(INT_NUM);
@@ -98,7 +99,8 @@ public class JimukyokuyoYobihanteiKinyuhyoEditor implements IJimukyokuyoYobihant
         source.shikibetuCode = ShikibetsuCode.EMPTY;
 
         if (!RString.isNullOrEmpty(item.get被保険者番号())) {
-            source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), item.get被保険者番号());
+            source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
+                    item.get被保険者番号());
         }
         return source;
     }
