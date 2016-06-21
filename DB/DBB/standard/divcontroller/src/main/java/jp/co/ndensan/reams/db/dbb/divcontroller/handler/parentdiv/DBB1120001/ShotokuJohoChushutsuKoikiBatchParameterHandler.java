@@ -130,10 +130,10 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
             if (result.getEntity().get市町村名() != null) {
                 row.getTxtCityName().setValue(result.getEntity().get市町村名());
             }
-            YMDHMS 基準日時 = result.getEntity().get処理日時();
-            RString 年月日 = 基準日時.getRDateTime().getDate().wareki().toDateString();
-            RString 時刻 = 基準日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);
             if (result.getEntity().get処理日時() != null) {
+                YMDHMS 基準日時 = result.getEntity().get処理日時();
+                RString 年月日 = 基準日時.getRDateTime().getDate().wareki().toDateString();
+                RString 時刻 = 基準日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);
                 row.getTxtSaishinShoriNitiji().setValue(年月日.concat(時刻));
             }
             RString 処理状態 = result.getEntity().get表示用処理状態();
@@ -176,7 +176,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
      * @return ShotokuJohoTyushutuRenkeiKoikiParameter 所得情報抽出・連携_バッチパラメータクラスです
      */
     public ShotokuJohoTyushutuRenkeiKoikiParameter getBatchParamter() {
-        // TODO:バッチが実装でいます
+        // TODO バッチが実装でいます
         ShotokuJohoTyushutuRenkeiKoikiParameter batchparam = new ShotokuJohoTyushutuRenkeiKoikiParameter();
         batchparam.set共有ファイルID(null);
         batchparam.set共有ファイル名(null);

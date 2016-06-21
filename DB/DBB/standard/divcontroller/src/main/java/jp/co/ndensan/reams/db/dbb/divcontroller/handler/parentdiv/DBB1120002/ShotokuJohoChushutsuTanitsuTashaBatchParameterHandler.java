@@ -168,7 +168,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
      * @return ShotokuJohoTyushutuRenkeiTanituParameter 所得情報抽出・連携_バッチパラメータクラスです
      */
     public ShotokuJohoTyushutuRenkeiTanituParameter getBatchParamter() {
-        // TODO:バッチが実装でいます
+        // TODO バッチが実装でいます
         ShotokuJohoTyushutuRenkeiTanituParameter batchparam = new ShotokuJohoTyushutuRenkeiTanituParameter();
         batchparam.set共有ファイルID(null);
         batchparam.set共有ファイル名(null);
