@@ -383,6 +383,7 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
                 hiHokensyaKubun,
                 -1 == gogitaiNo,
                 gogitaiNo,
+                gogitaiNoList,
                 isTaishoTsukiKubun,
                 isTaishoGeppiKubun,
                 taishoNendoYM,

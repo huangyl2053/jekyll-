@@ -1269,8 +1269,8 @@
         <if test="!isShinseiji and !isHorei">
             <choose>
                 <when test="#{ninteiShinseiKubun == '0'}">
-                    AND (C."ninteiShinseiShinseijiKubunCode" ('1', '3')
-                    OR C."ninteiShinseiHoreiKubunCode" = ('1', '3'))
+                    AND (C."ninteiShinseiShinseijiKubunCode" IN ('1', '3')
+                    OR C."ninteiShinseiHoreiKubunCode" IN ('1', '3'))
                 </when>
                 <when test="#{ninteiShinseiKubun == '2'}">
                     AND (C."ninteiShinseiShinseijiKubunCode" = '2'

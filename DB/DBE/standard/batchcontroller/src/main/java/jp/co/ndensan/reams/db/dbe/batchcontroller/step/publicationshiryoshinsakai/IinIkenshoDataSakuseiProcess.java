@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.publicationshiryoshinsakai;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoa3.ShujiiikenshoA3Report;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoa3.ShujiiikenshoA4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
@@ -24,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -35,6 +39,10 @@ public class IinIkenshoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiWar
 
     private static final RString SELECT_WARIATEJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.publicationshiryoshinsakai.IShiryoShinsakaiIinMapper.getShinsakaiWariateJoho");
+    private static final List<RString> PAGE_BREAK_KEYS_A3 = Collections.unmodifiableList(Arrays.asList(
+            new RString(ShujiiikenshoA3ReportSource.ReportSourceFields.hokenshaNo.name())));
+    private static final List<RString> PAGE_BREAK_KEYS_A4 = Collections.unmodifiableList(Arrays.asList(
+            new RString(ShujiiikenshoA4ReportSource.ReportSourceFields.hokenshaNo.name())));
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     @BatchWriter
@@ -43,6 +51,7 @@ public class IinIkenshoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiWar
     @BatchWriter
     private BatchReportWriter<ShujiiikenshoA3ReportSource> batchWriteA3;
     private ReportSourceWriter<ShujiiikenshoA3ReportSource> reportSourceWriterA3;
+    private ShujiiikenshoItem item;
     private final RString 出力スタイル_A4 = new RString("1");
 
     @Override
@@ -58,8 +67,8 @@ public class IinIkenshoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiWar
 
     @Override
     protected void usualProcess(ShinsakaiWariateJohoEntity entity) {
-        ShujiiikenshoItem item = new ShujiiikenshoItem();
-        set項目(item, entity);
+        item = new ShujiiikenshoItem();
+        set項目(entity);
         if (出力スタイル_A4.equals(paramter.getShuturyokuSutairu())) {
             // TODO QA回答まち、ファイル名が無し、
 //            item.set主治医意見書イメージ一頁目(共有ファイルを引き出す(entity.getImageSharedFileId(), 出力スタイル_A4));
@@ -77,13 +86,20 @@ public class IinIkenshoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiWar
 
     @Override
     protected void createWriter() {
-        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517152.getReportId().value()).create();
-        reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);
-        batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517005.getReportId().value()).create();
-        reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);
+        if (出力スタイル_A4.equals(paramter.getShuturyokuSutairu())) {
+            batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517152.getReportId().value())
+                    .addBreak(new BreakerCatalog<ShujiiikenshoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A4))
+                    .create();
+            reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);
+        } else {
+            batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517005.getReportId().value())
+                    .addBreak(new BreakerCatalog<ShujiiikenshoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
+                    .create();
+            reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);
+        }
     }
 
-    private void set項目(ShujiiikenshoItem item, ShinsakaiWariateJohoEntity 主治医意見書情報) {
+    private void set項目(ShinsakaiWariateJohoEntity 主治医意見書情報) {
         item.set保険者番号(主治医意見書情報.getShoKisaiHokenshaNo());
         item.set被保険者番号(主治医意見書情報.getHihokenshaNo());
         item.set名前(主治医意見書情報.getHihokenshaName().getColumnValue());
@@ -111,7 +127,15 @@ public class IinIkenshoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiWar
 //    }
     @Override
     protected void keyBreakProcess(ShinsakaiWariateJohoEntity current) {
-        hasBrek(getBefore(), current);
+        if (hasBrek(getBefore(), current)) {
+            if (出力スタイル_A4.equals(paramter.getShuturyokuSutairu())) {
+                ShujiiikenshoA4Report report = new ShujiiikenshoA4Report(item);
+                report.writeBy(reportSourceWriterA4);
+            } else {
+                ShujiiikenshoA3Report report = new ShujiiikenshoA3Report(item);
+                report.writeBy(reportSourceWriterA3);
+            }
+        }
     }
 
     private boolean hasBrek(ShinsakaiWariateJohoEntity before, ShinsakaiWariateJohoEntity current) {

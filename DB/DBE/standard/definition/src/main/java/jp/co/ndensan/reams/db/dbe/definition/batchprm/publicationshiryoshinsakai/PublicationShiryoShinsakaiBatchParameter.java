@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.publicationshiryoshinsakai;
 
+import jp.co.ndensan.reams.db.dbe.definition.processprm.publicationshiryoshinsakai.IinItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.publicationshiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.publicationshiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.publicationshiryoshinsakai.IinTuikaSiryoProcessParameter;
@@ -272,5 +273,14 @@ public class PublicationShiryoShinsakaiBatchParameter extends BatchParameterBase
                 shuturyokuSutairu,
                 printHou,
                 chohyoIinHusu);
+    }
+
+    /**
+     * 介護認定更新ProcessParameterに転換します。
+     *
+     * @return IinItiziHanteiProcessParameter
+     */
+    public IinItiziHanteiProcessParameter toIinItiziHanteiProcessParameter() {
+        return new IinItiziHanteiProcessParameter(shinsakaiKaisaiNo, shuturyokuJun, sakuseiJoken, gogitaiNo, printHou);
     }
 }
