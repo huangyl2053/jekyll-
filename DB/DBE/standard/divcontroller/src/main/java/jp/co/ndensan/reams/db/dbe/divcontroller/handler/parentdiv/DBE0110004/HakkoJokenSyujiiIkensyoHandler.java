@@ -116,7 +116,6 @@ public class HakkoJokenSyujiiIkensyoHandler {
                 div.getTxtIraiNisu().clearValue();
                 div.getTxtIraiNisu().setDisabled(true);
             }
-
         }
         if (!主治医意見書５項目確認一覧表フラグ) {
             div.getRadJoken2().setDisabled(true);
@@ -197,7 +196,6 @@ public class HakkoJokenSyujiiIkensyoHandler {
      * @return ikenshoJohoPrintBatchParameter
      */
     public IkenshoJohoPrintBatchParameter setBatchParameter() {
-
         boolean 主治医意見書未提出者一覧フラグ = div.getChkMiteishutsushaIchiran().getSelectedKeys().contains(SELECT_KEY0);
         boolean 主治医意見書５項目確認一覧表フラグ = div.getChkKakuninIchiranhyo().getSelectedKeys().contains(SELECT_KEY0);
         boolean 主治医意見書依頼未処理者一覧表フラグ = div.getChkIraiMishorishaIchiranhyo().getSelectedKeys().contains(SELECT_KEY0);
@@ -308,6 +306,5 @@ public class HakkoJokenSyujiiIkensyoHandler {
                 主治医意見書作成料請求一覧表受領日From,
                 主治医意見書作成料請求一覧表受領日To);
         return ikenshoJohoPrintBatchParameter;
-
     }
 }

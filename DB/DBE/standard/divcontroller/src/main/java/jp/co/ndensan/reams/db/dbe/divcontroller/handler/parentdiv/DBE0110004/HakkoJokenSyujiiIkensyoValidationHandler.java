@@ -54,7 +54,6 @@ public class HakkoJokenSyujiiIkensyoValidationHandler {
             validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.申請日範囲不正チェック));
         }
         return validPairs;
-
     }
 
     /**
@@ -76,7 +75,6 @@ public class HakkoJokenSyujiiIkensyoValidationHandler {
             validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.申請日範囲不正チェック));
         }
         return validPairs;
-
     }
 
     /**
@@ -98,7 +96,6 @@ public class HakkoJokenSyujiiIkensyoValidationHandler {
             validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.申請日範囲不正チェック));
         }
         return validPairs;
-
     }
 
     /**
@@ -120,7 +117,6 @@ public class HakkoJokenSyujiiIkensyoValidationHandler {
             validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.申請日範囲不正チェック));
         }
         return validPairs;
-
     }
 
     /**
@@ -142,7 +138,6 @@ public class HakkoJokenSyujiiIkensyoValidationHandler {
             validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.受領日範囲不正チェック));
         }
         return validPairs;
-
     }
 
     /**
@@ -260,5 +255,4 @@ public class HakkoJokenSyujiiIkensyoValidationHandler {
             return message;
         }
     }
-
 }
