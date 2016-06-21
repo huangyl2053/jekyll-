@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenSh
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -46,8 +47,6 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
     private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegisterKoiki");
     private static final RString 所得情報抽出_連携当初 = new RString("DBBMN51006");
     private static final RString 所得情報抽出_連携異動 = new RString("DBBMN51008");
-    private static final ReportId バッチID_当初広域保険者連携 = new ReportId("DBB1120002_ToushoShotokuJohoChushutsuRenkeiKoiki");
-    private static final ReportId バッチID_異動広域保険者連携 = new ReportId("DBB1120004_ShotokuJohoChushutsuRenkeiKoiki");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -58,24 +57,25 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
     public ResponseData<ShotokuJohoChushutsuKoikiBatchParameterDiv> onLoad(ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
         RString 遷移区分 = null;
         FlexibleYear 年度 = null;
-        ShotokuJohoChushutsuKoikiPanelDiv koikiPanelDiv = div.getShotokuJohoChushutsuKoikiPanel();
-        ShotokuJohoChushutsuKoikiBatchParameterHandler handler = getHandler(div);
-        handler.initCheck();
-        handler.shichosonIchiran();
+        RDate currentTime = RDate.getNowDate();
         RString メニューID = ResponseHolder.getMenuID();
         if (所得情報抽出_連携当初.equals(メニューID)) {
             遷移区分 = 遷移区分_0;
-            年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
+            年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, currentTime,
                     SubGyomuCode.DBB介護賦課));
         } else if (所得情報抽出_連携異動.equals(メニューID)) {
             遷移区分 = 遷移区分_1;
-            年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, RDate.getNowDate(),
+            年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, currentTime,
                     SubGyomuCode.DBB介護賦課));
         }
         SearchResult<KoikiZenShichosonJoho> koikiZenShichosonJohoList = KoikiShichosonJohoFinder
                 .createInstance().getGenShichosonJoho();
         List<ShichosonJohoResult> shichosonJohoList = ShotokuJohoChushutsuRenkeiKoiki.createInstance()
                 .getShichosonJoho(koikiZenShichosonJohoList.records(), 遷移区分, 年度);
+        ShotokuJohoChushutsuKoikiPanelDiv koikiPanelDiv = div.getShotokuJohoChushutsuKoikiPanel();
+        ShotokuJohoChushutsuKoikiBatchParameterHandler handler = getHandler(div);
+        handler.initCheck(currentTime);
+        handler.shichosonIchiran(currentTime, shichosonJohoList);
         List<dgShichosonIchiran_Row> rowList = new ArrayList<>();
         for (ShichosonJohoResult result : shichosonJohoList) {
             dgShichosonIchiran_Row row = new dgShichosonIchiran_Row();
@@ -85,13 +85,16 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
             if (result.getEntity().get市町村名() != null) {
                 row.getTxtCityName().setValue(result.getEntity().get市町村名());
             }
+            YMDHMS 基準日時 = result.getEntity().get処理日時();
+            RString 年月日 = 基準日時.getRDateTime().getDate().wareki().toDateString();
+            RString 時刻 = 基準日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);
             if (result.getEntity().get処理日時() != null) {
-                row.getTxtSaishinShoriNitiji().setValue(result.getEntity().get処理日時().getDate().wareki()
-                        .toDateString().concat(RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
+                row.getTxtSaishinShoriNitiji().setValue(年月日.concat(時刻));
             }
-            if (result.getEntity().get処理状態() != null) {
-                row.getTxtShoriState().setValue(result.getEntity().get処理状態());
-                if (処理待ち.equals(result.getEntity().get処理状態())) {
+            RString 処理状態 = result.getEntity().get表示用処理状態();
+            if (処理状態 != null) {
+                row.getTxtShoriState().setValue(処理状態);
+                if (処理待ち.equals(処理状態)) {
                     row.setSelectable(true);
                 } else {
                     row.setSelectable(false);
@@ -106,6 +109,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
         } else {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, false);
         }
+        div.getShotokuJohoChushutsuKoikiPanel().getTxtShoriNendoKoiki().setDisabled(true);
         div.getShotokuJohoChushutsuKoikiPanel().getCcdChohyoShutsuryokujunKoiki().load(SubGyomuCode.DBB介護賦課, 帳票ID);
         return createResponse(div);
     }
@@ -135,14 +139,6 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
             ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
         ShotokuJohoChushutsuKoikiBatchParameterHandler handler = getHandler(div);
         ShotokuJohoTyushutuRenkeiKoikiParameter parameter = handler.getBatchParamter();
-        RString メニューID = ResponseHolder.getMenuID();
-        if (所得情報抽出_連携当初.equals(メニューID)) {
-            div.getShotokuJohoChushutsuKoikiPanel().getCcdChohyoShutsuryokujunKoiki()
-                    .load(SubGyomuCode.DBB介護賦課, バッチID_当初広域保険者連携);
-        } else if (所得情報抽出_連携異動.equals(メニューID)) {
-            div.getShotokuJohoChushutsuKoikiPanel().getCcdChohyoShutsuryokujunKoiki()
-                    .load(SubGyomuCode.DBB介護賦課, バッチID_異動広域保険者連携);
-        }
         return ResponseData.of(parameter).respond();
     }
 
