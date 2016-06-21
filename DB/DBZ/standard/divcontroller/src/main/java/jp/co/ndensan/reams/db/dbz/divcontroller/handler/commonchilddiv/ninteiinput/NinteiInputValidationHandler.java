@@ -89,7 +89,7 @@ public class NinteiInputValidationHandler {
 
         validation有効開始日(UrErrorMessages.未入力, "有効開始日"),
         validation有効終了日(UrErrorMessages.未入力, "有効終了日"),
-        validation開始日と終了日の前後順(UrErrorMessages.終了日が開始日以前, "開始日", "終了日"),
+        validation開始日と終了日の前後順(UrErrorMessages.終了日が開始日以前),
         validation開始日と法施行の前後順(UrWarningMessages.日付の前後関係逆転以降, "法施行日", "有効開始日");
         private final Message message;
 
