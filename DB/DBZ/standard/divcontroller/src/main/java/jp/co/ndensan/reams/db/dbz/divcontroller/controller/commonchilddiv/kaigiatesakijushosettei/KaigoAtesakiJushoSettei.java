@@ -23,7 +23,7 @@ public class KaigoAtesakiJushoSettei {
      * @return ResponseData<KaigoAtesakiJushoSetteiDiv>
      */
     public ResponseData<KaigoAtesakiJushoSetteiDiv> onChange_radJushoSettei(KaigoAtesakiJushoSetteiDiv div) {
-        getHandler(div).setradJushoSettei();
+        getHandler(div).setradJushoSettei(div.getHdnサブ業務コード(), div.getHdn帳票分類ID());
         getHandler(div).宛先住所編集書式();
         return ResponseData.of(div).respond();
     }

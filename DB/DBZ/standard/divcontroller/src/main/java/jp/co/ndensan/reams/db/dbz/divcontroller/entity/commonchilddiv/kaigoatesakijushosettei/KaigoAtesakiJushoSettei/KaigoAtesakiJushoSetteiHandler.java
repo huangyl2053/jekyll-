@@ -78,29 +78,22 @@ public class KaigoAtesakiJushoSetteiHandler {
                 div.getRadJushoSettei().setDisabledItem(ddlShoriKubun);
             }
         }
-        DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通 = finader.select帳票制御共通(サブ業務コード, 帳票分類ID);
-        if (JushoHenshuKubun.帳票独自.getコード().equals(帳票制御共通.getJushoHenshuKubun())) {
-            div.getRadJushoSettei().setSelectedKey(JushoHenshuKubun.帳票独自.getコード());
-        } else {
-            div.getRadJushoSettei().setSelectedKey(JushoHenshuKubun.市町村共通.getコード());
-        }
-        if (JushoHenshuKubun.市町村共通.getコード().equals(div.getRadJushoSettei().getSelectedKey())) {
-            RString 市町村共通_都道府県名表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無,
-                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-            RString 市町村共通_郡名表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無,
-                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-            RString 市町村共通_市町村名表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無,
-                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-            RString 市町村共通_町域編集方法 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無,
-                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-            RString 市町村共通_方書表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無,
-                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-            div.setHdnChohyoDokujiTodofukenMei(市町村共通_都道府県名表示有無);
-            div.setHdnChohyoDokujiGunMei(市町村共通_郡名表示有無);
-            div.setHdnChohyoDokujiShichosonMei(市町村共通_市町村名表示有無);
-            div.setHdnChohyoDokujiHensyuHoho(市町村共通_町域編集方法);
-            div.setHdnChohyoDokujiKatagaki(市町村共通_方書表示有無);
-        } else {
+        住所設定(サブ業務コード, 帳票分類ID);
+        宛先住所編集書式();
+        div.setHdnサブ業務コード(サブ業務コード);
+        div.setHdn帳票分類ID(帳票分類ID);
+    }
+
+    /**
+     * 画面表示を制御する。
+     *
+     * @param サブ業務コード RString
+     * @param 帳票分類ID RString
+     */
+    public void setradJushoSettei(RString サブ業務コード, RString 帳票分類ID) {
+        if (JushoHenshuKubun.帳票独自.getコード().equals(div.getRadJushoSettei().getSelectedKey())) {
+            div.getBtnAtesakiJushoSettei().setDisabled(false);
+            DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通 = finader.select帳票制御共通(サブ業務コード, 帳票分類ID);
             if (帳票制御共通.getJushoHenshuTodoufukenMeiHyojiUmu()) {
                 RString 市町村共通_都道府県名表示有無 = JushoHenshuKubun.帳票独自.getコード();
                 div.setHdnChohyoDokujiTodofukenMei(市町村共通_都道府県名表示有無);
@@ -131,19 +124,23 @@ public class KaigoAtesakiJushoSetteiHandler {
                 RString 帳票独自_方書表示有無 = JushoHenshuKubun.市町村共通.getコード();
                 div.setHdnChohyoDokujiKatagaki(帳票独自_方書表示有無);
             }
-        }
-        宛先住所編集書式();
-    }
-
-    /**
-     * 画面表示を制御する。
-     *
-     */
-    public void setradJushoSettei() {
-        if (JushoHenshuKubun.帳票独自.getコード().equals(div.getRadJushoSettei().getSelectedKey())) {
-            div.getBtnAtesakiJushoSettei().setDisabled(false);
         } else {
             div.getBtnAtesakiJushoSettei().setDisabled(true);
+            RString 市町村共通_都道府県名表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無,
+                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+            RString 市町村共通_郡名表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無,
+                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+            RString 市町村共通_市町村名表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無,
+                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+            RString 市町村共通_町域編集方法 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無,
+                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+            RString 市町村共通_方書表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無,
+                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+            div.setHdnChohyoDokujiTodofukenMei(市町村共通_都道府県名表示有無);
+            div.setHdnChohyoDokujiGunMei(市町村共通_郡名表示有無);
+            div.setHdnChohyoDokujiShichosonMei(市町村共通_市町村名表示有無);
+            div.setHdnChohyoDokujiHensyuHoho(市町村共通_町域編集方法);
+            div.setHdnChohyoDokujiKatagaki(市町村共通_方書表示有無);
         }
     }
 
@@ -259,5 +256,62 @@ public class KaigoAtesakiJushoSetteiHandler {
             }
         }
         div.getTxtAtesakiJushoSettei().setValue(書式.toRString());
+    }
+
+    private void 住所設定(RString サブ業務コード, RString 帳票分類ID) {
+        DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通 = finader.select帳票制御共通(サブ業務コード, 帳票分類ID);
+        if (JushoHenshuKubun.帳票独自.getコード().equals(帳票制御共通.getJushoHenshuKubun())) {
+            div.getRadJushoSettei().setSelectedKey(JushoHenshuKubun.帳票独自.getコード());
+        } else {
+            div.getRadJushoSettei().setSelectedKey(JushoHenshuKubun.市町村共通.getコード());
+        }
+        if (JushoHenshuKubun.市町村共通.getコード().equals(div.getRadJushoSettei().getSelectedKey())) {
+            RString 市町村共通_都道府県名表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無,
+                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+            RString 市町村共通_郡名表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無,
+                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+            RString 市町村共通_市町村名表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無,
+                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+            RString 市町村共通_町域編集方法 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無,
+                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+            RString 市町村共通_方書表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無,
+                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+            div.setHdnChohyoDokujiTodofukenMei(市町村共通_都道府県名表示有無);
+            div.setHdnChohyoDokujiGunMei(市町村共通_郡名表示有無);
+            div.setHdnChohyoDokujiShichosonMei(市町村共通_市町村名表示有無);
+            div.setHdnChohyoDokujiHensyuHoho(市町村共通_町域編集方法);
+            div.setHdnChohyoDokujiKatagaki(市町村共通_方書表示有無);
+        } else {
+            if (帳票制御共通.getJushoHenshuTodoufukenMeiHyojiUmu()) {
+                RString 市町村共通_都道府県名表示有無 = JushoHenshuKubun.帳票独自.getコード();
+                div.setHdnChohyoDokujiTodofukenMei(市町村共通_都道府県名表示有無);
+            } else {
+                RString 市町村共通_都道府県名表示有無 = JushoHenshuKubun.市町村共通.getコード();
+                div.setHdnChohyoDokujiTodofukenMei(市町村共通_都道府県名表示有無);
+            }
+            if (帳票制御共通.getJushoHenshuGunMeiHyojiUmu()) {
+                RString 帳票独自_郡名表示有無 = JushoHenshuKubun.帳票独自.getコード();
+                div.setHdnChohyoDokujiGunMei(帳票独自_郡名表示有無);
+            } else {
+                RString 帳票独自_郡名表示有無 = JushoHenshuKubun.市町村共通.getコード();
+                div.setHdnChohyoDokujiGunMei(帳票独自_郡名表示有無);
+            }
+            if (帳票制御共通.getJushoHenshuShichosonMeiHyojiUmu()) {
+                RString 帳票独自_市町村名表示有無 = JushoHenshuKubun.帳票独自.getコード();
+                div.setHdnChohyoDokujiShichosonMei(帳票独自_市町村名表示有無);
+            } else {
+                RString 帳票独自_市町村名表示有無 = JushoHenshuKubun.市町村共通.getコード();
+                div.setHdnChohyoDokujiShichosonMei(帳票独自_市町村名表示有無);
+            }
+            RString 帳票独自_町域編集方法 = 帳票制御共通.getJushoHenshuChoikiHenshuHoho();
+            div.setHdnChohyoDokujiHensyuHoho(帳票独自_町域編集方法);
+            if (帳票制御共通.getJushoHenshuKatagakiHyojiUmu()) {
+                RString 帳票独自_方書表示有無 = JushoHenshuKubun.帳票独自.getコード();
+                div.setHdnChohyoDokujiKatagaki(帳票独自_方書表示有無);
+            } else {
+                RString 帳票独自_方書表示有無 = JushoHenshuKubun.市町村共通.getコード();
+                div.setHdnChohyoDokujiKatagaki(帳票独自_方書表示有無);
+            }
+        }
     }
 }
