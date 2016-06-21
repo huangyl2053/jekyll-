@@ -119,6 +119,10 @@ public enum ViewStateKeys {
     /**
      * 特徴対象者同定実行FLAG
      */
-    特徴対象者同定実行FLAG;
+    特徴対象者同定実行FLAG,
+    /**
+     * 特徴対象者同定STATE
+     */
+    特徴対象者同定STATE;
 
 }
