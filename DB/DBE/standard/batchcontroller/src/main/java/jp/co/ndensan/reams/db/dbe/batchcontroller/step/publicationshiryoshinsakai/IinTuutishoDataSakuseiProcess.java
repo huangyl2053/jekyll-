@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshub
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
@@ -41,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -168,8 +169,7 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
 
     private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
-        List<RString> list = new ArrayList<>();
-        EucFileOutputJokenhyoItem jokenhyoItem = new EucFileOutputJokenhyoItem(
+        ReportOutputJokenhyoItem jokenhyoItem = new ReportOutputJokenhyoItem(
                 ReportIdDBE.DBE515001.getReportId().getColumnValue(),
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
@@ -177,7 +177,8 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
                 new RString("介護認定審査会開催のお知らせ"),
                 new RString("1"),
                 RString.EMPTY,
-                list);
+                RString.EMPTY,
+                出力条件());
         OutputJokenhyoFactory.createInstance(jokenhyoItem).print();
     }
 
@@ -191,5 +192,15 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
 
     private boolean hasBrek(ShinsakaiIinCodeEntity before, ShinsakaiIinCodeEntity current) {
         return !before.getShinsakaiIinCode().equals(current.getShinsakaiIinCode());
+    }
+
+    private List<RString> 出力条件() {
+        List<RString> list = new ArrayList<>();
+        RStringBuilder builder = new RStringBuilder();
+        builder.append("【介護認定審査会開催番号】")
+                .append(" ")
+                .append(paramter.getShinsakaiKaisaiNo());
+        list.add(builder.toRString());
+        return list;
     }
 }

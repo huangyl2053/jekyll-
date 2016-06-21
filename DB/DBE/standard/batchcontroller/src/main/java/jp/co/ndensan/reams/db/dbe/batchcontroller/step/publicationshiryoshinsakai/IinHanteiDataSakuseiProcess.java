@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Hihokens
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
@@ -163,13 +163,14 @@ public class IinHanteiDataSakuseiProcess extends BatchKeyBreakBase<HanteiJohoEnt
             idName = ReportIdDBE.DBE517003.getReportName();
         }
         Association association = AssociationFinderFactory.createInstance().getAssociation();
-        EucFileOutputJokenhyoItem jokenhyoItem = new EucFileOutputJokenhyoItem(
+        ReportOutputJokenhyoItem jokenhyoItem = new ReportOutputJokenhyoItem(
                 id,
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 idName,
                 総ページ数,
+                RString.EMPTY,
                 RString.EMPTY,
                 出力条件());
         OutputJokenhyoFactory.createInstance(jokenhyoItem).print();
