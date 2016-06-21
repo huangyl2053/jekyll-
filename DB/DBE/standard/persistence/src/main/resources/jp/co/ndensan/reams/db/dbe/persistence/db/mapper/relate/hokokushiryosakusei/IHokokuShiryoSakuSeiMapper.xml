@@ -1549,10 +1549,10 @@
         </choose>
         <choose>
             <when test="!isEmptyGogitaiNo">
-                AND E."gogitaiNo" = #{gogitaiNo}
+                AND A."gogitaiNo" = #{gogitaiNo}
             </when>
             <otherwise>
-                AND E."gogitaiNo" IN
+                AND A."gogitaiNo" IN
                 <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
             </otherwise>
         </choose>
