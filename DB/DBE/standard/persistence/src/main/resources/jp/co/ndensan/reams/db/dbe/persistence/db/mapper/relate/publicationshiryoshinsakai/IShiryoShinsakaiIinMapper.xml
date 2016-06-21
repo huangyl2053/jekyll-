@@ -193,10 +193,10 @@
                 ) AS GaikyoChosaJoho
             WHERE
                 NinteiJoho.dbT5502_shinseishoKanriNo = GaikyoChosaJoho.dbt5202_shinseishoKanriNo
-            ORDER BY
+<!--            ORDER BY
                 <if test="isIsShuturyokuJun">
                    NinteiJoho.dbT5502_shinsakaiOrder
-                </if>
+                </if>-->
                 <!--TODO 出力順　実装しない-->
 <!--                <if test="!isIsShuturyokuJun">
                    #{shuturyokuJun}
@@ -559,10 +559,10 @@
             AND NinteiJoho.dbt5502_shinseishoKanriNo = GaikyoChosa.dbt5202_shinseishoKanriNo
             AND NinteiJoho.dbt5502_shinseishoKanriNo = ServiceJokyo.dbt5207_shinseishoKanriNo
             AND NinteiJoho.dbt5502_shinseishoKanriNo = ShisetsuRiyo.dbt5210_shinseishoKanriNo
-            ORDER BY
+<!--            ORDER BY
                 <if test="isIsShuturyokuJun">
                    NinteiJoho.dbT5502_shinsakaiOrder
-                </if>
+                </if>-->
                 <!--TODO 出力順　実装しない-->
 <!--                <if test="!isIsShuturyokuJun">
                    #{shuturyokuJun}
@@ -673,10 +673,10 @@
                 ShinsakaiWariateJoho.dbT5502_shinseishoKanriNo = dbt5115."shinseishoKanriNo"
             AND 
                 ShinsakaiWariateJoho.dbT5502_shinseishoKanriNo = GaikyoChosa.dbt5202_shinseishoKanriNo
-            ORDER BY
+<!--            ORDER BY
                 <if test="isIsShuturyokuJun">
                    NinteiJoho.dbT5502_shinsakaiOrder
-                </if>
+                </if>-->
                 <!--TODO 出力順　実装しない-->
 <!--                <if test="!isIsShuturyokuJun">
                    #{shuturyokuJun}
@@ -741,10 +741,10 @@
                 dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
             AND 
                 dbt5502."shinsakaiOrderKakuteiFlag" = #{isOrderKakuteiFlg}
-            ORDER BY
+<!--            ORDER BY
                 <if test="isIsShuturyokuJun">
                    NinteiJoho.dbT5502_shinsakaiOrder
-                </if>
+                </if>-->
                 <!--TODO 出力順　実装しない-->
 <!--                <if test="!isIsShuturyokuJun">
                    #{shuturyokuJun}
@@ -860,10 +860,10 @@
                 ) AS IkenshoJoho
             WHERE
                 NinteiShinseiJoho.dbt5502_shinseishoKanriNo = IkenshoJoho.dbt5302_shinseishoKanriNo
-            ORDER BY
+<!--            ORDER BY
                 <if test="isIsShuturyokuJun">
                    NinteiJoho.dbT5502_shinsakaiOrder
-                </if>
+                </if>-->
                 <!--TODO 出力順　実装しない-->
 <!--                <if test="!isIsShuturyokuJun">
                    #{shuturyokuJun}
@@ -931,10 +931,10 @@
             WHERE
                 NinteiShinseiJoho.dbt5502_shinseishoKanriNo = dbt5115."shinseishoKanriNo"
             AND NinteiShinseiJoho.dbt5502_shinseishoKanriNo = GaikyoChosa.dbt5202_shinseishoKanriNo
-            ORDER BY
+<!--            ORDER BY
                 <if test="isIsShuturyokuJun">
                    NinteiJoho.dbT5502_shinsakaiOrder
-                </if>
+                </if>-->
                 <!--TODO 出力順　実装しない-->
 <!--                <if test="!isIsShuturyokuJun">
                    #{shuturyokuJun}
@@ -988,10 +988,10 @@
             <if test="isSakuseiJokenTuika">
                 AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
             </if>
-            ORDER BY
+<!--            ORDER BY
                 <if test="isIsShuturyokuJun">
                    NinteiJoho.dbT5502_shinsakaiOrder
-                </if>
+                </if>-->
                 <!--TODO 出力順　実装しない-->
 <!--                <if test="!isIsShuturyokuJun">
                    #{shuturyokuJun}
@@ -1214,10 +1214,10 @@
             WHERE
                 NinteiShinseiJoho.dbt5502_shinseishoKanriNo = IkenshoJoho.dbt5302_shinseishoKanriNo
                 AND NinteiKekkaJoho.dbT5102_shinseishoKanriNo = NinteiShinseiJoho.dbt5502_shinseishoKanriNo
-            ORDER BY
+<!--            ORDER BY
                 <if test="isIsShuturyokuJun">
                    NinteiJoho.dbT5502_shinsakaiOrder
-                </if>
+                </if>-->
                 <!--TODO 出力順　実装しない-->
 <!--                <if test="!isIsShuturyokuJun">
                    #{shuturyokuJun}
