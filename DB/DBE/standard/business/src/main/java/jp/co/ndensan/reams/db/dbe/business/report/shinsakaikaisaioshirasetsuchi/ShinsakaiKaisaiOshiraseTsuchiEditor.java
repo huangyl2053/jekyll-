@@ -87,11 +87,10 @@ class ShinsakaiKaisaiOshiraseTsuchiEditor implements IShinsakaiKaisaiOshiraseTsu
     }
 
     private RString get開催時刻() {
-        List<RString> 予定時刻 = item.get予定時刻().split(":");
         RStringBuilder 開催時刻 = new RStringBuilder();
-        開催時刻.append(予定時刻.get(INT_0).padZeroToLeft(INT_2))
-                .append(new RString(":"))
-                .append(予定時刻.get(INT_1).padZeroToLeft(INT_2));
+        開催時刻.append(item.get開催時刻().padZeroToLeft(INT_4).substring(INT_0, INT_2));
+        開催時刻.append(new RString(":"));
+        開催時刻.append(item.get開催時刻().padZeroToLeft(INT_4).substring(INT_2));
         return 開催時刻.toRString();
     }
 

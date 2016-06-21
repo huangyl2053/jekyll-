@@ -49,11 +49,14 @@ public class PublicationShiryoShinsakaiHandler {
      * 介護認定審査会資料作成の初期化を設定します。
      */
     public void onLoad() {
-        set項目();
         出力条件の設定();
+        委員の審査会資料設定();
         List<RString> 事務 = new ArrayList<>();
         事務.add(事務用出力条件_概況特記);
         div.getChkPrintChoyoJimu().setDisabledItemsByKey(事務);
+        div.getChkPrintChohyoShinsakaiJimu().setDisabled(true);
+        div.getChkPrintChohyoShinsakaiIin().setDisabled(true);
+        事務局用の審査会資料設定();
         div.getTxtShiryoNoStart().setDisabled(true);
         div.getTxtSiryoNoEnd().setDisabled(true);
     }
@@ -107,6 +110,8 @@ public class PublicationShiryoShinsakaiHandler {
             div.getTxtShiryoNoStart().setDisabled(true);
             div.getTxtSiryoNoEnd().setDisabled(true);
         }
+        div.getChkPrintChohyoShinsakaiIin().setDisabled(false);
+        div.getChkPrintChohyoShinsakaiJimu().setDisabled(false);
     }
 
     /**
@@ -131,6 +136,7 @@ public class PublicationShiryoShinsakaiHandler {
             }
             div.getChkPrintChohyoShinsakaiJimu().setDisabledItemsByKey(事務_審査会資料);
         }
+        div.getChkPrintChohyoShinsakaiJimu().setDisabled(false);
     }
 
     /**
@@ -155,6 +161,7 @@ public class PublicationShiryoShinsakaiHandler {
             }
             div.getChkPrintChohyoShinsakaiIin().setDisabledItemsByKey(委員_審査会資料);
         }
+        div.getChkPrintChohyoShinsakaiIin().setDisabled(false);
     }
 
     /**
@@ -329,7 +336,6 @@ public class PublicationShiryoShinsakaiHandler {
             印刷帳票_事務局リスト.add(事務用出力条件_予備判定記入表);
             印刷帳票_事務局リスト.add(事務用出力条件_概況特記一覧);
         }
-        事務局用の審査会資料設定();
         div.getChkPrintChoyoJimu().setSelectedItemsByKey(印刷帳票_事務局リスト);
         if (個別設定.equals(印刷帳票_委員)) {
             RString 審査会開催通知書 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員_開催通知書, 日期, SubGyomuCode.DBE認定支援);
@@ -344,7 +350,6 @@ public class PublicationShiryoShinsakaiHandler {
             印刷帳票_委員リスト.add(作成条件_全件);
             印刷帳票_委員リスト.add(委員用出力条件_予備判定記入表);
         }
-        委員の審査会資料設定();
         div.getChkPrintChohyoIin().setSelectedItemsByKey(印刷帳票_委員リスト);
     }
 
