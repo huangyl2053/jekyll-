@@ -197,9 +197,10 @@
                 <if test="isIsShuturyokuJun">
                    NinteiJoho.dbT5502_shinsakaiOrder
                 </if>
-                <if test="!isIsShuturyokuJun">
+                <!--TODO 出力順　実装しない-->
+<!--                <if test="!isIsShuturyokuJun">
                    #{shuturyokuJun}
-                </if>
+                </if>-->
     </select>
     
     <select id="getNinteiTokkijikoCount" resultType="java.lang.Integer"
@@ -562,9 +563,10 @@
                 <if test="isIsShuturyokuJun">
                    NinteiJoho.dbT5502_shinsakaiOrder
                 </if>
-                <if test="!isIsShuturyokuJun">
+                <!--TODO 出力順　実装しない-->
+<!--                <if test="!isIsShuturyokuJun">
                    #{shuturyokuJun}
-                </if>
+                </if>-->
     </select>
       
     <select id="getZenShinseishoKanriNo" resultType="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" 
@@ -675,9 +677,10 @@
                 <if test="isIsShuturyokuJun">
                    NinteiJoho.dbT5502_shinsakaiOrder
                 </if>
-                <if test="!isIsShuturyokuJun">
+                <!--TODO 出力順　実装しない-->
+<!--                <if test="!isIsShuturyokuJun">
                    #{shuturyokuJun}
-                </if>
+                </if>-->
     </select>
     
     <select id="getHanteiJoho" resultMap="Result_HanteiJoho" 
@@ -742,9 +745,10 @@
                 <if test="isIsShuturyokuJun">
                    NinteiJoho.dbT5502_shinsakaiOrder
                 </if>
-                <if test="!isIsShuturyokuJun">
+                <!--TODO 出力順　実装しない-->
+<!--                <if test="!isIsShuturyokuJun">
                    #{shuturyokuJun}
-                </if>
+                </if>-->
     </select>
     
     <select id="getShinsakaiIinJoho" resultMap="Result_ShinsakaiIinJoho" 
@@ -860,9 +864,10 @@
                 <if test="isIsShuturyokuJun">
                    NinteiJoho.dbT5502_shinsakaiOrder
                 </if>
-                <if test="!isIsShuturyokuJun">
+                <!--TODO 出力順　実装しない-->
+<!--                <if test="!isIsShuturyokuJun">
                    #{shuturyokuJun}
-                </if>
+                </if>-->
     </select>
     
     <select id="getTokkiIranJoho" resultMap="Result_TokkiIranJoho" 
@@ -930,9 +935,10 @@
                 <if test="isIsShuturyokuJun">
                    NinteiJoho.dbT5502_shinsakaiOrder
                 </if>
-                <if test="!isIsShuturyokuJun">
+                <!--TODO 出力順　実装しない-->
+<!--                <if test="!isIsShuturyokuJun">
                    #{shuturyokuJun}
-                </if>
+                </if>-->
     </select>
     
     <select id="getSonotaJoho" resultMap="Result_SonotaJoho" 
@@ -986,9 +992,10 @@
                 <if test="isIsShuturyokuJun">
                    NinteiJoho.dbT5502_shinsakaiOrder
                 </if>
-                <if test="!isIsShuturyokuJun">
+                <!--TODO 出力順　実装しない-->
+<!--                <if test="!isIsShuturyokuJun">
                    #{shuturyokuJun}
-                </if>
+                </if>-->
     </select>  
     
     <select id="getIinShimei" resultMap="Result_ShinsakaiIinJoho" 
@@ -1211,9 +1218,10 @@
                 <if test="isIsShuturyokuJun">
                    NinteiJoho.dbT5502_shinsakaiOrder
                 </if>
-                <if test="!isIsShuturyokuJun">
+                <!--TODO 出力順　実装しない-->
+<!--                <if test="!isIsShuturyokuJun">
                    #{shuturyokuJun}
-                </if>
+                </if>-->
     </select>
     <select id="getSelectByKey" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.ResultMap_DbT5501ShinsakaiKaisaiYoteiJohoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinItiziHanteiMyBatisParameter" fetchSize="500" >
