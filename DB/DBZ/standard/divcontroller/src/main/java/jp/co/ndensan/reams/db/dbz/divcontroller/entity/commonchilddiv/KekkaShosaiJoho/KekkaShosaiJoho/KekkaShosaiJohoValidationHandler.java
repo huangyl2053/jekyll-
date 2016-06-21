@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KekkaShosaiJoho.KekkaShosaiJoho;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -76,7 +75,7 @@ public class KekkaShosaiJohoValidationHandler {
     private static enum KekkaShosaiJohoCheckMessages implements IValidationMessage {
 
         validation有効開始日(UrErrorMessages.必須項目_追加メッセージあり, "開始日"),
-        validation有効終了日(UrWarningMessages.未入力, "終了日"),
+        validation有効終了日(UrErrorMessages.必須項目_追加メッセージあり, "終了日"),
         validationサービス区分(UrErrorMessages.入力値が不正_追加メッセージあり, "サービス区分が31項目以上選択されています。");
         private final Message message;
 
