@@ -1,0 +1,69 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuShinseiList;
+
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+
+/**
+ * 画面設計_DBCKD00005_高額申請一覧共有子Div
+ *
+ * @reamsid_L DBC-2020-010 quxiaodong
+ */
+public class KogakuShinseiListDivValidationHandler {
+
+    private final KogakuShinseiListDiv div;
+    private static final RString サービス年月From = new RString("サービス年月From");
+    private static final RString サービス年月To = new RString("サービス年月To");
+
+    /**
+     * コンストラクタです。
+     *
+     * @param div KogakuKyufuTaishoListDiv
+     */
+    public KogakuShinseiListDivValidationHandler(KogakuShinseiListDiv div) {
+        this.div = div;
+    }
+
+    public ValidationMessageControlPairs 入力チェック() {
+        boolean flag1 = false;
+        boolean flag2 = false;
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (div.getTxtServiceYMFrom().getDomain() == null && div.getTxtServiceYMTo().getDomain() == null) {
+            flag1 = true;
+        }
+        if (div.getTxtServiceYMFrom().getDomain() != null && div.getTxtServiceYMTo().getDomain() != null
+                && div.getTxtServiceYMTo().getDomain().compareTo(div.getTxtServiceYMFrom().getDomain()) < 0) {
+            flag2 = true;
+        }
+        if (flag1 || flag2) {
+            validPairs.add(new ValidationMessageControlPair(
+                    new KogakuShinseiListDivValidationHandler.IdocheckMessages(
+                            UrErrorMessages.期間が不正, サービス年月From.toString(), サービス年月To.toString())));
+        }
+        return validPairs;
+    }
+
+    private static class IdocheckMessages implements IValidationMessage {
+
+        private final Message message;
+
+        public IdocheckMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+    }
+
+}
