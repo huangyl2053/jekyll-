@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -48,6 +49,8 @@ public class ShokanbarayiKeteiInfoPanel {
     private static final RString 申請を保存する = new RString("Element3");
     private static final RString 申請を削除する = new RString("btnDelete");
     private static final RString 証明書 = new RString("証明書");
+    private static final int 定数_0 = 0;
+    private static final int 定数_6 = 6;
 
     /**
      * onLoad
@@ -75,7 +78,8 @@ public class ShokanbarayiKeteiInfoPanel {
         }
         div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki().toDateString().toString()));
         div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
-        getHandler(div).initialize(被保険者番号, サービス年月, 整理番号);
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+        getHandler(div).initialize(被保険者番号, サービス年月, 整理番号, 画面モード);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class))) {
             return ResponseData.of(div).setState(DBC0820015StateName.削除モード);
         }
@@ -88,6 +92,8 @@ public class ShokanbarayiKeteiInfoPanel {
         }
         ViewStateHolder.put(ViewStateKeys.決定情報登録_償還払決定一覧, (Serializable) map_Row);
         ViewStateHolder.put(ViewStateKeys.決定情報登録_決定情報, 決定情報);
+        ViewStateHolder.put(ViewStateKeys.前回支払金額, div.getCcdShokanbaraiketteiJoho()
+                .getShokanbaraiketteiJohoDiv().getTxtShiharaikingakugoke().getValue());
         return ResponseData.of(div).respond();
     }
 
@@ -98,7 +104,7 @@ public class ShokanbarayiKeteiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<ShokanbarayiKeteiInfoPanelDiv> onClick_btnShinsei(ShokanbarayiKeteiInfoPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         if (登録.equals(画面モード)) {
             ViewStateHolder.put(ViewStateKeys.画面モード, 修正);
@@ -127,8 +133,10 @@ public class ShokanbarayiKeteiInfoPanel {
      */
     public ResponseData<ShokanbarayiKeteiInfoPanelDiv> onClick_btnServiceTeikyoShomeisyo(
             ShokanbarayiKeteiInfoPanelDiv div) {
-        if (getHandler(div).isチェック処理()) {
-            getHandler(div).putViewState();
+        ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+                ShoukanharaihishinseikensakuParameter.class);
+        if (getHandler(div).isチェック処理(paramter)) {
+            putViewState(div);
             return ResponseData.of(div).forwardWithEventName(DBC0820015TransitionEventName.サービス提供証明書).respond();
         } else {
             throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(証明書.toString()));
@@ -160,7 +168,8 @@ public class ShokanbarayiKeteiInfoPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).initialize(被保険者番号, サービス年月, 整理番号);
+                RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+                getHandler(div).initialize(被保険者番号, サービス年月, 整理番号, 画面モード);
                 return ResponseData.of(div).forwardWithEventName(DBC0820015TransitionEventName.一覧に戻る).respond();
             } else {
                 return ResponseData.of(div).respond();
@@ -181,7 +190,8 @@ public class ShokanbarayiKeteiInfoPanel {
         try {
             if (flag) {
                 if (!ResponseHolder.isReRequest()) {
-                    getHandler(div).登録Save();
+                    Decimal 支払金額合計初期 = ViewStateHolder.get(ViewStateKeys.前回支払金額, Decimal.class);
+                    getHandler(div).登録Save(支払金額合計初期);
                     return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
                             .replace(登録.toString())).respond();
                 }
@@ -232,5 +242,23 @@ public class ShokanbarayiKeteiInfoPanel {
 
     private ShokanbarayiKeteiInfoPanelHandler getHandler(ShokanbarayiKeteiInfoPanelDiv div) {
         return ShokanbarayiKeteiInfoPanelHandler.of(div);
+    }
+
+    private void putViewState(ShokanbarayiKeteiInfoPanelDiv div) {
+        FlexibleYearMonth サービス提供年月 = null;
+        RString 整理番号 = null;
+        if (div.getPanelTwo().getTxtServiceTeikyoYM().getValue() != null) {
+            サービス提供年月 = new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().toDateString()
+                    .substring(定数_0, 定数_6));
+        }
+        if (div.getPanelTwo().getTxtSeiriBango().getValue() != null) {
+            整理番号 = div.getPanelTwo().getTxtSeiriBango().getValue();
+        }
+
+        ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
+                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
+                サービス提供年月,
+                整理番号, null, null, null, null);
+        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
     }
 }

@@ -73,7 +73,7 @@ public class FutanGendogakuNinteiHandler {
 
             TextBoxFlexibleDate 決定日 = new TextBoxFlexibleDate();
             決定日.setValue(futanGendogakuNintei.get決定年月日());
-            row.setShinseiDate(決定日);
+            row.setKetteiDate(決定日);
 
             try {
                 row.setKetteiKubun(KetteiKubun.toValue(futanGendogakuNintei.get決定区分()).get名称());
@@ -82,11 +82,11 @@ public class FutanGendogakuNinteiHandler {
             }
             TextBoxFlexibleDate 適用日 = new TextBoxFlexibleDate();
             適用日.setValue(futanGendogakuNintei.get適用開始年月日());
-            row.setShinseiDate(適用日);
+            row.setTekiyoDate(適用日);
 
             TextBoxFlexibleDate 有効期限 = new TextBoxFlexibleDate();
             有効期限.setValue(futanGendogakuNintei.get適用終了年月日());
-            row.setShinseiDate(有効期限);
+            row.setYukoKigen(有効期限);
 
             try {
                 row.setShinseiRiyu(ShinseiRiyuKubun.toValue(futanGendogakuNintei.get申請理由区分()).get名称());
@@ -134,6 +134,8 @@ public class FutanGendogakuNinteiHandler {
 
         div.getDgFutanGendogakuNinteiList()
                 .setDataSource(dgList);
+
+        div.getFutanGendogakuNinteiDetail().setDisplayNone(true);
     }
 
     /**
@@ -143,6 +145,7 @@ public class FutanGendogakuNinteiHandler {
      */
     public void 詳細表示(ArrayList<FutanGendogakuNintei> list) {
 
+        div.getFutanGendogakuNinteiDetail().setDisplayNone(false);
         FutanGendogakuNintei futanGendogakuNintei = list.get(div.getDgFutanGendogakuNinteiList().getClickedRowId());
         if (futanGendogakuNintei != null) {
             div.getFutanGendogakuNinteiDetail().getTxtShinseiDate().setValue(futanGendogakuNintei.get申請年月日());
@@ -217,6 +220,8 @@ public class FutanGendogakuNinteiHandler {
             }
             div.getFutanGendogakuNinteiDetail().getYochokinjoho().getChkYochokin().
                     setSelectedItemsByKey(keys);
+            div.getFutanGendogakuNinteiDetail().getYochokinjoho().getTxtYochokin().
+                    setValue(futanGendogakuNintei.get預貯金額());
             div.getFutanGendogakuNinteiDetail().getYochokinjoho().getTxtYukaShoken().
                     setValue(futanGendogakuNintei.get有価証券評価概算額());
             div.getFutanGendogakuNinteiDetail().getYochokinjoho().getTxtSonota().

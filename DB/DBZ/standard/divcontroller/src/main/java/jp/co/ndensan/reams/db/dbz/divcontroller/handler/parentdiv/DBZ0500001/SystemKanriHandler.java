@@ -13,8 +13,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.configmaintenance.ConfigMaintenance;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0500001.SystemKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0500001.SystemKanriHoyouDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0500001.dgSystemKanri_Row;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
@@ -33,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigInfo;
  */
 public class SystemKanriHandler {
 
-    private final SystemKanriDiv div;
+    private final SystemKanriHoyouDiv div;
     private final RString dbu = new RString("DBU");
     private final RString dba = new RString("DBA");
     private final RString dbb = new RString("DBB");
@@ -46,7 +47,7 @@ public class SystemKanriHandler {
      *
      * @param div 資格不整合修正Div
      */
-    public SystemKanriHandler(SystemKanriDiv div) {
+    public SystemKanriHandler(SystemKanriHoyouDiv div) {
         this.div = div;
     }
 
@@ -56,13 +57,13 @@ public class SystemKanriHandler {
      * @param コンフィグリスト List<ConfigMaintenance>
      */
     public void initialize(List<ConfigMaintenance> コンフィグリスト) {
-        RString サブ業務名 = ControlDataHolder.getSubGyomuCD().getGyomuName();
+        RString サブ業務名 = ControlDataHolder.getExecutionSubGyomuCode().getGyomuName();
         SubGyomuCode サブ業務 = ControlDataHolder.getExecutionSubGyomuCode();
         List<dgSystemKanri_Row> rowList = new ArrayList<>();
         for (ConfigMaintenance configName : コンフィグリスト) {
             if (dbu.equals(new RString(サブ業務.toString()))) {
                 dgSystemKanri_Row row = new dgSystemKanri_Row();
-                BusinessConfigInfo コンフィグ = BusinessConfig.getConfigInfo(ConfigNameDBU.valueOf(configName.getConfigName().toString()),
+                BusinessConfigInfo コンフィグ = DbBusinessConfig.getConfigInfo(ConfigNameDBU.valueOf(configName.getConfigName().toString()),
                         RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
                 row.getConfigValue().setValue(コンフィグ.getConfigValue());
                 row.setConfigDescription(コンフィグ.getConfigDesc());
@@ -71,7 +72,7 @@ public class SystemKanriHandler {
                 row.setBeforeChangeConfigValue(コンフィグ.getConfigValue());
                 rowList.add(row);
             } else if (dba.equals(new RString(サブ業務.toString()))) {
-                BusinessConfigInfo コンフィグ = BusinessConfig.getConfigInfo(ConfigNameDBA.valueOf(configName.getConfigName().toString()),
+                BusinessConfigInfo コンフィグ = DbBusinessConfig.getConfigInfo(ConfigNameDBA.valueOf(configName.getConfigName().toString()),
                         RDate.getNowDate(), SubGyomuCode.DBA介護資格);
                 dgSystemKanri_Row row = new dgSystemKanri_Row();
                 row.getConfigValue().setValue(コンフィグ.getConfigValue());
@@ -81,7 +82,7 @@ public class SystemKanriHandler {
                 row.setBeforeChangeConfigValue(コンフィグ.getConfigValue());
                 rowList.add(row);
             } else if (dbc.equals(new RString(サブ業務.toString()))) {
-                BusinessConfigInfo コンフィグ = BusinessConfig.getConfigInfo(ConfigNameDBC.valueOf(configName.getConfigName().toString()),
+                BusinessConfigInfo コンフィグ = DbBusinessConfig.getConfigInfo(ConfigNameDBC.valueOf(configName.getConfigName().toString()),
                         RDate.getNowDate(), SubGyomuCode.DBC介護給付);
                 dgSystemKanri_Row row = new dgSystemKanri_Row();
                 row.getConfigValue().setValue(コンフィグ.getConfigValue());
@@ -91,7 +92,7 @@ public class SystemKanriHandler {
                 row.setBeforeChangeConfigValue(コンフィグ.getConfigValue());
                 rowList.add(row);
             } else if (dbb.equals(new RString(サブ業務.toString()))) {
-                BusinessConfigInfo コンフィグ = BusinessConfig.getConfigInfo(ConfigNameDBB.valueOf(configName.getConfigName().toString()),
+                BusinessConfigInfo コンフィグ = DbBusinessConfig.getConfigInfo(ConfigNameDBB.valueOf(configName.getConfigName().toString()),
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 dgSystemKanri_Row row = new dgSystemKanri_Row();
                 row.getConfigValue().setValue(コンフィグ.getConfigValue());
@@ -101,7 +102,7 @@ public class SystemKanriHandler {
                 row.setBeforeChangeConfigValue(コンフィグ.getConfigValue());
                 rowList.add(row);
             } else if (dbd.equals(new RString(サブ業務.toString()))) {
-                BusinessConfigInfo コンフィグ = BusinessConfig.getConfigInfo(ConfigNameDBD.valueOf(configName.getConfigName().toString()),
+                BusinessConfigInfo コンフィグ = DbBusinessConfig.getConfigInfo(ConfigNameDBD.valueOf(configName.getConfigName().toString()),
                         RDate.getNowDate(), SubGyomuCode.DBD介護受給);
                 dgSystemKanri_Row row = new dgSystemKanri_Row();
                 row.getConfigValue().setValue(コンフィグ.getConfigValue());
@@ -111,7 +112,7 @@ public class SystemKanriHandler {
                 row.setBeforeChangeConfigValue(コンフィグ.getConfigValue());
                 rowList.add(row);
             } else if (dbe.equals(new RString(サブ業務.toString()))) {
-                BusinessConfigInfo コンフィグ = BusinessConfig.getConfigInfo(ConfigNameDBE.valueOf(configName.getConfigName().toString()),
+                BusinessConfigInfo コンフィグ = DbBusinessConfig.getConfigInfo(ConfigNameDBE.valueOf(configName.getConfigName().toString()),
                         RDate.getNowDate(), SubGyomuCode.DBE認定支援);
                 dgSystemKanri_Row row = new dgSystemKanri_Row();
                 row.getConfigValue().setValue(コンフィグ.getConfigValue());
@@ -121,8 +122,8 @@ public class SystemKanriHandler {
                 row.setBeforeChangeConfigValue(コンフィグ.getConfigValue());
                 rowList.add(row);
             }
-            div.getLblSubGyomu().setText(サブ業務名);
-            div.getDgSystemKanri().setDataSource(rowList);
+            div.getSystemKanri().getLblSubGyomu().setText(サブ業務名);
+            div.getSystemKanri().getDgSystemKanri().setDataSource(rowList);
         }
     }
 
@@ -130,11 +131,11 @@ public class SystemKanriHandler {
      * 画面初期化処理。
      *
      */
-    public void 画面D処理() {
-        for (int i = 0; i < div.getDgSystemKanri().getDataSource().size(); i++) {
-            if (div.getDgSystemKanri().getDataSource().get(i).getConfigValue().getValue().
-                    equals(div.getDgSystemKanri().getDataSource().get(i).getBeforeChangeConfigValue())) {
-                div.getDgSystemKanri().getDataSource().get(i).setConfigValueChangeFlag(new RString("1"));
+    public void 画面処理() {
+        for (int i = 0; i < div.getSystemKanri().getDgSystemKanri().getDataSource().size(); i++) {
+            if (div.getSystemKanri().getDgSystemKanri().getDataSource().get(i).getConfigValue().getValue().
+                    equals(div.getSystemKanri().getDgSystemKanri().getDataSource().get(i).getBeforeChangeConfigValue())) {
+                div.getSystemKanri().getDgSystemKanri().getDataSource().get(i).setConfigValueChangeFlag(new RString("1"));
             }
         }
     }
@@ -151,39 +152,39 @@ public class SystemKanriHandler {
         変更理由.append(menuID);
         変更理由.append(new RString("を使用して更新"));
         if (dbu.equals(new RString(サブ業務.toString()))) {
-            for (int i = 0; i < div.getDgSystemKanri().getDataSource().size(); i++) {
-                BusinessConfig.update(SubGyomuCode.DBU介護統計報告, ConfigNameDBU.valueOf(div.getDgSystemKanri().getDataSource().get(i).getConfigName().toString()),
-                        div.getDgSystemKanri().getDataSource().get(i).getConfigValue().getValue(), 変更理由.toRString(),
+            for (int i = 0; i < div.getSystemKanri().getDgSystemKanri().getDataSource().size(); i++) {
+                BusinessConfig.update(SubGyomuCode.DBU介護統計報告, ConfigNameDBU.valueOf(div.getSystemKanri().getDgSystemKanri().getDataSource().get(i).getConfigName().toString()),
+                        div.getSystemKanri().getDgSystemKanri().getDataSource().get(i).getConfigValue().getValue(), 変更理由.toRString(),
                         RString.EMPTY, RDate.getNowDate());
             }
         } else if (dba.equals(new RString(サブ業務.toString()))) {
-            for (int i = 0; i < div.getDgSystemKanri().getDataSource().size(); i++) {
-                BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.valueOf(div.getDgSystemKanri().getDataSource().get(i).getConfigName().toString()),
-                        div.getDgSystemKanri().getDataSource().get(i).getConfigValue().getValue(), 変更理由.toRString(),
+            for (int i = 0; i < div.getSystemKanri().getDgSystemKanri().getDataSource().size(); i++) {
+                BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.valueOf(div.getSystemKanri().getDgSystemKanri().getDataSource().get(i).getConfigName().toString()),
+                        div.getSystemKanri().getDgSystemKanri().getDataSource().get(i).getConfigValue().getValue(), 変更理由.toRString(),
                         RString.EMPTY, RDate.getNowDate());
             }
         } else if (dbb.equals(new RString(サブ業務.toString()))) {
-            for (int i = 0; i < div.getDgSystemKanri().getDataSource().size(); i++) {
-                BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.valueOf(div.getDgSystemKanri().getDataSource().get(i).getConfigName().toString()),
-                        div.getDgSystemKanri().getDataSource().get(i).getConfigValue().getValue(), 変更理由.toRString(),
+            for (int i = 0; i < div.getSystemKanri().getDgSystemKanri().getDataSource().size(); i++) {
+                BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.valueOf(div.getSystemKanri().getDgSystemKanri().getDataSource().get(i).getConfigName().toString()),
+                        div.getSystemKanri().getDgSystemKanri().getDataSource().get(i).getConfigValue().getValue(), 変更理由.toRString(),
                         RString.EMPTY, RDate.getNowDate());
             }
         } else if (dbc.equals(new RString(サブ業務.toString()))) {
-            for (int i = 0; i < div.getDgSystemKanri().getDataSource().size(); i++) {
-                BusinessConfig.update(SubGyomuCode.DBC介護給付, ConfigNameDBC.valueOf(div.getDgSystemKanri().getDataSource().get(i).getConfigName().toString()),
-                        div.getDgSystemKanri().getDataSource().get(i).getConfigValue().getValue(), 変更理由.toRString(),
+            for (int i = 0; i < div.getSystemKanri().getDgSystemKanri().getDataSource().size(); i++) {
+                BusinessConfig.update(SubGyomuCode.DBC介護給付, ConfigNameDBC.valueOf(div.getSystemKanri().getDgSystemKanri().getDataSource().get(i).getConfigName().toString()),
+                        div.getSystemKanri().getDgSystemKanri().getDataSource().get(i).getConfigValue().getValue(), 変更理由.toRString(),
                         RString.EMPTY, RDate.getNowDate());
             }
         } else if (dbd.equals(new RString(サブ業務.toString()))) {
-            for (int i = 0; i < div.getDgSystemKanri().getDataSource().size(); i++) {
-                BusinessConfig.update(SubGyomuCode.DBD介護受給, ConfigNameDBD.valueOf(div.getDgSystemKanri().getDataSource().get(i).getConfigName().toString()),
-                        div.getDgSystemKanri().getDataSource().get(i).getConfigValue().getValue(), 変更理由.toRString(),
+            for (int i = 0; i < div.getSystemKanri().getDgSystemKanri().getDataSource().size(); i++) {
+                BusinessConfig.update(SubGyomuCode.DBD介護受給, ConfigNameDBD.valueOf(div.getSystemKanri().getDgSystemKanri().getDataSource().get(i).getConfigName().toString()),
+                        div.getSystemKanri().getDgSystemKanri().getDataSource().get(i).getConfigValue().getValue(), 変更理由.toRString(),
                         RString.EMPTY, RDate.getNowDate());
             }
         } else if (dbe.equals(new RString(サブ業務.toString()))) {
-            for (int i = 0; i < div.getDgSystemKanri().getDataSource().size(); i++) {
-                BusinessConfig.update(SubGyomuCode.DBE認定支援, ConfigNameDBE.valueOf(div.getDgSystemKanri().getDataSource().get(i).getConfigName().toString()),
-                        div.getDgSystemKanri().getDataSource().get(i).getConfigValue().getValue(), 変更理由.toRString(),
+            for (int i = 0; i < div.getSystemKanri().getDgSystemKanri().getDataSource().size(); i++) {
+                BusinessConfig.update(SubGyomuCode.DBE認定支援, ConfigNameDBE.valueOf(div.getSystemKanri().getDgSystemKanri().getDataSource().get(i).getConfigName().toString()),
+                        div.getSystemKanri().getDgSystemKanri().getDataSource().get(i).getConfigValue().getValue(), 変更理由.toRString(),
                         RString.EMPTY, RDate.getNowDate());
             }
         }

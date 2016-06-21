@@ -224,6 +224,8 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
                                 processPrm.getPsmShikibetsuTaisho(),
                                 orderBy);
             }
+        } else {
+            mybatisPrm = processPrm.toIkkatsuHakkoMybatisParameter();
         }
     }
 

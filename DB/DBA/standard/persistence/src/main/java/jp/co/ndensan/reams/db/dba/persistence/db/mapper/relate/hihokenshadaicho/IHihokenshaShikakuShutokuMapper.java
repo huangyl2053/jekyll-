@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshadaicho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 
 /**

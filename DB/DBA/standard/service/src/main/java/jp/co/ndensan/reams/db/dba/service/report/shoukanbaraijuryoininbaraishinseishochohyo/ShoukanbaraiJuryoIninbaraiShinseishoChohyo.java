@@ -116,14 +116,13 @@ public class ShoukanbaraiJuryoIninbaraiShinseishoChohyo {
         ShokanharaiJuryoIninShinseishoItem item = new ShokanharaiJuryoIninShinseishoItem(
                 ninshoshaSource.ninshoshaYakushokuMei,
                 birthYMD,
-                // TODO 内部QA：689 (介護保険保険者名称を設定する必要がありません。)
                 get帳票文言(2),
                 business.get住所(),
                 business.get被保険者氏名(),
                 business.getフリガナ(),
                 business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
                 business.get保険者番号().value(),
-                null,
+                new RString("1"),
                 Gender.toValue(business.get性別()).getCommonName(),
                 get帳票文言(1),
                 business.get電話番号(),

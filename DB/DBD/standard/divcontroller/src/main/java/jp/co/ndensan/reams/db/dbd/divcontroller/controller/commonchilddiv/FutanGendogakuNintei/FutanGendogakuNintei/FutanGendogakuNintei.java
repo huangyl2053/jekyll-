@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -31,18 +32,20 @@ public class FutanGendogakuNintei {
      */
     public ResponseData<FutanGendogakuNinteiDiv> onLoad(FutanGendogakuNinteiDiv div) {
 
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHiddenHihokenshaNo());
-        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
-            throw new SystemException("被保険者番号が設定されていません。");
-        }
+        if (!ResponseHolder.isReRequest()) {
+            HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHiddenHihokenshaNo());
+            if (被保険者番号 == null || 被保険者番号.isEmpty()) {
+                throw new SystemException("被保険者番号が設定されていません。");
+            }
 
-        List<jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei> 表示リスト
-                = getHandler(div).表示リスト取得(被保険者番号);
-        if (表示リスト == null || 表示リスト.isEmpty()) {
-            return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_申請情報なし.getMessage()).respond();
-        } else {
-            ViewStateHolder.put(ViewStateKeys.負担限度額認定申請の情報, new ArrayList<>(表示リスト));
-            getHandler(div).initialize(表示リスト);
+            List<jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei> 表示リスト
+                    = getHandler(div).表示リスト取得(被保険者番号);
+            if (表示リスト == null || 表示リスト.isEmpty()) {
+                return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_申請情報なし.getMessage()).respond();
+            } else {
+                ViewStateHolder.put(ViewStateKeys.負担限度額認定申請の情報, new ArrayList<>(表示リスト));
+                getHandler(div).initialize(表示リスト);
+            }
         }
 
         return ResponseData.of(div).respond();

@@ -1,10 +1,14 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dbe.entity.report.source.tokkitext2a4;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 特記事項Sourceクラスです。
+ *
+ * @reamsid_L DBE-0230-080 lizhuoxuan
+ */
 public class TokkiText2ReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

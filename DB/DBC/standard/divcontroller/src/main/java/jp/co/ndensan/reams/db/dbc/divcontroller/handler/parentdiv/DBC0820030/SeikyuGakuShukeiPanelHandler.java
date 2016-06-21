@@ -208,7 +208,7 @@ public class SeikyuGakuShukeiPanelHandler {
         } else if (削除.equals(state)) {
             if (RowState.Added.equals(row.getRowState())) {
                 div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getDataSource().remove(
-                        Integer.parseInt(div.getPanelSeikyugakuShukei().getRowId().toString()));
+                        div.getPanelSeikyugakuShukei().getRowId().getValue().intValue());
                 clear請求額集計登録();
                 div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setDisabled(true);
             } else {

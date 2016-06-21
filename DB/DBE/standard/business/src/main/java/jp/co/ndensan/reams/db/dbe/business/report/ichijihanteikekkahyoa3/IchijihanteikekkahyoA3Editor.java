@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.ichijihanteikekkahyoa3;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoA3ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -85,6 +86,7 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
         source.manzensei = item.get認知症自立度Ⅱ以上の蓋然性();
         source.jotainoanteisei = item.get状態の安定性();
         source.kyufukubun = item.get給付区分();
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
         if (item.get申請書管理番号() == null) {
             source.shinseishoKanriNo = null;
         } else {

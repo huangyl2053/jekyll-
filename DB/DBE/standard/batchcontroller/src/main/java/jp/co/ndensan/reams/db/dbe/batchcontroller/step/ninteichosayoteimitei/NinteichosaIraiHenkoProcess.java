@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaihenko.NinteichosaIraiHenkoData;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaihenko.NinteichosaIraiHenkoDataChange;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosairaihenko.NinteichosaIraiHenkoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosayoteimitei.NinteichosaIraiHenkoProcessParamter;
@@ -118,7 +119,7 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
     protected void keyBreakProcess(NinteichosaIraiHenkoRelateEntity current) {
         if (hasBrek(getBefore(), current)) {
             AccessLogger.log(AccessLogType.照会, toPersonalData(current));
-            NinteichosaIraiHenkoData data = NinteichosaIraiHenkoData.createEdit(getBefore(), current, countData);
+            NinteichosaIraiHenkoData data = NinteichosaIraiHenkoDataChange.createEdit(getBefore(), current, countData);
             if (data != null) {
                 NinteichosaIraiHenkoReport report = new NinteichosaIraiHenkoReport(data, index_tmp);
                 report.writeBy(reportSourceWriter);
@@ -134,7 +135,7 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
     @Override
     protected void usualProcess(NinteichosaIraiHenkoRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
-        NinteichosaIraiHenkoData data = NinteichosaIraiHenkoData.createEdit(getBefore(), entity, countData);
+        NinteichosaIraiHenkoData data = NinteichosaIraiHenkoDataChange.createEdit(getBefore(), entity, countData);
         if (data != null) {
             NinteichosaIraiHenkoReport report = new NinteichosaIraiHenkoReport(data, index_tmp);
             report.writeBy(reportSourceWriter);

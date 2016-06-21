@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- * クラスでのバリデーションを管理するハンドラークラスです。
+ * 審査会個人別状況照会のハンドラークラスです。
  *
  * @reamsid_L DBE-1380-010 jinjue
  */
@@ -55,43 +55,48 @@ public class ShinsakaiTaishoshaHandler {
     }
 
     /**
-     * 画面初期化表示、画面項目に設定されている値をクリアします。
+     * 画面初期化に画面項目の値を表示します。
      *
      * @param 予定情報 予定情報と結果情報
      * @param 一覧情報 List<ShinsakaiTaishoshaBusiness>
      */
     public void onLoad(ShinsakaiTaishoshaBusiness 予定情報, List<ShinsakaiTaishoshaBusiness> 一覧情報) {
         RStringBuilder 開催番号 = new RStringBuilder("第");
-        開催番号 = 開催番号.append(予定情報.getShinsakaiKaisaiNo()).append("回審査会");
-        div.getTxtShinsakaiName().setValue(開催番号.toRString());
-        div.getTxtGogitaiNumber().setValue(予定情報.getGogitaiMei());
-        div.getTxtYoteiTeiin().setValue(new Decimal(予定情報.getShinsakaiYoteiTeiin()));
-        div.getTxtWaritsukeNinzu().setValue(new Decimal(予定情報.getShinsakaiWariateZumiNinzu()));
-
-        div.getTxtStatus().setValue(ShinsakaiShinchokuJokyo.toValue(予定情報.getShinsakaiShinchokuJokyo().getColumnValue()).get名称());
-        div.getTxtShinsakaiKaijo().setValue(予定情報.getShinsakaiKaisaiBashoName());
-        div.getTxtShinsakaiChiku().setValue(予定情報.getShinsakaiKaisaiBashoCode());
-        div.getTxtShinsakauChikuName().setValue(CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援,
-                new CodeShubetsu(CODESHUBETSU_5001), 予定情報.getShinsakaiKaisaiChikuCode(),
-                FlexibleDate.getNowDate()));
-        div.getTxtKaisaiDate().setValue(予定情報.getShinsakaiKaisaiYoteiYMD());
-        div.getTxtYoteiKaishiTime().setValue(RTime.parse(予定情報.getShinsakaiKaishiTime().insert(2, ":")));
-        div.getTxtYoteiShuryoTime().setValue(RTime.parse(予定情報.getShinsakaiKaishiYoteiTime().insert(2, ":")));
-        if (予定情報.isGogitaiSeishinkaSonzaiFlag()) {
-            List<RString> key = new ArrayList<>();
-            key.add(new RString("key0"));
-            div.getChkNinchishoOnly().setSelectedItemsByKey(key);
+        if (予定情報 != null) {
+            開催番号 = 開催番号.append(予定情報.getShinsakaiKaisaiNo()).append("回審査会");
+            div.getTxtShinsakaiName().setValue(開催番号.toRString());
+            div.getTxtGogitaiNumber().setValue(予定情報.getGogitaiMei());
+            div.getTxtYoteiTeiin().setValue(new Decimal(予定情報.getShinsakaiYoteiTeiin()));
+            div.getTxtWaritsukeNinzu().setValue(new Decimal(予定情報.getShinsakaiWariateZumiNinzu()));
+            div.getTxtStatus().setValue(ShinsakaiShinchokuJokyo.toValue(予定情報.getShinsakaiShinchokuJokyo().getColumnValue()).get名称());
+            div.getTxtShinsakaiKaijo().setValue(予定情報.getShinsakaiKaisaiBashoName());
+            div.getTxtShinsakaiChiku().setValue(予定情報.getShinsakaiKaisaiBashoCode());
+            if (予定情報.getShinsakaiKaisaiChikuCode() != null) {
+                div.getTxtShinsakauChikuName().setValue(CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援,
+                        new CodeShubetsu(CODESHUBETSU_5001), 予定情報.getShinsakaiKaisaiChikuCode(),
+                        FlexibleDate.getNowDate()));
+            }
+            div.getTxtKaisaiDate().setValue(予定情報.getShinsakaiKaisaiYoteiYMD());
+            div.getTxtYoteiKaishiTime().setValue(RTime.parse(予定情報.getShinsakaiKaishiTime().insert(2, ":")));
+            div.getTxtYoteiShuryoTime().setValue(RTime.parse(予定情報.getShinsakaiKaishiYoteiTime().insert(2, ":")));
+            if (予定情報.isGogitaiSeishinkaSonzaiFlag()) {
+                List<RString> key = new ArrayList<>();
+                key.add(new RString("key0"));
+                div.getChkNinchishoOnly().setSelectedItemsByKey(key);
+            }
+            div.getTxtShinsakaiKaijoKekka().setValue(予定情報.getShinsakaiKaisaiBashoName());
+            div.getTxtShinsakaiChikuKekka().setValue(予定情報.getShinsakaiKaisaiBashoCode());
+            if (予定情報.getShinsakaiKaisaiChikuCode() != null) {
+                div.getTxtShinsakauChikuNameKekka().setValue(CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援,
+                        new CodeShubetsu(CODESHUBETSU_5001), 予定情報.getShinsakaiKaisaiChikuCode(),
+                        FlexibleDate.getNowDate()));
+            }
+            div.getTxtKaisaiDateKekka().setValue(予定情報.getShinsakaiKaisaiYMD());
+            div.getTxtKaishiTime().setValue(RTime.parse(予定情報.getShinsakaiKaishiTime().insert(2, ":")));
+            div.getTxtShuryoTime().setValue(RTime.parse(予定情報.getShinsakaiShuryoYoteiTime().insert(2, ":")));
+            div.getTxtShoyoTime().setValue(new Decimal(予定情報.getShoyoJikanGokei()));
+            div.getTxtJissiNinzu().setValue(new Decimal(予定情報.getShinsakaiJisshiNinzu()));
         }
-        div.getTxtShinsakaiKaijoKekka().setValue(予定情報.getShinsakaiKaisaiBashoName());
-        div.getTxtShinsakaiChikuKekka().setValue(予定情報.getShinsakaiKaisaiBashoCode());
-        div.getTxtShinsakauChikuNameKekka().setValue(CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援,
-                new CodeShubetsu(CODESHUBETSU_5001), 予定情報.getShinsakaiKaisaiChikuCode(),
-                FlexibleDate.getNowDate()));
-        div.getTxtKaisaiDateKekka().setValue(予定情報.getShinsakaiKaisaiYMD());
-        div.getTxtKaishiTime().setValue(RTime.parse(予定情報.getShinsakaiKaishiTime().insert(2, ":")));
-        div.getTxtShuryoTime().setValue(RTime.parse(予定情報.getShinsakaiShuryoYoteiTime().insert(2, ":")));
-        div.getTxtShoyoTime().setValue(new Decimal(予定情報.getShoyoJikanGokei()));
-        div.getTxtJissiNinzu().setValue(new Decimal(予定情報.getShinsakaiJisshiNinzu()));
 
         List<dgTaishoshaIchiran_Row> listRow = new ArrayList();
         for (ShinsakaiTaishoshaBusiness shinsakaiTai : 一覧情報) {

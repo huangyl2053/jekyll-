@@ -53,8 +53,8 @@ public class ChohyoSelect {
      * @return ResponseData<ChohyoSelectDiv>
      */
     public ResponseData<ChohyoSelectDiv> onClick_dgChohyoIchiran(ChohyoSelectDiv div) {
-        ViewStateHolder.put(ViewStateKeys.帳票分類ID, div.getDgChohyoIchiran().getDataSource().get(0).getChohyoBunruiId());
-        ViewStateHolder.put(ViewStateKeys.帳票分類名称, div.getDgChohyoIchiran().getDataSource().get(0).getChohyoBunruiName());
+        ViewStateHolder.put(ViewStateKeys.帳票分類ID, div.getDgChohyoIchiran().getClickedItem().getChohyoBunruiId());
+        ViewStateHolder.put(ViewStateKeys.帳票分類名称, div.getDgChohyoIchiran().getClickedItem().getChohyoBunruiName());
         return ResponseData.of(div).respond();
     }
 

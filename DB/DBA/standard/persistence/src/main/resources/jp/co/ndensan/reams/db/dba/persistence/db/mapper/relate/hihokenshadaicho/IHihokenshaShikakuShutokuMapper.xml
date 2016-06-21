@@ -39,7 +39,7 @@
 
     <select resultOrdered="true" id="getHihokenshaShutokuJyoho"
             resultMap="resultMap_getHihokenshaShutokuJyoho"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter" fetchSize="500">
         SELECT
         HihokenshaDaicho."hihokenshaNo" AS "hihokenshaDaicho_hihokenshaNo",
         HihokenshaDaicho."idoYMD" AS "hihokenshaDaicho_idoYMD",
@@ -91,7 +91,7 @@
 
     <select resultOrdered="true" id="getSaishinDeta"
             resultMap="resultMap_getHihokenshaShutokuJyoho"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter" fetchSize="500">
         SELECT
         HihokenshaDaicho."hihokenshaNo" AS "hihokenshaDaicho_hihokenshaNo",
         HihokenshaDaicho."idoYMD" AS "hihokenshaDaicho_idoYMD",
@@ -139,7 +139,7 @@
 
     <select resultOrdered="true" id="getSaidaiEdaban"
             resultMap="resultMap_getHihokenshaShutokuJyoho"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter" fetchSize="500">
         SELECT
         MAX(HihokenshaDaicho."edaNo") AS "hihokenshaDaicho_edaNo"
         FROM

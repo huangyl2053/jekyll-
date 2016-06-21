@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dba.business.core.nenreitoutatsuyoteishacheck.Nenr
 import jp.co.ndensan.reams.db.dba.business.core.nenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListCsv;
 import jp.co.ndensan.reams.db.dba.business.report.nenreitotatsuyoteishaichiranhyo.NenreitotatsuYoteishaIchiranhyoItem;
 import jp.co.ndensan.reams.db.dba.business.report.nenreitotatsuyoteishaichiranhyo.NenreitotatsuYoteishaIchiranhyoReport;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.nenreitoutatsuyoteisha.INenreiToutatsuYoteishaCheckListProcessParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitoutatsuyoteishachecklist.NenreiToutatsuYoteishaCheckListEntity;
@@ -384,9 +384,15 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
                 RString.EMPTY);
         nenreiCheckListEntity2 = nenreiCheckListMapper.
                 getTorokuNenreiToutatsuYoteishaCheckList2(torokuParameter);
+        List<NenreiToutatsuYoteishaCheckListEntity> temp = new ArrayList<>();
         if (!nenreiCheckListEntity2.isEmpty()) {
-            for (NenreiToutatsuYoteishaCheckListEntity entity : nenreiCheckListEntity2) {
-                nenreiCheckListEntity.add(entity);
+            if (!nenreiCheckListEntity.isEmpty()) {
+                for (NenreiToutatsuYoteishaCheckListEntity entity2 : nenreiCheckListEntity2) {
+                    getList2(entity2, temp);
+                }
+                nenreiCheckListEntity.addAll(temp);
+            } else {
+                nenreiCheckListEntity.addAll(nenreiCheckListEntity2);
             }
         }
     }
@@ -444,11 +450,54 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
                 new RString(uaFt200Psm3.getParameterMap().get(PSMYO.toString()).toString()));
         nenreiCheckListEntity2 = nenreiCheckListMapper.
                 getZenbuNenreiToutatsuYoteishaCheckList2(zenbuParameter2);
+        List<NenreiToutatsuYoteishaCheckListEntity> temp = new ArrayList<>();
         if (!nenreiCheckListEntity2.isEmpty()) {
-            for (NenreiToutatsuYoteishaCheckListEntity entity : nenreiCheckListEntity2) {
-                nenreiCheckListEntity.add(entity);
+            if (!nenreiCheckListEntity.isEmpty()) {
+                for (NenreiToutatsuYoteishaCheckListEntity entity2 : nenreiCheckListEntity2) {
+                    getList2(entity2, temp);
+                }
+                nenreiCheckListEntity.addAll(temp);
+            } else {
+                nenreiCheckListEntity.addAll(nenreiCheckListEntity2);
             }
         }
+    }
+
+    private void getList2(NenreiToutatsuYoteishaCheckListEntity entity2, List<NenreiToutatsuYoteishaCheckListEntity> temp) {
+        boolean flg = false;
+        for (NenreiToutatsuYoteishaCheckListEntity entity : nenreiCheckListEntity) {
+            if (entity.getHihokenshaNo().equals(entity2.getHihokenshaNo())
+                    && entity.getShikibetsuCode().equals(entity2.getShikibetsuCode())
+                    && entity.getKanaMeisho().equals(entity2.getKanaMeisho())
+                    && entity.getMeisho().equals(entity2.getMeisho())
+                    && entity.getSeibetsuCode().equals(entity2.getSeibetsuCode())
+                    && entity.getSeinengappiYMD().equals(entity2.getSeinengappiYMD())
+                    && entity.getNenreiyotainichi().equals(entity2.getNenreiyotainichi())
+                    && entity.getShigekubun().equals(entity2.getShigekubun())
+                    && entity.getJutosyakubun().equals(entity2.getJutosyakubun())) {
+                if (handan(entity, entity2)) {
+                    flg = true;
+                    break;
+                }
+            }
+        }
+        if (!flg) {
+            temp.add(entity2);
+        }
+    }
+
+    private boolean handan(NenreiToutatsuYoteishaCheckListEntity entity, NenreiToutatsuYoteishaCheckListEntity entity2) {
+        return entity.getZenkokuJushoCode().equals(entity2.getZenkokuJushoCode())
+                && entity.getJusho().equals(entity2.getJusho())
+                && entity.getGyoseikuCode().equals(entity2.getGyoseikuCode())
+                && entity.getGyoseikuName().equals(entity2.getGyoseikuName())
+                && entity.getJuminShubetsuCode().equals(entity2.getJuminShubetsuCode())
+                && entity.getJushochiTokureiFlag().equals(entity2.getJushochiTokureiFlag())
+                && entity.getShichosonCode().equals(entity2.getShichosonCode())
+                && entity.getSeikatsu().equals(entity2.getSeikatsu())
+                && entity.getJyotei().equals(entity2.getJyotei())
+                && entity.getHihokennshaKubunCode().equals(entity2.getHihokennshaKubunCode());
+
     }
 
     private void getShikakuShutokuJogaiList() {

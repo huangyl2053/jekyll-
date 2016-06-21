@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengaku;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.homonkaigogemmen.HobetsuKubun;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengakuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -64,11 +65,11 @@ public class HomonkaigoRiyoshaFutangakuGengakuHandler {
 
             TextBoxFlexibleDate 適用日 = new TextBoxFlexibleDate();
             適用日.setValue(homonKaigoGengaku.get適用開始年月日());
-            row.setShinseiDate(適用日);
+            row.setTekiyoDate(適用日);
 
             TextBoxFlexibleDate 有効期限 = new TextBoxFlexibleDate();
             有効期限.setValue(homonKaigoGengaku.get適用終了年月日());
-            row.setShinseiDate(有効期限);
+            row.setYukoKigen(有効期限);
 
             try {
                 row.setKetteiKubun(KetteiKubun.toValue(homonKaigoGengaku.get決定区分()).get名称());
@@ -78,11 +79,14 @@ public class HomonkaigoRiyoshaFutangakuGengakuHandler {
 
             TextBoxFlexibleDate 決定日 = new TextBoxFlexibleDate();
             決定日.setValue(homonKaigoGengaku.get決定年月日());
-            row.setShinseiDate(決定日);
+            row.setKetteiDate(決定日);
 
             row.setFushoninRiyu(homonKaigoGengaku.get非承認理由());
-            row.setHobetsuKubun(homonKaigoGengaku.get法別区分());
-
+            try {
+                row.setHobetsuKubun(HobetsuKubun.toValue(homonKaigoGengaku.get法別区分()).get名称());
+            } catch (IllegalArgumentException e) {
+                row.setHobetsuKubun(RString.EMPTY);
+            }
             TextBoxNum 給付率 = new TextBoxNum();
             if (homonKaigoGengaku.get給付率() != null) {
                 給付率.setValue(homonKaigoGengaku.get給付率().value());
@@ -99,6 +103,8 @@ public class HomonkaigoRiyoshaFutangakuGengakuHandler {
         }
 
         div.getDgHomonkaigoRiyoshaFutangakuGengakuList().setDataSource(dgList);
+
+        div.getHomonkaigoRiyoshaFutangakuGengakuDetail().setDisplayNone(true);
     }
 
     /**
@@ -107,6 +113,7 @@ public class HomonkaigoRiyoshaFutangakuGengakuHandler {
      */
     public void 詳細表示() {
 
+        div.getHomonkaigoRiyoshaFutangakuGengakuDetail().setDisplayNone(false);
         div.getHomonkaigoRiyoshaFutangakuGengakuDetail().getHomonkaigoRiyoshaFutangakuGengakuShinsei().getTxtShinseiDate().
                 setValue(div.getDgHomonkaigoRiyoshaFutangakuGengakuList().getClickedItem().getShinseiDate().getValue());
         div.getHomonkaigoRiyoshaFutangakuGengakuDetail().getHomonkaigoRiyoshaFutangakuGengakuShinsei().getTxtHobetsuKubun().

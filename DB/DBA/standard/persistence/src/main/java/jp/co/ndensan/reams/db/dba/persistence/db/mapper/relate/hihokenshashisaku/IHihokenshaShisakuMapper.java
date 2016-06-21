@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshashisaku;
 
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashisaku.HihokenshaShisakuRelateEntity;
 
 /**

@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.KaigoJigyoshaReturnEntity;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810021.KihonInfoDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -39,10 +39,6 @@ public class KihonInfoHandler {
     private static final FlexibleYearMonth 平成２１年４月 = new FlexibleYearMonth("200904");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
     private static final RString KEY = new RString("key0");
-    private static final RString 計画作成区分 = new RString("0001");
-    private static final RString 中止理由 = new RString("0009");
-    private static final RString 入所院前の状況 = new RString("0048");
-    private static final RString 退所院後の状況 = new RString("0010");
     private static final RString STR_2171 = new RString("2171");
     private static final RString STR_2172 = new RString("2172");
     private static final RString STR_2173 = new RString("2173");
@@ -152,7 +148,7 @@ public class KihonInfoHandler {
         FlexibleDate date = new FlexibleDate(RDate.getNowDate().toDateString());
         if (shokanKihon.get居宅サービス計画作成区分コード() != null) {
             UzT0007CodeEntity code = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                    new CodeShubetsu(計画作成区分), new Code(shokanKihon.get居宅サービス計画作成区分コード()), date);
+                    DBCCodeShubetsu.計画作成区分.getコード(), new Code(shokanKihon.get居宅サービス計画作成区分コード()), date);
             if (code != null) {
                 List<KeyValueDataSource> keyValueDataSource1 = new ArrayList<>();
                 keyValueDataSource1.add(new KeyValueDataSource(KEY, code.getコード名称()));
@@ -220,7 +216,7 @@ public class KihonInfoHandler {
             div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setVisible(false);
         } else if (shokanKihon.get中止理由_入所_院前の状況コード() != null) {
             UzT0007CodeEntity code4 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                    new CodeShubetsu(中止理由), new Code(shokanKihon.get中止理由_入所_院前の状況コード()), date);
+                    DBCCodeShubetsu.中止理由コード.getコード(), new Code(shokanKihon.get中止理由_入所_院前の状況コード()), date);
             if (code4 != null) {
                 List<KeyValueDataSource> keyValueDataSource2 = new ArrayList<>();
                 keyValueDataSource2.add(new KeyValueDataSource(KEY, code4.getコード名称()));
@@ -245,7 +241,7 @@ public class KihonInfoHandler {
             div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setVisible(false);
         } else if (shokanKihon.get中止理由_入所_院前の状況コード() != null) {
             UzT0007CodeEntity code3 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                    new CodeShubetsu(入所院前の状況), new Code(shokanKihon.get中止理由_入所_院前の状況コード()), date);
+                    DBCCodeShubetsu.入所_院_前の状況コード.getコード(), new Code(shokanKihon.get中止理由_入所_院前の状況コード()), date);
             if (code3 != null) {
                 List<KeyValueDataSource> keyValueDataSource3 = new ArrayList<>();
                 keyValueDataSource3.add(new KeyValueDataSource(KEY, code3.getコード名称()));
@@ -255,7 +251,7 @@ public class KihonInfoHandler {
         }
         if (shokanKihon.get退所_院後の状態コード() != null) {
             UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                    new CodeShubetsu(退所院後の状況), new Code(shokanKihon.get退所_院後の状態コード()), date);
+                    DBCCodeShubetsu.退所_院_後の状態コード.getコード(), new Code(shokanKihon.get退所_院後の状態コード()), date);
             if (code2 != null) {
                 List<KeyValueDataSource> keyValueDataSource4 = new ArrayList<>();
                 keyValueDataSource4.add(new KeyValueDataSource(KEY, code2.getコード名称()));

@@ -125,7 +125,7 @@ public class ShiharaiHohoHenkoShuryoShinseisho {
     private static RString get帳票文言() {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
-                SubGyomuCode.DBC介護給付,
+                SubGyomuCode.DBD介護受給,
                 new ReportId("DBD800009_ShiharaiHenkoShokanbaraikaShoryoShinseisho"),
                 KamokuCode.EMPTY,
                 1,

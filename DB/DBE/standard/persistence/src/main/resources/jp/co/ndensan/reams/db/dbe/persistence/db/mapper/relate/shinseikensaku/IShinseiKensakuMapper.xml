@@ -51,10 +51,8 @@
            ,DbT5101NinteiShinseiJoho."koroshoIfShikibetsuCode"
            ,DbT5101NinteiShinseiJoho."zenkaiYukoKikanStart"
            ,DbT5101NinteiShinseiJoho."zenkaiYukoKikanEnd"
-            <if test="useZenkaiNinteiShinseiJoho">
-                ,zenkaiNinteiShinseiJoho."nijiHanteiYokaigoJotaiKubunCode"
-                ,zenkaiNinteiShinseiJoho."nijiHanteiNinteiYukoKikan"
-            </if>
+           ,zenkaiNinteiShinseiJoho."nijiHanteiYokaigoJotaiKubunCode"
+           ,zenkaiNinteiShinseiJoho."nijiHanteiNinteiYukoKikan"
            ,DbT7051KoseiShichosonMaster."shichosonMeisho"
            ,DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho"
            ,DbT5913ChosainJoho."chosainShimei"
@@ -133,8 +131,7 @@
             rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511ShinsakaiKaisaiKekkaJoho
             ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiNo"
         </if>
-       <if test="useZenkaiNinteiShinseiJoho">
-          LEFT JOIN 
+        LEFT JOIN 
             (
             SELECT 
                 DbT5101."shinseishoKanriNo" AS "shinseishoKanriNo"
@@ -149,7 +146,6 @@
                 ON DbT5101."shinseishoKanriNo" = DbT5102."shinseishoKanriNo"
             ) AS zenkaiNinteiShinseiJoho
             ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = zenkaiNinteiShinseiJoho."shinseishoKanriNo"
-        </if>
         <if test="useGeninShikkan">
             LEFT JOIN 
                 rgdb."DbT5300GeninShikkan" DbT5300GeninShikkan

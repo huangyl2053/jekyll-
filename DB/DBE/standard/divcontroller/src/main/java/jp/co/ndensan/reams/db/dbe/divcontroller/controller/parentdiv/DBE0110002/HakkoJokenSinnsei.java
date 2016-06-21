@@ -103,11 +103,11 @@ public class HakkoJokenSinnsei {
      */
     public ResponseData<HakkoJokenSinnseiDiv> onClick_Check(HakkoJokenSinnseiDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).未入力チェック(validationMessages);
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).未選択チェック(validationMessages);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        validPairs = getValidationHandler(div).未選択チェック(validationMessages);
+        validPairs = getValidationHandler(div).未入力チェック(validationMessages);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
@@ -119,10 +119,10 @@ public class HakkoJokenSinnsei {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        /* validPairs = getValidationHandler(div).申請日入力チェック(validationMessages);
-         if (validPairs.iterator().hasNext()) {
-         return ResponseData.of(div).addValidationMessages(validPairs).respond();
-         }*/
+        validPairs = getValidationHandler(div).申請日入力チェック(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         return ResponseData.of(div).respond();
     }
 

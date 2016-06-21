@@ -7,22 +7,26 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.kyotakuservicekeikakuichiran.IKyotakuServiceKeikakuIchiranMapper">
 
     <select id="get居宅サービス計画情報For初期化"
-            resultMap="resultMap_KyotakuServiceKeikakuIchiranEntity" fetchSize="500">
+            resultMap="resultMap_KyotakuServiceKeikakuIchiranEntity" fetchSize="500"
+            resultOrdered="true">
         <include refid="selectKyotakuServiceKeikakuIchiranEntity" />
     </select>
 
     <select id="get計画依頼受付情報"
-            resultMap="resultMap_KeikakuIraiJohoEntity" fetchSize="500">
+            resultMap="resultMap_KeikakuIraiJohoEntity" fetchSize="500"
+            resultOrdered="true">
         <include refid="selectKeikakuIraiJohoEntity" />
     </select>
 
     <select id="getサービス種類For計画依頼受付情報"
-            resultMap="resultMap_ServiceShuruiCodeEntity" fetchSize="500">
+            resultMap="resultMap_ServiceShuruiCodeEntity" fetchSize="500"
+            resultOrdered="true">
         <include refid="selectServiceShuruiCodeEntity" />
     </select>
 
     <select id="get自己作成計画情報"
-            resultMap="resultMap_JikoSakuseiKeikakuJohoEntity" fetchSize="500">
+            resultMap="resultMap_JikoSakuseiKeikakuJohoEntity" fetchSize="500"
+            resultOrdered="true">
         <include refid="selectJikoSakuseiKeikakuJohoEntity" />
     </select>
 
@@ -86,7 +90,7 @@
         rgdb."DbT7060KaigoJigyosha"  AS  dbT7060_2
         WHERE
         dbT7060."jigyoshaNo" = dbT7060_2."jigyoshaNo"
-        AND dbT7060."yukoKaishiYMD" <<![CDATA[<]]>  dbT7060_2."yukoKaishiYMD"
+        AND dbT7060."yukoKaishiYMD" <![CDATA[<]]>  dbT7060_2."yukoKaishiYMD"
         )
         )
 
@@ -115,8 +119,8 @@
         D."taishoYM",
         E."sakuseiKubunCode",
         D."zanteiKubun",
-        '' AS "keikakuJigyoshaNo",
-        '' AS "jigyoshaName",
+        '' AS keikakuJigyoshaNo,
+        '' AS jigyoshaName,
         E."tekiyoKaishiYMD",
         E."tekiyoShuryoYMD",
         E."rirekiNo"
@@ -149,7 +153,7 @@
         rgdb."DbT7060KaigoJigyosha"  AS  dbT7060_2
         WHERE
         dbT7060."jigyoshaNo" = dbT7060_2."jigyoshaNo"
-        AND dbT7060."yukoKaishiYMD" <<![CDATA[<]]> dbT7060_2."yukoKaishiYMD"
+        AND dbT7060."yukoKaishiYMD" <![CDATA[<]]> dbT7060_2."yukoKaishiYMD"
         )
         )
 

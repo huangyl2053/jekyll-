@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.publicationshiryoshinsakai;
 
+import jp.co.ndensan.reams.db.dbe.definition.processprm.publicationshiryoshinsakai.IinItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.publicationshiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.publicationshiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.publicationshiryoshinsakai.IinTuikaSiryoProcessParameter;
@@ -13,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -76,13 +78,13 @@ public class PublicationShiryoShinsakaiBatchParameter extends BatchParameterBase
     @BatchParameter(key = SAKUSEIJOKEN, name = "作成条件")
     private RString sakuseiJoken;
     @BatchParameter(key = BANGOSTART, name = "開始資料番号")
-    private RString bangoStart;
+    private Decimal bangoStart;
     @BatchParameter(key = BANGOEND, name = "終了資料番号")
-    private RString bangoEnd;
+    private Decimal bangoEnd;
     @BatchParameter(key = CHOYOJIMUHUSU, name = "事務局用部数")
-    private RString choyoJimuHusu;
+    private Decimal choyoJimuHusu;
     @BatchParameter(key = CHOHYOIINHUSU, name = "審査会委員用部数")
-    private RString chohyoIinHusu;
+    private Decimal chohyoIinHusu;
     @BatchParameter(key = CHOYOJIMU_TUUTISHOFALG, name = "事務_審査会開催通知書フラグ")
     private RString choyoJimu_tuutishoFalg;
     @BatchParameter(key = CHOYOJIMU_TOKKIJIKOUFALG, name = "事務_特記事項フラグ")
@@ -161,10 +163,10 @@ public class PublicationShiryoShinsakaiBatchParameter extends BatchParameterBase
             RString shuturyokuSutairu,
             RString printHou,
             RString sakuseiJoken,
-            RString bangoStart,
-            RString bangoEnd,
-            RString choyoJimuHusu,
-            RString chohyoIinHusu,
+            Decimal bangoStart,
+            Decimal bangoEnd,
+            Decimal choyoJimuHusu,
+            Decimal chohyoIinHusu,
             RString choyoJimu_tuutishoFalg,
             RString choyoJimu_tokkiJikouFalg,
             RString choyoJimu_itiziHanteiFalg,
@@ -219,7 +221,11 @@ public class PublicationShiryoShinsakaiBatchParameter extends BatchParameterBase
                 shinsakaiKaisaiNo,
                 shuturyokuSutairu,
                 printHou,
-                chohyoIinHusu);
+                chohyoIinHusu,
+                shinsakaiKaisaiYoteiYMD,
+                shinsakaiKaishiYoteiTime,
+                shinsakaiKaisaiBashoName,
+                gogitaiNo);
     }
 
     /**
@@ -238,7 +244,7 @@ public class PublicationShiryoShinsakaiBatchParameter extends BatchParameterBase
                 chohyoIinHusu,
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
-                gogitaiName);
+                gogitaiName, gogitaiNo);
     }
 
     /**
@@ -253,7 +259,8 @@ public class PublicationShiryoShinsakaiBatchParameter extends BatchParameterBase
                 shuturyokuJun,
                 shuturyokuSutairu,
                 printHou,
-                chohyoIinHusu);
+                chohyoIinHusu,
+                shinsakaiKaishiYoteiTime);
     }
 
     /**
@@ -266,5 +273,14 @@ public class PublicationShiryoShinsakaiBatchParameter extends BatchParameterBase
                 shuturyokuSutairu,
                 printHou,
                 chohyoIinHusu);
+    }
+
+    /**
+     * 介護認定更新ProcessParameterに転換します。
+     *
+     * @return IinItiziHanteiProcessParameter
+     */
+    public IinItiziHanteiProcessParameter toIinItiziHanteiProcessParameter() {
+        return new IinItiziHanteiProcessParameter(shinsakaiKaisaiNo, shuturyokuJun, sakuseiJoken, gogitaiNo, printHou);
     }
 }

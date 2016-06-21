@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.report.kyodoshoriyojukyushaidorenrakuhyo;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.kyodoshoriyojukyushaidorenrakuhyo.KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.kyodoshoriyojukyushaidorenrakuhyo.param.KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kyodoshorijukyushaidorenrakuhyo.KyodoShoriJukyushaIdoRenrakuhyoSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -157,7 +157,7 @@ public class KyodoShoriJukyushaIdoRenrakuhyoEditor implements IKyodoShoriJukyush
             source.shuryoGG = 終了年月日.getEra();
             RString 終了年 = 終了年月日.getYear();
             source.shuryoYY = getYear(終了年);
-            source.kaishiMM = 終了年月日.getMonth();
+            source.shuryoMM = 終了年月日.getMonth();
             source.shuryoDD = 終了年月日.getDay();
         }
     }

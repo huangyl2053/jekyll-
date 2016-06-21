@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0230011
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyokobetsukoikiunyo.KaigoJuminhyoKobetsuKoikiunyo;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyokoukiu.KaiGoJuminHyokouKiuBatchParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KaigoJuminhyoKobetsuParameter;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KobetsuKoikiunyoBatchParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KobetsuKoikiunyoParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0230011.KobetsuJikoRenkeiInfoSakuseiKoikiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0230011.dgKobetsuJikoRenkeiInfoSakuseiKoik_Row;
@@ -113,7 +113,7 @@ public class KobetsuJikoRenkeiInfoSakuseiKoiki {
      * @param div div
      * @return ResponseData<KobetsuKoikiunyoBatchParameter>
      */
-    public ResponseData<KobetsuKoikiunyoBatchParameter> onClick_JikkouButton(KobetsuJikoRenkeiInfoSakuseiKoikiDiv div) {
+    public ResponseData<KaiGoJuminHyokouKiuBatchParameter> onClick_JikkouButton(KobetsuJikoRenkeiInfoSakuseiKoikiDiv div) {
         KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder finder = KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder
                 .createInstance();
         List<KaigoJuminhyoKobetsuParameter> kobetsuLsit = new ArrayList<>();
@@ -126,7 +126,7 @@ public class KobetsuJikoRenkeiInfoSakuseiKoiki {
             }
         }
         List<KobetsuKoikiunyoParameter> businessList = finder.getKaigoJuminhyoKobetsuKoikiunyoBatchParameter(kobetsuLsit).records();
-        KobetsuKoikiunyoBatchParameter parameter = new KobetsuKoikiunyoBatchParameter(businessList);
+        KaiGoJuminHyokouKiuBatchParameter parameter = new KaiGoJuminHyokouKiuBatchParameter(businessList);
         return ResponseData.of(parameter).respond();
     }
 

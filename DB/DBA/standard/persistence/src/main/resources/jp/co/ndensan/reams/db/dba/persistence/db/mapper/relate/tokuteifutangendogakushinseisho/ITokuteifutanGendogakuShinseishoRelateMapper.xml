@@ -28,7 +28,7 @@
 
     <select resultOrdered="true" id="get施設情報"
             resultMap="resultMap_DbT1004ShisetsuNyutaishoEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tokuteifutangendogakushinseisho.TokuteifutanMybatisParam"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tokuteifutangendogakushinseisho.TokuteifutanMybatisParam"
             fetchSize="500">
         SELECT
         "nyushoShisetsuShurui" AS 入所施設種類,
@@ -52,7 +52,7 @@
     </select>
     <select resultOrdered="true" id="get事業者情報"
             resultMap="resultMap_DbT7060KaigoJigyoshaEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tokuteifutangendogakushinseisho.TokuteifutanMybatisParam"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tokuteifutangendogakushinseisho.TokuteifutanMybatisParam"
             fetchSize="500">
         SELECT
         "jigyoshaName" AS 事業者名称,
@@ -73,7 +73,7 @@
     </select>
     <select resultOrdered="true" id="get介護除外住所地特例対象施設情報"
                resultMap="resultMap_DbT1005KaigoJogaiTokureiTaishoShisetsuEntity"
-               parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tokuteifutangendogakushinseisho.TokuteifutanMybatisParam"
+               parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tokuteifutangendogakushinseisho.TokuteifutanMybatisParam"
                fetchSize="500">
         SELECT
         "jigyoshaMeisho" AS 事業者名称,

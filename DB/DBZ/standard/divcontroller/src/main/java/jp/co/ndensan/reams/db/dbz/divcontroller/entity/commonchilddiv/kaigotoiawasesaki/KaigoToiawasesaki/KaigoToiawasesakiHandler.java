@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigotoia
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoToiawasesaki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoToiawasesakiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoToiawasesakiIdentifier;
@@ -16,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
@@ -182,17 +179,11 @@ public class KaigoToiawasesakiHandler {
      * 一件目を更新します。
      *
      * @param models 介護問合せ先情報
+     * @param oneKey 介護問合せ先の識別子
      * @return KaigoToiawasesakiBuilder ビルダークラス
      */
-    public KaigoToiawasesakiBuilder updateOneRow(Models<KaigoToiawasesakiIdentifier, KaigoToiawasesaki> models) {
-        RString 問合せ先管理単位 = DbBusinessConfig.get(ConfigNameDBU.問合せ先_管理単位, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        KaigoToiawasesakiIdentifier oneKey = null;
-        if (介護共通.equals(問合せ先管理単位)) {
-            oneKey = new KaigoToiawasesakiIdentifier(SubGyomuCode.DBZ介護共通, CHOHYOBUNRUIID);
-        } else if (サブ業務単位.equals(問合せ先管理単位)) {
-            oneKey = new KaigoToiawasesakiIdentifier(new SubGyomuCode(div.getHdnSubGyomuCode()),
-                    CHOHYOBUNRUIID);
-        }
+    public KaigoToiawasesakiBuilder updateOneRow(Models<KaigoToiawasesakiIdentifier, KaigoToiawasesaki> models,
+            KaigoToiawasesakiIdentifier oneKey) {
         KaigoToiawasesaki oneKaigoToiawasesaki = models.get(oneKey);
         KaigoToiawasesakiBuilder oneBuilder = oneKaigoToiawasesaki.createBuilderForEdit();
         oneBuilder.set郵便番号(new YubinNo(

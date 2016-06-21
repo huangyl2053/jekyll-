@@ -128,100 +128,97 @@ public class IchijihanteikekkahyoA4ReportSource implements IReportSource {
     public RString listkijunTime_8;
     @ReportItem(name = "listkijunTime_9", length = 7, order = 56)
     public RString listkijunTime_9;
-    @ReportItem(name = "TokuteiKoureisha", length = 60, order = 57)
-    public RString TokuteiKoureisha;
-    @ReportItem(name = "tokuteishippeiName", length = 40, order = 58)
+    @ReportItem(name = "tokuteishippeiName", length = 40, order = 57)
     public RString tokuteishippeiName;
-    @ReportItem(name = "keikokuNo", length = 120, order = 59)
+    @ReportItem(name = "keikokuNo", length = 120, order = 58)
     public RString keikokuNo;
-    @ReportItem(name = "HanteiKeikoku", length = 60, order = 60)
-    public RString HanteiKeikoku;
-    @ReportItem(name = "listChukanhyoka_1", length = 5, order = 61)
+    @ReportItem(name = "listChukanhyoka_1", length = 5, order = 59)
     public RString listChukanhyoka_1;
-    @ReportItem(name = "listChukanhyoka_2", length = 5, order = 62)
+    @ReportItem(name = "listChukanhyoka_2", length = 5, order = 60)
     public RString listChukanhyoka_2;
-    @ReportItem(name = "listChukanhyoka_3", length = 5, order = 63)
+    @ReportItem(name = "listChukanhyoka_3", length = 5, order = 61)
     public RString listChukanhyoka_3;
-    @ReportItem(name = "listChukanhyoka_4", length = 5, order = 64)
+    @ReportItem(name = "listChukanhyoka_4", length = 5, order = 62)
     public RString listChukanhyoka_4;
-    @ReportItem(name = "listChukanhyoka_5", length = 5, order = 65)
+    @ReportItem(name = "listChukanhyoka_5", length = 5, order = 63)
     public RString listChukanhyoka_5;
-    @ReportItem(name = "listtokki3_1", length = 1, order = 66)
+    @ReportItem(name = "listtokki3_1", length = 1, order = 64)
     public RString listtokki3_1;
-    @ReportItem(name = "listSangun_1", length = 22, order = 67)
+    @ReportItem(name = "listSangun_1", length = 22, order = 65)
     public RString listSangun_1;
-    @ReportItem(name = "listSangun_2", length = 1, order = 68)
+    @ReportItem(name = "listSangun_2", length = 1, order = 66)
     public RString listSangun_2;
-    @ReportItem(name = "listSangun_3", length = 1, order = 69)
+    @ReportItem(name = "listSangun_3", length = 1, order = 67)
     public RString listSangun_3;
-    @ReportItem(name = "listSangun_4", length = 22, order = 70)
+    @ReportItem(name = "listSangun_4", length = 22, order = 68)
     public RString listSangun_4;
-    @ReportItem(name = "ｌistNichijoseikatsujiritsudo_1", length = 2, order = 71)
+    @ReportItem(name = "ｌistNichijoseikatsujiritsudo_1", length = 2, order = 69)
     public RString ｌistNichijoseikatsujiritsudo_1;
-    @ReportItem(name = "listtokki8_1", length = 1, order = 72)
+    @ReportItem(name = "listtokki8_1", length = 1, order = 70)
     public RString listtokki8_1;
-    @ReportItem(name = "chosaNinchishoJiritsudo", length = 2, order = 73)
+    @ReportItem(name = "chosaNinchishoJiritsudo", length = 2, order = 71)
     public RString chosaNinchishoJiritsudo;
-    @ReportItem(name = "ikenNinchishoJiritsudo", length = 2, order = 74)
+    @ReportItem(name = "ikenNinchishoJiritsudo", length = 2, order = 72)
     public RString ikenNinchishoJiritsudo;
-    @ReportItem(name = "manzensei", length = 6, order = 75)
+    @ReportItem(name = "manzensei", length = 6, order = 73)
     public RString manzensei;
-    @ReportItem(name = "jotainoanteisei", length = 4, order = 76)
+    @ReportItem(name = "jotainoanteisei", length = 4, order = 74)
     public RString jotainoanteisei;
-    @ReportItem(name = "kyufukubun", length = 4, order = 77)
+    @ReportItem(name = "kyufukubun", length = 4, order = 75)
     public RString kyufukubun;
-    @ReportItem(name = "listtokki4_1", length = 1, order = 78)
+    @ReportItem(name = "listtokki4_1", length = 1, order = 76)
     public RString listtokki4_1;
-    @ReportItem(name = "listYongun_1", length = 22, order = 79)
+    @ReportItem(name = "listYongun_1", length = 22, order = 77)
     public RString listYongun_1;
-    @ReportItem(name = "listYongun_2", length = 1, order = 80)
+    @ReportItem(name = "listYongun_2", length = 1, order = 78)
     public RString listYongun_2;
-    @ReportItem(name = "listYongun_3", length = 1, order = 81)
+    @ReportItem(name = "listYongun_3", length = 1, order = 79)
     public RString listYongun_3;
-    @ReportItem(name = "listYongun_4", length = 22, order = 82)
+    @ReportItem(name = "listYongun_4", length = 22, order = 80)
     public RString listYongun_4;
-    @ReportItem(name = "sabisuName", length = 15, order = 83)
+    @ReportItem(name = "sabisuName", length = 15, order = 81)
     public RString sabisuName;
-    @ReportItem(name = "sabisuText", order = 84)
+    @ReportItem(name = "sabisuText", order = 82)
     public RString sabisuText;
-    @ReportItem(name = "listtokki5_1", length = 1, order = 85)
+    @ReportItem(name = "listtokki5_1", length = 1, order = 83)
     public RString listtokki5_1;
-    @ReportItem(name = "listGogun_1", length = 22, order = 86)
+    @ReportItem(name = "listGogun_1", length = 22, order = 84)
     public RString listGogun_1;
-    @ReportItem(name = "listGogun_2", length = 1, order = 87)
+    @ReportItem(name = "listGogun_2", length = 1, order = 85)
     public RString listGogun_2;
-    @ReportItem(name = "listGogun_3", length = 1, order = 88)
+    @ReportItem(name = "listGogun_3", length = 1, order = 86)
     public RString listGogun_3;
-    @ReportItem(name = "listGogun_4", length = 22, order = 89)
+    @ReportItem(name = "listGogun_4", length = 22, order = 87)
     public RString listGogun_4;
-    @ReportItem(name = "listtokki6_1", length = 1, order = 90)
+    @ReportItem(name = "listtokki6_1", length = 1, order = 88)
     public RString listtokki6_1;
-    @ReportItem(name = "listtokubetsunaIryo1_1", length = 2, order = 91)
+    @ReportItem(name = "listtokubetsunaIryo1_1", length = 2, order = 89)
     public RString listtokubetsunaIryo1_1;
-    @ReportItem(name = "listtokubetsunaIryo1_2", length = 1, order = 92)
+    @ReportItem(name = "listtokubetsunaIryo1_2", length = 1, order = 90)
     public RString listtokubetsunaIryo1_2;
-    @ReportItem(name = "listtokubetsunaIryo2_1", length = 2, order = 93)
+    @ReportItem(name = "listtokubetsunaIryo2_1", length = 2, order = 91)
     public RString listtokubetsunaIryo2_1;
-    @ReportItem(name = "listtokubetsunaIryo2_2", length = 1, order = 94)
+    @ReportItem(name = "listtokubetsunaIryo2_2", length = 1, order = 92)
     public RString listtokubetsunaIryo2_2;
-    @ReportItem(name = "listKaigokyufu_1", length = 3, order = 95)
-    public RString kaigo_listKaigokyufu_1;
-    @ReportItem(name = "tokuteiFukushiyoguKikan", length = 2, order = 96)
-    public RString kaigo_tokuteiFukushiyoguKikan;
-    @ReportItem(name = "listKaigokyufu_1", length = 3, order = 97)
-    public RString yobo_listKaigokyufu_1;
-    @ReportItem(name = "tokuteiFukushiyoguKikan", length = 2, order = 98)
-    public RString yobo_tokuteiFukushiyoguKikan;
-    @ReportPerson(id = "X")
-    public ShikibetsuCode shikibetuCode;
-    @ReportExpandedInfo(id = "X")
-    public ExpandedInformation shinseishoKanriNo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    @ReportItem(name = "listKaigokyufu_1", length = 3, order = 93)
+    public RString kaigo_listKaigokyufu_1;
+    @ReportItem(name = "tokuteiFukushiyoguKikan", length = 2, order = 94)
+    public RString kaigo_tokuteiFukushiyoguKikan;
+    @ReportItem(name = "listKaigokyufu_1", length = 3, order = 95)
+    public RString yobo_listKaigokyufu_1;
+    @ReportItem(name = "tokuteiFukushiyoguKikan", length = 2, order = 96)
+    public RString yobo_tokuteiFukushiyoguKikan;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation shinseishoKanriNo;
 
     /**
      * 改ページ条件のキーです。

@@ -4,8 +4,10 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.ShotokuJo
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -31,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
@@ -40,7 +41,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
@@ -49,7 +49,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * @reamsid_L DBD-3650-110 liangbc
  */
 public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -210,7 +209,7 @@ public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
     private final static RString マル = new RString("○");
 
     @Override
-    public void load(ShikibetsuCode 識別コード) {
+    public void initialize(ShikibetsuCode 識別コード) {
         if (識別コード == null || 識別コード.isEmpty()) {
             throw new SystemException("識別コードが設定されていません。");
         }

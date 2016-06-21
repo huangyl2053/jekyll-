@@ -1128,6 +1128,13 @@
     </resultMap>
     <resultMap id="resultMap_selectTokuchoHeinjunkaKakuteiItirannEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunkakakutei.TokuchoHeinjunkaKakuteiItirannEntity">
+        <id property="fukeEntity.調定年度" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="fukeEntity.賦課年度" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="fukeEntity.通知書番号" column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <id property="fukeEntity.履歴番号" column="rirekiNo" />
+        <id property="年金特徴回付情報_介護継承.shoriTaishoYM" column="shoriTaishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+        <id property="年金特徴回付情報_介護継承.koseiCityCode" column="koseiCityCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="年金特徴回付情報_介護継承.renban" column="renban" />
         <association property="fukeEntity" resultMap="resultMap_FukaTempEntity"/>
         <association property="徴収方法Newest" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.ResultMap_DbV2001ChoshuHohoEntity"/>
         <association property="年金特徴回付情報_介護継承" resultMap="ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>

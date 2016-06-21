@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureishiset
 import java.util.Map;
 import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureishisetsutaishotsuchisho.TatokuKanrenChohyoTaishoTsuchishoBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.tatokukanrenchohyoshiji.TatokuKanrenChohyoShijiData;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.ShisetsuJyohoRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tashitaishotsuchisho.TatokuKanrenChohyoTaishoTsuchishoEntity;

@@ -80,6 +80,9 @@
                "logicalDeletedFlag" <![CDATA[<>]]> TRUE)DbT1001
         WHERE
             rank_number = 1
+        <if test = "!chushutsuFlag">
+           AND DbT1001."dbT1001HihokenshaDaicho_shikakuSoshitsuYMD" IS NULL
+       </if>
         AND DbT1001."dbT1001HihokenshaDaicho_shikibetsuCode" = #{shikibetsuCode}
         ORDER BY
            DbT1001."dbT1001HihokenshaDaicho_shikibetsuCode",

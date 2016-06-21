@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0400011
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.core.config.ConfigKeysHihokenshashoIndicationMethod;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.service.core.nenreitoutatuyoteishachecklist.NenreiToutatuYoteishaCheckListManager;
 import jp.co.ndensan.reams.db.dbu.business.core.hihokenshashoikkatsuhakko.HihokenshashoIkkatsuHakkoModel;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.hihokenshasho.IkkatsuHakkoBatchParameter;
@@ -50,8 +51,6 @@ public class HihokenshaShoBatchPrm {
     private static final RString タイプ_B4横1 = new RString("21");
     private static final RString タイプ_B4横2 = new RString("22");
     private static final RString KOMOKUNAME = new RString("出力条件");
-    private static final ReportId REPORTID_A4 = new ReportId("DBA100001_HihokenshashoA4");
-    private static final ReportId REPORTID_B4 = new ReportId("DBA100002_HihokenshashoB4");
 
     /**
      * コンストラクタです。
@@ -83,9 +82,9 @@ public class HihokenshaShoBatchPrm {
         RString type = DbBusinessConfig.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_証表示タイプ, RDate.getNowDate(), SubGyomuCode.DBA介護資格);
         ReportId chohyoID = null;
         if (タイプ_A4横.equals(type)) {
-            chohyoID = REPORTID_A4;
+            chohyoID = ReportIdDBA.DBA100002.getReportId();
         } else if (タイプ_B4横1.equals(type) || タイプ_B4横2.equals(type)) {
-            chohyoID = REPORTID_B4;
+            chohyoID = ReportIdDBA.DBA100001.getReportId();
         }
         div.getHihokenshaShoShutsuryokuJun().load(SubGyomuCode.DBA介護資格,
                 nenreiToutatuYoteishaManager.get帳票分類ID(SubGyomuCode.DBA介護資格, chohyoID).get帳票分類ID());

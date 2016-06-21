@@ -5,11 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0110004;
 
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.ikenshojohoprint.IkenshoJohoPrintBatchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110004.HakkoJokenSyujiiIkensyoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110004.HakkoJokenSyujiiIkensyoHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110004.HakkoJokenSyujiiIkensyoValidationHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -301,6 +304,67 @@ public class HakkoJokenSyujiiIkensyo {
             div.getTxtSeikyuIchiranShoriYMD().setDisabled(true);
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 実行ボタン処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenSyujiiIkensyoDiv>
+     */
+    public ResponseData<IkenshoJohoPrintBatchParameter> onClick_Jikkou(HakkoJokenSyujiiIkensyoDiv div) {
+        return ResponseData.of(getHandler(div).setBatchParameter()).respond();
+    }
+
+    /**
+     * 入力チェックです。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenSyujiiIkensyoDiv>
+     */
+    public ResponseData<HakkoJokenSyujiiIkensyoDiv> onClick_Check(HakkoJokenSyujiiIkensyoDiv div) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).未選択チェック(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).未入力チェック(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).処理日範囲不正チェック1(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).処理日範囲不正チェック2(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).受領日範囲不正チェック(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).申請日範囲不正チェック1(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).申請日範囲不正チェック2(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).申請日範囲不正チェック3(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).申請日範囲不正チェック4(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private HakkoJokenSyujiiIkensyoValidationHandler getValidationHandler(HakkoJokenSyujiiIkensyoDiv div) {
+        return new HakkoJokenSyujiiIkensyoValidationHandler(div);
     }
 
     private HakkoJokenSyujiiIkensyoHandler getHandler(HakkoJokenSyujiiIkensyoDiv div) {

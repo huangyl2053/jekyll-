@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei;
 
-import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -19,9 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShoukanBaraiSuuchiShoIkatsuParamter extends BatchParameterBase {
-
-    private static final long serialVersionUID = -3452210388190986776L;
+public class ShoukanBaraiSuuchiShoIkatsuParamter {
 
     private RString 抽出モード;
     private RDate 決定日付From;

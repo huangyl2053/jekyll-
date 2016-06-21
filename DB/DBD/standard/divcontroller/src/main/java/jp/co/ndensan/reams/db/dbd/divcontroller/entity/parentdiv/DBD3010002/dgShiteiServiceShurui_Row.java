@@ -1,9 +1,9 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3010002;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jul 01 09:09:14 JST 2014 
+ * Tue Jun 21 14:12:47 CST 2016 
  */
 
 
@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgShiteiServiceShurui_Row extends DataRow {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private TextBoxCode serviceNo;
     private RString serviceType;
@@ -28,6 +29,8 @@ public class dgShiteiServiceShurui_Row extends DataRow {
         super();
         this.serviceNo = new TextBoxCode();
         this.serviceType = RString.EMPTY;
+        this.setOriginalData("serviceNo", serviceNo);
+        this.setOriginalData("serviceType", serviceType);
     }
 
     public dgShiteiServiceShurui_Row(TextBoxCode serviceNo, RString serviceType) {
@@ -56,4 +59,5 @@ public class dgShiteiServiceShurui_Row extends DataRow {
         this.serviceType = serviceType;
     }
 
+    // </editor-fold>
 }

@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 共有子Div「居宅計画」のデータ検索クラスです。
@@ -59,6 +60,7 @@ public class KyotakuServiceKeikakuIchiranFinder {
      * @param 被保険者番号 HihokenshaNo
      * @return List<KyotakuServiceKeikakuIchiranEntity>
      */
+    @Transaction
     public List<KyotakuServiceKeikakuIchiranEntity> 居宅サービス計画情報の取得(HihokenshaNo 被保険者番号) {
 
         IKyotakuServiceKeikakuIchiranMapper mapper = mapperProvider.create(IKyotakuServiceKeikakuIchiranMapper.class);
@@ -73,6 +75,7 @@ public class KyotakuServiceKeikakuIchiranFinder {
      * @param 被保険者番号 HihokenshaNo
      * @return List<KeikakuIraiJohoEntity>
      */
+    @Transaction
     public List<KeikakuIraiJohoEntity> 計画依頼受付情報の取得(HihokenshaNo 被保険者番号) {
 
         IKyotakuServiceKeikakuIchiranMapper mapper = mapperProvider.create(IKyotakuServiceKeikakuIchiranMapper.class);
@@ -101,6 +104,7 @@ public class KyotakuServiceKeikakuIchiranFinder {
      * @param 被保険者番号 HihokenshaNo
      * @return List<ServiceShuruiCodeEntity>
      */
+    @Transaction
     public List<ServiceShuruiCodeEntity> 計画依頼受付情報のサービス種類取得(HihokenshaNo 被保険者番号) {
 
         IKyotakuServiceKeikakuIchiranMapper mapper = mapperProvider.create(IKyotakuServiceKeikakuIchiranMapper.class);
@@ -115,6 +119,7 @@ public class KyotakuServiceKeikakuIchiranFinder {
      * @param 被保険者番号 HihokenshaNo
      * @return List<JikoSakuseiKeikakuJohoEntity>
      */
+    @Transaction
     public List<JikoSakuseiKeikakuJohoEntity> 自己作成計画情報の取得(HihokenshaNo 被保険者番号) {
 
         IKyotakuServiceKeikakuIchiranMapper mapper = mapperProvider.create(IKyotakuServiceKeikakuIchiranMapper.class);

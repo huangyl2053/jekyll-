@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoResult;
 import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokunenpo.ShichosonCodeNameResult;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoSearchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoo.JigyoHokokuGeppoSearchParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.basic.DbT7021JigyoHokokuTokeiDataDac;
@@ -295,9 +295,17 @@ public class JigyoHokokuGeppoHoseiHako {
      */
     @Transaction
     public int deleteJigyoHokokuGeppoData(JigyoHokokuGeppoDetalSearchParameter parameter) {
-        IJigyoHokokuGeppoHoseiHakoMapper hoseiHakoMapper
-                = mapperProvider.create(IJigyoHokokuGeppoHoseiHakoMapper.class);
-        return hoseiHakoMapper.delete事業報告月報(parameter);
+        DbT7021JigyoHokokuTokeiDataEntity dataEntity = new DbT7021JigyoHokokuTokeiDataEntity();
+        dataEntity.setHokokuYSeireki(parameter.get報告年());
+        dataEntity.setHokokuM(parameter.get報告月());
+        dataEntity.setShukeiTaishoYSeireki(parameter.get集計対象年());
+        dataEntity.setShukeiTaishoM(parameter.get集計対象月());
+        dataEntity.setToukeiTaishoKubun(parameter.get統計対象区分());
+        dataEntity.setShichosonCode(parameter.get市町村コード());
+        dataEntity.setHyoNo(parameter.get表番号());
+        dataEntity.setShukeiNo(parameter.get集計番号());
+        dataEntity.setState(EntityDataState.Deleted);
+        return dac.delete(dataEntity);
     }
 
     /**
