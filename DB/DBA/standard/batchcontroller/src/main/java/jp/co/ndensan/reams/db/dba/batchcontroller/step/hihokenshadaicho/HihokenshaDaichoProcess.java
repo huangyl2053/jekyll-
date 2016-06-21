@@ -95,6 +95,7 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
     @Override
     protected void initialize() {
         iIkkatsuSakuseiMapper = getMapper(IIkkatsuSakuseiMapper.class);
+        mybatisPrm = processPrm.toIkkatsuHakkoMybatisParameter();
         被保険者台帳EntityList = new ArrayList<>();
         get出力順();
     }
@@ -224,8 +225,6 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
                                 processPrm.getPsmShikibetsuTaisho(),
                                 orderBy);
             }
-        } else {
-            mybatisPrm = processPrm.toIkkatsuHakkoMybatisParameter();
         }
     }
 
