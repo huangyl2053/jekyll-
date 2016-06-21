@@ -42,22 +42,22 @@ public class PublicationShiryoShinsakaiValidationHandler {
      */
     public ValidationMessageControlPairs 発行チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        Decimal 事務部数 = div.getTxtCopyNumForJimukyoku1().getValue();
+//        Decimal 事務部数 = div.getTxtCopyNumForJimukyoku1().getValue();
         Decimal 委員部数 = div.getTxtCopyNumForShinsakaiIin1().getValue();
-        List<RString> 事務帳票 = div.getChkPrintChoyoJimu().getSelectedKeys();
+//        List<RString> 事務帳票 = div.getChkPrintChoyoJimu().getSelectedKeys();
         List<RString> 委員帳票 = div.getChkPrintChohyoIin().getSelectedKeys();
         RString 作成条件 = div.getRadSakuseiJokenType().getSelectedKey();
         Decimal 印刷範囲指定開始 = div.getTxtShiryoNoStart().getValue();
         Decimal 印刷範囲指定終了 = div.getTxtSiryoNoEnd().getValue();
-        if (事務部数 == null || 事務部数.intValue() == 0) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.部数未入力, div.getTxtCopyNumForJimukyoku1()));
-        }
+//        if (事務部数 == null || 事務部数.intValue() == 0) {
+//            validPairs.add(new ValidationMessageControlPair(RRVMessages.部数未入力, div.getTxtCopyNumForJimukyoku1()));
+//        }
         if (委員部数 == null || 委員部数.intValue() == 0) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.部数未入力, div.getTxtCopyNumForShinsakaiIin1()));
         }
-        if (事務帳票 == null || 事務帳票.isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.印刷帳票未選択, div.getChkPrintChoyoJimu()));
-        }
+//        if (事務帳票 == null || 事務帳票.isEmpty()) {
+//            validPairs.add(new ValidationMessageControlPair(RRVMessages.印刷帳票未選択, div.getChkPrintChoyoJimu()));
+//        }
         if (委員帳票 == null || 委員帳票.isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.印刷帳票未選択, div.getChkPrintChohyoIin()));
         }
