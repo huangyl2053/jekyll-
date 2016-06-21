@@ -28,7 +28,7 @@ public class HakkoJokenSinnseiValidationHandler {
 
     private static final RString SELECT_KEY0 = new RString("key0");
     private static final RString SELECT_KEY1 = new RString("key1");
-    private static final RString LASDEC_CODE = new RString("000000");
+    private static final LasdecCode LASDEC_CODE = new LasdecCode("000000");
     private final HakkoJokenSinnseiDiv div;
 
     /**
@@ -131,7 +131,7 @@ public class HakkoJokenSinnseiValidationHandler {
             shinnseikato = RDate.MAX;
         }
         RString kijyun = DbBusinessConfig.get(ConfigNameDBE.Reamsへの切り替え日, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
-                new LasdecCode(LASDEC_CODE), ConfigNameDBE.Reamsへの切り替え日.get名称());
+                LASDEC_CODE, ConfigNameDBE.Reamsへの切り替え日.get名称());
         RDate kijyundate = new RDate(kijyun.toString());
         if (!div.getRadHakoJyoken().getSelectedKey().contains(SELECT_KEY0)) {
             int yearsfrom = kijyundate.getBetweenYears(shinnseikafrom);
