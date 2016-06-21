@@ -73,6 +73,6 @@ public class SonotashiryoA4ReportSource implements IReportSource {
      */
     public enum ReportSourceFields {
 
-        shichosonNo,
+        hokenshaNo,
     }
 }

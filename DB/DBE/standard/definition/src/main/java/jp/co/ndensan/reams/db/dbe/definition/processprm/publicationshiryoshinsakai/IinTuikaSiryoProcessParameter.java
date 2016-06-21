@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.definition.processprm.publicationshiryoshinsa
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTuutishoMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 委員用追加資料鑑情報のProcessParameterです。
@@ -22,7 +23,7 @@ public class IinTuikaSiryoProcessParameter implements IBatchProcessParameter {
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuSutairu;
     private RString printHou;
-    private RString chohyoIinHusu;
+    private Decimal chohyoIinHusu;
 
     /**
      * コンストラクタです。
@@ -36,7 +37,7 @@ public class IinTuikaSiryoProcessParameter implements IBatchProcessParameter {
             RString shinsakaiKaisaiNo,
             RString shuturyokuSutairu,
             RString printHou,
-            RString chohyoIinHusu) {
+            Decimal chohyoIinHusu) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuSutairu = shuturyokuSutairu;
         this.printHou = printHou;

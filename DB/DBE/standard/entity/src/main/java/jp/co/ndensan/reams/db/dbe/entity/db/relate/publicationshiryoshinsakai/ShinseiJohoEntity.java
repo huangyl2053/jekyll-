@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.publicationshiryoshinsakai;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShinseiJohoEntity {
 
+    private ShinseishoKanriNo shinseishoKanriNo;
     private int shinsakaiOrder;
     private RString shoKisaiHokenshaNo;
     private RString hihokenshaNo;
@@ -28,4 +30,5 @@ public class ShinseiJohoEntity {
     private Code ichijiHanteiKekkaCode;
     private RString ichijiHnateiKeikokuCode;
     private int kijunJikan;
+    private Code jotaiKubunCode;
 }

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsak
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 委員用介護認定審査対象者一覧表情報のProcessParameterです。
@@ -26,7 +27,8 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
     private RString shuturyokuJun;
     private RString shuturyokuSutairu;
     private RString printHou;
-    private RString chohyoIinHusu;
+    private Decimal chohyoIinHusu;
+    private RString shinsakaiKaishiYoteiTime;
 
     /**
      * コンストラクタです。
@@ -38,6 +40,7 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
      * @param shuturyokuSutairu 出力スタイル
      * @param printHou 印刷方法
      * @param chohyoIinHusu 審査会委員用部数
+     * @param shinsakaiKaishiYoteiTime 介護認定審査会開始予定時刻
      */
     public IinShinsakaiIinJohoProcessParameter(
             RString gogitaiNo,
@@ -46,7 +49,8 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
             RString shuturyokuJun,
             RString shuturyokuSutairu,
             RString printHou,
-            RString chohyoIinHusu) {
+            Decimal chohyoIinHusu,
+            RString shinsakaiKaishiYoteiTime) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuJun = shuturyokuJun;
         this.gogitaiNo = gogitaiNo;
@@ -54,6 +58,7 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
         this.shuturyokuSutairu = shuturyokuSutairu;
         this.printHou = printHou;
         this.chohyoIinHusu = chohyoIinHusu;
+        this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;
     }
 
     /**

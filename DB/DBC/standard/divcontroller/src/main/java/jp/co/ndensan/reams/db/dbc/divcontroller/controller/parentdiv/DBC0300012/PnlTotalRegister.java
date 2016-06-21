@@ -34,7 +34,6 @@ public class PnlTotalRegister {
      * @return ResponseData
      */
     public ResponseData<PnlTotalRegisterDiv> onLoad(PnlTotalRegisterDiv div) {
-        ResponseData<PnlTotalRegisterDiv> responseData = new ResponseData<>();
         PnlTotalRegisterHandler handler = getHandler(div);
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (処理モード == null) {
@@ -43,7 +42,7 @@ public class PnlTotalRegister {
         }
         if (登録.equals(処理モード)) {
             handler.set登録初期データ();
-            return responseData;
+            return ResponseData.of(div).respond();
         }
         JuryoininKeiyakuJigyosha data = ViewStateHolder
                 .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
@@ -52,8 +51,7 @@ public class PnlTotalRegister {
 
         handler.set初期データ(処理モード, record);
 
-        responseData.data = div;
-        return responseData;
+        return ResponseData.of(div).respond();
     }
 
     /**

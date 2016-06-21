@@ -40,5 +40,6 @@ public class IinSonotashiryoSakuseiEntity {
     private RString sakuseiGengo;
     private RString shinsaGengo;
     private RString shinseiGengo;
+    private RString 申請書管理番号;
 
 }

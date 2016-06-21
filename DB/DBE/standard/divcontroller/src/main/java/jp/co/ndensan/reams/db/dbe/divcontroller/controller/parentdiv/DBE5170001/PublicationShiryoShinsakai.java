@@ -120,11 +120,6 @@ public class PublicationShiryoShinsakai {
      * @return ResponseData<PublicationShiryoShinsakaiBatchParameter>
      */
     public ResponseData<PublicationShiryoShinsakaiBatchParameter> onClick_btnExecute(PublicationShiryoShinsakaiDiv div) {
-        // TODO QA1221回答まち、
-        // DB更新処理を実施する
-        // 処理完了のメッセージを表示する
-        // 排他制御の解除を行う
-        // 画面を再表示する
         RString 審査会一覧_開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         RStringBuilder builder = new RStringBuilder();
         builder.append(new RString("DBEShinsakaiNo"))
