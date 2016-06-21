@@ -74,7 +74,7 @@ public class NinteichosaYoteiMiteiEditor implements INinteichosaYoteiMiteiEditor
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         RString 保険者番号 = RString.EMPTY;
         RString 被保険者番号 = RString.EMPTY;
-        if (RString.isNullOrEmpty(item.getDbT5101_shoKisaiHokenshaNo())) {
+        if (!RString.isNullOrEmpty(item.getDbT5101_shoKisaiHokenshaNo())) {
             保険者番号 = item.getDbT5101_shoKisaiHokenshaNo();
             被保険者番号 = item.getDbT5101_hihokenshaNo();
         }

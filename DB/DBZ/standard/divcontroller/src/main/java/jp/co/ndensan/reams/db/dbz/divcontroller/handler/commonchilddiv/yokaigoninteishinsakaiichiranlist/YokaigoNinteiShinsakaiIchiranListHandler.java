@@ -117,12 +117,10 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
             }
             if (ShinsakaiShinchokuJokyo.未開催.getコード().equals(shinsakaiKaisai.get介護認定審査会進捗状況())) {
                 row.setShinchokuJokyo(RString.EMPTY);
-            }
-            if (ShinsakaiShinchokuJokyo.未開催_割付完了.getコード().equals(shinsakaiKaisai.get介護認定審査会進捗状況())) {
+            } else if (ShinsakaiShinchokuJokyo.未開催_割付完了.getコード().equals(shinsakaiKaisai.get介護認定審査会進捗状況())) {
                 row.setShinchokuJokyo(介護認定審査会進捗状況_開催済);
-            }
-            if (ShinsakaiShinchokuJokyo.中止.getコード().equals(shinsakaiKaisai.get介護認定審査会進捗状況())) {
-                row.setShinchokuJokyo(ShinsakaiShinchokuJokyo.中止.get名称());
+            } else {
+                row.setShinchokuJokyo(ShinsakaiShinchokuJokyo.toValue(shinsakaiKaisai.get介護認定審査会進捗状況()).get名称());
             }
             row.setDummyFlag(shinsakaiKaisai.isダミーフラグ());
             row.setGogitaiNo(shinsakaiKaisai.get合議体番号());
@@ -158,7 +156,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
         ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.開始予定時間, 開始予定時間);
         ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資料作成, 資料作成);
         ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.合議体番号, 合議体番号);
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.合議体名称, 合議体名称);
+        ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.合議体名称, row.getGogitaiMeisho());
         ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.予定定員, 予定定員);
         ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.割付人数, 割付人数);
         ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.処理日, 処理日);
@@ -230,8 +228,8 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
     private RString get介護認定審査会進捗状況(dgShinsakaiIchiran_Row row) {
         if (介護認定審査会進捗状況_開催済.equals(row.getShinchokuJokyo())) {
             return ShinsakaiShinchokuJokyo.未開催_割付完了.getコード();
-        } else if (ShinsakaiShinchokuJokyo.中止.get名称().equals(row.getShinchokuJokyo())) {
-            return ShinsakaiShinchokuJokyo.中止.getコード();
+        } else if (!RString.isNullOrEmpty(row.getShinchokuJokyo())) {
+            return ShinsakaiShinchokuJokyo.valueOf(row.getShinchokuJokyo().toString()).getコード();
         } else {
             return ShinsakaiShinchokuJokyo.未開催.getコード();
         }

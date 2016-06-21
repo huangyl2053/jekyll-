@@ -1083,7 +1083,16 @@
         AND TO_CHAR(NOW(), 'YYYYMMDD') <![CDATA[<=]]> F."gogitaiYukoKikanShuryoYMD"
         LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" G
         ON C."shoKisaiHokenshaNo" = G."shoKisaiHokenshaNo"
-        WHERE A."gogitaiNo" = #{gogitaiNo}
+        WHERE
+        <choose>
+            <when test="!isEmptyGogitaiNo">
+                A."gogitaiNo" = #{gogitaiNo}
+            </when>
+            <otherwise>
+                A."gogitaiNo" IN
+                <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
+            </otherwise>
+        </choose>
         AND #{taishoGeppiFrom} <![CDATA[<=]]> A."shinsakaiKaisaiYMD"
         AND A."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
         AND G."shichosonCode" = #{shichosonCode}
@@ -1209,7 +1218,16 @@
         ON C."shinseishoKanriNo" = H."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" I
         ON I."shinseishoKanriNo" = H."zenkaiShinseishoKanriNo"
-        WHERE A."gogitaiNo" = #{gogitaiNo}
+        WHERE
+        <choose>
+            <when test="!isEmptyGogitaiNo">
+                A."gogitaiNo" = #{gogitaiNo}
+            </when>
+            <otherwise>
+                A."gogitaiNo" IN
+                <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
+            </otherwise>
+        </choose>
         AND #{taishoGeppiFrom} <![CDATA[<=]]> A."shinsakaiKaisaiYMD"
         AND A."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
         AND G."shichosonCode" = #{shichosonCode}
@@ -2700,7 +2718,16 @@
         AND TO_CHAR(NOW(), 'YYYYMMDD') <![CDATA[<=]]> G."gogitaiYukoKikanShuryoYMD"
         LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" H
         ON C."shoKisaiHokenshaNo" = H."shoKisaiHokenshaNo"
-        WHERE A."gogitaiNo" = #{gogitaiNo}
+        WHERE
+        <choose>
+            <when test="!isEmptyGogitaiNo">
+                A."gogitaiNo" = #{gogitaiNo}
+            </when>
+            <otherwise>
+                A."gogitaiNo" IN
+                <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
+            </otherwise>
+        </choose>
         AND #{taishoGeppiFrom} <![CDATA[<=]]> A."shinsakaiKaisaiYMD"
         AND A."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
         AND H."shichosonCode" = #{shichosonCode}

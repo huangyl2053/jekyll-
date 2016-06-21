@@ -1,41 +1,32 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3010002;
-
-/**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+/*
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * NinteiResult のクラスファイル
- *
+ * NinteiResult のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class NinteiResultDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
-    @JsonProperty("txtNinteiYMD")
-    private TextBoxFlexibleDate txtNinteiYMD;
-    @JsonProperty("txtYokaigodoCode")
-    private TextBoxCode txtYokaigodoCode;
-    @JsonProperty("txtYokaigodo")
-    private TextBox txtYokaigodo;
-    @JsonProperty("txtYukokikanTsukisu")
-    private TextBox txtYukokikanTsukisu;
-    @JsonProperty("txtNinteiYukoKaishiYMD")
-    private TextBoxFlexibleDate txtNinteiYukoKaishiYMD;
-    @JsonProperty("txtNinteiYukoShuryoYMD")
-    private TextBoxFlexibleDate txtNinteiYukoShuryoYMD;
-    @JsonProperty("NinteiResultEtcetera")
-    private NinteiResultEtceteraDiv NinteiResultEtcetera;
-    @JsonProperty("ShiteiServiceIchiran")
-    private ShiteiServiceIchiranDiv ShiteiServiceIchiran;
+    @JsonProperty("TxtToshoYukokikan")
+    private TextBoxDateRange TxtToshoYukokikan;
+    @JsonProperty("txtHakkoDate1")
+    private TextBoxFlexibleDate txtHakkoDate1;
+    @JsonProperty("txtHakkoDate2")
+    private TextBoxFlexibleDate txtHakkoDate2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -43,84 +34,59 @@ public class NinteiResultDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtNinteiYMD")
-    public TextBoxFlexibleDate getTxtNinteiYMD() {
-        return txtNinteiYMD;
+    /*
+     * getTxtToshoYukokikan
+     * @return TxtToshoYukokikan
+     */
+    @JsonProperty("TxtToshoYukokikan")
+    public TextBoxDateRange getTxtToshoYukokikan() {
+        return TxtToshoYukokikan;
     }
 
-    @JsonProperty("txtNinteiYMD")
-    public void setTxtNinteiYMD(TextBoxFlexibleDate txtNinteiYMD) {
-        this.txtNinteiYMD = txtNinteiYMD;
+    /*
+     * setTxtToshoYukokikan
+     * @param TxtToshoYukokikan TxtToshoYukokikan
+     */
+    @JsonProperty("TxtToshoYukokikan")
+    public void setTxtToshoYukokikan(TextBoxDateRange TxtToshoYukokikan) {
+        this.TxtToshoYukokikan = TxtToshoYukokikan;
     }
 
-    @JsonProperty("txtYokaigodoCode")
-    public TextBoxCode getTxtYokaigodoCode() {
-        return txtYokaigodoCode;
+    /*
+     * gettxtHakkoDate1
+     * @return txtHakkoDate1
+     */
+    @JsonProperty("txtHakkoDate1")
+    public TextBoxFlexibleDate getTxtHakkoDate1() {
+        return txtHakkoDate1;
     }
 
-    @JsonProperty("txtYokaigodoCode")
-    public void setTxtYokaigodoCode(TextBoxCode txtYokaigodoCode) {
-        this.txtYokaigodoCode = txtYokaigodoCode;
+    /*
+     * settxtHakkoDate1
+     * @param txtHakkoDate1 txtHakkoDate1
+     */
+    @JsonProperty("txtHakkoDate1")
+    public void setTxtHakkoDate1(TextBoxFlexibleDate txtHakkoDate1) {
+        this.txtHakkoDate1 = txtHakkoDate1;
     }
 
-    @JsonProperty("txtYokaigodo")
-    public TextBox getTxtYokaigodo() {
-        return txtYokaigodo;
+    /*
+     * gettxtHakkoDate2
+     * @return txtHakkoDate2
+     */
+    @JsonProperty("txtHakkoDate2")
+    public TextBoxFlexibleDate getTxtHakkoDate2() {
+        return txtHakkoDate2;
     }
 
-    @JsonProperty("txtYokaigodo")
-    public void setTxtYokaigodo(TextBox txtYokaigodo) {
-        this.txtYokaigodo = txtYokaigodo;
+    /*
+     * settxtHakkoDate2
+     * @param txtHakkoDate2 txtHakkoDate2
+     */
+    @JsonProperty("txtHakkoDate2")
+    public void setTxtHakkoDate2(TextBoxFlexibleDate txtHakkoDate2) {
+        this.txtHakkoDate2 = txtHakkoDate2;
     }
 
-    @JsonProperty("txtYukokikanTsukisu")
-    public TextBox getTxtYukokikanTsukisu() {
-        return txtYukokikanTsukisu;
-    }
-
-    @JsonProperty("txtYukokikanTsukisu")
-    public void setTxtYukokikanTsukisu(TextBox txtYukokikanTsukisu) {
-        this.txtYukokikanTsukisu = txtYukokikanTsukisu;
-    }
-
-    @JsonProperty("txtNinteiYukoKaishiYMD")
-    public TextBoxFlexibleDate getTxtNinteiYukoKaishiYMD() {
-        return txtNinteiYukoKaishiYMD;
-    }
-
-    @JsonProperty("txtNinteiYukoKaishiYMD")
-    public void setTxtNinteiYukoKaishiYMD(TextBoxFlexibleDate txtNinteiYukoKaishiYMD) {
-        this.txtNinteiYukoKaishiYMD = txtNinteiYukoKaishiYMD;
-    }
-
-    @JsonProperty("txtNinteiYukoShuryoYMD")
-    public TextBoxFlexibleDate getTxtNinteiYukoShuryoYMD() {
-        return txtNinteiYukoShuryoYMD;
-    }
-
-    @JsonProperty("txtNinteiYukoShuryoYMD")
-    public void setTxtNinteiYukoShuryoYMD(TextBoxFlexibleDate txtNinteiYukoShuryoYMD) {
-        this.txtNinteiYukoShuryoYMD = txtNinteiYukoShuryoYMD;
-    }
-
-    @JsonProperty("NinteiResultEtcetera")
-    public NinteiResultEtceteraDiv getNinteiResultEtcetera() {
-        return NinteiResultEtcetera;
-    }
-
-    @JsonProperty("NinteiResultEtcetera")
-    public void setNinteiResultEtcetera(NinteiResultEtceteraDiv NinteiResultEtcetera) {
-        this.NinteiResultEtcetera = NinteiResultEtcetera;
-    }
-
-    @JsonProperty("ShiteiServiceIchiran")
-    public ShiteiServiceIchiranDiv getShiteiServiceIchiran() {
-        return ShiteiServiceIchiran;
-    }
-
-    @JsonProperty("ShiteiServiceIchiran")
-    public void setShiteiServiceIchiran(ShiteiServiceIchiranDiv ShiteiServiceIchiran) {
-        this.ShiteiServiceIchiran = ShiteiServiceIchiran;
-    }
-
+    // </editor-fold>
 }
