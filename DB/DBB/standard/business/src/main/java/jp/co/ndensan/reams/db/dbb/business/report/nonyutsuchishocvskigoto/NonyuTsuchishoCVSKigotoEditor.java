@@ -171,7 +171,7 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
         }
 
         source.keisanMeisaishYen1 = EN;
-        if (item.get出力期リスト() != null
+        if (item.get出力期リスト() != null && !item.get出力期リスト().isEmpty()
                 && item.get出力期リスト().get(0) != null) {
             source.keisanMeisaishoKomokuTitle1 = new RString("第" + item.get出力期リスト().get(0).get期() + "期");
         } else {
