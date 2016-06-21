@@ -15,8 +15,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaschedule.NinteichosaS
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.NinteiChosaSchedulePanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.dgNinteiChosaSchedule_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.sukejurutouroku.SukejuruTourokuFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.DayOfWeek;
@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 認定調査スケジュール登録1の取得処理。
@@ -70,11 +69,11 @@ public class NinteiChosaScheduleHandler {
     private List<ChosaChiku> get対象地区List(List<ChikuShichosonBusiness> chikuList) {
         List<ChosaChiku> list = new ArrayList<>();
         for (ChikuShichosonBusiness chikuShichosonBusiness : chikuList) {
-            UzT0007CodeEntity entity = CodeMaster.getCode(SubGyomuCode.DBE認定支援,
-                    new CodeShubetsu("5002"), chikuShichosonBusiness.getChosaChikuCode(), FlexibleDate.getNowDate());
+            RString 調査地区名称 = CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
+                    DBECodeShubetsu.調査地区コード.getコード(), chikuShichosonBusiness.getChosaChikuCode(), FlexibleDate.getNowDate());
             ChosaChiku chiku = new ChosaChiku();
-            if (entity != null) {
-                chiku.set調査地区名称(entity.getコード名称());
+            if (!RString.isNullOrEmpty(調査地区名称)) {
+                chiku.set調査地区名称(調査地区名称);
                 chiku.set調査地区コード(chikuShichosonBusiness.getChosaChikuCode().getColumnValue());
                 list.add(chiku);
             } else {

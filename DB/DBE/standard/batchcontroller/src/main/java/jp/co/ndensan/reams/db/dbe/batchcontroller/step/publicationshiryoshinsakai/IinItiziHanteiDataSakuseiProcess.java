@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.publicationshiryoshinsakai;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.publicationshiryoshinsakai.IchijihanteikekkahyoItemSettei;
 import jp.co.ndensan.reams.db.dbe.business.report.ichijihanteikekkahyoa3.IchijihanteikekkahyoA3Report;
@@ -28,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -39,8 +42,13 @@ public class IinItiziHanteiDataSakuseiProcess extends BatchKeyBreakBase<ItiziHan
 
     private static final RString SELECT_NINTEITIZIHANTEI = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.publicationshiryoshinsakai.IShiryoShinsakaiIinMapper.getItiziHantei");
+    private static final List<RString> PAGE_BREAK_KEYS_A3 = Collections.unmodifiableList(Arrays.asList(
+            new RString(IchijihanteikekkahyoA3ReportSource.ReportSourceFields.shinseiCount.name())));
+    private static final List<RString> PAGE_BREAK_KEYS_A4 = Collections.unmodifiableList(Arrays.asList(
+            new RString(IchijihanteikekkahyoA4ReportSource.ReportSourceFields.shinseiCount.name())));
     private static final RString 出力スタイル_A4 = new RString("1");
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
+    private IchijihanteikekkahyoItem item;
     private IShiryoShinsakaiIinMapper mapper;
     List<ItiziHanteiEntity> itiziHanteiEntityList;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
@@ -77,7 +85,7 @@ public class IinItiziHanteiDataSakuseiProcess extends BatchKeyBreakBase<ItiziHan
         }
         List<NinteichosahyoTokkijikoEntity> 特記事項情報 = mapper.getNinteichosahyoTokkijiko(myBatisParameter);
         IchijihanteikekkahyoItemSettei itemSettei = new IchijihanteikekkahyoItemSettei();
-        IchijihanteikekkahyoItem item = itemSettei.set項目(entity, 特記事項情報, paramter, itiziHanteiEntityList);
+        item = itemSettei.set項目(entity, 特記事項情報, paramter, itiziHanteiEntityList);
         if (出力スタイル_A4.equals(paramter.getShuturyokuSutairu())) {
             IchijihanteikekkahyoA3Report report = new IchijihanteikekkahyoA3Report(item);
             report.writeBy(reportSourceWriterA3);
@@ -89,15 +97,30 @@ public class IinItiziHanteiDataSakuseiProcess extends BatchKeyBreakBase<ItiziHan
 
     @Override
     protected void createWriter() {
-        batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517085.getReportId().value()).create();
-        reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);
-        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517038.getReportId().value()).create();
-        reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);
+        if (出力スタイル_A4.equals(paramter.getShuturyokuSutairu())) {
+            batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517038.getReportId().value())
+                    .addBreak(new BreakerCatalog<IchijihanteikekkahyoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A4))
+                    .create();
+            reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);
+        } else {
+            batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517085.getReportId().value())
+                    .addBreak(new BreakerCatalog<IchijihanteikekkahyoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
+                    .create();
+            reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);
+        }
     }
 
     @Override
     protected void keyBreakProcess(ItiziHanteiEntity t) {
-        hasBrek(getBefore(), t);
+        if (hasBrek(getBefore(), t)) {
+            if (出力スタイル_A4.equals(paramter.getShuturyokuSutairu())) {
+                IchijihanteikekkahyoA4Report report = new IchijihanteikekkahyoA4Report(item);
+                report.writeBy(reportSourceWriterA4);
+            } else {
+                IchijihanteikekkahyoA3Report report = new IchijihanteikekkahyoA3Report(item);
+                report.writeBy(reportSourceWriterA3);
+            }
+        }
     }
 
     private boolean hasBrek(ItiziHanteiEntity before, ItiziHanteiEntity current) {

@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.publicationshiryoshinsakai;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaikaisaioshirasetsuchi.ShinsakaiKaisaiOshiraseTsuchiReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
@@ -29,7 +31,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -39,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -46,13 +49,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0150-200 linghuhang
  */
-public class IinTuutishoDataSakuseiProcess extends BatchProcessBase<ShinsakaiIinCodeEntity> {
+public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIinCodeEntity> {
 
     private static final RString SELECT_IINCODE = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.publicationshiryoshinsakai.IShiryoShinsakaiIinMapper.getShinsakaiIinCode");
     private IinTuutishoProcessParameter paramter;
     private IShiryoShinsakaiIinMapper mapper;
     private IinTuutishoMyBatisParameter myBatisParameter;
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
+            new RString(ShinsakaiKaisaiOshiraseTsuchiReportSource.ReportSourceFields.pageCount.name())));
+    private ShinsakaiKaisaiOshiraseTsuchiItem item;
     @BatchWriter
     private BatchReportWriter<ShinsakaiKaisaiOshiraseTsuchiReportSource> batchWrite;
     private ReportSourceWriter<ShinsakaiKaisaiOshiraseTsuchiReportSource> reportSourceWriter;
@@ -71,7 +77,7 @@ public class IinTuutishoDataSakuseiProcess extends BatchProcessBase<ShinsakaiIin
     }
 
     @Override
-    protected void process(ShinsakaiIinCodeEntity entity) {
+    protected void usualProcess(ShinsakaiIinCodeEntity entity) {
         myBatisParameter.setShinsakaiIinCode(entity.getShinsakaiIinCode());
         List<ShinsakaiYoteiJohoEntity> 委員情報 = mapper.getShinsakaiYoteiJoho(myBatisParameter);
         DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity dbT5595Entity = mapper.get宛先情報(myBatisParameter);
@@ -94,8 +100,8 @@ public class IinTuutishoDataSakuseiProcess extends BatchProcessBase<ShinsakaiIin
             }
         }
         for (ShinsakaiYoteiJohoEntity 情報 : 委員情報) {
-            ShinsakaiKaisaiOshiraseTsuchiItem item = new ShinsakaiKaisaiOshiraseTsuchiItem();
-            通知文設定(item, 情報, psmJohoEntity);
+            item = new ShinsakaiKaisaiOshiraseTsuchiItem();
+            通知文設定(情報, psmJohoEntity);
             ShinsakaiKaisaiOshiraseTsuchiReport report = new ShinsakaiKaisaiOshiraseTsuchiReport(item);
             report.writeBy(reportSourceWriter);
         }
@@ -103,7 +109,9 @@ public class IinTuutishoDataSakuseiProcess extends BatchProcessBase<ShinsakaiIin
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE515001.getReportId().value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE515001.getReportId().value())
+                .addBreak(new BreakerCatalog<ShinsakaiKaisaiOshiraseTsuchiReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
@@ -112,7 +120,7 @@ public class IinTuutishoDataSakuseiProcess extends BatchProcessBase<ShinsakaiIin
         outputJokenhyoFactory();
     }
 
-    private void 通知文設定(ShinsakaiKaisaiOshiraseTsuchiItem item, ShinsakaiYoteiJohoEntity 委員情報, PsmJohoEntity psmJohoEntity) {
+    private void 通知文設定(ShinsakaiYoteiJohoEntity 委員情報, PsmJohoEntity psmJohoEntity) {
         FlexibleDate 基準日 = new FlexibleDate(RDate.getNowDate().toDateString());
         NinshoshaSource 認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE515001.getReportId(),
                 基準日, NinshoshaDenshikoinshubetsuCode.保険者印, reportSourceWriter);
@@ -135,8 +143,8 @@ public class IinTuutishoDataSakuseiProcess extends BatchProcessBase<ShinsakaiIin
         item.set宛名機関名(psmJohoEntity.getKikanMeisho());
         item.set宛名名称付与(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書_宛先敬称, 発行日, SubGyomuCode.DBE認定支援));
         item.set発行日(発行日);
-        item.set通知文1(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE011001.getReportId(), KamokuCode.EMPTY, パターン番号, 1, 基準日));
-        item.set通知文2(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE011001.getReportId(), KamokuCode.EMPTY, パターン番号, 2, 基準日));
+        item.set通知文1(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE515001.getReportId(), KamokuCode.EMPTY, パターン番号, 1, 基準日));
+        item.set通知文2(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE515001.getReportId(), KamokuCode.EMPTY, パターン番号, 2, 基準日));
         item.set開催予定年月日(paramter.getShinsakaiKaisaiYoteiYMD());
         item.set予定時刻(paramter.getShinsakaiKaishiYoteiTime());
         item.set開催会場(paramter.getShinsakaiKaisaiBashoName());
@@ -155,14 +163,14 @@ public class IinTuutishoDataSakuseiProcess extends BatchProcessBase<ShinsakaiIin
                 item.set電話番号(委員情報.getShinsakaiKaisaiBashoTelNo().getColumnValue());
             }
         }
-        item.set通知文3(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE011001.getReportId(), KamokuCode.EMPTY, パターン番号, 項目番号, 基準日));
+        item.set通知文3(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE515001.getReportId(), KamokuCode.EMPTY, パターン番号, 項目番号, 基準日));
     }
 
     private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         List<RString> list = new ArrayList<>();
-        EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                ReportIdDBE.DBE011001.getReportId().getColumnValue(),
+        EucFileOutputJokenhyoItem jokenhyoItem = new EucFileOutputJokenhyoItem(
+                ReportIdDBE.DBE515001.getReportId().getColumnValue(),
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
@@ -170,6 +178,18 @@ public class IinTuutishoDataSakuseiProcess extends BatchProcessBase<ShinsakaiIin
                 new RString("1"),
                 RString.EMPTY,
                 list);
-        OutputJokenhyoFactory.createInstance(item).print();
+        OutputJokenhyoFactory.createInstance(jokenhyoItem).print();
+    }
+
+    @Override
+    protected void keyBreakProcess(ShinsakaiIinCodeEntity current) {
+        if (hasBrek(getBefore(), current)) {
+            ShinsakaiKaisaiOshiraseTsuchiReport report = new ShinsakaiKaisaiOshiraseTsuchiReport(item);
+            report.writeBy(reportSourceWriter);
+        }
+    }
+
+    private boolean hasBrek(ShinsakaiIinCodeEntity before, ShinsakaiIinCodeEntity current) {
+        return !before.getShinsakaiIinCode().equals(current.getShinsakaiIinCode());
     }
 }

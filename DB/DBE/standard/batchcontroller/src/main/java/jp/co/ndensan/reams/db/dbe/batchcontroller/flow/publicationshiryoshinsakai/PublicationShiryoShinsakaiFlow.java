@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.publicationshiryoshinsaka
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.publicationshiryoshinsakai.IinTokkiJikouItiziHanteiDataSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.publicationshiryoshinsakai.IinTuikaSiryoDataSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.publicationshiryoshinsakai.IinTuutishoDataSakuseiProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.publicationshiryoshinsakai.ShinsakaiKaisaiYoteiJohoUpdateProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.publicationshiryoshinsakai.SonotaJohoDataSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.publicationshiryoshinsakai.PublicationShiryoShinsakaiBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -38,6 +39,7 @@ public class PublicationShiryoShinsakaiFlow extends BatchFlowBase<PublicationShi
     private static final String 委員_追加資料鑑 = "iinTuikaSiryo";
     private static final String 委員_概況特記 = "iinTokkiIran";
     private static final String 委員_その他資料 = "iinSonotaJoho";
+    private static final String 審査会開催予定情報更新 = "kousin";
     private static final RString 選択 = new RString("1");
     private static final RString 作成条件_範囲指定 = new RString("範囲指定");
     private static final RString 作成条件_追加分 = new RString("追加分");
@@ -48,15 +50,17 @@ public class PublicationShiryoShinsakaiFlow extends BatchFlowBase<PublicationShi
                 && !作成条件_範囲指定.equals(getParameter().getSakuseiJoken())) {
             executeStep(委員_審査会開催通知書);
         }
-        if (選択.equals(getParameter().getChohyoIin_tokkiJikouFalg())) {
-            executeStep(委員_特記事項);
-        }
+        // TODO 帳票実装しない。
+//        if (選択.equals(getParameter().getChohyoIin_tokkiJikouFalg())) {
+//            executeStep(委員_特記事項);
+//        }
         if (選択.equals(getParameter().getChohyoIin_itiziHanteiFalg())) {
             executeStep(委員_一次判定結果);
         }
-        if (選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())) {
-            executeStep(委員_特記事項_一次判定結果);
-        }
+        // TODO 帳票実装しない。
+//        if (選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())) {
+//            executeStep(委員_特記事項_一次判定結果);
+//        }
         if (選択.equals(getParameter().getChohyoIin_ikenshoFalg())) {
             executeStep(委員_主治医意見書);
         }
@@ -74,8 +78,10 @@ public class PublicationShiryoShinsakaiFlow extends BatchFlowBase<PublicationShi
                 executeStep(委員_追加資料鑑);
             }
         }
-        executeStep(委員_概況特記);
+        // TODO 帳票実装しない。
+//        executeStep(委員_概況特記);
         executeStep(委員_その他資料);
+        executeStep(審査会開催予定情報更新);
     }
 
     /**
@@ -186,5 +192,16 @@ public class PublicationShiryoShinsakaiFlow extends BatchFlowBase<PublicationShi
     protected IBatchFlowCommand createSonotaJohoData() {
         return loopBatch(SonotaJohoDataSakuseiProcess.class)
                 .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+    }
+
+    /**
+     * 審査会開催予定情報更新の作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(審査会開催予定情報更新)
+    protected IBatchFlowCommand createKosinData() {
+        return loopBatch(ShinsakaiKaisaiYoteiJohoUpdateProcess.class)
+                .arguments(getParameter().toIinItiziHanteiProcessParameter()).define();
     }
 }

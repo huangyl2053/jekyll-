@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbe.business.report.iinsonotashiryosakusei;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.iinsonotashiryosakusei.IinSonotashiryoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinsonotashiryosakusei.SonotashiryoA3ReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 委員用その他資料のEditorです。
@@ -55,6 +58,11 @@ public class IinSonotashiryoSakuseiA3Editor implements IIinSonotashiryoSakuseiA3
         source.sakuseiGengo = item.getSakuseiGengo();
         source.shinsaGengo = item.getShinsaGengo();
         source.shinseiGengo = item.getShinseiGengo();
+        if (item.get申請書管理番号() == null) {
+            source.hishokenshaNo = null;
+        } else {
+            source.hishokenshaNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
+        }
         return source;
     }
 }

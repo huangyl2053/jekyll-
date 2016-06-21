@@ -49,11 +49,17 @@ public class PublicationShiryoShinsakaiValidationHandler {
         RString 作成条件 = div.getRadSakuseiJokenType().getSelectedKey();
         Decimal 印刷範囲指定開始 = div.getTxtShiryoNoStart().getValue();
         Decimal 印刷範囲指定終了 = div.getTxtSiryoNoEnd().getValue();
-        if (事務部数 == null || 事務部数.intValue() == 0 || 委員部数 == null || 委員部数.intValue() == 0) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.部数未入力, div.getTxtCopyNumForJimukyoku1(), div.getTxtCopyNumForShinsakaiIin1()));
+        if (事務部数 == null || 事務部数.intValue() == 0) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.部数未入力, div.getTxtCopyNumForJimukyoku1()));
         }
-        if (事務帳票 == null || 事務帳票.isEmpty() || 委員帳票 == null || 委員帳票.isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.印刷帳票未選択, div.getChkPrintChoyoJimu(), div.getChkPrintChohyoIin()));
+        if (委員部数 == null || 委員部数.intValue() == 0) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.部数未入力, div.getTxtCopyNumForShinsakaiIin1()));
+        }
+        if (事務帳票 == null || 事務帳票.isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.印刷帳票未選択, div.getChkPrintChoyoJimu()));
+        }
+        if (委員帳票 == null || 委員帳票.isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.印刷帳票未選択, div.getChkPrintChohyoIin()));
         }
         if (作成条件_範囲指定.equals(作成条件)) {
             if (印刷範囲指定開始 == null || 印刷範囲指定開始.intValue() == 0 || 印刷範囲指定終了 == null || 印刷範囲指定終了.intValue() == 0) {
