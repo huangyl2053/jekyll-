@@ -17,28 +17,28 @@
 
             ModeController.prototype.priorities = function () {
                 return [
-                    "表示モード",
-                    "保険者"
+                    "HyojiMode",
+                    "Hokensha"
                 ];
             };
 
-            ModeController.prototype.表示モード = function () {
-                return new Modes.表示モード(this.controls);
+            ModeController.prototype.HyojiMode = function () {
+                return new Modes.HyojiMode(this.controls);
             };
 
-            ModeController.prototype.保険者 = function () {
-                return new Modes.保険者(this.controls);
+            ModeController.prototype.Hokensha = function () {
+                return new Modes.Hokensha(this.controls);
             };
             return ModeController;
         })();
         HihokenshaFinder.ModeController = ModeController;
 
         (function (Modes) {
-            var 表示モード = (function () {
-                function 表示モード(controls) {
+            var HyojiMode = (function () {
+                function HyojiMode(controls) {
                     this.controls = controls;
                 }
-                表示モード.prototype.資格系 = function () {
+                HyojiMode.prototype.Shikakukei = function () {
                     this.controls.txtTuchishoNo().visible = false;
                     this.controls.txtTuchishoNo().displayNone = true;
                     this.controls.ddlFukaNendo().visible = false;
@@ -49,7 +49,7 @@
                     this.controls.chkJushochiTokureisha().displayNone = false;
                 };
 
-                表示モード.prototype.賦課系 = function () {
+                HyojiMode.prototype.Fukakei = function () {
                     this.controls.txtTuchishoNo().visible = true;
                     this.controls.txtTuchishoNo().displayNone = false;
                     this.controls.ddlFukaNendo().visible = true;
@@ -59,26 +59,26 @@
                     this.controls.chkJushochiTokureisha().visible = false;
                     this.controls.chkJushochiTokureisha().displayNone = true;
                 };
-                return 表示モード;
+                return HyojiMode;
             })();
-            Modes.表示モード = 表示モード;
+            Modes.HyojiMode = HyojiMode;
 
-            var 保険者 = (function () {
-                function 保険者(controls) {
+            var Hokensha = (function () {
+                function Hokensha(controls) {
                     this.controls = controls;
                 }
-                保険者.prototype.表示する = function () {
+                Hokensha.prototype.HyojiSuru = function () {
                     this.controls.ddlHokensha().visible = true;
                     this.controls.ddlHokensha().displayNone = false;
                 };
 
-                保険者.prototype.表示しない = function () {
+                Hokensha.prototype.HyojiShinai = function () {
                     this.controls.ddlHokensha().visible = false;
                     this.controls.ddlHokensha().displayNone = true;
                 };
-                return 保険者;
+                return Hokensha;
             })();
-            Modes.保険者 = 保険者;
+            Modes.Hokensha = Hokensha;
         })(HihokenshaFinder.Modes || (HihokenshaFinder.Modes = {}));
         var Modes = HihokenshaFinder.Modes;
     })(DBZ.HihokenshaFinder || (DBZ.HihokenshaFinder = {}));

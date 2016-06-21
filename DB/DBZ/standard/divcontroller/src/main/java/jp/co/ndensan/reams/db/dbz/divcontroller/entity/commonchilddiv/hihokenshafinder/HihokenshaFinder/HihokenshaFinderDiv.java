@@ -132,21 +132,21 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
     @JsonProperty("modes")
     private HashSet<Mode> modes;
 
-    public static enum 保険者 implements ICommonChildDivMode {
+    public static enum Hokensha implements ICommonChildDivMode {
 
-        表示する("表示する"),
-        表示しない("表示しない");
+        HyojiSuru("HyojiSuru"),
+        HyojiShinai("HyojiShinai");
 
         private final String name;
 
-        private 保険者(final String name) {
+        private Hokensha(final String name) {
             this.name = name;
         }
 
-        public static 保険者 getEnum(String str) {
-            保険者[] enumArray = 保険者.values();
+        public static Hokensha getEnum(String str) {
+            Hokensha[] enumArray = Hokensha.values();
 
-            for (保険者 enumStr : enumArray) {
+            for (Hokensha enumStr : enumArray) {
                 if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
@@ -161,29 +161,29 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
 
     }
 
-    public 保険者 getMode_保険者() {
-        return (保険者) _CommonChildDivModeUtil.getMode( this.modes, 保険者.class );
+    public Hokensha getMode_Hokensha() {
+        return (Hokensha) _CommonChildDivModeUtil.getMode( this.modes, Hokensha.class );
     }
 
-    public void setMode_保険者( 保険者 value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 保険者.class , value );
+    public void setMode_Hokensha( Hokensha value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, Hokensha.class , value );
     }
 
-    public static enum 表示モード implements ICommonChildDivMode {
+    public static enum HyojiMode implements ICommonChildDivMode {
 
-        資格系("資格系"),
-        賦課系("賦課系");
+        Shikakukei("Shikakukei"),
+        Fukakei("Fukakei");
 
         private final String name;
 
-        private 表示モード(final String name) {
+        private HyojiMode(final String name) {
             this.name = name;
         }
 
-        public static 表示モード getEnum(String str) {
-            表示モード[] enumArray = 表示モード.values();
+        public static HyojiMode getEnum(String str) {
+            HyojiMode[] enumArray = HyojiMode.values();
 
-            for (表示モード enumStr : enumArray) {
+            for (HyojiMode enumStr : enumArray) {
                 if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
@@ -198,12 +198,12 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
 
     }
 
-    public 表示モード getMode_表示モード() {
-        return (表示モード) _CommonChildDivModeUtil.getMode( this.modes, 表示モード.class );
+    public HyojiMode getMode_HyojiMode() {
+        return (HyojiMode) _CommonChildDivModeUtil.getMode( this.modes, HyojiMode.class );
     }
 
-    public void setMode_表示モード( 表示モード value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 表示モード.class , value );
+    public void setMode_HyojiMode( HyojiMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, HyojiMode.class , value );
     }
 
     // </editor-fold>
