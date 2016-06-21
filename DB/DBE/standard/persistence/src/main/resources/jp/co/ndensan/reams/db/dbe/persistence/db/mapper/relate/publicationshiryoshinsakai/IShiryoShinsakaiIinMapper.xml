@@ -688,6 +688,7 @@
             SELECT
                 dbt5502."shinsakaiOrder" AS dbt5502_shinsakaiOrder,
                 dbt7051."shichosonMeisho" AS dbt7051_shichosonMeisho,
+                dbt5101."hihokenshaKubunCode" AS dbt5101_hihokenshaKubunCode,
                 dbt5101."ninteiShinseiShinseijiKubunCode" AS dbt5101_shinseijiKubunCode,
                 dbt5101."hihokenshaNo" AS dbt5101_hihokenshaNo,
                 dbt5101."hihokenshaName" AS dbt5101_hihokenshaName,
@@ -1365,6 +1366,7 @@
             <result property="shinsakaiOrder" column="dbt5502_shinsakaiOrder" />
             <result property="shichosonMeisho" column="dbt7051_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
             <result property="shinseijiKubunCode" column="dbt5101_shinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+            <result property="hihokenshaKubunCode" column="dbt5101_hihokenshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
             <result property="hihokenshaNo" column="dbt5101_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
             <result property="hihokenshaName" column="dbt5101_hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
             <result property="seibetsu" column="dbt5101_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
