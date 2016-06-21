@@ -47,6 +47,10 @@ public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJu
     private RString hdnChohyoDokujiHensyuHoho;
     @JsonProperty("hdnChohyoDokujiKatagaki")
     private RString hdnChohyoDokujiKatagaki;
+    @JsonProperty("hdnサブ業務コード")
+    private RString hdnサブ業務コード;
+    @JsonProperty("hdn帳票分類ID")
+    private RString hdn帳票分類ID;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -196,6 +200,42 @@ public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJu
     @JsonProperty("hdnChohyoDokujiKatagaki")
     public void setHdnChohyoDokujiKatagaki(RString hdnChohyoDokujiKatagaki) {
         this.hdnChohyoDokujiKatagaki = hdnChohyoDokujiKatagaki;
+    }
+
+    /*
+     * gethdnサブ業務コード
+     * @return hdnサブ業務コード
+     */
+    @JsonProperty("hdnサブ業務コード")
+    public RString getHdnサブ業務コード() {
+        return hdnサブ業務コード;
+    }
+
+    /*
+     * sethdnサブ業務コード
+     * @param hdnサブ業務コード hdnサブ業務コード
+     */
+    @JsonProperty("hdnサブ業務コード")
+    public void setHdnサブ業務コード(RString hdnサブ業務コード) {
+        this.hdnサブ業務コード = hdnサブ業務コード;
+    }
+
+    /*
+     * gethdn帳票分類ID
+     * @return hdn帳票分類ID
+     */
+    @JsonProperty("hdn帳票分類ID")
+    public RString getHdn帳票分類ID() {
+        return hdn帳票分類ID;
+    }
+
+    /*
+     * sethdn帳票分類ID
+     * @param hdn帳票分類ID hdn帳票分類ID
+     */
+    @JsonProperty("hdn帳票分類ID")
+    public void setHdn帳票分類ID(RString hdn帳票分類ID) {
+        this.hdn帳票分類ID = hdn帳票分類ID;
     }
 
     /*
