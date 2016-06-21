@@ -7,8 +7,11 @@ package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishiryoa4;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa3.ShinsakaishiryoItem;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa4.ShinsakaishiryoA4ReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 事務局用介護認定審査対象者一覧表A4のEditorクラスです。
@@ -57,6 +60,12 @@ public class ShinsakaishiryoA4Editor implements IShinsakaishiryoA4Editor {
         source.list1_11 = item.get基準時間();
         source.list1_12 = RString.EMPTY;
         source.list1_13 = RString.EMPTY;
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        if (item.get申請書管理番号() == null) {
+            source.shinseishoKanriNo = null;
+        } else {
+            source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
+        }
         return source;
     }
 

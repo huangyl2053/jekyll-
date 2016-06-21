@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishiryoa3;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa3.ShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa3.ShinsakaishiryoItem;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -15,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 事務局用介護認定審査対象者一覧表A3のEditorクラスです。
@@ -79,6 +82,12 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
             source.listShinsei1_11 = RString.EMPTY;
             source.listZenkaiｙukokikan1_1 = get二時判定認定有効年月日();
             source.listYukokikan1_1 = RString.EMPTY;
+        }
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        if (item.get申請書管理番号() == null) {
+            source.shinseishoKanriNo = null;
+        } else {
+            source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
         }
         return source;
     }

@@ -13,11 +13,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1390-120 dongyabin
  */
-public class NinteichosaIraiHenkoDataChange {
+public final class NinteichosaIraiHenkoDataChange {
 
     private static NinteichosaIraiHenkoData data;
     private static int indexTmp;
     private static int index;
+
+    private NinteichosaIraiHenkoDataChange() {
+    }
 
     /**
      * 認定調査依頼先変更者のパラメータを作成します。
@@ -52,12 +55,15 @@ public class NinteichosaIraiHenkoDataChange {
                         nowEntity.getChosainShimei(),
                         new RString(indexTmp));
             }
-            if (index == count) {
+            if (index == count && indexTmp > 0) {
+                indexTmp = 0;
                 return data;
             }
         } else {
-            indexTmp = 0;
-            return data;
+            if (indexTmp > 0) {
+                indexTmp = 0;
+                return data;
+            }
         }
         return null;
     }

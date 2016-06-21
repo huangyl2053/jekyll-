@@ -152,39 +152,21 @@ public class KaigoJyuminhyouHandler {
         div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().setSelectable(true);
         div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().setModifyButtonState(DataGridButtonState.Enabled);
         div.getKonkaiInfoInput().setIsOpen(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
+        List<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgRowList = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getDataSource();
+        int rowcount = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().getId();
+        dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = dgRowList.get(rowcount);
         if (div.getKonkaiInfoInput().getChkZenken().isAllSelected()) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
-            List<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgRowList = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getDataSource();
-            int rowcount = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().getId();
-            dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = dgRowList.get(rowcount);
             dgRow.getTxtZenkenSakusei().setValue(new RString("する"));
             dgRow.getTxtKonkaiStSakuseiYMD().clearValue();
             dgRow.getTxtKonkaiStSakuseiTime().clearValue();
-            dgRowList.set(rowcount, dgRow);
-            div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().setDataSource(dgRowList);
         } else {
-            if (div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().getValue() == null) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
-                List<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgRowList = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getDataSource();
-                int rowcount = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().getId();
-                dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = dgRowList.get(rowcount);
-                dgRow.getTxtZenkenSakusei().setValue(RString.EMPTY);
-                dgRow.getTxtKonkaiStSakuseiYMD().setValue(div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().getValue());
-                dgRow.getTxtKonkaiStSakuseiTime().setValue(div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().getValue());
-                dgRowList.set(rowcount, dgRow);
-                div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().setDataSource(dgRowList);
-            } else {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
-                List<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgRowList = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getDataSource();
-                int rowcount = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().getId();
-                dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = dgRowList.get(rowcount);
-                dgRow.getTxtZenkenSakusei().setValue(RString.EMPTY);
-                dgRow.getTxtKonkaiStSakuseiYMD().setValue(div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().getValue());
-                dgRow.getTxtKonkaiStSakuseiTime().setValue(div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().getValue());
-                dgRowList.set(rowcount, dgRow);
-                div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().setDataSource(dgRowList);
-            }
+            dgRow.getTxtZenkenSakusei().setValue(RString.EMPTY);
+            dgRow.getTxtKonkaiStSakuseiYMD().setValue(div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().getValue());
+            dgRow.getTxtKonkaiStSakuseiTime().setValue(div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().getValue());
         }
+        dgRowList.set(rowcount, dgRow);
+        div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().setDataSource(dgRowList);
     }
 
     private KaigoJyuminValidationHandler createValidationHandler(KobetsuJikoRenkeiInfoSakuseiKoikiDiv div) {

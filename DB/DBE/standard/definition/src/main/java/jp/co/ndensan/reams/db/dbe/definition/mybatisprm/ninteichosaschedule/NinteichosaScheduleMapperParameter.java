@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosaschedule;
+package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaschedule;
 
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

@@ -329,7 +329,7 @@ public final class ReportUtil {
             return chohyoShutsuryokujunFinder.get出力順(subGyomuCode,
                     reportId,
                     reamsLoginID,
-                    new Long(shutsuryokujunId.toString()));
+                    Long.valueOf(shutsuryokujunId.toString()));
         }
         return null;
     }

@@ -3,17 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteikekkajoho;
+package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinseijoho;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
- * 要介護認定結果情報を特定するためのMyBatis用パラメータクラスです。
+ * 要介護認定申請情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public final class NinteiKekkaJohoMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class NinteiShinseiJohoMapperParameter {
+
+    private final ShinseishoKanriNo shinseishoKanriNo;
 
     /**
      * コンストラクタです。
@@ -21,10 +23,12 @@ public final class NinteiKekkaJohoMapperParameter {
      * @param shinseishoKanriNo 申請書管理番号
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
-    private NinteiKekkaJohoMapperParameter(
+    private NinteiShinseiJohoMapperParameter(
             ShinseishoKanriNo shinseishoKanriNo) {
 
-        requireNonNull(shinseishoKanriNo, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        this.shinseishoKanriNo = requireNonNull(shinseishoKanriNo,
+                jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages.値がnull.getReplacedMessage(
+                        "申請書管理番号"));
     }
 
     /**
@@ -33,9 +37,8 @@ public final class NinteiKekkaJohoMapperParameter {
      * @param shinseishoKanriNo 申請書管理番号
      * @return 要介護認定結果情報を特定するためのMyBatis用パラメータ
      */
-    public static NinteiKekkaJohoMapperParameter createParam(
+    public static NinteiShinseiJohoMapperParameter createParam(
             ShinseishoKanriNo shinseishoKanriNo) {
-        return new NinteiKekkaJohoMapperParameter(shinseishoKanriNo);
+        return new NinteiShinseiJohoMapperParameter(shinseishoKanriNo);
     }
-
 }

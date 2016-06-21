@@ -81,9 +81,11 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
             //if (RDate.getNowDateTime().isBefore(shoriDateKanriEntity.getTaishoShuryoTimestamp().getRDateTime())) {
             //TODO 技術点NO:31　バッチメッセージの出力　DBZErrorMessage．DBZE00006を返して、バッチ処理終了。
             //}
-            if (shoriDateKanriEntity.getTaishoShuryoTimestamp() == null) {
-                processParameter.setTaishoKaishiTimestamp(null);
-            } else {
+            YMDHMS taishoShuryoTimestamp = null;
+            if (shoriDateKanriEntity != null) {
+                taishoShuryoTimestamp = shoriDateKanriEntity.getTaishoShuryoTimestamp();
+            }
+            if (taishoShuryoTimestamp != null) {
                 processParameter.setTaishoKaishiTimestamp(shoriDateKanriEntity.getTaishoShuryoTimestamp().getRDateTime());
             }
             processParameter.setTaishoShuryoTimestamp(RDate.getNowDateTime());

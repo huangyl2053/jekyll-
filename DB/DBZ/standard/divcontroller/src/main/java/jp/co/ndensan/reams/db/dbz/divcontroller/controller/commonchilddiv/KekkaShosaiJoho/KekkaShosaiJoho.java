@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.kekkashosaijoho.KekkaShosaiJohoModel;
 import jp.co.ndensan.reams.db.dbz.business.core.kekkashosaijoho.KekkaShosaiJohoOutModel;
 import jp.co.ndensan.reams.db.dbz.business.core.kekkashosaijoho.KekkaShosaiJohoServiceShuri;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputDataPassModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KekkaShosaiJoho.KekkaShosaiJoho.KekkaShosaiJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KekkaShosaiJoho.KekkaShosaiJoho.KekkaShosaiJohoValidationHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.dgServiceIchiran_Row;
@@ -59,20 +60,30 @@ public class KekkaShosaiJoho {
             div.getCcdNinteiInput().set状態(モード_入力);
             div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.ShokaiMode);
             div.setMode_ShoriType(KekkaShosaiJohoDiv.ShoriType.InputMode);
+            NinteiInputDataPassModel passModel = new NinteiInputDataPassModel();
+            passModel.setSubGyomuCode(model.getDataPassModel().getSubGyomuCode());
+            passModel.set厚労省IFコード(model.getDataPassModel().get厚労省IFコード());
+            passModel.set申請書管理番号(model.getDataPassModel().get申請書管理番号());
+            passModel.set認定区分(new RString("1"));
+            passModel.setみなし更新認定(new ArrayList<RString>());
+            div.getCcdNinteiInput().initialize(passModel);
+            div.getCcdShinseiSonotaJohoInput().initialize();
         }
-        div.getCcdNinteiInput().initialize(model.getDataPassModel());
-        div.getCcdShinseiSonotaJohoInput().initialize();
-        div.getCcdShinseiSonotaJohoInput().set異動事由(model.getIdoJiyuCode());
-        div.getCcdShinseiSonotaJohoInput().set削除事由(model.getSakujoJiyuCode());
-        div.getCcdShinseiSonotaJohoInput().set理由(model.getRiyu());
-        div.getCcdShinseiSonotaJohoInput().set喪失日(model.getSoshitsuDay());
-        div.getCcdShinseiSonotaJohoInput().set取消日(model.getTorisageDay());
-        div.getCcdShinseiSonotaJohoInput().set当初認定期間From(model.getToshoNinteiKikanFrom());
-        div.getCcdShinseiSonotaJohoInput().set当初認定期間To(model.getToshoNinteiKikanTo());
-        div.getCcdShinseiSonotaJohoInput().set発行日１(model.getJukyuShikakuHakkoDay1());
-        div.getCcdShinseiSonotaJohoInput().set発行日2(model.getJukyuShikakuHakkoDay2());
-        div.getTxtShinseiKubunShinsei().setValue(model.getShinseiKubunShinsei());
-        div.getTxtShinseiKubunLaw().setValue(model.getShinseiKubunLaw());
+        if (!モード_入力.equals(mode)) {
+            div.getCcdNinteiInput().initialize(model.getDataPassModel());
+            div.getCcdShinseiSonotaJohoInput().initialize();
+            div.getCcdShinseiSonotaJohoInput().set異動事由(model.getIdoJiyuCode());
+            div.getCcdShinseiSonotaJohoInput().set削除事由(model.getSakujoJiyuCode());
+            div.getCcdShinseiSonotaJohoInput().set理由(model.getRiyu());
+            div.getCcdShinseiSonotaJohoInput().set喪失日(model.getSoshitsuDay());
+            div.getCcdShinseiSonotaJohoInput().set取消日(model.getTorisageDay());
+            div.getCcdShinseiSonotaJohoInput().set当初認定期間From(model.getToshoNinteiKikanFrom());
+            div.getCcdShinseiSonotaJohoInput().set当初認定期間To(model.getToshoNinteiKikanTo());
+            div.getCcdShinseiSonotaJohoInput().set発行日１(model.getJukyuShikakuHakkoDay1());
+            div.getCcdShinseiSonotaJohoInput().set発行日2(model.getJukyuShikakuHakkoDay2());
+            div.getTxtShinseiKubunShinsei().setValue(model.getShinseiKubunShinsei());
+            div.getTxtShinseiKubunLaw().setValue(model.getShinseiKubunLaw());
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -92,10 +103,10 @@ public class KekkaShosaiJoho {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             pairs.add(createValidationHandler(div).check有効開始日());
             pairs.add(createValidationHandler(div).checkサービス区分());
+            pairs.add(div.getCcdNinteiInput().開始終了日前後順check());
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
-            pairs.add(div.getCcdNinteiInput().開始終了日前後順check());
             pairs.add(createValidationHandler(div).check有効終了日());
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
