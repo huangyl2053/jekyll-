@@ -40,49 +40,47 @@ public class TokubetsuChoshuHeijunkaKakuteiCSVEntity {
     private RString 行政区コード;
     @CsvField(order = 110, name = "町域コード")
     private RString 町域コード;
-    @CsvField(order = 120, name = "住所")
-    private RString 住所;
-    @CsvField(order = 130, name = "町域_管内_管外住所")
+    @CsvField(order = 120, name = "町域_管内_管外住所")
     private RString 町域_管内_管外住所;
-    @CsvField(order = 140, name = "番地")
+    @CsvField(order = 130, name = "番地")
     private RString 番地;
-    @CsvField(order = 150, name = "保険料段階_仮算定時")
+    @CsvField(order = 140, name = "保険料段階_仮算定時")
     private RString 保険料段階_仮算定時;
-    @CsvField(order = 160, name = "今年度保険料率")
+    @CsvField(order = 150, name = "今年度保険料率")
     private RString 今年度保険料率;
-    @CsvField(order = 170, name = "特別徴収業務者コード")
+    @CsvField(order = 160, name = "特別徴収業務者コード")
     private RString 特別徴収業務者コード;
-    @CsvField(order = 180, name = "特別徴収業務者")
+    @CsvField(order = 170, name = "特別徴収業務者")
     private RString 特別徴収業務者;
-    @CsvField(order = 190, name = "特別徴収対象年金コード")
+    @CsvField(order = 180, name = "特別徴収対象年金コード")
     private RString 特別徴収対象年金コード;
-    @CsvField(order = 200, name = "特別徴収対象年金")
+    @CsvField(order = 190, name = "特別徴収対象年金")
     private RString 特別徴収対象年金;
-    @CsvField(order = 210, name = "変更前特徴額_１期")
+    @CsvField(order = 200, name = "変更前特徴額_１期")
     private RString 変更前特徴額_１期;
-    @CsvField(order = 220, name = "変更前特徴額_２期")
+    @CsvField(order = 210, name = "変更前特徴額_２期")
     private RString 変更前特徴額_２期;
-    @CsvField(order = 230, name = "変更前特徴額_３期")
+    @CsvField(order = 220, name = "変更前特徴額_３期")
     private RString 変更前特徴額_３期;
-    @CsvField(order = 240, name = "変更後特徴額_１期")
+    @CsvField(order = 230, name = "変更後特徴額_１期")
     private RString 変更後特徴額_１期;
-    @CsvField(order = 250, name = "変更後特徴額_２期")
+    @CsvField(order = 240, name = "変更後特徴額_２期")
     private RString 変更後特徴額_２期;
-    @CsvField(order = 260, name = "変更後特徴額_３期")
+    @CsvField(order = 250, name = "変更後特徴額_３期")
     private RString 変更後特徴額_３期;
-    @CsvField(order = 270, name = "普徴額_1期")
+    @CsvField(order = 260, name = "普徴額_1期")
     private RString 普徴額_1期;
-    @CsvField(order = 280, name = "普徴額_2期")
+    @CsvField(order = 270, name = "普徴額_2期")
     private RString 普徴額_2期;
-    @CsvField(order = 290, name = "普徴額_3期")
+    @CsvField(order = 280, name = "普徴額_3期")
     private RString 普徴額_3期;
-    @CsvField(order = 300, name = "普徴額_4期")
+    @CsvField(order = 290, name = "普徴額_4期")
     private RString 普徴額_4期;
-    @CsvField(order = 310, name = "普徴額5期")
+    @CsvField(order = 300, name = "普徴額5期")
     private RString 普徴額_5期;
-    @CsvField(order = 320, name = "普徴額6期")
+    @CsvField(order = 310, name = "普徴額6期")
     private RString 普徴額_6期;
-    @CsvField(order = 330, name = "備考")
+    @CsvField(order = 320, name = "備考")
     private RString 備考;
 
 }

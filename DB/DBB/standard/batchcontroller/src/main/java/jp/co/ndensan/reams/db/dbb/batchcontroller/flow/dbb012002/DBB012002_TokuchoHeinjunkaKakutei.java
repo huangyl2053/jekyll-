@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.DBB012002;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb012002;
 
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB0120002.TokuchoHeinjunkaKakuteiDbUpdateProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb0120002.TokuchoHeinjunkaKakuteiDbUpdateProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunkakakutei.TokuchoHeijunkaKakuteiBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

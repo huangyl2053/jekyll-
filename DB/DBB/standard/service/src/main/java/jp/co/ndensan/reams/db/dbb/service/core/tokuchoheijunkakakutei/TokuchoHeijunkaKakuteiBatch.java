@@ -155,7 +155,7 @@ public class TokuchoHeijunkaKakuteiBatch {
             mapper.inset特徴平準化賦課Temp(entity);
         }
         List<FukaJohoRelateEntity> relateEntityList = mapper.select平準化前の賦課の情報();
-        if (relateEntityList != null) {
+        if (relateEntityList != null && !relateEntityList.isEmpty()) {
             for (FukaJohoRelateEntity relateEntity : relateEntityList) {
                 relateEntity.initializeMd5ToEntities();
                 FukaJoho 平準化前の賦課の情報 = new FukaJoho(relateEntity);
@@ -665,14 +665,15 @@ public class TokuchoHeijunkaKakuteiBatch {
         set氏名(特徴平準化確定一覧, entity);
         set行政区コード(特徴平準化確定一覧, entity);
         set町域コード(特徴平準化確定一覧, entity);
-        entity.set住所(get住所(特徴平準化確定一覧));
         set町域_管内_管外住所(特徴平準化確定一覧, entity);
         set番地(特徴平準化確定一覧, entity);
         entity.set保険料段階_仮算定時(特徴平準化確定一覧.getFukeEntity().get保険料段階_仮算定時());
         HokenryoDankaiList 保険料段階リスト = new HokenryoDankaiSettings().getCurrent保険料段階List();
         HokenryoDankai 保険料段階 = 保険料段階リスト.getBy段階区分(特徴平準化確定一覧.getFukeEntity().get保険料段階_仮算定時());
-        RString 今年度保険料率 = new RString(保険料段階.get保険料率().toString());
-        entity.set今年度保険料率(今年度保険料率);
+        if (保険料段階.get保険料率() != null) {
+            RString 今年度保険料率 = DecimalFormatter.toコンマ区切りRString(保険料段階.get保険料率(), 整数_ZREO);
+            entity.set今年度保険料率(今年度保険料率);
+        }
         TokubetsuChoshuGimushaCode 特別徴収業務者コード = 特徴平準化確定一覧.get年金特徴回付情報_介護継承().getDtTokubetsuChoshuGimushaCode();
         if (特別徴収業務者コード != null) {
             entity.set特別徴収業務者コード(特別徴収業務者コード.toRString());
@@ -909,11 +910,6 @@ public class TokuchoHeijunkaKakuteiBatch {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(コード_ログコード), 定数_被保険者番号,
                 entity.getFukeEntity().get被保険者番号().value());
         return PersonalData.of(entity.getFukeEntity().get識別コード(), expandedInfo);
-    }
-
-    private RString get住所(TokuchoHeinjunkaKakuteiItirannEntity 特徴平準化確定一覧) {
-        // TODO QA855
-        return RString.EMPTY;
     }
 
     /**
