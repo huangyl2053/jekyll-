@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JimukyokuyoYobihanteiKinyuhyoEntity {
 
     private RString 作成年月日;
-    private RString 帳票名;
     private RString 頁番号;
     private RString 審査会開催番号;
     private RString 開催年月日;
