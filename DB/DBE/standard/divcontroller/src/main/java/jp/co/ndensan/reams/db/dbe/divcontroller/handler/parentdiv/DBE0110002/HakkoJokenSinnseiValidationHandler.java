@@ -58,7 +58,6 @@ public class HakkoJokenSinnseiValidationHandler {
             validPairs.add(new ValidationMessageControlPair(HakkoJokenSinnseiMessages.申請日範囲不正チェック));
         }
         return validPairs;
-
     }
 
     /**
@@ -112,9 +111,7 @@ public class HakkoJokenSinnseiValidationHandler {
         if (shoriYMDto.isBefore(shoriYMDfrom)) {
             validPairs.add(new ValidationMessageControlPair(HakkoJokenSinnseiMessages.処理日範囲不正チェック));
         }
-
         return validPairs;
-
     }
 
     /**
@@ -143,7 +140,6 @@ public class HakkoJokenSinnseiValidationHandler {
             }
         }
         return validPairs;
-
     }
 
     private static enum HakkoJokenSinnseiMessages implements IValidationMessage {
@@ -164,5 +160,4 @@ public class HakkoJokenSinnseiValidationHandler {
             return message;
         }
     }
-
 }

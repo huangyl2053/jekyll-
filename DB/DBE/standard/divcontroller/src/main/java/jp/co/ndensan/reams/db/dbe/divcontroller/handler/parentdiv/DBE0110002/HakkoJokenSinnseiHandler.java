@@ -73,7 +73,6 @@ public class HakkoJokenSinnseiHandler {
             div.getTxtShoriYMD().setDisabled(true);
             div.getTxtShinseibi().setDisabled(true);
         }
-
     }
 
     /**
@@ -99,14 +98,12 @@ public class HakkoJokenSinnseiHandler {
             RDateTime rDataTimeTo = RDateTime.of(div.getTxtShoriYMD().getToValue().toDateString(), new RString(""));
             shinseijouhoubatchParameter.setShorikaFrom(rDataTimeFrom);
             shinseijouhoubatchParameter.setShorikaTo(rDataTimeTo);
-
         } else {
             shinseijouhoubatchParameter.setSakuseijyouken(new RString("2"));
             FlexibleDate flexibledataFrom = new FlexibleDate(div.getTxtShinseibi().getFromValue().toDateString());
             FlexibleDate flexibledataTo = new FlexibleDate(div.getTxtShinseibi().getToValue().toDateString());
             shinseijouhoubatchParameter.setShinnseikaFrom(flexibledataFrom);
             shinseijouhoubatchParameter.setShinnseikaTo(flexibledataTo);
-
         }
         return shinseijouhoubatchParameter;
     }
