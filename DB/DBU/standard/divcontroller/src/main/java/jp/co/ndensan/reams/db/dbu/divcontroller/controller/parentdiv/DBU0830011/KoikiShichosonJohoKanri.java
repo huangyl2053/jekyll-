@@ -95,7 +95,6 @@ public class KoikiShichosonJohoKanri {
                 getHandler(requestDiv).get市町村識別ID()));
         KoseiShichosonMasterBuilder 市町村管理Builder = 修正前市町村.createBuilderForEdit();
         KoikiShichosonJohoKanriManager.createInstance().save市町村Master(getHandler(requestDiv).get市町村管理情報(市町村管理Builder));
-        RealInitialLocker.release(new LockingKey(UrControlDataFactory.createInstance().getMenuID()));
     }
 
     private void check(ValidationMessageControlPairs validationMessages, KoikiShichosonJohoKanriDiv requestDiv) {
