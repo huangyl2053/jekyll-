@@ -97,10 +97,21 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService {
                     KamokuCode.EMPTY, パターン番号, 項目番号_2, FlexibleDate.getNowDate());
 
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().
-                    get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), 発行日);
-            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
-                    認証者, 地方公共団体, assembler.getImageFolderPath(), new RDate(発行日.toString())).buildSource();
+
+            Ninshosha 認証者;
+            NinshoshaSource sourceBuilder;
+            if (発行日 == null || 発行日.isEmpty()) {
+                発行日 = FlexibleDate.getNowDate();
+                認証者 = NinshoshaFinderFactory.createInstance().
+                        get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), 発行日);
+                sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                        認証者, 地方公共団体, assembler.getImageFolderPath(), new RDate(発行日.toString())).buildSource();
+            } else {
+                認証者 = NinshoshaFinderFactory.createInstance().
+                        get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), 発行日);
+                sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                        認証者, 地方公共団体, assembler.getImageFolderPath(), new RDate(発行日.toString())).buildSource();
+            }
 
             IToiawasesakiFinder iToiawasesakiFinder = ToiawasesakiFinderFactory.createInstance();
             Toiawasesaki toiawase = iToiawasesakiFinder.
