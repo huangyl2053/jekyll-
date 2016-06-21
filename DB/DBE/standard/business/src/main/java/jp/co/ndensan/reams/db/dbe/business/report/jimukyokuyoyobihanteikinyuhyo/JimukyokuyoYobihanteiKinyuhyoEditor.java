@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -31,7 +32,8 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 public class JimukyokuyoYobihanteiKinyuhyoEditor implements IJimukyokuyoYobihanteiKinyuhyoEditor {
 
     private final JimukyokuyoYobihanteiKinyuhyoEntity item;
-    private static final int int_num = 2;
+    private static final int INT_NUM = 2;
+    private static final int INT_LENGTH = 4;
 
     /**
      * コンストラクタです。
@@ -70,7 +72,13 @@ public class JimukyokuyoYobihanteiKinyuhyoEditor implements IJimukyokuyoYobihant
         source.listTaishoshaIchiran_2 = item.get氏名();
         source.listTaishoshaIchiran_3 = Seibetsu.toValue(item.get性別()).get名称();
         source.listTaishoshaIchiran_4 = item.get年齢();
-        source.listTaishoshaIchiran_5 = YokaigoJotaiKubun09.toValue(item.get前回二次判定()).get名称();
+
+        if (item.get前回二次判定() == null) {
+            source.listTaishoshaIchiran_5 = RString.EMPTY;
+        } else {
+            source.listTaishoshaIchiran_5 = YokaigoJotaiKubun09.toValue(item.get前回二次判定()).get名称();
+        }
+
         source.listTaishoshaIchiran_6 = item.get前回認定有効期間().concat(new RString("ヵ月"));
         source.listTaishoshaIchiran_7 = IchijiHanteiKekkaCode09.toValue(item.get一次判定()).get名称();
         source.listTaishoshaIchiran_8 = RString.EMPTY;
@@ -82,14 +90,14 @@ public class JimukyokuyoYobihanteiKinyuhyoEditor implements IJimukyokuyoYobihant
         source.listShinseiKubun_1 = NinteiShinseiShinseijiKubunCode.toValue(item.get申請区分()).get名称();
         source.listNo_1 = item.getNo();
         source.listHokenshaName_1 = item.get保険者();
-        source.shinsakaiKaisaiNo = item.get審査会開催番号();
+        source.shinsakaiKaisaiNo = new RString(item.get審査会開催番号().length() - INT_LENGTH);
         source.kaisaiYMD = getパターン33(new RDate(item.get開催年月日().toString()));
-        source.kaisaiHH = item.get開催時().padZeroToLeft(int_num);
-        source.kaisaiMM = item.get開催分().padZeroToLeft(int_num);
+        source.kaisaiHH = item.get開催時().padZeroToLeft(INT_NUM);
+        source.kaisaiMM = item.get開催分().padZeroToLeft(INT_NUM);
         source.gogitaiName = item.get合議体名称();
-        if (item.get被保険者番号() == null) {
-            source.hishokenshaNo = null;
-        } else {
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+
+        if (!RString.isNullOrEmpty(item.get被保険者番号())) {
             source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), item.get被保険者番号());
         }
         return source;
