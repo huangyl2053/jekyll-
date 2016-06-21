@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteitiyousaiirai;
 
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosatokusokujohakko.CountGaitouDataKenSu13Parameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosatokusokujohakko.CountGaitouDataKenSu2Parameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteishinseijoho.NinteiShinseiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosatokusokujohakko.CountGaitouDataKenSu13Parameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosatokusokujohakko.CountGaitouDataKenSu2Parameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinseijoho.NinteiShinseiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
 
 /**

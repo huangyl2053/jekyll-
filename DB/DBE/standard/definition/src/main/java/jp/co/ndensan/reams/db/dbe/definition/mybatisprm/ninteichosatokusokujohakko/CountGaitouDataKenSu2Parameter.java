@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosatokusokujohakko;
+package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosatokusokujohakko;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
