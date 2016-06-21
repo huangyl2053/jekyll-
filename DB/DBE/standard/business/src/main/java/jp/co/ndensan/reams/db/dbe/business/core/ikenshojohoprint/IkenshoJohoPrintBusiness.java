@@ -125,7 +125,9 @@ public class IkenshoJohoPrintBusiness {
         shujiiIkenshoMiteishutsuEntity.set依頼日(entity.getIkenshoSakuseiIraiYMD());
         shujiiIkenshoMiteishutsuEntity.set入手予定日(entity.getIkenshoSakuseiIraiYoteiYMD());
         shujiiIkenshoMiteishutsuEntity.set直近督促日(entity.getIkenshoSakuseiTokusokuYMD());
-        shujiiIkenshoMiteishutsuEntity.set督促回数(Integer.parseInt(entity.getIkenshoTokusokuKaisu().toString()));
+        if (entity.getIkenshoTokusokuKaisu() != null) {
+            shujiiIkenshoMiteishutsuEntity.set督促回数(Integer.parseInt(entity.getIkenshoTokusokuKaisu().toString()));
+        }
         return shujiiIkenshoMiteishutsuEntity;
     }
 
