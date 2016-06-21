@@ -91,6 +91,7 @@ public class KarisanteiIdoFukaPanelHandler {
     private static final RString 仮算定異動賦課_処理名 = new RString("仮算定異動賦課");
     private static final RString 仮算定異動賦課確定_処理名 = new RString("仮算定異動賦課確定");
     private static final RString 仮算定異動賦課_MENU = new RString("DBBMN36001");
+    private static final RString 仮算定異動賦課通知書作成_MENU = new RString("DBBMN36002");
     private static final RString 普徴仮算定異動方法_項目 = new RString("普徴仮算定異動方法");
     private static final RString 普徴仮算定異動新規資格賦課_項目 = new RString("普徴仮算定異動新規資格賦課");
     private static final RString 普徴仮算定異動新規賦課方法_項目 = new RString("普徴仮算定異動新規賦課方法");
@@ -115,6 +116,7 @@ public class KarisanteiIdoFukaPanelHandler {
     private static final ReportId 特徴開始通知書_仮算定 = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private static final ReportId 仮算定額変更通知書 = new ReportId("DBB100010_KarisanteiHenkoTsuchishoDaihyo");
     private static final ReportId 納入通知書 = new ReportId("DBB200006_FutsuChoshuKarisanteiKekkaIchiran");
+    private static final ReportId 仮算定異動一括結果一覧表_帳票分類ＩＤ = new ReportId("DBB200013_KarisanteiIdoKekkaIchiran");
 
     /**
      * コンストラクタです。
@@ -369,6 +371,13 @@ public class KarisanteiIdoFukaPanelHandler {
         ChohyoMeter chohyoMeter;
         Set<Map.Entry<RString, RString>> set = rowMap.entrySet();
         for (Map.Entry<RString, RString> entry : set) {
+            if (仮算定異動賦課_MENU.equals(ResponseHolder.getMenuID())
+                    && 仮算定異動一括結果一覧表_帳票分類ＩＤ.equals(new ReportId(entry.getKey()))) {
+                div.getKarisanteiIdoFukaChohyoHakko().getCcdChohyoIchiran().setグリッドのチェックボックスDisplayNone(true);
+            } else if (仮算定異動賦課通知書作成_MENU.equals(ResponseHolder.getMenuID())
+                    && 仮算定額変更通知書_帳票分類ＩＤ.equals(new ReportId(entry.getKey()))) {
+                div.getKarisanteiIdoFukaChohyoHakko().getCcdChohyoIchiran().setグリッドのチェックボックスDisplayNone(true);
+            }
             chohyoMeter = new ChohyoMeter();
             chohyoMeter.set帳票分類ID(new ReportId(entry.getKey()));
             chohyoMeter.set出力順ID(entry.getValue());
