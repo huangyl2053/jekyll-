@@ -30,8 +30,8 @@ public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReportSource im
     public RString hihokenshaTelNo;
     @ReportItem(name = "hihokenJusho", order = 9)
     public RString hihokenJusho;
-    @ReportItem(name = "tsuchiBun", order = 10)
-    public RString tsuchiBun;
+    @ReportItem(name = "hihokenJusho1", order = 10)
+    public RString hihokenJusho1;
     @ReportItem(name = "remban", length = 4, order = 11)
     public RString remban;
     @ReportItem(name = "ninshoshaYakushokuMei", length = 15, order = 12)
