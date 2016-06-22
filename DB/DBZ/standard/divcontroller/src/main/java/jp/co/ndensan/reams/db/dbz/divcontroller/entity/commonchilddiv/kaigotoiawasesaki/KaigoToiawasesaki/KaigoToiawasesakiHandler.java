@@ -43,7 +43,6 @@ public class KaigoToiawasesakiHandler {
     private static final RString 問合せ先_受給共通 = new RString("受給共通");
     private static final RString 問合せ先_認定共通 = new RString("認定共通");
     private static final RString 問合せ先_統計共通 = new RString("統計共通");
-    private static final ReportId CHOHYOBUNRUIID = new ReportId("000000000");
     private static final int 件数 = 1;
     private final KaigoToiawasesakiDiv div;
 
