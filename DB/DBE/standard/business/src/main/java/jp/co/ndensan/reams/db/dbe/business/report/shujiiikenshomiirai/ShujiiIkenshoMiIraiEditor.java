@@ -73,8 +73,12 @@ public class ShujiiIkenshoMiIraiEditor implements IShujiiIkenshoMiIraiEditor {
         source.listIkeniraimishori_14 = item.get今回医療機関();
         source.listIkeniraimishori_15 = item.get今回主治医();
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        source.hokenshaNo = new ExpandedInformation(new Code("100"), new RString("保険者番号"), item.get保険者番号());
-        source.hihokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
+        if (!RString.isNullOrEmpty(item.get保険者番号())) {
+            source.hokenshaNo = new ExpandedInformation(new Code("100"), new RString("保険者番号"), item.get保険者番号());
+        }
+        if (!RString.isNullOrEmpty(item.get被保険者番号())) {
+            source.hihokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
+        }
         return source;
     }
 
