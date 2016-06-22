@@ -72,7 +72,7 @@ public class IchijihanteikekkahyoItemSettei {
     private static final RString A_06 = new RString("06A");
     private static final RString A_09 = new RString("09A");
     private static final RString B_09 = new RString("09B");
-    private static final RString 特記事項有 = new RString("＊");
+    private static final RString 特記事項有 = new RString("※");
     private static final RString 印字する = new RString("1");
     private static final int 連番_1 = 1;
     private static final int 連番_2 = 2;
