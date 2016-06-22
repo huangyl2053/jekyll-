@@ -78,6 +78,17 @@ public class PublicationShiryoShinsakai {
     }
 
     /**
+     * 出力スタイルを変更する場合、表示項目を変更する。
+     *
+     * @param div PublicationShiryoShinsakaiDiv
+     * @return ResponseData<PublicationShiryoShinsakaiDiv>
+     */
+    public ResponseData<PublicationShiryoShinsakaiDiv> onClick_syutuHeDa(PublicationShiryoShinsakaiDiv div) {
+        getHandler(div).onClick_syutuHeDa();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 事務局用印刷帳票チェックボックスを変更する場合、表示項目を変更する。
      *
      * @param div PublicationShiryoShinsakaiDiv
