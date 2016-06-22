@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210003.Gaik
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210003.GaikyoTokkiYichiranNyurokuHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210003.ValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -45,6 +46,11 @@ public class GaikyoTokkiYichiranNyuroku {
     private static final int INT4 = 4;
     private static final int INT5 = 5;
 
+    private enum DBE2210003Keys {
+
+        入力内容を取り消す用データ
+    }
+
     /**
      * 認定調査結果登録3初期化の設定します。
      *
@@ -53,7 +59,26 @@ public class GaikyoTokkiYichiranNyuroku {
      */
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onLoad(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
-        handler.onLoad();
+
+        ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
+        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+        RString 調査実施日 = ViewStateHolder.get(ViewStateKeys.調査実施日, RString.class);
+        RString 調査実施場所 = ViewStateHolder.get(ViewStateKeys.調査実施場所, RString.class);
+        RString 実施場所名称 = ViewStateHolder.get(ViewStateKeys.実施場所名称, RString.class);
+        RString 所属機関 = ViewStateHolder.get(ViewStateKeys.所属機関, RString.class);
+        RString 記入者 = ViewStateHolder.get(ViewStateKeys.記入者, RString.class);
+        RString 調査区分 = ViewStateHolder.get(ViewStateKeys.調査区分, RString.class);
+        model.set調査実施日(調査実施日);
+        model.set調査実施場所(調査実施場所);
+        model.set実施場所名称(実施場所名称);
+        model.set所属機関(所属機関);
+        model.set記入者(記入者);
+        model.set調査区分(調査区分);
+        model.set申請書管理番号(temp_申請書管理番号.getColumnValue());
+
+        gaikyoTokkiNyurokuMap = handler.onLoad(model, temp_申請書管理番号, temp_認定調査履歴番号);
+        ViewStateHolder.put(DBE2210003Keys.入力内容を取り消す用データ, gaikyoTokkiNyurokuMap);
         boolean gotLock = 前排他キーのセット();
         if (!gotLock) {
             ErrorMessage message = new ErrorMessage(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().getCode(),
@@ -435,7 +460,9 @@ public class GaikyoTokkiYichiranNyuroku {
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            handler.onClick_btnCancel();
+
+            gaikyoTokkiNyurokuMap = ViewStateHolder.get(DBE2210003Keys.入力内容を取り消す用データ, HashMap.class);
+            handler.onClick_btnCancel(gaikyoTokkiNyurokuMap);
             return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
@@ -457,7 +484,9 @@ public class GaikyoTokkiYichiranNyuroku {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-            handler.onClick_Save();
+            ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+            int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+            handler.onClick_Save(temp_申請書管理番号, temp_認定調査履歴番号);
             前排他キーの解除();
             return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("保存")).respond();
         }

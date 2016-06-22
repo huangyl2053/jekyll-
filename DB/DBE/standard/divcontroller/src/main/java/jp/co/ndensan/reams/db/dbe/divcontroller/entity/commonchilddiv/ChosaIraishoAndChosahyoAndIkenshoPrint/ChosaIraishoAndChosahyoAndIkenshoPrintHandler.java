@@ -66,8 +66,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
-
-
 /**
  * 依頼書・認定調査票(OCR)・主治医意見書印刷のハンドラークラスです。
  *
@@ -432,7 +430,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 RString 性別男 = RString.EMPTY;
                 RString 性別女 = RString.EMPTY;
 
-                if (Seibetsu.男.get名称().equals(seibetsu)) {
+                if (Seibetsu.男.getコード().equals(seibetsu)) {
                     性別女 = HOUSI;
                 } else {
                     性別男 = HOUSI;
@@ -520,6 +518,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         Map<Integer, RString> 通知文
                 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220002.getReportId(), KamokuCode.EMPTY, 1);
         for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : list) {
+            RString 認定申請区分 = business.get認定申請区分_申請時_コード();
+            if (!RString.isNullOrEmpty(認定申請区分)) {
+                認定申請区分 = NinteiShinseiShinseijiKubunCode.toValue(認定申請区分).get名称();
+            }
             ChosaIraiIchiranhyoBodyItem item = new ChosaIraiIchiranhyoBodyItem(
                     RString.EMPTY,
                     RString.EMPTY,
@@ -542,7 +544,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     business.get調査員氏名(),
                     business.get被保険者番号(),
                     business.get認定申請年月日(),
-                    business.get認定申請区分_申請時_コード(),
+                    認定申請区分,
                     business.get被保険者氏名(),
                     business.get被保険者氏名カナ(),
                     Seibetsu.toValue(business.get性別()).get名称(),
@@ -636,17 +638,17 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         business.get事業者名称(),
                         business.get被保険者氏名カナ(),
                         business.get被保険者氏名(),
-                        Seibetsu.男.getコード().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY,
-                        Seibetsu.女.getコード().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY,
+                        Seibetsu.男.get名称().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY,
+                        Seibetsu.女.get名称().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY,
                         business.get住所(),
                         business.get郵便番号(),
                         business.get電話番号(),
                         年号.startsWith(元号_明治) ? 記号 : RString.EMPTY,
                         年号.startsWith(元号_大正) ? 記号 : RString.EMPTY,
                         年号.startsWith(元号_昭和) ? 記号 : RString.EMPTY,
-                        年号.substring(INDEX_3, INDEX_5),
-                        年号.substring(INDEX_6, INDEX_8),
-                        年号.substring(INDEX_9),
+                        年号.substring(2, INDEX_4),
+                        年号.substring(INDEX_5, INDEX_7),
+                        年号.substring(INDEX_8),
                         business.get年齢(),
                         business.get連絡先住所(),
                         business.get連絡先郵便番号(),
@@ -656,9 +658,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         business.get連絡先続柄(),
                         RString.isNullOrEmpty(前回認定年月日) ? 記号 : RString.EMPTY,
                         !RString.isNullOrEmpty(前回認定年月日) ? 記号 : RString.EMPTY,
-                        !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(0, INDEX_3) : RString.EMPTY,
-                        !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(INDEX_3, INDEX_4) : RString.EMPTY,
-                        !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(INDEX_4, INDEX_5) : RString.EMPTY,
+                        !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(0, INDEX_4) : RString.EMPTY,
+                        !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(INDEX_4, INDEX_6) : RString.EMPTY,
+                        !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(INDEX_6, INDEX_8) : RString.EMPTY,
                         YOKAIGOJOTAIKUBUN01.equals(前回要介護状態区分コード) ? 記号 : RString.EMPTY,
                         要支援,
                         get要支援詳細(前回要介護状態区分コード),
@@ -931,7 +933,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
 
             List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
-                    .get認定調査票差異チェック票(parameter).records();
+                    .get意見書作成依頼書(parameter).records();
             if (!businessList.isEmpty()) {
                 ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
                 ShujiiIkenshoSakuseiIraishoItem item = new ShujiiIkenshoSakuseiIraishoItem();
@@ -1072,7 +1074,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
 
             List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
-                    .get意見書作成依頼一覧表(parameter).records();
+                    .get主治医意見書作成料請求書(parameter).records();
             if (!businessList.isEmpty()) {
                 ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
                 ShujiiIkenshoSakuseiRyoSeikyushoItem item = new ShujiiIkenshoSakuseiRyoSeikyushoItem();
@@ -1189,8 +1191,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 item.setShinseiMM2(ninteiShinseiDay.substring(INDEX_5, INDEX_6));
                 item.setShinseiDD1(ninteiShinseiDay.substring(INDEX_7, INDEX_8));
                 item.setShinseiDD2(ninteiShinseiDay.substring(INDEX_8));
-                item.setSeibetsuMan(Seibetsu.男.getコード().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY);
-                item.setSeibetsuWoman(Seibetsu.女.getコード().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY);
+                item.setSeibetsuMan(Seibetsu.男.get名称().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY);
+                item.setSeibetsuWoman(Seibetsu.女.get名称().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY);
                 item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? 記号 : RString.EMPTY);
                 item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? 記号 : RString.EMPTY);
                 item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? 記号 : RString.EMPTY);
