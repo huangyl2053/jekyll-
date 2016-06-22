@@ -221,8 +221,7 @@ public class SetaiinFinder {
             IShikibetsuTaisho 識別対象 = 識別対象Finder.get識別対象(GyomuCode.DB介護保険,
                     世帯員.get世帯員識別コード(), KensakuYusenKubun.住登外優先);
             if (!世帯員.get世帯員識別コード().isEmpty() && 識別対象 != null && !識別対象.get識別コード().isEmpty()) {
-                RString 本人区分 = 世帯員.get世帯員識別コード().equals(識別対象.get識別コード())
-                        ? HonninKubun.本人.getCode() : HonninKubun.世帯構成員.getCode();
+                RString 本人区分 = 世帯員.get本人区分();
                 SetaiinJoho 世帯員情報 = new SetaiinJoho(識別対象, 本人区分);
                 世帯員情報リスト.add(世帯員情報);
             }
