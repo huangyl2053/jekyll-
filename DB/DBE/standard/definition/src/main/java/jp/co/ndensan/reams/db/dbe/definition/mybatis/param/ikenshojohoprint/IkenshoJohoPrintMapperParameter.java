@@ -232,7 +232,7 @@ public final class IkenshoJohoPrintMapperParameter implements IMyBatisParameter 
                 処理状態区分_通常,
                 処理状態区分_延期,
                 主治医意見書作成依頼年月日,
-                FLAG_2.equals(主治医意見書未提出者一覧作成条件),
+                FLAG_2.equals(主治医意見書依頼未処理者一覧表作成条件),
                 FLAG_1.equals(主治医意見書未提出者一覧作成条件),
                 FLAG_2.equals(主治医意見書未提出者一覧作成条件),
                 FLAG_1.equals(主治医意見書依頼済み一覧表作成条件),
