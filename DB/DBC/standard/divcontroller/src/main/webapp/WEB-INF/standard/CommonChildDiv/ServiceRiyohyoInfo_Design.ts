@@ -1,8 +1,8 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
-// <reference path="./ServiceCodeInputCommonChildDiv/ServiceCodeInputCommonChildDiv.ts" />
 // <reference path="../d.ts/DBZCommonChildDiv.d.ts" />
+// <reference path="./ServiceCodeInputCommonChildDiv.ts" />
 
 module DBC {
 
@@ -43,8 +43,8 @@ module DBC {
                 return new UZA.TextBoxDateRange(this.convFiledName("txtTekiyoKikan"));
             }
 
-            public txtKubunShikyuGendogaku(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtKubunShikyuGendogaku"));
+            public txtKubunShikyuGendogaku(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtKubunShikyuGendogaku"));
             }
 
             public txtGendoKanriKikan(): UZA.TextBoxDateRange {
@@ -55,28 +55,28 @@ module DBC {
                 return new UZA.TextBoxDate(this.convFiledName("txtRiyoYM"));
             }
 
-            public cbZanteiKubun(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("cbZanteiKubun"));
+            public chkZanteiKubun(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkZanteiKubun"));
             }
 
             public ddlKoshinKbn(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlKoshinKbn"));
             }
 
-            public tbUpdateD(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("tbUpdateD"));
+            public txtKoshinYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtKoshinYMD"));
             }
 
             public txtSofuYM(): UZA.TextBoxDate {
                 return new UZA.TextBoxDate(this.convFiledName("txtSofuYM"));
             }
 
-            public btnZengetsuCopy(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnZengetsuCopy"));
+            public btnShowShuruiGendogaku(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnShowShuruiGendogaku"));
             }
 
-            public ShuruiGendoKakunin(): UZA.Button {
-                return new UZA.Button(this.convFiledName("ShuruiGendoKakunin"));
+            public btnZengetsuCopy(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnZengetsuCopy"));
             }
 
             public ServiceRiyohyoBeppyoRiyoNissu(): UZA.Panel {
@@ -111,28 +111,20 @@ module DBC {
                 return new UZA.DataGrid(this.convFiledName("dgServiceRiyohyoBeppyoList"));
             }
 
-            public plJigoshaService(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("plJigoshaService"));
+            public ServiceRiyohyoBeppyoJigyoshaServiceInput(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ServiceRiyohyoBeppyoJigyoshaServiceInput"));
             }
 
-            public txtJigyoshaCode(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtJigyoshaCode"));
-            }
-
-            public btnJigyosha(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnJigyosha"));
-            }
-
-            public txtJigyoshaName(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtJigyoshaName"));
-            }
-
-            //public ccdServiceCode(): DBC.ServiceCodeInputCommonChildDiv.ModeController {
-            //    return new DBC.ServiceCodeInputCommonChildDiv.ModeController(this.convFiledName("ccdServiceCode"));
+            //public ccdJigyoshaInput(): DBZ.ShisetsuJohoCommonChildDiv.ModeController {
+            //    return new DBZ.ShisetsuJohoCommonChildDiv.ModeController(this.convFiledName("ccdJigyoshaInput"));
             //}
 
-            //public ccdServiceType(): DBZ.ServiceTypeInputCommonChildDiv.ModeController {
-            //    return new DBZ.ServiceTypeInputCommonChildDiv.ModeController(this.convFiledName("ccdServiceType"));
+            //public ccdServiceCodeInput(): DBC.ServiceCodeInputCommonChildDiv.ModeController {
+            //    return new DBC.ServiceCodeInputCommonChildDiv.ModeController(this.convFiledName("ccdServiceCodeInput"));
+            //}
+
+            //public ccdServiceTypeInput(): DBZ.ServiceTypeInputCommonChildDiv.ModeController {
+            //    return new DBZ.ServiceTypeInputCommonChildDiv.ModeController(this.convFiledName("ccdServiceTypeInput"));
             //}
 
             public ServiceRiyohyoBeppyoMeisai(): UZA.Panel {
@@ -167,28 +159,32 @@ module DBC {
                 return new UZA.Label(this.convFiledName("lblServiceTani"));
             }
 
-            public tbTeigakuRiyoushaFudan(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("tbTeigakuRiyoushaFudan"));
+            public txtRiyoushaFutangaku(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRiyoushaFutangaku"));
             }
 
-            public tbRiyoushaFudan(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("tbRiyoushaFudan"));
+            public txtTeigakuRiyoushaFutangaku(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtTeigakuRiyoushaFutangaku"));
+            }
+
+            public ServiceRiyohyoBeppyoMeisaiFooter(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ServiceRiyohyoBeppyoMeisaiFooter"));
             }
 
             public btnBeppyoMeisaiKakutei(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnBeppyoMeisaiKakutei"));
             }
 
+            public btnCalcMeisaiGokei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnCalcMeisaiGokei"));
+            }
+
+            public btnCancelMeisaiInput(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnCancelMeisaiInput"));
+            }
+
             public btnCalcMeisai(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnCalcMeisai"));
-            }
-
-            public btnGokeiChange(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnGokeiChange"));
-            }
-
-            public btnClear(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnClear"));
             }
 
             public ServiceRiyohyoBeppyoGokei(): UZA.Panel {
@@ -251,24 +247,32 @@ module DBC {
                 return new UZA.Label(this.convFiledName("lblRiyoshaFutangakuZengaku"));
             }
 
-            public btnCalcGokei(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnCalcGokei"));
+            public ServiceRiyohyoBeppyoGokeiFooter(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ServiceRiyohyoBeppyoGokeiFooter"));
             }
 
             public btnBeppyoGokeiKakutei(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnBeppyoGokeiKakutei"));
             }
 
-            public btnClear2(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnClear2"));
+            public btnCalcGokei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnCalcGokei"));
             }
 
-            public btnSave(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnSave"));
+            public btnCancelGokeiInput(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnCancelGokeiInput"));
             }
 
-            public btnDelete(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnDelete"));
+            public ServiceRiyohyoBeppyoFooter(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ServiceRiyohyoBeppyoFooter"));
+            }
+
+            public btnUpdate(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnUpdate"));
+            }
+
+            public btnBackRiyoNengetsuIchiran(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnBackRiyoNengetsuIchiran"));
             }
 
         }
