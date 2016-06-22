@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 結果詳細情報画面のパラメータです。
  *
- * @reamsid_L DBE-1320-020 zuotao
+ * @reamsid_L DBZ-1320-020 zuotao
  */
 @lombok.Getter
 @lombok.Setter

@@ -14,8 +14,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
+ * 結果詳細情報画面のValidationHandlerです。
  *
- * @author zuotao
+ * @reamsid_L DBZ-1320-020 zuotao
  */
 public class KekkaShosaiJohoValidationHandler {
 
