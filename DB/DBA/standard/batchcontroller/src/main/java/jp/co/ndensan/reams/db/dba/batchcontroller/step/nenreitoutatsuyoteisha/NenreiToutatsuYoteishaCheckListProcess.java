@@ -53,6 +53,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -466,38 +467,36 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
     private void getList2(NenreiToutatsuYoteishaCheckListEntity entity2, List<NenreiToutatsuYoteishaCheckListEntity> temp) {
         boolean flg = false;
         for (NenreiToutatsuYoteishaCheckListEntity entity : nenreiCheckListEntity) {
-            if (entity.getHihokenshaNo().equals(entity2.getHihokenshaNo())
-                    && entity.getShikibetsuCode().equals(entity2.getShikibetsuCode())
-                    && entity.getKanaMeisho().equals(entity2.getKanaMeisho())
-                    && entity.getMeisho().equals(entity2.getMeisho())
-                    && entity.getSeibetsuCode().equals(entity2.getSeibetsuCode())
-                    && entity.getSeinengappiYMD().equals(entity2.getSeinengappiYMD())
-                    && entity.getNenreiyotainichi().equals(entity2.getNenreiyotainichi())
-                    && entity.getShigekubun().equals(entity2.getShigekubun())
-                    && entity.getJutosyakubun().equals(entity2.getJutosyakubun())) {
-                if (handan(entity, entity2)) {
-                    flg = true;
-                    break;
-                }
+            RStringBuilder entity1 = new RStringBuilder();
+            RStringBuilder entityNew = new RStringBuilder();
+            if (entity1.append(entity.getGyoseikuCode()).append(entity.getGyoseikuName()).append(entity.getHihokennshaKubunCode())
+                    .append(entity.getHihokenshaNo() == null ? RString.EMPTY : entity.getHihokenshaNo().value())
+                    .append(entity.getJuminShubetsuCode()).append(entity.getJusho()).append(entity.getJushochiTokureiFlag())
+                    .append(entity.getJutosyakubun()).append(entity.getJyotei()).append(entity.getKanaMeisho()).append(entity.getMeisho())
+                    .append(entity.getNenreiyotainichi() == null ? RString.EMPTY : entity.getNenreiyotainichi().toString())
+                    .append(entity.getSeibetsuCode()).append(entity.getSeikatsu())
+                    .append(entity.getSeinengappiYMD() == null ? RString.EMPTY : entity.getSeinengappiYMD().toString())
+                    .append(entity.getShichosonCode()).append(entity.getShigekubun())
+                    .append(entity.getShikibetsuCode() == null ? RString.EMPTY : entity.getShikibetsuCode().value())
+                    .append(entity.getZenkokuJushoCode()).equals(entityNew.append(entity2.getGyoseikuCode()).append(entity2.getGyoseikuName())
+                            .append(entity2.getHihokennshaKubunCode())
+                            .append(entity2.getHihokenshaNo() == null ? RString.EMPTY : entity2.getHihokenshaNo().value())
+                            .append(entity2.getJuminShubetsuCode()).append(entity2.getJusho())
+                            .append(entity2.getJushochiTokureiFlag()).append(entity2.getJutosyakubun())
+                            .append(entity2.getJyotei()).append(entity2.getKanaMeisho()).append(entity2.getMeisho())
+                            .append(entity2.getNenreiyotainichi() == null ? RString.EMPTY : entity2.getNenreiyotainichi().toString())
+                            .append(entity2.getSeibetsuCode()).append(entity2.getSeikatsu())
+                            .append(entity2.getSeinengappiYMD() == null ? RString.EMPTY : entity2.getSeinengappiYMD().toString())
+                            .append(entity2.getShichosonCode()).append(entity2.getShigekubun())
+                            .append(entity2.getShikibetsuCode() == null ? RString.EMPTY : entity2.getShikibetsuCode().value())
+                            .append(entity2.getZenkokuJushoCode()))) {
+                flg = true;
+                break;
             }
         }
         if (!flg) {
             temp.add(entity2);
         }
-    }
-
-    private boolean handan(NenreiToutatsuYoteishaCheckListEntity entity, NenreiToutatsuYoteishaCheckListEntity entity2) {
-        return entity.getZenkokuJushoCode().equals(entity2.getZenkokuJushoCode())
-                && entity.getJusho().equals(entity2.getJusho())
-                && entity.getGyoseikuCode().equals(entity2.getGyoseikuCode())
-                && entity.getGyoseikuName().equals(entity2.getGyoseikuName())
-                && entity.getJuminShubetsuCode().equals(entity2.getJuminShubetsuCode())
-                && entity.getJushochiTokureiFlag().equals(entity2.getJushochiTokureiFlag())
-                && entity.getShichosonCode().equals(entity2.getShichosonCode())
-                && entity.getSeikatsu().equals(entity2.getSeikatsu())
-                && entity.getJyotei().equals(entity2.getJyotei())
-                && entity.getHihokennshaKubunCode().equals(entity2.getHihokennshaKubunCode());
-
     }
 
     private void getShikakuShutokuJogaiList() {
