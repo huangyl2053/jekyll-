@@ -9,14 +9,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoa3.ShujiiikenshoA3Report;
-import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoa3.ShujiiikenshoA4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.publicationshiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.publicationshiryoshinsakai.ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.ShujiiikenshoA3ReportSource;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.ShujiiikenshoA4ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.ShujiiikenshoItem;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
@@ -35,24 +33,18 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0150-200 linghuhang
  */
-public class IinIkenshoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiWariateJohoEntity> {
+public class IinIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<ShinsakaiWariateJohoEntity> {
 
     private static final RString SELECT_WARIATEJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.publicationshiryoshinsakai.IShiryoShinsakaiIinMapper.getShinsakaiWariateJoho");
     private static final List<RString> PAGE_BREAK_KEYS_A3 = Collections.unmodifiableList(Arrays.asList(
             new RString(ShujiiikenshoA3ReportSource.ReportSourceFields.hokenshaNo.name())));
-    private static final List<RString> PAGE_BREAK_KEYS_A4 = Collections.unmodifiableList(Arrays.asList(
-            new RString(ShujiiikenshoA4ReportSource.ReportSourceFields.hokenshaNo.name())));
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
-    @BatchWriter
-    private BatchReportWriter<ShujiiikenshoA4ReportSource> batchWriteA4;
-    private ReportSourceWriter<ShujiiikenshoA4ReportSource> reportSourceWriterA4;
     @BatchWriter
     private BatchReportWriter<ShujiiikenshoA3ReportSource> batchWriteA3;
     private ReportSourceWriter<ShujiiikenshoA3ReportSource> reportSourceWriterA3;
     private ShujiiikenshoItem item;
-    private final RString 出力スタイル_A4 = new RString("1");
 
     @Override
     protected void initialize() {
@@ -69,34 +61,19 @@ public class IinIkenshoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiWar
     protected void usualProcess(ShinsakaiWariateJohoEntity entity) {
         item = new ShujiiikenshoItem();
         set項目(entity);
-        if (出力スタイル_A4.equals(paramter.getShuturyokuSutairu())) {
-            // TODO QA回答まち、ファイル名が無し、
-//            item.set主治医意見書イメージ一頁目(共有ファイルを引き出す(entity.getImageSharedFileId(), 出力スタイル_A4));
-//            item.set主治医意見書イメージ二頁目(共有ファイルを引き出す(entity.getImageSharedFileId(), 出力スタイル_A4));
-            ShujiiikenshoA4Report reportA4 = ShujiiikenshoA4Report.createFrom(item);
-            reportA4.writeBy(reportSourceWriterA4);
-        } else {
-            // TODO QA回答まち、ファイル名が無し、
+        // TODO QA回答まち、ファイル名が無し、
 //            item.set左の主治医意見書イメージ(共有ファイルを引き出す(entity.getImageSharedFileId(), 出力スタイル_A4));
 //            item.set右の主治医意見書イメージ(共有ファイルを引き出す(entity.getImageSharedFileId(), 出力スタイル_A4));
-            ShujiiikenshoA3Report reportA3 = ShujiiikenshoA3Report.createFrom(item);
-            reportA3.writeBy(reportSourceWriterA3);
-        }
+        ShujiiikenshoA3Report reportA3 = ShujiiikenshoA3Report.createFrom(item);
+        reportA3.writeBy(reportSourceWriterA3);
     }
 
     @Override
     protected void createWriter() {
-        if (出力スタイル_A4.equals(paramter.getShuturyokuSutairu())) {
-            batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517152.getReportId().value())
-                    .addBreak(new BreakerCatalog<ShujiiikenshoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A4))
-                    .create();
-            reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);
-        } else {
-            batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517005.getReportId().value())
-                    .addBreak(new BreakerCatalog<ShujiiikenshoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
-                    .create();
-            reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);
-        }
+        batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517005.getReportId().value())
+                .addBreak(new BreakerCatalog<ShujiiikenshoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
+                .create();
+        reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);
     }
 
     private void set項目(ShinsakaiWariateJohoEntity 主治医意見書情報) {
@@ -128,13 +105,8 @@ public class IinIkenshoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiWar
     @Override
     protected void keyBreakProcess(ShinsakaiWariateJohoEntity current) {
         if (hasBrek(getBefore(), current)) {
-            if (出力スタイル_A4.equals(paramter.getShuturyokuSutairu())) {
-                ShujiiikenshoA4Report report = new ShujiiikenshoA4Report(item);
-                report.writeBy(reportSourceWriterA4);
-            } else {
-                ShujiiikenshoA3Report report = new ShujiiikenshoA3Report(item);
-                report.writeBy(reportSourceWriterA3);
-            }
+            ShujiiikenshoA3Report report = new ShujiiikenshoA3Report(item);
+            report.writeBy(reportSourceWriterA3);
         }
     }
 

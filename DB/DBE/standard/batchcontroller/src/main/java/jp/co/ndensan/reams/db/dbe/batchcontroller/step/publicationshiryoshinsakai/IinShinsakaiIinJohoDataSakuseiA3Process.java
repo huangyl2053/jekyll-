@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.publicationshiryoshinsak
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaishiryoa3.ShinsakaishiryoA3Report;
-import jp.co.ndensan.reams.db.dbe.business.report.shinsakaishiryoa4.ShinsakaishiryoA4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter;
@@ -17,7 +16,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.publicationshiryoshinsakai.Sh
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.publicationshiryoshinsakai.ShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa3.ShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa3.ShinsakaishiryoItem;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa4.ShinsakaishiryoA4ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.publicationshiryoshinsakai.IShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
@@ -56,11 +54,10 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0150-200 linghuhang
  */
-public class IinShinsakaiIinJohoDataSakuseiProcess extends BatchProcessBase<ShinseiJohoEntity> {
+public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<ShinseiJohoEntity> {
 
     private static final RString SELECT_SHINASKAIIINJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.publicationshiryoshinsakai.IShiryoShinsakaiIinMapper.getShinseiJoho");
-    private static final RString 出力スタイル_A4 = new RString("1");
     private static final int INT_4 = 4;
     private IinShinsakaiIinJohoProcessParameter paramter;
     private IShiryoShinsakaiIinMapper mapper;
@@ -72,8 +69,6 @@ public class IinShinsakaiIinJohoDataSakuseiProcess extends BatchProcessBase<Shin
     @BatchWriter
     private BatchReportWriter<ShinsakaishiryoA3ReportSource> batchWriteA3;
     private ReportSourceWriter<ShinsakaishiryoA3ReportSource> reportSourceWriterA3;
-    private BatchReportWriter<ShinsakaishiryoA4ReportSource> batchWriteA4;
-    private ReportSourceWriter<ShinsakaishiryoA4ReportSource> reportSourceWriterA4;
 
     @Override
     protected void initialize() {
@@ -97,8 +92,6 @@ public class IinShinsakaiIinJohoDataSakuseiProcess extends BatchProcessBase<Shin
     protected void createWriter() {
         batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517001.getReportId().value()).create();
         reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);
-        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517011.getReportId().value()).create();
-        reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);
     }
 
     @Override
@@ -107,13 +100,8 @@ public class IinShinsakaiIinJohoDataSakuseiProcess extends BatchProcessBase<Shin
                 new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.getShinseishoKanriNo().getColumnValue()));
         personalDataList.add(personalData);
         ShinsakaishiryoItem item = setShinsakaishiryoItem(entity, no);
-        if (出力スタイル_A4.equals(paramter.getShuturyokuSutairu())) {
-            ShinsakaishiryoA4Report report = new ShinsakaishiryoA4Report(item);
-            report.writeBy(reportSourceWriterA4);
-        } else {
-            ShinsakaishiryoA3Report report = new ShinsakaishiryoA3Report(item);
-            report.writeBy(reportSourceWriterA3);
-        }
+        ShinsakaishiryoA3Report report = new ShinsakaishiryoA3Report(item);
+        report.writeBy(reportSourceWriterA3);
         no = no + 1;
     }
 
@@ -196,15 +184,8 @@ public class IinShinsakaiIinJohoDataSakuseiProcess extends BatchProcessBase<Shin
 
     private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
-        RString id;
-        RString ページ数;
-        if (出力スタイル_A4.equals(paramter.getShuturyokuSutairu())) {
-            id = ReportIdDBE.DBE517011.getReportId().getColumnValue();
-            ページ数 = new RString(reportSourceWriterA4.pageCount().value());
-        } else {
-            id = ReportIdDBE.DBE517001.getReportId().getColumnValue();
-            ページ数 = new RString(reportSourceWriterA3.pageCount().value());
-        }
+        RString id = ReportIdDBE.DBE517001.getReportId().getColumnValue();
+        RString ページ数 = new RString(reportSourceWriterA3.pageCount().value());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 id,
                 association.getLasdecCode_().getColumnValue(),
