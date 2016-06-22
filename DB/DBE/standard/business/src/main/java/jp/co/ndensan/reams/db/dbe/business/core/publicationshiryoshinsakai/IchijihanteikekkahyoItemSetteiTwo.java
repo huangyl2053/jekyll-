@@ -230,6 +230,7 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         } else if (!RString.isNullOrEmpty(認定調査短期記憶) && RString.isNullOrEmpty(医意見書短期記憶)) {
             item.set結果比較_短期記憶(結果比較_未);
         }
+        // TODO QA回答まち
 //        RString 認定調査徘徊 = RString.EMPTY;
 //        RString 医意見書徘徊 = RString.EMPTY;
 //        if (get徘徊コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()
@@ -750,6 +751,7 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         return Integer.MAX_VALUE;
     }
 
+    // TODO QA回答まち
 //    private int get主治医被害的コード(RString 厚労省IF識別コード) {
 //        if (A_99.equals(厚労省IF識別コード)) {
 //            return Integer.valueOf(IkenshoKomokuMapping99A.被害的.getコード().toString());
@@ -1051,17 +1053,61 @@ public class IchijihanteikekkahyoItemSetteiTwo {
 
     private int getコード(RString 厚労省IF識別コード, RString 名称) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return Integer.valueOf(NinteichosaKomokuMapping99A.valueOf(名称.toString()).getコード().toString());
+            return Integer.valueOf(getNinteichosaKomokuMapping99A(名称).toString());
         } else if (A_02.equals(厚労省IF識別コード)) {
-            return Integer.valueOf(NinteichosaKomokuMapping02A.valueOf(名称.toString()).getコード().toString());
+            return Integer.valueOf(getNinteichosaKomokuMapping02A(名称).toString());
         } else if (A_06.equals(厚労省IF識別コード)) {
-            return Integer.valueOf(NinteichosaKomokuMapping06A.valueOf(名称.toString()).getコード().toString());
+            return Integer.valueOf(getNinteichosaKomokuMapping06A(名称).toString());
         } else if (A_09.equals(厚労省IF識別コード)) {
-            return Integer.valueOf(NinteichosaKomokuMapping09A.valueOf(名称.toString()).getコード().toString());
+            return Integer.valueOf(getNinteichosaKomokuMapping09A(名称).toString());
         } else if (B_09.equals(厚労省IF識別コード)) {
-            return Integer.valueOf(NinteichosaKomokuMapping09B.valueOf(名称.toString()).getコード().toString());
+            return Integer.valueOf(getNinteichosaKomokuMapping09B(名称).toString());
         }
         return Integer.MAX_VALUE;
     }
 
+    private RString getNinteichosaKomokuMapping99A(RString 名称) {
+        for (NinteichosaKomokuMapping99A mapping : NinteichosaKomokuMapping99A.values()) {
+            if (mapping.get名称().equals(名称)) {
+                return mapping.getコード();
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getNinteichosaKomokuMapping02A(RString 名称) {
+        for (NinteichosaKomokuMapping02A mapping : NinteichosaKomokuMapping02A.values()) {
+            if (mapping.get名称().equals(名称)) {
+                return mapping.getコード();
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getNinteichosaKomokuMapping06A(RString 名称) {
+        for (NinteichosaKomokuMapping06A mapping : NinteichosaKomokuMapping06A.values()) {
+            if (mapping.get名称().equals(名称)) {
+                return mapping.getコード();
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getNinteichosaKomokuMapping09A(RString 名称) {
+        for (NinteichosaKomokuMapping09A mapping : NinteichosaKomokuMapping09A.values()) {
+            if (mapping.get名称().equals(名称)) {
+                return mapping.getコード();
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getNinteichosaKomokuMapping09B(RString 名称) {
+        for (NinteichosaKomokuMapping09B mapping : NinteichosaKomokuMapping09B.values()) {
+            if (mapping.get名称().equals(名称)) {
+                return mapping.getコード();
+            }
+        }
+        return RString.EMPTY;
+    }
 }
