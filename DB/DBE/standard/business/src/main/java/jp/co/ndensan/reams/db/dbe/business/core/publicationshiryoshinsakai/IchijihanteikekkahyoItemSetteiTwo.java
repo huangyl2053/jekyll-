@@ -60,11 +60,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査左_上肢コード = RString.EMPTY;
         RString 医意見書左_上肢コード = RString.EMPTY;
         if (getコード(厚労省IF識別コード, new RString("麻痺等の有無（左上肢）")) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査左_上肢コード = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医意見書コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書左_上肢コード = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (医意見書左_上肢コード.compareTo(認定調査左_上肢コード) > 0) {
@@ -75,11 +75,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査右_上肢コード = RString.EMPTY;
         RString 医意見書右_上肢コード = RString.EMPTY;
         if (getコード(厚労省IF識別コード, new RString("麻痺等の有無（右上肢）")) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査右_上肢コード = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医右_上肢コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書右_上肢コード = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (医意見書右_上肢コード.compareTo(認定調査右_上肢コード) > 0) {
@@ -90,11 +90,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査左_下肢コード = RString.EMPTY;
         RString 医意見書左_下肢コード = RString.EMPTY;
         if (getコード(厚労省IF識別コード, new RString("麻痺等の有無（左下肢）")) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査左_下肢コード = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医左_下肢コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書左_下肢コード = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (医意見書左_下肢コード.compareTo(認定調査左_下肢コード) > 0) {
@@ -118,11 +118,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査右_下肢コード = RString.EMPTY;
         RString 医意見書右_下肢コード = RString.EMPTY;
         if (getコード(厚労省IF識別コード, new RString("麻痺等の有無（右下肢）")) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査右_下肢コード = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医右_下肢コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書右_下肢コード = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (医意見書右_下肢コード.compareTo(認定調査右_下肢コード) > 0) {
@@ -133,11 +133,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査その他 = RString.EMPTY;
         RString 医意見書その他 = RString.EMPTY;
         if (getコード(厚労省IF識別コード, new RString("麻痺等の有無（その他）")) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査その他 = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医その他コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書その他 = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (医意見書その他.compareTo(認定調査その他) > 0) {
@@ -148,11 +148,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査拘縮_肩関節 = RString.EMPTY;
         RString 医意見書拘縮_肩関節 = RString.EMPTY;
         if (getコード(厚労省IF識別コード, new RString("関節の動く範囲の制限（肩関節）")) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査拘縮_肩関節 = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医拘縮_肩関節コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書拘縮_肩関節 = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (医意見書拘縮_肩関節.compareTo(認定調査拘縮_肩関節) > 0) {
@@ -168,11 +168,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査食事摂取 = RString.EMPTY;
         RString 医意見書食事摂取 = RString.EMPTY;
         if (getコード(厚労省IF識別コード, new RString("食事摂取")) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査食事摂取 = ChosaAnser20.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医食事摂取コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書食事摂取 = IkenKomoku14.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (!IkenKomoku14.記載なし.getコード().equals(医意見書食事摂取) && IkenKomoku14.全面介助.getコード().equals(医意見書食事摂取)
@@ -194,11 +194,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査意思の伝達 = RString.EMPTY;
         RString 医意見書意思の伝達 = RString.EMPTY;
         if (get意思の伝達コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査意思の伝達 = ChosaAnser14.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医意思の伝達コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書意思の伝達 = IkenKomoku06.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (!IkenKomoku06.記載なし.getコード().equals(医意見書意思の伝達) && 医意見書意思の伝達.compareTo(認定調査意思の伝達) > 0) {
@@ -216,11 +216,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査短期記憶 = RString.EMPTY;
         RString 医意見書短期記憶 = RString.EMPTY;
         if (get短期記憶コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査短期記憶 = ChosaAnser15.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医短期記憶コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書短期記憶 = IkenKomoku04.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (!IkenKomoku04.記載なし.getコード().equals(医意見書短期記憶) && 医意見書短期記憶.compareTo(認定調査短期記憶) > 0) {
@@ -234,11 +234,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
 //        RString 認定調査徘徊 = RString.EMPTY;
 //        RString 医意見書徘徊 = RString.EMPTY;
 //        if (get徘徊コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()
-//                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+//                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
 //            認定調査徘徊 = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
 //        }
 //        if (get主治医徘徊コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-//                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+//                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
 //            医意見書徘徊 = IkenKomoku06.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
 //        }
 //        if (医意見書徘徊.compareTo(認定調査徘徊) > 0) {
@@ -249,11 +249,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
 //        RString 認定調査被害的 = RString.EMPTY;
 //        RString 医意見書被害的 = RString.EMPTY;
 //        if (get被害的コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()
-//                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+//                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
 //            認定調査被害的 = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
 //        }
 //        if (get主治医被害的コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-//                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+//                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
 //            医意見書被害的 = IkenKomoku06.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
 //        }
 //        if (医意見書被害的.compareTo(認定調査被害的) > 0) {
@@ -269,11 +269,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査昼夜逆転 = RString.EMPTY;
         RString 医意見書昼夜逆転 = RString.EMPTY;
         if (get昼夜逆転コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査昼夜逆転 = ChosaAnser16.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医昼夜逆転コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書昼夜逆転 = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if ((ChosaAnser16.ある.getコード().equals(認定調査昼夜逆転) || ChosaAnser16.ときどきある.getコード().equals(認定調査昼夜逆転))
@@ -285,11 +285,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査介護に抵抗 = RString.EMPTY;
         RString 医意見書介護に抵抗 = RString.EMPTY;
         if (get介護に抵抗コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査介護に抵抗 = ChosaAnser16.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医介護に抵抗コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書介護に抵抗 = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (IkenKomoku01.有.getコード().equals(医意見書介護に抵抗) && ChosaAnser16.ない.getコード().equals(認定調査介護に抵抗)) {
@@ -307,11 +307,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査日常の意思決定 = RString.EMPTY;
         RString 医意見書日常の意思決定 = RString.EMPTY;
         if (get日常の意思決定コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査日常の意思決定 = ChosaAnser17.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医日常の意思決定コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書日常の意思決定 = IkenKomoku05.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (!IkenKomoku05.記載なし.getコード().equals(医意見書日常の意思決定) && 医意見書日常の意思決定.compareTo(認定調査日常の意思決定) > 0) {
@@ -330,11 +330,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査点滴の管理 = RString.EMPTY;
         RString 医意見書点滴の管理 = RString.EMPTY;
         if (getコード(厚労省IF識別コード, new RString("処置内容（点滴の管理）")) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査点滴の管理 = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医点滴の管理コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書点滴の管理 = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (医意見書点滴の管理.compareTo(認定調査点滴の管理) > 0) {
@@ -345,11 +345,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査中心静脈栄養 = RString.EMPTY;
         RString 医意見書中心静脈栄養 = RString.EMPTY;
         if (getコード(厚労省IF識別コード, new RString("処置内容（中心静脈栄養）")) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査中心静脈栄養 = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医中心静脈栄養コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書中心静脈栄養 = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (医意見書中心静脈栄養.compareTo(認定調査中心静脈栄養) > 0) {
@@ -360,11 +360,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査透析 = RString.EMPTY;
         RString 医意見書透析 = RString.EMPTY;
         if (getコード(厚労省IF識別コード, new RString("処置内容（透析）")) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査透析 = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医透析コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書透析 = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (医意見書透析.compareTo(認定調査透析) > 0) {
@@ -380,11 +380,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査ストーマの処置 = RString.EMPTY;
         RString 医意見書ストーマの処置 = RString.EMPTY;
         if (getコード(厚労省IF識別コード, new RString("処置内容（ストーマの処置）")) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査ストーマの処置 = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医ストーマの処置コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書ストーマの処置 = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (医意見書ストーマの処置.compareTo(認定調査ストーマの処置) > 0) {
@@ -395,11 +395,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査酸素療法 = RString.EMPTY;
         RString 医意見書酸素療法 = RString.EMPTY;
         if (getコード(厚労省IF識別コード, new RString("処置内容（酸素療法）")) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査酸素療法 = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医酸素療法コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書酸素療法 = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (医意見書酸素療法.compareTo(認定調査酸素療法) > 0) {
@@ -410,11 +410,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査レスピレーター = RString.EMPTY;
         RString 医意見書レスピレーター = RString.EMPTY;
         if (getコード(厚労省IF識別コード, new RString("処置内容（レスピレーター）")) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査レスピレーター = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医レスピレーターコード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書レスピレーター = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (医意見書レスピレーター.compareTo(認定調査レスピレーター) > 0) {
@@ -430,11 +430,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査気管切開の処置 = RString.EMPTY;
         RString 医意見書気管切開の処置 = RString.EMPTY;
         if (get気管切開の処置コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査気管切開の処置 = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医気管切開の処置コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書気管切開の処置 = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (医意見書気管切開の処置.compareTo(認定調査気管切開の処置) > 0) {
@@ -445,11 +445,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査疼痛の看護 = RString.EMPTY;
         RString 医意見書疼痛の看護 = RString.EMPTY;
         if (getコード(厚労省IF識別コード, new RString("処置内容（疼痛の看護）")) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査疼痛の看護 = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医疼痛の看護コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書疼痛の看護 = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (医意見書疼痛の看護.compareTo(認定調査疼痛の看護) > 0) {
@@ -460,11 +460,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査経管栄養 = RString.EMPTY;
         RString 医意見書経管栄養 = RString.EMPTY;
         if (getコード(厚労省IF識別コード, new RString("処置内容（経管栄養）")) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査経管栄養 = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医経管栄養コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書経管栄養 = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (医意見書経管栄養.compareTo(認定調査経管栄養) > 0) {
@@ -480,11 +480,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査モニター測定 = RString.EMPTY;
         RString 医意見書モニター測定 = RString.EMPTY;
         if (getモニター測定コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査モニター測定 = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医モニター測定コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書モニター測定 = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (医意見書モニター測定.compareTo(認定調査モニター測定) > 0) {
@@ -495,11 +495,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査じょくそうの処置 = RString.EMPTY;
         RString 医意見書じょくそうの処置 = RString.EMPTY;
         if (getじょくそうの処置コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査じょくそうの処置 = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医じょくそうの処置コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書じょくそうの処置 = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (医意見書じょくそうの処置.compareTo(認定調査じょくそうの処置) > 0) {
@@ -511,11 +511,11 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         RString 認定調査カテーテル = RString.EMPTY;
         RString 医意見書カテーテル = RString.EMPTY;
         if (getカテーテルコード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
             認定調査カテーテル = ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).getコード();
         }
         if (get主治医カテーテルコード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5304_remban()
-                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().getColumnValue())) {
+                && dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5304_koroshoIfShikibetsuCode().value())) {
             医意見書カテーテル = IkenKomoku01.toValue(itiziHanteiEntity.getDbt5304_ikenItem()).getコード();
         }
         if (医意見書カテーテル.compareTo(認定調査カテーテル) > 0) {

@@ -36,17 +36,12 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -63,7 +58,6 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
     private IShiryoShinsakaiIinMapper mapper;
     private IinShinsakaiIinJohoMyBatisParameter myBatisParameter;
     private List<ShinsakaiIinJohoEntity> shinsakaiIinJohoList;
-    private List<PersonalData> personalDataList;
     private int no;
     private int count;
     @BatchWriter
@@ -96,10 +90,7 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
 
     @Override
     protected void process(ShinseiJohoEntity entity) {
-        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
-                new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.getShinseishoKanriNo().getColumnValue()));
-        personalDataList.add(personalData);
-        ShinsakaishiryoItem item = setShinsakaishiryoItem(entity, no);
+        ShinsakaishiryoItem item = setShinsakaishiryoItem(entity);
         ShinsakaishiryoA3Report report = new ShinsakaishiryoA3Report(item);
         report.writeBy(reportSourceWriterA3);
         no = no + 1;
@@ -107,11 +98,10 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
 
     @Override
     protected void afterExecute() {
-        AccessLogger.log(AccessLogType.照会, personalDataList);
         outputJokenhyoFactory();
     }
 
-    private ShinsakaishiryoItem setShinsakaishiryoItem(ShinseiJohoEntity entity, int no) {
+    private ShinsakaishiryoItem setShinsakaishiryoItem(ShinseiJohoEntity entity) {
         ShinsakaishiryoItem item = new ShinsakaishiryoItem();
         item.set審査会番号(paramter.getShinsakaiKaisaiNo());
         item.set審査会開催年月日(get審査会開催年月日());

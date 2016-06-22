@@ -9,6 +9,7 @@
     <select id="getShinsakaiIinCode" resultMap="Result_ShinsakaiIinCode" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTuutishoMyBatisParameter" fetchSize="500" >
             SELECT
+                DISTINCT
                 dbt5503."shinsakaiIinCode" AS dbt5503_shinsakaiIinCode
             FROM
                 rgdb."DbT5503ShinsakaiWariateIinJoho" AS dbt5503
