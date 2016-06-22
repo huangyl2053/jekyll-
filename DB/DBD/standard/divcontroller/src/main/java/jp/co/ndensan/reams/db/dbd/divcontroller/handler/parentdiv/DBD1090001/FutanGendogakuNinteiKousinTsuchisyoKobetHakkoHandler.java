@@ -28,7 +28,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler {
      *
      * @param 被保険者番号 被保険者番号
      * @param 識別コード 識別コード
-     * @return
+     * @return 介護負担限度額認定の情報
      */
     public ArrayList<FutanGendogakuNintei> get介護負担限度額認定(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
 
