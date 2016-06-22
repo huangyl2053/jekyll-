@@ -77,8 +77,8 @@ public class FuchoKarisanteiFukaMenuPanel {
      * @return 普徴仮算定賦課画面
      */
     public ResponseData<FuchoKarisanteiFukaMenuPanelDiv> onStateTransition(FuchoKarisanteiFukaMenuPanelDiv div) {
-        boolean falg = ViewStateHolder.get(ViewStateKeys.実行フラグ, Boolean.class);
-        getHandler(div).set実行ボタン(falg);
+        boolean flag = ViewStateHolder.get(ViewStateKeys.実行フラグ, Boolean.class);
+        getHandler(div).set実行ボタン(flag);
         return ResponseData.of(div).respond();
     }
 

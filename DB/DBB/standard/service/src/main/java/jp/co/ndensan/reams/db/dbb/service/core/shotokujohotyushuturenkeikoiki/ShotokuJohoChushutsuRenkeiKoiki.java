@@ -164,9 +164,9 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
             rsb.append(SPLIT);
             rsb.append(entity.get市町村識別ID());
             rsb.append(SUFFIX.toString());
-            RString path = new RString(SharedFile.getBasePath() + File.separator + "rsb.toRString()");
+            RString path = new RString(SharedFile.getBasePath() + File.separator + rsb.toRString());
             File file = new File(path.toString());
-            if (file.exists()) {
+            if (!file.exists()) {
                 kanriMasterEntity.set処理状態(データなし);
                 kanriMasterEntity.set表示用処理状態(状態なし);
             } else {
@@ -184,9 +184,9 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
         rsb.append(SPLIT);
         rsb.append(entity.get市町村識別ID());
         rsb.append(SUFFIX.toString());
-        RString path = new RString(SharedFile.getBasePath() + File.separator + "rsb.toRString()");
+        RString path = new RString(SharedFile.getBasePath() + File.separator + rsb.toRString());
         File file = new File(path.toString());
-        if (file.exists()) {
+        if (!file.exists()) {
             kanriMasterEntity.set処理状態(データなし);
             kanriMasterEntity.set表示用処理状態(状態なし);
         } else {
