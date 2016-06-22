@@ -43,7 +43,7 @@ public class TainoJokyoResearcher {
     private static final int 十年前 = 10;
     private static final int 小数点以下3桁 = 3;
     private static final int 一年の月数 = 12;
-    private MapperProvider mapperProvider;
+    private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタです。
