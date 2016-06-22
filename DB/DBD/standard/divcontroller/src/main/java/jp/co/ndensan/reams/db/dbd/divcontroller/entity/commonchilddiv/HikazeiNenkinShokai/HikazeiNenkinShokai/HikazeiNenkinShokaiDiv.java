@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.HikazeiNe
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.hikazenenkintaishosha.HikazeNenkinTaishosha;
@@ -32,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -292,7 +292,7 @@ public class HikazeiNenkinShokaiDiv extends Panel implements IHikazeiNenkinShoka
             TextBoxCode 基礎年金番号 = new TextBoxCode();
             基礎年金番号.setValue(hikazeNenkinTaishosha.get基礎年金番号());
             TextBoxCode 現基礎年金番号 = new TextBoxCode();
-            基礎年金番号.setValue(hikazeNenkinTaishosha.get現基礎年金番号());
+            現基礎年金番号.setValue(hikazeNenkinTaishosha.get現基礎年金番号());
             TextBoxCode 年金コード = new TextBoxCode();
             年金コード.setValue(hikazeNenkinTaishosha.get年金コード());
             TextBoxNum dt金額1 = new TextBoxNum();
