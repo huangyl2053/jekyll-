@@ -124,7 +124,7 @@ public class HihokenshaDaichoSakuseiManager {
     private static final RString MINUTE = new RString("分");
     private static final RString SECOND = new RString("秒");
     private static final RString REPLACED_MESSAGE = new RString("parameter");
-    private static boolean flag = false;
+    private boolean flag = false;
     private final MapperProvider mapperProvider;
     private final DbT7006RoreiFukushiNenkinJukyushaDac 老齢福祉年金受給者Dac;
     private final DbT7037ShoKofuKaishuDac 証交付回収Dac;
