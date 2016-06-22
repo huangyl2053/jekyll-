@@ -19,7 +19,7 @@
         <result property="temp_認定調査回数" column="temp_認定調査回数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_認定調査委託区分コード" column="temp_認定調査委託区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    <select id="get認定調査情報"
+    <select resultOrdered="true" id="get認定調査情報"
             resultMap="resultMap_NinteiChosaJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe2210001.NinteiChosaJohoMybatisParameter"
             fetchSize="500">
@@ -47,7 +47,7 @@
         AND  DbT5101NinteiShinseiJoho."logicalDeletedFlag" = FALSE
     </select>
 
-    <select id="get既存概況調査情報"
+    <select resultOrdered="true" id="get既存概況調査情報"
             resultMap="resultMap_NinteiChosaJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe2210001.NinteiChosaJohoMybatisParameter"
             fetchSize="500">
