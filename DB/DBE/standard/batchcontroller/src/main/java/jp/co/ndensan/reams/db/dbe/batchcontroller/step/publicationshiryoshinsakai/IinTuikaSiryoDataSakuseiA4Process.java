@@ -101,9 +101,7 @@ public class IinTuikaSiryoDataSakuseiA4Process extends BatchKeyBreakBase<IinTuik
 
     @Override
     protected void usualProcess(IinTuikaSiryoEntity entity) {
-        tsuikashiryokagami.set審査会開催年月日(fromatパターン9(entity.getShinsakaiKaisaiYMD()));
         tsuikashiryokagami.set審査会審査順(new RString(entity.getShinsakaiOrder()));
-        tsuikashiryokagami.set保険者(entity.getShichosonMeisho());
         tsuikashiryokagami.set被保険者番号(entity.getHihokenshaNo());
         tsuikashiryokagami.set被保険者氏名(entity.getHihokenshaName() == null || entity.getHihokenshaName().isEmpty() ? RString.EMPTY
                 : entity.getHihokenshaName().value());
@@ -148,7 +146,7 @@ public class IinTuikaSiryoDataSakuseiA4Process extends BatchKeyBreakBase<IinTuik
         tsuikashiryokagami.set追加審査対象者数(new RString(mapper.getShinsakaiWariateJohoCount(myBatisParameter)));
         tsuikashiryokagami.set合議体番号(new RString(mapper.getShinsakaiKaisaiKekkaJoho(myBatisParameter).getGogitaiNo()));
         tsuikashiryokagami.set審査会開催年月日(fromatパターン9(mapper.getShinsakaiKaisaiKekkaJoho(myBatisParameter).getShinsakaiKaisaiYMD()));
-        // TODO 通知文取得キー不一致
+        // TODO QA回答まち、通知文取得キー不一致
         tsuikashiryokagami.set通知文1(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517009.getReportId(),
                 KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate()));
     }
