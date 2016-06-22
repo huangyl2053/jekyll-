@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 賦課Aliveのデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-022 wangkanglei
  */
 public class DbV2002FukaAliveDac implements ISaveable<DbV2002FukaEntity> {
 
