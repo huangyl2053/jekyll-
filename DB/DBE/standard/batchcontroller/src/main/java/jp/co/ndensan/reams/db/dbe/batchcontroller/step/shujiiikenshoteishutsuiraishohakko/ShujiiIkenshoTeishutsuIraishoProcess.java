@@ -85,7 +85,6 @@ public class ShujiiIkenshoTeishutsuIraishoProcess extends BatchProcessBase<Shuji
     private static final RString IKENSHOKINYUUOCR = new RString("【主治医意見書記入用紙OCR出力区分】");
     private static final RString IKENSHOSAKUSEISEIKYUUSHO = new RString("【主治医意見書作成料請求書出力区分】");
     private static final RString IKENSHOTEISHUTU = new RString("【介護保険指定医依頼兼主治医意見書提出意見依頼書出力区分】");
-    private int 宛名連番 = 1;
     private static final int INT3 = 3;
     private static final int INT4 = 4;
     private static final int INT5 = 5;
