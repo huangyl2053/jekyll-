@@ -1,0 +1,74 @@
+﻿{
+ "uiContainerName": "DBCUC81200",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "事業分支給額計算結果連絡票作成（単）",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0200001",
+     "layoutTitle": "対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC8120012",
+     "toLayoutTitle": "事業高額合算　事業分支給額計算結果連絡票作成",
+     "toState": "計算結果連絡票作成"
+    },
+    {
+     "id": "3",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC8120012",
+     "layoutTitle": "事業高額合算　事業分支給額計算結果連絡票作成",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC8120012",
+     "layoutTitle": "事業高額合算　事業分支給額計算結果連絡票作成",
+     "eventName": "検索結果一覧に戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC8120012",
+     "layoutTitle": "事業高額合算　事業分支給額計算結果連絡票作成",
+     "eventName": "対象者検索に戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
+    }
+   ]
+  }
+ ]
+}

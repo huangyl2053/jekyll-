@@ -259,21 +259,21 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
     @JsonProperty("modes")
     private HashSet<Mode> modes;
 
-    public static enum 台帳種別 implements ICommonChildDivMode {
+    public static enum DaichoShubetsu implements ICommonChildDivMode {
 
         台帳種別表示する("台帳種別表示する"),
         台帳種別非表示する("台帳種別非表示する");
 
         private final String name;
 
-        private 台帳種別(final String name) {
+        private DaichoShubetsu(final String name) {
             this.name = name;
         }
 
-        public static 台帳種別 getEnum(String str) {
-            台帳種別[] enumArray = 台帳種別.values();
+        public static DaichoShubetsu getEnum(String str) {
+            DaichoShubetsu[] enumArray = DaichoShubetsu.values();
 
-            for (台帳種別 enumStr : enumArray) {
+            for (DaichoShubetsu enumStr : enumArray) {
                 if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
@@ -288,15 +288,15 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
     }
 
-    public 台帳種別 getMode_台帳種別() {
-        return (台帳種別) _CommonChildDivModeUtil.getMode( this.modes, 台帳種別.class );
+    public DaichoShubetsu getMode_DaichoShubetsu() {
+        return (DaichoShubetsu) _CommonChildDivModeUtil.getMode(this.modes, DaichoShubetsu.class);
     }
 
-    public void setMode_台帳種別( 台帳種別 value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 台帳種別.class , value );
+    public void setMode_DaichoShubetsu(DaichoShubetsu value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DaichoShubetsu.class, value);
     }
 
-    public static enum 施設種類 implements ICommonChildDivMode {
+    public static enum ShisetsuShurui implements ICommonChildDivMode {
 
         施設種類を表示する("施設種類を表示する"),
         施設種類を非表示する("施設種類を非表示する"),
@@ -304,14 +304,14 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
         private final String name;
 
-        private 施設種類(final String name) {
+        private ShisetsuShurui(final String name) {
             this.name = name;
         }
 
-        public static 施設種類 getEnum(String str) {
-            施設種類[] enumArray = 施設種類.values();
+        public static ShisetsuShurui getEnum(String str) {
+            ShisetsuShurui[] enumArray = ShisetsuShurui.values();
 
-            for (施設種類 enumStr : enumArray) {
+            for (ShisetsuShurui enumStr : enumArray) {
                 if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
@@ -326,15 +326,15 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
     }
 
-    public 施設種類 getMode_施設種類() {
-        return (施設種類) _CommonChildDivModeUtil.getMode( this.modes, 施設種類.class );
+    public ShisetsuShurui getMode_施設種類() {
+        return (ShisetsuShurui) _CommonChildDivModeUtil.getMode(this.modes, ShisetsuShurui.class);
     }
 
-    public void setMode_施設種類( 施設種類 value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 施設種類.class , value );
+    public void setMode_施設種類(ShisetsuShurui value) {
+        _CommonChildDivModeUtil.setMode(this.modes, ShisetsuShurui.class, value);
     }
 
-    public static enum 入力補助 implements ICommonChildDivMode {
+    public static enum NyuryokuHojo implements ICommonChildDivMode {
 
         事業者を表示する("事業者を表示する"),
         他特例施設を表示する("他特例施設を表示する"),
@@ -344,14 +344,14 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
         private final String name;
 
-        private 入力補助(final String name) {
+        private NyuryokuHojo(final String name) {
             this.name = name;
         }
 
-        public static 入力補助 getEnum(String str) {
-            入力補助[] enumArray = 入力補助.values();
+        public static NyuryokuHojo getEnum(String str) {
+            NyuryokuHojo[] enumArray = NyuryokuHojo.values();
 
-            for (入力補助 enumStr : enumArray) {
+            for (NyuryokuHojo enumStr : enumArray) {
                 if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
@@ -366,15 +366,15 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
     }
 
-    public 入力補助 getMode_入力補助() {
-        return (入力補助) _CommonChildDivModeUtil.getMode( this.modes, 入力補助.class );
+    public NyuryokuHojo getMode_入力補助() {
+        return (NyuryokuHojo) _CommonChildDivModeUtil.getMode(this.modes, NyuryokuHojo.class);
     }
 
-    public void setMode_入力補助( 入力補助 value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 入力補助.class , value );
+    public void setMode_入力補助(NyuryokuHojo value) {
+        _CommonChildDivModeUtil.setMode(this.modes, NyuryokuHojo.class, value);
     }
 
-    public static enum 表示モード implements ICommonChildDivMode {
+    public static enum HyojiMode implements ICommonChildDivMode {
 
         defaultView("defaultView"),
         readOnly("readOnly"),
@@ -382,14 +382,14 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
         private final String name;
 
-        private 表示モード(final String name) {
+        private HyojiMode(final String name) {
             this.name = name;
         }
 
-        public static 表示モード getEnum(String str) {
-            表示モード[] enumArray = 表示モード.values();
+        public static HyojiMode getEnum(String str) {
+            HyojiMode[] enumArray = HyojiMode.values();
 
-            for (表示モード enumStr : enumArray) {
+            for (HyojiMode enumStr : enumArray) {
                 if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
@@ -404,12 +404,12 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
     }
 
-    public 表示モード getMode_表示モード() {
-        return (表示モード) _CommonChildDivModeUtil.getMode( this.modes, 表示モード.class );
+    public HyojiMode getMode_表示モード() {
+        return (HyojiMode) _CommonChildDivModeUtil.getMode(this.modes, HyojiMode.class);
     }
 
-    public void setMode_表示モード( 表示モード value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 表示モード.class , value );
+    public void setMode_表示モード(HyojiMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, HyojiMode.class, value);
     }
 
     // </editor-fold>

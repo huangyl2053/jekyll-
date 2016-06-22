@@ -50,7 +50,7 @@ public class ShoKaishuJokyoListDiv extends Panel implements IShoKaishuJokyoListD
     @JsonProperty("modes")
     private HashSet<Mode> modes;
 
-    public static enum グリッド表示モード implements ICommonChildDivMode {
+    public static enum GridHyojiMode implements ICommonChildDivMode {
 
         shokai("shokai"),
         toroku("toroku"),
@@ -58,14 +58,14 @@ public class ShoKaishuJokyoListDiv extends Panel implements IShoKaishuJokyoListD
 
         private final String name;
 
-        private グリッド表示モード(final String name) {
+        private GridHyojiMode(final String name) {
             this.name = name;
         }
 
-        public static グリッド表示モード getEnum(String str) {
-            グリッド表示モード[] enumArray = グリッド表示モード.values();
+        public static GridHyojiMode getEnum(String str) {
+            GridHyojiMode[] enumArray = GridHyojiMode.values();
 
-            for (グリッド表示モード enumStr : enumArray) {
+            for (GridHyojiMode enumStr : enumArray) {
                 if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
@@ -80,34 +80,34 @@ public class ShoKaishuJokyoListDiv extends Panel implements IShoKaishuJokyoListD
 
     }
 
-    public グリッド表示モード getMode_グリッド表示モード() {
-        return (グリッド表示モード) _CommonChildDivModeUtil.getMode(this.modes, グリッド表示モード.class);
+    public GridHyojiMode getMode_GridHyojiMode() {
+        return (GridHyojiMode) _CommonChildDivModeUtil.getMode(this.modes, GridHyojiMode.class);
     }
 
-    public void setMode_グリッド表示モード(グリッド表示モード value) {
-        _CommonChildDivModeUtil.setMode(this.modes, グリッド表示モード.class, value);
+    public void setMode_GridHyojiMode(GridHyojiMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, GridHyojiMode.class, value);
     }
 
-    public static enum 一覧パネル高さ implements ICommonChildDivMode {
+    public static enum IchiranPanelTakasa implements ICommonChildDivMode {
 
-        サイズ200("サイズ200"),
-        サイズ250("サイズ250"),
-        サイズ300("サイズ300"),
-        サイズ350("サイズ350"),
-        サイズ400("サイズ400"),
-        サイズ450("サイズ450"),
-        サイズ500("サイズ500");
+        Size200("Size200"),
+        Size250("Size250"),
+        Size300("Size300"),
+        Size350("Size350"),
+        Size400("Size400"),
+        Size450("Size450"),
+        Size500("Size500");
 
         private final String name;
 
-        private 一覧パネル高さ(final String name) {
+        private IchiranPanelTakasa(final String name) {
             this.name = name;
         }
 
-        public static 一覧パネル高さ getEnum(String str) {
-            一覧パネル高さ[] enumArray = 一覧パネル高さ.values();
+        public static IchiranPanelTakasa getEnum(String str) {
+            IchiranPanelTakasa[] enumArray = IchiranPanelTakasa.values();
 
-            for (一覧パネル高さ enumStr : enumArray) {
+            for (IchiranPanelTakasa enumStr : enumArray) {
                 if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
@@ -122,12 +122,12 @@ public class ShoKaishuJokyoListDiv extends Panel implements IShoKaishuJokyoListD
 
     }
 
-    public 一覧パネル高さ getMode_一覧パネル高さ() {
-        return (一覧パネル高さ) _CommonChildDivModeUtil.getMode(this.modes, 一覧パネル高さ.class);
+    public IchiranPanelTakasa getMode_IchiranPanelTakasa() {
+        return (IchiranPanelTakasa) _CommonChildDivModeUtil.getMode(this.modes, IchiranPanelTakasa.class);
     }
 
-    public void setMode_一覧パネル高さ(一覧パネル高さ value) {
-        _CommonChildDivModeUtil.setMode(this.modes, 一覧パネル高さ.class, value);
+    public void setMode_IchiranPanelTakasa(IchiranPanelTakasa value) {
+        _CommonChildDivModeUtil.setMode(this.modes, IchiranPanelTakasa.class, value);
     }
 
     //--------------- この行より下にコードを追加してください -------------------

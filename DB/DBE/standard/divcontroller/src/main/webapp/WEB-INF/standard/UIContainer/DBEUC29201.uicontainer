@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC29201",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "依頼情報データ受取（オルカ）",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2920001",
+     "toLayoutTitle": "依頼情報データ受取(オルカ)",
+     "toState": ""
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2920001",
+     "layoutTitle": "依頼情報データ受取(オルカ)",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

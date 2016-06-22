@@ -10,45 +10,45 @@ module DBZ {
                 this.controls = new Controls(fieldName);
             }
             
-            public 被保履歴ボタンを() {
-                return new Modes.被保履歴ボタンを(this.controls);
+            public HihoRirekiButtonWo() {
+                return new Modes.HihoRirekiButtonWo(this.controls);
             }
 
-            public 認定履歴ボタンを() {
-                return new Modes.認定履歴ボタンを(this.controls);
+            public NinteiRirekiButtonWo() {
+                return new Modes.NinteiRirekiButtonWo(this.controls);
             }
         }
 
         export module Modes {
 
-            export class 被保履歴ボタンを {
+            export class HihoRirekiButtonWo {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
                     this.controls = controls;
                 }
 
-                public 表示する(): void {
+                public HyojiSuru(): void {
                     this.controls.btnHihoRireki().displayNone = false;
                 }
                 
-                public 表示しない(): void {
+                public HyojiShinai(): void {
                     this.controls.btnHihoRireki().displayNone = true;
                 }
             }
 
-            export class 認定履歴ボタンを {
+            export class NinteiRirekiButtonWo {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
                     this.controls = controls;
                 }
 
-                public 表示する(): void {
+                public HyojiSuru(): void {
                     this.controls.btnNinteiRireki().displayNone = false;
                 }
                 
-                public 表示しない(): void {
+                public HyojiShinai(): void {
                     this.controls.btnNinteiRireki().displayNone = true;
                 }
             }

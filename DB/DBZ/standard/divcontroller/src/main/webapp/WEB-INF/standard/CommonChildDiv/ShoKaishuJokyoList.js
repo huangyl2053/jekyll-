@@ -8,9 +8,9 @@
             }
             ModeController.prototype.priorities = function () {
                 return [
-                    "グリッド表示モード",
-                    "一覧パネル高さ",
-                    "明細表示モード"
+                    "GridHyojiMode",
+                    "IchiranPanelTakasa",
+                    "MeisaiHyojiMode"
                 ];
             };
 
@@ -22,26 +22,26 @@
                 return new ShoKaishuJokyoList.PublicProperties(this.fieldName);
             };
 
-            ModeController.prototype.グリッド表示モード = function () {
-                return new Modes.グリッド表示モード(this.controls);
+            ModeController.prototype.GridHyojiMode = function () {
+                return new Modes.GridHyojiMode(this.controls);
             };
 
-            ModeController.prototype.一覧パネル高さ = function () {
-                return new Modes.一覧パネル高さ(this.controls);
+            ModeController.prototype.IchiranPanelTakasa = function () {
+                return new Modes.IchiranPanelTakasa(this.controls);
             };
-            ModeController.prototype.明細表示モード = function () {
-                return new Modes.明細表示モード(this.controls);
+            ModeController.prototype.MeisaiHyojiMode = function () {
+                return new Modes.MeisaiHyojiMode(this.controls);
             };
             return ModeController;
         })();
         ShoKaishuJokyoList.ModeController = ModeController;
 
         (function (Modes) {
-            var グリッド表示モード = (function () {
-                function グリッド表示モード(controls) {
+            var GridHyojiMode = (function () {
+                function GridHyojiMode(controls) {
                     this.controls = controls;
                 }
-                グリッド表示モード.prototype.shokai = function () {
+                GridHyojiMode.prototype.shokai = function () {
                     var gridSetting = this.controls.dgShoKaishuJokyo().gridSetting;
 
                     gridSetting.isShowSelectButtonColumn = false;
@@ -54,7 +54,7 @@
                     this.controls.ShoKaishuJokyoShosai().displayNone = false;
                 };
 
-                グリッド表示モード.prototype.toroku = function () {
+                GridHyojiMode.prototype.toroku = function () {
                     var gridSetting = this.controls.dgShoKaishuJokyo().gridSetting;
 
                     gridSetting.isShowSelectButtonColumn = true;
@@ -65,7 +65,7 @@
                     this.controls.dgShoKaishuJokyo()._control.afterPropertiesSet();
                 };
 
-                グリッド表示モード.prototype.select = function () {
+                GridHyojiMode.prototype.select = function () {
                     var gridSetting = this.controls.dgShoKaishuJokyo().gridSetting;
 
                     gridSetting.isShowSelectButtonColumn = true;
@@ -75,65 +75,65 @@
 
                     this.controls.dgShoKaishuJokyo()._control.afterPropertiesSet();
                 };
-                return グリッド表示モード;
+                return GridHyojiMode;
             })();
-            Modes.グリッド表示モード = グリッド表示モード;
+            Modes.GridHyojiMode = GridHyojiMode;
 
-            var 一覧パネル高さ = (function () {
-                function 一覧パネル高さ(controls) {
+            var IchiranPanelTakasa = (function () {
+                function IchiranPanelTakasa(controls) {
                     this.controls = controls;
                 }
-                一覧パネル高さ.prototype.サイズ200 = function () {
+                IchiranPanelTakasa.prototype.Size200 = function () {
                     this.controls.dgShoKaishuJokyo().height = "200";
                 };
 
-                一覧パネル高さ.prototype.サイズ250 = function () {
+                IchiranPanelTakasa.prototype.Size250 = function () {
                     this.controls.dgShoKaishuJokyo().height = "250";
                 };
 
-                一覧パネル高さ.prototype.サイズ300 = function () {
+                IchiranPanelTakasa.prototype.Size300 = function () {
                     this.controls.dgShoKaishuJokyo().height = "300";
                 };
 
-                一覧パネル高さ.prototype.サイズ350 = function () {
+                IchiranPanelTakasa.prototype.Size350 = function () {
                     this.controls.dgShoKaishuJokyo().height = "350";
                 };
 
-                一覧パネル高さ.prototype.サイズ400 = function () {
+                IchiranPanelTakasa.prototype.Size400 = function () {
                     this.controls.dgShoKaishuJokyo().height = "400";
                 };
 
-                一覧パネル高さ.prototype.サイズ450 = function () {
+                IchiranPanelTakasa.prototype.Size450 = function () {
                     this.controls.dgShoKaishuJokyo().height = "450";
                 };
 
-                一覧パネル高さ.prototype.サイズ500 = function () {
+                IchiranPanelTakasa.prototype.Size500 = function () {
                     this.controls.dgShoKaishuJokyo().height = "500";
                 };
-                return 一覧パネル高さ;
+                return IchiranPanelTakasa;
             })();
-            Modes.一覧パネル高さ = 一覧パネル高さ;
-            var 明細表示モード = (function () {
-                function 明細表示モード(controls) {
+            Modes.IchiranPanelTakasa = IchiranPanelTakasa;
+            var MeisaiHyojiMode = (function () {
+                function MeisaiHyojiMode(controls) {
                     this.controls = controls;
                 }
-                明細表示モード.prototype.照会 = function () {
+                MeisaiHyojiMode.prototype.Shokai = function () {
                     this.controls.ShoKaishuJokyoShosai().readOnly = true;
                     this.controls.ShoKaishuJokyoShosai().displayNone = false;
                 };
 
-                明細表示モード.prototype.入力 = function () {
+                MeisaiHyojiMode.prototype.Nyuryoku = function () {
                     this.controls.ShoKaishuJokyoShosai().readOnly = false;
                     this.controls.ShoKaishuJokyoShosai().displayNone = false;
                 };
 
-                明細表示モード.prototype.非表示 = function () {
+                MeisaiHyojiMode.prototype.Hihyoji = function () {
                     this.controls.ShoKaishuJokyoShosai().readOnly = true;
                     this.controls.ShoKaishuJokyoShosai().displayNone = true;
                 };
-                return 明細表示モード;
+                return MeisaiHyojiMode;
             })();
-            Modes.明細表示モード = 明細表示モード;
+            Modes.MeisaiHyojiMode = MeisaiHyojiMode;
         })(ShoKaishuJokyoList.Modes || (ShoKaishuJokyoList.Modes = {}));
         var Modes = ShoKaishuJokyoList.Modes;
     })(DBZ.ShoKaishuJokyoList || (DBZ.ShoKaishuJokyoList = {}));

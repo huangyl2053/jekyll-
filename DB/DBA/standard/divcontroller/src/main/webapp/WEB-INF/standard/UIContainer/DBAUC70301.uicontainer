@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBAUC70301",
+ "displayWizard": false,
+ "subGyomuCode": "DBA",
+ "steps": [
+  {
+   "id": 1,
+   "name": "汎用リスト（資格　他市町村住所地特例者）",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA7020001",
+     "toLayoutTitle": "汎用リスト",
+     "toState": "他市町村住所地特例者"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA7020001",
+     "layoutTitle": "汎用リスト",
+     "eventName": "実行",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
