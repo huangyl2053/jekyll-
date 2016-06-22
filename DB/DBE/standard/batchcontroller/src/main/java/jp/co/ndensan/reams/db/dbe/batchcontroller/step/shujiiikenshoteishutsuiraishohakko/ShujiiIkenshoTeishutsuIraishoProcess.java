@@ -62,7 +62,6 @@ public class ShujiiIkenshoTeishutsuIraishoProcess extends BatchProcessBase<Shuji
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoTeishutsuIraishoHakkoMapper."
             + "get主治医意見書提出依頼書発行");
     private static final ReportId 帳票ID = ReportIdDBE.DBE236001.getReportId();
-    private static final RString 文字列0 = new RString("0");
     private static final RString 文字列1 = new RString("1");
     private static final RString 記号_星 = new RString("*");
     private static final RString 年号_明治 = new RString("明");
