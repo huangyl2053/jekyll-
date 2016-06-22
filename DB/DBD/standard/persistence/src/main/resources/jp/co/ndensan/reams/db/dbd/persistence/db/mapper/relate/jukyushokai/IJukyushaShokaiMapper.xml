@@ -166,7 +166,7 @@
     </select>
 
     <select resultOrdered="true" id ="findサービス受給状況"
-            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.jukyushokai.ServiceJukyuJokyoEntity">
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.jukyushokai.ServiceJukyuJokyoEntity" fetchSize="500">
         WITH key AS(
         SELECT "shikibetsuCode" FROM rgdb."DbV1001HihokenshaDaicho" WHERE "hihokenshaNo" = #{被保険者番号}
         )
