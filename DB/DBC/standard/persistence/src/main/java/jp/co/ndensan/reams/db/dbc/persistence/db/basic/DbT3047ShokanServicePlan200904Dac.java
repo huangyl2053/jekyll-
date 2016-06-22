@@ -42,9 +42,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047ShokanServicePlan200904Entity> {
 
     private static final int 件数_1 = 1;
-    private static final RString 被保険者番号 = new RString("被保険者番号");
-    private static final RString サービス提供年月 = new RString("サービス提供年月");
-    private static final RString 整理番号 = new RString("整理番号");
+    private static final RString 定数_被保険者番号 = new RString("被保険者番号");
+    private static final RString 定数_サービス提供年月 = new RString("サービス提供年月");
+    private static final RString 定数_整理番号 = new RString("整理番号");
+    private static final RString 定数_事業者番号 = new RString("事業者番号");
     @InjectSession
     private SqlSession session;
 
@@ -70,10 +71,10 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
             RString 様式番号,
             RString 明細番号,
             RString 連番) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号.toString()));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(整理番号.toString()));
-        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業者番号.toString()));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス提供年月.toString()));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_事業者番号.toString()));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
         requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
@@ -112,10 +113,10 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
             RString 整理番号,
             JigyoshaNo 事業者番号,
             ServiceCode サービスコード) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号.toString()));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(整理番号.toString()));
-        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス提供年月.toString()));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_事業者番号.toString()));
         requireNonNull(サービスコード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービスコード"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -180,9 +181,9 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
      */
     @Transaction
     public DbT3047ShokanServicePlan200904Entity select決定理由情報(SyokanbaraiketteJohoParameter parameter) {
-        requireNonNull(parameter.getHiHokenshaNo(), UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号.toString()));
-        requireNonNull(parameter.getServiceTeikyoYM(), UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月.toString()));
-        requireNonNull(parameter.getSeiriNo(), UrSystemErrorMessages.値がnull.getReplacedMessage(整理番号.toString()));
+        requireNonNull(parameter.getHiHokenshaNo(), UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
+        requireNonNull(parameter.getServiceTeikyoYM(), UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス提供年月.toString()));
+        requireNonNull(parameter.getSeiriNo(), UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -213,10 +214,10 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
             RString 整理番号,
             JigyoshaNo 事業者番号,
             RString 様式番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号.toString()));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(整理番号.toString()));
-        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス提供年月.toString()));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_事業者番号.toString()));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -250,10 +251,10 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 明細番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号.toString()));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(整理番号.toString()));
-        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス提供年月.toString()));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_事業者番号.toString()));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
         requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
 

@@ -995,13 +995,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                 修正前支給区分 = ShikyuFushikyuKubun.不支給.getコード();
 
             } else {
-                dbT3036entity.setKetteiYMD(parameter.get決定年月日());
-                dbT3036entity.setShikyuHushikyuKetteiKubun(parameter.get支給区分());
-                dbT3036entity.setShiharaiKingaku(parameter.get支払金額合計());
-                set前回支払金額(parameter, dbT3036entity);
-                dbT3036entity.setSagakuKingakuGokei(parameter.get差額金額());
-                dbT3036entity.setState(EntityDataState.Modified);
-                償還払支給判定結果Dac.save(dbT3036entity);
+                insert償還払支給判定結果(parameter, dbT3036entity);
                 修正前支給区分 = parameter.get支給区分();
             }
             List<DbT3053ShokanShukeiEntity> entityList = 償還払請求集計Dac.select住宅改修費(parameter.get被保険者番号(),
@@ -1033,10 +1027,16 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
         }
     }
 
-    private void set前回支払金額(SyokanbaraihiShikyuShinseiKetteParameter parameter, DbT3036ShokanHanteiKekkaEntity dbT3036entity) {
+    private void insert償還払支給判定結果(SyokanbaraihiShikyuShinseiKetteParameter parameter, DbT3036ShokanHanteiKekkaEntity dbT3036entity) {
+        dbT3036entity.setKetteiYMD(parameter.get決定年月日());
+        dbT3036entity.setShikyuHushikyuKetteiKubun(parameter.get支給区分());
+        dbT3036entity.setShiharaiKingaku(parameter.get支払金額合計());
         if (モード_修正.equals(parameter.get画面モード()) && !parameter.get支払金額合計初期().equals(parameter.get支払金額合計())) {
             dbT3036entity.setZenkaiShiharaiKingaku(parameter.get支払金額合計初期());
         }
+        dbT3036entity.setSagakuKingakuGokei(parameter.get差額金額());
+        dbT3036entity.setState(EntityDataState.Modified);
+        償還払支給判定結果Dac.save(dbT3036entity);
     }
 
     private int up償還払請求集計(DbT3053ShokanShukeiEntity entity, SyokanbaraihiShikyuShinseiKetteParameter parameter,
