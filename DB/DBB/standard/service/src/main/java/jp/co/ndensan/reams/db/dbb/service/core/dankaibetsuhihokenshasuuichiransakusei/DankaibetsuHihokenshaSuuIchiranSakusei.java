@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.service.core.dankaibetuhihokensyasuichiranhyo;
+package jp.co.ndensan.reams.db.dbb.service.core.dankaibetsuhihokenshasuuichiransakusei;
 
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.dankaibetuhihokensyasuichiranhyo.DankaibetuHihokensyasuIchiranhyoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetuhihokensyasuichiranhyo.InputeImageDivEntity;
@@ -19,14 +19,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @reamsid_L DBB-1820-030 surun
  */
-public class DankaibetuHihokensyasuIchiranhyo {
+public class DankaibetsuHihokenshaSuuIchiranSakusei {
 
     private final DbT7022ShoriDateKanriDac 処理日付管理Dac;
 
     /**
      * コンストラクタです。
      */
-    DankaibetuHihokensyasuIchiranhyo() {
+    DankaibetsuHihokenshaSuuIchiranSakusei() {
         this.処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     }
 
@@ -35,17 +35,17 @@ public class DankaibetuHihokensyasuIchiranhyo {
      *
      * @param 処理日付管理Dac DbT7022ShoriDateKanriDac
      */
-    DankaibetuHihokensyasuIchiranhyo(DbT7022ShoriDateKanriDac 処理日付管理Dac) {
+    DankaibetsuHihokenshaSuuIchiranSakusei(DbT7022ShoriDateKanriDac 処理日付管理Dac) {
         this.処理日付管理Dac = 処理日付管理Dac;
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link DankaibetuHihokensyasuIchiranhyo}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link DankaibetsuHihokenshaSuuIchiranSakusei}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link DankaibetuHihokensyasuIchiranhyo}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link DankaibetsuHihokenshaSuuIchiranSakusei}のインスタンス
      */
-    public static DankaibetuHihokensyasuIchiranhyo createInstance() {
-        return InstanceProvider.create(DankaibetuHihokensyasuIchiranhyo.class);
+    public static DankaibetsuHihokenshaSuuIchiranSakusei createInstance() {
+        return InstanceProvider.create(DankaibetsuHihokenshaSuuIchiranSakusei.class);
     }
 
     /**
