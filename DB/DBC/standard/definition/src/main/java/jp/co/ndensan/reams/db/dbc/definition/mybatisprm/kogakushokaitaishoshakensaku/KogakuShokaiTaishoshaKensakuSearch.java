@@ -6,10 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaitaishoshakensaku;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +21,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuShokaiTaishoshaKensakuSearch {
 
-    private RString メニューID;
+    private boolean 指定して場合;
     private HihokenshaNo 被保険者番号;
     private FlexibleYearMonth 提供年月From;
     private FlexibleYearMonth 提供年月To;
@@ -31,6 +29,9 @@ public class KogakuShokaiTaishoshaKensakuSearch {
     private FlexibleDate 申請年月To;
     private FlexibleDate 決定年月From;
     private FlexibleDate 決定年月To;
-    private LasdecCode 市町村コード;
-
+    private FlexibleYearMonth 提供年月;
+    private FlexibleDate 申請年月初;
+    private FlexibleDate 申請年月末;
+    private FlexibleDate 決定年月初;
+    private FlexibleDate 決定年月末;
 }

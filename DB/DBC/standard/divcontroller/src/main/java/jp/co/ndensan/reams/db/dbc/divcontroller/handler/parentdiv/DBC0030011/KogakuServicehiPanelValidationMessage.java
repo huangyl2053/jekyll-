@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
  *
  * @reamsid_L DBC-3000-010 gongliang
  */
-public enum KogakuServicehiTaishoshaKensakuMainMessage implements IValidationMessage {
+public enum KogakuServicehiPanelValidationMessage implements IValidationMessage {
 
     /**
      * 被保番号、提供年月、申請年月、決定年月の最小限に一つが入力必要
@@ -38,7 +38,7 @@ public enum KogakuServicehiTaishoshaKensakuMainMessage implements IValidationMes
         return message;
     }
 
-    private KogakuServicehiTaishoshaKensakuMainMessage(IMessageGettable message, String... replacements) {
+    private KogakuServicehiPanelValidationMessage(IMessageGettable message, String... replacements) {
         this.message = message.getMessage().replace(replacements);
     }
 }
