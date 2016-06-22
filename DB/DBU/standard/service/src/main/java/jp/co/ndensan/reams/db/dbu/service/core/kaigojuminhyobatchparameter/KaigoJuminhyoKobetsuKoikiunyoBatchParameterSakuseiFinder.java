@@ -90,8 +90,8 @@ public class KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder {
             if (list.getKonkaiStSakuseiYMD() != null) {
                 batchParameter.setDateFrom(RDateTime.of(list.getKonkaiStSakuseiYMD().toDateString(),
                         new RString(list.getKonkaiStSakuseiTime().toString())));
-                batchParameter.setShichosonCode(list.getSakiShichoson());
             }
+            batchParameter.setShichosonCode(list.getSakiShichoson());
             batchParameterList.add(batchParameter);
         }
         return SearchResult.of(batchParameterList, 0, false);
