@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class KobetsuJikoRenkeiInfoSakuseiKoiki {
 
+    private static final int 連番 = 5;
+
     /**
      * 画面初期化表示する。
      *
@@ -122,6 +124,7 @@ public class KobetsuJikoRenkeiInfoSakuseiKoiki {
                 KaigoJuminhyoKobetsuParameter kobetsu = new KaigoJuminhyoKobetsuParameter();
                 kobetsu.setKonkaiStSakuseiTime(row.getTxtKonkaiStSakuseiTime().getValue());
                 kobetsu.setKonkaiStSakuseiYMD(row.getTxtKonkaiStSakuseiYMD().getValue());
+                kobetsu.setSakiShichoson(row.getTxtSakiShichoson().getValue().substring(0, 連番));
                 kobetsuLsit.add(kobetsu);
             }
         }
