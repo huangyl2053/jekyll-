@@ -98,9 +98,7 @@ public class IinTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<IinTuik
 
     @Override
     protected void usualProcess(IinTuikaSiryoEntity entity) {
-        tsuikashiryokagami.set審査会開催年月日(fromatパターン9(entity.getShinsakaiKaisaiYMD()));
         tsuikashiryokagami.set審査会審査順(new RString(entity.getShinsakaiOrder()));
-        tsuikashiryokagami.set保険者(entity.getShichosonMeisho());
         tsuikashiryokagami.set被保険者番号(entity.getHihokenshaNo());
         tsuikashiryokagami.set被保険者氏名(entity.getHihokenshaName() == null || entity.getHihokenshaName().isEmpty() ? RString.EMPTY
                 : entity.getHihokenshaName().value());
