@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * @reamsid_L DBB-1690-030 sunhui
  */
+@SuppressWarnings("checkstyle:illegaltoken")
 public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
 
     private final ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div;
@@ -102,7 +103,6 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
      * @param currentTime RDate
      * @param files FileData[]
      */
-    @SuppressWarnings("checkstyle:illegaltoken")
     public void initTorikoShori(FileData[] files, RDate currentTime) {
         if (files[0].getFileName().contains(所得情報ファイル)) {
             div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().setValue(処理待ち);
@@ -139,7 +139,6 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
      * @param files FileData[]
      * @return ValidationMessageControlPairs
      */
-    @SuppressWarnings("checkstyle:illegaltoken")
     public ValidationMessageControlPairs getCheckFile(FileData[] files) {
         ShotokuJohoChushutsuTanitsuTashaBatchParameterValidationHandler validation
                 = new ShotokuJohoChushutsuTanitsuTashaBatchParameterValidationHandler(div);
@@ -154,7 +153,6 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
      * @param files FileData[]
      * @return ValidationMessageControlPairs
      */
-    @SuppressWarnings("checkstyle:illegaltoken")
     public ValidationMessageControlPairs checkFilesStates(FileData[] files) {
         ShotokuJohoChushutsuTanitsuTashaBatchParameterValidationHandler validation
                 = new ShotokuJohoChushutsuTanitsuTashaBatchParameterValidationHandler(div);

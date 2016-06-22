@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * @reamsid_L DBB-1690-030 sunhui
  */
+@SuppressWarnings("checkstyle:illegaltoken")
 public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
 
     private static final RString 処理待ち = new RString("処理待ち");
@@ -45,7 +46,6 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
      * @param div ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv
      * @return ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv>
      */
-    @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv> onLoad(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div, FileData[] files) {
         RDate currentTime = RDate.getNowDate();
@@ -73,7 +73,6 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
      * @param files FileData[]
      * @return ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv>
      */
-    @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv> onclick_uplUpload(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div, FileData[] files) {
         FilesystemName sharedFileName = new FilesystemName(共有ファイル名);
@@ -90,7 +89,6 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
      * @param files FileData[]
      * @return ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv>
      */
-    @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv> onclick_btnUpload(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div, FileData[] files) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 所得情報ファイル);
@@ -114,7 +112,6 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
      * @param files FileData[]
      * @return ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv>
      */
-    @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv> onclick_checkRegister(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div, FileData[] files) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
