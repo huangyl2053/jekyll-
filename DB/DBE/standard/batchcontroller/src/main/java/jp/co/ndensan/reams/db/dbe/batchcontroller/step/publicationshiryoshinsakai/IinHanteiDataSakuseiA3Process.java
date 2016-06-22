@@ -51,7 +51,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  *
  * @reamsid_L DBE-0150-200 linghuhang
  */
-public class IinHanteiDataSakuseiProcess extends BatchKeyBreakBase<HanteiJohoEntity> {
+public class IinHanteiDataSakuseiA3Process extends BatchKeyBreakBase<HanteiJohoEntity> {
 
     private static final RString SELECT_HANTEIJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.publicationshiryoshinsakai.IShiryoShinsakaiIinMapper.getHanteiJoho");
@@ -65,7 +65,6 @@ public class IinHanteiDataSakuseiProcess extends BatchKeyBreakBase<HanteiJohoEnt
     @BatchWriter
     private BatchReportWriter<IinYobihanteiKinyuhyoReportSource> batchWrite;
     private ReportSourceWriter<IinYobihanteiKinyuhyoReportSource> reportSourceWriter;
-    private final RString 出力スタイル_A4 = new RString("1");
 
     @Override
     protected void initialize() {
@@ -91,13 +90,8 @@ public class IinHanteiDataSakuseiProcess extends BatchKeyBreakBase<HanteiJohoEnt
 
     @Override
     protected void createWriter() {
-        if (出力スタイル_A4.equals(paramter.getShuturyokuSutairu())) {
-            batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517022.getReportId().value())
-                    .addBreak(new BreakerCatalog<IinYobihanteiKinyuhyoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS)).create();
-        } else {
-            batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517003.getReportId().value())
-                    .addBreak(new BreakerCatalog<IinYobihanteiKinyuhyoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS)).create();
-        }
+        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517003.getReportId().value())
+                .addBreak(new BreakerCatalog<IinYobihanteiKinyuhyoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
@@ -152,16 +146,9 @@ public class IinHanteiDataSakuseiProcess extends BatchKeyBreakBase<HanteiJohoEnt
     }
 
     private void outputJokenhyoFactory() {
-        RString id;
-        RString idName;
+        RString id = ReportIdDBE.DBE517003.getReportId().getColumnValue();
+        RString idName = ReportIdDBE.DBE517003.getReportName();
         RString 総ページ数 = new RString(batchWrite.getPageCount());
-        if (出力スタイル_A4.equals(paramter.getShuturyokuSutairu())) {
-            id = ReportIdDBE.DBE517022.getReportId().getColumnValue();
-            idName = ReportIdDBE.DBE517022.getReportName();
-        } else {
-            id = ReportIdDBE.DBE517003.getReportId().getColumnValue();
-            idName = ReportIdDBE.DBE517003.getReportName();
-        }
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem jokenhyoItem = new ReportOutputJokenhyoItem(
                 id,

@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.publicationshiryoshinsak
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.report.tsuikashiryokagamia3.TsuikashiryokagamiA3Report;
 import jp.co.ndensan.reams.db.dbe.business.report.tsuikashiryokagamia4.TsuikashiryokagamiA4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTuutishoMyBatisParameter;
@@ -16,7 +15,6 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.publicationshiryoshinsak
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.publicationshiryoshinsakai.IinTuikaSiryoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.publicationshiryoshinsakai.ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tsuikashiryokagami.TsuikashiryokagamiEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.tsuikashiryokagamia3.TsuikashiryokagamiA3ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.tsuikashiryokagamia4.TsuikashiryokagamiA4ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.publicationshiryoshinsakai.IShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
@@ -49,15 +47,12 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0150-200 linghuhang
  */
-public class IinTuikaSiryoDataSakuseiProcess extends BatchKeyBreakBase<IinTuikaSiryoEntity> {
+public class IinTuikaSiryoDataSakuseiA4Process extends BatchKeyBreakBase<IinTuikaSiryoEntity> {
 
     private static final RString SELECT_IINTUIKASIRYO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.publicationshiryoshinsakai.IShiryoShinsakaiIinMapper.getIinTuikaSiryo");
-    private static final List<RString> PAGE_BREAK_KEYS_A3 = Collections.unmodifiableList(Arrays.asList(
-            new RString(TsuikashiryokagamiA3ReportSource.ReportSourceFields.shinsakaiNo.name())));
     private static final List<RString> PAGE_BREAK_KEYS_A4 = Collections.unmodifiableList(Arrays.asList(
             new RString(TsuikashiryokagamiA4ReportSource.ReportSourceFields.shinsakaiNo.name())));
-    private static final RString 印刷方法_A4 = new RString("1");
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
@@ -71,8 +66,6 @@ public class IinTuikaSiryoDataSakuseiProcess extends BatchKeyBreakBase<IinTuikaS
     private TsuikashiryokagamiEntity tsuikashiryokagami;
     private int データ件数;
     @BatchWriter
-    private BatchReportWriter<TsuikashiryokagamiA3ReportSource> batchWriterA3;
-    private ReportSourceWriter<TsuikashiryokagamiA3ReportSource> reportSourceWriterA3;
     private BatchReportWriter<TsuikashiryokagamiA4ReportSource> batchWriterA4;
     private ReportSourceWriter<TsuikashiryokagamiA4ReportSource> reportSourceWriterA4;
 
@@ -92,29 +85,17 @@ public class IinTuikaSiryoDataSakuseiProcess extends BatchKeyBreakBase<IinTuikaS
 
     @Override
     protected void createWriter() {
-        if (印刷方法_A4.equals(paramter.getShuturyokuSutairu())) {
-            batchWriterA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517019.getReportId().value())
-                    .addBreak(new BreakerCatalog<TsuikashiryokagamiA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A4))
-                    .create();
-            reportSourceWriterA4 = new ReportSourceWriter<>(batchWriterA4);
-        } else {
-            batchWriterA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517009.getReportId().value())
-                    .addBreak(new BreakerCatalog<TsuikashiryokagamiA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
-                    .create();
-            reportSourceWriterA3 = new ReportSourceWriter<>(batchWriterA3);
-        }
+        batchWriterA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517019.getReportId().value())
+                .addBreak(new BreakerCatalog<TsuikashiryokagamiA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A4))
+                .create();
+        reportSourceWriterA4 = new ReportSourceWriter<>(batchWriterA4);
     }
 
     @Override
     protected void keyBreakProcess(IinTuikaSiryoEntity entity) {
         if (データ件数 % 満ページ件数 == 0) {
-            if (印刷方法_A4.equals(paramter.getShuturyokuSutairu())) {
-                TsuikashiryokagamiA4Report report = new TsuikashiryokagamiA4Report(tsuikashiryokagami);
-                report.writeBy(reportSourceWriterA4);
-            } else {
-                TsuikashiryokagamiA3Report report = new TsuikashiryokagamiA3Report(tsuikashiryokagami);
-                report.writeBy(reportSourceWriterA3);
-            }
+            TsuikashiryokagamiA4Report report = new TsuikashiryokagamiA4Report(tsuikashiryokagami);
+            report.writeBy(reportSourceWriterA4);
         }
     }
 
@@ -140,13 +121,8 @@ public class IinTuikaSiryoDataSakuseiProcess extends BatchKeyBreakBase<IinTuikaS
         tsuikashiryokagami.set寝たきり度(entity.getNinchishoCode() == null || entity.getNinchishoCode().isEmpty() ? RString.EMPTY
                 : ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.getNinchishoCode().value()).get名称());
         set項目(entity);
-        if (印刷方法_A4.equals(paramter.getShuturyokuSutairu())) {
-            TsuikashiryokagamiA4Report report = new TsuikashiryokagamiA4Report(tsuikashiryokagami);
-            report.writeBy(reportSourceWriterA4);
-        } else {
-            TsuikashiryokagamiA3Report report = new TsuikashiryokagamiA3Report(tsuikashiryokagami);
-            report.writeBy(reportSourceWriterA3);
-        }
+        TsuikashiryokagamiA4Report report = new TsuikashiryokagamiA4Report(tsuikashiryokagami);
+        report.writeBy(reportSourceWriterA4);
         データ件数++;
     }
 
@@ -173,16 +149,8 @@ public class IinTuikaSiryoDataSakuseiProcess extends BatchKeyBreakBase<IinTuikaS
         tsuikashiryokagami.set合議体番号(new RString(mapper.getShinsakaiKaisaiKekkaJoho(myBatisParameter).getGogitaiNo()));
         tsuikashiryokagami.set審査会開催年月日(fromatパターン9(mapper.getShinsakaiKaisaiKekkaJoho(myBatisParameter).getShinsakaiKaisaiYMD()));
         // TODO 通知文取得キー不一致
-        if (印刷方法_A4.equals(paramter.getShuturyokuSutairu())) {
-            tsuikashiryokagami.set通知文1(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517009.getReportId(),
-                    KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate()));
-        } else {
-            tsuikashiryokagami.set通知文1(RString.EMPTY);
-            tsuikashiryokagami.set通知文2(RString.EMPTY);
-            tsuikashiryokagami.set通知文3(RString.EMPTY);
-            tsuikashiryokagami.set通知文4(RString.EMPTY);
-            tsuikashiryokagami.set通知文5(RString.EMPTY);
-        }
+        tsuikashiryokagami.set通知文1(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517009.getReportId(),
+                KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate()));
     }
 
     private void set審査員() {
