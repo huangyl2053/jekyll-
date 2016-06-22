@@ -168,7 +168,7 @@ public class TainoJokyoResearcher {
                 new滞納情報List.add(滞納情報);
             }
         }
-        Collections.sort(滞納情報List, new Comparator<TainoKiSummary>() {
+        Collections.sort(new滞納情報List, new Comparator<TainoKiSummary>() {
             @Override
             public int compare(TainoKiSummary o1, TainoKiSummary o2) {
                 return o1.get調定年度().compareTo(o2.get調定年度());
