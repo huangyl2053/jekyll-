@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <!-- @reamsid_L DBE-1300-040 dongyabin -->
+ <!-- @reamsid_L DBZ-1300-040 dongyabin -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.jogaishinsainjoho.IJogaiShinsainJohoMapper">
 
     <resultMap id="resultMap_ShinsakaiIinJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.jogaishinsainjoho.ShinsakaiIinJohoRelateEntity" autoMapping="true">

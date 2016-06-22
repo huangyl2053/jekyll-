@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 認定申請連絡先情報バリデーションチェックのメッセージクラスです。
  *
- * @reamsid_L DBE-1300-100 dongyabin
+ * @reamsid_L DBZ-1300-100 dongyabin
  */
 public class NinteiShinseiValidationHandler {
 

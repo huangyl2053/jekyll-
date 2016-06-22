@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * NinteiShinseiRenrakusakiJoho のクラスファイル
  *
- * @reamsid_L DBE-1300-100 dongyabin
+ * @reamsid_L DBZ-1300-100 dongyabin
  */
 public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShinseiRenrakusakiJohoDiv, IDialogDiv {
 
