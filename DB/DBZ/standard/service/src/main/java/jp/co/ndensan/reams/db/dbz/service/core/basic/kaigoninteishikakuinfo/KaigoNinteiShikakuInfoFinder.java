@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 介護認定資格情報を管理するクラスです。
  *
- * @reamsid_L DBE-1300-060 lizhuoxuan
+ * @reamsid_L DBZ-1300-060 lizhuoxuan
  */
 public class KaigoNinteiShikakuInfoFinder {
 
@@ -48,8 +48,7 @@ public class KaigoNinteiShikakuInfoFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoNinteiShikakuInfoFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KaigoNinteiShikakuInfoFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KaigoNinteiShikakuInfoFinder}のインスタンス
      */
     public static KaigoNinteiShikakuInfoFinder createInstance() {
         return InstanceProvider.create(KaigoNinteiShikakuInfoFinder.class);

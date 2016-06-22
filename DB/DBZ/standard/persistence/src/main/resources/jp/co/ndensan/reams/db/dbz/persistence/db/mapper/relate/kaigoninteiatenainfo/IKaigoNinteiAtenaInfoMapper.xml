@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <!-- 概要： 介護認定宛名情報のマッピング用XMLです。 -->
- <!-- @reamsid_L DBE-1300-050 lizhuoxuan -->
+ <!-- @reamsid_L DBZ-1300-050 lizhuoxuan -->
 
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kaigoninteiatenainfo.IKaigoNinteiAtenaInfoMapper">
