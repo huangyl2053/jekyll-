@@ -15,11 +15,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyosh
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3077JuryoininKeiyakuJigyoshaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.juryoininkeiyakujigyosha.IJuryoininKeiyakuJigyoshaMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -98,11 +95,9 @@ public class JuryoininKeiyakuJigyoshaManager {
      */
     @Transaction
     public int insJuryoininKeiyakuJigyosha(JuryoininKeiyakuJigyosha data) {
-        RString 契約事業者番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.契約事業者番号.getコード()).nextString();
         int 登録件数 = 0;
         if (data != null) {
             DbT3077JuryoininKeiyakuJigyoshaEntity entity = data.toEntity();
-            entity.setKeiyakuJigyoshaNo(契約事業者番号);
             entity.setState(EntityDataState.Added);
             登録件数 = dbT3077Dac.save(entity);
         }

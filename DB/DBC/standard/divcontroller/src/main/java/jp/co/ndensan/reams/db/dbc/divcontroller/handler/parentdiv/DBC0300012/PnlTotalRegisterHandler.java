@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyoshaBuilder;
+import jp.co.ndensan.reams.db.dbc.business.core.hokenjuryoininharaitoriatsukai.HokenJuryoIninHaraiToriatsukaiResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.keiyakushurui.JuryoIninKeiyakuShurui;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.PnlTotalRegisterDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.JuryoininKeiyakuJigyoshaManager;
+import jp.co.ndensan.reams.db.dbc.service.report.kaigohokenjuryoininharaitoriatsukaijigyosha.KaigoHokenJuryoIninHaraiToriatsukaiJigyosha;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -29,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
@@ -165,6 +169,8 @@ public final class PnlTotalRegisterHandler {
         } else {
             JuryoininKeiyakuJigyosha insertData = new JuryoininKeiyakuJigyosha(RString.EMPTY);
             JuryoininKeiyakuJigyoshaBuilder builder = insertData.createBuilderForEdit();
+            RString 契約事業者番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.契約事業者番号.getコード()).nextString();
+            builder.set契約事業者番号(契約事業者番号);
             builder.set開始年月日(new FlexibleDate(div.getPnlKeyakuJigyosya().getTxtKeyakubi().getFromValue().toDateString()));
             builder.set終了年月日(new FlexibleDate(div.getPnlKeyakuJigyosya().getTxtKeyakubi().getToValue().toDateString()));
             builder.set契約種類(div.getPnlKeyakuJigyosya().getDdlKeyakusyurui().getSelectedKey());
@@ -186,6 +192,7 @@ public final class PnlTotalRegisterHandler {
             builder.set口座名義人(div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeiginin().getDomain());
             builder.set口座名義人カナ(div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeigininKana().getDomain());
             insertData = builder.build();
+            div.getPnlKeyakuJigyosya().getTxtJigyosyakeiyakuNo().setValue(契約事業者番号);
             return JuryoininKeiyakuJigyoshaManager.createInstance().insJuryoininKeiyakuJigyosha(insertData);
         }
     }
@@ -457,5 +464,16 @@ public final class PnlTotalRegisterHandler {
                 div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyoKana().getDomain());
         div.getPnlKeyakuJigyosya().getTxtSofusakiJyusyo().setDomain(
                 div.getPnlKeyakuJigyosya().getTxtJigyosyaJyusyo().getDomain());
+    }
+
+    /**
+     * 発行データの取得
+     *
+     * @param 契約事業者番号 RString
+     * @return HokenJuryoIninHaraiToriatsukaiResult
+     */
+    public HokenJuryoIninHaraiToriatsukaiResult get発行データ(RString 契約事業者番号) {
+        KaigoHokenJuryoIninHaraiToriatsukaiJigyosha data = KaigoHokenJuryoIninHaraiToriatsukaiJigyosha.createInstance();
+        return data.setHokenJuryoIninHaraiToriatsukai(data.selectByKey(契約事業者番号));
     }
 }
