@@ -5,8 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.shotokujohotyushuturenkeitanitu;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeitanitu.ShotokuJohoBatchresultTanituParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeitanitu.ShotokuJohoTyushutuRenkeiTanituParameter;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.shichoson.ShichosonJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -104,8 +107,9 @@ public class ShotokuJohoChushutsuRenkeitanitu {
     public ShotokuJohoBatchresultTanituParameter createShotokuJohoParameter(
             ShotokuJohoTyushutuRenkeiTanituParameter parameter) {
         ShotokuJohoBatchresultTanituParameter result = new ShotokuJohoBatchresultTanituParameter();
+        List<ShichosonJohoEntity> 市町村情報List = new ArrayList<>();
         result.set処理年度(parameter.get処理年度());
-        result.set市町村情報List(parameter.get市町村情報List());
+        result.set市町村情報List(市町村情報List);
         result.set出力順ID(parameter.get出力順ID());
         result.set帳票ID(new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran"));
         result.set共有ファイル名(parameter.get共有ファイル名());

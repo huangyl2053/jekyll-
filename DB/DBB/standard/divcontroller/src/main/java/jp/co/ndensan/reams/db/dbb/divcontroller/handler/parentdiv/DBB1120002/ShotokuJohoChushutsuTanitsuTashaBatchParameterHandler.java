@@ -142,8 +142,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
     public ValidationMessageControlPairs getCheckFile(FileData[] files) {
         ShotokuJohoChushutsuTanitsuTashaBatchParameterValidationHandler validation
                 = new ShotokuJohoChushutsuTanitsuTashaBatchParameterValidationHandler(div);
-        ValidationMessageControlPairs pairs = validation.必須チェックValidate(files);
-        return pairs;
+        return validation.必須チェックValidate(files);
 
     }
 
@@ -156,8 +155,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
     public ValidationMessageControlPairs checkFilesStates(FileData[] files) {
         ShotokuJohoChushutsuTanitsuTashaBatchParameterValidationHandler validation
                 = new ShotokuJohoChushutsuTanitsuTashaBatchParameterValidationHandler(div);
-        ValidationMessageControlPairs validationMessages = validation.必須チェックValidate(files);
-        return validationMessages;
+        return validation.必須チェックValidate(files);
     }
 
     /**
