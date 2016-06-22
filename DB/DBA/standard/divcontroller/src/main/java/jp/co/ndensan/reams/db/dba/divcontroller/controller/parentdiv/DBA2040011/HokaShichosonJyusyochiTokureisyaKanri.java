@@ -89,7 +89,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
             }
             return ResponseData.of(div).setState(DBA2040011StateName.追加適用);
         } else if (メニューID_施設退所により解除.equals(menuId)) {
-            if (div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getKaijoTodokedeYMD().getValue() == null) {
+            if (div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getKaijoTodokedeYMD().getValue() != null) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), true);
             }
             return ResponseData.of(div).setState(DBA2040011StateName.追加解除);
