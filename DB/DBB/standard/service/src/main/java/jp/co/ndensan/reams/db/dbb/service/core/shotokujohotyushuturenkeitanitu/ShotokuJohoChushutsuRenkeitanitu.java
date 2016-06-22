@@ -32,6 +32,7 @@ public class ShotokuJohoChushutsuRenkeitanitu {
     private static final RString 遷移区分_1 = new RString("1");
     private static final RString 不可 = new RString("2");
     private static final RString 可 = new RString("1");
+    private static final RString 共有ファイル名 = new RString("BBKAIGO");
 
     ShotokuJohoChushutsuRenkeitanitu() {
         this.処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
@@ -112,7 +113,7 @@ public class ShotokuJohoChushutsuRenkeitanitu {
         result.set市町村情報List(市町村情報List);
         result.set出力順ID(parameter.get出力順ID());
         result.set帳票ID(new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran"));
-        result.set共有ファイル名(parameter.get共有ファイル名());
+        result.set共有ファイル名(共有ファイル名);
         result.set共有ファイルID(parameter.get共有ファイルID());
         result.set処理区分(parameter.get処理区分());
         return result;
