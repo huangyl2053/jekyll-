@@ -110,7 +110,6 @@ public class NonyuTsuchiShoJohoFactory {
         requireNonNull(本算定通知書情報, UrSystemErrorMessages.値がnull.getReplacedMessage("本算定通知書情報"));
         requireNonNull(本算定納入通知書制御情報, UrSystemErrorMessages.値がnull.getReplacedMessage("本算定納入通知書制御情報"));
         requireNonNull(出力期リスト, UrSystemErrorMessages.値がnull.getReplacedMessage("出力期リスト"));
-        requireNonNull(代納人氏名, UrSystemErrorMessages.値がnull.getReplacedMessage("代納人氏名"));
         FukaAtena 賦課の情報_更正後 = 本算定通知書情報.get賦課の情報_更正後();
         if (賦課の情報_更正後 != null && 賦課の情報_更正後.get賦課情報() != null
                 && !this.納期月コレクションマップ.containsKey(賦課の情報_更正後.get賦課情報().get調定年度())) {
@@ -251,7 +250,6 @@ public class NonyuTsuchiShoJohoFactory {
         requireNonNull(仮算定通知書情報, UrSystemErrorMessages.値がnull.getReplacedMessage("仮算定通知書情報"));
         requireNonNull(仮算定納入通知書制御情報, UrSystemErrorMessages.値がnull.getReplacedMessage("仮算定納入通知書制御情報"));
         requireNonNull(出力期リスト, UrSystemErrorMessages.値がnull.getReplacedMessage("出力期リスト"));
-        requireNonNull(代納人氏名, UrSystemErrorMessages.値がnull.getReplacedMessage("代納人氏名"));
         FukaAtena 賦課の情報_更正後 = 仮算定通知書情報.get賦課の情報_更正後();
         if (賦課の情報_更正後 != null && 賦課の情報_更正後.get賦課情報() != null
                 && !this.納期月コレクションマップ.containsKey(賦課の情報_更正後.get賦課情報().get調定年度())) {
@@ -352,7 +350,7 @@ public class NonyuTsuchiShoJohoFactory {
     private Decimal get金額By期(List<UniversalPhase> 普徴期別金額リスト, int 期) {
         for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
             if (期 == 普徴期別金額.get期()) {
-                return 普徴期別金額.get金額();
+                return null == 普徴期別金額.get金額() ? Decimal.ZERO : 普徴期別金額.get金額();
             }
         }
         return Decimal.ZERO;
