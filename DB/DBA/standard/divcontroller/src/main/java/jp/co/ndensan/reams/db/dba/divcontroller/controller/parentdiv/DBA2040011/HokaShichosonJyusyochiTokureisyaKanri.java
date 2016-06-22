@@ -84,12 +84,14 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         if (メニューID_施設入所により適用.equals(menuId) || メニューID_転入転出保留対象者管理.equals(menuId)) {
-            if (div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getKaijoTodokedeYMD().getValue() == null) {
+            if (!div.getCddTaJushochiTokureishaKanri().get適用情報一覧().isEmpty()
+                    && div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getKaijoTodokedeYMD().getValue() == null) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), true);
             }
             return ResponseData.of(div).setState(DBA2040011StateName.追加適用);
         } else if (メニューID_施設退所により解除.equals(menuId)) {
-            if (div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getKaijoTodokedeYMD().getValue() != null) {
+            if (!div.getCddTaJushochiTokureishaKanri().get適用情報一覧().isEmpty()
+                    && div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getKaijoTodokedeYMD().getValue() != null) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), true);
             }
             return ResponseData.of(div).setState(DBA2040011StateName.追加解除);
