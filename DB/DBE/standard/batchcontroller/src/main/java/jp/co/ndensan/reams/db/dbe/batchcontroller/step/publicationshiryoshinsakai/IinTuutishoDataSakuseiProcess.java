@@ -63,8 +63,8 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
     @BatchWriter
     private BatchReportWriter<ShinsakaiKaisaiOshiraseTsuchiReportSource> batchWrite;
     private ReportSourceWriter<ShinsakaiKaisaiOshiraseTsuchiReportSource> reportSourceWriter;
-    private final int パターン番号 = 1;
-    private final int 項目番号 = 3;
+    private static final int パターン番号 = 1;
+    private static final int 項目番号 = 3;
 
     @Override
     protected void initialize() {
@@ -93,11 +93,11 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
                 myBatisParameter.setNinteiChosaItakusakiCode(dbT5595Entity.getNinteichosaItakusakiCode());
                 myBatisParameter.setNinteiChosainCode(dbT5595Entity.getNinteiChosainNo());
                 myBatisParameter.setShoKisaiHokenshaNo(dbT5595Entity.getShoKisaiHokenshaNo());
-                psmJohoEntity = mapper.get主治医宛名情報(myBatisParameter);
+                psmJohoEntity = mapper.get認定調査員宛名情報(myBatisParameter);
             } else if (!RString.isNullOrEmpty(dbT5595Entity.getSonotaKikanCode())) {
                 myBatisParameter.setSonotaKikanCode(dbT5595Entity.getSonotaKikanCode());
                 myBatisParameter.setShoKisaiHokenshaNo(dbT5595Entity.getShoKisaiHokenshaNo());
-                psmJohoEntity = mapper.get主治医宛名情報(myBatisParameter);
+                psmJohoEntity = mapper.getその他宛名情報(myBatisParameter);
             }
         }
         for (ShinsakaiYoteiJohoEntity 情報 : 委員情報) {
@@ -124,7 +124,7 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
     private void 通知文設定(ShinsakaiYoteiJohoEntity 委員情報, PsmJohoEntity psmJohoEntity) {
         FlexibleDate 基準日 = new FlexibleDate(RDate.getNowDate().toDateString());
         NinshoshaSource 認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE515001.getReportId(),
-                基準日, NinshoshaDenshikoinshubetsuCode.保険者印, reportSourceWriter);
+                基準日, NinshoshaDenshikoinshubetsuCode.認定用印, reportSourceWriter);
         RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE515001.getReportId(), 基準日);
         RDate 発行日 = RDate.getNowDate();
         item.set電子公印(認証者情報.denshiKoin);
