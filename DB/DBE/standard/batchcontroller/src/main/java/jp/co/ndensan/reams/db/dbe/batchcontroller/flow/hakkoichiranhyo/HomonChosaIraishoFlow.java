@@ -49,7 +49,7 @@ public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatc
     private static final RString DBE221002 = new RString("DBE221002_ChosahyoKihonchosaKatamen.rse");
     private static final RString DBE221003 = new RString("DBE221003_ChosahyoKihonchosaRyomen.rse");
     private static final RString DBE221012 = new RString("DBE221012_chosahyoKihonchosa.rse");
-    private RDate 基準日 = RDate.getNowDate();
+    private RDate 基準日;
 
     private static final RString DBE221021 = new RString("DBE221021_chosahyoTokkijiko.rse");
     private static final RString DBE221022 = new RString("DBE221022_chosahyoTokkijiko.rse");
@@ -84,6 +84,7 @@ public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatc
 
     @Override
     protected void defineFlow() {
+        基準日 = RDate.getNowDate();
         if (getParameter().isNinteiChosaIraiChohyo()) {
             executeStep(CHOSAIRAISHOREPORT_PROCESS);
         }

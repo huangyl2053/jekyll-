@@ -44,8 +44,8 @@ public class ShujiiIkenshoTeishutsuIraishoReportSource implements IReportSource 
     public RString meishoFuyo;
     @ReportItem(name = "customerBarCode", order = 16)
     public RString customerBarCode;
-    @ReportItem(name = "atenaRenban", length = 8, order = 17)
-    public RString atenaRenban;
+    @ReportItem(name = "pageCount", length = 8, order = 17)
+    public RString pageCount;
     @ReportItem(name = "sonota", length = 14, order = 18)
     public RString sonota;
     @ReportItem(name = "title", length = 50, order = 19)
