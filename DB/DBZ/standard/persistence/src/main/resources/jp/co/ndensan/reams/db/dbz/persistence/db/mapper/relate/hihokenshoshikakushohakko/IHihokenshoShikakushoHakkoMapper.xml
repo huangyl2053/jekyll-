@@ -35,7 +35,7 @@
     </resultMap>
 
     <select id="被保険者証資格証発行情報取得" parameterType="jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter"
-            resultMap="被保険者証資格証発行情報取得ResultMap" fetchSize="500">
+            resultMap="被保険者証資格証発行情報取得ResultMap" resultOrdered="true" fetchSize="500">
         SELECT
         TB1."yokaigoJotaiKubunCode" AS TB1_yokaigoJotaiKubunCode,
         TB1."jukyuShinseiYMD" AS TB1_jukyuShinseiYMD,
@@ -80,7 +80,7 @@
     </select>
 
     <select id="限度額データ取得" parameterType="jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter"
-            resultMap="限度額データ取得ResultMap" fetchSize="500">
+            resultMap="限度額データ取得ResultMap" resultOrdered="true" fetchSize="500">
         SELECT
         A."serviceShuruiCode" AS A_serviceShuruiCode,
         A."shikyuGendoTaniSu" AS A_shikyuGendoTaniSu,
@@ -102,7 +102,7 @@
 
     </select>
 
-    <select id="居宅給付計画届出情報取得" resultMap="居宅給付計画届出情報取得ResultMap" fetchSize="500">
+    <select id="居宅給付計画届出情報取得" resultMap="居宅給付計画届出情報取得ResultMap" resultOrdered="true" fetchSize="500">
         SELECT
         A."hihokenshaNo" AS hihokenshaNo,
         A."taishoYM" AS taishoYM,
