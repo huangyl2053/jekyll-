@@ -17,11 +17,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 委員用特記事項の取得バッチクラスです。
+ * 委員用特記事項と一次判定結果票情報バッチクラスです。
  *
  * @reamsid_L DBE-0150-200 linghuhang
  */
-public class IinTokkiJikouDataSakuseiProcess extends BatchProcessBase<NinteiShinseiJohoEntity> {
+public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchProcessBase<NinteiShinseiJohoEntity> {
 
     private static final RString SELECT_NINTEIJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.publicationshiryoshinsakai.IShiryoShinsakaiIinMapper.getNinteiShinseiJoho");
