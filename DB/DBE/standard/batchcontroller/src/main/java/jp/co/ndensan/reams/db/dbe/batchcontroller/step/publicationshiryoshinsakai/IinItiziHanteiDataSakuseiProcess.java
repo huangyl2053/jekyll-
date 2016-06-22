@@ -87,11 +87,11 @@ public class IinItiziHanteiDataSakuseiProcess extends BatchKeyBreakBase<ItiziHan
         IchijihanteikekkahyoItemSettei itemSettei = new IchijihanteikekkahyoItemSettei();
         item = itemSettei.set項目(entity, 特記事項情報, paramter, itiziHanteiEntityList);
         if (出力スタイル_A4.equals(paramter.getShuturyokuSutairu())) {
-            IchijihanteikekkahyoA3Report report = new IchijihanteikekkahyoA3Report(item);
-            report.writeBy(reportSourceWriterA3);
-        } else {
             IchijihanteikekkahyoA4Report report = new IchijihanteikekkahyoA4Report(item);
             report.writeBy(reportSourceWriterA4);
+        } else {
+            IchijihanteikekkahyoA3Report report = new IchijihanteikekkahyoA3Report(item);
+            report.writeBy(reportSourceWriterA3);
         }
     }
 

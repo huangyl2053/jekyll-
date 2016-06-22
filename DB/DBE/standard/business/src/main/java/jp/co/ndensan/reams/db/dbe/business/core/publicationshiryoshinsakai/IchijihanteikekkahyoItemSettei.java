@@ -120,25 +120,21 @@ public class IchijihanteikekkahyoItemSettei {
         item.set審査人数(new RString(entity.getDbt5502_shinsakaiOrder()));
         item.set合議体番号(paramter.getGogitaiNo());
         item.set被保険者区分(HihokenshaKubunCode.toValue(entity.getDbt5101_hihokenshaKubunCode()).get名称());
-        item.set申請区分(NinteiShinseiShinseijiKubunCode.toValue(entity.getDbt5101_ninteiKubunCode().getColumnValue()).get名称());
         item.set年齢(new RString(entity.getDbt5101_age()));
-        item.set性別(Seibetsu.toValue(entity.getDbt5101_seibetsu().getColumnValue()).get名称());
         // TODO QA
 //        item.set前々回要介護度(YokaigoJotaiKubun09.toValue(entity.getDbt5101_zenYokaigoKubunCode().getColumnValue()).get名称());
 //        item.set前々回認定有効期間(前々回認定有効期間(entity.getDbt5101_zenkaiYukoKikanStart(), entity.getDbt5101_zenkaiYukoKikanEnd()));
 //        item.set前々回認定有効期間開始年月日(パターン17(entity.getDbt5101_zenkaiYukoKikanStart()));
 //        item.set前々回認定有効期間終了年月日(パターン17(entity.getDbt5101_zenkaiYukoKikanEnd()));
-        item.set前回要介護度(YokaigoJotaiKubun09.toValue(entity.getDbt5101_zenYokaigoKubunCode().getColumnValue()).get名称());
         item.set前回認定有効期間(前々回認定有効期間(entity.getDbt5101_zenkaiYukoKikanStart(), entity.getDbt5101_zenkaiYukoKikanEnd()));
         item.set前回認定有効期間開始年月日(パターン17(entity.getDbt5101_zenkaiYukoKikanStart()));
         item.set前回認定有効期間終了年月日(パターン17(entity.getDbt5101_zenkaiYukoKikanEnd()));
         item.set前回認定日(パターン16(entity.getDbt5101_zenkaiNinteiYMD()));
-        item.set前回状態像(YokaigoJotaiKubun09.toValue(entity.getDbt5101_zenYokaigoKubunCode().getColumnValue()).get名称());
-        item.set審査会資料作成年月日(new FlexibleDate(RDate.getNowDate().toDateString()));
+        item.set審査会資料作成年月日(FlexibleDate.getNowDate());
         item.set今回認定申請年月日(entity.getDbt5101_ninteiShinseiYMD());
         item.set今回認定調査実施年月日(entity.getDbt5202_ninteichosaJisshiYMD());
         item.set今回認定審査年月日(entity.getDbt5502_shinsakaiKaisaiYMD());
-        item.set一次判定結果(IchijiHanteiKekkaCode09.toValue(entity.getDbt5116_ichijiHanteiKekkaCode().getColumnValue()).get名称());
+
         if (HihokenshaKubunCode.第１号被保険者.getコード().equals(entity.getDbt5101_hihokenshaKubunCode())) {
             item.set特定疾病名(RString.EMPTY);
         } else if (HihokenshaKubunCode.第２号被保険者.getコード().equals(entity.getDbt5101_hihokenshaKubunCode())) {
@@ -166,20 +162,9 @@ public class IchijihanteikekkahyoItemSettei {
 //        item.set前回中間評価項目得点表第3群(月間);
 //        item.set前回中間評価項目得点表第4群(出力スタイル_A4);
 //        item.set前回中間評価項目得点表第5群(月間);
-        item.set障害高齢者自立度(ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.getDbT5203_shogaiCode().getColumnValue()).get名称());
         item.set障害高齢者自立度_ある(get障害高齢者自立度_ある(厚労省IF識別コード, 特記事項情報));
-        item.set認知症高齢者自立度(NinchishoNichijoSeikatsuJiritsudoCode.toValue(
-                entity.getDbT5203_ninchishoCode().getColumnValue()).get名称());
         item.set認知症高齢者自立度_ある(get認知症高齢者自立度_ある(厚労省IF識別コード, 特記事項情報));
-        item.set認定調査結果認知症高齢者自立度(NinchishoNichijoSeikatsuJiritsudoCode.toValue(
-                entity.getDbT5203_ninchishoCode().getColumnValue()).get名称());
-        item.set意見書認知症高齢者自立度(NinchishoNichijoSeikatsuJiritsudoCode.toValue(
-                entity.getDbT5203_ninchishoCode().getColumnValue()).get名称());
-
         item.set認知症自立度Ⅱ以上の蓋然性(new RString(entity.getDbt5116_iIijoNoGaizensei().intValue()));
-        item.set状態の安定性(JotaiAnteiseiCode.toValue(entity.getDbt5116_jotaiAnteiseiCode().getColumnValue()).get名称());
-        item.set給付区分(SuiteiKyufuKubunCode.toValue(entity.getDbt5116_suiteiKyufuKubunCode().getColumnValue()).get名称());
-        item.set現在のサービス利用状況(ServiceKubunCode.toValue(entity.getDbt5202_serviceKubunCode().getColumnValue()).get名称());
         RString dbt5207厚労省IF識別コード = entity.getDbt5207_koroshoIfShikibetsuCode().getColumnValue();
         if (ServiceKubunCode.予防給付サービス.getコード().equals(entity.getDbt5202_serviceKubunCode().getColumnValue())) {
             item = set介護給付サービス(item, dbt5207厚労省IF識別コード, 厚労省IF識別コード, entity, itiziHanteiEntityList);
@@ -187,6 +172,7 @@ public class IchijihanteikekkahyoItemSettei {
             item = set予防給付サービス(item, dbt5207厚労省IF識別コード, 厚労省IF識別コード, entity, itiziHanteiEntityList);
         }
         RString dbT5211厚労省IF識別コード = entity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue();
+        item = コード転換(item, entity);
         entity.getDbt5211_remban();
         for (ItiziHanteiEntity itiziHanteiEntity : itiziHanteiEntityList) {
             if (dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
@@ -245,6 +231,7 @@ public class IchijihanteikekkahyoItemSettei {
             item = set調査結果4(item, 厚労省IF識別コード, dbT5211厚労省IF識別コード, itiziHanteiEntity, 特記事項情報);
             item = itemSetteiTwo.set認定調査と主治医意見書の結果比較(item, 厚労省IF識別コード, dbT5211厚労省IF識別コード, itiziHanteiEntity);
         }
+
         return item;
     }
 
@@ -1976,15 +1963,54 @@ public class IchijihanteikekkahyoItemSettei {
     }
 
     private RString パターン17(FlexibleDate 項目) {
+        if (項目 == null || 項目.isEmpty()) {
+            return RString.EMPTY;
+        }
         return 項目.wareki().eraType(EraType.ALPHABET)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.SLASH)
                 .fillType(FillType.BLANK).toDateString();
     }
 
     private RString パターン16(FlexibleDate 項目) {
+        if (項目 == null || 項目.isEmpty()) {
+            return RString.EMPTY;
+        }
         return 項目.wareki().eraType(EraType.ALPHABET)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
                 .fillType(FillType.BLANK).toDateString();
     }
 
+    private IchijihanteikekkahyoItem コード転換(IchijihanteikekkahyoItem item, ItiziHanteiEntity entity) {
+        item.set申請区分(entity.getDbt5101_ninteiKubunCode() == null || entity.getDbt5101_ninteiKubunCode().isEmpty() ? RString.EMPTY
+                : NinteiShinseiShinseijiKubunCode.toValue(entity.getDbt5101_ninteiKubunCode().getColumnValue()).get名称());
+        item.set性別(entity.getDbt5101_seibetsu() == null || entity.getDbt5101_seibetsu().isEmpty()
+                ? RString.EMPTY : Seibetsu.toValue(entity.getDbt5101_seibetsu().getColumnValue()).get名称());
+        item.set前回要介護度(entity.getDbt5101_zenYokaigoKubunCode() == null || entity.getDbt5101_zenYokaigoKubunCode().isEmpty() ? RString.EMPTY
+                : YokaigoJotaiKubun09.toValue(entity.getDbt5101_zenYokaigoKubunCode().getColumnValue()).get名称());
+        item.set前回状態像(entity.getDbt5101_zenYokaigoKubunCode() == null || entity.getDbt5101_zenYokaigoKubunCode().isEmpty() ? RString.EMPTY
+                : YokaigoJotaiKubun09.toValue(entity.getDbt5101_zenYokaigoKubunCode().getColumnValue()).get名称());
+        item.set一次判定結果(entity.getDbt5116_ichijiHanteiKekkaCode() == null || entity.getDbt5116_ichijiHanteiKekkaCode().isEmpty() ? RString.EMPTY
+                : IchijiHanteiKekkaCode09.toValue(entity.getDbt5116_ichijiHanteiKekkaCode().getColumnValue()).get名称());
+        item.set障害高齢者自立度(entity.getDbT5203_shogaiCode() == null || entity.getDbT5203_shogaiCode().isEmpty() ? RString.EMPTY
+                : ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.getDbT5203_shogaiCode().getColumnValue()).get名称());
+        item.set認知症高齢者自立度(entity.getDbT5203_ninchishoCode() == null || entity.getDbT5203_ninchishoCode().isEmpty() ? RString.EMPTY
+                : NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.getDbT5203_ninchishoCode().getColumnValue()).get名称());
+        item = setコード転換(item, entity);
+        return item;
+    }
+
+    private IchijihanteikekkahyoItem setコード転換(IchijihanteikekkahyoItem item, ItiziHanteiEntity entity) {
+        item.set認定調査結果認知症高齢者自立度(
+                entity.getDbT5203_ninchishoCode() == null || entity.getDbT5203_ninchishoCode().isEmpty() ? RString.EMPTY
+                : NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.getDbT5203_ninchishoCode().getColumnValue()).get名称());
+        item.set意見書認知症高齢者自立度(entity.getDbT5203_ninchishoCode() == null || entity.getDbT5203_ninchishoCode().isEmpty() ? RString.EMPTY
+                : NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.getDbT5203_ninchishoCode().getColumnValue()).get名称());
+        item.set状態の安定性(entity.getDbt5116_jotaiAnteiseiCode() == null || entity.getDbt5116_jotaiAnteiseiCode().isEmpty() ? RString.EMPTY
+                : JotaiAnteiseiCode.toValue(entity.getDbt5116_jotaiAnteiseiCode().getColumnValue()).get名称());
+        item.set給付区分(entity.getDbt5116_suiteiKyufuKubunCode() == null || entity.getDbt5116_suiteiKyufuKubunCode().isEmpty() ? RString.EMPTY
+                : SuiteiKyufuKubunCode.toValue(entity.getDbt5116_suiteiKyufuKubunCode().getColumnValue()).get名称());
+        item.set現在のサービス利用状況(entity.getDbt5202_serviceKubunCode() == null || entity.getDbt5202_serviceKubunCode().isEmpty() ? RString.EMPTY
+                : ServiceKubunCode.toValue(entity.getDbt5202_serviceKubunCode().getColumnValue()).get名称());
+        return item;
+    }
 }
