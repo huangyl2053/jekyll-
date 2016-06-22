@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakuninte
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 負担限度額認定更新のお知らせ通知書個別発行のHandlerクラスです。
@@ -29,8 +28,9 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler {
      *
      * @param 被保険者番号 被保険者番号
      * @param 識別コード 識別コード
+     * @return
      */
-    public void get介護負担限度額認定(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
+    public ArrayList<FutanGendogakuNintei> get介護負担限度額認定(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
 
         // 業務概念「介護負担限度額認定の情報」を取得する
         FutanGendogakuNinteiManager futanGendogakuNinteiManager = FutanGendogakuNinteiManager.createInstance();
@@ -38,7 +38,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler {
                 = FutanGendogakuNinteiParameter.createSelectParam(GemmenGengakuShurui.負担限度額認定.getコード(), 被保険者番号);
         ArrayList<FutanGendogakuNintei> 介護保険負担限度額認定List = futanGendogakuNinteiManager.get負担限度額認定画面用リスト(parameter);
         compareTo(介護保険負担限度額認定List);
-        ViewStateHolder.put(KgHoukenFutanGendogakuNintei.リストキー, 介護保険負担限度額認定List);
+        return 介護保険負担限度額認定List;
     }
 
     /**
