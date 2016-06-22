@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * KaigoNinteiShinseiKihonJohoInput のクラスファイル
  *
- * @reamsid_L DBE-1300-070 wangxiaodong
+ * @reamsid_L DBZ-1300-070 wangxiaodong
  */
 public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigoNinteiShinseiKihonJohoInputDiv {
 

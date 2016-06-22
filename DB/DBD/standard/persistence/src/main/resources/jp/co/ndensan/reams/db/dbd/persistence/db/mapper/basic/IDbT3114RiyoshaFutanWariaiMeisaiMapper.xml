@@ -70,8 +70,9 @@
         <result property="logicalDeletedFlag" column="dbT3114RiyoshaFutanWariaiMeisai_logicalDeletedFlag" />
     </resultMap>
 
-    <select id="notExists_maxRirekiNo" resultMap="ResultMap_DbT3114RiyoshaFutanWariaiMeisaiEntity"
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuServiceMapperParameter" fetchSize="500">
+    <select resultOrdered="true" id="notExists_maxRirekiNo" resultMap="ResultMap_DbT3114RiyoshaFutanWariaiMeisaiEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuServiceMapperParameter"
+            fetchSize="500">
         SELECT *
         FROM rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS A
         WHERE A."hihokenshaNo" = #{被保険者番号}

@@ -224,7 +224,7 @@ public class IdoTaishoshaIchiran {
         return IdoTaishoshaIchiranHandler.of(div);
     }
 
-    public void putViewState(IdoTaishoshaIchiranDiv div) {
+    private void putViewState(IdoTaishoshaIchiranDiv div) {
         List<IdoTaishoshaIchiranparameter> listPar = new ArrayList<>();
         List<dgIdoTaishoshaIchiran_Row> rowList = div.getDgIdoTaishoshaIchiran().getDataSource();
         for (dgIdoTaishoshaIchiran_Row row : rowList) {

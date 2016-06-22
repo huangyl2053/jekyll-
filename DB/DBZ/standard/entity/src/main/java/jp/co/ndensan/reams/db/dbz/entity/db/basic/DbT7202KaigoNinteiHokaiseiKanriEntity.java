@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護認定法改正管理のdEntityです。
  *
- * @reamsid_L DBE-1300-080 yaodongsheng
+ * @reamsid_L DBZ-1300-080 yaodongsheng
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

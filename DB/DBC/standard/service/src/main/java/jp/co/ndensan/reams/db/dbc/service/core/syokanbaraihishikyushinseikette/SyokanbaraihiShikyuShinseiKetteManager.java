@@ -1034,10 +1034,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
     }
 
     private void set前回支払金額(SyokanbaraihiShikyuShinseiKetteParameter parameter, DbT3036ShokanHanteiKekkaEntity dbT3036entity) {
-        if (モード_修正.equals(parameter.get画面モード())) {
-            if (!parameter.get支払金額合計初期().equals(parameter.get支払金額合計())) {
-                dbT3036entity.setZenkaiShiharaiKingaku(parameter.get支払金額合計初期());
-            }
+        if (モード_修正.equals(parameter.get画面モード()) && !parameter.get支払金額合計初期().equals(parameter.get支払金額合計())) {
+            dbT3036entity.setZenkaiShiharaiKingaku(parameter.get支払金額合計初期());
         }
     }
 

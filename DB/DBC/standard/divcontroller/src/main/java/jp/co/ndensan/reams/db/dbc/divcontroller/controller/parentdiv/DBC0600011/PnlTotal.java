@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011.PnlTotalDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0600011.PnlTotalHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600011.PnlTotalParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
@@ -79,7 +80,7 @@ public class PnlTotal {
      * @return 福祉用具購入費支給申請_登録画面へ遷移
      */
     public ResponseData<PnlTotalDiv> onClick_byselectbutton(PnlTotalDiv div) {
-        getHandler(div).putViewStateHolder(参照);
+        putViewStateHolder(div, 参照);
         return ResponseData.of(div).forwardWithEventName(DBC0600011TransitionEventName.明細情報).respond();
     }
 
@@ -93,9 +94,9 @@ public class PnlTotal {
         RString 登録状態 = ResponseHolder.getState();
 
         if (登録状態.equals(差額登録)) {
-            getHandler(div).putViewStateHolder(差額登録);
+            putViewStateHolder(div, 差額登録);
         } else {
-            getHandler(div).putViewStateHolder(修正);
+            putViewStateHolder(div, 修正);
         }
         return ResponseData.of(div).forwardWithEventName(DBC0600011TransitionEventName.明細情報).respond();
     }
@@ -107,7 +108,7 @@ public class PnlTotal {
      * @return 福祉用具購入費支給申請_登録画面へ遷移
      */
     public ResponseData<PnlTotalDiv> onClick_dgShikyuShinseiList_delete(PnlTotalDiv div) {
-        getHandler(div).putViewStateHolder(削除);
+        putViewStateHolder(div, 削除);
         return ResponseData.of(div).forwardWithEventName(DBC0600011TransitionEventName.明細情報).respond();
     }
 
@@ -129,6 +130,13 @@ public class PnlTotal {
      */
     public ResponseData<PnlTotalDiv> onClick_btnBackToKensaku(PnlTotalDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC0600011TransitionEventName.検索に戻る).respond();
+    }
+
+    private void putViewStateHolder(PnlTotalDiv div, RString 状態) {
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        PnlTotalParameter parameter = getHandler(div).getViesStateParameter(被保険者番号);
+        ViewStateHolder.put(ViewStateKeys.支給申請情報検索キー, parameter);
+        ViewStateHolder.put(ViewStateKeys.状態, 状態);
     }
 
     private PnlTotalHandler getHandler(PnlTotalDiv div) {

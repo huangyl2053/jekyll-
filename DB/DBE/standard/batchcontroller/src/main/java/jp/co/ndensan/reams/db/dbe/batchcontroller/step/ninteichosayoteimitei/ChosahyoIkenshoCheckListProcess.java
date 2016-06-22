@@ -141,7 +141,7 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
         出力条件.add(dateFormat(paramter.get認定調査結果と主治医意見書のチェックリスト申請日From()));
         出力条件.add(dateFormat(paramter.get認定調査結果と主治医意見書のチェックリスト申請日To()));
         出力条件.add(dateFormat(paramter.get認定調査結果と主治医意見書のチェックリスト審査日()));
-        出力条件.add(dateFormat(paramter.get認定調査結果と主治医意見書のチェックリスト審査会()));
+        出力条件.add(paramter.get認定調査結果と主治医意見書のチェックリスト審査会());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBE.DBE012003.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);

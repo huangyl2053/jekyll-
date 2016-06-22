@@ -8,8 +8,10 @@
     <!-- 調定共通（介護継承）.賦課処理状況を更新します-->
     <update id="update賦課処理状況"
             parameterType="java.util.Map">
-        UPDATE rgdb."UrT0705ChoteiKyotsu"
+        UPDATE rgdb."UrT0705ChoteiKyotsu" as A
         SET "fukaShoriJokyo" = '1' 
+        FROM (
+        SELECT "UrT0705"."choteiId" 
         FROM rgdb."UrT0705ChoteiKyotsu" AS "UrT0705"
         INNER JOIN rgdb."DbT2003Kibetsu" AS "DbT2003"
         ON "DbT2003"."choteiId" = "UrT0705"."choteiId"
@@ -19,7 +21,8 @@
         AND "DbT2002"."tsuchishoNo" = "DbT2003"."tsuchishoNo"
         AND "DbT2002"."rirekiNo" = "DbT2003"."rirekiNo"
         WHERE "DbT2002"."fukaNendo" = #{fukaNendo}
-        AND "DbT2002"."choteiNichiji" = #{choteiNichiji}
+        AND "DbT2002"."choteiNichiji" = #{choteiNichiji}) AS B
+        WHERE A."choteiId" = B."choteiId"
     </update>
 
     <!-- 特徴平準化賦課Temp 一時テーブルを作成します-->

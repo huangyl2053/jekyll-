@@ -44,7 +44,7 @@ public class RiyoshaFutangakuGemmenHandler {
         if (!申請一覧情報.isEmpty()) {
             set利用負担額減免リスト(申請一覧情報);
         }
-        div.getRiyoshaFutangakuGemmenDetail().setDisabled(true);
+        div.getRiyoshaFutangakuGemmenDetail().setDisplayNone(true);
         return 申請一覧情報;
     }
 
@@ -91,7 +91,7 @@ public class RiyoshaFutangakuGemmenHandler {
      *
      */
     public void 一覧の詳細表示() {
-        div.getRiyoshaFutangakuGemmenDetail().setDisabled(false);
+        div.getRiyoshaFutangakuGemmenDetail().setDisplayNone(false);
         dgRiyoshaFutangakuGemmenList_Row dataSource = div.getDgRiyoshaFutangakuGemmenList().getActiveRow();
         if (dataSource.getShinseiDate() != null) {
             div.getRiyoshaFutangakuGemmenDetail().getTxtShinseiDate().setValue(dataSource.getShinseiDate().getValue());

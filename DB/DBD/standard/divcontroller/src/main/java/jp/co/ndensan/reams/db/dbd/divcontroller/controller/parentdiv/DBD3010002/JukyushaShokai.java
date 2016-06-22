@@ -147,8 +147,8 @@ public class JukyushaShokai {
      */
     public ResponseData<JukyushaShokaiDiv> onBeforeOpenDialog_btnShotokuJokyo(JukyushaShokaiDiv div) {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-        div.setHiddenHihokenshaNo(被保険者番号.getColumnValue());
+        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+        div.setHiddenShikibetsuCode(識別コード.getColumnValue());
         return ResponseData.of(div).respond();
     }
 

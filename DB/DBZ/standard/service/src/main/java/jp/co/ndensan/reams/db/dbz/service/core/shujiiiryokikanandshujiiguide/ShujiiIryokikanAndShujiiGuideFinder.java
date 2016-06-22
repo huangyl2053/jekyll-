@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 主治医医療機関＆主治医情報の取得処理です。
  *
- * @reamsid_L DBE-1300-130 xuyannan
+ * @reamsid_L DBZ-1300-130 xuyannan
  */
 public class ShujiiIryokikanAndShujiiGuideFinder {
 

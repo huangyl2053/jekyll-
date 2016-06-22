@@ -3,23 +3,27 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
- * @reamsid_L DBE-1300-090  suguangjun
+ *
+ * @reamsid_L DBZ-1300-090 suguangjun
  */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
- * NinteiShinseiShichosonRenrakuJiko のクラスファイル 
- * 
+ * NinteiShinseiShichosonRenrakuJiko のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteiShinseiShichosonRenrakuJikoDiv extends Panel implements INinteiShinseiShichosonRenrakuJikoDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -175,7 +179,7 @@ public class NinteiShinseiShichosonRenrakuJikoDiv extends Panel implements INint
             ShoriType[] enumArray = ShoriType.values();
 
             for (ShoriType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -190,11 +194,11 @@ public class NinteiShinseiShichosonRenrakuJikoDiv extends Panel implements INint
     }
 
     public ShoriType getMode_ShoriType() {
-        return (ShoriType) _CommonChildDivModeUtil.getMode( this.modes, ShoriType.class );
+        return (ShoriType) _CommonChildDivModeUtil.getMode(this.modes, ShoriType.class);
     }
 
-    public void setMode_ShoriType( ShoriType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, ShoriType.class , value );
+    public void setMode_ShoriType(ShoriType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, ShoriType.class, value);
     }
 
     // </editor-fold>

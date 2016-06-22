@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-0150-200 linghuhang
  */
-public class IinTokkiJikouItiziHanteiDataSakuseiProcess extends BatchProcessBase<NinteiShinseiJohoEntity> {
+public class IinTokkiJikouItiziHanteiDataSakuseiA4Process extends BatchProcessBase<NinteiShinseiJohoEntity> {
 
     private static final RString SELECT_NINTEIJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.publicationshiryoshinsakai.IShiryoShinsakaiIinMapper.getNinteiShinseiJoho");

@@ -5,6 +5,11 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushokai.IJukyushaShokaiMapper">
 
     <resultMap id="resultMap_申請情報の取得" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.jukyushokai.JukyuShokaiShinseiEntity" autoMapping="true">
+        <id column="dbT4001JukyushaDaicho_shichosonCode" />
+        <id column="dbT4001JukyushaDaicho_hihokenshaNo" />
+        <id column="dbT4001JukyushaDaicho_rirekiNo" />
+        <id column="dbT4001JukyushaDaicho_edaban"/>
+        <id column="dbT4001JukyushaDaicho_jukyuShinseiJiyu" />
         <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
         <association property="要介護認定インターフェース情報Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.ResultMap_DbT4003YokaigoNinteiInterfaceEntity"/>
     </resultMap>
@@ -161,7 +166,7 @@
     </select>
 
     <select resultOrdered="true" id ="findサービス受給状況"
-            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.jukyushokai.ServiceJukyuJokyoEntity">
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.jukyushokai.ServiceJukyuJokyoEntity" fetchSize="500">
         WITH key AS(
         SELECT "shikibetsuCode" FROM rgdb."DbV1001HihokenshaDaicho" WHERE "hihokenshaNo" = #{被保険者番号}
         )

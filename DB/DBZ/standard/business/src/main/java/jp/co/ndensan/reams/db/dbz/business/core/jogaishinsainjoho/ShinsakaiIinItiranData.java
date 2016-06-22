@@ -13,7 +13,7 @@ import lombok.Setter;
 /**
  * 審査会一覧のデータソースをbusinessl
  *
- * @reamsid_L DBE-1300-040 dongyabin
+ * @reamsid_L DBZ-1300-040 dongyabin
  */
 @Getter
 @Setter

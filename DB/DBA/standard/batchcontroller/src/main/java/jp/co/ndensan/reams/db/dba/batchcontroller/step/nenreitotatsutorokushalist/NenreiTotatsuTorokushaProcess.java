@@ -200,6 +200,11 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
         entity.set並び順_3(RString.EMPTY);
         entity.set並び順_4(RString.EMPTY);
         entity.set並び順_5(RString.EMPTY);
+        entity.set改頁１(RString.EMPTY);
+        entity.set改頁２(RString.EMPTY);
+        entity.set改頁３(RString.EMPTY);
+        entity.set改頁４(RString.EMPTY);
+        entity.set改頁５(RString.EMPTY);
         entity.set年齢到達者情報(nenreiTotatsushaJouhoulist);
         NenreiTotatsushaTorokuListBatch batch = new NenreiTotatsushaTorokuListBatch();
         item = batch.getNenreiTotatsushaTorokuChohyoData(entity);

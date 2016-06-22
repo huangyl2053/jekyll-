@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -80,15 +81,13 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
         if (processParameter.getTaishoKaishiTimestamp() == null && processParameter.getTaishoShuryoTimestamp() == null) {
             shoriDateKanriMapper = getMapper(IDbT7022ShoriDateKanriMapper.class);
             shoriDateKanriEntity = shoriDateKanriMapper.getTaishoShuryoYMD();
-            if (RDate.getNowDateTime().isBefore(shoriDateKanriEntity.getTaishoShuryoTimestamp().getRDateTime())) {
-                throw new BatchInterruptedException(DbzErrorMessages.期間が不正_未来日付不可.getMessage().toString());
-            }
             YMDHMS taishoShuryoTimestamp = null;
             if (shoriDateKanriEntity != null) {
                 taishoShuryoTimestamp = shoriDateKanriEntity.getTaishoShuryoTimestamp();
             }
             if (taishoShuryoTimestamp != null) {
-                processParameter.setTaishoKaishiTimestamp(shoriDateKanriEntity.getTaishoShuryoTimestamp().getRDateTime());
+                is日期期間判定(taishoShuryoTimestamp.getRDateTime());
+                processParameter.setTaishoKaishiTimestamp(taishoShuryoTimestamp.getRDateTime());
             }
             processParameter.setTaishoShuryoTimestamp(RDate.getNowDateTime());
         }
@@ -540,5 +539,11 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
             tashaJukiDataEntity.set受給者更新日時(entity.getDbT4001LastUpdateTimestamp().format西暦(日付.toString()));
         }
         return tashaJukiDataEntity;
+    }
+
+    private void is日期期間判定(RDateTime 終了日時) {
+        if (RDate.getNowDateTime().isBefore(終了日時)) {
+            throw new BatchInterruptedException(DbzErrorMessages.期間が不正_未来日付不可.getMessage().toString());
+        }
     }
 }

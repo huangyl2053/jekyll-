@@ -10,11 +10,6 @@
         <result property="被保険者カナ氏名" column="hihokenshakanamei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
         <result property="被保険者氏名" column="hihokenshamei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
         <result property="対象情報" column="taishojyohou" />
-        <result property="改頁１" column="gaipage_1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="改頁２" column="gaipage_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="改頁３" column="gaipage_3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="改頁４" column="gaipage_4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="改頁５" column="gaipage_5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="対象情報タイトル" column="taishojyohoutayitoru" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="開始タイトル" column="kaishitayitoru" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="終了タイトル" column="shuryotayitoru" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -61,11 +56,6 @@
         NULL AS "setaiCode"
         ,NULL AS "hihokenshakanamei"
         ,NULL AS "hihokenshamei"
-        ,NULL AS "gaipage_1"
-        ,NULL AS "gaipage_2"
-        ,NULL AS "gaipage_3"
-        ,NULL AS "gaipage_4"
-        ,NULL AS "gaipage_5"
         ,'データ種別：被保険者台帳' AS "taishojyohoutayitoru"
         ,1 AS "taishojyohou"
         ,'取得情報' AS "kaishitayitoru"

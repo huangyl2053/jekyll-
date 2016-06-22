@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * KaigoninteiShikakuInfo のクラスファイル
  *
- * @reamsid_L DBE-1300-060 lizhuoxuan
+ * @reamsid_L DBZ-1300-060 lizhuoxuan
  */
 public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShikakuInfoDiv {
 

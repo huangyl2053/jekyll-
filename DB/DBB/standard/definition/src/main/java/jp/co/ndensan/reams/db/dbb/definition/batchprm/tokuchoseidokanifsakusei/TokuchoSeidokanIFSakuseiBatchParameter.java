@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class TokuchoSeidokanIFSakuseiBatchParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;

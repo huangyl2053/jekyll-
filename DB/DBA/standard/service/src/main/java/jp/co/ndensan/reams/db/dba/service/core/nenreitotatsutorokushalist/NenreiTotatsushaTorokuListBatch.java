@@ -49,6 +49,11 @@ public class NenreiTotatsushaTorokuListBatch {
             tyouHyouListEntity.set並び順３(entity.get並び順_3());
             tyouHyouListEntity.set並び順４(entity.get並び順_4());
             tyouHyouListEntity.set並び順５(entity.get並び順_5());
+            tyouHyouListEntity.set改頁１(entity.get改頁１());
+            tyouHyouListEntity.set改頁２(entity.get改頁２());
+            tyouHyouListEntity.set改頁３(entity.get改頁３());
+            tyouHyouListEntity.set改頁４(entity.get改頁４());
+            tyouHyouListEntity.set改頁５(entity.get改頁５());
             if (nenreiTotatsushaJouhouEntity.get識別コード() == null) {
                 set帳票データ作成用Entityの部分項目(tyouHyouListEntity, nenreiTotatsushaJouhouEntity);
                 tyouHyouListEntity.setリスト下_被保険者氏名(被保険者氏名);
@@ -122,11 +127,6 @@ public class NenreiTotatsushaTorokuListBatch {
             NenreiTotatsuTorokushaListTyouHyouListEntity tyouHyouListEntity,
             NenreiTotatsushaJouhouEntity nenreiTotatsushaJouhouEntity) {
         tyouHyouListEntity.set対象情報タイトル(nenreiTotatsushaJouhouEntity.get対象情報タイトル());
-        tyouHyouListEntity.set改頁１(nenreiTotatsushaJouhouEntity.get改頁１());
-        tyouHyouListEntity.set改頁２(nenreiTotatsushaJouhouEntity.get改頁２());
-        tyouHyouListEntity.set改頁３(nenreiTotatsushaJouhouEntity.get改頁３());
-        tyouHyouListEntity.set改頁４(nenreiTotatsushaJouhouEntity.get改頁４());
-        tyouHyouListEntity.set改頁５(nenreiTotatsushaJouhouEntity.get改頁５());
         tyouHyouListEntity.set開始タイトル(nenreiTotatsushaJouhouEntity.get開始タイトル());
         tyouHyouListEntity.set終了タイトル(nenreiTotatsushaJouhouEntity.get終了タイトル());
         tyouHyouListEntity.set区分タイトル(nenreiTotatsushaJouhouEntity.get区分タイトル());

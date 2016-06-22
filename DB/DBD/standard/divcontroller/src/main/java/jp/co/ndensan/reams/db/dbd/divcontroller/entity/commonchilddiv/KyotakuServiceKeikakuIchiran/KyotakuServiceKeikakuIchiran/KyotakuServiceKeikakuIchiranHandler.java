@@ -501,7 +501,7 @@ public class KyotakuServiceKeikakuIchiranHandler {
                 if (entity.get限度超過単位数().intValue() >= 0) {
                     TextBoxNum 限度超過単位数 = new TextBoxNum();
                     限度超過単位数.setValue(entity.get限度超過単位数());
-                    row.setGendoChokaTanisu(合計単位数);
+                    row.setGendoChokaTanisu(限度超過単位数);
                 }
 
                 dgList.add(row);

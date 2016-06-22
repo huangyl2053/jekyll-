@@ -54,6 +54,6 @@ public class ShinsakaiGijirokuBuilder implements IShinsakaiGijirokuBuilder {
     @Override
     public ShinsakaiGijirokuReportSource build() {
         return ReportEditorJoiner.from(new ShinsakaiGijirokuReportSource()).join(editor)
-                .join(bodyEditor1).join(bodyEditor2).join(bodyEditor3).join(bodyEditor4).buildSource();
+                .join(bodyEditor1).join(bodyEditor2).join(bodyEditor3).join(bodyEditor4).join(bodyEditor5).buildSource();
     }
 }

@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7202KaigoNinteiHokaiseiKanr
 /**
  * 介護認定法改正管理のMapperです。
  *
- * @reamsid_L DBE-1300-080 yaodongsheng
+ * @reamsid_L DBZ-1300-080 yaodongsheng
  */
 public interface IDbT7202KaigoNinteiHokaiseiKanriMapper {
 

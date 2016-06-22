@@ -58,7 +58,7 @@ public class ShakaiFukushiHojinKeigenHandler {
             dataSourceList.add(dataSource);
         }
         div.getDgShakaiFukushiHojinKeigenList().setDataSource(dataSourceList);
-        div.getShakaiFukushiHojinKeigenDetail().setDisabled(true);
+        div.getShakaiFukushiHojinKeigenDetail().setDisplayNone(true);
     }
 
     private dgShakaiFukushiHojinKeigenList_Row getDataSourceList(ShakaifukuRiyoshaFutanKeigen 申請情報) {
@@ -117,7 +117,7 @@ public class ShakaiFukushiHojinKeigenHandler {
      *
      */
     public void 一覧の詳細表示() {
-        div.getShakaiFukushiHojinKeigenDetail().setDisabled(false);
+        div.getShakaiFukushiHojinKeigenDetail().setDisplayNone(false);
         dgShakaiFukushiHojinKeigenList_Row dataSource = div.getDgShakaiFukushiHojinKeigenList().getActiveRow();
         set社会福祉法人軽減詳細パネル(dataSource);
         set社会福祉法人軽減利用者負担パネル(dataSource);

@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  * 主治医医療機関＆主治医ガイドのHandlerクラスです。
  *
- * @reamsid_L DBE-1300-130 xuyannan
+ * @reamsid_L DBZ-1300-130 xuyannan
  */
 public class ShujiiIryokikanAndShujiiGuideHandler {
 

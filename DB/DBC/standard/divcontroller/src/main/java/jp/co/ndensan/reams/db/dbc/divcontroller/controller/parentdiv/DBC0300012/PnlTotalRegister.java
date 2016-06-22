@@ -1,19 +1,23 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0300012;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
+import jp.co.ndensan.reams.db.dbc.business.core.hokenjuryoininharaitoriatsukai.HokenJuryoIninHaraiToriatsukaiResult;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.deleted;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.saved;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012TransitionEventName.検索に戻る;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.PnlTotalRegisterDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0300012.PnlTotalRegisterHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.service.report.jyuryoitakuatukaijigyoshatorokutsuchisho.JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -71,6 +75,8 @@ public class PnlTotalRegister {
             if (削除.equals(処理モード)) {
                 return ResponseData.of(div).setState(deleted);
             }
+            RString 契約事業者番号 = div.getPnlKeyakuJigyosya().getTxtJigyosyakeiyakuNo().getValue();
+            ViewStateHolder.put(ViewStateKeys.契約事業者番号, 契約事業者番号);
             return ResponseData.of(div).setState(saved);
         }
         boolean changeFlg = false;
@@ -132,6 +138,27 @@ public class PnlTotalRegister {
         PnlTotalRegisterHandler handler = getHandler(div);
         handler.copy画面データ();
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「発行する」ボタン
+     *
+     * @param div PnlTotalRegisterDiv
+     * @return ResponseData
+     */
+    public ResponseData<SourceDataCollection> onClick_btnReportPublish(PnlTotalRegisterDiv div) {
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        RString 契約事業者番号;
+        if (登録.equals(処理モード)) {
+            契約事業者番号 = ViewStateHolder.get(ViewStateKeys.契約事業者番号, RString.class);
+        } else {
+            JuryoininKeiyakuJigyosha data = ViewStateHolder
+                    .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
+            契約事業者番号 = data.get契約事業者番号();
+        }
+        HokenJuryoIninHaraiToriatsukaiResult result = getHandler(div).get発行データ(契約事業者番号);
+        FlexibleDate 発行日 = new FlexibleDate(div.getPnlHakoubi().getTxtHakoubi().getValue().toDateString());
+        return ResponseData.of(new JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService().print(result.getEntity(), 発行日)).respond();
     }
 
     /**

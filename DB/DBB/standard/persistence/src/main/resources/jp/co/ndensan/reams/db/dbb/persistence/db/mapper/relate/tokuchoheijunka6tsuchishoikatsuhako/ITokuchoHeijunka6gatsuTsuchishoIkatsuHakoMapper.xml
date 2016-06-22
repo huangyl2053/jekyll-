@@ -37,7 +37,8 @@
 
     <select resultOrdered="true" id="select特徴平準化_6月分更新後とリアルのデータ"
             resultMap="resultMap_KarisanteiGakuHenkoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter"
+            fetchSize="500">
         SELECT
         <include refid="allColumns_DbT2015KeisangoJohoTemp" />,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />,
@@ -90,7 +91,8 @@
 
     <select resultOrdered="true" id="select計算後情報For計算後情報更正前"
             resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.DbTKeisangoJohoTempTableEntity"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter"
+            fetchSize="500">
         SELECT *
         FROM
         rgdb."DbT2015KeisangoJohoTemp"  AS DbT2015KeisangoJohoTemp
@@ -103,7 +105,8 @@
 
     <select resultOrdered="true" id="select前年度賦課情報"
             resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter"
+            fetchSize="500">
         SELECT
         *
         FROM
@@ -139,7 +142,7 @@
     </select>
 
     <select resultOrdered="true" id="select前年度特徴期別金額06"
-            resultType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler">
+            resultType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" fetchSize="500">
         SELECT
         UrT0705ChoteiKyotsu."choteigaku"
         FROM
@@ -159,8 +162,10 @@
         前年度賦課."hihokenshaNo" = DbT2002FukaTemp."hihokenshaNo"
     </select>
 
-    <select resultOrdered="true" id="selectAll賦課TempTableEntity" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter">
+    <select resultOrdered="true"
+            id="selectAll賦課TempTableEntity" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter"
+            fetchSize="500">
         SELECT *
         FROM
         rgdb."DbT2002FukaZennendoTemp"
@@ -168,7 +173,8 @@
 
     <select resultOrdered="true" id="select継続の被保険者区分TempTableEntity"
             resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter"
+            fetchSize="500">
         SELECT *
         FROM
         rgdb."DbT2002FukaZennendoTemp"
@@ -180,7 +186,8 @@
 
     <select resultOrdered="true" id="select4月開始の被保険者区分TempTableEntity"
             resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter"
+            fetchSize="500">
         SELECT *
         FROM
         rgdb."DbT2002FukaZennendoTemp"
@@ -192,7 +199,8 @@
 
     <select resultOrdered="true" id="select6月開始の被保険者区分TempTableEntity"
             resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter"
+            fetchSize="500">
         SELECT *
         FROM
         rgdb."DbT2002FukaZennendoTemp"
@@ -202,7 +210,8 @@
     </select>
 
     <select resultOrdered="true" id="select出力対象情報" resultMap="resultMap_出力対象情報の取得"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.ShutsuRyokuTaishoShutokuMyBatisParameter">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.ShutsuRyokuTaishoShutokuMyBatisParameter"
+            fetchSize="500">
         SELECT *
         FROM rgdb."DbT2002FukaTemp" AS DbT2002FukaTemp
         WHERE
@@ -223,7 +232,8 @@
 
     <select resultOrdered="true" id = "select賦課For通知書発行後異動者"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.ShutsuRyokuTaishoShutokuMyBatisParameter"
-            resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity">
+            resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity"
+            fetchSize="500">
         SELECT *
         FROM
         rgdb."DbT2002FukaTemp"

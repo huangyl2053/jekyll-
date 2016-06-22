@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 滞納警告のイベントを定義したDivControllerです。
  *
- * @reamsid_L DBD-3620-050 liangbc
+ * @reamsid_L DBD-4340-010 liangbc
  */
 public class TainoKeikokuMain {
 

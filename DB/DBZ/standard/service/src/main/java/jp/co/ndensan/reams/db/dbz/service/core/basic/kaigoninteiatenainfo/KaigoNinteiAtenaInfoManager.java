@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護認定宛名情報クラスです。
  *
- * @reamsid_L DBE-1300-050 lizhuoxuan
+ * @reamsid_L DBZ-1300-050 lizhuoxuan
  */
 public class KaigoNinteiAtenaInfoManager {
 
@@ -45,8 +45,7 @@ public class KaigoNinteiAtenaInfoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoNinteiAtenaInfoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KaigoNinteiAtenaInfoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KaigoNinteiAtenaInfoManager}のインスタンス
      */
     public static KaigoNinteiAtenaInfoManager createInstance() {
         return InstanceProvider.create(KaigoNinteiAtenaInfoManager.class);
