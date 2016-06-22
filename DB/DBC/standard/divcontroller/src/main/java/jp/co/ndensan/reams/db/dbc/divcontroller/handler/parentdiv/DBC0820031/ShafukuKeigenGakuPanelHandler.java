@@ -529,9 +529,10 @@ public final class ShafukuKeigenGakuPanelHandler {
     }
 
     /**
+     * 登録Save
      *
      * @param meisaiPar ShoukanharaihishinseimeisaikensakuParameter
-     * @param hojinKeigengakuEntityList
+     * @param hojinKeigengakuEntityList List
      */
     public void 登録Save(ShoukanharaihishinseimeisaikensakuParameter meisaiPar,
             List<ShokanShakaiFukushiHojinKeigengakuResult> hojinKeigengakuEntityList) {

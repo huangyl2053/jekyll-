@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourc
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -62,7 +63,12 @@ public class JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho {
 
     private static List<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishReport> toReports(RString ninshoshaYakushokuMei) {
         List<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishReport> list = new ArrayList<>();
-        JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishItem item = new JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishItem(ninshoshaYakushokuMei);
+        RStringBuilder 認証者 = new RStringBuilder();
+        if (!RString.isNullOrEmpty(ninshoshaYakushokuMei)) {
+            認証者.append(ninshoshaYakushokuMei);
+            認証者.append(new RString("長様"));
+        }
+        JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishItem item = new JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishItem(認証者.toRString());
         list.add(JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishReport.createReport(item));
         return list;
     }
