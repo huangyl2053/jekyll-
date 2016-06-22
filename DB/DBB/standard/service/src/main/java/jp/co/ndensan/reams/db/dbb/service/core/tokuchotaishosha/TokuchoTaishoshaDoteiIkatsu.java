@@ -240,11 +240,11 @@ public class TokuchoTaishoshaDoteiIkatsu {
         if (null != tokurei && null != tokurei.getShikibetsuCode()) {
             FlexibleDate 解除年月日 = tokurei.getKaijoYMD();
             return (null == 解除年月日 || 解除年月日.equals(FlexibleDate.EMPTY))
-                    ? DoteiFuitchiRiyu.資格なし : DoteiFuitchiRiyu.資格なし;
+                    ? DoteiFuitchiRiyu.資格なし : DoteiFuitchiRiyu.その他;
         } else if (null != jogaisha && null != jogaisha.getShikibetsuCode()) {
             FlexibleDate 解除年月日 = jogaisha.getKaijoYMD();
             return (null == 解除年月日 || 解除年月日.equals(FlexibleDate.EMPTY))
-                    ? DoteiFuitchiRiyu.資格なし : DoteiFuitchiRiyu.資格なし;
+                    ? DoteiFuitchiRiyu.資格なし : DoteiFuitchiRiyu.その他;
         } else if (被保険者台帳があるFlag) {
             return DoteiFuitchiRiyu.資格喪失;
         }
