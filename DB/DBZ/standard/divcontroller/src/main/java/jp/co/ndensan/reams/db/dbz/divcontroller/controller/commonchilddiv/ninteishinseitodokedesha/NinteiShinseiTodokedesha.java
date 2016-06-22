@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護認定申請届出者のDivControllerです。
  *
- * @reamsid_L DBE-1300-110 yaodongsheng
+ * @reamsid_L DBZ-1300-110 yaodongsheng
  */
 public class NinteiShinseiTodokedesha {
 

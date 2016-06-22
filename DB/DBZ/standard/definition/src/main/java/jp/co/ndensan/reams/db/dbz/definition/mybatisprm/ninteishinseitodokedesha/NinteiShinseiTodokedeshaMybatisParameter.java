@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200
 /**
  * 介護認定申請届出者の宛名検索条件。
  *
- * @reamsid_L DBA-0360-050 yaodongsheng
+ * @reamsid_L DBZ-1300-110 yaodongsheng
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
