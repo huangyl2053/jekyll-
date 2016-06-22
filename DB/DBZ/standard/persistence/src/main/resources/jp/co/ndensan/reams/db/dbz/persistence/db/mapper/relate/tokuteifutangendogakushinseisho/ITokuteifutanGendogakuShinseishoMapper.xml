@@ -34,7 +34,7 @@
         AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
     </select>
 
-    <select resultOrdered="true" id="get保険者名称" resultType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"
+    <select resultOrdered="true" id="get保険者名称" resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
             parameterType="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"
             fetchSize="500">
         SELECT

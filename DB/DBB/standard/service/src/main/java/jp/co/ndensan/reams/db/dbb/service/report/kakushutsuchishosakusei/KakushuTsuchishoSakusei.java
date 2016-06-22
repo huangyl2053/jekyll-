@@ -716,7 +716,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
                 代納人氏名 = 代納人情報リスト.get(0).get識別対象().get名称();
             }
         }
-        if (出力期リスト == null || 代納人氏名 == null) {
+        if (出力期リスト == null) {
             return;
         }
         NonyuTsuchiShoJohoFactory nonyuTsuchiShoJohoFactory = InstanceProvider.create(NonyuTsuchiShoJohoFactory.class);
@@ -1130,7 +1130,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
                 代納人氏名 = 代納人情報リスト.get(0).get識別対象().get名称();
             }
         }
-        if (出力期リスト == null || 代納人氏名 == null) {
+        if (出力期リスト == null) {
             return;
         }
         NonyuTsuchiShoJohoFactory nonyuTsuchiShoJohoFactory = InstanceProvider.create(NonyuTsuchiShoJohoFactory.class);

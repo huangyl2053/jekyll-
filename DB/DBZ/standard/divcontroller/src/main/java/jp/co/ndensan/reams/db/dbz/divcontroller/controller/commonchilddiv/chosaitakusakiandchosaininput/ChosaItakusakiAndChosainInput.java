@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  * 共有子Div「調査委託先/調査員入力」のDivControllerです。
  *
- * @reamsid_L DBE-1300-030 zhangguopeng
+ * @reamsid_L DBZ-1300-030 zhangguopeng
  */
 public class ChosaItakusakiAndChosainInput {
 

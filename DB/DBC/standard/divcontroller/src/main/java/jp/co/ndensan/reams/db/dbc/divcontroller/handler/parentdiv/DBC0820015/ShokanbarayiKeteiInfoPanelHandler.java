@@ -44,7 +44,6 @@ public class ShokanbarayiKeteiInfoPanelHandler {
 
     private final ShokanbarayiKeteiInfoPanelDiv div;
     private static final int 定数_0 = 0;
-    private static final int 定数_6 = 6;
 
     /**
      * ShokanbarayiKeteiInfoPanelHandler

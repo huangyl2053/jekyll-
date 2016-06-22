@@ -41,7 +41,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAns
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser15;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser16;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser17;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.GenzainoJokyoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
@@ -67,7 +66,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class IchijihanteikekkahyoItemSettei {
 
-    private static final RString 出力スタイル_A4 = new RString("1");
     private static final RString 月間 = new RString("月間");
     private static final RString A_99 = new RString("99A");
     private static final RString A_02 = new RString("02A");
@@ -115,8 +113,8 @@ public class IchijihanteikekkahyoItemSettei {
         item.set申請書管理番号(entity.getDbt5502_shinseishoKanriNo().getColumnValue());
         item.set帳票名(new RString("認定情報　（事務局用）"));
         item.set審査会審査順(new RString(entity.getDbt5502_shinsakaiOrder()));
-        // TODO 不知道怎么做
-        item.set現在の状況(GenzainoJokyoCode.toValue(出力スタイル_A4).get名称());
+        // TODO ENUMを提供しない
+//        item.set現在の状況(GenzainoJokyoCode.toValue(出力スタイル_A4).get名称());
         item.set審査人数(new RString(entity.getDbt5502_shinsakaiOrder()));
         item.set合議体番号(paramter.getGogitaiNo());
         item.set被保険者区分(HihokenshaKubunCode.toValue(entity.getDbt5101_hihokenshaKubunCode()).get名称());

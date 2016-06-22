@@ -115,6 +115,25 @@ public class PublicationShiryoShinsakaiHandler {
     }
 
     /**
+     * 出力スタイルを変更する場合、表示項目を変更する。
+     */
+    public void onClick_syutuHeDa() {
+        List<RString> 事務_審査会資料 = new ArrayList<>();
+        List<RString> 委員_審査会資料 = new ArrayList<>();
+        if (選択.equals(div.getDdlShutsuryokuStyleZenken().getSelectedKey())) {
+            事務_審査会資料.add(出力条件_特記事項_一次判定結果票);
+            委員_審査会資料.add(出力条件_特記事項_一次判定結果票);
+        } else {
+            事務_審査会資料.add(作成条件_全件);
+            事務_審査会資料.add(作成条件_範囲指定);
+            委員_審査会資料.add(作成条件_全件);
+            委員_審査会資料.add(作成条件_範囲指定);
+        }
+        div.getChkPrintChohyoShinsakaiJimu().setDisabledItemsByKey(事務_審査会資料);
+        div.getChkPrintChohyoShinsakaiIin().setDisabledItemsByKey(委員_審査会資料);
+    }
+
+    /**
      * 事務局用印刷帳票チェックボックスを変更する場合、表示項目を変更する。
      */
     public void onClick_chkPrintChoyoJimu() {
