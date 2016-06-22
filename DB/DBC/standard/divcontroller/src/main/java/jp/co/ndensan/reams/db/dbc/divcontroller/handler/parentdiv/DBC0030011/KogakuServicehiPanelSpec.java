@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0030011;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.HihokenshaKensakuJokenDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.KogakuServicehiTaishoshaKensakuMainDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.NengetsuKensakuJokenDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.KogakuServicehiPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.SearchKogakuHihokenshaDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.SearchYMDiv;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -17,14 +17,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-3000-010 gongliang
  */
-public enum KogakuServicehiTaishoshaKensakuMainSpec implements IPredicate<KogakuServicehiTaishoshaKensakuMainDiv> {
+public enum KogakuServicehiPanelSpec implements IPredicate<KogakuServicehiPanelDiv> {
 
     /**
      * 「被保険者を指定して検索する」を選択する場合 入力チェックです。
      */
     被保険者を指定入力チェック {
                 @Override
-                public boolean apply(KogakuServicehiTaishoshaKensakuMainDiv div) {
+                public boolean apply(KogakuServicehiPanelDiv div) {
                     RString 被保番号;
                     RDate 提供年月From;
                     RDate 提供年月To;
@@ -32,14 +32,14 @@ public enum KogakuServicehiTaishoshaKensakuMainSpec implements IPredicate<Kogaku
                     RDate 申請年月To;
                     RDate 決定年月From;
                     RDate 決定年月To;
-                    HihokenshaKensakuJokenDiv panel指定_被保険者 = div.getKogakuServicehiSearch().getHihokenshaKensakuJoken();
-                    被保番号 = panel指定_被保険者.getTxtHihoNo().getValue();
-                    提供年月From = panel指定_被保険者.getTxtTeikyoYMRange().getFromValue();
-                    提供年月To = panel指定_被保険者.getTxtTeikyoYMRange().getToValue();
-                    申請年月From = panel指定_被保険者.getTxtShinseiYMRange().getFromValue();
-                    申請年月To = panel指定_被保険者.getTxtShinseiYMRange().getToValue();
-                    決定年月From = panel指定_被保険者.getTxtKetteiYMRange().getFromValue();
-                    決定年月To = panel指定_被保険者.getTxtKetteiYMRange().getToValue();
+                    SearchKogakuHihokenshaDiv panel = div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha();
+                    被保番号 = panel.getTxtHihoNo().getValue();
+                    提供年月From = panel.getTxtTeikyoYMRange().getFromValue();
+                    提供年月To = panel.getTxtTeikyoYMRange().getToValue();
+                    申請年月From = panel.getTxtShinseiYMRange().getFromValue();
+                    申請年月To = panel.getTxtShinseiYMRange().getToValue();
+                    決定年月From = panel.getTxtKetteiYMRange().getFromValue();
+                    決定年月To = panel.getTxtKetteiYMRange().getToValue();
                     if (被保番号 != null && !被保番号.isEmpty()) {
                         return true;
                     }
@@ -57,14 +57,14 @@ public enum KogakuServicehiTaishoshaKensakuMainSpec implements IPredicate<Kogaku
      */
     年月を指定入力チェック {
                 @Override
-                public boolean apply(KogakuServicehiTaishoshaKensakuMainDiv div) {
+                public boolean apply(KogakuServicehiPanelDiv div) {
                     RDate 提供年月;
                     RDate 申請年月;
                     RDate 決定年月;
-                    NengetsuKensakuJokenDiv panel指定_年月 = div.getKogakuServicehiSearch().getNengetsuKensakuJoken();
-                    提供年月 = panel指定_年月.getTxtTeikyoYM().getValue();
-                    申請年月 = panel指定_年月.getTxtShinseiYM().getValue();
-                    決定年月 = panel指定_年月.getTxtKetteiYM().getValue();
+                    SearchYMDiv panel = div.getSearchKogakuServicehiPanel().getSearchYM();
+                    提供年月 = panel.getTxtTeikyoYM().getValue();
+                    申請年月 = panel.getTxtShinseiYM().getValue();
+                    決定年月 = panel.getTxtKetteiYM().getValue();
                     return !(提供年月 == null && 申請年月 == null && 決定年月 == null);
                 }
             };

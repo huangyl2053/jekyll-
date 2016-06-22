@@ -123,11 +123,11 @@
         <id column="dbT3110JigyoKogakuShikyuShinsei_serviceTeikyoYM" />
         <id column="dbT3110JigyoKogakuShikyuShinsei_shoKisaiHokenshaNo" />
         <id column="dbT3110JigyoKogakuShikyuShinsei_rirekiNo" />
-        <association property="高額介護サービス費支給申請Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3110JigyoKogakuShikyuShinseiMapper.ResultMap_DbT3110JigyoKogakuShikyuShinseiEntity"/>
-        <association property="高額介護サービス費支給判定結果Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3111JigyoKogakuShikyuHanteiKekkaMapper.ResultMap_DbT3111JigyoKogakuShikyuHanteiKekkaEntity"/>
-        <association property="高額介護サービス費支給審査決定Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3112KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3112KogakuShikyuShinsaKetteiEntity"/>
-        <association property="高額介護サービス費給付対象者合計Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3109JigyoKogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity"/>
-        <collection property="高額介護サービス費給付対象者明細List" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3108JigyoKogakuKyufuTaishoshaMeisaiMapper.ResultMap_DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity"/>
+        <association property="事業高額介護サービス費支給申請Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3110JigyoKogakuShikyuShinseiMapper.ResultMap_DbT3110JigyoKogakuShikyuShinseiEntity"/>
+        <association property="事業高額介護サービス費支給判定結果Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3111JigyoKogakuShikyuHanteiKekkaMapper.ResultMap_DbT3111JigyoKogakuShikyuHanteiKekkaEntity"/>
+        <association property="事業高額介護サービス費支給審査決定Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3112KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3112KogakuShikyuShinsaKetteiEntity"/>
+        <association property="事業高額介護サービス費給付対象者合計Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3109JigyoKogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity"/>
+        <collection property="事業高額介護サービス費給付対象者明細List" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3108JigyoKogakuKyufuTaishoshaMeisaiMapper.ResultMap_DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity"/>
         <collection property="介護事業者List" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
     </resultMap>
 
