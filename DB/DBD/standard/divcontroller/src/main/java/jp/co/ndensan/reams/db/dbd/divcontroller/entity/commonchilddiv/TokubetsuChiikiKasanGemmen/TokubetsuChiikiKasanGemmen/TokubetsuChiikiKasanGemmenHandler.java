@@ -44,7 +44,7 @@ public class TokubetsuChiikiKasanGemmenHandler {
         if (!申請一覧情報.isEmpty()) {
             set特別地域加算減免リストデータグリッド(申請一覧情報);
         }
-        div.getTokubetsuChiikiKasanGemmenDetail().setDisabled(true);
+        div.getTokubetsuChiikiKasanGemmenDetail().setDisplayNone(true);
         return 申請一覧情報;
     }
 
@@ -92,7 +92,7 @@ public class TokubetsuChiikiKasanGemmenHandler {
      *
      */
     public void 一覧の詳細表示() {
-        div.getTokubetsuChiikiKasanGemmenDetail().setDisabled(false);
+        div.getTokubetsuChiikiKasanGemmenDetail().setDisplayNone(false);
         dgTokubetsuChiikiKasanGemmenList_Row dataSource = div.getDgTokubetsuChiikiKasanGemmenList().getActiveRow();
         if (dataSource.getShinseiDate() != null) {
             div.getTokubetsuChiikiKasanGemmenDetail().getTxtShinseiDate().setValue(dataSource.getShinseiDate().getValue());
