@@ -54,9 +54,9 @@ public class IinTuikaSiryoDataSakuseiProcess extends BatchKeyBreakBase<IinTuikaS
     private static final RString SELECT_IINTUIKASIRYO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.publicationshiryoshinsakai.IShiryoShinsakaiIinMapper.getIinTuikaSiryo");
     private static final List<RString> PAGE_BREAK_KEYS_A3 = Collections.unmodifiableList(Arrays.asList(
-            new RString(TsuikashiryokagamiA3ReportSource.ReportSourceFields.shichosonNo.name())));
+            new RString(TsuikashiryokagamiA3ReportSource.ReportSourceFields.shinsakaiNo.name())));
     private static final List<RString> PAGE_BREAK_KEYS_A4 = Collections.unmodifiableList(Arrays.asList(
-            new RString(TsuikashiryokagamiA4ReportSource.ReportSourceFields.shichosonNo.name())));
+            new RString(TsuikashiryokagamiA4ReportSource.ReportSourceFields.shinsakaiNo.name())));
     private static final RString 印刷方法_A4 = new RString("1");
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.hanteikekkajohoshuturyoku;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -28,7 +29,7 @@ public class HanteiKekkaJohoShuturyokuBatchParameter extends BatchParameterBase 
     @BatchParameter(key = KEY_HAKKOUTYOUHYOU, name = "発行帳票")
     private RString hakkouTyouhyou;
     @BatchParameter(key = KEY_KAISAIBANGOU, name = "開催番号")
-    private RString kaisaiBangou;
+    private List<RString> kaisaiBangou;
 
     /**
      * バーチのパラメータを作成します。

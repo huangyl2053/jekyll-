@@ -173,9 +173,10 @@ public class ShinseiKensaku {
     public ResponseData<SourceDataCollection> onClick_btnitiranprint(ShinseiKensakuDiv div) {
         List<YokaigoYoshienShinseiIchiranItem> items = new ArrayList<>();
         ShinseiKensakuInfoBusiness infoBusiness = ViewStateHolder.get(ViewStateKeys.検索結果_認定申請情報, ShinseiKensakuInfoBusiness.class);
+        int renban = 1;
         for (ShinseiKensakuBusiness row : infoBusiness.getShinseiKensakuList()) {
             YokaigoYoshienShinseiIchiranItem item = new YokaigoYoshienShinseiIchiranItem();
-
+            item.setRenban(new RString(String.valueOf(renban++)));
             item.setShoKisaiHokenshaNo(row.get証記載保険者番号());
             item.setShichosonName(row.get市町村名称());
             if (row.get被保険者氏名() != null) {

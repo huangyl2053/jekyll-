@@ -36,7 +36,8 @@
         PSM."juminShubetsuCode" AS "PSM_juminShubetsuCode",
         DbT1001Hiho."shichosonCode" AS "DbT1001Hiho_shichosonCode",
         DbT1001Hiho."hihokenshaNo" AS "DbT1001Hiho_hihokenshaNo",
-        DbT1001Hiho."jushochiTokureiFlag" AS "DbT1001Hiho_jushochiTokureiFlag"
+        DbT1001Hiho."jushochiTokureiFlag" AS "DbT1001Hiho_jushochiTokureiFlag",
+        DbT1001Hiho."hihokennshaKubunCode" AS "DbT1001Hiho_hihokennshaKubunCode"
         FROM
         rgdb."DbT1001HihokenshaDaicho" AS DbT1001Hiho
         INNER JOIN
@@ -105,7 +106,8 @@
         PSM."juminShubetsuCode" AS "PSM_juminShubetsuCode",
         DbT1001Hiho."shichosonCode" AS "DbT1001Hiho_shichosonCode",
         DbT1001Hiho."hihokenshaNo" AS "DbT1001Hiho_hihokenshaNo",
-        DbT1001Hiho."jushochiTokureiFlag" AS "DbT1001Hiho_jushochiTokureiFlag"
+        DbT1001Hiho."jushochiTokureiFlag" AS "DbT1001Hiho_jushochiTokureiFlag",
+        DbT1001Hiho."hihokennshaKubunCode" AS "DbT1001Hiho_hihokennshaKubunCode"
         FROM
         rgua.${psmShikibetsuTaisho} AS PSM
         LEFT JOIN

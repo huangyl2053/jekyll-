@@ -28,6 +28,7 @@ public class HeijunkaKakutei {
      * @return ResponseData
      */
     public ResponseData<HeijunkaKakuteiDiv> onLoad(HeijunkaKakuteiDiv div) {
+        getHandler(div).check基準日時();
         ShoriDateKanri 処理日付管理 = getHandler(div).initialize();
         ViewStateHolder.put(ViewStateKeys.処理日付管理, 処理日付管理);
         return ResponseData.of(div).setState(DBB0130002StateName.平準化確定リアル);

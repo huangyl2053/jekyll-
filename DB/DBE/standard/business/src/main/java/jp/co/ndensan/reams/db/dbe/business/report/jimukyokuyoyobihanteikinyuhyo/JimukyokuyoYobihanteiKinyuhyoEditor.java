@@ -70,27 +70,44 @@ public class JimukyokuyoYobihanteiKinyuhyoEditor implements IJimukyokuyoYobihant
         source.printTimeStamp = systemDateTime.toRString();
         source.listTaishoshaIchiran_1 = item.get被保険者番号();
         source.listTaishoshaIchiran_2 = item.get氏名();
-        source.listTaishoshaIchiran_3 = Seibetsu.toValue(item.get性別()).get名称();
+        if (RString.isNullOrEmpty(item.get性別())) {
+            source.listTaishoshaIchiran_3 = RString.EMPTY;
+        } else {
+            source.listTaishoshaIchiran_3 = Seibetsu.toValue(item.get性別()).get名称();
+        }
+
         source.listTaishoshaIchiran_4 = item.get年齢();
 
-        if (item.get前回二次判定() == null) {
+        if (RString.isNullOrEmpty(item.get前回二次判定())) {
             source.listTaishoshaIchiran_5 = RString.EMPTY;
         } else {
             source.listTaishoshaIchiran_5 = YokaigoJotaiKubun09.toValue(item.get前回二次判定()).get名称();
         }
 
-        if (item.get前回認定有効期間() == null) {
+        if (RString.isNullOrEmpty(item.get前回認定有効期間())) {
             source.listTaishoshaIchiran_6 = RString.EMPTY;
         } else {
             source.listTaishoshaIchiran_6 = item.get前回認定有効期間().concat(new RString("ヵ月"));
 
         }
-        source.listTaishoshaIchiran_7 = IchijiHanteiKekkaCode09.toValue(item.get一次判定()).get名称();
+
+        if (RString.isNullOrEmpty(item.get一次判定())) {
+            source.listTaishoshaIchiran_7 = RString.EMPTY;
+        } else {
+            source.listTaishoshaIchiran_7 = IchijiHanteiKekkaCode09.toValue(item.get一次判定()).get名称();
+        }
+
         source.listTaishoshaIchiran_8 = RString.EMPTY;
         source.listTaishoshaIchiran_9 = RString.EMPTY;
         source.listTaishoshaIchiran_10 = RString.EMPTY;
-        source.listTokuteiShippeiName_1 = TokuteiShippei.toValue(item.get特定疾病コード()).get名称();
-        source.listTokuteiShippeiCode_1 = item.get特定疾病コード();
+
+        if (RString.isNullOrEmpty(item.get特定疾病コード())) {
+            source.listTokuteiShippeiCode_1 = RString.EMPTY;
+            source.listTokuteiShippeiName_1 = RString.EMPTY;
+        } else {
+            source.listTokuteiShippeiCode_1 = item.get特定疾病コード();
+            source.listTokuteiShippeiName_1 = TokuteiShippei.toValue(item.get特定疾病コード()).get名称();
+        }
         source.listIchijihanteiKeikokuCode_1 = item.get一次判定警告コード();
         source.listShinseiKubun_1 = NinteiShinseiShinseijiKubunCode.toValue(item.get申請区分()).get名称();
         source.listNo_1 = item.getNo();

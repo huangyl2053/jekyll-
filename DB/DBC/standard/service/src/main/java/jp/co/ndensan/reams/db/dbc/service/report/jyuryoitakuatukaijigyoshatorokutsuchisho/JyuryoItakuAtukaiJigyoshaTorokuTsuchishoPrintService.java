@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.report.jyuryoitakuatukaijigyoshatorokutsuchisho;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.jyuryoitakuatukaijigyoshatorokutsuchisho.JyuryoItakuAtukaiJigyoshaTorokuTsuchishoProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.jyuryoitakuatukaijigyoshatorokutsuchisho.JyuryoItakuAtukaiJigyoshaTorokuTsuchishoReport;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -56,17 +55,18 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService {
     private static final int 項目番号_2 = 2;
 
     /**
+     * 介護保険受領委任払い取扱事業者登録通知書を印刷します。
      *
-     * @param targets List<HokenJuryoIninHaraiToriatsukaiEntity>
+     * @param target HokenJuryoIninHaraiToriatsukaiEntity
      * @param 発行日 FlexibleDate
      * @return SourceDataCollection
      */
     public SourceDataCollection print(
-            List<HokenJuryoIninHaraiToriatsukaiEntity> targets,
+            HokenJuryoIninHaraiToriatsukaiEntity target,
             FlexibleDate 発行日) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(targets, 発行日, reportManager);
+            print(target, 発行日, reportManager);
             collection = reportManager.publish();
         }
         return collection;
@@ -75,12 +75,12 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService {
     /**
      * 介護保険受領委任払い取扱事業者登録通知書を印刷します。
      *
-     * @param targets List<HokenJuryoIninHaraiToriatsukaiEntity>
+     * @param target HokenJuryoIninHaraiToriatsukaiEntity
      * @param 発行日 FlexibleDate
      * @param reportManager ReportManager
      */
     public void print(
-            List<HokenJuryoIninHaraiToriatsukaiEntity> targets,
+            HokenJuryoIninHaraiToriatsukaiEntity target,
             FlexibleDate 発行日, ReportManager reportManager) {
         JyuryoItakuAtukaiJigyoshaTorokuTsuchishoProperty property = new JyuryoItakuAtukaiJigyoshaTorokuTsuchishoProperty();
         try (ReportAssembler<JyuryoItakuAtukaiJigyoshaTorokuTsuchishoSource> assembler = createAssembler(property, reportManager)) {
@@ -115,7 +115,7 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService {
 
             ReportSourceWriter<JyuryoItakuAtukaiJigyoshaTorokuTsuchishoSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
-            new JyuryoItakuAtukaiJigyoshaTorokuTsuchishoReport(targets, sourceBuilder, toiawasesakiSource,
+            new JyuryoItakuAtukaiJigyoshaTorokuTsuchishoReport(target, sourceBuilder, toiawasesakiSource,
                     文書番号, 通知書定型文１, 通知書定型文2).writeBy(reportSourceWriter);
         }
     }

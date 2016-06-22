@@ -165,18 +165,17 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             hachientity.set市町村コード(entity.get市町村コード());
             コード変換区分の判定8桁(codeHenkanKubun, entity, hachientity);
         }
-        if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null && entity.get資格取得年月日() != null
-                && entity.get受給者認定有効期間開始年月日() != null) && (!entity.get被保険者番号().isEmpty()
+        if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null)
+                && (!entity.get被保険者番号().isEmpty()
                 && !entity.get受給者被保険者番号().isEmpty()
-                && entity.get資格取得年月日().isBeforeOrEquals(entity.get受給者認定有効期間開始年月日()))) {
+                && 日期判定(entity.get資格取得年月日(), entity.get受給者認定有効期間開始年月日()))) {
             hachientity.set被保険者番号(entity.get被保険者番号());
             hachientity.set市町村コード(entity.get市町村コード());
             コード変換区分と更新日時の判定8桁(codeHenkanKubun, entity, hachientity);
         }
-        if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
-                && entity.get資格取得年月日() != null && entity.get受給者認定有効期間開始年月日() != null)
+        if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null)
                 && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
-                && entity.get受給者認定有効期間開始年月日().isBefore(entity.get資格取得年月日()))) {
+                && 日期判定2(entity.get資格取得年月日(), entity.get受給者認定有効期間開始年月日()))) {
             hachientity.set被保険者番号(entity.get被保険者番号());
             hachientity.set市町村コード(entity.get市町村コード());
             コード変換区分の判定8桁(codeHenkanKubun, entity, hachientity);
@@ -324,6 +323,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             RString 連番new = this.get連番(件数);
             junientity.set連番(連番new);
             被保険者番号NULL以外の判定12桁(codeHenkanKubun, entity, junientity);
+            entity.set被保険者番号(new HihokenshaNo(""));
             if ((entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty())
                     && (entity.get受給者被保険者番号() != null && !entity.get受給者被保険者番号().isEmpty())) {
                 junientity.set市町村コード(new RString(this.get地方公共団体コード().toString()));
@@ -346,18 +346,16 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             junientity.set被保険者番号(entity.get被保険者番号());
             コード変換区分の判定12桁(codeHenkanKubun, entity, junientity);
         }
-        if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
-                && entity.get資格取得年月日() != null && entity.get受給者認定有効期間開始年月日() != null)
-                && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
-                && entity.get資格取得年月日().isBeforeOrEquals(entity.get受給者認定有効期間開始年月日()))) {
+        if (entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
+                && !entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
+                && 日期判定(entity.get資格取得年月日(), entity.get受給者認定有効期間開始年月日())) {
             junientity.set市町村コード(entity.get市町村コード());
             junientity.set被保険者番号(entity.get被保険者番号());
             コード変換区分と更新日時の判定12桁(codeHenkanKubun, entity, junientity);
         }
-        if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
-                && entity.get資格取得年月日() != null && entity.get受給者認定有効期間開始年月日() != null)
-                && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
-                && entity.get受給者認定有効期間開始年月日().isBefore(entity.get資格取得年月日()))) {
+        if (entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
+                && !entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
+                && 日期判定2(entity.get資格取得年月日(), entity.get受給者認定有効期間開始年月日())) {
             junientity.set市町村コード(entity.get市町村コード());
             junientity.set被保険者番号(entity.get被保険者番号());
             コード変換区分の判定12桁(codeHenkanKubun, entity, junientity);
@@ -544,18 +542,16 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             jugoentity.set被保険者番号(entity.get被保険者番号());
             コード変換区分の判定15桁(codeHenkanKubun, entity, jugoentity);
         }
-        if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
-                && entity.get資格取得年月日() != null && entity.get受給者認定有効期間開始年月日() != null)
+        if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null)
                 && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
-                && entity.get資格取得年月日().isBeforeOrEquals(entity.get受給者認定有効期間開始年月日()))) {
+                && 日期判定(entity.get資格取得年月日(), entity.get受給者認定有効期間開始年月日()))) {
             jugoentity.set市町村コード(entity.get市町村コード());
             jugoentity.set被保険者番号(entity.get被保険者番号());
             コード変換区分と更新日時の判定15桁(codeHenkanKubun, entity, jugoentity);
         }
-        if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
-                && entity.get資格取得年月日() != null && entity.get受給者認定有効期間開始年月日() != null)
+        if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null)
                 && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
-                && entity.get受給者認定有効期間開始年月日().isBefore(entity.get資格取得年月日()))) {
+                && 日期判定(entity.get資格取得年月日(), entity.get受給者認定有効期間開始年月日()))) {
             jugoentity.set市町村コード(entity.get市町村コード());
             jugoentity.set被保険者番号(entity.get被保険者番号());
             コード変換区分の判定15桁(codeHenkanKubun, entity, jugoentity);
@@ -721,6 +717,30 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
     private LasdecCode get地方公共団体コード() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         return association.get地方公共団体コード();
+    }
+
+    private boolean 日期判定(FlexibleDate 資格取得年月日, FlexibleDate 受給者認定有効期間開始年月日) {
+        if ((資格取得年月日 == null || 資格取得年月日.isEmpty())
+                && 受給者認定有効期間開始年月日 != null && !受給者認定有効期間開始年月日.isEmpty()) {
+            return true;
+        }
+        if (資格取得年月日 == null || 受給者認定有効期間開始年月日 == null
+                || 資格取得年月日.isEmpty() || 受給者認定有効期間開始年月日.isEmpty()) {
+            return false;
+        }
+        return 資格取得年月日.isBeforeOrEquals(受給者認定有効期間開始年月日);
+    }
+
+    private boolean 日期判定2(FlexibleDate 資格取得年月日, FlexibleDate 受給者認定有効期間開始年月日) {
+        if (資格取得年月日 != null && !資格取得年月日.isEmpty()
+                && (受給者認定有効期間開始年月日 == null || 受給者認定有効期間開始年月日.isEmpty())) {
+            return true;
+        }
+        if (資格取得年月日 == null || 受給者認定有効期間開始年月日 == null
+                || 資格取得年月日.isEmpty() || 受給者認定有効期間開始年月日.isEmpty()) {
+            return false;
+        }
+        return 受給者認定有効期間開始年月日.isBefore(資格取得年月日);
     }
 
     /**

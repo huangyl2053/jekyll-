@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchoheijunkakakutei.HokenryoDankaibetu;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchoheijunkakakutei.Taishokensu;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunkakakutei.TokuchoHeijunkaKakuteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130002.HeijunkaKakuteiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130002.dgHeijunkaKakutei_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
@@ -27,11 +28,13 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
@@ -50,6 +53,7 @@ public class HeijunkaKakuteiHandler {
     private static final RString FORMAT = new RString("%02d");
     private static final RString 処理枝番 = new RString("0001");
     private static final RString 年度内連番 = new RString("0001");
+    private static final RString 確定処理を実行する = new RString("btnKakuteiReal");
 
     /**
      * コンストラクタです。
@@ -58,6 +62,35 @@ public class HeijunkaKakuteiHandler {
      */
     public HeijunkaKakuteiHandler(HeijunkaKakuteiDiv div) {
         this.div = div;
+    }
+
+    /**
+     * 基準日時チェックのメソッドます。
+     */
+    public void check基準日時() {
+        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
+                SubGyomuCode.DBB介護賦課);
+        ShoriDateKanri 処理日付管理 = null;
+        RString 機能 = RString.EMPTY;
+        ShoriDateKanriManager manager = new ShoriDateKanriManager();
+        if (特徴平準化_特徴6月分.equals(ResponseHolder.getMenuID())) {
+            処理日付管理 = manager.get処理日付管理マスタ(SubGyomuCode.DBB介護賦課,
+                    ShoriName.特徴平準化_6月分_確定.get名称(),
+                    処理枝番,
+                    new FlexibleYear(調定年度.toString()),
+                    年度内連番);
+            機能 = ShoriName.特徴平準化_6月分_確定.get名称();
+        } else if (特徴平準化_特徴8月分.equals(ResponseHolder.getMenuID())) {
+            処理日付管理 = manager.get処理日付管理マスタ(SubGyomuCode.DBB介護賦課,
+                    ShoriName.特徴平準化_8月分_確定.get名称(),
+                    処理枝番,
+                    new FlexibleYear(調定年度.toString()),
+                    年度内連番);
+            機能 = ShoriName.特徴平準化_8月分_確定.get名称();
+        }
+        if (処理日付管理 != null && 処理日付管理.get基準日時() != null) {
+            throw new ApplicationException(DbbErrorMessages.処理済み.getMessage().replace(機能.toString()));
+        }
     }
 
     /**
@@ -97,6 +130,9 @@ public class HeijunkaKakuteiHandler {
             div.getHeijunkaKakuteiShoriNaiyo().getTxtShoriNichiji().setValue(処理日時);
             set保険料段階別一覧(new FlexibleYear(調定年度.toString()), 基準日時);
         }
+        div.getBtnSagakuSettei().setDisabled(false);
+        div.getBtnTaishoGaiKensuSanshutsu().setDisabled(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(確定処理を実行する, false);
         return 処理日付管理;
     }
 

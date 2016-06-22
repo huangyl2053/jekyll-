@@ -10,10 +10,14 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0840011.SystemKanriPanelDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kensakuJoken.KensakuCursorPosition;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinShimeiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaiyusenChikuCode;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -35,6 +39,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 public class SystemKanriPanelHandler {
 
     private final SystemKanriPanelDiv div;
+    private RString メニューID;
+    private static final RString 対象としない = new RString("0");
+    private static final RString 対象とする = new RString("1");
 
     /**
      * コンストラクタです。
@@ -141,7 +148,9 @@ public class SystemKanriPanelHandler {
     /**
      * DDLの値を取得です。
      */
-    public void initlize() {
+    public void set_DDL() {
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        div.setHdnTxtDonyuKeitaiCode(new RString(shichosonSecurityJoho.get導入形態コード().toString()));
         div.getSystemKanri().getDdlChikuCode().getDataSource().clear();
         List<KeyValueDataSource> list最優先地区コード = new ArrayList<>();
         for (SaiyusenChikuCode saiyusenChikuCode : SaiyusenChikuCode.values()) {
@@ -171,11 +180,13 @@ public class SystemKanriPanelHandler {
         div.getSystemKanri().getDdlGaikokujinBirthdayHyoji().setDataSource(list外国人生年月日表示優先度);
         div.getSystemKanri().getSearchCondition().getDdlCursorPosition().getDataSource().clear();
         List<KeyValueDataSource> listカーソル位置 = new ArrayList<>();
+        RString コード = KensakuCursorPosition.住所.getコード();
+        RString 事務広域 = DonyuKeitaiCode.事務広域.getCode();
         for (KensakuCursorPosition kensakuCursorPosition : KensakuCursorPosition.values()) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
             dataSource.setKey(kensakuCursorPosition.getコード());
             dataSource.setValue(kensakuCursorPosition.get名称());
-            if (!("111".equals(div.getHdnTxtDonyuKeitaiCode().toString()) && "04".equals(kensakuCursorPosition.getコード().toString()))) {
+            if (!(事務広域.equals(div.getHdnTxtDonyuKeitaiCode()) && コード.equals(kensakuCursorPosition.getコード()))) {
                 listカーソル位置.add(dataSource);
             }
         }
@@ -183,62 +194,57 @@ public class SystemKanriPanelHandler {
     }
 
     /**
-     * 保存ボタン。<br/>
+     * 保存ボタン。
      *
-     * @param メニューID RString
+     * @param メニューID メニューID
      */
-    public void on_Click(RString メニューID) {
-        RStringBuilder 変更理由 = new RStringBuilder();
-        変更理由.append(メニューID);
-        変更理由.append(new RString("を使用して更新"));
-        uPdate(ConfigNameDBU.保険者情報_保険者番号, div.getSystemKanri().getTxtHokenjaCode().getValue(), 変更理由.toRString());
-        uPdate(ConfigNameDBU.保険者情報_保険者名称, div.getSystemKanri().getTxtHokenjaName().getValue(), 変更理由.toRString());
-        uPdate(ConfigNameDBU.保険者情報_郵便番号, new RString(div.getSystemKanri().getTxtYubinNo().getValue().toString()), 変更理由.toRString());
-        uPdate(ConfigNameDBU.保険者情報_住所, new RString(div.getSystemKanri().getTxtJusho().getDomain().toString()), 変更理由.toRString());
-        uPdate(ConfigNameDBU.保険者情報_電話番号, new RString(div.getSystemKanri().getTxtTelNo().getDomain().toString()), 変更理由.toRString());
-        uPdate(ConfigNameDBU.保険者情報_最優先地区コード, div.getSystemKanri().getDdlChikuCode().getSelectedKey(), 変更理由.toRString());
-        uPdate(ConfigNameDBU.外国人表示制御_氏名表示方法, div.getSystemKanri().getDdlGaikokujinHyoji().getSelectedKey(), 変更理由.toRString());
-        uPdate(ConfigNameDBU.外国人表示制御_生年月日表示方法, div.getSystemKanri().getDdlGaikokujinBirthdayHyoji().getSelectedKey(), 変更理由.toRString());
-        uPdate(ConfigNameDBU.老人保健情報_市町村番号, div.getSystemKanri().getTxtRojinHokenShichosonNo().getValue(), 変更理由.toRString());
-        uPdate(ConfigNameDBU.検索画面設定_カーソル位置, div.getSystemKanri().getSearchCondition().getDdlCursorPosition().getSelectedKey(), 変更理由.toRString());
-        uPdate(ConfigNameDBU.検索画面設定_検索オプション_前方一致条件有無, div.getSystemKanri().getSearchCondition().getRadForwardMatch().getSelectedKey(), 変更理由.toRString());
+    public void set_保存ボタン(RString メニューID) {
+        setDB_更新(ConfigNameDBU.保険者情報_保険者番号, div.getSystemKanri().getTxtHokenjaCode().getValue());
+        setDB_更新(ConfigNameDBU.保険者情報_保険者名称, div.getSystemKanri().getTxtHokenjaName().getValue());
+        setDB_更新(ConfigNameDBU.保険者情報_郵便番号, new RString(div.getSystemKanri().getTxtYubinNo().getValue().toString()));
+        setDB_更新(ConfigNameDBU.保険者情報_住所, new RString(div.getSystemKanri().getTxtJusho().getDomain().toString()));
+        setDB_更新(ConfigNameDBU.保険者情報_電話番号, new RString(div.getSystemKanri().getTxtTelNo().getDomain().toString()));
+        setDB_更新(ConfigNameDBU.保険者情報_最優先地区コード, div.getSystemKanri().getDdlChikuCode().getSelectedKey());
+        setDB_更新(ConfigNameDBU.外国人表示制御_氏名表示方法, div.getSystemKanri().getDdlGaikokujinHyoji().getSelectedKey());
+        setDB_更新(ConfigNameDBU.外国人表示制御_生年月日表示方法, div.getSystemKanri().getDdlGaikokujinBirthdayHyoji().getSelectedKey());
+        setDB_更新(ConfigNameDBU.老人保健情報_市町村番号, div.getSystemKanri().getTxtRojinHokenShichosonNo().getValue());
+        setDB_更新(ConfigNameDBU.検索画面設定_カーソル位置, div.getSystemKanri().getSearchCondition().getDdlCursorPosition().getSelectedKey());
+        setDB_更新(ConfigNameDBU.検索画面設定_検索オプション_前方一致条件有無, div.getSystemKanri().getSearchCondition().getRadForwardMatch().getSelectedKey());
         //TODO 介護宛先住所編集（共有子Div）が保存.
         if (div.getSystemKanri().getSearchCondition().getChkSearchOptionHihokensha().isAllSelected()) {
-            uPdate(ConfigNameDBU.検索画面設定_検索オプション_被保険者対象有無, new RString("1"), 変更理由.toRString());
+            setDB_更新(ConfigNameDBU.検索画面設定_検索オプション_被保険者対象有無, 対象とする);
         } else if (!div.getSystemKanri().getSearchCondition().getChkSearchOptionHihokensha().isAllSelected()) {
-            uPdate(ConfigNameDBU.検索画面設定_検索オプション_被保険者対象有無, new RString("0"), 変更理由.toRString());
+            setDB_更新(ConfigNameDBU.検索画面設定_検索オプション_被保険者対象有無, 対象としない);
         }
         if (div.getSystemKanri().getSearchCondition().getChkSearchOptionYokaigoNinteisha().isAllSelected()) {
-            uPdate(ConfigNameDBU.検索画面設定_検索オプション_要介護認定者対象有無, new RString("1"), 変更理由.toRString());
+            setDB_更新(ConfigNameDBU.検索画面設定_検索オプション_要介護認定者対象有無, 対象とする);
         } else if (!div.getSystemKanri().getSearchCondition().getChkSearchOptionYokaigoNinteisha().isAllSelected()) {
-            uPdate(ConfigNameDBU.検索画面設定_検索オプション_要介護認定者対象有無, new RString("0"), 変更理由.toRString());
+            setDB_更新(ConfigNameDBU.検索画面設定_検索オプション_要介護認定者対象有無, 対象としない);
         }
         if (div.getSystemKanri().getSearchCondition().getChkSearchOptionJushochiTokureisha().isAllSelected()) {
-            uPdate(ConfigNameDBU.検索画面設定_検索オプション_住所地特例者対象有無, new RString("1"), 変更理由.toRString());
+            setDB_更新(ConfigNameDBU.検索画面設定_検索オプション_住所地特例者対象有無, 対象とする);
         } else if (!div.getSystemKanri().getSearchCondition().getChkSearchOptionJushochiTokureisha().isAllSelected()) {
-            uPdate(ConfigNameDBU.検索画面設定_検索オプション_住所地特例者対象有無, new RString("0"), 変更理由.toRString());
+            setDB_更新(ConfigNameDBU.検索画面設定_検索オプション_住所地特例者対象有無, 対象としない);
         }
         if (div.getSystemKanri().getSearchCondition().getChkSearchOptionTajushochiTokureisha().isAllSelected()) {
-            uPdate(ConfigNameDBU.検索画面設定_検索オプション_他市町村住所地特例者対象有無, new RString("1"), 変更理由.toRString());
+            setDB_更新(ConfigNameDBU.検索画面設定_検索オプション_他市町村住所地特例者対象有無, 対象とする);
         } else if (!div.getSystemKanri().getSearchCondition().getChkSearchOptionTajushochiTokureisha().isAllSelected()) {
-            uPdate(ConfigNameDBU.検索画面設定_検索オプション_他市町村住所地特例者対象有無, new RString("0"), 変更理由.toRString());
+            setDB_更新(ConfigNameDBU.検索画面設定_検索オプション_他市町村住所地特例者対象有無, 対象としない);
         }
         if (div.getSystemKanri().getSearchCondition().getChkSearchOptionTekiyoJogaisha().isAllSelected()) {
-            uPdate(ConfigNameDBU.検索画面設定_検索オプション_適用除外者対象有無, new RString("1"), 変更理由.toRString());
+            setDB_更新(ConfigNameDBU.検索画面設定_検索オプション_適用除外者対象有無, 対象とする);
         } else if (!div.getSystemKanri().getSearchCondition().getChkSearchOptionTekiyoJogaisha().isAllSelected()) {
-            uPdate(ConfigNameDBU.検索画面設定_検索オプション_適用除外者対象有無, new RString("0"), 変更理由.toRString());
+            setDB_更新(ConfigNameDBU.検索画面設定_検索オプション_適用除外者対象有無, 対象としない);
         }
         RealInitialLocker.release(new LockingKey(メニューID));
     }
 
-    /**
-     * DBを更新です。
-     *
-     * @param key Enum
-     * @param values RString
-     * @param 変更理由 RString
-     */
-    public void uPdate(Enum key, RString values, RString 変更理由) {
-        BusinessConfig.update(key, values, 変更理由, RString.EMPTY, RDate.getNowDate());
+    private void setDB_更新(Enum key, RString values) {
+        RStringBuilder 変更理由 = new RStringBuilder();
+        メニューID = UrControlDataFactory.createInstance().getMenuID();
+        変更理由.append(メニューID);
+        変更理由.append(new RString("を使用して更新"));
+        BusinessConfig.update(key, values, 変更理由.toRString(), RString.EMPTY, RDate.getNowDate());
     }
+
 }

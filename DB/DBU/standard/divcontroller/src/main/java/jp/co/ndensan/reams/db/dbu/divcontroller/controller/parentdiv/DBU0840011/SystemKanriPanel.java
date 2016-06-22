@@ -5,11 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0840011;
 
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0840011.DBU0840011StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0840011.SystemKanriPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0840011.SystemKanriPanelHandler;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -24,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class SystemKanriPanel {
 
-    private IUrControlData controlData;
     private RString メニューID;
 
     /**
@@ -35,26 +32,17 @@ public class SystemKanriPanel {
      * @throws PessimisticLockingException
      */
     public ResponseData<SystemKanriPanelDiv> onLoad(SystemKanriPanelDiv div) {
-        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        div.setHdnTxtDonyuKeitaiCode(new RString(shichosonSecurityJoho.get導入形態コード().toString()));
-        controlData = UrControlDataFactory.createInstance();
-        メニューID = controlData.getMenuID();
+        メニューID = UrControlDataFactory.createInstance().getMenuID();
         if (!RealInitialLocker.tryGetLock(new LockingKey(メニューID))) {
             throw new PessimisticLockingException();
         }
-        getHandler(div).initlize();
+        getHandler(div).set_DDL();
         getHandler(div).onload();
         //TODO 介護宛先住所編集（共有子Div）が未実装
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBU0840011StateName.初期状態);
     }
 
-    /**
-     * コンストラクタです。
-     *
-     * @param div SystemKanriPanelDiv
-     * @return SystemKanriPanelHandler
-     */
-    public SystemKanriPanelHandler getHandler(SystemKanriPanelDiv div) {
+    private SystemKanriPanelHandler getHandler(SystemKanriPanelDiv div) {
         return new SystemKanriPanelHandler(div);
     }
 
@@ -65,9 +53,8 @@ public class SystemKanriPanel {
      * @return ResponseData<SystemKanriPanelDiv>
      */
     public ResponseData<SystemKanriPanelDiv> onClick_btnUpdate(SystemKanriPanelDiv div) {
-        controlData = UrControlDataFactory.createInstance();
-        メニューID = controlData.getMenuID();
-        getHandler(div).on_Click(メニューID);
+        メニューID = UrControlDataFactory.createInstance().getMenuID();
+        getHandler(div).set_保存ボタン(メニューID);
         return ResponseData.of(div).respond();
     }
 
@@ -79,6 +66,7 @@ public class SystemKanriPanel {
      * @return ResponseData<SystemKanriPanelDiv>
      */
     public ResponseData<SystemKanriPanelDiv> onClick_btnComplete(SystemKanriPanelDiv div) {
+        メニューID = UrControlDataFactory.createInstance().getMenuID();
         RealInitialLocker.release(new LockingKey(メニューID));
         return ResponseData.of(div).respond();
     }

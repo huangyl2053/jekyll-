@@ -229,8 +229,8 @@ public class TokuchoTaishoshaDoteiIkatsu {
     private boolean do資格喪失の判定(DbV1001HihokenshaDaichoEntity 被保険者, FlexibleDate now) {
         return !(ShikakuKubun._１号.getコード().equals(被保険者.getHihokennshaKubunCode())
                 && 被保険者.getIchigoShikakuShutokuYMD().compareTo(now) <= 0
-                && (null == 被保険者.getShikakuSoshitsuYMD() || now.compareTo(被保険者.getShikakuSoshitsuYMD()) <= 0)
-                && !被保険者.getLogicalDeletedFlag());
+                && (null == 被保険者.getShikakuSoshitsuYMD() || FlexibleDate.EMPTY.equals(被保険者.getShikakuSoshitsuYMD())
+                || now.compareTo(被保険者.getShikakuSoshitsuYMD()) <= 0) && !被保険者.getLogicalDeletedFlag());
     }
 
     private DoteiFuitchiRiyu do他市町村住所地特例者台帳時不一致理由(DbV1003TashichosonJushochiTokureiEntity tokurei,

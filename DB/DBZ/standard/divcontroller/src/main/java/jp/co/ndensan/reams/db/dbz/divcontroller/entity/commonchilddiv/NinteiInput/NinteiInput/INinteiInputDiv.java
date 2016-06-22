@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /*
  * このコードはツールによって生成されました。
  *
- * @reamsid_L DBE-1300-080 yaodongsheng
+ * @reamsid_L DBZ-1300-080 yaodongsheng
  */
 public interface INinteiInputDiv extends ICommonChildDivBaseProperties {
 

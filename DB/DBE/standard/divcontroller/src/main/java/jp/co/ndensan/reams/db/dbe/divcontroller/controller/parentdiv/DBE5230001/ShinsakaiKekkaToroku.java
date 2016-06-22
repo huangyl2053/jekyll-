@@ -14,8 +14,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKe
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanBusiness;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.ShinsakaiKekkaTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5230001.ShinsakaiKekkaTorokuHandler;
-import jp.co.ndensan.reams.db.dbe.service.core.basic.ShinsakaiWariateJohoManager;
-import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuManager;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -25,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
@@ -39,8 +36,8 @@ public class ShinsakaiKekkaToroku {
     private static final RString HASDATA = new RString("1");
 
     private final ShinsakaiKekkaTorokuManager manager;
-    private final NinteiShinseiJohoManager 要介護認定結果情報Manager;
-    private final ShinsakaiWariateJohoManager 介護認定審査会開催予定情報manager;
+    //private final NinteiShinseiJohoManager 要介護認定結果情報Manager;
+    //private final ShinsakaiWariateJohoManager 介護認定審査会開催予定情報manager;
 
     /**
      * コンストラクタです。
@@ -48,8 +45,8 @@ public class ShinsakaiKekkaToroku {
     public ShinsakaiKekkaToroku() {
         ViewStateHolder.put(ViewStateKeys.介護認定審査会開催結果登録_開催番号, new RString("209007"));
         this.manager = ShinsakaiKekkaTorokuManager.createInstance();
-        this.要介護認定結果情報Manager = NinteiShinseiJohoManager.createInstance();
-        this.介護認定審査会開催予定情報manager = new ShinsakaiWariateJohoManager();
+        //this.要介護認定結果情報Manager = NinteiShinseiJohoManager.createInstance();
+        //this.介護認定審査会開催予定情報manager = new ShinsakaiWariateJohoManager();
     }
 
     /**
@@ -262,7 +259,7 @@ public class ShinsakaiKekkaToroku {
      * @return ResponseData<NenreiTotatsuTorokushaListDiv>
      */
     public ResponseData<ShinsakaiKekkaTorokuDiv> onClick_Check(ShinsakaiKekkaTorokuDiv div) {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+//        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
 
         return ResponseData.of(div).respond();
     }

@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -232,6 +233,10 @@ public class KinkyujiShisetuRyoyohiPanel {
                     return createResponse(div);
                 }
             } else {
+                ValidationMessageControlPairs validPairs = getHandler(div).入力チェック();
+                if (validPairs.iterator().hasNext()) {
+                    return ResponseData.of(div).addValidationMessages(validPairs).respond();
+                }
                 boolean flag = getHandler(div).get内容変更状態();
                 if (flag) {
                     return save(div, keys, 処理モード);

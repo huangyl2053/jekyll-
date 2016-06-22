@@ -18,14 +18,13 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSon
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.ShinseiSonotaJohoInputDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 結果詳細情報画面のコントローラです。
  *
- * @reamsid_L DBE-1320-020 zuotao
+ * @reamsid_L DBZ-1320-020 zuotao
  */
 public class KekkaShosaiJoho {
 
@@ -96,18 +95,12 @@ public class KekkaShosaiJoho {
     public ResponseData<KekkaShosaiJohoDiv> onClick_btnToroku(KekkaShosaiJohoDiv div) {
         KekkaShosaiJohoModel model = DataPassingConverter.deserialize(div.getHdnKekkaShosaiJohoModel(), KekkaShosaiJohoModel.class);
         RString mode = model.getMode();
-        if (ResponseHolder.isWarningIgnoredRequest()) {
-            return ResponseData.of(div).dialogOKClose();
-        }
         if (モード_喪失.equals(mode) || モード_入力.equals(mode)) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             pairs.add(createValidationHandler(div).check有効開始日());
-            pairs.add(createValidationHandler(div).checkサービス区分());
-            pairs.add(div.getCcdNinteiInput().開始終了日前後順check());
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
-            }
             pairs.add(createValidationHandler(div).check有効終了日());
+            pairs.add(div.getCcdNinteiInput().開始終了日前後順check());
+            pairs.add(createValidationHandler(div).checkサービス区分());
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }

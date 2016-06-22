@@ -24,12 +24,32 @@ var DBD;
                 return "onClick_btnKyotakuService";
             };
 
+            Events.onClickClose_keikakuIraiUketsuke = function () {
+                return "onClickClose_keikakuIraiUketsuke";
+            };
+
+            Events.onClickClose_jikosakuseiKeikaku = function () {
+                return "onClickClose_jikosakuseiKeikaku";
+            };
+
             Events.onClick_btnShuruiGendoGakuKakunin = function () {
                 return "onClick_btnShuruiGendoGakuKakunin";
             };
 
             Events.onSelect_dgKyotakuService = function () {
                 return "onSelect_dgKyotakuService";
+            };
+
+            Events.onClickClose_kyotakuServiceJoho = function () {
+                return "onClickClose_kyotakuServiceJoho";
+            };
+
+            Events.onClickClose_kyotakuServiceMeisai = function () {
+                return "onClickClose_kyotakuServiceMeisai";
+            };
+
+            Events.onClickClose_shuruiGendoGakuKakunin = function () {
+                return "onClickClose_shuruiGendoGakuKakunin";
             };
             return Events;
         })();

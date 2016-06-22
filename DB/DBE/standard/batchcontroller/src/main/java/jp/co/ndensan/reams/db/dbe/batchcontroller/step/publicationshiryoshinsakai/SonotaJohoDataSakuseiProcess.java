@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.publicationshiryoshinsakai.So
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinsonotashiryosakusei.SonotashiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinsonotashiryosakusei.SonotashiryoA4ReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
@@ -184,13 +184,14 @@ public class SonotaJohoDataSakuseiProcess extends BatchKeyBreakBase<SonotaJohoEn
             総ページ数 = new RString(batchWriteA3.getPageCount());
         }
         Association association = AssociationFinderFactory.createInstance().getAssociation();
-        EucFileOutputJokenhyoItem jokenhyoItem = new EucFileOutputJokenhyoItem(
+        ReportOutputJokenhyoItem jokenhyoItem = new ReportOutputJokenhyoItem(
                 id,
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 idName,
                 総ページ数,
+                RString.EMPTY,
                 RString.EMPTY,
                 出力条件());
         OutputJokenhyoFactory.createInstance(jokenhyoItem).print();

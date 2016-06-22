@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
@@ -35,6 +36,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  * @reamsid_L DBB-1640-020 lijunjun
  */
 public class DbT2009RentaiGimushaDac implements ISaveable<DbT2009RentaiGimushaEntity> {
+
+    private static final RString MSG_被保険者番号 = new RString("被保険者番号");
 
     @InjectSession
     private SqlSession session;
@@ -74,7 +77,7 @@ public class DbT2009RentaiGimushaDac implements ISaveable<DbT2009RentaiGimushaEn
     @Transaction
     public DbT2009RentaiGimushaEntity selectBy最新連帯納付義務者(
             HihokenshaNo 被保険者番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_被保険者番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -96,7 +99,7 @@ public class DbT2009RentaiGimushaDac implements ISaveable<DbT2009RentaiGimushaEn
     @Transaction
     public List<DbT2009RentaiGimushaEntity> selectBy連帯納付義務者宛名情報リスト(
             HihokenshaNo 被保険者番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_被保険者番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -122,7 +125,7 @@ public class DbT2009RentaiGimushaDac implements ISaveable<DbT2009RentaiGimushaEn
     public DbT2009RentaiGimushaEntity selectBy連帯納付義務者宛名情報_削除(
             HihokenshaNo 被保険者番号, Decimal 履歴番号, ShikibetsuCode 識別コード,
             FlexibleDate 開始年月日, FlexibleDate 終了年月日) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_被保険者番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -147,7 +150,7 @@ public class DbT2009RentaiGimushaDac implements ISaveable<DbT2009RentaiGimushaEn
     @Transaction
     public DbT2009RentaiGimushaEntity selectBy連帯納付義務者_履歴番号(
             HihokenshaNo 被保険者番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_被保険者番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 

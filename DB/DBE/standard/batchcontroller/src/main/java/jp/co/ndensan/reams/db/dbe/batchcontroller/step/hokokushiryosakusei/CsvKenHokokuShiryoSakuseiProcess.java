@@ -53,6 +53,7 @@ public class CsvKenHokokuShiryoSakuseiProcess extends BatchProcessBase<SinsakaiH
     private CsvKenHokokuShiryoSakuseiProcessParameter paramter;
     private IHokokuShiryoSakuSeiMapper mapper;
     private FileSpoolManager manager;
+    private RString eucFilename;
     @BatchWriter
     private EucCsvWriter<KenHokokuShiryoSakuseiCSVEntity> eucCsvWriterKenHokokuShiryo;
 
@@ -61,7 +62,7 @@ public class CsvKenHokokuShiryoSakuseiProcess extends BatchProcessBase<SinsakaiH
         mapper = getMapper(IHokokuShiryoSakuSeiMapper.class);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
-        RString eucFilename = Path.combinePath(spoolWorkPath, ファイル名);
+        eucFilename = Path.combinePath(spoolWorkPath, ファイル名);
         eucCsvWriterKenHokokuShiryo = new EucCsvWriter.InstanceBuilder(eucFilename, EUC_ENTITY_ID).
                 setEncode(Encode.UTF_8withBOM)
                 .setDelimiter(EUC_WRITER_DELIMITER)
@@ -91,6 +92,7 @@ public class CsvKenHokokuShiryoSakuseiProcess extends BatchProcessBase<SinsakaiH
     @Override
     protected void afterExecute() {
         eucCsvWriterKenHokokuShiryo.close();
+        manager.spool(eucFilename);
     }
 
     private List<CsvKenHokokuShiryoEntity> get県報告用資料情報(SinsakaiHanteiJyokyoHeaderEntity current) {

@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 /**
  * DBZ.NinteiInput_認定情報のHandlerクラスです。
  *
- * @reamsid_L DBE-1300-080 yaodongsheng
+ * @reamsid_L DBZ-1300-080 yaodongsheng
  */
 public class NinteiInputHandler {
 

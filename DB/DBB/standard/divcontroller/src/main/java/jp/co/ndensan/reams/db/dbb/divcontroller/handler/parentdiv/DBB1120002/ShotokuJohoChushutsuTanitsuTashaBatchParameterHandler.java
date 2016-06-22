@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * @reamsid_L DBB-1690-030 sunhui
  */
+@SuppressWarnings("checkstyle:illegaltoken")
 public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
 
     private final ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div;
@@ -48,6 +49,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
     private static final RString 当初所得引出 = new RString("当初所得引出");
     private static final RString 所得引出 = new RString("所得引出");
     private static final RString 所得情報ファイル = new RString("BBKAIGOxxxxxxxx.CSV");
+    private static final RString FORMAT_平 = new RString("平%s");
 
     /**
      * コンストラクタです。
@@ -101,7 +103,6 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
      * @param currentTime RDate
      * @param files FileData[]
      */
-    @SuppressWarnings("checkstyle:illegaltoken")
     public void initTorikoShori(FileData[] files, RDate currentTime) {
         if (files[0].getFileName().contains(所得情報ファイル)) {
             div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().setValue(処理待ち);
@@ -118,10 +119,14 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
                 遷移区分 = 遷移区分_0;
                 年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, currentTime,
                         SubGyomuCode.DBB介護賦課));
+                RDate 処理年度 = new RDate(String.format(FORMAT_平.toString(), 年度.toString()));
+                div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtShoriNendoTanitsuTasha().setValue(処理年度);
             } else if (所得情報抽出_連携異動.equals(メニューID)) {
                 遷移区分 = 遷移区分_1;
                 年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, currentTime,
                         SubGyomuCode.DBB介護賦課));
+                RDate 処理年度 = new RDate(String.format(FORMAT_平.toString(), 年度.toString()));
+                div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtShoriNendoTanitsuTasha().setValue(処理年度);
             }
             RString 処理区分 = ShotokuJohoChushutsuRenkeitanitu.createInstance().getShoriKubun(市町村識別ID, 遷移区分, 年度);
             処理区分Handler(メニューID, 処理区分);
@@ -134,7 +139,6 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
      * @param files FileData[]
      * @return ValidationMessageControlPairs
      */
-    @SuppressWarnings("checkstyle:illegaltoken")
     public ValidationMessageControlPairs getCheckFile(FileData[] files) {
         ShotokuJohoChushutsuTanitsuTashaBatchParameterValidationHandler validation
                 = new ShotokuJohoChushutsuTanitsuTashaBatchParameterValidationHandler(div);
@@ -149,7 +153,6 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
      * @param files FileData[]
      * @return ValidationMessageControlPairs
      */
-    @SuppressWarnings("checkstyle:illegaltoken")
     public ValidationMessageControlPairs checkFilesStates(FileData[] files) {
         ShotokuJohoChushutsuTanitsuTashaBatchParameterValidationHandler validation
                 = new ShotokuJohoChushutsuTanitsuTashaBatchParameterValidationHandler(div);
@@ -163,6 +166,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
      * @return ShotokuJohoTyushutuRenkeiTanituParameter 所得情報抽出・連携_バッチパラメータクラスです
      */
     public ShotokuJohoTyushutuRenkeiTanituParameter getBatchParamter() {
+        // TODO バッチが実装でいます
         ShotokuJohoTyushutuRenkeiTanituParameter batchparam = new ShotokuJohoTyushutuRenkeiTanituParameter();
         batchparam.set共有ファイルID(null);
         batchparam.set共有ファイル名(null);
