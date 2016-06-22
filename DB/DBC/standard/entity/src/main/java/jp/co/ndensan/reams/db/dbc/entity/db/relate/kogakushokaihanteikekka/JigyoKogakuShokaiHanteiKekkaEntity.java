@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaihanteikekka;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3110JigyoKogakuShikyuShinseiEntity;
@@ -68,7 +69,7 @@ public class JigyoKogakuShokaiHanteiKekkaEntity {
      *
      * @param 事業高額介護サービス費給付対象者明細List 事業高額介護サービス費給付対象者明細List
      */
-    private DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity 事業高額介護サービス費給付対象者明細Entity;
+    private List<DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity> 事業高額介護サービス費給付対象者明細List;
 
     /**
      * -- GETTER -- 介護事業者Listを返します。
@@ -77,5 +78,5 @@ public class JigyoKogakuShokaiHanteiKekkaEntity {
      *
      * @param 介護事業者List 介護事業者List
      */
-    private DbT7060KaigoJigyoshaEntity 介護事業者Entity;
+    private List<DbT7060KaigoJigyoshaEntity> 介護事業者List;
 }
