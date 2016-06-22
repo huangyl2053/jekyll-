@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjoho;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
@@ -62,7 +63,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
      * 「条件をクリアする」ボタン押下、検索条件をクリアします。
      */
     public void 検索条件クリア() {
-        div.getHokensha().loadHokenshaList();
+        div.getHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTxtChosaItakusakiCodeFrom().clearValue();
         div.getTxtChosaItakuaskiCodeTo().clearValue();
         div.getTxtChosaItakusakiName().clearValue();

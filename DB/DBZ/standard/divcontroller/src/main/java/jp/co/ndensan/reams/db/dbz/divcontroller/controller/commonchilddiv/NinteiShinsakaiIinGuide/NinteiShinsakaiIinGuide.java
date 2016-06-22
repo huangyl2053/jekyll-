@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideResult;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideMapperParameter;
@@ -54,7 +55,7 @@ public class NinteiShinsakaiIinGuide {
         div.getKensakuJoken().getDdlShinsainShikakuCode().setSelectedKey(RString.EMPTY);
         getHandler(div).set性別();
         getHandler(div).set審査会委員資格();
-        div.getKensakuJoken().getCcdHokensha().loadHokenshaList();
+        div.getKensakuJoken().getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数());
         div.getBtnSaikensaku().setVisible(false);
         div.getDdlIryoKikan().getDataSource().clear();
@@ -74,7 +75,7 @@ public class NinteiShinsakaiIinGuide {
         div.getKensakuJoken().getTxtShinsakaiIinCodeTo().setValue(RString.EMPTY);
         div.getKensakuJoken().getTxtShinsakaiIinName().setValue(RString.EMPTY);
         div.getKensakuJoken().getDdlSeibetsu().setSelectedKey(RString.EMPTY);
-        div.getKensakuJoken().getCcdHokensha().loadHokenshaList();
+        div.getKensakuJoken().getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数());
         div.getKensakuJoken().getDdlShinsainShikakuCode().setSelectedKey(RString.EMPTY);
         div.getKensakuJoken().getShosaiJoken().getDdlIryoKikan().setSelectedKey(RString.EMPTY);
@@ -170,7 +171,7 @@ public class NinteiShinsakaiIinGuide {
         div.getKensakuJoken().getTxtShinsakaiIinCodeTo().setValue(RString.EMPTY);
         div.getKensakuJoken().getTxtShinsakaiIinName().setValue(RString.EMPTY);
         div.getKensakuJoken().getDdlSeibetsu().setSelectedKey(RString.EMPTY);
-        div.getKensakuJoken().getCcdHokensha().loadHokenshaList();
+        div.getKensakuJoken().getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数());
         div.getKensakuJoken().getDdlShinsainShikakuCode().setSelectedKey(RString.EMPTY);
         div.getKensakuJoken().getShosaiJoken().getDdlIryoKikan().setSelectedKey(RString.EMPTY);

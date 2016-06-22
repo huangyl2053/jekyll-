@@ -47,7 +47,7 @@ public class SoNoTaKikanGuideHandler {
      */
     public void load() {
         // TODO  内部QA：なし Redmine：#76905(保険者DDL共有子Divの取得方式が知らない、一時注釈を使用します)
-        // div.getCcdHokenshaList().loadHokenshaList();
+        // div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTxtSonotaKikanCodefrom().clearValue();
         div.getTxtSonotaKikanCodeto().clearValue();
         div.getTxtSonotaKikanName().clearValue();

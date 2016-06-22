@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.Yoka
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.dgShinseiJoho_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
@@ -56,7 +57,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
      * 画面初期化処理です。
      */
     public void onload() {
-        div.getCcdHokenshaList().loadHokenshaList();
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getRadKensakuHoho().setSelectedKey(DATE_SOURCE_KEY0);
         div.getRadMatchType().setSelectedKey(DATE_SOURCE_KEY0);
         div.getRadHizukeHani().setSelectedKey(DATE_SOURCE_KEY0);
