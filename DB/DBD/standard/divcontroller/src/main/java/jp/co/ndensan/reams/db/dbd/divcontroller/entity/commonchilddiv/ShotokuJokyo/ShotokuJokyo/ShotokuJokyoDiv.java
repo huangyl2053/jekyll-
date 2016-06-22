@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
@@ -33,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -46,7 +46,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * ShotokuJokyo のクラスファイル
  *
- * @reamsid_L DBD-3650-110 liangbc
+ * @reamsid_L DBD-3560-110 liangbc
  */
 public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
@@ -70,6 +70,12 @@ public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
     private RString txtShikibetsuCode;
     @JsonProperty("txtShotokuKijunYMDHMS")
     private RString txtShotokuKijunYMDHMS;
+    @JsonProperty("txtGyomuCode")
+    private RString txtGyomuCode;
+    @JsonProperty("txtMemoShikibetsuKbn")
+    private RString txtMemoShikibetsuKbn;
+    @JsonProperty("txtMemoShikibetsuTaishoCode")
+    private RString txtMemoShikibetsuTaishoCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -203,20 +209,78 @@ public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
         this.txtShotokuKijunYMDHMS = txtShotokuKijunYMDHMS;
     }
 
+    /*
+     * gettxtGyomuCode
+     * @return txtGyomuCode
+     */
+    @JsonProperty("txtGyomuCode")
+    public RString getTxtGyomuCode() {
+        return txtGyomuCode;
+    }
+
+    /*
+     * settxtGyomuCode
+     * @param txtGyomuCode txtGyomuCode
+     */
+    @JsonProperty("txtGyomuCode")
+    public void setTxtGyomuCode(RString txtGyomuCode) {
+        this.txtGyomuCode = txtGyomuCode;
+    }
+
+    /*
+     * gettxtMemoShikibetsuKbn
+     * @return txtMemoShikibetsuKbn
+     */
+    @JsonProperty("txtMemoShikibetsuKbn")
+    public RString getTxtMemoShikibetsuKbn() {
+        return txtMemoShikibetsuKbn;
+    }
+
+    /*
+     * settxtMemoShikibetsuKbn
+     * @param txtMemoShikibetsuKbn txtMemoShikibetsuKbn
+     */
+    @JsonProperty("txtMemoShikibetsuKbn")
+    public void setTxtMemoShikibetsuKbn(RString txtMemoShikibetsuKbn) {
+        this.txtMemoShikibetsuKbn = txtMemoShikibetsuKbn;
+    }
+
+    /*
+     * gettxtMemoShikibetsuTaishoCode
+     * @return txtMemoShikibetsuTaishoCode
+     */
+    @JsonProperty("txtMemoShikibetsuTaishoCode")
+    public RString getTxtMemoShikibetsuTaishoCode() {
+        return txtMemoShikibetsuTaishoCode;
+    }
+
+    /*
+     * settxtMemoShikibetsuTaishoCode
+     * @param txtMemoShikibetsuTaishoCode txtMemoShikibetsuTaishoCode
+     */
+    @JsonProperty("txtMemoShikibetsuTaishoCode")
+    public void setTxtMemoShikibetsuTaishoCode(RString txtMemoShikibetsuTaishoCode) {
+        this.txtMemoShikibetsuTaishoCode = txtMemoShikibetsuTaishoCode;
+    }
+
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     private final static RString BR = new RString("<br>");
     private final static RString マル = new RString("○");
+    private final static RString 表示しない = new RString("0");
+    private final static RString 住民税_減免前 = new RString("juminzeiGemmenMae");
+    private final static RString 住民税_減免後 = new RString("juminzeiGemmenGo");
+    private final static RString 住民税 = new RString("juminzei");
 
     @Override
-    public void initialize(ShikibetsuCode 識別コード) {
+    public void initialize(ShikibetsuCode 識別コード, YMDHMS 所得基準年月日) {
         if (識別コード == null || 識別コード.isEmpty()) {
             throw new SystemException("識別コードが設定されていません。");
         }
         setTxtShikibetsuCode(識別コード.getColumnValue());
         getTxtSetaiKijunYMD().setValue(RDate.getNowDate());
         get所得年度List();
-        世帯員所得情報の取得(識別コード, false);
+        世帯員所得情報の取得(識別コード, 所得基準年月日);
 
     }
 
@@ -224,33 +288,20 @@ public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
      * 世帯員所得情報の取得
      *
      * @param 識別コード 識別コード
-     * @param isDescByHihokenshaNo
+     * @param 所得基準年月日 所得基準年月日
      */
-    public void 世帯員所得情報の取得(ShikibetsuCode 識別コード, boolean isDescByHihokenshaNo) {
+    public void 世帯員所得情報の取得(ShikibetsuCode 識別コード, YMDHMS 所得基準年月日) {
         SetaiinShotokuJohoFinder finder = SetaiinShotokuJohoFinder.createInstance();
         List<SetaiinShotoku> 世帯員所得情報 = finder.get世帯員所得情報(識別コード,
                 new FlexibleYear(getDdShotokuNendo().getSelectedKey()),
-                new YMDHMS(getTxtSetaiKijunYMD().getValue(), new RTime(new RString("000000000"))));
-        if (isDescByHihokenshaNo) {
-            Collections.sort(世帯員所得情報, new Comparator<SetaiinShotoku>() {
-                @Override
-                public int compare(SetaiinShotoku o1, SetaiinShotoku o2) {
-                    if (o1.get被保険者番号().compareTo(o2.get被保険者番号()) < 0) {
-                        return 1;
-                    } else if (o1.get被保険者番号().compareTo(o2.get被保険者番号()) == 0) {
-                        return orderBy本人区分And住民票表示順(o1, o2);
-                    }
-                    return -1;
-                }
-            });
-        } else {
-            Collections.sort(世帯員所得情報, new Comparator<SetaiinShotoku>() {
-                @Override
-                public int compare(SetaiinShotoku o1, SetaiinShotoku o2) {
-                    return orderBy本人区分And住民票表示順(o1, o2);
-                }
-            });
-        }
+                所得基準年月日);
+
+        Collections.sort(世帯員所得情報, new Comparator<SetaiinShotoku>() {
+            @Override
+            public int compare(SetaiinShotoku o1, SetaiinShotoku o2) {
+                return orderBy本人区分And住民票表示順(o1, o2);
+            }
+        });
 
         List<dgSetaiShotoku_Row> rows = new ArrayList<>();
         for (SetaiinShotoku setaiinShotoku : 世帯員所得情報) {
@@ -266,11 +317,19 @@ public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
             row.setSeinengappiSeibetsuZokugara(new RString(ObjectUtil.defaultIfNull(setaiinShotoku.get生年月日(), FlexibleDate.EMPTY).toString()).
                     concat(RString.FULL_SPACE).concat(ObjectUtil.defaultIfNull(setaiinShotoku.get性別(), RString.EMPTY)).concat(BR).
                     concat(ObjectUtil.defaultIfNull(setaiinShotoku.get続柄(), RString.EMPTY)));
-            row.setShubetsu(RString.EMPTY); //TODO 世帯員所得情報.住民状態
+            row.setShubetsu(setaiinShotoku.get種別());
             row.setIdoDate(new RString(ObjectUtil.defaultIfNull(setaiinShotoku.get住民情報_異動日(), FlexibleDate.EMPTY).toString()));
             row.setRiyoshaFutandankai(利用者負担段階の判定(setaiinShotoku, is老齢福祉年金受給者, is生活保護受給者).get名称());
             row.setSeihoRorei(生保_老齢);
-            row.setJuminzei(RString.EMPTY);//TODO 介護所得.非課税区分（減免前）
+            if (setaiinShotoku.get課税区分_住民税減免前() != null && !setaiinShotoku.get課税区分_住民税減免前().isEmpty()) {
+                row.setJuminzeiGemmenMae(KazeiKubun.toValue(setaiinShotoku.get課税区分_住民税減免前()).get名称());
+            }
+            if (setaiinShotoku.get課税区分_住民税減免後() != null && !setaiinShotoku.get課税区分_住民税減免後().isEmpty()) {
+                row.setJuminzeiGemmenGo(KazeiKubun.toValue(setaiinShotoku.get課税区分_住民税減免後()).get名称());
+            }
+            if (setaiinShotoku.get課税区分_住民税減免前() != null && !setaiinShotoku.get課税区分_住民税減免前().isEmpty()) {
+                row.setJuminzei(KazeiKubun.toValue(setaiinShotoku.get課税区分_住民税減免前()).get名称());
+            }
             row.setGokeiShotokuKingaku(
                     new RString(KingakuFormatter.create(ObjectUtil.defaultIfNull(setaiinShotoku.get合計所得金額(), Decimal.ZERO)).
                             format(KingakuUnit.円).setCommaSeparated().toString()));
@@ -284,6 +343,23 @@ public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
             rows.add(row);
         }
         getDgSetaiShotoku().setDataSource(rows);
+        if (表示しない.equals(DbBusinessConfig.get(ConfigNameDBB.所得引出_住民税減免前後表示区分, RDate.getNowDate(), SubGyomuCode.DBB介護賦課))) {
+            getDgSetaiShotoku().getGridSetting().getColumn(住民税_減免前).setVisible(false);
+            getDgSetaiShotoku().getGridSetting().getColumn(住民税_減免後).setVisible(false);
+            getDgSetaiShotoku().getGridSetting().getColumn(住民税).setVisible(true);
+        } else {
+            getDgSetaiShotoku().getGridSetting().getColumn(住民税_減免前).setVisible(true);
+            getDgSetaiShotoku().getGridSetting().getColumn(住民税_減免後).setVisible(true);
+            getDgSetaiShotoku().getGridSetting().getColumn(住民税).setVisible(false);
+        }
+    }
+
+    public YMDHMS get所得基準年月日() {
+        if (getTxtShotokuKijunYMDHMS() != null && !getTxtShotokuKijunYMDHMS().isEmpty()) {
+            return new YMDHMS(getTxtShotokuKijunYMDHMS());
+        } else {
+            return new YMDHMS(RDate.getNowDateTime());
+        }
     }
 
     private void get所得年度List() {
