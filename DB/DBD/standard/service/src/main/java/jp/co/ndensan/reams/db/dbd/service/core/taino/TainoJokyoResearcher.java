@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.taino.ITainoJokyo
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.taino.JikoKubun;
+import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.DateDuration;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -42,6 +43,14 @@ public class TainoJokyoResearcher {
     private static final int 十年前 = 10;
     private static final int 小数点以下3桁 = 3;
     private static final int 一年の月数 = 12;
+    private MapperProvider mapperProvider;
+
+    /**
+     * コンストラクタです。
+     */
+    public TainoJokyoResearcher() {
+        mapperProvider = InstanceProvider.create(MapperProvider.class);
+    }
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link TainoJokyoResearcher}のインスタンスを返します。
@@ -139,7 +148,7 @@ public class TainoJokyoResearcher {
         FlexibleYear 賦課年度 = 基準日.getYear();
         TainoJokyoMapperParameter parameter
                 = TainoJokyoMapperParameter.createParameter(new RDate(基準日.toString()), 被保険者番号, 賦課年度);
-        return InstanceProvider.create(ITainoJokyoMapper.class).selectTainoJoho(parameter);
+        return mapperProvider.create(ITainoJokyoMapper.class).selectTainoJoho(parameter);
 
     }
 
