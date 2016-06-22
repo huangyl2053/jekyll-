@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0840011.SystemKanriPanelDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kensakuJoken.KensakuCursorPosition;
@@ -179,11 +180,13 @@ public class SystemKanriPanelHandler {
         div.getSystemKanri().getDdlGaikokujinBirthdayHyoji().setDataSource(list外国人生年月日表示優先度);
         div.getSystemKanri().getSearchCondition().getDdlCursorPosition().getDataSource().clear();
         List<KeyValueDataSource> listカーソル位置 = new ArrayList<>();
+        RString コード = KensakuCursorPosition.住所.getコード();
+        RString 事務広域 = DonyuKeitaiCode.事務広域.getCode();
         for (KensakuCursorPosition kensakuCursorPosition : KensakuCursorPosition.values()) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
             dataSource.setKey(kensakuCursorPosition.getコード());
             dataSource.setValue(kensakuCursorPosition.get名称());
-            if (!(new RString("111").equals(div.getHdnTxtDonyuKeitaiCode()) && new RString("04").equals(kensakuCursorPosition.getコード()))) {
+            if (!(事務広域.equals(div.getHdnTxtDonyuKeitaiCode()) && コード.equals(kensakuCursorPosition.getコード()))) {
                 listカーソル位置.add(dataSource);
             }
         }
@@ -236,25 +239,12 @@ public class SystemKanriPanelHandler {
         RealInitialLocker.release(new LockingKey(メニューID));
     }
 
-    /**
-     * DBを更新です。
-     *
-     * @param key キー名称
-     * @param values キー値
-     */
     private void setDB_更新(Enum key, RString values) {
-        BusinessConfig.update(key, values, get変更理由(), RString.EMPTY, RDate.getNowDate());
-    }
-
-    /**
-     * 変更理由を取得です。
-     *
-     */
-    private RString get変更理由() {
         RStringBuilder 変更理由 = new RStringBuilder();
         メニューID = UrControlDataFactory.createInstance().getMenuID();
         変更理由.append(メニューID);
         変更理由.append(new RString("を使用して更新"));
-        return 変更理由.toRString();
+        BusinessConfig.update(key, values, 変更理由.toRString(), RString.EMPTY, RDate.getNowDate());
     }
+
 }

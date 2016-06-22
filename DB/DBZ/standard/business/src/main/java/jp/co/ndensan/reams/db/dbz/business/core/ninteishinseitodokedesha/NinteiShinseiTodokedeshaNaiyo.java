@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * NinteiShinseiTodokedesha のクラスファ。
  *
- * @reamsid_L DBE-1300-110 yaodongsheng
+ * @reamsid_L DBZ-1300-110 yaodongsheng
  */
 @lombok.Getter
 @lombok.Setter

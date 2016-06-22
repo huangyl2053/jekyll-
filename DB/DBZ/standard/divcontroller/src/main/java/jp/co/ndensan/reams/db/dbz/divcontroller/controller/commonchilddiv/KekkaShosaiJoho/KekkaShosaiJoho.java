@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  * 結果詳細情報画面のコントローラです。
  *
- * @reamsid_L DBE-1320-020 zuotao
+ * @reamsid_L DBZ-1320-020 zuotao
  */
 public class KekkaShosaiJoho {
 

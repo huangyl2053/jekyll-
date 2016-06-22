@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * DBZ.NinteiInput_認定情報のValidationHandlerです。
  *
- * @reamsid_L DBE-1300-080 yaodongsheng
+ * @reamsid_L DBZ-1300-080 yaodongsheng
  */
 public class NinteiInputValidationHandler {
 

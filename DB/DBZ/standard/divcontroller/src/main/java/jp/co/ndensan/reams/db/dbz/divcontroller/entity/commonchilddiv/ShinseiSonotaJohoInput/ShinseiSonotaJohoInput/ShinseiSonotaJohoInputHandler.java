@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 /**
  * 共有子Div「申請その他情報」の実装クラスです。
  *
- * @reamsid_L DBE-1300-120 houtianpeng
+ * @reamsid_L DBZ-1300-120 houtianpeng
  */
 public class ShinseiSonotaJohoInputHandler {
 
