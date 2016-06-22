@@ -145,8 +145,10 @@ public class IkenshoJohoPrintProcessParameter implements IBatchProcessParameter 
      * @return IkenshoJohoPrintMapperParameter
      */
     public IkenshoJohoPrintMapperParameter toSinsakaiHanteiJyokyoMyBatisParameter() {
-        RDate 年月日 = RDate.getNowDate().minusDay(Integer.parseInt(主治医意見書未提出者一覧依頼日数.toString()));
-
+        RDate 年月日 = RDate.getNowDate();
+        if (!主治医意見書未提出者一覧依頼日数.isNullOrEmpty()) {
+            年月日 = RDate.getNowDate().minusDay(Integer.parseInt(主治医意見書未提出者一覧依頼日数.toString()));
+        }
         return IkenshoJohoPrintMapperParameter.createSelectByKeyParam(
                 主治医意見書未提出者一覧作成条件,
                 主治医意見書未提出者一覧申請日From,
