@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBB-1700-010 zhangrui -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.shotokushokai.IShotokuShokaiMapper">
     <!--対象者一覧データ取得-->
-    <select id="get対象者一覧データ" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokushokai.ShotokuShokaiTaishoshaIchiranParameter" 
+    <select resultOrdered="true" id="get対象者一覧データ" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokushokai.ShotokuShokaiTaishoshaIchiranParameter" 
             resultMap="resultMap_ShotokuShokaiTaishoshaEntity" fetchSize="500">
       SELECT 
         <include refid="allColumns_DbT2008ShotokuKanri"/> ,
