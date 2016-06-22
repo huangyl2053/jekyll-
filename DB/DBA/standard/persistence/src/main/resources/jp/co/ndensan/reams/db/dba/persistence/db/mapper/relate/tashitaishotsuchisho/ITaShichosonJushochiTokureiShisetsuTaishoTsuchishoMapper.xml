@@ -10,6 +10,7 @@ and open the template in the editor.
 
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tashitaishotsuchisho.ITaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper">
     <select id="getTaShichosonJushochiTokureiShisetsuTaishoTsuchisho"
+            resultOrdered="true"
             resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TatokuKanrenChohyoShijiDataEntity" fetchSize="500">
         SELECT
@@ -41,7 +42,9 @@ and open the template in the editor.
         AND  C."yukoKaishiYMD"<![CDATA[<=]]> B."taishoYMD" AND  B."taishoYMD"<![CDATA[<=]]> C."yukoShuryoYMD"
         LIMIT 1
     </select>
-    <select id="selectTaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatis" resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity"
+    <select id="selectTaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatis"
+            resultOrdered="true"
+            resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter">
         SELECT
         A."kanaMeisho" AS カナ名称,
