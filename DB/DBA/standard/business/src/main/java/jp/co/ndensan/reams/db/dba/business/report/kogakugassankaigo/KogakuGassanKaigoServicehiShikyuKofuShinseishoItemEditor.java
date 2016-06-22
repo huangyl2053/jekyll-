@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.business.report.kogakugassankaigo;
 
 import jp.co.ndensan.reams.db.dba.entity.report.kogakugassankaigo.KogakuGassanKaigoServicehiShikyuKofuShinseishoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 高額医療合算介護（介護予防）サービス費支給兼自己負担額証明書交付申請書のEditorです。
@@ -46,7 +47,7 @@ public class KogakuGassanKaigoServicehiShikyuKofuShinseishoItemEditor
         source.kaigoHokenshaName = item.getKaigoHokenshaName();
         source.hokenshaNo = item.getHokenshaNo();
         source.hihokenshaNo = item.getHihokenshaNo();
-        source.remban = item.getRemban();
+        source.remban = new RString("1");
         source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
         return source;
     }
