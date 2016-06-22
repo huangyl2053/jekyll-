@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 /**
  * 支払方法変更管理リストハンドラクラスです。
  *
- * @reamsid_L DBD-3620-050 liangbc
+ * @reamsid_L DBD-4340-010 liangbc
  */
 public class TainoKeikokuMainHandler {
 
