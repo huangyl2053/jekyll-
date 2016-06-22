@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.Chos
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.NinteiChosainMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.dgChosainIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -62,7 +63,7 @@ public class NinteiChosainMasterHandler {
      */
     public void load() {
 
-        div.getHokenshaList().loadHokenshaList();
+        div.getHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード(),
                 FlexibleDate.getNowDate());
         List<KeyValueDataSource> chikuDataSource = new ArrayList<>();
@@ -77,7 +78,7 @@ public class NinteiChosainMasterHandler {
      * 検索条件入力項目をクリアします。
      */
     public void clearKensakuJoken() {
-        div.getHokenshaList().loadHokenshaList();
+        div.getHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTxtSearchChosaItakusakiCodeFrom().clearValue();
         div.getTxtSearchChosaItakusakiCodeTo().clearValue();
         div.getTxtSearchChosaItakusakiMeisho().clearValue();

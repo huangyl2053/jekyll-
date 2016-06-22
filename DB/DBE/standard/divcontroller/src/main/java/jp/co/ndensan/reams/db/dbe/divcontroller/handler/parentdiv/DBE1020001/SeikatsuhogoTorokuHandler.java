@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.KoseiShichosonShishoMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.seikatsuhogotoroku.Minashi2shisaiJoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1020001.SeikatsuhogoTorokuDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -42,7 +43,7 @@ public class SeikatsuhogoTorokuHandler {
      * @param list 支所コードリスト
      */
     public void load(Minashi2shisaiJoho business, RString code, List<KoseiShichosonShishoMaster> list) {
-        div.getCcdHokenshaList().loadHokenshaList();
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         List<KeyValueDataSource> sourceList = new ArrayList<>();
         if (business != null) {
             // TODO QA#88089待ち、画面の遷移不正です

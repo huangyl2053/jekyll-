@@ -123,7 +123,7 @@ public class NinteiChosaIraiHandler {
      */
     public void load(boolean flg) {
         if (flg) {
-            div.getCcdHokenshaList().loadHokenshaList();
+            div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         }
         div.getTxtChosaItakusakiCode().clearValue();
         div.getTxtChosaItakusakiMeisho().clearValue();
