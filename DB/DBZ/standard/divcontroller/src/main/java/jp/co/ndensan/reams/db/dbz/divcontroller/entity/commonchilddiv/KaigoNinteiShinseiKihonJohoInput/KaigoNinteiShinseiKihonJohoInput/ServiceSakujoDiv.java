@@ -6,13 +6,14 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNint
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
  * ServiceSakujo のクラスファイル
  *
- * @reamsid_L DBE-1300-070 wangxiaodong
+ * @reamsid_L DBZ-1300-070 wangxiaodong
  */
 public class ServiceSakujoDiv extends Panel {
 

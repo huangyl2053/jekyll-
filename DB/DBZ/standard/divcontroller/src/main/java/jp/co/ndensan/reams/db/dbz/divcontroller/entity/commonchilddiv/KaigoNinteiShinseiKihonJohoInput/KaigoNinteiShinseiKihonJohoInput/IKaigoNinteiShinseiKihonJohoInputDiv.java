@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 /*
  * このコードはツールによって生成されました。
  *
- * @reamsid_L DBE-1300-070 wangxiaodong
+ * @reamsid_L DBZ-1300-070 wangxiaodong
  */
 public interface IKaigoNinteiShinseiKihonJohoInputDiv extends ICommonChildDivBaseProperties {
 
