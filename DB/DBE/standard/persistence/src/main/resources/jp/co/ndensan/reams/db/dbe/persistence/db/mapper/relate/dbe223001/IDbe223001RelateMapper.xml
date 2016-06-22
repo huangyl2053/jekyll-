@@ -197,7 +197,7 @@
     </select>
 
     <select resultOrdered="true" id="select認定調査依頼情報BY申請書管理番号"  resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.NinteichosaIraiUpdateMybatisParameter">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.NinteichosaIraiUpdateMybatisParameter" fetchSize="500">
         SELECT *
         FEOM rgdb."DbT5201NinteichosaIraiJoho"
         <if test="申請書管理番号!=null">
