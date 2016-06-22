@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.iknijuntsukishichosonjoho.IKi
  *
  * 調査委託先＆調査員ガイド Mapeerのクラスです。
  *
- * @reamsid_L DBE-1300-020 wanghui
+ * @reamsid_L DBZ-1300-020 wanghui
  */
 public interface IChosaItakusakiAndChosainGuideMapper {
 

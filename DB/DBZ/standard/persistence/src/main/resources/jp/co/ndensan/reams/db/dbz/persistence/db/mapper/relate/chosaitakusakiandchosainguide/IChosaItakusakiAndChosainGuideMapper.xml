@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： 調査委託先＆調査員ガイドの取得のマッピング用XMLです。 -->
-<!--@reamsid_L DBE-1300-020 wanghui  -->
+<!--@reamsid_L DBZ-1300-020 wanghui  -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosaitakusakiandchosainguide.IChosaItakusakiAndChosainGuideMapper">
     <resultMap id="resultMap_getKijuntsukiShichosonjoho" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.iknijuntsukishichosonjoho.IKijuntsukiShichosonjohoRelateEntity" autoMapping="true">
         <result property="ninteichosaItakusakiCode" column="DbT4910_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
