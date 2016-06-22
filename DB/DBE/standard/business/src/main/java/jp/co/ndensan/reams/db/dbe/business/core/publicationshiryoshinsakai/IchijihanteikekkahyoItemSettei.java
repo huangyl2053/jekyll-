@@ -171,7 +171,6 @@ public class IchijihanteikekkahyoItemSettei {
         }
         RString dbT5211厚労省IF識別コード = entity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue();
         item = コード転換(item, entity);
-        entity.getDbt5211_remban();
         for (ItiziHanteiEntity itiziHanteiEntity : itiziHanteiEntityList) {
             if (dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().getColumnValue())) {
                 if (getコード(厚労省IF識別コード, new RString("麻痺等の有無（左上肢）")) == itiziHanteiEntity.getDbt5211_remban()) {
