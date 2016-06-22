@@ -87,7 +87,6 @@ public class KekkatsuchiIchiranhyoProcess extends BatchProcessBase<KekkatsuchiIc
         entity.setPrintTimeStamp(システム時刻);
         entity.setSeibetsu(Seibetsu.toValue(entity.getSeibetsu()).get名称());
         entity.setNijiHanteiKekka(YokaigoJotaiKubun09.toValue(entity.getNijiHanteiKekka()).get名称());
-        KekkatsuchiIchiranhyoReport report = new KekkatsuchiIchiranhyoReport(entity, index);
         newShinsakaiNo = entity.getShinsakaiNo();
         if (oldShinsakaiNo.equals(newShinsakaiNo)) {
             index = index + 1;
@@ -95,6 +94,7 @@ public class KekkatsuchiIchiranhyoProcess extends BatchProcessBase<KekkatsuchiIc
             index = 1;
         }
         oldShinsakaiNo = newShinsakaiNo;
+        KekkatsuchiIchiranhyoReport report = new KekkatsuchiIchiranhyoReport(entity, index);
         report.writeBy(reportSourceWriter);
     }
 
