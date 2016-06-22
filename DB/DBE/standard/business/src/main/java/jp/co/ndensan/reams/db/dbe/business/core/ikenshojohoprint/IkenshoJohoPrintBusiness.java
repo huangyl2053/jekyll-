@@ -71,7 +71,7 @@ public class IkenshoJohoPrintBusiness {
         }
         index++;
         if (before.getShinseishoKanriNo().equals(entity.getShinseishoKanriNo())) {
-            if (entity.getIkenshoIraiRirekiNo() > 2) {
+            if (entity.getIkenshoIraiRirekiNo() > 1) {
                 indexTmp++;
                 shijiiIkenshoIraiHenko = new ShijiiIkenshoIraiHenko();
                 shijiiIkenshoIraiHenko.set保険者番号(entity.getShoKisaiHokenshaNo());
