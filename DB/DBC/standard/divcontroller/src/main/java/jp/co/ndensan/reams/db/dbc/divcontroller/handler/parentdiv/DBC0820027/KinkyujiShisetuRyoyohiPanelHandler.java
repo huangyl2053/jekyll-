@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面のハンドラクラスです
@@ -194,6 +195,7 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         div.getPanelShobyoName().setDisabled(false);
         div.getPanelOshinTsuyin().setDisabled(false);
         div.getPanelJiryoTensuu().setDisabled(false);
+        div.getBtnClear().setDisabled(false);
         clear登録();
     }
 
@@ -279,6 +281,9 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         }
         if (div.getTxtshujutsuTanisu().getValue() != null) {
             data = data.add(div.getTxtshujutsuTanisu().getValue());
+        }
+        if (div.getTxtHoshasenChiryoTanisu().getValue() != null) {
+            data = data.add(div.getTxtHoshasenChiryoTanisu().getValue());
         }
         if (div.getTxtShochiTanisu().getValue() != null) {
             data = data.add(div.getTxtShochiTanisu().getValue());
@@ -1000,6 +1005,7 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         div.getPanelShobyoName().setDisabled(false);
         div.getPanelOshinTsuyin().setDisabled(false);
         div.getPanelJiryoTensuu().setDisabled(false);
+        div.getBtnClear().setDisabled(false);
         div.setRowId(new RString(String.valueOf(div.getDgdKinkyujiShiseturyoyo().getClickedRowId())));
     }
 
@@ -1011,6 +1017,7 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         div.getPanelShobyoName().setDisabled(true);
         div.getPanelOshinTsuyin().setDisabled(true);
         div.getPanelJiryoTensuu().setDisabled(true);
+        div.getBtnClear().setDisabled(true);
         div.setRowId(new RString(String.valueOf(div.getDgdKinkyujiShiseturyoyo().getClickedRowId())));
     }
 
@@ -1051,5 +1058,24 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
             list.set(Integer.parseInt(div.getRowId().toString()), row);
         }
         div.getDgdKinkyujiShiseturyoyo().setDataSource(list);
+    }
+
+    /**
+     * 入力チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 入力チェック() {
+        KinkyujiShisetuRyoyohiPanelValidationHandler validationHandler = new KinkyujiShisetuRyoyohiPanelValidationHandler();
+        ValidationMessageControlPairs validPairs;
+        for (dgdKinkyujiShiseturyoyo_Row row : div.getDgdKinkyujiShiseturyoyo().getDataSource()) {
+            if (RowState.Added == row.getRowState() || RowState.Modified == row.getRowState()) {
+                validPairs = validationHandler.必須チェックValidate(row);
+                if (validPairs.iterator().hasNext()) {
+                    return validPairs;
+                }
+            }
+        }
+        return null;
     }
 }
