@@ -20,9 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護住民票個別事項連携情報作成【他社住基】_バッチパラメータ作成するクラスです。
- * 
- * @reamsid_L DBU-0350-040  lijia
- * 
+ *
+ * @reamsid_L DBU-0350-040 lijia
+ *
  */
 public class KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder {
 
@@ -86,12 +86,24 @@ public class KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder {
                 if (taishoShuryoTimestamp == null) {
                     taishoShuryoTimestamp = dbT7022ShoriDateKanriEntity.getTaishoShuryoTimestamp();
                 }
-                if (taishoShuryoTimestamp.isBeforeOrEquals(dbT7022ShoriDateKanriEntity.getTaishoShuryoTimestamp())) {
+                if (日期判定(taishoShuryoTimestamp, dbT7022ShoriDateKanriEntity.getTaishoShuryoTimestamp())) {
                     taishoShuryoTimestamp = dbT7022ShoriDateKanriEntity.getTaishoShuryoTimestamp();
                     chushutsuKikanJohoData = new ChushutsuKikanJohoData(dbT7022ShoriDateKanriEntity);
                 }
             }
         }
         return chushutsuKikanJohoData;
+    }
+
+    private boolean 日期判定(YMDHMS 前対象終了日時, YMDHMS 対象終了日時) {
+        if ((前対象終了日時 == null || 前対象終了日時.isEmpty())
+                && 対象終了日時 != null && !対象終了日時.isEmpty()) {
+            return true;
+        }
+        if (前対象終了日時 == null || 対象終了日時 == null
+                || 前対象終了日時.isEmpty() || 対象終了日時.isEmpty()) {
+            return false;
+        }
+        return 前対象終了日時.isBeforeOrEquals(対象終了日時);
     }
 }
