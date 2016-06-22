@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 /**
  * 除外審査員情報の画面処理Handlerクラスです。
  *
- * @reamsid_L DBE-1300-040 dongyabin
+ * @reamsid_L DBZ-1300-040 dongyabin
  */
 public class JogaiShinsainJohoHandler {
 
