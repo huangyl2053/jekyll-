@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class DBU0130011MainHandler {
 
     private static final RString モード_データなし = new RString("0");
-    private static final RString モード_データあり = new RString("1");
 
     private final DBU0130011MainDiv div;
 
