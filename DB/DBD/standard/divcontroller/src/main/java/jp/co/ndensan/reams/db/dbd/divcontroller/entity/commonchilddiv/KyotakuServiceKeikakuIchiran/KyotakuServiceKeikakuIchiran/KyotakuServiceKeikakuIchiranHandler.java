@@ -10,7 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.JikoSakuseiKeikakuJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.KeikakuIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.KyotakuServiceKeikakuIchiranEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.ServiceShuruiCodeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.ShuruiGendoKakuEntity;
 import jp.co.ndensan.reams.db.dbd.service.core.kyotakuservicekeikakuichiran.KyotakuServiceKeikakuIchiranFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
@@ -276,19 +275,18 @@ public class KyotakuServiceKeikakuIchiranHandler {
             div.getDvKeikakuIraiUketsuke().getTxtHenkoRiyu().setValue(計画依頼受付情報result.get(0).get事業者変更事由());
         }
 
-        RString サービス種類 = RString.EMPTY;
-        List<ServiceShuruiCodeEntity> サービス種類取得result
-                = KyotakuServiceKeikakuIchiranFinder.createInstance().計画依頼受付情報のサービス種類取得(被保険者番号);
-
-        if (サービス種類取得result == null || サービス種類取得result.isEmpty()) {
-            サービス種類 = RString.EMPTY;
-        } else {
-            // TODO
-            for (ServiceShuruiCodeEntity serviceEntity : サービス種類取得result) {
-
-            }
-        }
-
+//        RString サービス種類 = RString.EMPTY;
+//        List<ServiceShuruiCodeEntity> サービス種類取得result
+//                = KyotakuServiceKeikakuIchiranFinder.createInstance().計画依頼受付情報のサービス種類取得(被保険者番号);
+//
+//        if (サービス種類取得result == null || サービス種類取得result.isEmpty()) {
+//            サービス種類 = RString.EMPTY;
+//        } else {
+//            // TODO
+//            for (ServiceShuruiCodeEntity serviceEntity : サービス種類取得result) {
+//
+//            }
+//        }
     }
 
     private void selectFor自己作成(HihokenshaNo 被保険者番号) {
