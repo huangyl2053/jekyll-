@@ -368,12 +368,13 @@ public class NinteichosaIrai {
                         FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getHihoNumber(),
                 row.getHihoShimei(),
-                NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseiKubunShinseiji().toString()).getコード(),
+                RString.isNullOrEmpty(row.getShinseiKubunShinseiji())
+                ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseiKubunShinseiji().toString()).getコード(),
                 row.getShinseiKubunShinseiji(),
                 row.getChosaIraiKanryoDay().getValue() != null
                 ? row.getChosaIraiKanryoDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
                         FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
-                new RString(row.getChosaIraiSaichosaCount().getValue().toString()),
+                row.getChosaIraiSaichosaCount() != null ? new RString(row.getChosaIraiSaichosaCount().getValue().toString()) : RString.EMPTY,
                 row.getChosaIraishoHakkoDay().getValue() != null
                 ? row.getChosaIraishoHakkoDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
                         FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
@@ -389,7 +390,7 @@ public class NinteichosaIrai {
                 row.getChosaIraiKubun(),
                 row.getKonkaiChosaItakusaki(),
                 row.getKonkaiChosain(),
-                new RString(row.getKonkaiChosaCount().getValue().toString()),
+                row.getKonkaiChosaCount() != null ? new RString(row.getKonkaiChosaCount().getValue().toString()) : RString.EMPTY,
                 row.getZenkaiChosaItakusaki(),
                 row.getZenkaiChosain(),
                 row.getZenzenkaiChosaItakusaki(),
@@ -401,7 +402,7 @@ public class NinteichosaIrai {
                 ? row.getChosaTokusokuHakkoDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
                         FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChosaTokusokuHoho(),
-                new RString(row.getChosaTokusokuCount().getValue().toString()),
+                row.getChosaTokusokuCount() != null ? new RString(row.getChosaTokusokuCount().getValue().toString()) : RString.EMPTY,
                 row.getChosaIraiKigen().getValue() != null
                 ? row.getChosaIraiKigen().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
                         FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
@@ -453,7 +454,7 @@ public class NinteichosaIrai {
                 new RString(調査入力用データ.get認定調査依頼履歴番号()),
                 調査入力用データ.get認定調査委託先コード().value(),
                 調査入力用データ.get調査委託先(),
-                調査入力用データ.get認定調査員コード().value(),
+                調査入力用データ.get認定調査員コード() != null ? 調査入力用データ.get認定調査員コード().value() : RString.EMPTY,
                 調査入力用データ.get調査員氏名(),
                 調査入力用データ.get概況特記テキスト_イメージ区分(),
                 TokkijikoTextImageKubun.toValue(調査入力用データ.get概況特記テキスト_イメージ区分()).get名称(),

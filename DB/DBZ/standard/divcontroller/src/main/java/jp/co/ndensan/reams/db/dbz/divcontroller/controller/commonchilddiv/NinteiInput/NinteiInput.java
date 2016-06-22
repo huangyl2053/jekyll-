@@ -121,13 +121,27 @@ public class NinteiInput {
     }
 
     /**
-     * 開始または終了日がlostFocusです。
+     * 開始日がlostFocusです。
      *
      * @param div NinteiInputDiv
      * @return NinteiInputDiv
      */
-    public ResponseData<NinteiInputDiv> onClick_lostFocus(NinteiInputDiv div) {
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).開始終了日check();
+    public ResponseData<NinteiInputDiv> onClick_kaishiLostFocus(NinteiInputDiv div) {
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).開始日check();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 終了日がlostFocusです。
+     *
+     * @param div NinteiInputDiv
+     * @return NinteiInputDiv
+     */
+    public ResponseData<NinteiInputDiv> onClick_syuryoLostFocus(NinteiInputDiv div) {
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).終了日check();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
