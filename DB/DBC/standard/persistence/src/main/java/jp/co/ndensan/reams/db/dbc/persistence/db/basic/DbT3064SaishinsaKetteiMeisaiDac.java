@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 再審査決定明細のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 sunhui
  */
 public class DbT3064SaishinsaKetteiMeisaiDac implements ISaveable<DbT3064SaishinsaKetteiMeisaiEntity> {
 
