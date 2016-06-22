@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0140001;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.BatchFuchoKariSanteiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.FuchoKariSanteiFukaEntity;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
@@ -31,6 +32,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.IOutputChohyoIchiranDiv;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -40,7 +42,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
@@ -58,8 +59,6 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
     private final FuchoKarisanteiFukaMenuPanelDiv div;
     private static final int ゼロ_定値 = 0;
     private static final int イチ_定値 = 1;
-    private static final int ニ_定値 = 2;
-    private static final int ミ_定値 = 3;
     private static final RString 遷移元区分_0 = new RString("0");
     private static final RString 遷移元区分_1 = new RString("1");
     private static final RString 基準日時_未 = new RString("未");
@@ -101,14 +100,15 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
     private static final RString 出力期のタイプ_別々に = new RString("月）分");
     private static final RString 出力期のタイプ_全件 = new RString("月）~");
     private static final RString 項目名 = new RString("当初出力_出力方法");
+    private static final RString 期RSTRING = new RString("期");
     private static final RString 対象者_2 = new RString("2");
     private static final RString 対象者_現金 = new RString("現金納付者");
     private static final RString 対象者_口座 = new RString("口座振替者");
     private static final RString 月日 = new RString("0401");
-    private static final ReportId 帳票分類ID = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
     private static final RString 帳票グループコード_普徴仮算定賦課メニュー = new RString("0140001");
     private static final RString 帳票グループコード_普徴仮算定通知書一括発行メニュー = new RString("0140003");
-    private static final RString 帳票分類ＩＤ_保険料納入通知書_仮算定 = new RString("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
+    private static final RString 普通徴収仮算定結果一覧表_帳票分類ID = new RString("DBB200006_FutsuChoshuKarisanteiKekkaIchiran");
+    private static final RString 保険料納入通知書_仮算定_帳票分類ID = new RString("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
 
     /**
      * 処理状況エリアの初期化メソッドです。
@@ -206,7 +206,20 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
         } else if (普徴仮算定通知書一括発行メニュー.equals(メニューID)) {
             帳票グループコード = 帳票グループコード_普徴仮算定通知書一括発行メニュー;
         }
-        div.getMainPanelBatchParameter().getFuchoKarisanteiChohyoHakko2().getCcdChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 帳票グループコード);
+        IOutputChohyoIchiranDiv 算定帳票作成共有子Div = div.getMainPanelBatchParameter().getFuchoKarisanteiChohyoHakko2().getCcdChohyoIchiran();
+        算定帳票作成共有子Div.load(SubGyomuCode.DBB介護賦課, 帳票グループコード);
+        Map<RString, RString> rowMap = div.getMainPanelBatchParameter().getFuchoKarisanteiChohyoHakko2().getCcdChohyoIchiran()
+                .getSelected帳票IdAnd出力順Id();
+        Set<Map.Entry<RString, RString>> set = rowMap.entrySet();
+        for (Map.Entry<RString, RString> entry : set) {
+            if (普徴仮算定賦課メニュー.equals(メニューID)
+                    && 普通徴収仮算定結果一覧表_帳票分類ID.equals(entry.getKey())) {
+                算定帳票作成共有子Div.setグリッドのチェックボックスDisplayNone(true);
+            } else if (普徴仮算定通知書一括発行メニュー.equals(メニューID)
+                    && 保険料納入通知書_仮算定_帳票分類ID.equals(entry.getKey())) {
+                算定帳票作成共有子Div.setグリッドのチェックボックスDisplayNone(true);
+            }
+        }
     }
 
     /**
@@ -223,7 +236,7 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
         帳票作成個別情報Panel.getTxtHakkoYMD().setValue(発行日);
         RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, システム日と時, SubGyomuCode.DBB介護賦課);
         ChohyoSeigyoHanyo 出力方法 = FuchoKariSanteiFuka.createInstance()
-                .getChohyoSeigyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, new FlexibleYear(調定年度), 項目名);
+                .getChohyoSeigyoKey(SubGyomuCode.DBB介護賦課, new ReportId(保険料納入通知書_仮算定_帳票分類ID), new FlexibleYear(調定年度), 項目名);
         if (出力方法 == null) {
             throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage().evaluate());
         }
@@ -291,7 +304,7 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
         condition.set出力帳票一覧List(list);
         condition.set出力方法(帳票作成個別情報Panel.getTxtNotsuShutsuryokukiType2().getValue());
         RString 出力期 = 帳票作成個別情報Panel.getDdlNotsuShuturyokuki2().getSelectedValue();
-        condition.set出力期(出力期.substring(ゼロ_定値, イチ_定値));
+        condition.set出力期(出力期.substring(ゼロ_定値, 出力期.indexOf(期RSTRING)));
         if (出力期.endsWith(出力期のタイプ_別々に)) {
             condition.set出力期表示方法(定値_イチ);
         } else if (出力期.endsWith(出力期のタイプ_全件)) {
@@ -336,7 +349,7 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         for (Map.Entry<RString, RString> map : 出力帳票一覧.entrySet()) {
             RString 帳票分類Id = map.getKey();
-            if (帳票分類ＩＤ_保険料納入通知書_仮算定.equals(帳票分類Id)) {
+            if (保険料納入通知書_仮算定_帳票分類ID.equals(帳票分類Id)) {
                 RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, システム日時, SubGyomuCode.DBB介護賦課);
                 RDate 調定年月日 = new RDate(調定年度.toString().concat(調定月日.toString()));
                 RString 出力期 = div.getMainPanelBatchParameter()
@@ -349,7 +362,7 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
                     has型5期 = true;
                 }
                 // TODO QA880 普徴開始通知書（仮算定）のチェックがオンの場合
-            } else if (1 == 1) {
+            } else if (普通徴収仮算定結果一覧表_帳票分類ID.equals(帳票分類Id)) {
                 has普徴 = true;
             }
         }
@@ -409,9 +422,9 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
             int 期 = 期月.get期AsInt();
             int 月 = 期月.get月AsInt();
             RStringBuilder builder = new RStringBuilder();
-            builder.append(RStringUtil.convert半角to全角(new RString(String.valueOf(期))));
+            builder.append(new RString(String.valueOf(期)));
             builder.append(出力期のタイプ_前);
-            builder.append(RStringUtil.convert半角to全角(new RString(String.valueOf(月))));
+            builder.append(new RString(String.valueOf(月)));
             if (出力期のタイプ_別々に.equals(出力期のタイプ)) {
                 builder.append(出力期のタイプ_別々に);
             } else {

@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -92,8 +93,13 @@ public class JushochiTokureiTekiyoHenkoShuryoTodoke {
                 birthYMD = set生年月日(生年月日, entity.get生年月日不詳区分());
             }
         }
+        RStringBuilder 認証者 = new RStringBuilder();
+        if (!RString.isNullOrEmpty(ninshoshaYakushokuMei)) {
+            認証者.append(ninshoshaYakushokuMei);
+            認証者.append("認証者");
+        }
         JyushochiTokureiTekiyoHenkoItem item = new JyushochiTokureiTekiyoHenkoItem(
-                ninshoshaYakushokuMei,
+                認証者.toRString(),
                 entity.get被保険者番号() == null ? RString.EMPTY : entity.get被保険者番号().getColumnValue(),
                 entity.getフリガナ(),
                 entity.get被保険者氏名(),

@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class KobetsuJikoRenkeiInfoSakuseiKoiki {
 
-    private static final int 連番 = 5;
+    private static final int 連番 = 6;
 
     /**
      * 画面初期化表示する。

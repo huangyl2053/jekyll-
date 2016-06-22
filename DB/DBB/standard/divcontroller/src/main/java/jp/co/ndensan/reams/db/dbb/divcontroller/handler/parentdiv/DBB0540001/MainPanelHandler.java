@@ -240,7 +240,7 @@ public class MainPanelHandler {
         } else {
             edit空白以外を選択した場合();
             edit現在の月の徴収方法はなしの場合();
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
+            edit現在の月の徴収方法は普の場合();
         }
     }
 
@@ -531,70 +531,204 @@ public class MainPanelHandler {
     }
 
     private void edit現在の月の徴収方法はなしの場合() {
-
         choshuHouhou_Row row現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0);
         choshuHouhou_Row row変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1);
         RString getなし名称 = get徴収方法の名称(ChoshuHoho.toValue(コード_0).get名称());
+        boolean flag3 = false;
+        boolean flag4 = false;
+        boolean flag5 = false;
+        boolean flag6 = false;
+        boolean flag7 = false;
+        boolean flag8 = false;
+        boolean flag9 = false;
+        boolean flag10 = false;
         if (getなし名称.equals(row現在.getTxtZen3Gatsu())) {
             row変更後.setTxtZen3Gatsu(getなし名称);
             row変更後.setCellBgColor(前の名_3.toString(), row現在.getCellBgColor(前の名_3.toString()));
+            flag3 = true;
         }
         if (getなし名称.equals(row現在.getTxt4Gatsu())) {
             row変更後.setTxt4Gatsu(getなし名称);
             row変更後.setCellBgColor(名_4.toString(), row現在.getCellBgColor(名_4.toString()));
+            flag4 = true;
         }
         if (getなし名称.equals(row現在.getTxt5Gatsu())) {
             row変更後.setTxt5Gatsu(getなし名称);
             row変更後.setCellBgColor(名_5.toString(), row現在.getCellBgColor(名_5.toString()));
+            flag5 = true;
         }
         if (getなし名称.equals(row現在.getTxt6Gatsu())) {
             row変更後.setTxt6Gatsu(getなし名称);
             row変更後.setCellBgColor(名_6.toString(), row現在.getCellBgColor(名_6.toString()));
+            flag6 = true;
         }
         if (getなし名称.equals(row現在.getTxt7Gatsu())) {
             row変更後.setTxt7Gatsu(getなし名称);
             row変更後.setCellBgColor(名_7.toString(), row現在.getCellBgColor(名_7.toString()));
+            flag7 = true;
         }
         if (getなし名称.equals(row現在.getTxt8Gatsu())) {
             row変更後.setTxt8Gatsu(getなし名称);
             row変更後.setCellBgColor(名_8.toString(), row現在.getCellBgColor(名_8.toString()));
+            flag8 = true;
         }
         if (getなし名称.equals(row現在.getTxt9Gatsu())) {
             row変更後.setTxt9Gatsu(getなし名称);
             row変更後.setCellBgColor(名_9.toString(), row現在.getCellBgColor(名_9.toString()));
+            flag9 = true;
         }
         if (getなし名称.equals(row現在.getTxt10Gatsu())) {
             row変更後.setTxt10Gatsu(getなし名称);
             row変更後.setCellBgColor(名_10.toString(), row現在.getCellBgColor(名_10.toString()));
+            flag10 = true;
         }
-        continueEdit(getなし名称, row現在, row変更後);
+        boolean flag = flag3 && flag4 && flag5 && flag6 && flag7 && flag8 && flag9 && flag10;
+        continueEdit(getなし名称, row現在, row変更後, flag);
     }
 
-    private void continueEdit(RString getなし名称, choshuHouhou_Row row現在, choshuHouhou_Row row変更後) {
+    private void edit現在の月の徴収方法は普の場合() {
+        choshuHouhou_Row row現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0);
+        choshuHouhou_Row row変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1);
+        RString get普名称 = get徴収方法の名称(ChoshuHoho.toValue(コード_3).get名称());
+        boolean flag3 = false;
+        boolean flag4 = false;
+        boolean flag5 = false;
+        boolean flag6 = false;
+        boolean flag7 = false;
+        boolean flag8 = false;
+        boolean flag9 = false;
+        boolean flag10 = false;
+        if (get普名称.equals(row現在.getTxtZen3Gatsu())) {
+            row変更後.setTxtZen3Gatsu(get普名称);
+            row変更後.setCellBgColor(前の名_3.toString(), row現在.getCellBgColor(前の名_3.toString()));
+            flag3 = true;
+        }
+        if (get普名称.equals(row現在.getTxt4Gatsu())) {
+            row変更後.setTxt4Gatsu(get普名称);
+            row変更後.setCellBgColor(名_4.toString(), row現在.getCellBgColor(名_4.toString()));
+            flag4 = true;
+        }
+        if (get普名称.equals(row現在.getTxt5Gatsu())) {
+            row変更後.setTxt5Gatsu(get普名称);
+            row変更後.setCellBgColor(名_5.toString(), row現在.getCellBgColor(名_5.toString()));
+            flag5 = true;
+        }
+        if (get普名称.equals(row現在.getTxt6Gatsu())) {
+            row変更後.setTxt6Gatsu(get普名称);
+            row変更後.setCellBgColor(名_6.toString(), row現在.getCellBgColor(名_6.toString()));
+            flag6 = true;
+        }
+        if (get普名称.equals(row現在.getTxt7Gatsu())) {
+            row変更後.setTxt7Gatsu(get普名称);
+            row変更後.setCellBgColor(名_7.toString(), row現在.getCellBgColor(名_7.toString()));
+            flag7 = true;
+        }
+        if (get普名称.equals(row現在.getTxt8Gatsu())) {
+            row変更後.setTxt8Gatsu(get普名称);
+            row変更後.setCellBgColor(名_8.toString(), row現在.getCellBgColor(名_8.toString()));
+            flag8 = true;
+        }
+        if (get普名称.equals(row現在.getTxt9Gatsu())) {
+            row変更後.setTxt9Gatsu(get普名称);
+            row変更後.setCellBgColor(名_9.toString(), row現在.getCellBgColor(名_9.toString()));
+            flag9 = true;
+        }
+        if (get普名称.equals(row現在.getTxt10Gatsu())) {
+            row変更後.setTxt10Gatsu(get普名称);
+            row変更後.setCellBgColor(名_10.toString(), row現在.getCellBgColor(名_10.toString()));
+            flag10 = true;
+        }
+        boolean flag = flag3 && flag4 && flag5 && flag6 && flag7 && flag8 && flag9 && flag10;
+        continueEdit2(get普名称, row現在, row変更後, flag);
+    }
 
+    private void continueEdit(RString getなし名称,
+            choshuHouhou_Row row現在, choshuHouhou_Row row変更後, boolean flag) {
+        boolean flag11 = false;
+        boolean flag12 = false;
+        boolean flag1 = false;
+        boolean flag2 = false;
+        boolean flag3 = false;
+        boolean flag4 = false;
         if (getなし名称.equals(row現在.getTxt11Gatsu())) {
             row変更後.setTxt11Gatsu(getなし名称);
             row変更後.setCellBgColor(名_11.toString(), row現在.getCellBgColor(名_11.toString()));
+            flag11 = true;
         }
         if (getなし名称.equals(row現在.getTxt12Gatsu())) {
             row変更後.setTxt12Gatsu(getなし名称);
             row変更後.setCellBgColor(名_12.toString(), row現在.getCellBgColor(名_12.toString()));
+            flag12 = true;
         }
         if (getなし名称.equals(row現在.getTxt1Gatsu())) {
             row変更後.setTxt1Gatsu(getなし名称);
             row変更後.setCellBgColor(名_1.toString(), row現在.getCellBgColor(名_1.toString()));
+            flag1 = true;
         }
         if (getなし名称.equals(row現在.getTxt2Gatsu())) {
             row変更後.setTxt2Gatsu(getなし名称);
             row変更後.setCellBgColor(名_2.toString(), row現在.getCellBgColor(名_2.toString()));
+            flag2 = true;
         }
         if (getなし名称.equals(row現在.getTxt3Gatsu())) {
             row変更後.setTxt3Gatsu(getなし名称);
             row変更後.setCellBgColor(名_3.toString(), row現在.getCellBgColor(名_3.toString()));
+            flag3 = true;
         }
         if (getなし名称.equals(row現在.getTxtYoku4Gatsu())) {
             row変更後.setTxtYoku4Gatsu(getなし名称);
             row変更後.setCellBgColor(翌の名_4.toString(), row現在.getCellBgColor(翌の名_4.toString()));
+            flag4 = true;
+        }
+        if (flag && flag11 && flag12 && flag1 && flag2 && flag3 && flag4) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
+        }
+    }
+
+    private void continueEdit2(RString get普名称,
+            choshuHouhou_Row row現在, choshuHouhou_Row row変更後, boolean flag) {
+        boolean flag11 = false;
+        boolean flag12 = false;
+        boolean flag1 = false;
+        boolean flag2 = false;
+        boolean flag3 = false;
+        boolean flag4 = false;
+        if (get普名称.equals(row現在.getTxt11Gatsu())) {
+            row変更後.setTxt11Gatsu(get普名称);
+            row変更後.setCellBgColor(名_11.toString(), row現在.getCellBgColor(名_11.toString()));
+            flag11 = true;
+        }
+        if (get普名称.equals(row現在.getTxt12Gatsu())) {
+            row変更後.setTxt12Gatsu(get普名称);
+            row変更後.setCellBgColor(名_12.toString(), row現在.getCellBgColor(名_12.toString()));
+            flag12 = true;
+        }
+        if (get普名称.equals(row現在.getTxt1Gatsu())) {
+            row変更後.setTxt1Gatsu(get普名称);
+            row変更後.setCellBgColor(名_1.toString(), row現在.getCellBgColor(名_1.toString()));
+            flag1 = true;
+        }
+        if (get普名称.equals(row現在.getTxt2Gatsu())) {
+            row変更後.setTxt2Gatsu(get普名称);
+            row変更後.setCellBgColor(名_2.toString(), row現在.getCellBgColor(名_2.toString()));
+            flag2 = true;
+        }
+        if (get普名称.equals(row現在.getTxt3Gatsu())) {
+            row変更後.setTxt3Gatsu(get普名称);
+            row変更後.setCellBgColor(名_3.toString(), row現在.getCellBgColor(名_3.toString()));
+            flag3 = true;
+        }
+        if (get普名称.equals(row現在.getTxtYoku4Gatsu())) {
+            row変更後.setTxtYoku4Gatsu(get普名称);
+            row変更後.setCellBgColor(翌の名_4.toString(), row現在.getCellBgColor(翌の名_4.toString()));
+            flag4 = true;
+        }
+        if (flag && flag11 && flag12 && flag1 && flag2 && flag3 && flag4) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
         }
     }
 
