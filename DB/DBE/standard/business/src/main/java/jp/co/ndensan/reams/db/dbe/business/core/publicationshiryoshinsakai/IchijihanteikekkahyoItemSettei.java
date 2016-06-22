@@ -173,37 +173,37 @@ public class IchijihanteikekkahyoItemSettei {
         item = コード転換(item, entity);
         for (ItiziHanteiEntity itiziHanteiEntity : itiziHanteiEntityList) {
             if (dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
-                if (getコード(厚労省IF識別コード, new RString("麻痺等の有無（左上肢）")) == itiziHanteiEntity.getDbt5211_remban()) {
+                if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                     item.set調査結果_麻痺_左_上肢(ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                     item.set調査結果_麻痺_左_上肢_ある(get麻痺特記事項_ある(厚労省IF識別コード, 特記事項情報));
-                } else if (getコード(厚労省IF識別コード, new RString("麻痺等の有無（右上肢）")) == itiziHanteiEntity.getDbt5211_remban()) {
+                } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                     item.set調査結果_麻痺_右_上肢(ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                     item.set調査結果_麻痺_右_上肢_ある(get麻痺特記事項_ある(厚労省IF識別コード, 特記事項情報));
-                } else if (getコード(厚労省IF識別コード, new RString("麻痺等の有無（左下肢）")) == itiziHanteiEntity.getDbt5211_remban()) {
+                } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                     item.set調査結果_麻痺_左_下肢(ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                     item.set調査結果_麻痺_左_下肢_ある(get麻痺特記事項_ある(厚労省IF識別コード, 特記事項情報));
-                } else if (getコード(厚労省IF識別コード, new RString("麻痺等の有無（右下肢）")) == itiziHanteiEntity.getDbt5211_remban()) {
+                } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                     item.set調査結果_麻痺_右_下肢(ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                     item.set調査結果_麻痺_右_下肢_ある(get麻痺特記事項_ある(厚労省IF識別コード, 特記事項情報));
-                } else if (getコード(厚労省IF識別コード, new RString("麻痺等の有無（その他）")) == itiziHanteiEntity.getDbt5211_remban()) {
+                } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                     item.set調査結果_麻痺_その他(ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                     item.set調査結果_麻痺_その他_ある(get麻痺特記事項_ある(厚労省IF識別コード, 特記事項情報));
-                } else if (getコード(厚労省IF識別コード, new RString("関節の動く範囲の制限（肩関節）")) == itiziHanteiEntity.getDbt5211_remban()) {
+                } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                     item.set調査結果_拘縮_肩関節(ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                     item.set調査結果_拘縮_肩関節_ある(get拘縮の有無特記事項_ある(厚労省IF識別コード, 特記事項情報));
-                } else if (getコード(厚労省IF識別コード, new RString("関節の動く範囲の制限（股関節）")) == itiziHanteiEntity.getDbt5211_remban()) {
+                } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                     item.set調査結果_拘縮_股関節(ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                     item.set調査結果_拘縮_股関節_ある(get拘縮の有無特記事項_ある(厚労省IF識別コード, 特記事項情報));
-                } else if (getコード(厚労省IF識別コード, new RString("関節の動く範囲の制限（膝関節）")) == itiziHanteiEntity.getDbt5211_remban()) {
+                } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                     item.set調査結果_拘縮_膝関節(ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                     item.set調査結果_拘縮_膝関節_ある(get拘縮の有無特記事項_ある(厚労省IF識別コード, 特記事項情報));
-                } else if (getコード(厚労省IF識別コード, new RString("関節の動く範囲の制限（その他）")) == itiziHanteiEntity.getDbt5211_remban()) {
+                } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                     item.set調査結果_拘縮_その他(ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                     item.set調査結果_拘縮_その他_ある(get拘縮の有無特記事項_ある(厚労省IF識別コード, 特記事項情報));
-                } else if (getコード(厚労省IF識別コード, new RString("寝返り")) == itiziHanteiEntity.getDbt5211_remban()) {
+                } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                     item.set調査結果_寝返り(ChosaAnser02.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                     item.set調査結果_寝返り_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("寝返り")));
-                } else if (getコード(厚労省IF識別コード, new RString("起き上がり")) == itiziHanteiEntity.getDbt5211_remban()) {
+                } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                     item.set調査結果_起き上がり(ChosaAnser02.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                     item.set調査結果_起き上がり_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("起き上がり")));
                 } else if (get座位保持コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()) {
@@ -233,34 +233,34 @@ public class IchijihanteikekkahyoItemSettei {
             } else if (get簡単な調理コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()) {
                 item.set調査結果_簡単な調理(ChosaAnser10.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_簡単な調理_ある(get簡単な調理特記事項_ある(厚労省IF識別コード, 特記事項情報));
-            } else if (getコード(厚労省IF識別コード, new RString("処置内容（点滴の管理）")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_点滴の管理(ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_点滴の管理_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("点滴の管理")));
-            } else if (getコード(厚労省IF識別コード, new RString("処置内容（中心静脈栄養）")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_中心静脈栄養(ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_中心静脈栄養_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報,
                         new RString("中心静脈栄養")));
-            } else if (getコード(厚労省IF識別コード, new RString("処置内容（透析）")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_透析(ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_透析_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("透析")));
-            } else if (getコード(厚労省IF識別コード, new RString("処置内容（ストーマの処置）")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_ストーマの処置(ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_ストーマの処置_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("ストーマの処置")));
-            } else if (getコード(厚労省IF識別コード, new RString("処置内容（酸素療法）")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_酸素療法(ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_酸素療法_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("酸素療法")));
-            } else if (getコード(厚労省IF識別コード, new RString("処置内容（レスピレーター）")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_レスピレーター(ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_レスピレーター_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報,
                         new RString("レスピレーター")));
             } else if (get気管切開の処置コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()) {
                 item.set調査結果_気管切開の処置(ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_気管切開の処置_ある(get気管切開の処置特記事項_ある(厚労省IF識別コード, 特記事項情報));
-            } else if (getコード(厚労省IF識別コード, new RString("処置内容（疼痛の看護）")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_気管切開の処置(ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_気管切開の処置_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報,
                         new RString("疼痛の看護")));
-            } else if (getコード(厚労省IF識別コード, new RString("処置内容（経管栄養）")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_経管栄養(ChosaAnser01.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_経管栄養_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("経管栄養")));
             } else if (getモニター測定コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()) {
@@ -330,10 +330,10 @@ public class IchijihanteikekkahyoItemSettei {
     private IchijihanteikekkahyoItem set調査結果2(IchijihanteikekkahyoItem item, RString 厚労省IF識別コード, RString dbT5211厚労省IF識別コード,
             ItiziHanteiEntity itiziHanteiEntity, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
-            if (getコード(厚労省IF識別コード, new RString("整髪")) == itiziHanteiEntity.getDbt5211_remban()) {
+            if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_整髪(ChosaAnser12.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_整髪_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("整髪")));
-            } else if (getコード(厚労省IF識別コード, new RString("上衣の着脱")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_上衣の着脱(ChosaAnser10.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_上衣の着脱_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("上衣の着脱")));
             } else if (getズボン等の着脱コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()) {
@@ -389,40 +389,40 @@ public class IchijihanteikekkahyoItemSettei {
     private IchijihanteikekkahyoItem set調査結果1(IchijihanteikekkahyoItem item, RString 厚労省IF識別コード, RString dbT5211厚労省IF識別コード,
             ItiziHanteiEntity itiziHanteiEntity, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (dbT5211厚労省IF識別コード.equals(itiziHanteiEntity.getDbt5211_koroshoIfShikibetsuCode().value())) {
-            if (getコード(厚労省IF識別コード, new RString("両足での立位")) == itiziHanteiEntity.getDbt5211_remban()) {
+            if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_両足での立位(ChosaAnser04.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_両足での立位_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("両足での立位保持")));
-            } else if (getコード(厚労省IF識別コード, new RString("歩行")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_歩行(ChosaAnser02.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_歩行_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("歩行")));
-            } else if (getコード(厚労省IF識別コード, new RString("立ち上がり")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_立ち上がり(ChosaAnser02.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_立ち上がり_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("立ち上がり")));
-            } else if (getコード(厚労省IF識別コード, new RString("片足での立位")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_片足での立位(ChosaAnser04.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_片足での立位_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("片足での立位")));
-            } else if (getコード(厚労省IF識別コード, new RString("洗身")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_洗身(ChosaAnser06.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_洗身_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("洗身")));
-            } else if (getコード(厚労省IF識別コード, new RString("つめ切り")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_つめ切り(ChosaAnser07.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_つめ切り_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("つめ切り")));
-            } else if (getコード(厚労省IF識別コード, new RString("視力")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_視力(ChosaAnser08.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_視力_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("視力")));
-            } else if (getコード(厚労省IF識別コード, new RString("聴力")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_聴力(ChosaAnser09.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_聴力_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("聴力")));
-            } else if (getコード(厚労省IF識別コード, new RString("移乗")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_移乗(ChosaAnser10.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_移乗_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("移乗")));
-            } else if (getコード(厚労省IF識別コード, new RString("移動")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_移動(ChosaAnser10.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_移動_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("移動")));
             } else if (getえん下コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()) {
                 item.set調査結果_えん下(ChosaAnser11.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_えん下_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("えん下")));
-            } else if (getコード(厚労省IF識別コード, new RString("食事摂取")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_食事摂取(ChosaAnser10.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_食事摂取_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("食事摂取")));
             } else if (get排尿コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()) {
@@ -431,10 +431,10 @@ public class IchijihanteikekkahyoItemSettei {
             } else if (get排便コード(厚労省IF識別コード) == itiziHanteiEntity.getDbt5211_remban()) {
                 item.set調査結果_排便(ChosaAnser10.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_排便_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("排便")));
-            } else if (getコード(厚労省IF識別コード, new RString("口腔清潔")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_口腔清潔(ChosaAnser12.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_口腔清潔_ある(get口腔清潔特記事項_ある(厚労省IF識別コード, 特記事項情報));
-            } else if (getコード(厚労省IF識別コード, new RString("洗顔")) == itiziHanteiEntity.getDbt5211_remban()) {
+            } else if (!RString.isNullOrEmpty(getコード(厚労省IF識別コード, itiziHanteiEntity.getDbt5211_remban()))) {
                 item.set調査結果_洗顔(ChosaAnser12.toValue(itiziHanteiEntity.getDbt5211_researchItem()).get名称());
                 item.set調査結果_洗顔_ある(get特記事項_ある(厚労省IF識別コード, 特記事項情報, new RString("洗顔")));
             }
@@ -1737,64 +1737,59 @@ public class IchijihanteikekkahyoItemSettei {
         return Integer.MAX_VALUE;
     }
 
-    private int getコード(RString 厚労省IF識別コード, RString 名称) {
+    private RString getコード(RString 厚労省IF識別コード, int コード) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return Integer.valueOf(getNinteichosaKomokuMapping99A(名称).toString());
+            return getNinteichosaKomokuMapping99A(new RString(コード));
         } else if (A_02.equals(厚労省IF識別コード)) {
-            return Integer.valueOf(getNinteichosaKomokuMapping02A(名称).toString());
+            return getNinteichosaKomokuMapping02A(new RString(コード));
         } else if (A_06.equals(厚労省IF識別コード)) {
-            return Integer.valueOf(getNinteichosaKomokuMapping06A(名称).toString());
+            return getNinteichosaKomokuMapping06A(new RString(コード));
         } else if (A_09.equals(厚労省IF識別コード)) {
-            return Integer.valueOf(getNinteichosaKomokuMapping09A(名称).toString());
+            return getNinteichosaKomokuMapping09A(new RString(コード));
         } else if (B_09.equals(厚労省IF識別コード)) {
-            return Integer.valueOf(getNinteichosaKomokuMapping09B(名称).toString());
-        }
-        return Integer.MAX_VALUE;
-    }
-
-    private RString getNinteichosaKomokuMapping99A(RString 名称) {
-        for (NinteichosaKomokuMapping99A mapping : NinteichosaKomokuMapping99A.values()) {
-            if (mapping.get名称().equals(名称)) {
-                return mapping.getコード();
-            }
+            return getNinteichosaKomokuMapping09B(new RString(コード));
         }
         return RString.EMPTY;
     }
 
-    private RString getNinteichosaKomokuMapping02A(RString 名称) {
-        for (NinteichosaKomokuMapping02A mapping : NinteichosaKomokuMapping02A.values()) {
-            if (mapping.get名称().equals(名称)) {
-                return mapping.getコード();
-            }
+    private RString getNinteichosaKomokuMapping99A(RString コード) {
+        try {
+            return NinteichosaKomokuMapping99A.toValue(コード).getコード();
+        } catch (IllegalArgumentException e) {
+            return RString.EMPTY;
         }
-        return RString.EMPTY;
     }
 
-    private RString getNinteichosaKomokuMapping06A(RString 名称) {
-        for (NinteichosaKomokuMapping06A mapping : NinteichosaKomokuMapping06A.values()) {
-            if (mapping.get名称().equals(名称)) {
-                return mapping.getコード();
-            }
+    private RString getNinteichosaKomokuMapping02A(RString コード) {
+        try {
+            return NinteichosaKomokuMapping02A.toValue(コード).getコード();
+        } catch (IllegalArgumentException e) {
+            return RString.EMPTY;
         }
-        return RString.EMPTY;
     }
 
-    private RString getNinteichosaKomokuMapping09A(RString 名称) {
-        for (NinteichosaKomokuMapping09A mapping : NinteichosaKomokuMapping09A.values()) {
-            if (mapping.get名称().equals(名称)) {
-                return mapping.getコード();
-            }
+    private RString getNinteichosaKomokuMapping06A(RString コード) {
+        try {
+            return NinteichosaKomokuMapping06A.toValue(コード).getコード();
+        } catch (IllegalArgumentException e) {
+            return RString.EMPTY;
         }
-        return RString.EMPTY;
     }
 
-    private RString getNinteichosaKomokuMapping09B(RString 名称) {
-        for (NinteichosaKomokuMapping09B mapping : NinteichosaKomokuMapping09B.values()) {
-            if (mapping.get名称().equals(名称)) {
-                return mapping.getコード();
-            }
+    private RString getNinteichosaKomokuMapping09A(RString コード) {
+        try {
+            return NinteichosaKomokuMapping09A.toValue(コード).getコード();
+        } catch (IllegalArgumentException e) {
+            return RString.EMPTY;
         }
-        return RString.EMPTY;
+    }
+
+    private RString getNinteichosaKomokuMapping09B(RString コード) {
+        try {
+            return NinteichosaKomokuMapping09B.toValue(コード).getコード();
+        } catch (IllegalArgumentException e) {
+            return RString.EMPTY;
+        }
     }
 
     private RString getNinteichosaKomoku02A(RString 名称) {
