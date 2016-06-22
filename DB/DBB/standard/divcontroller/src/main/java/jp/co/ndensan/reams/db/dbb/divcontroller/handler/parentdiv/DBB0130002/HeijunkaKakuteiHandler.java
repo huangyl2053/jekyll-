@@ -88,7 +88,7 @@ public class HeijunkaKakuteiHandler {
                     年度内連番);
             機能 = ShoriName.特徴平準化_8月分_確定.get名称();
         }
-        if (処理日付管理 != null && 処理日付管理.get基準日時() != null) {
+        if (処理日付管理 != null && 処理日付管理.get基準日時() != null && !処理日付管理.get基準日時().isEmpty()) {
             throw new ApplicationException(DbbErrorMessages.処理済み.getMessage().replace(機能.toString()));
         }
     }
