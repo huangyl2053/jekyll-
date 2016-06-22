@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTais
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class HihokenshaAtenaResult {
 
     private DbV1001HihokenshaDaichoEntity entity;

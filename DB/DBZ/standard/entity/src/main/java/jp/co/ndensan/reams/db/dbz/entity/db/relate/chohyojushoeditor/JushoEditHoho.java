@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class JushoEditHoho {
 
     private LasdecCode 市町村コード;
