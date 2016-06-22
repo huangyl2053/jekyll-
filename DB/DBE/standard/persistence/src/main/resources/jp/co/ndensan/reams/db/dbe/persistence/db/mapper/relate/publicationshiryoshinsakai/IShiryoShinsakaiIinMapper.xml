@@ -1004,7 +1004,7 @@
             SELECT
                 dbt5594."shinsakaiIinShimei" AS dbt5594_shinsakaiIinShimei
             FROM
-                rgdb."DbT5503ShinsakaiWariateIinJoho" AS dbt5503,
+                rgdb."DbT5503ShinsakaiWariateIinJoho" AS dbt5503
             LEFT JOIN
                 rgdb."DbT5594ShinsakaiIinJoho" AS dbt5594
             ON
@@ -1029,7 +1029,7 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTuutishoMyBatisParameter" fetchSize="500" >
             SELECT
                 dbt5511."shinsakaiKaisaiYMD" AS dbt5511_shinsakaiKaisaiYMD,
-                dbt5511."gogitaiNo" AS dbt5511_gogitaiNo,
+                dbt5511."gogitaiNo" AS dbt5511_gogitaiNo
             FROM
                 rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS dbt5511
             WHERE
@@ -1050,21 +1050,21 @@
                 dbt5116Zen."ichijiHanteiKekkaCode" AS dbt5116Zen_ichijiHanteiKekkaCode,
                 dbt5102Zen."nijiHanteiYokaigoJotaiKubunCode" AS dbt5102Zen_jotaiKubunCode,
                 dbt5102Zen."nijiHanteiNinteiYukoKikan" AS dbt5102Zen_yukoKikan,
-                dbt5203."shogaiNichijoSeikatsuJiritsudoCode" AS dbt5203_shogai,
-                dbt5203."ninchishoNichijoSeikatsuJiritsudoCode" AS dbt5203_ninchisho,
+                KihonChosa.dbT5203_shogaiCode AS dbt5203_shogai,
+                KihonChosa.dbT5203_ninchishoCode AS dbt5203_ninchisho,
                 dbt5116."kijunJikan" AS dbt5116_kijunJikan,
                 dbt5116."ichijiHanteiKekkaCode" AS dbt5116_ichijiHanteiKekkaCode,
                 dbt5116."ichijiHnateiKeikokuCode" AS dbt5116_ichijiHnateiKeikokuCode
             FROM
                 rgdb."DbT5502ShinsakaiWariateJoho" AS dbt5502
            LEFT JOIN
-                rgdb."DbT7051KoseiShichosonMaster" AS dbt7051
-            ON
-                dbt7051."shoKisaiHokenshaNo" = dbt5101."shoKisaiHokenshaNo"
-            LEFT JOIN
                 rgdb."DbT5101NinteiShinseiJoho" AS dbt5101
             ON
                 dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
+           LEFT JOIN
+                rgdb."DbT7051KoseiShichosonMaster" AS dbt7051
+            ON
+                dbt7051."shoKisaiHokenshaNo" = dbt5101."shoKisaiHokenshaNo"
             LEFT JOIN
                 rgdb."DbT5116IchijiHanteiKekkaJoho" AS dbt5116
             ON
@@ -1089,18 +1089,26 @@
             INNER JOIN
                 (
                     SELECT
-                        MAX(dbt5203."ninteichosaRirekiNo") AS dbt5203_ninteichosaRirekiNo,
-                        dbt5203."shinseishoKanriNo" AS dbt5203_shinseishoKanriNo
-                    FROM
-                        rgdb."DbT5203NinteichosahyoKihonChosa" AS dbt5203
-                    GROUP BY
-                        dbt5203."shinseishoKanriNo"
+                        NinteichosahyoK."ninteichosaRirekiNo" AS dbT5203_ninteichosaRirekiNo,
+                        NinteichosahyoK."shinseishoKanriNo" AS dbT5203_shinseishoKanriNo,
+                        NinteichosahyoK."ninchishoNichijoSeikatsuJiritsudoCode" AS dbT5203_ninchishoCode,
+                        NinteichosahyoK."shogaiNichijoSeikatsuJiritsudoCode" AS dbT5203_shogaiCode
+                    FROM 
+                        (
+                            SELECT *,
+                                    ROW_NUMBER() OVER (PARTITION BY dbt5203."shinseishoKanriNo"
+                                        ORDER BY dbt5203."ninteichosaRirekiNo" DESC) AS dbt5203_RRKNO
+                                FROM
+                                    rgdb."DbT5203NinteichosahyoKihonChosa" AS dbt5203
+                        ) AS NinteichosahyoK
+                    WHERE
+                        dbt5203_RRKNO = '1'
                 ) AS KihonChosa
             ON
-                dbt5101."shinseishoKanriNo" = KihonChosa.shinseishoKanriNo
+                dbt5101."shinseishoKanriNo" = KihonChosa.dbT5203_shinseishoKanriNo
             WHERE
                 dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
-            AND dbt5502."shinsakaiKaisaiYMD" IS NULL
+            AND dbt5502."shinsakaiKaisaiYMD" = ''
             ORDER BY
                 dbt5502."shinsakaiOrder"
     </select>    
