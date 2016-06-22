@@ -522,7 +522,7 @@ public class NinteichosaIrai {
             NinteiKanryoJohoIdentifier 要介護認定完了情報の識別子 = new NinteiKanryoJohoIdentifier(
                     new ShinseishoKanriNo(row.getShinseishoKanriNo()));
             NinteichosaIraiListManager.createInstance().save要介護認定完了情報(要介護認定完了情報Model.get(要介護認定完了情報の識別子).
-                    createBuilderForEdit().set認定調査完了年月日(FlexibleDate.getNowDate()).build().toEntity());
+                    createBuilderForEdit().set認定調査依頼完了年月日(FlexibleDate.getNowDate()).build().toEntity());
         }
     }
 
