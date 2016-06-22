@@ -169,8 +169,7 @@ public class DBD1030001Handler {
      * @return 申請一覧情報
      */
     public List<ShakaifukuRiyoshaFutanKeigen> 申請一覧データ準備(HihokenshaNo 被保険者番号) {
-        List<ShakaifukuRiyoshaFutanKeigen> 申請一覧情報 = get申請一覧情報(被保険者番号);
-        return 申請一覧情報;
+        return ShakaiFukushiHojinKeigenService.createIntance().load社会福祉法人等利用者負担軽減申請All(被保険者番号);
     }
 
     private List<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態初期化(List<ShakaifukuRiyoshaFutanKeigen> 申請一覧情報) {
@@ -274,10 +273,6 @@ public class DBD1030001Handler {
             return 漢字承認しない;
         }
         return RString.EMPTY;
-    }
-
-    private List<ShakaifukuRiyoshaFutanKeigen> get申請一覧情報(HihokenshaNo 被保険者番号) {
-        return ShakaiFukushiHojinKeigenService.createIntance().load社会福祉法人等利用者負担軽減申請All(被保険者番号);
     }
 
     /**
@@ -386,8 +381,7 @@ public class DBD1030001Handler {
      */
     public ShakaifukuRiyoshaFutanKeigenToJotai get情報と状態BySelectDataSouce(ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayList) {
         dgShinseiList_Row dataSouce = div.getDgShinseiList().getActiveRow();
-        ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態 = get情報FromDataSouce(dataSouce, 情報と状態ArrayList);
-        return 情報と状態;
+        return get情報FromDataSouce(dataSouce, 情報と状態ArrayList);
     }
 
     /**
