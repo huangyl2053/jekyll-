@@ -78,10 +78,8 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getCcdBunshoBangoInputDiv()
                 .initialize(ReportIdDBD.DBDPR12002_1_1.getReportId());
 
-        getHandler().get介護負担限度額認定(被保険者番号, 識別コード);
-
-        ArrayList<FutanGendogakuNintei> futanGendogakuNinteiList
-                = ViewStateHolder.get(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.KgHoukenFutanGendogakuNintei.リストキー, ArrayList.class);
+        ArrayList<FutanGendogakuNintei> futanGendogakuNinteiList = getHandler().get介護負担限度額認定(被保険者番号, 識別コード);
+        ViewStateHolder.put(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.KgHoukenFutanGendogakuNintei.リストキー, futanGendogakuNinteiList);
         if (!futanGendogakuNinteiList.isEmpty()) {
             set負担限度額認定エリア(div, futanGendogakuNinteiList.get(futanGendogakuNinteiList.size() - 1));
             div.setListIndex(new RString(Integer.toString(futanGendogakuNinteiList.size() - 1)));
