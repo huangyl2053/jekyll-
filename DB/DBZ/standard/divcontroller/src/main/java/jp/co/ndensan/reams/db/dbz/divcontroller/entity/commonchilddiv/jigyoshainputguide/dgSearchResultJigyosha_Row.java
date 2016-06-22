@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jigyoshainputguide;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jigyoshainputguide;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、

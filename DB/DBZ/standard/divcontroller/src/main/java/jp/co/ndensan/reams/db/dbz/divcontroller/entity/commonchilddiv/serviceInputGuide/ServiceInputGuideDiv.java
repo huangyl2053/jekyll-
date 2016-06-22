@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.serviceInputGuide;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.serviceInputGuide;
 
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
