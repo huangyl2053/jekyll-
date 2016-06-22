@@ -56,7 +56,7 @@ public interface INinteichosaIraiMapper {
      * @param parameter 検索パラメータ
      * @return 最大の認定調査依頼履歴番号
      */
-    int selectMax認定調査依頼履歴番号(NinteichosaIraiParameter parameter);
+    Integer selectMax認定調査依頼履歴番号(NinteichosaIraiParameter parameter);
 
     /**
      * モバイルデータの申請書管理番号より、最新認定調査依頼情報を取得します。
