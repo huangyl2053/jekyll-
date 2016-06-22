@@ -132,12 +132,6 @@ public class IchijihanteikekkahyoItemSettei {
         item.set今回認定申請年月日(entity.getDbt5101_ninteiShinseiYMD());
         item.set今回認定調査実施年月日(entity.getDbt5202_ninteichosaJisshiYMD());
         item.set今回認定審査年月日(entity.getDbt5502_shinsakaiKaisaiYMD());
-
-        if (HihokenshaKubunCode.第１号被保険者.getコード().equals(entity.getDbt5101_hihokenshaKubunCode())) {
-            item.set特定疾病名(RString.EMPTY);
-        } else if (HihokenshaKubunCode.第２号被保険者.getコード().equals(entity.getDbt5101_hihokenshaKubunCode())) {
-            item.set特定疾病名(TokuteiShippei.toValue(entity.getDbt5101_nigoTokuteiShippeiCode().value()).get名称());
-        }
         item.set要介護認定等基準時間(new RString(entity.getDbt5116_kijunJikan()));
         item.set要介護認定等基準時間_食事(new RString(entity.getDbt5116_kijunJikanShokuji()));
         item.set要介護認定等基準時間_排泄(new RString(entity.getDbt5116_kijunJikanHaisetsu()));
@@ -1979,6 +1973,12 @@ public class IchijihanteikekkahyoItemSettei {
                 : SuiteiKyufuKubunCode.toValue(entity.getDbt5116_suiteiKyufuKubunCode().value()).get名称());
         item.set現在のサービス利用状況(entity.getDbt5202_serviceKubunCode() == null || entity.getDbt5202_serviceKubunCode().isEmpty() ? RString.EMPTY
                 : ServiceKubunCode.toValue(entity.getDbt5202_serviceKubunCode().value()).get名称());
+        if (HihokenshaKubunCode.第１号被保険者.getコード().equals(entity.getDbt5101_hihokenshaKubunCode())) {
+            item.set特定疾病名(RString.EMPTY);
+        } else if (HihokenshaKubunCode.第２号被保険者.getコード().equals(entity.getDbt5101_hihokenshaKubunCode())) {
+            item.set特定疾病名(entity.getDbt5101_nigoTokuteiShippeiCode() == null || entity.getDbt5101_nigoTokuteiShippeiCode().isEmpty() ? RString.EMPTY
+                    : TokuteiShippei.toValue(entity.getDbt5101_nigoTokuteiShippeiCode().value()).get名称());
+        }
         return item;
     }
 }

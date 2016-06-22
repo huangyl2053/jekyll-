@@ -282,7 +282,7 @@ public class PublicationShiryoShinsakaiHandler {
             RString 委員_主治医意見書フラグ,
             RString 委員_予備判定記入表フラグ) {
         return new PublicationShiryoShinsakaiBatchParameter(
-                div.getTxtShinsakaiKaisaiNo().getValue().substring(2),
+                div.getTxtShinsakaiKaisaiNo().getValue(),
                 div.getTxtShinsakaiYoteiDate().getValue(),
                 new RString(div.getTxtShinsakaiKaishiYoteiTime().getValue().toString()),
                 div.getTxtShinsakaiKaijo().getValue(),
