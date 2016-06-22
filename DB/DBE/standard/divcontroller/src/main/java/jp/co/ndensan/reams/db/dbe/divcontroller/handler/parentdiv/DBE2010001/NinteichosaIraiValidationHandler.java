@@ -45,7 +45,7 @@ public class NinteichosaIraiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (!(!RString.isNullOrEmpty(div.getCcdTaskList().一览件数())
                 && Integer.parseInt(div.getCcdTaskList().一览件数().toString()) > 0)) {
-            validationMessages.add(new ValidationMessageControlPair(RRVMessages.データが存在しない));
+            validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
         } else if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
         }
@@ -62,7 +62,7 @@ public class NinteichosaIraiValidationHandler {
         List<dgNinteiTaskList_Row> 選択されたデータ = div.getCcdTaskList().getCheckbox();
         if (!(!RString.isNullOrEmpty(div.getCcdTaskList().一览件数())
                 && Integer.parseInt(div.getCcdTaskList().一览件数().toString()) > 0)) {
-            validationMessages.add(new ValidationMessageControlPair(RRVMessages.データが存在しない));
+            validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
         } else if (選択されたデータ == null || 選択されたデータ.isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
         } else {
@@ -85,7 +85,7 @@ public class NinteichosaIraiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (!(!RString.isNullOrEmpty(div.getCcdTaskList().一览件数())
                 && Integer.parseInt(div.getCcdTaskList().一览件数().toString()) > 0)) {
-            validationMessages.add(new ValidationMessageControlPair(RRVMessages.データが存在しない));
+            validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
         } else if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
         } else {
@@ -108,7 +108,7 @@ public class NinteichosaIraiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (!(!RString.isNullOrEmpty(div.getCcdTaskList().一览件数())
                 && Integer.parseInt(div.getCcdTaskList().一览件数().toString()) > 0)) {
-            validationMessages.add(new ValidationMessageControlPair(RRVMessages.データが存在しない));
+            validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
         } else if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
         } else {
@@ -159,7 +159,7 @@ public class NinteichosaIraiValidationHandler {
 
     private static enum RRVMessages implements IValidationMessage {
 
-        データが存在しない(UrErrorMessages.データが存在しない),
+        該当データなし(UrErrorMessages.該当データなし),
         対象行を選択(UrErrorMessages.対象行を選択),
         複数選択不可_保険者(DbeErrorMessages.複数選択不可, "保険者"),
         選択必須(DbeErrorMessages.選択必須, "未割付のデータ"),
@@ -186,7 +186,7 @@ public class NinteichosaIraiValidationHandler {
     private boolean is異なった保険者(List<dgNinteiTaskList_Row> 選択されたデータ) {
         RString 保険者 = RString.EMPTY;
         for (dgNinteiTaskList_Row row : 選択されたデータ) {
-            if (!RString.isNullOrEmpty(保険者) && 保険者.equals(row.getHokensha())) {
+            if (!RString.isNullOrEmpty(保険者) && !保険者.equals(row.getHokensha())) {
                 return true;
             }
             保険者 = row.getHokensha();

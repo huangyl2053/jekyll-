@@ -26,7 +26,7 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter" 
             resultType="int" fetchSize="500">
         SELECT
-            SUM(DbT5913ChosainJoho."chosaKanoNinzuPerMonth")
+            COALESCE(SUM(DbT5913ChosainJoho."chosaKanoNinzuPerMonth"), 0)
         FROM
            rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910NinteichosaItakusakiJoho
         INNER JOIN
@@ -80,7 +80,7 @@
             DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" = (
                     SELECT MAX("DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo")
                     FROM rgdb."DbT5201NinteichosaIraiJoho"
-                    WHERE "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = DbT5913ChosainJoho."shinseishoKanriNo")
+                    WHERE "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = DbT5201NinteichosaIraiJoho."shinseishoKanriNo")
         AND
             substr(DbT5201NinteichosaIraiJoho."ninteichosaIraiYMD", 0, 6) = TO_CHAR(CURRENT_TIMESTAMP, 'YYYYMM')
         AND
@@ -120,7 +120,7 @@
     </select>
     <select resultOrdered="true" id="selectMax認定調査依頼履歴番号" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter" 
-            resultType="java.lang.Integer" fetchSize="500">
+            resultType="int" fetchSize="500">
         SELECT
             MAX("ninteichosaIraiRirekiNo")
         FROM
