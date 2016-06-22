@@ -42,12 +42,6 @@ public class SystemKanriPanel {
         return ResponseData.of(div).setState(DBU0840011StateName.初期状態);
     }
 
-    /**
-     * コンストラクタです。
-     *
-     * @param div SystemKanriPanelDiv
-     * @return SystemKanriPanelHandler
-     */
     private SystemKanriPanelHandler getHandler(SystemKanriPanelDiv div) {
         return new SystemKanriPanelHandler(div);
     }
