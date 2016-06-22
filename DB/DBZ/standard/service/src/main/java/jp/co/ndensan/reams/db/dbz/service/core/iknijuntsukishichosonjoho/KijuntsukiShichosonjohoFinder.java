@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * 調査委託先＆調査員ガイドのクラスです。
  *
- * @reamsid_L DBE-1300-020 wanghui
+ * @reamsid_L DBZ-1300-020 wanghui
  */
 public class KijuntsukiShichosonjohoFinder {
 
