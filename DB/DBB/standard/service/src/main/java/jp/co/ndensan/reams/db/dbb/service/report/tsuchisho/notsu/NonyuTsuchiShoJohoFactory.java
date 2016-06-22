@@ -329,8 +329,12 @@ public class NonyuTsuchiShoJohoFactory {
             shunoKanri.toEntity().setChoshukenUmu(true);
             shunoKanri.toEntity().setKibetsu(期);
             ShunoKey 収納キー = new ShunoKey(shunoKanri, 収納科目, 納期月リスト.get納期月From期(期));
+            Decimal 普徴期別金額 = get金額By期(普徴期別金額リスト, 期);
+            if (普徴期別金額.compareTo(Decimal.ZERO) <= 0) {
+                continue;
+            }
             SeikyuItemMeisai 請求明細 = new SeikyuItemMeisai(
-                    収納キー, get金額By期(普徴期別金額リスト, 期), Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Collections.EMPTY_LIST, 納期情報.get納期().get納期限());
+                    収納キー, 普徴期別金額, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Collections.EMPTY_LIST, 納期情報.get納期().get納期限());
             List<SeikyuItemMeisai> 請求明細リスト = new ArrayList<>();
             請求明細リスト.add(請求明細);
             SeikyuItem 編集元情報 = new SeikyuItem(地方公共団体コード, SeikyushoType.納付書, new RYear(調定年度.toDateString()),
