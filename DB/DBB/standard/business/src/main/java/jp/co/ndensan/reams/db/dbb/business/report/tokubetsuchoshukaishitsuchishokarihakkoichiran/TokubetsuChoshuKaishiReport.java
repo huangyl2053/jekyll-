@@ -28,7 +28,7 @@ public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSou
     private final RDateTime 帳票作成日時;
     private final List<RString> 改頁項目リスト;
     private final List<RString> 出力項目リスト;
-    private final int num;
+    private final int 連番;
 
     /**
      * コンストラクタです。
@@ -40,10 +40,10 @@ public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSou
      * @param 市町村名 RString
      * @param 出力項目リスト List<RString>
      * @param 改頁項目リスト List<RString>
-     * @param num int
+     * @param 連番 int
      */
     public TokubetsuChoshuKaishiReport(EditedHonSanteiTsuchiShoKyotsu editedhonsanteitsuchishokyotsu, FlexibleYear 賦課年度,
-            RDateTime 帳票作成日時, RString 市町村コード, RString 市町村名, List<RString> 出力項目リスト, List<RString> 改頁項目リスト, int num) {
+            RDateTime 帳票作成日時, RString 市町村コード, RString 市町村名, List<RString> 出力項目リスト, List<RString> 改頁項目リスト, int 連番) {
         this.editedhonsanteitsuchishokyotsu = editedhonsanteitsuchishokyotsu;
         this.賦課年度 = 賦課年度;
         this.帳票作成日時 = 帳票作成日時;
@@ -51,7 +51,7 @@ public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSou
         this.市町村名 = 市町村名;
         this.改頁項目リスト = 改頁項目リスト;
         this.出力項目リスト = 出力項目リスト;
-        this.num = num;
+        this.連番 = 連番;
     }
 
     /**
@@ -61,7 +61,7 @@ public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSou
     @Override
     public void writeBy(ReportSourceWriter<TokubetsuChoshuKaishiSource> reportSourceWriter) {
         ITokubetsuChoshuKaishiEditor tokubetsuchoshukaishieditor = new TokubetsuChoshuKaishiEditor(
-                editedhonsanteitsuchishokyotsu, 賦課年度, 出力項目リスト, 改頁項目リスト, 帳票作成日時, 市町村コード, 市町村名, num);
+                editedhonsanteitsuchishokyotsu, 賦課年度, 出力項目リスト, 改頁項目リスト, 帳票作成日時, 市町村コード, 市町村名, 連番);
         TokubetsuChoshuKaishiBuilder builder = new TokubetsuChoshuKaishiBuilder(tokubetsuchoshukaishieditor);
         reportSourceWriter.writeLine(builder);
     }

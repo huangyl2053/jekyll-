@@ -167,7 +167,6 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
      * listlowers
      *
      * @param source KaigoHokenryogakuSource
-     * @param i int
      */
     private void listlowers(KaigoHokenryogakuSource source) {
         if (編集後本算定通知書共通情報.get編集後宛先() != null

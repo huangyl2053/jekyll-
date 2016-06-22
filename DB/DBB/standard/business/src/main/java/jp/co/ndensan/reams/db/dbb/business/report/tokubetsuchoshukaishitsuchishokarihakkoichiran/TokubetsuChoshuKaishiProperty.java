@@ -56,25 +56,25 @@ public class TokubetsuChoshuKaishiProperty
         if (outputOrder == null) {
             return;
         }
-        List<ISetSortItem> list = outputOrder.get設定項目リスト();
-        if (list == null) {
+        List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
+        if (iSetSortItemList == null) {
             return;
         }
 
-        if (INDEX_0 < list.size() && list.get(INDEX_0).is改頁項目()) {
-            改頁１ = to帳票物理名(list.get(0).get項目ID());
+        if (INDEX_0 < iSetSortItemList.size() && iSetSortItemList.get(INDEX_0).is改頁項目()) {
+            改頁１ = to帳票物理名(iSetSortItemList.get(0).get項目ID());
         }
-        if (INDEX_1 < list.size() && list.get(INDEX_1).is改頁項目()) {
-            改頁２ = to帳票物理名(list.get(INDEX_1).get項目ID());
+        if (INDEX_1 < iSetSortItemList.size() && iSetSortItemList.get(INDEX_1).is改頁項目()) {
+            改頁２ = to帳票物理名(iSetSortItemList.get(INDEX_1).get項目ID());
         }
-        if (INDEX_2 < list.size() && list.get(INDEX_2).is改頁項目()) {
-            改頁３ = to帳票物理名(list.get(INDEX_2).get項目ID());
+        if (INDEX_2 < iSetSortItemList.size() && iSetSortItemList.get(INDEX_2).is改頁項目()) {
+            改頁３ = to帳票物理名(iSetSortItemList.get(INDEX_2).get項目ID());
         }
-        if (INDEX_3 < list.size() && list.get(INDEX_3).is改頁項目()) {
-            改頁４ = to帳票物理名(list.get(INDEX_3).get項目ID());
+        if (INDEX_3 < iSetSortItemList.size() && iSetSortItemList.get(INDEX_3).is改頁項目()) {
+            改頁４ = to帳票物理名(iSetSortItemList.get(INDEX_3).get項目ID());
         }
-        if (INDEX_4 < list.size() && list.get(INDEX_4).is改頁項目()) {
-            改頁５ = to帳票物理名(list.get(INDEX_4).get項目ID());
+        if (INDEX_4 < iSetSortItemList.size() && iSetSortItemList.get(INDEX_4).is改頁項目()) {
+            改頁５ = to帳票物理名(iSetSortItemList.get(INDEX_4).get項目ID());
         }
 
         if (!改頁１.isEmpty()) {
@@ -99,6 +99,7 @@ public class TokubetsuChoshuKaishiProperty
             Breakers<TokubetsuChoshuKaishiSource> breakers,
             BreakerCatalog<TokubetsuChoshuKaishiSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
 
             pageBreakKeys) {
             @Override

@@ -244,7 +244,7 @@
         AND DbT5101."logicalDeletedFlag" = FALSE
         <if test="主治医意見書未提出者一覧作成条件フラグ">
             AND
-            DbT5301."ikenshoSakuseiIraiYMD" <![CDATA[>=]]> #{主治医意見書作成依頼年月日}
+            DbT5301."ikenshoSakuseiIraiYMD" <![CDATA[<]]> #{主治医意見書作成依頼年月日}
         </if>
         <if test="主治医意見書未提出者一覧作成条件フラグ2">
             AND
