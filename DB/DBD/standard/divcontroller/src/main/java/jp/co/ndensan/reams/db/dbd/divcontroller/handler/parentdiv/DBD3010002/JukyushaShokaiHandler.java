@@ -254,7 +254,7 @@ public class JukyushaShokaiHandler {
                 認定column = 新規認定;
             } else if (JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(受給申請事由)) {
                 認定column = 更新認定_内;
-            } else if (JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(受給申請事由)) {
+            } else if (JukyuShinseiJiyu.再申請_有効期限外.getコード().equals(受給申請事由)) {
                 認定column = 更新認定_外;
             } else if (JukyuShinseiJiyu.要介護度変更申請.getコード().equals(受給申請事由) && 要支援者認定申請区分) {
                 認定column = 新規支援認定.concat(みなし文字);
