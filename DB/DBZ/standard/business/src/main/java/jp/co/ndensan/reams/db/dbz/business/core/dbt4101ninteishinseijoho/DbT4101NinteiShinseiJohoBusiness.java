@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 要介護認定申請情報(受給)クラスです。
  *
- * @reamsid_L DBE-1300-080 yaodongsheng
+ * @reamsid_L DBZ-1300-080 yaodongsheng
  */
 public class DbT4101NinteiShinseiJohoBusiness {
 
