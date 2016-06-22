@@ -170,12 +170,12 @@ public class KariSanteiIdoFuka {
      * @return YMDHMS
      */
     public YMDHMS getTyusyutuKaishibi(FlexibleYear 調定年度) {
-        DbT7022ShoriDateKanriEntity dbt;
-        dbt = 処理日付管理Dac.select抽出開始日時(調定年度);
-        if (dbt == null || dbt.getKijunTimestamp() == null || dbt.getKijunTimestamp().isEmpty()) {
+        DbT7022ShoriDateKanriEntity 処理日付管理entity;
+        処理日付管理entity = 処理日付管理Dac.select抽出開始日時(調定年度);
+        if (処理日付管理entity == null || 処理日付管理entity.getKijunTimestamp() == null || 処理日付管理entity.getKijunTimestamp().isEmpty()) {
             return null;
         } else {
-            return dbt.getKijunTimestamp();
+            return 処理日付管理entity.getKijunTimestamp();
         }
     }
 
@@ -190,12 +190,12 @@ public class KariSanteiIdoFuka {
      */
     public ChohyoSeigyoHanyo getChohyoHanyoKey(SubGyomuCode サブ業務コード, ReportId 帳票分類ID,
             FlexibleYear 管理年度, RString 項目名) {
-        DbT7067ChohyoSeigyoHanyoEntity entity
+        DbT7067ChohyoSeigyoHanyoEntity 帳票制御汎用entity
                 = 帳票制御汎用Dac.select帳票制御汎用キー(サブ業務コード, 帳票分類ID, 管理年度, 項目名);
-        if (entity == null) {
+        if (帳票制御汎用entity == null) {
             return null;
         }
-        return new ChohyoSeigyoHanyo(entity);
+        return new ChohyoSeigyoHanyo(帳票制御汎用entity);
     }
 
     /**
