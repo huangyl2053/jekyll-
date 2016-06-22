@@ -66,8 +66,8 @@ public class KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder {
         if (kaishiYMD != null && kaishiTimestamp != null) {
             kaigoJuminhyoBatchParameter.setTaishoKaishiYMDHMS(
                     RDateTime.of(new RString(kaishiYMD.toString()), new RString(kaishiTimestamp.toString())));
-            kaigoJuminhyoBatchParameter.setTaishoShuryoYMDHMS(RDate.getNowDateTime());
         }
+        kaigoJuminhyoBatchParameter.setTaishoShuryoYMDHMS(RDate.getNowDateTime());
         return kaigoJuminhyoBatchParameter;
     }
 

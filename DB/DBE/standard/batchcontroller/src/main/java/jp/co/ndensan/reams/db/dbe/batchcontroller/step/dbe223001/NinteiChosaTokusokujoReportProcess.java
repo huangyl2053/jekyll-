@@ -70,6 +70,11 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
     private static final RString 昭 = new RString("昭");
     private static final int 一桁 = 1;
 
+    RString 文書番号;
+    NinshoshaSource ninshoshaSource;
+    Map<Integer, RString> 通知文;
+    AtenaKikan atenaKikan;
+
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe223001.IDbe223001RelateMapper.select要介護認定調査督促状ByKey");
 
@@ -89,6 +94,7 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
     @Override
     protected void beforeExecute() {
         mapper = getMapper(IDbe223001RelateMapper.class);
+        getKyotsuData();
     }
 
     @Override
@@ -119,21 +125,24 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
         outShinseishoKanriNoList.setValue(shinseishoKanriNoList);
     }
 
-    private NinteiChosaTokusokujoBodyItem setBodyItem(NinteiChosaTokusokujoRelateEntity entity) {
-
-        RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, REPORT_DBE223001, paramter.getTemp_基準日());
-        NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_DBE223001, paramter.getTemp_基準日(), reportSourceWriter);
-        Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_DBE223001, KamokuCode.EMPTY, パターン番号_1);
+    private void getKyotsuData() {
+        文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, REPORT_DBE223001, paramter.getTemp_基準日());
+        ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_DBE223001, paramter.getTemp_基準日(), reportSourceWriter);
+        通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_DBE223001, KamokuCode.EMPTY, パターン番号_1);
 
         DbT7051KoseiShichosonMasterEntity shichoson = mapper.select市町村コード(paramter.getTemp_保険者コード());
         RString temp_市町村コード = RString.EMPTY;
         if (shichoson != null) {
             temp_市町村コード = shichoson.getShichosonCode().getColumnValue();
         }
-        AtenaKikan atenaKikan = mapper.select宛名機関(paramter.toNinteiChosaTokusokujoMybatisParameter(new LasdecCode(temp_市町村コード)));
+        atenaKikan = mapper.select宛名機関(paramter.toNinteiChosaTokusokujoMybatisParameter(new LasdecCode(temp_市町村コード)));
         if (atenaKikan == null) {
             atenaKikan = new AtenaKikan();
         }
+    }
+
+    private NinteiChosaTokusokujoBodyItem setBodyItem(NinteiChosaTokusokujoRelateEntity entity) {
+
         RString 宛名郵便番号 = RString.EMPTY;
         if (atenaKikan.get宛名郵便番号() != null) {
             宛名郵便番号 = atenaKikan.get宛名郵便番号().getColumnValue();

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900041.DBU0
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900041.DBU0900041TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900041.SaiketukekaTorokuPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0900041.SaiketukekaTorokuPanelHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0900041.SaiketukekaTorokuPanelHandler.Dbu900041Keys;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0900041.SaiketukekaTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.saiketukekatoroku.SaiketukekaToroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -47,14 +48,19 @@ public class SaiketukekaTorokuPanel {
 
         ResponseData<SaiketukekaTorokuPanelDiv> responseData = new ResponseData<>();
 
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        FlexibleDate 審査請求届出日 = ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class);
+
         if (修正.toString().equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class).toString())) {
 
-            createHandlerOf(requestDiv).修正_初期化の編集();
+            RString 修正前の値 = createHandlerOf(requestDiv).修正_初期化の編集(識別コード, 被保険者番号, 審査請求届出日);
+            ViewStateHolder.put(Dbu900041Keys.修正前の値, 修正前の値);
             return ResponseData.of(requestDiv).setState(DBU0900041StateName.修正状態);
         }
         if (削除.toString().equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class).toString())) {
 
-            createHandlerOf(requestDiv).削除_初期化の編集();
+            createHandlerOf(requestDiv).削除_初期化の編集(識別コード, 被保険者番号, 審査請求届出日);
             return ResponseData.of(requestDiv).setState(DBU0900041StateName.削除状態);
         }
         responseData.data = requestDiv;
@@ -78,8 +84,11 @@ public class SaiketukekaTorokuPanel {
      * @return ResponseData<SaiketukekaTorokuPanelDiv>
      */
     public ResponseData<SaiketukekaTorokuPanelDiv> onClick_btnCancel(SaiketukekaTorokuPanelDiv div) {
+
         if ((修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))) {
-            if (getValidationHandler().修正_変更有無チェック(createHandlerOf(div).get修正後の値())) {
+            RString 修正前の値 = ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class) == null
+                    ? RString.EMPTY : ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class);
+            if (getValidationHandler().修正_変更有無チェック(createHandlerOf(div).get修正後の値(), 修正前の値)) {
                 return 変更あり_修正処理の取消(div);
             } else {
                 createHandlerOf(div).内容の破棄();
@@ -136,7 +145,9 @@ public class SaiketukekaTorokuPanel {
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
-            boolean 変更あり = getValidationHandler().修正_変更有無チェック(createHandlerOf(div).get修正後の値());
+            RString 修正前の値 = ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class) == null
+                    ? RString.EMPTY : ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class);
+            boolean 変更あり = getValidationHandler().修正_変更有無チェック(createHandlerOf(div).get修正後の値(), 修正前の値);
             if (変更あり) {
                 return 変更あり_修正処理(div);
             } else {
