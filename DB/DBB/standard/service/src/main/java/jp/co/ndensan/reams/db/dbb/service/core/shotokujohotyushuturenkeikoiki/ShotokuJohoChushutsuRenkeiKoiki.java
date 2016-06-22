@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.shotokujohotyushuturenkeikoiki;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeikoiki.ShotokuJohoBatchresultKoikiParameter;
@@ -18,7 +19,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -124,8 +124,8 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
             shichosonJohoEntity.set処理区分(kanriMasterEntity.get処理区分());
             shichosonJohoList.add(shichosonJohoEntity);
         }
-        for (ShichosonJohoEntity entity : shichosonJohoList) {
-            shichosonJohoResultList.add(new ShichosonJohoResult(entity));
+        for (ShichosonJohoEntity resultEntity : shichosonJohoList) {
+            shichosonJohoResultList.add(new ShichosonJohoResult(resultEntity));
         }
         return shichosonJohoResultList;
     }
@@ -149,18 +149,6 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
         return result;
     }
 
-    private RString getSharedFileName(RString sharedFileName, KoikiZenShichosonJoho entity) {
-        if (sharedFileName == null || sharedFileName.isEmpty()) {
-            return RString.EMPTY;
-        }
-        RStringBuilder rsb = new RStringBuilder();
-        rsb.append(sharedFileName);
-        rsb.append(SPLIT);
-        rsb.append(entity.get市町村識別ID());
-        rsb.append(SUFFIX.toString());
-        return rsb.toRString();
-    }
-
     private void 基準日時と共有フォルダ処理判定(DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity,
             ShoriHizukeKanriMaster kanriMasterEntity, KoikiZenShichosonJoho entity) {
         YMDHMS 基準日時;
@@ -171,9 +159,14 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
             kanriMasterEntity.set処理日時(基準日時);
             kanriMasterEntity.set処理区分(不可);
         } else {
-            List<UzT0885SharedFileEntryEntity> sharedFiles = SharedFile.searchSharedFile(
-                    getSharedFileName(当初所得情報ファイル名, entity));
-            if (sharedFiles.isEmpty()) {
+            RStringBuilder rsb = new RStringBuilder();
+            rsb.append(当初所得情報ファイル名);
+            rsb.append(SPLIT);
+            rsb.append(entity.get市町村識別ID());
+            rsb.append(SUFFIX.toString());
+            RString path = new RString(SharedFile.getBasePath() + File.separator + "rsb.toRString()");
+            File file = new File(path.toString());
+            if (file.exists()) {
                 kanriMasterEntity.set処理状態(データなし);
                 kanriMasterEntity.set表示用処理状態(状態なし);
             } else {
@@ -186,9 +179,14 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
     }
 
     private void 共有フォルダ処理(ShoriHizukeKanriMaster kanriMasterEntity, KoikiZenShichosonJoho entity) {
-        List<UzT0885SharedFileEntryEntity> sharedFiles = SharedFile.searchSharedFile(
-                getSharedFileName(異動所得情報ファイル名, entity));
-        if (sharedFiles.isEmpty()) {
+        RStringBuilder rsb = new RStringBuilder();
+        rsb.append(異動所得情報ファイル名);
+        rsb.append(SPLIT);
+        rsb.append(entity.get市町村識別ID());
+        rsb.append(SUFFIX.toString());
+        RString path = new RString(SharedFile.getBasePath() + File.separator + "rsb.toRString()");
+        File file = new File(path.toString());
+        if (file.exists()) {
             kanriMasterEntity.set処理状態(データなし);
             kanriMasterEntity.set表示用処理状態(状態なし);
         } else {

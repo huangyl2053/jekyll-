@@ -166,8 +166,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
     public ValidationMessageControlPairs checkFilesStates(FileData[] files) {
         ShotokuJohoChushutsuKoikiBatchParameterValidationHandler validation
                 = new ShotokuJohoChushutsuKoikiBatchParameterValidationHandler(div);
-        ValidationMessageControlPairs pairs = validation.必須チェックValidate(files);
-        return pairs;
+        return validation.必須チェックValidate(files);
     }
 
     /**
