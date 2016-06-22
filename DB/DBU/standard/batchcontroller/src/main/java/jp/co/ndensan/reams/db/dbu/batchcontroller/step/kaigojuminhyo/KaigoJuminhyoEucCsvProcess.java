@@ -19,12 +19,14 @@ import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.TashajukiJunitoJugoCSV
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyo.KaigoJuminhyoRelateEntity;
 import jp.co.ndensan.reams.db.dbu.service.core.basic.kaigojuminhyo.KaigoJyuminhyouTashajukiCSVDataSakuseiFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.RenkeiDataFormatVersion;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7035RendoPatternEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7035RendoPatternMapper;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -78,9 +80,9 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
         if (processParameter.getTaishoKaishiTimestamp() == null && processParameter.getTaishoShuryoTimestamp() == null) {
             shoriDateKanriMapper = getMapper(IDbT7022ShoriDateKanriMapper.class);
             shoriDateKanriEntity = shoriDateKanriMapper.getTaishoShuryoYMD();
-            //if (RDate.getNowDateTime().isBefore(shoriDateKanriEntity.getTaishoShuryoTimestamp().getRDateTime())) {
-            //TODO 技術点NO:31　バッチメッセージの出力　DBZErrorMessage．DBZE00006を返して、バッチ処理終了。
-            //}
+            if (RDate.getNowDateTime().isBefore(shoriDateKanriEntity.getTaishoShuryoTimestamp().getRDateTime())) {
+                throw new BatchInterruptedException(DbzErrorMessages.期間が不正_未来日付不可.getMessage().toString());
+            }
             YMDHMS taishoShuryoTimestamp = null;
             if (shoriDateKanriEntity != null) {
                 taishoShuryoTimestamp = shoriDateKanriEntity.getTaishoShuryoTimestamp();
@@ -93,9 +95,9 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
 
         rendoPatternMapper = getMapper(IDbT7035RendoPatternMapper.class);
         dbT7035RendoPatternEntity = rendoPatternMapper.getRendoPatternEntity(new FlexibleDate(RDate.getNowDate().toDateString()));
-        //if (dbT7035RendoPatternEntity == null) {
-        //TODO 技術点NO:31　バッチメッセージの出力 DbzErrorMessages.連携パターン取得エラー.getMessage();
-        //}
+        if (dbT7035RendoPatternEntity == null) {
+            throw new BatchInterruptedException(DbzErrorMessages.連携パターン取得エラー.getMessage().toString());
+        }
         rendoPatternEntity = new RendoPatternEntity();
         rendoPatternEntity.setSakiFormatVersion(dbT7035RendoPatternEntity.getSakiFormatVersion());
         rendoPatternEntity.setSakiEncodeKeitai(dbT7035RendoPatternEntity.getSakiEncodeKeitai());

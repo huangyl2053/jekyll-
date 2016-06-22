@@ -63,11 +63,11 @@
         FROM
         rgdb."DbT1001HihokenshaDaicho"
         <where>
-            <if test="taishoKaishiTimestamp != null and taishoKaishiTimestamp != ''">
+            <if test="checkKaishiFlag">
                 rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{taishoKaishiTimestamp} AND
                 rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
             </if>
-            <if test="taishoKaishiTimestamp == null and taishoKaishiTimestamp == ''">
+            <if test="checkShuryoFlag">
                 rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
             </if>
         </where>
@@ -79,11 +79,11 @@
         rgdb."DbT4001JukyushaDaicho"
         <where>
             rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" <![CDATA[<>]]> '0'
-            <if test="taishoKaishiTimestamp != null and taishoKaishiTimestamp != ''">
+            <if test="checkKaishiFlag">
                 AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{taishoKaishiTimestamp}
                 AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
             </if>
-            <if test="taishoKaishiTimestamp == null and taishoKaishiTimestamp == ''">
+            <if test="checkShuryoFlag">
                 AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
             </if>
         </where>
@@ -100,11 +100,11 @@
         FROM
         rgdb."DbT1001HihokenshaDaicho"
         <where>
-            <if test="taishoKaishiTimestamp != null and taishoKaishiTimestamp != ''">
+            <if test="checkKaishiFlag">
                 rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{taishoKaishiTimestamp} AND
                 rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
             </if>
-            <if test="taishoKaishiTimestamp == null and taishoKaishiTimestamp == ''">
+            <if test="checkShuryoFlag">
                 rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
             </if>
         </where>
@@ -116,11 +116,11 @@
         rgdb."DbT4001JukyushaDaicho"
         where
         rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" <![CDATA[<>]]> '0'
-        <if test="taishoKaishiTimestamp != null and taishoKaishiTimestamp != ''">
+        <if test="checkKaishiFlag">
             AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{taishoKaishiTimestamp}
             AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
         </if>
-        <if test="taishoKaishiTimestamp == null and taishoKaishiTimestamp == ''">
+        <if test="checkShuryoFlag">
             AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
         </if>
         ) AS dbT4001Jukyusha
