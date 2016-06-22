@@ -63,7 +63,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
-
 /**
  * 認定調査員マスタ画面のハンドラークラスです。
  *
@@ -900,9 +899,9 @@ public class NinteiChosaIraiHandler {
                     年号.startsWith(元号_明治) ? 記号 : RString.EMPTY,
                     年号.startsWith(元号_大正) ? 記号 : RString.EMPTY,
                     年号.startsWith(元号_昭和) ? 記号 : RString.EMPTY,
-                    年号.substring(INDEX_3, INDEX_5),
-                    年号.substring(INDEX_6, INDEX_8),
-                    年号.substring(INDEX_9),
+                    年号.substring(2, INDEX_4),
+                    年号.substring(INDEX_5, INDEX_7),
+                    年号.substring(INDEX_8),
                     row.getAge(),
                     row.getRenrakusakiJusho(),
                     row.getRenrakusakiYubinNo(),
@@ -912,9 +911,9 @@ public class NinteiChosaIraiHandler {
                     row.getRenrakusakiTuzukigara(),
                     RString.isNullOrEmpty(前回認定年月日) ? 記号 : RString.EMPTY,
                     !RString.isNullOrEmpty(前回認定年月日) ? 記号 : RString.EMPTY,
-                    !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(0, INDEX_3) : RString.EMPTY,
-                    !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(INDEX_3, INDEX_4) : RString.EMPTY,
-                    !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(INDEX_4, INDEX_5) : RString.EMPTY,
+                    !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(0, INDEX_4) : RString.EMPTY,
+                    !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(INDEX_4, INDEX_6) : RString.EMPTY,
+                    !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(INDEX_6, INDEX_8) : RString.EMPTY,
                     YOKAIGOJOTAIKUBUN01.equals(前回要介護状態区分コード) ? 記号 : RString.EMPTY,
                     要支援,
                     get要支援詳細(前回要介護状態区分コード),
