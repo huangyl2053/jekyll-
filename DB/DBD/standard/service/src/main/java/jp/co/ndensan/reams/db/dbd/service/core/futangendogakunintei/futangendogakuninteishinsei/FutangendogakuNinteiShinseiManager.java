@@ -13,11 +13,9 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGeng
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiIdentifier;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4036FutanGendogakuNinteiBatchTestResultsEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4036FutanGendogakuNinteiBatchTestResultsDac;
-import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4036FutanGendogakuNinteiBatchTestResultsMapper;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -29,15 +27,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class FutangendogakuNinteiShinseiManager {
 
-    private final MapperProvider mapperProvider;
-    private IDbT4036FutanGendogakuNinteiBatchTestResultsMapper dbt4036mapper;
-    private DbT4036FutanGendogakuNinteiBatchTestResultsDac dac;
+    private final DbT4036FutanGendogakuNinteiBatchTestResultsDac dac;
 
     /**
      * コンストラクタです。
      */
     public FutangendogakuNinteiShinseiManager() {
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.dac = InstanceProvider.create(DbT4036FutanGendogakuNinteiBatchTestResultsDac.class);
     }
 
