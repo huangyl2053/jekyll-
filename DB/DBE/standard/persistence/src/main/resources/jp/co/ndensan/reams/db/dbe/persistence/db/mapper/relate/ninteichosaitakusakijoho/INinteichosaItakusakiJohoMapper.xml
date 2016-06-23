@@ -96,7 +96,7 @@
     </select>
 
     <select resultOrdered="true" id="get調査員" resultMap="result_CyoSai"
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.ninteichosaitakusakijoho.NinteichosaScheduleParameter" fetchSize="500">
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakijoho.NinteichosaScheduleParameter" fetchSize="500">
         SELECT
         DbT5221."ninteiChosaItakusakiCode" AS Temp_ninteiChosaItakusakiCode,
         DbT5910."jigyoshaMeisho" AS Temp_jigyoshaMeisho,
@@ -162,7 +162,7 @@
         DbT5221."yoyakuJokyo"
     </select>
     <select resultOrdered="true" id="get事務所" resultMap="result_JiMuSyo"
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.ninteichosaitakusakijoho.JiMuSyoParameter" fetchSize="500">
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakijoho.JiMuSyoParameter" fetchSize="500">
         SELECT
         DbT5221_temp.Temp_ninteiChosaItakusakiCode,
         DbT5221_temp.Temp_jigyoshaMeisho,
@@ -260,7 +260,7 @@
         DbT5221_temp.Temp_ninteiChosaYoteiYMD
     </select>
     <select resultOrdered="true" id="get時間管理" resultMap="result_JiKanKanRi"
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.ninteichosaitakusakijoho.JiKanKanRiParameter" fetchSize="500">
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakijoho.JiKanKanRiParameter" fetchSize="500">
         SELECT
         DbT5221."ninteiChosaYoteiKaishiTime" AS ninteiChosaYoteiKaishiTime_temp,
         DbT5221."ninteiChosaYoteiShuryoTime" AS ninteiChosaYoteiShuryoTime_temp,
