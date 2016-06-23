@@ -68,8 +68,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DbT2002FukaTempTableEntity extends DbTableEntityBase<DbT2002FukaTempTableEntity> implements IDbAccessable {
 
-    public static final RString TABLE_NAME = new RString("DbT2002FukaZennendoTemp");
-
     // 「更正後」計算後情報の全項目
     @TempTableColumnOrder(1)
     private RString koseigo_insertDantaiCd;

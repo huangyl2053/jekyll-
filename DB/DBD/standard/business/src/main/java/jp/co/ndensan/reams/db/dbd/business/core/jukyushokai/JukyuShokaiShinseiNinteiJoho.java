@@ -70,7 +70,7 @@ public class JukyuShokaiShinseiNinteiJoho {
      *
      * @return 指定医フラグ
      */
-    public boolean get指定医フラグ() {
+    public boolean is指定医フラグ() {
         return 申請認定情報Entity.is指定医フラグ();
     }
 
@@ -106,7 +106,7 @@ public class JukyuShokaiShinseiNinteiJoho {
      *
      * @return 受給者台帳_旧措置者フラグ
      */
-    public boolean get受給者台帳_旧措置者フラグ() {
+    public boolean is受給者台帳_旧措置者フラグ() {
         return 申請認定情報Entity.isDbT4001JukyushaDaicho_kyuSochishaFlag();
     }
 
@@ -115,7 +115,7 @@ public class JukyuShokaiShinseiNinteiJoho {
      *
      * @return 受給者台帳_資格取得前申請区分
      */
-    public boolean get受給者台帳_資格取得前申請区分() {
+    public boolean is受給者台帳_資格取得前申請区分() {
         return 申請認定情報Entity.isDbT4001JukyushaDaicho_shikakuShutokuMaeShinseiFlag();
     }
 

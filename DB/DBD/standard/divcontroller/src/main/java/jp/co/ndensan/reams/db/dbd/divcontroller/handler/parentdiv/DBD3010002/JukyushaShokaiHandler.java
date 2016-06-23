@@ -210,7 +210,7 @@ public class JukyushaShokaiHandler {
             row.getNinteiDate().setValue(joho.get受給者台帳_認定年月日());
             row.getKaishiDate().setValue(joho.get受給者台帳_認定有効開始年月日());
             row.getShuryoDate().setValue(joho.get受給者台帳_認定有効終了年月日());
-            row.setSo(joho.get受給者台帳_旧措置フラグ() ? 措 : RString.EMPTY);
+            row.setSo(joho.is受給者台帳_旧措置フラグ() ? 措 : RString.EMPTY);
             row.setShinsakaiIken(joho.get要介護認定インタフェース情報_審査会意見());
             row.setYokaigodo(get要介護度(joho.get受給者台帳_要介護認定状態区分コード()));
 
@@ -222,7 +222,7 @@ public class JukyushaShokaiHandler {
             認定column = RString.EMPTY;
             履歴番号 = joho.get受給者台帳_履歴番号();
             受給申請事由 = joho.get受給者台帳_受給申請事由().getColumnValue();
-            要支援者認定申請区分 = joho.get受給者台帳_要支援者認定申請区分();
+            要支援者認定申請区分 = joho.is受給者台帳_要支援者認定申請区分();
             if (履歴番号_0000.equals(履歴番号)) {
                 if (JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(受給申請事由)) {
                     認定column = 更新申請_内;
@@ -238,7 +238,7 @@ public class JukyushaShokaiHandler {
                     認定column = 新規申請;
                 }
             } else {
-                if (joho.get受給者台帳_論理削除フラグ()) {
+                if (joho.is受給者台帳_論理削除フラグ()) {
                     削除事由コード = joho.get受給者台帳_削除事由コード();
                     if (削除事由コード == null || 削除事由コード.isEmpty() || SakujoJiyuCode.過誤による削除.getコード().
                             equals(SakujoJiyuCode.toValue(削除事由コード.getColumnValue()).getコード())) {
@@ -374,7 +374,7 @@ public class JukyushaShokaiHandler {
         }
         div.getTxtShujiiMeisho().setValue(申請認定情報.get主治医氏名());
 
-        if (申請認定情報.get指定医フラグ()) {
+        if (申請認定情報.is指定医フラグ()) {
             List<RString> 指定医keys = new ArrayList<>();
             指定医keys.add(KEY0);
             div.getChkShiteii().setSelectedItemsByKey(指定医keys);
@@ -382,10 +382,10 @@ public class JukyushaShokaiHandler {
         div.getTxtShujiIryokikanMeisho().setValue(申請認定情報.get医療機関名称());
 
         List<RString> 申請方法keys = new ArrayList<>();
-        if (申請認定情報.get受給者台帳_旧措置者フラグ()) {
+        if (申請認定情報.is受給者台帳_旧措置者フラグ()) {
             申請方法keys.add(KEY1);
         }
-        if (申請認定情報.get受給者台帳_資格取得前申請区分()) {
+        if (申請認定情報.is受給者台帳_資格取得前申請区分()) {
             申請方法keys.add(KEY2);
         }
         if (申請認定情報.get受給者台帳_みなし要介護区分コード() != null

@@ -93,7 +93,7 @@ public class JukyuShokaiShinseiJoho {
      *
      * @return 受給者台帳_旧措置フラグ
      */
-    public boolean get受給者台帳_旧措置フラグ() {
+    public boolean is受給者台帳_旧措置フラグ() {
         return 受給者台帳Entity.getKyuSochishaFlag();
     }
 
@@ -129,7 +129,7 @@ public class JukyuShokaiShinseiJoho {
      *
      * @return had生保受給
      */
-    public boolean get受給者台帳_要支援者認定申請区分() {
+    public boolean is受給者台帳_要支援者認定申請区分() {
         return 受給者台帳Entity.getYoshienshaNinteiShinseiFlag();
     }
 
@@ -138,7 +138,7 @@ public class JukyuShokaiShinseiJoho {
      *
      * @return 受給者台帳_論理削除フラグ
      */
-    public boolean get受給者台帳_論理削除フラグ() {
+    public boolean is受給者台帳_論理削除フラグ() {
         return 受給者台帳Entity.getLogicalDeletedFlag();
     }
 

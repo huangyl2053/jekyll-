@@ -24,8 +24,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KoseimaeJohoUpdateProcess extends BatchProcessBase<DbT2002FukaTempTableEntity> {
 
-    KoseimaeJohoUpdateProcessParameter parameter;
+    private KoseimaeJohoUpdateProcessParameter parameter;
 
+    private static final RString TABLE_NAME = new RString("DbT2002FukaZennendoTemp");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6tsuchishoikatsuhako."
             + "ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper.selectAll賦課TempTableEntity");
@@ -42,7 +43,7 @@ public class KoseimaeJohoUpdateProcess extends BatchProcessBase<DbT2002FukaTempT
 
     @Override
     protected void createWriter() {
-        batchEntityCreatedWriter = new BatchEntityCreatedTempTableWriter<>(DbT2002FukaTempTableEntity.TABLE_NAME,
+        batchEntityCreatedWriter = new BatchEntityCreatedTempTableWriter<>(TABLE_NAME,
                 DbT2002FukaTempTableEntity.class);
     }
 

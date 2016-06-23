@@ -33,6 +33,8 @@ public class SaiketukekaTorokuPanelHandler {
      * @param 識別コード 識別コード
      * @param 被保険者番号 被保険者番号
      * @param 審査請求届出日 審査請求届出日
+     *
+     * @return 修正前の値
      */
     public RString 修正_初期化の編集(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 審査請求届出日) {
 
