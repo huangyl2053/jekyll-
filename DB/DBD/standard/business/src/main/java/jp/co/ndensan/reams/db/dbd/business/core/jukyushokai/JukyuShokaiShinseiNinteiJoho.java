@@ -431,7 +431,7 @@ public class JukyuShokaiShinseiNinteiJoho {
      * @return 指定サービス種類13
      */
     public ServiceShuruiCode get指定サービス種類13() {
-        return 申請認定情報Entity.getDbT4001JukyushaDaicho_shiteiServiceShurui01();
+        return 申請認定情報Entity.getDbT4001JukyushaDaicho_shiteiServiceShurui13();
     }
 
     /**
