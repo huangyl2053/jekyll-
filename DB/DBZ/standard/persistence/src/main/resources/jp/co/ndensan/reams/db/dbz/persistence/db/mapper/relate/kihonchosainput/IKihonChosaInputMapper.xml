@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBE-3000-090 wangjie2 --> 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kihonchosainput.IKihonChosaInputMapper">
-    <resultMap id="認定調査基本情報ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.kihonchosainput.KihonChosaInputEntity" autoMapping="true">
+    <resultMap id="認定調査基本情報ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.kihonchosainput.KihonChosaInputEntity" autoMapping="true">
         <result property="認知症高齢者自立度" column="認知症高齢者自立度"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="障害高齢者自立度" column="障害高齢者自立度"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="調査連番" column="調査連番"  typeHandler="org.apache.ibatis.type.IntegerTypeHandler" />

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.entity.db.kihonchosainput;
+package jp.co.ndensan.reams.db.dbz.entity.db.relate.kihonchosainput;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
