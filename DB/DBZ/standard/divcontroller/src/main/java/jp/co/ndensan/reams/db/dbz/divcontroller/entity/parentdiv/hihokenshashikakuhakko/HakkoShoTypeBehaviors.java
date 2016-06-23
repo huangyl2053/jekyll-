@@ -51,7 +51,7 @@ final class HakkoShoTypeBehaviors {
      * @param type {@link HihokenshaShikakuHakkoDiv.発行証タイプ}
      * @return 指定のmodeに対応する振る舞いを定義したインスタンス
      */
-    static IHakkoShoTypeBehavior createBy(HihokenshaShikakuHakkoDiv.発行証タイプ type) {
+    static IHakkoShoTypeBehavior createBy(HihokenshaShikakuHakkoDiv.HakkoshoType type) {
         switch (type) {
             case 被保険者証:
                 return new HihokenshaSho();

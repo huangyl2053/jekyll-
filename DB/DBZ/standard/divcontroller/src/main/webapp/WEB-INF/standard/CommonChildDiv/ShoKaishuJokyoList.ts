@@ -13,9 +13,9 @@ module DBZ
 
             public priorities(): Array {
                 return [
-                    "グリッド表示モード",
-                    "一覧パネル高さ" ,
-					"明細表示モード"
+                    "GridHyojiMode",
+                    "IchiranPanelTakasa" ,
+					"MeisaiHyojiMode"
 					
                 ];
             }
@@ -28,21 +28,21 @@ module DBZ
                 return new PublicProperties(this.fieldName);
             }
 
-            public グリッド表示モード() {
-                return new Modes.グリッド表示モード(this.controls);
+            public GridHyojiMode() {
+                return new Modes.GridHyojiMode(this.controls);
             }
 
-            public 一覧パネル高さ() {
-                return new Modes.一覧パネル高さ(this.controls);
+            public IchiranPanelTakasa() {
+                return new Modes.IchiranPanelTakasa(this.controls);
             }
-			  public 明細表示モード() {
-                return new Modes.明細表示モード(this.controls);
+			  public MeisaiHyojiMode() {
+                return new Modes.MeisaiHyojiMode(this.controls);
             }
         }
 
         export module Modes {
 
-            export class グリッド表示モード {
+            export class GridHyojiMode {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
@@ -85,60 +85,60 @@ module DBZ
                 }
             }
 
-            export class 一覧パネル高さ {
+            export class IchiranPanelTakasa {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
                     this.controls = controls;
                 }
 
-                public サイズ200(): void {
+                public Size200(): void {
                     this.controls.dgShoKaishuJokyo().height = "200";
                 }
 
-                public サイズ250(): void {
+                public Size250(): void {
                     this.controls.dgShoKaishuJokyo().height = "250";
                 }
 
-                public サイズ300(): void {
+                public Size300(): void {
                     this.controls.dgShoKaishuJokyo().height = "300";
                 }
 
-                public サイズ350(): void {
+                public Size350(): void {
                     this.controls.dgShoKaishuJokyo().height = "350";
                 }
 
-                public サイズ400(): void {
+                public Size400(): void {
                     this.controls.dgShoKaishuJokyo().height = "400";
                 }
 
-                public サイズ450(): void {
+                public Size450(): void {
                     this.controls.dgShoKaishuJokyo().height = "450";
                 }
 
-                public サイズ500(): void {
+                public Size500(): void {
                     this.controls.dgShoKaishuJokyo().height = "500";
                 }
 
             }
-			       export class 明細表示モード {
+			       export class MeisaiHyojiMode {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
                     this.controls = controls;
                 }
 
-                public 照会(): void {
+                public Shokai(): void {
                     this.controls.ShoKaishuJokyoShosai().readOnly = true;
                     this.controls.ShoKaishuJokyoShosai().displayNone = false;
                 }
 
-                public 入力(): void {
+                public Nyuryoku(): void {
                     this.controls.ShoKaishuJokyoShosai().readOnly = false;
                     this.controls.ShoKaishuJokyoShosai().displayNone = false;
                 }
 
-                public 非表示(): void {
+                public Hihyoji(): void {
                     this.controls.ShoKaishuJokyoShosai().readOnly = true;
                     this.controls.ShoKaishuJokyoShosai().displayNone = true;
                 }

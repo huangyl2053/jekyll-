@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC13402",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "事業分振込データ媒体書き込み",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC1340002",
+     "toLayoutTitle": "事業分　高額合算　振込FD作成処理",
+     "toState": "Default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1340002",
+     "layoutTitle": "事業分　高額合算　振込FD作成処理",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
