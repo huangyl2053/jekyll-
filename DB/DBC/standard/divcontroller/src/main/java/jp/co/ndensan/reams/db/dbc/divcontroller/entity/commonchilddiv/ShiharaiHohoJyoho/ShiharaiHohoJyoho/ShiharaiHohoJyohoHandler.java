@@ -948,23 +948,23 @@ public class ShiharaiHohoJyohoHandler {
     public ShunoKamokuShubetsu get業務内区分コード() {
 
         IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString menuID = controlData.getMenuID();
+        RString uiContainerId = controlData.getUIContainerId();
 
-        if (償還払い状況照会.equals(menuID)
-                || 福祉用具購入費支給申請.equals(menuID)
-                || 住宅改修費支給申請.equals(menuID)
-                || 住宅改修費事前申請.equals(menuID)
-                || 償還払い費支給申請.equals(menuID)) {
+        if (償還払い状況照会.equals(uiContainerId)
+                || 福祉用具購入費支給申請.equals(uiContainerId)
+                || 住宅改修費支給申請.equals(uiContainerId)
+                || 住宅改修費事前申請.equals(uiContainerId)
+                || 償還払い費支給申請.equals(uiContainerId)) {
 
             return ShunoKamokuShubetsu.介護給付_償還;
 
         }
-        if (高額サービス費支給申請.equals(menuID)) {
+        if (高額サービス費支給申請.equals(uiContainerId)) {
 
             return ShunoKamokuShubetsu.介護給付_高額;
         }
-        if (高額合算支給申請.equals(menuID)
-                || 高額合算支給決定情報補正.equals(menuID)) {
+        if (高額合算支給申請.equals(uiContainerId)
+                || 高額合算支給決定情報補正.equals(uiContainerId)) {
             return ShunoKamokuShubetsu.介護給付_高額合算;
         }
         return null;
