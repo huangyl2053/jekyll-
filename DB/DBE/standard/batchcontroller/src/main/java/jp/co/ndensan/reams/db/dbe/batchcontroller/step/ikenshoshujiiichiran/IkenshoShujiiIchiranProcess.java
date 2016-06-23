@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiHateiJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiOutputPage1;
 import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiOutputSort;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.IkenshoShujiiIchiranProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ikenshoshujiiichiran.IkenshoShujiiIchiranProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoshujiiichiran.IkenshoShujiiIchiranRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ShujiiIryokikanShujiiIchiranhyoReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;

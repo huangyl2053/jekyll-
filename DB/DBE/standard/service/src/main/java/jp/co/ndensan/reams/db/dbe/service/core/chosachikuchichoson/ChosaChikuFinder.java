@@ -11,7 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosachikuchichoson.ChosaChikuChichosonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosachikuchichoson.UzT0007CodeBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikuchichoson.ChosaChikuChichosonParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosachikuchichoson.ChosaChikuChichosonParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosachikuchichoson.ChosaChikuChichosonRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosachikuchichoson.IChosaChikuChichosonMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;

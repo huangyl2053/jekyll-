@@ -4,7 +4,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshojohoprint.IIkenshoJohoPrintMapper">
 
     <select id="get主治医意見書依頼未処理者情報" resultMap="resultMap_主治医意見書依頼未処理者" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshojohoprint.IkenshoJohoPrintMapperParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshojohoprint.IkenshoJohoPrintMapperParameter" 
             fetchSize="500" resultOrdered="true">
         SELECT 
         DbT5101."shinseishoKanriNo" AS "shinseishoKanriNo", 
@@ -97,7 +97,7 @@
     </resultMap>
     
     <select id="get主治医意見書作成依頼変更者情報" resultMap="resultMap_主治医意見書作成依頼変更者"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshojohoprint.IkenshoJohoPrintMapperParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshojohoprint.IkenshoJohoPrintMapperParameter" 
             fetchSize="500" resultOrdered="true">
         SELECT	
         DbT5101."shinseishoKanriNo" AS "shinseishoKanriNo",
@@ -161,7 +161,7 @@
     </resultMap>
     
     <select id="get主治医意見書作成依頼変更者情報COUNT" resultType="Integer"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshojohoprint.IkenshoJohoPrintMapperParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshojohoprint.IkenshoJohoPrintMapperParameter" 
             fetchSize="500" resultOrdered="true">
         SELECT	
         COUNT(1)
@@ -193,7 +193,7 @@
     </select>
     
     <select id="get主治医意見書未提出者情報" resultMap="resultMap_主治医意見書未提出者" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshojohoprint.IkenshoJohoPrintMapperParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshojohoprint.IkenshoJohoPrintMapperParameter" 
             fetchSize="500" resultOrdered="true">
         SELECT		
         DbT5101."shinseishoKanriNo" AS "shinseishoKanriNo",
@@ -276,7 +276,7 @@
     </resultMap>
     
     <select id="get主治医意見書依頼済み情報" resultMap="resultMap_主治医意見書依頼済み" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshojohoprint.IkenshoJohoPrintMapperParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshojohoprint.IkenshoJohoPrintMapperParameter" 
             fetchSize="500" resultOrdered="true">
         SELECT 
         DbT5101."shinseishoKanriNo" AS "shinseishoKanriNo",
@@ -385,7 +385,7 @@
     </resultMap>
     
     <select id="get主治医意見書５項目確認情報" resultMap="resultMap_主治医意見書５項目確認" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshojohoprint.IkenshoJohoPrintMapperParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshojohoprint.IkenshoJohoPrintMapperParameter" 
             fetchSize="500" resultOrdered="true">
         SELECT 
         DbT5101."shinseishoKanriNo" AS "shinseishoKanriNo",
@@ -472,7 +472,7 @@
     </resultMap>
     
     <select id="get主治医意見書作成料請求情報" resultMap="resultMap_主治医意見書作成料請求情報" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshojohoprint.IkenshoJohoPrintMapperParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshojohoprint.IkenshoJohoPrintMapperParameter"
             fetchSize="500" resultOrdered="true">
         SELECT
         DbT5101."shinseishoKanriNo" AS "shinseishoKanriNo",

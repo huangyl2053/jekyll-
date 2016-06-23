@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.definition.processprm.kaigojyuminhyokoukiu;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KobetsuKoikiunyoParameter;
-import jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuMapperParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuMapperParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import lombok.Getter;
 import lombok.Setter;

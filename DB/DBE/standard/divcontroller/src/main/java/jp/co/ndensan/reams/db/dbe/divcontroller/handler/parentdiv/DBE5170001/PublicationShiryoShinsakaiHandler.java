@@ -80,10 +80,8 @@ public class PublicationShiryoShinsakaiHandler {
         } else if (作成条件_範囲指定.equals(作成条件)) {
             事務.add(作成条件_全件);
             事務.add(事務用出力条件_予備判定記入表);
-            事務.add(事務用出力条件_概況特記一覧);
             事務.add(作成条件_範囲指定);
             委員.add(委員用出力条件_予備判定記入表);
-            委員.add(作成条件_全件);
             委員.add(作成条件_範囲指定);
             div.getChkPrintChoyoJimu().setDisabledItemsByKey(事務);
             div.getChkPrintChohyoIin().setDisabledItemsByKey(委員);
@@ -93,14 +91,12 @@ public class PublicationShiryoShinsakaiHandler {
         } else {
             事務.add(作成条件_全件);
             事務.add(事務用出力条件_予備判定記入表);
-            事務.add(事務用出力条件_概況特記一覧);
             事務.add(作成条件_範囲指定);
             事務_審査会資料.add(作成条件_全件);
             事務_審査会資料.add(作成条件_範囲指定);
             事務_審査会資料.add(出力条件_特記事項_一次判定結果票);
             事務_審査会資料.add(出力条件_主治医意見書);
             委員.add(委員用出力条件_予備判定記入表);
-            委員.add(作成条件_全件);
             委員.add(作成条件_範囲指定);
             div.getChkPrintChoyoJimu().setDisabledItemsByKey(事務);
             div.getChkPrintChohyoShinsakaiJimu().setDisabledItemsByKey(事務_審査会資料);

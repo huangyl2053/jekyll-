@@ -12,9 +12,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaitakusakijoho.ChikuSh
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaitakusakijoho.JiKanKanRiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaitakusakijoho.JiMuSyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaitakusakijoho.NinteichosaScheduleBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosaitakusakijoho.JiKanKanRiParameter;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosaitakusakijoho.JiMuSyoParameter;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosaitakusakijoho.NinteichosaScheduleParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakijoho.JiKanKanRiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakijoho.JiMuSyoParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakijoho.NinteichosaScheduleParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaitakusakijoho.ChikuShichosonRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaitakusakijoho.JiKanKanRiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaitakusakijoho.JiMuSyoEntity;

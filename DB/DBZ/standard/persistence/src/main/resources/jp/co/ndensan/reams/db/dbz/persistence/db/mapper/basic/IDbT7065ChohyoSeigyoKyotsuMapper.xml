@@ -101,7 +101,7 @@
         rgdb."DbT7065ChohyoSeigyoKyotsu"
     </select>
     <select id="get帳票分類名称" resultMap="ResultMap_DbT7065ChohyoSeigyoKyotsuEntity"
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.chohyoseigyokyotsucontro.ChohyoSeigyoKyotsuParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.chohyoseigyokyotsucontro.ChohyoSeigyoKyotsuParameter" fetchSize="500">
       SELECT
         DbT7065."chohyoBunruiID",
         DbT7065."chohyoBunruiMeisho" 

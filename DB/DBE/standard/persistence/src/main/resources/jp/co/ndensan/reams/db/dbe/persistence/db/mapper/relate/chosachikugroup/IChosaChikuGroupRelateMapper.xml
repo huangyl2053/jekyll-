@@ -11,7 +11,7 @@
         <result property="shichosonMeisho" column="DbT7051KoseiShi_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="selectChosaChikuGroupChosaChiku" resultMap="result_ChosaChikuGroupRelateEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikugroup.ChosaChikuGroupMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosachikugroup.ChosaChikuGroupMapperParameter" fetchSize="500">
         SELECT	
             DbT5225ChosaChi."yusenNo" AS "DbT5225ChosaChi_yusenNo",	
             DbT5225ChosaChi.chosachikucode AS "DbT5225ChosaChi_chosachikucode",	
@@ -28,7 +28,7 @@
     </select>
     
     <select resultOrdered="true" id="selectChosaChikuGroup" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5225ChosaChikuGroupMapper.ResultMap_DbT5225ChosaChikuGroupEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikugroup.ChosaChikuGroupMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosachikugroup.ChosaChikuGroupMapperParameter" fetchSize="500">
         SELECT	
             DbT5225ChosaChikuGroup.*	
         FROM		
@@ -44,7 +44,7 @@
     
     <select resultOrdered="true" id="selectChosaChikuGroupCount"
             resultType="int"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikugroup.ChosaChikuGroupMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosachikugroup.ChosaChikuGroupMapperParameter" fetchSize="500">
         SELECT
             COUNT(1)
         FROM
@@ -55,7 +55,7 @@
     
     <select resultOrdered="true" id="selectShichosonMeisho"
             resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikugroup.ChosaChikuGroupMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosachikugroup.ChosaChikuGroupMapperParameter" fetchSize="500">
         SELECT 
             DbT7051KoseiShi."shichosonMeisho"
         FROM 
@@ -66,7 +66,7 @@
     
     <select resultOrdered="true" id="selectChosaChikuGroupChosaChikuCount"
             resultType="int"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikugroup.ChosaChikuGroupMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosachikugroup.ChosaChikuGroupMapperParameter" fetchSize="500">
         SELECT    
             COUNT(1)             
         FROM       
@@ -81,7 +81,7 @@
     
     <select resultOrdered="true" id="selectChosaChikuGroupChosaChikuToroukuCount"
             resultType="int"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikugroup.ChosaChikuGroupMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosachikugroup.ChosaChikuGroupMapperParameter" fetchSize="500">
         SELECT    
             COUNT(1) 
         FROM       

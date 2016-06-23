@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SeikatsuhogoRireki;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.seikatsuhogorireki.SeikaatsuhogoDataModel;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.seikatsuhogorireki.SeikaatsuhogoDataModel;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

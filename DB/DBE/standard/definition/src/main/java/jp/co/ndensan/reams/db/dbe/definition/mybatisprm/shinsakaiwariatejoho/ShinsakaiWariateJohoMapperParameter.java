@@ -1,0 +1,52 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiwariatejoho;
+
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+/**
+ * 介護認定審査会割当情報を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
+ */
+@lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class ShinsakaiWariateJohoMapperParameter {
+
+    private final RString shinsakaiKaisaiNo;
+    private final ShinseishoKanriNo shinseishoKanriNo;
+
+    /**
+     * コンストラクタです。
+     *
+     * @param shinsakaiKaisaiNo RString
+     * @param shinseishoKanriNo ShinseishoKanriNo
+     * @throws NullPointerException 引数のいずれかが{@code null}の場合
+     */
+    private ShinsakaiWariateJohoMapperParameter(
+            RString shinsakaiKaisaiNo,
+            ShinseishoKanriNo shinseishoKanriNo) {
+
+        this.shinsakaiKaisaiNo = requireNonNull(shinsakaiKaisaiNo, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員コード"));
+        this.shinseishoKanriNo = requireNonNull(shinseishoKanriNo, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+    }
+
+    /**
+     * キー検索用のパラメータを生成します。
+     *
+     * @param kaisaiNo RString
+     * @param kanriNo ShinseishoKanriNo
+     * @return 身体手帳検索パラメータ
+     */
+    public static ShinsakaiWariateJohoMapperParameter createSelectByKeyParam(
+            RString kaisaiNo,
+            ShinseishoKanriNo kanriNo) {
+        return new ShinsakaiWariateJohoMapperParameter(kaisaiNo, kanriNo);
+    }
+}

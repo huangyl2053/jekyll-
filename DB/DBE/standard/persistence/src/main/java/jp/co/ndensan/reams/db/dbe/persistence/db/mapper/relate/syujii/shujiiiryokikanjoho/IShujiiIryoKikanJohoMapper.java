@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.syujii.shujiiiryokikanjoho;
 
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoRelateEntity;
 
 /**

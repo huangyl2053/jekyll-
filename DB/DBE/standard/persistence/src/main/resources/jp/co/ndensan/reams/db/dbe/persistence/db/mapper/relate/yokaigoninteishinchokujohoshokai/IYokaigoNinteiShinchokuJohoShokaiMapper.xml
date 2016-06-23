@@ -44,7 +44,7 @@
     
    <select resultOrdered="true" id="get申請者一覧内容"
            resultMap="resultMap_YokaigoNinteiShinchokuJohoShokaiRelateEntity" 
-           parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.yokaigoninteishinchokujohoshokai.YokaigoNinteiParamter" fetchSize="500">
+           parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.YokaigoNinteiParamter" fetchSize="500">
         SELECT                
             DbT7051."shichosonMeisho",               
             DbT5101."hihokenshaNo",               

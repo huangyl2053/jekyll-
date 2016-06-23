@@ -36,23 +36,26 @@ public class TainoKeikokuMainHandler {
      * @param 滞納判定結果 滞納判定結果
      */
     public void 滞納警告情報の表示(TainoHanteiResult 滞納判定結果) {
-        div.getTainoKeikoku().getTblTainoKeikoku().getTblShiharaiHoho().getLblShiharaiHohoTainohanteiKijunbiLabel().setText(
-                滞納判定結果.get滞納判定基準日().wareki().toDateString());
+        div.getTainoKeikoku().getTblTainoKeikoku().getTblShiharaiHoho().getLblShiharaiHohoTainohanteiKijunbi().setText(
+                滞納判定結果.get滞納判定基準日() == null ? RString.EMPTY : 滞納判定結果.get滞納判定基準日().wareki().toDateString());
         div.getTainoKeikoku().getTblTainoKeikoku().getTblShiharaiHoho().getLblShiharaiHohoSaikonoTainoNokigen().setText(
-                滞納判定結果.get最古滞納納期限().wareki().toDateString());
+                滞納判定結果.get最古滞納納期限() == null ? RString.EMPTY : 滞納判定結果.get最古滞納納期限().wareki().toDateString());
         div.getTainoKeikoku().getTblTainoKeikoku().getTblShiharaiHoho().getLblShiharaiHohoTainohanteiKikan().setText(
-                new RStringBuilder(滞納判定結果.get滞納判定期間().get年数())
+                滞納判定結果.get滞納判定期間() == null ? RString.EMPTY : new RStringBuilder(滞納判定結果.get滞納判定期間().get年数())
                 .append("年-").append(滞納判定結果.get滞納判定期間().get月数Without年数()).append("ヶ月以上").toRString());
         div.getTainoKeikoku().getTblTainoKeikoku().getTblShiharaiHoho().getLblShiharaiHohoTainoKikan().setText(
-                new RStringBuilder(滞納判定結果.get滞納期間().getYear())
+                滞納判定結果.get滞納期間() == null ? RString.EMPTY : new RStringBuilder(滞納判定結果.get滞納期間().getYear())
                 .append("年").append(滞納判定結果.get滞納期間().getMonth()).append("ヶ月").toRString());
         div.getTainoKeikoku().getTblKyufugakuGengaku().getLblGengakuTainohanteiKijunbi().setText(
-                滞納判定結果.get滞納判定基準日().wareki().toDateString());
+                滞納判定結果.get滞納判定基準日() == null ? RString.EMPTY : 滞納判定結果.get滞納判定基準日().wareki().toDateString());
         div.getTainoKeikoku().getTblKyufugakuGengaku2().getLblGengakuChosukenShometsu().setText(
-                new RString(滞納判定結果.get給付額減額().get徴収権消滅期間().roundDownTo(小数点以下の有効桁数).toString()));
+                (滞納判定結果.get給付額減額() == null || 滞納判定結果.get給付額減額().get徴収権消滅期間() == null) ? RString.EMPTY
+                : new RString(滞納判定結果.get給付額減額().get徴収権消滅期間().roundDownTo(小数点以下の有効桁数).toString()));
         div.getTainoKeikoku().getTblKyufugakuGengaku2().getLblGengakuNofuzumi().setText(
-                new RString(滞納判定結果.get給付額減額().get納付済期間().roundDownTo(小数点以下の有効桁数).toString()));
+                (滞納判定結果.get給付額減額() == null || 滞納判定結果.get給付額減額().get納付済期間() == null) ? RString.EMPTY
+                : new RString(滞納判定結果.get給付額減額().get納付済期間().roundDownTo(小数点以下の有効桁数).toString()));
         div.getTainoKeikoku().getTblKyufugakuGengaku2().getLblGengakuNofukgakuGengaku().setText(
-                new RStringBuilder(滞納判定結果.get給付額減額().get給付額減額期間()).append("ヶ月").toRString());
+                滞納判定結果.get給付額減額() == null ? RString.EMPTY
+                : new RStringBuilder(滞納判定結果.get給付額減額().get給付額減額期間()).append("ヶ月").toRString());
     }
 }

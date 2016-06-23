@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3053ShokanShukeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanshikyuketteiin.IShokanShikyuKetteiInMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokenshaatenafinder.HihokenshaAtenaResult;
-import jp.co.ndensan.reams.db.dbz.service.HihokenshaAtenaFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshaatena.HihokenshaAtenaFinder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;

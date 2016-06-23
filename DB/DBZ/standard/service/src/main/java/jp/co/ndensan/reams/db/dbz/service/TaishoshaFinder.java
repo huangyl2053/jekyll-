@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.FukaTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.TaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.relate.TaishoshaRelateDac;
-import jp.co.ndensan.reams.db.dbz.service.util.SearchResult;
+import jp.co.ndensan.reams.db.dbz.service.core.util.SearchResult;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.KojinSearchEntityHolder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;

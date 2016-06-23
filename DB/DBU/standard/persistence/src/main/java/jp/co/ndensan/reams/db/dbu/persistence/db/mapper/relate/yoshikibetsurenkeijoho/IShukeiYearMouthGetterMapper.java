@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.yoshikibetsurenkeijoho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 
 /**

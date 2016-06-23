@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.service.core.roujinhokenjukyushadaichokanri;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbu.definition.roujinhokenjukyushadaichokanri.RoujinHokenJukyushaDaichoKanriParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.roujinhokenjukyushadaichokanri.RoujinHokenJukyushaDaichoKanriParameter;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.roujinhokenjukyushadaichokanrimapper.IRoujinHokenJukyushaDaichoKanriMapper;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RojinHokenJukyushaJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7005RojinHokenJukyushaJohoEntity;

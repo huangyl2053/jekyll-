@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.tyousai.ninteichosaitakusakijoho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoRelateEntity;
 
 /**

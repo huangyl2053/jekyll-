@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.service.core.benmeitoroku;
 
 import jp.co.ndensan.reams.db.dbu.business.core.benmeitoroku.BenmeiTorokuMeisaiJoho;
-import jp.co.ndensan.reams.db.dbu.definition.mybatis.param.benmeitoroku.BenmeiTorokuMeisaiJohoParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.benmeitoroku.BenmeiTorokuMeisaiJohoParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.benmeitoroku.BenmeiTorokuMeisaiJohoEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.benmeitoroku.IBenmeiTorokuMeisaiJohoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;

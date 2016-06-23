@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.servicecode.SabisuKodoParameter;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.servicecode.SabisuKodoParameter;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 
 /**

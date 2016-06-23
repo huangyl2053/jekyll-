@@ -67,7 +67,7 @@
         <result property="zaitakuShisetsuKubun" column="zaitakuShisetsuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="select認定調査依頼情報" resultMap="resultMap_select認定調査依頼情報" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
           SELECT 
                   A."hihokenshaNo"
                  ,A."hihokenshaName"
@@ -120,7 +120,7 @@
             ORDER BY A."shinseishoKanriNo"
     </select>
      <select resultOrdered="true" id="select更新用認定調査依頼情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
            SELECT 
                 <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.allColumns_DbT5201NinteichosaIraiJoho" />
             FROM
@@ -174,7 +174,7 @@
                 AND "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = temp."ninteichosaIraiRirekiNo"
     </select>
     <select resultOrdered="true" id="select主治医意見書依頼情報" resultMap="resultMap_select認定調査依頼情報"
-              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
          SELECT 
                 A."hihokenshaNo"
                ,A."hihokenshaName"
@@ -227,7 +227,7 @@
          ORDER BY A."shinseishoKanriNo"
     </select>
      <select resultOrdered="true" id="select更新用主治医意見書依頼情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"
-              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
          SELECT 
                <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.allColumns_DbT5301ShujiiIkenshoIraiJoho" />
          FROM
@@ -281,7 +281,7 @@
                AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" = temp."ikenshoIraiRirekiNo" 
     </select>
      <select resultOrdered="true" id="select認定調査依頼書" resultMap="resultMap_select認定調査依頼情報"
-              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
              SELECT 
                  DISTINCT
                   A."hihokenshaNo"
@@ -338,7 +338,7 @@
              AND A."logicalDeletedFlag" = FALSE
      </select>
     <select resultOrdered="true" id="select認定調査依頼一覧表" resultMap="resultMap_select認定調査依頼情報"
-               parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
+               parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
            SELECT 
                   A."hihokenshaNo"
                  ,A."ninteiShinseiYMD"
@@ -396,7 +396,7 @@
                   A."shinseishoKanriNo"
       </select>
       <select resultOrdered="true" id="select認定調査票_概況調査" resultMap="resultMap_select認定調査依頼情報"
-              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
             SELECT 
                   DISTINCT
                   A."shinseishoKanriNo"
@@ -470,7 +470,7 @@
       </select>
       
        <select resultOrdered="true" id="select認定調査票差異チェック票" resultMap="resultMap_select認定調査依頼情報"
-              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
             SELECT 
                   DISTINCT
                   A."hihokenshaNo"
@@ -527,7 +527,7 @@
        </select>
        
       <select resultOrdered="true" id="select意見書作成依頼書" resultMap="resultMap_select認定調査依頼情報"
-                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
            SELECT 
                 DISTINCT
                 A."shoKisaiHokenshaNo"
@@ -584,7 +584,7 @@
         </select>
         
          <select resultOrdered="true" id="select意見書作成依頼一覧表" resultMap="resultMap_select認定調査依頼情報"
-                 parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+                 parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
                 SELECT 
                     A."hihokenshaNo"
                    ,A."hihokenshaKana"
@@ -640,7 +640,7 @@
          </select>
          
         <select resultOrdered="true" id="select主治医意見書記入用紙" resultMap="resultMap_select認定調査依頼情報"
-                   parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+                   parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
                     SELECT 
                       DISTINCT
                       A."shinseishoKanriNo"
@@ -685,7 +685,7 @@
          </select>
          
             <select resultOrdered="true" id="select主治医意見書作成料請求書" resultMap="resultMap_select認定調査依頼情報"
-                   parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+                   parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
                SELECT 
                     DISTINCT
                     A."shinseishoKanriNo"
@@ -735,7 +735,7 @@
          </select>
          
           <select resultOrdered="true" id="select介護保険診断命令書" resultMap="resultMap_select認定調査依頼情報"
-                  parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+                  parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
                 SELECT 
                        DISTINCT
                         A."hihokenshaNo"

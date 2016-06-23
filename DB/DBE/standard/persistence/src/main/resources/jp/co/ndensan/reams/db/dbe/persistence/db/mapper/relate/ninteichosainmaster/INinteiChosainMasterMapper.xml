@@ -6,7 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosainmaster.INinteiChosainMasterMapper">
       <select resultOrdered="true" id="selectNinteichosaItakusakiJoho"  
               resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
-              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterSearchParameter">
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainmaster.NinteiChosainMasterSearchParameter">
       SELECT
           "DbT5910NinteichosaItakusakiJoho"."jigyoshaMeisho"
        FROM
@@ -18,7 +18,7 @@
      </select>
      <select resultOrdered="true" id="selectNinteichosaIraiJohoCount"  
               resultType="int"
-              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterSearchParameter">
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainmaster.NinteiChosainMasterSearchParameter">
         SELECT        
             COUNT(0)
         FROM        
@@ -39,7 +39,7 @@
     </select>
     <select resultOrdered="true" id="selectNinteiShinseiJohoCount"  
               resultType="int"
-              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterSearchParameter">
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainmaster.NinteiChosainMasterSearchParameter">
         SELECT        
             COUNT(0)    
         FROM        
@@ -56,7 +56,7 @@
     </select>
     <select resultOrdered="true" id="selectChosainJohoCount"  
             resultType="int"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterSearchParameter">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainmaster.NinteiChosainMasterSearchParameter">
         SELECT        
              COUNT(0)    
         FROM        
@@ -68,7 +68,7 @@
         AND "DbT5913ChosainJoho"."ninteiChosainCode" = #{調査員コード}
     </select>
     <select resultOrdered="true" id="selectChosainJohoIchiranList"  
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterMapperParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainmaster.NinteiChosainMasterMapperParameter" 
             resultMap="resultMap_NinteiChosainMasterEntity" fetchSize="500">
         SELECT
         DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode",
@@ -192,7 +192,7 @@
        
     </select>
      <select resultOrdered="true" id="selectChosainJohoList"  
-        parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterMapperParameter" 
+        parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainmaster.NinteiChosainMasterMapperParameter" 
         resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.ResultMap_DbT5913ChosainJohoEntity"  fetchSize="500" >
         SELECT
         DbT5913ChosainJoho.*

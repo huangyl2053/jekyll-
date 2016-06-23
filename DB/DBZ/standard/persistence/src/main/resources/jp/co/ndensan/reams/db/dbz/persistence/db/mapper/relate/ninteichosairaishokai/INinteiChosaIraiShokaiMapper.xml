@@ -20,7 +20,7 @@
     </resultMap>
 
     <select resultOrdered="true" id="get認定調査情報" resultMap="result_NinteiRelateEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.param.ninteichosairaishokai.NinteiChosaIraiShokaiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ninteichosairaishokai.NinteiChosaIraiShokaiParameter" fetchSize="500">
       SELECT
            dbT5101."ninteiShinseiYMD" AS "ninteiShinseiYMD",
            dbT5101."ninteiShinseiShinseijiKubunCode" AS "ninteiShinseiShinseijiKubunCode",

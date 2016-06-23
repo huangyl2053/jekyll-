@@ -79,8 +79,6 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
         source.listkijunTime_8 = item.get要介護認定等基準時間_医療関連();
         source.listkijunTime_9 = item.get要介護認定等基準時間_認知症加算();
         source.keikokuNo = item.get警告コード();
-        source.ｌistSeikatsujiritsu_1 = item.get障害高齢者自立度();
-        source.ｌistSeikatsujiritsu_2 = item.get認知症高齢者自立度();
         source.chosaNinchishoJiritsudo = item.get認定調査結果認知症高齢者自立度();
         source.ikenNinchiJiritsudo = item.get意見書認知症高齢者自立度();
         source.manzensei = item.get認知症自立度Ⅱ以上の蓋然性();

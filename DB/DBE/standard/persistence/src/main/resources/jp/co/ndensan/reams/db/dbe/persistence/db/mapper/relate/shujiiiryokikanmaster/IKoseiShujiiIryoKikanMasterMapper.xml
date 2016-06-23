@@ -7,7 +7,7 @@
 
     <select resultOrdered="true" id="selectShujiiIryoKikanJohoCount"
              resultType="int"
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterSearchParameter">
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterSearchParameter">
         SELECT
         COUNT(0)
         FROM
@@ -20,7 +20,7 @@
 
     <select resultOrdered="true" id="selectShujiiJohoCount"
             resultType="int"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterSearchParameter">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterSearchParameter">
         SELECT
         COUNT(0)
         FROM
@@ -32,7 +32,7 @@
     </select>
 
     <select resultOrdered="true" id="selectShujiKikanJohoIchiranList"
-           parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter"
+           parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter"
            resultMap="resultMap_KoseiShujiiIryoKikanMasterEntity"            fetchSize="500">
         SELECT
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shichosonCode" AS "dbT5911ShujiiIryoKikanJoho_shichosonCode",
@@ -133,7 +133,7 @@
     </resultMap>
 
     <select resultOrdered="true" id="selectShujiiIryoKikanJohoList"
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter"
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter"
              resultMap="ResultMap_DbT5911ShujiiIryoKikanJohoEntity" fetchSize="500">
         SELECT
         DbT5911ShujiiIryoKikanJoho.*

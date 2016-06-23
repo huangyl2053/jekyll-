@@ -10,7 +10,7 @@
 </resultMap>
     <select resultOrdered="true" id = "getSelect"
             resultMap = "NinteiShinseishaKihonInfoRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.param.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoParameter" fetchSize="500">
         SELECT
             A."shinseishoKanriNo",
             A."shoKisaiHokenshaNo",

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.chohyoseigyokyotsucontro.ChohyoSeigyoKyotsuParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.chohyoseigyokyotsucontro.ChohyoSeigyoKyotsuParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 
 /**

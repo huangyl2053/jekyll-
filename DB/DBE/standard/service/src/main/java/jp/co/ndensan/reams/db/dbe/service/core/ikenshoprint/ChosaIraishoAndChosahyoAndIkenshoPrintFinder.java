@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.ikenshoprint;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoprint.IChosaIraishoAndChosahyoAndIkenshoPrintMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;

@@ -8,7 +8,7 @@
 
     <select resultOrdered="true" id="getShinsakaiKaisaiYoteiJohoEntity"
             resultMap="resultMap_ShinsakaiKaisaiYoteiJohoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter" fetchSize="500">
         SELECT
         dbT5501ShinsakaiKaisaiYoteiJoho.*,
         dbT5512ShinsakaiOnseiJoho.*,
@@ -84,7 +84,7 @@
     </select>
 <!--    <select resultOrdered="true" id="getShinsakaiKaisaiYoteiJohoEntity"
             resultMap="resultMap_ShinsakaiKaisaiYoteiJohoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter" fetchSize="500">
 
         SELECT
         DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode"
@@ -114,7 +114,7 @@
     </select>-->
     <!--    <select resultOrdered="true" id="getShinsakaiKaisaiYoteiJohoEntity"
             resultMap="resultMap_ShinsakaiKaisaiYoteiJohoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter" fetchSize="500">
         SELECT
         "第" + DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" + "回審査会" AS 審査会名称
         ,DbT5591GogitaiJoho."gogitaiNo"
@@ -201,7 +201,7 @@
     </resultMap>
     <select resultOrdered="true" id="get合議体情報"
             resultMap="resultMap_GogitaiJoho"
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter" fetchSize="500">
         SELECT
         "shinsakaiKaisaiBashoCode" AS "shinsakaiKaisaiBashoCode"
         ,"shinsakaiYoteiTeiin" AS "shinsakaiYoteiTeiin"

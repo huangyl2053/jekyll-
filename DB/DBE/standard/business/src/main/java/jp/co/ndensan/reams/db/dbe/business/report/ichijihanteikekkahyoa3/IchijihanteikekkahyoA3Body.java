@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IchijihanteikekkahyoA3Body {
 
+    private RString listSeikatsujiritsu_1;
+    private RString listSeikatsujiritsu_2;
     private RString kaigo_listKaigokyufu_1;
     private RString kaigo_listKaigokyufu1_1;
     private RString yobo_listYobokyufu_1;

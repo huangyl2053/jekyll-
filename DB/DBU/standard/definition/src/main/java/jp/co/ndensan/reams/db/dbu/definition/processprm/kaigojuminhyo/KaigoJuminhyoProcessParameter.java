@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.processprm.kaigojuminhyo;
 
-import jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigojuminhyo.KaigoJuminhyoMapperParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigojuminhyo.KaigoJuminhyoMapperParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import lombok.Getter;
