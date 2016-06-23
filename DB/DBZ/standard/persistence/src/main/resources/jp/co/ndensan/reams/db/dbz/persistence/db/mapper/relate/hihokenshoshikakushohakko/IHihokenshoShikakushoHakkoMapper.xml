@@ -4,7 +4,7 @@
 <!-- @reamsid_L DBA-1090-021 huangh -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokenshoshikakushohakko.IHihokenshoShikakushoHakkoMapper">
 
-    <resultMap id="被保険者証資格証発行情報取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoEntity" autoMapping="true">
+    <resultMap id="被保険者証資格証発行情報取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoEntity" autoMapping="true">
         <result property="要介護認定状態区分コード" column="TB1_yokaigoJotaiKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="受給申請年月日" column="TB1_jukyuShinseiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="認定年月日" column="TB1_ninteiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
@@ -16,13 +16,13 @@
         <result property="介護認定審査会意見" column="C_shinsakaiIken"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
-    <resultMap id="限度額データ取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.ServiceTypeListEntity" autoMapping="true">
+    <resultMap id="限度額データ取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokenshoshikakushohakko.ServiceTypeListEntity" autoMapping="true">
         <result property="限度額" column="A_shikyuGendoTaniSu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DemicalTypeHandler" />
         <result property="サービス種類コード" column="A_serviceShuruiCode"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler" />
         <result property="サービス種類名称" column="B_serviceShuruiMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
-    <resultMap id="居宅給付計画届出情報取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.KyotakuKeikakuTodokedeEntity" autoMapping="true">
+    <resultMap id="居宅給付計画届出情報取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokenshoshikakushohakko.KyotakuKeikakuTodokedeEntity" autoMapping="true">
         <result property="被保険者番号" column="hihokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
         <result property="対象年月" column="taishoYM"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
         <result property="履歴番号" column="rirekiNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
