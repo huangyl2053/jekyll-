@@ -22,7 +22,7 @@
     </resultMap>
 
     <select resultOrdered="true" id="getJigyoHokokuNenpoList" resultMap="getJigyoHokokuNenpoListResultMap"
-            parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.JigyoHokokuNenpoParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpo.JigyoHokokuNenpoParameter" fetchSize="500">
         SELECT
         DISTINCT
         jigyoHokokuTokeiData."hokokuYSeireki" AS "hokokuYSeireki",
