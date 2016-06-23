@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.ninteirirekiichiran.NinteiRireki
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ninteirirekiichiran.NinteiRirekiIchiranParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JukyuNinteirirekiInfo.JukyuNinteirirekiInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JukyuNinteirirekiInfo.JukyuNinteirirekiInfoHandler;
-import jp.co.ndensan.reams.db.dbz.service.core.NinteiRirekiIchiran;
+import jp.co.ndensan.reams.db.dbz.service.core.ninteirirekiichiran.NinteiRirekiIchiran;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**

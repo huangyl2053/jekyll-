@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyumin
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiDateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiEucCSVDateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyo.KaigoJuminhyoRelateEntity;
-import jp.co.ndensan.reams.db.dbu.service.core.basic.kaigojyuminhyoutashajuki.KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder;
+import jp.co.ndensan.reams.db.dbu.service.core.kaigojyuminhyoutashajuki.KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigojuminhyobatchparameter.KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuParameter;

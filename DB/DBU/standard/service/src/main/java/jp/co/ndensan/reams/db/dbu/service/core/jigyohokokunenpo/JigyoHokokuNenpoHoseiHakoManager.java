@@ -26,8 +26,8 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecuri
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho.GappeiCityJohoBFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -95,8 +95,7 @@ public class JigyoHokokuNenpoHoseiHakoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link JigyoHokokuNenpoHoseiHakoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link JigyoHokokuNenpoHoseiHakoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link JigyoHokokuNenpoHoseiHakoManager}のインスタンス
      */
     public static JigyoHokokuNenpoHoseiHakoManager createInstance() {
         return InstanceProvider.create(JigyoHokokuNenpoHoseiHakoManager.class);

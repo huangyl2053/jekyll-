@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.RendoPatternEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.TashajukiHachiCSVDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.TashajukiJunitoJugoCSVDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyo.KaigoJuminhyoRelateEntity;
-import jp.co.ndensan.reams.db.dbu.service.core.basic.kaigojuminhyo.KaigoJyuminhyouTashajukiCSVDataSakuseiFinder;
+import jp.co.ndensan.reams.db.dbu.service.core.kaigojuminhyo.KaigoJyuminhyouTashajukiCSVDataSakuseiFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.RenkeiDataFormatVersion;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;

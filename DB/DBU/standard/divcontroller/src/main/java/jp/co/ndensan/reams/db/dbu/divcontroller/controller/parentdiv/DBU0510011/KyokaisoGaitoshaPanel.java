@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.dgKy
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.dghokenryoNofu_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0510011.KyokaisoGaitoshaPanelHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0510011.KyokaisoGaitoshaPanelValidationHandler;
-import jp.co.ndensan.reams.db.dbu.service.kyokaisogaitosha.KyokaisoGaitoshaManager;
+import jp.co.ndensan.reams.db.dbu.service.core.kyokaisogaitosha.KyokaisoGaitoshaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoGaitosha;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoGaitoshaIdentifier;

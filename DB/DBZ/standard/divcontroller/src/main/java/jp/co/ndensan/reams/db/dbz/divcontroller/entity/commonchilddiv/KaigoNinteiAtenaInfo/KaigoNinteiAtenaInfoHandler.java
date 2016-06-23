@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.hokensha.HdnShoriTypeStatus;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigoninteiatenainfo.KaigoNinteiAtenaInfoParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv.AtenaType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv.ShoriType;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.kaigoninteiatenainfo.KaigoNinteiAtenaInfoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigoninteiatenainfo.KaigoNinteiAtenaInfoManager;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
