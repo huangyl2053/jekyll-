@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokusojouho.ShikakuTokusoJouho;
-import jp.co.ndensan.reams.db.dbz.definition.shikakutokusojouho.ShikakuTokusoJouhoParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakutokusojouho.ShikakuTokusoJouhoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakutokusojouho.ShikakuTokusouJouhoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shikakutokusojouho.IShikakuTokusouJouhoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;

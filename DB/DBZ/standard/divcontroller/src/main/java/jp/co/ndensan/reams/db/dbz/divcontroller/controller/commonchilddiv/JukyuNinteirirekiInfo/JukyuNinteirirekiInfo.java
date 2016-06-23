@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.Jukyu
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteirirekiichiran.NinteiRirekiIchiranBusiness;
-import jp.co.ndensan.reams.db.dbz.definition.param.ninteirirekiichiran.NinteiRirekiIchiranParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ninteirirekiichiran.NinteiRirekiIchiranParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JukyuNinteirirekiInfo.JukyuNinteirirekiInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JukyuNinteirirekiInfo.JukyuNinteirirekiInfoHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.NinteiRirekiIchiran;

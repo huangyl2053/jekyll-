@@ -28,7 +28,7 @@
         <result property="shujiiJohojokyoFlag" column="shujiiJohojokyoFlag" />
     </resultMap> 
     <select resultOrdered="true" id="get主治医医療機関_主治医情報" resultMap="resultMap_主治医医療機関_主治医情報" 
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter" 
             fetchSize="500">
         SELECT
             DbT5911."shichosonCode" AS "shichosonCode"
@@ -117,7 +117,7 @@
     </select>
     
     <select resultOrdered="true" id="get子主治医医療機関_子主治医情報" resultMap="resultMap_主治医医療機関_主治医情報" 
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter" 
             fetchSize="500">
         SELECT
             DbT4911."shichosonCode" AS "shichosonCode"

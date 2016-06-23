@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteirirekiichiran.NinteiRirekiIchiranBusiness;
-import jp.co.ndensan.reams.db.dbz.definition.param.ninteirirekiichiran.NinteiRirekiIchiranParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ninteirirekiichiran.NinteiRirekiIchiranParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ninteirirekiichiran.INinteiRirekiIchiranMapper;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;

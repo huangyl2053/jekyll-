@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosaitakusakiandchosainguide;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.param.ikninteichosaitakusakijoho.ChosaItakusakiAndChosainGuideParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikninteichosaitakusakijoho.ChosaItakusakiAndChosainGuideParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.iknijuntsukishichosonjoho.IKijuntsukiShichosonjohoRelateEntity;
 
 /**

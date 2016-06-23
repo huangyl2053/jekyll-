@@ -11,7 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBZCodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShutokuJiyuDDL;
-import jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakutokuso.ShikakuTokusoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakutoku.shikakutokuso.ServiceShikakuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shikakutokuso.IShikakuTokusoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;

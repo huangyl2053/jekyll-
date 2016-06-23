@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishicho
 import jp.co.ndensan.reams.db.dbz.business.core.sikakujiyushutoku.SikakuJiyuShutoku;
 import jp.co.ndensan.reams.db.dbz.business.core.sikakukanrenido.SikakuKanrenIdo;
 import jp.co.ndensan.reams.db.dbz.business.core.sikakukanrenidoa.HenkoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.param.sikakukanrenido.SikakuKanrenIdoParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.sikakukanrenido.SikakuKanrenIdoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.SikakuKanrenIdoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakujiyushutoku.ShikakuJiyuShutoku;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.sikakukanrenido.ISikakuKanrenIdoMapper;

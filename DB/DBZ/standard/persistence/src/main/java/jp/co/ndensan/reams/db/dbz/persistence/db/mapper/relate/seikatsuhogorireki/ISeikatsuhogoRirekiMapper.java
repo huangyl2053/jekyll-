@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.seikatsuhogorireki;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.seikatsuhogorireki.SeikatsuhogoParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.seikatsuhogorireki.SeikatsuhogoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.seikatsuhogorireki.SeikatsuhogoRelateEntity;
 
 /**

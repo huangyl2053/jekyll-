@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.shisetsunyushoinfo.ShisetSunyushoInfoBusiness;
-import jp.co.ndensan.reams.db.dbz.definition.param.shisetsunyushoinfo.ShisetSunyushoInfoParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shisetsunyushoinfo.ShisetSunyushoInfoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shisetsunyushoinfo.ShisetSunyushoInfoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shisetsunyushoinfo.IShisetSunyushoInfoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;

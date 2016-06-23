@@ -55,7 +55,7 @@ and open the template in the editor.
     </resultMap>
     
     <select resultOrdered="true" id="getShinsakaijyouhou" 
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.param.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter" 
             resultMap="WariateIinAndIinJohoEntity">
         SELECT
             A."kaigoninteiShinsakaiGichoKubunCode" AS kaigoninteiShinsakaiGichoKubunCode,
@@ -85,7 +85,7 @@ and open the template in the editor.
    
     
     <select resultOrdered="true" id="getHoketsukaijyouhou"
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.param.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter" 
             resultMap="WariateIinAndIinJohoEntity">
         SELECT
             A."kaigoninteiShinsakaiGichoKubunCode" AS kaigoninteiShinsakaiGichoKubunCode,
