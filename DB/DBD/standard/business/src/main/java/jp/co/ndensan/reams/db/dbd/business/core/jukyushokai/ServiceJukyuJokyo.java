@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.jukyushokai.ServiceJukyuJokyo
  */
 public class ServiceJukyuJokyo {
 
-    ServiceJukyuJokyoEntity サービス受給状況Entity;
+    private final ServiceJukyuJokyoEntity サービス受給状況Entity;
 
     /**
      * コンストラクタです。

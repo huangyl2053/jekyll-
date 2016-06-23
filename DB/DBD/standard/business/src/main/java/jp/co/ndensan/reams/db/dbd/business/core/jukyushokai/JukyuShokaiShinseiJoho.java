@@ -22,6 +22,12 @@ public class JukyuShokaiShinseiJoho {
     private final DbT4001JukyushaDaichoEntity 受給者台帳Entity;
     private final DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 受給者台帳Entity 受給者台帳Entity
+     * @param 要介護認定インターフェース情報Entity 要介護認定インターフェース情報Entity
+     */
     public JukyuShokaiShinseiJoho(DbT4001JukyushaDaichoEntity 受給者台帳Entity,
             DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity) {
         this.受給者台帳Entity = 受給者台帳Entity;

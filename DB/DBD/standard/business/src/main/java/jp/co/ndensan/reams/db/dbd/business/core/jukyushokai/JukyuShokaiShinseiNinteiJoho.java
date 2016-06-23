@@ -164,6 +164,11 @@ public class JukyuShokaiShinseiNinteiJoho {
         return 申請認定情報Entity.getDbT4001JukyushaDaicho_ninteiYMD();
     }
 
+    /**
+     * 受給者台帳_直近異動年月日を取得します。
+     *
+     * @return 受給者台帳_直近異動年月日
+     */
     public FlexibleDate get受給者台帳_直近異動年月日() {
         return 申請認定情報Entity.getDbT4001JukyushaDaicho_chokkinIdoYMD();
     }
@@ -582,10 +587,20 @@ public class JukyuShokaiShinseiNinteiJoho {
         return 申請認定情報Entity.getDbT4001JukyushaDaicho_shiteiServiceShurui30();
     }
 
+    /**
+     * 資格者証交付情報_有効期限を取得します。
+     *
+     * @return 資格者証交付情報_有効期限
+     */
     public FlexibleDate get資格者証交付情報_有効期限() {
         return 申請認定情報Entity.getDbt7037_有効期限();
     }
 
+    /**
+     * 資格者証交付情報_交付年月日を取得します。
+     *
+     * @return 資格者証交付情報_交付年月日
+     */
     public FlexibleDate get資格者証交付情報_交付年月日() {
         return 申請認定情報Entity.getDbt7037_交付年月日();
     }

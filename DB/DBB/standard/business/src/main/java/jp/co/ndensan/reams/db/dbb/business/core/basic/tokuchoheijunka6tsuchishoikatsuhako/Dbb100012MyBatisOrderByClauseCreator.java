@@ -29,7 +29,7 @@ public final class Dbb100012MyBatisOrderByClauseCreator {
     private static RString comma;
     private static RString quote;
     private static int commaCount;
-    private static int index5;
+    private static final int INDEX_5 = 5;
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -52,7 +52,6 @@ public final class Dbb100012MyBatisOrderByClauseCreator {
         comma = new RString(",");
         quote = new RString("\"");
         commaCount = 0;
-        index5 = 5;
         if (outputOrder.get設定項目リスト().isEmpty()) {
             return RString.EMPTY;
         }
@@ -62,7 +61,7 @@ public final class Dbb100012MyBatisOrderByClauseCreator {
                 continue;
             }
 
-            if (commaCount >= index5) {
+            if (commaCount >= INDEX_5) {
                 return orderByClause.toRString();
             }
 
