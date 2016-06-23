@@ -687,7 +687,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
     /**
      * 「保存する」ボタンを押下すること処理です。
      *
-     * @param insuranceInfEntity
+     * @param insuranceInfEntity 遷移先渡す項目
      */
     @Transaction
     public void onClick_btnSave(InsuranceInformation insuranceInfEntity) {

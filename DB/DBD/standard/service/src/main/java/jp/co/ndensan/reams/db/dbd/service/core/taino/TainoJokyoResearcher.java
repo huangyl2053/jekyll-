@@ -107,11 +107,12 @@ public class TainoJokyoResearcher {
                     徴収権消滅期間合計 = 徴収権消滅期間合計.add(滞納額合計.divide(調定額合計));
                     納付済期間合計 = 納付済期間合計.add(収入額合計.divide(調定額合計));
                 }
-                KyufugakuGengakuMeisai 給付額減額明細entity = new KyufugakuGengakuMeisai(該当調定年度, 滞納額合計, 調定額合計, 収入額合計);
-                給付額減額明細Map.put(該当調定年度, 給付額減額明細entity);
+                KyufugakuGengakuMeisai 給付額減額明細entity = new KyufugakuGengakuMeisai(滞納情報.get調定年度(), 滞納額合計, 調定額合計, 収入額合計);
+                給付額減額明細Map.put(滞納情報.get調定年度(), 給付額減額明細entity);
                 調定額合計 = Decimal.ZERO;
                 滞納額合計 = Decimal.ZERO;
                 収入額合計 = Decimal.ZERO;
+                該当調定年度 = 滞納情報.get調定年度();
             }
             if (JikoKubun.時効未到来.equals(滞納情報.get時効区分()) && 滞納情報.get滞納額().intValue() > 0) {
                 FlexibleDate 納期限 = new FlexibleDate(滞納情報.get納期限().toString());
