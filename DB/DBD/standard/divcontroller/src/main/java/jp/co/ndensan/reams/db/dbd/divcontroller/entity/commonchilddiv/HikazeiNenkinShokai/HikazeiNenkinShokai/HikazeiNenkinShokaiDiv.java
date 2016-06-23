@@ -41,7 +41,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 /**
  * 【共有子Div】 非課税年金のクラスファイル
  *
- * @reamsid_L DBD-3650-140 liangbc
+ * @reamsid_L DBD-3560-140 liangbc
  */
 public class HikazeiNenkinShokaiDiv extends Panel implements IHikazeiNenkinShokaiDiv {
 
