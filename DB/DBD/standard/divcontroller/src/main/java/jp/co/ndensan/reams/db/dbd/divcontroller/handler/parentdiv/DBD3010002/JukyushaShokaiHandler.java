@@ -144,7 +144,53 @@ public class JukyushaShokaiHandler {
      * 一覧の選択ボタン押下の処理です。
      */
     public void 選択ボタンをクリック() {
+        認定詳細パネルのクリア();
         set認定詳細パネル();
+    }
+
+    private void 認定詳細パネルのクリア() {
+        div.getTxtShinseiDate().clearValue();
+        div.getTxtShinseiShubetsu1().clearValue();
+        div.getTxtShinseiShubetsu2().clearValue();
+        div.getTxtShujiiMeisho().clearValue();
+
+        div.getChkShiteii().setSelectedItemsByKey(null);
+        div.getTxtShujiIryokikanMeisho().clearValue();
+
+        div.getChkShinsei().setSelectedItemsByKey(null);
+        div.getTxtShinseisha().clearValue();
+        div.getTxtShinseiRiyu().clearValue();
+        div.getTxtYokaigodoCode().clearValue();
+        div.getTxtYokaigodo().clearValue();
+        div.getTxtNinteiYMD().clearValue();
+        div.getTxtYukoKikan().clearFromValue();
+        div.getTxtYukoKikan().clearToValue();
+
+        div.getNinteiDetail().getShiteiServiceIchiran().getDgShiteiServiceShurui().getDataSource().clear();
+
+        div.getNinteiDetail().getNinteichosa().getTxtZenkaiYokaigodo().clearValue();
+        div.getNinteiDetail().getNinteichosa().getTxtZenkaiNinteiDate().clearValue();
+        div.getNinteiDetail().getNinteichosa().getTxtZenkaiYukokikan().clearFromValue();
+        div.getNinteiDetail().getNinteichosa().getTxtZenkaiYukokikan().clearToValue();
+
+        div.getNinteiDetail().getTxtShinsakaiIken().clearValue();
+        div.getNinteiDetail().getTxtNinteiResultIdoJiyu().clearValue();
+        div.getNinteiDetail().getTxtSakujoJiyu().clearValue();
+
+        div.getNinteiDetail().getTxtRiyu().clearValue();
+        div.getNinteiDetail().getTxtTokuteiShippei().clearValue();
+        div.getNinteiDetail().getTxtNinteiSoshitsuYMD().clearValue();
+        div.getNinteiDetail().getTxtTorikeshiYMD().clearValue();
+
+        div.getNinteiDetail().getNinteiResult().getTxtToshoYukokikan().clearFromValue();
+        div.getNinteiDetail().getNinteiResult().getTxtToshoYukokikan().clearToValue();
+        div.getNinteiDetail().getNinteiResult().getTxtHakkoDate1().clearValue();
+        div.getNinteiDetail().getNinteiResult().getTxtHakkoDate2().clearValue();
+
+        div.getNinteiDetail().getTxtNinteiShinseiKubunShinseiji().clearValue();
+        div.getNinteiDetail().getTxtNinteiShinseiKubunHorei().clearValue();
+        div.getNinteiDetail().getTxtYukokigen().clearValue();
+        div.getNinteiDetail().getTxtKofuDate().clearValue();
     }
 
     private void 一覧情報の編集(List<JukyuShokaiShinseiJoho> 申請情報List) {
