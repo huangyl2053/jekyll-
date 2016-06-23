@@ -15,7 +15,7 @@
 
     <select id="select事業報告集計一覧データ"  resultMap="resultMap_JigyoHokokuGeppoHoseiHakoEntity"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoo.JigyoHokokuGeppoSearchParameter"
-            fetchSize="500">
+            fetchSize="500" resultOrdered="true">
         SELECT
         DISTINCT
         dbT7021JigyoHokokuTokeiData."hokokuYSeireki",

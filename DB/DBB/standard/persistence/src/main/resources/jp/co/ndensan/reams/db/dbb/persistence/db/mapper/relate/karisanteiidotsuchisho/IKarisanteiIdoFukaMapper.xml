@@ -152,13 +152,13 @@
         SET "DbTZenkenfukaJohoTemp"."seikatsuHogoKubun" = #{生活保護区分}
         WHERE "DbTZenkenfukaJohoTemp"."seihoKaishiYMD" IS NOT NULL
     </insert>
-    <select id="selectCount異動賦課情報一時テーブル" resultClass="java.lang.Integer">
+    <select resultOrdered="true" id="selectCount異動賦課情報一時テーブル" resultClass="java.lang.Integer">
         SELECT COUNT(*) FROM "DbTIdofukaJohoTemp"
     </select>
-    <select id="selectCount全件賦課情報一時テーブル" resultClass="java.lang.Integer">
+    <select resultOrdered="true" id="selectCount全件賦課情報一時テーブル" resultClass="java.lang.Integer">
         SELECT COUNT(*) FROM "DbTZenkenfukaJohoTemp"
     </select>
-    <select id="selectAll異動賦課情報一時テーブル" resultMap="" parameterType="java.util.Map">
+    <select resultOrdered="true" id="selectAll異動賦課情報一時テーブル" resultMap="" parameterType="java.util.Map">
         SELECT "DbTIdofukaJohoTemp".* FROM "DbTIdofukaJohoTemp"
         WHERE  "DbTIdofukaJohoTemp"."" = '1'
         ORDER BY #{出力順}
@@ -167,7 +167,7 @@
         
     </insert>
     <select id="select全項目From全件賦課情報一時テーブル"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdoOrZenkenFukaSelectParameter">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdoOrZenkenFukaSelectParameter" resultOrdered="true">
         SELECT * FROM "DbTZenkenfukaJohoTemp" AS 一時テーブル
         WHERE 1==1 AND (
         <if test="is出力期_1()">
@@ -355,7 +355,7 @@
         一時テーブル."fuKibetsuGaku14" <![CDATA[<>]]> 一時テーブル."fuKibetsuGaku14")
     </sql>
     <select id="select全項目From異動賦課情報一時テーブル"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdoOrZenkenFukaSelectParameter">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdoOrZenkenFukaSelectParameter" resultOrdered="true">
         SELECT * FROM "DbTIdofukaJohoTemp" AS 一時テーブル
         WHERE 1==1 AND (
         <if test="is出力期_1()">

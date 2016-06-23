@@ -245,14 +245,14 @@
             Shukei."sakuseiYMD" ) AS TEMP
     </insert>
 
-    <select id="select被保険者番号From一時テーブル" resultMap="resultMap_KagoKetteiTsuchishoJyohoHokenshabunMeisaiEntity" fetchSize="500">
+    <select resultOrdered="true" id="select被保険者番号From一時テーブル" resultMap="resultMap_KagoKetteiTsuchishoJyohoHokenshabunMeisaiEntity" fetchSize="500">
         SELECT DISTINCT temp."hiHokenshaNo"
         FROM "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunMeisai" AS temp
     </select>
         
     <select id="get市町村コード"
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteihokenshain.KagoKetteiHokenshaInParameter">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteihokenshain.KagoKetteiHokenshaInParameter" resultOrdered="true">
      SELECT
          <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
      FROM
@@ -267,7 +267,7 @@
     </select>
     
     <select id="get新被保険者番号" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteihokenshain.KagoKetteiHokenshaInParameter" 
-        resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.ShihihokenshabangoTempTableEntity">
+        resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.ShihihokenshabangoTempTableEntity" resultOrdered="true">
         SELECT 
         Henkan."shichosonCode",
         Henkan."shinNo",
@@ -333,7 +333,7 @@
     </resultMap>
     
     <select id="select一時テーブル" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteihokenshain.KagoKetteiHokenshaInMybatisParameter"
-            resultMap="resultMap_KagoKetteiHokenshaInEntity" fetchSize="500">
+            resultMap="resultMap_KagoKetteiHokenshaInEntity" fetchSize="500" resultOrdered="true">
         SELECT Meisai."toriatsukaiYM",
                Meisai."shokisaiHokenshaNo",
                Meisai."shokisaiHokenshaNa",

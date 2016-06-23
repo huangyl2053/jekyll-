@@ -46,7 +46,7 @@
         <result property="koshinTaishoChushutsuYukoShuryoYM" column="dbT7203JukyuNinteiUmyo_koshinTaishoChushutsuYukoShuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
     </resultMap>
     
-    <select id="getEntity" resultMap="ResultMap_DbT7203JukyuNinteiUmyoEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7203JukyuNinteiUmyoEntity">
 	SELECT
 	<include refid="allColumns_DbT7203JukyuNinteiUmyo"/>
 	FROM

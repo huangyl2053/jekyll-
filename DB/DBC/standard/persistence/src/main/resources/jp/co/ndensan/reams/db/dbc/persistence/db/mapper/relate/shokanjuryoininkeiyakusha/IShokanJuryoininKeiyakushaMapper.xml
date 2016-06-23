@@ -17,7 +17,7 @@
     <select id="get契約事業者一覧"
             resultMap="resultMap_ShokanJuryoininKeiyakusha"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaListParameter" 
-            fetchSize="500">
+            fetchSize="500" resultOrdered="true">
         SELECT
             A.*,
             B.*

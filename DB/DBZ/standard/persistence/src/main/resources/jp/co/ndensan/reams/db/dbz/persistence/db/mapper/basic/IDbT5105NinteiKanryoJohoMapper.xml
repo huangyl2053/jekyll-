@@ -60,7 +60,7 @@
         <result property="ninteiShinsakaiKanryoYMD" column="dbT5105NinteiKanryoJoho_ninteiShinsakaiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="centerSoshinYMD" column="dbT5105NinteiKanryoJoho_centerSoshinYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT5105NinteiKanryoJohoEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5105NinteiKanryoJohoEntity">
         SELECT
         <include refid="allColumns_DbT5105NinteiKanryoJoho"/>
         FROM

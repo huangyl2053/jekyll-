@@ -16,7 +16,7 @@
     </resultMap>
     <select id="get対象データTwo"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tsuchishohakkogoidosha.QualificationsParamter"
-            resultMap="resultMap_selectDBV2001EntityResult" fetchSize="500">
+            resultMap="resultMap_selectDBV2001EntityResult" fetchSize="500" resultOrdered="true">
         <include refid="selectDbv2001EntityResult" />
     </select>
     <sql id="selectDbv2001EntityResult">
@@ -44,7 +44,7 @@
     </resultMap>
     <select id="get異動者情報"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tsuchishohakkogoidosha.IdoshaParamter"
-            resultMap="ResultMap_DbT2017Uaft200EntityResult" fetchSize="500">
+            resultMap="ResultMap_DbT2017Uaft200EntityResult" fetchSize="500" resultOrdered="true">
         <include refid="selectDbv2001Uaft200EntityResult" />
     </select>
     <sql id="selectDbv2001Uaft200EntityResult">

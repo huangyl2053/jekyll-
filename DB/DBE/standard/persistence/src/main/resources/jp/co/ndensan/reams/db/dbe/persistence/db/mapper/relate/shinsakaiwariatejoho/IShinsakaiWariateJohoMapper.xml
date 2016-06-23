@@ -6,7 +6,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiwariatejoho.IShinsakaiWariateJohoMapper">
 
-    <select id="select介護認定審査会割当情報ByKey" resultMap="resultMap_ShinsakaiWariateJohoEntity" fetchSize="500">
+    <select resultOrdered="true" id="select介護認定審査会割当情報ByKey" resultMap="resultMap_ShinsakaiWariateJohoEntity" fetchSize="500">
         <include refid="selectShinsakaiWariateJohoEntity" />
     </select>
 
@@ -36,7 +36,7 @@
         DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo" = DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo"
     </sql>
 
-    <select id="select介護認定審査会割当情報ByKey_審査順確定フラグ非一致" resultMap="resultMap_ShinsakaiWariateJohoEntity" fetchSize="500">
+    <select resultOrdered="true" id="select介護認定審査会割当情報ByKey_審査順確定フラグ非一致" resultMap="resultMap_ShinsakaiWariateJohoEntity" fetchSize="500">
         SELECT
         DbT5502ShinsakaiWariateJoho.*,
         DbT5101NinteiShinseiJoho.*

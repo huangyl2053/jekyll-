@@ -74,7 +74,7 @@
         <result property="ninteichosaTokusokuMemo" column="dbT5201NinteichosaIraiJoho_ninteichosaTokusokuMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="logicalDeletedFlag" column="dbT5201NinteichosaIraiJoho_logicalDeletedFlag" />
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT5201NinteichosaIraiJohoEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5201NinteichosaIraiJohoEntity">
         <!--SELECT
         <include refid="allColumns_DbT5201NinteichosaIraiJoho"/>
         FROM

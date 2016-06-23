@@ -63,13 +63,13 @@
         <result property="taishoKaishiTimestamp" column="dbT7022ShoriDateKanri_taishoKaishiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
         <result property="taishoShuryoTimestamp" column="dbT7022ShoriDateKanri_taishoShuryoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT7022ShoriDateKanriEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7022ShoriDateKanriEntity">
         SELECT
         <include refid="allColumns_DbT7022ShoriDateKanri" />
         FROM
         rgdb."DbT7022ShoriDateKanri"
     </select>
-    <select id="getTaishoShuryoYMD" resultMap="ResultMap_DbT7022ShoriDateKanriEntity">
+    <select resultOrdered="true" id="getTaishoShuryoYMD" resultMap="ResultMap_DbT7022ShoriDateKanriEntity">
         SELECT
         <include refid="allColumns_DbT7022ShoriDateKanri" />
         FROM

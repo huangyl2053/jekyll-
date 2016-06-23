@@ -5,7 +5,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninnteichousakekkatouroku1.INinnteiChousaKekkaTouroku1Mapper">
     <select id="getNinnteiChousaJoho" resultType="jp.co.ndensan.reams.db.dbe.entity.ninnteichousakekkatouroku1.TempDataEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.entity.ninnteichousakekkatouroku1.TempDataEntity" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.entity.ninnteichousakekkatouroku1.TempDataEntity" fetchSize="500" resultOrdered="true">
         SELECT
         DbT5101."koroshoIfShikibetsuCode" AS Temp_厚労省IF識別コード
         DbT5203."" AS Temp_認定調査依頼区分コード

@@ -30,7 +30,7 @@
     
     <select id="getNinteichosaScheduleInput"
             resultMap="resultMap_getNinteichosaScheduleInputRelateEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosayoteimitei.NinteichosaYoteiMiteiParamter" fetchSize="500" >
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosayoteimitei.NinteichosaYoteiMiteiParamter" fetchSize="500"  resultOrdered="true">
         SELECT
           DbT5101."shinseishoKanriNo" AS "dbT5101_shinseishoKanriNo"
           , DbT5101."shoKisaiHokenshaNo" AS "dbT5101_shoKisaiHokenshaNo"

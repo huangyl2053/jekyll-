@@ -93,7 +93,7 @@
         <result property="riyoshaSu" column="dbT7060KaigoJigyosha_riyoshaSu" />
         <result property="biko" column="dbT7060KaigoJigyosha_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT7060KaigoJigyoshaEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7060KaigoJigyoshaEntity">
         SELECT
         <include refid="allColumns_DbT7060KaigoJigyosha"/>
         FROM
@@ -102,7 +102,7 @@
 
     <select id="select介護事業者By申請日"
             parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigojigyosha.KaigoJigyoshaMapperParameter"
-            resultMap="ResultMap_DbT7060KaigoJigyoshaEntity" fetchSize="500">
+            resultMap="ResultMap_DbT7060KaigoJigyoshaEntity" fetchSize="500" resultOrdered="true">
         SELECT
         tbl."jigyoshaName" as "dbT7060KaigoJigyosha_jigyoshaName"
         FROM (

@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBC-0980-301 surun -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kagoketteihokenshainmasterinsert.IKagoKetteiHokenshaInMasterInsertMapper">
     
-    <select id = "insert過誤決定集計" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id = "insert過誤決定集計" parameterType="java.util.Map" fetchSize="500">
         INSERT INTO rgdb."DbT3060KagoKetteiShukei" 
         (
         "toriatsukaiYM",
@@ -40,7 +40,7 @@
         FROM  "DbWT3060KagoKetteiShukei" AS TEMP
     </select>
     
-    <select id="insert過誤決定明細" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="insert過誤決定明細" parameterType="java.util.Map" fetchSize="500">
         INSERT INTO rgdb."DbT3061KagoKetteiMeisai"
         (
         "toriatsukaiYM",

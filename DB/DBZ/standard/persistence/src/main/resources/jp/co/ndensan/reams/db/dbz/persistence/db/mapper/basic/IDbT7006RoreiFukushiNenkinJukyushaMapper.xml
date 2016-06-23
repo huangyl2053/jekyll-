@@ -47,7 +47,7 @@
         <result property="jukyuHaishiYMD" column="dbT7006RoreiFukushiNenkinJukyusha_jukyuHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="hihokenshaNo" column="dbT7006RoreiFukushiNenkinJukyusha_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
     </resultMap>
-<select id="getEntity" resultMap="ResultMap_DbT7006RoreiFukushiNenkinJukyushaEntity">
+<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7006RoreiFukushiNenkinJukyushaEntity">
     SELECT
     <include refid="allColumns_DbT7006RoreiFukushiNenkinJukyusha" />
     FROM

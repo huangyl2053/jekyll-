@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBC-0980-550 zhangrui -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper">
     <select id="selectbyKeyUndeleted" resultMap="ResultMap_DbT3104KokuhorenInterfaceKanriEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenInterfaceUpdateMybaticParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenInterfaceUpdateMybaticParameter" fetchSize="500" resultOrdered="true">
         select * from rgdb."DbT3104KokuhorenInterfaceKanri" As DbT3104
         where DbT3104."shoriYM" = #{shoriYM} and DbT3104."kokanShikibetsuNo" = #{kokanShikibetsuNo}
     </select>
@@ -99,7 +99,7 @@
         "biko" = #{備考}
     </update>
 
-    <select id="select処理結果リスト一時TBL" resultMap="resultMap_ShoriKekkaList" fetchSize="500">
+    <select resultOrdered="true" id="select処理結果リスト一時TBL" resultMap="resultMap_ShoriKekkaList" fetchSize="500">
         SELECT *
         FROM "DbWT0002KokuhorenTorikomiError"
         ORDER BY "errorKubunCode" ASC,
@@ -112,7 +112,7 @@
         "key5" ASC
     </select>
 
-    <select id="select処理結果リストUNIQUE" resultMap="resultMap_ShoriKekkaList" fetchSize="500">
+    <select resultOrdered="true" id="select処理結果リストUNIQUE" resultMap="resultMap_ShoriKekkaList" fetchSize="500">
         SELECT *
         FROM "DbWT0002KokuhorenTorikomiError" as TEMP
         where TEMP.errorKubunCode = #{errorKubunCode}
@@ -140,13 +140,13 @@
     </resultMap>
 
 
-    <select id="selectALL被保険者" resultMap="resultMap_DbWT0001HihokenshaTempEntity" fetchSize="500">
+    <select resultOrdered="true" id="selectALL被保険者" resultMap="resultMap_DbWT0001HihokenshaTempEntity" fetchSize="500">
         SELECT TEMP.*
         FROM "rgdb"."DbWT0001HihokenshaTemp" as TEMP
     </select>
 
     <!--被保険者番号変換対象を取ります-->
-    <select id="select被保険者番号変換対象" resultMap="resultMap_DbWT0001HihokenshaTempEntity" fetchSize="500">
+    <select resultOrdered="true" id="select被保険者番号変換対象" resultMap="resultMap_DbWT0001HihokenshaTempEntity" fetchSize="500">
         SELECT TEMP.*
         FROM "rgdb"."DbWT0001HihokenshaTemp" as TEMP
         where TEMP."serviceTeikyoYmd" <![CDATA[<]]> #{変換基準日}
@@ -194,7 +194,7 @@
     </resultMap>
 
     <!--新被保険者番号対象を取ります-->
-    <select id="select新被保険者番号" resultMap="resultMap_HihokenshaAndHenkanBangoEntity" fetchSize="500">
+    <select resultOrdered="true" id="select新被保険者番号" resultMap="resultMap_HihokenshaAndHenkanBangoEntity" fetchSize="500">
         SELECT TEMP.*,
         HENKAN."shichosonCode" as "shichosonCode2",
         HENKAN."shinNo" as "shinNo",
@@ -270,7 +270,7 @@
 
 
     <!--被保険者・宛名情報を取ります-->
-    <select id="select被保険者And宛名情報" resultMap="resultMap_HihokenshaAndDaichouAndAtenaEntity" fetchSize="500">
+    <select resultOrdered="true" id="select被保険者And宛名情報" resultMap="resultMap_HihokenshaAndDaichouAndAtenaEntity" fetchSize="500">
         SELECT
         <include refid="allColumns_DbWT0001HihokenshaTemp"/> ,
         <include refid="allColumns_DbV1001HihokenshaDaicho"/> ,

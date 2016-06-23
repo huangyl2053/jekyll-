@@ -138,7 +138,7 @@
         <result property="fuSaishutsuKampuGaku" column="dbT2002Fuka_fuSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
 
-    <select id="getEntity" resultMap="ResultMap_DbT2002FukaEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT2002FukaEntity">
         SELECT
         <include refid="allColumns_DbT2002Fuka" />
         FROM

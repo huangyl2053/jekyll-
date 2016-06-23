@@ -6,7 +6,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteifuka.IHonsanteifukaMapper">
     <select id="get通知書打ち分け条件"
-            resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2014TsuchishoUchiwakeJokenEntity" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2014TsuchishoUchiwakeJokenEntity" fetchSize="500" resultOrdered="true">
         SELECT *
         FROM
         rgdb."DbT2014TsuchishoUchiwakeJoken" AS "joken"
@@ -25,7 +25,7 @@
     
     <select id="get打分け方法情報一覧"
             parameterType="java.util.Map"
-            resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2014TsuchishoUchiwakeJokenEntity" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2014TsuchishoUchiwakeJokenEntity" fetchSize="500" resultOrdered="true">
         SELECT *
         FROM
         rgdb."DbT2014TsuchishoUchiwakeJoken" AS "joken"

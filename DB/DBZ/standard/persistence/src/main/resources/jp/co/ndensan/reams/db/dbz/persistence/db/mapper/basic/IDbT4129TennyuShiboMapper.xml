@@ -70,7 +70,7 @@
         <result property="nijiHanteiKekkaInputYMD" column="dbT4129TennyuShibo_nijiHanteiKekkaInputYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
     
-        <select id="getEntity" resultMap="ResultMap_DbT4129TennyuShiboEntity">
+        <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT4129TennyuShiboEntity">
 <!--	SELECT
 	<include refid="allColumns_DbT4129TennyuShibo"/>
 	FROM

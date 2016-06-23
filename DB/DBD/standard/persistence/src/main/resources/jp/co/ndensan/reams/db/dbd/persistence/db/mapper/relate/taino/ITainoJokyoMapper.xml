@@ -25,7 +25,7 @@
     </resultMap>
 
     <select id="selectTainoJoho" resultMap="resultMap_TainoJohoRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.taino.TainoJokyoMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.taino.TainoJokyoMapperParameter" fetchSize="500" resultOrdered="true">
         SELECT
         A."choteiNendo" AS 調定年度,
         A."fukaNendo" AS 賦課年度,

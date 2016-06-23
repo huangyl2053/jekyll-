@@ -80,7 +80,7 @@
     
     <select id="get高額送付情報" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoJukyushaTaishoshaParameter"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity" fetchSize="500" resultOrdered="true">
         <include refid="selectDbT3004" />
     </select>
     

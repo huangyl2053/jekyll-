@@ -29,7 +29,7 @@
     <!-- 検索条件より、対象者一覧を取得する。-->
     <select id="selectTaishosha" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensakuSearch"
-            resultMap="resultMap_KogakuShokaiTaishoshaKensakuEntity" fetchSize="500">
+            resultMap="resultMap_KogakuShokaiTaishoshaKensakuEntity" fetchSize="500" resultOrdered="true">
         SELECT
             A."hihokenshaNo" AS 被保険者番号,
             "ShikibetsuTaisho"."meisho" AS 氏名,

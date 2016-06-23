@@ -19,7 +19,7 @@
     </resultMap>
 
     <select id="get契約事業者情報" resultMap="resultMap_DbT3077JuryoininKeiyakuJigyoshaEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KeiyakushaParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KeiyakushaParameter" fetchSize="500" resultOrdered="true">
         SELECT
         DbT3077."keiyakuJigyoshaNo" AS "DbT3077_keiyakuJigyoshaNo"
         ,DbT3077."keiyakuJigyoshaName" AS "DbT3077_keiyakuJigyoshaName"

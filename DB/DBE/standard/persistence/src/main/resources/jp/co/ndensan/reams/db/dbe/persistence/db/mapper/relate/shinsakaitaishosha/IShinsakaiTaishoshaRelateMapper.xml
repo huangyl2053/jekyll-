@@ -6,7 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaitaishosha.IShinsakaiTaishoshaRelateMapper">
 
     <select id="get予定情報と結果情報" resultMap="resultMap_ShinsakaiTaishoshaRelateEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaitaishosha.ShinsakaiTaishoshaMapperParameter"   fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaitaishosha.ShinsakaiTaishoshaMapperParameter"   fetchSize="500" resultOrdered="true">
        	SELECT 														
 		A."shinsakaiKaisaiNo" as "shinsakaiKaisaiNo",
                 B."gogitaiMei" as "gogitaiMei",
@@ -79,7 +79,7 @@
         <result property="shujiiName" column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinsakaiKaisaiChikuCode" column="shinsakaiKaisaiChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
     </resultMap>
-    <select id="get情報" resultMap="resultMap_ShinsakaiTaishoshaRelateEntity"  parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"  fetchSize="500">
+    <select resultOrdered="true" id="get情報" resultMap="resultMap_ShinsakaiTaishoshaRelateEntity"  parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"  fetchSize="500">
         SELECT	B."shinsakaiOrder" as "shinsakaiOrder",
                 C."shoKisaiHokenshaNo"  as "shoKisaiHokenshaNo",
                 D."shichosonMeisho" as "shichosonMeisho",

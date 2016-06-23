@@ -6,7 +6,7 @@
 
     <select id="selectAllデータ"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoMybatisParameter"
-            resultMap="resultMap_HanyouRisutoSyuturyokuEntity" fetchSize="500">
+            resultMap="resultMap_HanyouRisutoSyuturyokuEntity" fetchSize="500" resultOrdered="true">
         <include refid="selectHanyouRisutoSyuturyokuEntity" />
     </select>
     <sql id="selectHanyouRisutoSyuturyokuEntity">

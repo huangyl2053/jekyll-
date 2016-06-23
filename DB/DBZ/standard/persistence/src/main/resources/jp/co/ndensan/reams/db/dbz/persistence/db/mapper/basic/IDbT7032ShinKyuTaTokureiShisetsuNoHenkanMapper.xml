@@ -49,7 +49,7 @@
         <result property="shichosonCode2" column="dbT7032ShinKyuTaTokureiShisetsuNoHenkan_shichosonCode2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="kyuTaTokureiShisetsuNo2" column="dbT7032ShinKyuTaTokureiShisetsuNoHenkan_kyuTaTokureiShisetsuNo2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<select id="getEntity" resultMap="ResultMap_DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity">
+<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity">
     SELECT
     <include refid="allColumns_DbT7032ShinKyuTaTokureiShisetsuNoHenkan"/>
     FROM

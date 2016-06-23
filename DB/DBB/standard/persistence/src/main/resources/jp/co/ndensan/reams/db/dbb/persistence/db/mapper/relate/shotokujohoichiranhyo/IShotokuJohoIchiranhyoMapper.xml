@@ -6,7 +6,7 @@
     
     <!--対象終了日時-->
     <select id="select対象終了日時_広域" parameterType="jp.co.ndensan.reams.db.dbb.definition.core.shotokujohoichiranhyo.ShotokuJohoIchiranhyoParameter"
-            resultMap="resultMap_TaishoShuryoYmdEntity" fetchSize="500">
+            resultMap="resultMap_TaishoShuryoYmdEntity" fetchSize="500" resultOrdered="true">
      SELECT 
      "shichosonCode",
      "taishoShuryoTimestamp",
@@ -28,7 +28,7 @@
     
     <!--対象終了日時_広域-->
     <select id="select対象終了日時" parameterType="jp.co.ndensan.reams.db.dbb.definition.core.shotokujohoichiranhyo.ShotokuJohoIchiranhyoKouikiParameter"
-            resultMap="resultMap_TaishoShuryoYmdEntity" fetchSize="500">
+            resultMap="resultMap_TaishoShuryoYmdEntity" fetchSize="500" resultOrdered="true">
      SELECT 
      "shichosonCode",
      "taishoShuryoTimestamp",
