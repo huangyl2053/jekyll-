@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigohokenshikakushasho;
+package jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigohokenshikakushasho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;

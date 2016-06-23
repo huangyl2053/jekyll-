@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigojyuminhyokoukiu;
+package jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigojyuminhyokoukiu;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KobetsuKoikiunyoParameter;

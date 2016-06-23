@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigojuminhyo;
+package jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigojuminhyo;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;

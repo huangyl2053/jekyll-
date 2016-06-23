@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbu.business.core.yoshikibetsurenkeijoho.JigyoHokokuTokei;
-import jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.yoshikibetsurenkeijoho.IShukeiYearMouthGetterMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;

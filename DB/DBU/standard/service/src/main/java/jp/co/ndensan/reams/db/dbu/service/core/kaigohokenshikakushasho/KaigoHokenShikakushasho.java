@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.KaigoHokenShikakushashoDataBusiness;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.ShienJigyoshaBusiness;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.ShikakushashoHakkoBusiness;
-import jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigohokenshikakushasho.KaigoHokenShikakushashoParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigohokenshikakushasho.KaigoHokenShikakushashoParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.HihokenshaDateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.HokenshaBangoMeishoInDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.ShienJigyoshaDataEntity;
