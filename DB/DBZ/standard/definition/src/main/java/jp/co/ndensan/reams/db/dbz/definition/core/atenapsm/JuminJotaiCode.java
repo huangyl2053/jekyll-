@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBZ-9999-023 wangchao
  */
-public enum juminJotaiCode {
+public enum JuminJotaiCode {
 
     /**
      * コード:1 名称:住民 略称:定義なし
@@ -39,7 +39,7 @@ public enum juminJotaiCode {
     private final RString code;
     private final RString fullName;
 
-    private juminJotaiCode(String code, String fullname) {
+    private JuminJotaiCode(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
     }
@@ -66,11 +66,11 @@ public enum juminJotaiCode {
      * 住民状態コードのコードと一致する内容を探します。
      *
      * @param code 住民状態コードのコード
-     * @return {@code code} に対応する住民状態コード
+     * @return {@literal code} に対応する住民状態コード
      */
-    public static juminJotaiCode toValue(RString code) {
+    public static JuminJotaiCode toValue(RString code) {
 
-        for (juminJotaiCode value : juminJotaiCode.values()) {
+        for (JuminJotaiCode value : JuminJotaiCode.values()) {
             if (value.code.equals(code)) {
                 return value;
             }
