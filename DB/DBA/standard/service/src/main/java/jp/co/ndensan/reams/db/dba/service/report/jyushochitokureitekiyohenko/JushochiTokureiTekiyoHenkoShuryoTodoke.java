@@ -96,7 +96,7 @@ public class JushochiTokureiTekiyoHenkoShuryoTodoke {
         RStringBuilder 認証者 = new RStringBuilder();
         if (!RString.isNullOrEmpty(ninshoshaYakushokuMei)) {
             認証者.append(ninshoshaYakushokuMei);
-            認証者.append("認証者");
+            認証者.append("長様");
         }
         JyushochiTokureiTekiyoHenkoItem item = new JyushochiTokureiTekiyoHenkoItem(
                 認証者.toRString(),
