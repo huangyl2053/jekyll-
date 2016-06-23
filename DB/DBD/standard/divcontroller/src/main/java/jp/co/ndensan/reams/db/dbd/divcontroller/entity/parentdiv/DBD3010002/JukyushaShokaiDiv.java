@@ -45,6 +45,8 @@ public class JukyushaShokaiDiv extends Panel {
     private RString hiddenShikibetsuCode;
     @JsonProperty("hiddenGyomuCode")
     private RString hiddenGyomuCode;
+    @JsonProperty("hiddenモード")
+    private RString hiddenモード;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -194,6 +196,24 @@ public class JukyushaShokaiDiv extends Panel {
     @JsonProperty("hiddenGyomuCode")
     public void setHiddenGyomuCode(RString hiddenGyomuCode) {
         this.hiddenGyomuCode = hiddenGyomuCode;
+    }
+
+    /*
+     * gethiddenモード
+     * @return hiddenモード
+     */
+    @JsonProperty("hiddenモード")
+    public RString getHiddenモード() {
+        return hiddenモード;
+    }
+
+    /*
+     * sethiddenモード
+     * @param hiddenモード hiddenモード
+     */
+    @JsonProperty("hiddenモード")
+    public void setHiddenモード(RString hiddenモード) {
+        this.hiddenモード = hiddenモード;
     }
 
     /*

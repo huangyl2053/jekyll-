@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -23,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBD-3560-010 xuyue
  */
 public class JukyushaShokai {
+
+    private static final RString 状態_照会 = new RString("照会");
 
     /**
      * 受給照会の初期化。(オンロード)
@@ -213,8 +216,9 @@ public class JukyushaShokai {
      */
     public ResponseData<JukyushaShokaiDiv> onBeforeOpenDialog_btnIryoHoken(JukyushaShokaiDiv div) {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-        div.setHiddenHihokenshaNo(被保険者番号.getColumnValue());
+        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+        div.setHiddenモード(状態_照会);
+        div.setHiddenShikibetsuCode(識別コード.getColumnValue());
         return ResponseData.of(div).respond();
     }
 
