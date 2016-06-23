@@ -67,7 +67,7 @@
         ORDER BY  DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo" DESC
     </sql>
 
-    <select id="get負担限度額認定帳票用リスト" resultMap="resultMap_FutanGendogakuNinteiEntity"
+    <select id="get負担限度額認定帳票用リスト" resultMap="resultMap_FutanGendogakuNinteiEntity" resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunintei.FutanGendogakuNinteiParameter" fetchSize="500">
         <include refid="selectFutanGendogakuNinteiThyouyListEntity" />
     </select>
@@ -94,6 +94,7 @@
 
     <select id="get負担限度額認定申請の情報List"
             resultMap="resultMap_FutanGendogakuNinteiEntity"
+            resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiShinseiMapperParameter"
             fetchSize="500">
         SELECT
@@ -111,6 +112,7 @@
 
     <select id="select負担限度額認定リストBy被保険者番号"
             resultMap="resultMap_FutanGendogakuNinteiEntity"
+            resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiShinseiMapperParameter"
             fetchSize="500">
         SELECT
