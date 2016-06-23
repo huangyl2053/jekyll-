@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.JikoGoShunyu
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TaishoHanteiKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.taino.ShunyuSummaryEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.taino.TainoJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.taino.JikoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.taino.MinoKannoKubun;
@@ -131,7 +132,7 @@ public final class TainoKiSummary {
                 時効起算日区分 = JikoKisanbiKubun.収入日;
             }
         }
-        Decimal 滞納額 = relateEntity.get調定額().subtract(収入額合計);
+        Decimal 滞納額 = ObjectUtil.defaultIfNull(relateEntity.get調定額(), Decimal.ZERO).subtract(収入額合計);
         MinoKannoKubun 未納完納区分 = get未納完納区分(relateEntity, 基準日, 滞納額);
         return new TainoKiSummary(
                 relateEntity.get賦課年度(),
