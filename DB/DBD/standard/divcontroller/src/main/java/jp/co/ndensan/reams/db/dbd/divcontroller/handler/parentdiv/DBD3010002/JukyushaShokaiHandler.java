@@ -301,7 +301,7 @@ public class JukyushaShokaiHandler {
                     申請認定情報.get受給者台帳_２号特定疾病コード().getColumnValue()).get名称());
         }
         if (申請認定情報.get受給者台帳_喪失年月日() != null) {
-            div.getNinteiDetail().getTxtNinteiSoshitsuYMD().setValue(new FlexibleDate(申請認定情報.get受給者台帳_喪失年月日().wareki().toDateString()));
+            div.getNinteiDetail().getTxtNinteiSoshitsuYMD().setValue(申請認定情報.get受給者台帳_喪失年月日());
         }
         if (get取消日(申請認定情報) != null) {
             div.getNinteiDetail().getTxtTorikeshiYMD().setValue(get取消日(申請認定情報));
