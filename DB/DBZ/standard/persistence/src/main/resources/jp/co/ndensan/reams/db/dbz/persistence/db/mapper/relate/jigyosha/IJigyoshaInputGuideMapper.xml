@@ -39,7 +39,7 @@
     </resultMap>
 
 
-    <select resultOrdered="true" id="getServiceJigyoshaInputGuide" resultMap="resultMap_serviceJigyoshaInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
+    <select resultOrdered="true" id="getServiceJigyoshaInputGuide" resultMap="resultMap_serviceJigyoshaInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
         SELECT
         dbT7060Kaigo."jigyoshaNo" AS "dbT7060Kaigo_jigyoshaNo",
         dbT7060Kaigo."yukoKaishiYMD" AS "dbT7060Kaigo_yukoKaishiYMD",
@@ -142,7 +142,7 @@
         dbT7060Kaigo."jigyoshaNo"
     </select>
 
-    <select resultOrdered="true" id="getTekiyoJogaiInputGuide" resultMap="resultMap_tekiyoJogaiInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
+    <select resultOrdered="true" id="getTekiyoJogaiInputGuide" resultMap="resultMap_tekiyoJogaiInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
         SELECT
         dbT1005Kaigo."jigyoshaNo" AS "dbT1005Kaigo_jigyoshaNo",
         dbT1005Kaigo."yukoKaishiYMD" AS "dbT1005Kaigo_yukoKaishiYMD",
@@ -209,7 +209,7 @@
         ORDER BY
         dbT1005Kaigo."jigyoshaNo"
     </select>
-    <select resultOrdered="true" id="getOtherTokureiInputGuide" resultMap="resultMap_otherTokureiInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
+    <select resultOrdered="true" id="getOtherTokureiInputGuide" resultMap="resultMap_otherTokureiInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
         SELECT
         dbT1005Kaigo."jigyoshaNo" AS "dbT1005Kaigo_jigyoshaNo",
         dbT1005Kaigo."yukoKaishiYMD" AS "dbT1005Kaigo_yukoKaishiYMD",

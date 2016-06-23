@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShurui
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.GunshiCodeJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceShuruiJigyoshaInputGuide;
-import jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jigyosha.JigyoshaInputGuideParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.ServiceJigyoshaInputGuideRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.jigyosha.IJigyoshaInputGuideMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
