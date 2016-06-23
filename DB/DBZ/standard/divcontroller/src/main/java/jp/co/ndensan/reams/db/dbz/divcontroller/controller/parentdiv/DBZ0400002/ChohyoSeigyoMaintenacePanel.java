@@ -66,14 +66,15 @@ public class ChohyoSeigyoMaintenacePanel {
     public ResponseData<ChohyoSeigyoMaintenacePanelDiv> onLoad(ChohyoSeigyoMaintenacePanelDiv div) {
         RStringBuilder lockKey = new RStringBuilder();
         RString 帳票分類ID = ViewStateHolder.get(ViewStateKeys.帳票分類ID, RString.class);
-        RString 帳票名称 = ViewStateHolder.get(ViewStateKeys.帳票分類名称, RString.class);
-        div.getLblChohyoName().setText(ViewStateHolder.get(ViewStateKeys.帳票分類名称, RString.class));
         lockKey.append(UrControlDataFactory.createInstance().getMenuID())
                 .append(帳票分類ID);
         LockingKey 前排他ロックキー = new LockingKey(lockKey.toString());
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             throw new PessimisticLockingException();
         }
+        div.getChohyoSeigyoMaintenace().setDisabled(false);
+        RString 帳票名称 = ViewStateHolder.get(ViewStateKeys.帳票分類名称, RString.class);
+        div.getLblChohyoName().setText(ViewStateHolder.get(ViewStateKeys.帳票分類名称, RString.class));
         SubGyomuCode subgyomuCode = ControlDataHolder.getExecutionSubGyomuCode();
         div.getCcdKaigoChohyoSeigyoKyotsu().initialize(subgyomuCode, new ReportId(帳票分類ID));
         List<ChohyoSeigyoHanyo> businessList = chohyoSeigyoHanyoManager.get帳票制御汎用(subgyomuCode, new ReportId(帳票分類ID)).records();
