@@ -9,7 +9,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaiiinjoho.ShinsakaiIinJoho;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaiwariateiinjoho.IGogitaiWariateIinJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;

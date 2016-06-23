@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChikuNinteiKo
 import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChikuNinteiNinteichosa;
 import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChosaChiku;
 import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.NinteichosaSchedule;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chikuninteichosain.ChosainJohoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.DBE2020002TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.NinteiChosaScheduleShosaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.dgNinteiChosaSchedule_Row;

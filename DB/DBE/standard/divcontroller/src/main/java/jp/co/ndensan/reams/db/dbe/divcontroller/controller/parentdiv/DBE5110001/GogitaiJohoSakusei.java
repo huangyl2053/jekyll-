@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.gogitaijohosakusei.GogitaiJohoSa
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.gogitaijohosakusei.GogitaiJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbe.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijohosakusei.GogitaiJohoSakuseiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijohosakusei.GogitaiJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.GogitaiJohoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgGogitaiIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgHoketsuShinsainList_Row;

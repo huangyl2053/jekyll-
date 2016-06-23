@@ -45,7 +45,7 @@
     </resultMap>
 
     <select resultOrdered="true" id="get審査会委員一覧検索" resultMap="resultMap_ShinsakaiKekkaTorokuIChiRanRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter"   fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter"   fetchSize="500">
         SELECT
         DbT5502ShinsakaiWariateJoho."shinsakaiOrder"  AS "shinsakaiOrder"
         ,DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo"
@@ -161,7 +161,7 @@
     </resultMap>
 
     <select resultOrdered="true" id="get審査会委員一覧更新_1"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter"
             resultMap="ResultMap_DbT5502ShinsakaiWariateJohoEntity" fetchSize="500">
         SELECT
         DbT5502ShinsakaiWariateJoho.*
@@ -244,7 +244,7 @@
     </resultMap>
 
     <select resultOrdered="true" id="get審査会委員一覧情報更新_2"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter"
             resultMap="resultMap_NinteiShinseiJoho" fetchSize="500">
         SELECT
         DbT5101NinteiShinseiJoho.*

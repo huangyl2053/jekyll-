@@ -4,7 +4,7 @@
 <!-- @reamsid_L DBE-0060-010 zhangzhiming -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikentokusokujo.IShujiiIkenTokusokujoMapper">
      <select resultOrdered="true" id="select督促状件数" resultType="int"
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiikentokusokujo.ShujiiIkenTokusokujoParameter" 
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikentokusokujo.ShujiiIkenTokusokujoParameter" 
              fetchSize="500">
           SELECT
             COUNT(0) AS count
@@ -55,7 +55,7 @@
             </if>
     </select>
     <select resultOrdered="true" id="select督促状対象者件数" resultType="int"
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiikentokusokujo.ShujiiIkenTokusokujoParameter" 
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikentokusokujo.ShujiiIkenTokusokujoParameter" 
              fetchSize="500">
           SELECT
             COUNT(0) AS count

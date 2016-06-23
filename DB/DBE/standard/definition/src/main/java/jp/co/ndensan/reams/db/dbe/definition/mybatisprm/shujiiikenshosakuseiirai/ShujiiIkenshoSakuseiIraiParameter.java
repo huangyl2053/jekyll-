@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai;
 
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinseikensaku.ShinseiKensakuMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku.ShinseiKensakuMapperParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

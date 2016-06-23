@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoirai.ninteishinseijoho;
 
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoirai.ninteishinseijoho.NinteiShinseiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoirai.ninteishinseijoho.NinteiShinseiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoirai.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
 
 /**

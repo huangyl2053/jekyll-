@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoprint;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;

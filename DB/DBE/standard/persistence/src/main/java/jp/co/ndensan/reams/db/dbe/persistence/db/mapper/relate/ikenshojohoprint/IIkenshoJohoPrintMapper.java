@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshojohoprint;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshojohoprint.IkenshoJohoPrintMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshojohoprint.IkenshoJohoPrintMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojohoprint.IkenshoJohoPrintRelateEntity;
 
 /**

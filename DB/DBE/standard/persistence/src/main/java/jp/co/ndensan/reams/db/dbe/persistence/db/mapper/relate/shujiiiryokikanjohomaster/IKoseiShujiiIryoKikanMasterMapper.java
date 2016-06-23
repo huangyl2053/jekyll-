@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiiryokikanjohomaster;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterSearchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterSearchParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 

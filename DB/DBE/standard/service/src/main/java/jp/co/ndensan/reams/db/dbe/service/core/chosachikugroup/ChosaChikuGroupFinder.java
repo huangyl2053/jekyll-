@@ -11,7 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.chosachikugroup.ChosaChikuGroupMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.chosachikugroup.ChosaChikuGroup;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikugroup.ChosaChikuGroupMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosachikugroup.ChosaChikuGroupMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosachikugroup.ChosaChikuGroupRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosachikugroup.IChosaChikuGroupRelateMapper;

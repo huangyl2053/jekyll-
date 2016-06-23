@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.processprm.ikenshojohoprint;
 
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshojohoprint.IkenshoJohoPrintMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshojohoprint.IkenshoJohoPrintMapperParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

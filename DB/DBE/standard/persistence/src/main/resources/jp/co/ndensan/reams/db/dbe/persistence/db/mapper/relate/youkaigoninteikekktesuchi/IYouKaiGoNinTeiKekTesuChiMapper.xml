@@ -35,7 +35,7 @@
 
     <select resultOrdered="true" id="getSyuJiSenTakuYiChiRan"
             resultMap="ResultMap_YouKaiGoNinTeiKekTesuChiRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter" fetchSize="500" >
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter" fetchSize="500" >
         SELECT
         rgdb."DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" AS youKaiGoNinTeiKekTesuChiRelateEntity_shujiiIryokikanCode,
         rgdb."DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho" AS youKaiGoNinTeiKekTesuChiRelateEntity_iryoKikanMeisho,
@@ -106,7 +106,7 @@
 
     <select resultOrdered="true" id="getKeKaTsuChiSyuTsuRyoKuTaiSyou"
             resultMap="ResultMap_YouKaiGoNinTeiKekTesuChiRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter" fetchSize="500" >
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter" fetchSize="500" >
         SELECT
         rgdb."DbT5101NinteiShinseiJoho"."hihokenshaNo" AS dbT5101NinteiShinseiJoho_hihokenshaNo,
         rgdb."DbT5101NinteiShinseiJoho"."hihokenshaName" AS dbT5101NinteiShinseiJoho_hihokenshaName,
