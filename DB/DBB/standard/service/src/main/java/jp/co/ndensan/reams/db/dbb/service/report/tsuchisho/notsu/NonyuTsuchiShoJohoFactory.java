@@ -317,17 +317,18 @@ public class NonyuTsuchiShoJohoFactory {
         List<SeikyuForPrinting> 請求情報リスト = new ArrayList<>();
         for (NokiJoho 納期情報 : 普徴納期情報リスト) {
             int 期 = 納期情報.get期月().get期AsInt();
-            ShunoKanri shunoKanri = ShunoKanri.newBuilder().build();
-            shunoKanri.toEntity().setKamokuCode(収納科目.getコード());
-            shunoKanri.toEntity().setKamokuEdabanCode(収納科目.get枝番コード());
-            shunoKanri.toEntity().setChoteiNendo(new RYear(調定年度.toDateString()));
-            shunoKanri.toEntity().setKazeiNendo(new RYear(賦課年度.toDateString()));
-            shunoKanri.toEntity().setTsuchishoNo(new jp.co.ndensan.reams.ur.urc.definition.core.shuno.tsuchishono.TsuchishoNo(
+            ShunoKanri.Builder builder = ShunoKanri.newBuilder();
+            builder.setKamokuCode(収納科目.getコード());
+            builder.setKamokuEdabanCode(収納科目.get枝番コード());
+            builder.setChoteiNendo(new RYear(調定年度.toDateString()));
+            builder.setKazeiNendo(new RYear(賦課年度.toDateString()));
+            builder.setTsuchishoNo(new jp.co.ndensan.reams.ur.urc.definition.core.shuno.tsuchishono.TsuchishoNo(
                     new Decimal(通知書番号.getColumnValue().toString())));
-            shunoKanri.toEntity().setShikibetsuCode(識別コード);
-            shunoKanri.toEntity().setJigyoKubunCode(JigyoKubun.未使用.getJigyoKubunCd());
-            shunoKanri.toEntity().setChoshukenUmu(true);
-            shunoKanri.toEntity().setKibetsu(期);
+            builder.setShikibetsuCode(識別コード);
+            builder.setJigyoKubunCode(JigyoKubun.未使用);
+            builder.setChoshukenUmu(true);
+            builder.setKibetsu(期);
+            ShunoKanri shunoKanri = builder.build();
             ShunoKey 収納キー = new ShunoKey(shunoKanri, 収納科目, 納期月リスト.get納期月From期(期));
             Decimal 普徴期別金額 = get金額By期(普徴期別金額リスト, 期);
             if (普徴期別金額.compareTo(Decimal.ZERO) <= 0) {
