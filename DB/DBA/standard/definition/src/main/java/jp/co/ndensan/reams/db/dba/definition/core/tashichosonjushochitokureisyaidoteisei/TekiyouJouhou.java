@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dba.definition.core.tashichosonjushochitokureisya
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 適用情報グリッドクラスです。
  *
  * @reamsid_L DBA-0401-010 dongyabin
@@ -30,7 +29,7 @@ public class TekiyouJouhou {
     /**
      * 適用日を設定します。
      *
-     * @param 適用日
+     * @param 適用日 適用日
      */
     public void set適用日(RString 適用日) {
         this.適用日 = 適用日;
@@ -48,7 +47,7 @@ public class TekiyouJouhou {
     /**
      * 解除日を設定します。
      *
-     * @param 解除日
+     * @param 解除日 解除日
      */
     public void set解除日(RString 解除日) {
         this.解除日 = 解除日;
