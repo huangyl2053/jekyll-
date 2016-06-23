@@ -73,6 +73,8 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
 
     private IchijihanteikekkahyoA3Body getBody1() {
         IchijihanteikekkahyoA3Body body = new IchijihanteikekkahyoA3Body();
+        body.setListSeikatsujiritsu_1(item.get障害高齢者自立度());
+        body.setListSeikatsujiritsu_2(item.get障害高齢者自立度_ある());
         body.setYobo_listYobokyufu_1(item.get介護予防訪問介護_ﾎｰﾑﾍﾙﾌﾟ_訪問型ｻｰﾋﾞｽ());
         body.setYobo_listYobokyufu1_1(item.get介護予防認知症対応型通所介護());
         body.setKaigo_listKaigokyufu_1(item.get訪問介護_ホームヘルプサービス());
@@ -123,6 +125,8 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
 
     private IchijihanteikekkahyoA3Body getBody2() {
         IchijihanteikekkahyoA3Body body = new IchijihanteikekkahyoA3Body();
+        body.setListSeikatsujiritsu_1(item.get認知症高齢者自立度());
+        body.setListSeikatsujiritsu_2(item.get認知症高齢者自立度_ある());
         body.setYobo_listYobokyufu_1(item.get介護予防訪問入浴介護());
         body.setYobo_listYobokyufu1_1(item.get介護予防小規模多機能型居宅介護());
         body.setKaigo_listKaigokyufu_1(item.get訪問入浴介護());

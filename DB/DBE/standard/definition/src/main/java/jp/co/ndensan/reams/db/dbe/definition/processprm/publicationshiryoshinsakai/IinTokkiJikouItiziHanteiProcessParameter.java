@@ -92,7 +92,7 @@ public class IinTokkiJikouItiziHanteiProcessParameter implements IBatchProcessPa
             isSakuseiJokenHani = true;
         }
         if (作成条件_追加分.equals(sakuseiJoken)) {
-            isSakuseiJokenHani = true;
+            isSakuseiJokenTuika = true;
         }
         if (RString.isNullOrEmpty(shuturyokuJun)) {
             isShuturyokuJun = true;

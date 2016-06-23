@@ -5,6 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.publicationshiryoshinsakai;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.gaikyoChosahyouniteichosahyousiseturiy.GaikyoChosahyouNiteichosahyouSisetuRiy02A;
+import jp.co.ndensan.reams.db.dbe.definition.core.gaikyoChosahyouniteichosahyousiseturiy.GaikyoChosahyouNiteichosahyouSisetuRiy06A;
+import jp.co.ndensan.reams.db.dbe.definition.core.gaikyoChosahyouniteichosahyousiseturiy.GaikyoChosahyouNiteichosahyouSisetuRiy09A;
+import jp.co.ndensan.reams.db.dbe.definition.core.gaikyoChosahyouniteichosahyousiseturiy.GaikyoChosahyouNiteichosahyouSisetuRiy09B;
+import jp.co.ndensan.reams.db.dbe.definition.core.gaikyoChosahyouniteichosahyousiseturiy.GaikyoChosahyouNiteichosahyouSisetuRiy99A;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.publicationshiryoshinsakai.ItiziHanteiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoItem;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping02A;
@@ -1104,5 +1109,30 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         } catch (IllegalArgumentException e) {
             return RString.EMPTY;
         }
+    }
+
+    /**
+     * 現在の状況の設定処理です。
+     *
+     * @param 連番 連番
+     * @param dbt5210_厚労省IF識別コード dbt5210_厚労省IF識別コード
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @return 現在の状況
+     */
+    public RString get現在の状況(RString 連番, RString dbt5210_厚労省IF識別コード, RString 厚労省IF識別コード) {
+        if (dbt5210_厚労省IF識別コード.equals(厚労省IF識別コード)) {
+            if (A_99.equals(厚労省IF識別コード)) {
+                return GaikyoChosahyouNiteichosahyouSisetuRiy99A.toValue(連番).get名称();
+            } else if (A_02.equals(厚労省IF識別コード)) {
+                return GaikyoChosahyouNiteichosahyouSisetuRiy02A.toValue(連番).get名称();
+            } else if (A_06.equals(厚労省IF識別コード)) {
+                return GaikyoChosahyouNiteichosahyouSisetuRiy06A.toValue(連番).get名称();
+            } else if (A_09.equals(厚労省IF識別コード)) {
+                return GaikyoChosahyouNiteichosahyouSisetuRiy09A.toValue(連番).get名称();
+            } else if (B_09.equals(厚労省IF識別コード)) {
+                return GaikyoChosahyouNiteichosahyouSisetuRiy09B.toValue(連番).get名称();
+            }
+        }
+        return RString.EMPTY;
     }
 }

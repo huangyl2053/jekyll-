@@ -31,6 +31,8 @@ public class IchijihanteikekkahyoA3BodyEditor implements IIchijihanteikekkahyoA3
     }
 
     private IchijihanteikekkahyoA3ReportSource editSource(IchijihanteikekkahyoA3ReportSource source) {
+        source.ｌistSeikatsujiritsu_1 = item.getListSeikatsujiritsu_1();
+        source.ｌistSeikatsujiritsu_2 = item.getListSeikatsujiritsu_2();
         source.kaigo_listKaigokyufu_1 = item.getKaigo_listKaigokyufu_1();
         source.kaigo_listKaigokyufu1_1 = item.getKaigo_listKaigokyufu1_1();
         source.yobo_listYobokyufu_1 = item.getYobo_listYobokyufu_1();
