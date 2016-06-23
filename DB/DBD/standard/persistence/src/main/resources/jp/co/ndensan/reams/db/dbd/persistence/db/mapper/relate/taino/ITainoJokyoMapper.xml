@@ -61,7 +61,7 @@
         FROM
         rgca."CaT0701Shunyu" AS Shunyu
         WHERE
-        Shunyu."shunyuYMD" = #{基準日}
+        Shunyu."shunyuYMD" &lt;= #{基準日}
         AND Shunyu."sokuhoKubun" = FALSE
         )AS D
         ON
