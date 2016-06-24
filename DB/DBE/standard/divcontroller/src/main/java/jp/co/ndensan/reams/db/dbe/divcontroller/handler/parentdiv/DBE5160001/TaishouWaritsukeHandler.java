@@ -81,6 +81,8 @@ public class TaishouWaritsukeHandler {
 
     /**
      * 画面初期化表示、画面項目に設定されている値をクリアする。
+     *
+     * @param 介護認定審査会番号 介護認定審査会番号
      */
     public void initializtion(RString 介護認定審査会番号) {
         div.getShinsakaiTaishoshaWaritsuke().setKaigoNinteiShinsakaiKaisaiNo(介護認定審査会番号);

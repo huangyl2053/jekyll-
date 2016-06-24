@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.core.gaikyoChosahyouniteichosahyousiseturiy;
+package jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 概況調査票認定調査票施設利用06Aを表す列挙型です。
+ * 概況調査票認定調査票施設利用09Bを表す列挙型です。
  *
  * @reamsid_L DBE-9999-023 wangchao
  */
-public enum GaikyoChosahyouNiteichosahyouSisetuRiy06A {
+public enum GaikyoChosahyouNiteichosahyouSisetuRiy09B {
 
     /**
      * データベース内連番:1 帳票上の文言:居宅
@@ -55,42 +55,42 @@ public enum GaikyoChosahyouNiteichosahyouSisetuRiy06A {
     private final RString code;
     private final RString fullName;
 
-    private GaikyoChosahyouNiteichosahyouSisetuRiy06A(String code, String fullname) {
+    private GaikyoChosahyouNiteichosahyouSisetuRiy09B(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
     }
 
     /**
-     * 概況調査票認定調査票施設利用06Aの連番を返します。
+     * 概況調査票認定調査票施設利用09Bの連番を返します。
      *
-     * @return 概況調査票認定調査票施設利用06Aの連番
+     * @return 概況調査票認定調査票施設利用09Bの連番
      */
     public RString get連番() {
         return code;
     }
 
     /**
-     * 概況調査票認定調査票施設利用06Aの帳票上の文言を返します。
+     * 概況調査票認定調査票施設利用09Bの帳票上の文言を返します。
      *
-     * @return 概況調査票認定調査票施設利用06Aの帳票上の文言
+     * @return 概況調査票認定調査票施設利用09Bの帳票上の文言
      */
     public RString get名称() {
         return fullName;
     }
 
     /**
-     * 概況調査票認定調査票施設利用06Aの連番と一致する内容を探します。
+     * 概況調査票認定調査票施設利用09Bの連番と一致する内容を探します。
      *
-     * @param code 概況調査票認定調査票施設利用06Aの連番
-     * @return {@code code} に対応する概況調査票認定調査票施設利用06A
+     * @param code 概況調査票認定調査票施設利用09Bの連番
+     * @return {@code code} に対応する概況調査票認定調査票施設利用09B
      */
-    public static GaikyoChosahyouNiteichosahyouSisetuRiy06A toValue(RString code) {
+    public static GaikyoChosahyouNiteichosahyouSisetuRiy09B toValue(RString code) {
 
-        for (GaikyoChosahyouNiteichosahyouSisetuRiy06A values : GaikyoChosahyouNiteichosahyouSisetuRiy06A.values()) {
-            if (values.code.equals(code)) {
-                return values;
+        for (GaikyoChosahyouNiteichosahyouSisetuRiy09B value : GaikyoChosahyouNiteichosahyouSisetuRiy09B.values()) {
+            if (value.code.equals(code)) {
+                return value;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("概況調査票認定調査票施設利用06A"));
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("概況調査票認定調査票施設利用09B"));
     }
 }

@@ -28,7 +28,6 @@ public class NinteichosaIraiJohoUpdateProcessParameter implements IBatchProcessP
     /**
      * 認定調査依頼情報更新のMybatisパラメータを作成します。
      *
-     * @param 申請書管理番号List 申請書管理番号List
      * @return 認定調査依頼情報更新のMybatisパラメータ
      */
     public NinteichosaIraiUpdateMybatisParameter toNinteiChosaTokusokujoMybatisParameter() {

@@ -42,7 +42,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 負担限度額認定更新のお知らせ通知書個別発行のクラスです。
  *
- * @reamsid_L DBD-3570-010 wangcaho
+ * @reamsid_L DBD-3570-010 wangchao
  */
 public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
 

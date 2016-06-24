@@ -544,6 +544,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     /**
      * 「特記事項を保存する」ボタンの操作処理を行う。
      *
+     * @param temp_申請書管理番号 temp_申請書管理番号
+     * @param temp_認定調査履歴番号 temp_認定調査履歴番号
      */
     public void onClick_Save(ShinseishoKanriNo temp_申請書管理番号, int temp_認定調査履歴番号) {
 
