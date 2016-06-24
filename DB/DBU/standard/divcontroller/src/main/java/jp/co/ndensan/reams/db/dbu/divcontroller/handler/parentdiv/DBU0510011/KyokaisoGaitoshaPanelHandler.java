@@ -48,7 +48,6 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
  */
 public class KyokaisoGaitoshaPanelHandler {
 
-    private static final RString 照会 = new RString("照会");
     private static final RString 措置_該当区分 = new RString("1");
     private static final RString 措置_非該当区分 = new RString("2");
     private static final RString 措置区分_該当 = new RString("該当");
@@ -78,21 +77,12 @@ public class KyokaisoGaitoshaPanelHandler {
      * 画面初期化処理です。
      *
      * @param 境界層該当一覧情報 境界層該当一覧情報
-     * @param 状態 状態
      */
-    public void onLoad(List<KyokaisoGaitoshaJoho> 境界層該当一覧情報, RString 状態) {
+    public void onLoad(List<KyokaisoGaitoshaJoho> 境界層該当一覧情報) {
         div.getDdlKyojuhiGendogakuDankai().setDataSource(居住費軽減負担限度額段階ドロップダウンリスト());
         div.getDdlKyoshituShurui().setDataSource(居住費軽減後居室種類ドロップダウンリスト());
         div.getDdlShokuhiGakenFutanGendogakuDankai().setDataSource(居住費軽減負担限度額段階ドロップダウンリスト());
-        if (照会.equals(状態)) {
-            set境界層該当一覧(境界層該当一覧情報);
-            div.getBtnTuika().setVisible(false);
-            div.getDgKyokaisouGaitouItran().getGridSetting().setIsShowSelectButtonColumn(true);
-            div.getDgKyokaisouGaitouItran().getGridSetting().setIsShowModifyButtonColumn(false);
-            div.getDgKyokaisouGaitouItran().getGridSetting().setIsShowDeleteButtonColumn(false);
-        } else {
-            set境界層該当一覧(境界層該当一覧情報);
-        }
+        set境界層該当一覧(境界層該当一覧情報);
     }
 
     /**
@@ -125,18 +115,16 @@ public class KyokaisoGaitoshaPanelHandler {
      *
      * @param row 境界層該当一覧選択したデータ
      * @param 境界層保険料段階情報 境界層保険料段階情報
-     * @param 状態 状態
      */
     public void onClick_ShowSelectButton(
             dgKyokaisouGaitouItran_Row row,
-            List<KyokaisoHokenryo> 境界層保険料段階情報,
-            RString 状態) {
+            List<KyokaisoHokenryo> 境界層保険料段階情報) {
         div.getKyokaisouGaitouItiran().setIranState(RString.EMPTY);
         div.getDdlSeidaiJogengaku().setDataSource(
                 読替後高額介護世帯上限額ドロップダウンリスト(new RDate(row.getShinseiDate().toString())));
         div.getDdlTekiyouSuruShutokuDankai().setDataSource(
                 所得段階ドロップダウンリスト(new RDate(row.getShinseiDate().toString())));
-        set境界層該当明細(row, 境界層保険料段階情報, 状態);
+        set境界層該当明細(row, 境界層保険料段階情報);
         set境界層該当明細非活性();
     }
 
@@ -145,12 +133,10 @@ public class KyokaisoGaitoshaPanelHandler {
      *
      * @param row 境界層該当一覧選択したデータ
      * @param 境界層保険料段階情報 境界層保険料段階情報
-     * @param 状態 状態
      */
     public void onClick_ShowModifyButton(
             dgKyokaisouGaitouItran_Row row,
-            List<KyokaisoHokenryo> 境界層保険料段階情報,
-            RString 状態) {
+            List<KyokaisoHokenryo> 境界層保険料段階情報) {
         div.getKyokaisouGaitouItiran().setIranState(状態_修正);
         div.getBtnTuikaSuru().setDisabled(false);
         div.getBtnCancel().setDisabled(false);
@@ -159,7 +145,7 @@ public class KyokaisoGaitoshaPanelHandler {
                 読替後高額介護世帯上限額ドロップダウンリスト(new RDate(row.getShinseiDate().toString())));
         div.getDdlTekiyouSuruShutokuDankai().setDataSource(
                 所得段階ドロップダウンリスト(new RDate(row.getShinseiDate().toString())));
-        set境界層該当明細(row, 境界層保険料段階情報, 状態);
+        set境界層該当明細(row, 境界層保険料段階情報);
         set境界層該当明細活性();
     }
 
@@ -168,18 +154,16 @@ public class KyokaisoGaitoshaPanelHandler {
      *
      * @param row 境界層該当一覧選択したデータ
      * @param 境界層保険料段階情報 境界層保険料段階情報
-     * @param 状態 状態
      */
     public void onClick_ShowDeleteButton(
             dgKyokaisouGaitouItran_Row row,
-            List<KyokaisoHokenryo> 境界層保険料段階情報,
-            RString 状態) {
+            List<KyokaisoHokenryo> 境界層保険料段階情報) {
         div.getKyokaisouGaitouItiran().setIranState(状態_削除);
         div.getDdlSeidaiJogengaku().setDataSource(
                 読替後高額介護世帯上限額ドロップダウンリスト(new RDate(row.getShinseiDate().toString())));
         div.getDdlTekiyouSuruShutokuDankai().setDataSource(
                 所得段階ドロップダウンリスト(new RDate(row.getShinseiDate().toString())));
-        set境界層該当明細(row, 境界層保険料段階情報, 状態);
+        set境界層該当明細(row, 境界層保険料段階情報);
         set境界層該当明細非活性();
     }
 
@@ -509,7 +493,7 @@ public class KyokaisoGaitoshaPanelHandler {
             row.setSyokuhiKeigengoFutangaku(new RString(nullToZero(境界層該当一覧.get食費軽減後負担額()).toString()));
             row.setYomikaegoKogakuKaigoSetaiJogengaku(new RString(nullToZero(境界層該当一覧.get高額ｻｰﾋﾞｽ費減額後上限額()).toString()));
             row.setKaigoHokenryoTeigengoSyotokuDankai(
-                    select所得段階(new RDate(境界層該当一覧.get申請年月日().toString()),
+                    select所得段階(境界層該当一覧.get申請年月日(),
                             境界層該当一覧.get保険料納付減額後保険料段階() == null ? RString.EMPTY : 境界層該当一覧.get保険料納付減額後保険料段階()));
             row.setKyokaisoSochiKetteiDate(日付フォーマット(境界層該当一覧.get境界層措置決定年月日()));
             row.setKyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku(new RString(
@@ -574,7 +558,7 @@ public class KyokaisoGaitoshaPanelHandler {
 
     private void set境界層該当明細(
             dgKyokaisouGaitouItran_Row row,
-            List<KyokaisoHokenryo> 境界層保険料段階情報, RString 状態) {
+            List<KyokaisoHokenryo> 境界層保険料段階情報) {
         div.getDghokenryoNofu().getGridSetting().setIsShowSelectButtonColumn(true);
         div.getTxtShiseibi().setValue(new RDate(row.getShinseiDate().toString()));
         div.getRadSochiGaitouKubun().setSelectedKey(row.getSochiGaitoHigaito());
@@ -591,7 +575,7 @@ public class KyokaisoGaitoshaPanelHandler {
         select読替後高額介護世帯上限額(new RDate(row.getShinseiDate().toString()),
                 row.getKogakuServicehiJogengakuGengakugoJogengaku());
         div.getRadHokenryoNofuGengaku().setSelectedKey(row.getHokenryoNofuGengakuFlag());
-        境界層保険料段階一覧(境界層保険料段階情報, new RDate(row.getShinseiDate().toString()), 状態);
+        境界層保険料段階一覧(境界層保険料段階情報, new RDate(row.getShinseiDate().toString()));
         div.getTxtHogoFuyoKonshoGengakuKingaku().setValue(new Decimal(row.getHogoFuyoKonkyoGengakuKingaku().toString()));
         div.getTxtKyufugakuJikoFutanGetsugaku().setValue(
                 new Decimal(row.getKyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku().toString()));
@@ -612,11 +596,11 @@ public class KyokaisoGaitoshaPanelHandler {
 
     }
 
-    private void 境界層保険料段階一覧(List<KyokaisoHokenryo> 境界層保険料段階情報, RDate 申請年月日, RString 状態) {
+    private void 境界層保険料段階一覧(List<KyokaisoHokenryo> 境界層保険料段階情報, RDate 申請年月日) {
         List<dghokenryoNofu_Row> nofu_rowList = new ArrayList<>();
         for (KyokaisoHokenryo 境界層保険料段階 : 境界層保険料段階情報) {
             dghokenryoNofu_Row nofu_row = new dghokenryoNofu_Row();
-            if (状態_削除.equals(div.getKyokaisouGaitouItiran().getIranState()) || 照会.equals(状態)) {
+            if (状態_削除.equals(div.getKyokaisouGaitouItiran().getIranState())) {
                 nofu_row.setSelectButtonState(DataGridButtonState.Disabled);
                 nofu_row.setModifyButtonState(DataGridButtonState.Disabled);
                 nofu_row.setDeleteButtonState(DataGridButtonState.Disabled);
@@ -624,7 +608,7 @@ public class KyokaisoGaitoshaPanelHandler {
             nofu_row.setState(RString.EMPTY);
             nofu_row.setTekiyoKaishiDate(年月フォーマット(境界層保険料段階.get適用開始年月()));
             nofu_row.setTekiyoShuryoDate(年月フォーマット(境界層保険料段階.get適用終了年月()));
-            nofu_row.setHokenryoDankai(select所得段階(申請年月日,
+            nofu_row.setHokenryoDankai(select所得段階(new FlexibleDate(申請年月日.toDateString()),
                     境界層保険料段階.get保険料納付減額後保険料段階()));
             nofu_row.setTekiyoRirekiNo(new RString(境界層保険料段階.get履歴番号().toString()));
             nofu_row.setTekiyoLinkNo(new RString(境界層保険料段階.getリンク番号().toString()));
@@ -814,8 +798,11 @@ public class KyokaisoGaitoshaPanelHandler {
         return dataSourceList;
     }
 
-    private RString select所得段階(RDate 申請日, RString 段階インデックス) {
-        List<KeyValueDataSource> dataSourceList = 所得段階ドロップダウンリスト(申請日);
+    private RString select所得段階(FlexibleDate 申請日, RString 段階インデックス) {
+        if (申請日 == null || 申請日.isEmpty()) {
+            return RString.EMPTY;
+        }
+        List<KeyValueDataSource> dataSourceList = 所得段階ドロップダウンリスト(new RDate(申請日.toString()));
         for (KeyValueDataSource keyValue : dataSourceList) {
             if (!RString.isNullOrEmpty(段階インデックス) && 段階インデックス.equals(keyValue.getKey())) {
                 return keyValue.getValue();

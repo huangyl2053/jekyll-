@@ -117,7 +117,6 @@
         rgdb."DbT1006KyokaisoGaitosha" AS dbT1006KyokaisoGaitosha
         WHERE
         dbT1006KyokaisoGaitosha."hihokenshaNo" = #{被保険者番号}
-        AND dbT1006KyokaisoGaitosha."logicalDeletedFlag" = FALSE
     </select>
 
     <select resultOrdered="true" id="selcet最新リンク番号" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaParameter"
@@ -128,7 +127,6 @@
         rgdb."DbT1006KyokaisoGaitosha" AS dbT1006KyokaisoGaitosha
         WHERE
         dbT1006KyokaisoGaitosha."hihokenshaNo" = #{被保険者番号}
-        AND dbT1006KyokaisoGaitosha."logicalDeletedFlag" = FALSE
     </select>
 
     <resultMap id="ResultMap_KyokaisoGaitoshaRelateEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaJohoRelateEntity" autoMapping="true">
