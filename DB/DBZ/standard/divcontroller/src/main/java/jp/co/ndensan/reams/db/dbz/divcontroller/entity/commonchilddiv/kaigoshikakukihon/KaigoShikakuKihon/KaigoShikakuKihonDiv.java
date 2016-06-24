@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -299,21 +299,21 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     @JsonProperty("modes")
     private HashSet<Mode> modes;
 
-    public static enum 認定履歴ボタンを implements ICommonChildDivMode {
+    public static enum NinteiRirekiButtonWo implements ICommonChildDivMode {
 
-        表示する("表示する"),
-        表示しない("表示しない");
+        HyojiSuru("HyojiSuru"),
+        HyojiShinai("HyojiShinai");
 
         private final String name;
 
-        private 認定履歴ボタンを(final String name) {
+        private NinteiRirekiButtonWo(final String name) {
             this.name = name;
         }
 
-        public static 認定履歴ボタンを getEnum(String str) {
-            認定履歴ボタンを[] enumArray = 認定履歴ボタンを.values();
+        public static NinteiRirekiButtonWo getEnum(String str) {
+            NinteiRirekiButtonWo[] enumArray = NinteiRirekiButtonWo.values();
 
-            for (認定履歴ボタンを enumStr : enumArray) {
+            for (NinteiRirekiButtonWo enumStr : enumArray) {
                 if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
@@ -328,29 +328,29 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     }
 
-    public 認定履歴ボタンを getMode_認定履歴ボタンを() {
-        return (認定履歴ボタンを) _CommonChildDivModeUtil.getMode(this.modes, 認定履歴ボタンを.class);
+    public NinteiRirekiButtonWo getMode_NinteiRirekiButtonWo() {
+        return (NinteiRirekiButtonWo) _CommonChildDivModeUtil.getMode(this.modes, NinteiRirekiButtonWo.class);
     }
 
-    public void setMode_認定履歴ボタンを(認定履歴ボタンを value) {
-        _CommonChildDivModeUtil.setMode(this.modes, 認定履歴ボタンを.class, value);
+    public void setMode_NinteiRirekiButtonWo(NinteiRirekiButtonWo value) {
+        _CommonChildDivModeUtil.setMode(this.modes, NinteiRirekiButtonWo.class, value);
     }
 
-    public static enum 被保履歴ボタンを implements ICommonChildDivMode {
+    public static enum HihoRirekiButtonWo implements ICommonChildDivMode {
 
-        表示する("表示する"),
-        表示しない("表示しない");
+        HyojiSuru("HyojiSuru"),
+        HyojiShinai("HyojiShinai");
 
         private final String name;
 
-        private 被保履歴ボタンを(final String name) {
+        private HihoRirekiButtonWo(final String name) {
             this.name = name;
         }
 
-        public static 被保履歴ボタンを getEnum(String str) {
-            被保履歴ボタンを[] enumArray = 被保履歴ボタンを.values();
+        public static HihoRirekiButtonWo getEnum(String str) {
+            HihoRirekiButtonWo[] enumArray = HihoRirekiButtonWo.values();
 
-            for (被保履歴ボタンを enumStr : enumArray) {
+            for (HihoRirekiButtonWo enumStr : enumArray) {
                 if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
@@ -365,12 +365,12 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     }
 
-    public 被保履歴ボタンを getMode_被保履歴ボタンを() {
-        return (被保履歴ボタンを) _CommonChildDivModeUtil.getMode(this.modes, 被保履歴ボタンを.class);
+    public HihoRirekiButtonWo getMode_HihoRirekiButtonWo() {
+        return (HihoRirekiButtonWo) _CommonChildDivModeUtil.getMode(this.modes, HihoRirekiButtonWo.class);
     }
 
-    public void setMode_被保履歴ボタンを(被保履歴ボタンを value) {
-        _CommonChildDivModeUtil.setMode(this.modes, 被保履歴ボタンを.class, value);
+    public void setMode_HihoRirekiButtonWo(HihoRirekiButtonWo value) {
+        _CommonChildDivModeUtil.setMode(this.modes, HihoRirekiButtonWo.class, value);
     }
 
     // </editor-fold>
@@ -430,9 +430,9 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     @JsonIgnore
     public void set認定履歴ボタンDisable(boolean isdisabled) {
         if (isdisabled) {
-            setMode_認定履歴ボタンを(認定履歴ボタンを.表示しない);
+            setMode_NinteiRirekiButtonWo(NinteiRirekiButtonWo.HyojiShinai);
         } else {
-            setMode_認定履歴ボタンを(認定履歴ボタンを.表示する);
+            setMode_NinteiRirekiButtonWo(NinteiRirekiButtonWo.HyojiSuru);
         }
     }
 
@@ -440,9 +440,9 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     @JsonIgnore
     public void set被保履歴ボタンDisable(boolean isdisabled) {
         if (isdisabled) {
-            setMode_被保履歴ボタンを(被保履歴ボタンを.表示しない);
+            setMode_HihoRirekiButtonWo(HihoRirekiButtonWo.HyojiShinai);
         } else {
-            setMode_被保履歴ボタンを(被保履歴ボタンを.表示する);
+            setMode_HihoRirekiButtonWo(HihoRirekiButtonWo.HyojiSuru);
         }
     }
 

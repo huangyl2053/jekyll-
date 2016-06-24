@@ -17,6 +17,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class SyokofukaisyuzyohouParameter {
 
     private RString 交付証種類コード;
