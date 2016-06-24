@@ -133,44 +133,44 @@ public class HakkoJokenHandler {
      * @return ninteichosaYoteiMiteiBatchParamter
      */
     public NinteichosaYoteiMiteiBatchParamter setBatchParameter() {
-        NinteichosaYoteiMiteiBatchParamter ninteichosaYoteiMiteiBatchParamter = new NinteichosaYoteiMiteiBatchParamter();
+        NinteichosaYoteiMiteiBatchParamter batchParamter = new NinteichosaYoteiMiteiBatchParamter();
         if (div.getChkNinteiChosaYoteiMiteishaIchiran().getSelectedKeys().contains(SELECT_KEY0)) {
-            ninteichosaYoteiMiteiBatchParamter.setNinteichosayoteimitei(true);
+            batchParamter.setNinteichosayoteimitei(true);
             if (div.getRadJoken1().getSelectedKey().contains(SELECT_KEY0)) {
-                ninteichosaYoteiMiteiBatchParamter.setJoken1(new RString("1"));
+                batchParamter.setJoken1(new RString("1"));
             } else {
-                ninteichosaYoteiMiteiBatchParamter.setJoken1(new RString("2"));
-                ninteichosaYoteiMiteiBatchParamter.setYoteimiteiymdFrom(div.getTxtYoteiMiteishaShinseiYMD().getFromValue().toDateString());
-                ninteichosaYoteiMiteiBatchParamter.setYoteimiteiymdTo(div.getTxtYoteiMiteishaShinseiYMD().getToValue().toDateString());
+                batchParamter.setJoken1(new RString("2"));
+                batchParamter.setYoteimiteiymdFrom(div.getTxtYoteiMiteishaShinseiYMD().getFromValue().toDateString());
+                batchParamter.setYoteimiteiymdTo(div.getTxtYoteiMiteishaShinseiYMD().getToValue().toDateString());
             }
         } else {
-            ninteichosaYoteiMiteiBatchParamter.setNinteichosayoteimitei(false);
+            batchParamter.setNinteichosayoteimitei(false);
         }
         if (div.getChkNinteiChosaIraisakiHenkoshaIchiranhyoJoken().getSelectedKeys().contains(SELECT_KEY0)) {
-            ninteichosaYoteiMiteiBatchParamter.setNinteichosaijoken(true);
-            ninteichosaYoteiMiteiBatchParamter.setIraisakihenkymdFrom(div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getFromValue().toDateString());
-            ninteichosaYoteiMiteiBatchParamter.setIraisakihenkymdTo(div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getToValue().toDateString());
+            batchParamter.setNinteichosaijoken(true);
+            batchParamter.setIraisakihenkymdFrom(div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getFromValue().toDateString());
+            batchParamter.setIraisakihenkymdTo(div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getToValue().toDateString());
         } else {
-            ninteichosaYoteiMiteiBatchParamter.setNinteichosaijoken(false);
+            batchParamter.setNinteichosaijoken(false);
         }
         if (div.getChkNinteiChosaKekkaShujiiIkenshoCheckListJoken().getSelectedKeys().contains(SELECT_KEY0)) {
-            ninteichosaYoteiMiteiBatchParamter.setCheckListJoken(true);
+            batchParamter.setCheckListJoken(true);
             if (div.getRadJoken3().getSelectedKey().contains(SELECT_KEY3)) {
-                ninteichosaYoteiMiteiBatchParamter.setJoken3(new RString("4"));
-                ninteichosaYoteiMiteiBatchParamter.setShinsakai(new RString(div.getTxtShinsakai().toString()));
+                batchParamter.setJoken3(new RString("4"));
+                batchParamter.setShinsakai(new RString(div.getTxtShinsakai().toString()));
             } else if (div.getRadJoken3().getSelectedKey().contains(SELECT_KEY1)) {
-                ninteichosaYoteiMiteiBatchParamter.setJoken3(new RString("2"));
-                ninteichosaYoteiMiteiBatchParamter.setCheckListShinseiYMDFrom(div.getTxtCheckListShinseiYMD().getFromValue().toDateString());
-                ninteichosaYoteiMiteiBatchParamter.setCheckListShinseiYMDTo(div.getTxtCheckListShinseiYMD().getToValue().toDateString());
+                batchParamter.setJoken3(new RString("2"));
+                batchParamter.setCheckListShinseiYMDFrom(div.getTxtCheckListShinseiYMD().getFromValue().toDateString());
+                batchParamter.setCheckListShinseiYMDTo(div.getTxtCheckListShinseiYMD().getToValue().toDateString());
             } else if (div.getRadJoken3().getSelectedKey().contains(SELECT_KEY2)) {
-                ninteichosaYoteiMiteiBatchParamter.setJoken3(new RString("3"));
-                ninteichosaYoteiMiteiBatchParamter.setShinsaYMD(new RString(div.getTxtShinsaYMD().toString()));
+                batchParamter.setJoken3(new RString("3"));
+                batchParamter.setShinsaYMD(new RString(div.getTxtShinsaYMD().toString()));
             } else {
-                ninteichosaYoteiMiteiBatchParamter.setJoken3(new RString("1"));
+                batchParamter.setJoken3(new RString("1"));
             }
         } else {
-            ninteichosaYoteiMiteiBatchParamter.setCheckListJoken(false);
+            batchParamter.setCheckListJoken(false);
         }
-        return ninteichosaYoteiMiteiBatchParamter;
+        return batchParamter;
     }
 }
