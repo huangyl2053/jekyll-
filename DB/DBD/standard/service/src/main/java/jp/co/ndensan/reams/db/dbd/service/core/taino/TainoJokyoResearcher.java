@@ -112,9 +112,9 @@ public class TainoJokyoResearcher {
                 }
                 KyufugakuGengakuMeisai 給付額減額明細entity = new KyufugakuGengakuMeisai(滞納情報.get調定年度(), 滞納額合計, 調定額合計, 収入額合計);
                 給付額減額明細Map.put(滞納情報.get調定年度(), 給付額減額明細entity);
-                調定額合計 = Decimal.ZERO;
-                滞納額合計 = Decimal.ZERO;
-                収入額合計 = Decimal.ZERO;
+                調定額合計 = 滞納情報.get調定額();
+                滞納額合計 = 滞納情報.get滞納額();
+                収入額合計 = 滞納情報.get収入額();
                 該当調定年度 = 滞納情報.get調定年度();
             }
             if (JikoKubun.時効未到来.equals(滞納情報.get時効区分()) && 滞納情報.get滞納額().intValue() > 0) {
@@ -126,10 +126,13 @@ public class TainoJokyoResearcher {
                 }
             }
         }
-        if (給付額減額明細Map.isEmpty() && !new滞納情報List.isEmpty()) {
-            KyufugakuGengakuMeisai 給付額減額明細entity = new KyufugakuGengakuMeisai(該当調定年度, 滞納額合計, 調定額合計, 収入額合計);
-            給付額減額明細Map.put(該当調定年度, 給付額減額明細entity);
+        if (!Decimal.ZERO.equals(調定額合計)) {
+            徴収権消滅期間合計 = 徴収権消滅期間合計.add(滞納額合計.divide(調定額合計));
+            納付済期間合計 = 納付済期間合計.add(収入額合計.divide(調定額合計));
         }
+        KyufugakuGengakuMeisai 給付額減額明細entity = new KyufugakuGengakuMeisai(該当調定年度, 滞納額合計, 調定額合計, 収入額合計);
+        給付額減額明細Map.put(該当調定年度, 給付額減額明細entity);
+
         if (!Decimal.ZERO.equals(徴収権消滅期間合計.add(納付済期間合計))) {
             給付額減額期間 = 徴収権消滅期間合計.multiply(徴収権消滅期間合計).divide(徴収権消滅期間合計.add(納付済期間合計)).divide(2).multiply(一年の月数);
         }
