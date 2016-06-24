@@ -152,7 +152,7 @@ public final class TainoKiSummary {
                 get時効区分(時効起算日, 基準日, 未納完納区分),
                 relateEntity.get通知書番号(),
                 TokuchoFuchoKubun.toValue(relateEntity.get徴収方法()),
-                最大収入日.isBefore(relateEntity.get時効起算年月日()) ? JikoGoShunyuKubun.なし : JikoGoShunyuKubun.あり,
+                最大収入日.isBefore(時効起算日) ? JikoGoShunyuKubun.なし : JikoGoShunyuKubun.あり,
                 TaishoHanteiKubun._空,
                 Decimal.ZERO);
     }
