@@ -1,6 +1,6 @@
-package jp.co.ndensan.reams.db.dbc.definition.core.serviceshurui;
+package jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui;
 
-import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -8,10 +8,10 @@ import org.junit.Test;
 
 /**
  * サービス種類のテストクラスです。
- * 
- * @author LDNS 
+ *
+ * @author LDNS
  */
-public class ServiceCategoryShuruiTest extends DbcTestBase{
+public class ServiceCategoryShuruiTest extends DbxTestBase {
 
     @Test(expected = NullPointerException.class)
     public void 引数がNullである場合_toValueは_NullPointerExceptionが発生する() {
