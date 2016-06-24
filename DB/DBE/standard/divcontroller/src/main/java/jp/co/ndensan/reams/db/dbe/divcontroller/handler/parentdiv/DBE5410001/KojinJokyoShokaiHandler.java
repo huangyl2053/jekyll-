@@ -230,12 +230,11 @@ public class KojinJokyoShokaiHandler {
                 div.getTxtNinteiKekka().setValue(YokaigoJotaiKubun02.
                         toValue(kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().value()).get名称());
             }
-        } else if (識別コード_99A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())) {
-            if (kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード() != null
-                    && !kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().isEmpty()) {
-                div.getTxtNinteiKekka().setValue(YokaigoJotaiKubun99.
-                        toValue(kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().value()).get名称());
-            }
+        } else if (識別コード_99A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())
+                && kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード() != null
+                && !kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().isEmpty()) {
+            div.getTxtNinteiKekka().setValue(YokaigoJotaiKubun99.
+                    toValue(kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().value()).get名称());
         }
     }
 
@@ -261,12 +260,11 @@ public class KojinJokyoShokaiHandler {
                 一次判定結果 = IchijiHanteiKekkaCode02.
                         toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get名称();
             }
-        } else if (識別コード_99A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())) {
-            if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード() != null
-                    && !kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().isEmpty()) {
-                一次判定結果 = IchijiHanteiKekkaCode99.
-                        toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get名称();
-            }
+        } else if (識別コード_99A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())
+                && kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード() != null
+                && !kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().isEmpty()) {
+            一次判定結果 = IchijiHanteiKekkaCode99.
+                    toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get名称();
         }
         if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード認知症加算() != null
                 && !kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード認知症加算().isEmpty()) {
