@@ -18,7 +18,7 @@ public class JimukyokuyoYobihanteiKinyuhyoReportSource implements IReportSource 
 
     @ReportItem(name = "shinsakaiKaisaiNo", length = 4, order = 1)
     public RString shinsakaiKaisaiNo;
-    @ReportItem(name = "kaisaiYMD", length = 10, order = 2)
+    @ReportItem(name = "kaisaiYMD", length = 14, order = 2)
     public RString kaisaiYMD;
     @ReportItem(name = "kaisaiHH", length = 2, order = 3)
     public RString kaisaiHH;
