@@ -16,13 +16,7 @@ public enum DBC1141011StateName implements IStateEnumerations {
 
     NoChange(""),
     Default("default"),
-    自己負担額情報補正;（一括）(
-
-    @Override
-    public RString getName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-"自己負担額情報補正（一括）");
+    自己負担額情報補正一括("自己負担額情報補正一括");
 
     private final RString name;
 

@@ -12,9 +12,6 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath>../../</relativePath>
     </parent>
-    <properties>
-        <jp.co.ndensan.reams.dbx.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbx.version>
-    </properties>
     <modules>
         <module>entity</module>
         <module>business</module>
