@@ -63,7 +63,8 @@ public enum DbzErrorMessages implements IMessageGettable, IValidationMessage {
     比較項目不一致(49, "比較項目が不一致です。：?"),
     適用期間対象外(50, "次の情報は適用期間の対象外です。：?"),
     最低限の入力なし(51, "いずれかの項目を入力してください：?"),
-    ダウンロード失敗(52, "ファイルのダウンロードに失敗しました。");
+    ダウンロード失敗(52, "ファイルのダウンロードに失敗しました。"),
+    アップロードファイルが不正(53, "アップロードファイルが不正です。：?");
 
     private final transient Message message;
 
