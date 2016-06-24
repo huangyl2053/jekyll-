@@ -146,7 +146,7 @@ public final class TainoKiSummary {
                 時効起算日,
                 時効起算日区分,
                 未納完納区分,
-                get時効区分(relateEntity, 基準日, 未納完納区分),
+                get時効区分(時効起算日, 基準日, 未納完納区分),
                 relateEntity.get通知書番号(),
                 TokuchoFuchoKubun.toValue(relateEntity.get徴収方法()),
                 最大収入日.isBefore(relateEntity.get時効起算年月日()) ? JikoGoShunyuKubun.なし : JikoGoShunyuKubun.あり,
@@ -170,9 +170,9 @@ public final class TainoKiSummary {
         }
     }
 
-    private static JikoKubun get時効区分(TainoJohoRelateEntity relateEntity, FlexibleDate 基準日, MinoKannoKubun 未納完納区分) {
+    private static JikoKubun get時効区分(FlexibleDate 時効起算日, FlexibleDate 基準日, MinoKannoKubun 未納完納区分) {
         if (MinoKannoKubun.未納あり.equals(未納完納区分)) {
-            if (relateEntity.get時効起算年月日().plusYear(2).isBeforeOrEquals(基準日)) {
+            if (時効起算日.plusYear(2).isBeforeOrEquals(基準日)) {
                 return JikoKubun.時効到来;
             } else {
                 return JikoKubun.時効未到来;
