@@ -9,8 +9,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceShuruiJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
-import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.core.kaigojigyoshano.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.JigyoshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jigyosha.JigyoshaInputGuideParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
@@ -126,7 +126,7 @@ public class JiGyoSyaHandler {
                     if (Jigyosha.records().get(i).get有効開始日() != null && !Jigyosha.records().get(i).get有効開始日().isEmpty()) {
                         dgJigyoshaItiran.getTxtYukoKaishibiYMD().setValue(new RDate(Jigyosha.records().get(i).get有効開始日().toString()));
                     }
-                    if (Jigyosha.records().get(i).get有効終了日() != null && !Jigyosha.records().get(i).get有効開始日().isEmpty()) {
+                    if (Jigyosha.records().get(i).get有効終了日() != null && !Jigyosha.records().get(i).get有効終了日().isEmpty()) {
                         dgJigyoshaItiran.getTxtYukoShuryobiYMD().setValue(new RDate(Jigyosha.records().get(i).get有効終了日().toString()));
                     }
                     dgJigyoshaItiran.setTxtMeisho(Jigyosha.records().get(i).get事業者名称() == null ? RString.EMPTY
