@@ -55,6 +55,7 @@ public class SystemKanriHoyou {
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             throw new PessimisticLockingException();
         }
+        div.getSystemKanri().setDisabled(false);
         List<ConfigMaintenance> resultList = finder.getSyozokuKikan(サブ業務コード.value()).records();
         getHandler(div).initialize(resultList);
         return ResponseData.of(div).respond();
