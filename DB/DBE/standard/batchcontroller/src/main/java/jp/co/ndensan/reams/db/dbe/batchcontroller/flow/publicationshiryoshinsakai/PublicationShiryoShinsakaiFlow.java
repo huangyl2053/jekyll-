@@ -80,10 +80,12 @@ public class PublicationShiryoShinsakaiFlow extends BatchFlowBase<PublicationShi
                 && 選択.equals(getParameter().getChohyoIin_itiziHanteiFalg())
                 && 選択.equals(getParameter().getChohyoIin_ikenshoFalg()))
                 || (選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())
-                && 選択.equals(getParameter().getChohyoIin_ikenshoFalg()))) {
-            if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
-                executeStep(委員_追加資料鑑);
-            }
+                && 選択.equals(getParameter().getChohyoIin_ikenshoFalg()))
+                && 作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
+            // TODO 審査対象者一覧帳票実装しない
+//            if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
+            executeStep(委員_追加資料鑑);
+//            }
 //            else {
 //                executeStep(委員_審査対象者一覧);
 //            }
