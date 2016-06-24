@@ -14,13 +14,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 public enum DBC1141011TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    自己負担額情報補正;（一括）(
-
-    @Override
-    public RString getName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-"自己負担額情報補正（一括）"),
+    自己負担額情報補正一括("自己負担額情報補正一括"),
     完了("完了");
 
     private final RString name;
