@@ -6,7 +6,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.publicationshiryoshinsakai.IShiryoShinsakaiIinMapper">
 
-    <select id="getShinsakaiIinCode" resultMap="Result_ShinsakaiIinCode" 
+    <select resultOrdered="true" id="getShinsakaiIinCode" resultMap="Result_ShinsakaiIinCode" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTuutishoMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 DISTINCT
@@ -19,7 +19,7 @@
                 dbt5503."shinsakaiIinCode"
     </select>
     
-    <select id="getShinsakaiYoteiJoho" resultMap="Result_ShinsakaiYoteiJoho" 
+    <select resultOrdered="true" id="getShinsakaiYoteiJoho" resultMap="Result_ShinsakaiYoteiJoho" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTuutishoMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 dbt5501."shinsakaiKaisaiNo" AS dbt5501_shinsakaiKaisaiNo,
@@ -68,7 +68,7 @@
         <result property="sonotaKikanCode" column="dbT5595_sonotaKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
-    <select id="get宛先情報" resultMap="resultMap宛先情報" 
+    <select resultOrdered="true" id="get宛先情報" resultMap="resultMap宛先情報" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTuutishoMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 dbT5595."shoKisaiHokenshaNo" AS dbT5595_shoKisaiHokenshaNo,
@@ -93,7 +93,7 @@
         <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
-    <select id="get主治医宛名情報" resultMap="resultMapPsmJohoEntity" 
+    <select resultOrdered="true" id="get主治医宛名情報" resultMap="resultMapPsmJohoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTuutishoMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 dbT5911."iryoKikanMeisho" AS iryoKikanMeisho,
@@ -111,7 +111,7 @@
                 AND dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
     </select>
     
-    <select id="get認定調査員宛名情報" resultMap="resultMapPsmJohoEntity" 
+    <select resultOrdered="true" id="get認定調査員宛名情報" resultMap="resultMapPsmJohoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTuutishoMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 dbT5910."jigyoshaMeisho" AS iryoKikanMeisho,
@@ -129,7 +129,7 @@
                 AND dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
     </select>
     
-    <select id="getその他宛名情報" resultMap="resultMapPsmJohoEntity" 
+    <select resultOrdered="true" id="getその他宛名情報" resultMap="resultMapPsmJohoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTuutishoMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 dbT5914."kikanMeisho" AS iryoKikanMeisho,
@@ -141,7 +141,7 @@
                 AND dbT5914."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
     </select>
     
-    <select id="getNinteiShinseiJoho" resultMap="Result_NinteiShinseiJoho" 
+    <select resultOrdered="true" id="getNinteiShinseiJoho" resultMap="Result_NinteiShinseiJoho" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 NinteiJoho.dbT5502_shinseishoKanriNo AS shinseishoKanriNo,
@@ -204,7 +204,7 @@
                 </if>-->
     </select>
     
-    <select id="getNinteiTokkijikoCount" resultType="java.lang.Integer"
+    <select resultOrdered="true" id="getNinteiTokkijikoCount" resultType="java.lang.Integer"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 COUNT(*)
@@ -220,7 +220,7 @@
             AND dbt5205."genponMaskKubun" = #{genponKubun}
     </select>
     
-    <select id="getNinteiTokkijiko" resultMap="Result_NinteiTokkijiko" 
+    <select resultOrdered="true" id="getNinteiTokkijiko" resultMap="Result_NinteiTokkijiko" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 dbt5205."ninteichosaTokkijikoNo" AS dbt5205_ninteichosaTokkijikoNo,
@@ -243,7 +243,7 @@
                 dbt5205."ninteichosaTokkijikoRemban"
     </select>
     
-    <select id="getItiziHantei" resultMap="Result_ItiziHantei" 
+    <select resultOrdered="true" id="getItiziHantei" resultMap="Result_ItiziHantei" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 NinteiJoho.dbt5502_shinseishoKanriNo AS dbt5502_shinseishoKanriNo,
@@ -570,7 +570,7 @@
                 </if>-->
     </select>
       
-    <select id="getZenShinseishoKanriNo" resultType="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" 
+    <select resultOrdered="true" id="getZenShinseishoKanriNo" resultType="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT       
                 dbt5121."zenkaiShinseishoKanriNo" AS dbt5121_zenkaiShinseishoKanriNo     
@@ -580,7 +580,7 @@
                 dbt5121."shinseishoKanriNo" = #{shinseishoKanri}
     </select>
     
-    <select id="getNinteichosahyoTokkijikoCount" resultType="java.lang.Integer" 
+    <select resultOrdered="true" id="getNinteichosahyoTokkijikoCount" resultType="java.lang.Integer" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT       
                 COUNT(*)
@@ -594,7 +594,7 @@
                 dbt5205."genponMaskKubun" = #{genponKubun}
     </select>
     
-    <select id="getNinteichosahyoTokkijiko" resultMap="Result_NinteichosahyoTokkijiko" 
+    <select resultOrdered="true" id="getNinteichosahyoTokkijiko" resultMap="Result_NinteichosahyoTokkijiko" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT       
                 dbt5205."ninteichosaTokkijikoNo" AS dbt5205_ninteichosaTokkijikoNo,
@@ -614,7 +614,7 @@
                 dbt5205."ninteichosaTokkijikoRemban"
     </select>
     
-    <select id="getShinsakaiWariateJoho" resultMap="Result_ShinsakaiWariateJoho" 
+    <select resultOrdered="true" id="getShinsakaiWariateJoho" resultMap="Result_ShinsakaiWariateJoho" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT       
                 ShinsakaiWariateJoho.dbT5502_shinseishoKanriNo AS dbT5502_shinseishoKanriNo,
@@ -684,7 +684,7 @@
                 </if>-->
     </select>
     
-    <select id="getHanteiJoho" resultMap="Result_HanteiJoho" 
+    <select resultOrdered="true" id="getHanteiJoho" resultMap="Result_HanteiJoho" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 dbt5502."shinsakaiOrder" AS dbt5502_shinsakaiOrder,
@@ -753,7 +753,7 @@
                 </if>-->
     </select>
     
-    <select id="getShinsakaiIinJoho" resultMap="Result_ShinsakaiIinJoho" 
+    <select resultOrdered="true" id="getShinsakaiIinJoho" resultMap="Result_ShinsakaiIinJoho" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 dbt5594."shinsakaiIinShimei" AS dbt5594_shinsakaiIinShimei
@@ -783,7 +783,7 @@
                 dbt5594."shinsakaiIinCode"
     </select>
     
-    <select id="getShinseiJoho" resultMap="Result_ShinseiJoho" 
+    <select resultOrdered="true" id="getShinseiJoho" resultMap="Result_ShinseiJoho" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 NinteiShinseiJoho.dbt5502_shinsakaiOrder AS dbt5502_shinsakaiOrder,
@@ -872,7 +872,7 @@
                 </if>-->
     </select>
     
-    <select id="getTokkiIranJoho" resultMap="Result_TokkiIranJoho" 
+    <select resultOrdered="true" id="getTokkiIranJoho" resultMap="Result_TokkiIranJoho" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 NinteiShinseiJoho.dbt5502_shinsakaiOrder AS dbt5502_shinsakaiOrder,
@@ -943,7 +943,7 @@
                 </if>-->
     </select>
     
-    <select id="getSonotaJoho" resultMap="Result_SonotaJoho" 
+    <select resultOrdered="true" id="getSonotaJoho" resultMap="Result_SonotaJoho" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 dbt5502."shinsakaiOrder" AS dbt5502_shinsakaiOrder,
@@ -1000,7 +1000,7 @@
                 </if>-->
     </select>  
     
-    <select id="getIinShimei" resultMap="Result_ShinsakaiIinJoho" 
+    <select resultOrdered="true" id="getIinShimei" resultMap="Result_ShinsakaiIinJoho" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTuutishoMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 dbt5594."shinsakaiIinShimei" AS dbt5594_shinsakaiIinShimei
@@ -1014,7 +1014,7 @@
                 dbt5503."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
     </select>
     
-    <select id="getShinsakaiWariateJohoCount" resultType="java.lang.Integer" 
+    <select resultOrdered="true" id="getShinsakaiWariateJohoCount" resultType="java.lang.Integer" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTuutishoMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT       
                 COUNT(*)
@@ -1026,7 +1026,7 @@
                 dbt5502."shinsakaiShiryoSakuseiYMD" IS NULL
     </select>
     
-    <select id="getShinsakaiKaisaiKekkaJoho" resultMap="Result_ShinsakaiKaisaiKekkaJoho"
+    <select resultOrdered="true" id="getShinsakaiKaisaiKekkaJoho" resultMap="Result_ShinsakaiKaisaiKekkaJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTuutishoMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 dbt5511."shinsakaiKaisaiYMD" AS dbt5511_shinsakaiKaisaiYMD,
@@ -1037,7 +1037,7 @@
                 dbt5511."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
     </select>
     
-    <select id="getIinTuikaSiryo" resultMap="Result_IinTuikaSiryo"
+    <select resultOrdered="true" id="getIinTuikaSiryo" resultMap="Result_IinTuikaSiryo"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinTuutishoMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 dbt5502."shinsakaiOrder" AS dbt5502_shinsakaiOrder,
@@ -1125,7 +1125,7 @@
         <result property="zenkaiShinseishoKanriNo" column="zenkaiShinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
     </resultMap>
     
-    <select id="get前回の申請管理番号" resultMap="resultMapDbT5121ShinseiRirekiJohoEntity" 
+    <select resultOrdered="true" id="get前回の申請管理番号" resultMap="resultMapDbT5121ShinseiRirekiJohoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 dbT5121."zenkaiShinseishoKanriNo" AS zenkaiShinseishoKanriNo
@@ -1134,7 +1134,7 @@
             WHERE dbT5121."shinseishoKanriNo" = #{shinseishoKanriNo}
     </select>
     
-    <select id="get前回二次判定" resultMap="resultMapDbT5102NinteiKekkaJohoEntity" 
+    <select resultOrdered="true" id="get前回二次判定" resultMap="resultMapDbT5102NinteiKekkaJohoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 dbT5102."nijiHanteiYokaigoJotaiKubunCode" as "dbT5102NinteiKekkaJoho_nijiHanteiYokaigoJotaiKubunCode",
@@ -1146,7 +1146,7 @@
             WHERE dbT5102."shinseishoKanriNo" = #{shinseishoKanriNo}
     </select>
     
-    <select id="getShinseiJohoCount" resultType="java.lang.Integer" 
+    <select resultOrdered="true" id="getShinseiJohoCount" resultType="java.lang.Integer" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 COUNT(*)
@@ -1233,7 +1233,7 @@
                    #{shuturyokuJun}
                 </if>-->
     </select>
-    <select id="getSelectByKey" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.ResultMap_DbT5501ShinsakaiKaisaiYoteiJohoEntity" 
+    <select resultOrdered="true" id="getSelectByKey" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.ResultMap_DbT5501ShinsakaiKaisaiYoteiJohoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.publicationshiryoshinsakai.IinItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT       
                 <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.allColumns_DbT5501ShinsakaiKaisaiYoteiJoho" />
