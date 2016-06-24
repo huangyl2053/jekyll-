@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 完了処理・認定調査依頼のモバイル入力用データのBusinessです。
  *
- * @reamsid_L DBE-0310-010 dingyi
+ * @reamsid_L DBE-0300-010 dingyi
  */
 public class NinteichosaIraiBusiness {
 

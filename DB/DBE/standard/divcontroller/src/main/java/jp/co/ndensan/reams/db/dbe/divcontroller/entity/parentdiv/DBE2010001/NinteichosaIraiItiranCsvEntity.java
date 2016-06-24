@@ -145,7 +145,7 @@ public class NinteichosaIraiItiranCsvEntity {
             RString chikuCode,
             RString chikuName) {
         this.shinseishoKanriNo = shinseishoKanriNo;
-        this.hihokensha = hihokenshaNo;
+        this.hihokensha = hihokensha;
         this.ninteiShinseiYMD = ninteiShinseiYMD;
         this.hihokenshaNo = hihokenshaNo;
         this.hihokenshaName = hihokenshaName;

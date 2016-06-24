@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -36,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 完了処理・認定調査依頼を管理するクラスです。
  *
- * @reamsid_L DBE-0310-010 dingyi
+ * @reamsid_L DBE-0300-010 dingyi
  */
 public class NinteichosaIraiManager {
 
@@ -130,6 +131,7 @@ public class NinteichosaIraiManager {
         List<DbT5913ChosainJohoEntity> 調査員情報リスト = mapper.select委託先調査員情報(
                 new NinteichosaIraiParameter(
                         保険者番号, 地区コード, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, null));
+        int max履歴番号 = getMax認定調査依頼履歴番号(申請書管理番号);
         for (DbT5913ChosainJohoEntity entity : 調査員情報リスト) {
             if (tmp要割付人数 == 0) {
                 return tmp要割付人数;
@@ -138,7 +140,7 @@ public class NinteichosaIraiManager {
                     if (tmp要割付人数 == 0) {
                         return tmp要割付人数;
                     } else {
-                        int max履歴番号 = getMax認定調査依頼履歴番号(申請書管理番号);
+                        max履歴番号++;
                         dbT5201Dac.save(set認定調査依頼情報(申請書管理番号, max履歴番号, 厚労省IF識別コード,
                                 entity.getNinteiChosaItakusakiCode(), entity.getNinteiChosainCode()).toEntity());
                         tmp要割付人数 = tmp要割付人数 - 1;
@@ -197,6 +199,7 @@ public class NinteichosaIraiManager {
         DbT5201NinteichosaIraiJohoEntity entity = mapper.select最新認定調査依頼情報(new NinteichosaIraiParameter(
                 RString.EMPTY, RString.EMPTY, 申請書管理番号, RString.EMPTY, RString.EMPTY, RString.EMPTY, null));
         entity.setMobileDataShutsuryokuZumiFlag(MobileDataShutsuryokuFlag.出力済.isモバイルデータ出力());
+        entity.setState(EntityDataState.Modified);
         dbT5201Dac.save(entity);
     }
 

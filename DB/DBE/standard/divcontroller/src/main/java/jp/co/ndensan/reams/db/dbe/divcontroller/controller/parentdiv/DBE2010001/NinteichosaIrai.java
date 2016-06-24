@@ -182,14 +182,18 @@ public class NinteichosaIrai {
                 return ResponseData.of(requestDiv).addMessage(new InformationMessage(
                         DbeInformationMessages.割付申請者人数が最大割付可能人数を超過.getMessage().getCode(),
                         DbeInformationMessages.割付申請者人数が最大割付可能人数を超過.getMessage().evaluate())).respond();
-            }
-            if (new RString(DbeInformationMessages.割付申請者人数が最大割付可能人数を超過.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            } else {
                 RealInitialLocker.release(前排他ロックキー);
                 getHandler(requestDiv).onLoad();
                 return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
             }
+        }
+        if (new RString(DbeInformationMessages.割付申請者人数が最大割付可能人数を超過.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            RealInitialLocker.release(前排他ロックキー);
+            getHandler(requestDiv).onLoad();
+            return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
         }
         return ResponseData.of(requestDiv).respond();
     }
@@ -368,8 +372,7 @@ public class NinteichosaIrai {
                         FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getHihoNumber(),
                 row.getHihoShimei(),
-                RString.isNullOrEmpty(row.getShinseiKubunShinseiji())
-                ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseiKubunShinseiji().toString()).getコード(),
+                get申請区分_申請時_コード(row.getShinseiKubunShinseiji()),
                 row.getShinseiKubunShinseiji(),
                 row.getChosaIraiKanryoDay().getValue() != null
                 ? row.getChosaIraiKanryoDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
@@ -413,78 +416,58 @@ public class NinteichosaIrai {
 
     private ChosaInputCsvEntity getChosaCsvData(NinteichosaIraiBusiness 調査入力用データ) {
         RString 厚労省IF識別コード = 調査入力用データ.get厚労省IF識別コード().value();
-        RString 調査項目文言 = RString.EMPTY;
         RString 調査項目連番 = new RString(調査入力用データ.get調査項目連番());
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード)) {
-            調査項目文言 = NinteichosaKomokuMapping99A.toValue(調査項目連番).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード)) {
-            調査項目文言 = NinteichosaKomokuMapping02A.toValue(調査項目連番).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード)) {
-            調査項目文言 = NinteichosaKomokuMapping06A.toValue(調査項目連番).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード)) {
-            調査項目文言 = NinteichosaKomokuMapping09A.toValue(調査項目連番).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード)) {
-            調査項目文言 = NinteichosaKomokuMapping09B.toValue(調査項目連番).get名称();
-        }
+        RString 調査項目文言 = get調査項目文言(厚労省IF識別コード, 調査項目連番);
         ChosaInputCsvEntity data = new ChosaInputCsvEntity(
                 調査入力用データ.get申請書管理番号().value(),
                 厚労省IF識別コード,
-                KoroshoIfShikibetsuCode.toValue(調査入力用データ.get厚労省IF識別コード().value()).get名称(),
+                KoroshoIfShikibetsuCode.toValue(厚労省IF識別コード).get名称(),
                 調査入力用データ.get証記載保険者番号(),
                 調査入力用データ.get被保険者番号(),
-                調査入力用データ.get認定申請年月日() != null
-                ? 調査入力用データ.get認定申請年月日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                get年月日共通ポリシー_パターン1(調査入力用データ.get認定申請年月日()),
                 調査入力用データ.get認定申請区分_申請時コード().value(),
                 NinteiShinseiShinseijiKubunCode.toValue(調査入力用データ.get認定申請区分_申請時コード().value()).get名称(),
                 調査入力用データ.get被保険者氏名().value(),
                 調査入力用データ.get被保険者氏名カナ().value(),
-                調査入力用データ.get生年月日() != null
-                ? 調査入力用データ.get生年月日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                get年月日共通ポリシー_パターン1(調査入力用データ.get生年月日()),
                 new RString(調査入力用データ.get年齢()),
                 Seibetsu.toValue(調査入力用データ.get性別().value()).get名称(),
                 調査入力用データ.get郵便番号().value(),
                 調査入力用データ.get住所().value(),
                 調査入力用データ.get電話番号().value(),
                 調査入力用データ.get保険者名(),
-                調査入力用データ.get認定調査依頼完了年月日() != null
-                ? 調査入力用データ.get認定調査依頼完了年月日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                get年月日共通ポリシー_パターン1(調査入力用データ.get認定調査依頼完了年月日()),
                 new RString(調査入力用データ.get認定調査依頼履歴番号()),
                 調査入力用データ.get認定調査委託先コード().value(),
                 調査入力用データ.get調査委託先(),
                 調査入力用データ.get認定調査員コード() != null ? 調査入力用データ.get認定調査員コード().value() : RString.EMPTY,
                 調査入力用データ.get調査員氏名(),
                 調査入力用データ.get概況特記テキスト_イメージ区分(),
-                TokkijikoTextImageKubun.toValue(調査入力用データ.get概況特記テキスト_イメージ区分()).get名称(),
-                調査入力用データ.get認定調査依頼区分コード().value(),
-                NinteiChousaIraiKubunCode.toValue(調査入力用データ.get認定調査依頼区分コード().value()).get名称(),
+                RString.isNullOrEmpty(調査入力用データ.get概況特記テキスト_イメージ区分()) ? RString.EMPTY : TokkijikoTextImageKubun.toValue(
+                        調査入力用データ.get概況特記テキスト_イメージ区分()).get名称(),
+                調査入力用データ.get認定調査依頼区分コード() != null ? 調査入力用データ.get認定調査依頼区分コード().value() : RString.EMPTY,
+                調査入力用データ.get認定調査依頼区分コード() != null ? NinteiChousaIraiKubunCode.toValue(
+                        調査入力用データ.get認定調査依頼区分コード().value()).get名称() : RString.EMPTY,
                 new RString(調査入力用データ.get認定調査回数()),
-                調査入力用データ.get認定調査実施年月日() != null
-                ? 調査入力用データ.get認定調査実施年月日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
-                調査入力用データ.get認定調査受領年月日() != null
-                ? 調査入力用データ.get認定調査受領年月日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
-                調査入力用データ.get認定調査区分コード().value(),
-                ChosaKubun.toValue(調査入力用データ.get認定調査区分コード().value()).get名称(),
-                調査入力用データ.get認定調査実施場所コード().value(),
-                ChosaJisshiBashoCode.toValue(調査入力用データ.get認定調査実施場所コード().value()).get名称(),
+                get年月日共通ポリシー_パターン1(調査入力用データ.get認定調査実施年月日()),
+                get年月日共通ポリシー_パターン1(調査入力用データ.get認定調査受領年月日()),
+                調査入力用データ.get認定調査区分コード() != null ? 調査入力用データ.get認定調査区分コード().value() : RString.EMPTY,
+                調査入力用データ.get認定調査区分コード() != null ? ChosaKubun.toValue(
+                        調査入力用データ.get認定調査区分コード().value()).get名称() : RString.EMPTY,
+                調査入力用データ.get認定調査実施場所コード() != null ? 調査入力用データ.get認定調査実施場所コード().value() : RString.EMPTY,
+                調査入力用データ.get認定調査実施場所コード() != null ? ChosaJisshiBashoCode.toValue(
+                        調査入力用データ.get認定調査実施場所コード().value()).get名称() : RString.EMPTY,
                 調査入力用データ.get認定調査実施場所名称(),
-                調査入力用データ.get認定調査_サービス区分コード().value(),
-                ServiceKubunCode.toValue(調査入力用データ.get認定調査_サービス区分コード().value()).get名称(),
+                調査入力用データ.get認定調査_サービス区分コード() != null ? 調査入力用データ.get認定調査_サービス区分コード().value() : RString.EMPTY,
+                調査入力用データ.get認定調査_サービス区分コード() != null ? ServiceKubunCode.toValue(
+                        調査入力用データ.get認定調査_サービス区分コード().value()).get名称() : RString.EMPTY,
                 調査入力用データ.get利用施設名(),
                 調査入力用データ.get利用施設住所(),
                 調査入力用データ.get利用施設電話番号(),
-                調査入力用データ.get利用施設郵便番号().value(),
+                調査入力用データ.get利用施設郵便番号() != null ? 調査入力用データ.get利用施設郵便番号().value() : RString.EMPTY,
                 調査入力用データ.get特記(),
-                調査入力用データ.get認定調査特記事項受付年月日() != null
-                ? 調査入力用データ.get認定調査特記事項受付年月日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
-                調査入力用データ.get認定調査特記事項受領年月日() != null
-                ? 調査入力用データ.get認定調査特記事項受領年月日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                get年月日共通ポリシー_パターン1(調査入力用データ.get認定調査特記事項受付年月日()),
+                get年月日共通ポリシー_パターン1(調査入力用データ.get認定調査特記事項受領年月日()),
                 調査入力用データ.get住宅改修_改修箇所(),
                 調査入力用データ.get市町村特別給付サービス種類名(),
                 調査入力用データ.get介護保険給付以外の在宅サービス種類名(),
@@ -494,8 +477,8 @@ public class NinteichosaIrai {
                 調査入力用データ.get概況特記事項_機器器械(),
                 調査入力用データ.get認定調査特記事項番号(),
                 new RString(調査入力用データ.get認定調査特記事項連番()),
-                調査入力用データ.get原本マスク区分().value(),
-                GenponMaskKubun.toValue(調査入力用データ.get原本マスク区分().value()).get名称(),
+                調査入力用データ.get原本マスク区分() != null ? 調査入力用データ.get原本マスク区分().value() : RString.EMPTY,
+                調査入力用データ.get原本マスク区分() != null ? GenponMaskKubun.toValue(調査入力用データ.get原本マスク区分().value()).get名称() : RString.EMPTY,
                 調査入力用データ.get特記事項(),
                 new RString(調査入力用データ.getサービスの状況連番()),
                 new RString(調査入力用データ.getサービスの状況()),
@@ -505,10 +488,12 @@ public class NinteichosaIrai {
                 調査入力用データ.getサービスの状況記入(),
                 new RString(調査入力用データ.get施設利用連番()),
                 new RString(String.valueOf(調査入力用データ.is施設利用フラグ())),
-                調査入力用データ.get認知症高齢者の日常生活自立度コード().value(),
-                GenponMaskKubun.toValue(調査入力用データ.get認知症高齢者の日常生活自立度コード().value()).get名称(),
-                調査入力用データ.get障害高齢者の日常生活自立度コード().value(),
-                GenponMaskKubun.toValue(調査入力用データ.get障害高齢者の日常生活自立度コード().value()).get名称(),
+                調査入力用データ.get認知症高齢者の日常生活自立度コード() != null ? 調査入力用データ.get認知症高齢者の日常生活自立度コード().value() : RString.EMPTY,
+                調査入力用データ.get認知症高齢者の日常生活自立度コード() != null ? GenponMaskKubun.toValue(
+                        調査入力用データ.get認知症高齢者の日常生活自立度コード().value()).get名称() : RString.EMPTY,
+                調査入力用データ.get障害高齢者の日常生活自立度コード() != null ? 調査入力用データ.get障害高齢者の日常生活自立度コード().value() : RString.EMPTY,
+                調査入力用データ.get障害高齢者の日常生活自立度コード() != null ? GenponMaskKubun.toValue(
+                        調査入力用データ.get障害高齢者の日常生活自立度コード().value()).get名称() : RString.EMPTY,
                 調査項目連番,
                 調査項目文言,
                 調査入力用データ.get調査項目());
@@ -564,6 +549,36 @@ public class NinteichosaIrai {
             申請書管理番号リスト.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
         }
         return 申請書管理番号リスト;
+    }
+
+    private RString get調査項目文言(RString 厚労省IF識別コード, RString 調査項目連番) {
+        RString 調査項目文言 = RString.EMPTY;
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード)) {
+            調査項目文言 = NinteichosaKomokuMapping99A.toValue(調査項目連番).get名称();
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード)) {
+            調査項目文言 = NinteichosaKomokuMapping02A.toValue(調査項目連番).get名称();
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード)) {
+            調査項目文言 = NinteichosaKomokuMapping06A.toValue(調査項目連番).get名称();
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード)) {
+            調査項目文言 = NinteichosaKomokuMapping09A.toValue(調査項目連番).get名称();
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード)) {
+            調査項目文言 = NinteichosaKomokuMapping09B.toValue(調査項目連番).get名称();
+        }
+        return 調査項目文言;
+    }
+
+    private RString get申請区分_申請時_コード(RString 名称) {
+        for (NinteiShinseiShinseijiKubunCode kubunCode : NinteiShinseiShinseijiKubunCode.values()) {
+            if (kubunCode.get名称().equals(名称)) {
+                return kubunCode.getコード();
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get年月日共通ポリシー_パターン1(FlexibleDate 年月日) {
+        return 年月日 != null ? 年月日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(
+                FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY;
     }
 
     private NinteichosaIraiHandler getHandler(NinteichosaIraiDiv div) {

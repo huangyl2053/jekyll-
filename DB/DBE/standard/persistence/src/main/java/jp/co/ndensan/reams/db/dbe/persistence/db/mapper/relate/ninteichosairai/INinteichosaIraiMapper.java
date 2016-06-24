@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 /**
  * 完了処理・認定調査依頼のマッパーインタフェースです。
  *
- * @reamsid_L DBE-0310-010 dingyi
+ * @reamsid_L DBE-0300-010 dingyi
  */
 public interface INinteichosaIraiMapper {
 
