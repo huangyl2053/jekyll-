@@ -36,6 +36,12 @@
         <include refid="selectShuruiGendoKakuEntity" />
     </select>
 
+    <select id="get居宅サービス明細情報"
+            resultMap="resultMap_KyotakuServiceMeisaiEntity" fetchSize="500"
+            resultOrdered="true">
+        <include refid="selectKyotakuServiceMeisaiEntity" />
+    </select>
+
     <resultMap id="resultMap_KyotakuServiceKeikakuIchiranEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.KyotakuServiceKeikakuIchiranEntity" autoMapping="true">
         <result property="対象年月" column="taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="作成区分コード" column="sakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -83,6 +89,23 @@
         <result property="支給限度単位数" column="支給限度単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="種類限度内単位数" column="種類限度内単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="限度超過単位数" column="限度超過単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+
+    <resultMap id="resultMap_KyotakuServiceMeisaiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.KyotakuServiceMeisaiEntity" autoMapping="true">
+        <result property="サービス提供事業者番号" column="サービス提供事業者番号"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="サービス種類コード" column="サービス種類コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="サービス項目コード" column="サービス項目コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceKomokuCodeTypeHandler"/>
+        <result property="単位数" column="単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="割引後適用率" column="割引後適用率" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenKyufuRitsuTypeHandler"/>
+        <result property="割引後適用単位数" column="割引後適用単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="回数_日数" column="回数_日数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="種類限度内単位数" column="種類限度内単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="種類限度超過単位数" column="種類限度超過単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="区分限度内単位数" column="区分限度内単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="区分限度超過単位数" column="区分限度超過単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="単位数単価" column="単位数単価" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="給付率" column="給付率" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenKyufuRitsuTypeHandler"/>
+        <result property="事業者名称" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
 
     <sql id="selectKyotakuServiceKeikakuIchiranEntity">
@@ -224,6 +247,7 @@
         ORDER BY C."yukoKaishiYMD" DESC
         LIMIT 1
         )
+        ORDER BY F."serviceShuruiCode" ASC
     </sql>
 
     <sql id="selectJikoSakuseiKeikakuJohoEntity">
@@ -259,6 +283,49 @@
         B."hihokenshaNo" = #{被保険者番号}
         AND B."taishoYM" = #{対象年月}
         AND B."rirekiNo" = #{履歴番号}
+    </sql>
+
+    <sql id="selectKyotakuServiceMeisaiEntity">
+        WITH 最新介護事業者 AS
+        (SELECT
+        dbT7060."jigyoshaNo",
+        dbT7060."jigyoshaName"
+        FROM
+        rgdb."DbT7060KaigoJigyosha" AS dbT7060
+        WHERE
+        NOT EXISTS (
+        SELECT  1
+        FROM
+        rgdb."DbT7060KaigoJigyosha"  AS  dbT7060_2
+        WHERE
+        dbT7060."jigyoshaNo" = dbT7060_2."jigyoshaNo"
+        AND dbT7060."yukoKaishiYMD" <![CDATA[<]]>  dbT7060_2."yukoKaishiYMD"
+        )
+        )
+        SELECT
+        A."serviceTeikyoJigyoshaNo" AS サービス提供事業者番号,
+        A."serviceShuruiCode" AS サービス種類コード,
+        A."serviceKomokuCode" AS サービス項目コード,
+        A."taniSu" AS 単位数,
+        A."waribikiGoTekiyoRitsu" AS 割引後適用率,
+        A."waribikiGoTekiyoTaniSu" AS 割引後適用単位数,
+        A."kaisu_Nissu" AS 回数_日数,
+        A."shuruiGendoChokaTaniSu_Nissu" AS 種類限度超過単位数,
+        A."shuruiGendoNaiTaniSu_Nissu" AS 種類限度内単位数,
+        A."kubunGendoChokaTaniSu_Nissu" AS 区分限度超過単位数,
+        A."kubunGendoNaiTaniSu_Nissu" AS 区分限度内単位数,
+        A."taniSuTanka" AS 単位数単価,
+        A."kyufuRitsu" AS 給付率,
+        B."jigyoshaName" AS 事業者名称
+        FROM
+        rgdb."DbT3008KyotakuKeikakuJikosakuseiMeisai" AS A
+        INNER JOIN
+        最新介護事業者 AS B
+        ON B."jigyoshaNo" = A."serviceTeikyoJigyoshaNo"
+        WHERE
+        A."hihokenshaNo" = #{被保険者番号}
+        AND A."taishoYM" = #{対象年月}
+        AND A."rirekiNo" = #{履歴番号}
     </sql>
 
 </mapper>

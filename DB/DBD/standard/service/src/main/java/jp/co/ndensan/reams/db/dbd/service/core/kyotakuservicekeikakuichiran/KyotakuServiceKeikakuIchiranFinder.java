@@ -9,15 +9,14 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.JikoSakuseiKeikakuJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.KeikakuIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.KyotakuServiceKeikakuIchiranEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.KyotakuServiceMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.ServiceShuruiCodeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.ShuruiGendoKakuEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.kyotakuservicekeikakuichiran.IKyotakuServiceKeikakuIchiranMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbV4001JukyushaDaichoAliveDac;
@@ -126,17 +125,17 @@ public class KyotakuServiceKeikakuIchiranFinder {
     }
 
     /**
-     * 認定申請中状況を取得します。
+     * 認定情報を取得します。
      *
      * @param 被保険者番号 HihokenshaNo
      * @return List<DbV4001JukyushaDaichoEntity>
      */
-    public List<DbV4001JukyushaDaichoEntity> 区分支給限度額And限度管理期間の取得(HihokenshaNo 被保険者番号) {
+    public List<DbV4001JukyushaDaichoEntity> 認定情報の取得(HihokenshaNo 被保険者番号) {
 
         DbV4001JukyushaDaichoAliveDac dbV4001Dac = InstanceProvider.create(DbV4001JukyushaDaichoAliveDac.class);
-        List<DbV4001JukyushaDaichoEntity> 認定申請中状況 = dbV4001Dac.selectBy被保険者番号(被保険者番号);
+        List<DbV4001JukyushaDaichoEntity> 認定情報 = dbV4001Dac.selectBy被保険者番号For自己作成計画情報(被保険者番号);
 
-        return 認定申請中状況;
+        return 認定情報;
     }
 
     /**
@@ -156,25 +155,25 @@ public class KyotakuServiceKeikakuIchiranFinder {
     }
 
     /**
-     * 認定申請中状況を取得します。
+     * 宅サービス明細情報を取得します。
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 対象年月 FlexibleDate
      * @param 履歴番号 int
-     * @return List<DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity>
+     * @return List<KyotakuServiceMeisaiEntity>
      */
-    public List<DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity> 居宅サービス明細情報の取得(
+    public List<KyotakuServiceMeisaiEntity> 居宅サービス明細情報の取得(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
             int 履歴番号) {
 
-        DbT3008KyotakuKeikakuJikosakuseiMeisaiDac dbt3008Dac = InstanceProvider.create(DbT3008KyotakuKeikakuJikosakuseiMeisaiDac.class);
-        List<DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity> 居宅サービス明細情報 = dbt3008Dac.select居宅給付計画自己作成明細(
+        IKyotakuServiceKeikakuIchiranMapper mapper = mapperProvider.create(IKyotakuServiceKeikakuIchiranMapper.class);
+        List<KyotakuServiceMeisaiEntity> 居宅サービス明細情報List = mapper.get居宅サービス明細情報(
                 被保険者番号,
                 対象年月,
                 履歴番号);
 
-        return 居宅サービス明細情報;
+        return 居宅サービス明細情報List;
     }
 
     /**

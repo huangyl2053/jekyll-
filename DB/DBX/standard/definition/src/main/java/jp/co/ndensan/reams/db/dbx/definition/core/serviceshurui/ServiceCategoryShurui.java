@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.definition.core.serviceshurui;
+package jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * サービス種類を表す列挙型です。
  *
- * @reamsid_L DBC-9999-023 liangbc
+ * @reamsid_L DBX-9999-023 liangbc
  */
 public enum ServiceCategoryShurui {
 
@@ -198,6 +198,14 @@ public enum ServiceCategoryShurui {
      * コード:67 名称:予防福祉用具貸与 略称:予用貸与
      */
     予用貸与("67", "予防福祉用具貸与", "予用貸与"),
+    /**
+     * コード:68 名称:小規模多機能型居宅介護（短期） 略称:地小規単
+     */
+    地小規単("68", "小規模多機能型居宅介護（短期）", "地小規単"),
+    /**
+     * コード:69 名称:予防小規模多機能型居宅（短期） 略称:地予小短
+     */
+    地予小短("69", "予防小規模多機能型居宅（短期）", "地予小短"),
     /**
      * コード:71 名称:夜間対応型訪問介護 略称:地夜間訪
      */

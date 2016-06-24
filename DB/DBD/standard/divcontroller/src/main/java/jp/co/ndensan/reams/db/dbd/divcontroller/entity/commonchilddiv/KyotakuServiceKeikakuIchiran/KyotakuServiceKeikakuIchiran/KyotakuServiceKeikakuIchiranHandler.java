@@ -10,13 +10,17 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.JikoSakuseiKeikakuJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.KeikakuIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.KyotakuServiceKeikakuIchiranEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.KyotakuServiceMeisaiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.ServiceShuruiCodeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyotakuservicekeikakuichiran.ShuruiGendoKakuEntity;
 import jp.co.ndensan.reams.db.dbd.service.core.kyotakuservicekeikakuichiran.KyotakuServiceKeikakuIchiranFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikaku.KyotakuservicekeikakuSakuseikubunCode;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikaku.TodokedeKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikaku.ZanteiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
@@ -43,11 +47,11 @@ public class KyotakuServiceKeikakuIchiranHandler {
     private final RString SAI_SHISEI = new RString("再申請");
     private final RString HENKOU_SHISEI = new RString("変更申請");
     private final RString SERVICE_HENKOU = new RString("サービス変更");
-    private final RString SHINKI = new RString("新規");
-    private final RString HENKOU = new RString("変更");
-    private final RString 訪問通所 = new RString("訪問通所");
-    private final RString 短期入所 = new RString("短期入所");
-    private final RString 居宅サービス = new RString("居宅サービス");
+    private final RString ケアマネジメント = new RString("ケアマネジメント");
+    private final RString 居宅介護 = new RString("居宅介護");
+    private final RString 居宅予防 = new RString("居宅予防");
+    private final RString 小規模介護 = new RString("小規模介護");
+    private final RString 小規模予防 = new RString("小規模予防");
 
     /**
      * コンストラクタです。
@@ -238,11 +242,8 @@ public class KyotakuServiceKeikakuIchiranHandler {
                 = KyotakuServiceKeikakuIchiranFinder.createInstance().計画依頼受付情報の取得(被保険者番号);
 
         if (計画依頼受付情報result != null && !計画依頼受付情報result.isEmpty()) {
-            if (new RString("1").equals(計画依頼受付情報result.get(0).get届出区分())) {
-                div.getDvKeikakuIraiUketsuke().getTxtTodokedeKubun().setValue(SHINKI);
-            } else if (new RString("2").equals(計画依頼受付情報result.get(0).get届出区分())) {
-                div.getDvKeikakuIraiUketsuke().getTxtTodokedeKubun().setValue(HENKOU);
-            }
+            div.getDvKeikakuIraiUketsuke().getTxtTodokedeKubun().setValue(
+                    TodokedeKubun.toValue(計画依頼受付情報result.get(0).get届出区分()).get名称());
 
             div.getDvKeikakuIraiUketsuke().getTxtIraiShinseiDate().setValue(計画依頼受付情報result.get(0).get届出年月日());
             if (計画依頼受付情報result.get(0).get適用開始年月日() != null && !計画依頼受付情報result.get(0).get適用開始年月日().isEmpty()) {
@@ -275,18 +276,32 @@ public class KyotakuServiceKeikakuIchiranHandler {
             div.getDvKeikakuIraiUketsuke().getTxtHenkoRiyu().setValue(計画依頼受付情報result.get(0).get事業者変更事由());
         }
 
-//        RString サービス種類 = RString.EMPTY;
-//        List<ServiceShuruiCodeEntity> サービス種類取得result
-//                = KyotakuServiceKeikakuIchiranFinder.createInstance().計画依頼受付情報のサービス種類取得(被保険者番号);
-//
-//        if (サービス種類取得result == null || サービス種類取得result.isEmpty()) {
-//            サービス種類 = RString.EMPTY;
-//        } else {
-//            // TODO
-//            for (ServiceShuruiCodeEntity serviceEntity : サービス種類取得result) {
-//
-//            }
-//        }
+        RString サービス種類 = RString.EMPTY;
+        List<ServiceShuruiCodeEntity> サービス種類取得result
+                = KyotakuServiceKeikakuIchiranFinder.createInstance().計画依頼受付情報のサービス種類取得(被保険者番号);
+
+        if (サービス種類取得result != null && !サービス種類取得result.isEmpty()) {
+            for (ServiceShuruiCodeEntity serviceEntity : サービス種類取得result) {
+                if (ServiceCategoryShurui.ケアマネ.getコード().equals(serviceEntity.getサービス種類().value())) {
+                    サービス種類 = ケアマネジメント;
+                } else if (ServiceCategoryShurui.居宅支援.getコード().equals(serviceEntity.getサービス種類().value())) {
+                    サービス種類 = 居宅介護;
+                } else if (ServiceCategoryShurui.予防支援.getコード().equals(serviceEntity.getサービス種類().value())) {
+                    サービス種類 = 居宅予防;
+                } else if (ServiceCategoryShurui.地小規単.getコード().equals(serviceEntity.getサービス種類().value())) {
+                    サービス種類 = 小規模介護;
+                } else if (ServiceCategoryShurui.地予小短.getコード().equals(serviceEntity.getサービス種類().value())) {
+                    サービス種類 = 小規模予防;
+                }
+                if (!RString.EMPTY.equals(サービス種類)) {
+                    サービス種類.concat(new RString("、"));
+                }
+            }
+            if (!RString.EMPTY.equals(サービス種類)) {
+                サービス種類.trimEnd();
+            }
+        }
+        div.getDvKeikakuIraiUketsuke().getTxtServiceShurui().setValue(サービス種類);
     }
 
     private void selectFor自己作成(HihokenshaNo 被保険者番号) {
@@ -327,19 +342,22 @@ public class KyotakuServiceKeikakuIchiranHandler {
                     自己作成計画情報result.get(0).get適用終了年月日().getDayValue())));
 
             List<RString> keys = new ArrayList<>();
-            if (new RString("1").equals(自己作成計画情報result.get(0).get暫定区分())) {
+            if (ZanteiKubun.暫定.getコード().equals(自己作成計画情報result.get(0).get暫定区分())) {
                 keys.add(new RString("0"));
             }
             div.getDvJikoSakuseiKeikaku().getChkZanteiKeikaku().setSelectedItemsByKey(keys);
         }
 
         List<DbV4001JukyushaDaichoEntity> dbV4001Result
-                = KyotakuServiceKeikakuIchiranFinder.createInstance().区分支給限度額And限度管理期間の取得(被保険者番号);
+                = KyotakuServiceKeikakuIchiranFinder.createInstance().認定情報の取得(被保険者番号);
         if (dbV4001Result != null && !dbV4001Result.isEmpty()) {
 
-            //TODO
-            div.getDvJikoSakuseiKeikaku().getTxtYokaigodo().setValue(
-                    YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(), dbV4001Result.get(0).getYokaigoJotaiKubunCode().getKey()).getName());
+            if (dbV4001Result.get(0).getNinteiYMD() == null || dbV4001Result.get(0).getNinteiYMD().isEmpty()) {
+                div.getDvJikoSakuseiKeikaku().getTxtYokaigodo().setValue(RString.EMPTY);
+            } else {
+                div.getDvJikoSakuseiKeikaku().getTxtYokaigodo().setValue(YokaigoJotaiKubunSupport.
+                        toValue(FlexibleDate.getNowDate(), dbV4001Result.get(0).getYokaigoJotaiKubunCode().getKey()).getName());
+            }
 
             div.getDvJikoSakuseiKeikaku().getTxtNinteiYukokikan().
                     setFromValue(new RDate(dbV4001Result.get(0).getNinteiYukoKikanKaishiYMD().toString()));
@@ -368,74 +386,76 @@ public class KyotakuServiceKeikakuIchiranHandler {
 
         List<DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity> dbt3010Result
                 = KyotakuServiceKeikakuIchiranFinder.createInstance().居宅サービス明細情報の短期入所利用日数取得(被保険者番号);
-        //TODO
-        if (dbt3010Result == null || dbt3010Result.isEmpty()) {
 
-        } else {
-
+        if (dbt3010Result != null && !dbt3010Result.isEmpty()) {
+            for (DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity entity : dbt3010Result) {
+                Decimal zenkaiRiyoNissu = entity.getZenkaiRiyoNissu();
+                Decimal konkaiKeikakuRiyoNissu = entity.getKonkaiKeikakuRiyoNissu();
+                if (FlexibleDate.getNowDate().getYearMonth().equals(entity.getRiyoYM())
+                        && zenkaiRiyoNissu != null
+                        && konkaiKeikakuRiyoNissu != null) {
+                    div.getDvKyotakuService().getTxtZengetsuMadeRiyoNissu().setValue(entity.getZenkaiRiyoNissu());
+                    div.getDvKyotakuService().getTxtTogetsuKeikakuRiyoNissu().setValue(entity.getKonkaiKeikakuRiyoNissu());
+                    div.getDvKyotakuService().getTxtRuisekiRiyoNissu().setValue(zenkaiRiyoNissu.add(konkaiKeikakuRiyoNissu));
+                }
+            }
         }
 
-        List<DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity> dbt3008Result
+        List<KyotakuServiceMeisaiEntity> 居宅サービス明細情報Result
                 = KyotakuServiceKeikakuIchiranFinder.createInstance().居宅サービス明細情報の取得(
                         被保険者番号,
                         div.getDgKyotakuServiceKeikakuIchiran().getClickedItem().getTaishoYM().getValue().getYearMonth(),
                         Integer.parseInt(div.getDgKyotakuServiceKeikakuIchiran().getClickedItem().getRirekiNo().toString()));
-        if (dbt3008Result != null && !dbt3008Result.isEmpty()) {
+        if (居宅サービス明細情報Result != null && !居宅サービス明細情報Result.isEmpty()) {
             List<dgKyotakuService_Row> dgServiceList = new ArrayList<>();
-            for (DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity dbt3008Entity : dbt3008Result) {
+            for (KyotakuServiceMeisaiEntity 居宅サービス明細情報Entity : 居宅サービス明細情報Result) {
                 dgKyotakuService_Row row = new dgKyotakuService_Row();
 
-                row.setJigyoshaNo(dbt3008Entity.getServiceTeikyoJigyoshaNo().value());
-                row.setServiceShuruiCode(dbt3008Entity.getServiceShuruiCode().value());
-                row.setServiceKomokuCode(dbt3008Entity.getServiceKomokuCode().value());
-                if (dbt3008Entity.getServiceShuruiCode() != null && dbt3008Entity.getServiceShuruiCode().value() != null) {
-                    row.setServiceCode(dbt3008Entity.getServiceShuruiCode().value().concat(dbt3008Entity.getServiceKomokuCode().value()));
+                row.setJigyoshaNo(居宅サービス明細情報Entity.getサービス提供事業者番号().value());
+                row.setServiceShuruiCode(居宅サービス明細情報Entity.getサービス種類コード().value());
+                row.setServiceKomokuCode(居宅サービス明細情報Entity.getサービス項目コード().value());
+                if (居宅サービス明細情報Entity.getサービス種類コード() != null && 居宅サービス明細情報Entity.getサービス項目コード().value() != null) {
+                    row.setServiceCode(居宅サービス明細情報Entity.getサービス種類コード().value().
+                            concat(居宅サービス明細情報Entity.getサービス項目コード().value()));
                 }
-                if (new RString("1").equals(dbt3008Entity.getKyotakuServiceKubun())) {
-                    row.setServiceName(訪問通所);
-                } else if (new RString("2").equals(dbt3008Entity.getKyotakuServiceKubun())) {
-                    row.setServiceName(短期入所);
-                } else if (new RString("3").equals(dbt3008Entity.getKyotakuServiceKubun())) {
-                    row.setServiceName(居宅サービス);
-                } else {
-                    row.setServiceName(RString.EMPTY);
-                }
+                row.setServiceName(居宅サービス明細情報Entity.get事業者名称().value());
 
-                row.setTani(new RString(dbt3008Entity.getTaniSu().toString()));
-                row.setWaribikigoRitsu(new RString(dbt3008Entity.getWaribikiGoTekiyoRitsu().value().toString()));
-                row.setWaribikigoTani(new RString(dbt3008Entity.getWaribikiGoTekiyoTaniSu().toString()));
-                row.setKaisu(new RString(dbt3008Entity.getKaisu_Nissu().toString()));
-                if (dbt3008Entity.getKaisu_Nissu() != null && dbt3008Entity.getWaribikiGoTekiyoTaniSu() != null) {
-                    row.setServiceTani(new RString(dbt3008Entity.getKaisu_Nissu().multiply(dbt3008Entity.getWaribikiGoTekiyoTaniSu()).toString()));
+                row.setTani(new RString(居宅サービス明細情報Entity.get単位数().toString()));
+                row.setWaribikigoRitsu(new RString(居宅サービス明細情報Entity.get割引後適用率().value().toString()));
+                row.setWaribikigoTani(new RString(居宅サービス明細情報Entity.get割引後適用単位数().toString()));
+                row.setKaisu(new RString(居宅サービス明細情報Entity.get回数_日数().toString()));
+                if (居宅サービス明細情報Entity.get回数_日数() != null && 居宅サービス明細情報Entity.get割引後適用単位数() != null) {
+                    row.setServiceTani(new RString(居宅サービス明細情報Entity.get回数_日数().
+                            multiply(居宅サービス明細情報Entity.get割引後適用単位数()).toString()));
                 }
-                row.setShuruiGendoKijunChoka(new RString(dbt3008Entity.getShuruiGendoChokaTaniSu_Nissu().toString()));
-                row.setShuruiGendoKijunNai(new RString(dbt3008Entity.getShuruiGendoNaiTaniSu_Nissu().toString()));
-                row.setKubunGendoKijunChoka(new RString(dbt3008Entity.getKubunGendoChokaTaniSu_Nissu().toString()));
-                row.setKubunGendoKijunNai(new RString(dbt3008Entity.getKubunGendoNaiTaniSu_Nissu().toString()));
-                row.setTaniTanka(new RString(dbt3008Entity.getTaniSuTanka().toString()));
+                row.setShuruiGendoKijunChoka(new RString(居宅サービス明細情報Entity.get種類限度超過単位数().toString()));
+                row.setShuruiGendoKijunNai(new RString(居宅サービス明細情報Entity.get種類限度内単位数().toString()));
+                row.setKubunGendoKijunChoka(new RString(居宅サービス明細情報Entity.get区分限度超過単位数().toString()));
+                row.setKubunGendoKijunNai(new RString(居宅サービス明細情報Entity.get区分限度内単位数().toString()));
+                row.setTaniTanka(new RString(居宅サービス明細情報Entity.get単位数単価().toString()));
 
                 Decimal 費用総額 = Decimal.ZERO;
                 Decimal 保険給付額 = Decimal.ZERO;
-                if (dbt3008Entity.getKubunGendoNaiTaniSu_Nissu() != null && dbt3008Entity.getTaniSuTanka() != null) {
-                    費用総額 = dbt3008Entity.getKubunGendoNaiTaniSu_Nissu().multiply(dbt3008Entity.getTaniSuTanka());
+                if (居宅サービス明細情報Entity.get区分限度内単位数() != null && 居宅サービス明細情報Entity.get単位数単価() != null) {
+                    費用総額 = 居宅サービス明細情報Entity.get区分限度内単位数().multiply(居宅サービス明細情報Entity.get単位数単価());
                     row.setHiyoSogaku(new RString(費用総額.toString()));
                 }
-                row.setKyufuRitsu(new RString(dbt3008Entity.getKyufuRitsu().value().toString()));
-                if (dbt3008Entity.getKubunGendoNaiTaniSu_Nissu() != null
-                        && dbt3008Entity.getTaniSuTanka() != null
-                        && dbt3008Entity.getKyufuRitsu() != null) {
-                    保険給付額 = dbt3008Entity.getKubunGendoNaiTaniSu_Nissu().
-                            multiply(dbt3008Entity.getTaniSuTanka()).multiply(dbt3008Entity.getKyufuRitsu().value());
+                row.setKyufuRitsu(new RString(居宅サービス明細情報Entity.get給付率().value().toString()));
+                if (居宅サービス明細情報Entity.get区分限度内単位数() != null
+                        && 居宅サービス明細情報Entity.get単位数単価() != null
+                        && 居宅サービス明細情報Entity.get給付率() != null) {
+                    保険給付額 = 居宅サービス明細情報Entity.get区分限度内単位数().
+                            multiply(居宅サービス明細情報Entity.get単位数単価()).multiply(居宅サービス明細情報Entity.get給付率().value());
 
                     row.setHokenKyufuGaku(new RString(保険給付額.toString()));
                 }
 
                 row.setRiyoushaFutanTaishobun(new RString(費用総額.subtract(保険給付額).toString()));
-                if (dbt3008Entity.getShuruiGendoChokaTaniSu_Nissu() != null
-                        && dbt3008Entity.getKubunGendoChokaTaniSu_Nissu() != null
-                        && dbt3008Entity.getTaniSuTanka() != null) {
-                    row.setRiyoushaFutanZengaku(new RString(dbt3008Entity.getShuruiGendoChokaTaniSu_Nissu().
-                            add(dbt3008Entity.getKubunGendoChokaTaniSu_Nissu()).multiply(dbt3008Entity.getTaniSuTanka()).toString()));
+                if (居宅サービス明細情報Entity.get種類限度超過単位数() != null
+                        && 居宅サービス明細情報Entity.get区分限度超過単位数() != null
+                        && 居宅サービス明細情報Entity.get単位数単価() != null) {
+                    row.setRiyoushaFutanZengaku(new RString(居宅サービス明細情報Entity.get種類限度超過単位数().
+                            add(居宅サービス明細情報Entity.get区分限度超過単位数()).multiply(居宅サービス明細情報Entity.get単位数単価()).toString()));
                 }
 
                 dgServiceList.add(row);
@@ -448,8 +468,7 @@ public class KyotakuServiceKeikakuIchiranHandler {
 
         dgKyotakuService_Row serviceRow = div.getDgKyotakuService().getActiveRow();
         div.getDvKyotakuMeisai().getTxtKyotakuJigyoshaNo().setValue(serviceRow.getJigyoshaNo());
-        //TODO
-        div.getDvKyotakuMeisai().getTxtKyotakuJigyoshaName().setValue(serviceRow.getJigyoshaNo());
+        div.getDvKyotakuMeisai().getTxtKyotakuJigyoshaName().setValue(serviceRow.getServiceName());
         div.getDvKyotakuMeisai().getTxtServiceCode1().setValue(serviceRow.getServiceShuruiCode());
         div.getDvKyotakuMeisai().getTxtServiceCode2().setValue(serviceRow.getServiceKomokuCode());
         div.getDvKyotakuMeisai().getTxtServiceName().setValue(serviceRow.getServiceName());
@@ -488,7 +507,7 @@ public class KyotakuServiceKeikakuIchiranHandler {
                 dgShuruiGendoKakunin_Row row = new dgShuruiGendoKakunin_Row();
 
                 if (entity.getサービス種類() != null) {
-                    row.setServiceShurui(entity.getサービス種類().value());
+                    row.setServiceShurui(ServiceCategoryShurui.toValue(entity.getサービス種類().value()).get名称());
                 }
                 TextBoxNum 限度額 = new TextBoxNum();
                 限度額.setValue(entity.get支給限度単位数());
