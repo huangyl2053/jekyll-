@@ -39,8 +39,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 public class KyotakuServiceKeikakuIchiranHandler {
 
     private final KyotakuServiceKeikakuIchiranDiv div;
-    private final RString ZANTEI = new RString("暫定");
-    private final RString ZANTEI_IGAI = new RString("暫定以外");
     private final RString YUKO = new RString("有効");
     private final RString MUKO = new RString("無効");
     private final RString SHINKI_SHISEI = new RString("新規申請");
