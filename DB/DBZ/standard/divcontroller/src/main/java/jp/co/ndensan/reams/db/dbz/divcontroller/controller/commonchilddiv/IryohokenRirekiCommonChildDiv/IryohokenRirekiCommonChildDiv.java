@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.iryohokenkanyujokyo.IryohokenRirekiCommonChildDivDate;
-import jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryohokenRirekiCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryohokenRirekiHandler;
@@ -26,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 共有子Div「医療保険履歴」のイベントを定義した共有子Divです。
@@ -40,7 +38,6 @@ public class IryohokenRirekiCommonChildDiv {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString 状態_選択 = new RString("選択");
-    private RString 医療保険情報_識別コード;
 
     /**
      * 初期化します。
@@ -50,8 +47,8 @@ public class IryohokenRirekiCommonChildDiv {
      */
     public ResponseData<IryohokenRirekiCommonChildDivDiv> onLoad(IryohokenRirekiCommonChildDivDiv requestDiv) {
         ResponseData<IryohokenRirekiCommonChildDivDiv> responseData = new ResponseData<>();
-        医療保険情報_識別コード = ViewStateHolder.get(ViewStateKeys.医療保険情報_識別コード, RString.class);
-        RString mode = ViewStateHolder.get(ViewStateKeys.医療保険情報_モード, RString.class);
+        RString 医療保険情報_識別コード = requestDiv.get識別コード();
+        RString mode = requestDiv.getモード();
         if (!RString.isNullOrEmpty(医療保険情報_識別コード) && !RString.isNullOrEmpty(mode)) {
             createHandlerOf(requestDiv).initialize(mode, 医療保険情報_識別コード);
         }
@@ -142,7 +139,7 @@ public class IryohokenRirekiCommonChildDiv {
     }
 
     private void ifelse(IryohokenRirekiCommonChildDivDiv requestDiv) {
-        医療保険情報_識別コード = ViewStateHolder.get(ViewStateKeys.医療保険情報_識別コード, RString.class);
+        RString 医療保険情報_識別コード = requestDiv.get識別コード();
 
         List<dgIryohokenIchiran_Row> 医療保険情報RiReKiNoSortList = requestDiv.getDgIryohokenIchiran().getDataSource();
         Collections.sort(医療保険情報RiReKiNoSortList, new RiReKiNoComparator());
