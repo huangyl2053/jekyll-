@@ -49,10 +49,8 @@ public class HakkoJokenValidationHandler {
     public ValidationMessageControlPairs 申請日範囲不正チェック1(ValidationMessageControlPairs validPairs) {
         RDate shinnseikafrom = div.getTxtYoteiMiteishaShinseiYMD().getFromValue();
         RDate shinnseikato = div.getTxtYoteiMiteishaShinseiYMD().getToValue();
-        if (!div.getTxtYoteiMiteishaShinseiYMD().isDisabled()) {
-            if (shinnseikato.isBefore(shinnseikafrom)) {
-                validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日範囲不正チェック));
-            }
+        if (!div.getTxtYoteiMiteishaShinseiYMD().isDisabled() && shinnseikato.isBefore(shinnseikafrom)) {
+            validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日範囲不正チェック));
         }
         return validPairs;
     }
@@ -66,10 +64,8 @@ public class HakkoJokenValidationHandler {
     public ValidationMessageControlPairs 申請日範囲不正チェック2(ValidationMessageControlPairs validPairs) {
         RDate shinnseikafrom = div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getFromValue();
         RDate shinnseikato = div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getToValue();
-        if (!div.getTxtIraisakiHenkoshaIchiranShinseiYMD().isDisabled()) {
-            if (shinnseikato.isBefore(shinnseikafrom)) {
-                validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日範囲不正チェック));
-            }
+        if (!div.getTxtIraisakiHenkoshaIchiranShinseiYMD().isDisabled() && shinnseikato.isBefore(shinnseikafrom)) {
+            validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日範囲不正チェック));
         }
         return validPairs;
     }
@@ -83,10 +79,8 @@ public class HakkoJokenValidationHandler {
     public ValidationMessageControlPairs 申請日範囲不正チェック3(ValidationMessageControlPairs validPairs) {
         RDate shinnseikafrom = div.getTxtCheckListShinseiYMD().getFromValue();
         RDate shinnseikato = div.getTxtCheckListShinseiYMD().getToValue();
-        if (!div.getTxtCheckListShinseiYMD().isDisabled()) {
-            if (shinnseikato.isBefore(shinnseikafrom)) {
-                validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日範囲不正チェック));
-            }
+        if (!div.getTxtCheckListShinseiYMD().isDisabled() && shinnseikato.isBefore(shinnseikafrom)) {
+            validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日範囲不正チェック));
         }
         return validPairs;
     }
@@ -113,31 +107,24 @@ public class HakkoJokenValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 未入力チェック(ValidationMessageControlPairs validPairs) {
-        if (!div.getTxtYoteiMiteishaShinseiYMD().isDisabled()) {
-            if ((null == div.getTxtYoteiMiteishaShinseiYMD().getFromValue()) || (null == div.getTxtYoteiMiteishaShinseiYMD().getToValue())) {
-                validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.未入力チェック));
-            }
+        if (!div.getTxtYoteiMiteishaShinseiYMD().isDisabled()
+                && ((null == div.getTxtYoteiMiteishaShinseiYMD().getFromValue()) || (null == div.getTxtYoteiMiteishaShinseiYMD().getToValue()))) {
+            validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.未入力チェック));
         }
-        if (!div.getTxtIraisakiHenkoshaIchiranShinseiYMD().isDisabled()) {
-            if ((null == div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getFromValue())
-                    || (null == div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getToValue())) {
-                validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.未入力チェック));
-            }
+        if (!div.getTxtIraisakiHenkoshaIchiranShinseiYMD().isDisabled()
+                && ((null == div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getFromValue())
+                || (null == div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getToValue()))) {
+            validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.未入力チェック));
         }
-        if (!div.getTxtCheckListShinseiYMD().isDisabled()) {
-            if ((null == div.getTxtCheckListShinseiYMD().getFromValue()) || (null == div.getTxtCheckListShinseiYMD().getToValue())) {
-                validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.未入力チェック));
-            }
+        if (!div.getTxtCheckListShinseiYMD().isDisabled()
+                && ((null == div.getTxtCheckListShinseiYMD().getFromValue()) || (null == div.getTxtCheckListShinseiYMD().getToValue()))) {
+            validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.未入力チェック));
         }
-        if (!div.getTxtShinsaYMD().isDisabled()) {
-            if (null == div.getTxtShinsaYMD().getValue()) {
-                validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.未入力チェック));
-            }
+        if (!div.getTxtShinsaYMD().isDisabled() && (null == div.getTxtShinsaYMD().getValue())) {
+            validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.未入力チェック));
         }
-        if (!div.getTxtShinsakai().isDisabled()) {
-            if (null == div.getTxtShinsakai().getValue()) {
-                validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.未入力チェック));
-            }
+        if (!div.getTxtShinsakai().isDisabled() && (null == div.getTxtShinsakai().getValue())) {
+            validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.未入力チェック));
         }
         return validPairs;
     }
