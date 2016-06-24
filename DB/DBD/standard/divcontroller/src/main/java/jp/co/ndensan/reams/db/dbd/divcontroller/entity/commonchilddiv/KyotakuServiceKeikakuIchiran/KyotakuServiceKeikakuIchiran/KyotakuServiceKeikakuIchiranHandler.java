@@ -86,12 +86,6 @@ public class KyotakuServiceKeikakuIchiranHandler {
 
             row.setKeikakuSakuseiKubun(KyotakuservicekeikakuSakuseikubunCode.toValue(entity.get作成区分コード()).get名称());
 
-            if (new RString("1").equals(entity.get暫定区分())) {
-                row.setZan(ZANTEI);
-            } else {
-                row.setZan(ZANTEI_IGAI);
-            }
-
             row.setJigyoshaNo(entity.get事業者番号() != null ? entity.get事業者番号().value() : RString.EMPTY);
             row.setJigyoshaName(entity.get事業者名称() != null ? entity.get事業者名称().value() : RString.EMPTY);
 
