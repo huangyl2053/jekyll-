@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
@@ -32,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 public class SystemKanriHoyou {
 
     private final ConfigMaintenanceFinder finder;
+    private static final RString 共通ボタン = new RString("btnUpdate");
 
     /**
      * コンストラクタです。
@@ -56,6 +58,7 @@ public class SystemKanriHoyou {
             throw new PessimisticLockingException();
         }
         div.getSystemKanri().setDisabled(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, false);
         List<ConfigMaintenance> resultList = finder.getSyozokuKikan(サブ業務コード.value()).records();
         getHandler(div).initialize(resultList);
         return ResponseData.of(div).respond();
