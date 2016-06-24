@@ -100,7 +100,7 @@ public final class TainoKiSummary {
         for (ShunyuSummaryEntity entity : relateEntity.get収入リスト()) {
             収入額合計 = 収入額合計.add(entity.get収入額());
             if (最大収入.compareTo(entity.get収入額()) < 0) {
-                最大収入日 = entity.get収入年月日();
+                最大収入日 = new FlexibleDate(entity.get収入年月日().toDateString());
             }
         }
         FlexibleDate 時効起算日 = FlexibleDate.MIN;
@@ -124,12 +124,15 @@ public final class TainoKiSummary {
             時効起算日 = new FlexibleDate(時効起算日.toString());
         }
         for (ShunyuSummaryEntity entity : relateEntity.get収入リスト()) {
-            if (時効起算日.plusYear(2).isBeforeOrEquals(entity.get収入年月日())) {
-                continue;
-            }
-            if (entity.get収入年月日().isBefore(時効起算日.plusYear(2)) && 時効起算日.isBefore(entity.get収入年月日())) {
-                時効起算日 = entity.get収入年月日();
-                時効起算日区分 = JikoKisanbiKubun.収入日;
+            if (entity.get収入年月日() != null) {
+                FlexibleDate 収入年月日 = new FlexibleDate(entity.get収入年月日().toDateString());
+                if (時効起算日.plusYear(2).isBeforeOrEquals(収入年月日)) {
+                    continue;
+                }
+                if (収入年月日.isBefore(時効起算日.plusYear(2)) && 時効起算日.isBefore(収入年月日)) {
+                    時効起算日 = 収入年月日;
+                    時効起算日区分 = JikoKisanbiKubun.収入日;
+                }
             }
         }
         Decimal 滞納額 = ObjectUtil.defaultIfNull(relateEntity.get調定額(), Decimal.ZERO).subtract(収入額合計);

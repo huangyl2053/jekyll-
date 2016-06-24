@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.taino;
 
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -19,5 +19,5 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class ShunyuSummaryEntity {
 
     private Decimal 収入額;
-    private FlexibleDate 収入年月日;
+    private RDate 収入年月日;
 }
