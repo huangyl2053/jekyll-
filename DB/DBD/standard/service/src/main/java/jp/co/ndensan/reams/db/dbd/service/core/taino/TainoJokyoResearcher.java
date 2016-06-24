@@ -93,7 +93,10 @@ public class TainoJokyoResearcher {
         Decimal 給付額減額期間 = Decimal.ZERO;
         List<TainoKiSummary> new滞納情報List = 滞納情報を整理(滞納情報List, 基準日);
         Map<FlexibleYear, KyufugakuGengakuMeisai> 給付額減額明細Map = new HashMap<>();
-        FlexibleYear 該当調定年度 = new滞納情報List.get(0).get調定年度();
+        FlexibleYear 該当調定年度 = FlexibleYear.EMPTY;
+        if (!new滞納情報List.isEmpty()) {
+            該当調定年度 = new滞納情報List.get(0).get調定年度();
+        }
         Decimal 調定額合計 = Decimal.ZERO;
         Decimal 滞納額合計 = Decimal.ZERO;
         Decimal 収入額合計 = Decimal.ZERO;

@@ -158,10 +158,10 @@ public final class TainoKiSummary {
     }
 
     private static MinoKannoKubun get未納完納区分(TainoJohoRelateEntity relateEntity, FlexibleDate 基準日, Decimal 滞納額) {
-        if (基準日.isBeforeOrEquals(new FlexibleDate(relateEntity.get納期限().toString()))) {
+        if (基準日.isBefore(new FlexibleDate(relateEntity.get納期限().toString()))) {
             return MinoKannoKubun.未来納期;
         }
-        if ((relateEntity.get時効起算年月日() == null || relateEntity.get時効起算年月日().isEmpty()) && Decimal.ZERO.equals(relateEntity.get調定額())) {
+        if ((relateEntity.get時効起算年月日() == null || relateEntity.get時効起算年月日().isEmpty()) || Decimal.ZERO.equals(relateEntity.get調定額())) {
             return MinoKannoKubun._0円;
         }
         if (Decimal.ZERO.equals(滞納額)) {
