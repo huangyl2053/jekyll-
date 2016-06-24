@@ -8,100 +8,98 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousakekkatouroku1.TempData;
-import jp.co.ndensan.reams.db.dbe.definition.core.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.ChosaJisshiBashoCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku02A_17;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku02A_18;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku02A_19;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku02A_20;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku02A_21;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku02A_22;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku02A_23;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku02A_24;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_1;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_10;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_11;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_12;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_14;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_15;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_16;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_17;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_18;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_19;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_2;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_23;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_24;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_25;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_26;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_27;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_28;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_29;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_3;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_30;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_4;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_5;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_6;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_7;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_8;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_9;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_1;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_10;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_11;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_12;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_14;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_15;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_16;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_17;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_18;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_19;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_2;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_24;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_25;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_26;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_27;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_28;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_29;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_3;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_30;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_31;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_4;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_5;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_6;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_7;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_8;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_9;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_1;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_10;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_11;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_12;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_14;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_15;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_16;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_17;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_18;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_19;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_2;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_20;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_21;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_24;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_25;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_26;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_27;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_28;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_29;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_3;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_30;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_31;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_4;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_5;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_6;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_7;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_8;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_9;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku99A_17;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku99A_18;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku99A_19;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku99A_20;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku02A_17;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku02A_18;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku02A_19;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku02A_20;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku02A_21;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku02A_22;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku02A_23;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku02A_24;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_1;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_10;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_11;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_12;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_14;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_15;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_16;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_17;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_18;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_19;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_2;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_23;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_24;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_25;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_26;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_27;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_28;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_29;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_3;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_30;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_4;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_5;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_6;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_7;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_8;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_9;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_1;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_10;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_11;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_12;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_14;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_15;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_16;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_17;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_18;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_19;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_2;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_24;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_25;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_26;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_27;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_28;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_29;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_3;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_30;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_31;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_4;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_5;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_6;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_7;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_8;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_9;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_1;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_10;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_11;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_12;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_14;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_15;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_16;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_17;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_18;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_19;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_2;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_20;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_21;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_24;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_25;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_26;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_27;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_28;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_29;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_3;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_30;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_31;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_4;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_5;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_6;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_7;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_8;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_9;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku99A_17;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku99A_18;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku99A_19;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku99A_20;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Div;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoSerViceFirstHalf_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoSerViceSecondHalf_Row;
@@ -110,8 +108,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.tplS
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.tplZaitakuDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.ninnteichousakekkatouroku1.NinnteiChousaKekkaTouroku1Finder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoKinyuItem;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyoFlag;
@@ -120,15 +119,9 @@ import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInputBuilder;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput1.KihonChosaInput1.KihonChosaInputHandler1;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput2.KihonChosaInput2.KihonChosaInputHandler2;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput3.KihonChosaInput3.KihonChosaInputHandler3;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput4.KihonChosaInput4.KihonChosaInputHandler4;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput5.KihonChosaInput5.KihonChosaInputHandler5;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput6.KihonChosaInput6.KihonChosaInputHandler6;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput7.KihonChosaInput7.KihonChosaInputHandler7;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoKinyuItemManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoServiceJokyoFlagManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoServiceJokyoManager;
@@ -300,13 +293,13 @@ public class NinnteiChousaKekkaTouroku1Handler {
         ViewStateHolder.put(Dbe2210001Keys.実施場所, null);
 
         ArrayList<KihonChosaInput> list = new ArrayList<>();
-        ViewStateHolder.put(KihonChosaInputHandler1.ViewStateKey.第一群認定調査基本情報リスト, list);
-        ViewStateHolder.put(KihonChosaInputHandler2.ViewStateKey.第二群認定調査基本情報リスト, list);
-        ViewStateHolder.put(KihonChosaInputHandler3.ViewStateKey.第三群認定調査基本情報リスト, list);
-        ViewStateHolder.put(KihonChosaInputHandler4.ViewStateKey.第四群認定調査基本情報リスト, list);
-        ViewStateHolder.put(KihonChosaInputHandler5.ViewStateKey.第五群認定調査基本情報リスト, list);
-        ViewStateHolder.put(KihonChosaInputHandler6.ViewStateKey.第六群認定調査基本情報リスト, list);
-        ViewStateHolder.put(KihonChosaInputHandler7.ViewStateKey.第七群認定調査基本情報リスト, list);
+        ViewStateHolder.put(ViewStateKeys.第一群認定調査基本情報リスト, list);
+        ViewStateHolder.put(ViewStateKeys.第二群認定調査基本情報リスト, list);
+        ViewStateHolder.put(ViewStateKeys.第三群認定調査基本情報リスト, list);
+        ViewStateHolder.put(ViewStateKeys.第四群認定調査基本情報リスト, list);
+        ViewStateHolder.put(ViewStateKeys.第五群認定調査基本情報リスト, list);
+        ViewStateHolder.put(ViewStateKeys.第六群認定調査基本情報リスト, list);
+        ViewStateHolder.put(ViewStateKeys.第七群認定調査基本情報リスト, list);
 
         利用サービス前半Gridのクリア();
         利用サービス後半Gridのクリア();
@@ -1119,13 +1112,13 @@ public class NinnteiChousaKekkaTouroku1Handler {
         }
 
         ViewStateHolder.put(Dbe2210001Keys.前回基本調査項目値あり, 前回基本調査項目値あり);
-        ViewStateHolder.put(KihonChosaInputHandler1.ViewStateKey.第一群認定調査基本情報リスト, 第1群List);
-        ViewStateHolder.put(KihonChosaInputHandler2.ViewStateKey.第二群認定調査基本情報リスト, 第2群List);
-        ViewStateHolder.put(KihonChosaInputHandler3.ViewStateKey.第三群認定調査基本情報リスト, 第3群List);
-        ViewStateHolder.put(KihonChosaInputHandler4.ViewStateKey.第四群認定調査基本情報リスト, 第4群List);
-        ViewStateHolder.put(KihonChosaInputHandler5.ViewStateKey.第五群認定調査基本情報リスト, 第5群List);
-        ViewStateHolder.put(KihonChosaInputHandler6.ViewStateKey.第六群認定調査基本情報リスト, 特別な医療List);
-        ViewStateHolder.put(KihonChosaInputHandler7.ViewStateKey.第七群認定調査基本情報リスト, 自立度List);
+        ViewStateHolder.put(ViewStateKeys.第一群認定調査基本情報リスト, 第1群List);
+        ViewStateHolder.put(ViewStateKeys.第二群認定調査基本情報リスト, 第2群List);
+        ViewStateHolder.put(ViewStateKeys.第三群認定調査基本情報リスト, 第3群List);
+        ViewStateHolder.put(ViewStateKeys.第四群認定調査基本情報リスト, 第4群List);
+        ViewStateHolder.put(ViewStateKeys.第五群認定調査基本情報リスト, 第5群List);
+        ViewStateHolder.put(ViewStateKeys.第六群認定調査基本情報リスト, 特別な医療List);
+        ViewStateHolder.put(ViewStateKeys.第七群認定調査基本情報リスト, 自立度List);
 
         RString 初期の基本調査 = 第1群.concat(第2群).concat(第3群).concat(第4群).concat(第5群).concat(特別な医療).concat(自立度);
         ViewStateHolder.put(Dbe2210001Keys.初期の基本調査, 初期の基本調査);
@@ -1332,13 +1325,13 @@ public class NinnteiChousaKekkaTouroku1Handler {
     @SuppressWarnings("unchecked")
     private RString get現在の基本調査() {
 
-        ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(KihonChosaInputHandler1.ViewStateKey.第一群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(KihonChosaInputHandler2.ViewStateKey.第二群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(KihonChosaInputHandler3.ViewStateKey.第三群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(KihonChosaInputHandler4.ViewStateKey.第四群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(KihonChosaInputHandler5.ViewStateKey.第五群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 特別な医療List = ViewStateHolder.get(KihonChosaInputHandler6.ViewStateKey.第六群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 自立度List = ViewStateHolder.get(KihonChosaInputHandler7.ViewStateKey.第七群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(ViewStateKeys.第一群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(ViewStateKeys.第二群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(ViewStateKeys.第三群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(ViewStateKeys.第四群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(ViewStateKeys.第五群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 特別な医療List = ViewStateHolder.get(ViewStateKeys.第六群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 自立度List = ViewStateHolder.get(ViewStateKeys.第七群認定調査基本情報リスト, ArrayList.class);
 
         RString 第1群 = RString.EMPTY;
         RString 第2群 = RString.EMPTY;
@@ -1399,13 +1392,13 @@ public class NinnteiChousaKekkaTouroku1Handler {
     @SuppressWarnings("unchecked")
     public void 前回値コピー処理() {
 
-        ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(KihonChosaInputHandler1.ViewStateKey.第一群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(KihonChosaInputHandler2.ViewStateKey.第二群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(KihonChosaInputHandler3.ViewStateKey.第三群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(KihonChosaInputHandler4.ViewStateKey.第四群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(KihonChosaInputHandler5.ViewStateKey.第五群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 特別な医療List = ViewStateHolder.get(KihonChosaInputHandler6.ViewStateKey.第六群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 自立度List = ViewStateHolder.get(KihonChosaInputHandler7.ViewStateKey.第七群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(ViewStateKeys.第一群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(ViewStateKeys.第二群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(ViewStateKeys.第三群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(ViewStateKeys.第四群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(ViewStateKeys.第五群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 特別な医療List = ViewStateHolder.get(ViewStateKeys.第六群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 自立度List = ViewStateHolder.get(ViewStateKeys.第七群認定調査基本情報リスト, ArrayList.class);
 
         for (KihonChosaInput 基本情報 : 第1群List) {
             基本情報 = new KihonChosaInput(基本情報.get認知症高齢者自立度(), 基本情報.get障害高齢者自立度(), 基本情報.get調査連番(),
@@ -1449,13 +1442,13 @@ public class NinnteiChousaKekkaTouroku1Handler {
                     基本情報.get前回調査連番(), 基本情報.get前回調査項目(), 基本情報.get認定調査特記事項番号(), 基本情報.get認定調査特記事項連番(),
                     基本情報.get原本マスク区分(), 基本情報.get特記事項());
         }
-        ViewStateHolder.put(KihonChosaInputHandler1.ViewStateKey.第一群認定調査基本情報リスト, 第1群List);
-        ViewStateHolder.put(KihonChosaInputHandler2.ViewStateKey.第二群認定調査基本情報リスト, 第2群List);
-        ViewStateHolder.put(KihonChosaInputHandler3.ViewStateKey.第三群認定調査基本情報リスト, 第3群List);
-        ViewStateHolder.put(KihonChosaInputHandler4.ViewStateKey.第四群認定調査基本情報リスト, 第4群List);
-        ViewStateHolder.put(KihonChosaInputHandler5.ViewStateKey.第五群認定調査基本情報リスト, 第5群List);
-        ViewStateHolder.put(KihonChosaInputHandler6.ViewStateKey.第六群認定調査基本情報リスト, 特別な医療List);
-        ViewStateHolder.put(KihonChosaInputHandler7.ViewStateKey.第七群認定調査基本情報リスト, 自立度List);
+        ViewStateHolder.put(ViewStateKeys.第一群認定調査基本情報リスト, 第1群List);
+        ViewStateHolder.put(ViewStateKeys.第二群認定調査基本情報リスト, 第2群List);
+        ViewStateHolder.put(ViewStateKeys.第三群認定調査基本情報リスト, 第3群List);
+        ViewStateHolder.put(ViewStateKeys.第四群認定調査基本情報リスト, 第4群List);
+        ViewStateHolder.put(ViewStateKeys.第五群認定調査基本情報リスト, 第5群List);
+        ViewStateHolder.put(ViewStateKeys.第六群認定調査基本情報リスト, 特別な医療List);
+        ViewStateHolder.put(ViewStateKeys.第七群認定調査基本情報リスト, 自立度List);
 
     }
 
@@ -1464,11 +1457,11 @@ public class NinnteiChousaKekkaTouroku1Handler {
      */
     @SuppressWarnings("unchecked")
     public void 規定値設定処理() {
-        ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(KihonChosaInputHandler1.ViewStateKey.第一群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(KihonChosaInputHandler2.ViewStateKey.第二群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(KihonChosaInputHandler3.ViewStateKey.第三群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(KihonChosaInputHandler4.ViewStateKey.第四群認定調査基本情報リスト, ArrayList.class);
-        ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(KihonChosaInputHandler5.ViewStateKey.第五群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(ViewStateKeys.第一群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(ViewStateKeys.第二群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(ViewStateKeys.第三群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(ViewStateKeys.第四群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(ViewStateKeys.第五群認定調査基本情報リスト, ArrayList.class);
 
         for (KihonChosaInput 基本情報 : 第1群List) {
             基本情報 = new KihonChosaInput(基本情報.get認知症高齢者自立度(), 基本情報.get障害高齢者自立度(), 基本情報.get調査連番(),
@@ -1500,11 +1493,11 @@ public class NinnteiChousaKekkaTouroku1Handler {
                     基本情報.get前回調査連番(), 基本情報.get前回調査項目(), 基本情報.get認定調査特記事項番号(), 基本情報.get認定調査特記事項連番(),
                     基本情報.get原本マスク区分(), 基本情報.get特記事項());
         }
-        ViewStateHolder.put(KihonChosaInputHandler1.ViewStateKey.第一群認定調査基本情報リスト, 第1群List);
-        ViewStateHolder.put(KihonChosaInputHandler2.ViewStateKey.第二群認定調査基本情報リスト, 第2群List);
-        ViewStateHolder.put(KihonChosaInputHandler3.ViewStateKey.第三群認定調査基本情報リスト, 第3群List);
-        ViewStateHolder.put(KihonChosaInputHandler4.ViewStateKey.第四群認定調査基本情報リスト, 第4群List);
-        ViewStateHolder.put(KihonChosaInputHandler5.ViewStateKey.第五群認定調査基本情報リスト, 第5群List);
+        ViewStateHolder.put(ViewStateKeys.第一群認定調査基本情報リスト, 第1群List);
+        ViewStateHolder.put(ViewStateKeys.第二群認定調査基本情報リスト, 第2群List);
+        ViewStateHolder.put(ViewStateKeys.第三群認定調査基本情報リスト, 第3群List);
+        ViewStateHolder.put(ViewStateKeys.第四群認定調査基本情報リスト, 第4群List);
+        ViewStateHolder.put(ViewStateKeys.第五群認定調査基本情報リスト, 第5群List);
     }
 
     /**

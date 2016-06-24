@@ -8,15 +8,15 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0100001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinseikensaku.ShinseiKensakuBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinseikensaku.ShinseiKensakuMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku.ShinseiKensakuMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100001.ShinseiKensakuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100001.dgShinseiJoho_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.KanryoInfoPhase;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.dokuji.KanryoInfoPhase;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -175,47 +175,39 @@ public class ShinseiKensakuHandler {
     }
 
     private void editZenkaiJohoForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
-        boolean useZenkaiNinteiShinseiJoho = false;
         RString 前回認定調査委託先 = finderDiv.getTxtZenkaiNinteiChosaItakusakiName().getValue();
         if (!RString.isNullOrEmpty(前回認定調査委託先)) {
             parameter.setZenkaiNinteiChosaItakusaki(finderDiv.getHdnZenkaiChosaItakusakiCode());
             parameter.setUseZenkaiNinteiChosaItakusaki(true);
-            useZenkaiNinteiShinseiJoho = true;
         }
         RString 前回主治医医療機関 = finderDiv.getTxtZenkaiShujiiIryokikanName().getValue();
         if (!RString.isNullOrEmpty(前回主治医医療機関)) {
             parameter.setZenkaiShujiiIryokikanCode(finderDiv.getHdnZenkaiShujiiIryokikanCode());
             parameter.setUseZenkaiShujiiIryokikanCode(true);
-            useZenkaiNinteiShinseiJoho = true;
         }
 
         RString 前回二次判定結果コード = finderDiv.getDdlZenkaiNijiHanteiKekka().getSelectedKey();
         if (!RString.isNullOrEmpty(前回二次判定結果コード)) {
             parameter.setZenkaiJotaiKubunCode(前回二次判定結果コード);
             parameter.setUseZenkaiJotaiKubunCode(true);
-            useZenkaiNinteiShinseiJoho = true;
         }
 
         RString 前回認定有効期間 = finderDiv.getTxtZenkaiNinteiYukoKikan().getValue();
         if (!RString.isNullOrEmpty(前回認定有効期間)) {
             parameter.setZenkaiYukoKikan(Integer.parseInt(前回認定有効期間.toString()));
             parameter.setUseZenkaiYukoKikan(true);
-            useZenkaiNinteiShinseiJoho = true;
         }
 
         FlexibleDate 設定有効開始日FROM = finderDiv.getTxtZenkaiYukoKaishiDateFrom().getValue();
         if (設定有効開始日FROM != null && !FlexibleDate.EMPTY.equals(設定有効開始日FROM)) {
             parameter.setZenkaiYukoKikanStartFrom(設定有効開始日FROM);
             parameter.setUseZenkaiYukoKikanStartFrom(true);
-            useZenkaiNinteiShinseiJoho = true;
         }
         FlexibleDate 設定有効開始日To = finderDiv.getTxtZenkaiYukoKaishiDateTo().getValue();
         if (設定有効開始日To != null && !FlexibleDate.EMPTY.equals(設定有効開始日To)) {
             parameter.setZenkaiYukoKikanStartTo(設定有効開始日To);
             parameter.setUseZenkaiYukoKikanStartTo(true);
-            useZenkaiNinteiShinseiJoho = true;
         }
-        parameter.setUseZenkaiNinteiShinseiJoho(useZenkaiNinteiShinseiJoho);
         RString 原因疾患 = finderDiv.getTxtGeninShikkanCode().getValue();
         if (!RString.isNullOrEmpty(原因疾患)) {
             parameter.setGeninShikkanCode(原因疾患);
@@ -661,7 +653,7 @@ public class ShinseiKensakuHandler {
                 row.setShimei(nullToEmpty(被保険者氏名.getColumnValue()));
             }
             FlexibleDate 生年月日 = business.get生年月日();
-            if (生年月日 != null) {
+            if (生年月日 != null && !生年月日.isEmpty()) {
                 TextBoxDate hihokenshaBirthDay = new TextBoxDate();
                 hihokenshaBirthDay.setValue(new RDate(生年月日.toString()));
                 row.setHihokenshaBirthDay(hihokenshaBirthDay);
@@ -700,6 +692,7 @@ public class ShinseiKensakuHandler {
             }
             row.setShoKisaiHokenshaNo(nullToEmpty(business.get証記載保険者番号()));
             row.setIkenshoIraiRirekiNo(new RString(String.valueOf(business.get主治医意見書作成依頼履歴番号())));
+            row.setNinteichosaIraiRirekiNo(new RString(String.valueOf(business.get認定調査依頼履歴番号())));
             dataSource.add(row);
         }
         div.getShinseiJohoIchiran().getDgShinseiJoho().setDataSource(dataSource);

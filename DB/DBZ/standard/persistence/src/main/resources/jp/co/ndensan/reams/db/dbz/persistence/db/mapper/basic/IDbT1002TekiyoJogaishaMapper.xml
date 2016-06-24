@@ -74,7 +74,7 @@
         <result property="logicalDeletedFlag" column="dbT1002TekiyoJogaisha_logicalDeletedFlag" />
     </resultMap>
     
-    <select id="getEntity" resultMap="ResultMap_DbT1002TekiyoJogaishaEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT1002TekiyoJogaishaEntity">
         SELECT
                 <include refid="allColumns_DbT1002TekiyoJogaisha"/>
         FROM

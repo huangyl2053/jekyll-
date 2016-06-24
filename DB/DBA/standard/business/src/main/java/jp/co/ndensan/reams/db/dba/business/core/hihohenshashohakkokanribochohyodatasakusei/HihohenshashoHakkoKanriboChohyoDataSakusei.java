@@ -11,13 +11,14 @@ import jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkokanriichiran
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.AkasiHakouKanriEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.AkasiHakouKanriRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihohenshashoHakkoKanriboChohyoDataSakuseiEntity;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.ShoYoshikiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoYoshikiKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -38,13 +39,9 @@ public final class HihohenshashoHakkoKanriboChohyoDataSakusei {
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
     private static final RString DATE_作成 = new RString("作成");
-    private static final RString 改頁 = new RString("被保険者証発行管理簿");
+//    private static final RString 改頁 = new RString("被保険者証発行管理簿");
     private static final RString 被保険者証発行 = new RString("介護保険　被保険者証発行管理一覧表");
     private static final RString 資格者証発行 = new RString("介護保険　資格者証発行管理一覧表");
-    private static final CodeShubetsu コード種別_0002 = new CodeShubetsu("0002");
-    private static final CodeShubetsu コード種別_0003 = new CodeShubetsu("0003");
-    private static final CodeShubetsu コード種別_0004 = new CodeShubetsu("0004");
-    private static final CodeShubetsu コード種別_0005 = new CodeShubetsu("0005");
 
     /**
      * 証発行管理帳票データリスト作成します。
@@ -85,32 +82,52 @@ public final class HihohenshashoHakkoKanriboChohyoDataSakusei {
                 chohyoDataEntity.set氏名(entity.getMeisho());
                 chohyoDataEntity.set住所(entity.getJusho());
                 chohyoDataEntity.set市町村コードListYou(entity.getShichosonCode().value());
-                chohyoDataEntity.set交付年月日(entity.getKofuYMD().wareki()
-                        .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                        separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+                chohyoDataEntity.set交付年月日(entity.getKofuYMD() != null ? entity.getKofuYMD().wareki().eraType(
+                        EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(
+                                Separator.PERIOD).fillType(FillType.BLANK).toDateString() : RString.EMPTY);
                 chohyoDataEntity.set交付事由コード(entity.getKofuJiyu());
                 if (被保険者証発行.equals(relateEntityList.getChouhouTitle())) {
                     chohyoDataEntity.set交付事由略称(CodeMaster.getCodeRyakusho(
-                            SubGyomuCode.DBA介護資格, コード種別_0002, new Code(entity.getKofuJiyu())));
+                            SubGyomuCode.DBA介護資格,
+                            DBACodeShubetsu.被保険者証交付事由.getコード(),
+                            new Code(entity.getKofuJiyu()),
+                            FlexibleDate.getNowDate()));
                     chohyoDataEntity.set交付事由名称(CodeMaster.getCodeMeisho(
-                            SubGyomuCode.DBA介護資格, コード種別_0002, new Code(entity.getKofuJiyu())));
-                    chohyoDataEntity.set回収事由名称(
-                            CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, コード種別_0003, new Code(entity.getKofuJiyu())));
+                            SubGyomuCode.DBA介護資格,
+                            DBACodeShubetsu.被保険者証交付事由.getコード(),
+                            new Code(entity.getKofuJiyu()),
+                            FlexibleDate.getNowDate()));
+                    chohyoDataEntity.set回収事由名称(CodeMaster.getCodeMeisho(
+                            SubGyomuCode.DBA介護資格,
+                            DBACodeShubetsu.被保険者証回収事由.getコード(),
+                            new Code(entity.getKaishuJiyu()),
+                            FlexibleDate.getNowDate()));
                 } else if (資格者証発行.equals(relateEntityList.getChouhouTitle())) {
                     chohyoDataEntity.set交付事由略称(CodeMaster.getCodeRyakusho(
-                            SubGyomuCode.DBA介護資格, コード種別_0004, new Code(entity.getKofuJiyu())));
+                            SubGyomuCode.DBA介護資格,
+                            DBACodeShubetsu.資格者証交付事由.getコード(),
+                            new Code(entity.getKofuJiyu()),
+                            FlexibleDate.getNowDate()));
                     chohyoDataEntity.set交付事由名称(CodeMaster.getCodeMeisho(
-                            SubGyomuCode.DBA介護資格, コード種別_0004, new Code(entity.getKofuJiyu())));
+                            SubGyomuCode.DBA介護資格,
+                            DBACodeShubetsu.資格者証交付事由.getコード(),
+                            new Code(entity.getKofuJiyu()),
+                            FlexibleDate.getNowDate()));
                     chohyoDataEntity.set回収事由名称(CodeMaster.getCodeMeisho(
-                            SubGyomuCode.DBA介護資格, コード種別_0005, new Code(entity.getKofuJiyu())));
+                            SubGyomuCode.DBA介護資格,
+                            DBACodeShubetsu.資格者証回収事由.getコード(),
+                            new Code(entity.getKaishuJiyu()),
+                            FlexibleDate.getNowDate()));
                 }
-                chohyoDataEntity.set回収年月日(entity.getKaishuYMD().wareki()
-                        .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                        separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-                chohyoDataEntity.set回収事由コード(entity.getKofuJiyu());
-
-                chohyoDataEntity.set有効期限((new RString(entity.getYukoKigenYMD().toString())));
-                chohyoDataEntity.set様式(ShoYoshikiKubun.toValue(entity.getShoYoshikiKubunCode()).get名称());
+                chohyoDataEntity.set回収年月日(entity.getKaishuYMD() != null ? entity.getKaishuYMD().wareki().eraType(
+                        EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(
+                                Separator.PERIOD).fillType(FillType.BLANK).toDateString() : RString.EMPTY);
+                chohyoDataEntity.set回収事由コード(entity.getKaishuJiyu());
+                chohyoDataEntity.set有効期限(entity.getYukoKigenYMD() != null ? entity.getYukoKigenYMD().wareki().eraType(
+                        EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(
+                                Separator.PERIOD).fillType(FillType.BLANK).toDateString() : RString.EMPTY);
+                chohyoDataEntity.set様式(RString.isNullOrEmpty(entity.getShoYoshikiKubunCode())
+                        ? RString.EMPTY : ShoYoshikiKubun.toValue(entity.getShoYoshikiKubunCode()).get名称());
                 chohyoDataEntityList.add(chohyoDataEntity);
             }
         } else {

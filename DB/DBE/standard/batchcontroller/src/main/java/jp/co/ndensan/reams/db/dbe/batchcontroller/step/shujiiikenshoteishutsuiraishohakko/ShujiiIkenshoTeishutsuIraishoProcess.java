@@ -11,18 +11,18 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoReport;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoTeishutsuIraishoHakkoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -62,7 +62,6 @@ public class ShujiiIkenshoTeishutsuIraishoProcess extends BatchProcessBase<Shuji
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoTeishutsuIraishoHakkoMapper."
             + "get主治医意見書提出依頼書発行");
     private static final ReportId 帳票ID = ReportIdDBE.DBE236001.getReportId();
-    private static final RString 文字列0 = new RString("0");
     private static final RString 文字列1 = new RString("1");
     private static final RString 記号_星 = new RString("*");
     private static final RString 年号_明治 = new RString("明");
@@ -86,7 +85,6 @@ public class ShujiiIkenshoTeishutsuIraishoProcess extends BatchProcessBase<Shuji
     private static final RString IKENSHOKINYUUOCR = new RString("【主治医意見書記入用紙OCR出力区分】");
     private static final RString IKENSHOSAKUSEISEIKYUUSHO = new RString("【主治医意見書作成料請求書出力区分】");
     private static final RString IKENSHOTEISHUTU = new RString("【介護保険指定医依頼兼主治医意見書提出意見依頼書出力区分】");
-    private int 宛名連番 = 1;
     private static final int INT3 = 3;
     private static final int INT4 = 4;
     private static final int INT5 = 5;
@@ -157,7 +155,6 @@ public class ShujiiIkenshoTeishutsuIraishoProcess extends BatchProcessBase<Shuji
         }
         item.setCustomerBarCode(getカスタマーバーコード(entity));
         item.setSonota(entity.get被保険者番号());
-        get宛名連番(item);
         item.setTitle(ReportIdDBE.DBE236001.getReportName());
         Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 1);
         item.setTsuchibun1(通知文Map.get(1));
@@ -191,14 +188,6 @@ public class ShujiiIkenshoTeishutsuIraishoProcess extends BatchProcessBase<Shuji
         }
         item.setTsuchibun1(通知文Map.get(2));
         return item;
-    }
-
-    private void get宛名連番(ShujiiIkenshoTeishutsuIraishoItem item) {
-        RStringBuilder builder = new RStringBuilder();
-        builder.append("*");
-        builder.append((new RString(String.valueOf(宛名連番++))).padLeft(文字列0, INT6));
-        builder.append("#");
-        item.setAtenaRenban(builder.toRString());
     }
 
     private RString get和暦(RString 日付, boolean 年号フラグ) {

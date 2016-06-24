@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 除外審査員情報データ取得してクラスです。
  *
- * @reamsid_L DBE-1300-040 dongyabin
+ * @reamsid_L DBZ-1300-040 dongyabin
  */
 public interface IJogaiShinsainJohoMapper {
 
@@ -24,4 +24,11 @@ public interface IJogaiShinsainJohoMapper {
      */
     List<ShinsakaiIinJohoRelateEntity> getShinsakaiIinJoho(RString shinseishoKanriNo);
 
+    /**
+     * 審査会委員コードより審査会委員情報を取得します。
+     *
+     * @param shinsakaiIinCode 審査会委員コード
+     * @return 審査会委員情報
+     */
+    List<ShinsakaiIinJohoRelateEntity> getShinsakaiIinJohoByCode(RString shinsakaiIinCode);
 }

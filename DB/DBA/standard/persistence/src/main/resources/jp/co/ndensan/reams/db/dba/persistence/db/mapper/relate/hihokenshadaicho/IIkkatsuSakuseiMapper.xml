@@ -24,12 +24,7 @@
         DbT1001."dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD",
         DbT1001."dbT1001HihokenshaDaicho_hihokennshaKubunCode",
         DbT1001."dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode",
-        <if test = "!chushutsuFlag">
-            NULL  AS "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
-        </if>
-        <if test = "chushutsuFlag">
-            "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
-        </if>      
+        DbT1001."dbT1001HihokenshaDaicho_shikakuSoshitsuYMD", 
         DbT1001."dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD",
         DbT1001."dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode",
         DbT1001."dbT1001HihokenshaDaicho_shikakuHenkoYMD",
@@ -47,7 +42,7 @@
         DbT1001."dbT1001HihokenshaDaicho_logicalDeletedFlag"
     </sql>
     
-    <select id="get被保険者台帳管理" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity" fetchSize="500">
+    <select resultOrdered="true" id="get被保険者台帳管理" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity" fetchSize="500">
         SELECT
            <include refid="allColumns_DbT1001HihokenshaDaicho" />
         FROM
@@ -57,15 +52,21 @@
            FROM
                rgdb."DbT1001HihokenshaDaicho"
            WHERE
-               "isDeleted" <![CDATA[<>]]> TRUE)DbT1001
+               "logicalDeletedFlag" <![CDATA[<>]]> TRUE)DbT1001
         WHERE
            rank_number = 1
+           <if test = "!chushutsuFlag">
+               AND DbT1001."dbT1001HihokenshaDaicho_shikakuSoshitsuYMD" IS NULL
+           </if>
         ORDER BY
            DbT1001."dbT1001HihokenshaDaicho_shikibetsuCode",
            DbT1001."dbT1001HihokenshaDaicho_shikakuShutokuYMD"
+           <if test="orderbyFlag">
+                , ${orderby}
+            </if>  
     </select>
     
-    <select id="get被保険者台帳管理情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"
+    <select resultOrdered="true" id="get被保険者台帳管理情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.IkkatsuSakuseiMybatisParameter" fetchSize="500">
         SELECT
            <include refid="allColumns_DbT1001HihokenshaDaicho" />
@@ -76,9 +77,12 @@
            FROM
                rgdb."DbT1001HihokenshaDaicho"
            WHERE
-               "isDeleted" <![CDATA[<>]]> TRUE)DbT1001
+               "logicalDeletedFlag" <![CDATA[<>]]> TRUE)DbT1001
         WHERE
             rank_number = 1
+        <if test = "!chushutsuFlag">
+           AND DbT1001."dbT1001HihokenshaDaicho_shikakuSoshitsuYMD" IS NULL
+       </if>
         AND DbT1001."dbT1001HihokenshaDaicho_shikibetsuCode" = #{shikibetsuCode}
         ORDER BY
            DbT1001."dbT1001HihokenshaDaicho_shikibetsuCode",
@@ -103,7 +107,7 @@
         <result property="jigyoshaName" column="jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>       
     </resultMap>
     
-    <select id="get生活保護受給者" resultMap="ResultMap_ShisetsuNyutaishoEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.IkkatsuSakuseiMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="get生活保護受給者" resultMap="ResultMap_ShisetsuNyutaishoEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.IkkatsuSakuseiMybatisParameter" fetchSize="500">
         SELECT
            UrT0508."shikibetsuCode",
            UrT0508."jukyuKaishiYMD",
@@ -148,7 +152,7 @@
            UrT0508."jukyuKaishiYMD"
     </select>
 
-    <select id="get老齢福祉年金受給者" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper.ResultMap_DbT7006RoreiFukushiNenkinJukyushaEntity"
+    <select resultOrdered="true" id="get老齢福祉年金受給者" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper.ResultMap_DbT7006RoreiFukushiNenkinJukyushaEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.IkkatsuSakuseiMybatisParameter" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper.allColumns_DbT7006RoreiFukushiNenkinJukyusha" />
@@ -161,14 +165,14 @@
             "dbT7006RoreiFukushiNenkinJukyusha_jukyuKaishiYMD"
     </select>
 
-    <select id="get証交付回収" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7037ShoKofuKaishuMapper.ResultMap_DbT7037ShoKofuKaishuEntity" 
+    <select resultOrdered="true" id="get証交付回収" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7037ShoKofuKaishuMapper.ResultMap_DbT7037ShoKofuKaishuEntity" 
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.IkkatsuSakuseiMybatisParameter" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7037ShoKofuKaishuMapper.allColumns_DbT7037ShoKofuKaishu" />
         FROM
             rgdb."DbT7037ShoKofuKaishu"
         WHERE
-            "isDeleted" <![CDATA[<>]]> TRUE
+            "logicalDeletedFlag" <![CDATA[<>]]> TRUE
         AND "shikibetsuCode" = #{shikibetsuCode}
         ORDER BY
             "dbT7037ShoKofuKaishu_shikibetsuCode",
@@ -179,7 +183,7 @@
     <resultMap id="get市町村名称_resultMap" type="jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.HihokenshaEntity" autoMapping="true">
         <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select id="get市町村名称" resultMap="get市町村名称_resultMap" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.IkkatsuSakuseiMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="get市町村名称" resultMap="get市町村名称_resultMap" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.IkkatsuSakuseiMybatisParameter" fetchSize="500">
         SELECT
             "shichosonMeisho"
         FROM
@@ -191,7 +195,7 @@
         LIMIT 1
     </select>
     
-    <select id="get識別対象" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity" 
+    <select resultOrdered="true" id="get識別対象" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity" 
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.IkkatsuSakuseiMybatisParameter" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
@@ -200,7 +204,7 @@
             AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
     </select>
 
-    <select id="get入所施設" resultMap="ResultMap_ShisetsuNyutaishoEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.IkkatsuSakuseiMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="get入所施設" resultMap="ResultMap_ShisetsuNyutaishoEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.IkkatsuSakuseiMybatisParameter" fetchSize="500">
         SELECT
             DbT1004."nyushoShisetsuShurui",
             DbT1004."nyushoShisetsuCode",
@@ -224,7 +228,7 @@
         AND DbT1004."taishoYMD" IS NULL
     </select>
     
-    <select id="get介護保険医療保険加入状況" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1008IryohokenKanyuJokyoMapper.ResultMap_DbT1008IryohokenKanyuJokyoEntity" 
+    <select resultOrdered="true" id="get介護保険医療保険加入状況" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1008IryohokenKanyuJokyoMapper.ResultMap_DbT1008IryohokenKanyuJokyoEntity" 
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.IkkatsuSakuseiMybatisParameter" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1008IryohokenKanyuJokyoMapper.allColumns_DbT1008IryohokenKanyuJokyo" />

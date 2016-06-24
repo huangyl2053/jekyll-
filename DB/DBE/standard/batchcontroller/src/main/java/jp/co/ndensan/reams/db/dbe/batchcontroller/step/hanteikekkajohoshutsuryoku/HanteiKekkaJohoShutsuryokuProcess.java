@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshutsuryo
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkajohoshutsuryoku.HanteiKekkaJohoShutsuryokuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.KekkatsuchiTaishoshaIchiranReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.UnyoKeitaiKubun.広域連合;
+import static jp.co.ndensan.reams.db.dbz.definition.core.hokensha.UnyoKeitaiKubun.広域連合;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;

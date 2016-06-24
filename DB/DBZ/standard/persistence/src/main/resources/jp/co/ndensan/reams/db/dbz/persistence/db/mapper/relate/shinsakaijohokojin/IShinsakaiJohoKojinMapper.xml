@@ -20,7 +20,7 @@ and open the template in the editor.
     </resultMap>
     
     
-    <select id="getKaisaikekkaandbashojoho"  
+    <select resultOrdered="true" id="getKaisaikekkaandbashojoho"  
             parameterType="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" 
             resultMap="KaisaiKekkaAndBashoJohoEntity">
         SELECT
@@ -54,8 +54,8 @@ and open the template in the editor.
         <result property="介護認定審査員資格コード" column="shinsakaiIinShikakuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
     
-    <select id="getShinsakaijyouhou" 
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.param.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter" 
+    <select resultOrdered="true" id="getShinsakaijyouhou" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter" 
             resultMap="WariateIinAndIinJohoEntity">
         SELECT
             A."kaigoninteiShinsakaiGichoKubunCode" AS kaigoninteiShinsakaiGichoKubunCode,
@@ -73,6 +73,7 @@ and open the template in the editor.
         INNER JOIN rgdb."DbT5593GogitaiWariateIinJoho" AS D
             ON C."gogitaiNo" = D."gogitaiNo"
             AND C."gogitaiYukoKikanKaishiYMD" = D."gogitaiYukoKikanKaishiYMD"
+            AND C."gogitaiYukoKikanShuryoYMD" = D."gogitaiYukoKikanShuryoYMD"
             AND B."shinsakaiIinCode" = D."shinsakaiIinCode"
             AND D."substituteFlag" = False
         WHERE
@@ -83,8 +84,8 @@ and open the template in the editor.
     
    
     
-    <select id="getHoketsukaijyouhou"
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.param.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter" 
+    <select resultOrdered="true" id="getHoketsukaijyouhou"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter" 
             resultMap="WariateIinAndIinJohoEntity">
         SELECT
             A."kaigoninteiShinsakaiGichoKubunCode" AS kaigoninteiShinsakaiGichoKubunCode,
@@ -102,6 +103,7 @@ and open the template in the editor.
         INNER JOIN rgdb."DbT5593GogitaiWariateIinJoho" AS D
             ON C."gogitaiNo" = D."gogitaiNo"
             AND C."gogitaiYukoKikanKaishiYMD" = D."gogitaiYukoKikanKaishiYMD"
+            AND C."gogitaiYukoKikanShuryoYMD" = D."gogitaiYukoKikanShuryoYMD"
             AND B."shinsakaiIinCode" = D."shinsakaiIinCode"
             AND D."substituteFlag" = True
         WHERE

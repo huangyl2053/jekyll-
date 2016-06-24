@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaiWariateIinJoho;
 
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaiwariateiinjoho.IGogitaiWariateIinJohoMapper;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5593GogitaiWariateIinJohoEntityGenerator;

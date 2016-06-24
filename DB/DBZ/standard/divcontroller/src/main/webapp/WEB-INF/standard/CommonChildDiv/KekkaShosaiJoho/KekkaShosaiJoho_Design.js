@@ -43,16 +43,16 @@ var DBZ;
                 return new DBZ.ShinseiSonotaJohoInput.ModeController(this.convFiledName("ccdShinseiSonotaJohoInput"));
             };
 
+            Controls.prototype.btnModoru = function () {
+                return new UZA.Button(this.convFiledName("btnModoru"));
+            };
+
             Controls.prototype.txtShinseiKubunShinsei = function () {
                 return new UZA.TextBox(this.convFiledName("txtShinseiKubunShinsei"));
             };
 
             Controls.prototype.txtShinseiKubunLaw = function () {
                 return new UZA.TextBox(this.convFiledName("txtShinseiKubunLaw"));
-            };
-
-            Controls.prototype.btnModoru = function () {
-                return new UZA.Button(this.convFiledName("btnModoru"));
             };
 
             Controls.prototype.btnToroku = function () {

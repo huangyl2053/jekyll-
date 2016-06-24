@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.dbc0820032;
+package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820032;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,8 +14,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisaiJushochiTokure
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiJushochiTokureiResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820032.KyuhuhiMeisaiJutokuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820032.dgJushochiTokutei_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -31,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -80,7 +77,8 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
             row.setDefaultDataName3(new RString(String.valueOf(shokan.getEntity().get日数_回数())));
             row.getDefaultDataName4().setValue(new Decimal(shokan.getEntity().getサービス単位数()));
             row.setDefaultDataName5(shokan.getEntity().get摘要());
-            if (shokan.getEntity().get施設所在保険者番号() != null && !shokan.getEntity().get施設所在保険者番号().isEmpty()) {
+            if (shokan.getEntity().get施設所在保険者番号() != null
+                    && !shokan.getEntity().get施設所在保険者番号().isEmpty()) {
                 row.setDefaultDataName6(shokan.getEntity().get施設所在保険者番号().value());
             }
             row.setDefaultDataName7(shokan.getEntity().get連番());
@@ -145,20 +143,18 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
             div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().
                     getCcdHokenshaJoho().setHokenjaNo(row.getDefaultDataName6());
         }
-
     }
 
     /**
      * clear給付費明細登録
      */
     public void clear給付費明細登録() {
-
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().setサービス種類コード(null);
+                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().setサービス種類コード(RString.EMPTY);
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().setサービス項目コード(null);
+                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().setサービス項目コード(RString.EMPTY);
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().setサービス名称(null);
+                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().setサービス名称(RString.EMPTY);
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getCcdHokenshaJoho().clear();
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtTanyi().clearValue();
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtKaisu().clearValue();
@@ -184,28 +180,28 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
      * modifyRow
      *
      * @param row dgdKyufuhiMeisai_Row
+     * @param state RString
      */
-    public void modifyRow(dgJushochiTokutei_Row row) {
-        RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+    public void modifyRow(dgJushochiTokutei_Row row, RString state) {
         if (修正.equals(state)) {
             boolean flag = checkState(row);
             if (flag) {
                 row.setRowState(RowState.Modified);
-                setDgJushochiTokutei(row);
+                setDgJushochiTokutei(row, state);
             }
         } else if (削除.equals(state)) {
             if (RowState.Added.equals(row.getRowState())) {
                 div.getPnlBtnDetail().getPnlKyufuhiMeisai().getDgJushochiTokutei().getDataSource().remove(
-                        Integer.parseInt(div.getPnlBtnDetail().getPnlKyufuhiMeisai().getRowId().toString()));
+                        div.getPnlBtnDetail().getPnlKyufuhiMeisai().getRowId().getValue().intValue());
                 clear給付費明細登録();
                 div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().setVisible(true);
             } else {
                 row.setRowState(RowState.Deleted);
-                setDgJushochiTokutei(row);
+                setDgJushochiTokutei(row, state);
             }
         } else if (登録.equals(state)) {
             row.setRowState(RowState.Added);
-            setDgJushochiTokutei(row);
+            setDgJushochiTokutei(row, state);
         }
     }
 
@@ -224,7 +220,8 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
             return true;
         }
         if (div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                getPnlKyufuhiMeisaiTouroku().getTxtKaisu().getValue() == null && ddgRow.getDefaultDataName3() != null) {
+                getPnlKyufuhiMeisaiTouroku().getTxtKaisu().getValue() == null
+                && ddgRow.getDefaultDataName3() != null) {
             return true;
         } else if (div.getPnlBtnDetail().getPnlKyufuhiMeisai().
                 getPnlKyufuhiMeisaiTouroku().getTxtKaisu().getValue() != null
@@ -245,7 +242,7 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
                 div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtTekiyo().getValue()));
     }
 
-    private void setDgJushochiTokutei(dgJushochiTokutei_Row ddgRow) {
+    private void setDgJushochiTokutei(dgJushochiTokutei_Row ddgRow, RString state) {
         RStringBuilder builder = new RStringBuilder();
         if (div.getPnlBtnDetail().getPnlKyufuhiMeisai().
                 getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().getサービスコード1() != null) {
@@ -275,7 +272,8 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
             ddgRow.getDefaultDataName4().setValue(div.getPnlBtnDetail().getPnlKyufuhiMeisai().
                     getPnlKyufuhiMeisaiTouroku().getTxtServiceTani().getValue());
         }
-        if (div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtTekiyo().getValue() != null) {
+        if (div.getPnlBtnDetail().getPnlKyufuhiMeisai().
+                getPnlKyufuhiMeisaiTouroku().getTxtTekiyo().getValue() != null) {
             ddgRow.setDefaultDataName5(div.getPnlBtnDetail().
                     getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtTekiyo().getValue());
         }
@@ -284,7 +282,7 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
             ddgRow.setDefaultDataName6(div.getPnlBtnDetail().getPnlKyufuhiMeisai().
                     getPnlKyufuhiMeisaiTouroku().getCcdHokenshaJoho().getHokenjaNo());
         }
-        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (登録.equals(state)) {
             List<dgJushochiTokutei_Row> list = div.getPnlBtnDetail().
                     getPnlKyufuhiMeisai().getDgJushochiTokutei().getDataSource();
             list.add(ddgRow);
@@ -323,10 +321,13 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
 
     /**
      * 保存処理
+     *
+     * @param meisaiPar ShoukanharaihishinseimeisaikensakuParameter
+     * @param 処理モード RString
+     * @param shkonlist List<ShokanMeisaiJushochiTokureiResult>
      */
-    public void 保存処理() {
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
+    public void 保存処理(ShoukanharaihishinseimeisaikensakuParameter meisaiPar, RString 処理モード,
+            List<ShokanMeisaiJushochiTokureiResult> shkonlist) {
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         RString 整理番号 = meisaiPar.get整理番号();
@@ -336,12 +337,11 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
         List<ShokanMeisaiJushochiTokurei> entityList = new ArrayList<>();
         List<dgJushochiTokutei_Row> dgrow = div.getPnlBtnDetail().getPnlKyufuhiMeisai().
                 getDgJushochiTokutei().getDataSource();
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+        if (削除.equals(処理モード)) {
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().
                     delShokanSyomeisyo(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         } else {
             int max連番 = 0;
-            List<ShokanMeisaiJushochiTokureiResult> shkonlist = ViewStateHolder.get(ViewStateKeys.給付費明細住特, List.class);
             Map<RString, ShokanMeisaiJushochiTokurei> mapList = new HashMap<>();
             for (ShokanMeisaiJushochiTokureiResult shokanMeisaiResult : shkonlist) {
                 mapList.put(shokanMeisaiResult.getEntity().get連番(), shokanMeisaiResult.getEntity());
@@ -375,7 +375,8 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
 
     }
 
-    private ShokanMeisaiJushochiTokurei buildshokanMeisai(ShokanMeisaiJushochiTokurei entity, dgJushochiTokutei_Row row) {
+    private ShokanMeisaiJushochiTokurei buildshokanMeisai(ShokanMeisaiJushochiTokurei entity,
+            dgJushochiTokutei_Row row) {
         RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().substring(0, 2).toString());
         RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().substring(2, NUM).toString());
         entity = clearshokanMeisaii(entity);
@@ -422,10 +423,10 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
      * get制御
      *
      * @param shikibetsuNoKanri ShikibetsuNoKanri
+     * @param meisaiPar ShoukanharaihishinseimeisaikensakuParameter
      */
-    public void getボタンを制御(ShikibetsuNoKanri shikibetsuNoKanri) {
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
+    public void getボタンを制御(ShikibetsuNoKanri shikibetsuNoKanri,
+            ShoukanharaihishinseimeisaikensakuParameter meisaiPar) {
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         RString 整理番号 = meisaiPar.get整理番号();
@@ -438,7 +439,8 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
         setサービス計画費ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set特定入所者費用ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set緊急時_所定疾患ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        set緊急時施設療養費ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+        set緊急時施設療養費ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月,
+                整理番号, 事業者番号, 様式番号, 明細番号);
         set食事費用ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set請求額集計ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set社福軽減額ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
@@ -615,23 +617,6 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
         } else if (設定可任意.equals(shikibetsuNoKanri.get社会福祉法人軽減設定区分())) {
             div.getPnlBtnDetail().getBtnShafukuGahenGaku().setIconNameEnum(IconName.NONE);
         }
-    }
-
-    /**
-     * putViewState
-     */
-    public void putViewState() {
-        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
-        ViewStateHolder.put(ViewStateKeys.申請日, div.getPnlBtnDetail().getTxtShinseibi().getValue());
-        ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
-                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
-                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-                new JigyoshaNo(div.getPnlBtnDetail().getTxtJigyoshaNo().getValue()),
-                div.getPnlBtnDetail().getTxtShomeisho().getValue(),
-                div.getPnlBtnDetail().getTxtMeisaiNo().getValue(),
-                null);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
     }
 
     /**

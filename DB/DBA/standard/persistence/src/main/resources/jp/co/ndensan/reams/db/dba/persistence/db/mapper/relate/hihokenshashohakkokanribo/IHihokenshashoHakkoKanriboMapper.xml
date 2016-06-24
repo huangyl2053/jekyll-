@@ -19,7 +19,7 @@
 
     </resultMap>
     
-    <select id="get証発行管理リスト情報"
+    <select resultOrdered="true" id="get証発行管理リスト情報"
             resultMap="resultMap_get証発行管理リスト情報"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshashohakkokanribo.HihokenshashoHakkoKanriboMybatisParameter" fetchSize="500">
         SELECT
@@ -42,16 +42,18 @@
         ON ShoKofuKaishu."shikibetsuCode" = PSM."shikibetsuCode"
         WHERE
         ShoKofuKaishu."logicalDeletedFlag" = 'false'
-        AND
-        ShoKofuKaishu."kofuJiyu" IN
-        <foreach
-            collection="kofuJiyulist"
-            item="code"
-            open="("
-            separator=","
-            close=")">
-            #{code}
-        </foreach>
+        <if test="kofuJiyulist.size() > 0">
+            AND
+            ShoKofuKaishu."kofuJiyu" IN
+            <foreach
+                collection="kofuJiyulist"
+                item="code"
+                open="("
+                separator=","
+                close=")">
+                #{code}
+            </foreach>
+        </if>
         <if test="kaishuJiyulist.size() > 0">
             AND
             ShoKofuKaishu."kaishuJiyu" IN
@@ -78,6 +80,6 @@
         <if test="iskaisyuShuryouhi">
             AND ShoKofuKaishu."kaishuYMD" <![CDATA[<=]]> #{kasyuusiuryouhi}
         </if>
-        ORDER BY ShoKofuKaishu."hihokenshaNo"
+        ORDER BY ShoKofuKaishu."hihokenshaNo", ShoKofuKaishu."kofuYMD" DESC, ShoKofuKaishu."hakkoShoriTimestamp" DESC
     </select>
 </mapper>

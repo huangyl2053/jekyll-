@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * DBZ.NinteiInput_認定情報の取得処理です。
  *
- * @reamsid_L DBE-1300-080 yaodongsheng
+ * @reamsid_L DBZ-1300-080 yaodongsheng
  */
 public class NinteiInputFinder {
 

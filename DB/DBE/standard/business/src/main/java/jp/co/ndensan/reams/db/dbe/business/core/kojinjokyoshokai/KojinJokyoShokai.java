@@ -278,12 +278,30 @@ public class KojinJokyoShokai {
     }
 
     /**
+     * 厚労省IF識別コードを返します。
+     *
+     * @return 厚労省IF識別コード
+     */
+    public Code get厚労省IF識別コード() {
+        return entity.getKoroshoIfShikibetsuCode();
+    }
+
+    /**
      * 要介護認定一次判定結果コードを返します。
      *
      * @return 要介護認定一次判定結果コード
      */
     public Code get要介護認定一次判定結果コード() {
         return entity.getIchijiHanteiKekkaCode();
+    }
+
+    /**
+     * 要介護認定一次判定結果コード認知症加算を返します。
+     *
+     * @return 要介護認定一次判定結果コード認知症加算
+     */
+    public Code get要介護認定一次判定結果コード認知症加算() {
+        return entity.getIchijiHanteiKekkaNinchishoKasanCode();
     }
 
     /**
@@ -347,6 +365,15 @@ public class KojinJokyoShokai {
      */
     public boolean is指定医フラグ() {
         return entity.isShiteiiFlag();
+    }
+
+    /**
+     * 医師区分コードを返します。
+     *
+     * @return 医師区分コード
+     */
+    public Code get医師区分コード() {
+        return entity.getIshiKubunCode();
     }
 
     /**

@@ -5,17 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.hokensha;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.ForeignersNameOutput;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.GappeiKyuShichosonHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.core.hokensha.ForeignersNameOutput;
+import jp.co.ndensan.reams.db.dbz.definition.core.hokensha.GappeiKyuShichosonHyoji;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.GunNamePrint;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HowToEditJusho;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.KatagakiPrint;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.RokenJukyushaNoTaikei;
+import jp.co.ndensan.reams.db.dbz.definition.core.hokensha.RokenJukyushaNoTaikei;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.ShichosonNamePrint;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TodofukenNamePrint;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TopPriorityArea;
 import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.GappeiKyuShichosonKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.UnyoKeitaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.hokensha.UnyoKeitaiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.GappeiChiikiNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.KokuhorenKoikiShichosonNo;

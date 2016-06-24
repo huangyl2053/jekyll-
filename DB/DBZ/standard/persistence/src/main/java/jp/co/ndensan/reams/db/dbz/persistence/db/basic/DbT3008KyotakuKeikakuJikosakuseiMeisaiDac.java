@@ -111,4 +111,33 @@ public class DbT3008KyotakuKeikakuJikosakuseiMeisaiDac implements ISaveable<DbT3
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 居宅給付計画自己作成明細を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年月 TaishoYM
+     * @param 履歴番号 RirekiNo
+     * @return List<DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity> select居宅給付計画自己作成明細(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth 対象年月,
+            int 履歴番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3008KyotakuKeikakuJikosakuseiMeisai.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(taishoYM, 対象年月),
+                                eq(rirekiNo, 履歴番号))).
+                toList(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity.class);
+    }
 }

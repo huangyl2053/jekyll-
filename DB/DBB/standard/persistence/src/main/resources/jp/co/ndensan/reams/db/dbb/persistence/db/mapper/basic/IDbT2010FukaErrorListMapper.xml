@@ -70,7 +70,7 @@
         <result property="shikakuSoshitsuJiyu" column="dbT2010FukaErrorList_shikakuSoshitsuJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-    <select id="getEntity" resultMap="ResultMap_DbT2010FukaErrorListEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT2010FukaErrorListEntity">
         SELECT
         <include refid="allColumns_DbT2010FukaErrorList" />
         FROM

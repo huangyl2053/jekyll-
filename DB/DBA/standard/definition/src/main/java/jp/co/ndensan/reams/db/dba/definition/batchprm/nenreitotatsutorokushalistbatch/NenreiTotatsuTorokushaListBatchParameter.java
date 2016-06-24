@@ -38,7 +38,6 @@ public class NenreiTotatsuTorokushaListBatchParameter extends BatchParameterBase
     private RString konkaikaishiYMDHMS;
     @BatchParameter(key = KEY_KONKAISHURYO_YMDHMS, name = "今回終了日時")
     private RString konkaishuryoYMDHMS;
-    private boolean tekiyojogaishadaichoFLG;
     @BatchParameter(key = KEY_SHUTURYOKUJUN_ID, name = "出力順ID")
     private RString shuturyokujunID;
 

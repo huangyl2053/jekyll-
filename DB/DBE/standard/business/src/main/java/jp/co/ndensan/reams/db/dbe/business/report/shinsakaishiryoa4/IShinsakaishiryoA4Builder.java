@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa4.Shinsak
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 事務局用介護認定審査対象者一覧表Builderのインターフェースクラスです。
+ * 事務局用介護認定審査対象者一覧表A4Builderのインターフェースクラスです。
  *
  * @reamsid_L DBE-0150-020 lishengli
  */

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choshuyuyojoho.Choshu
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsuchochuyuyo.KibetsuChoshuYuyo;
 import jp.co.ndensan.reams.db.dbb.business.report.choshuyuyo.KibetsuChoshyuYuyoKikan;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
@@ -23,7 +24,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoChoshuYuyoShurui;
 import jp.co.ndensan.reams.ur.urz.business.core.date.DateEditor;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -377,7 +377,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor
         for (KibetsuChoshuYuyo 介護期別徴収猶予 : 介護期別徴収猶予List) {
             RString 徴収方法 = 介護期別徴収猶予.get徴収方法();
             RString 期 = new RString(String.format(FORMAT_1桁.toString(), 介護期別徴収猶予.get期()));
-            if (ChoshuHohoKibetsu.普通徴収.code().equals(徴収方法) && 普徴期月.get期().equals(期)) {
+            if (ChoshuHohoKibetsu.普通徴収.getコード().equals(徴収方法) && 普徴期月.get期().equals(期)) {
                 徴収猶予期間 = new RString(DateEditor.to西暦(介護期別徴収猶予.get徴収猶予開始日()).toString()
                         + 波線.toString() + DateEditor.to西暦(介護期別徴収猶予.get徴収猶予終了日()).toString());
             }

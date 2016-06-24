@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigohokenshikakushasho;
 
-import jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigohokenshikakushasho.KaigoHokenShikakushashoParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigohokenshikakushasho.KaigoHokenShikakushashoParameter;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
 /**

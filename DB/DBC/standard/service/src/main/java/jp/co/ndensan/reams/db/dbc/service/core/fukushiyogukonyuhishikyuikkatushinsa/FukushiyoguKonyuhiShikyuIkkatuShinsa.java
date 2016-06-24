@@ -143,6 +143,9 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
     public void updShikyuShinsei(FlexibleDate 決定日, List<ShokanShinseiEntityResult> 支給申請一括審査List) {
         if (支給申請一括審査List != null && !支給申請一括審査List.isEmpty()) {
             for (ShokanShinseiEntityResult result : 支給申請一括審査List) {
+                if (result.getEntity().get償還払請求基本Entity() == null || result.getEntity().get償還払支給申請Entity() == null) {
+                    continue;
+                }
                 HihokenshaNoParameter parameter = new HihokenshaNoParameter(result.getEntity()
                         .get償還払請求基本Entity().getHiHokenshaNo());
                 IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper mapper

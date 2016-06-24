@@ -10,8 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.KokuhorenTorikomiConfigKeysFactory;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenTorikomiJohoModel;
 import jp.co.ndensan.reams.db.dbc.business.core.view.KokuhorenTorikomiJoho;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ConfigKeysKokuhorenTorikomi;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.IConfigKeysKokuhorenTorikomi;
+import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.IConfigKeysKokuhorenTorikomi;
+import jp.co.ndensan.reams.db.dbc.definition.core.config.ConfigKeysKokuhorenTorikomi;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhorenInterfaceKanriManager;
@@ -90,7 +90,7 @@ public class KokuhorenTorikomiManager {
         List<KokuhorenTorikomiJohoModel> models = new ArrayList<>();
         List<KokuhorenTorikomiJohoModel> result = new ArrayList<>();
         for (ConfigKeysKokuhorenTorikomi 交換識別番号 : ConfigKeysKokuhorenTorikomi.values()) {
-            models.add(find国保連取込コンフィグ(交換識別番号.getCode()));
+            models.add(find国保連取込コンフィグ(交換識別番号.getコード()));
         }
 
         for (KokuhorenTorikomiJohoModel model : models) {

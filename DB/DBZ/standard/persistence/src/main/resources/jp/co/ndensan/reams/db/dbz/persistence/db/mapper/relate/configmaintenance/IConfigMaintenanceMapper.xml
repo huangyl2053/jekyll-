@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<!-- @reamsid_L DBU-3991-010 wanghui -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.configmaintenance.IConfigMaintenanceMapper">
+
+    <resultMap id="被保険者証資格証発行情報取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.configmaintenance.ConfigMaintenanceRelateEntity" autoMapping="true">
+        <result property="configName" column="DbT7070_configName"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    <select resultOrdered="true" id="getコンフィグ制御汎用メンテナンス" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            resultMap="被保険者証資格証発行情報取得ResultMap" fetchSize="500">
+        SELECT
+        DbT7070."configName" as "DbT7070_configName"
+        FROM
+        rgdb."DbT7070ConfigMaintenanceControl" as DbT7070
+        WHERE
+        DbT7070."subGyomuCode" =#{subGyomuCode}
+        ORDER BY
+        DbT7070."hyojiJun1",DbT7070."hyojiJun2",DbT7070."hyojiJun3"
+    </select>
+</mapper>

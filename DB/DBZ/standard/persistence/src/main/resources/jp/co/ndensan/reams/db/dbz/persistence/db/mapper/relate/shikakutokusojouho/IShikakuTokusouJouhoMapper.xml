@@ -22,7 +22,7 @@
         <result property="lastUpdateTimestamp" column="DbT1001Hiho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
         <result property="tanIchi" column="tanIchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    <select id="getShikakuTosoJoho" resultMap="resultMap_getShikakuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.shikakutokusojouho.ShikakuTokusoJouhoParameter" fetchSize="500">
+    <select resultOrdered="true" id="getShikakuTosoJoho" resultMap="resultMap_getShikakuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakutokusojouho.ShikakuTokusoJouhoParameter" fetchSize="500">
         SELECT
         DbT1001Hiho."shikibetsuCode" as "DbT1001Hiho_shikibetsuCode",
         DbT1001Hiho."shikakuShutokuYMD" as "DbT1001Hiho_shikakuShutokuYMD",
@@ -73,7 +73,7 @@
         ORDER BY
         DbT1001Hiho."shikakuShutokuYMD" desc,DbT1001Hiho."idoYMD"  desc
     </select>
-    <select id="getShikakuJoho" resultMap="resultMap_getShikakuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.shikakutokusojouho.ShikakuTokusoJouhoParameter" fetchSize="500">
+    <select resultOrdered="true" id="getShikakuJoho" resultMap="resultMap_getShikakuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakutokusojouho.ShikakuTokusoJouhoParameter" fetchSize="500">
         SELECT
         DbT1001Hiho."shikibetsuCode" as "DbT1001Hiho_shikibetsuCode",
         DbT1001Hiho."shikakuShutokuYMD" as "DbT1001Hiho_shikakuShutokuYMD",

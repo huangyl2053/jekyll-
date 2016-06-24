@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.chosachikugroup.ChosaChikuGroupMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.chosachikugroup.ChosaChikuGroup;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.chosachikugroup.ChosaChikuGroupIdentifier;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikugroup.ChosaChikuGroupMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosachikugroup.ChosaChikuGroupMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.DBE2020008StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.NinteiChosaSchedule8MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.dgChosaChikuGroupChosaChikuList_Row;

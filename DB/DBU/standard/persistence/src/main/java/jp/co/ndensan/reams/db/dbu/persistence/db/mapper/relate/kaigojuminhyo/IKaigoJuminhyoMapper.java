@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigojuminhyo;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigojuminhyo.KaigoJuminhyoMapperParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigojuminhyo.KaigoJuminhyoMapperParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyo.KaigoJuminhyoRelateEntity;
 
 /**

@@ -4,21 +4,27 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJ
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
- * ShisetsuJoho のクラスファイル 
- * 
+ * ShisetsuJoho のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -259,22 +265,22 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
     @JsonProperty("modes")
     private HashSet<Mode> modes;
 
-    public static enum DaichoShubetsu implements ICommonChildDivMode {
+    public static enum DaichouShubetu implements ICommonChildDivMode {
 
         台帳種別表示する("台帳種別表示する"),
         台帳種別非表示する("台帳種別非表示する");
 
         private final String name;
 
-        private DaichoShubetsu(final String name) {
+        private DaichouShubetu(final String name) {
             this.name = name;
         }
 
-        public static DaichoShubetsu getEnum(String str) {
-            DaichoShubetsu[] enumArray = DaichoShubetsu.values();
+        public static DaichouShubetu getEnum(String str) {
+            DaichouShubetu[] enumArray = DaichouShubetu.values();
 
-            for (DaichoShubetsu enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+            for (DaichouShubetu enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -288,15 +294,15 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
     }
 
-    public DaichoShubetsu getMode_DaichoShubetsu() {
-        return (DaichoShubetsu) _CommonChildDivModeUtil.getMode(this.modes, DaichoShubetsu.class);
+    public DaichouShubetu getMode_DaichouShubetu() {
+        return (DaichouShubetu) _CommonChildDivModeUtil.getMode(this.modes, DaichouShubetu.class);
     }
 
-    public void setMode_DaichoShubetsu(DaichoShubetsu value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DaichoShubetsu.class, value);
+    public void setMode_DaichouShubetu(DaichouShubetu value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DaichouShubetu.class, value);
     }
 
-    public static enum ShisetsuShurui implements ICommonChildDivMode {
+    public static enum ShisetuShurui implements ICommonChildDivMode {
 
         施設種類を表示する("施設種類を表示する"),
         施設種類を非表示する("施設種類を非表示する"),
@@ -304,15 +310,15 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
         private final String name;
 
-        private ShisetsuShurui(final String name) {
+        private ShisetuShurui(final String name) {
             this.name = name;
         }
 
-        public static ShisetsuShurui getEnum(String str) {
-            ShisetsuShurui[] enumArray = ShisetsuShurui.values();
+        public static ShisetuShurui getEnum(String str) {
+            ShisetuShurui[] enumArray = ShisetuShurui.values();
 
-            for (ShisetsuShurui enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+            for (ShisetuShurui enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -326,15 +332,15 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
     }
 
-    public ShisetsuShurui getMode_施設種類() {
-        return (ShisetsuShurui) _CommonChildDivModeUtil.getMode(this.modes, ShisetsuShurui.class);
+    public ShisetuShurui getMode_ShisetuShurui() {
+        return (ShisetuShurui) _CommonChildDivModeUtil.getMode(this.modes, ShisetuShurui.class);
     }
 
-    public void setMode_施設種類(ShisetsuShurui value) {
-        _CommonChildDivModeUtil.setMode(this.modes, ShisetsuShurui.class, value);
+    public void setMode_ShisetuShurui(ShisetuShurui value) {
+        _CommonChildDivModeUtil.setMode(this.modes, ShisetuShurui.class, value);
     }
 
-    public static enum NyuryokuHojo implements ICommonChildDivMode {
+    public static enum NyuuryokuHojo implements ICommonChildDivMode {
 
         事業者を表示する("事業者を表示する"),
         他特例施設を表示する("他特例施設を表示する"),
@@ -344,15 +350,15 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
         private final String name;
 
-        private NyuryokuHojo(final String name) {
+        private NyuuryokuHojo(final String name) {
             this.name = name;
         }
 
-        public static NyuryokuHojo getEnum(String str) {
-            NyuryokuHojo[] enumArray = NyuryokuHojo.values();
+        public static NyuuryokuHojo getEnum(String str) {
+            NyuuryokuHojo[] enumArray = NyuuryokuHojo.values();
 
-            for (NyuryokuHojo enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+            for (NyuuryokuHojo enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -366,15 +372,15 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
     }
 
-    public NyuryokuHojo getMode_入力補助() {
-        return (NyuryokuHojo) _CommonChildDivModeUtil.getMode(this.modes, NyuryokuHojo.class);
+    public NyuuryokuHojo getMode_NyuuryokuHojo() {
+        return (NyuuryokuHojo) _CommonChildDivModeUtil.getMode(this.modes, NyuuryokuHojo.class);
     }
 
-    public void setMode_入力補助(NyuryokuHojo value) {
-        _CommonChildDivModeUtil.setMode(this.modes, NyuryokuHojo.class, value);
+    public void setMode_NyuuryokuHojo(NyuuryokuHojo value) {
+        _CommonChildDivModeUtil.setMode(this.modes, NyuuryokuHojo.class, value);
     }
 
-    public static enum HyojiMode implements ICommonChildDivMode {
+    public static enum HyouziModel implements ICommonChildDivMode {
 
         defaultView("defaultView"),
         readOnly("readOnly"),
@@ -382,15 +388,15 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
         private final String name;
 
-        private HyojiMode(final String name) {
+        private HyouziModel(final String name) {
             this.name = name;
         }
 
-        public static HyojiMode getEnum(String str) {
-            HyojiMode[] enumArray = HyojiMode.values();
+        public static HyouziModel getEnum(String str) {
+            HyouziModel[] enumArray = HyouziModel.values();
 
-            for (HyojiMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+            for (HyouziModel enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -404,15 +410,14 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
     }
 
-    public HyojiMode getMode_表示モード() {
-        return (HyojiMode) _CommonChildDivModeUtil.getMode(this.modes, HyojiMode.class);
+    public HyouziModel getMode_HyouziModel() {
+        return (HyouziModel) _CommonChildDivModeUtil.getMode(this.modes, HyouziModel.class);
     }
 
-    public void setMode_表示モード(HyojiMode value) {
-        _CommonChildDivModeUtil.setMode(this.modes, HyojiMode.class, value);
+    public void setMode_HyouziModel(HyouziModel value) {
+        _CommonChildDivModeUtil.setMode(this.modes, HyouziModel.class, value);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-
 }

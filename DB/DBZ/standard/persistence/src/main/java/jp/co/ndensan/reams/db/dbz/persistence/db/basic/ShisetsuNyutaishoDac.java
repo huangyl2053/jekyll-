@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaisho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaisho.daichoShubetsu;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaisho.nyushoYMD;
@@ -91,7 +91,7 @@ public class ShisetsuNyutaishoDac implements
         return accessor.
                 select().
                 table(DbT1004ShisetsuNyutaisho.class).
-                where(and(eq(shikibetsuCode, 個人識別コード), eq(daichoShubetsu, 台帳種別.getCode()))).
+                where(and(eq(shikibetsuCode, 個人識別コード), eq(daichoShubetsu, 台帳種別.getコード()))).
                 order(by(rirekiNo, Order.DESC)).
                 toList(DbT1004ShisetsuNyutaishoEntity.class);
     }

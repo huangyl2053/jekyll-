@@ -16,42 +16,42 @@ var DBC;
 
             ModeController.prototype.priorities = function () {
                 return [
-                    "HyojiMode"
+                    "HyoujiModo"
                 ];
             };
 
-            ModeController.prototype.HyojiMode = function () {
-                return new Modes.HyojiMode(this.controls);
+            ModeController.prototype.HyoujiModo = function () {
+                return new Modes.HyoujiModo(this.controls);
             };
             return ModeController;
         })();
         KaigoKyufuKokuhorenJohoTorikomi.ModeController = ModeController;
 
         (function (Modes) {
-            var HyojiMode = (function () {
-                function HyojiMode(controls) {
+            var HyoujiModo = (function () {
+                function HyoujiModo(controls) {
                     this.controls = controls;
                 }
-                HyojiMode.prototype.Mode1 = function () {
+                HyoujiModo.prototype.Mode1 = function () {
                     this.controls.ShoriTaishoJoho().displayNone = true;
                     this.controls.KakuninJikoMsg().displayNone = true;
                     this.controls.ShutsuRyokujun().displayNone = true;
                 };
 
-                HyojiMode.prototype.ModeShutsuryokujunJoken2 = function () {
+                HyoujiModo.prototype.ModeShutsuryokujunJoken2 = function () {
                     this.controls.ShoriTaishoJoho().displayNone = true;
                     this.controls.KakuninJikoMsg().displayNone = true;
                     this.controls.ShutsuRyokujun().displayNone = false;
                 };
 
-                HyojiMode.prototype.ModeKakuninMsgJoken3 = function () {
+                HyoujiModo.prototype.ModeKakuninMsgJoken3 = function () {
                     this.controls.ShoriTaishoJoho().displayNone = false;
                     this.controls.KakuninJikoMsg().displayNone = false;
                     this.controls.ShutsuRyokujun().displayNone = false;
                 };
-                return HyojiMode;
+                return HyoujiModo;
             })();
-            Modes.HyojiMode = HyojiMode;
+            Modes.HyoujiModo = HyoujiModo;
         })(KaigoKyufuKokuhorenJohoTorikomi.Modes || (KaigoKyufuKokuhorenJohoTorikomi.Modes = {}));
         var Modes = KaigoKyufuKokuhorenJohoTorikomi.Modes;
     })(DBC.KaigoKyufuKokuhorenJohoTorikomi || (DBC.KaigoKyufuKokuhorenJohoTorikomi = {}));

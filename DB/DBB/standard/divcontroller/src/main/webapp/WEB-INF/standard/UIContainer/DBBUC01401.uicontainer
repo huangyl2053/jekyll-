@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC01401",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "普徴仮算定通知書一括発行",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0140001",
+     "toLayoutTitle": "普徴仮算定賦課計算",
+     "toState": "普徴仮算定通知書一括発行"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0140001",
+     "layoutTitle": "普徴仮算定賦課計算",
+     "eventName": "完了する",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

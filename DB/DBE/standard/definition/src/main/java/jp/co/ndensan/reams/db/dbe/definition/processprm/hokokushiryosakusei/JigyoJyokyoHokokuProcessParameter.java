@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei;
 
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.JigyoJyokyoHokokuMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -19,6 +20,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JigyoJyokyoHokokuProcessParameter implements IBatchProcessParameter {
 
+    private boolean isJigyoJyokyoHokoku;
+    private boolean isJissiJyokyoTokei;
+    private boolean isSinsaHanteiJyokyo;
+    private boolean isSinsakaiKanrenTokei;
+    private boolean isCsvShutsuryoku;
+    private RString shutsuryokuFairuName;
+    private RDate kijyunYMD;
     private boolean isEmptyHokensyaNo;
     private RString hokensyaNo;
     private boolean isTaishoTsukiKubun;
@@ -34,6 +42,13 @@ public class JigyoJyokyoHokokuProcessParameter implements IBatchProcessParameter
     /**
      * コンストラクタです。
      *
+     * @param isJigyoJyokyoHokoku 事業状況報告出力区分
+     * @param isJissiJyokyoTokei 実施状況統計出力区分
+     * @param isSinsaHanteiJyokyo 審査判定状況出力区分
+     * @param isSinsakaiKanrenTokei 審査会関連統計資料作成出力区分
+     * @param isCsvShutsuryoku CSV出力区分
+     * @param shutsuryokuFairuName 出力ファイル名
+     * @param kijyunYMD 基準年月日
      * @param isEmptyHokensyaNo 空保険者番号
      * @param hokensyaNo 保険者番号
      * @param isTaishoTsukiKubun 対象月編集区分
@@ -47,6 +62,13 @@ public class JigyoJyokyoHokokuProcessParameter implements IBatchProcessParameter
      * @param isHorei 申請区分(法令)
      */
     public JigyoJyokyoHokokuProcessParameter(
+            boolean isJigyoJyokyoHokoku,
+            boolean isJissiJyokyoTokei,
+            boolean isSinsaHanteiJyokyo,
+            boolean isSinsakaiKanrenTokei,
+            boolean isCsvShutsuryoku,
+            RString shutsuryokuFairuName,
+            RDate kijyunYMD,
             boolean isEmptyHokensyaNo,
             RString hokensyaNo,
             boolean isTaishoTsukiKubun,
@@ -58,6 +80,13 @@ public class JigyoJyokyoHokokuProcessParameter implements IBatchProcessParameter
             RString taishoGeppiTo,
             boolean isShinseiji,
             boolean isHorei) {
+        this.isJigyoJyokyoHokoku = isJigyoJyokyoHokoku;
+        this.isJissiJyokyoTokei = isJissiJyokyoTokei;
+        this.isSinsaHanteiJyokyo = isSinsaHanteiJyokyo;
+        this.isSinsakaiKanrenTokei = isSinsakaiKanrenTokei;
+        this.isCsvShutsuryoku = isCsvShutsuryoku;
+        this.shutsuryokuFairuName = shutsuryokuFairuName;
+        this.kijyunYMD = kijyunYMD;
         this.isEmptyHokensyaNo = isEmptyHokensyaNo;
         this.hokensyaNo = hokensyaNo;
         this.isTaishoTsukiKubun = isTaishoTsukiKubun;

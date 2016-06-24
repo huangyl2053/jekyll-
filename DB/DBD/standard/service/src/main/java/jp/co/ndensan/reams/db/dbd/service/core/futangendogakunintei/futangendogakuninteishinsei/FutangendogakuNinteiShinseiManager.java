@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunint
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiViewState;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiIdentifier;
-import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
-import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4036FutanGendogakuNinteiBatchTestResultsMapper;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4036FutanGendogakuNinteiBatchTestResultsEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4036FutanGendogakuNinteiBatchTestResultsDac;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -27,14 +27,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class FutangendogakuNinteiShinseiManager {
 
-    private final MapperProvider mapperProvider;
-    private IDbT4036FutanGendogakuNinteiBatchTestResultsMapper dbt4036mapper;
+    private final DbT4036FutanGendogakuNinteiBatchTestResultsDac dac;
 
     /**
      * コンストラクタです。
      */
     public FutangendogakuNinteiShinseiManager() {
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.dac = InstanceProvider.create(DbT4036FutanGendogakuNinteiBatchTestResultsDac.class);
     }
 
     /**
@@ -50,12 +49,13 @@ public class FutangendogakuNinteiShinseiManager {
      * 介護保険負担限度額認定を削除する。
      *
      * @param hihokenshaNo 被保険者番号
-     * @return 更新件数 更新結果の件数を返します。
      */
     @Transaction
-    public int delete利用者負担額減額by被保険者番号(HihokenshaNo hihokenshaNo) {
-        dbt4036mapper = mapperProvider.create(IDbT4036FutanGendogakuNinteiBatchTestResultsMapper.class);
-        return dbt4036mapper.deleteByHihokenshaNo(hihokenshaNo);
+    public void delete利用者負担額減額by被保険者番号(HihokenshaNo hihokenshaNo) {
+        for (DbT4036FutanGendogakuNinteiBatchTestResultsEntity entity : dac.selectByHihokenshaNo(hihokenshaNo)) {
+            entity.setState(EntityDataState.Deleted);
+            dac.save(entity);
+        }
     }
 
     /**

@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.Jigy
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.dgServiceList_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2010013.JigyoshaTourokuHandler;
 import jp.co.ndensan.reams.db.dba.service.core.kaigojigyoshashisetsukanri.KaigoJigyoshaShisetsuKanriManager;
-import jp.co.ndensan.reams.db.dba.service.jigyoshatouroku.JigyoshaTourokuFinder;
+import jp.co.ndensan.reams.db.dba.service.core.jigyoshatouroku.JigyoshaTourokuFinder;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyoshaBuilder;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyosha;

@@ -18,8 +18,13 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -33,6 +38,11 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
 
     @InjectSession
     private SqlSession session;
+    private static final RString 事業者の番号 = new RString("事業者番号");
+    private static final RString サービスの種類コード = new RString("サービス種類コード");
+    private static final RString 有効の開始日 = new RString("有効開始日");
+    private static final RString 有効の日 = new RString("有効日");
+    private static final RString 介護事業者指定サービス = new RString("介護事業者指定サービス");
 
     /**
      * 主キーで介護事業者指定サービスを取得します。
@@ -48,9 +58,9 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
             JigyoshaNo 事業者番号,
             ServiceShuruiCode サービス種類コード,
             FlexibleDate 有効開始日) throws NullPointerException {
-        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
-        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
-        requireNonNull(有効開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始日"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業者の番号.toString()));
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サービスの種類コード.toString()));
+        requireNonNull(有効開始日, UrSystemErrorMessages.値がnull.getReplacedMessage(有効の開始日.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -86,7 +96,7 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
     @Transaction
     @Override
     public int save(DbT7063KaigoJigyoshaShiteiServiceEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護事業者指定サービスエンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(介護事業者指定サービス.toString()));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
@@ -99,7 +109,7 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
      * @return List<DbT7063KaigoJigyoshaShiteiServiceEntity>
      */
     public List<DbT7063KaigoJigyoshaShiteiServiceEntity> selectBy事業者番号(JigyoshaNo 事業者番号) {
-        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業者の番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -123,9 +133,9 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
             RString 事業者番号,
             RString サービス種類コード,
             FlexibleDate 有効開始日) throws NullPointerException {
-        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
-        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
-        requireNonNull(有効開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始日"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業者の番号.toString()));
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サービスの種類コード.toString()));
+        requireNonNull(有効開始日, UrSystemErrorMessages.値がnull.getReplacedMessage(有効の開始日.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -139,6 +149,37 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
     }
 
     /**
+     * 主キーで介護事業者指定サービスを取得します。
+     *
+     * @param 事業者番号 JigyoshaNo
+     * @param サービス種類コード ServiceShuruiCode
+     * @param 有効日 YukoKaishiYMD
+     * @return DbT7063KaigoJigyoshaShiteiServiceEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7063KaigoJigyoshaShiteiServiceEntity select事業者名称(
+            RString 事業者番号,
+            RString サービス種類コード,
+            FlexibleDate 有効日) throws NullPointerException {
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業者の番号.toString()));
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サービスの種類コード.toString()));
+        requireNonNull(有効日, UrSystemErrorMessages.値がnull.getReplacedMessage(有効の日.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7063KaigoJigyoshaShiteiService.class).
+                where(and(
+                                eq(jigyoshaNo, 事業者番号),
+                                leq(DbT7063KaigoJigyoshaShiteiService.yukoKaishiYMD, 有効日),
+                                or(leq(有効日, DbT7063KaigoJigyoshaShiteiService.yukoShuryoYMD),
+                                        isNULL(DbT7063KaigoJigyoshaShiteiService.yukoShuryoYMD)),
+                                eq(serviceShuruiCode, サービス種類コード))).
+                order(by(DbT7063KaigoJigyoshaShiteiService.yukoKaishiYMD, Order.DESC)).limit(1).
+                toObject(DbT7063KaigoJigyoshaShiteiServiceEntity.class);
+    }
+
+    /**
      * 主キーで介護事業者指定サービスを削除します。
      *
      * @param entity 介護事業者指定サービス
@@ -147,7 +188,7 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
      */
     @Transaction
     public int delete(DbT7063KaigoJigyoshaShiteiServiceEntity entity) throws NullPointerException {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護事業者指定サービス"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(介護事業者指定サービス.toString()));
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 }

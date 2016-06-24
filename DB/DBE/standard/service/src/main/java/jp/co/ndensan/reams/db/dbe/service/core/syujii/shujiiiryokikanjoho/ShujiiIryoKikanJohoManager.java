@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiiiryokikanjoho;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJoho;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.syujii.shujiiiryokikanjoho.IShujiiIryoKikanJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;

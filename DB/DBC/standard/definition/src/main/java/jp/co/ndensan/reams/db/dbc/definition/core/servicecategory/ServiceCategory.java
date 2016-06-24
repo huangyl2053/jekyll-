@@ -13,35 +13,24 @@ public enum ServiceCategory {
     /**
      * コード:無し 名称:居宅サービス 略称:定義なし
      */
-    居宅サービス("無し", "居宅サービス"),
+    居宅サービス("居宅サービス"),
     /**
      * コード:無し 名称:施設サービス 略称:定義なし
      */
-    施設サービス("無し", "施設サービス"),
+    施設サービス("施設サービス"),
     /**
      * コード:無し 名称:地域密着型サービス 略称:定義なし
      */
-    地域密着型サービス("無し", "地域密着型サービス"),
+    地域密着型サービス("地域密着型サービス"),
     /**
      * コード:無し 名称:合計対象外 略称:定義なし
      */
-    合計対象外("無し", "合計対象外");
+    合計対象外("合計対象外");
 
-    private final RString code;
     private final RString fullName;
 
-    private ServiceCategory(String code, String fullname) {
-        this.code = new RString(code);
+    private ServiceCategory(String fullname) {
         this.fullName = new RString(fullname);
-    }
-
-    /**
-     * 給付実績集計の合計対象のコードを返します。
-     *
-     * @return 給付実績集計の合計対象のコード
-     */
-    public RString getコード() {
-        return code;
     }
 
     /**
@@ -56,13 +45,13 @@ public enum ServiceCategory {
     /**
      * 給付実績集計の合計対象のコードと一致する内容を探します。
      *
-     * @param code 給付実績集計の合計対象のコード
-     * @return {@code code} に対応する給付実績集計の合計対象
+     * @param fullname 給付実績集計の合計対象
+     * @return { fullname} に対応する給付実績集計の合計対象
      */
-    public static ServiceCategory toValue(RString code) {
+    public static ServiceCategory toValue(RString fullname) {
 
         for (ServiceCategory serviceCategory : ServiceCategory.values()) {
-            if (serviceCategory.code.equals(code)) {
+            if (serviceCategory.get名称().equals(fullname)) {
                 return serviceCategory;
             }
         }

@@ -17,6 +17,7 @@ public enum KokuhorenJoho_TorikomiErrorListType {
      * コード:0020 名称:リストタイプ2 略称:定義なし
      */
     リストタイプ2("0020", "サービス提供年月", "整理番号", null, null, null);
+
     private final RString code;
     private final RString キー1;
     private final RString キー2;

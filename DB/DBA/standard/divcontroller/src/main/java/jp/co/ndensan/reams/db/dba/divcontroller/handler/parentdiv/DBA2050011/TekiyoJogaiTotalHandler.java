@@ -39,7 +39,7 @@ public class TekiyoJogaiTotalHandler {
      * @param 遷移元メニューID 遷移元メニューID
      */
     public void initialize(ShikibetsuCode 識別コード, RString 遷移元メニューID) {
-        div.getShikakuKihonJoho().getCcdAtenaJoho().onLoad(識別コード);
+        div.getShikakuKihonJoho().getCcdAtenaJoho().initialize(識別コード);
         if (遷移元メニューID_適用.equals(遷移元メニューID)) {
             div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().set状態(new RString(DisplayMode.適用登録モード.toString()));
         } else if (遷移元メニューID_解除.equals(遷移元メニューID)) {

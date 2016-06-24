@@ -8,10 +8,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100002;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakayijidouwaritsuke.ShinsaKayiJidouWaritsukeBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.taisyosyajidowaritsuke.TaisyosyaJidoWaritsukeBatchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100002.ShinsakaiAutoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100002.dgShinsakaiIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsGogitaiDummy;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -58,6 +60,7 @@ public class ShinsakaiAutoHandler {
                 dgShinsakaiIchiran.setWaritsukeninzu(jigyoshaInput.get割付人数());
                 dgShinsakaiIchiran.setShinchokuJokyo(ShinsakaiShinchokuJokyo.toValue(jigyoshaInput.get進捗状況()).get名称());
                 dgShinsakaiIchiran.setDammyflag(IsGogitaiDummy.toValue(jigyoshaInput.isダミーフラグ()).is合議体ダミーフラグTrue());
+                dgShinsakaiIchiran.setShinsakaiJidoWariateTeiin(jigyoshaInput.get自動割付定員());
                 dgShinsakaiIchiranList.add(dgShinsakaiIchiran);
             }
         }
@@ -67,7 +70,23 @@ public class ShinsakaiAutoHandler {
     /**
      * 審査会自動割付画面入力するデータより、バッチ用パラメータクラスを作成します。
      *
-     * @return
+     * @return List<TaisyosyaJidoWaritsukeBatchParameter>
      */
-    // TODO 対象者自動割付（DBE510001）バッチ実装しない。
+    public TaisyosyaJidoWaritsukeBatchParameter setBatchParameter() {
+
+        List<RString> shinsakaiKaisaiNo = new ArrayList<>();
+        List<FlexibleDate> kaisaiYMD = new ArrayList<>();
+        List<Integer> shinsakaiWaritsukeNinsu = new ArrayList<>();
+        List<Integer> shinsakaiJidoWariateTeiin = new ArrayList<>();
+        for (dgShinsakaiIchiran_Row row : shindiv.getDgShinsakaiIchiran().getDataSource()) {
+            if (row.getSelected()) {
+                shinsakaiKaisaiNo.add(row.getKaisaino());
+                kaisaiYMD.add(row.getKaisaibi().getValue() == null ? FlexibleDate.EMPTY
+                        : new FlexibleDate(row.getKaisaibi().getValue().toDateString()));
+                shinsakaiWaritsukeNinsu.add(Integer.valueOf(row.getWaritsukeninzu().toString()));
+                shinsakaiJidoWariateTeiin.add(Integer.valueOf(row.getShinsakaiJidoWariateTeiin().toString()));
+            }
+        }
+        return new TaisyosyaJidoWaritsukeBatchParameter(shinsakaiKaisaiNo, kaisaiYMD, shinsakaiWaritsukeNinsu, shinsakaiJidoWariateTeiin);
+    }
 }

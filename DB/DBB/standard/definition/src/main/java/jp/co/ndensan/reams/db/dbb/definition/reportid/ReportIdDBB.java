@@ -17,6 +17,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBB {
 
     /**
+     * 所得照会票【Ａ４横（標準版）】
+     */
+    DBB100001(new ReportId("DBB100001_ShotokuShokaihyoA4Yoko"), new RString("所得照会票【Ａ４横（標準版）】")),
+    /**
+     * 所得照会票【Ａ４縦】
+     */
+    DBB100002(new ReportId("DBB100002_ShotokuShokaihyoA4Tate"), new RString("所得照会票【Ａ４縦】")),
+    /**
      * 保険料納入通知書（仮算定）【コンビニ期毎タイプ（連帳）】
      */
     DBB100029(new ReportId("DBB100029_KarisanteiNonyuTsuchishoCVSKigotoRencho"),
@@ -362,6 +370,10 @@ public enum ReportIdDBB {
      */
     DBB200004(new ReportId("DBB200004_TokuChoHeijunkaTsuchishoHakkoIchiran"), new RString("特別徴収平準化仮算定額変更通知書発行一覧表")),
     /**
+     * 介護保険所得情報一覧表の帳票ID
+     */
+    DBB200008(new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran"), new RString("介護保険所得情報一覧表")),
+    /**
      * 保険料納入通知書（本算定過年度異動）発行一覧表の帳票ID
      */
     DBB200011(new ReportId("DBB200011_TokubetsuChoshuKaishiTsuchishoHonsanteiHakkoIchiran"), new RString("特別徴収開始通知書（本算定）発行一覧表")),
@@ -383,6 +395,15 @@ public enum ReportIdDBB {
      */
     DBB200017(new ReportId("DBB200017_HonsanteiKanendoIdoNonyutsuchishoHakkoIchiran"), new RString("保険料納入通知書（本算定過年度異動）発行一覧表")),
     /**
+     * 特別徴収依頼金額明細一覧表の帳票ID
+     */
+    DBB200023(new ReportId("DBB200023_TokubetsuChoshuIraikingakuMeisaiIchiran"), new RString("特別徴収依頼金額明細一覧表")),
+    /**
+     * 所得照会票発行一覧表の帳票ID
+     */
+    DBB200024(new ReportId("DBB200024_ShotokushokaihyoHakkoIchiran"), new RString("所得照会票発行一覧表")),
+    /**
+     *
      * 本算定異動（過年度）結果一覧表の帳票ID
      */
     DBB200027(new ReportId("DBB200027_KanendoIdouKekkaIchiran"), new RString("本算定異動（過年度）結果一覧表"));

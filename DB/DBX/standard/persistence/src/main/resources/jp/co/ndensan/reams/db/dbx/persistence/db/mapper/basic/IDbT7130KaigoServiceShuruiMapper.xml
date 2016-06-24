@@ -75,14 +75,14 @@
         <result property="nijiyoboInKahiKubun" column="dbT7130KaigoServiceShurui_nijiyoboInKahiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="serviceShoBunrui" column="dbT7130KaigoServiceShurui_serviceShoBunrui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT7130KaigoServiceShuruiEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7130KaigoServiceShuruiEntity">
         SELECT
         <include refid="allColumns_DbT7130KaigoServiceShurui"/>
         FROM
         rgdb."DbT7130KaigoServiceShurui"
     </select>
     
-    <select id="getserviceShuruiCdDDL" resultMap="ResultMap_DbT7130KaigoServiceShuruiEntity">
+    <select resultOrdered="true" id="getserviceShuruiCdDDL" resultMap="ResultMap_DbT7130KaigoServiceShuruiEntity">
         SELECT
           TEMP."serviceShuruiCd",
           TEMP."serviceShuruiMeisho" 

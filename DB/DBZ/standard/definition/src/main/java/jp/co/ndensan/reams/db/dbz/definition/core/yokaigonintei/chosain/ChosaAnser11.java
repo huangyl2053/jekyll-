@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -28,11 +27,11 @@ public enum ChosaAnser11 {
      * コード:3 名称:できない 略称できない一部介助
      */
     できない("3", "できない");
-    private final Code code;
+    private final RString code;
     private final RString fullName;
 
     private ChosaAnser11(String code, String fullname) {
-        this.code = new Code(code);
+        this.code = new RString(code);
         this.fullName = new RString(fullname);
     }
 
@@ -41,7 +40,7 @@ public enum ChosaAnser11 {
      *
      * @return 認定調査項目内容11のコード
      */
-    public Code getコード() {
+    public RString getコード() {
         return code;
     }
 
@@ -60,10 +59,10 @@ public enum ChosaAnser11 {
      * @param code 認定調査項目内容11のコード
      * @return {@code code} に対応する認定調査項目内容11
      */
-    public static ChosaAnser11 toValue(Code code) {
-        for (ChosaAnser11 anser01 : ChosaAnser11.values()) {
-            if (anser01.code.equals(code)) {
-                return anser01;
+    public static ChosaAnser11 toValue(RString code) {
+        for (ChosaAnser11 anser11 : ChosaAnser11.values()) {
+            if (anser11.code.equals(code)) {
+                return anser11;
             }
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("認定調査項目内容11"));

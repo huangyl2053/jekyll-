@@ -1,0 +1,41 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishiryoa3;
+
+import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa3.ShinsakaishiryoA3ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa3.ShinsakaishiryoItem;
+import jp.co.ndensan.reams.uz.uza.report.Report;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+
+/**
+ * 事務局用介護認定審査対象者一覧表A3のReportです。
+ *
+ * @reamsid_L DBE-0150-020 lishengli
+ */
+public class ShinsakaishiryoA3Report extends Report<ShinsakaishiryoA3ReportSource> {
+
+    private final ShinsakaishiryoItem item;
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param item 事務局用介護認定審査対象者一覧表のITEMLIST
+     */
+    public ShinsakaishiryoA3Report(ShinsakaishiryoItem item) {
+        this.item = item;
+    }
+
+    /**
+     *
+     * @param reportSourceWriter 事務局用介護認定審査対象者一覧表A3Sourceクラス
+     */
+    @Override
+    public void writeBy(ReportSourceWriter<ShinsakaishiryoA3ReportSource> reportSourceWriter) {
+        IShinsakaishiryoA3Editor headerEditor = new ShinsakaishiryoA3Editor(item);
+        IShinsakaishiryoA3Builder builder = new ShinsakaishiryoA3BuilderImpl(headerEditor);
+        reportSourceWriter.writeLine(builder);
+    }
+}

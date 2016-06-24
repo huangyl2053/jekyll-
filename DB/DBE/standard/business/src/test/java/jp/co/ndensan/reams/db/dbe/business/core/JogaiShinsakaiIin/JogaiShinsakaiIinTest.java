@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.JogaiShinsakaiIin;
 
 import jp.co.ndensan.reams.db.dbe.business.core.jogaishinsakaiiin.JogaiShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ShinsakaiIin;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaiiincode.ShinsakaiIinCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaiiincode.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;

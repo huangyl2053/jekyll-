@@ -49,6 +49,7 @@ public class KojinJokyoShokaiRelateEntity {
     private RString shienShinseiKubun;
     private Code nigoTokuteiShippeiCode;
     private boolean johoteikyoDoiFlag;
+    private Code koroshoIfShikibetsuCode;
     private Code ichijiHanteiKekkaCode;
     private FlexibleDate shinsakaiKaisaiYMD;
     private Code shoriJotaiKubun;
@@ -62,6 +63,8 @@ public class KojinJokyoShokaiRelateEntity {
     private RString ninteiChosainCode;
     private RString chosainShimei;
     private RString shichosonRenrakuJiko;
+    private Code ichijiHanteiKekkaNinchishoKasanCode;
+    private Code ishiKubunCode;
     private Code shinseiKubun;
     private RString hihokenshaNameKana;
     private FlexibleDate shinseiYMD;

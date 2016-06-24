@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120080;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.service.kogakuserviceketteijohotorikomidatahenshu.KogakuServiceKetteiJohoTorikomiDataHenshu;
+import jp.co.ndensan.reams.db.dbc.service.core.kogakuserviceketteijohotorikomidatahenshu.KogakuServiceKetteiJohoTorikomiDataHenshu;
 import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;

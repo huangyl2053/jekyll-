@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
+import jp.co.ndensan.reams.db.dbb.definition.core.gemmenchoshuyuyo.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004Gemmen;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyo.choteiNendo;
@@ -69,7 +69,7 @@ public class GemmenDac implements IModifiable<DbT2004GemmenEntity> {
                                 eq(fukaNendo, 賦課年度),
                                 eq(tsuchishoNo, 通知書番号),
                                 eq(rirekiNo, 履歴番号),
-                                eq(jotaiKubun, 状態区分.code()))).
+                                eq(jotaiKubun, 状態区分.getコード()))).
                 toObject(DbT2004GemmenEntity.class);
 
         return createModel(entity);

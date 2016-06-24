@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.config.ShiharaiHohoHenkoConfig;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakko;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.ShiharaiHohoHenkoShuryobunKisaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.configvalues.ShiharaiHohoHenkoShuryobunKisaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.HihokenshashoKofuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.ShikakushashoKofuJiyu;

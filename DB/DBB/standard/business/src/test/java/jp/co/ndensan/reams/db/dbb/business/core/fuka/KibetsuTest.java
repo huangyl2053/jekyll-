@@ -72,7 +72,6 @@ public class KibetsuTest extends DbbTestBase {
 //        public void 主キー名4がnullである場合に_NullPointerExceptionが発生する() {
 //            sut = new Kibetsu(調定年度, 賦課年度, 通知書番号, null, 徴収方法, 期);
 //        }
-
         @Test(expected = NullPointerException.class)
         public void 主キー名5がnullである場合に_NullPointerExceptionが発生する() {
             sut = new Kibetsu(調定年度, 賦課年度, 通知書番号, 履歴番号, null, 期);

@@ -155,17 +155,6 @@ public class ShisetsutourukuPanel {
     }
 
     /**
-     * 「完了する」ボタンを押下する。
-     *
-     * @param div ShisetsutourukuPanelDiv
-     * @return ResponseData
-     */
-    public ResponseData<ShisetsutourukuPanelDiv> btnComplete(ShisetsutourukuPanelDiv div) {
-        RealInitialLocker.release(LOCKINGKEY);
-        return ResponseData.of(div).setState(DBA2010012StateName.完了状態);
-    }
-
-    /**
      * 「再検索する」ボタンを押下する。
      *
      * @param div ShisetsutourukuPanelDiv

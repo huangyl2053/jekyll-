@@ -4,8 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2003KibetsuEntityGenerator;
-//import static jp.co.ndensan.reams.db.dbb.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2003KibetsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

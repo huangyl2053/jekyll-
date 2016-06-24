@@ -11,10 +11,10 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.Nint
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.KohoshaIchiran;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.TaishouWaritsukeHead;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.Taishouichiran;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.CountShinsakaiIinJogaiJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.CountShinsakaiWariateIinJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.KohoshaIchiranMapperParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.TaishouIchiranMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.CountShinsakaiIinJogaiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.CountShinsakaiWariateIinJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.KohoshaIchiranMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.TaishouIchiranMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.taishouwaritsuke.KohoshaIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.taishouwaritsuke.TaishouIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.taishouwaritsuke.TaishouWaritsukeHeadEntity;

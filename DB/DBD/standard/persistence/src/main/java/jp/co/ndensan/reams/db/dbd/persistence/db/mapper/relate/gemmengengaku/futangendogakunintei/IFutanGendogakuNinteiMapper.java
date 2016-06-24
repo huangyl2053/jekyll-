@@ -56,4 +56,12 @@ public interface IFutanGendogakuNinteiMapper {
      * @return FutanGendogakuNinteiEntity{@code list}
      */
     List<FutanGendogakuNinteiEntity> get負担限度額認定申請の情報List(FutanGendogakuNinteiShinseiMapperParameter param);
+
+    /**
+     * 負担限度額認定申請の情報を取得By被保険者番号。
+     *
+     * @param param FutanGendogakuNinteiShinseiMapperParameter
+     * @return FutanGendogakuNinteiEntity{@code list}
+     */
+    List<FutanGendogakuNinteiEntity> select負担限度額認定リストBy被保険者番号(FutanGendogakuNinteiShinseiMapperParameter param);
 }

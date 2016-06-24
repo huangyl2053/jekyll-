@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaitakusakijoho.Ninteic
 import jp.co.ndensan.reams.db.dbe.business.report.chosaschedulehyo.ChosaSchedulehyoReportJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.chosaschedulehyojikankanri.ChosaSchedulehyoJikankanriReportJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.chosaschedulehyotyousayin.ChosaSchedulehyoTyousayinReportJoho;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosaitakusakijoho.JiKanKanRiParameter;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosaitakusakijoho.JiMuSyoParameter;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosaitakusakijoho.NinteichosaScheduleParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakijoho.JiKanKanRiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakijoho.JiMuSyoParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakijoho.NinteichosaScheduleParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020009.DBE2020009StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020009.NinteiChosaSchedule9MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020009.NinteiChosaSchedule9MainHandler;

@@ -22,6 +22,6 @@ public class KeidoshaFukushiYoguTaiyoKakuninShinseisho2Proerty extends ReportPro
      * コンストラクタです。
      */
     public KeidoshaFukushiYoguTaiyoKakuninShinseisho2Proerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBC800021.getReportId());
+        super(SubGyomuCode.DBC介護給付, ReportIdDBA.DBC800021.getReportId());
     }
 }

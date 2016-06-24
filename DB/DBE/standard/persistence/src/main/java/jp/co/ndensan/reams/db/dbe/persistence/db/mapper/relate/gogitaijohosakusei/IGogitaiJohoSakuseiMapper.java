@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijohosakusei;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijohosakusei.GogitaiJohoSakuseiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijohosakusei.GogitaiJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

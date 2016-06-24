@@ -6,7 +6,7 @@
     <!-- select被保険者番号 -->
     <select id="selectHihokenjabango"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.nenreitotatsushikakuidochoshuhohokoshin.NenreitotatsuShikakuIdoChoshuhohoKoshinMybatisParam"
-            resultMap="resultMap_DbT1001HihokenshaDaichoEntity" fetchSize="500">
+            resultMap="resultMap_DbT1001HihokenshaDaichoEntity" fetchSize="500" resultOrdered="true">
         <include refid="selectDbT1001HihokenshaDaichoEntity" />
     </select>
     <sql id="selectDbT1001HihokenshaDaichoEntity" >
@@ -29,4 +29,3 @@
         <result property="ichigoShikakuShutokuYMD" column="ichigoShikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap> 
 </mapper>
-

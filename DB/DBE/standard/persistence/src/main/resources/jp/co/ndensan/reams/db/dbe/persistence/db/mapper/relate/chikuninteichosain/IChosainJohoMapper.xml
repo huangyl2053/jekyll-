@@ -9,9 +9,9 @@
         <result property="chosaChikuCode"                   column="chikuShichoson_chosaChikuCode"                   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
-    <select id="get調査地区コード" 
+    <select resultOrdered="true" id="get調査地区コード" 
              resultMap="resultMap_ChosaChikuEntity"  
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
         SELECT
             ChikuShichoson."chosaChikuCode" AS "chikuShichoson_chosaChikuCode"
         FROM
@@ -25,9 +25,9 @@
         ORDER BY ChikuShichoson."yusenNo"
     </select>
     
-    <select id="get通常件数" 
+    <select resultOrdered="true" id="get通常件数" 
              resultType="int" 
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
         SELECT
             COUNT(0)
         FROM
@@ -37,9 +37,9 @@
             AND NinteiChosaScheduleMemo."chosaChikuCode" = #{chosaChikuCode}
             AND NinteiChosaScheduleMemo."memoPriority" = '1'
     </select>
-    <select id="get重要件数" 
+    <select resultOrdered="true" id="get重要件数" 
              resultType="int" 
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
         SELECT
             COUNT(0)
         FROM
@@ -61,9 +61,9 @@
         <result property="yoyakuKaoFlag"                       column="ninteichosaSchedule_yoyakuKaoFlag"/>
     </resultMap>
     
-   <select id="getChikuNinteiChosainRelateEntity" 
+   <select resultOrdered="true" id="getChikuNinteiChosainRelateEntity" 
              resultMap="resultMap_ChikuNinteiChosainRelateEntity" 
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
         SELECT
                 ChikuNinteiChosain."ninteiChosainCode" AS "chikuNinteiChosain_ninteiChosainCode",
                 ChikuNinteiChosain."shichosonCode" AS "chikuNinteiChosain_shichosonCode",
@@ -91,9 +91,9 @@
                 AND ChikuNinteiChosain."shichosonCode" = #{shichosonCode}
     </select>
     
-   <select id="getChikuNinteiChosainRelateEntityKensaku" 
+   <select resultOrdered="true" id="getChikuNinteiChosainRelateEntityKensaku" 
             resultMap="resultMap_ChikuNinteiChosainRelateEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
        SELECT
                ChikuNinteiChosain."ninteiChosainCode" AS "chikuNinteiChosain_ninteiChosainCode",
                ChikuNinteiChosain."shichosonCode" AS "chikuNinteiChosain_shichosonCode",
@@ -129,9 +129,9 @@
         <result property="shichosonMeisho"                     column="koseiShichosonMaster_shichosonMeisho"                   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
-    <select id="getChikuNinteiKoseiShichosonRelateRelateEntity" 
+    <select resultOrdered="true" id="getChikuNinteiKoseiShichosonRelateRelateEntity" 
              resultMap="resultMap_ChikuNinteiKoseiShichosonRelateEntity" 
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
         SELECT
                 DISTINCT ChikuNinteiChosain."shichosonCode" AS "chikuNinteiChosain_shichosonCode",
                 KoseiShichosonMaster."shichosonMeisho" AS "koseiShichosonMaster_shichosonMeisho"
@@ -147,9 +147,9 @@
         <result property="jigyoshaMeisho"                      column="koseiShichosonMaster_jigyoshaMeisho"                    typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
-    <select id="getChikuNinteiNinteichosaRelateEntity" 
+    <select resultOrdered="true" id="getChikuNinteiNinteichosaRelateEntity" 
              resultMap="resultMap_ChikuNinteiNinteichosaRelateEntity" 
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
         SELECT
                 DISTINCT ChikuNinteiChosain."ninteiChosaItakusakiCode" AS "chikuNinteiChosain_ninteiChosaItakusakiCode",
                 NinteichosaItakusakiJoho."jigyoshaMeisho" AS "koseiShichosonMaster_jigyoshaMeisho"
@@ -166,9 +166,9 @@
         <result property="shinseishoKanriNo"                   column="ninteichosaSchedule_shinseishoKanriNo"                  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
     </resultMap>
     
-    <select id="getNinteichosaScheduleEntity" 
+    <select resultOrdered="true" id="getNinteichosaScheduleEntity" 
              resultMap="resultMap_NinteichosaScheduleEntity" 
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
         SELECT
                 NinteichosaSchedule."shinseishoKanriNo" AS "ninteichosaSchedule_shinseishoKanriNo"
         FROM 

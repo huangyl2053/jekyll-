@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBB-1720-030 lijunjun -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.saihakkofinder.ISaiHakkoFinderMapper">
+    
+    <!--再発行対象リスト-->
+    <select resultOrdered="true" id="select再発行対象" parameterType="jp.co.ndensan.reams.uz.uza.lang.RYear"
+            resultMap="resultMap_SaiHakkoEntity" fetchSize="500">
+     SELECT 
+     count(A."setaiCode") AS 発行件数,
+     A."shoriNendo" AS 処理年度,
+     A."hakkoReamsLoginId" AS ユーザ,
+     A."sakuseiTimestamp" AS 処理日時
+     FROM rgdb."DbT2020ShotokuShokaihyoHakkoRireki" AS A
+     INNER JOIN rgdb."DbV2502KaigoShotoku" AS B
+     ON 
+     A."shoriNendo"=B."shotokuNendo"
+     AND A."shikibetsuCode"=B."shikibetsuCode"
+     WHERE
+     (B."kazeiKubun"<![CDATA[<>]]>'4'
+     OR B."kazeiKubunGemmenGo"<![CDATA[<>]]>'4'
+     )
+     AND A."shoriNendo"=#{処理年度}
+     GROUP BY A."shoriNendo", A."sakuseiTimestamp", A."hakkoReamsLoginId"
+     ORDER BY A."sakuseiTimestamp" DESC
+    </select>
+    <resultMap id="resultMap_SaiHakkoEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.saihakkofinder.SaiHakkoEntity">
+        <result property="発行件数" column="発行件数" />
+        <result property="処理年度" column="処理年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RYearTypeHandler"/>
+        <result property="ユーザ" column="ユーザ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="処理日時" column="処理日時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+    </resultMap> 
+</mapper>

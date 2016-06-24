@@ -13,13 +13,16 @@ import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB27100
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.DBB2710011TransitionEventName.終了する;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.KaigoAtenaJohoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB2710011.KaigoAtenaJohoHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -40,7 +43,8 @@ public class KaigoAtenaJoho {
             QuestionMessage message = new QuestionMessage(
                     DbbErrorMessages.特徴対象者でないため処理不可.getMessage().getCode(),
                     DbbErrorMessages.特徴対象者でないため処理不可.getMessage().evaluate());
-            return getHandler(div).onload() ? ResponseData.of(div).addMessage(message).respond() : ResponseData.of(div).setState(特徴対象者登録);
+            FukaTaishoshaKey key = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
+            return getHandler(div).onload(key) ? ResponseData.of(div).addMessage(message).respond() : ResponseData.of(div).setState(特徴対象者登録);
         }
         if (ResponseHolder.getMessageCode().equals(new RString(DbbErrorMessages.特徴対象者でないため処理不可.getMessage().getCode()))
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
@@ -132,7 +136,8 @@ public class KaigoAtenaJoho {
         }
         if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.保存の確認.getMessage().getCode()))
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-            getHandler(div).onClick_btnUpdate();
+            FukaTaishoshaKey key = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
+            getHandler(div).onClick_btnUpdate(key);
             return ResponseData.of(div).setState(結果確認);
         }
         return ResponseData.of(div).respond();

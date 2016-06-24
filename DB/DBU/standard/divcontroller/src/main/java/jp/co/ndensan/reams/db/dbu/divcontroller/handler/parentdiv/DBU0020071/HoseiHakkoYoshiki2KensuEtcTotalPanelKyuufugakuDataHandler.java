@@ -8,10 +8,11 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020071;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020071.HoseiHakkoYoshiki2KensuEtcTotalPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
-import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
+import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -83,6 +84,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
     private static final RString 給付額第２号被保険者分再掲 = new RString("02");
     private static final RString 給付額総数特例分 = new RString("03");
     private static final RString 給付額第２号被保険者分再掲特例分 = new RString("04");
+    private static final RString 更新 = new RString("更新");
+    private static final RString 削除 = new RString("削除");
 
     private final HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div;
 
@@ -93,6 +96,98 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
      */
     public HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
         this.div = div;
+    }
+
+    /**
+     * 削除状態に非活性化設定
+     */
+    public void 非活性化設定() {
+        div.setDisabled(true);
+    }
+
+    /**
+     * 予防給付チェック前設定
+     */
+    public void 予防給付チェック前設定() {
+        div.getPnlMain().set予防給付(RString.EMPTY);
+    }
+
+    /**
+     * 予防給付チェック後設定
+     */
+    public void 予防給付チェック後設定() {
+        div.getPnlMain().set予防給付(RString.HALF_SPACE);
+    }
+
+    /**
+     * 介護給付チェック前設定
+     */
+    public void 介護給付チェック前設定() {
+        div.getPnlMain().set介護給付(RString.EMPTY);
+    }
+
+    /**
+     * 介護給付チェック後設定
+     */
+    public void 介護給付チェック後設定() {
+        div.getPnlMain().set介護給付(RString.HALF_SPACE);
+    }
+
+    /**
+     * 合計チェック前設定
+     */
+    public void 合計チェック前設定() {
+        div.getPnlMain().set合計(RString.EMPTY);
+    }
+
+    /**
+     * 合計チェック後設定
+     */
+    public void 合計チェック後設定() {
+        div.getPnlMain().set合計(RString.HALF_SPACE);
+    }
+
+    /**
+     * 予防給付判空
+     *
+     * @return 予防給付判空の結果
+     */
+    public boolean 予防給付判空() {
+        return div.getPnlMain().get予防給付().isNullOrEmpty();
+    }
+
+    /**
+     * 介護給付判空
+     *
+     * @return 介護給付判空の結果
+     */
+    public boolean 介護給付判空() {
+        return div.getPnlMain().get介護給付().isNullOrEmpty();
+    }
+
+    /**
+     * 合計判空
+     *
+     * @return 合計判空の結果
+     */
+    public boolean 合計判空() {
+        return div.getPnlMain().get合計().isNullOrEmpty();
+    }
+
+    /**
+     * 正常終了に画面表示
+     */
+    public void 更新正常終了() {
+        div.getPnlKanryo().getCcdKanryoMessage().setSuccessMessage(new RString(
+                UrInformationMessages.正常終了.getMessage().replace(更新.toString()).evaluate()));
+    }
+
+    /**
+     * 正常終了に画面表示
+     */
+    public void 削除正常終了() {
+        div.getPnlKanryo().getCcdKanryoMessage().setSuccessMessage(new RString(
+                UrInformationMessages.正常終了.getMessage().replace(削除.toString()).evaluate()));
     }
 
     private List<JigyoHokokuTokeiData> get事業報告月報詳細データリスト(
@@ -135,7 +230,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
         return 修正データリスト;
     }
 
-    private List<JigyoHokokuTokeiData> get事業報告給付額修正データリスト(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
+    private List<JigyoHokokuTokeiData> get事業報告給付額修正データリスト(
+            List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト) {
 
         修正データリスト = editor給付額修正データリスト1(事業報告月報詳細データリスト, 修正データリスト);
@@ -152,7 +248,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
         return 修正データリスト;
     }
 
-    private List<JigyoHokokuTokeiData> editor給付額修正データリスト1(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
+    private List<JigyoHokokuTokeiData> editor給付額修正データリスト1(
+            List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト) {
 
         修正データリスト = get事業報告修正データ(事業報告月報詳細データリスト, 修正データリスト, 縦番号_15,
@@ -206,7 +303,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
         return 修正データリスト;
     }
 
-    private List<JigyoHokokuTokeiData> editor給付額修正データリスト2(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
+    private List<JigyoHokokuTokeiData> editor給付額修正データリスト2(
+            List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト) {
         修正データリスト = get事業報告修正データ(事業報告月報詳細データリスト, 修正データリスト, 縦番号_18,
                 div.getPnlMain().getTbl4().getTextBox1250().getValue(),
@@ -259,7 +357,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
         return 修正データリスト;
     }
 
-    private List<JigyoHokokuTokeiData> editor給付額修正データリスト3(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
+    private List<JigyoHokokuTokeiData> editor給付額修正データリスト3(
+            List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト) {
         修正データリスト = get事業報告修正データ(事業報告月報詳細データリスト, 修正データリスト, 縦番号_20,
                 div.getPnlMain().getTbl4().getTextBox1294().getValue(),
@@ -312,7 +411,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
         return 修正データリスト;
     }
 
-    private List<JigyoHokokuTokeiData> editor給付額修正データリスト4(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
+    private List<JigyoHokokuTokeiData> editor給付額修正データリスト4(
+            List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト) {
         修正データリスト = get事業報告修正データ(事業報告月報詳細データリスト, 修正データリスト, 縦番号_24,
                 div.getPnlMain().getTbl4().getTextBox1338().getValue(),
@@ -365,7 +465,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
         return 修正データリスト;
     }
 
-    private List<JigyoHokokuTokeiData> editor給付額修正データリスト5(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
+    private List<JigyoHokokuTokeiData> editor給付額修正データリスト5(
+            List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト) {
         修正データリスト = get事業報告修正データ(事業報告月報詳細データリスト, 修正データリスト, 縦番号_4,
                 div.getPnlMain().getTbl4().getTextBox1382().getValue(),
@@ -418,7 +519,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
         return 修正データリスト;
     }
 
-    private List<JigyoHokokuTokeiData> editor給付額修正データリスト6(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
+    private List<JigyoHokokuTokeiData> editor給付額修正データリスト6(
+            List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト) {
         修正データリスト = get事業報告修正データ(事業報告月報詳細データリスト, 修正データリスト, 縦番号_31,
                 div.getPnlMain().getTbl4().getTextBox1426().getValue(),
@@ -469,7 +571,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
         return 修正データリスト;
     }
 
-    private List<JigyoHokokuTokeiData> editor給付額修正データリスト7(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
+    private List<JigyoHokokuTokeiData> editor給付額修正データリスト7(
+            List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト) {
         修正データリスト = get事業報告修正データ(事業報告月報詳細データリスト, 修正データリスト, 縦番号_34,
                 div.getPnlMain().getTbl4().getTextBox1468().getValue(),
@@ -519,7 +622,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
         return 修正データリスト;
     }
 
-    private List<JigyoHokokuTokeiData> editor給付額修正データリスト8(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
+    private List<JigyoHokokuTokeiData> editor給付額修正データリスト8(
+            List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト) {
         修正データリスト = get事業報告修正データ_1(事業報告月報詳細データリスト, 修正データリスト, 縦番号_38,
                 div.getPnlMain().getTbl4().getTextBox1509().getValue(),
@@ -570,7 +674,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
         return 修正データリスト;
     }
 
-    private List<JigyoHokokuTokeiData> editor給付額修正データリスト9(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
+    private List<JigyoHokokuTokeiData> editor給付額修正データリスト9(
+            List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト) {
         修正データリスト = get事業報告修正データ_1(事業報告月報詳細データリスト, 修正データリスト, 縦番号_9,
                 div.getPnlMain().getTbl4().getTextBox1551().getValue(),
@@ -604,7 +709,7 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
                 div.getPnlMain().getTbl4().getTextBox1577().getValue(),
                 div.getPnlMain().getTbl4().getTextBox1578().getValue(),
                 div.getPnlMain().getTbl4().getTextBox1579().getValue(),
-                div.getPnlMain().getTbl4().getTextBox1280().getValue(),
+                div.getPnlMain().getTbl4().getTextBox1580().getValue(),
                 div.getPnlMain().getTbl4().getTextBox1581().getValue(),
                 div.getPnlMain().getTbl4().getTextBox1582().getValue());
         修正データリスト = get事業報告修正データ_1(事業報告月報詳細データリスト, 修正データリスト, 縦番号_12,
@@ -621,7 +726,8 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
         return 修正データリスト;
     }
 
-    private List<JigyoHokokuTokeiData> editor給付額修正データリスト10(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
+    private List<JigyoHokokuTokeiData> editor給付額修正データリスト10(
+            List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト) {
         修正データリスト = get事業報告修正データ_1(事業報告月報詳細データリスト, 修正データリスト, 縦番号_13,
                 div.getPnlMain().getTbl4().getTextBox1593().getValue(),
@@ -650,21 +756,22 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
         return 修正データリスト;
     }
 
-    private List<JigyoHokokuTokeiData> get事業報告修正データ_3(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
+    private List<JigyoHokokuTokeiData> get事業報告修正データ_3(
+            List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト,
             Decimal 縦番号,
-            RString 集計結果値1,
-            RString 集計結果値2,
-            RString 集計結果値3,
-            RString 集計結果値4,
-            RString 集計結果値5,
-            RString 集計結果値6,
-            RString 集計結果値7,
-            RString 集計結果値8,
-            RString 集計結果値9,
-            RString 集計結果値10,
-            RString 集計結果値11,
-            RString 集計結果値12) {
+            Decimal 集計結果値1,
+            Decimal 集計結果値2,
+            Decimal 集計結果値3,
+            Decimal 集計結果値4,
+            Decimal 集計結果値5,
+            Decimal 集計結果値6,
+            Decimal 集計結果値7,
+            Decimal 集計結果値8,
+            Decimal 集計結果値9,
+            Decimal 集計結果値10,
+            Decimal 集計結果値11,
+            Decimal 集計結果値12) {
         修正データリスト = set集計結果値(集計結果値1, 修正データリスト, 事業報告月報詳細データリスト, 横番号_1, 縦番号);
         修正データリスト = set集計結果値(集計結果値2, 修正データリスト, 事業報告月報詳細データリスト, 横番号_2, 縦番号);
         修正データリスト = set集計結果値(集計結果値3, 修正データリスト, 事業報告月報詳細データリスト, 横番号_3, 縦番号);
@@ -683,17 +790,17 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
     private List<JigyoHokokuTokeiData> get事業報告修正データ_2(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト,
             Decimal 縦番号,
-            RString 集計結果値1,
-            RString 集計結果値2,
-            RString 集計結果値3,
-            RString 集計結果値4,
-            RString 集計結果値5,
-            RString 集計結果値6,
-            RString 集計結果値7,
-            RString 集計結果値8,
-            RString 集計結果値9,
-            RString 集計結果値10,
-            RString 集計結果値11) {
+            Decimal 集計結果値1,
+            Decimal 集計結果値2,
+            Decimal 集計結果値3,
+            Decimal 集計結果値4,
+            Decimal 集計結果値5,
+            Decimal 集計結果値6,
+            Decimal 集計結果値7,
+            Decimal 集計結果値8,
+            Decimal 集計結果値9,
+            Decimal 集計結果値10,
+            Decimal 集計結果値11) {
         修正データリスト = set集計結果値(集計結果値1, 修正データリスト, 事業報告月報詳細データリスト, 横番号_1, 縦番号);
         修正データリスト = set集計結果値(集計結果値2, 修正データリスト, 事業報告月報詳細データリスト, 横番号_3, 縦番号);
         修正データリスト = set集計結果値(集計結果値3, 修正データリスト, 事業報告月報詳細データリスト, 横番号_4, 縦番号);
@@ -711,16 +818,16 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
     private List<JigyoHokokuTokeiData> get事業報告修正データ_1(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト,
             Decimal 縦番号,
-            RString 集計結果値1,
-            RString 集計結果値2,
-            RString 集計結果値3,
-            RString 集計結果値4,
-            RString 集計結果値5,
-            RString 集計結果値6,
-            RString 集計結果値7,
-            RString 集計結果値8,
-            RString 集計結果値9,
-            RString 集計結果値10) {
+            Decimal 集計結果値1,
+            Decimal 集計結果値2,
+            Decimal 集計結果値3,
+            Decimal 集計結果値4,
+            Decimal 集計結果値5,
+            Decimal 集計結果値6,
+            Decimal 集計結果値7,
+            Decimal 集計結果値8,
+            Decimal 集計結果値9,
+            Decimal 集計結果値10) {
         修正データリスト = set集計結果値(集計結果値1, 修正データリスト, 事業報告月報詳細データリスト, 横番号_3, 縦番号);
         修正データリスト = set集計結果値(集計結果値2, 修正データリスト, 事業報告月報詳細データリスト, 横番号_4, 縦番号);
         修正データリスト = set集計結果値(集計結果値3, 修正データリスト, 事業報告月報詳細データリスト, 横番号_5, 縦番号);
@@ -737,17 +844,17 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
     private List<JigyoHokokuTokeiData> get事業報告修正データ(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト,
             Decimal 縦番号,
-            RString 集計結果値1,
-            RString 集計結果値2,
-            RString 集計結果値3,
-            RString 集計結果値4,
-            RString 集計結果値5,
-            RString 集計結果値6,
-            RString 集計結果値7,
-            RString 集計結果値8,
-            RString 集計結果値9,
-            RString 集計結果値10,
-            RString 集計結果値11) {
+            Decimal 集計結果値1,
+            Decimal 集計結果値2,
+            Decimal 集計結果値3,
+            Decimal 集計結果値4,
+            Decimal 集計結果値5,
+            Decimal 集計結果値6,
+            Decimal 集計結果値7,
+            Decimal 集計結果値8,
+            Decimal 集計結果値9,
+            Decimal 集計結果値10,
+            Decimal 集計結果値11) {
         修正データリスト = set集計結果値(集計結果値1, 修正データリスト, 事業報告月報詳細データリスト, 横番号_2, 縦番号);
         修正データリスト = set集計結果値(集計結果値2, 修正データリスト, 事業報告月報詳細データリスト, 横番号_3, 縦番号);
         修正データリスト = set集計結果値(集計結果値3, 修正データリスト, 事業報告月報詳細データリスト, 横番号_4, 縦番号);
@@ -763,13 +870,13 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
     }
 
     private List<JigyoHokokuTokeiData> set集計結果値(
-            RString 集計結果値,
+            Decimal 集計結果値,
             List<JigyoHokokuTokeiData> 修正データリスト,
             List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             Decimal 横番号,
             Decimal 縦番号) {
         JigyoHokokuTokeiData entity = check事業報告統計データ(事業報告月報詳細データリスト, 横番号, 縦番号);
-        if (集計結果値 == null || 集計結果値.isEmpty()) {
+        if (集計結果値 == null) {
             if (entity != null && entity.get集計結果値() != null) {
                 entity = entity.createBuilderForEdit().set集計結果値(null).build();
                 entity = entity.modifiedModel();
@@ -778,16 +885,16 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
             }
         } else {
             if (entity == null) {
-                entity = set事業報告統計データ(事業報告月報詳細データリスト, 横番号, 縦番号, new Decimal(集計結果値.toString()));
+                entity = set事業報告統計データ(事業報告月報詳細データリスト, 横番号, 縦番号, 集計結果値);
                 修正データリスト.add(entity);
                 return 修正データリスト;
             } else if (entity.get集計結果値() == null) {
-                entity = entity.createBuilderForEdit().set集計結果値(new Decimal(集計結果値.toString())).build();
+                entity = entity.createBuilderForEdit().set集計結果値(集計結果値).build();
                 entity = entity.modifiedModel();
                 修正データリスト.add(entity);
                 return 修正データリスト;
-            } else if (!entity.get集計結果値().equals(new Decimal(集計結果値.toString()))) {
-                entity = entity.createBuilderForEdit().set集計結果値(new Decimal(集計結果値.toString())).build();
+            } else if (!entity.get集計結果値().equals(集計結果値)) {
+                entity = entity.createBuilderForEdit().set集計結果値(集計結果値).build();
                 entity = entity.modifiedModel();
                 修正データリスト.add(entity);
                 return 修正データリスト;

@@ -7,10 +7,10 @@ import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokunenpo.JigyoHokokuNenpoResult;
 import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokunenpo.ShichosonCodeNameResult;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.JigyoHokokuNenpoDetalParameter;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.JigyoHokokuNenpoParameter;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.SearchJigyoHokokuNenpo;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.ShukeiInfo;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpo.JigyoHokokuNenpoDetalParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpo.JigyoHokokuNenpoParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpo.SearchJigyoHokokuNenpo;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpo.ShukeiInfo;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.basic.DbT7021JigyoHokokuTokeiDataDac;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokunenpo.IJigyoHokokuNenpoMapper;
@@ -24,10 +24,10 @@ import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.KyuShichosonJohoEn
 import jp.co.ndensan.reams.db.dbx.service.core.gappeijoho.KyuShichosonCodeFinder;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.TokeiTaishoKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho.GappeiCityJohoBFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -95,8 +95,7 @@ public class JigyoHokokuNenpoHoseiHakoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link JigyoHokokuNenpoHoseiHakoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link JigyoHokokuNenpoHoseiHakoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link JigyoHokokuNenpoHoseiHakoManager}のインスタンス
      */
     public static JigyoHokokuNenpoHoseiHakoManager createInstance() {
         return InstanceProvider.create(JigyoHokokuNenpoHoseiHakoManager.class);

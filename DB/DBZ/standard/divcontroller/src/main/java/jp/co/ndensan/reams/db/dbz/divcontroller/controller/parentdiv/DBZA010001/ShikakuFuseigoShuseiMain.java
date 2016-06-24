@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.DBZA010001.Shi
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo.ShikakuFuseigoShuseiService;
 import jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo.ShikakuSeigoseiCheckJohoManager;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -134,14 +135,28 @@ public class ShikakuFuseigoShuseiMain {
         ViewStateHolder.put(ViewStateKeys.資格不整合_台帳状態, RString.EMPTY);
         if (台帳状態.equals(台帳状態_不整合あり)) {
             RString 台帳種別 = ViewStateHolder.get(ViewStateKeys.資格不整合_不整合修正中, ShikakuFuseigoBusiness.class).get台帳種別();
-            getHandler(div).setMeisaiByDaichoType(台帳種別);
+            IKojin 個人情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_個人情報, IKojin.class);
+            FuseigoRiyu 不整合理由 = ViewStateHolder.get(ViewStateKeys.資格不整合_不整合理由, FuseigoRiyu.class);
+            div.getShikakuFuseigoIchiran().setDisabled(true);
             if (台帳種別.equals(DaichoType.被保険者.getコード())) {
+                HihokenshaDaicho 現在の資格の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_現在の資格の情報, HihokenshaDaicho.class);
+                HihokenshaDaicho 修正後の資格の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の資格の情報, HihokenshaDaicho.class);
+                ShikakuShutokuJogaisha 資格取得除外の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_取得除外の情報, ShikakuShutokuJogaisha.class);
+                getHandler(div).setHihokenshaMeisai(不整合理由, 個人情報, 現在の資格の情報, 修正後の資格の情報, 資格取得除外の情報);
                 return ResponseData.of(div).setState(DBZA010001StateName.資格修正);
             }
             if (台帳種別.equals(DaichoType.適用除外者.getコード())) {
+                TekiyoJogaisha 現在の他特の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_現在の除外の情報, TekiyoJogaisha.class);
+                TekiyoJogaisha 修正後の他特の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の除外の情報, TekiyoJogaisha.class);
+                getHandler(div).setTekiyoMeisai(不整合理由, 個人情報, 現在の他特の情報, 修正後の他特の情報);
                 return ResponseData.of(div).setState(DBZA010001StateName.除外者修正);
             }
             if (台帳種別.equals(DaichoType.他市町村住所地特例者.getコード())) {
+                TashichosonJushochiTokurei 現在の他特の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_現在の他特の情報,
+                        TashichosonJushochiTokurei.class);
+                TashichosonJushochiTokurei 修正後の他特の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の他特の情報,
+                        TashichosonJushochiTokurei.class);
+                getHandler(div).setTashichosonMeisai(不整合理由, 個人情報, 現在の他特の情報, 修正後の他特の情報);
                 return ResponseData.of(div).setState(DBZA010001StateName.他特修正);
             }
         }
@@ -175,7 +190,12 @@ public class ShikakuFuseigoShuseiMain {
             div.getJushochiTokureiTekiyo().setDisabled(false);
             div.getShikakuHenko().setDisabled(false);
             div.getSikakuShutoku().setDisabled(false);
-            getHandler(div).setMeisaiByDaichoType(DaichoType.被保険者.getコード());
+            IKojin 個人情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_個人情報, IKojin.class);
+            FuseigoRiyu 不整合理由 = ViewStateHolder.get(ViewStateKeys.資格不整合_不整合理由, FuseigoRiyu.class);
+            HihokenshaDaicho 現在の資格の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_現在の資格の情報, HihokenshaDaicho.class);
+            HihokenshaDaicho 修正後の資格の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の資格の情報, HihokenshaDaicho.class);
+            ShikakuShutokuJogaisha 資格取得除外の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_取得除外の情報, ShikakuShutokuJogaisha.class);
+            getHandler(div).setHihokenshaMeisai(不整合理由, 個人情報, 現在の資格の情報, 修正後の資格の情報, 資格取得除外の情報);
         }
         return ResponseData.of(div).respond();
     }
@@ -187,7 +207,8 @@ public class ShikakuFuseigoShuseiMain {
      * @return ResponseData<ShikakuFuseigoShuseiMainDiv>
      */
     public ResponseData<ShikakuFuseigoShuseiMainDiv> onChange_chkJutoku(ShikakuFuseigoShuseiMainDiv div) {
-        getHandler(div).setShikakuSoushitu();
+        FuseigoRiyu 不整合理由 = ViewStateHolder.get(ViewStateKeys.資格不整合_不整合理由, FuseigoRiyu.class);
+        getHandler(div).setShikakuSoushitu(不整合理由);
         return ResponseData.of(div).respond();
     }
 
@@ -198,7 +219,8 @@ public class ShikakuFuseigoShuseiMain {
      * @return ResponseData<ShikakuFuseigoShuseiMainDiv>
      */
     public ResponseData<ShikakuFuseigoShuseiMainDiv> onChange_chkShutokuJogai(ShikakuFuseigoShuseiMainDiv div) {
-        getHandler(div).setSyutokuJogai();
+        FuseigoRiyu 不整合理由 = ViewStateHolder.get(ViewStateKeys.資格不整合_不整合理由, FuseigoRiyu.class);
+        getHandler(div).setSyutokuJogai(不整合理由);
         return ResponseData.of(div).respond();
     }
 
@@ -215,7 +237,11 @@ public class ShikakuFuseigoShuseiMain {
         ShikakuFuseigoBusiness shikakuFusei = ViewStateHolder.get(ViewStateKeys.資格不整合_不整合修正中, ShikakuFuseigoBusiness.class);
         RString 台帳種別 = shikakuFusei.get台帳種別();
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(getValidationHandler(div).beforeUpdCheck(台帳種別));
+        HihokenshaDaicho 修正後の資格の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の資格の情報, HihokenshaDaicho.class);
+        TekiyoJogaisha 修正後の除外の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の除外の情報, TekiyoJogaisha.class);
+        TashichosonJushochiTokurei 修正後の他特の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の他特の情報, TashichosonJushochiTokurei.class);
+        validationMessages.add(getValidationHandler(div).beforeUpdCheck(台帳種別, shikakuFusei,
+                修正後の資格の情報, 修正後の除外の情報, 修正後の他特の情報));
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
@@ -225,20 +251,25 @@ public class ShikakuFuseigoShuseiMain {
                 div.getShikakuFuseigoIchiran().setDisabled(false);
                 return onLoad(div);
             }
-            getHandler(div).set修正後の情報(台帳種別);
+            FuseigoRiyu 不整合理由 = ViewStateHolder.get(ViewStateKeys.資格不整合_不整合理由, FuseigoRiyu.class);
             if (台帳種別.equals(DaichoType.被保険者.getコード())) {
-                save修正後の情報By被保険者(shikakuFusei, div);
+                修正後の資格の情報 = getHandler(div).set資格の情報(不整合理由, 修正後の資格の情報);
+                int 履歴番号 = manager.getMax履歴番号(修正後の資格の情報.get識別コード());
+                ShikakuShutokuJogaisha 取得除外の情報 = getHandler(div).set取得除外の情報(不整合理由, 履歴番号, 修正後の資格の情報);
+                save修正後の情報By被保険者(shikakuFusei, div, 修正後の資格の情報, 取得除外の情報);
             }
             if (台帳種別.equals(DaichoType.適用除外者.getコード())) {
+                修正後の除外の情報 = getHandler(div).set除外の情報(不整合理由, 修正後の除外の情報);
                 manager.save除外情報(
                         ViewStateHolder.get(ViewStateKeys.資格不整合_現在の除外の情報, TekiyoJogaisha.class),
-                        ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の除外の情報, TekiyoJogaisha.class),
+                        修正後の除外の情報,
                         shikakuFusei.get整合性チェック情報());
             }
             if (台帳種別.equals(DaichoType.他市町村住所地特例者.getコード())) {
+                修正後の他特の情報 = getHandler(div).set他特の情報(不整合理由, 修正後の他特の情報);
                 manager.save他特情報(
                         ViewStateHolder.get(ViewStateKeys.資格不整合_現在の他特の情報, TashichosonJushochiTokurei.class),
-                        ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の他特の情報, TashichosonJushochiTokurei.class),
+                        修正後の他特の情報,
                         shikakuFusei.get整合性チェック情報());
             }
         }
@@ -246,15 +277,15 @@ public class ShikakuFuseigoShuseiMain {
         return onLoad(div);
     }
 
-    private void save修正後の情報By被保険者(ShikakuFuseigoBusiness shikakuFusei, ShikakuFuseigoShuseiMainDiv div) {
+    private void save修正後の情報By被保険者(ShikakuFuseigoBusiness shikakuFusei,
+            ShikakuFuseigoShuseiMainDiv div, HihokenshaDaicho 修正後の資格の情報, ShikakuShutokuJogaisha 取得除外の情報) {
         if (div.getChkShutokuJogai().isAllSelected()) {
-            manager.save取得除外情報(ViewStateHolder.get(
-                    ViewStateKeys.資格不整合_取得除外の情報, ShikakuShutokuJogaisha.class),
+            manager.save取得除外情報(取得除外の情報,
                     shikakuFusei.get整合性チェック情報());
         } else {
             manager.save資格情報(
                     ViewStateHolder.get(ViewStateKeys.資格不整合_現在の資格の情報, HihokenshaDaicho.class),
-                    ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の資格の情報, HihokenshaDaicho.class),
+                    修正後の資格の情報,
                     shikakuFusei.get整合性チェック情報());
         }
     }

@@ -10,9 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReport;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReportSource;
@@ -22,7 +20,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.ikenshosakuseiryo.IkenshoSakuseiRyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -181,7 +181,7 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoProcess extends BatchProcessBase<Sh
     }
 
     private void set意見書作成料(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity, ShujiiIkenshoSakuseiRyoSeikyushoItem item) {
-        if (IkenshoIraiKubun.初回依頼.getCode().equals(entity.get主治医意見書依頼区分())
+        if (IkenshoIraiKubun.初回依頼.getコード().equals(entity.get主治医意見書依頼区分())
                 && ZaitakuShisetsuKubun.在宅.getコード().equals(entity.get在宅施設区分())) {
             RString shinkiZaitakuKingaku = item.getShinkiZaitakuKingaku();
             item.setIkenshoSakuseiRyo1(shinkiZaitakuKingaku.substring(0, 1));
@@ -193,7 +193,7 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoProcess extends BatchProcessBase<Sh
             item.setSeikyugakuIkenshoSakuseiRyo3(shinkiZaitakuKingaku.substring(2, INT3));
             item.setSeikyugakuIkenshoSakuseiRyo4(shinkiZaitakuKingaku.substring(INT3, INT4));
         }
-        if (IkenshoIraiKubun.初回依頼.getCode().equals(entity.get主治医意見書依頼区分())
+        if (IkenshoIraiKubun.初回依頼.getコード().equals(entity.get主治医意見書依頼区分())
                 && ZaitakuShisetsuKubun.施設.getコード().equals(entity.get在宅施設区分())) {
             RString shinkiShisetsuKingaku = item.getShinkiShisetsuKingaku();
             item.setIkenshoSakuseiRyo1(shinkiShisetsuKingaku.substring(0, 1));
@@ -206,7 +206,7 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoProcess extends BatchProcessBase<Sh
             item.setSeikyugakuIkenshoSakuseiRyo4(shinkiShisetsuKingaku.substring(INT3, INT4));
 
         }
-        if (IkenshoIraiKubun.再依頼.getCode().equals(entity.get主治医意見書依頼区分())
+        if (IkenshoIraiKubun.再依頼.getコード().equals(entity.get主治医意見書依頼区分())
                 && ZaitakuShisetsuKubun.在宅.getコード().equals(entity.get在宅施設区分())) {
             RString keizokuZaitakuKingaku = item.getKeizokuZaitakuKingaku();
             item.setIkenshoSakuseiRyo1(keizokuZaitakuKingaku.substring(0, 1));
@@ -219,7 +219,7 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoProcess extends BatchProcessBase<Sh
             item.setSeikyugakuIkenshoSakuseiRyo4(keizokuZaitakuKingaku.substring(INT3, INT4));
 
         }
-        if (IkenshoIraiKubun.再依頼.getCode().equals(entity.get主治医意見書依頼区分())
+        if (IkenshoIraiKubun.再依頼.getコード().equals(entity.get主治医意見書依頼区分())
                 && ZaitakuShisetsuKubun.施設.getコード().equals(entity.get在宅施設区分())) {
             RString keizokuShisetsuKingaku = item.getKeizokuShisetsuKingaku();
             item.setIkenshoSakuseiRyo1(keizokuShisetsuKingaku.substring(0, 1));

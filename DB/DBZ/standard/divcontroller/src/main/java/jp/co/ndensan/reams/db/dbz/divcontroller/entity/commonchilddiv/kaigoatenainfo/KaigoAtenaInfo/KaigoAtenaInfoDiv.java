@@ -61,7 +61,7 @@ public class KaigoAtenaInfoDiv extends Panel implements IKaigoAtenaInfoDiv {
      * @param 識別コード 識別コード
      */
     @Override
-    public void onLoad(ShikibetsuCode 識別コード) {
+    public void initialize(ShikibetsuCode 識別コード) {
         IAtesakiGyomuHanteiKey 業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険);
         IAtenaSearchKey 宛名検索キー = new AtenaSearchKeyBuilder(KensakuYusenKubun.住登外優先, 業務判定キー).set識別コード(識別コード).build();
         getAtenaInfo().load(宛名検索キー);

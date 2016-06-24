@@ -62,7 +62,7 @@
         <result property="gogitaiSeishinkaSonzaiFlag" column="dbT5591GogitaiJoho_gogitaiSeishinkaSonzaiFlag" />
         <result property="gogitaiDummyFlag" column="dbT5591GogitaiJoho_gogitaiDummyFlag" />
     </resultMap>
-   <select id="getEntity" resultMap="ResultMap_DbT5591GogitaiJohoEntity">
+   <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5591GogitaiJohoEntity">
         SELECT
         <include refid="allColumns_DbT5591GogitaiJoho"/>
         FROM

@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 調査委託先/調査員入力共有子DivののHandlerクラスです。
  *
- * @reamsid_L DBE-1300-030 zhangguopeng
+ * @reamsid_L DBZ-1300-030 zhangguopeng
  */
 public class ChosaItakusakiAndChosainInputHandler {
 

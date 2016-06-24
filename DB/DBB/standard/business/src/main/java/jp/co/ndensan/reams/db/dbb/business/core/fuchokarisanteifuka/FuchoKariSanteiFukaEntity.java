@@ -22,7 +22,7 @@ public class FuchoKariSanteiFukaEntity {
 
     private FlexibleYear 調定年度;
     private FlexibleYear 賦課年度;
-    private List<FuchoKariSanteiEntity> 出力帳票一覧List;
+    private List<BatchFuchoKariSanteiResult> 出力帳票一覧List;
     private FlexibleDate 発行日;
     private RString 出力方法;
     private RString 出力期表示方法;
@@ -30,6 +30,6 @@ public class FuchoKariSanteiFukaEntity {
     private RString 対象者;
     private RString 生活保護者をまとめて先頭に出力フラグ;
     private RString ページごとに山分けフラグ;
-    private RString 算定期;
+    private boolean 一括発行起動フラグ;
 
 }

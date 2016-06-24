@@ -6,12 +6,15 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410018;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410018.TsuchishoJoho5C3Div;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
+import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoBunruiKanriManager;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 国保連情報受取データ取込_[5C3]共同処理用受給者情報更新結果のクラスです。
@@ -31,7 +34,9 @@ public class TsuchishoJoho5C3 {
     public ResponseData<TsuchishoJoho5C3Div> onLoad(TsuchishoJoho5C3Div div) {
         ChohyoBunruiKanri code = ChohyoBunruiKanriManager.createInstance().get帳票分類管理(SubGyomuCode.DBC介護給付,
                 new ReportId(帳票ID));
-        div.getCcdKokurenJohoTorikomi().onLoadModeShutsuryokujunJoken2(SubGyomuCode.DBC介護給付, code.get帳票分類ID());
+        KokuhorenDataTorikomiViewStateClass parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
+                KokuhorenDataTorikomiViewStateClass.class);
+        div.getCcdKokurenJohoTorikomi().initialize(SubGyomuCode.DBC介護給付, code.get帳票分類ID(), parmater);
         return ResponseData.of(div).respond();
     }
 

@@ -5,7 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.YokaigoJotaizoReiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -79,7 +87,7 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 被保区分
      */
     public RString get被保区分() {
-        return entity.get被保険者区分コード();
+        return HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).get名称();
     }
 
     /**
@@ -88,7 +96,7 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 申請区分_申請時
      */
     public RString get申請区分_申請時() {
-        return entity.get申請区分_申請時_コード().value();
+        return NinteiShinseiShinseijiKubunCode.toValue(entity.get申請区分_申請時_コード().value()).get名称();
     }
 
     /**
@@ -97,7 +105,7 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 申請区分_法令
      */
     public RString get申請区分_法令() {
-        return entity.get申請区分_法令_コード().value();
+        return NinteiShinseiHoreiCode.toValue(entity.get申請区分_法令_コード().value()).get名称();
     }
 
     /**
@@ -124,7 +132,17 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 前回一次判定
      */
     public RString get前回一次判定() {
-        return entity.get要介護認定一次判定結果コード().value();
+        return IchijiHanteiKekkaCode09.toValue(entity.get要介護認定一次判定結果コード().value()).get名称();
+    }
+
+    /**
+     * 前回一次判定を取得します。
+     *
+     * @return 前回一次判定
+     */
+    public RString get前回二次判定() {
+        // 汤雅芳QA已经回来
+        return YokaigoJotaiKubun09.toValue(entity.get要介護認定一次判定結果コード().value()).get名称();
     }
 
     /**
@@ -133,7 +151,7 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 今回一次判定
      */
     public RString get今回一次判定() {
-        return entity.get要介護認定一次判定結果コード().value();
+        return IchijiHanteiKekkaCode09.toValue(entity.get要介護認定一次判定結果コード().value()).get名称();
     }
 
     /**
@@ -142,7 +160,7 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 今回二次判定
      */
     public RString get今回二次判定() {
-        return entity.get二次判定要介護状態区分コード().value();
+        return YokaigoJotaiKubun09.toValue(entity.get二次判定要介護状態区分コード().value()).get名称();
     }
 
     /**
@@ -151,7 +169,7 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 判定結果
      */
     public RString get判定結果() {
-        return entity.get判定結果コード();
+        return HanteiKekkaCode.toValue(entity.get判定結果コード().value()).get名称();
     }
 
     /**
@@ -169,7 +187,7 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 特定疾病
      */
     public RString get特定疾病() {
-        return entity.getコード_２号特定疾病コード().value();
+        return TokuteiShippei.toValue(entity.getコード_２号特定疾病コード().value()).get名称();
     }
 
     /**
@@ -178,7 +196,7 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 状態像コード
      */
     public RString get状態像コード() {
-        return entity.get要介護状態像例コード().value();
+        return YokaigoJotaizoReiCode.toValue(entity.get要介護状態像例コード().value()).get名称();
     }
 
     /**
@@ -233,6 +251,24 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      */
     public RString get審査会意見種類() {
         return entity.get審査会意見種類();
+    }
+
+    /**
+     * 生年月日を取得します。
+     *
+     * @return 生年月日
+     */
+    public FlexibleDate get生年月日() {
+        return entity.get生年月日();
+    }
+
+    /**
+     * 一次判定結果変更理由を取得します。
+     *
+     * @return 一次判定結果変更理由
+     */
+    public RString get一次判定結果変更理由() {
+        return entity.get一次判定結果変更理由();
     }
 
 }

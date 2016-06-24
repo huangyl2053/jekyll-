@@ -83,8 +83,8 @@ public class TenshutsuHoryuTaishoshaBusiness implements ITennyuTenshutsuHoryuTai
      */
     @Override
     public RString get住民種別() {
-
-        return new RString(JuminShubetsu.toValue(entity.get住民種別コード()).name());
+        return entity.get住民種別コード() == null ? null
+                : new RString(JuminShubetsu.toValue(entity.get住民種別コード()).name());
     }
 
     /**
@@ -124,7 +124,8 @@ public class TenshutsuHoryuTaishoshaBusiness implements ITennyuTenshutsuHoryuTai
      */
     @Override
     public RString get性別() {
-        return Gender.toValue(entity.get性別コード()).getName().getShortJapanese();
+        return entity.get性別コード() == null ? null
+                : Gender.toValue(entity.get性別コード()).getName().getShortJapanese();
     }
 
     /**
@@ -134,7 +135,8 @@ public class TenshutsuHoryuTaishoshaBusiness implements ITennyuTenshutsuHoryuTai
      */
     @Override
     public RString get異動事由() {
-        return JukiIdoJiyu.toValue(entity.get異動事由コード()).get異動事由略称();
+        return entity.get異動事由コード() == null ? null
+                : JukiIdoJiyu.toValue(entity.get異動事由コード()).get異動事由略称();
     }
 
     /**

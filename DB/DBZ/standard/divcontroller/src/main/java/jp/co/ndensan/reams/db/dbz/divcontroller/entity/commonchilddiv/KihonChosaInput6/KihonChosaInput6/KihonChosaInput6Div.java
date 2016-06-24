@@ -7,13 +7,15 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * KihonChosaInput6 のクラスファイル
@@ -182,9 +184,9 @@ public class KihonChosaInput6Div extends Panel implements IKihonChosaInput6Div {
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public void onLoad(ShinseishoKanriNo 申請書管理番号, RString 認定調査依頼履歴番号) {
+    public void onLoad(ShinseishoKanriNo 申請書管理番号, RString 認定調査依頼履歴番号, List<KihonChosaInput> 認定調査基本情報リスト) {
         KihonChosaInputHandler6 handler = new KihonChosaInputHandler6(this);
-        handler.onLoad(申請書管理番号, 認定調査依頼履歴番号);
+        handler.onLoad(申請書管理番号, 認定調査依頼履歴番号, 認定調査基本情報リスト);
     }
 
 }

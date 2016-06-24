@@ -30,8 +30,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 //import jp.co.ndensan.reams.db.dbz.entity.db.relate.FukaTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaFinder;
-import jp.co.ndensan.reams.db.dbz.service.search.FukaSearchItem;
-import jp.co.ndensan.reams.db.dbz.service.util.SearchResult;
+import jp.co.ndensan.reams.db.dbz.service.core.search.FukaSearchItem;
+import jp.co.ndensan.reams.db.dbz.service.core.util.SearchResult;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import static jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory.createKojin;
 import static jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory.createShikibetsuTaisho;
@@ -74,6 +74,8 @@ public class FukaTaishoshaSearch {
     private static final ISearchCondition 条件無 = null;
     private static final int 最近処理者検索数 = 1;
     private static final int 最大取得件数 = new GaitoshaKensakuConfig().get最大取得件数();
+    private static final RString フラグ_1 = new RString("1");
+    private static final RString フラグ_2 = new RString("2");
 
     /**
      * 「初期化」時の処理です。
@@ -196,6 +198,7 @@ public class FukaTaishoshaSearch {
             save最近処理者(div, 対象者);
             div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(toRowList(newResult));
             set賦課年度(div);
+            ViewStateHolder.put(ViewStateKey.各種通知書作成フラグ, フラグ_1);
             // 次画面遷移
             return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
             // 検索結果が２件以上の場合
@@ -295,6 +298,7 @@ public class FukaTaishoshaSearch {
             }
             div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(toRowList(対象者));
         }
+        ViewStateHolder.put(ViewStateKey.各種通知書作成フラグ, フラグ_1);
         return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
     }
 
@@ -311,6 +315,7 @@ public class FukaTaishoshaSearch {
         save最近処理者(div);
         // ViewState_個人確定キーの保存
         put対象者Key(create対象者Key(div));
+        ViewStateHolder.put(ViewStateKey.各種通知書作成フラグ, フラグ_2);
         // 次画面遷移
         return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
     }

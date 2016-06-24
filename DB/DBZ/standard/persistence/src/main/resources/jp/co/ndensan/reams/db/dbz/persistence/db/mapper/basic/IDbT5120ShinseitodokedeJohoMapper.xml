@@ -5,36 +5,36 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5120ShinseitodokedeJohoMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5120ShinseitodokedeJoho">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5120ShinseitodokedeJohoMapper.allColumns_DbT5120ShinseitodokedeJoho" />
-     FROM
-         rgdb."DbT5120ShinseitodokedeJoho"
-     WHERE
-         rgdb."DbT5120ShinseitodokedeJoho"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5120ShinseitodokedeJohoMapper.allColumns_DbT5120ShinseitodokedeJoho" />
+        FROM
+        rgdb."DbT5120ShinseitodokedeJoho"
+        WHERE
+        rgdb."DbT5120ShinseitodokedeJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5120ShinseitodokedeJoho">
-         "DbT5120ShinseitodokedeJoho"."shinseishoKanriNo" as "dbT5120ShinseitodokedeJoho_shinseishoKanriNo",
-         "DbT5120ShinseitodokedeJoho"."insertDantaiCd" as "dbT5120ShinseitodokedeJoho_insertDantaiCd",
-         "DbT5120ShinseitodokedeJoho"."insertTimestamp" as "dbT5120ShinseitodokedeJoho_insertTimestamp",
-         "DbT5120ShinseitodokedeJoho"."insertReamsLoginId" as "dbT5120ShinseitodokedeJoho_insertReamsLoginId",
-         "DbT5120ShinseitodokedeJoho"."insertContextId" as "dbT5120ShinseitodokedeJoho_insertContextId",
-         "DbT5120ShinseitodokedeJoho"."isDeleted" as "dbT5120ShinseitodokedeJoho_isDeleted",
-         "DbT5120ShinseitodokedeJoho"."updateCount" as "dbT5120ShinseitodokedeJoho_updateCount",
-         "DbT5120ShinseitodokedeJoho"."lastUpdateTimestamp" as "dbT5120ShinseitodokedeJoho_lastUpdateTimestamp",
-         "DbT5120ShinseitodokedeJoho"."lastUpdateReamsLoginId" as "dbT5120ShinseitodokedeJoho_lastUpdateReamsLoginId",
-         "DbT5120ShinseitodokedeJoho"."shinseiTodokedeDaikoKubunCode" as "dbT5120ShinseitodokedeJoho_shinseiTodokedeDaikoKubunCode",
-         "DbT5120ShinseitodokedeJoho"."shinseiTodokedeshaShimei" as "dbT5120ShinseitodokedeJoho_shinseiTodokedeshaShimei",
-         "DbT5120ShinseitodokedeJoho"."shinseiTodokedeshaKanaShimei" as "dbT5120ShinseitodokedeJoho_shinseiTodokedeshaKanaShimei",
-         "DbT5120ShinseitodokedeJoho"."shinseiTodokedeshaTsuzukigara" as "dbT5120ShinseitodokedeJoho_shinseiTodokedeshaTsuzukigara",
-         "DbT5120ShinseitodokedeJoho"."shinseiTodokedeDaikoJigyoshaNo" as "dbT5120ShinseitodokedeJoho_shinseiTodokedeDaikoJigyoshaNo",
-         "DbT5120ShinseitodokedeJoho"."jigyoshaKubun" as "dbT5120ShinseitodokedeJoho_jigyoshaKubun",
-         "DbT5120ShinseitodokedeJoho"."shinseiTodokedeshaYubinNo" as "dbT5120ShinseitodokedeJoho_shinseiTodokedeshaYubinNo",
-         "DbT5120ShinseitodokedeJoho"."shinseiTodokedeshaJusho" as "dbT5120ShinseitodokedeJoho_shinseiTodokedeshaJusho",
-         "DbT5120ShinseitodokedeJoho"."shinseiTodokedeshaTelNo" as "dbT5120ShinseitodokedeJoho_shinseiTodokedeshaTelNo"
+        "DbT5120ShinseitodokedeJoho"."shinseishoKanriNo" as "dbT5120ShinseitodokedeJoho_shinseishoKanriNo",
+        "DbT5120ShinseitodokedeJoho"."insertDantaiCd" as "dbT5120ShinseitodokedeJoho_insertDantaiCd",
+        "DbT5120ShinseitodokedeJoho"."insertTimestamp" as "dbT5120ShinseitodokedeJoho_insertTimestamp",
+        "DbT5120ShinseitodokedeJoho"."insertReamsLoginId" as "dbT5120ShinseitodokedeJoho_insertReamsLoginId",
+        "DbT5120ShinseitodokedeJoho"."insertContextId" as "dbT5120ShinseitodokedeJoho_insertContextId",
+        "DbT5120ShinseitodokedeJoho"."isDeleted" as "dbT5120ShinseitodokedeJoho_isDeleted",
+        "DbT5120ShinseitodokedeJoho"."updateCount" as "dbT5120ShinseitodokedeJoho_updateCount",
+        "DbT5120ShinseitodokedeJoho"."lastUpdateTimestamp" as "dbT5120ShinseitodokedeJoho_lastUpdateTimestamp",
+        "DbT5120ShinseitodokedeJoho"."lastUpdateReamsLoginId" as "dbT5120ShinseitodokedeJoho_lastUpdateReamsLoginId",
+        "DbT5120ShinseitodokedeJoho"."shinseiTodokedeDaikoKubunCode" as "dbT5120ShinseitodokedeJoho_shinseiTodokedeDaikoKubunCode",
+        "DbT5120ShinseitodokedeJoho"."shinseiTodokedeshaShimei" as "dbT5120ShinseitodokedeJoho_shinseiTodokedeshaShimei",
+        "DbT5120ShinseitodokedeJoho"."shinseiTodokedeshaKanaShimei" as "dbT5120ShinseitodokedeJoho_shinseiTodokedeshaKanaShimei",
+        "DbT5120ShinseitodokedeJoho"."shinseiTodokedeshaTsuzukigara" as "dbT5120ShinseitodokedeJoho_shinseiTodokedeshaTsuzukigara",
+        "DbT5120ShinseitodokedeJoho"."shinseiTodokedeDaikoJigyoshaNo" as "dbT5120ShinseitodokedeJoho_shinseiTodokedeDaikoJigyoshaNo",
+        "DbT5120ShinseitodokedeJoho"."jigyoshaKubun" as "dbT5120ShinseitodokedeJoho_jigyoshaKubun",
+        "DbT5120ShinseitodokedeJoho"."shinseiTodokedeshaYubinNo" as "dbT5120ShinseitodokedeJoho_shinseiTodokedeshaYubinNo",
+        "DbT5120ShinseitodokedeJoho"."shinseiTodokedeshaJusho" as "dbT5120ShinseitodokedeJoho_shinseiTodokedeshaJusho",
+        "DbT5120ShinseitodokedeJoho"."shinseiTodokedeshaTelNo" as "dbT5120ShinseitodokedeJoho_shinseiTodokedeshaTelNo"
     </sql>
 
 

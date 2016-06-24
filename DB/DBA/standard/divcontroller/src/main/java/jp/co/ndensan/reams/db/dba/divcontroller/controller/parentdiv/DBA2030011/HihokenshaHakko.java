@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2030011
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011.HihokenshaHakkoDiv;
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoPrintConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.HihokenshashoPrintType;
+import jp.co.ndensan.reams.db.dbz.definition.core.configvalues.HihokenshashoPrintType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.report.IReportPublishable;

@@ -88,4 +88,24 @@ public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuDac implements
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 居宅給付計画自己作成短期入所利用日数を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity> selectBy被保険者番号(
+            HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                toList(DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity.class);
+    }
 }

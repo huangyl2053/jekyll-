@@ -8,10 +8,11 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0030001
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiMapperParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0030001.FukaKakuteiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0030001.FukaKakuteiPanelHandler;
-import jp.co.ndensan.reams.db.dbb.service.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiManager;
+import jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiManager;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  *
@@ -32,6 +33,7 @@ public class FukaKakutei {
     private static final RString 仮算定異動賦課確定 = new RString("仮算定異動賦課確定");
     private static final RString 本算定賦課確定 = new RString("本算定賦課確定");
     private static final RString 異動賦課確定 = new RString("異動賦課確定");
+    private static final RString 共通ボタン = new RString("btnFukaKakutei");
 
     /**
      * コンストラクタです。
@@ -47,6 +49,7 @@ public class FukaKakutei {
      * @return ResponseData
      */
     public ResponseData<FukaKakuteiDiv> onLoad(FukaKakuteiDiv div) {
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
         getHandler(div).賦課年度の設定();
         if (getHandler(div).処理名_特徴仮算定賦課(基準日時取得(div, 特徴仮算定賦課), 基準日時取得(div, 特徴仮算定賦課確定))) {
 
@@ -89,8 +92,9 @@ public class FukaKakutei {
     }
 
     private void 賦課処理状況更新(FukaKakuteiDiv div) {
-        TokuchoKarisanteiFukaKakuteiMapperParameter parameter = TokuchoKarisanteiFukaKakuteiMapperParameter.createParam(div.getFukaKakuteiBatchParameter().
-                getFukaKeisanShoriNaiyo().getTxtFukaKeisanShoriNichiji().getValue(), div.getFukaKakuteiBatchParameter().
+        TokuchoKarisanteiFukaKakuteiMapperParameter parameter = TokuchoKarisanteiFukaKakuteiMapperParameter.createParam(
+                div.getFukaKakuteiBatchParameter().get基準日時(),
+                div.getFukaKakuteiBatchParameter().
                 getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().getDomain());
         fukaKakuteiManager.updateFukaShoriJyokyo(parameter);
     }

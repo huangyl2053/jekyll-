@@ -12,12 +12,12 @@ import jp.co.ndensan.reams.db.dbd.business.report.riyoshafutangakugengakumenjyos
 import jp.co.ndensan.reams.db.dbd.business.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoReport;
 import jp.co.ndensan.reams.db.dbd.entity.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinSeinengappiHyojihoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
@@ -108,14 +108,14 @@ public class RiyoshaFutangakuGengakuMenjyoShinseisho {
         RiyoshaFutangakuGengakuMenjyoShinseishoProerty proerty = new RiyoshaFutangakuGengakuMenjyoShinseishoProerty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<RiyoshaFutangakuGengakuMenjyoShinseishoReportSource> assembler = createAssembler(proerty, reportManager)) {
+                ReportSourceWriter<RiyoshaFutangakuGengakuMenjyoShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
-                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), null, RString.EMPTY);
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), null, reportSourceWriter.getImageFolderPath());
                 List<UaFt200FindShikibetsuTaishoEntity> psmJoho = getPsmJoho(識別コード);
                 RString title = this.getタイトル(被保険者番号, psmJoho);
                 for (RiyoshaFutangakuGengakuMenjyoShinseishoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei, title)) {
-                    ReportSourceWriter<RiyoshaFutangakuGengakuMenjyoShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
                 }
             }
@@ -216,7 +216,7 @@ public class RiyoshaFutangakuGengakuMenjyoShinseisho {
         DbT4001JukyushaDaichoEntity 受給者台帳情報 = 受給者台帳Dac.select受給者台帳情報(shikibetsuTaisho.get現全国地方公共団体コード(),
                 被保険者番号,
                 new Code(YukoMukoKubun.有効.getコード()));
-        if (受給者台帳情報.getKyuSochishaFlag()) {
+        if (受給者台帳情報 != null && 受給者台帳情報.getKyuSochishaFlag()) {
             return new RString("（特別療養老人ホームの要介護旧措置入所者に関する認定申請）");
         }
         return RString.EMPTY;

@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosainmaster;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterMapperParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterSearchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainmaster.NinteiChosainMasterMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainmaster.NinteiChosainMasterSearchParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosainmaster.NinteiChosainMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

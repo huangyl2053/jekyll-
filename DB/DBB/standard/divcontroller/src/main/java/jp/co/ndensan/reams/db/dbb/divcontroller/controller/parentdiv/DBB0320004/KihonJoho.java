@@ -29,7 +29,7 @@ public class KihonJoho {
 
         FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
 
-        div.getCcdKaigoAtenaInfo().onLoad(taishoshaKey.get識別コード());
+        div.getCcdKaigoAtenaInfo().initialize(taishoshaKey.get識別コード());
 
         KaigoFukaKihonSearchKey searchKey = new KaigoFukaKihonSearchKey.Builder(
                 taishoshaKey.get通知書番号(),

@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dba.entity.report.kyotakukaigojutakukaishuhijizens
 /**
  * 介護保険居宅介護（予防）住宅改修費事前（受領委任払）申請書エディターです。
  *
- * @reamsid_L DBA-0540-703  lijia
- * 
+ * @reamsid_L DBA-0540-703 lijia
+ *
  */
 public class KyotakuKaigoJutakuKaishuhiJizenShinseishoEditorImpl implements IKyotakuKaigoJutakuKaishuhiJizenShinseishoEditor {
 
@@ -41,7 +41,7 @@ public class KyotakuKaigoJutakuKaishuhiJizenShinseishoEditorImpl implements IKyo
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
         source.hokenshaNo = item.getHokenshaNo();
         source.hihokenshaName = item.getHihokenshaName();
-        source.hihokenshaNo = item.getHokenshaNo();
+        source.hihokenshaNo = item.getHihokenshaNo();
         source.birthYMD = item.getBirthYMD();
         source.yubinNo = item.getYubinNo();
         source.telNo = item.getTelNo();

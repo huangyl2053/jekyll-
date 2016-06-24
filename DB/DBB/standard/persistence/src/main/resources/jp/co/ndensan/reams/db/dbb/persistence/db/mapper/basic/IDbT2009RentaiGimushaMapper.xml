@@ -50,7 +50,7 @@
         <result property="endYMD" column="dbT2009RentaiGimusha_endYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
     
-    <select id="getEntity" resultMap="ResultMap_DbT2009RentaiGimushaEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT2009RentaiGimushaEntity">
         SELECT
         <include refid="allColumns_DbT2009RentaiGimusha" />
         FROM

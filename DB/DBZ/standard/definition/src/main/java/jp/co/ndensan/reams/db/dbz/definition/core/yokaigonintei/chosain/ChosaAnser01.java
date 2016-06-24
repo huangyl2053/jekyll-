@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -24,11 +23,11 @@ public enum ChosaAnser01 {
      * コード:2 名称:あり 略称:あり
      */
     あり("2", "あり");
-    private final Code code;
+    private final RString code;
     private final RString fullName;
 
     private ChosaAnser01(String code, String fullname) {
-        this.code = new Code(code);
+        this.code = new RString(code);
         this.fullName = new RString(fullname);
     }
 
@@ -37,7 +36,7 @@ public enum ChosaAnser01 {
      *
      * @return 認定調査項目内容01のコード
      */
-    public Code getコード() {
+    public RString getコード() {
         return code;
     }
 
@@ -56,7 +55,7 @@ public enum ChosaAnser01 {
      * @param code 認定調査項目内容01のコード
      * @return {@code code} に対応する認定調査項目内容01
      */
-    public static ChosaAnser01 toValue(Code code) {
+    public static ChosaAnser01 toValue(RString code) {
         for (ChosaAnser01 anser01 : ChosaAnser01.values()) {
             if (anser01.code.equals(code)) {
                 return anser01;

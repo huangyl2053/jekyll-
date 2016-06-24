@@ -43,7 +43,7 @@
         <result property="lastUpdateReamsLoginId" column="dbT5115Image_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="imageSharedFileId" column="dbT5115Image_imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT5115ImageEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5115ImageEntity">
         <!--SELECT
         <include refid="allColumns_DbT5115Image"/>
         FROM

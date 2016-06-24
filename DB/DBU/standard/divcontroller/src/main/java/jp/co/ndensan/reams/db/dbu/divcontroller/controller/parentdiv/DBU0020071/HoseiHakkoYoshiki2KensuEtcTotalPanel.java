@@ -23,9 +23,8 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020071.Hos
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020071.HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuLoadHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
+import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -58,25 +57,21 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanel {
      * @return ResponseData<HoseiHakkoYoshiki2KensuEtcTotalPanelDiv>
      */
     public ResponseData<HoseiHakkoYoshiki2KensuEtcTotalPanelDiv> onLoad(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
-        HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuLoadHandler handler = getHandler(div);
-        HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuLoadHandler handler4 = getHandler4(div);
-        HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuLoadHandler handler5 = getHandler5(div);
-        HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuLoadHandler handler6 = getHandler6(div);
 
         JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.事業報告基本,
                 JigyoHokokuGeppoParameter.class);
-        handler.setViewState(引き継ぎデータ);
+        getHandler(div).initializeKihoneria(引き継ぎデータ);
 
-        handler.件数OnLoad(引き継ぎデータ);
-        handler4.単位数OnLoad(引き継ぎデータ);
-        handler5.費用額OnLoad(引き継ぎデータ);
-        handler6.給付額OnLoad(引き継ぎデータ);
+        getHandler(div).件数OnLoad(引き継ぎデータ);
+        getHandler4(div).単位数OnLoad(引き継ぎデータ);
+        getHandler5(div).費用額OnLoad(引き継ぎデータ);
+        getHandler6(div).給付額OnLoad(引き継ぎデータ);
 
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (更新.equals(状態)) {
             return ResponseData.of(div).setState(DBU0020071StateName.修正状態);
         } else if (削除.equals(状態)) {
-            div.getPnlMain().setReadOnly(true);
+            getHandler8(div).非活性化設定();
             return ResponseData.of(div).setState(DBU0020071StateName.削除状態);
         }
         return ResponseData.of(div).respond();
@@ -88,52 +83,51 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanel {
      * @param div HoseiHakkoYoshiki2KensuEtcTotalPanelDiv
      * @return ResponseData<HoseiHakkoYoshiki2KensuEtcTotalPanelDiv>
      */
-    public ResponseData<HoseiHakkoYoshiki2KensuEtcTotalPanelDiv> onClick_btnModUpdate(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
-        HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuLoadHandler handler = getHandler(div);
-        HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler handler2 = getHandler2(div);
+    public ResponseData<HoseiHakkoYoshiki2KensuEtcTotalPanelDiv> onClick_btnModUpdate(
+            HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
 
         JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.事業報告基本,
                 JigyoHokokuGeppoParameter.class);
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)) && !ResponseHolder.isReRequest()) {
-            handler.delete(引き継ぎデータ);
-            div.getPnlKanryo()
-                    .getCcdKanryoMessage().setSuccessMessage(new RString(
-                                    UrInformationMessages.正常終了.getMessage().replace(削除.toString()).evaluate()));
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            getHandler(div).delete(引き継ぎデータ);
+            getHandler8(div).削除正常終了();
             return ResponseData.of(div).setState(DBU0020071StateName.完了状態);
 
         }
         List<JigyoHokokuTokeiData> 修正データリスト = get修正データ(div);
-        if (handler2.is修正データ無し(修正データリスト) && !ResponseHolder.isReRequest()) {
+        if (getHandler2(div).is修正データ無し(修正データリスト)) {
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         } else {
-            return 修正データ更新(div, 修正データリスト, 整合性チェックNG_予防給付(div), 整合性チェックNG_介護給付(div), 整合性チェックNG_合計(div));
+            return 修正データ更新(div, 修正データリスト, 整合性チェックNG_予防給付(div),
+                    整合性チェックNG_介護給付(div), 整合性チェックNG_合計(div));
         }
     }
 
-    private ResponseData<HoseiHakkoYoshiki2KensuEtcTotalPanelDiv> 修正データ更新(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div,
+    private ResponseData<HoseiHakkoYoshiki2KensuEtcTotalPanelDiv> 修正データ更新(
+            HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div,
             List<JigyoHokokuTokeiData> 修正データリスト,
             boolean 整合性チェックNG_予防給付,
             boolean 整合性チェックNG_介護給付,
             boolean 整合性チェックNG_合計) {
         if (!ResponseHolder.isReRequest() && 整合性チェックNG_予防給付) {
-            div.getPnlMain().set予防給付(RString.EMPTY);
+            getHandler8(div).予防給付チェック前設定();
             return ResponseData.of(div).addMessage(
                     UrWarningMessages.相違.getMessage().replace(
                             要支援計.toString(), 合計計算結果.toString())).respond();
         } else if (!ResponseHolder.isReRequest() && 整合性チェックNG_介護給付) {
-            div.getPnlMain().set介護給付(RString.EMPTY);
+            getHandler8(div).介護給付チェック前設定();
             return ResponseData.of(div).addMessage(
                     UrWarningMessages.相違.getMessage().replace(
                             要介護計.toString(), 合計計算結果.toString())).respond();
         } else if (!ResponseHolder.isReRequest() && 整合性チェックNG_合計) {
-            div.getPnlMain().set合計(RString.EMPTY);
+            getHandler8(div).合計チェック前設定();
             return ResponseData.of(div).addMessage(
                     UrWarningMessages.相違.getMessage().replace(
                             合計.toString(), 要支援計と要介護計の合計計算結果.toString())).respond();
         }
 
         if (整合性チェック_予防給付_はい(整合性チェックNG_予防給付, div)) {
-            div.getPnlMain().set予防給付(RString.HALF_SPACE);
+            getHandler8(div).予防給付チェック後設定();
             if (整合性チェックNG_介護給付) {
                 return ResponseData.of(div).addMessage(
                         UrWarningMessages.相違.getMessage().replace(
@@ -148,7 +142,7 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanel {
                                 UrQuestionMessages.処理実行の確認.getMessage().evaluate())).respond();
             }
         } else if (整合性チェック_介護給付_はい(整合性チェックNG_介護給付, div)) {
-            div.getPnlMain().set介護給付(RString.HALF_SPACE);
+            getHandler8(div).介護給付チェック後設定();
             if (整合性チェックNG_合計) {
                 return ResponseData.of(div).addMessage(
                         UrWarningMessages.相違.getMessage().replace(
@@ -159,11 +153,12 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanel {
                                 UrQuestionMessages.処理実行の確認.getMessage().evaluate())).respond();
             }
         } else if (整合性チェック_合計_はい(整合性チェックNG_合計, div)) {
-            div.getPnlMain().set合計(RString.HALF_SPACE);
+            getHandler8(div).合計チェック後設定();
             return ResponseData.of(div).addMessage(
                     new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                             UrQuestionMessages.処理実行の確認.getMessage().evaluate())).respond();
         }
+        チェックはいいえ(div, 整合性チェックNG_予防給付, 整合性チェックNG_介護給付, 整合性チェックNG_合計);
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(
                     new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
@@ -172,11 +167,30 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanel {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             JigyoHokokuGeppoHoseiHako.createInstance().updateJigyoHokokuGeppoEntity(修正データリスト);
-            div.getPnlKanryo().getCcdKanryoMessage().setSuccessMessage(new RString(
-                    UrInformationMessages.正常終了.getMessage().replace(更新.toString()).evaluate()));
+            getHandler8(div).更新正常終了();
             return ResponseData.of(div).setState(DBU0020071StateName.完了状態);
         } else {
             return ResponseData.of(div).respond();
+        }
+    }
+
+    private void チェックはいいえ(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div,
+            boolean 整合性チェックNG_予防給付,
+            boolean 整合性チェックNG_介護給付,
+            boolean 整合性チェックNG_合計) {
+        if (new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No
+                || new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            if (整合性チェックNG_予防給付) {
+                getHandler8(div).予防給付チェック前設定();
+            }
+            if (整合性チェックNG_介護給付) {
+                getHandler8(div).介護給付チェック前設定();
+            }
+            if (整合性チェックNG_合計) {
+                getHandler8(div).合計チェック前設定();
+            }
         }
     }
 
@@ -186,11 +200,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanel {
      * @param div HoseiHakkoYoshiki2KensuEtcTotalPanelDiv
      * @return ResponseData<HoseiHakkoYoshiki2KensuEtcTotalPanelDiv>
      */
-    public ResponseData<HoseiHakkoYoshiki2KensuEtcTotalPanelDiv> onClick_btnModBack(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
-        HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler handler1 = getHandler2(div);
+    public ResponseData<HoseiHakkoYoshiki2KensuEtcTotalPanelDiv> onClick_btnModBack(
+            HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
         List<JigyoHokokuTokeiData> 修正データ = get修正データ(div);
-
-        if (handler1.is修正データ無し(修正データ)) {
+        if (getHandler2(div).is修正データ無し(修正データ)) {
             return ResponseData.of(div).forwardWithEventName(DBU0020071TransitionEventName.補正発行検索に戻る).respond();
         }
         if (!ResponseHolder.isReRequest()) {
@@ -223,22 +236,24 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanel {
         return 修正データ;
     }
 
-    private boolean 整合性チェック_予防給付_はい(boolean 整合性チェック_予防給付, HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
+    private boolean 整合性チェック_予防給付_はい(boolean 整合性チェック_予防給付,
+            HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
         return new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                && 整合性チェック_予防給付 && div.getPnlMain().get予防給付().isNullOrEmpty();
+                && 整合性チェック_予防給付 && getHandler8(div).予防給付判空();
     }
 
-    private boolean 整合性チェック_介護給付_はい(boolean 整合性チェック_介護給付, HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
+    private boolean 整合性チェック_介護給付_はい(boolean 整合性チェック_介護給付,
+            HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
         return new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                && 整合性チェック_介護給付 && div.getPnlMain().get介護給付().isNullOrEmpty();
+                && 整合性チェック_介護給付 && getHandler8(div).介護給付判空();
     }
 
     private boolean 整合性チェック_合計_はい(boolean 整合性チェック_合計, HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
         return new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                && 整合性チェック_合計 && div.getPnlMain().get合計().isNullOrEmpty();
+                && 整合性チェック_合計 && getHandler8(div).合計判空();
     }
 
     private boolean 整合性チェックNG_予防給付(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
@@ -256,43 +271,53 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanel {
                 || getHandler9(div).is整合性チェック_費用額_NG3() || getHandler10(div).is整合性チェック_給付額_NG3();
     }
 
-    private HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuLoadHandler getHandler(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
+    private HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuLoadHandler getHandler(
+            HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
         return new HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuLoadHandler(div);
     }
 
-    private HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler getHandler2(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
+    private HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler getHandler2(
+            HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
         return new HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler(div);
     }
 
-    private HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler getHandler3(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
+    private HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler getHandler3(
+            HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
         return new HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler(div);
     }
 
-    private HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuLoadHandler getHandler4(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
+    private HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuLoadHandler getHandler4(
+            HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
         return new HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuLoadHandler(div);
     }
 
-    private HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuLoadHandler getHandler5(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
+    private HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuLoadHandler getHandler5(
+            HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
         return new HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuLoadHandler(div);
     }
 
-    private HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuLoadHandler getHandler6(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
+    private HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuLoadHandler getHandler6(
+            HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
         return new HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuLoadHandler(div);
     }
 
-    private HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuCheckHandler getHandler7(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
+    private HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuCheckHandler getHandler7(
+            HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
         return new HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuCheckHandler(div);
     }
 
-    private HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler getHandler8(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
+    private HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler getHandler8(
+            HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
         return new HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler(div);
     }
 
-    private HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler getHandler9(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
+    private HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler getHandler9(
+            HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
         return new HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuCheckHandler(div);
     }
 
-    private HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuCheckHandler getHandler10(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
+    private HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuCheckHandler getHandler10(
+            HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
         return new HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuCheckHandler(div);
     }
 

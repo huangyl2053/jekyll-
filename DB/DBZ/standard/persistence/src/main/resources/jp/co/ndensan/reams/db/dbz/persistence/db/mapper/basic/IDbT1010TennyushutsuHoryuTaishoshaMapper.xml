@@ -94,7 +94,7 @@
         <result property="maeJushoKatagaki" column="dbT1010TennyushutsuHoryuTaishosha_maeJushoKatagaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KatagakiTypeHandler"/>
     </resultMap>
 
-    <select id="getEntity" resultMap="ResultMap_DbT1010TennyushutsuHoryuTaishoshaEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT1010TennyushutsuHoryuTaishoshaEntity">
         SELECT
         <include refid="allColumns_DbT1010TennyushutsuHoryuTaishosha"/>
         FROM

@@ -1,13 +1,14 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha;
 
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaDataPassModel;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaNaiyo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
 /*
  * このコードはツールによって生成されました。
  *
- * @reamsid_L DBE-1300-110 yaodongsheng
+ * @reamsid_L DBZ-1300-110 yaodongsheng
  */
 public interface INinteiShinseiTodokedeshaDiv extends ICommonChildDivBaseProperties {
 
@@ -24,4 +25,11 @@ public interface INinteiShinseiTodokedeshaDiv extends ICommonChildDivBasePropert
      * @param mode mode
      */
     public void set状態(RString mode);
+
+    /**
+     * 画面一覧内容を取得。
+     *
+     * @return NinteiShinseiTodokedeshaNaiyo NinteiShinseiTodokedeshaNaiyo
+     */
+    public NinteiShinseiTodokedeshaNaiyo get一覧内容();
 }

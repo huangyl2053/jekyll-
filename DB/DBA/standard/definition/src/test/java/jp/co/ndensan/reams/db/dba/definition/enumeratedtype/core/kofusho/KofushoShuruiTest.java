@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.kofusho;
 
+import jp.co.ndensan.reams.db.dba.definition.core.kofusho.KofushoShurui;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;

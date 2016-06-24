@@ -5,9 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -17,81 +14,77 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum GemmenGengakuShurui {
 
     /**
-     * 標準負担額減額
+     * コード:01 名称:標準負担額減免
      */
-    標準負担額減免("01"),
+    標準負担額減免("01", "標準負担額減免"),
     /**
-     * 特定標準負担額減額
+     * コード:02 名称:特定標準負担額減額
      */
-    特定標準負担額減額("02"),
+    特定標準負担額減額("02", "特定標準負担額減額"),
     /**
-     * 利用者負担額減額
+     * コード:03 名称:利用者負担額減額
      */
-    利用者負担額減額("03"),
+    利用者負担額減額("03", "利用者負担額減額"),
     /**
-     * 社会福祉法人等利用者負担軽減
+     * コード:04 名称:社会福祉法人等軽減
      */
-    社会福祉法人等利用者負担軽減("04"),
+    社会福祉法人等利用者負担軽減("04", "社会福祉法人等軽減"),
     /**
-     * 訪問介護利用者負担減額
+     * コード:05 名称:訪問介護利用者負担額減額
      */
-    訪問介護利用者負担額減額("05"),
+    訪問介護利用者負担額減額("05", "訪問介護利用者負担額減額"),
     /**
-     * 特別地域加算減免
+     * コード:06 名称:特別地域加算減免
      */
-    特別地域加算減免("06"),
+    特別地域加算減免("06", "特別地域加算減免"),
     /**
-     * 負担限度額認定
+     * コード:07 名称:負担限度額認定
      */
-    負担限度額認定("07");
+    負担限度額認定("07", "負担限度額認定"),
+    /**
+     * コード:10 名称:障がい者控除
+     */
+    障がい者控除("10", "障がい者控除");
 
-    private final RString aCode;
+    private final RString code;
+    private final RString fullName;
 
-    private GemmenGengakuShurui(String code) {
-        this.aCode = new RString(code);
+    private GemmenGengakuShurui(String code, String fullname) {
+        this.code = new RString(code);
+        this.fullName = new RString(fullname);
+
     }
 
     /**
-     * コードを返却します。
+     * 減免減額種類のコードを返します。
      *
-     * @return コード
+     * @return 減免減額種類のコード
      */
-    public RString code() {
-        return aCode;
+    public RString getコード() {
+        return code;
     }
 
     /**
-     * 指定のコードに対応する GemmenGengakuShurui を返します。
+     * 減免減額種類の名称を返します。
      *
-     * @param code コード
-     * @return コードに対応する GemmenGengakuShurui
-     * @throws IllegalArgumentException 指定のコードに対応する GemmenGengakuShurui が無い時
+     * @return 減免減額種類の名称
      */
-    public static GemmenGengakuShurui toValue(RString code) throws IllegalArgumentException {
-        GemmenGengakuShurui value = CodeToValue.get(code);
-        if (value != null) {
-            return value;
-        }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage(
-                GemmenGengakuShurui.class.getSimpleName()));
+    public RString get名称() {
+        return fullName;
     }
 
-    //<editor-fold defaultstate="collapsed" desc="CodeToValue">
-    private static final class CodeToValue {
-
-        private static final Map<RString, GemmenGengakuShurui> DICTHIONARY;
-
-        static {
-            Map<RString, GemmenGengakuShurui> map = new HashMap<>();
-            for (GemmenGengakuShurui value : values()) {
-                map.put(value.code(), value);
+    /**
+     * 減免減額種類のコードと一致する内容を探します。
+     *
+     * @param code 減免減額種類のコード
+     * @return {@code code} に対応する減免減額種類
+     */
+    public static GemmenGengakuShurui toValue(RString code) {
+        for (GemmenGengakuShurui gemmenGengakuShurui : GemmenGengakuShurui.values()) {
+            if (gemmenGengakuShurui.code.equals(code)) {
+                return gemmenGengakuShurui;
             }
-            DICTHIONARY = Collections.unmodifiableMap(map);
         }
-
-        static GemmenGengakuShurui get(RString code) {
-            return DICTHIONARY.get(code);
-        }
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("減免減額種類"));
     }
-    //</editor-fold>
 }

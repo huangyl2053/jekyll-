@@ -10,14 +10,14 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataIdentifier;
 import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
-import jp.co.ndensan.reams.db.dbu.definition.enumeratedtype.DbuViewStateKey;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.SearchJigyoHokokuNenpo;
+import jp.co.ndensan.reams.db.dbu.definition.core.viewstate.DbuViewStateKey;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpo.SearchJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060021.DBU0060021StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060021.DBU0060021TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060021.NenpoYoushiki1HoseiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0060021.NenpoYoushiki1HoseiHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokunenpo.JigyoHokokuNenpoHoseiHakoManager;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 老人保健受給者台帳管理Divを制御します。
- * 
+ *
  * @reamsid_L DBU-1060-020 wangkun
  */
 public class NenpoYoushiki1Hosei {
@@ -52,10 +52,14 @@ public class NenpoYoushiki1Hosei {
     public ResponseData<NenpoYoushiki1HoseiDiv> onLoad(NenpoYoushiki1HoseiDiv div) {
         ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity param = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報,
                 ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
+        LasdecCode 市町村コード = LasdecCode.EMPTY;
+        if (!RString.isNullOrEmpty(param.get選択した市町村コード())) {
+            市町村コード = new LasdecCode(param.get選択した市町村コード().substring(0, 選択した市町村コード));
+        }
         List<JigyoHokokuTokeiData> jigyoHokokuTokeiDataList = JigyoHokokuNenpoHoseiHakoManager.createInstance()
                 .getJigyoHokokuNenpoDetal(new SearchJigyoHokokuNenpo(new FlexibleYear(param.get画面報告年度()),
                                 new FlexibleYear(param.get画面集計年度()),
-                                new LasdecCode(param.get選択した市町村コード().substring(0, 選択した市町村コード)),
+                                市町村コード,
                                 param.get事業報告年報補正表示のコード(),
                                 Code.EMPTY)).records();
         if (jigyoHokokuTokeiDataList.isEmpty()) {
@@ -112,7 +116,9 @@ public class NenpoYoushiki1Hosei {
      */
     public ResponseData<NenpoYoushiki1HoseiDiv> onClick_btnBack(NenpoYoushiki1HoseiDiv div) {
         NenpoYoushiki1HoseiHandler handler = createHandler(div);
-        List<JigyoHokokuTokeiData> 修正データの取得リスト = handler.修正データの取得();
+        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> jigyoHokokuTokeiData
+                = ViewStateHolder.get(ViewStateKeys.開催場所情報一覧, Models.class);
+        List<JigyoHokokuTokeiData> 修正データの取得リスト = handler.修正データの取得(jigyoHokokuTokeiData);
         if (修正データの取得リスト.isEmpty()) {
             return ResponseData.of(div).forwardWithEventName(DBU0060021TransitionEventName.検索に戻る).respond();
         }
@@ -136,7 +142,9 @@ public class NenpoYoushiki1Hosei {
     }
 
     private List<JigyoHokokuTokeiData> 修正データのチェック(NenpoYoushiki1HoseiDiv div) {
-        List<JigyoHokokuTokeiData> 修正データの取得リスト = createHandler(div).修正データの取得();
+        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> jigyoHokokuTokeiData
+                = ViewStateHolder.get(ViewStateKeys.開催場所情報一覧, Models.class);
+        List<JigyoHokokuTokeiData> 修正データの取得リスト = createHandler(div).修正データの取得(jigyoHokokuTokeiData);
         if (修正データの取得リスト.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaichosakusei.HihokenshaDaichoSakusei;
 import jp.co.ndensan.reams.db.dba.business.report.hihokenshadaicho.HihokenshaDaichoReport;
+import jp.co.ndensan.reams.db.dba.definition.core.hihokenshadaicho.HihokenshaDaichoRelateItem;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.IkkatsuSakuseiMybatisParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.hihokenshadaicho.IkkatsuSusakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
@@ -20,8 +21,10 @@ import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshadaicho.
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaichosakusei.HihokenshaDaichoSakuseiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.mybatisorderbycreator.MyBatisOrderByCreator;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.setai.SetaiinFinder;
@@ -33,10 +36,14 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.gyosekukaku.IGyoseiKukaku;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -47,8 +54,9 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -76,7 +84,6 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
     private static final RString GYOSEIKU_TITLE = new RString("行政区");
     private static final RString NYUSHOSHISETSUSHURUI_11 = new RString("11");
     private static final RString TELEPHONENOTITLE = new RString("連絡先");
-    //private IOutputOrder shutsuryokujunId;
     private IkkatsuSusakuseiProcessParameter processPrm;
     private IkkatsuSakuseiMybatisParameter mybatisPrm;
     private IIkkatsuSakuseiMapper iIkkatsuSakuseiMapper;
@@ -87,9 +94,10 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
 
     @Override
     protected void initialize() {
-        mybatisPrm = processPrm.toIkkatsuHakkoMybatisParameter();
         iIkkatsuSakuseiMapper = getMapper(IIkkatsuSakuseiMapper.class);
+        mybatisPrm = processPrm.toIkkatsuHakkoMybatisParameter();
         被保険者台帳EntityList = new ArrayList<>();
+        get出力順();
     }
 
     @Override
@@ -120,13 +128,14 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
 
     private HihokenshaEntity set被保険者Entity(DbT1001HihokenshaDaichoEntity entity) {
         HihokenshaEntity 被保険者Entity = new HihokenshaEntity();
-        被保険者Entity.setPrintDate(RDate.getNowDate().toDateString());
+        被保険者Entity.setPrintDate(RDateTime.now());
         被保険者Entity.setPage(RString.EMPTY);
         被保険者Entity.setTitle(TITLE);
         被保険者Entity.setShichosonCode(entity.getShichosonCode());
         被保険者Entity.setShichosonMeisho(get市町村名称(entity));
         被保険者Entity.setHihokenshaNoTitle(HIHOKENSHANOTITLE);
         被保険者Entity.setHihokenshaNo(entity.getHihokenshaNo());
+        被保険者Entity.setShikibetsuCode(entity.getShikibetsuCode());
         UaFt200FindShikibetsuTaishoEntity 識別対象Entity = get宛名識別対象取得(entity.getShikibetsuCode());
         if (識別対象Entity != null) {
             IShikibetsuTaisho shikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(識別対象Entity);
@@ -134,7 +143,7 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
             被保険者Entity.setKanaMeisho(shikibetsuTaisho.get名称().getKana());
             被保険者Entity.setMeisho(shikibetsuTaisho.get名称().getName());
             被保険者Entity.setSeinengappiYMD(iKojin.get生年月日().toFlexibleDate());
-            被保険者Entity.setSeibetsuCode(iKojin.get性別().getCode());
+            被保険者Entity.setSeibetsuCode(Seibetsu.toValue(iKojin.get性別().getCode()).get名称());
             被保険者Entity.setSetaiCode(iKojin.get世帯コード());
             被保険者Entity.setShikibetsuCode(iKojin.get識別コード());
             IGyoseiKukaku iGyoseiKukaku = iKojin.get行政区画();
@@ -160,9 +169,10 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
         if (get入所施設(entity) != null) {
             被保険者Entity.setJigyoshaNo(get入所施設(entity).getJigyoshaNo());
             if (NYUSHOSHISETSUSHURUI_11.equals(get入所施設(entity).getNyushoShisetsuShurui())) {
-                被保険者Entity.setJigyoshaMeisho(new AtenaMeisho(get入所施設(entity).getJigyoshaName().value()));
+                被保険者Entity.setJigyoshaMeisho(get入所施設(entity).getJigyoshaName());
             }
-            被保険者Entity.setJigyoshaMeisho(new AtenaMeisho(get入所施設(entity).getJigyoshaMeisho()));
+            被保険者Entity.setJigyoshaMeisho(!RString.isNullOrEmpty(get入所施設(entity).getJigyoshaMeisho())
+                    ? new AtenaMeisho(get入所施設(entity).getJigyoshaMeisho()) : AtenaMeisho.EMPTY);
         }
         if (get医療保険(entity) != null) {
             被保険者Entity.setIryoHokenShubetsu(get医療保険(entity).getIryoHokenShubetsuCode());
@@ -170,10 +180,11 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
             被保険者Entity.setIryoHokenKigoNo(get医療保険(entity).getIryoHokenKigoNo());
         }
         IkkatsuSakuseiMybatisParameter mybatisParameter = IkkatsuSakuseiMybatisParameter.
-                createSelectByKeyParam(mybatisPrm.isChushutsuFlag(),
-                        mybatisPrm.getShichosonCode(),
+                createSelectByKeyParam(processPrm.isChushutsuFlag(),
+                        processPrm.getShichosonCode(),
                         被保険者Entity.getShikibetsuCode(),
-                        mybatisPrm.getPsmShikibetsuTaisho());
+                        processPrm.getPsmShikibetsuTaisho(),
+                        RString.EMPTY);
         被保険者Entity.setDbT1001HihokenshaDaichoEntityList(iIkkatsuSakuseiMapper.get被保険者台帳管理情報(mybatisParameter));
         被保険者Entity.setShisetsuNyutaishoEntityList(iIkkatsuSakuseiMapper.get生活保護受給者(mybatisParameter));
         被保険者Entity.setDbT7006RoreiFukushiNenkinJukyushaEntityList(iIkkatsuSakuseiMapper.get老齢福祉年金受給者(mybatisParameter));
@@ -197,25 +208,35 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
         return setaiinJohoEntityList;
     }
 
-    //    TODO 出力順の取得方式確認中
-//    private void get出力順(){
-//     IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
-//        RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
-//        if (!RString.isNullOrEmpty(processPrm.getShutsuryokujunId())) {
-//            shutsuryokujunId = chohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBA介護資格,
-//                    帳票ID,
-//                    reamsLoginID,
-//                    new Long(processPrm.getShutsuryokujunId().toString()));
-//            if (shutsuryokujunId != null) {
-//
-//            }
-//        }
-//    }
+    private void get出力順() {
+        IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
+        if (processPrm.getShutsuryokujunId() != null) {
+            IOutputOrder shutsuryokujunId = chohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBA介護資格,
+                    帳票ID,
+                    reamsLoginID,
+                    Long.valueOf(processPrm.getShutsuryokujunId().toString()));
+            if (shutsuryokujunId != null) {
+                RString orderBy = MyBatisOrderByCreator.createWithOutOrderBy(HihokenshaDaichoRelateItem.class, shutsuryokujunId);
+                mybatisPrm = IkkatsuSakuseiMybatisParameter.
+                        createSelectByKeyParam(processPrm.isChushutsuFlag(),
+                                processPrm.getShichosonCode(),
+                                processPrm.getShikibetsuCode(),
+                                processPrm.getPsmShikibetsuTaisho(),
+                                orderBy);
+            }
+        }
+    }
+
     private RString get市町村名称(DbT1001HihokenshaDaichoEntity entity) {
-        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務,
+                processPrm.getLoginUserId());
         IkkatsuSakuseiMybatisParameter mybatisParameter = IkkatsuSakuseiMybatisParameter.
-                createSelectByKeyParam(mybatisPrm.isChushutsuFlag(), entity.getShichosonCode(), mybatisPrm.getShikibetsuCode(),
-                        mybatisPrm.getPsmShikibetsuTaisho());
+                createSelectByKeyParam(processPrm.isChushutsuFlag(),
+                        entity.getShichosonCode(),
+                        processPrm.getShikibetsuCode(),
+                        processPrm.getPsmShikibetsuTaisho(),
+                        RString.EMPTY);
         RString shichosonMeisho = RString.EMPTY;
         RString 導入形態コード = shichosonSecurityJoho.get導入形態コード().value();
         if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード) || DonyuKeitaiCode.認定単一.getCode().equals(導入形態コード)) {
@@ -259,22 +280,31 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
         key.set識別コード(shikibetsuCode);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         IkkatsuSakuseiMybatisParameter mybatisParameter = IkkatsuSakuseiMybatisParameter.
-                createSelectByKeyParam(mybatisPrm.isChushutsuFlag(), mybatisPrm.getShichosonCode(), mybatisPrm.getShikibetsuCode(),
-                        new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
+                createSelectByKeyParam(processPrm.isChushutsuFlag(),
+                        processPrm.getShichosonCode(),
+                        processPrm.getShikibetsuCode(),
+                        new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
+                        RString.EMPTY);
         return iIkkatsuSakuseiMapper.get識別対象(mybatisParameter);
     }
 
     private ShisetsuNyutaishoEntity get入所施設(DbT1001HihokenshaDaichoEntity entity) {
         IkkatsuSakuseiMybatisParameter mybatisParameter = IkkatsuSakuseiMybatisParameter.
-                createSelectByKeyParam(mybatisPrm.isChushutsuFlag(), mybatisPrm.getShichosonCode(), entity.getShikibetsuCode(),
-                        mybatisPrm.getPsmShikibetsuTaisho());
+                createSelectByKeyParam(processPrm.isChushutsuFlag(),
+                        processPrm.getShichosonCode(),
+                        entity.getShikibetsuCode(),
+                        processPrm.getPsmShikibetsuTaisho(),
+                        RString.EMPTY);
         return iIkkatsuSakuseiMapper.get入所施設(mybatisParameter);
     }
 
     private DbT1008IryohokenKanyuJokyoEntity get医療保険(DbT1001HihokenshaDaichoEntity entity) {
         IkkatsuSakuseiMybatisParameter mybatisParameter = IkkatsuSakuseiMybatisParameter.
-                createSelectByKeyParam(mybatisPrm.isChushutsuFlag(), mybatisPrm.getShichosonCode(), entity.getShikibetsuCode(),
-                        mybatisPrm.getPsmShikibetsuTaisho());
+                createSelectByKeyParam(processPrm.isChushutsuFlag(),
+                        processPrm.getShichosonCode(),
+                        entity.getShikibetsuCode(),
+                        processPrm.getPsmShikibetsuTaisho(),
+                        RString.EMPTY);
         return iIkkatsuSakuseiMapper.get介護保険医療保険加入状況(mybatisParameter);
     }
 

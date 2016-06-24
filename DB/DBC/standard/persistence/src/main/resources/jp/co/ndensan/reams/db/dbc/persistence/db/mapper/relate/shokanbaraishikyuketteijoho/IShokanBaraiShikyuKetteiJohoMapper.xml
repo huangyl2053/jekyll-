@@ -140,7 +140,7 @@
         <result property="増減理由" column="biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <select id="select一時TBL4集計" resultMap="resultMap_Shuukei" fetchSize="500">
+    <select resultOrdered="true" id="select一時TBL4集計" resultMap="resultMap_Shuukei" fetchSize="500">
         SELECT TEMP."hiHokenshaNo",
         TEMP."serviceTeikyoYM",
         TEMP."seiriNo",
@@ -176,7 +176,7 @@
     </resultMap>
 
     <!-- 償還払支給決定情報一時TBL集計4償還払支給判定結 -->
-    <select id="select一時TBL4償還払支給判定結果" resultMap="resultMap_ShokanHanteiKekka" fetchSize="500">
+    <select resultOrdered="true" id="select一時TBL4償還払支給判定結果" resultMap="resultMap_ShokanHanteiKekka" fetchSize="500">
         SELECT TEMP."kokanShikibetsuNo",
         TEMP."zhangpiaoKindHead",
         TEMP."shoKisaiHokenshaNo",
@@ -209,7 +209,7 @@
     </resultMap>
 
     <!-- 一時テーブルの被保険者番号の取得-->
-    <select id="select被保険者番号" resultMap="resultMap_Hihokensha" fetchSize="500">
+    <select resultOrdered="true" id="select被保険者番号" resultMap="resultMap_Hihokensha" fetchSize="500">
         SELECT DISTINCT SHOKAN."hihokenshaNo"
         FROM "TABLE_SHOKANBARAISHIKYUKETTEIJOHO" AS SHOKAN
     </select>

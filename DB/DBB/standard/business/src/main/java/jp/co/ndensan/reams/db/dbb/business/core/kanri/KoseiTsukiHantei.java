@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.kanri;
 
+import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.SuitoSeiriTaishoNendo;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ZogakuGengakuKubun;
@@ -12,7 +13,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiHyoki;
-import jp.co.ndensan.reams.db.dbx.definition.core.TsukiShorkiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.TsukiShorkiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
@@ -133,5 +134,46 @@ public class KoseiTsukiHantei {
             }
         }
         return 月;
+    }
+
+    /**
+     * パラメータに渡された日付が該当する更正月、期を判定し返します。<BR>
+     * 仮算定期間中の日付が渡された場合、本算定第１期の月・期を返します。
+     *
+     * @param 指定日 年月日
+     * @return 期月
+     * @throws NullPointerException 入力.指定日 がnull の場合、NullPointerExceptionをスローする。
+     */
+    public Kitsuki find更正月_本算定期(RDate 指定日) {
+        Objects.requireNonNull(指定日);
+        Kitsuki kitsuki = find更正月(指定日);
+        RString 普徴期情報_仮算定期数 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_仮算定期数, 指定日, SubGyomuCode.DBB介護賦課);
+
+        int 本算定第１期 = Integer.parseInt(普徴期情報_仮算定期数.toString()) + 1;
+        List<Kitsuki> kitsukiList = new FuchoKiUtil(new FlexibleYear(指定日.getYear().toDateString())).get期月リスト().get期の月(本算定第１期);
+        if (本算定第１期 <= kitsuki.get期AsInt()) {
+            return kitsuki;
+        } else if (!kitsukiList.isEmpty()) {
+            return kitsukiList.get(0);
+        }
+        return new Kitsuki(Tsuki._4月, RString.EMPTY, TsukiShorkiKubun.デフォルト, false, KitsukiHyoki.EMPTY);
+    }
+
+    /**
+     * パラメータに渡された日付が該当する特別徴収の更正月、期を判定し返します。
+     *
+     * @param 指定日 年月日
+     * @return 期月
+     * @throws NullPointerException 入力.指定日 がnull の場合、NullPointerExceptionをスローする。
+     */
+    public Kitsuki find特徴更正月(RDate 指定日) {
+        Objects.requireNonNull(指定日);
+
+        Tsuki tsuki = get月(指定日);
+        if (Tsuki.翌年度4月.equals(tsuki) || Tsuki.翌年度5月.equals(tsuki)) {
+            return new Kitsuki(Tsuki._4月, RString.EMPTY, TsukiShorkiKubun.デフォルト, false, KitsukiHyoki.EMPTY);
+        } else {
+            return new FuchoKiUtil(new FlexibleYear(指定日.getYear().toDateString())).get期月リスト().get月の期(tsuki);
+        }
     }
 }

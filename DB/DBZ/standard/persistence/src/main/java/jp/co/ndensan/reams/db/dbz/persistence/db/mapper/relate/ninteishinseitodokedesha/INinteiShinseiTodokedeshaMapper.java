@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.ninteishinseitodokedesha.Nint
 /**
  * 介護認定申請届出者のマッパーインタフェースです。
  *
- * @reamsid_L DBE-1300-110 yaodongsheng
+ * @reamsid_L DBZ-1300-110 yaodongsheng
  */
 public interface INinteiShinseiTodokedeshaMapper {
 

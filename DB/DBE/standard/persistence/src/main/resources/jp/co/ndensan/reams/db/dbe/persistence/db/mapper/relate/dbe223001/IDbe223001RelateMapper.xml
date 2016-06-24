@@ -24,7 +24,7 @@
         <result property="temp_申請書管理番号" column="temp_申請書管理番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
         <result property="temp_申請区分コード" column="temp_申請区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
     </resultMap>
-    <select id="select要介護認定調査督促状ByKey"
+    <select resultOrdered="true" id="select要介護認定調査督促状ByKey"
             resultMap="resultMap_NinteiChosaTokusokujoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe223001.NinteiChosaTokusokujoMybatisParameter"
             fetchSize="500">
@@ -77,7 +77,7 @@
         <result property="temp_事業者住所" column="temp_事業者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_事業者電話番号" column="temp_事業者電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
     </resultMap>
-    <select id="select認定調査督促対象者一覧表ByKey"
+    <select resultOrdered="true" id="select認定調査督促対象者一覧表ByKey"
             resultMap="resultMap_NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter"
             fetchSize="500">
@@ -164,7 +164,7 @@
         temp_被保険者氏名カナ
     </select>
 
-    <select id="select市町村コード"
+    <select resultOrdered="true" id="select市町村コード"
             resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity"
             parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"
             fetchSize="500">
@@ -176,7 +176,7 @@
         LIMIT 1
     </select>
 
-    <select id="select宛名機関"
+    <select resultOrdered="true" id="select宛名機関"
             resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.AtenaKikan"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter"
             fetchSize="500">
@@ -194,6 +194,19 @@
         DbT5913."ninteiChosaItakusakiCode" = #{temp_認定調査委託先コード}
         AND DbT5913."ninteiChosainCode" = #{temp_認定調査員コード}
         AND DbT5913."shichosonCode" = #{temp_市町村コード}
+    </select>
+
+    <select resultOrdered="true" id="select認定調査依頼情報BY申請書管理番号"  resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.NinteichosaIraiUpdateMybatisParameter" fetchSize="500">
+        SELECT *
+        FEOM rgdb."DbT5201NinteichosaIraiJoho"
+        <if test="申請書管理番号!=null">
+            WHERE
+            "shinseishoKanriNo" IN
+            <foreach item="申請書管理番号" index="index" collection="申請書管理番号" open="(" separator="," close=")">
+                #{申請書管理番号}
+            </foreach>
+        </if>
     </select>
 
 </mapper>

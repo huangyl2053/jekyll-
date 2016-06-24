@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.benmeitoroku;
 
-import jp.co.ndensan.reams.db.dbu.definition.mybatis.param.benmeitoroku.BenmeiTorokuMeisaiJohoParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.benmeitoroku.BenmeiTorokuMeisaiJohoParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.benmeitoroku.BenmeiTorokuMeisaiJohoEntity;
 
 /**

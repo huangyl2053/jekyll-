@@ -5,12 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.ninteishinseitodokedesha;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbz.business.core.dbt4101ninteishinseijoho.DbT4101NinteiShinseiJohoBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.dbt4120shinseitodokedejoho.DbT4120ShinseitodokedeJohoBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.dbt4121shinseirirekijoho.DbT4121ShinseiRirekiJohoBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaBusiness;
+import jp.co.ndensan.reams.db.dbz.business.core.shisetujyoho.KaigoJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ninteishinseitodokedesha.NinteiShinseiTodokedeshaMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
@@ -22,19 +28,22 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4120HokenshaShinseitod
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ninteishinseitodokedesha.INinteiShinseiTodokedeshaMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護認定申請届出者のfinderクラスです。
  *
- * @reamsid_L DBE-1300-110 yaodongsheng
+ * @reamsid_L DBZ-1300-110 yaodongsheng
  */
 public class NinteiShinseiTodokedeshaFinder {
 
     private final DbT4121ShinseiRirekiJohoDac dbT4121dac;
     private final DbT4101NinteiShinseiJohoDac dbT4101dac;
     private final DbT4120HokenshaShinseitodokedeJohoDac dbT4120dac;
+    private final DbT7060KaigoJigyoshaDac dbT7060dac;
     private final MapperProvider mapperProvider;
 
     /**
@@ -44,6 +53,7 @@ public class NinteiShinseiTodokedeshaFinder {
         this.dbT4121dac = InstanceProvider.create(DbT4121ShinseiRirekiJohoDac.class);
         this.dbT4101dac = InstanceProvider.create(DbT4101NinteiShinseiJohoDac.class);
         this.dbT4120dac = InstanceProvider.create(DbT4120HokenshaShinseitodokedeJohoDac.class);
+        this.dbT7060dac = InstanceProvider.create(DbT7060KaigoJigyoshaDac.class);
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
@@ -59,11 +69,13 @@ public class NinteiShinseiTodokedeshaFinder {
             DbT4121ShinseiRirekiJohoDac dbT4121dac,
             DbT4101NinteiShinseiJohoDac dbT4101dac,
             DbT4120HokenshaShinseitodokedeJohoDac dbT4120dac,
-            MapperProvider mapperProvider) {
+            MapperProvider mapperProvider,
+            DbT7060KaigoJigyoshaDac dbT7060dac) {
         this.dbT4121dac = dbT4121dac;
         this.dbT4101dac = dbT4101dac;
         this.dbT4120dac = dbT4120dac;
         this.mapperProvider = mapperProvider;
+        this.dbT7060dac = dbT7060dac;
     }
 
     /**
@@ -136,4 +148,23 @@ public class NinteiShinseiTodokedeshaFinder {
         return null;
     }
 
+    /**
+     * 介護事業者情報を取得します。
+     *
+     * @param 事業者番号 KaigoJigyoshaNo
+     * @param システム日付 FlexibleDate
+     * @return List<KaigoJigyoshaInputGuide> 介護事業者取得リスト
+     */
+    @Transaction
+    public SearchResult<KaigoJigyoshaInputGuide> getKaigoJigyoshaInputGuide(JigyoshaNo 事業者番号, FlexibleDate システム日付) {
+        List<KaigoJigyoshaInputGuide> kaigoJigyoshaList = new ArrayList<>();
+        List<DbT7060KaigoJigyoshaEntity> dbT7060List = dbT7060dac.select介護事業者(事業者番号, システム日付);
+        if (dbT7060List == null || dbT7060List.isEmpty()) {
+            return SearchResult.of(Collections.<KaigoJigyoshaInputGuide>emptyList(), 0, false);
+        }
+        for (DbT7060KaigoJigyoshaEntity entity : dbT7060List) {
+            kaigoJigyoshaList.add(new KaigoJigyoshaInputGuide(entity));
+        }
+        return SearchResult.of(kaigoJigyoshaList, 0, false);
+    }
 }

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 審査会個人別状況照会のマッピング用XMLです。 -->
+<!--@reamsid_L DBE-1380-010 jinjue-->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaitaishosha.IShinsakaiTaishoshaRelateMapper">
+
+    <select id="get予定情報と結果情報" resultMap="resultMap_ShinsakaiTaishoshaRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaitaishosha.ShinsakaiTaishoshaMapperParameter"   fetchSize="500" resultOrdered="true">
+       	SELECT 														
+		A."shinsakaiKaisaiNo" as "shinsakaiKaisaiNo",
+                B."gogitaiMei" as "gogitaiMei",
+                A."shinsakaiYoteiTeiin" as "shinsakaiYoteiTeiin",
+                A."shinsakaiWariateZumiNinzu" as "shinsakaiWariateZumiNinzu",
+                A."ShinsakaiShinchokuJokyo" as "ShinsakaiShinchokuJokyo",
+                C."shinsakaiKaisaiBashoName" as "shinsakaiKaisaiBashoName",
+                C. "shinsakaiKaisaiBashoCode" as  "shinsakaiKaisaiBashoCode",
+                C."shinsakaiKaisaiChikuCode" as "shinsakaiKaisaiChikuCode",
+                A."shinsakaiKaisaiYoteiYMD" as "shinsakaiKaisaiYoteiYMD",
+                A."shinsakaiKaishiYoteiTime" as "shinsakaiKaishiYoteiTime",
+                A."shinsakaiShuryoYoteiTime" as "shinsakaiShuryoYoteiTime",
+                B."gogitaiSeishinkaSonzaiFlag" as "gogitaiSeishinkaSonzaiFlag" ,
+                D."shinsakaiKaisaiYMD" as "shinsakaiKaisaiYMD",
+                D."shinsakaiKaishiTime" as "shinsakaiKaishiTime",
+                D."shinsakaiShuryoTime" as "shinsakaiShuryoTime",
+                D."shoyoJikanGokei" as "shoyoJikanGokei",
+                D."shinsakaiJisshiNinzu" as "shinsakaiJisshiNinzu"
+	FROM 														
+		 rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  AS  A													
+	LEFT JOIN    rgdb."DbT5591GogitaiJoho"  AS B														
+		ON     A."gogitaiNo" = B."gogitaiNo"													
+		AND   B."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> #{時間}
+                AND   #{時間} <![CDATA[<=]]>  B."gogitaiYukoKikanShuryoYMD"							
+	LEFT JOIN    rgdb."DbT5592ShinsakaiKaisaiBashoJoho"  AS C														
+		ON     A."shinsakaiKaisaiYoteiBashoCode"  = C."shinsakaiKaisaiBashoCode"													
+	LEFT JOIN    rgdb."DbT5511ShinsakaiKaisaiKekkaJoho"  AS D														
+		ON     A."shinsakaiKaisaiNo"  = D."shinsakaiKaisaiNo"												
+	LEFT JOIN    rgdb."DbT5592ShinsakaiKaisaiBashoJoho"  AS E														
+		ON     D."shinsakaiKaisaiBashoCode"  = E."shinsakaiKaisaiBashoCode"												
+	WHERE														
+		A."shinsakaiKaisaiNo" = #{審査会開催番号}
+    </select>
+    <resultMap id="resultMap_ShinsakaiTaishoshaRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaitaishosha.ShinsakaiTaishoshaRelateEntity" autoMapping="true">
+        <result property="shinsakaiKaisaiNo" column="shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="gogitaiMei" column="gogitaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiYoteiTeiin" column="shinsakaiYoteiTeiin" />
+        <result property="shinsakaiWariateZumiNinzu" column="shinsakaiWariateZumiNinzu" />
+        <result property="shinsakaiShinchokuJokyo" column="ShinsakaiShinchokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="shinsakaiKaisaiBashoName" column="shinsakaiKaisaiBashoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiKaisaiBashoCode" column="shinsakaiKaisaiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiKaisaiYoteiYMD" column="shinsakaiKaisaiYoteiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinsakaiKaishiYoteiTime" column="shinsakaiKaishiYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiShuryoYoteiTime" column="shinsakaiShuryoYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="gogitaiSeishinkaSonzaiFlag" column="gogitaiSeishinkaSonzaiFlag"  />
+        <result property="shinsakaiKaisaiYMD" column="shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinsakaiKaishiTime" column="shinsakaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiShuryoTime" column="shinsakaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shoyoJikanGokei" column="shoyoJikanGokei"  />
+        <result property="shinsakaiJisshiNinzu" column="shinsakaiJisshiNinzu" />
+        <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="seibetsu" column="seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="hihokenshaKubunCode" column="hihokenshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiShinseiShinseijiKubunCode" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="ninteiShinseiYMD" column="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiOrder" column="shinsakaiOrder" />
+        <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
+        <result property="saiChosaIraiKaisu" column="saiChosaIraiKaisu"  />
+        <result property="saiSakuseiIraiKaisu" column="saiSakuseiIraiKaisu"  />
+        <result property="ichijiHanteiKekkaCode" column="ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="nijiHanteiYokaigoJotaiKubunCode" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="shogaiNichijoSeikatsuJiritsudoCode" column="shogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="ninchishoNichijoSeikatsuJiritsudoCode" column="ninchishoNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="jigyoshaMeisho" column="jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chosainShimei" column="chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="iryoKikanMeisho" column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiName" column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiKaisaiChikuCode" column="shinsakaiKaisaiChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+    </resultMap>
+    <select resultOrdered="true" id="get情報" resultMap="resultMap_ShinsakaiTaishoshaRelateEntity"  parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"  fetchSize="500">
+        SELECT	B."shinsakaiOrder" as "shinsakaiOrder",
+                C."shoKisaiHokenshaNo"  as "shoKisaiHokenshaNo",
+                D."shichosonMeisho" as "shichosonMeisho",
+                C. "hihokenshaNo" as  "hihokenshaNo",
+                C."hihokenshaName" as "hihokenshaName",
+                C."seibetsu" as "seibetsu",
+                C."hihokenshaKubunCode" as "hihokenshaKubunCode",
+                C."ninteiShinseiShinseijiKubunCode" as "ninteiShinseiShinseijiKubunCode",
+                C."ninteiShinseiYMD" as "ninteiShinseiYMD",
+                E."ichijiHanteiKekkaCode" as "ichijiHanteiKekkaCode",
+                F. "nijiHanteiYokaigoJotaiKubunCode" as "nijiHanteiYokaigoJotaiKubunCode",
+                G."shogaiNichijoSeikatsuJiritsudoCode"  as "shogaiNichijoSeikatsuJiritsudoCode" ,
+                G."ninchishoNichijoSeikatsuJiritsudoCode" as "ninchishoNichijoSeikatsuJiritsudoCode",
+                H."jigyoshaMeisho" as "jigyoshaMeisho",
+                I. "chosainShimei" as  "chosainShimei",
+                C."saiChosaIraiKaisu"  as "saiChosaIraiKaisu" ,
+                J."iryoKikanMeisho" as "iryoKikanMeisho",
+                K."shujiiName" as "shujiiName",
+                C."saiSakuseiIraiKaisu" as "saiSakuseiIraiKaisu",
+                B."shinseishoKanriNo"  as "shinseishoKanriNo" 
+	FROM														
+		 rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"   AS  A													
+	LEFT JOIN    rgdb."DbT5502ShinsakaiWariateJoho"  AS B														
+		ON     A."shinsakaiKaisaiNo" = B."shinsakaiKaisaiNo"													
+	LEFT JOIN   rgdb."DbT5101NinteiShinseiJoho"  AS C														
+		ON     B."shinseishoKanriNo" = C."shinseishoKanriNo"													
+	INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster"  AS  D 														
+		ON	 C."shoKisaiHokenshaNo"  =  D."shoKisaiHokenshaNo"												
+	LEFT JOIN   rgdb."DbT5116IchijiHanteiKekkaJoho"  AS E														
+		ON     C."shinseishoKanriNo" = E."shinseishoKanriNo"													
+	LEFT JOIN  rgdb."DbT5102NinteiKekkaJoho"  AS F														
+		ON     C."shinseishoKanriNo" = F."shinseishoKanriNo"													
+	LEFT JOIN   rgdb."DbT5203NinteichosahyoKihonChosa"  AS G														
+		ON     C."shinseishoKanriNo" = G."shinseishoKanriNo"													
+		AND   NOT EXISTS (	SELECT  'X' 									
+					FROM     rgdb."DbT5203NinteichosahyoKihonChosa" AS G1									
+					WHERE    G."shinseishoKanriNo" =G1."shinseishoKanriNo"									
+					AND      G."ninteichosaRirekiNo" <![CDATA[ < ]]> G1."ninteichosaRirekiNo" )									
+	LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho"   AS H														
+		ON    C."ninteiChosaItakusakiCode" = H."ninteichosaItakusakiCode"													
+		AND 	H."shichosonCode" = D."shichosonCode"												
+	LEFT JOIN   rgdb."DbT5913ChosainJoho"   AS I														
+		ON    C."ninteiChosaItakusakiCode" = I."ninteiChosaItakusakiCode"													
+		AND 	C."ninteiChosainCode" = I."ninteiChosainCode"												
+		AND 	I."shichosonCode" = D."shichosonCode"												
+	LEFT JOIN   rgdb."DbT5911ShujiiIryoKikanJoho"   AS J														
+		ON    C."shujiiIryokikanCode" =J."shujiiIryokikanCode"													
+		AND 	J."shichosonCode" = D."shichosonCode"											
+	LEFT JOIN  rgdb."DbT5912ShujiiJoho"  AS K														
+		ON    C."shujiiIryokikanCode" = K."shujiiIryokikanCode"													
+		AND 	C."shujiiCode" =K."shujiiCode"												
+		AND 	K."shichosonCode" = D."shichosonCode"												
+	WHERE														
+		A."shinsakaiKaisaiNo" = #{審査会開催番号}												
+	ORDER  BY   B."shinsakaiKaisaiNo"													
+    </select>
+</mapper>

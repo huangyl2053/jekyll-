@@ -6,11 +6,11 @@ package jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikensho.ShujiiIkenshoBase;
 import jp.co.ndensan.reams.db.dbe.business.helper.ShujiiIkenshoResultMock;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IkenshoDoi;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinteiJohoTeikyoKibo;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShujiiIkenshoIraiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShujiiIkenshoSakuseiKaisu;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
+import jp.co.ndensan.reams.db.dbe.definition.core.IkenshoDoi;
+import jp.co.ndensan.reams.db.dbe.definition.core.NinteiJohoTeikyoKibo;
+import jp.co.ndensan.reams.db.dbe.definition.core.ShujiiIkenshoIraiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.ShujiiIkenshoSakuseiKaisu;
+import jp.co.ndensan.reams.db.dbe.definition.core.ShujiiIkenshoSakuseiryoShubetsu;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;

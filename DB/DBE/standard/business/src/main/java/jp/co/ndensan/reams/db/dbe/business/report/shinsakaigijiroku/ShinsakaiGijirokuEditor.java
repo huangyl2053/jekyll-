@@ -87,5 +87,4 @@ public class ShinsakaiGijirokuEditor implements IShinsakaiGijirokuEditor {
 
         return source;
     }
-
 }

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.roujinhokenjukyushadaichokanrimapper;
 
-import jp.co.ndensan.reams.db.dbu.definition.roujinhokenjukyushadaichokanri.RoujinHokenJukyushaDaichoKanriParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.roujinhokenjukyushadaichokanri.RoujinHokenJukyushaDaichoKanriParameter;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
 /**

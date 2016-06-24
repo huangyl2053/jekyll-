@@ -24,7 +24,7 @@
         <result property="shinryokaName" column="shinryokaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shujiiJokyoFlag" column="shujiiJokyoFlag" />
     </resultMap>
-    <select id="getIkenshoShujiiIchiranRelateEntity"
+    <select resultOrdered="true" id="getIkenshoShujiiIchiranRelateEntity"
             resultMap="resultMap_getIkenshoShujiiIchiranRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ikenshoshujiiichiran.IkenshoShujiiIchiranMybatisParameter"
             fetchSize="500">

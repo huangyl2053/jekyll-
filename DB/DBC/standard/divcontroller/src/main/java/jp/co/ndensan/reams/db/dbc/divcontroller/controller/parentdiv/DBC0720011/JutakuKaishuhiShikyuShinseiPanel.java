@@ -88,9 +88,9 @@ public class JutakuKaishuhiShikyuShinseiPanel {
             if (!resultList.isEmpty() && !viewStateList.isEmpty()) {
                 審査結果の再設定(viewStateList, resultList);
             }
-            申請一覧の表示順(viewStateList);
+            申請一覧の表示順(resultList);
             MishinsaShikyuShinseiListHandler handler = MishinsaShikyuShinseiListHandler.of(div.getMishinsaShikyuShinseiListPanel());
-            handler.initializeDropDownList(viewStateList);
+            handler.initializeDropDownList(resultList);
             if (viewStateList.isEmpty()) {
                 div.getMishinsaShikyuShinseiListPanel().getShinsaButton().getBtnShinsa().setDisabled(Boolean.TRUE);
             }
@@ -134,15 +134,12 @@ public class JutakuKaishuhiShikyuShinseiPanel {
      * @param resultList List<MiShinsaSikyuShinsei>
      */
     private void 審査結果の再設定(List<MiShinsaSikyuShinsei> viewStateList, List<MiShinsaSikyuShinsei> resultList) {
-        for (MiShinsaSikyuShinsei viewState : viewStateList) {
-            for (MiShinsaSikyuShinsei data : resultList) {
+        for (MiShinsaSikyuShinsei data : resultList) {
+            for (MiShinsaSikyuShinsei viewState : viewStateList) {
                 if (viewState.getEntity().get被保険者番号().equals(data.getEntity().get被保険者番号())
                         && viewState.getEntity().getサービス提供年月().equals(data.getEntity().getサービス提供年月())
                         && viewState.getEntity().get整理番号().equals(data.getEntity().get整理番号())) {
-                    ShokanShinsei entity = viewState.getEntity().createBuilderForEdit().set住宅住所変更(data.getEntity().is住宅住所変更())
-                            .set要介護状態３段階変更(data.getEntity().is要介護状態３段階変更())
-                            .set審査結果(data.getEntity().get審査結果()).build();
-                    viewState.setEntity(entity);
+                    viewState.setEntity(data.getEntity());
                 }
             }
         }

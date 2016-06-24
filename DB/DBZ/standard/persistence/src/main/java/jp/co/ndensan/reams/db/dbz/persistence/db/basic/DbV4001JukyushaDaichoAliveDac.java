@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.edaban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.jukyuShinseiJiyu;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.jukyuShinseiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
@@ -20,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import static jp.co.ndensan.reams.uz.uza.util.db.Order.ASC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -137,5 +140,21 @@ public class DbV4001JukyushaDaichoAliveDac implements ISaveable<DbV4001JukyushaD
                 where(
                         eq(hihokenshaNo, 被保険者番号)).
                 toObject(DbV4001JukyushaDaichoEntity.class);
+    }
+
+    /**
+     * 受給者台帳AliveをselectBy被保険者番号For自己作成計画情報。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return DbV4001JukyushaDaichoEntityの{@code list}
+     */
+    @Transaction
+    public List<DbV4001JukyushaDaichoEntity> selectBy被保険者番号For自己作成計画情報(HihokenshaNo 被保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV4001JukyushaDaicho.class).
+                where(eq(hihokenshaNo, 被保険者番号)).order(by(jukyuShinseiYMD, ASC)).limit(1).
+                toList(DbV4001JukyushaDaichoEntity.class);
     }
 }

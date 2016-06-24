@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  * 保険料納入通知書（本算定過年度）【銀振タイプ】帳票項目定義_4期 IHokenryoNonyuTsuchishoGinfuriFourKiBuilder
  *
- * @reamsid_L DBB-9110-150 liangbcW
+ * @reamsid_L DBB-9110-150 liangbc
  */
 public interface IHokenryoNonyuTsuchishoGinfuriFourKiBuilder extends IReportBuilder<HokenryoNonyuTsuchishoGinfuriFourKiSource> {
 

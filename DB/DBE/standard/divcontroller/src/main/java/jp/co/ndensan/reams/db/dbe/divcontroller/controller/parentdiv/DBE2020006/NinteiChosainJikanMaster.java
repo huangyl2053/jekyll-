@@ -608,6 +608,7 @@ public class NinteiChosainJikanMaster {
      */
     public ResponseData<NinteiChosainJikanMasterDiv> onOkClose_btnSenTaKu(NinteiChosainJikanMasterDiv div) {
         getHandler(div).btnNinteiChosaIkkatsuInput();
+        btnNinteiChosaModel(div);
         return ResponseData.of(div).setState(DBE2020006StateName.編集);
     }
 
@@ -1106,5 +1107,159 @@ public class NinteiChosainJikanMaster {
         keyValue.setKey(指定調査地区.getコード().value());
         keyValue.setValue(指定調査地区.getコード名称());
         return keyValue;
+    }
+
+    private void btnNinteiChosaModel(NinteiChosainJikanMasterDiv div) {
+        NinteiChosaIkkatsuInputModel models = DataPassingConverter.deserialize(div.getNinteiChosaIkkatsuInputModel(), NinteiChosaIkkatsuInputModel.class);
+        if (models != null) {
+            List<NinteiChosaIkkatsuInputModel> データ = models.getModelList();
+            if (データ != null) {
+                for (NinteiChosaIkkatsuInputModel model : データ) {
+                    FlexibleDate 設定予定日 = model.get認定調査予定年月日();
+                    RString 時間枠 = model.get認定調査時間枠().getColumnValue();
+                    RString 認定調査予定開始時間 = model.get認定調査予定開始時間();
+                    RString 認定調査予定終了時間 = model.get認定調査予定終了時間();
+                    データ編集(設定予定日, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, div);
+                }
+            }
+        }
+    }
+
+    private void データ編集(
+            FlexibleDate 設定予定日,
+            RString 時間枠,
+            RString 認定調査予定開始時間,
+            RString 認定調査予定終了時間,
+            NinteiChosainJikanMasterDiv div) {
+        Seireki date2 = div.getTxtSettingMonth().getValue().seireki();
+        for (int i = 1; i < (div.getTxtSettingMonth().getValue().getLastDay() + 1); i++) {
+            FlexibleDate 予定日 = new FlexibleDate(
+                    Integer.parseInt(date2.getYear().toString()),
+                    Integer.parseInt(date2.getMonth().toString()), i);
+            if (設定予定日.compareTo(予定日) == 0) {
+                一括設定データ(予定日, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, div);
+            }
+        }
+    }
+
+    private void 一括設定データ(
+            FlexibleDate 予定日,
+            RString 時間枠,
+            RString 認定調査予定開始時間,
+            RString 認定調査予定終了時間,
+            NinteiChosainJikanMasterDiv div) {
+        一括設定時間枠一と一括設定時間枠二(予定日, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, div);
+        一括設定時間枠三と一括設定時間枠四(予定日, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, div);
+        一括設定時間枠五と一括設定時間枠六(予定日, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, div);
+        一括設定時間枠七と一括設定時間枠八(予定日, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, div);
+        一括設定時間枠九と一括設定時間枠十(予定日, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, div);
+    }
+
+    private void 一括設定時間枠一と一括設定時間枠二(FlexibleDate 予定日,
+            RString 時間枠,
+            RString 認定調査予定開始時間,
+            RString 認定調査予定終了時間,
+            NinteiChosainJikanMasterDiv div) {
+        switch (Integer.parseInt(時間枠.toString())) {
+            case 時間枠_1:
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠, div);
+                break;
+            case 時間枠_2:
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠, div);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 一括設定時間枠三と一括設定時間枠四(FlexibleDate 予定日,
+            RString 時間枠,
+            RString 認定調査予定開始時間,
+            RString 認定調査予定終了時間,
+            NinteiChosainJikanMasterDiv div) {
+        switch (Integer.parseInt(時間枠.toString())) {
+            case 時間枠_3:
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠, div);
+                break;
+            case 時間枠_4:
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠, div);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 一括設定時間枠五と一括設定時間枠六(FlexibleDate 予定日,
+            RString 時間枠,
+            RString 認定調査予定開始時間,
+            RString 認定調査予定終了時間,
+            NinteiChosainJikanMasterDiv div) {
+        switch (Integer.parseInt(時間枠.toString())) {
+            case 時間枠_5:
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠, div);
+                break;
+            case 時間枠_6:
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠, div);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 一括設定時間枠七と一括設定時間枠八(FlexibleDate 予定日,
+            RString 時間枠,
+            RString 認定調査予定開始時間,
+            RString 認定調査予定終了時間,
+            NinteiChosainJikanMasterDiv div) {
+        switch (Integer.parseInt(時間枠.toString())) {
+            case 時間枠_7:
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠, div);
+                break;
+            case 時間枠_8:
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠, div);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 一括設定時間枠九と一括設定時間枠十(FlexibleDate 予定日,
+            RString 時間枠,
+            RString 認定調査予定開始時間,
+            RString 認定調査予定終了時間,
+            NinteiChosainJikanMasterDiv div) {
+        switch (Integer.parseInt(時間枠.toString())) {
+            case 時間枠_9:
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠, div);
+                break;
+            case 時間枠_10:
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠, div);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void set一括設定Model(FlexibleDate 予定年月日, RString 認定調査予定開始時間, RString 認定調査予定終了時間, RString 時間枠,
+            NinteiChosainJikanMasterDiv div) {
+
+        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
+        RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
+        RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
+        LasdecCode 市町村コード = new LasdecCode(div.getMainPanel().getSearchConditionPanel().getHiddenShichosonCode());
+        Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels
+                = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.class);
+        NinteichosaSchedule 情報PK = new NinteichosaSchedule(
+                予定年月日,
+                認定調査予定開始時間,
+                認定調査予定終了時間,
+                new Code(時間枠),
+                調査地区コード,
+                認定調査委託先コード,
+                認定調査員コード,
+                市町村コード);
+        ninteichosaModels.add(情報PK.createBuilderForEdit().set予約可能フラグ(true).build());
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.create(ninteichosaModels));
+
     }
 }

@@ -42,7 +42,7 @@
         <result property="最大依頼履歴番号" column="ikenshoIraiRirekiNo"/> 
     </resultMap>
     
-    <select id="get主治医意見書提出依頼書発行" resultMap="resultMap_ShujiiIkenshoTeishutsuIraishoHakko"
+    <select resultOrdered="true" id="get主治医意見書提出依頼書発行" resultMap="resultMap_ShujiiIkenshoTeishutsuIraishoHakko"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoMybitisParamter" fetchSize="500">
         SELECT
             DbT5101."shinseishoKanriNo"

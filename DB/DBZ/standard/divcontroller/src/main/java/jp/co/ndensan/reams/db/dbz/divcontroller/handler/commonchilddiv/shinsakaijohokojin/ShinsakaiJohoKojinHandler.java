@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.shinsaka
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.shinsakaijohokojin.KaisaiKekkaAndBashoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.shinsakaijohokojin.WariateIinAndIinJoho;
@@ -16,7 +17,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinsakaiJ
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinsakaiJohoKojin.ShinsakaiJohoKojin.dgShinsakaiIin_Row;
 import jp.co.ndensan.reams.db.dbz.service.core.shinsakaijohokojin.ShinsakaiJohoKojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -55,7 +55,8 @@ public class ShinsakaiJohoKojinHandler {
         }
         if (kaisai.get介護認定審査会開催地区コード() != null && !kaisai.get介護認定審査会開催地区コード().isEmpty()) {
             div.getTxtShinsakaijoChikuMeisho().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
-                    new CodeShubetsu("5001"), kaisai.get介護認定審査会開催地区コード()));
+                    DBECodeShubetsu.審査会地区コード.getコード(), kaisai.get介護認定審査会開催地区コード()
+            ));
         } else {
             div.getTxtShinsakaijoChikuMeisho().setValue(RString.EMPTY);
         }

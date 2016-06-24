@@ -27,15 +27,15 @@
      "condition": "",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0130011",
-     "toLayoutTitle": "老健受給者番号管理",
-     "toState": "老人保健受給者台帳管理"
+     "toLayoutTitle": "老健受給者番号照会",
+     "toState": "default"
     },
     {
      "id": "3",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBU",
      "layoutName": "DBU0130011",
-     "layoutTitle": "老健受給者番号管理",
+     "layoutTitle": "老健受給者番号照会",
      "eventName": "対象者検索に戻る",
      "destroy": false,
      "condition": "",
@@ -49,10 +49,24 @@
      "type": "end",
      "layoutSubGyomuCode": "DBU",
      "layoutName": "DBU0130011",
-     "layoutTitle": "老健受給者番号管理",
+     "layoutTitle": "老健受給者番号照会",
      "eventName": "完了する",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0130011",
+     "layoutTitle": "老健受給者番号照会",
+     "eventName": "対象者一覧に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
     }
    ]
   }

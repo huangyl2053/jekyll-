@@ -16,8 +16,8 @@
         <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="waritsukesumiKensu" column="Temp_waritsukeCount"/>
     </resultMap>
-    <select id="selectNinnteiChousaItaku" resultMap="result_NinnteiChousairaiEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
+    <select resultOrdered="true" id="selectNinnteiChousaItaku" resultMap="result_NinnteiChousairaiEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
         SELECT
         DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode" AS Temp_ninteichosaItakusakiCode
         , DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho" AS Temp_jigyoshaMeisho
@@ -107,8 +107,8 @@
         <result property="waritsukesumiKensu" column="Temp_waritsukeCount"/>
         <result property="chosaKanoNinzuPerMonth" column="chosaKanoNinzuPerMonth" />
     </resultMap>
-    <select id="selectChousaIn" resultMap="result_ChousaIn"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
+    <select resultOrdered="true" id="selectChousaIn" resultMap="result_ChousaIn"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
         SELECT
         DbT5913ChosainJoho."ninteiChosainCode" AS Temp_ninteiChosainCode
         , DbT5913ChosainJoho."chosainShimei" AS Temp_chosainShimei
@@ -223,6 +223,7 @@
         <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo"/>
         <result property="hokenshaNo" column="hokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteiChosaItakusakiCode" column="ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="renrakusakiTuzukigara" column="renrakusakiTuzukigara" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="renrakusakiYubinNo" column="renrakusakiYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="renrakusakiJusho" column="renrakusakiJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
@@ -230,8 +231,8 @@
         <result property="renrakusakiKeitaiTelNo" column="renrakusakiKeitaiTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="renrakusakiShimei" column="renrakusakiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
-    <select id="getWaritsuke" resultMap="result_WaritsukeEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
+    <select resultOrdered="true" id="getWaritsuke" resultMap="result_WaritsukeEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
         SELECT
         dbT5101."koroshoIfShikibetsuCode"         AS "koroshoIfShikibetsuCode"
         ,dbT5101."hihokenshaNo"                    AS "hihokenshaNo"
@@ -258,10 +259,8 @@
         ,dbT5201."ninteichosaKigenYMD"             AS "ninteichosaKigenYMD"
         ,dbT5201."iraishoShutsuryokuYMD"           AS "iraishoShutsuryokuYMD"
         ,dbT5201."chosahyoTouShutsuryokuYMD"       AS "chosahyoTouShutsuryokuYMD"
-        ,dbT5910."waritsukeTeiin"                  AS "waritsukeTeiin"
         ,dbT5911."iryoKikanMeisho"                 AS "iryoKikanMeisho"
         ,dbT5912."shujiiName"                      AS "shujiiName"
-        ,dbT5913."chosaKanoNinzuPerMonth"          AS "chosaKanoNinzuPerMonth"
         ,dbT5910Zenkai."jigyoshaMeisho"            AS "Temp_jigyoshaMeisho"
         ,dbT5911Zenkai."iryoKikanMeisho"           AS "Temp_iryoKikanMeisho"
         ,dbT5912Zenkai."shujiiName"                AS "Temp_shujiiName"
@@ -269,9 +268,10 @@
         ,dbT5105."ninteichosaKanryoYMD"            AS  "ninteichosaKanryoYMD"
         ,dbT5101."shinseishoKanriNo"               AS "shinseishoKanriNo"
         ,dbT5201Waritukezumi."ninteichosaIraiRirekiNo"         AS "ninteichosaIraiRirekiNo"
-        ,dbT5101."ninteiChosainCode" AS "ninteiChosainCode"
+        ,dbT5201."ninteiChosainCode" AS "ninteiChosainCode"
         ,dbT5101."shoKisaiHokenshaNo" AS "hokenshaNo"
         ,dbT5201."ninteichosaItakusakiCode" AS "ninteichosaItakusakiCode"
+        ,dbT5913."shichosonCode" AS "shichosonCode"
         ,G."renrakusakiShimei" AS "renrakusakiShimei"
         ,G."renrakusakiYubinNo" AS "renrakusakiYubinNo"
         ,G."renrakusakiTelNo" AS "renrakusakiTelNo"
@@ -318,7 +318,7 @@
         AND dbT5913."ninteiChosainCode" = dbT5101."ninteiChosainCode"
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbT5910
         ON dbT5910."shichosonCode" = dbT7051."shichosonCode"
-        AND dbT5910."ninteichosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
+        AND dbT5910."ninteichosaItakusakiCode" = dbT5913."ninteiChosaItakusakiCode"
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911
         ON
         dbT5911."shichosonCode" IN (
@@ -397,7 +397,7 @@
                      SELECT 'X' 
                      FROM rgdb."DbT5150RenrakusakiJoho" AS G1
                      WHERE  G."shinseishoKanriNo" = G1."shinseishoKanriNo"
-                     AND G.renban = G1.renban
+                     AND G.renban <![CDATA[<]]> G1.renban
         )
         WHERE
         dbT5101."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
@@ -420,8 +420,8 @@
         <collection property="ninteichosaIraiJohoEntity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity"/>
     </resultMap>
 
-    <select id="getNinteichosaIraiJohoList" resultMap="getNinteichosaIraiJohoList_resultMap"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
+    <select resultOrdered="true" id="getNinteichosaIraiJohoList" resultMap="getNinteichosaIraiJohoList_resultMap"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
         SELECT
         DbT5105NinteiKanryoJoho.*,
         NinteichosaIraiJoho.*
@@ -631,8 +631,8 @@
         <result property="ninteiChosainCode" column="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />
     </resultMap>
-    <select id="getShiteWaritsuke" resultMap="result_ShiteWaritsukeEntity"
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
+    <select resultOrdered="true" id="getShiteWaritsuke" resultMap="result_ShiteWaritsukeEntity"
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
         SELECT
         dbT5101."koroshoIfShikibetsuCode" AS "koroshoIfShikibetsuCode"
         , dbT5101."hihokenshaNo" AS "hihokenshaNo"
@@ -761,8 +761,8 @@
         <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />
         <result property="ninteiChosainCode" column="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select id="getShiteWaritsukeSai" resultMap="result_ShiteWaritsukeSaiEntity"
-                 parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
+    <select resultOrdered="true" id="getShiteWaritsukeSai" resultMap="result_ShiteWaritsukeSaiEntity"
+                 parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
         SELECT
         dbT5101."koroshoIfShikibetsuCode" AS "koroshoIfShikibetsuCode"
         , dbT5101."hihokenshaNo" AS "hihokenshaNo"
@@ -884,7 +884,7 @@
         dbT5101."chosaKubun"
     </select>
 
-    <select id="getNinteichosaIraiJoho" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity"
+    <select resultOrdered="true" id="getNinteichosaIraiJoho" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity"
                     parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT
         DbT5201NinteichosaIraiJoho.*
@@ -911,8 +911,8 @@
         <result property="ninchishoSeikatsuJiritsudo" column="ninchishoSeikatsuJiritsudo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shogaiSeikatsuJiritsudo" column="shogaiSeikatsuJiritsudo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select id="get認定調査票差異チェック票情報" resultMap="result_SaiChekkuhyoEntity"
-                    parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.SaiChekkuhyoParameter" fetchSize="500">
+    <select resultOrdered="true" id="get認定調査票差異チェック票情報" resultMap="result_SaiChekkuhyoEntity"
+                    parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairai.SaiChekkuhyoParameter" fetchSize="500">
         SELECT 
              DbT5116IchijiHanteiKekkaJoho."ichijiHanteiKekkaCode" AS "ichijiHanteiKekkaCode"
             ,DbT5102NinteiKekkaJoho."nijiHanteiYMD" AS "nijiHanteiYMD"

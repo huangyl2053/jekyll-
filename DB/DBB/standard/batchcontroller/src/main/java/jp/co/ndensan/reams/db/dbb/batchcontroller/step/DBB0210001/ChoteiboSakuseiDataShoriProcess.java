@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.DanKai;
 import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.DankaiChoteigakuShokei;
 import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.DankaiGokeigo;
@@ -47,7 +48,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
@@ -93,7 +93,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
     private static final RString 仮算定 = new RString("1");
     private IChoteiboSakuseiMapper choteiboSakuseiMapper;
     private ChoteiboProcessParameter parameter;
-    
+
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
@@ -167,14 +167,14 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
             YMDHMS 終了調定日時) {
         insert期別情報一時テーブル(調定年度, 賦課年度, 開始調定日時, 終了調定日時);
         insert段階情報一時テーブル(調定年度, 賦課年度, 開始調定日時, 終了調定日時);
-        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.code(), 当月, 仮算定);
-        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.code(), 当月, 本算定);
-        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.code(), 前月, 仮算定);
-        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.code(), 前月, 本算定);
-        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(), 当月, 仮算定);
-        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(), 当月, 本算定);
-        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(), 前月, 仮算定);
-        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(), 前月, 本算定);
+        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.getコード(), 当月, 仮算定);
+        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.getコード(), 当月, 本算定);
+        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.getコード(), 前月, 仮算定);
+        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.getコード(), 前月, 本算定);
+        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.getコード(), 当月, 仮算定);
+        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.getコード(), 当月, 本算定);
+        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.getコード(), 前月, 仮算定);
+        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.getコード(), 前月, 本算定);
 
         update内併徴者数(調定年度, 賦課年度, 仮算定);
         update内併徴者数(調定年度, 賦課年度, 本算定);
@@ -417,9 +417,9 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
             } else if (当月フラグ == 前月) {
                 dankaiShokeiEntity.setZengetsusueKensu(entity.getDankaiKensu());
             }
-            if (ChoshuHohoKibetsu.特別徴収.code().equals(徴収方法) && 当月フラグ == 当月) {
+            if (ChoshuHohoKibetsu.特別徴収.getコード().equals(徴収方法) && 当月フラグ == 当月) {
                 dankaiShokeiEntity.setTokuchosyaKensu(entity.getDankaiKensu());
-            } else if (ChoshuHohoKibetsu.普通徴収.code().equals(徴収方法) && 当月フラグ == 当月) {
+            } else if (ChoshuHohoKibetsu.普通徴収.getコード().equals(徴収方法) && 当月フラグ == 当月) {
                 dankaiShokeiEntity.setFuchosyaKensu(entity.getDankaiKensu());
             }
             choteiboSakuseiMapper.insertTmpDankaiShokei(dankaiShokeiEntity);
@@ -788,7 +788,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_DANNENDO.toString(), 当年度);
         param.put(KEY_ZENNENDO.toString(), 前年度);
         param.put(KEY_ZENZENNENDO.toString(), 前々年度);
-        param.put(KEY_CHUSHUHOUHOU.toString(), ChoshuHohoKibetsu.特別徴収.code());
+        param.put(KEY_CHUSHUHOUHOU.toString(), ChoshuHohoKibetsu.特別徴収.getコード());
 
         List<TokuchoKibetusDataEntity> tokuchoKibetusDataList = choteiboSakuseiMapper.select特徴期別のデータ(param);
         for (TokuchoKibetusDataEntity entity : tokuchoKibetusDataList) {
@@ -823,7 +823,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_DANNENDO.toString(), 当年度);
         param.put(KEY_ZENNENDO.toString(), 前年度);
         param.put(KEY_ZENZENNENDO.toString(), 前々年度);
-        param.put(KEY_CHUSHUHOUHOU.toString(), ChoshuHohoKibetsu.普通徴収.code());
+        param.put(KEY_CHUSHUHOUHOU.toString(), ChoshuHohoKibetsu.普通徴収.getコード());
 
         List<KibetsuShokeiEntity> kibetsuShokeiList = choteiboSakuseiMapper.select普徴期別小計情報(param);
         List<KibetsuShokeiGokeiEntity> kibetsuShokeiGokeiList = choteiboSakuseiMapper.select期別小計の合計情報(param);
@@ -832,7 +832,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         KanendoKiUtil 月期対応取得_過年度 = new KanendoKiUtil(当年度);
         KitsukiList 期月リスト_過年度 = 月期対応取得_過年度.get期月リスト();
         GokeiBubunEntity gokeiBubunEntity = new GokeiBubunEntity();
-        gokeiBubunEntity.setChoshuHouhou(ChoshuHohoKibetsu.普通徴収.code());
+        gokeiBubunEntity.setChoshuHouhou(ChoshuHohoKibetsu.普通徴収.getコード());
         for (KibetsuShokeiEntity entity : kibetsuShokeiList) {
             int 期 = 期月リスト_普徴.get月の期(Tsuki._4月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._4月, entity.get調定額の小計By期別(期));

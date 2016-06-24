@@ -13,11 +13,11 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyot
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.KibetsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 賦課の情報を管理するクラスです。
  *
- * @reamsid_L DBB-9999-013 huangh
+ * @reamsid_L DBB-9999-013 xicongwang
  */
 public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEntity, FukaJoho> implements Serializable {
 
@@ -909,6 +909,44 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
     }
 
     /**
+     * 調定IDを返します。
+     *
+     * @return 調定ID List<Long>
+     */
+    public List<Long> get調定ID() {
+
+        if (kibetsu == null || kibetsu.values() == null || kibetsu.values().isEmpty()) {
+            return null;
+        }
+        List<Long> 調定IDList = new ArrayList<>();
+        List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
+        for (Kibetsu 介護期別 : 介護期別List) {
+            ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(介護期別.get調定ID().longValue());
+            調定IDList.add(介護期別.getChoteiKyotsu(identifier).get調定ID());
+        }
+        return 調定IDList;
+    }
+
+    /**
+     * 収納IDを返します。
+     *
+     * @return 収納ID List<Long>
+     */
+    public List<Long> get収納ID() {
+
+        if (kibetsu == null || kibetsu.values() == null || kibetsu.values().isEmpty()) {
+            return null;
+        }
+        List<Long> 収納IDList = new ArrayList<>();
+        List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
+        for (Kibetsu 介護期別 : 介護期別List) {
+            ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(介護期別.get調定ID().longValue());
+            収納IDList.add(介護期別.getChoteiKyotsu(identifier).get収納ID());
+        }
+        return 収納IDList;
+    }
+
+    /**
      * 期別金額を返します。
      *
      * @param 期 int
@@ -918,7 +956,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
     private Decimal get期別金額(int 期, RString 徴収方法期別) {
 
         if (kibetsu == null || kibetsu.values() == null || kibetsu.values().isEmpty()) {
-            return Decimal.ZERO;
+            return null;
         }
         List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
         for (Kibetsu 介護期別 : 介護期別List) {
@@ -929,7 +967,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
                 return 介護期別.getChoteiKyotsu(identifier).get調定額();
             }
         }
-        return Decimal.ZERO;
+        return null;
     }
 
     /**

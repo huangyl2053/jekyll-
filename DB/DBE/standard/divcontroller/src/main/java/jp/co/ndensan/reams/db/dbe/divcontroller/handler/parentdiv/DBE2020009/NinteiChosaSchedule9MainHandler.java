@@ -18,10 +18,12 @@ import jp.co.ndensan.reams.db.dbe.business.report.chosaschedulehyojikankanri.Cho
 import jp.co.ndensan.reams.db.dbe.business.report.chosaschedulehyotyousayin.ChosaSchedulehyoTyousayinBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.chosaschedulehyotyousayin.ChosaSchedulehyoTyousayinHeadItem;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020009.NinteiChosaSchedule9MainDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChosainJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaItakusakiJoho;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -37,7 +39,6 @@ public class NinteiChosaSchedule9MainHandler {
 
     private final NinteiChosaSchedule9MainDiv div;
     private final RString 全て = new RString("0");
-    private static final CodeShubetsu コード種別 = new CodeShubetsu("5002");
 
     /**
      * コンストラクタです。
@@ -126,7 +127,8 @@ public class NinteiChosaSchedule9MainHandler {
     private List<KeyValueDataSource> 調査地区ドロップダウンリスト() {
 
         List<KeyValueDataSource> dataSource = new ArrayList();
-        List<UzT0007CodeEntity> 指定調査地区 = CodeMaster.getCode(SubGyomuCode.DBE認定支援, コード種別);
+        List<UzT0007CodeEntity> 指定調査地区 = CodeMaster.getCode(SubGyomuCode.DBE認定支援,
+                DBECodeShubetsu.調査地区コード.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
         for (UzT0007CodeEntity entity : 指定調査地区) {
 
             KeyValueDataSource keyValue = new KeyValueDataSource();
@@ -160,7 +162,7 @@ public class NinteiChosaSchedule9MainHandler {
         for (ChosainJoho entity : 対象認定調査員) {
 
             KeyValueDataSource keyValue = new KeyValueDataSource();
-            keyValue.setKey(entity.get認定調査員コード().value());
+            keyValue.setKey(entity.get認定調査員コード());
             keyValue.setValue(entity.get調査員氏名());
 
             dataSource.add(keyValue);

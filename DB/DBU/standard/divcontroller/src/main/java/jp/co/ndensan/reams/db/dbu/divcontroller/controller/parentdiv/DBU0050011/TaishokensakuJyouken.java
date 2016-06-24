@@ -36,7 +36,9 @@ public class TaishokensakuJyouken {
      * @return 介護保険特別会計経理状況登録_検索情報Divを持つResponseData
      */
     public ResponseData<TaishokensakuJyoukenDiv> onload(TaishokensakuJyoukenDiv div) {
-        getHandler(div).onload();
+        Boolean is詳細画面から = ViewStateHolder.get(ViewStateKey.is詳細画面から, Boolean.class);
+        RString 市町村名称 = ViewStateHolder.get(TaishokensakuJyoukenHandler.DBU0050011ViewStateKey.選択市町村名称, RString.class);
+        getHandler(div).onload(is詳細画面から, 市町村名称);
         return ResponseData.of(div).respond();
     }
 
@@ -136,7 +138,15 @@ public class TaishokensakuJyouken {
         /**
          * 介護保険特別会計経理状況登録_様式４の３の画面に遷移です。
          */
-        様式４の３;
+        様式４の３,
+        /**
+         * is詳細画面からです。
+         */
+        is詳細画面から,
+        /**
+         * 遷移前の選択市町村名称です。
+         */
+        選択市町村名称;
     }
 
 }

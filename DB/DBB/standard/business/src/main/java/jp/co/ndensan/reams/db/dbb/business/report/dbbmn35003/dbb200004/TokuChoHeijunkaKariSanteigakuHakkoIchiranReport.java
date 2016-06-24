@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200004.TokuChoHeij
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.kingaku.IKingakuFormatter;
 import jp.co.ndensan.reams.ur.urz.business.core.kingaku.KingakuFormatter;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.kingaku.KingakuUnit;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -32,54 +34,29 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReport
         extends Report<TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource> {
 
     private final List<EditedKariSanteiTsuchiShoKyotsu> editedDataList;
+    private final IOutputOrder outputOrder;
     private static final int INDEX_0 = 0;
+    private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
     private static final int INDEX_5 = 5;
     private static final int INDEX_6 = 6;
     private static final int INDEX_8 = 8;
-    private final RString 出力順１;
-    private final RString 出力順２;
-    private final RString 出力順３;
-    private final RString 出力順４;
-    private final RString 出力順５;
-    private final RString 改頁１;
-    private final RString 改頁２;
-    private final RString 改頁３;
-    private final RString 改頁４;
-    private final RString 改頁５;
+
     private final RDateTime 帳票作成日時;
 
     /**
      * コンストラクタです。
      *
      * @param editedDataList 編集後仮算定通知書共通情報entityのリスト
-     * @param 改頁１ 改頁１
-     * @param 改頁２ 改頁２
-     * @param 改頁３ 改頁３
-     * @param 改頁４ 改頁４
-     * @param 改頁５ 改頁５
-     * @param 出力順１ 出力順１
-     * @param 出力順２ 出力順２
-     * @param 出力順３ 出力順３
-     * @param 出力順４ 出力順４
-     * @param 出力順５ 出力順５
+     * @param outputOrder outputOrder
      * @param 帳票作成日時 帳票作成日時
      */
     public TokuChoHeijunkaKariSanteigakuHakkoIchiranReport(List<EditedKariSanteiTsuchiShoKyotsu> editedDataList,
-            RString 改頁１, RString 改頁２, RString 改頁３, RString 改頁４, RString 改頁５,
-            RString 出力順１, RString 出力順２, RString 出力順３, RString 出力順４, RString 出力順５, RDateTime 帳票作成日時) {
+            IOutputOrder outputOrder, RDateTime 帳票作成日時) {
         this.editedDataList = editedDataList != null ? editedDataList : new ArrayList<EditedKariSanteiTsuchiShoKyotsu>();
-        this.出力順１ = 出力順１;
-        this.出力順２ = 出力順２;
-        this.出力順３ = 出力順３;
-        this.出力順４ = 出力順４;
-        this.出力順５ = 出力順５;
-        this.改頁１ = 改頁１;
-        this.改頁２ = 改頁２;
-        this.改頁３ = 改頁３;
-        this.改頁４ = 改頁４;
-        this.改頁５ = 改頁５;
+        this.outputOrder = outputOrder;
         this.帳票作成日時 = 帳票作成日時;
     }
 
@@ -88,7 +65,7 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReport
         int 連番 = 1;
         for (EditedKariSanteiTsuchiShoKyotsu editedData : editedDataList) {
             TokuChoHeijunkaKariSanteigakuHakkoIchiranItem item = new TokuChoHeijunkaKariSanteigakuHakkoIchiranItem();
-            setHeader(editedData, item);
+            setHeader(editedData, item, outputOrder);
             setBody(editedData, item, 連番);
             ITokuChoHeijunkaKariSanteigakuHakkoIchiranEditor headerEditor = new TokuChoHeijunkaKariSanteigakuHakkoIchiranHeaderEditor(item);
             ITokuChoHeijunkaKariSanteigakuHakkoIchiranEditor hyojiBodyEditor = new TokuChoHeijunkaKariSanteigakuHakkoIchiranBodyEditor(item);
@@ -99,7 +76,56 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReport
         }
     }
 
-    private void setHeader(EditedKariSanteiTsuchiShoKyotsu editedData, TokuChoHeijunkaKariSanteigakuHakkoIchiranItem item) {
+    private void setHeader(EditedKariSanteiTsuchiShoKyotsu editedData, TokuChoHeijunkaKariSanteigakuHakkoIchiranItem item, IOutputOrder outputOrder) {
+
+        RString 改頁１ = RString.EMPTY;
+        RString 改頁２ = RString.EMPTY;
+        RString 改頁３ = RString.EMPTY;
+        RString 改頁４ = RString.EMPTY;
+        RString 改頁５ = RString.EMPTY;
+        RString 出力順１ = RString.EMPTY;
+        RString 出力順２ = RString.EMPTY;
+        RString 出力順３ = RString.EMPTY;
+        RString 出力順４ = RString.EMPTY;
+        RString 出力順５ = RString.EMPTY;
+
+        List<ISetSortItem> list = outputOrder.get設定項目リスト();
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+
+        if (list.size() > INDEX_0 && list.get(INDEX_0).is改頁項目()) {
+            改頁１ = list.get(0).get項目名();
+        }
+        if (list.size() > INDEX_1 && list.get(INDEX_1).is改頁項目()) {
+            改頁２ = list.get(INDEX_1).get項目名();
+        }
+        if (list.size() > INDEX_2 && list.get(INDEX_2).is改頁項目()) {
+            改頁３ = list.get(INDEX_2).get項目名();
+        }
+        if (list.size() > INDEX_3 && list.get(INDEX_3).is改頁項目()) {
+            改頁４ = list.get(INDEX_3).get項目名();
+        }
+        if (list.size() > INDEX_4 && list.get(INDEX_4).is改頁項目()) {
+            改頁５ = list.get(INDEX_4).get項目名();
+        }
+
+        if (list.size() > INDEX_0) {
+            出力順１ = list.get(INDEX_0).get項目名();
+        }
+        if (list.size() > INDEX_1) {
+            出力順２ = list.get(INDEX_1).get項目名();
+        }
+        if (list.size() > INDEX_2) {
+            出力順３ = list.get(INDEX_2).get項目名();
+        }
+        if (list.size() > INDEX_3) {
+            出力順４ = list.get(INDEX_3).get項目名();
+        }
+        if (list.size() > INDEX_4) {
+            出力順５ = list.get(INDEX_4).get項目名();
+        }
+
         RTime time = 帳票作成日時.getTime();
         RString hour = new RString(time.toString()).substring(INDEX_0, INDEX_2);
         RString min = new RString(time.toString()).substring(INDEX_3, INDEX_5);

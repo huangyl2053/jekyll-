@@ -10,10 +10,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.iryohokenkanyujokyo.IryohokenKanyuJokyo;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.iryohokenkanyujokyo.IryohokenKanyuJokyoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.iryohokenkanyujokyo.IryohokenKanyuJokyoIdentifier;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.service.core.iryohokenkanyujokyo.IryohokenKanyuJokyoManager;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -43,7 +43,6 @@ public class IryohokenRirekiHandler {
     private static final RString 状態_登録 = new RString("登録");
     private static final RString 状態_追加 = new RString("追加");
     private static final RString コロン = new RString(":");
-    private static final CodeShubetsu コード = new CodeShubetsu("0001");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
 
@@ -64,14 +63,16 @@ public class IryohokenRirekiHandler {
      * @param 識別コード 識別コード
      */
     public void initialize(RString 状態, RString 識別コード) {
-        List<UzT0007CodeEntity> entityList = CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu(new RString("0001")));
+        List<UzT0007CodeEntity> entityList = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                DBACodeShubetsu.医療保険種類.getCodeShubetsu(), FlexibleDate.getNowDate());
         List<KeyValueDataSource> keyvalueList = new ArrayList<>();
         for (UzT0007CodeEntity codeEntity : entityList) {
             keyvalueList.add(new KeyValueDataSource(codeEntity.getコード().getKey(), codeEntity.getコード名称()));
         }
         div.getPnlIryohokenJoho().getDdlSyubetsu().setDataSource(keyvalueList);
 
-        SearchResult<IryohokenKanyuJokyo> iryohokenkanyuList = IryohokenKanyuJokyoManager.createInstance().getIryoHokenJohoList(new ShikibetsuCode(識別コード));
+        SearchResult<IryohokenKanyuJokyo> iryohokenkanyuList = IryohokenKanyuJokyoManager.createInstance().
+                getIryoHokenJohoList(new ShikibetsuCode(識別コード));
         Models<IryohokenKanyuJokyoIdentifier, IryohokenKanyuJokyo> 医療保険情報 = Models.create(iryohokenkanyuList.records());
         ViewStateHolder.put(ViewStateKeys.医療保険情報, 医療保険情報);
 
@@ -84,7 +85,8 @@ public class IryohokenRirekiHandler {
                 Ichiran_Row.setDefaultDataName1(jigyoshaInput.get市町村コード().value());
                 Ichiran_Row.setDefaultDataName3(jigyoshaInput.get医療保険加入年月日().wareki().toDateString());
                 Ichiran_Row.setDefaultDataName4(jigyoshaInput.get医療保険脱退年月日().wareki().toDateString());
-                Ichiran_Row.setDefaultDataName5(CodeMaster.getCodeMeisho(コード, new Code(jigyoshaInput.get医療保険種別コード())));
+                Ichiran_Row.setDefaultDataName5(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.医療保険種類.getCodeShubetsu(),
+                        new Code(jigyoshaInput.get医療保険種別コード()), FlexibleDate.getNowDate()));
                 Ichiran_Row.setDefaultDataName8(jigyoshaInput.get医療保険者番号());
                 Ichiran_Row.setDefaultDataName6(jigyoshaInput.get医療保険者名称());
                 Ichiran_Row.setDefaultDataName7(jigyoshaInput.get医療保険記号番号());

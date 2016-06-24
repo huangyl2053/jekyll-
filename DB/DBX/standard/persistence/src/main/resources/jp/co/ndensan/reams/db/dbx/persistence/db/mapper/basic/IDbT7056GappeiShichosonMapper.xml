@@ -68,7 +68,7 @@
         <result property="hyojiUmu" column="dbT7056GappeiShichoson_hyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <select id="getEntity" resultMap="ResultMap_DbT7056GappeiShichosonEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7056GappeiShichosonEntity">
         SELECT
         <include refid="allColumns_DbT7056GappeiShichoson"/>
         FROM

@@ -33,8 +33,6 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -57,15 +55,13 @@ public class RoUReiFuKuShiNenKin {
     public ResponseData<RoUReiFuKuShiNenKinDiv> onLoad(RoUReiFuKuShiNenKinDiv div) {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード();
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号();
-        div.getKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        div.getKihonJoho().getCcdKaigoShikakuKihon().onLoad(識別コード);
+        div.getKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
+        div.getKihonJoho().getCcdKaigoShikakuKihon().initialize(識別コード);
         div.getRoreiFukushiNenkinJohoList().getCcdRoreiFukushiNenkinRireki().initialize(識別コード, 被保険者番号);
         アクセスログ(AccessLogType.照会, 識別コード);
         if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
             div.setReadOnly(true);
-            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            validationMessages.add(new ValidationMessageControlPair(TekiyoJogaiTotalErrorMessage.排他_他のユーザが使用中));
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
         }
         return ResponseData.of(div).setState(DBU0110011StateName.初期状態);
     }

@@ -8,7 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirai.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirai.shujiiikenshoiraijoho.ShujiiIkenshoIraiJoho;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoirai.ninteishinseijoho.NinteiShinseiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoirai.ninteishinseijoho.NinteiShinseiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoirai.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoirai.ninteishinseijoho.INinteiShinseiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;

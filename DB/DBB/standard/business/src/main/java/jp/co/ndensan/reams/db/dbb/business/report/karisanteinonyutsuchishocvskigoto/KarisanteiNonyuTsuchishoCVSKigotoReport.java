@@ -7,12 +7,13 @@ package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvski
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.HenshuHaniKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvskigoto.KarisanteiNonyuTsuchishoCVSKigotoSource;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
@@ -22,46 +23,48 @@ import lombok.NonNull;
  *
  * @reamsid_L DBB-9110-070 wangjie2
  */
-public class KarisanteiNonyuTsuchishoCVSKigotoReport extends Report<KarisanteiNonyuTsuchishoCVSKigotoSource> {
+public class KarisanteiNonyuTsuchishoCVSKigotoReport extends INonyuTsuchisho<KarisanteiNonyuTsuchishoCVSKigotoSource> {
 
-    private final KarisanteiNonyuTsuchishoCVSKigotoItem item;
+    private final KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報;
+    private final NinshoshaSource ninshoshaSource;
 
     /**
      * コンストラクタです。
      *
-     * @param item KarisanteiNonyuTsuchishoCVSKigotoItem
+     * @param 仮算定納入通知書情報 仮算定納入通知書情報
+     * @param ninshoshaSource 認証者情報
      */
-    protected KarisanteiNonyuTsuchishoCVSKigotoReport(KarisanteiNonyuTsuchishoCVSKigotoItem item) {
-        this.item = item;
+    protected KarisanteiNonyuTsuchishoCVSKigotoReport(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報,
+            NinshoshaSource ninshoshaSource) {
+        this.仮算定納入通知書情報 = 仮算定納入通知書情報;
+        this.ninshoshaSource = ninshoshaSource;
     }
 
     /**
      *
-     * @param item KarisanteiNonyuTsuchishoCVSKigotoItem
+     * @param 仮算定納入通知書情報 仮算定納入通知書情報
+     * @param ninshoshaSource 認証者情報
      * @return KarisanteiNonyuTsuchishoCVSKigotoReport
      * @throws NullPointerException 引数が{@code null}の時
      */
-    public static KarisanteiNonyuTsuchishoCVSKigotoReport createFrom(@NonNull KarisanteiNonyuTsuchishoCVSKigotoItem item) {
-        return new KarisanteiNonyuTsuchishoCVSKigotoReport(item);
+    public static KarisanteiNonyuTsuchishoCVSKigotoReport createFrom(
+            @NonNull KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, NinshoshaSource ninshoshaSource) {
+        return new KarisanteiNonyuTsuchishoCVSKigotoReport(仮算定納入通知書情報, ninshoshaSource);
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KarisanteiNonyuTsuchishoCVSKigotoSource> reportSourceWriter) {
-        KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報 = item.get仮算定納入通知書情報();
-        if (null == 仮算定納入通知書情報) {
-            仮算定納入通知書情報 = new KariSanteiNonyuTsuchiShoJoho();
-        }
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 仮算定納入通知書情報.get納入通知書期情報リスト();
-        if (納入通知書期情報リスト.isEmpty()) {
+        if (null == 納入通知書期情報リスト) {
             納入通知書期情報リスト = new ArrayList<>();
         }
         int 連番 = 1;
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
-            if (納入通知書期情報.get納付額().compareTo(Decimal.ZERO) <= 0) {
+            if (null == 納入通知書期情報.get納付額() || 納入通知書期情報.get納付額().compareTo(Decimal.ZERO) <= 0) {
                 continue;
             }
             IKarisanteiNonyuTsuchishoCVSKigotoEditor editor
-                    = new KarisanteiNonyuTsuchishoCVSKigotoEditor(item, 連番);
+                    = new KarisanteiNonyuTsuchishoCVSKigotoEditor(仮算定納入通知書情報, ninshoshaSource, 納入通知書期情報, 連番);
             IKarisanteiNonyuTsuchishoCVSKigotoBuilder builder = new KarisanteiNonyuTsuchishoCVSKigotoBuilder(editor);
             reportSourceWriter.writeLine(builder);
             連番++;
@@ -73,13 +76,9 @@ public class KarisanteiNonyuTsuchishoCVSKigotoReport extends Report<KarisanteiNo
      *
      * @return List<KarisanteiNonyuTsuchishoCVSKigotoReport>
      */
-    public List<KarisanteiNonyuTsuchishoCVSKigotoReport> devidedByPage() {
-        //TODO
-        List<KarisanteiNonyuTsuchishoCVSKigotoReport> reportLst = new ArrayList<>();
-        KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報 = item.get仮算定納入通知書情報();
-        if (null == 仮算定納入通知書情報) {
-            仮算定納入通知書情報 = new KariSanteiNonyuTsuchiShoJoho();
-        }
+    @Override
+    public List<INonyuTsuchisho> devidedByPage() {
+        List<INonyuTsuchisho> reportLst = new ArrayList<>();
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 仮算定納入通知書情報.get納入通知書期情報リスト();
         if (納入通知書期情報リスト.isEmpty()) {
             納入通知書期情報リスト = new ArrayList<>();
@@ -92,8 +91,7 @@ public class KarisanteiNonyuTsuchishoCVSKigotoReport extends Report<KarisanteiNo
             仮算定納入通知書情報Report.set編集範囲区分(HenshuHaniKubun.全てのレイアウト);
             仮算定納入通知書情報Report.set納入通知書期情報リスト(納入通知書期情報リストReport);
             KarisanteiNonyuTsuchishoCVSKigotoReport report
-                    = KarisanteiNonyuTsuchishoCVSKigotoReport.createFrom(
-                            new KarisanteiNonyuTsuchishoCVSKigotoItem(仮算定納入通知書情報Report, item.getNinshoshaSource()));
+                    = KarisanteiNonyuTsuchishoCVSKigotoReport.createFrom(仮算定納入通知書情報Report, ninshoshaSource);
             reportLst.add(report);
         }
         return reportLst;

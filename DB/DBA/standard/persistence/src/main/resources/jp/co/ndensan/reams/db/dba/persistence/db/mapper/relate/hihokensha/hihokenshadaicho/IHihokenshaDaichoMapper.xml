@@ -4,7 +4,7 @@
 <!-- @reamsid_L DBA-9999-011 sunhaidi -->
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokensha.hihokenshadaicho.IHihokenshaDaichoMapper">
-<!--    <select id="select被保険者台帳管理ByKey" resultMap="resultMap_HihokenshaDaichoEntity" fetchSize="500">
+<!--    <select resultOrdered="true" id="select被保険者台帳管理ByKey" resultMap="resultMap_HihokenshaDaichoEntity" fetchSize="500">
         <include refid="selectHihokenshaDaichoEntity" />
     </select>
 

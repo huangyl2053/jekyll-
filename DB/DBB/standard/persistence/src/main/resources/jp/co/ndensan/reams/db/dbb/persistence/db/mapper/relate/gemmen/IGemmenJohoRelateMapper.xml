@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： 減免の情報のマッピング用XMLです。 -->
-<!-- @reamsid_L DBB-9999-013 huangh -->
+<!-- @reamsid_L DBB-9999-013 xicongwang -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.gemmen.IGemmenJohoRelateMapper">
 
     <select id="select減免の情報ByKey" resultMap="resultMap_GemmenJohoRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gemmen.GemmenJohoRelateMapperParameter"
-            fetchSize="500">
+            fetchSize="500" resultOrdered="true">
         <include refid="selectGemmenJohoRelateEntity" />
     </select>
 
@@ -77,7 +77,7 @@
     
      <select id="select減免の情報_決定更正後" resultMap="resultMap_GemmenJohoRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gemmen.GemmenJohoRelateSonotaMapperParameter"
-            fetchSize="500">
+            fetchSize="500" resultOrdered="true">
         SELECT
         DbT2002Fuka.*,
         DbT2004Gemmen.*,
@@ -125,7 +125,7 @@
 
      <select id="select減免の情報_取消更正後" resultMap="resultMap_GemmenJohoRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gemmen.GemmenJohoRelateSonotaMapperParameter"
-            fetchSize="500">
+            fetchSize="500" resultOrdered="true">
         SELECT
         DbT2002Fuka.*,
         DbT2004Gemmen.*,
@@ -164,7 +164,7 @@
             AND DbT2002Fuka."dbT2002Fuka_choteiNichiji" = #{調定日時}
             AND (DbT2004Gemmen."dbT2004Gemmen_jotaiKubun" = '1'
                 OR
-                DbT2004Gemmen."dbT2004Gemmen_jotaiKubun" = '1')
+                DbT2004Gemmen."dbT2004Gemmen_jotaiKubun" = '2')
             AND DbT2004Gemmen."dbT2004Gemmen_sakuseiKubun" = '3'
     </select>
 </mapper>

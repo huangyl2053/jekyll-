@@ -14,12 +14,6 @@ var DBZ;
                 return new KaigoUploadPanel.PublicProperties(this.fieldName);
             };
 
-            ModeController.prototype.priorities = function () {
-                return [
-                    "IsSimpleMode"
-                ];
-            };
-
             ModeController.prototype.IsSimpleMode = function () {
                 return new Modes.IsSimpleMode(this.controls);
             };
@@ -33,11 +27,19 @@ var DBZ;
                     this.controls = controls;
                 }
                 IsSimpleMode.prototype.TRUE = function () {
+                    this.controls.uplUploadFile().displayNone = false;
+                    this.controls.uplUploadFile1().displayNone = true;
+                    this.controls.btnUpload().displayNone = false;
+                    this.controls.btnUpload1().displayNone = true;
                     this.controls.lblFileName().visible = true;
                     this.controls.lblUploadFileName().visible = true;
                 };
 
                 IsSimpleMode.prototype.FALSE = function () {
+                    this.controls.uplUploadFile().displayNone = true;
+                    this.controls.uplUploadFile1().displayNone = false;
+                    this.controls.btnUpload().displayNone = true;
+                    this.controls.btnUpload1().displayNone = false;
                     this.controls.lblFileName().visible = false;
                     this.controls.lblUploadFileName().visible = false;
                 };

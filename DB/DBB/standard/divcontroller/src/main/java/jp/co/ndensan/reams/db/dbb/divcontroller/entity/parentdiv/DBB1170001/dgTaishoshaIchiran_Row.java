@@ -3,23 +3,19 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1170001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Mar 30 13:55:24 JST 2016 
+ * Tue May 31 14:16:53 CST 2016
  */
-
-
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
-
 /**
- * dgTaishoshaIchiran_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgTaishoshaIchiran_Row のクラスファイル
+ *
+ * @reamsid_L DBB-1700-010 zhangrui
  */
-
 public class dgTaishoshaIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private TextBox txtHihokenshaNo;
     private TextBox txtKetsugoCode;

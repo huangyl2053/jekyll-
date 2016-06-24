@@ -16,7 +16,7 @@
     <result property="shinsakaiKaisaiBashoName" column="shinsakaiKaisaiBashoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     <result property="shinsakaiYoteiTeiin" column="shinsakaiYoteiTeiin" />
     </resultMap>
-    <select id="get審査会開催予定情報By開催番号" resultMap="resultMap_getShinsakaiKaisaiYoteiJoho" 
+    <select resultOrdered="true" id="get審査会開催予定情報By開催番号" resultMap="resultMap_getShinsakaiKaisaiYoteiJoho" 
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT
             dbT5591."gogitaiMei" AS "gogitaiMei"
@@ -31,6 +31,8 @@
             rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" dbT5501
         INNER JOIN rgdb."DbT5591GogitaiJoho" dbT5591 
               ON dbT5591."gogitaiNo" = dbT5501."gogitaiNo"
+              AND dbT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> dbT5501."shinsakaiKaisaiYoteiYMD"
+              AND dbT5591."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> dbT5501."shinsakaiKaisaiYoteiYMD"
         INNER JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" dbT5592 
               ON dbT5592."shinsakaiKaisaiBashoCode" = dbT5501."shinsakaiKaisaiYoteiBashoCode"
         WHERE
@@ -50,8 +52,8 @@
     <result property="shinsakaiIinShuryoYMD" column="shinsakaiIinShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     <result property="substituteFlag" column="substituteFlag" />
     </resultMap>
-    <select id="get審査会委員情報By開催番号" resultMap="resultMap_getShinsakaiiinJoho" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinwaritsuke.ShinsakaiIinWaritsukeParameter" fetchSize="500">
+    <select resultOrdered="true" id="get審査会委員情報By開催番号" resultMap="resultMap_getShinsakaiiinJoho" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinwaritsuke.ShinsakaiIinWaritsukeParameter" fetchSize="500">
         SELECT
             dbT5594."shinsakaiIinCode" AS "shinsakaiIinCode"
             ,dbT5594."shinsakaiIinShimei" AS "shinsakaiIinShimei"
@@ -80,8 +82,12 @@
                     ON dbT5503."shinsakaiKaisaiNo" = dbT5501."shinsakaiKaisaiNo"
                 INNER JOIN  rgdb."DbT5591GogitaiJoho" dbT5591
                     ON dbT5591."gogitaiNo" = dbT5501."gogitaiNo"
+                    AND dbT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> dbT5501."shinsakaiKaisaiYoteiYMD"
+                    AND dbT5591."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> dbT5501."shinsakaiKaisaiYoteiYMD"
                 INNER JOIN  rgdb."DbT5593GogitaiWariateIinJoho" dbT5593
                     ON dbT5591."gogitaiNo" = dbT5593."gogitaiNo"
+                    AND dbT5591."gogitaiYukoKikanKaishiYMD" = dbT5593."gogitaiYukoKikanKaishiYMD"
+                    AND dbT5591."gogitaiYukoKikanShuryoYMD" = dbT5593."gogitaiYukoKikanShuryoYMD"
                 INNER JOIN  rgdb."DbT5594ShinsakaiIinJoho" dbT5594
                     ON dbT5594."shinsakaiIinCode" = dbT5593."shinsakaiIinCode"
                 INNER JOIN  rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" dbT5595
@@ -106,8 +112,8 @@
                                                 AND dbT5503."shinsakaiKaisaiNo" <![CDATA[<>]]> #{kaisaiNo}
                                                 )
     </select>
-    <select id="get審査会委員情報By開催年月日" resultMap="resultMap_getShinsakaiiinJoho" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinwaritsuke.ShinsakaiIinWaritsukeParameter" fetchSize="500">
+    <select resultOrdered="true" id="get審査会委員情報By開催年月日" resultMap="resultMap_getShinsakaiiinJoho" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinwaritsuke.ShinsakaiIinWaritsukeParameter" fetchSize="500">
         SELECT
             dbT5594."shinsakaiIinCode" AS "shinsakaiIinCode"
             ,dbT5594."shinsakaiIinShimei" AS "shinsakaiIinShimei"
@@ -125,7 +131,6 @@
             ,dbT5594."haishiFlag" AS "haishiFlag"
             ,dbT5594."shinsakaiIinKaishiYMD" AS "shinsakaiIinKaishiYMD"
             ,dbT5594."shinsakaiIinShuryoYMD" AS "shinsakaiIinShuryoYMD"
-             <!--TODO 内部QA:868 Redmine：  (補欠の取得方式が知らない、一時値を使用します)--> 
             ,dbT5593."substituteFlag"
         FROM rgdb."DbT5594ShinsakaiIinJoho" dbT5594
                 INNER JOIN  rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" dbT5595
@@ -135,6 +140,8 @@
                     ON dbT5593."shinsakaiIinCode" = dbT5594."shinsakaiIinCode"
                 INNER JOIN rgdb."DbT5591GogitaiJoho" dbT5591
                     ON dbT5591."gogitaiNo" = dbT5593."gogitaiNo"
+                    AND dbT5591."gogitaiYukoKikanKaishiYMD" = dbT5593."gogitaiYukoKikanKaishiYMD"
+                    AND dbT5591."gogitaiYukoKikanShuryoYMD" = dbT5593."gogitaiYukoKikanShuryoYMD"
                 LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" dbT5910
                     ON dbT5595."ninteichosaItakusakiCode" = dbT5910."ninteichosaItakusakiCode"
                         AND dbT5910."shichosonCode" = #{shichousonCode}

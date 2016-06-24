@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0210011;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyo.ChushutsuKikanJohoData;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0210011.KobetsuJikoRenkeiInfoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -40,21 +41,25 @@ public class KobetsuJikoRenkeiInfoSakuseiHandler {
      * @param chushutsuKikanJohoData 抽出期間情報Entity
      */
     public void initialize(ChushutsuKikanJohoData chushutsuKikanJohoData) {
-
         if (chushutsuKikanJohoData != null) {
-            div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromYMD().setValue(
-                    chushutsuKikanJohoData.get対象開始日時().getDate());
-            div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromTime().setValue(
-                    chushutsuKikanJohoData.get対象開始日時().getRDateTime().getTime());
-            div.getTblChushutsuKikan().getTxtZenkaiChushutsuToYMD().setValue(
-                    chushutsuKikanJohoData.get対象終了日時().getDate());
-            div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().setValue(
-                    chushutsuKikanJohoData.get対象終了日時().getRDateTime().getTime());
-            div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setValue(
-                    chushutsuKikanJohoData.get対象終了日時().getDate());
-            div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setValue(
-                    chushutsuKikanJohoData.get対象終了日時().getRDateTime().getTime());
-
+            YMDHMS 対象開始日時 = chushutsuKikanJohoData.get対象開始日時();
+            if (対象開始日時 != null && !対象開始日時.isEmpty()) {
+                div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromYMD().setValue(
+                        chushutsuKikanJohoData.get対象開始日時().getDate());
+                div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromTime().setValue(
+                        chushutsuKikanJohoData.get対象開始日時().getRDateTime().getTime());
+            }
+            YMDHMS 対象終了日時 = chushutsuKikanJohoData.get対象終了日時();
+            if (対象終了日時 != null && !対象終了日時.isEmpty()) {
+                div.getTblChushutsuKikan().getTxtZenkaiChushutsuToYMD().setValue(
+                        chushutsuKikanJohoData.get対象終了日時().getDate());
+                div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().setValue(
+                        chushutsuKikanJohoData.get対象終了日時().getRDateTime().getTime());
+                div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setValue(
+                        chushutsuKikanJohoData.get対象終了日時().getDate());
+                div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setValue(
+                        chushutsuKikanJohoData.get対象終了日時().getRDateTime().getTime());
+            }
         } else {
             div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromYMD().clearValue();
             div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromTime().clearValue();

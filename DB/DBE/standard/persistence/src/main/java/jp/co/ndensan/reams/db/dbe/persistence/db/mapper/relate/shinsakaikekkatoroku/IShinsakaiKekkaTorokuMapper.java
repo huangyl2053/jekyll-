@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaikekkatoroku;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuRelateEntity;

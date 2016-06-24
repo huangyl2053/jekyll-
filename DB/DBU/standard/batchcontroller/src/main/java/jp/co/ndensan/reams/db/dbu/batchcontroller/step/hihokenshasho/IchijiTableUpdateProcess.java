@@ -108,7 +108,8 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
                     mybatisPrm.getShikibetsuCode(),
                     mybatisPrm.getPsmShikibetsuTaisho(),
                     mybatisPrm.getPsmAtesaki(),
-                    mybatisPrm.getNenreiTotatsuYMD());
+                    mybatisPrm.getNenreiTotatsuYMD(),
+                    RString.EMPTY);
             要介護認定List.addAll(iIkkatsuHakkoMapper.getNinteiKekkaJoho(mybatisParam));
         }
         for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 要介護認定List) {
@@ -167,7 +168,8 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
                 mybatisPrm.getShikibetsuCode(),
                 new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
                 mybatisPrm.getPsmAtesaki(),
-                mybatisPrm.getNenreiTotatsuYMD());
+                mybatisPrm.getNenreiTotatsuYMD(),
+                RString.EMPTY);
 
         List<IkkatsuHakkoRelateEntity> 本人情報List = iIkkatsuHakkoMapper.getHonninJoho(mybatisParam);
         for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 本人情報List) {
@@ -198,7 +200,8 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
                 mybatisPrm.getShikibetsuCode(),
                 mybatisPrm.getPsmShikibetsuTaisho(),
                 new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString()),
-                mybatisPrm.getNenreiTotatsuYMD());
+                mybatisPrm.getNenreiTotatsuYMD(),
+                RString.EMPTY);
         List<IkkatsuHakkoRelateEntity> 送付先情報List = iIkkatsuHakkoMapper.getSofusakiJoho(mybatisParam);
         for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 送付先情報List) {
             iIkkatsuHakkoMapper.updateTmp_SofusakiJoho(ikkatsuHakkoRelateEntity);

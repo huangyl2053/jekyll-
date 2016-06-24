@@ -18,11 +18,11 @@ module DBZ {
 
             public priorities(): Array {
                 return [
-                    "HyojiMode",
-                    "HeightSize",
-                    "WidthSize",
-                    "MeisaiHyojiMode",
-                    "RiyoType"
+                    "DisplayMode",
+                    "DataGridHeight",
+                    "DataGridWidth",
+                    "MeisaiMode",
+                    "Riyou"
                 ];
             }
 
@@ -34,25 +34,25 @@ module DBZ {
                 return new PublicProperties(this.fieldName);
             }
 
-            public HyojiMode() {
-                return new Modes.HyojiMode(this.controls);
+            public DisplayMode() {
+                return new Modes.DisplayMode(this.controls);
             }
 
-            public HeightSize() {
-                return new Modes.HeightSize(this.controls);
+            public DataGridHeight() {
+                return new Modes.DataGridHeight(this.controls);
             }
 
-            public WidthSize() {
-                return new Modes.WidthSize(this.controls);
+            public DataGridWidth() {
+                return new Modes.DataGridWidth(this.controls);
             }
 
 
-            public MeisaiHyojiMode() {
-                return new Modes.MeisaiHyojiMode(this.controls);
+            public MeisaiMode() {
+                return new Modes.MeisaiMode(this.controls);
             }
 
-            public RiyoType() {
-                return new Modes.RiyoType(this.controls);
+            public Riyou() {
+                return new Modes.Riyou(this.controls);
             }
 
         }
@@ -60,7 +60,7 @@ module DBZ {
         export module Modes {
 
 
-            export class HyojiMode {
+            export class DisplayMode {
                 private controls: Controls;
                 private gridWidthCalc;
 
@@ -156,7 +156,7 @@ module DBZ {
                 }
             }
 
-            export class HeightSize {
+            export class DataGridHeight {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
@@ -193,7 +193,7 @@ module DBZ {
                 }
             }
 
-            export class WidthSize {
+            export class DataGridWidth {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
@@ -222,7 +222,7 @@ module DBZ {
             }
 
 
-            export class MeisaiHyojiMode {
+            export class MeisaiMode {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
@@ -289,7 +289,7 @@ module DBZ {
 
 
 
-            export class RiyoType{
+            export class Riyou{
 			private gridWidthCalc;
 			private controls: Controls;
                     constructor(controls: Controls) {

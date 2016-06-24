@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisya.TaJushochiTokureisyaKanriParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisya.TaJushochiTokureisyaKanriParameter;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokureisyakanri.ITaJushochiTokureisyaKanriMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -51,7 +51,7 @@ public class TaJushochiTokureisyaKanriManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TaJushochiTokureisyaKanriManager}のインスタンスを返します。
      *
-     * @return // * {@link InstanceProvider#create}にて生成した{@link TaJushochiTokureisyaKanriManager}のインスタンス
+     * @return // {@link InstanceProvider#create}にて生成した{@link TaJushochiTokureisyaKanriManager}のインスタンス
      */
     public static TaJushochiTokureisyaKanriManager createInstance() {
         return InstanceProvider.create(TaJushochiTokureisyaKanriManager.class);
@@ -78,7 +78,10 @@ public class TaJushochiTokureisyaKanriManager {
         TaJushochiTokureisyaKanriParameter 直近適用グリッド行 = sortList.get(0);
         for (TaJushochiTokureisyaKanriParameter date : paramater) {
 
-            if (新規.equals(date.get状態()) && (date.getNyuusyoYMD().isBefore(直近適用グリッド行.getTayishoYMD())
+            if (新規.equals(date.get状態()) && !date.getNyuusyoYMD().isEmpty()
+                    && !直近適用グリッド行.getTayishoYMD().isEmpty()
+                    && !直近適用グリッド行.getKaijoYMD().isEmpty()
+                    && (date.getNyuusyoYMD().isBefore(直近適用グリッド行.getTayishoYMD())
                     || date.getNyuusyoYMD().isBefore(直近適用グリッド行.getKaijoYMD()))) {
                 throw new ApplicationException(
                         UrErrorMessages.期間が重複.getMessage());
@@ -102,7 +105,9 @@ public class TaJushochiTokureisyaKanriManager {
      */
     public void checkKaijoJotai(List<TaJushochiTokureisyaKanriParameter> paramater) {
         for (TaJushochiTokureisyaKanriParameter date : paramater) {
-            if (修正.equals(date.get状態()) && !date.getNyuusyoYMD().isBefore(date.getTayishoYMD())) {
+            if (修正.equals(date.get状態()) && !date.getNyuusyoYMD().isEmpty()
+                    && !date.getTayishoYMD().isEmpty()
+                    && !date.getNyuusyoYMD().isBeforeOrEquals(date.getTayishoYMD())) {
                 throw new ApplicationException(
                         UrErrorMessages.入力値が不正.getMessage());
             }

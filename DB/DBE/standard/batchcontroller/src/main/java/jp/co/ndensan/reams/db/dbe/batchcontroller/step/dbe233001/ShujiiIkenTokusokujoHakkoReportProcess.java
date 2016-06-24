@@ -55,11 +55,12 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
     @BatchWriter
     private BatchReportWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> batchWrite;
     private ReportSourceWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> reportSourceWriter;
-    NinteiChosaTokusokuTaishoshaIchiranhyoItem item;
     private List<NinteiChosaTokusokuTaishoshaIchiranhyoItem> itemList;
+    NinteiChosaTokusokuTaishoshaIchiranhyoItem item;
     private ShuturyokuJyoukenProcessParamter processPrm;
     private static final RString CSV出力有無 = new RString("なし");
     private static final RString CSVファイル名 = new RString("-");
+    private static int index = 1;
 
     static {
         OUT_DATA_LIST = new RString("outDataList");
@@ -106,13 +107,14 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
                 entity.getTemp_事業者住所(),
                 entity.getTemp_事業者電話番号() == null ? RString.EMPTY : entity.getTemp_事業者電話番号().getColumnValue());
         itemList.add(item);
+        NinteiChosaTokusokuTaishoshaIchiranhyoReport report = new NinteiChosaTokusokuTaishoshaIchiranhyoReport(item, index);
+        index = index + 1;
+        report.writeBy(reportSourceWriter);
     }
 
     @Override
     protected void afterExecute() {
         set出力条件表();
-        NinteiChosaTokusokuTaishoshaIchiranhyoReport report = NinteiChosaTokusokuTaishoshaIchiranhyoReport.createFrom(itemList);
-        report.writeBy(reportSourceWriter);
         outDataList.setValue(shinseishoKanriNoList);
         shujiDataList.setValue(itemList);
     }

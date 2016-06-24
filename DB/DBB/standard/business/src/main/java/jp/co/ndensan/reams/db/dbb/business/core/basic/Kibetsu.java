@@ -181,8 +181,7 @@ public class Kibetsu extends ModelBase<KibetsuIdentifier, DbT2003KibetsuEntity, 
     }
 
     /**
-     * 保持する介護期別を削除対象とします。<br/>
-     * {@link DbT2003KibetsuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護期別を削除対象とします。<br/> {@link DbT2003KibetsuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link Kibetsu}
      */

@@ -74,7 +74,7 @@
         <result property="torikeshiGemmenGaku" column="dbT2004Gemmen_torikeshiGemmenGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
 
-    <select id="getEntity" resultMap="ResultMap_DbT2004GemmenEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT2004GemmenEntity">
         SELECT
         <include refid="allColumns_DbT2004Gemmen" />
         FROM

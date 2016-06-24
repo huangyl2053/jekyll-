@@ -10,9 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 審査対象者一覧のEntityクラスです。
+ * 事務局用介護認定審査対象者一覧表のEntityクラスです。
  *
- *
+ * @reamsid_L DBE-0150-020 lishengli
  */
 @Getter
 @Setter

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoSetai;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShikibetsuCd;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HonninKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.setai.SetaiinParameter;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.setai.ISetaiinMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
@@ -220,10 +220,11 @@ public class SetaiinFinder {
             IShikibetsuTaishoFinder 識別対象Finder = ShikibetsuTaishoService.getShikibetsuTaishoFinder();
             IShikibetsuTaisho 識別対象 = 識別対象Finder.get識別対象(GyomuCode.DB介護保険,
                     世帯員.get世帯員識別コード(), KensakuYusenKubun.住登外優先);
-            RString 本人区分 = 世帯員.get世帯員識別コード().equals(識別対象.get識別コード())
-                    ? HonninKubun.本人.getCode() : HonninKubun.世帯構成員.getCode();
-            SetaiinJoho 世帯員情報 = new SetaiinJoho(識別対象, 本人区分);
-            世帯員情報リスト.add(世帯員情報);
+            if (!世帯員.get世帯員識別コード().isEmpty() && 識別対象 != null && !識別対象.get識別コード().isEmpty()) {
+                RString 本人区分 = 世帯員.get本人区分();
+                SetaiinJoho 世帯員情報 = new SetaiinJoho(識別対象, 本人区分);
+                世帯員情報リスト.add(世帯員情報);
+            }
         }
         return 世帯員情報リスト;
     }

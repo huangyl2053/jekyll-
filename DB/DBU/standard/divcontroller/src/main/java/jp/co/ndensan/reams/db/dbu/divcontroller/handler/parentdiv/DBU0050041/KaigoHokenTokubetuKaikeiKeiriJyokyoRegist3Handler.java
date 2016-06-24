@@ -14,12 +14,11 @@ import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyo
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenShoriDateKanri;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.Shichoson;
-import jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0050011.TaishokensakuJyouken;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.YoshikiYonnosanDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.tblYoshikiyonnosanDiv;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyoHokokuNenpoShoriName;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.JigyoHokokuNenpoShoriName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -33,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -187,9 +185,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
 
     /**
      * 画面初期化処理です。
+     *
+     * @param insuranceInfEntity 引き継ぎデータ
      */
-    public void onload() {
-        InsuranceInformation insuranceInfEntity = get引き継ぎデータ();
+    public void onload(InsuranceInformation insuranceInfEntity) {
         if (DELETE.equals(insuranceInfEntity.get処理フラグ())
                 || UPDATE.equals(insuranceInfEntity.get処理フラグ())) {
             onload処理フラグが一覧修正Or一覧削除(insuranceInfEntity);
@@ -293,10 +292,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
     /**
      * 修正データの取得処理です。
      *
+     * @param insuranceInfEntity 引き継ぎデータ
      * @return 修正データ
      */
-    public List<KaigoHokenJigyoHokokuNenpo> get修正データ() {
-        InsuranceInformation insuranceInfEntity = get引き継ぎデータ();
+    public List<KaigoHokenJigyoHokokuNenpo> get修正データ(InsuranceInformation insuranceInfEntity) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager 介護保険特別会計経理状況登録Manager
                 = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
         FlexibleYear 報告年 = new FlexibleYear(insuranceInfEntity.get報告年().toString());
@@ -309,9 +308,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
                 .getJigyoHokokuNenpoDetal(報告年, 集計対象年, 統計対象区分, 市町村コード, 集計番号_0302.getColumnValue()).get(0);
         KaigoHokenJigyoHokokuNenpo 更新前実質的な収支についてデータ = 介護保険特別会計経理状況登録Manager
                 .getJigyoHokokuNenpoDetal(報告年, 集計対象年, 統計対象区分, 市町村コード, 集計番号_0303.getColumnValue()).get(0);
-        KaigoHokenJigyoHokokuNenpo 画面入力前年度以前データ = get各部分画面入力データ(前年度以前データ);
-        KaigoHokenJigyoHokokuNenpo 画面入力今年度データ = get各部分画面入力データ(今年度データ);
-        KaigoHokenJigyoHokokuNenpo 画面入力実質的な収支についてデータ = get各部分画面入力データ(実質的な収支についてデータ);
+        KaigoHokenJigyoHokokuNenpo 画面入力前年度以前データ = get各部分画面入力データ(前年度以前データ, insuranceInfEntity);
+        KaigoHokenJigyoHokokuNenpo 画面入力今年度データ = get各部分画面入力データ(今年度データ, insuranceInfEntity);
+        KaigoHokenJigyoHokokuNenpo 画面入力実質的な収支についてデータ = get各部分画面入力データ(実質的な収支についてデータ, insuranceInfEntity);
         KaigoHokenJigyoHokokuNenpo 修正前年度以前データ = get各部分修正データ(更新前前年度以前データ, 画面入力前年度以前データ);
         KaigoHokenJigyoHokokuNenpo 修正今年度データ = get各部分修正データ(更新前今年度データ, 画面入力今年度データ);
         KaigoHokenJigyoHokokuNenpo 修正実質的な収支についてデータ
@@ -351,10 +350,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
      * 各部分画面入力データを取得処理です。
      *
      * @param データ区分 データ区分
+     * @param insuranceInfEntity 引き継ぎデータ
      * @return 画面入力データ
      */
-    public KaigoHokenJigyoHokokuNenpo get各部分画面入力データ(RString データ区分) {
-        InsuranceInformation insuranceInfEntity = get引き継ぎデータ();
+    public KaigoHokenJigyoHokokuNenpo get各部分画面入力データ(RString データ区分, InsuranceInformation insuranceInfEntity) {
         Code 集計番号 = Code.EMPTY;
         Map<RString, Decimal> 詳細データエリア = new HashMap<>();
         if (前年度以前データ.equals(データ区分)) {
@@ -687,12 +686,13 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
 
     /**
      * 「保存する」ボタンを押下すること処理です。
+     *
+     * @param insuranceInfEntity 遷移先渡す項目
      */
     @Transaction
-    public void onClick_btnSave() {
+    public void onClick_btnSave(InsuranceInformation insuranceInfEntity) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager 介護保険特別会計経理状況登録Manager
                 = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
-        InsuranceInformation insuranceInfEntity = get引き継ぎデータ();
         KaigoHokenShoriDateKanri 処理日付管理マスタ = get処理日付管理マスタ();
         if (内部処理モード_追加.equals(div.getShoriMode())) {
             介護保険特別会計経理状況登録Manager.insertShoriDateKanri(処理日付管理マスタ);
@@ -715,9 +715,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
             List<KaigoHokenJigyoHokokuNenpo> 前年度以前データLst = new ArrayList<>();
             List<KaigoHokenJigyoHokokuNenpo> 今年度データLst = new ArrayList<>();
             List<KaigoHokenJigyoHokokuNenpo> 実質的な収支についてデータLst = new ArrayList<>();
-            KaigoHokenJigyoHokokuNenpo 画面入力前年度以前データ = get各部分画面入力データ(前年度以前データ);
-            KaigoHokenJigyoHokokuNenpo 画面入力今年度データ = get各部分画面入力データ(今年度データ);
-            KaigoHokenJigyoHokokuNenpo 画面入力実質的な収支についてデータ = get各部分画面入力データ(実質的な収支についてデータ);
+            KaigoHokenJigyoHokokuNenpo 画面入力前年度以前データ = get各部分画面入力データ(前年度以前データ, insuranceInfEntity);
+            KaigoHokenJigyoHokokuNenpo 画面入力今年度データ = get各部分画面入力データ(今年度データ, insuranceInfEntity);
+            KaigoHokenJigyoHokokuNenpo 画面入力実質的な収支についてデータ = get各部分画面入力データ(実質的な収支についてデータ, insuranceInfEntity);
             前年度以前データLst.add(画面入力前年度以前データ);
             今年度データLst.add(画面入力今年度データ);
             実質的な収支についてデータLst.add(画面入力実質的な収支についてデータ);
@@ -725,7 +725,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
             介護保険特別会計経理状況登録Manager.regKaigoHokenTokubetuKaikeiKeiriJyokyo(今年度データLst);
             介護保険特別会計経理状況登録Manager.regKaigoHokenTokubetuKaikeiKeiriJyokyo(実質的な収支についてデータLst);
         } else if (内部処理モード_修正.equals(div.getShoriMode())) {
-            List<KaigoHokenJigyoHokokuNenpo> 修正データLst = get修正データ();
+            List<KaigoHokenJigyoHokokuNenpo> 修正データLst = get修正データ(insuranceInfEntity);
             介護保険特別会計経理状況登録Manager.updKaigoHokenTokubetuKaikeiKeiriJyokyo(修正データLst);
         }
     }
@@ -755,19 +755,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
             dataSource.add(keyValueDataSource);
         }
         return dataSource;
-    }
-
-    /**
-     * 引き継ぎデータ取得処理です。
-     *
-     */
-    private InsuranceInformation get引き継ぎデータ() {
-        InsuranceInformation 引き継ぎデータ
-                = ViewStateHolder.get(TaishokensakuJyouken.ViewStateKey.様式４, InsuranceInformation.class);
-        if (null == 引き継ぎデータ) {
-            引き継ぎデータ = new InsuranceInformation(ADD);
-        }
-        return 引き継ぎデータ;
     }
 
 }

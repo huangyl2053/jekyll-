@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijohosakusei.GogitaiJohoSakuseiRsult;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuRelateEntity;
@@ -105,18 +105,18 @@ public class ShinsakaiKekkaTorokuManager {
      * @return SearchResult<ShinsakaiKaisaiYoteiJoho> 介護認定審査会開催予定情報Business
      */
     @Transaction
-    public SearchResult<ShinsakaiKaisaiYoteiJoho2> get審査会委員一覧検索_業務概念_1(RString 開催番号) {
-        List<ShinsakaiKaisaiYoteiJoho2> resultList = new ArrayList<>();
+    public SearchResult<ShinsakaiWariateJoho> get審査会委員一覧検索_業務概念_1(RString 開催番号) {
+        List<ShinsakaiWariateJoho> resultList = new ArrayList<>();
         List<DbT5502ShinsakaiWariateJohoEntity> entityList
                 = mapperProvider.create(IShinsakaiKekkaTorokuMapper.class)
                 .get審査会委員一覧更新_1(ShinsakaiKekkaTorokuParameter.createShinsakaiKekkaTorokuParameter(開催番号));
         if (entityList.isEmpty()) {
             return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
         }
-//        for (ShinsakaiKaisaiYoteiJohoRelateEntity entity : entityList) {
-//            entity.initializeMd5ToEntities();
-//            resultList.add(new ShinsakaiKaisaiYoteiJoho(entity));
-//        }
+        for (DbT5502ShinsakaiWariateJohoEntity entity : entityList) {
+            entity.initializeMd5();
+            resultList.add(new ShinsakaiWariateJoho(entity));
+        }
         return SearchResult.of(resultList, 0, false);
     }
 

@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.Main
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.choshuHouhou_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
-import jp.co.ndensan.reams.db.dbb.service.core.kanri.ChosyuHohoHenko;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -128,7 +127,7 @@ public class MainPanelHandler {
      * @param key KaigoFukaKihonSearchKey
      */
     public void setヘッダエリア(ShikibetsuCode 識別コード, KaigoFukaKihonSearchKey key) {
-        div.getAtenaInfo().getKiagoAtenaInfo().onLoad(識別コード);
+        div.getAtenaInfo().getKiagoAtenaInfo().initialize(識別コード);
         div.getAtenaInfo().getKaigoFukaKihon().load(key);
         this.set共通エリア();
 
@@ -137,16 +136,12 @@ public class MainPanelHandler {
     /**
      * 世帯所得情報一覧エリアの設定
      *
-     * @param 賦課年度 賦課年度
-     * @param 被保険者番号 被保険者番号
+     * @param 賦課年度 FlexibleYear
+     * @param 被保険者番号 HihokenshaNo
+     * @param serviceResult ChoshuHohoResult
      */
-    public void set世帯所得情報一覧エリア(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
-
-        ChoshuHohoResult serviceResult = ChosyuHohoHenko.createInstance()
-                .getChosyuHoho(賦課年度, 被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.徴収方法データ, serviceResult.getHoho());
-        ViewStateHolder.put(ViewStateKeys.特別徴収停止日時, serviceResult.getHoho().get特別徴収停止日時());
-        ViewStateHolder.put(ViewStateKeys.特別徴収停止事由コード, serviceResult.getHoho().get特別徴収停止事由コード());
+    public void set世帯所得情報一覧エリア(FlexibleYear 賦課年度,
+            HihokenshaNo 被保険者番号, ChoshuHohoResult serviceResult) {
         RDate fukaNendo = new RDate(賦課年度.wareki().firstYear(FirstYear.ICHI_NEN).toDateString().toString());
         div.getChoshuInfo().getTxtFukaNendo().setValue(fukaNendo);
         if (null != serviceResult.getHoho().get本徴収_年金コード()) {
@@ -245,7 +240,7 @@ public class MainPanelHandler {
         } else {
             edit空白以外を選択した場合();
             edit現在の月の徴収方法はなしの場合();
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
+            edit現在の月の徴収方法は普の場合();
         }
     }
 
@@ -254,10 +249,11 @@ public class MainPanelHandler {
      *
      * @param 賦課年度 賦課年度
      * @param 被保険者番号 被保険者番号
+     * @param 徴収方法データ ChoshuHoho
      */
-    public void saveボタンを押下(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
-
-        dataSaveEdit(賦課年度, 被保険者番号);
+    public void saveボタンを押下(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号,
+            jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法データ) {
+        dataSaveEdit(賦課年度, 被保険者番号, 徴収方法データ);
     }
 
     private DataGridCellBgColor setBgColor(RString コード) {
@@ -535,85 +531,217 @@ public class MainPanelHandler {
     }
 
     private void edit現在の月の徴収方法はなしの場合() {
-
         choshuHouhou_Row row現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0);
         choshuHouhou_Row row変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1);
         RString getなし名称 = get徴収方法の名称(ChoshuHoho.toValue(コード_0).get名称());
+        boolean flag3 = false;
+        boolean flag4 = false;
+        boolean flag5 = false;
+        boolean flag6 = false;
+        boolean flag7 = false;
+        boolean flag8 = false;
+        boolean flag9 = false;
+        boolean flag10 = false;
         if (getなし名称.equals(row現在.getTxtZen3Gatsu())) {
             row変更後.setTxtZen3Gatsu(getなし名称);
             row変更後.setCellBgColor(前の名_3.toString(), row現在.getCellBgColor(前の名_3.toString()));
+            flag3 = true;
         }
         if (getなし名称.equals(row現在.getTxt4Gatsu())) {
             row変更後.setTxt4Gatsu(getなし名称);
             row変更後.setCellBgColor(名_4.toString(), row現在.getCellBgColor(名_4.toString()));
+            flag4 = true;
         }
         if (getなし名称.equals(row現在.getTxt5Gatsu())) {
             row変更後.setTxt5Gatsu(getなし名称);
             row変更後.setCellBgColor(名_5.toString(), row現在.getCellBgColor(名_5.toString()));
+            flag5 = true;
         }
         if (getなし名称.equals(row現在.getTxt6Gatsu())) {
             row変更後.setTxt6Gatsu(getなし名称);
             row変更後.setCellBgColor(名_6.toString(), row現在.getCellBgColor(名_6.toString()));
+            flag6 = true;
         }
         if (getなし名称.equals(row現在.getTxt7Gatsu())) {
             row変更後.setTxt7Gatsu(getなし名称);
             row変更後.setCellBgColor(名_7.toString(), row現在.getCellBgColor(名_7.toString()));
+            flag7 = true;
         }
         if (getなし名称.equals(row現在.getTxt8Gatsu())) {
             row変更後.setTxt8Gatsu(getなし名称);
             row変更後.setCellBgColor(名_8.toString(), row現在.getCellBgColor(名_8.toString()));
+            flag8 = true;
         }
         if (getなし名称.equals(row現在.getTxt9Gatsu())) {
             row変更後.setTxt9Gatsu(getなし名称);
             row変更後.setCellBgColor(名_9.toString(), row現在.getCellBgColor(名_9.toString()));
+            flag9 = true;
         }
         if (getなし名称.equals(row現在.getTxt10Gatsu())) {
             row変更後.setTxt10Gatsu(getなし名称);
             row変更後.setCellBgColor(名_10.toString(), row現在.getCellBgColor(名_10.toString()));
+            flag10 = true;
         }
-        continueEdit(getなし名称, row現在, row変更後);
+        boolean flag = flag3 && flag4 && flag5 && flag6 && flag7 && flag8 && flag9 && flag10;
+        continueEdit(getなし名称, row現在, row変更後, flag);
     }
 
-    private void continueEdit(RString getなし名称, choshuHouhou_Row row現在, choshuHouhou_Row row変更後) {
+    private void edit現在の月の徴収方法は普の場合() {
+        choshuHouhou_Row row現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0);
+        choshuHouhou_Row row変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1);
+        RString get普名称 = get徴収方法の名称(ChoshuHoho.toValue(コード_3).get名称());
+        boolean flag3 = false;
+        boolean flag4 = false;
+        boolean flag5 = false;
+        boolean flag6 = false;
+        boolean flag7 = false;
+        boolean flag8 = false;
+        boolean flag9 = false;
+        boolean flag10 = false;
+        if (get普名称.equals(row現在.getTxtZen3Gatsu())) {
+            row変更後.setTxtZen3Gatsu(get普名称);
+            row変更後.setCellBgColor(前の名_3.toString(), row現在.getCellBgColor(前の名_3.toString()));
+            flag3 = true;
+        }
+        if (get普名称.equals(row現在.getTxt4Gatsu())) {
+            row変更後.setTxt4Gatsu(get普名称);
+            row変更後.setCellBgColor(名_4.toString(), row現在.getCellBgColor(名_4.toString()));
+            flag4 = true;
+        }
+        if (get普名称.equals(row現在.getTxt5Gatsu())) {
+            row変更後.setTxt5Gatsu(get普名称);
+            row変更後.setCellBgColor(名_5.toString(), row現在.getCellBgColor(名_5.toString()));
+            flag5 = true;
+        }
+        if (get普名称.equals(row現在.getTxt6Gatsu())) {
+            row変更後.setTxt6Gatsu(get普名称);
+            row変更後.setCellBgColor(名_6.toString(), row現在.getCellBgColor(名_6.toString()));
+            flag6 = true;
+        }
+        if (get普名称.equals(row現在.getTxt7Gatsu())) {
+            row変更後.setTxt7Gatsu(get普名称);
+            row変更後.setCellBgColor(名_7.toString(), row現在.getCellBgColor(名_7.toString()));
+            flag7 = true;
+        }
+        if (get普名称.equals(row現在.getTxt8Gatsu())) {
+            row変更後.setTxt8Gatsu(get普名称);
+            row変更後.setCellBgColor(名_8.toString(), row現在.getCellBgColor(名_8.toString()));
+            flag8 = true;
+        }
+        if (get普名称.equals(row現在.getTxt9Gatsu())) {
+            row変更後.setTxt9Gatsu(get普名称);
+            row変更後.setCellBgColor(名_9.toString(), row現在.getCellBgColor(名_9.toString()));
+            flag9 = true;
+        }
+        if (get普名称.equals(row現在.getTxt10Gatsu())) {
+            row変更後.setTxt10Gatsu(get普名称);
+            row変更後.setCellBgColor(名_10.toString(), row現在.getCellBgColor(名_10.toString()));
+            flag10 = true;
+        }
+        boolean flag = flag3 && flag4 && flag5 && flag6 && flag7 && flag8 && flag9 && flag10;
+        continueEdit2(get普名称, row現在, row変更後, flag);
+    }
 
+    private void continueEdit(RString getなし名称,
+            choshuHouhou_Row row現在, choshuHouhou_Row row変更後, boolean flag) {
+        boolean flag11 = false;
+        boolean flag12 = false;
+        boolean flag1 = false;
+        boolean flag2 = false;
+        boolean flag3 = false;
+        boolean flag4 = false;
         if (getなし名称.equals(row現在.getTxt11Gatsu())) {
             row変更後.setTxt11Gatsu(getなし名称);
             row変更後.setCellBgColor(名_11.toString(), row現在.getCellBgColor(名_11.toString()));
+            flag11 = true;
         }
         if (getなし名称.equals(row現在.getTxt12Gatsu())) {
             row変更後.setTxt12Gatsu(getなし名称);
             row変更後.setCellBgColor(名_12.toString(), row現在.getCellBgColor(名_12.toString()));
+            flag12 = true;
         }
         if (getなし名称.equals(row現在.getTxt1Gatsu())) {
             row変更後.setTxt1Gatsu(getなし名称);
             row変更後.setCellBgColor(名_1.toString(), row現在.getCellBgColor(名_1.toString()));
+            flag1 = true;
         }
         if (getなし名称.equals(row現在.getTxt2Gatsu())) {
             row変更後.setTxt2Gatsu(getなし名称);
             row変更後.setCellBgColor(名_2.toString(), row現在.getCellBgColor(名_2.toString()));
+            flag2 = true;
         }
         if (getなし名称.equals(row現在.getTxt3Gatsu())) {
             row変更後.setTxt3Gatsu(getなし名称);
             row変更後.setCellBgColor(名_3.toString(), row現在.getCellBgColor(名_3.toString()));
+            flag3 = true;
         }
         if (getなし名称.equals(row現在.getTxtYoku4Gatsu())) {
             row変更後.setTxtYoku4Gatsu(getなし名称);
             row変更後.setCellBgColor(翌の名_4.toString(), row現在.getCellBgColor(翌の名_4.toString()));
+            flag4 = true;
+        }
+        if (flag && flag11 && flag12 && flag1 && flag2 && flag3 && flag4) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
         }
     }
 
-    private void dataSaveEdit(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
+    private void continueEdit2(RString get普名称,
+            choshuHouhou_Row row現在, choshuHouhou_Row row変更後, boolean flag) {
+        boolean flag11 = false;
+        boolean flag12 = false;
+        boolean flag1 = false;
+        boolean flag2 = false;
+        boolean flag3 = false;
+        boolean flag4 = false;
+        if (get普名称.equals(row現在.getTxt11Gatsu())) {
+            row変更後.setTxt11Gatsu(get普名称);
+            row変更後.setCellBgColor(名_11.toString(), row現在.getCellBgColor(名_11.toString()));
+            flag11 = true;
+        }
+        if (get普名称.equals(row現在.getTxt12Gatsu())) {
+            row変更後.setTxt12Gatsu(get普名称);
+            row変更後.setCellBgColor(名_12.toString(), row現在.getCellBgColor(名_12.toString()));
+            flag12 = true;
+        }
+        if (get普名称.equals(row現在.getTxt1Gatsu())) {
+            row変更後.setTxt1Gatsu(get普名称);
+            row変更後.setCellBgColor(名_1.toString(), row現在.getCellBgColor(名_1.toString()));
+            flag1 = true;
+        }
+        if (get普名称.equals(row現在.getTxt2Gatsu())) {
+            row変更後.setTxt2Gatsu(get普名称);
+            row変更後.setCellBgColor(名_2.toString(), row現在.getCellBgColor(名_2.toString()));
+            flag2 = true;
+        }
+        if (get普名称.equals(row現在.getTxt3Gatsu())) {
+            row変更後.setTxt3Gatsu(get普名称);
+            row変更後.setCellBgColor(名_3.toString(), row現在.getCellBgColor(名_3.toString()));
+            flag3 = true;
+        }
+        if (get普名称.equals(row現在.getTxtYoku4Gatsu())) {
+            row変更後.setTxtYoku4Gatsu(get普名称);
+            row変更後.setCellBgColor(翌の名_4.toString(), row現在.getCellBgColor(翌の名_4.toString()));
+            flag4 = true;
+        }
+        if (flag && flag11 && flag12 && flag1 && flag2 && flag3 && flag4) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
+        }
+    }
+
+    private void dataSaveEdit(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号,
+            jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法データ) {
         int 現在の月;
         final int three = 3;
         YMDHMS 特別徴収停止日時 = null;
         RString 特別徴収停止事由コード = null;
         RDate システム日付 = RDate.getNowDate();
-        jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法データ = ViewStateHolder.
-                get(ViewStateKeys.徴収方法データ, jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho.class);
         jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法_変更後
                 = new jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho(
                         賦課年度, 被保険者番号, 徴収方法データ.get履歴番号() + 1);
-
         RStringBuilder builder = new RStringBuilder(賦課年度.plusYear(1).toString());
         RString 賦課年度日付 = builder.append(RSTR_0331).toRString();
         RDate 賦課日付 = new RDate(賦課年度日付.toString());

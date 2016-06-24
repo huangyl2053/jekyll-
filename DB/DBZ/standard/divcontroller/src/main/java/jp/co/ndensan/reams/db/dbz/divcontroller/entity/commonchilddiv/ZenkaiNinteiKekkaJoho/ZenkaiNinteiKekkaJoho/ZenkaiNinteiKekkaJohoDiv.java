@@ -4,27 +4,27 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNin
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
- * ZenkaiNinteiKekkaJoho のクラスファイル 
- * 
+ * ZenkaiNinteiKekkaJoho のクラスファイル
+ *
  * @reamsid_L DBE-3000-020 dongyabin
  */
 public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekkaJohoDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -62,6 +62,7 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
      * @return txtYokaigodo
      */
     @JsonProperty("txtYokaigodo")
+    @Override
     public TextBox getTxtYokaigodo() {
         return txtYokaigodo;
     }
@@ -71,6 +72,7 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
      * @param txtYokaigodo txtYokaigodo
      */
     @JsonProperty("txtYokaigodo")
+    @Override
     public void setTxtYokaigodo(TextBox txtYokaigodo) {
         this.txtYokaigodo = txtYokaigodo;
     }
@@ -80,6 +82,7 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
      * @return txtNinteiDay
      */
     @JsonProperty("txtNinteiDay")
+    @Override
     public TextBoxFlexibleDate getTxtNinteiDay() {
         return txtNinteiDay;
     }
@@ -89,6 +92,7 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
      * @param txtNinteiDay txtNinteiDay
      */
     @JsonProperty("txtNinteiDay")
+    @Override
     public void setTxtNinteiDay(TextBoxFlexibleDate txtNinteiDay) {
         this.txtNinteiDay = txtNinteiDay;
     }
@@ -98,6 +102,7 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
      * @return txtYukoKikanFrom
      */
     @JsonProperty("txtYukoKikanFrom")
+    @Override
     public TextBoxFlexibleDate getTxtYukoKikanFrom() {
         return txtYukoKikanFrom;
     }
@@ -107,6 +112,7 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
      * @param txtYukoKikanFrom txtYukoKikanFrom
      */
     @JsonProperty("txtYukoKikanFrom")
+    @Override
     public void setTxtYukoKikanFrom(TextBoxFlexibleDate txtYukoKikanFrom) {
         this.txtYukoKikanFrom = txtYukoKikanFrom;
     }
@@ -116,6 +122,7 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
      * @return txtYukoKikanTo
      */
     @JsonProperty("txtYukoKikanTo")
+    @Override
     public TextBoxFlexibleDate getTxtYukoKikanTo() {
         return txtYukoKikanTo;
     }
@@ -125,6 +132,7 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
      * @param txtYukoKikanTo txtYukoKikanTo
      */
     @JsonProperty("txtYukoKikanTo")
+    @Override
     public void setTxtYukoKikanTo(TextBoxFlexibleDate txtYukoKikanTo) {
         this.txtYukoKikanTo = txtYukoKikanTo;
     }
@@ -240,7 +248,7 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
             DivSize[] enumArray = DivSize.values();
 
             for (DivSize enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -255,11 +263,11 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
     }
 
     public DivSize getMode_DivSize() {
-        return (DivSize) _CommonChildDivModeUtil.getMode( this.modes, DivSize.class );
+        return (DivSize) _CommonChildDivModeUtil.getMode(this.modes, DivSize.class);
     }
 
-    public void setMode_DivSize( DivSize value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DivSize.class , value );
+    public void setMode_DivSize(DivSize value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DivSize.class, value);
     }
 
     public static enum ShokaiButtonType implements ICommonChildDivMode {
@@ -277,7 +285,7 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
             ShokaiButtonType[] enumArray = ShokaiButtonType.values();
 
             for (ShokaiButtonType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -292,18 +300,18 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
     }
 
     public ShokaiButtonType getMode_ShokaiButtonType() {
-        return (ShokaiButtonType) _CommonChildDivModeUtil.getMode( this.modes, ShokaiButtonType.class );
+        return (ShokaiButtonType) _CommonChildDivModeUtil.getMode(this.modes, ShokaiButtonType.class);
     }
 
-    public void setMode_ShokaiButtonType( ShokaiButtonType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, ShokaiButtonType.class , value );
+    public void setMode_ShokaiButtonType(ShokaiButtonType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, ShokaiButtonType.class, value);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-    
     /**
      * 前回認定結果Divの初期化です。
+     *
      * @param subGyomuCode 画面モード
      * @param shinseishoKanriNo 申請書管理番号
      * @param 参照結果 参照結果
@@ -314,7 +322,7 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
             RString 参照結果) {
         getHandler().onLoad(subGyomuCode, shinseishoKanriNo, 参照結果);
     }
-    
+
     private ZenkaiNinteiKekkaJohoHandler getHandler() {
         return new ZenkaiNinteiKekkaJohoHandler(this);
     }

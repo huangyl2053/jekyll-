@@ -11,16 +11,16 @@ import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.
 import jp.co.ndensan.reams.db.dba.business.report.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoItem;
 import jp.co.ndensan.reams.db.dba.business.report.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoProperty;
 import jp.co.ndensan.reams.db.dba.business.report.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoReport;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tokuteifutangendogakushinseisho.TokuteifutanMybatisParam;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tokuteifutangendogakushinseisho.TokuteifutanMybatisParam;
 import jp.co.ndensan.reams.db.dba.entity.report.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tokuteifutangendogakushinseisho.ITokuteifutanGendogakuShinseishoRelateMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinSeinengappiHyojihoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
@@ -70,15 +70,13 @@ public class TokuteifutanGendogakuShinseisho {
     private static final int INDEX_3 = 3;
     private static final RString 連番 = new RString("1");
     private final MapperProvider mapperProvider;
-    private final ITokuteifutanGendogakuShinseishoRelateMapper tokuteifutanRelateMapper;
 
     /**
      * コンストラクタ。
      *
      */
-    public TokuteifutanGendogakuShinseisho() {
+    TokuteifutanGendogakuShinseisho() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.tokuteifutanRelateMapper = mapperProvider.create(ITokuteifutanGendogakuShinseishoRelateMapper.class);
     }
 
     /**
@@ -86,10 +84,17 @@ public class TokuteifutanGendogakuShinseisho {
      *
      * @param mapperProvider mapper取得
      */
-    TokuteifutanGendogakuShinseisho(MapperProvider mapperProvider,
-            ITokuteifutanGendogakuShinseishoRelateMapper tokuteifutanRelateMapper) {
+    TokuteifutanGendogakuShinseisho(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
-        this.tokuteifutanRelateMapper = tokuteifutanRelateMapper;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link TokuteifutanGendogakuShinseisho}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link TokuteifutanGendogakuShinseisho}のインスタンス
+     */
+    public static TokuteifutanGendogakuShinseisho createInstance() {
+        return InstanceProvider.create(TokuteifutanGendogakuShinseisho.class);
     }
 
     /**
@@ -104,13 +109,13 @@ public class TokuteifutanGendogakuShinseisho {
         TokuteiFutangendogakuShinseishoProperty proerty = new TokuteiFutangendogakuShinseishoProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokuteiFutangendogakuShinseishoReportSource> assembler = createAssembler(proerty, reportManager)) {
+                ReportSourceWriter<TokuteiFutangendogakuShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                        null, null);
+                        null, reportSourceWriter.getImageFolderPath());
                 for (TokuteiFutangendogakuShinseishoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei, 識別コード)) {
-                    ReportSourceWriter<TokuteiFutangendogakuShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
                 }
             }
@@ -215,7 +220,7 @@ public class TokuteifutanGendogakuShinseisho {
         RString 施設名称 = RString.EMPTY;
         List<RString> list = new ArrayList<>();
         if (dbT1004ShisetsuNyutaishoEntity != null) {
-            if (ShisetsuType.介護保険施設.getCode().equals(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuShurui())) {
+            if (ShisetsuType.介護保険施設.getコード().equals(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuShurui())) {
                 DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyoshaEntity = get介護事業者_事業者情報の取得(dbT1004ShisetsuNyutaishoEntity
                         .getNyushoShisetsuCode().value());
                 施設郵便番号 = dbT7060KaigoJigyoshaEntity == null
@@ -227,7 +232,7 @@ public class TokuteifutanGendogakuShinseisho {
                 施設名称 = dbT7060KaigoJigyoshaEntity == null
                         ? RString.EMPTY : getAtenaMeishoValue(dbT7060KaigoJigyoshaEntity.getJigyoshaName());
             }
-            if (ShisetsuType.住所地特例対象施設.getCode().equals(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuShurui())) {
+            if (ShisetsuType.住所地特例対象施設.getコード().equals(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuShurui())) {
                 DbT1005KaigoJogaiTokureiTaishoShisetsuEntity dbT1005Entity
                         = get介護除外住所地特例対象施設_事業者情報の取得(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuCode().value());
                 施設郵便番号 = dbT1005Entity == null ? RString.EMPTY : getYubinNoValue(dbT1005Entity.getYubinNo());
@@ -244,19 +249,24 @@ public class TokuteifutanGendogakuShinseisho {
     }
 
     private DbT1004ShisetsuNyutaishoEntity get施設情報の取得(ShikibetsuCode 識別コード) {
+        ITokuteifutanGendogakuShinseishoRelateMapper tokuteifutanRelateMapper = mapperProvider
+                .create(ITokuteifutanGendogakuShinseishoRelateMapper.class);
         DbT1004ShisetsuNyutaishoEntity entity = tokuteifutanRelateMapper
                 .get施設情報(TokuteifutanMybatisParam.create施設情報パラメータ(識別コード.value()));
         return entity;
     }
 
     private DbT7060KaigoJigyoshaEntity get介護事業者_事業者情報の取得(RString 入所施設コード) {
+        ITokuteifutanGendogakuShinseishoRelateMapper tokuteifutanRelateMapper = mapperProvider
+                .create(ITokuteifutanGendogakuShinseishoRelateMapper.class);
         DbT7060KaigoJigyoshaEntity entity = tokuteifutanRelateMapper.get事業者情報(TokuteifutanMybatisParam
                 .create介護事業者パラメータ(入所施設コード));
         return entity;
     }
 
     private DbT1005KaigoJogaiTokureiTaishoShisetsuEntity get介護除外住所地特例対象施設_事業者情報の取得(RString 入所施設コード) {
-
+        ITokuteifutanGendogakuShinseishoRelateMapper tokuteifutanRelateMapper = mapperProvider
+                .create(ITokuteifutanGendogakuShinseishoRelateMapper.class);
         DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity = tokuteifutanRelateMapper
                 .get介護除外住所地特例対象施設情報(TokuteifutanMybatisParam.create介護除外住所地特例対象施設パラメータ(入所施設コード));
         return entity;

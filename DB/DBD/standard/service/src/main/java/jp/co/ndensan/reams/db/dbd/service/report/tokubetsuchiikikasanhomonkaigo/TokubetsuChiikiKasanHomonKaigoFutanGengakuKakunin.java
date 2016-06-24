@@ -14,11 +14,11 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyos
 import jp.co.ndensan.reams.db.dbd.entity.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinSeinengappiHyojihoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
@@ -100,12 +100,13 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
         TokubetsuChiikiKasanGenmenTaishoShinseishoProerty proerty = new TokubetsuChiikiKasanGenmenTaishoShinseishoProerty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource> assembler = createAssembler(proerty, reportManager)) {
+                ReportSourceWriter<TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
-                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), null, RString.EMPTY);
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), null, reportSourceWriter.getImageFolderPath());
                 for (TokubetsuChiikiKasanGenmenTaishoShinseishoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
-                    ReportSourceWriter<TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+
                     report.writeBy(reportSourceWriter);
                 }
             }

@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0230011
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyokobetsukoikiunyo.KaigoJuminhyoKobetsuKoikiunyo;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyokoukiu.KaiGoJuminHyokouKiuBatchParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KaigoJuminhyoKobetsuParameter;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KobetsuKoikiunyoBatchParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KobetsuKoikiunyoParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0230011.KobetsuJikoRenkeiInfoSakuseiKoikiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0230011.dgKobetsuJikoRenkeiInfoSakuseiKoik_Row;
@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbu.service.core.kaigojuminhyobatchparameter.Kaigo
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 介護住民票個別事項連携情報作成【広域運用】画面Divを制御します。
@@ -25,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
  * @reamsid_L DBU-0550-010 zhangzhiming
  */
 public class KobetsuJikoRenkeiInfoSakuseiKoiki {
+
+    private static final int 連番 = 6;
 
     /**
      * 画面初期化表示する。
@@ -57,6 +60,10 @@ public class KobetsuJikoRenkeiInfoSakuseiKoiki {
      * @return ResponseData<KobetsuJikoRenkeiInfoSakuseiKoikiDiv>
      */
     public ResponseData<KobetsuJikoRenkeiInfoSakuseiKoikiDiv> onClick_KakuButton(KobetsuJikoRenkeiInfoSakuseiKoikiDiv div) {
+        ValidationMessageControlPairs validationMessageControlPairs = getHandler(div).validateCheck();
+        if (validationMessageControlPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
+        }
         getHandler(div).onClick_KakuButton();
         return ResponseData.of(div).respond();
     }
@@ -108,7 +115,7 @@ public class KobetsuJikoRenkeiInfoSakuseiKoiki {
      * @param div div
      * @return ResponseData<KobetsuKoikiunyoBatchParameter>
      */
-    public ResponseData<KobetsuKoikiunyoBatchParameter> onClick_JikkouButton(KobetsuJikoRenkeiInfoSakuseiKoikiDiv div) {
+    public ResponseData<KaiGoJuminHyokouKiuBatchParameter> onClick_JikkouButton(KobetsuJikoRenkeiInfoSakuseiKoikiDiv div) {
         KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder finder = KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder
                 .createInstance();
         List<KaigoJuminhyoKobetsuParameter> kobetsuLsit = new ArrayList<>();
@@ -117,11 +124,12 @@ public class KobetsuJikoRenkeiInfoSakuseiKoiki {
                 KaigoJuminhyoKobetsuParameter kobetsu = new KaigoJuminhyoKobetsuParameter();
                 kobetsu.setKonkaiStSakuseiTime(row.getTxtKonkaiStSakuseiTime().getValue());
                 kobetsu.setKonkaiStSakuseiYMD(row.getTxtKonkaiStSakuseiYMD().getValue());
+                kobetsu.setSakiShichoson(row.getTxtSakiShichoson().getValue().substring(0, 連番));
                 kobetsuLsit.add(kobetsu);
             }
         }
         List<KobetsuKoikiunyoParameter> businessList = finder.getKaigoJuminhyoKobetsuKoikiunyoBatchParameter(kobetsuLsit).records();
-        KobetsuKoikiunyoBatchParameter parameter = new KobetsuKoikiunyoBatchParameter(businessList);
+        KaiGoJuminHyokouKiuBatchParameter parameter = new KaiGoJuminHyokouKiuBatchParameter(businessList);
         return ResponseData.of(parameter).respond();
     }
 

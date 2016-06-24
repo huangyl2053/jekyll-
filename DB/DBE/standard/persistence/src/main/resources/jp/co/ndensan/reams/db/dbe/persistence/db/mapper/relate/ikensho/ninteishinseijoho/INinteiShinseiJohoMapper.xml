@@ -6,13 +6,13 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.ninteishinseijoho.INinteiShinseiJohoMapper">
 
-    <select id="select要介護認定申請情報ByKey" resultMap="resultMap_NinteiShinseiJohoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikensho.ninteishinseijoho.NinteiShinseiJohoMapperParameter" fetchSize="500">
+    <select resultOrdered="true" id="select要介護認定申請情報ByKey" resultMap="resultMap_NinteiShinseiJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikensho.ninteishinseijoho.NinteiShinseiJohoMapperParameter" fetchSize="500">
         <include refid="selectNinteiShinseiJohoEntity" />
     </select>
 
-    <select id="select要介護認定申請情報リストBy主キー1" resultMap="resultMap_NinteiShinseiJohoEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikensho.ninteishinseijoho.NinteiShinseiJohoMapperParameter" fetchSize="500">
+    <select resultOrdered="true" id="select要介護認定申請情報リストBy主キー1" resultMap="resultMap_NinteiShinseiJohoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikensho.ninteishinseijoho.NinteiShinseiJohoMapperParameter" fetchSize="500">
         <include refid="selectNinteiShinseiJohoEntity" />
     </select>
 
@@ -74,8 +74,8 @@
         </where>
     </sql>
     
-    <select id="get意見書情報" resultMap="resultMap_NinteiShinseiJohoEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikensho.ninteishinseijoho.NinteiShinseiJohoMapperParameter" fetchSize="500">
+    <select resultOrdered="true" id="get意見書情報" resultMap="resultMap_NinteiShinseiJohoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikensho.ninteishinseijoho.NinteiShinseiJohoMapperParameter" fetchSize="500">
         SELECT
         DbT5101NinteiShinseiJoho.*,
         DbT5300GeninShikkan.*,

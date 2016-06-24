@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120190.SaishinsaInsert
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120190.SaishinsaTempUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120190.SaishinsaWriteReportProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.saishinsaketteihokenshain.SaishinsaKetteiHokenshaInBatchParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.IcchiJoken;
+import jp.co.ndensan.reams.db.dbc.definition.core.IcchiJoken;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;

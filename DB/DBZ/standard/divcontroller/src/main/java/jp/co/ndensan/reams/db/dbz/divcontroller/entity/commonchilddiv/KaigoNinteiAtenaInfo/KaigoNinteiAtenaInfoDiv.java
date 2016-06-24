@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * KaigoNinteiAtenaInfo のクラスファイル
  *
- * @reamsid_L DBE-1300-050 lizhuoxuan
+ * @reamsid_L DBZ-1300-050 lizhuoxuan
  */
 public class KaigoNinteiAtenaInfoDiv extends Panel implements IKaigoNinteiAtenaInfoDiv {
 

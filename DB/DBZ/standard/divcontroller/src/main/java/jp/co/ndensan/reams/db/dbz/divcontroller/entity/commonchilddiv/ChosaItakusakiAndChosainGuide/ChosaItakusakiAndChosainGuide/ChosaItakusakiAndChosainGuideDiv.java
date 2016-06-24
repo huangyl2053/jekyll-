@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * ChosaItakusakiAndChosainGuide のクラスファイル
  *
- * @reamsid_L DBE-1300-020 wanghui
+ * @reamsid_L DBZ-1300-020 wanghui
  */
 public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaItakusakiAndChosainGuideDiv {
 

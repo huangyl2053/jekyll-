@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.config;
 
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysFukaKeisan;
+import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigKeysFukaKeisan;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

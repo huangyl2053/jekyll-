@@ -8,8 +8,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.report.tennyutenshutsumitorokuichiranhyo.TennyuTenshutsuMiTorokuIchiranhyoBodyItem;
 import jp.co.ndensan.reams.db.dba.business.report.tennyutenshutsumitorokuichiranhyo.TennyuTenshutsuMiTorokuIchiranhyoHeadItem;
 import jp.co.ndensan.reams.db.dba.business.report.tennyutenshutsumitorokuichiranhyo.TennyuTenshutsuMiTorokuIchiranhyoReport;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.shikakuidomishorisha.TennyuSakuseiJiyu;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.shikakuidomishorisha.TenshutsuSakuseiJiyu;
+import jp.co.ndensan.reams.db.dba.definition.core.shikakuidomishorisha.TennyuSakuseiJiyu;
+import jp.co.ndensan.reams.db.dba.definition.core.shikakuidomishorisha.TenshutsuSakuseiJiyu;
 import jp.co.ndensan.reams.db.dba.definition.processprm.tennyutensyutsumitorokuichiranhyo.TennyuTensyutsuMiTorokuIchiranhyoProcessParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshuhosyutaisyosya.TennyuHosyutaiSyosyaEntity;
@@ -156,8 +156,8 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
         }
         if (!eucCsvList.isEmpty()) {
             eucCsvWriter.close();
+            manager.spool(eucFilePath);
         }
-        manager.spool(eucFilePath);
         TennyuTenshutsuMiTorokuIchiranhyoReport report = TennyuTenshutsuMiTorokuIchiranhyoReport.createFrom(headItem, bodyItemList);
         report.writeBy(reportSourceWriter);
 

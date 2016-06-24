@@ -66,7 +66,7 @@
         <result property="fukaShoriJokyo" column="urT0705ChoteiKyotsu_fukaShoriJokyo" />
     </resultMap>
     
-    <select id="getEntity" resultMap="ResultMap_UrT0705ChoteiKyotsuEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_UrT0705ChoteiKyotsuEntity">
         SELECT
         <include refid="allColumns_UrT0705ChoteiKyotsu" />
         FROM

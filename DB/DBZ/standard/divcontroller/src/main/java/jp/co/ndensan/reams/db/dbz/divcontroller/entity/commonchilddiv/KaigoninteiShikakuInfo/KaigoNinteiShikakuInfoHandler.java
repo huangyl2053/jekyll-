@@ -9,12 +9,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigoninteishikakuinfo.KaigoNinteiShikakuInfoBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.YokaigoJotaiKubunSupport;
-import jp.co.ndensan.reams.db.dbz.definition.core.jyushochitokureisha.JushochitokureishaKubun;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.kaigoninteishikakuinfo.KaigoNinteiShikakuInfoFinder;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.definition.core.jushochitokureisha.JushochitokureishaKubun;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigoninteishikakuinfo.KaigoNinteiShikakuInfoFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護認定資格情報の取得するクラスです。
  *
- * @reamsid_L DBE-1300-060 lizhuoxuan
+ * @reamsid_L DBZ-1300-060 lizhuoxuan
  */
 public class KaigoNinteiShikakuInfoHandler {
 

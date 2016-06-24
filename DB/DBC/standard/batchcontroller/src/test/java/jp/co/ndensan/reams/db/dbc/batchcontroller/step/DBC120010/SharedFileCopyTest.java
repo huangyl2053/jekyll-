@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010;
 
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.IcchiJoken;
+import jp.co.ndensan.reams.db.dbc.definition.core.IcchiJoken;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow._StepResult;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;

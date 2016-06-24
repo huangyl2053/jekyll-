@@ -60,9 +60,9 @@ public class ShokujiHiyo {
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class);
         RDate 申請日 = new RDate(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_申請日, RString.class).toString());
 
-        div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getPanelCcd().getCcdKaigoAtenaInfo().initialize(識別コード);
         if (!被保険者番号.isEmpty()) {
-            div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         } else {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
@@ -157,7 +157,7 @@ public class ShokujiHiyo {
      * @return ResponseData
      */
     public ResponseData<ShokujiHiyoDiv> onClick_dgList_select(ShokujiHiyoDiv div) {
-        getHandler(div).set食事費用パネル２();
+        getHandler(div).set食事費用パネル２(ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
         return createResponse(div);
     }
 

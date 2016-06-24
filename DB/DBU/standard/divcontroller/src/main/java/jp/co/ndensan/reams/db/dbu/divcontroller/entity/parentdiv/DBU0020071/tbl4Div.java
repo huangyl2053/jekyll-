@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * tbl4 のクラスファイル
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  */
 public class tbl4Div extends TablePanel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -953,2047 +953,2047 @@ public class tbl4Div extends TablePanel {
      * TablePanelコントロールに特化したヘルパーメソッドを作成
      */
     @JsonIgnore
-    public TextBox getTextBox1206() {
+    public TextBoxNum getTextBox1206() {
         return this.TableCell1333.getTextBox1206();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1207() {
+    public TextBoxNum getTextBox1207() {
         return this.TableCell1334.getTextBox1207();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1208() {
+    public TextBoxNum getTextBox1208() {
         return this.TableCell1335.getTextBox1208();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1209() {
+    public TextBoxNum getTextBox1209() {
         return this.TableCell1336.getTextBox1209();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1210() {
+    public TextBoxNum getTextBox1210() {
         return this.TableCell1337.getTextBox1210();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1211() {
+    public TextBoxNum getTextBox1211() {
         return this.TableCell1338.getTextBox1211();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1212() {
+    public TextBoxNum getTextBox1212() {
         return this.TableCell1339.getTextBox1212();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1213() {
+    public TextBoxNum getTextBox1213() {
         return this.TableCell1340.getTextBox1213();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1214() {
+    public TextBoxNum getTextBox1214() {
         return this.TableCell1341.getTextBox1214();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1215() {
+    public TextBoxNum getTextBox1215() {
         return this.TableCell1342.getTextBox1215();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1216() {
+    public TextBoxNum getTextBox1216() {
         return this.TableCell1343.getTextBox1216();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1217() {
+    public TextBoxNum getTextBox1217() {
         return this.TableCell1345.getTextBox1217();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1218() {
+    public TextBoxNum getTextBox1218() {
         return this.TableCell1346.getTextBox1218();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1219() {
+    public TextBoxNum getTextBox1219() {
         return this.TableCell1347.getTextBox1219();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1220() {
+    public TextBoxNum getTextBox1220() {
         return this.TableCell1348.getTextBox1220();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1221() {
+    public TextBoxNum getTextBox1221() {
         return this.TableCell1349.getTextBox1221();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1222() {
+    public TextBoxNum getTextBox1222() {
         return this.TableCell1350.getTextBox1222();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1223() {
+    public TextBoxNum getTextBox1223() {
         return this.TableCell1351.getTextBox1223();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1224() {
+    public TextBoxNum getTextBox1224() {
         return this.TableCell1352.getTextBox1224();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1225() {
+    public TextBoxNum getTextBox1225() {
         return this.TableCell1353.getTextBox1225();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1226() {
+    public TextBoxNum getTextBox1226() {
         return this.TableCell1354.getTextBox1226();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1227() {
+    public TextBoxNum getTextBox1227() {
         return this.TableCell1355.getTextBox1227();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1228() {
+    public TextBoxNum getTextBox1228() {
         return this.TableCell1358.getTextBox1228();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1229() {
+    public TextBoxNum getTextBox1229() {
         return this.TableCell1359.getTextBox1229();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1230() {
+    public TextBoxNum getTextBox1230() {
         return this.TableCell1360.getTextBox1230();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1231() {
+    public TextBoxNum getTextBox1231() {
         return this.TableCell1361.getTextBox1231();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1232() {
+    public TextBoxNum getTextBox1232() {
         return this.TableCell1362.getTextBox1232();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1233() {
+    public TextBoxNum getTextBox1233() {
         return this.TableCell1363.getTextBox1233();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1234() {
+    public TextBoxNum getTextBox1234() {
         return this.TableCell1364.getTextBox1234();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1235() {
+    public TextBoxNum getTextBox1235() {
         return this.TableCell1365.getTextBox1235();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1236() {
+    public TextBoxNum getTextBox1236() {
         return this.TableCell1366.getTextBox1236();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1237() {
+    public TextBoxNum getTextBox1237() {
         return this.TableCell1367.getTextBox1237();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1238() {
+    public TextBoxNum getTextBox1238() {
         return this.TableCell1368.getTextBox1238();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1239() {
+    public TextBoxNum getTextBox1239() {
         return this.TableCell1371.getTextBox1239();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1240() {
+    public TextBoxNum getTextBox1240() {
         return this.TableCell1372.getTextBox1240();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1241() {
+    public TextBoxNum getTextBox1241() {
         return this.TableCell1373.getTextBox1241();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1242() {
+    public TextBoxNum getTextBox1242() {
         return this.TableCell1374.getTextBox1242();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1243() {
+    public TextBoxNum getTextBox1243() {
         return this.TableCell1375.getTextBox1243();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1244() {
+    public TextBoxNum getTextBox1244() {
         return this.TableCell1376.getTextBox1244();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1245() {
+    public TextBoxNum getTextBox1245() {
         return this.TableCell1377.getTextBox1245();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1246() {
+    public TextBoxNum getTextBox1246() {
         return this.TableCell1378.getTextBox1246();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1247() {
+    public TextBoxNum getTextBox1247() {
         return this.TableCell1379.getTextBox1247();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1248() {
+    public TextBoxNum getTextBox1248() {
         return this.TableCell1380.getTextBox1248();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1249() {
+    public TextBoxNum getTextBox1249() {
         return this.TableCell1381.getTextBox1249();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1250() {
+    public TextBoxNum getTextBox1250() {
         return this.TableCell1384.getTextBox1250();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1251() {
+    public TextBoxNum getTextBox1251() {
         return this.TableCell1385.getTextBox1251();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1252() {
+    public TextBoxNum getTextBox1252() {
         return this.TableCell1386.getTextBox1252();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1253() {
+    public TextBoxNum getTextBox1253() {
         return this.TableCell1387.getTextBox1253();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1254() {
+    public TextBoxNum getTextBox1254() {
         return this.TableCell1388.getTextBox1254();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1255() {
+    public TextBoxNum getTextBox1255() {
         return this.TableCell1389.getTextBox1255();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1256() {
+    public TextBoxNum getTextBox1256() {
         return this.TableCell1390.getTextBox1256();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1257() {
+    public TextBoxNum getTextBox1257() {
         return this.TableCell1391.getTextBox1257();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1258() {
+    public TextBoxNum getTextBox1258() {
         return this.TableCell1392.getTextBox1258();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1259() {
+    public TextBoxNum getTextBox1259() {
         return this.TableCell1393.getTextBox1259();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1260() {
+    public TextBoxNum getTextBox1260() {
         return this.TableCell1394.getTextBox1260();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1261() {
+    public TextBoxNum getTextBox1261() {
         return this.TableCell1397.getTextBox1261();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1262() {
+    public TextBoxNum getTextBox1262() {
         return this.TableCell1398.getTextBox1262();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1263() {
+    public TextBoxNum getTextBox1263() {
         return this.TableCell1399.getTextBox1263();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1264() {
+    public TextBoxNum getTextBox1264() {
         return this.TableCell1400.getTextBox1264();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1265() {
+    public TextBoxNum getTextBox1265() {
         return this.TableCell1401.getTextBox1265();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1266() {
+    public TextBoxNum getTextBox1266() {
         return this.TableCell1402.getTextBox1266();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1267() {
+    public TextBoxNum getTextBox1267() {
         return this.TableCell1403.getTextBox1267();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1268() {
+    public TextBoxNum getTextBox1268() {
         return this.TableCell1404.getTextBox1268();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1269() {
+    public TextBoxNum getTextBox1269() {
         return this.TableCell1405.getTextBox1269();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1270() {
+    public TextBoxNum getTextBox1270() {
         return this.TableCell1406.getTextBox1270();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1271() {
+    public TextBoxNum getTextBox1271() {
         return this.TableCell1407.getTextBox1271();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1272() {
+    public TextBoxNum getTextBox1272() {
         return this.TableCell1410.getTextBox1272();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1273() {
+    public TextBoxNum getTextBox1273() {
         return this.TableCell1411.getTextBox1273();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1274() {
+    public TextBoxNum getTextBox1274() {
         return this.TableCell1412.getTextBox1274();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1275() {
+    public TextBoxNum getTextBox1275() {
         return this.TableCell1413.getTextBox1275();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1276() {
+    public TextBoxNum getTextBox1276() {
         return this.TableCell1414.getTextBox1276();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1277() {
+    public TextBoxNum getTextBox1277() {
         return this.TableCell1415.getTextBox1277();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1278() {
+    public TextBoxNum getTextBox1278() {
         return this.TableCell1416.getTextBox1278();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1279() {
+    public TextBoxNum getTextBox1279() {
         return this.TableCell1417.getTextBox1279();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1280() {
+    public TextBoxNum getTextBox1280() {
         return this.TableCell1418.getTextBox1280();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1281() {
+    public TextBoxNum getTextBox1281() {
         return this.TableCell1419.getTextBox1281();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1282() {
+    public TextBoxNum getTextBox1282() {
         return this.TableCell1420.getTextBox1282();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1283() {
+    public TextBoxNum getTextBox1283() {
         return this.TableCell1422.getTextBox1283();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1284() {
+    public TextBoxNum getTextBox1284() {
         return this.TableCell1423.getTextBox1284();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1285() {
+    public TextBoxNum getTextBox1285() {
         return this.TableCell1424.getTextBox1285();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1286() {
+    public TextBoxNum getTextBox1286() {
         return this.TableCell1425.getTextBox1286();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1287() {
+    public TextBoxNum getTextBox1287() {
         return this.TableCell1426.getTextBox1287();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1288() {
+    public TextBoxNum getTextBox1288() {
         return this.TableCell1427.getTextBox1288();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1289() {
+    public TextBoxNum getTextBox1289() {
         return this.TableCell1428.getTextBox1289();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1290() {
+    public TextBoxNum getTextBox1290() {
         return this.TableCell1429.getTextBox1290();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1291() {
+    public TextBoxNum getTextBox1291() {
         return this.TableCell1430.getTextBox1291();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1292() {
+    public TextBoxNum getTextBox1292() {
         return this.TableCell1431.getTextBox1292();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1293() {
+    public TextBoxNum getTextBox1293() {
         return this.TableCell1432.getTextBox1293();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1294() {
+    public TextBoxNum getTextBox1294() {
         return this.TableCell1435.getTextBox1294();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1295() {
+    public TextBoxNum getTextBox1295() {
         return this.TableCell1436.getTextBox1295();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1296() {
+    public TextBoxNum getTextBox1296() {
         return this.TableCell1437.getTextBox1296();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1297() {
+    public TextBoxNum getTextBox1297() {
         return this.TableCell1438.getTextBox1297();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1298() {
+    public TextBoxNum getTextBox1298() {
         return this.TableCell1439.getTextBox1298();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1299() {
+    public TextBoxNum getTextBox1299() {
         return this.TableCell1440.getTextBox1299();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1300() {
+    public TextBoxNum getTextBox1300() {
         return this.TableCell1441.getTextBox1300();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1301() {
+    public TextBoxNum getTextBox1301() {
         return this.TableCell1442.getTextBox1301();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1302() {
+    public TextBoxNum getTextBox1302() {
         return this.TableCell1443.getTextBox1302();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1303() {
+    public TextBoxNum getTextBox1303() {
         return this.TableCell1444.getTextBox1303();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1304() {
+    public TextBoxNum getTextBox1304() {
         return this.TableCell1445.getTextBox1304();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1305() {
+    public TextBoxNum getTextBox1305() {
         return this.TableCell1448.getTextBox1305();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1306() {
+    public TextBoxNum getTextBox1306() {
         return this.TableCell1449.getTextBox1306();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1307() {
+    public TextBoxNum getTextBox1307() {
         return this.TableCell1450.getTextBox1307();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1308() {
+    public TextBoxNum getTextBox1308() {
         return this.TableCell1451.getTextBox1308();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1309() {
+    public TextBoxNum getTextBox1309() {
         return this.TableCell1452.getTextBox1309();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1310() {
+    public TextBoxNum getTextBox1310() {
         return this.TableCell1453.getTextBox1310();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1311() {
+    public TextBoxNum getTextBox1311() {
         return this.TableCell1454.getTextBox1311();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1312() {
+    public TextBoxNum getTextBox1312() {
         return this.TableCell1455.getTextBox1312();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1313() {
+    public TextBoxNum getTextBox1313() {
         return this.TableCell1456.getTextBox1313();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1314() {
+    public TextBoxNum getTextBox1314() {
         return this.TableCell1457.getTextBox1314();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1315() {
+    public TextBoxNum getTextBox1315() {
         return this.TableCell1458.getTextBox1315();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1316() {
+    public TextBoxNum getTextBox1316() {
         return this.TableCell1460.getTextBox1316();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1317() {
+    public TextBoxNum getTextBox1317() {
         return this.TableCell1461.getTextBox1317();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1318() {
+    public TextBoxNum getTextBox1318() {
         return this.TableCell1462.getTextBox1318();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1319() {
+    public TextBoxNum getTextBox1319() {
         return this.TableCell1463.getTextBox1319();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1320() {
+    public TextBoxNum getTextBox1320() {
         return this.TableCell1464.getTextBox1320();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1321() {
+    public TextBoxNum getTextBox1321() {
         return this.TableCell1465.getTextBox1321();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1322() {
+    public TextBoxNum getTextBox1322() {
         return this.TableCell1466.getTextBox1322();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1323() {
+    public TextBoxNum getTextBox1323() {
         return this.TableCell1467.getTextBox1323();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1324() {
+    public TextBoxNum getTextBox1324() {
         return this.TableCell1468.getTextBox1324();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1325() {
+    public TextBoxNum getTextBox1325() {
         return this.TableCell1469.getTextBox1325();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1326() {
+    public TextBoxNum getTextBox1326() {
         return this.TableCell1470.getTextBox1326();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1327() {
+    public TextBoxNum getTextBox1327() {
         return this.TableCell1473.getTextBox1327();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1328() {
+    public TextBoxNum getTextBox1328() {
         return this.TableCell1474.getTextBox1328();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1329() {
+    public TextBoxNum getTextBox1329() {
         return this.TableCell1475.getTextBox1329();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1330() {
+    public TextBoxNum getTextBox1330() {
         return this.TableCell1476.getTextBox1330();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1331() {
+    public TextBoxNum getTextBox1331() {
         return this.TableCell1477.getTextBox1331();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1332() {
+    public TextBoxNum getTextBox1332() {
         return this.TableCell1478.getTextBox1332();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1333() {
+    public TextBoxNum getTextBox1333() {
         return this.TableCell1479.getTextBox1333();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1334() {
+    public TextBoxNum getTextBox1334() {
         return this.TableCell1480.getTextBox1334();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1335() {
+    public TextBoxNum getTextBox1335() {
         return this.TableCell1481.getTextBox1335();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1336() {
+    public TextBoxNum getTextBox1336() {
         return this.TableCell1482.getTextBox1336();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1337() {
+    public TextBoxNum getTextBox1337() {
         return this.TableCell1483.getTextBox1337();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1338() {
+    public TextBoxNum getTextBox1338() {
         return this.TableCell1486.getTextBox1338();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1339() {
+    public TextBoxNum getTextBox1339() {
         return this.TableCell1487.getTextBox1339();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1340() {
+    public TextBoxNum getTextBox1340() {
         return this.TableCell1488.getTextBox1340();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1341() {
+    public TextBoxNum getTextBox1341() {
         return this.TableCell1489.getTextBox1341();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1342() {
+    public TextBoxNum getTextBox1342() {
         return this.TableCell1490.getTextBox1342();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1343() {
+    public TextBoxNum getTextBox1343() {
         return this.TableCell1491.getTextBox1343();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1344() {
+    public TextBoxNum getTextBox1344() {
         return this.TableCell1492.getTextBox1344();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1345() {
+    public TextBoxNum getTextBox1345() {
         return this.TableCell1493.getTextBox1345();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1346() {
+    public TextBoxNum getTextBox1346() {
         return this.TableCell1494.getTextBox1346();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1347() {
+    public TextBoxNum getTextBox1347() {
         return this.TableCell1495.getTextBox1347();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1348() {
+    public TextBoxNum getTextBox1348() {
         return this.TableCell1496.getTextBox1348();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1349() {
+    public TextBoxNum getTextBox1349() {
         return this.TableCell1499.getTextBox1349();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1350() {
+    public TextBoxNum getTextBox1350() {
         return this.TableCell1500.getTextBox1350();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1351() {
+    public TextBoxNum getTextBox1351() {
         return this.TableCell1501.getTextBox1351();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1352() {
+    public TextBoxNum getTextBox1352() {
         return this.TableCell1502.getTextBox1352();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1353() {
+    public TextBoxNum getTextBox1353() {
         return this.TableCell1503.getTextBox1353();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1354() {
+    public TextBoxNum getTextBox1354() {
         return this.TableCell1504.getTextBox1354();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1355() {
+    public TextBoxNum getTextBox1355() {
         return this.TableCell1505.getTextBox1355();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1356() {
+    public TextBoxNum getTextBox1356() {
         return this.TableCell1506.getTextBox1356();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1357() {
+    public TextBoxNum getTextBox1357() {
         return this.TableCell1507.getTextBox1357();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1358() {
+    public TextBoxNum getTextBox1358() {
         return this.TableCell1508.getTextBox1358();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1359() {
+    public TextBoxNum getTextBox1359() {
         return this.TableCell1509.getTextBox1359();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1360() {
+    public TextBoxNum getTextBox1360() {
         return this.TableCell1511.getTextBox1360();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1361() {
+    public TextBoxNum getTextBox1361() {
         return this.TableCell1512.getTextBox1361();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1362() {
+    public TextBoxNum getTextBox1362() {
         return this.TableCell1513.getTextBox1362();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1363() {
+    public TextBoxNum getTextBox1363() {
         return this.TableCell1514.getTextBox1363();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1364() {
+    public TextBoxNum getTextBox1364() {
         return this.TableCell1515.getTextBox1364();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1365() {
+    public TextBoxNum getTextBox1365() {
         return this.TableCell1516.getTextBox1365();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1366() {
+    public TextBoxNum getTextBox1366() {
         return this.TableCell1517.getTextBox1366();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1367() {
+    public TextBoxNum getTextBox1367() {
         return this.TableCell1518.getTextBox1367();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1368() {
+    public TextBoxNum getTextBox1368() {
         return this.TableCell1519.getTextBox1368();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1369() {
+    public TextBoxNum getTextBox1369() {
         return this.TableCell1520.getTextBox1369();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1370() {
+    public TextBoxNum getTextBox1370() {
         return this.TableCell1521.getTextBox1370();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1371() {
+    public TextBoxNum getTextBox1371() {
         return this.TableCell1524.getTextBox1371();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1372() {
+    public TextBoxNum getTextBox1372() {
         return this.TableCell1525.getTextBox1372();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1373() {
+    public TextBoxNum getTextBox1373() {
         return this.TableCell1526.getTextBox1373();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1374() {
+    public TextBoxNum getTextBox1374() {
         return this.TableCell1527.getTextBox1374();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1375() {
+    public TextBoxNum getTextBox1375() {
         return this.TableCell1528.getTextBox1375();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1376() {
+    public TextBoxNum getTextBox1376() {
         return this.TableCell1529.getTextBox1376();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1377() {
+    public TextBoxNum getTextBox1377() {
         return this.TableCell1530.getTextBox1377();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1378() {
+    public TextBoxNum getTextBox1378() {
         return this.TableCell1531.getTextBox1378();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1379() {
+    public TextBoxNum getTextBox1379() {
         return this.TableCell1532.getTextBox1379();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1380() {
+    public TextBoxNum getTextBox1380() {
         return this.TableCell1533.getTextBox1380();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1381() {
+    public TextBoxNum getTextBox1381() {
         return this.TableCell1534.getTextBox1381();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1382() {
+    public TextBoxNum getTextBox1382() {
         return this.TableCell1537.getTextBox1382();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1383() {
+    public TextBoxNum getTextBox1383() {
         return this.TableCell1538.getTextBox1383();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1384() {
+    public TextBoxNum getTextBox1384() {
         return this.TableCell1539.getTextBox1384();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1385() {
+    public TextBoxNum getTextBox1385() {
         return this.TableCell1540.getTextBox1385();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1386() {
+    public TextBoxNum getTextBox1386() {
         return this.TableCell1541.getTextBox1386();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1387() {
+    public TextBoxNum getTextBox1387() {
         return this.TableCell1542.getTextBox1387();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1388() {
+    public TextBoxNum getTextBox1388() {
         return this.TableCell1543.getTextBox1388();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1389() {
+    public TextBoxNum getTextBox1389() {
         return this.TableCell1544.getTextBox1389();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1390() {
+    public TextBoxNum getTextBox1390() {
         return this.TableCell1545.getTextBox1390();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1391() {
+    public TextBoxNum getTextBox1391() {
         return this.TableCell1546.getTextBox1391();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1392() {
+    public TextBoxNum getTextBox1392() {
         return this.TableCell1547.getTextBox1392();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1393() {
+    public TextBoxNum getTextBox1393() {
         return this.TableCell1550.getTextBox1393();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1394() {
+    public TextBoxNum getTextBox1394() {
         return this.TableCell1551.getTextBox1394();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1395() {
+    public TextBoxNum getTextBox1395() {
         return this.TableCell1552.getTextBox1395();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1396() {
+    public TextBoxNum getTextBox1396() {
         return this.TableCell1553.getTextBox1396();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1397() {
+    public TextBoxNum getTextBox1397() {
         return this.TableCell1554.getTextBox1397();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1398() {
+    public TextBoxNum getTextBox1398() {
         return this.TableCell1555.getTextBox1398();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1399() {
+    public TextBoxNum getTextBox1399() {
         return this.TableCell1556.getTextBox1399();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1400() {
+    public TextBoxNum getTextBox1400() {
         return this.TableCell1557.getTextBox1400();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1401() {
+    public TextBoxNum getTextBox1401() {
         return this.TableCell1558.getTextBox1401();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1402() {
+    public TextBoxNum getTextBox1402() {
         return this.TableCell1559.getTextBox1402();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1403() {
+    public TextBoxNum getTextBox1403() {
         return this.TableCell1560.getTextBox1403();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1404() {
+    public TextBoxNum getTextBox1404() {
         return this.TableCell1562.getTextBox1404();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1405() {
+    public TextBoxNum getTextBox1405() {
         return this.TableCell1563.getTextBox1405();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1406() {
+    public TextBoxNum getTextBox1406() {
         return this.TableCell1564.getTextBox1406();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1407() {
+    public TextBoxNum getTextBox1407() {
         return this.TableCell1565.getTextBox1407();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1408() {
+    public TextBoxNum getTextBox1408() {
         return this.TableCell1566.getTextBox1408();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1409() {
+    public TextBoxNum getTextBox1409() {
         return this.TableCell1567.getTextBox1409();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1410() {
+    public TextBoxNum getTextBox1410() {
         return this.TableCell1568.getTextBox1410();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1411() {
+    public TextBoxNum getTextBox1411() {
         return this.TableCell1569.getTextBox1411();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1412() {
+    public TextBoxNum getTextBox1412() {
         return this.TableCell1570.getTextBox1412();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1413() {
+    public TextBoxNum getTextBox1413() {
         return this.TableCell1571.getTextBox1413();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1414() {
+    public TextBoxNum getTextBox1414() {
         return this.TableCell1572.getTextBox1414();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1415() {
+    public TextBoxNum getTextBox1415() {
         return this.TableCell1574.getTextBox1415();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1416() {
+    public TextBoxNum getTextBox1416() {
         return this.TableCell1575.getTextBox1416();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1417() {
+    public TextBoxNum getTextBox1417() {
         return this.TableCell1576.getTextBox1417();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1418() {
+    public TextBoxNum getTextBox1418() {
         return this.TableCell1577.getTextBox1418();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1419() {
+    public TextBoxNum getTextBox1419() {
         return this.TableCell1578.getTextBox1419();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1420() {
+    public TextBoxNum getTextBox1420() {
         return this.TableCell1579.getTextBox1420();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1421() {
+    public TextBoxNum getTextBox1421() {
         return this.TableCell1580.getTextBox1421();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1422() {
+    public TextBoxNum getTextBox1422() {
         return this.TableCell1581.getTextBox1422();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1423() {
+    public TextBoxNum getTextBox1423() {
         return this.TableCell1582.getTextBox1423();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1424() {
+    public TextBoxNum getTextBox1424() {
         return this.TableCell1583.getTextBox1424();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1425() {
+    public TextBoxNum getTextBox1425() {
         return this.TableCell1584.getTextBox1425();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1426() {
+    public TextBoxNum getTextBox1426() {
         return this.TableCell1585.getTextBox1426();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1427() {
+    public TextBoxNum getTextBox1427() {
         return this.TableCell1586.getTextBox1427();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1428() {
+    public TextBoxNum getTextBox1428() {
         return this.TableCell1587.getTextBox1428();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1429() {
+    public TextBoxNum getTextBox1429() {
         return this.TableCell1588.getTextBox1429();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1430() {
+    public TextBoxNum getTextBox1430() {
         return this.TableCell1589.getTextBox1430();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1431() {
+    public TextBoxNum getTextBox1431() {
         return this.TableCell1590.getTextBox1431();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1432() {
+    public TextBoxNum getTextBox1432() {
         return this.TableCell1591.getTextBox1432();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1433() {
+    public TextBoxNum getTextBox1433() {
         return this.TableCell1592.getTextBox1433();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1434() {
+    public TextBoxNum getTextBox1434() {
         return this.TableCell1593.getTextBox1434();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1435() {
+    public TextBoxNum getTextBox1435() {
         return this.TableCell1594.getTextBox1435();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1436() {
+    public TextBoxNum getTextBox1436() {
         return this.TableCell1595.getTextBox1436();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1437() {
+    public TextBoxNum getTextBox1437() {
         return this.TableCell1597.getTextBox1437();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1438() {
+    public TextBoxNum getTextBox1438() {
         return this.TableCell1598.getTextBox1438();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1439() {
+    public TextBoxNum getTextBox1439() {
         return this.TableCell1599.getTextBox1439();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1440() {
+    public TextBoxNum getTextBox1440() {
         return this.TableCell1600.getTextBox1440();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1441() {
+    public TextBoxNum getTextBox1441() {
         return this.TableCell1601.getTextBox1441();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1442() {
+    public TextBoxNum getTextBox1442() {
         return this.TableCell1602.getTextBox1442();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1443() {
+    public TextBoxNum getTextBox1443() {
         return this.TableCell1603.getTextBox1443();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1444() {
+    public TextBoxNum getTextBox1444() {
         return this.TableCell1604.getTextBox1444();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1445() {
+    public TextBoxNum getTextBox1445() {
         return this.TableCell1605.getTextBox1445();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1446() {
+    public TextBoxNum getTextBox1446() {
         return this.TableCell1606.getTextBox1446();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1447() {
+    public TextBoxNum getTextBox1447() {
         return this.TableCell1608.getTextBox1447();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1448() {
+    public TextBoxNum getTextBox1448() {
         return this.TableCell1609.getTextBox1448();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1449() {
+    public TextBoxNum getTextBox1449() {
         return this.TableCell1610.getTextBox1449();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1450() {
+    public TextBoxNum getTextBox1450() {
         return this.TableCell1611.getTextBox1450();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1451() {
+    public TextBoxNum getTextBox1451() {
         return this.TableCell1612.getTextBox1451();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1452() {
+    public TextBoxNum getTextBox1452() {
         return this.TableCell1613.getTextBox1452();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1453() {
+    public TextBoxNum getTextBox1453() {
         return this.TableCell1614.getTextBox1453();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1454() {
+    public TextBoxNum getTextBox1454() {
         return this.TableCell1615.getTextBox1454();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1455() {
+    public TextBoxNum getTextBox1455() {
         return this.TableCell1616.getTextBox1455();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1456() {
+    public TextBoxNum getTextBox1456() {
         return this.TableCell1617.getTextBox1456();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1457() {
+    public TextBoxNum getTextBox1457() {
         return this.TableCell1619.getTextBox1457();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1458() {
+    public TextBoxNum getTextBox1458() {
         return this.TableCell1620.getTextBox1458();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1459() {
+    public TextBoxNum getTextBox1459() {
         return this.TableCell1621.getTextBox1459();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1460() {
+    public TextBoxNum getTextBox1460() {
         return this.TableCell1622.getTextBox1460();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1461() {
+    public TextBoxNum getTextBox1461() {
         return this.TableCell1623.getTextBox1461();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1462() {
+    public TextBoxNum getTextBox1462() {
         return this.TableCell1624.getTextBox1462();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1463() {
+    public TextBoxNum getTextBox1463() {
         return this.TableCell1625.getTextBox1463();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1464() {
+    public TextBoxNum getTextBox1464() {
         return this.TableCell1626.getTextBox1464();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1465() {
+    public TextBoxNum getTextBox1465() {
         return this.TableCell1627.getTextBox1465();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1466() {
+    public TextBoxNum getTextBox1466() {
         return this.TableCell1628.getTextBox1466();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1467() {
+    public TextBoxNum getTextBox1467() {
         return this.TableCell1629.getTextBox1467();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1468() {
+    public TextBoxNum getTextBox1468() {
         return this.TableCell1631.getTextBox1468();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1469() {
+    public TextBoxNum getTextBox1469() {
         return this.TableCell1632.getTextBox1469();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1470() {
+    public TextBoxNum getTextBox1470() {
         return this.TableCell1633.getTextBox1470();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1471() {
+    public TextBoxNum getTextBox1471() {
         return this.TableCell1634.getTextBox1471();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1472() {
+    public TextBoxNum getTextBox1472() {
         return this.TableCell1635.getTextBox1472();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1473() {
+    public TextBoxNum getTextBox1473() {
         return this.TableCell1636.getTextBox1473();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1474() {
+    public TextBoxNum getTextBox1474() {
         return this.TableCell1637.getTextBox1474();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1475() {
+    public TextBoxNum getTextBox1475() {
         return this.TableCell1638.getTextBox1475();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1476() {
+    public TextBoxNum getTextBox1476() {
         return this.TableCell1639.getTextBox1476();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1477() {
+    public TextBoxNum getTextBox1477() {
         return this.TableCell1640.getTextBox1477();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1478() {
+    public TextBoxNum getTextBox1478() {
         return this.TableCell1641.getTextBox1478();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1479() {
+    public TextBoxNum getTextBox1479() {
         return this.TableCell1643.getTextBox1479();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1480() {
+    public TextBoxNum getTextBox1480() {
         return this.TableCell1644.getTextBox1480();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1481() {
+    public TextBoxNum getTextBox1481() {
         return this.TableCell1645.getTextBox1481();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1482() {
+    public TextBoxNum getTextBox1482() {
         return this.TableCell1646.getTextBox1482();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1483() {
+    public TextBoxNum getTextBox1483() {
         return this.TableCell1647.getTextBox1483();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1484() {
+    public TextBoxNum getTextBox1484() {
         return this.TableCell1648.getTextBox1484();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1485() {
+    public TextBoxNum getTextBox1485() {
         return this.TableCell1649.getTextBox1485();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1486() {
+    public TextBoxNum getTextBox1486() {
         return this.TableCell1650.getTextBox1486();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1487() {
+    public TextBoxNum getTextBox1487() {
         return this.TableCell1651.getTextBox1487();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1488() {
+    public TextBoxNum getTextBox1488() {
         return this.TableCell1652.getTextBox1488();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1489() {
+    public TextBoxNum getTextBox1489() {
         return this.TableCell1654.getTextBox1489();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1490() {
+    public TextBoxNum getTextBox1490() {
         return this.TableCell1655.getTextBox1490();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1491() {
+    public TextBoxNum getTextBox1491() {
         return this.TableCell1656.getTextBox1491();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1492() {
+    public TextBoxNum getTextBox1492() {
         return this.TableCell1657.getTextBox1492();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1493() {
+    public TextBoxNum getTextBox1493() {
         return this.TableCell1658.getTextBox1493();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1494() {
+    public TextBoxNum getTextBox1494() {
         return this.TableCell1659.getTextBox1494();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1495() {
+    public TextBoxNum getTextBox1495() {
         return this.TableCell1660.getTextBox1495();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1496() {
+    public TextBoxNum getTextBox1496() {
         return this.TableCell1661.getTextBox1496();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1497() {
+    public TextBoxNum getTextBox1497() {
         return this.TableCell1662.getTextBox1497();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1498() {
+    public TextBoxNum getTextBox1498() {
         return this.TableCell1663.getTextBox1498();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1499() {
+    public TextBoxNum getTextBox1499() {
         return this.TableCell1665.getTextBox1499();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1500() {
+    public TextBoxNum getTextBox1500() {
         return this.TableCell1666.getTextBox1500();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1501() {
+    public TextBoxNum getTextBox1501() {
         return this.TableCell1667.getTextBox1501();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1502() {
+    public TextBoxNum getTextBox1502() {
         return this.TableCell1668.getTextBox1502();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1503() {
+    public TextBoxNum getTextBox1503() {
         return this.TableCell1669.getTextBox1503();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1504() {
+    public TextBoxNum getTextBox1504() {
         return this.TableCell1670.getTextBox1504();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1505() {
+    public TextBoxNum getTextBox1505() {
         return this.TableCell1671.getTextBox1505();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1506() {
+    public TextBoxNum getTextBox1506() {
         return this.TableCell1672.getTextBox1506();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1507() {
+    public TextBoxNum getTextBox1507() {
         return this.TableCell1673.getTextBox1507();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1508() {
+    public TextBoxNum getTextBox1508() {
         return this.TableCell1674.getTextBox1508();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1509() {
+    public TextBoxNum getTextBox1509() {
         return this.TableCell1676.getTextBox1509();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1510() {
+    public TextBoxNum getTextBox1510() {
         return this.TableCell1677.getTextBox1510();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1511() {
+    public TextBoxNum getTextBox1511() {
         return this.TableCell1678.getTextBox1511();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1512() {
+    public TextBoxNum getTextBox1512() {
         return this.TableCell1679.getTextBox1512();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1513() {
+    public TextBoxNum getTextBox1513() {
         return this.TableCell1680.getTextBox1513();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1514() {
+    public TextBoxNum getTextBox1514() {
         return this.TableCell1681.getTextBox1514();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1515() {
+    public TextBoxNum getTextBox1515() {
         return this.TableCell1682.getTextBox1515();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1516() {
+    public TextBoxNum getTextBox1516() {
         return this.TableCell1683.getTextBox1516();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1517() {
+    public TextBoxNum getTextBox1517() {
         return this.TableCell1684.getTextBox1517();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1518() {
+    public TextBoxNum getTextBox1518() {
         return this.TableCell1685.getTextBox1518();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1519() {
+    public TextBoxNum getTextBox1519() {
         return this.TableCell1686.getTextBox1519();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1520() {
+    public TextBoxNum getTextBox1520() {
         return this.TableCell1687.getTextBox1520();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1521() {
+    public TextBoxNum getTextBox1521() {
         return this.TableCell1688.getTextBox1521();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1522() {
+    public TextBoxNum getTextBox1522() {
         return this.TableCell1689.getTextBox1522();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1523() {
+    public TextBoxNum getTextBox1523() {
         return this.TableCell1690.getTextBox1523();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1524() {
+    public TextBoxNum getTextBox1524() {
         return this.TableCell1691.getTextBox1524();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1525() {
+    public TextBoxNum getTextBox1525() {
         return this.TableCell1692.getTextBox1525();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1526() {
+    public TextBoxNum getTextBox1526() {
         return this.TableCell1693.getTextBox1526();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1527() {
+    public TextBoxNum getTextBox1527() {
         return this.TableCell1694.getTextBox1527();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1528() {
+    public TextBoxNum getTextBox1528() {
         return this.TableCell1695.getTextBox1528();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1529() {
+    public TextBoxNum getTextBox1529() {
         return this.TableCell1696.getTextBox1529();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1530() {
+    public TextBoxNum getTextBox1530() {
         return this.TableCell1698.getTextBox1530();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1531() {
+    public TextBoxNum getTextBox1531() {
         return this.TableCell1699.getTextBox1531();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1532() {
+    public TextBoxNum getTextBox1532() {
         return this.TableCell1700.getTextBox1532();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1533() {
+    public TextBoxNum getTextBox1533() {
         return this.TableCell1701.getTextBox1533();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1534() {
+    public TextBoxNum getTextBox1534() {
         return this.TableCell1702.getTextBox1534();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1535() {
+    public TextBoxNum getTextBox1535() {
         return this.TableCell1703.getTextBox1535();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1536() {
+    public TextBoxNum getTextBox1536() {
         return this.TableCell1704.getTextBox1536();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1537() {
+    public TextBoxNum getTextBox1537() {
         return this.TableCell1705.getTextBox1537();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1538() {
+    public TextBoxNum getTextBox1538() {
         return this.TableCell1706.getTextBox1538();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1539() {
+    public TextBoxNum getTextBox1539() {
         return this.TableCell1707.getTextBox1539();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1540() {
+    public TextBoxNum getTextBox1540() {
         return this.TableCell1708.getTextBox1540();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1541() {
+    public TextBoxNum getTextBox1541() {
         return this.TableCell1710.getTextBox1541();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1542() {
+    public TextBoxNum getTextBox1542() {
         return this.TableCell1711.getTextBox1542();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1543() {
+    public TextBoxNum getTextBox1543() {
         return this.TableCell1712.getTextBox1543();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1544() {
+    public TextBoxNum getTextBox1544() {
         return this.TableCell1713.getTextBox1544();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1545() {
+    public TextBoxNum getTextBox1545() {
         return this.TableCell1714.getTextBox1545();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1546() {
+    public TextBoxNum getTextBox1546() {
         return this.TableCell1715.getTextBox1546();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1547() {
+    public TextBoxNum getTextBox1547() {
         return this.TableCell1716.getTextBox1547();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1548() {
+    public TextBoxNum getTextBox1548() {
         return this.TableCell1717.getTextBox1548();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1549() {
+    public TextBoxNum getTextBox1549() {
         return this.TableCell1718.getTextBox1549();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1550() {
+    public TextBoxNum getTextBox1550() {
         return this.TableCell1719.getTextBox1550();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1551() {
+    public TextBoxNum getTextBox1551() {
         return this.TableCell1721.getTextBox1551();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1552() {
+    public TextBoxNum getTextBox1552() {
         return this.TableCell1722.getTextBox1552();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1553() {
+    public TextBoxNum getTextBox1553() {
         return this.TableCell1723.getTextBox1553();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1554() {
+    public TextBoxNum getTextBox1554() {
         return this.TableCell1724.getTextBox1554();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1555() {
+    public TextBoxNum getTextBox1555() {
         return this.TableCell1725.getTextBox1555();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1556() {
+    public TextBoxNum getTextBox1556() {
         return this.TableCell1726.getTextBox1556();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1557() {
+    public TextBoxNum getTextBox1557() {
         return this.TableCell1727.getTextBox1557();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1558() {
+    public TextBoxNum getTextBox1558() {
         return this.TableCell1728.getTextBox1558();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1559() {
+    public TextBoxNum getTextBox1559() {
         return this.TableCell1729.getTextBox1559();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1560() {
+    public TextBoxNum getTextBox1560() {
         return this.TableCell1730.getTextBox1560();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1561() {
+    public TextBoxNum getTextBox1561() {
         return this.TableCell1732.getTextBox1561();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1562() {
+    public TextBoxNum getTextBox1562() {
         return this.TableCell1733.getTextBox1562();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1563() {
+    public TextBoxNum getTextBox1563() {
         return this.TableCell1734.getTextBox1563();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1564() {
+    public TextBoxNum getTextBox1564() {
         return this.TableCell1735.getTextBox1564();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1565() {
+    public TextBoxNum getTextBox1565() {
         return this.TableCell1736.getTextBox1565();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1566() {
+    public TextBoxNum getTextBox1566() {
         return this.TableCell1737.getTextBox1566();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1567() {
+    public TextBoxNum getTextBox1567() {
         return this.TableCell1738.getTextBox1567();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1568() {
+    public TextBoxNum getTextBox1568() {
         return this.TableCell1739.getTextBox1568();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1569() {
+    public TextBoxNum getTextBox1569() {
         return this.TableCell1740.getTextBox1569();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1570() {
+    public TextBoxNum getTextBox1570() {
         return this.TableCell1741.getTextBox1570();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1571() {
+    public TextBoxNum getTextBox1571() {
         return this.TableCell1742.getTextBox1571();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1572() {
+    public TextBoxNum getTextBox1572() {
         return this.TableCell1745.getTextBox1572();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1573() {
+    public TextBoxNum getTextBox1573() {
         return this.TableCell1746.getTextBox1573();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1574() {
+    public TextBoxNum getTextBox1574() {
         return this.TableCell1747.getTextBox1574();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1575() {
+    public TextBoxNum getTextBox1575() {
         return this.TableCell1748.getTextBox1575();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1576() {
+    public TextBoxNum getTextBox1576() {
         return this.TableCell1749.getTextBox1576();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1577() {
+    public TextBoxNum getTextBox1577() {
         return this.TableCell1750.getTextBox1577();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1578() {
+    public TextBoxNum getTextBox1578() {
         return this.TableCell1751.getTextBox1578();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1579() {
+    public TextBoxNum getTextBox1579() {
         return this.TableCell1752.getTextBox1579();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1580() {
+    public TextBoxNum getTextBox1580() {
         return this.TableCell1753.getTextBox1580();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1581() {
+    public TextBoxNum getTextBox1581() {
         return this.TableCell1754.getTextBox1581();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1582() {
+    public TextBoxNum getTextBox1582() {
         return this.TableCell1755.getTextBox1582();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1583() {
+    public TextBoxNum getTextBox1583() {
         return this.TableCell1758.getTextBox1583();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1584() {
+    public TextBoxNum getTextBox1584() {
         return this.TableCell1759.getTextBox1584();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1585() {
+    public TextBoxNum getTextBox1585() {
         return this.TableCell1760.getTextBox1585();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1586() {
+    public TextBoxNum getTextBox1586() {
         return this.TableCell1761.getTextBox1586();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1587() {
+    public TextBoxNum getTextBox1587() {
         return this.TableCell1762.getTextBox1587();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1588() {
+    public TextBoxNum getTextBox1588() {
         return this.TableCell1763.getTextBox1588();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1589() {
+    public TextBoxNum getTextBox1589() {
         return this.TableCell1764.getTextBox1589();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1590() {
+    public TextBoxNum getTextBox1590() {
         return this.TableCell1765.getTextBox1590();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1591() {
+    public TextBoxNum getTextBox1591() {
         return this.TableCell1766.getTextBox1591();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1592() {
+    public TextBoxNum getTextBox1592() {
         return this.TableCell1767.getTextBox1592();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1593() {
+    public TextBoxNum getTextBox1593() {
         return this.TableCell1770.getTextBox1593();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1594() {
+    public TextBoxNum getTextBox1594() {
         return this.TableCell1771.getTextBox1594();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1595() {
+    public TextBoxNum getTextBox1595() {
         return this.TableCell1772.getTextBox1595();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1596() {
+    public TextBoxNum getTextBox1596() {
         return this.TableCell1773.getTextBox1596();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1597() {
+    public TextBoxNum getTextBox1597() {
         return this.TableCell1774.getTextBox1597();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1598() {
+    public TextBoxNum getTextBox1598() {
         return this.TableCell1775.getTextBox1598();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1599() {
+    public TextBoxNum getTextBox1599() {
         return this.TableCell1776.getTextBox1599();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1600() {
+    public TextBoxNum getTextBox1600() {
         return this.TableCell1777.getTextBox1600();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1601() {
+    public TextBoxNum getTextBox1601() {
         return this.TableCell1778.getTextBox1601();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1602() {
+    public TextBoxNum getTextBox1602() {
         return this.TableCell1779.getTextBox1602();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1603() {
+    public TextBoxNum getTextBox1603() {
         return this.TableCell1780.getTextBox1603();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1604() {
+    public TextBoxNum getTextBox1604() {
         return this.TableCell1781.getTextBox1604();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1605() {
+    public TextBoxNum getTextBox1605() {
         return this.TableCell1782.getTextBox1605();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1606() {
+    public TextBoxNum getTextBox1606() {
         return this.TableCell1783.getTextBox1606();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1607() {
+    public TextBoxNum getTextBox1607() {
         return this.TableCell1784.getTextBox1607();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1608() {
+    public TextBoxNum getTextBox1608() {
         return this.TableCell1785.getTextBox1608();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1609() {
+    public TextBoxNum getTextBox1609() {
         return this.TableCell1786.getTextBox1609();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1610() {
+    public TextBoxNum getTextBox1610() {
         return this.TableCell1787.getTextBox1610();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1611() {
+    public TextBoxNum getTextBox1611() {
         return this.TableCell1788.getTextBox1611();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1612() {
+    public TextBoxNum getTextBox1612() {
         return this.TableCell1789.getTextBox1612();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1613() {
+    public TextBoxNum getTextBox1613() {
         return this.TableCell1790.getTextBox1613();
     }
 
     @JsonIgnore
-    public TextBox getTextBox1614() {
+    public TextBoxNum getTextBox1614() {
         return this.TableCell1791.getTextBox1614();
     }
 
@@ -11310,7 +11310,7 @@ public class tbl4Div extends TablePanel {
  * @author 自動生成
  */
 class TableCell1793Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -11321,7 +11321,7 @@ class TableCell1793Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1332Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -11333,16 +11333,16 @@ class TableCell1332Attbl4 extends TableCell {
  */
 class TableCell1333Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1206")
-    private TextBox TextBox1206;
+    private TextBoxNum TextBox1206;
 
     /*
      * getTextBox1206
      * @return TextBox1206
      */
     @JsonProperty("TextBox1206")
-    public TextBox getTextBox1206() {
+    public TextBoxNum getTextBox1206() {
         return TextBox1206;
     }
 
@@ -11351,7 +11351,7 @@ class TableCell1333Attbl4 extends TableCell {
      * @param TextBox1206 TextBox1206
      */
     @JsonProperty("TextBox1206")
-    public void setTextBox1206(TextBox TextBox1206) {
+    public void setTextBox1206(TextBoxNum TextBox1206) {
         this.TextBox1206 = TextBox1206;
     }
 
@@ -11365,16 +11365,16 @@ class TableCell1333Attbl4 extends TableCell {
  */
 class TableCell1334Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1207")
-    private TextBox TextBox1207;
+    private TextBoxNum TextBox1207;
 
     /*
      * getTextBox1207
      * @return TextBox1207
      */
     @JsonProperty("TextBox1207")
-    public TextBox getTextBox1207() {
+    public TextBoxNum getTextBox1207() {
         return TextBox1207;
     }
 
@@ -11383,7 +11383,7 @@ class TableCell1334Attbl4 extends TableCell {
      * @param TextBox1207 TextBox1207
      */
     @JsonProperty("TextBox1207")
-    public void setTextBox1207(TextBox TextBox1207) {
+    public void setTextBox1207(TextBoxNum TextBox1207) {
         this.TextBox1207 = TextBox1207;
     }
 
@@ -11397,16 +11397,16 @@ class TableCell1334Attbl4 extends TableCell {
  */
 class TableCell1335Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1208")
-    private TextBox TextBox1208;
+    private TextBoxNum TextBox1208;
 
     /*
      * getTextBox1208
      * @return TextBox1208
      */
     @JsonProperty("TextBox1208")
-    public TextBox getTextBox1208() {
+    public TextBoxNum getTextBox1208() {
         return TextBox1208;
     }
 
@@ -11415,7 +11415,7 @@ class TableCell1335Attbl4 extends TableCell {
      * @param TextBox1208 TextBox1208
      */
     @JsonProperty("TextBox1208")
-    public void setTextBox1208(TextBox TextBox1208) {
+    public void setTextBox1208(TextBoxNum TextBox1208) {
         this.TextBox1208 = TextBox1208;
     }
 
@@ -11429,16 +11429,16 @@ class TableCell1335Attbl4 extends TableCell {
  */
 class TableCell1336Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1209")
-    private TextBox TextBox1209;
+    private TextBoxNum TextBox1209;
 
     /*
      * getTextBox1209
      * @return TextBox1209
      */
     @JsonProperty("TextBox1209")
-    public TextBox getTextBox1209() {
+    public TextBoxNum getTextBox1209() {
         return TextBox1209;
     }
 
@@ -11447,7 +11447,7 @@ class TableCell1336Attbl4 extends TableCell {
      * @param TextBox1209 TextBox1209
      */
     @JsonProperty("TextBox1209")
-    public void setTextBox1209(TextBox TextBox1209) {
+    public void setTextBox1209(TextBoxNum TextBox1209) {
         this.TextBox1209 = TextBox1209;
     }
 
@@ -11461,16 +11461,16 @@ class TableCell1336Attbl4 extends TableCell {
  */
 class TableCell1337Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1210")
-    private TextBox TextBox1210;
+    private TextBoxNum TextBox1210;
 
     /*
      * getTextBox1210
      * @return TextBox1210
      */
     @JsonProperty("TextBox1210")
-    public TextBox getTextBox1210() {
+    public TextBoxNum getTextBox1210() {
         return TextBox1210;
     }
 
@@ -11479,7 +11479,7 @@ class TableCell1337Attbl4 extends TableCell {
      * @param TextBox1210 TextBox1210
      */
     @JsonProperty("TextBox1210")
-    public void setTextBox1210(TextBox TextBox1210) {
+    public void setTextBox1210(TextBoxNum TextBox1210) {
         this.TextBox1210 = TextBox1210;
     }
 
@@ -11493,16 +11493,16 @@ class TableCell1337Attbl4 extends TableCell {
  */
 class TableCell1338Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1211")
-    private TextBox TextBox1211;
+    private TextBoxNum TextBox1211;
 
     /*
      * getTextBox1211
      * @return TextBox1211
      */
     @JsonProperty("TextBox1211")
-    public TextBox getTextBox1211() {
+    public TextBoxNum getTextBox1211() {
         return TextBox1211;
     }
 
@@ -11511,7 +11511,7 @@ class TableCell1338Attbl4 extends TableCell {
      * @param TextBox1211 TextBox1211
      */
     @JsonProperty("TextBox1211")
-    public void setTextBox1211(TextBox TextBox1211) {
+    public void setTextBox1211(TextBoxNum TextBox1211) {
         this.TextBox1211 = TextBox1211;
     }
 
@@ -11525,16 +11525,16 @@ class TableCell1338Attbl4 extends TableCell {
  */
 class TableCell1339Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1212")
-    private TextBox TextBox1212;
+    private TextBoxNum TextBox1212;
 
     /*
      * getTextBox1212
      * @return TextBox1212
      */
     @JsonProperty("TextBox1212")
-    public TextBox getTextBox1212() {
+    public TextBoxNum getTextBox1212() {
         return TextBox1212;
     }
 
@@ -11543,7 +11543,7 @@ class TableCell1339Attbl4 extends TableCell {
      * @param TextBox1212 TextBox1212
      */
     @JsonProperty("TextBox1212")
-    public void setTextBox1212(TextBox TextBox1212) {
+    public void setTextBox1212(TextBoxNum TextBox1212) {
         this.TextBox1212 = TextBox1212;
     }
 
@@ -11557,16 +11557,16 @@ class TableCell1339Attbl4 extends TableCell {
  */
 class TableCell1340Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1213")
-    private TextBox TextBox1213;
+    private TextBoxNum TextBox1213;
 
     /*
      * getTextBox1213
      * @return TextBox1213
      */
     @JsonProperty("TextBox1213")
-    public TextBox getTextBox1213() {
+    public TextBoxNum getTextBox1213() {
         return TextBox1213;
     }
 
@@ -11575,7 +11575,7 @@ class TableCell1340Attbl4 extends TableCell {
      * @param TextBox1213 TextBox1213
      */
     @JsonProperty("TextBox1213")
-    public void setTextBox1213(TextBox TextBox1213) {
+    public void setTextBox1213(TextBoxNum TextBox1213) {
         this.TextBox1213 = TextBox1213;
     }
 
@@ -11589,16 +11589,16 @@ class TableCell1340Attbl4 extends TableCell {
  */
 class TableCell1341Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1214")
-    private TextBox TextBox1214;
+    private TextBoxNum TextBox1214;
 
     /*
      * getTextBox1214
      * @return TextBox1214
      */
     @JsonProperty("TextBox1214")
-    public TextBox getTextBox1214() {
+    public TextBoxNum getTextBox1214() {
         return TextBox1214;
     }
 
@@ -11607,7 +11607,7 @@ class TableCell1341Attbl4 extends TableCell {
      * @param TextBox1214 TextBox1214
      */
     @JsonProperty("TextBox1214")
-    public void setTextBox1214(TextBox TextBox1214) {
+    public void setTextBox1214(TextBoxNum TextBox1214) {
         this.TextBox1214 = TextBox1214;
     }
 
@@ -11621,16 +11621,16 @@ class TableCell1341Attbl4 extends TableCell {
  */
 class TableCell1342Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1215")
-    private TextBox TextBox1215;
+    private TextBoxNum TextBox1215;
 
     /*
      * getTextBox1215
      * @return TextBox1215
      */
     @JsonProperty("TextBox1215")
-    public TextBox getTextBox1215() {
+    public TextBoxNum getTextBox1215() {
         return TextBox1215;
     }
 
@@ -11639,7 +11639,7 @@ class TableCell1342Attbl4 extends TableCell {
      * @param TextBox1215 TextBox1215
      */
     @JsonProperty("TextBox1215")
-    public void setTextBox1215(TextBox TextBox1215) {
+    public void setTextBox1215(TextBoxNum TextBox1215) {
         this.TextBox1215 = TextBox1215;
     }
 
@@ -11653,16 +11653,16 @@ class TableCell1342Attbl4 extends TableCell {
  */
 class TableCell1343Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1216")
-    private TextBox TextBox1216;
+    private TextBoxNum TextBox1216;
 
     /*
      * getTextBox1216
      * @return TextBox1216
      */
     @JsonProperty("TextBox1216")
-    public TextBox getTextBox1216() {
+    public TextBoxNum getTextBox1216() {
         return TextBox1216;
     }
 
@@ -11671,7 +11671,7 @@ class TableCell1343Attbl4 extends TableCell {
      * @param TextBox1216 TextBox1216
      */
     @JsonProperty("TextBox1216")
-    public void setTextBox1216(TextBox TextBox1216) {
+    public void setTextBox1216(TextBoxNum TextBox1216) {
         this.TextBox1216 = TextBox1216;
     }
 
@@ -11684,7 +11684,7 @@ class TableCell1343Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1344Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -11696,16 +11696,16 @@ class TableCell1344Attbl4 extends TableCell {
  */
 class TableCell1345Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1217")
-    private TextBox TextBox1217;
+    private TextBoxNum TextBox1217;
 
     /*
      * getTextBox1217
      * @return TextBox1217
      */
     @JsonProperty("TextBox1217")
-    public TextBox getTextBox1217() {
+    public TextBoxNum getTextBox1217() {
         return TextBox1217;
     }
 
@@ -11714,7 +11714,7 @@ class TableCell1345Attbl4 extends TableCell {
      * @param TextBox1217 TextBox1217
      */
     @JsonProperty("TextBox1217")
-    public void setTextBox1217(TextBox TextBox1217) {
+    public void setTextBox1217(TextBoxNum TextBox1217) {
         this.TextBox1217 = TextBox1217;
     }
 
@@ -11728,16 +11728,16 @@ class TableCell1345Attbl4 extends TableCell {
  */
 class TableCell1346Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1218")
-    private TextBox TextBox1218;
+    private TextBoxNum TextBox1218;
 
     /*
      * getTextBox1218
      * @return TextBox1218
      */
     @JsonProperty("TextBox1218")
-    public TextBox getTextBox1218() {
+    public TextBoxNum getTextBox1218() {
         return TextBox1218;
     }
 
@@ -11746,7 +11746,7 @@ class TableCell1346Attbl4 extends TableCell {
      * @param TextBox1218 TextBox1218
      */
     @JsonProperty("TextBox1218")
-    public void setTextBox1218(TextBox TextBox1218) {
+    public void setTextBox1218(TextBoxNum TextBox1218) {
         this.TextBox1218 = TextBox1218;
     }
 
@@ -11760,16 +11760,16 @@ class TableCell1346Attbl4 extends TableCell {
  */
 class TableCell1347Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1219")
-    private TextBox TextBox1219;
+    private TextBoxNum TextBox1219;
 
     /*
      * getTextBox1219
      * @return TextBox1219
      */
     @JsonProperty("TextBox1219")
-    public TextBox getTextBox1219() {
+    public TextBoxNum getTextBox1219() {
         return TextBox1219;
     }
 
@@ -11778,7 +11778,7 @@ class TableCell1347Attbl4 extends TableCell {
      * @param TextBox1219 TextBox1219
      */
     @JsonProperty("TextBox1219")
-    public void setTextBox1219(TextBox TextBox1219) {
+    public void setTextBox1219(TextBoxNum TextBox1219) {
         this.TextBox1219 = TextBox1219;
     }
 
@@ -11792,16 +11792,16 @@ class TableCell1347Attbl4 extends TableCell {
  */
 class TableCell1348Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1220")
-    private TextBox TextBox1220;
+    private TextBoxNum TextBox1220;
 
     /*
      * getTextBox1220
      * @return TextBox1220
      */
     @JsonProperty("TextBox1220")
-    public TextBox getTextBox1220() {
+    public TextBoxNum getTextBox1220() {
         return TextBox1220;
     }
 
@@ -11810,7 +11810,7 @@ class TableCell1348Attbl4 extends TableCell {
      * @param TextBox1220 TextBox1220
      */
     @JsonProperty("TextBox1220")
-    public void setTextBox1220(TextBox TextBox1220) {
+    public void setTextBox1220(TextBoxNum TextBox1220) {
         this.TextBox1220 = TextBox1220;
     }
 
@@ -11824,16 +11824,16 @@ class TableCell1348Attbl4 extends TableCell {
  */
 class TableCell1349Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1221")
-    private TextBox TextBox1221;
+    private TextBoxNum TextBox1221;
 
     /*
      * getTextBox1221
      * @return TextBox1221
      */
     @JsonProperty("TextBox1221")
-    public TextBox getTextBox1221() {
+    public TextBoxNum getTextBox1221() {
         return TextBox1221;
     }
 
@@ -11842,7 +11842,7 @@ class TableCell1349Attbl4 extends TableCell {
      * @param TextBox1221 TextBox1221
      */
     @JsonProperty("TextBox1221")
-    public void setTextBox1221(TextBox TextBox1221) {
+    public void setTextBox1221(TextBoxNum TextBox1221) {
         this.TextBox1221 = TextBox1221;
     }
 
@@ -11856,16 +11856,16 @@ class TableCell1349Attbl4 extends TableCell {
  */
 class TableCell1350Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1222")
-    private TextBox TextBox1222;
+    private TextBoxNum TextBox1222;
 
     /*
      * getTextBox1222
      * @return TextBox1222
      */
     @JsonProperty("TextBox1222")
-    public TextBox getTextBox1222() {
+    public TextBoxNum getTextBox1222() {
         return TextBox1222;
     }
 
@@ -11874,7 +11874,7 @@ class TableCell1350Attbl4 extends TableCell {
      * @param TextBox1222 TextBox1222
      */
     @JsonProperty("TextBox1222")
-    public void setTextBox1222(TextBox TextBox1222) {
+    public void setTextBox1222(TextBoxNum TextBox1222) {
         this.TextBox1222 = TextBox1222;
     }
 
@@ -11888,16 +11888,16 @@ class TableCell1350Attbl4 extends TableCell {
  */
 class TableCell1351Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1223")
-    private TextBox TextBox1223;
+    private TextBoxNum TextBox1223;
 
     /*
      * getTextBox1223
      * @return TextBox1223
      */
     @JsonProperty("TextBox1223")
-    public TextBox getTextBox1223() {
+    public TextBoxNum getTextBox1223() {
         return TextBox1223;
     }
 
@@ -11906,7 +11906,7 @@ class TableCell1351Attbl4 extends TableCell {
      * @param TextBox1223 TextBox1223
      */
     @JsonProperty("TextBox1223")
-    public void setTextBox1223(TextBox TextBox1223) {
+    public void setTextBox1223(TextBoxNum TextBox1223) {
         this.TextBox1223 = TextBox1223;
     }
 
@@ -11920,16 +11920,16 @@ class TableCell1351Attbl4 extends TableCell {
  */
 class TableCell1352Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1224")
-    private TextBox TextBox1224;
+    private TextBoxNum TextBox1224;
 
     /*
      * getTextBox1224
      * @return TextBox1224
      */
     @JsonProperty("TextBox1224")
-    public TextBox getTextBox1224() {
+    public TextBoxNum getTextBox1224() {
         return TextBox1224;
     }
 
@@ -11938,7 +11938,7 @@ class TableCell1352Attbl4 extends TableCell {
      * @param TextBox1224 TextBox1224
      */
     @JsonProperty("TextBox1224")
-    public void setTextBox1224(TextBox TextBox1224) {
+    public void setTextBox1224(TextBoxNum TextBox1224) {
         this.TextBox1224 = TextBox1224;
     }
 
@@ -11952,16 +11952,16 @@ class TableCell1352Attbl4 extends TableCell {
  */
 class TableCell1353Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1225")
-    private TextBox TextBox1225;
+    private TextBoxNum TextBox1225;
 
     /*
      * getTextBox1225
      * @return TextBox1225
      */
     @JsonProperty("TextBox1225")
-    public TextBox getTextBox1225() {
+    public TextBoxNum getTextBox1225() {
         return TextBox1225;
     }
 
@@ -11970,7 +11970,7 @@ class TableCell1353Attbl4 extends TableCell {
      * @param TextBox1225 TextBox1225
      */
     @JsonProperty("TextBox1225")
-    public void setTextBox1225(TextBox TextBox1225) {
+    public void setTextBox1225(TextBoxNum TextBox1225) {
         this.TextBox1225 = TextBox1225;
     }
 
@@ -11984,16 +11984,16 @@ class TableCell1353Attbl4 extends TableCell {
  */
 class TableCell1354Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1226")
-    private TextBox TextBox1226;
+    private TextBoxNum TextBox1226;
 
     /*
      * getTextBox1226
      * @return TextBox1226
      */
     @JsonProperty("TextBox1226")
-    public TextBox getTextBox1226() {
+    public TextBoxNum getTextBox1226() {
         return TextBox1226;
     }
 
@@ -12002,7 +12002,7 @@ class TableCell1354Attbl4 extends TableCell {
      * @param TextBox1226 TextBox1226
      */
     @JsonProperty("TextBox1226")
-    public void setTextBox1226(TextBox TextBox1226) {
+    public void setTextBox1226(TextBoxNum TextBox1226) {
         this.TextBox1226 = TextBox1226;
     }
 
@@ -12016,16 +12016,16 @@ class TableCell1354Attbl4 extends TableCell {
  */
 class TableCell1355Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1227")
-    private TextBox TextBox1227;
+    private TextBoxNum TextBox1227;
 
     /*
      * getTextBox1227
      * @return TextBox1227
      */
     @JsonProperty("TextBox1227")
-    public TextBox getTextBox1227() {
+    public TextBoxNum getTextBox1227() {
         return TextBox1227;
     }
 
@@ -12034,7 +12034,7 @@ class TableCell1355Attbl4 extends TableCell {
      * @param TextBox1227 TextBox1227
      */
     @JsonProperty("TextBox1227")
-    public void setTextBox1227(TextBox TextBox1227) {
+    public void setTextBox1227(TextBoxNum TextBox1227) {
         this.TextBox1227 = TextBox1227;
     }
 
@@ -12047,7 +12047,7 @@ class TableCell1355Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1356Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -12058,7 +12058,7 @@ class TableCell1356Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1357Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -12070,16 +12070,16 @@ class TableCell1357Attbl4 extends TableCell {
  */
 class TableCell1358Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1228")
-    private TextBox TextBox1228;
+    private TextBoxNum TextBox1228;
 
     /*
      * getTextBox1228
      * @return TextBox1228
      */
     @JsonProperty("TextBox1228")
-    public TextBox getTextBox1228() {
+    public TextBoxNum getTextBox1228() {
         return TextBox1228;
     }
 
@@ -12088,7 +12088,7 @@ class TableCell1358Attbl4 extends TableCell {
      * @param TextBox1228 TextBox1228
      */
     @JsonProperty("TextBox1228")
-    public void setTextBox1228(TextBox TextBox1228) {
+    public void setTextBox1228(TextBoxNum TextBox1228) {
         this.TextBox1228 = TextBox1228;
     }
 
@@ -12102,16 +12102,16 @@ class TableCell1358Attbl4 extends TableCell {
  */
 class TableCell1359Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1229")
-    private TextBox TextBox1229;
+    private TextBoxNum TextBox1229;
 
     /*
      * getTextBox1229
      * @return TextBox1229
      */
     @JsonProperty("TextBox1229")
-    public TextBox getTextBox1229() {
+    public TextBoxNum getTextBox1229() {
         return TextBox1229;
     }
 
@@ -12120,7 +12120,7 @@ class TableCell1359Attbl4 extends TableCell {
      * @param TextBox1229 TextBox1229
      */
     @JsonProperty("TextBox1229")
-    public void setTextBox1229(TextBox TextBox1229) {
+    public void setTextBox1229(TextBoxNum TextBox1229) {
         this.TextBox1229 = TextBox1229;
     }
 
@@ -12134,16 +12134,16 @@ class TableCell1359Attbl4 extends TableCell {
  */
 class TableCell1360Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1230")
-    private TextBox TextBox1230;
+    private TextBoxNum TextBox1230;
 
     /*
      * getTextBox1230
      * @return TextBox1230
      */
     @JsonProperty("TextBox1230")
-    public TextBox getTextBox1230() {
+    public TextBoxNum getTextBox1230() {
         return TextBox1230;
     }
 
@@ -12152,7 +12152,7 @@ class TableCell1360Attbl4 extends TableCell {
      * @param TextBox1230 TextBox1230
      */
     @JsonProperty("TextBox1230")
-    public void setTextBox1230(TextBox TextBox1230) {
+    public void setTextBox1230(TextBoxNum TextBox1230) {
         this.TextBox1230 = TextBox1230;
     }
 
@@ -12166,16 +12166,16 @@ class TableCell1360Attbl4 extends TableCell {
  */
 class TableCell1361Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1231")
-    private TextBox TextBox1231;
+    private TextBoxNum TextBox1231;
 
     /*
      * getTextBox1231
      * @return TextBox1231
      */
     @JsonProperty("TextBox1231")
-    public TextBox getTextBox1231() {
+    public TextBoxNum getTextBox1231() {
         return TextBox1231;
     }
 
@@ -12184,7 +12184,7 @@ class TableCell1361Attbl4 extends TableCell {
      * @param TextBox1231 TextBox1231
      */
     @JsonProperty("TextBox1231")
-    public void setTextBox1231(TextBox TextBox1231) {
+    public void setTextBox1231(TextBoxNum TextBox1231) {
         this.TextBox1231 = TextBox1231;
     }
 
@@ -12198,16 +12198,16 @@ class TableCell1361Attbl4 extends TableCell {
  */
 class TableCell1362Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1232")
-    private TextBox TextBox1232;
+    private TextBoxNum TextBox1232;
 
     /*
      * getTextBox1232
      * @return TextBox1232
      */
     @JsonProperty("TextBox1232")
-    public TextBox getTextBox1232() {
+    public TextBoxNum getTextBox1232() {
         return TextBox1232;
     }
 
@@ -12216,7 +12216,7 @@ class TableCell1362Attbl4 extends TableCell {
      * @param TextBox1232 TextBox1232
      */
     @JsonProperty("TextBox1232")
-    public void setTextBox1232(TextBox TextBox1232) {
+    public void setTextBox1232(TextBoxNum TextBox1232) {
         this.TextBox1232 = TextBox1232;
     }
 
@@ -12230,16 +12230,16 @@ class TableCell1362Attbl4 extends TableCell {
  */
 class TableCell1363Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1233")
-    private TextBox TextBox1233;
+    private TextBoxNum TextBox1233;
 
     /*
      * getTextBox1233
      * @return TextBox1233
      */
     @JsonProperty("TextBox1233")
-    public TextBox getTextBox1233() {
+    public TextBoxNum getTextBox1233() {
         return TextBox1233;
     }
 
@@ -12248,7 +12248,7 @@ class TableCell1363Attbl4 extends TableCell {
      * @param TextBox1233 TextBox1233
      */
     @JsonProperty("TextBox1233")
-    public void setTextBox1233(TextBox TextBox1233) {
+    public void setTextBox1233(TextBoxNum TextBox1233) {
         this.TextBox1233 = TextBox1233;
     }
 
@@ -12262,16 +12262,16 @@ class TableCell1363Attbl4 extends TableCell {
  */
 class TableCell1364Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1234")
-    private TextBox TextBox1234;
+    private TextBoxNum TextBox1234;
 
     /*
      * getTextBox1234
      * @return TextBox1234
      */
     @JsonProperty("TextBox1234")
-    public TextBox getTextBox1234() {
+    public TextBoxNum getTextBox1234() {
         return TextBox1234;
     }
 
@@ -12280,7 +12280,7 @@ class TableCell1364Attbl4 extends TableCell {
      * @param TextBox1234 TextBox1234
      */
     @JsonProperty("TextBox1234")
-    public void setTextBox1234(TextBox TextBox1234) {
+    public void setTextBox1234(TextBoxNum TextBox1234) {
         this.TextBox1234 = TextBox1234;
     }
 
@@ -12294,16 +12294,16 @@ class TableCell1364Attbl4 extends TableCell {
  */
 class TableCell1365Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1235")
-    private TextBox TextBox1235;
+    private TextBoxNum TextBox1235;
 
     /*
      * getTextBox1235
      * @return TextBox1235
      */
     @JsonProperty("TextBox1235")
-    public TextBox getTextBox1235() {
+    public TextBoxNum getTextBox1235() {
         return TextBox1235;
     }
 
@@ -12312,7 +12312,7 @@ class TableCell1365Attbl4 extends TableCell {
      * @param TextBox1235 TextBox1235
      */
     @JsonProperty("TextBox1235")
-    public void setTextBox1235(TextBox TextBox1235) {
+    public void setTextBox1235(TextBoxNum TextBox1235) {
         this.TextBox1235 = TextBox1235;
     }
 
@@ -12326,16 +12326,16 @@ class TableCell1365Attbl4 extends TableCell {
  */
 class TableCell1366Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1236")
-    private TextBox TextBox1236;
+    private TextBoxNum TextBox1236;
 
     /*
      * getTextBox1236
      * @return TextBox1236
      */
     @JsonProperty("TextBox1236")
-    public TextBox getTextBox1236() {
+    public TextBoxNum getTextBox1236() {
         return TextBox1236;
     }
 
@@ -12344,7 +12344,7 @@ class TableCell1366Attbl4 extends TableCell {
      * @param TextBox1236 TextBox1236
      */
     @JsonProperty("TextBox1236")
-    public void setTextBox1236(TextBox TextBox1236) {
+    public void setTextBox1236(TextBoxNum TextBox1236) {
         this.TextBox1236 = TextBox1236;
     }
 
@@ -12358,16 +12358,16 @@ class TableCell1366Attbl4 extends TableCell {
  */
 class TableCell1367Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1237")
-    private TextBox TextBox1237;
+    private TextBoxNum TextBox1237;
 
     /*
      * getTextBox1237
      * @return TextBox1237
      */
     @JsonProperty("TextBox1237")
-    public TextBox getTextBox1237() {
+    public TextBoxNum getTextBox1237() {
         return TextBox1237;
     }
 
@@ -12376,7 +12376,7 @@ class TableCell1367Attbl4 extends TableCell {
      * @param TextBox1237 TextBox1237
      */
     @JsonProperty("TextBox1237")
-    public void setTextBox1237(TextBox TextBox1237) {
+    public void setTextBox1237(TextBoxNum TextBox1237) {
         this.TextBox1237 = TextBox1237;
     }
 
@@ -12390,16 +12390,16 @@ class TableCell1367Attbl4 extends TableCell {
  */
 class TableCell1368Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1238")
-    private TextBox TextBox1238;
+    private TextBoxNum TextBox1238;
 
     /*
      * getTextBox1238
      * @return TextBox1238
      */
     @JsonProperty("TextBox1238")
-    public TextBox getTextBox1238() {
+    public TextBoxNum getTextBox1238() {
         return TextBox1238;
     }
 
@@ -12408,7 +12408,7 @@ class TableCell1368Attbl4 extends TableCell {
      * @param TextBox1238 TextBox1238
      */
     @JsonProperty("TextBox1238")
-    public void setTextBox1238(TextBox TextBox1238) {
+    public void setTextBox1238(TextBoxNum TextBox1238) {
         this.TextBox1238 = TextBox1238;
     }
 
@@ -12421,7 +12421,7 @@ class TableCell1368Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1369Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -12432,7 +12432,7 @@ class TableCell1369Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1370Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -12444,16 +12444,16 @@ class TableCell1370Attbl4 extends TableCell {
  */
 class TableCell1371Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1239")
-    private TextBox TextBox1239;
+    private TextBoxNum TextBox1239;
 
     /*
      * getTextBox1239
      * @return TextBox1239
      */
     @JsonProperty("TextBox1239")
-    public TextBox getTextBox1239() {
+    public TextBoxNum getTextBox1239() {
         return TextBox1239;
     }
 
@@ -12462,7 +12462,7 @@ class TableCell1371Attbl4 extends TableCell {
      * @param TextBox1239 TextBox1239
      */
     @JsonProperty("TextBox1239")
-    public void setTextBox1239(TextBox TextBox1239) {
+    public void setTextBox1239(TextBoxNum TextBox1239) {
         this.TextBox1239 = TextBox1239;
     }
 
@@ -12476,16 +12476,16 @@ class TableCell1371Attbl4 extends TableCell {
  */
 class TableCell1372Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1240")
-    private TextBox TextBox1240;
+    private TextBoxNum TextBox1240;
 
     /*
      * getTextBox1240
      * @return TextBox1240
      */
     @JsonProperty("TextBox1240")
-    public TextBox getTextBox1240() {
+    public TextBoxNum getTextBox1240() {
         return TextBox1240;
     }
 
@@ -12494,7 +12494,7 @@ class TableCell1372Attbl4 extends TableCell {
      * @param TextBox1240 TextBox1240
      */
     @JsonProperty("TextBox1240")
-    public void setTextBox1240(TextBox TextBox1240) {
+    public void setTextBox1240(TextBoxNum TextBox1240) {
         this.TextBox1240 = TextBox1240;
     }
 
@@ -12508,16 +12508,16 @@ class TableCell1372Attbl4 extends TableCell {
  */
 class TableCell1373Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1241")
-    private TextBox TextBox1241;
+    private TextBoxNum TextBox1241;
 
     /*
      * getTextBox1241
      * @return TextBox1241
      */
     @JsonProperty("TextBox1241")
-    public TextBox getTextBox1241() {
+    public TextBoxNum getTextBox1241() {
         return TextBox1241;
     }
 
@@ -12526,7 +12526,7 @@ class TableCell1373Attbl4 extends TableCell {
      * @param TextBox1241 TextBox1241
      */
     @JsonProperty("TextBox1241")
-    public void setTextBox1241(TextBox TextBox1241) {
+    public void setTextBox1241(TextBoxNum TextBox1241) {
         this.TextBox1241 = TextBox1241;
     }
 
@@ -12540,16 +12540,16 @@ class TableCell1373Attbl4 extends TableCell {
  */
 class TableCell1374Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1242")
-    private TextBox TextBox1242;
+    private TextBoxNum TextBox1242;
 
     /*
      * getTextBox1242
      * @return TextBox1242
      */
     @JsonProperty("TextBox1242")
-    public TextBox getTextBox1242() {
+    public TextBoxNum getTextBox1242() {
         return TextBox1242;
     }
 
@@ -12558,7 +12558,7 @@ class TableCell1374Attbl4 extends TableCell {
      * @param TextBox1242 TextBox1242
      */
     @JsonProperty("TextBox1242")
-    public void setTextBox1242(TextBox TextBox1242) {
+    public void setTextBox1242(TextBoxNum TextBox1242) {
         this.TextBox1242 = TextBox1242;
     }
 
@@ -12572,16 +12572,16 @@ class TableCell1374Attbl4 extends TableCell {
  */
 class TableCell1375Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1243")
-    private TextBox TextBox1243;
+    private TextBoxNum TextBox1243;
 
     /*
      * getTextBox1243
      * @return TextBox1243
      */
     @JsonProperty("TextBox1243")
-    public TextBox getTextBox1243() {
+    public TextBoxNum getTextBox1243() {
         return TextBox1243;
     }
 
@@ -12590,7 +12590,7 @@ class TableCell1375Attbl4 extends TableCell {
      * @param TextBox1243 TextBox1243
      */
     @JsonProperty("TextBox1243")
-    public void setTextBox1243(TextBox TextBox1243) {
+    public void setTextBox1243(TextBoxNum TextBox1243) {
         this.TextBox1243 = TextBox1243;
     }
 
@@ -12604,16 +12604,16 @@ class TableCell1375Attbl4 extends TableCell {
  */
 class TableCell1376Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1244")
-    private TextBox TextBox1244;
+    private TextBoxNum TextBox1244;
 
     /*
      * getTextBox1244
      * @return TextBox1244
      */
     @JsonProperty("TextBox1244")
-    public TextBox getTextBox1244() {
+    public TextBoxNum getTextBox1244() {
         return TextBox1244;
     }
 
@@ -12622,7 +12622,7 @@ class TableCell1376Attbl4 extends TableCell {
      * @param TextBox1244 TextBox1244
      */
     @JsonProperty("TextBox1244")
-    public void setTextBox1244(TextBox TextBox1244) {
+    public void setTextBox1244(TextBoxNum TextBox1244) {
         this.TextBox1244 = TextBox1244;
     }
 
@@ -12636,16 +12636,16 @@ class TableCell1376Attbl4 extends TableCell {
  */
 class TableCell1377Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1245")
-    private TextBox TextBox1245;
+    private TextBoxNum TextBox1245;
 
     /*
      * getTextBox1245
      * @return TextBox1245
      */
     @JsonProperty("TextBox1245")
-    public TextBox getTextBox1245() {
+    public TextBoxNum getTextBox1245() {
         return TextBox1245;
     }
 
@@ -12654,7 +12654,7 @@ class TableCell1377Attbl4 extends TableCell {
      * @param TextBox1245 TextBox1245
      */
     @JsonProperty("TextBox1245")
-    public void setTextBox1245(TextBox TextBox1245) {
+    public void setTextBox1245(TextBoxNum TextBox1245) {
         this.TextBox1245 = TextBox1245;
     }
 
@@ -12668,16 +12668,16 @@ class TableCell1377Attbl4 extends TableCell {
  */
 class TableCell1378Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1246")
-    private TextBox TextBox1246;
+    private TextBoxNum TextBox1246;
 
     /*
      * getTextBox1246
      * @return TextBox1246
      */
     @JsonProperty("TextBox1246")
-    public TextBox getTextBox1246() {
+    public TextBoxNum getTextBox1246() {
         return TextBox1246;
     }
 
@@ -12686,7 +12686,7 @@ class TableCell1378Attbl4 extends TableCell {
      * @param TextBox1246 TextBox1246
      */
     @JsonProperty("TextBox1246")
-    public void setTextBox1246(TextBox TextBox1246) {
+    public void setTextBox1246(TextBoxNum TextBox1246) {
         this.TextBox1246 = TextBox1246;
     }
 
@@ -12700,16 +12700,16 @@ class TableCell1378Attbl4 extends TableCell {
  */
 class TableCell1379Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1247")
-    private TextBox TextBox1247;
+    private TextBoxNum TextBox1247;
 
     /*
      * getTextBox1247
      * @return TextBox1247
      */
     @JsonProperty("TextBox1247")
-    public TextBox getTextBox1247() {
+    public TextBoxNum getTextBox1247() {
         return TextBox1247;
     }
 
@@ -12718,7 +12718,7 @@ class TableCell1379Attbl4 extends TableCell {
      * @param TextBox1247 TextBox1247
      */
     @JsonProperty("TextBox1247")
-    public void setTextBox1247(TextBox TextBox1247) {
+    public void setTextBox1247(TextBoxNum TextBox1247) {
         this.TextBox1247 = TextBox1247;
     }
 
@@ -12732,16 +12732,16 @@ class TableCell1379Attbl4 extends TableCell {
  */
 class TableCell1380Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1248")
-    private TextBox TextBox1248;
+    private TextBoxNum TextBox1248;
 
     /*
      * getTextBox1248
      * @return TextBox1248
      */
     @JsonProperty("TextBox1248")
-    public TextBox getTextBox1248() {
+    public TextBoxNum getTextBox1248() {
         return TextBox1248;
     }
 
@@ -12750,7 +12750,7 @@ class TableCell1380Attbl4 extends TableCell {
      * @param TextBox1248 TextBox1248
      */
     @JsonProperty("TextBox1248")
-    public void setTextBox1248(TextBox TextBox1248) {
+    public void setTextBox1248(TextBoxNum TextBox1248) {
         this.TextBox1248 = TextBox1248;
     }
 
@@ -12764,16 +12764,16 @@ class TableCell1380Attbl4 extends TableCell {
  */
 class TableCell1381Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1249")
-    private TextBox TextBox1249;
+    private TextBoxNum TextBox1249;
 
     /*
      * getTextBox1249
      * @return TextBox1249
      */
     @JsonProperty("TextBox1249")
-    public TextBox getTextBox1249() {
+    public TextBoxNum getTextBox1249() {
         return TextBox1249;
     }
 
@@ -12782,7 +12782,7 @@ class TableCell1381Attbl4 extends TableCell {
      * @param TextBox1249 TextBox1249
      */
     @JsonProperty("TextBox1249")
-    public void setTextBox1249(TextBox TextBox1249) {
+    public void setTextBox1249(TextBoxNum TextBox1249) {
         this.TextBox1249 = TextBox1249;
     }
 
@@ -12795,7 +12795,7 @@ class TableCell1381Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1382Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -12806,7 +12806,7 @@ class TableCell1382Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1383Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -12818,16 +12818,16 @@ class TableCell1383Attbl4 extends TableCell {
  */
 class TableCell1384Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1250")
-    private TextBox TextBox1250;
+    private TextBoxNum TextBox1250;
 
     /*
      * getTextBox1250
      * @return TextBox1250
      */
     @JsonProperty("TextBox1250")
-    public TextBox getTextBox1250() {
+    public TextBoxNum getTextBox1250() {
         return TextBox1250;
     }
 
@@ -12836,7 +12836,7 @@ class TableCell1384Attbl4 extends TableCell {
      * @param TextBox1250 TextBox1250
      */
     @JsonProperty("TextBox1250")
-    public void setTextBox1250(TextBox TextBox1250) {
+    public void setTextBox1250(TextBoxNum TextBox1250) {
         this.TextBox1250 = TextBox1250;
     }
 
@@ -12850,16 +12850,16 @@ class TableCell1384Attbl4 extends TableCell {
  */
 class TableCell1385Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1251")
-    private TextBox TextBox1251;
+    private TextBoxNum TextBox1251;
 
     /*
      * getTextBox1251
      * @return TextBox1251
      */
     @JsonProperty("TextBox1251")
-    public TextBox getTextBox1251() {
+    public TextBoxNum getTextBox1251() {
         return TextBox1251;
     }
 
@@ -12868,7 +12868,7 @@ class TableCell1385Attbl4 extends TableCell {
      * @param TextBox1251 TextBox1251
      */
     @JsonProperty("TextBox1251")
-    public void setTextBox1251(TextBox TextBox1251) {
+    public void setTextBox1251(TextBoxNum TextBox1251) {
         this.TextBox1251 = TextBox1251;
     }
 
@@ -12882,16 +12882,16 @@ class TableCell1385Attbl4 extends TableCell {
  */
 class TableCell1386Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1252")
-    private TextBox TextBox1252;
+    private TextBoxNum TextBox1252;
 
     /*
      * getTextBox1252
      * @return TextBox1252
      */
     @JsonProperty("TextBox1252")
-    public TextBox getTextBox1252() {
+    public TextBoxNum getTextBox1252() {
         return TextBox1252;
     }
 
@@ -12900,7 +12900,7 @@ class TableCell1386Attbl4 extends TableCell {
      * @param TextBox1252 TextBox1252
      */
     @JsonProperty("TextBox1252")
-    public void setTextBox1252(TextBox TextBox1252) {
+    public void setTextBox1252(TextBoxNum TextBox1252) {
         this.TextBox1252 = TextBox1252;
     }
 
@@ -12914,16 +12914,16 @@ class TableCell1386Attbl4 extends TableCell {
  */
 class TableCell1387Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1253")
-    private TextBox TextBox1253;
+    private TextBoxNum TextBox1253;
 
     /*
      * getTextBox1253
      * @return TextBox1253
      */
     @JsonProperty("TextBox1253")
-    public TextBox getTextBox1253() {
+    public TextBoxNum getTextBox1253() {
         return TextBox1253;
     }
 
@@ -12932,7 +12932,7 @@ class TableCell1387Attbl4 extends TableCell {
      * @param TextBox1253 TextBox1253
      */
     @JsonProperty("TextBox1253")
-    public void setTextBox1253(TextBox TextBox1253) {
+    public void setTextBox1253(TextBoxNum TextBox1253) {
         this.TextBox1253 = TextBox1253;
     }
 
@@ -12946,16 +12946,16 @@ class TableCell1387Attbl4 extends TableCell {
  */
 class TableCell1388Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1254")
-    private TextBox TextBox1254;
+    private TextBoxNum TextBox1254;
 
     /*
      * getTextBox1254
      * @return TextBox1254
      */
     @JsonProperty("TextBox1254")
-    public TextBox getTextBox1254() {
+    public TextBoxNum getTextBox1254() {
         return TextBox1254;
     }
 
@@ -12964,7 +12964,7 @@ class TableCell1388Attbl4 extends TableCell {
      * @param TextBox1254 TextBox1254
      */
     @JsonProperty("TextBox1254")
-    public void setTextBox1254(TextBox TextBox1254) {
+    public void setTextBox1254(TextBoxNum TextBox1254) {
         this.TextBox1254 = TextBox1254;
     }
 
@@ -12978,16 +12978,16 @@ class TableCell1388Attbl4 extends TableCell {
  */
 class TableCell1389Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1255")
-    private TextBox TextBox1255;
+    private TextBoxNum TextBox1255;
 
     /*
      * getTextBox1255
      * @return TextBox1255
      */
     @JsonProperty("TextBox1255")
-    public TextBox getTextBox1255() {
+    public TextBoxNum getTextBox1255() {
         return TextBox1255;
     }
 
@@ -12996,7 +12996,7 @@ class TableCell1389Attbl4 extends TableCell {
      * @param TextBox1255 TextBox1255
      */
     @JsonProperty("TextBox1255")
-    public void setTextBox1255(TextBox TextBox1255) {
+    public void setTextBox1255(TextBoxNum TextBox1255) {
         this.TextBox1255 = TextBox1255;
     }
 
@@ -13010,16 +13010,16 @@ class TableCell1389Attbl4 extends TableCell {
  */
 class TableCell1390Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1256")
-    private TextBox TextBox1256;
+    private TextBoxNum TextBox1256;
 
     /*
      * getTextBox1256
      * @return TextBox1256
      */
     @JsonProperty("TextBox1256")
-    public TextBox getTextBox1256() {
+    public TextBoxNum getTextBox1256() {
         return TextBox1256;
     }
 
@@ -13028,7 +13028,7 @@ class TableCell1390Attbl4 extends TableCell {
      * @param TextBox1256 TextBox1256
      */
     @JsonProperty("TextBox1256")
-    public void setTextBox1256(TextBox TextBox1256) {
+    public void setTextBox1256(TextBoxNum TextBox1256) {
         this.TextBox1256 = TextBox1256;
     }
 
@@ -13042,16 +13042,16 @@ class TableCell1390Attbl4 extends TableCell {
  */
 class TableCell1391Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1257")
-    private TextBox TextBox1257;
+    private TextBoxNum TextBox1257;
 
     /*
      * getTextBox1257
      * @return TextBox1257
      */
     @JsonProperty("TextBox1257")
-    public TextBox getTextBox1257() {
+    public TextBoxNum getTextBox1257() {
         return TextBox1257;
     }
 
@@ -13060,7 +13060,7 @@ class TableCell1391Attbl4 extends TableCell {
      * @param TextBox1257 TextBox1257
      */
     @JsonProperty("TextBox1257")
-    public void setTextBox1257(TextBox TextBox1257) {
+    public void setTextBox1257(TextBoxNum TextBox1257) {
         this.TextBox1257 = TextBox1257;
     }
 
@@ -13074,16 +13074,16 @@ class TableCell1391Attbl4 extends TableCell {
  */
 class TableCell1392Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1258")
-    private TextBox TextBox1258;
+    private TextBoxNum TextBox1258;
 
     /*
      * getTextBox1258
      * @return TextBox1258
      */
     @JsonProperty("TextBox1258")
-    public TextBox getTextBox1258() {
+    public TextBoxNum getTextBox1258() {
         return TextBox1258;
     }
 
@@ -13092,7 +13092,7 @@ class TableCell1392Attbl4 extends TableCell {
      * @param TextBox1258 TextBox1258
      */
     @JsonProperty("TextBox1258")
-    public void setTextBox1258(TextBox TextBox1258) {
+    public void setTextBox1258(TextBoxNum TextBox1258) {
         this.TextBox1258 = TextBox1258;
     }
 
@@ -13106,16 +13106,16 @@ class TableCell1392Attbl4 extends TableCell {
  */
 class TableCell1393Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1259")
-    private TextBox TextBox1259;
+    private TextBoxNum TextBox1259;
 
     /*
      * getTextBox1259
      * @return TextBox1259
      */
     @JsonProperty("TextBox1259")
-    public TextBox getTextBox1259() {
+    public TextBoxNum getTextBox1259() {
         return TextBox1259;
     }
 
@@ -13124,7 +13124,7 @@ class TableCell1393Attbl4 extends TableCell {
      * @param TextBox1259 TextBox1259
      */
     @JsonProperty("TextBox1259")
-    public void setTextBox1259(TextBox TextBox1259) {
+    public void setTextBox1259(TextBoxNum TextBox1259) {
         this.TextBox1259 = TextBox1259;
     }
 
@@ -13138,16 +13138,16 @@ class TableCell1393Attbl4 extends TableCell {
  */
 class TableCell1394Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1260")
-    private TextBox TextBox1260;
+    private TextBoxNum TextBox1260;
 
     /*
      * getTextBox1260
      * @return TextBox1260
      */
     @JsonProperty("TextBox1260")
-    public TextBox getTextBox1260() {
+    public TextBoxNum getTextBox1260() {
         return TextBox1260;
     }
 
@@ -13156,7 +13156,7 @@ class TableCell1394Attbl4 extends TableCell {
      * @param TextBox1260 TextBox1260
      */
     @JsonProperty("TextBox1260")
-    public void setTextBox1260(TextBox TextBox1260) {
+    public void setTextBox1260(TextBoxNum TextBox1260) {
         this.TextBox1260 = TextBox1260;
     }
 
@@ -13169,7 +13169,7 @@ class TableCell1394Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1395Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -13180,7 +13180,7 @@ class TableCell1395Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1396Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -13192,16 +13192,16 @@ class TableCell1396Attbl4 extends TableCell {
  */
 class TableCell1397Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1261")
-    private TextBox TextBox1261;
+    private TextBoxNum TextBox1261;
 
     /*
      * getTextBox1261
      * @return TextBox1261
      */
     @JsonProperty("TextBox1261")
-    public TextBox getTextBox1261() {
+    public TextBoxNum getTextBox1261() {
         return TextBox1261;
     }
 
@@ -13210,7 +13210,7 @@ class TableCell1397Attbl4 extends TableCell {
      * @param TextBox1261 TextBox1261
      */
     @JsonProperty("TextBox1261")
-    public void setTextBox1261(TextBox TextBox1261) {
+    public void setTextBox1261(TextBoxNum TextBox1261) {
         this.TextBox1261 = TextBox1261;
     }
 
@@ -13224,16 +13224,16 @@ class TableCell1397Attbl4 extends TableCell {
  */
 class TableCell1398Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1262")
-    private TextBox TextBox1262;
+    private TextBoxNum TextBox1262;
 
     /*
      * getTextBox1262
      * @return TextBox1262
      */
     @JsonProperty("TextBox1262")
-    public TextBox getTextBox1262() {
+    public TextBoxNum getTextBox1262() {
         return TextBox1262;
     }
 
@@ -13242,7 +13242,7 @@ class TableCell1398Attbl4 extends TableCell {
      * @param TextBox1262 TextBox1262
      */
     @JsonProperty("TextBox1262")
-    public void setTextBox1262(TextBox TextBox1262) {
+    public void setTextBox1262(TextBoxNum TextBox1262) {
         this.TextBox1262 = TextBox1262;
     }
 
@@ -13256,16 +13256,16 @@ class TableCell1398Attbl4 extends TableCell {
  */
 class TableCell1399Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1263")
-    private TextBox TextBox1263;
+    private TextBoxNum TextBox1263;
 
     /*
      * getTextBox1263
      * @return TextBox1263
      */
     @JsonProperty("TextBox1263")
-    public TextBox getTextBox1263() {
+    public TextBoxNum getTextBox1263() {
         return TextBox1263;
     }
 
@@ -13274,7 +13274,7 @@ class TableCell1399Attbl4 extends TableCell {
      * @param TextBox1263 TextBox1263
      */
     @JsonProperty("TextBox1263")
-    public void setTextBox1263(TextBox TextBox1263) {
+    public void setTextBox1263(TextBoxNum TextBox1263) {
         this.TextBox1263 = TextBox1263;
     }
 
@@ -13288,16 +13288,16 @@ class TableCell1399Attbl4 extends TableCell {
  */
 class TableCell1400Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1264")
-    private TextBox TextBox1264;
+    private TextBoxNum TextBox1264;
 
     /*
      * getTextBox1264
      * @return TextBox1264
      */
     @JsonProperty("TextBox1264")
-    public TextBox getTextBox1264() {
+    public TextBoxNum getTextBox1264() {
         return TextBox1264;
     }
 
@@ -13306,7 +13306,7 @@ class TableCell1400Attbl4 extends TableCell {
      * @param TextBox1264 TextBox1264
      */
     @JsonProperty("TextBox1264")
-    public void setTextBox1264(TextBox TextBox1264) {
+    public void setTextBox1264(TextBoxNum TextBox1264) {
         this.TextBox1264 = TextBox1264;
     }
 
@@ -13320,16 +13320,16 @@ class TableCell1400Attbl4 extends TableCell {
  */
 class TableCell1401Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1265")
-    private TextBox TextBox1265;
+    private TextBoxNum TextBox1265;
 
     /*
      * getTextBox1265
      * @return TextBox1265
      */
     @JsonProperty("TextBox1265")
-    public TextBox getTextBox1265() {
+    public TextBoxNum getTextBox1265() {
         return TextBox1265;
     }
 
@@ -13338,7 +13338,7 @@ class TableCell1401Attbl4 extends TableCell {
      * @param TextBox1265 TextBox1265
      */
     @JsonProperty("TextBox1265")
-    public void setTextBox1265(TextBox TextBox1265) {
+    public void setTextBox1265(TextBoxNum TextBox1265) {
         this.TextBox1265 = TextBox1265;
     }
 
@@ -13352,16 +13352,16 @@ class TableCell1401Attbl4 extends TableCell {
  */
 class TableCell1402Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1266")
-    private TextBox TextBox1266;
+    private TextBoxNum TextBox1266;
 
     /*
      * getTextBox1266
      * @return TextBox1266
      */
     @JsonProperty("TextBox1266")
-    public TextBox getTextBox1266() {
+    public TextBoxNum getTextBox1266() {
         return TextBox1266;
     }
 
@@ -13370,7 +13370,7 @@ class TableCell1402Attbl4 extends TableCell {
      * @param TextBox1266 TextBox1266
      */
     @JsonProperty("TextBox1266")
-    public void setTextBox1266(TextBox TextBox1266) {
+    public void setTextBox1266(TextBoxNum TextBox1266) {
         this.TextBox1266 = TextBox1266;
     }
 
@@ -13384,16 +13384,16 @@ class TableCell1402Attbl4 extends TableCell {
  */
 class TableCell1403Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1267")
-    private TextBox TextBox1267;
+    private TextBoxNum TextBox1267;
 
     /*
      * getTextBox1267
      * @return TextBox1267
      */
     @JsonProperty("TextBox1267")
-    public TextBox getTextBox1267() {
+    public TextBoxNum getTextBox1267() {
         return TextBox1267;
     }
 
@@ -13402,7 +13402,7 @@ class TableCell1403Attbl4 extends TableCell {
      * @param TextBox1267 TextBox1267
      */
     @JsonProperty("TextBox1267")
-    public void setTextBox1267(TextBox TextBox1267) {
+    public void setTextBox1267(TextBoxNum TextBox1267) {
         this.TextBox1267 = TextBox1267;
     }
 
@@ -13416,16 +13416,16 @@ class TableCell1403Attbl4 extends TableCell {
  */
 class TableCell1404Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1268")
-    private TextBox TextBox1268;
+    private TextBoxNum TextBox1268;
 
     /*
      * getTextBox1268
      * @return TextBox1268
      */
     @JsonProperty("TextBox1268")
-    public TextBox getTextBox1268() {
+    public TextBoxNum getTextBox1268() {
         return TextBox1268;
     }
 
@@ -13434,7 +13434,7 @@ class TableCell1404Attbl4 extends TableCell {
      * @param TextBox1268 TextBox1268
      */
     @JsonProperty("TextBox1268")
-    public void setTextBox1268(TextBox TextBox1268) {
+    public void setTextBox1268(TextBoxNum TextBox1268) {
         this.TextBox1268 = TextBox1268;
     }
 
@@ -13448,16 +13448,16 @@ class TableCell1404Attbl4 extends TableCell {
  */
 class TableCell1405Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1269")
-    private TextBox TextBox1269;
+    private TextBoxNum TextBox1269;
 
     /*
      * getTextBox1269
      * @return TextBox1269
      */
     @JsonProperty("TextBox1269")
-    public TextBox getTextBox1269() {
+    public TextBoxNum getTextBox1269() {
         return TextBox1269;
     }
 
@@ -13466,7 +13466,7 @@ class TableCell1405Attbl4 extends TableCell {
      * @param TextBox1269 TextBox1269
      */
     @JsonProperty("TextBox1269")
-    public void setTextBox1269(TextBox TextBox1269) {
+    public void setTextBox1269(TextBoxNum TextBox1269) {
         this.TextBox1269 = TextBox1269;
     }
 
@@ -13480,16 +13480,16 @@ class TableCell1405Attbl4 extends TableCell {
  */
 class TableCell1406Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1270")
-    private TextBox TextBox1270;
+    private TextBoxNum TextBox1270;
 
     /*
      * getTextBox1270
      * @return TextBox1270
      */
     @JsonProperty("TextBox1270")
-    public TextBox getTextBox1270() {
+    public TextBoxNum getTextBox1270() {
         return TextBox1270;
     }
 
@@ -13498,7 +13498,7 @@ class TableCell1406Attbl4 extends TableCell {
      * @param TextBox1270 TextBox1270
      */
     @JsonProperty("TextBox1270")
-    public void setTextBox1270(TextBox TextBox1270) {
+    public void setTextBox1270(TextBoxNum TextBox1270) {
         this.TextBox1270 = TextBox1270;
     }
 
@@ -13512,16 +13512,16 @@ class TableCell1406Attbl4 extends TableCell {
  */
 class TableCell1407Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1271")
-    private TextBox TextBox1271;
+    private TextBoxNum TextBox1271;
 
     /*
      * getTextBox1271
      * @return TextBox1271
      */
     @JsonProperty("TextBox1271")
-    public TextBox getTextBox1271() {
+    public TextBoxNum getTextBox1271() {
         return TextBox1271;
     }
 
@@ -13530,7 +13530,7 @@ class TableCell1407Attbl4 extends TableCell {
      * @param TextBox1271 TextBox1271
      */
     @JsonProperty("TextBox1271")
-    public void setTextBox1271(TextBox TextBox1271) {
+    public void setTextBox1271(TextBoxNum TextBox1271) {
         this.TextBox1271 = TextBox1271;
     }
 
@@ -13543,7 +13543,7 @@ class TableCell1407Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1408Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -13554,7 +13554,7 @@ class TableCell1408Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1409Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -13566,16 +13566,16 @@ class TableCell1409Attbl4 extends TableCell {
  */
 class TableCell1410Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1272")
-    private TextBox TextBox1272;
+    private TextBoxNum TextBox1272;
 
     /*
      * getTextBox1272
      * @return TextBox1272
      */
     @JsonProperty("TextBox1272")
-    public TextBox getTextBox1272() {
+    public TextBoxNum getTextBox1272() {
         return TextBox1272;
     }
 
@@ -13584,7 +13584,7 @@ class TableCell1410Attbl4 extends TableCell {
      * @param TextBox1272 TextBox1272
      */
     @JsonProperty("TextBox1272")
-    public void setTextBox1272(TextBox TextBox1272) {
+    public void setTextBox1272(TextBoxNum TextBox1272) {
         this.TextBox1272 = TextBox1272;
     }
 
@@ -13598,16 +13598,16 @@ class TableCell1410Attbl4 extends TableCell {
  */
 class TableCell1411Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1273")
-    private TextBox TextBox1273;
+    private TextBoxNum TextBox1273;
 
     /*
      * getTextBox1273
      * @return TextBox1273
      */
     @JsonProperty("TextBox1273")
-    public TextBox getTextBox1273() {
+    public TextBoxNum getTextBox1273() {
         return TextBox1273;
     }
 
@@ -13616,7 +13616,7 @@ class TableCell1411Attbl4 extends TableCell {
      * @param TextBox1273 TextBox1273
      */
     @JsonProperty("TextBox1273")
-    public void setTextBox1273(TextBox TextBox1273) {
+    public void setTextBox1273(TextBoxNum TextBox1273) {
         this.TextBox1273 = TextBox1273;
     }
 
@@ -13630,16 +13630,16 @@ class TableCell1411Attbl4 extends TableCell {
  */
 class TableCell1412Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1274")
-    private TextBox TextBox1274;
+    private TextBoxNum TextBox1274;
 
     /*
      * getTextBox1274
      * @return TextBox1274
      */
     @JsonProperty("TextBox1274")
-    public TextBox getTextBox1274() {
+    public TextBoxNum getTextBox1274() {
         return TextBox1274;
     }
 
@@ -13648,7 +13648,7 @@ class TableCell1412Attbl4 extends TableCell {
      * @param TextBox1274 TextBox1274
      */
     @JsonProperty("TextBox1274")
-    public void setTextBox1274(TextBox TextBox1274) {
+    public void setTextBox1274(TextBoxNum TextBox1274) {
         this.TextBox1274 = TextBox1274;
     }
 
@@ -13662,16 +13662,16 @@ class TableCell1412Attbl4 extends TableCell {
  */
 class TableCell1413Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1275")
-    private TextBox TextBox1275;
+    private TextBoxNum TextBox1275;
 
     /*
      * getTextBox1275
      * @return TextBox1275
      */
     @JsonProperty("TextBox1275")
-    public TextBox getTextBox1275() {
+    public TextBoxNum getTextBox1275() {
         return TextBox1275;
     }
 
@@ -13680,7 +13680,7 @@ class TableCell1413Attbl4 extends TableCell {
      * @param TextBox1275 TextBox1275
      */
     @JsonProperty("TextBox1275")
-    public void setTextBox1275(TextBox TextBox1275) {
+    public void setTextBox1275(TextBoxNum TextBox1275) {
         this.TextBox1275 = TextBox1275;
     }
 
@@ -13694,16 +13694,16 @@ class TableCell1413Attbl4 extends TableCell {
  */
 class TableCell1414Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1276")
-    private TextBox TextBox1276;
+    private TextBoxNum TextBox1276;
 
     /*
      * getTextBox1276
      * @return TextBox1276
      */
     @JsonProperty("TextBox1276")
-    public TextBox getTextBox1276() {
+    public TextBoxNum getTextBox1276() {
         return TextBox1276;
     }
 
@@ -13712,7 +13712,7 @@ class TableCell1414Attbl4 extends TableCell {
      * @param TextBox1276 TextBox1276
      */
     @JsonProperty("TextBox1276")
-    public void setTextBox1276(TextBox TextBox1276) {
+    public void setTextBox1276(TextBoxNum TextBox1276) {
         this.TextBox1276 = TextBox1276;
     }
 
@@ -13726,16 +13726,16 @@ class TableCell1414Attbl4 extends TableCell {
  */
 class TableCell1415Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1277")
-    private TextBox TextBox1277;
+    private TextBoxNum TextBox1277;
 
     /*
      * getTextBox1277
      * @return TextBox1277
      */
     @JsonProperty("TextBox1277")
-    public TextBox getTextBox1277() {
+    public TextBoxNum getTextBox1277() {
         return TextBox1277;
     }
 
@@ -13744,7 +13744,7 @@ class TableCell1415Attbl4 extends TableCell {
      * @param TextBox1277 TextBox1277
      */
     @JsonProperty("TextBox1277")
-    public void setTextBox1277(TextBox TextBox1277) {
+    public void setTextBox1277(TextBoxNum TextBox1277) {
         this.TextBox1277 = TextBox1277;
     }
 
@@ -13758,16 +13758,16 @@ class TableCell1415Attbl4 extends TableCell {
  */
 class TableCell1416Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1278")
-    private TextBox TextBox1278;
+    private TextBoxNum TextBox1278;
 
     /*
      * getTextBox1278
      * @return TextBox1278
      */
     @JsonProperty("TextBox1278")
-    public TextBox getTextBox1278() {
+    public TextBoxNum getTextBox1278() {
         return TextBox1278;
     }
 
@@ -13776,7 +13776,7 @@ class TableCell1416Attbl4 extends TableCell {
      * @param TextBox1278 TextBox1278
      */
     @JsonProperty("TextBox1278")
-    public void setTextBox1278(TextBox TextBox1278) {
+    public void setTextBox1278(TextBoxNum TextBox1278) {
         this.TextBox1278 = TextBox1278;
     }
 
@@ -13790,16 +13790,16 @@ class TableCell1416Attbl4 extends TableCell {
  */
 class TableCell1417Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1279")
-    private TextBox TextBox1279;
+    private TextBoxNum TextBox1279;
 
     /*
      * getTextBox1279
      * @return TextBox1279
      */
     @JsonProperty("TextBox1279")
-    public TextBox getTextBox1279() {
+    public TextBoxNum getTextBox1279() {
         return TextBox1279;
     }
 
@@ -13808,7 +13808,7 @@ class TableCell1417Attbl4 extends TableCell {
      * @param TextBox1279 TextBox1279
      */
     @JsonProperty("TextBox1279")
-    public void setTextBox1279(TextBox TextBox1279) {
+    public void setTextBox1279(TextBoxNum TextBox1279) {
         this.TextBox1279 = TextBox1279;
     }
 
@@ -13822,16 +13822,16 @@ class TableCell1417Attbl4 extends TableCell {
  */
 class TableCell1418Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1280")
-    private TextBox TextBox1280;
+    private TextBoxNum TextBox1280;
 
     /*
      * getTextBox1280
      * @return TextBox1280
      */
     @JsonProperty("TextBox1280")
-    public TextBox getTextBox1280() {
+    public TextBoxNum getTextBox1280() {
         return TextBox1280;
     }
 
@@ -13840,7 +13840,7 @@ class TableCell1418Attbl4 extends TableCell {
      * @param TextBox1280 TextBox1280
      */
     @JsonProperty("TextBox1280")
-    public void setTextBox1280(TextBox TextBox1280) {
+    public void setTextBox1280(TextBoxNum TextBox1280) {
         this.TextBox1280 = TextBox1280;
     }
 
@@ -13854,16 +13854,16 @@ class TableCell1418Attbl4 extends TableCell {
  */
 class TableCell1419Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1281")
-    private TextBox TextBox1281;
+    private TextBoxNum TextBox1281;
 
     /*
      * getTextBox1281
      * @return TextBox1281
      */
     @JsonProperty("TextBox1281")
-    public TextBox getTextBox1281() {
+    public TextBoxNum getTextBox1281() {
         return TextBox1281;
     }
 
@@ -13872,7 +13872,7 @@ class TableCell1419Attbl4 extends TableCell {
      * @param TextBox1281 TextBox1281
      */
     @JsonProperty("TextBox1281")
-    public void setTextBox1281(TextBox TextBox1281) {
+    public void setTextBox1281(TextBoxNum TextBox1281) {
         this.TextBox1281 = TextBox1281;
     }
 
@@ -13886,16 +13886,16 @@ class TableCell1419Attbl4 extends TableCell {
  */
 class TableCell1420Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1282")
-    private TextBox TextBox1282;
+    private TextBoxNum TextBox1282;
 
     /*
      * getTextBox1282
      * @return TextBox1282
      */
     @JsonProperty("TextBox1282")
-    public TextBox getTextBox1282() {
+    public TextBoxNum getTextBox1282() {
         return TextBox1282;
     }
 
@@ -13904,7 +13904,7 @@ class TableCell1420Attbl4 extends TableCell {
      * @param TextBox1282 TextBox1282
      */
     @JsonProperty("TextBox1282")
-    public void setTextBox1282(TextBox TextBox1282) {
+    public void setTextBox1282(TextBoxNum TextBox1282) {
         this.TextBox1282 = TextBox1282;
     }
 
@@ -13917,7 +13917,7 @@ class TableCell1420Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1421Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -13929,16 +13929,16 @@ class TableCell1421Attbl4 extends TableCell {
  */
 class TableCell1422Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1283")
-    private TextBox TextBox1283;
+    private TextBoxNum TextBox1283;
 
     /*
      * getTextBox1283
      * @return TextBox1283
      */
     @JsonProperty("TextBox1283")
-    public TextBox getTextBox1283() {
+    public TextBoxNum getTextBox1283() {
         return TextBox1283;
     }
 
@@ -13947,7 +13947,7 @@ class TableCell1422Attbl4 extends TableCell {
      * @param TextBox1283 TextBox1283
      */
     @JsonProperty("TextBox1283")
-    public void setTextBox1283(TextBox TextBox1283) {
+    public void setTextBox1283(TextBoxNum TextBox1283) {
         this.TextBox1283 = TextBox1283;
     }
 
@@ -13961,16 +13961,16 @@ class TableCell1422Attbl4 extends TableCell {
  */
 class TableCell1423Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1284")
-    private TextBox TextBox1284;
+    private TextBoxNum TextBox1284;
 
     /*
      * getTextBox1284
      * @return TextBox1284
      */
     @JsonProperty("TextBox1284")
-    public TextBox getTextBox1284() {
+    public TextBoxNum getTextBox1284() {
         return TextBox1284;
     }
 
@@ -13979,7 +13979,7 @@ class TableCell1423Attbl4 extends TableCell {
      * @param TextBox1284 TextBox1284
      */
     @JsonProperty("TextBox1284")
-    public void setTextBox1284(TextBox TextBox1284) {
+    public void setTextBox1284(TextBoxNum TextBox1284) {
         this.TextBox1284 = TextBox1284;
     }
 
@@ -13993,16 +13993,16 @@ class TableCell1423Attbl4 extends TableCell {
  */
 class TableCell1424Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1285")
-    private TextBox TextBox1285;
+    private TextBoxNum TextBox1285;
 
     /*
      * getTextBox1285
      * @return TextBox1285
      */
     @JsonProperty("TextBox1285")
-    public TextBox getTextBox1285() {
+    public TextBoxNum getTextBox1285() {
         return TextBox1285;
     }
 
@@ -14011,7 +14011,7 @@ class TableCell1424Attbl4 extends TableCell {
      * @param TextBox1285 TextBox1285
      */
     @JsonProperty("TextBox1285")
-    public void setTextBox1285(TextBox TextBox1285) {
+    public void setTextBox1285(TextBoxNum TextBox1285) {
         this.TextBox1285 = TextBox1285;
     }
 
@@ -14025,16 +14025,16 @@ class TableCell1424Attbl4 extends TableCell {
  */
 class TableCell1425Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1286")
-    private TextBox TextBox1286;
+    private TextBoxNum TextBox1286;
 
     /*
      * getTextBox1286
      * @return TextBox1286
      */
     @JsonProperty("TextBox1286")
-    public TextBox getTextBox1286() {
+    public TextBoxNum getTextBox1286() {
         return TextBox1286;
     }
 
@@ -14043,7 +14043,7 @@ class TableCell1425Attbl4 extends TableCell {
      * @param TextBox1286 TextBox1286
      */
     @JsonProperty("TextBox1286")
-    public void setTextBox1286(TextBox TextBox1286) {
+    public void setTextBox1286(TextBoxNum TextBox1286) {
         this.TextBox1286 = TextBox1286;
     }
 
@@ -14057,16 +14057,16 @@ class TableCell1425Attbl4 extends TableCell {
  */
 class TableCell1426Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1287")
-    private TextBox TextBox1287;
+    private TextBoxNum TextBox1287;
 
     /*
      * getTextBox1287
      * @return TextBox1287
      */
     @JsonProperty("TextBox1287")
-    public TextBox getTextBox1287() {
+    public TextBoxNum getTextBox1287() {
         return TextBox1287;
     }
 
@@ -14075,7 +14075,7 @@ class TableCell1426Attbl4 extends TableCell {
      * @param TextBox1287 TextBox1287
      */
     @JsonProperty("TextBox1287")
-    public void setTextBox1287(TextBox TextBox1287) {
+    public void setTextBox1287(TextBoxNum TextBox1287) {
         this.TextBox1287 = TextBox1287;
     }
 
@@ -14089,16 +14089,16 @@ class TableCell1426Attbl4 extends TableCell {
  */
 class TableCell1427Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1288")
-    private TextBox TextBox1288;
+    private TextBoxNum TextBox1288;
 
     /*
      * getTextBox1288
      * @return TextBox1288
      */
     @JsonProperty("TextBox1288")
-    public TextBox getTextBox1288() {
+    public TextBoxNum getTextBox1288() {
         return TextBox1288;
     }
 
@@ -14107,7 +14107,7 @@ class TableCell1427Attbl4 extends TableCell {
      * @param TextBox1288 TextBox1288
      */
     @JsonProperty("TextBox1288")
-    public void setTextBox1288(TextBox TextBox1288) {
+    public void setTextBox1288(TextBoxNum TextBox1288) {
         this.TextBox1288 = TextBox1288;
     }
 
@@ -14121,16 +14121,16 @@ class TableCell1427Attbl4 extends TableCell {
  */
 class TableCell1428Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1289")
-    private TextBox TextBox1289;
+    private TextBoxNum TextBox1289;
 
     /*
      * getTextBox1289
      * @return TextBox1289
      */
     @JsonProperty("TextBox1289")
-    public TextBox getTextBox1289() {
+    public TextBoxNum getTextBox1289() {
         return TextBox1289;
     }
 
@@ -14139,7 +14139,7 @@ class TableCell1428Attbl4 extends TableCell {
      * @param TextBox1289 TextBox1289
      */
     @JsonProperty("TextBox1289")
-    public void setTextBox1289(TextBox TextBox1289) {
+    public void setTextBox1289(TextBoxNum TextBox1289) {
         this.TextBox1289 = TextBox1289;
     }
 
@@ -14153,16 +14153,16 @@ class TableCell1428Attbl4 extends TableCell {
  */
 class TableCell1429Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1290")
-    private TextBox TextBox1290;
+    private TextBoxNum TextBox1290;
 
     /*
      * getTextBox1290
      * @return TextBox1290
      */
     @JsonProperty("TextBox1290")
-    public TextBox getTextBox1290() {
+    public TextBoxNum getTextBox1290() {
         return TextBox1290;
     }
 
@@ -14171,7 +14171,7 @@ class TableCell1429Attbl4 extends TableCell {
      * @param TextBox1290 TextBox1290
      */
     @JsonProperty("TextBox1290")
-    public void setTextBox1290(TextBox TextBox1290) {
+    public void setTextBox1290(TextBoxNum TextBox1290) {
         this.TextBox1290 = TextBox1290;
     }
 
@@ -14185,16 +14185,16 @@ class TableCell1429Attbl4 extends TableCell {
  */
 class TableCell1430Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1291")
-    private TextBox TextBox1291;
+    private TextBoxNum TextBox1291;
 
     /*
      * getTextBox1291
      * @return TextBox1291
      */
     @JsonProperty("TextBox1291")
-    public TextBox getTextBox1291() {
+    public TextBoxNum getTextBox1291() {
         return TextBox1291;
     }
 
@@ -14203,7 +14203,7 @@ class TableCell1430Attbl4 extends TableCell {
      * @param TextBox1291 TextBox1291
      */
     @JsonProperty("TextBox1291")
-    public void setTextBox1291(TextBox TextBox1291) {
+    public void setTextBox1291(TextBoxNum TextBox1291) {
         this.TextBox1291 = TextBox1291;
     }
 
@@ -14217,16 +14217,16 @@ class TableCell1430Attbl4 extends TableCell {
  */
 class TableCell1431Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1292")
-    private TextBox TextBox1292;
+    private TextBoxNum TextBox1292;
 
     /*
      * getTextBox1292
      * @return TextBox1292
      */
     @JsonProperty("TextBox1292")
-    public TextBox getTextBox1292() {
+    public TextBoxNum getTextBox1292() {
         return TextBox1292;
     }
 
@@ -14235,7 +14235,7 @@ class TableCell1431Attbl4 extends TableCell {
      * @param TextBox1292 TextBox1292
      */
     @JsonProperty("TextBox1292")
-    public void setTextBox1292(TextBox TextBox1292) {
+    public void setTextBox1292(TextBoxNum TextBox1292) {
         this.TextBox1292 = TextBox1292;
     }
 
@@ -14249,16 +14249,16 @@ class TableCell1431Attbl4 extends TableCell {
  */
 class TableCell1432Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1293")
-    private TextBox TextBox1293;
+    private TextBoxNum TextBox1293;
 
     /*
      * getTextBox1293
      * @return TextBox1293
      */
     @JsonProperty("TextBox1293")
-    public TextBox getTextBox1293() {
+    public TextBoxNum getTextBox1293() {
         return TextBox1293;
     }
 
@@ -14267,7 +14267,7 @@ class TableCell1432Attbl4 extends TableCell {
      * @param TextBox1293 TextBox1293
      */
     @JsonProperty("TextBox1293")
-    public void setTextBox1293(TextBox TextBox1293) {
+    public void setTextBox1293(TextBoxNum TextBox1293) {
         this.TextBox1293 = TextBox1293;
     }
 
@@ -14280,7 +14280,7 @@ class TableCell1432Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1433Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -14291,7 +14291,7 @@ class TableCell1433Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1434Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -14303,16 +14303,16 @@ class TableCell1434Attbl4 extends TableCell {
  */
 class TableCell1435Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1294")
-    private TextBox TextBox1294;
+    private TextBoxNum TextBox1294;
 
     /*
      * getTextBox1294
      * @return TextBox1294
      */
     @JsonProperty("TextBox1294")
-    public TextBox getTextBox1294() {
+    public TextBoxNum getTextBox1294() {
         return TextBox1294;
     }
 
@@ -14321,7 +14321,7 @@ class TableCell1435Attbl4 extends TableCell {
      * @param TextBox1294 TextBox1294
      */
     @JsonProperty("TextBox1294")
-    public void setTextBox1294(TextBox TextBox1294) {
+    public void setTextBox1294(TextBoxNum TextBox1294) {
         this.TextBox1294 = TextBox1294;
     }
 
@@ -14335,16 +14335,16 @@ class TableCell1435Attbl4 extends TableCell {
  */
 class TableCell1436Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1295")
-    private TextBox TextBox1295;
+    private TextBoxNum TextBox1295;
 
     /*
      * getTextBox1295
      * @return TextBox1295
      */
     @JsonProperty("TextBox1295")
-    public TextBox getTextBox1295() {
+    public TextBoxNum getTextBox1295() {
         return TextBox1295;
     }
 
@@ -14353,7 +14353,7 @@ class TableCell1436Attbl4 extends TableCell {
      * @param TextBox1295 TextBox1295
      */
     @JsonProperty("TextBox1295")
-    public void setTextBox1295(TextBox TextBox1295) {
+    public void setTextBox1295(TextBoxNum TextBox1295) {
         this.TextBox1295 = TextBox1295;
     }
 
@@ -14367,16 +14367,16 @@ class TableCell1436Attbl4 extends TableCell {
  */
 class TableCell1437Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1296")
-    private TextBox TextBox1296;
+    private TextBoxNum TextBox1296;
 
     /*
      * getTextBox1296
      * @return TextBox1296
      */
     @JsonProperty("TextBox1296")
-    public TextBox getTextBox1296() {
+    public TextBoxNum getTextBox1296() {
         return TextBox1296;
     }
 
@@ -14385,7 +14385,7 @@ class TableCell1437Attbl4 extends TableCell {
      * @param TextBox1296 TextBox1296
      */
     @JsonProperty("TextBox1296")
-    public void setTextBox1296(TextBox TextBox1296) {
+    public void setTextBox1296(TextBoxNum TextBox1296) {
         this.TextBox1296 = TextBox1296;
     }
 
@@ -14399,16 +14399,16 @@ class TableCell1437Attbl4 extends TableCell {
  */
 class TableCell1438Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1297")
-    private TextBox TextBox1297;
+    private TextBoxNum TextBox1297;
 
     /*
      * getTextBox1297
      * @return TextBox1297
      */
     @JsonProperty("TextBox1297")
-    public TextBox getTextBox1297() {
+    public TextBoxNum getTextBox1297() {
         return TextBox1297;
     }
 
@@ -14417,7 +14417,7 @@ class TableCell1438Attbl4 extends TableCell {
      * @param TextBox1297 TextBox1297
      */
     @JsonProperty("TextBox1297")
-    public void setTextBox1297(TextBox TextBox1297) {
+    public void setTextBox1297(TextBoxNum TextBox1297) {
         this.TextBox1297 = TextBox1297;
     }
 
@@ -14431,16 +14431,16 @@ class TableCell1438Attbl4 extends TableCell {
  */
 class TableCell1439Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1298")
-    private TextBox TextBox1298;
+    private TextBoxNum TextBox1298;
 
     /*
      * getTextBox1298
      * @return TextBox1298
      */
     @JsonProperty("TextBox1298")
-    public TextBox getTextBox1298() {
+    public TextBoxNum getTextBox1298() {
         return TextBox1298;
     }
 
@@ -14449,7 +14449,7 @@ class TableCell1439Attbl4 extends TableCell {
      * @param TextBox1298 TextBox1298
      */
     @JsonProperty("TextBox1298")
-    public void setTextBox1298(TextBox TextBox1298) {
+    public void setTextBox1298(TextBoxNum TextBox1298) {
         this.TextBox1298 = TextBox1298;
     }
 
@@ -14463,16 +14463,16 @@ class TableCell1439Attbl4 extends TableCell {
  */
 class TableCell1440Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1299")
-    private TextBox TextBox1299;
+    private TextBoxNum TextBox1299;
 
     /*
      * getTextBox1299
      * @return TextBox1299
      */
     @JsonProperty("TextBox1299")
-    public TextBox getTextBox1299() {
+    public TextBoxNum getTextBox1299() {
         return TextBox1299;
     }
 
@@ -14481,7 +14481,7 @@ class TableCell1440Attbl4 extends TableCell {
      * @param TextBox1299 TextBox1299
      */
     @JsonProperty("TextBox1299")
-    public void setTextBox1299(TextBox TextBox1299) {
+    public void setTextBox1299(TextBoxNum TextBox1299) {
         this.TextBox1299 = TextBox1299;
     }
 
@@ -14495,16 +14495,16 @@ class TableCell1440Attbl4 extends TableCell {
  */
 class TableCell1441Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1300")
-    private TextBox TextBox1300;
+    private TextBoxNum TextBox1300;
 
     /*
      * getTextBox1300
      * @return TextBox1300
      */
     @JsonProperty("TextBox1300")
-    public TextBox getTextBox1300() {
+    public TextBoxNum getTextBox1300() {
         return TextBox1300;
     }
 
@@ -14513,7 +14513,7 @@ class TableCell1441Attbl4 extends TableCell {
      * @param TextBox1300 TextBox1300
      */
     @JsonProperty("TextBox1300")
-    public void setTextBox1300(TextBox TextBox1300) {
+    public void setTextBox1300(TextBoxNum TextBox1300) {
         this.TextBox1300 = TextBox1300;
     }
 
@@ -14527,16 +14527,16 @@ class TableCell1441Attbl4 extends TableCell {
  */
 class TableCell1442Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1301")
-    private TextBox TextBox1301;
+    private TextBoxNum TextBox1301;
 
     /*
      * getTextBox1301
      * @return TextBox1301
      */
     @JsonProperty("TextBox1301")
-    public TextBox getTextBox1301() {
+    public TextBoxNum getTextBox1301() {
         return TextBox1301;
     }
 
@@ -14545,7 +14545,7 @@ class TableCell1442Attbl4 extends TableCell {
      * @param TextBox1301 TextBox1301
      */
     @JsonProperty("TextBox1301")
-    public void setTextBox1301(TextBox TextBox1301) {
+    public void setTextBox1301(TextBoxNum TextBox1301) {
         this.TextBox1301 = TextBox1301;
     }
 
@@ -14559,16 +14559,16 @@ class TableCell1442Attbl4 extends TableCell {
  */
 class TableCell1443Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1302")
-    private TextBox TextBox1302;
+    private TextBoxNum TextBox1302;
 
     /*
      * getTextBox1302
      * @return TextBox1302
      */
     @JsonProperty("TextBox1302")
-    public TextBox getTextBox1302() {
+    public TextBoxNum getTextBox1302() {
         return TextBox1302;
     }
 
@@ -14577,7 +14577,7 @@ class TableCell1443Attbl4 extends TableCell {
      * @param TextBox1302 TextBox1302
      */
     @JsonProperty("TextBox1302")
-    public void setTextBox1302(TextBox TextBox1302) {
+    public void setTextBox1302(TextBoxNum TextBox1302) {
         this.TextBox1302 = TextBox1302;
     }
 
@@ -14591,16 +14591,16 @@ class TableCell1443Attbl4 extends TableCell {
  */
 class TableCell1444Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1303")
-    private TextBox TextBox1303;
+    private TextBoxNum TextBox1303;
 
     /*
      * getTextBox1303
      * @return TextBox1303
      */
     @JsonProperty("TextBox1303")
-    public TextBox getTextBox1303() {
+    public TextBoxNum getTextBox1303() {
         return TextBox1303;
     }
 
@@ -14609,7 +14609,7 @@ class TableCell1444Attbl4 extends TableCell {
      * @param TextBox1303 TextBox1303
      */
     @JsonProperty("TextBox1303")
-    public void setTextBox1303(TextBox TextBox1303) {
+    public void setTextBox1303(TextBoxNum TextBox1303) {
         this.TextBox1303 = TextBox1303;
     }
 
@@ -14623,16 +14623,16 @@ class TableCell1444Attbl4 extends TableCell {
  */
 class TableCell1445Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1304")
-    private TextBox TextBox1304;
+    private TextBoxNum TextBox1304;
 
     /*
      * getTextBox1304
      * @return TextBox1304
      */
     @JsonProperty("TextBox1304")
-    public TextBox getTextBox1304() {
+    public TextBoxNum getTextBox1304() {
         return TextBox1304;
     }
 
@@ -14641,7 +14641,7 @@ class TableCell1445Attbl4 extends TableCell {
      * @param TextBox1304 TextBox1304
      */
     @JsonProperty("TextBox1304")
-    public void setTextBox1304(TextBox TextBox1304) {
+    public void setTextBox1304(TextBoxNum TextBox1304) {
         this.TextBox1304 = TextBox1304;
     }
 
@@ -14654,7 +14654,7 @@ class TableCell1445Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1446Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -14665,7 +14665,7 @@ class TableCell1446Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1447Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -14677,16 +14677,16 @@ class TableCell1447Attbl4 extends TableCell {
  */
 class TableCell1448Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1305")
-    private TextBox TextBox1305;
+    private TextBoxNum TextBox1305;
 
     /*
      * getTextBox1305
      * @return TextBox1305
      */
     @JsonProperty("TextBox1305")
-    public TextBox getTextBox1305() {
+    public TextBoxNum getTextBox1305() {
         return TextBox1305;
     }
 
@@ -14695,7 +14695,7 @@ class TableCell1448Attbl4 extends TableCell {
      * @param TextBox1305 TextBox1305
      */
     @JsonProperty("TextBox1305")
-    public void setTextBox1305(TextBox TextBox1305) {
+    public void setTextBox1305(TextBoxNum TextBox1305) {
         this.TextBox1305 = TextBox1305;
     }
 
@@ -14709,16 +14709,16 @@ class TableCell1448Attbl4 extends TableCell {
  */
 class TableCell1449Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1306")
-    private TextBox TextBox1306;
+    private TextBoxNum TextBox1306;
 
     /*
      * getTextBox1306
      * @return TextBox1306
      */
     @JsonProperty("TextBox1306")
-    public TextBox getTextBox1306() {
+    public TextBoxNum getTextBox1306() {
         return TextBox1306;
     }
 
@@ -14727,7 +14727,7 @@ class TableCell1449Attbl4 extends TableCell {
      * @param TextBox1306 TextBox1306
      */
     @JsonProperty("TextBox1306")
-    public void setTextBox1306(TextBox TextBox1306) {
+    public void setTextBox1306(TextBoxNum TextBox1306) {
         this.TextBox1306 = TextBox1306;
     }
 
@@ -14741,16 +14741,16 @@ class TableCell1449Attbl4 extends TableCell {
  */
 class TableCell1450Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1307")
-    private TextBox TextBox1307;
+    private TextBoxNum TextBox1307;
 
     /*
      * getTextBox1307
      * @return TextBox1307
      */
     @JsonProperty("TextBox1307")
-    public TextBox getTextBox1307() {
+    public TextBoxNum getTextBox1307() {
         return TextBox1307;
     }
 
@@ -14759,7 +14759,7 @@ class TableCell1450Attbl4 extends TableCell {
      * @param TextBox1307 TextBox1307
      */
     @JsonProperty("TextBox1307")
-    public void setTextBox1307(TextBox TextBox1307) {
+    public void setTextBox1307(TextBoxNum TextBox1307) {
         this.TextBox1307 = TextBox1307;
     }
 
@@ -14773,16 +14773,16 @@ class TableCell1450Attbl4 extends TableCell {
  */
 class TableCell1451Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1308")
-    private TextBox TextBox1308;
+    private TextBoxNum TextBox1308;
 
     /*
      * getTextBox1308
      * @return TextBox1308
      */
     @JsonProperty("TextBox1308")
-    public TextBox getTextBox1308() {
+    public TextBoxNum getTextBox1308() {
         return TextBox1308;
     }
 
@@ -14791,7 +14791,7 @@ class TableCell1451Attbl4 extends TableCell {
      * @param TextBox1308 TextBox1308
      */
     @JsonProperty("TextBox1308")
-    public void setTextBox1308(TextBox TextBox1308) {
+    public void setTextBox1308(TextBoxNum TextBox1308) {
         this.TextBox1308 = TextBox1308;
     }
 
@@ -14805,16 +14805,16 @@ class TableCell1451Attbl4 extends TableCell {
  */
 class TableCell1452Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1309")
-    private TextBox TextBox1309;
+    private TextBoxNum TextBox1309;
 
     /*
      * getTextBox1309
      * @return TextBox1309
      */
     @JsonProperty("TextBox1309")
-    public TextBox getTextBox1309() {
+    public TextBoxNum getTextBox1309() {
         return TextBox1309;
     }
 
@@ -14823,7 +14823,7 @@ class TableCell1452Attbl4 extends TableCell {
      * @param TextBox1309 TextBox1309
      */
     @JsonProperty("TextBox1309")
-    public void setTextBox1309(TextBox TextBox1309) {
+    public void setTextBox1309(TextBoxNum TextBox1309) {
         this.TextBox1309 = TextBox1309;
     }
 
@@ -14837,16 +14837,16 @@ class TableCell1452Attbl4 extends TableCell {
  */
 class TableCell1453Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1310")
-    private TextBox TextBox1310;
+    private TextBoxNum TextBox1310;
 
     /*
      * getTextBox1310
      * @return TextBox1310
      */
     @JsonProperty("TextBox1310")
-    public TextBox getTextBox1310() {
+    public TextBoxNum getTextBox1310() {
         return TextBox1310;
     }
 
@@ -14855,7 +14855,7 @@ class TableCell1453Attbl4 extends TableCell {
      * @param TextBox1310 TextBox1310
      */
     @JsonProperty("TextBox1310")
-    public void setTextBox1310(TextBox TextBox1310) {
+    public void setTextBox1310(TextBoxNum TextBox1310) {
         this.TextBox1310 = TextBox1310;
     }
 
@@ -14869,16 +14869,16 @@ class TableCell1453Attbl4 extends TableCell {
  */
 class TableCell1454Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1311")
-    private TextBox TextBox1311;
+    private TextBoxNum TextBox1311;
 
     /*
      * getTextBox1311
      * @return TextBox1311
      */
     @JsonProperty("TextBox1311")
-    public TextBox getTextBox1311() {
+    public TextBoxNum getTextBox1311() {
         return TextBox1311;
     }
 
@@ -14887,7 +14887,7 @@ class TableCell1454Attbl4 extends TableCell {
      * @param TextBox1311 TextBox1311
      */
     @JsonProperty("TextBox1311")
-    public void setTextBox1311(TextBox TextBox1311) {
+    public void setTextBox1311(TextBoxNum TextBox1311) {
         this.TextBox1311 = TextBox1311;
     }
 
@@ -14901,16 +14901,16 @@ class TableCell1454Attbl4 extends TableCell {
  */
 class TableCell1455Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1312")
-    private TextBox TextBox1312;
+    private TextBoxNum TextBox1312;
 
     /*
      * getTextBox1312
      * @return TextBox1312
      */
     @JsonProperty("TextBox1312")
-    public TextBox getTextBox1312() {
+    public TextBoxNum getTextBox1312() {
         return TextBox1312;
     }
 
@@ -14919,7 +14919,7 @@ class TableCell1455Attbl4 extends TableCell {
      * @param TextBox1312 TextBox1312
      */
     @JsonProperty("TextBox1312")
-    public void setTextBox1312(TextBox TextBox1312) {
+    public void setTextBox1312(TextBoxNum TextBox1312) {
         this.TextBox1312 = TextBox1312;
     }
 
@@ -14933,16 +14933,16 @@ class TableCell1455Attbl4 extends TableCell {
  */
 class TableCell1456Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1313")
-    private TextBox TextBox1313;
+    private TextBoxNum TextBox1313;
 
     /*
      * getTextBox1313
      * @return TextBox1313
      */
     @JsonProperty("TextBox1313")
-    public TextBox getTextBox1313() {
+    public TextBoxNum getTextBox1313() {
         return TextBox1313;
     }
 
@@ -14951,7 +14951,7 @@ class TableCell1456Attbl4 extends TableCell {
      * @param TextBox1313 TextBox1313
      */
     @JsonProperty("TextBox1313")
-    public void setTextBox1313(TextBox TextBox1313) {
+    public void setTextBox1313(TextBoxNum TextBox1313) {
         this.TextBox1313 = TextBox1313;
     }
 
@@ -14965,16 +14965,16 @@ class TableCell1456Attbl4 extends TableCell {
  */
 class TableCell1457Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1314")
-    private TextBox TextBox1314;
+    private TextBoxNum TextBox1314;
 
     /*
      * getTextBox1314
      * @return TextBox1314
      */
     @JsonProperty("TextBox1314")
-    public TextBox getTextBox1314() {
+    public TextBoxNum getTextBox1314() {
         return TextBox1314;
     }
 
@@ -14983,7 +14983,7 @@ class TableCell1457Attbl4 extends TableCell {
      * @param TextBox1314 TextBox1314
      */
     @JsonProperty("TextBox1314")
-    public void setTextBox1314(TextBox TextBox1314) {
+    public void setTextBox1314(TextBoxNum TextBox1314) {
         this.TextBox1314 = TextBox1314;
     }
 
@@ -14997,16 +14997,16 @@ class TableCell1457Attbl4 extends TableCell {
  */
 class TableCell1458Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1315")
-    private TextBox TextBox1315;
+    private TextBoxNum TextBox1315;
 
     /*
      * getTextBox1315
      * @return TextBox1315
      */
     @JsonProperty("TextBox1315")
-    public TextBox getTextBox1315() {
+    public TextBoxNum getTextBox1315() {
         return TextBox1315;
     }
 
@@ -15015,7 +15015,7 @@ class TableCell1458Attbl4 extends TableCell {
      * @param TextBox1315 TextBox1315
      */
     @JsonProperty("TextBox1315")
-    public void setTextBox1315(TextBox TextBox1315) {
+    public void setTextBox1315(TextBoxNum TextBox1315) {
         this.TextBox1315 = TextBox1315;
     }
 
@@ -15028,7 +15028,7 @@ class TableCell1458Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1459Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -15040,16 +15040,16 @@ class TableCell1459Attbl4 extends TableCell {
  */
 class TableCell1460Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1316")
-    private TextBox TextBox1316;
+    private TextBoxNum TextBox1316;
 
     /*
      * getTextBox1316
      * @return TextBox1316
      */
     @JsonProperty("TextBox1316")
-    public TextBox getTextBox1316() {
+    public TextBoxNum getTextBox1316() {
         return TextBox1316;
     }
 
@@ -15058,7 +15058,7 @@ class TableCell1460Attbl4 extends TableCell {
      * @param TextBox1316 TextBox1316
      */
     @JsonProperty("TextBox1316")
-    public void setTextBox1316(TextBox TextBox1316) {
+    public void setTextBox1316(TextBoxNum TextBox1316) {
         this.TextBox1316 = TextBox1316;
     }
 
@@ -15072,16 +15072,16 @@ class TableCell1460Attbl4 extends TableCell {
  */
 class TableCell1461Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1317")
-    private TextBox TextBox1317;
+    private TextBoxNum TextBox1317;
 
     /*
      * getTextBox1317
      * @return TextBox1317
      */
     @JsonProperty("TextBox1317")
-    public TextBox getTextBox1317() {
+    public TextBoxNum getTextBox1317() {
         return TextBox1317;
     }
 
@@ -15090,7 +15090,7 @@ class TableCell1461Attbl4 extends TableCell {
      * @param TextBox1317 TextBox1317
      */
     @JsonProperty("TextBox1317")
-    public void setTextBox1317(TextBox TextBox1317) {
+    public void setTextBox1317(TextBoxNum TextBox1317) {
         this.TextBox1317 = TextBox1317;
     }
 
@@ -15104,16 +15104,16 @@ class TableCell1461Attbl4 extends TableCell {
  */
 class TableCell1462Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1318")
-    private TextBox TextBox1318;
+    private TextBoxNum TextBox1318;
 
     /*
      * getTextBox1318
      * @return TextBox1318
      */
     @JsonProperty("TextBox1318")
-    public TextBox getTextBox1318() {
+    public TextBoxNum getTextBox1318() {
         return TextBox1318;
     }
 
@@ -15122,7 +15122,7 @@ class TableCell1462Attbl4 extends TableCell {
      * @param TextBox1318 TextBox1318
      */
     @JsonProperty("TextBox1318")
-    public void setTextBox1318(TextBox TextBox1318) {
+    public void setTextBox1318(TextBoxNum TextBox1318) {
         this.TextBox1318 = TextBox1318;
     }
 
@@ -15136,16 +15136,16 @@ class TableCell1462Attbl4 extends TableCell {
  */
 class TableCell1463Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1319")
-    private TextBox TextBox1319;
+    private TextBoxNum TextBox1319;
 
     /*
      * getTextBox1319
      * @return TextBox1319
      */
     @JsonProperty("TextBox1319")
-    public TextBox getTextBox1319() {
+    public TextBoxNum getTextBox1319() {
         return TextBox1319;
     }
 
@@ -15154,7 +15154,7 @@ class TableCell1463Attbl4 extends TableCell {
      * @param TextBox1319 TextBox1319
      */
     @JsonProperty("TextBox1319")
-    public void setTextBox1319(TextBox TextBox1319) {
+    public void setTextBox1319(TextBoxNum TextBox1319) {
         this.TextBox1319 = TextBox1319;
     }
 
@@ -15168,16 +15168,16 @@ class TableCell1463Attbl4 extends TableCell {
  */
 class TableCell1464Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1320")
-    private TextBox TextBox1320;
+    private TextBoxNum TextBox1320;
 
     /*
      * getTextBox1320
      * @return TextBox1320
      */
     @JsonProperty("TextBox1320")
-    public TextBox getTextBox1320() {
+    public TextBoxNum getTextBox1320() {
         return TextBox1320;
     }
 
@@ -15186,7 +15186,7 @@ class TableCell1464Attbl4 extends TableCell {
      * @param TextBox1320 TextBox1320
      */
     @JsonProperty("TextBox1320")
-    public void setTextBox1320(TextBox TextBox1320) {
+    public void setTextBox1320(TextBoxNum TextBox1320) {
         this.TextBox1320 = TextBox1320;
     }
 
@@ -15200,16 +15200,16 @@ class TableCell1464Attbl4 extends TableCell {
  */
 class TableCell1465Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1321")
-    private TextBox TextBox1321;
+    private TextBoxNum TextBox1321;
 
     /*
      * getTextBox1321
      * @return TextBox1321
      */
     @JsonProperty("TextBox1321")
-    public TextBox getTextBox1321() {
+    public TextBoxNum getTextBox1321() {
         return TextBox1321;
     }
 
@@ -15218,7 +15218,7 @@ class TableCell1465Attbl4 extends TableCell {
      * @param TextBox1321 TextBox1321
      */
     @JsonProperty("TextBox1321")
-    public void setTextBox1321(TextBox TextBox1321) {
+    public void setTextBox1321(TextBoxNum TextBox1321) {
         this.TextBox1321 = TextBox1321;
     }
 
@@ -15232,16 +15232,16 @@ class TableCell1465Attbl4 extends TableCell {
  */
 class TableCell1466Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1322")
-    private TextBox TextBox1322;
+    private TextBoxNum TextBox1322;
 
     /*
      * getTextBox1322
      * @return TextBox1322
      */
     @JsonProperty("TextBox1322")
-    public TextBox getTextBox1322() {
+    public TextBoxNum getTextBox1322() {
         return TextBox1322;
     }
 
@@ -15250,7 +15250,7 @@ class TableCell1466Attbl4 extends TableCell {
      * @param TextBox1322 TextBox1322
      */
     @JsonProperty("TextBox1322")
-    public void setTextBox1322(TextBox TextBox1322) {
+    public void setTextBox1322(TextBoxNum TextBox1322) {
         this.TextBox1322 = TextBox1322;
     }
 
@@ -15264,16 +15264,16 @@ class TableCell1466Attbl4 extends TableCell {
  */
 class TableCell1467Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1323")
-    private TextBox TextBox1323;
+    private TextBoxNum TextBox1323;
 
     /*
      * getTextBox1323
      * @return TextBox1323
      */
     @JsonProperty("TextBox1323")
-    public TextBox getTextBox1323() {
+    public TextBoxNum getTextBox1323() {
         return TextBox1323;
     }
 
@@ -15282,7 +15282,7 @@ class TableCell1467Attbl4 extends TableCell {
      * @param TextBox1323 TextBox1323
      */
     @JsonProperty("TextBox1323")
-    public void setTextBox1323(TextBox TextBox1323) {
+    public void setTextBox1323(TextBoxNum TextBox1323) {
         this.TextBox1323 = TextBox1323;
     }
 
@@ -15296,16 +15296,16 @@ class TableCell1467Attbl4 extends TableCell {
  */
 class TableCell1468Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1324")
-    private TextBox TextBox1324;
+    private TextBoxNum TextBox1324;
 
     /*
      * getTextBox1324
      * @return TextBox1324
      */
     @JsonProperty("TextBox1324")
-    public TextBox getTextBox1324() {
+    public TextBoxNum getTextBox1324() {
         return TextBox1324;
     }
 
@@ -15314,7 +15314,7 @@ class TableCell1468Attbl4 extends TableCell {
      * @param TextBox1324 TextBox1324
      */
     @JsonProperty("TextBox1324")
-    public void setTextBox1324(TextBox TextBox1324) {
+    public void setTextBox1324(TextBoxNum TextBox1324) {
         this.TextBox1324 = TextBox1324;
     }
 
@@ -15328,16 +15328,16 @@ class TableCell1468Attbl4 extends TableCell {
  */
 class TableCell1469Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1325")
-    private TextBox TextBox1325;
+    private TextBoxNum TextBox1325;
 
     /*
      * getTextBox1325
      * @return TextBox1325
      */
     @JsonProperty("TextBox1325")
-    public TextBox getTextBox1325() {
+    public TextBoxNum getTextBox1325() {
         return TextBox1325;
     }
 
@@ -15346,7 +15346,7 @@ class TableCell1469Attbl4 extends TableCell {
      * @param TextBox1325 TextBox1325
      */
     @JsonProperty("TextBox1325")
-    public void setTextBox1325(TextBox TextBox1325) {
+    public void setTextBox1325(TextBoxNum TextBox1325) {
         this.TextBox1325 = TextBox1325;
     }
 
@@ -15360,16 +15360,16 @@ class TableCell1469Attbl4 extends TableCell {
  */
 class TableCell1470Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1326")
-    private TextBox TextBox1326;
+    private TextBoxNum TextBox1326;
 
     /*
      * getTextBox1326
      * @return TextBox1326
      */
     @JsonProperty("TextBox1326")
-    public TextBox getTextBox1326() {
+    public TextBoxNum getTextBox1326() {
         return TextBox1326;
     }
 
@@ -15378,7 +15378,7 @@ class TableCell1470Attbl4 extends TableCell {
      * @param TextBox1326 TextBox1326
      */
     @JsonProperty("TextBox1326")
-    public void setTextBox1326(TextBox TextBox1326) {
+    public void setTextBox1326(TextBoxNum TextBox1326) {
         this.TextBox1326 = TextBox1326;
     }
 
@@ -15391,7 +15391,7 @@ class TableCell1470Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1471Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -15402,7 +15402,7 @@ class TableCell1471Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1472Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -15414,16 +15414,16 @@ class TableCell1472Attbl4 extends TableCell {
  */
 class TableCell1473Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1327")
-    private TextBox TextBox1327;
+    private TextBoxNum TextBox1327;
 
     /*
      * getTextBox1327
      * @return TextBox1327
      */
     @JsonProperty("TextBox1327")
-    public TextBox getTextBox1327() {
+    public TextBoxNum getTextBox1327() {
         return TextBox1327;
     }
 
@@ -15432,7 +15432,7 @@ class TableCell1473Attbl4 extends TableCell {
      * @param TextBox1327 TextBox1327
      */
     @JsonProperty("TextBox1327")
-    public void setTextBox1327(TextBox TextBox1327) {
+    public void setTextBox1327(TextBoxNum TextBox1327) {
         this.TextBox1327 = TextBox1327;
     }
 
@@ -15446,16 +15446,16 @@ class TableCell1473Attbl4 extends TableCell {
  */
 class TableCell1474Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1328")
-    private TextBox TextBox1328;
+    private TextBoxNum TextBox1328;
 
     /*
      * getTextBox1328
      * @return TextBox1328
      */
     @JsonProperty("TextBox1328")
-    public TextBox getTextBox1328() {
+    public TextBoxNum getTextBox1328() {
         return TextBox1328;
     }
 
@@ -15464,7 +15464,7 @@ class TableCell1474Attbl4 extends TableCell {
      * @param TextBox1328 TextBox1328
      */
     @JsonProperty("TextBox1328")
-    public void setTextBox1328(TextBox TextBox1328) {
+    public void setTextBox1328(TextBoxNum TextBox1328) {
         this.TextBox1328 = TextBox1328;
     }
 
@@ -15478,16 +15478,16 @@ class TableCell1474Attbl4 extends TableCell {
  */
 class TableCell1475Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1329")
-    private TextBox TextBox1329;
+    private TextBoxNum TextBox1329;
 
     /*
      * getTextBox1329
      * @return TextBox1329
      */
     @JsonProperty("TextBox1329")
-    public TextBox getTextBox1329() {
+    public TextBoxNum getTextBox1329() {
         return TextBox1329;
     }
 
@@ -15496,7 +15496,7 @@ class TableCell1475Attbl4 extends TableCell {
      * @param TextBox1329 TextBox1329
      */
     @JsonProperty("TextBox1329")
-    public void setTextBox1329(TextBox TextBox1329) {
+    public void setTextBox1329(TextBoxNum TextBox1329) {
         this.TextBox1329 = TextBox1329;
     }
 
@@ -15510,16 +15510,16 @@ class TableCell1475Attbl4 extends TableCell {
  */
 class TableCell1476Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1330")
-    private TextBox TextBox1330;
+    private TextBoxNum TextBox1330;
 
     /*
      * getTextBox1330
      * @return TextBox1330
      */
     @JsonProperty("TextBox1330")
-    public TextBox getTextBox1330() {
+    public TextBoxNum getTextBox1330() {
         return TextBox1330;
     }
 
@@ -15528,7 +15528,7 @@ class TableCell1476Attbl4 extends TableCell {
      * @param TextBox1330 TextBox1330
      */
     @JsonProperty("TextBox1330")
-    public void setTextBox1330(TextBox TextBox1330) {
+    public void setTextBox1330(TextBoxNum TextBox1330) {
         this.TextBox1330 = TextBox1330;
     }
 
@@ -15542,16 +15542,16 @@ class TableCell1476Attbl4 extends TableCell {
  */
 class TableCell1477Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1331")
-    private TextBox TextBox1331;
+    private TextBoxNum TextBox1331;
 
     /*
      * getTextBox1331
      * @return TextBox1331
      */
     @JsonProperty("TextBox1331")
-    public TextBox getTextBox1331() {
+    public TextBoxNum getTextBox1331() {
         return TextBox1331;
     }
 
@@ -15560,7 +15560,7 @@ class TableCell1477Attbl4 extends TableCell {
      * @param TextBox1331 TextBox1331
      */
     @JsonProperty("TextBox1331")
-    public void setTextBox1331(TextBox TextBox1331) {
+    public void setTextBox1331(TextBoxNum TextBox1331) {
         this.TextBox1331 = TextBox1331;
     }
 
@@ -15574,16 +15574,16 @@ class TableCell1477Attbl4 extends TableCell {
  */
 class TableCell1478Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1332")
-    private TextBox TextBox1332;
+    private TextBoxNum TextBox1332;
 
     /*
      * getTextBox1332
      * @return TextBox1332
      */
     @JsonProperty("TextBox1332")
-    public TextBox getTextBox1332() {
+    public TextBoxNum getTextBox1332() {
         return TextBox1332;
     }
 
@@ -15592,7 +15592,7 @@ class TableCell1478Attbl4 extends TableCell {
      * @param TextBox1332 TextBox1332
      */
     @JsonProperty("TextBox1332")
-    public void setTextBox1332(TextBox TextBox1332) {
+    public void setTextBox1332(TextBoxNum TextBox1332) {
         this.TextBox1332 = TextBox1332;
     }
 
@@ -15606,16 +15606,16 @@ class TableCell1478Attbl4 extends TableCell {
  */
 class TableCell1479Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1333")
-    private TextBox TextBox1333;
+    private TextBoxNum TextBox1333;
 
     /*
      * getTextBox1333
      * @return TextBox1333
      */
     @JsonProperty("TextBox1333")
-    public TextBox getTextBox1333() {
+    public TextBoxNum getTextBox1333() {
         return TextBox1333;
     }
 
@@ -15624,7 +15624,7 @@ class TableCell1479Attbl4 extends TableCell {
      * @param TextBox1333 TextBox1333
      */
     @JsonProperty("TextBox1333")
-    public void setTextBox1333(TextBox TextBox1333) {
+    public void setTextBox1333(TextBoxNum TextBox1333) {
         this.TextBox1333 = TextBox1333;
     }
 
@@ -15638,16 +15638,16 @@ class TableCell1479Attbl4 extends TableCell {
  */
 class TableCell1480Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1334")
-    private TextBox TextBox1334;
+    private TextBoxNum TextBox1334;
 
     /*
      * getTextBox1334
      * @return TextBox1334
      */
     @JsonProperty("TextBox1334")
-    public TextBox getTextBox1334() {
+    public TextBoxNum getTextBox1334() {
         return TextBox1334;
     }
 
@@ -15656,7 +15656,7 @@ class TableCell1480Attbl4 extends TableCell {
      * @param TextBox1334 TextBox1334
      */
     @JsonProperty("TextBox1334")
-    public void setTextBox1334(TextBox TextBox1334) {
+    public void setTextBox1334(TextBoxNum TextBox1334) {
         this.TextBox1334 = TextBox1334;
     }
 
@@ -15670,16 +15670,16 @@ class TableCell1480Attbl4 extends TableCell {
  */
 class TableCell1481Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1335")
-    private TextBox TextBox1335;
+    private TextBoxNum TextBox1335;
 
     /*
      * getTextBox1335
      * @return TextBox1335
      */
     @JsonProperty("TextBox1335")
-    public TextBox getTextBox1335() {
+    public TextBoxNum getTextBox1335() {
         return TextBox1335;
     }
 
@@ -15688,7 +15688,7 @@ class TableCell1481Attbl4 extends TableCell {
      * @param TextBox1335 TextBox1335
      */
     @JsonProperty("TextBox1335")
-    public void setTextBox1335(TextBox TextBox1335) {
+    public void setTextBox1335(TextBoxNum TextBox1335) {
         this.TextBox1335 = TextBox1335;
     }
 
@@ -15702,16 +15702,16 @@ class TableCell1481Attbl4 extends TableCell {
  */
 class TableCell1482Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1336")
-    private TextBox TextBox1336;
+    private TextBoxNum TextBox1336;
 
     /*
      * getTextBox1336
      * @return TextBox1336
      */
     @JsonProperty("TextBox1336")
-    public TextBox getTextBox1336() {
+    public TextBoxNum getTextBox1336() {
         return TextBox1336;
     }
 
@@ -15720,7 +15720,7 @@ class TableCell1482Attbl4 extends TableCell {
      * @param TextBox1336 TextBox1336
      */
     @JsonProperty("TextBox1336")
-    public void setTextBox1336(TextBox TextBox1336) {
+    public void setTextBox1336(TextBoxNum TextBox1336) {
         this.TextBox1336 = TextBox1336;
     }
 
@@ -15734,16 +15734,16 @@ class TableCell1482Attbl4 extends TableCell {
  */
 class TableCell1483Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1337")
-    private TextBox TextBox1337;
+    private TextBoxNum TextBox1337;
 
     /*
      * getTextBox1337
      * @return TextBox1337
      */
     @JsonProperty("TextBox1337")
-    public TextBox getTextBox1337() {
+    public TextBoxNum getTextBox1337() {
         return TextBox1337;
     }
 
@@ -15752,7 +15752,7 @@ class TableCell1483Attbl4 extends TableCell {
      * @param TextBox1337 TextBox1337
      */
     @JsonProperty("TextBox1337")
-    public void setTextBox1337(TextBox TextBox1337) {
+    public void setTextBox1337(TextBoxNum TextBox1337) {
         this.TextBox1337 = TextBox1337;
     }
 
@@ -15765,7 +15765,7 @@ class TableCell1483Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1484Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -15776,7 +15776,7 @@ class TableCell1484Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1485Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -15788,16 +15788,16 @@ class TableCell1485Attbl4 extends TableCell {
  */
 class TableCell1486Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1338")
-    private TextBox TextBox1338;
+    private TextBoxNum TextBox1338;
 
     /*
      * getTextBox1338
      * @return TextBox1338
      */
     @JsonProperty("TextBox1338")
-    public TextBox getTextBox1338() {
+    public TextBoxNum getTextBox1338() {
         return TextBox1338;
     }
 
@@ -15806,7 +15806,7 @@ class TableCell1486Attbl4 extends TableCell {
      * @param TextBox1338 TextBox1338
      */
     @JsonProperty("TextBox1338")
-    public void setTextBox1338(TextBox TextBox1338) {
+    public void setTextBox1338(TextBoxNum TextBox1338) {
         this.TextBox1338 = TextBox1338;
     }
 
@@ -15820,16 +15820,16 @@ class TableCell1486Attbl4 extends TableCell {
  */
 class TableCell1487Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1339")
-    private TextBox TextBox1339;
+    private TextBoxNum TextBox1339;
 
     /*
      * getTextBox1339
      * @return TextBox1339
      */
     @JsonProperty("TextBox1339")
-    public TextBox getTextBox1339() {
+    public TextBoxNum getTextBox1339() {
         return TextBox1339;
     }
 
@@ -15838,7 +15838,7 @@ class TableCell1487Attbl4 extends TableCell {
      * @param TextBox1339 TextBox1339
      */
     @JsonProperty("TextBox1339")
-    public void setTextBox1339(TextBox TextBox1339) {
+    public void setTextBox1339(TextBoxNum TextBox1339) {
         this.TextBox1339 = TextBox1339;
     }
 
@@ -15852,16 +15852,16 @@ class TableCell1487Attbl4 extends TableCell {
  */
 class TableCell1488Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1340")
-    private TextBox TextBox1340;
+    private TextBoxNum TextBox1340;
 
     /*
      * getTextBox1340
      * @return TextBox1340
      */
     @JsonProperty("TextBox1340")
-    public TextBox getTextBox1340() {
+    public TextBoxNum getTextBox1340() {
         return TextBox1340;
     }
 
@@ -15870,7 +15870,7 @@ class TableCell1488Attbl4 extends TableCell {
      * @param TextBox1340 TextBox1340
      */
     @JsonProperty("TextBox1340")
-    public void setTextBox1340(TextBox TextBox1340) {
+    public void setTextBox1340(TextBoxNum TextBox1340) {
         this.TextBox1340 = TextBox1340;
     }
 
@@ -15884,16 +15884,16 @@ class TableCell1488Attbl4 extends TableCell {
  */
 class TableCell1489Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1341")
-    private TextBox TextBox1341;
+    private TextBoxNum TextBox1341;
 
     /*
      * getTextBox1341
      * @return TextBox1341
      */
     @JsonProperty("TextBox1341")
-    public TextBox getTextBox1341() {
+    public TextBoxNum getTextBox1341() {
         return TextBox1341;
     }
 
@@ -15902,7 +15902,7 @@ class TableCell1489Attbl4 extends TableCell {
      * @param TextBox1341 TextBox1341
      */
     @JsonProperty("TextBox1341")
-    public void setTextBox1341(TextBox TextBox1341) {
+    public void setTextBox1341(TextBoxNum TextBox1341) {
         this.TextBox1341 = TextBox1341;
     }
 
@@ -15916,16 +15916,16 @@ class TableCell1489Attbl4 extends TableCell {
  */
 class TableCell1490Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1342")
-    private TextBox TextBox1342;
+    private TextBoxNum TextBox1342;
 
     /*
      * getTextBox1342
      * @return TextBox1342
      */
     @JsonProperty("TextBox1342")
-    public TextBox getTextBox1342() {
+    public TextBoxNum getTextBox1342() {
         return TextBox1342;
     }
 
@@ -15934,7 +15934,7 @@ class TableCell1490Attbl4 extends TableCell {
      * @param TextBox1342 TextBox1342
      */
     @JsonProperty("TextBox1342")
-    public void setTextBox1342(TextBox TextBox1342) {
+    public void setTextBox1342(TextBoxNum TextBox1342) {
         this.TextBox1342 = TextBox1342;
     }
 
@@ -15948,16 +15948,16 @@ class TableCell1490Attbl4 extends TableCell {
  */
 class TableCell1491Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1343")
-    private TextBox TextBox1343;
+    private TextBoxNum TextBox1343;
 
     /*
      * getTextBox1343
      * @return TextBox1343
      */
     @JsonProperty("TextBox1343")
-    public TextBox getTextBox1343() {
+    public TextBoxNum getTextBox1343() {
         return TextBox1343;
     }
 
@@ -15966,7 +15966,7 @@ class TableCell1491Attbl4 extends TableCell {
      * @param TextBox1343 TextBox1343
      */
     @JsonProperty("TextBox1343")
-    public void setTextBox1343(TextBox TextBox1343) {
+    public void setTextBox1343(TextBoxNum TextBox1343) {
         this.TextBox1343 = TextBox1343;
     }
 
@@ -15980,16 +15980,16 @@ class TableCell1491Attbl4 extends TableCell {
  */
 class TableCell1492Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1344")
-    private TextBox TextBox1344;
+    private TextBoxNum TextBox1344;
 
     /*
      * getTextBox1344
      * @return TextBox1344
      */
     @JsonProperty("TextBox1344")
-    public TextBox getTextBox1344() {
+    public TextBoxNum getTextBox1344() {
         return TextBox1344;
     }
 
@@ -15998,7 +15998,7 @@ class TableCell1492Attbl4 extends TableCell {
      * @param TextBox1344 TextBox1344
      */
     @JsonProperty("TextBox1344")
-    public void setTextBox1344(TextBox TextBox1344) {
+    public void setTextBox1344(TextBoxNum TextBox1344) {
         this.TextBox1344 = TextBox1344;
     }
 
@@ -16012,16 +16012,16 @@ class TableCell1492Attbl4 extends TableCell {
  */
 class TableCell1493Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1345")
-    private TextBox TextBox1345;
+    private TextBoxNum TextBox1345;
 
     /*
      * getTextBox1345
      * @return TextBox1345
      */
     @JsonProperty("TextBox1345")
-    public TextBox getTextBox1345() {
+    public TextBoxNum getTextBox1345() {
         return TextBox1345;
     }
 
@@ -16030,7 +16030,7 @@ class TableCell1493Attbl4 extends TableCell {
      * @param TextBox1345 TextBox1345
      */
     @JsonProperty("TextBox1345")
-    public void setTextBox1345(TextBox TextBox1345) {
+    public void setTextBox1345(TextBoxNum TextBox1345) {
         this.TextBox1345 = TextBox1345;
     }
 
@@ -16044,16 +16044,16 @@ class TableCell1493Attbl4 extends TableCell {
  */
 class TableCell1494Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1346")
-    private TextBox TextBox1346;
+    private TextBoxNum TextBox1346;
 
     /*
      * getTextBox1346
      * @return TextBox1346
      */
     @JsonProperty("TextBox1346")
-    public TextBox getTextBox1346() {
+    public TextBoxNum getTextBox1346() {
         return TextBox1346;
     }
 
@@ -16062,7 +16062,7 @@ class TableCell1494Attbl4 extends TableCell {
      * @param TextBox1346 TextBox1346
      */
     @JsonProperty("TextBox1346")
-    public void setTextBox1346(TextBox TextBox1346) {
+    public void setTextBox1346(TextBoxNum TextBox1346) {
         this.TextBox1346 = TextBox1346;
     }
 
@@ -16076,16 +16076,16 @@ class TableCell1494Attbl4 extends TableCell {
  */
 class TableCell1495Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1347")
-    private TextBox TextBox1347;
+    private TextBoxNum TextBox1347;
 
     /*
      * getTextBox1347
      * @return TextBox1347
      */
     @JsonProperty("TextBox1347")
-    public TextBox getTextBox1347() {
+    public TextBoxNum getTextBox1347() {
         return TextBox1347;
     }
 
@@ -16094,7 +16094,7 @@ class TableCell1495Attbl4 extends TableCell {
      * @param TextBox1347 TextBox1347
      */
     @JsonProperty("TextBox1347")
-    public void setTextBox1347(TextBox TextBox1347) {
+    public void setTextBox1347(TextBoxNum TextBox1347) {
         this.TextBox1347 = TextBox1347;
     }
 
@@ -16108,16 +16108,16 @@ class TableCell1495Attbl4 extends TableCell {
  */
 class TableCell1496Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1348")
-    private TextBox TextBox1348;
+    private TextBoxNum TextBox1348;
 
     /*
      * getTextBox1348
      * @return TextBox1348
      */
     @JsonProperty("TextBox1348")
-    public TextBox getTextBox1348() {
+    public TextBoxNum getTextBox1348() {
         return TextBox1348;
     }
 
@@ -16126,7 +16126,7 @@ class TableCell1496Attbl4 extends TableCell {
      * @param TextBox1348 TextBox1348
      */
     @JsonProperty("TextBox1348")
-    public void setTextBox1348(TextBox TextBox1348) {
+    public void setTextBox1348(TextBoxNum TextBox1348) {
         this.TextBox1348 = TextBox1348;
     }
 
@@ -16139,7 +16139,7 @@ class TableCell1496Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1497Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -16150,7 +16150,7 @@ class TableCell1497Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1498Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -16162,16 +16162,16 @@ class TableCell1498Attbl4 extends TableCell {
  */
 class TableCell1499Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1349")
-    private TextBox TextBox1349;
+    private TextBoxNum TextBox1349;
 
     /*
      * getTextBox1349
      * @return TextBox1349
      */
     @JsonProperty("TextBox1349")
-    public TextBox getTextBox1349() {
+    public TextBoxNum getTextBox1349() {
         return TextBox1349;
     }
 
@@ -16180,7 +16180,7 @@ class TableCell1499Attbl4 extends TableCell {
      * @param TextBox1349 TextBox1349
      */
     @JsonProperty("TextBox1349")
-    public void setTextBox1349(TextBox TextBox1349) {
+    public void setTextBox1349(TextBoxNum TextBox1349) {
         this.TextBox1349 = TextBox1349;
     }
 
@@ -16194,16 +16194,16 @@ class TableCell1499Attbl4 extends TableCell {
  */
 class TableCell1500Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1350")
-    private TextBox TextBox1350;
+    private TextBoxNum TextBox1350;
 
     /*
      * getTextBox1350
      * @return TextBox1350
      */
     @JsonProperty("TextBox1350")
-    public TextBox getTextBox1350() {
+    public TextBoxNum getTextBox1350() {
         return TextBox1350;
     }
 
@@ -16212,7 +16212,7 @@ class TableCell1500Attbl4 extends TableCell {
      * @param TextBox1350 TextBox1350
      */
     @JsonProperty("TextBox1350")
-    public void setTextBox1350(TextBox TextBox1350) {
+    public void setTextBox1350(TextBoxNum TextBox1350) {
         this.TextBox1350 = TextBox1350;
     }
 
@@ -16226,16 +16226,16 @@ class TableCell1500Attbl4 extends TableCell {
  */
 class TableCell1501Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1351")
-    private TextBox TextBox1351;
+    private TextBoxNum TextBox1351;
 
     /*
      * getTextBox1351
      * @return TextBox1351
      */
     @JsonProperty("TextBox1351")
-    public TextBox getTextBox1351() {
+    public TextBoxNum getTextBox1351() {
         return TextBox1351;
     }
 
@@ -16244,7 +16244,7 @@ class TableCell1501Attbl4 extends TableCell {
      * @param TextBox1351 TextBox1351
      */
     @JsonProperty("TextBox1351")
-    public void setTextBox1351(TextBox TextBox1351) {
+    public void setTextBox1351(TextBoxNum TextBox1351) {
         this.TextBox1351 = TextBox1351;
     }
 
@@ -16258,16 +16258,16 @@ class TableCell1501Attbl4 extends TableCell {
  */
 class TableCell1502Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1352")
-    private TextBox TextBox1352;
+    private TextBoxNum TextBox1352;
 
     /*
      * getTextBox1352
      * @return TextBox1352
      */
     @JsonProperty("TextBox1352")
-    public TextBox getTextBox1352() {
+    public TextBoxNum getTextBox1352() {
         return TextBox1352;
     }
 
@@ -16276,7 +16276,7 @@ class TableCell1502Attbl4 extends TableCell {
      * @param TextBox1352 TextBox1352
      */
     @JsonProperty("TextBox1352")
-    public void setTextBox1352(TextBox TextBox1352) {
+    public void setTextBox1352(TextBoxNum TextBox1352) {
         this.TextBox1352 = TextBox1352;
     }
 
@@ -16290,16 +16290,16 @@ class TableCell1502Attbl4 extends TableCell {
  */
 class TableCell1503Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1353")
-    private TextBox TextBox1353;
+    private TextBoxNum TextBox1353;
 
     /*
      * getTextBox1353
      * @return TextBox1353
      */
     @JsonProperty("TextBox1353")
-    public TextBox getTextBox1353() {
+    public TextBoxNum getTextBox1353() {
         return TextBox1353;
     }
 
@@ -16308,7 +16308,7 @@ class TableCell1503Attbl4 extends TableCell {
      * @param TextBox1353 TextBox1353
      */
     @JsonProperty("TextBox1353")
-    public void setTextBox1353(TextBox TextBox1353) {
+    public void setTextBox1353(TextBoxNum TextBox1353) {
         this.TextBox1353 = TextBox1353;
     }
 
@@ -16322,16 +16322,16 @@ class TableCell1503Attbl4 extends TableCell {
  */
 class TableCell1504Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1354")
-    private TextBox TextBox1354;
+    private TextBoxNum TextBox1354;
 
     /*
      * getTextBox1354
      * @return TextBox1354
      */
     @JsonProperty("TextBox1354")
-    public TextBox getTextBox1354() {
+    public TextBoxNum getTextBox1354() {
         return TextBox1354;
     }
 
@@ -16340,7 +16340,7 @@ class TableCell1504Attbl4 extends TableCell {
      * @param TextBox1354 TextBox1354
      */
     @JsonProperty("TextBox1354")
-    public void setTextBox1354(TextBox TextBox1354) {
+    public void setTextBox1354(TextBoxNum TextBox1354) {
         this.TextBox1354 = TextBox1354;
     }
 
@@ -16354,16 +16354,16 @@ class TableCell1504Attbl4 extends TableCell {
  */
 class TableCell1505Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1355")
-    private TextBox TextBox1355;
+    private TextBoxNum TextBox1355;
 
     /*
      * getTextBox1355
      * @return TextBox1355
      */
     @JsonProperty("TextBox1355")
-    public TextBox getTextBox1355() {
+    public TextBoxNum getTextBox1355() {
         return TextBox1355;
     }
 
@@ -16372,7 +16372,7 @@ class TableCell1505Attbl4 extends TableCell {
      * @param TextBox1355 TextBox1355
      */
     @JsonProperty("TextBox1355")
-    public void setTextBox1355(TextBox TextBox1355) {
+    public void setTextBox1355(TextBoxNum TextBox1355) {
         this.TextBox1355 = TextBox1355;
     }
 
@@ -16386,16 +16386,16 @@ class TableCell1505Attbl4 extends TableCell {
  */
 class TableCell1506Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1356")
-    private TextBox TextBox1356;
+    private TextBoxNum TextBox1356;
 
     /*
      * getTextBox1356
      * @return TextBox1356
      */
     @JsonProperty("TextBox1356")
-    public TextBox getTextBox1356() {
+    public TextBoxNum getTextBox1356() {
         return TextBox1356;
     }
 
@@ -16404,7 +16404,7 @@ class TableCell1506Attbl4 extends TableCell {
      * @param TextBox1356 TextBox1356
      */
     @JsonProperty("TextBox1356")
-    public void setTextBox1356(TextBox TextBox1356) {
+    public void setTextBox1356(TextBoxNum TextBox1356) {
         this.TextBox1356 = TextBox1356;
     }
 
@@ -16418,16 +16418,16 @@ class TableCell1506Attbl4 extends TableCell {
  */
 class TableCell1507Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1357")
-    private TextBox TextBox1357;
+    private TextBoxNum TextBox1357;
 
     /*
      * getTextBox1357
      * @return TextBox1357
      */
     @JsonProperty("TextBox1357")
-    public TextBox getTextBox1357() {
+    public TextBoxNum getTextBox1357() {
         return TextBox1357;
     }
 
@@ -16436,7 +16436,7 @@ class TableCell1507Attbl4 extends TableCell {
      * @param TextBox1357 TextBox1357
      */
     @JsonProperty("TextBox1357")
-    public void setTextBox1357(TextBox TextBox1357) {
+    public void setTextBox1357(TextBoxNum TextBox1357) {
         this.TextBox1357 = TextBox1357;
     }
 
@@ -16450,16 +16450,16 @@ class TableCell1507Attbl4 extends TableCell {
  */
 class TableCell1508Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1358")
-    private TextBox TextBox1358;
+    private TextBoxNum TextBox1358;
 
     /*
      * getTextBox1358
      * @return TextBox1358
      */
     @JsonProperty("TextBox1358")
-    public TextBox getTextBox1358() {
+    public TextBoxNum getTextBox1358() {
         return TextBox1358;
     }
 
@@ -16468,7 +16468,7 @@ class TableCell1508Attbl4 extends TableCell {
      * @param TextBox1358 TextBox1358
      */
     @JsonProperty("TextBox1358")
-    public void setTextBox1358(TextBox TextBox1358) {
+    public void setTextBox1358(TextBoxNum TextBox1358) {
         this.TextBox1358 = TextBox1358;
     }
 
@@ -16482,16 +16482,16 @@ class TableCell1508Attbl4 extends TableCell {
  */
 class TableCell1509Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1359")
-    private TextBox TextBox1359;
+    private TextBoxNum TextBox1359;
 
     /*
      * getTextBox1359
      * @return TextBox1359
      */
     @JsonProperty("TextBox1359")
-    public TextBox getTextBox1359() {
+    public TextBoxNum getTextBox1359() {
         return TextBox1359;
     }
 
@@ -16500,7 +16500,7 @@ class TableCell1509Attbl4 extends TableCell {
      * @param TextBox1359 TextBox1359
      */
     @JsonProperty("TextBox1359")
-    public void setTextBox1359(TextBox TextBox1359) {
+    public void setTextBox1359(TextBoxNum TextBox1359) {
         this.TextBox1359 = TextBox1359;
     }
 
@@ -16513,7 +16513,7 @@ class TableCell1509Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1510Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -16525,16 +16525,16 @@ class TableCell1510Attbl4 extends TableCell {
  */
 class TableCell1511Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1360")
-    private TextBox TextBox1360;
+    private TextBoxNum TextBox1360;
 
     /*
      * getTextBox1360
      * @return TextBox1360
      */
     @JsonProperty("TextBox1360")
-    public TextBox getTextBox1360() {
+    public TextBoxNum getTextBox1360() {
         return TextBox1360;
     }
 
@@ -16543,7 +16543,7 @@ class TableCell1511Attbl4 extends TableCell {
      * @param TextBox1360 TextBox1360
      */
     @JsonProperty("TextBox1360")
-    public void setTextBox1360(TextBox TextBox1360) {
+    public void setTextBox1360(TextBoxNum TextBox1360) {
         this.TextBox1360 = TextBox1360;
     }
 
@@ -16557,16 +16557,16 @@ class TableCell1511Attbl4 extends TableCell {
  */
 class TableCell1512Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1361")
-    private TextBox TextBox1361;
+    private TextBoxNum TextBox1361;
 
     /*
      * getTextBox1361
      * @return TextBox1361
      */
     @JsonProperty("TextBox1361")
-    public TextBox getTextBox1361() {
+    public TextBoxNum getTextBox1361() {
         return TextBox1361;
     }
 
@@ -16575,7 +16575,7 @@ class TableCell1512Attbl4 extends TableCell {
      * @param TextBox1361 TextBox1361
      */
     @JsonProperty("TextBox1361")
-    public void setTextBox1361(TextBox TextBox1361) {
+    public void setTextBox1361(TextBoxNum TextBox1361) {
         this.TextBox1361 = TextBox1361;
     }
 
@@ -16589,16 +16589,16 @@ class TableCell1512Attbl4 extends TableCell {
  */
 class TableCell1513Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1362")
-    private TextBox TextBox1362;
+    private TextBoxNum TextBox1362;
 
     /*
      * getTextBox1362
      * @return TextBox1362
      */
     @JsonProperty("TextBox1362")
-    public TextBox getTextBox1362() {
+    public TextBoxNum getTextBox1362() {
         return TextBox1362;
     }
 
@@ -16607,7 +16607,7 @@ class TableCell1513Attbl4 extends TableCell {
      * @param TextBox1362 TextBox1362
      */
     @JsonProperty("TextBox1362")
-    public void setTextBox1362(TextBox TextBox1362) {
+    public void setTextBox1362(TextBoxNum TextBox1362) {
         this.TextBox1362 = TextBox1362;
     }
 
@@ -16621,16 +16621,16 @@ class TableCell1513Attbl4 extends TableCell {
  */
 class TableCell1514Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1363")
-    private TextBox TextBox1363;
+    private TextBoxNum TextBox1363;
 
     /*
      * getTextBox1363
      * @return TextBox1363
      */
     @JsonProperty("TextBox1363")
-    public TextBox getTextBox1363() {
+    public TextBoxNum getTextBox1363() {
         return TextBox1363;
     }
 
@@ -16639,7 +16639,7 @@ class TableCell1514Attbl4 extends TableCell {
      * @param TextBox1363 TextBox1363
      */
     @JsonProperty("TextBox1363")
-    public void setTextBox1363(TextBox TextBox1363) {
+    public void setTextBox1363(TextBoxNum TextBox1363) {
         this.TextBox1363 = TextBox1363;
     }
 
@@ -16653,16 +16653,16 @@ class TableCell1514Attbl4 extends TableCell {
  */
 class TableCell1515Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1364")
-    private TextBox TextBox1364;
+    private TextBoxNum TextBox1364;
 
     /*
      * getTextBox1364
      * @return TextBox1364
      */
     @JsonProperty("TextBox1364")
-    public TextBox getTextBox1364() {
+    public TextBoxNum getTextBox1364() {
         return TextBox1364;
     }
 
@@ -16671,7 +16671,7 @@ class TableCell1515Attbl4 extends TableCell {
      * @param TextBox1364 TextBox1364
      */
     @JsonProperty("TextBox1364")
-    public void setTextBox1364(TextBox TextBox1364) {
+    public void setTextBox1364(TextBoxNum TextBox1364) {
         this.TextBox1364 = TextBox1364;
     }
 
@@ -16685,16 +16685,16 @@ class TableCell1515Attbl4 extends TableCell {
  */
 class TableCell1516Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1365")
-    private TextBox TextBox1365;
+    private TextBoxNum TextBox1365;
 
     /*
      * getTextBox1365
      * @return TextBox1365
      */
     @JsonProperty("TextBox1365")
-    public TextBox getTextBox1365() {
+    public TextBoxNum getTextBox1365() {
         return TextBox1365;
     }
 
@@ -16703,7 +16703,7 @@ class TableCell1516Attbl4 extends TableCell {
      * @param TextBox1365 TextBox1365
      */
     @JsonProperty("TextBox1365")
-    public void setTextBox1365(TextBox TextBox1365) {
+    public void setTextBox1365(TextBoxNum TextBox1365) {
         this.TextBox1365 = TextBox1365;
     }
 
@@ -16717,16 +16717,16 @@ class TableCell1516Attbl4 extends TableCell {
  */
 class TableCell1517Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1366")
-    private TextBox TextBox1366;
+    private TextBoxNum TextBox1366;
 
     /*
      * getTextBox1366
      * @return TextBox1366
      */
     @JsonProperty("TextBox1366")
-    public TextBox getTextBox1366() {
+    public TextBoxNum getTextBox1366() {
         return TextBox1366;
     }
 
@@ -16735,7 +16735,7 @@ class TableCell1517Attbl4 extends TableCell {
      * @param TextBox1366 TextBox1366
      */
     @JsonProperty("TextBox1366")
-    public void setTextBox1366(TextBox TextBox1366) {
+    public void setTextBox1366(TextBoxNum TextBox1366) {
         this.TextBox1366 = TextBox1366;
     }
 
@@ -16749,16 +16749,16 @@ class TableCell1517Attbl4 extends TableCell {
  */
 class TableCell1518Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1367")
-    private TextBox TextBox1367;
+    private TextBoxNum TextBox1367;
 
     /*
      * getTextBox1367
      * @return TextBox1367
      */
     @JsonProperty("TextBox1367")
-    public TextBox getTextBox1367() {
+    public TextBoxNum getTextBox1367() {
         return TextBox1367;
     }
 
@@ -16767,7 +16767,7 @@ class TableCell1518Attbl4 extends TableCell {
      * @param TextBox1367 TextBox1367
      */
     @JsonProperty("TextBox1367")
-    public void setTextBox1367(TextBox TextBox1367) {
+    public void setTextBox1367(TextBoxNum TextBox1367) {
         this.TextBox1367 = TextBox1367;
     }
 
@@ -16781,16 +16781,16 @@ class TableCell1518Attbl4 extends TableCell {
  */
 class TableCell1519Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1368")
-    private TextBox TextBox1368;
+    private TextBoxNum TextBox1368;
 
     /*
      * getTextBox1368
      * @return TextBox1368
      */
     @JsonProperty("TextBox1368")
-    public TextBox getTextBox1368() {
+    public TextBoxNum getTextBox1368() {
         return TextBox1368;
     }
 
@@ -16799,7 +16799,7 @@ class TableCell1519Attbl4 extends TableCell {
      * @param TextBox1368 TextBox1368
      */
     @JsonProperty("TextBox1368")
-    public void setTextBox1368(TextBox TextBox1368) {
+    public void setTextBox1368(TextBoxNum TextBox1368) {
         this.TextBox1368 = TextBox1368;
     }
 
@@ -16813,16 +16813,16 @@ class TableCell1519Attbl4 extends TableCell {
  */
 class TableCell1520Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1369")
-    private TextBox TextBox1369;
+    private TextBoxNum TextBox1369;
 
     /*
      * getTextBox1369
      * @return TextBox1369
      */
     @JsonProperty("TextBox1369")
-    public TextBox getTextBox1369() {
+    public TextBoxNum getTextBox1369() {
         return TextBox1369;
     }
 
@@ -16831,7 +16831,7 @@ class TableCell1520Attbl4 extends TableCell {
      * @param TextBox1369 TextBox1369
      */
     @JsonProperty("TextBox1369")
-    public void setTextBox1369(TextBox TextBox1369) {
+    public void setTextBox1369(TextBoxNum TextBox1369) {
         this.TextBox1369 = TextBox1369;
     }
 
@@ -16845,16 +16845,16 @@ class TableCell1520Attbl4 extends TableCell {
  */
 class TableCell1521Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1370")
-    private TextBox TextBox1370;
+    private TextBoxNum TextBox1370;
 
     /*
      * getTextBox1370
      * @return TextBox1370
      */
     @JsonProperty("TextBox1370")
-    public TextBox getTextBox1370() {
+    public TextBoxNum getTextBox1370() {
         return TextBox1370;
     }
 
@@ -16863,7 +16863,7 @@ class TableCell1521Attbl4 extends TableCell {
      * @param TextBox1370 TextBox1370
      */
     @JsonProperty("TextBox1370")
-    public void setTextBox1370(TextBox TextBox1370) {
+    public void setTextBox1370(TextBoxNum TextBox1370) {
         this.TextBox1370 = TextBox1370;
     }
 
@@ -16876,7 +16876,7 @@ class TableCell1521Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1522Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -16887,7 +16887,7 @@ class TableCell1522Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1523Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -16899,16 +16899,16 @@ class TableCell1523Attbl4 extends TableCell {
  */
 class TableCell1524Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1371")
-    private TextBox TextBox1371;
+    private TextBoxNum TextBox1371;
 
     /*
      * getTextBox1371
      * @return TextBox1371
      */
     @JsonProperty("TextBox1371")
-    public TextBox getTextBox1371() {
+    public TextBoxNum getTextBox1371() {
         return TextBox1371;
     }
 
@@ -16917,7 +16917,7 @@ class TableCell1524Attbl4 extends TableCell {
      * @param TextBox1371 TextBox1371
      */
     @JsonProperty("TextBox1371")
-    public void setTextBox1371(TextBox TextBox1371) {
+    public void setTextBox1371(TextBoxNum TextBox1371) {
         this.TextBox1371 = TextBox1371;
     }
 
@@ -16931,16 +16931,16 @@ class TableCell1524Attbl4 extends TableCell {
  */
 class TableCell1525Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1372")
-    private TextBox TextBox1372;
+    private TextBoxNum TextBox1372;
 
     /*
      * getTextBox1372
      * @return TextBox1372
      */
     @JsonProperty("TextBox1372")
-    public TextBox getTextBox1372() {
+    public TextBoxNum getTextBox1372() {
         return TextBox1372;
     }
 
@@ -16949,7 +16949,7 @@ class TableCell1525Attbl4 extends TableCell {
      * @param TextBox1372 TextBox1372
      */
     @JsonProperty("TextBox1372")
-    public void setTextBox1372(TextBox TextBox1372) {
+    public void setTextBox1372(TextBoxNum TextBox1372) {
         this.TextBox1372 = TextBox1372;
     }
 
@@ -16963,16 +16963,16 @@ class TableCell1525Attbl4 extends TableCell {
  */
 class TableCell1526Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1373")
-    private TextBox TextBox1373;
+    private TextBoxNum TextBox1373;
 
     /*
      * getTextBox1373
      * @return TextBox1373
      */
     @JsonProperty("TextBox1373")
-    public TextBox getTextBox1373() {
+    public TextBoxNum getTextBox1373() {
         return TextBox1373;
     }
 
@@ -16981,7 +16981,7 @@ class TableCell1526Attbl4 extends TableCell {
      * @param TextBox1373 TextBox1373
      */
     @JsonProperty("TextBox1373")
-    public void setTextBox1373(TextBox TextBox1373) {
+    public void setTextBox1373(TextBoxNum TextBox1373) {
         this.TextBox1373 = TextBox1373;
     }
 
@@ -16995,16 +16995,16 @@ class TableCell1526Attbl4 extends TableCell {
  */
 class TableCell1527Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1374")
-    private TextBox TextBox1374;
+    private TextBoxNum TextBox1374;
 
     /*
      * getTextBox1374
      * @return TextBox1374
      */
     @JsonProperty("TextBox1374")
-    public TextBox getTextBox1374() {
+    public TextBoxNum getTextBox1374() {
         return TextBox1374;
     }
 
@@ -17013,7 +17013,7 @@ class TableCell1527Attbl4 extends TableCell {
      * @param TextBox1374 TextBox1374
      */
     @JsonProperty("TextBox1374")
-    public void setTextBox1374(TextBox TextBox1374) {
+    public void setTextBox1374(TextBoxNum TextBox1374) {
         this.TextBox1374 = TextBox1374;
     }
 
@@ -17027,16 +17027,16 @@ class TableCell1527Attbl4 extends TableCell {
  */
 class TableCell1528Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1375")
-    private TextBox TextBox1375;
+    private TextBoxNum TextBox1375;
 
     /*
      * getTextBox1375
      * @return TextBox1375
      */
     @JsonProperty("TextBox1375")
-    public TextBox getTextBox1375() {
+    public TextBoxNum getTextBox1375() {
         return TextBox1375;
     }
 
@@ -17045,7 +17045,7 @@ class TableCell1528Attbl4 extends TableCell {
      * @param TextBox1375 TextBox1375
      */
     @JsonProperty("TextBox1375")
-    public void setTextBox1375(TextBox TextBox1375) {
+    public void setTextBox1375(TextBoxNum TextBox1375) {
         this.TextBox1375 = TextBox1375;
     }
 
@@ -17059,16 +17059,16 @@ class TableCell1528Attbl4 extends TableCell {
  */
 class TableCell1529Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1376")
-    private TextBox TextBox1376;
+    private TextBoxNum TextBox1376;
 
     /*
      * getTextBox1376
      * @return TextBox1376
      */
     @JsonProperty("TextBox1376")
-    public TextBox getTextBox1376() {
+    public TextBoxNum getTextBox1376() {
         return TextBox1376;
     }
 
@@ -17077,7 +17077,7 @@ class TableCell1529Attbl4 extends TableCell {
      * @param TextBox1376 TextBox1376
      */
     @JsonProperty("TextBox1376")
-    public void setTextBox1376(TextBox TextBox1376) {
+    public void setTextBox1376(TextBoxNum TextBox1376) {
         this.TextBox1376 = TextBox1376;
     }
 
@@ -17091,16 +17091,16 @@ class TableCell1529Attbl4 extends TableCell {
  */
 class TableCell1530Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1377")
-    private TextBox TextBox1377;
+    private TextBoxNum TextBox1377;
 
     /*
      * getTextBox1377
      * @return TextBox1377
      */
     @JsonProperty("TextBox1377")
-    public TextBox getTextBox1377() {
+    public TextBoxNum getTextBox1377() {
         return TextBox1377;
     }
 
@@ -17109,7 +17109,7 @@ class TableCell1530Attbl4 extends TableCell {
      * @param TextBox1377 TextBox1377
      */
     @JsonProperty("TextBox1377")
-    public void setTextBox1377(TextBox TextBox1377) {
+    public void setTextBox1377(TextBoxNum TextBox1377) {
         this.TextBox1377 = TextBox1377;
     }
 
@@ -17123,16 +17123,16 @@ class TableCell1530Attbl4 extends TableCell {
  */
 class TableCell1531Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1378")
-    private TextBox TextBox1378;
+    private TextBoxNum TextBox1378;
 
     /*
      * getTextBox1378
      * @return TextBox1378
      */
     @JsonProperty("TextBox1378")
-    public TextBox getTextBox1378() {
+    public TextBoxNum getTextBox1378() {
         return TextBox1378;
     }
 
@@ -17141,7 +17141,7 @@ class TableCell1531Attbl4 extends TableCell {
      * @param TextBox1378 TextBox1378
      */
     @JsonProperty("TextBox1378")
-    public void setTextBox1378(TextBox TextBox1378) {
+    public void setTextBox1378(TextBoxNum TextBox1378) {
         this.TextBox1378 = TextBox1378;
     }
 
@@ -17155,16 +17155,16 @@ class TableCell1531Attbl4 extends TableCell {
  */
 class TableCell1532Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1379")
-    private TextBox TextBox1379;
+    private TextBoxNum TextBox1379;
 
     /*
      * getTextBox1379
      * @return TextBox1379
      */
     @JsonProperty("TextBox1379")
-    public TextBox getTextBox1379() {
+    public TextBoxNum getTextBox1379() {
         return TextBox1379;
     }
 
@@ -17173,7 +17173,7 @@ class TableCell1532Attbl4 extends TableCell {
      * @param TextBox1379 TextBox1379
      */
     @JsonProperty("TextBox1379")
-    public void setTextBox1379(TextBox TextBox1379) {
+    public void setTextBox1379(TextBoxNum TextBox1379) {
         this.TextBox1379 = TextBox1379;
     }
 
@@ -17187,16 +17187,16 @@ class TableCell1532Attbl4 extends TableCell {
  */
 class TableCell1533Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1380")
-    private TextBox TextBox1380;
+    private TextBoxNum TextBox1380;
 
     /*
      * getTextBox1380
      * @return TextBox1380
      */
     @JsonProperty("TextBox1380")
-    public TextBox getTextBox1380() {
+    public TextBoxNum getTextBox1380() {
         return TextBox1380;
     }
 
@@ -17205,7 +17205,7 @@ class TableCell1533Attbl4 extends TableCell {
      * @param TextBox1380 TextBox1380
      */
     @JsonProperty("TextBox1380")
-    public void setTextBox1380(TextBox TextBox1380) {
+    public void setTextBox1380(TextBoxNum TextBox1380) {
         this.TextBox1380 = TextBox1380;
     }
 
@@ -17219,16 +17219,16 @@ class TableCell1533Attbl4 extends TableCell {
  */
 class TableCell1534Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1381")
-    private TextBox TextBox1381;
+    private TextBoxNum TextBox1381;
 
     /*
      * getTextBox1381
      * @return TextBox1381
      */
     @JsonProperty("TextBox1381")
-    public TextBox getTextBox1381() {
+    public TextBoxNum getTextBox1381() {
         return TextBox1381;
     }
 
@@ -17237,7 +17237,7 @@ class TableCell1534Attbl4 extends TableCell {
      * @param TextBox1381 TextBox1381
      */
     @JsonProperty("TextBox1381")
-    public void setTextBox1381(TextBox TextBox1381) {
+    public void setTextBox1381(TextBoxNum TextBox1381) {
         this.TextBox1381 = TextBox1381;
     }
 
@@ -17250,7 +17250,7 @@ class TableCell1534Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1535Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -17261,7 +17261,7 @@ class TableCell1535Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1536Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -17273,16 +17273,16 @@ class TableCell1536Attbl4 extends TableCell {
  */
 class TableCell1537Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1382")
-    private TextBox TextBox1382;
+    private TextBoxNum TextBox1382;
 
     /*
      * getTextBox1382
      * @return TextBox1382
      */
     @JsonProperty("TextBox1382")
-    public TextBox getTextBox1382() {
+    public TextBoxNum getTextBox1382() {
         return TextBox1382;
     }
 
@@ -17291,7 +17291,7 @@ class TableCell1537Attbl4 extends TableCell {
      * @param TextBox1382 TextBox1382
      */
     @JsonProperty("TextBox1382")
-    public void setTextBox1382(TextBox TextBox1382) {
+    public void setTextBox1382(TextBoxNum TextBox1382) {
         this.TextBox1382 = TextBox1382;
     }
 
@@ -17305,16 +17305,16 @@ class TableCell1537Attbl4 extends TableCell {
  */
 class TableCell1538Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1383")
-    private TextBox TextBox1383;
+    private TextBoxNum TextBox1383;
 
     /*
      * getTextBox1383
      * @return TextBox1383
      */
     @JsonProperty("TextBox1383")
-    public TextBox getTextBox1383() {
+    public TextBoxNum getTextBox1383() {
         return TextBox1383;
     }
 
@@ -17323,7 +17323,7 @@ class TableCell1538Attbl4 extends TableCell {
      * @param TextBox1383 TextBox1383
      */
     @JsonProperty("TextBox1383")
-    public void setTextBox1383(TextBox TextBox1383) {
+    public void setTextBox1383(TextBoxNum TextBox1383) {
         this.TextBox1383 = TextBox1383;
     }
 
@@ -17337,16 +17337,16 @@ class TableCell1538Attbl4 extends TableCell {
  */
 class TableCell1539Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1384")
-    private TextBox TextBox1384;
+    private TextBoxNum TextBox1384;
 
     /*
      * getTextBox1384
      * @return TextBox1384
      */
     @JsonProperty("TextBox1384")
-    public TextBox getTextBox1384() {
+    public TextBoxNum getTextBox1384() {
         return TextBox1384;
     }
 
@@ -17355,7 +17355,7 @@ class TableCell1539Attbl4 extends TableCell {
      * @param TextBox1384 TextBox1384
      */
     @JsonProperty("TextBox1384")
-    public void setTextBox1384(TextBox TextBox1384) {
+    public void setTextBox1384(TextBoxNum TextBox1384) {
         this.TextBox1384 = TextBox1384;
     }
 
@@ -17369,16 +17369,16 @@ class TableCell1539Attbl4 extends TableCell {
  */
 class TableCell1540Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1385")
-    private TextBox TextBox1385;
+    private TextBoxNum TextBox1385;
 
     /*
      * getTextBox1385
      * @return TextBox1385
      */
     @JsonProperty("TextBox1385")
-    public TextBox getTextBox1385() {
+    public TextBoxNum getTextBox1385() {
         return TextBox1385;
     }
 
@@ -17387,7 +17387,7 @@ class TableCell1540Attbl4 extends TableCell {
      * @param TextBox1385 TextBox1385
      */
     @JsonProperty("TextBox1385")
-    public void setTextBox1385(TextBox TextBox1385) {
+    public void setTextBox1385(TextBoxNum TextBox1385) {
         this.TextBox1385 = TextBox1385;
     }
 
@@ -17401,16 +17401,16 @@ class TableCell1540Attbl4 extends TableCell {
  */
 class TableCell1541Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1386")
-    private TextBox TextBox1386;
+    private TextBoxNum TextBox1386;
 
     /*
      * getTextBox1386
      * @return TextBox1386
      */
     @JsonProperty("TextBox1386")
-    public TextBox getTextBox1386() {
+    public TextBoxNum getTextBox1386() {
         return TextBox1386;
     }
 
@@ -17419,7 +17419,7 @@ class TableCell1541Attbl4 extends TableCell {
      * @param TextBox1386 TextBox1386
      */
     @JsonProperty("TextBox1386")
-    public void setTextBox1386(TextBox TextBox1386) {
+    public void setTextBox1386(TextBoxNum TextBox1386) {
         this.TextBox1386 = TextBox1386;
     }
 
@@ -17433,16 +17433,16 @@ class TableCell1541Attbl4 extends TableCell {
  */
 class TableCell1542Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1387")
-    private TextBox TextBox1387;
+    private TextBoxNum TextBox1387;
 
     /*
      * getTextBox1387
      * @return TextBox1387
      */
     @JsonProperty("TextBox1387")
-    public TextBox getTextBox1387() {
+    public TextBoxNum getTextBox1387() {
         return TextBox1387;
     }
 
@@ -17451,7 +17451,7 @@ class TableCell1542Attbl4 extends TableCell {
      * @param TextBox1387 TextBox1387
      */
     @JsonProperty("TextBox1387")
-    public void setTextBox1387(TextBox TextBox1387) {
+    public void setTextBox1387(TextBoxNum TextBox1387) {
         this.TextBox1387 = TextBox1387;
     }
 
@@ -17465,16 +17465,16 @@ class TableCell1542Attbl4 extends TableCell {
  */
 class TableCell1543Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1388")
-    private TextBox TextBox1388;
+    private TextBoxNum TextBox1388;
 
     /*
      * getTextBox1388
      * @return TextBox1388
      */
     @JsonProperty("TextBox1388")
-    public TextBox getTextBox1388() {
+    public TextBoxNum getTextBox1388() {
         return TextBox1388;
     }
 
@@ -17483,7 +17483,7 @@ class TableCell1543Attbl4 extends TableCell {
      * @param TextBox1388 TextBox1388
      */
     @JsonProperty("TextBox1388")
-    public void setTextBox1388(TextBox TextBox1388) {
+    public void setTextBox1388(TextBoxNum TextBox1388) {
         this.TextBox1388 = TextBox1388;
     }
 
@@ -17497,16 +17497,16 @@ class TableCell1543Attbl4 extends TableCell {
  */
 class TableCell1544Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1389")
-    private TextBox TextBox1389;
+    private TextBoxNum TextBox1389;
 
     /*
      * getTextBox1389
      * @return TextBox1389
      */
     @JsonProperty("TextBox1389")
-    public TextBox getTextBox1389() {
+    public TextBoxNum getTextBox1389() {
         return TextBox1389;
     }
 
@@ -17515,7 +17515,7 @@ class TableCell1544Attbl4 extends TableCell {
      * @param TextBox1389 TextBox1389
      */
     @JsonProperty("TextBox1389")
-    public void setTextBox1389(TextBox TextBox1389) {
+    public void setTextBox1389(TextBoxNum TextBox1389) {
         this.TextBox1389 = TextBox1389;
     }
 
@@ -17529,16 +17529,16 @@ class TableCell1544Attbl4 extends TableCell {
  */
 class TableCell1545Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1390")
-    private TextBox TextBox1390;
+    private TextBoxNum TextBox1390;
 
     /*
      * getTextBox1390
      * @return TextBox1390
      */
     @JsonProperty("TextBox1390")
-    public TextBox getTextBox1390() {
+    public TextBoxNum getTextBox1390() {
         return TextBox1390;
     }
 
@@ -17547,7 +17547,7 @@ class TableCell1545Attbl4 extends TableCell {
      * @param TextBox1390 TextBox1390
      */
     @JsonProperty("TextBox1390")
-    public void setTextBox1390(TextBox TextBox1390) {
+    public void setTextBox1390(TextBoxNum TextBox1390) {
         this.TextBox1390 = TextBox1390;
     }
 
@@ -17561,16 +17561,16 @@ class TableCell1545Attbl4 extends TableCell {
  */
 class TableCell1546Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1391")
-    private TextBox TextBox1391;
+    private TextBoxNum TextBox1391;
 
     /*
      * getTextBox1391
      * @return TextBox1391
      */
     @JsonProperty("TextBox1391")
-    public TextBox getTextBox1391() {
+    public TextBoxNum getTextBox1391() {
         return TextBox1391;
     }
 
@@ -17579,7 +17579,7 @@ class TableCell1546Attbl4 extends TableCell {
      * @param TextBox1391 TextBox1391
      */
     @JsonProperty("TextBox1391")
-    public void setTextBox1391(TextBox TextBox1391) {
+    public void setTextBox1391(TextBoxNum TextBox1391) {
         this.TextBox1391 = TextBox1391;
     }
 
@@ -17593,16 +17593,16 @@ class TableCell1546Attbl4 extends TableCell {
  */
 class TableCell1547Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1392")
-    private TextBox TextBox1392;
+    private TextBoxNum TextBox1392;
 
     /*
      * getTextBox1392
      * @return TextBox1392
      */
     @JsonProperty("TextBox1392")
-    public TextBox getTextBox1392() {
+    public TextBoxNum getTextBox1392() {
         return TextBox1392;
     }
 
@@ -17611,7 +17611,7 @@ class TableCell1547Attbl4 extends TableCell {
      * @param TextBox1392 TextBox1392
      */
     @JsonProperty("TextBox1392")
-    public void setTextBox1392(TextBox TextBox1392) {
+    public void setTextBox1392(TextBoxNum TextBox1392) {
         this.TextBox1392 = TextBox1392;
     }
 
@@ -17624,7 +17624,7 @@ class TableCell1547Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1548Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -17635,7 +17635,7 @@ class TableCell1548Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1549Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -17647,16 +17647,16 @@ class TableCell1549Attbl4 extends TableCell {
  */
 class TableCell1550Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1393")
-    private TextBox TextBox1393;
+    private TextBoxNum TextBox1393;
 
     /*
      * getTextBox1393
      * @return TextBox1393
      */
     @JsonProperty("TextBox1393")
-    public TextBox getTextBox1393() {
+    public TextBoxNum getTextBox1393() {
         return TextBox1393;
     }
 
@@ -17665,7 +17665,7 @@ class TableCell1550Attbl4 extends TableCell {
      * @param TextBox1393 TextBox1393
      */
     @JsonProperty("TextBox1393")
-    public void setTextBox1393(TextBox TextBox1393) {
+    public void setTextBox1393(TextBoxNum TextBox1393) {
         this.TextBox1393 = TextBox1393;
     }
 
@@ -17679,16 +17679,16 @@ class TableCell1550Attbl4 extends TableCell {
  */
 class TableCell1551Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1394")
-    private TextBox TextBox1394;
+    private TextBoxNum TextBox1394;
 
     /*
      * getTextBox1394
      * @return TextBox1394
      */
     @JsonProperty("TextBox1394")
-    public TextBox getTextBox1394() {
+    public TextBoxNum getTextBox1394() {
         return TextBox1394;
     }
 
@@ -17697,7 +17697,7 @@ class TableCell1551Attbl4 extends TableCell {
      * @param TextBox1394 TextBox1394
      */
     @JsonProperty("TextBox1394")
-    public void setTextBox1394(TextBox TextBox1394) {
+    public void setTextBox1394(TextBoxNum TextBox1394) {
         this.TextBox1394 = TextBox1394;
     }
 
@@ -17711,16 +17711,16 @@ class TableCell1551Attbl4 extends TableCell {
  */
 class TableCell1552Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1395")
-    private TextBox TextBox1395;
+    private TextBoxNum TextBox1395;
 
     /*
      * getTextBox1395
      * @return TextBox1395
      */
     @JsonProperty("TextBox1395")
-    public TextBox getTextBox1395() {
+    public TextBoxNum getTextBox1395() {
         return TextBox1395;
     }
 
@@ -17729,7 +17729,7 @@ class TableCell1552Attbl4 extends TableCell {
      * @param TextBox1395 TextBox1395
      */
     @JsonProperty("TextBox1395")
-    public void setTextBox1395(TextBox TextBox1395) {
+    public void setTextBox1395(TextBoxNum TextBox1395) {
         this.TextBox1395 = TextBox1395;
     }
 
@@ -17743,16 +17743,16 @@ class TableCell1552Attbl4 extends TableCell {
  */
 class TableCell1553Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1396")
-    private TextBox TextBox1396;
+    private TextBoxNum TextBox1396;
 
     /*
      * getTextBox1396
      * @return TextBox1396
      */
     @JsonProperty("TextBox1396")
-    public TextBox getTextBox1396() {
+    public TextBoxNum getTextBox1396() {
         return TextBox1396;
     }
 
@@ -17761,7 +17761,7 @@ class TableCell1553Attbl4 extends TableCell {
      * @param TextBox1396 TextBox1396
      */
     @JsonProperty("TextBox1396")
-    public void setTextBox1396(TextBox TextBox1396) {
+    public void setTextBox1396(TextBoxNum TextBox1396) {
         this.TextBox1396 = TextBox1396;
     }
 
@@ -17775,16 +17775,16 @@ class TableCell1553Attbl4 extends TableCell {
  */
 class TableCell1554Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1397")
-    private TextBox TextBox1397;
+    private TextBoxNum TextBox1397;
 
     /*
      * getTextBox1397
      * @return TextBox1397
      */
     @JsonProperty("TextBox1397")
-    public TextBox getTextBox1397() {
+    public TextBoxNum getTextBox1397() {
         return TextBox1397;
     }
 
@@ -17793,7 +17793,7 @@ class TableCell1554Attbl4 extends TableCell {
      * @param TextBox1397 TextBox1397
      */
     @JsonProperty("TextBox1397")
-    public void setTextBox1397(TextBox TextBox1397) {
+    public void setTextBox1397(TextBoxNum TextBox1397) {
         this.TextBox1397 = TextBox1397;
     }
 
@@ -17807,16 +17807,16 @@ class TableCell1554Attbl4 extends TableCell {
  */
 class TableCell1555Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1398")
-    private TextBox TextBox1398;
+    private TextBoxNum TextBox1398;
 
     /*
      * getTextBox1398
      * @return TextBox1398
      */
     @JsonProperty("TextBox1398")
-    public TextBox getTextBox1398() {
+    public TextBoxNum getTextBox1398() {
         return TextBox1398;
     }
 
@@ -17825,7 +17825,7 @@ class TableCell1555Attbl4 extends TableCell {
      * @param TextBox1398 TextBox1398
      */
     @JsonProperty("TextBox1398")
-    public void setTextBox1398(TextBox TextBox1398) {
+    public void setTextBox1398(TextBoxNum TextBox1398) {
         this.TextBox1398 = TextBox1398;
     }
 
@@ -17839,16 +17839,16 @@ class TableCell1555Attbl4 extends TableCell {
  */
 class TableCell1556Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1399")
-    private TextBox TextBox1399;
+    private TextBoxNum TextBox1399;
 
     /*
      * getTextBox1399
      * @return TextBox1399
      */
     @JsonProperty("TextBox1399")
-    public TextBox getTextBox1399() {
+    public TextBoxNum getTextBox1399() {
         return TextBox1399;
     }
 
@@ -17857,7 +17857,7 @@ class TableCell1556Attbl4 extends TableCell {
      * @param TextBox1399 TextBox1399
      */
     @JsonProperty("TextBox1399")
-    public void setTextBox1399(TextBox TextBox1399) {
+    public void setTextBox1399(TextBoxNum TextBox1399) {
         this.TextBox1399 = TextBox1399;
     }
 
@@ -17871,16 +17871,16 @@ class TableCell1556Attbl4 extends TableCell {
  */
 class TableCell1557Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1400")
-    private TextBox TextBox1400;
+    private TextBoxNum TextBox1400;
 
     /*
      * getTextBox1400
      * @return TextBox1400
      */
     @JsonProperty("TextBox1400")
-    public TextBox getTextBox1400() {
+    public TextBoxNum getTextBox1400() {
         return TextBox1400;
     }
 
@@ -17889,7 +17889,7 @@ class TableCell1557Attbl4 extends TableCell {
      * @param TextBox1400 TextBox1400
      */
     @JsonProperty("TextBox1400")
-    public void setTextBox1400(TextBox TextBox1400) {
+    public void setTextBox1400(TextBoxNum TextBox1400) {
         this.TextBox1400 = TextBox1400;
     }
 
@@ -17903,16 +17903,16 @@ class TableCell1557Attbl4 extends TableCell {
  */
 class TableCell1558Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1401")
-    private TextBox TextBox1401;
+    private TextBoxNum TextBox1401;
 
     /*
      * getTextBox1401
      * @return TextBox1401
      */
     @JsonProperty("TextBox1401")
-    public TextBox getTextBox1401() {
+    public TextBoxNum getTextBox1401() {
         return TextBox1401;
     }
 
@@ -17921,7 +17921,7 @@ class TableCell1558Attbl4 extends TableCell {
      * @param TextBox1401 TextBox1401
      */
     @JsonProperty("TextBox1401")
-    public void setTextBox1401(TextBox TextBox1401) {
+    public void setTextBox1401(TextBoxNum TextBox1401) {
         this.TextBox1401 = TextBox1401;
     }
 
@@ -17935,16 +17935,16 @@ class TableCell1558Attbl4 extends TableCell {
  */
 class TableCell1559Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1402")
-    private TextBox TextBox1402;
+    private TextBoxNum TextBox1402;
 
     /*
      * getTextBox1402
      * @return TextBox1402
      */
     @JsonProperty("TextBox1402")
-    public TextBox getTextBox1402() {
+    public TextBoxNum getTextBox1402() {
         return TextBox1402;
     }
 
@@ -17953,7 +17953,7 @@ class TableCell1559Attbl4 extends TableCell {
      * @param TextBox1402 TextBox1402
      */
     @JsonProperty("TextBox1402")
-    public void setTextBox1402(TextBox TextBox1402) {
+    public void setTextBox1402(TextBoxNum TextBox1402) {
         this.TextBox1402 = TextBox1402;
     }
 
@@ -17967,16 +17967,16 @@ class TableCell1559Attbl4 extends TableCell {
  */
 class TableCell1560Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1403")
-    private TextBox TextBox1403;
+    private TextBoxNum TextBox1403;
 
     /*
      * getTextBox1403
      * @return TextBox1403
      */
     @JsonProperty("TextBox1403")
-    public TextBox getTextBox1403() {
+    public TextBoxNum getTextBox1403() {
         return TextBox1403;
     }
 
@@ -17985,7 +17985,7 @@ class TableCell1560Attbl4 extends TableCell {
      * @param TextBox1403 TextBox1403
      */
     @JsonProperty("TextBox1403")
-    public void setTextBox1403(TextBox TextBox1403) {
+    public void setTextBox1403(TextBoxNum TextBox1403) {
         this.TextBox1403 = TextBox1403;
     }
 
@@ -17998,7 +17998,7 @@ class TableCell1560Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1561Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -18010,16 +18010,16 @@ class TableCell1561Attbl4 extends TableCell {
  */
 class TableCell1562Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1404")
-    private TextBox TextBox1404;
+    private TextBoxNum TextBox1404;
 
     /*
      * getTextBox1404
      * @return TextBox1404
      */
     @JsonProperty("TextBox1404")
-    public TextBox getTextBox1404() {
+    public TextBoxNum getTextBox1404() {
         return TextBox1404;
     }
 
@@ -18028,7 +18028,7 @@ class TableCell1562Attbl4 extends TableCell {
      * @param TextBox1404 TextBox1404
      */
     @JsonProperty("TextBox1404")
-    public void setTextBox1404(TextBox TextBox1404) {
+    public void setTextBox1404(TextBoxNum TextBox1404) {
         this.TextBox1404 = TextBox1404;
     }
 
@@ -18042,16 +18042,16 @@ class TableCell1562Attbl4 extends TableCell {
  */
 class TableCell1563Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1405")
-    private TextBox TextBox1405;
+    private TextBoxNum TextBox1405;
 
     /*
      * getTextBox1405
      * @return TextBox1405
      */
     @JsonProperty("TextBox1405")
-    public TextBox getTextBox1405() {
+    public TextBoxNum getTextBox1405() {
         return TextBox1405;
     }
 
@@ -18060,7 +18060,7 @@ class TableCell1563Attbl4 extends TableCell {
      * @param TextBox1405 TextBox1405
      */
     @JsonProperty("TextBox1405")
-    public void setTextBox1405(TextBox TextBox1405) {
+    public void setTextBox1405(TextBoxNum TextBox1405) {
         this.TextBox1405 = TextBox1405;
     }
 
@@ -18074,16 +18074,16 @@ class TableCell1563Attbl4 extends TableCell {
  */
 class TableCell1564Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1406")
-    private TextBox TextBox1406;
+    private TextBoxNum TextBox1406;
 
     /*
      * getTextBox1406
      * @return TextBox1406
      */
     @JsonProperty("TextBox1406")
-    public TextBox getTextBox1406() {
+    public TextBoxNum getTextBox1406() {
         return TextBox1406;
     }
 
@@ -18092,7 +18092,7 @@ class TableCell1564Attbl4 extends TableCell {
      * @param TextBox1406 TextBox1406
      */
     @JsonProperty("TextBox1406")
-    public void setTextBox1406(TextBox TextBox1406) {
+    public void setTextBox1406(TextBoxNum TextBox1406) {
         this.TextBox1406 = TextBox1406;
     }
 
@@ -18106,16 +18106,16 @@ class TableCell1564Attbl4 extends TableCell {
  */
 class TableCell1565Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1407")
-    private TextBox TextBox1407;
+    private TextBoxNum TextBox1407;
 
     /*
      * getTextBox1407
      * @return TextBox1407
      */
     @JsonProperty("TextBox1407")
-    public TextBox getTextBox1407() {
+    public TextBoxNum getTextBox1407() {
         return TextBox1407;
     }
 
@@ -18124,7 +18124,7 @@ class TableCell1565Attbl4 extends TableCell {
      * @param TextBox1407 TextBox1407
      */
     @JsonProperty("TextBox1407")
-    public void setTextBox1407(TextBox TextBox1407) {
+    public void setTextBox1407(TextBoxNum TextBox1407) {
         this.TextBox1407 = TextBox1407;
     }
 
@@ -18138,16 +18138,16 @@ class TableCell1565Attbl4 extends TableCell {
  */
 class TableCell1566Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1408")
-    private TextBox TextBox1408;
+    private TextBoxNum TextBox1408;
 
     /*
      * getTextBox1408
      * @return TextBox1408
      */
     @JsonProperty("TextBox1408")
-    public TextBox getTextBox1408() {
+    public TextBoxNum getTextBox1408() {
         return TextBox1408;
     }
 
@@ -18156,7 +18156,7 @@ class TableCell1566Attbl4 extends TableCell {
      * @param TextBox1408 TextBox1408
      */
     @JsonProperty("TextBox1408")
-    public void setTextBox1408(TextBox TextBox1408) {
+    public void setTextBox1408(TextBoxNum TextBox1408) {
         this.TextBox1408 = TextBox1408;
     }
 
@@ -18170,16 +18170,16 @@ class TableCell1566Attbl4 extends TableCell {
  */
 class TableCell1567Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1409")
-    private TextBox TextBox1409;
+    private TextBoxNum TextBox1409;
 
     /*
      * getTextBox1409
      * @return TextBox1409
      */
     @JsonProperty("TextBox1409")
-    public TextBox getTextBox1409() {
+    public TextBoxNum getTextBox1409() {
         return TextBox1409;
     }
 
@@ -18188,7 +18188,7 @@ class TableCell1567Attbl4 extends TableCell {
      * @param TextBox1409 TextBox1409
      */
     @JsonProperty("TextBox1409")
-    public void setTextBox1409(TextBox TextBox1409) {
+    public void setTextBox1409(TextBoxNum TextBox1409) {
         this.TextBox1409 = TextBox1409;
     }
 
@@ -18202,16 +18202,16 @@ class TableCell1567Attbl4 extends TableCell {
  */
 class TableCell1568Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1410")
-    private TextBox TextBox1410;
+    private TextBoxNum TextBox1410;
 
     /*
      * getTextBox1410
      * @return TextBox1410
      */
     @JsonProperty("TextBox1410")
-    public TextBox getTextBox1410() {
+    public TextBoxNum getTextBox1410() {
         return TextBox1410;
     }
 
@@ -18220,7 +18220,7 @@ class TableCell1568Attbl4 extends TableCell {
      * @param TextBox1410 TextBox1410
      */
     @JsonProperty("TextBox1410")
-    public void setTextBox1410(TextBox TextBox1410) {
+    public void setTextBox1410(TextBoxNum TextBox1410) {
         this.TextBox1410 = TextBox1410;
     }
 
@@ -18234,16 +18234,16 @@ class TableCell1568Attbl4 extends TableCell {
  */
 class TableCell1569Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1411")
-    private TextBox TextBox1411;
+    private TextBoxNum TextBox1411;
 
     /*
      * getTextBox1411
      * @return TextBox1411
      */
     @JsonProperty("TextBox1411")
-    public TextBox getTextBox1411() {
+    public TextBoxNum getTextBox1411() {
         return TextBox1411;
     }
 
@@ -18252,7 +18252,7 @@ class TableCell1569Attbl4 extends TableCell {
      * @param TextBox1411 TextBox1411
      */
     @JsonProperty("TextBox1411")
-    public void setTextBox1411(TextBox TextBox1411) {
+    public void setTextBox1411(TextBoxNum TextBox1411) {
         this.TextBox1411 = TextBox1411;
     }
 
@@ -18266,16 +18266,16 @@ class TableCell1569Attbl4 extends TableCell {
  */
 class TableCell1570Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1412")
-    private TextBox TextBox1412;
+    private TextBoxNum TextBox1412;
 
     /*
      * getTextBox1412
      * @return TextBox1412
      */
     @JsonProperty("TextBox1412")
-    public TextBox getTextBox1412() {
+    public TextBoxNum getTextBox1412() {
         return TextBox1412;
     }
 
@@ -18284,7 +18284,7 @@ class TableCell1570Attbl4 extends TableCell {
      * @param TextBox1412 TextBox1412
      */
     @JsonProperty("TextBox1412")
-    public void setTextBox1412(TextBox TextBox1412) {
+    public void setTextBox1412(TextBoxNum TextBox1412) {
         this.TextBox1412 = TextBox1412;
     }
 
@@ -18298,16 +18298,16 @@ class TableCell1570Attbl4 extends TableCell {
  */
 class TableCell1571Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1413")
-    private TextBox TextBox1413;
+    private TextBoxNum TextBox1413;
 
     /*
      * getTextBox1413
      * @return TextBox1413
      */
     @JsonProperty("TextBox1413")
-    public TextBox getTextBox1413() {
+    public TextBoxNum getTextBox1413() {
         return TextBox1413;
     }
 
@@ -18316,7 +18316,7 @@ class TableCell1571Attbl4 extends TableCell {
      * @param TextBox1413 TextBox1413
      */
     @JsonProperty("TextBox1413")
-    public void setTextBox1413(TextBox TextBox1413) {
+    public void setTextBox1413(TextBoxNum TextBox1413) {
         this.TextBox1413 = TextBox1413;
     }
 
@@ -18330,16 +18330,16 @@ class TableCell1571Attbl4 extends TableCell {
  */
 class TableCell1572Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1414")
-    private TextBox TextBox1414;
+    private TextBoxNum TextBox1414;
 
     /*
      * getTextBox1414
      * @return TextBox1414
      */
     @JsonProperty("TextBox1414")
-    public TextBox getTextBox1414() {
+    public TextBoxNum getTextBox1414() {
         return TextBox1414;
     }
 
@@ -18348,7 +18348,7 @@ class TableCell1572Attbl4 extends TableCell {
      * @param TextBox1414 TextBox1414
      */
     @JsonProperty("TextBox1414")
-    public void setTextBox1414(TextBox TextBox1414) {
+    public void setTextBox1414(TextBoxNum TextBox1414) {
         this.TextBox1414 = TextBox1414;
     }
 
@@ -18361,7 +18361,7 @@ class TableCell1572Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1573Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -18373,16 +18373,16 @@ class TableCell1573Attbl4 extends TableCell {
  */
 class TableCell1574Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1415")
-    private TextBox TextBox1415;
+    private TextBoxNum TextBox1415;
 
     /*
      * getTextBox1415
      * @return TextBox1415
      */
     @JsonProperty("TextBox1415")
-    public TextBox getTextBox1415() {
+    public TextBoxNum getTextBox1415() {
         return TextBox1415;
     }
 
@@ -18391,7 +18391,7 @@ class TableCell1574Attbl4 extends TableCell {
      * @param TextBox1415 TextBox1415
      */
     @JsonProperty("TextBox1415")
-    public void setTextBox1415(TextBox TextBox1415) {
+    public void setTextBox1415(TextBoxNum TextBox1415) {
         this.TextBox1415 = TextBox1415;
     }
 
@@ -18405,16 +18405,16 @@ class TableCell1574Attbl4 extends TableCell {
  */
 class TableCell1575Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1416")
-    private TextBox TextBox1416;
+    private TextBoxNum TextBox1416;
 
     /*
      * getTextBox1416
      * @return TextBox1416
      */
     @JsonProperty("TextBox1416")
-    public TextBox getTextBox1416() {
+    public TextBoxNum getTextBox1416() {
         return TextBox1416;
     }
 
@@ -18423,7 +18423,7 @@ class TableCell1575Attbl4 extends TableCell {
      * @param TextBox1416 TextBox1416
      */
     @JsonProperty("TextBox1416")
-    public void setTextBox1416(TextBox TextBox1416) {
+    public void setTextBox1416(TextBoxNum TextBox1416) {
         this.TextBox1416 = TextBox1416;
     }
 
@@ -18437,16 +18437,16 @@ class TableCell1575Attbl4 extends TableCell {
  */
 class TableCell1576Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1417")
-    private TextBox TextBox1417;
+    private TextBoxNum TextBox1417;
 
     /*
      * getTextBox1417
      * @return TextBox1417
      */
     @JsonProperty("TextBox1417")
-    public TextBox getTextBox1417() {
+    public TextBoxNum getTextBox1417() {
         return TextBox1417;
     }
 
@@ -18455,7 +18455,7 @@ class TableCell1576Attbl4 extends TableCell {
      * @param TextBox1417 TextBox1417
      */
     @JsonProperty("TextBox1417")
-    public void setTextBox1417(TextBox TextBox1417) {
+    public void setTextBox1417(TextBoxNum TextBox1417) {
         this.TextBox1417 = TextBox1417;
     }
 
@@ -18469,16 +18469,16 @@ class TableCell1576Attbl4 extends TableCell {
  */
 class TableCell1577Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1418")
-    private TextBox TextBox1418;
+    private TextBoxNum TextBox1418;
 
     /*
      * getTextBox1418
      * @return TextBox1418
      */
     @JsonProperty("TextBox1418")
-    public TextBox getTextBox1418() {
+    public TextBoxNum getTextBox1418() {
         return TextBox1418;
     }
 
@@ -18487,7 +18487,7 @@ class TableCell1577Attbl4 extends TableCell {
      * @param TextBox1418 TextBox1418
      */
     @JsonProperty("TextBox1418")
-    public void setTextBox1418(TextBox TextBox1418) {
+    public void setTextBox1418(TextBoxNum TextBox1418) {
         this.TextBox1418 = TextBox1418;
     }
 
@@ -18501,16 +18501,16 @@ class TableCell1577Attbl4 extends TableCell {
  */
 class TableCell1578Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1419")
-    private TextBox TextBox1419;
+    private TextBoxNum TextBox1419;
 
     /*
      * getTextBox1419
      * @return TextBox1419
      */
     @JsonProperty("TextBox1419")
-    public TextBox getTextBox1419() {
+    public TextBoxNum getTextBox1419() {
         return TextBox1419;
     }
 
@@ -18519,7 +18519,7 @@ class TableCell1578Attbl4 extends TableCell {
      * @param TextBox1419 TextBox1419
      */
     @JsonProperty("TextBox1419")
-    public void setTextBox1419(TextBox TextBox1419) {
+    public void setTextBox1419(TextBoxNum TextBox1419) {
         this.TextBox1419 = TextBox1419;
     }
 
@@ -18533,16 +18533,16 @@ class TableCell1578Attbl4 extends TableCell {
  */
 class TableCell1579Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1420")
-    private TextBox TextBox1420;
+    private TextBoxNum TextBox1420;
 
     /*
      * getTextBox1420
      * @return TextBox1420
      */
     @JsonProperty("TextBox1420")
-    public TextBox getTextBox1420() {
+    public TextBoxNum getTextBox1420() {
         return TextBox1420;
     }
 
@@ -18551,7 +18551,7 @@ class TableCell1579Attbl4 extends TableCell {
      * @param TextBox1420 TextBox1420
      */
     @JsonProperty("TextBox1420")
-    public void setTextBox1420(TextBox TextBox1420) {
+    public void setTextBox1420(TextBoxNum TextBox1420) {
         this.TextBox1420 = TextBox1420;
     }
 
@@ -18565,16 +18565,16 @@ class TableCell1579Attbl4 extends TableCell {
  */
 class TableCell1580Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1421")
-    private TextBox TextBox1421;
+    private TextBoxNum TextBox1421;
 
     /*
      * getTextBox1421
      * @return TextBox1421
      */
     @JsonProperty("TextBox1421")
-    public TextBox getTextBox1421() {
+    public TextBoxNum getTextBox1421() {
         return TextBox1421;
     }
 
@@ -18583,7 +18583,7 @@ class TableCell1580Attbl4 extends TableCell {
      * @param TextBox1421 TextBox1421
      */
     @JsonProperty("TextBox1421")
-    public void setTextBox1421(TextBox TextBox1421) {
+    public void setTextBox1421(TextBoxNum TextBox1421) {
         this.TextBox1421 = TextBox1421;
     }
 
@@ -18597,16 +18597,16 @@ class TableCell1580Attbl4 extends TableCell {
  */
 class TableCell1581Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1422")
-    private TextBox TextBox1422;
+    private TextBoxNum TextBox1422;
 
     /*
      * getTextBox1422
      * @return TextBox1422
      */
     @JsonProperty("TextBox1422")
-    public TextBox getTextBox1422() {
+    public TextBoxNum getTextBox1422() {
         return TextBox1422;
     }
 
@@ -18615,7 +18615,7 @@ class TableCell1581Attbl4 extends TableCell {
      * @param TextBox1422 TextBox1422
      */
     @JsonProperty("TextBox1422")
-    public void setTextBox1422(TextBox TextBox1422) {
+    public void setTextBox1422(TextBoxNum TextBox1422) {
         this.TextBox1422 = TextBox1422;
     }
 
@@ -18629,16 +18629,16 @@ class TableCell1581Attbl4 extends TableCell {
  */
 class TableCell1582Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1423")
-    private TextBox TextBox1423;
+    private TextBoxNum TextBox1423;
 
     /*
      * getTextBox1423
      * @return TextBox1423
      */
     @JsonProperty("TextBox1423")
-    public TextBox getTextBox1423() {
+    public TextBoxNum getTextBox1423() {
         return TextBox1423;
     }
 
@@ -18647,7 +18647,7 @@ class TableCell1582Attbl4 extends TableCell {
      * @param TextBox1423 TextBox1423
      */
     @JsonProperty("TextBox1423")
-    public void setTextBox1423(TextBox TextBox1423) {
+    public void setTextBox1423(TextBoxNum TextBox1423) {
         this.TextBox1423 = TextBox1423;
     }
 
@@ -18661,16 +18661,16 @@ class TableCell1582Attbl4 extends TableCell {
  */
 class TableCell1583Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1424")
-    private TextBox TextBox1424;
+    private TextBoxNum TextBox1424;
 
     /*
      * getTextBox1424
      * @return TextBox1424
      */
     @JsonProperty("TextBox1424")
-    public TextBox getTextBox1424() {
+    public TextBoxNum getTextBox1424() {
         return TextBox1424;
     }
 
@@ -18679,7 +18679,7 @@ class TableCell1583Attbl4 extends TableCell {
      * @param TextBox1424 TextBox1424
      */
     @JsonProperty("TextBox1424")
-    public void setTextBox1424(TextBox TextBox1424) {
+    public void setTextBox1424(TextBoxNum TextBox1424) {
         this.TextBox1424 = TextBox1424;
     }
 
@@ -18693,16 +18693,16 @@ class TableCell1583Attbl4 extends TableCell {
  */
 class TableCell1584Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1425")
-    private TextBox TextBox1425;
+    private TextBoxNum TextBox1425;
 
     /*
      * getTextBox1425
      * @return TextBox1425
      */
     @JsonProperty("TextBox1425")
-    public TextBox getTextBox1425() {
+    public TextBoxNum getTextBox1425() {
         return TextBox1425;
     }
 
@@ -18711,7 +18711,7 @@ class TableCell1584Attbl4 extends TableCell {
      * @param TextBox1425 TextBox1425
      */
     @JsonProperty("TextBox1425")
-    public void setTextBox1425(TextBox TextBox1425) {
+    public void setTextBox1425(TextBoxNum TextBox1425) {
         this.TextBox1425 = TextBox1425;
     }
 
@@ -18725,16 +18725,16 @@ class TableCell1584Attbl4 extends TableCell {
  */
 class TableCell1585Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1426")
-    private TextBox TextBox1426;
+    private TextBoxNum TextBox1426;
 
     /*
      * getTextBox1426
      * @return TextBox1426
      */
     @JsonProperty("TextBox1426")
-    public TextBox getTextBox1426() {
+    public TextBoxNum getTextBox1426() {
         return TextBox1426;
     }
 
@@ -18743,7 +18743,7 @@ class TableCell1585Attbl4 extends TableCell {
      * @param TextBox1426 TextBox1426
      */
     @JsonProperty("TextBox1426")
-    public void setTextBox1426(TextBox TextBox1426) {
+    public void setTextBox1426(TextBoxNum TextBox1426) {
         this.TextBox1426 = TextBox1426;
     }
 
@@ -18757,16 +18757,16 @@ class TableCell1585Attbl4 extends TableCell {
  */
 class TableCell1586Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1427")
-    private TextBox TextBox1427;
+    private TextBoxNum TextBox1427;
 
     /*
      * getTextBox1427
      * @return TextBox1427
      */
     @JsonProperty("TextBox1427")
-    public TextBox getTextBox1427() {
+    public TextBoxNum getTextBox1427() {
         return TextBox1427;
     }
 
@@ -18775,7 +18775,7 @@ class TableCell1586Attbl4 extends TableCell {
      * @param TextBox1427 TextBox1427
      */
     @JsonProperty("TextBox1427")
-    public void setTextBox1427(TextBox TextBox1427) {
+    public void setTextBox1427(TextBoxNum TextBox1427) {
         this.TextBox1427 = TextBox1427;
     }
 
@@ -18789,16 +18789,16 @@ class TableCell1586Attbl4 extends TableCell {
  */
 class TableCell1587Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1428")
-    private TextBox TextBox1428;
+    private TextBoxNum TextBox1428;
 
     /*
      * getTextBox1428
      * @return TextBox1428
      */
     @JsonProperty("TextBox1428")
-    public TextBox getTextBox1428() {
+    public TextBoxNum getTextBox1428() {
         return TextBox1428;
     }
 
@@ -18807,7 +18807,7 @@ class TableCell1587Attbl4 extends TableCell {
      * @param TextBox1428 TextBox1428
      */
     @JsonProperty("TextBox1428")
-    public void setTextBox1428(TextBox TextBox1428) {
+    public void setTextBox1428(TextBoxNum TextBox1428) {
         this.TextBox1428 = TextBox1428;
     }
 
@@ -18821,16 +18821,16 @@ class TableCell1587Attbl4 extends TableCell {
  */
 class TableCell1588Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1429")
-    private TextBox TextBox1429;
+    private TextBoxNum TextBox1429;
 
     /*
      * getTextBox1429
      * @return TextBox1429
      */
     @JsonProperty("TextBox1429")
-    public TextBox getTextBox1429() {
+    public TextBoxNum getTextBox1429() {
         return TextBox1429;
     }
 
@@ -18839,7 +18839,7 @@ class TableCell1588Attbl4 extends TableCell {
      * @param TextBox1429 TextBox1429
      */
     @JsonProperty("TextBox1429")
-    public void setTextBox1429(TextBox TextBox1429) {
+    public void setTextBox1429(TextBoxNum TextBox1429) {
         this.TextBox1429 = TextBox1429;
     }
 
@@ -18853,16 +18853,16 @@ class TableCell1588Attbl4 extends TableCell {
  */
 class TableCell1589Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1430")
-    private TextBox TextBox1430;
+    private TextBoxNum TextBox1430;
 
     /*
      * getTextBox1430
      * @return TextBox1430
      */
     @JsonProperty("TextBox1430")
-    public TextBox getTextBox1430() {
+    public TextBoxNum getTextBox1430() {
         return TextBox1430;
     }
 
@@ -18871,7 +18871,7 @@ class TableCell1589Attbl4 extends TableCell {
      * @param TextBox1430 TextBox1430
      */
     @JsonProperty("TextBox1430")
-    public void setTextBox1430(TextBox TextBox1430) {
+    public void setTextBox1430(TextBoxNum TextBox1430) {
         this.TextBox1430 = TextBox1430;
     }
 
@@ -18885,16 +18885,16 @@ class TableCell1589Attbl4 extends TableCell {
  */
 class TableCell1590Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1431")
-    private TextBox TextBox1431;
+    private TextBoxNum TextBox1431;
 
     /*
      * getTextBox1431
      * @return TextBox1431
      */
     @JsonProperty("TextBox1431")
-    public TextBox getTextBox1431() {
+    public TextBoxNum getTextBox1431() {
         return TextBox1431;
     }
 
@@ -18903,7 +18903,7 @@ class TableCell1590Attbl4 extends TableCell {
      * @param TextBox1431 TextBox1431
      */
     @JsonProperty("TextBox1431")
-    public void setTextBox1431(TextBox TextBox1431) {
+    public void setTextBox1431(TextBoxNum TextBox1431) {
         this.TextBox1431 = TextBox1431;
     }
 
@@ -18917,16 +18917,16 @@ class TableCell1590Attbl4 extends TableCell {
  */
 class TableCell1591Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1432")
-    private TextBox TextBox1432;
+    private TextBoxNum TextBox1432;
 
     /*
      * getTextBox1432
      * @return TextBox1432
      */
     @JsonProperty("TextBox1432")
-    public TextBox getTextBox1432() {
+    public TextBoxNum getTextBox1432() {
         return TextBox1432;
     }
 
@@ -18935,7 +18935,7 @@ class TableCell1591Attbl4 extends TableCell {
      * @param TextBox1432 TextBox1432
      */
     @JsonProperty("TextBox1432")
-    public void setTextBox1432(TextBox TextBox1432) {
+    public void setTextBox1432(TextBoxNum TextBox1432) {
         this.TextBox1432 = TextBox1432;
     }
 
@@ -18949,16 +18949,16 @@ class TableCell1591Attbl4 extends TableCell {
  */
 class TableCell1592Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1433")
-    private TextBox TextBox1433;
+    private TextBoxNum TextBox1433;
 
     /*
      * getTextBox1433
      * @return TextBox1433
      */
     @JsonProperty("TextBox1433")
-    public TextBox getTextBox1433() {
+    public TextBoxNum getTextBox1433() {
         return TextBox1433;
     }
 
@@ -18967,7 +18967,7 @@ class TableCell1592Attbl4 extends TableCell {
      * @param TextBox1433 TextBox1433
      */
     @JsonProperty("TextBox1433")
-    public void setTextBox1433(TextBox TextBox1433) {
+    public void setTextBox1433(TextBoxNum TextBox1433) {
         this.TextBox1433 = TextBox1433;
     }
 
@@ -18981,16 +18981,16 @@ class TableCell1592Attbl4 extends TableCell {
  */
 class TableCell1593Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1434")
-    private TextBox TextBox1434;
+    private TextBoxNum TextBox1434;
 
     /*
      * getTextBox1434
      * @return TextBox1434
      */
     @JsonProperty("TextBox1434")
-    public TextBox getTextBox1434() {
+    public TextBoxNum getTextBox1434() {
         return TextBox1434;
     }
 
@@ -18999,7 +18999,7 @@ class TableCell1593Attbl4 extends TableCell {
      * @param TextBox1434 TextBox1434
      */
     @JsonProperty("TextBox1434")
-    public void setTextBox1434(TextBox TextBox1434) {
+    public void setTextBox1434(TextBoxNum TextBox1434) {
         this.TextBox1434 = TextBox1434;
     }
 
@@ -19013,16 +19013,16 @@ class TableCell1593Attbl4 extends TableCell {
  */
 class TableCell1594Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1435")
-    private TextBox TextBox1435;
+    private TextBoxNum TextBox1435;
 
     /*
      * getTextBox1435
      * @return TextBox1435
      */
     @JsonProperty("TextBox1435")
-    public TextBox getTextBox1435() {
+    public TextBoxNum getTextBox1435() {
         return TextBox1435;
     }
 
@@ -19031,7 +19031,7 @@ class TableCell1594Attbl4 extends TableCell {
      * @param TextBox1435 TextBox1435
      */
     @JsonProperty("TextBox1435")
-    public void setTextBox1435(TextBox TextBox1435) {
+    public void setTextBox1435(TextBoxNum TextBox1435) {
         this.TextBox1435 = TextBox1435;
     }
 
@@ -19045,16 +19045,16 @@ class TableCell1594Attbl4 extends TableCell {
  */
 class TableCell1595Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1436")
-    private TextBox TextBox1436;
+    private TextBoxNum TextBox1436;
 
     /*
      * getTextBox1436
      * @return TextBox1436
      */
     @JsonProperty("TextBox1436")
-    public TextBox getTextBox1436() {
+    public TextBoxNum getTextBox1436() {
         return TextBox1436;
     }
 
@@ -19063,7 +19063,7 @@ class TableCell1595Attbl4 extends TableCell {
      * @param TextBox1436 TextBox1436
      */
     @JsonProperty("TextBox1436")
-    public void setTextBox1436(TextBox TextBox1436) {
+    public void setTextBox1436(TextBoxNum TextBox1436) {
         this.TextBox1436 = TextBox1436;
     }
 
@@ -19076,7 +19076,7 @@ class TableCell1595Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1596Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -19088,16 +19088,16 @@ class TableCell1596Attbl4 extends TableCell {
  */
 class TableCell1597Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1437")
-    private TextBox TextBox1437;
+    private TextBoxNum TextBox1437;
 
     /*
      * getTextBox1437
      * @return TextBox1437
      */
     @JsonProperty("TextBox1437")
-    public TextBox getTextBox1437() {
+    public TextBoxNum getTextBox1437() {
         return TextBox1437;
     }
 
@@ -19106,7 +19106,7 @@ class TableCell1597Attbl4 extends TableCell {
      * @param TextBox1437 TextBox1437
      */
     @JsonProperty("TextBox1437")
-    public void setTextBox1437(TextBox TextBox1437) {
+    public void setTextBox1437(TextBoxNum TextBox1437) {
         this.TextBox1437 = TextBox1437;
     }
 
@@ -19120,16 +19120,16 @@ class TableCell1597Attbl4 extends TableCell {
  */
 class TableCell1598Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1438")
-    private TextBox TextBox1438;
+    private TextBoxNum TextBox1438;
 
     /*
      * getTextBox1438
      * @return TextBox1438
      */
     @JsonProperty("TextBox1438")
-    public TextBox getTextBox1438() {
+    public TextBoxNum getTextBox1438() {
         return TextBox1438;
     }
 
@@ -19138,7 +19138,7 @@ class TableCell1598Attbl4 extends TableCell {
      * @param TextBox1438 TextBox1438
      */
     @JsonProperty("TextBox1438")
-    public void setTextBox1438(TextBox TextBox1438) {
+    public void setTextBox1438(TextBoxNum TextBox1438) {
         this.TextBox1438 = TextBox1438;
     }
 
@@ -19152,16 +19152,16 @@ class TableCell1598Attbl4 extends TableCell {
  */
 class TableCell1599Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1439")
-    private TextBox TextBox1439;
+    private TextBoxNum TextBox1439;
 
     /*
      * getTextBox1439
      * @return TextBox1439
      */
     @JsonProperty("TextBox1439")
-    public TextBox getTextBox1439() {
+    public TextBoxNum getTextBox1439() {
         return TextBox1439;
     }
 
@@ -19170,7 +19170,7 @@ class TableCell1599Attbl4 extends TableCell {
      * @param TextBox1439 TextBox1439
      */
     @JsonProperty("TextBox1439")
-    public void setTextBox1439(TextBox TextBox1439) {
+    public void setTextBox1439(TextBoxNum TextBox1439) {
         this.TextBox1439 = TextBox1439;
     }
 
@@ -19184,16 +19184,16 @@ class TableCell1599Attbl4 extends TableCell {
  */
 class TableCell1600Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1440")
-    private TextBox TextBox1440;
+    private TextBoxNum TextBox1440;
 
     /*
      * getTextBox1440
      * @return TextBox1440
      */
     @JsonProperty("TextBox1440")
-    public TextBox getTextBox1440() {
+    public TextBoxNum getTextBox1440() {
         return TextBox1440;
     }
 
@@ -19202,7 +19202,7 @@ class TableCell1600Attbl4 extends TableCell {
      * @param TextBox1440 TextBox1440
      */
     @JsonProperty("TextBox1440")
-    public void setTextBox1440(TextBox TextBox1440) {
+    public void setTextBox1440(TextBoxNum TextBox1440) {
         this.TextBox1440 = TextBox1440;
     }
 
@@ -19216,16 +19216,16 @@ class TableCell1600Attbl4 extends TableCell {
  */
 class TableCell1601Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1441")
-    private TextBox TextBox1441;
+    private TextBoxNum TextBox1441;
 
     /*
      * getTextBox1441
      * @return TextBox1441
      */
     @JsonProperty("TextBox1441")
-    public TextBox getTextBox1441() {
+    public TextBoxNum getTextBox1441() {
         return TextBox1441;
     }
 
@@ -19234,7 +19234,7 @@ class TableCell1601Attbl4 extends TableCell {
      * @param TextBox1441 TextBox1441
      */
     @JsonProperty("TextBox1441")
-    public void setTextBox1441(TextBox TextBox1441) {
+    public void setTextBox1441(TextBoxNum TextBox1441) {
         this.TextBox1441 = TextBox1441;
     }
 
@@ -19248,16 +19248,16 @@ class TableCell1601Attbl4 extends TableCell {
  */
 class TableCell1602Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1442")
-    private TextBox TextBox1442;
+    private TextBoxNum TextBox1442;
 
     /*
      * getTextBox1442
      * @return TextBox1442
      */
     @JsonProperty("TextBox1442")
-    public TextBox getTextBox1442() {
+    public TextBoxNum getTextBox1442() {
         return TextBox1442;
     }
 
@@ -19266,7 +19266,7 @@ class TableCell1602Attbl4 extends TableCell {
      * @param TextBox1442 TextBox1442
      */
     @JsonProperty("TextBox1442")
-    public void setTextBox1442(TextBox TextBox1442) {
+    public void setTextBox1442(TextBoxNum TextBox1442) {
         this.TextBox1442 = TextBox1442;
     }
 
@@ -19280,16 +19280,16 @@ class TableCell1602Attbl4 extends TableCell {
  */
 class TableCell1603Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1443")
-    private TextBox TextBox1443;
+    private TextBoxNum TextBox1443;
 
     /*
      * getTextBox1443
      * @return TextBox1443
      */
     @JsonProperty("TextBox1443")
-    public TextBox getTextBox1443() {
+    public TextBoxNum getTextBox1443() {
         return TextBox1443;
     }
 
@@ -19298,7 +19298,7 @@ class TableCell1603Attbl4 extends TableCell {
      * @param TextBox1443 TextBox1443
      */
     @JsonProperty("TextBox1443")
-    public void setTextBox1443(TextBox TextBox1443) {
+    public void setTextBox1443(TextBoxNum TextBox1443) {
         this.TextBox1443 = TextBox1443;
     }
 
@@ -19312,16 +19312,16 @@ class TableCell1603Attbl4 extends TableCell {
  */
 class TableCell1604Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1444")
-    private TextBox TextBox1444;
+    private TextBoxNum TextBox1444;
 
     /*
      * getTextBox1444
      * @return TextBox1444
      */
     @JsonProperty("TextBox1444")
-    public TextBox getTextBox1444() {
+    public TextBoxNum getTextBox1444() {
         return TextBox1444;
     }
 
@@ -19330,7 +19330,7 @@ class TableCell1604Attbl4 extends TableCell {
      * @param TextBox1444 TextBox1444
      */
     @JsonProperty("TextBox1444")
-    public void setTextBox1444(TextBox TextBox1444) {
+    public void setTextBox1444(TextBoxNum TextBox1444) {
         this.TextBox1444 = TextBox1444;
     }
 
@@ -19344,16 +19344,16 @@ class TableCell1604Attbl4 extends TableCell {
  */
 class TableCell1605Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1445")
-    private TextBox TextBox1445;
+    private TextBoxNum TextBox1445;
 
     /*
      * getTextBox1445
      * @return TextBox1445
      */
     @JsonProperty("TextBox1445")
-    public TextBox getTextBox1445() {
+    public TextBoxNum getTextBox1445() {
         return TextBox1445;
     }
 
@@ -19362,7 +19362,7 @@ class TableCell1605Attbl4 extends TableCell {
      * @param TextBox1445 TextBox1445
      */
     @JsonProperty("TextBox1445")
-    public void setTextBox1445(TextBox TextBox1445) {
+    public void setTextBox1445(TextBoxNum TextBox1445) {
         this.TextBox1445 = TextBox1445;
     }
 
@@ -19376,16 +19376,16 @@ class TableCell1605Attbl4 extends TableCell {
  */
 class TableCell1606Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1446")
-    private TextBox TextBox1446;
+    private TextBoxNum TextBox1446;
 
     /*
      * getTextBox1446
      * @return TextBox1446
      */
     @JsonProperty("TextBox1446")
-    public TextBox getTextBox1446() {
+    public TextBoxNum getTextBox1446() {
         return TextBox1446;
     }
 
@@ -19394,7 +19394,7 @@ class TableCell1606Attbl4 extends TableCell {
      * @param TextBox1446 TextBox1446
      */
     @JsonProperty("TextBox1446")
-    public void setTextBox1446(TextBox TextBox1446) {
+    public void setTextBox1446(TextBoxNum TextBox1446) {
         this.TextBox1446 = TextBox1446;
     }
 
@@ -19407,7 +19407,7 @@ class TableCell1606Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1607Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -19419,16 +19419,16 @@ class TableCell1607Attbl4 extends TableCell {
  */
 class TableCell1608Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1447")
-    private TextBox TextBox1447;
+    private TextBoxNum TextBox1447;
 
     /*
      * getTextBox1447
      * @return TextBox1447
      */
     @JsonProperty("TextBox1447")
-    public TextBox getTextBox1447() {
+    public TextBoxNum getTextBox1447() {
         return TextBox1447;
     }
 
@@ -19437,7 +19437,7 @@ class TableCell1608Attbl4 extends TableCell {
      * @param TextBox1447 TextBox1447
      */
     @JsonProperty("TextBox1447")
-    public void setTextBox1447(TextBox TextBox1447) {
+    public void setTextBox1447(TextBoxNum TextBox1447) {
         this.TextBox1447 = TextBox1447;
     }
 
@@ -19451,16 +19451,16 @@ class TableCell1608Attbl4 extends TableCell {
  */
 class TableCell1609Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1448")
-    private TextBox TextBox1448;
+    private TextBoxNum TextBox1448;
 
     /*
      * getTextBox1448
      * @return TextBox1448
      */
     @JsonProperty("TextBox1448")
-    public TextBox getTextBox1448() {
+    public TextBoxNum getTextBox1448() {
         return TextBox1448;
     }
 
@@ -19469,7 +19469,7 @@ class TableCell1609Attbl4 extends TableCell {
      * @param TextBox1448 TextBox1448
      */
     @JsonProperty("TextBox1448")
-    public void setTextBox1448(TextBox TextBox1448) {
+    public void setTextBox1448(TextBoxNum TextBox1448) {
         this.TextBox1448 = TextBox1448;
     }
 
@@ -19483,16 +19483,16 @@ class TableCell1609Attbl4 extends TableCell {
  */
 class TableCell1610Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1449")
-    private TextBox TextBox1449;
+    private TextBoxNum TextBox1449;
 
     /*
      * getTextBox1449
      * @return TextBox1449
      */
     @JsonProperty("TextBox1449")
-    public TextBox getTextBox1449() {
+    public TextBoxNum getTextBox1449() {
         return TextBox1449;
     }
 
@@ -19501,7 +19501,7 @@ class TableCell1610Attbl4 extends TableCell {
      * @param TextBox1449 TextBox1449
      */
     @JsonProperty("TextBox1449")
-    public void setTextBox1449(TextBox TextBox1449) {
+    public void setTextBox1449(TextBoxNum TextBox1449) {
         this.TextBox1449 = TextBox1449;
     }
 
@@ -19515,16 +19515,16 @@ class TableCell1610Attbl4 extends TableCell {
  */
 class TableCell1611Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1450")
-    private TextBox TextBox1450;
+    private TextBoxNum TextBox1450;
 
     /*
      * getTextBox1450
      * @return TextBox1450
      */
     @JsonProperty("TextBox1450")
-    public TextBox getTextBox1450() {
+    public TextBoxNum getTextBox1450() {
         return TextBox1450;
     }
 
@@ -19533,7 +19533,7 @@ class TableCell1611Attbl4 extends TableCell {
      * @param TextBox1450 TextBox1450
      */
     @JsonProperty("TextBox1450")
-    public void setTextBox1450(TextBox TextBox1450) {
+    public void setTextBox1450(TextBoxNum TextBox1450) {
         this.TextBox1450 = TextBox1450;
     }
 
@@ -19547,16 +19547,16 @@ class TableCell1611Attbl4 extends TableCell {
  */
 class TableCell1612Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1451")
-    private TextBox TextBox1451;
+    private TextBoxNum TextBox1451;
 
     /*
      * getTextBox1451
      * @return TextBox1451
      */
     @JsonProperty("TextBox1451")
-    public TextBox getTextBox1451() {
+    public TextBoxNum getTextBox1451() {
         return TextBox1451;
     }
 
@@ -19565,7 +19565,7 @@ class TableCell1612Attbl4 extends TableCell {
      * @param TextBox1451 TextBox1451
      */
     @JsonProperty("TextBox1451")
-    public void setTextBox1451(TextBox TextBox1451) {
+    public void setTextBox1451(TextBoxNum TextBox1451) {
         this.TextBox1451 = TextBox1451;
     }
 
@@ -19579,16 +19579,16 @@ class TableCell1612Attbl4 extends TableCell {
  */
 class TableCell1613Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1452")
-    private TextBox TextBox1452;
+    private TextBoxNum TextBox1452;
 
     /*
      * getTextBox1452
      * @return TextBox1452
      */
     @JsonProperty("TextBox1452")
-    public TextBox getTextBox1452() {
+    public TextBoxNum getTextBox1452() {
         return TextBox1452;
     }
 
@@ -19597,7 +19597,7 @@ class TableCell1613Attbl4 extends TableCell {
      * @param TextBox1452 TextBox1452
      */
     @JsonProperty("TextBox1452")
-    public void setTextBox1452(TextBox TextBox1452) {
+    public void setTextBox1452(TextBoxNum TextBox1452) {
         this.TextBox1452 = TextBox1452;
     }
 
@@ -19611,16 +19611,16 @@ class TableCell1613Attbl4 extends TableCell {
  */
 class TableCell1614Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1453")
-    private TextBox TextBox1453;
+    private TextBoxNum TextBox1453;
 
     /*
      * getTextBox1453
      * @return TextBox1453
      */
     @JsonProperty("TextBox1453")
-    public TextBox getTextBox1453() {
+    public TextBoxNum getTextBox1453() {
         return TextBox1453;
     }
 
@@ -19629,7 +19629,7 @@ class TableCell1614Attbl4 extends TableCell {
      * @param TextBox1453 TextBox1453
      */
     @JsonProperty("TextBox1453")
-    public void setTextBox1453(TextBox TextBox1453) {
+    public void setTextBox1453(TextBoxNum TextBox1453) {
         this.TextBox1453 = TextBox1453;
     }
 
@@ -19643,16 +19643,16 @@ class TableCell1614Attbl4 extends TableCell {
  */
 class TableCell1615Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1454")
-    private TextBox TextBox1454;
+    private TextBoxNum TextBox1454;
 
     /*
      * getTextBox1454
      * @return TextBox1454
      */
     @JsonProperty("TextBox1454")
-    public TextBox getTextBox1454() {
+    public TextBoxNum getTextBox1454() {
         return TextBox1454;
     }
 
@@ -19661,7 +19661,7 @@ class TableCell1615Attbl4 extends TableCell {
      * @param TextBox1454 TextBox1454
      */
     @JsonProperty("TextBox1454")
-    public void setTextBox1454(TextBox TextBox1454) {
+    public void setTextBox1454(TextBoxNum TextBox1454) {
         this.TextBox1454 = TextBox1454;
     }
 
@@ -19675,16 +19675,16 @@ class TableCell1615Attbl4 extends TableCell {
  */
 class TableCell1616Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1455")
-    private TextBox TextBox1455;
+    private TextBoxNum TextBox1455;
 
     /*
      * getTextBox1455
      * @return TextBox1455
      */
     @JsonProperty("TextBox1455")
-    public TextBox getTextBox1455() {
+    public TextBoxNum getTextBox1455() {
         return TextBox1455;
     }
 
@@ -19693,7 +19693,7 @@ class TableCell1616Attbl4 extends TableCell {
      * @param TextBox1455 TextBox1455
      */
     @JsonProperty("TextBox1455")
-    public void setTextBox1455(TextBox TextBox1455) {
+    public void setTextBox1455(TextBoxNum TextBox1455) {
         this.TextBox1455 = TextBox1455;
     }
 
@@ -19707,16 +19707,16 @@ class TableCell1616Attbl4 extends TableCell {
  */
 class TableCell1617Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1456")
-    private TextBox TextBox1456;
+    private TextBoxNum TextBox1456;
 
     /*
      * getTextBox1456
      * @return TextBox1456
      */
     @JsonProperty("TextBox1456")
-    public TextBox getTextBox1456() {
+    public TextBoxNum getTextBox1456() {
         return TextBox1456;
     }
 
@@ -19725,7 +19725,7 @@ class TableCell1617Attbl4 extends TableCell {
      * @param TextBox1456 TextBox1456
      */
     @JsonProperty("TextBox1456")
-    public void setTextBox1456(TextBox TextBox1456) {
+    public void setTextBox1456(TextBoxNum TextBox1456) {
         this.TextBox1456 = TextBox1456;
     }
 
@@ -19738,7 +19738,7 @@ class TableCell1617Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1618Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -19750,16 +19750,16 @@ class TableCell1618Attbl4 extends TableCell {
  */
 class TableCell1619Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1457")
-    private TextBox TextBox1457;
+    private TextBoxNum TextBox1457;
 
     /*
      * getTextBox1457
      * @return TextBox1457
      */
     @JsonProperty("TextBox1457")
-    public TextBox getTextBox1457() {
+    public TextBoxNum getTextBox1457() {
         return TextBox1457;
     }
 
@@ -19768,7 +19768,7 @@ class TableCell1619Attbl4 extends TableCell {
      * @param TextBox1457 TextBox1457
      */
     @JsonProperty("TextBox1457")
-    public void setTextBox1457(TextBox TextBox1457) {
+    public void setTextBox1457(TextBoxNum TextBox1457) {
         this.TextBox1457 = TextBox1457;
     }
 
@@ -19782,16 +19782,16 @@ class TableCell1619Attbl4 extends TableCell {
  */
 class TableCell1620Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1458")
-    private TextBox TextBox1458;
+    private TextBoxNum TextBox1458;
 
     /*
      * getTextBox1458
      * @return TextBox1458
      */
     @JsonProperty("TextBox1458")
-    public TextBox getTextBox1458() {
+    public TextBoxNum getTextBox1458() {
         return TextBox1458;
     }
 
@@ -19800,7 +19800,7 @@ class TableCell1620Attbl4 extends TableCell {
      * @param TextBox1458 TextBox1458
      */
     @JsonProperty("TextBox1458")
-    public void setTextBox1458(TextBox TextBox1458) {
+    public void setTextBox1458(TextBoxNum TextBox1458) {
         this.TextBox1458 = TextBox1458;
     }
 
@@ -19814,16 +19814,16 @@ class TableCell1620Attbl4 extends TableCell {
  */
 class TableCell1621Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1459")
-    private TextBox TextBox1459;
+    private TextBoxNum TextBox1459;
 
     /*
      * getTextBox1459
      * @return TextBox1459
      */
     @JsonProperty("TextBox1459")
-    public TextBox getTextBox1459() {
+    public TextBoxNum getTextBox1459() {
         return TextBox1459;
     }
 
@@ -19832,7 +19832,7 @@ class TableCell1621Attbl4 extends TableCell {
      * @param TextBox1459 TextBox1459
      */
     @JsonProperty("TextBox1459")
-    public void setTextBox1459(TextBox TextBox1459) {
+    public void setTextBox1459(TextBoxNum TextBox1459) {
         this.TextBox1459 = TextBox1459;
     }
 
@@ -19846,16 +19846,16 @@ class TableCell1621Attbl4 extends TableCell {
  */
 class TableCell1622Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1460")
-    private TextBox TextBox1460;
+    private TextBoxNum TextBox1460;
 
     /*
      * getTextBox1460
      * @return TextBox1460
      */
     @JsonProperty("TextBox1460")
-    public TextBox getTextBox1460() {
+    public TextBoxNum getTextBox1460() {
         return TextBox1460;
     }
 
@@ -19864,7 +19864,7 @@ class TableCell1622Attbl4 extends TableCell {
      * @param TextBox1460 TextBox1460
      */
     @JsonProperty("TextBox1460")
-    public void setTextBox1460(TextBox TextBox1460) {
+    public void setTextBox1460(TextBoxNum TextBox1460) {
         this.TextBox1460 = TextBox1460;
     }
 
@@ -19878,16 +19878,16 @@ class TableCell1622Attbl4 extends TableCell {
  */
 class TableCell1623Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1461")
-    private TextBox TextBox1461;
+    private TextBoxNum TextBox1461;
 
     /*
      * getTextBox1461
      * @return TextBox1461
      */
     @JsonProperty("TextBox1461")
-    public TextBox getTextBox1461() {
+    public TextBoxNum getTextBox1461() {
         return TextBox1461;
     }
 
@@ -19896,7 +19896,7 @@ class TableCell1623Attbl4 extends TableCell {
      * @param TextBox1461 TextBox1461
      */
     @JsonProperty("TextBox1461")
-    public void setTextBox1461(TextBox TextBox1461) {
+    public void setTextBox1461(TextBoxNum TextBox1461) {
         this.TextBox1461 = TextBox1461;
     }
 
@@ -19910,16 +19910,16 @@ class TableCell1623Attbl4 extends TableCell {
  */
 class TableCell1624Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1462")
-    private TextBox TextBox1462;
+    private TextBoxNum TextBox1462;
 
     /*
      * getTextBox1462
      * @return TextBox1462
      */
     @JsonProperty("TextBox1462")
-    public TextBox getTextBox1462() {
+    public TextBoxNum getTextBox1462() {
         return TextBox1462;
     }
 
@@ -19928,7 +19928,7 @@ class TableCell1624Attbl4 extends TableCell {
      * @param TextBox1462 TextBox1462
      */
     @JsonProperty("TextBox1462")
-    public void setTextBox1462(TextBox TextBox1462) {
+    public void setTextBox1462(TextBoxNum TextBox1462) {
         this.TextBox1462 = TextBox1462;
     }
 
@@ -19942,16 +19942,16 @@ class TableCell1624Attbl4 extends TableCell {
  */
 class TableCell1625Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1463")
-    private TextBox TextBox1463;
+    private TextBoxNum TextBox1463;
 
     /*
      * getTextBox1463
      * @return TextBox1463
      */
     @JsonProperty("TextBox1463")
-    public TextBox getTextBox1463() {
+    public TextBoxNum getTextBox1463() {
         return TextBox1463;
     }
 
@@ -19960,7 +19960,7 @@ class TableCell1625Attbl4 extends TableCell {
      * @param TextBox1463 TextBox1463
      */
     @JsonProperty("TextBox1463")
-    public void setTextBox1463(TextBox TextBox1463) {
+    public void setTextBox1463(TextBoxNum TextBox1463) {
         this.TextBox1463 = TextBox1463;
     }
 
@@ -19974,16 +19974,16 @@ class TableCell1625Attbl4 extends TableCell {
  */
 class TableCell1626Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1464")
-    private TextBox TextBox1464;
+    private TextBoxNum TextBox1464;
 
     /*
      * getTextBox1464
      * @return TextBox1464
      */
     @JsonProperty("TextBox1464")
-    public TextBox getTextBox1464() {
+    public TextBoxNum getTextBox1464() {
         return TextBox1464;
     }
 
@@ -19992,7 +19992,7 @@ class TableCell1626Attbl4 extends TableCell {
      * @param TextBox1464 TextBox1464
      */
     @JsonProperty("TextBox1464")
-    public void setTextBox1464(TextBox TextBox1464) {
+    public void setTextBox1464(TextBoxNum TextBox1464) {
         this.TextBox1464 = TextBox1464;
     }
 
@@ -20006,16 +20006,16 @@ class TableCell1626Attbl4 extends TableCell {
  */
 class TableCell1627Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1465")
-    private TextBox TextBox1465;
+    private TextBoxNum TextBox1465;
 
     /*
      * getTextBox1465
      * @return TextBox1465
      */
     @JsonProperty("TextBox1465")
-    public TextBox getTextBox1465() {
+    public TextBoxNum getTextBox1465() {
         return TextBox1465;
     }
 
@@ -20024,7 +20024,7 @@ class TableCell1627Attbl4 extends TableCell {
      * @param TextBox1465 TextBox1465
      */
     @JsonProperty("TextBox1465")
-    public void setTextBox1465(TextBox TextBox1465) {
+    public void setTextBox1465(TextBoxNum TextBox1465) {
         this.TextBox1465 = TextBox1465;
     }
 
@@ -20038,16 +20038,16 @@ class TableCell1627Attbl4 extends TableCell {
  */
 class TableCell1628Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1466")
-    private TextBox TextBox1466;
+    private TextBoxNum TextBox1466;
 
     /*
      * getTextBox1466
      * @return TextBox1466
      */
     @JsonProperty("TextBox1466")
-    public TextBox getTextBox1466() {
+    public TextBoxNum getTextBox1466() {
         return TextBox1466;
     }
 
@@ -20056,7 +20056,7 @@ class TableCell1628Attbl4 extends TableCell {
      * @param TextBox1466 TextBox1466
      */
     @JsonProperty("TextBox1466")
-    public void setTextBox1466(TextBox TextBox1466) {
+    public void setTextBox1466(TextBoxNum TextBox1466) {
         this.TextBox1466 = TextBox1466;
     }
 
@@ -20070,16 +20070,16 @@ class TableCell1628Attbl4 extends TableCell {
  */
 class TableCell1629Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1467")
-    private TextBox TextBox1467;
+    private TextBoxNum TextBox1467;
 
     /*
      * getTextBox1467
      * @return TextBox1467
      */
     @JsonProperty("TextBox1467")
-    public TextBox getTextBox1467() {
+    public TextBoxNum getTextBox1467() {
         return TextBox1467;
     }
 
@@ -20088,7 +20088,7 @@ class TableCell1629Attbl4 extends TableCell {
      * @param TextBox1467 TextBox1467
      */
     @JsonProperty("TextBox1467")
-    public void setTextBox1467(TextBox TextBox1467) {
+    public void setTextBox1467(TextBoxNum TextBox1467) {
         this.TextBox1467 = TextBox1467;
     }
 
@@ -20101,7 +20101,7 @@ class TableCell1629Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1630Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -20113,16 +20113,16 @@ class TableCell1630Attbl4 extends TableCell {
  */
 class TableCell1631Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1468")
-    private TextBox TextBox1468;
+    private TextBoxNum TextBox1468;
 
     /*
      * getTextBox1468
      * @return TextBox1468
      */
     @JsonProperty("TextBox1468")
-    public TextBox getTextBox1468() {
+    public TextBoxNum getTextBox1468() {
         return TextBox1468;
     }
 
@@ -20131,7 +20131,7 @@ class TableCell1631Attbl4 extends TableCell {
      * @param TextBox1468 TextBox1468
      */
     @JsonProperty("TextBox1468")
-    public void setTextBox1468(TextBox TextBox1468) {
+    public void setTextBox1468(TextBoxNum TextBox1468) {
         this.TextBox1468 = TextBox1468;
     }
 
@@ -20145,16 +20145,16 @@ class TableCell1631Attbl4 extends TableCell {
  */
 class TableCell1632Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1469")
-    private TextBox TextBox1469;
+    private TextBoxNum TextBox1469;
 
     /*
      * getTextBox1469
      * @return TextBox1469
      */
     @JsonProperty("TextBox1469")
-    public TextBox getTextBox1469() {
+    public TextBoxNum getTextBox1469() {
         return TextBox1469;
     }
 
@@ -20163,7 +20163,7 @@ class TableCell1632Attbl4 extends TableCell {
      * @param TextBox1469 TextBox1469
      */
     @JsonProperty("TextBox1469")
-    public void setTextBox1469(TextBox TextBox1469) {
+    public void setTextBox1469(TextBoxNum TextBox1469) {
         this.TextBox1469 = TextBox1469;
     }
 
@@ -20177,16 +20177,16 @@ class TableCell1632Attbl4 extends TableCell {
  */
 class TableCell1633Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1470")
-    private TextBox TextBox1470;
+    private TextBoxNum TextBox1470;
 
     /*
      * getTextBox1470
      * @return TextBox1470
      */
     @JsonProperty("TextBox1470")
-    public TextBox getTextBox1470() {
+    public TextBoxNum getTextBox1470() {
         return TextBox1470;
     }
 
@@ -20195,7 +20195,7 @@ class TableCell1633Attbl4 extends TableCell {
      * @param TextBox1470 TextBox1470
      */
     @JsonProperty("TextBox1470")
-    public void setTextBox1470(TextBox TextBox1470) {
+    public void setTextBox1470(TextBoxNum TextBox1470) {
         this.TextBox1470 = TextBox1470;
     }
 
@@ -20209,16 +20209,16 @@ class TableCell1633Attbl4 extends TableCell {
  */
 class TableCell1634Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1471")
-    private TextBox TextBox1471;
+    private TextBoxNum TextBox1471;
 
     /*
      * getTextBox1471
      * @return TextBox1471
      */
     @JsonProperty("TextBox1471")
-    public TextBox getTextBox1471() {
+    public TextBoxNum getTextBox1471() {
         return TextBox1471;
     }
 
@@ -20227,7 +20227,7 @@ class TableCell1634Attbl4 extends TableCell {
      * @param TextBox1471 TextBox1471
      */
     @JsonProperty("TextBox1471")
-    public void setTextBox1471(TextBox TextBox1471) {
+    public void setTextBox1471(TextBoxNum TextBox1471) {
         this.TextBox1471 = TextBox1471;
     }
 
@@ -20241,16 +20241,16 @@ class TableCell1634Attbl4 extends TableCell {
  */
 class TableCell1635Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1472")
-    private TextBox TextBox1472;
+    private TextBoxNum TextBox1472;
 
     /*
      * getTextBox1472
      * @return TextBox1472
      */
     @JsonProperty("TextBox1472")
-    public TextBox getTextBox1472() {
+    public TextBoxNum getTextBox1472() {
         return TextBox1472;
     }
 
@@ -20259,7 +20259,7 @@ class TableCell1635Attbl4 extends TableCell {
      * @param TextBox1472 TextBox1472
      */
     @JsonProperty("TextBox1472")
-    public void setTextBox1472(TextBox TextBox1472) {
+    public void setTextBox1472(TextBoxNum TextBox1472) {
         this.TextBox1472 = TextBox1472;
     }
 
@@ -20273,16 +20273,16 @@ class TableCell1635Attbl4 extends TableCell {
  */
 class TableCell1636Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1473")
-    private TextBox TextBox1473;
+    private TextBoxNum TextBox1473;
 
     /*
      * getTextBox1473
      * @return TextBox1473
      */
     @JsonProperty("TextBox1473")
-    public TextBox getTextBox1473() {
+    public TextBoxNum getTextBox1473() {
         return TextBox1473;
     }
 
@@ -20291,7 +20291,7 @@ class TableCell1636Attbl4 extends TableCell {
      * @param TextBox1473 TextBox1473
      */
     @JsonProperty("TextBox1473")
-    public void setTextBox1473(TextBox TextBox1473) {
+    public void setTextBox1473(TextBoxNum TextBox1473) {
         this.TextBox1473 = TextBox1473;
     }
 
@@ -20305,16 +20305,16 @@ class TableCell1636Attbl4 extends TableCell {
  */
 class TableCell1637Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1474")
-    private TextBox TextBox1474;
+    private TextBoxNum TextBox1474;
 
     /*
      * getTextBox1474
      * @return TextBox1474
      */
     @JsonProperty("TextBox1474")
-    public TextBox getTextBox1474() {
+    public TextBoxNum getTextBox1474() {
         return TextBox1474;
     }
 
@@ -20323,7 +20323,7 @@ class TableCell1637Attbl4 extends TableCell {
      * @param TextBox1474 TextBox1474
      */
     @JsonProperty("TextBox1474")
-    public void setTextBox1474(TextBox TextBox1474) {
+    public void setTextBox1474(TextBoxNum TextBox1474) {
         this.TextBox1474 = TextBox1474;
     }
 
@@ -20337,16 +20337,16 @@ class TableCell1637Attbl4 extends TableCell {
  */
 class TableCell1638Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1475")
-    private TextBox TextBox1475;
+    private TextBoxNum TextBox1475;
 
     /*
      * getTextBox1475
      * @return TextBox1475
      */
     @JsonProperty("TextBox1475")
-    public TextBox getTextBox1475() {
+    public TextBoxNum getTextBox1475() {
         return TextBox1475;
     }
 
@@ -20355,7 +20355,7 @@ class TableCell1638Attbl4 extends TableCell {
      * @param TextBox1475 TextBox1475
      */
     @JsonProperty("TextBox1475")
-    public void setTextBox1475(TextBox TextBox1475) {
+    public void setTextBox1475(TextBoxNum TextBox1475) {
         this.TextBox1475 = TextBox1475;
     }
 
@@ -20369,16 +20369,16 @@ class TableCell1638Attbl4 extends TableCell {
  */
 class TableCell1639Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1476")
-    private TextBox TextBox1476;
+    private TextBoxNum TextBox1476;
 
     /*
      * getTextBox1476
      * @return TextBox1476
      */
     @JsonProperty("TextBox1476")
-    public TextBox getTextBox1476() {
+    public TextBoxNum getTextBox1476() {
         return TextBox1476;
     }
 
@@ -20387,7 +20387,7 @@ class TableCell1639Attbl4 extends TableCell {
      * @param TextBox1476 TextBox1476
      */
     @JsonProperty("TextBox1476")
-    public void setTextBox1476(TextBox TextBox1476) {
+    public void setTextBox1476(TextBoxNum TextBox1476) {
         this.TextBox1476 = TextBox1476;
     }
 
@@ -20401,16 +20401,16 @@ class TableCell1639Attbl4 extends TableCell {
  */
 class TableCell1640Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1477")
-    private TextBox TextBox1477;
+    private TextBoxNum TextBox1477;
 
     /*
      * getTextBox1477
      * @return TextBox1477
      */
     @JsonProperty("TextBox1477")
-    public TextBox getTextBox1477() {
+    public TextBoxNum getTextBox1477() {
         return TextBox1477;
     }
 
@@ -20419,7 +20419,7 @@ class TableCell1640Attbl4 extends TableCell {
      * @param TextBox1477 TextBox1477
      */
     @JsonProperty("TextBox1477")
-    public void setTextBox1477(TextBox TextBox1477) {
+    public void setTextBox1477(TextBoxNum TextBox1477) {
         this.TextBox1477 = TextBox1477;
     }
 
@@ -20433,16 +20433,16 @@ class TableCell1640Attbl4 extends TableCell {
  */
 class TableCell1641Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1478")
-    private TextBox TextBox1478;
+    private TextBoxNum TextBox1478;
 
     /*
      * getTextBox1478
      * @return TextBox1478
      */
     @JsonProperty("TextBox1478")
-    public TextBox getTextBox1478() {
+    public TextBoxNum getTextBox1478() {
         return TextBox1478;
     }
 
@@ -20451,7 +20451,7 @@ class TableCell1641Attbl4 extends TableCell {
      * @param TextBox1478 TextBox1478
      */
     @JsonProperty("TextBox1478")
-    public void setTextBox1478(TextBox TextBox1478) {
+    public void setTextBox1478(TextBoxNum TextBox1478) {
         this.TextBox1478 = TextBox1478;
     }
 
@@ -20464,7 +20464,7 @@ class TableCell1641Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1642Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -20476,16 +20476,16 @@ class TableCell1642Attbl4 extends TableCell {
  */
 class TableCell1643Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1479")
-    private TextBox TextBox1479;
+    private TextBoxNum TextBox1479;
 
     /*
      * getTextBox1479
      * @return TextBox1479
      */
     @JsonProperty("TextBox1479")
-    public TextBox getTextBox1479() {
+    public TextBoxNum getTextBox1479() {
         return TextBox1479;
     }
 
@@ -20494,7 +20494,7 @@ class TableCell1643Attbl4 extends TableCell {
      * @param TextBox1479 TextBox1479
      */
     @JsonProperty("TextBox1479")
-    public void setTextBox1479(TextBox TextBox1479) {
+    public void setTextBox1479(TextBoxNum TextBox1479) {
         this.TextBox1479 = TextBox1479;
     }
 
@@ -20508,16 +20508,16 @@ class TableCell1643Attbl4 extends TableCell {
  */
 class TableCell1644Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1480")
-    private TextBox TextBox1480;
+    private TextBoxNum TextBox1480;
 
     /*
      * getTextBox1480
      * @return TextBox1480
      */
     @JsonProperty("TextBox1480")
-    public TextBox getTextBox1480() {
+    public TextBoxNum getTextBox1480() {
         return TextBox1480;
     }
 
@@ -20526,7 +20526,7 @@ class TableCell1644Attbl4 extends TableCell {
      * @param TextBox1480 TextBox1480
      */
     @JsonProperty("TextBox1480")
-    public void setTextBox1480(TextBox TextBox1480) {
+    public void setTextBox1480(TextBoxNum TextBox1480) {
         this.TextBox1480 = TextBox1480;
     }
 
@@ -20540,16 +20540,16 @@ class TableCell1644Attbl4 extends TableCell {
  */
 class TableCell1645Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1481")
-    private TextBox TextBox1481;
+    private TextBoxNum TextBox1481;
 
     /*
      * getTextBox1481
      * @return TextBox1481
      */
     @JsonProperty("TextBox1481")
-    public TextBox getTextBox1481() {
+    public TextBoxNum getTextBox1481() {
         return TextBox1481;
     }
 
@@ -20558,7 +20558,7 @@ class TableCell1645Attbl4 extends TableCell {
      * @param TextBox1481 TextBox1481
      */
     @JsonProperty("TextBox1481")
-    public void setTextBox1481(TextBox TextBox1481) {
+    public void setTextBox1481(TextBoxNum TextBox1481) {
         this.TextBox1481 = TextBox1481;
     }
 
@@ -20572,16 +20572,16 @@ class TableCell1645Attbl4 extends TableCell {
  */
 class TableCell1646Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1482")
-    private TextBox TextBox1482;
+    private TextBoxNum TextBox1482;
 
     /*
      * getTextBox1482
      * @return TextBox1482
      */
     @JsonProperty("TextBox1482")
-    public TextBox getTextBox1482() {
+    public TextBoxNum getTextBox1482() {
         return TextBox1482;
     }
 
@@ -20590,7 +20590,7 @@ class TableCell1646Attbl4 extends TableCell {
      * @param TextBox1482 TextBox1482
      */
     @JsonProperty("TextBox1482")
-    public void setTextBox1482(TextBox TextBox1482) {
+    public void setTextBox1482(TextBoxNum TextBox1482) {
         this.TextBox1482 = TextBox1482;
     }
 
@@ -20604,16 +20604,16 @@ class TableCell1646Attbl4 extends TableCell {
  */
 class TableCell1647Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1483")
-    private TextBox TextBox1483;
+    private TextBoxNum TextBox1483;
 
     /*
      * getTextBox1483
      * @return TextBox1483
      */
     @JsonProperty("TextBox1483")
-    public TextBox getTextBox1483() {
+    public TextBoxNum getTextBox1483() {
         return TextBox1483;
     }
 
@@ -20622,7 +20622,7 @@ class TableCell1647Attbl4 extends TableCell {
      * @param TextBox1483 TextBox1483
      */
     @JsonProperty("TextBox1483")
-    public void setTextBox1483(TextBox TextBox1483) {
+    public void setTextBox1483(TextBoxNum TextBox1483) {
         this.TextBox1483 = TextBox1483;
     }
 
@@ -20636,16 +20636,16 @@ class TableCell1647Attbl4 extends TableCell {
  */
 class TableCell1648Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1484")
-    private TextBox TextBox1484;
+    private TextBoxNum TextBox1484;
 
     /*
      * getTextBox1484
      * @return TextBox1484
      */
     @JsonProperty("TextBox1484")
-    public TextBox getTextBox1484() {
+    public TextBoxNum getTextBox1484() {
         return TextBox1484;
     }
 
@@ -20654,7 +20654,7 @@ class TableCell1648Attbl4 extends TableCell {
      * @param TextBox1484 TextBox1484
      */
     @JsonProperty("TextBox1484")
-    public void setTextBox1484(TextBox TextBox1484) {
+    public void setTextBox1484(TextBoxNum TextBox1484) {
         this.TextBox1484 = TextBox1484;
     }
 
@@ -20668,16 +20668,16 @@ class TableCell1648Attbl4 extends TableCell {
  */
 class TableCell1649Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1485")
-    private TextBox TextBox1485;
+    private TextBoxNum TextBox1485;
 
     /*
      * getTextBox1485
      * @return TextBox1485
      */
     @JsonProperty("TextBox1485")
-    public TextBox getTextBox1485() {
+    public TextBoxNum getTextBox1485() {
         return TextBox1485;
     }
 
@@ -20686,7 +20686,7 @@ class TableCell1649Attbl4 extends TableCell {
      * @param TextBox1485 TextBox1485
      */
     @JsonProperty("TextBox1485")
-    public void setTextBox1485(TextBox TextBox1485) {
+    public void setTextBox1485(TextBoxNum TextBox1485) {
         this.TextBox1485 = TextBox1485;
     }
 
@@ -20700,16 +20700,16 @@ class TableCell1649Attbl4 extends TableCell {
  */
 class TableCell1650Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1486")
-    private TextBox TextBox1486;
+    private TextBoxNum TextBox1486;
 
     /*
      * getTextBox1486
      * @return TextBox1486
      */
     @JsonProperty("TextBox1486")
-    public TextBox getTextBox1486() {
+    public TextBoxNum getTextBox1486() {
         return TextBox1486;
     }
 
@@ -20718,7 +20718,7 @@ class TableCell1650Attbl4 extends TableCell {
      * @param TextBox1486 TextBox1486
      */
     @JsonProperty("TextBox1486")
-    public void setTextBox1486(TextBox TextBox1486) {
+    public void setTextBox1486(TextBoxNum TextBox1486) {
         this.TextBox1486 = TextBox1486;
     }
 
@@ -20732,16 +20732,16 @@ class TableCell1650Attbl4 extends TableCell {
  */
 class TableCell1651Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1487")
-    private TextBox TextBox1487;
+    private TextBoxNum TextBox1487;
 
     /*
      * getTextBox1487
      * @return TextBox1487
      */
     @JsonProperty("TextBox1487")
-    public TextBox getTextBox1487() {
+    public TextBoxNum getTextBox1487() {
         return TextBox1487;
     }
 
@@ -20750,7 +20750,7 @@ class TableCell1651Attbl4 extends TableCell {
      * @param TextBox1487 TextBox1487
      */
     @JsonProperty("TextBox1487")
-    public void setTextBox1487(TextBox TextBox1487) {
+    public void setTextBox1487(TextBoxNum TextBox1487) {
         this.TextBox1487 = TextBox1487;
     }
 
@@ -20764,16 +20764,16 @@ class TableCell1651Attbl4 extends TableCell {
  */
 class TableCell1652Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1488")
-    private TextBox TextBox1488;
+    private TextBoxNum TextBox1488;
 
     /*
      * getTextBox1488
      * @return TextBox1488
      */
     @JsonProperty("TextBox1488")
-    public TextBox getTextBox1488() {
+    public TextBoxNum getTextBox1488() {
         return TextBox1488;
     }
 
@@ -20782,7 +20782,7 @@ class TableCell1652Attbl4 extends TableCell {
      * @param TextBox1488 TextBox1488
      */
     @JsonProperty("TextBox1488")
-    public void setTextBox1488(TextBox TextBox1488) {
+    public void setTextBox1488(TextBoxNum TextBox1488) {
         this.TextBox1488 = TextBox1488;
     }
 
@@ -20795,7 +20795,7 @@ class TableCell1652Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1653Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -20807,16 +20807,16 @@ class TableCell1653Attbl4 extends TableCell {
  */
 class TableCell1654Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1489")
-    private TextBox TextBox1489;
+    private TextBoxNum TextBox1489;
 
     /*
      * getTextBox1489
      * @return TextBox1489
      */
     @JsonProperty("TextBox1489")
-    public TextBox getTextBox1489() {
+    public TextBoxNum getTextBox1489() {
         return TextBox1489;
     }
 
@@ -20825,7 +20825,7 @@ class TableCell1654Attbl4 extends TableCell {
      * @param TextBox1489 TextBox1489
      */
     @JsonProperty("TextBox1489")
-    public void setTextBox1489(TextBox TextBox1489) {
+    public void setTextBox1489(TextBoxNum TextBox1489) {
         this.TextBox1489 = TextBox1489;
     }
 
@@ -20839,16 +20839,16 @@ class TableCell1654Attbl4 extends TableCell {
  */
 class TableCell1655Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1490")
-    private TextBox TextBox1490;
+    private TextBoxNum TextBox1490;
 
     /*
      * getTextBox1490
      * @return TextBox1490
      */
     @JsonProperty("TextBox1490")
-    public TextBox getTextBox1490() {
+    public TextBoxNum getTextBox1490() {
         return TextBox1490;
     }
 
@@ -20857,7 +20857,7 @@ class TableCell1655Attbl4 extends TableCell {
      * @param TextBox1490 TextBox1490
      */
     @JsonProperty("TextBox1490")
-    public void setTextBox1490(TextBox TextBox1490) {
+    public void setTextBox1490(TextBoxNum TextBox1490) {
         this.TextBox1490 = TextBox1490;
     }
 
@@ -20871,16 +20871,16 @@ class TableCell1655Attbl4 extends TableCell {
  */
 class TableCell1656Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1491")
-    private TextBox TextBox1491;
+    private TextBoxNum TextBox1491;
 
     /*
      * getTextBox1491
      * @return TextBox1491
      */
     @JsonProperty("TextBox1491")
-    public TextBox getTextBox1491() {
+    public TextBoxNum getTextBox1491() {
         return TextBox1491;
     }
 
@@ -20889,7 +20889,7 @@ class TableCell1656Attbl4 extends TableCell {
      * @param TextBox1491 TextBox1491
      */
     @JsonProperty("TextBox1491")
-    public void setTextBox1491(TextBox TextBox1491) {
+    public void setTextBox1491(TextBoxNum TextBox1491) {
         this.TextBox1491 = TextBox1491;
     }
 
@@ -20903,16 +20903,16 @@ class TableCell1656Attbl4 extends TableCell {
  */
 class TableCell1657Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1492")
-    private TextBox TextBox1492;
+    private TextBoxNum TextBox1492;
 
     /*
      * getTextBox1492
      * @return TextBox1492
      */
     @JsonProperty("TextBox1492")
-    public TextBox getTextBox1492() {
+    public TextBoxNum getTextBox1492() {
         return TextBox1492;
     }
 
@@ -20921,7 +20921,7 @@ class TableCell1657Attbl4 extends TableCell {
      * @param TextBox1492 TextBox1492
      */
     @JsonProperty("TextBox1492")
-    public void setTextBox1492(TextBox TextBox1492) {
+    public void setTextBox1492(TextBoxNum TextBox1492) {
         this.TextBox1492 = TextBox1492;
     }
 
@@ -20935,16 +20935,16 @@ class TableCell1657Attbl4 extends TableCell {
  */
 class TableCell1658Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1493")
-    private TextBox TextBox1493;
+    private TextBoxNum TextBox1493;
 
     /*
      * getTextBox1493
      * @return TextBox1493
      */
     @JsonProperty("TextBox1493")
-    public TextBox getTextBox1493() {
+    public TextBoxNum getTextBox1493() {
         return TextBox1493;
     }
 
@@ -20953,7 +20953,7 @@ class TableCell1658Attbl4 extends TableCell {
      * @param TextBox1493 TextBox1493
      */
     @JsonProperty("TextBox1493")
-    public void setTextBox1493(TextBox TextBox1493) {
+    public void setTextBox1493(TextBoxNum TextBox1493) {
         this.TextBox1493 = TextBox1493;
     }
 
@@ -20967,16 +20967,16 @@ class TableCell1658Attbl4 extends TableCell {
  */
 class TableCell1659Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1494")
-    private TextBox TextBox1494;
+    private TextBoxNum TextBox1494;
 
     /*
      * getTextBox1494
      * @return TextBox1494
      */
     @JsonProperty("TextBox1494")
-    public TextBox getTextBox1494() {
+    public TextBoxNum getTextBox1494() {
         return TextBox1494;
     }
 
@@ -20985,7 +20985,7 @@ class TableCell1659Attbl4 extends TableCell {
      * @param TextBox1494 TextBox1494
      */
     @JsonProperty("TextBox1494")
-    public void setTextBox1494(TextBox TextBox1494) {
+    public void setTextBox1494(TextBoxNum TextBox1494) {
         this.TextBox1494 = TextBox1494;
     }
 
@@ -20999,16 +20999,16 @@ class TableCell1659Attbl4 extends TableCell {
  */
 class TableCell1660Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1495")
-    private TextBox TextBox1495;
+    private TextBoxNum TextBox1495;
 
     /*
      * getTextBox1495
      * @return TextBox1495
      */
     @JsonProperty("TextBox1495")
-    public TextBox getTextBox1495() {
+    public TextBoxNum getTextBox1495() {
         return TextBox1495;
     }
 
@@ -21017,7 +21017,7 @@ class TableCell1660Attbl4 extends TableCell {
      * @param TextBox1495 TextBox1495
      */
     @JsonProperty("TextBox1495")
-    public void setTextBox1495(TextBox TextBox1495) {
+    public void setTextBox1495(TextBoxNum TextBox1495) {
         this.TextBox1495 = TextBox1495;
     }
 
@@ -21031,16 +21031,16 @@ class TableCell1660Attbl4 extends TableCell {
  */
 class TableCell1661Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1496")
-    private TextBox TextBox1496;
+    private TextBoxNum TextBox1496;
 
     /*
      * getTextBox1496
      * @return TextBox1496
      */
     @JsonProperty("TextBox1496")
-    public TextBox getTextBox1496() {
+    public TextBoxNum getTextBox1496() {
         return TextBox1496;
     }
 
@@ -21049,7 +21049,7 @@ class TableCell1661Attbl4 extends TableCell {
      * @param TextBox1496 TextBox1496
      */
     @JsonProperty("TextBox1496")
-    public void setTextBox1496(TextBox TextBox1496) {
+    public void setTextBox1496(TextBoxNum TextBox1496) {
         this.TextBox1496 = TextBox1496;
     }
 
@@ -21063,16 +21063,16 @@ class TableCell1661Attbl4 extends TableCell {
  */
 class TableCell1662Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1497")
-    private TextBox TextBox1497;
+    private TextBoxNum TextBox1497;
 
     /*
      * getTextBox1497
      * @return TextBox1497
      */
     @JsonProperty("TextBox1497")
-    public TextBox getTextBox1497() {
+    public TextBoxNum getTextBox1497() {
         return TextBox1497;
     }
 
@@ -21081,7 +21081,7 @@ class TableCell1662Attbl4 extends TableCell {
      * @param TextBox1497 TextBox1497
      */
     @JsonProperty("TextBox1497")
-    public void setTextBox1497(TextBox TextBox1497) {
+    public void setTextBox1497(TextBoxNum TextBox1497) {
         this.TextBox1497 = TextBox1497;
     }
 
@@ -21095,16 +21095,16 @@ class TableCell1662Attbl4 extends TableCell {
  */
 class TableCell1663Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1498")
-    private TextBox TextBox1498;
+    private TextBoxNum TextBox1498;
 
     /*
      * getTextBox1498
      * @return TextBox1498
      */
     @JsonProperty("TextBox1498")
-    public TextBox getTextBox1498() {
+    public TextBoxNum getTextBox1498() {
         return TextBox1498;
     }
 
@@ -21113,7 +21113,7 @@ class TableCell1663Attbl4 extends TableCell {
      * @param TextBox1498 TextBox1498
      */
     @JsonProperty("TextBox1498")
-    public void setTextBox1498(TextBox TextBox1498) {
+    public void setTextBox1498(TextBoxNum TextBox1498) {
         this.TextBox1498 = TextBox1498;
     }
 
@@ -21126,7 +21126,7 @@ class TableCell1663Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1664Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -21138,16 +21138,16 @@ class TableCell1664Attbl4 extends TableCell {
  */
 class TableCell1665Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1499")
-    private TextBox TextBox1499;
+    private TextBoxNum TextBox1499;
 
     /*
      * getTextBox1499
      * @return TextBox1499
      */
     @JsonProperty("TextBox1499")
-    public TextBox getTextBox1499() {
+    public TextBoxNum getTextBox1499() {
         return TextBox1499;
     }
 
@@ -21156,7 +21156,7 @@ class TableCell1665Attbl4 extends TableCell {
      * @param TextBox1499 TextBox1499
      */
     @JsonProperty("TextBox1499")
-    public void setTextBox1499(TextBox TextBox1499) {
+    public void setTextBox1499(TextBoxNum TextBox1499) {
         this.TextBox1499 = TextBox1499;
     }
 
@@ -21170,16 +21170,16 @@ class TableCell1665Attbl4 extends TableCell {
  */
 class TableCell1666Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1500")
-    private TextBox TextBox1500;
+    private TextBoxNum TextBox1500;
 
     /*
      * getTextBox1500
      * @return TextBox1500
      */
     @JsonProperty("TextBox1500")
-    public TextBox getTextBox1500() {
+    public TextBoxNum getTextBox1500() {
         return TextBox1500;
     }
 
@@ -21188,7 +21188,7 @@ class TableCell1666Attbl4 extends TableCell {
      * @param TextBox1500 TextBox1500
      */
     @JsonProperty("TextBox1500")
-    public void setTextBox1500(TextBox TextBox1500) {
+    public void setTextBox1500(TextBoxNum TextBox1500) {
         this.TextBox1500 = TextBox1500;
     }
 
@@ -21202,16 +21202,16 @@ class TableCell1666Attbl4 extends TableCell {
  */
 class TableCell1667Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1501")
-    private TextBox TextBox1501;
+    private TextBoxNum TextBox1501;
 
     /*
      * getTextBox1501
      * @return TextBox1501
      */
     @JsonProperty("TextBox1501")
-    public TextBox getTextBox1501() {
+    public TextBoxNum getTextBox1501() {
         return TextBox1501;
     }
 
@@ -21220,7 +21220,7 @@ class TableCell1667Attbl4 extends TableCell {
      * @param TextBox1501 TextBox1501
      */
     @JsonProperty("TextBox1501")
-    public void setTextBox1501(TextBox TextBox1501) {
+    public void setTextBox1501(TextBoxNum TextBox1501) {
         this.TextBox1501 = TextBox1501;
     }
 
@@ -21234,16 +21234,16 @@ class TableCell1667Attbl4 extends TableCell {
  */
 class TableCell1668Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1502")
-    private TextBox TextBox1502;
+    private TextBoxNum TextBox1502;
 
     /*
      * getTextBox1502
      * @return TextBox1502
      */
     @JsonProperty("TextBox1502")
-    public TextBox getTextBox1502() {
+    public TextBoxNum getTextBox1502() {
         return TextBox1502;
     }
 
@@ -21252,7 +21252,7 @@ class TableCell1668Attbl4 extends TableCell {
      * @param TextBox1502 TextBox1502
      */
     @JsonProperty("TextBox1502")
-    public void setTextBox1502(TextBox TextBox1502) {
+    public void setTextBox1502(TextBoxNum TextBox1502) {
         this.TextBox1502 = TextBox1502;
     }
 
@@ -21266,16 +21266,16 @@ class TableCell1668Attbl4 extends TableCell {
  */
 class TableCell1669Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1503")
-    private TextBox TextBox1503;
+    private TextBoxNum TextBox1503;
 
     /*
      * getTextBox1503
      * @return TextBox1503
      */
     @JsonProperty("TextBox1503")
-    public TextBox getTextBox1503() {
+    public TextBoxNum getTextBox1503() {
         return TextBox1503;
     }
 
@@ -21284,7 +21284,7 @@ class TableCell1669Attbl4 extends TableCell {
      * @param TextBox1503 TextBox1503
      */
     @JsonProperty("TextBox1503")
-    public void setTextBox1503(TextBox TextBox1503) {
+    public void setTextBox1503(TextBoxNum TextBox1503) {
         this.TextBox1503 = TextBox1503;
     }
 
@@ -21298,16 +21298,16 @@ class TableCell1669Attbl4 extends TableCell {
  */
 class TableCell1670Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1504")
-    private TextBox TextBox1504;
+    private TextBoxNum TextBox1504;
 
     /*
      * getTextBox1504
      * @return TextBox1504
      */
     @JsonProperty("TextBox1504")
-    public TextBox getTextBox1504() {
+    public TextBoxNum getTextBox1504() {
         return TextBox1504;
     }
 
@@ -21316,7 +21316,7 @@ class TableCell1670Attbl4 extends TableCell {
      * @param TextBox1504 TextBox1504
      */
     @JsonProperty("TextBox1504")
-    public void setTextBox1504(TextBox TextBox1504) {
+    public void setTextBox1504(TextBoxNum TextBox1504) {
         this.TextBox1504 = TextBox1504;
     }
 
@@ -21330,16 +21330,16 @@ class TableCell1670Attbl4 extends TableCell {
  */
 class TableCell1671Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1505")
-    private TextBox TextBox1505;
+    private TextBoxNum TextBox1505;
 
     /*
      * getTextBox1505
      * @return TextBox1505
      */
     @JsonProperty("TextBox1505")
-    public TextBox getTextBox1505() {
+    public TextBoxNum getTextBox1505() {
         return TextBox1505;
     }
 
@@ -21348,7 +21348,7 @@ class TableCell1671Attbl4 extends TableCell {
      * @param TextBox1505 TextBox1505
      */
     @JsonProperty("TextBox1505")
-    public void setTextBox1505(TextBox TextBox1505) {
+    public void setTextBox1505(TextBoxNum TextBox1505) {
         this.TextBox1505 = TextBox1505;
     }
 
@@ -21362,16 +21362,16 @@ class TableCell1671Attbl4 extends TableCell {
  */
 class TableCell1672Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1506")
-    private TextBox TextBox1506;
+    private TextBoxNum TextBox1506;
 
     /*
      * getTextBox1506
      * @return TextBox1506
      */
     @JsonProperty("TextBox1506")
-    public TextBox getTextBox1506() {
+    public TextBoxNum getTextBox1506() {
         return TextBox1506;
     }
 
@@ -21380,7 +21380,7 @@ class TableCell1672Attbl4 extends TableCell {
      * @param TextBox1506 TextBox1506
      */
     @JsonProperty("TextBox1506")
-    public void setTextBox1506(TextBox TextBox1506) {
+    public void setTextBox1506(TextBoxNum TextBox1506) {
         this.TextBox1506 = TextBox1506;
     }
 
@@ -21394,16 +21394,16 @@ class TableCell1672Attbl4 extends TableCell {
  */
 class TableCell1673Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1507")
-    private TextBox TextBox1507;
+    private TextBoxNum TextBox1507;
 
     /*
      * getTextBox1507
      * @return TextBox1507
      */
     @JsonProperty("TextBox1507")
-    public TextBox getTextBox1507() {
+    public TextBoxNum getTextBox1507() {
         return TextBox1507;
     }
 
@@ -21412,7 +21412,7 @@ class TableCell1673Attbl4 extends TableCell {
      * @param TextBox1507 TextBox1507
      */
     @JsonProperty("TextBox1507")
-    public void setTextBox1507(TextBox TextBox1507) {
+    public void setTextBox1507(TextBoxNum TextBox1507) {
         this.TextBox1507 = TextBox1507;
     }
 
@@ -21426,16 +21426,16 @@ class TableCell1673Attbl4 extends TableCell {
  */
 class TableCell1674Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1508")
-    private TextBox TextBox1508;
+    private TextBoxNum TextBox1508;
 
     /*
      * getTextBox1508
      * @return TextBox1508
      */
     @JsonProperty("TextBox1508")
-    public TextBox getTextBox1508() {
+    public TextBoxNum getTextBox1508() {
         return TextBox1508;
     }
 
@@ -21444,7 +21444,7 @@ class TableCell1674Attbl4 extends TableCell {
      * @param TextBox1508 TextBox1508
      */
     @JsonProperty("TextBox1508")
-    public void setTextBox1508(TextBox TextBox1508) {
+    public void setTextBox1508(TextBoxNum TextBox1508) {
         this.TextBox1508 = TextBox1508;
     }
 
@@ -21457,7 +21457,7 @@ class TableCell1674Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1675Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -21469,16 +21469,16 @@ class TableCell1675Attbl4 extends TableCell {
  */
 class TableCell1676Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1509")
-    private TextBox TextBox1509;
+    private TextBoxNum TextBox1509;
 
     /*
      * getTextBox1509
      * @return TextBox1509
      */
     @JsonProperty("TextBox1509")
-    public TextBox getTextBox1509() {
+    public TextBoxNum getTextBox1509() {
         return TextBox1509;
     }
 
@@ -21487,7 +21487,7 @@ class TableCell1676Attbl4 extends TableCell {
      * @param TextBox1509 TextBox1509
      */
     @JsonProperty("TextBox1509")
-    public void setTextBox1509(TextBox TextBox1509) {
+    public void setTextBox1509(TextBoxNum TextBox1509) {
         this.TextBox1509 = TextBox1509;
     }
 
@@ -21501,16 +21501,16 @@ class TableCell1676Attbl4 extends TableCell {
  */
 class TableCell1677Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1510")
-    private TextBox TextBox1510;
+    private TextBoxNum TextBox1510;
 
     /*
      * getTextBox1510
      * @return TextBox1510
      */
     @JsonProperty("TextBox1510")
-    public TextBox getTextBox1510() {
+    public TextBoxNum getTextBox1510() {
         return TextBox1510;
     }
 
@@ -21519,7 +21519,7 @@ class TableCell1677Attbl4 extends TableCell {
      * @param TextBox1510 TextBox1510
      */
     @JsonProperty("TextBox1510")
-    public void setTextBox1510(TextBox TextBox1510) {
+    public void setTextBox1510(TextBoxNum TextBox1510) {
         this.TextBox1510 = TextBox1510;
     }
 
@@ -21533,16 +21533,16 @@ class TableCell1677Attbl4 extends TableCell {
  */
 class TableCell1678Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1511")
-    private TextBox TextBox1511;
+    private TextBoxNum TextBox1511;
 
     /*
      * getTextBox1511
      * @return TextBox1511
      */
     @JsonProperty("TextBox1511")
-    public TextBox getTextBox1511() {
+    public TextBoxNum getTextBox1511() {
         return TextBox1511;
     }
 
@@ -21551,7 +21551,7 @@ class TableCell1678Attbl4 extends TableCell {
      * @param TextBox1511 TextBox1511
      */
     @JsonProperty("TextBox1511")
-    public void setTextBox1511(TextBox TextBox1511) {
+    public void setTextBox1511(TextBoxNum TextBox1511) {
         this.TextBox1511 = TextBox1511;
     }
 
@@ -21565,16 +21565,16 @@ class TableCell1678Attbl4 extends TableCell {
  */
 class TableCell1679Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1512")
-    private TextBox TextBox1512;
+    private TextBoxNum TextBox1512;
 
     /*
      * getTextBox1512
      * @return TextBox1512
      */
     @JsonProperty("TextBox1512")
-    public TextBox getTextBox1512() {
+    public TextBoxNum getTextBox1512() {
         return TextBox1512;
     }
 
@@ -21583,7 +21583,7 @@ class TableCell1679Attbl4 extends TableCell {
      * @param TextBox1512 TextBox1512
      */
     @JsonProperty("TextBox1512")
-    public void setTextBox1512(TextBox TextBox1512) {
+    public void setTextBox1512(TextBoxNum TextBox1512) {
         this.TextBox1512 = TextBox1512;
     }
 
@@ -21597,16 +21597,16 @@ class TableCell1679Attbl4 extends TableCell {
  */
 class TableCell1680Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1513")
-    private TextBox TextBox1513;
+    private TextBoxNum TextBox1513;
 
     /*
      * getTextBox1513
      * @return TextBox1513
      */
     @JsonProperty("TextBox1513")
-    public TextBox getTextBox1513() {
+    public TextBoxNum getTextBox1513() {
         return TextBox1513;
     }
 
@@ -21615,7 +21615,7 @@ class TableCell1680Attbl4 extends TableCell {
      * @param TextBox1513 TextBox1513
      */
     @JsonProperty("TextBox1513")
-    public void setTextBox1513(TextBox TextBox1513) {
+    public void setTextBox1513(TextBoxNum TextBox1513) {
         this.TextBox1513 = TextBox1513;
     }
 
@@ -21629,16 +21629,16 @@ class TableCell1680Attbl4 extends TableCell {
  */
 class TableCell1681Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1514")
-    private TextBox TextBox1514;
+    private TextBoxNum TextBox1514;
 
     /*
      * getTextBox1514
      * @return TextBox1514
      */
     @JsonProperty("TextBox1514")
-    public TextBox getTextBox1514() {
+    public TextBoxNum getTextBox1514() {
         return TextBox1514;
     }
 
@@ -21647,7 +21647,7 @@ class TableCell1681Attbl4 extends TableCell {
      * @param TextBox1514 TextBox1514
      */
     @JsonProperty("TextBox1514")
-    public void setTextBox1514(TextBox TextBox1514) {
+    public void setTextBox1514(TextBoxNum TextBox1514) {
         this.TextBox1514 = TextBox1514;
     }
 
@@ -21661,16 +21661,16 @@ class TableCell1681Attbl4 extends TableCell {
  */
 class TableCell1682Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1515")
-    private TextBox TextBox1515;
+    private TextBoxNum TextBox1515;
 
     /*
      * getTextBox1515
      * @return TextBox1515
      */
     @JsonProperty("TextBox1515")
-    public TextBox getTextBox1515() {
+    public TextBoxNum getTextBox1515() {
         return TextBox1515;
     }
 
@@ -21679,7 +21679,7 @@ class TableCell1682Attbl4 extends TableCell {
      * @param TextBox1515 TextBox1515
      */
     @JsonProperty("TextBox1515")
-    public void setTextBox1515(TextBox TextBox1515) {
+    public void setTextBox1515(TextBoxNum TextBox1515) {
         this.TextBox1515 = TextBox1515;
     }
 
@@ -21693,16 +21693,16 @@ class TableCell1682Attbl4 extends TableCell {
  */
 class TableCell1683Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1516")
-    private TextBox TextBox1516;
+    private TextBoxNum TextBox1516;
 
     /*
      * getTextBox1516
      * @return TextBox1516
      */
     @JsonProperty("TextBox1516")
-    public TextBox getTextBox1516() {
+    public TextBoxNum getTextBox1516() {
         return TextBox1516;
     }
 
@@ -21711,7 +21711,7 @@ class TableCell1683Attbl4 extends TableCell {
      * @param TextBox1516 TextBox1516
      */
     @JsonProperty("TextBox1516")
-    public void setTextBox1516(TextBox TextBox1516) {
+    public void setTextBox1516(TextBoxNum TextBox1516) {
         this.TextBox1516 = TextBox1516;
     }
 
@@ -21725,16 +21725,16 @@ class TableCell1683Attbl4 extends TableCell {
  */
 class TableCell1684Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1517")
-    private TextBox TextBox1517;
+    private TextBoxNum TextBox1517;
 
     /*
      * getTextBox1517
      * @return TextBox1517
      */
     @JsonProperty("TextBox1517")
-    public TextBox getTextBox1517() {
+    public TextBoxNum getTextBox1517() {
         return TextBox1517;
     }
 
@@ -21743,7 +21743,7 @@ class TableCell1684Attbl4 extends TableCell {
      * @param TextBox1517 TextBox1517
      */
     @JsonProperty("TextBox1517")
-    public void setTextBox1517(TextBox TextBox1517) {
+    public void setTextBox1517(TextBoxNum TextBox1517) {
         this.TextBox1517 = TextBox1517;
     }
 
@@ -21757,16 +21757,16 @@ class TableCell1684Attbl4 extends TableCell {
  */
 class TableCell1685Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1518")
-    private TextBox TextBox1518;
+    private TextBoxNum TextBox1518;
 
     /*
      * getTextBox1518
      * @return TextBox1518
      */
     @JsonProperty("TextBox1518")
-    public TextBox getTextBox1518() {
+    public TextBoxNum getTextBox1518() {
         return TextBox1518;
     }
 
@@ -21775,7 +21775,7 @@ class TableCell1685Attbl4 extends TableCell {
      * @param TextBox1518 TextBox1518
      */
     @JsonProperty("TextBox1518")
-    public void setTextBox1518(TextBox TextBox1518) {
+    public void setTextBox1518(TextBoxNum TextBox1518) {
         this.TextBox1518 = TextBox1518;
     }
 
@@ -21789,16 +21789,16 @@ class TableCell1685Attbl4 extends TableCell {
  */
 class TableCell1686Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1519")
-    private TextBox TextBox1519;
+    private TextBoxNum TextBox1519;
 
     /*
      * getTextBox1519
      * @return TextBox1519
      */
     @JsonProperty("TextBox1519")
-    public TextBox getTextBox1519() {
+    public TextBoxNum getTextBox1519() {
         return TextBox1519;
     }
 
@@ -21807,7 +21807,7 @@ class TableCell1686Attbl4 extends TableCell {
      * @param TextBox1519 TextBox1519
      */
     @JsonProperty("TextBox1519")
-    public void setTextBox1519(TextBox TextBox1519) {
+    public void setTextBox1519(TextBoxNum TextBox1519) {
         this.TextBox1519 = TextBox1519;
     }
 
@@ -21821,16 +21821,16 @@ class TableCell1686Attbl4 extends TableCell {
  */
 class TableCell1687Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1520")
-    private TextBox TextBox1520;
+    private TextBoxNum TextBox1520;
 
     /*
      * getTextBox1520
      * @return TextBox1520
      */
     @JsonProperty("TextBox1520")
-    public TextBox getTextBox1520() {
+    public TextBoxNum getTextBox1520() {
         return TextBox1520;
     }
 
@@ -21839,7 +21839,7 @@ class TableCell1687Attbl4 extends TableCell {
      * @param TextBox1520 TextBox1520
      */
     @JsonProperty("TextBox1520")
-    public void setTextBox1520(TextBox TextBox1520) {
+    public void setTextBox1520(TextBoxNum TextBox1520) {
         this.TextBox1520 = TextBox1520;
     }
 
@@ -21853,16 +21853,16 @@ class TableCell1687Attbl4 extends TableCell {
  */
 class TableCell1688Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1521")
-    private TextBox TextBox1521;
+    private TextBoxNum TextBox1521;
 
     /*
      * getTextBox1521
      * @return TextBox1521
      */
     @JsonProperty("TextBox1521")
-    public TextBox getTextBox1521() {
+    public TextBoxNum getTextBox1521() {
         return TextBox1521;
     }
 
@@ -21871,7 +21871,7 @@ class TableCell1688Attbl4 extends TableCell {
      * @param TextBox1521 TextBox1521
      */
     @JsonProperty("TextBox1521")
-    public void setTextBox1521(TextBox TextBox1521) {
+    public void setTextBox1521(TextBoxNum TextBox1521) {
         this.TextBox1521 = TextBox1521;
     }
 
@@ -21885,16 +21885,16 @@ class TableCell1688Attbl4 extends TableCell {
  */
 class TableCell1689Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1522")
-    private TextBox TextBox1522;
+    private TextBoxNum TextBox1522;
 
     /*
      * getTextBox1522
      * @return TextBox1522
      */
     @JsonProperty("TextBox1522")
-    public TextBox getTextBox1522() {
+    public TextBoxNum getTextBox1522() {
         return TextBox1522;
     }
 
@@ -21903,7 +21903,7 @@ class TableCell1689Attbl4 extends TableCell {
      * @param TextBox1522 TextBox1522
      */
     @JsonProperty("TextBox1522")
-    public void setTextBox1522(TextBox TextBox1522) {
+    public void setTextBox1522(TextBoxNum TextBox1522) {
         this.TextBox1522 = TextBox1522;
     }
 
@@ -21917,16 +21917,16 @@ class TableCell1689Attbl4 extends TableCell {
  */
 class TableCell1690Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1523")
-    private TextBox TextBox1523;
+    private TextBoxNum TextBox1523;
 
     /*
      * getTextBox1523
      * @return TextBox1523
      */
     @JsonProperty("TextBox1523")
-    public TextBox getTextBox1523() {
+    public TextBoxNum getTextBox1523() {
         return TextBox1523;
     }
 
@@ -21935,7 +21935,7 @@ class TableCell1690Attbl4 extends TableCell {
      * @param TextBox1523 TextBox1523
      */
     @JsonProperty("TextBox1523")
-    public void setTextBox1523(TextBox TextBox1523) {
+    public void setTextBox1523(TextBoxNum TextBox1523) {
         this.TextBox1523 = TextBox1523;
     }
 
@@ -21949,16 +21949,16 @@ class TableCell1690Attbl4 extends TableCell {
  */
 class TableCell1691Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1524")
-    private TextBox TextBox1524;
+    private TextBoxNum TextBox1524;
 
     /*
      * getTextBox1524
      * @return TextBox1524
      */
     @JsonProperty("TextBox1524")
-    public TextBox getTextBox1524() {
+    public TextBoxNum getTextBox1524() {
         return TextBox1524;
     }
 
@@ -21967,7 +21967,7 @@ class TableCell1691Attbl4 extends TableCell {
      * @param TextBox1524 TextBox1524
      */
     @JsonProperty("TextBox1524")
-    public void setTextBox1524(TextBox TextBox1524) {
+    public void setTextBox1524(TextBoxNum TextBox1524) {
         this.TextBox1524 = TextBox1524;
     }
 
@@ -21981,16 +21981,16 @@ class TableCell1691Attbl4 extends TableCell {
  */
 class TableCell1692Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1525")
-    private TextBox TextBox1525;
+    private TextBoxNum TextBox1525;
 
     /*
      * getTextBox1525
      * @return TextBox1525
      */
     @JsonProperty("TextBox1525")
-    public TextBox getTextBox1525() {
+    public TextBoxNum getTextBox1525() {
         return TextBox1525;
     }
 
@@ -21999,7 +21999,7 @@ class TableCell1692Attbl4 extends TableCell {
      * @param TextBox1525 TextBox1525
      */
     @JsonProperty("TextBox1525")
-    public void setTextBox1525(TextBox TextBox1525) {
+    public void setTextBox1525(TextBoxNum TextBox1525) {
         this.TextBox1525 = TextBox1525;
     }
 
@@ -22013,16 +22013,16 @@ class TableCell1692Attbl4 extends TableCell {
  */
 class TableCell1693Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1526")
-    private TextBox TextBox1526;
+    private TextBoxNum TextBox1526;
 
     /*
      * getTextBox1526
      * @return TextBox1526
      */
     @JsonProperty("TextBox1526")
-    public TextBox getTextBox1526() {
+    public TextBoxNum getTextBox1526() {
         return TextBox1526;
     }
 
@@ -22031,7 +22031,7 @@ class TableCell1693Attbl4 extends TableCell {
      * @param TextBox1526 TextBox1526
      */
     @JsonProperty("TextBox1526")
-    public void setTextBox1526(TextBox TextBox1526) {
+    public void setTextBox1526(TextBoxNum TextBox1526) {
         this.TextBox1526 = TextBox1526;
     }
 
@@ -22045,16 +22045,16 @@ class TableCell1693Attbl4 extends TableCell {
  */
 class TableCell1694Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1527")
-    private TextBox TextBox1527;
+    private TextBoxNum TextBox1527;
 
     /*
      * getTextBox1527
      * @return TextBox1527
      */
     @JsonProperty("TextBox1527")
-    public TextBox getTextBox1527() {
+    public TextBoxNum getTextBox1527() {
         return TextBox1527;
     }
 
@@ -22063,7 +22063,7 @@ class TableCell1694Attbl4 extends TableCell {
      * @param TextBox1527 TextBox1527
      */
     @JsonProperty("TextBox1527")
-    public void setTextBox1527(TextBox TextBox1527) {
+    public void setTextBox1527(TextBoxNum TextBox1527) {
         this.TextBox1527 = TextBox1527;
     }
 
@@ -22077,16 +22077,16 @@ class TableCell1694Attbl4 extends TableCell {
  */
 class TableCell1695Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1528")
-    private TextBox TextBox1528;
+    private TextBoxNum TextBox1528;
 
     /*
      * getTextBox1528
      * @return TextBox1528
      */
     @JsonProperty("TextBox1528")
-    public TextBox getTextBox1528() {
+    public TextBoxNum getTextBox1528() {
         return TextBox1528;
     }
 
@@ -22095,7 +22095,7 @@ class TableCell1695Attbl4 extends TableCell {
      * @param TextBox1528 TextBox1528
      */
     @JsonProperty("TextBox1528")
-    public void setTextBox1528(TextBox TextBox1528) {
+    public void setTextBox1528(TextBoxNum TextBox1528) {
         this.TextBox1528 = TextBox1528;
     }
 
@@ -22109,16 +22109,16 @@ class TableCell1695Attbl4 extends TableCell {
  */
 class TableCell1696Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1529")
-    private TextBox TextBox1529;
+    private TextBoxNum TextBox1529;
 
     /*
      * getTextBox1529
      * @return TextBox1529
      */
     @JsonProperty("TextBox1529")
-    public TextBox getTextBox1529() {
+    public TextBoxNum getTextBox1529() {
         return TextBox1529;
     }
 
@@ -22127,7 +22127,7 @@ class TableCell1696Attbl4 extends TableCell {
      * @param TextBox1529 TextBox1529
      */
     @JsonProperty("TextBox1529")
-    public void setTextBox1529(TextBox TextBox1529) {
+    public void setTextBox1529(TextBoxNum TextBox1529) {
         this.TextBox1529 = TextBox1529;
     }
 
@@ -22140,7 +22140,7 @@ class TableCell1696Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1697Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -22152,16 +22152,16 @@ class TableCell1697Attbl4 extends TableCell {
  */
 class TableCell1698Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1530")
-    private TextBox TextBox1530;
+    private TextBoxNum TextBox1530;
 
     /*
      * getTextBox1530
      * @return TextBox1530
      */
     @JsonProperty("TextBox1530")
-    public TextBox getTextBox1530() {
+    public TextBoxNum getTextBox1530() {
         return TextBox1530;
     }
 
@@ -22170,7 +22170,7 @@ class TableCell1698Attbl4 extends TableCell {
      * @param TextBox1530 TextBox1530
      */
     @JsonProperty("TextBox1530")
-    public void setTextBox1530(TextBox TextBox1530) {
+    public void setTextBox1530(TextBoxNum TextBox1530) {
         this.TextBox1530 = TextBox1530;
     }
 
@@ -22184,16 +22184,16 @@ class TableCell1698Attbl4 extends TableCell {
  */
 class TableCell1699Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1531")
-    private TextBox TextBox1531;
+    private TextBoxNum TextBox1531;
 
     /*
      * getTextBox1531
      * @return TextBox1531
      */
     @JsonProperty("TextBox1531")
-    public TextBox getTextBox1531() {
+    public TextBoxNum getTextBox1531() {
         return TextBox1531;
     }
 
@@ -22202,7 +22202,7 @@ class TableCell1699Attbl4 extends TableCell {
      * @param TextBox1531 TextBox1531
      */
     @JsonProperty("TextBox1531")
-    public void setTextBox1531(TextBox TextBox1531) {
+    public void setTextBox1531(TextBoxNum TextBox1531) {
         this.TextBox1531 = TextBox1531;
     }
 
@@ -22216,16 +22216,16 @@ class TableCell1699Attbl4 extends TableCell {
  */
 class TableCell1700Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1532")
-    private TextBox TextBox1532;
+    private TextBoxNum TextBox1532;
 
     /*
      * getTextBox1532
      * @return TextBox1532
      */
     @JsonProperty("TextBox1532")
-    public TextBox getTextBox1532() {
+    public TextBoxNum getTextBox1532() {
         return TextBox1532;
     }
 
@@ -22234,7 +22234,7 @@ class TableCell1700Attbl4 extends TableCell {
      * @param TextBox1532 TextBox1532
      */
     @JsonProperty("TextBox1532")
-    public void setTextBox1532(TextBox TextBox1532) {
+    public void setTextBox1532(TextBoxNum TextBox1532) {
         this.TextBox1532 = TextBox1532;
     }
 
@@ -22248,16 +22248,16 @@ class TableCell1700Attbl4 extends TableCell {
  */
 class TableCell1701Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1533")
-    private TextBox TextBox1533;
+    private TextBoxNum TextBox1533;
 
     /*
      * getTextBox1533
      * @return TextBox1533
      */
     @JsonProperty("TextBox1533")
-    public TextBox getTextBox1533() {
+    public TextBoxNum getTextBox1533() {
         return TextBox1533;
     }
 
@@ -22266,7 +22266,7 @@ class TableCell1701Attbl4 extends TableCell {
      * @param TextBox1533 TextBox1533
      */
     @JsonProperty("TextBox1533")
-    public void setTextBox1533(TextBox TextBox1533) {
+    public void setTextBox1533(TextBoxNum TextBox1533) {
         this.TextBox1533 = TextBox1533;
     }
 
@@ -22280,16 +22280,16 @@ class TableCell1701Attbl4 extends TableCell {
  */
 class TableCell1702Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1534")
-    private TextBox TextBox1534;
+    private TextBoxNum TextBox1534;
 
     /*
      * getTextBox1534
      * @return TextBox1534
      */
     @JsonProperty("TextBox1534")
-    public TextBox getTextBox1534() {
+    public TextBoxNum getTextBox1534() {
         return TextBox1534;
     }
 
@@ -22298,7 +22298,7 @@ class TableCell1702Attbl4 extends TableCell {
      * @param TextBox1534 TextBox1534
      */
     @JsonProperty("TextBox1534")
-    public void setTextBox1534(TextBox TextBox1534) {
+    public void setTextBox1534(TextBoxNum TextBox1534) {
         this.TextBox1534 = TextBox1534;
     }
 
@@ -22312,16 +22312,16 @@ class TableCell1702Attbl4 extends TableCell {
  */
 class TableCell1703Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1535")
-    private TextBox TextBox1535;
+    private TextBoxNum TextBox1535;
 
     /*
      * getTextBox1535
      * @return TextBox1535
      */
     @JsonProperty("TextBox1535")
-    public TextBox getTextBox1535() {
+    public TextBoxNum getTextBox1535() {
         return TextBox1535;
     }
 
@@ -22330,7 +22330,7 @@ class TableCell1703Attbl4 extends TableCell {
      * @param TextBox1535 TextBox1535
      */
     @JsonProperty("TextBox1535")
-    public void setTextBox1535(TextBox TextBox1535) {
+    public void setTextBox1535(TextBoxNum TextBox1535) {
         this.TextBox1535 = TextBox1535;
     }
 
@@ -22344,16 +22344,16 @@ class TableCell1703Attbl4 extends TableCell {
  */
 class TableCell1704Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1536")
-    private TextBox TextBox1536;
+    private TextBoxNum TextBox1536;
 
     /*
      * getTextBox1536
      * @return TextBox1536
      */
     @JsonProperty("TextBox1536")
-    public TextBox getTextBox1536() {
+    public TextBoxNum getTextBox1536() {
         return TextBox1536;
     }
 
@@ -22362,7 +22362,7 @@ class TableCell1704Attbl4 extends TableCell {
      * @param TextBox1536 TextBox1536
      */
     @JsonProperty("TextBox1536")
-    public void setTextBox1536(TextBox TextBox1536) {
+    public void setTextBox1536(TextBoxNum TextBox1536) {
         this.TextBox1536 = TextBox1536;
     }
 
@@ -22376,16 +22376,16 @@ class TableCell1704Attbl4 extends TableCell {
  */
 class TableCell1705Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1537")
-    private TextBox TextBox1537;
+    private TextBoxNum TextBox1537;
 
     /*
      * getTextBox1537
      * @return TextBox1537
      */
     @JsonProperty("TextBox1537")
-    public TextBox getTextBox1537() {
+    public TextBoxNum getTextBox1537() {
         return TextBox1537;
     }
 
@@ -22394,7 +22394,7 @@ class TableCell1705Attbl4 extends TableCell {
      * @param TextBox1537 TextBox1537
      */
     @JsonProperty("TextBox1537")
-    public void setTextBox1537(TextBox TextBox1537) {
+    public void setTextBox1537(TextBoxNum TextBox1537) {
         this.TextBox1537 = TextBox1537;
     }
 
@@ -22408,16 +22408,16 @@ class TableCell1705Attbl4 extends TableCell {
  */
 class TableCell1706Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1538")
-    private TextBox TextBox1538;
+    private TextBoxNum TextBox1538;
 
     /*
      * getTextBox1538
      * @return TextBox1538
      */
     @JsonProperty("TextBox1538")
-    public TextBox getTextBox1538() {
+    public TextBoxNum getTextBox1538() {
         return TextBox1538;
     }
 
@@ -22426,7 +22426,7 @@ class TableCell1706Attbl4 extends TableCell {
      * @param TextBox1538 TextBox1538
      */
     @JsonProperty("TextBox1538")
-    public void setTextBox1538(TextBox TextBox1538) {
+    public void setTextBox1538(TextBoxNum TextBox1538) {
         this.TextBox1538 = TextBox1538;
     }
 
@@ -22440,16 +22440,16 @@ class TableCell1706Attbl4 extends TableCell {
  */
 class TableCell1707Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1539")
-    private TextBox TextBox1539;
+    private TextBoxNum TextBox1539;
 
     /*
      * getTextBox1539
      * @return TextBox1539
      */
     @JsonProperty("TextBox1539")
-    public TextBox getTextBox1539() {
+    public TextBoxNum getTextBox1539() {
         return TextBox1539;
     }
 
@@ -22458,7 +22458,7 @@ class TableCell1707Attbl4 extends TableCell {
      * @param TextBox1539 TextBox1539
      */
     @JsonProperty("TextBox1539")
-    public void setTextBox1539(TextBox TextBox1539) {
+    public void setTextBox1539(TextBoxNum TextBox1539) {
         this.TextBox1539 = TextBox1539;
     }
 
@@ -22472,16 +22472,16 @@ class TableCell1707Attbl4 extends TableCell {
  */
 class TableCell1708Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1540")
-    private TextBox TextBox1540;
+    private TextBoxNum TextBox1540;
 
     /*
      * getTextBox1540
      * @return TextBox1540
      */
     @JsonProperty("TextBox1540")
-    public TextBox getTextBox1540() {
+    public TextBoxNum getTextBox1540() {
         return TextBox1540;
     }
 
@@ -22490,7 +22490,7 @@ class TableCell1708Attbl4 extends TableCell {
      * @param TextBox1540 TextBox1540
      */
     @JsonProperty("TextBox1540")
-    public void setTextBox1540(TextBox TextBox1540) {
+    public void setTextBox1540(TextBoxNum TextBox1540) {
         this.TextBox1540 = TextBox1540;
     }
 
@@ -22503,7 +22503,7 @@ class TableCell1708Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1709Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -22515,16 +22515,16 @@ class TableCell1709Attbl4 extends TableCell {
  */
 class TableCell1710Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1541")
-    private TextBox TextBox1541;
+    private TextBoxNum TextBox1541;
 
     /*
      * getTextBox1541
      * @return TextBox1541
      */
     @JsonProperty("TextBox1541")
-    public TextBox getTextBox1541() {
+    public TextBoxNum getTextBox1541() {
         return TextBox1541;
     }
 
@@ -22533,7 +22533,7 @@ class TableCell1710Attbl4 extends TableCell {
      * @param TextBox1541 TextBox1541
      */
     @JsonProperty("TextBox1541")
-    public void setTextBox1541(TextBox TextBox1541) {
+    public void setTextBox1541(TextBoxNum TextBox1541) {
         this.TextBox1541 = TextBox1541;
     }
 
@@ -22547,16 +22547,16 @@ class TableCell1710Attbl4 extends TableCell {
  */
 class TableCell1711Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1542")
-    private TextBox TextBox1542;
+    private TextBoxNum TextBox1542;
 
     /*
      * getTextBox1542
      * @return TextBox1542
      */
     @JsonProperty("TextBox1542")
-    public TextBox getTextBox1542() {
+    public TextBoxNum getTextBox1542() {
         return TextBox1542;
     }
 
@@ -22565,7 +22565,7 @@ class TableCell1711Attbl4 extends TableCell {
      * @param TextBox1542 TextBox1542
      */
     @JsonProperty("TextBox1542")
-    public void setTextBox1542(TextBox TextBox1542) {
+    public void setTextBox1542(TextBoxNum TextBox1542) {
         this.TextBox1542 = TextBox1542;
     }
 
@@ -22579,16 +22579,16 @@ class TableCell1711Attbl4 extends TableCell {
  */
 class TableCell1712Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1543")
-    private TextBox TextBox1543;
+    private TextBoxNum TextBox1543;
 
     /*
      * getTextBox1543
      * @return TextBox1543
      */
     @JsonProperty("TextBox1543")
-    public TextBox getTextBox1543() {
+    public TextBoxNum getTextBox1543() {
         return TextBox1543;
     }
 
@@ -22597,7 +22597,7 @@ class TableCell1712Attbl4 extends TableCell {
      * @param TextBox1543 TextBox1543
      */
     @JsonProperty("TextBox1543")
-    public void setTextBox1543(TextBox TextBox1543) {
+    public void setTextBox1543(TextBoxNum TextBox1543) {
         this.TextBox1543 = TextBox1543;
     }
 
@@ -22611,16 +22611,16 @@ class TableCell1712Attbl4 extends TableCell {
  */
 class TableCell1713Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1544")
-    private TextBox TextBox1544;
+    private TextBoxNum TextBox1544;
 
     /*
      * getTextBox1544
      * @return TextBox1544
      */
     @JsonProperty("TextBox1544")
-    public TextBox getTextBox1544() {
+    public TextBoxNum getTextBox1544() {
         return TextBox1544;
     }
 
@@ -22629,7 +22629,7 @@ class TableCell1713Attbl4 extends TableCell {
      * @param TextBox1544 TextBox1544
      */
     @JsonProperty("TextBox1544")
-    public void setTextBox1544(TextBox TextBox1544) {
+    public void setTextBox1544(TextBoxNum TextBox1544) {
         this.TextBox1544 = TextBox1544;
     }
 
@@ -22643,16 +22643,16 @@ class TableCell1713Attbl4 extends TableCell {
  */
 class TableCell1714Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1545")
-    private TextBox TextBox1545;
+    private TextBoxNum TextBox1545;
 
     /*
      * getTextBox1545
      * @return TextBox1545
      */
     @JsonProperty("TextBox1545")
-    public TextBox getTextBox1545() {
+    public TextBoxNum getTextBox1545() {
         return TextBox1545;
     }
 
@@ -22661,7 +22661,7 @@ class TableCell1714Attbl4 extends TableCell {
      * @param TextBox1545 TextBox1545
      */
     @JsonProperty("TextBox1545")
-    public void setTextBox1545(TextBox TextBox1545) {
+    public void setTextBox1545(TextBoxNum TextBox1545) {
         this.TextBox1545 = TextBox1545;
     }
 
@@ -22675,16 +22675,16 @@ class TableCell1714Attbl4 extends TableCell {
  */
 class TableCell1715Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1546")
-    private TextBox TextBox1546;
+    private TextBoxNum TextBox1546;
 
     /*
      * getTextBox1546
      * @return TextBox1546
      */
     @JsonProperty("TextBox1546")
-    public TextBox getTextBox1546() {
+    public TextBoxNum getTextBox1546() {
         return TextBox1546;
     }
 
@@ -22693,7 +22693,7 @@ class TableCell1715Attbl4 extends TableCell {
      * @param TextBox1546 TextBox1546
      */
     @JsonProperty("TextBox1546")
-    public void setTextBox1546(TextBox TextBox1546) {
+    public void setTextBox1546(TextBoxNum TextBox1546) {
         this.TextBox1546 = TextBox1546;
     }
 
@@ -22707,16 +22707,16 @@ class TableCell1715Attbl4 extends TableCell {
  */
 class TableCell1716Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1547")
-    private TextBox TextBox1547;
+    private TextBoxNum TextBox1547;
 
     /*
      * getTextBox1547
      * @return TextBox1547
      */
     @JsonProperty("TextBox1547")
-    public TextBox getTextBox1547() {
+    public TextBoxNum getTextBox1547() {
         return TextBox1547;
     }
 
@@ -22725,7 +22725,7 @@ class TableCell1716Attbl4 extends TableCell {
      * @param TextBox1547 TextBox1547
      */
     @JsonProperty("TextBox1547")
-    public void setTextBox1547(TextBox TextBox1547) {
+    public void setTextBox1547(TextBoxNum TextBox1547) {
         this.TextBox1547 = TextBox1547;
     }
 
@@ -22739,16 +22739,16 @@ class TableCell1716Attbl4 extends TableCell {
  */
 class TableCell1717Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1548")
-    private TextBox TextBox1548;
+    private TextBoxNum TextBox1548;
 
     /*
      * getTextBox1548
      * @return TextBox1548
      */
     @JsonProperty("TextBox1548")
-    public TextBox getTextBox1548() {
+    public TextBoxNum getTextBox1548() {
         return TextBox1548;
     }
 
@@ -22757,7 +22757,7 @@ class TableCell1717Attbl4 extends TableCell {
      * @param TextBox1548 TextBox1548
      */
     @JsonProperty("TextBox1548")
-    public void setTextBox1548(TextBox TextBox1548) {
+    public void setTextBox1548(TextBoxNum TextBox1548) {
         this.TextBox1548 = TextBox1548;
     }
 
@@ -22771,16 +22771,16 @@ class TableCell1717Attbl4 extends TableCell {
  */
 class TableCell1718Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1549")
-    private TextBox TextBox1549;
+    private TextBoxNum TextBox1549;
 
     /*
      * getTextBox1549
      * @return TextBox1549
      */
     @JsonProperty("TextBox1549")
-    public TextBox getTextBox1549() {
+    public TextBoxNum getTextBox1549() {
         return TextBox1549;
     }
 
@@ -22789,7 +22789,7 @@ class TableCell1718Attbl4 extends TableCell {
      * @param TextBox1549 TextBox1549
      */
     @JsonProperty("TextBox1549")
-    public void setTextBox1549(TextBox TextBox1549) {
+    public void setTextBox1549(TextBoxNum TextBox1549) {
         this.TextBox1549 = TextBox1549;
     }
 
@@ -22803,16 +22803,16 @@ class TableCell1718Attbl4 extends TableCell {
  */
 class TableCell1719Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1550")
-    private TextBox TextBox1550;
+    private TextBoxNum TextBox1550;
 
     /*
      * getTextBox1550
      * @return TextBox1550
      */
     @JsonProperty("TextBox1550")
-    public TextBox getTextBox1550() {
+    public TextBoxNum getTextBox1550() {
         return TextBox1550;
     }
 
@@ -22821,7 +22821,7 @@ class TableCell1719Attbl4 extends TableCell {
      * @param TextBox1550 TextBox1550
      */
     @JsonProperty("TextBox1550")
-    public void setTextBox1550(TextBox TextBox1550) {
+    public void setTextBox1550(TextBoxNum TextBox1550) {
         this.TextBox1550 = TextBox1550;
     }
 
@@ -22834,7 +22834,7 @@ class TableCell1719Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1720Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -22846,16 +22846,16 @@ class TableCell1720Attbl4 extends TableCell {
  */
 class TableCell1721Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1551")
-    private TextBox TextBox1551;
+    private TextBoxNum TextBox1551;
 
     /*
      * getTextBox1551
      * @return TextBox1551
      */
     @JsonProperty("TextBox1551")
-    public TextBox getTextBox1551() {
+    public TextBoxNum getTextBox1551() {
         return TextBox1551;
     }
 
@@ -22864,7 +22864,7 @@ class TableCell1721Attbl4 extends TableCell {
      * @param TextBox1551 TextBox1551
      */
     @JsonProperty("TextBox1551")
-    public void setTextBox1551(TextBox TextBox1551) {
+    public void setTextBox1551(TextBoxNum TextBox1551) {
         this.TextBox1551 = TextBox1551;
     }
 
@@ -22878,16 +22878,16 @@ class TableCell1721Attbl4 extends TableCell {
  */
 class TableCell1722Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1552")
-    private TextBox TextBox1552;
+    private TextBoxNum TextBox1552;
 
     /*
      * getTextBox1552
      * @return TextBox1552
      */
     @JsonProperty("TextBox1552")
-    public TextBox getTextBox1552() {
+    public TextBoxNum getTextBox1552() {
         return TextBox1552;
     }
 
@@ -22896,7 +22896,7 @@ class TableCell1722Attbl4 extends TableCell {
      * @param TextBox1552 TextBox1552
      */
     @JsonProperty("TextBox1552")
-    public void setTextBox1552(TextBox TextBox1552) {
+    public void setTextBox1552(TextBoxNum TextBox1552) {
         this.TextBox1552 = TextBox1552;
     }
 
@@ -22910,16 +22910,16 @@ class TableCell1722Attbl4 extends TableCell {
  */
 class TableCell1723Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1553")
-    private TextBox TextBox1553;
+    private TextBoxNum TextBox1553;
 
     /*
      * getTextBox1553
      * @return TextBox1553
      */
     @JsonProperty("TextBox1553")
-    public TextBox getTextBox1553() {
+    public TextBoxNum getTextBox1553() {
         return TextBox1553;
     }
 
@@ -22928,7 +22928,7 @@ class TableCell1723Attbl4 extends TableCell {
      * @param TextBox1553 TextBox1553
      */
     @JsonProperty("TextBox1553")
-    public void setTextBox1553(TextBox TextBox1553) {
+    public void setTextBox1553(TextBoxNum TextBox1553) {
         this.TextBox1553 = TextBox1553;
     }
 
@@ -22942,16 +22942,16 @@ class TableCell1723Attbl4 extends TableCell {
  */
 class TableCell1724Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1554")
-    private TextBox TextBox1554;
+    private TextBoxNum TextBox1554;
 
     /*
      * getTextBox1554
      * @return TextBox1554
      */
     @JsonProperty("TextBox1554")
-    public TextBox getTextBox1554() {
+    public TextBoxNum getTextBox1554() {
         return TextBox1554;
     }
 
@@ -22960,7 +22960,7 @@ class TableCell1724Attbl4 extends TableCell {
      * @param TextBox1554 TextBox1554
      */
     @JsonProperty("TextBox1554")
-    public void setTextBox1554(TextBox TextBox1554) {
+    public void setTextBox1554(TextBoxNum TextBox1554) {
         this.TextBox1554 = TextBox1554;
     }
 
@@ -22974,16 +22974,16 @@ class TableCell1724Attbl4 extends TableCell {
  */
 class TableCell1725Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1555")
-    private TextBox TextBox1555;
+    private TextBoxNum TextBox1555;
 
     /*
      * getTextBox1555
      * @return TextBox1555
      */
     @JsonProperty("TextBox1555")
-    public TextBox getTextBox1555() {
+    public TextBoxNum getTextBox1555() {
         return TextBox1555;
     }
 
@@ -22992,7 +22992,7 @@ class TableCell1725Attbl4 extends TableCell {
      * @param TextBox1555 TextBox1555
      */
     @JsonProperty("TextBox1555")
-    public void setTextBox1555(TextBox TextBox1555) {
+    public void setTextBox1555(TextBoxNum TextBox1555) {
         this.TextBox1555 = TextBox1555;
     }
 
@@ -23006,16 +23006,16 @@ class TableCell1725Attbl4 extends TableCell {
  */
 class TableCell1726Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1556")
-    private TextBox TextBox1556;
+    private TextBoxNum TextBox1556;
 
     /*
      * getTextBox1556
      * @return TextBox1556
      */
     @JsonProperty("TextBox1556")
-    public TextBox getTextBox1556() {
+    public TextBoxNum getTextBox1556() {
         return TextBox1556;
     }
 
@@ -23024,7 +23024,7 @@ class TableCell1726Attbl4 extends TableCell {
      * @param TextBox1556 TextBox1556
      */
     @JsonProperty("TextBox1556")
-    public void setTextBox1556(TextBox TextBox1556) {
+    public void setTextBox1556(TextBoxNum TextBox1556) {
         this.TextBox1556 = TextBox1556;
     }
 
@@ -23038,16 +23038,16 @@ class TableCell1726Attbl4 extends TableCell {
  */
 class TableCell1727Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1557")
-    private TextBox TextBox1557;
+    private TextBoxNum TextBox1557;
 
     /*
      * getTextBox1557
      * @return TextBox1557
      */
     @JsonProperty("TextBox1557")
-    public TextBox getTextBox1557() {
+    public TextBoxNum getTextBox1557() {
         return TextBox1557;
     }
 
@@ -23056,7 +23056,7 @@ class TableCell1727Attbl4 extends TableCell {
      * @param TextBox1557 TextBox1557
      */
     @JsonProperty("TextBox1557")
-    public void setTextBox1557(TextBox TextBox1557) {
+    public void setTextBox1557(TextBoxNum TextBox1557) {
         this.TextBox1557 = TextBox1557;
     }
 
@@ -23070,16 +23070,16 @@ class TableCell1727Attbl4 extends TableCell {
  */
 class TableCell1728Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1558")
-    private TextBox TextBox1558;
+    private TextBoxNum TextBox1558;
 
     /*
      * getTextBox1558
      * @return TextBox1558
      */
     @JsonProperty("TextBox1558")
-    public TextBox getTextBox1558() {
+    public TextBoxNum getTextBox1558() {
         return TextBox1558;
     }
 
@@ -23088,7 +23088,7 @@ class TableCell1728Attbl4 extends TableCell {
      * @param TextBox1558 TextBox1558
      */
     @JsonProperty("TextBox1558")
-    public void setTextBox1558(TextBox TextBox1558) {
+    public void setTextBox1558(TextBoxNum TextBox1558) {
         this.TextBox1558 = TextBox1558;
     }
 
@@ -23102,16 +23102,16 @@ class TableCell1728Attbl4 extends TableCell {
  */
 class TableCell1729Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1559")
-    private TextBox TextBox1559;
+    private TextBoxNum TextBox1559;
 
     /*
      * getTextBox1559
      * @return TextBox1559
      */
     @JsonProperty("TextBox1559")
-    public TextBox getTextBox1559() {
+    public TextBoxNum getTextBox1559() {
         return TextBox1559;
     }
 
@@ -23120,7 +23120,7 @@ class TableCell1729Attbl4 extends TableCell {
      * @param TextBox1559 TextBox1559
      */
     @JsonProperty("TextBox1559")
-    public void setTextBox1559(TextBox TextBox1559) {
+    public void setTextBox1559(TextBoxNum TextBox1559) {
         this.TextBox1559 = TextBox1559;
     }
 
@@ -23134,16 +23134,16 @@ class TableCell1729Attbl4 extends TableCell {
  */
 class TableCell1730Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1560")
-    private TextBox TextBox1560;
+    private TextBoxNum TextBox1560;
 
     /*
      * getTextBox1560
      * @return TextBox1560
      */
     @JsonProperty("TextBox1560")
-    public TextBox getTextBox1560() {
+    public TextBoxNum getTextBox1560() {
         return TextBox1560;
     }
 
@@ -23152,7 +23152,7 @@ class TableCell1730Attbl4 extends TableCell {
      * @param TextBox1560 TextBox1560
      */
     @JsonProperty("TextBox1560")
-    public void setTextBox1560(TextBox TextBox1560) {
+    public void setTextBox1560(TextBoxNum TextBox1560) {
         this.TextBox1560 = TextBox1560;
     }
 
@@ -23165,7 +23165,7 @@ class TableCell1730Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1731Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -23177,16 +23177,16 @@ class TableCell1731Attbl4 extends TableCell {
  */
 class TableCell1732Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1561")
-    private TextBox TextBox1561;
+    private TextBoxNum TextBox1561;
 
     /*
      * getTextBox1561
      * @return TextBox1561
      */
     @JsonProperty("TextBox1561")
-    public TextBox getTextBox1561() {
+    public TextBoxNum getTextBox1561() {
         return TextBox1561;
     }
 
@@ -23195,7 +23195,7 @@ class TableCell1732Attbl4 extends TableCell {
      * @param TextBox1561 TextBox1561
      */
     @JsonProperty("TextBox1561")
-    public void setTextBox1561(TextBox TextBox1561) {
+    public void setTextBox1561(TextBoxNum TextBox1561) {
         this.TextBox1561 = TextBox1561;
     }
 
@@ -23209,16 +23209,16 @@ class TableCell1732Attbl4 extends TableCell {
  */
 class TableCell1733Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1562")
-    private TextBox TextBox1562;
+    private TextBoxNum TextBox1562;
 
     /*
      * getTextBox1562
      * @return TextBox1562
      */
     @JsonProperty("TextBox1562")
-    public TextBox getTextBox1562() {
+    public TextBoxNum getTextBox1562() {
         return TextBox1562;
     }
 
@@ -23227,7 +23227,7 @@ class TableCell1733Attbl4 extends TableCell {
      * @param TextBox1562 TextBox1562
      */
     @JsonProperty("TextBox1562")
-    public void setTextBox1562(TextBox TextBox1562) {
+    public void setTextBox1562(TextBoxNum TextBox1562) {
         this.TextBox1562 = TextBox1562;
     }
 
@@ -23241,16 +23241,16 @@ class TableCell1733Attbl4 extends TableCell {
  */
 class TableCell1734Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1563")
-    private TextBox TextBox1563;
+    private TextBoxNum TextBox1563;
 
     /*
      * getTextBox1563
      * @return TextBox1563
      */
     @JsonProperty("TextBox1563")
-    public TextBox getTextBox1563() {
+    public TextBoxNum getTextBox1563() {
         return TextBox1563;
     }
 
@@ -23259,7 +23259,7 @@ class TableCell1734Attbl4 extends TableCell {
      * @param TextBox1563 TextBox1563
      */
     @JsonProperty("TextBox1563")
-    public void setTextBox1563(TextBox TextBox1563) {
+    public void setTextBox1563(TextBoxNum TextBox1563) {
         this.TextBox1563 = TextBox1563;
     }
 
@@ -23273,16 +23273,16 @@ class TableCell1734Attbl4 extends TableCell {
  */
 class TableCell1735Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1564")
-    private TextBox TextBox1564;
+    private TextBoxNum TextBox1564;
 
     /*
      * getTextBox1564
      * @return TextBox1564
      */
     @JsonProperty("TextBox1564")
-    public TextBox getTextBox1564() {
+    public TextBoxNum getTextBox1564() {
         return TextBox1564;
     }
 
@@ -23291,7 +23291,7 @@ class TableCell1735Attbl4 extends TableCell {
      * @param TextBox1564 TextBox1564
      */
     @JsonProperty("TextBox1564")
-    public void setTextBox1564(TextBox TextBox1564) {
+    public void setTextBox1564(TextBoxNum TextBox1564) {
         this.TextBox1564 = TextBox1564;
     }
 
@@ -23305,16 +23305,16 @@ class TableCell1735Attbl4 extends TableCell {
  */
 class TableCell1736Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1565")
-    private TextBox TextBox1565;
+    private TextBoxNum TextBox1565;
 
     /*
      * getTextBox1565
      * @return TextBox1565
      */
     @JsonProperty("TextBox1565")
-    public TextBox getTextBox1565() {
+    public TextBoxNum getTextBox1565() {
         return TextBox1565;
     }
 
@@ -23323,7 +23323,7 @@ class TableCell1736Attbl4 extends TableCell {
      * @param TextBox1565 TextBox1565
      */
     @JsonProperty("TextBox1565")
-    public void setTextBox1565(TextBox TextBox1565) {
+    public void setTextBox1565(TextBoxNum TextBox1565) {
         this.TextBox1565 = TextBox1565;
     }
 
@@ -23337,16 +23337,16 @@ class TableCell1736Attbl4 extends TableCell {
  */
 class TableCell1737Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1566")
-    private TextBox TextBox1566;
+    private TextBoxNum TextBox1566;
 
     /*
      * getTextBox1566
      * @return TextBox1566
      */
     @JsonProperty("TextBox1566")
-    public TextBox getTextBox1566() {
+    public TextBoxNum getTextBox1566() {
         return TextBox1566;
     }
 
@@ -23355,7 +23355,7 @@ class TableCell1737Attbl4 extends TableCell {
      * @param TextBox1566 TextBox1566
      */
     @JsonProperty("TextBox1566")
-    public void setTextBox1566(TextBox TextBox1566) {
+    public void setTextBox1566(TextBoxNum TextBox1566) {
         this.TextBox1566 = TextBox1566;
     }
 
@@ -23369,16 +23369,16 @@ class TableCell1737Attbl4 extends TableCell {
  */
 class TableCell1738Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1567")
-    private TextBox TextBox1567;
+    private TextBoxNum TextBox1567;
 
     /*
      * getTextBox1567
      * @return TextBox1567
      */
     @JsonProperty("TextBox1567")
-    public TextBox getTextBox1567() {
+    public TextBoxNum getTextBox1567() {
         return TextBox1567;
     }
 
@@ -23387,7 +23387,7 @@ class TableCell1738Attbl4 extends TableCell {
      * @param TextBox1567 TextBox1567
      */
     @JsonProperty("TextBox1567")
-    public void setTextBox1567(TextBox TextBox1567) {
+    public void setTextBox1567(TextBoxNum TextBox1567) {
         this.TextBox1567 = TextBox1567;
     }
 
@@ -23401,16 +23401,16 @@ class TableCell1738Attbl4 extends TableCell {
  */
 class TableCell1739Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1568")
-    private TextBox TextBox1568;
+    private TextBoxNum TextBox1568;
 
     /*
      * getTextBox1568
      * @return TextBox1568
      */
     @JsonProperty("TextBox1568")
-    public TextBox getTextBox1568() {
+    public TextBoxNum getTextBox1568() {
         return TextBox1568;
     }
 
@@ -23419,7 +23419,7 @@ class TableCell1739Attbl4 extends TableCell {
      * @param TextBox1568 TextBox1568
      */
     @JsonProperty("TextBox1568")
-    public void setTextBox1568(TextBox TextBox1568) {
+    public void setTextBox1568(TextBoxNum TextBox1568) {
         this.TextBox1568 = TextBox1568;
     }
 
@@ -23433,16 +23433,16 @@ class TableCell1739Attbl4 extends TableCell {
  */
 class TableCell1740Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1569")
-    private TextBox TextBox1569;
+    private TextBoxNum TextBox1569;
 
     /*
      * getTextBox1569
      * @return TextBox1569
      */
     @JsonProperty("TextBox1569")
-    public TextBox getTextBox1569() {
+    public TextBoxNum getTextBox1569() {
         return TextBox1569;
     }
 
@@ -23451,7 +23451,7 @@ class TableCell1740Attbl4 extends TableCell {
      * @param TextBox1569 TextBox1569
      */
     @JsonProperty("TextBox1569")
-    public void setTextBox1569(TextBox TextBox1569) {
+    public void setTextBox1569(TextBoxNum TextBox1569) {
         this.TextBox1569 = TextBox1569;
     }
 
@@ -23465,16 +23465,16 @@ class TableCell1740Attbl4 extends TableCell {
  */
 class TableCell1741Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1570")
-    private TextBox TextBox1570;
+    private TextBoxNum TextBox1570;
 
     /*
      * getTextBox1570
      * @return TextBox1570
      */
     @JsonProperty("TextBox1570")
-    public TextBox getTextBox1570() {
+    public TextBoxNum getTextBox1570() {
         return TextBox1570;
     }
 
@@ -23483,7 +23483,7 @@ class TableCell1741Attbl4 extends TableCell {
      * @param TextBox1570 TextBox1570
      */
     @JsonProperty("TextBox1570")
-    public void setTextBox1570(TextBox TextBox1570) {
+    public void setTextBox1570(TextBoxNum TextBox1570) {
         this.TextBox1570 = TextBox1570;
     }
 
@@ -23497,16 +23497,16 @@ class TableCell1741Attbl4 extends TableCell {
  */
 class TableCell1742Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1571")
-    private TextBox TextBox1571;
+    private TextBoxNum TextBox1571;
 
     /*
      * getTextBox1571
      * @return TextBox1571
      */
     @JsonProperty("TextBox1571")
-    public TextBox getTextBox1571() {
+    public TextBoxNum getTextBox1571() {
         return TextBox1571;
     }
 
@@ -23515,7 +23515,7 @@ class TableCell1742Attbl4 extends TableCell {
      * @param TextBox1571 TextBox1571
      */
     @JsonProperty("TextBox1571")
-    public void setTextBox1571(TextBox TextBox1571) {
+    public void setTextBox1571(TextBoxNum TextBox1571) {
         this.TextBox1571 = TextBox1571;
     }
 
@@ -23528,7 +23528,7 @@ class TableCell1742Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1743Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -23539,7 +23539,7 @@ class TableCell1743Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1744Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -23551,16 +23551,16 @@ class TableCell1744Attbl4 extends TableCell {
  */
 class TableCell1745Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1572")
-    private TextBox TextBox1572;
+    private TextBoxNum TextBox1572;
 
     /*
      * getTextBox1572
      * @return TextBox1572
      */
     @JsonProperty("TextBox1572")
-    public TextBox getTextBox1572() {
+    public TextBoxNum getTextBox1572() {
         return TextBox1572;
     }
 
@@ -23569,7 +23569,7 @@ class TableCell1745Attbl4 extends TableCell {
      * @param TextBox1572 TextBox1572
      */
     @JsonProperty("TextBox1572")
-    public void setTextBox1572(TextBox TextBox1572) {
+    public void setTextBox1572(TextBoxNum TextBox1572) {
         this.TextBox1572 = TextBox1572;
     }
 
@@ -23583,16 +23583,16 @@ class TableCell1745Attbl4 extends TableCell {
  */
 class TableCell1746Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1573")
-    private TextBox TextBox1573;
+    private TextBoxNum TextBox1573;
 
     /*
      * getTextBox1573
      * @return TextBox1573
      */
     @JsonProperty("TextBox1573")
-    public TextBox getTextBox1573() {
+    public TextBoxNum getTextBox1573() {
         return TextBox1573;
     }
 
@@ -23601,7 +23601,7 @@ class TableCell1746Attbl4 extends TableCell {
      * @param TextBox1573 TextBox1573
      */
     @JsonProperty("TextBox1573")
-    public void setTextBox1573(TextBox TextBox1573) {
+    public void setTextBox1573(TextBoxNum TextBox1573) {
         this.TextBox1573 = TextBox1573;
     }
 
@@ -23615,16 +23615,16 @@ class TableCell1746Attbl4 extends TableCell {
  */
 class TableCell1747Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1574")
-    private TextBox TextBox1574;
+    private TextBoxNum TextBox1574;
 
     /*
      * getTextBox1574
      * @return TextBox1574
      */
     @JsonProperty("TextBox1574")
-    public TextBox getTextBox1574() {
+    public TextBoxNum getTextBox1574() {
         return TextBox1574;
     }
 
@@ -23633,7 +23633,7 @@ class TableCell1747Attbl4 extends TableCell {
      * @param TextBox1574 TextBox1574
      */
     @JsonProperty("TextBox1574")
-    public void setTextBox1574(TextBox TextBox1574) {
+    public void setTextBox1574(TextBoxNum TextBox1574) {
         this.TextBox1574 = TextBox1574;
     }
 
@@ -23647,16 +23647,16 @@ class TableCell1747Attbl4 extends TableCell {
  */
 class TableCell1748Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1575")
-    private TextBox TextBox1575;
+    private TextBoxNum TextBox1575;
 
     /*
      * getTextBox1575
      * @return TextBox1575
      */
     @JsonProperty("TextBox1575")
-    public TextBox getTextBox1575() {
+    public TextBoxNum getTextBox1575() {
         return TextBox1575;
     }
 
@@ -23665,7 +23665,7 @@ class TableCell1748Attbl4 extends TableCell {
      * @param TextBox1575 TextBox1575
      */
     @JsonProperty("TextBox1575")
-    public void setTextBox1575(TextBox TextBox1575) {
+    public void setTextBox1575(TextBoxNum TextBox1575) {
         this.TextBox1575 = TextBox1575;
     }
 
@@ -23679,16 +23679,16 @@ class TableCell1748Attbl4 extends TableCell {
  */
 class TableCell1749Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1576")
-    private TextBox TextBox1576;
+    private TextBoxNum TextBox1576;
 
     /*
      * getTextBox1576
      * @return TextBox1576
      */
     @JsonProperty("TextBox1576")
-    public TextBox getTextBox1576() {
+    public TextBoxNum getTextBox1576() {
         return TextBox1576;
     }
 
@@ -23697,7 +23697,7 @@ class TableCell1749Attbl4 extends TableCell {
      * @param TextBox1576 TextBox1576
      */
     @JsonProperty("TextBox1576")
-    public void setTextBox1576(TextBox TextBox1576) {
+    public void setTextBox1576(TextBoxNum TextBox1576) {
         this.TextBox1576 = TextBox1576;
     }
 
@@ -23711,16 +23711,16 @@ class TableCell1749Attbl4 extends TableCell {
  */
 class TableCell1750Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1577")
-    private TextBox TextBox1577;
+    private TextBoxNum TextBox1577;
 
     /*
      * getTextBox1577
      * @return TextBox1577
      */
     @JsonProperty("TextBox1577")
-    public TextBox getTextBox1577() {
+    public TextBoxNum getTextBox1577() {
         return TextBox1577;
     }
 
@@ -23729,7 +23729,7 @@ class TableCell1750Attbl4 extends TableCell {
      * @param TextBox1577 TextBox1577
      */
     @JsonProperty("TextBox1577")
-    public void setTextBox1577(TextBox TextBox1577) {
+    public void setTextBox1577(TextBoxNum TextBox1577) {
         this.TextBox1577 = TextBox1577;
     }
 
@@ -23743,16 +23743,16 @@ class TableCell1750Attbl4 extends TableCell {
  */
 class TableCell1751Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1578")
-    private TextBox TextBox1578;
+    private TextBoxNum TextBox1578;
 
     /*
      * getTextBox1578
      * @return TextBox1578
      */
     @JsonProperty("TextBox1578")
-    public TextBox getTextBox1578() {
+    public TextBoxNum getTextBox1578() {
         return TextBox1578;
     }
 
@@ -23761,7 +23761,7 @@ class TableCell1751Attbl4 extends TableCell {
      * @param TextBox1578 TextBox1578
      */
     @JsonProperty("TextBox1578")
-    public void setTextBox1578(TextBox TextBox1578) {
+    public void setTextBox1578(TextBoxNum TextBox1578) {
         this.TextBox1578 = TextBox1578;
     }
 
@@ -23775,16 +23775,16 @@ class TableCell1751Attbl4 extends TableCell {
  */
 class TableCell1752Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1579")
-    private TextBox TextBox1579;
+    private TextBoxNum TextBox1579;
 
     /*
      * getTextBox1579
      * @return TextBox1579
      */
     @JsonProperty("TextBox1579")
-    public TextBox getTextBox1579() {
+    public TextBoxNum getTextBox1579() {
         return TextBox1579;
     }
 
@@ -23793,7 +23793,7 @@ class TableCell1752Attbl4 extends TableCell {
      * @param TextBox1579 TextBox1579
      */
     @JsonProperty("TextBox1579")
-    public void setTextBox1579(TextBox TextBox1579) {
+    public void setTextBox1579(TextBoxNum TextBox1579) {
         this.TextBox1579 = TextBox1579;
     }
 
@@ -23807,16 +23807,16 @@ class TableCell1752Attbl4 extends TableCell {
  */
 class TableCell1753Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1580")
-    private TextBox TextBox1580;
+    private TextBoxNum TextBox1580;
 
     /*
      * getTextBox1580
      * @return TextBox1580
      */
     @JsonProperty("TextBox1580")
-    public TextBox getTextBox1580() {
+    public TextBoxNum getTextBox1580() {
         return TextBox1580;
     }
 
@@ -23825,7 +23825,7 @@ class TableCell1753Attbl4 extends TableCell {
      * @param TextBox1580 TextBox1580
      */
     @JsonProperty("TextBox1580")
-    public void setTextBox1580(TextBox TextBox1580) {
+    public void setTextBox1580(TextBoxNum TextBox1580) {
         this.TextBox1580 = TextBox1580;
     }
 
@@ -23839,16 +23839,16 @@ class TableCell1753Attbl4 extends TableCell {
  */
 class TableCell1754Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1581")
-    private TextBox TextBox1581;
+    private TextBoxNum TextBox1581;
 
     /*
      * getTextBox1581
      * @return TextBox1581
      */
     @JsonProperty("TextBox1581")
-    public TextBox getTextBox1581() {
+    public TextBoxNum getTextBox1581() {
         return TextBox1581;
     }
 
@@ -23857,7 +23857,7 @@ class TableCell1754Attbl4 extends TableCell {
      * @param TextBox1581 TextBox1581
      */
     @JsonProperty("TextBox1581")
-    public void setTextBox1581(TextBox TextBox1581) {
+    public void setTextBox1581(TextBoxNum TextBox1581) {
         this.TextBox1581 = TextBox1581;
     }
 
@@ -23871,16 +23871,16 @@ class TableCell1754Attbl4 extends TableCell {
  */
 class TableCell1755Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1582")
-    private TextBox TextBox1582;
+    private TextBoxNum TextBox1582;
 
     /*
      * getTextBox1582
      * @return TextBox1582
      */
     @JsonProperty("TextBox1582")
-    public TextBox getTextBox1582() {
+    public TextBoxNum getTextBox1582() {
         return TextBox1582;
     }
 
@@ -23889,7 +23889,7 @@ class TableCell1755Attbl4 extends TableCell {
      * @param TextBox1582 TextBox1582
      */
     @JsonProperty("TextBox1582")
-    public void setTextBox1582(TextBox TextBox1582) {
+    public void setTextBox1582(TextBoxNum TextBox1582) {
         this.TextBox1582 = TextBox1582;
     }
 
@@ -23902,7 +23902,7 @@ class TableCell1755Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1756Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -23913,7 +23913,7 @@ class TableCell1756Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1757Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -23925,16 +23925,16 @@ class TableCell1757Attbl4 extends TableCell {
  */
 class TableCell1758Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1583")
-    private TextBox TextBox1583;
+    private TextBoxNum TextBox1583;
 
     /*
      * getTextBox1583
      * @return TextBox1583
      */
     @JsonProperty("TextBox1583")
-    public TextBox getTextBox1583() {
+    public TextBoxNum getTextBox1583() {
         return TextBox1583;
     }
 
@@ -23943,7 +23943,7 @@ class TableCell1758Attbl4 extends TableCell {
      * @param TextBox1583 TextBox1583
      */
     @JsonProperty("TextBox1583")
-    public void setTextBox1583(TextBox TextBox1583) {
+    public void setTextBox1583(TextBoxNum TextBox1583) {
         this.TextBox1583 = TextBox1583;
     }
 
@@ -23957,16 +23957,16 @@ class TableCell1758Attbl4 extends TableCell {
  */
 class TableCell1759Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1584")
-    private TextBox TextBox1584;
+    private TextBoxNum TextBox1584;
 
     /*
      * getTextBox1584
      * @return TextBox1584
      */
     @JsonProperty("TextBox1584")
-    public TextBox getTextBox1584() {
+    public TextBoxNum getTextBox1584() {
         return TextBox1584;
     }
 
@@ -23975,7 +23975,7 @@ class TableCell1759Attbl4 extends TableCell {
      * @param TextBox1584 TextBox1584
      */
     @JsonProperty("TextBox1584")
-    public void setTextBox1584(TextBox TextBox1584) {
+    public void setTextBox1584(TextBoxNum TextBox1584) {
         this.TextBox1584 = TextBox1584;
     }
 
@@ -23989,16 +23989,16 @@ class TableCell1759Attbl4 extends TableCell {
  */
 class TableCell1760Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1585")
-    private TextBox TextBox1585;
+    private TextBoxNum TextBox1585;
 
     /*
      * getTextBox1585
      * @return TextBox1585
      */
     @JsonProperty("TextBox1585")
-    public TextBox getTextBox1585() {
+    public TextBoxNum getTextBox1585() {
         return TextBox1585;
     }
 
@@ -24007,7 +24007,7 @@ class TableCell1760Attbl4 extends TableCell {
      * @param TextBox1585 TextBox1585
      */
     @JsonProperty("TextBox1585")
-    public void setTextBox1585(TextBox TextBox1585) {
+    public void setTextBox1585(TextBoxNum TextBox1585) {
         this.TextBox1585 = TextBox1585;
     }
 
@@ -24021,16 +24021,16 @@ class TableCell1760Attbl4 extends TableCell {
  */
 class TableCell1761Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1586")
-    private TextBox TextBox1586;
+    private TextBoxNum TextBox1586;
 
     /*
      * getTextBox1586
      * @return TextBox1586
      */
     @JsonProperty("TextBox1586")
-    public TextBox getTextBox1586() {
+    public TextBoxNum getTextBox1586() {
         return TextBox1586;
     }
 
@@ -24039,7 +24039,7 @@ class TableCell1761Attbl4 extends TableCell {
      * @param TextBox1586 TextBox1586
      */
     @JsonProperty("TextBox1586")
-    public void setTextBox1586(TextBox TextBox1586) {
+    public void setTextBox1586(TextBoxNum TextBox1586) {
         this.TextBox1586 = TextBox1586;
     }
 
@@ -24053,16 +24053,16 @@ class TableCell1761Attbl4 extends TableCell {
  */
 class TableCell1762Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1587")
-    private TextBox TextBox1587;
+    private TextBoxNum TextBox1587;
 
     /*
      * getTextBox1587
      * @return TextBox1587
      */
     @JsonProperty("TextBox1587")
-    public TextBox getTextBox1587() {
+    public TextBoxNum getTextBox1587() {
         return TextBox1587;
     }
 
@@ -24071,7 +24071,7 @@ class TableCell1762Attbl4 extends TableCell {
      * @param TextBox1587 TextBox1587
      */
     @JsonProperty("TextBox1587")
-    public void setTextBox1587(TextBox TextBox1587) {
+    public void setTextBox1587(TextBoxNum TextBox1587) {
         this.TextBox1587 = TextBox1587;
     }
 
@@ -24085,16 +24085,16 @@ class TableCell1762Attbl4 extends TableCell {
  */
 class TableCell1763Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1588")
-    private TextBox TextBox1588;
+    private TextBoxNum TextBox1588;
 
     /*
      * getTextBox1588
      * @return TextBox1588
      */
     @JsonProperty("TextBox1588")
-    public TextBox getTextBox1588() {
+    public TextBoxNum getTextBox1588() {
         return TextBox1588;
     }
 
@@ -24103,7 +24103,7 @@ class TableCell1763Attbl4 extends TableCell {
      * @param TextBox1588 TextBox1588
      */
     @JsonProperty("TextBox1588")
-    public void setTextBox1588(TextBox TextBox1588) {
+    public void setTextBox1588(TextBoxNum TextBox1588) {
         this.TextBox1588 = TextBox1588;
     }
 
@@ -24117,16 +24117,16 @@ class TableCell1763Attbl4 extends TableCell {
  */
 class TableCell1764Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1589")
-    private TextBox TextBox1589;
+    private TextBoxNum TextBox1589;
 
     /*
      * getTextBox1589
      * @return TextBox1589
      */
     @JsonProperty("TextBox1589")
-    public TextBox getTextBox1589() {
+    public TextBoxNum getTextBox1589() {
         return TextBox1589;
     }
 
@@ -24135,7 +24135,7 @@ class TableCell1764Attbl4 extends TableCell {
      * @param TextBox1589 TextBox1589
      */
     @JsonProperty("TextBox1589")
-    public void setTextBox1589(TextBox TextBox1589) {
+    public void setTextBox1589(TextBoxNum TextBox1589) {
         this.TextBox1589 = TextBox1589;
     }
 
@@ -24149,16 +24149,16 @@ class TableCell1764Attbl4 extends TableCell {
  */
 class TableCell1765Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1590")
-    private TextBox TextBox1590;
+    private TextBoxNum TextBox1590;
 
     /*
      * getTextBox1590
      * @return TextBox1590
      */
     @JsonProperty("TextBox1590")
-    public TextBox getTextBox1590() {
+    public TextBoxNum getTextBox1590() {
         return TextBox1590;
     }
 
@@ -24167,7 +24167,7 @@ class TableCell1765Attbl4 extends TableCell {
      * @param TextBox1590 TextBox1590
      */
     @JsonProperty("TextBox1590")
-    public void setTextBox1590(TextBox TextBox1590) {
+    public void setTextBox1590(TextBoxNum TextBox1590) {
         this.TextBox1590 = TextBox1590;
     }
 
@@ -24181,16 +24181,16 @@ class TableCell1765Attbl4 extends TableCell {
  */
 class TableCell1766Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1591")
-    private TextBox TextBox1591;
+    private TextBoxNum TextBox1591;
 
     /*
      * getTextBox1591
      * @return TextBox1591
      */
     @JsonProperty("TextBox1591")
-    public TextBox getTextBox1591() {
+    public TextBoxNum getTextBox1591() {
         return TextBox1591;
     }
 
@@ -24199,7 +24199,7 @@ class TableCell1766Attbl4 extends TableCell {
      * @param TextBox1591 TextBox1591
      */
     @JsonProperty("TextBox1591")
-    public void setTextBox1591(TextBox TextBox1591) {
+    public void setTextBox1591(TextBoxNum TextBox1591) {
         this.TextBox1591 = TextBox1591;
     }
 
@@ -24213,16 +24213,16 @@ class TableCell1766Attbl4 extends TableCell {
  */
 class TableCell1767Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1592")
-    private TextBox TextBox1592;
+    private TextBoxNum TextBox1592;
 
     /*
      * getTextBox1592
      * @return TextBox1592
      */
     @JsonProperty("TextBox1592")
-    public TextBox getTextBox1592() {
+    public TextBoxNum getTextBox1592() {
         return TextBox1592;
     }
 
@@ -24231,7 +24231,7 @@ class TableCell1767Attbl4 extends TableCell {
      * @param TextBox1592 TextBox1592
      */
     @JsonProperty("TextBox1592")
-    public void setTextBox1592(TextBox TextBox1592) {
+    public void setTextBox1592(TextBoxNum TextBox1592) {
         this.TextBox1592 = TextBox1592;
     }
 
@@ -24244,7 +24244,7 @@ class TableCell1767Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1768Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -24255,7 +24255,7 @@ class TableCell1768Attbl4 extends TableCell {
  * @author 自動生成
  */
 class TableCell1769Attbl4 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
@@ -24267,16 +24267,16 @@ class TableCell1769Attbl4 extends TableCell {
  */
 class TableCell1770Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1593")
-    private TextBox TextBox1593;
+    private TextBoxNum TextBox1593;
 
     /*
      * getTextBox1593
      * @return TextBox1593
      */
     @JsonProperty("TextBox1593")
-    public TextBox getTextBox1593() {
+    public TextBoxNum getTextBox1593() {
         return TextBox1593;
     }
 
@@ -24285,7 +24285,7 @@ class TableCell1770Attbl4 extends TableCell {
      * @param TextBox1593 TextBox1593
      */
     @JsonProperty("TextBox1593")
-    public void setTextBox1593(TextBox TextBox1593) {
+    public void setTextBox1593(TextBoxNum TextBox1593) {
         this.TextBox1593 = TextBox1593;
     }
 
@@ -24299,16 +24299,16 @@ class TableCell1770Attbl4 extends TableCell {
  */
 class TableCell1771Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1594")
-    private TextBox TextBox1594;
+    private TextBoxNum TextBox1594;
 
     /*
      * getTextBox1594
      * @return TextBox1594
      */
     @JsonProperty("TextBox1594")
-    public TextBox getTextBox1594() {
+    public TextBoxNum getTextBox1594() {
         return TextBox1594;
     }
 
@@ -24317,7 +24317,7 @@ class TableCell1771Attbl4 extends TableCell {
      * @param TextBox1594 TextBox1594
      */
     @JsonProperty("TextBox1594")
-    public void setTextBox1594(TextBox TextBox1594) {
+    public void setTextBox1594(TextBoxNum TextBox1594) {
         this.TextBox1594 = TextBox1594;
     }
 
@@ -24331,16 +24331,16 @@ class TableCell1771Attbl4 extends TableCell {
  */
 class TableCell1772Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1595")
-    private TextBox TextBox1595;
+    private TextBoxNum TextBox1595;
 
     /*
      * getTextBox1595
      * @return TextBox1595
      */
     @JsonProperty("TextBox1595")
-    public TextBox getTextBox1595() {
+    public TextBoxNum getTextBox1595() {
         return TextBox1595;
     }
 
@@ -24349,7 +24349,7 @@ class TableCell1772Attbl4 extends TableCell {
      * @param TextBox1595 TextBox1595
      */
     @JsonProperty("TextBox1595")
-    public void setTextBox1595(TextBox TextBox1595) {
+    public void setTextBox1595(TextBoxNum TextBox1595) {
         this.TextBox1595 = TextBox1595;
     }
 
@@ -24363,16 +24363,16 @@ class TableCell1772Attbl4 extends TableCell {
  */
 class TableCell1773Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1596")
-    private TextBox TextBox1596;
+    private TextBoxNum TextBox1596;
 
     /*
      * getTextBox1596
      * @return TextBox1596
      */
     @JsonProperty("TextBox1596")
-    public TextBox getTextBox1596() {
+    public TextBoxNum getTextBox1596() {
         return TextBox1596;
     }
 
@@ -24381,7 +24381,7 @@ class TableCell1773Attbl4 extends TableCell {
      * @param TextBox1596 TextBox1596
      */
     @JsonProperty("TextBox1596")
-    public void setTextBox1596(TextBox TextBox1596) {
+    public void setTextBox1596(TextBoxNum TextBox1596) {
         this.TextBox1596 = TextBox1596;
     }
 
@@ -24395,16 +24395,16 @@ class TableCell1773Attbl4 extends TableCell {
  */
 class TableCell1774Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1597")
-    private TextBox TextBox1597;
+    private TextBoxNum TextBox1597;
 
     /*
      * getTextBox1597
      * @return TextBox1597
      */
     @JsonProperty("TextBox1597")
-    public TextBox getTextBox1597() {
+    public TextBoxNum getTextBox1597() {
         return TextBox1597;
     }
 
@@ -24413,7 +24413,7 @@ class TableCell1774Attbl4 extends TableCell {
      * @param TextBox1597 TextBox1597
      */
     @JsonProperty("TextBox1597")
-    public void setTextBox1597(TextBox TextBox1597) {
+    public void setTextBox1597(TextBoxNum TextBox1597) {
         this.TextBox1597 = TextBox1597;
     }
 
@@ -24427,16 +24427,16 @@ class TableCell1774Attbl4 extends TableCell {
  */
 class TableCell1775Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1598")
-    private TextBox TextBox1598;
+    private TextBoxNum TextBox1598;
 
     /*
      * getTextBox1598
      * @return TextBox1598
      */
     @JsonProperty("TextBox1598")
-    public TextBox getTextBox1598() {
+    public TextBoxNum getTextBox1598() {
         return TextBox1598;
     }
 
@@ -24445,7 +24445,7 @@ class TableCell1775Attbl4 extends TableCell {
      * @param TextBox1598 TextBox1598
      */
     @JsonProperty("TextBox1598")
-    public void setTextBox1598(TextBox TextBox1598) {
+    public void setTextBox1598(TextBoxNum TextBox1598) {
         this.TextBox1598 = TextBox1598;
     }
 
@@ -24459,16 +24459,16 @@ class TableCell1775Attbl4 extends TableCell {
  */
 class TableCell1776Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1599")
-    private TextBox TextBox1599;
+    private TextBoxNum TextBox1599;
 
     /*
      * getTextBox1599
      * @return TextBox1599
      */
     @JsonProperty("TextBox1599")
-    public TextBox getTextBox1599() {
+    public TextBoxNum getTextBox1599() {
         return TextBox1599;
     }
 
@@ -24477,7 +24477,7 @@ class TableCell1776Attbl4 extends TableCell {
      * @param TextBox1599 TextBox1599
      */
     @JsonProperty("TextBox1599")
-    public void setTextBox1599(TextBox TextBox1599) {
+    public void setTextBox1599(TextBoxNum TextBox1599) {
         this.TextBox1599 = TextBox1599;
     }
 
@@ -24491,16 +24491,16 @@ class TableCell1776Attbl4 extends TableCell {
  */
 class TableCell1777Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1600")
-    private TextBox TextBox1600;
+    private TextBoxNum TextBox1600;
 
     /*
      * getTextBox1600
      * @return TextBox1600
      */
     @JsonProperty("TextBox1600")
-    public TextBox getTextBox1600() {
+    public TextBoxNum getTextBox1600() {
         return TextBox1600;
     }
 
@@ -24509,7 +24509,7 @@ class TableCell1777Attbl4 extends TableCell {
      * @param TextBox1600 TextBox1600
      */
     @JsonProperty("TextBox1600")
-    public void setTextBox1600(TextBox TextBox1600) {
+    public void setTextBox1600(TextBoxNum TextBox1600) {
         this.TextBox1600 = TextBox1600;
     }
 
@@ -24523,16 +24523,16 @@ class TableCell1777Attbl4 extends TableCell {
  */
 class TableCell1778Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1601")
-    private TextBox TextBox1601;
+    private TextBoxNum TextBox1601;
 
     /*
      * getTextBox1601
      * @return TextBox1601
      */
     @JsonProperty("TextBox1601")
-    public TextBox getTextBox1601() {
+    public TextBoxNum getTextBox1601() {
         return TextBox1601;
     }
 
@@ -24541,7 +24541,7 @@ class TableCell1778Attbl4 extends TableCell {
      * @param TextBox1601 TextBox1601
      */
     @JsonProperty("TextBox1601")
-    public void setTextBox1601(TextBox TextBox1601) {
+    public void setTextBox1601(TextBoxNum TextBox1601) {
         this.TextBox1601 = TextBox1601;
     }
 
@@ -24555,16 +24555,16 @@ class TableCell1778Attbl4 extends TableCell {
  */
 class TableCell1779Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1602")
-    private TextBox TextBox1602;
+    private TextBoxNum TextBox1602;
 
     /*
      * getTextBox1602
      * @return TextBox1602
      */
     @JsonProperty("TextBox1602")
-    public TextBox getTextBox1602() {
+    public TextBoxNum getTextBox1602() {
         return TextBox1602;
     }
 
@@ -24573,7 +24573,7 @@ class TableCell1779Attbl4 extends TableCell {
      * @param TextBox1602 TextBox1602
      */
     @JsonProperty("TextBox1602")
-    public void setTextBox1602(TextBox TextBox1602) {
+    public void setTextBox1602(TextBoxNum TextBox1602) {
         this.TextBox1602 = TextBox1602;
     }
 
@@ -24587,16 +24587,16 @@ class TableCell1779Attbl4 extends TableCell {
  */
 class TableCell1780Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1603")
-    private TextBox TextBox1603;
+    private TextBoxNum TextBox1603;
 
     /*
      * getTextBox1603
      * @return TextBox1603
      */
     @JsonProperty("TextBox1603")
-    public TextBox getTextBox1603() {
+    public TextBoxNum getTextBox1603() {
         return TextBox1603;
     }
 
@@ -24605,7 +24605,7 @@ class TableCell1780Attbl4 extends TableCell {
      * @param TextBox1603 TextBox1603
      */
     @JsonProperty("TextBox1603")
-    public void setTextBox1603(TextBox TextBox1603) {
+    public void setTextBox1603(TextBoxNum TextBox1603) {
         this.TextBox1603 = TextBox1603;
     }
 
@@ -24619,16 +24619,16 @@ class TableCell1780Attbl4 extends TableCell {
  */
 class TableCell1781Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1604")
-    private TextBox TextBox1604;
+    private TextBoxNum TextBox1604;
 
     /*
      * getTextBox1604
      * @return TextBox1604
      */
     @JsonProperty("TextBox1604")
-    public TextBox getTextBox1604() {
+    public TextBoxNum getTextBox1604() {
         return TextBox1604;
     }
 
@@ -24637,7 +24637,7 @@ class TableCell1781Attbl4 extends TableCell {
      * @param TextBox1604 TextBox1604
      */
     @JsonProperty("TextBox1604")
-    public void setTextBox1604(TextBox TextBox1604) {
+    public void setTextBox1604(TextBoxNum TextBox1604) {
         this.TextBox1604 = TextBox1604;
     }
 
@@ -24651,16 +24651,16 @@ class TableCell1781Attbl4 extends TableCell {
  */
 class TableCell1782Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1605")
-    private TextBox TextBox1605;
+    private TextBoxNum TextBox1605;
 
     /*
      * getTextBox1605
      * @return TextBox1605
      */
     @JsonProperty("TextBox1605")
-    public TextBox getTextBox1605() {
+    public TextBoxNum getTextBox1605() {
         return TextBox1605;
     }
 
@@ -24669,7 +24669,7 @@ class TableCell1782Attbl4 extends TableCell {
      * @param TextBox1605 TextBox1605
      */
     @JsonProperty("TextBox1605")
-    public void setTextBox1605(TextBox TextBox1605) {
+    public void setTextBox1605(TextBoxNum TextBox1605) {
         this.TextBox1605 = TextBox1605;
     }
 
@@ -24683,16 +24683,16 @@ class TableCell1782Attbl4 extends TableCell {
  */
 class TableCell1783Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1606")
-    private TextBox TextBox1606;
+    private TextBoxNum TextBox1606;
 
     /*
      * getTextBox1606
      * @return TextBox1606
      */
     @JsonProperty("TextBox1606")
-    public TextBox getTextBox1606() {
+    public TextBoxNum getTextBox1606() {
         return TextBox1606;
     }
 
@@ -24701,7 +24701,7 @@ class TableCell1783Attbl4 extends TableCell {
      * @param TextBox1606 TextBox1606
      */
     @JsonProperty("TextBox1606")
-    public void setTextBox1606(TextBox TextBox1606) {
+    public void setTextBox1606(TextBoxNum TextBox1606) {
         this.TextBox1606 = TextBox1606;
     }
 
@@ -24715,16 +24715,16 @@ class TableCell1783Attbl4 extends TableCell {
  */
 class TableCell1784Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1607")
-    private TextBox TextBox1607;
+    private TextBoxNum TextBox1607;
 
     /*
      * getTextBox1607
      * @return TextBox1607
      */
     @JsonProperty("TextBox1607")
-    public TextBox getTextBox1607() {
+    public TextBoxNum getTextBox1607() {
         return TextBox1607;
     }
 
@@ -24733,7 +24733,7 @@ class TableCell1784Attbl4 extends TableCell {
      * @param TextBox1607 TextBox1607
      */
     @JsonProperty("TextBox1607")
-    public void setTextBox1607(TextBox TextBox1607) {
+    public void setTextBox1607(TextBoxNum TextBox1607) {
         this.TextBox1607 = TextBox1607;
     }
 
@@ -24747,16 +24747,16 @@ class TableCell1784Attbl4 extends TableCell {
  */
 class TableCell1785Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1608")
-    private TextBox TextBox1608;
+    private TextBoxNum TextBox1608;
 
     /*
      * getTextBox1608
      * @return TextBox1608
      */
     @JsonProperty("TextBox1608")
-    public TextBox getTextBox1608() {
+    public TextBoxNum getTextBox1608() {
         return TextBox1608;
     }
 
@@ -24765,7 +24765,7 @@ class TableCell1785Attbl4 extends TableCell {
      * @param TextBox1608 TextBox1608
      */
     @JsonProperty("TextBox1608")
-    public void setTextBox1608(TextBox TextBox1608) {
+    public void setTextBox1608(TextBoxNum TextBox1608) {
         this.TextBox1608 = TextBox1608;
     }
 
@@ -24779,16 +24779,16 @@ class TableCell1785Attbl4 extends TableCell {
  */
 class TableCell1786Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1609")
-    private TextBox TextBox1609;
+    private TextBoxNum TextBox1609;
 
     /*
      * getTextBox1609
      * @return TextBox1609
      */
     @JsonProperty("TextBox1609")
-    public TextBox getTextBox1609() {
+    public TextBoxNum getTextBox1609() {
         return TextBox1609;
     }
 
@@ -24797,7 +24797,7 @@ class TableCell1786Attbl4 extends TableCell {
      * @param TextBox1609 TextBox1609
      */
     @JsonProperty("TextBox1609")
-    public void setTextBox1609(TextBox TextBox1609) {
+    public void setTextBox1609(TextBoxNum TextBox1609) {
         this.TextBox1609 = TextBox1609;
     }
 
@@ -24811,16 +24811,16 @@ class TableCell1786Attbl4 extends TableCell {
  */
 class TableCell1787Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1610")
-    private TextBox TextBox1610;
+    private TextBoxNum TextBox1610;
 
     /*
      * getTextBox1610
      * @return TextBox1610
      */
     @JsonProperty("TextBox1610")
-    public TextBox getTextBox1610() {
+    public TextBoxNum getTextBox1610() {
         return TextBox1610;
     }
 
@@ -24829,7 +24829,7 @@ class TableCell1787Attbl4 extends TableCell {
      * @param TextBox1610 TextBox1610
      */
     @JsonProperty("TextBox1610")
-    public void setTextBox1610(TextBox TextBox1610) {
+    public void setTextBox1610(TextBoxNum TextBox1610) {
         this.TextBox1610 = TextBox1610;
     }
 
@@ -24843,16 +24843,16 @@ class TableCell1787Attbl4 extends TableCell {
  */
 class TableCell1788Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1611")
-    private TextBox TextBox1611;
+    private TextBoxNum TextBox1611;
 
     /*
      * getTextBox1611
      * @return TextBox1611
      */
     @JsonProperty("TextBox1611")
-    public TextBox getTextBox1611() {
+    public TextBoxNum getTextBox1611() {
         return TextBox1611;
     }
 
@@ -24861,7 +24861,7 @@ class TableCell1788Attbl4 extends TableCell {
      * @param TextBox1611 TextBox1611
      */
     @JsonProperty("TextBox1611")
-    public void setTextBox1611(TextBox TextBox1611) {
+    public void setTextBox1611(TextBoxNum TextBox1611) {
         this.TextBox1611 = TextBox1611;
     }
 
@@ -24875,16 +24875,16 @@ class TableCell1788Attbl4 extends TableCell {
  */
 class TableCell1789Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1612")
-    private TextBox TextBox1612;
+    private TextBoxNum TextBox1612;
 
     /*
      * getTextBox1612
      * @return TextBox1612
      */
     @JsonProperty("TextBox1612")
-    public TextBox getTextBox1612() {
+    public TextBoxNum getTextBox1612() {
         return TextBox1612;
     }
 
@@ -24893,7 +24893,7 @@ class TableCell1789Attbl4 extends TableCell {
      * @param TextBox1612 TextBox1612
      */
     @JsonProperty("TextBox1612")
-    public void setTextBox1612(TextBox TextBox1612) {
+    public void setTextBox1612(TextBoxNum TextBox1612) {
         this.TextBox1612 = TextBox1612;
     }
 
@@ -24907,16 +24907,16 @@ class TableCell1789Attbl4 extends TableCell {
  */
 class TableCell1790Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1613")
-    private TextBox TextBox1613;
+    private TextBoxNum TextBox1613;
 
     /*
      * getTextBox1613
      * @return TextBox1613
      */
     @JsonProperty("TextBox1613")
-    public TextBox getTextBox1613() {
+    public TextBoxNum getTextBox1613() {
         return TextBox1613;
     }
 
@@ -24925,7 +24925,7 @@ class TableCell1790Attbl4 extends TableCell {
      * @param TextBox1613 TextBox1613
      */
     @JsonProperty("TextBox1613")
-    public void setTextBox1613(TextBox TextBox1613) {
+    public void setTextBox1613(TextBoxNum TextBox1613) {
         this.TextBox1613 = TextBox1613;
     }
 
@@ -24939,16 +24939,16 @@ class TableCell1790Attbl4 extends TableCell {
  */
 class TableCell1791Attbl4 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("TextBox1614")
-    private TextBox TextBox1614;
+    private TextBoxNum TextBox1614;
 
     /*
      * getTextBox1614
      * @return TextBox1614
      */
     @JsonProperty("TextBox1614")
-    public TextBox getTextBox1614() {
+    public TextBoxNum getTextBox1614() {
         return TextBox1614;
     }
 
@@ -24957,7 +24957,7 @@ class TableCell1791Attbl4 extends TableCell {
      * @param TextBox1614 TextBox1614
      */
     @JsonProperty("TextBox1614")
-    public void setTextBox1614(TextBox TextBox1614) {
+    public void setTextBox1614(TextBoxNum TextBox1614) {
         this.TextBox1614 = TextBox1614;
     }
 

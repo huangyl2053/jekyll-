@@ -7,14 +7,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhe
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
-import java.util.HashSet;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
@@ -22,12 +17,16 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoIdentifier;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -601,6 +600,26 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
             return SearchResult.of(Collections.<HihokenshaDaicho>emptyList(), 0, false);
         }
         return SearchResult.of(hihokenshaList, 0, false);
+    }
+
+    /**
+     * 被保険者資格詳細異動用、変更履歴グリッドのデータを取得します。
+     *
+     * @return SearchResult<HihokenshaDaicho>
+     */
+    @Override
+    public SearchResult<HihokenshaDaicho> getGridDataFor資格詳細異動() {
+        Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> result
+                = ViewStateHolder.get(ViewStateKeys.資格変更履歴_被保険者台帳情報, Models.class);
+        List<HihokenshaDaicho> retList = new ArrayList<>();
+        for (dgHenko_Row row : this.getDgHenko().getDataSource()) {
+            retList.add(result.get(new HihokenshaDaichoIdentifier(new HihokenshaNo(row.getHihokenshaNo()),
+                    row.getIdoYMD().getValue(), row.getEdaNo())));
+        }
+        if (retList.isEmpty()) {
+            return SearchResult.of(Collections.<HihokenshaDaicho>emptyList(), 0, false);
+        }
+        return SearchResult.of(retList, 0, false);
     }
 
     /**

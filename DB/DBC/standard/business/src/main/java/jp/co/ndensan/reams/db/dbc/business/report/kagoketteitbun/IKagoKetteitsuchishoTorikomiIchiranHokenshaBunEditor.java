@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
  *
  * @reamsid_L DBC-0980-470 lijunjun
  */
-interface IKagoKetteitsuchishoTorikomiIchiranHokenshaBunEditor extends IReportEditor<KagoKetteitsuchishoTorikomiIchiranHokenshaBunSource> {
+public interface IKagoKetteitsuchishoTorikomiIchiranHokenshaBunEditor
+        extends IReportEditor<KagoKetteitsuchishoTorikomiIchiranHokenshaBunSource> {
 
 }

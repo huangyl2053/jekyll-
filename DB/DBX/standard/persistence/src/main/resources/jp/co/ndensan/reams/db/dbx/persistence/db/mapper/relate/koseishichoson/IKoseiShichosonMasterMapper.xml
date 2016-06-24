@@ -15,7 +15,7 @@
     <!--DbT7052KoseiShichosonShisho-->
     <select id="getKoseiShichosonEntity"
             resultMap="resultMap_KoseiShichosonMasterEntity"
-            parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatisprm.koseishichoson.KoseiShichosonMasterMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatisprm.koseishichoson.KoseiShichosonMasterMapperParameter" fetchSize="500" resultOrdered="true">
           SELECT
         DbT7051KoseiShichosonMaster.*,
         DbT7052KoseiShichosonShishoMaster.*

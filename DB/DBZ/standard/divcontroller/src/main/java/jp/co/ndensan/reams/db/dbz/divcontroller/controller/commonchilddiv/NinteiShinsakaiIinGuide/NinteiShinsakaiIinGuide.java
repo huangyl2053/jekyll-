@@ -10,23 +10,23 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideResult;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideMapperParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideMapperParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinsakaiIinGuide.NinteiShinsakaiIinGuide.NinteiShinsakaiIinGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideHandler;
-import jp.co.ndensan.reams.db.dbz.service.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideManager;
+import jp.co.ndensan.reams.db.dbz.service.core.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 認定審査会委員ガイドのDivControllerです
@@ -55,8 +55,8 @@ public class NinteiShinsakaiIinGuide {
         div.getKensakuJoken().getDdlShinsainShikakuCode().setSelectedKey(RString.EMPTY);
         getHandler(div).set性別();
         getHandler(div).set審査会委員資格();
-        div.getKensakuJoken().getCcdHokensha().loadHokenshaList();
-        div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数上限());
+        div.getKensakuJoken().getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
+        div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数());
         div.getBtnSaikensaku().setVisible(false);
         div.getDdlIryoKikan().getDataSource().clear();
         div.getDdlKaigoJigyosha().getDataSource().clear();
@@ -75,8 +75,8 @@ public class NinteiShinsakaiIinGuide {
         div.getKensakuJoken().getTxtShinsakaiIinCodeTo().setValue(RString.EMPTY);
         div.getKensakuJoken().getTxtShinsakaiIinName().setValue(RString.EMPTY);
         div.getKensakuJoken().getDdlSeibetsu().setSelectedKey(RString.EMPTY);
-        div.getKensakuJoken().getCcdHokensha().loadHokenshaList();
-        div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数上限());
+        div.getKensakuJoken().getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
+        div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数());
         div.getKensakuJoken().getDdlShinsainShikakuCode().setSelectedKey(RString.EMPTY);
         div.getKensakuJoken().getShosaiJoken().getDdlIryoKikan().setSelectedKey(RString.EMPTY);
         div.getKensakuJoken().getShosaiJoken().getDdlKaigoJigyosha().setSelectedKey(RString.EMPTY);
@@ -108,6 +108,9 @@ public class NinteiShinsakaiIinGuide {
         RString kaigoJigyosha = div.getKensakuJoken().getShosaiJoken().getDdlKaigoJigyosha().getSelectedKey();
         RString sonotaJigyosha = div.getKensakuJoken().getShosaiJoken().getDdlSonotaJigyosha().getSelectedKey();
         Decimal maxKensu = div.getKensakuJoken().getTxtMaxKensu().getValue();
+        if (maxKensu.intValue() > get最大取得件数上限().intValue()) {
+            throw new ApplicationException("最大取得件数上限が超過しています。最大取得件数上限(" + get最大取得件数上限().intValue() + ")以下に調整してください。");
+        }
         RString kikenFlag = getChkFlag(div.getKensakuJoken().getShosaiJoken().getChkKiken().getSelectedKeys());
         RString haishiFlag = getChkFlag(div.getKensakuJoken().getShosaiJoken().getChkHaishi().getSelectedKeys());
         NinteiShinsakaiIinGuideMapperParameter parameter;
@@ -168,8 +171,8 @@ public class NinteiShinsakaiIinGuide {
         div.getKensakuJoken().getTxtShinsakaiIinCodeTo().setValue(RString.EMPTY);
         div.getKensakuJoken().getTxtShinsakaiIinName().setValue(RString.EMPTY);
         div.getKensakuJoken().getDdlSeibetsu().setSelectedKey(RString.EMPTY);
-        div.getKensakuJoken().getCcdHokensha().loadHokenshaList();
-        div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数上限());
+        div.getKensakuJoken().getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
+        div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数());
         div.getKensakuJoken().getDdlShinsainShikakuCode().setSelectedKey(RString.EMPTY);
         div.getKensakuJoken().getShosaiJoken().getDdlIryoKikan().setSelectedKey(RString.EMPTY);
         div.getKensakuJoken().getShosaiJoken().getDdlKaigoJigyosha().setSelectedKey(RString.EMPTY);
@@ -192,8 +195,8 @@ public class NinteiShinsakaiIinGuide {
     public ResponseData<NinteiShinsakaiIinGuideDiv> onClick_ShinsakaiIinIchiranDate(NinteiShinsakaiIinGuideDiv div) {
         RString 介護認定審査会委員コード = div.getShinsakaiIinIchiran().getDgShinsakaiIinIchiran().getClickedItem().getCode();
         RString 審査会委員名称 = div.getShinsakaiIinIchiran().getDgShinsakaiIinIchiran().getClickedItem().getShinsakaiIinName();
-        ViewStateHolder.put(ViewStateKeys.介護認定審査会委員コード, 介護認定審査会委員コード);
-        ViewStateHolder.put(ViewStateKeys.審査会委員名称, 審査会委員名称);
+        div.setHdnShinsakaiIinCode(介護認定審査会委員コード);
+        div.setHdnShinsakaiIinName(審査会委員名称);
         return ResponseData.of(div).respond();
     }
 
@@ -207,11 +210,22 @@ public class NinteiShinsakaiIinGuide {
         return ResponseData.of(div).respond();
     }
 
+    private Decimal get最大取得件数() {
+        Decimal 最大取得件数 = new Decimal(0);
+        if (DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告) != null) {
+            最大取得件数 = new Decimal(DbBusinessConfig.get(
+                    ConfigNameDBU.検索制御_最大取得件数,
+                    RDate.getNowDate(),
+                    SubGyomuCode.DBU介護統計報告).toString());
+        }
+        return 最大取得件数;
+    }
+
     private Decimal get最大取得件数上限() {
         Decimal 最大取得件数上限 = new Decimal(0);
-        if (DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告) != null) {
+        if (DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告) != null) {
             最大取得件数上限 = new Decimal(DbBusinessConfig.get(
-                    ConfigNameDBU.検索制御_最大取得件数上限,
+                    ConfigNameDBU.検索制御_最大取得件数,
                     RDate.getNowDate(),
                     SubGyomuCode.DBU介護統計報告).toString());
         }

@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.db.dbx.business.core._YoKaigoNinteiChosa;
 import jp.co.ndensan.reams.db.dbx.business.core._YoKaigoNinteiIchijiHantei;
 import jp.co.ndensan.reams.db.dbx.business.core._YoKaigoNinteiKekka;
 import jp.co.ndensan.reams.db.dbx.business.core._YoKaigoNinteiShinsei;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.YoKaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.KaigohokenJukyushaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.KaigohokenJukyushaAndKojinEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;

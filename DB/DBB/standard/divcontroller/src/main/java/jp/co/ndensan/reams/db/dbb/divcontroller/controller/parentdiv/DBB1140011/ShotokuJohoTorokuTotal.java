@@ -38,7 +38,8 @@ public class ShotokuJohoTorokuTotal {
      * @return div
      */
     public ResponseData<ShotokuJohoTorokuTotalDiv> onLoad(ShotokuJohoTorokuTotalDiv div) {
-        getHandler(div).onload();
+        FukaTaishoshaKey viewStateData = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
+        getHandler(div).onload(viewStateData);
         return ResponseData.of(div).respond();
     }
 

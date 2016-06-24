@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020081.Yos
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020081.YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
+import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -116,7 +116,6 @@ public class YoshikiNinogoHoseiNinorokuHosei {
                     UrWarningMessages.相違.getMessage().replace(
                             MSG_GOKEI.toString(), MSG_YOSIENKEIGOKEI.toString())).respond();
         }
-
         if (is予防要支援はい(予防要支援結果チェック, div)) {
             div.set予防要支援結果(RString.FULL_SPACE);
             if (介護要支援結果チェック) {
@@ -149,7 +148,7 @@ public class YoshikiNinogoHoseiNinorokuHosei {
                     new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                             UrQuestionMessages.処理実行の確認.getMessage().evaluate())).respond();
         }
-
+        ダイアログいいえチェック(予防要支援結果チェック, div, 介護要支援結果チェック, 合計要支援結果チェック);
         if (!ResponseHolder.isReRequest() && !修正データ.isEmpty()) {
             return ResponseData.of(div).addMessage(
                     new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
@@ -164,6 +163,25 @@ public class YoshikiNinogoHoseiNinorokuHosei {
             return ResponseData.of(div).setState(DBU0020081StateName.完了状態);
         } else {
             return ResponseData.of(div).respond();
+        }
+    }
+
+    private void ダイアログいいえチェック(boolean 予防要支援結果チェック, YoshikiNinogoHoseiNinorokuHoseiDiv div,
+            boolean 介護要支援結果チェック, boolean 合計要支援結果チェック) {
+        if ((new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No)
+                || (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
+                        ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No)) {
+            if (予防要支援結果チェック) {
+                div.set予防要支援結果(RString.EMPTY);
+            }
+            if (介護要支援結果チェック) {
+                div.set介護要支援結果(RString.EMPTY);
+            }
+            if (合計要支援結果チェック) {
+                div.set合計要支援結果(RString.EMPTY);
+            }
         }
     }
 

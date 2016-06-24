@@ -5,9 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0540001;
 
+import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbb.business.core.choshuhoho.ChoshuHohoResult;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.DBB0540001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.MainPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0540001.MainPanelHandler;
+import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbb.service.core.kanri.ChosyuHohoHenko;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
@@ -46,7 +50,12 @@ public class MainPanel {
                 賦課対象者.get通知書番号(), 賦課年度, 賦課対象者.get市町村コード(), 識別コード).build();
         MainPanelHandler handler = new MainPanelHandler(div);
         handler.setヘッダエリア(識別コード, key);
-        handler.set世帯所得情報一覧エリア(賦課年度, 被保険者番号);
+        ChoshuHohoResult serviceResult = ChosyuHohoHenko.createInstance()
+                .getChosyuHoho(賦課年度, 被保険者番号);
+        ViewStateHolder.put(ViewStateKeys.徴収方法データ, serviceResult.getHoho());
+        ViewStateHolder.put(ViewStateKeys.特別徴収停止日時, serviceResult.getHoho().get特別徴収停止日時());
+        ViewStateHolder.put(ViewStateKeys.特別徴収停止事由コード, serviceResult.getHoho().get特別徴収停止事由コード());
+        handler.set世帯所得情報一覧エリア(賦課年度, 被保険者番号, serviceResult);
         AccessLogger.log(AccessLogType.照会, PersonalData.withKojinNo(識別コード));
         return ResponseData.of(div).respond();
     }
@@ -58,10 +67,8 @@ public class MainPanel {
      * @return ResponseData
      */
     public ResponseData<MainPanelDiv> onChange(MainPanelDiv div) {
-
         MainPanelHandler handler = new MainPanelHandler(div);
         handler.change普通徴収に切り替える月DDL();
-
         return ResponseData.of(div).respond();
     }
 
@@ -77,7 +84,9 @@ public class MainPanel {
         FlexibleYear 賦課年度 = 賦課対象者.get賦課年度();
         HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
         try {
-            handler.saveボタンを押下(賦課年度, 被保険者番号);
+            ChoshuHoho 徴収方法データ = ViewStateHolder.
+                    get(ViewStateKeys.徴収方法データ, ChoshuHoho.class);
+            handler.saveボタンを押下(賦課年度, 被保険者番号, 徴収方法データ);
             div.getKanryoMessage().getCcdKaigoKanryoMessage().setMessage(処理名,
                     賦課対象者.get識別コード().value(),
                     div.getAtenaInfo().getKiagoAtenaInfo().get氏名漢字(), true);
@@ -89,5 +98,4 @@ public class MainPanel {
             return ResponseData.of(div).setState(DBB0540001StateName.完了状態);
         }
     }
-
 }

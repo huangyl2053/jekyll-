@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujii;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shujiiiryokikanandshujiiguide.IShujiiIryokikanAndShujiiGuideMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 主治医医療機関＆主治医情報の取得処理です。
  *
- * @reamsid_L DBE-1300-130 xuyannan
+ * @reamsid_L DBZ-1300-130 xuyannan
  */
 public class ShujiiIryokikanAndShujiiGuideFinder {
 

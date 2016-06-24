@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.shujiiIk
 
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.shujiiikenshojoho.IShujiiIkenshoJohoMapper;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5302ShujiiIkenshoJohoEntityGenerator;

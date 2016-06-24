@@ -14,10 +14,10 @@ import jp.co.ndensan.reams.db.dba.business.report.shoukanbaraijuryoininbaraishin
 import jp.co.ndensan.reams.db.dba.entity.report.shoukanbaraijuryoininbaraishinseishochohyo.ShokanharaiJuryoIninShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinSeinengappiHyojihoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
@@ -74,16 +74,16 @@ public class ShoukanbaraiJuryoIninbaraiShinseishoChohyo {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<ShokanharaiJuryoIninShinseishoReportSource> assembler
                     = createAssembler(property, reportManager)) {
+                ReportSourceWriter<ShokanharaiJuryoIninShinseishoReportSource> reportWriter
+                        = new ReportSourceWriter(assembler);
                 INinshoshaSourceBuilderCreator builderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder builder = builderCreator.create(
                         GyomuCode.DB介護保険,
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                         null,
-                        null);
+                        reportWriter.getImageFolderPath());
                 for (ShokanharaiJuryoIninShinseishoReport report
                         : toReports(get被保険者基本情報(識別コード, 被保険者番号), builder.buildSource())) {
-                    ReportSourceWriter<ShokanharaiJuryoIninShinseishoReportSource> reportWriter
-                            = new ReportSourceWriter(assembler);
                     report.writeBy(reportWriter);
                 }
             }
@@ -116,14 +116,13 @@ public class ShoukanbaraiJuryoIninbaraiShinseishoChohyo {
         ShokanharaiJuryoIninShinseishoItem item = new ShokanharaiJuryoIninShinseishoItem(
                 ninshoshaSource.ninshoshaYakushokuMei,
                 birthYMD,
-                // TODO 内部QA：689 (介護保険保険者名称を設定する必要がありません。)
                 get帳票文言(2),
                 business.get住所(),
                 business.get被保険者氏名(),
                 business.getフリガナ(),
                 business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
                 business.get保険者番号().value(),
-                null,
+                new RString("1"),
                 Gender.toValue(business.get性別()).getCommonName(),
                 get帳票文言(1),
                 business.get電話番号(),

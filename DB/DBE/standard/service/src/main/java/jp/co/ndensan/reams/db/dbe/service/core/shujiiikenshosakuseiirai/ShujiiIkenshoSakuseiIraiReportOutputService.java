@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshosakuseiirai;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReport;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.kaigohokenshindanmeireish
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho.ShujiiIkenshoSakuseiIraishoReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoReportSource;
+import jp.co.ndensan.reams.db.dbe.service.report.ikenshokinyuyoshi.IkenshokinyuyoshiPrintService;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha._NinshoshaSourceBuilderCreator;
@@ -152,6 +154,24 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
         }
     }
 
+    /**
+     * 主治医意見書記入用紙を出力します。
+     *
+     * @param 主治医意見書記入用紙List 主治医意見書記入用紙List
+     */
+    public void print主治医意見書記入用紙(List<IkenshokinyuyoshiBusiness> 主治医意見書記入用紙List) {
+        new IkenshokinyuyoshiPrintService().print(主治医意見書記入用紙List);
+    }
+
+    /**
+     * 主治医意見書記入用紙OCRを出力します。
+     *
+     * @param 主治医意見書記入用紙OCRList 主治医意見書記入用紙OCRList
+     */
+    public void print主治医意見書記入用紙OCR(List<IkenshokinyuyoshiBusiness> 主治医意見書記入用紙OCRList) {
+        new IkenshokinyuyoshiPrintService().print(主治医意見書記入用紙OCRList);
+    }
+
     private List<ShujiiIkenshoTeishutsuIraishoItem> setNishosha(List<ShujiiIkenshoTeishutsuIraishoItem> itemList, NinshoshaSource ninshosha) {
         List<ShujiiIkenshoTeishutsuIraishoItem> resultList = new ArrayList<>();
         for (ShujiiIkenshoTeishutsuIraishoItem item : itemList) {
@@ -191,14 +211,14 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             NinshoshaSource ninshosha) {
         List<KaigohokenShindanMeireishoHeaderItem> resultList = new ArrayList<>();
         for (KaigohokenShindanMeireishoHeaderItem item : itemList) {
-            item.setShomeiHakkoYMD(ninshosha.hakkoYMD);
+            item.setHakkoYMD(ninshosha.hakkoYMD);
             item.setDenshiKoin(ninshosha.denshiKoin);
-//            item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
-//            item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
-//            item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);
-//            item.setNinshoshaShimeiKakenai(ninshosha.ninshoshaShimeiKakenai);
-//            item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
-//            item.setKoinMojiretsu(ninshosha.koinMojiretsu);
+            item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
+            item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
+            item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);
+            item.setNinshoshaShimeiKakenai(ninshosha.ninshoshaShimeiKakenai);
+            item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
+            item.setKoinMojiretsu(ninshosha.koinMojiretsu);
             item.setKoinShoryaku(ninshosha.koinShoryaku);
             resultList.add(item);
         }

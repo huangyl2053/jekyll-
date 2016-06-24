@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijikofree;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoItem;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyotokkijiko.ChosahyoTokkijikoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -18,25 +18,25 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ChosahyoTokkijikoFreeReport extends Report<ChosahyoTokkijikoReportSource> {
 
-    private final List<ChosahyoTokkijikoItem> itemList;
+    private final List<ChosahyoTokkijikoBusiness> businessList;
 
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 要介護認定調査票（特記事項）フリー様式のItem
+     * @param businessList 要介護認定調査票（特記事項）フリー様式のbusiness
      * @return 要介護認定調査票（特記事項）フリー様式のReport
      */
-    public static ChosahyoTokkijikoFreeReport createFrom(List<ChosahyoTokkijikoItem> itemList) {
-        return new ChosahyoTokkijikoFreeReport(itemList);
+    public static ChosahyoTokkijikoFreeReport createFrom(List<ChosahyoTokkijikoBusiness> businessList) {
+        return new ChosahyoTokkijikoFreeReport(businessList);
     }
 
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 要介護認定調査票（特記事項）フリー様式のItem
+     * @param businessList 要介護認定調査票（特記事項）フリー様式のItem
      */
-    protected ChosahyoTokkijikoFreeReport(List<ChosahyoTokkijikoItem> itemList) {
-        this.itemList = itemList;
+    protected ChosahyoTokkijikoFreeReport(List<ChosahyoTokkijikoBusiness> businessList) {
+        this.businessList = businessList;
     }
 
     /**
@@ -46,7 +46,7 @@ public class ChosahyoTokkijikoFreeReport extends Report<ChosahyoTokkijikoReportS
      */
     @Override
     public void writeBy(ReportSourceWriter<ChosahyoTokkijikoReportSource> reportSourceWriter) {
-        for (ChosahyoTokkijikoItem item : itemList) {
+        for (ChosahyoTokkijikoBusiness item : businessList) {
             IChosahyoTokkijikoFreeEditor editor = new ChosahyoTokkijikoFreeEditorImpl(item);
             IChosahyoTokkijikoFreeBuilder builder = new ChosahyoTokkijikoFreeBuilderImpl(editor);
             reportSourceWriter.writeLine(builder);

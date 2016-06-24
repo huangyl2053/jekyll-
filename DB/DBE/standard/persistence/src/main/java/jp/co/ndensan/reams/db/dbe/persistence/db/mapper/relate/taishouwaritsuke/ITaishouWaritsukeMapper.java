@@ -6,10 +6,10 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.taishouwaritsuke;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.CountShinsakaiIinJogaiJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.CountShinsakaiWariateIinJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.KohoshaIchiranMapperParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.TaishouIchiranMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.CountShinsakaiIinJogaiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.CountShinsakaiWariateIinJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.KohoshaIchiranMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.TaishouIchiranMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.taishouwaritsuke.KohoshaIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.taishouwaritsuke.TaishouIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.taishouwaritsuke.TaishouWaritsukeHeadEntity;

@@ -9,9 +9,14 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichigojihantei
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5510IchiGojiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5510IchiGojiHanteiKekkaJohoDac;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5102NinteiKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5105NinteiKanryoJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5502ShinsakaiWariateJohoDac;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -26,11 +31,13 @@ public class ShinsakaiTorokuManager {
     private final DbT5105NinteiKanryoJohoDac dbt5105Dac;
     private final DbT5102NinteiKekkaJohoDac dbt5102Dac;
     private final DbT5510IchiGojiHanteiKekkaJohoDac dbt5501Dac;
+    private final DbT5502ShinsakaiWariateJohoDac dbt5502Dac;
 
     ShinsakaiTorokuManager() {
         this.dbt5105Dac = InstanceProvider.create(DbT5105NinteiKanryoJohoDac.class);
         this.dbt5102Dac = InstanceProvider.create(DbT5102NinteiKekkaJohoDac.class);
         this.dbt5501Dac = InstanceProvider.create(DbT5510IchiGojiHanteiKekkaJohoDac.class);
+        this.dbt5502Dac = InstanceProvider.create(DbT5502ShinsakaiWariateJohoDac.class);
     }
 
     /**
@@ -41,10 +48,12 @@ public class ShinsakaiTorokuManager {
     ShinsakaiTorokuManager(
             DbT5105NinteiKanryoJohoDac dbt5105Dac,
             DbT5102NinteiKekkaJohoDac dbt5102Dac,
-            DbT5510IchiGojiHanteiKekkaJohoDac dbt5501Dac) {
+            DbT5510IchiGojiHanteiKekkaJohoDac dbt5501Dac,
+            DbT5502ShinsakaiWariateJohoDac dbt5502Dac) {
         this.dbt5105Dac = dbt5105Dac;
         this.dbt5102Dac = dbt5102Dac;
         this.dbt5501Dac = dbt5501Dac;
+        this.dbt5502Dac = dbt5502Dac;
     }
 
     /**
@@ -77,6 +86,22 @@ public class ShinsakaiTorokuManager {
     public void saveCsvDataInput(NinteiKekkaJoho 要介護認定結果情報, IchiGojiHanteiKekkaJoho 要介護認定1_5次判定結果情報) {
         dbt5102Dac.save(要介護認定結果情報.toEntity());
         saveIchiGojiHanteiKekkaJoho(要介護認定1_5次判定結果情報);
+    }
+
+    /**
+     * 審査会資料作成年月日を取得します。
+     *
+     * @param 審査会開催番号 審査会開催番号
+     * @param 申請書管理番号 申請書管理番号
+     * @return FlexibleDate 審査会資料作成年月日
+     */
+    @Transaction
+    public FlexibleDate get審査会資料作成年月日(RString 審査会開催番号, ShinseishoKanriNo 申請書管理番号) {
+        DbT5502ShinsakaiWariateJohoEntity entity = dbt5502Dac.selectByKey(審査会開催番号, 申請書管理番号);
+        if (entity != null) {
+            return entity.getShinsakaiShiryoSakuseiYMD();
+        }
+        return FlexibleDate.EMPTY;
     }
 
     private void saveIchiGojiHanteiKekkaJoho(IchiGojiHanteiKekkaJoho 要介護認定1_5次判定結果情報) {

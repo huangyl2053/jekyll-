@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran.IkenshoShujiiIchiranBodyItem;
-import jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran.IkenshoShujiiIchiranHeadItem;
-import jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran.IkenshoShujiiIchiranReport;
+import jp.co.ndensan.reams.db.dbe.business.report.ikenshoshujiiichiran.IkenshoShujiiIchiranHeadItem;
+import jp.co.ndensan.reams.db.dbe.business.report.ikenshoshujiiichiran.IkenshoShujiiIchiranReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.IkenshoShujiiIchiranProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiHateiJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiOutputPage1;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiOutputSort;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ikenshoshujiiichiran.IkenshoShujiiIchiranProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoshujiiichiran.IkenshoShujiiIchiranRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ShujiiIryokikanShujiiIchiranhyoReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -44,7 +46,8 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoshujiiichiran."
             + "IkenshoShujiiIchiranRelateMapper.getIkenshoShujiiIchiranRelateEntity");
-    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("listIchiranhyoUpper_1")));
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
+            new RString(ShujiiIryokikanShujiiIchiranhyoReportSource.ReportSourceFields.listIchiranhyoUpper_1.name())));
     private static final RString CSV出力有無 = new RString("なし");
     private static final RString CSVファイル名 = new RString("-");
     private static final RString 市町村コード = new RString("【市町村コード】");
@@ -59,7 +62,6 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
     private static final RString ジョブ番号 = new RString("【ジョブ番号】");
 
     IkenshoShujiiIchiranHeadItem headItem;
-    List<IkenshoShujiiIchiranBodyItem> bodyItemList;
     IkenshoShujiiIchiranProcessParameter processParameter;
     @BatchWriter
     private BatchReportWriter<ShujiiIryokikanShujiiIchiranhyoReportSource> batchWrite;
@@ -67,7 +69,6 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
 
     @Override
     protected void initialize() {
-        bodyItemList = new ArrayList<>();
         headItem = new IkenshoShujiiIchiranHeadItem(
                 processParameter.getShichosonCode(),
                 processParameter.getShichosonName(),
@@ -96,43 +97,21 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
 
     @Override
     protected void usualProcess(IkenshoShujiiIchiranRelateEntity entity) {
-        bodyItemList.add(setBodyItem(entity));
+        IkenshoShujiiIchiranReport report = new IkenshoShujiiIchiranReport(headItem, entity);
+        report.writeBy(reportSourceWriter);
     }
 
     @Override
     protected void keyBreakProcess(IkenshoShujiiIchiranRelateEntity current) {
         if (hasBrek(getBefore(), current)) {
-            IkenshoShujiiIchiranReport report = IkenshoShujiiIchiranReport.createFrom(headItem, bodyItemList);
+            IkenshoShujiiIchiranReport report = new IkenshoShujiiIchiranReport(headItem, current);
             report.writeBy(reportSourceWriter);
-            bodyItemList = new ArrayList<>();
         }
     }
 
     @Override
     protected void afterExecute() {
-
-        IkenshoShujiiIchiranReport report = IkenshoShujiiIchiranReport.createFrom(headItem, bodyItemList);
-        report.writeBy(reportSourceWriter);
         set出力条件表();
-    }
-
-    private IkenshoShujiiIchiranBodyItem setBodyItem(IkenshoShujiiIchiranRelateEntity entity) {
-        return new IkenshoShujiiIchiranBodyItem(
-                entity.getIryokikanCode(),
-                entity.getIryoKikanMeishoKana(),
-                entity.getDaihyoshaNameKana(),
-                entity.getYubinNo() == null ? RString.EMPTY : entity.getYubinNo().value(),
-                entity.getTelNo() == null ? RString.EMPTY : entity.getTelNo().value(),
-                entity.isIryokikanJokyoFlag(),
-                entity.getShujiiCode(),
-                entity.getShujiiKana() == null ? RString.EMPTY : entity.getShujiiKana().value(),
-                entity.getSeibetsu() == null ? RString.EMPTY : entity.getSeibetsu().getKey(),
-                entity.isShujiiJokyoFlag(),
-                entity.getIryoKikanMeisho(),
-                entity.getDaihyoshaName() == null ? RString.EMPTY : entity.getDaihyoshaName().value(),
-                entity.getJusho(),
-                entity.getShujiiName() == null ? RString.EMPTY : entity.getShujiiName().value(),
-                entity.getShinryokaName());
     }
 
     private boolean hasBrek(IkenshoShujiiIchiranRelateEntity before, IkenshoShujiiIchiranRelateEntity current) {
@@ -167,15 +146,15 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(状況);
-        builder.append(processParameter.getJyokyo());
+        builder.append(ShujiiHateiJokyo.toValue(processParameter.getJyokyo()).get名称());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(並び順);
-        builder.append(processParameter.getOutputSort());
+        builder.append(ShujiiOutputSort.toValue(processParameter.getOutputSort()).get名称());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(改頁);
-        builder.append(processParameter.getNextpage());
+        builder.append(ShujiiOutputPage1.toValue(processParameter.getNextpage()).get名称());
         出力条件.add(builder.toRString());
 
         Association association = AssociationFinderFactory.createInstance().getAssociation();

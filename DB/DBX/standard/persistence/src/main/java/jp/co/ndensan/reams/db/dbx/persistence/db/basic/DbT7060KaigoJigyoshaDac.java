@@ -29,12 +29,15 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護事業者のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 quxiaodong
  */
 public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEntity> {
 
     private static final RString TXT事業者番号 = new RString("事業者番号");
     private static final RString TXT介護事業者エンティティ = new RString("介護事業者エンティティ");
     private static final RString TXTシステム日付 = new RString("システム日付");
+    private static final RString TXT日付 = new RString("日付");
     @InjectSession
     private SqlSession session;
 
@@ -110,26 +113,46 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
      * 入所施設名称の取得。
      *
      * @param 事業者番号 JigyoshaNo
-     * @param システム日付 FlexibleDate
      * @return List<DbT7060KaigoJigyoshaEntity>
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public List<DbT7060KaigoJigyoshaEntity> select介護事業者(
-            JigyoshaNo 事業者番号,
-            FlexibleDate システム日付) throws NullPointerException {
+            JigyoshaNo 事業者番号) throws NullPointerException {
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT事業者番号.toString()));
-        requireNonNull(システム日付, UrSystemErrorMessages.値がnull.getReplacedMessage(TXTシステム日付.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT7060KaigoJigyosha.class).
+                where(eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号)).
+                order(by(yukoKaishiYMD, Order.DESC)).limit(1).
+                toList(DbT7060KaigoJigyoshaEntity.class);
+    }
+
+    /**
+     * 事業者名称の取得。
+     *
+     * @param 事業者番号 JigyoshaNo
+     * @param 日付 FlexibleDate
+     * @return List<DbT7060KaigoJigyoshaEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7060KaigoJigyoshaEntity select事業者の名称(
+            JigyoshaNo 事業者番号,
+            FlexibleDate 日付) throws NullPointerException {
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT事業者番号.toString()));
+        requireNonNull(日付, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT日付.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7060KaigoJigyosha.class).
                 where(and(
                                 eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号),
-                                leq(DbT7060KaigoJigyosha.yukoKaishiYMD, システム日付),
-                                or(leq(システム日付, DbT7060KaigoJigyosha.yukoShuryoYMD), isNULL(DbT7060KaigoJigyosha.yukoShuryoYMD)))).
-                toList(DbT7060KaigoJigyoshaEntity.class);
+                                leq(DbT7060KaigoJigyosha.yukoKaishiYMD, 日付),
+                                or(leq(日付, DbT7060KaigoJigyosha.yukoShuryoYMD), isNULL(DbT7060KaigoJigyosha.yukoShuryoYMD))))
+                .order(by(DbT7060KaigoJigyosha.yukoKaishiYMD, Order.DESC)).limit(1)
+                .toObject(DbT7060KaigoJigyoshaEntity.class);
     }
 
     /**
@@ -172,5 +195,31 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
                                 eq(DbT7060KaigoJigyosha.isDeleted, false)))
                 .order(by(DbT7060KaigoJigyosha.yukoKaishiYMD, Order.DESC)).limit(1)
                 .toObject(DbT7060KaigoJigyoshaEntity.class);
+    }
+
+    /**
+     * 入所施設名称の取得。
+     *
+     * @param 事業者番号 JigyoshaNo
+     * @param システム日付 FlexibleDate
+     * @return List<DbT7060KaigoJigyoshaEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT7060KaigoJigyoshaEntity> select介護事業者(
+            JigyoshaNo 事業者番号,
+            FlexibleDate システム日付) throws NullPointerException {
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT事業者番号.toString()));
+        requireNonNull(システム日付, UrSystemErrorMessages.値がnull.getReplacedMessage(TXTシステム日付.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7060KaigoJigyosha.class).
+                where(and(
+                                eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号),
+                                leq(DbT7060KaigoJigyosha.yukoKaishiYMD, システム日付),
+                                or(leq(システム日付, DbT7060KaigoJigyosha.yukoShuryoYMD), isNULL(DbT7060KaigoJigyosha.yukoShuryoYMD)))).
+                toList(DbT7060KaigoJigyoshaEntity.class);
     }
 }

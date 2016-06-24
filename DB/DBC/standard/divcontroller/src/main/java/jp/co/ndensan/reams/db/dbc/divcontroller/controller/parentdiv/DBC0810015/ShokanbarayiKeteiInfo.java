@@ -42,9 +42,9 @@ public class ShokanbarayiKeteiInfo {
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
 
-        div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getPanelOne().getCcdKaigoAtenaInfo().initialize(識別コード);
         if (!被保険者番号.isEmpty()) {
-            div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getPanelOne().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         } else {
             div.getPanelOne().getCcdKaigoShikakuKihon().setVisible(false);
         }

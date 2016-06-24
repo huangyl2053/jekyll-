@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dba.business.report.juryoininharaikeiyakushinseish
 import jp.co.ndensan.reams.db.dba.business.report.juryoininharaikeiyakushinseisho.JuryoIninharaiKeiyakuShinseishoProerty;
 import jp.co.ndensan.reams.db.dba.business.report.juryoininharaikeiyakushinseisho.JuryoIninharaiKeiyakuShinseishoReport;
 import jp.co.ndensan.reams.db.dba.entity.report.juryoininharaikeiyakushinseisho.JuryoIninharaiKeiyakuShinseishoReportSource;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 /**
  *
  * 介護保険受領委任払い契約申請書Printクラスです。
+ *
  * @reamsid_L DBA-0540-060 dongyabin
  */
 public class JuryoIninbaraiKeiyakuShinseisho {
@@ -61,13 +62,13 @@ public class JuryoIninbaraiKeiyakuShinseisho {
         JuryoIninharaiKeiyakuShinseishoProerty proerty = new JuryoIninharaiKeiyakuShinseishoProerty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<JuryoIninharaiKeiyakuShinseishoReportSource> assembler = createAssembler(proerty, reportManager)) {
+                ReportSourceWriter<JuryoIninharaiKeiyakuShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                        null, null);
+                        null, reportSourceWriter.getImageFolderPath());
                 for (JuryoIninharaiKeiyakuShinseishoReport report : toReports(住宅福祉出力区分,
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
-                    ReportSourceWriter<JuryoIninharaiKeiyakuShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
                 }
             }
@@ -91,14 +92,14 @@ public class JuryoIninbaraiKeiyakuShinseisho {
 
     private List<RString> get文言項目(RString 住宅福祉出力区分) {
         List<RString> 文言項目List = new ArrayList<>();
-        if (住宅福祉出力区分_福祉用具用.equals(住宅福祉出力区分)) {
+        if (住宅福祉出力区分_住宅改修用.equals(住宅福祉出力区分)) {
             文言項目List.add(get帳票文言(INDEX_2, INDEX_2));
             文言項目List.add(get帳票文言(INDEX_2, INDEX_3));
             文言項目List.add(get帳票文言(INDEX_2, INDEX_4));
             文言項目List.add(get帳票文言(INDEX_2, INDEX_5));
             文言項目List.add(get帳票文言(INDEX_2, INDEX_1));
             return 文言項目List;
-        } else if (住宅福祉出力区分_住宅改修用.equals(住宅福祉出力区分)) {
+        } else if (住宅福祉出力区分_福祉用具用.equals(住宅福祉出力区分)) {
             文言項目List.add(get帳票文言(INDEX_1, INDEX_2));
             文言項目List.add(get帳票文言(INDEX_1, INDEX_3));
             文言項目List.add(get帳票文言(INDEX_1, INDEX_4));

@@ -5,9 +5,9 @@
 package jp.co.ndensan.reams.db.dbe.business.core.shinsakai;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsainYusoKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiIinJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaiiincode.ShinsakaiIinCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.ShinsakaiIinJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsainYusoKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaiiincode.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

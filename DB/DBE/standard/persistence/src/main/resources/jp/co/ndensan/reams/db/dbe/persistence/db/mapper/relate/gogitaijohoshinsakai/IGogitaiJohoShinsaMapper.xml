@@ -12,7 +12,7 @@
         <result property="合議体精神科医存在フラグ" column="gogitaiSeishinkaSonzaiFlag"/>
         <result property="介護認定審査会委員氏名" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select id="get合議体情報"
+    <select resultOrdered="true" id="get合議体情報"
             resultMap="resultMap_GogitaiJoho" fetchSize="500">
         SELECT
         DbT5591."gogitaiNo" AS "gogitaiNo"
@@ -42,7 +42,7 @@
         <result property="委員定員" column="shinsakaiIinTeiin"/>
         <result property="催予定場所コード" column="shinsakaiKaisaiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select id="get開催予定情報"
+    <select resultOrdered="true" id="get開催予定情報"
             resultMap="resultMap_ShinsakaiIinJoho"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT

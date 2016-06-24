@@ -9,17 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiKaisaiYoteiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiiinJoho;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.IsHaishi;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.Sikaku;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.hoshu.GogitaichoKubunCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.IsGogitaiSeishinkaSonzai;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.IsShusseki;
+import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.GogitaichoKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsGogitaiSeishinkaSonzai;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShusseki;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.ShinsakaiIinWaritsukeDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.dgShinsakaiIinKoseiIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsGogitaiDummy;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.IsHaishi;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -28,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 介護認定審査会割当委員情報のHandlerクラスです。
@@ -59,14 +57,15 @@ public class ShinsakaiIinWaritsukeHandler {
      * 画面初期化処理です。
      *
      * @param saiYoteiJoho ヘッドエリア内容
+     * @param 開催番号 開催番号
      */
-    public void onLoad(List<ShinsakaiKaisaiYoteiJoho> saiYoteiJoho) {
+    public void onLoad(List<ShinsakaiKaisaiYoteiJoho> saiYoteiJoho, RString 開催番号) {
         List<RString> chkDummyKubunlist = new ArrayList<>();
         List<RString> chkSeishinkailist = new ArrayList<>();
         ShinsakaiKaisaiYoteiJoho business = saiYoteiJoho.get(0);
         RStringBuilder builder = new RStringBuilder();
         builder.append(介護認定審査会の前);
-        builder.append(ViewStateHolder.get(ViewStateKeys.介護認定審査会委員割付_開催番号, RString.class));
+        builder.append(開催番号);
         builder.append(介護認定審査会の後);
         div.getTxtKaigoNinteiShinsakai().setValue(builder.toRString());
         div.getTxtGogitai().setValue(nullToEmpty(business.get合議体()));

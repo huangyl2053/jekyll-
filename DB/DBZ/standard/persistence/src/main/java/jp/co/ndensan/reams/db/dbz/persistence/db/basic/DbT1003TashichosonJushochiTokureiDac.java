@@ -107,6 +107,24 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
     }
 
     /**
+     * 識別コードと異動日により、最大枝番を取得です。
+     *
+     * @param 識別コード 識別コード
+     * @param 異動日 異動日
+     * @return 最大枝番
+     */
+    @Transaction
+    public DbT1003TashichosonJushochiTokureiEntity get最大枝番(ShikibetsuCode 識別コード, FlexibleDate 異動日) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(max(edaNo)).
+                table(DbT1003TashichosonJushochiTokurei.class).
+                where(and(
+                                eq(shikibetsuCode, 識別コード),
+                                eq(idoYMD, 異動日))).
+                toObject(DbT1003TashichosonJushochiTokureiEntity.class);
+    }
+
+    /**
      * 他市町村住所地特例で異動日のレコード中で最大の枝番を取得します。
      *
      * @param 識別コード ShikibetsuCode

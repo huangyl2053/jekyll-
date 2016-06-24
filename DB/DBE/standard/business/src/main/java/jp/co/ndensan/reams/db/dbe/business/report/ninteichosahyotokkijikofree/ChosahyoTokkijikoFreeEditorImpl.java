@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijikofree;
 
-import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoItem;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyotokkijiko.ChosahyoTokkijikoReportSource;
 
 /**
@@ -15,15 +15,15 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyotokkijiko.C
  */
 public class ChosahyoTokkijikoFreeEditorImpl implements IChosahyoTokkijikoFreeEditor {
 
-    private final ChosahyoTokkijikoItem item;
+    private final ChosahyoTokkijikoBusiness business;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link ChosahyoTokkijikoItem}
+     * @param business {@link ChosahyoTokkijikoBusiness}
      */
-    protected ChosahyoTokkijikoFreeEditorImpl(ChosahyoTokkijikoItem item) {
-        this.item = item;
+    protected ChosahyoTokkijikoFreeEditorImpl(ChosahyoTokkijikoBusiness business) {
+        this.business = business;
     }
 
     /**
@@ -38,30 +38,29 @@ public class ChosahyoTokkijikoFreeEditorImpl implements IChosahyoTokkijikoFreeEd
     }
 
     private ChosahyoTokkijikoReportSource editSource(ChosahyoTokkijikoReportSource source) {
-        // TODO 内部QA:667 Redmine#:75887 (二つ帳票formファイルがあるので、処置に惑います。)
-        source.hokenshaNo1 = item.getHokenshaNo1();
-        source.hokenshaNo2 = item.getHokenshaNo2();
-        source.hokenshaNo3 = item.getHokenshaNo3();
-        source.hokenshaNo4 = item.getHokenshaNo4();
-        source.hokenshaNo5 = item.getHokenshaNo5();
-        source.hokenshaNo6 = item.getHokenshaNo6();
-        source.shinseiYY1 = item.getShinseiYY1();
-        source.shinseiYY2 = item.getShinseiYY2();
-        source.shinseiMM1 = item.getShinseiMM1();
-        source.shinseiMM2 = item.getShinseiMM2();
-        source.shinseiDD1 = item.getShinseiDD1();
-        source.shinseiDD2 = item.getShinseiDD2();
-        source.hihokenshaNo1 = item.getHihokenshaNo1();
-        source.hihokenshaNo2 = item.getHihokenshaNo2();
-        source.hihokenshaNo3 = item.getHihokenshaNo3();
-        source.hihokenshaNo4 = item.getHihokenshaNo4();
-        source.hihokenshaNo5 = item.getHihokenshaNo5();
-        source.hihokenshaNo6 = item.getHihokenshaNo6();
-        source.hihokenshaNo7 = item.getHihokenshaNo7();
-        source.hihokenshaNo8 = item.getHihokenshaNo8();
-        source.hihokenshaNo9 = item.getHihokenshaNo9();
-        source.hihokenshaNo10 = item.getHihokenshaNo10();
-        source.hihokenshaName = item.getHihokenshaName();
+        source.hokenshaNo1 = business.getHokenshaNo1();
+        source.hokenshaNo2 = business.getHokenshaNo2();
+        source.hokenshaNo3 = business.getHokenshaNo3();
+        source.hokenshaNo4 = business.getHokenshaNo4();
+        source.hokenshaNo5 = business.getHokenshaNo5();
+        source.hokenshaNo6 = business.getHokenshaNo6();
+        source.shinseiYY1 = business.getShinseiYY1();
+        source.shinseiYY2 = business.getShinseiYY2();
+        source.shinseiMM1 = business.getShinseiMM1();
+        source.shinseiMM2 = business.getShinseiMM2();
+        source.shinseiDD1 = business.getShinseiDD1();
+        source.shinseiDD2 = business.getShinseiDD2();
+        source.hihokenshaNo1 = business.getHihokenshaNo1();
+        source.hihokenshaNo2 = business.getHihokenshaNo2();
+        source.hihokenshaNo3 = business.getHihokenshaNo3();
+        source.hihokenshaNo4 = business.getHihokenshaNo4();
+        source.hihokenshaNo5 = business.getHihokenshaNo5();
+        source.hihokenshaNo6 = business.getHihokenshaNo6();
+        source.hihokenshaNo7 = business.getHihokenshaNo7();
+        source.hihokenshaNo8 = business.getHihokenshaNo8();
+        source.hihokenshaNo9 = business.getHihokenshaNo9();
+        source.hihokenshaNo10 = business.getHihokenshaNo10();
+        source.hihokenshaName = business.getHihokenshaName();
         return source;
     }
 }

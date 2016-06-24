@@ -54,6 +54,7 @@ public class ShikyuShinseiDetail {
     private static final RString メッセージ_更新 = new RString("更新");
     private static final RString 申請を保存する = new RString("btnUpdate");
     private static final RString 申請を削除する = new RString("btnDelete");
+    private static final RString 確認 = new RString("確認");
 
     /**
      * 画面初期化処理です。
@@ -183,13 +184,17 @@ public class ShikyuShinseiDetail {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-
-        ValidationMessageControlPairs valid = getValidationHandler(div).validateFor支払金額合計整合性チェック();
+        ValidationMessageControlPairs valid = new ValidationMessageControlPairs();
+        if (!ResponseHolder.isWarningIgnoredRequest() && !div.getCheckFlag().equals(確認)) {
+            valid = getValidationHandler(div).validateFor支払金額合計整合性チェック();
+        }
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
+
         ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.償還払支給申請詳細データ, ShokanShinsei.class);
-        if (!ResponseHolder.isReRequest()) {
+        if (!new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            div.setCheckFlag(確認);
             boolean flag = getHandler(div).update(画面モード, 償還払支給申請);
             if (flag) {
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
