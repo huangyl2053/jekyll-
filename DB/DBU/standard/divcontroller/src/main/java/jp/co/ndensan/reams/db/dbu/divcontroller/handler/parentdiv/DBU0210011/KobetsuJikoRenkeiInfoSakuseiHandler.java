@@ -43,14 +43,14 @@ public class KobetsuJikoRenkeiInfoSakuseiHandler {
     public void initialize(ChushutsuKikanJohoData chushutsuKikanJohoData) {
         if (chushutsuKikanJohoData != null) {
             YMDHMS 対象開始日時 = chushutsuKikanJohoData.get対象開始日時();
-            if (対象開始日時 != null) {
+            if (対象開始日時 != null && !対象開始日時.isEmpty()) {
                 div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromYMD().setValue(
                         chushutsuKikanJohoData.get対象開始日時().getDate());
                 div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromTime().setValue(
                         chushutsuKikanJohoData.get対象開始日時().getRDateTime().getTime());
             }
             YMDHMS 対象終了日時 = chushutsuKikanJohoData.get対象終了日時();
-            if (対象終了日時 != null) {
+            if (対象終了日時 != null && !対象終了日時.isEmpty()) {
                 div.getTblChushutsuKikan().getTxtZenkaiChushutsuToYMD().setValue(
                         chushutsuKikanJohoData.get対象終了日時().getDate());
                 div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().setValue(
