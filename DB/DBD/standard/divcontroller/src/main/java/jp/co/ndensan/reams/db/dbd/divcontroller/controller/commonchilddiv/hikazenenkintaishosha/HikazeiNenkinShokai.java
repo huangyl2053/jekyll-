@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
  *
  * 【共有子Div】 非課税年金のDivControllerです。
  *
- * @reamsid_L DBD-3650-140 liangbc
+ * @reamsid_L DBD-3560-140 liangbc
  */
 public class HikazeiNenkinShokai {
 
