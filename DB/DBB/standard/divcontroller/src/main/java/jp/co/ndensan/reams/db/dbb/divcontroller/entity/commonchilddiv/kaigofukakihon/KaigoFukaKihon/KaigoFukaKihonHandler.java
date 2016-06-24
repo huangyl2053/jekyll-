@@ -66,26 +66,31 @@ public class KaigoFukaKihonHandler {
      */
     public void load(KaigoFukaKihonSearchKey searchKey) {
 
-        div.getTxtTsuchishoNo().setValue(searchKey.get通知書番号().value());
+        if (searchKey.get賦課年度() == null || searchKey.get通知書番号() == null
+                || searchKey.get賦課年度().isEmpty() || searchKey.get通知書番号().isEmpty()) {
+            div.getBtnHihoRireki().setDisabled(true);
+        } else {
+            div.getTxtTsuchishoNo().setValue(searchKey.get通知書番号().value());
 
-        Optional<Fuka> fuka = fukaMiscManager.get最新介護賦課(searchKey.get賦課年度(), searchKey.get通知書番号());
-        if (fuka.isPresent()) {
-            Optional<HokenryoDankai> dankai = hokenryoDankaiManager.get保険料段階(searchKey.get賦課年度(), fuka.get().get保険料段階());
-            if (dankai.isPresent()) {
-                div.getTxtHokenryoDankai().setValue(HokenryoDankaiUtil.edit表示用保険料段階(dankai.get()));
+            Optional<Fuka> fuka = fukaMiscManager.get最新介護賦課(searchKey.get賦課年度(), searchKey.get通知書番号());
+            if (fuka.isPresent()) {
+                Optional<HokenryoDankai> dankai = hokenryoDankaiManager.get保険料段階(searchKey.get賦課年度(), fuka.get().get保険料段階());
+                if (dankai.isPresent()) {
+                    div.getTxtHokenryoDankai().setValue(HokenryoDankaiUtil.edit表示用保険料段階(dankai.get()));
+                }
             }
-        }
 
-        Optional<HihokenshaDaicho> daicho = Optional.ofNullable(hihokenshaDaichoManager.get最新被保険者台帳(searchKey.get市町村コード(), searchKey.get識別コード()));
-        if (daicho.isPresent()) {
-            HihokenshaDaicho daichoModel = daicho.get();
-            div.getTxtHihokenshaNo().setValue(daichoModel.get被保険者番号().value());
-            div.getTxtShutokuYmd().setValue(daichoModel.get資格取得年月日());
-            div.getTxtShutokuJiyu().setValue(CodeMasterNoOption.getCodeRyakusho(
-                    SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), new Code(daichoModel.get資格取得事由コード())));
-            div.getTxtSoshitsuYmd().setValue(daichoModel.get資格喪失年月日());
-            div.getTxtSoshitsuJiyu().setValue(CodeMasterNoOption.getCodeRyakusho(
-                    SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu(), new Code(daichoModel.get資格喪失事由コード())));
+            Optional<HihokenshaDaicho> daicho = Optional.ofNullable(hihokenshaDaichoManager.get最新被保険者台帳(searchKey.get市町村コード(), searchKey.get識別コード()));
+            if (daicho.isPresent()) {
+                HihokenshaDaicho daichoModel = daicho.get();
+                div.getTxtHihokenshaNo().setValue(daichoModel.get被保険者番号().value());
+                div.getTxtShutokuYmd().setValue(daichoModel.get資格取得年月日());
+                div.getTxtShutokuJiyu().setValue(CodeMasterNoOption.getCodeRyakusho(
+                        SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), new Code(daichoModel.get資格取得事由コード())));
+                div.getTxtSoshitsuYmd().setValue(daichoModel.get資格喪失年月日());
+                div.getTxtSoshitsuJiyu().setValue(CodeMasterNoOption.getCodeRyakusho(
+                        SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu(), new Code(daichoModel.get資格喪失事由コード())));
+            }
         }
     }
 }

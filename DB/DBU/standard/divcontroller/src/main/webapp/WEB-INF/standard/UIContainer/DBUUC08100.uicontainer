@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBUUC08100",
+ "displayWizard": false,
+ "subGyomuCode": "DBU",
+ "steps": [
+  {
+   "id": 1,
+   "name": "郡市マスタ更新",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0810011",
+     "toLayoutTitle": "郡市マスタ更新",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0810011",
+     "layoutTitle": "郡市マスタ更新",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
