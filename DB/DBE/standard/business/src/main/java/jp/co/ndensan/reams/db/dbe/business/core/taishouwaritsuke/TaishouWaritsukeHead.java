@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke;
 import static jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.CheckForNullUtil.checkNullForCode;
 import static jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.CheckForNullUtil.checkNullForFlexibleDate;
 import static jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.CheckForNullUtil.checkNullForRString;
-import jp.co.ndensan.reams.db.dbe.entity.taishouwaritsuke.TaishouWaritsukeHeadEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.taishouwaritsuke.TaishouWaritsukeHeadEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
