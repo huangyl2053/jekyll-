@@ -4,11 +4,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaTokk
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -20,17 +18,21 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoTokkijikoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.chosatokkishokai.ChosaTokkiShokaiFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.File;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.StaticImage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
@@ -44,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @reamsid_L DBE-3000-200 liangbc
  */
 public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -75,6 +78,8 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     private RString ninteichosaRirekiNo;
     @JsonProperty("ninteichosaTokkijikoNoList")
     private RString ninteichosaTokkijikoNoList;
+    @JsonProperty("downLoadFilePath")
+    private RString downLoadFilePath;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -299,6 +304,24 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     /*
+     * getdownLoadFilePath
+     * @return downLoadFilePath
+     */
+    @JsonProperty("downLoadFilePath")
+    public RString getDownLoadFilePath() {
+        return downLoadFilePath;
+    }
+
+    /*
+     * setdownLoadFilePath
+     * @param downLoadFilePath downLoadFilePath
+     */
+    @JsonProperty("downLoadFilePath")
+    public void setDownLoadFilePath(RString downLoadFilePath) {
+        this.downLoadFilePath = downLoadFilePath;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -307,7 +330,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLblTextTokkiJikoTitle(Label lblTextTokkiJikoTitle) {
+    public void setLblTextTokkiJikoTitle(Label lblTextTokkiJikoTitle) {
         this.getTestTokki().setLblTextTokkiJikoTitle(lblTextTokkiJikoTitle);
     }
 
@@ -317,7 +340,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkiJikouNo(TextBox txtTokkiJikouNo) {
+    public void setTxtTokkiJikouNo(TextBox txtTokkiJikouNo) {
         this.getTestTokki().setTxtTokkiJikouNo(txtTokkiJikouNo);
     }
 
@@ -327,7 +350,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLblTextTokkiJikoHyphen(Label lblTextTokkiJikoHyphen) {
+    public void setLblTextTokkiJikoHyphen(Label lblTextTokkiJikoHyphen) {
         this.getTestTokki().setLblTextTokkiJikoHyphen(lblTextTokkiJikoHyphen);
     }
 
@@ -337,7 +360,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkiJikoNoText(TextBoxNum txtTokkiJikoNoText) {
+    public void setTxtTokkiJikoNoText(TextBoxNum txtTokkiJikoNoText) {
         this.getTestTokki().setTxtTokkiJikoNoText(txtTokkiJikoNoText);
     }
 
@@ -347,7 +370,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkiJikouName(TextBox txtTokkiJikouName) {
+    public void setTxtTokkiJikouName(TextBox txtTokkiJikouName) {
         this.getTestTokki().setTxtTokkiJikouName(txtTokkiJikouName);
     }
 
@@ -357,7 +380,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLblTextGenpon(Label lblTextGenpon) {
+    public void setLblTextGenpon(Label lblTextGenpon) {
         this.getTestTokki().setLblTextGenpon(lblTextGenpon);
     }
 
@@ -367,7 +390,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoInputGenpo(TextBoxMultiLine txtTokkijikoInputGenpo) {
+    public void setTxtTokkijikoInputGenpo(TextBoxMultiLine txtTokkijikoInputGenpo) {
         this.getTestTokki().setTxtTokkijikoInputGenpo(txtTokkijikoInputGenpo);
     }
 
@@ -377,7 +400,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLblTextMask(Label lblTextMask) {
+    public void setLblTextMask(Label lblTextMask) {
         this.getTestTokki().setLblTextMask(lblTextMask);
     }
 
@@ -387,7 +410,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoInputMask(TextBoxMultiLine txtTokkijikoInputMask) {
+    public void setTxtTokkijikoInputMask(TextBoxMultiLine txtTokkijikoInputMask) {
         this.getTestTokki().setTxtTokkijikoInputMask(txtTokkijikoInputMask);
     }
 
@@ -397,7 +420,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setBtnBeforeTextTokkiJiko(Button btnBeforeTextTokkiJiko) {
+    public void setBtnBeforeTextTokkiJiko(Button btnBeforeTextTokkiJiko) {
         this.getTestTokki().setBtnBeforeTextTokkiJiko(btnBeforeTextTokkiJiko);
     }
 
@@ -407,7 +430,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setBtnAfterTextTokkiJiko(Button btnAfterTextTokkiJiko) {
+    public void setBtnAfterTextTokkiJiko(Button btnAfterTextTokkiJiko) {
         this.getTestTokki().setBtnAfterTextTokkiJiko(btnAfterTextTokkiJiko);
     }
 
@@ -417,7 +440,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setBtnBeforeTokkiJikoNoText(Button btnBeforeTokkiJikoNoText) {
+    public void setBtnBeforeTokkiJikoNoText(Button btnBeforeTokkiJikoNoText) {
         this.getTestTokki().setBtnBeforeTokkiJikoNoText(btnBeforeTokkiJikoNoText);
     }
 
@@ -427,7 +450,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setBtnAfterTokkiJikoNoText(Button btnAfterTokkiJikoNoText) {
+    public void setBtnAfterTokkiJikoNoText(Button btnAfterTokkiJikoNoText) {
         this.getTestTokki().setBtnAfterTokkiJikoNoText(btnAfterTokkiJikoNoText);
     }
 
@@ -437,7 +460,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkiJikouNoImage(TextBox txtTokkiJikouNoImage) {
+    public void setTxtTokkiJikouNoImage(TextBox txtTokkiJikouNoImage) {
         this.getImageTokki().setTxtTokkiJikouNoImage(txtTokkiJikouNoImage);
     }
 
@@ -447,7 +470,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLblTokkiJikoHyphenImage(Label lblTokkiJikoHyphenImage) {
+    public void setLblTokkiJikoHyphenImage(Label lblTokkiJikoHyphenImage) {
         this.getImageTokki().setLblTokkiJikoHyphenImage(lblTokkiJikoHyphenImage);
     }
 
@@ -457,7 +480,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkiJikoNoImage(TextBoxNum txtTokkiJikoNoImage) {
+    public void setTxtTokkiJikoNoImage(TextBoxNum txtTokkiJikoNoImage) {
         this.getImageTokki().setTxtTokkiJikoNoImage(txtTokkiJikoNoImage);
     }
 
@@ -467,7 +490,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkiJikouNameImage(TextBox txtTokkiJikouNameImage) {
+    public void setTxtTokkiJikouNameImage(TextBox txtTokkiJikouNameImage) {
         this.getImageTokki().setTxtTokkiJikouNameImage(txtTokkiJikouNameImage);
     }
 
@@ -477,7 +500,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLblMsgGenpon(Label lblMsgGenpon) {
+    public void setLblMsgGenpon(Label lblMsgGenpon) {
         this.getImageTokki().setLblMsgGenpon(lblMsgGenpon);
     }
 
@@ -487,7 +510,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpoImage(StaticImage imgGenpoImage) {
+    public void setImgGenpoImage(StaticImage imgGenpoImage) {
         this.getImageTokki().setImgGenpoImage(imgGenpoImage);
     }
 
@@ -497,7 +520,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLblMsgMask(Label lblMsgMask) {
+    public void setLblMsgMask(Label lblMsgMask) {
         this.getImageTokki().setLblMsgMask(lblMsgMask);
     }
 
@@ -507,7 +530,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMaskingImage(StaticImage imgMaskingImage) {
+    public void setImgMaskingImage(StaticImage imgMaskingImage) {
         this.getImageTokki().setImgMaskingImage(imgMaskingImage);
     }
 
@@ -517,7 +540,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setBtnBeforeImageTokkiJiko(Button btnBeforeImageTokkiJiko) {
+    public void setBtnBeforeImageTokkiJiko(Button btnBeforeImageTokkiJiko) {
         this.getImageTokki().setBtnBeforeImageTokkiJiko(btnBeforeImageTokkiJiko);
     }
 
@@ -527,7 +550,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setBtnAfterImageTokkiJiko(Button btnAfterImageTokkiJiko) {
+    public void setBtnAfterImageTokkiJiko(Button btnAfterImageTokkiJiko) {
         this.getImageTokki().setBtnAfterImageTokkiJiko(btnAfterImageTokkiJiko);
     }
 
@@ -537,7 +560,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setBtnBeforeTokkiJikoNoImg(Button btnBeforeTokkiJikoNoImg) {
+    public void setBtnBeforeTokkiJikoNoImg(Button btnBeforeTokkiJikoNoImg) {
         this.getImageTokki().setBtnBeforeTokkiJikoNoImg(btnBeforeTokkiJikoNoImg);
     }
 
@@ -547,7 +570,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setBtnAfterTokkiJikoNoImg(Button btnAfterTokkiJikoNoImg) {
+    public void setBtnAfterTokkiJikoNoImg(Button btnAfterTokkiJikoNoImg) {
         this.getImageTokki().setBtnAfterTokkiJikoNoImg(btnAfterTokkiJikoNoImg);
     }
 
@@ -569,6 +592,11 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         rembanPageNo = new RString("0");
         tokkijikoNoPageNo = new RString("0");
         ViewStateHolder.put(ChosaTokkiShokaiKey.認定調査特記事項List, 認定調査特記事項List);
+        ImageManager imageManager = InstanceProvider.create(ImageManager.class);
+        ChosaTokkiShokaiFinder finder = InstanceProvider.create(ChosaTokkiShokaiFinder.class);
+        Image イメージ情報 = imageManager.getイメージ情報(new ShinseishoKanriNo(shinseishoKanriNo));
+        FilesystemName sharedFileName = finder.selectSharedFileNameByKey(new ShinseishoKanriNo(shinseishoKanriNo));
+        downLoadFilePath = getDownLoadFilePath(イメージ情報.getイメージ共有ファイルID(), sharedFileName);
         initializa(認定調査特記事項List.get(0).get(0));
     }
 
@@ -584,10 +612,8 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                 = NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(認定調査特記事項.get特記情報().get認定調査特記事項番号());
         boolean is特記事項テキスト_イメージ区分がテキスト
                 = is特記事項テキスト_イメージ区分がテキスト(認定調査特記事項.get特記情報().get特記事項テキスト_イメージ区分());
-        boolean is原本マスク区分が原本
-                = is原本マスク区分が原本(認定調査特記事項.get特記情報().get原本マスク区分().getColumnValue());
         initializaテキストエリア(認定調査特記事項マッピング, 認定調査特記事項, is特記事項テキスト_イメージ区分がテキスト);
-        initializaイメージエリア(認定調査特記事項マッピング, 認定調査特記事項, is特記事項テキスト_イメージ区分がテキスト, is原本マスク区分が原本);
+        initializaイメージエリア(認定調査特記事項マッピング, 認定調査特記事項, is特記事項テキスト_イメージ区分がテキスト);
         setButtonsDisable(is特記事項テキスト_イメージ区分がテキスト);
     }
 
@@ -618,33 +644,35 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
 
     @JsonIgnore
     private void initializaイメージエリア(NinteiChosaTokkiJikou 認定調査特記事項マッピング, ChosaTokkiShokaiJoho 認定調査特記事項,
-            boolean is特記事項テキスト_イメージ区分がテキスト, boolean is原本マスク区分が原本) {
+            boolean is特記事項テキスト_イメージ区分がテキスト) {
         this.ImageTokki.getTxtTokkiJikouNoImage().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
         this.ImageTokki.getTxtTokkiJikoNoImage().setValue(new Decimal(認定調査特記事項.get特記情報().get認定調査特記事項連番()));
         this.ImageTokki.getTxtTokkiJikouNameImage().setValue(認定調査特記事項マッピング.get特記事項名());
-        getImage(認定調査特記事項.get特記情報(), is特記事項テキスト_イメージ区分がテキスト, is原本マスク区分が原本);
+        if (!is特記事項テキスト_イメージ区分がテキスト) {
+            getImage(認定調査特記事項.get特記情報());
+        }
     }
 
     @JsonIgnore
-    private void getImage(NinteichosahyoTokkijiko 認定調査特記事項, boolean is特記事項テキスト_イメージ区分がテキスト, boolean is原本マスク区分が原本) {
+    private void getImage(NinteichosahyoTokkijiko 認定調査特記事項) {
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(認定調査特記事項.get特記事項テキスト_イメージ区分())) {
-            ImageManager imageManager = InstanceProvider.create(ImageManager.class);
-            Image イメージ情報 = imageManager.getイメージ情報(new ShinseishoKanriNo(shinseishoKanriNo));
-            if (イメージ情報 != null) {
-                RDateTime sharedFileId = イメージ情報.getイメージ共有ファイルID();
-                if (!is特記事項テキスト_イメージ区分がテキスト && is原本マスク区分が原本) {
-                    RString sharedFileName = replaceShareFileName(
-                            NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(TestTokki.getTxtTokkiJikouNo().getValue()).getイメージファイル(),
-                            認定調査特記事項.get認定調査特記事項連番(), !is特記事項テキスト_イメージ区分がテキスト && true);
-                    ImageTokki.getImgGenpoImage().setSrc(getFilePath(sharedFileId, sharedFileName));
-                } else if (!is特記事項テキスト_イメージ区分がテキスト && !is原本マスク区分が原本) {
-                    RString sharedFileName = replaceShareFileName(
-                            NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(TestTokki.getTxtTokkiJikouNo().getValue()).getイメージファイル(),
-                            認定調査特記事項.get認定調査特記事項連番(), false);
-                    ImageTokki.getImgMaskingImage().setSrc(getFilePath(sharedFileId, sharedFileName));
-                }
+            RString path原本 = getImageSrc(Path.combinePath(downLoadFilePath, replaceShareFileName(
+                    NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(TestTokki.getTxtTokkiJikouNo().getValue()).getイメージファイル(),
+                    認定調査特記事項.get認定調査特記事項連番(), true)));
+            RString pathマスク = getImageSrc(Path.combinePath(downLoadFilePath, replaceShareFileName(
+                    NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(TestTokki.getTxtTokkiJikouNo().getValue()).getイメージファイル(),
+                    認定調査特記事項.get認定調査特記事項連番(), false)));
+            if (File.exists(pathマスク)) {
+                ImageTokki.getImgGenpoImage().setSrc(pathマスク);
+                ImageTokki.getImgMaskingImage().setSrc(path原本);
+            } else {
+                ImageTokki.getImgGenpoImage().setSrc(path原本);
             }
         }
+    }
+
+    private RString getImageSrc(RString path) {
+        return Path.combinePath(new RString(File.separator + "db"), new RString("dbz"), path.substring(path.indexOf("image")));
     }
 
     @JsonIgnore
@@ -730,13 +758,12 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbz/WEB-INF/image/"));
+    private RString getDownLoadFilePath(RDateTime sharedFileId, FilesystemName sharedFileName) {
+        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app"), new RString("webapps"), new RString("db#dbz"),
+                new RString("WEB-INF"), new RString("image"));
         ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
-                        sharedFileId);
-        SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
-        return Path.combinePath(new RString("/db/dbz/image/"), sharedFileName);
+                = new ReadOnlySharedFileEntryDescriptor(sharedFileName, sharedFileId);
+        return SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath)).toRString();
     }
 
     @JsonIgnore
