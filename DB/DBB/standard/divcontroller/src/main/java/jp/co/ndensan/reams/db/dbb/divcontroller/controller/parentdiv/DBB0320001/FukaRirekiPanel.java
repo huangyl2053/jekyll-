@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320001;
 
-import jp.co.ndensan.reams.db.dbb.business.HokenryoDankaiUtil;
+import jp.co.ndensan.reams.db.dbb.business.util.HokenryoDankaiUtil;
 import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaComparators;
-import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
+import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.definition.core.viewstate.DbbViewStateKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;

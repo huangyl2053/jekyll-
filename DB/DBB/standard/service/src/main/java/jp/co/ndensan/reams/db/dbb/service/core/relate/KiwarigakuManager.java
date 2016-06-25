@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KibetsuChoteiKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KiwarigakuMeisai;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.relate.KibetsuChoteiKyotsuEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.relate.KibetsuChoteiKyotsuDac;
+import jp.co.ndensan.reams.db.dbb.persistence.db.relate.KibetsuChoteiKyotsuDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

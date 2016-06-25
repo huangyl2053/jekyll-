@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.business.validation.FukaTaishoshaSearchValidationMessage;
+import jp.co.ndensan.reams.db.dbz.business.core.validation.FukaTaishoshaSearchValidationMessage;
 import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;

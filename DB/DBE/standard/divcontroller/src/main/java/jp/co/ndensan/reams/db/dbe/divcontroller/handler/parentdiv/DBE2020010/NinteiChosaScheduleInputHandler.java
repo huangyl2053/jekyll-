@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020010;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.basic.ninteichosascheduleinput.NinteiChosaScheduleGamenkoumuku;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosascheduleinput.NinteiChosaScheduleGamenkoumuku;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020010.NinteiChosaScheduleInputDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;

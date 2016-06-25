@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.helper;
 
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiInputValidator;
-import jp.co.ndensan.reams.db.dbz.business.validation.NinteiInputValidationMessage;
+import jp.co.ndensan.reams.db.dbz.business.core.validation.NinteiInputValidationMessage;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;

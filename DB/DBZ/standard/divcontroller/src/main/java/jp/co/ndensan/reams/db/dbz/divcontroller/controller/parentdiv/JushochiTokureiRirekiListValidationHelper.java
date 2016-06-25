@@ -6,12 +6,12 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv;
 
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.JuchochiTokureiKaijoValidator;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.JuchochiTokureiTekiyoValidator;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.JushochiTokureiValidator;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.JuchochiTokureiKaijoValidator;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.JuchochiTokureiTekiyoValidator;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.JushochiTokureiValidator;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
-import jp.co.ndensan.reams.db.dbz.business.validation.JushochiTokureiValidationMessage;
+import jp.co.ndensan.reams.db.dbz.business.core.validation.JushochiTokureiValidationMessage;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.dgJutoku_Row;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;

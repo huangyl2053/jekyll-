@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv;
 
-import jp.co.ndensan.reams.db.dbz.business.validations.validator.custom.ShikakuHenkoValidator;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.ShikakuHenkoRirekiKanriContext;
-import jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage;
+import jp.co.ndensan.reams.db.dbz.business.core.validations.validator.custom.ShikakuHenkoValidator;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.ShikakuHenkoRirekiKanriContext;
+import jp.co.ndensan.reams.db.dbz.business.core.validation.ShikakuHenkoValidationMessage;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;

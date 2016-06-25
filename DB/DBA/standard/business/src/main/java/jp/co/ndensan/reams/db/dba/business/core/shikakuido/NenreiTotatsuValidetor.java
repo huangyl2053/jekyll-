@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.business.core.shikakuido;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.config.NenreiTotatsuKijunConfig;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;

@@ -186,7 +186,7 @@ public class ShujiiMaster {
                 div.getDdlShujiiKanaMeisho().getSelectedKey(),
                 div.getTxtSaidaiHyojiKensu().getValue());
         ShujiiMasterFinder shujiiMasterFinder = ShujiiMasterFinder.createInstance();
-        List<jp.co.ndensan.reams.db.dbe.business.core.basic.shujiijoho.ShujiiMaster> 主治医情報List
+        List<jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster> 主治医情報List
                 = shujiiMasterFinder.getShujiiIchiranList(
                         parameter).records();
         if (主治医情報List.isEmpty()) {

@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2020010;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.basic.ninteichosascheduleinput.NinteiChosaSchedule;
-import jp.co.ndensan.reams.db.dbe.business.core.basic.ninteichosascheduleinput.NinteiChosaScheduleGamenkoumuku;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosascheduleinput.NinteiChosaSchedule;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosascheduleinput.NinteiChosaScheduleGamenkoumuku;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinseirirekijoho.ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;

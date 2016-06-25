@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.ShotokuHikidashiConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.Shotoku;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
-import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
+import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysHizuke;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.GekihenkanwaSochi;

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.chosachikugroup;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.basic.chosachikugroup.ChosaChikuGroupMaster;
+import jp.co.ndensan.reams.db.dbe.business.core.chosachikugroup.ChosaChikuGroupMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.chosachikugroup.ChosaChikuGroup;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosachikugroup.ChosaChikuGroupMapperParameter;
