@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.tashitaishotsuchisho.TaShicho
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tashitaishotsuchisho.TatokuKanrenChohyoTaishoTsuchishoEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tashitaishotsuchisho.ITaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper;
 import jp.co.ndensan.reams.db.dba.service.core.tajushochito.ShisetsuJyohoFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
@@ -23,7 +24,6 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -143,7 +143,10 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
             outEntity.set退所年月日(施設情報Entity.get退所年月日().
                     wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            outEntity.set退所事由(CodeMaster.getCodeMeisho(new CodeShubetsu("0011"), new Code(施設情報Entity.get退所事由())));
+            outEntity.set退所事由(CodeMaster.getCodeMeisho(
+                    DBACodeShubetsu.介護資格解除事由_他特例者.getコード(),
+                    new Code(施設情報Entity.get退所事由()),
+                    FlexibleDate.getNowDate()));
             outEntity.set施設名称(施設情報Entity.get事業者名称());
             outEntity.set施設電話番号(施設情報Entity.get電話番号());
             outEntity.set施設FAX番号(施設情報Entity.getFax番号());

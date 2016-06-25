@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 居宅サービス計画届出区分を表す列挙型です。
  *
- * @reamsid_L DBZ-9999-023 黄浩
+ * @reamsid_L DBZ-9999-023 huangh
  */
 public enum TodokedeKubun {
 
