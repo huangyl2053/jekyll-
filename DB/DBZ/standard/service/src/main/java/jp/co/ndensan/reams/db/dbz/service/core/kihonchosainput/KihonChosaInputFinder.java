@@ -53,6 +53,9 @@ public class KihonChosaInputFinder {
         List<KihonChosaInputEntity> 認定調査基本情報Entityリスト = mapper.get認定調査基本情報(申請書管理番号);
         List<KihonChosaInput> 認定調査基本情報リスト = new ArrayList<>();
         for (KihonChosaInputEntity 認定調査基本情報Entity : 認定調査基本情報Entityリスト) {
+            if (null == 認定調査基本情報Entity) {
+                continue;
+            }
             KihonChosaInput 認定調査基本情報 = new KihonChosaInput(認定調査基本情報Entity);
             認定調査基本情報リスト.add(認定調査基本情報);
         }
