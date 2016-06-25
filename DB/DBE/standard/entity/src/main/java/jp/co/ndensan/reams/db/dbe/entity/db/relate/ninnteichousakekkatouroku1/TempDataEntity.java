@@ -3,7 +3,7 @@
  *Tochangethistemplatefile,chooseTools|templates
  *andopenthetemplateintheeditor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.ninnteichousakekkatouroku1;
+package jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousakekkatouroku1;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
