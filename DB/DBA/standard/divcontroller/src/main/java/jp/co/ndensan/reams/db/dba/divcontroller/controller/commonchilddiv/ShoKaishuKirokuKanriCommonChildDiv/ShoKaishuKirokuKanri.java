@@ -51,10 +51,10 @@ public class ShoKaishuKirokuKanri {
         requestDiv.setMode_DisplayMode(ShoKaishuKirokuKanriDiv.DisplayMode.shokai_selected);
         dgKoufuKaishu_Row dgKoufuKaishuRow = requestDiv.getDgKoufuKaishu().getSelectedItems().get(0);
         requestDiv.getPanelInput().getTxtKoufuType().setValue(dgKoufuKaishuRow.getKoufuType());
-        if (dgKoufuKaishuRow.getKoufuDate() != null && !dgKoufuKaishuRow.getKoufuDate().isEmpty()) {
+        if (dgKoufuKaishuRow.getKoufuDate().getValue() != null) {
             requestDiv.getPanelInput().getTxtKoufuDate().setValue(new RDate(dgKoufuKaishuRow.getKoufuDate().toString()));
         }
-        if (dgKoufuKaishuRow.getYukoKigen() != null && !dgKoufuKaishuRow.getYukoKigen().isEmpty()) {
+        if (dgKoufuKaishuRow.getYukoKigen().getValue() != null) {
             requestDiv.getPanelInput().getTxtYukouKigen().setValue(new RDate(dgKoufuKaishuRow.getYukoKigen().toString()));
         }
         if (被保険者証.equals(dgKoufuKaishuRow.getKoufuType())) {
@@ -64,7 +64,7 @@ public class ShoKaishuKirokuKanri {
         }
         requestDiv.getPanelInput().getDdlKoufuJiyu().setSelectedValue(dgKoufuKaishuRow.getKoufuJiyu());
         requestDiv.getPanelInput().getTxaKoufuRiyu().setValue(dgKoufuKaishuRow.getKofuRiyu());
-        if (dgKoufuKaishuRow.getKaishuDate() != null && !dgKoufuKaishuRow.getKaishuDate().isEmpty()) {
+        if (dgKoufuKaishuRow.getKaishuDate().getValue() != null) {
             requestDiv.getPanelInput().getTxtKaisyuDate().setValue(new RDate(dgKoufuKaishuRow.getKaishuDate().toString()));
         }
         if (被保険者証.equals(dgKoufuKaishuRow.getKoufuType())) {
@@ -142,12 +142,13 @@ public class ShoKaishuKirokuKanri {
                 int rowcount = shoKaishuDiv.getDgKoufuKaishu().getClickedItem().getId();
                 dgKoufuKaishu_Row row = list.get(rowcount);
                 row.setKoufuType(shoKaishuDiv.getPanelInput().getTxtKoufuType().getValue());
-                row.setKoufuDate(shoKaishuDiv.getPanelInput().getTxtKoufuDate().getValue().wareki().toDateString());
-                row.setYukoKigen(shoKaishuDiv.getPanelInput().getTxtYukouKigen().getValue().wareki().toDateString());
+                row.setKoufuDate(shoKaishuDiv.getPanelInput().getTxtKoufuDate());
+                row.getKoufuDate().setValue(shoKaishuDiv.getPanelInput().getTxtKoufuDate().getValue());
+                row.getYukoKigen().setValue(shoKaishuDiv.getPanelInput().getTxtYukouKigen().getValue());
                 row.setKoufuJiyu(shoKaishuDiv.getPanelInput().getDdlKoufuJiyu().getSelectedValue());
                 row.setKoufuJiyuNo(shoKaishuDiv.getPanelInput().getDdlKoufuJiyu().getSelectedKey());
                 row.setKofuRiyu(shoKaishuDiv.getPanelInput().getTxaKoufuRiyu().getValue());
-                row.setKaishuDate(shoKaishuDiv.getPanelInput().getTxtKaisyuDate().getValue().wareki().toDateString());
+                row.getKaishuDate().setValue(shoKaishuDiv.getPanelInput().getTxtKaisyuDate().getValue());
                 row.setKaishuJiyu(shoKaishuDiv.getPanelInput().getDdlKaisyuJiyu().getSelectedValue());
                 row.setKaishuJiyuNo(shoKaishuDiv.getPanelInput().getDdlKaisyuJiyu().getSelectedKey());
                 row.setKaishuRiyu(shoKaishuDiv.getPanelInput().getTxaKaishuRiyu().getValue());
