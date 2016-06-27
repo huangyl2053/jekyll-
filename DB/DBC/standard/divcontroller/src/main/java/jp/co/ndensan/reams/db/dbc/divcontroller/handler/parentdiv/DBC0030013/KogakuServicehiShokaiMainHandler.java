@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 世帯合算並列表示のHandlerです。
@@ -61,12 +62,9 @@ public class KogakuServicehiShokaiMainHandler {
      * @param 引き継ぎ情報 KogakuServiceData
      */
     public void load共有子Div(KogakuServiceData 引き継ぎ情報) {
-//        ShikibetsuCode 識別コード = 引き継ぎ情報.get識別コード();
-//        HihokenshaNo 被保険者番号 = 引き継ぎ情報.get被保険者番号();
-//        FlexibleYearMonth サービス提供年月 = 引き継ぎ情報.getサービス提供年月();
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("0000000002");
-        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth("201505");
+        ShikibetsuCode 識別コード = 引き継ぎ情報.get識別コード();
+        HihokenshaNo 被保険者番号 = 引き継ぎ情報.get被保険者番号();
+        FlexibleYearMonth サービス提供年月 = 引き継ぎ情報.getサービス提供年月();
 //        RString 履歴番号 = 引き継ぎ情報.get履歴番号();
 //        HokenshaNo 証記載保険者番号 = 引き継ぎ情報.get証記載保険者番号();
         div.getSetaiInfo().getCcdKaigoAtenaInfo().initialize(識別コード);
@@ -100,11 +98,9 @@ public class KogakuServicehiShokaiMainHandler {
     public void onClick_並べて表示する(KogakuServiceData 引き継ぎ情報) {
         List<SetaiinShotoku> 世帯員所得Selected = div.getSetaiInfoPanel().getCcdSetaiShotokuIchiran().get世帯員所得Selected();
         操作可否確認(世帯員所得Selected);
-//        RString メニューID = ResponseHolder.getMenuID();
-        RString メニューID = new RString("DBCMN11004");
+        RString メニューID = ResponseHolder.getMenuID();
         ShowResultTwoDiv 並べて表示エリア = div.getShowResultTwo();
-//        FlexibleYearMonth サービス提供年月 = 引き継ぎ情報.getサービス提供年月();
-        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth("201505");
+        FlexibleYearMonth サービス提供年月 = 引き継ぎ情報.getサービス提供年月();
         並べて表示エリア.getTxtTeikyoYMShowTwo().setValue(サービス提供年月 == null ? null : new RDate(サービス提供年月.toString()));
 
         KogakuShokaiHanteiKekkaParam parameter = new KogakuShokaiHanteiKekkaParam();
@@ -221,11 +217,13 @@ public class KogakuServicehiShokaiMainHandler {
         if (世帯員所得Selected == null || 世帯員所得Selected.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象者を選択.getMessage().evaluate());
         }
-        for (SetaiinShotoku 世帯員所得 : 世帯員所得Selected) {
-            if (!世帯員所得.is同月サービス有無()) {
+        // TODO 給付実績より同月サービス情報を取得部分は未実装  SetaiinShotokuJohoFinder
+//        for (SetaiinShotoku 世帯員所得 : 世帯員所得Selected) {
+//            if (!世帯員所得.is同月サービス有無()) {
+//                世帯員所得.
 //                throw new ApplicationException(DbcErrorMessages.同月サービスなし世帯員.getMessage().evaluate());
-            }
-        }
+//            }
+//        }
     }
 
     private List<KeyValueDataSource> get審査方法() {
