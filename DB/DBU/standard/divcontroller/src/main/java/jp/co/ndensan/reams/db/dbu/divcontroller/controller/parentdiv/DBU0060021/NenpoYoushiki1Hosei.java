@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataIdentifier;
-import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.definition.core.viewstate.DbuViewStateKey;
+import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpo.SearchJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060021.DBU0060021StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060021.DBU0060021TransitionEventName;
@@ -39,7 +39,6 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class NenpoYoushiki1Hosei {
 
-    private static final int 選択した市町村コード = 6;
     private static final RString 処理種別_修正 = new RString("修正");
     private static final RString 処理種別_削除 = new RString("削除");
 
@@ -52,10 +51,7 @@ public class NenpoYoushiki1Hosei {
     public ResponseData<NenpoYoushiki1HoseiDiv> onLoad(NenpoYoushiki1HoseiDiv div) {
         ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity param = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報,
                 ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
-        LasdecCode 市町村コード = LasdecCode.EMPTY;
-        if (!RString.isNullOrEmpty(param.get選択した市町村コード())) {
-            市町村コード = new LasdecCode(param.get選択した市町村コード().substring(0, 選択した市町村コード));
-        }
+        LasdecCode 市町村コード = new LasdecCode(param.get行市町村コード());
         List<JigyoHokokuTokeiData> jigyoHokokuTokeiDataList = JigyoHokokuNenpoHoseiHakoManager.createInstance()
                 .getJigyoHokokuNenpoDetal(new SearchJigyoHokokuNenpo(new FlexibleYear(param.get画面報告年度()),
                                 new FlexibleYear(param.get画面集計年度()),

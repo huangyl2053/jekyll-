@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 事業報告（年報）補正、発行_検索のHandlerクラスです。
- * 
- * @reamsid_L DBU-1060-010  lijia
- * 
+ *
+ * @reamsid_L DBU-1060-010 lijia
+ *
  */
 public class PanelBaseHandler {
 
@@ -40,9 +40,9 @@ public class PanelBaseHandler {
      */
     public void set市町村情報(List<KeyValueDataSource> 市町村情報リスト) {
         div.getTaishokensaku().getDdlShichoson().setDataSource(市町村情報リスト);
-        if (1 < 市町村情報リスト.size()) {
+        if (2 < 市町村情報リスト.size()) {
             div.getTaishokensaku().getDdlShichoson().setIsBlankLine(true);
-        } else if (市町村情報リスト.size() == 1) {
+        } else if (市町村情報リスト.size() == 2) {
             div.getTaishokensaku().getDdlShichoson().setDisplayNone(true);
             div.getTaishokensaku().getDdlShichoson().setSelectedIndex(1);
         }
