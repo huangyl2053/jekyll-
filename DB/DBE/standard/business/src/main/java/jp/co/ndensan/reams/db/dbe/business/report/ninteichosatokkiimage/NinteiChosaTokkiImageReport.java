@@ -37,10 +37,12 @@ public class NinteiChosaTokkiImageReport extends Report<NinteiChosaTokkiImageRep
      */
     @Override
     public void writeBy(ReportSourceWriter<NinteiChosaTokkiImageReportSource> reportSourceWriter) {
-        for (int i = ZERO; i < MAXCOUNT; i++) {
-            INinteiChosaTokkiImageEditor editor = new NinteiChosaTokkiImageEditor(entity, i);
-            INinteiChosaTokkiImageBuilder builder = new NinteiChosaTokkiImageBuilder(editor);
-            reportSourceWriter.writeLine(builder);
+        for (int indexPage = 1; indexPage <= Integer.parseInt(entity.get総ページ数().toString()); indexPage++) {
+            for (int i = ZERO; i < MAXCOUNT; i++) {
+                INinteiChosaTokkiImageEditor editor = new NinteiChosaTokkiImageEditor(entity, i, indexPage);
+                INinteiChosaTokkiImageBuilder builder = new NinteiChosaTokkiImageBuilder(editor);
+                reportSourceWriter.writeLine(builder);
+            }
         }
     }
 }
