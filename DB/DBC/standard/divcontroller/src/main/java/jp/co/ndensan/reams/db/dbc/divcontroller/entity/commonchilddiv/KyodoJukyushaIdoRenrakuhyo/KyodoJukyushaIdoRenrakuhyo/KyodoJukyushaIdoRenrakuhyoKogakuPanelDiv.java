@@ -1,21 +1,28 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyodoJukyushaIdoRenrakuhyo;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyodoJukyushaIdoRenrakuhyo.KyodoJukyushaIdoRenrakuhyo;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * KyodoJukyushaIdoRenrakuhyoKogakuPanel のクラスファイル 
- * 
- * @author 自動生成
+ * KyodoJukyushaIdoRenrakuhyoKogakuPanel のクラスファイル
+ *
+ * @reamsid_L DBC-4390-010 xupeng
  */
 public class KyodoJukyushaIdoRenrakuhyoKogakuPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -178,7 +185,7 @@ public class KyodoJukyushaIdoRenrakuhyoKogakuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadRoureiFukushiNenkinJukyuAriFlag(RadioButton radRoureiFukushiNenkinJukyuAriFlag) {
+    public void setRadRoureiFukushiNenkinJukyuAriFlag(RadioButton radRoureiFukushiNenkinJukyuAriFlag) {
         this.getKogakuRadioBtnPanel().setRadRoureiFukushiNenkinJukyuAriFlag(radRoureiFukushiNenkinJukyuAriFlag);
     }
 
@@ -188,7 +195,7 @@ public class KyodoJukyushaIdoRenrakuhyoKogakuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadRiyoshaFutan2DankaiAriFlag(RadioButton radRiyoshaFutan2DankaiAriFlag) {
+    public void setRadRiyoshaFutan2DankaiAriFlag(RadioButton radRiyoshaFutan2DankaiAriFlag) {
         this.getKogakuRadioBtnPanel().setRadRiyoshaFutan2DankaiAriFlag(radRiyoshaFutan2DankaiAriFlag);
     }
 
@@ -198,7 +205,7 @@ public class KyodoJukyushaIdoRenrakuhyoKogakuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadShikyuShinseishoOutputAriFlag(RadioButton radShikyuShinseishoOutputAriFlag) {
+    public void setRadShikyuShinseishoOutputAriFlag(RadioButton radShikyuShinseishoOutputAriFlag) {
         this.getKogakuRadioBtnPanel().setRadShikyuShinseishoOutputAriFlag(radShikyuShinseishoOutputAriFlag);
     }
 
