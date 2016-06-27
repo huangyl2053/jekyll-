@@ -29,7 +29,7 @@
     <!-- 検索条件より、対象者一覧を取得する。-->
     <select id="selectTaishosha" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensakuSearch"
-            resultMap="resultMap_KogakuShokaiTaishoshaKensakuEntity" fetchSize="500">
+            resultMap="resultMap_KogakuShokaiTaishoshaKensakuEntity" fetchSize="500" resultOrdered="true">
         SELECT
             A."hihokenshaNo" AS 被保険者番号,
             "ShikibetsuTaisho"."meisho" AS 氏名,
@@ -91,11 +91,17 @@
             <if test="提供年月 != null and !提供年月.isEmpty()">
                 AND A."serviceTeikyoYM" =  #{提供年月}
             </if>
-            <if test="申請年月 != null and !申請年月.isEmpty()">
-                AND A."shinseiYMD" =  #{申請年月}
+            <if test="申請年月初 != null and !申請年月初.isEmpty()">
+                AND #{申請年月初} <![CDATA[<=]]> A."shinseiYMD"
             </if>
-            <if test="決定年月 != null and !決定年月.isEmpty()">
-                AND B."ketteiYMD" =  #{決定年月}
+            <if test="申請年月末 != null and !申請年月末.isEmpty()">
+                AND A."shinseiYMD" <![CDATA[<=]]> #{申請年月末}
+            </if>
+            <if test="決定年月初 != null and !決定年月初.isEmpty()">
+                AND #{決定年月初} <![CDATA[<=]]> B."ketteiYMD"
+            </if>
+            <if test="決定年月末 != null and !決定年月末.isEmpty()">
+                AND B."ketteiYMD" <![CDATA[<=]]>  #{決定年月末}
             </if>
         </if>
     </select>

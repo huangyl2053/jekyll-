@@ -47,7 +47,7 @@
         <result property="isShutaruGeninShikkan" column="dbT5300GeninShikkan_isShutaruGeninShikkan" />
         <result property="geninShikkanCode" column="dbT5300GeninShikkan_geninShikkanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
-<select id="getEntity" resultMap="ResultMap_DbT5300GeninShikkanEntity">
+<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5300GeninShikkanEntity">
     SELECT
     <include refid="allColumns_DbT5300GeninShikkan" />
     FROM

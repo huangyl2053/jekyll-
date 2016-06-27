@@ -8,6 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7066ChohyoSeigyoKyotsuControl;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7066ChohyoSeigyoKyotsuControl.chohyoBunruiID;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7066ChohyoSeigyoKyotsuControl.kyotsuGamenShiyoUmu;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7066ChohyoSeigyoKyotsuControl.subGyomuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7066ChohyoSeigyoKyotsuControlEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -15,7 +16,9 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -52,6 +55,32 @@ public class DbT7066ChohyoSeigyoKyotsuControlDac implements ISaveable<DbT7066Cho
                                 eq(subGyomuCode, サブ業務コード),
                                 eq(chohyoBunruiID, 帳票分類ID))).
                 toObject(DbT7066ChohyoSeigyoKyotsuControlEntity.class);
+    }
+
+    /**
+     * 主キーで帳票制御共通コントロールを取得します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 共通画面使用有無 boolean
+     * @return DbT7066ChohyoSeigyoKyotsuControlEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT7066ChohyoSeigyoKyotsuControlEntity> select帳票分類ID(
+            SubGyomuCode サブ業務コード,
+            boolean 共通画面使用有無) throws NullPointerException {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サブ業務コード"));
+        requireNonNull(共通画面使用有無, UrSystemErrorMessages.値がnull.getReplacedMessage("共通画面使用有無"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7066ChohyoSeigyoKyotsuControl.class).
+                where(and(
+                                eq(subGyomuCode, サブ業務コード),
+                                eq(kyotsuGamenShiyoUmu, 共通画面使用有無))).
+                order(by(chohyoBunruiID, DESC))
+                .toList(DbT7066ChohyoSeigyoKyotsuControlEntity.class);
     }
 
     /**

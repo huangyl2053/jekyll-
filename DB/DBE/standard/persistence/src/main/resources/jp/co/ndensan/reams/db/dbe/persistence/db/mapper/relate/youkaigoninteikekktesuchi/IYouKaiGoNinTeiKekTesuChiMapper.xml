@@ -33,9 +33,9 @@
         <result property="ikenshoIraiRirekiNo" column="dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <select id="getSyuJiSenTakuYiChiRan"
+    <select resultOrdered="true" id="getSyuJiSenTakuYiChiRan"
             resultMap="ResultMap_YouKaiGoNinTeiKekTesuChiRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter" fetchSize="500" >
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter" fetchSize="500" >
         SELECT
         rgdb."DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" AS youKaiGoNinTeiKekTesuChiRelateEntity_shujiiIryokikanCode,
         rgdb."DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho" AS youKaiGoNinTeiKekTesuChiRelateEntity_iryoKikanMeisho,
@@ -91,10 +91,6 @@
             AND
             rgdb."DbT5101NinteiShinseiJoho"."shujiiCode" = #{主治医コード}
         </if>
-        <if test="useMaDaNyuRyouKu">
-            AND
-            rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoYMD" IS NULL
-        </if>
         GROUP BY
         rgdb."DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode",
         rgdb."DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho",
@@ -108,9 +104,9 @@
         rgdb."DbT5912ShujiiJoho"."shujiiCode"
     </select>
 
-    <select id="getKeKaTsuChiSyuTsuRyoKuTaiSyou"
+    <select resultOrdered="true" id="getKeKaTsuChiSyuTsuRyoKuTaiSyou"
             resultMap="ResultMap_YouKaiGoNinTeiKekTesuChiRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter" fetchSize="500" >
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter" fetchSize="500" >
         SELECT
         rgdb."DbT5101NinteiShinseiJoho"."hihokenshaNo" AS dbT5101NinteiShinseiJoho_hihokenshaNo,
         rgdb."DbT5101NinteiShinseiJoho"."hihokenshaName" AS dbT5101NinteiShinseiJoho_hihokenshaName,
@@ -159,15 +155,11 @@
             AND
             rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiYMD" <![CDATA[<=]]> #{二次判定期間To}
         </if>
-        <if test="useMaDaNyuRyouKu">
-            AND
-            rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoYMD" IS NULL
-        </if>
         ORDER BY
         rgdb."DbT5101NinteiShinseiJoho"."hihokenshaNo"
     </select>
 
-    <select id="getCyouHyouSyuTsuRyoKu"
+    <select resultOrdered="true" id="getCyouHyouSyuTsuRyoKu"
             resultMap="ResultMap_YouKaiGoNinTeiKekTesuChiRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe090001.YouKaiGoNinTeiKekTesuChiMybitisParamter" fetchSize="500" >
         SELECT

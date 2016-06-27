@@ -19,8 +19,8 @@
         <result column="ninteichosaIraiKubunCode" property="ninteichosaIraiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
     </resultMap>
 
-    <select id="get認定調査情報" resultMap="result_NinteiRelateEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.param.ninteichosairaishokai.NinteiChosaIraiShokaiParameter" fetchSize="500">
+    <select resultOrdered="true" id="get認定調査情報" resultMap="result_NinteiRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ninteichosairaishokai.NinteiChosaIraiShokaiParameter" fetchSize="500">
       SELECT
            dbT5101."ninteiShinseiYMD" AS "ninteiShinseiYMD",
            dbT5101."ninteiShinseiShinseijiKubunCode" AS "ninteiShinseiShinseijiKubunCode",

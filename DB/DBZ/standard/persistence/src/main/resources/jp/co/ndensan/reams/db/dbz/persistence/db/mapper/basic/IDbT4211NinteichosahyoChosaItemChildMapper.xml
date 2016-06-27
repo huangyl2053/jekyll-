@@ -50,7 +50,7 @@
         <result property="researchItem" column="dbT4211NinteichosahyoChosaItemChild_researchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <select id="getEntity" resultMap="ResultMap_DbT4211NinteichosahyoChosaItemChildEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT4211NinteichosahyoChosaItemChildEntity">
         SELECT
         <include refid="allColumns_DbT4211NinteichosahyoChosaItemChild"/>
         FROM

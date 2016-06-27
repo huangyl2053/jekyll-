@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JushochitokureiTekiyoJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**

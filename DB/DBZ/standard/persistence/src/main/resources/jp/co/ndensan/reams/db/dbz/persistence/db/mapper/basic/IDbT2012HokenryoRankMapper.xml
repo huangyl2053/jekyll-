@@ -48,7 +48,7 @@
         <result property="sokyuNendo" column="dbT2012HokenryoRank_sokyuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
     </resultMap>
     
-        <select id="getEntity" resultMap="ResultMap_DbT2012HokenryoRankEntity">
+        <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT2012HokenryoRankEntity">
 	SELECT
 	<include refid="allColumns_DbT2012HokenryoRank"/>
 	FROM

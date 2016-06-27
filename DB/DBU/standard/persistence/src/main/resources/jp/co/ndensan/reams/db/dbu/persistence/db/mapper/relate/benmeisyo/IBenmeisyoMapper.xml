@@ -10,7 +10,7 @@
         <result property="弁明内容" column="bemmeiNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <select id="getBenmeijoho" resultMap="getBenmeisyoResultMap" parameterType="jp.co.ndensan.reams.db.dbu.definition.core.benmeisyo.BenmeisyoMapperParameter" fetchSize="500">
+    <select resultOrdered="true" id="getBenmeijoho" resultMap="getBenmeisyoResultMap" parameterType="jp.co.ndensan.reams.db.dbu.definition.core.benmeisyo.BenmeisyoMapperParameter" fetchSize="500">
         SELECT
         "DbT7001FufukuMoshitate"."shobunShuruiCode" AS "shobunShuruiCode",
         "DbT7001FufukuMoshitate"."bemmeishoSakuseiYMD" AS "bemmeishoSakuseiYMD",
@@ -31,7 +31,7 @@
     </select>
 
 
-    <select id="selectAtena" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.core.benmeisyo.BenmeiAtenaParameter">
+    <select resultOrdered="true" id="selectAtena" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.core.benmeisyo.BenmeiAtenaParameter">
         SELECT
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM

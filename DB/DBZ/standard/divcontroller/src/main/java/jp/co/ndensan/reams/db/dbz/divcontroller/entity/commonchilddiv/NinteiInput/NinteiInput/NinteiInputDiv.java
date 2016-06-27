@@ -13,7 +13,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputDataPassModel;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputNaiyo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteiinput.NinteiInputHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteiinput.NinteiInputValidationHandler;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
@@ -32,11 +34,11 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * NinteiInput のクラスファイル。
  *
- * @reamsid_L DBE-1300-080 yaodongsheng
+ * @reamsid_L DBZ-1300-080 yaodongsheng
  */
 public class NinteiInputDiv extends Panel implements INinteiInputDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -417,5 +419,25 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     @Override
     public ValidationMessageControlPairs 開始終了日前後順check() {
         return new NinteiInputValidationHandler(this).開始終了日前後順check();
+    }
+
+    /**
+     * 画面一覧内容を取得。
+     *
+     * @return NinteiInputNaiyo
+     */
+    @Override
+    public NinteiInputNaiyo getNaiyo() {
+        return new NinteiInputHandler(this).getNaiyo();
+    }
+
+    /**
+     * Service一覧内容を取得。
+     *
+     * @return dgServiceIchiran_Row
+     */
+    @Override
+    public List<dgServiceIchiran_Row> getServiceRow() {
+        return new NinteiInputHandler(this).getServiceRow();
     }
 }

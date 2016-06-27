@@ -8,12 +8,18 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsahanteijokyo.ShinsaHanteiJokyoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsahanteijokyo.ShinsaHanteiJokyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
+import jp.co.ndensan.reams.db.dbe.definition.core.yokaigonintei.shinsei.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.SinsakaiHanteiJyokyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.SinsakaiHanteiJyokyoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.SinsakaiHanteiJyokyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.SinsakaiHanteiJyokyoHeaderEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.shinsahanteijokyo.ShinsaHanteiJokyoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -23,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -40,6 +48,23 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
             new RString(ShinsaHanteiJokyoReportSource.ReportSourceFields.gogitaiName.name()),
             new RString(ShinsaHanteiJokyoReportSource.ReportSourceFields.hokenshaNo.name())));
     private static final RString 帳票タイトル = new RString("介護認定審査会判定状況表");
+    private static final RString JIGYOJYOKYOHOKOKU = new RString("【事業状況報告出力区分】");
+    private static final RString JISSIJYOKYOTOKEI = new RString("【実施状況統計出力区分】");
+    private static final RString SINSAHANTEIJYOKYO = new RString("【審査判定状況出力区分】");
+    private static final RString SINSAKAIKANRENTOKEI = new RString("【審査会関連統計資料作成出力区分】");
+    private static final RString CSVSHUTSURYOKU = new RString("【CSV出力区分】");
+    private static final RString SHUTSURYOKUFAIRU = new RString("【出力ファイル名】");
+    private static final RString HOKENSYANO = new RString("【保険者番号】");
+    private static final RString HIHOKENSYAKUBUN = new RString("【被保険者区分】");
+    private static final RString GOGITAINO = new RString("【合議体番号】");
+    private static final RString TAISHOTSUKIKUBUN = new RString("【対象月編集区分】");
+    private static final RString TAISHOYM = new RString("【対象年月】");
+    private static final RString KIJYUNYMD = new RString("【基準年月日】");
+    private static final RString TAISHOGEPPIKUBUN = new RString("【対象月日編集区分】");
+    private static final RString TAISHOGEPPIFROM = new RString("【対象月日開始】");
+    private static final RString TAISHOGEPPITO = new RString("【対象月日終了】");
+    private static final RString SINSEIKUBUNSINSEITOKI = new RString("【申請区分(申請時)】");
+    private static final RString SINSEIKUBUNHOREI = new RString("【申請区分(法令)】");
     private static final DecimalFormat FORMAT = new DecimalFormat("0.0");
     private static final RString コード_非該当 = new RString("01");
     private static final RString コード_要支援1 = new RString("12");
@@ -63,6 +88,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
     private static final RString 割合なし = new RString("0.0%");
     private static final int 割合 = 100;
     private static final RString パーセント = new RString("%");
+    private static final RString 全合議体 = new RString("全合議体");
     List<ShinsaHanteiJokyoItem> itemList;
     private SinsakaiHanteiJyokyoProcessParameter paramter;
     private IHokokuShiryoSakuSeiMapper mapper;
@@ -131,11 +157,15 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
     @Override
     protected void afterExecute() {
         ShinsaHanteiJokyoReport report = ShinsaHanteiJokyoReport.createFrom(itemList);
+        outputJokenhyo();
         report.writeBy(reportSourceWriter);
     }
 
     private boolean hasBrek(SinsakaiHanteiJyokyoHeaderEntity before, SinsakaiHanteiJyokyoHeaderEntity current) {
-        return !(before.getGogitaiMei() == current.getGogitaiMei()
+        if (paramter.isEmptyGogitaiNo()) {
+            return !before.getShoKisaiHokenshaNo().equals(current.getShoKisaiHokenshaNo());
+        }
+        return !(before.getGogitaiNo() == current.getGogitaiNo()
                 && before.getShoKisaiHokenshaNo().equals(current.getShoKisaiHokenshaNo()));
     }
 
@@ -146,6 +176,97 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
         batisParameter.setTaishoGeppiTo(current.getShinsakaiKaisaiYMDMax());
         batisParameter.setShichosonCode(current.getShichosonCode());
         return mapper.getSinsakaiHanteiJyokyo(batisParameter);
+    }
+
+    private void outputJokenhyo() {
+        Association association = AssociationFinderFactory.createInstance().getAssociation();
+        ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
+                ReportIdDBE.DBE701001.getReportId().value(),
+                association.getLasdecCode_().getColumnValue(),
+                association.get市町村名(),
+                new RString(String.valueOf(JobContextHolder.getJobId())),
+                帳票タイトル,
+                new RString(reportSourceWriter.pageCount().value()),
+                new RString("無し"),
+                new RString("ー"),
+                contribute());
+        OutputJokenhyoFactory.createInstance(item).print();
+    }
+
+    private List<RString> contribute() {
+        List<RString> 出力条件 = new ArrayList<>();
+        RStringBuilder 条件 = new RStringBuilder();
+        条件.append(JIGYOJYOKYOHOKOKU);
+        条件.append(paramter.isJigyoJyokyoHokoku());
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(JISSIJYOKYOTOKEI);
+        条件.append(paramter.isJissiJyokyoTokei());
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(SINSAHANTEIJYOKYO);
+        条件.append(paramter.isSinsaHanteiJyokyo());
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(SINSAKAIKANRENTOKEI);
+        条件.append(paramter.isSinsakaiKanrenTokei());
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(CSVSHUTSURYOKU);
+        条件.append(paramter.isCsvShutsuryoku());
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(SHUTSURYOKUFAIRU);
+        条件.append(paramter.getShutsuryokuFairuName());
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(HOKENSYANO);
+        条件.append(paramter.getHokensyaNo());
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(HIHOKENSYAKUBUN);
+        条件.append(HihokenshaKubun.toValue(paramter.getHihokenshaKubun()).get名称());
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(GOGITAINO);
+        条件.append(paramter.isEmptyGogitaiNo() ? RString.EMPTY : new RString(paramter.getGogitaiNo()));
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(TAISHOTSUKIKUBUN);
+        条件.append(paramter.isTaishoTsukiKubun());
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(TAISHOYM);
+        条件.append(!paramter.isTaishoTsukiKubun() ? RString.EMPTY
+                : new RYearMonth(paramter.getTaishoNendoYM()).wareki().toDateString());
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(KIJYUNYMD);
+        条件.append(paramter.getKijyunYMD() == null ? RString.EMPTY : paramter.getKijyunYMD().toDateString());
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(TAISHOGEPPIKUBUN);
+        条件.append(paramter.isTaishoGeppiKubun());
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(TAISHOGEPPIFROM);
+        条件.append(paramter.isEmptyTaishoGeppiFrom() ? RString.EMPTY
+                : new RDate(paramter.getTaishoGeppiFrom().toString()).toDateString());
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(TAISHOGEPPITO);
+        条件.append(paramter.isEmptyTaishoGeppiTo() ? RString.EMPTY
+                : new RDate(paramter.getTaishoGeppiTo().toString()).toDateString());
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(SINSEIKUBUNSINSEITOKI);
+        条件.append(paramter.isShinseiji());
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(SINSEIKUBUNHOREI);
+        条件.append(paramter.isHorei());
+        出力条件.add(条件.toRString());
+        return 出力条件;
     }
 
     private ShinsaHanteiJokyoItem get一次判定非該当(List<SinsakaiHanteiJyokyoEntity> 審査判定状況,
@@ -162,7 +283,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + 非該当要介護2被保険者数 + 非該当要介護3被保険者数 + 非該当要介護4被保険者数 + 非該当要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.isEmptyGogitaiNo() ? 全合議体 : current.getGogitaiMei(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -214,7 +335,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + 要支援1要介護2被保険者数 + 要支援1要介護3被保険者数 + 要支援1要介護4被保険者数 + 要支援1要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.isEmptyGogitaiNo() ? 全合議体 : current.getGogitaiMei(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -266,7 +387,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + 要支援2要介護2被保険者数 + 要支援2要介護3被保険者数 + 要支援2要介護4被保険者数 + 要支援2要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.isEmptyGogitaiNo() ? 全合議体 : current.getGogitaiMei(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -318,7 +439,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + 要介護1要介護2被保険者数 + 要介護1要介護3被保険者数 + 要介護1要介護4被保険者数 + 要介護1要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.isEmptyGogitaiNo() ? 全合議体 : current.getGogitaiMei(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -370,7 +491,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + 要介護2要介護2被保険者数 + 要介護2要介護3被保険者数 + 要介護2要介護4被保険者数 + 要介護2要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.isEmptyGogitaiNo() ? 全合議体 : current.getGogitaiMei(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -422,7 +543,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + 要介護3要介護2被保険者数 + 要介護3要介護3被保険者数 + 要介護3要介護4被保険者数 + 要介護3要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.isEmptyGogitaiNo() ? 全合議体 : current.getGogitaiMei(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -475,7 +596,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + 要介護4要介護2被保険者数 + 要介護4要介護3被保険者数 + 要介護4要介護4被保険者数 + 要介護4要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.isEmptyGogitaiNo() ? 全合議体 : current.getGogitaiMei(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -527,7 +648,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + 要介護5要介護2被保険者数 + 要介護5要介護3被保険者数 + 要介護5要介護4被保険者数 + 要介護5要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.isEmptyGogitaiNo() ? 全合議体 : current.getGogitaiMei(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -628,7 +749,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + toInt(一次判定要介護4.getListHantei_14()) + toInt(一次判定要介護5.getListHantei_14());
         ShinsaHanteiJokyoItem 合計 = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.isEmptyGogitaiNo() ? 全合議体 : current.getGogitaiMei(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -709,7 +830,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + toInt(一次判定要介護4.getListHantei_9());
         ShinsaHanteiJokyoItem 変更者Item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.isEmptyGogitaiNo() ? 全合議体 : current.getGogitaiMei(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -759,7 +880,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
         int 合計計 = Integer.parseInt(合計.getListHantei_10().toString());
         ShinsaHanteiJokyoItem 割合Item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.isEmptyGogitaiNo() ? 全合議体 : current.getGogitaiMei(),
                 get対象開始年月日(),
                 get対象終了年月日(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -792,7 +913,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                         FORMAT.format(new Decimal(二次判定要介護4計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 合計計 == 0 || 二次判定要介護5計 == 0 ? 割合なし : new RString(
                         FORMAT.format(new Decimal(二次判定要介護5計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
-                new RString("100%"),
+                new RString("100.0%"),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,

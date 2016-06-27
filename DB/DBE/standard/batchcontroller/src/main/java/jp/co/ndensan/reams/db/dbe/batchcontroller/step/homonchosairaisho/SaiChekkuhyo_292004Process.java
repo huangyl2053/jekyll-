@@ -140,7 +140,7 @@ public class SaiChekkuhyo_292004Process extends BatchProcessBase<HomonChosaIrais
                 前回連番Map.get(NinteichosaKomokuMapping09B.聴力.getコード()),
                 前回連番Map.get(NinteichosaKomokuMapping09B.移乗.getコード()),
                 前回連番Map.get(NinteichosaKomokuMapping09B.移動.getコード()),
-                前回連番Map.get(NinteichosaKomokuMapping09B.嚥下.getコード()),
+                前回連番Map.get(NinteichosaKomokuMapping09B.えん下.getコード()),
                 前回連番Map.get(NinteichosaKomokuMapping09B.食事摂取.getコード()),
                 前回連番Map.get(NinteichosaKomokuMapping09B.排尿.getコード()),
                 前回連番Map.get(NinteichosaKomokuMapping09B.排便.getコード()),

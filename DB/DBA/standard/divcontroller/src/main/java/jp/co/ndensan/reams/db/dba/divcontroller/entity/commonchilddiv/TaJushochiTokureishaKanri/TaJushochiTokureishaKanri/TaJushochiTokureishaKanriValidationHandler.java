@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -55,13 +56,13 @@ public class TaJushochiTokureishaKanriValidationHandler {
                 if (div.getTxtTekiyobi().getValue() == null) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日, div.getTxtTekiyobi()));
                 } else {
-                    if (最新の適用情報 != null && 最新の適用情報.getTekiyoYMD().getValue() != null
+                    if (最新の適用情報 != null && 最新の適用情報.getTekiyoYMD().getValue() != null && !RowState.Deleted.equals(最新の適用情報.getRowState())
                             && (!div.getTxtTekiyobi().getValue().isBefore(最新の適用情報.getTekiyoYMD().getValue()))) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日と最新の適用情報の整合性チェック, div.getTxtTekiyobi()));
                     }
                 }
-                if (div.getTxtKaijyobi().getValue() != null && div.getDdlKaijyoJiyo().getSelectedKey() == null
-                        || div.getDdlKaijyoJiyo().getSelectedKey().isEmpty()) {
+                if (div.getTxtKaijyobi().getValue() != null && (div.getDdlKaijyoJiyo().getSelectedKey() == null
+                        || div.getDdlKaijyoJiyo().getSelectedKey().isEmpty())) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.解除事由, div.getDdlKaijyoJiyo()));
                 }
                 if (div.getDdlTekiyoJiyo().getSelectedKey() == null
@@ -90,7 +91,7 @@ public class TaJushochiTokureishaKanriValidationHandler {
                         && !div.getDgJushochiTokureiRireki().getDataSource().isEmpty()) {
                     for (dgJushochiTokureiRireki_Row row : div.getDgJushochiTokureiRireki().getDataSource()) {
                         if (div.getSelectData().equals(new RString(String.valueOf(row.getId())))
-                                || 状態_削除.equals(new RString(row.getRowState().toString()))) {
+                                || RowState.Deleted.equals(row.getRowState())) {
                             continue;
                         }
                         if (row.getKaijoYMD().getValue() == null) {
@@ -179,8 +180,8 @@ public class TaJushochiTokureishaKanriValidationHandler {
         解除日と解除届出日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "解除届出日", "解除日"),
         適用日と解除日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "解除日", メッセージ適用日.toString()),
         適用日と最新の適用情報の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, メッセージ適用日.toString(), "最新の適用情報"),
-        入所日の必須チェック(DbzErrorMessages.複数必須項目相関チェックエラー, "入所日", "入所施設"),
-        入所施設の必須チェック(DbzErrorMessages.複数必須項目相関チェックエラー, "入所施設", "入所日"),
+        入所日の必須チェック(DbzErrorMessages.複数必須項目相関チェックエラー, "入所施設", "入所日"),
+        入所施設の必須チェック(DbzErrorMessages.複数必須項目相関チェックエラー, "入所日", "入所施設"),
         期間が重複(UrErrorMessages.期間が重複),
         入力値が不正(UrErrorMessages.入力値が不正);
         private final Message message;

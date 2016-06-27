@@ -48,7 +48,7 @@
         <result property="chosaKihonKomokuChangeFlag" column="dbT7202KaigoNinteiHokaiseiKanri_chosaKihonKomokuChangeFlag" />
         <result property="shujiiIkenshoKomokuChangeFlag" column="dbT7202KaigoNinteiHokaiseiKanri_shujiiIkenshoKomokuChangeFlag" />
     </resultMap>
-   <select id="getEntity" resultMap="ResultMap_DbT7202KaigoNinteiHokaiseiKanriEntity">
+   <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7202KaigoNinteiHokaiseiKanriEntity">
         SELECT
         <include refid="allColumns_DbT7202KaigoNinteiHokaiseiKanri"/>
         FROM

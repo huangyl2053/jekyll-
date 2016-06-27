@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0050001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.core.shinseishoshurui.ShinseishoChohyoShurui;
+import jp.co.ndensan.reams.db.dba.service.core.hihokenshashokoufushinseisho.DainigoHihokenshashoKofuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshashonadosaikofushinseisho.HihokenshashonadoSaikofuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.core.itakuservicekeikalusakuseiiraitodokedesho.KyotakuServiceKeikakuSakuseiIraiTodokedesho;
 import jp.co.ndensan.reams.db.dba.service.core.joseikinkyufushinseisho.JoseikinKyufuShinseisho;
@@ -17,11 +18,13 @@ import jp.co.ndensan.reams.db.dba.service.core.shokanharaishikyushinseisho.Shouk
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseishojoho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.choshuyuyoshinseisho.ChoshuYuyoShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.hokenryogenmenchoshuyoyushinseisho.KaigoHokenryoGenmenShinseisho;
+import jp.co.ndensan.reams.db.dba.service.report.homonkaigoriyoushafutangakugengakushinseisho.HomonkaigoRiyoushaFutangakuGengakuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.jukyushikakushomeishokoufushinseisho.KaigoHokenJukyushikakuShomeishoKofuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.juryoininharaikeiyakushinseisho.JuryoIninbaraiKeiyakuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.juryoininharaitoriatsu.JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.jyushochitokureitekiyohenko.JushochiTokureiTekiyoHenkoShuryoTodoke;
 import jp.co.ndensan.reams.db.dba.service.report.keidoshafukushiyogutoriatsukaikakuninshinseisho.KeidoshaFukushiyoguToriatsukaiKakuninShinseisho;
+import jp.co.ndensan.reams.db.dba.service.report.kogakugassanservice.KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.kyotakuJutakukaishuhi.KyotakuJutakuKaishuhiShikyuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.kyotakukaigofukushi.KyotakuKaigoFukushiYoguKonyuhiShikyuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.kyotakukaigojutakukaishuhijizenshinseisho.KyotakuKaigoJutakuKaishuhiJizenShinseisho;
@@ -39,13 +42,11 @@ import jp.co.ndensan.reams.db.dbd.service.report.tokubetsuchiikikasanhomonkaigo.
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050001.KakushuShinseishoHakkoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050001.dgKakushushinsei_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 各種申請書の発行処理です。
@@ -67,10 +68,12 @@ public class KakushuShinseishoHakkoHandler {
      * コンストラクタです。
      *
      * @param div 各種申請書Div
+     * @param data 資格対象者
      */
-    public KakushuShinseishoHakkoHandler(KakushuShinseishoHakkoDiv div) {
+    public KakushuShinseishoHakkoHandler(KakushuShinseishoHakkoDiv div,
+            TaishoshaKey data) {
         this.div = div;
-        this.data = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
+        this.data = data;
     }
 
     /**
@@ -78,8 +81,8 @@ public class KakushuShinseishoHakkoHandler {
      */
     public void onLoad() {
         ShikibetsuCode 識別コード = data.get識別コード();
-        div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        div.getShikakuKihonJoho().getCcdKaigoShikakuKihon().onLoad(識別コード);
+        div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
+        div.getShikakuKihonJoho().getCcdKaigoShikakuKihon().initialize(識別コード);
         List<dgKakushushinsei_Row> dateSource = new ArrayList<>();
         for (ShinseishoChohyoShurui 申請書帳票 : ShinseishoChohyoShurui.values()) {
             dgKakushushinsei_Row row = new dgKakushushinsei_Row(Boolean.FALSE, get業務名称(申請書帳票
@@ -116,8 +119,8 @@ public class KakushuShinseishoHakkoHandler {
                     sourceData = todoke.createHihokenshashonadoSaikofuShinseishoChohyo(識別コード, 被保険者番号);
                 }
                 if (ShinseishoChohyoShurui.介護保険被保険者証交付申請書_第2号被保険者.get名称().equals(row.getShinseisho())) {
-                    ShikakuShutokuIdoSoshitsuTodoke todoke = new ShikakuShutokuIdoSoshitsuTodoke();
-                    sourceData = todoke.createShikakuShutokuIdoSoshitsuTodokeChohyo(識別コード, 被保険者番号);
+                    DainigoHihokenshashoKofuShinseisho todoke = new DainigoHihokenshashoKofuShinseisho();
+                    sourceData = todoke.createDainigoHihokenshashoKofuShinseishoChohyo(識別コード, 被保険者番号);
                 }
                 if (ShinseishoChohyoShurui.介護保険住所地特例適用_変更_終了届.get名称().equals(row.getShinseisho())) {
                     JushochiTokureiTekiyoHenkoShuryoTodoke todoke = new JushochiTokureiTekiyoHenkoShuryoTodoke();
@@ -147,9 +150,17 @@ public class KakushuShinseishoHakkoHandler {
                     sourceData = RiyoshaFutangakuGengakuMenjyoShinseisho.createInstance()
                             .createKaigoHokenRiyoshaFutangakuGengakuMenjyoShinseishoChohyo(識別コード, 被保険者番号);
                 }
+                if (ShinseishoChohyoShurui.介護保険利用者負担額減額_免除申請書_旧措置者用.get名称().equals(row.getShinseisho())) {
+                    sourceData = RiyoshaFutangakuGengakuMenjyoShinseisho.createInstance()
+                            .createKaigoHokenRiyoshaFutangakuGengakuMenjyoShinseishoChohyo(識別コード, 被保険者番号);
+                }
                 if (ShinseishoChohyoShurui.介護保険特定負担限度額申請書.get名称().equals(row.getShinseisho())) {
-                    TokuteifutanGendogakuShinseisho todoke = new TokuteifutanGendogakuShinseisho();
+                    TokuteifutanGendogakuShinseisho todoke = TokuteifutanGendogakuShinseisho.createInstance();
                     sourceData = todoke.createTokuteifutanGendogakuShinseishoChohyo(識別コード, 被保険者番号);
+                }
+                if (ShinseishoChohyoShurui.訪問介護利用者負担額減額申請書.get名称().equals(row.getShinseisho())) {
+                    HomonkaigoRiyoushaFutangakuGengakuShinseisho todoke = new HomonkaigoRiyoushaFutangakuGengakuShinseisho();
+                    sourceData = todoke.createHomonkaigoRiyoushaFutangakuGengakuShinseishoChohyo(識別コード, 被保険者番号);
                 }
                 if (ShinseishoChohyoShurui.社会福祉法人等利用者負担軽減対象確認申請書.get名称().equals(row.getShinseisho())) {
                     ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho todoke = ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho
@@ -164,14 +175,6 @@ public class KakushuShinseishoHakkoHandler {
                     KyufugakuGengakuMenjoShinseisho todoke = new KyufugakuGengakuMenjoShinseisho();
                     sourceData = todoke.createKyufugakuGengakuMenjoShinseishoChohyo(識別コード, 被保険者番号);
                 }
-                if (ShinseishoChohyoShurui.支払方法変更_償還払い化_終了申請書.get名称().equals(row.getShinseisho())) {
-                    ShiharaiHohoHenkoShuryoShinseisho todoke = new ShiharaiHohoHenkoShuryoShinseisho();
-                    sourceData = todoke.createShiharaiHohoHenkoShuryoShinseishoChohyo(被保険者番号, 識別コード);
-                }
-                if (ShinseishoChohyoShurui.介護保険受領委任払い取扱事業者登録申請書.get名称().equals(row.getShinseisho())) {
-                    JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho todoke = new JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho();
-                    sourceData = todoke.createJuryoIninbaraiToriatsukaiJigyoshaTorokuShinseishoChohyo();
-                }
                 sourceData = reportPublish_bak(sourceData, row);
             }
         }
@@ -181,6 +184,14 @@ public class KakushuShinseishoHakkoHandler {
     private SourceDataCollection reportPublish_bak(SourceDataCollection sourceData, dgKakushushinsei_Row row) {
         ShikibetsuCode 識別コード = data.get識別コード();
         HihokenshaNo 被保険者番号 = data.get被保険者番号();
+        if (ShinseishoChohyoShurui.支払方法変更_償還払い化_終了申請書.get名称().equals(row.getShinseisho())) {
+            ShiharaiHohoHenkoShuryoShinseisho todoke = new ShiharaiHohoHenkoShuryoShinseisho();
+            sourceData = todoke.createShiharaiHohoHenkoShuryoShinseishoChohyo(被保険者番号, 識別コード);
+        }
+        if (ShinseishoChohyoShurui.介護保険受領委任払い取扱事業者登録申請書.get名称().equals(row.getShinseisho())) {
+            JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho todoke = new JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho();
+            sourceData = todoke.createJuryoIninbaraiToriatsukaiJigyoshaTorokuShinseishoChohyo();
+        }
         if (ShinseishoChohyoShurui.介護保険受領委任払い契約申請書_福祉用具.get名称().equals(row.getShinseisho())) {
             JuryoIninbaraiKeiyakuShinseisho todoke = new JuryoIninbaraiKeiyakuShinseisho();
             sourceData = todoke.createJuryoIninbaraiKeiyakuShinseishoChohyo(new RString("2"));
@@ -220,6 +231,11 @@ public class KakushuShinseishoHakkoHandler {
         if (ShinseishoChohyoShurui.介護保険高額介護_予防_サービス費支給_受領委任払_申請書.get名称().equals(row.getShinseisho())) {
             KogakuKaigoServicehiShikyuJuryoIninShinseisho todoke = new KogakuKaigoServicehiShikyuJuryoIninShinseisho();
             sourceData = todoke.createKogakuKaigoServicehiShikyuJuryoIninShinseishoChohyo(識別コード, 被保険者番号);
+        }
+        if (ShinseishoChohyoShurui.高額医療合算介護_介護予防_サービス費支給兼自己負担額証明書交付申請書.get名称().equals(row.getShinseisho())) {
+            KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseisho todoke
+                    = new KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseisho();
+            sourceData = todoke.createKogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseishoChohyo(識別コード, 被保険者番号);
         }
         if (ShinseishoChohyoShurui.介護保険助成金給付申請書.get名称().equals(row.getShinseisho())) {
             JoseikinKyufuShinseisho todoke = new JoseikinKyufuShinseisho();

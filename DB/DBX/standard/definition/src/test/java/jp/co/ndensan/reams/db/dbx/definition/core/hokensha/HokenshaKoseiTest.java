@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbx.definition.core.hokensha;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -30,7 +29,7 @@ public class HokenshaKoseiTest extends DbxTestBase {
         @Test
         public void toValue_は引数のcodeに該当するオブジェクトが存在する時_それを返す() {
             HokenshaKosei item = HokenshaKosei.単一市町村;
-            assertThat(sut.toValue(item.code()), is(item));
+            assertThat(sut.toValue(item.getコード()), is(item));
         }
 
         @Test(expected = IllegalArgumentException.class)

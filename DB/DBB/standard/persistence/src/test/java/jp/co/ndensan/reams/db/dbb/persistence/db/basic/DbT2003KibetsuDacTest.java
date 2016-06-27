@@ -111,7 +111,6 @@ public class DbT2003KibetsuDacTest extends DbbTestDacBase {
 //                    DEFAULT_徴収方法,
 //                    DEFAULT_期);
 //        }
-
         @Test(expected = NullPointerException.class)
         public void 徴収方法がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(

@@ -4,15 +4,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KaigoKyuf
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
 import java.util.HashSet;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -20,8 +18,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * KaigoKyufuKokuhorenJohoTorikomi のクラスファイル
@@ -29,7 +30,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * @reamsid_L DBC-0980-290 wangkanglei
  */
 public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoKyufuKokuhorenJohoTorikomiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -169,7 +171,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     @JsonProperty("modes")
     private HashSet<Mode> modes;
 
-    public static enum HyojiMode implements ICommonChildDivMode {
+    public static enum HyoujiModo implements ICommonChildDivMode {
 
         Mode1("Mode1"),
         ModeShutsuryokujunJoken2("ModeShutsuryokujunJoken2"),
@@ -177,15 +179,15 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
 
         private final String name;
 
-        private HyojiMode(final String name) {
+        private HyoujiModo(final String name) {
             this.name = name;
         }
 
-        public static HyojiMode getEnum(String str) {
-            HyojiMode[] enumArray = HyojiMode.values();
+        public static HyoujiModo getEnum(String str) {
+            HyoujiModo[] enumArray = HyoujiModo.values();
 
-            for (HyojiMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+            for (HyoujiModo enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -199,12 +201,12 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
 
     }
 
-    public HyojiMode getMode_HyojiMode() {
-        return (HyojiMode) _CommonChildDivModeUtil.getMode( this.modes, HyojiMode.class );
+    public HyoujiModo getMode_HyoujiModo() {
+        return (HyoujiModo) _CommonChildDivModeUtil.getMode(this.modes, HyoujiModo.class);
     }
 
-    public void setMode_HyojiMode( HyojiMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, HyojiMode.class , value );
+    public void setMode_HyoujiModo(HyoujiModo value) {
+        _CommonChildDivModeUtil.setMode(this.modes, HyoujiModo.class, value);
     }
 
     /*
@@ -216,7 +218,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     }
 
     @JsonIgnore
-    public void  setLblShoriTaishoJoho(Label lblShoriTaishoJoho) {
+    public void setLblShoriTaishoJoho(Label lblShoriTaishoJoho) {
         this.getShoriTaishoJoho().setLblShoriTaishoJoho(lblShoriTaishoJoho);
     }
 
@@ -226,7 +228,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     }
 
     @JsonIgnore
-    public void  setChkTsuJobun(CheckBoxList chkTsuJobun) {
+    public void setChkTsuJobun(CheckBoxList chkTsuJobun) {
         this.getShoriTaishoJoho().setChkTsuJobun(chkTsuJobun);
     }
 
@@ -236,7 +238,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     }
 
     @JsonIgnore
-    public void  setLblKakuninJohoMsg(Label lblKakuninJohoMsg) {
+    public void setLblKakuninJohoMsg(Label lblKakuninJohoMsg) {
         this.getKakuninJikoMsg().setLblKakuninJohoMsg(lblKakuninJohoMsg);
     }
 
@@ -246,7 +248,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     }
 
     @JsonIgnore
-    public void  setLblAruBaiMsg(Label lblAruBaiMsg) {
+    public void setLblAruBaiMsg(Label lblAruBaiMsg) {
         this.getKakuninJikoMsg().setLblAruBaiMsg(lblAruBaiMsg);
     }
 
@@ -256,7 +258,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     }
 
     @JsonIgnore
-    public void  setLblNaiBaiMsg(Label lblNaiBaiMsg) {
+    public void setLblNaiBaiMsg(Label lblNaiBaiMsg) {
         this.getKakuninJikoMsg().setLblNaiBaiMsg(lblNaiBaiMsg);
     }
 
@@ -269,8 +271,8 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     //--------------- この行より下にコードを追加してください -------------------
     @JsonIgnore
     @Override
-    public void onLoadMode1() {
-        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadMode1();
+    public void initialize(KokuhorenDataTorikomiViewStateClass parmater) {
+        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadMode1(parmater);
     }
 
     @JsonIgnore
@@ -281,14 +283,18 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
 
     @JsonIgnore
     @Override
-    public void onLoadModeShutsuryokujunJoken2(SubGyomuCode サブ業務コード, ReportId 帳票ID) {
-        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadModeShutsuryokujunJoken2(サブ業務コード, 帳票ID);
+    public void initialize(SubGyomuCode サブ業務コード,
+            ReportId 帳票ID,
+            KokuhorenDataTorikomiViewStateClass parmater) {
+        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadModeShutsuryokujunJoken2(サブ業務コード, 帳票ID, parmater);
     }
 
     @JsonIgnore
     @Override
-    public void onLoadModeKakuninMsgJoken3(SubGyomuCode サブ業務コード, ReportId 帳票ID) {
-        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadModeKakuninMsgJoken3(サブ業務コード, 帳票ID);
+    public void initialize(KokuhorenDataTorikomiViewStateClass parmater,
+            SubGyomuCode サブ業務コード,
+            ReportId 帳票ID) {
+        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadModeKakuninMsgJoken3(サブ業務コード, 帳票ID, parmater);
     }
 
     @JsonIgnore

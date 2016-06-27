@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
@@ -23,8 +24,8 @@ import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
 import jp.co.ndensan.reams.ue.uex.definition.core.NenkinCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuGimushaCode;
+import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -58,6 +59,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private static final int 期_12 = 12;
     private static final int 期_13 = 13;
     private static final int 期_14 = 14;
+    private static final int INDEX_3 = 3;
     private static final RString 普徴メソッド_収入 = new RString("get普徴収入額");
     private static final RString 特徴メソッド_収入 = new RString("get特徴収入額");
     private static final RString 普徴メソッド_賦課 = new RString("get普徴期別金額");
@@ -66,9 +68,6 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private static final RString 徴収_普徴 = new RString("普通徴収");
     private static final RString 徴収_特徴 = new RString("特別徴収");
     private static final RString 徴収_なし = new RString("徴収なし");
-    private static final CodeShubetsu 年金コード = new CodeShubetsu("0046");
-    private static final CodeShubetsu 特別徴収義務者コード = new CodeShubetsu("0047");
-    private static final CodeShubetsu 調定事由 = new CodeShubetsu("0003");
     private static final RString 随時 = new RString("随時");
     private static final RString 現年随時 = new RString("現年随時");
 
@@ -142,14 +141,14 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
             編集後仮算定通知書.set賦課年度_年度なし(仮算定通知書情報.get賦課の情報_更正後().get賦課情報().get賦課年度()
                     .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString());
             編集後仮算定通知書.set通知書番号(仮算定通知書情報.get賦課の情報_更正後().get賦課情報().get通知書番号());
-            編集後仮算定通知書.set調定事由１(CodeMaster.getCodeRyakusho(調定事由,
-                    new Code(仮算定通知書情報.get賦課の情報_更正後().get賦課情報().get調定事由1())));
-            編集後仮算定通知書.set調定事由２(CodeMaster.getCodeRyakusho(調定事由,
-                    new Code(仮算定通知書情報.get賦課の情報_更正後().get賦課情報().get調定事由2())));
-            編集後仮算定通知書.set調定事由３(CodeMaster.getCodeRyakusho(調定事由,
-                    new Code(仮算定通知書情報.get賦課の情報_更正後().get賦課情報().get調定事由3())));
-            編集後仮算定通知書.set調定事由４(CodeMaster.getCodeRyakusho(調定事由,
-                    new Code(仮算定通知書情報.get賦課の情報_更正後().get賦課情報().get調定事由4())));
+            編集後仮算定通知書.set調定事由１(CodeMaster.getCodeRyakusho(DBBCodeShubetsu.調定事由.getコード(),
+                    new Code(仮算定通知書情報.get賦課の情報_更正後().get賦課情報().get調定事由1()), FlexibleDate.getNowDate()));
+            編集後仮算定通知書.set調定事由２(CodeMaster.getCodeRyakusho(DBBCodeShubetsu.調定事由.getコード(),
+                    new Code(仮算定通知書情報.get賦課の情報_更正後().get賦課情報().get調定事由2()), FlexibleDate.getNowDate()));
+            編集後仮算定通知書.set調定事由３(CodeMaster.getCodeRyakusho(DBBCodeShubetsu.調定事由.getコード(),
+                    new Code(仮算定通知書情報.get賦課の情報_更正後().get賦課情報().get調定事由3()), FlexibleDate.getNowDate()));
+            編集後仮算定通知書.set調定事由４(CodeMaster.getCodeRyakusho(DBBCodeShubetsu.調定事由.getコード(),
+                    new Code(仮算定通知書情報.get賦課の情報_更正後().get賦課情報().get調定事由4()), FlexibleDate.getNowDate()));
         }
         編集後仮算定通知書.set前年度情報有無(前年度情報有無);
         編集後仮算定通知書.set前年度情報(get前年度情報(仮算定通知書情報.get前年度賦課情報(), 前年度情報有無, 前年度最終期普徴期別介護保険料));
@@ -239,10 +238,12 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         更正前.set更正前普徴期別金額リスト(get普徴期別金額リストBy賦課情報(仮算定通知書情報.get普徴納期情報リスト(), 賦課情報_更正前));
         更正前.set更正前特別徴収義務者(仮算定通知書情報.get対象者_追加含む_情報_更正前() == null
                 || 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード() == null ? RString.EMPTY
-                : CodeMaster.getCodeMeisho(特別徴収義務者コード, 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード().value()));
+                : CodeMaster.getCodeMeisho(UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+                        仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード().value(), FlexibleDate.getNowDate()));
         更正前.set更正前特別徴収対象年金(仮算定通知書情報.get徴収方法情報_更正前() == null
                 || 仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード() == null ? RString.EMPTY
-                : CodeMaster.getCodeMeisho(年金コード, new Code(仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード().substring(0, 2))));
+                : CodeMaster.getCodeMeisho(UEXCodeShubetsu.年金コード.getCodeShubetsu(),
+                        new Code(仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード().substring(0, INDEX_3)), FlexibleDate.getNowDate()));
         更正前.set更正前特別徴収義務者コード(new NenkinCode(仮算定通知書情報.get対象者_追加含む_情報_更正前() == null ? Code.EMPTY
                 : 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード().value()));
         更正前.set更正前特別徴収対象年金コード(new TokubetsuChoshuGimushaCode(
@@ -276,18 +277,24 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         更正前.set期間_自_西暦(賦課情報_更正前.get月割開始年月1() == null ? RString.EMPTY : new FlexibleDate(
                 賦課情報_更正前.get月割開始年月1().getYearValue(), 賦課情報_更正前.get月割開始年月1().getMonthValue(), 1).seireki()
                 .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
-        更正前.set期間_至((賦課情報_更正前.get月割終了年月2() != null && !賦課情報_更正前.get月割終了年月2().isEmpty()
-                ? new FlexibleDate(賦課情報_更正前.get月割終了年月2().getYearValue(), 賦課情報_更正前.get月割終了年月2().getMonthValue(),
-                        賦課情報_更正前.get月割終了年月2().getLastDay())
-                : new FlexibleDate(賦課情報_更正前.get月割終了年月1().getYearValue(), 賦課情報_更正前.get月割終了年月1().getMonthValue(),
-                        賦課情報_更正前.get月割終了年月1().getLastDay())).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        更正前.set期間_至__西暦((賦課情報_更正前.get月割終了年月2() != null && !賦課情報_更正前.get月割終了年月2().isEmpty()
-                ? new FlexibleDate(賦課情報_更正前.get月割終了年月2().getYearValue(), 賦課情報_更正前.get月割終了年月2().getMonthValue(),
-                        賦課情報_更正前.get月割終了年月2().getLastDay())
-                : new FlexibleDate(賦課情報_更正前.get月割終了年月1().getYearValue(), 賦課情報_更正前.get月割終了年月1().getMonthValue(),
-                        賦課情報_更正前.get月割終了年月1().getLastDay())).seireki()
-                .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+        if (賦課情報_更正前.get月割終了年月2() != null && !賦課情報_更正前.get月割終了年月2().isEmpty()) {
+            更正前.set期間_至(new FlexibleDate(賦課情報_更正前.get月割終了年月2().getYearValue(), 賦課情報_更正前.get月割終了年月2()
+                    .getMonthValue(), 賦課情報_更正前.get月割終了年月2().getLastDay()).wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        } else if (賦課情報_更正前.get月割終了年月1() != null && !賦課情報_更正前.get月割終了年月1().isEmpty()) {
+            更正前.set期間_至(new FlexibleDate(賦課情報_更正前.get月割終了年月1().getYearValue(), 賦課情報_更正前.get月割終了年月1()
+                    .getMonthValue(), 賦課情報_更正前.get月割終了年月1().getLastDay()).wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        }
+        if (賦課情報_更正前.get月割終了年月2() != null && !賦課情報_更正前.get月割終了年月2().isEmpty()) {
+            更正前.set期間_至__西暦(new FlexibleDate(賦課情報_更正前.get月割終了年月2().getYearValue(), 賦課情報_更正前
+                    .get月割終了年月2().getMonthValue(), 賦課情報_更正前.get月割終了年月2().getLastDay()).seireki()
+                    .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+        } else if (賦課情報_更正前.get月割終了年月1() != null && !賦課情報_更正前.get月割終了年月1().isEmpty()) {
+            更正前.set期間_至__西暦(new FlexibleDate(賦課情報_更正前.get月割終了年月1().getYearValue(), 賦課情報_更正前
+                    .get月割終了年月1().getMonthValue(), 賦課情報_更正前.get月割終了年月1().getLastDay()).seireki()
+                    .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+        }
         更正前.set保険料段階(!RString.isNullOrEmpty(賦課情報_更正前.get保険料算定段階2())
                 ? 賦課情報_更正前.get保険料算定段階2() : 賦課情報_更正前.get保険料算定段階1());
         更正前.set保険料率(賦課情報_更正前.get算定年額保険料2() != null ? new RString(賦課情報_更正前.get算定年額保険料2().toString())
@@ -335,10 +342,12 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         更正後.set更正後普徴期別金額リスト(get普徴期別金額リストBy賦課情報(仮算定通知書情報.get普徴納期情報リスト(), 賦課情報_更正後));
         更正後.set更正後特別徴収義務者(仮算定通知書情報.get対象者_追加含む_情報_更正後() == null
                 || 仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード() == null ? RString.EMPTY
-                : CodeMaster.getCodeMeisho(特別徴収義務者コード, 仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード().value()));
+                : CodeMaster.getCodeMeisho(UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+                        仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード().value(), FlexibleDate.getNowDate()));
         更正後.set更正後特別徴収対象年金(仮算定通知書情報.get徴収方法情報_更正後() == null
                 || 仮算定通知書情報.get徴収方法情報_更正後().get仮徴収_年金コード() == null ? RString.EMPTY
-                : CodeMaster.getCodeMeisho(年金コード, new Code(仮算定通知書情報.get徴収方法情報_更正後().get仮徴収_年金コード().substring(0, 2))));
+                : CodeMaster.getCodeMeisho(UEXCodeShubetsu.年金コード.getCodeShubetsu(),
+                        new Code(仮算定通知書情報.get徴収方法情報_更正後().get仮徴収_年金コード().substring(0, INDEX_3)), FlexibleDate.getNowDate()));
         更正後.set更正後特別徴収義務者コード(仮算定通知書情報.get対象者_追加含む_情報_更正後() == null
                 || 仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード() == null ? RString.EMPTY
                 : 仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード().toRString());
@@ -366,30 +375,29 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
                 .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         更正後.set更正後資格喪失日_西暦(賦課情報_更正後.get資格喪失日() == null ? RString.EMPTY : 賦課情報_更正後.get資格喪失日().seireki()
                 .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
-        更正後.set期間_自((賦課情報_更正後.get月割終了年月2() != null && !賦課情報_更正後.get月割終了年月2().isEmpty()
-                ? new FlexibleDate(賦課情報_更正後.get月割終了年月2().getYearValue(), 賦課情報_更正後.get月割終了年月2().getMonthValue(),
-                        賦課情報_更正後.get月割終了年月2().getLastDay())
-                : new FlexibleDate(賦課情報_更正後.get月割終了年月1().getYearValue(), 賦課情報_更正後.get月割終了年月1().getMonthValue(),
-                        賦課情報_更正後.get月割終了年月1().getLastDay())).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        更正後.set期間_自_西暦((賦課情報_更正後.get月割終了年月2() != null && !賦課情報_更正後.get月割終了年月2().isEmpty()
-                ? new FlexibleDate(賦課情報_更正後.get月割終了年月2().getYearValue(), 賦課情報_更正後.get月割終了年月2().getMonthValue(),
-                        賦課情報_更正後.get月割終了年月2().getLastDay())
-                : new FlexibleDate(賦課情報_更正後.get月割終了年月1().getYearValue(), 賦課情報_更正後.get月割終了年月1().getMonthValue(),
-                        賦課情報_更正後.get月割終了年月1().getLastDay())).seireki()
-                .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
-        更正後.set期間_至((賦課情報_更正後.get月割終了年月2() != null && !賦課情報_更正後.get月割終了年月2().isEmpty()
-                ? new FlexibleDate(賦課情報_更正後.get月割終了年月2().getYearValue(), 賦課情報_更正後.get月割終了年月2().getMonthValue(),
-                        賦課情報_更正後.get月割終了年月2().getLastDay())
-                : new FlexibleDate(賦課情報_更正後.get月割終了年月1().getYearValue(), 賦課情報_更正後.get月割終了年月1().getMonthValue(),
-                        賦課情報_更正後.get月割終了年月1().getLastDay())).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        更正後.set期間_至_西暦((賦課情報_更正後.get月割終了年月2() != null && !賦課情報_更正後.get月割終了年月2().isEmpty()
-                ? new FlexibleDate(賦課情報_更正後.get月割終了年月2().getYearValue(), 賦課情報_更正後.get月割終了年月2().getMonthValue(),
-                        賦課情報_更正後.get月割終了年月2().getLastDay())
-                : new FlexibleDate(賦課情報_更正後.get月割終了年月1().getYearValue(), 賦課情報_更正後.get月割終了年月1().getMonthValue(),
-                        賦課情報_更正後.get月割終了年月1().getLastDay())).seireki()
-                .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+        if (賦課情報_更正後.get月割開始年月1() != null && !賦課情報_更正後.get月割開始年月1().isEmpty()) {
+            更正後.set期間_自(new FlexibleDate(賦課情報_更正後.get月割開始年月1().getYearValue(), 賦課情報_更正後.get月割終了年月1()
+                    .getMonthValue(), 賦課情報_更正後.get月割開始年月1().getLastDay()).wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            更正後.set期間_自_西暦(new FlexibleDate(賦課情報_更正後.get月割開始年月1().getYearValue(), 賦課情報_更正後.get月割開始年月1()
+                    .getMonthValue(), 賦課情報_更正後.get月割開始年月1().getLastDay()).seireki()
+                    .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+        }
+        if (賦課情報_更正後.get月割終了年月2() != null && !賦課情報_更正後.get月割終了年月2().isEmpty()) {
+            更正後.set期間_至(new FlexibleDate(賦課情報_更正後.get月割終了年月2().getYearValue(), 賦課情報_更正後.get月割終了年月2().getMonthValue(),
+                    賦課情報_更正後.get月割終了年月2().getLastDay()).wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            更正後.set期間_至_西暦(new FlexibleDate(賦課情報_更正後.get月割終了年月2().getYearValue(), 賦課情報_更正後.get月割終了年月2().getMonthValue(),
+                    賦課情報_更正後.get月割終了年月2().getLastDay()).seireki()
+                    .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+        } else if (賦課情報_更正後.get月割終了年月1() != null && !賦課情報_更正後.get月割終了年月1().isEmpty()) {
+            更正後.set期間_至(new FlexibleDate(賦課情報_更正後.get月割終了年月1().getYearValue(), 賦課情報_更正後.get月割終了年月1().getMonthValue(),
+                    賦課情報_更正後.get月割終了年月1().getLastDay()).wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            更正後.set期間_至_西暦(new FlexibleDate(賦課情報_更正後.get月割終了年月1().getYearValue(), 賦課情報_更正後.get月割終了年月1().getMonthValue(),
+                    賦課情報_更正後.get月割終了年月1().getLastDay()).seireki()
+                    .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+        }
         更正後.set保険料段階(!RString.isNullOrEmpty(賦課情報_更正後.get保険料算定段階2())
                 ? 賦課情報_更正後.get保険料算定段階2() : 賦課情報_更正後.get保険料算定段階1());
         更正後.set保険料率(賦課情報_更正後.get算定年額保険料2() != null ? new RString(賦課情報_更正後.get算定年額保険料2().toString())

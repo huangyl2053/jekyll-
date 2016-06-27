@@ -70,7 +70,8 @@ public class JigyoshaService {
         setサービス種類(div);
         RString 画面状態 = ViewStateHolder.get(ViewStateKeys.サービス登録_画面状態, RString.class);
         if (状態_追加.equals(画面状態)) {
-            getHandler(div).set状態_追加();
+            getHandler(div).set状態_追加(ViewStateHolder
+                    .get(ViewStateKeys.サービス登録_事業者番号, RString.class));
             return ResponseData.of(div).setState(DBA2010014StateName.追加状態);
         } else if (状態_修正.equals(画面状態)) {
             getHandler(div).set画面情報(get事業者サービス情報取得());
@@ -136,6 +137,18 @@ public class JigyoshaService {
         IHokenjaManager manager = new _HokenjaManager();
         Hokenja joho = manager.get保険者except介護保険(new HokenjaNo(div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().getValue()));
         div.getJigyoshaServiceKihon().getTxtTorokuHokenshaName().setValue(joho == null ? RString.EMPTY : joho.get保険者名());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「登録保険者入力ガイド」ボタンを押しダイアログ画面を戻る、登録保険者を設定します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<JigyoshaServiceDiv>
+     */
+    public ResponseData<JigyoshaServiceDiv> onClick_BtnHokenshaInputGuide(JigyoshaServiceDiv div) {
+        div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().setValue(div.getHokenshaNo());
+        div.getJigyoshaServiceKihon().getTxtTorokuHokenshaName().setValue(div.getHokenshaMeisho());
         return ResponseData.of(div).respond();
     }
 

@@ -12,7 +12,7 @@
     </resultMap>
     
      <!-- 世帯員把握入力のデータの取得-->
-    <select id="get世帯員把握入力Temp" resultMap="resultMap_DbT2005SetaiHaakuTempEntity" fetchSize="500">
+    <select resultOrdered="true" id="get世帯員把握入力Temp" resultMap="resultMap_DbT2005SetaiHaakuTempEntity" fetchSize="500">
         SELECT 
         A."hihokenshaNo",
         A."shikibetsuCode",
@@ -26,7 +26,7 @@
     </select>
     
     <!-- 世帯員把握入力のデータの取得-->
-    <select id="selectNotNull" resultMap="resultMap_DbT2005SetaiHaakuTempEntity" fetchSize="500">
+    <select resultOrdered="true" id="selectNotNull" resultMap="resultMap_DbT2005SetaiHaakuTempEntity" fetchSize="500">
         SELECT 
         "hihokenshaNo",
         "shikibetsuCode",
@@ -50,7 +50,7 @@
     
     
     <!-- 介護所得のデータの取得-->
-    <select id="select介護所得" resultMap="resultMap_DbV2502KaigoShotokuEntity" fetchSize="500">
+    <select resultOrdered="true" id="select介護所得" resultMap="resultMap_DbV2502KaigoShotokuEntity" fetchSize="500">
         SELECT
         介護所得."shikibetsuCode",
         介護所得."shotokuNendo",

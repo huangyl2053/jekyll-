@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho;
 
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
@@ -19,7 +19,7 @@ public final class KozaParameter {
 
     private final long kozaId;
     private final ShikibetsuCode shikibetsuCode;
-    private final KamokuCode kamokuCode;
+    private final ShunoKamokuShubetsu kamokuCode;
 
     /**
      * コンストラクタです。
@@ -28,7 +28,7 @@ public final class KozaParameter {
      * @param shikibetsuCode 識別コード
      * @param kamokuCode 科目コード
      */
-    private KozaParameter(long kozaId, ShikibetsuCode shikibetsuCode, KamokuCode kamokuCode) {
+    private KozaParameter(long kozaId, ShikibetsuCode shikibetsuCode, ShunoKamokuShubetsu kamokuCode) {
         this.kozaId = kozaId;
         this.shikibetsuCode = shikibetsuCode;
         this.kamokuCode = kamokuCode;
@@ -43,7 +43,7 @@ public final class KozaParameter {
      * @return 介護認定審査会委員情報パラメータ
      */
     public static KozaParameter createParam(
-            long kozaId, ShikibetsuCode shikibetsuCode, KamokuCode kamokuCode) {
+            long kozaId, ShikibetsuCode shikibetsuCode, ShunoKamokuShubetsu kamokuCode) {
         return new KozaParameter(kozaId, shikibetsuCode, kamokuCode);
     }
 

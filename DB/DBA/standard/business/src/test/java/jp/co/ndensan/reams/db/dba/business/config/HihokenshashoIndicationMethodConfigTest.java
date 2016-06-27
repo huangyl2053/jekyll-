@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.config;
 
-import jp.co.ndensan.reams.db.dba.definition.core.enumeratedtype.config.ConfigKeysHihokenshashoIndicationMethod;
+import jp.co.ndensan.reams.db.dba.definition.core.config.ConfigKeysHihokenshashoIndicationMethod;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

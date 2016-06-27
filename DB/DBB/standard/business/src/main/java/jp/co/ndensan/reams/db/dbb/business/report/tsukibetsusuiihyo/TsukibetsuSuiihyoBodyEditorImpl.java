@@ -14,14 +14,14 @@ import jp.co.ndensan.reams.db.dbb.entity.report.source.tsukibetsusuiihyo.Tsukibe
  */
 public class TsukibetsuSuiihyoBodyEditorImpl implements ITsukibetsuSuiihyoEditor {
 
-    private final TsukibetsuSuiihyoBodyItem item;
+    private final TsukibetsuSuiihyoBody item;
 
     /**
      * コンストラクタです。
      *
      * @param bodyItem 月別推移表ボディのITEM
      */
-    public TsukibetsuSuiihyoBodyEditorImpl(TsukibetsuSuiihyoBodyItem bodyItem) {
+    public TsukibetsuSuiihyoBodyEditorImpl(TsukibetsuSuiihyoBody bodyItem) {
         this.item = bodyItem;
     }
 
@@ -38,6 +38,7 @@ public class TsukibetsuSuiihyoBodyEditorImpl implements ITsukibetsuSuiihyoEditor
 
     private TsukibetsuSuiihyoReportSource editBody(TsukibetsuSuiihyoReportSource source) {
 
+        source.listTitle_1 = item.getListTitle_1();
         source.list_1 = item.getList_1();
         source.list_2 = item.getList_2();
         source.list_3 = item.getList_3();

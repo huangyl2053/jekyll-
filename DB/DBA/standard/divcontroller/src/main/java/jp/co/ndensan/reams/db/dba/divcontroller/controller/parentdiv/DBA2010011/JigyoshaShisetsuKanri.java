@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2010011;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010011.DBA2010011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010011.JigyoshaShisetsuKanriDiv;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
@@ -13,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -46,11 +49,19 @@ public class JigyoshaShisetsuKanri {
         JigyoshaMode mode = new JigyoshaMode();
         if (MENU_ID.equals(UrControlDataFactory.createInstance().getMenuID())) {
             div.getJigyoshaShurui().getRadJigyoshaShurui().setSelectedKey(その他特例施設モード);
+            List<KeyValueDataSource> sourceList = new ArrayList<>();
+            sourceList.add(new KeyValueDataSource(new RString("11"), new RString("サービス事業者")));
+            div.getJigyoshaShurui().getRadJigyoshaShurui().setDisabledItem(sourceList);
         } else {
             div.getJigyoshaShurui().getRadJigyoshaShurui().setSelectedKey(サービス事業者モード);
+            List<KeyValueDataSource> sourceList = new ArrayList<>();
+            sourceList.add(new KeyValueDataSource(new RString("12"), new RString("その他特例施設")));
+            sourceList.add(new KeyValueDataSource(new RString("21"), new RString("適用除外施設")));
+            div.getJigyoshaShurui().getRadJigyoshaShurui().setDisabledItem(sourceList);
         }
         mode.setJigyoshaShubetsu(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey());
         div.setJigyoshaMode(DataPassingConverter.serialize(mode));
+        div.getJigyoshaNyuryokuGuide().getCommonChildDiv1().setYaMeRu();
         div.getJigyoshaNyuryokuGuide().getCommonChildDiv1().initialize(mode);
         div.getJigyoshaNyuryokuGuide().getCommonChildDiv1().getJigyoshaNyuryokuGudieCommonChildDiv()
                 .setJigyoshaMode(DataPassingConverter.serialize(mode));

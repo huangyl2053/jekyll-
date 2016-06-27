@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.ShisetsuI
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Apr 27 22:13:01 JST 2016 
+ * Fri Jun 17 13:25:48 CST 2016 
  */
 
 
@@ -20,13 +20,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgShisetsuIdoJoho_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private TextBoxFlexibleDate nyushoDate;
     private TextBoxFlexibleDate taishoDate;
     private RString jigyoshaName;
     private RString jigyoshaCode;
     private RString tenshutsusakiHokenshaNo;
+    private RString shisetsuShurui;
 
     public dgShisetsuIdoJoho_Row() {
         super();
@@ -35,25 +36,29 @@ public class dgShisetsuIdoJoho_Row extends DataRow {
         this.jigyoshaName = RString.EMPTY;
         this.jigyoshaCode = RString.EMPTY;
         this.tenshutsusakiHokenshaNo = RString.EMPTY;
+        this.shisetsuShurui = RString.EMPTY;
         this.setOriginalData("nyushoDate", nyushoDate);
         this.setOriginalData("taishoDate", taishoDate);
         this.setOriginalData("jigyoshaName", jigyoshaName);
         this.setOriginalData("jigyoshaCode", jigyoshaCode);
         this.setOriginalData("tenshutsusakiHokenshaNo", tenshutsusakiHokenshaNo);
+        this.setOriginalData("shisetsuShurui", shisetsuShurui);
     }
 
-    public dgShisetsuIdoJoho_Row(TextBoxFlexibleDate nyushoDate, TextBoxFlexibleDate taishoDate, RString jigyoshaName, RString jigyoshaCode, RString tenshutsusakiHokenshaNo) {
+    public dgShisetsuIdoJoho_Row(TextBoxFlexibleDate nyushoDate, TextBoxFlexibleDate taishoDate, RString jigyoshaName, RString jigyoshaCode, RString tenshutsusakiHokenshaNo, RString shisetsuShurui) {
         super();
         this.setOriginalData("nyushoDate", nyushoDate);
         this.setOriginalData("taishoDate", taishoDate);
         this.setOriginalData("jigyoshaName", jigyoshaName);
         this.setOriginalData("jigyoshaCode", jigyoshaCode);
         this.setOriginalData("tenshutsusakiHokenshaNo", tenshutsusakiHokenshaNo);
+        this.setOriginalData("shisetsuShurui", shisetsuShurui);
         this.nyushoDate = nyushoDate;
         this.taishoDate = taishoDate;
         this.jigyoshaName = jigyoshaName;
         this.jigyoshaCode = jigyoshaCode;
         this.tenshutsusakiHokenshaNo = tenshutsusakiHokenshaNo;
+        this.shisetsuShurui = shisetsuShurui;
     }
 
     public TextBoxFlexibleDate getNyushoDate() {
@@ -74,6 +79,10 @@ public class dgShisetsuIdoJoho_Row extends DataRow {
 
     public RString getTenshutsusakiHokenshaNo() {
         return tenshutsusakiHokenshaNo;
+    }
+
+    public RString getShisetsuShurui() {
+        return shisetsuShurui;
     }
 
     public void setNyushoDate(TextBoxFlexibleDate nyushoDate) {
@@ -99,6 +108,11 @@ public class dgShisetsuIdoJoho_Row extends DataRow {
     public void setTenshutsusakiHokenshaNo(RString tenshutsusakiHokenshaNo) {
         this.setOriginalData("tenshutsusakiHokenshaNo", tenshutsusakiHokenshaNo);
         this.tenshutsusakiHokenshaNo = tenshutsusakiHokenshaNo;
+    }
+
+    public void setShisetsuShurui(RString shisetsuShurui) {
+        this.setOriginalData("shisetsuShurui", shisetsuShurui);
+        this.shisetsuShurui = shisetsuShurui;
     }
 
     // </editor-fold>

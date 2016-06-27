@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410039
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410039.TsuchishoJoho111Div;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
+import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoBunruiKanriManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -19,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 国保連情報受取データ取込_[111]給付実績情報のクラスです。
@@ -39,7 +42,9 @@ public class TsuchishoJoho111 {
     public ResponseData<TsuchishoJoho111Div> onLoad(TsuchishoJoho111Div div) {
         ChohyoBunruiKanri code = ChohyoBunruiKanriManager.createInstance().get帳票分類管理(SubGyomuCode.DBC介護給付,
                 new ReportId(帳票ID));
-        div.getCcdKokurenJohoTorikomi().onLoadModeKakuninMsgJoken3(SubGyomuCode.DBC介護給付, code.get帳票分類ID());
+        KokuhorenDataTorikomiViewStateClass parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
+                KokuhorenDataTorikomiViewStateClass.class);
+        div.getCcdKokurenJohoTorikomi().initialize(parmater, SubGyomuCode.DBC介護給付, code.get帳票分類ID());
         return ResponseData.of(div).respond();
     }
 

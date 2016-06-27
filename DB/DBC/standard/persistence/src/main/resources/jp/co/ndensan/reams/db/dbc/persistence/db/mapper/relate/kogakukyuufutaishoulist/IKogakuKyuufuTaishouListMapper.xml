@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 高額給付対象一覧共有子Divのマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-2020-060 quxiaodong -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukyuufutaishoulist.IKogakuKyuufuTaishouListMapper">
+
+    <resultMap id="resultMap_KogakuKyuufuTaishouListEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyuufutaishoulist.KogakuKyuufuTaishouListEntity" autoMapping="true">
+        <result property="明細合計区分" column="明細合計区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業者番号" column="事業者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler" />
+        <result property="サービス種類コード" column="サービス種類コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceCodeTypeHandler" />
+         <result property="サービス費用合計額" column="サービス費用合計額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+         <result property="利用者負担額" column="利用者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+         <result property="高額給付根拠" column="高額給付根拠" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+         <result property="サービス費用合計額合計" column="サービス費用合計額合計" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+         <result property="利用者負担額合計" column="利用者負担額合計" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+         <result property="算定基準額" column="算定基準額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+         <result property="支払済金額合計" column="支払済金額合計" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+         <result property="高額支給額" column="高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+    <select resultOrdered="true" id="getKogakuKyuufuTaishouList"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukyuufutaishoulist.KogakuKyuufuTaishouListParameter"
+            resultMap="resultMap_KogakuKyuufuTaishouListEntity" fetchSize="500">
+        SELECT *
+        FROM
+        (SELECT
+        '1' as 明細合計区分,
+        DbT3054KogakuKyufuTaishoshaMeisai."jigyoshaNo"  AS  事業者番号,
+        DbT3054KogakuKyufuTaishoshaMeisai."serviceShuruiCode" AS  サービス種類コード,
+        DbT3054KogakuKyufuTaishoshaMeisai."serviceHiyoGokeiGaku" AS  サービス費用合計額,
+        DbT3054KogakuKyufuTaishoshaMeisai."riyoshaFutanGaku" AS  利用者負担額,
+        DbT3054KogakuKyufuTaishoshaMeisai."kogakuKyufuKonkyo" AS  高額給付根拠,
+        '0'  AS  サービス費用合計額合計,
+        '0'  AS  利用者負担額合計,
+        '0'  AS  算定基準額,
+        '0'  AS  支払済金額合計,
+        '0'  AS  高額支給額
+        FROM
+        rgdb."DbT3054KogakuKyufuTaishoshaMeisai" AS DbT3054KogakuKyufuTaishoshaMeisai
+        WHERE 
+          DbT3054KogakuKyufuTaishoshaMeisai."hihokenshaNo" = #{hiHokenshaNo}
+         AND DbT3054KogakuKyufuTaishoshaMeisai."serviceTeikyoYM" = #{serviceTeikyoYM}
+        UNION
+        SELECT
+        '2'  AS 明細合計区分,
+        null   AS  事業者番号,
+        null  AS  サービス種類コード,
+        '0' AS  サービス費用合計額,
+        '0' AS  利用者負担額,
+        null  AS  高額給付根拠,
+        DbT3055KogakuKyufuTaishoshaGokei."serviceHiyoGokeiGakuGokei"  AS  サービス費用合計額合計,
+        DbT3055KogakuKyufuTaishoshaGokei."riyoshaFutanGakuGokei"  AS  利用者負担額合計,
+        DbT3055KogakuKyufuTaishoshaGokei."santeiKijunGaku"  AS  算定基準額,
+        DbT3055KogakuKyufuTaishoshaGokei."shiharaiSumiKingakuGokei"  AS  支払済金額合計,
+        DbT3055KogakuKyufuTaishoshaGokei."KogakuShikyuGaku"  AS  高額支給額
+         FROM
+        rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS DbT3055KogakuKyufuTaishoshaGokei
+         WHERE 
+          DbT3055KogakuKyufuTaishoshaGokei."hihokenshaNo" = #{hiHokenshaNo}
+         AND DbT3055KogakuKyufuTaishoshaGokei."serviceTeikyoYM" = #{serviceTeikyoYM}
+        ) AS C
+        ORDER BY
+        C.明細合計区分  ASC,
+        C.事業者番号  ASC,
+        C.サービス種類コード  ASC
+    </select>
+    <select resultOrdered="true" id="getJigyouKogakuKyuufuTaishouList"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukyuufutaishoulist.KogakuKyuufuTaishouListParameter"
+            resultMap="resultMap_KogakuKyuufuTaishouListEntity" fetchSize="500">
+        SELECT *
+        FROM
+        (SELECT
+        '1' as 明細合計区分,
+        DbT3108JigyoKogakuKyufuTaishoshaMeisai."jigyoshaNo"  AS  事業者番号,
+        DbT3108JigyoKogakuKyufuTaishoshaMeisai."serviceShuruiCode" AS  サービス種類コード,
+        DbT3108JigyoKogakuKyufuTaishoshaMeisai."serviceHiyoGokeiGaku" AS  サービス費用合計額,
+        DbT3108JigyoKogakuKyufuTaishoshaMeisai."riyoshaFutanGaku" AS  利用者負担額,
+        DbT3108JigyoKogakuKyufuTaishoshaMeisai."jigyoKogakuKyufuKonkyo" AS  高額給付根拠,
+        '0'  AS  サービス費用合計額合計,
+        '0'  AS  利用者負担額合計,
+        '0'  AS  算定基準額,
+        '0'  AS  支払済金額合計,
+        '0'  AS  高額支給額
+        FROM
+        rgdb."DbT3108JigyoKogakuKyufuTaishoshaMeisai" AS DbT3108JigyoKogakuKyufuTaishoshaMeisai
+        WHERE 
+          DbT3108JigyoKogakuKyufuTaishoshaMeisai."hihokenshaNo" = #{hiHokenshaNo}
+         AND DbT3108JigyoKogakuKyufuTaishoshaMeisai."serviceTeikyoYM" = #{serviceTeikyoYM}
+        UNION
+        SELECT
+        '2'  AS 明細合計区分,
+        null   AS  事業者番号,
+        null  AS  サービス種類コード,
+        '0' AS  サービス費用合計額,
+        '0' AS  利用者負担額,
+        null  AS  高額給付根拠,
+        DbT3109JigyoKogakuKyufuTaishoshaGokei."serviceHiyoGokeiGakuGokei"  AS  サービス費用合計額合計,
+        DbT3109JigyoKogakuKyufuTaishoshaGokei."riyoshaFutanGakuGokei"  AS  利用者負担額合計,
+        DbT3109JigyoKogakuKyufuTaishoshaGokei."santeiKijunGaku"  AS  算定基準額,
+        DbT3109JigyoKogakuKyufuTaishoshaGokei."shiharaiSumiKingakuGokei"  AS  支払済金額合計,
+        DbT3109JigyoKogakuKyufuTaishoshaGokei."jigyoKogakuShikyuGaku"  AS  高額支給額
+         FROM
+        rgdb."DbT3109JigyoKogakuKyufuTaishoshaGokei" AS DbT3109JigyoKogakuKyufuTaishoshaGokei
+         WHERE 
+          DbT3109JigyoKogakuKyufuTaishoshaGokei."hihokenshaNo" = #{hiHokenshaNo}
+         AND DbT3109JigyoKogakuKyufuTaishoshaGokei."serviceTeikyoYM" = #{serviceTeikyoYM}
+        ) AS C
+        ORDER BY
+        C.明細合計区分  ASC,
+        C.事業者番号  ASC,
+        C.サービス種類コード  ASC
+    </select>
+</mapper>

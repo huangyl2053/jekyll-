@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.IsExistJ
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -31,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 要介護認定情報提供Divを制御クラスです。
@@ -61,13 +59,13 @@ public class YokaigoNinteiJohoTeikyoHandler {
     /**
      * 画面情報を設定します。
      *
+     * @param 被保険者番号 被保険者番号
      */
-    public void onLoad() {
+    public void onLoad(RString 被保険者番号) {
         div.getNinteiKekkaShosai().setIsOpen(false);
         div.getHakkoChohyo().setIsOpen(false);
         div.getNInteiRirekiInfo().setIsOpen(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnkensakuback"), false);
-        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
         HihokenshaJyuhouBusiness 被保険者情報 = YokaigoNinteiJohoTeikyoFinder.createInstance().select被保険者情報(被保険者番号);
         if (被保険者情報 != null) {
             div.getTxtHihokenshaNo().setValue(被保険者情報.get被保険者番号());

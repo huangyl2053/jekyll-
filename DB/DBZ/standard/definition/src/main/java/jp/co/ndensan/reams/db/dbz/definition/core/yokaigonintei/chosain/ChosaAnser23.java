@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -28,11 +27,11 @@ public enum ChosaAnser23 {
      * コード:3 名称:介護者の指示が通じない 略称:介護者の指示が通じない
      */
     介護者の指示が通じない("3", "介護者の指示が通じない");
-    private final Code code;
+    private final RString code;
     private final RString fullName;
 
     private ChosaAnser23(String code, String fullname) {
-        this.code = new Code(code);
+        this.code = new RString(code);
         this.fullName = new RString(fullname);
     }
 
@@ -41,7 +40,7 @@ public enum ChosaAnser23 {
      *
      * @return 認定調査項目内容23のコード
      */
-    public Code getコード() {
+    public RString getコード() {
         return code;
     }
 
@@ -60,10 +59,10 @@ public enum ChosaAnser23 {
      * @param code 認定調査項目内容23のコード
      * @return {@code code} に対応する認定調査項目内容23
      */
-    public static ChosaAnser23 toValue(Code code) {
-        for (ChosaAnser23 anser01 : ChosaAnser23.values()) {
-            if (anser01.code.equals(code)) {
-                return anser01;
+    public static ChosaAnser23 toValue(RString code) {
+        for (ChosaAnser23 anser23 : ChosaAnser23.values()) {
+            if (anser23.code.equals(code)) {
+                return anser23;
             }
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("認定調査項目内容23"));

@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.business.comparator;
 
 import java.util.Comparator;
 import jp.co.ndensan.reams.db.dbz.business.core.IShikibetsuCodeGettable;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.SortOrder;
+import jp.co.ndensan.reams.db.dbz.definition.core.sortjun.SortOrder;
 
 /**
  * {@link IShikibetsuCodeGettable 識別コードが取得可能なオブジェクト}専用のComparatorです。
@@ -31,8 +31,7 @@ public final class ShikibetsuCodeComparator implements Comparator<IShikibetsuCod
     private final SortOrder order;
 
     /**
-     * ソート順を指定して、ShikibetsuCodeComparatorを生成します。<br />
-     * {@link SortOrder#ASC SortOrder.ASC}のときは、昇順ソート用のComparatorを、
+     * ソート順を指定して、ShikibetsuCodeComparatorを生成します。<br /> {@link SortOrder#ASC SortOrder.ASC}のときは、昇順ソート用のComparatorを、
      * {@link SortOrder#DESC SortOrder.DESC}のときは、降順ソート用のComparatorを生成します。
      *
      * @param order {@link SortOrder ソート順}
@@ -43,6 +42,6 @@ public final class ShikibetsuCodeComparator implements Comparator<IShikibetsuCod
 
     @Override
     public int compare(IShikibetsuCodeGettable o1, IShikibetsuCodeGettable o2) {
-        return o1.get識別コード().compareTo(o2.get識別コード()) * order.rate();
+        return o1.get識別コード().compareTo(o2.get識別コード()) * order.getコード();
     }
 }

@@ -4,17 +4,21 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.gemmenshu
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * GemmenShurui のクラスファイル 
- * 
- * @author 自動生成
+ * GemmenShurui のクラスファイル
+ *
+ * @reamsid_L DBB-1660-030 xupeng
  */
 public class GemmenShuruiDiv extends Panel implements IGemmenShuruiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,6 +29,10 @@ public class GemmenShuruiDiv extends Panel implements IGemmenShuruiDiv {
     private DataGrid<dgGemmenShurui_Row> dgGemmenShurui;
     @JsonProperty("btnTorikeshi")
     private Button btnTorikeshi;
+    @JsonProperty("GemmenShuruiCode")
+    private RString GemmenShuruiCode;
+    @JsonProperty("GemmenShuruiHyojiMongon")
+    private RString GemmenShuruiHyojiMongon;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -68,7 +76,42 @@ public class GemmenShuruiDiv extends Panel implements IGemmenShuruiDiv {
         this.btnTorikeshi = btnTorikeshi;
     }
 
+    /*
+     * getGemmenShuruiCode
+     * @return GemmenShuruiCode
+     */
+    @JsonProperty("GemmenShuruiCode")
+    public RString getGemmenShuruiCode() {
+        return GemmenShuruiCode;
+    }
+
+    /*
+     * setGemmenShuruiCode
+     * @param GemmenShuruiCode GemmenShuruiCode
+     */
+    @JsonProperty("GemmenShuruiCode")
+    public void setGemmenShuruiCode(RString GemmenShuruiCode) {
+        this.GemmenShuruiCode = GemmenShuruiCode;
+    }
+
+    /*
+     * getGemmenShuruiHyojiMongon
+     * @return GemmenShuruiHyojiMongon
+     */
+    @JsonProperty("GemmenShuruiHyojiMongon")
+    public RString getGemmenShuruiHyojiMongon() {
+        return GemmenShuruiHyojiMongon;
+    }
+
+    /*
+     * setGemmenShuruiHyojiMongon
+     * @param GemmenShuruiHyojiMongon GemmenShuruiHyojiMongon
+     */
+    @JsonProperty("GemmenShuruiHyojiMongon")
+    public void setGemmenShuruiHyojiMongon(RString GemmenShuruiHyojiMongon) {
+        this.GemmenShuruiHyojiMongon = GemmenShuruiHyojiMongon;
+    }
+
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-
 }

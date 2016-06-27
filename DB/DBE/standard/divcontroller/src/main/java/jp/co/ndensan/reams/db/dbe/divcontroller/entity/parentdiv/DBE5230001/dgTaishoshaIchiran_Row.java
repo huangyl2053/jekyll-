@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon May 16 15:18:34 CST 2016 
+ * Thu Jun 16 15:31:58 CST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 
 public class dgTaishoshaIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private RString shinsakaiJunjo;
     private RString hokenshaNo;
@@ -51,7 +51,12 @@ public class dgTaishoshaIchiran_Row extends DataRow {
     private RString chosahyoNinchido;
     private RString ikenshoNetakirido;
     private RString ikenshoNinchido;
-    private RString model;
+    private RString seiNenGaBi;
+    private RString hidMemo;
+    private RString hidIken;
+    private RString hidIkenCode;
+    private RString hidIchiHenKou;
+    private RString upDateFlag;
 
     public dgTaishoshaIchiran_Row() {
         super();
@@ -84,7 +89,12 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.chosahyoNinchido = RString.EMPTY;
         this.ikenshoNetakirido = RString.EMPTY;
         this.ikenshoNinchido = RString.EMPTY;
-        this.model = RString.EMPTY;
+        this.seiNenGaBi = RString.EMPTY;
+        this.hidMemo = RString.EMPTY;
+        this.hidIken = RString.EMPTY;
+        this.hidIkenCode = RString.EMPTY;
+        this.hidIchiHenKou = RString.EMPTY;
+        this.upDateFlag = RString.EMPTY;
         this.setOriginalData("shinsakaiJunjo", shinsakaiJunjo);
         this.setOriginalData("hokenshaNo", hokenshaNo);
         this.setOriginalData("hokenshaMeisho", hokenshaMeisho);
@@ -114,10 +124,15 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("chosahyoNinchido", chosahyoNinchido);
         this.setOriginalData("ikenshoNetakirido", ikenshoNetakirido);
         this.setOriginalData("ikenshoNinchido", ikenshoNinchido);
-        this.setOriginalData("model", model);
+        this.setOriginalData("seiNenGaBi", seiNenGaBi);
+        this.setOriginalData("hidMemo", hidMemo);
+        this.setOriginalData("hidIken", hidIken);
+        this.setOriginalData("hidIkenCode", hidIkenCode);
+        this.setOriginalData("hidIchiHenKou", hidIchiHenKou);
+        this.setOriginalData("upDateFlag", upDateFlag);
     }
 
-    public dgTaishoshaIchiran_Row(RString shinsakaiJunjo, RString hokenshaNo, RString hokenshaMeisho, RString hihokenshaNo, RString shimei, RString hihoKubun, RString shinseiKubunShinseiji, RString shinseiKubunLaw, TextBoxFlexibleDate shinseiDay, TextBoxFlexibleDate zenkaiYukoKikanShuryoDay, RString zenkaiIchijiHantei, RString konkaiIchijiHantei, RString zenkaiNijiHantei, RString konkaiNijiHantei, RString hanteiKekka, TextBoxFlexibleDate nijiHanteiDate, RString tokuteiShippei, RString jotaizo, TextBoxFlexibleDate ninteiKikanKaishi, TextBoxFlexibleDate ninteiKikanShuryo, RString ninteiKikanTukisu, Boolean shinsakaiMemo, Boolean shinsakaiIken, RString shinsakaiIkenShurui, RString ichijiHanteiKekkaHenkoRiyu, RString chosahyoNetakirido, RString chosahyoNinchido, RString ikenshoNetakirido, RString ikenshoNinchido, RString model) {
+    public dgTaishoshaIchiran_Row(RString shinsakaiJunjo, RString hokenshaNo, RString hokenshaMeisho, RString hihokenshaNo, RString shimei, RString hihoKubun, RString shinseiKubunShinseiji, RString shinseiKubunLaw, TextBoxFlexibleDate shinseiDay, TextBoxFlexibleDate zenkaiYukoKikanShuryoDay, RString zenkaiIchijiHantei, RString konkaiIchijiHantei, RString zenkaiNijiHantei, RString konkaiNijiHantei, RString hanteiKekka, TextBoxFlexibleDate nijiHanteiDate, RString tokuteiShippei, RString jotaizo, TextBoxFlexibleDate ninteiKikanKaishi, TextBoxFlexibleDate ninteiKikanShuryo, RString ninteiKikanTukisu, Boolean shinsakaiMemo, Boolean shinsakaiIken, RString shinsakaiIkenShurui, RString ichijiHanteiKekkaHenkoRiyu, RString chosahyoNetakirido, RString chosahyoNinchido, RString ikenshoNetakirido, RString ikenshoNinchido, RString seiNenGaBi, RString hidMemo, RString hidIken, RString hidIkenCode, RString hidIchiHenKou, RString upDateFlag) {
         super();
         this.setOriginalData("shinsakaiJunjo", shinsakaiJunjo);
         this.setOriginalData("hokenshaNo", hokenshaNo);
@@ -148,7 +163,12 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("chosahyoNinchido", chosahyoNinchido);
         this.setOriginalData("ikenshoNetakirido", ikenshoNetakirido);
         this.setOriginalData("ikenshoNinchido", ikenshoNinchido);
-        this.setOriginalData("model", model);
+        this.setOriginalData("seiNenGaBi", seiNenGaBi);
+        this.setOriginalData("hidMemo", hidMemo);
+        this.setOriginalData("hidIken", hidIken);
+        this.setOriginalData("hidIkenCode", hidIkenCode);
+        this.setOriginalData("hidIchiHenKou", hidIchiHenKou);
+        this.setOriginalData("upDateFlag", upDateFlag);
         this.shinsakaiJunjo = shinsakaiJunjo;
         this.hokenshaNo = hokenshaNo;
         this.hokenshaMeisho = hokenshaMeisho;
@@ -178,7 +198,12 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.chosahyoNinchido = chosahyoNinchido;
         this.ikenshoNetakirido = ikenshoNetakirido;
         this.ikenshoNinchido = ikenshoNinchido;
-        this.model = model;
+        this.seiNenGaBi = seiNenGaBi;
+        this.hidMemo = hidMemo;
+        this.hidIken = hidIken;
+        this.hidIkenCode = hidIkenCode;
+        this.hidIchiHenKou = hidIchiHenKou;
+        this.upDateFlag = upDateFlag;
     }
 
     public RString getShinsakaiJunjo() {
@@ -297,8 +322,28 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         return ikenshoNinchido;
     }
 
-    public RString getModel() {
-        return model;
+    public RString getSeiNenGaBi() {
+        return seiNenGaBi;
+    }
+
+    public RString getHidMemo() {
+        return hidMemo;
+    }
+
+    public RString getHidIken() {
+        return hidIken;
+    }
+
+    public RString getHidIkenCode() {
+        return hidIkenCode;
+    }
+
+    public RString getHidIchiHenKou() {
+        return hidIchiHenKou;
+    }
+
+    public RString getUpDateFlag() {
+        return upDateFlag;
     }
 
     public void setShinsakaiJunjo(RString shinsakaiJunjo) {
@@ -446,9 +491,34 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.ikenshoNinchido = ikenshoNinchido;
     }
 
-    public void setModel(RString model) {
-        this.setOriginalData("model", model);
-        this.model = model;
+    public void setSeiNenGaBi(RString seiNenGaBi) {
+        this.setOriginalData("seiNenGaBi", seiNenGaBi);
+        this.seiNenGaBi = seiNenGaBi;
+    }
+
+    public void setHidMemo(RString hidMemo) {
+        this.setOriginalData("hidMemo", hidMemo);
+        this.hidMemo = hidMemo;
+    }
+
+    public void setHidIken(RString hidIken) {
+        this.setOriginalData("hidIken", hidIken);
+        this.hidIken = hidIken;
+    }
+
+    public void setHidIkenCode(RString hidIkenCode) {
+        this.setOriginalData("hidIkenCode", hidIkenCode);
+        this.hidIkenCode = hidIkenCode;
+    }
+
+    public void setHidIchiHenKou(RString hidIchiHenKou) {
+        this.setOriginalData("hidIchiHenKou", hidIchiHenKou);
+        this.hidIchiHenKou = hidIchiHenKou;
+    }
+
+    public void setUpDateFlag(RString upDateFlag) {
+        this.setOriginalData("upDateFlag", upDateFlag);
+        this.upDateFlag = upDateFlag;
     }
 
     // </editor-fold>

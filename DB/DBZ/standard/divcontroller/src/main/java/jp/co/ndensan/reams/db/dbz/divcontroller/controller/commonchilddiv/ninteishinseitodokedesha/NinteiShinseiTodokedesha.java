@@ -5,11 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.ninteishinseitodokedesha;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.dbt4101ninteishinseijoho.DbT4101NinteiShinseiJohoBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.dbt4120shinseitodokedejoho.DbT4120ShinseitodokedeJohoBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.dbt4121shinseirirekijoho.DbT4121ShinseiRirekiJohoBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaBusiness;
+import jp.co.ndensan.reams.db.dbz.business.core.shisetujyoho.KaigoJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ninteishinseitodokedesha.NinteiShinseiTodokedeshaMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
@@ -20,15 +23,15 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.TsuzukigaraCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護認定申請届出者のDivControllerです。
  *
- * @reamsid_L DBE-1300-110 yaodongsheng
+ * @reamsid_L DBZ-1300-110 yaodongsheng
  */
 public class NinteiShinseiTodokedesha {
 
@@ -112,9 +115,7 @@ public class NinteiShinseiTodokedesha {
             div.getTxtShimei().setValue(mesho == null ? RString.EMPTY : mesho.value());
             AtenaKanaMeisho kanameisho = shikibetsutaisyo.getPsmEntity().getKanaMeisho();
             div.getTxtKanaShimei().setValue(kanameisho == null ? RString.EMPTY : kanameisho.value());
-//            div.getLblHonninKankeiseiMei().setText(shikibetsutaisyo.getPsmEntity().getTsuzukigara());
-            TsuzukigaraCode code = shikibetsutaisyo.getPsmEntity().getTsuzukigaraCode();
-            div.getTxtHonninKankeisei().setValue(code == null ? RString.EMPTY : code.value());
+            div.getTxtHonninKankeisei().setValue(shikibetsutaisyo.getPsmEntity().getTsuzukigara());
             div.getTxtYubinNo().setValue(shikibetsutaisyo.getPsmEntity().getYubinNo());
             div.getCcdChoikiInput().load(shikibetsutaisyo.getPsmEntity().getChoikiCode());
             div.getCcdZenkokuJushoInput().load(shikibetsutaisyo.getPsmEntity().getZenkokuJushoCode(), shikibetsutaisyo.getPsmEntity().getYubinNo());
@@ -135,6 +136,26 @@ public class NinteiShinseiTodokedesha {
         } else {
             div.setMode_DisplayType(NinteiShinseiTodokedeshaDiv.DisplayType.管外);
         }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * LostFocusの処理。
+     *
+     * @param div NinteiShinseiTodokedeshaDiv
+     * @return NinteiShinseiTodokedeshaDivのResponseData
+     */
+    public ResponseData<NinteiShinseiTodokedeshaDiv> lostFocus(NinteiShinseiTodokedeshaDiv div) {
+        if (!RString.isNullOrEmpty(div.getTxtJigyoshaCode().getValue())) {
+            NinteiShinseiTodokedeshaFinder finder = NinteiShinseiTodokedeshaFinder.createInstance();
+            List<KaigoJigyoshaInputGuide> kaigoList = finder.getKaigoJigyoshaInputGuide(new JigyoshaNo(div.getTxtJigyoshaCode().getValue()),
+                    FlexibleDate.getNowDate()).records();
+            if (!kaigoList.isEmpty()) {
+                div.getTxtJigyoshaName().setValue(kaigoList.get(0).get事業者名称().value());
+                return ResponseData.of(div).respond();
+            }
+        }
+        div.getTxtJigyoshaName().setValue(RString.EMPTY);
         return ResponseData.of(div).respond();
     }
 

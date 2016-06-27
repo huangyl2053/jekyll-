@@ -22,7 +22,7 @@
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE0100001",
      "layoutTitle": "申請者検索",
-     "eventName": "対象者特定",
+     "eventName": "要介護認定情報提供へ",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",

@@ -62,11 +62,11 @@ public class ShikakuHenkouIdou {
      */
     public ResponseData<ShikakuHenkouIdouDiv> onLoad(ShikakuHenkouIdouDiv div) {
         TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        div.getCcdKaigoAtenaInfo().onLoad(key.get識別コード());
+        div.getCcdKaigoAtenaInfo().initialize(key.get識別コード());
         if (key.get被保険者番号() == null) {
             div.getCcdKaigoShikakuKihon().setVisible(true);
         } else {
-            div.getCcdKaigoShikakuKihon().onLoad(key.get被保険者番号());
+            div.getCcdKaigoShikakuKihon().initialize(key.get被保険者番号());
         }
         HihokenshaShutokuJyoho hihokensha = shutokuManager.getSaishinDeta(
                 key.get識別コード(), key.get被保険者番号());

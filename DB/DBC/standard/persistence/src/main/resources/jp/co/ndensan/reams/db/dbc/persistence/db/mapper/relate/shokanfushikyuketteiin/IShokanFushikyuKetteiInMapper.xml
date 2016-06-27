@@ -9,7 +9,7 @@
     </resultMap>
     
      <!--一時テーブルの被保険者番号の取得-->
-    <select id="select被保険者番号" resultMap="resultMap_Hihokensha" fetchSize="500">
+    <select resultOrdered="true" id="select被保険者番号" resultMap="resultMap_Hihokensha" fetchSize="500">
         SELECT DISTINCT SHOKAN."hiHokenshaNo"
         FROM "DbTShokanFushikyuKetteiInTempTable" AS SHOKAN
     </select>
@@ -27,7 +27,7 @@
     <!-- 被保険者台帳管理から市町村コード取得 -->
     <select id="select市町村コードFrom被保険者台帳管理"
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanfushikyuketteiin.ShokanFushikyuKetteiInParameter">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanfushikyuketteiin.ShokanFushikyuKetteiInParameter" resultOrdered="true">
      SELECT
          <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
      FROM
@@ -52,7 +52,7 @@
     <!-- 被保険者台帳管理から新被保険者番号取得 -->
     <select id="select新被保険者番号From新旧被保険者番号変換"
             resultMap="resultMap_SinHihokenshaBangoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanfushikyuketteiin.ShokanFushikyuKetteiInParameter">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanfushikyuketteiin.ShokanFushikyuKetteiInParameter" resultOrdered="true">
      SELECT
          DbT7026."shichosonCode",
          DbT7026."shinNo",
@@ -101,7 +101,7 @@
     </resultMap>
     <!-- 一時テーブルの被保険者番号 識別コードの取得 -->
     <select id="select識別コード"
-            resultMap="resultMap_ShikibetsuCode" fetchSize="500">
+            resultMap="resultMap_ShikibetsuCode" fetchSize="500" resultOrdered="true">
         SELECT DISTINCT TEMP."shikibetsuCode"
         FROM "DbTShokanFushikyuKetteiInTempTable" AS TEMP
     </select>
@@ -116,7 +116,7 @@
         <result property="行政区名" column="gyoseikuName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select id="select宛名情報Entity" resultMap="resultMap_PSM" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanfushikyuketteiin.ShokanFushikyuKetteiInPSMParameter" fetchSize="50">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanfushikyuketteiin.ShokanFushikyuKetteiInPSMParameter" fetchSize="50" resultOrdered="true">
         SELECT 
              宛名."shikibetsuCode",
              宛名."zenkokuJushoCode",
@@ -172,7 +172,7 @@
     </resultMap>
     <select id="select一時テーブル" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanfushikyuketteiin.ShokanFushikyuKetteiInMybatisParameter"
-            resultMap="resultMap_yishiTable" fetchSize="500">
+            resultMap="resultMap_yishiTable" fetchSize="500" resultOrdered="true">
         SELECT TEMP.*
         FROM "DbTShokanFushikyuKetteiInTempTable" AS TEMP
         ORDER BY TEMP."shokisaiHokenshaNo",
@@ -189,7 +189,7 @@
         <result property="no" column="no" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="sakuseiYMD" column="sakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
-    <select id="select償還払不支給決定情報一時テーブル" resultMap="resultMap_ShokanFushikyuKetteiInEntity" fetchSize="500">
+    <select resultOrdered="true" id="select償還払不支給決定情報一時テーブル" resultMap="resultMap_ShokanFushikyuKetteiInEntity" fetchSize="500">
         SELECT TEMP."hiHokenshaNo",
                TEMP."serviceTeikyoYM",
                TEMP."seiriNo",
@@ -230,7 +230,7 @@
         <result property="shikyuKubunCode" column="shikyuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tensuKingaku" column="tensuKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    <select id="select償還払不支給決定情報一時" resultMap="resultMap_ShokanFushikyuKetteiIn" fetchSize="500">
+    <select resultOrdered="true" id="select償還払不支給決定情報一時" resultMap="resultMap_ShokanFushikyuKetteiIn" fetchSize="500">
         SELECT TEMP."hiHokenshaNo",
                TEMP."serviceTeikyoYM",
                TEMP."seiriNo",
@@ -258,7 +258,7 @@
     </resultMap>
     <select id="select備考" 
             resultMap="resultMap_FushikyuKetteiInEntityn" fetchSize="500"
-            parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanfushikyuketteiin.ShokanFushikyuKetteiInEntity">
+            parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanfushikyuketteiin.ShokanFushikyuKetteiInEntity" resultOrdered="true">
         SELECT TEMP."bikoOne" AS bikoOne,
                TEMP."bikoTwo" AS bikoTwo
         FROM "DbTShokanFushikyuKetteiInTempTable" AS TEMP

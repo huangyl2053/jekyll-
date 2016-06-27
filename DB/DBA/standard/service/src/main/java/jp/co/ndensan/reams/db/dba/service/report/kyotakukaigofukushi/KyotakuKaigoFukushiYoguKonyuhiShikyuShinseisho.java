@@ -11,13 +11,14 @@ import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.
 import jp.co.ndensan.reams.db.dba.business.report.fukushiyogukonyuhi.FukushiYoguKonyuhiShinseishoJuryoIninHaraiItem;
 import jp.co.ndensan.reams.db.dba.business.report.fukushiyogukonyuhi.FukushiYoguKonyuhiShinseishoJuryoIninHaraiProperty;
 import jp.co.ndensan.reams.db.dba.business.report.fukushiyogukonyuhi.FukushiYoguKonyuhiShinseishoJuryoIninHaraiReport;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.report.fukushiyogukonyuhi.FukushiYoguKonyuhiShinseishoJuryoIninHaraiReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinSeinengappiHyojihoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
@@ -26,7 +27,6 @@ import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeik
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -71,13 +71,13 @@ public class KyotakuKaigoFukushiYoguKonyuhiShikyuShinseisho {
         FukushiYoguKonyuhiShinseishoJuryoIninHaraiProperty property = new FukushiYoguKonyuhiShinseishoJuryoIninHaraiProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<FukushiYoguKonyuhiShinseishoJuryoIninHaraiReportSource> assembler = createAssembler(property, reportManager)) {
+                ReportSourceWriter<FukushiYoguKonyuhiShinseishoJuryoIninHaraiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                        null, null);
+                        null, reportSourceWriter.getImageFolderPath());
                 for (FukushiYoguKonyuhiShinseishoJuryoIninHaraiReport report : toReports(get被保険者基本情報取得(識別コード, 被保険者番号),
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
-                    ReportSourceWriter<FukushiYoguKonyuhiShinseishoJuryoIninHaraiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
                 }
             }
@@ -129,7 +129,7 @@ public class KyotakuKaigoFukushiYoguKonyuhiShikyuShinseisho {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
                 SubGyomuCode.DBC介護給付,
-                new ReportId("DBC800013_FukushiYoguKonyuhiShinseishoJuryoIninHarai"),
+                ReportIdDBA.DBC800013.getReportId(),
                 KamokuCode.EMPTY,
                 1,
                 項目番号,

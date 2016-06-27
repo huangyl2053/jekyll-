@@ -24,15 +24,17 @@
         <result property="shiryoSakuseiZumiFlag" column="shinsakaiKaisaiYoteiJoho_shiryoSakuseiZumiFlag"/>
         <result property="shinsakaiShinchokuJokyo" column="shinsakaiKaisaiYoteiJoho_ShinsakaiShinchokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="gogitaiDummyFlag" column="gogitaiJoho_gogitaiDummyFlag"/>
+        <result property="合議体番号" column="gogitaiJoho_gogitaiNo"/>
     </resultMap>
     
-    <select id="get審査会一覧"
+    <select resultOrdered="true" id="get審査会一覧"
             resultMap="resultMap_ShinsakaiKaisaiRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.core.shinsakaikaisai.ShinsakaiKaisaiParameter" fetchSize="500">
         SELECT
                 shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" AS "shinsakaiKaisaiYoteiJoho_shinsakaiKaisaiYoteiYMD",
                 shinsakaiKaisaiYoteiJoho."shinsakaiKaishiYoteiTime" AS "shinsakaiKaisaiYoteiJoho_shinsakaiKaishiYoteiTime",
                 shinsakaiKaisaiYoteiJoho."shinsakaiShuryoYoteiTime" AS "shinsakaiKaisaiYoteiJoho_shinsakaiShuryoYoteiTime",
+                gogitaiJoho."gogitaiNo" AS gogitaiJoho_gogitaiNo,
                 '第'||shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"||'回審査会' AS 合議体名称,
                 gogitaiJoho."gogitaiMei" AS "gogitaiJoho_gogitaiMei",
                 CASE WHEN gogitaiJoho."gogitaiSeishinkaSonzaiFlag" = True 

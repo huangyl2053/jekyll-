@@ -8,7 +8,7 @@
 
     <select id="get契約事業者一覧"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.juryoininkeiyakujigyosha.JuryoininKeiyakuJigyoshaParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.juryoininkeiyakujigyosha.JuryoininKeiyakuJigyoshaParameter" fetchSize="500" resultOrdered="true">
         SELECT
             JURYOININKEIYAKUJIGYOSHA.*
         FROM
@@ -52,7 +52,7 @@
     
     <select id="get契約事業者"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity"
-            parameterType="java.util.Map" fetchSize="500">
+            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
             JURYOININKEIYAKUJIGYOSHA.*
         FROM
@@ -67,7 +67,7 @@
             AND ((KINYUKIKANSHITEN."kaishiYMD" <![CDATA[<=]]> #{systemDate}
                     AND #{systemDate} <![CDATA[<=]]> KINYUKIKANSHITEN."shuryoYMD")
                 OR (KINYUKIKANSHITEN."kaishiYMD" <![CDATA[<=]]> #{kaishiYMD}
-                    AND #{kaishiYMD} <![CDATA[<=]]> KINYUKIKANSHITEN."shuryoYMD")
-                )
+                    AND #{shuryoYMD} <![CDATA[<=]]> KINYUKIKANSHITEN."shuryoYMD")
+                ) 
     </select>
 </mapper>

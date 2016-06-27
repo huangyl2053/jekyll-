@@ -55,19 +55,27 @@ public final class ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter implement
             createProcessParam(ShoukanBaraiSuuchiShoIkatsuBatchParamter batchParamter) {
 
         FlexibleDate dataFrom = FlexibleDate.EMPTY;
-        FlexibleDate dataTo = FlexibleDate.EMPTY;
+        FlexibleDate dataTo = FlexibleDate.MAX;
         if (new RString("1").equals(batchParamter.get抽出モード())) {
-            dataFrom = new FlexibleDate(batchParamter.get受付日付From().toDateString());
-            dataTo = new FlexibleDate(batchParamter.get受付日付To().toDateString());
+            if (batchParamter.get受付日付From() != null) {
+                dataFrom = new FlexibleDate(batchParamter.get受付日付From().toDateString());
+            }
+            if (batchParamter.get受付日付To() != null) {
+                dataTo = new FlexibleDate(batchParamter.get受付日付To().toDateString());
+            }
         } else if (new RString("2").equals(batchParamter.get抽出モード())) {
-            dataFrom = new FlexibleDate(batchParamter.get決定日付From().toDateString());
-            dataTo = new FlexibleDate(batchParamter.get決定日付To().toDateString());
+            if (batchParamter.get決定日付From() != null) {
+                dataFrom = new FlexibleDate(batchParamter.get決定日付From().toDateString());
+            }
+            if (batchParamter.get決定日付To() != null) {
+                dataTo = new FlexibleDate(batchParamter.get決定日付To().toDateString());
+            }
         }
         return new ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter(
                 batchParamter.get振込予定日() == null ? null : new FlexibleDate(batchParamter.get振込予定日().toDateString()),
                 dataFrom, dataTo,
                 batchParamter.get発行日() == null ? null : new FlexibleDate(batchParamter.get発行日().toDateString()),
-                batchParamter.get決定者受付年月() == null ? null : new FlexibleYearMonth(batchParamter.get発行日().getYearMonth().toDateString()),
+                batchParamter.get決定者受付年月() == null ? null : new FlexibleYearMonth(batchParamter.get決定者受付年月().toDateString()),
                 batchParamter.get抽出モード(), batchParamter.get印書(), batchParamter.get決定日());
     }
 }

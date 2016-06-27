@@ -67,7 +67,7 @@
         <result property="koikiNinshoNoUmu" column="dbT7024KoikiShichosonCodeHenkanPattern_koikiNinshoNoUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shichosonNoFukaKubun" column="dbT7024KoikiShichosonCodeHenkanPattern_shichosonNoFukaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<select id="getEntity" resultMap="ResultMap_DbT7024KoikiShichosonCodeHenkanPatternEntity">
+<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7024KoikiShichosonCodeHenkanPatternEntity">
     SELECT
     <include refid="allColumns_DbT7024KoikiShichosonCodeHenkanPattern" />
     FROM

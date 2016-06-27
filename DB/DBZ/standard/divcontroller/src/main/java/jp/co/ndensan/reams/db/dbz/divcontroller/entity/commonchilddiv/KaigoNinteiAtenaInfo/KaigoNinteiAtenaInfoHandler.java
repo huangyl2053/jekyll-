@@ -13,11 +13,11 @@ import static jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei.
 import static jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei.広域市町村;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigoninteiatenainfo.KaigoNinteiAtenaInfoBusiness;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.HdnShoriTypeStatus;
+import jp.co.ndensan.reams.db.dbz.definition.core.hokensha.HdnShoriTypeStatus;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigoninteiatenainfo.KaigoNinteiAtenaInfoParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv.AtenaType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv.ShoriType;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.kaigoninteiatenainfo.KaigoNinteiAtenaInfoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigoninteiatenainfo.KaigoNinteiAtenaInfoManager;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護認定宛名情報の取得するクラスです。
  *
- * @reamsid_L DBE-1300-050 lizhuoxuan
+ * @reamsid_L DBZ-1300-050 lizhuoxuan
  */
 public class KaigoNinteiAtenaInfoHandler {
 

@@ -31,9 +31,9 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTais
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
+import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -73,9 +73,6 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
     private static final RString 期_12 = new RString("12");
     private static final RString 期_13 = new RString("13");
     private static final RString 期_14 = new RString("14");
-    private static final CodeShubetsu コード種別0046 = new CodeShubetsu("0046");
-    private static final CodeShubetsu コード種別0047 = new CodeShubetsu("0047");
-
     private static final int SIZE_3 = 3;
     private static final int SIZE_6 = 6;
     private static final int SIZE_14 = 14;
@@ -370,10 +367,10 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         更正前.set普徴期別金額リスト(普徴期別金額リスト);
         更正前.set特別徴収額合計(get普徴納付済額(本算定通知書情報.get賦課の情報_更正前().get賦課情報(), 1, SIZE_14));
         NenkinTokuchoKaifuJoho 対象者_追加含む_情報_更正前 = 本算定通知書情報.get対象者_追加含む_情報_更正前();
-
+        FlexibleDate 基準日 = FlexibleDate.getNowDate();
         if (対象者_追加含む_情報_更正前 != null && 対象者_追加含む_情報_更正前.getDT特別徴収義務者コード() != null) {
-            RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード種別0047,
-                    対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value());
+            RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+                    対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value(), 基準日);
             更正前.set特別徴収義務者(特別徴収義務者);
             更正前.set特別徴収義務者コード(対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value().value());
         }
@@ -381,7 +378,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         ChoshuHoho 徴収方法情報_更正前 = 本算定通知書情報.get徴収方法情報_更正前();
         RString 年金コード = 徴収方法情報_更正前.get本徴収_年金コード();
         if (!RString.isNullOrEmpty(年金コード) && SIZE_3 < 年金コード.length()) {
-            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード種別0046, new Code(年金コード.substring(0, SIZE_3)));
+            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
+                    new Code(年金コード.substring(0, SIZE_3)), 基準日);
             更正前.set特別徴収対象年金(特別徴収対象年金);
         }
         更正前.set特別徴収対象年金コード(年金コード);
@@ -466,10 +464,10 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         更正後.set普徴期別金額リスト(普徴期別金額リスト);
         更正後.set特別徴収額合計(get普徴納付済額(本算定通知書情報.get賦課の情報_更正後().get賦課情報(), 1, SIZE_14));
         NenkinTokuchoKaifuJoho 対象者_追加含む_情報_更正後 = 本算定通知書情報.get対象者_追加含む_情報_更正後();
-
+        FlexibleDate 基準日 = FlexibleDate.getNowDate();
         if (対象者_追加含む_情報_更正後 != null && 対象者_追加含む_情報_更正後.getDT特別徴収義務者コード() != null) {
-            RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード種別0047,
-                    対象者_追加含む_情報_更正後.getDT特別徴収義務者コード().value());
+            RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+                    対象者_追加含む_情報_更正後.getDT特別徴収義務者コード().value(), 基準日);
             更正後.set特別徴収義務者(特別徴収義務者);
             更正後.set特別徴収義務者コード(対象者_追加含む_情報_更正後.getDT特別徴収義務者コード().value().value());
         }
@@ -477,7 +475,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         ChoshuHoho 徴収方法情報_更正後 = 本算定通知書情報.get徴収方法情報_更正後();
         RString 年金コード = 徴収方法情報_更正後.get本徴収_年金コード();
         if (!RString.isNullOrEmpty(年金コード) && SIZE_3 < 年金コード.length()) {
-            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード種別0046, new Code(年金コード.substring(0, SIZE_3)));
+            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
+                    new Code(年金コード.substring(0, SIZE_3)), 基準日);
             更正後.set特別徴収対象年金(特別徴収対象年金);
         }
         更正後.set特別徴収対象年金コード(年金コード);
@@ -534,23 +533,23 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         characteristicsPhase1.set金額(賦課情報.get特徴期別金額01());
         特徴期別金額リスト.add(characteristicsPhase1);
         CharacteristicsPhase characteristicsPhase2 = new CharacteristicsPhase();
-        characteristicsPhase2.set期(期_1);
+        characteristicsPhase2.set期(期_2);
         characteristicsPhase2.set金額(賦課情報.get特徴期別金額02());
         特徴期別金額リスト.add(characteristicsPhase2);
         CharacteristicsPhase characteristicsPhase3 = new CharacteristicsPhase();
-        characteristicsPhase3.set期(期_1);
+        characteristicsPhase3.set期(期_3);
         characteristicsPhase3.set金額(賦課情報.get特徴期別金額03());
         特徴期別金額リスト.add(characteristicsPhase3);
         CharacteristicsPhase characteristicsPhase4 = new CharacteristicsPhase();
-        characteristicsPhase4.set期(期_1);
+        characteristicsPhase4.set期(期_4);
         characteristicsPhase4.set金額(賦課情報.get特徴期別金額04());
         特徴期別金額リスト.add(characteristicsPhase4);
         CharacteristicsPhase characteristicsPhase5 = new CharacteristicsPhase();
-        characteristicsPhase5.set期(期_1);
+        characteristicsPhase5.set期(期_5);
         characteristicsPhase5.set金額(賦課情報.get特徴期別金額05());
         特徴期別金額リスト.add(characteristicsPhase5);
         CharacteristicsPhase characteristicsPhase6 = new CharacteristicsPhase();
-        characteristicsPhase6.set期(期_1);
+        characteristicsPhase6.set期(期_6);
         characteristicsPhase6.set金額(賦課情報.get特徴期別金額06());
         特徴期別金額リスト.add(characteristicsPhase6);
         return 特徴期別金額リスト;
@@ -648,7 +647,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             Class clazz = fukaJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                普徴納付済額.add((Decimal) getMethod.invoke(fukaJoho));
+                普徴納付済額.add(nullToZero((Decimal) getMethod.invoke(fukaJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -668,13 +667,20 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             Class clazz = fukaJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                特徴納付済額.add((Decimal) getMethod.invoke(fukaJoho));
+                特徴納付済額.add(nullToZero((Decimal) getMethod.invoke(fukaJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
         return 特徴納付済額;
+    }
+
+    private Decimal nullToZero(Decimal number) {
+        if (number == null) {
+            return Decimal.ZERO;
+        }
+        return number;
     }
 
     private Decimal get普徴納付済額(ShunyuJoho shunyuJoho, int start, int end) {
@@ -689,7 +695,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             Class clazz = shunyuJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                普徴納付済額.add((Decimal) getMethod.invoke(shunyuJoho));
+                普徴納付済額.add(nullToZero((Decimal) getMethod.invoke(shunyuJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -709,7 +715,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             Class clazz = shunyuJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                特徴納付済額.add((Decimal) getMethod.invoke(shunyuJoho));
+                特徴納付済額.add(nullToZero((Decimal) getMethod.invoke(shunyuJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.Tashic
 import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureishisetsutaishotsuchisho.TatokuKanrenChohyoTaishoTsuchishoBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.tatokukanrenchohyoshiji.TatokuKanrenChohyoShijiData;
 import jp.co.ndensan.reams.db.dba.business.report.shisetsutaishotsuchisho.ShisetsuTaishoTsuchishoItem;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tatokukanrenchohyoshijidata.TatokuKanrenParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tatokukanrenchohyoshijidata.TatokuKanrenParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7020011.TatokureiTaishoTsuchishoHakkoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7020011.TatokureiTaishoTsuchishoHakkoHandler;
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7020011.Tat
 import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureisyaKanriManager;
 import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureishisetsutaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder;
 import jp.co.ndensan.reams.db.dba.service.report.shisetsutaishotsuchisho.ShisetsuTaishoTsuchishoPrintService;
-import jp.co.ndensan.reams.db.dba.service.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoFinder;
+import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiIdentifier;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
@@ -60,8 +60,8 @@ public class TatokureiTaishoTsuchishoHakko {
      */
     public ResponseData<TatokureiTaishoTsuchishoHakkoDiv> onLoad(TatokureiTaishoTsuchishoHakkoDiv div) {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード();
-        div.getCcdKaigoAtenaInfo().onLoad(識別コード);
-        div.getCcdKaigoShikakuJoho().onLoad(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号());
+        div.getCcdKaigoAtenaInfo().initialize(識別コード);
+        div.getCcdKaigoShikakuJoho().initialize(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号());
         List<TaJushochiTokureisyaKanriMaster> tekiyoJohoList = get適用情報(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
         if (tekiyoJohoList != null && !tekiyoJohoList.isEmpty()) {
             TashichosonBusiness 住所地特例Model = TaJushochiTokureisyaKanriManager.createInstance().get他市町村住所地特例(識別コード);

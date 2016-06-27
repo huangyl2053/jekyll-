@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteiresult.NinteiResultSimple;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinsei.NinteiShinseiRiyu;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitorisage.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiShinsei;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiYusenWaritsukeKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.ShinsakaiYusenWaritsukeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.HihokenshaOutlineDiv;

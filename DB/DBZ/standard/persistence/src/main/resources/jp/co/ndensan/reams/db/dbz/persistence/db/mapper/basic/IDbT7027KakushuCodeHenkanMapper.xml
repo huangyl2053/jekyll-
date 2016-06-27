@@ -53,7 +53,7 @@
         <result property="shichosonCode2" column="dbT7027KakushuCodeHenkan_shichosonCode2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="gaibuCode2" column="dbT7027KakushuCodeHenkan_gaibuCode2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<select id="getEntity" resultMap="ResultMap_DbT7027KakushuCodeHenkanEntity">
+<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7027KakushuCodeHenkanEntity">
     SELECT
     <include refid="allColumns_DbT7027KakushuCodeHenkan"/>
     FROM

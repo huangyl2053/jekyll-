@@ -14,7 +14,7 @@
               resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosaChikuGroup.IDbT5225ChosaChikuGroupMapper.resultMap_DbT5225ChosaChikuGroupEntity"/>
       </resultMap>
               <select id="getNinteichosaScheduleRelateEntity"            resultMap="resultMap_NinteichosaScheduleRelateEntity"
-            parameterType=" " fetchSize="500">
+            parameterType=" " fetchSize="500" resultOrdered="true">
      SELECT 
         dbT5221NinteichosaSchedule.*,
         dbT5101NinteiShinseiJoho.*,

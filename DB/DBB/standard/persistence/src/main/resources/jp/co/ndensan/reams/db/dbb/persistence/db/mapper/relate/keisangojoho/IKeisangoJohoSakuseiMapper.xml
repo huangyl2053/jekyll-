@@ -129,10 +129,11 @@
         <association property="計算中間Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.ResultMap_KeisanTyukanTempEntity"/>
         <association property="介護期別Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
         <association property="調定共通介護継承Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
+        <association property="介護徴収方法Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
         <association property="収入情報取得PSMEntity" resultMap="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt702FindTotalShunyuFunctionMapper.totalShunyuResult"/>
     </resultMap>
     
-    <select id="get全賦課最新情報2" resultMap="ResultMap_FukaEntity"
+    <select resultOrdered="true" id="get全賦課最新情報2" resultMap="ResultMap_FukaEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
         SELECT
             <include refid="allColumns_FukaJoho"/>
@@ -147,11 +148,12 @@
             "db2002Fuka"."tsuchishoNo"
     </select>
 
-    <select id="get期別金額" resultMap="resultMap_getKeisangoJohoSakusei"
+    <select resultOrdered="true" id="get期別金額" resultMap="resultMap_getKeisangoJohoSakusei"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.allColumns_KeisanTyukanTemp"/>,
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
+             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.allColumns_DbT2001ChoshuHoho"/>,
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>
         FROM
             "KeisanTyukanTemp" AS "KeisanTyukanTemp"
@@ -162,6 +164,12 @@
         AND "DbT2003Kibetsu"."fukaNendo" = "KeisanTyukanTemp"."fukaNendo"
         AND "DbT2003Kibetsu"."tsuchishoNo" = "KeisanTyukanTemp"."tsuchishoNo"
         AND "DbT2003Kibetsu"."rirekiNo" = "KeisanTyukanTemp"."fukaRirekiNo"
+        INNER JOIN 
+            rgdb."DbT2001ChoshuHoho" AS "DbT2001ChoshuHoho" 
+        ON 
+            "DbT2001ChoshuHoho"."fukaNendo" = "KeisanTyukanTemp"."fukaNendo"
+        AND "DbT2001ChoshuHoho"."hihokenshaNo" = "KeisanTyukanTemp"."hihokenshaNo"
+        AND "DbT2001ChoshuHoho"."rirekiNo" = "KeisanTyukanTemp"."choshuHohoRirekiNo"
         INNER JOIN 
             rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu" 
         ON 
@@ -177,7 +185,7 @@
             "DbT2003Kibetsu"."choshuHouhou"
     </select>
     
-    <select id="get収入情報" resultMap="resultMap_getKeisangoJohoSakusei"
+    <select resultOrdered="true" id="get収入情報" resultMap="resultMap_getKeisangoJohoSakusei"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.allColumns_KeisanTyukanTemp"/>,
@@ -211,7 +219,7 @@
             "DbT2003Kibetsu"."choshuHouhou"
     </select>
     
-    <select id="get更新前賦課情報" resultMap="ResultMap_FukaEntity"
+    <select resultOrdered="true" id="get更新前賦課情報" resultMap="ResultMap_FukaEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
         SELECT
             <include refid="allColumns_FukaJoho"/>
@@ -229,7 +237,7 @@
         AND "db2002Fuka"."fukaNendo" = #{fukaNendo}
     </select>
     
-    <select id="get計算中間Temp更新後情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.ResultMap_KeisanTyukanTempEntity"
+    <select resultOrdered="true" id="get計算中間Temp更新後情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.ResultMap_KeisanTyukanTempEntity"
             fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.allColumns_KeisanTyukanTemp"/>
@@ -239,7 +247,7 @@
             "KeisanTyukanTemp"."koseiZengoKubun" = '2'
     </select>
     
-    <select id="get計算中間Temp更新前情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.ResultMap_KeisanTyukanTempEntity"
+    <select resultOrdered="true" id="get計算中間Temp更新前情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.ResultMap_KeisanTyukanTempEntity"
             fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.allColumns_KeisanTyukanTemp"/>
@@ -249,7 +257,7 @@
             "KeisanTyukanTemp"."koseiZengoKubun" = '1'
     </select>
     
-    <select id="get全賦課最新情報3" resultMap="ResultMap_FukaEntity"
+    <select resultOrdered="true" id="get全賦課最新情報3" resultMap="ResultMap_FukaEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
         SELECT
             <include refid="allColumns_FukaJoho"/>
@@ -276,7 +284,7 @@
             "db2002Fuka"."tsuchishoNo"
     </select>
     
-    <select id="get全賦課最新情報4" resultMap="ResultMap_FukaEntity"
+    <select resultOrdered="true" id="get全賦課最新情報4" resultMap="ResultMap_FukaEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
         SELECT
             <include refid="allColumns_FukaJoho"/>
@@ -303,7 +311,7 @@
             "db2002Fuka"."tsuchishoNo"
     </select>
     
-    <select id="get全賦課最新情報5" resultMap="ResultMap_FukaEntity"
+    <select resultOrdered="true" id="get全賦課最新情報5" resultMap="ResultMap_FukaEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
         SELECT
             <include refid="allColumns_FukaJoho"/>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： 徴収猶予の情報のマッピング用XMLです。 -->
-<!-- @reamsid_L DBB-9999-013 huangh -->
+<!-- @reamsid_L DBB-9999-013 xicongwang -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.choshuyuyo.IChoshuYuyoJohoRelateMapper">
 
-    <select id="select徴収猶予の情報ByKey" resultMap="resultMap_ChoshuYuyoJohoRelateEntity" fetchSize="500">
+    <select resultOrdered="true" id="select徴収猶予の情報ByKey" resultMap="resultMap_ChoshuYuyoJohoRelateEntity" fetchSize="500">
         <include refid="selectChoshuYuyoJohoRelateEntity" />
     </select>
 
@@ -95,7 +95,7 @@
 
 
     <select id="select徴収猶予の情報_決定更正後" resultMap="resultMap_ChoshuYuyoJohoRelateEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choshuyuyo.ChoshuYuyoJohoRelateSonotaMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choshuyuyo.ChoshuYuyoJohoRelateSonotaMapperParameter" fetchSize="500" resultOrdered="true">
         SELECT
         DbT2002Fuka.*,
         DbT2003Kibetsu.*,
@@ -155,7 +155,7 @@
     </select>
 
     <select id="select徴収猶予の情報_取消更正後" resultMap="resultMap_ChoshuYuyoJohoRelateEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choshuyuyo.ChoshuYuyoJohoRelateSonotaMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choshuyuyo.ChoshuYuyoJohoRelateSonotaMapperParameter" fetchSize="500" resultOrdered="true">
         SELECT
         DbT2002Fuka.*,
         DbT2003Kibetsu.*,

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 /**
  * panelFour のクラスファイル
  *
- * @ @reamsid_L DBC-1030-040 quxiaodong
+ * @reamsid_L DBC-1030-040 quxiaodong
  */
 public class panelFourDiv extends Panel {
 

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.shinseikensaku;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinseikensaku.ShinseiKensakuBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinseikensaku.ShinseiKensakuMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku.ShinseiKensakuMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseikensaku.ShinseiKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinseikensaku.IShinseiKensakuMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;

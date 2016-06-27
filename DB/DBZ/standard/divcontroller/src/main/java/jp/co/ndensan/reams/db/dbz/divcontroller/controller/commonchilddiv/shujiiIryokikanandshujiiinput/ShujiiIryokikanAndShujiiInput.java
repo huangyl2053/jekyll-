@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  * 主治医医療機関&主治医入力のコントローラです。
  *
- * @reamsid_L DBE-1300-140 chengsanyuan
+ * @reamsid_L DBZ-1300-140 chengsanyuan
  */
 public class ShujiiIryokikanAndShujiiInput {
 

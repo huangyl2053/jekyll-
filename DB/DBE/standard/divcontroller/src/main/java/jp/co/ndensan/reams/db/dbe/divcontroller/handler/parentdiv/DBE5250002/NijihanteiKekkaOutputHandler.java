@@ -15,13 +15,11 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002.dgTa
 import jp.co.ndensan.reams.db.dbe.service.core.basic.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuFinder;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
@@ -40,7 +38,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 判定結果情報出力(保険者)の取得するクラスです。
@@ -243,12 +240,12 @@ public class NijihanteiKekkaOutputHandler {
      *
      */
     public void アクセスログ() {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード()));
+        AccessLogger.log(AccessLogType.照会, toPersonalData(ShikibetsuCode.EMPTY));
     }
 
-    private PersonalData toPersonalData(ShikibetsuCode 識別コード) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("003"), new RString("識別コード"), 識別コード.value());
-        return PersonalData.of(識別コード, expandedInfo);
+    private PersonalData toPersonalData(ShikibetsuCode 申請書管理番号) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号.value());
+        return PersonalData.of(申請書管理番号, expandedInfo);
     }
 
     private void hokenjouhou() {
@@ -257,8 +254,10 @@ public class NijihanteiKekkaOutputHandler {
         List<AuthorityItem> 市町村識別ID = ShichosonSecurityJoho.getShichosonShikibetsuId(loginId);
         if (市町村識別ID != null && !市町村識別ID.isEmpty()) {
             KoseiShichosonJoho 市町村情報 = ShichosonSecurityJoho.getKouseiShichosonJoho(市町村識別ID.get(0).getItemId());
-            nijidiv.getKensakuJoken().getTxtHokenshaNo().setValue(new RString(市町村情報.get証記載保険者番号().toString()));
-            nijidiv.getKensakuJoken().getTxtHokenshaName().setValue(市町村情報.get市町村名称());
+            if (市町村情報 != null) {
+                nijidiv.getKensakuJoken().getTxtHokenshaNo().setValue(new RString(市町村情報.get証記載保険者番号().toString()));
+                nijidiv.getKensakuJoken().getTxtHokenshaName().setValue(市町村情報.get市町村名称());
+            }
         }
     }
 }

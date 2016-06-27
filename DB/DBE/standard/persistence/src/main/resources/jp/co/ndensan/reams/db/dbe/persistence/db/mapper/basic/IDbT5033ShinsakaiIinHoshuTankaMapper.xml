@@ -46,7 +46,7 @@
         <result property="lastUpdateReamsLoginId" column="dbT5033ShinsakaiIinHoshuTanka_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tanka" column="dbT5033ShinsakaiIinHoshuTanka_tanka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT5033ShinsakaiIinHoshuTankaEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5033ShinsakaiIinHoshuTankaEntity">
         SELECT
         <include refid="allColumns_DbT5033ShinsakaiIinHoshuTanka"/>
         FROM

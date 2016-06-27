@@ -53,7 +53,7 @@
         <result property="ninteiShinseiNen" column="dbT4305IkenshoImageJoho_ninteiShinseiNen" />
         <result property="sharedFileId" column="dbT4305IkenshoImageJoho_sharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT4305IkenshoImageJohoEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT4305IkenshoImageJohoEntity">
         SELECT
         <include refid="allColumns_DbT4305IkenshoImageJoho"/>
         FROM

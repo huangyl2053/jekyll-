@@ -54,7 +54,7 @@
         <result property="choteiId" column="dbT2003Kibetsu_choteiId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
 
-    <select id="getEntity" resultMap="ResultMap_DbT2003KibetsuEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT2003KibetsuEntity">
         SELECT
         <include refid="allColumns_DbT2003Kibetsu" />
         FROM

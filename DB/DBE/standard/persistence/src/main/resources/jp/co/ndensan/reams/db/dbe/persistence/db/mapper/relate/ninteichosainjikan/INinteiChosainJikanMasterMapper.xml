@@ -13,8 +13,8 @@
         <result property="biko" column="DbT5221_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yoyakuKaoFlag" column="DbT5221_yoyakuKaoFlag" />
     </resultMap>
-    <select id="selectNinteichosa" resultMap="result_NinteichosaScheduleEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainjikan.NinteiChosainJikanMasterParameter" fetchSize="500">
+    <select resultOrdered="true" id="selectNinteichosa" resultMap="result_NinteichosaScheduleEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainjikan.NinteiChosainJikanMasterParameter" fetchSize="500">
         SELECT
         dbt5221Nintei."ninteiChosaYoteiYMD" AS DbT5221_ninteiChosaYoteiYMD,
         dbt5221Nintei."ninteiChosaYoteiKaishiTime" AS DbT5221_ninteiChosaYoteiKaishiTime,
@@ -37,8 +37,8 @@
         dbt5221Nintei."shichosonCode" = #{shichosonCode}
     </select>
 
-    <select id="selectNintei" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainjikan.NinteiChosainJikanMasterParameter" fetchSize="500">
+    <select resultOrdered="true" id="selectNintei" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainjikan.NinteiChosainJikanMasterParameter" fetchSize="500">
         SELECT
         dbt5221Nintei.*
         FROM
@@ -59,8 +59,8 @@
         <result property="biko" column="DbT5221_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yoyakuKaoFlag" column="DbT5221_yoyakuKaoFlag" />
     </resultMap>
-    <select id="selectByKy" resultMap="result_Ninteichosa"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainjikan.NinteiChosainJikanMasterParameter" fetchSize="500">
+    <select resultOrdered="true" id="selectByKy" resultMap="result_Ninteichosa"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainjikan.NinteiChosainJikanMasterParameter" fetchSize="500">
         SELECT
         dbt5221Nintei."biko" AS DbT5221_biko,
         dbt5221Nintei."yoyakuKaoFlag" AS DbT5221_yoyakuKaoFlag

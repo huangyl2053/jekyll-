@@ -21,7 +21,7 @@ import lombok.Setter;
 /**
  * 審査会委員情報のRelateEntityクラス。
  *
- * @reamsid_L DBE-1300-040 dongyabin
+ * @reamsid_L DBZ-1300-040 dongyabin
  */
 @Getter
 @Setter
@@ -51,5 +51,7 @@ public class ShinsakaiIinJohoRelateEntity {
     private RString ninteichosaItakusakiCode;
     private RString ninteiChosainNo;
     private RString sonotaKikanCode;
+    private RString shichosonCode;
+    private RString jogaiTaishoShinsakaiIinCode;
 
 }

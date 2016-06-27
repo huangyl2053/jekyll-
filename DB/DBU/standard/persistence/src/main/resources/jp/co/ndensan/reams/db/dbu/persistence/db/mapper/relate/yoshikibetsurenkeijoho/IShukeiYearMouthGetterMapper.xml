@@ -11,7 +11,7 @@
      <result property="hokokuM" column="dbT7021Jigyo_hokokuM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
  </resultMap>
         
-    <select id="selectCollectionDate1_10" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
+    <select resultOrdered="true" id="selectCollectionDate1_10" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
             resultMap="resultMap_JigyoHokokuTokeiDataEntity" fetchSize="500">
         SELECT
             dbT7021Jigyo."shukeiTaishoYSeireki" AS "dbT7021Jigyo_shukeiTaishoYSeireki",	
@@ -37,7 +37,7 @@
             1	
     </select>
     
-     <select id="selectCollectionDate12_14" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
+     <select resultOrdered="true" id="selectCollectionDate12_14" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
             resultMap="resultMap_JigyoHokokuTokeiDataEntity" fetchSize="500">
          SELECT
             dbT7021Jigyo."shukeiTaishoYSeireki" AS "dbT7021Jigyo_shukeiTaishoYSeireki",	
@@ -63,7 +63,7 @@
             1
      </select>
      
-     <select id="selectReviewDate12_14" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
+     <select resultOrdered="true" id="selectReviewDate12_14" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
             resultMap="resultMap_JigyoHokokuTokeiDataEntity" fetchSize="500">
          SELECT
             dbT7021Jigyo."shukeiTaishoYSeireki" AS "dbT7021Jigyo_shukeiTaishoYSeireki",	
@@ -89,7 +89,7 @@
             1
      </select>
      
-     <select id="selectDecisionDate12_14" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
+     <select resultOrdered="true" id="selectDecisionDate12_14" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
             resultMap="resultMap_JigyoHokokuTokeiDataEntity" fetchSize="500">
          SELECT
             dbT7021Jigyo."shukeiTaishoYSeireki" AS "dbT7021Jigyo_shukeiTaishoYSeireki",	
@@ -115,7 +115,7 @@
             1
      </select>
      
-     <select id="selectCollectionDate" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
+     <select resultOrdered="true" id="selectCollectionDate" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
             resultMap="resultMap_JigyoHokokuTokeiDataEntity" fetchSize="500">
          SELECT
             dbT7021Jigyo."shukeiTaishoYSeireki" AS "dbT7021Jigyo_shukeiTaishoYSeireki",	
@@ -145,7 +145,7 @@
             1
      </select>
      
-     <select id="selectReviewDate" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
+     <select resultOrdered="true" id="selectReviewDate" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
             resultMap="resultMap_JigyoHokokuTokeiDataEntity" fetchSize="500">
          SELECT
             dbT7021Jigyo."shukeiTaishoYSeireki" AS "dbT7021Jigyo_shukeiTaishoYSeireki",	
@@ -175,7 +175,7 @@
             1
      </select>
      
-     <select id="selectDecisionDate" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
+     <select resultOrdered="true" id="selectDecisionDate" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
             resultMap="resultMap_JigyoHokokuTokeiDataEntity" fetchSize="500">
          SELECT
          dbT7021Jigyo."shukeiTaishoYSeireki" AS "dbT7021Jigyo_shukeiTaishoYSeireki",
@@ -216,7 +216,7 @@
          1
      </select>
      
-      <select id="selectKakoHokokuYM" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
+      <select resultOrdered="true" id="selectKakoHokokuYM" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
             resultMap="resultMap_JigyoHokokuTokeiDataEntity" fetchSize="500">
           SELECT
           dbT7021Jigyo."hokokuYSeireki" AS "dbT7021Jigyo_hokokuYSeireki",

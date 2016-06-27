@@ -123,13 +123,21 @@ public class ShinshinIkenHandler {
      * コンストラクタです。
      *
      * @param div 画面情報
+     * @param 要介護認定申請情報 要介護認定申請情報
+     * @param 管理番号 管理番号
+     * @param 履歴番号 履歴番号
+     * @param 要介護認定主治医意見書情報_TMP 要介護認定主治医意見書情報_TMP
      */
-    public ShinshinIkenHandler(ShinshinIkenDiv div) {
+    public ShinshinIkenHandler(ShinshinIkenDiv div,
+            NinteiShinseiJoho 要介護認定申請情報,
+            RString 管理番号,
+            RString 履歴番号,
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報_TMP) {
         this.div = div;
-        this.要介護認定申請情報 = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_意見書情報, NinteiShinseiJoho.class);
-        this.管理番号 = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class);
-        this.履歴番号 = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class);
-        this.要介護認定主治医意見書情報_TMP = ViewStateHolder.get(ViewStateKeys.心身の意見入力_要介護認定主治医意見書情報, ShujiiIkenshoJoho.class);
+        this.要介護認定申請情報 = 要介護認定申請情報;
+        this.管理番号 = 管理番号;
+        this.履歴番号 = 履歴番号;
+        this.要介護認定主治医意見書情報_TMP = 要介護認定主治医意見書情報_TMP;
     }
 
     /**

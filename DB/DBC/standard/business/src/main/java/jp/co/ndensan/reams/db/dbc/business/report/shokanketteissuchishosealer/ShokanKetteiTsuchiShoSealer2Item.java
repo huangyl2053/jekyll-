@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.business.report.shokanketteissuchishosealer;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import lombok.Getter;
 
 /**
  * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）のITEMです。
@@ -14,7 +13,8 @@ import lombok.Getter;
  * @reamsid_L DBC-1000-140 hezhenzhen
  *
  */
-@Getter
+@lombok.Getter
+@lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanKetteiTsuchiShoSealer2Item {
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho.GogitaiJoho;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaijoho.GogitaiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJohoEntity;
@@ -40,8 +41,7 @@ public class HokokuShiryoSakuSeiFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HokokuShiryoSakuSeiFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link HokokuShiryoSakuSeiFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link HokokuShiryoSakuSeiFinder}のインスタンス
      */
     public static HokokuShiryoSakuSeiFinder createInstance() {
         return InstanceProvider.create(HokokuShiryoSakuSeiFinder.class);
@@ -61,8 +61,9 @@ public class HokokuShiryoSakuSeiFinder {
         }
         List<GogitaiJoho> gogitaiNoList = new ArrayList();
         for (DbT5591GogitaiJohoEntity entity : 合議体番号リスト) {
-            gogitaiNoList.add(new GogitaiJoho(entity.getGogitaiNo(), entity.getGogitaiYukoKikanKaishiYMD())
-                    .createBuilderForEdit().set合議体名称(entity.getGogitaiMei()).build());
+            GogitaiJohoRelateEntity relateEntity = new GogitaiJohoRelateEntity();
+            relateEntity.set合議体情報Entity(entity);
+            gogitaiNoList.add(new GogitaiJoho(relateEntity));
         }
         return SearchResult.of(gogitaiNoList, 0, false);
     }

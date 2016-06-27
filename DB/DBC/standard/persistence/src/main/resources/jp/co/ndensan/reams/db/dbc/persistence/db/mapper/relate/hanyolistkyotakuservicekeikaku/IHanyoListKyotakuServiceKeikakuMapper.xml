@@ -4,7 +4,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyolistkyotakuservicekeikaku.IHanyoListKyotakuServiceKeikakuMapper">
     <select id="getCSVData"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuMybatisParameter"
-            resultMap="resultMapHanyoListKyotakuServiceKeikakuEntity" fetchSize="500">
+            resultMap="resultMapHanyoListKyotakuServiceKeikakuEntity" fetchSize="500" resultOrdered="true">
         <include refid="selectHanyoListKyotakuServiceKeikakuEntity" />
     </select>
     <sql id="selectHanyoListKyotakuServiceKeikakuEntity">

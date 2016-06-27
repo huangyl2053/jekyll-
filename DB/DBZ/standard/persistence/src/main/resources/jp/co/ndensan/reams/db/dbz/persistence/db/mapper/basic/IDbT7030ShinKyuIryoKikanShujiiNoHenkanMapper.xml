@@ -55,7 +55,7 @@
         <result property="kyuIryoKikanNo2" column="dbT7030ShinKyuIryoKikanShujiiNoHenkan_kyuIryoKikanNo2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kyuShujiiNo2" column="dbT7030ShinKyuIryoKikanShujiiNoHenkan_kyuShujiiNo2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<select id="getEntity" resultMap="ResultMap_DbT7030ShinKyuIryoKikanShujiiNoHenkanEntity">
+<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7030ShinKyuIryoKikanShujiiNoHenkanEntity">
     SELECT
     <include refid="allColumns_DbT7030ShinKyuIryoKikanShujiiNoHenkan"/>
     FROM

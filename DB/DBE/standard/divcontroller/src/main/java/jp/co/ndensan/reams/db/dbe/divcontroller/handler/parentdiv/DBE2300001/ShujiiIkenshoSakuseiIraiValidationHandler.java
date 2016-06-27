@@ -60,20 +60,6 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
     }
 
     /**
-     * 保存のチェックを処理します。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 保存チェック() {
-//        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-//        validationMessages.add(申請者一覧未選択チェック());
-//        validationMessages.add(主治医意見書作成依頼日チェック());
-//        validationMessages.add(主治医医療機関チェック());
-//        validationMessages.add(主治医チェック());
-        return new ValidationMessageControlPairs();
-    }
-
-    /**
      * 発行のチェックを処理します。
      *
      * @return ValidationMessageControlPairs

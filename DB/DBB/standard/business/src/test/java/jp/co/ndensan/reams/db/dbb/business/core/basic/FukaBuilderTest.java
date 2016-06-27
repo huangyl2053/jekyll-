@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -167,13 +167,13 @@ public class FukaBuilderTest extends DbbTestBase {
         @Test
         public void 戻り値の課税区分は_設定した値と同じ課税区分を返す() {
             business = sut.set課税区分(DbT2002FukaEntityGenerator.DEFAULT_課税区分).build();
-            assertThat(business.get課税区分().toRString(), is(DbT2002FukaEntityGenerator.DEFAULT_課税区分));
+            assertThat(business.get課税区分().get名称(), is(DbT2002FukaEntityGenerator.DEFAULT_課税区分));
         }
 
         @Test
         public void 戻り値の世帯課税区分は_設定した値と同じ世帯課税区分を返す() {
             business = sut.set世帯課税区分(DbT2002FukaEntityGenerator.DEFAULT_世帯課税区分).build();
-            assertThat(business.get世帯課税区分().toRString(), is(DbT2002FukaEntityGenerator.DEFAULT_世帯課税区分));
+            assertThat(business.get世帯課税区分().get名称(), is(DbT2002FukaEntityGenerator.DEFAULT_世帯課税区分));
         }
 
         @Test

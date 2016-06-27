@@ -8,10 +8,11 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5910001
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.ikenshoshujiiichiran.IkenshoShujiiIchiranParameter;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji.ShujiiHateiJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji.ShujiiOutputPage;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji.ShujiiOutputSort;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiHateiJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiOutputPage;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiOutputSort;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5910001.IkenshoShujiiIchiranDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -38,7 +39,7 @@ public class IkenshoShujiiIchiranHandler {
      */
     public void onLoad() {
 
-        div.getCcdHokensha().loadHokenshaList();
+        div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         div.getDdlOutputSort().setDataSource(set出力順());
         List<KeyValueDataSource> 改頁 = new ArrayList();
         改頁.add(new KeyValueDataSource(ShujiiOutputPage.医療機関コード.getコード(), ShujiiOutputPage.医療機関コード.get名称()));

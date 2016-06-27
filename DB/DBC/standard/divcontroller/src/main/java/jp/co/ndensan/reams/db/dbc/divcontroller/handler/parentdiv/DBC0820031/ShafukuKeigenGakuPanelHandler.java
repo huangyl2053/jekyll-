@@ -14,14 +14,12 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShakaiFukushiHojinKe
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031.ShafukuKeigenGakuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031.dgdShafukukeigenngaku_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -30,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
@@ -92,10 +89,9 @@ public final class ShafukuKeigenGakuPanelHandler {
      * getボタンを制御
      *
      * @param entity entity
+     * @param meisaiPar ShoukanharaihishinseimeisaikensakuParameter
      */
-    public void getボタンを制御(ShikibetsuNoKanri entity) {
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
+    public void getボタンを制御(ShikibetsuNoKanri entity, ShoukanharaihishinseimeisaikensakuParameter meisaiPar) {
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         RString 整理番号 = meisaiPar.get整理番号();
@@ -378,10 +374,11 @@ public final class ShafukuKeigenGakuPanelHandler {
 
     /**
      * initializeByConfirm
+     *
+     * @param state RString
      */
-    public void initializeByConfirm() {
+    public void initializeByConfirm(RString state) {
         Boolean checkFlag = false;
-        RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (修正.equals(state)) {
             checkFlag = serviceChange(checkFlag);
             if (checkFlag) {
@@ -508,35 +505,19 @@ public final class ShafukuKeigenGakuPanelHandler {
 
     /**
      * 内容の破棄
+     *
+     * @param list List<ShokanShakaiFukushiHojinKeigengakuResult>
      */
-    public void 内容の破棄() {
-        List<ShokanShakaiFukushiHojinKeigengakuResult> list = ViewStateHolder.get(ViewStateKeys.情報, List.class);
+    public void 内容の破棄(List<ShokanShakaiFukushiHojinKeigengakuResult> list) {
         initialize(list);
     }
 
     /**
-     * putViewState
-     */
-    public void putViewState() {
-        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
-        ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
-        ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
-                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
-                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-                new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue()),
-                div.getPanelHead().getTxtShomeisho().getValue(),
-                div.getPanelHead().getTxtMeisaiBango().getValue(),
-                null);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
-    }
-
-    /**
      * 削除Save
+     *
+     * @param meisaiPar ShoukanharaihishinseimeisaikensakuParameter
      */
-    public void 削除Save() {
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
+    public void 削除Save(ShoukanharaihishinseimeisaikensakuParameter meisaiPar) {
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         RString 整理番号 = meisaiPar.get整理番号();
@@ -549,18 +530,18 @@ public final class ShafukuKeigenGakuPanelHandler {
 
     /**
      * 登録Save
+     *
+     * @param meisaiPar ShoukanharaihishinseimeisaikensakuParameter
+     * @param hojinKeigengakuEntityList List<ShokanShakaiFukushiHojinKeigengakuResult>
      */
-    public void 登録Save() {
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
+    public void 登録Save(ShoukanharaihishinseimeisaikensakuParameter meisaiPar,
+            List<ShokanShakaiFukushiHojinKeigengakuResult> hojinKeigengakuEntityList) {
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         JigyoshaNo 事業者番号 = meisaiPar.get事業者番号();
         RString 様式番号 = meisaiPar.get様式番号();
         RString 明細番号 = meisaiPar.get明細番号();
         int max連番 = 0;
-        List<ShokanShakaiFukushiHojinKeigengakuResult> hojinKeigengakuEntityList = ViewStateHolder.get(
-                ViewStateKeys.情報, List.class);
         List<ShokanShakaiFukushiHojinKeigengaku> entityList1 = new ArrayList<>();
         Map<RString, ShokanShakaiFukushiHojinKeigengaku> map = new HashMap<>();
         for (ShokanShakaiFukushiHojinKeigengakuResult entityModified : hojinKeigengakuEntityList) {

@@ -6,9 +6,8 @@ package jp.co.ndensan.reams.db.dbz.entity.helper;
 
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoSaikofuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoSaikofuKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JushochitokureiKaijoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JushochitokureiTekiyoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.KoikinaiJushochitokureishaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.JushochitokureiKaijoJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
@@ -16,11 +15,11 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.JushochiTokureishaKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.code.KaigoShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.code.KaigoShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.code.KaigoShikakuHenkoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.code.KaigoShikakuJutokuTekiyoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.code.KaigoShikakuJutokuKaijoJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -37,8 +36,7 @@ import static org.mockito.Mockito.*;
 public final class DbT1001HihokenshaDaichoEntityMock {
 
     /**
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の
-     * {@link org.mockito.Mockito#spy(java.lang.Object)  スパイインスタンス}を返します。
+     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の {@link org.mockito.Mockito#spy(java.lang.Object)  スパイインスタンス}を返します。
      *
      * @return DbT1001HihokenshaDaichoEntityのスパイ
      */
@@ -77,7 +75,7 @@ public final class DbT1001HihokenshaDaichoEntityMock {
          entity.setJushochitokureiKaijoTodokedeYMD(new FlexibleDate("00000000"));
          entity.setJushochitokureiKaijoYMD(new FlexibleDate("00000000"));
          entity.setJushochiTokureiFlag(JushochiTokureishaKubun.通常資格者.getコード());
-         entity.setKoikinaiJushochiTokureiFlag(KoikinaiJushochitokureishaKubun.通常資格者.getCode());
+         entity.setKoikinaiJushochiTokureiFlag(KoikinaiJushochitokureishaKubun.通常資格者.getコード());
          entity.setKoikinaiTokureiSochimotoShichosonCode(LasdecCode.EMPTY);
          entity.setKyuShichosonCode(null);
          entity.setSaikofuKubun(HihokenshashoSaikofuKubun.なし.getCode());

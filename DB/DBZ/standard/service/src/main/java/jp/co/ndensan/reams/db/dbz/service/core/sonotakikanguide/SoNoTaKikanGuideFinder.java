@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.business.core.sonotakikanguide.SoNoTaKikanGuide;
-import jp.co.ndensan.reams.db.dbz.definition.param.sonotakikanguide.SoNoTaKikanGuideParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.sonotakikanguide.SoNoTaKikanGuideParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5914SonotaKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5914SonotaKikanJohoMapper;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;

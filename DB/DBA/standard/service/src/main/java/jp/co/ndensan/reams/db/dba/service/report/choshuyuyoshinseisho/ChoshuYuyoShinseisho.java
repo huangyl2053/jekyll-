@@ -14,10 +14,10 @@ import jp.co.ndensan.reams.db.dba.business.report.choshuyuyoshinseisho.HokenryoG
 import jp.co.ndensan.reams.db.dba.entity.report.choshuyuyoshinseisho.HokenryoGenmenChoshuYoyuShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinSeinengappiHyojihoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
@@ -70,16 +70,17 @@ public class ChoshuYuyoShinseisho {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<HokenryoGenmenChoshuYoyuShinseishoReportSource> assembler
                     = createAssembler(property, reportManager)) {
+                ReportSourceWriter<HokenryoGenmenChoshuYoyuShinseishoReportSource> reportWriter
+                        = new ReportSourceWriter(assembler);
                 INinshoshaSourceBuilderCreator builderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder builder = builderCreator.create(
                         GyomuCode.DB介護保険,
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                         null,
-                        null);
+                        reportWriter.getImageFolderPath());
                 for (HokenryoGenmenChoshuYoyuShinseishoReport report
                         : toReports(get被保険者基本情報(識別コード, 被保険者番号), builder.buildSource())) {
-                    ReportSourceWriter<HokenryoGenmenChoshuYoyuShinseishoReportSource> reportWriter
-                            = new ReportSourceWriter(assembler);
+
                     report.writeBy(reportWriter);
                 }
             }

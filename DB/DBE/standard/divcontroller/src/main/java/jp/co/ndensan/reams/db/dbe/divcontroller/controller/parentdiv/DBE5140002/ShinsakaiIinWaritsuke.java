@@ -62,7 +62,7 @@ public class ShinsakaiIinWaritsuke {
     public ResponseData<ShinsakaiIinWaritsukeDiv> onLoad(ShinsakaiIinWaritsukeDiv div) {
         List<ShinsakaiKaisaiYoteiJoho> kaisaiYoteiJohoList = kaisaiYoteiJohomanager
                 .search審査会開催予定情報Of開催番号(開催番号).records();
-        getHandler(div).onLoad(kaisaiYoteiJohoList);
+        getHandler(div).onLoad(kaisaiYoteiJohoList, 開催番号);
         List<ShinsakaiiinJoho> iinJoholist = iinJohomanager.search審査会委員情報Of開催番号(開催番号, 開催年月日).records();
         getHandler(div).setDataGrid(iinJoholist);
         Models<ShinsakaiWariateIinJoho2Identifier, ShinsakaiWariateIinJoho2> models

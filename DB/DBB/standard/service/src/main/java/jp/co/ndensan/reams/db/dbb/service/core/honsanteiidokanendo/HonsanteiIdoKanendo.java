@@ -45,6 +45,7 @@ public class HonsanteiIdoKanendo {
     private final RString zeroRS = new RString("0");
     private final RString oneRS = new RString("1");
     private final RString twoRS = new RString("2");
+    private final RString threeRS = new RString("3");
     private final RString zOneRS = new RString("001");
     private final RString twlZRS = new RString("301");
     private final RString twlTRS = new RString("302");
@@ -137,27 +138,28 @@ public class HonsanteiIdoKanendo {
     /**
      * 帳票ID取得
      *
-     * @param 調定年度 調定年度
-     * @param 算定期 算定期
-     * @param chohyoPara HonsanteiIdoParameter
+     * @param 調定年度 FlexibleYear
+     * @param 算定期 RString
+     * @param chohyoPara List<HonsanteiIdoParameter>
+     * @param 決定_変更通知書区分 RString
      * @return List<HonsanteiIdoKanendoResult>
      */
     public List<HonsanteiIdoKanendoResult> getChohyoID(FlexibleYear 調定年度,
-            RString 算定期, List<HonsanteiIdoParameter> chohyoPara) {
+            RString 算定期, List<HonsanteiIdoParameter> chohyoPara, RString 決定_変更通知書区分) {
         List<HonsanteiIdoKanendoResult> resultList = new ArrayList<>();
         if (chohyoPara == null || chohyoPara.isEmpty()) {
             return null;
         }
         for (HonsanteiIdoParameter choParameter : chohyoPara) {
             if (決定変更通知書_帳票分類ID.equals(choParameter.get帳票分類ID())) {
-                HonsanteiIdoKanendoResult result1 = get決定通知書(choParameter.get帳票分類ID(),
-                        choParameter.get出力順ID(), 調定年度);
-                if (result1 != null) {
+                if (決定_変更通知書区分.equals(oneRS) || 決定_変更通知書区分.equals(threeRS)) {
+                    HonsanteiIdoKanendoResult result1 = get決定通知書(choParameter.get帳票分類ID(),
+                            choParameter.get出力順ID(), 調定年度);
                     resultList.add(result1);
                 }
-                HonsanteiIdoKanendoResult result2 = get変更通知書(choParameter.get帳票分類ID(),
-                        choParameter.get出力順ID(), 調定年度);
-                if (result2 != null) {
+                if (決定_変更通知書区分.equals(twoRS) || 決定_変更通知書区分.equals(threeRS)) {
+                    HonsanteiIdoKanendoResult result2 = get変更通知書(choParameter.get帳票分類ID(),
+                            choParameter.get出力順ID(), 調定年度);
                     resultList.add(result2);
                 }
             }
@@ -206,42 +208,20 @@ public class HonsanteiIdoKanendo {
         result.set処理対象(parameter.get処理対象());
         result.set抽出開始日時(parameter.get抽出開始日時());
         result.set抽出終了日時(parameter.get抽出終了日時());
-        List<HonsanteiIdoKanendoResult> choResult = getChohyoID(parameter.get調定年度(),
-                parameter.get算定期(), parameter.get出力帳票一覧());
-        result.set出力帳票一覧(choResult);
-        if (parameter.get決定_チェックボックス() != null && !parameter.get決定_チェックボックス().isEmpty()) {
-            result.set決定_チェックボックス(oneRS);
-        } else {
-            result.set決定_チェックボックス(zeroRS);
-        }
+        result.set出力帳票一覧(parameter.get出力帳票一覧());
+        result.set決定_チェックボックス(parameter.get決定_チェックボックス());
         result.set決定_対象賦課年度(parameter.get決定_対象賦課年度());
         result.set決定_発行日(parameter.get決定_発行日());
         result.set決定_文書番号(parameter.get決定_文書番号());
-        if (parameter.get変更_チェックボックス() != null && !parameter.get変更_チェックボックス().isEmpty()) {
-            result.set変更_チェックボックス(oneRS);
-        } else {
-            result.set変更_チェックボックス(zeroRS);
-        }
+        result.set変更_チェックボックス(parameter.get変更_チェックボックス());
         result.set変更_対象賦課年度(parameter.get変更_対象賦課年度());
         result.set変更_発行日(parameter.get変更_発行日());
         result.set変更_文書番号(parameter.get変更_文書番号());
-        if (zeroRS.equals(parameter.get変更_対象者())) {
-            result.set変更_対象者(zeroRS);
-        } else if (oneRS.equals(parameter.get変更_対象者())) {
-            result.set変更_対象者(oneRS);
-        } else {
-            result.set変更_対象者(twoRS);
-        }
+        result.set変更_対象者(parameter.get変更_対象者());
         result.set納入_対象賦課年度(parameter.get納入_対象賦課年度());
         result.set納入_発行日(parameter.get納入_発行日());
         result.set納入_出力期(parameter.get納入_出力期());
-        if (zeroRS.equals(parameter.get変更_対象者())) {
-            result.set納入_対象者(zeroRS);
-        } else if (oneRS.equals(parameter.get変更_対象者())) {
-            result.set納入_対象者(oneRS);
-        } else {
-            result.set納入_対象者(twoRS);
-        }
+        result.set納入_対象者(parameter.get納入_対象者());
         if (口座用.equals(parameter.get納入_口座振替様式())) {
             result.set納入_口座振替様式(oneRS);
         } else if (現金用.equals(parameter.get納入_口座振替様式())) {

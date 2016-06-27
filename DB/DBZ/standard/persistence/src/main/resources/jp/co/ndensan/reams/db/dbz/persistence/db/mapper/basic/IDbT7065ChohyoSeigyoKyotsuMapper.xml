@@ -94,11 +94,27 @@
         <result property="chikuHyoji3" column="dbT7065ChohyoSeigyoKyotsu_chikuHyoji3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-    <select id="getEntity" resultMap="ResultMap_DbT7065ChohyoSeigyoKyotsuEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7065ChohyoSeigyoKyotsuEntity">
         SELECT
         <include refid="allColumns_DbT7065ChohyoSeigyoKyotsu"/>
         FROM
         rgdb."DbT7065ChohyoSeigyoKyotsu"
     </select>
-
+    <select id="get帳票分類名称" resultMap="ResultMap_DbT7065ChohyoSeigyoKyotsuEntity"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.chohyoseigyokyotsucontro.ChohyoSeigyoKyotsuParameter" fetchSize="500" resultOrdered="true">
+      SELECT
+        DbT7065."chohyoBunruiID",
+        DbT7065."chohyoBunruiMeisho" 
+	FROM
+	rgdb."DbT7065ChohyoSeigyoKyotsu" AS DbT7065
+      WHERE
+        <if test="帳票分類IDフラグ">
+         DbT7065."chohyoBunruiID" IN
+        <foreach collection="帳票分類ID" item="code" open="(" separator="," close=")">
+              #{code}  
+        </foreach> 
+        AND
+        </if>
+        DbT7065."subGyomuCode" = #{サブ業務コード}
+    </select>
 </mapper>

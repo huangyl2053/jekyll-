@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 /**
  * このコードはツールによって生成されました。
  *
- * @reamsid_L DBE-1300-060 lizhuoxuan
+ * @reamsid_L DBZ-1300-060 lizhuoxuan
  */
 public interface IKaigoninteiShikakuInfoDiv extends ICommonChildDivBaseProperties {
 

@@ -58,7 +58,7 @@
         <result property="codeMasterCodeShubetsu" column="dbT7067ChohyoSeigyoHanyo_codeMasterCodeShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeShubetsuTypeHandler"/>
     </resultMap>
     
-    <select id="getEntity" resultMap="ResultMap_DbT7067ChohyoSeigyoHanyoEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7067ChohyoSeigyoHanyoEntity">
 	SELECT
 	<include refid="allColumns_DbT7067ChohyoSeigyoHanyo"/>
 	FROM

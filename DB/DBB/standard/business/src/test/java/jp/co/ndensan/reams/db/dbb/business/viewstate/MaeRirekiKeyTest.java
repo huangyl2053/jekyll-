@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbb.business.viewstate;
 
 import jp.co.ndensan.reams.db.dbb.business.viewstate.MaeRirekiKey;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.SanteiState;
+import jp.co.ndensan.reams.db.dbz.definition.core.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
-import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator.*;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import static org.hamcrest.CoreMatchers.is;

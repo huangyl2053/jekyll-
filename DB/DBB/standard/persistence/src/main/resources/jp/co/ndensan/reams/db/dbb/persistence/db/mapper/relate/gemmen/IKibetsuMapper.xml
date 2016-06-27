@@ -6,7 +6,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.gemmen.IKibetsuMapper">
 
-    <select id="select介護期別ByKey" resultMap="resultMap_KibetsuEntity" fetchSize="500">
+    <select resultOrdered="true" id="select介護期別ByKey" resultMap="resultMap_KibetsuEntity" fetchSize="500">
         <include refid="selectKibetsuEntity" />
     </select>
 

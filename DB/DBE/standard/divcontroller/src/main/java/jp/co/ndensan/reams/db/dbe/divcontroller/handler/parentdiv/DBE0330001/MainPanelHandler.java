@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.dgRe
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -67,20 +68,21 @@ public class MainPanelHandler {
         List<dgResultList_Row> rowList = new ArrayList();
         TextBoxDate 認定状況提供日 = new TextBoxDate();
         boolean 認定状況提供日フラグ = false;
+        RStringBuilder rsb = new RStringBuilder();
         for (YouKaiGoNinTeiKekTesuChi youKaiGoNinTeiKekTesuChi : businessList) {
             if (youKaiGoNinTeiKekTesuChi.get認定状況提供日() == null || youKaiGoNinTeiKekTesuChi.get認定状況提供日().isEmpty()) {
                 認定状況提供日フラグ = true;
             } else {
-                認定状況提供日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get二次判定日().toString()));
+                認定状況提供日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get認定状況提供日().toString()));
             }
             TextBoxDate 生年月日 = new TextBoxDate();
             TextBoxDate 申請日 = new TextBoxDate();
-            TextBoxDate 二次判定結果 = new TextBoxDate();
+            TextBoxDate 有効期間開始 = new TextBoxDate();
             TextBoxDate 有効期間終了 = new TextBoxDate();
             TextBoxDate 二次判定日 = new TextBoxDate();
             生年月日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get生年月日().toString()));
             申請日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get申請日().toString()));
-            二次判定結果.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get二次判定結果().toString()));
+            有効期間開始.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get有効期間開始().toString()));
             有効期間終了.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get有効期間終了().toString()));
             二次判定日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get二次判定日().toString()));
             dgResultList_Row row = new dgResultList_Row(
@@ -93,20 +95,39 @@ public class MainPanelHandler {
                     申請日,
                     youKaiGoNinTeiKekTesuChi.get申請区分_申請時(),
                     youKaiGoNinTeiKekTesuChi.get申請区分_法令(),
-                    二次判定結果,
-                    youKaiGoNinTeiKekTesuChi.get有効期間(),
-                    youKaiGoNinTeiKekTesuChi.get有効期間開始(),
-                    有効期間終了,
                     二次判定日,
+                    youKaiGoNinTeiKekTesuChi.get二次判定結果(),
+                    youKaiGoNinTeiKekTesuChi.get有効期間(),
+                    有効期間開始,
+                    有効期間終了,
                     認定状況提供日,
-                    youKaiGoNinTeiKekTesuChi.get申請書管理番号()
-            );
+                    youKaiGoNinTeiKekTesuChi.get申請書管理番号());
             if (認定状況提供日フラグ) {
                 row.setSelected(認定状況提供日フラグ);
             }
+            rsb.append(String.valueOf(認定状況提供日フラグ));
+            認定状況提供日フラグ = false;
             rowList.add(row);
         }
+        RString tempYMD = RString.EMPTY;
+        if (div.getPrintPanel().getTxtNinteiJokyoTeikyoYMD().getValue() != null) {
+            tempYMD = div.getPrintPanel().getTxtNinteiJokyoTeikyoYMD().getValue().toDateString();
+        }
+        rsb.append(tempYMD)
+                .append(div.getPrintPanel().getRadPrintCondition().getSelectedKey());
+        div.getPrintPanel().setHiddenitem(rsb.toRString());
         div.getDgResultList().setDataSource(rowList);
+    }
+
+    /**
+     * 「認定状況提供日未入力チェック」メッセジーの取得します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs getメッセジー_入力データなし() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.対象データなし_追加メッセージあり, "認定状況提供日")));
+        return validPairs;
     }
 
     /**

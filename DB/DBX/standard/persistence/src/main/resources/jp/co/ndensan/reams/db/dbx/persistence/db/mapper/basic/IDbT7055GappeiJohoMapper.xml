@@ -54,7 +54,7 @@
         <result property="kokuhorenDataFromYMD" column="dbT7055GappeiJoho_kokuhorenDataFromYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
 
-    <select id="getEntity" resultMap="ResultMap_DbT7055GappeiJohoEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7055GappeiJohoEntity">
         SELECT
         <include refid="allColumns_DbT7055GappeiJoho"/>
         FROM

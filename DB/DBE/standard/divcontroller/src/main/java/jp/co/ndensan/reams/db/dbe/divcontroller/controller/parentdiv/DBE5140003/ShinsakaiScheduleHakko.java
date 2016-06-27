@@ -124,7 +124,7 @@ public class ShinsakaiScheduleHakko {
         RString nendoParameter = RString.EMPTY;
         RString kubun = new RString("1");
         if (div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleNenkan().isAllSelected()) {
-            nendoParameter = div.getShinsakaiScheduleSrch().getTxtNendo().getValue().toDateString();
+            nendoParameter = div.getShinsakaiScheduleSrch().getTxtNendo().getValue().getYear().toDateString();
             kubun = new RString("2");
         }
         return new KaigoNinteiShinsakaiScheduleBatchParamter(

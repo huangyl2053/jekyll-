@@ -5,13 +5,13 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.ninteishinsakaiiinshozokukikanjoho.KaigoNinteiShinsakaiIinShozokuKikanJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJoho;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsainYusoKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.Sikaku;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsainYusoKubun;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinjoho.IShinsakaiIinJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.kaigoninteishinsakaiiinshozokukikan.KaigoNinteiShinsakaiIinShozokuKikanJohoManager;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5594ShinsakaiIinJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -103,8 +103,8 @@ public class ShinsakaiIinJohoManager {
      */
     public List<KeyValueDataSource> get審査員郵送区分List() {
         List<KeyValueDataSource> 審査員郵送区分 = new ArrayList<>();
-        審査員郵送区分.add(new KeyValueDataSource(ShinsainYusoKubun.自宅.get郵送区分(), new RString(ShinsainYusoKubun.自宅.name())));
-        審査員郵送区分.add(new KeyValueDataSource(ShinsainYusoKubun.所属機関.get郵送区分(), new RString(ShinsainYusoKubun.所属機関.name())));
+        審査員郵送区分.add(new KeyValueDataSource(ShinsainYusoKubun.自宅.getコード(), ShinsainYusoKubun.自宅.get名称()));
+        審査員郵送区分.add(new KeyValueDataSource(ShinsainYusoKubun.所属機関.getコード(), ShinsainYusoKubun.所属機関.get名称()));
 
         return 審査員郵送区分;
     }

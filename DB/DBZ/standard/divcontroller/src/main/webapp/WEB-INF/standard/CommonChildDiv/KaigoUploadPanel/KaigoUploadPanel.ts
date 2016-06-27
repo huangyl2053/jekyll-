@@ -20,12 +20,6 @@ module DBZ
                 return new PublicProperties(this.fieldName);
             }
 
-            public priorities(): Array {
-                return [
-                    "IsSimpleMode"
-                ];
-            }
-
             public IsSimpleMode() {
                 return new Modes.IsSimpleMode(this.controls);
             }
@@ -41,11 +35,19 @@ module DBZ
                 }
 
                 public TRUE(): void {
+                    this.controls.uplUploadFile().displayNone = false;
+                    this.controls.uplUploadFile1().displayNone = true;
+                    this.controls.btnUpload().displayNone = false;
+                    this.controls.btnUpload1().displayNone = true;
                     this.controls.lblFileName().visible = true;
                     this.controls.lblUploadFileName().visible = true;
                 }
 
                 public FALSE(): void {
+                    this.controls.uplUploadFile().displayNone = true;
+                    this.controls.uplUploadFile1().displayNone = false;
+                    this.controls.btnUpload().displayNone = true;
+                    this.controls.btnUpload1().displayNone = false;
                     this.controls.lblFileName().visible = false;
                     this.controls.lblUploadFileName().visible = false;
                 }

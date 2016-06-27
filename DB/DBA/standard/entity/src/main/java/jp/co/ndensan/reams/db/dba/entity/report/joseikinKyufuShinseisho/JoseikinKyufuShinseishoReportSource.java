@@ -35,6 +35,8 @@ public class JoseikinKyufuShinseishoReportSource implements IReportSource {
     public RString hihokenJusho;
     @ReportItem(name = "remban", length = 4, order = 11)
     public RString remban;
+    @ReportItem(name = "ninshoshaYakushokuMei", length = 15, order = 12)
+    public RString ninshoshaYakushokuMei;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

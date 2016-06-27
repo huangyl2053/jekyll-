@@ -50,7 +50,7 @@
         <result property="ikenItem" column="dbT4304ShujiiIkenshoIkenItem_ikenItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <select id="getEntity" resultMap="ResultMap_DbT4304ShujiiIkenshoIkenItemEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT4304ShujiiIkenshoIkenItemEntity">
         SELECT
         <include refid="allColumns_DbT4304ShujiiIkenshoIkenItem"/>
         FROM

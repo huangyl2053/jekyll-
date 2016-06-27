@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -42,6 +44,15 @@ public class ChohyoSeigyoHanyoManager {
      */
     ChohyoSeigyoHanyoManager(DbT7067ChohyoSeigyoHanyoDac dac) {
         this.dac = dac;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link ChohyoSeigyoHanyoManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link ChohyoSeigyoHanyoManager}のインスタンス
+     */
+    public static ChohyoSeigyoHanyoManager createInstance() {
+        return InstanceProvider.create(ChohyoSeigyoHanyoManager.class);
     }
 
     /**
@@ -140,5 +151,38 @@ public class ChohyoSeigyoHanyoManager {
             businessList.add(new ChohyoSeigyoHanyo(entity));
         }
         return businessList;
+    }
+
+    /**
+     * 帳票制御汎用リスト{@link ChohyoSeigyoHanyo}を更新します。
+     *
+     * @param 帳票制御汎用リスト 帳票制御汎用リスト
+     */
+    @Transaction
+    public void update帳票制御汎用(List<ChohyoSeigyoHanyo> 帳票制御汎用リスト) {
+        requireNonNull(帳票制御汎用リスト, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御汎用"));
+        for (ChohyoSeigyoHanyo 帳票制御汎用 : 帳票制御汎用リスト) {
+            DbT7067ChohyoSeigyoHanyoEntity entity = 帳票制御汎用.toEntity();
+            entity.setState(EntityDataState.Modified);
+            dac.save(entity);
+        }
+    }
+
+    /**
+     * 帳票制御汎用リスト{@link ChohyoSeigyoHanyo}を取得します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 帳票分類ID ChohyoBunruiID
+     * @return SearchResult<ChohyoSeigyoHanyo>
+     */
+    @Transaction
+    public SearchResult<ChohyoSeigyoHanyo> get帳票制御汎用(SubGyomuCode サブ業務コード,
+            ReportId 帳票分類ID) {
+        List<ChohyoSeigyoHanyo> businessList = new ArrayList<>();
+        for (DbT7067ChohyoSeigyoHanyoEntity entity : dac.get帳票制御汎用(サブ業務コード, 帳票分類ID)) {
+            entity.initializeMd5();
+            businessList.add(new ChohyoSeigyoHanyo(entity));
+        }
+        return SearchResult.of(businessList, 0, false);
     }
 }

@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.NinteichosaResult;
 
 import jp.co.ndensan.reams.db.dbe.business.core.NinteichosahyoKaitoHairetsuCode;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

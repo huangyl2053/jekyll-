@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.riyoshafutangakugengakumenjyoshinseisho;
 
-import jp.co.ndensan.reams.db.dbd.definition.core.reportid.ReportIdDBD;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
@@ -21,6 +21,6 @@ public class RiyoshaFutangakuGengakuMenjyoShinseishoProerty extends ReportProper
      * コンストラクタです。
      */
     public RiyoshaFutangakuGengakuMenjyoShinseishoProerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBD.DBD800002.getReportId());
+        super(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD800002.getReportId());
     }
 }

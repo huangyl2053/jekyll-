@@ -46,5 +46,15 @@
             <version>${jp.co.ndensan.reams.cax.version}</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+            <artifactId>UexDefinition</artifactId>
+            <version>${jp.co.ndensan.reams.uex.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+            <artifactId>UexEntity</artifactId>
+            <version>${jp.co.ndensan.reams.uex.version}</version>
+        </dependency>
     </dependencies>
 </project>

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA4010011
 
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaichosakusei.HihokenshaDaichoSakusei;
 import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.ShikakuRirekiJoho;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011.DBA4010011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011.HihokenshaShokaiTotalDiv;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaichosakusei.HihokenshaDaichoSakuseiManager;
@@ -54,8 +54,8 @@ public class HihokenshaShokaiTotal {
         TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
         ShikibetsuCode shikibetsuCode = key.get識別コード();
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
-        div.getKihonJoho().getCcdKaigoAtenaInfo().onLoad(shikibetsuCode);
-        div.getKihonJoho().getCcdKaigoShikakuKihon().onLoad(shikibetsuCode);
+        div.getKihonJoho().getCcdKaigoAtenaInfo().initialize(shikibetsuCode);
+        div.getKihonJoho().getCcdKaigoShikakuKihon().initialize(shikibetsuCode);
         div.getHihokenshaShokaiPanel().getCcdShisetsuTokusoRireki().initialize(hihokenshaNo, shikibetsuCode);
         div.setHihokenshaRirekiFlag(LOAD済み);
         return ResponseData.of(div).respond();

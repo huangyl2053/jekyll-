@@ -7,12 +7,14 @@ package jp.co.ndensan.reams.db.dbb.business.report.fukaerror;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportItem;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportItem;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportShoriKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
@@ -22,8 +24,6 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  * @reamsid_L DBB-0720-010 zuotao
  */
 public class FukaErrorListCsvItem extends InternalReportItem implements IInternalReportItem {
-
-    private static final CodeShubetsu コード種別エラーコード = new CodeShubetsu(new RString("0009"));
 
     @CsvField(order = 10, name = "処理区分")
     private final RString 処理区分;
@@ -60,7 +60,8 @@ public class FukaErrorListCsvItem extends InternalReportItem implements IInterna
 
         this.賦課年度 = model.get賦課年度().toDateString();
         this.通知書番号 = model.get通知書番号().value();
-        this.エラー詳細 = CodeMaster.getCodeRyakusho(コード種別エラーコード, model.getエラーコード());
+        this.エラー詳細 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課,
+                DBBCodeShubetsu.エラーコード.getコード(), model.getエラーコード(), FlexibleDate.getNowDate());
         this.被保険者番号 = model.get被保険者番号().value();
         this.識別コード = model.get識別コード().value();
 

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
@@ -17,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -65,8 +65,8 @@ public class KokuhorenKyoutsuuFileReceivedDeleteManager {
             File from = new File(保存先フォルダ + File.separator + エントリ情報.getName());
             File to = new File(保存先フォルダ + File.separator + 新ファイル名.toString());
             if (!from.renameTo(to)) {
-                throw new ApplicationException(UrErrorMessages.ファイルWRITEエラー.getMessage().
-                        replace(新ファイル名.toString()));
+                throw new BatchInterruptedException(UrErrorMessages.ファイルWRITEエラー.getMessage().
+                        replace(新ファイル名.toString()).toString());
             }
             SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(新ファイル名.toString()));
             sfd = SharedFile.defineSharedFile(sfd);

@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0030011
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.yoshikibetsurenkeijoho.JigyoHokokuTokei;
-import jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoHandler;
-import jp.co.ndensan.reams.db.dbu.service.yoshikibetsurenkeijoho.ShukeiYearMouthGetterFinder;
+import jp.co.ndensan.reams.db.dbu.service.core.yoshikibetsurenkeijoho.ShukeiYearMouthGetterFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;

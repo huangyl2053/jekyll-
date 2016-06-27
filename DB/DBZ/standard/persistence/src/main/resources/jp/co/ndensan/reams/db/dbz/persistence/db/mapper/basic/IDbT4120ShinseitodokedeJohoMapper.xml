@@ -60,7 +60,7 @@
         <result property="shinseiTodokedeshaTelNo" column="dbT4120ShinseitodokedeJoho_shinseiTodokedeshaTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
     </resultMap>
     
-        <select id="getEntity" resultMap="ResultMap_DbT4120ShinseitodokedeJohoEntity">
+        <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT4120ShinseitodokedeJohoEntity">
 <!--	SELECT
 	<include refid="allColumns_DbT4120ShinseitodokedeJoho"/>
 	FROM

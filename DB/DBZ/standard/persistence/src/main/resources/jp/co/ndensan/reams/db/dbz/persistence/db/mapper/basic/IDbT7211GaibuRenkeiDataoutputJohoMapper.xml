@@ -54,7 +54,7 @@
         <result property="CenterSoshinChushutsuYMD" column="dbT7211GaibuRenkeiDataoutputJoho_CenterSoshinChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
     
-    <select id="getEntity" resultMap="ResultMap_DbT7211GaibuRenkeiDataoutputJohoEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7211GaibuRenkeiDataoutputJohoEntity">
 	SELECT
 	<include refid="allColumns_DbT7211GaibuRenkeiDataoutputJoho"/>
 	FROM

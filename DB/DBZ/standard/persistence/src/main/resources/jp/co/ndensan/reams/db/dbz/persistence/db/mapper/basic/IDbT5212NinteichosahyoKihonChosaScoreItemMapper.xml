@@ -49,7 +49,7 @@
         <result property="koroshoIfShikibetsuCode" column="dbT5212NinteichosahyoKihonChosaScoreItem_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="researchItem01" column="dbT5212NinteichosahyoKihonChosaScoreItem_researchItem01" />
     </resultMap>
-<select id="getEntity" resultMap="ResultMap_DbT5212NinteichosahyoKihonChosaScoreItemEntity">
+<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5212NinteichosahyoKihonChosaScoreItemEntity">
     SELECT
     <include refid="allColumns_DbT5212NinteichosahyoKihonChosaScoreItem" />
     FROM

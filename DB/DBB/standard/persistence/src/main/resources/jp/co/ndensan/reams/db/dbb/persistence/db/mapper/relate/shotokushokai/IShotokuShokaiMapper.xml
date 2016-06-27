@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBB-1700-010 zhangrui -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.shotokushokai.IShotokuShokaiMapper">
+    <!--対象者一覧データ取得-->
+    <select resultOrdered="true" id="get対象者一覧データ" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokushokai.ShotokuShokaiTaishoshaIchiranParameter" 
+            resultMap="resultMap_ShotokuShokaiTaishoshaEntity" fetchSize="500">
+      SELECT 
+        <include refid="allColumns_DbT2008ShotokuKanri"/> ,
+        "DbT2020ShotokuShokaihyoHakkoRireki"."shokaisakiLasdecCode",
+        "DbT2020ShotokuShokaihyoHakkoRireki"."setaiCode",
+        "DbT2020ShotokuShokaihyoHakkoRireki"."hakkoYMD",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        ATENA."kanjiShimei",
+        ATENA."kanaShimei",
+        ATENA."seinengappiYMD",
+        ATENA."seibetsuCode"
+      FROM "rgdb"."DbT2008ShotokuKanri" JOIN "rgdb"."DbT2020ShotokuShokaihyoHakkoRireki" ON
+         "DbT2008ShotokuKanri"."shikibetsuCode" = "DbT2020ShotokuShokaihyoHakkoRireki"."shikibetsuCode"
+        AND "DbT2008ShotokuKanri"."shotokuNendo" = "DbT2020ShotokuShokaihyoHakkoRireki"."shoriNendo"
+        JOIN "rgdb"."DbT1001HihokenshaDaicho" ON
+        "DbT2008ShotokuKanri"."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode"
+        JOIN "rgua"."UaFt200FindShikibetsuTaisho"('2',#{システム日付},TRUE,'DB',false,"DbT2008ShotokuKanri"."shikibetsuCode",'','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') as ATENA
+        ON "DbT2008ShotokuKanri"."shikibetsuCode" = ATENA."shikibetsuCode"
+        WHERE 
+        (
+        "DbT2008ShotokuKanri"."kazeiKubun" = '4'
+        <if test="is住民税減免前後表示 == true">  
+        OR "DbT2008ShotokuKanri"."kazeiKubunGemmenGo" = '4'
+        </if>
+        )
+        AND "DbT2020ShotokuShokaihyoHakkoRireki"."shoriNendo" = #{基準年度}
+        AND "DbT2020ShotokuShokaihyoHakkoRireki"."sakuseiTimestamp" <![CDATA[>=]]> #{抽出期間FROM}
+        AND "DbT2020ShotokuShokaihyoHakkoRireki"."sakuseiTimestamp" <![CDATA[<]]> #{抽出期間TO}
+        AND "DbT2008ShotokuKanri"."isDeleted" = false
+        AND "DbT2020ShotokuShokaihyoHakkoRireki"."isDeleted" = false
+        ORDER BY "DbT2020ShotokuShokaihyoHakkoRireki"."hakkoYMD" DESC,
+                 "DbT2020ShotokuShokaihyoHakkoRireki"."setaiCode" ASC,
+                 "DbT2020ShotokuShokaihyoHakkoRireki"."shikibetsuCode" ASC
+    </select>
+    
+    <!--HihokenshaAndDaichouAndAtenaEntityの項目にマッピングします。-->
+    <resultMap id="resultMap_ShotokuShokaiTaishoshaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokai.ShotokuShokaiTaishoshaEntity" autoMapping="true">
+        <result property="shotokuNendo" column="dbT2008ShotokuKanri_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="shikibetsuCode" column="dbT2008ShotokuKanri_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="rirekiNo" column="dbT2008ShotokuKanri_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT2008ShotokuKanri_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT2008ShotokuKanri_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT2008ShotokuKanri_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT2008ShotokuKanri_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT2008ShotokuKanri_isDeleted" />
+        <result property="updateCount" column="dbT2008ShotokuKanri_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT2008ShotokuKanri_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT2008ShotokuKanri_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeiKubun" column="dbT2008ShotokuKanri_kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeiKubunGemmenGo" column="dbT2008ShotokuKanri_kazeiKubunGemmenGo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gokeiShotokuGaku" column="dbT2008ShotokuKanri_gokeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nenkiniShunyuGaku" column="dbT2008ShotokuKanri_nenkiniShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nenkiniShotokuGaku" column="dbT2008ShotokuKanri_nenkiniShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kazeiShotokuGaku" column="dbT2008ShotokuKanri_kazeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gekihenKanwaKubun" column="dbT2008ShotokuKanri_gekihenKanwaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yusenKubun" column="dbT2008ShotokuKanri_yusenKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoriTimeStamp" column="dbT2008ShotokuKanri_shoriTimeStamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="shokaisakiLasdecCode" column="shokaisakiLasdecCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="setaiCode" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler" />
+        <result property="hakkoYMD" column="hakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="kanjiShimei" column="kanjiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="kanaShimei" column="kanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <result property="seinengappiYMD" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="seibetsuCode" column="seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    
+    <sql id="allColumns_DbT2008ShotokuKanri">
+         "DbT2008ShotokuKanri"."shotokuNendo" as "dbT2008ShotokuKanri_shotokuNendo",
+         "DbT2008ShotokuKanri"."shikibetsuCode" as "dbT2008ShotokuKanri_shikibetsuCode",
+         "DbT2008ShotokuKanri"."rirekiNo" as "dbT2008ShotokuKanri_rirekiNo",
+         "DbT2008ShotokuKanri"."insertDantaiCd" as "dbT2008ShotokuKanri_insertDantaiCd",
+         "DbT2008ShotokuKanri"."insertTimestamp" as "dbT2008ShotokuKanri_insertTimestamp",
+         "DbT2008ShotokuKanri"."insertReamsLoginId" as "dbT2008ShotokuKanri_insertReamsLoginId",
+         "DbT2008ShotokuKanri"."insertContextId" as "dbT2008ShotokuKanri_insertContextId",
+         "DbT2008ShotokuKanri"."isDeleted" as "dbT2008ShotokuKanri_isDeleted",
+         "DbT2008ShotokuKanri"."updateCount" as "dbT2008ShotokuKanri_updateCount",
+         "DbT2008ShotokuKanri"."lastUpdateTimestamp" as "dbT2008ShotokuKanri_lastUpdateTimestamp",
+         "DbT2008ShotokuKanri"."lastUpdateReamsLoginId" as "dbT2008ShotokuKanri_lastUpdateReamsLoginId",
+         "DbT2008ShotokuKanri"."kazeiKubun" as "dbT2008ShotokuKanri_kazeiKubun",
+         "DbT2008ShotokuKanri"."kazeiKubunGemmenGo" as "dbT2008ShotokuKanri_kazeiKubunGemmenGo",
+         "DbT2008ShotokuKanri"."gokeiShotokuGaku" as "dbT2008ShotokuKanri_gokeiShotokuGaku",
+         "DbT2008ShotokuKanri"."nenkiniShunyuGaku" as "dbT2008ShotokuKanri_nenkiniShunyuGaku",
+         "DbT2008ShotokuKanri"."nenkiniShotokuGaku" as "dbT2008ShotokuKanri_nenkiniShotokuGaku",
+         "DbT2008ShotokuKanri"."kazeiShotokuGaku" as "dbT2008ShotokuKanri_kazeiShotokuGaku",
+         "DbT2008ShotokuKanri"."gekihenKanwaKubun" as "dbT2008ShotokuKanri_gekihenKanwaKubun",
+         "DbT2008ShotokuKanri"."yusenKubun" as "dbT2008ShotokuKanri_yusenKubun",
+         "DbT2008ShotokuKanri"."shoriTimeStamp" as "dbT2008ShotokuKanri_shoriTimeStamp"
+    </sql>
+    
+</mapper>

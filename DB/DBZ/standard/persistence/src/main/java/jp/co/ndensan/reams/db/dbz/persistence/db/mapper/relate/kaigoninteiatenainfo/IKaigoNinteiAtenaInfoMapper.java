@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigoninteiatenainfo.KaigoNin
  *
  * 介護認定宛名情報のマッパーインタフェースです。
  *
- * @reamsid_L DBE-1300-050 lizhuoxuan
+ * @reamsid_L DBZ-1300-050 lizhuoxuan
  */
 public interface IKaigoNinteiAtenaInfoMapper {
 

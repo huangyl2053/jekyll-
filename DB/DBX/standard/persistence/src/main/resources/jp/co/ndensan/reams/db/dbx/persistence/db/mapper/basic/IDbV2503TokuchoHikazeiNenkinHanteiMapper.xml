@@ -5,22 +5,22 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2503TokuchoHikazeiNenkinHanteiMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbV2503TokuchoHikazeiNenkinHantei">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2503TokuchoHikazeiNenkinHanteiMapper.allColumns_DbV2503TokuchoHikazeiNenkinHantei" />
-     FROM
-         rgdb."DbV2503TokuchoHikazeiNenkinHantei"
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2503TokuchoHikazeiNenkinHanteiMapper.allColumns_DbV2503TokuchoHikazeiNenkinHantei" />
+        FROM
+        rgdb."DbV2503TokuchoHikazeiNenkinHantei"
 
     </sql>
 
     <sql id="allColumns_DbV2503TokuchoHikazeiNenkinHantei">
-         "DbV2503TokuchoHikazeiNenkinHantei"."tsuchishoNo" as "DbV2503TokuchoHikazeiNenkinHantei_tsuchishoNo",
-         "DbV2503TokuchoHikazeiNenkinHantei"."choteiNendo" as "DbV2503TokuchoHikazeiNenkinHantei_choteiNendo",
-         "DbV2503TokuchoHikazeiNenkinHantei"."kazeiNendo" as "DbV2503TokuchoHikazeiNenkinHantei_kazeiNendo",
-         "DbV2503TokuchoHikazeiNenkinHantei"."ki" as "DbV2503TokuchoHikazeiNenkinHantei_ki",
-         "DbV2503TokuchoHikazeiNenkinHantei"."isHikazeiNenkin" as "DbV2503TokuchoHikazeiNenkinHantei_isHikazeiNenkin"
+        "DbV2503TokuchoHikazeiNenkinHantei"."tsuchishoNo" as "DbV2503TokuchoHikazeiNenkinHantei_tsuchishoNo",
+        "DbV2503TokuchoHikazeiNenkinHantei"."choteiNendo" as "DbV2503TokuchoHikazeiNenkinHantei_choteiNendo",
+        "DbV2503TokuchoHikazeiNenkinHantei"."kazeiNendo" as "DbV2503TokuchoHikazeiNenkinHantei_kazeiNendo",
+        "DbV2503TokuchoHikazeiNenkinHantei"."ki" as "DbV2503TokuchoHikazeiNenkinHantei_ki",
+        "DbV2503TokuchoHikazeiNenkinHantei"."isHikazeiNenkin" as "DbV2503TokuchoHikazeiNenkinHantei_isHikazeiNenkin"
     </sql>
 
 
@@ -32,12 +32,12 @@
         <result property="ki" column="DbV2503TokuchoHikazeiNenkinHantei_ki"/>
         <result property="isHikazeiNenkin" column="DbV2503TokuchoHikazeiNenkinHantei_isHikazeiNenkin"/>
     </resultMap>
-    
-    <select id="getEntity" resultMap="ResultMap_DbV2503TokuchoHikazeiNenkinHanteiEntity">
+
+    <select id="getEntity" resultMap="ResultMap_DbV2503TokuchoHikazeiNenkinHanteiEntity" resultOrdered = "true">
         SELECT
         <include refid="allColumns_DbV2503TokuchoHikazeiNenkinHantei"/>
         FROM
         rgdb."DbV2503TokuchoHikazeiNenkinHantei"
-     </select>
+    </select>
 
 </mapper>

@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step;
 
 import java.util.Arrays;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.DbcMapperInterfaces;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KyufuKanrihyoTorikomi.KeikakuSakuseiKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KyufuKanrihyoTorikomi.SakuseiKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KyufuKanrihyoTorikomi.ShubetsuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.DbcMapperInterfaces;
+import jp.co.ndensan.reams.db.dbc.definition.core.KyufuKanrihyoTorikomi.KeikakuSakuseiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.KyufuKanrihyoTorikomi.SakuseiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.KyufuKanrihyoTorikomi.ShubetsuKubun;
 import jp.co.ndensan.reams.db.dbc.entity.csv.KyufuKanrihyoInIchiRanEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.KyufuKanrihyoInKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbTKyufukanrihyoDataTempTableEntity;

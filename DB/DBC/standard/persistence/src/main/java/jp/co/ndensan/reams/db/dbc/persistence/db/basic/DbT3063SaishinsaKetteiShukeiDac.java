@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3063SaishinsaKetteiShukei;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3063SaishinsaKetteiShukei.hokenshaKubun;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3063SaishinsaKetteiShukei.rirekiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3063SaishinsaKetteiShukei.toriatsukaiYM;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3063SaishinsaKetteiShukei.torikomiYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3063SaishinsaKetteiShukeiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -28,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 再審査決定集計のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 sunhui
  */
 public class DbT3063SaishinsaKetteiShukeiDac implements ISaveable<DbT3063SaishinsaKetteiShukeiEntity> {
 
@@ -116,5 +119,40 @@ public class DbT3063SaishinsaKetteiShukeiDac implements ISaveable<DbT3063Saishin
                                 eq(hokenshaKubun, 保険者区分)))
                 .order(by(rirekiNo, DESC)).limit(1).
                 toObject(DbT3063SaishinsaKetteiShukeiEntity.class);
+    }
+
+    /**
+     * 再審査決定集計を取得します。
+     *
+     * @param 取込年月 ToriatsukaiYM
+     * @param 保険者区分 HokenshaKubun
+     * @return DbT3063SaishinsaKetteiShukeiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3063SaishinsaKetteiShukeiEntity> selectAllBy(
+            FlexibleYearMonth 取込年月,
+            RString 保険者区分) throws NullPointerException {
+        requireNonNull(保険者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者区分"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3063SaishinsaKetteiShukei.class).
+                where(and(
+                                eq(torikomiYM, 取込年月),
+                                eq(hokenshaKubun, 保険者区分))).
+                toList(DbT3063SaishinsaKetteiShukeiEntity.class);
+    }
+
+    /**
+     * DbT3063SaishinsaKetteiShukeiEntityyを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int delete(DbT3063SaishinsaKetteiShukeiEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払支給判定結果エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 }

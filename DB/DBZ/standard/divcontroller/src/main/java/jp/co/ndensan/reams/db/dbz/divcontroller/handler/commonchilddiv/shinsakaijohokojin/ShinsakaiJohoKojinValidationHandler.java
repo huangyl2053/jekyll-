@@ -5,14 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.shinsakaijohokojin;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinsakaiJohoKojin.ShinsakaiJohoKojin.ShinsakaiJohoKojinDiv;
-import jp.co.ndensan.reams.db.dbz.service.core.shinsakaijohokojin.ShinsakaiJohoKojinFinder;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinsakaiJohoKojin.ShinsakaiJohoKojin.ShinsakaiJohoKojinDivSpec;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -40,9 +42,11 @@ public class ShinsakaiJohoKojinValidationHandler {
      */
     public ValidationMessageControlPairs validateForAction() {
         ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
-        if (ShinsakaiJohoKojinFinder.createInstance().審査会未割当チェック(new ShinseishoKanriNo(div.getHdnShinseishoKanriNo())) == 0) {
-            validationMessage.add(new ValidationMessageControlPair(IdocheckMessages.審査会未割当));
-        }
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(ShinsakaiJohoKojinDivSpec.審査会未割当チェック)
+                .thenAdd(IdocheckMessages.審査会未割当).messages());
+        validationMessage.add(new ValidationMessageControlDictionaryBuilder().
+                add(IdocheckMessages.審査会未割当, div).build().check(messages));
         return validationMessage;
     }
 

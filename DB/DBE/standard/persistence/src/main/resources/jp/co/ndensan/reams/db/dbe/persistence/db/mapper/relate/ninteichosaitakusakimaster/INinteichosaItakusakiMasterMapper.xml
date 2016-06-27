@@ -47,7 +47,7 @@
         <collection property="調査員情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.ResultMap_DbT5913ChosainJohoEntity"/>
     </resultMap>
 
-    <select id="ninteichosaItakusakiSearch" parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.NinteichosaItakusakiKensakuParameter" resultMap="resultMap_KoseiShichosonMasterEntity" fetchSize="500">
+    <select resultOrdered="true" id="ninteichosaItakusakiSearch" parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.NinteichosaItakusakiKensakuParameter" resultMap="resultMap_KoseiShichosonMasterEntity" fetchSize="500">
         SELECT
         dbt5051."shichosonShokibetsuID" dbT5051KoseiShichosonMaster_shichosonShokibetsuID,
         dbt5910."shichosonCode",

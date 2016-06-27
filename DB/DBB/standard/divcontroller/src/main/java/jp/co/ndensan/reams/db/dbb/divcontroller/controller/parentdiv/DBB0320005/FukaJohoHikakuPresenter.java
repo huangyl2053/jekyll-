@@ -293,8 +293,8 @@ public final class FukaJohoHikakuPresenter {
             div.getTxtSetaiinSuHon1().setValue(new RString(String.valueOf(model.get世帯員数())));
             div.getTxtShikakuShutokuYMDHon1().setValue(toRDate(model.get資格取得日()));
             div.getTxtShikakusoshitsuYMDHon1().setValue(toRDate(model.get資格喪失日()));
-            div.getTxtHonninKazeiHon1().setValue(model.get課税区分().toRString());
-            div.getTxtSetaiKazeiHon1().setValue(model.get世帯課税区分().toRString());
+            div.getTxtHonninKazeiHon1().setValue(model.get課税区分().get名称());
+            div.getTxtSetaiKazeiHon1().setValue(model.get世帯課税区分().get名称());
             div.getTxtGoukeiShotokuHon1().setValue(model.get合計所得金額());
             div.getTxtNenkinShunyuHon1().setValue(model.get公的年金収入額());
             div.getTxtKoseiYMDHon1().setValue(model.get調定日時().getDate().wareki().toDateString());
@@ -358,8 +358,8 @@ public final class FukaJohoHikakuPresenter {
             div.getTxtSetaiinSuHon2().setValue(new RString(String.valueOf(model.get世帯員数())));
             div.getTxtShikakuShutokuYMDHon2().setValue(toRDate(model.get資格取得日()));
             div.getTxtShikakuSoshitsuYMDHon2().setValue(toRDate(model.get資格喪失日()));
-            div.getTxtHonninKazeiHon2().setValue(model.get課税区分().toRString());
-            div.getTxtSetaiKazeiHon2().setValue(model.get世帯課税区分().toRString());
+            div.getTxtHonninKazeiHon2().setValue(model.get課税区分().get名称());
+            div.getTxtSetaiKazeiHon2().setValue(model.get世帯課税区分().get名称());
             div.getTxtGoukeiShotokuHon2().setValue(model.get合計所得金額());
             div.getTxtNenkinShunyuHon2().setValue(model.get公的年金収入額());
             div.getTxtKoseiYMDHon2().setValue(model.get調定日時().getDate().wareki().toDateString());

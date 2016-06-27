@@ -50,7 +50,7 @@
         <result property="gogitaichoKubunCode" column="dbT5593GogitaiWariateIinJoho_gogitaichoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="substituteFlag" column="dbT5593GogitaiWariateIinJoho_substituteFlag" />
     </resultMap>
-   <select id="getEntity" resultMap="ResultMap_DbT5593GogitaiWariateIinJohoEntity">
+   <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5593GogitaiWariateIinJohoEntity">
         SELECT
         <include refid="allColumns_DbT5593GogitaiWariateIinJoho"/>
         FROM

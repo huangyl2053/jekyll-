@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho.GappeiCityJohoBFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -64,13 +63,15 @@ public class TaishokensakuJyoukenHandler {
 
     /**
      * 画面初期化処理です。
+     *
+     * @param is詳細画面から is詳細画面から
+     * @param 市町村名称 市町村名称
      */
-    public void onload() {
-        Boolean is詳細画面から = ViewStateHolder.get(DBU0050011ViewStateKey.is詳細画面から, Boolean.class);
+    public void onload(Boolean is詳細画面から, RString 市町村名称) {
         if (null == is詳細画面から) {
             onLoadFromMain();
         } else if (is詳細画面から) {
-            onLoadFromDetail();
+            onLoadFromDetail(市町村名称);
         } else {
             onLoadFromMain();
         }
@@ -187,15 +188,16 @@ public class TaishokensakuJyoukenHandler {
 
     /**
      * 詳細画面から遷移の場合、画面初期化処理です。
+     *
+     * @param 市町村名称 市町村名称
      */
-    public void onLoadFromDetail() {
+    public void onLoadFromDetail(RString 市町村名称) {
         List<Shichoson> 市町村Lst = get市町村Lst();
         if (市町村Lst.isEmpty()) {
             throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
         }
         List<KeyValueDataSource> dataSource = getDataSourceFrom市町村Lst(市町村Lst);
         div.getDdlShichoson().setDataSource(dataSource);
-        RString 市町村名称 = ViewStateHolder.get(DBU0050011ViewStateKey.選択市町村名称, RString.class);
         set報告年度And集計年度();
         div.getDdlShichoson().setSelectedValue(市町村名称);
         div.getDdlShichoson().setDisplayNone(is単一合併なし());

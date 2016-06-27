@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Seikatsuh
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.seikatsuhogorireki.SeikaatsuhogoBusiness;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.seikatsuhogorireki.SeikaatsuhogoDataModel;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.seikatsuhogorireki.SeikaatsuhogoDataModel;
 import jp.co.ndensan.reams.db.dbz.service.core.seikatsuhogorireki.SeikatsuhogoRirekiFinder;
 import jp.co.ndensan.reams.ur.urd.definition.core.seikatsuhogo.KyugoShisetsuNyuTaishoKubunType;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;

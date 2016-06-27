@@ -39,6 +39,8 @@ public final class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
     private final RString psmShikibetsuTaisho;
     private final RString psmAtesaki;
     private final FlexibleDate nenreiTotatsuYMD;
+    private final RString orderby;
+    private final boolean orderbyFlag;
 
     /**
      * コンストラクタです。<br/>
@@ -58,6 +60,8 @@ public final class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
      * @param 識別対象PSM 識別対象PSM
      * @param 宛先PSM 宛先PSM
      * @param 年齢到達日 年齢到達日
+     * @param orderby 出力順項目
+     * @param orderbyFlag 出力順項目有り無し
      *
      */
     private IkkatsuHakkoMybatisParameter(RString 出力条件コード,
@@ -74,7 +78,9 @@ public final class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
             ShikibetsuCode 識別コード,
             RString 識別対象PSM,
             RString 宛先PSM,
-            FlexibleDate 年齢到達日) {
+            FlexibleDate 年齢到達日,
+            RString orderby,
+            boolean orderbyFlag) {
         this.shutsuryokuJokenCode = 出力条件コード;
         this.konkaiFromYMDHMS = 今回の開始日時;
         this.konkaiToYMD = 今回の終了日;
@@ -90,6 +96,8 @@ public final class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
         this.psmShikibetsuTaisho = 識別対象PSM;
         this.psmAtesaki = 宛先PSM;
         this.nenreiTotatsuYMD = 年齢到達日;
+        this.orderby = orderby;
+        this.orderbyFlag = orderbyFlag;
     }
 
     /**
@@ -110,6 +118,7 @@ public final class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
      * @param 識別対象PSM 識別対象PSM
      * @param 宛先PSM 宛先PSM
      * @param 年齢到達日 年齢到達日
+     * @param orderby 出力順項目
      *
      * @return mybatisパラメータ
      */
@@ -127,7 +136,12 @@ public final class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
             ShikibetsuCode 識別コード,
             RString 識別対象PSM,
             RString 宛先PSM,
-            FlexibleDate 年齢到達日) {
+            FlexibleDate 年齢到達日,
+            RString orderby) {
+        boolean flag = false;
+        if (!RString.isNullOrEmpty(orderby)) {
+            flag = true;
+        }
         return new IkkatsuHakkoMybatisParameter(出力条件コード,
                 今回の開始日時,
                 今回の終了日,
@@ -142,6 +156,6 @@ public final class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
                 識別コード,
                 識別対象PSM,
                 宛先PSM,
-                年齢到達日);
+                年齢到達日, orderby, flag);
     }
 }

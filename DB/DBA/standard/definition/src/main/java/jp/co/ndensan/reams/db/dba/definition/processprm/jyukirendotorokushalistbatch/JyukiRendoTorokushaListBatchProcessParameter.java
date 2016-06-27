@@ -53,6 +53,7 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
      * @param tajushochitokureishakanriFLG 他住所地特例者管理フラグ
      * @param tekiyojogaishadaichoFLG 適用除外者台帳フラグ
      * @param shuturyokujunID 出力順ID
+     * @param loginId LOGINユーザID
      */
     public JyukiRendoTorokushaListBatchProcessParameter(
             RString zenkaikaishiYMDHMS,
@@ -62,7 +63,8 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
             boolean hihokenshadaichoFLG,
             boolean tajushochitokureishakanriFLG,
             boolean tekiyojogaishadaichoFLG,
-            RString shuturyokujunID) {
+            RString shuturyokujunID,
+            RString loginId) {
         this.zenkaikaishiYMDHMS = zenkaikaishiYMDHMS;
         this.zenkaishuryoYMDHMS = zenkaishuryoYMDHMS;
         this.konkaikaishiYMDHMS = konkaikaishiYMDHMS;
@@ -71,6 +73,7 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
         this.tajushochitokureishakanriFLG = tajushochitokureishakanriFLG;
         this.tekiyojogaishadaichoFLG = tekiyojogaishadaichoFLG;
         this.shuturyokujunID = shuturyokujunID;
+        this.loginId = loginId;
     }
 
     /**

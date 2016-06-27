@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoh
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2Identifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiWariateIinJohoBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbe.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.DBE5210001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.ByteReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -50,6 +52,7 @@ public class ShinsakaiKaisaiKekka {
     private final ShinsakaiKaisaiKekkaFinder service;
     private final ShinsakaiKaisaiYoteiJohoManager manager;
     private final ShinsakaiOnseiJohoManager onseiJohoManager;
+    private final LockingKey 前排他ロックキー;
 
     /**
      * コンストラクタです。
@@ -58,6 +61,7 @@ public class ShinsakaiKaisaiKekka {
         service = ShinsakaiKaisaiKekkaFinder.createInstance();
         manager = ShinsakaiKaisaiYoteiJohoManager.createInstance();
         onseiJohoManager = new ShinsakaiOnseiJohoManager();
+        前排他ロックキー = new LockingKey("DBEShinsakaiNo" + ViewStateHolder.get(介護認定審査会共有一覧_開催番号, RString.class));
     }
 
     /**
@@ -69,6 +73,7 @@ public class ShinsakaiKaisaiKekka {
     public ResponseData<ShinsakaiKaisaiKekkaDiv> onLoad(ShinsakaiKaisaiKekkaDiv div) {
         ResponseData<ShinsakaiKaisaiKekkaDiv> responseData = new ResponseData<>();
         RString 開催番号 = ViewStateHolder.get(介護認定審査会共有一覧_開催番号, RString.class);
+        RealInitialLocker.lock(前排他ロックキー);
         List<ShinsakaiKaisaiYoteiJohoBusiness> saiYoteiJoho = service.getヘッドエリア内容検索(開催番号).records();
         div.getDdlKaisaiBasho().setDataSource(service.get開催会場());
         getHandler(div).onLoad(saiYoteiJoho);
@@ -163,9 +168,14 @@ public class ShinsakaiKaisaiKekka {
                 && new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))
                 || ResponseHolder.isWarningIgnoredRequest()) {
             setYotei(div);
+            RealInitialLocker.release(前排他ロックキー);
             return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("審査会開催結果登録")).respond();
         }
-        onLoad(div);
+        if ((ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))
+                || ResponseHolder.isWarningIgnoredRequest()) {
+            return ResponseData.of(div).forwardWithEventName(DBE5210001TransitionEventName.審査会一覧に戻る).respond();
+        }
         return ResponseData.of(div).respond();
     }
 

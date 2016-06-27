@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tashihenkotsuchisho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.ShisetsuJyohoParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.ShisetsuJyohoParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.ShisetsuJyohoRelateEntity;
 
 /**

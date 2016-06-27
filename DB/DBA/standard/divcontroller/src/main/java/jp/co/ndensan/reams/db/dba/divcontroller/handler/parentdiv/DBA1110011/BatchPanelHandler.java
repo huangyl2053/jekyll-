@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashohakkokanribo.KayiSyuuJiyuu;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashohakkokanribo.KouFuJiyuu;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hihokenshashohakkokanribo.HihokenshashoHakkoKanriboBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.BatchPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.dgKaishuJiyu_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.dgKoufuJiyu_Row;
@@ -37,8 +38,6 @@ public class BatchPanelHandler {
     private static final RString 項目名付加キー = new RString("key1");
     private static final RString 連番付加キー = new RString("key2");
     private static final RString 日付編集キー = new RString("key3");
-
-    private static final RString REPORT_ID_DBA200004 = new RString("DBA200004");
 
     /**
      * コンストラクタです。
@@ -73,7 +72,7 @@ public class BatchPanelHandler {
         }
         div.getDgKaishuJiyu().setDataSource(dgKaishuJiyuRowList);
         div.getDgKoufuJiyu().setDataSource(dgKoufuJiyuRowList);
-        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBA介護資格, new ReportId(REPORT_ID_DBA200004));
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBA介護資格, new ReportId(ReportIdDBA.DBA200004.getReportId().value()));
     }
 
     /**

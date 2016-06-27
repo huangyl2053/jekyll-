@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.ShisetsuJohoCommonChildDiv;
 
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -76,7 +76,7 @@ public class ShisetsuJohoCommonChildDiv {
                 && (requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey() == null
                 || requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty())) {
 
-            mode.setJigyoshaShubetsu(ShisetsuType.適用除外施設.getCode());
+            mode.setJigyoshaShubetsu(ShisetsuType.適用除外施設.getコード());
         }
 
         requestDiv.setJigyoshaMode(DataPassingConverter.serialize(mode));

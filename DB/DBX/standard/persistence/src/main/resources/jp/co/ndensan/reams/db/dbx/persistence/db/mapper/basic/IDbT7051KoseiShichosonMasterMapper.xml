@@ -104,14 +104,14 @@
         <result property="unyoKeitaiKubun" column="dbT7051KoseiShichosonMaster_unyoKeitaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <select id="getEntity" resultMap="ResultMap_DbT7051KoseiShichosonMasterEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7051KoseiShichosonMasterEntity">
         SELECT
         <include refid="allColumns_DbT7051KoseiShichosonMaster"/>
         FROM
         rgdb."DbT7051KoseiShichosonMaster"
     </select>
 
-    <select id="getKouikiKyuShichosonCodeJohoList" resultMap="ResultMap_DbT7051KoseiShichosonMasterEntity">
+    <select resultOrdered="true" id="getKouikiKyuShichosonCodeJohoList" resultMap="ResultMap_DbT7051KoseiShichosonMasterEntity">
         SELECT
         <include refid="allColumns_DbT7051KoseiShichosonMaster"/>
         FROM
@@ -124,7 +124,7 @@
     
     <select id="getKoseishichosonList" 
             parameterType="jp.co.ndensan.reams.db.dbx.definition.core.koseishichosonselector.KoseiShiChosonSelectorParamter"
-            resultMap="ResultMap_DbT7051KoseiShichosonMasterEntity">
+            resultMap="ResultMap_DbT7051KoseiShichosonMasterEntity" resultOrdered="true">
         SELECT  
         A."shichosonCode" AS "dbT7051KoseiShichosonMaster_shichosonCode",
         A."shichosonMeisho" AS "dbT7051KoseiShichosonMaster_shichosonMeisho"

@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 //import static jp.co.ndensan.reams.db.dbb.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2002FukaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -210,12 +210,12 @@ public class FukaTest extends DbbTestBase {
 
         @Test
         public void get課税区分は_entityが持つ課税区分を返す() {
-            assertThat(sut.get課税区分().toRString(), is(FukaEntity.getKazeiKubun()));
+            assertThat(sut.get課税区分().get名称(), is(FukaEntity.getKazeiKubun()));
         }
 
         @Test
         public void get世帯課税区分は_entityが持つ世帯課税区分を返す() {
-            assertThat(sut.get世帯課税区分().toRString(), is(FukaEntity.getSetaikazeiKubun()));
+            assertThat(sut.get世帯課税区分().get名称(), is(FukaEntity.getSetaikazeiKubun()));
         }
 
         @Test

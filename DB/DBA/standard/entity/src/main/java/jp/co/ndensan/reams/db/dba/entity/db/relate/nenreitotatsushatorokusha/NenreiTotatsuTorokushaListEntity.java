@@ -26,5 +26,10 @@ public class NenreiTotatsuTorokushaListEntity {
     private RString 並び順_3;
     private RString 並び順_4;
     private RString 並び順_5;
+    private RString 改頁１;
+    private RString 改頁２;
+    private RString 改頁３;
+    private RString 改頁４;
+    private RString 改頁５;
     private List<NenreiTotatsushaJouhouEntity> 年齢到達者情報;
 }

@@ -11,8 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidokanendofukakakutei.K
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.KanendoFukaKakuteiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.dgKanendoFukaIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.dgShoriNichiji_Row;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbb.service.honsanteiidokanendofukakakutei.HonsanteiIdoKanendoFukaKakutei;
+import jp.co.ndensan.reams.db.dbb.service.core.honsanteiidokanendofukakakutei.HonsanteiIdoKanendoFukaKakutei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -22,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -334,16 +332,5 @@ public class KanendoFukaKakuteiHandler {
         if (div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getTotalRecords() > 0) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(確定処理, false);
         }
-    }
-
-    /**
-     * viewStateへの設定のメソッドます。
-     */
-    public void setViewState() {
-        dgKanendoFukaIchiran_Row row = div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getClickedItem();
-        ViewStateHolder.put(ViewStateKeys.調定年度, row.getTxtChoteiNendo().getValue());
-        ViewStateHolder.put(ViewStateKeys.賦課年度, row.getTxtChoteiNendo().getValue());
-        ViewStateHolder.put(ViewStateKeys.通知書番号, row.getTxtChoteiNendo().getValue());
-        ViewStateHolder.put(ViewStateKeys.履歴番号, row.getTxtChoteiNendo().getValue());
     }
 }

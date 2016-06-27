@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2020007
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosachikuchichoson.ChosaChikuChichosonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosachikuchichoson.UzT0007CodeBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikuchichoson.ChosaChikuChichosonParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosachikuchichoson.ChosaChikuChichosonParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.DBE2020007StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.NinteiChosaSchedule7MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.dgChosaChikuChichosonList_Row;
@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020007.Mai
 import jp.co.ndensan.reams.db.dbe.service.core.chosachikuchichoson.ChosaChikuFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichosonIdentifier;
+import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -133,7 +134,9 @@ public class NinteiChosaSchedule7Main {
      * @return ResponseData<NinteiChosaSchedule7MainDiv>
      */
     public ResponseData<NinteiChosaSchedule7MainDiv> onOkClose_Dialog(NinteiChosaSchedule7MainDiv div) {
-        getHandler(div).onOkClose_Dialog();
+        KoseiShiChosonSelectorModel dataPassModel = ViewStateHolder.get(
+                ViewStateKeys.構成市町村選択_引き継ぎデータ, KoseiShiChosonSelectorModel.class);
+        getHandler(div).onOkClose_Dialog(dataPassModel);
         return ResponseData.of(div).setState(DBE2020007StateName.調査地区市町村情報登録);
     }
 
@@ -210,7 +213,9 @@ public class NinteiChosaSchedule7Main {
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
-            getHandler(div).onClick_HozonnBtn();
+            Models<ChikuShichosonIdentifier, ChikuShichoson> models
+                    = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録7_地区市町村情報, Models.class);
+            getHandler(div).onClick_HozonnBtn(models);
             div.getCcdKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2020007StateName.完了);
         }

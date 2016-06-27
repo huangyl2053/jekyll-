@@ -24,13 +24,16 @@ public class IkkatsuSakuseiBatchParameter extends BatchParameterBase {
     private static final String KEY_CHUSHUTSUFLAG = "chushutsuFlag";
     private static final String KEY_SHUTSURYOKUFLAG = "shutsuryokuFlag";
     private static final String KEY_SHUTSURYOKUJUN_ID = "shutsuryokujunId";
+    private static final String KEY_LOGINUSER_ID = "loginUserId";
 
     @BatchParameter(key = KEY_CHUSHUTSUFLAG, name = "資格喪失者抽出フラグ")
     private boolean chushutsuFlag;
     @BatchParameter(key = KEY_SHUTSURYOKUFLAG, name = "出力フラグ")
     private boolean shutsuryokuFlag;
     @BatchParameter(key = KEY_SHUTSURYOKUJUN_ID, name = "出力順ID")
-    private RString shutsuryokujunId;
+    private Long shutsuryokujunId;
+    @BatchParameter(key = KEY_LOGINUSER_ID, name = "登録ユーザーID")
+    private RString loginUserId;
 
     /**
      * コンストラクタです。<br/>
@@ -38,14 +41,16 @@ public class IkkatsuSakuseiBatchParameter extends BatchParameterBase {
      * @param chushutsuFlag 資格喪失者抽出フラグ
      * @param shutsuryokuFlag 出力フラグ
      * @param shutsuryokujunId 出力順ID
-     *
+     * @param loginUserId 登録ユーザーID
      */
     public IkkatsuSakuseiBatchParameter(boolean chushutsuFlag,
             boolean shutsuryokuFlag,
-            RString shutsuryokujunId) {
+            Long shutsuryokujunId,
+            RString loginUserId) {
         this.chushutsuFlag = chushutsuFlag;
         this.shutsuryokuFlag = shutsuryokuFlag;
         this.shutsuryokujunId = shutsuryokujunId;
+        this.loginUserId = loginUserId;
     }
 
     /**
@@ -61,6 +66,6 @@ public class IkkatsuSakuseiBatchParameter extends BatchParameterBase {
      * @return processパラメータ
      */
     public IkkatsuSusakuseiProcessParameter toIkkatsuHakkoProcessParameter() {
-        return new IkkatsuSusakuseiProcessParameter(chushutsuFlag, shutsuryokuFlag, shutsuryokujunId);
+        return new IkkatsuSusakuseiProcessParameter(chushutsuFlag, shutsuryokuFlag, shutsuryokujunId, loginUserId);
     }
 }

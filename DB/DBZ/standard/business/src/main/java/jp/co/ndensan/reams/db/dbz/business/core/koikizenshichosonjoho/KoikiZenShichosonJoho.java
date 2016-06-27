@@ -292,4 +292,13 @@ public class KoikiZenShichosonJoho {
     public RString get運用形態区分() {
         return entity.getUnyoKeitaiKubun();
     }
+
+    /**
+     * 所得引出方法を取得します。
+     *
+     * @return 所得引出方法
+     */
+    public RString get所得引出方法() {
+        return entity.getShotokuHikidashiHoho();
+    }
 }

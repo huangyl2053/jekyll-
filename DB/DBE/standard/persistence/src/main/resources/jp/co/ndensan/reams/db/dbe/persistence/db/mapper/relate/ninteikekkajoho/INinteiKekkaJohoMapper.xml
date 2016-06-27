@@ -7,7 +7,7 @@
 
 <!--    <select id="getNinteiShinseiJohoEntity"
     resultMap="resultMap_NinteiKekkaJohoEntity"
-    parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteikekkajoho.NinteiKekkaJohoMapperParameter" fetchSize="500">
+    parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteikekkajoho.NinteiKekkaJohoMapperParameter" fetchSize="500" resultOrdered="true">
         SELECT
         dbT5101NinteiShinseiJoho.*,
         dbT5120ShinseitodokedeJoho.*,								

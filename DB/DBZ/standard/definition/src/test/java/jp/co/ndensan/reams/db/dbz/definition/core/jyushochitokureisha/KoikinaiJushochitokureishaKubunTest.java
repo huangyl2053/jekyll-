@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.definition.core.jyushochitokureisha;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.jushochitokureisha.KoikinaiJushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;

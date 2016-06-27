@@ -7,17 +7,15 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5100002
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakayijidouwaritsuke.ShinsaKayiJidouWaritsukeBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.kaigoninteishinsakai.KaigoNinteiShinsakaiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.taisyosyajidowaritsuke.TaisyosyaJidoWaritsukeBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kaigoninteishinsakai.KaigoNinteiShinsakaiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100002.DBE5100002TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100002.ShinsakaiAutoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100002.ShinsakaiAutoHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100002.ValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.shinsakayijidouwaritsuke.ShinsaKayiJidouWaritsukeFinder;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -36,7 +34,7 @@ public class ShinsakaiAuto {
      */
     public ResponseData<ShinsakaiAutoDiv> onLoad(ShinsakaiAutoDiv shinDiv) {
         List<ShinsaKayiJidouWaritsukeBusiness> shinsaKayiList
-                = ShinsaKayiJidouWaritsukeFinder.createInstance().getHanteiKekka(ViewStateHolder.get(ViewStateKeys.審査会一覧_開催番号,
+                = ShinsaKayiJidouWaritsukeFinder.createInstance().getHanteiKekka(ViewStateHolder.get(ViewStateKeys.開催番号,
                                 KaigoNinteiShinsakaiParameter.class)).records();
         getHandler(shinDiv).onLoad(shinsaKayiList);
         return createResponse(shinDiv);
@@ -48,18 +46,22 @@ public class ShinsakaiAuto {
      * @param shinDiv ShinsakaiAutoDiv
      * @return ResponseData<ShinsakaiAutoDiv>
      */
-    // TODO 対象者自動割付（DBE510001）バッチ実装しない。
     public ResponseData<ShinsakaiAutoDiv> onClick_ShinsaBtn(ShinsakaiAutoDiv shinDiv) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(shinDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
-        }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs validationMessages = onClick_btnCheck(shinDiv);
-            if (validationMessages.iterator().hasNext()) {
-                return ResponseData.of(shinDiv).addValidationMessages(validationMessages).respond();
-            }
+        ValidationMessageControlPairs validationMessages = onClick_btnCheck(shinDiv);
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(shinDiv).addValidationMessages(validationMessages).respond();
         }
         return createResponseData(shinDiv);
+    }
+
+    /**
+     * 「自動割付を実行する」ボタンを押下時、バッチパラメータを引き渡し、バッチを起動する。<br/>
+     *
+     * @param shinDiv ShinsakaiAutoDiv
+     * @return ResponseData<ShinsakaiAutoDiv>
+     */
+    public ResponseData<TaisyosyaJidoWaritsukeBatchParameter> onClick_btnShinsakaiAuto(ShinsakaiAutoDiv shinDiv) {
+        return ResponseData.of(getHandler(shinDiv).setBatchParameter()).respond();
     }
 
     /**
@@ -70,7 +72,6 @@ public class ShinsakaiAuto {
      */
     public ValidationMessageControlPairs onClick_btnCheck(ShinsakaiAutoDiv shinDiv) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-
         getValidationHandler(shinDiv).審査会データ空チェック(validationMessages);
         getValidationHandler(shinDiv).審査会未選択チェック(validationMessages);
         getValidationHandler(shinDiv).審査会開催チェック(validationMessages);

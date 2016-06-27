@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3060KagoKetteiShukei;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3060KagoKetteiShukei.*;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3060KagoKetteiShukei.hokenshaKubun;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3060KagoKetteiShukei.rirekiNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3060KagoKetteiShukei.toriatsukaiYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3060KagoKetteiShukeiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -24,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 過誤決定集計のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-0980-301 surun
  */
 public class DbT3060KagoKetteiShukeiDac implements ISaveable<DbT3060KagoKetteiShukeiEntity> {
 
@@ -60,6 +64,43 @@ public class DbT3060KagoKetteiShukeiDac implements ISaveable<DbT3060KagoKetteiSh
     }
 
     /**
+     * selectByKey
+     *
+     * @param 取扱年月 FlexibleYearMonth
+     * @param 保険者区分 RString
+     * @return DbT3060KagoKetteiShukeiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3060KagoKetteiShukeiEntity> selectByKey(
+            FlexibleYearMonth 取扱年月,
+            RString 保険者区分) throws NullPointerException {
+        requireNonNull(取扱年月, UrSystemErrorMessages.値がnull.getReplacedMessage("取扱年月"));
+        requireNonNull(保険者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者区分"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3060KagoKetteiShukei.class).
+                where(and(
+                                eq(toriatsukaiYM, 取扱年月),
+                                eq(hokenshaKubun, 保険者区分))).
+                toList(DbT3060KagoKetteiShukeiEntity.class);
+    }
+
+    /**
+     * DbT3078ShokanJuryoininKeiyakushaEntityを登録します。状態によってdelete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int delete(DbT3060KagoKetteiShukeiEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("過誤決定集計エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * 過誤決定集計を全件返します。
      *
      * @return List<DbT3060KagoKetteiShukeiEntity>
@@ -87,4 +128,5 @@ public class DbT3060KagoKetteiShukeiDac implements ISaveable<DbT3060KagoKetteiSh
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
 }

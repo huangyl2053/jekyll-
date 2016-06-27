@@ -44,7 +44,7 @@
         <result property="zenkaiShinseishoKanriNo" column="dbT4121ShinseiRirekiJoho_zenkaiShinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
     </resultMap>
     
-        <select id="getEntity" resultMap="ResultMap_DbT4121ShinseiRirekiJohoEntity">
+        <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT4121ShinseiRirekiJohoEntity">
 <!--	SELECT
 	<include refid="allColumns_DbT4121ShinseiRirekiJoho"/>
 	FROM

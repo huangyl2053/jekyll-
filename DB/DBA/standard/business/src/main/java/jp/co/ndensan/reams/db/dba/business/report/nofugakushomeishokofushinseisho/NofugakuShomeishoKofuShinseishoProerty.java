@@ -21,6 +21,6 @@ public class NofugakuShomeishoKofuShinseishoProerty extends ReportPropertyBase<N
      * コンストラクタです。
      */
     public NofugakuShomeishoKofuShinseishoProerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBB800003.getReportId());
+        super(SubGyomuCode.DBB介護賦課, ReportIdDBA.DBB800003.getReportId());
     }
 }

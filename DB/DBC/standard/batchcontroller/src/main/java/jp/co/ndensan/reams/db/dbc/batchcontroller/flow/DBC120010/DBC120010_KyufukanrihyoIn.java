@@ -16,8 +16,8 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.SharedFileCopyP
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.KyufuKanrihyoInBatchRegistCsvOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.KyufuKanrihyoInBatchRegistGetEditInfoProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.KokuhorenJohoTorikomiBatchParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.IcchiJoken;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KokuhorenIFShoriJotaiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.IcchiJoken;
+import jp.co.ndensan.reams.db.dbc.definition.core.KokuhorenIFShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;

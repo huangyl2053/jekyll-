@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.KyotakuSe
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyotakuServiceKeikakuIchiranDiv extends Panel implements IKyotakuServiceKeikakuIchiranDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -37,6 +38,8 @@ public class KyotakuServiceKeikakuIchiranDiv extends Panel implements IKyotakuSe
     private DvKyotakuMeisaiDiv DvKyotakuMeisai;
     @JsonProperty("DvShuruiGendoKakunin")
     private DvShuruiGendoKakuninDiv DvShuruiGendoKakunin;
+    @JsonProperty("hiddenHihokenshaNo")
+    private RString hiddenHihokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -168,6 +171,24 @@ public class KyotakuServiceKeikakuIchiranDiv extends Panel implements IKyotakuSe
     @JsonProperty("DvShuruiGendoKakunin")
     public void setDvShuruiGendoKakunin(DvShuruiGendoKakuninDiv DvShuruiGendoKakunin) {
         this.DvShuruiGendoKakunin = DvShuruiGendoKakunin;
+    }
+
+    /*
+     * gethiddenHihokenshaNo
+     * @return hiddenHihokenshaNo
+     */
+    @JsonProperty("hiddenHihokenshaNo")
+    public RString getHiddenHihokenshaNo() {
+        return hiddenHihokenshaNo;
+    }
+
+    /*
+     * sethiddenHihokenshaNo
+     * @param hiddenHihokenshaNo hiddenHihokenshaNo
+     */
+    @JsonProperty("hiddenHihokenshaNo")
+    public void setHiddenHihokenshaNo(RString hiddenHihokenshaNo) {
+        this.hiddenHihokenshaNo = hiddenHihokenshaNo;
     }
 
     /*

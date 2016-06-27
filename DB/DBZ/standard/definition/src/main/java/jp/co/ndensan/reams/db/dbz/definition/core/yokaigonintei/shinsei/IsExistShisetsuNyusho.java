@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -11,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 施設入所の有無を表す列挙型です。
  *
- * @reamsid_L DBZ-9999-023 wangchao
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IsExistShisetsuNyusho {
 
@@ -37,7 +32,7 @@ public enum IsExistShisetsuNyusho {
      *
      * @return 施設入所の有無のコード
      */
-    public boolean is入所している() {
+    public boolean is施設入所() {
         return code;
     }
 

@@ -5,11 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2230001;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.DbeBusinessConfigKey;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosa.DbeBusinessConfigKey;
+import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2230001.NinteiChosaTokusokujoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -121,7 +122,7 @@ public class NinteiChosaTokusokujoHakkoHandler {
         if (Decimal.canConvert(認定調査督促期限日数)) {
             div.getYokaigoNinteiChosaTokusokujo().getTxtOverChosaIraiDay().setValue(new Decimal(認定調査督促期限日数.toString()));
         }
-        div.getCcdHokensha().loadHokenshaList();
+        div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         div.getHakkoJoken().getRadChohyoSentaku().setSelectedKey(RADIOBUTTONKEY0);
         div.getYokaigoNinteiChosaTokusokujo().getTxtHakkoDay().setValue(FlexibleDate.getNowDate());
     }

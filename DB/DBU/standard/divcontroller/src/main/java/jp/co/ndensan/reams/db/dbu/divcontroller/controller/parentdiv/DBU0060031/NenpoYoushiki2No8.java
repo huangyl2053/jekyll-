@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataIdentifier;
-import jp.co.ndensan.reams.db.dbu.definition.core.nenpoyoushiki2no8.NenpoYoushiki2No8ViewStateKeys;
+import jp.co.ndensan.reams.db.dbu.definition.core.viewstate.NenpoYoushiki2No8ViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
-import jp.co.ndensan.reams.db.dbu.definition.enumeratedtype.DbuViewStateKey;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.SearchJigyoHokokuNenpo;
+import jp.co.ndensan.reams.db.dbu.definition.core.viewstate.DbuViewStateKey;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpo.SearchJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031.DBU0060031StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031.DBU0060031TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031.NenpoYoushiki2No8Div;
@@ -28,8 +28,8 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -71,8 +71,8 @@ public class NenpoYoushiki2No8 {
     private LasdecCode 市町村コード;
     private RString 様式種類コード;
     private RString 補正フラグ;
-    private FlexibleDate 報告年度;
-    private FlexibleDate 集計年度;
+    private RDate 報告年度;
+    private RDate 集計年度;
     private RString 保険者コード;
     private RString 保険者名称;
 
@@ -85,8 +85,8 @@ public class NenpoYoushiki2No8 {
     public ResponseData<NenpoYoushiki2No8Div> onLoad(NenpoYoushiki2No8Div div) {
         ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity
                 = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
-        報告年度 = new FlexibleDate(entity.get画面報告年度());
-        集計年度 = new FlexibleDate(entity.get画面集計年度());
+        報告年度 = new RDate(entity.get画面報告年度().toString());
+        集計年度 = new RDate(entity.get画面集計年度().toString());
         保険者コード = entity.get保険者コード();
         保険者名称 = entity.get市町村名称();
         補正フラグ = entity.get補正フラグ();

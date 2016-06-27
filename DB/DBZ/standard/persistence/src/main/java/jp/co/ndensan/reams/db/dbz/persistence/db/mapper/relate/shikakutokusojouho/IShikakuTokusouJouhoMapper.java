@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shikakutokusojouho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.shikakutokusojouho.ShikakuTokusoJouhoParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakutokusojouho.ShikakuTokusoJouhoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakutokusojouho.ShikakuTokusouJouhoRelateEntity;
 
 /**

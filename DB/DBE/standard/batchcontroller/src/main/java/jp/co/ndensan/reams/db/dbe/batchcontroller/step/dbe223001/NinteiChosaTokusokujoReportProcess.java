@@ -10,20 +10,19 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe223001.NinteiChosaTokusokujoBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe223001.NinteiChosaTokusokujoReport;
-import jp.co.ndensan.reams.db.dbe.definition.core.DbeMapperInterfaces;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe223001.NinteiChosaTokusokujoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.AtenaKikan;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.NinteiChosaTokusokujoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.dbe223001.NinteiChosaTokusokujoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe223001.IDbe223001RelateMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -71,6 +70,14 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
     private static final RString 昭 = new RString("昭");
     private static final int 一桁 = 1;
 
+    RString 文書番号;
+    NinshoshaSource ninshoshaSource;
+    Map<Integer, RString> 通知文;
+    AtenaKikan atenaKikan;
+
+    private static final RString MYBATIS_SELECT_ID
+            = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe223001.IDbe223001RelateMapper.select要介護認定調査督促状ByKey");
+
     static {
         OUT_SHINSEISHO_KANRINO_LIST = new RString("outShinseishoKanriNoList");
     }
@@ -87,11 +94,12 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
     @Override
     protected void beforeExecute() {
         mapper = getMapper(IDbe223001RelateMapper.class);
+        getKyotsuData();
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(DbeMapperInterfaces.要介護認定調査督促状データの抽出.getFullPath(), paramter.toNinteiChosaTokusokujoMybatisParameter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, paramter.toNinteiChosaTokusokujoMybatisParameter());
     }
 
     @Override
@@ -117,21 +125,24 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
         outShinseishoKanriNoList.setValue(shinseishoKanriNoList);
     }
 
-    private NinteiChosaTokusokujoBodyItem setBodyItem(NinteiChosaTokusokujoRelateEntity entity) {
-
-        RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, REPORT_DBE223001, paramter.getTemp_基準日());
-        NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_DBE223001, paramter.getTemp_基準日(), reportSourceWriter);
-        Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_DBE223001, KamokuCode.EMPTY, パターン番号_1);
+    private void getKyotsuData() {
+        文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, REPORT_DBE223001, paramter.getTemp_基準日());
+        ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_DBE223001, paramter.getTemp_基準日(), reportSourceWriter);
+        通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_DBE223001, KamokuCode.EMPTY, パターン番号_1);
 
         DbT7051KoseiShichosonMasterEntity shichoson = mapper.select市町村コード(paramter.getTemp_保険者コード());
         RString temp_市町村コード = RString.EMPTY;
         if (shichoson != null) {
             temp_市町村コード = shichoson.getShichosonCode().getColumnValue();
         }
-        AtenaKikan atenaKikan = mapper.select宛名機関(paramter.toNinteiChosaTokusokujoMybatisParameter(new LasdecCode(temp_市町村コード)));
+        atenaKikan = mapper.select宛名機関(paramter.toNinteiChosaTokusokujoMybatisParameter(new LasdecCode(temp_市町村コード)));
         if (atenaKikan == null) {
             atenaKikan = new AtenaKikan();
         }
+    }
+
+    private NinteiChosaTokusokujoBodyItem setBodyItem(NinteiChosaTokusokujoRelateEntity entity) {
+
         RString 宛名郵便番号 = RString.EMPTY;
         if (atenaKikan.get宛名郵便番号() != null) {
             宛名郵便番号 = atenaKikan.get宛名郵便番号().getColumnValue();

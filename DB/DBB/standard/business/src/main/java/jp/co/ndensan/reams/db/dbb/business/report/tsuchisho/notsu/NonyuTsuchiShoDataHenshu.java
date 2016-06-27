@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.entity.db.basic.noki.nokikanri.UrT0729NokiKanriEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -929,10 +930,10 @@ public class NonyuTsuchiShoDataHenshu {
             納付書共通.set郵便番号(編集後宛先.get郵便番号());
             納付書共通.set行政区名(編集後宛先.get行政区名());
             納付書共通.set方書(編集後宛先.get方書());
-            納付書共通.set代納人氏名(代納人氏名.getName());
+            納付書共通.set代納人氏名(null == 代納人氏名 ? AtenaMeisho.EMPTY : 代納人氏名.getName());
             納付書共通.set被保険者氏名(編集後宛先.get本人名称().getName());
             if (AtesakiShubetsu.代納人送付先.equals(編集後宛先.get宛先種別()) || AtesakiShubetsu.代納人.equals(編集後宛先.get宛先種別())) {
-                納付書共通.set納付者氏名(代納人氏名.getName().getColumnValue());
+                納付書共通.set納付者氏名(null == 代納人氏名 ? RString.EMPTY : 代納人氏名.getName().getColumnValue());
                 納付書共通.set被代納人氏名(納付書共通.get被保険者氏名().getColumnValue());
             } else {
                 納付書共通.set納付者氏名(空白);

@@ -3,15 +3,54 @@
 <!-- @reamsid_L DBU-0350-020  lijia -->
 <mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigojuminhyo.IKaigoJuminhyoMapper">
 
-    <select id="getKaigoJuminhyoEntity" resultMap="resultMap_KaigoJuminhyoEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuMapperParameter" fetchSize="500">
+    <select resultOrdered="true" id="getKaigoJuminhyoEntity" resultMap="resultMap_KaigoJuminhyoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigojuminhyo.KaigoJuminhyoMapperParameter" fetchSize="500">
         SELECT
         dbT1001HihokenshaDaicho.*,
         dbT4001JukyushaDaicho.*
         FROM
-        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.noDeleted_DbT1001HihokenshaDaicho" />) AS dbT1001HihokenshaDaicho
+        (SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
+        FROM
+        rgdb."DbT1001HihokenshaDaicho"
+        INNER JOIN
+        (SELECT
+        rgdb."DbT1001HihokenshaDaicho"."hihokenshaNo" AS "hihokenshaNo",
+        MAX(rgdb."DbT1001HihokenshaDaicho"."idoYMD") AS "idoYMD",
+        MAX(rgdb."DbT1001HihokenshaDaicho"."edaNo") AS "edaNo"
+        FROM
+        rgdb."DbT1001HihokenshaDaicho"         
+        WHERE
+        rgdb."DbT1001HihokenshaDaicho"."isDeleted" = FALSE
+        GROUP BY rgdb."DbT1001HihokenshaDaicho"."hihokenshaNo"
+        ) DbT1001
+        ON 
+        rgdb."DbT1001HihokenshaDaicho"."hihokenshaNo" = DbT1001."hihokenshaNo"
+        and
+        rgdb."DbT1001HihokenshaDaicho"."idoYMD" = DbT1001."idoYMD"
+        and
+        rgdb."DbT1001HihokenshaDaicho"."edaNo" = DbT1001."edaNo") AS dbT1001HihokenshaDaicho
         FULL JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.noDeleted_DbT4001JukyushaDaicho" />) AS dbT4001JukyushaDaicho
+        (SELECT  
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho" />
+        FROM rgdb."DbT4001JukyushaDaicho"
+        INNER JOIN
+        (SELECT
+        rgdb."DbT4001JukyushaDaicho"."hihokenshaNo" AS "hihokenshaNo",
+        MAX(rgdb."DbT4001JukyushaDaicho"."rirekiNo") AS "rirekiNo",
+        MAX(rgdb."DbT4001JukyushaDaicho"."edaban") AS "edaban"
+        FROM
+        rgdb."DbT4001JukyushaDaicho"
+        WHERE
+        rgdb."DbT4001JukyushaDaicho"."isDeleted" = FALSE
+        GROUP BY rgdb."DbT4001JukyushaDaicho"."hihokenshaNo"
+        ) DbT4001
+        ON
+        rgdb."DbT4001JukyushaDaicho"."hihokenshaNo" = DbT4001."hihokenshaNo"
+        AND
+        rgdb."DbT4001JukyushaDaicho"."rirekiNo" = DbT4001."rirekiNo"
+        AND
+        rgdb."DbT4001JukyushaDaicho"."edaban" = DbT4001."edaban") AS dbT4001JukyushaDaicho
         ON
         dbT1001HihokenshaDaicho."dbT1001HihokenshaDaicho_hihokenshaNo" = dbT4001JukyushaDaicho."dbT4001JukyushaDaicho_hihokenshaNo" 
         WHERE
@@ -24,11 +63,11 @@
         FROM
         rgdb."DbT1001HihokenshaDaicho"
         <where>
-            <if test="taishoKaishiTimestamp != null and taishoKaishiTimestamp != ''">
+            <if test="checkKaishiFlag">
                 rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{taishoKaishiTimestamp} AND
                 rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
             </if>
-            <if test="taishoKaishiTimestamp == null and taishoKaishiTimestamp == ''">
+            <if test="checkShuryoFlag">
                 rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
             </if>
         </where>
@@ -39,12 +78,12 @@
         FROM
         rgdb."DbT4001JukyushaDaicho"
         <where>
-            rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" = '0'
-            <if test="taishoKaishiTimestamp != null and taishoKaishiTimestamp != ''">
+            rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" <![CDATA[<>]]> '0'
+            <if test="checkKaishiFlag">
                 AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{taishoKaishiTimestamp}
                 AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
             </if>
-            <if test="taishoKaishiTimestamp == null and taishoKaishiTimestamp == ''">
+            <if test="checkShuryoFlag">
                 AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
             </if>
         </where>
@@ -61,11 +100,11 @@
         FROM
         rgdb."DbT1001HihokenshaDaicho"
         <where>
-            <if test="taishoKaishiTimestamp != null and taishoKaishiTimestamp != ''">
+            <if test="checkKaishiFlag">
                 rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{taishoKaishiTimestamp} AND
                 rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
             </if>
-            <if test="taishoKaishiTimestamp == null and taishoKaishiTimestamp == ''">
+            <if test="checkShuryoFlag">
                 rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
             </if>
         </where>
@@ -76,12 +115,12 @@
         FROM
         rgdb."DbT4001JukyushaDaicho"
         where
-        rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" = '0'
-        <if test="taishoKaishiTimestamp != null and taishoKaishiTimestamp != ''">
+        rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" <![CDATA[<>]]> '0'
+        <if test="checkKaishiFlag">
             AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{taishoKaishiTimestamp}
             AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
         </if>
-        <if test="taishoKaishiTimestamp == null and taishoKaishiTimestamp == ''">
+        <if test="checkShuryoFlag">
             AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
         </if>
         ) AS dbT4001Jukyusha

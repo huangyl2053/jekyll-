@@ -200,7 +200,7 @@ and open the template in the editor.
     </resultMap>
 
     <!--被保険者台帳の異動者情報取得-->
-    <select id="getHihokenshaDaichoIdo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getHihokenshaDaichoIdo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT 
         DbT1001."hihokenshaNo",
         DbT1001."shikibetsuCode",
@@ -226,7 +226,7 @@ and open the template in the editor.
     </select>
       
     <!--受給者台帳異動情報の取得-->
-    <select id="getJukyushaDaichoIdo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getJukyushaDaichoIdo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
         DbT4001."hihokenshaNo",
         DbT4001."shikibetsuCode",
@@ -254,7 +254,7 @@ and open the template in the editor.
     </select>
       
     <!--年齢到達予定者情報の取得-->
-    <select id="getNenreiTotatsuYotesha" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getNenreiTotatsuYotesha" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
         PSM."shikibetsuCode",
         PSM."genLasdecCode" AS "shichosonCode",
@@ -684,7 +684,7 @@ and open the template in the editor.
     </update>
     
     <!--生年月日の値がない場合、対象情報の取得-->
-    <select id="getTaishoJoho1" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
+    <select resultOrdered="true" id="getTaishoJoho1" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
         Tmp."hihokenshaNo",
         Tmp."shikibetsuCode",
@@ -719,7 +719,7 @@ and open the template in the editor.
     </select>
     
     <!--一時テーブルから生年月日の値があるデータを取得します-->
-    <select id="get生年月日ある" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
+    <select resultOrdered="true" id="get生年月日ある" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
         SELECT
             Tmp."hihokenshaNo",
             Tmp."shikibetsuCode",
@@ -732,7 +732,7 @@ and open the template in the editor.
     </select>
     
     <!--生年月日の値がある場合、被保険者台帳管理にチェック-->
-    <select id="get最新被保険者1" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
+    <select resultOrdered="true" id="get最新被保険者1" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
         SELECT
             DbT1001."shikibetsuCode"
         FROM(
@@ -751,7 +751,7 @@ and open the template in the editor.
     </select>
     
     <!--生年月日の値がある場合、被保険者台帳管理に再チェック-->
-    <select id="get最新被保険者2" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
+    <select resultOrdered="true" id="get最新被保険者2" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
         SELECT
             DbT1001."shikibetsuCode"
         FROM(
@@ -767,7 +767,7 @@ and open the template in the editor.
     </select>
     
     <!--生年月日の値がある場合、適用除外者のチェック-->
-    <select id="get最新適用除外者1" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
+    <select resultOrdered="true" id="get最新適用除外者1" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
         SELECT
             DbT1002."shikibetsuCode"
         FROM(
@@ -783,7 +783,7 @@ and open the template in the editor.
     </select>
     
     <!--生年月日の値がある場合、適用除外者のチェック-->
-    <select id="get最新適用除外者2" resultMap="resultMap_getIkkatsuHakkoRelateEntity"  parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="get最新適用除外者2" resultMap="resultMap_getIkkatsuHakkoRelateEntity"  parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
             DbT1002."shikibetsuCode"
         FROM(
@@ -802,7 +802,7 @@ and open the template in the editor.
     </select>
     
     <!--生年月日の値がある場合、他市町村住所地特例のチェック-->
-    <select id="get最新他市町村住所地特例1" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
+    <select resultOrdered="true" id="get最新他市町村住所地特例1" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
         SELECT
             DbT1003."shikibetsuCode"
         FROM(
@@ -818,7 +818,7 @@ and open the template in the editor.
     </select>
     
     <!--生年月日の値がある場合、他市町村住所地特例のチェック-->
-    <select id="get最新他市町村住所地特例2" resultMap="resultMap_getIkkatsuHakkoRelateEntity"  parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="get最新他市町村住所地特例2" resultMap="resultMap_getIkkatsuHakkoRelateEntity"  parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
             DbT1003."shikibetsuCode"
         FROM(
@@ -837,7 +837,7 @@ and open the template in the editor.
     </select>
     
     <!--取得した対象データは「転入保留対象者」テーブルに存在しない者が対象を取得します-->
-    <select id="get転入保留対象者" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
+    <select resultOrdered="true" id="get転入保留対象者" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
             "shikibetsuCode"
         FROM
@@ -845,7 +845,7 @@ and open the template in the editor.
     </select>
     
     <!--チェック用データの処理-->
-    <select id="getCheckTmpHihoken" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
+    <select resultOrdered="true" id="getCheckTmpHihoken" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
         SELECT
         "hihokenshaNo",               
         "shikibetsuCode",
@@ -857,7 +857,7 @@ and open the template in the editor.
     </select>
       
     <!--一括発行の場合、対象情報を取得します。-->
-    <select id="getIkkatsuShoriDateKanri" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getIkkatsuShoriDateKanri" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
         "hihokenshaNo",
         "hakkoShoriTimestamp"
@@ -872,7 +872,7 @@ and open the template in the editor.
     </select>
       
     <!--画面で「再発行する」をチェックする場合、対象情報を取得します。-->
-    <select id="getCheckShoriDateKanri" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getCheckShoriDateKanri" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT 
         DbT7037."hihokenshaNo"
         FROM(
@@ -939,7 +939,7 @@ and open the template in the editor.
     </update>
     
     <!--被保険者台帳の情報を取得します。-->
-    <select id="getHihokenshaDaicho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
+    <select resultOrdered="true" id="getHihokenshaDaicho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
         DbT1001Joho."hihokenshaNo",
         DbT1001Joho."shikibetsuCode",
@@ -1079,7 +1079,7 @@ and open the template in the editor.
     </update>
       
     <!--介護保険施設入退所の情報を取得します。-->
-    <select id="getKaigoHokenShisetsuNyutaisho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
+    <select resultOrdered="true" id="getKaigoHokenShisetsuNyutaisho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
         Tmp."hihokenshaNo",
         DbT1004Joho."shikibetsuCode",
@@ -1154,7 +1154,7 @@ and open the template in the editor.
     </update>
       
     <!--受給者台帳の情報を取得します。-->
-    <select id="getJukyushaDaicho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
+    <select resultOrdered="true" id="getJukyushaDaicho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
         DbT4001Joho."shichosonCode",
         DbT4001Joho."hihokenshaNo",
@@ -1503,7 +1503,7 @@ and open the template in the editor.
     </update>
         
     <!--要介護認定結果情報を取得します。-->
-    <select id="getNinteiKekkaJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getNinteiKekkaJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
         Tmp."hihokenshaNo",
         DbT4102Joho."shinseishoKanriNo",
@@ -1554,7 +1554,7 @@ and open the template in the editor.
     </update>
       
     <!--支払方法変更情報を取得します-->
-    <select id="getShiharaiHohoHenko" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
+    <select resultOrdered="true" id="getShiharaiHohoHenko" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
         DbT4021Joho."shoKisaiHokenshaNo",
         DbT4021Joho."hihokenshaNo",
@@ -1720,7 +1720,7 @@ and open the template in the editor.
     </update>
         
     <!--居宅給付計画届出情報の取得-->
-    <select id="getKyotakuKeikakuTodokede" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
+    <select resultOrdered="true" id="getKyotakuKeikakuTodokede" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
         DbT3005Kyotaku."hihokenshaNo",
         DbT3005Kyotaku."taishoYM",
@@ -1775,7 +1775,7 @@ and open the template in the editor.
     </select>
       
     <!--居宅給付計画事業者作成情報の取得-->
-    <select id="getKyotakuKeikakuJigyoshaSakusei" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getKyotakuKeikakuJigyoshaSakusei" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
         DbT3005Joho."hihokenshaNo",
         DbT3005Joho."taishoYM",
@@ -1870,7 +1870,7 @@ and open the template in the editor.
     </select>
       
     <!--居宅給付計画自己作成情報の取得-->
-    <select id="getKyotakuKeikakuJikoSakusei" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getKyotakuKeikakuJikoSakusei" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
         DbT3005Joho."hihokenshaNo",
         DbT3005Joho."taishoYM",
@@ -1985,7 +1985,7 @@ and open the template in the editor.
     </update>
         
     <!--本人情報取得-->
-    <select id="getHonninJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getHonninJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT 
         Tmp."hihokenshaNo",
         PSM."shikibetsuCode",
@@ -2024,7 +2024,7 @@ and open the template in the editor.
     </update>
       
     <!--送付先情報取得-->
-    <select id="getSofusakiJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getSofusakiJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT 
         Tmp."hihokenshaNo" ,
         psmAtesaki."kannaiKangaiKubun",
@@ -2053,7 +2053,7 @@ and open the template in the editor.
     </update>
       
     <!-- 被保険者証用データを取得します。-->
-    <select id="getHihokenshayo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
+    <select resultOrdered="true" id="getHihokenshayo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
         "hihokenshaNo",
         "shikibetsuCode",
@@ -2241,7 +2241,7 @@ and open the template in the editor.
     </select>
       
     <!-- 被保険者証一覧表用を取得します。-->
-    <select id="getHihokenshaIchiran" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
+    <select resultOrdered="true" id="getHihokenshaIchiran" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
         "hihokenshaNo",
         "shikibetsuCode",
@@ -2424,10 +2424,13 @@ and open the template in the editor.
         "shisetyuJotaiFlag"
         FROM
         "TmpHihokenshasho_Ichi"
+        <if test="orderbyFlag">
+            ${orderby}
+        </if> 
     </select>
       
     <!--同一被保険者番号の最大履歴番号を取得します。 -->
-    <select id="getSaishinrirekiNo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getSaishinrirekiNo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT 
             "rirekiNo"
         FROM 
@@ -2500,7 +2503,7 @@ and open the template in the editor.
     </update>
     
      <!-- 一時テーブル情報を取得します -->
-    <select id="getTmpHihokenshasho_Ichi" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
+    <select resultOrdered="true" id="getTmpHihokenshasho_Ichi" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
             "hihokenshaNo",
             "shikibetsuCode"

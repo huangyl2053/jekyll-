@@ -12,7 +12,7 @@
     </resultMap>
 
     <select id="selectChosyuHoho" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri.ChosyuHohoHenkoMapperParameter" 
-     resultMap="ChoshuHohoEntity"  fetchSize="500" >
+     resultMap="ChoshuHohoEntity"  fetchSize="500"  resultOrdered="true">
           SELECT
              T1.*,
              T2."choshuHoho3gat" AS "choshuHoho3gat"

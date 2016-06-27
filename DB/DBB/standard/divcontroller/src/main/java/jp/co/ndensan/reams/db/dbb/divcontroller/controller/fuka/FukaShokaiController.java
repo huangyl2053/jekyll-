@@ -10,15 +10,15 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.business.viewstate.MaeRirekiKey;
-import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.DbbViewStateKey;
+import jp.co.ndensan.reams.db.dbb.definition.core.viewstate.DbbViewStateKey;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShoriName;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.SanteiState;
+import jp.co.ndensan.reams.db.dbz.definition.core.fuka.SanteiState;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.ExceptionSuppliers;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
@@ -279,7 +279,7 @@ public final class FukaShokaiController {
      */
     public static SanteiState judgeSanteiState(Fuka fuka) {
         Optional<ShoriDateKanri> modeloid = Optional.ofNullable(new ShoriDateKanriManager().get処理日付管理マスタ(
-                SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.toRString(),
+                SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(),
                 SERIAL_NUMBER1, fuka.get賦課年度(), SERIAL_NUMBER1));
 
         if (!modeloid.isPresent()) {

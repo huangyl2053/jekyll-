@@ -22,6 +22,6 @@ public class HokenryoGenmenChoshuYoyuShinseishoProerty extends
      * コンストラクタです。
      */
     public HokenryoGenmenChoshuYoyuShinseishoProerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBB800002.getReportId());
+        super(SubGyomuCode.DBB介護賦課, ReportIdDBA.DBB800002.getReportId());
     }
 }

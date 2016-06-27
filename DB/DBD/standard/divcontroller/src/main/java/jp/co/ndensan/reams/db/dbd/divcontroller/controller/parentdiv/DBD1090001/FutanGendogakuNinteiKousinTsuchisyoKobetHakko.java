@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.ShinseiRiyuKubun;
-import jp.co.ndensan.reams.db.dbd.definition.core.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090001.DBD1090001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090001.DBD1090001TransitionEventName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090001.FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv;
@@ -42,7 +42,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 負担限度額認定更新のお知らせ通知書個別発行のクラスです。
  *
- * @reamsid_L DBD-3570-010 wangcaho
+ * @reamsid_L DBD-3570-010 wangchao
  */
 public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
 
@@ -57,7 +57,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         ShikibetsuCode 識別コード = 資格対象者.get識別コード();
-        div.getCcdKaigoAtenaInfoDiv().onLoad(識別コード);
+        div.getCcdKaigoAtenaInfoDiv().initialize(識別コード);
 
         if (new RString(DbdInformationMessages.受給共通_被保データなし.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())) {
@@ -72,16 +72,14 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
 
             return ResponseData.of(div).addMessage(DbdInformationMessages.受給共通_被保データなし.getMessage()).respond();
         } else {
-            div.getCcdKaigoShikakuKihonDiv().onLoad(被保険者番号);
+            div.getCcdKaigoShikakuKihonDiv().initialize(被保険者番号);
         }
 
         div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getCcdBunshoBangoInputDiv()
                 .initialize(ReportIdDBD.DBDPR12002_1_1.getReportId());
 
-        getHandler().get介護負担限度額認定(被保険者番号, 識別コード);
-
-        ArrayList<FutanGendogakuNintei> futanGendogakuNinteiList
-                = ViewStateHolder.get(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.KgHoukenFutanGendogakuNintei.リストキー, ArrayList.class);
+        ArrayList<FutanGendogakuNintei> futanGendogakuNinteiList = getHandler().get介護負担限度額認定(被保険者番号, 識別コード);
+        ViewStateHolder.put(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.KgHoukenFutanGendogakuNintei.リストキー, futanGendogakuNinteiList);
         if (!futanGendogakuNinteiList.isEmpty()) {
             set負担限度額認定エリア(div, futanGendogakuNinteiList.get(futanGendogakuNinteiList.size() - 1));
             div.setListIndex(new RString(Integer.toString(futanGendogakuNinteiList.size() - 1)));
@@ -139,12 +137,18 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
     }
 
     private void set負担限度額認定エリア(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div, FutanGendogakuNintei futanGendogakuNintei) {
-        div.getHihokenshashoHakkoTaishoshaJoho().getTxtKeqteiKubunn().setValue(KetteiKubun.toValue(futanGendogakuNintei.get決定区分()).get名称());
+        div.getHihokenshashoHakkoTaishoshaJoho().getTxtKeqteiKubunn().setValue(
+                futanGendogakuNintei.get決定区分() == null || futanGendogakuNintei.get決定区分().isEmpty()
+                ? RString.EMPTY : KetteiKubun.toValue(futanGendogakuNintei.get決定区分()).get名称());
         div.getHihokenshashoHakkoTaishoshaJoho().getTxtSinnseiRiyuu().setValue(
-                ShinseiRiyuKubun.toValue(futanGendogakuNintei.get申請理由区分()).get名称());
+                futanGendogakuNintei.get申請理由区分() == null || futanGendogakuNintei.get申請理由区分().isEmpty()
+                ? RString.EMPTY : ShinseiRiyuKubun.toValue(futanGendogakuNintei.get申請理由区分()).get名称());
         div.getHihokenshashoHakkoTaishoshaJoho().getTxtFutanDankai().setValue(
-                RiyoshaFutanDankai.toValue(futanGendogakuNintei.get利用者負担段階()).get名称());
-        div.getHihokenshashoHakkoTaishoshaJoho().getTxtKyusoti().setValue(KyuSochishaKubun.toValue(futanGendogakuNintei.get旧措置者区分()).get名称());
+                futanGendogakuNintei.get利用者負担段階() == null || futanGendogakuNintei.get利用者負担段階().isEmpty()
+                ? RString.EMPTY : RiyoshaFutanDankai.toValue(futanGendogakuNintei.get利用者負担段階()).get名称());
+        div.getHihokenshashoHakkoTaishoshaJoho().getTxtKyusoti().setValue(
+                futanGendogakuNintei.get旧措置者区分() == null || futanGendogakuNintei.get旧措置者区分().isEmpty()
+                ? RString.EMPTY : KyuSochishaKubun.toValue(futanGendogakuNintei.get旧措置者区分()).get名称());
         if (futanGendogakuNintei.is境界層該当者区分()) {
             div.getHihokenshashoHakkoTaishoshaJoho().getTxtKyoukaiso().setValue(new RString("該当"));
         } else {

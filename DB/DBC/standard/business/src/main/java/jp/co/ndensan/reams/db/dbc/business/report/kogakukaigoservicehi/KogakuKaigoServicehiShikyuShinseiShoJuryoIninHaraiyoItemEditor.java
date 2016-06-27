@@ -46,6 +46,7 @@ public class KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItemEditor
         source.yubinNo = item.getYubinNo();
         source.jusho = item.getJusho();
         source.remban = item.getRemban();
+        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
         return source;
     }
 }

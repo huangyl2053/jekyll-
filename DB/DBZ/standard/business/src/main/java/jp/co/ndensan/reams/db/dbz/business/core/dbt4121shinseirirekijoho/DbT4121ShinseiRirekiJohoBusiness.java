@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4121ShinseiRirekiJohoEntity
 /**
  * 申請履歴情報クラスです。
  *
- * @reamsid_L DBE-1300-110 yaodongsheng
+ * @reamsid_L DBZ-1300-110 yaodongsheng
  */
 public class DbT4121ShinseiRirekiJohoBusiness {
 

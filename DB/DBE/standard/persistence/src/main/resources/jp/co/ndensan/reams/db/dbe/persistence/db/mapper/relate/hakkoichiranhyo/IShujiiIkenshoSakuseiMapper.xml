@@ -22,7 +22,7 @@
         <result property="主治医名" column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />    
     </resultMap>
     
-    <select id="get主治医意見書作成依頼発行一覧表" resultMap="resultMap_ShujiiIkenshoSakusei" 
+    <select resultOrdered="true" id="get主治医意見書作成依頼発行一覧表" resultMap="resultMap_ShujiiIkenshoSakusei" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.ShujiiIkenshoSakuseiMybitisParamter" fetchSize="500">
         SELECT
             DbT5301."iraishoShutsuryokuYMD",

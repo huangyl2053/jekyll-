@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * KensakuKekkaIchiran のクラスファイル
  *
- * @reamsid_L DBE-1300-130 xuyannan
+ * @reamsid_L DBZ-1300-130 xuyannan
  */
 public class KensakuKekkaIchiranDiv extends Panel {
 

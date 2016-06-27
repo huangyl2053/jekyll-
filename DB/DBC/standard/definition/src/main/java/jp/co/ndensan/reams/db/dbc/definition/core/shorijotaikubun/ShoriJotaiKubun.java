@@ -25,7 +25,11 @@ public enum ShoriJotaiKubun {
     /**
      * コード:9 名称:処理なし 略称:定義なし
      */
-    処理なし("9", "処理なし");
+    処理なし("9", "処理なし"),
+    /**
+     * コード:5 名称:再処理前 略称:定義なし
+     */
+    再処理前("5", "再処理前");
 
     private final RString code;
     private final RString fullName;

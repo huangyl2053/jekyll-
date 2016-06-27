@@ -10,35 +10,29 @@ and open the template in the editor.
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nyutaishoshakanri.INyutaishoshaKanriMapper">
 
 <!--介護保険施設情報件数を取得します-->
-    <select id="getHihokenshaDaichoCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
+    <select resultOrdered="true" id="getHihokenshaDaichoCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
         SELECT  
             COUNT(*)
         FROM     
-            rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004,
             (SELECT 
                  DbT1001HihokenshaDaicho.*, 
-                 ROW_NUMBER() over(partition by "shikibetsuCode","jushochitokureiTekiyoYMD" order by "shikibetsuCode" asc,
-                 "jushochitokureiTekiyoYMD" asc,"idoYMD" desc,"edaNo" desc) as rrkno
+                 ROW_NUMBER() over(partition by "shikibetsuCode","shikakuShutokuYMD" order by "shikibetsuCode" asc,
+                 "shikakuShutokuYMD" asc,"idoYMD" desc,"edaNo" desc) as rrkno
            FROM
                rgdb."DbT1001HihokenshaDaicho" AS DbT1001HihokenshaDaicho
            WHERE
                "logicalDeletedFlag" = FALSE) AS DbT1001        
         WHERE    
-            DbT1004."nyushoYMD" = #{入所年月日} 
-            AND DbT1004."taishoYMD" =  #{退所年月日}
-            AND DbT1004."nyushoShisetsuShurui" = #{入所施設種類}
-            AND DbT1004."shikibetsuCode" = DbT1001."shikibetsuCode"
-            AND DbT1004."nyushoYMD" <![CDATA[>=]]> DbT1001."shikakuSoshitsuYMD"
-            AND DbT1004."taishoYMD" <![CDATA[<=]]> DbT1001."shikakuShutokuYMD"
-            AND DbT1001."logicalDeletedFlag" <![CDATA[<>]]> TRUE
+                DbT1001."shikakuSoshitsuYMD" <![CDATA[<=]]> #{入所年月日} 
+            AND DbT1001."shikakuShutokuYMD" <![CDATA[>=]]> #{退所年月日}
+            AND DbT1001.rrkno = 1
     </select>
     
     <!--適用除外施設情報件数を取得します-->
-    <select id="getTekiyoJogaishaCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
+    <select resultOrdered="true" id="getTekiyoJogaishaCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
         SELECT  
             COUNT(*)
         FROM      
-            rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004,
             (SELECT 
                 DbT1002TekiyoJogaisha.*, 
                 ROW_NUMBER() over(partition by "shikibetsuCode","tekiyoYMD" order by "shikibetsuCode" asc,
@@ -48,21 +42,16 @@ and open the template in the editor.
             WHERE
                 "logicalDeletedFlag" = FALSE) AS DbT1002        
         WHERE    
-            DbT1004."nyushoYMD" = #{入所年月日} 
-        AND DbT1004."taishoYMD" =  #{退所年月日}
-        AND DbT1004."nyushoShisetsuShurui" = #{入所施設種類}
-        AND DbT1004."shikibetsuCode" = DbT1002."shikibetsuCode"
-        AND DbT1004."nyushoYMD" <![CDATA[>=]]> DbT1002."kaijoYMD"
-        AND DbT1004."taishoYMD" <![CDATA[<=]]> DbT1002."tekiyoYMD"
-        AND DbT1002."logicalDeletedFlag" <![CDATA[<>]]> TRUE
+            DbT1002."kaijoYMD" <![CDATA[<=]]> #{入所年月日}
+        AND DbT1002."tekiyoYMD" <![CDATA[>=]]> #{退所年月日}
+        AND DbT1002.rrkno = 1
     </select>
       
     <!--住所地特例対象施設情報件数を取得します-->
-    <select id="getTashichosonJushochiTokureiCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
+    <select resultOrdered="true" id="getTashichosonJushochiTokureiCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
         SELECT  
             COUNT(*)
         FROM      
-            rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004,
             (SELECT 
                     DbT1003TashichosonJushochiTokurei.*, 
                     ROW_NUMBER() over(partition by "shikibetsuCode","tekiyoYMD" order by "shikibetsuCode" asc,
@@ -72,12 +61,8 @@ and open the template in the editor.
             WHERE
                 "logicalDeletedFlag" = FALSE) AS DbT1003        
         WHERE    
-            DbT1004."nyushoYMD" = #{入所年月日} 
-        AND DbT1004."taishoYMD" =  #{退所年月日}
-        AND DbT1004."nyushoShisetsuShurui" = #{入所施設種類}
-        AND DbT1004."shikibetsuCode" = DbT1003."shikibetsuCode"
-        AND DbT1004."nyushoYMD" <![CDATA[>=]]> DbT1003."kaijoYMD"
-        AND DbT1004."taishoYMD" <![CDATA[<=]]> DbT1003."tekiyoYMD"
-        AND DbT1003."logicalDeletedFlag" <![CDATA[<>]]> TRUE
+            DbT1003."kaijoYMD" <![CDATA[<=]]> #{入所年月日}
+        AND DbT1003."tekiyoYMD" <![CDATA[>=]]> #{退所年月日}
+        AND DbT1003.rrkno = 1
     </select>
 </mapper>

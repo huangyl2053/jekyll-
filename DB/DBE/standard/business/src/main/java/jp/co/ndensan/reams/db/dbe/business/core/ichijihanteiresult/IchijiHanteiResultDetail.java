@@ -13,10 +13,10 @@ import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikeikoku.IchijiHantei
 import jp.co.ndensan.reams.db.dbe.business.core.ninchishokoreishajiritsudo.NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiChukanHyokaKomokuTokuten;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiKijunTime;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KariIchijiHanteiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItem;
+import jp.co.ndensan.reams.db.dbe.definition.core.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.NichijoSeikatsuJiritsudoKumiawaseItem;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

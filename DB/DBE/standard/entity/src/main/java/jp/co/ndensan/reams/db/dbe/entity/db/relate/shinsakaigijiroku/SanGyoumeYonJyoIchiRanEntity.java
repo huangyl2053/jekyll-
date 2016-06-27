@@ -10,31 +10,31 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護認定審査会開催結果情報Entityクラスです。
  *
- * @reamsid_L DBE-0180-030 wangkun
+ * @reamsid_L DBE-0170-040 wangkun
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
 public class SanGyoumeYonJyoIchiRanEntity {
 
-    private RString listShinseishubetsuCount_1;
-    private RString listShinseishubetsuCount_2;
-    private RString listShinseishubetsuCount_3;
-    private RString listShinseishubetsuCount_4;
+    private RString 一行目;
+    private RString 二行目;
+    private RString 三行目;
+    private RString 四行目;
 
     /**
      * 新規、更新、区変の件数を設定します。
      *
-     * @param listShinseishubetsuCount_1 listShinseishubetsuCount_1
-     * @param listShinseishubetsuCount_2 listShinseishubetsuCount_2
-     * @param listShinseishubetsuCount_3 listShinseishubetsuCount_3
-     * @param listShinseishubetsuCount_4 listShinseishubetsuCount_4
+     * @param 一行目 一行目
+     * @param 二行目 二行目
+     * @param 三行目 三行目
+     * @param 四行目 四行目
      */
-    public SanGyoumeYonJyoIchiRanEntity(RString listShinseishubetsuCount_1, RString listShinseishubetsuCount_2,
-            RString listShinseishubetsuCount_3, RString listShinseishubetsuCount_4) {
-        this.listShinseishubetsuCount_1 = listShinseishubetsuCount_1;
-        this.listShinseishubetsuCount_2 = listShinseishubetsuCount_2;
-        this.listShinseishubetsuCount_3 = listShinseishubetsuCount_3;
-        this.listShinseishubetsuCount_4 = listShinseishubetsuCount_4;
+    public SanGyoumeYonJyoIchiRanEntity(RString 一行目, RString 二行目,
+            RString 三行目, RString 四行目) {
+        this.一行目 = 一行目;
+        this.二行目 = 二行目;
+        this.三行目 = 三行目;
+        this.四行目 = 四行目;
     }
 }

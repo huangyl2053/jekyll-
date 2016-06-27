@@ -4,19 +4,25 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1170001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxYear;
 
 /**
- * ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiran のクラスファイル 
- * 
- * @author 自動生成
+ * ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiran のクラスファイル
+ *
+ * @reamsid_L DBB-1700-010 zhangrui
  */
 public class ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -79,7 +85,7 @@ public class ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblChushutsuStYMD(Label lblChushutsuStYMD) {
+    public void setLblChushutsuStYMD(Label lblChushutsuStYMD) {
         this.getChushutsuJoken().setLblChushutsuStYMD(lblChushutsuStYMD);
     }
 
@@ -89,7 +95,7 @@ public class ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblChushutsuStTime(Label lblChushutsuStTime) {
+    public void setLblChushutsuStTime(Label lblChushutsuStTime) {
         this.getChushutsuJoken().setLblChushutsuStTime(lblChushutsuStTime);
     }
 
@@ -99,7 +105,7 @@ public class ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblChushutsuEdYMD(Label lblChushutsuEdYMD) {
+    public void setLblChushutsuEdYMD(Label lblChushutsuEdYMD) {
         this.getChushutsuJoken().setLblChushutsuEdYMD(lblChushutsuEdYMD);
     }
 
@@ -109,7 +115,7 @@ public class ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblChushutsuEdTime(Label lblChushutsuEdTime) {
+    public void setLblChushutsuEdTime(Label lblChushutsuEdTime) {
         this.getChushutsuJoken().setLblChushutsuEdTime(lblChushutsuEdTime);
     }
 
@@ -119,7 +125,7 @@ public class ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChushutsuKijunNendo(TextBoxYear txtChushutsuKijunNendo) {
+    public void setTxtChushutsuKijunNendo(TextBoxYear txtChushutsuKijunNendo) {
         this.getChushutsuJoken().setTxtChushutsuKijunNendo(txtChushutsuKijunNendo);
     }
 
@@ -129,7 +135,7 @@ public class ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChushutsuStYMD(TextBoxDate txtChushutsuStYMD) {
+    public void setTxtChushutsuStYMD(TextBoxDate txtChushutsuStYMD) {
         this.getChushutsuJoken().setTxtChushutsuStYMD(txtChushutsuStYMD);
     }
 
@@ -139,7 +145,7 @@ public class ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChushutsuStTime(TextBoxTime txtChushutsuStTime) {
+    public void setTxtChushutsuStTime(TextBoxTime txtChushutsuStTime) {
         this.getChushutsuJoken().setTxtChushutsuStTime(txtChushutsuStTime);
     }
 
@@ -149,7 +155,7 @@ public class ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKara(Label lblKara) {
+    public void setLblKara(Label lblKara) {
         this.getChushutsuJoken().setLblKara(lblKara);
     }
 
@@ -159,7 +165,7 @@ public class ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChushutsuEdYMD(TextBoxDate txtChushutsuEdYMD) {
+    public void setTxtChushutsuEdYMD(TextBoxDate txtChushutsuEdYMD) {
         this.getChushutsuJoken().setTxtChushutsuEdYMD(txtChushutsuEdYMD);
     }
 
@@ -169,7 +175,7 @@ public class ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChushutsuEdTime(TextBoxTime txtChushutsuEdTime) {
+    public void setTxtChushutsuEdTime(TextBoxTime txtChushutsuEdTime) {
         this.getChushutsuJoken().setTxtChushutsuEdTime(txtChushutsuEdTime);
     }
 
@@ -179,7 +185,7 @@ public class ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnChushutsu(Button btnChushutsu) {
+    public void setBtnChushutsu(Button btnChushutsu) {
         this.getChushutsuJoken().setBtnChushutsu(btnChushutsu);
     }
 
@@ -189,7 +195,7 @@ public class ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgTaishoshaIchiran(DataGrid<dgTaishoshaIchiran_Row> dgTaishoshaIchiran) {
+    public void setDgTaishoshaIchiran(DataGrid<dgTaishoshaIchiran_Row> dgTaishoshaIchiran) {
         this.getTaishoshaIchiran().setDgTaishoshaIchiran(dgTaishoshaIchiran);
     }
 

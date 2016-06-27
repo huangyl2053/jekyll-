@@ -4,19 +4,18 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0030001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
 /**
- * FukaKakuteiBatchParameter のクラスファイル
- *
+ * FukaKakuteiBatchParameter のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class FukaKakuteiBatchParameterDiv extends PanelBatchParameter {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,6 +28,8 @@ public class FukaKakuteiBatchParameterDiv extends PanelBatchParameter {
     private FukaKeisanShoriNaiyoDiv FukaKeisanShoriNaiyo;
     @JsonProperty("処理名")
     private RString 処理名;
+    @JsonProperty("基準日時")
+    private RString 基準日時;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -88,6 +89,24 @@ public class FukaKakuteiBatchParameterDiv extends PanelBatchParameter {
     @JsonProperty("処理名")
     public void set処理名(RString 処理名) {
         this.処理名 = 処理名;
+    }
+
+    /*
+     * get基準日時
+     * @return 基準日時
+     */
+    @JsonProperty("基準日時")
+    public RString get基準日時() {
+        return 基準日時;
+    }
+
+    /*
+     * set基準日時
+     * @param 基準日時 基準日時
+     */
+    @JsonProperty("基準日時")
+    public void set基準日時(RString 基準日時) {
+        this.基準日時 = 基準日時;
     }
 
     // </editor-fold>

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisanteitsuchishohakko.BatchFuchoKariSanteiEntity;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 
 /**
  * バッチ出力帳票一覧Entityクラスです。
@@ -17,14 +17,18 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisanteitsuchishoha
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class BatchFuchoKariSanteiResult {
 
-    private BatchFuchoKariSanteiEntity entity;
+    private ReportId 帳票ID;
+    private long 出力順ID;
 
     /**
      * コンストラクタです。
      *
-     * @param entity entity
+     * @param 帳票ID ReportId
+     * @param 出力順ID long
      */
-    public BatchFuchoKariSanteiResult(BatchFuchoKariSanteiEntity entity) {
-        this.entity = entity;
+    public BatchFuchoKariSanteiResult(ReportId 帳票ID,
+            long 出力順ID) {
+        this.帳票ID = 帳票ID;
+        this.出力順ID = 出力順ID;
     }
 }

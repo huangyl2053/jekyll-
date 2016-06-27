@@ -20,9 +20,9 @@
         <result property="hihokennshaKubunCode"    column="DbT1001Hiho_hihokennshaKubunCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
-    <select id="getTorokuNenreiToutatsuYoteishaCheckList"
+    <select resultOrdered="true" id="getTorokuNenreiToutatsuYoteishaCheckList"
             resultMap="resultMap_NenreiToutatsuYoteishaCheckListEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter" fetchSize="500">
         SELECT
         PSM."shikibetsuCode" AS "PSM_shikibetsuCode",
         PSM."meisho" AS "PSM_meisho",
@@ -36,7 +36,8 @@
         PSM."juminShubetsuCode" AS "PSM_juminShubetsuCode",
         DbT1001Hiho."shichosonCode" AS "DbT1001Hiho_shichosonCode",
         DbT1001Hiho."hihokenshaNo" AS "DbT1001Hiho_hihokenshaNo",
-        DbT1001Hiho."jushochiTokureiFlag" AS "DbT1001Hiho_jushochiTokureiFlag"
+        DbT1001Hiho."jushochiTokureiFlag" AS "DbT1001Hiho_jushochiTokureiFlag",
+        DbT1001Hiho."hihokennshaKubunCode" AS "DbT1001Hiho_hihokennshaKubunCode"
         FROM
         rgdb."DbT1001HihokenshaDaicho" AS DbT1001Hiho
         INNER JOIN
@@ -54,9 +55,9 @@
         DbT1001Hiho."logicalDeletedFlag" <![CDATA[<>]]> TRUE
     </select>
 
-    <select id="getTorokuNenreiToutatsuYoteishaCheckList2"
+    <select resultOrdered="true" id="getTorokuNenreiToutatsuYoteishaCheckList2"
             resultMap="resultMap_NenreiToutatsuYoteishaCheckListEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter"    fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter"    fetchSize="500">
         SELECT
         PSM."shikibetsuCode" AS "PSM_shikibetsuCode",
         PSM."meisho" AS "PSM_meisho",
@@ -88,9 +89,9 @@
         DbT1001Hiho."hihokennshaKubunCode" = '2'
     </select>
 
-    <select id="getZenbuNenreiToutatsuYoteishaCheckList"
+    <select resultOrdered="true" id="getZenbuNenreiToutatsuYoteishaCheckList"
             resultMap="resultMap_NenreiToutatsuYoteishaCheckListEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter"
             fetchSize="500">
         SELECT
         PSM."shikibetsuCode" AS "PSM_shikibetsuCode",
@@ -105,7 +106,8 @@
         PSM."juminShubetsuCode" AS "PSM_juminShubetsuCode",
         DbT1001Hiho."shichosonCode" AS "DbT1001Hiho_shichosonCode",
         DbT1001Hiho."hihokenshaNo" AS "DbT1001Hiho_hihokenshaNo",
-        DbT1001Hiho."jushochiTokureiFlag" AS "DbT1001Hiho_jushochiTokureiFlag"
+        DbT1001Hiho."jushochiTokureiFlag" AS "DbT1001Hiho_jushochiTokureiFlag",
+        DbT1001Hiho."hihokennshaKubunCode" AS "DbT1001Hiho_hihokennshaKubunCode"
         FROM
         rgua.${psmShikibetsuTaisho} AS PSM
         LEFT JOIN
@@ -123,9 +125,9 @@
         )
     </select>
 
-    <select id="getZenbuNenreiToutatsuYoteishaCheckList2"
+    <select resultOrdered="true" id="getZenbuNenreiToutatsuYoteishaCheckList2"
             resultMap="resultMap_NenreiToutatsuYoteishaCheckListEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter"
             fetchSize="500">
         SELECT
         PSM."shikibetsuCode" AS "PSM_shikibetsuCode",
@@ -212,7 +214,7 @@
     <resultMap id="resultMap_DbT1009ShikakuShutokuJogaishaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity" autoMapping="true">
         <result property="shikibetsuCode"   column="DbT1009Shikaku_shikibetsuCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
     </resultMap>
-    <select id="getShikakuShutokuJogaiList"
+    <select resultOrdered="true" id="getShikakuShutokuJogaiList"
             resultMap="resultMap_DbT1009ShikakuShutokuJogaishaEntity" fetchSize="500">
         SELECT
         "DbT1009Shikaku_shikibetsuCode"
@@ -231,7 +233,7 @@
         <result property="tekiyoYMD"    column="DbT1002Tekiyo_tekiyoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="kaijoYMD"    column="DbT1002Tekiyo_kaijoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
     </resultMap>
-    <select id="getTekiyoJogaiList"
+    <select resultOrdered="true" id="getTekiyoJogaiList"
             resultMap="resultMap_DbT1002TekiyoJogaishaEntity" fetchSize="500">
         SELECT
         "DbT1002Tekiyo_shikibetsuCode",
@@ -257,7 +259,7 @@
         <result property="tekiyoYMD"    column="DbT1003Tashicho_tekiyoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="kaijoYMD"    column="DbT1003Tashicho_kaijoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
     </resultMap>
-    <select id="getTashichosonJushochi"
+    <select resultOrdered="true" id="getTashichosonJushochi"
             resultMap="resultMap_DbT1003TashichosonJushochiTokureiEntity" fetchSize="500">
         SELECT
         "DbT1003Tashicho_shikibetsuCode",
@@ -281,7 +283,7 @@
         <result property="shikibetsuCode"   column="DbT1010Tennyu_shikibetsuCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
         <result property="torokuIdoYMD"    column="DbT1010Tennyu_torokuIdoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
     </resultMap>
-    <select id="getTennyushutsuHoryuTaishosha"
+    <select resultOrdered="true" id="getTennyushutsuHoryuTaishosha"
             resultMap="resultMap_DbT1010TennyushutsuHoryuTaishoshaEntity" fetchSize="500">
         SELECT
         "DbT1010Tennyu_shikibetsuCode",
@@ -301,7 +303,7 @@
         <result property="jukyuKaishiYMD"    column="UrT0508Seika_jukyuKaishiYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="jukyuHaishiYMD"    column="UrT0508Seika_jukyuHaishiYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
     </resultMap>
-    <select id="getSeikatsuHogojyu"
+    <select resultOrdered="true" id="getSeikatsuHogojyu"
             resultMap="resultMap_UrT0508SeikatsuHogoJukyushaEntity" parameterType="jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode" fetchSize="500">
         SELECT
         UrT0508Seika."shikibetsuCode" AS "UrT0508Seika_shikibetsuCode",
@@ -329,9 +331,11 @@
         'DBA',
         '000000',
         #{shoriName},
-        TO_CHAR(TO_NUMBER((SELECT MAX("shoriEdaban") FROM rgdb."DbT7022ShoriDateKanri"),  '0009') + 1, 'FM0009'),
+        TO_CHAR(TO_NUMBER((SELECT coalesce(MAX("shoriEdaban"), '0') FROM rgdb."DbT7022ShoriDateKanri" where "subGyomuCode" = 'DBA'
+        AND "shichosonCode" = '000000' AND "shoriName" = #{shoriName})   ,  '0009') + 1, 'FM0009'),
         TO_CHAR(NOW(),'yyyy'),
-        TO_CHAR(TO_NUMBER((SELECT MAX("nendoNaiRenban") FROM rgdb."DbT7022ShoriDateKanri"),  '0009') + 1, 'FM0009'),
+        TO_CHAR(TO_NUMBER((SELECT coalesce(MAX("nendoNaiRenban"), '0') FROM rgdb."DbT7022ShoriDateKanri" where "subGyomuCode" = 'DBA'
+        AND "shichosonCode" = '000000' AND "shoriName" = #{shoriName}),  '0009') + 1, 'FM0009'),
         #{taishoKaishiYMD},
         #{taishoShuryoYMD})
     </insert>

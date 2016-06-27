@@ -79,9 +79,9 @@ public class ShafukuKeigenGakuPanel {
                 償還払費申請検索.getServiceTeikyoYM());
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, sikibetuKey);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getPanelCcd().getCcdKaigoAtenaInfo().initialize(識別コード);
         if (!被保険者番号.isEmpty()) {
-            div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         } else {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
@@ -145,7 +145,7 @@ public class ShafukuKeigenGakuPanel {
         if (entity == null) {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         } else {
-            getHandler(div).getボタンを制御(entity);
+            getHandler(div).getボタンを制御(entity, meisaiPar);
         }
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(false);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
@@ -253,7 +253,8 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_Confirm(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).initializeByConfirm();
+        RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        getHandler(div).initializeByConfirm(state);
         return ResponseData.of(div).respond();
     }
 
@@ -277,7 +278,8 @@ public class ShafukuKeigenGakuPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).内容の破棄();
+                List<ShokanShakaiFukushiHojinKeigengakuResult> list = ViewStateHolder.get(ViewStateKeys.情報, List.class);
+                getHandler(div).内容の破棄(list);
                 return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.一覧に戻る).respond();
             }
         } else {
@@ -297,7 +299,11 @@ public class ShafukuKeigenGakuPanel {
         try {
             if (flag) {
                 if (!ResponseHolder.isReRequest()) {
-                    getHandler(div).登録Save();
+                    ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                            ShoukanharaihishinseimeisaikensakuParameter.class);
+                    List<ShokanShakaiFukushiHojinKeigengakuResult> hojinKeigengakuEntityList = ViewStateHolder.get(
+                            ViewStateKeys.情報, List.class);
+                    getHandler(div).登録Save(meisaiPar, hojinKeigengakuEntityList);
                     return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
                             .replace(登録.toString())).respond();
                 }
@@ -331,7 +337,9 @@ public class ShafukuKeigenGakuPanel {
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_CommonDelete(ShafukuKeigenGakuPanelDiv div) {
         try {
             if (!ResponseHolder.isReRequest()) {
-                getHandler(div).削除Save();
+                ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                        ShoukanharaihishinseimeisaikensakuParameter.class);
+                getHandler(div).削除Save(meisaiPar);
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
                         .replace(削除.toString())).respond();
             }
@@ -352,7 +360,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKihoninfo(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.基本情報).respond();
     }
 
@@ -363,7 +371,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKyufuMeisai(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.給付費明細).respond();
     }
 
@@ -374,7 +382,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnTokuteiShiryohi(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.特定診療費).respond();
     }
 
@@ -385,7 +393,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnServiceKeikakuhi(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.サービス計画費).respond();
     }
 
@@ -396,7 +404,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnTokuteinyushosha(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.特定入所者費用).respond();
     }
 
@@ -407,7 +415,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnGokeiinfo(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.合計情報).respond();
     }
 
@@ -418,7 +426,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKyufuhiMeisaiJutoku(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.給付費明細_住特).respond();
     }
 
@@ -429,7 +437,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKinkyujiShoteiShikan(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.緊急時_所定疾患).respond();
     }
 
@@ -440,7 +448,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKinkyujiShisetsu(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.緊急時施設療養費).respond();
     }
 
@@ -451,7 +459,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnShokujihiyo(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.食事費用).respond();
     }
 
@@ -462,11 +470,25 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnSeikyugaku(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.請求額集計).respond();
     }
 
     private ShafukuKeigenGakuPanelHandler getHandler(ShafukuKeigenGakuPanelDiv div) {
         return ShafukuKeigenGakuPanelHandler.of(div);
+    }
+
+    private void putViewState(ShafukuKeigenGakuPanelDiv div) {
+        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
+        ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
+        ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
+                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
+                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
+                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
+                new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue()),
+                div.getPanelHead().getTxtShomeisho().getValue(),
+                div.getPanelHead().getTxtMeisaiBango().getValue(),
+                null);
+        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
     }
 }

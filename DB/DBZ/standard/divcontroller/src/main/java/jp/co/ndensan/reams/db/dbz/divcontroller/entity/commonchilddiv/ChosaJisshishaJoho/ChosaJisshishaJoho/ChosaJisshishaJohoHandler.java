@@ -82,7 +82,7 @@ public class ChosaJisshishaJohoHandler {
                 .get申請書管理番号()).records();
         List<KeyValueDataSource> kinyusha = new ArrayList<>();
         for (ChosainJoho chosainJoho : chosainJohoList) {
-            KeyValueDataSource data = new KeyValueDataSource(chosainJoho.get認定調査員コード().getColumnValue(),
+            KeyValueDataSource data = new KeyValueDataSource(chosainJoho.get認定調査員コード(),
                     chosainJoho.get調査員氏名());
             kinyusha.add(data);
         }
