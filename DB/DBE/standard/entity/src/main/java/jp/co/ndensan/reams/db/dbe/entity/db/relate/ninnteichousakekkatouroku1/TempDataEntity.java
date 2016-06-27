@@ -11,6 +11,8 @@ import lombok.Setter;
 
 /**
  * 認定調査結果登録1のtempDataクラスです。
+ *
+ * @reamsid_L DBE-0040-010 xuyue
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
