@@ -209,8 +209,17 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
             item.setKekka(ShikyuFushikyuKubun.toValue(shiharai.get支給不支給決定区分()).get名称());
         }
         item.setShikyuGaku(shiharai.get支給額() == null ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shiharai.get支給額(), ZERO));
-        // TODO QA1181確認中 増減の理由
-        item.setRiyu1(shiharai.get増減理由等());
+        RString 増減の理由 = shiharai.get増減理由等();
+        if (RString.isNullOrEmpty(増減の理由) || 増減の理由.length() <= 文字数_38) {
+            item.setRiyu1(増減の理由);
+        } else if (増減の理由.length() <= 文字数_76) {
+            item.setRiyu1(増減の理由.substring(ZERO, 文字数_38));
+            item.setRiyu2(増減の理由.substring(文字数_38));
+        } else {
+            item.setRiyu1(増減の理由.substring(ZERO, 文字数_38));
+            item.setRiyu2(増減の理由.substring(文字数_38, 文字数_76));
+            item.setRiyu3(RString.EMPTY);
+        }
         if (ShiharaiHohoKubun.窓口払.getコード().equals(shiharai.get支払方法区分コード())) {
             item.setTorikeshi1(RString.EMPTY);
             item.setTorikeshi2(RString.EMPTY);
