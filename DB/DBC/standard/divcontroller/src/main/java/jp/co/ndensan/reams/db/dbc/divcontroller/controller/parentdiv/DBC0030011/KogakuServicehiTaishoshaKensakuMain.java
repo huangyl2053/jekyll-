@@ -41,7 +41,6 @@ public class KogakuServicehiTaishoshaKensakuMain {
     private static final RString 提供年月R = new RString("提供年月");
     private static final RString 申請年月R = new RString("申請年月");
     private static final RString 決定年月R = new RString("決定年月");
-    private static final RString メニューID_高額介護 = new RString("DBCMN11004");
 
     /**
      * 画面の初期化メソッドです。
