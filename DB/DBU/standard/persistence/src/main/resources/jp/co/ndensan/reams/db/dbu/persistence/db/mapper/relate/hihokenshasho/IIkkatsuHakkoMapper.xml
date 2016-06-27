@@ -674,7 +674,7 @@ and open the template in the editor.
         SET
         "shisetyuJotaiFlag" = TRUE
         WHERE
-        "hihokenshaNo" = (
+        "hihokenshaNo" IN (
         SELECT DISTINCT 
         DbT4001."hihokenshaNo"
         FROM 
