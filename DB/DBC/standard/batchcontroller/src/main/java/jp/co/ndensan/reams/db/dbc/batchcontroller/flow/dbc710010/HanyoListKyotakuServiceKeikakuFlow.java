@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.DBC710010;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc710010;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710010.HanyoListKyotakuServiceKeikakuNoRenbanProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710010.HanyoListKyotakuServiceKeikakuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710010.HanyoListKyotakuServiceKeikakuNoRenbanProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710010.HanyoListKyotakuServiceKeikakuProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
