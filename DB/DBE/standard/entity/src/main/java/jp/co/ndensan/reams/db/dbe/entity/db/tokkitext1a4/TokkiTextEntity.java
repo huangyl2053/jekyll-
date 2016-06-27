@@ -21,5 +21,6 @@ public class TokkiTextEntity {
     private RString 特記事項名称;
     private RString 特記事項;
     private RString 特記事項イメージ;
+    private RString 特記事項連番;
 
 }
