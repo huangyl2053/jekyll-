@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo;
 
+import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
@@ -49,11 +50,10 @@ public class FukaKonkyoFactory {
         }
         FukaKonkyo 賦課根拠 = new FukaKonkyo();
         賦課根拠.setFukakijunYMD(賦課基準日);
-
         for (SeikatsuHogoJukyusha 生保の情報 : 生保の情報リスト) {
             if (!生保の情報.toEntity().getIsDeleted() && 生保の情報.get受給開始日().isBeforeOrEquals(賦課基準日)
                     && (生保の情報.get受給廃止日() == null || 生保の情報.get受給廃止日().isEmpty()
-                    || 賦課基準日.isBeforeOrEquals(生保の情報.get受給廃止日()))) {
+                    || 賦課基準日.isBefore(生保の情報.get受給廃止日()))) {
                 賦課根拠.setSeihoStartYMD(生保の情報.get受給開始日());
                 賦課根拠.setSeihoEndYMD(生保の情報.get受給廃止日());
                 break;
@@ -62,19 +62,21 @@ public class FukaKonkyoFactory {
         for (RoreiFukushiNenkinJukyusha 老齢の情報 : 老齢の情報のリスト) {
             if (!老齢の情報.toEntity().getIsDeleted() && 老齢の情報.get受給開始年月日().isBeforeOrEquals(賦課基準日)
                     && (老齢の情報.get受給終了年月日() == null || 老齢の情報.get受給終了年月日().isEmpty()
-                    || 賦課基準日.isBeforeOrEquals(老齢の情報.get受給終了年月日()))) {
+                    || 賦課基準日.isBefore(老齢の情報.get受給終了年月日()))) {
                 賦課根拠.setRoreiNenkinStartYMD(老齢の情報.get受給開始年月日());
                 賦課根拠.setRoreiNenkinEndYMD(老齢の情報.get受給終了年月日());
                 break;
             }
         }
+        List<KazeiKubun> 課税区分リスト = new ArrayList<>();
         for (SetaiinShotoku 世帯員 : 世帯員所得情報List) {
-            賦課根拠.getSetaiinKazeiKubunList().add(KazeiKubun.toValue(世帯員.get課税区分_住民税減免前()));
+            課税区分リスト.add(KazeiKubun.toValue(世帯員.get課税区分_住民税減免前()));
             if (HonninKubun.本人.getCode().equals(世帯員.get本人区分())) {
                 賦課根拠.setGokeiShotoku(世帯員.get合計所得金額());
                 賦課根拠.setKotekiNenkinShunyu(世帯員.get年金収入額());
             }
         }
+        賦課根拠.setSetaiinKazeiKubunList(課税区分リスト);
         return 賦課根拠;
     }
 }
