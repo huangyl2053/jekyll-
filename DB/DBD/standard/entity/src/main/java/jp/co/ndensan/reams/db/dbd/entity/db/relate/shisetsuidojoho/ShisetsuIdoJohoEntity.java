@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.shisetsuidojoho;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -23,5 +24,6 @@ public class ShisetsuIdoJohoEntity {
     private RString 入所施設種類;
     private RString 入所施設コード;
     private RString 事業者名称;
+    private HihokenshaNo 転出先保険者番号;
 
 }

@@ -13,12 +13,19 @@
                CASE A."nyushoShisetsuShurui"
                WHEN '11' THEN B."jigyoshaName"
                ELSE C."jigyoshaMeisho"
-               END AS 事業者名称
+               END AS 事業者名称,
+               '' AS 転出先保険者番号
         FROM rgdb."DbV1004HihokenshaShisetsuNyutaisho" AS A
-        LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS B
+        LEFT JOIN (SELECT 介護事業者."jigyoshaNo",介護事業者."jigyoshaName"
+                   FROM rgdb."DbT7060KaigoJigyosha" AS 介護事業者
+                   WHERE NOT EXISTS(SELECT 1 FROM rgdb."DbT7060KaigoJigyosha" AS 介護事業者2
+                                    WHERE 介護事業者."jigyoshaNo" = 介護事業者2."jigyoshaNo"
+                                          AND 介護事業者."yukoKaishiYMD" <![CDATA[<]]> 介護事業者2."yukoKaishiYMD")
+                   ) AS B
               ON B."jigyoshaNo" = A."nyushoShisetsuCode"
-        LEFT JOIN rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS C
+        LEFT JOIN rgdb."DbV1005KaigoJogaiTokureiTaishoShisetsu" AS C
               ON C."jigyoshaNo" = A."nyushoShisetsuCode"
+              AND C."jigyoshaShubetsu" = (CASE A."nyushoShisetsuShurui" WHEN '12' THEN '01' WHEN '21' THEN '02' ELSE NULL END)
         WHERE A."shikibetsuCode" = #{識別コード}
         ORDER BY A."nyushoYMD" DESC
     </select>
@@ -29,5 +36,6 @@
         <result property="入所施設種類" column="入所施設種類" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="入所施設コード" column="入所施設コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="事業者名称" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="転出先保険者番号" column="転出先保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
     </resultMap>
 </mapper>
