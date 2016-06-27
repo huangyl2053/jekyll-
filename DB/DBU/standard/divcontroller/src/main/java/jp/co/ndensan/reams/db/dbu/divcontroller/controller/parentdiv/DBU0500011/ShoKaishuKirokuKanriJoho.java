@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -84,7 +83,6 @@ public class ShoKaishuKirokuKanriJoho {
             validationMessages.add(new ValidationMessageControlPair(TekiyoJogaiTotalErrorMessage.排他_他のユーザが使用中));
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-
         return ResponseData.of(div).respond();
     }
 
@@ -95,19 +93,15 @@ public class ShoKaishuKirokuKanriJoho {
      * @return ResponseData<ShoKaishuKirokuKanriJohoDiv>
      */
     public ResponseData<ShoKaishuKirokuKanriJohoDiv> onClick_Hozon(ShoKaishuKirokuKanriJohoDiv div) {
-
-        if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
-        }
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(HOZONMESSAGE).respond();
-        }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             setHozon(div);
             RealInitialLocker.release(LOCKINGKEY);
             アクセスログ(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
             return ResponseData.of(div).setState(DBU0500011StateName.完了状態);
+        }
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(HOZONMESSAGE).respond();
         }
         return ResponseData.of(div).respond();
     }
