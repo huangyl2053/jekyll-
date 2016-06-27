@@ -138,6 +138,7 @@ public class NinteiChosaScheduleInput {
                 NinteiChosaScheduleGamenkoumuku.class);
         if (画面ステート_1.equals(対象者を検索するモード)) {
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_対象者を検索するモード, RString.EMPTY);
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_対象者を検索, RString.EMPTY);
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, 画面項目.get調査日値());
         }
         getHandler(div).onLoad(temp_申請者管理番号3, temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況,
@@ -302,7 +303,7 @@ public class NinteiChosaScheduleInput {
         temp_地区コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, temp_地区コード);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面ステート, 画面ステート);
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_対象者を検索するモード, 画面ステート_1);
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_対象者を検索, new RString("1"));
         NinteiChosaScheduleGamenkoumuku gamenkoumuku = new NinteiChosaScheduleGamenkoumuku();
         gamenkoumuku.set認定調査員コード値(div.getWariateJokyo().getTxtNinteiChosainCode().getValue());
         gamenkoumuku.set認定調査員コード状態(div.getWariateJokyo().getTxtNinteiChosainCode().isDisabled());
