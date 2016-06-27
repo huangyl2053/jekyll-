@@ -658,20 +658,15 @@ public class Honsanteifuka {
             }
         }
         result.set納入_発行日(parameter.get納入_発行日());
-        if (区分_する.equals(parameter.get生活保護対象者())) {
-            result.set納入_出力対象(区分_ゼロ);
-        } else if (区分_しない.equals(parameter.get生活保護対象者())) {
-            result.set納入_出力対象(区分_イチ);
+        if (区分_する.equals(parameter.get納入_生活保護対象者をまとめて先頭に出力())) {
+            result.set納入_生活保護対象者をまとめて先頭に出力(区分_ゼロ);
+        } else if (区分_しない.equals(parameter.get納入_生活保護対象者をまとめて先頭に出力())) {
+            result.set納入_生活保護対象者をまとめて先頭に出力(区分_イチ);
         }
         if (区分_する.equals(parameter.get納入_ページごとに山分け())) {
             result.set納入_ページごとに山分け(区分_ゼロ);
         } else if (区分_しない.equals(parameter.get納入_ページごとに山分け())) {
             result.set納入_ページごとに山分け(区分_イチ);
-        }
-        if (区分_する.equals(parameter.get納入_生活保護対象者をまとめて先頭に出力())) {
-            result.set納入_生活保護対象者をまとめて先頭に出力(区分_ゼロ);
-        } else if (区分_しない.equals(parameter.get納入_生活保護対象者をまとめて先頭に出力())) {
-            result.set納入_生活保護対象者をまとめて先頭に出力(区分_イチ);
         }
         result.set打分け条件情報(parameter.get打分け条件情報());
         result.set処理日時(RDate.getNowDateTime());
