@@ -9,11 +9,14 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0840011.DBU0
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0840011.SystemKanriPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0840011.SystemKanriPanelHandler;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * システム管理情報（介護統計共通)のDivControllerです。
@@ -54,7 +57,16 @@ public class SystemKanriPanel {
      */
     public ResponseData<SystemKanriPanelDiv> onClick_btnUpdate(SystemKanriPanelDiv div) {
         メニューID = UrControlDataFactory.createInstance().getMenuID();
-        getHandler(div).set_保存ボタン(メニューID);
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
+        }
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            getHandler(div).set_保存ボタン(メニューID);
+            div.getKanryoMessage().getCcdKaigoKanryoMessage().setMessage(new RString("システム管理登録_介護統計共通保存処理は正常に行われました。"),
+                    RString.EMPTY, RString.EMPTY, true);
+            return ResponseData.of(div).setState(DBU0840011StateName.完了状態);
+        }
         return ResponseData.of(div).respond();
     }
 
