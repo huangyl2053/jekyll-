@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5100001
 
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.definition.core.viewstate.TaishouWaritsukeViewStateKey;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kaigoninteishinsakai.KaigoNinteiShinsakaiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.DBE5100001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.DBE5100001TransitionEventName;
@@ -101,7 +100,7 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        ViewStateHolder.put(TaishouWaritsukeViewStateKey.介護認定審査会番号, div.getCcdShinsakaiItiran().get開催番号List().get(数字_0));
+        ViewStateHolder.put(ViewStateKeys.介護認定審査会番号, div.getCcdShinsakaiItiran().get開催番号List().get(数字_0));
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会対象者割付へ遷移する).respond();
     }
 
