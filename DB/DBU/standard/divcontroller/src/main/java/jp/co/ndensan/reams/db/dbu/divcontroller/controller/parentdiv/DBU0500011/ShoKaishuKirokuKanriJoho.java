@@ -150,11 +150,11 @@ public class ShoKaishuKirokuKanriJoho {
             ShoKofuKaishu shoKofuKaishu = models.get(key);
             ShoKofuKaishuBuilder builder = shoKofuKaishu.createBuilderForEdit();
             if (状態_修正.equals(dgKoufuKaishu.getStatus())) {
-                builder.set交付年月日(getDate(dgKoufuKaishu.getKoufuDate()));
-                builder.set有効期限(getDate(dgKoufuKaishu.getYukoKigen()));
+                builder.set交付年月日(getDate(dgKoufuKaishu.getKoufuDate().getText()));
+                builder.set有効期限(getDate(dgKoufuKaishu.getYukoKigen().getText()));
                 builder.set交付事由(dgKoufuKaishu.getKoufuJiyuNo());
                 builder.set交付理由(dgKoufuKaishu.getKofuRiyu());
-                builder.set回収年月日(getDate(dgKoufuKaishu.getKaishuDate()));
+                builder.set回収年月日(getDate(dgKoufuKaishu.getKaishuDate().getText()));
                 builder.set回収事由(dgKoufuKaishu.getKaishuJiyuNo());
                 builder.set回収理由(dgKoufuKaishu.getKaishuRiyu());
                 builder.set発行処理日時(YMDHMS.now());
