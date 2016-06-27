@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.DBB0210001;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb0210001;
 
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB0210001.ChoteiboSakuseiDataShoriProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB0210001.ChoteiboSakuseiReportProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb0210001.ChoteiboSakuseiDataShoriProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb0210001.ChoteiboSakuseiReportProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.choteibo.ChoteiboBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBB-0770-030 zhangrui
  */
-public class DBB0210001_ChoteiboSakusei extends BatchFlowBase<ChoteiboBatchParameter> {
+public class DBB0210001_ChoteiboSakuseiFlow extends BatchFlowBase<ChoteiboBatchParameter> {
 
     @Override
     protected void defineFlow() {
