@@ -34,20 +34,18 @@ public class KogakuShinseiListDivValidationHandler {
     }
 
     public ValidationMessageControlPairs 入力チェック() {
-        boolean flag1 = false;
-        boolean flag2 = false;
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (div.getTxtServiceYMFrom().getDomain() == null && div.getTxtServiceYMTo().getDomain() == null) {
-            flag1 = true;
+            validPairs.add(new ValidationMessageControlPair(
+                    new KogakuShinseiListDivValidationHandler.IdocheckMessages(
+                            UrErrorMessages.期間が不正)));
         }
         if (div.getTxtServiceYMFrom().getDomain() != null && div.getTxtServiceYMTo().getDomain() != null
                 && div.getTxtServiceYMTo().getDomain().compareTo(div.getTxtServiceYMFrom().getDomain()) < 0) {
-            flag2 = true;
-        }
-        if (flag1 || flag2) {
             validPairs.add(new ValidationMessageControlPair(
                     new KogakuShinseiListDivValidationHandler.IdocheckMessages(
-                            UrErrorMessages.期間が不正, サービス年月From.toString(), サービス年月To.toString())));
+                            UrErrorMessages.期間が不正_追加メッセージあり２,
+                            サービス年月From.toString(), サービス年月To.toString())));
         }
         return validPairs;
     }

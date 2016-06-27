@@ -68,8 +68,10 @@ public class KogakuShinseiListDivHandler {
     public void 画面初期化(RString メニューID, HihokenshaNo 被保険者番号, RString 導入形態コード) {
         FlexibleYearMonth サービス年月 = FlexibleDate.getNowDate().
                 getYearMonth().minusMonth(THREE);
-        div.getTxtServiceYM().setDomain(new RYearMonth(サービス年月.wareki().toString()));
+        div.getTxtServiceYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
         set証記載保険者番号(被保険者番号, サービス年月, 導入形態コード);
+        List<KougakuShinseiIchiranJohyouEntityResult> kogaList = new ArrayList<>();
+        set高額申請一覧情報(kogaList);
         if (高額介護サービス費照会.equals(メニューID)) {
             set照会モード();
         }
@@ -151,13 +153,13 @@ public class KogakuShinseiListDivHandler {
                 div.getDgShinseiJoho().getGridSetting().getColumns().get(EIGHT).setVisible(false);
                 div.getDgShinseiJoho().getGridSetting().getColumns().get(NINE).setColumnName(審査年月);
                 div.getDgShinseiJoho().getGridSetting().getColumns().get(TEN).setColumnName(登録年月日);
-                if (koga.getEntity().get判定送付年月() != null) {
-                    row.setData10(koga.getEntity().get判定送付年月().wareki().toDateString());
+                if (koga.getEntity().get対象者判定審査年月() != null) {
+                    row.setData10(koga.getEntity().get対象者判定審査年月().wareki().toDateString());
                     //TODO  QA881
                 }
-                if (koga.getEntity().get判定取込年月() != null) {
-                    row.setData11(koga.getEntity().get判定取込年月().wareki().toDateString());
-                    //TODO QA881  
+                if (koga.getEntity().get決定年月日() != null) {
+                    row.setData11(koga.getEntity().get決定年月日().wareki().toDateString());
+                    //TODO QA881
                 }
             }
             if (koga.getEntity().get証記載番号() != null && !koga.getEntity().get証記載番号().isEmpty()) {

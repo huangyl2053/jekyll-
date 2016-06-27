@@ -574,4 +574,13 @@ public class KyufuShiharayiMeisaiPanelHandler {
         div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setReadOnly(flag);
     }
 
+    /**
+     *
+     * @param flag boolean
+     */
+    public void 制御(boolean flag) {
+        div.getPanelThree().getBtnAdd().setDisabled(flag);
+        div.getPanelThree().getDgdKyufuhiMeisai().setDisabled(flag);
+    }
+
 }
