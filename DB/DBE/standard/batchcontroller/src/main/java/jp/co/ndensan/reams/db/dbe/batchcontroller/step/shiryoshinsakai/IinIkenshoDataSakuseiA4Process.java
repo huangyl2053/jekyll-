@@ -104,10 +104,7 @@ public class IinIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<ShinsakaiW
 //    }
     @Override
     protected void keyBreakProcess(ShinsakaiWariateJohoEntity current) {
-        if (hasBrek(getBefore(), current)) {
-            ShujiiikenshoA4Report report = new ShujiiikenshoA4Report(item);
-            report.writeBy(reportSourceWriterA4);
-        }
+        hasBrek(getBefore(), current);
     }
 
     private boolean hasBrek(ShinsakaiWariateJohoEntity before, ShinsakaiWariateJohoEntity current) {

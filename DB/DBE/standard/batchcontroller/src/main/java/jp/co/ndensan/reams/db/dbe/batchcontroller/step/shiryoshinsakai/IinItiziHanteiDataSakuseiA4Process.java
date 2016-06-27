@@ -93,10 +93,7 @@ public class IinItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<ItiziH
 
     @Override
     protected void keyBreakProcess(ItiziHanteiEntity t) {
-        if (hasBrek(getBefore(), t)) {
-            IchijihanteikekkahyoA4Report report = new IchijihanteikekkahyoA4Report(item);
-            report.writeBy(reportSourceWriterA4);
-        }
+        hasBrek(getBefore(), t);
     }
 
     private boolean hasBrek(ItiziHanteiEntity before, ItiziHanteiEntity current) {
