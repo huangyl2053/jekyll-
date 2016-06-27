@@ -66,6 +66,7 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
         source.shinsaYMD = パターン16(item.get今回認定審査年月日());
         source.ichijiHanteiKekka = item.get一次判定結果();
         source.chosaJisshiDate1 = パターン16(item.get今回認定調査実施年月日());
+        source.chosaJisshiBasho = item.get認定調査実施場所名称();
         source.tokuteishippeiName = item.get特定疾病名();
         source.kijunGokeiTime = item.get要介護認定等基準時間();
         source.zenkaiKijunGokeiTime = item.get要介護認定等基準時間();
