@@ -34,7 +34,6 @@ public class ChosaIraishoHeadItem {
     private final RString meishoFuyo;
     private final RString customerBarCode;
     private final RString sonota;
-    private final RString atenaRenban;
     private final RString title;
     private final RString tsuchibun1;
     private final RString hihokenshaNo1;
@@ -86,7 +85,6 @@ public class ChosaIraishoHeadItem {
      * @param meishoFuyo 名称付与
      * @param customerBarCode カスタマーバーコード
      * @param sonota その他
-     * @param atenaRenban 宛名連番
      * @param title タイトル
      * @param tsuchibun1 通知文1
      * @param hihokenshaNo1 被保険者番号1
@@ -136,7 +134,6 @@ public class ChosaIraishoHeadItem {
             RString meishoFuyo,
             RString customerBarCode,
             RString sonota,
-            RString atenaRenban,
             RString title,
             RString tsuchibun1,
             RString hihokenshaNo1,
@@ -184,7 +181,6 @@ public class ChosaIraishoHeadItem {
         this.meishoFuyo = meishoFuyo;
         this.customerBarCode = customerBarCode;
         this.sonota = sonota;
-        this.atenaRenban = atenaRenban;
         this.title = title;
         this.tsuchibun1 = tsuchibun1;
         this.hihokenshaNo1 = hihokenshaNo1;

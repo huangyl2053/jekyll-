@@ -64,7 +64,6 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
         source.meishoFuyo = item.getMeishoFuyo();
         source.customerBarCode = item.getCustomerBarCode();
         source.sonota = item.getSonota();
-        source.atenaRenban = item.getAtenaRenban();
         source.customerBarCode = item.getCustomerBarCode();
         source.title = item.getTitle();
         source.tsuchibun1 = item.getTsuchibun1();
