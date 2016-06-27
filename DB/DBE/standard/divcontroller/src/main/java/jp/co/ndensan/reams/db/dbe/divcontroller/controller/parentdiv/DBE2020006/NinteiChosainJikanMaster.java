@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.dgTi
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020006.NinteiChosainJikanMasterHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020006.NinteiChosainJikanMasterValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosainjikan.NinteiChosainJikanMasterManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
@@ -27,7 +28,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -80,7 +80,6 @@ public class NinteiChosainJikanMaster {
     private final RString 編集状態_未指定 = new RString("1");
     private final RString 編集状態_既存 = new RString("2");
     private final RString 保存 = new RString("保存");
-    private static final CodeShubetsu コード種別 = new CodeShubetsu("5002");
 
     /**
      * コンストラクタです。
@@ -1102,7 +1101,8 @@ public class NinteiChosainJikanMaster {
     }
 
     private KeyValueDataSource 調査地区ドロップダウンリスト(Code 調査地区コード) {
-        UzT0007CodeEntity 指定調査地区 = CodeMaster.getCode(SubGyomuCode.DBE認定支援, コード種別, 調査地区コード);
+        FlexibleDate 基准日 = FlexibleDate.getNowDate();
+        UzT0007CodeEntity 指定調査地区 = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード(), 調査地区コード, 基准日);
         KeyValueDataSource keyValue = new KeyValueDataSource();
         keyValue.setKey(指定調査地区.getコード().value());
         keyValue.setValue(指定調査地区.getコード名称());
