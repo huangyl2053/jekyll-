@@ -40,6 +40,7 @@ public class HonsanteifukaBatchParameter extends BatchParameterBase {
     private static final String KEY_納入_対象者 = "納入_対象者";
     private static final String KEY_納入_発行日 = "納入_発行日";
     private static final String KEY_納入_出力対象 = "納入_出力対象";
+    private static final String KEY_納入_生活保護対象者をまとめて先頭に出力 = "納入_生活保護対象者をまとめて先頭に出力";
     private static final String KEY_納入_ページごとに山分け = "納入_ページごとに山分け";
     private static final String KEY_打分け条件情報 = "打分け条件情報";
     private static final String KEY_処理日時 = "処理日時";
@@ -71,6 +72,8 @@ public class HonsanteifukaBatchParameter extends BatchParameterBase {
     private RDate 納入_発行日;
     @BatchParameter(key = KEY_納入_出力対象, name = "納入_出力対象")
     private RString 納入_出力対象;
+    @BatchParameter(key = KEY_納入_生活保護対象者をまとめて先頭に出力, name = "納入_生活保護対象者をまとめて先頭に出力")
+    private RString 納入_生活保護対象者をまとめて先頭に出力;
     @BatchParameter(key = KEY_納入_ページごとに山分け, name = "納入_ページごとに山分け")
     private RString 納入_ページごとに山分け;
     @BatchParameter(key = KEY_打分け条件情報, name = "打分け条件情報")
