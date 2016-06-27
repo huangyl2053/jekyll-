@@ -142,7 +142,6 @@ public class ShoKaishuKirokuKanri {
                 int rowcount = shoKaishuDiv.getDgKoufuKaishu().getClickedItem().getId();
                 dgKoufuKaishu_Row row = list.get(rowcount);
                 row.setKoufuType(shoKaishuDiv.getPanelInput().getTxtKoufuType().getValue());
-                row.setKoufuDate(shoKaishuDiv.getPanelInput().getTxtKoufuDate());
                 row.getKoufuDate().setValue(shoKaishuDiv.getPanelInput().getTxtKoufuDate().getValue());
                 row.getYukoKigen().setValue(shoKaishuDiv.getPanelInput().getTxtYukouKigen().getValue());
                 row.setKoufuJiyu(shoKaishuDiv.getPanelInput().getDdlKoufuJiyu().getSelectedValue());
