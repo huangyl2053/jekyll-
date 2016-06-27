@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 保険料納入通知書（本算定過年度）【期毎タイプ】IHokenryoNonyuTsuchishoKigotoEditor
  *
- * @reamsid_L DBB-9110-140 liangbc
+ * @reamsid_L DBB-9110-140 wangjie2
  */
 public interface IHokenryoNonyuTsuchishoKigotoEditor extends IReportEditor<HokenryoNonyuTsuchishoKigotoSource> {
 
