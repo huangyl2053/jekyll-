@@ -211,6 +211,7 @@ public class SystemKanriPanelHandler {
         setDB_更新(ConfigNameDBU.老人保健情報_市町村番号, div.getSystemKanri().getTxtRojinHokenShichosonNo().getValue());
         setDB_更新(ConfigNameDBU.検索画面設定_カーソル位置, div.getSystemKanri().getSearchCondition().getDdlCursorPosition().getSelectedKey());
         setDB_更新(ConfigNameDBU.検索画面設定_検索オプション_前方一致条件有無, div.getSystemKanri().getSearchCondition().getRadForwardMatch().getSelectedKey());
+        setDB_更新(ConfigNameDBU.検索制御_最大取得件数, new RString(div.getSystemKanri().getSearchCondition().getTxtMaxGetNumber().getValue().toString()));
         //TODO 介護宛先住所編集（共有子Div）が保存.
         if (div.getSystemKanri().getSearchCondition().getChkSearchOptionHihokensha().isAllSelected()) {
             setDB_更新(ConfigNameDBU.検索画面設定_検索オプション_被保険者対象有無, 対象とする);
