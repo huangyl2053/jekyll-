@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0030011;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.KogakuServicehiPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.KogakuServicehiTaishoshaKensakuMainDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
@@ -16,16 +16,16 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * @reamsid_L DBC-3000-010 gongliang
  */
-public class KogakuServicehiPanelValidationHandler {
+public class KogakuServicehiTaishoshaKensakuMainValidationHandler {
 
-    private final KogakuServicehiPanelDiv div;
+    private final KogakuServicehiTaishoshaKensakuMainDiv div;
 
     /**
      * コンストラクタです。
      *
-     * @param div {@link KogakuServicehiPanelDiv}
+     * @param div {@link KogakuServicehiTaishoshaKensakuMainDiv}
      */
-    public KogakuServicehiPanelValidationHandler(KogakuServicehiPanelDiv div) {
+    public KogakuServicehiTaishoshaKensakuMainValidationHandler(KogakuServicehiTaishoshaKensakuMainDiv div) {
         this.div = div;
     }
 
@@ -35,14 +35,14 @@ public class KogakuServicehiPanelValidationHandler {
      * @return {@link ValidationMessageControlPairs}
      */
     public ValidationMessageControlPairs validate被保険者を指定入力() {
-        IValidationMessages message = new KogakuServicehiPanelValidator(div).validate被保険者を指定入力();
+        IValidationMessages message = new KogakuServicehiTaishoshaKensakuMainValidator(div).validate被保険者を指定入力();
         return create被保険者を指定入力Dictionary().check(message);
     }
 
     private ValidationDictionary create被保険者を指定入力Dictionary() {
         return new ValidationDictionaryBuilder()
-                .add(KogakuServicehiPanelValidationMessage.被保険者を指定入力チェック,
-                        div.getSearchKogakuServicehiPanel().getSearchKogakuHihokensha()).build();
+                .add(KogakuServicehiTaishoshaKensakuMainMessage.被保険者を指定入力チェック,
+                        div.getKogakuServicehiSearch().getHihokenshaKensakuJoken()).build();
     }
 
     /**
@@ -51,14 +51,14 @@ public class KogakuServicehiPanelValidationHandler {
      * @return {@link ValidationMessageControlPairs}
      */
     public ValidationMessageControlPairs validate年月を指定入力() {
-        IValidationMessages message = new KogakuServicehiPanelValidator(div).validate年月を指定入力();
+        IValidationMessages message = new KogakuServicehiTaishoshaKensakuMainValidator(div).validate年月を指定入力();
         return create年月を指定入力Dictionary().check(message);
     }
 
     private ValidationDictionary create年月を指定入力Dictionary() {
         return new ValidationDictionaryBuilder()
-                .add(KogakuServicehiPanelValidationMessage.年月を指定入力チェック,
-                        div.getSearchKogakuServicehiPanel().getSearchYM()).build();
+                .add(KogakuServicehiTaishoshaKensakuMainMessage.年月を指定入力チェック,
+                        div.getKogakuServicehiSearch().getNengetsuKensakuJoken()).build();
     }
 
 }
