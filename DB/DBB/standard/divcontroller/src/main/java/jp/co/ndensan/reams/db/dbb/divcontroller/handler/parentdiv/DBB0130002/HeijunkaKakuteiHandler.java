@@ -265,7 +265,7 @@ public class HeijunkaKakuteiHandler {
         List<dgHeijunkaKakutei_Row> rowList = div.getHeijunkaSagakuKakunin().getDgHeijunkaKakutei().getDataSource();
         Map<RString, Decimal> 差額Map = new HashMap<>();
         for (dgHeijunkaKakutei_Row row : rowList) {
-            差額Map.put(row.getTxtHokenryoDankai(), row.getTxtSagaku().getValue());
+            差額Map.put(row.getTxtDankaiKubun(), row.getTxtSagaku().getValue());
         }
         RString 賦課年度 = div.getHeijunkaKakuteiShoriNaiyo().getTxtFukaNendo().getValue();
         TokuchoHeijunkaKakuteiBatchParameter parameter = TokuchoHeijunkaKakutei.createInstance()
