@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -573,8 +574,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         csvEntity.set受給申請事由(isNull(entity.getDbV4001受給申請事由())
                 ? RString.EMPTY : entity.getDbV4001受給申請事由().value());
         csvEntity.set受給申請日(dataToRString(entity.getDbV4001受給申請年月日(), parameter));
-        csvEntity.set受給要介護度(isNull(entity.getDbV4001要介護認定状態区分コード())
-                ? RString.EMPTY : entity.getDbV4001要介護認定状態区分コード().value());
+        csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(parameter.get基準年月日(), entity.getDbV4001要介護認定状態区分コード().value()).getName());
         csvEntity.set受給認定開始日(dataToRString(entity.getDbV4001認定有効期間開始日(), parameter));
         csvEntity.set受給認定終了日(dataToRString(entity.getDbV4001認定有効期間終了日(), parameter));
         csvEntity.set受給認定日(dataToRString(entity.getDbV4001受給認定日(), parameter));

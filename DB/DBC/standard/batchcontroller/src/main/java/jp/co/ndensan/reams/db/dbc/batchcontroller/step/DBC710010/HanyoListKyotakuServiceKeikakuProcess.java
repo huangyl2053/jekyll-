@@ -92,6 +92,7 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
     private List<PersonalData> personalDataList;
     private RString eucFilePath;
     private Decimal 連番;
+    private FlexibleDate システム日付;
 
     @BatchWriter
     private EucCsvWriter<HanyoListKyotakuServiceKeikakuCsvEntity> eucCsvWriter;
@@ -99,6 +100,7 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
     @Override
     protected void beforeExecute() {
         連番 = Decimal.ONE;
+        システム日付 = FlexibleDate.getNowDate();
         csvEntityEditor = new HanyoListKyotakuServiceKeikakuCsvEntityEditor();
         personalDataList = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
@@ -132,6 +134,7 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
     protected void process(HanyoListKyotakuServiceKeikakuEntity entity) {
         eucCsvWriter.writeLine(csvEntityEditor.editor(entity, parameter, 連番));
         連番 = 連番.add(Decimal.ONE);
+        parameter.set基準年月日(システム日付);
         personalDataList.add(toPersonalData(entity));
 
     }
