@@ -167,6 +167,9 @@ public class NinteiChosaSchedule3Main {
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_保険者, div.getDdlHokensha().getSelectedKey());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員状況02, div.getDgResultList().getSelectedItems().get(0).getJokyo());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面番号, 画面番号);
+        if (編集モード.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_対象者を検索, RString.class))) {
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_対象者を検索するモード, 編集モード);
+        }
         return ResponseData.of(div).respond();
     }
 
