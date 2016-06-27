@@ -29,12 +29,12 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho.ShujiiIkens
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoReportSource;
 import jp.co.ndensan.reams.db.dbe.service.report.ikenshokinyuyoshi.IkenshokinyuyoshiPrintService;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha._NinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -81,7 +81,8 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
         list.add(ShujiiIkenshoSakuseiIraishoReport.createFrom(主治医意見書作成依頼情報ItemList));
         ShujiiIkenshoSakuseiIraishoProperty property = new ShujiiIkenshoSakuseiIraishoProperty();
         try (ReportAssembler<ShujiiIkenshoSakuseiIraishoReportSource> assembler = createAssembler(property, reportManager)) {
-            INinshoshaSourceBuilder ninshosha = new _NinshoshaSourceBuilderCreator().create(GyomuCode.DB介護保険, RString.EMPTY,
+            INinshoshaSourceBuilder ninshosha = new _NinshoshaSourceBuilderCreator().create(GyomuCode.DB介護保険,
+                    NinshoshaDenshikoinshubetsuCode.認定用印.getコード(),
                     RDate.getNowDate(), assembler.getImageFolderPath());
             list.add(ShujiiIkenshoSakuseiIraishoReport.createFrom(set主治医意見書作成依頼(主治医意見書作成依頼情報ItemList, ninshosha.buildSource())));
             for (ShujiiIkenshoSakuseiIraishoReport report : list) {
@@ -120,7 +121,8 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
         List<KaigohokenShindanMeireishoReport> list = new ArrayList<>();
         KaigohokenShindanMeireishoProperty property = new KaigohokenShindanMeireishoProperty();
         try (ReportAssembler<KaigohokenShindanMeireishoReportSource> assembler = createAssembler(property, reportManager)) {
-            INinshoshaSourceBuilder ninshosha = new _NinshoshaSourceBuilderCreator().create(GyomuCode.DB介護保険, RString.EMPTY,
+            INinshoshaSourceBuilder ninshosha = new _NinshoshaSourceBuilderCreator().create(GyomuCode.DB介護保険,
+                    NinshoshaDenshikoinshubetsuCode.認定用印.getコード(),
                     RDate.getNowDate(), assembler.getImageFolderPath());
             list.add(KaigohokenShindanMeireishoReport.createFrom(set介護保険診断命令書(介護保険診断命令書ItemList, ninshosha.buildSource())));
             for (KaigohokenShindanMeireishoReport report : list) {
@@ -141,7 +143,8 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
         List<ShujiiIkenshoTeishutsuIraishoReport> list = new ArrayList<>();
         ShujiiIkenshoTeishutsuIraishoProperty property = new ShujiiIkenshoTeishutsuIraishoProperty();
         try (ReportAssembler<ShujiiIkenshoTeishutsuIraishoReportSource> assembler = createAssembler(property, reportManager)) {
-            INinshoshaSourceBuilder ninshoshaSourceBuilder = new _NinshoshaSourceBuilderCreator().create(GyomuCode.DB介護保険, RString.EMPTY,
+            INinshoshaSourceBuilder ninshoshaSourceBuilder = new _NinshoshaSourceBuilderCreator().create(GyomuCode.DB介護保険,
+                    NinshoshaDenshikoinshubetsuCode.認定用印.getコード(),
                     RDate.getNowDate(), assembler.getImageFolderPath());
             list.add(ShujiiIkenshoTeishutsuIraishoReport.createFrom(setNishosha(介護保険指定医依頼兼主治医意見書提出意見書ItemList,
                     ninshoshaSourceBuilder.buildSource())));
@@ -163,9 +166,11 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
         List<IkenshoSakuseiIraiIchiranhyoReport> list = new ArrayList<>();
         IkenshoSakuseiIraiIchiranhyoProperty property = new IkenshoSakuseiIraiIchiranhyoProperty();
         try (ReportAssembler<IkenshoSakuseiIraiIchiranhyoReportSource> assembler = createAssembler(property, reportManager)) {
-            INinshoshaSourceBuilder ninshoshaSourceBuilder = new _NinshoshaSourceBuilderCreator().create(GyomuCode.DB介護保険, RString.EMPTY,
+            INinshoshaSourceBuilder ninshoshaSourceBuilder = new _NinshoshaSourceBuilderCreator().create(GyomuCode.DB介護保険,
+                    NinshoshaDenshikoinshubetsuCode.認定用印.getコード(),
                     RDate.getNowDate(), assembler.getImageFolderPath());
-            list.add(IkenshoSakuseiIraiIchiranhyoReport.createFrom(set主治医意見書作成依頼一覧表認定者(主治医意見書作成依頼一覧表ItemList, ninshoshaSourceBuilder.buildSource())));
+            list.add(IkenshoSakuseiIraiIchiranhyoReport.createFrom(set主治医意見書作成依頼一覧表認定者(
+                    主治医意見書作成依頼一覧表ItemList, ninshoshaSourceBuilder.buildSource())));
             for (IkenshoSakuseiIraiIchiranhyoReport report : list) {
                 ReportSourceWriter<IkenshoSakuseiIraiIchiranhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 report.writeBy(reportSourceWriter);
