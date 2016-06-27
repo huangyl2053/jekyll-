@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030013;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 14 10:24:55 CST 2016
+ * Thu Jun 23 16:14:49 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
