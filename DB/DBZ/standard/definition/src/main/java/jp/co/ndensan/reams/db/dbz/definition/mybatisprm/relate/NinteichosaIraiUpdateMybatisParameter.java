@@ -19,7 +19,7 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class NinteichosaIraiUpdateMybatisParameter implements IMyBatisParameter {
 
-    private List<RString> 申請書管理番号List;
+    private List<RString> 申請書管理番号;
     private final RString temp_督促日;
     private final RString temp_督促方法;
     private final RString temp_督促メモ;
@@ -27,17 +27,17 @@ public final class NinteichosaIraiUpdateMybatisParameter implements IMyBatisPara
     /**
      * コンストラクタです。
      *
-     * @param 申請書管理番号List 申請書管理番号List
+     * @param 申請書管理番号 申請書管理番号
      * @param temp_督促日 督促日
      * @param temp_督促方法 督促方法
      * @param temp_督促メモ 督促メモ
      */
-    public NinteichosaIraiUpdateMybatisParameter(List<RString> 申請書管理番号List,
+    public NinteichosaIraiUpdateMybatisParameter(List<RString> 申請書管理番号,
             RString temp_督促日,
             RString temp_督促方法,
             RString temp_督促メモ
     ) {
-        this.申請書管理番号List = 申請書管理番号List;
+        this.申請書管理番号 = 申請書管理番号;
         this.temp_督促日 = temp_督促日;
         this.temp_督促方法 = temp_督促方法;
         this.temp_督促メモ = temp_督促メモ;

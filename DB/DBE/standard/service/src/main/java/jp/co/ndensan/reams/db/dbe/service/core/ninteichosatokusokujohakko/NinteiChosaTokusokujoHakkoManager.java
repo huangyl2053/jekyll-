@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.ninteichosatokusokujohakko;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosatokusokujohakko.CountGaitouDataKenSu13Parameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosatokusokujohakko.CountGaitouDataKenSu2Parameter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe223001.NinteichosaIraiJohoUpdateProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosatokusokujyo.NinteichosaIraiJohoUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteitiyousaiirai.INinteiShinseiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
