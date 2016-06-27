@@ -10,12 +10,12 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.business.core.viewstate.MaeRirekiKey;
-import jp.co.ndensan.reams.db.dbb.definition.core.viewstate.DbbViewStateKey;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -64,7 +64,7 @@ public final class FukaShokaiController {
      * @return 賦課照会キー
      */
     public static FukaShokaiKey getFukaShokaiKeyInViewState() {
-        return ViewStateHolder.get(DbbViewStateKey.FukaShokaiKey, FukaShokaiKey.class);
+        return ViewStateHolder.get(ViewStateKeys.賦課照会キー, FukaShokaiKey.class);
     }
 
     /**
@@ -75,7 +75,7 @@ public final class FukaShokaiController {
      */
     public static MaeRirekiKey getMaeRirekiKeyInViewState() {
 
-        MaeRirekiKey maeRirekiKey = ViewStateHolder.get(DbbViewStateKey.MaeRirekiKey, MaeRirekiKey.class);
+        MaeRirekiKey maeRirekiKey = ViewStateHolder.get(ViewStateKeys.前履歴キー, MaeRirekiKey.class);
         if (maeRirekiKey != null) {
             return maeRirekiKey;
         }
@@ -90,7 +90,7 @@ public final class FukaShokaiController {
 
         Fuka 前年度賦課モデル = modeloid.get();
         MaeRirekiKey maeKey = ViewStateKeyCreator.createMaeRirekiKey(前年度賦課モデル, fukaKey.get氏名());
-        ViewStateHolder.put(DbbViewStateKey.MaeRirekiKey, maeKey);
+        ViewStateHolder.put(ViewStateKeys.前履歴キー, maeKey);
 
         return maeKey;
     }
