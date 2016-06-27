@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0030011;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.KogakuServicehiPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.KogakuServicehiTaishoshaKensakuMainDiv;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
@@ -15,16 +15,16 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
  *
  * @reamsid_L DBC-3000-010 gongliang
  */
-public class KogakuServicehiPanelValidator {
+public class KogakuServicehiTaishoshaKensakuMainValidator {
 
-    private final KogakuServicehiPanelDiv div;
+    private final KogakuServicehiTaishoshaKensakuMainDiv div;
 
     /**
      * コンストラクタです。
      *
      * @param div {@link DvShokanbaraiJo hoDiv}
      */
-    public KogakuServicehiPanelValidator(KogakuServicehiPanelDiv div) {
+    public KogakuServicehiTaishoshaKensakuMainValidator(KogakuServicehiTaishoshaKensakuMainDiv div) {
         this.div = div;
     }
 
@@ -36,8 +36,8 @@ public class KogakuServicehiPanelValidator {
     public IValidationMessages validate被保険者を指定入力() {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div)
-                .ifNot(KogakuServicehiPanelSpec.被保険者を指定入力チェック)
-                .thenAdd(KogakuServicehiPanelValidationMessage.被保険者を指定入力チェック)
+                .ifNot(KogakuServicehiTaishoshaKensakuMainSpec.被保険者を指定入力チェック)
+                .thenAdd(KogakuServicehiTaishoshaKensakuMainMessage.被保険者を指定入力チェック)
                 .messages());
         return messages;
     }
@@ -50,8 +50,8 @@ public class KogakuServicehiPanelValidator {
     public IValidationMessages validate年月を指定入力() {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div)
-                .ifNot(KogakuServicehiPanelSpec.年月を指定入力チェック)
-                .thenAdd(KogakuServicehiPanelValidationMessage.年月を指定入力チェック)
+                .ifNot(KogakuServicehiTaishoshaKensakuMainSpec.年月を指定入力チェック)
+                .thenAdd(KogakuServicehiTaishoshaKensakuMainMessage.年月を指定入力チェック)
                 .messages());
         return messages;
     }
