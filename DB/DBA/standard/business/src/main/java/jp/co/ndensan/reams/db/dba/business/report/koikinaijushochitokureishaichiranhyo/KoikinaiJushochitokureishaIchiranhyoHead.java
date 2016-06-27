@@ -16,11 +16,9 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KoikinaiJushochitokureishaIchiranhyoHeadItem {
+public class KoikinaiJushochitokureishaIchiranhyoHead {
 
     private final RString 印刷日時;
-    // TODO 袁献輝 rseファイルにninshoshaShimeiを存在しない　2016/02/26。
-//    private final RString ページ数;
     private final RString 市町村コード;
     private final RString 市町村名;
     private final RString 並び順１;
@@ -52,10 +50,8 @@ public class KoikinaiJushochitokureishaIchiranhyoHeadItem {
      * @param 改頁５ 改頁５
      *
      */
-    public KoikinaiJushochitokureishaIchiranhyoHeadItem(
+    public KoikinaiJushochitokureishaIchiranhyoHead(
             RString 印刷日時,
-            // TODO 袁献輝 rseファイルにninshoshaShimeiを存在しない　2016/02/26。
-            //            RString ページ数,
             RString 市町村コード,
             RString 市町村名,
             RString 並び順１,
@@ -68,10 +64,7 @@ public class KoikinaiJushochitokureishaIchiranhyoHeadItem {
             RString 改頁３,
             RString 改頁４,
             RString 改頁５) {
-
         this.印刷日時 = 印刷日時;
-        // TODO 袁献輝 rseファイルにninshoshaShimeiを存在しない　2016/02/26。
-//        this.ページ数 = ページ数;
         this.市町村コード = 市町村コード;
         this.市町村名 = 市町村名;
         this.並び順１ = 並び順１;

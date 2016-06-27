@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package jp.co.ndensan.reams.db.dbu.definition.koikinaijushochitokurei;
+package jp.co.ndensan.reams.db.dbu.definition.core.koikinaijushochitokurei;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;

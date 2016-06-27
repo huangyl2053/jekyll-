@@ -15,7 +15,7 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KoikinaiJushochitokureishaIchiranhyoBodyItem {
+public class KoikinaiJushochitokureishaIchiranhyoBody {
 
     private final RString 被保険者番号;
     private final RString 氏名カナ;
@@ -68,7 +68,7 @@ public class KoikinaiJushochitokureishaIchiranhyoBodyItem {
      * @param 措置市町村コード 措置市町村コード
      * @param 措置市町村名称 措置市町村名称
      */
-    public KoikinaiJushochitokureishaIchiranhyoBodyItem(
+    public KoikinaiJushochitokureishaIchiranhyoBody(
             RString 被保険者番号,
             RString 氏名カナ,
             RString 生年月日,

@@ -16,8 +16,8 @@ import java.util.List;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KoikinaiJushochitokureishaIchiranhyoReportJoho {
 
-    private final KoikinaiJushochitokureishaIchiranhyoHeadItem headItem;
-    private final List<KoikinaiJushochitokureishaIchiranhyoBodyItem> bodyItemList;
+    private final KoikinaiJushochitokureishaIchiranhyoHead headItem;
+    private final List<KoikinaiJushochitokureishaIchiranhyoBody> bodyItemList;
 
     /**
      * コンストラクタを作成します。
@@ -26,8 +26,8 @@ public class KoikinaiJushochitokureishaIchiranhyoReportJoho {
      * @param bodyItemList 広域内住所地特例者一覧表ボディリスト
      */
     public KoikinaiJushochitokureishaIchiranhyoReportJoho(
-            KoikinaiJushochitokureishaIchiranhyoHeadItem headItem,
-            List<KoikinaiJushochitokureishaIchiranhyoBodyItem> bodyItemList) {
+            KoikinaiJushochitokureishaIchiranhyoHead headItem,
+            List<KoikinaiJushochitokureishaIchiranhyoBody> bodyItemList) {
 
         this.headItem = headItem;
         this.bodyItemList = bodyItemList;
