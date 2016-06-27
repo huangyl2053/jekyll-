@@ -60,6 +60,7 @@
         <result property="before_before_chosainShimei" column="before_before_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chikuCode" column="chikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo"/>
+        <result property="koroshoIfShikibetsuCode"  column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
     <resultMap id="resultMap_IKnSyoiRaiRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IKnSyoiRaiRelateEntity" autoMapping="true">
         <result property="shinseishoKanriNo"  column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
@@ -162,6 +163,7 @@
 	<result property="ninteichosaKanryoYMD"  column="ninteichosaKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
 	<result property="ikenshoTorokuKanryoYMD"  column="ikenshoTorokuKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
 	<result property="maskingKanryoYMD"  column="maskingKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="imageSharedFileId"  column="imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
    </resultMap>
    <resultMap id="resultMap_ShinSaKaiToRoKuRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelateEntity" autoMapping="true">
     <result property="shinseishoKanriNo"  column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
@@ -230,6 +232,18 @@
     <result property="centerSoshinYMD"  column="centerSoshinYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     <result property="ifSofuYMD"  column="ifSofuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
 </resultMap>
+   <resultMap id="resultMap_ShinSaKeTuKeRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKeTuKeRelateEntity" autoMapping="true">
+        <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="shinseijiKubunCode" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="ninteiShinseiYMD" column="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="koshinTsuchiHakkoYMD" column="koshinTsuchiHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="koshinTsuchiHakkoKanryoYMD" column="koshinTsuchiHakkoKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shoriJotaiKubun" column="shoriJotaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="johoTorokuKanryoYMD" column="ninteiShinseiJohoTorokuKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
     <select resultOrdered="true" id="get更新対象" resultMap="resultMap_KoShiTaisyoRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT                                                                                
@@ -421,7 +435,8 @@
             DbT5910_temp1_1."jigyoshaMeisho"  AS   before_before_jigyoshaMeisho,
             DbT5913_temp_1_1."chosainShimei"  AS  before_before_chosainShimei,
             DbT5913."chikuCode",
-            DbT5201."ninteichosaIraiRirekiNo"
+            DbT5201."ninteichosaIraiRirekiNo",
+            DbT5101."koroshoIfShikibetsuCode"
         FROM
             rgdb."DbT5101NinteiShinseiJoho" DbT5101
             INNER  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
@@ -998,13 +1013,16 @@
             DbT5105."ikenshoSakuseiIraiKanryoYMD",
             DbT5105."ninteichosaKanryoYMD",
             DbT5105."ikenshoTorokuKanryoYMD",
-            DbT5105."maskingKanryoYMD"
+            DbT5105."maskingKanryoYMD",
+            DbT4115."imageSharedFileId"
         FROM
             rgdb."DbT5101NinteiShinseiJoho" DbT5101
             INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
                 ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
             INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
                 ON  DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            INNER  JOIN  rgdb."DbT4115Image" DbT4115
+                ON  DbT4115."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         WHERE
                 DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
             AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
@@ -1248,4 +1266,40 @@
                   DbT5101."ninteiShinseiYMD",
                   DbT5101."shoKisaiHokenshaNo"
     </select>
+    <select resultOrdered="true" id="get審査受付" resultMap="resultMap_ShinSaKeTuKeRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+        SELECT                                                                                
+            DbT5101."shinseishoKanriNo",
+            DbT5101."ninteiShinseiShinseijiKubunCode",
+            DbT5101."hihokenshaNo",
+            DbT5101."hihokenshaName",
+            DbT5101."ninteiShinseiYMD",
+            DbT5101."koshinTsuchiHakkoYMD",
+            DbT5101."koshinTsuchiHakkoKanryoYMD",
+            DbT5101."shoriJotaiKubun",
+            DbT7051."shichosonMeisho",
+            DbT5105."ninteiShinseiJohoTorokuKanryoYMD"                                                                            
+        FROM
+            rgdb."DbT5101NinteiShinseiJoho" DbT5101
+            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051                                                                       
+                ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+            INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
+                ON  DbT5105."shinseishoKanriNo"= DbT5101."shinseishoKanriNo"
+        WHERE                                                                                
+                DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+            AND DbT5105."ninteichosaIraiKanryoYMD" IS NULL
+            AND DbT5105."ninteichosaKanryoYMD" IS NULL
+            AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NULL
+            AND DbT5105."ikenshoTorokuKanryoYMD" IS NULL
+            AND DbT5105."ichijiHanteiKanryoYMD" IS NULL
+            AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
+            AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
+            AND DbT5105."centerSoshinYMD" IS NULL
+            AND DbT5105."maskingKanryoYMD" IS NULL
+            AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
+            AND DbT5101."logicalDeletedFlag" = FALSE
+        ORDER BY  DbT5101."hihokenshaKana",
+                  DbT5101."ninteiShinseiYMD",
+                  DbT5101."shoKisaiHokenshaNo"
+   </select>
 </mapper>

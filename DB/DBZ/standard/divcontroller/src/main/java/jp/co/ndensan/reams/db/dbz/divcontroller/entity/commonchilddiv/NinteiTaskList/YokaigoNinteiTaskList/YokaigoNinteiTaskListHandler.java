@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.NiJiHanTei
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShiSeiKeTuKeBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiToRoKuBusiness;
+import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKeTuKeBusiness;
+import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.NijiHanteiKekkaInputHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
@@ -33,7 +35,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiTokusokuHoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.NijiHanteiKekkaInputHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
@@ -72,6 +73,7 @@ public class YokaigoNinteiTaskListHandler {
     private static final RString 審査会登録モード = new RString("審査会登録モード");
     private static final RString 二次判定モード = new RString("二次判定モード");
     private static final RString 月例処理モード = new RString("月例処理モード");
+    private static final RString 審査受付モード = new RString("審査受付モード");
     private static final Code 認定ｿﾌﾄ99 = new Code(new RString("99A"));
     private static final Code 認定ｿﾌﾄ2002 = new Code(new RString("02A"));
     private static final Code 認定ｿﾌﾄ2006 = new Code(new RString("06A"));
@@ -153,6 +155,10 @@ public class YokaigoNinteiTaskListHandler {
     private static final int インデックス_73 = 73;
     private static final int インデックス_74 = 74;
     private static final int インデックス_75 = 75;
+    private static final int インデックス_82 = 82;
+    private static final int インデックス_83 = 83;
+    private static final int インデックス_84 = 84;
+    private static final int インデックス_85 = 85;
 
     /**
      * コンストラクタです。
@@ -288,6 +294,12 @@ public class YokaigoNinteiTaskListHandler {
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
             月例処理モード(月例処理List);
         }
+        if (審査受付モード.equals(モード)) {
+            List<ShinSaKeTuKeBusiness> 審査受付List = YokaigoNinteiTaskListFinder.createInstance().
+                    get審査受付モード(YokaigoNinteiTaskListParameter.
+                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
+            審査受付モード(審査受付List);
+        }
     }
 
     private void 更新対象モード(List<KoShiTaisyoBusiness> 更新対象List) {
@@ -421,13 +433,14 @@ public class YokaigoNinteiTaskListHandler {
             row.setChosaTokusokuHoho(business.get認定調査督促方法() == null ? RString.EMPTY
                     : new RString(NinteichosaTokusokuHoho.toValue(business.get認定調査督促方法()).name()));
             row.getChosaTokusokuCount().setValue(new Decimal(business.get認定調査督促回数()));
-            row.getChosaTokusokuLiit().setValue(new RDate(business.get認定調査期限年月日().toString()));
+            row.setChikuCode(RString.isNullOrEmpty(business.get地区コード()) ? RString.EMPTY : business.get地区コード());
             row.setChosaTokusokuChiku(business.get地区コード() == null ? RString.EMPTY
                     : CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
                             DBECodeShubetsu.調査地区コード.getコード(),
                             new Code(business.get地区コード()), new FlexibleDate(RDate.getNowDate().toDateString())));
             row.setNinteichosaIraiRirekiNo(new RString(String.valueOf(business.get認定調査依頼履歴番号())));
             row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
+            row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード() == null ? RString.EMPTY : business.get厚労省IF識別コード().value());
             調査依頼モードの日付設定(row, business);
             rowList.add(row);
         }
@@ -437,6 +450,10 @@ public class YokaigoNinteiTaskListHandler {
     }
 
     private void 調査依頼モードの日付設定(dgNinteiTaskList_Row row, CyoSaiRaiBusiness business) {
+
+        if (business.get認定調査期限年月日() != null) {
+            row.getChosaTokusokuLiit().setValue(new RDate(business.get認定調査期限年月日().toString()));
+        }
 
         if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
             row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
@@ -751,6 +768,10 @@ public class YokaigoNinteiTaskListHandler {
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_25).setVisible(true);
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_31).setVisible(true);
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_55).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_82).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_83).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_84).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_85).setVisible(true);
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
         int completeCount = 0;
         for (MaSuKinGuBusiness business : マスキングList) {
@@ -952,6 +973,39 @@ public class YokaigoNinteiTaskListHandler {
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
 
+    private void 審査受付モード(List<ShinSaKeTuKeBusiness> 審査受付List) {
+
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_1).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_2).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_3).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_4).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_8).setVisible(true);
+        List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
+        int completeCount = 0;
+        for (ShinSaKeTuKeBusiness business : 審査受付List) {
+
+            dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
+            row.setHokensha(business.get保険者() == null ? RString.EMPTY : business.get保険者());
+            if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
+                row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
+            }
+            row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
+            row.setHihoShimei(business.get被保険者氏名() == null ? RString.EMPTY : business.get被保険者氏名().value());
+            row.setShinseiKubunShinseiji(business.get認定申請区分_申請時コード() == null
+                    ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分_申請時コード().getKey()).get名称());
+            if (business.get認定申請情報登録完了年月日() != null && !business.get認定申請情報登録完了年月日().isEmpty()) {
+                completeCount++;
+                row.getKoshinTsuchiYMD().setValue(new RDate(business.get認定申請情報登録完了年月日().toString()));
+            }
+
+            rowList.add(row);
+        }
+        div.getTxtTotalCount().setValue(new RString(String.valueOf(審査受付List.size())));
+        div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
+        div.getDgNinteiTaskList().setDataSource(rowList);
+    }
+
     private void 共通状態() {
 
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(false);
@@ -1030,6 +1084,10 @@ public class YokaigoNinteiTaskListHandler {
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_73).setVisible(false);
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_74).setVisible(false);
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_75).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_82).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_83).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_84).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_85).setVisible(false);
     }
 
     private RString 一次判定結果の名称を取得する(Code 厚労省IF識別コード, Code 一次判定結果コード) {

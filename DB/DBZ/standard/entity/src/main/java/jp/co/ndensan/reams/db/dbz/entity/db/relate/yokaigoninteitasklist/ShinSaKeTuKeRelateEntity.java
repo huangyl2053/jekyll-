@@ -9,31 +9,28 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 要介護認定申請情報&構成市町村マスタ&要介護認定完了情報RelateEntityクラスです。
+ * 要介護認定申請情報＆構成市町村マスタRelateEntityクラスです。
  *
  * @reamsid_L DBE-3000-160 houtianpeng
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class MaSuKinGuRelateEntity {
+public class ShinSaKeTuKeRelateEntity {
 
     private ShinseishoKanriNo shinseishoKanriNo;
+    private Code shinseijiKubunCode;
     private RString hihokenshaNo;
     private AtenaMeisho hihokenshaName;
-    private Code shinseijiKubunCode;
     private FlexibleDate ninteiShinseiYMD;
+    private FlexibleDate koshinTsuchiHakkoYMD;
+    private FlexibleDate koshinTsuchiHakkoKanryoYMD;
+    private Code shoriJotaiKubun;
     private RString shichosonMeisho;
-    private FlexibleDate ninteichosaIraiKanryoYMD;
-    private FlexibleDate ikenshoSakuseiIraiKanryoYMD;
-    private FlexibleDate ninteichosaKanryoYMD;
-    private FlexibleDate ikenshoTorokuKanryoYMD;
-    private FlexibleDate maskingKanryoYMD;
-    private RDateTime imageSharedFileId;
+    private FlexibleDate johoTorokuKanryoYMD;
 }

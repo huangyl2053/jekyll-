@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.NiJiHan
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShiSeiKeTuKeRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKeTuKeRelateEntity;
 
 /**
  * 要介護認定申請情報＆構成市町村マスタ検索のインタフェイスです。
@@ -80,8 +81,7 @@ public interface IYokaigoNinteiTaskListMapper {
     List<ShinSaKaiToRoKuRelate> get前意見書依頼(YokaigoNinteiTaskListParameter parameter);
 
     /**
-     * 要介護認定申請情報＆申請履歴情報＆要介護認定完了情報＆構成市町村マスタ＆ 
-     * 認定調査依頼情報＆認定調査票（概況調査）＆認定調査委託先情報＆調査員情報
+     * 要介護認定申請情報＆申請履歴情報＆要介護認定完了情報＆構成市町村マスタ＆ 認定調査依頼情報＆認定調査票（概況調査）＆認定調査委託先情報＆調査員情報
      *
      * @param parameter YokaigoNinteiTaskListParameter
      * @return List<CyoSaNyuSyuRelateEntity>
@@ -173,4 +173,12 @@ public interface IYokaigoNinteiTaskListMapper {
      * @return List<GeTuReiSyoRiRelateEntity>
      */
     List<GeTuReiSyoRiRelateEntity> get月例処理(YokaigoNinteiTaskListParameter parameter);
+
+    /**
+     * 審査受付モードによって、要介護認定申請情報＆構成市町村マスタを取得します。
+     *
+     * @param parameter YokaigoNinteiTaskListParameter
+     * @return List<ShinSaKeTuKeRelateEntity>
+     */
+    List<ShinSaKeTuKeRelateEntity> get審査受付(YokaigoNinteiTaskListParameter parameter);
 }
