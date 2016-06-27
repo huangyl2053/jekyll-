@@ -1,12 +1,20 @@
-/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
-/// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="../../d.ts/jquery.d.ts" />
+/// <reference path="../../d.ts/UzViewControls.d.ts" />
+/// <reference path="../../d.ts/UzaConverter.d.ts" />
 
 module DBC {
 
      export module KyodoJukyushaIdoRenrakuhyo {
 
         export class Events {
+
+            public static onClick_onChange(): string {
+                return "onClick_onChange";
+            }
+
+            public static onClick_chkChange(): string {
+                return "onClick_chkChange";
+            }
 
         }
 

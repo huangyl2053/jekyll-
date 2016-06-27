@@ -1,26 +1,38 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyodoJukyushaIdoRenrakuhyo;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyodoJukyushaIdoRenrakuhyo.KyodoJukyushaIdoRenrakuhyo;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
 import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyodoshoriyoJukyushaIdoRenrakuhyoParam;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
- * KyodoJukyushaIdoRenrakuhyo のクラスファイル 
- * 
- * @author 自動生成
+ * KyodoJukyushaIdoRenrakuhyo のクラスファイル
+ *
+ * @reamsid_L DBC-4390-010 xupeng
  */
 public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyushaIdoRenrakuhyoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -497,7 +509,7 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
             DisplayMode[] enumArray = DisplayMode.values();
 
             for (DisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -512,11 +524,11 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     }
 
     public DisplayMode getMode_DisplayMode() {
-        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
+        return (DisplayMode) _CommonChildDivModeUtil.getMode(this.modes, DisplayMode.class);
     }
 
-    public void setMode_DisplayMode( DisplayMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
+    public void setMode_DisplayMode(DisplayMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DisplayMode.class, value);
     }
 
     /*
@@ -528,7 +540,7 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     }
 
     @JsonIgnore
-    public void  setLin1(HorizontalLine lin1) {
+    public void setLin1(HorizontalLine lin1) {
         this.getKyodoJukyushaIdoRenrakuhyoTeisei().setLin1(lin1);
     }
 
@@ -538,7 +550,7 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     }
 
     @JsonIgnore
-    public void  setTxtTeiseiYMD(TextBoxDate txtTeiseiYMD) {
+    public void setTxtTeiseiYMD(TextBoxDate txtTeiseiYMD) {
         this.getKyodoJukyushaIdoRenrakuhyoTeisei().setTxtTeiseiYMD(txtTeiseiYMD);
     }
 
@@ -548,7 +560,7 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     }
 
     @JsonIgnore
-    public void  setRadTeiseiKubunCode(RadioButton radTeiseiKubunCode) {
+    public void setRadTeiseiKubunCode(RadioButton radTeiseiKubunCode) {
         this.getKyodoJukyushaIdoRenrakuhyoTeisei().setRadTeiseiKubunCode(radTeiseiKubunCode);
     }
 
@@ -558,7 +570,7 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     }
 
     @JsonIgnore
-    public void  setRadRoureiFukushiNenkinJukyuAriFlag(RadioButton radRoureiFukushiNenkinJukyuAriFlag) {
+    public void setRadRoureiFukushiNenkinJukyuAriFlag(RadioButton radRoureiFukushiNenkinJukyuAriFlag) {
         this.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getKogakuRadioBtnPanel().setRadRoureiFukushiNenkinJukyuAriFlag(radRoureiFukushiNenkinJukyuAriFlag);
     }
 
@@ -568,7 +580,7 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     }
 
     @JsonIgnore
-    public void  setRadRiyoshaFutan2DankaiAriFlag(RadioButton radRiyoshaFutan2DankaiAriFlag) {
+    public void setRadRiyoshaFutan2DankaiAriFlag(RadioButton radRiyoshaFutan2DankaiAriFlag) {
         this.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getKogakuRadioBtnPanel().setRadRiyoshaFutan2DankaiAriFlag(radRiyoshaFutan2DankaiAriFlag);
     }
 
@@ -578,11 +590,59 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     }
 
     @JsonIgnore
-    public void  setRadShikyuShinseishoOutputAriFlag(RadioButton radShikyuShinseishoOutputAriFlag) {
+    public void setRadShikyuShinseishoOutputAriFlag(RadioButton radShikyuShinseishoOutputAriFlag) {
         this.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getKogakuRadioBtnPanel().setRadShikyuShinseishoOutputAriFlag(radShikyuShinseishoOutputAriFlag);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    /**
+     * 画面を画面初期化します。
+     *
+     * @param 処理モード RString
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 FlexibleDate
+     * @param 論理削除 boolean
+     * @param 対象年月 FlexibleYearMonth
+     * @return KyodoshoriyoJukyushaIdoRenrakuhyoParam
+     */
+    @JsonIgnore
+    @Override
+    public KyodoshoriyoJukyushaIdoRenrakuhyoParam initialize(RString 処理モード, HihokenshaNo 被保険者番号,
+            FlexibleDate 異動日, boolean 論理削除, FlexibleYearMonth 対象年月) {
+        return KyodoJukyushaIdoRenrakuhyoDivHandler.of(this).initialize(処理モード, 被保険者番号, 異動日, 論理削除, 対象年月);
+    }
 
+    /**
+     * 最新画面データ
+     *
+     * @return KyodoshoriyoJukyushaIdoRenrakuhyoParam
+     */
+    @JsonIgnore
+    @Override
+    public KyodoshoriyoJukyushaIdoRenrakuhyoParam getNewデータ() {
+        return KyodoJukyushaIdoRenrakuhyoDivHandler.of(this).getNewデータ();
+    }
+
+    /**
+     * 一時差止日の入力チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs get一時差止日の入力チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivHandler.of(this).一時差止日の入力チェック();
+    }
+
+    /**
+     * 一時差止日の関連チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs get一時差止日の関連チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivHandler.of(this).一時差止日の関連チェック();
+    }
 }
