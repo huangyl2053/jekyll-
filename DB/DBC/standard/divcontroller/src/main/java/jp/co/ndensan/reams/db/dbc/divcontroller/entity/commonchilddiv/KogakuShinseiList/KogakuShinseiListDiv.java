@@ -340,5 +340,6 @@ public class KogakuShinseiListDiv extends Panel implements IKogakuShinseiListDiv
         KogakuShinseiListDivHandler.of(this).画面初期化(メニューID, 被保険者番号, 導入形態コード);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.導入形態コード, 導入形態コード);
+        ViewStateHolder.put(ViewStateKeys.メニューID, メニューID);
     }
 }

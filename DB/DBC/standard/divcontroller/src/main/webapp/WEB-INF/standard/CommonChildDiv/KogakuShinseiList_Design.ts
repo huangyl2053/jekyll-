@@ -8,6 +8,34 @@ module DBC {
 
         export class Events {
 
+            public static onFocus_txtServiceYM(): string {
+                return "onFocus_txtServiceYM";
+            }
+
+            public static onClick_btnShinseiJohoTsuika(): string {
+                return "onClick_btnShinseiJohoTsuika";
+            }
+
+            public static onClick_btnTaishosyaJoho(): string {
+                return "onClick_btnTaishosyaJoho";
+            }
+
+            public static onClick_btnKensaku(): string {
+                return "onClick_btnKensaku";
+            }
+
+            public static onClick_select(): string {
+                return "onClick_select";
+            }
+
+            public static onClick_modify(): string {
+                return "onClick_modify";
+            }
+
+            public static onClick_delete(): string {
+                return "onClick_delete";
+            }
+
             public static onMulti_dgKyufuJissekiMeisaiList(): string {
                 return "onMulti_dgKyufuJissekiMeisaiList";
             }
@@ -71,6 +99,10 @@ module DBC {
 
             public dgShinseiJoho(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgShinseiJoho"));
+            }
+
+            public rowId(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("rowId"));
             }
 
         }
