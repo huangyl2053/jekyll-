@@ -86,7 +86,7 @@ public class ShinsakaiKaisaiOshiraseTsuchiReportSource implements IReportSource 
      */
     public enum ReportSourceFields {
 
-        pageCount,
+        gogitaiNo,
 
     }
 }

@@ -128,10 +128,7 @@ public class SonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<SonotaJoho
 //    }
     @Override
     protected void keyBreakProcess(SonotaJohoEntity current) {
-        if (hasBrek(getBefore(), current)) {
-            IinSonotashiryoSakuseiA3Report report = new IinSonotashiryoSakuseiA3Report(item);
-            report.writeBy(reportSourceWriterA3);
-        }
+        hasBrek(getBefore(), current);
     }
 
     private boolean hasBrek(SonotaJohoEntity before, SonotaJohoEntity current) {
