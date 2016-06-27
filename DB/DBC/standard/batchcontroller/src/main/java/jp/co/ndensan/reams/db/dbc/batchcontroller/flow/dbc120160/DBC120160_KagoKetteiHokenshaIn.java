@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.DBC120160;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc120160;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120160.KagoKetteiHokenshaInSharedFileCopy;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120160.KagoKetteiHokenshaInTempSaveProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120160.KagoKetteiHokenshaInUpdataDBProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120160.KagoKetteiHokenshaInUpdataTempTableProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120160.KagoKetteiHokenshaInWriteReportProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120160.KagoKetteiHokenshaInSharedFileCopy;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120160.KagoKetteiHokenshaInTempSaveProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120160.KagoKetteiHokenshaInUpdataDBProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120160.KagoKetteiHokenshaInUpdataTempTableProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120160.KagoKetteiHokenshaInWriteReportProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaWriteReportProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.kagoketteihokenshain.KagoKetteiHokenshaInBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
