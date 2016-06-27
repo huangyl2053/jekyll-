@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710010;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710010;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.ChushutsuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.SakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuProcessParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity;
-import jp.co.ndensan.reams.db.dbc.service.core.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor;
+import jp.co.ndensan.reams.db.dbc.service.core.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuCsvEntityEditor;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -53,6 +53,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -61,7 +62,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBC-3091-020 surun
  */
-public class HanyoListKyotakuServiceKeikakuNoRenbanProcess extends BatchProcessBase<HanyoListKyotakuServiceKeikakuEntity> {
+public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<HanyoListKyotakuServiceKeikakuEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "hanyolistkyotakuservicekeikaku.IHanyoListKyotakuServiceKeikakuMapper.getCSVData");
@@ -85,18 +86,20 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanProcess extends BatchProcessB
     private static final RString CSVNAME = new RString("HanyoList_KyotakuServiceKeikaku.csv");
     private static final RString 定数_被保険者番号 = new RString("被保険者番号");
     private HanyoListKyotakuServiceKeikakuProcessParameter parameter;
-    private HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor csvEntityEditor;
+    private HanyoListKyotakuServiceKeikakuCsvEntityEditor csvEntityEditor;
     private Association 地方公共団体;
     private FileSpoolManager manager;
     private List<PersonalData> personalDataList;
     private RString eucFilePath;
+    private Decimal 連番;
 
     @BatchWriter
-    private EucCsvWriter<HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity> eucCsvWriter;
+    private EucCsvWriter<HanyoListKyotakuServiceKeikakuCsvEntity> eucCsvWriter;
 
     @Override
     protected void beforeExecute() {
-        csvEntityEditor = new HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor();
+        連番 = Decimal.ONE;
+        csvEntityEditor = new HanyoListKyotakuServiceKeikakuCsvEntityEditor();
         personalDataList = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
 
@@ -127,7 +130,8 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanProcess extends BatchProcessB
 
     @Override
     protected void process(HanyoListKyotakuServiceKeikakuEntity entity) {
-        eucCsvWriter.writeLine(csvEntityEditor.editor(entity, parameter));
+        eucCsvWriter.writeLine(csvEntityEditor.editor(entity, parameter, 連番));
+        連番 = 連番.add(Decimal.ONE);
         personalDataList.add(toPersonalData(entity));
 
     }
@@ -141,7 +145,7 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanProcess extends BatchProcessB
     @Override
     protected void afterExecute() {
         if ((personalDataList == null || personalDataList.isEmpty()) && parameter.isCsv項目名付加()) {
-            eucCsvWriter.writeLine(new HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity());
+            eucCsvWriter.writeLine(new HanyoListKyotakuServiceKeikakuCsvEntity());
         }
         eucCsvWriter.close();
         if (personalDataList == null || personalDataList.isEmpty()) {
