@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.JogaiShinsainJoho;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShinsainJoho.JogaiShinsainJoho.JogaiShinsainJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShinsainJoho.JogaiShinsainJoho.dgShinsakaiIinIchiran_Row;
@@ -43,6 +44,7 @@ public class JogaiShinsainJohoHandler {
     public void 画面項目にセットされている値をクリア() {
         div.getTxtShinsakaiIinCode().clearValue();
         div.getTxtShinsakaiIinName().clearValue();
+        div.getDgShozokuKikanIchiran().setDataSource(new ArrayList<dgShozokuKikanIchiran_Row>());
     }
 
     /**

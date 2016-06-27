@@ -15,9 +15,13 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShins
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShinsainJoho.JogaiShinsainJoho.dgShozokuKikanIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.JogaiShinsainJoho.JogaiShinsainJohoHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.jogaishinsainjoho.JogaiShinsainJohoFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
@@ -43,7 +47,6 @@ public class JogaiShinsainJoho {
         getHandler(div).画面項目にセットされている値をクリア();
         getHandler(div).set画面状態();
         set画面情報(div);
-
         return ResponseData.of(div).respond();
     }
 
@@ -56,6 +59,7 @@ public class JogaiShinsainJoho {
     public ResponseData<JogaiShinsainJohoDiv> onClick_btnShinkiTsuika(JogaiShinsainJohoDiv div) {
         div.getShinsakaiIinJoho().setReadOnly(false);
         div.setHdnModel(追加);
+        getHandler(div).画面項目にセットされている値をクリア();
         return ResponseData.of(div).respond();
     }
 
@@ -132,19 +136,29 @@ public class JogaiShinsainJoho {
      * @return ResponseData<JogaiShinsainJohoDiv>
      */
     public ResponseData<JogaiShinsainJohoDiv> onClick_btnKakutei(JogaiShinsainJohoDiv div) {
-        List<dgShinsakaiIinIchiran_Row> rowList = div.getDgShinsakaiIinIchiran().getDataSource();
-        List<ShinsakaiIinItiran> shinsakaiIinItiranList = new ArrayList<>();
-        for (dgShinsakaiIinIchiran_Row row : rowList) {
-            ShinsakaiIinItiran shinsakaiIinItiran = new ShinsakaiIinItiran();
-            shinsakaiIinItiran.setShimei(row.getShimei());
-            shinsakaiIinItiran.setShinsakaiIinCode(row.getShinsakaiIinCode());
-            shinsakaiIinItiran.setShozokuKikan(row.getShozokuKikan());
-            shinsakaiIinItiranList.add(shinsakaiIinItiran);
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.確定の確認.getMessage().getCode(),
+                    UrQuestionMessages.確定の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
-        ShinsakaiIinItiranData shinsakaiIinItiranBusiness = new ShinsakaiIinItiranData();
-        shinsakaiIinItiranBusiness.setShinsakaiIinItiranList(shinsakaiIinItiranList);
-        div.setHdnShinsakaiIinItiran(DataPassingConverter.serialize(shinsakaiIinItiranBusiness));
-        return ResponseData.of(div).dialogOKClose();
+        if (new RString(UrQuestionMessages.確定の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            List<dgShinsakaiIinIchiran_Row> rowList = div.getDgShinsakaiIinIchiran().getDataSource();
+            List<ShinsakaiIinItiran> shinsakaiIinItiranList = new ArrayList<>();
+            for (dgShinsakaiIinIchiran_Row row : rowList) {
+                ShinsakaiIinItiran shinsakaiIinItiran = new ShinsakaiIinItiran();
+                shinsakaiIinItiran.setShimei(row.getShimei());
+                shinsakaiIinItiran.setShinsakaiIinCode(row.getShinsakaiIinCode());
+                shinsakaiIinItiran.setShozokuKikan(row.getShozokuKikan());
+                shinsakaiIinItiranList.add(shinsakaiIinItiran);
+            }
+            ShinsakaiIinItiranData shinsakaiIinItiranBusiness = new ShinsakaiIinItiranData();
+            shinsakaiIinItiranBusiness.setShinsakaiIinItiranList(shinsakaiIinItiranList);
+            div.setHdnShinsakaiIinItiran(DataPassingConverter.serialize(shinsakaiIinItiranBusiness));
+            return ResponseData.of(div).dialogOKClose();
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
