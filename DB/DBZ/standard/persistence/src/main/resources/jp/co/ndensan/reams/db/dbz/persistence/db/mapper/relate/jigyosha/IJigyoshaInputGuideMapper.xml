@@ -39,7 +39,7 @@
     </resultMap>
 
 
-    <select resultOrdered="true" id="getServiceJigyoshaInputGuide" resultMap="resultMap_serviceJigyoshaInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
+    <select resultOrdered="true" id="getServiceJigyoshaInputGuide" resultMap="resultMap_serviceJigyoshaInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
     SELECT * FROM(
         SELECT
         dbT7060Kaigo."jigyoshaNo" AS "dbT7060Kaigo_jigyoshaNo",
@@ -151,7 +151,7 @@
         WHERE rank_number = 1
     </select>
 
-    <select resultOrdered="true" id="getTekiyoJogaiInputGuide" resultMap="resultMap_tekiyoJogaiInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
+    <select resultOrdered="true" id="getTekiyoJogaiInputGuide" resultMap="resultMap_tekiyoJogaiInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
     SELECT * FROM(
         SELECT
         dbT1005Kaigo."jigyoshaNo" AS "dbT1005Kaigo_jigyoshaNo",
@@ -219,7 +219,7 @@
         </if>) AS dbT1005Kaigo1
         WHERE rank_number = 1
     </select>
-    <select resultOrdered="true" id="getOtherTokureiInputGuide" resultMap="resultMap_otherTokureiInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
+    <select resultOrdered="true" id="getOtherTokureiInputGuide" resultMap="resultMap_otherTokureiInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
     SELECT * FROM(
         SELECT
         dbT1005Kaigo."jigyoshaNo" AS "dbT1005Kaigo_jigyoshaNo",
