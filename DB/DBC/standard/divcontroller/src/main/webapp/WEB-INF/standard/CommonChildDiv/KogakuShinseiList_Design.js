@@ -4,6 +4,34 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onFocus_txtServiceYM = function () {
+                return "onFocus_txtServiceYM";
+            };
+
+            Events.onClick_btnShinseiJohoTsuika = function () {
+                return "onClick_btnShinseiJohoTsuika";
+            };
+
+            Events.onClick_btnTaishosyaJoho = function () {
+                return "onClick_btnTaishosyaJoho";
+            };
+
+            Events.onClick_btnKensaku = function () {
+                return "onClick_btnKensaku";
+            };
+
+            Events.onClick_select = function () {
+                return "onClick_select";
+            };
+
+            Events.onClick_modify = function () {
+                return "onClick_modify";
+            };
+
+            Events.onClick_delete = function () {
+                return "onClick_delete";
+            };
+
             Events.onMulti_dgKyufuJissekiMeisaiList = function () {
                 return "onMulti_dgKyufuJissekiMeisaiList";
             };
@@ -65,6 +93,10 @@ var DBC;
 
             Controls.prototype.dgShinseiJoho = function () {
                 return new UZA.DataGrid(this.convFiledName("dgShinseiJoho"));
+            };
+
+            Controls.prototype.rowId = function () {
+                return new UZA.TextBoxNum(this.convFiledName("rowId"));
             };
             return Controls;
         })();
