@@ -369,11 +369,14 @@ public class KyokaisoGaitoshaPanel {
                     (修正前の履歴番号 + 1),
                     修正前のリンク番号,
                     new FlexibleYearMonth(修正後の適用開始年月.getYearMonth().toDateString()));
+            if (状態_追加.equals(nofu_Row.getState())) {
+                hokenryoDan = getHandler(div).editHokenryoDankai(models.get(修正前Key));
+            }
             if (状態_削除.equals(nofu_Row.getState()) || !状態_追加.equals(nofu_Row.getState())) {
                 models.add(models.get(修正前Key).createBuilderForEdit().is論理削除フラグ(true).build());
                 hokenryoDan = getHandler(div).editHokenryoDankai(hokenryoDan);
-                models.add(hokenryoDan);
             }
+            models.add(hokenryoDan);
         } else if (状態_削除.equals(状態)) {
             if (状態_修正.equals(イベント状態)) {
                 最新リンク番号 = Integer.parseInt(row.getLinkNo().toString());

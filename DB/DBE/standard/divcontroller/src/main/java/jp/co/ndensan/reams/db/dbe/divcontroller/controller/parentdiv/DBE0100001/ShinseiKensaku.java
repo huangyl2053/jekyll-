@@ -165,6 +165,16 @@ public class ShinseiKensaku {
     }
 
     /**
+     * 「選択した帳票を発行する」ボタンのclick後処理です。
+     *
+     * @param div ShinseiKensakuDiv
+     * @return ResponseData<ShinseiKensakuDiv>
+     */
+    public ResponseData<ShinseiKensakuDiv> onClick_printAfter(ShinseiKensakuDiv div) {
+        return ResponseData.of(div).setState(DBE0100001StateName.完了);
+    }
+
+    /**
      * 「選択した帳票を発行する」ボタンのclick処理です。
      *
      * @param div ShinseiKensakuDiv
@@ -198,7 +208,7 @@ public class ShinseiKensaku {
             item.setShujiiName(row.get主治医氏名());
             items.add(item);
         }
-        return ResponseData.of(new YokaigoYoshienShinseiIchiranPrintService().print(items)).setState(DBE0100001StateName.完了);
+        return ResponseData.of(new YokaigoYoshienShinseiIchiranPrintService().print(items)).respond();
     }
 
     private ShinseiKensakuHandler getHandler(ShinseiKensakuDiv div) {

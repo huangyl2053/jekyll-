@@ -90,7 +90,6 @@ public class IchijihanteikekkahyoEntity {
     private RString 中間評価項目得点第3群;
     private RString 中間評価項目得点第4群;
     private RString 中間評価項目得点第5群;
-    private List<RString> 特記自立度リスト;
     private List<RString> 高齢者自立度リスト;
     private RString 認定調査結果認知症高齢者自立度;
     private RString 意見書認知症高齢者自立度;
@@ -135,4 +134,5 @@ public class IchijihanteikekkahyoEntity {
     private List<RString> 特別な医療3_2リスト;
     private List<RString> 特別な医療4_1リスト;
     private List<RString> 特別な医療4_2リスト;
+    private RString 厚労省IF識別コード;
 }

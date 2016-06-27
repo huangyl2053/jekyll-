@@ -7,14 +7,14 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.koikinaijushochitokurei;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoBodyItem;
-import jp.co.ndensan.reams.db.dba.business.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoHeadItem;
+import jp.co.ndensan.reams.db.dba.business.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoBody;
+import jp.co.ndensan.reams.db.dba.business.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoHead;
 import jp.co.ndensan.reams.db.dba.business.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoReport;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbu.business.report.koikinaijushochitokurei.KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei;
-import jp.co.ndensan.reams.db.dbu.definition.koikinaijushochitokurei.KoikinaiJushochiTokureiEntity;
-import jp.co.ndensan.reams.db.dbu.definition.koikinaijushochitokurei.KoikinaiJushochiTokureiItiranEntity;
+import jp.co.ndensan.reams.db.dbu.definition.core.koikinaijushochitokurei.KoikinaiJushochiTokureiEntity;
+import jp.co.ndensan.reams.db.dbu.definition.core.koikinaijushochitokurei.KoikinaiJushochiTokureiItiranEntity;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.koikinaijushochitokurei.KoikinaiKaijoParamter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.koikinaijushochitokurei.KoikinaiJushochiTokureiProcessParamter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.koikinaijushochitokurei.KoikinaiJushochiTokureiRelateEntity;
@@ -80,13 +80,13 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void afterExecute() {
-        KoikinaiJushochitokureishaIchiranhyoReport report = KoikinaiJushochitokureishaIchiranhyoReport.createFrom(getHeadItem(), getBodyItem());
+        KoikinaiJushochitokureishaIchiranhyoReport report = new KoikinaiJushochitokureishaIchiranhyoReport(getHeadItem(), getBodyItem());
         report.writeBy(retortWrite);
     }
 
-    private KoikinaiJushochitokureishaIchiranhyoHeadItem getHeadItem() {
+    private KoikinaiJushochitokureishaIchiranhyoHead getHeadItem() {
         KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei business = 帳票データlist.get(0);
-        return new KoikinaiJushochitokureishaIchiranhyoHeadItem(business.get印刷日時(),
+        return new KoikinaiJushochitokureishaIchiranhyoHead(business.get印刷日時(),
                 business.get市町村コード(),
                 business.get市町村名(),
                 business.get並び順１(),
@@ -101,10 +101,10 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
                 business.get改頁５());
     }
 
-    private List<KoikinaiJushochitokureishaIchiranhyoBodyItem> getBodyItem() {
-        List<KoikinaiJushochitokureishaIchiranhyoBodyItem> itemList = new ArrayList<>();
+    private List<KoikinaiJushochitokureishaIchiranhyoBody> getBodyItem() {
+        List<KoikinaiJushochitokureishaIchiranhyoBody> itemList = new ArrayList<>();
         for (KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei data : 帳票データlist) {
-            KoikinaiJushochitokureishaIchiranhyoBodyItem item = new KoikinaiJushochitokureishaIchiranhyoBodyItem(data.get被保険者番号(),
+            KoikinaiJushochitokureishaIchiranhyoBody item = new KoikinaiJushochitokureishaIchiranhyoBody(data.get被保険者番号(),
                     data.get氏名カナ(),
                     data.get生年月日(),
                     data.get住所コード(),

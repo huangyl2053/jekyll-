@@ -44,7 +44,7 @@
      ORDER BY "shichosonCode" ASC
     </select>
     
-    <resultMap id="resultMap_TaishoShuryoYmdEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.shotokujohoichiranhyo.TaishoShuryoYmdEntity" autoMapping="true">
+    <resultMap id="resultMap_TaishoShuryoYmdEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyo.TaishoShuryoYmdEntity" autoMapping="true">
         <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="対象終了日時" column="taishoShuryoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
         <result property="年度内連番" column="年度内連番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

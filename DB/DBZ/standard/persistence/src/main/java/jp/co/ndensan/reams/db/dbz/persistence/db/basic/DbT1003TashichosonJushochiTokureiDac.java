@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003TashichosonJushochiTokureiEntity> {
 
+    private static final RString 識別コード_TMP = new RString("識別コード");
     @InjectSession
     private SqlSession session;
 
@@ -143,6 +144,30 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
                 order(by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).
                 limit(1).
                 toObject(DbT1003TashichosonJushochiTokureiEntity.class);
+    }
+
+    /**
+     * 訂正対象の履歴を取得します。
+     *
+     * @param 識別コード 識別コード
+     * @param 適用年月日 適用年月日
+     * @return List<DbT1003TashichosonJushochiTokureiEntity>
+     */
+    @Transaction
+    public List<DbT1003TashichosonJushochiTokureiEntity> get訂正対象の履歴(ShikibetsuCode 識別コード,
+            FlexibleDate 適用年月日) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード_TMP.toString()));
+        requireNonNull(適用年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用年月日"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1003TashichosonJushochiTokurei.class).
+                where(and(
+                                eq(shikibetsuCode, 識別コード),
+                                eq(DbT1003TashichosonJushochiTokurei.tekiyoYMD, 適用年月日),
+                                eq(DbT1003TashichosonJushochiTokurei.isDeleted, false))).
+                toList(DbT1003TashichosonJushochiTokureiEntity.class);
     }
 
 }

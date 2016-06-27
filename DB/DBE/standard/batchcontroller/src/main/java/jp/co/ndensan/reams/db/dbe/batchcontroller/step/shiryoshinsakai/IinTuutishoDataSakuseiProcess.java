@@ -58,7 +58,7 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
     private IShiryoShinsakaiIinMapper mapper;
     private IinTuutishoMyBatisParameter myBatisParameter;
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
-            new RString(ShinsakaiKaisaiOshiraseTsuchiReportSource.ReportSourceFields.pageCount.name())));
+            new RString(ShinsakaiKaisaiOshiraseTsuchiReportSource.ReportSourceFields.gogitaiNo.name())));
     private ShinsakaiKaisaiOshiraseTsuchiItem item;
     @BatchWriter
     private BatchReportWriter<ShinsakaiKaisaiOshiraseTsuchiReportSource> batchWrite;
@@ -184,10 +184,7 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
 
     @Override
     protected void keyBreakProcess(ShinsakaiIinCodeEntity current) {
-        if (hasBrek(getBefore(), current)) {
-            ShinsakaiKaisaiOshiraseTsuchiReport report = new ShinsakaiKaisaiOshiraseTsuchiReport(item);
-            report.writeBy(reportSourceWriter);
-        }
+        hasBrek(getBefore(), current);
     }
 
     private boolean hasBrek(ShinsakaiIinCodeEntity before, ShinsakaiIinCodeEntity current) {

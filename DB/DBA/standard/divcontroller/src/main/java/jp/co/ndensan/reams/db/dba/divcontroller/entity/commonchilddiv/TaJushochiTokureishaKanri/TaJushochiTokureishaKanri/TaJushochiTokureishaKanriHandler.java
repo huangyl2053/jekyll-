@@ -816,6 +816,10 @@ public class TaJushochiTokureishaKanriHandler {
         if (更新前データ.get適用受付年月日() != null && !更新前データ.get適用受付年月日().isEmpty()) {
             編集Builder.set適用受付年月日(更新前データ.get適用受付年月日());
         }
+        if (row.getKaijoTodokedeYMD() != null && row.getKaijoTodokedeYMD().getValue() != null) {
+            編集Builder.set解除届出年月日(new FlexibleDate(row.getKaijoTodokedeYMD().getValue().toDateString()));
+            編集Builder.set解除受付年月日(new FlexibleDate(row.getKaijoTodokedeYMD().getValue().toDateString()));
+        }
         return 編集Builder
                 .set異動事由コード(row.getKaijoJiyu())
                 .set市町村コード(new LasdecCode(row.getShichosonCode()))
@@ -824,8 +828,6 @@ public class TaJushochiTokureishaKanriHandler {
                 .set適用届出年月日(new FlexibleDate(row.getTekiyoTodokedeYMD().getValue().toDateString()))
                 .set他市町村住所地特例解除事由コード(row.getKaijoJiyu())
                 .set解除年月日(new FlexibleDate(row.getKaijoYMD().getValue().toDateString()))
-                .set解除届出年月日(new FlexibleDate(row.getKaijoTodokedeYMD().getValue().toDateString()))
-                .set解除受付年月日(new FlexibleDate(row.getKaijoTodokedeYMD().getValue().toDateString()))
                 .set論理削除フラグ(false)
                 .build();
     }

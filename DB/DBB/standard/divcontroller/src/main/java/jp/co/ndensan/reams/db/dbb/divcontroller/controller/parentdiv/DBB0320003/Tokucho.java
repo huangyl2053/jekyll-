@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
-import jp.co.ndensan.reams.db.dbb.definition.core.viewstate.DbbViewStateKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.TokuChoIdoAndIraiDiv;
@@ -18,6 +17,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.Toku
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.TokuchoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.dgTokuChoIdoAndIrai_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.dgTokuchoKekka_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysTokuchoHosoku;
 import jp.co.ndensan.reams.db.dbz.definition.core.config.TokuchoHosokuConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuka.SanteiState;
@@ -102,7 +102,7 @@ public class Tokucho {
     public ResponseData<TokuchoDiv> onChange_radChoshu(TokuchoDiv div) {
 
         FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
-        ViewStateHolder.put(DbbViewStateKey.FukaShokaiKey, key);
+        ViewStateHolder.put(ViewStateKeys.賦課照会キー, key);
         // 年金保険者突合情報について、仮徴収/本徴収/翌年度のいずれかの情報を再表示する
         ChoshuHoho model = FukaShokaiController.getChoshuHohoModelByFukaShokaiKeyWithoutRirekiNo();
         if (div.getRadChoshu().getSelectedKey().equals(SanteiState.仮算定.getKey())) {

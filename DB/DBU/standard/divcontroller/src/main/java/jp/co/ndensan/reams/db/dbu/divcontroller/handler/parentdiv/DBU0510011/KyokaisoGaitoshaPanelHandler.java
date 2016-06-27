@@ -239,8 +239,10 @@ public class KyokaisoGaitoshaPanelHandler {
      * @param 最新履歴番号 最新履歴番号
      */
     public void onClick_btnKakutei(RString イベント状態, int 最新リンク番号, int 最新履歴番号) {
-
-        dghokenryoNofu_Row row = new dghokenryoNofu_Row();
+        dghokenryoNofu_Row row = div.getDghokenryoNofu().getActiveRow();
+        if (row == null) {
+            row = new dghokenryoNofu_Row();
+        }
         if (!状態_追加.equals(div.getHokenryoNofuGengaku().getTekiyoState())
                 && !div.getHokenryoNofuGengaku().getTekiyoState().isEmpty()) {
             row = div.getDghokenryoNofu().getActiveRow();
