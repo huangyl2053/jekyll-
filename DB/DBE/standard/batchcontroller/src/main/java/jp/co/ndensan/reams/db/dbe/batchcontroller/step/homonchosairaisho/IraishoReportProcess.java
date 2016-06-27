@@ -11,8 +11,8 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoReport;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.HomonChosaIraishoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaisho.ChosaIraishoReportSource;
@@ -186,7 +186,6 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
                 get名称付与(),
                 getカスタマーバーコード(entity),
                 entity.get被保険者番号(),
-                get宛名連番(),
                 ConfigNameDBE.認定調査依頼書.get名称(),
                 通知文Map.get(1),
                 被保険者番号1,
@@ -236,14 +235,6 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
             提出期限 = entity.get認定調査期限年月日();
         }
         return 提出期限;
-    }
-
-    private RString get宛名連番() {
-        RStringBuilder builder = new RStringBuilder();
-        builder.append("*");
-        builder.append((new RString(String.valueOf(宛名連番++))).padLeft(文字列0, INT6));
-        builder.append("#");
-        return builder.toRString();
     }
 
     private RString get名称付与() {
