@@ -94,7 +94,6 @@ public class NinteiChosaIraiPrintService {
                         item.getMeishoFuyo(),
                         item.getCustomerBarCode(),
                         item.getSonota(),
-                        item.getAtenaRenban(),
                         item.getTitle(),
                         item.getTsuchibun1(),
                         item.getHihokenshaNo1(),
