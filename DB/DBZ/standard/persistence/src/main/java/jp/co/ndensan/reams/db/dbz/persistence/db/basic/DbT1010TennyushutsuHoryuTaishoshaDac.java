@@ -54,6 +54,26 @@ public class DbT1010TennyushutsuHoryuTaishoshaDac implements ISaveable<DbT1010Te
     }
 
     /**
+     * 識別コードで転入保留対象者を取得します。
+     *
+     * @param 識別コード 識別コード
+     * @return List<DbT1010TennyushutsuHoryuTaishoshaEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT1010TennyushutsuHoryuTaishoshaEntity> selectBy識別コード(ShikibetsuCode 識別コード)
+            throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1010TennyushutsuHoryuTaishosha.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                toList(DbT1010TennyushutsuHoryuTaishoshaEntity.class);
+    }
+
+    /**
      * 転入保留対象者を全件返します。
      *
      * @return List<DbT1010TennyushutsuHoryuTaishoshaEntity>

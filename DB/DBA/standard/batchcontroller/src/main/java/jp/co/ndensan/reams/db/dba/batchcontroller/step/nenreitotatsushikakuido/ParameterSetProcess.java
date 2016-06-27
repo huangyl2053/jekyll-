@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.batchcontroller.step.dbamn71001;
+package jp.co.ndensan.reams.db.dba.batchcontroller.step.nenreitotatsushikakuido;
 
-import jp.co.ndensan.reams.db.dba.definition.processprm.dbamn71001.ParameterSetProcessParameter;
+import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaichokoshin.HihokenshaDaichoKoshin;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -31,8 +30,7 @@ public class ParameterSetProcess extends SimpleBatchProcessBase {
      * OutputParameter用キー shuryoYMD
      */
     public static final RString SHURYO_YMD;
-    private ParameterSetProcessParameter patameter;
-    private IDbT7022ShoriDateKanriMapper mapper;
+    private HihokenshaDaichoKoshin hihokenshaDaichoKoshin;
 
     static {
         KAISHI_YMD = new RString("kaishiYMD");
@@ -45,7 +43,7 @@ public class ParameterSetProcess extends SimpleBatchProcessBase {
     protected void beforeExecute() {
         kaishiYMD = new OutputParameter<>();
         shuryoYMD = new OutputParameter<>();
-        mapper = getMapper(IDbT7022ShoriDateKanriMapper.class);
+        hihokenshaDaichoKoshin = HihokenshaDaichoKoshin.createInstance();
     }
 
     @Override
@@ -54,7 +52,7 @@ public class ParameterSetProcess extends SimpleBatchProcessBase {
         FlexibleDate 開始日;
         FlexibleDate 終了日;
 
-        DbT7022ShoriDateKanriEntity entity = mapper.get処理日付管理マスタByKey(patameter.toNinteiChosaTokusokujoMybatisParameter());
+        DbT7022ShoriDateKanriEntity entity = hihokenshaDaichoKoshin.selectバッチ内で抽出条件();
 
         if (entity != null) {
             開始日 = entity.getKijunYMD();

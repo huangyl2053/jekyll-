@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.mybatisprm.dbamn71001;
+package jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido;
 
 import java.util.List;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;

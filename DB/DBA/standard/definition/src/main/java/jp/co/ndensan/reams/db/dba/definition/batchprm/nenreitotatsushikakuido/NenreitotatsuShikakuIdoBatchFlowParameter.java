@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.batchprm.dbamn71001;
+package jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitotatsushikakuido;
 
-import jp.co.ndensan.reams.db.dba.definition.processprm.dbamn71001.ShikakuIdoTaishoshaShutokuProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.processprm.nenreitotatsushikakuido.HihokenshaDaichoKoshinProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import lombok.Getter;
@@ -18,18 +18,15 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class Dbamn71001BatchFlowParameter extends BatchParameterBase {
+public class NenreitotatsuShikakuIdoBatchFlowParameter extends BatchParameterBase {
 
-    /**
-     * 65歳年齢到達資格異動バッチパラメータクラスです。
-     */
     private FlexibleDate kaishiYMD;
     private FlexibleDate shuryoYMD;
 
     /**
      * コンストラクタです。
      */
-    public Dbamn71001BatchFlowParameter() {
+    public NenreitotatsuShikakuIdoBatchFlowParameter() {
 
     }
 
@@ -39,7 +36,7 @@ public class Dbamn71001BatchFlowParameter extends BatchParameterBase {
      * @param kaishiYMD 開始日
      * @param shuryoYMD 終了日
      */
-    private Dbamn71001BatchFlowParameter(
+    private NenreitotatsuShikakuIdoBatchFlowParameter(
             FlexibleDate kaishiYMD,
             FlexibleDate shuryoYMD
     ) {
@@ -54,10 +51,10 @@ public class Dbamn71001BatchFlowParameter extends BatchParameterBase {
      * @param shuryoYMD 終了日
      * @return 65歳年齢到達資格異動バッチパラメータ
      */
-    public Dbamn71001BatchFlowParameter createRoreiFukushiParam(
+    public NenreitotatsuShikakuIdoBatchFlowParameter createRoreiFukushiParam(
             FlexibleDate kaishiYMD,
             FlexibleDate shuryoYMD) {
-        return new Dbamn71001BatchFlowParameter(
+        return new NenreitotatsuShikakuIdoBatchFlowParameter(
                 kaishiYMD,
                 shuryoYMD);
     }
@@ -67,9 +64,9 @@ public class Dbamn71001BatchFlowParameter extends BatchParameterBase {
      *
      * @return 認定調査督促対象者一覧表作成のパラメータ
      */
-    public ShikakuIdoTaishoshaShutokuProcessParameter toShikakuIdoTaishoshaShutokuProcessParameter() {
+    public HihokenshaDaichoKoshinProcessParameter toShikakuIdoTaishoshaShutokuProcessParameter() {
 
-        ShikakuIdoTaishoshaShutokuProcessParameter parameter = new ShikakuIdoTaishoshaShutokuProcessParameter();
+        HihokenshaDaichoKoshinProcessParameter parameter = new HihokenshaDaichoKoshinProcessParameter();
         parameter.set開始日(kaishiYMD);
         parameter.set終了日(shuryoYMD);
         return parameter;
