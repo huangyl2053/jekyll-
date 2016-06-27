@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohoichiranhyo.TaishoShuryoYmd;
 import jp.co.ndensan.reams.db.dbb.definition.core.shotokujohoichiranhyo.ShotokuJohoIchiranhyoKouikiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.shotokujohoichiranhyo.ShotokuJohoIchiranhyoParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.shotokujohoichiranhyo.TaishoShuryoYmdEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyo.TaishoShuryoYmdEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.shotokujohoichiranhyo.IShotokuJohoIchiranhyoMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
