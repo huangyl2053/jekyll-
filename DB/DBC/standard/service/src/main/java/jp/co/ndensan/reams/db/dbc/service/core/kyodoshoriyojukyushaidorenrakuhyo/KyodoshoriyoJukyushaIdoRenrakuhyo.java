@@ -240,8 +240,8 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
         }
         entity.set共通項目Entity(共通項目Entity);
 
-        DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity 基本情報Entity = new DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
         if (dbT3002Entity != null) {
+            DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity 基本情報Entity = new DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
             基本情報Entity.setIdoYMD(dbT3002Entity.getIdoYMD());
             基本情報Entity.setRirekiNo(dbT3002Entity.getRirekiNo());
             基本情報Entity.setHiHokenshaName(dbT3002Entity.getHiHokenshaName());
@@ -252,22 +252,22 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
             基本情報Entity.setChohyoOutputJunjyoCode(dbT3002Entity.getChohyoOutputJunjyoCode());
             基本情報Entity.setTeiseiKubunCode(dbT3002Entity.getTeiseiKubunCode());
             基本情報Entity.setTeiseiYMD(dbT3002Entity.getTeiseiYMD());
+            entity.set基本情報Entity(基本情報Entity);
         }
-        entity.set基本情報Entity(基本情報Entity);
 
-        DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity 償還情報Entity = new DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity();
         if (dbT3003Entity != null) {
+            DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity 償還情報Entity = new DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity();
             償還情報Entity.setIdoYMD(dbT3003Entity.getIdoYMD());
             償還情報Entity.setRirekiNo(dbT3003Entity.getRirekiNo());
             償還情報Entity.setHokenKyufuIchijiSashitomeKaishiYMD(dbT3003Entity.getHokenKyufuIchijiSashitomeKaishiYMD());
             償還情報Entity.setHokenKyufuIchijiSashitomeShuryoYMD(dbT3003Entity.getHokenKyufuIchijiSashitomeShuryoYMD());
             償還情報Entity.setHokenkyufuIchijiSashitomeKubunCode(dbT3003Entity.getHokenkyufuIchijiSashitomeKubunCode());
             償還情報Entity.setHokenkyufuIchijiSashitomeKingaku(dbT3003Entity.getHokenkyufuIchijiSashitomeKingaku());
+            entity.set償還情報Entity(償還情報Entity);
         }
-        entity.set償還情報Entity(償還情報Entity);
 
-        DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity 高額情報Entity = new DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity();
         if (dbT3004Entity != null) {
+            DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity 高額情報Entity = new DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity();
             高額情報Entity.setIdoYMD(dbT3004Entity.getIdoYMD());
             高額情報Entity.setRirekiNo(dbT3004Entity.getRirekiNo());
             高額情報Entity.setSetaiShuyakuNo(dbT3004Entity.getSetaiShuyakuNo());
@@ -276,8 +276,8 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
             高額情報Entity.setRiyoshaFutan2DankaiAriFlag(dbT3004Entity.getRiyoshaFutan2DankaiAriFlag());
             高額情報Entity.setRoureiFukushiNenkinJukyuAriFlag(dbT3004Entity.getRoureiFukushiNenkinJukyuAriFlag());
             高額情報Entity.setShikyuShinseishoOutputAriFlag(dbT3004Entity.getShikyuShinseishoOutputAriFlag());
+            entity.set高額情報Entity(高額情報Entity);
         }
-        entity.set高額情報Entity(高額情報Entity);
 
         return entity;
     }
