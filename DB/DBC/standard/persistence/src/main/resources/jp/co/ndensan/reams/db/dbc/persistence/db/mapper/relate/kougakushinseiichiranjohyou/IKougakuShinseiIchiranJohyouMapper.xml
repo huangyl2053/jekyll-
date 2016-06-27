@@ -19,6 +19,8 @@
         <result property="判定送付年月" column="判定送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="判定取込年月" column="判定取込年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="証記載番号" column="証記載番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="対象者判定審査年月" column="対象者判定審査年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="決定年月日" column="決定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="getKougakuShinseiIchiranJohyou"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakushinseiichiranjohyou.KougakuShinseiIchiranJohyouParameter"
@@ -35,7 +37,9 @@
         A."tashoshaUketoriYM" AS 対象取込年月,
         C."hanteiKekkaSofuYM" AS 判定送付年月,
         D."ketteishaUketoriYM" AS 判定取込年月,
-        B."shoKisaiHokenshaNo" AS 証記載番号
+        B."shoKisaiHokenshaNo" AS 証記載番号,
+        A."taishoshaHanteiShinsaYM" AS 対象者判定審査年月,
+        C."ketteiYMD" AS 決定年月日
         FROM
         rgdb."DbT3056KogakuShikyuShinsei" AS B
         LEFT JOIN 
@@ -72,7 +76,7 @@
     <select resultOrdered="true" id="getJigyouKougakuShinseiIchiranJohyou"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakushinseiichiranjohyou.KougakuShinseiIchiranJohyouParameter"
             resultMap="resultMap_KougakuShinseiIchiranJohyouEntity" fetchSize="500">
-         SELECT
+        SELECT
         B."serviceTeikyoYM" AS サービス年月,
         B."rirekiNo" AS 管理番号,
         A."riyoshaFutanGakuGokei" AS 利用者負担額合計,
@@ -84,7 +88,9 @@
         A."tashoshaUketoriYM" AS 対象取込年月,
         C."hanteiKekkaSofuYM" AS 判定送付年月,
         D."ketteishaUketoriYM" AS 判定取込年月,
-        B."shoKisaiHokenshaNo" AS 証記載番号
+        B."shoKisaiHokenshaNo" AS 証記載番号,
+        A."taishoshaHanteiShinsaYM" AS 対象者判定審査年月,
+        C."ketteiYMD" AS 決定年月日
         FROM
         rgdb."DbT3110JigyoKogakuShikyuShinsei" AS B
         LEFT JOIN 
