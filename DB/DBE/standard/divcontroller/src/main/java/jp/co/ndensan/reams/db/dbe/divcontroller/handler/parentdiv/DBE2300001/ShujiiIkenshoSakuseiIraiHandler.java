@@ -17,11 +17,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.KanryoInfoPhase;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.KanryoInfoPhase;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -122,13 +122,13 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             if (申請者.getTemp_前回主治医() != null) {
                 row.setZenkaiShujii(申請者.getTemp_前回主治医().value());
             }
-            if (申請者.getTemp_依頼書出力年月日() != null) {
+            if (!isEmpty(申請者.getTemp_依頼書出力年月日())) {
                 row.getIraishoShutsuryokuDay().setValue(new RDate(申請者.getTemp_依頼書出力年月日().toString()));
             }
-            if (申請者.getTemp_意見書出力年月日() != null) {
+            if (!isEmpty(申請者.getTemp_意見書出力年月日())) {
                 row.getIkenshoShutsuryokuDay().setValue(new RDate(申請者.getTemp_意見書出力年月日().toString()));
             }
-            if (申請者.getTemp_請求書出力年月日() != null) {
+            if (!isEmpty(申請者.getTemp_請求書出力年月日())) {
                 row.getSeikyushoShutsuryokuDay().setValue(new RDate(申請者.getTemp_請求書出力年月日().toString()));
             }
             row.setShujiiIryoKikanCode(申請者.getTemp_主治医医療機関コード());
@@ -152,6 +152,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             row.setTelNo(申請者.getTemp_電話番号() == null ? RString.EMPTY : 申請者.getTemp_電話番号().value());
             row.setAge(new RString(String.valueOf(申請者.getTemp_年齢())));
             row.setIryoKikanFaxNo(申請者.getTemp_医療機関所FAX());
+            row.setShichosonCode(申請者.getTemp_市町村コード() == null ? RString.EMPTY : 申請者.getTemp_市町村コード().value());
             申請者一覧.add(row);
         }
         div.getShinseishaIchiran().setIsOpen(true);
@@ -223,7 +224,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
         }
         RString 認定有効な申請時点 = finderDiv.getTxtCheckDay().getValue();
         if (!RString.isNullOrEmpty(認定有効な申請時点)) {
-            parameter.setYokaiYMD(認定有効期間);
+            parameter.setYokaiYMD(認定有効な申請時点);
             parameter.setUseYokaiYMD(true);
             useNinteiKekkaJoho = true;
         }
@@ -270,42 +271,48 @@ public class ShujiiIkenshoSakuseiIraiHandler {
 
     private void editKaisaiDateForParameter(NinteiShinseishaFinderDiv finderDiv, ShujiiIkenshoSakuseiIraiParameter parameter) {
         boolean useShinsakaiKaisaiKekkaJoho = false;
+        boolean useNinteiKekkaJoho = parameter.isUseNinteiKekkaJoho();
         FlexibleDate 開催日FROM = finderDiv.getTxtKaisaiDateFrom().getValue();
         if (開催日FROM != null && !FlexibleDate.EMPTY.equals(開催日FROM)) {
             parameter.setShinsakaiKaisaiYMDFrom(開催日FROM);
             parameter.setUseShinsakaiKaisaiYMDFrom(true);
             useShinsakaiKaisaiKekkaJoho = true;
+            useNinteiKekkaJoho = true;
         }
         FlexibleDate 開催日To = finderDiv.getTxtKaisaiDateTo().getValue();
         if (開催日To != null && !FlexibleDate.EMPTY.equals(開催日To)) {
             parameter.setShinsakaiKaisaiYMDTo(開催日To);
             parameter.setUseShinsakaiKaisaiYMDTo(true);
             useShinsakaiKaisaiKekkaJoho = true;
+            useNinteiKekkaJoho = true;
         }
         RString 開催番号FROM = finderDiv.getTxtKaisaiNumberStart().getValue();
         if (!RString.isNullOrEmpty(開催番号FROM)) {
             parameter.setShinsakaiKaisaiNoFrom(開催番号FROM);
             parameter.setUseShinsakaiKaisaiNoFrom(true);
             useShinsakaiKaisaiKekkaJoho = true;
+            useNinteiKekkaJoho = true;
         }
         RString 開催番号To = finderDiv.getTxtKaisaiNumberEnd().getValue();
         if (!RString.isNullOrEmpty(開催番号To)) {
             parameter.setShinsakaiKaisaiNoTo(開催番号To);
             parameter.setUseShinsakaiKaisaiNoTo(true);
             useShinsakaiKaisaiKekkaJoho = true;
+            useNinteiKekkaJoho = true;
         }
+        parameter.setUseNinteiKekkaJoho(useNinteiKekkaJoho);
         parameter.setUseShinsakaiKaisaiKekkaJoho(useShinsakaiKaisaiKekkaJoho);
     }
 
     private void editZenkaiJohoForParameter(NinteiShinseishaFinderDiv finderDiv, ShujiiIkenshoSakuseiIraiParameter parameter) {
         boolean useZenkaiNinteiShinseiJoho = false;
-        RString 前回認定調査委託先 = finderDiv.getTxtZenkaiNinteiChosaItakusakiName().getValue();
+        RString 前回認定調査委託先 = finderDiv.getHdnZenkaiChosaItakusakiCode();
         if (!RString.isNullOrEmpty(前回認定調査委託先)) {
             parameter.setZenkaiNinteiChosaItakusaki(finderDiv.getHdnZenkaiChosaItakusakiCode());
             parameter.setUseZenkaiNinteiChosaItakusaki(true);
             useZenkaiNinteiShinseiJoho = true;
         }
-        RString 前回主治医医療機関 = finderDiv.getTxtZenkaiShujiiIryokikanName().getValue();
+        RString 前回主治医医療機関 = finderDiv.getHdnZenkaiShujiiIryokikanCode();
         if (!RString.isNullOrEmpty(前回主治医医療機関)) {
             parameter.setZenkaiShujiiIryokikanCode(finderDiv.getHdnZenkaiShujiiIryokikanCode());
             parameter.setUseZenkaiShujiiIryokikanCode(true);
@@ -359,12 +366,12 @@ public class ShujiiIkenshoSakuseiIraiHandler {
     }
 
     private void editShujiiJohoForParameter(NinteiShinseishaFinderDiv finderDiv, ShujiiIkenshoSakuseiIraiParameter parameter) {
-        RString 主治医医療機関 = finderDiv.getTxtShujiiIryokikanName().getValue();
+        RString 主治医医療機関 = finderDiv.getHdnShujiiIryokikanCode();
         if (!RString.isNullOrEmpty(主治医医療機関)) {
             parameter.setShujiiIryokikanCode(finderDiv.getHdnShujiiIryokikanCode());
             parameter.setUseShujiiIryokikanCode(true);
         }
-        RString 主治医氏名 = finderDiv.getTxtShujiiName().getValue();
+        RString 主治医氏名 = finderDiv.getHdnShujiiCode();
         if (!RString.isNullOrEmpty(主治医氏名)) {
             parameter.setShujiiCode(finderDiv.getHdnShujiiCode());
             parameter.setUseShujiiCode(true);
@@ -386,6 +393,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
         FlexibleDate 意見書受領日To = finderDiv.getTxtIkenshoKinyuDateTo().getValue();
         if (意見書受領日To != null && !FlexibleDate.EMPTY.equals(意見書受領日To)) {
             parameter.setIkenshoJuryoYMDTo(意見書受領日To);
+            parameter.setUseIkenshoJuryoYMDTo(true);
             useShujiiIkenshoJoho = true;
         }
         parameter.setUseShujiiIkenshoJoho(useShujiiIkenshoJoho);
@@ -488,13 +496,13 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             parameter.setShisetsuNyushoFlag(false);
         }
 
-        RString 認定調査委託先コード = finderDiv.getTxtNinteiChosaItakusakiName().getValue();
+        RString 認定調査委託先コード = finderDiv.getHdnChosaItakusakiCode();
         if (!RString.isNullOrEmpty(認定調査委託先コード)) {
             parameter.setNinteiChosaItakusakiCode(finderDiv.getHdnChosaItakusakiCode());
             parameter.setUseNinteiChosaItakusakiCode(true);
         }
 
-        RString 認定調査員氏名 = finderDiv.getTxtNinteiChosainName().getValue();
+        RString 認定調査員氏名 = finderDiv.getHdnChosainCode();
         if (!RString.isNullOrEmpty(認定調査員氏名)) {
             parameter.setNinteiChosainCode(finderDiv.getHdnChosainCode());
             parameter.setUseNinteiChosainCode(true);
@@ -766,5 +774,9 @@ public class ShujiiIkenshoSakuseiIraiHandler {
         } else if (KanryoInfoPhase.月例処理.getコード().equals(現在のフェーズ)) {
             parameter.setNowPhaseGetsureiShori(true);
         }
+    }
+
+    private boolean isEmpty(FlexibleDate date) {
+        return date == null || date.isEmpty();
     }
 }

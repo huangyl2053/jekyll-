@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 主治医意見書作成依頼情報の帳票出力管理クラスです。
@@ -51,27 +52,38 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class ShujiiIkenshoSakuseiIraiReportOutputService {
 
-    private final ReportManager reportManager;
-
     /**
      * コンストラクタです。
      *
      * @param reportManager ReportManager
      */
-    public ShujiiIkenshoSakuseiIraiReportOutputService(ReportManager reportManager) {
-        this.reportManager = reportManager;
+    ShujiiIkenshoSakuseiIraiReportOutputService() {
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoSakuseiIraiReportOutputService}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoSakuseiIraiReportOutputService}のインスタンス
+     */
+    public static ShujiiIkenshoSakuseiIraiReportOutputService createInstance() {
+        return InstanceProvider.create(ShujiiIkenshoSakuseiIraiReportOutputService.class);
     }
 
     /**
      * 主治医意見書作成依頼情報を出力します。
      *
      * @param 主治医意見書作成依頼情報ItemList 主治医意見書作成依頼情報ItemList
+     * @param reportManager 帳票印刷Manager
      */
-    public void print主治医意見書作成依頼情報(List<ShujiiIkenshoSakuseiIraishoItem> 主治医意見書作成依頼情報ItemList) {
+    public void print主治医意見書作成依頼情報(List<ShujiiIkenshoSakuseiIraishoItem> 主治医意見書作成依頼情報ItemList,
+            ReportManager reportManager) {
         List<ShujiiIkenshoSakuseiIraishoReport> list = new ArrayList<>();
         list.add(ShujiiIkenshoSakuseiIraishoReport.createFrom(主治医意見書作成依頼情報ItemList));
         ShujiiIkenshoSakuseiIraishoProperty property = new ShujiiIkenshoSakuseiIraishoProperty();
         try (ReportAssembler<ShujiiIkenshoSakuseiIraishoReportSource> assembler = createAssembler(property, reportManager)) {
+            INinshoshaSourceBuilder ninshosha = new _NinshoshaSourceBuilderCreator().create(GyomuCode.DB介護保険, RString.EMPTY,
+                    RDate.getNowDate(), assembler.getImageFolderPath());
+            list.add(ShujiiIkenshoSakuseiIraishoReport.createFrom(set主治医意見書作成依頼(主治医意見書作成依頼情報ItemList, ninshosha.buildSource())));
             for (ShujiiIkenshoSakuseiIraishoReport report : list) {
                 ReportSourceWriter<ShujiiIkenshoSakuseiIraishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 report.writeBy(reportSourceWriter);
@@ -83,8 +95,10 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
      * 主治医意見書作成料請求書を出力します。
      *
      * @param 主治医意見書作成料請求書ItemList 主治医意見書作成料請求書ItemList
+     * @param reportManager 帳票印刷Manager
      */
-    public void print主治医意見書作成料請求書(List<ShujiiIkenshoSakuseiRyoSeikyushoItem> 主治医意見書作成料請求書ItemList) {
+    public void print主治医意見書作成料請求書(List<ShujiiIkenshoSakuseiRyoSeikyushoItem> 主治医意見書作成料請求書ItemList,
+            ReportManager reportManager) {
         List<ShujiiIkenshoSakuseiRyoSeikyushoReport> list = new ArrayList<>();
         list.add(ShujiiIkenshoSakuseiRyoSeikyushoReport.createFrom(主治医意見書作成料請求書ItemList));
         ShujiiIkenshoSakuseiRyoSeikyushoProperty property = new ShujiiIkenshoSakuseiRyoSeikyushoProperty();
@@ -100,8 +114,9 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
      * 介護保険診断命令書を出力します。
      *
      * @param 介護保険診断命令書ItemList 介護保険診断命令書ItemList
+     * @param reportManager 帳票印刷Manager
      */
-    public void print介護保険診断命令書(List<KaigohokenShindanMeireishoHeaderItem> 介護保険診断命令書ItemList) {
+    public void print介護保険診断命令書(List<KaigohokenShindanMeireishoHeaderItem> 介護保険診断命令書ItemList, ReportManager reportManager) {
         List<KaigohokenShindanMeireishoReport> list = new ArrayList<>();
         KaigohokenShindanMeireishoProperty property = new KaigohokenShindanMeireishoProperty();
         try (ReportAssembler<KaigohokenShindanMeireishoReportSource> assembler = createAssembler(property, reportManager)) {
@@ -119,8 +134,10 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
      * 介護保険指定医依頼兼主治医意見書提出意見書を出力します。
      *
      * @param 介護保険指定医依頼兼主治医意見書提出意見書ItemList 介護保険指定医依頼兼主治医意見書提出意見書ItemList
+     * @param reportManager 帳票印刷Manager
      */
-    public void print介護保険指定医依頼兼主治医意見書提出意見書(List<ShujiiIkenshoTeishutsuIraishoItem> 介護保険指定医依頼兼主治医意見書提出意見書ItemList) {
+    public void print介護保険指定医依頼兼主治医意見書提出意見書(List<ShujiiIkenshoTeishutsuIraishoItem> 介護保険指定医依頼兼主治医意見書提出意見書ItemList,
+            ReportManager reportManager) {
         List<ShujiiIkenshoTeishutsuIraishoReport> list = new ArrayList<>();
         ShujiiIkenshoTeishutsuIraishoProperty property = new ShujiiIkenshoTeishutsuIraishoProperty();
         try (ReportAssembler<ShujiiIkenshoTeishutsuIraishoReportSource> assembler = createAssembler(property, reportManager)) {
@@ -139,8 +156,10 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
      * 主治医意見書作成依頼一覧表を出力します。
      *
      * @param 主治医意見書作成依頼一覧表ItemList 主治医意見書作成依頼一覧表ItemList
+     * @param reportManager 帳票印刷Manager
      */
-    public void print主治医意見書作成依頼一覧表(List<IkenshoSakuseiIraiIchiranhyoItem> 主治医意見書作成依頼一覧表ItemList) {
+    public void print主治医意見書作成依頼一覧表(List<IkenshoSakuseiIraiIchiranhyoItem> 主治医意見書作成依頼一覧表ItemList,
+            ReportManager reportManager) {
         List<IkenshoSakuseiIraiIchiranhyoReport> list = new ArrayList<>();
         IkenshoSakuseiIraiIchiranhyoProperty property = new IkenshoSakuseiIraiIchiranhyoProperty();
         try (ReportAssembler<IkenshoSakuseiIraiIchiranhyoReportSource> assembler = createAssembler(property, reportManager)) {
@@ -235,5 +254,66 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
         builder.isHojinNo(property.containsHojinNo());
         builder.isKojinNo(property.containsKojinNo());
         return builder.<T>create();
+    }
+
+    private List<ShujiiIkenshoSakuseiIraishoItem> set主治医意見書作成依頼(List<ShujiiIkenshoSakuseiIraishoItem> itemList,
+            NinshoshaSource ninshosha) {
+        List<ShujiiIkenshoSakuseiIraishoItem> resultList = new ArrayList<>();
+        for (ShujiiIkenshoSakuseiIraishoItem item : itemList) {
+            item.setHakkoYMD1(ninshosha.hakkoYMD);
+            item.setDenshiKoin(ninshosha.denshiKoin);
+            item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
+            item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
+            item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);
+            item.setNinshoshaShimeiKakenai(ninshosha.ninshoshaShimeiKakenai);
+            item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
+            item.setKoinMojiretsu(ninshosha.koinMojiretsu);
+            item.setKoinShoryaku(ninshosha.koinShoryaku);
+            item.setBunshoNo(item.getBunshoNo());
+            item.setYubinNo1(item.getYubinNo1());
+            item.setJushoText(item.getJushoText());
+            item.setKikanNameText(item.getKikanNameText());
+            item.setShimeiText(item.getShimeiText());
+            item.setMeishoFuyo(item.getMeishoFuyo());
+            item.setCustomerBarCode(item.getCustomerBarCode());
+            item.setSonota(item.getSonota());
+            item.setAtenaRenban(item.getAtenaRenban());
+            item.setTitle(item.getTitle());
+            item.setTsuchibun1(item.getTsuchibun1());
+            item.setShinseiKubun(item.getShinseiKubun());
+            item.setHihokenshaNo1(item.getHihokenshaNo1());
+            item.setHihokenshaNo2(item.getHihokenshaNo2());
+            item.setHihokenshaNo3(item.getHihokenshaNo3());
+            item.setHihokenshaNo4(item.getHihokenshaNo4());
+            item.setHihokenshaNo5(item.getHihokenshaNo5());
+            item.setHihokenshaNo6(item.getHihokenshaNo6());
+            item.setHihokenshaNo7(item.getHihokenshaNo7());
+            item.setHihokenshaNo8(item.getHihokenshaNo8());
+            item.setHihokenshaNo9(item.getHihokenshaNo9());
+            item.setHihokenshaNo10(item.getHihokenshaNo10());
+            item.setHokenshaNo1(item.getHokenshaNo1());
+            item.setHokenshaNo2(item.getHokenshaNo2());
+            item.setHokenshaNo3(item.getHokenshaNo3());
+            item.setHokenshaNo4(item.getHokenshaNo4());
+            item.setHokenshaNo5(item.getHokenshaNo5());
+            item.setHokenshaNo6(item.getHokenshaNo6());
+            item.setHihokenshaNameKana(item.getHihokenshaNameKana());
+            item.setSeibetsuMan(item.getSeibetsuMan());
+            item.setSeibetsuWoman(item.getSeibetsuWoman());
+            item.setHihokenshaName(item.getHihokenshaName());
+            item.setBirthGengoMeiji(item.getBirthGengoMeiji());
+            item.setBirthGengoTaisho(item.getBirthGengoTaisho());
+            item.setBirthGengoShowa(item.getBirthGengoShowa());
+            item.setBirthYMD(item.getBirthYMD());
+            item.setYubinNo(item.getYubinNo());
+            item.setJusho(item.getJusho());
+            item.setShinseiYMD(item.getShinseiYMD());
+            item.setTeishutsuKigen(item.getTeishutsuKigen());
+            item.setTsuchibun2(item.getTsuchibun2());
+            item.setRemban(item.getRemban());
+            item.setShoriName(item.getShoriName());
+            resultList.add(item);
+        }
+        return resultList;
     }
 }

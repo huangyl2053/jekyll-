@@ -19,8 +19,8 @@ import jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho.ShujiiIkenshoSak
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoItem;
 import jp.co.ndensan.reams.db.dbe.definition.core.ShujiiIkenshoIraiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIraiAtenaJohoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.ShujiiIkenshoSakuseiIraiDiv;
@@ -251,7 +251,7 @@ public class ShujiiIkenshoSakuseiIrai {
     }
 
     /**
-     * 発行押下のチェック処理を行います。
+     * 被保険者変更処理を行います。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ
@@ -427,6 +427,7 @@ public class ShujiiIkenshoSakuseiIrai {
         介護保険指定医依頼兼主治医意見書提出意見書ItemList = new ArrayList<>();
         主治医意見書記入用紙List = new ArrayList<>();
         主治医意見書記入用紙OCRList = new ArrayList<>();
+        List<ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報List = new ArrayList<>();
 
         RDate sysdate = RDate.getNowDate();
         RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, sysdate, SubGyomuCode.DBE認定支援);
@@ -446,12 +447,14 @@ public class ShujiiIkenshoSakuseiIrai {
                 } else if (div.getIraiprint().getTxtkigenymd().getValue() != null) {
                     builder.set主治医意見書作成期限年月日(new FlexibleDate(div.getIraiprint().getTxtkigenymd().getValue().toDateString()));
                 }
-                ikenshoIraiJoho = builder.build();
-                manager.save主治医意見書作成依頼情報(ikenshoIraiJoho, EntityDataState.Modified);
+                主治医意見書作成依頼情報.add(builder.build());
             }
             createChoHyoData(div, row);
         }
         toPrint(reportManager);
+        for (ShujiiIkenshoIraiJoho ikenshoIraiJoho : 主治医意見書作成依頼情報List) {
+            manager.save主治医意見書作成依頼情報(ikenshoIraiJoho, EntityDataState.Modified);
+        }
     }
 
     private RString getEditedYubinNo(RString yubinNo) {
@@ -834,21 +837,21 @@ public class ShujiiIkenshoSakuseiIrai {
     }
 
     private void toPrint(ReportManager reportManager) {
-        ShujiiIkenshoSakuseiIraiReportOutputService outputService = new ShujiiIkenshoSakuseiIraiReportOutputService(reportManager);
+        ShujiiIkenshoSakuseiIraiReportOutputService outputService = ShujiiIkenshoSakuseiIraiReportOutputService.createInstance();
         if (!主治医意見書作成依頼情報ItemList.isEmpty()) {
-            outputService.print主治医意見書作成依頼情報(主治医意見書作成依頼情報ItemList);
+            outputService.print主治医意見書作成依頼情報(主治医意見書作成依頼情報ItemList, reportManager);
         }
         if (!主治医意見書作成依頼一覧表ItemList.isEmpty()) {
-            outputService.print主治医意見書作成依頼一覧表(主治医意見書作成依頼一覧表ItemList);
+            outputService.print主治医意見書作成依頼一覧表(主治医意見書作成依頼一覧表ItemList, reportManager);
         }
         if (!主治医意見書作成料請求書ItemList.isEmpty()) {
-            outputService.print主治医意見書作成料請求書(主治医意見書作成料請求書ItemList);
+            outputService.print主治医意見書作成料請求書(主治医意見書作成料請求書ItemList, reportManager);
         }
         if (!介護保険診断命令書ItemList.isEmpty()) {
-            outputService.print介護保険診断命令書(介護保険診断命令書ItemList);
+            outputService.print介護保険診断命令書(介護保険診断命令書ItemList, reportManager);
         }
         if (!介護保険指定医依頼兼主治医意見書提出意見書ItemList.isEmpty()) {
-            outputService.print介護保険指定医依頼兼主治医意見書提出意見書(介護保険指定医依頼兼主治医意見書提出意見書ItemList);
+            outputService.print介護保険指定医依頼兼主治医意見書提出意見書(介護保険指定医依頼兼主治医意見書提出意見書ItemList, reportManager);
         }
         if (!主治医意見書記入用紙List.isEmpty()) {
             outputService.print主治医意見書記入用紙(主治医意見書記入用紙List);
