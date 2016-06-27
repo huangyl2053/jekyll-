@@ -440,6 +440,7 @@ public class GaikyoTokkiYichiranNyuroku {
         if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            前排他キーの解除();
             return ResponseData.of(div).forwardWithEventName(DBE2210003TransitionEventName.認定調査結果登録に戻る).respond();
         }
         return ResponseData.of(div).respond();
