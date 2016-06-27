@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.core.tashichosonjushochitokureisyaidoteisei;
+package jp.co.ndensan.reams.db.dbz.definition.core.tashichosonjushochitokureisyaidoteisei;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import lombok.Getter;
