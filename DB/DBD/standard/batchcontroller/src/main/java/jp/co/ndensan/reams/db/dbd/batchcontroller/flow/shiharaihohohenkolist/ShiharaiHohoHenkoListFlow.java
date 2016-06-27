@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd207010;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.shiharaihohohenkolist;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd207010.ShiharaiHohoKanriListProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.shiharaihohohenkolist.ShiharaiHohoKanriListProcess;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd207010.Dbd207010BatchFlowParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.shiharaihohohenkolist.ShiharaiHohoHenkoListFlowParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  * 
  * @reamsid_L DBD-3630-040  zhulx
  */
-public class Dbd207010Flow extends BatchFlowBase<Dbd207010BatchFlowParameter> {
+public class ShiharaiHohoHenkoListFlow extends BatchFlowBase<ShiharaiHohoHenkoListFlowParameter> {
 
     @Override
     protected void defineFlow() {

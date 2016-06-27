@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd207010;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.shiharaihohohenkolist;
 
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohokanrilist.ShiharaiHohoKanriListData;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd207010.ShiharaiHohoKanriListProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.shiharaihohohenkolist.ShiharaiHohoKanriListProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,7 +19,7 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class Dbd207010BatchFlowParameter extends BatchParameterBase {
+public class ShiharaiHohoHenkoListFlowParameter extends BatchParameterBase {
 
     private FlexibleDate 基準日;
     private RString 登録者選択;

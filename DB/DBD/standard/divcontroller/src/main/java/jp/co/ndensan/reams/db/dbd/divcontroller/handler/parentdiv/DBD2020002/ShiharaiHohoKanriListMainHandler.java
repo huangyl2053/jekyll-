@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020002;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd207010.Dbd207010BatchFlowParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.shiharaihohohenkolist.ShiharaiHohoHenkoListFlowParameter;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohokanrilist.ShiharaiHohoKanriListData;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020002.ShiharaiHohoKanriListMainDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 支払方法変更管理リストハンドラクラスです。
  *
- * @reamsid_L DBD-3630-010  zhulx
+ * @reamsid_L DBD-3630-010 zhulx
  */
 public class ShiharaiHohoKanriListMainHandler {
 
@@ -114,7 +114,7 @@ public class ShiharaiHohoKanriListMainHandler {
      *
      * @return CreateShiharaiHohoListBatchParameter 支払方法変更管理リスト_バッチ用のパラメータ
      */
-    public Dbd207010BatchFlowParameter batchParameter() {
+    public ShiharaiHohoHenkoListFlowParameter batchParameter() {
         ShiharaiHohoKanriListData tempData = new ShiharaiHohoKanriListData();
         tempData.set基準日(div.getChushutsuJoken().getTxtKijunYMD().getValue());
         tempData.set登録者選択(div.getRadTorokusha().getSelectedKey());
@@ -125,8 +125,8 @@ public class ShiharaiHohoKanriListMainHandler {
         tempData.set償還決定登録者1の選択(div.getChushutsuJoken().getDdl1GoShokanKetteiSashitomeAriOnly().getSelectedKey());
         tempData.set償還決定登録者2の選択(div.getChushutsuJoken().getDdl1GoShokanKetteiKojoAriOnly().getSelectedKey());
         tempData.set改頁出力順ID(new RString(String.valueOf(div.getCcdChohyoShutsuryokujun().get出力順ID())));
-        tempData.set帳票ID(new RString("DBD200007_ShiharaiHohoHenkoKanriIchiran"));
-        Dbd207010BatchFlowParameter batchParameter = new Dbd207010BatchFlowParameter();
+        tempData.set帳票ID(ReportIdDBD.DBD200007.getReportId().value());
+        ShiharaiHohoHenkoListFlowParameter batchParameter = new ShiharaiHohoHenkoListFlowParameter();
         batchParameter.toDbd207010BatchParameter(tempData);
         return batchParameter;
     }
@@ -152,7 +152,7 @@ public class ShiharaiHohoKanriListMainHandler {
         }
         return validPairs;
     }
-    
+
     private static class IdocheckMessages implements IValidationMessage {
 
         private final Message message;
@@ -186,7 +186,7 @@ public class ShiharaiHohoKanriListMainHandler {
         dataSources.add(kv);
         kv = new KeyValueDataSource(DROPDOWNKEY1, new RString("通知書未発行のみ"));
         dataSources.add(kv);
-        
+
         if (RADIOBUTTONKEY1.equals(torokushaKbn)
                 || RADIOBUTTONKEY2.equals(torokushaKbn)) {
             kv = new KeyValueDataSource(DROPDOWNKEY2, new RString("適用中者のみ"));
