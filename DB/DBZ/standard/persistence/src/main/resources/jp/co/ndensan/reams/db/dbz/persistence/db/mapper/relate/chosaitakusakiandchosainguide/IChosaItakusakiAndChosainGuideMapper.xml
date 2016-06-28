@@ -13,6 +13,7 @@
         <result property="chosainShimei" column="DbT4913_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chosainKanaShimei" column="DbT4913_chosainKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jokyoFlag2" column="DbT4913_jokyoFlag" />
+        <result property="shichosonCode" column="DbT4910_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="getKijuntsukiShichosonjoho" resultMap="resultMap_getKijuntsukiShichosonjoho" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikninteichosaitakusakijoho.ChosaItakusakiAndChosainGuideParameter" fetchSize="500">
         SELECT
@@ -24,7 +25,9 @@
         DbT4913."ninteiChosainCode" as"DbT4913_ninteiChosainCode" ,
         DbT4913."chosainShimei" as "DbT4913_chosainShimei",
         DbT4913."chosainKanaShimei" as "DbT4913_chosainKanaShimei",
-        DbT4913."jokyoFlag" as "DbT4913_jokyoFlag"
+        DbT4913."jokyoFlag" as "DbT4913_jokyoFlag",
+        DbT4910."shichosonCode" as "DbT4910_shichosonCode"
+        
         FROM
         rgdb."DbT4910NinteichosaItakusakiJoho" as DbT4910
         LEFT JOIN
@@ -117,7 +120,8 @@
         DbT5913."ninteiChosainCode" as"DbT4913_ninteiChosainCode" ,
         DbT5913."chosainShimei" as "DbT4913_chosainShimei",
         DbT5913."chosainKanaShimei" as "DbT4913_chosainKanaShimei",
-        DbT5913."jokyoFlag" as "DbT4913_jokyoFlag"
+        DbT5913."jokyoFlag" as "DbT4913_jokyoFlag",
+        DbT5910."shichosonCode" as "DbT5910_shichosonCode"
         FROM
         rgdb."DbT5910NinteichosaItakusakiJoho" as DbT5910
         LEFT JOIN

@@ -27,4 +27,5 @@ public class IKijuntsukiShichosonjohoRelateEntity {
     private RString chosainShimei;
     private RString chosainKanaShimei;
     private boolean jokyoFlag2;
+    private RString shichosonCode;
 }
