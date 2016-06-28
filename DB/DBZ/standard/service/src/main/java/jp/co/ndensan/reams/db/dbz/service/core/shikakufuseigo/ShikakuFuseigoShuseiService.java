@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.shikakufuseigo.FuseigoCheckResul
 import jp.co.ndensan.reams.db.dbz.business.core.shikakufuseigo.FuseigoCheckResultOfTatokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakufuseigo.FuseigoCheckResultOfTekiyoJogai;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuseigoriyu.FuseigoRiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakufuseigo.DaichoFuseigoJotai;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.hihokenshadaicho.HihokenshaDaichoSearchCondition;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
@@ -111,12 +112,12 @@ public class ShikakuFuseigoShuseiService {
         result.set現在の資格の情報(資格の情報);
         result.set修正後の資格の情報(修正後の資格の情報);
         if (資格の情報 == null) {
-            result.set被保険者台帳状態(new RString("未作成"));
+            result.set被保険者台帳状態(DaichoFuseigoJotai.未作成);
         } else {
             if (不整合理由 == null) {
-                result.set被保険者台帳状態(new RString("不整合なし"));
+                result.set被保険者台帳状態(DaichoFuseigoJotai.不整合なし);
             } else {
-                result.set被保険者台帳状態(new RString("不整合あり"));
+                result.set被保険者台帳状態(DaichoFuseigoJotai.不整合あり);
             }
         }
 
@@ -149,12 +150,12 @@ public class ShikakuFuseigoShuseiService {
         result.set個人(個人情報);
         result.set修正後の除外の情報(除外の情報修正後);
         if (除外の情報 == null) {
-            result.set適用除外者台帳状態(new RString("未作成"));
+            result.set適用除外者台帳状態(DaichoFuseigoJotai.未作成);
         }
         if (不整合理由 == null) {
-            result.set適用除外者台帳状態(new RString("不整合なし"));
+            result.set適用除外者台帳状態(DaichoFuseigoJotai.不整合なし);
         } else {
-            result.set適用除外者台帳状態(new RString("不整合あり"));
+            result.set適用除外者台帳状態(DaichoFuseigoJotai.不整合あり);
         }
         return result;
     }
@@ -185,12 +186,12 @@ public class ShikakuFuseigoShuseiService {
         result.set個人(個人情報);
         result.set修正後の他特の情報(他特の情報修正後);
         if (他特の情報 == null) {
-            result.set他市町村住所地特例台帳状態(new RString("未作成"));
+            result.set他市町村住所地特例台帳状態(DaichoFuseigoJotai.未作成);
         }
         if (不整合理由 == null) {
-            result.set他市町村住所地特例台帳状態(new RString("不整合なし"));
+            result.set他市町村住所地特例台帳状態(DaichoFuseigoJotai.不整合なし);
         } else {
-            result.set他市町村住所地特例台帳状態(new RString("不整合あり"));
+            result.set他市町村住所地特例台帳状態(DaichoFuseigoJotai.不整合あり);
         }
         return result;
     }

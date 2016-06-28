@@ -18,8 +18,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiBuilde
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaishaBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakufuseigo.ShikakuFuseigoBusiness;
-import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysNenreiTotatsuKijunJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuseigoriyu.FuseigoRiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.jogaiidojiyu.JogaiKaijoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.jogaiidojiyu.JogaiTekiyoJiyu;
@@ -105,7 +105,7 @@ public class ShikakuFuseigoShuseiMainHandler {
             if (business.get処理日時() != null && business.get処理日時().isAfter(処理日時)) {
                 処理日時 = business.get処理日時();
             }
-            if (business.get台帳種別().equals(daichoType) && gaiHyoji == business.is対象外フラグ()) {
+            if (daichoType.equals(business.get台帳種別()) && gaiHyoji == business.is対象外フラグ()) {
                 dgShikakuFuseigoIchiran_Row row = new dgShikakuFuseigoIchiran_Row();
                 row.setIgnoree(business.is対象外フラグ() ? new RString("○") : RString.EMPTY);
                 row.setHihoNo(business.get被保険者番号().value());

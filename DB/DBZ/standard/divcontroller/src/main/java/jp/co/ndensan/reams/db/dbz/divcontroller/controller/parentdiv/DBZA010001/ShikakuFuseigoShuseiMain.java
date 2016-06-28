@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.shikakufuseigo.ShikakuFuseigoBus
 import jp.co.ndensan.reams.db.dbz.business.core.shikakufuseigo.ShikakuFuseigoShusei;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuseigoriyu.FuseigoRiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakufuseigo.DaichoFuseigoJotai;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001.DBZA010001StateName;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001.ShikakuFuseigoShuseiMainDiv;
@@ -45,9 +46,6 @@ public class ShikakuFuseigoShuseiMain {
 
     private final ShikakuSeigoseiCheckJohoManager manager;
     private final ShikakuFuseigoShuseiService serivce;
-
-    private static final RString 台帳状態_不整合なし = new RString("不整合なし");
-    private static final RString 台帳状態_不整合あり = new RString("不整合あり");
 
     /**
      * コンストラクタです。
@@ -131,9 +129,9 @@ public class ShikakuFuseigoShuseiMain {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return onLoad(div);
         }
-        RString 台帳状態 = ViewStateHolder.get(ViewStateKeys.資格不整合_台帳状態, RString.class);
-        ViewStateHolder.put(ViewStateKeys.資格不整合_台帳状態, RString.EMPTY);
-        if (台帳状態.equals(台帳状態_不整合あり)) {
+        DaichoFuseigoJotai 台帳状態 = ViewStateHolder.get(ViewStateKeys.資格不整合_台帳状態, DaichoFuseigoJotai.class);
+        ViewStateHolder.put(ViewStateKeys.資格不整合_台帳状態, null);
+        if (台帳状態 == DaichoFuseigoJotai.不整合あり) {
             RString 台帳種別 = ViewStateHolder.get(ViewStateKeys.資格不整合_不整合修正中, ShikakuFuseigoBusiness.class).get台帳種別();
             IKojin 個人情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_個人情報, IKojin.class);
             FuseigoRiyu 不整合理由 = ViewStateHolder.get(ViewStateKeys.資格不整合_不整合理由, FuseigoRiyu.class);
@@ -351,9 +349,9 @@ public class ShikakuFuseigoShuseiMain {
                         break;
                 }
             }
-            RString 台帳状態 = ViewStateHolder.get(ViewStateKeys.資格不整合_台帳状態, RString.class);
-            if (!RString.isNullOrEmpty(台帳状態)) {
-                if (台帳状態.equals(台帳状態_不整合なし)) {
+            DaichoFuseigoJotai 台帳状態 = ViewStateHolder.get(ViewStateKeys.資格不整合_台帳状態, DaichoFuseigoJotai.class);
+            if (台帳状態 != null) {
+                if (台帳状態 == DaichoFuseigoJotai.不整合なし) {
                     business.getBusinessList().remove(shikakuFusei);
                     ViewStateHolder.put(ViewStateKeys.資格不整合_整合性チェックの情報_宛名, business);
                     return true;
