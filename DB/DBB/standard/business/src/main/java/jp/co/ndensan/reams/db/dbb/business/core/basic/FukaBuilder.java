@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link Fuka}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBB-9999-012 xicongwang
  */
 public class FukaBuilder {
 
@@ -607,6 +609,28 @@ public class FukaBuilder {
     public FukaBuilder set賦課市町村コード(LasdecCode 賦課市町村コード) {
         requireNonNull(賦課市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課市町村コード"));
         entity.setFukaShichosonCode(賦課市町村コード);
+        return this;
+    }
+
+    /**
+     * 特徴歳出還付額を設定します。
+     *
+     * @param 特徴歳出還付額 特徴歳出還付額
+     * @return {@link FukaBuilder}
+     */
+    public FukaBuilder set特徴歳出還付額(Decimal 特徴歳出還付額) {
+        entity.setTkSaishutsuKampuGaku(特徴歳出還付額);
+        return this;
+    }
+
+    /**
+     * 普徴歳出還付額を設定します。
+     *
+     * @param 普徴歳出還付額 普徴歳出還付額
+     * @return {@link FukaBuilder}
+     */
+    public FukaBuilder set普徴歳出還付額(Decimal 普徴歳出還付額) {
+        entity.setFuSaishutsuKampuGaku(普徴歳出還付額);
         return this;
     }
 
