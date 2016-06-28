@@ -14,18 +14,15 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.Honsan
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendo.HonsanteiIdoKanendoResult;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.KozaFurikaeOutputType;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NotsuKozaShutsuryokuTaisho;
-import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550001.KanendoFukaDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550001.dgChushutsuKikan_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550001.dgShoriKakunin_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.dgOutputChohyoIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -34,14 +31,11 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  *
@@ -54,18 +48,19 @@ public class KanendoFukaHandler {
     private static final RString ZERO_RS = new RString("0");
     private static final RString ONE_RS = new RString("1");
     private static final RString TWO_RS = new RString("2");
-    private static final int THREE_RS = 3;
+    private static final int NUM_1 = 1;
+    private static final int NUM_2 = 2;
+    private static final int NUM_3 = 3;
     private final RString 本算定異動_過年度 = new RString("DBBMN45000");
     private final RString 過年度異動通知書作成 = new RString("DBBMN45002");
+    private final RString 本算定異動_過年度_ボタン = new RString("Element1");
+    private final RString 過年度異動通知書作成_ボタン = new RString("Element2");
+    private final RString 過年度 = new RString("DBB0550001");
+    private final RString 過年度異動通知書 = new RString("DBB0550003");
     private final RString 個人住民税処理状況 = new RString("BbT1901KojinJuminzeiShoriJokyo");
-    private final RString 決定通知書の発行日 = new RString("決定通知書の発行日");
-    private final RString 変更通知書の発行日 = new RString("変更通知書の発行日");
-    private final RString 納入通知書の発行日 = new RString("納入通知書の発行日");
-    private final RString 対象者 = new RString("対象者");
-    private final RString 通知書チェックボックス = new RString("通知書チェックボックス");
     private final RString 未 = new RString("未");
     private final RString 済 = new RString("済");
-    private final RString 実行 = new RString("Element1");
+    private static final RString 月 = new RString("月");
     private static final ReportId 決定変更通知書_帳票分類ID = new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
     private static final ReportId 納入通知書_帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
 
@@ -79,29 +74,45 @@ public class KanendoFukaHandler {
     }
 
     /**
+     * 画面初期化のメソッドます。
+     *
+     * @param 調定年度 FlexibleYear
+     * @param shdaList List<ShoriDateKanri>
+     * @param shoriDate3 ShoriDateKanri
+     * @return flag
+     */
+    public boolean initialize(FlexibleYear 調定年度, List<ShoriDateKanri> shdaList, ShoriDateKanri shoriDate3) {
+        set処理対象();
+        div.getKanendoShoriNaiyo().getTxtChoteiNendo().setDomain(new RYear(調定年度.wareki().toDateString()));
+        set算定帳票作成();
+        set対象賦課年度();
+        set帳票作成個別情報();
+        boolean flag = 処理日付管理マスタ(shdaList);
+        return flag;
+    }
+
+    /**
      * 処理対象取得
      *
-     * @return 処理対象
+     *
      */
-    public List<KeyValueDataSource> set処理対象() {
-        List<KeyValueDataSource> 処理対象 = new ArrayList<>();
-        int 月末の日 = RDate.getNowDate().getLastDay();
-        int 日付関連 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBB.日付関連_更正月判定日数,
-                RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
-        int システム日 = RDate.getNowDate().getDayValue();
-        if (システム日 < 月末の日 - 日付関連 || RDate.getNowDate().getMonthValue() == THREE_RS) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(
-                    ONE_RS, Tsuki.toValue(new RString(RDate.getNowDate().getMonthValue())).get名称());
-            処理対象.add(dataSource);
+    public void set処理対象() {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        RDate date = RDate.getNowDate();
+        int 境界日付 = date.getLastDay() - Integer.valueOf(DbBusinessConfig.get(
+                ConfigNameDBB.日付関連_更正月判定日数, date, SubGyomuCode.DBB介護賦課).toString());
+        int 日 = date.getDayValue();
+        RString 属する月 = new RString(String.valueOf(date.getMonthValue()));
+        dataSource.add(new KeyValueDataSource(属する月.padZeroToLeft(NUM_2), 属する月.concat(月)));
+        if (日 < 境界日付 || date.getMonthValue() == NUM_3) {
+            div.getKanendoShoriNaiyo().getDdlShoritsuki().setDataSource(dataSource);
+            div.getKanendoShoriNaiyo().getDdlShoritsuki().setSelectedKey(属する月.padZeroToLeft(NUM_2));
         } else {
-            KeyValueDataSource dataSource1 = new KeyValueDataSource(
-                    ONE_RS, Tsuki.toValue(new RString(RDate.getNowDate().getMonthValue())).get名称());
-            KeyValueDataSource dataSource2 = new KeyValueDataSource(
-                    TWO_RS, Tsuki.toValue(new RString(RDate.getNowDate().getMonthValue() + 1)).get名称());
-            処理対象.add(dataSource1);
-            処理対象.add(dataSource2);
+            RString 翌月 = new RString(String.valueOf(date.plusMonth(NUM_1).getMonthValue()));
+            dataSource.add(new KeyValueDataSource(翌月.padZeroToLeft(NUM_2), 翌月.concat(月)));
+            div.getKanendoShoriNaiyo().getDdlShoritsuki().setDataSource(dataSource);
+            div.getKanendoShoriNaiyo().getDdlShoritsuki().setSelectedKey(翌月.padZeroToLeft(NUM_2));
         }
-        return 処理対象;
     }
 
     /**
@@ -141,13 +152,14 @@ public class KanendoFukaHandler {
      * 処理日付管理マスタ取得
      *
      * @param shdaList List<ShoriDateKanri>
-     * @param shoriDate ShoriDateKanri
+     * @return flag
      */
-    public void 処理日付管理マスタ(List<ShoriDateKanri> shdaList, ShoriDateKanri shoriDate) {
+    public boolean 処理日付管理マスタ(List<ShoriDateKanri> shdaList) {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
         List<dgShoriKakunin_Row> rowList = new ArrayList<>();
         dgShoriKakunin_Row row = new dgShoriKakunin_Row();
+        boolean flag = false;
         if (本算定異動_過年度.equals(menuID)) {
             row.getTxtShoriMei().setValue(個人住民税処理状況);
             //TODO 処理日時 状況   QA808
@@ -156,13 +168,15 @@ public class KanendoFukaHandler {
             row.getTxtShoriMei().setValue(処理名);
             if (shdaList.isEmpty()) {
                 row.getTxtJokyo().setValue(未);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, true);
-            } else if (!shdaList.isEmpty() && (null == shoriDate.get基準日時() || shoriDate.get基準日時().isEmpty())) {
+                flag = true;
+            } else if (!shdaList.isEmpty() && (null == shdaList.get(0).get基準日時()
+                    || shdaList.get(0).get基準日時().isEmpty())) {
                 row.getTxtJokyo().setValue(未);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, true);
-            } else if (!shdaList.isEmpty() && shoriDate.get基準日時() != null && !shoriDate.get基準日時().isEmpty()) {
-                RString 年月日 = shoriDate.get基準日時().getRDateTime().getDate().wareki().toDateString();
-                RString 時刻 = shoriDate.get基準日時().getRDateTime().getTime().
+                flag = true;
+            } else if (!shdaList.isEmpty() && shdaList.get(0).get基準日時() != null
+                    && !shdaList.get(0).get基準日時().isEmpty()) {
+                RString 年月日 = shdaList.get(0).get基準日時().getRDateTime().getDate().wareki().toDateString();
+                RString 時刻 = shdaList.get(0).get基準日時().getRDateTime().getTime().
                         toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
                 RString 基準日時 = 年月日.concat(時刻);
                 row.getTxtJokyo().setValue(済);
@@ -171,6 +185,7 @@ public class KanendoFukaHandler {
         }
         rowList.add(row);
         div.getKanendoFukaBatchParameter().getDgShoriKakunin().setDataSource(rowList);
+        return flag;
     }
 
     /**
@@ -180,9 +195,9 @@ public class KanendoFukaHandler {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
         if (本算定異動_過年度.equals(menuID)) {
-            div.getCcdChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 本算定異動_過年度);
+            div.getCcdChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 過年度);
         } else if (過年度異動通知書作成.equals(menuID)) {
-            div.getCcdChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 過年度異動通知書作成);
+            div.getCcdChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 過年度異動通知書);
         }
     }
 
@@ -361,51 +376,6 @@ public class KanendoFukaHandler {
     }
 
     /**
-     * 入力チェック
-     *
-     * @return validPairs
-     */
-    public ValidationMessageControlPairs 入力チェック() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getTxtKetteiTsuchiHakkoYMD().getValue() == null) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.必須, 決定通知書の発行日.toString())));
-        }
-        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getTxtHenkoTsuchiHakkoYMD().getValue() == null) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.必須, 変更通知書の発行日.toString())));
-        }
-        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getTxtNotsuHakkoYMD().getValue() == null) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.必須, 納入通知書の発行日.toString())));
-        }
-        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkNotsuTaishosha().getSelectedKeys() == null
-                || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkNotsuTaishosha().getSelectedKeys().isEmpty()
-                || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchiTaishosha().getSelectedKeys() == null
-                || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchiTaishosha().getSelectedKeys().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.必須, 対象者.toString())));
-        }
-        if (!div.getKanendoShoriNaiyo().getDdlShoritsuki().getSelectedValue().
-                equals(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().getSelectedValue())) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    DbbErrorMessages.賦課処理対象月と通知書出力月の不整合)));
-        }
-        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkKetteiTsuchi().getSelectedKeys().isEmpty()
-                || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkKetteiTsuchi().getSelectedKeys() == null
-                || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchi().getSelectedKeys().isEmpty()
-                || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchi().getSelectedKeys() == null) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.必須, 通知書チェックボックス.toString())));
-        }
-        if (div.getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    DbbErrorMessages.帳票ID取得不可のため処理不可)));
-        }
-        return validPairs;
-    }
-
-    /**
      * get各通知書の帳票ID
      *
      * @return List<HonsanteiIdoParameter>
@@ -429,18 +399,17 @@ public class KanendoFukaHandler {
         return 出力帳票一覧;
     }
 
-    private static class IdocheckMessages implements IValidationMessage {
-
-        private final Message message;
-
-        public IdocheckMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
+    /**
+     * 実行ボタン状態の設定する。
+     *
+     * @param flag 実行ボタンの活性と不活性flag
+     */
+    public void set実行ボタン(boolean flag) {
+        RString メニューID = ResponseHolder.getMenuID();
+        if (本算定異動_過年度.equals(メニューID)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(本算定異動_過年度_ボタン, flag);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(過年度異動通知書作成_ボタン, flag);
         }
     }
-
 }
