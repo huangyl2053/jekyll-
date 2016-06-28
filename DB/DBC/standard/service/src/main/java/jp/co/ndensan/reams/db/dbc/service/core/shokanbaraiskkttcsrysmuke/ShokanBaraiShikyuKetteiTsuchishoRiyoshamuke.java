@@ -143,6 +143,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
         RString key = RString.EMPTY;
         Decimal 支給金額 = Decimal.ZERO;
         RString 給付の種類 = RString.EMPTY;
+        RString 増減理由等 = RString.EMPTY;
         RString サービス種類コード = RString.EMPTY;
         ShokanKetteiTsuchiShoHihokenshabunItem item = new ShokanKetteiTsuchiShoHihokenshabunItem();
         for (ShokanKetteiTsuchiShoShiharai shoShiharai : businessList) {
@@ -158,21 +159,24 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
                 key = getKey(shoShiharai);
                 支給金額 = shoShiharai.get支給額();
                 給付の種類 = shoShiharai.get種類();
+                増減理由等 = shoShiharai.get増減理由等();
                 サービス種類コード = shoShiharai.getサービス種類コード();
             }
-            // TODO QA1137 増減理由等、帳票設計がない
             if (給付の種類.length() <= 文字数_38) {
                 item.setKyufuShu1(給付の種類);
-                item.setRiyu1(shoShiharai.get増減理由等());
             } else if (給付の種類.length() <= 文字数_76) {
                 item.setKyufuShu1(給付の種類.substring(ZERO, 文字数_38));
                 item.setKyufuShu2(給付の種類.substring(文字数_38));
-                item.setRiyu2(shoShiharai.get増減理由等());
             } else {
                 item.setKyufuShu1(給付の種類.substring(ZERO, 文字数_38));
                 item.setKyufuShu2(給付の種類.substring(文字数_38, 文字数_76));
                 item.setKyufuShu3(給付の種類.substring(文字数_76));
-                item.setRiyu3(shoShiharai.get増減理由等());
+            }
+            if (増減理由等.length() <= 文字数_38) {
+                item.setRiyu1(増減理由等);
+            } else {
+                item.setRiyu1(増減理由等.substring(ZERO, 文字数_38));
+                item.setRiyu2(増減理由等.substring(文字数_38));
             }
             item.setBunshoNo(文書番号);
             item.setHihokenshaName(shoShiharai.get被保険者氏名());
