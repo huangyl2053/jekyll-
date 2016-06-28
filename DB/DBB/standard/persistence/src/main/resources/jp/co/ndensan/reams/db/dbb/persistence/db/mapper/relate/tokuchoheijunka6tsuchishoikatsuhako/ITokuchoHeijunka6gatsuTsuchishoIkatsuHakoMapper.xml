@@ -47,7 +47,7 @@
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt310FindKozaFunctionMapper.columns_Koza" />,
         年金特徴回付情報.*
         FROM
-        rgdb."DbT2015KeisangoJohoTemp" AS "DbT2015KeisangoJohoTemp"
+        "DbT2015KeisangoJohoTemp" AS "DbT2015KeisangoJohoTemp"
         INNER JOIN
         rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,true,
@@ -95,7 +95,7 @@
             fetchSize="500">
         SELECT *
         FROM
-        rgdb."DbT2015KeisangoJohoTemp"  AS DbT2015KeisangoJohoTemp
+        "DbT2015KeisangoJohoTemp"  AS DbT2015KeisangoJohoTemp
         WHERE
         DbT2015KeisangoJohoTemp."koseiZengoKubun" = '1'
         <if test="一括発行起動">
@@ -146,7 +146,7 @@
         SELECT
         UrT0705ChoteiKyotsu."choteigaku"
         FROM
-        rgdb."DbT2002FukaZennendoTemp" AS 前年度賦課
+        "DbT2002FukaZennendoTemp" AS 前年度賦課
         INNER JOIN
         rgdb."DbT2003Kibetsu" AS DbT2003Kibetsu
         ON  DbT2003Kibetsu."choteiNendo" = 前年度賦課."choteiNendo"
@@ -168,7 +168,7 @@
             fetchSize="500">
         SELECT *
         FROM
-        rgdb."DbT2002FukaZennendoTemp"
+        "DbT2002FukaZennendoTemp"
     </select>
 
     <select resultOrdered="true" id="select継続の被保険者区分TempTableEntity"
@@ -177,7 +177,7 @@
             fetchSize="500">
         SELECT *
         FROM
-        rgdb."DbT2002FukaZennendoTemp"
+        "DbT2002FukaZennendoTemp"
         WHERE
         "koseigo_choshuHoho4gatsu" IN (#{特別徴収_厚生労働省}, #{特別徴収_地共済})
         AND
@@ -190,7 +190,7 @@
             fetchSize="500">
         SELECT *
         FROM
-        rgdb."DbT2002FukaZennendoTemp"
+        "DbT2002FukaZennendoTemp"
         WHERE
         "koseigo_choshuHoho4gatsu" IN (#{特別徴収_厚生労働省}, #{特別徴収_地共済})
         AND
@@ -203,7 +203,7 @@
             fetchSize="500">
         SELECT *
         FROM
-        rgdb."DbT2002FukaZennendoTemp"
+        "DbT2002FukaZennendoTemp"
         WHERE
         ("koseigo_choshuHoho4gatsu" != #{特別徴収_厚生労働省} AND "koseigo_choshuHoho4gatsu" != #{特別徴収_地共済})
         AND ("choshuHoho6gatsu" = #{特別徴収_厚生労働省} OR "choshuHoho6gatsu" = #{特別徴収_地共済})
