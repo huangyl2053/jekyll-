@@ -70,6 +70,9 @@ public class KogakuServicehiShokaiMainHandler {
         if (サービス提供年月 != null && !サービス提供年月.isEmpty()) {
             FlexibleDate 世帯基準年月日 = new FlexibleDate(サービス提供年月.toString().concat(世帯基準の日.toString()));
             FlexibleYear 所得年度 = サービス提供年月.getYear();
+            // TODO QA902 初期化時に、共有子Div内部で表示する世帯員のアクセスログ出力を行う
+            // TODO QA902 YMDHMS.now()?EMPTY?
+            // TODO QA902 「並べて表示する」ボタンの問題
             div.getSetaiInfoPanel().getCcdSetaiShotokuIchiran().initialize(識別コード, 世帯基準年月日, 所得年度, YMDHMS.now());
         }
     }
