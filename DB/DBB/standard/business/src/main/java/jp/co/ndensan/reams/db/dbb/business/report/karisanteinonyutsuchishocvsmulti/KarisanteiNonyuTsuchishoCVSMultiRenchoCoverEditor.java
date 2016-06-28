@@ -265,7 +265,9 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
         source.entaikin1 = RString.EMPTY;
         source.biko11 = RString.EMPTY;
         source.biko21 = RString.EMPTY;
-        source.funyuFukanBango1 = RString.EMPTY;
+        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+            source.funyuFukanBango1 = new RString("F").concat(new RString(renban).padLeft("0", INT_6)).concat("-3");
+        }
     }
 
     private KarisanteiNonyuTsuchishoCVSMultiRenchoSource edit納付書2(KarisanteiNonyuTsuchishoCVSMultiRenchoSource source) {
@@ -335,7 +337,9 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
         source.entaikin2 = RString.EMPTY;
         source.biko12 = RString.EMPTY;
         source.biko22 = RString.EMPTY;
-        source.funyuFukanBango2 = RString.EMPTY;
+        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+            source.funyuFukanBango2 = new RString("F").concat(new RString(renban).padLeft("0", INT_6)).concat("-4");
+        }
 
         return source;
     }

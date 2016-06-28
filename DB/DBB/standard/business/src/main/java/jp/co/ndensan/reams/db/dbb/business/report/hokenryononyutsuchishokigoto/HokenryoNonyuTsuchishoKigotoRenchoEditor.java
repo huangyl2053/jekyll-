@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NofuShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NokigenShutsuryokuHoho;
-import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishokigoto.HokenryoNonyuTsuchishoKigotoSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishokigoto.HokenryoNonyuTsuchishoKigotoRenchoSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,11 +27,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 保険料納入通知書（本算定）【期毎タイプ】HokenryoNonyuTsuchishoKigotoEditor
+ * 保険料納入通知書（本算定）【期毎タイプ】HokenryoNonyuTsuchishoKigotoRenchoEditor
  *
- * @reamsid_L DBB-9110-080 liangbc
+ * @reamsid_L DBB-9110-080 huangh
  */
-public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchishoKigotoEditor {
+public class HokenryoNonyuTsuchishoKigotoRenchoEditor implements IHokenryoNonyuTsuchishoKigotoRenchoEditor {
 
     private final HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報;
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
@@ -60,7 +60,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
      * @param ninshoshaSource 認証者情報
      * @param 連番 連番
      */
-    protected HokenryoNonyuTsuchishoKigotoEditor(HonSanteiNonyuTsuchiShoJoho item,
+    protected HokenryoNonyuTsuchishoKigotoRenchoEditor(HonSanteiNonyuTsuchiShoJoho item,
             NonyuTsuchiShoKiJoho 納入通知書期情報,
             NinshoshaSource ninshoshaSource,
             int 連番) {
@@ -76,7 +76,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
     }
 
     @Override
-    public HokenryoNonyuTsuchishoKigotoSource edit(HokenryoNonyuTsuchishoKigotoSource source) {
+    public HokenryoNonyuTsuchishoKigotoRenchoSource edit(HokenryoNonyuTsuchishoKigotoRenchoSource source) {
         editレイヤ１(source);
         editCompNinshosha(source);
         editCompNofushoItem(source);
@@ -85,7 +85,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         return source;
     }
 
-    private void editCompSofubutsuAtesaki(HokenryoNonyuTsuchishoKigotoSource source) {
+    private void editCompSofubutsuAtesaki(HokenryoNonyuTsuchishoKigotoRenchoSource source) {
         if (本算定納入通知書情報.get編集後本算定通知書共通情報() != null
                 && 本算定納入通知書情報.get編集後本算定通知書共通情報().get編集後宛先() != null
                 && 本算定納入通知書情報.get編集後本算定通知書共通情報().get編集後宛先().getSofubutsuAtesakiSource() != null) {
@@ -128,7 +128,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         }
     }
 
-    private void editCompRyoshushoItem(HokenryoNonyuTsuchishoKigotoSource source) {
+    private void editCompRyoshushoItem(HokenryoNonyuTsuchishoKigotoRenchoSource source) {
         source.ryoshushoKanendo = RString.EMPTY;
         source.ryoshushoNendo = RStringUtil.convert半角to全角(納付書共通.get調定年度表記());
         source.ryoshushoKanendobun = RString.EMPTY;
@@ -165,7 +165,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.ryoshushoShichosonMei2 = RString.EMPTY;
     }
 
-    private void editCompNofushoItem(HokenryoNonyuTsuchishoKigotoSource source) {
+    private void editCompNofushoItem(HokenryoNonyuTsuchishoKigotoRenchoSource source) {
         Map<Integer, RString> ocr = 納入通知書期情報.getOcr();
         if (ocr == null || ocr.isEmpty()) {
             ocr = new HashMap<>();
@@ -204,7 +204,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.nofushoShichosonMei = 納付書共通.get納付書市町村名();
     }
 
-    private void editCompNinshosha(HokenryoNonyuTsuchishoKigotoSource source) {
+    private void editCompNinshosha(HokenryoNonyuTsuchishoKigotoRenchoSource source) {
         if (ninshoshaSource != null) {
             source.denshiKoin = ninshoshaSource.denshiKoin;
             source.hakkoYMD = ninshoshaSource.hakkoYMD;
@@ -218,7 +218,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         }
     }
 
-    private void editレイヤ１(HokenryoNonyuTsuchishoKigotoSource source) {
+    private void editレイヤ１(HokenryoNonyuTsuchishoKigotoRenchoSource source) {
         boolean is納期限出力方法が0 = is納期限出力方法が0();
         List<AfterEditInformation> 普徴納期情報リスト = null == 編集後本算定通知書共通情報.get普徴納期情報リスト()
                 ? new ArrayList<AfterEditInformation>() : 編集後本算定通知書共通情報.get普徴納期情報リスト();
@@ -349,8 +349,6 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.bankCode = 編集後本算定通知書共通情報.get編集後口座().get金融機関コードCombinedWith支店コード();
         source.kozaShurui = 編集後本算定通知書共通情報.get編集後口座().get口座種別略称();
         source.kozaNo = 編集後本算定通知書共通情報.get編集後口座().get口座番号Or通帳記号番号();
-        source.renban = new RString(String.valueOf(連番)).padLeft("0", INDEX_6);
-        source.hokenshaName = 編集後本算定通知書共通情報.get保険者名();
     }
 
     private Decimal get普徴期別金額By期(List<UniversalPhase> 普徴期別金額リスト, int 期) {
@@ -392,5 +390,4 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         }
         return data.get納期終了日();
     }
-
 }
