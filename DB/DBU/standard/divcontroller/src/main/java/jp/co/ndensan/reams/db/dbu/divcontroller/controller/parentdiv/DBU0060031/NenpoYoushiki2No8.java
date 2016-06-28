@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataIdentifier;
-import jp.co.ndensan.reams.db.dbu.definition.core.viewstate.NenpoYoushiki2No8ViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpo.SearchJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031.DBU0060031StateName;
@@ -182,17 +181,17 @@ public class NenpoYoushiki2No8 {
         if (補正フラグ.equals(フラグ_削除)) {
             List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = new ArrayList<>();
             Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 件数タブデータ
-                    = ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.件数データグリッド, Models.class);
+                    = ViewStateHolder.get(ViewStateKeys.件数データグリッド, Models.class);
             for (JigyoHokokuTokeiData 件数 : 件数タブデータ) {
                 事業報告集計一覧データリスト.add(件数);
             }
             Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 費用額データ
-                    = ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.費用額データグリッド, Models.class);
+                    = ViewStateHolder.get(ViewStateKeys.費用額データグリッド, Models.class);
             for (JigyoHokokuTokeiData 費用額 : 費用額データ) {
                 事業報告集計一覧データリスト.add(費用額);
             }
             Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 給付額データ
-                    = ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.給付額データグリッド, Models.class);
+                    = ViewStateHolder.get(ViewStateKeys.給付額データグリッド, Models.class);
             for (JigyoHokokuTokeiData 給付額 : 給付額データ) {
                 事業報告集計一覧データリスト.add(給付額);
             }
@@ -215,7 +214,7 @@ public class NenpoYoushiki2No8 {
         SearchJigyoHokokuNenpo jigyoHokokuNenpoSearch = new SearchJigyoHokokuNenpo(報告年, 集計対象年, 市町村コード, 様式種類コード, 集計番号_0601);
         List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = JigyoHokokuNenpoHoseiHakoManager.createInstance().
                 getJigyoHokokuNenpoDetal(jigyoHokokuNenpoSearch).records();
-        ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.件数データグリッド, Models.create(事業報告集計一覧データリスト));
+        ViewStateHolder.put(ViewStateKeys.件数データグリッド, Models.create(事業報告集計一覧データリスト));
         List<dgItakuyobosabisujukyusu_Row> dgItakuyobosabiList = new ArrayList<>();
         for (Decimal 行番号 : getHandler(div).get行番(jigyoHokokuNenpoSearch)) {
             dgItakuyobosabisujukyusu_Row dgItakuyobosabi = new dgItakuyobosabisujukyusu_Row();
@@ -276,7 +275,7 @@ public class NenpoYoushiki2No8 {
         SearchJigyoHokokuNenpo jigyoHokokuNenpoSearch = new SearchJigyoHokokuNenpo(報告年, 集計対象年, 市町村コード, 様式種類コード, 集計番号_0602);
         List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = JigyoHokokuNenpoHoseiHakoManager.createInstance().
                 getJigyoHokokuNenpoDetal(jigyoHokokuNenpoSearch).records();
-        ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.費用額データグリッド, Models.create(事業報告集計一覧データリスト));
+        ViewStateHolder.put(ViewStateKeys.費用額データグリッド, Models.create(事業報告集計一覧データリスト));
         List<dgChiikimitchakuyobosabisujukyu_Row> dgChiikimitchList = new ArrayList<>();
         for (Decimal 行番号 : getHandler(div).get行番(jigyoHokokuNenpoSearch)) {
             dgChiikimitchakuyobosabisujukyu_Row dgChiikimitch = new dgChiikimitchakuyobosabisujukyu_Row();
@@ -337,7 +336,7 @@ public class NenpoYoushiki2No8 {
         SearchJigyoHokokuNenpo jigyoHokokuNenpoSearch = new SearchJigyoHokokuNenpo(報告年, 集計対象年, 市町村コード, 様式種類コード, 集計番号_0603);
         List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = JigyoHokokuNenpoHoseiHakoManager.createInstance().
                 getJigyoHokokuNenpoDetal(jigyoHokokuNenpoSearch).records();
-        ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.給付額データグリッド, Models.create(事業報告集計一覧データリスト));
+        ViewStateHolder.put(ViewStateKeys.給付額データグリッド, Models.create(事業報告集計一覧データリスト));
         List<dgHisetsugaigosabisujukyu_Row> dgHisetsugaigoList = new ArrayList<>();
         for (Decimal 行番号 : getHandler(div).get行番(jigyoHokokuNenpoSearch)) {
             dgHisetsugaigosabisujukyu_Row dgHisetsugaigo = new dgHisetsugaigosabisujukyu_Row();
