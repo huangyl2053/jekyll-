@@ -102,6 +102,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
                 kensakuKekkaIchiran_Row.setChosainKanaShimei(nullToEmpty(business.get調査員氏名カナ()));
                 kensakuKekkaIchiran_Row.setChosainHJokyo(nullToEmpty(business.is調査員状況フラグ()
                         ? new RString("有効") : new RString("無効")));
+                kensakuKekkaIchiran_Row.setShichosonCode(business.get市町村コード());
                 if (!business.is状況フラグ() || !business.is調査員状況フラグ()) {
                     kensakuKekkaIchiran_Row.setRowBgColor(DataGridCellBgColor.bgColorGray);
                     div.getDgKensakuKekkaIchiran().setReadOnly(true);
@@ -124,7 +125,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
         if (dataPassModel != null) {
             対象モード = nullToEmpty(dataPassModel.get対象モード());
             if (RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
-                dataPassModel.set市町村コード(div.getHokensha().getSelectedItem().get市町村コード().value());
+                dataPassModel.set市町村コード(div.getDgKensakuKekkaIchiran().getClickedItem().getShichosonCode());
             }
             if (ChosaItakusakiAndChosainGuideDiv.TaishoMode.Itakusaki.toString().equals(対象モード.toString())) {
                 dataPassModel.set委託先コード(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakicode().getValue());
