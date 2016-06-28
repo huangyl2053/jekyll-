@@ -39,7 +39,7 @@ public class TextMasking {
     }
 
     /**
-     * 親画面から渡すパラメータをそのまま戻す,本画面を閉じます。
+     * 親画面から渡すパラメータをそのまま戻す、本画面を閉じます。
      *
      * @param div TextMaskingDiv
      * @return ResponseData<TextMaskingDiv>

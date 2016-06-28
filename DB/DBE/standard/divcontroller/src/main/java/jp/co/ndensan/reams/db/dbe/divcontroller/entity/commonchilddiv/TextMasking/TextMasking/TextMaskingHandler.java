@@ -42,7 +42,7 @@ public class TextMaskingHandler {
         RString 特記事項 = 特記事項情報.get特記事項_マッピング().get(GenponMaskKubun.原本.getコード());
         div.getTxtBeforeMasking().setValue(特記事項);
         RString 特記事項再び = 特記事項情報.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード());
-        if (特記事項再び.isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(特記事項再び)) {
             div.getTxtAfterMasking().setValue(特記事項);
         } else {
             div.getTxtAfterMasking().setValue(特記事項再び);
